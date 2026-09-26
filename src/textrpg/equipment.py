@@ -9,6 +9,39 @@ from .modifiers import (
     set_counts,
     validate_modifier_mapping,
 )
+from .schema import ATTRIBUTE_SPECS, SKILL_CATALOG
+
+
+def _validate_requirements(item_id: str, requirements: Any) -> tuple[Dict[str, float], Dict[str, float]]:
+    if requirements is None:
+        return {}, {}
+    if not isinstance(requirements, Mapping):
+        raise RuleError(f"Equipment requirements must be an object: {item_id}")
+
+    attr_requirements = requirements.get("attributes", {})
+    skill_requirements = requirements.get("skills", {})
+    if not isinstance(attr_requirements, Mapping):
+        raise RuleError(f"Equipment attribute requirements must be an object: {item_id}")
+    if not isinstance(skill_requirements, Mapping):
+        raise RuleError(f"Equipment skill requirements must be an object: {item_id}")
+
+    validated_attrs: Dict[str, float] = {}
+    for key, minimum in attr_requirements.items():
+        if key not in ATTRIBUTE_SPECS:
+            raise RuleError(f"Unknown equipment attribute requirement: {key}")
+        if isinstance(minimum, bool) or not isinstance(minimum, (int, float)):
+            raise RuleError(f"Equipment attribute requirement must be numeric: {key}")
+        validated_attrs[key] = float(minimum)
+
+    validated_skills: Dict[str, float] = {}
+    for key, minimum in skill_requirements.items():
+        if key not in SKILL_CATALOG:
+            raise RuleError(f"Unknown equipment skill requirement: {key}")
+        if isinstance(minimum, bool) or not isinstance(minimum, (int, float)):
+            raise RuleError(f"Equipment skill requirement must be numeric: {key}")
+        validated_skills[key] = float(minimum)
+
+    return validated_attrs, validated_skills
 
 
 DEFAULT_SLOTS = (
@@ -49,14 +82,17 @@ def equip_item(
 
     # Equipment requirements deliberately use permanent/base values. Allowing one
     # equipped item to qualify another can create circular or order-dependent builds.
-    requirements = item.get("requirements", {})
+    attr_requirements, skill_requirements = _validate_requirements(
+        item_id,
+        item.get("requirements", {}),
+    )
     attrs = state.player.get("attributes", {})
     skills = state.player.get("skills", {})
-    for key, minimum in requirements.get("attributes", {}).items():
-        if float(attrs.get(key, 0)) < float(minimum):
+    for key, minimum in attr_requirements.items():
+        if float(attrs.get(key, 0)) < minimum:
             raise RuleError(f"Attribute requirement not met: {key} >= {minimum}")
-    for key, minimum in requirements.get("skills", {}).items():
-        if float(skills.get(key, 0)) < float(minimum):
+    for key, minimum in skill_requirements.items():
+        if float(skills.get(key, 0)) < minimum:
             raise RuleError(f"Skill requirement not met: {key} >= {minimum}")
 
     previous = state.equipment.get(slot)
