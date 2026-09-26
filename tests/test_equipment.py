@@ -61,5 +61,42 @@ class EquipmentTests(unittest.TestCase):
                 },
             )
 
+    def test_unknown_requirement_ids_are_rejected(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={"attributes": {"might": 50}, "skills": {"blades": 50}},
+        )
+        with self.assertRaises(RuleError):
+            equip_item(
+                state,
+                {
+                    "item_id": "ITEM_BAD_ATTR_REQ",
+                    "slot": "body",
+                    "requirements": {"attributes": {"migth": 10}},
+                },
+            )
+        with self.assertRaises(RuleError):
+            equip_item(
+                state,
+                {
+                    "item_id": "ITEM_BAD_SKILL_REQ",
+                    "slot": "hands",
+                    "requirements": {"skills": {"bladez": 10}},
+                },
+            )
+
+    def test_requirement_minimum_must_be_numeric(self):
+        state = GameState(seed="s", scene_id="A", player={"attributes": {"might": 50}})
+        with self.assertRaises(RuleError):
+            equip_item(
+                state,
+                {
+                    "item_id": "ITEM_BAD_REQ_VALUE",
+                    "slot": "body",
+                    "requirements": {"attributes": {"might": True}},
+                },
+            )
+
 if __name__ == "__main__":
     unittest.main()
