@@ -62,6 +62,33 @@ def validate_modifier_mapping(
     return validated
 
 
+def validate_set_definitions(set_definitions: Any) -> None:
+    """Validate every authored set threshold and modifier map."""
+    if not isinstance(set_definitions, Mapping):
+        raise ValueError("set_definitions must be an object")
+    for set_id, definition in set_definitions.items():
+        if not isinstance(definition, Mapping):
+            raise ValueError(f"Set definition must be an object: {set_id}")
+        thresholds = definition.get("thresholds", {})
+        if not isinstance(thresholds, Mapping):
+            raise ValueError(f"Set thresholds must be an object: {set_id}")
+        for pieces_raw, bonus in thresholds.items():
+            try:
+                pieces = int(pieces_raw)
+            except (TypeError, ValueError) as exc:
+                raise ValueError(
+                    f"Invalid set threshold for {set_id}: {pieces_raw!r}"
+                ) from exc
+            if pieces <= 0:
+                raise ValueError(f"Set threshold must be positive for {set_id}: {pieces}")
+            if not isinstance(bonus, Mapping):
+                raise ValueError(f"Set bonus must be an object: {set_id}:{pieces}")
+            validate_modifier_mapping(
+                bonus.get("modifiers", {}),
+                source=f"set:{set_id}:{pieces}",
+            )
+
+
 def set_counts(state: Any) -> Dict[str, int]:
     counts: Dict[str, int] = {}
     for record in state.equipment.values():
@@ -75,6 +102,7 @@ def active_set_bonuses(
     state: Any,
     set_definitions: Mapping[str, Mapping[str, Any]],
 ) -> Dict[str, Dict[str, Any]]:
+    validate_set_definitions(set_definitions)
     counts = set_counts(state)
     active: Dict[str, Dict[str, Any]] = {}
     for set_id, count in counts.items():
