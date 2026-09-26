@@ -38,6 +38,30 @@ class StatsTests(unittest.TestCase):
         state.player["attributes"]["magic_number"] = 4
         self.assertTrue(any("unknown attribute" in e for e in validate_player_stats(state)))
 
+    def test_capacity_derived_values_are_floored_at_zero(self):
+        state = self.state()
+        state.perks["PERK_COLLAPSE"] = {
+            "modifiers": {
+                "derived.max_health": -1000,
+                "derived.carry_capacity": -1000,
+            }
+        }
+        values = derived_stats(state)
+        self.assertEqual(values["max_health"], 0.0)
+        self.assertEqual(values["carry_capacity"], 0.0)
+
+        state.player["resources"] = {"health": 20}
+        initialize_resources(state)
+        self.assertEqual(state.player["resources"]["max_health"], 0.0)
+        self.assertEqual(state.player["resources"]["health"], 0.0)
+
+    def test_contest_style_derived_values_can_go_negative(self):
+        state = self.state()
+        state.perks["PERK_STAGGERED"] = {
+            "modifiers": {"derived.initiative": -1000}
+        }
+        self.assertLess(derived_stats(state)["initiative"], 0.0)
+
 
 if __name__ == "__main__":
     unittest.main()
