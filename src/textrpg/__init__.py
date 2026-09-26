@@ -12,7 +12,18 @@ from .powers import (
     use_technique,
 )
 from .simulation import advance_time, apply_condition, recover, train, train_attribute
-from .social import add_memory, eligible_leak_targets, ensure_npc, npc_learn, share_knowledge
+from .social import (
+    add_memory,
+    adjust_relationship,
+    eligible_leak_targets,
+    ensure_npc,
+    npc_learn,
+    relationship_meets,
+    set_goal,
+    share_knowledge,
+    transition_story_state,
+    update_goal_progress,
+)
 from .stats import ATTRIBUTE_SPECS, SKILL_CATALOG, derived_stats, initialize_resources, validate_player_stats
 from .validation import assert_valid_scenes, validate_scenes
 
@@ -28,6 +39,7 @@ __all__ = [
     "discover_technique",
     "evolve_ability",
     "add_memory",
+    "adjust_relationship",
     "advance_time",
     "apply_condition",
     "assert_valid_scenes",
@@ -44,10 +56,14 @@ __all__ = [
     "loads_state",
     "mastery_stage",
     "npc_learn",
+    "relationship_meets",
     "recover",
     "save_state",
+    "set_goal",
     "set_counts",
     "share_knowledge",
+    "transition_story_state",
+    "update_goal_progress",
     "technique_available",
     "technique_stage",
     "technique_use_status",
