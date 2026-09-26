@@ -296,3 +296,122 @@ The unresolved seven-vs-eight core-stat schema remains a separate design conflic
 - `src/textrpg/__init__.py`
 - `tests/test_modifiers.py`
 - `docs/SYSTEMS_CATALOG.md` v0.3
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-EFFECTIVE-HARDENING-04
+
+Repository: `jbob-coder/Text-rpg-game`
+Context branch: `shared/game-context`
+Parent implementation branch: `feature/effective-stat-pipeline`
+Review/evolution branch: `review/effective-stat-contract-hardening`
+Parent feature tip at branch point: `1f9afb4e4c2242f3620e6dced13e83544da3db0d`
+
+### CURRENT_OBJECTIVE
+
+[IN_PROGRESS] Continue reviewing and evolving the effective-stat pipeline before it is considered closed. The review branch deliberately stays separate from the feature branch so hardening work can be inspected/reverted without disturbing the other implementation workstream.
+
+### VERIFIED_STATE
+
+[VERIFIED] The review branch was created from the current effective-stat feature tip and remains ahead without being behind the parent feature branch at the latest comparison performed by this chat.
+
+[IMPLEMENTED] The review branch centralizes attribute, skill, resource, derived-stat, and derived-formula metadata in `src/textrpg/schema.py` while preserving the existing public imports through `stats.py` / package exports.
+
+[IMPLEMENTED] Modifier paths are now validated against the exact canonical registries. Unknown IDs such as `attributes.migth` or `derived.max_heath`, unsupported namespaces, and malformed nested paths are rejected instead of silently contributing nothing.
+
+[IMPLEMENTED] Validation is applied at multiple boundaries:
+- equipment modifiers before equip
+- condition modifiers before condition application
+- perk modifiers added by rule effects
+- set modifier definitions accepted by RulesEngine
+- authored scene stat/check paths and add-perk modifier maps
+- runtime aggregation/breakdown calls
+
+[IMPLEMENTED] Capacity-style derived values now use explicit non-negative domain floors on the review branch: max Health, max Stamina, max Focus, max Resolve, and carry capacity cannot resolve below zero. Contest-style scores such as initiative, accuracy, evasion, and guard remain allowed to go negative under severe penalties.
+
+[IMPLEMENTED] Derived formulas are represented as inspectable data instead of being duplicated only as inline arithmetic.
+
+[IMPLEMENTED] `derived_stat_breakdown()` explains:
+- formula base constant
+- each effective input
+- input weight
+- weighted contribution
+- direct `derived.*` modifier provenance
+- raw total
+- domain floor
+- floor adjustment
+- final total
+
+[IMPLEMENTED] `RulesEngine.explain_player_value()` provides one public explanation entry point for effective attributes/skills and fully calculated derived values. This directly supports future status-screen/debug UI without requiring the UI to reconstruct rules itself.
+
+### TEST_COVERAGE_ADDED
+
+[IMPLEMENTED] New/expanded tests on the review branch cover:
+- invalid canonical modifier paths
+- invalid set modifier definitions
+- invalid equipment modifier paths
+- invalid condition modifier paths
+- scene validation for typoed stat/modifier paths
+- check skill namespace validation
+- non-negative floors for capacity derived values
+- negative contest-style values remaining legal
+- floor adjustment provenance
+- RulesEngine explanation payloads for an effective attribute and a derived value
+
+### TESTS_RUN
+
+None by this chat against the actual review branch runtime.
+
+### TEST_RESULTS
+
+[UNKNOWN] The new review-branch tests have been authored and inspected, but this chat has not executed the complete repository suite or the newly added tests. The review branch must not be labeled VERIFIED or merge-ready yet.
+
+### DESIGN STATUS
+
+[PROVISIONAL] The zero-floor policy is a conservative evolution candidate, not final balance canon. It intentionally clamps physical/resource capacities while preserving signed contest scores so penalties can still create negative margins.
+
+[PROVISIONAL] The explainability payload is designed for rules/debug/status UI and may be refined before the client contract is frozen.
+
+### RISKS / REVIEW NOTES
+
+[RISK] Full-suite execution remains mandatory before promoting the review branch back into the feature branch.
+
+[RISK] Modifier ingestion currently normalizes validated numeric values to floats. This is JSON-compatible but should be checked against any future exact-type assumptions in saves or UI serialization.
+
+[RISK] Set-definition validation is stricter for modifier paths, but broader content-pack validation for missing/unknown set IDs is still future work.
+
+[RISK] The seven-vs-eight core-attribute design conflict remains separate. The review branch hardens the current seven-attribute infrastructure and must not be misread as locking that schema permanently.
+
+### NEXT_ACTION
+
+1. Inspect the complete review diff against `feature/effective-stat-pipeline` for compatibility and accidental behavior changes.
+2. Execute a branch-equivalent targeted verification for the new hardening behaviors if a free local execution path is available.
+3. Execute the complete repository test suite before promotion.
+4. Fix any regression before moving changes into the feature branch.
+5. Only after verification, decide whether to promote, revise, or discard individual hardening changes.
+6. Continue the separate game-design work on the canonical stat schema and system catalog in parallel.
+
+### FILES_CHANGED_ON_REVIEW_BRANCH
+
+- `src/textrpg/schema.py`
+- `src/textrpg/modifiers.py`
+- `src/textrpg/stats.py`
+- `src/textrpg/core.py`
+- `src/textrpg/equipment.py`
+- `src/textrpg/simulation.py`
+- `src/textrpg/validation.py`
+- `src/textrpg/__init__.py`
+- `tests/test_modifiers.py`
+- `tests/test_stats.py`
+- `tests/test_validation.py`
+- `tests/test_equipment.py`
+- `tests/test_simulation.py`
+- `docs/SYSTEMS_CATALOG.md`
+- `docs/IMPLEMENTATION_STATUS.md`
+
+### EVIDENCE
+
+- branch comparison `feature/effective-stat-pipeline...review/effective-stat-contract-hardening`
+- repository source/tests listed above
+- current user direction: do not call the integration closed; review/evolve it first
