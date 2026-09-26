@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from hashlib import sha256
 from typing import Any, Dict, List, Mapping, MutableMapping, Optional
 
-from .modifiers import effective_player_value, validate_modifier_mapping
+from .modifiers import validate_modifier_mapping
 
 
 class RuleError(ValueError):
