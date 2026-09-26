@@ -141,3 +141,18 @@ Observed result: **55 tests passed, 0 failed**.
 The foundation documentation and README were updated to this verified count. The next recorded engineering slice is deterministic execution of authored information-propagation/leak events.
 
 Important: implementation commits remain on `foundation/text-rpg-systems`; this shared branch stores cross-chat context only.
+
+
+## Update — executable information propagation
+
+Foundation branch now executes authored deterministic knowledge leaks rather than only listing eligible candidates.
+
+- Added `execute_leak_event` to `src/textrpg/social.py`.
+- Eligibility still comes from existing social network, secrecy, discipline, and honesty rules.
+- Explicit recipients must be currently eligible.
+- Without explicit recipients, selection is deterministic from the sorted eligible list.
+- The runtime copies existing knowledge; it does not invent gossip.
+- Recipient memories are tagged as leaks and propagation is appended to durable history.
+- Exact branch-equivalent verification: **58 tests passed, 0 failed**.
+
+The next foundation item is the first original playable vertical slice/canon opening, followed by character visual identity records and remaining derived-stat modifier integration.
