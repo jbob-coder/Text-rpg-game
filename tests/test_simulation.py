@@ -63,5 +63,15 @@ class SimulationTests(unittest.TestCase):
         )
 
 
+    def test_invalid_condition_modifier_path_is_rejected(self):
+        state = self.state()
+        with self.assertRaises(Exception) as context:
+            apply_condition(
+                state,
+                "COND_BAD",
+                modifiers={"skills.athletcs": -3},
+            )
+        self.assertIn("Invalid condition modifiers", str(context.exception))
+
 if __name__ == "__main__":
     unittest.main()
