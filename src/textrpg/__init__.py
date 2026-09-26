@@ -1,5 +1,12 @@
 from .core import GameState, RuleError, RulesEngine
 from .equipment import active_set_bonuses, equip_item, equipment_modifiers, set_counts
+from .modifiers import (
+    condition_modifiers,
+    effective_player_value,
+    modifier_breakdown,
+    modifier_totals,
+    perk_modifiers,
+)
 from .persistence import CURRENT_SCHEMA_VERSION, dumps_state, load_state, loads_state, save_state
 from .progression import gain_ability_mastery, mastery_stage, technique_available
 from .simulation import advance_time, apply_condition, recover, train, train_attribute
@@ -19,8 +26,10 @@ __all__ = [
     "advance_time",
     "apply_condition",
     "assert_valid_scenes",
+    "condition_modifiers",
     "derived_stats",
     "dumps_state",
+    "effective_player_value",
     "eligible_leak_targets",
     "ensure_npc",
     "equip_item",
@@ -30,7 +39,10 @@ __all__ = [
     "load_state",
     "loads_state",
     "mastery_stage",
+    "modifier_breakdown",
+    "modifier_totals",
     "npc_learn",
+    "perk_modifiers",
     "recover",
     "save_state",
     "set_counts",
