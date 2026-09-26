@@ -1,0 +1,102 @@
+{
+  "scenes": {
+    "SAMPLE_ARCHIVE_ENTRY": {
+      "title": "Restricted Archive",
+      "body": "A sealed archive door hums behind the service corridor. Two people in your group know it exists, but only one knows why it was sealed.",
+      "choices": [
+        {
+          "id": "ASK_MARA_PRIVATELY",
+          "text": "Ask Mara privately what she knows.",
+          "time_cost_minutes": 6,
+          "requires": [
+            {"type": "relationship_min", "npc": "NPC_MARA", "axis": "trust", "value": 20}
+          ],
+          "disabled_reason": "Mara does not trust you enough to answer privately.",
+          "outcomes": {
+            "default": {
+              "effects": [
+                {"type": "learn", "knowledge_id": "KNOW_ARCHIVE_ACCIDENT", "source": "NPC_MARA", "confidence": 0.8, "private": true},
+                {"type": "relationship", "npc": "NPC_MARA", "axis": "trust", "value": 2}
+              ],
+              "next_scene": "SAMPLE_ARCHIVE_DECISION"
+            }
+          }
+        },
+        {
+          "id": "FORCE_PANEL",
+          "text": "Try to bypass the damaged control panel.",
+          "time_cost_minutes": 12,
+          "check": {
+            "stat": "attributes.intellect",
+            "skill": "skills.technical_systems",
+            "skill_weight": 0.6,
+            "difficulty": 58,
+            "variance": 8
+          },
+          "outcomes": {
+            "critical_success": {
+              "effects": [
+                {"type": "set_flag", "key": "archive.open", "value": true},
+                {"type": "add_player", "path": "skills.technical_systems", "value": 1}
+              ],
+              "next_scene": "SAMPLE_ARCHIVE_DECISION"
+            },
+            "success": {
+              "effects": [
+                {"type": "set_flag", "key": "archive.open", "value": true},
+                {"type": "add_player", "path": "resources.focus", "value": -5}
+              ],
+              "next_scene": "SAMPLE_ARCHIVE_DECISION"
+            },
+            "failure": {
+              "effects": [
+                {"type": "set_flag", "key": "archive.alarm_soft", "value": true},
+                {"type": "add_player", "path": "resources.focus", "value": -8}
+              ],
+              "next_scene": "SAMPLE_ARCHIVE_DECISION"
+            },
+            "critical_failure": {
+              "effects": [
+                {"type": "set_flag", "key": "archive.alarm_hard", "value": true},
+                {"type": "add_player", "path": "resources.focus", "value": -12},
+                {"type": "relationship", "npc": "NPC_MARA", "axis": "trust", "value": -4}
+              ],
+              "next_scene": "SAMPLE_ARCHIVE_DECISION"
+            }
+          }
+        },
+        {
+          "id": "USE_CIPHER_KEY",
+          "text": "Use the cipher key you recovered earlier.",
+          "time_cost_minutes": 2,
+          "visible_if": [
+            {"type": "knows", "knowledge_id": "KNOW_CIPHER_SIGNATURE"}
+          ],
+          "requires": [
+            {"type": "item_min", "item_id": "ITEM_CIPHER_KEY", "quantity": 1}
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {"type": "inventory", "item_id": "ITEM_CIPHER_KEY", "quantity": -1},
+                {"type": "set_flag", "key": "archive.open_clean", "value": true}
+              ],
+              "next_scene": "SAMPLE_ARCHIVE_DECISION"
+            }
+          }
+        }
+      ]
+    },
+    "SAMPLE_ARCHIVE_DECISION": {
+      "title": "What to do with the truth",
+      "body": "The archive contains evidence that can alter several relationships. What you reveal, conceal, or verify will become persistent state.",
+      "choices": [
+        {
+          "id": "END_SAMPLE",
+          "text": "Close the sample scene.",
+          "outcomes": {"default": {"effects": [{"type": "set_flag", "key": "sample.complete", "value": true}]}}
+        }
+      ]
+    }
+  }
+}
