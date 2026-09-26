@@ -68,5 +68,59 @@ class RulesEngineTests(unittest.TestCase):
             engine.choose(s, "ASK_MARA_PRIVATELY")
 
 
+class ExtendedStateTests(unittest.TestCase):
+    def test_equipment_and_perks_modify_checks_without_mutating_base_stat(self):
+        engine = load_engine()
+        s = state("equipment-seed")
+        s.equipment["hands"] = {
+            "item_id": "ITEM_TOOL_GLOVES",
+            "modifiers": {"attributes.intellect": 4},
+        }
+        s.perks["PERK_METHODICAL"] = {
+            "source": "training",
+            "modifiers": {"skills.technical_systems": 3},
+        }
+        event = engine.choose(s, "FORCE_PANEL")
+        self.assertEqual(s.player["attributes"]["intellect"], 55)
+        self.assertEqual(event["check"]["base"], 59.0)
+        self.assertEqual(event["check"]["skill"], 15.0)
+
+    def test_npc_knowledge_and_party_conditions(self):
+        engine = RulesEngine({
+            "A": {"choices": [{
+                "id": "PRIVATE_GROUP_LINE",
+                "text": "Use a fact only this group can act on.",
+                "visible_if": [
+                    {"type": "party_has", "npc": "NPC_MARA"},
+                    {"type": "npc_knows", "npc": "NPC_MARA", "knowledge_id": "KNOW_ROUTE"}
+                ],
+                "outcomes": {"default": {"effects": []}}
+            }]}
+        })
+        s = GameState(
+            seed="x",
+            scene_id="A",
+            party=["NPC_MARA"],
+            npcs={"NPC_MARA": {"knowledge": {"KNOW_ROUTE": {}}}},
+        )
+        self.assertEqual([c["id"] for c in engine.available_choices(s)], ["PRIVATE_GROUP_LINE"])
+
+    def test_personality_effect_is_bounded(self):
+        engine = RulesEngine({"A": {"choices": [{
+            "id": "PRESSURE",
+            "text": "Pressure NPC",
+            "outcomes": {
+                "default": {
+                    "effects": [
+                        {"type": "personality", "npc": "NPC_MARA", "axis": "caution", "value": 250}
+                    ]
+                }
+            }
+        }]}})
+        s = GameState(seed="x", scene_id="A")
+        engine.choose(s, "PRESSURE")
+        self.assertEqual(s.npcs["NPC_MARA"]["personality"]["caution"], 100)
+
+
 if __name__ == "__main__":
     unittest.main()
