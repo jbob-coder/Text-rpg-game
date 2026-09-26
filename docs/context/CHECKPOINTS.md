@@ -92,3 +92,107 @@ None by this chat for this design checkpoint.
 - `docs/SYSTEMS_CATALOG.md`
 - `docs/IMPLEMENTATION_STATUS.md`
 - current conversation direction
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-GAME-DIRECTION-UI-02
+
+Repository: `jbob-coder/Text-rpg-game`
+Context branch: `shared/game-context`
+
+### CURRENT_OBJECTIVE
+
+[DIRECTION] Preserve in durable project documentation exactly how the user wants the game to feel and how the player-facing status/character screen should represent the underlying systems, while keeping unresolved stat-schema decisions explicit.
+
+### DIRECTION
+
+[DIRECTION] Life-and-decisions RPG first: systems exist to create persistent consequences, long-term character development, and a living world.
+
+[DIRECTION] Slow, earned progression is mandatory project direction. No trivial instant permanent gains.
+
+[DIRECTION] Player/NPC knowledge, memories, relationships, injuries, time, equipment, quests, powers, and prior conversations can persist and influence later content.
+
+[DIRECTION] The status screen must make deep state understandable without turning the game into a constant spreadsheet view.
+
+### VERIFIED_STATE
+
+[VERIFIED] `docs/context/GAME_DIRECTION_AND_UI.md` now records the game direction, progression philosophy, layered player-state model, resource/ability concepts, living-world expectations, and the status-screen reference discussed in this chat.
+
+[VERIFIED] `docs/context/DECISIONS.md` now exists and records accepted direction plus the unresolved seven-vs-eight-attribute decision.
+
+[VERIFIED] `docs/context/chats/2026-09-27-stats-game-direction.md` preserves this workstream's user instructions, designs, correction of scope, open decisions, and next design work.
+
+[VERIFIED] `docs/context/README.md` and `CONTEXT_SYNC_PROTOCOL.md` now require future chats to read the game-direction/UI specification as part of the canonical startup workflow.
+
+### DESIGNED_NOT_IMPLEMENTED
+
+[DESIGNED] Status-screen structure includes:
+- identity/progression
+- core attributes
+- Health/Stamina/Focus/Resolve and relevant power-specific resources
+- selected derived/combat values
+- ability rank/level/mastery/control/efficiency/techniques where appropriate
+- skills/masteries
+- active injuries/conditions/status effects
+- hidden/undiscovered properties without leaking discovery content
+
+[PROVISIONAL] Exact screen typography, field names, density, overall Level/EXP usage, and final attribute list are not yet canonical.
+
+### CONFLICTS
+
+[CONFLICTING] Seven implemented core attributes versus the eight-attribute design candidate remains unresolved. The UI specification must adapt to whichever schema becomes canonical.
+
+### COMPLETED
+
+- Preserved game direction in a dedicated required-reading document.
+- Preserved the status-screen concept as a structural design reference.
+- Added a design decision log.
+- Added the first per-chat context record.
+- Updated canonical reading/synchronization rules so future chats inherit this context.
+
+### IN_PROGRESS
+
+[DESIGNED] Continue developing the stat schema and complete game-system catalog; do not treat the status-screen example or eight-stat proposal as already implemented.
+
+### NEXT_ACTION
+
+1. Stress-test seven-stat and eight-stat schemas against representative gameplay.
+2. Decide attribute responsibility boundaries.
+3. Decide whether a top-level character Level/EXP is retained.
+4. Map every visible status-screen field to its authoritative game-state source.
+5. Expand systems catalog while preserving slow progression and persistent consequence as global constraints.
+
+### BLOCKERS
+
+No blocker to design work. Attribute-schema choice remains intentionally open.
+
+### RISKS
+
+[RISK] UI can become overloaded if every internal value is always visible.
+[RISK] Hidden information can be accidentally leaked if status UI exposes undiscovered power properties.
+[RISK] A stat-schema migration becomes more expensive if delayed until large amounts of authored content depend on old stat names.
+
+### FILES_CHANGED
+
+- `docs/context/GAME_DIRECTION_AND_UI.md`
+- `docs/context/DECISIONS.md`
+- `docs/context/chats/2026-09-27-stats-game-direction.md`
+- `docs/context/README.md`
+- `docs/context/CONTEXT_SYNC_PROTOCOL.md`
+- `docs/context/CHECKPOINTS.md`
+
+### TESTS_RUN
+
+None. This checkpoint concerns design/documentation, not runtime behavior.
+
+### TEST_RESULTS
+
+No fresh runtime test claim.
+
+### EVIDENCE
+
+- current user direction in this chat
+- `docs/GAME_FOUNDATION.md`
+- `docs/SYSTEMS_CATALOG.md`
+- `docs/context/GAME_DIRECTION_AND_UI.md`
+- `docs/context/DECISIONS.md`
