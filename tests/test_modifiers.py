@@ -161,6 +161,50 @@ class ModifierPipelineTests(unittest.TestCase):
                 },
             )
 
+    def test_rules_engine_explains_effective_and_derived_values(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={
+                "attributes": {
+                    "might": 10,
+                    "agility": 10,
+                    "perception": 0,
+                    "endurance": 0,
+                    "intellect": 0,
+                    "will": 0,
+                    "presence": 0,
+                },
+                "skills": {"athletics": 0},
+            },
+            equipment={
+                "body": {
+                    "item_id": "A",
+                    "set_id": "SET_SCOUT",
+                    "modifiers": {"attributes.might": 2},
+                },
+                "hands": {"item_id": "B", "set_id": "SET_SCOUT", "modifiers": {}},
+            },
+        )
+        engine = RulesEngine({"A": {"choices": []}}, set_definitions=SET_DEFINITIONS)
+
+        might = engine.explain_player_value(state, "attributes.might")
+        self.assertEqual(might["total"], 17.0)
+        self.assertEqual(might["breakdown"]["base"], 10.0)
+        self.assertEqual(might["breakdown"]["equipment:body"], 2.0)
+        self.assertEqual(might["breakdown"]["set:SET_SCOUT:2"], 5.0)
+
+        evasion = engine.explain_player_value(state, "derived.evasion")
+        self.assertEqual(evasion["total"], 8.5)
+        self.assertEqual(
+            evasion["breakdown"]["inputs"]["attributes.agility"]["contribution"],
+            6.5,
+        )
+        self.assertEqual(
+            evasion["breakdown"]["direct_modifiers"]["set:SET_SCOUT:2"],
+            2.0,
+        )
+
     def test_rules_engine_can_gate_on_full_derived_value(self):
         engine = RulesEngine(
             {
