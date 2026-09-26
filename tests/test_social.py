@@ -4,6 +4,7 @@ from textrpg import GameState, RuleError
 from textrpg.social import (
     adjust_relationship,
     eligible_leak_targets,
+    execute_leak_event,
     npc_learn,
     relationship_meets,
     set_goal,
@@ -56,6 +57,82 @@ class SocialTests(unittest.TestCase):
             network={"NPC_A": ["NPC_C", "NPC_B", "NPC_B"]},
         )
         self.assertEqual(targets, ["NPC_B", "NPC_C"])
+
+    def test_leak_event_executes_deterministic_first_candidate(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            npcs={
+                "NPC_A": {
+                    "personality": {"discipline": 10, "honesty": 90},
+                    "knowledge": {},
+                },
+                "NPC_B": {},
+                "NPC_C": {},
+            },
+        )
+        npc_learn(state, "NPC_A", "KNOW_X", source="PLAYER", secrecy=1)
+        event = execute_leak_event(
+            state,
+            holder="NPC_A",
+            knowledge_id="KNOW_X",
+            network={"NPC_A": ["NPC_C", "NPC_B"]},
+        )
+        self.assertEqual(event["candidates"], ["NPC_B", "NPC_C"])
+        self.assertEqual(event["recipients"], ["NPC_B"])
+        self.assertIn("KNOW_X", state.npcs["NPC_B"]["knowledge"])
+        self.assertNotIn("KNOW_X", state.npcs["NPC_C"]["knowledge"])
+        self.assertIn("leak", state.npcs["NPC_B"]["memories"][-1]["tags"])
+
+    def test_leak_event_can_use_explicit_eligible_recipient(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            npcs={
+                "NPC_A": {
+                    "personality": {"discipline": 10, "honesty": 90},
+                    "knowledge": {},
+                },
+                "NPC_B": {},
+                "NPC_C": {},
+            },
+        )
+        npc_learn(state, "NPC_A", "KNOW_X", source="PLAYER", secrecy=1)
+        event = execute_leak_event(
+            state,
+            holder="NPC_A",
+            knowledge_id="KNOW_X",
+            network={"NPC_A": ["NPC_B", "NPC_C"]},
+            recipients=["NPC_C"],
+            event_id="LEAK_ARCHIVE_RUMOR",
+        )
+        self.assertEqual(event["event_id"], "LEAK_ARCHIVE_RUMOR")
+        self.assertEqual(event["recipients"], ["NPC_C"])
+        self.assertIn("KNOW_X", state.npcs["NPC_C"]["knowledge"])
+
+    def test_leak_event_rejects_ineligible_recipient(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            npcs={
+                "NPC_A": {
+                    "personality": {"discipline": 10, "honesty": 90},
+                    "knowledge": {},
+                },
+                "NPC_B": {},
+                "NPC_C": {},
+            },
+        )
+        npc_learn(state, "NPC_A", "KNOW_X", source="PLAYER", secrecy=1)
+        with self.assertRaises(RuleError):
+            execute_leak_event(
+                state,
+                holder="NPC_A",
+                knowledge_id="KNOW_X",
+                network={"NPC_A": ["NPC_B"]},
+                recipients=["NPC_C"],
+            )
+        self.assertNotIn("KNOW_X", state.npcs["NPC_C"]["knowledge"])
 
     def test_relationship_axes_are_bounded_and_evaluated_independently(self):
         state = GameState(
