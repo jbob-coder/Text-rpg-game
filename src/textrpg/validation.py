@@ -12,6 +12,7 @@ SUPPORTED_CONDITIONS: Set[str] = {
     "stat_min",
     "stat_max",
     "relationship_min",
+    "relationship_max",
     "knows",
     "npc_knows",
     "party_has",
