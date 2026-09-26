@@ -141,6 +141,47 @@ class ModifierPipelineTests(unittest.TestCase):
         values = derived_stats(state, SET_DEFINITIONS)
         self.assertEqual(values["evasion"], 2.0)
 
+    def test_rules_engine_can_gate_on_full_derived_value(self):
+        engine = RulesEngine(
+            {
+                "A": {
+                    "choices": [
+                        {
+                            "id": "DODGE_GAP",
+                            "text": "Cross the moving gap",
+                            "requires": [
+                                {"type": "stat_min", "path": "derived.evasion", "value": 8}
+                            ],
+                            "outcomes": {"default": {"effects": []}},
+                        }
+                    ]
+                }
+            },
+            set_definitions=SET_DEFINITIONS,
+        )
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={
+                "attributes": {
+                    "agility": 10,
+                    "perception": 0,
+                    "might": 0,
+                    "endurance": 0,
+                    "intellect": 0,
+                    "will": 0,
+                    "presence": 0,
+                },
+                "skills": {"athletics": 0},
+            },
+            equipment={
+                "body": {"item_id": "A", "set_id": "SET_SCOUT", "modifiers": {}},
+                "hands": {"item_id": "B", "set_id": "SET_SCOUT", "modifiers": {}},
+            },
+        )
+        # Base evasion is 6.5; the active two-piece set adds +2 => 8.5.
+        self.assertTrue(engine.available_choices(state)[0]["enabled"])
+
 
 if __name__ == "__main__":
     unittest.main()
