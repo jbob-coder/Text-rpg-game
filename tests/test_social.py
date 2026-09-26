@@ -129,7 +129,7 @@ class SocialTests(unittest.TestCase):
             state.npcs["NPC_A"]["story_state"]["TRACK_PERSONAL"],
             "OPENING",
         )
-        with self.assertRaises(Exception):
+        with self.assertRaises(RuleError):
             transition_story_state(
                 state,
                 "NPC_A",
@@ -151,7 +151,7 @@ class SocialTests(unittest.TestCase):
             progress=100,
             status="completed",
         )
-        with self.assertRaises(Exception):
+        with self.assertRaises(RuleError):
             update_goal_progress(state, "NPC_A", "GOAL_SHORT", 1)
 
 
