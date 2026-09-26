@@ -121,6 +121,63 @@ class ExtendedStateTests(unittest.TestCase):
         engine.choose(s, "PRESSURE")
         self.assertEqual(s.npcs["NPC_MARA"]["personality"]["caution"], 100)
 
+    def test_conditions_and_set_bonuses_modify_effective_values_once(self):
+        engine = RulesEngine(
+            {
+                "A": {
+                    "choices": [{
+                        "id": "TEST_CHECK",
+                        "text": "Resolve an effective-stat check.",
+                        "check": {
+                            "stat": "attributes.intellect",
+                            "difficulty": 0,
+                            "variance": 0,
+                        },
+                        "outcomes": {
+                            "critical_success": {"effects": []},
+                            "success": {"effects": []},
+                            "failure": {"effects": []},
+                            "critical_failure": {"effects": []},
+                        },
+                    }]
+                }
+            },
+            equipment_sets={
+                "SET_ANALYST": {
+                    "thresholds": {
+                        "2": {"modifiers": {"attributes.intellect": 4}},
+                    }
+                }
+            },
+        )
+        s = GameState(
+            seed="x",
+            scene_id="A",
+            player={
+                "attributes": {"intellect": 55},
+                "conditions": {
+                    "COND_CONCUSSION": {
+                        "modifiers": {"attributes.intellect": -3},
+                    }
+                },
+            },
+            equipment={
+                "head": {
+                    "item_id": "ITEM_VISOR",
+                    "set_id": "SET_ANALYST",
+                    "modifiers": {"attributes.intellect": 1},
+                },
+                "body": {
+                    "item_id": "ITEM_COAT",
+                    "set_id": "SET_ANALYST",
+                    "modifiers": {"attributes.intellect": 1},
+                },
+            },
+        )
+        event = engine.choose(s, "TEST_CHECK")
+        self.assertEqual(s.player["attributes"]["intellect"], 55)
+        self.assertEqual(event["check"]["base"], 58.0)
+
 
 if __name__ == "__main__":
     unittest.main()
