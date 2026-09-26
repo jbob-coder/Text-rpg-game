@@ -81,7 +81,7 @@ class SocialTests(unittest.TestCase):
         self.assertEqual(event["candidates"], ["NPC_B", "NPC_C"])
         self.assertEqual(event["recipients"], ["NPC_B"])
         self.assertIn("KNOW_X", state.npcs["NPC_B"]["knowledge"])
-        self.assertNotIn("KNOW_X", state.npcs["NPC_C"]["knowledge"])
+        self.assertNotIn("KNOW_X", state.npcs["NPC_C"].get("knowledge", {}))
         self.assertIn("leak", state.npcs["NPC_B"]["memories"][-1]["tags"])
 
     def test_leak_event_can_use_explicit_eligible_recipient(self):
