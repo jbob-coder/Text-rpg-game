@@ -4,7 +4,7 @@
 
 Create the non-AI authored RPG foundation: persistent choices, stats, NPC memory, hidden information, equipment/perks, earned power progression, deterministic checks, save compatibility, simulation time, training, recovery, and pixel-art consistency rules.
 
-Current sub-objective: unify all effective player-value calculations so equipment, active set bonuses, perks, and conditions affect checks and derived stats through one inspectable pipeline without mutating base stats or being counted twice.
+Current sub-objective: harden the effective-value pipeline before closure: reject invalid modifier paths, define safe domains for derived capacities, and expose enough provenance for RulesEngine/UI to explain final effective and derived values without mutating base stats or double counting.
 
 ## VERIFIED_STATE
 
@@ -13,6 +13,8 @@ Repository: `jbob-coder/Text-rpg-game`
 Foundation branch: `foundation/text-rpg-systems`
 
 Current implementation branch: `feature/effective-stat-pipeline`
+
+Current review/evolution branch: `review/effective-stat-contract-hardening`
 
 The original `main` branch is not modified by this work.
 
@@ -63,6 +65,16 @@ Implemented on `feature/effective-stat-pipeline`:
 - Condition severity remains metadata; authored modifier magnitudes are not silently multiplied by severity.
 - New targeted tests cover stacking, set-aware choice requirements, condition penalties, direct derived modifiers, repeated calculations, and base-stat immutability.
 
+Implemented on the review/evolution branch but **not yet promoted back to the feature branch**:
+- Central stat/schema registry shared by calculation and validation code.
+- Canonical modifier-path validation for attributes, skills, and derived values.
+- Invalid equipment/condition/perk/set modifier paths are rejected at their authoring/runtime boundaries instead of being silently ignored.
+- Scene validation checks stat requirement/check paths and perk modifier maps.
+- Capacity-style derived values have explicit zero floors; contest-style scores remain allowed to go negative.
+- Derived formulas are centralized as data.
+- `derived_stat_breakdown()` explains formula constants, effective weighted inputs, direct modifiers, floor adjustment, and final total.
+- `RulesEngine.explain_player_value()` exposes one player-value explanation API for attributes/skills and fully calculated derived values.
+
 ## TESTS_RUN
 
 Parent foundation verification previously recorded:
@@ -85,14 +97,18 @@ Verified by that targeted run:
 - repeated derived calculations do not accumulate modifiers
 - resource maxima use the effective derived result
 
-The complete repository test suite has **not yet been re-run against the new feature branch**, so the branch is implemented but not yet fully VERIFIED as a whole.
+The complete repository test suite has **not yet been re-run against the new feature branch**, so the feature branch is implemented but not yet fully VERIFIED as a whole.
+
+The review/evolution branch adds further tests for path validation, invalid equipment/condition/set definitions, derived-value floors, and explanation payloads. Those new tests have been written and inspected but have **not** been executed by this workstream yet. Do not treat the review branch as verified or merge-ready solely because the tests exist.
 
 No GitHub Actions workflow was added; verification does not consume hosted CI minutes.
 
 ## NEXT_ACTION
 
-1. Re-run the complete repository suite against `feature/effective-stat-pipeline` in a full branch checkout/reconstruction and fix any regression found.
-2. Add power resource costs, cooldowns, technique stages, drawbacks, and evolution prerequisites.
+1. Execute the complete repository suite against `review/effective-stat-contract-hardening`, fix regressions, and compare behavior with the parent feature branch.
+2. Review the new path/floor/explainability contract and promote it back to `feature/effective-stat-pipeline` only after verification.
+3. Re-run the full suite again on the final promoted feature tip and record the exact command/result.
+4. Add power resource costs, cooldowns, technique stages, drawbacks, and evolution prerequisites.
 3. Add explicit NPC goal/story-state transitions and multidimensional relationship utilities.
 4. Add quest graph definitions, branching objectives, failure states, and content-pack validation.
 5. Add deterministic information propagation events that execute authored leak rules rather than only listing candidates.
