@@ -115,3 +115,36 @@ Before the effective-value feature is treated as integration-complete, define tw
 UI/debug note:
 - `modifier_breakdown()` gives a complete provenance breakdown for player-relative base paths such as attributes/skills
 - a future UI that wants to explain a final calculated derived value should expose the formula-derived base plus direct `derived.*` contributions, not present the direct modifier total alone as the full derivation
+
+
+---
+
+## DEC-MOD-003 — Contract hardening candidates before pipeline closure
+
+Status: [DESIGNED] CANDIDATE / [IMPLEMENTED] ON REVIEW BRANCH / NOT YET VERIFIED
+
+Review branch: `review/effective-stat-contract-hardening`
+
+This decision records the current evolution candidate without declaring it canonical or complete.
+
+Candidate A — exact modifier-path registry:
+- attribute modifiers must use a known `attributes.<id>`
+- skill modifiers must use a known `skills.<id>`
+- direct derived modifiers must use a known `derived.<id>`
+- typoed IDs and unsupported namespaces are rejected at authoring/runtime boundaries rather than silently ignored
+
+Candidate B — derived-value domain policy:
+- non-negative capacity values: max Health, max Stamina, max Focus, max Resolve, carry capacity
+- signed contest values: initiative, accuracy, evasion, guard may go below zero so severe penalties still affect margins
+
+Candidate C — explainability contract:
+- derived formulas are centralized as data
+- `derived_stat_breakdown()` exposes weighted inputs, direct modifiers, floor adjustment, and final total
+- `RulesEngine.explain_player_value()` is the single rules-facing explanation API intended for debug/status UI
+
+Why this is not closed:
+- the new tests have not yet been executed by this chat
+- the full repository suite has not been executed on the review branch
+- the domain/floor policy is an architecture/balance choice and should remain reversible until verified in play and accepted for promotion
+
+Related: `CP-2026-09-27-EFFECTIVE-HARDENING-04`
