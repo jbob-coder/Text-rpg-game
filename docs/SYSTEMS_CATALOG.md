@@ -157,6 +157,58 @@ Set bonuses are threshold-based. A two-piece effect and four-piece effect can co
 
 Set bonuses are data, not hard-coded into item logic.
 
+## Power runtime
+
+Powers now have separate overall ability mastery and per-technique mastery.
+
+A technique may define:
+- minimum ability rank/mastery
+- minimum technique stage
+- attribute/skill/knowledge/perk/flag/item prerequisites
+- universal or power-specific resource costs
+- world-time cooldown
+- mastery gained from use
+- condition drawbacks such as strain, injury, or fatigue
+
+Technique stages currently progress:
+- discovered
+- unstable
+- learned
+- practiced
+- mastered
+
+Ability evolution is authored rather than automatic. An evolution can require a combination of rank, mastery, learned facts, perks, attributes, skills, flags, items, and technique mastery. Successful evolution can change form/tags, consume required items, grant source-tracked perks, and establish a persistent rank floor.
+
+## Quest graphs
+
+Quests are authored graphs rather than a single integer stage.
+
+Each quest can define:
+- stable quest ID
+- stable stage IDs
+- objectives per stage
+- required vs optional objectives
+- objective prerequisites
+- objective-specific branches
+- stage-level completion routes
+- objective/stage failure routes
+- terminal completed/failed stages
+
+Runtime quest state records current stage, completed/failed objectives, status, timestamps, and transition history.
+
+Static validation checks graph references before play. Whole-content-pack validation also verifies that scene `quest_stage` effects reference real quest/stage IDs.
+
+## NPC goals, story state, and relationships
+
+Important NPCs can now maintain:
+- independent relationship axes bounded to -100..100
+- minimum and maximum relationship gates
+- explicit goals with priority/progress/status
+- guarded story-state tracks that only transition from authored prior states
+- durable history entries for relationship, goal, and story transitions
+
+This keeps NPC development inspectable and authored rather than deriving behavior from one generic friendship score.
+
 ## NPC memory and knowledge
 
 Important NPCs have separate state for:
