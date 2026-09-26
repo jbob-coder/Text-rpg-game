@@ -49,10 +49,16 @@ def advance_time(state: GameState, minutes: int) -> list[str]:
     return expired
 
 
-def recover(state: GameState, minutes: int, *, quality: float = 1.0) -> Dict[str, float]:
+def recover(
+    state: GameState,
+    minutes: int,
+    *,
+    quality: float = 1.0,
+    set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
+) -> Dict[str, float]:
     if minutes < 0 or quality < 0:
         raise RuleError("Recovery time and quality must be non-negative")
-    maxima = initialize_resources(state)
+    maxima = initialize_resources(state, set_definitions=set_definitions)
     resources = state.player["resources"]
     hours = minutes / 60.0
     rates = {"health": 0.04, "stamina": 0.30, "focus": 0.22, "resolve": 0.15}
@@ -74,6 +80,7 @@ def train(
     minutes: int,
     intensity: float = 1.0,
     mentor_bonus: float = 0.0,
+    set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
     if skill not in SKILL_CATALOG:
         raise RuleError(f"Unknown skill: {skill}")
@@ -84,7 +91,7 @@ def train(
     if mentor_bonus < 0:
         raise RuleError("Mentor bonus cannot be negative")
 
-    initialize_resources(state)
+    initialize_resources(state, set_definitions=set_definitions)
     resources = state.player["resources"]
     stamina_cost = minutes / 60.0 * 8.0 * intensity
     focus_cost = minutes / 60.0 * 5.0 * intensity

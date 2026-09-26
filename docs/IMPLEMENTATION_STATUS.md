@@ -4,15 +4,21 @@
 
 Create the non-AI authored RPG foundation: persistent choices, stats, NPC memory, hidden information, equipment/perks, earned power progression, deterministic checks, save compatibility, simulation time, training, recovery, and pixel-art consistency rules.
 
+Current sub-objective: unify all effective player-value calculations so equipment, active set bonuses, perks, and conditions affect checks and derived stats through one inspectable pipeline without mutating base stats or being counted twice.
+
 ## VERIFIED_STATE
 
 Repository: `jbob-coder/Text-rpg-game`
 
-Working branch: `foundation/text-rpg-systems`
+Foundation branch: `foundation/text-rpg-systems`
+
+Current implementation branch: `feature/effective-stat-pipeline`
 
 The original `main` branch is not modified by this work.
 
 ## COMPLETED
+
+Foundation systems already present before this feature branch:
 
 - Deterministic authored scene engine.
 - Persistent player state and history.
@@ -25,7 +31,6 @@ The original `main` branch is not modified by this work.
 - Inventory requirements and item consumption.
 - Quest-stage effects.
 - NPC personality drift with bounded values.
-- Equipment and perk modifiers applied to checks without rewriting base stats.
 - Ability mastery XP and rank progression.
 - Technique requirements that can depend on rank, mastery, knowledge, and perks.
 - Versioned JSON save/load layer with explicit schema rejection.
@@ -45,23 +50,48 @@ The original `main` branch is not modified by this work.
 - Abstract reference extraction notes that avoid copying source story content.
 - Systems catalog documenting the stat/training/equipment/social contract.
 
+Implemented on `feature/effective-stat-pipeline`:
+
+- One additive modifier aggregation layer for equipment, equipment-set thresholds, perks, and active conditions/injuries.
+- Canonical modifier paths for attributes, skills, and direct derived values.
+- Per-source modifier breakdown suitable for debugging and future status-screen explanations/tooltips.
+- Rules-engine stat requirements/checks now use the unified effective value and can receive set definitions.
+- Derived stats now use effective attributes/skills and direct `derived.*` bonuses.
+- Resource maxima now inherit effective derived values.
+- Recovery and training accept set-definition context so resource maxima remain consistent when set bonuses are active.
+- Equipment requirement checks deliberately remain based on permanent/base values to avoid circular/order-dependent gear qualification.
+- Condition severity remains metadata; authored modifier magnitudes are not silently multiplied by severity.
+- New targeted tests cover stacking, set-aware choice requirements, condition penalties, direct derived modifiers, repeated calculations, and base-stat immutability.
+
 ## TESTS_RUN
 
-Command used against a branch-equivalent reconstruction of the current remote files:
+Parent foundation verification previously recorded:
 
 ```bash
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Result: **29 tests passed, 0 failed**.
+Parent-branch result: **29 tests passed, 0 failed**.
 
-The verification covered the original foundation tests plus the new stats, training/recovery, conditions, equipment-set, and social-information tests.
+For the new effective-stat feature, a targeted branch-equivalent reconstruction was executed against the new modifier/check/derived-stat behavior. Result: **targeted modifier-pipeline verification passed**.
+
+Verified by that targeted run:
+- base + equipment + set + perk + condition stacking
+- exact per-source total
+- base-stat immutability
+- stat requirement enabled/disabled state after effective modifiers
+- condition penalties affecting derived stats
+- direct `derived.*` bonuses
+- repeated derived calculations do not accumulate modifiers
+- resource maxima use the effective derived result
+
+The complete repository test suite has **not yet been re-run against the new feature branch**, so the branch is implemented but not yet fully VERIFIED as a whole.
 
 No GitHub Actions workflow was added; verification does not consume hosted CI minutes.
 
 ## NEXT_ACTION
 
-1. Integrate condition modifiers and equipment set bonuses directly into all effective-stat/check calculations.
+1. Re-run the complete repository suite against `feature/effective-stat-pipeline` in a full branch checkout/reconstruction and fix any regression found.
 2. Add power resource costs, cooldowns, technique stages, drawbacks, and evolution prerequisites.
 3. Add explicit NPC goal/story-state transitions and multidimensional relationship utilities.
 4. Add quest graph definitions, branching objectives, failure states, and content-pack validation.
@@ -74,6 +104,8 @@ No GitHub Actions workflow was added; verification does not consume hosted CI mi
 
 The rules core is not blocked.
 
+Full-branch verification is still pending because the current connected repository workflow can inspect and modify remote files but does not provide a normal local Git checkout by itself. Targeted reconstructed execution is available and has been used without hosted CI billing.
+
 The visual/runtime implementation should not be hard-wired yet because the final client technology has not been established in the repository. Keeping rules separate avoids throwing away work if the presentation target changes.
 
 ## IMPORTANT_DECISIONS
@@ -85,7 +117,9 @@ The visual/runtime implementation should not be hard-wired yet because the final
 - Information and conversations are first-class gameplay state.
 - Important NPCs use multidimensional relationships instead of one friendship score.
 - Secret propagation remains deterministic, inspectable, and authored.
-- Equipment can alter behavior and stats without mutating the player’s underlying base attributes.
+- Effective-value modifiers are additive in the current contract and must be applied through one pipeline.
+- Equipment/set/perk/condition modifiers do not rewrite the player’s permanent base values.
+- Equipment requirements use permanent/base attributes and skills to avoid circular equipment dependencies.
 - Art generation must obey a canonical visual identity sheet before an asset becomes game canon.
 
 ## KNOWN_RISKS
@@ -94,4 +128,5 @@ The visual/runtime implementation should not be hard-wired yet because the final
 - Excessive branching can cause content explosion. Recombining branches around durable state is preferred over writing a completely separate story for every choice.
 - Hidden information must be scoped to the correct character/player knowledge stores or secrets can leak accidentally.
 - Progression and recovery numbers are provisional until a playable loop provides balancing evidence.
-- Equipment set bonuses and condition modifiers currently exist as separate helpers; they must be integrated carefully so modifiers are not double-counted.
+- Set-definition context must be supplied consistently anywhere set bonuses are expected; a later runtime/service layer should centralize this content context so callers cannot accidentally omit it.
+- The current modifier contract is additive only. Multiplicative/capped/override stacking must be deliberately designed before introduction rather than patched ad hoc.
