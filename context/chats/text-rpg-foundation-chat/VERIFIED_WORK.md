@@ -118,3 +118,26 @@ Foundation commits for this slice:
 - `30b4a33fe65a3c33704a78476251877199b89f7f` — README refresh.
 
 This shared branch contains the context record, not those implementation commits themselves. Inspect `foundation/text-rpg-systems` for the live code.
+
+
+## Update — power runtime, NPC state, and quest graphs
+
+Verified on 2026-09-26 against an exact branch-equivalent reconstruction whose changed-file Git blob hashes matched the live `foundation/text-rpg-systems` files.
+
+Completed:
+- `src/textrpg/powers.py`: resource costs, world-time cooldowns, per-technique mastery stages, authored drawbacks, overall ability mastery gain, evolution prerequisites/results, item consumption, source-tracked perk grants, and durable evolution rank floors.
+- `src/textrpg/social.py`: bounded multidimensional relationship changes, min/max gates, explicit NPC goals/progress, and guarded NPC story-state transitions.
+- `src/textrpg/quests.py`: authored quest graphs with required/optional objectives, prerequisites, branches, failure routes, terminal stages, manual failure, and durable quest history.
+- `src/textrpg/validation.py`: whole-content-pack validation including scene `quest_stage` references to real quest/stage IDs.
+- Regression tests for all of the above.
+
+Verification command:
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -v
+```
+
+Observed result: **55 tests passed, 0 failed**.
+
+The foundation documentation and README were updated to this verified count. The next recorded engineering slice is deterministic execution of authored information-propagation/leak events.
+
+Important: implementation commits remain on `foundation/text-rpg-systems`; this shared branch stores cross-chat context only.
