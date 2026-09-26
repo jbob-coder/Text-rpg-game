@@ -52,7 +52,9 @@ def gain_ability_mastery(
     for index, threshold in enumerate(rank_thresholds):
         if ability["mastery_xp"] >= threshold:
             rank = index
-    ability["rank"] = min(rank, max_rank)
+    derived_rank = min(rank, max_rank)
+    rank_floor = int(ability.get("rank_floor", 0))
+    ability["rank"] = max(derived_rank, rank_floor)
 
     return {"before": before, "after": dict(ability)}
 
