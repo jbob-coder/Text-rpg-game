@@ -13,13 +13,14 @@ from .persistence import CURRENT_SCHEMA_VERSION, dumps_state, load_state, loads_
 from .progression import gain_ability_mastery, mastery_stage, technique_available
 from .simulation import advance_time, apply_condition, recover, train, train_attribute
 from .social import add_memory, eligible_leak_targets, ensure_npc, npc_learn, share_knowledge
-from .stats import ATTRIBUTE_SPECS, SKILL_CATALOG, derived_stats, initialize_resources, validate_player_stats
-from .schema import DERIVED_STAT_SPECS
+from .stats import ATTRIBUTE_SPECS, SKILL_CATALOG, derived_stat_breakdown, derived_stats, initialize_resources, validate_player_stats
+from .schema import DERIVED_FORMULAS, DERIVED_STAT_SPECS
 from .validation import assert_valid_scenes, validate_scenes
 
 __all__ = [
     "ATTRIBUTE_SPECS",
     "CURRENT_SCHEMA_VERSION",
+    "DERIVED_FORMULAS",
     "DERIVED_STAT_SPECS",
     "GameState",
     "RuleError",
@@ -31,6 +32,7 @@ __all__ = [
     "apply_condition",
     "assert_valid_scenes",
     "condition_modifiers",
+    "derived_stat_breakdown",
     "derived_stats",
     "dumps_state",
     "effective_player_value",
