@@ -11,6 +11,15 @@ from .powers import (
     technique_use_status,
     use_technique,
 )
+from .quests import (
+    assert_valid_quest_definitions,
+    available_objectives,
+    complete_objective,
+    fail_objective,
+    fail_quest,
+    start_quest,
+    validate_quest_definitions,
+)
 from .simulation import advance_time, apply_condition, recover, train, train_attribute
 from .social import (
     add_memory,
@@ -25,7 +34,7 @@ from .social import (
     update_goal_progress,
 )
 from .stats import ATTRIBUTE_SPECS, SKILL_CATALOG, derived_stats, initialize_resources, validate_player_stats
-from .validation import assert_valid_scenes, validate_scenes
+from .validation import assert_valid_content_pack, assert_valid_scenes, validate_content_pack, validate_scenes
 
 __all__ = [
     "ATTRIBUTE_SPECS",
@@ -42,12 +51,18 @@ __all__ = [
     "adjust_relationship",
     "advance_time",
     "apply_condition",
+    "assert_valid_content_pack",
+    "assert_valid_quest_definitions",
     "assert_valid_scenes",
+    "available_objectives",
+    "complete_objective",
     "derived_stats",
     "dumps_state",
     "eligible_leak_targets",
     "ensure_npc",
     "equip_item",
+    "fail_objective",
+    "fail_quest",
     "equipment_modifiers",
     "gain_ability_mastery",
     "gain_technique_mastery",
@@ -60,6 +75,7 @@ __all__ = [
     "recover",
     "save_state",
     "set_goal",
+    "start_quest",
     "set_counts",
     "share_knowledge",
     "transition_story_state",
@@ -70,6 +86,8 @@ __all__ = [
     "train",
     "train_attribute",
     "use_technique",
+    "validate_content_pack",
     "validate_player_stats",
+    "validate_quest_definitions",
     "validate_scenes",
 ]
