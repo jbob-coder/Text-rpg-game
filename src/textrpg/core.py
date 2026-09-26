@@ -55,6 +55,12 @@ class GameState:
     knowledge: Dict[str, Dict[str, Any]] = field(default_factory=dict)
     inventory: Dict[str, int] = field(default_factory=dict)
     quests: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    npcs: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    party: List[str] = field(default_factory=list)
+    abilities: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    equipment: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    perks: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    schema_version: int = 1
     history: List[Dict[str, Any]] = field(default_factory=list)
 
     def snapshot(self) -> Dict[str, Any]:
@@ -69,6 +75,12 @@ class GameState:
             "knowledge": self.knowledge,
             "inventory": self.inventory,
             "quests": self.quests,
+            "npcs": self.npcs,
+            "party": self.party,
+            "abilities": self.abilities,
+            "equipment": self.equipment,
+            "perks": self.perks,
+            "schema_version": self.schema_version,
             "history": self.history,
         }
 
@@ -149,11 +161,11 @@ class RulesEngine:
                 if actual != condition.get("equals", True):
                     return False
             elif kind == "stat_min":
-                actual = _get_path(state.player, condition["path"], 0)
+                actual = self._effective_player_value(state, condition["path"])
                 if actual < condition["value"]:
                     return False
             elif kind == "stat_max":
-                actual = _get_path(state.player, condition["path"], 0)
+                actual = self._effective_player_value(state, condition["path"])
                 if actual > condition["value"]:
                     return False
             elif kind == "relationship_min":
@@ -163,6 +175,20 @@ class RulesEngine:
             elif kind == "knows":
                 if condition["knowledge_id"] not in state.knowledge:
                     return False
+            elif kind == "npc_knows":
+                npc = state.npcs.get(condition["npc"], {})
+                if condition["knowledge_id"] not in npc.get("knowledge", {}):
+                    return False
+            elif kind == "party_has":
+                if condition["npc"] not in state.party:
+                    return False
+            elif kind == "ability_rank_min":
+                rank = state.abilities.get(condition["ability_id"], {}).get("rank", 0)
+                if rank < condition["value"]:
+                    return False
+            elif kind == "has_perk":
+                if condition["perk_id"] not in state.perks:
+                    return False
             elif kind == "item_min":
                 if state.inventory.get(condition["item_id"], 0) < condition.get("quantity", 1):
                     return False
@@ -170,10 +196,21 @@ class RulesEngine:
                 raise RuleError(f"Unknown condition type: {kind}")
         return True
 
+    def _effective_player_value(self, state: GameState, path: str) -> float:
+        base = _get_path(state.player, path, 0)
+        if not isinstance(base, (int, float)):
+            raise RuleError(f"Player value is not numeric: {path}")
+        total = float(base)
+        for equipped in state.equipment.values():
+            total += float(equipped.get("modifiers", {}).get(path, 0))
+        for perk in state.perks.values():
+            total += float(perk.get("modifiers", {}).get(path, 0))
+        return total
+
     def _resolve_check(self, state: GameState, check: Dict[str, Any], choice_id: str) -> Dict[str, Any]:
         stat_path = check["stat"]
-        stat = float(_get_path(state.player, stat_path, 0))
-        skill = float(_get_path(state.player, check.get("skill", "skills.none"), 0)) if check.get("skill") else 0.0
+        stat = float(self._effective_player_value(state, stat_path))
+        skill = float(self._effective_player_value(state, check.get("skill", "skills.none"))) if check.get("skill") else 0.0
         difficulty = float(check.get("difficulty", 50))
         variance = float(check.get("variance", 10))
 
@@ -233,5 +270,32 @@ class RulesEngine:
                 quest = state.quests.setdefault(effect["quest_id"], {})
                 quest["stage"] = effect["stage"]
                 quest["status"] = effect.get("status", quest.get("status", "active"))
+            elif kind == "npc_learn":
+                npc = state.npcs.setdefault(effect["npc"], {})
+                knowledge = npc.setdefault("knowledge", {})
+                knowledge[effect["knowledge_id"]] = {
+                    "source": effect.get("source", "unknown"),
+                    "confidence": effect.get("confidence", 1.0),
+                    "turn_learned": state.turn,
+                }
+            elif kind == "personality":
+                npc = state.npcs.setdefault(effect["npc"], {})
+                personality = npc.setdefault("personality", {})
+                axis = effect["axis"]
+                personality[axis] = max(-100, min(100, personality.get(axis, 0) + effect["value"]))
+            elif kind == "party_add":
+                npc_id = effect["npc"]
+                if npc_id not in state.party:
+                    state.party.append(npc_id)
+            elif kind == "party_remove":
+                npc_id = effect["npc"]
+                if npc_id in state.party:
+                    state.party.remove(npc_id)
+            elif kind == "add_perk":
+                state.perks[effect["perk_id"]] = {
+                    "source": effect.get("source", "unknown"),
+                    "modifiers": effect.get("modifiers", {}),
+                    "tags": effect.get("tags", []),
+                }
             else:
                 raise RuleError(f"Unknown effect type: {kind}")
