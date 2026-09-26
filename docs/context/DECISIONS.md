@@ -26,6 +26,10 @@ Resolution rule:
 - evaluate both schemas against combat, stealth, traversal, technical tasks, social play, investigation, injury/recovery, training, powers, and life-simulation decisions before selecting canonical names/responsibilities
 - no silent implementation migration before resolution
 
+Detailed evaluation: `docs/context/STAT_SCHEMA_EVALUATION.md`
+
+Current design recommendation candidate: eight core attributes, because separating Dexterity from Agility removes a repeated responsibility conflict and Constitution cleanly separates durable bodily resilience from the spendable Stamina resource. This remains [DESIGNED], not canonical, until explicitly accepted and migrated.
+
 Related: `CP-2026-09-27-STATS-SCHEMA-01`
 
 ---
