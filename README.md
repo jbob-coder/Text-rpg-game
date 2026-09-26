@@ -21,7 +21,7 @@ The rules layer is deliberately separated from presentation. The game can later 
 - `src/textrpg/stats.py` — canonical attributes, skills, resources, and derived values.
 - `src/textrpg/simulation.py` — world time, conditions, training, and recovery.
 - `src/textrpg/equipment.py` — equipment slots, requirements, modifiers, and set bonuses.
-- `src/textrpg/social.py` — NPC memory, private knowledge, relationships, goals, story-state transitions, sharing, and leak-candidate rules.
+- `src/textrpg/social.py` — NPC memory, private knowledge, relationships, goals, story-state transitions, sharing, leak eligibility, and deterministic leak-event execution.
 - `content/sample_scene.json` — non-canon scene showing relationship, knowledge, item, and stat-dependent choices.
 - `tests/` — behavior, progression, persistence, and content-validation tests.
 
@@ -31,6 +31,6 @@ The rules layer is deliberately separated from presentation. The game can later 
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Latest local verification for the branch-equivalent files: **55 tests passed, 0 failed**.
+Latest local verification for the branch-equivalent files: **58 tests passed, 0 failed**.
 
 The prototype uses only the Python standard library. No hosted AI service or GitHub Actions workflow is required.
