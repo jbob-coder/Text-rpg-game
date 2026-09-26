@@ -131,6 +131,69 @@ def eligible_leak_targets(
     return sorted(set(targets))
 
 
+def execute_leak_event(
+    state: GameState,
+    *,
+    holder: str,
+    knowledge_id: str,
+    network: Mapping[str, Iterable[str]],
+    recipients: Iterable[str] | None = None,
+    max_recipients: int = 1,
+    event_id: str = "LEAK_EVENT",
+) -> Dict[str, Any]:
+    """Execute an authored deterministic information-propagation event.
+
+    Candidate eligibility still comes from authored network/personality/secrecy rules.
+    When recipients are not explicitly authored, the sorted eligible list is used so
+    the same state always produces the same recipients.
+    """
+    if max_recipients < 1:
+        raise RuleError("Leak event max_recipients must be at least 1")
+
+    candidates = eligible_leak_targets(
+        state,
+        holder=holder,
+        knowledge_id=knowledge_id,
+        network=network,
+    )
+
+    if recipients is None:
+        selected = candidates[:max_recipients]
+    else:
+        selected = sorted(set(recipients))
+        if len(selected) > max_recipients:
+            raise RuleError(
+                f"Leak event selected {len(selected)} recipients but max is {max_recipients}"
+            )
+        invalid = [recipient for recipient in selected if recipient not in candidates]
+        if invalid:
+            raise RuleError(
+                "Leak event recipient is not currently eligible: " + ", ".join(invalid)
+            )
+
+    for recipient in selected:
+        share_knowledge(
+            state,
+            speaker=holder,
+            recipient=recipient,
+            knowledge_id=knowledge_id,
+            voluntary=False,
+        )
+
+    event = {
+        "type": "knowledge_leak",
+        "event_id": event_id,
+        "holder": holder,
+        "knowledge_id": knowledge_id,
+        "candidates": list(candidates),
+        "recipients": list(selected),
+        "turn": state.turn,
+        "time_minutes": state.time_minutes,
+    }
+    state.history.append(event)
+    return event
+
+
 def adjust_relationship(
     state: GameState,
     npc_id: str,
