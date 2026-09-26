@@ -112,3 +112,55 @@ def assert_valid_scenes(scenes: Mapping[str, Dict[str, Any]]) -> None:
     errors = validate_scenes(scenes)
     if errors:
         raise RuleError("Invalid authored content:\n- " + "\n- ".join(errors))
+
+
+def validate_content_pack(
+    scenes: Mapping[str, Dict[str, Any]],
+    quests: Mapping[str, Mapping[str, Any]] | None = None,
+) -> List[str]:
+    """Validate scenes plus authored quest definitions and their cross-references."""
+    from .quests import validate_quest_definitions
+
+    quest_definitions = quests or {}
+    errors = list(validate_scenes(scenes))
+    errors.extend(validate_quest_definitions(quest_definitions))
+
+    for scene_id, scene in scenes.items():
+        for choice_index, choice in enumerate(scene.get("choices", [])):
+            for outcome_name, outcome in choice.get("outcomes", {}).items():
+                if not isinstance(outcome, Mapping):
+                    continue
+                for effect_index, effect in enumerate(outcome.get("effects", [])):
+                    if effect.get("type") != "quest_stage":
+                        continue
+                    location = (
+                        f"{scene_id}.choices[{choice_index}]."
+                        f"outcomes.{outcome_name}.effect[{effect_index}]"
+                    )
+                    quest_id = effect.get("quest_id")
+                    stage_id = effect.get("stage")
+                    definition = quest_definitions.get(quest_id)
+
+                    if definition is None:
+                        errors.append(
+                            f"{location} references unknown quest {quest_id!r}"
+                        )
+                        continue
+
+                    stages = definition.get("stages", {})
+                    if stage_id not in stages:
+                        errors.append(
+                            f"{location} references unknown stage "
+                            f"{stage_id!r} for quest {quest_id!r}"
+                        )
+
+    return errors
+
+
+def assert_valid_content_pack(
+    scenes: Mapping[str, Dict[str, Any]],
+    quests: Mapping[str, Mapping[str, Any]] | None = None,
+) -> None:
+    errors = validate_content_pack(scenes, quests)
+    if errors:
+        raise RuleError("Invalid authored content pack:\n- " + "\n- ".join(errors))
