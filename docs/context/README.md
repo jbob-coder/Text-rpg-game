@@ -18,23 +18,27 @@ A new chat working on this game should read, in order:
 
 1. `docs/context/README.md`
 2. `docs/context/CONTEXT_SYNC_PROTOCOL.md`
-3. `docs/context/CHECKPOINTS.md`
-4. `docs/context/DECISIONS.md`
-5. `docs/IMPLEMENTATION_STATUS.md`
-6. `docs/GAME_FOUNDATION.md`
-7. `docs/SYSTEMS_CATALOG.md`
-8. relevant entries under `docs/context/chats/`
-9. the actual source/tests for any implementation-specific claim
+3. `docs/context/GAME_DIRECTION_AND_UI.md`
+4. `docs/context/CHECKPOINTS.md`
+5. `docs/context/DECISIONS.md`
+6. `docs/IMPLEMENTATION_STATUS.md`
+7. `docs/GAME_FOUNDATION.md`
+8. `docs/SYSTEMS_CATALOG.md`
+9. relevant entries under `docs/context/chats/`
+10. the actual source/tests for any implementation-specific claim
+
+The purpose of placing `GAME_DIRECTION_AND_UI.md` near the top is to prevent technically correct work from drifting away from the user's intended game experience.
 
 ## Authority order
 
 When sources conflict, use this order:
 
-1. Current executable source, authored content, schemas, and tests on the branch being discussed.
-2. Current repository implementation/status documents when they are supported by repository evidence.
-3. Accepted decisions and checkpoints in this directory.
-4. Per-chat context records.
-5. Chat memory or conversational recollection.
+1. Current executable source, authored content, schemas, and tests on the branch being discussed for implementation claims.
+2. Explicit current user direction and accepted project decisions for product/design intent.
+3. Current repository implementation/status documents when they are supported by repository evidence.
+4. Accepted decisions and checkpoints in this directory.
+5. Per-chat context records.
+6. Chat memory or conversational recollection.
 
 If a lower source disagrees with a higher source, do not silently merge them. Record a conflict.
 
@@ -55,9 +59,10 @@ Every non-trivial project claim should be classifiable as one of:
 
 ## Files in this context layer
 
+- `GAME_DIRECTION_AND_UI.md` — authoritative design-direction reference for what the game should feel like, its progression philosophy, player-state layers, and status-screen target.
 - `CONTEXT_SYNC_PROTOCOL.md` — mandatory procedure, markup vocabulary, evidence rules, handoffs, conflict handling, and checkpoint rules.
 - `CHECKPOINTS.md` — append-only project checkpoints.
-- `DECISIONS.md` — compact architectural/design decision log.
+- `DECISIONS.md` — compact architectural/design decision log, including unresolved conflicts.
 - `chats/` — one independent context record per meaningful chat/workstream.
 
 ## Anti-drift rules
@@ -68,7 +73,9 @@ Every non-trivial project claim should be classifiable as one of:
 - Prefer adding a newer record with `SUPERSEDES`/`CONFLICTS_WITH` links.
 - Preserve unresolved questions and risks during context compression.
 - Important continuity must live in files and stable IDs, not only prose memory.
-- Repository files outrank remembered summaries when they conflict.
+- Repository files outrank remembered summaries when they conflict about implementation.
+- Explicit user direction outranks older design assumptions when the user intentionally changes the product direction.
+- Before implementing a system that affects player-facing design, check `GAME_DIRECTION_AND_UI.md` and `DECISIONS.md` for unresolved conflicts.
 
 ## What belongs in a chat record
 
