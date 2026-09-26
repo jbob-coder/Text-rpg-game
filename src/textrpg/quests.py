@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import re
 from typing import Any, Dict, Mapping
 
 from .core import GameState, RuleError
-from .validation import STABLE_ID
+
+
+STABLE_ID = re.compile(r"^[A-Z][A-Z0-9_]*$")
 
 
 QUEST_STATUSES = ("active", "completed", "failed")
