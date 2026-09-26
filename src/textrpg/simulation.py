@@ -142,6 +142,8 @@ def train_attribute(
         raise RuleError(f"Unknown attribute: {attribute}")
     if minutes < 120:
         raise RuleError("Core attributes require at least 120 minutes of focused training")
+    if intensity <= 0 or intensity > 2.0:
+        raise RuleError("Attribute training intensity must be in range (0, 2]")
     current = float(state.player.setdefault("attributes", {}).get(attribute, 0))
     gain = (minutes / 60.0) * 0.08 * intensity * max(0.15, 1.0 - current / 110.0)
     after = min(100.0, current + gain)
