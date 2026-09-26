@@ -1,0 +1,25 @@
+import unittest
+
+from textrpg import GameState, RuleError, dumps_state, loads_state
+
+
+class PersistenceTests(unittest.TestCase):
+    def test_round_trip_preserves_extended_state(self):
+        state = GameState(
+            seed="save-seed",
+            scene_id="SCENE_1",
+            party=["NPC_A"],
+            abilities={"ABILITY_X": {"rank": 1, "mastery_xp": 120}},
+            perks={"PERK_X": {"source": "training"}},
+        )
+        loaded = loads_state(dumps_state(state))
+        self.assertEqual(loaded.snapshot(), state.snapshot())
+
+    def test_unknown_schema_is_rejected(self):
+        raw = '{"schema_version":999,"seed":"x","scene_id":"A"}'
+        with self.assertRaises(RuleError):
+            loads_state(raw)
+
+
+if __name__ == "__main__":
+    unittest.main()
