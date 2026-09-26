@@ -162,14 +162,22 @@ Reconstructed scenarios passed:
 - signed negative initiative
 - rejection of typoed/unsupported modifier paths
 
-This is useful semantic evidence but **is not equivalent to executing the repository branch**.
+A broader local reconstruction was then assembled from the current fetched review-branch source/test content and run with:
+
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -v
+```
+
+Observed reconstructed-suite result: **46 tests passed, 0 failed**.
+
+This materially increases confidence in compatibility across core rules, equipment, modifiers, persistence, progression, simulation, social state, stats, and validation. It is still **not equivalent to executing a byte-for-byte checkout of the GitHub branch**, because the connected repository interface does not expose a normal local clone and the reconstruction was assembled from fetched contents.
 
 ## Not verified
 
 The following remain unverified:
 
 - import/syntax behavior of the actual remote branch in a Python checkout
-- full repository unit test suite on this review tip
+- full repository unit test suite on a byte-for-byte checkout of this review tip
 - compatibility with every caller outside the current test suite
 - save round-trip after normalized numeric modifier values are stored as floats
 - performance impact of repeated deep explainability calls in a large content pack
