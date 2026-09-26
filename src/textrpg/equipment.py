@@ -3,7 +3,12 @@ from __future__ import annotations
 from typing import Any, Dict, Mapping
 
 from .core import GameState, RuleError
-from .modifiers import active_set_bonuses, equipment_modifiers, set_counts
+from .modifiers import (
+    active_set_bonuses,
+    equipment_modifiers,
+    set_counts,
+    validate_modifier_mapping,
+)
 
 
 DEFAULT_SLOTS = (
@@ -34,6 +39,14 @@ def equip_item(
     if consume_inventory and state.inventory.get(item_id, 0) < 1:
         raise RuleError(f"Item not present in inventory: {item_id}")
 
+    try:
+        modifiers = validate_modifier_mapping(
+            item.get("modifiers", {}),
+            source=f"equipment:{item_id}",
+        )
+    except ValueError as exc:
+        raise RuleError(f"Invalid equipment modifiers for {item_id}: {exc}") from exc
+
     # Equipment requirements deliberately use permanent/base values. Allowing one
     # equipped item to qualify another can create circular or order-dependent builds.
     requirements = item.get("requirements", {})
@@ -51,7 +64,7 @@ def equip_item(
         "item_id": item_id,
         "slot": slot,
         "quality": item.get("quality", "standard"),
-        "modifiers": dict(item.get("modifiers", {})),
+        "modifiers": modifiers,
         "tags": list(item.get("tags", [])),
         "set_id": item.get("set_id"),
         "active_ability": item.get("active_ability"),
