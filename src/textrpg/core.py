@@ -4,6 +4,8 @@ from dataclasses import dataclass, field
 from hashlib import sha256
 from typing import Any, Dict, List, Mapping, MutableMapping, Optional
 
+from .modifiers import effective_player_value
+
 
 class RuleError(ValueError):
     """Raised when authored game data violates the engine contract."""
@@ -32,7 +34,7 @@ def _set_path(data: MutableMapping[str, Any], path: str, value: Any) -> None:
 
 def _add_path(data: MutableMapping[str, Any], path: str, delta: float) -> None:
     current = _get_path(data, path, 0)
-    if not isinstance(current, (int, float)):
+    if not isinstance(current, (int, float)) or isinstance(current, bool):
         raise RuleError(f"Cannot add numeric delta to non-numeric path: {path}")
     _set_path(data, path, current + delta)
 
@@ -91,8 +93,14 @@ class RulesEngine:
     No generative AI is required at runtime. Content is explicit and testable.
     """
 
-    def __init__(self, scenes: Mapping[str, Dict[str, Any]]):
+    def __init__(
+        self,
+        scenes: Mapping[str, Dict[str, Any]],
+        *,
+        set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
+    ):
         self.scenes = dict(scenes)
+        self.set_definitions = dict(set_definitions or {})
 
     def get_scene(self, state: GameState) -> Dict[str, Any]:
         try:
@@ -197,15 +205,10 @@ class RulesEngine:
         return True
 
     def _effective_player_value(self, state: GameState, path: str) -> float:
-        base = _get_path(state.player, path, 0)
-        if not isinstance(base, (int, float)):
-            raise RuleError(f"Player value is not numeric: {path}")
-        total = float(base)
-        for equipped in state.equipment.values():
-            total += float(equipped.get("modifiers", {}).get(path, 0))
-        for perk in state.perks.values():
-            total += float(perk.get("modifiers", {}).get(path, 0))
-        return total
+        try:
+            return effective_player_value(state, path, self.set_definitions)
+        except ValueError as exc:
+            raise RuleError(f"Invalid effective player value for {path}: {exc}") from exc
 
     def _resolve_check(self, state: GameState, check: Dict[str, Any], choice_id: str) -> Dict[str, Any]:
         stat_path = check["stat"]
