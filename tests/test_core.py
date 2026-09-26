@@ -178,6 +178,60 @@ class ExtendedStateTests(unittest.TestCase):
         self.assertEqual(s.player["attributes"]["intellect"], 55)
         self.assertEqual(event["check"]["base"], 58.0)
 
+    def test_relationship_max_can_gate_authored_choice(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "LOW_SUSPICION_LINE",
+                    "text": "Speak while suspicion is still low.",
+                    "requires": [{
+                        "type": "relationship_max",
+                        "npc": "NPC_A",
+                        "axis": "suspicion",
+                        "value": 30,
+                    }],
+                    "outcomes": {"default": {"effects": []}},
+                }]
+            }
+        })
+        s = GameState(
+            seed="x",
+            scene_id="A",
+            relationships={"NPC_A": {"suspicion": 20}},
+        )
+        choice = engine.available_choices(s)[0]
+        self.assertTrue(choice["enabled"])
+        s.relationships["NPC_A"]["suspicion"] = 40
+        choice = engine.available_choices(s)[0]
+        self.assertFalse(choice["enabled"])
+
+    def test_relationship_effect_is_bounded(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "TRUST_EVENT",
+                    "text": "Apply a large relationship change.",
+                    "outcomes": {
+                        "default": {
+                            "effects": [{
+                                "type": "relationship",
+                                "npc": "NPC_A",
+                                "axis": "trust",
+                                "value": 250,
+                            }]
+                        }
+                    },
+                }]
+            }
+        })
+        s = GameState(
+            seed="x",
+            scene_id="A",
+            relationships={"NPC_A": {"trust": 10}},
+        )
+        engine.choose(s, "TRUST_EVENT")
+        self.assertEqual(s.relationships["NPC_A"]["trust"], 100.0)
+
 
 if __name__ == "__main__":
     unittest.main()
