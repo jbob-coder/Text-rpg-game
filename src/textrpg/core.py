@@ -218,20 +218,36 @@ class RulesEngine:
                 raise RuleError(f"Unknown condition type: {kind}")
         return True
 
-    def _effective_player_value(self, state: GameState, path: str) -> float:
+    def explain_player_value(self, state: GameState, path: str) -> Dict[str, Any]:
+        """Return a stable explainability payload for a player-facing value."""
         if path.startswith("derived."):
             # Local import avoids a module-import cycle: stats depends on GameState.
-            from .stats import derived_stats
+            from .stats import derived_stat_breakdown
 
             key = path.removeprefix("derived.")
-            values = derived_stats(state, self.set_definitions)
-            if key not in values:
-                raise RuleError(f"Unknown derived stat: {path}")
-            return float(values[key])
+            breakdown = derived_stat_breakdown(state, key, self.set_definitions)
+            return {
+                "kind": "derived",
+                "path": path,
+                "total": float(breakdown["total"]),
+                "breakdown": breakdown,
+            }
+
+        from .modifiers import modifier_breakdown
+
         try:
-            return effective_player_value(state, path, self.set_definitions)
+            breakdown = modifier_breakdown(state, path, self.set_definitions)
         except ValueError as exc:
             raise RuleError(f"Invalid effective player value for {path}: {exc}") from exc
+        return {
+            "kind": "effective",
+            "path": path,
+            "total": float(breakdown["total"]),
+            "breakdown": breakdown,
+        }
+
+    def _effective_player_value(self, state: GameState, path: str) -> float:
+        return float(self.explain_player_value(state, path)["total"])
 
     def _resolve_check(self, state: GameState, check: Dict[str, Any], choice_id: str) -> Dict[str, Any]:
         stat_path = check["stat"]
