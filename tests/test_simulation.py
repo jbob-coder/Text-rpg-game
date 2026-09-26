@@ -1,6 +1,6 @@
 import unittest
 
-from textrpg import GameState
+from textrpg import GameState, RuleError
 from textrpg.simulation import apply_condition, advance_time, recover, train, train_attribute
 from textrpg.stats import initialize_resources
 
@@ -65,7 +65,7 @@ class SimulationTests(unittest.TestCase):
 
     def test_invalid_condition_modifier_path_is_rejected(self):
         state = self.state()
-        with self.assertRaises(Exception) as context:
+        with self.assertRaises(RuleError) as context:
             apply_condition(
                 state,
                 "COND_BAD",
