@@ -41,6 +41,63 @@ SKILL_CATALOG: Dict[str, str] = {
 
 RESOURCE_KEYS = ("health", "stamina", "focus", "resolve")
 
+# Formula definitions are data so runtime calculations, explainability, tests,
+# documentation, and future UI can refer to one source of truth.
+DERIVED_FORMULAS: Dict[str, Dict[str, Any]] = {
+    "max_health": {
+        "base": 50.0,
+        "terms": {"attributes.endurance": 2.0, "attributes.will": 0.5},
+    },
+    "max_stamina": {
+        "base": 40.0,
+        "terms": {"attributes.endurance": 1.5, "skills.athletics": 0.5},
+    },
+    "max_focus": {
+        "base": 30.0,
+        "terms": {"attributes.intellect": 0.8, "attributes.will": 0.7},
+    },
+    "max_resolve": {
+        "base": 25.0,
+        "terms": {
+            "attributes.will": 1.1,
+            "attributes.presence": 0.35,
+            "skills.leadership": 0.15,
+        },
+    },
+    "initiative": {
+        "base": 0.0,
+        "terms": {"attributes.agility": 0.7, "attributes.perception": 0.3},
+    },
+    "accuracy": {
+        "base": 0.0,
+        "terms": {
+            "attributes.perception": 0.55,
+            "attributes.agility": 0.20,
+            "skills.ranged": 0.25,
+        },
+    },
+    "evasion": {
+        "base": 0.0,
+        "terms": {
+            "attributes.agility": 0.65,
+            "attributes.perception": 0.20,
+            "skills.athletics": 0.15,
+        },
+    },
+    "guard": {
+        "base": 0.0,
+        "terms": {
+            "attributes.endurance": 0.45,
+            "attributes.might": 0.25,
+            "skills.defense": 0.30,
+        },
+    },
+    "carry_capacity": {
+        "base": 10.0,
+        "terms": {"attributes.might": 0.8, "attributes.endurance": 0.2},
+    },
+}
+
 # Derived values that represent physical/resource capacities have a hard floor.
 # Contest-style values may legitimately go below zero under severe penalties.
 DERIVED_STAT_SPECS: Dict[str, Dict[str, Any]] = {
