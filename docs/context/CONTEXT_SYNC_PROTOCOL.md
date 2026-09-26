@@ -6,13 +6,16 @@ Purpose: keep multiple ChatGPT chats and human workstreams aligned on the same g
 
 Before doing meaningful design or implementation work on this project:
 1. Read `docs/context/README.md`.
-2. Read `docs/context/CHECKPOINTS.md`.
-3. Read `docs/context/DECISIONS.md`.
-4. Read `docs/IMPLEMENTATION_STATUS.md`, `docs/GAME_FOUNDATION.md`, and `docs/SYSTEMS_CATALOG.md`.
-5. Read the relevant record under `docs/context/chats/`.
-6. For implementation claims, inspect actual source/tests on the branch being discussed.
+2. Read `docs/context/GAME_DIRECTION_AND_UI.md`.
+3. Read `docs/context/CHECKPOINTS.md`.
+4. Read `docs/context/DECISIONS.md`.
+5. Read `docs/IMPLEMENTATION_STATUS.md`, `docs/GAME_FOUNDATION.md`, and `docs/SYSTEMS_CATALOG.md`.
+6. Read the relevant record under `docs/context/chats/`.
+7. For implementation claims, inspect actual source/tests on the branch being discussed.
 
 After meaningful work, append or add a chat/workstream record. Do not overwrite another chat's history to make records agree.
+
+When a user clarifies how the game should feel, progress, present information, or react to choices, update the durable direction records rather than leaving that instruction only in chat.
 
 ## Markup vocabulary
 
@@ -65,6 +68,7 @@ Each meaningful chat/workstream gets its own file under `docs/context/chats/`.
 A chat record should preserve:
 - user instructions that affect product direction
 - system designs proposed or accepted
+- player-facing UI/status-screen requirements when discussed
 - rejected ideas and why
 - unresolved alternatives
 - conflicts with existing repository documents
@@ -84,10 +88,14 @@ When two chats disagree:
 5. Resolve only from stronger repository evidence or explicit user direction.
 6. Record the resolution in `DECISIONS.md` with a new decision ID.
 
+Implementation evidence and product direction answer different questions. Source/tests establish what exists; explicit current user direction establishes what the product is supposed to become. Do not use stale implementation merely to overrule a newer deliberate design decision.
+
 ## Compression / difficult-context recovery
 
 When context becomes large, preserve at minimum:
 - current objective
+- product/game direction
+- status-screen/player-information architecture when relevant
 - player/stat/system design decisions
 - persistent world-state architecture
 - NPC memory/knowledge model
@@ -96,4 +104,4 @@ When context becomes large, preserve at minimum:
 - branch/commit/file evidence
 - next action
 
-Repository files outrank remembered summaries when they conflict.
+Repository files outrank remembered summaries when they conflict about implementation state. Explicit current user direction supersedes older design assumptions when the user deliberately changes direction, but the change must be recorded rather than silently rewriting history.
