@@ -25,7 +25,7 @@ The original `main` branch is not modified by this work.
 - Inventory requirements and item consumption.
 - Quest-stage effects.
 - NPC personality drift with bounded values.
-- Equipment and perk modifiers applied to checks without rewriting base stats.
+- Equipment, reached equipment-set bonuses, perks, and active condition modifiers applied to checks without rewriting base stats.
 - Ability mastery XP and rank progression.
 - Technique requirements that can depend on rank, mastery, knowledge, and perks.
 - Versioned JSON save/load layer with explicit schema rejection.
@@ -53,22 +53,21 @@ Command used against a branch-equivalent reconstruction of the current remote fi
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Result: **29 tests passed, 0 failed**.
+Result: **30 tests passed, 0 failed**.
 
-The verification covered the original foundation tests plus the new stats, training/recovery, conditions, equipment-set, and social-information tests.
+The verification covered the original foundation tests plus stats, training/recovery, conditions, equipment sets, effective modifier aggregation, and social-information tests.
 
 No GitHub Actions workflow was added; verification does not consume hosted CI minutes.
 
 ## NEXT_ACTION
 
-1. Integrate condition modifiers and equipment set bonuses directly into all effective-stat/check calculations.
-2. Add power resource costs, cooldowns, technique stages, drawbacks, and evolution prerequisites.
-3. Add explicit NPC goal/story-state transitions and multidimensional relationship utilities.
-4. Add quest graph definitions, branching objectives, failure states, and content-pack validation.
-5. Add deterministic information propagation events that execute authored leak rules rather than only listing candidates.
-6. Define the first original playable vertical slice and its canon opening scenario.
-7. Add character visual identity records that can drive consistent pixel portrait/sprite generation.
-8. Connect the rules layer to the chosen pixel-art presentation runtime after the client technology is deliberately selected.
+1. Add power resource costs, cooldowns, technique stages, drawbacks, and evolution prerequisites.
+2. Add explicit NPC goal/story-state transitions and multidimensional relationship utilities.
+3. Add quest graph definitions, branching objectives, failure states, and content-pack validation.
+4. Add deterministic information propagation events that execute authored leak rules rather than only listing candidates.
+5. Define the first original playable vertical slice and its canon opening scenario.
+6. Add character visual identity records that can drive consistent pixel portrait/sprite generation.
+7. Connect the rules layer to the chosen pixel-art presentation runtime after the client technology is deliberately selected.
 
 ## BLOCKERS
 
@@ -94,4 +93,4 @@ The visual/runtime implementation should not be hard-wired yet because the final
 - Excessive branching can cause content explosion. Recombining branches around durable state is preferred over writing a completely separate story for every choice.
 - Hidden information must be scoped to the correct character/player knowledge stores or secrets can leak accidentally.
 - Progression and recovery numbers are provisional until a playable loop provides balancing evidence.
-- Equipment set bonuses and condition modifiers currently exist as separate helpers; they must be integrated carefully so modifiers are not double-counted.
+- Effective-stat aggregation now applies direct equipment, reached set-bonus thresholds, perks, and active condition modifiers once each. Future derived-stat integration must preserve the same no-double-counting rule.
