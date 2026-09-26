@@ -240,7 +240,13 @@ Instead, it can deterministically calculate eligible leak targets based on:
 - the holder’s discipline/honesty profile
 - an authored social network
 
-Story content still decides whether the leak event actually fires.
+Story content still decides whether a propagation event fires. Once it does, the runtime can execute the authored leak deterministically:
+- candidate eligibility is recalculated from the current state
+- explicit authored recipients must be eligible
+- otherwise recipients are selected from the sorted eligible list
+- the existing knowledge record is copied rather than invented or rewritten
+- recipients receive a leak-tagged memory
+- the event records candidates and actual recipients in durable history
 
 ## Design constraint
 
