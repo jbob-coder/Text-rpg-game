@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, Dict, Mapping, MutableMapping
 
 from .core import GameState, RuleError
-from .progression import technique_available
+from .progression import gain_ability_mastery, technique_available
 from .simulation import apply_condition
 
 
@@ -183,6 +183,9 @@ def technique_use_status(
     mastery_gain = float(definition.get("mastery_gain", 0))
     if mastery_gain < 0:
         raise RuleError("Technique mastery gain cannot be negative")
+    ability_mastery_gain = float(definition.get("ability_mastery_gain", 0))
+    if ability_mastery_gain < 0:
+        raise RuleError("Ability mastery gain cannot be negative")
 
     for drawback in definition.get("drawbacks", []):
         if drawback.get("type") != "condition":
@@ -248,6 +251,13 @@ def use_technique(
             state, ability_id, technique_id, mastery_gain
         )
 
+    ability_mastery_gain = float(definition.get("ability_mastery_gain", 0))
+    ability_mastery_result = None
+    if ability_mastery_gain:
+        ability_mastery_result = gain_ability_mastery(
+            state, ability_id, ability_mastery_gain
+        )
+
     event = {
         "type": "technique_use",
         "ability_id": ability_id,
@@ -257,6 +267,7 @@ def use_technique(
         "ready_at_minutes": technique["ready_at_minutes"],
         "drawbacks": applied_drawbacks,
         "mastery": mastery_result,
+        "ability_mastery": ability_mastery_result,
     }
     state.history.append(event)
     return event
@@ -303,6 +314,20 @@ def ability_evolution_status(
         if not record or not _stage_at_least(record.get("stage", "unknown"), stage_min):
             reasons.append(f"technique:{required_id}:{stage_min}")
 
+    result = definition.get("result", {})
+    for item_id, quantity in result.get("consume_items", {}).items():
+        if int(quantity) < 0:
+            raise RuleError(f"Evolution item consumption cannot be negative: {item_id}")
+        if state.inventory.get(item_id, 0) < int(quantity):
+            reasons.append(f"consume_item:{item_id}")
+
+    for perk_id in result.get("grant_perks", {}):
+        if perk_id in state.perks:
+            reasons.append(f"perk_exists:{perk_id}")
+
+    if "rank_floor" in result and int(result["rank_floor"]) < 0:
+        raise RuleError("Evolution rank floor cannot be negative")
+
     return {"available": not reasons, "reasons": reasons}
 
 
@@ -324,11 +349,22 @@ def evolve_ability(
     if "form" in result:
         ability["form"] = result["form"]
     if "rank_floor" in result:
-        ability["rank"] = max(int(ability.get("rank", 0)), int(result["rank_floor"]))
+        rank_floor = int(result["rank_floor"])
+        ability["rank_floor"] = max(int(ability.get("rank_floor", 0)), rank_floor)
+        ability["rank"] = max(int(ability.get("rank", 0)), ability["rank_floor"])
 
     if "tags" in result:
         tags = list(dict.fromkeys([*ability.get("tags", []), *result["tags"]]))
         ability["tags"] = tags
+
+    consumed_items: Dict[str, int] = {}
+    for item_id, quantity_raw in result.get("consume_items", {}).items():
+        quantity = int(quantity_raw)
+        if quantity:
+            state.inventory[item_id] -= quantity
+            consumed_items[item_id] = quantity
+            if state.inventory[item_id] <= 0:
+                del state.inventory[item_id]
 
     granted_perks: list[str] = []
     for perk_id, perk in result.get("grant_perks", {}).items():
@@ -355,6 +391,7 @@ def evolve_ability(
         "previous_form": previous_form,
         "form": ability.get("form"),
         "granted_perks": granted_perks,
+        "consumed_items": consumed_items,
     }
     state.history.append(event)
     return event
