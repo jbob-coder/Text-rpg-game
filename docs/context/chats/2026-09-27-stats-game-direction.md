@@ -114,3 +114,19 @@ The implementation workstream contains focused tests and reports targeted verifi
 - map each visible status-screen field to an authoritative underlying state source
 - preserve the effective-value pipeline as infrastructure without treating it as resolution of the seven-vs-eight attribute design
 - record final resolutions in `DECISIONS.md` before changing canonical stat identities
+
+
+## Review/evolution continuation — effective-stat hardening
+
+[IN_PROGRESS] Following the user's instruction not to call the integration closed, this chat created `review/effective-stat-contract-hardening` from the current feature tip instead of modifying the other workstream directly.
+
+[IMPLEMENTED] The review branch adds strict canonical modifier-path validation, derived-capacity floors, centralized derived formulas, detailed derived-value provenance, and `RulesEngine.explain_player_value()`.
+
+[IMPLEMENTED] Additional regression tests were authored for typoed modifier paths, set/equipment/condition validation, capacity floors, signed contest scores, and explanation payloads.
+
+[UNKNOWN] These new review-branch tests have not been executed by this chat. No merge/readiness claim is made.
+
+[PROVISIONAL] The chosen floor policy is deliberately reversible: capacity values floor at zero; contest-style scores can remain negative. It is an evolution candidate pending verification, not immutable canon.
+
+[RELATES_TO:CP-2026-09-27-EFFECTIVE-HARDENING-04]
+[RELATES_TO:DEC-MOD-003]
