@@ -28,6 +28,8 @@ The original `main` branch is not modified by this work.
 - Equipment, reached equipment-set bonuses, perks, and active condition modifiers applied to checks without rewriting base stats.
 - Ability mastery XP and rank progression.
 - Technique requirements that can depend on rank, mastery, knowledge, and perks.
+- Power runtime with per-technique mastery stages, resource costs, world-time cooldowns, authored condition drawbacks, overall ability mastery gain, and evolution prerequisites.
+- Ability evolution can change form/tags, consume authored items, grant source-tracked perks, and establish a durable rank floor that later mastery recalculation cannot erase.
 - Versioned JSON save/load layer with explicit schema rejection.
 - Static content validation for stable IDs, duplicate choices, unsupported rules, and invalid scene references.
 - Canonical seven-attribute catalog and grouped skill catalog.
@@ -40,10 +42,14 @@ The original `main` branch is not modified by this work.
 - NPC memory records with importance, tags, time, and contextual data.
 - NPC-owned private knowledge with confidence, truth state, secrecy, and source.
 - Explicit character-to-character knowledge sharing.
+- Multidimensional relationship utilities with independent minimum/maximum gates and bounded -100..100 changes.
+- Explicit NPC goals with priority, progress, completion/failure state, durable history, and guarded story-state transitions.
 - Deterministic leak-candidate evaluation based on authored social networks and NPC personality; no generative gossip.
 - Pixel visual consistency specification.
 - Abstract reference extraction notes that avoid copying source story content.
 - Systems catalog documenting the stat/training/equipment/social contract.
+- Authored quest-graph runtime with prerequisite objectives, optional branches, failure routes, terminal stages, manual failure, and durable transition history.
+- Quest-definition validation and whole-content-pack validation, including scene-to-quest-stage cross-reference checks.
 
 ## TESTS_RUN
 
@@ -53,21 +59,18 @@ Command used against a branch-equivalent reconstruction of the current remote fi
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Result: **30 tests passed, 0 failed**.
+Result: **55 tests passed, 0 failed**.
 
-The verification covered the original foundation tests plus stats, training/recovery, conditions, equipment sets, effective modifier aggregation, and social-information tests.
+The verification covered scene rules, persistence, stats, training/recovery, conditions, equipment sets, effective modifier aggregation, power runtime/evolution, NPC relationships/goals/story state, quest graphs, social information, and content-pack validation.
 
 No GitHub Actions workflow was added; verification does not consume hosted CI minutes.
 
 ## NEXT_ACTION
 
-1. Add power resource costs, cooldowns, technique stages, drawbacks, and evolution prerequisites.
-2. Add explicit NPC goal/story-state transitions and multidimensional relationship utilities.
-3. Add quest graph definitions, branching objectives, failure states, and content-pack validation.
-4. Add deterministic information propagation events that execute authored leak rules rather than only listing candidates.
-5. Define the first original playable vertical slice and its canon opening scenario.
-6. Add character visual identity records that can drive consistent pixel portrait/sprite generation.
-7. Connect the rules layer to the chosen pixel-art presentation runtime after the client technology is deliberately selected.
+1. Add deterministic information propagation events that execute authored leak rules rather than only listing candidates.
+2. Define the first original playable vertical slice and its canon opening scenario.
+3. Add character visual identity records that can drive consistent pixel portrait/sprite generation.
+4. Connect the rules layer to the chosen pixel-art presentation runtime after the client technology is deliberately selected.
 
 ## BLOCKERS
 
