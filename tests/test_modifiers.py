@@ -165,6 +165,19 @@ class ModifierPipelineTests(unittest.TestCase):
                 },
             )
 
+    def test_rules_engine_rejects_invalid_set_thresholds(self):
+        with self.assertRaises(RuleError):
+            RulesEngine(
+                {"A": {"choices": []}},
+                set_definitions={
+                    "SET_BAD": {
+                        "thresholds": {
+                            "not-a-number": {"modifiers": {"attributes.might": 1}}
+                        }
+                    }
+                },
+            )
+
     def test_rules_engine_explains_effective_and_derived_values(self):
         state = GameState(
             seed="s",
