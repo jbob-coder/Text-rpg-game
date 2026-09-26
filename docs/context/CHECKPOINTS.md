@@ -415,3 +415,33 @@ None by this chat against the actual review branch runtime.
 - branch comparison `feature/effective-stat-pipeline...review/effective-stat-contract-hardening`
 - repository source/tests listed above
 - current user direction: do not call the integration closed; review/evolve it first
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-EFFECTIVE-HARDENING-EVIDENCE-05
+
+Review branch: `review/effective-stat-contract-hardening`
+
+### VERIFIED_STATE
+
+[VERIFIED] A branch-equivalent reconstructed execution of the current hardening rules passed the targeted semantic scenarios for:
+- exact base + equipment + set + perk + condition stacking
+- provenance totals
+- derived formula + direct set modifier
+- full derived effective value
+- zero floors for capacity values
+- negative contest-style initiative remaining legal
+- rejection of typoed/unsupported modifier paths
+
+### LIMITATION
+
+[UNKNOWN] This was not execution of the actual GitHub checkout. It does not verify package imports, the complete repository suite, all persistence behavior, or every caller. The review branch remains NOT merge-ready.
+
+[IMPLEMENTED] Additional hardening since CP-04 centralizes set-definition validation, validates malformed thresholds, and makes the public `effective_player_value(derived.*)` resolve the full derived formula rather than only direct modifiers.
+
+[IMPLEMENTED] `docs/EFFECTIVE_STAT_HARDENING_REVIEW.md` on the review branch now records the review scope, compatibility analysis, authored tests, reconstructed evidence, unverified items, and promotion gate.
+
+### NEXT_ACTION
+
+Actual branch execution/full regression remains the mandatory next verification gate before promotion.
