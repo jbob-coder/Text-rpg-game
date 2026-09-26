@@ -1,7 +1,7 @@
 import unittest
 
 from textrpg import GameState
-from textrpg.stats import derived_stats, initialize_resources, validate_player_stats
+from textrpg.stats import derived_stat_breakdown, derived_stats, initialize_resources, validate_player_stats
 
 
 class StatsTests(unittest.TestCase):
@@ -54,6 +54,17 @@ class StatsTests(unittest.TestCase):
         initialize_resources(state)
         self.assertEqual(state.player["resources"]["max_health"], 0.0)
         self.assertEqual(state.player["resources"]["health"], 0.0)
+
+    def test_derived_breakdown_exposes_floor_adjustment(self):
+        state = self.state()
+        state.perks["PERK_COLLAPSE"] = {
+            "modifiers": {"derived.max_health": -1000}
+        }
+        breakdown = derived_stat_breakdown(state, "max_health")
+        self.assertLess(breakdown["raw_total"], 0.0)
+        self.assertEqual(breakdown["floor"], 0.0)
+        self.assertGreater(breakdown["floor_adjustment"], 0.0)
+        self.assertEqual(breakdown["total"], 0.0)
 
     def test_contest_style_derived_values_can_go_negative(self):
         state = self.state()
