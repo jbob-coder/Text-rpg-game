@@ -140,6 +140,10 @@ class ModifierPipelineTests(unittest.TestCase):
         )
         values = derived_stats(state, SET_DEFINITIONS)
         self.assertEqual(values["evasion"], 2.0)
+        self.assertEqual(
+            effective_player_value(state, "derived.evasion", SET_DEFINITIONS),
+            2.0,
+        )
 
     def test_modifier_path_registry_rejects_typos(self):
         with self.assertRaises(ValueError):
