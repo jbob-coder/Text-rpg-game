@@ -2,6 +2,15 @@ from .core import GameState, RuleError, RulesEngine
 from .equipment import active_set_bonuses, equip_item, equipment_modifiers, set_counts
 from .persistence import CURRENT_SCHEMA_VERSION, dumps_state, load_state, loads_state, save_state
 from .progression import gain_ability_mastery, mastery_stage, technique_available
+from .powers import (
+    ability_evolution_status,
+    discover_technique,
+    evolve_ability,
+    gain_technique_mastery,
+    technique_stage,
+    technique_use_status,
+    use_technique,
+)
 from .simulation import advance_time, apply_condition, recover, train, train_attribute
 from .social import add_memory, eligible_leak_targets, ensure_npc, npc_learn, share_knowledge
 from .stats import ATTRIBUTE_SPECS, SKILL_CATALOG, derived_stats, initialize_resources, validate_player_stats
@@ -15,6 +24,9 @@ __all__ = [
     "RulesEngine",
     "SKILL_CATALOG",
     "active_set_bonuses",
+    "ability_evolution_status",
+    "discover_technique",
+    "evolve_ability",
     "add_memory",
     "advance_time",
     "apply_condition",
@@ -26,6 +38,7 @@ __all__ = [
     "equip_item",
     "equipment_modifiers",
     "gain_ability_mastery",
+    "gain_technique_mastery",
     "initialize_resources",
     "load_state",
     "loads_state",
@@ -36,8 +49,11 @@ __all__ = [
     "set_counts",
     "share_knowledge",
     "technique_available",
+    "technique_stage",
+    "technique_use_status",
     "train",
     "train_attribute",
+    "use_technique",
     "validate_player_stats",
     "validate_scenes",
 ]
