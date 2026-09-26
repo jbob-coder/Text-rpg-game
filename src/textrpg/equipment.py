@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Dict, Mapping
 
 from .core import GameState, RuleError
+from .modifiers import active_set_bonuses, equipment_modifiers, set_counts
 
 
 DEFAULT_SLOTS = (
@@ -33,6 +34,8 @@ def equip_item(
     if consume_inventory and state.inventory.get(item_id, 0) < 1:
         raise RuleError(f"Item not present in inventory: {item_id}")
 
+    # Equipment requirements deliberately use permanent/base values. Allowing one
+    # equipped item to qualify another can create circular or order-dependent builds.
     requirements = item.get("requirements", {})
     attrs = state.player.get("attributes", {})
     skills = state.player.get("skills", {})
@@ -60,43 +63,3 @@ def equip_item(
         if state.inventory[item_id] <= 0:
             del state.inventory[item_id]
     return previous
-
-
-def set_counts(state: GameState) -> Dict[str, int]:
-    counts: Dict[str, int] = {}
-    for record in state.equipment.values():
-        set_id = record.get("set_id")
-        if set_id:
-            counts[set_id] = counts.get(set_id, 0) + 1
-    return counts
-
-
-def active_set_bonuses(
-    state: GameState,
-    set_definitions: Mapping[str, Mapping[str, Any]],
-) -> Dict[str, Dict[str, Any]]:
-    counts = set_counts(state)
-    active: Dict[str, Dict[str, Any]] = {}
-    for set_id, count in counts.items():
-        definition = set_definitions.get(set_id, {})
-        thresholds = definition.get("thresholds", {})
-        for pieces_raw, bonus in thresholds.items():
-            pieces = int(pieces_raw)
-            if count >= pieces:
-                active[f"{set_id}:{pieces}"] = dict(bonus)
-    return active
-
-
-def equipment_modifiers(
-    state: GameState,
-    set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
-) -> Dict[str, float]:
-    total: Dict[str, float] = {}
-    for record in state.equipment.values():
-        for path, value in record.get("modifiers", {}).items():
-            total[path] = total.get(path, 0.0) + float(value)
-    if set_definitions:
-        for bonus in active_set_bonuses(state, set_definitions).values():
-            for path, value in bonus.get("modifiers", {}).items():
-                total[path] = total.get(path, 0.0) + float(value)
-    return total
