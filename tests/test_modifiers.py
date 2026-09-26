@@ -1,6 +1,6 @@
 import unittest
 
-from textrpg import GameState, RulesEngine, effective_player_value, modifier_breakdown
+from textrpg import GameState, RuleError, RulesEngine, effective_player_value, modifier_breakdown, validate_modifier_path
 from textrpg.stats import derived_stats, initialize_resources
 
 
@@ -140,6 +140,26 @@ class ModifierPipelineTests(unittest.TestCase):
         )
         values = derived_stats(state, SET_DEFINITIONS)
         self.assertEqual(values["evasion"], 2.0)
+
+    def test_modifier_path_registry_rejects_typos(self):
+        with self.assertRaises(ValueError):
+            validate_modifier_path("attributes.migth")
+        with self.assertRaises(ValueError):
+            validate_modifier_path("derived.max_heath")
+        self.assertEqual(validate_modifier_path("skills.ranged"), "skills.ranged")
+
+    def test_rules_engine_rejects_invalid_set_modifier_paths(self):
+        with self.assertRaises(RuleError):
+            RulesEngine(
+                {"A": {"choices": []}},
+                set_definitions={
+                    "SET_BAD": {
+                        "thresholds": {
+                            "2": {"modifiers": {"derived.max_heath": 5}}
+                        }
+                    }
+                },
+            )
 
     def test_rules_engine_can_gate_on_full_derived_value(self):
         engine = RulesEngine(
