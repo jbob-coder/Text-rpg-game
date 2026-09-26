@@ -71,6 +71,8 @@ Current baseline formulas:
 
 These formulas are provisional balancing values, not final canon numbers.
 
+Capacity-style derived values currently have explicit non-negative floors: max Health, max Stamina, max Focus, max Resolve, and carry capacity cannot resolve below zero. Contest-style scores such as initiative, accuracy, evasion, and guard may go below zero under severe penalties; that preserves meaningful failure margins instead of silently erasing penalties.
+
 ## Effective-value pipeline
 
 Checks and derived values use one additive modifier pipeline. A modifier is not written back into the permanent base attribute/skill.
@@ -86,9 +88,13 @@ Canonical paths:
 - skills: `skills.<id>` such as `skills.ranged`
 - direct derived modifiers: `derived.<id>` such as `derived.max_health`
 
+These paths are validated against centralized attribute, skill, and derived-stat registries. Unknown IDs, unsupported namespaces, and malformed nested paths are authoring errors rather than silently ignored modifiers.
+
 A derived calculation first reads effective attributes/skills, then applies any direct `derived.*` modifier exactly once. This prevents the same equipment/perk/condition bonus from being baked into permanent state and then counted again.
 
-The modifier layer can return a per-source breakdown (`base`, equipment slot, set threshold, perk ID, condition ID, total). This is intended for debugging and for future UI tooltips that explain why a displayed value differs from the base value.
+The modifier layer can return a per-source breakdown (`base`, equipment slot, set threshold, perk ID, condition ID, total). This is intended for debugging and player-facing inspection.
+
+Derived formulas are also centralized as data. `derived_stat_breakdown()` exposes the formula constant, each effective input and weight, the direct `derived.*` contributions, any domain-floor adjustment, and the final total. `RulesEngine.explain_player_value()` provides one entry point for explaining either a base/effective attribute or skill, or a fully calculated derived value.
 
 Condition severity is metadata in the current contract. The authored numeric modifier is already the final magnitude; severity does not silently multiply it.
 
