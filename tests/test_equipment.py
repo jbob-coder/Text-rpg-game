@@ -49,5 +49,17 @@ class EquipmentTests(unittest.TestCase):
             )
 
 
+    def test_invalid_modifier_path_is_rejected_before_equip(self):
+        state = GameState(seed="s", scene_id="A", player={"attributes": {}})
+        with self.assertRaises(RuleError):
+            equip_item(
+                state,
+                {
+                    "item_id": "ITEM_BAD",
+                    "slot": "body",
+                    "modifiers": {"attributes.migth": 3},
+                },
+            )
+
 if __name__ == "__main__":
     unittest.main()
