@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Dict, Iterable, Mapping
 
 from .core import GameState, RuleError
+from .modifiers import validate_modifier_mapping
 from .stats import ATTRIBUTE_SPECS, SKILL_CATALOG, initialize_resources
 
 
@@ -18,13 +19,21 @@ def apply_condition(
 ) -> Dict[str, Any]:
     if severity < 1 or severity > 5:
         raise RuleError("Condition severity must be in range 1..5")
+    try:
+        validated_modifiers = validate_modifier_mapping(
+            modifiers or {},
+            source=f"condition:{condition_id}",
+        )
+    except ValueError as exc:
+        raise RuleError(f"Invalid condition modifiers for {condition_id}: {exc}") from exc
+
     conditions = state.player.setdefault("conditions", {})
     record = {
         "severity": severity,
         "duration_minutes": duration_minutes,
         "source": source,
         "tags": list(tags),
-        "modifiers": dict(modifiers or {}),
+        "modifiers": validated_modifiers,
         "applied_at": state.time_minutes,
     }
     conditions[condition_id] = record
@@ -67,8 +76,8 @@ def recover(
         before = float(resources.get(key, 0))
         amount = maxima[key] * rate * hours * quality
         after = min(maxima[key], before + amount)
-        resources[key] = round(after, 3)
-        gained[key] = round(after - before, 3)
+        resources[key] = round(max(0.0, after), 3)
+        gained[key] = round(resources[key] - before, 3)
     advance_time(state, minutes)
     return gained
 
