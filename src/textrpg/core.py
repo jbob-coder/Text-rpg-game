@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from hashlib import sha256
 from typing import Any, Dict, List, Mapping, MutableMapping, Optional
 
-from .modifiers import validate_modifier_mapping
+from .modifiers import validate_modifier_mapping, validate_set_definitions
 
 
 class RuleError(ValueError):
@@ -102,17 +102,7 @@ class RulesEngine:
         self.scenes = dict(scenes)
         self.set_definitions = dict(set_definitions or {})
         try:
-            for set_id, definition in self.set_definitions.items():
-                thresholds = definition.get("thresholds", {})
-                if not isinstance(thresholds, Mapping):
-                    raise ValueError(f"Set thresholds must be an object: {set_id}")
-                for pieces, bonus in thresholds.items():
-                    if not isinstance(bonus, Mapping):
-                        raise ValueError(f"Set bonus must be an object: {set_id}:{pieces}")
-                    validate_modifier_mapping(
-                        bonus.get("modifiers", {}),
-                        source=f"set:{set_id}:{pieces}",
-                    )
+            validate_set_definitions(self.set_definitions)
         except ValueError as exc:
             raise RuleError(f"Invalid set definitions: {exc}") from exc
 
