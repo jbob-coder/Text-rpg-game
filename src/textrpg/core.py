@@ -205,6 +205,15 @@ class RulesEngine:
         return True
 
     def _effective_player_value(self, state: GameState, path: str) -> float:
+        if path.startswith("derived."):
+            # Local import avoids a module-import cycle: stats depends on GameState.
+            from .stats import derived_stats
+
+            key = path.removeprefix("derived.")
+            values = derived_stats(state, self.set_definitions)
+            if key not in values:
+                raise RuleError(f"Unknown derived stat: {path}")
+            return float(values[key])
         try:
             return effective_player_value(state, path, self.set_definitions)
         except ValueError as exc:
