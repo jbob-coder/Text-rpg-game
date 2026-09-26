@@ -4,6 +4,7 @@ import re
 from typing import Any, Dict, Iterable, List, Mapping, Set
 
 from .core import RuleError
+from .modifiers import validate_modifier_mapping, validate_modifier_path
 
 
 STABLE_ID = re.compile(r"^[A-Z][A-Z0-9_]*$")
@@ -43,15 +44,32 @@ def _validate_id(value: Any, label: str, errors: List[str]) -> None:
 def _walk_conditions(conditions: Iterable[Mapping[str, Any]], location: str, errors: List[str]) -> None:
     for index, condition in enumerate(conditions):
         kind = condition.get("type")
+        item_location = f"{location}.condition[{index}]"
         if kind not in SUPPORTED_CONDITIONS:
-            errors.append(f"{location}.condition[{index}] has unsupported type {kind!r}")
+            errors.append(f"{item_location} has unsupported type {kind!r}")
+            continue
+        if kind in {"stat_min", "stat_max"}:
+            try:
+                validate_modifier_path(condition.get("path"))
+            except ValueError as exc:
+                errors.append(f"{item_location} has invalid stat path: {exc}")
 
 
 def _walk_effects(effects: Iterable[Mapping[str, Any]], location: str, errors: List[str]) -> None:
     for index, effect in enumerate(effects):
         kind = effect.get("type")
+        item_location = f"{location}.effect[{index}]"
         if kind not in SUPPORTED_EFFECTS:
-            errors.append(f"{location}.effect[{index}] has unsupported type {kind!r}")
+            errors.append(f"{item_location} has unsupported type {kind!r}")
+            continue
+        if kind == "add_perk":
+            try:
+                validate_modifier_mapping(
+                    effect.get("modifiers", {}),
+                    source=f"{item_location}.add_perk",
+                )
+            except ValueError as exc:
+                errors.append(f"{item_location} has invalid modifiers: {exc}")
 
 
 def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
@@ -87,8 +105,27 @@ def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
                 errors.append(f"{location}.outcomes must be a non-empty object")
                 continue
 
-            if "check" in choice and "stat" not in choice["check"]:
-                errors.append(f"{location}.check must define stat")
+            if "check" in choice:
+                check = choice["check"]
+                if not isinstance(check, Mapping):
+                    errors.append(f"{location}.check must be an object")
+                elif "stat" not in check:
+                    errors.append(f"{location}.check must define stat")
+                else:
+                    try:
+                        validate_modifier_path(check.get("stat"))
+                    except ValueError as exc:
+                        errors.append(f"{location}.check has invalid stat path: {exc}")
+                    skill_path = check.get("skill")
+                    if skill_path is not None:
+                        try:
+                            validate_modifier_path(skill_path)
+                            if not str(skill_path).startswith("skills."):
+                                errors.append(
+                                    f"{location}.check skill must use skills.<id>: {skill_path!r}"
+                                )
+                        except ValueError as exc:
+                            errors.append(f"{location}.check has invalid skill path: {exc}")
 
             for outcome_name, outcome in outcomes.items():
                 outcome_location = f"{location}.outcomes.{outcome_name}"
