@@ -1,4 +1,4 @@
-# Systems Catalog — Foundation v0.2
+# Systems Catalog — Foundation v0.3
 
 This document is the canonical high-level map for player statistics and the first non-combat simulation systems. It exists to keep future content authors, UI work, and balancing consistent.
 
@@ -71,6 +71,29 @@ Current baseline formulas:
 
 These formulas are provisional balancing values, not final canon numbers.
 
+## Effective-value pipeline
+
+Checks and derived values use one additive modifier pipeline. A modifier is not written back into the permanent base attribute/skill.
+
+Current modifier sources:
+- equipped-item modifiers
+- active equipment-set threshold bonuses
+- perks
+- active conditions/injuries
+
+Canonical paths:
+- attributes: `attributes.<id>` such as `attributes.might`
+- skills: `skills.<id>` such as `skills.ranged`
+- direct derived modifiers: `derived.<id>` such as `derived.max_health`
+
+A derived calculation first reads effective attributes/skills, then applies any direct `derived.*` modifier exactly once. This prevents the same equipment/perk/condition bonus from being baked into permanent state and then counted again.
+
+The modifier layer can return a per-source breakdown (`base`, equipment slot, set threshold, perk ID, condition ID, total). This is intended for debugging and for future UI tooltips that explain why a displayed value differs from the base value.
+
+Condition severity is metadata in the current contract. The authored numeric modifier is already the final magnitude; severity does not silently multiply it.
+
+Equipment requirements deliberately use permanent/base attributes and skills rather than effective values. This avoids circular builds where one equipped item qualifies another item and makes equip order affect validity.
+
 ## Resources
 
 The initial universal resources are:
@@ -81,6 +104,8 @@ The initial universal resources are:
 - Resolve
 
 Power-specific resources may exist separately. A power does not have to use a universal mana pool.
+
+Resource maxima come from derived values, so effective attributes/skills and direct derived modifiers can change maximum resources. Recovery and training accept the same set-definition context so set bonuses can be reflected consistently.
 
 ## Training
 
@@ -111,6 +136,8 @@ Conditions are explicit state records with:
 - time applied
 
 Timed conditions expire through world-time advancement. Permanent injuries or scars can use `duration_minutes = null` and require authored treatment/recovery events.
+
+Condition modifiers participate in the same effective-value pipeline as equipment, sets, and perks.
 
 ## Recovery
 
@@ -155,7 +182,7 @@ Equipment requirements are checked before equipping.
 
 Set bonuses are threshold-based. A two-piece effect and four-piece effect can coexist when both thresholds are reached.
 
-Set bonuses are data, not hard-coded into item logic.
+Set bonuses are data, not hard-coded into item logic. Active set modifiers feed the unified effective-value pipeline when set definitions are supplied by the caller/rules context.
 
 ## NPC memory and knowledge
 
