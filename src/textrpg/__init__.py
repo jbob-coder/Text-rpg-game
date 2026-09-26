@@ -8,6 +8,7 @@ from .modifiers import (
     perk_modifiers,
     validate_modifier_mapping,
     validate_modifier_path,
+    validate_set_definitions,
 )
 from .persistence import CURRENT_SCHEMA_VERSION, dumps_state, load_state, loads_state, save_state
 from .progression import gain_ability_mastery, mastery_stage, technique_available
@@ -58,6 +59,7 @@ __all__ = [
     "train_attribute",
     "validate_modifier_mapping",
     "validate_modifier_path",
+    "validate_set_definitions",
     "validate_player_stats",
     "validate_scenes",
 ]
