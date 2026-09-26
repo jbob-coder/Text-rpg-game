@@ -132,7 +132,7 @@ class SocialTests(unittest.TestCase):
                 network={"NPC_A": ["NPC_B"]},
                 recipients=["NPC_C"],
             )
-        self.assertNotIn("KNOW_X", state.npcs["NPC_C"]["knowledge"])
+        self.assertNotIn("KNOW_X", state.npcs["NPC_C"].get("knowledge", {}))
 
     def test_relationship_axes_are_bounded_and_evaluated_independently(self):
         state = GameState(
