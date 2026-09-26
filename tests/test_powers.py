@@ -55,6 +55,7 @@ class PowerRuntimeTests(unittest.TestCase):
             },
             "cooldown_minutes": 15,
             "mastery_gain": 10,
+            "ability_mastery_gain": 5,
         }
 
     def test_technique_stage_thresholds(self):
@@ -136,6 +137,15 @@ class PowerRuntimeTests(unittest.TestCase):
         gain_technique_mastery(state, "ABILITY_FLUX", "TECHNIQUE_PULSE", 30)
         self.assertEqual(technique["stage"], "learned")
 
+    def test_use_can_advance_overall_ability_mastery(self):
+        state = self.state()
+        before = state.abilities["ABILITY_FLUX"]["mastery_xp"]
+        event = use_technique(
+            state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition()
+        )
+        self.assertEqual(state.abilities["ABILITY_FLUX"]["mastery_xp"], before + 5)
+        self.assertIsNotNone(event["ability_mastery"])
+
     def test_evolution_requires_technique_stage_and_other_prerequisites(self):
         state = self.state()
         definition = {
@@ -180,6 +190,7 @@ class PowerRuntimeTests(unittest.TestCase):
                 "form": "stabilized_flux",
                 "rank_floor": 3,
                 "tags": ["stable"],
+                "consume_items": {"ITEM_CORE_SHARD": 1},
                 "grant_perks": {
                     "PERK_FLUX_CONTROL": {
                         "modifiers": {"attributes.will": 2},
@@ -193,8 +204,15 @@ class PowerRuntimeTests(unittest.TestCase):
         )
         self.assertEqual(state.abilities["ABILITY_FLUX"]["form"], "stabilized_flux")
         self.assertGreaterEqual(state.abilities["ABILITY_FLUX"]["rank"], 3)
+        self.assertEqual(state.abilities["ABILITY_FLUX"]["rank_floor"], 3)
+        self.assertNotIn("ITEM_CORE_SHARD", state.inventory)
+        self.assertEqual(event["consumed_items"], {"ITEM_CORE_SHARD": 1})
         self.assertIn("PERK_FLUX_CONTROL", state.perks)
         self.assertEqual(event["type"], "ability_evolution")
+
+        gain_ability_mastery(state, "ABILITY_FLUX", 1)
+        self.assertGreaterEqual(state.abilities["ABILITY_FLUX"]["rank"], 3)
+
         with self.assertRaises(RuleError):
             evolve_ability(
                 state, "ABILITY_FLUX", "EVOLUTION_STABLE", definition
