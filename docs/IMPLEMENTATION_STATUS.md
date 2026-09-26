@@ -45,6 +45,7 @@ The original `main` branch is not modified by this work.
 - Multidimensional relationship utilities with independent minimum/maximum gates and bounded -100..100 changes.
 - Explicit NPC goals with priority, progress, completion/failure state, durable history, and guarded story-state transitions.
 - Deterministic leak-candidate evaluation based on authored social networks and NPC personality; no generative gossip.
+- Deterministic authored leak-event execution that transfers existing knowledge only to eligible recipients, records recipient memories, and appends an inspectable propagation event.
 - Pixel visual consistency specification.
 - Abstract reference extraction notes that avoid copying source story content.
 - Systems catalog documenting the stat/training/equipment/social contract.
@@ -59,17 +60,17 @@ Command used against a branch-equivalent reconstruction of the current remote fi
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Result: **55 tests passed, 0 failed**.
+Result: **58 tests passed, 0 failed**.
 
-The verification covered scene rules, persistence, stats, training/recovery, conditions, equipment sets, effective modifier aggregation, power runtime/evolution, NPC relationships/goals/story state, quest graphs, social information, and content-pack validation.
+The verification covered scene rules, persistence, stats, training/recovery, conditions, equipment sets, effective modifier aggregation, power runtime/evolution, NPC relationships/goals/story state, quest graphs, deterministic information propagation, and content-pack validation.
 
 No GitHub Actions workflow was added; verification does not consume hosted CI minutes.
 
 ## NEXT_ACTION
 
-1. Add deterministic information propagation events that execute authored leak rules rather than only listing candidates.
-2. Define the first original playable vertical slice and its canon opening scenario.
-3. Add character visual identity records that can drive consistent pixel portrait/sprite generation.
+1. Define the first original playable vertical slice and its canon opening scenario.
+2. Add character visual identity records that can drive consistent pixel portrait/sprite generation.
+3. Integrate effective equipment/condition/perk modifiers into derived-stat/resource calculations without double counting.
 4. Connect the rules layer to the chosen pixel-art presentation runtime after the client technology is deliberately selected.
 
 ## BLOCKERS
