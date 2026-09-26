@@ -196,3 +196,103 @@ No fresh runtime test claim.
 - `docs/SYSTEMS_CATALOG.md`
 - `docs/context/GAME_DIRECTION_AND_UI.md`
 - `docs/context/DECISIONS.md`
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-EFFECTIVE-PIPELINE-03
+
+Repository: `jbob-coder/Text-rpg-game`
+Context branch: `shared/game-context`
+Implementation workstream: `feature/effective-stat-pipeline`
+Inspected implementation tip: `ac49e62affb7458f51fd486e41e46df7860a93af`
+Foundation base: `e51d8169f629a75c3bf1b0e5d19b318a2bd6d0cb`
+
+### CURRENT_OBJECTIVE
+
+[IMPLEMENTED] Review the unified effective-stat/modifier workstream against the foundation branch, establish the exact authored path contract, and identify incompatibilities/regression risks before treating the integration as complete.
+
+### VERIFIED_STATE
+
+[VERIFIED] Source inspection shows the feature branch is ahead of `foundation/text-rpg-systems` and confines the integration to the systems catalog, package exports, rules engine, equipment helper routing, a new modifier module, simulation resource-context plumbing, derived-stat calculation, and focused modifier tests.
+
+[IMPLEMENTED] `src/textrpg/modifiers.py` centralizes additive modifier sources:
+- equipment slots
+- active equipment-set thresholds
+- perks
+- active conditions/injuries
+
+[IMPLEMENTED] `modifier_breakdown()` preserves source provenance (`base`, equipment slot, set threshold, perk ID, condition ID, `total`).
+
+[IMPLEMENTED] `RulesEngine` delegates effective player values to the unified pipeline and accepts optional set definitions.
+
+[IMPLEMENTED] `derived_stats()` now consumes effective attributes/skills and direct `derived.*` modifiers. `initialize_resources()`, `recover()`, and `train()` can receive the same set-definition context.
+
+[IMPLEMENTED] Public package exports add modifier APIs without removing the prior public surface. Legacy equipment helper names remain reachable.
+
+[VERIFIED] The feature branch documents the convention in `docs/SYSTEMS_CATALOG.md` v0.3:
+- `attributes.<id>`
+- `skills.<id>`
+- `derived.<id>`
+- base values are not mutated by effective modifiers
+- condition severity does not automatically multiply authored modifier magnitude
+- equipment requirements use permanent/base values
+
+### COMPATIBILITY_REVIEW
+
+[VERIFIED] No structural persistence migration is introduced by this diff; `GameState`/persistence files are not changed by the feature comparison.
+
+[VERIFIED] Existing call forms remain compatible because new context parameters are optional; no existing required positional API was removed in the inspected diff.
+
+[VERIFIED] Equipment requirement behavior intentionally remains base-stat based to avoid circular/order-dependent equipment qualification.
+
+### TEST_COVERAGE_PRESENT
+
+[IMPLEMENTED] `tests/test_modifiers.py` contains focused tests covering:
+- stacking equipment + set + perk + condition once
+- preservation of permanent base stat
+- per-source breakdown
+- rule requirements reacting to set and condition modifiers
+- derived stats reacting to effective inputs and direct derived modifiers
+- direct set modification of a derived value
+
+### TESTS_RUN
+
+None by this chat.
+
+### TEST_RESULTS
+
+[UNKNOWN] No runtime pass/fail result is claimed by this checkpoint. GitHub combined status for the inspected documentation tip exposed no status checks. Presence of tests is not equivalent to execution.
+
+### OPEN_RISKS
+
+[RISK] Modifier-path validation is not yet an explicit authored-data contract. A typo/unknown path can become an ineffective or misleading modifier unless validation rejects it.
+
+[RISK] Direct `derived.*` modifiers are currently added without domain floors. A sufficiently negative authored modifier can make values such as `max_health`, `max_stamina`, or `carry_capacity` negative; `initialize_resources()` would then trust the resulting resource maximum. The project must define clamp/reject semantics per derived stat.
+
+[RISK] `modifier_breakdown()` fully explains player-relative base values such as attributes/skills, but it does not by itself represent the formula-derived base component of a final derived statistic. A UI tooltip for final derived values will need a derived-calculation breakdown contract if full explainability is required.
+
+### CONFLICTS
+
+None found with persistence/state shape or existing public signatures during this inspection.
+
+The unresolved seven-vs-eight core-stat schema remains a separate design conflict and is not resolved by this pipeline.
+
+### NEXT_ACTION
+
+1. Add/confirm authored-path validation for modifier namespaces and IDs.
+2. Decide and test domain-floor semantics for derived/resource maxima.
+3. Execute the full test suite on the feature tip and record exact command/result.
+4. Add regression tests for existing foundation behavior if the full suite does not already cover all unchanged public entry points.
+5. After runtime verification, record merge/readiness state without conflating it with the still-open core-stat schema decision.
+
+### EVIDENCE
+
+- branch comparison `foundation/text-rpg-systems...feature/effective-stat-pipeline`
+- `src/textrpg/modifiers.py`
+- `src/textrpg/core.py`
+- `src/textrpg/stats.py`
+- `src/textrpg/simulation.py`
+- `src/textrpg/equipment.py`
+- `src/textrpg/__init__.py`
+- `tests/test_modifiers.py`
+- `docs/SYSTEMS_CATALOG.md` v0.3
