@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from hashlib import sha256
 from typing import Any, Dict, List, Mapping, MutableMapping, Optional
 
-from .modifiers import effective_player_value
+from .modifiers import effective_player_value, validate_modifier_mapping
 
 
 class RuleError(ValueError):
@@ -101,6 +101,20 @@ class RulesEngine:
     ):
         self.scenes = dict(scenes)
         self.set_definitions = dict(set_definitions or {})
+        try:
+            for set_id, definition in self.set_definitions.items():
+                thresholds = definition.get("thresholds", {})
+                if not isinstance(thresholds, Mapping):
+                    raise ValueError(f"Set thresholds must be an object: {set_id}")
+                for pieces, bonus in thresholds.items():
+                    if not isinstance(bonus, Mapping):
+                        raise ValueError(f"Set bonus must be an object: {set_id}:{pieces}")
+                    validate_modifier_mapping(
+                        bonus.get("modifiers", {}),
+                        source=f"set:{set_id}:{pieces}",
+                    )
+        except ValueError as exc:
+            raise RuleError(f"Invalid set definitions: {exc}") from exc
 
     def get_scene(self, state: GameState) -> Dict[str, Any]:
         try:
@@ -304,9 +318,18 @@ class RulesEngine:
                 if npc_id in state.party:
                     state.party.remove(npc_id)
             elif kind == "add_perk":
+                try:
+                    modifiers = validate_modifier_mapping(
+                        effect.get("modifiers", {}),
+                        source=f"perk:{effect['perk_id']}",
+                    )
+                except ValueError as exc:
+                    raise RuleError(
+                        f"Invalid perk modifiers for {effect['perk_id']}: {exc}"
+                    ) from exc
                 state.perks[effect["perk_id"]] = {
                     "source": effect.get("source", "unknown"),
-                    "modifiers": effect.get("modifiers", {}),
+                    "modifiers": modifiers,
                     "tags": effect.get("tags", []),
                 }
             else:
