@@ -445,3 +445,76 @@ Review branch: `review/effective-stat-contract-hardening`
 ### NEXT_ACTION
 
 Actual branch execution/full regression remains the mandatory next verification gate before promotion.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-HARDENING-AND-STATUS-CONTRACT-06
+
+Repository: `jbob-coder/Text-rpg-game`
+Context branch: `shared/game-context`
+Review/evolution branch: `review/effective-stat-contract-hardening`
+
+### CURRENT_OBJECTIVE
+
+[IN_PROGRESS] Continue evolving the effective-stat/rules contract while converting the previously discussed status screen into a precise data/projection contract that future clients can implement without duplicating rules or leaking hidden state.
+
+### IMPLEMENTATION EVOLUTION
+
+[IMPLEMENTED] Additional review-branch hardening now rejects unknown equipment requirement attribute/skill IDs and non-numeric requirement minima rather than treating authoring typos as ordinary unmet requirements.
+
+[IMPLEMENTED] Core attribute training intensity is now bounded to `(0, 2]`, matching the anti-abuse direction used by skill training and preventing negative/undefined intensity from creating invalid permanent progression.
+
+[IMPLEMENTED] New tests cover those equipment requirement and attribute-training contracts.
+
+### TEST EVIDENCE
+
+[VERIFIED] A refreshed local branch-equivalent reconstruction, assembled from current fetched review-branch source/test content, was executed with:
+
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -v
+```
+
+Observed result: **49 tests passed, 0 failed**.
+
+[IMPORTANT LIMITATION] This remains reconstructed execution, not a byte-for-byte Git checkout of the remote branch. It provides strong semantic/regression evidence but does not replace final actual-branch execution before promotion.
+
+### STATUS SCREEN ARCHITECTURE
+
+[DESIGNED] Added `docs/context/STATUS_SCREEN_DATA_CONTRACT.md` and made it required reading for future chats.
+
+The contract establishes:
+- UI as a projection of authoritative rules/state, not a second rules engine
+- visible/explainable/discovered/partially-known/hidden disclosure levels
+- base vs effective attribute presentation
+- current vs maximum resource ownership
+- derived-value explainability through the rules layer
+- ability hidden-data/evolution filtering
+- condition/injury disclosure rules
+- equipment requirement display against base values
+- relationship and knowledge projections that do not expose NPC internals
+- developer/debug separation
+- future state-change/invalidation categories
+- migration-safe `GameState -> Rules/Projection Service -> StatusScreenViewModel -> Client` boundary
+- registry-driven rendering so a later seven-to-eight-stat migration does not require hard-coded UI rewrites
+
+### CURRENT DESIGN STATE
+
+[DESIGNED] The eight-stat candidate remains the stronger current design recommendation but is not yet canonical or migrated.
+
+[DESIGNED] The status screen contract is intentionally schema-driven so either the current seven-stat foundation or a future eight-stat canonical schema can be presented through the same client architecture.
+
+### RISKS
+
+[RISK] Actual remote-branch execution remains the final technical verification gap before promotion.
+[RISK] The zero-floor derived-value policy remains provisional until explicitly accepted as canonical balance/rules behavior.
+[RISK] The ability panel still needs a dedicated player-visible projection so raw hidden evolution/prerequisite data cannot leak into normal UI.
+[RISK] A future stat-schema migration must be atomic across registry, formulas, validation, saves, tests, authored content, and UI metadata.
+
+### NEXT_ACTION
+
+1. Continue code review for remaining authoring-contract holes and reversible hardening opportunities.
+2. Keep review work isolated from the parent feature branch until promotion gates are met.
+3. Define the player-visible ability/progression projection contract next.
+4. Continue resolving the seven-vs-eight core-stat decision with migration design before changing persistent schema.
+5. Execute the real review branch test suite when a byte-for-byte checkout/runtime becomes available.
