@@ -1,6 +1,6 @@
 import unittest
 
-from textrpg import GameState
+from textrpg import DERIVED_FORMULAS, DERIVED_STAT_SPECS, GameState, validate_modifier_path
 from textrpg.stats import derived_stat_breakdown, derived_stats, initialize_resources, validate_player_stats
 
 
@@ -37,6 +37,12 @@ class StatsTests(unittest.TestCase):
         state = self.state()
         state.player["attributes"]["magic_number"] = 4
         self.assertTrue(any("unknown attribute" in e for e in validate_player_stats(state)))
+
+    def test_derived_formula_registry_is_consistent(self):
+        self.assertEqual(set(DERIVED_FORMULAS), set(DERIVED_STAT_SPECS))
+        for formula in DERIVED_FORMULAS.values():
+            for path in formula.get("terms", {}):
+                self.assertEqual(validate_modifier_path(path), path)
 
     def test_capacity_derived_values_are_floored_at_zero(self):
         state = self.state()
