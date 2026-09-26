@@ -129,3 +129,207 @@ def eligible_leak_targets(
         if knowledge_id not in target_knows:
             targets.append(target)
     return sorted(set(targets))
+
+
+def adjust_relationship(
+    state: GameState,
+    npc_id: str,
+    changes: Mapping[str, float],
+    *,
+    source: str = "unknown",
+) -> Dict[str, Any]:
+    """Apply bounded changes to independent relationship axes.
+
+    Relationship axes remain separate. This function deliberately does not collapse
+    trust, fear, affection, suspicion, or the other dimensions into one friendship score.
+    """
+    ensure_npc(state, npc_id)
+    relationship = state.relationships[npc_id]
+    before: Dict[str, float] = {}
+    after: Dict[str, float] = {}
+
+    for axis, delta_raw in changes.items():
+        if axis not in RELATIONSHIP_AXES:
+            raise RuleError(f"Unknown relationship axis: {axis}")
+        if not isinstance(delta_raw, (int, float)):
+            raise RuleError(f"Relationship change must be numeric: {axis}")
+        before[axis] = float(relationship.get(axis, 0))
+        value = before[axis] + float(delta_raw)
+        relationship[axis] = max(-100.0, min(100.0, value))
+        after[axis] = relationship[axis]
+
+    event = {
+        "type": "relationship_change",
+        "npc_id": npc_id,
+        "source": source,
+        "before": before,
+        "after": after,
+        "turn": state.turn,
+        "time_minutes": state.time_minutes,
+    }
+    state.history.append(event)
+    return event
+
+
+def relationship_meets(
+    state: GameState,
+    npc_id: str,
+    *,
+    minimums: Mapping[str, float] | None = None,
+    maximums: Mapping[str, float] | None = None,
+) -> bool:
+    """Evaluate authored multidimensional relationship gates without flattening axes."""
+    relationship = state.relationships.get(npc_id, {})
+
+    for axis, minimum in (minimums or {}).items():
+        if axis not in RELATIONSHIP_AXES:
+            raise RuleError(f"Unknown relationship axis: {axis}")
+        if float(relationship.get(axis, 0)) < float(minimum):
+            return False
+
+    for axis, maximum in (maximums or {}).items():
+        if axis not in RELATIONSHIP_AXES:
+            raise RuleError(f"Unknown relationship axis: {axis}")
+        if float(relationship.get(axis, 0)) > float(maximum):
+            return False
+
+    return True
+
+
+GOAL_STATUSES = ("active", "paused", "completed", "failed")
+
+
+def set_goal(
+    state: GameState,
+    npc_id: str,
+    goal_id: str,
+    *,
+    priority: int = 50,
+    progress: float = 0.0,
+    status: str = "active",
+    source: str = "unknown",
+    data: Mapping[str, Any] | None = None,
+) -> Dict[str, Any]:
+    """Create an explicit NPC goal record.
+
+    Existing goal IDs cannot be silently replaced; callers must update the existing
+    record through a dedicated transition/progress operation instead.
+    """
+    if priority < 0 or priority > 100:
+        raise RuleError("Goal priority must be in range 0..100")
+    if progress < 0 or progress > 100:
+        raise RuleError("Goal progress must be in range 0..100")
+    if status not in GOAL_STATUSES:
+        raise RuleError(f"Unsupported goal status: {status}")
+
+    npc = ensure_npc(state, npc_id)
+    goals = npc["goals"]
+    if goal_id in goals:
+        raise RuleError(f"Goal already exists for {npc_id}: {goal_id}")
+
+    record = {
+        "goal_id": goal_id,
+        "priority": int(priority),
+        "progress": float(progress),
+        "status": status,
+        "source": source,
+        "created_turn": state.turn,
+        "created_at_minutes": state.time_minutes,
+        "updated_at_minutes": state.time_minutes,
+        "data": dict(data or {}),
+    }
+    goals[goal_id] = record
+    state.history.append(
+        {
+            "type": "npc_goal_created",
+            "npc_id": npc_id,
+            "goal_id": goal_id,
+            "status": status,
+            "priority": int(priority),
+            "turn": state.turn,
+            "time_minutes": state.time_minutes,
+        }
+    )
+    return record
+
+
+def update_goal_progress(
+    state: GameState,
+    npc_id: str,
+    goal_id: str,
+    delta: float,
+    *,
+    completion_threshold: float = 100.0,
+) -> Dict[str, Any]:
+    if completion_threshold <= 0 or completion_threshold > 100:
+        raise RuleError("Goal completion threshold must be in range (0, 100]")
+    npc = ensure_npc(state, npc_id)
+    goal = npc["goals"].get(goal_id)
+    if not goal:
+        raise RuleError(f"Unknown goal for {npc_id}: {goal_id}")
+    if goal.get("status") in {"completed", "failed"}:
+        raise RuleError(f"Cannot progress closed goal: {goal_id}")
+    if not isinstance(delta, (int, float)):
+        raise RuleError("Goal progress delta must be numeric")
+
+    before = float(goal.get("progress", 0))
+    after = max(0.0, min(100.0, before + float(delta)))
+    goal["progress"] = after
+    if after >= completion_threshold:
+        goal["status"] = "completed"
+    goal["updated_at_minutes"] = state.time_minutes
+
+    event = {
+        "type": "npc_goal_progress",
+        "npc_id": npc_id,
+        "goal_id": goal_id,
+        "before": before,
+        "after": after,
+        "status": goal["status"],
+        "turn": state.turn,
+        "time_minutes": state.time_minutes,
+    }
+    state.history.append(event)
+    return event
+
+
+def transition_story_state(
+    state: GameState,
+    npc_id: str,
+    track_id: str,
+    to_state: str,
+    *,
+    allowed_from: Iterable[str | None] | None = None,
+    reason: str = "unknown",
+    data: Mapping[str, Any] | None = None,
+) -> Dict[str, Any]:
+    """Move one authored NPC story track through an explicit guarded transition."""
+    if not isinstance(to_state, str) or not to_state:
+        raise RuleError("Story state must be a non-empty string")
+
+    npc = ensure_npc(state, npc_id)
+    story_state = npc["story_state"]
+    previous = story_state.get(track_id)
+
+    if allowed_from is not None:
+        allowed = tuple(allowed_from)
+        if previous not in allowed:
+            raise RuleError(
+                f"Invalid story-state transition for {npc_id}/{track_id}: "
+                f"{previous!r} -> {to_state!r}"
+            )
+
+    story_state[track_id] = to_state
+    event = {
+        "type": "npc_story_transition",
+        "npc_id": npc_id,
+        "track_id": track_id,
+        "from_state": previous,
+        "to_state": to_state,
+        "reason": reason,
+        "data": dict(data or {}),
+        "turn": state.turn,
+        "time_minutes": state.time_minutes,
+    }
+    state.history.append(event)
+    return event
