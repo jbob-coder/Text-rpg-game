@@ -73,5 +73,12 @@ class SimulationTests(unittest.TestCase):
             )
         self.assertIn("Invalid condition modifiers", str(context.exception))
 
+    def test_attribute_training_intensity_is_bounded(self):
+        state = self.state()
+        with self.assertRaises(RuleError):
+            train_attribute(state, attribute="might", minutes=120, intensity=0)
+        with self.assertRaises(RuleError):
+            train_attribute(state, attribute="might", minutes=120, intensity=2.1)
+
 if __name__ == "__main__":
     unittest.main()
