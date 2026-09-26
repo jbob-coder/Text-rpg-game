@@ -178,6 +178,10 @@ class RulesEngine:
                 actual = state.relationships.get(condition["npc"], {}).get(condition["axis"], 0)
                 if actual < condition["value"]:
                     return False
+            elif kind == "relationship_max":
+                actual = state.relationships.get(condition["npc"], {}).get(condition["axis"], 0)
+                if actual > condition["value"]:
+                    return False
             elif kind == "knows":
                 if condition["knowledge_id"] not in state.knowledge:
                     return False
@@ -290,7 +294,9 @@ class RulesEngine:
                 _set_path(state.player, effect["path"], effect["value"])
             elif kind == "relationship":
                 npc = state.relationships.setdefault(effect["npc"], {})
-                npc[effect["axis"]] = npc.get(effect["axis"], 0) + effect["value"]
+                axis = effect["axis"]
+                value = float(npc.get(axis, 0)) + float(effect["value"])
+                npc[axis] = max(-100.0, min(100.0, value))
             elif kind == "learn":
                 state.knowledge[effect["knowledge_id"]] = {
                     "source": effect.get("source", "unknown"),
