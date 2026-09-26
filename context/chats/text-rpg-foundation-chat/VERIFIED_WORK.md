@@ -92,3 +92,29 @@ Treat this as a documentation inconsistency to fix after the test suite is rerun
 ## Safety against cross-chat collisions
 
 Other chats should not edit this contributor file. They should create a sibling directory under `context/chats/` and record their own context and evidence separately.
+
+
+## Update — effective modifier integration
+
+Additional foundation work completed after this context branch was created:
+
+- `src/textrpg/core.py` now accepts optional authored equipment-set definitions in `RulesEngine`.
+- Effective player values used by checks now aggregate:
+  - direct equipment modifiers;
+  - each reached equipment-set threshold once;
+  - perk modifiers;
+  - active condition modifiers.
+- Base player attributes/skills remain unchanged by those temporary/equipment modifiers.
+- Malformed condition collections and invalid equipment-set thresholds are rejected through the rules contract.
+- Added a regression test proving direct gear, a two-piece set bonus, and a negative condition combine once without mutating the underlying attribute.
+- Branch-equivalent local verification after the change: **30 tests passed, 0 failed**.
+- `README.md` was refreshed to list the newer modules and the 30-test result.
+- `docs/IMPLEMENTATION_STATUS.md` was advanced so the power-runtime slice is now the next engineering task.
+
+Foundation commits for this slice:
+- `81f7e155616543cd130606b6e4de49ee58750602` — core modifier integration.
+- `76d8543b0ad41a738cea6c493f40e6db3ca8b50a` — regression test.
+- `dd61efd2ea1f417686c5e67f325ee4023bb9ac2e` — implementation status.
+- `30b4a33fe65a3c33704a78476251877199b89f7f` — README refresh.
+
+This shared branch contains the context record, not those implementation commits themselves. Inspect `foundation/text-rpg-systems` for the live code.
