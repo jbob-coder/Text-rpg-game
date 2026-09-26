@@ -20,13 +20,14 @@ A new chat working on this game should read, in order:
 2. `docs/context/CONTEXT_SYNC_PROTOCOL.md`
 3. `docs/context/GAME_DIRECTION_AND_UI.md`
 4. `docs/context/STAT_SCHEMA_EVALUATION.md`
-5. `docs/context/CHECKPOINTS.md`
-6. `docs/context/DECISIONS.md`
-7. `docs/IMPLEMENTATION_STATUS.md`
-8. `docs/GAME_FOUNDATION.md`
-9. `docs/SYSTEMS_CATALOG.md`
-10. relevant entries under `docs/context/chats/`
-11. the actual source/tests for any implementation-specific claim
+5. `docs/context/STATUS_SCREEN_DATA_CONTRACT.md`
+6. `docs/context/CHECKPOINTS.md`
+7. `docs/context/DECISIONS.md`
+8. `docs/IMPLEMENTATION_STATUS.md`
+9. `docs/GAME_FOUNDATION.md`
+10. `docs/SYSTEMS_CATALOG.md`
+11. relevant entries under `docs/context/chats/`
+12. the actual source/tests for any implementation-specific claim
 
 The purpose of placing `GAME_DIRECTION_AND_UI.md` near the top is to prevent technically correct work from drifting away from the user's intended game experience.
 
@@ -62,6 +63,7 @@ Every non-trivial project claim should be classifiable as one of:
 
 - `GAME_DIRECTION_AND_UI.md` — authoritative design-direction reference for what the game should feel like, its progression philosophy, player-state layers, and status-screen target.
 - `STAT_SCHEMA_EVALUATION.md` — detailed seven-vs-eight core-stat stress test, scenario matrix, migration considerations, and current recommendation candidate.
+- `STATUS_SCREEN_DATA_CONTRACT.md` — detailed mapping from authoritative game state/rules to player-facing status UI, including disclosure levels, explainability, hidden-data rules, and migration-safe presentation boundaries.
 - `CONTEXT_SYNC_PROTOCOL.md` — mandatory procedure, markup vocabulary, evidence rules, handoffs, conflict handling, and checkpoint rules.
 - `CHECKPOINTS.md` — append-only project checkpoints.
 - `DECISIONS.md` — compact architectural/design decision log, including unresolved conflicts.
