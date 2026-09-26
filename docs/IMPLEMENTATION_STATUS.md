@@ -99,9 +99,15 @@ Verified by that targeted run:
 
 The complete repository test suite has **not yet been re-run against the new feature branch**, so the feature branch is implemented but not yet fully VERIFIED as a whole.
 
-The review/evolution branch adds further tests for path validation, invalid equipment/condition/set definitions, derived-value floors, and explanation payloads. Those new tests have been written and inspected but have **not** been executed by this workstream yet. Do not treat the review branch as verified or merge-ready solely because the tests exist.
+The review/evolution branch adds further tests for path validation, invalid equipment/condition/set definitions, derived-value floors, and explanation payloads. Those repository tests have been written and inspected but have **not** been executed against an actual branch checkout by this workstream yet.
+
+A branch-equivalent reconstructed execution of the reviewed hardening logic was performed separately and passed the targeted semantic scenarios (stacking/provenance, derived formula + direct modifier, capacity floors, signed contest score, invalid-path rejection). This is supporting evidence only; it does **not** replace execution of the repository test suite.
+
+Do not treat the review branch as fully VERIFIED or merge-ready solely because the authored tests and reconstructed scenarios pass.
 
 No GitHub Actions workflow was added; verification does not consume hosted CI minutes.
+
+Detailed hardening review evidence: `docs/EFFECTIVE_STAT_HARDENING_REVIEW.md`.
 
 ## NEXT_ACTION
 
