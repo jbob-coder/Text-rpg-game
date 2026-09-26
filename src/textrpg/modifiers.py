@@ -246,8 +246,9 @@ def effective_player_value(
 ) -> float:
     """Return base player value plus equipment/set/perk/condition modifiers."""
     if path.startswith("derived."):
-        raise ValueError(
-            "effective_player_value does not resolve full derived formulas; "
-            "use RulesEngine or derived_stats for derived.* values"
-        )
+        # Local import keeps schema/modifier modules independent during import.
+        from .stats import derived_stat_breakdown
+
+        key = path.removeprefix("derived.")
+        return float(derived_stat_breakdown(state, key, set_definitions)["total"])
     return modifier_breakdown(state, path, set_definitions)["total"]
