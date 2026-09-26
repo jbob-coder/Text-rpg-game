@@ -14,12 +14,14 @@ The rules layer is deliberately separated from presentation. The game can later 
 - `docs/IMPLEMENTATION_STATUS.md` — current objective, verified state, completed work, risks, and next actions.
 - `src/textrpg/core.py` — deterministic scene/choice rules and persistent state.
 - `src/textrpg/progression.py` — earned ability mastery and technique prerequisites.
+- `src/textrpg/powers.py` — technique costs, cooldowns, drawbacks, mastery stages, and ability evolution.
+- `src/textrpg/quests.py` — authored quest graphs, objective prerequisites, branching/failure routes, and terminal states.
 - `src/textrpg/persistence.py` — versioned JSON save/load.
-- `src/textrpg/validation.py` — static validation for authored content.
+- `src/textrpg/validation.py` — scene validation plus whole-content-pack quest cross-reference validation.
 - `src/textrpg/stats.py` — canonical attributes, skills, resources, and derived values.
 - `src/textrpg/simulation.py` — world time, conditions, training, and recovery.
 - `src/textrpg/equipment.py` — equipment slots, requirements, modifiers, and set bonuses.
-- `src/textrpg/social.py` — NPC memory, private knowledge, sharing, and leak-candidate rules.
+- `src/textrpg/social.py` — NPC memory, private knowledge, relationships, goals, story-state transitions, sharing, and leak-candidate rules.
 - `content/sample_scene.json` — non-canon scene showing relationship, knowledge, item, and stat-dependent choices.
 - `tests/` — behavior, progression, persistence, and content-validation tests.
 
@@ -29,6 +31,6 @@ The rules layer is deliberately separated from presentation. The game can later 
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Latest local verification for the branch-equivalent files: **30 tests passed, 0 failed**.
+Latest local verification for the branch-equivalent files: **55 tests passed, 0 failed**.
 
 The prototype uses only the Python standard library. No hosted AI service or GitHub Actions workflow is required.
