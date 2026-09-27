@@ -71,6 +71,66 @@ class AndroidGameSession:
             return flagged
         return state.scene_id
 
+
+    def _inventory_view_for(self, state: GameState) -> Dict[str, Any]:
+        item_definitions = self.content.registries.get("items", {})
+        if not isinstance(item_definitions, Mapping):
+            item_definitions = {}
+
+        items: list[Dict[str, Any]] = []
+        for item_id in sorted(state.inventory):
+            quantity = state.inventory[item_id]
+            if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0:
+                continue
+            definition = item_definitions.get(item_id, {})
+            if not isinstance(definition, Mapping):
+                definition = {}
+            label = definition.get("label")
+            items.append(
+                {
+                    "id": item_id,
+                    "name": label if isinstance(label, str) and label else _pretty_id(item_id, "ITEM_"),
+                    "quantity": quantity,
+                }
+            )
+
+        equipment: list[Dict[str, Any]] = []
+        for slot in (
+            "head",
+            "body",
+            "hands",
+            "legs",
+            "feet",
+            "main_hand",
+            "off_hand",
+            "accessory_1",
+            "accessory_2",
+        ):
+            record = state.equipment.get(slot)
+            if not isinstance(record, Mapping):
+                equipment.append({"slot": slot, "equipped": False})
+                continue
+            item_id = record.get("item_id")
+            if not isinstance(item_id, str) or not item_id:
+                equipment.append({"slot": slot, "equipped": False})
+                continue
+            definition = item_definitions.get(item_id, {})
+            if not isinstance(definition, Mapping):
+                definition = {}
+            label = definition.get("label")
+            equipment.append(
+                {
+                    "slot": slot,
+                    "equipped": True,
+                    "item_id": item_id,
+                    "name": label if isinstance(label, str) and label else _pretty_id(item_id, "ITEM_"),
+                    "quality": record.get("quality", "standard")
+                    if isinstance(record.get("quality", "standard"), str)
+                    else "standard",
+                }
+            )
+        return {"items": items, "equipment": equipment}
+
     def _quest_view_for(self, state: GameState) -> list[Dict[str, Any]]:
         definitions = self.content.raw.get("quests", {})
         if not isinstance(definitions, Mapping):
@@ -155,6 +215,11 @@ class AndroidGameSession:
             scene_defs = {}
 
         discovered: set[str] = {self._location_for(state)}
+        if state.flags.get("android_debug.discover_all_map") is True:
+            discovered.update(
+                location_id for location_id in raw_nodes
+                if isinstance(location_id, str)
+            )
         for event in state.history:
             if not isinstance(event, Mapping):
                 continue
@@ -215,6 +280,7 @@ class AndroidGameSession:
         return {
             "scene": self.engine.build_scene_view(state),
             "status": self._status_view_for(state),
+            "inventory": self._inventory_view_for(state),
             "quests": self._quest_view_for(state),
             "map": self._map_view_for(state),
             "meta": {
@@ -255,6 +321,62 @@ class AndroidGameSession:
             raise AndroidBridgeError(
                 "CHOICE_ERROR",
                 "That choice is not available.",
+                technical_detail=str(exc),
+            ) from exc
+
+
+    def apply_cheat(self, code: str) -> Dict[str, Any]:
+        """Apply an explicit developer cheat without exposing generic state mutation."""
+        if not isinstance(code, str) or not code.strip():
+            raise AndroidBridgeError("CHEAT_ERROR", "Enter a valid cheat code.")
+
+        normalized = code.strip().upper()
+        before = deepcopy(self.state.snapshot())
+        try:
+            if normalized == "FULLRESTORE":
+                resources = self.state.player.setdefault("resources", {})
+                if not isinstance(resources, dict):
+                    raise RuleError("player.resources must be mutable")
+                for resource in self._status_view_for(self.state)["resources"]:
+                    resources[resource["id"]] = resource["max"]
+            elif normalized == "CLEARCONDITIONS":
+                self.state.player["conditions"] = {}
+            elif normalized == "GIVE_RELAY":
+                self.state.inventory["ITEM_DEAD_RELAY"] = (
+                    self.state.inventory.get("ITEM_DEAD_RELAY", 0) + 1
+                )
+            elif normalized == "MAXATTR":
+                attributes = self.state.player.setdefault("attributes", {})
+                if not isinstance(attributes, dict):
+                    raise RuleError("player.attributes must be mutable")
+                for attribute in self._status_view_for(self.state)["attributes"]:
+                    attributes[attribute["id"]] = 100
+            elif normalized == "DEBUGMAP":
+                self.state.flags["android_debug.discover_all_map"] = True
+            else:
+                raise AndroidBridgeError(
+                    "CHEAT_ERROR",
+                    "Unknown cheat code.",
+                    technical_detail=f"Unsupported cheat code: {normalized}",
+                )
+
+            self.state.history.append(
+                {
+                    "type": "cheat_applied",
+                    "code": normalized,
+                    "turn": self.state.turn,
+                    "time_minutes": self.state.time_minutes,
+                }
+            )
+            return self.scene_view()
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError(
+                "CHEAT_ERROR",
+                "The cheat code could not be applied.",
                 technical_detail=str(exc),
             ) from exc
 
