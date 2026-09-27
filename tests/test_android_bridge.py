@@ -315,3 +315,16 @@ class AndroidBridgeTests(unittest.TestCase):
 
         self.assertIn("KNOW_GATE_TWELVE_CREW_WITHDRAWAL", session.state.knowledge)
         self.assertEqual("DISTRICT_ARCHIVE", result["map"]["current_location"])
+
+
+    def test_district_cheat_is_explicit_and_player_safe(self):
+        session = create_session(CONTENT)
+
+        view = session.apply_cheat("district")
+
+        self.assertEqual("DISTRICT_HUB", session.state.scene_id)
+        self.assertTrue(session.state.flags["world.free_roam_unlocked"])
+        self.assertEqual("The District Opens Up", view["scene"]["title"])
+        node_ids = {node["id"] for node in view["map"]["nodes"]}
+        self.assertIn("DISTRICT_ARCHIVE", node_ids)
+        self.assertIn("WORKSHOP_ROW", node_ids)

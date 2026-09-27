@@ -636,7 +636,7 @@ private fun SettingsPanel(
         PixelPanel(title = "Developer") {
             var cheatCode by remember { mutableStateOf("") }
             Text(
-                "Cheats are validated by the Python game layer. Available test codes: FULLRESTORE, CLEARCONDITIONS, GIVE_RELAY, MAXATTR, DEBUGMAP.",
+                "Cheats are validated by the Python game layer. Available test codes: FULLRESTORE, CLEARCONDITIONS, GIVE_RELAY, MAXATTR, DEBUGMAP, DISTRICT.",
                 color = PixelColors.Muted,
                 style = MaterialTheme.typography.bodyMedium,
             )

@@ -596,6 +596,13 @@ class AndroidGameSession:
                     attributes[attribute["id"]] = 100
             elif normalized == "DEBUGMAP":
                 self.state.flags["android_debug.discover_all_map"] = True
+            elif normalized == "DISTRICT":
+                if "DISTRICT_HUB" not in self.engine.scenes:
+                    raise RuleError("DISTRICT cheat requires DISTRICT_HUB content")
+                self.state.flags["world.free_roam_unlocked"] = True
+                self.state.flags["vertical_slice_01.opening_complete"] = True
+                self.state.flags.pop("android.map_location_override", None)
+                self.state.scene_id = "DISTRICT_HUB"
             else:
                 raise AndroidBridgeError(
                     "CHEAT_ERROR",
