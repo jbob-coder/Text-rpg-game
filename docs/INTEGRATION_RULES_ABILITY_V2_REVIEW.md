@@ -241,3 +241,112 @@ Before promotion:
 7. recheck no-double-counting across ability requirements and effective modifiers
 8. update shared context with exact command/result
 9. decide whether integration is promoted as one unit or split into reviewed source branches
+
+
+## Transactional and atomicity hardening — later integration pass
+
+A later integration audit extended the validate-before-commit rule beyond the original
+ability modifier pipeline.
+
+### World time
+
+`advance_time()` now constructs and validates the complete timed-condition update
+plan before changing `state.time_minutes` or condition durations.
+
+`recover()`, skill training, attribute training, and technique practice preflight
+time advancement before their own persistent mutations.
+
+This prevents a malformed timed condition from allowing resources, mastery, skills,
+attributes, or clock state to become partially updated.
+
+### Resource normalization
+
+`initialize_resources()` now calculates and validates the entire resource update
+before committing it.
+
+Current resource values must be finite numeric values. A malformed Health/Focus/etc.
+value can no longer leave only some `max_*` fields written before the error is
+raised.
+
+### Training state
+
+Skill and attribute training validate the existing skill/attribute value before
+resource or progression mutation.
+
+Training also validates the history/time containers that it will later update.
+
+### Choice transactions
+
+`RulesEngine.choose()` now validates:
+- choice time cost
+- next-scene target
+- turn state
+- history container
+- time-advance viability
+
+before applying authored effects.
+
+Choice execution then runs against a deep snapshot of `GameState`. If a later
+effect fails, the snapshot is restored and the exception is re-raised.
+
+This closes the cross-effect partial mutation class where an earlier flag,
+relationship, quest, power, inventory, or other effect could persist after a
+later effect rejected the same authored choice.
+
+### Ability evolution
+
+Evolution now validates persistent ability state, completed-evolution records,
+inventory quantities, perk state, tags, history, and mutable containers before
+commit.
+
+The next form/rank floor/rank/tags, item consumption, granted perks, evolution
+record, and history event are prepared before persistent writes.
+
+### Ability use/discovery/mastery
+
+Additional precommit checks now cover:
+- mutable resource paths
+- mutable ability/technique records
+- condition container before drawbacks
+- history container
+- existing rank/rank-floor/mastery state
+- ability/technique discovery container state
+- non-empty technique IDs
+
+Direct mastery progression computes the next mastery/stage/rank before assigning
+the persistent values.
+
+### New regression coverage authored
+
+Additional tests now cover:
+- malformed timed conditions without clock mutation
+- training rejected before resource/stat mutation
+- atomic resource normalization failure
+- invalid next-scene rejection before choice effects
+- rollback when a later choice effect fails
+- invalid condition container before technique spend
+- invalid timed condition before technique practice
+- invalid evolution form/tags/inventory/history
+- corrupt mastery/rank-floor state without further mutation
+- invalid discovery state without partial creation
+
+These tests are present on the integration branch but remain subject to exact
+integration-branch execution.
+
+## Foundation synchronization
+
+During this work, `foundation/text-rpg-systems` advanced with documentation and a
+new save/resume regression module.
+
+The integration branch was explicitly synchronized with foundation through merge
+commit `c54ca69179599cb40fa5db151f1cec6d8be6ac75`.
+
+At the synchronization point:
+- foundation head: `3efc7f733fdbda1d60964cb73d6449c3c0808e1b`
+- integration status: **61 commits ahead, 0 behind**
+- foundation's own status document reports **93 tests passed, 0 failed** against a
+  hash-matched branch-equivalent reconstruction
+
+That 93-test result verifies the foundation state, not the additional integration
+changes. The integration branch still requires its own exact/branch-equivalent run.
+
