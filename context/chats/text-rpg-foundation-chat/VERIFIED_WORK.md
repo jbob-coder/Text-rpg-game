@@ -230,3 +230,33 @@ New permanent coverage in `tests/test_save_resume_routes.py` verifies JSON save/
 This **93 passed / 0 failed** result supersedes the earlier intermediate 58-test checkpoint and the previously mentioned unverified “13 focused checks” note. The 13-check statement must not be used as current evidence.
 
 Current next engineering focus on `foundation/text-rpg-systems`: define the provisional `ABILITY_TRACE_ECHO` resource/drawback/recovery contract and strengthen cross-reference validation before adding stronger power content.
+
+
+## Update — Trace Echo resource contract, live-use drawback, and 97-test verification
+
+Foundation work verified on 2026-09-27:
+
+- Added authored power-definition validation and runtime loading.
+- Powers can define ability-specific resource pools instead of using a universal mana resource.
+- `ABILITY_TRACE_ECHO` now uses `power_resources.trace_resonance` with start/max 10 and baseline recovery of 2 per hour.
+- `TECHNIQUE_SIGNAL_PULSE` now has a concrete first-use contract: 3 Focus + 2 Trace Resonance, 10-minute cooldown, mastery gain, and temporary `COND_ECHO_STRAIN`.
+- The first live-use scene records a new trace fact, applies strain, and spends the power-specific resource.
+- A 30-minute quiet-recovery scene restores 1 Trace Resonance and advances the shared world clock, naturally expiring the 20-minute strain condition.
+- `TECHNIQUE_DIRECTIONAL_TRACE` exists only as a locked future definition, with later rank/mastery, knowledge, perk, Perception/Will, and Power-skill requirements.
+- Content-pack validation now rejects unknown power/technique references and structurally validates power/NPC effect IDs plus practice/recovery durations.
+
+Verification:
+- The prior exact 93-test reconstruction remained the baseline.
+- Every source/content/test file changed in this slice was Git-blob-hash matched to the live `foundation/text-rpg-systems` branch.
+- Observed full-suite result:
+
+```text
+Ran 97 tests in 0.019s
+
+OK
+```
+
+Current next engineering focus:
+1. add explicit discovery prerequisites for future techniques;
+2. formalize knowledge/perk/item registries enough for stronger cross-reference validation;
+3. keep The Dead Relay / Gate Twelve / Tamsin / Trace Echo provisional until deliberate canon review.
