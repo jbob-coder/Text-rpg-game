@@ -1463,3 +1463,57 @@ This is not an executed pass count.
 ### NEXT_ACTION
 
 Continue targeted static integration/atomicity review only where it can reveal concrete cross-system defects; avoid feature expansion. Exact runtime execution remains the promotion gate.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-SOCIAL-ATOMICITY-16
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after this pass: `2e052bffef06b5f9fe4058b679a31010b8174582`
+
+### ISSUES FOUND
+
+[VERIFIED STATIC] Several public social APIs could mutate durable state during queries or rejected operations:
+
+- `eligible_leak_targets()` called `ensure_npc()` for holder/targets, so a read-only eligibility query could create NPC shells/relationship entries.
+- `adjust_relationship()` applied axes sequentially before validating the full change set, so an invalid later axis could leave an earlier axis changed.
+- `share_knowledge()` could create an empty speaker NPC on a missing-knowledge failure.
+- `update_goal_progress()` could create an empty NPC shell before reporting an unknown goal.
+- `transition_story_state()` could create an NPC shell before an `allowed_from` guard rejected the transition.
+- a multi-recipient `execute_leak_event()` could leave earlier recipients mutated if a later recipient transfer failed.
+
+### FIXES
+
+[IMPLEMENTED]
+- leak eligibility is now a non-mutating query;
+- relationship adjustments validate/plan all axes before commit;
+- knowledge transfer preflights speaker and recipient containers;
+- goal progress reads existing goal state without creating an NPC on failure;
+- story transitions preflight previous state before successful NPC creation/mutation;
+- multi-recipient leak events snapshot NPC/relationship/history state and roll back the full event on failure.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added tests for:
+- leak query purity;
+- relationship multi-axis failure atomicity;
+- missing-speaker share purity;
+- unknown-goal progress purity;
+- rejected story-transition purity;
+- multi-recipient leak rollback.
+
+[VERIFIED STATIC] V6 now contains **208 authored test methods across 17 test files**.
+
+This remains an authored-test count, not an execution result.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 runtime execution remains pending.
+
+### NEXT_ACTION
+
+Continue only focused reconciliation/hardening review for concrete state-integrity defects. Avoid adding features or beginning the seven-to-eight stat migration before exact V6 execution.
