@@ -1,7 +1,7 @@
 import unittest
 
-from textrpg import GameState, RulesEngine
-from textrpg.stats import derived_stats, effective_player_value, initialize_resources, validate_player_stats
+from textrpg import DERIVED_FORMULAS, DERIVED_STAT_SPECS, GameState, RuleError, RulesEngine, validate_modifier_path
+from textrpg.stats import derived_stat_breakdown, derived_stats, effective_player_value, initialize_resources, validate_player_stats
 
 
 class StatsTests(unittest.TestCase):
@@ -152,6 +152,100 @@ class StatsTests(unittest.TestCase):
         event = engine.choose(state, "CHECK_MIGHT")
         self.assertEqual(event["check"]["base"], 44.0)
 
+
+    def test_derived_formula_registry_is_consistent(self):
+        self.assertEqual(set(DERIVED_FORMULAS), set(DERIVED_STAT_SPECS))
+        for formula in DERIVED_FORMULAS.values():
+            for path in formula.get("terms", {}):
+                self.assertEqual(validate_modifier_path(path), path)
+
+    def test_capacity_derived_values_are_floored_at_zero(self):
+        state = self.state()
+        state.perks["PERK_COLLAPSE"] = {
+            "modifiers": {
+                "derived.max_health": -1000,
+                "derived.carry_capacity": -1000,
+            }
+        }
+        values = derived_stats(state)
+        self.assertEqual(values["max_health"], 0.0)
+        self.assertEqual(values["carry_capacity"], 0.0)
+
+        state.player["resources"] = {"health": 20}
+        initialize_resources(state)
+        self.assertEqual(state.player["resources"]["max_health"], 0.0)
+        self.assertEqual(state.player["resources"]["health"], 0.0)
+
+    def test_derived_breakdown_exposes_floor_adjustment(self):
+        state = self.state()
+        state.perks["PERK_COLLAPSE"] = {
+            "modifiers": {"derived.max_health": -1000}
+        }
+        breakdown = derived_stat_breakdown(state, "max_health")
+        self.assertLess(breakdown["raw_total"], 0.0)
+        self.assertEqual(breakdown["floor"], 0.0)
+        self.assertGreater(breakdown["floor_adjustment"], 0.0)
+        self.assertEqual(breakdown["total"], 0.0)
+
+    def test_contest_style_derived_values_can_go_negative(self):
+        state = self.state()
+        state.perks["PERK_STAGGERED"] = {
+            "modifiers": {"derived.initiative": -1000}
+        }
+        self.assertLess(derived_stats(state)["initiative"], 0.0)
+
+    def test_foundation_stats_keyword_api_remains_compatible(self):
+        state = self.state()
+        state.equipment = {
+            "body": {"item_id": "A", "set_id": "SET_COMPAT", "modifiers": {}},
+            "hands": {"item_id": "B", "set_id": "SET_COMPAT", "modifiers": {}},
+        }
+        sets = {
+            "SET_COMPAT": {
+                "thresholds": {
+                    "2": {"modifiers": {"derived.max_health": 5}}
+                }
+            }
+        }
+        values = derived_stats(state, equipment_sets=sets)
+        self.assertEqual(
+            values["max_health"],
+            derived_stats(state, set_definitions=sets)["max_health"],
+        )
+        maxima = initialize_resources(state, equipment_sets=sets)
+        self.assertEqual(maxima["health"], values["max_health"])
+
+    def test_non_finite_player_stats_are_reported(self):
+        state = self.state()
+        state.player["attributes"]["might"] = float("nan")
+        state.player["skills"]["athletics"] = float("inf")
+        errors = validate_player_stats(state)
+        self.assertTrue(any("attribute might must be finite numeric" in e for e in errors))
+        self.assertTrue(any("skill athletics must be finite numeric" in e for e in errors))
+
+    def test_resource_initialization_rejects_invalid_current_value_atomically(self):
+        state = self.state()
+        state.player["resources"] = {
+            "health": True,
+            "stamina": 10.0,
+        }
+        before = dict(state.player["resources"])
+        with self.assertRaises(RuleError):
+            initialize_resources(state)
+        self.assertEqual(state.player["resources"], before)
+        self.assertNotIn("max_health", state.player["resources"])
+
+    def test_resource_initialization_rejects_non_finite_current_value_atomically(self):
+        state = self.state()
+        state.player["resources"] = {
+            "health": 10.0,
+            "focus": float("nan"),
+        }
+        before_keys = set(state.player["resources"])
+        with self.assertRaises(Exception):
+            initialize_resources(state)
+        self.assertEqual(set(state.player["resources"]), before_keys)
+        self.assertNotIn("max_focus", state.player["resources"])
 
 if __name__ == "__main__":
     unittest.main()
