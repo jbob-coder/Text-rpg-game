@@ -1,5 +1,6 @@
 package com.thegame.rpg.ui
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -26,6 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
@@ -51,10 +53,12 @@ fun TheGameRoot(
     onChoice: (String) -> Unit,
     onSave: () -> Unit,
     onLoad: () -> Unit,
+    onNarrate: (String) -> Boolean,
+    onStopNarration: () -> Unit,
 ) {
     val snapshot = uiState.snapshot
     if (uiState.bootState == BootState.Ready && snapshot != null) {
-        PixelGameShell(snapshot, uiState.busy, onChoice, onSave, onLoad)
+        PixelGameShell(snapshot, uiState.busy, onChoice, onSave, onLoad, onNarrate, onStopNarration)
     } else {
         PixelBootScreen(uiState.bootState)
     }
@@ -77,7 +81,7 @@ fun GameScreen(
         TopStatusBar(snapshot, onSettings = { onNavigate("More") })
         Spacer(Modifier.height(8.dp))
         Box(modifier = Modifier.weight(1f)) {
-            StorySection(snapshot, busy, onChoice)
+            StorySection(snapshot, busy, onChoice, onNarrate = {})
         }
         Spacer(Modifier.height(8.dp))
         Row(
@@ -123,6 +127,8 @@ private fun PixelGameShell(
     onChoice: (String) -> Unit,
     onSave: () -> Unit,
     onLoad: () -> Unit,
+    onNarrate: (String) -> Boolean,
+    onStopNarration: () -> Unit,
 ) {
     var section by remember { mutableStateOf(GameSection.STORY) }
     var settingsOpen by remember { mutableStateOf(false) }
@@ -137,24 +143,18 @@ private fun PixelGameShell(
         Spacer(Modifier.height(8.dp))
         Box(Modifier.weight(1f)) {
             if (settingsOpen) {
-                SettingsPanel(snapshot, onSave, onLoad) { settingsOpen = false }
+                SettingsPanel(snapshot, onSave, onLoad, onStopNarration) { settingsOpen = false }
             } else {
                 when (section) {
-                    GameSection.STORY -> StorySection(snapshot, busy, onChoice)
+                    GameSection.STORY -> StorySection(snapshot, busy, onChoice, onNarrate)
                     GameSection.CHARACTER -> CharacterSection(snapshot)
                     GameSection.STATS -> StatsSection(snapshot)
                     GameSection.INVENTORY -> ComingPanel(
                         "Inventory",
                         "Inventory is engine-owned. The item and equipment browser will render authoritative inventory state here.",
                     )
-                    GameSection.QUESTS -> ComingPanel(
-                        "Quests",
-                        "Main, side, optional, and lore quest categories will render from a player-safe quest projection.",
-                    )
-                    GameSection.MAP -> ComingPanel(
-                        "World Map",
-                        "The interactive pixel map will use authored location IDs and routes, never a second UI-owned world state.",
-                    )
+                    GameSection.QUESTS -> QuestSection(snapshot)
+                    GameSection.MAP -> MapSection(snapshot)
                     GameSection.MORE -> MorePanel(
                         onCharacter = { section = GameSection.CHARACTER },
                         onSettings = { settingsOpen = true },
@@ -197,7 +197,7 @@ private fun TopStatusBar(snapshot: GameSnapshot, onSettings: () -> Unit) {
 }
 
 @Composable
-private fun StorySection(snapshot: GameSnapshot, busy: Boolean, onChoice: (String) -> Unit) {
+private fun StorySection(snapshot: GameSnapshot, busy: Boolean, onChoice: (String) -> Unit, onNarrate: (String) -> Boolean) {
     BoxWithConstraints(Modifier.fillMaxSize()) {
         if (maxWidth >= 720.dp) {
             Row(
@@ -213,6 +213,7 @@ private fun StorySection(snapshot: GameSnapshot, busy: Boolean, onChoice: (Strin
                     snapshot = snapshot,
                     busy = busy,
                     onChoice = onChoice,
+                    onNarrate = onNarrate,
                     modifier = Modifier.weight(0.64f).fillMaxHeight(),
                 )
             }
@@ -231,6 +232,7 @@ private fun StorySection(snapshot: GameSnapshot, busy: Boolean, onChoice: (Strin
                     snapshot = snapshot,
                     busy = busy,
                     onChoice = onChoice,
+                    onNarrate = onNarrate,
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(0.58f),
@@ -245,6 +247,7 @@ private fun NarrativePanel(
     snapshot: GameSnapshot,
     busy: Boolean,
     onChoice: (String) -> Unit,
+    onNarrate: (String) -> Boolean,
     modifier: Modifier,
 ) {
     PixelPanel(modifier = modifier, title = snapshot.title) {
@@ -254,7 +257,14 @@ private fun NarrativePanel(
                 .testTag("narrative-scroll")
                 .verticalScroll(rememberScrollState()),
         ) {
-            Text(snapshot.body, color = PixelColors.Paper, style = MaterialTheme.typography.bodyLarge)
+            Text(
+                text = snapshot.body,
+                color = PixelColors.Paper,
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.clickable(role = Role.Button) { onNarrate(snapshot.body) },
+            )
+            Spacer(Modifier.height(10.dp))
+            PixelTextButton("READ ALOUD") { onNarrate(snapshot.body) }
             Spacer(Modifier.height(18.dp))
             Text("DECIDE", color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
             Spacer(Modifier.height(8.dp))
@@ -384,6 +394,7 @@ private fun SettingsPanel(
     snapshot: GameSnapshot,
     onSave: () -> Unit,
     onLoad: () -> Unit,
+    onStopNarration: () -> Unit,
     onClose: () -> Unit,
 ) {
     Column(
@@ -403,10 +414,12 @@ private fun SettingsPanel(
         }
         PixelPanel(title = "Narration") {
             Text(
-                "Tap-to-narrate, auto-read, voice, and text-delay controls are next in the native TTS slice.",
+                "Tap the narrative text or READ ALOUD to use the device's native text-to-speech engine.",
                 color = PixelColors.Muted,
                 style = MaterialTheme.typography.bodyMedium,
             )
+            Spacer(Modifier.height(8.dp))
+            PixelTextButton("STOP NARRATION", onStopNarration)
         }
         PixelPanel(title = "Session") {
             LabeledValue("Content", snapshot.contentId ?: "—")
@@ -420,6 +433,138 @@ private fun SettingsPanel(
                 color = PixelColors.Muted,
                 style = MaterialTheme.typography.bodyMedium,
             )
+        }
+    }
+}
+
+@Composable
+private fun QuestSection(snapshot: GameSnapshot) {
+    Column(
+        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        if (snapshot.quests.isEmpty()) {
+            PixelPanel(title = "Quests") {
+                Text(
+                    "No quest is active yet. Explore the current scene and the quest log will update from authoritative state.",
+                    color = PixelColors.Muted,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+            }
+        } else {
+            listOf("main", "side", "optional", "lore").forEach { category ->
+                val quests = snapshot.quests.filter { it.category == category }
+                if (quests.isNotEmpty()) {
+                    PixelPanel(title = category) {
+                        quests.forEach { quest ->
+                            Text(quest.title, color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
+                            if (quest.description.isNotBlank()) {
+                                Spacer(Modifier.height(4.dp))
+                                Text(quest.description, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
+                            }
+                            Spacer(Modifier.height(6.dp))
+                            Text(
+                                "STATUS ${quest.status.uppercase()} // ${quest.stage.replace('_', ' ')}",
+                                color = PixelColors.Cyan,
+                                style = MaterialTheme.typography.labelLarge,
+                            )
+                            quest.objectives.forEach { objective ->
+                                val stateMark = when (objective.status) {
+                                    "completed" -> "[x]"
+                                    "failed" -> "[!]"
+                                    "active" -> "[ ]"
+                                    else -> "[-]"
+                                }
+                                val optional = if (objective.required) "" else " (optional)"
+                                Text(
+                                    "$stateMark ${objective.title}$optional",
+                                    color = when (objective.status) {
+                                        "completed" -> PixelColors.Cyan
+                                        "failed" -> PixelColors.Danger
+                                        "locked" -> PixelColors.Disabled
+                                        else -> PixelColors.Paper
+                                    },
+                                    style = MaterialTheme.typography.bodyMedium,
+                                )
+                            }
+                            Spacer(Modifier.height(12.dp))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun MapSection(snapshot: GameSnapshot) {
+    val map = snapshot.worldMap
+    var selectedId by remember(map.currentLocation, map.nodes) { mutableStateOf(map.currentLocation) }
+    val selected = map.nodes.firstOrNull { it.id == selectedId }
+        ?: map.nodes.firstOrNull { it.current }
+        ?: map.nodes.firstOrNull()
+
+    Column(
+        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        PixelPanel(title = map.title) {
+            if (map.nodes.isEmpty()) {
+                Text(
+                    "No mapped location has been discovered yet.",
+                    color = PixelColors.Muted,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+            } else {
+                Canvas(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(220.dp)
+                        .background(PixelColors.Deep)
+                        .border(2.dp, PixelColors.Muted),
+                ) {
+                    fun point(id: String): Offset? {
+                        val node = map.nodes.firstOrNull { it.id == id } ?: return null
+                        return Offset(
+                            x = (node.x.coerceIn(0.0, 100.0) / 100.0 * size.width).toFloat(),
+                            y = (node.y.coerceIn(0.0, 100.0) / 100.0 * size.height).toFloat(),
+                        )
+                    }
+                    map.edges.forEach { edge ->
+                        val from = point(edge.from)
+                        val to = point(edge.to)
+                        if (from != null && to != null) drawLine(PixelColors.Muted, from, to, strokeWidth = 5f)
+                    }
+                    map.nodes.forEach { node ->
+                        val p = point(node.id) ?: return@forEach
+                        val nodeSize = if (node.current) 18f else 13f
+                        drawRect(
+                            color = if (node.current) PixelColors.Gold else PixelColors.Cyan,
+                            topLeft = Offset(p.x - nodeSize / 2f, p.y - nodeSize / 2f),
+                            size = androidx.compose.ui.geometry.Size(nodeSize, nodeSize),
+                        )
+                    }
+                }
+
+                Spacer(Modifier.height(10.dp))
+                Text("DISCOVERED LOCATIONS", color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
+                Spacer(Modifier.height(6.dp))
+                map.nodes.forEach { node ->
+                    PixelTextButton(
+                        label = if (node.current) "> ${node.title} [YOU]" else node.title,
+                        onClick = { selectedId = node.id },
+                    )
+                    Spacer(Modifier.height(6.dp))
+                }
+
+                if (selected != null) {
+                    Spacer(Modifier.height(8.dp))
+                    Text(selected.title, color = PixelColors.Cyan, style = MaterialTheme.typography.titleLarge)
+                    if (selected.description.isNotBlank()) {
+                        Text(selected.description, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+            }
         }
     }
 }
