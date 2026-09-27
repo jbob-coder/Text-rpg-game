@@ -413,5 +413,275 @@ class ExtendedStateTests(unittest.TestCase):
         )
 
 
+    def test_invalid_choice_time_rejects_before_effect_mutation(self):
+        scenes = {
+            "SCENE_A": {
+                "choices": [
+                    {
+                        "id": "CHOICE_BAD_TIME",
+                        "text": "Bad time",
+                        "time_cost_minutes": True,
+                        "outcomes": {
+                            "default": {
+                                "effects": [
+                                    {
+                                        "type": "set_flag",
+                                        "key": "SHOULD_NOT_MUTATE",
+                                        "value": True,
+                                    }
+                                ]
+                            }
+                        },
+                    }
+                ]
+            }
+        }
+        state = GameState(seed="s", scene_id="SCENE_A")
+        engine = RulesEngine(scenes)
+        with self.assertRaises(RuleError):
+            engine.choose(state, "CHOICE_BAD_TIME")
+        self.assertNotIn("SHOULD_NOT_MUTATE", state.flags)
+        self.assertEqual(state.time_minutes, 0)
+        self.assertEqual(state.turn, 0)
+
+    def test_choice_rejects_unknown_next_scene_before_effect_mutation(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "BAD_NEXT",
+                    "text": "Invalid destination",
+                    "outcomes": {
+                        "default": {
+                            "effects": [{
+                                "type": "set_flag",
+                                "key": "SHOULD_ROLLBACK",
+                                "value": True,
+                            }],
+                            "next_scene": "MISSING_SCENE",
+                        }
+                    },
+                }]
+            }
+        })
+        state = GameState(seed="x", scene_id="A")
+        with self.assertRaises(RuleError):
+            engine.choose(state, "BAD_NEXT")
+        self.assertNotIn("SHOULD_ROLLBACK", state.flags)
+        self.assertEqual(state.scene_id, "A")
+        self.assertEqual(state.turn, 0)
+
+    def test_choice_preflights_invalid_time_state_before_effects(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "WAIT_BAD",
+                    "text": "Wait",
+                    "time_cost_minutes": 5,
+                    "outcomes": {
+                        "default": {
+                            "effects": [{
+                                "type": "set_flag",
+                                "key": "SHOULD_NOT_APPLY",
+                                "value": True,
+                            }]
+                        }
+                    },
+                }]
+            }
+        })
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            player={
+                "conditions": {
+                    "COND_CORRUPT": {
+                        "duration_minutes": True,
+                        "severity": 1,
+                        "source": "test",
+                        "tags": [],
+                        "modifiers": {},
+                    }
+                }
+            },
+        )
+        with self.assertRaises(RuleError):
+            engine.choose(state, "WAIT_BAD")
+        self.assertNotIn("SHOULD_NOT_APPLY", state.flags)
+        self.assertEqual(state.time_minutes, 0)
+        self.assertEqual(state.turn, 0)
+
+    def test_choice_rolls_back_prior_effects_when_later_effect_fails(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "TRANSACTION",
+                    "text": "Try an atomic sequence",
+                    "outcomes": {
+                        "default": {
+                            "effects": [
+                                {
+                                    "type": "set_flag",
+                                    "key": "FIRST_EFFECT",
+                                    "value": True,
+                                },
+                                {
+                                    "type": "technique_practice",
+                                    "ability_id": "ABILITY_MISSING",
+                                    "technique_id": "TECHNIQUE_MISSING",
+                                    "minutes": 60,
+                                },
+                            ]
+                        }
+                    },
+                }]
+            }
+        })
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            player={"resources": {"focus": 20.0, "stamina": 20.0}},
+        )
+        with self.assertRaises(RuleError):
+            engine.choose(state, "TRANSACTION")
+        self.assertNotIn("FIRST_EFFECT", state.flags)
+        self.assertEqual(state.turn, 0)
+        self.assertEqual(state.time_minutes, 0)
+        self.assertEqual(state.history, [])
+
+    def test_rules_engine_power_effects_use_authored_definitions_transactionally(self):
+        powers = {
+            "ABILITY_TRACE": {
+                "family": "sensory",
+                "resource": {
+                    "path": "power_resources.trace",
+                    "maximum": 10,
+                    "starting": 10,
+                    "recovery_per_hour": 2,
+                },
+                "techniques": {
+                    "TECHNIQUE_PULSE": {
+                        "stage_min": "discovered",
+                        "costs": {"power_resources.trace": 3},
+                        "cooldown_minutes": 0,
+                    }
+                },
+            }
+        }
+        engine = RulesEngine(
+            {
+                "A": {
+                    "choices": [
+                        {
+                            "id": "DISCOVER_POWER",
+                            "text": "Discover it.",
+                            "outcomes": {
+                                "default": {
+                                    "effects": [
+                                        {
+                                            "type": "ability_discover",
+                                            "ability_id": "ABILITY_TRACE",
+                                        },
+                                        {
+                                            "type": "technique_discover",
+                                            "ability_id": "ABILITY_TRACE",
+                                            "technique_id": "TECHNIQUE_PULSE",
+                                        },
+                                    ]
+                                }
+                            },
+                        },
+                        {
+                            "id": "USE_POWER",
+                            "text": "Use it.",
+                            "outcomes": {
+                                "default": {
+                                    "effects": [
+                                        {
+                                            "type": "technique_use",
+                                            "ability_id": "ABILITY_TRACE",
+                                            "technique_id": "TECHNIQUE_PULSE",
+                                        }
+                                    ]
+                                }
+                            },
+                        },
+                        {
+                            "id": "RECOVER_POWER",
+                            "text": "Recover.",
+                            "outcomes": {
+                                "default": {
+                                    "effects": [
+                                        {
+                                            "type": "power_recover",
+                                            "ability_id": "ABILITY_TRACE",
+                                            "minutes": 30,
+                                        }
+                                    ]
+                                }
+                            },
+                        },
+                    ]
+                }
+            },
+            power_definitions=powers,
+        )
+        state = GameState(seed="x", scene_id="A")
+
+        engine.choose(state, "DISCOVER_POWER")
+        self.assertEqual(state.player["power_resources"]["trace"], 10.0)
+
+        engine.choose(state, "USE_POWER")
+        self.assertEqual(state.player["power_resources"]["trace"], 7.0)
+
+        engine.choose(state, "RECOVER_POWER")
+        self.assertEqual(state.player["power_resources"]["trace"], 8.0)
+        self.assertEqual(state.time_minutes, 30)
+
+    def test_power_effect_failure_rolls_back_prior_choice_effects(self):
+        powers = {
+            "ABILITY_TRACE": {
+                "resource": {
+                    "path": "power_resources.trace",
+                    "maximum": 10,
+                    "starting": 10,
+                    "recovery_per_hour": 2,
+                },
+                "techniques": {},
+            }
+        }
+        engine = RulesEngine(
+            {
+                "A": {
+                    "choices": [{
+                        "id": "BAD_POWER_SEQUENCE",
+                        "text": "Fail atomically.",
+                        "outcomes": {
+                            "default": {
+                                "effects": [
+                                    {
+                                        "type": "set_flag",
+                                        "key": "SHOULD_ROLL_BACK",
+                                        "value": True,
+                                    },
+                                    {
+                                        "type": "technique_use",
+                                        "ability_id": "ABILITY_TRACE",
+                                        "technique_id": "TECHNIQUE_MISSING",
+                                    },
+                                ]
+                            }
+                        },
+                    }]
+                }
+            },
+            power_definitions=powers,
+        )
+        state = GameState(seed="x", scene_id="A")
+        with self.assertRaises(RuleError):
+            engine.choose(state, "BAD_POWER_SEQUENCE")
+        self.assertNotIn("SHOULD_ROLL_BACK", state.flags)
+        self.assertEqual(state.turn, 0)
+        self.assertEqual(state.history, [])
+
 if __name__ == "__main__":
     unittest.main()
