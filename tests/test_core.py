@@ -413,5 +413,46 @@ class ExtendedStateTests(unittest.TestCase):
         )
 
 
+    def test_technique_discoverable_condition_tracks_runtime_requirements(self):
+        power_definitions = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_DIRECTIONAL": {
+                        "discovery_requirements": {
+                            "rank_min": 1,
+                            "knowledge": ["KNOW_TRACE_PATTERN"],
+                        }
+                    }
+                }
+            }
+        }
+        engine = RulesEngine(
+            {
+                "A": {
+                    "choices": [{
+                        "id": "DISCOVER_DIRECTIONAL",
+                        "text": "Study the directional pattern.",
+                        "requires": [{
+                            "type": "technique_discoverable",
+                            "ability_id": "ABILITY_TRACE",
+                            "technique_id": "TECHNIQUE_DIRECTIONAL",
+                        }],
+                        "outcomes": {"default": {"effects": []}},
+                    }]
+                }
+            },
+            power_definitions=power_definitions,
+        )
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            abilities={"ABILITY_TRACE": {"rank": 0, "mastery_xp": 0, "techniques": {}}},
+        )
+        self.assertFalse(engine.available_choices(state)[0]["enabled"])
+        state.abilities["ABILITY_TRACE"]["rank"] = 1
+        state.knowledge["KNOW_TRACE_PATTERN"] = {}
+        self.assertTrue(engine.available_choices(state)[0]["enabled"])
+
+
 if __name__ == "__main__":
     unittest.main()
