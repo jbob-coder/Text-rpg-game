@@ -5,6 +5,7 @@ from typing import Any, Dict, Mapping, MutableMapping
 from .core import GameState, RuleError
 from .progression import gain_ability_mastery, technique_available
 from .simulation import apply_condition
+from .stats import effective_player_value
 
 
 TECHNIQUE_STAGES = (
@@ -115,17 +116,27 @@ def _stage_at_least(actual: str, minimum: str) -> bool:
 def _extra_requirements_met(
     state: GameState,
     requirements: Mapping[str, Any],
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> list[str]:
     reasons: list[str] = []
 
-    attributes = state.player.get("attributes", {})
     for key, minimum in requirements.get("attributes", {}).items():
-        if float(attributes.get(key, 0)) < float(minimum):
+        actual = effective_player_value(
+            state,
+            f"attributes.{key}",
+            equipment_sets=equipment_sets,
+        )
+        if actual < float(minimum):
             reasons.append(f"attribute:{key}")
 
-    skills = state.player.get("skills", {})
     for key, minimum in requirements.get("skills", {}).items():
-        if float(skills.get(key, 0)) < float(minimum):
+        actual = effective_player_value(
+            state,
+            f"skills.{key}",
+            equipment_sets=equipment_sets,
+        )
+        if actual < float(minimum):
             reasons.append(f"skill:{key}")
 
     for key, expected in requirements.get("flags", {}).items():
@@ -361,6 +372,8 @@ def technique_use_status(
     ability_id: str,
     technique_id: str,
     definition: Mapping[str, Any],
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
     definition_errors = validate_technique_definition(definition)
     if definition_errors:
@@ -381,7 +394,13 @@ def technique_use_status(
     if not technique_available(state, ability_id, dict(requirements)):
         reasons.append("ability_requirements")
 
-    reasons.extend(_extra_requirements_met(state, requirements))
+    reasons.extend(
+        _extra_requirements_met(
+            state,
+            requirements,
+            equipment_sets=equipment_sets,
+        )
+    )
 
     minimum_stage = definition.get("stage_min", "discovered")
     if not _stage_at_least(technique.get("stage", "unknown"), minimum_stage):
@@ -432,8 +451,16 @@ def use_technique(
     ability_id: str,
     technique_id: str,
     definition: Mapping[str, Any],
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
-    status = technique_use_status(state, ability_id, technique_id, definition)
+    status = technique_use_status(
+        state,
+        ability_id,
+        technique_id,
+        definition,
+        equipment_sets=equipment_sets,
+    )
     if not status["available"]:
         raise RuleError(
             f"Technique cannot be used: {technique_id} ({', '.join(status['reasons'])})"
@@ -501,6 +528,8 @@ def ability_evolution_status(
     ability_id: str,
     evolution_id: str,
     definition: Mapping[str, Any],
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
     definition_errors = validate_evolution_definition(definition)
     if definition_errors:
@@ -535,7 +564,13 @@ def ability_evolution_status(
         if perk_id not in state.perks:
             reasons.append(f"perk:{perk_id}")
 
-    reasons.extend(_extra_requirements_met(state, requirements))
+    reasons.extend(
+        _extra_requirements_met(
+            state,
+            requirements,
+            equipment_sets=equipment_sets,
+        )
+    )
 
     techniques = ability.get("techniques", {})
     for required_id, stage_min in requirements.get("techniques", {}).items():
@@ -565,8 +600,16 @@ def evolve_ability(
     ability_id: str,
     evolution_id: str,
     definition: Mapping[str, Any],
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
-    status = ability_evolution_status(state, ability_id, evolution_id, definition)
+    status = ability_evolution_status(
+        state,
+        ability_id,
+        evolution_id,
+        definition,
+        equipment_sets=equipment_sets,
+    )
     if not status["available"]:
         raise RuleError(
             f"Ability cannot evolve: {evolution_id} ({', '.join(status['reasons'])})"
