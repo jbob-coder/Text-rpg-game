@@ -264,5 +264,56 @@ class ModifierPipelineTests(unittest.TestCase):
         self.assertTrue(engine.available_choices(state)[0]["enabled"])
 
 
+    def test_foundation_equipment_sets_keyword_remains_compatible(self):
+        state = GameState(
+            seed="compat",
+            scene_id="A",
+            player={
+                "attributes": {
+                    "might": 10,
+                    "agility": 0,
+                    "endurance": 0,
+                    "intellect": 0,
+                    "will": 0,
+                    "perception": 0,
+                    "presence": 0,
+                },
+                "skills": {},
+            },
+            equipment={
+                "body": {"item_id": "A", "set_id": "SET_COMPAT", "modifiers": {}},
+                "hands": {"item_id": "B", "set_id": "SET_COMPAT", "modifiers": {}},
+            },
+        )
+        sets = {
+            "SET_COMPAT": {
+                "thresholds": {
+                    "2": {"modifiers": {"attributes.might": 5}}
+                }
+            }
+        }
+        self.assertEqual(
+            effective_player_value(
+                state,
+                "attributes.might",
+                equipment_sets=sets,
+            ),
+            15.0,
+        )
+
+    def test_conflicting_set_context_aliases_are_rejected(self):
+        state = GameState(
+            seed="compat",
+            scene_id="A",
+            player={"attributes": {"might": 10}},
+        )
+        with self.assertRaises(ValueError):
+            effective_player_value(
+                state,
+                "attributes.might",
+                {"SET_A": {"thresholds": {}}},
+                equipment_sets={"SET_B": {"thresholds": {}}},
+            )
+
 if __name__ == "__main__":
     unittest.main()
