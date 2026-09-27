@@ -1,6 +1,6 @@
 import unittest
 
-from textrpg import GameState, RuleError
+from textrpg import GameState, RuleError, RulesEngine
 from textrpg.quests import (
     available_objectives,
     complete_objective,
@@ -163,6 +163,64 @@ class QuestGraphTests(unittest.TestCase):
         self.assertEqual(state.quests["QUEST_ARCHIVE"]["status"], "failed")
         with self.assertRaises(RuleError):
             available_objectives(state, "QUEST_ARCHIVE", definition)
+
+    def test_scene_effect_can_start_quest_graph(self):
+        definition = self.definition()
+        engine = RulesEngine(
+            {
+                "SCENE_A": {
+                    "choices": [{
+                        "id": "START_CASE",
+                        "text": "Take the case.",
+                        "outcomes": {
+                            "default": {
+                                "effects": [{
+                                    "type": "quest_start",
+                                    "quest_id": "QUEST_ARCHIVE",
+                                }]
+                            }
+                        },
+                    }]
+                }
+            },
+            quest_definitions={"QUEST_ARCHIVE": definition},
+        )
+        state = self.state()
+        engine.choose(state, "START_CASE")
+        self.assertEqual(state.quests["QUEST_ARCHIVE"]["status"], "active")
+        self.assertEqual(
+            state.quests["QUEST_ARCHIVE"]["stage"],
+            "STAGE_INVESTIGATE",
+        )
+
+    def test_scene_effect_can_complete_graph_objective_and_advance(self):
+        definition = self.definition()
+        state = self.state()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+        complete_objective(state, "QUEST_ARCHIVE", "OBJ_FIND_RECORD", definition)
+
+        engine = RulesEngine(
+            {
+                "SCENE_A": {
+                    "choices": [{
+                        "id": "INTERVIEW",
+                        "text": "Interview the witness.",
+                        "outcomes": {
+                            "default": {
+                                "effects": [{
+                                    "type": "quest_objective_complete",
+                                    "quest_id": "QUEST_ARCHIVE",
+                                    "objective_id": "OBJ_INTERVIEW_WITNESS",
+                                }]
+                            }
+                        },
+                    }]
+                }
+            },
+            quest_definitions={"QUEST_ARCHIVE": definition},
+        )
+        engine.choose(state, "INTERVIEW")
+        self.assertEqual(state.quests["QUEST_ARCHIVE"]["stage"], "STAGE_DECIDE")
 
 
 if __name__ == "__main__":
