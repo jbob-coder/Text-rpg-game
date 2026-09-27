@@ -2,7 +2,15 @@ import json
 import unittest
 from pathlib import Path
 
-from textrpg import RuleError, assert_valid_content_pack, assert_valid_scenes, validate_content_pack, validate_scenes
+from textrpg import (
+    RuleError,
+    assert_valid_content_pack,
+    assert_valid_scenes,
+    validate_content_pack,
+    validate_quest_definitions,
+    validate_registries,
+    validate_scenes,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -302,6 +310,49 @@ class ValidationTests(unittest.TestCase):
         }
         errors = validate_content_pack({}, {}, powers, registries)
         self.assertTrue(any("unknown condition" in error for error in errors))
+
+
+    def test_scene_validator_rejects_non_mapping_root_without_crash(self):
+        errors = validate_scenes([])
+        self.assertEqual(errors, ["scenes must be an object"])
+
+    def test_content_pack_does_not_silently_coerce_falsey_invalid_roots(self):
+        errors = validate_content_pack({}, [], [])
+        self.assertTrue(any("quest definitions must be an object" in e for e in errors))
+        self.assertTrue(any("power definitions must be an object" in e for e in errors))
+
+    def test_quest_validator_rejects_non_mapping_root_without_crash(self):
+        self.assertEqual(
+            validate_quest_definitions([]),
+            ["quest definitions must be an object"],
+        )
+
+    def test_registry_cross_reference_skips_malformed_scene_nodes_after_reporting_shape(self):
+        scenes = {
+            "SCENE_A": {
+                "choices": [
+                    "not-an-object",
+                    {
+                        "id": "CHOICE_BAD",
+                        "text": "Broken",
+                        "requires": [123],
+                        "outcomes": {"default": {"effects": [456]}},
+                    },
+                ]
+            }
+        }
+        registries = {
+            "knowledge": {},
+            "perks": {},
+            "items": {},
+            "conditions": {},
+        }
+
+        errors = validate_content_pack(scenes, {}, {}, registries)
+
+        self.assertTrue(any("must be an object" in e for e in errors))
+        self.assertTrue(any("condition[0] must be an object" in e for e in errors))
+        self.assertTrue(any("effect[0] must be an object" in e for e in errors))
 
 
 if __name__ == "__main__":
