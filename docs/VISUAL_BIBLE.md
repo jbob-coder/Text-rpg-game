@@ -1,8 +1,16 @@
-# Pixel Visual Bible — v0.1
+# Pixel Visual Bible — v0.2
+
+## Product rule — non-negotiable
+
+The shipped game presentation is **pixel style**. This applies to the player avatar, recurring characters, equipment layers, scene illustrations, locations, map presentation, icons, HUD ornaments, menus, transitions, and major narrative moments.
+
+The project owner has explicitly authorized creative additions and presentation improvements as long as they preserve the requested game features, remain consistent with the authoritative gameplay architecture, and keep the pixel-art direction intact.
+
+Pixel style is not a temporary prototype treatment. It is a product constraint.
 
 ## Goal
 
-The game can use portraits, scene illustrations, equipment callouts, and short UI animations while preserving one coherent pixel-art language. Generated or hand-made assets must follow the same specification before being accepted.
+The game can use portraits, scene illustrations, equipment callouts, map visuals, character layers, and short UI animations while preserving one coherent pixel-art language. Generated or hand-made assets must follow the same specification before being accepted.
 
 ## Baseline style
 
@@ -12,6 +20,8 @@ The game can use portraits, scene illustrations, equipment callouts, and short U
 - No photorealistic rendering mixed into the game UI.
 - Avoid inconsistent pseudo-pixel art where a smooth painting is merely overlaid with a pixel filter.
 - Lighting direction and scale must be documented per location set.
+- Nearest-neighbor or otherwise crisp integer-aligned presentation should be preferred when scaling pixel assets.
+- Smooth-vector UI may be used only as invisible layout/interaction infrastructure; the visible presentation must conform to the pixel language.
 
 ## Character identity sheet
 
@@ -31,6 +41,27 @@ Every recurring character must have one canonical character spec before scene ar
 - approved poses
 
 A generated image is not automatically canon. It becomes canon only after it matches the identity sheet and is explicitly approved.
+
+## Player-avatar rule
+
+The player is not represented only by text or a generic icon. The primary gameplay experience must support a persistent visible player character/avatar.
+
+The player visual system should be designed as a layered paper-doll/sprite composition rather than a sequence of unrelated flattened images. At minimum, the architecture must be able to represent:
+
+- base body / silhouette;
+- hair and identity features;
+- head equipment;
+- chest equipment;
+- hands/arm equipment where visible;
+- leg equipment;
+- footwear;
+- main-hand item;
+- off-hand item;
+- accessory overlays when they materially affect appearance;
+- injury/status overlays;
+- pose/state variants.
+
+Equipment state remains authoritative in gameplay systems. Visual layers reflect that state; they do not independently decide what is equipped.
 
 ## Machine-readable identity contract
 
@@ -64,9 +95,51 @@ For each important scene/location:
 - alternate state images only when the state materially changes what the player should understand
 - environmental overlay tags for weather, alarms, damage, darkness, or faction control
 
+For the player/world UI:
+
+- pixel-style map markers with stable semantic roles;
+- location tiles/cards with consistent border, icon, and state conventions;
+- equipment-slot icons that match the same pixel grid/palette rules;
+- quest-state icons for main, side, optional, and lore/world content;
+- status/resource icons sized for mobile readability.
+
+## Map and world presentation
+
+The interactive map should feel like part of the game world, not like a generic mobile navigation screen.
+
+Initial direction:
+
+- 2D pixel-art city/location map before any heavier 3D implementation;
+- clear selectable locations and travel routes;
+- discovered/undiscovered states;
+- quest/event indicators;
+- player-position marker;
+- locked/inaccessible locations with readable reasons when appropriate;
+- world-state changes reflected visually where practical.
+
+Movement/navigation commands update authoritative world state. The map renders that state and sends intent; it does not become a second world-state owner.
+
+## UI pixel-language rule
+
+Jetpack Compose or another UI toolkit may handle layout, accessibility, text rendering, touch targets, scrolling, safe areas, and navigation. The visible game shell must still read as a coherent pixel RPG.
+
+Use:
+
+- crisp pixel borders and panels;
+- consistent corner geometry;
+- pixel icons/sprites;
+- restrained shadows/lighting consistent with the art direction;
+- large readable narrative typography;
+- generous mobile touch targets even when the visible button art is pixel-styled;
+- clear separation between gameplay HUD and deeper panels such as Stats, Equipment, Inventory, Quests, Map, Saves, Settings, and Developer tools.
+
+Do not sacrifice accessibility or text readability merely to imitate a low-resolution console interface.
+
 ## Consistency rule
 
 Do not regenerate a character from a prose prompt alone after the first approved design. Future generation prompts must reference the canonical visual spec and approved reference assets.
+
+Do not introduce isolated visual systems that ignore this bible. New art families should extend the existing visual language rather than reset it.
 
 ## Animation rule
 
@@ -78,18 +151,31 @@ Animation should communicate game state, not exist only as decoration. Examples:
 - relationship shift: subtle portrait/emote change where appropriate
 - injury: persistent status marker and visual overlay
 - major evolution: bespoke sequence reserved for true milestone changes
+- equipment change: concise layer transition or slot feedback rather than a full-screen interruption
+- map travel: short readable transition that preserves location context
 
 ## Scene composition
 
-Text remains primary. Art supports comprehension and atmosphere.
+Text remains primary, but the player character and world should remain visually present. Art supports comprehension, atmosphere, identity, and spatial context.
 
 Recommended mobile composition:
 
-1. compact scene header
-2. scene illustration/portrait region
-3. readable narrative text
-4. optional state chips (time, location, party)
-5. choice list
-6. expandable character/stats/inventory panels
+1. compact scene/location/time header
+2. scene/map + visible player-avatar region
+3. readable narrative text with tap-to-narrate affordance
+4. optional state chips (time, location, party, urgent conditions)
+5. choice list/cards
+6. bottom or contextual navigation to Character, Inventory, Quests, Map, and More/Settings
 
 Avoid permanently displaying every statistic. Detailed sheets should be one action away so the narrative screen stays readable.
+
+## Acceptance gate for visual additions
+
+A visual addition is acceptable only when it:
+
+1. preserves pixel style at the actual mobile presentation size;
+2. uses the canonical character/location identity data where applicable;
+3. does not contradict authoritative gameplay/equipment/world state;
+4. remains readable and touch-usable on Android;
+5. has a repeatable asset/source path rather than existing only as an ephemeral chat image;
+6. can be replaced or evolved without rewriting gameplay rules.
