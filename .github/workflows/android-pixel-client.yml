@@ -49,5 +49,8 @@ jobs:
       - name: Run Android unit tests
         run: gradle -p android testDebugUnitTest --stacktrace
 
+      - name: Compile Compose instrumentation tests
+        run: gradle -p android :app:assembleDebugAndroidTest --stacktrace
+
       - name: Assemble debug APK
         run: gradle -p android :app:assembleDebug --stacktrace
