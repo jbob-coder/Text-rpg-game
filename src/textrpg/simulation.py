@@ -78,27 +78,55 @@ def apply_condition(
 
 
 def advance_time(state: GameState, minutes: int) -> list[str]:
+    """Advance world time atomically after validating all timed conditions."""
     minutes = _minutes(minutes, "Time advance minutes", minimum=0)
-    state.time_minutes += minutes
-    expired: list[str] = []
-    conditions = state.player.setdefault("conditions", {})
-    if not isinstance(conditions, dict):
+
+    existing_conditions = state.player.get("conditions")
+    if existing_conditions is None:
+        conditions: dict[str, Any] = {}
+    elif not isinstance(existing_conditions, dict):
         raise RuleError("player.conditions must be an object")
-    for condition_id, record in list(conditions.items()):
+    else:
+        conditions = existing_conditions
+
+    duration_updates: Dict[str, int] = {}
+    expired: list[str] = []
+    for condition_id, record in conditions.items():
         if not isinstance(record, Mapping):
             raise RuleError(f"Condition record must be an object: {condition_id}")
         duration = record.get("duration_minutes")
         if duration is None:
             continue
-        duration = max(
+        next_duration = max(
             0,
-            _minutes(duration, f"Condition duration_minutes {condition_id}", minimum=0)
+            _minutes(
+                duration,
+                f"Condition duration_minutes {condition_id}",
+                minimum=0,
+            )
             - minutes,
         )
-        record["duration_minutes"] = duration
-        if duration == 0:
+        if next_duration == 0:
             expired.append(condition_id)
-            del conditions[condition_id]
+        else:
+            duration_updates[condition_id] = next_duration
+
+    # Validation is complete. Commit time and condition-duration changes together.
+    state.time_minutes += minutes
+    if existing_conditions is None:
+        state.player["conditions"] = conditions
+
+    for condition_id, next_duration in duration_updates.items():
+        record = conditions[condition_id]
+        if not isinstance(record, dict):
+            # The Mapping check above deliberately allows read-only mappings in
+            # corrupted state; mutation requires a mutable dict.
+            raise RuleError(f"Condition record must be mutable: {condition_id}")
+        record["duration_minutes"] = next_duration
+
+    for condition_id in expired:
+        del conditions[condition_id]
+
     return expired
 
 
