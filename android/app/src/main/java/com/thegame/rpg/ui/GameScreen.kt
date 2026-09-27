@@ -290,14 +290,15 @@ private fun ResourcePanel(snapshot: GameSnapshot) {
 @Composable
 private fun CharacterSection(snapshot: GameSnapshot) {
     BoxWithConstraints(Modifier.fillMaxSize()) {
+        val wideCharacterPanel = maxWidth > 700.dp
         Row(
             modifier = Modifier
                 .fillMaxSize()
                 .horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            PlayerAvatarPanel(snapshot.identity, Modifier.width(if (maxWidth > 700.dp) 320.dp else 260.dp))
-            PixelPanel(Modifier.width(if (maxWidth > 700.dp) 420.dp else 320.dp), "Character") {
+            PlayerAvatarPanel(snapshot.identity, Modifier.width(if (wideCharacterPanel) 320.dp else 260.dp))
+            PixelPanel(Modifier.width(if (wideCharacterPanel) 420.dp else 320.dp), "Character") {
                 LabeledValue("Name", snapshot.identity.name ?: "Unassigned")
                 LabeledValue("Level", snapshot.identity.level?.toString() ?: "—")
                 LabeledValue("Path", snapshot.identity.path ?: "—")
