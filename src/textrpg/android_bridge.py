@@ -61,6 +61,10 @@ class AndroidGameSession:
         )
 
     def _location_for(self, state: GameState) -> str:
+        override = state.flags.get("android.map_location_override")
+        if isinstance(override, str) and override:
+            return override
+
         scene = self.engine.get_scene(state)
         authored = scene.get("location_id")
         if isinstance(authored, str) and authored:
@@ -314,6 +318,7 @@ class AndroidGameSession:
             )
         try:
             self.engine.choose(self.state, choice_id)
+            self.state.flags.pop("android.map_location_override", None)
             return self.scene_view()
         except AndroidBridgeError:
             raise
@@ -324,6 +329,105 @@ class AndroidGameSession:
                 technical_detail=str(exc),
             ) from exc
 
+
+
+    def travel(self, location_id: str) -> Dict[str, Any]:
+        """Move between discovered adjacent map nodes without bypassing story rules."""
+        if not isinstance(location_id, str) or not location_id:
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "Choose a valid destination.",
+            )
+
+        authored = self.content.raw.get("world_map", {})
+        if not isinstance(authored, Mapping):
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "Travel is not available in this area.",
+            )
+        raw_nodes = authored.get("nodes", {})
+        raw_edges = authored.get("edges", [])
+        if not isinstance(raw_nodes, Mapping) or not isinstance(raw_edges, list):
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "Travel data is unavailable.",
+            )
+        if location_id not in raw_nodes:
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "That destination does not exist.",
+            )
+
+        current = self._location_for(self.state)
+        if current == location_id:
+            return self.scene_view()
+
+        visible_map = self._map_view_for(self.state)
+        discovered = {
+            node["id"] for node in visible_map["nodes"]
+            if isinstance(node, Mapping) and isinstance(node.get("id"), str)
+        }
+        if location_id not in discovered:
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "That destination has not been discovered.",
+            )
+
+        connected = False
+        travel_minutes = 5
+        for edge in raw_edges:
+            if not isinstance(edge, Mapping):
+                continue
+            start = edge.get("from")
+            end = edge.get("to")
+            if {start, end} == {current, location_id}:
+                connected = True
+                authored_minutes = edge.get("travel_minutes", 5)
+                if (
+                    isinstance(authored_minutes, bool)
+                    or not isinstance(authored_minutes, int)
+                    or authored_minutes < 0
+                ):
+                    raise AndroidBridgeError(
+                        "TRAVEL_ERROR",
+                        "Travel time data is invalid.",
+                    )
+                travel_minutes = authored_minutes
+                break
+
+        if not connected:
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "No discovered route connects those locations.",
+            )
+
+        before = deepcopy(self.state.snapshot())
+        try:
+            from .simulation import advance_time
+
+            advance_time(self.state, travel_minutes)
+            self.state.flags["android.map_location_override"] = location_id
+            self.state.history.append(
+                {
+                    "type": "map_travel",
+                    "from": current,
+                    "to": location_id,
+                    "travel_minutes": travel_minutes,
+                    "turn": self.state.turn,
+                    "time_minutes": self.state.time_minutes,
+                }
+            )
+            return self.scene_view()
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "Travel could not be completed.",
+                technical_detail=str(exc),
+            ) from exc
 
     def apply_cheat(self, code: str) -> Dict[str, Any]:
         """Apply an explicit developer cheat without exposing generic state mutation."""

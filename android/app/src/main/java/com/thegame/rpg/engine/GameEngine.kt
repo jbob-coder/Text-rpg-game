@@ -160,6 +160,8 @@ interface GameEngine {
     suspend fun save(): Result<Unit>
     suspend fun load(): Result<GameSnapshot>
     suspend fun applyCheat(code: String): Result<GameSnapshot>
+    suspend fun travel(locationId: String): Result<GameSnapshot> =
+        Result.failure(UnsupportedOperationException("travel is not implemented"))
 }
 
 internal object BridgeSnapshotMapper {

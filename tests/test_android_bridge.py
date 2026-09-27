@@ -72,6 +72,30 @@ class AndroidBridgeTests(unittest.TestCase):
         self.assertNotIn("TRACE_CHAMBER", node_ids)
 
 
+
+    def test_map_travel_requires_discovered_adjacent_route_and_advances_time(self):
+        session = create_session(CONTENT)
+        session.choose("TAKE_DEAD_RELAY")
+        before_scene = session.state.scene_id
+        before_time = session.state.time_minutes
+
+        view = session.travel("PLATFORM_NINE")
+
+        self.assertEqual(before_scene, session.state.scene_id)
+        self.assertEqual(before_time + 5, session.state.time_minutes)
+        self.assertEqual("PLATFORM_NINE", view["map"]["current_location"])
+        self.assertEqual("map_travel", session.state.history[-1]["type"])
+
+    def test_map_travel_rejects_undiscovered_destination_without_mutation(self):
+        session = create_session(CONTENT)
+        before = deepcopy(session.state.snapshot())
+
+        with self.assertRaises(AndroidBridgeError) as caught:
+            session.travel("TRACE_CHAMBER")
+
+        self.assertEqual("TRAVEL_ERROR", caught.exception.code)
+        self.assertEqual(before, session.state.snapshot())
+
     def test_inventory_projection_exposes_items_and_slots_without_modifiers(self):
         session = create_session(CONTENT)
 

@@ -57,10 +57,11 @@ fun TheGameRoot(
     onNarrate: (String) -> Boolean,
     onStopNarration: () -> Unit,
     onCheat: (String) -> Unit,
+    onTravel: (String) -> Unit,
 ) {
     val snapshot = uiState.snapshot
     if (uiState.bootState == BootState.Ready && snapshot != null) {
-        PixelGameShell(snapshot, uiState.busy, onChoice, onSave, onLoad, onNarrate, onStopNarration, onCheat)
+        PixelGameShell(snapshot, uiState.busy, onChoice, onSave, onLoad, onNarrate, onStopNarration, onCheat, onTravel)
     } else {
         PixelBootScreen(uiState.bootState)
     }
@@ -132,6 +133,7 @@ private fun PixelGameShell(
     onNarrate: (String) -> Boolean,
     onStopNarration: () -> Unit,
     onCheat: (String) -> Unit,
+    onTravel: (String) -> Unit,
 ) {
     var section by remember { mutableStateOf(GameSection.STORY) }
     var settingsOpen by remember { mutableStateOf(false) }
@@ -154,7 +156,7 @@ private fun PixelGameShell(
                     GameSection.STATS -> StatsSection(snapshot)
                     GameSection.INVENTORY -> InventorySection(snapshot)
                     GameSection.QUESTS -> QuestSection(snapshot)
-                    GameSection.MAP -> MapSection(snapshot)
+                    GameSection.MAP -> MapSection(snapshot, busy, onTravel)
                     GameSection.MORE -> MorePanel(
                         onCharacter = { section = GameSection.CHARACTER },
                         onSettings = { settingsOpen = true },
@@ -552,7 +554,11 @@ private fun QuestSection(snapshot: GameSnapshot) {
 }
 
 @Composable
-private fun MapSection(snapshot: GameSnapshot) {
+private fun MapSection(
+    snapshot: GameSnapshot,
+    busy: Boolean,
+    onTravel: (String) -> Unit,
+) {
     val map = snapshot.worldMap
     var selectedId by remember(map.currentLocation, map.nodes) { mutableStateOf(map.currentLocation) }
     val selected = map.nodes.firstOrNull { it.id == selectedId }
@@ -617,6 +623,15 @@ private fun MapSection(snapshot: GameSnapshot) {
                     Text(selected.title, color = PixelColors.Cyan, style = MaterialTheme.typography.titleLarge)
                     if (selected.description.isNotBlank()) {
                         Text(selected.description, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
+                    }
+                    if (!selected.current) {
+                        Spacer(Modifier.height(8.dp))
+                        PixelTextButton(
+                            label = if (busy) "TRAVELING..." else "TRAVEL HERE",
+                            onClick = {
+                                if (!busy) onTravel(selected.id)
+                            },
+                        )
                     }
                 }
             }

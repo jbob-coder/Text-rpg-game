@@ -68,6 +68,15 @@ class PythonGameEngine internal constructor(
             }
         }
 
+    override suspend fun travel(locationId: String): Result<GameSnapshot> =
+        withContext(Dispatchers.IO) {
+            try {
+                Result.success(BridgeSnapshotMapper.fromMap(gateway.travel(locationId)))
+            } catch (failure: Throwable) {
+                Result.failure(classifyFailure(failure))
+            }
+        }
+
     companion object {
         private val knownCodes = listOf(
             "CONTENT_ERROR",
@@ -78,6 +87,7 @@ class PythonGameEngine internal constructor(
             "SAVE_PATH_REQUIRED",
             "CHOICE_ERROR",
             "CHEAT_ERROR",
+            "TRAVEL_ERROR",
             "ENGINE_ERROR",
         )
 
@@ -102,6 +112,7 @@ class PythonGameEngine internal constructor(
                 "SAVE_ERROR", "SAVE_PATH_REQUIRED" -> "The game could not be saved."
                 "CHOICE_ERROR" -> "That choice is not available."
                 "CHEAT_ERROR" -> "That cheat code could not be applied."
+                "TRAVEL_ERROR" -> "Travel could not be completed."
                 else -> "The game engine could not start."
             }
             return EngineStartException(
@@ -120,6 +131,7 @@ internal interface PythonSessionGateway {
     fun save()
     fun load(): Map<String, Any?>
     fun applyCheat(code: String): Map<String, Any?>
+    fun travel(locationId: String): Map<String, Any?>
 }
 
 private class ChaquopySessionGateway : PythonSessionGateway {
@@ -198,6 +210,18 @@ private class ChaquopySessionGateway : PythonSessionGateway {
                 failure = failure,
                 fallbackCode = "CHEAT_ERROR",
                 fallbackMessage = "That cheat code could not be applied.",
+            )
+        }
+    }
+
+    override fun travel(locationId: String): Map<String, Any?> {
+        try {
+            return viewToMap(requireSession().callAttr("travel", locationId))
+        } catch (failure: Throwable) {
+            throw classifyPythonBoundaryFailure(
+                failure = failure,
+                fallbackCode = "TRAVEL_ERROR",
+                fallbackMessage = "Travel could not be completed.",
             )
         }
     }
@@ -310,6 +334,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
             "SAVE_PATH_REQUIRED",
             "CHOICE_ERROR",
             "CHEAT_ERROR",
+            "TRAVEL_ERROR",
         ).firstOrNull { message.contains(it) }
 
         val code = known ?: fallbackCode
@@ -320,6 +345,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
             "SAVE_ERROR", "SAVE_PATH_REQUIRED" -> "The game could not be saved."
             "CHOICE_ERROR" -> "That choice is not available."
             "CHEAT_ERROR" -> "That cheat code could not be applied."
+            "TRAVEL_ERROR" -> "Travel could not be completed."
             else -> fallbackMessage
         }
         return GatewayFailure(code, public, detail, failure)
