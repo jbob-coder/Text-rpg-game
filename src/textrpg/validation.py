@@ -4,6 +4,7 @@ import re
 from typing import Any, Dict, Iterable, List, Mapping, Set
 
 from .core import RuleError
+from .modifiers import validate_modifier_mapping, validate_modifier_path
 
 
 STABLE_ID = re.compile(r"^[A-Z][A-Z0-9_]*$")
@@ -53,18 +54,47 @@ def _validate_id(value: Any, label: str, errors: List[str]) -> None:
         errors.append(f"{label} must be a stable uppercase ID: {value!r}")
 
 
-def _walk_conditions(conditions: Iterable[Mapping[str, Any]], location: str, errors: List[str]) -> None:
+def _walk_conditions(conditions: Any, location: str, errors: List[str]) -> None:
+    if not isinstance(conditions, list):
+        errors.append(f"{location} must be a list")
+        return
     for index, condition in enumerate(conditions):
+        item_location = f"{location}.condition[{index}]"
+        if not isinstance(condition, Mapping):
+            errors.append(f"{item_location} must be an object")
+            continue
         kind = condition.get("type")
         if kind not in SUPPORTED_CONDITIONS:
-            errors.append(f"{location}.condition[{index}] has unsupported type {kind!r}")
+            errors.append(f"{item_location} has unsupported type {kind!r}")
+            continue
+        if kind in {"stat_min", "stat_max"}:
+            try:
+                validate_modifier_path(condition.get("path"))
+            except ValueError as exc:
+                errors.append(f"{item_location} has invalid stat path: {exc}")
 
 
-def _walk_effects(effects: Iterable[Mapping[str, Any]], location: str, errors: List[str]) -> None:
+def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
+    if not isinstance(effects, list):
+        errors.append(f"{location}.effects must be a list")
+        return
     for index, effect in enumerate(effects):
+        item_location = f"{location}.effect[{index}]"
+        if not isinstance(effect, Mapping):
+            errors.append(f"{item_location} must be an object")
+            continue
         kind = effect.get("type")
         if kind not in SUPPORTED_EFFECTS:
-            errors.append(f"{location}.effect[{index}] has unsupported type {kind!r}")
+            errors.append(f"{item_location} has unsupported type {kind!r}")
+            continue
+        if kind == "add_perk":
+            try:
+                validate_modifier_mapping(
+                    effect.get("modifiers", {}),
+                    source=f"{item_location}.add_perk",
+                )
+            except ValueError as exc:
+                errors.append(f"{item_location} has invalid modifiers: {exc}")
 
 
 def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
@@ -75,6 +105,9 @@ def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
 
     for scene_id, scene in scenes.items():
         _validate_id(scene_id, "scene_id", errors)
+        if not isinstance(scene, Mapping):
+            errors.append(f"{scene_id} must be an object")
+            continue
         choices = scene.get("choices", [])
         if not isinstance(choices, list):
             errors.append(f"{scene_id}.choices must be a list")
@@ -82,6 +115,9 @@ def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
 
         for index, choice in enumerate(choices):
             location = f"{scene_id}.choices[{index}]"
+            if not isinstance(choice, Mapping):
+                errors.append(f"{location} must be an object")
+                continue
             choice_id = choice.get("id")
             _validate_id(choice_id, f"{location}.id", errors)
             if isinstance(choice_id, str):
@@ -100,8 +136,27 @@ def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
                 errors.append(f"{location}.outcomes must be a non-empty object")
                 continue
 
-            if "check" in choice and "stat" not in choice["check"]:
-                errors.append(f"{location}.check must define stat")
+            if "check" in choice:
+                check = choice["check"]
+                if not isinstance(check, Mapping):
+                    errors.append(f"{location}.check must be an object")
+                elif "stat" not in check:
+                    errors.append(f"{location}.check must define stat")
+                else:
+                    try:
+                        validate_modifier_path(check.get("stat"))
+                    except ValueError as exc:
+                        errors.append(f"{location}.check has invalid stat path: {exc}")
+                    skill_path = check.get("skill")
+                    if skill_path is not None:
+                        try:
+                            validate_modifier_path(skill_path)
+                            if not str(skill_path).startswith("skills."):
+                                errors.append(
+                                    f"{location}.check skill must use skills.<id>: {skill_path!r}"
+                                )
+                        except ValueError as exc:
+                            errors.append(f"{location}.check has invalid skill path: {exc}")
 
             for outcome_name, outcome in outcomes.items():
                 outcome_location = f"{location}.outcomes.{outcome_name}"
@@ -138,11 +193,26 @@ def validate_content_pack(
     errors.extend(validate_quest_definitions(quest_definitions))
 
     for scene_id, scene in scenes.items():
-        for choice_index, choice in enumerate(scene.get("choices", [])):
-            for outcome_name, outcome in choice.get("outcomes", {}).items():
+        if not isinstance(scene, Mapping):
+            continue
+        choices = scene.get("choices", [])
+        if not isinstance(choices, list):
+            continue
+        for choice_index, choice in enumerate(choices):
+            if not isinstance(choice, Mapping):
+                continue
+            outcomes = choice.get("outcomes", {})
+            if not isinstance(outcomes, Mapping):
+                continue
+            for outcome_name, outcome in outcomes.items():
                 if not isinstance(outcome, Mapping):
                     continue
-                for effect_index, effect in enumerate(outcome.get("effects", [])):
+                effects = outcome.get("effects", [])
+                if not isinstance(effects, list):
+                    continue
+                for effect_index, effect in enumerate(effects):
+                    if not isinstance(effect, Mapping):
+                        continue
                     effect_type = effect.get("type")
                     if effect_type not in {
                         "quest_stage",
