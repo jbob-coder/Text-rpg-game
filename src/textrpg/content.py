@@ -17,6 +17,7 @@ class LoadedContentPack:
     title: str
     canon_status: str
     raw: Dict[str, Any]
+    registries: Dict[str, Any]
     state: GameState
     engine: RulesEngine
 
@@ -42,6 +43,7 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
     characters = data.get("characters", {})
     equipment_sets = data.get("equipment_sets", {})
     powers = data.get("powers", {})
+    registries = data.get("registries")
 
     if not isinstance(scenes, Mapping) or not scenes:
         raise RuleError("Content pack requires non-empty scenes")
@@ -53,8 +55,10 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
         raise RuleError("Content pack equipment_sets must be an object")
     if not isinstance(powers, Mapping):
         raise RuleError("Content pack powers must be an object")
+    if registries is not None and not isinstance(registries, Mapping):
+        raise RuleError("Content pack registries must be an object")
 
-    assert_valid_content_pack(scenes, quests, powers)
+    assert_valid_content_pack(scenes, quests, powers, registries)
     assert_valid_character_visuals(characters)
 
     initial = data.get("initial_state")
@@ -78,6 +82,27 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
     if stat_errors:
         raise RuleError("Invalid initial player stats:\n- " + "\n- ".join(stat_errors))
 
+    if registries is not None:
+        known = {
+            category: set(registries.get(category, {}).keys())
+            for category in ("knowledge", "perks", "items", "conditions")
+            if isinstance(registries.get(category, {}), Mapping)
+        }
+        initial_refs = {
+            "knowledge": state.knowledge.keys(),
+            "perks": state.perks.keys(),
+            "items": state.inventory.keys(),
+            "conditions": state.player.get("conditions", {}).keys()
+            if isinstance(state.player.get("conditions", {}), Mapping)
+            else (),
+        }
+        for category, ids in initial_refs.items():
+            for stable_id in ids:
+                if stable_id not in known.get(category, set()):
+                    raise RuleError(
+                        f"initial_state references unknown {category} ID: {stable_id}"
+                    )
+
     engine = RulesEngine(
         scenes,
         equipment_sets=equipment_sets,
@@ -90,6 +115,7 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
         title=title,
         canon_status=canon_status,
         raw=dict(data),
+        registries=dict(registries or {}),
         state=state,
         engine=engine,
     )
