@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from math import isfinite
 from typing import Any, Dict, Iterable, List, Mapping, Set
 
 from .core import RuleError
@@ -46,6 +47,8 @@ SUPPORTED_EFFECTS: Set[str] = {
     "ability_discover",
     "technique_discover",
     "technique_practice",
+    "technique_use",
+    "power_recover",
 }
 
 
@@ -78,15 +81,77 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
     if not isinstance(effects, list):
         errors.append(f"{location}.effects must be a list")
         return
+
+    npc_effects = {
+        "relationship",
+        "npc_learn",
+        "npc_goal_create",
+        "npc_goal_progress",
+        "npc_story_transition",
+        "personality",
+        "party_add",
+        "party_remove",
+    }
+    power_effects = {
+        "ability_discover",
+        "technique_discover",
+        "technique_practice",
+        "technique_use",
+        "power_recover",
+    }
+
     for index, effect in enumerate(effects):
         item_location = f"{location}.effect[{index}]"
         if not isinstance(effect, Mapping):
             errors.append(f"{item_location} must be an object")
             continue
+
         kind = effect.get("type")
         if kind not in SUPPORTED_EFFECTS:
             errors.append(f"{item_location} has unsupported type {kind!r}")
             continue
+
+        if kind in npc_effects:
+            _validate_id(effect.get("npc"), f"{item_location}.npc", errors)
+
+        if kind in power_effects:
+            _validate_id(
+                effect.get("ability_id"),
+                f"{item_location}.ability_id",
+                errors,
+            )
+
+        if kind in {"technique_discover", "technique_practice", "technique_use"}:
+            _validate_id(
+                effect.get("technique_id"),
+                f"{item_location}.technique_id",
+                errors,
+            )
+
+        if kind in {"technique_practice", "power_recover"}:
+            minutes = effect.get("minutes")
+            minimum = 30 if kind == "technique_practice" else 1
+            if (
+                isinstance(minutes, bool)
+                or not isinstance(minutes, int)
+                or minutes < minimum
+            ):
+                errors.append(
+                    f"{item_location}.minutes must be an integer >= {minimum}"
+                )
+
+        if kind == "power_recover" and "quality" in effect:
+            quality = effect.get("quality")
+            if (
+                isinstance(quality, bool)
+                or not isinstance(quality, (int, float))
+                or not isfinite(float(quality))
+                or float(quality) < 0
+            ):
+                errors.append(
+                    f"{item_location}.quality must be finite non-negative numeric"
+                )
+
         if kind == "add_perk":
             try:
                 validate_modifier_mapping(
@@ -95,7 +160,6 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
                 )
             except ValueError as exc:
                 errors.append(f"{item_location} has invalid modifiers: {exc}")
-
 
 def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
     """Statically validate authored scene data before it reaches a playthrough."""
@@ -194,13 +258,20 @@ def assert_valid_scenes(scenes: Mapping[str, Dict[str, Any]]) -> None:
 def validate_content_pack(
     scenes: Mapping[str, Dict[str, Any]],
     quests: Mapping[str, Mapping[str, Any]] | None = None,
+    powers: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> List[str]:
-    """Validate scenes plus authored quest definitions and their cross-references."""
+    """Validate scenes, quest/power definitions, and authored cross-references."""
+    from .powers import validate_power_definitions
     from .quests import validate_quest_definitions
 
     quest_definitions = quests or {}
+    power_definitions = powers or {}
     errors = list(validate_scenes(scenes))
     errors.extend(validate_quest_definitions(quest_definitions))
+    errors.extend(validate_power_definitions(power_definitions))
+
+    if not isinstance(scenes, Mapping):
+        return errors
 
     for scene_id, scene in scenes.items():
         if not isinstance(scene, Mapping):
@@ -224,53 +295,82 @@ def validate_content_pack(
                     if not isinstance(effect, Mapping):
                         continue
                     effect_type = effect.get("type")
-                    if effect_type not in {
+                    location = (
+                        f"{scene_id}.choices[{choice_index}]."
+                        f"outcomes.{outcome_name}.effect[{effect_index}]"
+                    )
+
+                    if effect_type in {
                         "quest_stage",
                         "quest_start",
                         "quest_objective_complete",
                         "quest_objective_fail",
                         "quest_fail",
                     }:
-                        continue
-
-                    location = (
-                        f"{scene_id}.choices[{choice_index}]."
-                        f"outcomes.{outcome_name}.effect[{effect_index}]"
-                    )
-                    quest_id = effect.get("quest_id")
-                    definition = quest_definitions.get(quest_id)
-
-                    if definition is None:
-                        errors.append(
-                            f"{location} references unknown quest {quest_id!r}"
-                        )
-                        continue
-
-                    stages = definition.get("stages", {})
-
-                    if effect_type == "quest_stage":
-                        stage_id = effect.get("stage")
-                        if stage_id not in stages:
+                        quest_id = effect.get("quest_id")
+                        definition = quest_definitions.get(quest_id)
+                        if definition is None:
                             errors.append(
-                                f"{location} references unknown stage "
-                                f"{stage_id!r} for quest {quest_id!r}"
+                                f"{location} references unknown quest {quest_id!r}"
                             )
+                        elif isinstance(definition, Mapping):
+                            stages = definition.get("stages", {})
+                            if effect_type == "quest_stage":
+                                stage_id = effect.get("stage")
+                                if stage_id not in stages:
+                                    errors.append(
+                                        f"{location} references unknown stage "
+                                        f"{stage_id!r} for quest {quest_id!r}"
+                                    )
+                            if effect_type in {
+                                "quest_objective_complete",
+                                "quest_objective_fail",
+                            }:
+                                objective_id = effect.get("objective_id")
+                                matching_stages = [
+                                    stage_id
+                                    for stage_id, stage in stages.items()
+                                    if isinstance(stage, Mapping)
+                                    and objective_id in stage.get("objectives", {})
+                                ]
+                                if not matching_stages:
+                                    errors.append(
+                                        f"{location} references unknown objective "
+                                        f"{objective_id!r} for quest {quest_id!r}"
+                                    )
 
                     if effect_type in {
-                        "quest_objective_complete",
-                        "quest_objective_fail",
+                        "ability_discover",
+                        "technique_discover",
+                        "technique_practice",
+                        "technique_use",
+                        "power_recover",
                     }:
-                        objective_id = effect.get("objective_id")
-                        matching_stages = [
-                            stage_id
-                            for stage_id, stage in stages.items()
-                            if objective_id in stage.get("objectives", {})
-                        ]
-                        if not matching_stages:
+                        ability_id = effect.get("ability_id")
+                        definition = power_definitions.get(ability_id)
+                        if definition is None:
                             errors.append(
-                                f"{location} references unknown objective "
-                                f"{objective_id!r} for quest {quest_id!r}"
+                                f"{location} references unknown power {ability_id!r}"
                             )
+                            continue
+                        if not isinstance(definition, Mapping):
+                            continue
+
+                        if effect_type in {
+                            "technique_discover",
+                            "technique_practice",
+                            "technique_use",
+                        }:
+                            technique_id = effect.get("technique_id")
+                            techniques = definition.get("techniques", {})
+                            if (
+                                not isinstance(techniques, Mapping)
+                                or technique_id not in techniques
+                            ):
+                                errors.append(
+                                    f"{location} references unknown technique "
+                                    f"{technique_id!r} for power {ability_id!r}"
+                                )
 
     return errors
 
@@ -278,7 +378,8 @@ def validate_content_pack(
 def assert_valid_content_pack(
     scenes: Mapping[str, Dict[str, Any]],
     quests: Mapping[str, Mapping[str, Any]] | None = None,
+    powers: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> None:
-    errors = validate_content_pack(scenes, quests)
+    errors = validate_content_pack(scenes, quests, powers)
     if errors:
         raise RuleError("Invalid authored content pack:\n- " + "\n- ".join(errors))
