@@ -6,6 +6,7 @@ from textrpg.powers import (
     discover_technique,
     evolve_ability,
     gain_technique_mastery,
+    practice_technique,
     technique_stage,
     technique_use_status,
     use_technique,
@@ -217,6 +218,79 @@ class PowerRuntimeTests(unittest.TestCase):
             evolve_ability(
                 state, "ABILITY_FLUX", "EVOLUTION_STABLE", definition
             )
+
+
+    def test_practice_technique_costs_time_resources_and_progresses_slowly(self):
+        state = self.state()
+        before_focus = state.player["resources"]["focus"]
+        before_stamina = state.player["resources"]["stamina"]
+        before_time = state.time_minutes
+
+        event = practice_technique(
+            state,
+            "ABILITY_FLUX",
+            "TECHNIQUE_PULSE",
+            minutes=60,
+        )
+
+        technique = state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]
+        self.assertEqual(state.time_minutes, before_time + 60)
+        self.assertEqual(state.player["resources"]["focus"], before_focus - 6)
+        self.assertEqual(state.player["resources"]["stamina"], before_stamina - 4)
+        self.assertEqual(technique["mastery_xp"], 8.0)
+        self.assertEqual(technique["stage"], "discovered")
+        self.assertEqual(event["type"], "technique_practice")
+
+    def test_practice_technique_uses_diminishing_returns_and_mentor_bonus(self):
+        state = self.state()
+        first = practice_technique(
+            state,
+            "ABILITY_FLUX",
+            "TECHNIQUE_PULSE",
+            minutes=60,
+            mentor_bonus=0.5,
+        )
+        first_gain = (
+            first["technique_mastery_after"] - first["technique_mastery_before"]
+        )
+
+        state.player["resources"]["focus"] = 100
+        state.player["resources"]["stamina"] = 100
+        state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["mastery_xp"] = 300
+        state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["stage"] = "mastered"
+        second = practice_technique(
+            state,
+            "ABILITY_FLUX",
+            "TECHNIQUE_PULSE",
+            minutes=60,
+            mentor_bonus=0.5,
+        )
+        second_gain = (
+            second["technique_mastery_after"] - second["technique_mastery_before"]
+        )
+        self.assertLess(second_gain, first_gain)
+
+    def test_practice_rejects_insufficient_resources_without_partial_mutation(self):
+        state = self.state()
+        state.player["resources"]["focus"] = 1
+        before = dict(state.player["resources"])
+        before_time = state.time_minutes
+        before_mastery = state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["mastery_xp"]
+
+        with self.assertRaises(RuleError):
+            practice_technique(
+                state,
+                "ABILITY_FLUX",
+                "TECHNIQUE_PULSE",
+                minutes=60,
+            )
+
+        self.assertEqual(state.player["resources"], before)
+        self.assertEqual(state.time_minutes, before_time)
+        self.assertEqual(
+            state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["mastery_xp"],
+            before_mastery,
+        )
 
 
 if __name__ == "__main__":
