@@ -213,6 +213,51 @@ The static authored-test count is now **208** across 17 test files.
 
 This remains a static/source hardening result. Exact execution of the complete V6 suite is still required.
 
+
+## Quest and technique-discovery failure atomicity hardening
+
+A further static mutation audit found two additional areas where rejected direct API operations could leave durable state changed.
+
+### Quest mutations
+
+Direct quest APIs now preflight mutable runtime containers before changing quest state.
+
+Hardening added to:
+- `start_quest()`
+- `complete_objective()`
+- `fail_objective()`
+- `fail_quest()`
+
+Changes include:
+- require mutable `state.quests` for quest creation;
+- require list-backed global history before quest mutation;
+- require mutable quest records and list-backed completed/failed/history containers;
+- validate the authored quest definition before objective completion/failure mutation;
+- reject malformed quest runtime state before appending objectives or closing a quest.
+
+Regression coverage verifies:
+- corrupt global history cannot create a partially-started quest;
+- corrupt quest history cannot leave an objective marked complete;
+- malformed authored quest graphs are rejected before objective mutation;
+- a failed manual quest-close does not change active quest status.
+
+### Technique discovery
+
+`discover_technique()` previously created an empty `ability["techniques"]` container before discovery requirements were evaluated when an older/partial ability state lacked that container.
+
+If discovery then failed, the rejected operation still changed persistent ability state.
+
+V6 now plans a missing technique container locally and attaches it only after discovery requirements pass.
+
+A regression verifies a failed technique discovery leaves:
+- ability state unchanged;
+- history unchanged;
+- no empty `techniques` container created.
+
+The static authored-test count is now **213** across 17 test files.
+
+These are source/test hardening results only. Exact V6 runtime execution remains the promotion gate.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
@@ -224,7 +269,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 208 authored test methods;
+- V6 has 213 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
