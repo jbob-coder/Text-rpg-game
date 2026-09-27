@@ -143,6 +143,61 @@ Coverage present includes:
 - deep status inspection
 - rejection of hidden/raw status paths
 
+## Additional cross-system hardening added during integration review
+
+The integration review exposed mutation hazards that were not obvious while the
+systems were inspected separately.
+
+### Spendable resource paths
+
+Technique costs are now restricted to:
+- `resources.<id>`
+- `power_resources.<id>`
+
+A technique definition can no longer spend an arbitrary player path such as
+`attributes.will`. This prevents a malformed authored ability from converting
+a temporary activation cost into permanent stat damage.
+
+### Modifier validation before technique/evolution mutation
+
+Technique drawback modifiers are validated against the canonical modifier-path
+registry before any cost/cooldown/use mutation.
+
+Evolution-granted perk modifiers are also validated before form, rank, item, or
+perk mutation.
+
+This closes a partial-state failure mode where invalid modifiers could otherwise
+be discovered only after resources/items or progression state had already changed.
+
+### Requirement ID validation
+
+Technique/evolution attribute and skill requirements now reject unknown IDs at
+definition-validation time instead of relying on a later effective-value lookup.
+
+### Atomic mastery mutation
+
+Direct ability and technique mastery progression now validates existing
+persistent mastery/rank-floor state and computes the next stage/rank before
+writing mutations.
+
+Corrupt/non-finite persistent progression state therefore raises before changing
+the stored mastery/stage/rank.
+
+Technique discovery also rejects empty technique IDs and invalid technique
+containers.
+
+### Tests added for these integration hazards
+
+New tests cover:
+- arbitrary non-resource technique cost paths
+- invalid drawback modifier paths before spending resources
+- unknown attribute/skill requirement IDs
+- invalid evolution perk modifiers before form/item mutation
+- corrupt ability mastery before progression mutation
+- invalid rank-floor state
+- corrupt technique mastery before progression mutation
+- invalid technique discovery IDs/containers
+
 ## Verification state
 
 No byte-for-byte checkout of this integration branch has been executed by this chat.
@@ -169,6 +224,10 @@ This integration does not decide:
 - exact player-facing typography/layout
 
 The branch is deliberately registry/path driven so the core-stat decision can still evolve.
+
+At the latest repository comparison performed after this hardening,
+`integration/rules-ability-v2` was **42 commits ahead of foundation and 0 behind**.
+This is branch-state evidence only, not runtime-test evidence.
 
 ## Promotion gate
 
