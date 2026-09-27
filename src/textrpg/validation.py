@@ -45,6 +45,8 @@ SUPPORTED_EFFECTS: Set[str] = {
     "ability_discover",
     "technique_discover",
     "technique_practice",
+    "technique_use",
+    "power_recover",
 }
 
 
@@ -61,10 +63,50 @@ def _walk_conditions(conditions: Iterable[Mapping[str, Any]], location: str, err
 
 
 def _walk_effects(effects: Iterable[Mapping[str, Any]], location: str, errors: List[str]) -> None:
+    npc_effects = {
+        "relationship",
+        "npc_learn",
+        "npc_goal_create",
+        "npc_goal_progress",
+        "npc_story_transition",
+        "personality",
+        "party_add",
+        "party_remove",
+    }
+    power_effects = {
+        "ability_discover",
+        "technique_discover",
+        "technique_practice",
+        "technique_use",
+        "power_recover",
+    }
     for index, effect in enumerate(effects):
         kind = effect.get("type")
+        effect_location = f"{location}.effect[{index}]"
         if kind not in SUPPORTED_EFFECTS:
-            errors.append(f"{location}.effect[{index}] has unsupported type {kind!r}")
+            errors.append(f"{effect_location} has unsupported type {kind!r}")
+            continue
+        if kind in npc_effects:
+            _validate_id(effect.get("npc"), f"{effect_location}.npc", errors)
+        if kind in power_effects:
+            _validate_id(
+                effect.get("ability_id"),
+                f"{effect_location}.ability_id",
+                errors,
+            )
+        if kind in {"technique_discover", "technique_practice", "technique_use"}:
+            _validate_id(
+                effect.get("technique_id"),
+                f"{effect_location}.technique_id",
+                errors,
+            )
+        if kind in {"technique_practice", "power_recover"}:
+            minutes = effect.get("minutes")
+            minimum = 30 if kind == "technique_practice" else 1
+            if not isinstance(minutes, int) or minutes < minimum:
+                errors.append(
+                    f"{effect_location}.minutes must be an integer >= {minimum}"
+                )
 
 
 def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
@@ -129,13 +171,17 @@ def assert_valid_scenes(scenes: Mapping[str, Dict[str, Any]]) -> None:
 def validate_content_pack(
     scenes: Mapping[str, Dict[str, Any]],
     quests: Mapping[str, Mapping[str, Any]] | None = None,
+    powers: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> List[str]:
-    """Validate scenes plus authored quest definitions and their cross-references."""
+    """Validate scenes plus quest/power definitions and cross-references."""
+    from .powers import validate_power_definitions
     from .quests import validate_quest_definitions
 
     quest_definitions = quests or {}
+    power_definitions = powers or {}
     errors = list(validate_scenes(scenes))
     errors.extend(validate_quest_definitions(quest_definitions))
+    errors.extend(validate_power_definitions(power_definitions))
 
     for scene_id, scene in scenes.items():
         for choice_index, choice in enumerate(scene.get("choices", [])):
@@ -192,13 +238,52 @@ def validate_content_pack(
                                 f"{objective_id!r} for quest {quest_id!r}"
                             )
 
+    for scene_id, scene in scenes.items():
+        for choice_index, choice in enumerate(scene.get("choices", [])):
+            for outcome_name, outcome in choice.get("outcomes", {}).items():
+                if not isinstance(outcome, Mapping):
+                    continue
+                for effect_index, effect in enumerate(outcome.get("effects", [])):
+                    effect_type = effect.get("type")
+                    if effect_type not in {
+                        "ability_discover",
+                        "technique_discover",
+                        "technique_practice",
+                        "technique_use",
+                        "power_recover",
+                    }:
+                        continue
+                    location = (
+                        f"{scene_id}.choices[{choice_index}]."
+                        f"outcomes.{outcome_name}.effect[{effect_index}]"
+                    )
+                    ability_id = effect.get("ability_id")
+                    definition = power_definitions.get(ability_id)
+                    if definition is None:
+                        errors.append(
+                            f"{location} references unknown power {ability_id!r}"
+                        )
+                        continue
+                    if effect_type in {
+                        "technique_discover",
+                        "technique_practice",
+                        "technique_use",
+                    }:
+                        technique_id = effect.get("technique_id")
+                        if technique_id not in definition.get("techniques", {}):
+                            errors.append(
+                                f"{location} references unknown technique "
+                                f"{technique_id!r} for power {ability_id!r}"
+                            )
+
     return errors
 
 
 def assert_valid_content_pack(
     scenes: Mapping[str, Dict[str, Any]],
     quests: Mapping[str, Mapping[str, Any]] | None = None,
+    powers: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> None:
-    errors = validate_content_pack(scenes, quests)
+    errors = validate_content_pack(scenes, quests, powers)
     if errors:
         raise RuleError("Invalid authored content pack:\n- " + "\n- ".join(errors))
