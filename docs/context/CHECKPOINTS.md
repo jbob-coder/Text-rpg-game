@@ -882,3 +882,72 @@ None on a byte-for-byte checkout of `integration/rules-ability-v2` by this chat.
 3. Recompare against foundation before every promotion decision.
 4. Execute the complete suite on an exact checkout when a supported runtime is available.
 5. Keep the stat-schema migration separate until DEC-STAT-001 is explicitly resolved.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-INTEGRATION-ATOMICITY-10
+
+Repository: `jbob-coder/Text-rpg-game`
+Active integration branch: `integration/rules-ability-v2`
+
+### CURRENT_OBJECTIVE
+
+[IN_PROGRESS] Continue integration-level review specifically for cross-system mutation hazards between abilities, resources, modifiers, progression, and player-facing status state.
+
+### BRANCH STATE
+
+[VERIFIED] At the latest comparison after this review pass, `integration/rules-ability-v2` is **42 commits ahead of `foundation/text-rpg-systems` and 0 behind**.
+
+### CROSS-SYSTEM ISSUES FOUND AND HARDENED
+
+[IMPLEMENTED] Technique activation costs are now restricted to spendable resource namespaces:
+- `resources.<id>`
+- `power_resources.<id>`
+
+A malformed technique can no longer use a cost path such as `attributes.will` and permanently damage a core stat through the activation-cost mechanism.
+
+[IMPLEMENTED] Technique drawback modifier maps are validated against the canonical modifier registry before any resource spend, cooldown update, use increment, condition application, or mastery mutation.
+
+[IMPLEMENTED] Evolution-granted perk modifier maps are validated before form/rank/item/perk mutation.
+
+[IMPLEMENTED] Technique/evolution attribute and skill requirement IDs are validated against the canonical stat/skill registries before runtime evaluation.
+
+[IMPLEMENTED] Ability mastery advancement now validates existing mastery/rank-floor state and computes the next mastery/stage/rank before writing persistent state.
+
+[IMPLEMENTED] Technique mastery advancement now validates existing mastery state and computes the next mastery/stage before mutation.
+
+[IMPLEMENTED] Technique discovery now rejects empty technique IDs and invalid technique containers.
+
+### TEST COVERAGE ADDED
+
+[IMPLEMENTED] New tests cover:
+- arbitrary non-resource cost path rejection before mutation
+- invalid drawback modifier rejection before resource spend
+- unknown power requirement stat/skill IDs
+- invalid evolution perk modifier rejection before form/item mutation
+- corrupt ability mastery rejection without further mutation
+- invalid rank-floor rejection before mastery mutation
+- corrupt technique mastery rejection without stage mutation
+- invalid/empty technique discovery identifiers and containers
+
+### TEST EXECUTION
+
+[UNKNOWN] These new integration tests are authored but have not been executed on a byte-for-byte checkout by this chat. Runtime verification remains pending.
+
+### ARCHITECTURE IMPACT
+
+[DESIGNED] This review strengthens a general project rule: authored-data validation that can fail must occur before irreversible/persistent mutation whenever practical.
+
+[DESIGNED] Ability activation should be modeled as:
+
+`validate definition/state -> evaluate availability -> compute mutation plan -> commit mutation -> record event`
+
+rather than interleaving validation and persistent writes.
+
+### NEXT_ACTION
+
+1. Continue auditing evolution and technique execution for any remaining post-mutation failure paths.
+2. Apply the same validate-before-commit rule to other stateful systems where needed.
+3. Recompare integration V2 against foundation before every promotion decision.
+4. Execute the full suite on an exact checkout when a supported runtime is available.
