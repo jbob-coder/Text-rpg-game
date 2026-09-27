@@ -1,4 +1,5 @@
 import unittest
+from types import MappingProxyType
 
 from textrpg import GameState, RuleError, gain_ability_mastery, mastery_stage, technique_available
 
@@ -99,6 +100,66 @@ class ProgressionTests(unittest.TestCase):
         with self.assertRaises(RuleError):
             gain_ability_mastery(state, "ABILITY_BAD", 10)
         self.assertEqual(state.abilities["ABILITY_BAD"]["mastery_xp"], 0.0)
+
+
+    def test_gain_mastery_rejects_immutable_ability_container_before_nested_mutation(self):
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            abilities={
+                "ABILITY_EXAMPLE": {
+                    "rank": 0,
+                    "mastery_xp": 10.0,
+                    "mastery_stage": "discovered",
+                    "techniques": {},
+                }
+            },
+        )
+        existing = state.abilities["ABILITY_EXAMPLE"]
+        state.abilities = MappingProxyType(state.abilities)
+
+        with self.assertRaises(RuleError):
+            gain_ability_mastery(state, "ABILITY_EXAMPLE", 5)
+
+        self.assertEqual(existing["mastery_xp"], 10.0)
+        self.assertEqual(existing["rank"], 0)
+
+    def test_gain_mastery_rejects_corrupt_rank_before_overwrite(self):
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            abilities={
+                "ABILITY_EXAMPLE": {
+                    "rank": True,
+                    "mastery_xp": 10.0,
+                    "mastery_stage": "discovered",
+                    "techniques": {},
+                }
+            },
+        )
+
+        with self.assertRaises(RuleError):
+            gain_ability_mastery(state, "ABILITY_EXAMPLE", 5)
+
+        self.assertIs(state.abilities["ABILITY_EXAMPLE"]["rank"], True)
+        self.assertEqual(state.abilities["ABILITY_EXAMPLE"]["mastery_xp"], 10.0)
+
+    def test_technique_available_rejects_malformed_query_contract(self):
+        state = GameState(seed="x", scene_id="A")
+        gain_ability_mastery(state, "ABILITY_EXAMPLE", 100)
+
+        with self.assertRaises(RuleError):
+            technique_available(state, "ABILITY_EXAMPLE", {"rank_min": True})
+        with self.assertRaises(RuleError):
+            technique_available(
+                state,
+                "ABILITY_EXAMPLE",
+                {"knowledge": "KNOW_FORM"},
+            )
+
+        state.abilities["ABILITY_EXAMPLE"]["mastery_xp"] = float("nan")
+        with self.assertRaises(RuleError):
+            technique_available(state, "ABILITY_EXAMPLE", {})
 
 if __name__ == "__main__":
     unittest.main()
