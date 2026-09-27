@@ -359,6 +359,30 @@ The static authored-test count is now **229** across 17 test files.
 
 This is still a static/source result. Exact execution of the V6 suite remains pending.
 
+
+## Social numeric and metadata boundary hardening
+
+A further social-system audit found invalid numeric/metadata values that could either persist non-finite state or raise late implementation exceptions after partial setup.
+
+V6 now hardens:
+- `ensure_npc()` against corrupt nested NPC/relationship containers before adding defaults;
+- `add_memory()` memory IDs, integer importance, tag collections, and data mappings;
+- `npc_learn()` knowledge IDs/source/truth, finite confidence, and integer secrecy;
+- `share_knowledge()` secrecy state to require strict integer 0..5 values;
+- `eligible_leak_targets()` holder/knowledge/network shape, finite personality inputs, secrecy state, and target IDs;
+- `execute_leak_event()` event ID and recipient collection/IDs before any transfer;
+- `adjust_relationship()` finite current/delta values;
+- `relationship_meets()` mapping shape and finite threshold/current values;
+- `set_goal()` stable metadata shape, integer priority, finite progress, source and data mapping;
+- `update_goal_progress()` finite threshold/delta/current progress;
+- `transition_story_state()` track/reason/data/allowed-from metadata before NPC mutation.
+
+Six regressions were added covering non-finite knowledge confidence, boolean secrecy, non-finite relationship changes, invalid goal numeric metadata, invalid story-transition data, non-finite leak personality state, and malformed leak recipient collections.
+
+The static authored-test count is now **235** across 17 test files.
+
+This remains a static/source hardening result. Exact V6 runtime execution is still pending.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
@@ -370,7 +394,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 229 authored test methods;
+- V6 has 235 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
