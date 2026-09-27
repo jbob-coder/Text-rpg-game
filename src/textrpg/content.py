@@ -5,7 +5,7 @@ from dataclasses import dataclass, fields
 from pathlib import Path
 from typing import Any, Dict, Mapping
 
-from .core import GameState, RuleError, RulesEngine
+from .core import GameState, RuleError, RulesEngine, validate_game_state_structure
 from .stats import validate_player_stats
 from .validation import assert_valid_content_pack
 from .visuals import assert_valid_character_visuals
@@ -73,6 +73,7 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
         )
 
     state = GameState(**dict(initial))
+    validate_game_state_structure(state)
     if state.scene_id not in scenes:
         raise RuleError(
             f"initial_state.scene_id points to unknown scene: {state.scene_id}"
