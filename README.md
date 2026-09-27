@@ -27,7 +27,7 @@ The rules layer is deliberately separated from presentation. The game can later 
 - `src/textrpg/visuals.py` — canonical recurring-character visual identity validation and normalized generation contracts.
 - `content/vertical_slice_01.json` — original provisional-canon playable slice: opening branches, NPC state, Gate Twelve power discovery, and gradual first practice.
 - `content/sample_scene.json` — non-canon scene showing relationship, knowledge, item, and stat-dependent choices.
-- `tests/` — behavior, progression, persistence, and content-validation tests.
+- `tests/` — behavior, progression, persistence, content validation, end-to-end route, and save/resume regression tests.
 
 ## Play the current local slice
 
@@ -45,8 +45,8 @@ The CLI is a development client, not the final presentation layer. It runs autho
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Latest exact branch-equivalent verification: **89 tests passed, 0 failed**.
+Latest exact branch-equivalent verification: **93 tests passed, 0 failed**.
 
-The local verification copy was hash-checked against the live branch for all 14 source modules, 14 test modules, and both JSON content files used by the suite. Cooperative, solo, recovery, and first-power routes were also exercised across save/load round trips successfully.
+The verification copy was hash-checked against the live branch, including the new save/resume regression module. Cooperative, solo, recovery, and first-power routes are now permanent tests that cross JSON save/load boundaries.
 
 The prototype uses only the Python standard library. No hosted AI service or GitHub Actions workflow is required.
