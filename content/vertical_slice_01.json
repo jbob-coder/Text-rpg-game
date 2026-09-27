@@ -210,7 +210,7 @@
             "OBJ_COMPLETE_FIRST_SESSION": {
               "required": true,
               "on_complete": {
-                "next_stage": "STAGE_COMPLETE"
+                "next_stage": "STAGE_FIRST_USE"
               }
             }
           }
@@ -219,6 +219,26 @@
           "terminal": true,
           "terminal_status": "completed",
           "objectives": {}
+        },
+        "STAGE_FIRST_USE": {
+          "objectives": {
+            "OBJ_USE_SIGNAL_PULSE": {
+              "required": true,
+              "on_complete": {
+                "next_stage": "STAGE_RECOVER"
+              }
+            }
+          }
+        },
+        "STAGE_RECOVER": {
+          "objectives": {
+            "OBJ_RECOVER_TRACE_RESONANCE": {
+              "required": true,
+              "on_complete": {
+                "next_stage": "STAGE_COMPLETE"
+              }
+            }
+          }
         }
       }
     }
@@ -858,19 +878,19 @@
                   "objective_id": "OBJ_COMPLETE_FIRST_SESSION"
                 }
               ],
-              "next_scene": "POWER_FIRST_PRACTICE_RESULT"
+              "next_scene": "POWER_FIRST_LIVE_USE"
             }
           }
         }
       ]
     },
     "POWER_FIRST_PRACTICE_RESULT": {
-      "title": "Still Unstable",
-      "body": "After an hour, you can sometimes recognize the beginning of the pattern before it fades. That is progress, not mastery. The technique remains at its earliest stage, and further improvement will require more time, recovery, experimentation, and eventually real use.",
+      "title": "Progress, Cost, and a Locked Door Ahead",
+      "body": "The first controlled use confirms three things: Trace Echo has its own limited resonance reserve, active use can cause sensory strain, and recovery is slower than expenditure. The stronger directional technique remains locked behind substantially more mastery, knowledge, tolerance training, and improved perception/will.",
       "choices": [
         {
-          "id": "END_FIRST_POWER_SESSION",
-          "text": "Record what you learned and stop for now.",
+          "id": "END_TRACE_ECHO_FOUNDATION_SLICE",
+          "text": "Record the limits and end the current prototype slice.",
           "outcomes": {
             "default": {
               "effects": [
@@ -884,6 +904,166 @@
           }
         }
       ]
+    },
+    "POWER_FIRST_LIVE_USE": {
+      "title": "A Pulse You Can Finally Hold",
+      "body": "Practice has not made Trace Echo reliable, but the pattern now lasts long enough to test once. The dead relay is the safest target: familiar, contained, and already tied to the signal that triggered the ability.",
+      "choices": [
+        {
+          "id": "USE_SIGNAL_PULSE_ON_RELAY",
+          "text": "Use Signal Pulse once on the dead relay and stop if the strain spikes.",
+          "time_cost_minutes": 1,
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "technique_use",
+                  "ability_id": "ABILITY_TRACE_ECHO",
+                  "technique_id": "TECHNIQUE_SIGNAL_PULSE"
+                },
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_GATE_TWELVE_RECENT_TRACE",
+                  "source": "TECHNIQUE_SIGNAL_PULSE",
+                  "confidence": 0.65,
+                  "private": true
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_GATE_TWELVE_ECHO",
+                  "objective_id": "OBJ_USE_SIGNAL_PULSE"
+                }
+              ],
+              "next_scene": "POWER_TRACE_STRAIN"
+            }
+          }
+        }
+      ]
+    },
+    "POWER_TRACE_STRAIN": {
+      "title": "The Cost of Listening Too Closely",
+      "body": "The pulse resolves into a short-lived directional impression, then your ordinary senses feel overexposed. The useful information remains, but so does a temporary sensory strain. Quiet recovery restores the ability-specific reserve slowly.",
+      "choices": [
+        {
+          "id": "RECOVER_TRACE_RESONANCE_THIRTY_MINUTES",
+          "text": "Spend thirty quiet minutes recovering before trying anything else.",
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "power_recover",
+                  "ability_id": "ABILITY_TRACE_ECHO",
+                  "minutes": 30,
+                  "quality": 1
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_GATE_TWELVE_ECHO",
+                  "objective_id": "OBJ_RECOVER_TRACE_RESONANCE"
+                }
+              ],
+              "next_scene": "POWER_FIRST_PRACTICE_RESULT"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "powers": {
+    "ABILITY_TRACE_ECHO": {
+      "family": "sensory_resonance",
+      "form": "latent_trace",
+      "tags": [
+        "sensory",
+        "noncombat",
+        "signal"
+      ],
+      "resource": {
+        "path": "power_resources.trace_resonance",
+        "maximum": 10,
+        "starting": 10,
+        "recovery_per_hour": 2
+      },
+      "techniques": {
+        "TECHNIQUE_SIGNAL_PULSE": {
+          "stage_min": "discovered",
+          "requirements": {
+            "rank_min": 0,
+            "mastery_xp_min": 0,
+            "knowledge": [
+              "KNOW_TRACE_ECHO_IS_PERSONAL_PERCEPTION"
+            ]
+          },
+          "costs": {
+            "resources.focus": 3,
+            "power_resources.trace_resonance": 2
+          },
+          "cooldown_minutes": 10,
+          "mastery_gain": 2,
+          "ability_mastery_gain": 1,
+          "drawbacks": [
+            {
+              "type": "condition",
+              "condition_id": "COND_ECHO_STRAIN",
+              "severity": 1,
+              "duration_minutes": 20,
+              "tags": [
+                "power",
+                "sensory",
+                "strain"
+              ],
+              "modifiers": {
+                "attributes.perception": -3,
+                "attributes.will": -1
+              }
+            }
+          ]
+        },
+        "TECHNIQUE_DIRECTIONAL_TRACE": {
+          "stage_min": "discovered",
+          "requirements": {
+            "rank_min": 1,
+            "mastery_xp_min": 100,
+            "knowledge": [
+              "KNOW_TRACE_ECHO_PATTERN_STABLE"
+            ],
+            "perks": [
+              "PERK_TRACE_TOLERANCE"
+            ],
+            "attributes": {
+              "perception": 45,
+              "will": 45
+            },
+            "skills": {
+              "powers": 10
+            }
+          },
+          "costs": {
+            "resources.focus": 5,
+            "power_resources.trace_resonance": 4
+          },
+          "cooldown_minutes": 30,
+          "mastery_gain": 3,
+          "ability_mastery_gain": 2,
+          "drawbacks": [
+            {
+              "type": "condition",
+              "condition_id": "COND_ECHO_STRAIN",
+              "severity": 2,
+              "duration_minutes": 35,
+              "tags": [
+                "power",
+                "sensory",
+                "strain"
+              ],
+              "modifiers": {
+                "attributes.perception": -5,
+                "attributes.will": -2
+              }
+            }
+          ]
+        }
+      }
     }
   }
 }
