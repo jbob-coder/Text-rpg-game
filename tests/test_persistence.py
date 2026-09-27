@@ -107,5 +107,24 @@ class PersistenceTests(unittest.TestCase):
         with self.assertRaises(RuleError):
             dumps_state(state)
 
+    def test_non_finite_json_numbers_are_rejected_at_persistence_boundary(self):
+        raw = (
+            '{"schema_version":1,"seed":"x","scene_id":"A",'
+            '"player":{"attributes":{"might":NaN}}}'
+        )
+        with self.assertRaises(RuleError):
+            loads_state(raw)
+
+        state = GameState(seed="x", scene_id="A")
+        state.player["attributes"] = {"might": float("inf")}
+        with self.assertRaises(RuleError):
+            dumps_state(state)
+
+    def test_non_json_serializable_nested_state_is_wrapped_as_rule_error(self):
+        state = GameState(seed="x", scene_id="A")
+        state.player["debug_values"] = {"not", "json"}
+        with self.assertRaises(RuleError):
+            dumps_state(state)
+
 if __name__ == "__main__":
     unittest.main()
