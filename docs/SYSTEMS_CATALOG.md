@@ -267,6 +267,16 @@ The provisional Directional Trace discovery contract is:
 
 The training hub intentionally allows repetition and recovery until the contract is met. This is a mechanics prototype; pacing may later be broken into day/session milestones instead of exposing the loop as one continuous hub.
 
+The first Directional Trace use is also authored:
+- cost: 5 Focus + 4 Trace Resonance
+- cooldown: 30 world minutes
+- first-use mastery: +3 technique XP and +2 overall Trace Echo mastery
+- drawback: severity-2 `COND_ECHO_STRAIN` for 35 minutes
+- information result: `KNOW_DIRECTIONAL_TRACE_POINTS_DEEPER`
+- one hour of quiet power recovery restores 2 Trace Resonance and clears the temporary strain through normal time advancement
+
+Discovery does not imply mastery. Directional Trace begins at 0 mastery XP and remains `discovered` after its first +3 XP use.
+
 ## Ability discovery and practice
 
 Ability discovery is separate from mastery.
