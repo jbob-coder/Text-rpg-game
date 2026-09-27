@@ -55,6 +55,41 @@ data class GameIdentity(
     val level: Int? = null,
 )
 
+data class GameQuestObjective(
+    val id: String,
+    val title: String,
+    val required: Boolean,
+    val status: String,
+)
+
+data class GameQuest(
+    val id: String,
+    val title: String,
+    val description: String,
+    val category: String,
+    val status: String,
+    val stage: String,
+    val objectives: List<GameQuestObjective>,
+)
+
+data class GameMapNode(
+    val id: String,
+    val title: String,
+    val description: String,
+    val x: Double,
+    val y: Double,
+    val current: Boolean,
+)
+
+data class GameMapEdge(val from: String, val to: String)
+
+data class GameWorldMap(
+    val title: String = "World",
+    val currentLocation: String = "",
+    val nodes: List<GameMapNode> = emptyList(),
+    val edges: List<GameMapEdge> = emptyList(),
+)
+
 data class GameSnapshot(
     val sceneId: String,
     val title: String,
@@ -66,6 +101,8 @@ data class GameSnapshot(
     val skills: List<GameSkill> = emptyList(),
     val conditions: List<GameCondition> = emptyList(),
     val identity: GameIdentity = GameIdentity(),
+    val quests: List<GameQuest> = emptyList(),
+    val worldMap: GameWorldMap = GameWorldMap(),
     val turn: Int,
     val timeMinutes: Int,
     val location: String,
@@ -195,6 +232,63 @@ internal object BridgeSnapshotMapper {
             level = optionalInteger(identityMap["level"], "status.identity.level"),
         )
 
+        val quests = optionalList(payload["quests"], "quests").mapIndexed { questIndex, item ->
+            val quest = objectMap(item, "quests[$questIndex]")
+            val objectives = optionalList(
+                quest["objectives"],
+                "quests[$questIndex].objectives",
+            ).mapIndexed { objectiveIndex, objectiveItem ->
+                val objective = objectMap(
+                    objectiveItem,
+                    "quests[$questIndex].objectives[$objectiveIndex]",
+                )
+                GameQuestObjective(
+                    id = text(objective["id"], "quests[$questIndex].objectives[$objectiveIndex].id"),
+                    title = text(objective["title"], "quests[$questIndex].objectives[$objectiveIndex].title"),
+                    required = boolean(
+                        objective["required"],
+                        "quests[$questIndex].objectives[$objectiveIndex].required",
+                    ),
+                    status = text(objective["status"], "quests[$questIndex].objectives[$objectiveIndex].status"),
+                )
+            }
+            GameQuest(
+                id = text(quest["id"], "quests[$questIndex].id"),
+                title = text(quest["title"], "quests[$questIndex].title"),
+                description = optionalText(quest["description"]) ?: "",
+                category = text(quest["category"], "quests[$questIndex].category"),
+                status = text(quest["status"], "quests[$questIndex].status"),
+                stage = optionalText(quest["stage"]) ?: "",
+                objectives = objectives,
+            )
+        }
+
+        val mapPayload = optionalObjectMap(payload["map"], "map")
+        val mapNodes = optionalList(mapPayload["nodes"], "map.nodes").mapIndexed { nodeIndex, item ->
+            val node = objectMap(item, "map.nodes[$nodeIndex]")
+            GameMapNode(
+                id = text(node["id"], "map.nodes[$nodeIndex].id"),
+                title = text(node["title"], "map.nodes[$nodeIndex].title"),
+                description = optionalText(node["description"]) ?: "",
+                x = number(node["x"], "map.nodes[$nodeIndex].x"),
+                y = number(node["y"], "map.nodes[$nodeIndex].y"),
+                current = boolean(node["current"], "map.nodes[$nodeIndex].current"),
+            )
+        }
+        val mapEdges = optionalList(mapPayload["edges"], "map.edges").mapIndexed { edgeIndex, item ->
+            val edge = objectMap(item, "map.edges[$edgeIndex]")
+            GameMapEdge(
+                from = text(edge["from"], "map.edges[$edgeIndex].from"),
+                to = text(edge["to"], "map.edges[$edgeIndex].to"),
+            )
+        }
+        val worldMap = GameWorldMap(
+            title = optionalText(mapPayload["title"]) ?: "World",
+            currentLocation = optionalText(mapPayload["current_location"]) ?: "",
+            nodes = mapNodes,
+            edges = mapEdges,
+        )
+
         return GameSnapshot(
             sceneId = sceneId,
             title = text(scene["title"], "scene.title"),
@@ -206,6 +300,8 @@ internal object BridgeSnapshotMapper {
             skills = skills,
             conditions = conditions,
             identity = identity,
+            quests = quests,
+            worldMap = worldMap,
             turn = integer(meta["turn"], "meta.turn"),
             timeMinutes = integer(meta["time_minutes"], "meta.time_minutes"),
             location = optionalText(meta["location"]) ?: sceneId,
