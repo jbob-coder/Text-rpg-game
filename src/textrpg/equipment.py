@@ -112,6 +112,8 @@ def equip_item(
         item_id,
         item.get("requirements", {}),
     )
+    if not isinstance(state.player, Mapping):
+        raise RuleError("state.player must be an object")
     attrs = state.player.get("attributes", {})
     skills = state.player.get("skills", {})
     if not isinstance(attrs, Mapping):
@@ -140,6 +142,10 @@ def equip_item(
         if float(current) < minimum:
             raise RuleError(f"Skill requirement not met: {key} >= {minimum}")
 
+    set_id = item.get("set_id")
+    if set_id is not None and (not isinstance(set_id, str) or not set_id):
+        raise RuleError(f"Equipment set_id must be a non-empty string: {item_id}")
+
     tags = item.get("tags", [])
     passive_perks = item.get("passive_perks", [])
     if not isinstance(tags, list) or not all(isinstance(tag, str) and tag for tag in tags):
@@ -158,7 +164,7 @@ def equip_item(
         "quality": item.get("quality", "standard"),
         "modifiers": modifiers,
         "tags": list(tags),
-        "set_id": item.get("set_id"),
+        "set_id": set_id,
         "active_ability": item.get("active_ability"),
         "passive_perks": list(passive_perks),
         "source": item.get("source", "unknown"),
