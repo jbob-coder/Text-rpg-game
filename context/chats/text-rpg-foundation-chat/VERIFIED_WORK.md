@@ -290,3 +290,24 @@ Current next engineering direction:
 1. create authored routes that earn `KNOW_TRACE_ECHO_PATTERN_STABLE` and `PERK_TRACE_TOLERANCE`;
 2. build a later research/training branch where Directional Trace can eventually be discovered legitimately;
 3. keep story/lore content provisional until deliberate canon review.
+
+
+## Update — earned Trace stabilization and Directional Trace route
+
+Foundation implementation advanced after the exact 103-test checkpoint:
+
+- Added `not_has_perk` and `technique_stage_min` authored conditions.
+- Added scene effects for Powers-skill training and universal resource recovery.
+- Power attribute/skill prerequisites now use effective player values, allowing earned perks to satisfy specialized requirements without changing base attributes.
+- Added `QUEST_TRACE_STABILIZATION` and a repeatable training/research hub.
+- Stable-pattern knowledge is now earned by analyzing traces only after Signal Pulse reaches `learned`.
+- `PERK_TRACE_TOLERANCE` is earned through a six-hour tolerance protocol and grants +5 effective Perception / +5 effective Will.
+- Directional Trace was retuned as a reachable mid-tier technique: ability mastery 20, Signal Pulse learned, Powers 10, stable-pattern knowledge, Trace Tolerance, effective Perception/Will 45.
+- Added an authored final discovery route; Directional Trace still begins at zero technique mastery after discovery.
+- Added regression tests for the full earned route, training/recovery effects, stage/perk gates, and save/resume across the Directional Trace unlock.
+- The current JSON content pack was parsed and structurally audited: 14 scenes, 23 unique choices, 3 quests, 1 power definition, and no missing scene/quest/power/technique references.
+
+Verification boundary:
+- **103 passed / 0 failed** remains the latest fully executed Python suite.
+- That run predates this stabilization-route slice.
+- Do not claim a higher test count until the latest branch is executed in a code environment.
