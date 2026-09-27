@@ -179,6 +179,69 @@ Technique stages currently progress:
 
 Ability evolution is authored rather than automatic. An evolution can require a combination of rank, mastery, learned facts, perks, attributes, skills, flags, items, and technique mastery. Successful evolution can change form/tags, consume required items, grant source-tracked perks, and establish a persistent rank floor.
 
+## Ability-specific power resources
+
+Power resources are authored per ability rather than forcing every power through a universal mana pool.
+
+A power definition can specify:
+- a numeric path under `player.power_resources`
+- maximum value
+- starting value
+- recovery per hour
+- technique-specific costs that can combine that resource with universal resources such as Focus
+
+The first provisional example is `ABILITY_TRACE_ECHO`:
+- resource: `power_resources.trace_resonance`
+- start/max: 10
+- baseline recovery: 2 per hour
+- `TECHNIQUE_SIGNAL_PULSE`: costs 2 Trace Resonance + 3 Focus
+- cooldown: 10 world minutes
+- active-use drawback: `COND_ECHO_STRAIN` for 20 minutes, temporarily reducing Perception and Will
+- first 30-minute quiet recovery restores only 1 Trace Resonance at baseline quality
+
+Recovery advances the same simulation clock used by cooldowns and timed conditions. This means resource recovery and drawback expiry cannot drift onto separate clocks.
+
+A stronger provisional technique, `TECHNIQUE_DIRECTIONAL_TRACE`, is defined but not granted. Its authored requirements include later ability rank/mastery, specific knowledge, a tolerance perk, improved Perception/Will, and Power skill. This preserves the rule that stronger techniques are earned rather than automatically unlocked by discovering the ability.
+
+## Technique discovery gates
+
+Technique discovery is now distinct from technique use.
+
+A technique can define `discovery_requirements` using:
+- ability rank and mastery XP
+- required knowledge
+- required perks
+- attribute/skill minimums
+- flags
+- inventory items
+- mastery stage of prerequisite techniques
+
+Runtime discovery refuses to create the technique record until those requirements are satisfied. Choices can also use the `technique_discoverable` condition to present the opportunity as locked/available without duplicating the underlying rules.
+
+The provisional `TECHNIQUE_DIRECTIONAL_TRACE` contract currently requires:
+- Trace Echo rank 1
+- 100 ability mastery XP
+- `KNOW_TRACE_ECHO_PATTERN_STABLE`
+- `PERK_TRACE_TOLERANCE`
+- Perception 45
+- Will 45
+- Powers skill 10
+- `TECHNIQUE_SIGNAL_PULSE` at least `learned`
+
+These values remain provisional balancing data.
+
+## Stable content registries
+
+A content pack may define stable registries for:
+- knowledge
+- perks
+- items
+- conditions
+
+When registries are present, authored scene gates/effects and power requirements/drawbacks are cross-checked against them before play. Initial inventory, player knowledge, perks, and conditions are also checked by the content loader.
+
+Registries provide ID integrity and metadata ownership; they do not automatically grant the registered content.
+
 ## Ability discovery and practice
 
 Ability discovery is separate from mastery.

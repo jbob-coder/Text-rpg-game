@@ -65,7 +65,18 @@ The original `main` branch is not modified by this work.
 - Explicit ability discovery creates a rank-0/mastery-0 shell rather than granting free progression.
 - Technique practice now consumes stamina/focus, advances world time, uses diminishing returns, supports mentor bonuses, and grants gradual technique/ability mastery.
 - `The Dead Relay` now continues below Gate Twelve into the first provisional power-discovery/practice sequence; one hour of first practice is intentionally insufficient to leave the earliest technique stage.
+- Power definitions can now declare ability-specific resource pools, starting/max values, recovery rates, technique costs/cooldowns/drawbacks, and future unlock requirements.
+- `ABILITY_TRACE_ECHO` now uses `power_resources.trace_resonance` rather than a universal mana pool: max/start 10, baseline recovery 2 per hour.
+- `TECHNIQUE_SIGNAL_PULSE` now has a real first-use loop: focus + Trace Resonance cost, 10-minute cooldown, mastery gain, and temporary `COND_ECHO_STRAIN`.
+- A 30-minute quiet-recovery scene restores only 1 Trace Resonance at the current rate and advances shared world time, allowing the 20-minute strain condition to expire naturally.
+- `TECHNIQUE_DIRECTIONAL_TRACE` is defined but intentionally locked behind later rank/mastery, knowledge, perk, attribute, and skill requirements.
+- Content validation now validates power-definition structure and rejects scene effects that reference unknown powers or techniques; NPC/power effect IDs and practice/recovery durations receive structural validation.
 - Save/resume route regressions permanently cover cooperative, solo, failure/recovery, and first-power paths.
+- Technique discovery now has a separate authored prerequisite contract from technique use; locked techniques cannot be discovered early through runtime effects.
+- Choices can use the `technique_discoverable` condition to expose or lock authored discovery opportunities based on the current persistent state.
+- Stable content registries are now supported for knowledge, perks, items, and conditions; scene/power references can be cross-validated before play.
+- Initial-state inventory/knowledge/perk/condition IDs are checked against registries when a content pack opts into registry enforcement.
+- `TECHNIQUE_DIRECTIONAL_TRACE` now has explicit discovery prerequisites including Trace Echo rank/mastery, stable-pattern knowledge, Trace Tolerance, attributes, Power skill, and learned Signal Pulse.
 
 ## TESTS_RUN
 
@@ -75,9 +86,9 @@ Command used against a branch-equivalent reconstruction of the current remote fi
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Latest exact branch-equivalent suite result: **93 tests passed, 0 failed**.
+Latest exact branch-equivalent suite result: **103 tests passed, 0 failed**.
 
-Verification was performed against a local reconstruction of the live `foundation/text-rpg-systems` branch. Git blob hashes were checked against the live repository for the reconstructed source/content set, and the newly added save/resume regression module was separately hash-matched to its live Git blob before the final run.
+Verification was performed against a local reconstruction of the live `foundation/text-rpg-systems` branch. The local reconstruction started from the exact 97-test branch snapshot. Every source/content/test file changed in the technique-discovery/registry slice was Git-blob-hash matched against the live branch before the final 103-test run.
 
 Observed command:
 
@@ -88,7 +99,7 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 Observed result:
 
 ```text
-Ran 93 tests in 0.027s
+Ran 103 tests in 0.034s
 
 OK
 ```
@@ -99,11 +110,11 @@ No GitHub Actions workflow was added; verification does not consume hosted CI mi
 
 ## NEXT_ACTION
 
-1. Define power-resource identity, drawbacks, recovery behavior, and later unlock prerequisites for `ABILITY_TRACE_ECHO` before adding stronger techniques.
-2. Strengthen authored-content validation for power/NPC effect references as content volume grows.
-3. Review `The Dead Relay` as provisional story material; promote, revise, or replace it only after deliberate canon review.
-4. Expand canonical visual identity records when additional recurring characters are intentionally introduced.
-5. Add more end-to-end route coverage as new authored branches are introduced.
+1. Add authored acquisition paths for `KNOW_TRACE_ECHO_PATTERN_STABLE` and `PERK_TRACE_TOLERANCE` instead of granting either through debug/state edits.
+2. Add a real future training/research branch where `TECHNIQUE_DIRECTIONAL_TRACE` can eventually become discoverable through earned state.
+3. Extend stable registries to reusable content packs as more items/perks/conditions are introduced.
+4. Review `The Dead Relay`, Gate Twelve, Tamsin, and Trace Echo as provisional story material before promoting any of them to confirmed canon.
+5. Continue save/resume end-to-end coverage for every new major route.
 6. Connect the rules layer to a selected pixel-art presentation runtime only after the client technology is deliberately chosen.
 
 ## BLOCKERS

@@ -16,16 +16,16 @@ The rules layer is deliberately separated from presentation. The game can later 
 - `src/textrpg/content.py` — validated JSON content-pack loading into state + engine.
 - `src/textrpg/cli.py` — local standard-library terminal client with save/resume support.
 - `src/textrpg/progression.py` — earned ability mastery and technique prerequisites.
-- `src/textrpg/powers.py` — explicit ability discovery, paid technique practice, costs, cooldowns, drawbacks, mastery stages, and evolution.
+- `src/textrpg/powers.py` — explicit ability/technique discovery gates, ability-specific resources/recovery, paid practice, costs, cooldowns, drawbacks, mastery stages, and evolution.
 - `src/textrpg/quests.py` — authored quest graphs, objective prerequisites, branching/failure routes, and terminal states.
 - `src/textrpg/persistence.py` — versioned JSON save/load.
-- `src/textrpg/validation.py` — scene validation plus whole-content-pack quest cross-reference validation.
+- `src/textrpg/validation.py` — scene/quest/power validation plus stable registry cross-references for knowledge, perks, items, and conditions.
 - `src/textrpg/stats.py` — canonical attributes, skills, modifier-aware resources, and derived values.
 - `src/textrpg/simulation.py` — world time, conditions, training, and recovery.
 - `src/textrpg/equipment.py` — equipment slots, requirements, modifiers, and set bonuses.
 - `src/textrpg/social.py` — NPC memory, private knowledge, relationships, goals, story-state transitions, sharing, leak eligibility, and deterministic leak-event execution.
 - `src/textrpg/visuals.py` — canonical recurring-character visual identity validation and normalized generation contracts.
-- `content/vertical_slice_01.json` — original provisional-canon playable slice: opening branches, NPC state, Gate Twelve power discovery, and gradual first practice.
+- `content/vertical_slice_01.json` — original provisional-canon playable slice: opening branches, NPC state, Gate Twelve power discovery, first live technique use, drawback, and resource recovery.
 - `content/sample_scene.json` — non-canon scene showing relationship, knowledge, item, and stat-dependent choices.
 - `tests/` — behavior, progression, persistence, content validation, end-to-end route, and save/resume regression tests.
 
@@ -45,8 +45,8 @@ The CLI is a development client, not the final presentation layer. It runs autho
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Latest exact branch-equivalent verification: **93 tests passed, 0 failed**.
+Latest exact branch-equivalent verification: **103 tests passed, 0 failed**.
 
-The verification copy was hash-checked against the live branch, including the new save/resume regression module. Cooperative, solo, recovery, and first-power routes are now permanent tests that cross JSON save/load boundaries.
+The current verification extends the exact 97-test baseline. Every file changed in the technique-discovery/registry slice was Git-blob-hash matched to the live branch before the 103-test run. Cooperative, solo, recovery, and first-power routes remain permanent save/load regression tests.
 
 The prototype uses only the Python standard library. No hosted AI service or GitHub Actions workflow is required.
