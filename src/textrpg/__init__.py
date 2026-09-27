@@ -36,6 +36,11 @@ from .social import (
 )
 from .stats import ATTRIBUTE_SPECS, SKILL_CATALOG, derived_stats, effective_player_value, initialize_resources, validate_player_stats
 from .validation import assert_valid_content_pack, assert_valid_scenes, validate_content_pack, validate_scenes
+from .visuals import (
+    assert_valid_character_visuals,
+    character_generation_contract,
+    validate_character_visuals,
+)
 
 __all__ = [
     "ATTRIBUTE_SPECS",
@@ -52,10 +57,12 @@ __all__ = [
     "adjust_relationship",
     "advance_time",
     "apply_condition",
+    "assert_valid_character_visuals",
     "assert_valid_content_pack",
     "assert_valid_quest_definitions",
     "assert_valid_scenes",
     "available_objectives",
+    "character_generation_contract",
     "complete_objective",
     "derived_stats",
     "effective_player_value",
@@ -89,6 +96,7 @@ __all__ = [
     "train",
     "train_attribute",
     "use_technique",
+    "validate_character_visuals",
     "validate_content_pack",
     "validate_player_stats",
     "validate_quest_definitions",
