@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-27 14:21 AST  
+Updated: 2026-09-27 14:23 AST  
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -59,6 +59,11 @@ The UI must not become the authoritative rules engine.
 - STATUS: `IN_PROGRESS`
 - PRIORITY: `P0 / BLOCKING`
 - OBSERVED: Jack installed/opened the generated Android test APK and reported a black screen.
+- VERIFIED INVESTIGATION (2026-09-27 14:23 AST):
+  - the current repository tree contains no Android project, manifest, Gradle files, NativeActivity source, or persisted wrapper source;
+  - the previously generated `THE-GAME-V6-Android-Test.apk` is not available in the current runtime or searchable Library/conversation files;
+  - unrelated Android/Godot artifacts from other projects were found and explicitly excluded from this diagnosis.
+- CURRENT BLOCKER: the failing APK cannot be reproduced or inspected from authoritative source because its packaging source/artifact was ephemeral.
 - REQUIRED CHECKS:
   - launcher/entry activity and manifest;
   - ABI/native-library packaging;
@@ -252,4 +257,4 @@ Before ending meaningful work, update:
 
 ## Immediate next action
 
-Resume TASK A-001 and diagnose the Android black-screen startup from the actual package/source path rather than redesigning UI first.
+Resume TASK A-001. Recover the original APK/wrapper source if possible; if it is unrecoverable, design a repository-owned reproducible Android client before attempting another APK build.
