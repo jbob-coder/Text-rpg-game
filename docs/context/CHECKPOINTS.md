@@ -1517,3 +1517,60 @@ This remains an authored-test count, not an execution result.
 ### NEXT_ACTION
 
 Continue only focused reconciliation/hardening review for concrete state-integrity defects. Avoid adding features or beginning the seven-to-eight stat migration before exact V6 execution.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-QUEST-POWER-ATOMICITY-17
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after this pass: `461fdd2d5fc218976d3520885671bc95c10ca748`
+
+### ISSUES FOUND
+
+[VERIFIED STATIC] Direct quest and technique-discovery APIs still had failure paths that could leave persistent state changed even when the requested operation was rejected.
+
+Quest risks:
+- `start_quest()` could write quest state before discovering corrupt global history.
+- `complete_objective()` / `fail_objective()` could mutate objective state before later failures if runtime quest containers or authored definition data were malformed.
+- `fail_quest()` could change quest status before discovering unusable history containers.
+
+Technique discovery risk:
+- `discover_technique()` could attach an empty `techniques` mapping to an older/partial ability state before discovery requirements were evaluated.
+
+### FIXES
+
+[IMPLEMENTED]
+- quest creation/mutation now preflights mutable quest/history containers;
+- objective completion/failure validates the authored quest graph before durable mutation;
+- quest runtime records require list-backed objective/history state before mutation;
+- failed manual quest close leaves active status unchanged;
+- missing ability technique containers are now created locally and attached only after technique discovery succeeds.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added tests proving:
+- corrupt global history cannot partially start a quest;
+- corrupt quest history cannot partially complete an objective;
+- invalid quest definitions fail before objective mutation;
+- failed quest close cannot change active status;
+- failed technique discovery leaves ability state/history unchanged and does not create an empty technique container.
+
+[VERIFIED STATIC] V6 now contains **213 authored test methods across 17 test files**.
+
+This is not an execution result.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 runtime execution remains pending.
+
+### SCOPE CONTROL
+
+[DECISION] No feature expansion, no seven-to-eight stat migration, and no context-branch consolidation were performed in this pass.
+
+### NEXT_ACTION
+
+Continue only focused integrity review for concrete reconciliation defects. Exact V6 suite execution remains the required promotion/merge gate.
