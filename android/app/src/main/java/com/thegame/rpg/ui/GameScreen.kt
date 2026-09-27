@@ -535,7 +535,10 @@ private fun SettingsPanel(
             Spacer(Modifier.height(12.dp))
             PixelTextButton("SAVE GAME", onSave)
             Spacer(Modifier.height(8.dp))
-            PixelTextButton("LOAD / CONTINUE", onLoad)
+            PixelTextButton("LOAD / CONTINUE") {
+                onLoad()
+                onClose()
+            }
             Spacer(Modifier.height(8.dp))
             PixelTextButton("CLOSE", onClose)
         }
