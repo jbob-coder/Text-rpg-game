@@ -80,7 +80,13 @@ This reduces partial-mutation risk from malformed authored data.
 
 Boolean values are no longer accepted as valid numeric power resources.
 
-This prevents Python's `bool` subclassing of `int` from allowing `True` or `False` to act as ability-resource amounts.
+Technique/ability mastery gains now reject booleans, NaN, infinity, and negative gains.
+
+Ability rank thresholds are validated as finite, non-negative, ascending values, and `max_rank` must be a non-negative integer.
+
+Technique/evolution item quantities are validated as non-negative integers rather than being silently truncated from fractional values.
+
+This prevents Python's `bool` subclassing of `int`, non-finite progression values, and fractional inventory requirements from corrupting progression state.
 
 ### Effective stat requirements
 
@@ -142,7 +148,7 @@ The parent foundation document reports a prior branch-equivalent run of **58 tes
 
 That result predates the V2 additions and is not claimed as verification of V2.
 
-The new V2 tests exist in the repository, but this workstream has not executed a byte-for-byte checkout of V2. Therefore:
+The new V2 tests exist in the repository, including explicit persistence coverage for player-visible ability discovery/evolution state, but this workstream has not executed a byte-for-byte checkout of V2. Therefore:
 
 **V2 is implemented and statically reviewed, but not fully VERIFIED or merge-ready.**
 
