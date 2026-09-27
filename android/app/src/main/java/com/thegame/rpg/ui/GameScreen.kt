@@ -980,7 +980,17 @@ private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) 
 private fun PixelTextButton(
     label: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
+) = PixelTextButton(
+    label = label,
+    modifier = Modifier,
+    onClick = onClick,
+)
+
+@Composable
+private fun PixelTextButton(
+    label: String,
+    modifier: Modifier,
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = modifier
