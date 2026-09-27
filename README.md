@@ -18,10 +18,12 @@ The rules layer is deliberately separated from presentation. The game can later 
 - `src/textrpg/quests.py` — authored quest graphs, objective prerequisites, branching/failure routes, and terminal states.
 - `src/textrpg/persistence.py` — versioned JSON save/load.
 - `src/textrpg/validation.py` — scene validation plus whole-content-pack quest cross-reference validation.
-- `src/textrpg/stats.py` — canonical attributes, skills, resources, and derived values.
+- `src/textrpg/stats.py` — canonical attributes, skills, modifier-aware resources, and derived values.
 - `src/textrpg/simulation.py` — world time, conditions, training, and recovery.
 - `src/textrpg/equipment.py` — equipment slots, requirements, modifiers, and set bonuses.
 - `src/textrpg/social.py` — NPC memory, private knowledge, relationships, goals, story-state transitions, sharing, leak eligibility, and deterministic leak-event execution.
+- `src/textrpg/visuals.py` — canonical recurring-character visual identity validation and normalized generation contracts.
+- `content/vertical_slice_01.json` — first original playable opening slice, currently marked provisional canon.
 - `content/sample_scene.json` — non-canon scene showing relationship, knowledge, item, and stat-dependent choices.
 - `tests/` — behavior, progression, persistence, and content-validation tests.
 
@@ -31,6 +33,8 @@ The rules layer is deliberately separated from presentation. The game can later 
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Latest local verification for the branch-equivalent files: **58 tests passed, 0 failed**.
+Last full branch-equivalent suite verification: **58 tests passed, 0 failed**.
+
+The latest additions have also passed **13 focused local reconstruction checks**. The full suite must be rerun before increasing the repository-wide pass count.
 
 The prototype uses only the Python standard library. No hosted AI service or GitHub Actions workflow is required.
