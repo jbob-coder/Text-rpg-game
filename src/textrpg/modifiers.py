@@ -44,6 +44,19 @@ def _numeric(value: Any, *, source: str, path: str) -> float:
     return float(value)
 
 
+def _state_mapping(state: Any, field_name: str) -> Mapping[str, Any]:
+    value = getattr(state, field_name, None)
+    if not isinstance(value, Mapping):
+        raise ValueError(f"state.{field_name} must be an object")
+    return value
+
+
+def _record_mapping(value: Any, label: str) -> Mapping[str, Any]:
+    if not isinstance(value, Mapping):
+        raise ValueError(f"{label} must be an object")
+    return value
+
+
 def validate_modifier_path(path: Any) -> str:
     """Validate one canonical effective-value path and return it unchanged."""
     if not isinstance(path, str) or not path:
@@ -115,10 +128,15 @@ def validate_set_definitions(set_definitions: Any) -> None:
 
 def set_counts(state: Any) -> Dict[str, int]:
     counts: Dict[str, int] = {}
-    for record in state.equipment.values():
+    equipment = _state_mapping(state, "equipment")
+    for slot, raw_record in equipment.items():
+        record = _record_mapping(raw_record, f"Equipment record {slot}")
         set_id = record.get("set_id")
-        if set_id:
-            counts[set_id] = counts.get(set_id, 0) + 1
+        if set_id is None:
+            continue
+        if not isinstance(set_id, str) or not set_id:
+            raise ValueError(f"Equipment set_id must be a non-empty string: {slot}")
+        counts[set_id] = counts.get(set_id, 0) + 1
     return counts
 
 
@@ -157,7 +175,9 @@ def equipment_modifiers(
     set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, float]:
     total: Dict[str, float] = {}
-    for slot, record in state.equipment.items():
+    equipment = _state_mapping(state, "equipment")
+    for slot, raw_record in equipment.items():
+        record = _record_mapping(raw_record, f"Equipment record {slot}")
         modifiers = validate_modifier_mapping(
             record.get("modifiers", {}),
             source=f"equipment:{slot}",
@@ -177,7 +197,9 @@ def equipment_modifiers(
 
 def perk_modifiers(state: Any) -> Dict[str, float]:
     total: Dict[str, float] = {}
-    for perk_id, perk in state.perks.items():
+    perks = _state_mapping(state, "perks")
+    for perk_id, raw_perk in perks.items():
+        perk = _record_mapping(raw_perk, f"Perk record {perk_id}")
         modifiers = validate_modifier_mapping(
             perk.get("modifiers", {}),
             source=f"perk:{perk_id}",
@@ -189,7 +211,8 @@ def perk_modifiers(state: Any) -> Dict[str, float]:
 
 def condition_modifiers(state: Any) -> Dict[str, float]:
     total: Dict[str, float] = {}
-    conditions = state.player.get("conditions", {})
+    player = _state_mapping(state, "player")
+    conditions = player.get("conditions", {})
     if not isinstance(conditions, Mapping):
         raise ValueError("player.conditions must be an object")
     for condition_id, condition in conditions.items():
@@ -249,13 +272,18 @@ def modifier_breakdown(
     validate_modifier_path(path)
     breakdown: Dict[str, float] = {}
 
+    player = _state_mapping(state, "player")
+    equipment = _state_mapping(state, "equipment")
+    perks = _state_mapping(state, "perks")
+
     if path.startswith("derived."):
         breakdown["base"] = 0.0
     else:
-        base = _get_path(state.player, path, 0)
+        base = _get_path(player, path, 0)
         breakdown["base"] = _numeric(base, source="player", path=path)
 
-    for slot, record in state.equipment.items():
+    for slot, raw_record in equipment.items():
+        record = _record_mapping(raw_record, f"Equipment record {slot}")
         modifiers = validate_modifier_mapping(
             record.get("modifiers", {}),
             source=f"equipment:{slot}",
@@ -272,7 +300,8 @@ def modifier_breakdown(
             if path in modifiers:
                 breakdown[f"set:{bonus_id}"] = modifiers[path]
 
-    for perk_id, perk in state.perks.items():
+    for perk_id, raw_perk in perks.items():
+        perk = _record_mapping(raw_perk, f"Perk record {perk_id}")
         modifiers = validate_modifier_mapping(
             perk.get("modifiers", {}),
             source=f"perk:{perk_id}",
@@ -280,7 +309,7 @@ def modifier_breakdown(
         if path in modifiers:
             breakdown[f"perk:{perk_id}"] = modifiers[path]
 
-    conditions = state.player.get("conditions", {})
+    conditions = player.get("conditions", {})
     if not isinstance(conditions, Mapping):
         raise ValueError("player.conditions must be an object")
     for condition_id, condition in conditions.items():
