@@ -645,5 +645,97 @@ class PowerRuntimeTests(unittest.TestCase):
                 before_mastery,
             )
 
+    def test_technique_cost_cannot_target_permanent_attribute(self):
+        state = self.state()
+        before_will = state.player["attributes"]["will"]
+        definition = self.definition()
+        definition["costs"] = {"attributes.will": 1}
+        with self.assertRaises(RuleError):
+            use_technique(
+                state,
+                "ABILITY_FLUX",
+                "TECHNIQUE_PULSE",
+                definition,
+            )
+        self.assertEqual(state.player["attributes"]["will"], before_will)
+        self.assertEqual(
+            state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["uses"],
+            0,
+        )
+
+    def test_invalid_drawback_modifier_path_rejects_before_spend(self):
+        state = self.state()
+        before_focus = state.player["resources"]["focus"]
+        before_flux = state.player["power_resources"]["flux"]
+        definition = self.definition()
+        definition["drawbacks"] = [
+            {
+                "type": "condition",
+                "condition_id": "COND_BAD",
+                "severity": 1,
+                "duration_minutes": 10,
+                "tags": ["power"],
+                "modifiers": {"attributes.wlll": -1},
+            }
+        ]
+        with self.assertRaises(RuleError):
+            use_technique(
+                state,
+                "ABILITY_FLUX",
+                "TECHNIQUE_PULSE",
+                definition,
+            )
+        self.assertEqual(state.player["resources"]["focus"], before_focus)
+        self.assertEqual(state.player["power_resources"]["flux"], before_flux)
+        self.assertNotIn("COND_BAD", state.player.get("conditions", {}))
+
+    def test_invalid_drawback_tags_reject_before_spend(self):
+        state = self.state()
+        before_focus = state.player["resources"]["focus"]
+        definition = self.definition()
+        definition["drawbacks"] = [
+            {
+                "type": "condition",
+                "condition_id": "COND_BAD_TAGS",
+                "tags": "not-a-list",
+            }
+        ]
+        with self.assertRaises(RuleError):
+            use_technique(
+                state,
+                "ABILITY_FLUX",
+                "TECHNIQUE_PULSE",
+                definition,
+            )
+        self.assertEqual(state.player["resources"]["focus"], before_focus)
+
+    def test_invalid_evolution_perk_modifier_rejects_before_mutation(self):
+        state = self.state()
+        definition = {
+            "requirements": {"rank_min": 2},
+            "result": {
+                "form": "bad_form",
+                "consume_items": {"ITEM_CORE_SHARD": 1},
+                "grant_perks": {
+                    "PERK_BAD_PATH": {
+                        "modifiers": {"attributes.wlll": 2},
+                        "tags": ["power"],
+                    }
+                },
+            },
+        }
+        before_inventory = dict(state.inventory)
+        before_form = state.abilities["ABILITY_FLUX"].get("form")
+        with self.assertRaises(RuleError):
+            evolve_ability(
+                state,
+                "ABILITY_FLUX",
+                "EVOLUTION_BAD_PATH",
+                definition,
+            )
+        self.assertEqual(state.inventory, before_inventory)
+        self.assertEqual(state.abilities["ABILITY_FLUX"].get("form"), before_form)
+        self.assertNotIn("PERK_BAD_PATH", state.perks)
+
 if __name__ == "__main__":
     unittest.main()
