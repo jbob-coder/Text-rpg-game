@@ -86,5 +86,79 @@ class ValidationTests(unittest.TestCase):
         self.assertTrue(any("unknown stage" in error for error in errors))
 
 
+    def test_invalid_stat_and_perk_modifier_paths_are_reported(self):
+        scenes = {
+            "SCENE_A": {
+                "choices": [
+                    {
+                        "id": "CHOICE_A",
+                        "text": "Try it",
+                        "requires": [
+                            {"type": "stat_min", "path": "attributes.migth", "value": 10}
+                        ],
+                        "outcomes": {
+                            "default": {
+                                "effects": [
+                                    {
+                                        "type": "add_perk",
+                                        "perk_id": "PERK_BAD",
+                                        "modifiers": {"derived.max_heath": 5},
+                                    }
+                                ]
+                            }
+                        },
+                    }
+                ]
+            }
+        }
+        errors = validate_scenes(scenes)
+        self.assertTrue(any("invalid stat path" in e for e in errors))
+        self.assertTrue(any("invalid modifiers" in e for e in errors))
+
+    def test_check_skill_must_use_skill_namespace(self):
+        scenes = {
+            "SCENE_A": {
+                "choices": [
+                    {
+                        "id": "CHOICE_A",
+                        "text": "Try it",
+                        "check": {
+                            "stat": "attributes.might",
+                            "skill": "attributes.agility",
+                        },
+                        "outcomes": {"default": {}},
+                    }
+                ]
+            }
+        }
+        errors = validate_scenes(scenes)
+        self.assertTrue(any("skill must use skills.<id>" in e for e in errors))
+
+    def test_structural_authoring_errors_are_reported_not_crashed(self):
+        scenes = {
+            "SCENE_BAD": {
+                "choices": [
+                    "not-an-object",
+                    {
+                        "id": "CHOICE_BAD",
+                        "text": "Broken",
+                        "visible_if": {"type": "flag"},
+                        "requires": [123],
+                        "outcomes": {
+                            "default": {
+                                "effects": {"type": "set_flag"}
+                            }
+                        },
+                    },
+                ]
+            },
+            "SCENE_NOT_OBJECT": "broken",
+        }
+        errors = validate_scenes(scenes)
+        self.assertTrue(any("must be an object" in e for e in errors))
+        self.assertTrue(any("visible_if must be a list" in e for e in errors))
+        self.assertTrue(any("condition[0] must be an object" in e for e in errors))
+        self.assertTrue(any("effects must be a list" in e for e in errors))
+
 if __name__ == "__main__":
     unittest.main()
