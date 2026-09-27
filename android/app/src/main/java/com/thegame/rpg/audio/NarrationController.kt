@@ -10,6 +10,10 @@ class NarrationController(
     private val tts = TextToSpeech(context.applicationContext, this)
     @Volatile
     private var ready = false
+    @Volatile
+    private var speechRate = 0.92f
+    @Volatile
+    private var lastText = ""
 
     override fun onInit(status: Int) {
         if (status != TextToSpeech.SUCCESS) {
@@ -28,7 +32,7 @@ class NarrationController(
             tts.language = Locale.US
         }
 
-        tts.setSpeechRate(0.92f)
+        tts.setSpeechRate(speechRate)
         tts.setPitch(1.0f)
         ready = true
     }
@@ -36,6 +40,7 @@ class NarrationController(
     fun speak(text: String): Boolean {
         val clean = text.trim()
         if (!ready || clean.isEmpty()) return false
+        lastText = clean
         val result = tts.speak(
             clean,
             TextToSpeech.QUEUE_FLUSH,
@@ -43,6 +48,21 @@ class NarrationController(
             "the-game-narration",
         )
         return result == TextToSpeech.SUCCESS
+    }
+
+    fun replay(): Boolean {
+        val previous = lastText
+        if (previous.isBlank()) return false
+        return speak(previous)
+    }
+
+    fun setSpeechRate(rate: Float): Float {
+        val applied = rate.coerceIn(0.5f, 1.5f)
+        speechRate = applied
+        if (ready) {
+            tts.setSpeechRate(applied)
+        }
+        return applied
     }
 
     fun stop() {

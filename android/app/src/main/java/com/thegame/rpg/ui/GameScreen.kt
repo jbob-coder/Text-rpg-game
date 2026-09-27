@@ -23,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import com.thegame.rpg.GameUiState
 import com.thegame.rpg.boot.BootState
 import com.thegame.rpg.engine.GameSnapshot
+import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
 
 enum class GameSection(val label: String) {
@@ -55,7 +57,14 @@ fun TheGameRoot(
     onSave: () -> Unit,
     onLoad: () -> Unit,
     onNarrate: (String) -> Boolean,
+    onReplayNarration: () -> Boolean,
     onStopNarration: () -> Unit,
+    autoReadNarration: Boolean,
+    onAutoReadChange: (Boolean) -> Unit,
+    narrationRate: Float,
+    onNarrationRateChange: (Float) -> Unit,
+    textDelayMs: Int,
+    onTextDelayChange: (Int) -> Unit,
     onCheat: (String) -> Unit,
     onEquip: (String) -> Unit,
     onUnequip: (String) -> Unit,
@@ -70,7 +79,14 @@ fun TheGameRoot(
             onSave,
             onLoad,
             onNarrate,
+            onReplayNarration,
             onStopNarration,
+            autoReadNarration,
+            onAutoReadChange,
+            narrationRate,
+            onNarrationRateChange,
+            textDelayMs,
+            onTextDelayChange,
             onCheat,
             onEquip,
             onUnequip,
@@ -98,7 +114,13 @@ fun GameScreen(
         TopStatusBar(snapshot, onSettings = { onNavigate("More") })
         Spacer(Modifier.height(8.dp))
         Box(modifier = Modifier.weight(1f)) {
-            StorySection(snapshot, busy, onChoice, onNarrate = { false })
+            StorySection(
+                snapshot = snapshot,
+                busy = busy,
+                onChoice = onChoice,
+                onNarrate = { false },
+                textDelayMs = 0,
+            )
         }
         Spacer(Modifier.height(8.dp))
         Row(
@@ -145,7 +167,14 @@ private fun PixelGameShell(
     onSave: () -> Unit,
     onLoad: () -> Unit,
     onNarrate: (String) -> Boolean,
+    onReplayNarration: () -> Boolean,
     onStopNarration: () -> Unit,
+    autoReadNarration: Boolean,
+    onAutoReadChange: (Boolean) -> Unit,
+    narrationRate: Float,
+    onNarrationRateChange: (Float) -> Unit,
+    textDelayMs: Int,
+    onTextDelayChange: (Int) -> Unit,
     onCheat: (String) -> Unit,
     onEquip: (String) -> Unit,
     onUnequip: (String) -> Unit,
@@ -153,6 +182,12 @@ private fun PixelGameShell(
 ) {
     var section by remember { mutableStateOf(GameSection.STORY) }
     var settingsOpen by remember { mutableStateOf(false) }
+
+    LaunchedEffect(snapshot.sceneId, autoReadNarration) {
+        if (autoReadNarration) {
+            onNarrate(snapshot.body)
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -164,10 +199,30 @@ private fun PixelGameShell(
         Spacer(Modifier.height(8.dp))
         Box(Modifier.weight(1f)) {
             if (settingsOpen) {
-                SettingsPanel(snapshot, onSave, onLoad, onStopNarration, onCheat) { settingsOpen = false }
+                SettingsPanel(
+                    snapshot = snapshot,
+                    onSave = onSave,
+                    onLoad = onLoad,
+                    onReplayNarration = onReplayNarration,
+                    onStopNarration = onStopNarration,
+                    autoReadNarration = autoReadNarration,
+                    onAutoReadChange = onAutoReadChange,
+                    narrationRate = narrationRate,
+                    onNarrationRateChange = onNarrationRateChange,
+                    textDelayMs = textDelayMs,
+                    onTextDelayChange = onTextDelayChange,
+                    onCheat = onCheat,
+                    onClose = { settingsOpen = false },
+                )
             } else {
                 when (section) {
-                    GameSection.STORY -> StorySection(snapshot, busy, onChoice, onNarrate)
+                    GameSection.STORY -> StorySection(
+                        snapshot = snapshot,
+                        busy = busy,
+                        onChoice = onChoice,
+                        onNarrate = onNarrate,
+                        textDelayMs = textDelayMs,
+                    )
                     GameSection.CHARACTER -> CharacterSection(snapshot)
                     GameSection.STATS -> StatsSection(snapshot)
                     GameSection.INVENTORY -> InventorySection(
@@ -220,7 +275,13 @@ private fun TopStatusBar(snapshot: GameSnapshot, onSettings: () -> Unit) {
 }
 
 @Composable
-private fun StorySection(snapshot: GameSnapshot, busy: Boolean, onChoice: (String) -> Unit, onNarrate: (String) -> Boolean) {
+private fun StorySection(
+    snapshot: GameSnapshot,
+    busy: Boolean,
+    onChoice: (String) -> Unit,
+    onNarrate: (String) -> Boolean,
+    textDelayMs: Int,
+) {
     BoxWithConstraints(Modifier.fillMaxSize()) {
         if (maxWidth >= 720.dp) {
             Row(
@@ -237,6 +298,7 @@ private fun StorySection(snapshot: GameSnapshot, busy: Boolean, onChoice: (Strin
                     busy = busy,
                     onChoice = onChoice,
                     onNarrate = onNarrate,
+                    textDelayMs = textDelayMs,
                     modifier = Modifier.weight(0.64f).fillMaxHeight(),
                 )
             }
@@ -256,6 +318,7 @@ private fun StorySection(snapshot: GameSnapshot, busy: Boolean, onChoice: (Strin
                     busy = busy,
                     onChoice = onChoice,
                     onNarrate = onNarrate,
+                    textDelayMs = textDelayMs,
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(0.58f),
@@ -271,8 +334,25 @@ private fun NarrativePanel(
     busy: Boolean,
     onChoice: (String) -> Unit,
     onNarrate: (String) -> Boolean,
+    textDelayMs: Int,
     modifier: Modifier,
 ) {
+    var visibleChars by remember(snapshot.sceneId, snapshot.body, textDelayMs) {
+        mutableStateOf(if (textDelayMs <= 0) snapshot.body.length else 0)
+    }
+    LaunchedEffect(snapshot.sceneId, snapshot.body, textDelayMs) {
+        if (textDelayMs <= 0) {
+            visibleChars = snapshot.body.length
+        } else {
+            visibleChars = 0
+            while (visibleChars < snapshot.body.length) {
+                delay(textDelayMs.toLong())
+                visibleChars = (visibleChars + 3).coerceAtMost(snapshot.body.length)
+            }
+        }
+    }
+    val visibleBody = snapshot.body.take(visibleChars)
+
     PixelPanel(modifier = modifier, title = snapshot.title) {
         Column(
             modifier = Modifier
@@ -288,7 +368,7 @@ private fun NarrativePanel(
             )
             Spacer(Modifier.height(12.dp))
             Text(
-                text = snapshot.body,
+                text = visibleBody,
                 color = PixelColors.Paper,
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.clickable(role = Role.Button) { onNarrate(snapshot.body) },
@@ -421,7 +501,14 @@ private fun SettingsPanel(
     snapshot: GameSnapshot,
     onSave: () -> Unit,
     onLoad: () -> Unit,
+    onReplayNarration: () -> Boolean,
     onStopNarration: () -> Unit,
+    autoReadNarration: Boolean,
+    onAutoReadChange: (Boolean) -> Unit,
+    narrationRate: Float,
+    onNarrationRateChange: (Float) -> Unit,
+    textDelayMs: Int,
+    onTextDelayChange: (Int) -> Unit,
     onCheat: (String) -> Unit,
     onClose: () -> Unit,
 ) {
@@ -446,6 +533,46 @@ private fun SettingsPanel(
                 color = PixelColors.Muted,
                 style = MaterialTheme.typography.bodyMedium,
             )
+            Spacer(Modifier.height(8.dp))
+            PixelTextButton("REPLAY NARRATION") { onReplayNarration() }
+            Spacer(Modifier.height(8.dp))
+            PixelTextButton(
+                if (autoReadNarration) "AUTO-READ // ON" else "AUTO-READ // OFF"
+            ) {
+                onAutoReadChange(!autoReadNarration)
+            }
+            Spacer(Modifier.height(8.dp))
+            Text(
+                "VOICE SPEED // " + String.format("%.2fx", narrationRate),
+                color = PixelColors.Paper,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            Spacer(Modifier.height(6.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                PixelTextButton("SLOWER") {
+                    onNarrationRateChange((narrationRate - 0.10f).coerceAtLeast(0.5f))
+                }
+                PixelTextButton("FASTER") {
+                    onNarrationRateChange((narrationRate + 0.10f).coerceAtMost(1.5f))
+                }
+            }
+            Spacer(Modifier.height(8.dp))
+            Text(
+                "TEXT REVEAL // " + if (textDelayMs <= 0) "INSTANT" else textDelayMs.toString() + " ms",
+                color = PixelColors.Paper,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            Spacer(Modifier.height(6.dp))
+            PixelTextButton("CYCLE TEXT SPEED") {
+                onTextDelayChange(
+                    when (textDelayMs) {
+                        0 -> 15
+                        15 -> 35
+                        35 -> 70
+                        else -> 0
+                    }
+                )
+            }
             Spacer(Modifier.height(8.dp))
             PixelTextButton("STOP NARRATION", onStopNarration)
         }
