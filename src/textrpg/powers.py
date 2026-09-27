@@ -239,6 +239,172 @@ def _numeric_player_path(state: GameState, path: str) -> float:
     return float(value)
 
 
+def _power_resource_plan(
+    state: GameState,
+    ability_id: str,
+    definition: Mapping[str, Any],
+) -> Dict[str, Any] | None:
+    """Validate and plan one authored power resource without mutating state."""
+    errors = validate_power_definitions({ability_id: definition})
+    if errors:
+        raise RuleError("Invalid power definition:\n- " + "\n- ".join(errors))
+
+    resource = definition.get("resource")
+    if resource is None:
+        return None
+    if not isinstance(resource, Mapping):
+        raise RuleError(f"Power resource definition must be an object: {ability_id}")
+
+    path = _validate_power_resource_path(
+        resource.get("path"),
+        f"{ability_id}.resource.path",
+    )
+    maximum = float(resource["maximum"])
+    starting = float(resource.get("starting", maximum))
+    recovery_per_hour = float(resource.get("recovery_per_hour", 0))
+
+    if not isinstance(state.player, MutableMapping):
+        raise RuleError("player state must be mutable")
+
+    resource_id = path.split(".", 1)[1]
+    existing_container = state.player.get("power_resources")
+    if existing_container is None:
+        container: MutableMapping[str, Any] = {}
+        create_container = True
+    elif not isinstance(existing_container, MutableMapping):
+        raise RuleError("player.power_resources must be a mutable object")
+    else:
+        container = existing_container
+        create_container = False
+
+    missing = resource_id not in container
+    if missing:
+        current = starting
+    else:
+        raw = container[resource_id]
+        if (
+            isinstance(raw, bool)
+            or not isinstance(raw, (int, float))
+            or not isfinite(float(raw))
+        ):
+            raise RuleError(f"Power resource must be a finite number: {path}")
+        current = float(raw)
+        if current < 0 or current > maximum:
+            raise RuleError(
+                f"Power resource must be in range 0..{maximum}: {path}={current}"
+            )
+
+    return {
+        "path": path,
+        "resource_id": resource_id,
+        "container": container,
+        "create_container": create_container,
+        "missing": missing,
+        "current": current,
+        "maximum": maximum,
+        "starting": starting,
+        "recovery_per_hour": recovery_per_hour,
+    }
+
+
+def _commit_power_resource_plan(state: GameState, plan: Mapping[str, Any], value: float) -> None:
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not isfinite(float(value))
+    ):
+        raise RuleError("Power resource commit value must be finite numeric")
+    maximum = float(plan["maximum"])
+    value = float(value)
+    if value < 0 or value > maximum:
+        raise RuleError(
+            f"Power resource commit value must be in range 0..{maximum}: {value}"
+        )
+
+    container = plan["container"]
+    if not isinstance(container, MutableMapping):
+        raise RuleError("Power resource container must be mutable")
+    if plan["create_container"]:
+        state.player["power_resources"] = container
+    container[str(plan["resource_id"])] = value
+
+
+def initialize_power_resource(
+    state: GameState,
+    ability_id: str,
+    definition: Mapping[str, Any],
+) -> Dict[str, float | str] | None:
+    """Initialize an ability-specific resource from an authored definition."""
+    plan = _power_resource_plan(state, ability_id, definition)
+    if plan is None:
+        return None
+
+    if plan["missing"]:
+        _commit_power_resource_plan(state, plan, float(plan["starting"]))
+
+    return {
+        "path": str(plan["path"]),
+        "current": float(plan["current"]),
+        "maximum": float(plan["maximum"]),
+        "recovery_per_hour": float(plan["recovery_per_hour"]),
+    }
+
+
+def recover_power_resource(
+    state: GameState,
+    ability_id: str,
+    definition: Mapping[str, Any],
+    *,
+    minutes: int,
+    quality: float = 1.0,
+) -> Dict[str, Any]:
+    """Recover one authored power resource through the shared world clock."""
+    if isinstance(minutes, bool) or not isinstance(minutes, int) or minutes <= 0:
+        raise RuleError("Power recovery minutes must be a positive integer")
+    if (
+        isinstance(quality, bool)
+        or not isinstance(quality, (int, float))
+        or not isfinite(float(quality))
+        or float(quality) < 0
+    ):
+        raise RuleError("Power recovery quality must be a finite non-negative number")
+
+    ability = state.abilities.get(ability_id)
+    if ability is None:
+        raise RuleError(f"Unknown ability: {ability_id}")
+    _ability_progression_state(ability, ability_id)
+    _validate_history_container(state)
+    validate_time_advance(state, minutes)
+
+    plan = _power_resource_plan(state, ability_id, definition)
+    if plan is None:
+        raise RuleError(f"Ability has no recoverable power resource: {ability_id}")
+
+    before = float(plan["current"])
+    rate = float(plan["recovery_per_hour"])
+    maximum = float(plan["maximum"])
+    amount = rate * (minutes / 60.0) * float(quality)
+    after = min(maximum, before + amount)
+
+    event = {
+        "type": "power_resource_recovery",
+        "ability_id": ability_id,
+        "resource_path": str(plan["path"]),
+        "before": round(before, 3),
+        "after": round(after, 3),
+        "gained": round(after - before, 3),
+        "minutes": minutes,
+        "quality": float(quality),
+        "time_minutes": state.time_minutes + minutes,
+    }
+
+    # All state/definition/time validation is complete before persistent mutation.
+    _commit_power_resource_plan(state, plan, after)
+    advance_time(state, minutes)
+    state.history.append(event)
+    return event
+
+
 def discover_ability(
     state: GameState,
     ability_id: str,
