@@ -184,6 +184,15 @@ private fun PixelGameShell(
 ) {
     var section by remember { mutableStateOf(GameSection.STORY) }
     var settingsOpen by remember { mutableStateOf(false) }
+    var lastSceneId by remember { mutableStateOf(snapshot.sceneId) }
+
+    LaunchedEffect(snapshot.sceneId) {
+        if (snapshot.sceneId != lastSceneId) {
+            section = GameSection.STORY
+            settingsOpen = false
+            lastSceneId = snapshot.sceneId
+        }
+    }
 
     LaunchedEffect(snapshot.sceneId, autoReadNarration) {
         if (autoReadNarration) {
