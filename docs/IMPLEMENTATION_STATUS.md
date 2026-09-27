@@ -65,6 +65,7 @@ The original `main` branch is not modified by this work.
 - Explicit ability discovery creates a rank-0/mastery-0 shell rather than granting free progression.
 - Technique practice now consumes stamina/focus, advances world time, uses diminishing returns, supports mentor bonuses, and grants gradual technique/ability mastery.
 - `The Dead Relay` now continues below Gate Twelve into the first provisional power-discovery/practice sequence; one hour of first practice is intentionally insufficient to leave the earliest technique stage.
+- Save/resume route regressions permanently cover cooperative, solo, failure/recovery, and first-power paths.
 
 ## TESTS_RUN
 
@@ -74,21 +75,35 @@ Command used against a branch-equivalent reconstruction of the current remote fi
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Last full branch-equivalent suite result on record: **58 tests passed, 0 failed**.
+Latest exact branch-equivalent suite result: **93 tests passed, 0 failed**.
 
-That full run predates the newest modifier-centralization, content-loader/CLI, NPC goal/story scene effects, negative knowledge gates, extended vertical-slice, and power-practice changes.
+Verification was performed against a local reconstruction of the live `foundation/text-rpg-systems` branch. Git blob hashes were checked against the live repository for the reconstructed source/content set, and the newly added save/resume regression module was separately hash-matched to its live Git blob before the final run.
 
-Additional regression tests have been authored for those changes, but this chat has **not yet executed a new complete branch-equivalent suite after the latest commits**. Do not increase the repository-wide pass count until that run is observed.
+Observed command:
+
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -v
+```
+
+Observed result:
+
+```text
+Ran 93 tests in 0.027s
+
+OK
+```
+
+Save/resume is now permanent regression coverage in `tests/test_save_resume_routes.py`. Cooperative-direct, solo-direct, failure/recovery-join, and first-power-practice routes each survive a JSON save/load round trip and continue successfully.
 
 No GitHub Actions workflow was added; verification does not consume hosted CI minutes.
 
 ## NEXT_ACTION
 
-1. Reconstruct the latest branch locally and run the complete unittest suite; resolve every regression before raising the verified count.
-2. Exercise the CLI against `content/vertical_slice_01.json` and verify save/resume across cooperative, solo, recovery, and first-power routes.
-3. Review/promote `The Dead Relay` from provisional canon to confirmed canon or revise its setting/story before wider content expansion.
-4. Define power resource identity, drawbacks, and later unlock prerequisites for `ABILITY_TRACE_ECHO` before adding stronger techniques.
-5. Expand canonical visual identity records to every recurring character introduced after Tamsin.
+1. Define power-resource identity, drawbacks, recovery behavior, and later unlock prerequisites for `ABILITY_TRACE_ECHO` before adding stronger techniques.
+2. Strengthen authored-content validation for power/NPC effect references as content volume grows.
+3. Review `The Dead Relay` as provisional story material; promote, revise, or replace it only after deliberate canon review.
+4. Expand canonical visual identity records when additional recurring characters are intentionally introduced.
+5. Add more end-to-end route coverage as new authored branches are introduced.
 6. Connect the rules layer to a selected pixel-art presentation runtime only after the client technology is deliberately chosen.
 
 ## BLOCKERS
