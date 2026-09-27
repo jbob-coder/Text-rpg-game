@@ -485,6 +485,8 @@ def _validate_history_container(state: GameState) -> None:
 
 
 def _validate_condition_container(state: GameState) -> None:
+    if not isinstance(state.player, MutableMapping):
+        raise RuleError("player state must be mutable")
     conditions = state.player.get("conditions")
     if conditions is not None and not isinstance(conditions, dict):
         raise RuleError("player.conditions must be an object")
