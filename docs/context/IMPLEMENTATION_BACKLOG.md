@@ -218,3 +218,30 @@ Isolated runtime evidence:
 Important limitation:
 
 The local shell could not resolve `github.com`, so it could not clone the exact repository and run the existing V6 258-test suite together with these 69 tests. Stage 3 therefore remains open and none of these prototype tasks should be marked integrated/canonical yet.
+
+
+### Prototype expansion evidence — wounds and first hunt integration
+
+Prototype branch code/test HEAD exercised: `6f0f8ed1b165d3de43f14ce0d58d0237259ddfe3`
+
+Documentation-only prototype HEAD after evidence refresh: `efbfaee6d23eb85889db09a058dc9b04669f03c7`
+
+Additional prototype coverage:
+
+- TASK-COMBAT-012..013 — persistent per-zone wound consequences, impairment tags, and disabled actions are prototyped.
+- TASK-COMBAT-014 — direct core-zone damage can now deterministically translate into beast-crystal harvest damage.
+- TASK-HUNT-004..009 — a contract-level integration test now connects weapon targeting, armor coverage, limb injury, retreat memory, adaptation readiness, rematch geometry, core exposure, crystal damage, and forge compatibility.
+- TASK-HUNT-005 — explicitly demonstrated: head/core are unavailable initially and become available only after battle-state changes.
+- TASK-HUNT-006 — retreat is recorded as persistent beast encounter memory in the prototype.
+- TASK-HUNT-007 — repeated observed targeting is sufficient for behavioral adaptation readiness; no adaptation appears without observations.
+- TASK-HUNT-008 — core strike changes harvested crystal integrity.
+- TASK-HUNT-009 — recovered beast crystal is checked against weapon socket/compatibility rules.
+
+Updated isolated runtime evidence:
+
+- previous prototype tests: 69
+- wound tests: 12
+- cross-system hunt integration tests: 3
+- total: **84 passed / 0 failed / 0 errors**
+
+These remain isolated prototype results, not full-repository V6 integration results.
