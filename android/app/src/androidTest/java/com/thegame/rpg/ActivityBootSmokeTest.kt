@@ -7,6 +7,7 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import org.junit.Rule
 import org.junit.Test
 
@@ -28,6 +29,18 @@ class ActivityBootSmokeTest {
         }
     }
 
+    private fun scrollToChoiceAndClick(choiceId: String, timeoutMillis: Long = 30_000) {
+        composeRule.waitUntil(timeoutMillis = timeoutMillis) {
+            composeRule.onAllNodes(
+                androidx.compose.ui.test.hasTestTag("choice-$choiceId")
+            ).fetchSemanticsNodes().isNotEmpty()
+        }
+        composeRule.onNodeWithTag("choice-$choiceId")
+            .performScrollTo()
+            .assertIsDisplayed()
+            .performClick()
+    }
+
     @Test
     fun realActivityBootsAndAppliesFirstPythonChoice() {
         composeRule.waitUntil(timeoutMillis = 60_000) {
@@ -38,9 +51,7 @@ class ActivityBootSmokeTest {
 
         composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
         composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
-        composeRule.onNodeWithTag("choice-TAKE_DEAD_RELAY")
-            .assertIsDisplayed()
-            .performClick()
+        scrollToChoiceAndClick("TAKE_DEAD_RELAY")
 
         waitForText("A Case That Should Be Empty", timeoutMillis = 30_000)
 
@@ -56,7 +67,7 @@ class ActivityBootSmokeTest {
             ).fetchSemanticsNodes().isNotEmpty()
         }
 
-        composeRule.onNodeWithTag("choice-TAKE_DEAD_RELAY").performClick()
+        scrollToChoiceAndClick("TAKE_DEAD_RELAY")
         waitForText("A Case That Should Be Empty", timeoutMillis = 30_000)
 
         waitForClickableText("SETTINGS")
@@ -70,7 +81,7 @@ class ActivityBootSmokeTest {
         composeRule.waitForIdle()
         composeRule.onNodeWithText("CLOSE").performClick()
         waitForClickableText("Use the maintenance seal to open the casing without damaging it.")
-        composeRule.onNodeWithTag("choice-USE_MAINTENANCE_SEAL").performClick()
+        scrollToChoiceAndClick("USE_MAINTENANCE_SEAL")
         waitForText("Gate Twelve", timeoutMillis = 30_000)
 
         composeRule.onNodeWithText("SETTINGS").performClick()
