@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-27 14:23 AST  
+Updated: 2026-09-27 17:34 AST  
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -20,13 +20,18 @@ Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPL
 ## Current repository baseline
 
 - Repository: `jbob-coder/Text-rpg-game`
-- Current stabilization branch: `fix/v6-runtime-boundaries`
+- Current Android integration branch: `feature/android-pixel-client-v1`
+- Current verified Android HEAD: `510851cc165702fbe19ef005083a03cbcd00a9f3`
+- Stabilization branch retained: `fix/v6-runtime-boundaries`
 - Stabilization baseline before continuity work: `fcfe8115a72eb07036fa4e74a61a0094eaa3ff10`
 - V6 parent: `integration/rules-ability-v6-reconcile@7f5f104fb839068bdfaf5cec72f37129ae20d463`
 - `main`: placeholder; do not treat it as the canonical implementation.
 - Untouched V6 recorded execution: 258 tests, 245 passed, 1 failed, 12 errors.
 - Repaired candidate recorded execution: 275 tests, 0 failures/errors/skips on CPython 3.12.14/Linux.
-- Current content record: 16 scenes, 25 choices, 3 quests, 1 power definition.
+- Verified base-client content record at Android HEAD: 16 scenes, 25 choices, 3 quests, 1 power definition.
+- Android runtime evidence: workflow run 65 / run ID 36351957867; Python 290/290 OK; Android build/compile gates OK; representative emulator API 35 x86_64 completed 3 tests successfully.
+- APK SHA-256 for exact Android HEAD: `94e325d55c5dd1404dbab8d0209dbfe1f8c0c29c5abecfdd582736851da4cd74`.
+- Physical handset validation and APK delivery remain separate gates.
 - Seven-attribute schema and save schema 1 remain; no stat/save migration has been performed.
 
 The 275-pass evidence is committed under `docs/verification/v6/`. It is historical evidence for that exact candidate, not proof for later code changes.
@@ -55,159 +60,176 @@ The UI must not become the authoritative rules engine.
 
 ## P0 — Android startup
 
-### TASK A-001 — Diagnose Android black screen
-- STATUS: `IN_PROGRESS`
+### TASK A-001 — Resolve Android black-screen incident
+- STATUS: `DONE`
 - PRIORITY: `P0 / BLOCKING`
-- OBSERVED: Jack installed/opened the generated Android test APK and reported a black screen.
-- VERIFIED INVESTIGATION (2026-09-27 14:23 AST):
-  - the current repository tree contains no Android project, manifest, Gradle files, NativeActivity source, or persisted wrapper source;
-  - the previously generated `THE-GAME-V6-Android-Test.apk` is not available in the current runtime or searchable Library/conversation files;
-  - unrelated Android/Godot artifacts from other projects were found and explicitly excluded from this diagnosis.
-- CURRENT BLOCKER: the failing APK cannot be reproduced or inspected from authoritative source because its packaging source/artifact was ephemeral.
-- REQUIRED CHECKS:
-  - launcher/entry activity and manifest;
-  - ABI/native-library packaging;
-  - surface/window initialization;
-  - packaged assets and asset paths;
-  - HTML/JS/native bridge if applicable;
-  - lifecycle/startup error handling;
-  - representative Android runtime/device logs.
-- DONE WHEN: root cause is identified, corrected, rebuilt, and visible gameplay is confirmed on representative Android runtime/device.
-- COMPLETED_AT: —
+- RESOLUTION: the exact failure inside the old ephemeral NativeActivity/WebView wrapper remains unrecoverable because its authoritative wrapper source/artifact was not retained. The incident was closed by replacing that wrapper with a repository-owned reproducible Kotlin/Compose + Chaquopy client with visible startup/error states.
+- VERIFIED RUNTIME (2026-09-27 17:34 AST):
+  - exact source `510851cc165702fbe19ef005083a03cbcd00a9f3`;
+  - workflow run `36351957867` completed successfully;
+  - real `MainActivity` booted on Android API 35 x86_64 emulator;
+  - Python engine initialized and rendered visible gameplay;
+  - first authored choice advanced to the next scene;
+  - Save -> further choice -> Load/Continue restored the saved scene;
+  - 3 connected Android instrumentation tests finished successfully.
+- LIMITATION: this resolves the black-screen product failure class on a representative Android runtime; it does not retroactively prove the exact internal crash mechanism of the discarded wrapper.
+- COMPLETED_AT: `2026-09-27 17:34 AST`
 
 ### TASK A-002 — Rebuild corrected APK
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
 - DEPENDS_ON: A-001
+- VERIFIED: debug APK builds from repository source; package structure checks pass for ARM64, ARMv7, x86_64 and bundled content. Exact SHA-256 at `510851cc…`: `94e325d55c5dd1404dbab8d0209dbfe1f8c0c29c5abecfdd582736851da4cd74`.
+- REMAINING: produce/download the distributable artifact from a controlled build and deliver it to the user; physical handset install remains separate.
 - DONE WHEN: package builds, integrity/signing is checked, and artifact is delivered.
 - COMPLETED_AT: —
 
 ### TASK A-003 — Physical/representative Android validation
-- STATUS: `PENDING`
-- DEPENDS_ON: A-002
-- DONE WHEN: visible startup/gameplay is confirmed; black screen no longer reproduces.
-- COMPLETED_AT: —
+- STATUS: `DONE`
+- DEPENDS_ON: A-002 build path
+- VERIFIED: Android API 35 x86_64 representative emulator booted the real Activity and completed 3 connected tests, including visible startup/choice and Save/Continue restoration.
+- LIMITATION: no physical handset is claimed by this task result.
+- DONE WHEN: visible startup/gameplay is confirmed; black screen no longer reproduces on a representative Android runtime.
+- COMPLETED_AT: `2026-09-27 17:34 AST`
 
 ## UI / UX reconstruction
 
 ### TASK U-001 — Primary gameplay layout
-- STATUS: `PENDING`
-- Character visible; map/scene visible; large narrative area; clear navigation.
-- COMPLETED_AT: —
+- STATUS: `DONE`
+- RESULT: repository-owned Compose shell has persistent pixel avatar, scene illustration, large narrative panel, choice cards, top status/settings and separate bottom navigation.
+- EVIDENCE: exact Android HEAD `510851cc…` compiled and booted on representative emulator.
+- COMPLETED_AT: `2026-09-27 17:34 AST`
 
 ### TASK U-002 — Narrative readability
-- STATUS: `PENDING`
-- Larger text/container, long-text handling, readable spacing.
-- COMPLETED_AT: —
+- STATUS: `DONE`
+- RESULT: dedicated scrollable narrative surface, preserved authored title casing, large body typography, text-reveal control and scene-change scroll reset.
+- COMPLETED_AT: `2026-09-27 17:34 AST`
 
 ### TASK U-003 — Decision presentation
-- STATUS: `PENDING`
-- Better cards/modals; choices may have immediate, delayed, hidden, or narrative-only consequences.
-- COMPLETED_AT: —
+- STATUS: `DONE`
+- RESULT: pixel decision cards expose enabled/locked state and player-safe disabled reason; authoritative consequences remain Python-owned.
+- COMPLETED_AT: `2026-09-27 17:34 AST`
 
 ### TASK U-004 — Settings/save separation
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
 - Top-right Settings with Audio, Narration, Text speed/delay, Controls, Save, Load, Accessibility.
 - Saves must not clutter the primary gameplay HUD.
 - COMPLETED_AT: —
 
 ### TASK U-005 — Developer/cheat panel
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
+- IMPLEMENTED: hideable Developer surface and validated Python whitelist (`FULLRESTORE`, `CLEARCONDITIONS`, `GIVE_RELAY`, `MAXATTR`, `DEBUGMAP`).
 - Separate/hideable developer surface for XP, level, items, quests, stats, teleport, currency, abilities, world flags, time.
 - COMPLETED_AT: —
 
 ## Character / stats / equipment
 
 ### TASK P-001 — Visible avatar
-- STATUS: `PENDING`
-- Player has a persistent on-screen visual identity.
-- COMPLETED_AT: —
+- STATUS: `DONE`
+- RESULT: persistent pixel player avatar is visible in the gameplay layout and confirmed by connected Android smoke.
+- COMPLETED_AT: `2026-09-27 17:34 AST`
 
 ### TASK P-002 — Equipment model + visual integration
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
+- IMPLEMENTED: authoritative equipment slots, equip/unequip bridge and Android equipment panel. Visual paper-doll integration is being validated in `feature/android-open-world-v1`.
 - Planned slots: Head, Chest, Hands, Legs, Feet, Main Hand, Off Hand, Ring 1, Ring 2, Neck, Accessory 1, Accessory 2.
 - Equipment must affect authoritative state/rules and eventually appearance.
 - COMPLETED_AT: —
 
 ### TASK P-003 — Dedicated detailed Stats screen
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
+- IMPLEMENTED: separate Stats surface with resources, attributes, derived stats, skills and conditions from the player-safe projection. Deeper contribution/meaning presentation remains in progress.
 - Categories: Core, Combat, Resources, Social, Progression, Derived.
 - Inspectable base/equipment/passive contributions and gameplay meaning.
 - COMPLETED_AT: —
 
 ### TASK P-004 — Inventory / Equipment panels
-- STATUS: `PENDING`
+- STATUS: `DONE`
+- RESULT: Inventory and Equipment are separate from narrative; equip/unequip mutations run through Python and return updated player-safe state.
+- COMPLETED_AT: `2026-09-27 17:34 AST`
 - Separate from main narrative screen.
 - COMPLETED_AT: —
 
 ## World / map
 
 ### TASK W-001 — Interactive map
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
+- IMPLEMENTED: authored location graph, discovered nodes, route rendering, selected destination and authoritative travel/time. Directly tappable pixel nodes and narrative destination travel are being validated in `feature/android-open-world-v1`.
 - Start with a maintainable interactive 2D location/world map before heavier 3D.
 - COMPLETED_AT: —
 
 ### TASK W-002 — City/location graph
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
 - Locations/interiors/NPC destinations/events represented with stable IDs.
 - Example labels are not automatically canon.
 - COMPLETED_AT: —
 
 ### TASK W-003 — World interaction
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
 - Movement between locations; NPC visits; optional exploration; location/world-state-triggered events.
 - COMPLETED_AT: —
 
 ### TASK W-004 — Persistent world events
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
 - Choices can set flags and produce delayed NPC/world changes and route changes.
 - COMPLETED_AT: —
 
 ## Quest / narrative
 
 ### TASK Q-001 — Main Quest framework
-- STATUS: `PENDING`
+- STATUS: `DONE`
+- RESULT: authoritative staged quest graph exists and is projected to Android by category.
+- COMPLETED_AT: `2026-09-27 17:34 AST`
 - Branching main-story progression.
 - COMPLETED_AT: —
 
 ### TASK Q-002 — Side Quest framework
-- STATUS: `PENDING`
+- STATUS: `DONE`
+- RESULT: side quest category and authored Gate Twelve quest are supported by the same authoritative quest system.
+- COMPLETED_AT: `2026-09-27 17:34 AST`
 - Optional integrated side stories.
 - COMPLETED_AT: —
 
 ### TASK Q-003 — Optional Quest framework
-- STATUS: `PENDING`
+- STATUS: `DONE`
+- RESULT: optional quest category and Trace Stabilization content are supported and projected.
+- COMPLETED_AT: `2026-09-27 17:34 AST`
 - Optional activities not required for main progression.
 - COMPLETED_AT: —
 
 ### TASK Q-004 — Lore/world narrative exploration
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
+- CANDIDATE: `feature/android-open-world-v1` adds an authored lore quest and cross-location knowledge consequences; not DONE until integration gates pass.
 - Optional discoverable world information.
 - COMPLETED_AT: —
 
 ### TASK Q-005 — Branching narrative graph
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
 - Persistent flags, delayed consequences, non-stat consequences, reconvergence and mutually exclusive routes where authored.
 - COMPLETED_AT: —
 
 ### TASK Q-006 — Canon/context consistency
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
+- RULE: current expansion is original project content; external/reference novel material is not silently imported as canon.
 - Re-read authoritative project context before expanding story; do not silently import copyrighted/reference story content as canon.
 - COMPLETED_AT: —
 
 ## Audio / visual presentation
 
 ### TASK M-001 — Tap-to-narrate
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
+- IMPLEMENTED: native Android TTS, tap/read-aloud, replay, stop, auto-read, speech-rate and text-reveal controls. Voice selection/pause semantics remain follow-up work.
 - Play/pause/replay; auto-read; speed/text delay; voice selection if supported.
 - COMPLETED_AT: —
 
 ### TASK M-002 — Scene illustrations
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
+- IMPLEMENTED: procedural pixel scene illustrations for the current depot/Gate Twelve slice; broader location coverage remains in progress.
 - Consistent visual storytelling for locations/events/characters.
 - COMPLETED_AT: —
 
 ### TASK M-003 — Character visual asset pipeline
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
+- CANDIDATE: paper-doll equipment layers are implemented on `feature/android-open-world-v1`; reusable external asset pipeline is not finished.
 - Reusable avatar/equipment visual pipeline rather than one-off replacements.
 - COMPLETED_AT: —
 
@@ -257,4 +279,4 @@ Before ending meaningful work, update:
 
 ## Immediate next action
 
-Resume TASK A-001. Recover the original APK/wrapper source if possible; if it is unrecoverable, design a repository-owned reproducible Android client before attempting another APK build.
+Promote and verify `feature/android-open-world-v1` on top of the green Android baseline without losing the verified Save/Continue and scroll/navigation fixes. Then run full Python + Android build gates and a selective emulator smoke for free-roam map travel. After that, produce a controlled downloadable APK artifact for physical-device testing.
