@@ -79,5 +79,12 @@ class VisualIdentityTests(unittest.TestCase):
             character_generation_contract("bad-id", self.record())
 
 
+    def test_visual_validator_rejects_non_mapping_root_without_crash(self):
+        self.assertEqual(
+            validate_character_visuals([]),
+            ["character visual records must be an object"],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
