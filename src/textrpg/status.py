@@ -178,6 +178,74 @@ def _derived_view(
     return output
 
 
+def _hidden_condition_ids(
+    state: GameState,
+    definitions: Mapping[str, Mapping[str, Any]],
+) -> set[str]:
+    conditions = state.player.get("conditions", {})
+    if conditions is None:
+        return set()
+    if not isinstance(conditions, Mapping):
+        raise RuleError("player.conditions must be an object")
+
+    hidden: set[str] = set()
+    for condition_id, record in conditions.items():
+        if not isinstance(condition_id, str) or not condition_id:
+            raise RuleError("Condition IDs must be non-empty strings")
+        if not isinstance(record, Mapping):
+            raise RuleError(f"Condition record must be an object: {condition_id}")
+        definition = definitions.get(condition_id, {})
+        if not isinstance(definition, Mapping):
+            raise RuleError(f"Condition definition must be an object: {condition_id}")
+        if record.get("visible", True) is False or definition.get("player_visible", True) is False:
+            hidden.add(condition_id)
+    return hidden
+
+
+def _sanitize_player_breakdown(
+    value: Any,
+    hidden_condition_ids: set[str],
+) -> Any:
+    """Remove hidden condition identifiers from player-facing provenance."""
+    if isinstance(value, Mapping):
+        sanitized: Dict[str, Any] = {}
+        hidden_total = 0.0
+        for key, item in value.items():
+            if (
+                isinstance(key, str)
+                and key.startswith("condition:")
+                and key.removeprefix("condition:") in hidden_condition_ids
+            ):
+                if (
+                    isinstance(item, bool)
+                    or not isinstance(item, (int, float))
+                    or not isfinite(float(item))
+                ):
+                    raise RuleError("Hidden condition modifier must be finite numeric")
+                hidden_total += float(item)
+                continue
+            sanitized[key] = _sanitize_player_breakdown(
+                item,
+                hidden_condition_ids,
+            )
+        if hidden_total:
+            existing = sanitized.get("unidentified_modifier", 0.0)
+            if (
+                isinstance(existing, bool)
+                or not isinstance(existing, (int, float))
+                or not isfinite(float(existing))
+            ):
+                raise RuleError("Player breakdown unidentified_modifier must be numeric")
+            sanitized["unidentified_modifier"] = float(existing) + hidden_total
+        return sanitized
+    if isinstance(value, list):
+        return [
+            _sanitize_player_breakdown(item, hidden_condition_ids)
+            for item in value
+        ]
+    return value
+
+
 def _condition_view(
     state: GameState,
     definitions: Mapping[str, Mapping[str, Any]],
@@ -307,6 +375,8 @@ def inspect_status_value(
     state: GameState,
     engine: RulesEngine,
     path: str,
+    *,
+    condition_definitions: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
     """Return a player-safe deep explanation for a visible numeric status value.
 
@@ -337,15 +407,25 @@ def inspect_status_value(
             "Status inspection supports only attributes.*, skills.*, or derived.*"
         )
 
+    condition_definitions = condition_definitions or {}
+    if not isinstance(condition_definitions, Mapping):
+        raise RuleError("condition_definitions must be an object")
+
     explanation = engine.explain_player_value(state, path)
     total = _finite_number(explanation.get("total"), f"status value {path}")
     breakdown = explanation.get("breakdown")
     if not isinstance(breakdown, Mapping):
         raise RuleError(f"Status explanation breakdown must be an object: {path}")
 
+    hidden_conditions = _hidden_condition_ids(state, condition_definitions)
+    safe_breakdown = _sanitize_player_breakdown(
+        breakdown,
+        hidden_conditions,
+    )
+
     return {
         "path": path,
         "kind": explanation.get("kind"),
         "total": total,
-        "breakdown": dict(breakdown),
+        "breakdown": safe_breakdown,
     }
