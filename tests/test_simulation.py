@@ -80,5 +80,37 @@ class SimulationTests(unittest.TestCase):
         with self.assertRaises(RuleError):
             train_attribute(state, attribute="might", minutes=120, intensity=2.1)
 
+    def test_condition_temporal_and_metadata_contracts_are_strict(self):
+        state = self.state()
+        with self.assertRaises(RuleError):
+            apply_condition(state, "", severity=1)
+        with self.assertRaises(RuleError):
+            apply_condition(state, "COND_BOOL", severity=True)
+        with self.assertRaises(RuleError):
+            apply_condition(state, "COND_NEG", duration_minutes=-1)
+        with self.assertRaises(RuleError):
+            apply_condition(state, "COND_TAG", tags="fatigue")
+
+    def test_time_and_training_reject_boolean_or_non_finite_values(self):
+        state = self.state()
+        with self.assertRaises(RuleError):
+            advance_time(state, True)
+        with self.assertRaises(RuleError):
+            recover(state, 60, quality=float("nan"))
+        with self.assertRaises(RuleError):
+            train(
+                state,
+                skill="athletics",
+                minutes=60,
+                intensity=float("inf"),
+            )
+        with self.assertRaises(RuleError):
+            train_attribute(
+                state,
+                attribute="might",
+                minutes=120,
+                intensity=True,
+            )
+
 if __name__ == "__main__":
     unittest.main()
