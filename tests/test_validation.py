@@ -17,6 +17,33 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class ValidationTests(unittest.TestCase):
+    def test_perk_visibility_must_be_boolean_in_effects_and_registries(self):
+        effect = {"type": "add_perk", "perk_id": "PERK_SECRET", "visible": False}
+        scenes = {"SCENE_A": {"choices": [{
+            "id": "GRANT", "text": "Continue",
+            "outcomes": {"default": {"effects": [effect]}},
+        }]}}
+        self.assertEqual(validate_scenes(scenes), [])
+        self.assertEqual(validate_registries({"perks": {"PERK_SECRET": {"player_visible": False}}}), [])
+        for bad in (0, None, "false", []):
+            with self.subTest(bad=bad):
+                effect["visible"] = bad
+                self.assertTrue(validate_scenes(scenes))
+                self.assertTrue(validate_registries({"perks": {"PERK_SECRET": {"player_visible": bad}}}))
+
+    def test_resource_requirements_validate_separately_from_modifier_paths(self):
+        condition = {"type": "resource_min", "resource": "stamina", "value": 8}
+        scenes = {"SCENE_A": {"choices": [{
+            "id": "TRAIN", "text": "Train", "requires": [condition],
+            "outcomes": {"default": {}},
+        }]}}
+        self.assertEqual(validate_scenes(scenes), [])
+        for resource, value in (("secret", 8), ([], 8), ("stamina", True),
+                                ("stamina", float("inf")), ("stamina", -1)):
+            with self.subTest(resource=resource, value=value):
+                condition.update(resource=resource, value=value)
+                self.assertTrue(validate_scenes(scenes))
+
     def test_sample_content_is_valid(self):
         scenes = json.loads((ROOT / "content" / "sample_scene.json").read_text(encoding="utf-8"))["scenes"]
         self.assertEqual(validate_scenes(scenes), [])

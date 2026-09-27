@@ -1,9 +1,10 @@
 import copy
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
-from textrpg import RuleError, content_pack_from_mapping, load_content_pack
+from textrpg import RuleError, content_pack_from_mapping, load_content_pack, inspect_status_value
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -11,6 +12,31 @@ SLICE = ROOT / "content" / "vertical_slice_01.json"
 
 
 class ContentPackTests(unittest.TestCase):
+    def test_perk_registry_visibility_reaches_status_without_extra_client_context(self):
+        data = self.data()
+        data["registries"]["perks"]["PERK_TRACE_TOLERANCE"]["player_visible"] = False
+        data["initial_state"]["perks"] = {
+            "PERK_TRACE_TOLERANCE": {"modifiers": {"attributes.will": 3}},
+        }
+        pack = content_pack_from_mapping(data)
+        view = inspect_status_value(pack.state, pack.engine, "attributes.will")
+        self.assertNotIn("PERK_TRACE_TOLERANCE", repr(view))
+        self.assertEqual(view["breakdown"]["unidentified_modifier"], 3.0)
+
+    def test_file_loader_rejects_non_finite_numbers_in_metadata(self):
+        data = self.data()
+        data["metadata"] = {"probe": None}
+        raw = json.dumps(data)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "content.json"
+            for token in ("NaN", "Infinity", "-Infinity", "1e400", "-1e400"):
+                with self.subTest(token=token):
+                    path.write_text(raw.replace('"probe": null', '"probe": ' + token), encoding="utf-8")
+                    with self.assertRaisesRegex(RuleError, "strict JSON"):
+                        load_content_pack(path)
+            path.write_text(raw.replace('"probe": null', '"probe": 1.25'), encoding="utf-8")
+            self.assertEqual(load_content_pack(path).raw["metadata"]["probe"], 1.25)
+
     def data(self):
         return json.loads(SLICE.read_text(encoding="utf-8"))
 

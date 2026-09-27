@@ -1,6 +1,13 @@
 # Rules + Ability Integration V6 Reconciliation
 
-Status: **IN PROGRESS — STATIC RECONCILIATION COMPLETE, RUNTIME VERIFICATION PENDING**
+Status: **RUNTIME EXECUTED — BASELINE FAILURES REPAIRED ON STABILIZATION CANDIDATE**
+
+2026-09-27 update: exact upstream V6 source at `7f5f104fb839068bdfaf5cec72f37129ae20d463`
+ran 258 tests with 1 failure and 12 errors. The repaired `fix/v6-runtime-boundaries`
+candidate passes 275 tests. See [V6_STABILIZATION_HANDOFF.md](V6_STABILIZATION_HANDOFF.md).
+
+The static-work entries below are historical. Their interim test counts and
+"runtime pending" statements describe earlier checkpoints, not the current candidate.
 
 Repository: `jbob-coder/Text-rpg-game`
 
@@ -556,19 +563,15 @@ This remains static/source verification only. The exact runtime suite is still p
 
 ## Runtime verification boundary
 
-No exact V6 Python suite has been executed from this chat.
+The execution gap was closed on 2026-09-27 by retrieving all 45 source files through
+the GitHub connection, checking each Git blob hash, and reproducing the full source
+tree `434d32353f4c5cab192d45298353d4cfbacff9e4` before testing.
 
-Attempted direct repository execution is blocked because the local container cannot reach GitHub and no registered Codex execution environment is available.
-
-No GitHub Actions workflow is being introduced solely to obtain a pass claim.
-
-Therefore:
-- historical fully observed foundation evidence remains **103 passed / 0 failed**;
-- current foundation has 108 authored test methods;
-- V6 has 258 authored test methods;
-- V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
-
-Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
+Untouched V6 at `7f5f104fb839068bdfaf5cec72f37129ae20d463`: **258 tests, 1 failure, 12 errors**.
+The repaired candidate: **275 tests, OK** on CPython 3.12.14/Linux.
+The baseline remains failing; the green claim applies to the repaired candidate only.
+Logs and source identities are stored in `docs/verification/v6/`.
+No GitHub Actions workflow or hosted CI was introduced.
 
 ## Deliberate exclusions
 
@@ -583,12 +586,7 @@ V6 reconciliation does not include:
 
 ## Remaining gate
 
-1. Obtain an authorized exact runtime for the V6 branch.
-2. Execute:
-   `PYTHONPATH=src python -m unittest discover -s tests -v`
-3. Fix only observed integration regressions.
-4. Re-run until green.
-5. Verify save/resume and hidden-data/status boundaries.
-6. Record exact V6 SHA and observed result.
-7. Only after that, consolidate duplicate context histories.
-8. Keep seven-to-eight stat migration as a later isolated migration.
+1. Review the stabilization diff and its executed evidence.
+2. Establish the canonical implementation branch without blind-merging foundation.
+3. Update shared-context pointers and resolve superseded PRs/branch policy.
+4. Keep seven-to-eight stat migration as a later isolated migration.

@@ -69,6 +69,48 @@ class RulesEngineTests(unittest.TestCase):
             engine.choose(s, "ASK_MARA_PRIVATELY")
 
 
+class ResourceChoiceTests(unittest.TestCase):
+    def engine(self, resource="stamina", minimum=8):
+        return RulesEngine({"SCENE_A": {"choices": [{
+            "id": "TRAIN",
+            "text": "Train",
+            "requires": [{"type": "resource_min", "resource": resource, "value": minimum}],
+        }]}})
+
+    def test_resource_gate_uses_current_pool_and_includes_threshold(self):
+        engine = self.engine()
+        for current, enabled in ((0, False), (7, False), (8, True), (9, True)):
+            with self.subTest(current=current):
+                s = GameState(seed="s", scene_id="SCENE_A", player={
+                    "resources": {"stamina": current, "max_stamina": 999},
+                }, perks={"PERK_CAP": {"modifiers": {"derived.max_stamina": 1000}}})
+                before = json.dumps(s.snapshot(), sort_keys=True)
+                self.assertEqual(engine.available_choices(s)[0]["enabled"], enabled)
+                if enabled:
+                    engine.choose(s, "TRAIN")
+                    self.assertEqual(s.player["resources"]["stamina"], current)
+                    self.assertEqual(s.turn, 1)
+                else:
+                    with self.assertRaises(RuleError):
+                        engine.choose(s, "TRAIN")
+                    self.assertEqual(json.dumps(s.snapshot(), sort_keys=True), before)
+
+    def test_resource_gate_rejects_invalid_pool_or_requirement(self):
+        for resources in ([], {"stamina": True}, {"stamina": float("nan")},
+                          {"stamina": float("inf")}, {"stamina": -1}):
+            with self.subTest(resources=resources):
+                s = GameState(seed="s", scene_id="SCENE_A", player={"resources": resources})
+                with self.assertRaises(RuleError):
+                    self.engine().available_choices(s)
+        s = GameState(seed="s", scene_id="SCENE_A")
+        self.assertFalse(self.engine().available_choices(s)[0]["enabled"])
+        for resource, minimum in (("secret", 1), ([], 1), ("focus", True),
+                                  ("focus", float("nan")), ("focus", -1)):
+            with self.subTest(resource=resource, minimum=minimum):
+                with self.assertRaises(RuleError):
+                    self.engine(resource, minimum).available_choices(s)
+
+
 class ExtendedStateTests(unittest.TestCase):
     def test_equipment_and_perks_modify_checks_without_mutating_base_stat(self):
         engine = load_engine()

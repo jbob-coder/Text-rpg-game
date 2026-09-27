@@ -11,14 +11,14 @@ from .persistence import load_state, save_state
 
 
 def render_scene(engine: RulesEngine, state: GameState) -> str:
-    scene = engine.get_scene(state)
+    scene = engine.build_scene_view(state)
     lines = [
         "",
         f"== {scene.get('title', state.scene_id)} ==",
         scene.get("body", ""),
         "",
     ]
-    choices = engine.available_choices(state)
+    choices = scene["choices"]
     if not choices:
         lines.append("[No choices are currently available.]")
         return "\n".join(lines)

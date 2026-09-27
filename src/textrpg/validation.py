@@ -4,7 +4,7 @@ import re
 from math import isfinite
 from typing import Any, Dict, Iterable, List, Mapping, Set
 
-from .core import RuleError
+from .core import RuleError, validate_resource_requirement
 from .modifiers import validate_modifier_mapping, validate_modifier_path
 
 
@@ -13,6 +13,7 @@ SUPPORTED_CONDITIONS: Set[str] = {
     "flag",
     "stat_min",
     "stat_max",
+    "resource_min",
     "relationship_min",
     "relationship_max",
     "knows",
@@ -80,6 +81,11 @@ def _walk_conditions(conditions: Any, location: str, errors: List[str]) -> None:
                 validate_modifier_path(condition.get("path"))
             except ValueError as exc:
                 errors.append(f"{item_location} has invalid stat path: {exc}")
+        if kind == "resource_min":
+            try:
+                validate_resource_requirement(condition)
+            except RuleError as exc:
+                errors.append(f"{item_location} has invalid resource requirement: {exc}")
         if kind == "technique_discoverable":
             _validate_id(
                 condition.get("ability_id"),
@@ -241,6 +247,8 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
                 )
 
         if kind == "add_perk":
+            if "visible" in effect and not isinstance(effect["visible"], bool):
+                errors.append(f"{item_location}.visible must be boolean")
             try:
                 validate_modifier_mapping(
                     effect.get("modifiers", {}),
@@ -273,6 +281,9 @@ def validate_registries(registries: Mapping[str, Mapping[str, Any]]) -> List[str
                 errors.append(
                     f"registries.{category}.{stable_id} metadata must be an object"
                 )
+            elif category == "perks" and "player_visible" in metadata:
+                if not isinstance(metadata["player_visible"], bool):
+                    errors.append(f"registries.perks.{stable_id}.player_visible must be boolean")
     return errors
 
 

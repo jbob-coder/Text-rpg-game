@@ -1018,13 +1018,13 @@
           "text": "Practice Signal Pulse for two focused hours.",
           "requires": [
             {
-              "type": "stat_min",
-              "stat": "resources.stamina",
+              "type": "resource_min",
+              "resource": "stamina",
               "value": 8
             },
             {
-              "type": "stat_min",
-              "stat": "resources.focus",
+              "type": "resource_min",
+              "resource": "focus",
               "value": 12
             }
           ],
@@ -1050,13 +1050,13 @@
           "text": "Train two hours of controlled power fundamentals and measurement.",
           "requires": [
             {
-              "type": "stat_min",
-              "stat": "resources.stamina",
+              "type": "resource_min",
+              "resource": "stamina",
               "value": 16
             },
             {
-              "type": "stat_min",
-              "stat": "resources.focus",
+              "type": "resource_min",
+              "resource": "focus",
               "value": 10
             }
           ],

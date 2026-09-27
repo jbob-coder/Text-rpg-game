@@ -202,31 +202,56 @@ def _hidden_condition_ids(
     return hidden
 
 
+def _hidden_perk_ids(
+    state: GameState,
+    definitions: Mapping[str, Mapping[str, Any]],
+) -> set[str]:
+    if not isinstance(state.perks, Mapping):
+        raise RuleError("state.perks must be an object")
+    if not isinstance(definitions, Mapping):
+        raise RuleError("perk_definitions must be an object")
+    hidden: set[str] = set()
+    for perk_id, record in state.perks.items():
+        if not isinstance(perk_id, str) or not perk_id:
+            raise RuleError("Perk IDs must be non-empty strings")
+        if not isinstance(record, Mapping):
+            raise RuleError(f"Perk record must be an object: {perk_id}")
+        definition = definitions.get(perk_id, {})
+        if not isinstance(definition, Mapping):
+            raise RuleError(f"Perk definition must be an object: {perk_id}")
+        visible = record.get("visible", True)
+        player_visible = definition.get("player_visible", True)
+        if not isinstance(visible, bool) or not isinstance(player_visible, bool):
+            raise RuleError("Perk visibility must be boolean")
+        if not visible or not player_visible:
+            hidden.add(perk_id)
+    return hidden
+
+
 def _sanitize_player_breakdown(
     value: Any,
-    hidden_condition_ids: set[str],
+    hidden_source_keys: set[str],
 ) -> Any:
-    """Remove hidden condition identifiers from player-facing provenance."""
+    """Aggregate hidden condition/perk provenance without exposing its identifiers."""
     if isinstance(value, Mapping):
         sanitized: Dict[str, Any] = {}
         hidden_total = 0.0
         for key, item in value.items():
             if (
                 isinstance(key, str)
-                and key.startswith("condition:")
-                and key.removeprefix("condition:") in hidden_condition_ids
+                and key in hidden_source_keys
             ):
                 if (
                     isinstance(item, bool)
                     or not isinstance(item, (int, float))
                     or not isfinite(float(item))
                 ):
-                    raise RuleError("Hidden condition modifier must be finite numeric")
+                    raise RuleError("Hidden modifier must be finite numeric")
                 hidden_total += float(item)
                 continue
             sanitized[key] = _sanitize_player_breakdown(
                 item,
-                hidden_condition_ids,
+                hidden_source_keys,
             )
         if hidden_total:
             existing = sanitized.get("unidentified_modifier", 0.0)
@@ -240,7 +265,7 @@ def _sanitize_player_breakdown(
         return sanitized
     if isinstance(value, list):
         return [
-            _sanitize_player_breakdown(item, hidden_condition_ids)
+            _sanitize_player_breakdown(item, hidden_source_keys)
             for item in value
         ]
     return value
@@ -418,9 +443,12 @@ def inspect_status_value(
         raise RuleError(f"Status explanation breakdown must be an object: {path}")
 
     hidden_conditions = _hidden_condition_ids(state, condition_definitions)
+    hidden_perks = _hidden_perk_ids(state, engine.perk_definitions)
+    hidden_sources = {f"condition:{key}" for key in hidden_conditions}
+    hidden_sources.update(f"perk:{key}" for key in hidden_perks)
     safe_breakdown = _sanitize_player_breakdown(
         breakdown,
-        hidden_conditions,
+        hidden_sources,
     )
 
     return {
