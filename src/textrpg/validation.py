@@ -42,6 +42,9 @@ SUPPORTED_EFFECTS: Set[str] = {
     "party_add",
     "party_remove",
     "add_perk",
+    "ability_discover",
+    "technique_discover",
+    "technique_practice",
 }
 
 
