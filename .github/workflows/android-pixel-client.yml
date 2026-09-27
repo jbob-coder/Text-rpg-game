@@ -91,6 +91,7 @@ jobs:
           retention-days: 1
 
   android-emulator-smoke:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' || contains(github.event.head_commit.message, '[emulator]')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
