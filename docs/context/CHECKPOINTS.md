@@ -2265,3 +2265,105 @@ A beast can adapt only from observed evidence, and the quality/speed of adaptati
 2. Promote/freeze a verified baseline.
 3. Begin the backlog with data contracts for combat, crystals, equipment, and beast state.
 4. Build one narrow hunt vertical slice before broad species/content expansion.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-MEDIEVAL-PROTOTYPE-CONTRACTS-29
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Prototype branch: `prototype/medieval-crystal-combat-contracts`
+
+Prototype base: `integration/rules-ability-v6-reconcile@7f5f104fb839068bdfaf5cec72f37129ae20d463`
+
+Prototype code/test HEAD exercised: `8092edd4e106b0b44c983c78645a8793e975d444`
+
+Prototype branch after documentation-only status refresh: `c44f7289d79b025613e2ed454161f6ade55f630d`
+
+### CURRENT_OBJECTIVE
+
+[PROTOTYPE] Convert the accepted medieval crystal-beast design into isolated executable contracts without mutating or falsely promoting V6.
+
+### RUNTIME-GATE ATTEMPT
+
+[VERIFIED] A fresh local clone attempt for `integration/rules-ability-v6-reconcile` failed because the execution container could not resolve `github.com`.
+
+[DECISION] Do not bypass the Stage 3 verification requirement and do not claim the V6 suite passed.
+
+### IMPLEMENTED ON ISOLATED PROTOTYPE BRANCH
+
+[IMPLEMENTED PROTOTYPE] Added:
+
+- `src/textrpg/combat.py`
+- `src/textrpg/crystals.py`
+- `src/textrpg/beasts.py`
+- `src/textrpg/weapons.py`
+- `src/textrpg/armor.py`
+- `src/textrpg/forge.py`
+
+[IMPLEMENTED PROTOTYPE] Added tests:
+
+- `tests/test_combat_targeting.py`
+- `tests/test_crystals.py`
+- `tests/test_beasts.py`
+- `tests/test_weapons.py`
+- `tests/test_armor.py`
+- `tests/test_forge.py`
+
+### BEHAVIOR PROTOTYPED
+
+[IMPLEMENTED PROTOTYPE] Combat targetability is constrained by range, facing, elevation, posture, battle-state tags, blocked zones, and weapon tags.
+
+[IMPLEMENTED PROTOTYPE] Player-safe targeting returns only currently reachable/visible zones and omits hidden weakness/effect metadata.
+
+[IMPLEMENTED PROTOTYPE] Mine/beast crystals carry strict provenance, quality, integrity, resonance, appraisal, and hidden-data boundaries.
+
+[IMPLEMENTED PROTOTYPE] Weapons now have physical reach/handling/balance/momentum/guard/penetration/recovery/stamina burden/durability/damage profiles and crystal sockets.
+
+[IMPLEMENTED PROTOTYPE] Armor has explicit body-zone coverage, cutting/piercing/blunt resistance profiles, burden/flexibility/noise/durability, and crystal sockets.
+
+[IMPLEMENTED PROTOTYPE] Forge integration checks socket capacity, crystal tags, crystal stability, destroyed-crystal state, and canonical staged-work ordering.
+
+[IMPLEMENTED PROTOTYPE] Beast memory records only actual observations and uses bounded capacity/confidence influenced by intelligence.
+
+[IMPLEMENTED PROTOTYPE] Adaptation readiness requires observed evidence; tactical/strategic readiness is intelligence-gated; biological readiness additionally requires time/resources.
+
+[IMPLEMENTED PROTOTYPE] Communication tier is bounded by both beast intelligence and species capability.
+
+[IMPLEMENTED PROTOTYPE] Command eligibility is authored separately from raw level and can require social species capability, intelligence, level, and followers.
+
+### TEST EVIDENCE
+
+[VERIFIED ISOLATED] The exact prototype module contents were assembled into a local isolated package harness with a minimal compatible `RuleError` dependency.
+
+Observed combined run:
+
+- 69 tests executed
+- 69 passed
+- 0 failed
+- 0 errors
+
+This verifies only the isolated prototype contracts exercised by those tests.
+
+[UNKNOWN] Full repository integration remains unverified because the exact V6 repository could not be cloned/executed in the available shell.
+
+### ARCHITECTURE PRESERVED
+
+[VERIFIED STATIC]
+
+- V6 promotion branch was not modified.
+- V6 `GameState` was not changed.
+- persistence schema was not changed.
+- existing V6 equipment slots/modifier pipeline were not changed.
+- the seven-vs-eight stat conflict was not silently resolved.
+- player-safe projections remain separate from hidden/internal data.
+- no paid/billing-risk CI was introduced.
+
+### NEXT_ACTION
+
+1. Keep Stage 3 V6 exact-runtime verification as the promotion gate.
+2. Continue isolated prototype work with zone wounds/consequences and one cross-system hunt scenario.
+3. Add beast level/development progression rules without making level the sole power source.
+4. Add authored adaptation outcomes and deterministic intelligence-gated voice/bark projection.
+5. After V6 becomes runtime-verified, design the real GameState/save/content migration before integrating the prototype.
