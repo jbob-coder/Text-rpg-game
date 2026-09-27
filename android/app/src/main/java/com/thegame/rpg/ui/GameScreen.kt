@@ -57,11 +57,25 @@ fun TheGameRoot(
     onNarrate: (String) -> Boolean,
     onStopNarration: () -> Unit,
     onCheat: (String) -> Unit,
+    onEquip: (String) -> Unit,
+    onUnequip: (String) -> Unit,
     onTravel: (String) -> Unit,
 ) {
     val snapshot = uiState.snapshot
     if (uiState.bootState == BootState.Ready && snapshot != null) {
-        PixelGameShell(snapshot, uiState.busy, onChoice, onSave, onLoad, onNarrate, onStopNarration, onCheat, onTravel)
+        PixelGameShell(
+            snapshot,
+            uiState.busy,
+            onChoice,
+            onSave,
+            onLoad,
+            onNarrate,
+            onStopNarration,
+            onCheat,
+            onEquip,
+            onUnequip,
+            onTravel,
+        )
     } else {
         PixelBootScreen(uiState.bootState)
     }
@@ -133,6 +147,8 @@ private fun PixelGameShell(
     onNarrate: (String) -> Boolean,
     onStopNarration: () -> Unit,
     onCheat: (String) -> Unit,
+    onEquip: (String) -> Unit,
+    onUnequip: (String) -> Unit,
     onTravel: (String) -> Unit,
 ) {
     var section by remember { mutableStateOf(GameSection.STORY) }
@@ -154,7 +170,12 @@ private fun PixelGameShell(
                     GameSection.STORY -> StorySection(snapshot, busy, onChoice, onNarrate)
                     GameSection.CHARACTER -> CharacterSection(snapshot)
                     GameSection.STATS -> StatsSection(snapshot)
-                    GameSection.INVENTORY -> InventorySection(snapshot)
+                    GameSection.INVENTORY -> InventorySection(
+                        snapshot = snapshot,
+                        busy = busy,
+                        onEquip = onEquip,
+                        onUnequip = onUnequip,
+                    )
                     GameSection.QUESTS -> QuestSection(snapshot)
                     GameSection.MAP -> MapSection(snapshot, busy, onTravel)
                     GameSection.MORE -> MorePanel(
@@ -327,9 +348,8 @@ private fun CharacterSection(snapshot: GameSnapshot) {
                 Text("EQUIPMENT SLOTS", color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
                 Spacer(Modifier.height(6.dp))
                 snapshot.inventory.equipment.forEach { slot ->
-                    val slotName = slot.slot.replace('_', ' ').uppercase()
                     val itemName = if (slot.equipped) slot.name ?: slot.itemId ?: "EQUIPPED" else "—"
-                    LabeledValue(slotName, itemName)
+                    LabeledValue(slotDisplayName(slot.slot), itemName)
                 }
             }
         }
@@ -462,14 +482,18 @@ private fun SettingsPanel(
 }
 
 @Composable
-private fun InventorySection(snapshot: GameSnapshot) {
+private fun InventorySection(
+    snapshot: GameSnapshot,
+    busy: Boolean,
+    onEquip: (String) -> Unit,
+    onUnequip: (String) -> Unit,
+) {
     Column(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         PixelPanel(title = "Equipment") {
             snapshot.inventory.equipment.forEach { slot ->
-                val slotName = slot.slot.replace('_', ' ').uppercase()
                 val item = if (slot.equipped) {
                     buildString {
                         append(slot.name ?: slot.itemId ?: "EQUIPPED")
@@ -478,7 +502,13 @@ private fun InventorySection(snapshot: GameSnapshot) {
                 } else {
                     "EMPTY"
                 }
-                LabeledValue(slotName, item)
+                LabeledValue(slotDisplayName(slot.slot), item)
+                if (slot.equipped) {
+                    PixelTextButton(if (busy) "WORKING..." else "UNEQUIP") {
+                        if (!busy) onUnequip(slot.slot)
+                    }
+                    Spacer(Modifier.height(6.dp))
+                }
             }
         }
 
@@ -488,6 +518,19 @@ private fun InventorySection(snapshot: GameSnapshot) {
             } else {
                 snapshot.inventory.items.forEach { item ->
                     LabeledValue(item.name, "x${item.quantity}")
+                    if (item.equippable) {
+                        PixelTextButton(
+                            label = if (busy) {
+                                "WORKING..."
+                            } else {
+                                "EQUIP // ${slotDisplayName(item.slot ?: "")}"
+                            },
+                            onClick = {
+                                if (!busy) onEquip(item.id)
+                            },
+                        )
+                        Spacer(Modifier.height(6.dp))
+                    }
                 }
             }
         }
@@ -721,6 +764,15 @@ private fun LabeledValue(label: String, value: String) {
         Text(value, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
     }
     Spacer(Modifier.height(4.dp))
+}
+
+private fun slotDisplayName(slot: String): String = when (slot) {
+    "body" -> "CHEST"
+    "ring_1" -> "RING I"
+    "ring_2" -> "RING II"
+    "accessory_1" -> "ACCESSORY I"
+    "accessory_2" -> "ACCESSORY II"
+    else -> slot.replace('_', ' ').uppercase()
 }
 
 private fun formatGameTime(minutes: Int): String {
