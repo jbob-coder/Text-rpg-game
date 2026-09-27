@@ -74,21 +74,35 @@ Command used against a branch-equivalent reconstruction of the current remote fi
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Last full branch-equivalent suite result on record: **58 tests passed, 0 failed**.
+Latest exact branch-equivalent suite result: **89 tests passed, 0 failed**.
 
-That full run predates the newest modifier-centralization, content-loader/CLI, NPC goal/story scene effects, negative knowledge gates, extended vertical-slice, and power-practice changes.
+Verification was performed against a local reconstruction of the live `foundation/text-rpg-systems` branch. Git blob hashes were checked against the live repository for all **14 Python source modules, 14 test modules, and 2 JSON content files** used by the suite before execution.
 
-Additional regression tests have been authored for those changes, but this chat has **not yet executed a new complete branch-equivalent suite after the latest commits**. Do not increase the repository-wide pass count until that run is observed.
+Observed command:
+
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -v
+```
+
+Observed result:
+
+```text
+Ran 89 tests in 0.017s
+
+OK
+```
+
+An additional save/resume route exercise was run after the full suite. Cooperative-direct, solo-direct, failure/recovery-join, and first-power-practice routes each survived a JSON save/load round trip and continued successfully.
 
 No GitHub Actions workflow was added; verification does not consume hosted CI minutes.
 
 ## NEXT_ACTION
 
-1. Reconstruct the latest branch locally and run the complete unittest suite; resolve every regression before raising the verified count.
-2. Exercise the CLI against `content/vertical_slice_01.json` and verify save/resume across cooperative, solo, recovery, and first-power routes.
-3. Review/promote `The Dead Relay` from provisional canon to confirmed canon or revise its setting/story before wider content expansion.
-4. Define power resource identity, drawbacks, and later unlock prerequisites for `ABILITY_TRACE_ECHO` before adding stronger techniques.
-5. Expand canonical visual identity records to every recurring character introduced after Tamsin.
+1. Convert the successful save/resume route exercise into permanent regression coverage so persistence across authored branches cannot silently regress.
+2. Define power-resource identity, drawbacks, recovery behavior, and later unlock prerequisites for `ABILITY_TRACE_ECHO` before adding stronger techniques.
+3. Review `The Dead Relay` as provisional story material; promote, revise, or replace it only after deliberate canon review.
+4. Expand canonical visual identity records when additional recurring characters are intentionally introduced.
+5. Strengthen authored-content validation for power/NPC effect references as content volume grows.
 6. Connect the rules layer to a selected pixel-art presentation runtime only after the client technology is deliberately chosen.
 
 ## BLOCKERS
