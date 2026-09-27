@@ -65,8 +65,23 @@ def validate_quest_definitions(
                     errors.append(f"{location} must be an object")
                     continue
 
-                for required_id in objective.get("requires_objectives", []):
-                    if required_id not in objective_ids:
+                required = objective.get("required", True)
+                if not isinstance(required, bool):
+                    errors.append(f"{location}.required must be a boolean")
+
+                prerequisites = objective.get("requires_objectives", [])
+                if not isinstance(prerequisites, list):
+                    errors.append(
+                        f"{location}.requires_objectives must be a list of stable IDs"
+                    )
+                    prerequisites = []
+                for required_id in prerequisites:
+                    _validate_stable_id(
+                        required_id,
+                        f"{location}.requires_objectives entry",
+                        errors,
+                    )
+                    if isinstance(required_id, str) and required_id not in objective_ids:
                         errors.append(
                             f"{location} requires unknown objective {required_id!r} "
                             f"in stage {stage_id}"
