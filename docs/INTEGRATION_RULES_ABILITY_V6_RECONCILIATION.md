@@ -335,6 +335,30 @@ The static authored-test count is now **227** across 17 test files.
 
 This remains source/test hardening only; exact runtime execution is still pending.
 
+
+## Player-safe status provenance redaction
+
+A disclosure review against `docs/context/STATUS_SCREEN_DATA_CONTRACT.md` found that `inspect_status_value()` returned the raw modifier provenance emitted by the rules engine.
+
+That meant a mechanically active but player-hidden condition could still leak its stable condition ID through keys such as:
+
+`condition:COND_HIDDEN`
+
+even though the normal condition list correctly filtered that condition.
+
+V6 now preserves the authoritative numeric total while sanitizing player-facing modifier provenance:
+- conditions hidden by runtime `visible: false` are redacted;
+- conditions hidden by authored `player_visible: false` are redacted when condition definitions are supplied;
+- hidden condition IDs are not returned in the player-facing breakdown;
+- their aggregate contribution is represented only as `unidentified_modifier`, preserving arithmetic explainability without exposing the hidden stable ID;
+- nested derived-stat `direct_modifiers` are sanitized by the same rule.
+
+Two regressions verify runtime-hidden and definition-hidden condition provenance cannot expose the hidden condition identifier.
+
+The static authored-test count is now **229** across 17 test files.
+
+This is still a static/source result. Exact execution of the V6 suite remains pending.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
@@ -346,7 +370,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 227 authored test methods;
+- V6 has 229 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
