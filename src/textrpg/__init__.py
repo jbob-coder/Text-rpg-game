@@ -34,7 +34,7 @@ from .social import (
     transition_story_state,
     update_goal_progress,
 )
-from .stats import ATTRIBUTE_SPECS, SKILL_CATALOG, derived_stats, initialize_resources, validate_player_stats
+from .stats import ATTRIBUTE_SPECS, SKILL_CATALOG, derived_stats, effective_player_value, initialize_resources, validate_player_stats
 from .validation import assert_valid_content_pack, assert_valid_scenes, validate_content_pack, validate_scenes
 
 __all__ = [
@@ -58,6 +58,7 @@ __all__ = [
     "available_objectives",
     "complete_objective",
     "derived_stats",
+    "effective_player_value",
     "dumps_state",
     "eligible_leak_targets",
     "execute_leak_event",
