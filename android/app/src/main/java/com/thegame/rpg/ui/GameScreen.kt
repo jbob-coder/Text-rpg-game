@@ -83,7 +83,7 @@ fun GameScreen(
         TopStatusBar(snapshot, onSettings = { onNavigate("More") })
         Spacer(Modifier.height(8.dp))
         Box(modifier = Modifier.weight(1f)) {
-            StorySection(snapshot, busy, onChoice, onNarrate = {})
+            StorySection(snapshot, busy, onChoice, onNarrate = { false })
         }
         Spacer(Modifier.height(8.dp))
         Row(
