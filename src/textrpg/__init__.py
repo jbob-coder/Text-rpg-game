@@ -5,14 +5,17 @@ from .persistence import CURRENT_SCHEMA_VERSION, dumps_state, load_state, loads_
 from .progression import gain_ability_mastery, mastery_stage, technique_available
 from .powers import (
     ability_evolution_status,
+    assert_valid_power_definitions,
     discover_ability,
     discover_technique,
     evolve_ability,
     gain_technique_mastery,
     practice_technique,
+    recover_power_resource,
     technique_stage,
     technique_use_status,
     use_technique,
+    validate_power_definitions,
 )
 from .quests import (
     assert_valid_quest_definitions,
@@ -57,6 +60,7 @@ __all__ = [
     "SKILL_CATALOG",
     "active_set_bonuses",
     "ability_evolution_status",
+    "assert_valid_power_definitions",
     "discover_ability",
     "discover_technique",
     "evolve_ability",
@@ -91,6 +95,7 @@ __all__ = [
     "npc_learn",
     "relationship_meets",
     "recover",
+    "recover_power_resource",
     "save_state",
     "set_goal",
     "start_quest",
@@ -107,6 +112,7 @@ __all__ = [
     "validate_character_visuals",
     "validate_content_pack",
     "validate_player_stats",
+    "validate_power_definitions",
     "validate_quest_definitions",
     "validate_scenes",
 ]
