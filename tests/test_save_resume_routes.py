@@ -111,5 +111,50 @@ class SaveResumeRouteTests(unittest.TestCase):
         )
 
 
+    def test_directional_trace_unlock_survives_save_resume(self):
+        state = self.run_round_trip(
+            [
+                "TAKE_DEAD_RELAY",
+                "USE_MAINTENANCE_SEAL",
+                "KEEP_GATE_TWELVE_SECRET",
+                "LEAVE_DEPOT_ALONE",
+                "CONTINUE_BELOW_GATE_TWELVE",
+                "FOLLOW_TRACE_ECHO",
+                "PRACTICE_SIGNAL_PULSE_ONE_HOUR",
+                "USE_SIGNAL_PULSE_ON_RELAY",
+                "RECOVER_TRACE_RESONANCE_THIRTY_MINUTES",
+                "BEGIN_TRACE_STABILIZATION_PLAN",
+                "PRACTICE_SIGNAL_PULSE_TWO_HOURS",
+                "PRACTICE_SIGNAL_PULSE_TWO_HOURS",
+                "PRACTICE_SIGNAL_PULSE_TWO_HOURS",
+                "PRACTICE_SIGNAL_PULSE_TWO_HOURS",
+                "RECOVER_EIGHT_HOURS",
+                "TRAIN_POWER_FUNDAMENTALS_TWO_HOURS",
+                "TRAIN_POWER_FUNDAMENTALS_TWO_HOURS",
+                "TRAIN_POWER_FUNDAMENTALS_TWO_HOURS",
+                "TRAIN_POWER_FUNDAMENTALS_TWO_HOURS",
+                "TRAIN_POWER_FUNDAMENTALS_TWO_HOURS",
+                "TRAIN_POWER_FUNDAMENTALS_TWO_HOURS",
+                "ANALYZE_STABLE_TRACE_PATTERN",
+                "COMPLETE_TRACE_TOLERANCE_PROTOCOL",
+            ],
+            [
+                "DISCOVER_DIRECTIONAL_TRACE",
+                "END_DIRECTIONAL_TRACE_PROTOTYPE",
+            ],
+        )
+        self.assertIn(
+            "TECHNIQUE_DIRECTIONAL_TRACE",
+            state.abilities["ABILITY_TRACE_ECHO"]["techniques"],
+        )
+        self.assertEqual(
+            state.quests["QUEST_TRACE_STABILIZATION"]["status"],
+            "completed",
+        )
+        self.assertTrue(
+            state.flags["vertical_slice_01.directional_trace_discovered"]
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
