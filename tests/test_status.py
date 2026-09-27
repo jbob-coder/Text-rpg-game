@@ -232,5 +232,44 @@ class StatusProjectionTests(unittest.TestCase):
             with self.assertRaises(RuleError):
                 inspect_status_value(state, engine, path)
 
+
+    def test_deep_status_inspection_redacts_hidden_condition_identifier(self):
+        state, engine = self.state_and_engine()
+        view = inspect_status_value(state, engine, "attributes.will")
+
+        rendered = repr(view)
+        self.assertNotIn("COND_HIDDEN", rendered)
+        self.assertIn("unidentified_modifier", view["breakdown"])
+        self.assertEqual(view["total"], 12.0)
+
+    def test_deep_status_inspection_honors_hidden_condition_definition(self):
+        state, engine = self.state_and_engine()
+        state.player["conditions"]["COND_SECRET_CAP"] = {
+            "severity": 1,
+            "duration_minutes": 20,
+            "tags": ["secret"],
+            "visible": True,
+            "modifiers": {"derived.max_health": -4},
+        }
+
+        view = inspect_status_value(
+            state,
+            engine,
+            "derived.max_health",
+            condition_definitions={
+                "COND_SECRET_CAP": {
+                    "name": "Classified",
+                    "player_visible": False,
+                }
+            },
+        )
+
+        rendered = repr(view)
+        self.assertNotIn("COND_SECRET_CAP", rendered)
+        self.assertIn(
+            "unidentified_modifier",
+            view["breakdown"]["direct_modifiers"],
+        )
+
 if __name__ == "__main__":
     unittest.main()
