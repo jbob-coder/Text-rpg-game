@@ -1,4 +1,5 @@
 import unittest
+from types import MappingProxyType
 
 from textrpg import GameState, RuleError
 from textrpg.equipment import active_set_bonuses, equip_item, equipment_modifiers, set_counts
@@ -109,6 +110,70 @@ class EquipmentTests(unittest.TestCase):
                     "requirements": {"attributes": {"might": float("nan")}},
                 },
             )
+
+
+    def test_consume_inventory_preflights_mutable_inventory_before_equip(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={"attributes": {"might": 50}, "skills": {}},
+            inventory={"ITEM_X": 1},
+        )
+        state.inventory = MappingProxyType({"ITEM_X": 1})
+        before_equipment = dict(state.equipment)
+
+        with self.assertRaises(RuleError):
+            equip_item(
+                state,
+                {
+                    "item_id": "ITEM_X",
+                    "slot": "body",
+                    "modifiers": {},
+                },
+                consume_inventory=True,
+            )
+
+        self.assertEqual(state.equipment, before_equipment)
+
+    def test_corrupt_requirement_source_stat_is_rejected_before_equip(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={"attributes": {"might": float("nan")}, "skills": {}},
+        )
+        before_equipment = dict(state.equipment)
+
+        with self.assertRaises(RuleError):
+            equip_item(
+                state,
+                {
+                    "item_id": "ITEM_X",
+                    "slot": "body",
+                    "requirements": {"attributes": {"might": 10}},
+                },
+            )
+
+        self.assertEqual(state.equipment, before_equipment)
+
+    def test_invalid_equipment_tags_are_rejected_before_commit(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={"attributes": {}, "skills": {}},
+        )
+
+        with self.assertRaises(RuleError):
+            equip_item(
+                state,
+                {
+                    "item_id": "ITEM_X",
+                    "slot": "body",
+                    "tags": "armor",
+                },
+            )
+
+        self.assertNotIn("body", state.equipment)
+
 
 if __name__ == "__main__":
     unittest.main()
