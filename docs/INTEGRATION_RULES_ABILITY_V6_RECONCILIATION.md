@@ -461,6 +461,31 @@ The static authored-test count is now **246** across 17 test files.
 
 These remain static/source hardening results only. Exact V6 runtime execution is still pending.
 
+
+## Static-validator root and test-harness hardening
+
+A targeted review of the validation layer found that several public validators still assumed mapping-shaped roots and could raise implementation exceptions instead of returning authored validation errors.
+
+V6 now hardens:
+- `validate_scenes()` against non-mapping scene roots;
+- `validate_quest_definitions()` against non-mapping quest-definition roots;
+- `validate_character_visuals()` against non-mapping visual-record roots;
+- `validate_content_pack()` so falsey invalid roots such as `quests=[]` or `powers=[]` are no longer silently coerced to `{}`;
+- registry cross-reference traversal so malformed scene/choice/condition/effect/power nodes are skipped safely after their structural errors are recorded.
+
+This pass also found an existing test-harness defect: `tests/test_validation.py` called `validate_registries()` without importing it. The missing import is now fixed.
+
+Five regression methods were added covering:
+- non-mapping scene roots;
+- falsey invalid quest/power roots;
+- non-mapping quest roots;
+- malformed registry cross-reference traversal;
+- non-mapping visual-record roots.
+
+The static authored-test count is now **251** across 17 test files.
+
+This remains static/source verification only. The complete suite still requires exact runtime execution before any green or merge-ready claim.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
@@ -472,7 +497,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 246 authored test methods;
+- V6 has 251 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
