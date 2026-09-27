@@ -190,7 +190,10 @@
           "terminal_status": "completed",
           "objectives": {}
         }
-      }
+      },
+      "title": "The Dead Relay",
+      "category": "main",
+      "description": "Recover the impossible relay signal and decide what Gate Twelve means for the evacuation."
     },
     "QUEST_GATE_TWELVE_ECHO": {
       "start_stage": "STAGE_DISCOVER",
@@ -240,7 +243,10 @@
             }
           }
         }
-      }
+      },
+      "title": "Gate Twelve Echo",
+      "category": "side",
+      "description": "Investigate the signal below Gate Twelve and learn what it does before relying on it."
     },
     "QUEST_TRACE_STABILIZATION": {
       "start_stage": "STAGE_FOUNDATION",
@@ -276,7 +282,10 @@
           "terminal_status": "completed",
           "objectives": {}
         }
-      }
+      },
+      "title": "Trace Stabilization",
+      "category": "optional",
+      "description": "Train Trace Echo through repeatable sessions, recovery, and controlled technique growth."
     }
   },
   "scenes": {
@@ -327,7 +336,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "PLATFORM_NINE"
     },
     "OPENING_RELAY_CASING": {
       "title": "A Case That Should Be Empty",
@@ -447,7 +457,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "RELAY_WORKBENCH"
     },
     "OPENING_RECOVERY": {
       "title": "One More Person Has to Know",
@@ -525,7 +536,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "RELAY_WORKBENCH"
     },
     "OPENING_DECISION": {
       "title": "Gate Twelve",
@@ -733,7 +745,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "PLATFORM_NINE"
     },
     "OPENING_TUNNEL": {
       "title": "Below the Evacuation Route",
@@ -783,7 +796,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "SERVICE_TUNNEL"
     },
     "OPENING_SOLO_EXIT": {
       "title": "The Quiet Stair",
@@ -811,7 +825,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "EVAC_STAIR"
     },
     "OPENING_END": {
       "title": "Gate Twelve: The First Echo",
@@ -837,7 +852,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "GATE_TWELVE"
     },
     "POWER_GATE_TWELVE_SIGNAL": {
       "title": "A Signal With No Receiver",
@@ -887,7 +903,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "GATE_TWELVE"
     },
     "POWER_FIRST_PRACTICE": {
       "title": "One Hour, No Shortcut",
@@ -918,7 +935,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "TRACE_CHAMBER"
     },
     "POWER_FIRST_PRACTICE_RESULT": {
       "title": "A Method Instead of a Shortcut",
@@ -944,7 +962,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "TRACE_CHAMBER"
     },
     "POWER_FIRST_LIVE_USE": {
       "title": "A Pulse You Can Finally Hold",
@@ -979,7 +998,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "GATE_TWELVE"
     },
     "POWER_TRACE_STRAIN": {
       "title": "The Cost of Listening Too Closely",
@@ -1007,7 +1027,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "GATE_TWELVE"
     },
     "TRACE_STABILIZATION_HUB": {
       "title": "Trace Echo Training Ledger",
@@ -1214,7 +1235,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "TRACE_CHAMBER"
     },
     "TRACE_DIRECTIONAL_DISCOVERY_RESULT": {
       "title": "Direction, Not Mastery",
@@ -1248,7 +1270,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "TRACE_CHAMBER"
     },
     "TRACE_DIRECTIONAL_AFTERSHOCK": {
       "title": "A Stronger Echo, A Stronger Cost",
@@ -1271,7 +1294,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "SERVICE_TUNNEL"
     },
     "TRACE_DIRECTIONAL_SESSION_END": {
       "title": "A New Route, Not a Free Upgrade",
@@ -1297,7 +1321,8 @@
             }
           }
         }
-      ]
+      ],
+      "location_id": "TRACE_CHAMBER"
     }
   },
   "powers": {
@@ -1458,5 +1483,72 @@
         "label": "Echo Strain"
       }
     }
+  },
+  "world_map": {
+    "title": "Gate Twelve District",
+    "nodes": {
+      "PLATFORM_NINE": {
+        "title": "Platform Nine",
+        "description": "Evacuation platform inside the municipal tram depot.",
+        "x": 18,
+        "y": 36
+      },
+      "RELAY_WORKBENCH": {
+        "title": "Relay Workbench",
+        "description": "A maintenance bench where the dead relay can be examined.",
+        "x": 34,
+        "y": 31
+      },
+      "GATE_TWELVE": {
+        "title": "Service Gate Twelve",
+        "description": "A sealed maintenance entrance below the depot.",
+        "x": 53,
+        "y": 48
+      },
+      "SERVICE_TUNNEL": {
+        "title": "Service Tunnel",
+        "description": "Restricted infrastructure running under the evacuation route.",
+        "x": 70,
+        "y": 61
+      },
+      "EVAC_STAIR": {
+        "title": "Quiet Stair",
+        "description": "A maintenance stair which exits away from the main evacuation flow.",
+        "x": 40,
+        "y": 70
+      },
+      "TRACE_CHAMBER": {
+        "title": "Trace Chamber",
+        "description": "A controlled space used to reproduce and stabilize Trace Echo.",
+        "x": 82,
+        "y": 39
+      }
+    },
+    "edges": [
+      {
+        "from": "PLATFORM_NINE",
+        "to": "RELAY_WORKBENCH"
+      },
+      {
+        "from": "PLATFORM_NINE",
+        "to": "GATE_TWELVE"
+      },
+      {
+        "from": "PLATFORM_NINE",
+        "to": "EVAC_STAIR"
+      },
+      {
+        "from": "GATE_TWELVE",
+        "to": "SERVICE_TUNNEL"
+      },
+      {
+        "from": "GATE_TWELVE",
+        "to": "TRACE_CHAMBER"
+      },
+      {
+        "from": "SERVICE_TUNNEL",
+        "to": "TRACE_CHAMBER"
+      }
+    ]
   }
 }
