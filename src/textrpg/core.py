@@ -269,6 +269,26 @@ class RulesEngine:
                 rank = state.abilities.get(condition["ability_id"], {}).get("rank", 0)
                 if rank < condition["value"]:
                     return False
+            elif kind == "technique_discoverable":
+                from .powers import technique_discovery_status
+
+                ability_id = condition["ability_id"]
+                technique_id = condition["technique_id"]
+                power_definition = self.power_definitions.get(ability_id)
+                if power_definition is None:
+                    return False
+                technique_definition = power_definition.get("techniques", {}).get(
+                    technique_id
+                )
+                if technique_definition is None:
+                    return False
+                if not technique_discovery_status(
+                    state,
+                    ability_id,
+                    technique_id,
+                    technique_definition,
+                )["available"]:
+                    return False
             elif kind == "has_perk":
                 if condition["perk_id"] not in state.perks:
                     return False
@@ -488,10 +508,23 @@ class RulesEngine:
             elif kind == "technique_discover":
                 from .powers import discover_technique
 
+                ability_id = effect["ability_id"]
+                technique_id = effect["technique_id"]
+                power_definition = self.power_definitions.get(ability_id)
+                technique_definition = None
+                if power_definition is not None:
+                    technique_definition = power_definition.get("techniques", {}).get(
+                        technique_id
+                    )
+                    if technique_definition is None:
+                        raise RuleError(
+                            f"Unknown technique definition: {ability_id}/{technique_id}"
+                        )
                 discover_technique(
                     state,
-                    effect["ability_id"],
-                    effect["technique_id"],
+                    ability_id,
+                    technique_id,
+                    technique_definition,
                 )
             elif kind == "technique_practice":
                 from .powers import practice_technique
