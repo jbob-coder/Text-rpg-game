@@ -223,5 +223,29 @@ class StatsTests(unittest.TestCase):
         self.assertTrue(any("attribute might must be finite numeric" in e for e in errors))
         self.assertTrue(any("skill athletics must be finite numeric" in e for e in errors))
 
+    def test_resource_initialization_rejects_invalid_current_value_atomically(self):
+        state = self.state()
+        state.player["resources"] = {
+            "health": True,
+            "stamina": 10.0,
+        }
+        before = dict(state.player["resources"])
+        with self.assertRaises(Exception):
+            initialize_resources(state)
+        self.assertEqual(state.player["resources"], before)
+        self.assertNotIn("max_health", state.player["resources"])
+
+    def test_resource_initialization_rejects_non_finite_current_value_atomically(self):
+        state = self.state()
+        state.player["resources"] = {
+            "health": 10.0,
+            "focus": float("nan"),
+        }
+        before_keys = set(state.player["resources"])
+        with self.assertRaises(Exception):
+            initialize_resources(state)
+        self.assertEqual(set(state.player["resources"]), before_keys)
+        self.assertNotIn("max_focus", state.player["resources"])
+
 if __name__ == "__main__":
     unittest.main()
