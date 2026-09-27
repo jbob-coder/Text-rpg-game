@@ -209,8 +209,10 @@ def execute_leak_event(
     When recipients are not explicitly authored, the sorted eligible list is used so
     the same state always produces the same recipients.
     """
-    if max_recipients < 1:
-        raise RuleError("Leak event max_recipients must be at least 1")
+    if isinstance(max_recipients, bool) or not isinstance(max_recipients, int) or max_recipients < 1:
+        raise RuleError("Leak event max_recipients must be an integer >= 1")
+    if not isinstance(state.history, list):
+        raise RuleError("state.history must be a list")
 
     candidates = eligible_leak_targets(
         state,
@@ -233,27 +235,36 @@ def execute_leak_event(
                 "Leak event recipient is not currently eligible: " + ", ".join(invalid)
             )
 
-    for recipient in selected:
-        share_knowledge(
-            state,
-            speaker=holder,
-            recipient=recipient,
-            knowledge_id=knowledge_id,
-            voluntary=False,
-        )
+    npcs_before = deepcopy(state.npcs)
+    relationships_before = deepcopy(state.relationships)
+    history_before = deepcopy(state.history)
+    try:
+        for recipient in selected:
+            share_knowledge(
+                state,
+                speaker=holder,
+                recipient=recipient,
+                knowledge_id=knowledge_id,
+                voluntary=False,
+            )
 
-    event = {
-        "type": "knowledge_leak",
-        "event_id": event_id,
-        "holder": holder,
-        "knowledge_id": knowledge_id,
-        "candidates": list(candidates),
-        "recipients": list(selected),
-        "turn": state.turn,
-        "time_minutes": state.time_minutes,
-    }
-    state.history.append(event)
-    return event
+        event = {
+            "type": "knowledge_leak",
+            "event_id": event_id,
+            "holder": holder,
+            "knowledge_id": knowledge_id,
+            "candidates": list(candidates),
+            "recipients": list(selected),
+            "turn": state.turn,
+            "time_minutes": state.time_minutes,
+        }
+        state.history.append(event)
+        return event
+    except Exception:
+        state.npcs = npcs_before
+        state.relationships = relationships_before
+        state.history = history_before
+        raise
 
 
 def adjust_relationship(
