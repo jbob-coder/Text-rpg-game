@@ -10,10 +10,49 @@ data class GameChoice(
     val disabledReason: String? = null,
 )
 
-data class GameResource(
+data class GameResource(val id: String, val current: Double, val max: Double)
+
+data class GameAttribute(
     val id: String,
-    val current: Double,
-    val max: Double,
+    val name: String,
+    val base: Double,
+    val effective: Double,
+    val delta: Double,
+    val modified: Boolean,
+    val role: String? = null,
+)
+
+data class GameDerivedStat(
+    val id: String,
+    val name: String,
+    val value: Double,
+    val role: String? = null,
+)
+
+data class GameSkill(
+    val id: String,
+    val name: String,
+    val category: String,
+    val base: Double,
+    val effective: Double,
+    val delta: Double,
+    val modified: Boolean,
+)
+
+data class GameCondition(
+    val id: String,
+    val name: String,
+    val severity: Int,
+    val durationMinutes: Int?,
+    val tags: List<String>,
+)
+
+data class GameIdentity(
+    val name: String? = null,
+    val origin: String? = null,
+    val background: String? = null,
+    val path: String? = null,
+    val level: Int? = null,
 )
 
 data class GameSnapshot(
@@ -22,6 +61,11 @@ data class GameSnapshot(
     val body: String,
     val choices: List<GameChoice>,
     val resources: List<GameResource>,
+    val attributes: List<GameAttribute> = emptyList(),
+    val derived: List<GameDerivedStat> = emptyList(),
+    val skills: List<GameSkill> = emptyList(),
+    val conditions: List<GameCondition> = emptyList(),
+    val identity: GameIdentity = GameIdentity(),
     val turn: Int,
     val timeMinutes: Int,
     val location: String,
@@ -56,9 +100,7 @@ interface GameEngine {
     ): Result<GameSnapshot>
 
     suspend fun choose(choiceId: String): Result<GameSnapshot>
-
     suspend fun save(): Result<Unit>
-
     suspend fun load(): Result<GameSnapshot>
 }
 
@@ -88,12 +130,82 @@ internal object BridgeSnapshotMapper {
             )
         }
 
+        val attributes = optionalList(status["attributes"], "status.attributes").mapIndexed { index, item ->
+            val attribute = objectMap(item, "status.attributes[$index]")
+            GameAttribute(
+                id = text(attribute["id"], "status.attributes[$index].id"),
+                name = text(attribute["name"], "status.attributes[$index].name"),
+                base = number(attribute["base"], "status.attributes[$index].base"),
+                effective = number(attribute["effective"], "status.attributes[$index].effective"),
+                delta = number(attribute["delta"], "status.attributes[$index].delta"),
+                modified = boolean(attribute["modified"], "status.attributes[$index].modified"),
+                role = optionalText(attribute["role"]),
+            )
+        }
+
+        val derived = optionalList(status["derived"], "status.derived").mapIndexed { index, item ->
+            val stat = objectMap(item, "status.derived[$index]")
+            GameDerivedStat(
+                id = text(stat["id"], "status.derived[$index].id"),
+                name = text(stat["name"], "status.derived[$index].name"),
+                value = number(stat["value"], "status.derived[$index].value"),
+                role = optionalText(stat["role"]),
+            )
+        }
+
+        val skillGroups = optionalObjectMap(status["skills"], "status.skills")
+        val skills = buildList {
+            skillGroups.forEach { (category, rawSkills) ->
+                optionalList(rawSkills, "status.skills.$category").forEachIndexed { index, item ->
+                    val skill = objectMap(item, "status.skills.$category[$index]")
+                    add(
+                        GameSkill(
+                            id = text(skill["id"], "status.skills.$category[$index].id"),
+                            name = text(skill["name"], "status.skills.$category[$index].name"),
+                            category = category,
+                            base = number(skill["base"], "status.skills.$category[$index].base"),
+                            effective = number(skill["effective"], "status.skills.$category[$index].effective"),
+                            delta = number(skill["delta"], "status.skills.$category[$index].delta"),
+                            modified = boolean(skill["modified"], "status.skills.$category[$index].modified"),
+                        )
+                    )
+                }
+            }
+        }
+
+        val conditions = optionalList(status["conditions"], "status.conditions").mapIndexed { index, item ->
+            val condition = objectMap(item, "status.conditions[$index]")
+            GameCondition(
+                id = text(condition["id"], "status.conditions[$index].id"),
+                name = text(condition["name"], "status.conditions[$index].name"),
+                severity = integer(condition["severity"], "status.conditions[$index].severity"),
+                durationMinutes = optionalInteger(condition["duration_minutes"], "status.conditions[$index].duration_minutes"),
+                tags = optionalList(condition["tags"], "status.conditions[$index].tags").mapIndexed { tagIndex, tag ->
+                    text(tag, "status.conditions[$index].tags[$tagIndex]")
+                },
+            )
+        }
+
+        val identityMap = optionalObjectMap(status["identity"], "status.identity")
+        val identity = GameIdentity(
+            name = optionalText(identityMap["name"]),
+            origin = optionalText(identityMap["origin"]),
+            background = optionalText(identityMap["background"]),
+            path = optionalText(identityMap["path"]),
+            level = optionalInteger(identityMap["level"], "status.identity.level"),
+        )
+
         return GameSnapshot(
             sceneId = sceneId,
             title = text(scene["title"], "scene.title"),
             body = text(scene["body"], "scene.body"),
             choices = choices,
             resources = resources,
+            attributes = attributes,
+            derived = derived,
+            skills = skills,
+            conditions = conditions,
+            identity = identity,
             turn = integer(meta["turn"], "meta.turn"),
             timeMinutes = integer(meta["time_minutes"], "meta.time_minutes"),
             location = optionalText(meta["location"]) ?: sceneId,
@@ -102,27 +214,26 @@ internal object BridgeSnapshotMapper {
         )
     }
 
-    @Suppress("UNCHECKED_CAST")
     private fun objectMap(value: Any?, label: String): Map<String, Any?> {
-        if (value !is Map<*, *>) {
-            throw IllegalArgumentException("$label must be an object")
-        }
+        if (value !is Map<*, *>) throw IllegalArgumentException("$label must be an object")
         val output = LinkedHashMap<String, Any?>()
         value.forEach { (key, item) ->
-            if (key !is String) {
-                throw IllegalArgumentException("$label keys must be text")
-            }
+            if (key !is String) throw IllegalArgumentException("$label keys must be text")
             output[key] = item
         }
         return output
     }
 
+    private fun optionalObjectMap(value: Any?, label: String): Map<String, Any?> =
+        if (value == null) emptyMap() else objectMap(value, label)
+
     private fun list(value: Any?, label: String): List<*> {
-        if (value !is List<*>) {
-            throw IllegalArgumentException("$label must be a list")
-        }
+        if (value !is List<*>) throw IllegalArgumentException("$label must be a list")
         return value
     }
+
+    private fun optionalList(value: Any?, label: String): List<*> =
+        if (value == null) emptyList<Any?>() else list(value, label)
 
     private fun text(value: Any?, label: String): String {
         if (value !is String || value.isBlank()) {
@@ -138,31 +249,26 @@ internal object BridgeSnapshotMapper {
     }
 
     private fun boolean(value: Any?, label: String): Boolean {
-        if (value !is Boolean) {
-            throw IllegalArgumentException("$label must be boolean")
-        }
+        if (value !is Boolean) throw IllegalArgumentException("$label must be boolean")
         return value
     }
 
     private fun number(value: Any?, label: String): Double {
-        if (value !is Number) {
-            throw IllegalArgumentException("$label must be numeric")
-        }
+        if (value !is Number) throw IllegalArgumentException("$label must be numeric")
         val output = value.toDouble()
-        if (!output.isFinite()) {
-            throw IllegalArgumentException("$label must be finite")
-        }
+        if (!output.isFinite()) throw IllegalArgumentException("$label must be finite")
         return output
     }
 
     private fun integer(value: Any?, label: String): Int {
-        if (value !is Number) {
-            throw IllegalArgumentException("$label must be numeric")
-        }
+        if (value !is Number) throw IllegalArgumentException("$label must be numeric")
         val asLong = value.toLong()
         if (asLong < 0 || asLong > Int.MAX_VALUE || value.toDouble() != asLong.toDouble()) {
             throw IllegalArgumentException("$label must be a non-negative integer")
         }
         return asLong.toInt()
     }
+
+    private fun optionalInteger(value: Any?, label: String): Int? =
+        if (value == null) null else integer(value, label)
 }

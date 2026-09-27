@@ -21,35 +21,24 @@ data class GameUiState(
     val busy: Boolean = false,
 )
 
-class GameViewModel(
-    application: Application,
-) : AndroidViewModel(application) {
+class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val engine: GameEngine = PythonGameEngine()
     private val _uiState = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()
-
     private var startRequested = false
 
     fun startIfNeeded() {
         if (startRequested) return
         startRequested = true
         _uiState.update { it.copy(busy = true) }
-
         viewModelScope.launch {
-            val result = engine.start(getApplication()) { stage ->
+            engine.start(getApplication()) { stage ->
                 _uiState.update { current -> current.copy(bootState = stage, busy = true) }
-            }
-            result.fold(
+            }.fold(
                 onSuccess = { snapshot ->
-                    _uiState.value = GameUiState(
-                        bootState = BootState.Ready,
-                        snapshot = snapshot,
-                        busy = false,
-                    )
+                    _uiState.value = GameUiState(BootState.Ready, snapshot, false)
                 },
-                onFailure = { failure ->
-                    publishFailure(failure)
-                },
+                onFailure = ::publishFailure,
             )
         }
     }
@@ -59,18 +48,30 @@ class GameViewModel(
         _uiState.update { it.copy(busy = true) }
         viewModelScope.launch {
             engine.choose(choiceId).fold(
-                onSuccess = { snapshot ->
-                    _uiState.update {
-                        it.copy(
-                            bootState = BootState.Ready,
-                            snapshot = snapshot,
-                            busy = false,
-                        )
-                    }
-                },
-                onFailure = { failure ->
-                    publishFailure(failure)
-                },
+                onSuccess = { snapshot -> _uiState.update { it.copy(bootState = BootState.Ready, snapshot = snapshot, busy = false) } },
+                onFailure = ::publishFailure,
+            )
+        }
+    }
+
+    fun save() {
+        if (_uiState.value.busy) return
+        _uiState.update { it.copy(busy = true) }
+        viewModelScope.launch {
+            engine.save().fold(
+                onSuccess = { _uiState.update { it.copy(busy = false) } },
+                onFailure = ::publishFailure,
+            )
+        }
+    }
+
+    fun load() {
+        if (_uiState.value.busy) return
+        _uiState.update { it.copy(busy = true) }
+        viewModelScope.launch {
+            engine.load().fold(
+                onSuccess = { snapshot -> _uiState.update { it.copy(bootState = BootState.Ready, snapshot = snapshot, busy = false) } },
+                onFailure = ::publishFailure,
             )
         }
     }
@@ -78,11 +79,6 @@ class GameViewModel(
     private fun publishFailure(failure: Throwable) {
         val engineFailure = failure as? EngineStartException ?: PythonGameEngine.classifyFailure(failure)
         Log.e("TheGame", engineFailure.technicalDetail, engineFailure)
-        _uiState.update {
-            it.copy(
-                bootState = engineFailure.toBootStateError(),
-                busy = false,
-            )
-        }
+        _uiState.update { it.copy(bootState = engineFailure.toBootStateError(), busy = false) }
     }
 }
