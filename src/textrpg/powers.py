@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import Any, Dict, Mapping, MutableMapping
 
 from .core import GameState, RuleError
@@ -23,6 +24,102 @@ _STAGE_ORDER = {
     "practiced": 3,
     "mastered": 4,
 }
+
+
+_STABLE_ID = re.compile(r"^[A-Z][A-Z0-9_]*$")
+
+
+def validate_power_definitions(
+    definitions: Mapping[str, Mapping[str, Any]],
+) -> list[str]:
+    """Validate authored power/resource/technique definitions before play."""
+    errors: list[str] = []
+    for ability_id, definition in definitions.items():
+        if not isinstance(ability_id, str) or not _STABLE_ID.fullmatch(ability_id):
+            errors.append(f"ability_id must be a stable uppercase ID: {ability_id!r}")
+            continue
+        if not isinstance(definition, Mapping):
+            errors.append(f"{ability_id} power definition must be an object")
+            continue
+
+        resource = definition.get("resource")
+        if resource is not None:
+            if not isinstance(resource, Mapping):
+                errors.append(f"{ability_id}.resource must be an object")
+            else:
+                path = resource.get("path")
+                if not isinstance(path, str) or not path.startswith("power_resources."):
+                    errors.append(
+                        f"{ability_id}.resource.path must start with 'power_resources.'"
+                    )
+                maximum = resource.get("maximum")
+                starting = resource.get("starting", maximum)
+                recovery = resource.get("recovery_per_hour", 0)
+                for field, value in (("maximum", maximum), ("starting", starting), ("recovery_per_hour", recovery)):
+                    if not isinstance(value, (int, float)):
+                        errors.append(f"{ability_id}.resource.{field} must be numeric")
+                if isinstance(maximum, (int, float)) and maximum <= 0:
+                    errors.append(f"{ability_id}.resource.maximum must be positive")
+                if isinstance(starting, (int, float)) and isinstance(maximum, (int, float)):
+                    if starting < 0 or starting > maximum:
+                        errors.append(
+                            f"{ability_id}.resource.starting must be in range 0..maximum"
+                        )
+                if isinstance(recovery, (int, float)) and recovery < 0:
+                    errors.append(
+                        f"{ability_id}.resource.recovery_per_hour cannot be negative"
+                    )
+
+        techniques = definition.get("techniques", {})
+        if not isinstance(techniques, Mapping):
+            errors.append(f"{ability_id}.techniques must be an object")
+            continue
+        for technique_id, technique in techniques.items():
+            if not isinstance(technique_id, str) or not _STABLE_ID.fullmatch(technique_id):
+                errors.append(
+                    f"{ability_id} technique_id must be a stable uppercase ID: {technique_id!r}"
+                )
+                continue
+            if not isinstance(technique, Mapping):
+                errors.append(f"{ability_id}.{technique_id} must be an object")
+                continue
+            stage_min = technique.get("stage_min", "discovered")
+            if stage_min not in _STAGE_ORDER or stage_min == "unknown":
+                errors.append(
+                    f"{ability_id}.{technique_id}.stage_min is unsupported: {stage_min!r}"
+                )
+            cooldown = technique.get("cooldown_minutes", 0)
+            if not isinstance(cooldown, int) or cooldown < 0:
+                errors.append(
+                    f"{ability_id}.{technique_id}.cooldown_minutes must be a non-negative integer"
+                )
+            for path, amount in technique.get("costs", {}).items():
+                if not isinstance(path, str) or not path:
+                    errors.append(f"{ability_id}.{technique_id} has invalid cost path")
+                if not isinstance(amount, (int, float)) or amount < 0:
+                    errors.append(
+                        f"{ability_id}.{technique_id} cost {path!r} must be non-negative numeric"
+                    )
+            for drawback in technique.get("drawbacks", []):
+                if not isinstance(drawback, Mapping) or drawback.get("type") != "condition":
+                    errors.append(
+                        f"{ability_id}.{technique_id} drawbacks must be condition records"
+                    )
+                    continue
+                condition_id = drawback.get("condition_id")
+                if not isinstance(condition_id, str) or not _STABLE_ID.fullmatch(condition_id):
+                    errors.append(
+                        f"{ability_id}.{technique_id} drawback condition_id must be stable uppercase ID"
+                    )
+    return errors
+
+
+def assert_valid_power_definitions(
+    definitions: Mapping[str, Mapping[str, Any]],
+) -> None:
+    errors = validate_power_definitions(definitions)
+    if errors:
+        raise RuleError("Invalid power definitions:\n- " + "\n- ".join(errors))
 
 
 def technique_stage(xp: float) -> str:
@@ -65,6 +162,78 @@ def _numeric_player_path(state: GameState, path: str) -> float:
     return float(value)
 
 
+def initialize_power_resource(
+    state: GameState,
+    ability_id: str,
+    definition: Mapping[str, Any],
+) -> Dict[str, float | str] | None:
+    """Initialize an ability-specific resource without creating a universal mana pool."""
+    errors = validate_power_definitions({ability_id: definition})
+    if errors:
+        raise RuleError("Invalid power definition:\n- " + "\n- ".join(errors))
+    resource = definition.get("resource")
+    if not resource:
+        return None
+    path = resource["path"]
+    maximum = float(resource["maximum"])
+    starting = float(resource.get("starting", maximum))
+    current = _player_path(state, path)
+    if current is None:
+        _set_player_path(state, path, starting)
+        current = starting
+    elif not isinstance(current, (int, float)):
+        raise RuleError(f"Power resource path is non-numeric: {path}")
+    return {
+        "path": path,
+        "current": float(current),
+        "maximum": maximum,
+        "recovery_per_hour": float(resource.get("recovery_per_hour", 0)),
+    }
+
+
+def recover_power_resource(
+    state: GameState,
+    ability_id: str,
+    definition: Mapping[str, Any],
+    *,
+    minutes: int,
+    quality: float = 1.0,
+) -> Dict[str, Any]:
+    """Recover one authored power resource while advancing shared world time."""
+    if minutes <= 0:
+        raise RuleError("Power recovery time must be positive")
+    if quality < 0:
+        raise RuleError("Power recovery quality cannot be negative")
+    if ability_id not in state.abilities:
+        raise RuleError(f"Unknown ability: {ability_id}")
+    resource = initialize_power_resource(state, ability_id, definition)
+    if resource is None:
+        raise RuleError(f"Ability has no recoverable power resource: {ability_id}")
+
+    path = str(resource["path"])
+    before = _numeric_player_path(state, path)
+    maximum = float(resource["maximum"])
+    rate = float(resource["recovery_per_hour"])
+    amount = rate * (minutes / 60.0) * quality
+    after = min(maximum, before + amount)
+    _set_player_path(state, path, after)
+    advance_time(state, minutes)
+
+    event = {
+        "type": "power_resource_recovery",
+        "ability_id": ability_id,
+        "resource_path": path,
+        "before": round(before, 3),
+        "after": round(after, 3),
+        "gained": round(after - before, 3),
+        "minutes": minutes,
+        "quality": quality,
+        "time_minutes": state.time_minutes,
+    }
+    state.history.append(event)
+    return event
+
+
 def discover_ability(
     state: GameState,
     ability_id: str,
@@ -73,6 +242,7 @@ def discover_ability(
     form: str | None = None,
     tags: tuple[str, ...] | list[str] = (),
     data: Mapping[str, Any] | None = None,
+    definition: Mapping[str, Any] | None = None,
 ) -> Dict[str, Any]:
     """Create the persistent shell of an ability without granting mastery."""
     is_new = ability_id not in state.abilities
@@ -90,6 +260,9 @@ def discover_ability(
     ability.setdefault("tags", list(tags))
     ability.setdefault("data", dict(data or {}))
     ability.setdefault("techniques", {})
+
+    if definition is not None:
+        initialize_power_resource(state, ability_id, definition)
 
     if is_new:
         state.history.append(
