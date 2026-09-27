@@ -9,6 +9,8 @@ import com.thegame.rpg.engine.EngineStartException
 import com.thegame.rpg.engine.GameEngine
 import com.thegame.rpg.engine.GameSnapshot
 import com.thegame.rpg.engine.PythonGameEngine
+import com.thegame.rpg.save.ContinueResult
+import com.thegame.rpg.save.SaveRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,6 +25,10 @@ data class GameUiState(
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val engine: GameEngine = PythonGameEngine()
+    private val saveRepository = SaveRepository(
+        application.filesDir.resolve("saves/slot-0.json"),
+        engine,
+    )
     private val _uiState = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()
     private var startRequested = false
@@ -69,10 +75,23 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         if (_uiState.value.busy) return
         _uiState.update { it.copy(busy = true) }
         viewModelScope.launch {
-            engine.load().fold(
-                onSuccess = { snapshot -> _uiState.update { it.copy(bootState = BootState.Ready, snapshot = snapshot, busy = false) } },
-                onFailure = ::publishFailure,
-            )
+            when (val result = saveRepository.continueGame()) {
+                ContinueResult.Missing -> publishFailure(
+                    EngineStartException(
+                        stageId = "LOAD_ERROR",
+                        publicMessage = "No saved game exists yet.",
+                        technicalDetail = "Continue requested but saves/slot-0.json does not exist.",
+                    )
+                )
+                is ContinueResult.Failed -> publishFailure(result.error)
+                is ContinueResult.Loaded -> _uiState.update {
+                    it.copy(
+                        bootState = BootState.Ready,
+                        snapshot = result.snapshot,
+                        busy = false,
+                    )
+                }
+            }
         }
     }
 
