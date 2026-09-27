@@ -25,10 +25,12 @@ REQUIRED_FIELDS = (
 
 
 def validate_character_visuals(
-    records: Mapping[str, Mapping[str, Any]],
+    records: Any,
 ) -> list[str]:
     """Validate canonical visual identity sheets for recurring characters."""
     errors: list[str] = []
+    if not isinstance(records, Mapping):
+        return ["character visual records must be an object"]
 
     for character_id, record in records.items():
         if not isinstance(character_id, str) or not STABLE_ID.fullmatch(character_id):
