@@ -413,5 +413,36 @@ class ExtendedStateTests(unittest.TestCase):
         )
 
 
+    def test_invalid_choice_time_rejects_before_effect_mutation(self):
+        scenes = {
+            "SCENE_A": {
+                "choices": [
+                    {
+                        "id": "CHOICE_BAD_TIME",
+                        "text": "Bad time",
+                        "time_cost_minutes": True,
+                        "outcomes": {
+                            "default": {
+                                "effects": [
+                                    {
+                                        "type": "set_flag",
+                                        "key": "SHOULD_NOT_MUTATE",
+                                        "value": True,
+                                    }
+                                ]
+                            }
+                        },
+                    }
+                ]
+            }
+        }
+        state = GameState(seed="s", scene_id="SCENE_A")
+        engine = RulesEngine(scenes)
+        with self.assertRaises(RuleError):
+            engine.choose(state, "CHOICE_BAD_TIME")
+        self.assertNotIn("SHOULD_NOT_MUTATE", state.flags)
+        self.assertEqual(state.time_minutes, 0)
+        self.assertEqual(state.turn, 0)
+
 if __name__ == "__main__":
     unittest.main()
