@@ -6,6 +6,8 @@ Current stabilization candidate: `fix/v6-runtime-boundaries`, based on
 `integration/rules-ability-v6-reconcile@7f5f104fb839068bdfaf5cec72f37129ae20d463`.
 The default `main` branch is still a placeholder; select the candidate branch to run this implementation.
 
+> Coding agents and future sessions: start with [`AGENTS.md`](AGENTS.md), then read [`docs/THE_GAME_MASTER_TASK_REGISTER.md`](docs/THE_GAME_MASTER_TASK_REGISTER.md) for the current objective, blockers, task states, and handoff rules.
+
 ## Rules-engine vertical slice
 
 The rules layer is deliberately separated from presentation. The game can later use a pixel-art Android, Godot, desktop, or web client without rebuilding the RPG state model.
@@ -15,6 +17,7 @@ The rules layer is deliberately separated from presentation. The game can later 
 - `docs/REFERENCE_NOTES.md` — abstract lessons from supplied reference material; no copied story content.
 - `docs/IMPLEMENTATION_STATUS.md` — current objective, verified state, completed work, risks, and next actions.
 - `docs/V6_STABILIZATION_HANDOFF.md` — executed baseline, repairs, compatibility boundaries, and verification evidence.
+- `docs/THE_GAME_MASTER_TASK_REGISTER.md` — repository-native task queue and continuity index.
 - `src/textrpg/core.py` — deterministic scene/choice rules and persistent state.
 - `src/textrpg/content.py` — validated JSON content-pack loading into state + engine.
 - `src/textrpg/cli.py` — local standard-library terminal client with save/resume support.
