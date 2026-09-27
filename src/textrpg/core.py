@@ -102,6 +102,45 @@ class GameState:
         }
 
 
+def validate_game_state_structure(state: GameState) -> None:
+    """Validate the durable top-level GameState contract before persistence/use."""
+    if not isinstance(state.seed, str) or not state.seed:
+        raise RuleError("state.seed must be a non-empty string")
+    if not isinstance(state.scene_id, str) or not state.scene_id:
+        raise RuleError("state.scene_id must be a non-empty string")
+
+    for field_name in ("turn", "time_minutes", "schema_version"):
+        value = getattr(state, field_name)
+        if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+            raise RuleError(f"state.{field_name} must be a non-negative integer")
+
+    for field_name in (
+        "player",
+        "flags",
+        "relationships",
+        "knowledge",
+        "inventory",
+        "quests",
+        "npcs",
+        "abilities",
+        "equipment",
+        "perks",
+    ):
+        value = getattr(state, field_name)
+        if not isinstance(value, MutableMapping):
+            raise RuleError(f"state.{field_name} must be a mutable object")
+
+    if not isinstance(state.party, list):
+        raise RuleError("state.party must be a list")
+    if not all(isinstance(npc_id, str) and npc_id for npc_id in state.party):
+        raise RuleError("state.party entries must be non-empty strings")
+
+    if not isinstance(state.history, list):
+        raise RuleError("state.history must be a list")
+    if not all(isinstance(event, Mapping) for event in state.history):
+        raise RuleError("state.history entries must be objects")
+
+
 def _restore_snapshot(state: GameState, snapshot: Mapping[str, Any]) -> None:
     """Restore a deep-copied GameState snapshot after a failed transaction."""
     for key, value in snapshot.items():
