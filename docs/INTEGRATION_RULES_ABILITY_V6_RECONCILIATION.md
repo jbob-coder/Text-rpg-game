@@ -183,9 +183,35 @@ A regression test now verifies that failed direct training leaves:
 - world time unchanged;
 - history unchanged.
 
-The static authored-test count is now **202** across 17 test files.
+The static authored-test count is now **208** across 17 test files.
 
 This remains source/test hardening only. Exact runtime execution is still required before any green claim.
+
+
+## Social-state purity and atomicity hardening
+
+A targeted review of public social APIs found several failure paths that could change durable state even when an operation was only being queried or ultimately rejected.
+
+V6 now hardens these paths:
+
+- `eligible_leak_targets()` is now a read-only query. It no longer creates missing NPC shells, relationship entries, or knowledge containers merely by evaluating leak eligibility.
+- `adjust_relationship()` validates every requested axis/value and plans the resulting values before mutating any relationship axis. An invalid later axis can no longer leave an earlier axis partially changed.
+- `share_knowledge()` now preflights speaker knowledge and recipient containers before writing recipient knowledge or memories. A missing speaker no longer creates an empty NPC shell as a side effect of failure.
+- `update_goal_progress()` now rejects missing/invalid goals without calling `ensure_npc()`; failed progress attempts no longer create empty NPC/relationship state.
+- `transition_story_state()` now checks the existing/implicit previous state and `allowed_from` guard before creating or mutating an NPC.
+- `execute_leak_event()` now snapshots NPC/relationship/history state and rolls the full event back if any later recipient transfer fails. Multi-recipient leak execution is therefore transactional.
+
+Regression coverage was added for:
+- leak-eligibility query purity;
+- relationship multi-axis failure atomicity;
+- missing-speaker share purity;
+- unknown-goal progress purity;
+- rejected story-transition purity;
+- multi-recipient leak rollback when a later recipient is corrupt.
+
+The static authored-test count is now **208** across 17 test files.
+
+This remains a static/source hardening result. Exact execution of the complete V6 suite is still required.
 
 ## Runtime verification boundary
 
@@ -198,7 +224,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 202 authored test methods;
+- V6 has 208 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
