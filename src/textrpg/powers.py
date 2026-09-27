@@ -28,6 +28,8 @@ _STAGE_ORDER = {
 
 
 def technique_stage(xp: float) -> str:
+    if isinstance(xp, bool) or not isinstance(xp, (int, float)) or not isfinite(float(xp)):
+        raise RuleError("Technique mastery XP must be a finite number")
     if xp < 0:
         raise RuleError("Technique mastery XP cannot be negative")
     stage = "unknown"
@@ -91,6 +93,8 @@ def gain_technique_mastery(
     technique_id: str,
     xp: float,
 ) -> Dict[str, Any]:
+    if isinstance(xp, bool) or not isinstance(xp, (int, float)) or not isfinite(float(xp)):
+        raise RuleError("Technique mastery gain must be a finite number")
     if xp < 0:
         raise RuleError("Technique mastery gain cannot be negative")
     ability = state.abilities.get(ability_id)
