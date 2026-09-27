@@ -76,6 +76,14 @@ class VerticalSliceTests(unittest.TestCase):
             "completed",
         )
         self.assertEqual(state.flags["opening.route"], "tunnel_with_tamsin")
+        self.assertEqual(
+            state.npcs["NPC_TAMSIN"]["story_state"]["TRACK_RELAY_CASE"],
+            "ENTERED_GATE_TWELVE",
+        )
+        self.assertEqual(
+            state.npcs["NPC_TAMSIN"]["goals"]["GOAL_UNDERSTAND_GATE_TWELVE"]["progress"],
+            50.0,
+        )
 
         engine.choose(state, "END_VERTICAL_SLICE")
         self.assertTrue(state.flags["vertical_slice_01.complete"])
@@ -103,6 +111,10 @@ class VerticalSliceTests(unittest.TestCase):
         self.assertEqual(
             state.quests["QUEST_DEAD_RELAY"]["stage"],
             "STAGE_SOLO_ROUTE",
+        )
+        self.assertEqual(
+            state.npcs["NPC_TAMSIN"]["story_state"]["TRACK_RELAY_CASE"],
+            "PLAYER_LEFT_WITH_RELAY_SECRET",
         )
 
         engine.choose(state, "LEAVE_DEPOT_ALONE")
@@ -140,6 +152,31 @@ class VerticalSliceTests(unittest.TestCase):
         self.assertIn(
             "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
             state.npcs["NPC_TAMSIN"]["knowledge"],
+        )
+        self.assertEqual(
+            state.npcs["NPC_TAMSIN"]["story_state"]["TRACK_RELAY_CASE"],
+            "KNOWS_GATE_TWELVE",
+        )
+        self.assertEqual(
+            state.npcs["NPC_TAMSIN"]["goals"]["GOAL_UNDERSTAND_GATE_TWELVE"]["progress"],
+            10.0,
+        )
+
+        visible = {choice["id"] for choice in engine.available_choices(state)}
+        self.assertNotIn("TELL_TAMSIN_GATE_TWELVE", visible)
+        self.assertNotIn("KEEP_GATE_TWELVE_SECRET", visible)
+        self.assertIn("ASK_TAMSIN_TO_JOIN_KNOWN_ROUTE", visible)
+        self.assertIn("LEAVE_TAMSIN_AT_DEPOT_AFTER_RECOVERY", visible)
+
+        engine.choose(state, "ASK_TAMSIN_TO_JOIN_KNOWN_ROUTE")
+        self.assertIn("NPC_TAMSIN", state.party)
+        self.assertEqual(
+            state.npcs["NPC_TAMSIN"]["story_state"]["TRACK_RELAY_CASE"],
+            "JOINS_GATE_TWELVE",
+        )
+        self.assertEqual(
+            state.npcs["NPC_TAMSIN"]["goals"]["GOAL_UNDERSTAND_GATE_TWELVE"]["progress"],
+            25.0,
         )
 
 
