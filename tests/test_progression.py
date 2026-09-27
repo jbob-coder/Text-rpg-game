@@ -54,5 +54,51 @@ class ProgressionTests(unittest.TestCase):
         with self.assertRaises(RuleError):
             mastery_stage(float("nan"))
 
+    def test_corrupt_existing_ability_mastery_is_rejected_without_mutation(self):
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            abilities={
+                "ABILITY_BAD": {
+                    "rank": 1,
+                    "mastery_xp": float("nan"),
+                    "mastery_stage": "learned",
+                    "techniques": {},
+                }
+            },
+        )
+        before = dict(state.abilities["ABILITY_BAD"])
+        with self.assertRaises(RuleError):
+            gain_ability_mastery(state, "ABILITY_BAD", 10)
+        self.assertEqual(
+            state.abilities["ABILITY_BAD"]["rank"],
+            before["rank"],
+        )
+        self.assertTrue(
+            str(state.abilities["ABILITY_BAD"]["mastery_xp"]) == "nan"
+        )
+        self.assertEqual(
+            state.abilities["ABILITY_BAD"]["mastery_stage"],
+            before["mastery_stage"],
+        )
+
+    def test_invalid_rank_floor_is_rejected_before_mastery_mutation(self):
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            abilities={
+                "ABILITY_BAD": {
+                    "rank": 0,
+                    "rank_floor": True,
+                    "mastery_xp": 0.0,
+                    "mastery_stage": "discovered",
+                    "techniques": {},
+                }
+            },
+        )
+        with self.assertRaises(RuleError):
+            gain_ability_mastery(state, "ABILITY_BAD", 10)
+        self.assertEqual(state.abilities["ABILITY_BAD"]["mastery_xp"], 0.0)
+
 if __name__ == "__main__":
     unittest.main()
