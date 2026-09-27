@@ -8,6 +8,8 @@ from textrpg.powers import (
     evolve_ability,
     gain_technique_mastery,
     practice_technique,
+    recover_power_resource,
+    validate_power_definitions,
     technique_stage,
     technique_use_status,
     use_technique,
@@ -312,6 +314,44 @@ class PowerRuntimeTests(unittest.TestCase):
             state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["mastery_xp"],
             before_mastery,
         )
+
+
+    def test_power_definition_resource_contract_and_recovery(self):
+        definition = {
+            "family": "sensory",
+            "resource": {
+                "path": "power_resources.trace_resonance",
+                "maximum": 10,
+                "starting": 10,
+                "recovery_per_hour": 2,
+            },
+            "techniques": {},
+        }
+        self.assertEqual(validate_power_definitions({"ABILITY_TRACE": definition}), [])
+        state = GameState(seed="x", scene_id="A")
+        discover_ability(state, "ABILITY_TRACE", definition=definition)
+        self.assertEqual(state.player["power_resources"]["trace_resonance"], 10)
+        state.player["power_resources"]["trace_resonance"] = 6
+        event = recover_power_resource(state, "ABILITY_TRACE", definition, minutes=30)
+        self.assertEqual(state.player["power_resources"]["trace_resonance"], 7.0)
+        self.assertEqual(event["gained"], 1.0)
+        self.assertEqual(state.time_minutes, 30)
+
+    def test_invalid_power_resource_definition_is_rejected(self):
+        errors = validate_power_definitions({
+            "ABILITY_TRACE": {
+                "resource": {
+                    "path": "resources.focus",
+                    "maximum": 10,
+                    "starting": 11,
+                    "recovery_per_hour": -1,
+                },
+                "techniques": {},
+            }
+        })
+        self.assertTrue(any("power_resources" in error for error in errors))
+        self.assertTrue(any("starting" in error for error in errors))
+        self.assertTrue(any("recovery_per_hour" in error for error in errors))
 
 
 if __name__ == "__main__":
