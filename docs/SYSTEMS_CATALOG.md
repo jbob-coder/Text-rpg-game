@@ -179,6 +179,26 @@ Technique stages currently progress:
 
 Ability evolution is authored rather than automatic. An evolution can require a combination of rank, mastery, learned facts, perks, attributes, skills, flags, items, and technique mastery. Successful evolution can change form/tags, consume required items, grant source-tracked perks, and establish a persistent rank floor.
 
+## Ability discovery and practice
+
+Ability discovery is separate from mastery.
+
+A discovery event creates an ability shell at rank 0 and mastery 0. It may establish family, form, tags, and authored metadata, but it does not silently grant competence.
+
+Technique discovery is also separate from technique mastery. Newly discovered techniques begin at the earliest stage.
+
+Technique practice:
+- requires an already discovered ability and technique
+- requires at least 30 minutes
+- consumes stamina and focus
+- advances the world clock
+- respects technique recovery/cooldown time
+- supports bounded intensity and mentor bonuses
+- uses diminishing returns as technique mastery rises
+- grants technique mastery faster than overall ability mastery
+
+The current baseline is deliberately slow: one ordinary hour from zero technique mastery grants 8 technique XP, which is not enough to leave the `discovered` stage. This value is provisional balancing data and exists to enforce the design rule that major progression is earned across repeated time, training, experimentation, and use.
+
 ## Quest graphs
 
 Quests are authored graphs rather than a single integer stage.
