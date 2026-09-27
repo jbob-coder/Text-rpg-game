@@ -55,6 +55,25 @@ data class GameIdentity(
     val level: Int? = null,
 )
 
+data class GameInventoryItem(
+    val id: String,
+    val name: String,
+    val quantity: Int,
+)
+
+data class GameEquipmentSlot(
+    val slot: String,
+    val equipped: Boolean,
+    val itemId: String? = null,
+    val name: String? = null,
+    val quality: String? = null,
+)
+
+data class GameInventory(
+    val items: List<GameInventoryItem> = emptyList(),
+    val equipment: List<GameEquipmentSlot> = emptyList(),
+)
+
 data class GameQuestObjective(
     val id: String,
     val title: String,
@@ -101,6 +120,7 @@ data class GameSnapshot(
     val skills: List<GameSkill> = emptyList(),
     val conditions: List<GameCondition> = emptyList(),
     val identity: GameIdentity = GameIdentity(),
+    val inventory: GameInventory = GameInventory(),
     val quests: List<GameQuest> = emptyList(),
     val worldMap: GameWorldMap = GameWorldMap(),
     val turn: Int,
@@ -139,6 +159,7 @@ interface GameEngine {
     suspend fun choose(choiceId: String): Result<GameSnapshot>
     suspend fun save(): Result<Unit>
     suspend fun load(): Result<GameSnapshot>
+    suspend fun applyCheat(code: String): Result<GameSnapshot>
 }
 
 internal object BridgeSnapshotMapper {
@@ -232,6 +253,33 @@ internal object BridgeSnapshotMapper {
             level = optionalInteger(identityMap["level"], "status.identity.level"),
         )
 
+        val inventoryPayload = optionalObjectMap(payload["inventory"], "inventory")
+        val inventoryItems = optionalList(inventoryPayload["items"], "inventory.items").mapIndexed { index, item ->
+            val value = objectMap(item, "inventory.items[$index]")
+            GameInventoryItem(
+                id = text(value["id"], "inventory.items[$index].id"),
+                name = text(value["name"], "inventory.items[$index].name"),
+                quantity = integer(value["quantity"], "inventory.items[$index].quantity"),
+            )
+        }
+        val equipmentSlots = optionalList(
+            inventoryPayload["equipment"],
+            "inventory.equipment",
+        ).mapIndexed { index, item ->
+            val value = objectMap(item, "inventory.equipment[$index]")
+            GameEquipmentSlot(
+                slot = text(value["slot"], "inventory.equipment[$index].slot"),
+                equipped = boolean(value["equipped"], "inventory.equipment[$index].equipped"),
+                itemId = optionalText(value["item_id"]),
+                name = optionalText(value["name"]),
+                quality = optionalText(value["quality"]),
+            )
+        }
+        val inventory = GameInventory(
+            items = inventoryItems,
+            equipment = equipmentSlots,
+        )
+
         val quests = optionalList(payload["quests"], "quests").mapIndexed { questIndex, item ->
             val quest = objectMap(item, "quests[$questIndex]")
             val objectives = optionalList(
@@ -300,6 +348,7 @@ internal object BridgeSnapshotMapper {
             skills = skills,
             conditions = conditions,
             identity = identity,
+            inventory = inventory,
             quests = quests,
             worldMap = worldMap,
             turn = integer(meta["turn"], "meta.turn"),
