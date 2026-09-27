@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from math import isfinite
 from typing import Any, Dict, Mapping, MutableMapping
 
 from .core import GameState, RuleError
@@ -155,9 +156,21 @@ def _number(value: Any, label: str, errors: list[str], *, minimum: float | None 
         errors.append(f"{label} must be numeric")
         return None
     number = float(value)
+    if not isfinite(number):
+        errors.append(f"{label} must be finite")
+        return None
     if minimum is not None and number < minimum:
         errors.append(f"{label} must be >= {minimum}")
     return number
+
+
+def _integer(value: Any, label: str, errors: list[str], *, minimum: int | None = None) -> int | None:
+    if isinstance(value, bool) or not isinstance(value, int):
+        errors.append(f"{label} must be an integer")
+        return None
+    if minimum is not None and value < minimum:
+        errors.append(f"{label} must be >= {minimum}")
+    return value
 
 
 def validate_technique_definition(definition: Any) -> list[str]:
@@ -180,11 +193,17 @@ def validate_technique_definition(definition: Any) -> list[str]:
         if not isinstance(value, Mapping):
             errors.append(f"requirements.{section} must be an object")
 
-    for key in ("rank_min", "mastery_xp_min"):
-        if key in requirements:
-            _number(requirements[key], f"requirements.{key}", errors, minimum=0.0)
+    if "rank_min" in requirements:
+        _integer(requirements["rank_min"], "requirements.rank_min", errors, minimum=0)
+    if "mastery_xp_min" in requirements:
+        _number(
+            requirements["mastery_xp_min"],
+            "requirements.mastery_xp_min",
+            errors,
+            minimum=0.0,
+        )
 
-    for section in ("attributes", "skills", "items"):
+    for section in ("attributes", "skills"):
         values = requirements.get(section, {})
         if isinstance(values, Mapping):
             for key, minimum in values.items():
@@ -194,6 +213,16 @@ def validate_technique_definition(definition: Any) -> list[str]:
                     errors,
                     minimum=0.0,
                 )
+
+    item_requirements = requirements.get("items", {})
+    if isinstance(item_requirements, Mapping):
+        for item_id, quantity in item_requirements.items():
+            _integer(
+                quantity,
+                f"requirements.items.{item_id}",
+                errors,
+                minimum=0,
+            )
 
     for section in ("knowledge", "perks"):
         values = requirements.get(section, [])
@@ -274,16 +303,22 @@ def validate_evolution_definition(definition: Any) -> list[str]:
         errors.append("requirements must be an object")
         requirements = {}
 
-    for key in ("rank_min", "mastery_xp_min"):
-        if key in requirements:
-            _number(requirements[key], f"requirements.{key}", errors, minimum=0.0)
+    if "rank_min" in requirements:
+        _integer(requirements["rank_min"], "requirements.rank_min", errors, minimum=0)
+    if "mastery_xp_min" in requirements:
+        _number(
+            requirements["mastery_xp_min"],
+            "requirements.mastery_xp_min",
+            errors,
+            minimum=0.0,
+        )
 
     for section in ("attributes", "skills", "items", "flags", "techniques"):
         value = requirements.get(section, {})
         if not isinstance(value, Mapping):
             errors.append(f"requirements.{section} must be an object")
 
-    for section in ("attributes", "skills", "items"):
+    for section in ("attributes", "skills"):
         values = requirements.get(section, {})
         if isinstance(values, Mapping):
             for key, minimum in values.items():
@@ -293,6 +328,16 @@ def validate_evolution_definition(definition: Any) -> list[str]:
                     errors,
                     minimum=0.0,
                 )
+
+    item_requirements = requirements.get("items", {})
+    if isinstance(item_requirements, Mapping):
+        for item_id, quantity in item_requirements.items():
+            _integer(
+                quantity,
+                f"requirements.items.{item_id}",
+                errors,
+                minimum=0,
+            )
 
     for section in ("knowledge", "perks"):
         values = requirements.get(section, [])
