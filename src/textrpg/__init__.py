@@ -11,6 +11,8 @@ from .powers import (
     technique_stage,
     technique_use_status,
     use_technique,
+    validate_evolution_definition,
+    validate_technique_definition,
 )
 from .quests import (
     assert_valid_quest_definitions,
@@ -91,6 +93,8 @@ __all__ = [
     "train",
     "train_attribute",
     "use_technique",
+    "validate_evolution_definition",
+    "validate_technique_definition",
     "validate_content_pack",
     "validate_player_stats",
     "validate_quest_definitions",
