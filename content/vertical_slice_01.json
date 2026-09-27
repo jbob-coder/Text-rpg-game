@@ -151,13 +151,13 @@
         },
         "STAGE_DECIDE": {
           "objectives": {
-            "OBJ_TELL_TAMSIN": {
+            "OBJ_CHOOSE_WITH_TAMSIN": {
               "required": false,
               "on_complete": {
                 "next_stage": "STAGE_TUNNEL_ROUTE"
               }
             },
-            "OBJ_KEEP_SECRET": {
+            "OBJ_CHOOSE_SOLO": {
               "required": false,
               "on_complete": {
                 "next_stage": "STAGE_SOLO_ROUTE"
@@ -223,8 +223,18 @@
                   "type": "learn",
                   "knowledge_id": "KNOW_RELAY_WAS_DELIVERED_BY_COURIER",
                   "source": "OPENING_DEPOT_BLACKOUT",
-                  "confidence": 1.0,
+                  "confidence": 1,
                   "private": false
+                },
+                {
+                  "type": "npc_story_transition",
+                  "npc": "NPC_TAMSIN",
+                  "track_id": "TRACK_RELAY_CASE",
+                  "to_state": "OBSERVING_RELAY",
+                  "allowed_from": [
+                    null
+                  ],
+                  "reason": "PLAYER_ACCEPTED_RELAY"
                 }
               ],
               "next_scene": "OPENING_RELAY_CASING"
@@ -260,7 +270,7 @@
                   "type": "learn",
                   "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
                   "source": "ITEM_DEAD_RELAY",
-                  "confidence": 1.0,
+                  "confidence": 1,
                   "private": true
                 },
                 {
@@ -399,6 +409,27 @@
                   "value": 2
                 },
                 {
+                  "type": "npc_story_transition",
+                  "npc": "NPC_TAMSIN",
+                  "track_id": "TRACK_RELAY_CASE",
+                  "to_state": "KNOWS_GATE_TWELVE",
+                  "allowed_from": [
+                    "OBSERVING_RELAY"
+                  ],
+                  "reason": "RECOVERED_RELAY_HANDSHAKE"
+                },
+                {
+                  "type": "npc_goal_create",
+                  "npc": "NPC_TAMSIN",
+                  "goal_id": "GOAL_UNDERSTAND_GATE_TWELVE",
+                  "priority": 75,
+                  "progress": 10,
+                  "source": "OPENING_RECOVERY",
+                  "data": {
+                    "subject": "SERVICE_GATE_12"
+                  }
+                },
+                {
                   "type": "quest_objective_complete",
                   "quest_id": "QUEST_DEAD_RELAY",
                   "objective_id": "OBJ_ASK_FOR_HELP"
@@ -412,7 +443,7 @@
     },
     "OPENING_DECISION": {
       "title": "Gate Twelve",
-      "body": "The destination resolves to Service Gate Twelve, a sealed maintenance entrance below the depot. The official evacuation route runs in the opposite direction. Tamsin is still busy at the emergency panel and has not seen the address unless you choose to tell her.",
+      "body": "The destination resolves to Service Gate Twelve, a sealed maintenance entrance below the depot. The official evacuation route runs in the opposite direction. The next decision is not only whether to go below, but whether Tamsin becomes part of what happens there.",
       "choices": [
         {
           "id": "TELL_TAMSIN_GATE_TWELVE",
@@ -434,7 +465,7 @@
                   "npc": "NPC_TAMSIN",
                   "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
                   "source": "PLAYER",
-                  "confidence": 1.0
+                  "confidence": 1
                 },
                 {
                   "type": "party_add",
@@ -449,12 +480,40 @@
                 {
                   "type": "quest_objective_complete",
                   "quest_id": "QUEST_DEAD_RELAY",
-                  "objective_id": "OBJ_TELL_TAMSIN"
+                  "objective_id": "OBJ_CHOOSE_WITH_TAMSIN"
+                },
+                {
+                  "type": "npc_story_transition",
+                  "npc": "NPC_TAMSIN",
+                  "track_id": "TRACK_RELAY_CASE",
+                  "to_state": "JOINS_GATE_TWELVE",
+                  "allowed_from": [
+                    "OBSERVING_RELAY"
+                  ],
+                  "reason": "PLAYER_SHARED_GATE_TWELVE"
+                },
+                {
+                  "type": "npc_goal_create",
+                  "npc": "NPC_TAMSIN",
+                  "goal_id": "GOAL_UNDERSTAND_GATE_TWELVE",
+                  "priority": 75,
+                  "progress": 20,
+                  "source": "OPENING_DECISION",
+                  "data": {
+                    "subject": "SERVICE_GATE_12"
+                  }
                 }
               ],
               "next_scene": "OPENING_TUNNEL"
             }
-          }
+          },
+          "visible_if": [
+            {
+              "type": "npc_not_knows",
+              "npc": "NPC_TAMSIN",
+              "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12"
+            }
+          ]
         },
         {
           "id": "KEEP_GATE_TWELVE_SECRET",
@@ -472,7 +531,116 @@
                 {
                   "type": "quest_objective_complete",
                   "quest_id": "QUEST_DEAD_RELAY",
-                  "objective_id": "OBJ_KEEP_SECRET"
+                  "objective_id": "OBJ_CHOOSE_SOLO"
+                },
+                {
+                  "type": "npc_story_transition",
+                  "npc": "NPC_TAMSIN",
+                  "track_id": "TRACK_RELAY_CASE",
+                  "to_state": "PLAYER_LEFT_WITH_RELAY_SECRET",
+                  "allowed_from": [
+                    "OBSERVING_RELAY"
+                  ],
+                  "reason": "PLAYER_WITHHELD_GATE_TWELVE"
+                }
+              ],
+              "next_scene": "OPENING_SOLO_EXIT"
+            }
+          },
+          "visible_if": [
+            {
+              "type": "npc_not_knows",
+              "npc": "NPC_TAMSIN",
+              "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12"
+            }
+          ]
+        },
+        {
+          "id": "ASK_TAMSIN_TO_JOIN_KNOWN_ROUTE",
+          "text": "Ask Tamsin to come with you now that she knows the route.",
+          "time_cost_minutes": 2,
+          "visible_if": [
+            {
+              "type": "npc_knows",
+              "npc": "NPC_TAMSIN",
+              "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12"
+            }
+          ],
+          "requires": [
+            {
+              "type": "relationship_min",
+              "npc": "NPC_TAMSIN",
+              "axis": "trust",
+              "value": 10
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "party_add",
+                  "npc": "NPC_TAMSIN"
+                },
+                {
+                  "type": "relationship",
+                  "npc": "NPC_TAMSIN",
+                  "axis": "trust",
+                  "value": 1
+                },
+                {
+                  "type": "npc_story_transition",
+                  "npc": "NPC_TAMSIN",
+                  "track_id": "TRACK_RELAY_CASE",
+                  "to_state": "JOINS_GATE_TWELVE",
+                  "allowed_from": [
+                    "KNOWS_GATE_TWELVE"
+                  ],
+                  "reason": "PLAYER_INVITED_TAMSIN_AFTER_RECOVERY"
+                },
+                {
+                  "type": "npc_goal_progress",
+                  "npc": "NPC_TAMSIN",
+                  "goal_id": "GOAL_UNDERSTAND_GATE_TWELVE",
+                  "delta": 15
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_CHOOSE_WITH_TAMSIN"
+                }
+              ],
+              "next_scene": "OPENING_TUNNEL"
+            }
+          }
+        },
+        {
+          "id": "LEAVE_TAMSIN_AT_DEPOT_AFTER_RECOVERY",
+          "text": "Ask Tamsin to stay with the evacuees while you go to Gate Twelve alone.",
+          "time_cost_minutes": 2,
+          "visible_if": [
+            {
+              "type": "npc_knows",
+              "npc": "NPC_TAMSIN",
+              "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12"
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "npc_story_transition",
+                  "npc": "NPC_TAMSIN",
+                  "track_id": "TRACK_RELAY_CASE",
+                  "to_state": "STAYS_AT_DEPOT",
+                  "allowed_from": [
+                    "KNOWS_GATE_TWELVE"
+                  ],
+                  "reason": "PLAYER_GOES_ALONE_AFTER_RECOVERY"
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_CHOOSE_SOLO"
                 }
               ],
               "next_scene": "OPENING_SOLO_EXIT"
@@ -507,6 +675,22 @@
                   "type": "quest_objective_complete",
                   "quest_id": "QUEST_DEAD_RELAY",
                   "objective_id": "OBJ_ENTER_TUNNEL"
+                },
+                {
+                  "type": "npc_goal_progress",
+                  "npc": "NPC_TAMSIN",
+                  "goal_id": "GOAL_UNDERSTAND_GATE_TWELVE",
+                  "delta": 30
+                },
+                {
+                  "type": "npc_story_transition",
+                  "npc": "NPC_TAMSIN",
+                  "track_id": "TRACK_RELAY_CASE",
+                  "to_state": "ENTERED_GATE_TWELVE",
+                  "allowed_from": [
+                    "JOINS_GATE_TWELVE"
+                  ],
+                  "reason": "PARTY_ENTERED_SERVICE_TUNNEL"
                 }
               ],
               "next_scene": "OPENING_END"
