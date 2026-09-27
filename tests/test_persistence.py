@@ -84,5 +84,28 @@ class PersistenceTests(unittest.TestCase):
             loads_state('{"schema_version":1,"seed":"x","scene_id":3}')
 
 
+
+    def test_corrupt_nested_state_container_is_rejected_on_load(self):
+        raw = (
+            '{"schema_version":1,"seed":"x","scene_id":"A",'
+            '"player":[]}'
+        )
+        with self.assertRaises(RuleError):
+            loads_state(raw)
+
+    def test_corrupt_party_entries_are_rejected_on_load(self):
+        raw = (
+            '{"schema_version":1,"seed":"x","scene_id":"A",'
+            '"party":["NPC_A",3]}'
+        )
+        with self.assertRaises(RuleError):
+            loads_state(raw)
+
+    def test_dumps_state_rejects_corrupt_runtime_structure(self):
+        state = GameState(seed="x", scene_id="A")
+        state.history = ["not-an-event"]
+        with self.assertRaises(RuleError):
+            dumps_state(state)
+
 if __name__ == "__main__":
     unittest.main()
