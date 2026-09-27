@@ -646,7 +646,9 @@ private fun SettingsPanel(
                 onValueChange = { cheatCode = it.uppercase() },
                 label = { Text("CHEAT CODE") },
                 singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("cheat-input"),
             )
             Spacer(Modifier.height(8.dp))
             PixelTextButton("APPLY CHEAT") {
