@@ -28,6 +28,10 @@ SUPPORTED_EFFECTS: Set[str] = {
     "learn",
     "inventory",
     "quest_stage",
+    "quest_start",
+    "quest_objective_complete",
+    "quest_objective_fail",
+    "quest_fail",
     "npc_learn",
     "personality",
     "party_add",
@@ -131,14 +135,21 @@ def validate_content_pack(
                 if not isinstance(outcome, Mapping):
                     continue
                 for effect_index, effect in enumerate(outcome.get("effects", [])):
-                    if effect.get("type") != "quest_stage":
+                    effect_type = effect.get("type")
+                    if effect_type not in {
+                        "quest_stage",
+                        "quest_start",
+                        "quest_objective_complete",
+                        "quest_objective_fail",
+                        "quest_fail",
+                    }:
                         continue
+
                     location = (
                         f"{scene_id}.choices[{choice_index}]."
                         f"outcomes.{outcome_name}.effect[{effect_index}]"
                     )
                     quest_id = effect.get("quest_id")
-                    stage_id = effect.get("stage")
                     definition = quest_definitions.get(quest_id)
 
                     if definition is None:
@@ -148,11 +159,30 @@ def validate_content_pack(
                         continue
 
                     stages = definition.get("stages", {})
-                    if stage_id not in stages:
-                        errors.append(
-                            f"{location} references unknown stage "
-                            f"{stage_id!r} for quest {quest_id!r}"
-                        )
+
+                    if effect_type == "quest_stage":
+                        stage_id = effect.get("stage")
+                        if stage_id not in stages:
+                            errors.append(
+                                f"{location} references unknown stage "
+                                f"{stage_id!r} for quest {quest_id!r}"
+                            )
+
+                    if effect_type in {
+                        "quest_objective_complete",
+                        "quest_objective_fail",
+                    }:
+                        objective_id = effect.get("objective_id")
+                        matching_stages = [
+                            stage_id
+                            for stage_id, stage in stages.items()
+                            if objective_id in stage.get("objectives", {})
+                        ]
+                        if not matching_stages:
+                            errors.append(
+                                f"{location} references unknown objective "
+                                f"{objective_id!r} for quest {quest_id!r}"
+                            )
 
     return errors
 
