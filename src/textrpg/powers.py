@@ -64,8 +64,12 @@ def _set_player_path(state: GameState, path: str, value: Any) -> None:
 
 def _numeric_player_path(state: GameState, path: str) -> float:
     value = _player_path(state, path)
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
-        raise RuleError(f"Power resource path is missing or non-numeric: {path}")
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not isfinite(float(value))
+    ):
+        raise RuleError(f"Power resource path is missing or non-finite numeric: {path}")
     return float(value)
 
 
@@ -830,8 +834,32 @@ def ability_player_view(
         raise RuleError("Ability technique definitions must be an object")
 
     for technique_id, record in ability.get("techniques", {}).items():
+        if not isinstance(technique_id, str) or not technique_id:
+            raise RuleError("Technique state keys must be non-empty IDs")
         if not isinstance(record, Mapping):
             raise RuleError(f"Technique state must be an object: {technique_id}")
+        technique_mastery = record.get("mastery_xp", 0.0)
+        if (
+            isinstance(technique_mastery, bool)
+            or not isinstance(technique_mastery, (int, float))
+            or not isfinite(float(technique_mastery))
+            or float(technique_mastery) < 0
+        ):
+            raise RuleError(
+                f"Technique mastery_xp must be a finite non-negative number: {technique_id}"
+            )
+        uses_value = record.get("uses", 0)
+        if isinstance(uses_value, bool) or not isinstance(uses_value, int) or uses_value < 0:
+            raise RuleError(f"Technique uses must be a non-negative integer: {technique_id}")
+        ready_at_value = record.get("ready_at_minutes", 0)
+        if (
+            isinstance(ready_at_value, bool)
+            or not isinstance(ready_at_value, int)
+            or ready_at_value < 0
+        ):
+            raise RuleError(
+                f"Technique ready_at_minutes must be a non-negative integer: {technique_id}"
+            )
         authored = (
             technique_definitions.get(technique_id, {})
             if isinstance(technique_definitions, Mapping)
@@ -840,7 +868,7 @@ def ability_player_view(
         if authored is not None and not isinstance(authored, Mapping):
             raise RuleError(f"Technique definition must be an object: {technique_id}")
         authored = authored or {}
-        ready_at = int(record.get("ready_at_minutes", 0))
+        ready_at = ready_at_value
         output["techniques"].append(
             {
                 "technique_id": technique_id,
@@ -854,8 +882,8 @@ def ability_player_view(
                     f"Technique stage {technique_id}",
                     default="discovered",
                 ),
-                "mastery_xp": float(record.get("mastery_xp", 0.0)),
-                "uses": int(record.get("uses", 0)),
+                "mastery_xp": float(technique_mastery),
+                "uses": uses_value,
                 "ready": state.time_minutes >= ready_at,
                 "cooldown_remaining_minutes": max(0, ready_at - state.time_minutes),
             }
