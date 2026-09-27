@@ -3,6 +3,7 @@ import unittest
 from textrpg import GameState, RuleError, gain_ability_mastery
 from textrpg.powers import (
     ability_evolution_status,
+    discover_ability,
     discover_technique,
     evolve_ability,
     gain_technique_mastery,
@@ -58,6 +59,26 @@ class PowerRuntimeTests(unittest.TestCase):
             "mastery_gain": 10,
             "ability_mastery_gain": 5,
         }
+
+    def test_discover_ability_creates_shell_without_free_mastery(self):
+        state = GameState(seed="s", scene_id="A")
+        ability = discover_ability(
+            state,
+            "ABILITY_TRACE_ECHO",
+            family="perception",
+            form="latent",
+            tags=["sensory"],
+        )
+        self.assertEqual(ability["rank"], 0)
+        self.assertEqual(ability["mastery_xp"], 0.0)
+        self.assertEqual(ability["family"], "perception")
+        self.assertEqual(ability["form"], "latent")
+        self.assertEqual(state.history[-1]["type"], "ability_discovered")
+
+        history_count = len(state.history)
+        discover_ability(state, "ABILITY_TRACE_ECHO", family="different")
+        self.assertEqual(len(state.history), history_count)
+        self.assertEqual(state.abilities["ABILITY_TRACE_ECHO"]["family"], "perception")
 
     def test_technique_stage_thresholds(self):
         self.assertEqual(technique_stage(0), "discovered")
