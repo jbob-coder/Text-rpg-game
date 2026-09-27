@@ -50,22 +50,33 @@ def apply_condition(
         _minutes(duration_minutes, "Condition duration_minutes", minimum=0)
     if not isinstance(source, str) or not source:
         raise RuleError("Condition source must be a non-empty string")
-    if isinstance(tags, (str, bytes)):
+    if isinstance(tags, (str, bytes)) or not isinstance(tags, Iterable):
         raise RuleError("Condition tags must be an iterable of non-empty strings")
     tag_list = list(tags)
     if not all(isinstance(tag, str) and tag for tag in tag_list):
         raise RuleError("Condition tags must be an iterable of non-empty strings")
+    if modifiers is not None and not isinstance(modifiers, Mapping):
+        raise RuleError("Condition modifiers must be an object")
     try:
         validated_modifiers = validate_modifier_mapping(
-            modifiers or {},
+            {} if modifiers is None else modifiers,
             source=f"condition:{condition_id}",
         )
     except ValueError as exc:
         raise RuleError(f"Invalid condition modifiers for {condition_id}: {exc}") from exc
 
-    conditions = state.player.setdefault("conditions", {})
-    if not isinstance(conditions, dict):
-        raise RuleError("player.conditions must be an object")
+    if not isinstance(state.player, MutableMapping):
+        raise RuleError("player state must be mutable")
+    existing_conditions = state.player.get("conditions")
+    if existing_conditions is None:
+        conditions: MutableMapping[str, Any] = {}
+        create_conditions = True
+    elif not isinstance(existing_conditions, MutableMapping):
+        raise RuleError("player.conditions must be a mutable object")
+    else:
+        conditions = existing_conditions
+        create_conditions = False
+
     record = {
         "severity": severity,
         "duration_minutes": duration_minutes,
@@ -74,6 +85,10 @@ def apply_condition(
         "modifiers": validated_modifiers,
         "applied_at": state.time_minutes,
     }
+
+    # Commit only after metadata and container structure are fully validated.
+    if create_conditions:
+        state.player["conditions"] = conditions
     conditions[condition_id] = record
     return record
 
