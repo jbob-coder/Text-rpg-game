@@ -59,6 +59,8 @@ data class GameInventoryItem(
     val id: String,
     val name: String,
     val quantity: Int,
+    val equippable: Boolean = false,
+    val slot: String? = null,
 )
 
 data class GameEquipmentSlot(
@@ -160,6 +162,10 @@ interface GameEngine {
     suspend fun save(): Result<Unit>
     suspend fun load(): Result<GameSnapshot>
     suspend fun applyCheat(code: String): Result<GameSnapshot>
+    suspend fun equip(itemId: String): Result<GameSnapshot> =
+        Result.failure(UnsupportedOperationException("equip is not implemented"))
+    suspend fun unequip(slot: String): Result<GameSnapshot> =
+        Result.failure(UnsupportedOperationException("unequip is not implemented"))
     suspend fun travel(locationId: String): Result<GameSnapshot> =
         Result.failure(UnsupportedOperationException("travel is not implemented"))
 }
@@ -262,6 +268,8 @@ internal object BridgeSnapshotMapper {
                 id = text(value["id"], "inventory.items[$index].id"),
                 name = text(value["name"], "inventory.items[$index].name"),
                 quantity = integer(value["quantity"], "inventory.items[$index].quantity"),
+                equippable = optionalBoolean(value["equippable"]) ?: false,
+                slot = optionalText(value["slot"]),
             )
         }
         val equipmentSlots = optionalList(
@@ -418,4 +426,10 @@ internal object BridgeSnapshotMapper {
 
     private fun optionalInteger(value: Any?, label: String): Int? =
         if (value == null) null else integer(value, label)
+
+    private fun optionalBoolean(value: Any?): Boolean? = when (value) {
+        null -> null
+        is Boolean -> value
+        else -> throw IllegalArgumentException("optional boolean field has invalid type")
+    }
 }
