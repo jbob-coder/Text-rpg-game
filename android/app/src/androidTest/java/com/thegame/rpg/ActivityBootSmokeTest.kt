@@ -56,7 +56,9 @@ class ActivityBootSmokeTest {
         waitForText("A Case That Should Be Empty", timeoutMillis = 30_000)
 
         composeRule.onNodeWithText("A Case That Should Be Empty").assertIsDisplayed()
-        composeRule.onNodeWithTag("choice-USE_MAINTENANCE_SEAL").assertIsDisplayed()
+        composeRule.onNodeWithTag("choice-USE_MAINTENANCE_SEAL")
+            .performScrollTo()
+            .assertIsDisplayed()
     }
 
     @Test
@@ -89,6 +91,8 @@ class ActivityBootSmokeTest {
         composeRule.onNodeWithText("LOAD / CONTINUE").performClick()
 
         waitForText("A Case That Should Be Empty", timeoutMillis = 30_000)
-        composeRule.onNodeWithTag("choice-USE_MAINTENANCE_SEAL").assertIsDisplayed()
+        composeRule.onNodeWithTag("choice-USE_MAINTENANCE_SEAL")
+            .performScrollTo()
+            .assertIsDisplayed()
     }
 }
