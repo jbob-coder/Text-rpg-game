@@ -645,5 +645,118 @@ class PowerRuntimeTests(unittest.TestCase):
                 before_mastery,
             )
 
+    def test_invalid_cost_path_is_rejected_before_any_mutation(self):
+        state = self.state()
+        invalid = self.definition()
+        invalid["costs"] = {"attributes.will": 1}
+        before_player = dict(state.player)
+        before_technique = dict(
+            state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]
+        )
+
+        errors = validate_technique_definition(invalid)
+        self.assertTrue(any("resources.<id> or power_resources.<id>" in e for e in errors))
+        with self.assertRaises(RuleError):
+            use_technique(state, "ABILITY_FLUX", "TECHNIQUE_PULSE", invalid)
+
+        self.assertEqual(state.player, before_player)
+        self.assertEqual(
+            state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"],
+            before_technique,
+        )
+
+    def test_invalid_drawback_modifier_path_is_rejected_before_spending(self):
+        state = self.state()
+        invalid = self.definition()
+        invalid["drawbacks"] = [
+            {
+                "type": "condition",
+                "condition_id": "COND_BAD",
+                "severity": 1,
+                "tags": ["strain"],
+                "modifiers": {"attributes.migth": -1},
+            }
+        ]
+        before_focus = state.player["resources"]["focus"]
+        before_flux = state.player["power_resources"]["flux"]
+
+        errors = validate_technique_definition(invalid)
+        self.assertTrue(any("modifiers invalid" in e for e in errors))
+        with self.assertRaises(RuleError):
+            use_technique(state, "ABILITY_FLUX", "TECHNIQUE_PULSE", invalid)
+
+        self.assertEqual(state.player["resources"]["focus"], before_focus)
+        self.assertEqual(state.player["power_resources"]["flux"], before_flux)
+        self.assertNotIn("COND_BAD", state.player.get("conditions", {}))
+
+    def test_unknown_power_requirement_ids_are_definition_errors(self):
+        technique = self.definition()
+        technique["requirements"]["attributes"] = {"wil": 1}
+        technique["requirements"]["skills"] = {"powerz": 1}
+        errors = validate_technique_definition(technique)
+        self.assertTrue(any("unknown ID 'wil'" in e for e in errors))
+        self.assertTrue(any("unknown ID 'powerz'" in e for e in errors))
+
+        evolution = {
+            "requirements": {
+                "attributes": {"wil": 1},
+                "skills": {"powerz": 1},
+            },
+            "result": {},
+        }
+        errors = validate_evolution_definition(evolution)
+        self.assertTrue(any("unknown ID 'wil'" in e for e in errors))
+        self.assertTrue(any("unknown ID 'powerz'" in e for e in errors))
+
+    def test_corrupt_mastery_state_is_rejected_before_technique_spend(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["mastery_xp"] = float("nan")
+        before_focus = state.player["resources"]["focus"]
+        before_flux = state.player["power_resources"]["flux"]
+
+        with self.assertRaises(RuleError):
+            use_technique(
+                state,
+                "ABILITY_FLUX",
+                "TECHNIQUE_PULSE",
+                self.definition(),
+            )
+
+        self.assertEqual(state.player["resources"]["focus"], before_focus)
+        self.assertEqual(state.player["power_resources"]["flux"], before_flux)
+
+    def test_invalid_evolution_perk_modifier_is_rejected_before_form_or_item_mutation(self):
+        state = self.state()
+        state.inventory["ITEM_CORE_SHARD"] = 2
+        definition = {
+            "requirements": {},
+            "result": {
+                "form": "stable",
+                "consume_items": {"ITEM_CORE_SHARD": 1},
+                "grant_perks": {
+                    "PERK_BAD": {
+                        "modifiers": {"derived.max_heath": 5},
+                        "tags": ["evolution"],
+                    }
+                },
+            },
+        }
+        before_inventory = dict(state.inventory)
+        before_form = state.abilities["ABILITY_FLUX"].get("form")
+
+        errors = validate_evolution_definition(definition)
+        self.assertTrue(any("modifiers invalid" in e for e in errors))
+        with self.assertRaises(RuleError):
+            evolve_ability(
+                state,
+                "ABILITY_FLUX",
+                "EVOLUTION_BAD_PERK",
+                definition,
+            )
+
+        self.assertEqual(state.inventory, before_inventory)
+        self.assertEqual(state.abilities["ABILITY_FLUX"].get("form"), before_form)
+        self.assertNotIn("PERK_BAD", state.perks)
+
 if __name__ == "__main__":
     unittest.main()
