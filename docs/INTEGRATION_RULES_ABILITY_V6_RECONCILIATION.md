@@ -421,6 +421,46 @@ The static authored-test count is now **240** across 17 test files.
 
 A fresh Codex runtime-environment check during this pass returned no registered environments, so exact suite execution remains unavailable here and no pass claim is made.
 
+
+## World-time and modifier-source boundary hardening
+
+A further static integrity pass found two additional classes of failure.
+
+### World-time preflight
+
+`advance_time()` validated the requested delta and timed conditions but did not validate the existing `state.time_minutes` value or require mutable player state before committing.
+
+This mattered beyond direct time advancement because recovery and training preflight time before performing other mutations. A corrupt current world-time value could therefore allow resource normalization to happen and only fail later when time was incremented.
+
+V6 now requires, during the shared time-advance plan:
+- existing `state.time_minutes` to be a non-negative integer with booleans rejected;
+- `state.player` to be mutable before any time/condition commit.
+
+Three regressions verify:
+- corrupt current time is rejected without condition mutation;
+- immutable player state is rejected before time changes;
+- recovery rejects corrupt world time before resource normalization.
+
+### Modifier source structure
+
+The effective-stat pipeline previously assumed nested equipment/perk records and top-level player/equipment/perk containers were mapping-shaped.
+
+Corrupt state could therefore surface `AttributeError` from calls such as `.get()` instead of a consistent modifier-contract error.
+
+V6 now preflights modifier source containers and records:
+- player/equipment/perks must be mappings;
+- equipment records must be mappings;
+- perk records must be mappings;
+- equipment `set_id`, when present, must be a non-empty string.
+
+This keeps direct modifier/stat queries deterministic and lets the higher RulesEngine boundary convert modifier `ValueError` failures into `RuleError` consistently.
+
+Three regressions cover corrupt equipment records, corrupt perk records, and corrupt player containers.
+
+The static authored-test count is now **246** across 17 test files.
+
+These remain static/source hardening results only. Exact V6 runtime execution is still pending.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
@@ -432,7 +472,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 240 authored test methods;
+- V6 has 246 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
