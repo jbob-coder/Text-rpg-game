@@ -77,5 +77,31 @@ class ValidationTests(unittest.TestCase):
         self.assertTrue(any("skill must use skills.<id>" in e for e in errors))
 
 
+    def test_structural_authoring_errors_are_reported_not_crashed(self):
+        scenes = {
+            "SCENE_BAD": {
+                "choices": [
+                    "not-an-object",
+                    {
+                        "id": "CHOICE_BAD",
+                        "text": "Broken",
+                        "visible_if": {"type": "flag"},
+                        "requires": [123],
+                        "outcomes": {
+                            "default": {
+                                "effects": {"type": "set_flag"}
+                            }
+                        },
+                    },
+                ]
+            },
+            "SCENE_NOT_OBJECT": "broken",
+        }
+        errors = validate_scenes(scenes)
+        self.assertTrue(any("must be an object" in e for e in errors))
+        self.assertTrue(any("visible_if must be a list" in e for e in errors))
+        self.assertTrue(any("condition[0] must be an object" in e for e in errors))
+        self.assertTrue(any("effects must be a list" in e for e in errors))
+
 if __name__ == "__main__":
     unittest.main()
