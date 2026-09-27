@@ -413,10 +413,29 @@ def discover_ability(
     form: str | None = None,
     tags: tuple[str, ...] | list[str] = (),
     data: Mapping[str, Any] | None = None,
+    definition: Mapping[str, Any] | None = None,
 ) -> Dict[str, Any]:
     """Create a persistent ability shell without granting free mastery."""
     if not isinstance(ability_id, str) or not ability_id:
         raise RuleError("Ability ID must be a non-empty string")
+    if not _STABLE_ID.fullmatch(ability_id):
+        raise RuleError(f"Ability ID must be a stable uppercase ID: {ability_id!r}")
+    if definition is not None and not isinstance(definition, Mapping):
+        raise RuleError("Ability definition must be an object")
+
+    resource_plan = None
+    if definition is not None:
+        resource_plan = _power_resource_plan(state, ability_id, definition)
+        authored_family = definition.get("family")
+        authored_form = definition.get("form")
+        authored_tags = definition.get("tags", [])
+        if family == "unknown" and isinstance(authored_family, str) and authored_family:
+            family = authored_family
+        if form is None and isinstance(authored_form, str) and authored_form:
+            form = authored_form
+        if not tags and isinstance(authored_tags, list):
+            tags = list(authored_tags)
+
     if not isinstance(family, str) or not family:
         raise RuleError("Ability family must be a non-empty string")
     if form is not None and (not isinstance(form, str) or not form):
@@ -449,6 +468,13 @@ def discover_ability(
         if not isinstance(existing_techniques, MutableMapping):
             raise RuleError(f"Ability techniques state is invalid: {ability_id}")
 
+        # Definition/resource state was validated before these writes.
+        if resource_plan is not None and resource_plan["missing"]:
+            _commit_power_resource_plan(
+                state,
+                resource_plan,
+                float(resource_plan["starting"]),
+            )
         existing.setdefault("family", family)
         existing.setdefault("form", form)
         existing.setdefault("tags", list(tags))
@@ -466,6 +492,14 @@ def discover_ability(
         "data": dict(data or {}),
         "techniques": {},
     }
+
+    # All validation is complete; resource + ability discovery now commit together.
+    if resource_plan is not None and resource_plan["missing"]:
+        _commit_power_resource_plan(
+            state,
+            resource_plan,
+            float(resource_plan["starting"]),
+        )
     state.abilities[ability_id] = ability
     state.history.append(
         {
@@ -478,7 +512,6 @@ def discover_ability(
         }
     )
     return ability
-
 
 def discover_technique(state: GameState, ability_id: str, technique_id: str) -> Dict[str, Any]:
     if not isinstance(technique_id, str) or not technique_id:
