@@ -98,5 +98,17 @@ class EquipmentTests(unittest.TestCase):
                 },
             )
 
+    def test_non_finite_requirement_minimum_is_rejected(self):
+        state = GameState(seed="s", scene_id="A", player={"attributes": {"might": 50}})
+        with self.assertRaises(RuleError):
+            equip_item(
+                state,
+                {
+                    "item_id": "ITEM_NAN_REQ",
+                    "slot": "body",
+                    "requirements": {"attributes": {"might": float("nan")}},
+                },
+            )
+
 if __name__ == "__main__":
     unittest.main()
