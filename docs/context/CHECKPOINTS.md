@@ -1127,3 +1127,108 @@ This reduces merge churn and lowers the risk of overwriting reviewed integration
 3. When the foundation workstream reaches a checkpoint, freeze its exact SHA and reconcile once.
 4. Execute all tests on the reconciled source before promotion.
 5. Continue stat-schema migration design separately from executable migration.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-RECONCILIATION-INVENTORY-12
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Foundation: `foundation/text-rpg-systems@b3340bc38e63e916c6cc7a8538ed1e8a34011112`
+
+Preserved integration checkpoint: `integration/rules-ability-v5@fd36b9f1d14528f3dc5eb37e20e9120af25af036`
+
+New reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 creation point: exact V5 SHA `fd36b9f1d14528f3dc5eb37e20e9120af25af036`
+
+Merge base between current foundation and V5: `3ff37588f3ee9c0900e2e048387503c97cf9ed97`
+
+### CURRENT_OBJECTIVE
+
+[IN_PROGRESS] Converge current foundation + V5 into one reproducible implementation without blindly merging parent commits and without mixing the seven-to-eight stat migration into reconciliation.
+
+### AUTHORITATIVE WORKSTREAM ROLES
+
+- [VERIFIED] Active implementation: `foundation/text-rpg-systems`
+- [VERIFIED] Preserved integration checkpoint: `integration/rules-ability-v5`
+- [VERIFIED] Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+- [VERIFIED] Active architecture/context: `shared/game-context`
+- [PRESERVE] Secondary context history: `context/shared-game-context`
+- [DECISION] Do not consolidate the two context branches until V6 reaches a reproducible verified checkpoint.
+
+### INVENTORY RESULT
+
+[VERIFIED] The 19 foundation-only commits since the merge base were inspected individually before any V6 source edit.
+
+Detailed inventory:
+`docs/context/FOUNDATION_V5_RECONCILIATION_INVENTORY.md`
+
+Classification:
+- 1 direct isolated regression-test carry candidate
+- 11 semantic-reconciliation commits
+- 7 documentation/content commits
+
+[VERIFIED] Most foundation-only source intent is already present in V5 in evolved/hardened form.
+
+### PRIMARY MISSING SOURCE DELTA
+
+[VERIFIED] V5 does not yet enforce same-ability prerequisite-technique cross-reference integrity inside `validate_power_definitions()`:
+- a technique must not require itself
+- referenced prerequisite technique IDs must exist in the ability's technique mapping
+
+This must be added to V6's hardened validator rather than replaying the older foundation `powers.py` patch.
+
+### PRIMARY MISSING CONTENT DELTA
+
+[VERIFIED] Current foundation contains the post-discovery Directional Trace tail that V5 lacks:
+- controlled first use
+- stronger Echo Strain
+- deeper-route knowledge
+- one-hour recovery
+- final first-use-complete flag
+
+Structural comparison at inventory time:
+- foundation: 16 scenes / 25 unique choices
+- V5: 14 scenes / 23 unique choices
+
+### ALREADY REPRESENTED IN V5
+
+[VERIFIED] Do not replay older foundation patches for:
+- `not_has_perk`
+- `technique_stage_min`
+- `skill_train`
+- `recover_resources`
+- validation of those rule types
+- effective power attribute/skill prerequisites
+- earned Trace stabilization route through Directional Trace discovery
+- related existing route/core/save-resume tests
+
+### TEST / RUNTIME BOUNDARY
+
+[REPORTED_VERIFICATION] Latest historical fully executed foundation suite remains 103 passed / 0 failed.
+
+[VERIFIED STATIC] Current foundation contains 108 authored `test_*` methods.
+
+[VERIFIED STATIC] V5 contains approximately 199 authored `test_*` methods.
+
+[UNKNOWN] No exact V6 suite has been executed. V6 must not be called green, complete, merge-ready, or verified until exact execution is observed.
+
+### STAT MIGRATION
+
+[DECISION] The seven-to-eight stat migration is explicitly outside this reconciliation cycle.
+
+Reconciliation target remains the current seven-stat executable schema. Any later eight-stat migration must begin from a green integrated baseline and remain isolated/reviewable/reversible.
+
+### NEXT_ACTION
+
+1. Reconcile the single missing source invariant into V6's hardened `validate_power_definitions()`.
+2. Add/adapt its isolated regression.
+3. Recover the missing Directional Trace first-use content delta.
+4. Reconcile route/save-resume regression tests without replacing V5 test files wholesale.
+5. Perform static validation and exact cross-branch diff review.
+6. Execute the full V6 suite in an authorized exact runtime.
+7. Fix observed regressions.
+8. Record exact V6 SHA and test evidence.
+9. Only then consolidate context histories.
