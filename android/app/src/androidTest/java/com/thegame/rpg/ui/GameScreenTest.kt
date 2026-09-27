@@ -111,7 +111,10 @@ class GameScreenTest {
             }
         }
 
-        composeRule.onNodeWithTag("nav-map").performClick()
+        composeRule.onNodeWithTag("nav-map")
+            .performScrollTo()
+            .assertIsDisplayed()
+            .performClick()
         composeRule.onNodeWithTag("world-map-canvas").assertIsDisplayed()
         composeRule.onNodeWithTag("map-node-DISTRICT_ARCHIVE")
             .performScrollTo()

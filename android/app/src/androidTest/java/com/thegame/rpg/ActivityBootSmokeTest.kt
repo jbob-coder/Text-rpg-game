@@ -115,6 +115,7 @@ class ActivityBootSmokeTest {
         waitForText("The District Opens Up", timeoutMillis = 60_000)
 
         composeRule.onNodeWithTag("nav-map")
+            .performScrollTo()
             .assertIsDisplayed()
             .performClick()
         composeRule.waitUntil(timeoutMillis = 30_000) {
