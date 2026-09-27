@@ -241,6 +241,42 @@
           }
         }
       }
+    },
+    "QUEST_TRACE_STABILIZATION": {
+      "start_stage": "STAGE_FOUNDATION",
+      "stages": {
+        "STAGE_FOUNDATION": {
+          "objectives": {
+            "OBJ_STABILIZE_SIGNAL_PULSE": {
+              "required": true
+            },
+            "OBJ_ANALYZE_STABLE_PATTERN": {
+              "required": true
+            },
+            "OBJ_EARN_TRACE_TOLERANCE": {
+              "required": true
+            }
+          },
+          "on_complete": {
+            "next_stage": "STAGE_DIRECTIONAL"
+          }
+        },
+        "STAGE_DIRECTIONAL": {
+          "objectives": {
+            "OBJ_DISCOVER_DIRECTIONAL_TRACE": {
+              "required": true,
+              "on_complete": {
+                "next_stage": "STAGE_COMPLETE"
+              }
+            }
+          }
+        },
+        "STAGE_COMPLETE": {
+          "terminal": true,
+          "terminal_status": "completed",
+          "objectives": {}
+        }
+      }
     }
   },
   "scenes": {
@@ -885,12 +921,12 @@
       ]
     },
     "POWER_FIRST_PRACTICE_RESULT": {
-      "title": "Progress, Cost, and a Locked Door Ahead",
-      "body": "The first controlled use confirms three things: Trace Echo has its own limited resonance reserve, active use can cause sensory strain, and recovery is slower than expenditure. The stronger directional technique remains locked behind substantially more mastery, knowledge, tolerance training, and improved perception/will.",
+      "title": "A Method Instead of a Shortcut",
+      "body": "The first controlled use gives you a baseline, not an upgrade. To make Trace Echo useful at direction-finding range, you need three things: stabilize Signal Pulse through repetition, understand which trace patterns remain consistent, and condition yourself to tolerate the sensory load.",
       "choices": [
         {
-          "id": "END_TRACE_ECHO_FOUNDATION_SLICE",
-          "text": "Record the limits and end the current prototype slice.",
+          "id": "BEGIN_TRACE_STABILIZATION_PLAN",
+          "text": "Begin a structured Trace Echo stabilization plan.",
           "outcomes": {
             "default": {
               "effects": [
@@ -898,8 +934,13 @@
                   "type": "set_flag",
                   "key": "vertical_slice_01.power_session_complete",
                   "value": true
+                },
+                {
+                  "type": "quest_start",
+                  "quest_id": "QUEST_TRACE_STABILIZATION"
                 }
-              ]
+              ],
+              "next_scene": "TRACE_STABILIZATION_HUB"
             }
           }
         }
@@ -967,6 +1008,234 @@
           }
         }
       ]
+    },
+    "TRACE_STABILIZATION_HUB": {
+      "title": "Trace Echo Training Ledger",
+      "body": "Progress is measured in sessions, recovery, and reproducible results. Signal Pulse can be practiced, the general Powers skill can be trained, and recovery is necessary when Focus or Stamina runs low. The research options only become useful after the technique itself has stabilized.",
+      "choices": [
+        {
+          "id": "PRACTICE_SIGNAL_PULSE_TWO_HOURS",
+          "text": "Practice Signal Pulse for two focused hours.",
+          "requires": [
+            {
+              "type": "stat_min",
+              "stat": "resources.stamina",
+              "value": 8
+            },
+            {
+              "type": "stat_min",
+              "stat": "resources.focus",
+              "value": 12
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "technique_practice",
+                  "ability_id": "ABILITY_TRACE_ECHO",
+                  "technique_id": "TECHNIQUE_SIGNAL_PULSE",
+                  "minutes": 120,
+                  "intensity": 1,
+                  "stamina_per_hour": 4,
+                  "focus_per_hour": 6
+                }
+              ],
+              "next_scene": "TRACE_STABILIZATION_HUB"
+            }
+          }
+        },
+        {
+          "id": "TRAIN_POWER_FUNDAMENTALS_TWO_HOURS",
+          "text": "Train two hours of controlled power fundamentals and measurement.",
+          "requires": [
+            {
+              "type": "stat_min",
+              "stat": "resources.stamina",
+              "value": 16
+            },
+            {
+              "type": "stat_min",
+              "stat": "resources.focus",
+              "value": 10
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "skill_train",
+                  "skill": "powers",
+                  "minutes": 120,
+                  "intensity": 1
+                }
+              ],
+              "next_scene": "TRACE_STABILIZATION_HUB"
+            }
+          }
+        },
+        {
+          "id": "RECOVER_EIGHT_HOURS",
+          "text": "Stop training and recover for eight hours.",
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "recover_resources",
+                  "minutes": 480,
+                  "quality": 1
+                }
+              ],
+              "next_scene": "TRACE_STABILIZATION_HUB"
+            }
+          }
+        },
+        {
+          "id": "ANALYZE_STABLE_TRACE_PATTERN",
+          "text": "Compare the relay and Gate Twelve traces until the repeatable pattern becomes clear.",
+          "time_cost_minutes": 180,
+          "visible_if": [
+            {
+              "type": "not_knows",
+              "knowledge_id": "KNOW_TRACE_ECHO_PATTERN_STABLE"
+            }
+          ],
+          "requires": [
+            {
+              "type": "technique_stage_min",
+              "ability_id": "ABILITY_TRACE_ECHO",
+              "technique_id": "TECHNIQUE_SIGNAL_PULSE",
+              "stage": "learned"
+            },
+            {
+              "type": "knows",
+              "knowledge_id": "KNOW_GATE_TWELVE_RECENT_TRACE"
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_TRACE_ECHO_PATTERN_STABLE",
+                  "source": "TRACE_STABILIZATION_HUB",
+                  "confidence": 0.9,
+                  "private": true
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_TRACE_STABILIZATION",
+                  "objective_id": "OBJ_STABILIZE_SIGNAL_PULSE"
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_TRACE_STABILIZATION",
+                  "objective_id": "OBJ_ANALYZE_STABLE_PATTERN"
+                }
+              ],
+              "next_scene": "TRACE_STABILIZATION_HUB"
+            }
+          }
+        },
+        {
+          "id": "COMPLETE_TRACE_TOLERANCE_PROTOCOL",
+          "text": "Complete a six-hour sensory tolerance protocol using short pulses, darkness, and controlled recovery.",
+          "time_cost_minutes": 360,
+          "visible_if": [
+            {
+              "type": "not_has_perk",
+              "perk_id": "PERK_TRACE_TOLERANCE"
+            }
+          ],
+          "requires": [
+            {
+              "type": "knows",
+              "knowledge_id": "KNOW_TRACE_ECHO_PATTERN_STABLE"
+            },
+            {
+              "type": "technique_stage_min",
+              "ability_id": "ABILITY_TRACE_ECHO",
+              "technique_id": "TECHNIQUE_SIGNAL_PULSE",
+              "stage": "learned"
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "add_perk",
+                  "perk_id": "PERK_TRACE_TOLERANCE",
+                  "source": "TRACE_TOLERANCE_PROTOCOL",
+                  "modifiers": {
+                    "attributes.perception": 5,
+                    "attributes.will": 5
+                  },
+                  "tags": [
+                    "power",
+                    "sensory",
+                    "training"
+                  ]
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_TRACE_STABILIZATION",
+                  "objective_id": "OBJ_EARN_TRACE_TOLERANCE"
+                }
+              ],
+              "next_scene": "TRACE_STABILIZATION_HUB"
+            }
+          }
+        },
+        {
+          "id": "DISCOVER_DIRECTIONAL_TRACE",
+          "text": "Use the stabilized pattern to derive Directional Trace.",
+          "requires": [
+            {
+              "type": "technique_discoverable",
+              "ability_id": "ABILITY_TRACE_ECHO",
+              "technique_id": "TECHNIQUE_DIRECTIONAL_TRACE"
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "technique_discover",
+                  "ability_id": "ABILITY_TRACE_ECHO",
+                  "technique_id": "TECHNIQUE_DIRECTIONAL_TRACE"
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_TRACE_STABILIZATION",
+                  "objective_id": "OBJ_DISCOVER_DIRECTIONAL_TRACE"
+                }
+              ],
+              "next_scene": "TRACE_DIRECTIONAL_DISCOVERY_RESULT"
+            }
+          }
+        }
+      ]
+    },
+    "TRACE_DIRECTIONAL_DISCOVERY_RESULT": {
+      "title": "Direction, Not Mastery",
+      "body": "Directional Trace is finally reproducible enough to exist as a technique. It begins at zero technique mastery. The training that unlocked it does not make it mastered, cheap, or safe; it only gives you a reliable method for attempting it.",
+      "choices": [
+        {
+          "id": "END_DIRECTIONAL_TRACE_PROTOTYPE",
+          "text": "Record the new technique and end the current prototype branch.",
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "vertical_slice_01.directional_trace_discovered",
+                  "value": true
+                }
+              ]
+            }
+          }
+        }
+      ]
     }
   },
   "powers": {
@@ -1022,8 +1291,8 @@
         "TECHNIQUE_DIRECTIONAL_TRACE": {
           "stage_min": "discovered",
           "requirements": {
-            "rank_min": 1,
-            "mastery_xp_min": 100,
+            "rank_min": 0,
+            "mastery_xp_min": 20,
             "knowledge": [
               "KNOW_TRACE_ECHO_PATTERN_STABLE"
             ],
@@ -1063,8 +1332,8 @@
             }
           ],
           "discovery_requirements": {
-            "rank_min": 1,
-            "mastery_xp_min": 100,
+            "rank_min": 0,
+            "mastery_xp_min": 20,
             "knowledge": [
               "KNOW_TRACE_ECHO_PATTERN_STABLE"
             ],
@@ -1106,7 +1375,8 @@
     },
     "perks": {
       "PERK_TRACE_TOLERANCE": {
-        "label": "Trace Tolerance"
+        "label": "Trace Tolerance",
+        "description": "Conditioned sensory control that improves effective Perception and Will while handling Trace Echo."
       }
     },
     "items": {
