@@ -545,8 +545,8 @@ class RulesEngine:
                     state,
                     effect["npc"],
                     effect["goal_id"],
-                    priority=int(effect.get("priority", 50)),
-                    progress=float(effect.get("progress", 0)),
+                    priority=effect.get("priority", 50),
+                    progress=effect.get("progress", 0),
                     status=effect.get("status", "active"),
                     source=effect.get("source", "authored_scene"),
                     data=effect.get("data"),
@@ -558,10 +558,8 @@ class RulesEngine:
                     state,
                     effect["npc"],
                     effect["goal_id"],
-                    float(effect["delta"]),
-                    completion_threshold=float(
-                        effect.get("completion_threshold", 100)
-                    ),
+                    effect["delta"],
+                    completion_threshold=effect.get("completion_threshold", 100),
                 )
             elif kind == "npc_story_transition":
                 from .social import transition_story_state
