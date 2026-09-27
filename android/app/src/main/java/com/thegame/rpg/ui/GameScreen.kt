@@ -257,6 +257,13 @@ private fun NarrativePanel(
                 .testTag("narrative-scroll")
                 .verticalScroll(rememberScrollState()),
         ) {
+            SceneIllustration(
+                locationId = snapshot.location,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp),
+            )
+            Spacer(Modifier.height(12.dp))
             Text(
                 text = snapshot.body,
                 color = PixelColors.Paper,
