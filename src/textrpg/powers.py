@@ -224,6 +224,37 @@ def validate_power_definitions(
                     for error in technique_errors
                 )
 
+            # Cross-reference prerequisite techniques only after every technique
+            # definition has been structurally validated. This preserves the
+            # hardened per-technique validator while rejecting impossible
+            # dependency graphs before runtime.
+            technique_ids = set(techniques.keys())
+            for technique_id, technique in techniques.items():
+                if (
+                    not isinstance(technique_id, str)
+                    or not _STABLE_ID.fullmatch(technique_id)
+                    or not isinstance(technique, Mapping)
+                ):
+                    continue
+                for field_name in ("discovery_requirements", "requirements"):
+                    requirements = technique.get(field_name, {})
+                    if not isinstance(requirements, Mapping):
+                        continue
+                    required_techniques = requirements.get("techniques", {})
+                    if not isinstance(required_techniques, Mapping):
+                        continue
+                    for required_id in required_techniques:
+                        if required_id == technique_id:
+                            errors.append(
+                                f"{ability_id}.{technique_id}.{field_name} "
+                                "cannot require itself"
+                            )
+                        elif required_id not in technique_ids:
+                            errors.append(
+                                f"{ability_id}.{technique_id}.{field_name} "
+                                f"references unknown technique {required_id!r}"
+                            )
+
         evolutions = definition.get("evolutions", {})
         if not isinstance(evolutions, Mapping):
             errors.append(f"{ability_id}.evolutions must be an object")
