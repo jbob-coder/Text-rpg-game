@@ -80,5 +80,26 @@ class StatsTests(unittest.TestCase):
         self.assertLess(derived_stats(state)["initiative"], 0.0)
 
 
+    def test_foundation_stats_keyword_api_remains_compatible(self):
+        state = self.state()
+        state.equipment = {
+            "body": {"item_id": "A", "set_id": "SET_COMPAT", "modifiers": {}},
+            "hands": {"item_id": "B", "set_id": "SET_COMPAT", "modifiers": {}},
+        }
+        sets = {
+            "SET_COMPAT": {
+                "thresholds": {
+                    "2": {"modifiers": {"derived.max_health": 5}}
+                }
+            }
+        }
+        values = derived_stats(state, equipment_sets=sets)
+        self.assertEqual(
+            values["max_health"],
+            derived_stats(state, set_definitions=sets)["max_health"],
+        )
+        maxima = initialize_resources(state, equipment_sets=sets)
+        self.assertEqual(maxima["health"], values["max_health"])
+
 if __name__ == "__main__":
     unittest.main()
