@@ -118,53 +118,79 @@ def discover_ability(
         raise RuleError("Ability family must be a non-empty string")
     if form is not None and (not isinstance(form, str) or not form):
         raise RuleError("Ability form must be null or a non-empty string")
-    if isinstance(tags, (str, bytes)) or not all(
+    if not isinstance(tags, (tuple, list)) or not all(
         isinstance(tag, str) and tag for tag in tags
     ):
-        raise RuleError("Ability tags must be an iterable of non-empty strings")
+        raise RuleError("Ability tags must be a list/tuple of non-empty strings")
     if data is not None and not isinstance(data, Mapping):
         raise RuleError("Ability data must be an object")
+    if not isinstance(state.abilities, MutableMapping):
+        raise RuleError("state.abilities must be mutable")
+    _validate_history_container(state)
 
-    is_new = ability_id not in state.abilities
-    ability = state.abilities.setdefault(
-        ability_id,
+    existing = state.abilities.get(ability_id)
+    if existing is not None:
+        if not isinstance(existing, MutableMapping):
+            raise RuleError(f"Ability state must be an object: {ability_id}")
+        _ability_progression_state(existing, ability_id)
+
+        existing_tags = existing.get("tags", [])
+        if not isinstance(existing_tags, list) or not all(
+            isinstance(tag, str) and tag for tag in existing_tags
+        ):
+            raise RuleError(f"Ability tags state is invalid: {ability_id}")
+        existing_data = existing.get("data", {})
+        if not isinstance(existing_data, Mapping):
+            raise RuleError(f"Ability data state is invalid: {ability_id}")
+        existing_techniques = existing.get("techniques", {})
+        if not isinstance(existing_techniques, MutableMapping):
+            raise RuleError(f"Ability techniques state is invalid: {ability_id}")
+
+        existing.setdefault("family", family)
+        existing.setdefault("form", form)
+        existing.setdefault("tags", list(tags))
+        existing.setdefault("data", dict(data or {}))
+        existing.setdefault("techniques", {})
+        return existing
+
+    ability: Dict[str, Any] = {
+        "rank": 0,
+        "mastery_xp": 0.0,
+        "mastery_stage": "discovered",
+        "family": family,
+        "form": form,
+        "tags": list(tags),
+        "data": dict(data or {}),
+        "techniques": {},
+    }
+    state.abilities[ability_id] = ability
+    state.history.append(
         {
-            "rank": 0,
-            "mastery_xp": 0.0,
-            "mastery_stage": "discovered",
-            "techniques": {},
-        },
+            "type": "ability_discovered",
+            "ability_id": ability_id,
+            "family": family,
+            "form": form,
+            "turn": state.turn,
+            "time_minutes": state.time_minutes,
+        }
     )
-    if not isinstance(ability, MutableMapping):
-        raise RuleError(f"Ability state must be an object: {ability_id}")
-
-    ability.setdefault("family", family)
-    ability.setdefault("form", form)
-    ability.setdefault("tags", list(tags))
-    ability.setdefault("data", dict(data or {}))
-    ability.setdefault("techniques", {})
-
-    if is_new:
-        state.history.append(
-            {
-                "type": "ability_discovered",
-                "ability_id": ability_id,
-                "family": ability.get("family"),
-                "form": ability.get("form"),
-                "turn": state.turn,
-                "time_minutes": state.time_minutes,
-            }
-        )
     return ability
 
 
 def discover_technique(state: GameState, ability_id: str, technique_id: str) -> Dict[str, Any]:
     if not isinstance(technique_id, str) or not technique_id:
         raise RuleError("Technique ID must be a non-empty string")
+    _validate_history_container(state)
+
     ability = state.abilities.get(ability_id)
     if not isinstance(ability, MutableMapping):
         raise RuleError(f"Unknown or invalid ability state: {ability_id}")
-    techniques = ability.setdefault("techniques", {})
+    _ability_progression_state(ability, ability_id)
+
+    techniques = ability.get("techniques")
+    if techniques is None:
+        techniques = {}
+        ability["techniques"] = techniques
     if not isinstance(techniques, MutableMapping):
         raise RuleError(f"Ability techniques must be an object: {ability_id}")
     if technique_id in techniques:
@@ -172,6 +198,7 @@ def discover_technique(state: GameState, ability_id: str, technique_id: str) -> 
         if not isinstance(existing, MutableMapping):
             raise RuleError(f"Technique state must be an object: {technique_id}")
         return existing
+
     record = {
         "mastery_xp": 0.0,
         "stage": "discovered",
@@ -190,7 +217,6 @@ def discover_technique(state: GameState, ability_id: str, technique_id: str) -> 
         }
     )
     return record
-
 
 def gain_technique_mastery(
     state: GameState,
@@ -288,8 +314,8 @@ def practice_technique(
     )
 
     ability = state.abilities.get(ability_id)
-    if not isinstance(ability, Mapping):
-        raise RuleError(f"Unknown ability: {ability_id}")
+    if not isinstance(ability, MutableMapping):
+        raise RuleError(f"Unknown or immutable ability state: {ability_id}")
     _ability_progression_state(ability, ability_id)
     validate_time_advance(state, minutes)
     _validate_history_container(state)
