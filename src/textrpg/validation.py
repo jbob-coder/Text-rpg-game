@@ -23,6 +23,8 @@ SUPPORTED_CONDITIONS: Set[str] = {
     "ability_rank_min",
     "technique_discoverable",
     "has_perk",
+    "not_has_perk",
+    "technique_stage_min",
     "item_min",
 }
 SUPPORTED_EFFECTS: Set[str] = {
@@ -50,6 +52,8 @@ SUPPORTED_EFFECTS: Set[str] = {
     "technique_practice",
     "technique_use",
     "power_recover",
+    "skill_train",
+    "recover_resources",
 }
 
 
@@ -87,6 +91,28 @@ def _walk_conditions(conditions: Any, location: str, errors: List[str]) -> None:
                 f"{item_location}.technique_id",
                 errors,
             )
+        if kind == "technique_stage_min":
+            _validate_id(
+                condition.get("ability_id"),
+                f"{item_location}.ability_id",
+                errors,
+            )
+            _validate_id(
+                condition.get("technique_id"),
+                f"{item_location}.technique_id",
+                errors,
+            )
+            if condition.get("stage") not in {
+                "discovered",
+                "unstable",
+                "learned",
+                "practiced",
+                "mastered",
+            }:
+                errors.append(
+                    f"{item_location}.stage has unsupported value "
+                    f"{condition.get('stage')!r}"
+                )
 
 
 def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
@@ -140,7 +166,7 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
                 errors,
             )
 
-        if kind in {"technique_practice", "power_recover"}:
+        if kind in {"technique_practice", "power_recover", "skill_train", "recover_resources"}:
             minutes = effect.get("minutes")
             minimum = 30 if kind == "technique_practice" else 1
             if (
@@ -163,6 +189,11 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
                 errors.append(
                     f"{item_location}.quality must be finite non-negative numeric"
                 )
+
+        if kind == "skill_train":
+            skill = effect.get("skill")
+            if not isinstance(skill, str) or not skill:
+                errors.append(f"{item_location}.skill must be non-empty text")
 
         if kind == "add_perk":
             try:
@@ -228,7 +259,7 @@ def _registry_reference_errors(
                     kind = condition.get("type")
                     if kind in {"knows", "not_knows", "npc_knows", "npc_not_knows"}:
                         require("knowledge", condition.get("knowledge_id"), location)
-                    elif kind == "has_perk":
+                    elif kind in {"has_perk", "not_has_perk"}:
                         require("perks", condition.get("perk_id"), location)
                     elif kind == "item_min":
                         require("items", condition.get("item_id"), location)
@@ -513,7 +544,10 @@ def validate_content_pack(
                 for condition_index, condition in enumerate(conditions):
                     if not isinstance(condition, Mapping):
                         continue
-                    if condition.get("type") != "technique_discoverable":
+                    if condition.get("type") not in {
+                        "technique_discoverable",
+                        "technique_stage_min",
+                    }:
                         continue
                     location = (
                         f"{scene_id}.choices[{choice_index}].{gate_name}."
