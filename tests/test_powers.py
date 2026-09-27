@@ -9,6 +9,7 @@ from textrpg.powers import (
     gain_technique_mastery,
     practice_technique,
     recover_power_resource,
+    technique_discovery_status,
     validate_power_definitions,
     technique_stage,
     technique_use_status,
@@ -352,6 +353,85 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertTrue(any("power_resources" in error for error in errors))
         self.assertTrue(any("starting" in error for error in errors))
         self.assertTrue(any("recovery_per_hour" in error for error in errors))
+
+
+    def test_technique_discovery_requirements_block_until_earned(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={
+                "attributes": {"perception": 45, "will": 45},
+                "skills": {"powers": 10},
+            },
+            inventory={"ITEM_TRACE_LENS": 1},
+            flags={"TRACE_RESEARCHED": True},
+        )
+        discover_ability(state, "ABILITY_TRACE")
+        discover_technique(state, "ABILITY_TRACE", "TECHNIQUE_PULSE")
+        definition = {
+            "discovery_requirements": {
+                "rank_min": 1,
+                "mastery_xp_min": 100,
+                "knowledge": ["KNOW_TRACE_PATTERN"],
+                "perks": ["PERK_TRACE_TOLERANCE"],
+                "attributes": {"perception": 45, "will": 45},
+                "skills": {"powers": 10},
+                "flags": {"TRACE_RESEARCHED": True},
+                "items": {"ITEM_TRACE_LENS": 1},
+                "techniques": {"TECHNIQUE_PULSE": "learned"},
+            }
+        }
+
+        status = technique_discovery_status(
+            state, "ABILITY_TRACE", "TECHNIQUE_DIRECTIONAL", definition
+        )
+        self.assertFalse(status["available"])
+        self.assertIn("rank", status["reasons"])
+        self.assertIn("knowledge:KNOW_TRACE_PATTERN", status["reasons"])
+        self.assertIn("perk:PERK_TRACE_TOLERANCE", status["reasons"])
+        self.assertIn(
+            "technique:TECHNIQUE_PULSE:learned", status["reasons"]
+        )
+        with self.assertRaises(RuleError):
+            discover_technique(
+                state, "ABILITY_TRACE", "TECHNIQUE_DIRECTIONAL", definition
+            )
+
+        gain_ability_mastery(state, "ABILITY_TRACE", 100)
+        state.knowledge["KNOW_TRACE_PATTERN"] = {}
+        state.perks["PERK_TRACE_TOLERANCE"] = {"source": "training"}
+        gain_technique_mastery(state, "ABILITY_TRACE", "TECHNIQUE_PULSE", 40)
+
+        self.assertTrue(
+            technique_discovery_status(
+                state, "ABILITY_TRACE", "TECHNIQUE_DIRECTIONAL", definition
+            )["available"]
+        )
+        record = discover_technique(
+            state, "ABILITY_TRACE", "TECHNIQUE_DIRECTIONAL", definition
+        )
+        self.assertEqual(record["stage"], "discovered")
+        self.assertEqual(record["mastery_xp"], 0.0)
+
+    def test_invalid_discovery_requirement_definition_is_rejected(self):
+        errors = validate_power_definitions({
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_DIRECTIONAL": {
+                        "discovery_requirements": {
+                            "rank_min": -1,
+                            "knowledge": ["bad-id"],
+                            "items": {"ITEM_X": 0},
+                            "techniques": {"TECHNIQUE_X": "impossible"},
+                        }
+                    }
+                }
+            }
+        })
+        self.assertTrue(any("rank_min" in error for error in errors))
+        self.assertTrue(any("knowledge" in error for error in errors))
+        self.assertTrue(any("quantity" in error for error in errors))
+        self.assertTrue(any("unsupported stage" in error for error in errors))
 
 
 if __name__ == "__main__":
