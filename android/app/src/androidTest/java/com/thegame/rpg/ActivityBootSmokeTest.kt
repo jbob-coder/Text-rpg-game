@@ -106,7 +106,10 @@ class ActivityBootSmokeTest {
         waitForClickableText("SETTINGS")
         composeRule.onNodeWithText("SETTINGS").performClick()
         waitForClickableText("CHEAT // DISTRICT FREE ROAM")
-        composeRule.onNodeWithText("CHEAT // DISTRICT FREE ROAM").performClick()
+        composeRule.onNodeWithText("CHEAT // DISTRICT FREE ROAM")
+            .performScrollTo()
+            .assertIsDisplayed()
+            .performClick()
 
         // A successful authoritative scene change closes Settings automatically.
         waitForText("The District Opens Up", timeoutMillis = 60_000)
