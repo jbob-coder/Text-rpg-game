@@ -12,9 +12,10 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 
-class PythonGameEngine(
-    private val gateway: PythonSessionGateway = ChaquopySessionGateway(),
+class PythonGameEngine internal constructor(
+    private val gateway: PythonSessionGateway,
 ) : GameEngine {
+    constructor() : this(ChaquopySessionGateway())
     override suspend fun start(
         context: Context,
         onStage: (BootState) -> Unit,
