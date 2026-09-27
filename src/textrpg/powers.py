@@ -4,7 +4,6 @@ from math import isfinite
 from typing import Any, Dict, Mapping, MutableMapping
 
 from .core import GameState, RuleError
-from .modifiers import validate_modifier_mapping
 from .progression import gain_ability_mastery, technique_available
 from .simulation import advance_time, apply_condition
 from .stats import effective_player_value
@@ -463,15 +462,6 @@ def validate_technique_definition(definition: Any) -> list[str]:
             if not isinstance(path, str) or not path:
                 errors.append("cost paths must be non-empty strings")
                 continue
-            parts = path.split(".")
-            if (
-                len(parts) != 2
-                or parts[0] not in {"resources", "power_resources"}
-                or not parts[1]
-            ):
-                errors.append(
-                    f"costs.{path} must use resources.<id> or power_resources.<id>"
-                )
             _number(amount, f"costs.{path}", errors, minimum=0.0)
 
     if "cooldown_minutes" in definition:
@@ -513,24 +503,16 @@ def validate_technique_definition(definition: Any) -> list[str]:
                     errors.append(f"{location}.duration_minutes must be an integer or null")
                 elif duration < 0:
                     errors.append(f"{location}.duration_minutes must be >= 0")
-            tags = drawback.get("tags", [])
-            if (
-                not isinstance(tags, (list, tuple))
-                or not all(isinstance(tag, str) and tag for tag in tags)
-            ):
-                errors.append(
-                    f"{location}.tags must be a list/tuple of non-empty strings"
-                )
-
             modifiers = drawback.get("modifiers")
             if modifiers is not None:
-                try:
-                    validate_modifier_mapping(
-                        modifiers,
-                        source=f"technique:{location}",
-                    )
-                except ValueError as exc:
-                    errors.append(f"{location}.modifiers invalid: {exc}")
+                if not isinstance(modifiers, Mapping):
+                    errors.append(f"{location}.modifiers must be an object")
+                else:
+                    for path, value in modifiers.items():
+                        if not isinstance(path, str) or not path:
+                            errors.append(f"{location}.modifier paths must be non-empty strings")
+                            continue
+                        _number(value, f"{location}.modifiers.{path}", errors)
 
     return errors
 
@@ -638,13 +620,14 @@ def validate_evolution_definition(definition: Any) -> list[str]:
                 errors.append(f"{location} must be an object")
                 continue
             modifiers = perk.get("modifiers", {})
-            try:
-                validate_modifier_mapping(
-                    modifiers,
-                    source=f"evolution:{location}",
-                )
-            except ValueError as exc:
-                errors.append(f"{location}.modifiers invalid: {exc}")
+            if not isinstance(modifiers, Mapping):
+                errors.append(f"{location}.modifiers must be an object")
+            else:
+                for path, value in modifiers.items():
+                    if not isinstance(path, str) or not path:
+                        errors.append(f"{location}.modifier paths must be non-empty strings")
+                        continue
+                    _number(value, f"{location}.modifiers.{path}", errors)
             perk_tags = perk.get("tags", [])
             if not isinstance(perk_tags, list) or not all(
                 isinstance(v, str) and v for v in perk_tags
@@ -957,17 +940,6 @@ def evolve_ability(
 
 
 
-def _fallback_display_name(value: str, *prefixes: str) -> str:
-    if not isinstance(value, str) or not value:
-        raise RuleError("Display fallback ID must be a non-empty string")
-    display = value
-    for prefix in prefixes:
-        if display.startswith(prefix):
-            display = display[len(prefix):]
-            break
-    return display.replace("_", " ").title()
-
-
 def _visible_text(value: Any, label: str, *, default: str | None = None) -> str:
     if value is None and default is not None:
         return default
@@ -1020,7 +992,7 @@ def ability_player_view(
         "name": _visible_text(
             definition.get("name", ability.get("name")),
             "ability display name",
-            default=_fallback_display_name(ability_id, "ABILITY_"),
+            default=ability_id,
         ),
         "rank": rank_value,
         "mastery_stage": _visible_text(
@@ -1120,7 +1092,7 @@ def ability_player_view(
                 "name": _visible_text(
                     authored.get("name"),
                     f"Technique display name {technique_id}",
-                    default=_fallback_display_name(technique_id, "TECHNIQUE_"),
+                    default=technique_id,
                 ),
                 "stage": _visible_text(
                     record.get("stage"),
@@ -1169,7 +1141,7 @@ def ability_player_view(
             name = _visible_text(
                 authored.get("name"),
                 f"Evolution display name {evolution_id}",
-                default=_fallback_display_name(evolution_id, "EVOLUTION_"),
+                default=evolution_id,
             )
         else:
             name = _visible_text(
