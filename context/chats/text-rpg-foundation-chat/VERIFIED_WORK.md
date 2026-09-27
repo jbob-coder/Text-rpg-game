@@ -156,3 +156,22 @@ Foundation branch now executes authored deterministic knowledge leaks rather tha
 - Exact branch-equivalent verification: **58 tests passed, 0 failed**.
 
 The next foundation item is the first original playable vertical slice/canon opening, followed by character visual identity records and remaining derived-stat modifier integration.
+
+
+## Update — modifier-aware derived stats, visual identities, and first playable opening
+
+Additional foundation work completed on 2026-09-26:
+
+- `src/textrpg/stats.py` now calculates derived values and resource maxima from effective equipment/set/perk/condition modifiers and supports direct `derived.<name>` modifiers without rewriting base stats.
+- Scene rules can now invoke graph-aware quest effects: start quest, complete/fail objective, and fail quest.
+- `src/textrpg/visuals.py` validates canonical recurring-character identity records and produces normalized art-generation contracts.
+- `content/vertical_slice_01.json` adds the first original playable opening slice, **The Dead Relay**, currently marked `provisional_canon`.
+- The slice has cooperative, solo, and failure/recovery routes that recombine through durable quest, relationship, party, knowledge, inventory, and flag state.
+- `NPC_TAMSIN` is the first structured recurring-character visual identity record.
+
+Verification boundary:
+- Last full branch-equivalent suite remains **58 tests passed, 0 failed**.
+- The newest slice has **13 focused local reconstruction checks passed**.
+- Do not report a higher repository-wide unittest count until the complete branch-equivalent suite is rerun after these latest changes.
+
+Current next step on the foundation branch is a complete suite rerun, then review/promotion or revision of the provisional opening before expanding the next content slice.
