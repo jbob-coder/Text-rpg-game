@@ -214,5 +214,24 @@ class EquipmentTests(unittest.TestCase):
                 self.assertNotIn("body", state.equipment)
 
 
+    def test_ring_neck_and_second_accessory_slots_are_supported(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={"attributes": {}, "skills": {}},
+        )
+        for slot in ("ring_1", "ring_2", "neck", "accessory_1", "accessory_2"):
+            with self.subTest(slot=slot):
+                equip_item(
+                    state,
+                    {
+                        "item_id": f"ITEM_{slot.upper()}",
+                        "slot": slot,
+                        "modifiers": {},
+                    },
+                )
+                self.assertEqual(state.equipment[slot]["slot"], slot)
+
+
 if __name__ == "__main__":
     unittest.main()
