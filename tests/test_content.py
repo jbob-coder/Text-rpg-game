@@ -57,5 +57,24 @@ class ContentPackTests(unittest.TestCase):
             content_pack_from_mapping(data)
 
 
+    def test_invalid_initial_player_container_is_rejected_cleanly(self):
+        data = self.data()
+        data["initial_state"]["player"] = []
+        with self.assertRaises(RuleError):
+            content_pack_from_mapping(data)
+
+    def test_invalid_initial_knowledge_container_is_rejected_cleanly(self):
+        data = self.data()
+        data["initial_state"]["knowledge"] = []
+        with self.assertRaises(RuleError):
+            content_pack_from_mapping(data)
+
+    def test_invalid_initial_turn_type_is_rejected_cleanly(self):
+        data = self.data()
+        data["initial_state"]["turn"] = True
+        with self.assertRaises(RuleError):
+            content_pack_from_mapping(data)
+
+
 if __name__ == "__main__":
     unittest.main()
