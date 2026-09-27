@@ -130,3 +130,22 @@ The implementation workstream contains focused tests and reports targeted verifi
 
 [RELATES_TO:CP-2026-09-27-EFFECTIVE-HARDENING-04]
 [RELATES_TO:DEC-MOD-003]
+
+
+## Ability progression V2 continuation
+
+[VERIFIED] The repository foundation had advanced beyond the earlier context snapshot: its current status document reports power runtime/evolution, quest graphs, richer NPC/social state, content-pack validation, and 58 passing branch-equivalent tests from its own workstream.
+
+[SUPERSEDED] `feature/ability-progression-v1` is no longer the active ability branch because the live foundation advanced after it was created.
+
+[IN_PROGRESS] Active ability work moved to `feature/ability-progression-v2`, created from a newer foundation state. V2 adds a player-safe ability projection, technique/evolution definition validation, effective-stat/set-aware power requirements, mastery numeric hardening, and save coverage for ability disclosure state.
+
+[IMPLEMENTED] Player-safe projection deliberately omits hidden evolution definitions/requirements and exposes only discovered techniques plus explicitly visible evolution knowledge.
+
+[IMPLEMENTED] Power progression rejects malformed/non-finite/boolean mastery inputs, malformed definitions, and fractional item requirements before mutation where covered by the V2 validation contract.
+
+[UNKNOWN] V2 tests have not been executed on a byte-for-byte checkout by this chat. Do not merge/promote based only on authored tests.
+
+[RISK] Foundation is advancing concurrently. At the latest comparison, the parent-only changes were in README/status/visual documentation and `tests/test_stats.py`, not the V2 power/progression source files, but a fresh comparison remains mandatory before promotion.
+
+[RELATES_TO:CP-2026-09-27-ABILITY-PROGRESSION-V2-07]
