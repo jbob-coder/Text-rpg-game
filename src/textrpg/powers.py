@@ -60,7 +60,7 @@ def _set_player_path(state: GameState, path: str, value: Any) -> None:
 
 def _numeric_player_path(state: GameState, path: str) -> float:
     value = _player_path(state, path)
-    if not isinstance(value, (int, float)):
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise RuleError(f"Power resource path is missing or non-numeric: {path}")
     return float(value)
 
@@ -395,3 +395,145 @@ def evolve_ability(
     }
     state.history.append(event)
     return event
+
+
+
+def ability_player_view(
+    state: GameState,
+    ability_id: str,
+    definition: Mapping[str, Any] | None = None,
+) -> Dict[str, Any]:
+    """Return a player-safe projection of one known ability.
+
+    This intentionally does not dump the raw authored definition. Only techniques
+    already present in persistent ability state and evolution entries explicitly
+    marked visible in persistent state are projected. Hidden requirements remain
+    inaccessible to a normal status UI.
+    """
+    ability = state.abilities.get(ability_id)
+    if not ability:
+        raise RuleError(f"Unknown ability: {ability_id}")
+
+    definition = definition or {}
+    output: Dict[str, Any] = {
+        "name": definition.get("name", ability.get("name", ability_id)),
+        "rank": int(ability.get("rank", 0)),
+        "mastery_stage": ability.get("mastery_stage", "discovered"),
+        "mastery_xp": float(ability.get("mastery_xp", 0.0)),
+        "form": ability.get("form"),
+        "state": ability.get("state", "ready"),
+        "techniques": [],
+        "evolutions": [],
+    }
+
+    for optional_key in ("control", "efficiency"):
+        if optional_key in ability:
+            value = ability[optional_key]
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                raise RuleError(
+                    f"Ability {optional_key} must be numeric: {ability_id}"
+                )
+            output[optional_key] = float(value)
+
+    resource_definition = definition.get("resource")
+    if resource_definition is not None:
+        if not isinstance(resource_definition, Mapping):
+            raise RuleError("Ability resource definition must be an object")
+        current_path = resource_definition.get("current_path")
+        max_path = resource_definition.get("max_path")
+        if not isinstance(current_path, str) or not current_path:
+            raise RuleError("Ability resource current_path must be a non-empty string")
+        current = _numeric_player_path(state, current_path)
+        resource_view: Dict[str, Any] = {
+            "label": resource_definition.get("label", "Resource"),
+            "current": current,
+        }
+        if max_path is not None:
+            if not isinstance(max_path, str) or not max_path:
+                raise RuleError("Ability resource max_path must be a non-empty string")
+            resource_view["max"] = _numeric_player_path(state, max_path)
+        output["resource"] = resource_view
+
+    technique_definitions = definition.get("techniques", {})
+    if technique_definitions is not None and not isinstance(technique_definitions, Mapping):
+        raise RuleError("Ability technique definitions must be an object")
+
+    for technique_id, record in ability.get("techniques", {}).items():
+        if not isinstance(record, Mapping):
+            raise RuleError(f"Technique state must be an object: {technique_id}")
+        authored = (
+            technique_definitions.get(technique_id, {})
+            if isinstance(technique_definitions, Mapping)
+            else {}
+        )
+        if authored is not None and not isinstance(authored, Mapping):
+            raise RuleError(f"Technique definition must be an object: {technique_id}")
+        authored = authored or {}
+        ready_at = int(record.get("ready_at_minutes", 0))
+        output["techniques"].append(
+            {
+                "technique_id": technique_id,
+                "name": authored.get("name", technique_id),
+                "stage": record.get("stage", "discovered"),
+                "mastery_xp": float(record.get("mastery_xp", 0.0)),
+                "uses": int(record.get("uses", 0)),
+                "ready": state.time_minutes >= ready_at,
+                "cooldown_remaining_minutes": max(0, ready_at - state.time_minutes),
+            }
+        )
+
+    evolution_definitions = definition.get("evolutions", {})
+    if evolution_definitions is not None and not isinstance(evolution_definitions, Mapping):
+        raise RuleError("Ability evolution definitions must be an object")
+
+    visibility = ability.get("evolution_visibility", {})
+    if visibility is not None and not isinstance(visibility, Mapping):
+        raise RuleError("Ability evolution_visibility must be an object")
+
+    for evolution_id, knowledge in (visibility or {}).items():
+        if not isinstance(knowledge, Mapping):
+            raise RuleError(
+                f"Evolution visibility state must be an object: {evolution_id}"
+            )
+        disclosure = knowledge.get("state", "hidden")
+        if disclosure == "hidden":
+            continue
+        if disclosure not in {"hinted", "partial", "known", "satisfied"}:
+            raise RuleError(
+                f"Unsupported evolution disclosure state: {evolution_id}:{disclosure}"
+            )
+        authored = (
+            evolution_definitions.get(evolution_id, {})
+            if isinstance(evolution_definitions, Mapping)
+            else {}
+        )
+        if authored is not None and not isinstance(authored, Mapping):
+            raise RuleError(f"Evolution definition must be an object: {evolution_id}")
+        authored = authored or {}
+
+        item: Dict[str, Any] = {
+            "evolution_id": evolution_id,
+            "state": disclosure,
+            "name": authored.get("name", evolution_id)
+            if disclosure in {"known", "satisfied"}
+            else knowledge.get("label", "Unknown evolution"),
+        }
+        hint = knowledge.get("hint")
+        if hint is not None:
+            item["hint"] = str(hint)
+        known_requirements = knowledge.get("known_requirements")
+        if known_requirements is not None:
+            if not isinstance(known_requirements, list):
+                raise RuleError(
+                    f"known_requirements must be a list: {evolution_id}"
+                )
+            item["known_requirements"] = list(known_requirements)
+        output["evolutions"].append(item)
+
+    completed_evolutions = [
+        record.get("evolution_id")
+        for record in ability.get("evolutions", [])
+        if isinstance(record, Mapping) and record.get("evolution_id")
+    ]
+    output["completed_evolutions"] = completed_evolutions
+    return output
