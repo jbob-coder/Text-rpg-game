@@ -1,4 +1,5 @@
 import unittest
+from types import MappingProxyType
 
 from textrpg import GameState, RuleError
 from textrpg.simulation import apply_condition, advance_time, recover, train, train_attribute, validate_time_advance
@@ -234,6 +235,40 @@ class SimulationTests(unittest.TestCase):
             )
 
         self.assertEqual(state.player.get("conditions", {}), before_conditions)
+
+
+    def test_time_advance_rejects_corrupt_current_time_before_mutation(self):
+        state = self.state()
+        state.time_minutes = True
+        before_conditions = dict(state.player.get("conditions", {}))
+
+        with self.assertRaises(RuleError):
+            advance_time(state, 10)
+
+        self.assertIs(state.time_minutes, True)
+        self.assertEqual(state.player.get("conditions", {}), before_conditions)
+
+    def test_time_advance_rejects_immutable_player_before_time_mutation(self):
+        state = self.state()
+        state.player = MappingProxyType(state.player)
+        before_time = state.time_minutes
+
+        with self.assertRaises(RuleError):
+            advance_time(state, 10)
+
+        self.assertEqual(state.time_minutes, before_time)
+
+    def test_recovery_preflights_corrupt_world_time_before_resource_normalization(self):
+        state = self.state()
+        state.time_minutes = -1
+        state.player["resources"].pop("max_health", None)
+        before_resources = dict(state.player["resources"])
+
+        with self.assertRaises(RuleError):
+            recover(state, 60)
+
+        self.assertEqual(state.player["resources"], before_resources)
+        self.assertEqual(state.time_minutes, -1)
 
 
 if __name__ == "__main__":
