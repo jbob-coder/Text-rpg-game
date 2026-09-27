@@ -1347,3 +1347,64 @@ Both are preserved until V6 has exact runtime evidence. After V6 verification, `
 4. Record exact V6 SHA, command, test count, failures, and final content audit.
 5. Then perform the context-history consolidation.
 6. Only after a stable integrated seven-stat baseline exists should DEC-STAT-001 move into an executable migration workstream.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-SET-CONTEXT-PLUMBING-14
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after this pass: `c015de25ec94360c2156814c64b4f70e81785a78`
+
+### ISSUE FOUND
+
+[VERIFIED STATIC] During a call-site audit of resource/stat context propagation, `RulesEngine._apply_effects()` was found to invoke authored `skill_train` and `recover_resources` effects without forwarding the engine's resolved equipment-set definitions.
+
+The underlying simulation functions already accept `set_definitions` and use it when recalculating derived resource maxima.
+
+Without forwarding this context, scene-driven training/recovery could disagree with the rest of the RulesEngine when an active equipment-set threshold modifies resource maxima through paths such as:
+- `derived.max_stamina`
+- `derived.max_focus`
+- other resource-capacity derived values
+
+### FIX
+
+[IMPLEMENTED] V6 now passes:
+
+`set_definitions=self.equipment_sets`
+
+from RulesEngine into both:
+- `simulation.train()`
+- `simulation.recover()`
+
+for authored scene effects.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added an integration-level core test that:
+1. equips two set pieces;
+2. activates a threshold with direct Max Stamina / Max Focus modifiers;
+3. executes authored `skill_train`;
+4. checks resource maxima against set-aware derived values;
+5. executes authored `recover_resources`;
+6. verifies the same set-aware maxima remain authoritative.
+
+[VERIFIED STATIC] V6 now contains **201 authored test methods across 17 test files**.
+
+This remains an authored-test count, not an execution result.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 runtime execution remains pending.
+
+Do not promote, merge, or call the branch green solely from this static fix.
+
+### NEXT_ACTION
+
+1. Continue static cross-system plumbing/atomicity audit while exact runtime remains unavailable.
+2. Execute the complete V6 suite as soon as an authorized exact runtime is available.
+3. Fix only observed runtime regressions.
+4. Record exact SHA + command + pass/fail result before promotion.
