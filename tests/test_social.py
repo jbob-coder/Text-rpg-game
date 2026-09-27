@@ -413,5 +413,159 @@ class SocialTests(unittest.TestCase):
         self.assertNotIn("KNOW_X", state.npcs["NPC_B"]["knowledge"])
 
 
+    def test_npc_learn_rejects_non_finite_or_boolean_metadata_without_creation(self):
+        for kwargs in (
+            {"confidence": float("nan")},
+            {"confidence": float("inf")},
+            {"secrecy": True},
+        ):
+            state = GameState(seed="s", scene_id="A")
+            before_npcs = dict(state.npcs)
+            before_relationships = dict(state.relationships)
+
+            with self.assertRaises(RuleError):
+                npc_learn(
+                    state,
+                    "NPC_A",
+                    "KNOW_X",
+                    source="PLAYER",
+                    **kwargs,
+                )
+
+            self.assertEqual(state.npcs, before_npcs)
+            self.assertEqual(state.relationships, before_relationships)
+
+    def test_relationship_adjustment_rejects_non_finite_values_without_mutation(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            relationships={"NPC_A": {"trust": 10}},
+        )
+        before = dict(state.relationships["NPC_A"])
+        before_history = list(state.history)
+
+        with self.assertRaises(RuleError):
+            adjust_relationship(
+                state,
+                "NPC_A",
+                {"trust": float("nan")},
+            )
+
+        self.assertEqual(state.relationships["NPC_A"], before)
+        self.assertEqual(state.history, before_history)
+
+    def test_goal_creation_rejects_invalid_numeric_metadata_before_npc_creation(self):
+        for kwargs in (
+            {"priority": 10.5},
+            {"progress": float("nan")},
+            {"progress": float("inf")},
+        ):
+            state = GameState(seed="s", scene_id="A")
+
+            with self.assertRaises(RuleError):
+                set_goal(
+                    state,
+                    "NPC_A",
+                    "GOAL_X",
+                    **kwargs,
+                )
+
+            self.assertEqual(state.npcs, {})
+            self.assertEqual(state.relationships, {})
+            self.assertEqual(state.history, [])
+
+    def test_story_transition_rejects_invalid_data_before_mutation(self):
+        state = GameState(seed="s", scene_id="A")
+
+        with self.assertRaises(RuleError):
+            transition_story_state(
+                state,
+                "NPC_A",
+                "TRACK_X",
+                "OPEN",
+                allowed_from=[None],
+                data=["not", "a", "mapping"],
+            )
+
+        self.assertEqual(state.npcs, {})
+        self.assertEqual(state.relationships, {})
+        self.assertEqual(state.history, [])
+
+    def test_leak_eligibility_rejects_non_finite_personality_without_mutation(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            npcs={
+                "NPC_A": {
+                    "personality": {"discipline": float("nan"), "honesty": 90},
+                    "knowledge": {
+                        "KNOW_X": {
+                            "source": "PLAYER",
+                            "confidence": 1.0,
+                            "truth": "unknown",
+                            "secrecy": 1,
+                            "turn_learned": 0,
+                        }
+                    },
+                    "memories": [],
+                    "goals": {},
+                    "story_state": {},
+                }
+            },
+        )
+        before_npcs = {
+            npc_id: dict(record)
+            for npc_id, record in state.npcs.items()
+        }
+        before_relationships = dict(state.relationships)
+
+        with self.assertRaises(RuleError):
+            eligible_leak_targets(
+                state,
+                holder="NPC_A",
+                knowledge_id="KNOW_X",
+                network={"NPC_A": ["NPC_B"]},
+            )
+
+        self.assertEqual(state.npcs, before_npcs)
+        self.assertEqual(state.relationships, before_relationships)
+
+    def test_leak_event_rejects_string_recipient_collection_before_mutation(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            npcs={
+                "NPC_A": {
+                    "personality": {"discipline": 10, "honesty": 90},
+                    "knowledge": {
+                        "KNOW_X": {
+                            "source": "PLAYER",
+                            "confidence": 1.0,
+                            "truth": "unknown",
+                            "secrecy": 1,
+                            "turn_learned": 0,
+                        }
+                    },
+                    "memories": [],
+                    "goals": {},
+                    "story_state": {},
+                }
+            },
+        )
+        before_history = list(state.history)
+
+        with self.assertRaises(RuleError):
+            execute_leak_event(
+                state,
+                holder="NPC_A",
+                knowledge_id="KNOW_X",
+                network={"NPC_A": ["NPC_B"]},
+                recipients="NPC_B",
+            )
+
+        self.assertEqual(state.history, before_history)
+        self.assertNotIn("NPC_B", state.npcs)
+
+
 if __name__ == "__main__":
     unittest.main()
