@@ -1574,3 +1574,75 @@ This is not an execution result.
 ### NEXT_ACTION
 
 Continue only focused integrity review for concrete reconciliation defects. Exact V6 suite execution remains the required promotion/merge gate.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-EQUIPMENT-PERSISTENCE-18
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after this pass: `99037c28c62feb43ebe2fa64c5fbfd55e662f023`
+
+### ISSUES FOUND
+
+[VERIFIED STATIC] Equipment mutation and save deserialization still exposed boundary cases that could either mutate before full preflight or silently discard malformed save data.
+
+Equipment:
+- consuming from an immutable/corrupt inventory could fail after the equipped slot was already replaced;
+- non-finite base attribute/skill values could bypass requirement comparisons;
+- malformed tag/perk metadata was not rejected before commit.
+
+Persistence:
+- non-object JSON roots could raise implementation exceptions instead of `RuleError`;
+- boolean schema values could compare equal to integer schema version 1;
+- unknown top-level fields for the current schema were silently ignored by dataclass-field filtering;
+- required identity fields were only checked for presence, not non-empty string type.
+
+### FIXES
+
+[IMPLEMENTED] `equip_item()` now preflights:
+- item mapping;
+- mutable equipment;
+- boolean consume flag;
+- mutable inventory and positive integer quantity when consuming;
+- mapping-backed attributes/skills;
+- finite numeric requirement source values;
+- list-backed non-empty string tags/passive perks.
+
+[IMPLEMENTED] `loads_state()` now:
+- converts JSON syntax failure to `RuleError`;
+- requires a JSON object root;
+- requires exact integer schema version, rejecting booleans;
+- requires non-empty string seed/scene ID;
+- rejects unsupported top-level fields instead of silently dropping them.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added 8 tests covering:
+- immutable inventory preflight;
+- non-finite equipment requirement state;
+- malformed equipment tags;
+- non-object save payload;
+- invalid JSON;
+- boolean schema version;
+- unknown current-schema field rejection;
+- invalid required identity fields.
+
+[VERIFIED STATIC] V6 now contains **221 authored test methods across 17 test files**.
+
+This is not an executed pass count.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 suite execution remains pending.
+
+### SCOPE CONTROL
+
+[DECISION] No feature expansion, stat-schema migration, branch promotion, or context-branch consolidation was performed.
+
+### NEXT_ACTION
+
+Continue only targeted state-integrity review for concrete defects. Exact V6 runtime execution remains the required merge/promotion gate.
