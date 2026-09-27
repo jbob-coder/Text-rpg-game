@@ -80,6 +80,21 @@ class QuestGraphTests(unittest.TestCase):
         errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
         self.assertTrue(any("unknown stage" in error for error in errors))
 
+    def test_malformed_objective_metadata_is_reported_without_validator_crash(self):
+        definition = self.definition()
+        objective = definition["stages"]["STAGE_INVESTIGATE"]["objectives"][
+            "OBJ_INTERVIEW_WITNESS"
+        ]
+        objective["required"] = "yes"
+        objective["requires_objectives"] = None
+
+        errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
+
+        self.assertTrue(any(".required must be a boolean" in error for error in errors))
+        self.assertTrue(
+            any(".requires_objectives must be a list" in error for error in errors)
+        )
+
     def test_objective_prerequisites_control_availability(self):
         state = self.state()
         definition = self.definition()
