@@ -32,6 +32,21 @@ Every recurring character must have one canonical character spec before scene ar
 
 A generated image is not automatically canon. It becomes canon only after it matches the identity sheet and is explicitly approved.
 
+## Machine-readable identity contract
+
+The identity-sheet rule is now enforced by `src/textrpg/visuals.py`.
+
+Recurring-character records can be validated before art work begins. The normalized generation contract preserves immutable identity details, approved expressions/poses, palette information, forbidden deviations, and approved reference-asset paths.
+
+The first provisional implementation record is `NPC_TAMSIN` inside `content/vertical_slice_01.json`.
+
+Important distinction:
+
+- the identity record may be provisional with the content slice;
+- generated art remains candidate-only;
+- an image is not promoted to canon merely because it was generated from a valid record;
+- once a design is approved, future assets must use the same record/reference assets rather than reconstructing the character from memory.
+
 ## Recommended asset families
 
 For each major character:
