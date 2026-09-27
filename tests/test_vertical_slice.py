@@ -2,7 +2,13 @@ import json
 import unittest
 from pathlib import Path
 
-from textrpg import GameState, RulesEngine, validate_character_visuals, validate_content_pack
+from textrpg import (
+    GameState,
+    RulesEngine,
+    technique_discovery_status,
+    validate_character_visuals,
+    validate_content_pack,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,7 +28,12 @@ class VerticalSliceTests(unittest.TestCase):
     def test_content_pack_and_visual_identities_are_valid(self):
         data = load_slice()
         self.assertEqual(
-            validate_content_pack(data["scenes"], data["quests"], data.get("powers", {})),
+            validate_content_pack(
+                data["scenes"],
+                data["quests"],
+                data.get("powers", {}),
+                data.get("registries"),
+            ),
             [],
         )
         self.assertEqual(
@@ -244,6 +255,30 @@ class VerticalSliceTests(unittest.TestCase):
         self.assertEqual(
             state.quests["QUEST_GATE_TWELVE_ECHO"]["status"],
             "completed",
+        )
+
+        directional = data["powers"]["ABILITY_TRACE_ECHO"]["techniques"][
+            "TECHNIQUE_DIRECTIONAL_TRACE"
+        ]
+        discovery = technique_discovery_status(
+            state,
+            "ABILITY_TRACE_ECHO",
+            "TECHNIQUE_DIRECTIONAL_TRACE",
+            directional,
+        )
+        self.assertFalse(discovery["available"])
+        self.assertNotIn(
+            "TECHNIQUE_DIRECTIONAL_TRACE",
+            state.abilities["ABILITY_TRACE_ECHO"]["techniques"],
+        )
+        self.assertIn("rank", discovery["reasons"])
+        self.assertIn("mastery_xp", discovery["reasons"])
+        self.assertIn(
+            "knowledge:KNOW_TRACE_ECHO_PATTERN_STABLE", discovery["reasons"]
+        )
+        self.assertIn("perk:PERK_TRACE_TOLERANCE", discovery["reasons"])
+        self.assertIn(
+            "technique:TECHNIQUE_SIGNAL_PULSE:learned", discovery["reasons"]
         )
 
         engine.choose(state, "END_TRACE_ECHO_FOUNDATION_SLICE")
