@@ -14,16 +14,29 @@ def dumps_state(state: GameState) -> str:
     validate_game_state_structure(state)
     payload = state.snapshot()
     payload["schema_version"] = CURRENT_SCHEMA_VERSION
-    return json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True)
+    try:
+        return json.dumps(
+            payload,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+            allow_nan=False,
+        )
+    except (TypeError, ValueError) as exc:
+        raise RuleError("Game state cannot be serialized as strict JSON") from exc
+
+
+def _reject_non_finite_constant(value: str) -> None:
+    raise ValueError(f"Non-finite JSON number is not allowed: {value}")
 
 
 def loads_state(raw: str) -> GameState:
     if not isinstance(raw, str):
         raise RuleError("Save payload must be JSON text")
     try:
-        parsed = json.loads(raw)
-    except json.JSONDecodeError as exc:
-        raise RuleError("Save payload is not valid JSON") from exc
+        parsed = json.loads(raw, parse_constant=_reject_non_finite_constant)
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise RuleError("Save payload is not valid strict JSON") from exc
     if not isinstance(parsed, dict):
         raise RuleError("Save payload must be a JSON object")
 
