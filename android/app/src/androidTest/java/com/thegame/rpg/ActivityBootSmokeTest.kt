@@ -114,15 +114,21 @@ class ActivityBootSmokeTest {
         // A successful authoritative scene change closes Settings automatically.
         waitForText("The District Opens Up", timeoutMillis = 60_000)
 
-        waitForClickableText("Map")
-        composeRule.onNodeWithText("Map").performClick()
-        waitForClickableText("Municipal Archive", timeoutMillis = 30_000)
-        composeRule.onNodeWithText("Municipal Archive")
-            .performScrollTo()
+        composeRule.onNodeWithTag("nav-map")
+            .assertIsDisplayed()
             .performClick()
-        waitForClickableText("TRAVEL HERE", timeoutMillis = 30_000)
-        composeRule.onNodeWithText("TRAVEL HERE")
+        composeRule.waitUntil(timeoutMillis = 30_000) {
+            composeRule.onAllNodes(
+                androidx.compose.ui.test.hasTestTag("world-map-canvas")
+            ).fetchSemanticsNodes().isNotEmpty()
+        }
+        composeRule.onNodeWithTag("map-node-DISTRICT_ARCHIVE")
             .performScrollTo()
+            .assertIsDisplayed()
+            .performClick()
+        composeRule.onNodeWithTag("map-travel")
+            .performScrollTo()
+            .assertIsDisplayed()
             .performClick()
 
         waitForText("The Municipal Archive", timeoutMillis = 60_000)
