@@ -6,7 +6,7 @@ Prototype branch: `prototype/medieval-crystal-combat-contracts`
 
 Base V6 SHA: `7f5f104fb839068bdfaf5cec72f37129ae20d463`
 
-Current prototype HEAD at this checkpoint: `947e3837790f58c5f011ed9af2d5a1e140945d42`
+Current prototype code/test HEAD before this status refresh: `8092edd4e106b0b44c983c78645a8793e975d444`
 
 ## Purpose
 
@@ -58,7 +58,7 @@ Prototype crystal contract:
 - effective integrity after harvest damage
 - hidden definition data stays out of player-safe views
 
-This is intentionally a data/projection contract. Forge integration and crystal effect resolution are not yet implemented.
+This is intentionally a data/projection contract. Crystal effect resolution remains future work; staged weapon compatibility/forge preview now exists in `src/textrpg/forge.py`.
 
 ### `src/textrpg/beasts.py`
 
@@ -113,18 +113,58 @@ Prototype physical weapon contract:
 
 The existing V6 `equipment.py` is deliberately untouched. Its slot/modifier pipeline remains the current implementation contract until a later migration/integration pass.
 
+### `src/textrpg/armor.py`
+
+Prototype coverage-based armor contract:
+
+- armor slots aligned to current visible equipment concepts: head / body / hands / legs / feet
+- explicit covered body zones
+- cutting / piercing / blunt resistance profiles
+- weight
+- flexibility
+- noise
+- fatigue burden
+- durability
+- material
+- forge quality
+- condition
+- crystal sockets and integrated crystal IDs
+- zone query that returns only armor layers actually covering the selected target zone
+- player-safe armor projection
+- internal tuning metadata excluded from player-facing output
+
+Damage resolution is intentionally not hard-coded yet. The armor query returns the authoritative protective layers so later combat rules can resolve penetration/mitigation without duplicating coverage logic.
+
+### `src/textrpg/forge.py`
+
+Prototype staged forge/crystal integration contract:
+
+- canonical forge stage order from material selection through inspection/complete
+- serializable work-in-progress forge-job validation
+- no skipped/reordered completed stages
+- bounded quality inputs
+- weapon/crystal socket-capacity check
+- weapon allowed-crystal-tag compatibility
+- minimum crystal-stability gate
+- destroyed-crystal rejection
+- non-mutating integration preview
+
+The prototype does not mutate persistent equipment yet. That remains intentionally deferred until the real GameState/save migration is designed after V6 verification.
+
 ## Tests authored on prototype branch
 
 - `tests/test_combat_targeting.py` — 11 tests
 - `tests/test_crystals.py` — 11 tests
 - `tests/test_beasts.py` — 14 tests
 - `tests/test_weapons.py` — 12 tests
+- `tests/test_armor.py` — 11 tests
+- `tests/test_forge.py` — 10 tests
 
-Total new prototype tests: **48**.
+Total new prototype tests: **69**.
 
 ## Runtime evidence
 
-[VERIFIED ISOLATED] The four prototype modules were executed together in a local isolated package harness with the same committed module contents and a minimal compatible `RuleError` dependency.
+[VERIFIED ISOLATED] The six prototype modules were executed together in a local isolated package harness with the same committed module contents and a minimal compatible `RuleError` dependency.
 
 Command form:
 
@@ -132,8 +172,8 @@ Command form:
 
 Observed result:
 
-- Ran 48 tests
-- 48 passed
+- Ran 69 tests
+- 69 passed
 - 0 failed
 - 0 errors
 
@@ -141,7 +181,7 @@ This proves the isolated contract logic exercised by those tests.
 
 [UNKNOWN] Full-repository integration remains unverified.
 
-The local shell could not clone the public repository because DNS resolution for `github.com` failed. Therefore the existing V6 258-test suite plus these 48 tests has not been executed as one exact checkout.
+The local shell could not clone the public repository because DNS resolution for `github.com` failed. Therefore the existing V6 258-test suite plus these 69 prototype tests has not been executed as one exact checkout.
 
 No claim that the full repository is green is permitted.
 
@@ -158,12 +198,10 @@ No claim that the full repository is green is permitted.
 
 ## Next prototype work
 
-1. armor/body-coverage contract
-2. zone wound/consequence contract
-3. crystal-to-weapon compatibility and forge-stage contract
-4. beast progression/level advancement policy
-5. authored adaptation definitions that consume adaptation readiness
-6. deterministic beast voice/bark projection
-7. region/territory state and coarse beast-vs-beast simulation
-8. one authored hunt scenario connecting weapon -> targeting -> wound/core exposure -> crystal harvest
-9. only after V6 verification: design the real GameState/persistence migration and integration path
+1. zone wound/consequence contract
+2. beast progression/level advancement policy
+3. authored adaptation definitions that consume adaptation readiness
+4. deterministic beast voice/bark projection
+5. region/territory state and coarse beast-vs-beast simulation
+6. one authored hunt scenario connecting weapon -> targeting -> armor -> wound/core exposure -> crystal harvest -> forge preview
+7. only after V6 verification: design the real GameState/persistence migration and integration path
