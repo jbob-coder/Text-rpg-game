@@ -20,7 +20,8 @@ A new chat working on this game should read, in order:
 2. `docs/context/CONTEXT_SYNC_PROTOCOL.md`
 3. `docs/context/GAME_DIRECTION_AND_UI.md`
 4. `docs/context/STAT_SCHEMA_EVALUATION.md`
-5. `docs/context/STATUS_SCREEN_DATA_CONTRACT.md`
+5. `docs/context/STAT_SCHEMA_MIGRATION_PLAN.md`
+6. `docs/context/STATUS_SCREEN_DATA_CONTRACT.md`
 6. `docs/context/ABILITY_PROGRESSION_CONTRACT.md`
 7. `docs/context/BRANCH_INTEGRATION_CONTRACT.md`
 8. `docs/context/CHECKPOINTS.md`
@@ -65,6 +66,7 @@ Every non-trivial project claim should be classifiable as one of:
 
 - `GAME_DIRECTION_AND_UI.md` — authoritative design-direction reference for what the game should feel like, its progression philosophy, player-state layers, and status-screen target.
 - `STAT_SCHEMA_EVALUATION.md` — detailed seven-vs-eight core-stat stress test, scenario matrix, migration considerations, and current recommendation candidate.
+- `STAT_SCHEMA_MIGRATION_PLAN.md` — reversible save/content/API migration design if the eight-stat candidate is accepted, including the unresolved Dexterity bootstrap policy and migration test gate.
 - `STATUS_SCREEN_DATA_CONTRACT.md` — detailed mapping from authoritative game state/rules to player-facing status UI, including disclosure levels, explainability, hidden-data rules, and migration-safe presentation boundaries.
 - `ABILITY_PROGRESSION_CONTRACT.md` — rank/mastery/technique/resource/cooldown/evolution architecture, visibility rules, anti-exploit constraints, and safe implementation order for abilities.
 - `BRANCH_INTEGRATION_CONTRACT.md` — cross-branch API compatibility, no-double-counting rules, disclosure/numeric/time invariants, overlap hotspots, and safe promotion order for active implementation workstreams.
