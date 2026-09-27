@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Dict, Mapping
 
 from .core import GameState, RuleError
+from .equipment import equipment_modifiers
 
 
 ATTRIBUTE_SPECS: Dict[str, Dict[str, Any]] = {
@@ -78,36 +79,115 @@ def validate_player_stats(state: GameState) -> list[str]:
     return errors
 
 
-def derived_stats(state: GameState) -> Dict[str, float]:
-    attrs = state.player.get("attributes", {})
-    skills = state.player.get("skills", {})
-    might = _num(attrs, "might")
-    agility = _num(attrs, "agility")
-    endurance = _num(attrs, "endurance")
-    intellect = _num(attrs, "intellect")
-    will = _num(attrs, "will")
-    perception = _num(attrs, "perception")
-    presence = _num(attrs, "presence")
-    athletics = _num(skills, "athletics")
-    defense = _num(skills, "defense")
-    ranged = _num(skills, "ranged")
-    leadership = _num(skills, "leadership")
-    return {
-        "max_health": round(50 + endurance * 2.0 + will * 0.5, 2),
-        "max_stamina": round(40 + endurance * 1.5 + athletics * 0.5, 2),
-        "max_focus": round(30 + intellect * 0.8 + will * 0.7, 2),
-        "max_resolve": round(25 + will * 1.1 + presence * 0.35 + leadership * 0.15, 2),
-        "initiative": round(agility * 0.7 + perception * 0.3, 2),
-        "accuracy": round(perception * 0.55 + agility * 0.20 + ranged * 0.25, 2),
-        "evasion": round(agility * 0.65 + perception * 0.20 + athletics * 0.15, 2),
-        "guard": round(endurance * 0.45 + might * 0.25 + defense * 0.30, 2),
-        "carry_capacity": round(10 + might * 0.8 + endurance * 0.2, 2),
+def _modifier_totals(
+    state: GameState,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
+) -> Dict[str, float]:
+    """Aggregate temporary/equipment modifier paths exactly once.
+
+    Direct equipment plus reached set bonuses come from equipment_modifiers().
+    Perks and active conditions are then added once each. Base player values are
+    never rewritten by this aggregation.
+    """
+    total = equipment_modifiers(state, equipment_sets)
+
+    for perk_id, perk in state.perks.items():
+        if not isinstance(perk, Mapping):
+            raise RuleError(f"Perk record must be an object: {perk_id}")
+        for path, value in perk.get("modifiers", {}).items():
+            total[path] = total.get(path, 0.0) + float(value)
+
+    conditions = state.player.get("conditions", {})
+    if conditions is not None and not isinstance(conditions, Mapping):
+        raise RuleError("player.conditions must be an object")
+    for condition_id, condition in (conditions or {}).items():
+        if not isinstance(condition, Mapping):
+            raise RuleError(f"Condition record must be an object: {condition_id}")
+        for path, value in condition.get("modifiers", {}).items():
+            total[path] = total.get(path, 0.0) + float(value)
+
+    return total
+
+
+def effective_player_value(
+    state: GameState,
+    path: str,
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
+) -> float:
+    current: Any = state.player
+    for part in path.split("."):
+        if not isinstance(current, Mapping) or part not in current:
+            current = 0
+            break
+        current = current[part]
+    if not isinstance(current, (int, float)):
+        raise RuleError(f"Player value is not numeric: {path}")
+    modifiers = _modifier_totals(state, equipment_sets)
+    return float(current) + float(modifiers.get(path, 0.0))
+
+
+def derived_stats(
+    state: GameState,
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
+) -> Dict[str, float]:
+    """Calculate derived values from effective attributes/skills.
+
+    Attribute/skill modifiers affect formulas, while modifiers authored directly
+    against derived.<name> are added once after the formula is calculated.
+    """
+    modifiers = _modifier_totals(state, equipment_sets)
+
+    def effective(path: str) -> float:
+        current: Any = state.player
+        for part in path.split("."):
+            if not isinstance(current, Mapping) or part not in current:
+                current = 0
+                break
+            current = current[part]
+        if not isinstance(current, (int, float)):
+            raise RuleError(f"Player value is not numeric: {path}")
+        return float(current) + float(modifiers.get(path, 0.0))
+
+    might = effective("attributes.might")
+    agility = effective("attributes.agility")
+    endurance = effective("attributes.endurance")
+    intellect = effective("attributes.intellect")
+    will = effective("attributes.will")
+    perception = effective("attributes.perception")
+    presence = effective("attributes.presence")
+    athletics = effective("skills.athletics")
+    defense = effective("skills.defense")
+    ranged = effective("skills.ranged")
+    leadership = effective("skills.leadership")
+
+    values = {
+        "max_health": 50 + endurance * 2.0 + will * 0.5,
+        "max_stamina": 40 + endurance * 1.5 + athletics * 0.5,
+        "max_focus": 30 + intellect * 0.8 + will * 0.7,
+        "max_resolve": 25 + will * 1.1 + presence * 0.35 + leadership * 0.15,
+        "initiative": agility * 0.7 + perception * 0.3,
+        "accuracy": perception * 0.55 + agility * 0.20 + ranged * 0.25,
+        "evasion": agility * 0.65 + perception * 0.20 + athletics * 0.15,
+        "guard": endurance * 0.45 + might * 0.25 + defense * 0.30,
+        "carry_capacity": 10 + might * 0.8 + endurance * 0.2,
     }
 
+    for key in list(values):
+        values[key] += float(modifiers.get(f"derived.{key}", 0.0))
+        values[key] = round(values[key], 2)
+    return values
 
-def initialize_resources(state: GameState, *, refill: bool = False) -> Dict[str, float]:
+
+def initialize_resources(
+    state: GameState,
+    *,
+    refill: bool = False,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
+) -> Dict[str, float]:
     resources = state.player.setdefault("resources", {})
-    derived = derived_stats(state)
+    derived = derived_stats(state, equipment_sets=equipment_sets)
     maxima = {
         "health": derived["max_health"],
         "stamina": derived["max_stamina"],
