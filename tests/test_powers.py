@@ -434,5 +434,24 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertTrue(any("unsupported stage" in error for error in errors))
 
 
+    def test_power_validation_rejects_unknown_and_self_technique_dependencies(self):
+        errors = validate_power_definitions({
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_A": {
+                        "discovery_requirements": {
+                            "techniques": {
+                                "TECHNIQUE_A": "learned",
+                                "TECHNIQUE_MISSING": "learned",
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        self.assertTrue(any("cannot require itself" in error for error in errors))
+        self.assertTrue(any("unknown technique" in error for error in errors))
+
+
 if __name__ == "__main__":
     unittest.main()
