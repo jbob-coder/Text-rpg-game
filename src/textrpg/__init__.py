@@ -1,3 +1,4 @@
+from .content import LoadedContentPack, content_pack_from_mapping, load_content_pack
 from .core import GameState, RuleError, RulesEngine
 from .equipment import active_set_bonuses, equip_item, equipment_modifiers, set_counts
 from .persistence import CURRENT_SCHEMA_VERSION, dumps_state, load_state, loads_state, save_state
@@ -45,6 +46,9 @@ from .visuals import (
 __all__ = [
     "ATTRIBUTE_SPECS",
     "CURRENT_SCHEMA_VERSION",
+    "load_content_pack",
+    "content_pack_from_mapping",
+    "LoadedContentPack",
     "GameState",
     "RuleError",
     "RulesEngine",
