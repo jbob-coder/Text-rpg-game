@@ -433,5 +433,24 @@ class PowerRuntimeTests(unittest.TestCase):
         )
         self.assertTrue(status["available"])
 
+    def test_invalid_technique_mastery_numbers_are_rejected(self):
+        state = self.state()
+        for value in (True, float("nan"), float("inf"), -1):
+            with self.assertRaises(RuleError):
+                gain_technique_mastery(
+                    state,
+                    "ABILITY_FLUX",
+                    "TECHNIQUE_PULSE",
+                    value,
+                )
+        with self.assertRaises(RuleError):
+            technique_stage(float("nan"))
+
+    def test_fractional_item_requirement_is_rejected(self):
+        invalid = self.definition()
+        invalid["requirements"]["items"] = {"ITEM_CORE_SHARD": 1.5}
+        errors = validate_technique_definition(invalid)
+        self.assertTrue(any("must be an integer" in error for error in errors))
+
 if __name__ == "__main__":
     unittest.main()
