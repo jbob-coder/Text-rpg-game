@@ -548,5 +548,140 @@ class ExtendedStateTests(unittest.TestCase):
         self.assertEqual(state.time_minutes, 0)
         self.assertEqual(state.history, [])
 
+    def test_rules_engine_power_effects_use_authored_definitions_transactionally(self):
+        powers = {
+            "ABILITY_TRACE": {
+                "family": "sensory",
+                "resource": {
+                    "path": "power_resources.trace",
+                    "maximum": 10,
+                    "starting": 10,
+                    "recovery_per_hour": 2,
+                },
+                "techniques": {
+                    "TECHNIQUE_PULSE": {
+                        "stage_min": "discovered",
+                        "costs": {"power_resources.trace": 3},
+                        "cooldown_minutes": 0,
+                    }
+                },
+            }
+        }
+        engine = RulesEngine(
+            {
+                "A": {
+                    "choices": [
+                        {
+                            "id": "DISCOVER_POWER",
+                            "text": "Discover it.",
+                            "outcomes": {
+                                "default": {
+                                    "effects": [
+                                        {
+                                            "type": "ability_discover",
+                                            "ability_id": "ABILITY_TRACE",
+                                        },
+                                        {
+                                            "type": "technique_discover",
+                                            "ability_id": "ABILITY_TRACE",
+                                            "technique_id": "TECHNIQUE_PULSE",
+                                        },
+                                    ]
+                                }
+                            },
+                        },
+                        {
+                            "id": "USE_POWER",
+                            "text": "Use it.",
+                            "outcomes": {
+                                "default": {
+                                    "effects": [
+                                        {
+                                            "type": "technique_use",
+                                            "ability_id": "ABILITY_TRACE",
+                                            "technique_id": "TECHNIQUE_PULSE",
+                                        }
+                                    ]
+                                }
+                            },
+                        },
+                        {
+                            "id": "RECOVER_POWER",
+                            "text": "Recover.",
+                            "outcomes": {
+                                "default": {
+                                    "effects": [
+                                        {
+                                            "type": "power_recover",
+                                            "ability_id": "ABILITY_TRACE",
+                                            "minutes": 30,
+                                        }
+                                    ]
+                                }
+                            },
+                        },
+                    ]
+                }
+            },
+            power_definitions=powers,
+        )
+        state = GameState(seed="x", scene_id="A")
+
+        engine.choose(state, "DISCOVER_POWER")
+        self.assertEqual(state.player["power_resources"]["trace"], 10.0)
+
+        engine.choose(state, "USE_POWER")
+        self.assertEqual(state.player["power_resources"]["trace"], 7.0)
+
+        engine.choose(state, "RECOVER_POWER")
+        self.assertEqual(state.player["power_resources"]["trace"], 8.0)
+        self.assertEqual(state.time_minutes, 30)
+
+    def test_power_effect_failure_rolls_back_prior_choice_effects(self):
+        powers = {
+            "ABILITY_TRACE": {
+                "resource": {
+                    "path": "power_resources.trace",
+                    "maximum": 10,
+                    "starting": 10,
+                    "recovery_per_hour": 2,
+                },
+                "techniques": {},
+            }
+        }
+        engine = RulesEngine(
+            {
+                "A": {
+                    "choices": [{
+                        "id": "BAD_POWER_SEQUENCE",
+                        "text": "Fail atomically.",
+                        "outcomes": {
+                            "default": {
+                                "effects": [
+                                    {
+                                        "type": "set_flag",
+                                        "key": "SHOULD_ROLL_BACK",
+                                        "value": True,
+                                    },
+                                    {
+                                        "type": "technique_use",
+                                        "ability_id": "ABILITY_TRACE",
+                                        "technique_id": "TECHNIQUE_MISSING",
+                                    },
+                                ]
+                            }
+                        },
+                    }]
+                }
+            },
+            power_definitions=powers,
+        )
+        state = GameState(seed="x", scene_id="A")
+        with self.assertRaises(RuleError):
+            engine.choose(state, "BAD_POWER_SEQUENCE")
+        self.assertNotIn("SHOULD_ROLL_BACK", state.flags)
+        self.assertEqual(state.turn, 0)
+        self.assertEqual(state.history, [])
+
 if __name__ == "__main__":
     unittest.main()
