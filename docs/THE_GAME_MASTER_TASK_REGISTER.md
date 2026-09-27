@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-27 14:19 AST  
+Updated: 2026-09-27 14:21 AST  
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -214,9 +214,9 @@ The UI must not become the authoritative rules engine.
 - COMPLETED_AT: `2026-09-27 14:12 AST`
 
 ### TASK R-002 — Repo-native agent continuity
-- STATUS: `IN_PROGRESS`
-- OBJECTIVE: root `AGENTS.md` plus this file so future agents can continue without depending on chat memory.
-- COMPLETED_AT: —
+- STATUS: `DONE`
+- RESULT: root `AGENTS.md`, this task register, and README entrypoint were written to `fix/v6-runtime-boundaries` and fetched back from GitHub for verification.
+- COMPLETED_AT: `2026-09-27 14:21 AST`
 
 ## Known technical follow-ups
 
@@ -252,4 +252,4 @@ Before ending meaningful work, update:
 
 ## Immediate next action
 
-Complete TASK R-002, then resume TASK A-001 and diagnose the Android black-screen startup from the actual package/source path rather than redesigning UI first.
+Resume TASK A-001 and diagnose the Android black-screen startup from the actual package/source path rather than redesigning UI first.
