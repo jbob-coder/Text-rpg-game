@@ -471,35 +471,61 @@ private fun StatsSection(snapshot: GameSnapshot) {
         }
         PixelPanel(title = "Core Attributes") {
             snapshot.attributes.forEach { stat ->
-                val bonus = if (stat.delta == 0.0) "" else " (${signed(stat.delta)})"
                 Text(
-                    "${stat.name.padEnd(14)} ${stat.effective.roundToInt()}$bonus",
+                    text = "${stat.name.uppercase()} // ${stat.effective.roundToInt()}",
                     color = if (stat.modified) PixelColors.Cyan else PixelColors.Paper,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.titleLarge,
                 )
+                Text(
+                    text = "BASE ${stat.base.roundToInt()}  •  EFFECTIVE ${stat.effective.roundToInt()}" +
+                        if (stat.delta == 0.0) "" else "  •  MOD ${signed(stat.delta)}",
+                    color = PixelColors.Muted,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+                if (!stat.role.isNullOrBlank()) {
+                    Text(
+                        text = stat.role,
+                        color = PixelColors.Paper,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+                Spacer(Modifier.height(10.dp))
             }
         }
         PixelPanel(title = "Derived") {
             snapshot.derived.forEach { stat ->
                 Text(
-                    "${stat.name.padEnd(18)} ${stat.value.roundToInt()}",
+                    text = "${stat.name.uppercase()} // ${stat.value.roundToInt()}",
                     color = PixelColors.Paper,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.titleLarge,
                 )
+                if (!stat.role.isNullOrBlank()) {
+                    Text(
+                        text = stat.role,
+                        color = PixelColors.Muted,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+                Spacer(Modifier.height(8.dp))
             }
         }
         PixelPanel(title = "Skills") {
             snapshot.skills.groupBy { it.category }.forEach { (category, skills) ->
                 Text("[${category.uppercase()}]", color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
                 skills.forEach { skill ->
-                    val bonus = if (skill.delta == 0.0) "" else " (${signed(skill.delta)})"
                     Text(
-                        "${skill.name.padEnd(18)} ${skill.effective.roundToInt()}$bonus",
+                        text = "${skill.name} // ${skill.effective.roundToInt()}",
                         color = if (skill.modified) PixelColors.Cyan else PixelColors.Paper,
                         style = MaterialTheme.typography.bodyMedium,
                     )
+                    Text(
+                        text = "BASE ${skill.base.roundToInt()}" +
+                            if (skill.delta == 0.0) "" else "  •  MOD ${signed(skill.delta)}",
+                        color = PixelColors.Muted,
+                        style = MaterialTheme.typography.labelLarge,
+                    )
                 }
-                Spacer(Modifier.height(6.dp))
+                Spacer(Modifier.height(8.dp))
             }
         }
         if (snapshot.conditions.isNotEmpty()) {
