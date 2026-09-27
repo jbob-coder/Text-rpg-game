@@ -1,5 +1,9 @@
 name: Android Pixel Client
 
+concurrency:
+  group: android-pixel-client-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
     branches:
