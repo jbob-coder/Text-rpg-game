@@ -185,3 +185,42 @@ class AndroidBridgeTests(unittest.TestCase):
 
             self.assertEqual("LOAD_ERROR", caught.exception.code)
             self.assertEqual(before, session.state.snapshot())
+
+    def test_authored_equipment_can_be_equipped_and_unequipped_transactionally(self):
+        session = create_session(CONTENT)
+        before = session.scene_view()
+        gear = next(
+            item for item in before["inventory"]["items"]
+            if item.get("equippable")
+        )
+        starting_quantity = gear["quantity"]
+
+        equipped = session.equip(gear["id"])
+        slot = gear["slot"]
+        equipped_slot = next(
+            item for item in equipped["inventory"]["equipment"]
+            if item["slot"] == slot
+        )
+        self.assertTrue(equipped_slot["equipped"])
+        remaining = next(
+            (
+                item["quantity"]
+                for item in equipped["inventory"]["items"]
+                if item["id"] == gear["id"]
+            ),
+            0,
+        )
+        self.assertEqual(starting_quantity - 1, remaining)
+
+        restored = session.unequip(slot)
+        restored_quantity = next(
+            item["quantity"]
+            for item in restored["inventory"]["items"]
+            if item["id"] == gear["id"]
+        )
+        self.assertEqual(starting_quantity, restored_quantity)
+        empty_slot = next(
+            item for item in restored["inventory"]["equipment"]
+            if item["slot"] == slot
+        )
+        self.assertFalse(empty_slot["equipped"])
