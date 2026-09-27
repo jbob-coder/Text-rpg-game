@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from math import isfinite
 from typing import Any, Dict, Mapping
 
 from .core import GameState, RuleError
@@ -29,16 +30,24 @@ def _validate_requirements(item_id: str, requirements: Any) -> tuple[Dict[str, f
     for key, minimum in attr_requirements.items():
         if key not in ATTRIBUTE_SPECS:
             raise RuleError(f"Unknown equipment attribute requirement: {key}")
-        if isinstance(minimum, bool) or not isinstance(minimum, (int, float)):
-            raise RuleError(f"Equipment attribute requirement must be numeric: {key}")
+        if (
+            isinstance(minimum, bool)
+            or not isinstance(minimum, (int, float))
+            or not isfinite(float(minimum))
+        ):
+            raise RuleError(f"Equipment attribute requirement must be finite numeric: {key}")
         validated_attrs[key] = float(minimum)
 
     validated_skills: Dict[str, float] = {}
     for key, minimum in skill_requirements.items():
         if key not in SKILL_CATALOG:
             raise RuleError(f"Unknown equipment skill requirement: {key}")
-        if isinstance(minimum, bool) or not isinstance(minimum, (int, float)):
-            raise RuleError(f"Equipment skill requirement must be numeric: {key}")
+        if (
+            isinstance(minimum, bool)
+            or not isinstance(minimum, (int, float))
+            or not isfinite(float(minimum))
+        ):
+            raise RuleError(f"Equipment skill requirement must be finite numeric: {key}")
         validated_skills[key] = float(minimum)
 
     return validated_attrs, validated_skills
