@@ -859,11 +859,109 @@ def _ability_progression_state(
     return rank, float(mastery), rank_floor
 
 
+def _validate_discovery_requirements(
+    requirements: Any,
+    errors: list[str],
+) -> None:
+    """Validate the authored gate that controls whether a technique may be learned."""
+    if requirements is None:
+        return
+    if not isinstance(requirements, Mapping):
+        errors.append("discovery_requirements must be an object")
+        return
+
+    if "rank_min" in requirements:
+        _integer(
+            requirements["rank_min"],
+            "discovery_requirements.rank_min",
+            errors,
+            minimum=0,
+        )
+    if "mastery_xp_min" in requirements:
+        _number(
+            requirements["mastery_xp_min"],
+            "discovery_requirements.mastery_xp_min",
+            errors,
+            minimum=0.0,
+        )
+
+    for section in ("attributes", "skills"):
+        values = requirements.get(section, {})
+        if not isinstance(values, Mapping):
+            errors.append(f"discovery_requirements.{section} must be an object")
+            continue
+        catalog = ATTRIBUTE_SPECS if section == "attributes" else SKILL_CATALOG
+        for key, minimum in values.items():
+            if key not in catalog:
+                errors.append(
+                    f"discovery_requirements.{section} has unknown ID {key!r}"
+                )
+            _number(
+                minimum,
+                f"discovery_requirements.{section}.{key}",
+                errors,
+                minimum=0.0,
+            )
+
+    flags = requirements.get("flags", {})
+    if not isinstance(flags, Mapping):
+        errors.append("discovery_requirements.flags must be an object")
+
+    items = requirements.get("items", {})
+    if not isinstance(items, Mapping):
+        errors.append("discovery_requirements.items must be an object")
+    else:
+        for item_id, quantity in items.items():
+            if not isinstance(item_id, str) or not _STABLE_ID.fullmatch(item_id):
+                errors.append(
+                    f"discovery_requirements.items has invalid stable ID {item_id!r}"
+                )
+            _integer(
+                quantity,
+                f"discovery_requirements.items.{item_id}",
+                errors,
+                minimum=1,
+            )
+
+    for section in ("knowledge", "perks"):
+        values = requirements.get(section, [])
+        if not isinstance(values, list):
+            errors.append(f"discovery_requirements.{section} must be a list")
+            continue
+        for stable_id in values:
+            if not isinstance(stable_id, str) or not _STABLE_ID.fullmatch(stable_id):
+                errors.append(
+                    f"discovery_requirements.{section} contains invalid stable ID "
+                    f"{stable_id!r}"
+                )
+
+    techniques = requirements.get("techniques", {})
+    if not isinstance(techniques, Mapping):
+        errors.append("discovery_requirements.techniques must be an object")
+    else:
+        for required_id, stage in techniques.items():
+            if not isinstance(required_id, str) or not _STABLE_ID.fullmatch(required_id):
+                errors.append(
+                    "discovery_requirements.techniques has invalid technique ID "
+                    f"{required_id!r}"
+                )
+            if stage not in _STAGE_ORDER or stage == "unknown":
+                errors.append(
+                    f"discovery_requirements.techniques.{required_id} has "
+                    f"unsupported stage {stage!r}"
+                )
+
+
 def validate_technique_definition(definition: Any) -> list[str]:
     """Validate one authored technique definition without mutating game state."""
     errors: list[str] = []
     if not isinstance(definition, Mapping):
         return ["technique definition must be an object"]
+
+    _validate_discovery_requirements(
+        definition.get("discovery_requirements", {}),
+        errors,
+    )
 
     stage_min = definition.get("stage_min", "discovered")
     if stage_min not in _STAGE_ORDER:
