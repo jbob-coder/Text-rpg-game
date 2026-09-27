@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -55,10 +56,11 @@ fun TheGameRoot(
     onLoad: () -> Unit,
     onNarrate: (String) -> Boolean,
     onStopNarration: () -> Unit,
+    onCheat: (String) -> Unit,
 ) {
     val snapshot = uiState.snapshot
     if (uiState.bootState == BootState.Ready && snapshot != null) {
-        PixelGameShell(snapshot, uiState.busy, onChoice, onSave, onLoad, onNarrate, onStopNarration)
+        PixelGameShell(snapshot, uiState.busy, onChoice, onSave, onLoad, onNarrate, onStopNarration, onCheat)
     } else {
         PixelBootScreen(uiState.bootState)
     }
@@ -129,6 +131,7 @@ private fun PixelGameShell(
     onLoad: () -> Unit,
     onNarrate: (String) -> Boolean,
     onStopNarration: () -> Unit,
+    onCheat: (String) -> Unit,
 ) {
     var section by remember { mutableStateOf(GameSection.STORY) }
     var settingsOpen by remember { mutableStateOf(false) }
@@ -143,16 +146,13 @@ private fun PixelGameShell(
         Spacer(Modifier.height(8.dp))
         Box(Modifier.weight(1f)) {
             if (settingsOpen) {
-                SettingsPanel(snapshot, onSave, onLoad, onStopNarration) { settingsOpen = false }
+                SettingsPanel(snapshot, onSave, onLoad, onStopNarration, onCheat) { settingsOpen = false }
             } else {
                 when (section) {
                     GameSection.STORY -> StorySection(snapshot, busy, onChoice, onNarrate)
                     GameSection.CHARACTER -> CharacterSection(snapshot)
                     GameSection.STATS -> StatsSection(snapshot)
-                    GameSection.INVENTORY -> ComingPanel(
-                        "Inventory",
-                        "Inventory is engine-owned. The item and equipment browser will render authoritative inventory state here.",
-                    )
+                    GameSection.INVENTORY -> InventorySection(snapshot)
                     GameSection.QUESTS -> QuestSection(snapshot)
                     GameSection.MAP -> MapSection(snapshot)
                     GameSection.MORE -> MorePanel(
@@ -317,12 +317,10 @@ private fun CharacterSection(snapshot: GameSnapshot) {
                 Spacer(Modifier.height(12.dp))
                 Text("EQUIPMENT SLOTS", color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
                 Spacer(Modifier.height(6.dp))
-                listOf(
-                    "HEAD", "CHEST", "HANDS", "LEGS", "FEET", "MAIN HAND",
-                    "OFF HAND", "RING I", "RING II", "NECK", "ACCESSORY",
-                ).chunked(2).forEach { row ->
-                    Text(row.joinToString("   "), color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
-                    Spacer(Modifier.height(4.dp))
+                snapshot.inventory.equipment.forEach { slot ->
+                    val slotName = slot.slot.replace('_', ' ').uppercase()
+                    val itemName = if (slot.equipped) slot.name ?: slot.itemId ?: "EQUIPPED" else "—"
+                    LabeledValue(slotName, itemName)
                 }
             }
         }
@@ -395,6 +393,7 @@ private fun SettingsPanel(
     onSave: () -> Unit,
     onLoad: () -> Unit,
     onStopNarration: () -> Unit,
+    onCheat: (String) -> Unit,
     onClose: () -> Unit,
 ) {
     Column(
@@ -428,11 +427,60 @@ private fun SettingsPanel(
             LabeledValue("Turn", snapshot.turn.toString())
         }
         PixelPanel(title = "Developer") {
+            var cheatCode by remember { mutableStateOf("") }
             Text(
-                "Developer and cheat commands will be isolated here and routed through validated Python commands.",
+                "Cheats are validated by the Python game layer. Available test codes: FULLRESTORE, CLEARCONDITIONS, GIVE_RELAY, MAXATTR, DEBUGMAP.",
                 color = PixelColors.Muted,
                 style = MaterialTheme.typography.bodyMedium,
             )
+            Spacer(Modifier.height(8.dp))
+            OutlinedTextField(
+                value = cheatCode,
+                onValueChange = { cheatCode = it.uppercase() },
+                label = { Text("CHEAT CODE") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Spacer(Modifier.height(8.dp))
+            PixelTextButton("APPLY CHEAT") {
+                if (cheatCode.isNotBlank()) {
+                    onCheat(cheatCode)
+                    cheatCode = ""
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun InventorySection(snapshot: GameSnapshot) {
+    Column(
+        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        PixelPanel(title = "Equipment") {
+            snapshot.inventory.equipment.forEach { slot ->
+                val slotName = slot.slot.replace('_', ' ').uppercase()
+                val item = if (slot.equipped) {
+                    buildString {
+                        append(slot.name ?: slot.itemId ?: "EQUIPPED")
+                        if (!slot.quality.isNullOrBlank()) append(" // ").append(slot.quality.uppercase())
+                    }
+                } else {
+                    "EMPTY"
+                }
+                LabeledValue(slotName, item)
+            }
+        }
+
+        PixelPanel(title = "Inventory") {
+            if (snapshot.inventory.items.isEmpty()) {
+                Text("No carried items.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
+            } else {
+                snapshot.inventory.items.forEach { item ->
+                    LabeledValue(item.name, "x${item.quantity}")
+                }
+            }
         }
     }
 }
