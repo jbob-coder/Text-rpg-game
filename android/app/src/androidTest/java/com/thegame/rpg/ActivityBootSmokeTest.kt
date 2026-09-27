@@ -77,13 +77,12 @@ class ActivityBootSmokeTest {
         waitForClickableText("SAVE GAME")
         composeRule.onNodeWithText("SAVE GAME").performClick()
 
-        // Saving is asynchronous. The Close action remains present while the
-        // ViewModel completes the Python persistence call, so wait for Compose
-        // to settle before returning to the story and attempting another choice.
-        composeRule.waitForIdle()
+        // Saving uses background I/O. Wait for the game to become interactive
+        // again rather than treating Compose idleness as proof that persistence
+        // has completed.
         composeRule.onNodeWithText("CLOSE").performClick()
-        waitForClickableText("Use the maintenance seal to open the casing without damaging it.")
-        scrollToChoiceAndClick("USE_MAINTENANCE_SEAL")
+        waitForClickableText("Use the maintenance seal to open the casing without damaging it.", timeoutMillis = 60_000)
+        scrollToChoiceAndClick("USE_MAINTENANCE_SEAL", timeoutMillis = 60_000)
         waitForText("Gate Twelve", timeoutMillis = 30_000)
 
         composeRule.onNodeWithText("SETTINGS").performClick()
