@@ -160,5 +160,30 @@ class ValidationTests(unittest.TestCase):
         self.assertTrue(any("condition[0] must be an object" in e for e in errors))
         self.assertTrue(any("effects must be a list" in e for e in errors))
 
+    def test_choice_time_cost_must_be_non_negative_integer(self):
+        scenes = {
+            "SCENE_A": {
+                "choices": [
+                    {
+                        "id": "CHOICE_BAD_TIME",
+                        "text": "Bad",
+                        "time_cost_minutes": -1,
+                        "outcomes": {"default": {}},
+                    },
+                    {
+                        "id": "CHOICE_BOOL_TIME",
+                        "text": "Bad bool",
+                        "time_cost_minutes": True,
+                        "outcomes": {"default": {}},
+                    },
+                ]
+            }
+        }
+        errors = validate_scenes(scenes)
+        self.assertEqual(
+            sum("time_cost_minutes must be a non-negative integer" in e for e in errors),
+            2,
+        )
+
 if __name__ == "__main__":
     unittest.main()
