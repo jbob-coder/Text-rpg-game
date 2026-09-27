@@ -65,6 +65,12 @@ The original `main` branch is not modified by this work.
 - Explicit ability discovery creates a rank-0/mastery-0 shell rather than granting free progression.
 - Technique practice now consumes stamina/focus, advances world time, uses diminishing returns, supports mentor bonuses, and grants gradual technique/ability mastery.
 - `The Dead Relay` now continues below Gate Twelve into the first provisional power-discovery/practice sequence; one hour of first practice is intentionally insufficient to leave the earliest technique stage.
+- Power definitions can now declare ability-specific resource pools, starting/max values, recovery rates, technique costs/cooldowns/drawbacks, and future unlock requirements.
+- `ABILITY_TRACE_ECHO` now uses `power_resources.trace_resonance` rather than a universal mana pool: max/start 10, baseline recovery 2 per hour.
+- `TECHNIQUE_SIGNAL_PULSE` now has a real first-use loop: focus + Trace Resonance cost, 10-minute cooldown, mastery gain, and temporary `COND_ECHO_STRAIN`.
+- A 30-minute quiet-recovery scene restores only 1 Trace Resonance at the current rate and advances shared world time, allowing the 20-minute strain condition to expire naturally.
+- `TECHNIQUE_DIRECTIONAL_TRACE` is defined but intentionally locked behind later rank/mastery, knowledge, perk, attribute, and skill requirements.
+- Content validation now validates power-definition structure and rejects scene effects that reference unknown powers or techniques; NPC/power effect IDs and practice/recovery durations receive structural validation.
 - Save/resume route regressions permanently cover cooperative, solo, failure/recovery, and first-power paths.
 
 ## TESTS_RUN
@@ -75,9 +81,9 @@ Command used against a branch-equivalent reconstruction of the current remote fi
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Latest exact branch-equivalent suite result: **93 tests passed, 0 failed**.
+Latest exact branch-equivalent suite result: **97 tests passed, 0 failed**.
 
-Verification was performed against a local reconstruction of the live `foundation/text-rpg-systems` branch. Git blob hashes were checked against the live repository for the reconstructed source/content set, and the newly added save/resume regression module was separately hash-matched to its live Git blob before the final run.
+Verification was performed against a local reconstruction of the live `foundation/text-rpg-systems` branch. The local reconstruction was based on the previously exact 93-test branch snapshot. Every source/content/test file changed in the Trace Echo resource/validation slice was then Git-blob-hash matched against the live branch before relying on the final 97-test run.
 
 Observed command:
 
@@ -88,7 +94,7 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 Observed result:
 
 ```text
-Ran 93 tests in 0.027s
+Ran 97 tests in 0.019s
 
 OK
 ```
@@ -99,11 +105,11 @@ No GitHub Actions workflow was added; verification does not consume hosted CI mi
 
 ## NEXT_ACTION
 
-1. Define power-resource identity, drawbacks, recovery behavior, and later unlock prerequisites for `ABILITY_TRACE_ECHO` before adding stronger techniques.
-2. Strengthen authored-content validation for power/NPC effect references as content volume grows.
-3. Review `The Dead Relay` as provisional story material; promote, revise, or replace it only after deliberate canon review.
-4. Expand canonical visual identity records when additional recurring characters are intentionally introduced.
-5. Add more end-to-end route coverage as new authored branches are introduced.
+1. Add explicit authored discovery requirements for future techniques so a technique definition cannot be discovered before its unlock prerequisites are satisfied.
+2. Add content-pack validation for referenced knowledge/perk/item IDs once those registries are formalized.
+3. Review `The Dead Relay`, Gate Twelve, Tamsin, and Trace Echo as provisional story material before promoting any of them to confirmed canon.
+4. Expand recurring-character visual identity records only when additional named characters are intentionally introduced.
+5. Continue adding save/resume end-to-end coverage for every new major route.
 6. Connect the rules layer to a selected pixel-art presentation runtime only after the client technology is deliberately chosen.
 
 ## BLOCKERS
