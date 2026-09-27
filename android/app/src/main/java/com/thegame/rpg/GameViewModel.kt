@@ -76,6 +76,25 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun applyCheat(code: String) {
+        if (_uiState.value.busy) return
+        _uiState.update { it.copy(busy = true) }
+        viewModelScope.launch {
+            engine.applyCheat(code).fold(
+                onSuccess = { snapshot ->
+                    _uiState.update {
+                        it.copy(
+                            bootState = BootState.Ready,
+                            snapshot = snapshot,
+                            busy = false,
+                        )
+                    }
+                },
+                onFailure = ::publishFailure,
+            )
+        }
+    }
+
     private fun publishFailure(failure: Throwable) {
         val engineFailure = failure as? EngineStartException ?: PythonGameEngine.classifyFailure(failure)
         Log.e("TheGame", engineFailure.technicalDetail, engineFailure)
