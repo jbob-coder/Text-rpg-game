@@ -723,12 +723,15 @@ def discover_technique(
         raise RuleError(f"Unknown or invalid ability state: {ability_id}")
     _ability_progression_state(ability, ability_id)
 
-    techniques = ability.get("techniques")
-    if techniques is None:
-        techniques = {}
-        ability["techniques"] = techniques
-    if not isinstance(techniques, MutableMapping):
+    existing_techniques = ability.get("techniques")
+    create_techniques = existing_techniques is None
+    if create_techniques:
+        techniques: MutableMapping[str, Any] = {}
+    elif not isinstance(existing_techniques, MutableMapping):
         raise RuleError(f"Ability techniques must be an object: {ability_id}")
+    else:
+        techniques = existing_techniques
+
     if technique_id in techniques:
         existing = techniques[technique_id]
         if not isinstance(existing, MutableMapping):
@@ -755,6 +758,8 @@ def discover_technique(
         "ready_at_minutes": state.time_minutes,
         "discovered_at_minutes": state.time_minutes,
     }
+    if create_techniques:
+        ability["techniques"] = techniques
     techniques[technique_id] = record
     state.history.append(
         {
