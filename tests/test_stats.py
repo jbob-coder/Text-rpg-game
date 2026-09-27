@@ -1,6 +1,6 @@
 import unittest
 
-from textrpg import DERIVED_FORMULAS, DERIVED_STAT_SPECS, GameState, RulesEngine, validate_modifier_path
+from textrpg import DERIVED_FORMULAS, DERIVED_STAT_SPECS, GameState, RuleError, RulesEngine, validate_modifier_path
 from textrpg.stats import derived_stat_breakdown, derived_stats, effective_player_value, initialize_resources, validate_player_stats
 
 
@@ -230,7 +230,7 @@ class StatsTests(unittest.TestCase):
             "stamina": 10.0,
         }
         before = dict(state.player["resources"])
-        with self.assertRaises(Exception):
+        with self.assertRaises(RuleError):
             initialize_resources(state)
         self.assertEqual(state.player["resources"], before)
         self.assertNotIn("max_health", state.player["resources"])
