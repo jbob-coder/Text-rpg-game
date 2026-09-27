@@ -163,6 +163,30 @@ This changes the static authored-test count from 200 to **201**.
 
 Runtime execution is still pending; this is a source-level fix plus authored regression, not a pass claim.
 
+
+## Additional atomicity hardening
+
+A second static integration defect was found in direct `simulation.train()` usage.
+
+Before this pass, `train()` called `initialize_resources()` before checking whether current Stamina/Focus were sufficient. Resource initialization is internally atomic, but it can still normalize current values and write `max_*` fields. If training then failed for insufficient resources, those normalization writes could remain even though the training action itself failed.
+
+V6 now treats resource normalization as part of the training transaction:
+- snapshot existing resource state;
+- normalize against the authoritative derived/set-aware maxima;
+- check training affordability;
+- if affordability fails, restore the exact prior resource state;
+- only then proceed to skill/resource/time/history mutation.
+
+A regression test now verifies that failed direct training leaves:
+- resources unchanged;
+- skills unchanged;
+- world time unchanged;
+- history unchanged.
+
+The static authored-test count is now **202** across 17 test files.
+
+This remains source/test hardening only. Exact runtime execution is still required before any green claim.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
@@ -174,7 +198,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 200 authored test methods;
+- V6 has 202 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
