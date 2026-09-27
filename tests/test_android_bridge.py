@@ -29,7 +29,7 @@ class AndroidBridgeTests(unittest.TestCase):
 
         view = session.scene_view()
 
-        self.assertEqual({"scene", "status", "meta"}, set(view))
+        self.assertEqual({"scene", "status", "quests", "map", "meta"}, set(view))
         self.assertIn("id", view["scene"])
         self.assertIn("title", view["scene"])
         self.assertIn("body", view["scene"])
@@ -37,9 +37,40 @@ class AndroidBridgeTests(unittest.TestCase):
         self.assertIn("resources", view["status"])
         self.assertEqual(0, view["meta"]["turn"])
         self.assertEqual(0, view["meta"]["time_minutes"])
+        self.assertEqual("PLATFORM_NINE", view["map"]["current_location"])
+        self.assertEqual(["PLATFORM_NINE"], [node["id"] for node in view["map"]["nodes"]])
+        self.assertEqual([], view["quests"])
 
         leaked = FORBIDDEN_AUTHORED_KEYS.intersection(set(walk_keys(view)))
         self.assertEqual(set(), leaked)
+
+
+    def test_quest_projection_exposes_category_without_authored_effects(self):
+        session = create_session(CONTENT)
+        session.choose("CHECK_RELAY")
+
+        view = session.scene_view()
+
+        self.assertEqual(1, len(view["quests"]))
+        quest = view["quests"][0]
+        self.assertEqual("QUEST_DEAD_RELAY", quest["id"])
+        self.assertEqual("The Dead Relay", quest["title"])
+        self.assertEqual("main", quest["category"])
+        self.assertEqual("active", quest["status"])
+        leaked = FORBIDDEN_AUTHORED_KEYS.intersection(set(walk_keys(quest)))
+        self.assertEqual(set(), leaked)
+
+    def test_map_projection_discovers_locations_from_history(self):
+        session = create_session(CONTENT)
+        session.choose("CHECK_RELAY")
+
+        view = session.scene_view()
+        node_ids = {node["id"] for node in view["map"]["nodes"]}
+
+        self.assertEqual("RELAY_WORKBENCH", view["map"]["current_location"])
+        self.assertIn("PLATFORM_NINE", node_ids)
+        self.assertIn("RELAY_WORKBENCH", node_ids)
+        self.assertNotIn("TRACE_CHAMBER", node_ids)
 
     def test_invalid_choice_is_controlled_and_does_not_mutate_state(self):
         session = create_session(CONTENT)
