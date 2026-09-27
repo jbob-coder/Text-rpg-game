@@ -2183,3 +2183,85 @@ None. Only static/source verification and authored regression additions were pos
 ### NEXT_ACTION
 
 Continue targeted Stage 3 integrity review for concrete defects while preserving the runtime gate. Prefer free/local exact execution when a runtime becomes available. Do not ask the user to test intermediate builds.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-MEDIEVAL-CRYSTAL-BEAST-DIRECTION-28
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Context branch: `shared/game-context`
+
+### USER DIRECTION
+
+[DIRECTION] Expand the game around a medieval-era world where weapons and armor are forged and empowered by crystals.
+
+[DIRECTION] Crystals can be mined from natural deposits or harvested from beasts from a crystal located beside/around the heart/core.
+
+[DIRECTION] Combat must use positional/body-zone targeting. The player cannot choose every body region from every combat state. Range, facing, posture, weapon, terrain, and battle-state changes determine what can be attacked.
+
+[DIRECTION] Retreat is persistent. A surviving beast can remember encounters, develop, level, adapt to observed player behavior, and later become a major territorial actor.
+
+[DIRECTION] Beast intelligence affects learning, battle behavior, hierarchy/command capability, communication, and performance against other beasts.
+
+[DIRECTION] Beasts can level/develop over time and participate in persistent world conflict outside the player's immediate encounter.
+
+[DIRECTION] Beast voice/dialogue complexity can grow with intelligence, development, memory, social role, and encounter state.
+
+### INTERPRETATION
+
+[ASSUMPTION] The user's phrase "chef or commander" was interpreted as "chief/chieftain or commander" because it appeared in the context of territorial beast leadership. No cooking-role system was added by this checkpoint.
+
+### DESIGN REFINEMENT
+
+[DECISION] Adaptation is not an automatic buff after retreat.
+
+A beast can adapt only from observed evidence, and the quality/speed of adaptation is constrained by intelligence, learning/memory capability, observation confidence, biology, time, injuries, and available resources.
+
+[DECISION] Beast level does not replace attributes, skills, injuries, equipment/crystal traits, intelligence, terrain, or group strength.
+
+[DECISION] A high-level beast does not automatically become a commander. Command roles require suitable intelligence/social capacity plus followers, territory, and development.
+
+[DECISION] Directly attacking a beast's heart/core creates a loot tradeoff: it may be highly lethal while damaging or destroying the valuable beast crystal.
+
+[DECISION] Dynamic beast dialogue remains authored/template-driven and state-backed so runtime generative AI is not required.
+
+### DOCUMENTATION ADDED
+
+[VERIFIED] Added:
+- `docs/context/MEDIEVAL_CRYSTAL_BEAST_SYSTEMS.md`
+- `docs/context/IMPLEMENTATION_BACKLOG.md`
+
+[VERIFIED] Updated:
+- `docs/context/README.md` canonical reading order and context-file catalog
+- `docs/context/DECISIONS.md` with accepted medieval/crystal, positional-combat, equipment, beast-memory, communication, and stage-gate decisions
+- `docs/context/CHECKPOINTS.md` with this checkpoint
+
+### TASK COVERAGE ADDED
+
+[DESIGNED] The durable backlog now covers:
+- current V6 exact-runtime promotion gate
+- crystal definitions/instances and harvesting
+- forged weapon and armor expansion
+- forging/crystal integration
+- positional combat and body-zone targetability
+- beast runtime state and leveling
+- encounter memory and constrained adaptation
+- intelligence/hierarchy/territorial command
+- beast-vs-beast ecology simulation
+- intelligence-gated authored voice/dialogue
+- one complete medieval hunt -> retreat -> rematch -> harvest -> forge vertical slice
+
+### IMPLEMENTATION STATUS
+
+[DESIGNED] No executable RPG source was changed by this design pass.
+
+[DECISION] Do not merge this feature expansion into `integration/rules-ability-v6-reconcile` until the exact V6 Stage 3 runtime gate is satisfied.
+
+### NEXT_ACTION
+
+1. Satisfy the exact V6 runtime gate.
+2. Promote/freeze a verified baseline.
+3. Begin the backlog with data contracts for combat, crystals, equipment, and beast state.
+4. Build one narrow hunt vertical slice before broad species/content expansion.
