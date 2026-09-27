@@ -144,12 +144,19 @@ def discover_ability(
 
 
 def discover_technique(state: GameState, ability_id: str, technique_id: str) -> Dict[str, Any]:
+    if not isinstance(technique_id, str) or not technique_id:
+        raise RuleError("Technique ID must be a non-empty string")
     ability = state.abilities.get(ability_id)
-    if not ability:
-        raise RuleError(f"Unknown ability: {ability_id}")
+    if not isinstance(ability, MutableMapping):
+        raise RuleError(f"Unknown or invalid ability state: {ability_id}")
     techniques = ability.setdefault("techniques", {})
+    if not isinstance(techniques, MutableMapping):
+        raise RuleError(f"Ability techniques must be an object: {ability_id}")
     if technique_id in techniques:
-        return techniques[technique_id]
+        existing = techniques[technique_id]
+        if not isinstance(existing, MutableMapping):
+            raise RuleError(f"Technique state must be an object: {technique_id}")
+        return existing
     record = {
         "mastery_xp": 0.0,
         "stage": "discovered",
@@ -183,13 +190,27 @@ def gain_technique_mastery(
     ability = state.abilities.get(ability_id)
     if not ability:
         raise RuleError(f"Unknown ability: {ability_id}")
-    technique = ability.get("techniques", {}).get(technique_id)
-    if not technique:
-        raise RuleError(f"Technique has not been discovered: {technique_id}")
+    techniques = ability.get("techniques", {})
+    if not isinstance(techniques, Mapping):
+        raise RuleError(f"Ability techniques must be an object: {ability_id}")
+    technique = techniques.get(technique_id)
+    if not isinstance(technique, MutableMapping):
+        raise RuleError(f"Technique has not been discovered or is invalid: {technique_id}")
 
+    current_mastery = technique.get("mastery_xp", 0.0)
+    if (
+        isinstance(current_mastery, bool)
+        or not isinstance(current_mastery, (int, float))
+        or not isfinite(float(current_mastery))
+        or float(current_mastery) < 0
+    ):
+        raise RuleError(f"Technique mastery state is invalid: {technique_id}")
+
+    next_mastery = float(current_mastery) + float(xp)
+    next_stage = technique_stage(next_mastery)
     before = dict(technique)
-    technique["mastery_xp"] = float(technique.get("mastery_xp", 0.0)) + float(xp)
-    technique["stage"] = technique_stage(technique["mastery_xp"])
+    technique["mastery_xp"] = next_mastery
+    technique["stage"] = next_stage
     return {"before": before, "after": dict(technique)}
 
 
