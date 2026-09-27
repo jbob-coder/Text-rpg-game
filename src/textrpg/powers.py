@@ -4,7 +4,7 @@ from typing import Any, Dict, Mapping, MutableMapping
 
 from .core import GameState, RuleError
 from .progression import gain_ability_mastery, technique_available
-from .simulation import apply_condition
+from .simulation import advance_time, apply_condition
 
 
 TECHNIQUE_STAGES = (
@@ -102,6 +102,107 @@ def gain_technique_mastery(
     technique["mastery_xp"] = float(technique.get("mastery_xp", 0.0)) + float(xp)
     technique["stage"] = technique_stage(technique["mastery_xp"])
     return {"before": before, "after": dict(technique)}
+
+
+def practice_technique(
+    state: GameState,
+    ability_id: str,
+    technique_id: str,
+    *,
+    minutes: int,
+    intensity: float = 1.0,
+    mentor_bonus: float = 0.0,
+    stamina_per_hour: float = 4.0,
+    focus_per_hour: float = 6.0,
+) -> Dict[str, Any]:
+    """Practice an already-discovered technique through paid world time.
+
+    Practice is intentionally gradual: it consumes stamina/focus, advances the
+    simulation clock, uses diminishing returns, and grants less overall ability
+    mastery than technique-specific mastery.
+    """
+    if minutes < 30:
+        raise RuleError("Technique practice requires at least 30 minutes")
+    if intensity <= 0 or intensity > 2.0:
+        raise RuleError("Technique practice intensity must be in range (0, 2]")
+    if mentor_bonus < 0 or mentor_bonus > 1.0:
+        raise RuleError("Technique mentor bonus must be in range 0..1")
+    if stamina_per_hour < 0 or focus_per_hour < 0:
+        raise RuleError("Technique practice resource rates cannot be negative")
+
+    ability = state.abilities.get(ability_id)
+    if not ability:
+        raise RuleError(f"Unknown ability: {ability_id}")
+    technique = ability.get("techniques", {}).get(technique_id)
+    if not technique:
+        raise RuleError(f"Technique has not been discovered: {technique_id}")
+
+    ready_at = int(technique.get("ready_at_minutes", 0))
+    if state.time_minutes < ready_at:
+        raise RuleError(
+            f"Technique is still recovering for {ready_at - state.time_minutes} minutes"
+        )
+
+    hours = minutes / 60.0
+    stamina_cost = hours * float(stamina_per_hour) * intensity
+    focus_cost = hours * float(focus_per_hour) * intensity
+
+    stamina_before = _numeric_player_path(state, "resources.stamina")
+    focus_before = _numeric_player_path(state, "resources.focus")
+    if stamina_before < stamina_cost or focus_before < focus_cost:
+        raise RuleError("Insufficient stamina or focus for technique practice")
+
+    technique_before = float(technique.get("mastery_xp", 0.0))
+    ability_before = float(ability.get("mastery_xp", 0.0))
+    learning_factor = max(0.15, 1.0 - technique_before / 450.0)
+    technique_gain = (
+        hours
+        * 8.0
+        * intensity
+        * learning_factor
+        * (1.0 + mentor_bonus)
+    )
+    ability_gain = technique_gain * 0.35
+
+    # Validate everything above before spending resources or advancing time.
+    _set_player_path(state, "resources.stamina", stamina_before - stamina_cost)
+    _set_player_path(state, "resources.focus", focus_before - focus_cost)
+    gain_technique_mastery(
+        state,
+        ability_id,
+        technique_id,
+        technique_gain,
+    )
+    gain_ability_mastery(
+        state,
+        ability_id,
+        ability_gain,
+    )
+    advance_time(state, minutes)
+
+    event = {
+        "type": "technique_practice",
+        "ability_id": ability_id,
+        "technique_id": technique_id,
+        "minutes": minutes,
+        "intensity": intensity,
+        "mentor_bonus": mentor_bonus,
+        "technique_mastery_before": round(technique_before, 3),
+        "technique_mastery_after": round(
+            float(technique.get("mastery_xp", 0.0)),
+            3,
+        ),
+        "ability_mastery_before": round(ability_before, 3),
+        "ability_mastery_after": round(
+            float(ability.get("mastery_xp", 0.0)),
+            3,
+        ),
+        "stamina_spent": round(stamina_cost, 3),
+        "focus_spent": round(focus_cost, 3),
+        "time_minutes": state.time_minutes,
+    }
+    state.history.append(event)
+    return event
 
 
 def _stage_at_least(actual: str, minimum: str) -> bool:
