@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from math import isfinite
-from typing import Any, Dict, Iterable, Mapping
+from typing import Any, Dict, Iterable, Mapping, MutableMapping
 
 from .core import GameState, RuleError
 from .modifiers import validate_modifier_mapping
@@ -196,6 +196,26 @@ def train(
     validate_time_advance(state, minutes)
     if not isinstance(state.history, list):
         raise RuleError("state.history must be a list")
+    if not isinstance(state.player, MutableMapping):
+        raise RuleError("player state must be mutable")
+
+    existing_skills = state.player.get("skills")
+    if existing_skills is None:
+        skills: MutableMapping[str, Any] = {}
+        create_skills = True
+    elif not isinstance(existing_skills, MutableMapping):
+        raise RuleError("player.skills must be a mutable object")
+    else:
+        skills = existing_skills
+        create_skills = False
+
+    current_raw = skills.get(skill, 0)
+    current = _finite(
+        current_raw,
+        f"Skill state {skill}",
+        minimum=0.0,
+        maximum=100.0,
+    )
 
     initialize_resources(state, set_definitions=set_definitions)
     resources = state.player["resources"]
@@ -204,11 +224,12 @@ def train(
     if resources["stamina"] < stamina_cost or resources["focus"] < focus_cost:
         raise RuleError("Insufficient stamina or focus for this training session")
 
-    current = float(state.player.setdefault("skills", {}).get(skill, 0))
+    if create_skills:
+        state.player["skills"] = skills
     learning_factor = max(0.10, 1.0 - current / 115.0)
     gain = (minutes / 60.0) * intensity * learning_factor * (1.0 + mentor_bonus)
     new_value = min(100.0, current + gain)
-    state.player["skills"][skill] = round(new_value, 3)
+    skills[skill] = round(new_value, 3)
     resources["stamina"] = round(resources["stamina"] - stamina_cost, 3)
     resources["focus"] = round(resources["focus"] - focus_cost, 3)
     advance_time(state, minutes)
@@ -220,8 +241,8 @@ def train(
         "intensity": intensity,
         "mentor_bonus": mentor_bonus,
         "before": current,
-        "after": state.player["skills"][skill],
-        "gain": round(state.player["skills"][skill] - current, 3),
+        "after": skills[skill],
+        "gain": round(skills[skill] - current, 3),
         "time_minutes": state.time_minutes,
     }
     state.history.append(event)
@@ -247,18 +268,38 @@ def train_attribute(
     validate_time_advance(state, minutes)
     if not isinstance(state.history, list):
         raise RuleError("state.history must be a list")
-    current = float(state.player.setdefault("attributes", {}).get(attribute, 0))
+    if not isinstance(state.player, MutableMapping):
+        raise RuleError("player state must be mutable")
+
+    existing_attributes = state.player.get("attributes")
+    if existing_attributes is None:
+        attributes: MutableMapping[str, Any] = {}
+        create_attributes = True
+    elif not isinstance(existing_attributes, MutableMapping):
+        raise RuleError("player.attributes must be a mutable object")
+    else:
+        attributes = existing_attributes
+        create_attributes = False
+
+    current = _finite(
+        attributes.get(attribute, 0),
+        f"Attribute state {attribute}",
+        minimum=float(ATTRIBUTE_SPECS[attribute]["min"]),
+        maximum=float(ATTRIBUTE_SPECS[attribute]["max"]),
+    )
     gain = (minutes / 60.0) * 0.08 * intensity * max(0.15, 1.0 - current / 110.0)
     after = min(100.0, current + gain)
-    state.player["attributes"][attribute] = round(after, 3)
+    if create_attributes:
+        state.player["attributes"] = attributes
+    attributes[attribute] = round(after, 3)
     advance_time(state, minutes)
     event = {
         "type": "attribute_training",
         "attribute": attribute,
         "minutes": minutes,
         "before": current,
-        "after": state.player["attributes"][attribute],
-        "gain": round(state.player["attributes"][attribute] - current, 3),
+        "after": attributes[attribute],
+        "gain": round(attributes[attribute] - current, 3),
         "time_minutes": state.time_minutes,
     }
     state.history.append(event)
