@@ -646,9 +646,21 @@ private fun SettingsPanel(
         PixelPanel(title = "Developer") {
             var cheatCode by remember { mutableStateOf("") }
             Text(
-                "Cheats are validated by the Python game layer. Available test codes: FULLRESTORE, CLEARCONDITIONS, GIVE_RELAY, MAXATTR, DEBUGMAP, DISTRICT.",
+                "Cheats are validated by the Python game layer. Quick actions and manual codes use the same whitelist.",
                 color = PixelColors.Muted,
                 style = MaterialTheme.typography.bodyMedium,
+            )
+            Spacer(Modifier.height(8.dp))
+            PixelTextButton("CHEAT // DISTRICT FREE ROAM") { onCheat("DISTRICT") }
+            Spacer(Modifier.height(6.dp))
+            PixelTextButton("CHEAT // FULL RESTORE") { onCheat("FULLRESTORE") }
+            Spacer(Modifier.height(6.dp))
+            PixelTextButton("CHEAT // DEBUG MAP") { onCheat("DEBUGMAP") }
+            Spacer(Modifier.height(10.dp))
+            Text(
+                "Manual codes: FULLRESTORE, CLEARCONDITIONS, GIVE_RELAY, MAXATTR, DEBUGMAP, DISTRICT.",
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.labelLarge,
             )
             Spacer(Modifier.height(8.dp))
             OutlinedTextField(

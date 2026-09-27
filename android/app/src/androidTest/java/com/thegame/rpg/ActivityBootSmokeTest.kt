@@ -105,18 +105,10 @@ class ActivityBootSmokeTest {
 
         waitForClickableText("SETTINGS")
         composeRule.onNodeWithText("SETTINGS").performClick()
-        composeRule.waitUntil(timeoutMillis = 30_000) {
-            composeRule.onAllNodes(
-                androidx.compose.ui.test.hasTestTag("cheat-input")
-            ).fetchSemanticsNodes().isNotEmpty()
-        }
-        composeRule.onNodeWithTag("cheat-input").performTextInput("DISTRICT")
-        waitForClickableText("APPLY CHEAT")
-        composeRule.onNodeWithText("APPLY CHEAT").performClick()
+        waitForClickableText("CHEAT // DISTRICT FREE ROAM")
+        composeRule.onNodeWithText("CHEAT // DISTRICT FREE ROAM").performClick()
 
         // A successful authoritative scene change closes Settings automatically.
-        // Synchronize on the resulting narrative frame instead of racing the
-        // background Kotlin -> Chaquopy -> Python bridge with a manual Close tap.
         waitForText("The District Opens Up", timeoutMillis = 60_000)
 
         waitForClickableText("Map")
