@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from math import isfinite
-from typing import Any, Dict, Iterable, MutableMapping
+from typing import Any, Dict, Iterable, Mapping, MutableMapping
 
 from .core import GameState, RuleError
 
@@ -42,6 +42,10 @@ def gain_ability_mastery(
     Rank is derived from accumulated mastery XP. Story prerequisites for techniques
     should remain authored conditions rather than being silently granted here.
     """
+    if not isinstance(ability_id, str) or not ability_id:
+        raise RuleError("Ability ID must be a non-empty string")
+    if not isinstance(state.abilities, MutableMapping):
+        raise RuleError("state.abilities must be mutable")
     if isinstance(xp, bool) or not isinstance(xp, (int, float)) or not isfinite(float(xp)):
         raise RuleError("Ability mastery gain must be a finite number")
     if xp < 0:
@@ -73,6 +77,14 @@ def gain_ability_mastery(
         }
     if not isinstance(existing, MutableMapping):
         raise RuleError(f"Ability state must be mutable: {ability_id}")
+
+    current_rank = existing.get("rank", 0)
+    if (
+        isinstance(current_rank, bool)
+        or not isinstance(current_rank, int)
+        or current_rank < 0
+    ):
+        raise RuleError(f"Ability rank state is invalid: {ability_id}")
 
     current_mastery = existing.get("mastery_xp", 0.0)
     if (
@@ -110,18 +122,72 @@ def gain_ability_mastery(
     return {"before": before, "after": dict(ability)}
 
 
-def technique_available(state: GameState, ability_id: str, requirements: Dict[str, Any]) -> bool:
+def technique_available(
+    state: GameState,
+    ability_id: str,
+    requirements: Mapping[str, Any],
+) -> bool:
+    """Evaluate basic technique requirements without mutating state."""
+    if not isinstance(ability_id, str) or not ability_id:
+        raise RuleError("Ability ID must be a non-empty string")
+    if not isinstance(requirements, Mapping):
+        raise RuleError("Technique requirements must be an object")
+    if not isinstance(state.abilities, Mapping):
+        raise RuleError("state.abilities must be an object")
+    if not isinstance(state.knowledge, Mapping):
+        raise RuleError("state.knowledge must be an object")
+    if not isinstance(state.perks, Mapping):
+        raise RuleError("state.perks must be an object")
+
     ability = state.abilities.get(ability_id)
-    if not ability:
+    if ability is None:
         return False
-    if ability.get("rank", 0) < requirements.get("rank_min", 0):
+    if not isinstance(ability, Mapping):
+        raise RuleError(f"Ability state must be an object: {ability_id}")
+
+    rank = ability.get("rank", 0)
+    if isinstance(rank, bool) or not isinstance(rank, int) or rank < 0:
+        raise RuleError(f"Ability rank state is invalid: {ability_id}")
+    mastery = ability.get("mastery_xp", 0.0)
+    if (
+        isinstance(mastery, bool)
+        or not isinstance(mastery, (int, float))
+        or not isfinite(float(mastery))
+        or float(mastery) < 0
+    ):
+        raise RuleError(f"Ability mastery state is invalid: {ability_id}")
+
+    rank_min = requirements.get("rank_min", 0)
+    if isinstance(rank_min, bool) or not isinstance(rank_min, int) or rank_min < 0:
+        raise RuleError("Technique rank_min must be a non-negative integer")
+    mastery_min = requirements.get("mastery_xp_min", 0)
+    if (
+        isinstance(mastery_min, bool)
+        or not isinstance(mastery_min, (int, float))
+        or not isfinite(float(mastery_min))
+        or float(mastery_min) < 0
+    ):
+        raise RuleError("Technique mastery_xp_min must be finite non-negative numeric")
+
+    knowledge = requirements.get("knowledge", [])
+    perks = requirements.get("perks", [])
+    if not isinstance(knowledge, list) or not all(
+        isinstance(value, str) and value for value in knowledge
+    ):
+        raise RuleError("Technique knowledge requirements must be a list of non-empty IDs")
+    if not isinstance(perks, list) or not all(
+        isinstance(value, str) and value for value in perks
+    ):
+        raise RuleError("Technique perk requirements must be a list of non-empty IDs")
+
+    if rank < rank_min:
         return False
-    if ability.get("mastery_xp", 0) < requirements.get("mastery_xp_min", 0):
+    if float(mastery) < float(mastery_min):
         return False
-    for knowledge_id in requirements.get("knowledge", []):
+    for knowledge_id in knowledge:
         if knowledge_id not in state.knowledge:
             return False
-    for perk_id in requirements.get("perks", []):
+    for perk_id in perks:
         if perk_id not in state.perks:
             return False
     return True
