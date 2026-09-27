@@ -191,6 +191,36 @@
           "objectives": {}
         }
       }
+    },
+    "QUEST_GATE_TWELVE_ECHO": {
+      "start_stage": "STAGE_DISCOVER",
+      "stages": {
+        "STAGE_DISCOVER": {
+          "objectives": {
+            "OBJ_FOLLOW_ECHO": {
+              "required": true,
+              "on_complete": {
+                "next_stage": "STAGE_PRACTICE"
+              }
+            }
+          }
+        },
+        "STAGE_PRACTICE": {
+          "objectives": {
+            "OBJ_COMPLETE_FIRST_SESSION": {
+              "required": true,
+              "on_complete": {
+                "next_stage": "STAGE_COMPLETE"
+              }
+            }
+          }
+        },
+        "STAGE_COMPLETE": {
+          "terminal": true,
+          "terminal_status": "completed",
+          "objectives": {}
+        }
+      }
     }
   },
   "scenes": {
@@ -728,18 +758,125 @@
       ]
     },
     "OPENING_END": {
-      "title": "End of Vertical Slice",
-      "body": "The opening establishes a persistent route, relationship state, private-information state, quest history, and party composition for the next content block.",
+      "title": "Gate Twelve: The First Echo",
+      "body": "The relay case has brought you to the threshold of something the municipal records do not explain. Your route, party composition, Tamsin's knowledge, and the choices that got you here remain persistent.",
       "choices": [
         {
-          "id": "END_VERTICAL_SLICE",
-          "text": "End the prototype slice.",
+          "id": "CONTINUE_BELOW_GATE_TWELVE",
+          "text": "Continue below Gate Twelve.",
           "outcomes": {
             "default": {
               "effects": [
                 {
                   "type": "set_flag",
-                  "key": "vertical_slice_01.complete",
+                  "key": "vertical_slice_01.opening_complete",
+                  "value": true
+                },
+                {
+                  "type": "quest_start",
+                  "quest_id": "QUEST_GATE_TWELVE_ECHO"
+                }
+              ],
+              "next_scene": "POWER_GATE_TWELVE_SIGNAL"
+            }
+          }
+        }
+      ]
+    },
+    "POWER_GATE_TWELVE_SIGNAL": {
+      "title": "A Signal With No Receiver",
+      "body": "Below Gate Twelve, the dead relay begins to pulse against your palm. Tamsin's diagnostic reader sees no carrier frequency. You do. The sensation is not a voice or a message; it is a spatial afterimage, as if recent energy use has left a pressure pattern in the metal around you.",
+      "choices": [
+        {
+          "id": "FOLLOW_TRACE_ECHO",
+          "text": "Focus on the afterimage instead of forcing it to make sense.",
+          "time_cost_minutes": 5,
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "ability_discover",
+                  "ability_id": "ABILITY_TRACE_ECHO",
+                  "family": "sensory_resonance",
+                  "form": "latent_trace",
+                  "tags": [
+                    "sensory",
+                    "noncombat",
+                    "signal"
+                  ],
+                  "data": {
+                    "description": "Perceives residual patterns left by recent energy or signal activity.",
+                    "canon_status": "provisional"
+                  }
+                },
+                {
+                  "type": "technique_discover",
+                  "ability_id": "ABILITY_TRACE_ECHO",
+                  "technique_id": "TECHNIQUE_SIGNAL_PULSE"
+                },
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_TRACE_ECHO_IS_PERSONAL_PERCEPTION",
+                  "source": "POWER_GATE_TWELVE_SIGNAL",
+                  "confidence": 0.7,
+                  "private": true
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_GATE_TWELVE_ECHO",
+                  "objective_id": "OBJ_FOLLOW_ECHO"
+                }
+              ],
+              "next_scene": "POWER_FIRST_PRACTICE"
+            }
+          }
+        }
+      ]
+    },
+    "POWER_FIRST_PRACTICE": {
+      "title": "One Hour, No Shortcut",
+      "body": "The first impression is not control. When you try to reproduce the sensation deliberately, it slips away. The only useful option is practice: repeat the same narrow exercise, stop when your focus drops, and record what changes.",
+      "choices": [
+        {
+          "id": "PRACTICE_SIGNAL_PULSE_ONE_HOUR",
+          "text": "Spend one hour practicing the same narrow pulse-sensing exercise.",
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "technique_practice",
+                  "ability_id": "ABILITY_TRACE_ECHO",
+                  "technique_id": "TECHNIQUE_SIGNAL_PULSE",
+                  "minutes": 60,
+                  "intensity": 1,
+                  "stamina_per_hour": 4,
+                  "focus_per_hour": 6
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_GATE_TWELVE_ECHO",
+                  "objective_id": "OBJ_COMPLETE_FIRST_SESSION"
+                }
+              ],
+              "next_scene": "POWER_FIRST_PRACTICE_RESULT"
+            }
+          }
+        }
+      ]
+    },
+    "POWER_FIRST_PRACTICE_RESULT": {
+      "title": "Still Unstable",
+      "body": "After an hour, you can sometimes recognize the beginning of the pattern before it fades. That is progress, not mastery. The technique remains at its earliest stage, and further improvement will require more time, recovery, experimentation, and eventually real use.",
+      "choices": [
+        {
+          "id": "END_FIRST_POWER_SESSION",
+          "text": "Record what you learned and stop for now.",
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "vertical_slice_01.power_session_complete",
                   "value": true
                 }
               ]
