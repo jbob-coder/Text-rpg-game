@@ -665,6 +665,7 @@ class RulesEngine:
                     minutes=int(effect["minutes"]),
                     intensity=float(effect.get("intensity", 1.0)),
                     mentor_bonus=float(effect.get("mentor_bonus", 0.0)),
+                    set_definitions=self.equipment_sets,
                 )
             elif kind == "recover_resources":
                 from .simulation import recover
@@ -673,6 +674,7 @@ class RulesEngine:
                     state,
                     int(effect["minutes"]),
                     quality=float(effect.get("quality", 1.0)),
+                    set_definitions=self.equipment_sets,
                 )
             else:
                 raise RuleError(f"Unknown effect type: {kind}")
