@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from math import isfinite
-from typing import Any, Dict, Mapping
+from typing import Any, Dict, Mapping, MutableMapping
 
 from .core import GameState, RuleError
 from .modifiers import (
@@ -72,14 +72,31 @@ def equip_item(
     *,
     consume_inventory: bool = False,
 ) -> Dict[str, Any] | None:
+    if not isinstance(item, Mapping):
+        raise RuleError("Equipment item must be an object")
+    if not isinstance(state.equipment, MutableMapping):
+        raise RuleError("state.equipment must be mutable")
+    if not isinstance(consume_inventory, bool):
+        raise RuleError("consume_inventory must be boolean")
+
     item_id = item.get("item_id")
     slot = item.get("slot")
     if not isinstance(item_id, str) or not item_id:
         raise RuleError("Equipment item requires item_id")
     if slot not in DEFAULT_SLOTS:
         raise RuleError(f"Unsupported equipment slot: {slot}")
-    if consume_inventory and state.inventory.get(item_id, 0) < 1:
-        raise RuleError(f"Item not present in inventory: {item_id}")
+
+    inventory_quantity = None
+    if consume_inventory:
+        if not isinstance(state.inventory, MutableMapping):
+            raise RuleError("state.inventory must be mutable")
+        inventory_quantity = state.inventory.get(item_id, 0)
+        if (
+            isinstance(inventory_quantity, bool)
+            or not isinstance(inventory_quantity, int)
+            or inventory_quantity < 1
+        ):
+            raise RuleError(f"Item not present in inventory: {item_id}")
 
     try:
         modifiers = validate_modifier_mapping(
@@ -97,12 +114,42 @@ def equip_item(
     )
     attrs = state.player.get("attributes", {})
     skills = state.player.get("skills", {})
+    if not isinstance(attrs, Mapping):
+        raise RuleError("player.attributes must be an object")
+    if not isinstance(skills, Mapping):
+        raise RuleError("player.skills must be an object")
+
     for key, minimum in attr_requirements.items():
-        if float(attrs.get(key, 0)) < minimum:
+        current = attrs.get(key, 0)
+        if (
+            isinstance(current, bool)
+            or not isinstance(current, (int, float))
+            or not isfinite(float(current))
+        ):
+            raise RuleError(f"Equipment attribute state must be finite numeric: {key}")
+        if float(current) < minimum:
             raise RuleError(f"Attribute requirement not met: {key} >= {minimum}")
     for key, minimum in skill_requirements.items():
-        if float(skills.get(key, 0)) < minimum:
+        current = skills.get(key, 0)
+        if (
+            isinstance(current, bool)
+            or not isinstance(current, (int, float))
+            or not isfinite(float(current))
+        ):
+            raise RuleError(f"Equipment skill state must be finite numeric: {key}")
+        if float(current) < minimum:
             raise RuleError(f"Skill requirement not met: {key} >= {minimum}")
+
+    tags = item.get("tags", [])
+    passive_perks = item.get("passive_perks", [])
+    if not isinstance(tags, list) or not all(isinstance(tag, str) and tag for tag in tags):
+        raise RuleError(f"Equipment tags must be a list of non-empty strings: {item_id}")
+    if not isinstance(passive_perks, list) or not all(
+        isinstance(perk_id, str) and perk_id for perk_id in passive_perks
+    ):
+        raise RuleError(
+            f"Equipment passive_perks must be a list of non-empty strings: {item_id}"
+        )
 
     previous = state.equipment.get(slot)
     state.equipment[slot] = {
@@ -110,14 +157,16 @@ def equip_item(
         "slot": slot,
         "quality": item.get("quality", "standard"),
         "modifiers": modifiers,
-        "tags": list(item.get("tags", [])),
+        "tags": list(tags),
         "set_id": item.get("set_id"),
         "active_ability": item.get("active_ability"),
-        "passive_perks": list(item.get("passive_perks", [])),
+        "passive_perks": list(passive_perks),
         "source": item.get("source", "unknown"),
     }
     if consume_inventory:
-        state.inventory[item_id] -= 1
-        if state.inventory[item_id] <= 0:
+        remaining = int(inventory_quantity) - 1
+        if remaining <= 0:
             del state.inventory[item_id]
+        else:
+            state.inventory[item_id] = remaining
     return previous
