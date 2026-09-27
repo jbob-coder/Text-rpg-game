@@ -144,6 +144,7 @@ class RulesEngine:
         *,
         equipment_sets: Optional[Mapping[str, Mapping[str, Any]]] = None,
         quest_definitions: Optional[Mapping[str, Mapping[str, Any]]] = None,
+        power_definitions: Optional[Mapping[str, Mapping[str, Any]]] = None,
         set_definitions: Optional[Mapping[str, Mapping[str, Any]]] = None,
     ):
         self.scenes = dict(scenes)
@@ -158,6 +159,15 @@ class RulesEngine:
             raise RuleError(f"Invalid equipment-set definitions: {exc}") from exc
         self.set_definitions = self.equipment_sets
         self.quest_definitions = dict(quest_definitions or {})
+        self.power_definitions = dict(power_definitions or {})
+        if self.power_definitions:
+            from .powers import validate_power_definitions
+
+            power_errors = validate_power_definitions(self.power_definitions)
+            if power_errors:
+                raise RuleError(
+                    "Invalid power definitions:\n- " + "\n- ".join(power_errors)
+                )
 
     def get_scene(self, state: GameState) -> Dict[str, Any]:
         try:
@@ -527,13 +537,25 @@ class RulesEngine:
             elif kind == "ability_discover":
                 from .powers import discover_ability
 
+                ability_id = effect["ability_id"]
+                definition = self.power_definitions.get(ability_id)
                 discover_ability(
                     state,
-                    effect["ability_id"],
-                    family=effect.get("family", "unknown"),
-                    form=effect.get("form"),
-                    tags=effect.get("tags", ()),
+                    ability_id,
+                    family=effect.get(
+                        "family",
+                        definition.get("family", "unknown") if definition else "unknown",
+                    ),
+                    form=effect.get(
+                        "form",
+                        definition.get("form") if definition else None,
+                    ),
+                    tags=effect.get(
+                        "tags",
+                        definition.get("tags", ()) if definition else (),
+                    ),
                     data=effect.get("data"),
+                    definition=definition,
                 )
             elif kind == "technique_discover":
                 from .powers import discover_technique
@@ -555,6 +577,45 @@ class RulesEngine:
                     mentor_bonus=float(effect.get("mentor_bonus", 0.0)),
                     stamina_per_hour=float(effect.get("stamina_per_hour", 4.0)),
                     focus_per_hour=float(effect.get("focus_per_hour", 6.0)),
+                )
+            elif kind == "technique_use":
+                from .powers import use_technique
+
+                ability_id = effect["ability_id"]
+                technique_id = effect["technique_id"]
+                definition = self.power_definitions.get(ability_id)
+                if definition is None:
+                    raise RuleError(f"Unknown power definition: {ability_id}")
+                techniques = definition.get("techniques", {})
+                if not isinstance(techniques, Mapping):
+                    raise RuleError(
+                        f"Power techniques definition must be an object: {ability_id}"
+                    )
+                technique_definition = techniques.get(technique_id)
+                if not isinstance(technique_definition, Mapping):
+                    raise RuleError(
+                        f"Unknown technique definition: {ability_id}/{technique_id}"
+                    )
+                use_technique(
+                    state,
+                    ability_id,
+                    technique_id,
+                    technique_definition,
+                    equipment_sets=self.equipment_sets,
+                )
+            elif kind == "power_recover":
+                from .powers import recover_power_resource
+
+                ability_id = effect["ability_id"]
+                definition = self.power_definitions.get(ability_id)
+                if definition is None:
+                    raise RuleError(f"Unknown power definition: {ability_id}")
+                recover_power_resource(
+                    state,
+                    ability_id,
+                    definition,
+                    minutes=int(effect["minutes"]),
+                    quality=float(effect.get("quality", 1.0)),
                 )
             else:
                 raise RuleError(f"Unknown effect type: {kind}")
