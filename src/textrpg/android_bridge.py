@@ -232,6 +232,31 @@ class AndroidGameSession:
                     if isinstance(location_id, str) and location_id:
                         discovered.add(location_id)
 
+        for location_id, node in raw_nodes.items():
+            if not isinstance(location_id, str) or not isinstance(node, Mapping):
+                continue
+            discover_flag = node.get("discover_flag")
+            if (
+                isinstance(discover_flag, str)
+                and discover_flag
+                and state.flags.get(discover_flag) is True
+            ):
+                discovered.add(location_id)
+
+        current_location = self._location_for(state)
+
+        def is_reachable(location_id: str) -> bool:
+            if location_id == current_location:
+                return True
+            for edge in raw_edges:
+                if not isinstance(edge, Mapping):
+                    continue
+                start = edge.get("from")
+                end = edge.get("to")
+                if {start, end} == {current_location, location_id}:
+                    return start in discovered and end in discovered
+            return False
+
         nodes: list[Dict[str, Any]] = []
         for location_id, node in raw_nodes.items():
             if location_id not in discovered or not isinstance(location_id, str) or not isinstance(node, Mapping):
@@ -253,7 +278,8 @@ class AndroidGameSession:
                     else "",
                     "x": float(x),
                     "y": float(y),
-                    "current": location_id == self._location_for(state),
+                    "current": location_id == current_location,
+                    "reachable": is_reachable(location_id),
                 }
             )
 
@@ -356,6 +382,12 @@ class AndroidGameSession:
         current = self._location_for(self.state)
         if current == location_id:
             return self.scene_view()
+        target_node = raw_nodes.get(location_id, {})
+        if not isinstance(target_node, Mapping):
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "Travel data for that destination is invalid.",
+            )
 
         visible_map = self._map_view_for(self.state)
         discovered = {
@@ -401,7 +433,20 @@ class AndroidGameSession:
             from .simulation import advance_time
 
             advance_time(self.state, travel_minutes)
-            self.state.flags["android.map_location_override"] = location_id
+            target_scene = target_node.get("scene_id")
+            if target_scene is not None:
+                if (
+                    not isinstance(target_scene, str)
+                    or not target_scene
+                    or target_scene not in self.engine.scenes
+                ):
+                    raise RuleError(
+                        f"Map destination references invalid scene: {location_id}"
+                    )
+                self.state.scene_id = target_scene
+                self.state.flags.pop("android.map_location_override", None)
+            else:
+                self.state.flags["android.map_location_override"] = location_id
             self.state.history.append(
                 {
                     "type": "map_travel",

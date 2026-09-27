@@ -803,12 +803,20 @@ private fun MapSection(
                     }
                     if (!selected.current) {
                         Spacer(Modifier.height(8.dp))
-                        PixelTextButton(
-                            label = if (busy) "TRAVELING..." else "TRAVEL HERE",
-                            onClick = {
-                                if (!busy) onTravel(selected.id)
-                            },
-                        )
+                        if (selected.reachable) {
+                            PixelTextButton(
+                                label = if (busy) "TRAVELING..." else "TRAVEL HERE",
+                                onClick = {
+                                    if (!busy) onTravel(selected.id)
+                                },
+                            )
+                        } else {
+                            Text(
+                                text = "NO DIRECT ROUTE FROM CURRENT LOCATION",
+                                color = PixelColors.Disabled,
+                                style = MaterialTheme.typography.labelLarge,
+                            )
+                        }
                     }
                 }
             }

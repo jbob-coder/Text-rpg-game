@@ -227,3 +227,49 @@ class AndroidBridgeTests(unittest.TestCase):
             if item["slot"] == slot
         )
         self.assertFalse(empty_slot["equipped"])
+
+
+    def test_free_roam_nodes_unlock_and_travel_changes_scene(self):
+        session = create_session(CONTENT)
+        session.state.scene_id = "DISTRICT_HUB"
+        session.state.flags["world.free_roam_unlocked"] = True
+
+        before = session.scene_view()
+        nodes = {node["id"]: node for node in before["map"]["nodes"]}
+
+        self.assertEqual("DISTRICT_PLAZA", before["map"]["current_location"])
+        self.assertTrue(nodes["DISTRICT_ARCHIVE"]["reachable"])
+        self.assertTrue(nodes["WORKSHOP_ROW"]["reachable"])
+
+        after = session.travel("DISTRICT_ARCHIVE")
+
+        self.assertEqual("DISTRICT_ARCHIVE", session.state.scene_id)
+        self.assertEqual("DISTRICT_ARCHIVE", after["map"]["current_location"])
+        self.assertEqual("The Municipal Archive", after["scene"]["title"])
+
+    def test_archive_lore_choice_changes_narrative_state_without_stat_reward(self):
+        session = create_session(CONTENT)
+        session.state.scene_id = "DISTRICT_ARCHIVE"
+        session.state.flags["world.free_roam_unlocked"] = True
+        attributes_before = deepcopy(session.state.player.get("attributes", {}))
+
+        view = session.choose("READ_PLATFORM_NINE_RECORDS")
+
+        self.assertIn("KNOW_PLATFORM_NINE_EVAC_PROTOCOL", session.state.knowledge)
+        self.assertEqual(attributes_before, session.state.player.get("attributes", {}))
+        lore = next(
+            quest for quest in view["quests"]
+            if quest["id"] == "QUEST_PLATFORM_NINE_RECORDS"
+        )
+        self.assertEqual("lore", lore["category"])
+        self.assertEqual("completed", lore["status"])
+
+    def test_directional_branch_continues_into_free_roam_hub(self):
+        session = create_session(CONTENT)
+        session.state.scene_id = "TRACE_DIRECTIONAL_SESSION_END"
+
+        view = session.choose("END_DIRECTIONAL_TRACE_PROTOTYPE")
+
+        self.assertEqual("DISTRICT_HUB", session.state.scene_id)
+        self.assertTrue(session.state.flags["world.free_roam_unlocked"])
+        self.assertEqual("DISTRICT_PLAZA", view["map"]["current_location"])
