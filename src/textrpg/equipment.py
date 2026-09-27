@@ -61,6 +61,9 @@ DEFAULT_SLOTS = (
     "feet",
     "main_hand",
     "off_hand",
+    "ring_1",
+    "ring_2",
+    "neck",
     "accessory_1",
     "accessory_2",
 )
