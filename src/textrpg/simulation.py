@@ -77,12 +77,15 @@ def apply_condition(
     return record
 
 
-def advance_time(state: GameState, minutes: int) -> list[str]:
-    """Advance world time atomically after validating all timed conditions."""
+def _time_advance_plan(
+    state: GameState,
+    minutes: int,
+) -> tuple[int, dict[str, Any], bool, Dict[str, int], list[str]]:
     minutes = _minutes(minutes, "Time advance minutes", minimum=0)
 
     existing_conditions = state.player.get("conditions")
-    if existing_conditions is None:
+    created_conditions = existing_conditions is None
+    if created_conditions:
         conditions: dict[str, Any] = {}
     elif not isinstance(existing_conditions, dict):
         raise RuleError("player.conditions must be an object")
@@ -92,6 +95,8 @@ def advance_time(state: GameState, minutes: int) -> list[str]:
     duration_updates: Dict[str, int] = {}
     expired: list[str] = []
     for condition_id, record in conditions.items():
+        if not isinstance(condition_id, str) or not condition_id:
+            raise RuleError("Condition IDs must be non-empty strings")
         if not isinstance(record, Mapping):
             raise RuleError(f"Condition record must be an object: {condition_id}")
         duration = record.get("duration_minutes")
@@ -113,9 +118,26 @@ def advance_time(state: GameState, minutes: int) -> list[str]:
         else:
             duration_updates[condition_id] = next_duration
 
-    # Validation is complete. Commit time and condition-duration changes together.
+    return minutes, conditions, created_conditions, duration_updates, expired
+
+
+def validate_time_advance(state: GameState, minutes: int) -> None:
+    """Validate that advancing time can commit without mutating state."""
+    _time_advance_plan(state, minutes)
+
+
+def advance_time(state: GameState, minutes: int) -> list[str]:
+    """Advance world time atomically after validating all timed conditions."""
+    (
+        minutes,
+        conditions,
+        created_conditions,
+        duration_updates,
+        expired,
+    ) = _time_advance_plan(state, minutes)
+
     state.time_minutes += minutes
-    if existing_conditions is None:
+    if created_conditions:
         state.player["conditions"] = conditions
 
     for condition_id, next_duration in duration_updates.items():
@@ -136,6 +158,7 @@ def recover(
 ) -> Dict[str, float]:
     minutes = _minutes(minutes, "Recovery minutes", minimum=0)
     quality = _finite(quality, "Recovery quality", minimum=0.0)
+    validate_time_advance(state, minutes)
     maxima = initialize_resources(state, set_definitions=set_definitions)
     resources = state.player["resources"]
     hours = minutes / 60.0
@@ -170,6 +193,9 @@ def train(
         maximum=2.0,
     )
     mentor_bonus = _finite(mentor_bonus, "Mentor bonus", minimum=0.0)
+    validate_time_advance(state, minutes)
+    if not isinstance(state.history, list):
+        raise RuleError("state.history must be a list")
 
     initialize_resources(state, set_definitions=set_definitions)
     resources = state.player["resources"]
@@ -218,6 +244,9 @@ def train_attribute(
         minimum=0.0000001,
         maximum=2.0,
     )
+    validate_time_advance(state, minutes)
+    if not isinstance(state.history, list):
+        raise RuleError("state.history must be a list")
     current = float(state.player.setdefault("attributes", {}).get(attribute, 0))
     gain = (minutes / 60.0) * 0.08 * intensity * max(0.15, 1.0 - current / 110.0)
     after = min(100.0, current + gain)
