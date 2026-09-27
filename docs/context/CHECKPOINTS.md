@@ -1939,3 +1939,59 @@ This is not an executed pass count.
 ### NEXT_ACTION
 
 Continue only targeted integrity review for concrete defects while exact runtime remains unavailable. Exact V6 execution remains the required promotion gate.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-VALIDATOR-HARNESS-24
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after this pass: `7718cd422d69eb4515dfa5beb7dd4ab117c1c6fe`
+
+### ISSUES FOUND
+
+[VERIFIED STATIC] Public static validators still had malformed-root paths that could raise implementation exceptions instead of returning validation errors.
+
+[VERIFIED STATIC] `validate_content_pack()` used falsey coercion for quest/power definitions, allowing invalid roots such as `[]` to be silently treated as empty mappings.
+
+[VERIFIED STATIC] Registry cross-reference traversal assumed structurally valid nested scene/power nodes even after the main validators had already reported those nodes as malformed.
+
+[VERIFIED STATIC] `tests/test_validation.py` referenced `validate_registries()` without importing it.
+
+### FIXES
+
+[IMPLEMENTED]
+- non-mapping scene roots now return a validation error;
+- non-mapping quest roots now return a validation error;
+- non-mapping character-visual roots now return a validation error;
+- invalid falsey quest/power roots are preserved and reported instead of coerced;
+- registry cross-reference traversal now skips malformed nested nodes safely;
+- the missing `validate_registries` test import is fixed.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added 5 regression methods covering:
+- malformed scene root;
+- falsey invalid quest/power roots;
+- malformed quest root;
+- malformed nested registry cross-reference traversal;
+- malformed character-visual root.
+
+[VERIFIED STATIC] V6 now contains **251 authored test methods across 17 test files**.
+
+This is not an executed pass count.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 suite execution remains pending.
+
+### SCOPE CONTROL
+
+[DECISION] No feature expansion, no stat-schema migration, no V5/Foundation mutation, and no context-branch consolidation were performed.
+
+### NEXT_ACTION
+
+Continue only focused integrity review for concrete defects while exact runtime remains unavailable. Exact V6 execution remains the promotion gate.
