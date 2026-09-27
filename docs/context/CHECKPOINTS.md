@@ -2114,3 +2114,72 @@ This is not an executed pass count.
 ### NEXT_ACTION
 
 Continue evidence-driven Stage 3 integrity review without user-dependent manual QA. Exact free/local runtime execution remains the promotion gate.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-PERSISTENCE-QUEST-BOUNDARY-27
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after implementation/docs in this pass: `7f5f104fb839068bdfaf5cec72f37129ae20d463`
+
+### USER DIRECTION
+
+[DIRECTION] The user reconfirmed that they will not perform intermediate game testing.
+
+[DECISION] Continue development without making the user an ongoing QA dependency. Ask for user testing only at the final acceptance/release-candidate stage defined in `FINAL_ACCEPTANCE_AND_TESTING_POLICY.md`.
+
+### REPOSITORY DRIFT CORRECTION
+
+[VERIFIED] The user-supplied status referenced V6 `7718cd422d69eb4515dfa5beb7dd4ab117c1c6fe` and 251 authored tests, but a fresh repository read showed that V6 had already advanced independently to `280f99c940235cc7284006d7e5b1f76c554fb8f3` with 255 authored tests before this pass began.
+
+[DECISION] Current repository state, not stale conversation state, remained authoritative. Work continued from the actual V6 head.
+
+### ISSUES FOUND
+
+[VERIFIED STATIC] Persistence used Python's permissive JSON defaults. Non-standard `NaN`/`Infinity` values could be emitted or accepted even though the save boundary is documented as JSON, and nested non-JSON values could leak raw serialization exceptions.
+
+[VERIFIED STATIC] `validate_quest_definitions()` iterated `requires_objectives` without validating its container shape and did not enforce a boolean `required` field. Malformed authored quest metadata could therefore raise an implementation exception instead of returning validation errors.
+
+### FIXES
+
+[IMPLEMENTED]
+- persistence serialization now uses strict finite JSON with `allow_nan=False`;
+- load parsing rejects non-finite JSON constants;
+- persistence serialization failures are wrapped as `RuleError`;
+- quest objectives require boolean `required` metadata;
+- `requires_objectives` must be a list and each prerequisite is validated as a stable ID before cross-reference checks.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added 3 regression methods covering:
+- non-finite JSON values at load/dump boundaries;
+- non-JSON-serializable nested runtime values;
+- malformed quest objective metadata without validator crashes.
+
+[VERIFIED STATIC] V6 now contains **258 authored test methods across 17 test files**.
+
+This is not an executed pass count.
+
+### RUNTIME STATUS
+
+[UNKNOWN] The exact full runtime suite has not yet executed on `7f5f104fb839068bdfaf5cec72f37129ae20d463`.
+
+[DECISION] Stage 3 remains open. No green, merge-ready, complete, or Stage 4 promotion claim is permitted yet.
+
+### PROTECTED BRANCHES
+
+[VERIFIED] `foundation/text-rpg-systems` remains at `b3340bc38e63e916c6cc7a8538ed1e8a34011112`.
+
+[VERIFIED] `integration/rules-ability-v5` remains at `fd36b9f1d14528f3dc5eb37e20e9120af25af036`.
+
+### TESTS RUN
+
+None. Only static/source verification and authored regression additions were possible in this pass.
+
+### NEXT_ACTION
+
+Continue targeted Stage 3 integrity review for concrete defects while preserving the runtime gate. Prefer free/local exact execution when a runtime becomes available. Do not ask the user to test intermediate builds.
