@@ -113,6 +113,11 @@ class ActivityBootSmokeTest {
         composeRule.onNodeWithTag("cheat-input").performTextInput("DISTRICT")
         waitForClickableText("APPLY CHEAT")
         composeRule.onNodeWithText("APPLY CHEAT").performClick()
+
+        // Cheat execution crosses Kotlin -> Chaquopy -> Python on background I/O.
+        // Wait for the player-safe snapshot to report the new authoritative scene
+        // before closing Settings, rather than racing the async bridge.
+        waitForText("DISTRICT_HUB", timeoutMillis = 60_000)
         composeRule.onNodeWithText("CLOSE").performClick()
 
         waitForText("The District Opens Up", timeoutMillis = 60_000)

@@ -79,6 +79,7 @@ fun PlayerAvatarPanel(
     identity: GameIdentity,
     equipment: List<GameEquipmentSlot> = emptyList(),
     modifier: Modifier = Modifier,
+    compact: Boolean = false,
 ) {
     val equippedSlots = equipment
         .filter { it.equipped }
@@ -88,12 +89,21 @@ fun PlayerAvatarPanel(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(0.82f)
+                .then(
+                    if (compact) Modifier.height(150.dp)
+                    else Modifier.aspectRatio(0.82f)
+                )
                 .background(PixelColors.Deep)
                 .border(2.dp, PixelColors.Cyan),
             contentAlignment = Alignment.Center,
         ) {
-            Canvas(modifier = Modifier.fillMaxWidth(0.78f).aspectRatio(0.62f)) {
+            Canvas(
+                modifier = if (compact) {
+                    Modifier.height(134.dp).aspectRatio(0.62f)
+                } else {
+                    Modifier.fillMaxWidth(0.78f).aspectRatio(0.62f)
+                }
+            ) {
                 val px = minOf(size.width / 18f, size.height / 30f)
                 fun block(x: Int, y: Int, w: Int, h: Int, color: Color) {
                     drawRect(color, Offset(x * px, y * px), Size(w * px, h * px))

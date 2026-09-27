@@ -327,6 +327,7 @@ private fun StorySection(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(0.42f),
+                    compact = true,
                 )
                 NarrativePanel(
                     snapshot = snapshot,
