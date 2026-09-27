@@ -101,5 +101,13 @@ class StatsTests(unittest.TestCase):
         maxima = initialize_resources(state, equipment_sets=sets)
         self.assertEqual(maxima["health"], values["max_health"])
 
+    def test_non_finite_player_stats_are_reported(self):
+        state = self.state()
+        state.player["attributes"]["might"] = float("nan")
+        state.player["skills"]["athletics"] = float("inf")
+        errors = validate_player_stats(state)
+        self.assertTrue(any("attribute might must be finite numeric" in e for e in errors))
+        self.assertTrue(any("skill athletics must be finite numeric" in e for e in errors))
+
 if __name__ == "__main__":
     unittest.main()
