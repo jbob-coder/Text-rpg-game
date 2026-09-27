@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass, field
 from hashlib import sha256
 from math import isfinite
@@ -101,6 +102,12 @@ class GameState:
         }
 
 
+def _restore_snapshot(state: GameState, snapshot: Mapping[str, Any]) -> None:
+    """Restore a deep-copied GameState snapshot after a failed transaction."""
+    for key, value in snapshot.items():
+        setattr(state, key, value)
+
+
 def effective_player_value(
     state: GameState,
     path: str,
@@ -187,6 +194,8 @@ class RulesEngine:
         outcome = choice.get("outcomes", {}).get(result_key)
         if outcome is None:
             outcome = choice.get("outcomes", {}).get("default", {})
+        if not isinstance(outcome, Mapping):
+            raise RuleError(f"Choice outcome must be an object: {choice_id}:{result_key}")
 
         time_cost = choice.get("time_cost_minutes", 0)
         if isinstance(time_cost, bool) or not isinstance(time_cost, int) or time_cost < 0:
@@ -194,31 +203,51 @@ class RulesEngine:
                 f"Choice time cost must be a non-negative integer: {choice_id}"
             )
 
-        before_scene = state.scene_id
-        self._apply_effects(state, outcome.get("effects", []))
-        if time_cost:
-            from .simulation import advance_time
-
-            advance_time(state, time_cost)
-        state.turn += 1
-
         next_scene = outcome.get("next_scene", choice.get("next_scene"))
-        if next_scene:
+        if next_scene is not None:
+            if not isinstance(next_scene, str) or not next_scene:
+                raise RuleError(f"Choice next_scene must be a non-empty string: {choice_id}")
             if next_scene not in self.scenes:
                 raise RuleError(f"Outcome points to unknown scene: {next_scene}")
-            state.scene_id = next_scene
 
-        event = {
-            "turn": state.turn,
-            "scene": before_scene,
-            "choice": choice_id,
-            "check": check_result,
-            "outcome": result_key,
-            "next_scene": state.scene_id,
-            "time_minutes": state.time_minutes,
-        }
-        state.history.append(event)
-        return event
+        if isinstance(state.turn, bool) or not isinstance(state.turn, int) or state.turn < 0:
+            raise RuleError("state.turn must be a non-negative integer")
+        if not isinstance(state.history, list):
+            raise RuleError("state.history must be a list")
+
+        if time_cost:
+            from .simulation import validate_time_advance
+
+            validate_time_advance(state, time_cost)
+
+        before_scene = state.scene_id
+        snapshot = deepcopy(state.snapshot())
+
+        try:
+            self._apply_effects(state, outcome.get("effects", []))
+            if time_cost:
+                from .simulation import advance_time
+
+                advance_time(state, time_cost)
+
+            state.turn += 1
+            if next_scene is not None:
+                state.scene_id = next_scene
+
+            event = {
+                "turn": state.turn,
+                "scene": before_scene,
+                "choice": choice_id,
+                "check": check_result,
+                "outcome": result_key,
+                "next_scene": state.scene_id,
+                "time_minutes": state.time_minutes,
+            }
+            state.history.append(event)
+            return event
+        except Exception:
+            _restore_snapshot(state, snapshot)
+            raise
 
     def _conditions_met(self, state: GameState, conditions: List[Dict[str, Any]]) -> bool:
         for condition in conditions:
