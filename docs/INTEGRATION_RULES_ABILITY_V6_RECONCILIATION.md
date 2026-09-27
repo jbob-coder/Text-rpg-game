@@ -138,6 +138,31 @@ Observed:
 
 This static audit does not replace execution of the Python validator/tests.
 
+
+## Additional integration defect found during static plumbing review
+
+After the initial reconciliation, a cross-system context propagation defect was found in `RulesEngine._apply_effects()`.
+
+The authored effects:
+- `skill_train`
+- `recover_resources`
+
+called `simulation.train()` / `simulation.recover()` without forwarding the engine's resolved equipment-set definitions.
+
+Those simulation functions already accept `set_definitions` and use it when recalculating resource maxima. Omitting the context meant an authored scene-driven training/recovery action could calculate different Health/Stamina/Focus/Resolve maxima from the rest of the same RulesEngine when active set bonuses modified derived resource maxima.
+
+V6 now forwards:
+
+`set_definitions=self.equipment_sets`
+
+for both authored effect paths.
+
+A regression test was added that equips two pieces of a set with direct `derived.max_stamina` and `derived.max_focus` bonuses, executes authored training and recovery choices, and verifies the resource maxima continue to match the set-aware derived values.
+
+This changes the static authored-test count from 200 to **201**.
+
+Runtime execution is still pending; this is a source-level fix plus authored regression, not a pass claim.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
