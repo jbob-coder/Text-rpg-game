@@ -452,5 +452,55 @@ class PowerRuntimeTests(unittest.TestCase):
         errors = validate_technique_definition(invalid)
         self.assertTrue(any("must be an integer" in error for error in errors))
 
+    def test_player_view_rejects_unsafe_resource_projection_paths(self):
+        state = self.state()
+        definition = {
+            "resource": {
+                "label": "Bad",
+                "current_path": "attributes.will",
+            }
+        }
+        with self.assertRaises(RuleError):
+            ability_player_view(state, "ABILITY_FLUX", definition)
+
+    def test_player_view_rejects_non_string_known_requirements(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["evolution_visibility"] = {
+            "EVOLUTION_BAD": {
+                "state": "known",
+                "known_requirements": [{"hidden": "raw-data"}],
+            }
+        }
+        with self.assertRaises(RuleError):
+            ability_player_view(
+                state,
+                "ABILITY_FLUX",
+                {"evolutions": {"EVOLUTION_BAD": {"name": "Bad"}}},
+            )
+
+    def test_player_view_rejects_non_finite_or_invalid_projection_state(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["control"] = float("nan")
+        with self.assertRaises(RuleError):
+            ability_player_view(state, "ABILITY_FLUX")
+
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["uses"] = True
+        with self.assertRaises(RuleError):
+            ability_player_view(state, "ABILITY_FLUX")
+
+        state = self.state()
+        state.player["power_resources"]["flux"] = float("inf")
+        with self.assertRaises(RuleError):
+            ability_player_view(
+                state,
+                "ABILITY_FLUX",
+                {
+                    "resource": {
+                        "current_path": "power_resources.flux",
+                    }
+                },
+            )
+
 if __name__ == "__main__":
     unittest.main()
