@@ -1766,3 +1766,64 @@ This is not an executed pass count.
 ### NEXT_ACTION
 
 Continue only targeted integrity/disclosure review for concrete defects. Exact V6 runtime execution remains the required promotion gate.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-SOCIAL-NUMERIC-METADATA-21
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after this pass: `ddcd356d62a18ccb9a8316520f758ab7c5c0fde4`
+
+### ISSUES FOUND
+
+[VERIFIED STATIC] Social APIs still accepted some invalid numeric/metadata values that could persist non-finite state or fail late after partial setup.
+
+Examples:
+- NaN/Infinity confidence or personality values;
+- boolean/invalid secrecy values;
+- non-finite relationship deltas/current values;
+- fractional priority or non-finite goal progress;
+- malformed transition data/allowed-from values;
+- malformed leak recipient collections and target IDs;
+- corrupt nested NPC containers encountered by `ensure_npc()`.
+
+### FIXES
+
+[IMPLEMENTED]
+- added strict finite-number validation across social numeric boundaries;
+- hardened `ensure_npc()` structural preflight;
+- hardened memory/knowledge metadata;
+- hardened leak query/event inputs;
+- hardened relationship comparison/mutation inputs;
+- hardened goal creation/progress metadata;
+- hardened story-transition metadata before mutation.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added 6 regression methods covering:
+- non-finite knowledge confidence / boolean secrecy;
+- non-finite relationship mutation;
+- invalid goal numeric metadata;
+- invalid story transition data before NPC creation;
+- non-finite leak personality state;
+- malformed leak recipient collection.
+
+[VERIFIED STATIC] V6 now contains **235 authored test methods across 17 test files**.
+
+This is not an executed pass count.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 suite execution remains pending.
+
+### SCOPE CONTROL
+
+[DECISION] No feature expansion, no stat-schema migration, no V5/Foundation mutation, and no context-branch consolidation were performed.
+
+### NEXT_ACTION
+
+Continue only targeted integrity review for concrete defects. Exact V6 runtime execution remains the required promotion gate.
