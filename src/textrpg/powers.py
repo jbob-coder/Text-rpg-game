@@ -65,6 +65,46 @@ def _numeric_player_path(state: GameState, path: str) -> float:
     return float(value)
 
 
+def discover_ability(
+    state: GameState,
+    ability_id: str,
+    *,
+    family: str = "unknown",
+    form: str | None = None,
+    tags: tuple[str, ...] | list[str] = (),
+    data: Mapping[str, Any] | None = None,
+) -> Dict[str, Any]:
+    """Create the persistent shell of an ability without granting mastery."""
+    is_new = ability_id not in state.abilities
+    ability = state.abilities.setdefault(
+        ability_id,
+        {
+            "rank": 0,
+            "mastery_xp": 0.0,
+            "mastery_stage": "discovered",
+            "techniques": {},
+        },
+    )
+    ability.setdefault("family", family)
+    ability.setdefault("form", form)
+    ability.setdefault("tags", list(tags))
+    ability.setdefault("data", dict(data or {}))
+    ability.setdefault("techniques", {})
+
+    if is_new:
+        state.history.append(
+            {
+                "type": "ability_discovered",
+                "ability_id": ability_id,
+                "family": ability.get("family"),
+                "form": ability.get("form"),
+                "turn": state.turn,
+                "time_minutes": state.time_minutes,
+            }
+        )
+    return ability
+
+
 def discover_technique(state: GameState, ability_id: str, technique_id: str) -> Dict[str, Any]:
     ability = state.abilities.get(ability_id)
     if not ability:
@@ -80,6 +120,15 @@ def discover_technique(state: GameState, ability_id: str, technique_id: str) -> 
         "discovered_at_minutes": state.time_minutes,
     }
     techniques[technique_id] = record
+    state.history.append(
+        {
+            "type": "technique_discovered",
+            "ability_id": ability_id,
+            "technique_id": technique_id,
+            "turn": state.turn,
+            "time_minutes": state.time_minutes,
+        }
+    )
     return record
 
 
