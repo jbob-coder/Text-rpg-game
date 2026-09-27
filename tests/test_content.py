@@ -47,5 +47,27 @@ class ContentPackTests(unittest.TestCase):
             content_pack_from_mapping(data)
 
 
+    def test_content_pack_loads_authored_power_definitions(self):
+        data = self.data()
+        data["powers"] = {
+            "ABILITY_TEST": {
+                "resource": {
+                    "path": "power_resources.test",
+                    "maximum": 5,
+                    "starting": 5,
+                    "recovery_per_hour": 1,
+                },
+                "techniques": {},
+            }
+        }
+        pack = content_pack_from_mapping(data)
+        self.assertIn("ABILITY_TEST", pack.engine.power_definitions)
+
+    def test_content_pack_rejects_non_mapping_powers(self):
+        data = self.data()
+        data["powers"] = []
+        with self.assertRaises(RuleError):
+            content_pack_from_mapping(data)
+
 if __name__ == "__main__":
     unittest.main()
