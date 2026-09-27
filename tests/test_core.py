@@ -444,5 +444,109 @@ class ExtendedStateTests(unittest.TestCase):
         self.assertEqual(state.time_minutes, 0)
         self.assertEqual(state.turn, 0)
 
+    def test_choice_rejects_unknown_next_scene_before_effect_mutation(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "BAD_NEXT",
+                    "text": "Invalid destination",
+                    "outcomes": {
+                        "default": {
+                            "effects": [{
+                                "type": "set_flag",
+                                "key": "SHOULD_ROLLBACK",
+                                "value": True,
+                            }],
+                            "next_scene": "MISSING_SCENE",
+                        }
+                    },
+                }]
+            }
+        })
+        state = GameState(seed="x", scene_id="A")
+        with self.assertRaises(RuleError):
+            engine.choose(state, "BAD_NEXT")
+        self.assertNotIn("SHOULD_ROLLBACK", state.flags)
+        self.assertEqual(state.scene_id, "A")
+        self.assertEqual(state.turn, 0)
+
+    def test_choice_preflights_invalid_time_state_before_effects(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "WAIT_BAD",
+                    "text": "Wait",
+                    "time_cost_minutes": 5,
+                    "outcomes": {
+                        "default": {
+                            "effects": [{
+                                "type": "set_flag",
+                                "key": "SHOULD_NOT_APPLY",
+                                "value": True,
+                            }]
+                        }
+                    },
+                }]
+            }
+        })
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            player={
+                "conditions": {
+                    "COND_CORRUPT": {
+                        "duration_minutes": True,
+                        "severity": 1,
+                        "source": "test",
+                        "tags": [],
+                        "modifiers": {},
+                    }
+                }
+            },
+        )
+        with self.assertRaises(RuleError):
+            engine.choose(state, "WAIT_BAD")
+        self.assertNotIn("SHOULD_NOT_APPLY", state.flags)
+        self.assertEqual(state.time_minutes, 0)
+        self.assertEqual(state.turn, 0)
+
+    def test_choice_rolls_back_prior_effects_when_later_effect_fails(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "TRANSACTION",
+                    "text": "Try an atomic sequence",
+                    "outcomes": {
+                        "default": {
+                            "effects": [
+                                {
+                                    "type": "set_flag",
+                                    "key": "FIRST_EFFECT",
+                                    "value": True,
+                                },
+                                {
+                                    "type": "technique_practice",
+                                    "ability_id": "ABILITY_MISSING",
+                                    "technique_id": "TECHNIQUE_MISSING",
+                                    "minutes": 60,
+                                },
+                            ]
+                        }
+                    },
+                }]
+            }
+        })
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            player={"resources": {"focus": 20.0, "stamina": 20.0}},
+        )
+        with self.assertRaises(RuleError):
+            engine.choose(state, "TRANSACTION")
+        self.assertNotIn("FIRST_EFFECT", state.flags)
+        self.assertEqual(state.turn, 0)
+        self.assertEqual(state.time_minutes, 0)
+        self.assertEqual(state.history, [])
+
 if __name__ == "__main__":
     unittest.main()
