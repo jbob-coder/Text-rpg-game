@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from math import isfinite
 from typing import Any, Dict, Mapping
 
 from .core import GameState, RuleError
@@ -37,8 +38,12 @@ def validate_player_stats(state: GameState) -> list[str]:
         if key not in ATTRIBUTE_SPECS:
             errors.append(f"unknown attribute: {key}")
             continue
-        if isinstance(value, bool) or not isinstance(value, (int, float)):
-            errors.append(f"attribute {key} must be numeric")
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not isfinite(float(value))
+        ):
+            errors.append(f"attribute {key} must be finite numeric")
             continue
         spec = ATTRIBUTE_SPECS[key]
         if value < spec["min"] or value > spec["max"]:
@@ -46,8 +51,14 @@ def validate_player_stats(state: GameState) -> list[str]:
     for key, value in skills.items():
         if key not in SKILL_CATALOG:
             errors.append(f"unknown skill: {key}")
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or value < 0 or value > 100:
-            errors.append(f"skill {key} must be numeric in range 0..100")
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not isfinite(float(value))
+            or value < 0
+            or value > 100
+        ):
+            errors.append(f"skill {key} must be finite numeric in range 0..100")
     return errors
 
 
