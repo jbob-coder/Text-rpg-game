@@ -19,19 +19,21 @@ A new chat working on this game should read, in order:
 1. `docs/context/README.md`
 2. `docs/context/CONTEXT_SYNC_PROTOCOL.md`
 3. `docs/context/GAME_DIRECTION_AND_UI.md`
-4. `docs/context/STAT_SCHEMA_EVALUATION.md`
-5. `docs/context/STAT_SCHEMA_MIGRATION_PLAN.md`
-6. `docs/context/STATUS_SCREEN_DATA_CONTRACT.md`
-6. `docs/context/ABILITY_PROGRESSION_CONTRACT.md`
-7. `docs/context/BRANCH_INTEGRATION_CONTRACT.md`
-8. `docs/context/FINAL_ACCEPTANCE_AND_TESTING_POLICY.md`
-9. `docs/context/CHECKPOINTS.md`
-10. `docs/context/DECISIONS.md`
-11. `docs/IMPLEMENTATION_STATUS.md`
-12. `docs/GAME_FOUNDATION.md`
-13. `docs/SYSTEMS_CATALOG.md`
-14. relevant entries under `docs/context/chats/`
-15. the actual source/tests for any implementation-specific claim
+4. `docs/context/MEDIEVAL_CRYSTAL_BEAST_SYSTEMS.md`
+5. `docs/context/IMPLEMENTATION_BACKLOG.md`
+6. `docs/context/STAT_SCHEMA_EVALUATION.md`
+7. `docs/context/STAT_SCHEMA_MIGRATION_PLAN.md`
+8. `docs/context/STATUS_SCREEN_DATA_CONTRACT.md`
+9. `docs/context/ABILITY_PROGRESSION_CONTRACT.md`
+10. `docs/context/BRANCH_INTEGRATION_CONTRACT.md`
+11. `docs/context/FINAL_ACCEPTANCE_AND_TESTING_POLICY.md`
+12. `docs/context/CHECKPOINTS.md`
+13. `docs/context/DECISIONS.md`
+14. `docs/IMPLEMENTATION_STATUS.md`
+15. `docs/GAME_FOUNDATION.md`
+16. `docs/SYSTEMS_CATALOG.md`
+17. relevant entries under `docs/context/chats/`
+18. the actual source/tests for any implementation-specific claim
 
 The purpose of placing `GAME_DIRECTION_AND_UI.md` near the top is to prevent technically correct work from drifting away from the user's intended game experience.
 
@@ -70,6 +72,8 @@ Every non-trivial project claim should be classifiable as one of:
 - `STAT_SCHEMA_MIGRATION_PLAN.md` — reversible save/content/API migration design if the eight-stat candidate is accepted, including the unresolved Dexterity bootstrap policy and migration test gate.
 - `STATUS_SCREEN_DATA_CONTRACT.md` — detailed mapping from authoritative game state/rules to player-facing status UI, including disclosure levels, explainability, hidden-data rules, and migration-safe presentation boundaries.
 - `ABILITY_PROGRESSION_CONTRACT.md` — rank/mastery/technique/resource/cooldown/evolution architecture, visibility rules, anti-exploit constraints, and safe implementation order for abilities.
+- `MEDIEVAL_CRYSTAL_BEAST_SYSTEMS.md` — accepted medieval-era world direction for forged weapons/armor, mine and beast-heart crystals, positional body-zone combat, persistent beast progression, encounter memory/adaptation, intelligence, hierarchy, territory, ecology, and authored dynamic dialogue.
+- `IMPLEMENTATION_BACKLOG.md` — durable task list and dependencies, including the current Stage 3 runtime gate and the planned medieval/crystal systems.
 - `BRANCH_INTEGRATION_CONTRACT.md` — cross-branch API compatibility, no-double-counting rules, disclosure/numeric/time invariants, overlap hotspots, and safe promotion order for active implementation workstreams.
 - `FINAL_ACCEPTANCE_AND_TESTING_POLICY.md` — accepted rule that the user is the final acceptance tester, not an intermediate QA dependency; defines internal verification and release-readiness gates.
 - `CONTEXT_SYNC_PROTOCOL.md` — mandatory procedure, markup vocabulary, evidence rules, handoffs, conflict handling, and checkpoint rules.
