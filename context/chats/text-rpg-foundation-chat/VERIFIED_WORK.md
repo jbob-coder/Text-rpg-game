@@ -311,3 +311,22 @@ Verification boundary:
 - **103 passed / 0 failed** remains the latest fully executed Python suite.
 - That run predates this stabilization-route slice.
 - Do not claim a higher test count until the latest branch is executed in a code environment.
+
+
+## Update — first Directional Trace use and extended earned route
+
+Additional foundation work after the 103-test checkpoint:
+
+- The Trace stabilization hub now leads to a legitimately earned `TECHNIQUE_DIRECTIONAL_TRACE` discovery.
+- Directional Trace is reachable through repeated Signal Pulse practice, Powers-skill training, recovery, stable-pattern research, and the Trace Tolerance protocol.
+- The first Directional Trace use is playable and costs 5 Focus + 4 Trace Resonance.
+- First use applies severity-2 `COND_ECHO_STRAIN` for 35 minutes, grants 3 Directional Trace mastery XP, and reveals `KNOW_DIRECTIONAL_TRACE_POINTS_DEEPER`.
+- One hour of power recovery restores 2 Trace Resonance and clears the temporary strain through the shared clock.
+- Power validation now rejects prerequisite techniques that reference themselves or unknown techniques.
+- Save/resume coverage has been extended through Directional Trace discovery, first use, recovery, and final flags.
+- Latest structural JSON audit: 16 scenes, 25 unique choices, 3 quests, 1 power definition, 6 registered knowledge IDs, and no missing audited scene/quest/power/technique/registry references.
+- Five new regression tests have been authored since the last full Python run.
+
+Verification boundary remains strict:
+- **103 passed / 0 failed** is still the latest fully executed suite.
+- The new stabilization/Directional Trace commits have not yet received a complete Python-suite rerun in this chat.
