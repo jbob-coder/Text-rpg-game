@@ -298,5 +298,120 @@ class SocialTests(unittest.TestCase):
         self.assertEqual(state.history, before_history)
 
 
+    def test_missing_speaker_share_does_not_create_npc_shell(self):
+        state = GameState(seed="s", scene_id="A")
+        before_npcs = dict(state.npcs)
+        before_relationships = dict(state.relationships)
+
+        with self.assertRaises(RuleError):
+            share_knowledge(
+                state,
+                speaker="NPC_MISSING",
+                recipient="NPC_B",
+                knowledge_id="KNOW_X",
+            )
+
+        self.assertEqual(state.npcs, before_npcs)
+        self.assertEqual(state.relationships, before_relationships)
+
+    def test_unknown_goal_progress_does_not_create_npc_shell(self):
+        state = GameState(seed="s", scene_id="A")
+        before_npcs = dict(state.npcs)
+        before_relationships = dict(state.relationships)
+        before_history = list(state.history)
+
+        with self.assertRaises(RuleError):
+            update_goal_progress(
+                state,
+                "NPC_MISSING",
+                "GOAL_UNKNOWN",
+                5,
+            )
+
+        self.assertEqual(state.npcs, before_npcs)
+        self.assertEqual(state.relationships, before_relationships)
+        self.assertEqual(state.history, before_history)
+
+    def test_rejected_story_transition_does_not_create_npc_shell(self):
+        state = GameState(seed="s", scene_id="A")
+        before_npcs = dict(state.npcs)
+        before_relationships = dict(state.relationships)
+        before_history = list(state.history)
+
+        with self.assertRaises(RuleError):
+            transition_story_state(
+                state,
+                "NPC_MISSING",
+                "TRACK_PERSONAL",
+                "FINALE",
+                allowed_from=["MIDPOINT"],
+            )
+
+        self.assertEqual(state.npcs, before_npcs)
+        self.assertEqual(state.relationships, before_relationships)
+        self.assertEqual(state.history, before_history)
+
+    def test_multi_recipient_leak_rolls_back_when_later_recipient_is_invalid(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            npcs={
+                "NPC_A": {
+                    "personality": {"discipline": 10, "honesty": 90},
+                    "knowledge": {
+                        "KNOW_X": {
+                            "source": "PLAYER",
+                            "confidence": 1.0,
+                            "truth": "unknown",
+                            "secrecy": 1,
+                            "turn_learned": 0,
+                        }
+                    },
+                    "memories": [],
+                    "goals": {},
+                    "story_state": {},
+                },
+                "NPC_B": {
+                    "knowledge": {},
+                    "memories": [],
+                    "personality": {},
+                    "goals": {},
+                    "story_state": {},
+                },
+                "NPC_C": {
+                    "knowledge": {},
+                    "memories": "corrupt",
+                    "personality": {},
+                    "goals": {},
+                    "story_state": {},
+                },
+            },
+        )
+        before_npcs = {
+            npc_id: {
+                key: (dict(value) if isinstance(value, dict) else list(value) if isinstance(value, list) else value)
+                for key, value in record.items()
+            }
+            for npc_id, record in state.npcs.items()
+        }
+        before_relationships = dict(state.relationships)
+        before_history = list(state.history)
+
+        with self.assertRaises(RuleError):
+            execute_leak_event(
+                state,
+                holder="NPC_A",
+                knowledge_id="KNOW_X",
+                network={"NPC_A": ["NPC_B", "NPC_C"]},
+                recipients=["NPC_B", "NPC_C"],
+                max_recipients=2,
+            )
+
+        self.assertEqual(state.npcs, before_npcs)
+        self.assertEqual(state.relationships, before_relationships)
+        self.assertEqual(state.history, before_history)
+        self.assertNotIn("KNOW_X", state.npcs["NPC_B"]["knowledge"])
+
+
 if __name__ == "__main__":
     unittest.main()
