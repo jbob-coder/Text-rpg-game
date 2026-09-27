@@ -454,5 +454,112 @@ class ExtendedStateTests(unittest.TestCase):
         self.assertTrue(engine.available_choices(state)[0]["enabled"])
 
 
+    def test_technique_stage_and_negative_perk_conditions(self):
+        engine = RulesEngine({
+            "A": {"choices": [{
+                "id": "RESEARCH",
+                "text": "Research after learning the technique.",
+                "requires": [
+                    {
+                        "type": "technique_stage_min",
+                        "ability_id": "ABILITY_TRACE",
+                        "technique_id": "TECHNIQUE_PULSE",
+                        "stage": "learned",
+                    },
+                    {
+                        "type": "not_has_perk",
+                        "perk_id": "PERK_TOLERANCE",
+                    },
+                ],
+                "outcomes": {"default": {"effects": []}},
+            }]}
+        })
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            abilities={
+                "ABILITY_TRACE": {
+                    "techniques": {
+                        "TECHNIQUE_PULSE": {
+                            "stage": "unstable",
+                            "mastery_xp": 20,
+                        }
+                    }
+                }
+            },
+        )
+        self.assertFalse(engine.available_choices(state)[0]["enabled"])
+        state.abilities["ABILITY_TRACE"]["techniques"]["TECHNIQUE_PULSE"][
+            "stage"
+        ] = "learned"
+        self.assertTrue(engine.available_choices(state)[0]["enabled"])
+        state.perks["PERK_TOLERANCE"] = {}
+        self.assertFalse(engine.available_choices(state)[0]["enabled"])
+
+    def test_scene_effects_can_train_skill_and_recover_resources(self):
+        engine = RulesEngine({
+            "A": {"choices": [{
+                "id": "TRAIN",
+                "text": "Train.",
+                "outcomes": {
+                    "default": {
+                        "effects": [{
+                            "type": "skill_train",
+                            "skill": "powers",
+                            "minutes": 120,
+                        }],
+                        "next_scene": "B",
+                    }
+                },
+            }]},
+            "B": {"choices": [{
+                "id": "REST",
+                "text": "Recover.",
+                "outcomes": {
+                    "default": {
+                        "effects": [{
+                            "type": "recover_resources",
+                            "minutes": 480,
+                        }]
+                    }
+                },
+            }]},
+        })
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            player={
+                "attributes": {
+                    "might": 30,
+                    "agility": 30,
+                    "endurance": 30,
+                    "intellect": 40,
+                    "will": 40,
+                    "perception": 40,
+                    "presence": 30,
+                },
+                "skills": {},
+                "resources": {
+                    "health": 100,
+                    "stamina": 100,
+                    "focus": 80,
+                    "resolve": 50,
+                },
+            },
+        )
+        engine.choose(state, "TRAIN")
+        self.assertGreater(state.player["skills"]["powers"], 0)
+        stamina_after_training = state.player["resources"]["stamina"]
+        focus_after_training = state.player["resources"]["focus"]
+        engine.choose(state, "REST")
+        self.assertGreater(
+            state.player["resources"]["stamina"], stamina_after_training
+        )
+        self.assertGreater(
+            state.player["resources"]["focus"], focus_after_training
+        )
+        self.assertEqual(state.time_minutes, 600)
+
+
 if __name__ == "__main__":
     unittest.main()
