@@ -1,6 +1,6 @@
 import unittest
 
-from textrpg import GameState
+from textrpg import GameState, RulesEngine
 from textrpg.stats import derived_stats, effective_player_value, initialize_resources, validate_player_stats
 
 
@@ -129,6 +129,28 @@ class StatsTests(unittest.TestCase):
             effective_player_value(state, "attributes.might"),
             44.0,
         )
+
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "CHECK_MIGHT",
+                    "text": "Check effective might.",
+                    "check": {
+                        "stat": "attributes.might",
+                        "difficulty": 0,
+                        "variance": 0,
+                    },
+                    "outcomes": {
+                        "critical_success": {"effects": []},
+                        "success": {"effects": []},
+                        "failure": {"effects": []},
+                        "critical_failure": {"effects": []},
+                    },
+                }]
+            }
+        })
+        event = engine.choose(state, "CHECK_MIGHT")
+        self.assertEqual(event["check"]["base"], 44.0)
 
 
 if __name__ == "__main__":
