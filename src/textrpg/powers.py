@@ -957,6 +957,17 @@ def evolve_ability(
 
 
 
+def _fallback_display_name(value: str, *prefixes: str) -> str:
+    if not isinstance(value, str) or not value:
+        raise RuleError("Display fallback ID must be a non-empty string")
+    display = value
+    for prefix in prefixes:
+        if display.startswith(prefix):
+            display = display[len(prefix):]
+            break
+    return display.replace("_", " ").title()
+
+
 def _visible_text(value: Any, label: str, *, default: str | None = None) -> str:
     if value is None and default is not None:
         return default
@@ -1009,7 +1020,7 @@ def ability_player_view(
         "name": _visible_text(
             definition.get("name", ability.get("name")),
             "ability display name",
-            default=ability_id,
+            default=_fallback_display_name(ability_id, "ABILITY_"),
         ),
         "rank": rank_value,
         "mastery_stage": _visible_text(
@@ -1109,7 +1120,7 @@ def ability_player_view(
                 "name": _visible_text(
                     authored.get("name"),
                     f"Technique display name {technique_id}",
-                    default=technique_id,
+                    default=_fallback_display_name(technique_id, "TECHNIQUE_"),
                 ),
                 "stage": _visible_text(
                     record.get("stage"),
@@ -1158,7 +1169,7 @@ def ability_player_view(
             name = _visible_text(
                 authored.get("name"),
                 f"Evolution display name {evolution_id}",
-                default=evolution_id,
+                default=_fallback_display_name(evolution_id, "EVOLUTION_"),
             )
         else:
             name = _visible_text(
