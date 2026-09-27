@@ -85,6 +85,62 @@ class GameState:
         }
 
 
+def effective_player_value(
+    state: GameState,
+    path: str,
+    *,
+    equipment_sets: Optional[Mapping[str, Mapping[str, Any]]] = None,
+) -> float:
+    """Return one effective numeric player value without mutating base state.
+
+    This is the single aggregation contract used by scene checks and derived-stat
+    formulas. It applies direct equipment, reached set thresholds, perks, and active
+    conditions exactly once.
+    """
+    base = _get_path(state.player, path, 0)
+    if not isinstance(base, (int, float)):
+        raise RuleError(f"Player value is not numeric: {path}")
+
+    total = float(base)
+    set_counts: Dict[str, int] = {}
+
+    for equipped in state.equipment.values():
+        if not isinstance(equipped, Mapping):
+            raise RuleError("Equipment records must be objects")
+        total += float(equipped.get("modifiers", {}).get(path, 0))
+        set_id = equipped.get("set_id")
+        if set_id:
+            set_counts[set_id] = set_counts.get(set_id, 0) + 1
+
+    definitions = equipment_sets or {}
+    for set_id, count in set_counts.items():
+        definition = definitions.get(set_id, {})
+        for pieces_raw, bonus in definition.get("thresholds", {}).items():
+            try:
+                pieces = int(pieces_raw)
+            except (TypeError, ValueError) as exc:
+                raise RuleError(
+                    f"Invalid equipment-set threshold for {set_id}: {pieces_raw}"
+                ) from exc
+            if count >= pieces:
+                total += float(bonus.get("modifiers", {}).get(path, 0))
+
+    for perk_id, perk in state.perks.items():
+        if not isinstance(perk, Mapping):
+            raise RuleError(f"Perk record must be an object: {perk_id}")
+        total += float(perk.get("modifiers", {}).get(path, 0))
+
+    conditions = state.player.get("conditions", {})
+    if conditions is not None and not isinstance(conditions, Mapping):
+        raise RuleError("player.conditions must be an object")
+    for condition_id, condition in (conditions or {}).items():
+        if not isinstance(condition, Mapping):
+            raise RuleError(f"Condition record must be an object: {condition_id}")
+        total += float(condition.get("modifiers", {}).get(path, 0))
+
+    return total
+
+
 class RulesEngine:
     """Data-driven, deterministic rules engine for authored RPG content.
 
@@ -216,46 +272,11 @@ class RulesEngine:
         return True
 
     def _effective_player_value(self, state: GameState, path: str) -> float:
-        base = _get_path(state.player, path, 0)
-        if not isinstance(base, (int, float)):
-            raise RuleError(f"Player value is not numeric: {path}")
-
-        total = float(base)
-
-        # Direct equipment modifiers are applied exactly once.
-        set_counts: Dict[str, int] = {}
-        for equipped in state.equipment.values():
-            total += float(equipped.get("modifiers", {}).get(path, 0))
-            set_id = equipped.get("set_id")
-            if set_id:
-                set_counts[set_id] = set_counts.get(set_id, 0) + 1
-
-        # Set bonuses are authored separately from item modifiers. Each reached
-        # threshold applies once, so a 2-piece and 4-piece bonus may both be active.
-        for set_id, count in set_counts.items():
-            definition = self.equipment_sets.get(set_id, {})
-            for pieces_raw, bonus in definition.get("thresholds", {}).items():
-                try:
-                    pieces = int(pieces_raw)
-                except (TypeError, ValueError) as exc:
-                    raise RuleError(
-                        f"Invalid equipment-set threshold for {set_id}: {pieces_raw}"
-                    ) from exc
-                if count >= pieces:
-                    total += float(bonus.get("modifiers", {}).get(path, 0))
-
-        for perk in state.perks.values():
-            total += float(perk.get("modifiers", {}).get(path, 0))
-
-        conditions = state.player.get("conditions", {})
-        if conditions is not None and not isinstance(conditions, Mapping):
-            raise RuleError("player.conditions must be an object")
-        for condition_id, condition in (conditions or {}).items():
-            if not isinstance(condition, Mapping):
-                raise RuleError(f"Condition record must be an object: {condition_id}")
-            total += float(condition.get("modifiers", {}).get(path, 0))
-
-        return total
+        return effective_player_value(
+            state,
+            path,
+            equipment_sets=self.equipment_sets,
+        )
 
     def _resolve_check(self, state: GameState, check: Dict[str, Any], choice_id: str) -> Dict[str, Any]:
         stat_path = check["stat"]
