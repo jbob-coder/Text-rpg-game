@@ -41,6 +41,7 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
     quests = data.get("quests", {})
     characters = data.get("characters", {})
     equipment_sets = data.get("equipment_sets", {})
+    powers = data.get("powers", {})
 
     if not isinstance(scenes, Mapping) or not scenes:
         raise RuleError("Content pack requires non-empty scenes")
@@ -50,8 +51,10 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
         raise RuleError("Content pack characters must be an object")
     if not isinstance(equipment_sets, Mapping):
         raise RuleError("Content pack equipment_sets must be an object")
+    if not isinstance(powers, Mapping):
+        raise RuleError("Content pack powers must be an object")
 
-    assert_valid_content_pack(scenes, quests)
+    assert_valid_content_pack(scenes, quests, powers)
     assert_valid_character_visuals(characters)
 
     initial = data.get("initial_state")
@@ -79,6 +82,7 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
         scenes,
         equipment_sets=equipment_sets,
         quest_definitions=quests,
+        power_definitions=powers,
     )
 
     return LoadedContentPack(
