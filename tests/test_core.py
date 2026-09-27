@@ -345,5 +345,73 @@ class ExtendedStateTests(unittest.TestCase):
         self.assertNotIn("COND_SHORT", state.player["conditions"])
 
 
+    def test_scene_effects_can_discover_and_practice_power_gradually(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "DISCOVER",
+                    "text": "Notice the latent pattern.",
+                    "outcomes": {
+                        "default": {
+                            "effects": [
+                                {
+                                    "type": "ability_discover",
+                                    "ability_id": "ABILITY_TRACE_ECHO",
+                                    "family": "perception",
+                                    "form": "latent",
+                                },
+                                {
+                                    "type": "technique_discover",
+                                    "ability_id": "ABILITY_TRACE_ECHO",
+                                    "technique_id": "TECHNIQUE_SIGNAL_PULSE",
+                                },
+                            ],
+                            "next_scene": "B",
+                        }
+                    },
+                }]
+            },
+            "B": {
+                "choices": [{
+                    "id": "PRACTICE",
+                    "text": "Practice for one hour.",
+                    "outcomes": {
+                        "default": {
+                            "effects": [{
+                                "type": "technique_practice",
+                                "ability_id": "ABILITY_TRACE_ECHO",
+                                "technique_id": "TECHNIQUE_SIGNAL_PULSE",
+                                "minutes": 60,
+                            }]
+                        }
+                    },
+                }]
+            },
+        })
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            player={"resources": {"focus": 20.0, "stamina": 20.0}},
+        )
+        engine.choose(state, "DISCOVER")
+        ability = state.abilities["ABILITY_TRACE_ECHO"]
+        self.assertEqual(ability["mastery_xp"], 0.0)
+        self.assertEqual(
+            ability["techniques"]["TECHNIQUE_SIGNAL_PULSE"]["mastery_xp"],
+            0.0,
+        )
+
+        engine.choose(state, "PRACTICE")
+        self.assertEqual(state.time_minutes, 60)
+        self.assertEqual(
+            ability["techniques"]["TECHNIQUE_SIGNAL_PULSE"]["mastery_xp"],
+            8.0,
+        )
+        self.assertEqual(
+            ability["techniques"]["TECHNIQUE_SIGNAL_PULSE"]["stage"],
+            "discovered",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
