@@ -44,10 +44,9 @@ class AndroidBridgeTests(unittest.TestCase):
         leaked = FORBIDDEN_AUTHORED_KEYS.intersection(set(walk_keys(view)))
         self.assertEqual(set(), leaked)
 
-
     def test_quest_projection_exposes_category_without_authored_effects(self):
         session = create_session(CONTENT)
-        session.choose("CHECK_RELAY")
+        session.choose("TAKE_DEAD_RELAY")
 
         view = session.scene_view()
 
@@ -62,7 +61,7 @@ class AndroidBridgeTests(unittest.TestCase):
 
     def test_map_projection_discovers_locations_from_history(self):
         session = create_session(CONTENT)
-        session.choose("CHECK_RELAY")
+        session.choose("TAKE_DEAD_RELAY")
 
         view = session.scene_view()
         node_ids = {node["id"] for node in view["map"]["nodes"]}
@@ -122,7 +121,3 @@ class AndroidBridgeTests(unittest.TestCase):
 
             self.assertEqual("LOAD_ERROR", caught.exception.code)
             self.assertEqual(before, session.state.snapshot())
-
-
-if __name__ == "__main__":
-    unittest.main()
