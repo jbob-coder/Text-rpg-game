@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from math import isfinite
 from typing import Any, Dict, Mapping, MutableMapping
 
@@ -27,6 +28,142 @@ _STAGE_ORDER = {
     "practiced": 3,
     "mastered": 4,
 }
+
+
+_STABLE_ID = re.compile(r"^[A-Z][A-Z0-9_]*$")
+
+
+def _validate_power_resource_path(path: Any, label: str) -> str:
+    if not isinstance(path, str) or not path:
+        raise RuleError(f"{label} must be a non-empty string")
+    parts = path.split(".")
+    if len(parts) != 2 or parts[0] != "power_resources" or not parts[1]:
+        raise RuleError(f"{label} must use power_resources.<id>")
+    return path
+
+
+def validate_power_definitions(
+    definitions: Mapping[str, Mapping[str, Any]],
+) -> list[str]:
+    """Validate complete authored ability/resource/technique definitions."""
+    errors: list[str] = []
+    if not isinstance(definitions, Mapping):
+        return ["power definitions must be an object"]
+
+    for ability_id, definition in definitions.items():
+        if not isinstance(ability_id, str) or not _STABLE_ID.fullmatch(ability_id):
+            errors.append(f"ability_id must be a stable uppercase ID: {ability_id!r}")
+            continue
+        if not isinstance(definition, Mapping):
+            errors.append(f"{ability_id} power definition must be an object")
+            continue
+
+        family = definition.get("family")
+        if family is not None and (not isinstance(family, str) or not family):
+            errors.append(f"{ability_id}.family must be a non-empty string")
+        form = definition.get("form")
+        if form is not None and (not isinstance(form, str) or not form):
+            errors.append(f"{ability_id}.form must be null or a non-empty string")
+        tags = definition.get("tags", [])
+        if not isinstance(tags, list) or not all(
+            isinstance(tag, str) and tag for tag in tags
+        ):
+            errors.append(f"{ability_id}.tags must be a list of non-empty strings")
+
+        resource = definition.get("resource")
+        if resource is not None:
+            if not isinstance(resource, Mapping):
+                errors.append(f"{ability_id}.resource must be an object")
+            else:
+                try:
+                    _validate_power_resource_path(
+                        resource.get("path"),
+                        f"{ability_id}.resource.path",
+                    )
+                except RuleError as exc:
+                    errors.append(str(exc))
+
+                maximum = resource.get("maximum")
+                starting = resource.get("starting", maximum)
+                recovery = resource.get("recovery_per_hour", 0)
+                parsed: Dict[str, float] = {}
+                for field, value in (
+                    ("maximum", maximum),
+                    ("starting", starting),
+                    ("recovery_per_hour", recovery),
+                ):
+                    if (
+                        isinstance(value, bool)
+                        or not isinstance(value, (int, float))
+                        or not isfinite(float(value))
+                    ):
+                        errors.append(
+                            f"{ability_id}.resource.{field} must be a finite number"
+                        )
+                    else:
+                        parsed[field] = float(value)
+
+                if "maximum" in parsed and parsed["maximum"] <= 0:
+                    errors.append(f"{ability_id}.resource.maximum must be positive")
+                if "starting" in parsed and "maximum" in parsed:
+                    if parsed["starting"] < 0 or parsed["starting"] > parsed["maximum"]:
+                        errors.append(
+                            f"{ability_id}.resource.starting must be in range 0..maximum"
+                        )
+                if "recovery_per_hour" in parsed and parsed["recovery_per_hour"] < 0:
+                    errors.append(
+                        f"{ability_id}.resource.recovery_per_hour cannot be negative"
+                    )
+
+        techniques = definition.get("techniques", {})
+        if not isinstance(techniques, Mapping):
+            errors.append(f"{ability_id}.techniques must be an object")
+        else:
+            for technique_id, technique in techniques.items():
+                if (
+                    not isinstance(technique_id, str)
+                    or not _STABLE_ID.fullmatch(technique_id)
+                ):
+                    errors.append(
+                        f"{ability_id} technique_id must be a stable uppercase ID: "
+                        f"{technique_id!r}"
+                    )
+                    continue
+                technique_errors = validate_technique_definition(technique)
+                errors.extend(
+                    f"{ability_id}.{technique_id}: {error}"
+                    for error in technique_errors
+                )
+
+        evolutions = definition.get("evolutions", {})
+        if not isinstance(evolutions, Mapping):
+            errors.append(f"{ability_id}.evolutions must be an object")
+        else:
+            for evolution_id, evolution in evolutions.items():
+                if (
+                    not isinstance(evolution_id, str)
+                    or not _STABLE_ID.fullmatch(evolution_id)
+                ):
+                    errors.append(
+                        f"{ability_id} evolution_id must be a stable uppercase ID: "
+                        f"{evolution_id!r}"
+                    )
+                    continue
+                evolution_errors = validate_evolution_definition(evolution)
+                errors.extend(
+                    f"{ability_id}.{evolution_id}: {error}"
+                    for error in evolution_errors
+                )
+
+    return errors
+
+
+def assert_valid_power_definitions(
+    definitions: Mapping[str, Mapping[str, Any]],
+) -> None:
+    errors = validate_power_definitions(definitions)
+    if errors:
+        raise RuleError("Invalid power definitions:\n- " + "\n- ".join(errors))
 
 
 def technique_stage(xp: float) -> str:
