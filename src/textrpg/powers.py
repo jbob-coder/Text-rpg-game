@@ -719,6 +719,25 @@ def evolve_ability(
 
 
 
+def _visible_text(value: Any, label: str, *, default: str | None = None) -> str:
+    if value is None and default is not None:
+        return default
+    if not isinstance(value, str) or not value:
+        raise RuleError(f"{label} must be a non-empty string")
+    return value
+
+
+def _visible_resource_path(path: Any, label: str) -> str:
+    if not isinstance(path, str) or not path:
+        raise RuleError(f"{label} must be a non-empty string")
+    parts = path.split(".")
+    if len(parts) != 2 or parts[0] not in {"resources", "power_resources"} or not parts[1]:
+        raise RuleError(
+            f"{label} must use resources.<id> or power_resources.<id>"
+        )
+    return path
+
+
 def ability_player_view(
     state: GameState,
     ability_id: str,
@@ -736,13 +755,37 @@ def ability_player_view(
         raise RuleError(f"Unknown ability: {ability_id}")
 
     definition = definition or {}
+    rank_value = ability.get("rank", 0)
+    if isinstance(rank_value, bool) or not isinstance(rank_value, int) or rank_value < 0:
+        raise RuleError(f"Ability rank must be a non-negative integer: {ability_id}")
+    mastery_value = ability.get("mastery_xp", 0.0)
+    if (
+        isinstance(mastery_value, bool)
+        or not isinstance(mastery_value, (int, float))
+        or not isfinite(float(mastery_value))
+        or float(mastery_value) < 0
+    ):
+        raise RuleError(f"Ability mastery_xp must be a finite non-negative number: {ability_id}")
+
     output: Dict[str, Any] = {
-        "name": definition.get("name", ability.get("name", ability_id)),
-        "rank": int(ability.get("rank", 0)),
-        "mastery_stage": ability.get("mastery_stage", "discovered"),
-        "mastery_xp": float(ability.get("mastery_xp", 0.0)),
+        "name": _visible_text(
+            definition.get("name", ability.get("name")),
+            "ability display name",
+            default=ability_id,
+        ),
+        "rank": rank_value,
+        "mastery_stage": _visible_text(
+            ability.get("mastery_stage"),
+            "ability mastery_stage",
+            default="discovered",
+        ),
+        "mastery_xp": float(mastery_value),
         "form": ability.get("form"),
-        "state": ability.get("state", "ready"),
+        "state": _visible_text(
+            ability.get("state"),
+            "ability state",
+            default="ready",
+        ),
         "techniques": [],
         "evolutions": [],
     }
@@ -750,9 +793,13 @@ def ability_player_view(
     for optional_key in ("control", "efficiency"):
         if optional_key in ability:
             value = ability[optional_key]
-            if isinstance(value, bool) or not isinstance(value, (int, float)):
+            if (
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not isfinite(float(value))
+            ):
                 raise RuleError(
-                    f"Ability {optional_key} must be numeric: {ability_id}"
+                    f"Ability {optional_key} must be a finite number: {ability_id}"
                 )
             output[optional_key] = float(value)
 
@@ -760,18 +807,21 @@ def ability_player_view(
     if resource_definition is not None:
         if not isinstance(resource_definition, Mapping):
             raise RuleError("Ability resource definition must be an object")
-        current_path = resource_definition.get("current_path")
+        current_path = _visible_resource_path(
+            resource_definition.get("current_path"),
+            "Ability resource current_path",
+        )
         max_path = resource_definition.get("max_path")
-        if not isinstance(current_path, str) or not current_path:
-            raise RuleError("Ability resource current_path must be a non-empty string")
         current = _numeric_player_path(state, current_path)
         resource_view: Dict[str, Any] = {
             "label": resource_definition.get("label", "Resource"),
             "current": current,
         }
         if max_path is not None:
-            if not isinstance(max_path, str) or not max_path:
-                raise RuleError("Ability resource max_path must be a non-empty string")
+            max_path = _visible_resource_path(
+                max_path,
+                "Ability resource max_path",
+            )
             resource_view["max"] = _numeric_player_path(state, max_path)
         output["resource"] = resource_view
 
@@ -794,8 +844,16 @@ def ability_player_view(
         output["techniques"].append(
             {
                 "technique_id": technique_id,
-                "name": authored.get("name", technique_id),
-                "stage": record.get("stage", "discovered"),
+                "name": _visible_text(
+                    authored.get("name"),
+                    f"Technique display name {technique_id}",
+                    default=technique_id,
+                ),
+                "stage": _visible_text(
+                    record.get("stage"),
+                    f"Technique stage {technique_id}",
+                    default="discovered",
+                ),
                 "mastery_xp": float(record.get("mastery_xp", 0.0)),
                 "uses": int(record.get("uses", 0)),
                 "ready": state.time_minutes >= ready_at,
@@ -832,21 +890,39 @@ def ability_player_view(
             raise RuleError(f"Evolution definition must be an object: {evolution_id}")
         authored = authored or {}
 
+        if not isinstance(evolution_id, str) or not evolution_id:
+            raise RuleError("Evolution visibility keys must be non-empty IDs")
+        if disclosure in {"known", "satisfied"}:
+            name = _visible_text(
+                authored.get("name"),
+                f"Evolution display name {evolution_id}",
+                default=evolution_id,
+            )
+        else:
+            name = _visible_text(
+                knowledge.get("label"),
+                f"Evolution visible label {evolution_id}",
+                default="Unknown evolution",
+            )
         item: Dict[str, Any] = {
             "evolution_id": evolution_id,
             "state": disclosure,
-            "name": authored.get("name", evolution_id)
-            if disclosure in {"known", "satisfied"}
-            else knowledge.get("label", "Unknown evolution"),
+            "name": name,
         }
         hint = knowledge.get("hint")
         if hint is not None:
-            item["hint"] = str(hint)
+            item["hint"] = _visible_text(
+                hint,
+                f"Evolution hint {evolution_id}",
+            )
         known_requirements = knowledge.get("known_requirements")
         if known_requirements is not None:
-            if not isinstance(known_requirements, list):
+            if (
+                not isinstance(known_requirements, list)
+                or not all(isinstance(value, str) and value for value in known_requirements)
+            ):
                 raise RuleError(
-                    f"known_requirements must be a list: {evolution_id}"
+                    f"known_requirements must be a list of non-empty strings: {evolution_id}"
                 )
             item["known_requirements"] = list(known_requirements)
         output["evolutions"].append(item)
