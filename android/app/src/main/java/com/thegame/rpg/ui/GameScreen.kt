@@ -289,7 +289,10 @@ private fun StorySection(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Column(Modifier.weight(0.36f).fillMaxHeight()) {
-                    PlayerAvatarPanel(snapshot.identity)
+                    PlayerAvatarPanel(
+                        identity = snapshot.identity,
+                        equipment = snapshot.inventory.equipment,
+                    )
                     Spacer(Modifier.height(8.dp))
                     ResourcePanel(snapshot)
                 }
@@ -309,6 +312,7 @@ private fun StorySection(
             ) {
                 PlayerAvatarPanel(
                     identity = snapshot.identity,
+                    equipment = snapshot.inventory.equipment,
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(0.42f),
@@ -429,7 +433,11 @@ private fun CharacterSection(snapshot: GameSnapshot) {
                 .horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            PlayerAvatarPanel(snapshot.identity, Modifier.width(if (wideCharacterPanel) 320.dp else 260.dp))
+            PlayerAvatarPanel(
+                identity = snapshot.identity,
+                equipment = snapshot.inventory.equipment,
+                modifier = Modifier.width(if (wideCharacterPanel) 320.dp else 260.dp),
+            )
             PixelPanel(Modifier.width(if (wideCharacterPanel) 420.dp else 320.dp), "Character") {
                 LabeledValue("Name", snapshot.identity.name ?: "Unassigned")
                 LabeledValue("Level", snapshot.identity.level?.toString() ?: "—")
