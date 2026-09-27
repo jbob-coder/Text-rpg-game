@@ -693,6 +693,11 @@ def validate_evolution_definition(definition: Any) -> list[str]:
         errors.append("result must be an object")
         return errors
 
+    if "form" in result:
+        form = result["form"]
+        if not isinstance(form, str) or not form:
+            errors.append("result.form must be a non-empty string")
+
     if "rank_floor" in result:
         value = result["rank_floor"]
         if isinstance(value, bool) or not isinstance(value, int):
@@ -885,7 +890,14 @@ def use_technique(
         _validate_condition_container(state)
 
     ability = state.abilities[ability_id]
-    technique = ability["techniques"][technique_id]
+    if not isinstance(ability, MutableMapping):
+        raise RuleError(f"Ability state must be mutable: {ability_id}")
+    techniques = ability.get("techniques", {})
+    if not isinstance(techniques, MutableMapping):
+        raise RuleError(f"Ability techniques must be mutable: {ability_id}")
+    technique = techniques.get(technique_id)
+    if not isinstance(technique, MutableMapping):
+        raise RuleError(f"Technique state must be mutable: {technique_id}")
 
     spent: Dict[str, float] = {}
     for path, amount_raw in definition.get("costs", {}).items():
@@ -949,6 +961,9 @@ def ability_evolution_status(
     *,
     equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
+    if not isinstance(evolution_id, str) or not evolution_id:
+        raise RuleError("Evolution ID must be a non-empty string")
+
     definition_errors = validate_evolution_definition(definition)
     if definition_errors:
         raise RuleError(
@@ -956,22 +971,45 @@ def ability_evolution_status(
         )
 
     ability = state.abilities.get(ability_id)
-    if not ability:
+    if ability is None:
         return {"available": False, "reasons": ["ability_missing"]}
+    rank, mastery_xp, _rank_floor = _ability_progression_state(
+        ability,
+        ability_id,
+    )
 
-    if evolution_id in {
-        record.get("evolution_id") for record in ability.get("evolutions", [])
-    }:
+    evolutions = ability.get("evolutions", [])
+    if not isinstance(evolutions, list):
+        raise RuleError(f"Ability evolutions must be a list: {ability_id}")
+    completed_ids: set[str] = set()
+    for index, record in enumerate(evolutions):
+        if not isinstance(record, Mapping):
+            raise RuleError(
+                f"Ability evolution record must be an object: {ability_id}[{index}]"
+            )
+        completed_id = record.get("evolution_id")
+        if completed_id is not None:
+            if not isinstance(completed_id, str) or not completed_id:
+                raise RuleError(
+                    f"Ability evolution record ID is invalid: {ability_id}[{index}]"
+                )
+            completed_ids.add(completed_id)
+    if evolution_id in completed_ids:
         return {"available": False, "reasons": ["already_evolved"]}
+
+    if not isinstance(state.knowledge, Mapping):
+        raise RuleError("state.knowledge must be an object")
+    if not isinstance(state.perks, Mapping):
+        raise RuleError("state.perks must be an object")
+    if not isinstance(state.inventory, Mapping):
+        raise RuleError("state.inventory must be an object")
 
     requirements = definition.get("requirements", {})
     reasons: list[str] = []
 
-    if ability.get("rank", 0) < int(requirements.get("rank_min", 0)):
+    if rank < int(requirements.get("rank_min", 0)):
         reasons.append("rank")
-    if float(ability.get("mastery_xp", 0)) < float(
-        requirements.get("mastery_xp_min", 0)
-    ):
+    if mastery_xp < float(requirements.get("mastery_xp_min", 0)):
         reasons.append("mastery_xp")
 
     for knowledge_id in requirements.get("knowledge", []):
@@ -991,27 +1029,35 @@ def ability_evolution_status(
     )
 
     techniques = ability.get("techniques", {})
+    if not isinstance(techniques, Mapping):
+        raise RuleError(f"Ability techniques must be an object: {ability_id}")
     for required_id, stage_min in requirements.get("techniques", {}).items():
         record = techniques.get(required_id)
-        if not record or not _stage_at_least(record.get("stage", "unknown"), stage_min):
+        if record is None:
+            reasons.append(f"technique:{required_id}:{stage_min}")
+            continue
+        if not isinstance(record, Mapping):
+            raise RuleError(f"Technique state must be an object: {required_id}")
+        if not _stage_at_least(record.get("stage", "unknown"), stage_min):
             reasons.append(f"technique:{required_id}:{stage_min}")
 
     result = definition.get("result", {})
     for item_id, quantity in result.get("consume_items", {}).items():
-        if int(quantity) < 0:
-            raise RuleError(f"Evolution item consumption cannot be negative: {item_id}")
-        if state.inventory.get(item_id, 0) < int(quantity):
+        current_quantity = state.inventory.get(item_id, 0)
+        if (
+            isinstance(current_quantity, bool)
+            or not isinstance(current_quantity, int)
+            or current_quantity < 0
+        ):
+            raise RuleError(f"Inventory quantity is invalid: {item_id}")
+        if current_quantity < quantity:
             reasons.append(f"consume_item:{item_id}")
 
     for perk_id in result.get("grant_perks", {}):
         if perk_id in state.perks:
             reasons.append(f"perk_exists:{perk_id}")
 
-    if "rank_floor" in result and int(result["rank_floor"]) < 0:
-        raise RuleError("Evolution rank floor cannot be negative")
-
     return {"available": not reasons, "reasons": reasons}
-
 
 def evolve_ability(
     state: GameState,
@@ -1033,60 +1079,114 @@ def evolve_ability(
             f"Ability cannot evolve: {evolution_id} ({', '.join(status['reasons'])})"
         )
 
+    _validate_history_container(state)
+
     ability = state.abilities[ability_id]
+    if not isinstance(ability, MutableMapping):
+        raise RuleError(f"Ability state must be mutable: {ability_id}")
+    current_rank, _mastery_xp, current_rank_floor = _ability_progression_state(
+        ability,
+        ability_id,
+    )
+
+    if not isinstance(state.inventory, MutableMapping):
+        raise RuleError("state.inventory must be mutable")
+    if not isinstance(state.perks, MutableMapping):
+        raise RuleError("state.perks must be mutable")
+
+    existing_tags = ability.get("tags", [])
+    if not isinstance(existing_tags, list) or not all(
+        isinstance(tag, str) and tag for tag in existing_tags
+    ):
+        raise RuleError(f"Ability tags state is invalid: {ability_id}")
+
+    existing_evolutions = ability.get("evolutions")
+    if existing_evolutions is None:
+        evolution_records: list[Dict[str, Any]] = []
+        evolutions_were_missing = True
+    elif not isinstance(existing_evolutions, list):
+        raise RuleError(f"Ability evolutions must be a list: {ability_id}")
+    else:
+        evolution_records = existing_evolutions
+        evolutions_were_missing = False
+
     result = definition.get("result", {})
     previous_form = ability.get("form")
-    if "form" in result:
-        ability["form"] = result["form"]
-    if "rank_floor" in result:
-        rank_floor = int(result["rank_floor"])
-        ability["rank_floor"] = max(int(ability.get("rank_floor", 0)), rank_floor)
-        ability["rank"] = max(int(ability.get("rank", 0)), ability["rank_floor"])
+    next_form = result.get("form", previous_form)
 
-    if "tags" in result:
-        tags = list(dict.fromkeys([*ability.get("tags", []), *result["tags"]]))
-        ability["tags"] = tags
+    incoming_rank_floor = result.get("rank_floor")
+    next_rank_floor = current_rank_floor
+    if incoming_rank_floor is not None:
+        next_rank_floor = max(current_rank_floor, incoming_rank_floor)
+    next_rank = max(current_rank, next_rank_floor)
 
+    incoming_tags = result.get("tags", [])
+    next_tags = list(dict.fromkeys([*existing_tags, *incoming_tags]))
+
+    inventory_after: Dict[str, int] = {}
     consumed_items: Dict[str, int] = {}
-    for item_id, quantity_raw in result.get("consume_items", {}).items():
-        quantity = int(quantity_raw)
+    for item_id, quantity in result.get("consume_items", {}).items():
+        current_quantity = state.inventory.get(item_id, 0)
+        if (
+            isinstance(current_quantity, bool)
+            or not isinstance(current_quantity, int)
+            or current_quantity < quantity
+        ):
+            raise RuleError(f"Inventory changed or is invalid before evolution: {item_id}")
+        inventory_after[item_id] = current_quantity - quantity
         if quantity:
-            state.inventory[item_id] -= quantity
             consumed_items[item_id] = quantity
-            if state.inventory[item_id] <= 0:
-                del state.inventory[item_id]
 
-    granted_perks: list[str] = []
+    perk_records: Dict[str, Dict[str, Any]] = {}
     for perk_id, perk in result.get("grant_perks", {}).items():
-        state.perks[perk_id] = {
+        if perk_id in state.perks:
+            raise RuleError(f"Perk already exists before evolution commit: {perk_id}")
+        perk_records[perk_id] = {
             "source": f"evolution:{ability_id}:{evolution_id}",
             "modifiers": dict(perk.get("modifiers", {})),
             "tags": list(perk.get("tags", [])),
         }
-        granted_perks.append(perk_id)
 
     record = {
         "evolution_id": evolution_id,
         "time_minutes": state.time_minutes,
         "previous_form": previous_form,
-        "form": ability.get("form"),
+        "form": next_form,
     }
-    ability.setdefault("evolutions", []).append(record)
-
     event = {
         "type": "ability_evolution",
         "ability_id": ability_id,
         "evolution_id": evolution_id,
         "time_minutes": state.time_minutes,
         "previous_form": previous_form,
-        "form": ability.get("form"),
-        "granted_perks": granted_perks,
-        "consumed_items": consumed_items,
+        "form": next_form,
+        "granted_perks": list(perk_records),
+        "consumed_items": dict(consumed_items),
     }
+
+    # All validation/planning is complete. Commit persistent state.
+    if "form" in result:
+        ability["form"] = next_form
+    if incoming_rank_floor is not None:
+        ability["rank_floor"] = next_rank_floor
+        ability["rank"] = next_rank
+    if "tags" in result:
+        ability["tags"] = next_tags
+
+    for item_id, remaining in inventory_after.items():
+        if remaining <= 0:
+            state.inventory.pop(item_id, None)
+        else:
+            state.inventory[item_id] = remaining
+
+    for perk_id, perk_record in perk_records.items():
+        state.perks[perk_id] = perk_record
+
+    if evolutions_were_missing:
+        ability["evolutions"] = evolution_records
+    evolution_records.append(record)
     state.history.append(event)
     return event
-
-
 
 def _visible_text(value: Any, label: str, *, default: str | None = None) -> str:
     if value is None and default is not None:
