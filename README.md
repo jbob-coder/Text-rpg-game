@@ -13,8 +13,10 @@ The rules layer is deliberately separated from presentation. The game can later 
 - `docs/REFERENCE_NOTES.md` — abstract lessons from supplied reference material; no copied story content.
 - `docs/IMPLEMENTATION_STATUS.md` — current objective, verified state, completed work, risks, and next actions.
 - `src/textrpg/core.py` — deterministic scene/choice rules and persistent state.
+- `src/textrpg/content.py` — validated JSON content-pack loading into state + engine.
+- `src/textrpg/cli.py` — local standard-library terminal client with save/resume support.
 - `src/textrpg/progression.py` — earned ability mastery and technique prerequisites.
-- `src/textrpg/powers.py` — technique costs, cooldowns, drawbacks, mastery stages, and ability evolution.
+- `src/textrpg/powers.py` — explicit ability discovery, paid technique practice, costs, cooldowns, drawbacks, mastery stages, and evolution.
 - `src/textrpg/quests.py` — authored quest graphs, objective prerequisites, branching/failure routes, and terminal states.
 - `src/textrpg/persistence.py` — versioned JSON save/load.
 - `src/textrpg/validation.py` — scene validation plus whole-content-pack quest cross-reference validation.
@@ -23,9 +25,19 @@ The rules layer is deliberately separated from presentation. The game can later 
 - `src/textrpg/equipment.py` — equipment slots, requirements, modifiers, and set bonuses.
 - `src/textrpg/social.py` — NPC memory, private knowledge, relationships, goals, story-state transitions, sharing, leak eligibility, and deterministic leak-event execution.
 - `src/textrpg/visuals.py` — canonical recurring-character visual identity validation and normalized generation contracts.
-- `content/vertical_slice_01.json` — first original playable opening slice, currently marked provisional canon.
+- `content/vertical_slice_01.json` — original provisional-canon playable slice: opening branches, NPC state, Gate Twelve power discovery, and gradual first practice.
 - `content/sample_scene.json` — non-canon scene showing relationship, knowledge, item, and stat-dependent choices.
 - `tests/` — behavior, progression, persistence, and content-validation tests.
+
+## Play the current local slice
+
+From the repository root:
+
+```bash
+PYTHONPATH=src python -m textrpg.cli content/vertical_slice_01.json --save local_save.json
+```
+
+The CLI is a development client, not the final presentation layer. It runs authored deterministic content locally and requires no runtime AI or hosted service.
 
 ## Run verification
 
@@ -33,8 +45,8 @@ The rules layer is deliberately separated from presentation. The game can later 
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Last full branch-equivalent suite verification: **58 tests passed, 0 failed**.
+Last full branch-equivalent suite verification on record: **58 tests passed, 0 failed**.
 
-The latest additions have also passed **13 focused local reconstruction checks**. The full suite must be rerun before increasing the repository-wide pass count.
+That result predates the newest CLI/content-loader, modifier-centralization, NPC story-state, knowledge-gate, extended vertical-slice, and technique-practice commits. New regression tests are present, but the complete latest suite must be executed before the verified count is increased.
 
 The prototype uses only the Python standard library. No hosted AI service or GitHub Actions workflow is required.
