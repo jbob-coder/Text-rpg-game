@@ -260,3 +260,33 @@ Current next engineering focus:
 1. add explicit discovery prerequisites for future techniques;
 2. formalize knowledge/perk/item registries enough for stronger cross-reference validation;
 3. keep The Dead Relay / Gate Twelve / Tamsin / Trace Echo provisional until deliberate canon review.
+
+
+## Update — technique discovery gates, stable registries, and 103-test verification
+
+Foundation work verified on 2026-09-27:
+
+- Technique discovery now has a separate authored prerequisite contract from technique use.
+- `discover_technique` refuses early unlocks when `discovery_requirements` are unmet.
+- Added `technique_discovery_status` and the `technique_discoverable` authored choice condition.
+- Discovery requirements can use ability rank/mastery, knowledge, perks, attributes, skills, flags, items, and prerequisite technique mastery stages.
+- Added optional stable registries for knowledge, perks, items, and conditions.
+- When a content pack defines registries, scene gates/effects, power requirements/drawbacks, and initial-state references are cross-validated before play.
+- `TECHNIQUE_DIRECTIONAL_TRACE` now has explicit discovery prerequisites and remains unavailable in the current playable slice.
+- The registry contains the current Trace Echo knowledge/perk/item/condition IDs; registry presence does not grant any of them.
+
+Verification:
+- The local reconstruction started from the exact 97-test branch snapshot.
+- Every source/content/test file changed in this slice was Git-blob-hash matched against the live `foundation/text-rpg-systems` branch.
+- Observed complete-suite result:
+
+```text
+Ran 103 tests in 0.034s
+
+OK
+```
+
+Current next engineering direction:
+1. create authored routes that earn `KNOW_TRACE_ECHO_PATTERN_STABLE` and `PERK_TRACE_TOLERANCE`;
+2. build a later research/training branch where Directional Trace can eventually be discovered legitimately;
+3. keep story/lore content provisional until deliberate canon review.
