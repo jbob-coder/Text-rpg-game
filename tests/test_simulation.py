@@ -160,5 +160,26 @@ class SimulationTests(unittest.TestCase):
         self.assertEqual(state.player["attributes"]["might"], before)
         self.assertEqual(state.time_minutes, 0)
 
+    def test_training_rejects_corrupt_skill_before_resource_normalization(self):
+        state = self.state()
+        state.player["skills"]["technical_systems"] = float("nan")
+        state.player["resources"].pop("max_health", None)
+        before_resources = dict(state.player["resources"])
+        with self.assertRaises(RuleError):
+            train(state, skill="technical_systems", minutes=60)
+        self.assertEqual(state.player["resources"], before_resources)
+        self.assertTrue(
+            str(state.player["skills"]["technical_systems"]) == "nan"
+        )
+
+    def test_attribute_training_rejects_corrupt_attribute_without_time_change(self):
+        state = self.state()
+        state.player["attributes"]["might"] = float("inf")
+        before_time = state.time_minutes
+        with self.assertRaises(RuleError):
+            train_attribute(state, attribute="might", minutes=120)
+        self.assertEqual(state.time_minutes, before_time)
+        self.assertEqual(state.player["attributes"]["might"], float("inf"))
+
 if __name__ == "__main__":
     unittest.main()
