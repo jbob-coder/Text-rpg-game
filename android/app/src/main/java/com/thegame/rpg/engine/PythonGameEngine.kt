@@ -68,6 +68,24 @@ class PythonGameEngine internal constructor(
             }
         }
 
+    override suspend fun equip(itemId: String): Result<GameSnapshot> =
+        withContext(Dispatchers.IO) {
+            try {
+                Result.success(BridgeSnapshotMapper.fromMap(gateway.equip(itemId)))
+            } catch (failure: Throwable) {
+                Result.failure(classifyFailure(failure))
+            }
+        }
+
+    override suspend fun unequip(slot: String): Result<GameSnapshot> =
+        withContext(Dispatchers.IO) {
+            try {
+                Result.success(BridgeSnapshotMapper.fromMap(gateway.unequip(slot)))
+            } catch (failure: Throwable) {
+                Result.failure(classifyFailure(failure))
+            }
+        }
+
     override suspend fun travel(locationId: String): Result<GameSnapshot> =
         withContext(Dispatchers.IO) {
             try {
@@ -87,6 +105,7 @@ class PythonGameEngine internal constructor(
             "SAVE_PATH_REQUIRED",
             "CHOICE_ERROR",
             "CHEAT_ERROR",
+            "EQUIP_ERROR",
             "TRAVEL_ERROR",
             "ENGINE_ERROR",
         )
@@ -112,6 +131,7 @@ class PythonGameEngine internal constructor(
                 "SAVE_ERROR", "SAVE_PATH_REQUIRED" -> "The game could not be saved."
                 "CHOICE_ERROR" -> "That choice is not available."
                 "CHEAT_ERROR" -> "That cheat code could not be applied."
+                "EQUIP_ERROR" -> "Equipment could not be changed."
                 "TRAVEL_ERROR" -> "Travel could not be completed."
                 else -> "The game engine could not start."
             }
@@ -131,6 +151,8 @@ internal interface PythonSessionGateway {
     fun save()
     fun load(): Map<String, Any?>
     fun applyCheat(code: String): Map<String, Any?>
+    fun equip(itemId: String): Map<String, Any?>
+    fun unequip(slot: String): Map<String, Any?>
     fun travel(locationId: String): Map<String, Any?>
 }
 
@@ -210,6 +232,30 @@ private class ChaquopySessionGateway : PythonSessionGateway {
                 failure = failure,
                 fallbackCode = "CHEAT_ERROR",
                 fallbackMessage = "That cheat code could not be applied.",
+            )
+        }
+    }
+
+    override fun equip(itemId: String): Map<String, Any?> {
+        try {
+            return viewToMap(requireSession().callAttr("equip", itemId))
+        } catch (failure: Throwable) {
+            throw classifyPythonBoundaryFailure(
+                failure = failure,
+                fallbackCode = "EQUIP_ERROR",
+                fallbackMessage = "Equipment could not be changed.",
+            )
+        }
+    }
+
+    override fun unequip(slot: String): Map<String, Any?> {
+        try {
+            return viewToMap(requireSession().callAttr("unequip", slot))
+        } catch (failure: Throwable) {
+            throw classifyPythonBoundaryFailure(
+                failure = failure,
+                fallbackCode = "EQUIP_ERROR",
+                fallbackMessage = "Equipment could not be changed.",
             )
         }
     }
@@ -334,6 +380,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
             "SAVE_PATH_REQUIRED",
             "CHOICE_ERROR",
             "CHEAT_ERROR",
+            "EQUIP_ERROR",
             "TRAVEL_ERROR",
         ).firstOrNull { message.contains(it) }
 
@@ -345,6 +392,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
             "SAVE_ERROR", "SAVE_PATH_REQUIRED" -> "The game could not be saved."
             "CHOICE_ERROR" -> "That choice is not available."
             "CHEAT_ERROR" -> "That cheat code could not be applied."
+            "EQUIP_ERROR" -> "Equipment could not be changed."
             "TRAVEL_ERROR" -> "Travel could not be completed."
             else -> fallbackMessage
         }
