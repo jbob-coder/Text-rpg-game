@@ -157,3 +157,24 @@ Why this is not closed:
 - the domain/floor policy is an architecture/balance choice and should remain reversible until verified in play and accepted for promotion
 
 Related: `CP-2026-09-27-EFFECTIVE-HARDENING-04`
+
+
+---
+
+## DEC-TEST-001 — User is final acceptance tester, not intermediate QA
+
+Status: [DIRECTION] ACCEPTED
+
+The user will not test the game during normal development. Intermediate implementation must not depend on the user launching builds, reproducing defects, checking screens, or running manual regression steps.
+
+Verification responsibility stays inside the development workflow through static inspection, authored automated tests, deterministic simulation, content/schema validation, save/load verification, exact-SHA evidence, and free/local runtime execution where available.
+
+Unexecuted tests must never be described as passing. If exact runtime verification is unavailable, the affected gate remains open and the project must not be promoted by assumption.
+
+The current Stage 3 runtime gate therefore remains mandatory even though the user will not perform intermediate testing.
+
+Do not introduce paid/billing-risk CI solely to obtain test execution without explicit user authorization.
+
+The user should be asked to perform a game check only when a final acceptance/release candidate exists: agreed scope implemented, required automated suite green on the exact candidate SHA, validators clean, applicable save/load/progression/migration paths verified, no known release-blocking defects, documentation synchronized, and a playable/runnable package prepared.
+
+Detailed policy: `docs/context/FINAL_ACCEPTANCE_AND_TESTING_POLICY.md`
