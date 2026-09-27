@@ -29,6 +29,80 @@ _STAGE_ORDER = {
 _STABLE_ID = re.compile(r"^[A-Z][A-Z0-9_]*$")
 
 
+def _validate_requirements_definition(
+    ability_id: str,
+    technique_id: str,
+    field_name: str,
+    requirements: Any,
+    errors: list[str],
+) -> None:
+    location = f"{ability_id}.{technique_id}.{field_name}"
+    if requirements is None:
+        return
+    if not isinstance(requirements, Mapping):
+        errors.append(f"{location} must be an object")
+        return
+
+    for numeric_field in ("rank_min", "mastery_xp_min"):
+        value = requirements.get(numeric_field, 0)
+        if not isinstance(value, (int, float)) or value < 0:
+            errors.append(f"{location}.{numeric_field} must be non-negative numeric")
+
+    for list_field in ("knowledge", "perks"):
+        values = requirements.get(list_field, [])
+        if not isinstance(values, list):
+            errors.append(f"{location}.{list_field} must be a list")
+            continue
+        for value in values:
+            if not isinstance(value, str) or not _STABLE_ID.fullmatch(value):
+                errors.append(
+                    f"{location}.{list_field} contains invalid stable ID: {value!r}"
+                )
+
+    for map_field in ("attributes", "skills"):
+        values = requirements.get(map_field, {})
+        if not isinstance(values, Mapping):
+            errors.append(f"{location}.{map_field} must be an object")
+            continue
+        for key, minimum in values.items():
+            if not isinstance(key, str) or not key:
+                errors.append(f"{location}.{map_field} has invalid key")
+            if not isinstance(minimum, (int, float)):
+                errors.append(
+                    f"{location}.{map_field}.{key} minimum must be numeric"
+                )
+
+    flags = requirements.get("flags", {})
+    if not isinstance(flags, Mapping):
+        errors.append(f"{location}.flags must be an object")
+
+    items = requirements.get("items", {})
+    if not isinstance(items, Mapping):
+        errors.append(f"{location}.items must be an object")
+    else:
+        for item_id, quantity in items.items():
+            if not isinstance(item_id, str) or not _STABLE_ID.fullmatch(item_id):
+                errors.append(f"{location}.items has invalid item ID: {item_id!r}")
+            if not isinstance(quantity, int) or quantity < 1:
+                errors.append(
+                    f"{location}.items.{item_id} quantity must be integer >= 1"
+                )
+
+    techniques = requirements.get("techniques", {})
+    if not isinstance(techniques, Mapping):
+        errors.append(f"{location}.techniques must be an object")
+    else:
+        for required_id, stage in techniques.items():
+            if not isinstance(required_id, str) or not _STABLE_ID.fullmatch(required_id):
+                errors.append(
+                    f"{location}.techniques has invalid technique ID: {required_id!r}"
+                )
+            if stage not in _STAGE_ORDER or stage == "unknown":
+                errors.append(
+                    f"{location}.techniques.{required_id} has unsupported stage {stage!r}"
+                )
+
+
 def validate_power_definitions(
     definitions: Mapping[str, Mapping[str, Any]],
 ) -> list[str]:
@@ -83,6 +157,20 @@ def validate_power_definitions(
             if not isinstance(technique, Mapping):
                 errors.append(f"{ability_id}.{technique_id} must be an object")
                 continue
+            _validate_requirements_definition(
+                ability_id,
+                technique_id,
+                "discovery_requirements",
+                technique.get("discovery_requirements", {}),
+                errors,
+            )
+            _validate_requirements_definition(
+                ability_id,
+                technique_id,
+                "requirements",
+                technique.get("requirements", {}),
+                errors,
+            )
             stage_min = technique.get("stage_min", "discovered")
             if stage_min not in _STAGE_ORDER or stage_min == "unknown":
                 errors.append(
@@ -278,13 +366,70 @@ def discover_ability(
     return ability
 
 
-def discover_technique(state: GameState, ability_id: str, technique_id: str) -> Dict[str, Any]:
+def technique_discovery_status(
+    state: GameState,
+    ability_id: str,
+    technique_id: str,
+    definition: Mapping[str, Any] | None = None,
+) -> Dict[str, Any]:
+    """Report whether an authored technique may be discovered now."""
+    ability = state.abilities.get(ability_id)
+    if not ability:
+        return {"available": False, "reasons": ["ability_missing"]}
+
+    if technique_id in ability.get("techniques", {}):
+        return {"available": True, "reasons": [], "already_discovered": True}
+
+    requirements = (definition or {}).get("discovery_requirements", {})
+    reasons: list[str] = []
+
+    if float(ability.get("rank", 0)) < float(requirements.get("rank_min", 0)):
+        reasons.append("rank")
+    if float(ability.get("mastery_xp", 0)) < float(
+        requirements.get("mastery_xp_min", 0)
+    ):
+        reasons.append("mastery_xp")
+
+    for knowledge_id in requirements.get("knowledge", []):
+        if knowledge_id not in state.knowledge:
+            reasons.append(f"knowledge:{knowledge_id}")
+    for perk_id in requirements.get("perks", []):
+        if perk_id not in state.perks:
+            reasons.append(f"perk:{perk_id}")
+
+    reasons.extend(_extra_requirements_met(state, requirements))
+
+    techniques = ability.get("techniques", {})
+    for required_id, stage_min in requirements.get("techniques", {}).items():
+        record = techniques.get(required_id)
+        if not record or not _stage_at_least(record.get("stage", "unknown"), stage_min):
+            reasons.append(f"technique:{required_id}:{stage_min}")
+
+    return {"available": not reasons, "reasons": reasons, "already_discovered": False}
+
+
+def discover_technique(
+    state: GameState,
+    ability_id: str,
+    technique_id: str,
+    definition: Mapping[str, Any] | None = None,
+) -> Dict[str, Any]:
     ability = state.abilities.get(ability_id)
     if not ability:
         raise RuleError(f"Unknown ability: {ability_id}")
     techniques = ability.setdefault("techniques", {})
     if technique_id in techniques:
         return techniques[technique_id]
+
+    status = technique_discovery_status(
+        state, ability_id, technique_id, definition
+    )
+    if not status["available"]:
+        raise RuleError(
+            f"Technique cannot be discovered: {technique_id} "
+            f"({', '.join(status['reasons'])})"
+        )
+
     record = {
         "mastery_xp": 0.0,
         "stage": "discovered",
