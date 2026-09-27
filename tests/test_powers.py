@@ -784,5 +784,156 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertTrue(str(technique["mastery_xp"]) == "nan")
         self.assertEqual(technique["stage"], original_stage)
 
+    def test_use_rejects_corrupt_condition_container_before_spend(self):
+        state = self.state()
+        state.player["conditions"] = []
+        definition = self.definition()
+        definition["drawbacks"] = [
+            {
+                "type": "condition",
+                "condition_id": "COND_STRAIN",
+                "severity": 1,
+                "duration_minutes": 10,
+                "tags": ["strain"],
+                "modifiers": {"attributes.will": -1},
+            }
+        ]
+        before_focus = state.player["resources"]["focus"]
+        before_flux = state.player["power_resources"]["flux"]
+        before_uses = state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["uses"]
+
+        with self.assertRaises(RuleError):
+            use_technique(state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition)
+
+        self.assertEqual(state.player["resources"]["focus"], before_focus)
+        self.assertEqual(state.player["power_resources"]["flux"], before_flux)
+        self.assertEqual(
+            state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["uses"],
+            before_uses,
+        )
+
+    def test_practice_rejects_invalid_timed_condition_before_progression_mutation(self):
+        state = self.state()
+        state.player["conditions"] = {
+            "COND_BAD_TIME": {
+                "duration_minutes": True,
+                "severity": 1,
+                "source": "test",
+                "tags": [],
+                "modifiers": {},
+            }
+        }
+        before_resources = {
+            "focus": state.player["resources"]["focus"],
+            "stamina": state.player["resources"]["stamina"],
+        }
+        technique = state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]
+        before_technique = technique["mastery_xp"]
+        before_ability = state.abilities["ABILITY_FLUX"]["mastery_xp"]
+
+        with self.assertRaises(RuleError):
+            practice_technique(
+                state,
+                "ABILITY_FLUX",
+                "TECHNIQUE_PULSE",
+                minutes=60,
+            )
+
+        self.assertEqual(state.player["resources"]["focus"], before_resources["focus"])
+        self.assertEqual(state.player["resources"]["stamina"], before_resources["stamina"])
+        self.assertEqual(technique["mastery_xp"], before_technique)
+        self.assertEqual(state.abilities["ABILITY_FLUX"]["mastery_xp"], before_ability)
+        self.assertEqual(state.time_minutes, 0)
+
+    def test_invalid_evolution_form_is_definition_error(self):
+        definition = {
+            "requirements": {},
+            "result": {"form": ""},
+        }
+        errors = validate_evolution_definition(definition)
+        self.assertTrue(any("result.form" in error for error in errors))
+
+    def test_evolution_rejects_corrupt_tags_before_any_commit(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["tags"] = "not-a-list"
+        definition = {
+            "requirements": {},
+            "result": {
+                "form": "stable",
+                "consume_items": {"ITEM_CORE_SHARD": 1},
+                "grant_perks": {
+                    "PERK_EVOLUTION": {
+                        "modifiers": {"attributes.will": 1},
+                        "tags": ["evolution"],
+                    }
+                },
+            },
+        }
+        before_inventory = dict(state.inventory)
+        before_form = state.abilities["ABILITY_FLUX"].get("form")
+
+        with self.assertRaises(RuleError):
+            evolve_ability(
+                state,
+                "ABILITY_FLUX",
+                "EVOLUTION_CORRUPT_TAGS",
+                definition,
+            )
+
+        self.assertEqual(state.inventory, before_inventory)
+        self.assertEqual(state.abilities["ABILITY_FLUX"].get("form"), before_form)
+        self.assertNotIn("PERK_EVOLUTION", state.perks)
+
+    def test_evolution_rejects_invalid_inventory_quantity_before_commit(self):
+        state = self.state()
+        state.inventory["ITEM_CORE_SHARD"] = True
+        definition = {
+            "requirements": {},
+            "result": {
+                "form": "stable",
+                "consume_items": {"ITEM_CORE_SHARD": 1},
+            },
+        }
+        before_form = state.abilities["ABILITY_FLUX"].get("form")
+        with self.assertRaises(RuleError):
+            evolve_ability(
+                state,
+                "ABILITY_FLUX",
+                "EVOLUTION_BAD_INVENTORY",
+                definition,
+            )
+        self.assertEqual(state.abilities["ABILITY_FLUX"].get("form"), before_form)
+        self.assertIs(state.inventory["ITEM_CORE_SHARD"], True)
+
+    def test_evolution_rejects_invalid_history_before_commit(self):
+        state = self.state()
+        state.history = "corrupt"
+        definition = {
+            "requirements": {},
+            "result": {"form": "stable"},
+        }
+        before_form = state.abilities["ABILITY_FLUX"].get("form")
+        with self.assertRaises(RuleError):
+            evolve_ability(
+                state,
+                "ABILITY_FLUX",
+                "EVOLUTION_BAD_HISTORY",
+                definition,
+            )
+        self.assertEqual(state.abilities["ABILITY_FLUX"].get("form"), before_form)
+
+    def test_discovery_rejects_bad_history_without_creating_state(self):
+        state = GameState(seed="s", scene_id="A")
+        state.history = "corrupt"
+        with self.assertRaises(RuleError):
+            discover_ability(state, "ABILITY_NEW", family="test")
+        self.assertNotIn("ABILITY_NEW", state.abilities)
+
+    def test_discover_ability_rejects_non_iterable_tags_as_rule_error(self):
+        state = GameState(seed="s", scene_id="A")
+        with self.assertRaises(RuleError):
+            discover_ability(state, "ABILITY_NEW", tags=42)
+        self.assertEqual(state.abilities, {})
+
 if __name__ == "__main__":
     unittest.main()
