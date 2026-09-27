@@ -518,3 +518,105 @@ The contract establishes:
 3. Define the player-visible ability/progression projection contract next.
 4. Continue resolving the seven-vs-eight core-stat decision with migration design before changing persistent schema.
 5. Execute the real review branch test suite when a byte-for-byte checkout/runtime becomes available.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-ABILITY-PROGRESSION-V2-07
+
+Repository: `jbob-coder/Text-rpg-game`
+Context branch: `shared/game-context`
+Parent implementation branch: `foundation/text-rpg-systems`
+Ability workstream: `feature/ability-progression-v2`
+
+### CURRENT_OBJECTIVE
+
+[IN_PROGRESS] Evolve the already-existing power runtime toward the documented ability/status-screen architecture without changing the unresolved core-stat schema or leaking hidden progression data.
+
+### FOUNDATION STATE DISCOVERED DURING REVIEW
+
+[IMPLEMENTED] The current foundation is further advanced than the earlier context checkpoint. Its own `docs/IMPLEMENTATION_STATUS.md` reports:
+- power runtime with technique mastery, costs, world-time cooldowns, drawbacks, ability mastery, and evolution prerequisites
+- durable ability evolution with form/tags/items/perks/rank-floor behavior
+- authored quest graphs and quest/content-pack validation
+- richer NPC relationships/goals/story-state and deterministic leak execution
+- character visual identity work in the current foundation package surface
+
+[REPORTED_VERIFICATION] The foundation status document reports a branch-equivalent test run of **58 passed, 0 failed**. This chat inspected that report but did not independently execute those 58 tests on the foundation branch.
+
+### STALE-BRANCH CORRECTION
+
+[VERIFIED] The first ability work branch (`feature/ability-progression-v1`) was compared against the live foundation and found behind while the parent continued advancing.
+
+[DIRECTION] Rather than continue on stale ancestry, the ability work was restarted as `feature/ability-progression-v2` from a newer foundation tip and the ability-only changes were ported forward.
+
+[VERIFIED] At the latest comparison in this chat, V2 is ahead by six commits and behind the live foundation by one unrelated parent commit affecting `tests/test_stats.py`. Final promotion still requires a fresh comparison because concurrent foundation work continues.
+
+### ABILITY V2 IMPLEMENTATION
+
+[IMPLEMENTED] `ability_player_view()` now provides a dedicated player-safe ability projection rather than exposing raw ability/definition dictionaries.
+
+The projection includes only player-appropriate state:
+- display name
+- rank
+- mastery stage / mastery XP
+- current form/state
+- optional control and efficiency
+- configured ability-resource current/max values
+- discovered techniques only
+- technique cooldown remaining
+- explicitly visible evolution entries only
+- completed evolution IDs
+
+[IMPLEMENTED] Hidden evolution definitions remain hidden even when their authored definitions contain names/requirements. Hinted/partial/known/satisfied visibility is driven by persistent player-facing evolution visibility state.
+
+[IMPLEMENTED] Added `validate_technique_definition()` and `validate_evolution_definition()` so malformed authored power data is rejected before technique/evolution mutation.
+
+[IMPLEMENTED] Boolean values are rejected as numeric ability resources.
+
+[IMPLEMENTED] Technique/evolution attribute and skill requirements now use the existing effective-value pipeline, including equipment, perks, conditions, and reached equipment-set bonuses when set definitions are supplied.
+
+### TEST COVERAGE ADDED
+
+[IMPLEMENTED] New V2 tests cover:
+- discovered-technique-only projection
+- hidden evolution non-disclosure
+- no raw evolution-requirement leakage
+- resource/control/efficiency projection
+- cooldown remaining without advancing time
+- boolean resource rejection
+- malformed technique definition rejected before resource/use mutation
+- malformed evolution definition rejected before form/item/perk mutation
+- effective attribute requirements using equipment/perk/condition/set stacking
+- effective-stat evolution requirements
+
+### TESTS_RUN
+
+None by this chat on a byte-for-byte checkout of `feature/ability-progression-v2`.
+
+### TEST_RESULTS
+
+[UNKNOWN] The new V2 tests are authored and inspected but not yet executed on an exact checkout. The historical/reported foundation 58-test result does not verify V2 additions.
+
+### FILES_CHANGED_ON_ABILITY_V2
+
+- `src/textrpg/powers.py`
+- `src/textrpg/__init__.py`
+- `tests/test_powers.py`
+- `docs/ABILITY_PROGRESSION_V2_REVIEW.md`
+
+### RISKS
+
+[RISK] Parent foundation continues changing concurrently; V2 must be compared/rebased/ported before promotion.
+[RISK] Player-view disclosure metadata must remain persistent and explicit so authored hidden evolution data cannot leak.
+[RISK] Effective-stat integration and the separate hardening review branch must not be merged blindly; no-double-counting behavior must be rechecked on the final combined ancestry.
+[RISK] The seven-vs-eight core-stat decision remains independent. Power requirement APIs should remain path/registry driven so the future migration is localized.
+
+### NEXT_ACTION
+
+1. Continue ability runtime review for remaining mutation/authoring edge cases.
+2. Add save-round-trip coverage for the player-visible evolution/discovery state used by the ability projection.
+3. Recompare V2 against the latest foundation before further promotion work.
+4. Execute the full suite on the final synchronized branch state.
+5. Keep `feature/ability-progression-v1` as superseded work history; do not use it as the active branch.
+6. Continue the stat-schema migration design separately from ability runtime implementation.
