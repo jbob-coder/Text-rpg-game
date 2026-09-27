@@ -41,10 +41,16 @@ def _validate_id(value: Any, label: str, errors: List[str]) -> None:
         errors.append(f"{label} must be a stable uppercase ID: {value!r}")
 
 
-def _walk_conditions(conditions: Iterable[Mapping[str, Any]], location: str, errors: List[str]) -> None:
+def _walk_conditions(conditions: Any, location: str, errors: List[str]) -> None:
+    if not isinstance(conditions, list):
+        errors.append(f"{location} must be a list")
+        return
     for index, condition in enumerate(conditions):
-        kind = condition.get("type")
         item_location = f"{location}.condition[{index}]"
+        if not isinstance(condition, Mapping):
+            errors.append(f"{item_location} must be an object")
+            continue
+        kind = condition.get("type")
         if kind not in SUPPORTED_CONDITIONS:
             errors.append(f"{item_location} has unsupported type {kind!r}")
             continue
@@ -55,10 +61,16 @@ def _walk_conditions(conditions: Iterable[Mapping[str, Any]], location: str, err
                 errors.append(f"{item_location} has invalid stat path: {exc}")
 
 
-def _walk_effects(effects: Iterable[Mapping[str, Any]], location: str, errors: List[str]) -> None:
+def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
+    if not isinstance(effects, list):
+        errors.append(f"{location}.effects must be a list")
+        return
     for index, effect in enumerate(effects):
-        kind = effect.get("type")
         item_location = f"{location}.effect[{index}]"
+        if not isinstance(effect, Mapping):
+            errors.append(f"{item_location} must be an object")
+            continue
+        kind = effect.get("type")
         if kind not in SUPPORTED_EFFECTS:
             errors.append(f"{item_location} has unsupported type {kind!r}")
             continue
@@ -80,6 +92,9 @@ def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
 
     for scene_id, scene in scenes.items():
         _validate_id(scene_id, "scene_id", errors)
+        if not isinstance(scene, Mapping):
+            errors.append(f"{scene_id} must be an object")
+            continue
         choices = scene.get("choices", [])
         if not isinstance(choices, list):
             errors.append(f"{scene_id}.choices must be a list")
@@ -87,6 +102,9 @@ def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
 
         for index, choice in enumerate(choices):
             location = f"{scene_id}.choices[{index}]"
+            if not isinstance(choice, Mapping):
+                errors.append(f"{location} must be an object")
+                continue
             choice_id = choice.get("id")
             _validate_id(choice_id, f"{location}.id", errors)
             if isinstance(choice_id, str):
