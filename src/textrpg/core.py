@@ -370,6 +370,43 @@ class RulesEngine:
                     "confidence": effect.get("confidence", 1.0),
                     "turn_learned": state.turn,
                 }
+            elif kind == "npc_goal_create":
+                from .social import set_goal
+
+                set_goal(
+                    state,
+                    effect["npc"],
+                    effect["goal_id"],
+                    priority=int(effect.get("priority", 50)),
+                    progress=float(effect.get("progress", 0)),
+                    status=effect.get("status", "active"),
+                    source=effect.get("source", "authored_scene"),
+                    data=effect.get("data"),
+                )
+            elif kind == "npc_goal_progress":
+                from .social import update_goal_progress
+
+                update_goal_progress(
+                    state,
+                    effect["npc"],
+                    effect["goal_id"],
+                    float(effect["delta"]),
+                    completion_threshold=float(
+                        effect.get("completion_threshold", 100)
+                    ),
+                )
+            elif kind == "npc_story_transition":
+                from .social import transition_story_state
+
+                transition_story_state(
+                    state,
+                    effect["npc"],
+                    effect["track_id"],
+                    effect["to_state"],
+                    allowed_from=effect.get("allowed_from"),
+                    reason=effect.get("reason", "authored_scene"),
+                    data=effect.get("data"),
+                )
             elif kind == "personality":
                 npc = state.npcs.setdefault(effect["npc"], {})
                 personality = npc.setdefault("personality", {})
