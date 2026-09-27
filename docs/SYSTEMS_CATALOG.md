@@ -242,6 +242,31 @@ When registries are present, authored scene gates/effects and power requirements
 
 Registries provide ID integrity and metadata ownership; they do not automatically grant the registered content.
 
+## Trace Echo stabilization loop
+
+The current provisional playable branch demonstrates how a stronger technique is earned through multiple systems rather than a single unlock button.
+
+After the first Signal Pulse use, the player can begin `QUEST_TRACE_STABILIZATION`. The hub supports:
+- repeated two-hour Signal Pulse practice sessions;
+- two-hour Powers-skill training sessions;
+- eight-hour universal-resource recovery;
+- stable-pattern analysis once Signal Pulse reaches `learned`;
+- a six-hour sensory tolerance protocol;
+- Directional Trace discovery only when its complete discovery contract is satisfied.
+
+`PERK_TRACE_TOLERANCE` is granted by the tolerance protocol, not by registration or debug state. It currently contributes +5 effective Perception and +5 effective Will. Power prerequisite checks use effective attribute/skill values, so this specialized training can qualify the character without rewriting base attributes.
+
+The provisional Directional Trace discovery contract is:
+- Trace Echo ability mastery >= 20
+- Signal Pulse stage >= learned
+- Powers skill >= 10
+- `KNOW_TRACE_ECHO_PATTERN_STABLE`
+- `PERK_TRACE_TOLERANCE`
+- effective Perception >= 45
+- effective Will >= 45
+
+The training hub intentionally allows repetition and recovery until the contract is met. This is a mechanics prototype; pacing may later be broken into day/session milestones instead of exposing the loop as one continuous hub.
+
 ## Ability discovery and practice
 
 Ability discovery is separate from mastery.
