@@ -173,3 +173,48 @@ The medieval/crystal work below is blocked from V6 integration by TASK-STAGE3-00
 - Important beast memories, adaptations, territories, crystals, items, wounds, and encounter outcomes need stable IDs/state if later systems react to them.
 - Slow progression and persistent consequence remain global design rules.
 - No paid/billing-risk CI should be introduced solely for verification without explicit user authorization.
+
+
+## Prototype evidence ledger — 2026-09-27
+
+Status: [PROTOTYPE] / NOT PROMOTED / NOT TASK COMPLETION
+
+Prototype branch: `prototype/medieval-crystal-combat-contracts`
+
+Prototype code/test HEAD exercised before documentation-only refresh: `8092edd4e106b0b44c983c78645a8793e975d444`
+
+Current prototype branch after status documentation refresh: `c44f7289d79b025613e2ed454161f6ade55f630d`
+
+Base V6: `7f5f104fb839068bdfaf5cec72f37129ae20d463`
+
+The following backlog areas now have isolated executable prototypes. Their main checkboxes remain open because the work has not been integrated with the authoritative GameState/persistence/content loader or executed together with the exact V6 suite.
+
+Prototype coverage:
+
+- TASK-COMBAT-001..010 — CombatState/body-zone reachability concepts, positional gates, and player-safe target projection are prototyped.
+- TASK-COMBAT-017..019 — player-safe targeting and environment/state-driven unlock behavior have prototype tests.
+- TASK-CRYSTAL-001..004 — crystal definitions/instances, source types, provenance, and appraisal visibility are prototyped.
+- TASK-CRYSTAL-007..008 — harvest-damage/integrity representation and strict metadata validation are partially prototyped.
+- TASK-EQUIP-001..011 — physical weapon/armor definitions, damage/resistance profiles, body coverage, durability, and crystal-socket metadata are partially prototyped.
+- TASK-EQUIP-014..015 — player-safe weapon/armor projections and prototype automated coverage exist.
+- TASK-FORGE-002 — staged forge-job order is prototyped.
+- TASK-FORGE-004..005 — crystal/weapon compatibility, stability, socket-capacity, and destroyed-crystal rejection are partially prototyped.
+- TASK-FORGE-007 — forge compatibility/preview returns explicit deterministic reasons; final quality provenance is still open.
+- TASK-BEAST-002..004 — BeastRuntimeState-shaped data, level/development fields, and intelligence are prototyped; actual level-up progression remains open.
+- TASK-ADAPT-001..009 — bounded encounter memory, observation confidence, intelligence gates, time/resources gates, and no-omniscient-counter readiness are prototyped. Actual authored adaptations are still open.
+- TASK-ADAPT-012 — isolated deterministic tests exist for memory/adaptation readiness.
+- TASK-INTEL-001..004 — intelligence range, communication cap, role vocabulary, and authored command eligibility gates are partially prototyped.
+
+Isolated runtime evidence:
+
+- combat targeting: 11 tests
+- crystals: 11 tests
+- beast memory/adaptation/command: 14 tests
+- weapons: 12 tests
+- armor: 11 tests
+- forge compatibility/staging: 10 tests
+- total: **69 passed / 0 failed / 0 errors**
+
+Important limitation:
+
+The local shell could not resolve `github.com`, so it could not clone the exact repository and run the existing V6 258-test suite together with these 69 tests. Stage 3 therefore remains open and none of these prototype tasks should be marked integrated/canonical yet.
