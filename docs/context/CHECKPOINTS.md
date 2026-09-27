@@ -2367,3 +2367,69 @@ This verifies only the isolated prototype contracts exercised by those tests.
 3. Add beast level/development progression rules without making level the sole power source.
 4. Add authored adaptation outcomes and deterministic intelligence-gated voice/bark projection.
 5. After V6 becomes runtime-verified, design the real GameState/save/content migration before integrating the prototype.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-MEDIEVAL-HUNT-INTEGRATION-30
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Prototype branch: `prototype/medieval-crystal-combat-contracts`
+
+Prototype code/test HEAD exercised: `6f0f8ed1b165d3de43f14ce0d58d0237259ddfe3`
+
+Prototype status-doc refresh HEAD: `efbfaee6d23eb85889db09a058dc9b04669f03c7`
+
+### IMPLEMENTED PROTOTYPE
+
+Added:
+
+- `src/textrpg/wounds.py`
+- `tests/test_wounds.py`
+- `tests/test_medieval_hunt_prototype.py`
+
+### SYSTEM CONNECTION VERIFIED IN ISOLATION
+
+[VERIFIED ISOLATED] Initial battle state exposes only body zones reachable from the current position/weapon.
+
+[VERIFIED ISOLATED] Armor coverage is zone-specific: chest armor does not automatically protect an exposed foreleg.
+
+[VERIFIED ISOLATED] Repeated zone damage creates persistent impairment tags/action restrictions according to authored wound thresholds.
+
+[VERIFIED ISOLATED] A surviving beast records repeated player targeting and retreat as encounter memory.
+
+[VERIFIED ISOLATED] Behavioral adaptation readiness appears only after sufficient observations/confidence.
+
+[VERIFIED ISOLATED] Changing battle state can expose the head/core without modifying the beast's anatomy definition.
+
+[VERIFIED ISOLATED] A direct core hit can damage the future heart-crystal harvest.
+
+[VERIFIED ISOLATED] Harvest damage reduces effective crystal integrity.
+
+[VERIFIED ISOLATED] The resulting beast crystal can be evaluated for compatibility with an open weapon crystal socket.
+
+### TEST EVIDENCE
+
+Combined isolated prototype run:
+
+- 84 tests executed
+- 84 passed
+- 0 failed
+- 0 errors
+
+This includes combat, weapons, armor, crystals, forging, beast memory/adaptation, wounds, and cross-system hunt integration.
+
+### LIMITATION
+
+[UNKNOWN] The exact V6 suite and the prototype suite still have not run together in a byte-for-byte repository checkout because the available local shell cannot resolve `github.com`.
+
+[DECISION] V6 remains unmodified and unpromoted. These results do not close Stage 3.
+
+### NEXT_ACTION
+
+1. Prototype beast development/level advancement.
+2. Prototype authored adaptation outcomes that consume readiness evidence.
+3. Prototype intelligence-gated deterministic voice/bark selection.
+4. Prototype territory/region state and coarse beast-vs-beast simulation.
+5. Keep all persistence/GameState integration deferred until an exact V6 runtime becomes available and is green.
