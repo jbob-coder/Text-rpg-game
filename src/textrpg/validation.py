@@ -195,6 +195,51 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
             if not isinstance(skill, str) or not skill:
                 errors.append(f"{item_location}.skill must be non-empty text")
 
+        if kind == "npc_goal_create":
+            _validate_id(effect.get("goal_id"), f"{item_location}.goal_id", errors)
+            priority = effect.get("priority", 50)
+            if (
+                isinstance(priority, bool)
+                or not isinstance(priority, int)
+                or priority < 0
+                or priority > 100
+            ):
+                errors.append(
+                    f"{item_location}.priority must be an integer in range 0..100"
+                )
+            progress = effect.get("progress", 0)
+            if (
+                isinstance(progress, bool)
+                or not isinstance(progress, (int, float))
+                or not isfinite(float(progress))
+                or float(progress) < 0
+                or float(progress) > 100
+            ):
+                errors.append(
+                    f"{item_location}.progress must be finite numeric in range 0..100"
+                )
+
+        if kind == "npc_goal_progress":
+            _validate_id(effect.get("goal_id"), f"{item_location}.goal_id", errors)
+            delta = effect.get("delta")
+            if (
+                isinstance(delta, bool)
+                or not isinstance(delta, (int, float))
+                or not isfinite(float(delta))
+            ):
+                errors.append(f"{item_location}.delta must be finite numeric")
+            threshold = effect.get("completion_threshold", 100)
+            if (
+                isinstance(threshold, bool)
+                or not isinstance(threshold, (int, float))
+                or not isfinite(float(threshold))
+                or float(threshold) <= 0
+                or float(threshold) > 100
+            ):
+                errors.append(
+                    f"{item_location}.completion_threshold must be finite numeric in range (0, 100]"
+                )
+
         if kind == "add_perk":
             try:
                 validate_modifier_mapping(
