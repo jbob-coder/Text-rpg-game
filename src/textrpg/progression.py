@@ -63,21 +63,49 @@ def gain_ability_mastery(
             raise RuleError("Ability rank thresholds must be sorted ascending")
         previous_threshold = float(threshold)
 
-    ability = state.abilities.setdefault(
-        ability_id,
-        {"rank": 0, "mastery_xp": 0.0, "mastery_stage": "discovered", "techniques": {}},
-    )
-    before = dict(ability)
-    ability["mastery_xp"] = float(ability.get("mastery_xp", 0.0)) + float(xp)
-    ability["mastery_stage"] = mastery_stage(ability["mastery_xp"])
+    existing = state.abilities.get(ability_id)
+    if existing is None:
+        existing = {
+            "rank": 0,
+            "mastery_xp": 0.0,
+            "mastery_stage": "discovered",
+            "techniques": {},
+        }
+    if not isinstance(existing, dict):
+        raise RuleError(f"Ability state must be an object: {ability_id}")
+
+    current_mastery = existing.get("mastery_xp", 0.0)
+    if (
+        isinstance(current_mastery, bool)
+        or not isinstance(current_mastery, (int, float))
+        or not isfinite(float(current_mastery))
+        or float(current_mastery) < 0
+    ):
+        raise RuleError(f"Ability mastery state is invalid: {ability_id}")
+
+    rank_floor_raw = existing.get("rank_floor", 0)
+    if (
+        isinstance(rank_floor_raw, bool)
+        or not isinstance(rank_floor_raw, int)
+        or rank_floor_raw < 0
+    ):
+        raise RuleError(f"Ability rank_floor state is invalid: {ability_id}")
+
+    next_mastery = float(current_mastery) + float(xp)
+    next_stage = mastery_stage(next_mastery)
 
     rank = 0
     for index, threshold in enumerate(rank_thresholds):
-        if ability["mastery_xp"] >= threshold:
+        if next_mastery >= threshold:
             rank = index
     derived_rank = min(rank, max_rank)
-    rank_floor = int(ability.get("rank_floor", 0))
-    ability["rank"] = max(derived_rank, rank_floor)
+    next_rank = max(derived_rank, rank_floor_raw)
+
+    before = dict(existing)
+    ability = state.abilities.setdefault(ability_id, existing)
+    ability["mastery_xp"] = next_mastery
+    ability["mastery_stage"] = next_stage
+    ability["rank"] = next_rank
 
     return {"before": before, "after": dict(ability)}
 
