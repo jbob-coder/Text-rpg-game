@@ -114,6 +114,44 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun equip(itemId: String) {
+        if (_uiState.value.busy) return
+        _uiState.update { it.copy(busy = true) }
+        viewModelScope.launch {
+            engine.equip(itemId).fold(
+                onSuccess = { snapshot ->
+                    _uiState.update {
+                        it.copy(
+                            bootState = BootState.Ready,
+                            snapshot = snapshot,
+                            busy = false,
+                        )
+                    }
+                },
+                onFailure = ::publishFailure,
+            )
+        }
+    }
+
+    fun unequip(slot: String) {
+        if (_uiState.value.busy) return
+        _uiState.update { it.copy(busy = true) }
+        viewModelScope.launch {
+            engine.unequip(slot).fold(
+                onSuccess = { snapshot ->
+                    _uiState.update {
+                        it.copy(
+                            bootState = BootState.Ready,
+                            snapshot = snapshot,
+                            busy = false,
+                        )
+                    }
+                },
+                onFailure = ::publishFailure,
+            )
+        }
+    }
+
     fun travel(locationId: String) {
         if (_uiState.value.busy) return
         _uiState.update { it.copy(busy = true) }
