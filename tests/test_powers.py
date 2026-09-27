@@ -597,5 +597,53 @@ class PowerRuntimeTests(unittest.TestCase):
                 },
             )
 
+    def test_discover_ability_rejects_malformed_metadata_before_history_mutation(self):
+        state = GameState(seed="s", scene_id="A")
+        with self.assertRaises(RuleError):
+            discover_ability(state, "", family="perception")
+        with self.assertRaises(RuleError):
+            discover_ability(state, "ABILITY_BAD", tags="sensory")
+        with self.assertRaises(RuleError):
+            discover_ability(state, "ABILITY_BAD", data=["not", "mapping"])
+        self.assertEqual(state.abilities, {})
+        self.assertEqual(state.history, [])
+
+    def test_discover_technique_records_discovery_once(self):
+        state = GameState(seed="s", scene_id="A")
+        discover_ability(state, "ABILITY_TRACE", family="perception")
+        before = len(state.history)
+        discover_technique(state, "ABILITY_TRACE", "TECHNIQUE_SCAN")
+        self.assertEqual(state.history[-1]["type"], "technique_discovered")
+        self.assertEqual(len(state.history), before + 1)
+        discover_technique(state, "ABILITY_TRACE", "TECHNIQUE_SCAN")
+        self.assertEqual(len(state.history), before + 1)
+
+    def test_practice_rejects_invalid_numeric_inputs_without_mutation(self):
+        for kwargs in (
+            {"minutes": True},
+            {"minutes": 60, "intensity": float("nan")},
+            {"minutes": 60, "mentor_bonus": float("inf")},
+            {"minutes": 60, "stamina_per_hour": -1},
+        ):
+            state = self.state()
+            before_resources = dict(state.player["resources"])
+            before_time = state.time_minutes
+            before_mastery = dict(
+                state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]
+            )
+            with self.assertRaises(RuleError):
+                practice_technique(
+                    state,
+                    "ABILITY_FLUX",
+                    "TECHNIQUE_PULSE",
+                    **kwargs,
+                )
+            self.assertEqual(state.player["resources"], before_resources)
+            self.assertEqual(state.time_minutes, before_time)
+            self.assertEqual(
+                state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"],
+                before_mastery,
+            )
+
 if __name__ == "__main__":
     unittest.main()
