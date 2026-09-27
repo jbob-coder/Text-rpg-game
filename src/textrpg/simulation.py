@@ -98,6 +98,14 @@ def _time_advance_plan(
     minutes: int,
 ) -> tuple[int, dict[str, Any], bool, Dict[str, int], list[str]]:
     minutes = _minutes(minutes, "Time advance minutes", minimum=0)
+    if (
+        isinstance(state.time_minutes, bool)
+        or not isinstance(state.time_minutes, int)
+        or state.time_minutes < 0
+    ):
+        raise RuleError("state.time_minutes must be a non-negative integer")
+    if not isinstance(state.player, MutableMapping):
+        raise RuleError("player state must be mutable")
 
     existing_conditions = state.player.get("conditions")
     created_conditions = existing_conditions is None
