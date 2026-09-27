@@ -85,8 +85,13 @@ class VerticalSliceTests(unittest.TestCase):
             50.0,
         )
 
-        engine.choose(state, "END_VERTICAL_SLICE")
-        self.assertTrue(state.flags["vertical_slice_01.complete"])
+        engine.choose(state, "CONTINUE_BELOW_GATE_TWELVE")
+        self.assertTrue(state.flags["vertical_slice_01.opening_complete"])
+        self.assertEqual(state.scene_id, "POWER_GATE_TWELVE_SIGNAL")
+        self.assertEqual(
+            state.quests["QUEST_GATE_TWELVE_ECHO"]["stage"],
+            "STAGE_DISCOVER",
+        )
 
     def test_solo_route_preserves_private_destination_knowledge(self):
         data = load_slice()
@@ -178,6 +183,51 @@ class VerticalSliceTests(unittest.TestCase):
             state.npcs["NPC_TAMSIN"]["goals"]["GOAL_UNDERSTAND_GATE_TWELVE"]["progress"],
             25.0,
         )
+
+
+    def test_first_power_requires_discovery_then_paid_practice(self):
+        data = load_slice()
+        state = make_state(data)
+        engine = RulesEngine(
+            data["scenes"],
+            quest_definitions=data["quests"],
+        )
+
+        engine.choose(state, "TAKE_DEAD_RELAY")
+        engine.choose(state, "USE_MAINTENANCE_SEAL")
+        engine.choose(state, "KEEP_GATE_TWELVE_SECRET")
+        engine.choose(state, "LEAVE_DEPOT_ALONE")
+        engine.choose(state, "CONTINUE_BELOW_GATE_TWELVE")
+
+        before_focus = state.player["resources"]["focus"]
+        before_stamina = state.player["resources"]["stamina"]
+
+        engine.choose(state, "FOLLOW_TRACE_ECHO")
+        ability = state.abilities["ABILITY_TRACE_ECHO"]
+        technique = ability["techniques"]["TECHNIQUE_SIGNAL_PULSE"]
+        self.assertEqual(ability["rank"], 0)
+        self.assertEqual(ability["mastery_xp"], 0.0)
+        self.assertEqual(technique["mastery_xp"], 0.0)
+        self.assertEqual(technique["stage"], "discovered")
+        self.assertEqual(
+            state.quests["QUEST_GATE_TWELVE_ECHO"]["stage"],
+            "STAGE_PRACTICE",
+        )
+
+        time_before_practice = state.time_minutes
+        engine.choose(state, "PRACTICE_SIGNAL_PULSE_ONE_HOUR")
+        self.assertEqual(state.time_minutes, time_before_practice + 60)
+        self.assertEqual(state.player["resources"]["focus"], before_focus - 6)
+        self.assertEqual(state.player["resources"]["stamina"], before_stamina - 4)
+        self.assertEqual(technique["mastery_xp"], 8.0)
+        self.assertEqual(technique["stage"], "discovered")
+        self.assertEqual(
+            state.quests["QUEST_GATE_TWELVE_ECHO"]["status"],
+            "completed",
+        )
+
+        engine.choose(state, "END_FIRST_POWER_SESSION")
+        self.assertTrue(state.flags["vertical_slice_01.power_session_complete"])
 
 
 if __name__ == "__main__":
