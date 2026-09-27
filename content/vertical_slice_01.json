@@ -1061,8 +1061,65 @@
                 "attributes.will": -2
               }
             }
-          ]
+          ],
+          "discovery_requirements": {
+            "rank_min": 1,
+            "mastery_xp_min": 100,
+            "knowledge": [
+              "KNOW_TRACE_ECHO_PATTERN_STABLE"
+            ],
+            "perks": [
+              "PERK_TRACE_TOLERANCE"
+            ],
+            "attributes": {
+              "perception": 45,
+              "will": 45
+            },
+            "skills": {
+              "powers": 10
+            },
+            "techniques": {
+              "TECHNIQUE_SIGNAL_PULSE": "learned"
+            }
+          }
         }
+      }
+    }
+  },
+  "registries": {
+    "knowledge": {
+      "KNOW_RELAY_WAS_DELIVERED_BY_COURIER": {
+        "label": "Relay courier handoff"
+      },
+      "KNOW_RELAY_DESTINATION_SERVICE_GATE_12": {
+        "label": "Relay destination: Service Gate Twelve"
+      },
+      "KNOW_TRACE_ECHO_IS_PERSONAL_PERCEPTION": {
+        "label": "Trace Echo is personal perception"
+      },
+      "KNOW_GATE_TWELVE_RECENT_TRACE": {
+        "label": "Recent trace below Gate Twelve"
+      },
+      "KNOW_TRACE_ECHO_PATTERN_STABLE": {
+        "label": "Stable Trace Echo pattern theory"
+      }
+    },
+    "perks": {
+      "PERK_TRACE_TOLERANCE": {
+        "label": "Trace Tolerance"
+      }
+    },
+    "items": {
+      "ITEM_MAINTENANCE_SEAL": {
+        "label": "Maintenance seal"
+      },
+      "ITEM_DEAD_RELAY": {
+        "label": "Dead municipal relay"
+      }
+    },
+    "conditions": {
+      "COND_ECHO_STRAIN": {
+        "label": "Echo Strain"
       }
     }
   }
