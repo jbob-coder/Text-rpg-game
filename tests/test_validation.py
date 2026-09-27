@@ -2,7 +2,14 @@ import json
 import unittest
 from pathlib import Path
 
-from textrpg import RuleError, assert_valid_content_pack, assert_valid_scenes, validate_content_pack, validate_scenes
+from textrpg import (
+    RuleError,
+    assert_valid_content_pack,
+    assert_valid_scenes,
+    validate_content_pack,
+    validate_registries,
+    validate_scenes,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -116,6 +123,50 @@ class ValidationTests(unittest.TestCase):
         powers = {"ABILITY_TRACE": {"techniques": {}}}
         errors = validate_content_pack(scenes, {}, powers)
         self.assertTrue(any("unknown technique" in error for error in errors))
+
+
+    def test_registry_validation_and_scene_cross_reference(self):
+        scenes = {
+            "SCENE_A": {"choices": [{
+                "id": "CHOICE_KNOW",
+                "text": "Learn it.",
+                "outcomes": {"default": {"effects": [{
+                    "type": "learn",
+                    "knowledge_id": "KNOW_MISSING",
+                }]}}
+            }]}
+        }
+        registries = {
+            "knowledge": {"KNOW_OTHER": {}},
+            "perks": {},
+            "items": {},
+            "conditions": {},
+        }
+        self.assertEqual(validate_registries(registries), [])
+        errors = validate_content_pack(scenes, {}, {}, registries)
+        self.assertTrue(any("unknown knowledge" in error for error in errors))
+
+    def test_registry_cross_reference_checks_power_drawback_condition(self):
+        powers = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_PULSE": {
+                        "drawbacks": [{
+                            "type": "condition",
+                            "condition_id": "COND_MISSING",
+                        }]
+                    }
+                }
+            }
+        }
+        registries = {
+            "knowledge": {},
+            "perks": {},
+            "items": {},
+            "conditions": {"COND_OTHER": {}},
+        }
+        errors = validate_content_pack({}, {}, powers, registries)
+        self.assertTrue(any("unknown condition" in error for error in errors))
 
 
 if __name__ == "__main__":
