@@ -54,3 +54,24 @@ jobs:
 
       - name: Assemble debug APK
         run: gradle -p android :app:assembleDebug --stacktrace
+
+      - name: Verify APK contents and hash
+        run: |
+          APK="android/app/build/outputs/apk/debug/app-debug.apk"
+          test -f "$APK"
+          sha256sum "$APK" | tee android-apk-sha256.txt
+          unzip -l "$APK" > android-apk-contents.txt
+          grep -q "lib/arm64-v8a/" android-apk-contents.txt
+          grep -q "lib/armeabi-v7a/" android-apk-contents.txt
+          grep -q "vertical_slice_01.json" android-apk-contents.txt
+
+      - name: Upload reproducible debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: THE-GAME-Android-Pixel-Client-${{ github.sha }}
+          path: |
+            android/app/build/outputs/apk/debug/app-debug.apk
+            android-apk-sha256.txt
+            android-apk-contents.txt
+          if-no-files-found: error
+          retention-days: 7
