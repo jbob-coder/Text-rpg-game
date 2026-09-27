@@ -86,5 +86,37 @@ class ValidationTests(unittest.TestCase):
         self.assertTrue(any("unknown stage" in error for error in errors))
 
 
+    def test_content_pack_rejects_unknown_power_reference(self):
+        scenes = {
+            "SCENE_A": {"choices": [{
+                "id": "CHOICE_POWER",
+                "text": "Discover.",
+                "outcomes": {"default": {"effects": [{
+                    "type": "ability_discover",
+                    "ability_id": "ABILITY_MISSING",
+                }]}}
+            }]}
+        }
+        errors = validate_content_pack(scenes, {}, {})
+        self.assertTrue(any("unknown power" in error for error in errors))
+
+    def test_content_pack_rejects_unknown_technique_reference(self):
+        scenes = {
+            "SCENE_A": {"choices": [{
+                "id": "CHOICE_POWER",
+                "text": "Practice.",
+                "outcomes": {"default": {"effects": [{
+                    "type": "technique_practice",
+                    "ability_id": "ABILITY_TRACE",
+                    "technique_id": "TECHNIQUE_MISSING",
+                    "minutes": 60,
+                }]}}
+            }]}
+        }
+        powers = {"ABILITY_TRACE": {"techniques": {}}}
+        errors = validate_content_pack(scenes, {}, powers)
+        self.assertTrue(any("unknown technique" in error for error in errors))
+
+
 if __name__ == "__main__":
     unittest.main()
