@@ -758,3 +758,127 @@ Current hardening review branch: `review/effective-stat-contract-hardening-v3`
 3. Keep the ability-progression workstream separate until both branches are synchronized against the same foundation ancestry.
 4. Execute the full repository suite on an exact checkout when a supported runtime becomes available.
 5. Do not install a new external runtime plugin solely to manufacture a verification claim; keep verification provenance explicit.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-INTEGRATION-RULES-ABILITY-V2-09
+
+Repository: `jbob-coder/Text-rpg-game`
+Context branch: `shared/game-context`
+Active integration branch: `integration/rules-ability-v2`
+
+### CURRENT_OBJECTIVE
+
+[IN_PROGRESS] Review the effective-stat hardening, ability-progression runtime, player-safe ability projection, and status-screen projection together on one current-foundation integration branch without prematurely promoting either source workstream.
+
+### BRANCH STATE
+
+[VERIFIED] `integration/rules-ability-v2` was created from the prior integration branch and synchronized with the latest ability V4 source/test changes.
+
+[VERIFIED] At the latest comparison in this chat, `integration/rules-ability-v2` is **36 commits ahead of `foundation/text-rpg-systems` and 0 behind**.
+
+[SUPERSEDED] `integration/rules-ability-v1` remains history/reference; V2 is the active integration review branch.
+
+### INTEGRATED SYSTEMS
+
+[IMPLEMENTED] Effective stat/modifier hardening from V3:
+- canonical modifier paths
+- equipment/set/perk/condition aggregation
+- provenance breakdowns
+- derived formula registry/explainability
+- derived capacity floors
+- authored-data validation hardening
+- compatibility for `equipment_sets=` and `set_definitions=`
+
+[IMPLEMENTED] Ability progression/runtime from the current V4 workstream:
+- discovery
+- rank/mastery
+- technique mastery
+- costs/cooldowns/drawbacks
+- evolution
+- player-safe ability view
+- definition validation
+- finite numeric guards
+- effective-stat/set-aware requirements
+- persistence coverage for visibility/discovery state
+
+[IMPLEMENTED] Status projection:
+- `build_status_view()` for identity, attributes, resources, derived values, grouped skills, safe abilities, and visible conditions
+- no raw hidden quest/NPC/ability data in the ordinary player projection
+
+[IMPLEMENTED] Added `inspect_status_value()` as a safe projection-level deep inspection API.
+
+Allowed inspection namespaces:
+- `attributes.<known-id>`
+- `skills.<known-id>`
+- `derived.<known-id>`
+
+Rejected by design:
+- quest internals
+- raw ability paths
+- relationship internals
+- unknown IDs
+- arbitrary nested state paths
+
+[DESIGNED] This establishes the intended boundary:
+
+`GameState -> RulesEngine/effective-value contract -> player-safe projection -> client UI`
+
+The UI should not reproduce formulas, modifier stacking, equipment-set logic, or hidden-data filtering.
+
+### TEST COVERAGE PRESENT
+
+[IMPLEMENTED] Integration coverage now includes tests for:
+- modifier stacking/provenance
+- derived explanations
+- modifier/set/path validation
+- malformed authored structures
+- equipment requirements
+- resource floors/training bounds
+- ability progression validation
+- hidden evolution non-disclosure
+- ability projection numeric safety
+- effective-stat power requirements
+- ability visibility save round-trip
+- non-mutating status projection
+- hidden condition filtering
+- deep status inspection
+- rejection of hidden/raw status paths
+
+### TESTS RUN
+
+None on a byte-for-byte checkout of `integration/rules-ability-v2` by this chat.
+
+### TEST RESULTS
+
+[UNKNOWN] Exact runtime verification remains pending. GitHub is connected for repository work, but no Actions workflow is present on the reviewed branch and no Codex execution environment is registered in this conversation.
+
+### FILES / DOCUMENTATION
+
+[IMPLEMENTED] Added `docs/INTEGRATION_RULES_ABILITY_V2_REVIEW.md` on the integration branch. It records branch provenance, system boundaries, verification limits, open design decisions, and promotion gates.
+
+### OPEN DESIGN ITEMS
+
+[CONFLICTING] Seven vs eight core attributes remains unresolved and is not changed by this integration.
+
+[QUESTION] Overall character Level/EXP remains unresolved.
+
+[PROVISIONAL] Derived zero-floor policy remains reversible until accepted through design/play evidence.
+
+[QUESTION] Ability-specific modifier namespaces remain deferred until concrete mechanics justify them.
+
+### RISKS
+
+[RISK] Foundation may continue advancing concurrently; a fresh comparison is mandatory before any promotion.
+[RISK] Combining hardening and abilities can reveal no-double-counting or API-alias problems that isolated branches do not show.
+[RISK] Player-safe projections must remain the only ordinary UI path to hidden ability/condition data.
+[RISK] Exact test execution is still the principal technical verification gap.
+
+### NEXT_ACTION
+
+1. Continue integration-level review for modifier/ability/status interactions.
+2. Add focused tests for any cross-system edge case discovered.
+3. Recompare against foundation before every promotion decision.
+4. Execute the complete suite on an exact checkout when a supported runtime is available.
+5. Keep the stat-schema migration separate until DEC-STAT-001 is explicitly resolved.
