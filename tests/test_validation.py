@@ -185,5 +185,80 @@ class ValidationTests(unittest.TestCase):
             2,
         )
 
+    def test_content_pack_rejects_unknown_power_reference(self):
+        scenes = {
+            "SCENE_A": {"choices": [{
+                "id": "CHOICE_POWER",
+                "text": "Discover.",
+                "outcomes": {"default": {"effects": [{
+                    "type": "ability_discover",
+                    "ability_id": "ABILITY_MISSING",
+                }]}}
+            }]}
+        }
+        errors = validate_content_pack(scenes, {}, {})
+        self.assertTrue(any("unknown power" in error for error in errors))
+
+    def test_content_pack_rejects_unknown_technique_reference(self):
+        scenes = {
+            "SCENE_A": {"choices": [{
+                "id": "CHOICE_POWER",
+                "text": "Practice.",
+                "outcomes": {"default": {"effects": [{
+                    "type": "technique_practice",
+                    "ability_id": "ABILITY_TRACE",
+                    "technique_id": "TECHNIQUE_MISSING",
+                    "minutes": 60,
+                }]}}
+            }]}
+        }
+        powers = {"ABILITY_TRACE": {"techniques": {}}}
+        errors = validate_content_pack(scenes, {}, powers)
+        self.assertTrue(any("unknown technique" in error for error in errors))
+
+    def test_power_recovery_effect_contract_is_strict(self):
+        scenes = {
+            "SCENE_A": {"choices": [
+                {
+                    "id": "CHOICE_BAD_RECOVERY_TIME",
+                    "text": "Recover.",
+                    "outcomes": {"default": {"effects": [{
+                        "type": "power_recover",
+                        "ability_id": "ABILITY_TRACE",
+                        "minutes": True,
+                    }]}}
+                },
+                {
+                    "id": "CHOICE_BAD_RECOVERY_QUALITY",
+                    "text": "Recover badly.",
+                    "outcomes": {"default": {"effects": [{
+                        "type": "power_recover",
+                        "ability_id": "ABILITY_TRACE",
+                        "minutes": 30,
+                        "quality": float("nan"),
+                    }]}}
+                },
+            ]}
+        }
+        errors = validate_scenes(scenes)
+        self.assertTrue(any(".minutes must be an integer >= 1" in e for e in errors))
+        self.assertTrue(any(".quality must be finite non-negative numeric" in e for e in errors))
+
+    def test_power_effect_ids_must_be_stable(self):
+        scenes = {
+            "SCENE_A": {"choices": [{
+                "id": "CHOICE_BAD_POWER_ID",
+                "text": "Bad.",
+                "outcomes": {"default": {"effects": [{
+                    "type": "technique_use",
+                    "ability_id": "bad ability",
+                    "technique_id": "bad technique",
+                }]}}
+            }]}
+        }
+        errors = validate_scenes(scenes)
+        self.assertTrue(any("ability_id must be a stable uppercase ID" in e for e in errors))
+        self.assertTrue(any("technique_id must be a stable uppercase ID" in e for e in errors))
+
 if __name__ == "__main__":
     unittest.main()
