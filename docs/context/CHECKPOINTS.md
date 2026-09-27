@@ -1887,3 +1887,55 @@ This is not an executed pass count.
 ### NEXT_ACTION
 
 Continue only targeted integrity review for concrete defects. Exact V6 runtime execution remains the required promotion gate.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-TIME-MODIFIER-BOUNDARY-23
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after this pass: `e9a9866007b41f33a03bc040251d58cf47f67713`
+
+### ISSUES FOUND
+
+[VERIFIED STATIC] Shared world-time validation did not validate the existing world-time value or require mutable player state before commit. This could let callers such as recovery normalize resources and only fail later when corrupt time was incremented.
+
+[VERIFIED STATIC] The modifier pipeline assumed player/equipment/perk containers and nested equipment/perk records were mapping-shaped, allowing corrupt state to surface implementation `AttributeError` instead of a consistent modifier-contract failure.
+
+### FIXES
+
+[IMPLEMENTED]
+- `_time_advance_plan()` now requires non-negative integer `state.time_minutes`, rejecting booleans;
+- `_time_advance_plan()` now requires mutable player state before any time/condition commit;
+- modifier source helpers now validate top-level player/equipment/perks containers;
+- equipment and perk records are validated as mappings before `.get()`;
+- non-null equipment set IDs must be non-empty strings.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added 6 regression methods covering:
+- corrupt current world time;
+- immutable player during time advance;
+- recovery preflight before resource normalization;
+- corrupt equipment modifier record;
+- corrupt perk modifier record;
+- corrupt player container in effective-stat queries.
+
+[VERIFIED STATIC] V6 now contains **246 authored test methods across 17 test files**.
+
+This is not an executed pass count.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 suite execution remains pending.
+
+### SCOPE CONTROL
+
+[DECISION] No feature expansion, no stat-schema migration, no V5/Foundation mutation, and no context-branch consolidation were performed.
+
+### NEXT_ACTION
+
+Continue only targeted integrity review for concrete defects while exact runtime remains unavailable. Exact V6 execution remains the required promotion gate.
