@@ -233,5 +233,86 @@ class ExtendedStateTests(unittest.TestCase):
         self.assertEqual(s.relationships["NPC_A"]["trust"], 100.0)
 
 
+    def test_negative_knowledge_conditions_are_first_class_gates(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [
+                    {
+                        "id": "PLAYER_DOES_NOT_KNOW",
+                        "text": "Visible before the player learns.",
+                        "visible_if": [{
+                            "type": "not_knows",
+                            "knowledge_id": "KNOW_X",
+                        }],
+                        "outcomes": {"default": {"effects": []}},
+                    },
+                    {
+                        "id": "NPC_DOES_NOT_KNOW",
+                        "text": "Visible before the NPC learns.",
+                        "visible_if": [{
+                            "type": "npc_not_knows",
+                            "npc": "NPC_A",
+                            "knowledge_id": "KNOW_X",
+                        }],
+                        "outcomes": {"default": {"effects": []}},
+                    },
+                ]
+            }
+        })
+        state = GameState(seed="x", scene_id="A", npcs={"NPC_A": {}})
+        ids = {choice["id"] for choice in engine.available_choices(state)}
+        self.assertEqual(ids, {"PLAYER_DOES_NOT_KNOW", "NPC_DOES_NOT_KNOW"})
+
+        state.knowledge["KNOW_X"] = {}
+        state.npcs["NPC_A"]["knowledge"] = {"KNOW_X": {}}
+        self.assertEqual(engine.available_choices(state), [])
+
+    def test_scene_effects_can_drive_npc_goal_and_story_state(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "SOCIAL_STATE",
+                    "text": "Create and advance authored NPC state.",
+                    "outcomes": {
+                        "default": {
+                            "effects": [
+                                {
+                                    "type": "npc_story_transition",
+                                    "npc": "NPC_A",
+                                    "track_id": "TRACK_CASE",
+                                    "to_state": "INVOLVED",
+                                    "allowed_from": [None],
+                                },
+                                {
+                                    "type": "npc_goal_create",
+                                    "npc": "NPC_A",
+                                    "goal_id": "GOAL_CASE",
+                                    "priority": 80,
+                                    "progress": 10,
+                                },
+                                {
+                                    "type": "npc_goal_progress",
+                                    "npc": "NPC_A",
+                                    "goal_id": "GOAL_CASE",
+                                    "delta": 25,
+                                },
+                            ]
+                        }
+                    },
+                }]
+            }
+        })
+        state = GameState(seed="x", scene_id="A")
+        engine.choose(state, "SOCIAL_STATE")
+        self.assertEqual(
+            state.npcs["NPC_A"]["story_state"]["TRACK_CASE"],
+            "INVOLVED",
+        )
+        self.assertEqual(
+            state.npcs["NPC_A"]["goals"]["GOAL_CASE"]["progress"],
+            35.0,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
