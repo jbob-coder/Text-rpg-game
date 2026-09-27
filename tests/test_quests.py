@@ -223,5 +223,71 @@ class QuestGraphTests(unittest.TestCase):
         self.assertEqual(state.quests["QUEST_ARCHIVE"]["stage"], "STAGE_DECIDE")
 
 
+    def test_start_quest_rejects_corrupt_history_without_creating_quest(self):
+        state = self.state()
+        state.history = "corrupt"
+        before_quests = dict(state.quests)
+
+        with self.assertRaises(RuleError):
+            start_quest(state, "QUEST_ARCHIVE", self.definition())
+
+        self.assertEqual(state.quests, before_quests)
+
+    def test_complete_objective_preflights_quest_history_before_mutation(self):
+        state = self.state()
+        definition = self.definition()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+        quest = state.quests["QUEST_ARCHIVE"]
+        quest["history"] = "corrupt"
+        before_completed = list(quest["completed_objectives"])
+        before_state_history = list(state.history)
+
+        with self.assertRaises(RuleError):
+            complete_objective(
+                state,
+                "QUEST_ARCHIVE",
+                "OBJ_FIND_RECORD",
+                definition,
+            )
+
+        self.assertEqual(quest["completed_objectives"], before_completed)
+        self.assertEqual(state.history, before_state_history)
+
+    def test_complete_objective_rejects_invalid_definition_without_mutation(self):
+        state = self.state()
+        definition = self.definition()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+        broken = self.definition()
+        broken["stages"]["STAGE_INVESTIGATE"]["on_complete"] = {
+            "next_stage": "STAGE_MISSING"
+        }
+        quest = state.quests["QUEST_ARCHIVE"]
+        before_completed = list(quest["completed_objectives"])
+        before_history = list(state.history)
+
+        with self.assertRaises(RuleError):
+            complete_objective(
+                state,
+                "QUEST_ARCHIVE",
+                "OBJ_FIND_RECORD",
+                broken,
+            )
+
+        self.assertEqual(quest["completed_objectives"], before_completed)
+        self.assertEqual(state.history, before_history)
+
+    def test_fail_quest_rejects_corrupt_state_history_without_closing_quest(self):
+        state = self.state()
+        definition = self.definition()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+        quest = state.quests["QUEST_ARCHIVE"]
+        state.history = "corrupt"
+
+        with self.assertRaises(RuleError):
+            fail_quest(state, "QUEST_ARCHIVE", reason="test_failure")
+
+        self.assertEqual(quest["status"], "active")
+
+
 if __name__ == "__main__":
     unittest.main()
