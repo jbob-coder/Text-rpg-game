@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from math import isfinite
 from typing import Any, Dict, Iterable, Mapping, MutableMapping
 
 from .core import GameState, RuleError
@@ -10,8 +11,63 @@ RELATIONSHIP_AXES = ("trust", "respect", "affection", "fear", "suspicion", "debt
 PERSONALITY_AXES = ("empathy", "aggression", "caution", "ambition", "honesty", "loyalty", "curiosity", "discipline")
 
 
+def _finite_number(value: Any, label: str) -> float:
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not isfinite(float(value))
+    ):
+        raise RuleError(f"{label} must be a finite number")
+    return float(value)
+
+
 def ensure_npc(state: GameState, npc_id: str) -> Dict[str, Any]:
-    npc = state.npcs.setdefault(npc_id, {})
+    """Return/create one NPC shell without accepting corrupt nested containers."""
+    if not isinstance(npc_id, str) or not npc_id:
+        raise RuleError("NPC ID must be a non-empty string")
+    if not isinstance(state.npcs, MutableMapping):
+        raise RuleError("state.npcs must be mutable")
+    if not isinstance(state.relationships, MutableMapping):
+        raise RuleError("state.relationships must be mutable")
+
+    existing = state.npcs.get(npc_id)
+    if existing is None:
+        npc: Dict[str, Any] = {
+            "personality": {},
+            "knowledge": {},
+            "memories": [],
+            "goals": {},
+            "story_state": {},
+        }
+        create_npc = True
+    else:
+        if not isinstance(existing, MutableMapping):
+            raise RuleError(f"NPC state must be mutable: {npc_id}")
+        npc = existing
+        create_npc = False
+        expected = {
+            "personality": Mapping,
+            "knowledge": MutableMapping,
+            "memories": list,
+            "goals": MutableMapping,
+            "story_state": MutableMapping,
+        }
+        for field_name, expected_type in expected.items():
+            if field_name in npc and not isinstance(npc[field_name], expected_type):
+                raise RuleError(
+                    f"NPC {field_name} has invalid type: {npc_id}"
+                )
+
+    existing_relationship = state.relationships.get(npc_id)
+    if existing_relationship is not None and not isinstance(
+        existing_relationship,
+        MutableMapping,
+    ):
+        raise RuleError(f"Relationship state must be mutable: {npc_id}")
+
+    # Commit only after all existing state has passed structural preflight.
+    if create_npc:
+        state.npcs[npc_id] = npc
     npc.setdefault("personality", {})
     npc.setdefault("knowledge", {})
     npc.setdefault("memories", [])
@@ -30,16 +86,29 @@ def add_memory(
     tags: Iterable[str] = (),
     data: Mapping[str, Any] | None = None,
 ) -> Dict[str, Any]:
+    if not isinstance(memory_id, str) or not memory_id:
+        raise RuleError("Memory ID must be a non-empty string")
+    if isinstance(importance, bool) or not isinstance(importance, int):
+        raise RuleError("Memory importance must be an integer")
     if importance < 1 or importance > 5:
         raise RuleError("Memory importance must be in range 1..5")
+    if isinstance(tags, (str, bytes)) or not isinstance(tags, Iterable):
+        raise RuleError("Memory tags must be an iterable of non-empty strings")
+    tag_values = list(tags)
+    if not all(isinstance(tag, str) and tag for tag in tag_values):
+        raise RuleError("Memory tags must contain only non-empty strings")
+    if data is not None and not isinstance(data, Mapping):
+        raise RuleError("Memory data must be an object")
+    payload = dict(data or {})
+
     npc = ensure_npc(state, npc_id)
     record = {
         "memory_id": memory_id,
         "importance": importance,
         "turn": state.turn,
         "time_minutes": state.time_minutes,
-        "tags": list(tags),
-        "data": dict(data or {}),
+        "tags": tag_values,
+        "data": payload,
     }
     npc["memories"].append(record)
     return record
@@ -55,14 +124,24 @@ def npc_learn(
     truth: str = "unknown",
     secrecy: int = 0,
 ) -> Dict[str, Any]:
-    if confidence < 0 or confidence > 1:
+    if not isinstance(knowledge_id, str) or not knowledge_id:
+        raise RuleError("Knowledge ID must be a non-empty string")
+    if not isinstance(source, str) or not source:
+        raise RuleError("Knowledge source must be a non-empty string")
+    if not isinstance(truth, str) or not truth:
+        raise RuleError("Knowledge truth must be a non-empty string")
+    confidence_value = _finite_number(confidence, "Knowledge confidence")
+    if confidence_value < 0 or confidence_value > 1:
         raise RuleError("Knowledge confidence must be in range 0..1")
+    if isinstance(secrecy, bool) or not isinstance(secrecy, int):
+        raise RuleError("Knowledge secrecy must be an integer")
     if secrecy < 0 or secrecy > 5:
         raise RuleError("Knowledge secrecy must be in range 0..5")
+
     npc = ensure_npc(state, npc_id)
     record = {
         "source": source,
-        "confidence": confidence,
+        "confidence": confidence_value,
         "truth": truth,
         "secrecy": secrecy,
         "turn_learned": state.turn,
@@ -289,16 +368,13 @@ def adjust_relationship(
     for axis, delta_raw in changes.items():
         if axis not in RELATIONSHIP_AXES:
             raise RuleError(f"Unknown relationship axis: {axis}")
-        if isinstance(delta_raw, bool) or not isinstance(delta_raw, (int, float)):
-            raise RuleError(f"Relationship change must be numeric: {axis}")
-        try:
-            current = float(existing.get(axis, 0))
-        except (TypeError, ValueError) as exc:
-            raise RuleError(
-                f"Relationship state must be numeric: {npc_id}/{axis}"
-            ) from exc
+        delta = _finite_number(delta_raw, f"Relationship change {axis}")
+        current = _finite_number(
+            existing.get(axis, 0),
+            f"Relationship state {npc_id}/{axis}",
+        )
         before[axis] = current
-        value = current + float(delta_raw)
+        value = current + delta
         after[axis] = max(-100.0, min(100.0, value))
 
     # All axes validate before durable state is created or modified.
@@ -328,17 +404,39 @@ def relationship_meets(
 ) -> bool:
     """Evaluate authored multidimensional relationship gates without flattening axes."""
     relationship = state.relationships.get(npc_id, {})
+    if not isinstance(relationship, Mapping):
+        raise RuleError(f"Relationship state must be an object: {npc_id}")
+    if minimums is not None and not isinstance(minimums, Mapping):
+        raise RuleError("Relationship minimums must be an object")
+    if maximums is not None and not isinstance(maximums, Mapping):
+        raise RuleError("Relationship maximums must be an object")
 
     for axis, minimum in (minimums or {}).items():
         if axis not in RELATIONSHIP_AXES:
             raise RuleError(f"Unknown relationship axis: {axis}")
-        if float(relationship.get(axis, 0)) < float(minimum):
+        actual = _finite_number(
+            relationship.get(axis, 0),
+            f"Relationship state {npc_id}/{axis}",
+        )
+        minimum_value = _finite_number(
+            minimum,
+            f"Relationship minimum {axis}",
+        )
+        if actual < minimum_value:
             return False
 
     for axis, maximum in (maximums or {}).items():
         if axis not in RELATIONSHIP_AXES:
             raise RuleError(f"Unknown relationship axis: {axis}")
-        if float(relationship.get(axis, 0)) > float(maximum):
+        actual = _finite_number(
+            relationship.get(axis, 0),
+            f"Relationship state {npc_id}/{axis}",
+        )
+        maximum_value = _finite_number(
+            maximum,
+            f"Relationship maximum {axis}",
+        )
+        if actual > maximum_value:
             return False
 
     return True
@@ -363,12 +461,22 @@ def set_goal(
     Existing goal IDs cannot be silently replaced; callers must update the existing
     record through a dedicated transition/progress operation instead.
     """
+    if not isinstance(goal_id, str) or not goal_id:
+        raise RuleError("Goal ID must be a non-empty string")
+    if isinstance(priority, bool) or not isinstance(priority, int):
+        raise RuleError("Goal priority must be an integer")
     if priority < 0 or priority > 100:
         raise RuleError("Goal priority must be in range 0..100")
-    if progress < 0 or progress > 100:
+    progress_value = _finite_number(progress, "Goal progress")
+    if progress_value < 0 or progress_value > 100:
         raise RuleError("Goal progress must be in range 0..100")
     if status not in GOAL_STATUSES:
         raise RuleError(f"Unsupported goal status: {status}")
+    if not isinstance(source, str) or not source:
+        raise RuleError("Goal source must be a non-empty string")
+    if data is not None and not isinstance(data, Mapping):
+        raise RuleError("Goal data must be an object")
+    payload = dict(data or {})
 
     if not isinstance(state.history, list):
         raise RuleError("state.history must be a list")
@@ -388,13 +496,13 @@ def set_goal(
     record = {
         "goal_id": goal_id,
         "priority": int(priority),
-        "progress": float(progress),
+        "progress": progress_value,
         "status": status,
         "source": source,
         "created_turn": state.turn,
         "created_at_minutes": state.time_minutes,
         "updated_at_minutes": state.time_minutes,
-        "data": dict(data or {}),
+        "data": payload,
     }
     goals[goal_id] = record
     state.history.append(
@@ -419,10 +527,13 @@ def update_goal_progress(
     *,
     completion_threshold: float = 100.0,
 ) -> Dict[str, Any]:
-    if completion_threshold <= 0 or completion_threshold > 100:
+    threshold = _finite_number(
+        completion_threshold,
+        "Goal completion threshold",
+    )
+    if threshold <= 0 or threshold > 100:
         raise RuleError("Goal completion threshold must be in range (0, 100]")
-    if isinstance(delta, bool) or not isinstance(delta, (int, float)):
-        raise RuleError("Goal progress delta must be numeric")
+    delta_value = _finite_number(delta, "Goal progress delta")
     if not isinstance(state.history, list):
         raise RuleError("state.history must be a list")
 
@@ -438,10 +549,13 @@ def update_goal_progress(
     if goal.get("status") in {"completed", "failed"}:
         raise RuleError(f"Cannot progress closed goal: {goal_id}")
 
-    before = float(goal.get("progress", 0))
-    after = max(0.0, min(100.0, before + float(delta)))
+    before = _finite_number(
+        goal.get("progress", 0),
+        f"Goal progress state {npc_id}/{goal_id}",
+    )
+    after = max(0.0, min(100.0, before + delta_value))
     goal["progress"] = after
-    if after >= completion_threshold:
+    if after >= threshold:
         goal["status"] = "completed"
     goal["updated_at_minutes"] = state.time_minutes
 
@@ -470,8 +584,23 @@ def transition_story_state(
     data: Mapping[str, Any] | None = None,
 ) -> Dict[str, Any]:
     """Move one authored NPC story track through a preflighted transition."""
+    if not isinstance(track_id, str) or not track_id:
+        raise RuleError("Story track ID must be a non-empty string")
     if not isinstance(to_state, str) or not to_state:
         raise RuleError("Story state must be a non-empty string")
+    if not isinstance(reason, str) or not reason:
+        raise RuleError("Story transition reason must be a non-empty string")
+    if data is not None and not isinstance(data, Mapping):
+        raise RuleError("Story transition data must be an object")
+    payload = dict(data or {})
+    if allowed_from is not None:
+        if isinstance(allowed_from, (str, bytes)) or not isinstance(allowed_from, Iterable):
+            raise RuleError("allowed_from must be an iterable of states")
+        allowed = tuple(allowed_from)
+        if not all(value is None or (isinstance(value, str) and value) for value in allowed):
+            raise RuleError("allowed_from entries must be non-empty strings or null")
+    else:
+        allowed = None
     if not isinstance(state.history, list):
         raise RuleError("state.history must be a list")
 
@@ -486,8 +615,7 @@ def transition_story_state(
             raise RuleError(f"NPC story_state must be an object: {npc_id}")
         previous = existing_story.get(track_id)
 
-    if allowed_from is not None:
-        allowed = tuple(allowed_from)
+    if allowed is not None:
         if previous not in allowed:
             raise RuleError(
                 f"Invalid story-state transition for {npc_id}/{track_id}: "
@@ -505,7 +633,7 @@ def transition_story_state(
         "from_state": previous,
         "to_state": to_state,
         "reason": reason,
-        "data": dict(data or {}),
+        "data": payload,
         "turn": state.turn,
         "time_minutes": state.time_minutes,
     }
