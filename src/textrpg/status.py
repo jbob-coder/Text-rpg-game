@@ -224,9 +224,14 @@ def _condition_view(
         ):
             raise RuleError(f"Condition tags must be a list of strings: {condition_id}")
 
+        fallback_id = (
+            condition_id.removeprefix("COND_")
+            if condition_id.startswith("COND_")
+            else condition_id
+        )
         display_name = definition.get(
             "name",
-            condition_id.replace("_", " ").title(),
+            fallback_id.replace("_", " ").title(),
         )
         if not isinstance(display_name, str) or not display_name:
             raise RuleError(f"Condition name must be a non-empty string: {condition_id}")
