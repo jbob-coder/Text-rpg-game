@@ -18,7 +18,7 @@ def _validate_stable_id(value: Any, label: str, errors: list[str]) -> None:
 
 
 def validate_quest_definitions(
-    definitions: Mapping[str, Mapping[str, Any]],
+    definitions: Any,
 ) -> list[str]:
     """Validate authored quest graphs before a playthrough uses them.
 
@@ -26,6 +26,8 @@ def validate_quest_definitions(
     references, terminal outcomes, and branch targets without executing the quest.
     """
     errors: list[str] = []
+    if not isinstance(definitions, Mapping):
+        return ["quest definitions must be an object"]
 
     for quest_id, definition in definitions.items():
         _validate_stable_id(quest_id, "quest_id", errors)
