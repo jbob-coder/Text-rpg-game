@@ -196,7 +196,13 @@ class RulesEngine:
 
         before_scene = state.scene_id
         self._apply_effects(state, outcome.get("effects", []))
-        state.time_minutes += int(choice.get("time_cost_minutes", 0))
+        time_cost = int(choice.get("time_cost_minutes", 0))
+        if time_cost < 0:
+            raise RuleError(f"Choice time cost cannot be negative: {choice_id}")
+        if time_cost:
+            from .simulation import advance_time
+
+            advance_time(state, time_cost)
         state.turn += 1
 
         next_scene = outcome.get("next_scene", choice.get("next_scene"))
