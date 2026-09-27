@@ -296,3 +296,22 @@ class AndroidBridgeTests(unittest.TestCase):
         self.assertTrue(session.state.flags["world.trace_echo_quest_started"])
         self.assertIn("QUEST_GATE_TWELVE_ECHO", session.state.quests)
         self.assertEqual("A Signal With No Receiver", resumed["scene"]["title"])
+
+
+    def test_workshop_rumor_unlocks_delayed_archive_investigation(self):
+        session = create_session(CONTENT)
+        session.state.flags["world.free_roam_unlocked"] = True
+        session.state.scene_id = "DISTRICT_WORKSHOP"
+
+        session.choose("ASK_WORKERS_ABOUT_GATE_TWELVE")
+        self.assertTrue(session.state.flags["world.workshop_rumor_heard"])
+
+        session.state.scene_id = "DISTRICT_ARCHIVE"
+        archive = session.scene_view()
+        choices = {choice["id"] for choice in archive["scene"]["choices"]}
+        self.assertIn("CROSSCHECK_GATE_TWELVE_WORKSHOP_RUMOR", choices)
+
+        result = session.choose("CROSSCHECK_GATE_TWELVE_WORKSHOP_RUMOR")
+
+        self.assertIn("KNOW_GATE_TWELVE_CREW_WITHDRAWAL", session.state.knowledge)
+        self.assertEqual("DISTRICT_ARCHIVE", result["map"]["current_location"])

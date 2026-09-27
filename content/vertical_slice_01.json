@@ -1491,6 +1491,36 @@
               "next_scene": "DISTRICT_ARCHIVE"
             }
           }
+        },
+        {
+          "id": "CROSSCHECK_GATE_TWELVE_WORKSHOP_RUMOR",
+          "text": "Cross-check the workshop rumor against old Gate Twelve maintenance bulletins.",
+          "time_cost_minutes": 15,
+          "visible_if": [
+            {
+              "type": "flag",
+              "key": "world.workshop_rumor_heard",
+              "equals": true
+            },
+            {
+              "type": "not_knows",
+              "knowledge_id": "KNOW_GATE_TWELVE_CREW_WITHDRAWAL"
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_GATE_TWELVE_CREW_WITHDRAWAL",
+                  "source": "DISTRICT_ARCHIVE",
+                  "confidence": 0.85,
+                  "private": false
+                }
+              ],
+              "next_scene": "DISTRICT_ARCHIVE"
+            }
+          }
         }
       ],
       "location_id": "DISTRICT_ARCHIVE"
@@ -1668,6 +1698,10 @@
       "KNOW_PLATFORM_NINE_EVAC_PROTOCOL": {
         "label": "Platform Nine evacuation protocol",
         "description": "Municipal records show that Platform Nine's emergency routing was deliberately designed to preserve maintenance access during district evacuations."
+      },
+      "KNOW_GATE_TWELVE_CREW_WITHDRAWAL": {
+        "label": "Gate Twelve crew withdrawal",
+        "description": "Workshop recollections and archive maintenance bulletins agree that municipal crews stopped routine work at Gate Twelve earlier than public records suggest."
       }
     },
     "perks": {
