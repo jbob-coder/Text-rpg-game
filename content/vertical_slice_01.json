@@ -1,0 +1,568 @@
+{
+  "content_id": "CONTENT_VERTICAL_SLICE_01",
+  "title": "The Dead Relay",
+  "canon_status": "provisional_canon",
+  "initial_state": {
+    "seed": "VERTICAL_SLICE_01",
+    "scene_id": "OPENING_DEPOT_BLACKOUT",
+    "player": {
+      "attributes": {
+        "might": 30,
+        "agility": 35,
+        "endurance": 35,
+        "intellect": 45,
+        "will": 40,
+        "perception": 40,
+        "presence": 30
+      },
+      "skills": {
+        "athletics": 20,
+        "technical_systems": 25,
+        "investigation": 20,
+        "persuasion": 15
+      },
+      "resources": {
+        "health": 100,
+        "stamina": 70,
+        "focus": 60,
+        "resolve": 50
+      }
+    },
+    "relationships": {
+      "NPC_TAMSIN": {
+        "trust": 15,
+        "respect": 5,
+        "affection": 0,
+        "fear": 0,
+        "suspicion": 5,
+        "debt": 0,
+        "loyalty": 0
+      }
+    },
+    "inventory": {
+      "ITEM_MAINTENANCE_SEAL": 1
+    },
+    "npcs": {
+      "NPC_TAMSIN": {
+        "personality": {
+          "empathy": 55,
+          "aggression": 20,
+          "caution": 65,
+          "ambition": 40,
+          "honesty": 70,
+          "loyalty": 60,
+          "curiosity": 75,
+          "discipline": 70
+        },
+        "knowledge": {},
+        "memories": [],
+        "goals": {},
+        "story_state": {}
+      }
+    }
+  },
+  "characters": {
+    "NPC_TAMSIN": {
+      "height_class": "average",
+      "body_proportions": "slim athletic adult; long forearms; compact stance",
+      "skin_tone": "medium warm brown",
+      "hair": {
+        "shape": "angular layered crop with a heavy left-side fringe",
+        "length": "short",
+        "palette": "near-black with muted cool highlights"
+      },
+      "eye_color": "dark brown",
+      "default_outfit": "charcoal municipal utility jacket over a pale work shirt with dark work trousers",
+      "silhouette_anchors": [
+        "high utility-jacket collar",
+        "narrow cross-body tool satchel",
+        "rolled right sleeve"
+      ],
+      "role_markers": [
+        "small municipal systems badge on left chest"
+      ],
+      "equipment_attachment_points": [
+        "left hip tool loop",
+        "cross-body satchel strap"
+      ],
+      "permanent_marks": [
+        "small notch through right eyebrow"
+      ],
+      "forbidden_deviations": [
+        "no long hair",
+        "no saturated neon clothing",
+        "do not remove the eyebrow notch",
+        "do not replace the cross-body tool satchel with a backpack"
+      ],
+      "emotion_set": [
+        "neutral",
+        "focused",
+        "concerned",
+        "angry",
+        "relieved"
+      ],
+      "poses": [
+        "front",
+        "profile",
+        "three-quarter",
+        "holding diagnostic reader"
+      ],
+      "palette": {
+        "jacket": "#30343B",
+        "shirt": "#C9C7BE",
+        "trousers": "#24272C",
+        "skin_shadow": "#8B5F4B"
+      },
+      "approved_reference_assets": []
+    }
+  },
+  "quests": {
+    "QUEST_DEAD_RELAY": {
+      "start_stage": "STAGE_RELAY",
+      "stages": {
+        "STAGE_RELAY": {
+          "objectives": {
+            "OBJ_RECOVER_RELAY": {
+              "required": true
+            },
+            "OBJ_IDENTIFY_DESTINATION": {
+              "required": true,
+              "requires_objectives": [
+                "OBJ_RECOVER_RELAY"
+              ]
+            }
+          },
+          "on_complete": {
+            "next_stage": "STAGE_DECIDE"
+          },
+          "on_fail": {
+            "next_stage": "STAGE_RECOVER"
+          }
+        },
+        "STAGE_RECOVER": {
+          "objectives": {
+            "OBJ_ASK_FOR_HELP": {
+              "required": true,
+              "on_complete": {
+                "next_stage": "STAGE_DECIDE"
+              }
+            }
+          }
+        },
+        "STAGE_DECIDE": {
+          "objectives": {
+            "OBJ_TELL_TAMSIN": {
+              "required": false,
+              "on_complete": {
+                "next_stage": "STAGE_TUNNEL_ROUTE"
+              }
+            },
+            "OBJ_KEEP_SECRET": {
+              "required": false,
+              "on_complete": {
+                "next_stage": "STAGE_SOLO_ROUTE"
+              }
+            }
+          }
+        },
+        "STAGE_TUNNEL_ROUTE": {
+          "objectives": {
+            "OBJ_ENTER_TUNNEL": {
+              "required": true,
+              "on_complete": {
+                "next_stage": "STAGE_COMPLETE"
+              }
+            }
+          }
+        },
+        "STAGE_SOLO_ROUTE": {
+          "objectives": {
+            "OBJ_LEAVE_DEPOT": {
+              "required": true,
+              "on_complete": {
+                "next_stage": "STAGE_COMPLETE"
+              }
+            }
+          }
+        },
+        "STAGE_COMPLETE": {
+          "terminal": true,
+          "terminal_status": "completed",
+          "objectives": {}
+        }
+      }
+    }
+  },
+  "scenes": {
+    "OPENING_DEPOT_BLACKOUT": {
+      "title": "The Last Light in Platform Nine",
+      "body": "The district blackout reaches the tram depot before the evacuation order does. Emergency strips burn red along the floor. A maintenance courier lies conscious beside a dead relay case, too injured to carry it farther. Tamsin, a systems apprentice, is trying to keep the depot doors powered long enough for the remaining passengers to leave.",
+      "choices": [
+        {
+          "id": "TAKE_DEAD_RELAY",
+          "text": "Take responsibility for the relay case.",
+          "time_cost_minutes": 2,
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "quest_start",
+                  "quest_id": "QUEST_DEAD_RELAY"
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_RECOVER_RELAY"
+                },
+                {
+                  "type": "inventory",
+                  "item_id": "ITEM_DEAD_RELAY",
+                  "quantity": 1
+                },
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_RELAY_WAS_DELIVERED_BY_COURIER",
+                  "source": "OPENING_DEPOT_BLACKOUT",
+                  "confidence": 1.0,
+                  "private": false
+                }
+              ],
+              "next_scene": "OPENING_RELAY_CASING"
+            }
+          }
+        }
+      ]
+    },
+    "OPENING_RELAY_CASING": {
+      "title": "A Case That Should Be Empty",
+      "body": "The relay is an obsolete municipal model. Its outer casing is cold, but a faint status pulse repeats from inside. The address plate has been physically scraped away.",
+      "choices": [
+        {
+          "id": "USE_MAINTENANCE_SEAL",
+          "text": "Use the maintenance seal to open the casing without damaging it.",
+          "time_cost_minutes": 4,
+          "requires": [
+            {
+              "type": "item_min",
+              "item_id": "ITEM_MAINTENANCE_SEAL",
+              "quantity": 1
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "inventory",
+                  "item_id": "ITEM_MAINTENANCE_SEAL",
+                  "quantity": -1
+                },
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
+                  "source": "ITEM_DEAD_RELAY",
+                  "confidence": 1.0,
+                  "private": true
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_IDENTIFY_DESTINATION"
+                }
+              ],
+              "next_scene": "OPENING_DECISION"
+            }
+          }
+        },
+        {
+          "id": "FORCE_RELAY_CASING",
+          "text": "Force the damaged casing and risk destroying the remaining signal.",
+          "time_cost_minutes": 7,
+          "check": {
+            "stat": "attributes.intellect",
+            "skill": "skills.technical_systems",
+            "skill_weight": 0.5,
+            "difficulty": 100,
+            "variance": 0
+          },
+          "outcomes": {
+            "critical_success": {
+              "effects": [
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
+                  "source": "ITEM_DEAD_RELAY",
+                  "confidence": 0.8,
+                  "private": true
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_IDENTIFY_DESTINATION"
+                }
+              ],
+              "next_scene": "OPENING_DECISION"
+            },
+            "success": {
+              "effects": [
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
+                  "source": "ITEM_DEAD_RELAY",
+                  "confidence": 0.6,
+                  "private": true
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_IDENTIFY_DESTINATION"
+                }
+              ],
+              "next_scene": "OPENING_DECISION"
+            },
+            "failure": {
+              "effects": [
+                {
+                  "type": "quest_objective_fail",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_IDENTIFY_DESTINATION"
+                },
+                {
+                  "type": "set_flag",
+                  "key": "relay.casing_damaged",
+                  "value": true
+                }
+              ],
+              "next_scene": "OPENING_RECOVERY"
+            },
+            "critical_failure": {
+              "effects": [
+                {
+                  "type": "quest_objective_fail",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_IDENTIFY_DESTINATION"
+                },
+                {
+                  "type": "set_flag",
+                  "key": "relay.signal_lost",
+                  "value": true
+                }
+              ],
+              "next_scene": "OPENING_RECOVERY"
+            }
+          }
+        }
+      ]
+    },
+    "OPENING_RECOVERY": {
+      "title": "One More Person Has to Know",
+      "body": "The relay's pulse is gone. Tamsin notices the change immediately. Recovering the destination now means admitting what you were trying to do.",
+      "choices": [
+        {
+          "id": "ASK_TAMSIN_FOR_RECOVERY_HELP",
+          "text": "Show Tamsin the damaged relay and ask her to recover its last address handshake.",
+          "time_cost_minutes": 10,
+          "requires": [
+            {
+              "type": "relationship_min",
+              "npc": "NPC_TAMSIN",
+              "axis": "trust",
+              "value": 10
+            },
+            {
+              "type": "relationship_max",
+              "npc": "NPC_TAMSIN",
+              "axis": "suspicion",
+              "value": 40
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
+                  "source": "NPC_TAMSIN",
+                  "confidence": 0.9,
+                  "private": false
+                },
+                {
+                  "type": "npc_learn",
+                  "npc": "NPC_TAMSIN",
+                  "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
+                  "source": "ITEM_DEAD_RELAY",
+                  "confidence": 0.9
+                },
+                {
+                  "type": "relationship",
+                  "npc": "NPC_TAMSIN",
+                  "axis": "trust",
+                  "value": 2
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_ASK_FOR_HELP"
+                }
+              ],
+              "next_scene": "OPENING_DECISION"
+            }
+          }
+        }
+      ]
+    },
+    "OPENING_DECISION": {
+      "title": "Gate Twelve",
+      "body": "The destination resolves to Service Gate Twelve, a sealed maintenance entrance below the depot. The official evacuation route runs in the opposite direction. Tamsin is still busy at the emergency panel and has not seen the address unless you choose to tell her.",
+      "choices": [
+        {
+          "id": "TELL_TAMSIN_GATE_TWELVE",
+          "text": "Tell Tamsin about Gate Twelve and ask her to come with you.",
+          "time_cost_minutes": 3,
+          "requires": [
+            {
+              "type": "relationship_min",
+              "npc": "NPC_TAMSIN",
+              "axis": "trust",
+              "value": 10
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "npc_learn",
+                  "npc": "NPC_TAMSIN",
+                  "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
+                  "source": "PLAYER",
+                  "confidence": 1.0
+                },
+                {
+                  "type": "party_add",
+                  "npc": "NPC_TAMSIN"
+                },
+                {
+                  "type": "relationship",
+                  "npc": "NPC_TAMSIN",
+                  "axis": "trust",
+                  "value": 3
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_TELL_TAMSIN"
+                }
+              ],
+              "next_scene": "OPENING_TUNNEL"
+            }
+          }
+        },
+        {
+          "id": "KEEP_GATE_TWELVE_SECRET",
+          "text": "Keep the destination private and leave for Gate Twelve alone.",
+          "time_cost_minutes": 2,
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "relationship",
+                  "npc": "NPC_TAMSIN",
+                  "axis": "suspicion",
+                  "value": 4
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_KEEP_SECRET"
+                }
+              ],
+              "next_scene": "OPENING_SOLO_EXIT"
+            }
+          }
+        }
+      ]
+    },
+    "OPENING_TUNNEL": {
+      "title": "Below the Evacuation Route",
+      "body": "Tamsin kills the emergency panel, pockets her reader, and follows you beneath the platform. Gate Twelve opens onto a service tunnel that is supposed to have been sealed for years. Fresh boot prints cross the dust.",
+      "choices": [
+        {
+          "id": "ENTER_GATE_TWELVE_WITH_TAMSIN",
+          "text": "Enter the tunnel together.",
+          "time_cost_minutes": 5,
+          "requires": [
+            {
+              "type": "party_has",
+              "npc": "NPC_TAMSIN"
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "opening.route",
+                  "value": "tunnel_with_tamsin"
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_ENTER_TUNNEL"
+                }
+              ],
+              "next_scene": "OPENING_END"
+            }
+          }
+        }
+      ]
+    },
+    "OPENING_SOLO_EXIT": {
+      "title": "The Quiet Stair",
+      "body": "You wait until Tamsin turns back to the passengers, then slip through the maintenance stair alone. The relay case feels heavier once nobody else knows where you are going.",
+      "choices": [
+        {
+          "id": "LEAVE_DEPOT_ALONE",
+          "text": "Descend toward Gate Twelve alone.",
+          "time_cost_minutes": 5,
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "opening.route",
+                  "value": "solo"
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_LEAVE_DEPOT"
+                }
+              ],
+              "next_scene": "OPENING_END"
+            }
+          }
+        }
+      ]
+    },
+    "OPENING_END": {
+      "title": "End of Vertical Slice",
+      "body": "The opening establishes a persistent route, relationship state, private-information state, quest history, and party composition for the next content block.",
+      "choices": [
+        {
+          "id": "END_VERTICAL_SLICE",
+          "text": "End the prototype slice.",
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "vertical_slice_01.complete",
+                  "value": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
