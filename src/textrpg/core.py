@@ -96,9 +96,11 @@ class RulesEngine:
         scenes: Mapping[str, Dict[str, Any]],
         *,
         equipment_sets: Optional[Mapping[str, Mapping[str, Any]]] = None,
+        quest_definitions: Optional[Mapping[str, Mapping[str, Any]]] = None,
     ):
         self.scenes = dict(scenes)
         self.equipment_sets = dict(equipment_sets or {})
+        self.quest_definitions = dict(quest_definitions or {})
 
     def get_scene(self, state: GameState) -> Dict[str, Any]:
         try:
@@ -310,9 +312,56 @@ class RulesEngine:
                 if state.inventory[item_id] <= 0:
                     state.inventory.pop(item_id, None)
             elif kind == "quest_stage":
+                # Legacy direct-stage effect. New authored content should prefer the
+                # graph-aware quest_start/quest_objective_* effects below.
                 quest = state.quests.setdefault(effect["quest_id"], {})
                 quest["stage"] = effect["stage"]
                 quest["status"] = effect.get("status", quest.get("status", "active"))
+            elif kind == "quest_start":
+                from .quests import start_quest
+
+                quest_id = effect["quest_id"]
+                definition = self.quest_definitions.get(quest_id)
+                if definition is None:
+                    raise RuleError(f"Unknown quest definition: {quest_id}")
+                start_quest(state, quest_id, definition)
+            elif kind == "quest_objective_complete":
+                from .quests import complete_objective
+
+                quest_id = effect["quest_id"]
+                definition = self.quest_definitions.get(quest_id)
+                if definition is None:
+                    raise RuleError(f"Unknown quest definition: {quest_id}")
+                complete_objective(
+                    state,
+                    quest_id,
+                    effect["objective_id"],
+                    definition,
+                )
+            elif kind == "quest_objective_fail":
+                from .quests import fail_objective
+
+                quest_id = effect["quest_id"]
+                definition = self.quest_definitions.get(quest_id)
+                if definition is None:
+                    raise RuleError(f"Unknown quest definition: {quest_id}")
+                fail_objective(
+                    state,
+                    quest_id,
+                    effect["objective_id"],
+                    definition,
+                )
+            elif kind == "quest_fail":
+                from .quests import fail_quest
+
+                quest_id = effect["quest_id"]
+                if quest_id not in self.quest_definitions:
+                    raise RuleError(f"Unknown quest definition: {quest_id}")
+                fail_quest(
+                    state,
+                    quest_id,
+                    reason=effect.get("reason", "authored_scene"),
+                )
             elif kind == "npc_learn":
                 npc = state.npcs.setdefault(effect["npc"], {})
                 knowledge = npc.setdefault("knowledge", {})
