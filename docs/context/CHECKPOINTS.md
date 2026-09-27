@@ -704,3 +704,57 @@ No byte-for-byte remote-branch suite was executed by this chat for the newest co
 3. Recompare both active branches against foundation before any integration branch is created.
 4. Build a combined integration branch only when the parent baseline is intentionally frozen for verification.
 5. Run focused + persistence + full-suite tests on that combined state before promotion.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-HARDENING-V3-PLUGIN-AUDIT-08
+
+Repository: `jbob-coder/Text-rpg-game`
+Context branch: `shared/game-context`
+Current hardening review branch: `review/effective-stat-contract-hardening-v3`
+
+### TOOL / PLUGIN AUDIT
+
+[VERIFIED] Plugin directory was checked for the current repository/testing workflow.
+
+- GitHub plugin/connector is installed and is the active tool used for repository inspection, branch comparison, file edits, and checkpoint synchronization.
+- Superpowers is installed and available as a plugin package, but no separate callable tool surface for it is exposed in this chat runtime; no unsupported claim of execution is made.
+- Codex Tasks was checked for a registered execution environment; none is currently registered, so it cannot provide the missing exact branch-runtime test execution from this conversation.
+- No additional plugin is required for the current repository-editing work. External runtime/deployment plugins were not installed because exact-branch execution is not worth introducing a new external dependency merely for this review.
+
+### HARDENING BRANCH CORRECTION
+
+[SUPERSEDED] Earlier hardening branches based on the old effective-stat feature ancestry are not the active integration target.
+
+[VERIFIED] `review/effective-stat-contract-hardening-v3` is the current hardening branch. At the latest comparison in this chat it is **ahead of `foundation/text-rpg-systems` and not behind**.
+
+[VERIFIED] A focused source probe confirmed that V3 preserves foundation behavior that the older review branch had accidentally lagged behind, including:
+- `quest_definitions` support
+- `relationship_max`
+- `not_knows`
+- `npc_not_knows`
+- `equipment_sets` compatibility
+- world-time `advance_time` behavior
+
+[IMPLEMENTED] V3 additionally contains the hardening/explainability work, including `set_definitions` migration support and `explain_player_value()`.
+
+### API COMPATIBILITY
+
+[IMPLEMENTED] The hardening pipeline now preserves the foundation public keyword `equipment_sets=` while also supporting the newer internal `set_definitions` naming. Conflicting simultaneous values are rejected explicitly rather than silently choosing one.
+
+[IMPLEMENTED] Compatibility applies to effective-player-value and derived/resource calculation entry points so ability/runtime branches can continue using the foundation API during migration.
+
+### TEST / VERIFICATION STATUS
+
+[UNKNOWN] No GitHub Actions workflow exists on the reviewed branch, and no registered Codex execution environment is available. Therefore exact byte-for-byte remote branch execution is still not claimed by this chat.
+
+[IMPLEMENTED] Regression tests exist on V3 for foundation keyword compatibility, conflicting set-context aliases, modifier-path validation, derived floors, non-finite values, explainability, malformed authored data, equipment requirements, and training bounds.
+
+### NEXT_ACTION
+
+1. Continue work only from hardening V3, not the stale hardening branches.
+2. Recompare V3 with foundation before any promotion because other chats may continue advancing foundation.
+3. Keep the ability-progression workstream separate until both branches are synchronized against the same foundation ancestry.
+4. Execute the full repository suite on an exact checkout when a supported runtime becomes available.
+5. Do not install a new external runtime plugin solely to manufacture a verification claim; keep verification provenance explicit.
