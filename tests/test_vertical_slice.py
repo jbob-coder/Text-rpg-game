@@ -100,6 +100,7 @@ class VerticalSliceTests(unittest.TestCase):
         engine = RulesEngine(
             data["scenes"],
             quest_definitions=data["quests"],
+            power_definitions=data.get("powers", {}),
         )
 
         engine.choose(state, "TAKE_DEAD_RELAY")
@@ -136,6 +137,7 @@ class VerticalSliceTests(unittest.TestCase):
         engine = RulesEngine(
             data["scenes"],
             quest_definitions=data["quests"],
+            power_definitions=data.get("powers", {}),
         )
 
         engine.choose(state, "TAKE_DEAD_RELAY")
@@ -192,6 +194,7 @@ class VerticalSliceTests(unittest.TestCase):
         engine = RulesEngine(
             data["scenes"],
             quest_definitions=data["quests"],
+            power_definitions=data.get("powers", {}),
         )
 
         engine.choose(state, "TAKE_DEAD_RELAY")
