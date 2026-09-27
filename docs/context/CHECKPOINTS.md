@@ -1995,3 +1995,61 @@ This is not an executed pass count.
 ### NEXT_ACTION
 
 Continue only focused integrity review for concrete defects while exact runtime remains unavailable. Exact V6 execution remains the promotion gate.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-FINAL-ACCEPTANCE-POLICY-25
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Context branch: `shared/game-context`
+
+Referenced implementation branch: `integration/rules-ability-v6-reconcile`
+
+Referenced V6 head before this documentation checkpoint: `7718cd422d69eb4515dfa5beb7dd4ab117c1c6fe`
+
+### USER DIRECTION
+
+[DIRECTION] The user will not perform intermediate game testing and does not want development to depend on repeated manual checks.
+
+[DIRECTION] The user becomes the final acceptance tester only after the game is complete within the agreed scope and a final runnable/release candidate is ready.
+
+### DEVELOPMENT CONSEQUENCE
+
+[DECISION] Do not ask the user to run intermediate builds, reproduce bugs, inspect screens, or execute manual regression steps as a prerequisite for continued development.
+
+[DECISION] Intermediate verification must use automated/static/deterministic mechanisms and free/local runtime execution where available.
+
+[DECISION] Authored tests are not passing evidence until executed. Unavailable runtime verification remains [UNKNOWN] and keeps the associated stage gate open.
+
+[DECISION] Do not create paid/billing-risk CI solely to obtain verification without explicit user authorization.
+
+### STAGE STATUS
+
+[VERIFIED STATIC] The current referenced V6 contains 251 authored test methods across 17 test files.
+
+[UNKNOWN] The exact full runtime suite has not yet been executed on `7718cd422d69eb4515dfa5beb7dd4ab117c1c6fe`.
+
+[DECISION] Stage 3 therefore remains open. Stage 4 canonicalization/migrations must not be used to bypass the unresolved Stage 3 runtime gate.
+
+### FINAL ACCEPTANCE GATE
+
+The game may be presented to the user for final checking only when the agreed release scope is implemented, integrations are reconciled, the required automated suite is green on the exact candidate SHA, validators are clean, applicable save/load/progression/migration paths are verified, no known release blockers remain, documentation matches implementation, and a runnable/playable package is prepared.
+
+This is an operational release criterion, not a claim that zero software defects can be mathematically guaranteed.
+
+### FILES CHANGED
+
+- `docs/context/FINAL_ACCEPTANCE_AND_TESTING_POLICY.md`
+- `docs/context/README.md`
+- `docs/context/DECISIONS.md`
+- `docs/context/CHECKPOINTS.md`
+
+### TESTS RUN
+
+None. Documentation-only checkpoint.
+
+### NEXT_ACTION
+
+Continue Stage 3 without user-dependent manual QA. Preserve the exact-runtime-suite gate and continue only evidence-driven hardening until free/local execution is available.
