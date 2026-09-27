@@ -27,6 +27,7 @@ Resolution rule:
 - no silent implementation migration before resolution
 
 Detailed evaluation: `docs/context/STAT_SCHEMA_EVALUATION.md`
+Migration architecture if eight stats are accepted: `docs/context/STAT_SCHEMA_MIGRATION_PLAN.md`
 
 Current design recommendation candidate: eight core attributes, because separating Dexterity from Agility removes a repeated responsibility conflict and Constitution cleanly separates durable bodily resilience from the spendable Stamina resource. This remains [DESIGNED], not canonical, until explicitly accepted and migrated.
 
@@ -127,7 +128,10 @@ UI/debug note:
 
 Status: [DESIGNED] CANDIDATE / [IMPLEMENTED] ON REVIEW BRANCH / NOT YET VERIFIED
 
-Review branch: `review/effective-stat-contract-hardening`
+Historical review branch: `review/effective-stat-contract-hardening`
+Current integrated review branch: `integration/rules-ability-v5`
+
+[SUPERSEDED] The historical review branch is no longer the active promotion target. Its hardening contract has been carried forward through later hardening/integration branches; current implementation claims must be checked against `integration/rules-ability-v5` (or a newer explicitly recorded successor), not the historical review tip.
 
 This decision records the current evolution candidate without declaring it canonical or complete.
 
@@ -147,8 +151,9 @@ Candidate C — explainability contract:
 - `RulesEngine.explain_player_value()` is the single rules-facing explanation API intended for debug/status UI
 
 Why this is not closed:
-- the new tests have not yet been executed by this chat
-- the full repository suite has not been executed on the review branch
+- the current integration tests have not yet been executed by this chat on a byte-for-byte checkout
+- the full repository suite has not been executed on the current integration branch
+- the parent foundation is changing concurrently and requires a frozen-SHA reconciliation before promotion
 - the domain/floor policy is an architecture/balance choice and should remain reversible until verified in play and accepted for promotion
 
 Related: `CP-2026-09-27-EFFECTIVE-HARDENING-04`
