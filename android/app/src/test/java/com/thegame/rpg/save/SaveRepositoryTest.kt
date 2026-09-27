@@ -117,5 +117,8 @@ class SaveRepositoryTest {
             loadCalls += 1
             return loadResult
         }
+
+        override suspend fun applyCheat(code: String): Result<GameSnapshot> =
+            Result.failure(UnsupportedOperationException("not used"))
     }
 }
