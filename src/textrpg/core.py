@@ -187,9 +187,16 @@ class RulesEngine:
             elif kind == "knows":
                 if condition["knowledge_id"] not in state.knowledge:
                     return False
+            elif kind == "not_knows":
+                if condition["knowledge_id"] in state.knowledge:
+                    return False
             elif kind == "npc_knows":
                 npc = state.npcs.get(condition["npc"], {})
                 if condition["knowledge_id"] not in npc.get("knowledge", {}):
+                    return False
+            elif kind == "npc_not_knows":
+                npc = state.npcs.get(condition["npc"], {})
+                if condition["knowledge_id"] in npc.get("knowledge", {}):
                     return False
             elif kind == "party_has":
                 if condition["npc"] not in state.party:
