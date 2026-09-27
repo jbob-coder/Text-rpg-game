@@ -292,6 +292,23 @@ class RulesEngine:
             elif kind == "has_perk":
                 if condition["perk_id"] not in state.perks:
                     return False
+            elif kind == "not_has_perk":
+                if condition["perk_id"] in state.perks:
+                    return False
+            elif kind == "technique_stage_min":
+                from .powers import _stage_at_least
+
+                ability = state.abilities.get(condition["ability_id"], {})
+                technique = ability.get("techniques", {}).get(
+                    condition["technique_id"]
+                )
+                if not technique:
+                    return False
+                if not _stage_at_least(
+                    technique.get("stage", "unknown"),
+                    condition["stage"],
+                ):
+                    return False
             elif kind == "item_min":
                 if state.inventory.get(condition["item_id"], 0) < condition.get("quantity", 1):
                     return False
@@ -570,6 +587,24 @@ class RulesEngine:
                     ability_id,
                     definition,
                     minutes=int(effect["minutes"]),
+                    quality=float(effect.get("quality", 1.0)),
+                )
+            elif kind == "skill_train":
+                from .simulation import train
+
+                train(
+                    state,
+                    skill=effect["skill"],
+                    minutes=int(effect["minutes"]),
+                    intensity=float(effect.get("intensity", 1.0)),
+                    mentor_bonus=float(effect.get("mentor_bonus", 0.0)),
+                )
+            elif kind == "recover_resources":
+                from .simulation import recover
+
+                recover(
+                    state,
+                    int(effect["minutes"]),
                     quality=float(effect.get("quality", 1.0)),
                 )
             else:
