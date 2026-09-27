@@ -1047,3 +1047,83 @@ That result verifies foundation, not the additional Integration V2 changes.
 3. Fix any integration-only regression before promotion.
 4. Continue reviewing remaining stateful systems for validate-plan-commit/rollback behavior.
 5. Keep the seven-vs-eight core-stat decision separate from runtime hardening.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-INTEGRATION-V5-DRIFT-CONTROL-11
+
+Repository: `jbob-coder/Text-rpg-game`
+Active integration branch: `integration/rules-ability-v5`
+Superseded integration branches for active work: V2/V3/V4
+
+### CURRENT_OBJECTIVE
+
+[IN_PROGRESS] Keep rules/stat hardening, ability progression, and player-safe status projection integrated on a recent foundation snapshot while preventing concurrent-parent churn from silently overwriting reviewed work.
+
+### WHY V5 WAS CREATED
+
+[VERIFIED] Foundation continued advancing while earlier integration branches were under review. V5 was created from a newer foundation state and integration-specific files/changes were selectively ported rather than force-moving stale branches.
+
+[VERIFIED] The temporary V4 sync pull request (#3) was closed **without merge** after it proved conflictful/stale. It is history only.
+
+### FOUNDATION FEATURES PRESERVED IN V5
+
+[IMPLEMENTED] V5 explicitly preserves newer foundation behavior encountered during reconstruction:
+- authored technique discovery requirements
+- stable content registries
+- `technique_discoverable`
+- `technique_stage_min`
+- `has_perk` / `not_has_perk`
+- authored `skill_train` effects
+- authored `recover_resources` effects
+- current Trace Echo / Directional Trace content routes
+- current save/resume route expectations
+
+### INTEGRATION FEATURES PRESENT
+
+[IMPLEMENTED] V5 retains effective-stat hardening, provenance, derived explainability, resource floors, equipment/set alias compatibility, RulesEngine explainability, atomic choice rollback, ability-resource/runtime hardening, ability player-safe projection, and status/deep-inspection projection.
+
+[IMPLEMENTED] RulesEngine choice execution follows preflight + snapshot + commit/rollback semantics.
+
+[IMPLEMENTED] Current integration-level mutation rule remains:
+
+`validate definition/state -> evaluate -> preflight/plan -> commit -> record event`
+
+### CONCURRENT-DRIFT POLICY
+
+[DECISION] Do **not** continuously rewrite the integration branch merely to keep a transient `0 behind` count while another chat is actively committing to foundation.
+
+Instead:
+1. continue integration work against the identified snapshot
+2. record parent drift explicitly
+3. freeze an intended foundation commit at promotion time
+4. perform one deliberate final reconciliation against that exact commit
+5. execute the full test suite on the reconciled source
+
+This reduces merge churn and lowers the risk of overwriting reviewed integration code.
+
+### TEST STATUS
+
+[UNKNOWN] V5 has not been executed as a byte-for-byte checkout by this chat.
+
+[IMPLEMENTED] Tests are present for effective values, modifier provenance, derived stats, atomic choice failure, ability resources, progression, discovery gates, player-safe projections, persistence, status inspection, registry cross-references, and the current vertical-slice routes.
+
+### DOCUMENTATION
+
+[IMPLEMENTED] Added `docs/INTEGRATION_RULES_ABILITY_V5_REVIEW.md` on V5 with scope, preserved foundation features, verification limits, drift policy, and promotion gate.
+
+### OPEN DESIGN ITEMS
+
+[CONFLICTING] Seven vs eight core attributes remains unresolved.
+[QUESTION] Overall character Level/EXP remains unresolved.
+[QUESTION] Ability-specific modifier namespaces remain deferred.
+[PROVISIONAL] Balance/floor coefficients remain subject to play evidence.
+
+### NEXT_ACTION
+
+1. Continue integration-level mutation/visibility review without chasing every parent commit.
+2. Keep V5 isolated from main/foundation promotion.
+3. When the foundation workstream reaches a checkpoint, freeze its exact SHA and reconcile once.
+4. Execute all tests on the reconciled source before promotion.
+5. Continue stat-schema migration design separately from executable migration.
