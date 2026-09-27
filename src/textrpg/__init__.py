@@ -23,6 +23,7 @@ from .powers import (
     initialize_power_resource,
     practice_technique,
     recover_power_resource,
+    technique_discovery_status,
     technique_stage,
     technique_use_status,
     use_technique,
@@ -64,7 +65,13 @@ from .stats import (
     validate_player_stats,
 )
 from .schema import DERIVED_FORMULAS, DERIVED_STAT_SPECS
-from .validation import assert_valid_content_pack, assert_valid_scenes, validate_content_pack, validate_scenes
+from .validation import (
+    assert_valid_content_pack,
+    assert_valid_scenes,
+    validate_content_pack,
+    validate_registries,
+    validate_scenes,
+)
 from .visuals import (
     assert_valid_character_visuals,
     character_generation_contract,
@@ -138,6 +145,7 @@ __all__ = [
     "transition_story_state",
     "update_goal_progress",
     "technique_available",
+    "technique_discovery_status",
     "technique_stage",
     "technique_use_status",
     "train",
@@ -148,6 +156,7 @@ __all__ = [
     "validate_technique_definition",
     "validate_character_visuals",
     "validate_content_pack",
+    "validate_registries",
     "validate_modifier_mapping",
     "validate_modifier_path",
     "validate_player_stats",
