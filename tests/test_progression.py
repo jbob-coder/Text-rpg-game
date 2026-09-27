@@ -1,6 +1,6 @@
 import unittest
 
-from textrpg import GameState, gain_ability_mastery, mastery_stage, technique_available
+from textrpg import GameState, RuleError, gain_ability_mastery, mastery_stage, technique_available
 
 
 class ProgressionTests(unittest.TestCase):
@@ -30,6 +30,29 @@ class ProgressionTests(unittest.TestCase):
         s.perks["PERK_CONTROL"] = {"source": "mentor"}
         self.assertTrue(technique_available(s, "ABILITY_EXAMPLE", req))
 
+
+    def test_invalid_mastery_numbers_and_rank_thresholds_are_rejected(self):
+        s = GameState(seed="x", scene_id="A")
+        for value in (True, float("nan"), float("inf"), -1):
+            with self.assertRaises(RuleError):
+                gain_ability_mastery(s, "ABILITY_BAD", value)
+
+        with self.assertRaises(RuleError):
+            gain_ability_mastery(
+                s,
+                "ABILITY_BAD",
+                1,
+                rank_thresholds=(0, 100, 50),
+            )
+        with self.assertRaises(RuleError):
+            gain_ability_mastery(
+                s,
+                "ABILITY_BAD",
+                1,
+                rank_thresholds=(),
+            )
+        with self.assertRaises(RuleError):
+            mastery_stage(float("nan"))
 
 if __name__ == "__main__":
     unittest.main()
