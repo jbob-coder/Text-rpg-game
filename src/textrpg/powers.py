@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+from math import isfinite
 from typing import Any, Dict, Mapping, MutableMapping
 
 from .core import GameState, RuleError
 from .progression import gain_ability_mastery, technique_available
 from .simulation import advance_time, apply_condition
+from .stats import effective_player_value
 
 
 TECHNIQUE_STAGES = (
@@ -26,6 +28,8 @@ _STAGE_ORDER = {
 
 
 def technique_stage(xp: float) -> str:
+    if isinstance(xp, bool) or not isinstance(xp, (int, float)) or not isfinite(float(xp)):
+        raise RuleError("Technique mastery XP must be a finite number")
     if xp < 0:
         raise RuleError("Technique mastery XP cannot be negative")
     stage = "unknown"
@@ -60,8 +64,12 @@ def _set_player_path(state: GameState, path: str, value: Any) -> None:
 
 def _numeric_player_path(state: GameState, path: str) -> float:
     value = _player_path(state, path)
-    if not isinstance(value, (int, float)):
-        raise RuleError(f"Power resource path is missing or non-numeric: {path}")
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not isfinite(float(value))
+    ):
+        raise RuleError(f"Power resource path is missing or non-finite numeric: {path}")
     return float(value)
 
 
@@ -74,7 +82,20 @@ def discover_ability(
     tags: tuple[str, ...] | list[str] = (),
     data: Mapping[str, Any] | None = None,
 ) -> Dict[str, Any]:
-    """Create the persistent shell of an ability without granting mastery."""
+    """Create a persistent ability shell without granting free mastery."""
+    if not isinstance(ability_id, str) or not ability_id:
+        raise RuleError("Ability ID must be a non-empty string")
+    if not isinstance(family, str) or not family:
+        raise RuleError("Ability family must be a non-empty string")
+    if form is not None and (not isinstance(form, str) or not form):
+        raise RuleError("Ability form must be null or a non-empty string")
+    if isinstance(tags, (str, bytes)) or not all(
+        isinstance(tag, str) and tag for tag in tags
+    ):
+        raise RuleError("Ability tags must be an iterable of non-empty strings")
+    if data is not None and not isinstance(data, Mapping):
+        raise RuleError("Ability data must be an object")
+
     is_new = ability_id not in state.abilities
     ability = state.abilities.setdefault(
         ability_id,
@@ -85,6 +106,9 @@ def discover_ability(
             "techniques": {},
         },
     )
+    if not isinstance(ability, MutableMapping):
+        raise RuleError(f"Ability state must be an object: {ability_id}")
+
     ability.setdefault("family", family)
     ability.setdefault("form", form)
     ability.setdefault("tags", list(tags))
@@ -138,6 +162,8 @@ def gain_technique_mastery(
     technique_id: str,
     xp: float,
 ) -> Dict[str, Any]:
+    if isinstance(xp, bool) or not isinstance(xp, (int, float)) or not isfinite(float(xp)):
+        raise RuleError("Technique mastery gain must be a finite number")
     if xp < 0:
         raise RuleError("Technique mastery gain cannot be negative")
     ability = state.abilities.get(ability_id)
@@ -164,45 +190,96 @@ def practice_technique(
     stamina_per_hour: float = 4.0,
     focus_per_hour: float = 6.0,
 ) -> Dict[str, Any]:
-    """Practice an already-discovered technique through paid world time.
+    """Practice a discovered technique through paid world time and resources."""
+    if isinstance(minutes, bool) or not isinstance(minutes, int) or minutes < 30:
+        raise RuleError("Technique practice requires integer minutes >= 30")
 
-    Practice is intentionally gradual: it consumes stamina/focus, advances the
-    simulation clock, uses diminishing returns, and grants less overall ability
-    mastery than technique-specific mastery.
-    """
-    if minutes < 30:
-        raise RuleError("Technique practice requires at least 30 minutes")
-    if intensity <= 0 or intensity > 2.0:
-        raise RuleError("Technique practice intensity must be in range (0, 2]")
-    if mentor_bonus < 0 or mentor_bonus > 1.0:
-        raise RuleError("Technique mentor bonus must be in range 0..1")
-    if stamina_per_hour < 0 or focus_per_hour < 0:
-        raise RuleError("Technique practice resource rates cannot be negative")
+    def finite_number(
+        value: Any,
+        label: str,
+        *,
+        minimum: float | None = None,
+        maximum: float | None = None,
+    ) -> float:
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not isfinite(float(value))
+        ):
+            raise RuleError(f"{label} must be a finite number")
+        number = float(value)
+        if minimum is not None and number < minimum:
+            raise RuleError(f"{label} must be >= {minimum}")
+        if maximum is not None and number > maximum:
+            raise RuleError(f"{label} must be <= {maximum}")
+        return number
+
+    intensity = finite_number(
+        intensity,
+        "Technique practice intensity",
+        minimum=0.0000001,
+        maximum=2.0,
+    )
+    mentor_bonus = finite_number(
+        mentor_bonus,
+        "Technique mentor bonus",
+        minimum=0.0,
+        maximum=1.0,
+    )
+    stamina_per_hour = finite_number(
+        stamina_per_hour,
+        "Technique stamina rate",
+        minimum=0.0,
+    )
+    focus_per_hour = finite_number(
+        focus_per_hour,
+        "Technique focus rate",
+        minimum=0.0,
+    )
 
     ability = state.abilities.get(ability_id)
-    if not ability:
+    if not isinstance(ability, Mapping):
         raise RuleError(f"Unknown ability: {ability_id}")
     technique = ability.get("techniques", {}).get(technique_id)
-    if not technique:
+    if not isinstance(technique, MutableMapping):
         raise RuleError(f"Technique has not been discovered: {technique_id}")
 
-    ready_at = int(technique.get("ready_at_minutes", 0))
+    ready_at = technique.get("ready_at_minutes", 0)
+    if isinstance(ready_at, bool) or not isinstance(ready_at, int) or ready_at < 0:
+        raise RuleError(f"Technique ready_at_minutes is invalid: {technique_id}")
     if state.time_minutes < ready_at:
         raise RuleError(
             f"Technique is still recovering for {ready_at - state.time_minutes} minutes"
         )
 
     hours = minutes / 60.0
-    stamina_cost = hours * float(stamina_per_hour) * intensity
-    focus_cost = hours * float(focus_per_hour) * intensity
+    stamina_cost = hours * stamina_per_hour * intensity
+    focus_cost = hours * focus_per_hour * intensity
 
     stamina_before = _numeric_player_path(state, "resources.stamina")
     focus_before = _numeric_player_path(state, "resources.focus")
     if stamina_before < stamina_cost or focus_before < focus_cost:
         raise RuleError("Insufficient stamina or focus for technique practice")
 
-    technique_before = float(technique.get("mastery_xp", 0.0))
-    ability_before = float(ability.get("mastery_xp", 0.0))
+    technique_before = technique.get("mastery_xp", 0.0)
+    ability_before = ability.get("mastery_xp", 0.0)
+    if (
+        isinstance(technique_before, bool)
+        or not isinstance(technique_before, (int, float))
+        or not isfinite(float(technique_before))
+        or float(technique_before) < 0
+    ):
+        raise RuleError("Technique mastery state is invalid")
+    if (
+        isinstance(ability_before, bool)
+        or not isinstance(ability_before, (int, float))
+        or not isfinite(float(ability_before))
+        or float(ability_before) < 0
+    ):
+        raise RuleError("Ability mastery state is invalid")
+
+    technique_before = float(technique_before)
+    ability_before = float(ability_before)
     learning_factor = max(0.15, 1.0 - technique_before / 450.0)
     technique_gain = (
         hours
@@ -213,7 +290,7 @@ def practice_technique(
     )
     ability_gain = technique_gain * 0.35
 
-    # Validate everything above before spending resources or advancing time.
+    # All validation happens above this point. Mutations below are deliberate.
     _set_player_path(state, "resources.stamina", stamina_before - stamina_cost)
     _set_player_path(state, "resources.focus", focus_before - focus_cost)
     gain_technique_mastery(
@@ -265,17 +342,27 @@ def _stage_at_least(actual: str, minimum: str) -> bool:
 def _extra_requirements_met(
     state: GameState,
     requirements: Mapping[str, Any],
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> list[str]:
     reasons: list[str] = []
 
-    attributes = state.player.get("attributes", {})
     for key, minimum in requirements.get("attributes", {}).items():
-        if float(attributes.get(key, 0)) < float(minimum):
+        actual = effective_player_value(
+            state,
+            f"attributes.{key}",
+            equipment_sets=equipment_sets,
+        )
+        if actual < float(minimum):
             reasons.append(f"attribute:{key}")
 
-    skills = state.player.get("skills", {})
     for key, minimum in requirements.get("skills", {}).items():
-        if float(skills.get(key, 0)) < float(minimum):
+        actual = effective_player_value(
+            state,
+            f"skills.{key}",
+            equipment_sets=equipment_sets,
+        )
+        if actual < float(minimum):
             reasons.append(f"skill:{key}")
 
     for key, expected in requirements.get("flags", {}).items():
@@ -289,12 +376,281 @@ def _extra_requirements_met(
     return reasons
 
 
+def _number(value: Any, label: str, errors: list[str], *, minimum: float | None = None) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        errors.append(f"{label} must be numeric")
+        return None
+    number = float(value)
+    if not isfinite(number):
+        errors.append(f"{label} must be finite")
+        return None
+    if minimum is not None and number < minimum:
+        errors.append(f"{label} must be >= {minimum}")
+    return number
+
+
+def _integer(value: Any, label: str, errors: list[str], *, minimum: int | None = None) -> int | None:
+    if isinstance(value, bool) or not isinstance(value, int):
+        errors.append(f"{label} must be an integer")
+        return None
+    if minimum is not None and value < minimum:
+        errors.append(f"{label} must be >= {minimum}")
+    return value
+
+
+def validate_technique_definition(definition: Any) -> list[str]:
+    """Validate one authored technique definition without mutating game state."""
+    errors: list[str] = []
+    if not isinstance(definition, Mapping):
+        return ["technique definition must be an object"]
+
+    stage_min = definition.get("stage_min", "discovered")
+    if stage_min not in _STAGE_ORDER:
+        errors.append(f"stage_min has unsupported value {stage_min!r}")
+
+    requirements = definition.get("requirements", {})
+    if not isinstance(requirements, Mapping):
+        errors.append("requirements must be an object")
+        requirements = {}
+
+    for section in ("attributes", "skills", "flags", "items"):
+        value = requirements.get(section, {})
+        if not isinstance(value, Mapping):
+            errors.append(f"requirements.{section} must be an object")
+
+    if "rank_min" in requirements:
+        _integer(requirements["rank_min"], "requirements.rank_min", errors, minimum=0)
+    if "mastery_xp_min" in requirements:
+        _number(
+            requirements["mastery_xp_min"],
+            "requirements.mastery_xp_min",
+            errors,
+            minimum=0.0,
+        )
+
+    for section in ("attributes", "skills"):
+        values = requirements.get(section, {})
+        if isinstance(values, Mapping):
+            for key, minimum in values.items():
+                _number(
+                    minimum,
+                    f"requirements.{section}.{key}",
+                    errors,
+                    minimum=0.0,
+                )
+
+    item_requirements = requirements.get("items", {})
+    if isinstance(item_requirements, Mapping):
+        for item_id, quantity in item_requirements.items():
+            _integer(
+                quantity,
+                f"requirements.items.{item_id}",
+                errors,
+                minimum=0,
+            )
+
+    for section in ("knowledge", "perks"):
+        values = requirements.get(section, [])
+        if not isinstance(values, list) or not all(isinstance(v, str) and v for v in values):
+            errors.append(f"requirements.{section} must be a list of non-empty IDs")
+
+    costs = definition.get("costs", {})
+    if not isinstance(costs, Mapping):
+        errors.append("costs must be an object")
+    else:
+        for path, amount in costs.items():
+            if not isinstance(path, str) or not path:
+                errors.append("cost paths must be non-empty strings")
+                continue
+            _number(amount, f"costs.{path}", errors, minimum=0.0)
+
+    if "cooldown_minutes" in definition:
+        cooldown = definition["cooldown_minutes"]
+        if isinstance(cooldown, bool) or not isinstance(cooldown, int):
+            errors.append("cooldown_minutes must be an integer")
+        elif cooldown < 0:
+            errors.append("cooldown_minutes must be >= 0")
+
+    for key in ("mastery_gain", "ability_mastery_gain"):
+        if key in definition:
+            _number(definition[key], key, errors, minimum=0.0)
+
+    drawbacks = definition.get("drawbacks", [])
+    if not isinstance(drawbacks, list):
+        errors.append("drawbacks must be a list")
+    else:
+        for index, drawback in enumerate(drawbacks):
+            location = f"drawbacks[{index}]"
+            if not isinstance(drawback, Mapping):
+                errors.append(f"{location} must be an object")
+                continue
+            if drawback.get("type") != "condition":
+                errors.append(
+                    f"{location}.type has unsupported value {drawback.get('type')!r}"
+                )
+                continue
+            condition_id = drawback.get("condition_id")
+            if not isinstance(condition_id, str) or not condition_id:
+                errors.append(f"{location}.condition_id must be a non-empty string")
+            severity = drawback.get("severity", 1)
+            if isinstance(severity, bool) or not isinstance(severity, int):
+                errors.append(f"{location}.severity must be an integer")
+            elif severity < 1 or severity > 5:
+                errors.append(f"{location}.severity must be in range 1..5")
+            duration = drawback.get("duration_minutes")
+            if duration is not None:
+                if isinstance(duration, bool) or not isinstance(duration, int):
+                    errors.append(f"{location}.duration_minutes must be an integer or null")
+                elif duration < 0:
+                    errors.append(f"{location}.duration_minutes must be >= 0")
+            modifiers = drawback.get("modifiers")
+            if modifiers is not None:
+                if not isinstance(modifiers, Mapping):
+                    errors.append(f"{location}.modifiers must be an object")
+                else:
+                    for path, value in modifiers.items():
+                        if not isinstance(path, str) or not path:
+                            errors.append(f"{location}.modifier paths must be non-empty strings")
+                            continue
+                        _number(value, f"{location}.modifiers.{path}", errors)
+
+    return errors
+
+
+def validate_evolution_definition(definition: Any) -> list[str]:
+    """Validate one authored evolution definition before any state mutation."""
+    errors: list[str] = []
+    if not isinstance(definition, Mapping):
+        return ["evolution definition must be an object"]
+
+    requirements = definition.get("requirements", {})
+    if not isinstance(requirements, Mapping):
+        errors.append("requirements must be an object")
+        requirements = {}
+
+    if "rank_min" in requirements:
+        _integer(requirements["rank_min"], "requirements.rank_min", errors, minimum=0)
+    if "mastery_xp_min" in requirements:
+        _number(
+            requirements["mastery_xp_min"],
+            "requirements.mastery_xp_min",
+            errors,
+            minimum=0.0,
+        )
+
+    for section in ("attributes", "skills", "items", "flags", "techniques"):
+        value = requirements.get(section, {})
+        if not isinstance(value, Mapping):
+            errors.append(f"requirements.{section} must be an object")
+
+    for section in ("attributes", "skills"):
+        values = requirements.get(section, {})
+        if isinstance(values, Mapping):
+            for key, minimum in values.items():
+                _number(
+                    minimum,
+                    f"requirements.{section}.{key}",
+                    errors,
+                    minimum=0.0,
+                )
+
+    item_requirements = requirements.get("items", {})
+    if isinstance(item_requirements, Mapping):
+        for item_id, quantity in item_requirements.items():
+            _integer(
+                quantity,
+                f"requirements.items.{item_id}",
+                errors,
+                minimum=0,
+            )
+
+    for section in ("knowledge", "perks"):
+        values = requirements.get(section, [])
+        if not isinstance(values, list) or not all(isinstance(v, str) and v for v in values):
+            errors.append(f"requirements.{section} must be a list of non-empty IDs")
+
+    techniques = requirements.get("techniques", {})
+    if isinstance(techniques, Mapping):
+        for technique_id, stage in techniques.items():
+            if not isinstance(technique_id, str) or not technique_id:
+                errors.append("requirements.techniques keys must be non-empty IDs")
+            if stage not in _STAGE_ORDER:
+                errors.append(
+                    f"requirements.techniques.{technique_id} has unsupported stage {stage!r}"
+                )
+
+    result = definition.get("result", {})
+    if not isinstance(result, Mapping):
+        errors.append("result must be an object")
+        return errors
+
+    if "rank_floor" in result:
+        value = result["rank_floor"]
+        if isinstance(value, bool) or not isinstance(value, int):
+            errors.append("result.rank_floor must be an integer")
+        elif value < 0:
+            errors.append("result.rank_floor must be >= 0")
+
+    tags = result.get("tags", [])
+    if not isinstance(tags, list) or not all(isinstance(v, str) and v for v in tags):
+        errors.append("result.tags must be a list of non-empty strings")
+
+    consume_items = result.get("consume_items", {})
+    if not isinstance(consume_items, Mapping):
+        errors.append("result.consume_items must be an object")
+    else:
+        for item_id, quantity in consume_items.items():
+            if not isinstance(item_id, str) or not item_id:
+                errors.append("result.consume_items keys must be non-empty IDs")
+                continue
+            if isinstance(quantity, bool) or not isinstance(quantity, int):
+                errors.append(f"result.consume_items.{item_id} must be an integer")
+            elif quantity < 0:
+                errors.append(f"result.consume_items.{item_id} must be >= 0")
+
+    grant_perks = result.get("grant_perks", {})
+    if not isinstance(grant_perks, Mapping):
+        errors.append("result.grant_perks must be an object")
+    else:
+        for perk_id, perk in grant_perks.items():
+            location = f"result.grant_perks.{perk_id}"
+            if not isinstance(perk_id, str) or not perk_id:
+                errors.append("result.grant_perks keys must be non-empty IDs")
+            if not isinstance(perk, Mapping):
+                errors.append(f"{location} must be an object")
+                continue
+            modifiers = perk.get("modifiers", {})
+            if not isinstance(modifiers, Mapping):
+                errors.append(f"{location}.modifiers must be an object")
+            else:
+                for path, value in modifiers.items():
+                    if not isinstance(path, str) or not path:
+                        errors.append(f"{location}.modifier paths must be non-empty strings")
+                        continue
+                    _number(value, f"{location}.modifiers.{path}", errors)
+            perk_tags = perk.get("tags", [])
+            if not isinstance(perk_tags, list) or not all(
+                isinstance(v, str) and v for v in perk_tags
+            ):
+                errors.append(f"{location}.tags must be a list of non-empty strings")
+
+    return errors
+
+
 def technique_use_status(
     state: GameState,
     ability_id: str,
     technique_id: str,
     definition: Mapping[str, Any],
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
+    definition_errors = validate_technique_definition(definition)
+    if definition_errors:
+        raise RuleError(
+            "Invalid technique definition: " + "; ".join(definition_errors)
+        )
+
     reasons: list[str] = []
     ability = state.abilities.get(ability_id)
     if not ability:
@@ -308,7 +664,13 @@ def technique_use_status(
     if not technique_available(state, ability_id, dict(requirements)):
         reasons.append("ability_requirements")
 
-    reasons.extend(_extra_requirements_met(state, requirements))
+    reasons.extend(
+        _extra_requirements_met(
+            state,
+            requirements,
+            equipment_sets=equipment_sets,
+        )
+    )
 
     minimum_stage = definition.get("stage_min", "discovered")
     if not _stage_at_least(technique.get("stage", "unknown"), minimum_stage):
@@ -359,8 +721,16 @@ def use_technique(
     ability_id: str,
     technique_id: str,
     definition: Mapping[str, Any],
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
-    status = technique_use_status(state, ability_id, technique_id, definition)
+    status = technique_use_status(
+        state,
+        ability_id,
+        technique_id,
+        definition,
+        equipment_sets=equipment_sets,
+    )
     if not status["available"]:
         raise RuleError(
             f"Technique cannot be used: {technique_id} ({', '.join(status['reasons'])})"
@@ -428,7 +798,15 @@ def ability_evolution_status(
     ability_id: str,
     evolution_id: str,
     definition: Mapping[str, Any],
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
+    definition_errors = validate_evolution_definition(definition)
+    if definition_errors:
+        raise RuleError(
+            "Invalid evolution definition: " + "; ".join(definition_errors)
+        )
+
     ability = state.abilities.get(ability_id)
     if not ability:
         return {"available": False, "reasons": ["ability_missing"]}
@@ -456,7 +834,13 @@ def ability_evolution_status(
         if perk_id not in state.perks:
             reasons.append(f"perk:{perk_id}")
 
-    reasons.extend(_extra_requirements_met(state, requirements))
+    reasons.extend(
+        _extra_requirements_met(
+            state,
+            requirements,
+            equipment_sets=equipment_sets,
+        )
+    )
 
     techniques = ability.get("techniques", {})
     for required_id, stage_min in requirements.get("techniques", {}).items():
@@ -486,8 +870,16 @@ def evolve_ability(
     ability_id: str,
     evolution_id: str,
     definition: Mapping[str, Any],
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
-    status = ability_evolution_status(state, ability_id, evolution_id, definition)
+    status = ability_evolution_status(
+        state,
+        ability_id,
+        evolution_id,
+        definition,
+        equipment_sets=equipment_sets,
+    )
     if not status["available"]:
         raise RuleError(
             f"Ability cannot evolve: {evolution_id} ({', '.join(status['reasons'])})"
@@ -545,3 +937,245 @@ def evolve_ability(
     }
     state.history.append(event)
     return event
+
+
+
+def _visible_text(value: Any, label: str, *, default: str | None = None) -> str:
+    if value is None and default is not None:
+        return default
+    if not isinstance(value, str) or not value:
+        raise RuleError(f"{label} must be a non-empty string")
+    return value
+
+
+def _visible_resource_path(path: Any, label: str) -> str:
+    if not isinstance(path, str) or not path:
+        raise RuleError(f"{label} must be a non-empty string")
+    parts = path.split(".")
+    if len(parts) != 2 or parts[0] not in {"resources", "power_resources"} or not parts[1]:
+        raise RuleError(
+            f"{label} must use resources.<id> or power_resources.<id>"
+        )
+    return path
+
+
+def ability_player_view(
+    state: GameState,
+    ability_id: str,
+    definition: Mapping[str, Any] | None = None,
+) -> Dict[str, Any]:
+    """Return a player-safe projection of one known ability.
+
+    This intentionally does not dump the raw authored definition. Only techniques
+    already present in persistent ability state and evolution entries explicitly
+    marked visible in persistent state are projected. Hidden requirements remain
+    inaccessible to a normal status UI.
+    """
+    ability = state.abilities.get(ability_id)
+    if not ability:
+        raise RuleError(f"Unknown ability: {ability_id}")
+
+    definition = definition or {}
+    rank_value = ability.get("rank", 0)
+    if isinstance(rank_value, bool) or not isinstance(rank_value, int) or rank_value < 0:
+        raise RuleError(f"Ability rank must be a non-negative integer: {ability_id}")
+    mastery_value = ability.get("mastery_xp", 0.0)
+    if (
+        isinstance(mastery_value, bool)
+        or not isinstance(mastery_value, (int, float))
+        or not isfinite(float(mastery_value))
+        or float(mastery_value) < 0
+    ):
+        raise RuleError(f"Ability mastery_xp must be a finite non-negative number: {ability_id}")
+
+    output: Dict[str, Any] = {
+        "name": _visible_text(
+            definition.get("name", ability.get("name")),
+            "ability display name",
+            default=ability_id,
+        ),
+        "rank": rank_value,
+        "mastery_stage": _visible_text(
+            ability.get("mastery_stage"),
+            "ability mastery_stage",
+            default="discovered",
+        ),
+        "mastery_xp": float(mastery_value),
+        "form": ability.get("form"),
+        "state": _visible_text(
+            ability.get("state"),
+            "ability state",
+            default="ready",
+        ),
+        "techniques": [],
+        "evolutions": [],
+    }
+
+    for optional_key in ("control", "efficiency"):
+        if optional_key in ability:
+            value = ability[optional_key]
+            if (
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not isfinite(float(value))
+            ):
+                raise RuleError(
+                    f"Ability {optional_key} must be a finite number: {ability_id}"
+                )
+            output[optional_key] = float(value)
+
+    resource_definition = definition.get("resource")
+    if resource_definition is not None:
+        if not isinstance(resource_definition, Mapping):
+            raise RuleError("Ability resource definition must be an object")
+        current_path = _visible_resource_path(
+            resource_definition.get("current_path"),
+            "Ability resource current_path",
+        )
+        max_path = resource_definition.get("max_path")
+        current = _numeric_player_path(state, current_path)
+        resource_view: Dict[str, Any] = {
+            "label": resource_definition.get("label", "Resource"),
+            "current": current,
+        }
+        if max_path is not None:
+            max_path = _visible_resource_path(
+                max_path,
+                "Ability resource max_path",
+            )
+            resource_view["max"] = _numeric_player_path(state, max_path)
+        output["resource"] = resource_view
+
+    technique_definitions = definition.get("techniques", {})
+    if technique_definitions is not None and not isinstance(technique_definitions, Mapping):
+        raise RuleError("Ability technique definitions must be an object")
+
+    for technique_id, record in ability.get("techniques", {}).items():
+        if not isinstance(technique_id, str) or not technique_id:
+            raise RuleError("Technique state keys must be non-empty IDs")
+        if not isinstance(record, Mapping):
+            raise RuleError(f"Technique state must be an object: {technique_id}")
+        technique_mastery = record.get("mastery_xp", 0.0)
+        if (
+            isinstance(technique_mastery, bool)
+            or not isinstance(technique_mastery, (int, float))
+            or not isfinite(float(technique_mastery))
+            or float(technique_mastery) < 0
+        ):
+            raise RuleError(
+                f"Technique mastery_xp must be a finite non-negative number: {technique_id}"
+            )
+        uses_value = record.get("uses", 0)
+        if isinstance(uses_value, bool) or not isinstance(uses_value, int) or uses_value < 0:
+            raise RuleError(f"Technique uses must be a non-negative integer: {technique_id}")
+        ready_at_value = record.get("ready_at_minutes", 0)
+        if (
+            isinstance(ready_at_value, bool)
+            or not isinstance(ready_at_value, int)
+            or ready_at_value < 0
+        ):
+            raise RuleError(
+                f"Technique ready_at_minutes must be a non-negative integer: {technique_id}"
+            )
+        authored = (
+            technique_definitions.get(technique_id, {})
+            if isinstance(technique_definitions, Mapping)
+            else {}
+        )
+        if authored is not None and not isinstance(authored, Mapping):
+            raise RuleError(f"Technique definition must be an object: {technique_id}")
+        authored = authored or {}
+        ready_at = ready_at_value
+        output["techniques"].append(
+            {
+                "technique_id": technique_id,
+                "name": _visible_text(
+                    authored.get("name"),
+                    f"Technique display name {technique_id}",
+                    default=technique_id,
+                ),
+                "stage": _visible_text(
+                    record.get("stage"),
+                    f"Technique stage {technique_id}",
+                    default="discovered",
+                ),
+                "mastery_xp": float(technique_mastery),
+                "uses": uses_value,
+                "ready": state.time_minutes >= ready_at,
+                "cooldown_remaining_minutes": max(0, ready_at - state.time_minutes),
+            }
+        )
+
+    evolution_definitions = definition.get("evolutions", {})
+    if evolution_definitions is not None and not isinstance(evolution_definitions, Mapping):
+        raise RuleError("Ability evolution definitions must be an object")
+
+    visibility = ability.get("evolution_visibility", {})
+    if visibility is not None and not isinstance(visibility, Mapping):
+        raise RuleError("Ability evolution_visibility must be an object")
+
+    for evolution_id, knowledge in (visibility or {}).items():
+        if not isinstance(knowledge, Mapping):
+            raise RuleError(
+                f"Evolution visibility state must be an object: {evolution_id}"
+            )
+        disclosure = knowledge.get("state", "hidden")
+        if disclosure == "hidden":
+            continue
+        if disclosure not in {"hinted", "partial", "known", "satisfied"}:
+            raise RuleError(
+                f"Unsupported evolution disclosure state: {evolution_id}:{disclosure}"
+            )
+        authored = (
+            evolution_definitions.get(evolution_id, {})
+            if isinstance(evolution_definitions, Mapping)
+            else {}
+        )
+        if authored is not None and not isinstance(authored, Mapping):
+            raise RuleError(f"Evolution definition must be an object: {evolution_id}")
+        authored = authored or {}
+
+        if not isinstance(evolution_id, str) or not evolution_id:
+            raise RuleError("Evolution visibility keys must be non-empty IDs")
+        if disclosure in {"known", "satisfied"}:
+            name = _visible_text(
+                authored.get("name"),
+                f"Evolution display name {evolution_id}",
+                default=evolution_id,
+            )
+        else:
+            name = _visible_text(
+                knowledge.get("label"),
+                f"Evolution visible label {evolution_id}",
+                default="Unknown evolution",
+            )
+        item: Dict[str, Any] = {
+            "evolution_id": evolution_id,
+            "state": disclosure,
+            "name": name,
+        }
+        hint = knowledge.get("hint")
+        if hint is not None:
+            item["hint"] = _visible_text(
+                hint,
+                f"Evolution hint {evolution_id}",
+            )
+        known_requirements = knowledge.get("known_requirements")
+        if known_requirements is not None:
+            if (
+                not isinstance(known_requirements, list)
+                or not all(isinstance(value, str) and value for value in known_requirements)
+            ):
+                raise RuleError(
+                    f"known_requirements must be a list of non-empty strings: {evolution_id}"
+                )
+            item["known_requirements"] = list(known_requirements)
+        output["evolutions"].append(item)
+
+    completed_evolutions = [
+        record.get("evolution_id")
+        for record in ability.get("evolutions", [])
+        if isinstance(record, Mapping) and record.get("evolution_id")
+    ]
+    output["completed_evolutions"] = completed_evolutions
+    return output
