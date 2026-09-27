@@ -29,7 +29,7 @@ class AndroidBridgeTests(unittest.TestCase):
 
         view = session.scene_view()
 
-        self.assertEqual({"scene", "status", "quests", "map", "meta"}, set(view))
+        self.assertEqual({"scene", "status", "inventory", "quests", "map", "meta"}, set(view))
         self.assertIn("id", view["scene"])
         self.assertIn("title", view["scene"])
         self.assertIn("body", view["scene"])
@@ -70,6 +70,46 @@ class AndroidBridgeTests(unittest.TestCase):
         self.assertIn("PLATFORM_NINE", node_ids)
         self.assertIn("RELAY_WORKBENCH", node_ids)
         self.assertNotIn("TRACE_CHAMBER", node_ids)
+
+
+    def test_inventory_projection_exposes_items_and_slots_without_modifiers(self):
+        session = create_session(CONTENT)
+
+        view = session.scene_view()
+
+        self.assertEqual("ITEM_MAINTENANCE_SEAL", view["inventory"]["items"][0]["id"])
+        self.assertEqual(1, view["inventory"]["items"][0]["quantity"])
+        self.assertTrue(all("modifiers" not in entry for entry in view["inventory"]["equipment"]))
+
+    def test_validated_cheats_mutate_only_through_whitelist(self):
+        session = create_session(CONTENT)
+        session.state.player["resources"]["stamina"] = 1
+
+        restored = session.apply_cheat("fullrestore")
+
+        stamina = next(resource for resource in restored["status"]["resources"] if resource["id"] == "stamina")
+        self.assertEqual(stamina["max"], stamina["current"])
+        self.assertEqual("FULLRESTORE", session.state.history[-1]["code"])
+
+    def test_unknown_cheat_rolls_back_without_mutation(self):
+        session = create_session(CONTENT)
+        before = deepcopy(session.state.snapshot())
+
+        with self.assertRaises(AndroidBridgeError) as caught:
+            session.apply_cheat("MAKE_ME_A_GOD")
+
+        self.assertEqual("CHEAT_ERROR", caught.exception.code)
+        self.assertEqual(before, session.state.snapshot())
+
+    def test_debug_map_cheat_reveals_authored_nodes_without_scene_mutation(self):
+        session = create_session(CONTENT)
+        before_scene = session.state.scene_id
+
+        view = session.apply_cheat("DEBUGMAP")
+
+        self.assertEqual(before_scene, session.state.scene_id)
+        self.assertGreaterEqual(len(view["map"]["nodes"]), 6)
+
 
     def test_invalid_choice_is_controlled_and_does_not_mutate_state(self):
         session = create_session(CONTENT)
