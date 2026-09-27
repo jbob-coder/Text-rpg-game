@@ -301,3 +301,51 @@ def build_status_view(
         "abilities": abilities,
         "conditions": _condition_view(state, condition_definitions),
     }
+
+
+def inspect_status_value(
+    state: GameState,
+    engine: RulesEngine,
+    path: str,
+) -> Dict[str, Any]:
+    """Return a player-safe deep explanation for a visible numeric status value.
+
+    Only core attributes, registered skills, and registered derived values are
+    inspectable through this projection boundary. Hidden quest/NPC/ability raw
+    paths cannot be requested through this API.
+    """
+    if not isinstance(engine, RulesEngine):
+        raise RuleError("inspect_status_value requires the active RulesEngine")
+    if not isinstance(path, str) or not path:
+        raise RuleError("Status inspection path must be a non-empty string")
+
+    namespace, separator, key = path.partition(".")
+    if not separator or not key or "." in key:
+        raise RuleError(f"Invalid status inspection path: {path}")
+
+    if namespace == "attributes":
+        if key not in ATTRIBUTE_SPECS:
+            raise RuleError(f"Unknown visible attribute: {key}")
+    elif namespace == "skills":
+        if key not in SKILL_CATALOG:
+            raise RuleError(f"Unknown visible skill: {key}")
+    elif namespace == "derived":
+        if key not in DERIVED_STAT_SPECS:
+            raise RuleError(f"Unknown visible derived value: {key}")
+    else:
+        raise RuleError(
+            "Status inspection supports only attributes.*, skills.*, or derived.*"
+        )
+
+    explanation = engine.explain_player_value(state, path)
+    total = _finite_number(explanation.get("total"), f"status value {path}")
+    breakdown = explanation.get("breakdown")
+    if not isinstance(breakdown, Mapping):
+        raise RuleError(f"Status explanation breakdown must be an object: {path}")
+
+    return {
+        "path": path,
+        "kind": explanation.get("kind"),
+        "total": total,
+        "breakdown": dict(breakdown),
+    }
