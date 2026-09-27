@@ -460,5 +460,37 @@ class RulesEngine:
                     "modifiers": effect.get("modifiers", {}),
                     "tags": effect.get("tags", []),
                 }
+            elif kind == "ability_discover":
+                from .powers import discover_ability
+
+                discover_ability(
+                    state,
+                    effect["ability_id"],
+                    family=effect.get("family", "unknown"),
+                    form=effect.get("form"),
+                    tags=effect.get("tags", ()),
+                    data=effect.get("data"),
+                )
+            elif kind == "technique_discover":
+                from .powers import discover_technique
+
+                discover_technique(
+                    state,
+                    effect["ability_id"],
+                    effect["technique_id"],
+                )
+            elif kind == "technique_practice":
+                from .powers import practice_technique
+
+                practice_technique(
+                    state,
+                    effect["ability_id"],
+                    effect["technique_id"],
+                    minutes=int(effect["minutes"]),
+                    intensity=float(effect.get("intensity", 1.0)),
+                    mentor_bonus=float(effect.get("mentor_bonus", 0.0)),
+                    stamina_per_hour=float(effect.get("stamina_per_hour", 4.0)),
+                    focus_per_hour=float(effect.get("focus_per_hour", 6.0)),
+                )
             else:
                 raise RuleError(f"Unknown effect type: {kind}")
