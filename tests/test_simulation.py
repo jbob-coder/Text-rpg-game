@@ -208,5 +208,33 @@ class SimulationTests(unittest.TestCase):
         self.assertEqual(state.history, before_history)
 
 
+    def test_condition_rejects_falsey_non_mapping_modifiers_without_mutation(self):
+        state = self.state()
+        before_conditions = dict(state.player.get("conditions", {}))
+
+        with self.assertRaises(RuleError):
+            apply_condition(
+                state,
+                "COND_BAD_MODIFIERS",
+                modifiers=[],
+            )
+
+        self.assertEqual(state.player.get("conditions", {}), before_conditions)
+        self.assertNotIn("COND_BAD_MODIFIERS", state.player.get("conditions", {}))
+
+    def test_condition_rejects_non_iterable_tags_without_mutation(self):
+        state = self.state()
+        before_conditions = dict(state.player.get("conditions", {}))
+
+        with self.assertRaises(RuleError):
+            apply_condition(
+                state,
+                "COND_BAD_TAGS",
+                tags=7,
+            )
+
+        self.assertEqual(state.player.get("conditions", {}), before_conditions)
+
+
 if __name__ == "__main__":
     unittest.main()
