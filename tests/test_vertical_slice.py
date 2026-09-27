@@ -271,7 +271,7 @@ class VerticalSliceTests(unittest.TestCase):
             "TECHNIQUE_DIRECTIONAL_TRACE",
             state.abilities["ABILITY_TRACE_ECHO"]["techniques"],
         )
-        self.assertIn("rank", discovery["reasons"])
+        self.assertNotIn("rank", discovery["reasons"])
         self.assertIn("mastery_xp", discovery["reasons"])
         self.assertIn(
             "knowledge:KNOW_TRACE_ECHO_PATTERN_STABLE", discovery["reasons"]
@@ -281,8 +281,91 @@ class VerticalSliceTests(unittest.TestCase):
             "technique:TECHNIQUE_SIGNAL_PULSE:learned", discovery["reasons"]
         )
 
-        engine.choose(state, "END_TRACE_ECHO_FOUNDATION_SLICE")
+        engine.choose(state, "BEGIN_TRACE_STABILIZATION_PLAN")
         self.assertTrue(state.flags["vertical_slice_01.power_session_complete"])
+        self.assertEqual(state.scene_id, "TRACE_STABILIZATION_HUB")
+        self.assertEqual(
+            state.quests["QUEST_TRACE_STABILIZATION"]["stage"],
+            "STAGE_FOUNDATION",
+        )
+
+
+    def test_directional_trace_is_earned_through_training_research_and_tolerance(self):
+        data = load_slice()
+        state = make_state(data)
+        engine = RulesEngine(
+            data["scenes"],
+            quest_definitions=data["quests"],
+            power_definitions=data.get("powers", {}),
+        )
+
+        for choice_id in [
+            "TAKE_DEAD_RELAY",
+            "USE_MAINTENANCE_SEAL",
+            "KEEP_GATE_TWELVE_SECRET",
+            "LEAVE_DEPOT_ALONE",
+            "CONTINUE_BELOW_GATE_TWELVE",
+            "FOLLOW_TRACE_ECHO",
+            "PRACTICE_SIGNAL_PULSE_ONE_HOUR",
+            "USE_SIGNAL_PULSE_ON_RELAY",
+            "RECOVER_TRACE_RESONANCE_THIRTY_MINUTES",
+            "BEGIN_TRACE_STABILIZATION_PLAN",
+        ]:
+            engine.choose(state, choice_id)
+
+        for _ in range(4):
+            engine.choose(state, "PRACTICE_SIGNAL_PULSE_TWO_HOURS")
+
+        signal = state.abilities["ABILITY_TRACE_ECHO"]["techniques"][
+            "TECHNIQUE_SIGNAL_PULSE"
+        ]
+        self.assertGreaterEqual(signal["mastery_xp"], 40)
+        self.assertIn(signal["stage"], {"learned", "practiced", "mastered"})
+        self.assertGreaterEqual(
+            state.abilities["ABILITY_TRACE_ECHO"]["mastery_xp"],
+            20,
+        )
+
+        engine.choose(state, "RECOVER_EIGHT_HOURS")
+        for _ in range(6):
+            engine.choose(state, "TRAIN_POWER_FUNDAMENTALS_TWO_HOURS")
+        self.assertGreaterEqual(state.player["skills"]["powers"], 10)
+
+        engine.choose(state, "ANALYZE_STABLE_TRACE_PATTERN")
+        self.assertIn("KNOW_TRACE_ECHO_PATTERN_STABLE", state.knowledge)
+        self.assertEqual(
+            state.quests["QUEST_TRACE_STABILIZATION"]["stage"],
+            "STAGE_FOUNDATION",
+        )
+
+        engine.choose(state, "COMPLETE_TRACE_TOLERANCE_PROTOCOL")
+        self.assertIn("PERK_TRACE_TOLERANCE", state.perks)
+        self.assertEqual(
+            state.quests["QUEST_TRACE_STABILIZATION"]["stage"],
+            "STAGE_DIRECTIONAL",
+        )
+
+        choices = {
+            choice["id"]: choice
+            for choice in engine.available_choices(state)
+        }
+        self.assertTrue(choices["DISCOVER_DIRECTIONAL_TRACE"]["enabled"])
+
+        engine.choose(state, "DISCOVER_DIRECTIONAL_TRACE")
+        directional = state.abilities["ABILITY_TRACE_ECHO"]["techniques"][
+            "TECHNIQUE_DIRECTIONAL_TRACE"
+        ]
+        self.assertEqual(directional["mastery_xp"], 0.0)
+        self.assertEqual(directional["stage"], "discovered")
+        self.assertEqual(
+            state.quests["QUEST_TRACE_STABILIZATION"]["status"],
+            "completed",
+        )
+
+        engine.choose(state, "END_DIRECTIONAL_TRACE_PROTOTYPE")
+        self.assertTrue(
+            state.flags["vertical_slice_01.directional_trace_discovered"]
+        )
 
 
 if __name__ == "__main__":
