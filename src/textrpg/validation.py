@@ -21,6 +21,7 @@ SUPPORTED_CONDITIONS: Set[str] = {
     "npc_not_knows",
     "party_has",
     "ability_rank_min",
+    "technique_discoverable",
     "has_perk",
     "item_min",
 }
@@ -75,6 +76,17 @@ def _walk_conditions(conditions: Any, location: str, errors: List[str]) -> None:
                 validate_modifier_path(condition.get("path"))
             except ValueError as exc:
                 errors.append(f"{item_location} has invalid stat path: {exc}")
+        if kind == "technique_discoverable":
+            _validate_id(
+                condition.get("ability_id"),
+                f"{item_location}.ability_id",
+                errors,
+            )
+            _validate_id(
+                condition.get("technique_id"),
+                f"{item_location}.technique_id",
+                errors,
+            )
 
 
 def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
@@ -160,6 +172,108 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
                 )
             except ValueError as exc:
                 errors.append(f"{item_location} has invalid modifiers: {exc}")
+
+REGISTRY_CATEGORIES = ("knowledge", "perks", "items", "conditions")
+
+
+def validate_registries(registries: Mapping[str, Mapping[str, Any]]) -> List[str]:
+    """Validate optional stable-ID registries used for cross-reference checks."""
+    errors: List[str] = []
+    if not isinstance(registries, Mapping):
+        return ["registries must be an object"]
+
+    for category in registries:
+        if category not in REGISTRY_CATEGORIES:
+            errors.append(f"registries has unsupported category {category!r}")
+
+    for category in REGISTRY_CATEGORIES:
+        records = registries.get(category, {})
+        if not isinstance(records, Mapping):
+            errors.append(f"registries.{category} must be an object")
+            continue
+        for stable_id, metadata in records.items():
+            _validate_id(stable_id, f"registries.{category} id", errors)
+            if not isinstance(metadata, Mapping):
+                errors.append(
+                    f"registries.{category}.{stable_id} metadata must be an object"
+                )
+    return errors
+
+
+def _registry_reference_errors(
+    scenes: Mapping[str, Dict[str, Any]],
+    powers: Mapping[str, Mapping[str, Any]],
+    registries: Mapping[str, Mapping[str, Any]],
+) -> List[str]:
+    errors: List[str] = []
+    known = {
+        category: set(registries.get(category, {}).keys())
+        if isinstance(registries.get(category, {}), Mapping)
+        else set()
+        for category in REGISTRY_CATEGORIES
+    }
+
+    def require(category: str, stable_id: Any, location: str) -> None:
+        if not isinstance(stable_id, str) or stable_id not in known[category]:
+            errors.append(
+                f"{location} references unknown {category[:-1] if category.endswith('s') else category} "
+                f"{stable_id!r}"
+            )
+
+    for scene_id, scene in scenes.items():
+        for choice_index, choice in enumerate(scene.get("choices", [])):
+            for gate_name in ("visible_if", "requires"):
+                for index, condition in enumerate(choice.get(gate_name, [])):
+                    location = f"{scene_id}.choices[{choice_index}].{gate_name}[{index}]"
+                    kind = condition.get("type")
+                    if kind in {"knows", "not_knows", "npc_knows", "npc_not_knows"}:
+                        require("knowledge", condition.get("knowledge_id"), location)
+                    elif kind == "has_perk":
+                        require("perks", condition.get("perk_id"), location)
+                    elif kind == "item_min":
+                        require("items", condition.get("item_id"), location)
+
+            for outcome_name, outcome in choice.get("outcomes", {}).items():
+                if not isinstance(outcome, Mapping):
+                    continue
+                for effect_index, effect in enumerate(outcome.get("effects", [])):
+                    location = (
+                        f"{scene_id}.choices[{choice_index}].outcomes."
+                        f"{outcome_name}.effect[{effect_index}]"
+                    )
+                    kind = effect.get("type")
+                    if kind in {"learn", "npc_learn"}:
+                        require("knowledge", effect.get("knowledge_id"), location)
+                    elif kind == "inventory":
+                        require("items", effect.get("item_id"), location)
+                    elif kind == "add_perk":
+                        require("perks", effect.get("perk_id"), location)
+
+    for ability_id, definition in powers.items():
+        if not isinstance(definition, Mapping):
+            continue
+        for technique_id, technique in definition.get("techniques", {}).items():
+            if not isinstance(technique, Mapping):
+                continue
+            for field_name in ("discovery_requirements", "requirements"):
+                requirements = technique.get(field_name, {})
+                if not isinstance(requirements, Mapping):
+                    continue
+                base = f"powers.{ability_id}.{technique_id}.{field_name}"
+                for knowledge_id in requirements.get("knowledge", []):
+                    require("knowledge", knowledge_id, base)
+                for perk_id in requirements.get("perks", []):
+                    require("perks", perk_id, base)
+                for item_id in requirements.get("items", {}):
+                    require("items", item_id, base)
+            for index, drawback in enumerate(technique.get("drawbacks", [])):
+                if isinstance(drawback, Mapping) and drawback.get("type") == "condition":
+                    require(
+                        "conditions",
+                        drawback.get("condition_id"),
+                        f"powers.{ability_id}.{technique_id}.drawbacks[{index}]",
+                    )
+    return errors
 
 def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
     """Statically validate authored scene data before it reaches a playthrough."""
@@ -259,6 +373,7 @@ def validate_content_pack(
     scenes: Mapping[str, Dict[str, Any]],
     quests: Mapping[str, Mapping[str, Any]] | None = None,
     powers: Mapping[str, Mapping[str, Any]] | None = None,
+    registries: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> List[str]:
     """Validate scenes, quest/power definitions, and authored cross-references."""
     from .powers import validate_power_definitions
@@ -269,6 +384,16 @@ def validate_content_pack(
     errors = list(validate_scenes(scenes))
     errors.extend(validate_quest_definitions(quest_definitions))
     errors.extend(validate_power_definitions(power_definitions))
+    if registries is not None:
+        errors.extend(validate_registries(registries))
+        if isinstance(scenes, Mapping):
+            errors.extend(
+                _registry_reference_errors(
+                    scenes,
+                    power_definitions,
+                    registries,
+                )
+            )
 
     if not isinstance(scenes, Mapping):
         return errors
@@ -372,6 +497,48 @@ def validate_content_pack(
                                     f"{technique_id!r} for power {ability_id!r}"
                                 )
 
+    for scene_id, scene in scenes.items():
+        if not isinstance(scene, Mapping):
+            continue
+        choices = scene.get("choices", [])
+        if not isinstance(choices, list):
+            continue
+        for choice_index, choice in enumerate(choices):
+            if not isinstance(choice, Mapping):
+                continue
+            for gate_name in ("visible_if", "requires"):
+                conditions = choice.get(gate_name, [])
+                if not isinstance(conditions, list):
+                    continue
+                for condition_index, condition in enumerate(conditions):
+                    if not isinstance(condition, Mapping):
+                        continue
+                    if condition.get("type") != "technique_discoverable":
+                        continue
+                    location = (
+                        f"{scene_id}.choices[{choice_index}].{gate_name}."
+                        f"condition[{condition_index}]"
+                    )
+                    ability_id = condition.get("ability_id")
+                    definition = power_definitions.get(ability_id)
+                    if definition is None:
+                        errors.append(
+                            f"{location} references unknown power {ability_id!r}"
+                        )
+                        continue
+                    if not isinstance(definition, Mapping):
+                        continue
+                    technique_id = condition.get("technique_id")
+                    techniques = definition.get("techniques", {})
+                    if (
+                        not isinstance(techniques, Mapping)
+                        or technique_id not in techniques
+                    ):
+                        errors.append(
+                            f"{location} references unknown technique "
+                            f"{technique_id!r} for power {ability_id!r}"
+                        )
+
     return errors
 
 
@@ -379,7 +546,8 @@ def assert_valid_content_pack(
     scenes: Mapping[str, Dict[str, Any]],
     quests: Mapping[str, Mapping[str, Any]] | None = None,
     powers: Mapping[str, Mapping[str, Any]] | None = None,
+    registries: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> None:
-    errors = validate_content_pack(scenes, quests, powers)
+    errors = validate_content_pack(scenes, quests, powers, registries)
     if errors:
         raise RuleError("Invalid authored content pack:\n- " + "\n- ".join(errors))
