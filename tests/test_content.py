@@ -21,6 +21,7 @@ class ContentPackTests(unittest.TestCase):
         self.assertEqual(pack.state.scene_id, "OPENING_DEPOT_BLACKOUT")
         choices = {choice["id"] for choice in pack.engine.available_choices(pack.state)}
         self.assertIn("TAKE_DEAD_RELAY", choices)
+        self.assertIn("ABILITY_TRACE_ECHO", pack.engine.power_definitions)
 
     def test_unknown_initial_scene_is_rejected(self):
         data = self.data()
