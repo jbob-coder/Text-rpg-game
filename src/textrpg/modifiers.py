@@ -5,6 +5,25 @@ from typing import Any, Dict, Mapping
 from .schema import ATTRIBUTE_SPECS, DERIVED_STAT_SPECS, SKILL_CATALOG
 
 
+def resolve_set_context(
+    set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
+) -> Mapping[str, Mapping[str, Any]] | None:
+    """Resolve old/new public names for authored equipment-set definitions.
+
+    The foundation public stat API historically exposed `equipment_sets=`.
+    The hardening work introduced `set_definitions` internally. Both names are
+    accepted during migration so cross-branch integration does not break callers.
+    """
+    if set_definitions is not None and equipment_sets is not None:
+        if set_definitions is not equipment_sets and set_definitions != equipment_sets:
+            raise ValueError(
+                "Provide either set_definitions or equipment_sets, not conflicting values"
+            )
+    return set_definitions if set_definitions is not None else equipment_sets
+
+
 def _get_path(data: Mapping[str, Any], path: str, default: Any = None) -> Any:
     current: Any = data
     for part in path.split("."):
@@ -209,6 +228,8 @@ def modifier_breakdown(
     state: Any,
     path: str,
     set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, float]:
     """Return an inspectable additive breakdown for one canonical path.
 
@@ -216,6 +237,10 @@ def modifier_breakdown(
     contribution is calculated by derived_stats and is intentionally not
     represented as a fake player-base field.
     """
+    set_definitions = resolve_set_context(
+        set_definitions,
+        equipment_sets=equipment_sets,
+    )
     validate_modifier_path(path)
     breakdown: Dict[str, float] = {}
 
@@ -271,8 +296,14 @@ def effective_player_value(
     state: Any,
     path: str,
     set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> float:
-    """Return base player value plus equipment/set/perk/condition modifiers."""
+    """Return an effective value while preserving the foundation keyword API."""
+    set_definitions = resolve_set_context(
+        set_definitions,
+        equipment_sets=equipment_sets,
+    )
     if path.startswith("derived."):
         # Local import keeps schema/modifier modules independent during import.
         from .stats import derived_stat_breakdown
