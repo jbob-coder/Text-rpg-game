@@ -1633,23 +1633,70 @@ def ability_player_view(
     if resource_definition is not None:
         if not isinstance(resource_definition, Mapping):
             raise RuleError("Ability resource definition must be an object")
-        current_path = _visible_resource_path(
-            resource_definition.get("current_path"),
-            "Ability resource current_path",
+
+        label = _visible_text(
+            resource_definition.get("label"),
+            "Ability resource label",
+            default="Resource",
         )
-        max_path = resource_definition.get("max_path")
-        current = _numeric_player_path(state, current_path)
-        resource_view: Dict[str, Any] = {
-            "label": resource_definition.get("label", "Resource"),
-            "current": current,
-        }
-        if max_path is not None:
-            max_path = _visible_resource_path(
-                max_path,
-                "Ability resource max_path",
+
+        if "path" in resource_definition:
+            # Canonical authored power-resource schema.
+            current_path = _validate_power_resource_path(
+                resource_definition.get("path"),
+                "Ability resource path",
             )
-            resource_view["max"] = _numeric_player_path(state, max_path)
-        output["resource"] = resource_view
+            current = _numeric_player_path(state, current_path)
+            maximum_raw = resource_definition.get("maximum")
+            if (
+                isinstance(maximum_raw, bool)
+                or not isinstance(maximum_raw, (int, float))
+                or not isfinite(float(maximum_raw))
+                or float(maximum_raw) <= 0
+            ):
+                raise RuleError("Ability resource maximum must be a finite positive number")
+            maximum = float(maximum_raw)
+            if current < 0 or current > maximum:
+                raise RuleError(
+                    f"Ability resource current value must be in range 0..{maximum}"
+                )
+
+            recovery_raw = resource_definition.get("recovery_per_hour", 0)
+            if (
+                isinstance(recovery_raw, bool)
+                or not isinstance(recovery_raw, (int, float))
+                or not isfinite(float(recovery_raw))
+                or float(recovery_raw) < 0
+            ):
+                raise RuleError(
+                    "Ability resource recovery_per_hour must be finite non-negative"
+                )
+
+            output["resource"] = {
+                "label": label,
+                "current": current,
+                "max": maximum,
+                "recovery_per_hour": float(recovery_raw),
+            }
+        else:
+            # Migration compatibility for the earlier projection-only schema.
+            current_path = _visible_resource_path(
+                resource_definition.get("current_path"),
+                "Ability resource current_path",
+            )
+            max_path = resource_definition.get("max_path")
+            current = _numeric_player_path(state, current_path)
+            resource_view: Dict[str, Any] = {
+                "label": label,
+                "current": current,
+            }
+            if max_path is not None:
+                max_path = _visible_resource_path(
+                    max_path,
+                    "Ability resource max_path",
+                )
+                resource_view["max"] = _numeric_player_path(state, max_path)
+            output["resource"] = resource_view
 
     technique_definitions = definition.get("techniques", {})
     if technique_definitions is not None and not isinstance(technique_definitions, Mapping):
