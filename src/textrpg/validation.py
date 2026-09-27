@@ -252,9 +252,21 @@ def _registry_reference_errors(
             )
 
     for scene_id, scene in scenes.items():
-        for choice_index, choice in enumerate(scene.get("choices", [])):
+        if not isinstance(scene, Mapping):
+            continue
+        choices = scene.get("choices", [])
+        if not isinstance(choices, list):
+            continue
+        for choice_index, choice in enumerate(choices):
+            if not isinstance(choice, Mapping):
+                continue
             for gate_name in ("visible_if", "requires"):
-                for index, condition in enumerate(choice.get(gate_name, [])):
+                conditions = choice.get(gate_name, [])
+                if not isinstance(conditions, list):
+                    continue
+                for index, condition in enumerate(conditions):
+                    if not isinstance(condition, Mapping):
+                        continue
                     location = f"{scene_id}.choices[{choice_index}].{gate_name}[{index}]"
                     kind = condition.get("type")
                     if kind in {"knows", "not_knows", "npc_knows", "npc_not_knows"}:
@@ -264,10 +276,18 @@ def _registry_reference_errors(
                     elif kind == "item_min":
                         require("items", condition.get("item_id"), location)
 
-            for outcome_name, outcome in choice.get("outcomes", {}).items():
+            outcomes = choice.get("outcomes", {})
+            if not isinstance(outcomes, Mapping):
+                continue
+            for outcome_name, outcome in outcomes.items():
                 if not isinstance(outcome, Mapping):
                     continue
-                for effect_index, effect in enumerate(outcome.get("effects", [])):
+                effects = outcome.get("effects", [])
+                if not isinstance(effects, list):
+                    continue
+                for effect_index, effect in enumerate(effects):
+                    if not isinstance(effect, Mapping):
+                        continue
                     location = (
                         f"{scene_id}.choices[{choice_index}].outcomes."
                         f"{outcome_name}.effect[{effect_index}]"
@@ -283,7 +303,10 @@ def _registry_reference_errors(
     for ability_id, definition in powers.items():
         if not isinstance(definition, Mapping):
             continue
-        for technique_id, technique in definition.get("techniques", {}).items():
+        techniques = definition.get("techniques", {})
+        if not isinstance(techniques, Mapping):
+            continue
+        for technique_id, technique in techniques.items():
             if not isinstance(technique, Mapping):
                 continue
             for field_name in ("discovery_requirements", "requirements"):
@@ -291,13 +314,22 @@ def _registry_reference_errors(
                 if not isinstance(requirements, Mapping):
                     continue
                 base = f"powers.{ability_id}.{technique_id}.{field_name}"
-                for knowledge_id in requirements.get("knowledge", []):
-                    require("knowledge", knowledge_id, base)
-                for perk_id in requirements.get("perks", []):
-                    require("perks", perk_id, base)
-                for item_id in requirements.get("items", {}):
-                    require("items", item_id, base)
-            for index, drawback in enumerate(technique.get("drawbacks", [])):
+                knowledge = requirements.get("knowledge", [])
+                if isinstance(knowledge, list):
+                    for knowledge_id in knowledge:
+                        require("knowledge", knowledge_id, base)
+                perks = requirements.get("perks", [])
+                if isinstance(perks, list):
+                    for perk_id in perks:
+                        require("perks", perk_id, base)
+                items = requirements.get("items", {})
+                if isinstance(items, Mapping):
+                    for item_id in items:
+                        require("items", item_id, base)
+            drawbacks = technique.get("drawbacks", [])
+            if not isinstance(drawbacks, list):
+                continue
+            for index, drawback in enumerate(drawbacks):
                 if isinstance(drawback, Mapping) and drawback.get("type") == "condition":
                     require(
                         "conditions",
@@ -306,9 +338,11 @@ def _registry_reference_errors(
                     )
     return errors
 
-def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
+def validate_scenes(scenes: Any) -> List[str]:
     """Statically validate authored scene data before it reaches a playthrough."""
     errors: List[str] = []
+    if not isinstance(scenes, Mapping):
+        return ["scenes must be an object"]
     scene_ids = set(scenes.keys())
     global_choice_ids: Set[str] = set()
 
@@ -410,18 +444,21 @@ def validate_content_pack(
     from .powers import validate_power_definitions
     from .quests import validate_quest_definitions
 
-    quest_definitions = quests or {}
-    power_definitions = powers or {}
+    quest_definitions = {} if quests is None else quests
+    power_definitions = {} if powers is None else powers
     errors = list(validate_scenes(scenes))
     errors.extend(validate_quest_definitions(quest_definitions))
     errors.extend(validate_power_definitions(power_definitions))
+
+    quest_lookup = quest_definitions if isinstance(quest_definitions, Mapping) else {}
+    power_lookup = power_definitions if isinstance(power_definitions, Mapping) else {}
     if registries is not None:
         errors.extend(validate_registries(registries))
         if isinstance(scenes, Mapping):
             errors.extend(
                 _registry_reference_errors(
                     scenes,
-                    power_definitions,
+                    power_lookup,
                     registries,
                 )
             )
@@ -464,7 +501,7 @@ def validate_content_pack(
                         "quest_fail",
                     }:
                         quest_id = effect.get("quest_id")
-                        definition = quest_definitions.get(quest_id)
+                        definition = quest_lookup.get(quest_id)
                         if definition is None:
                             errors.append(
                                 f"{location} references unknown quest {quest_id!r}"
@@ -503,7 +540,7 @@ def validate_content_pack(
                         "power_recover",
                     }:
                         ability_id = effect.get("ability_id")
-                        definition = power_definitions.get(ability_id)
+                        definition = power_lookup.get(ability_id)
                         if definition is None:
                             errors.append(
                                 f"{location} references unknown power {ability_id!r}"
