@@ -22,6 +22,11 @@ class ContentPackTests(unittest.TestCase):
         choices = {choice["id"] for choice in pack.engine.available_choices(pack.state)}
         self.assertIn("TAKE_DEAD_RELAY", choices)
         self.assertIn("ABILITY_TRACE_ECHO", pack.engine.power_definitions)
+        self.assertIn(
+            "KNOW_TRACE_ECHO_PATTERN_STABLE",
+            pack.registries["knowledge"],
+        )
+        self.assertIn("COND_ECHO_STRAIN", pack.registries["conditions"])
 
     def test_unknown_initial_scene_is_rejected(self):
         data = self.data()
@@ -67,6 +72,18 @@ class ContentPackTests(unittest.TestCase):
     def test_content_pack_rejects_non_mapping_powers(self):
         data = self.data()
         data["powers"] = []
+        with self.assertRaises(RuleError):
+            content_pack_from_mapping(data)
+
+    def test_unknown_initial_inventory_registry_id_is_rejected(self):
+        data = self.data()
+        data["initial_state"]["inventory"]["ITEM_UNREGISTERED"] = 1
+        with self.assertRaises(RuleError):
+            content_pack_from_mapping(data)
+
+    def test_non_mapping_registry_is_rejected(self):
+        data = self.data()
+        data["registries"] = []
         with self.assertRaises(RuleError):
             content_pack_from_mapping(data)
 
