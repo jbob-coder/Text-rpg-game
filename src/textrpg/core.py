@@ -188,11 +188,14 @@ class RulesEngine:
         if outcome is None:
             outcome = choice.get("outcomes", {}).get("default", {})
 
+        time_cost = choice.get("time_cost_minutes", 0)
+        if isinstance(time_cost, bool) or not isinstance(time_cost, int) or time_cost < 0:
+            raise RuleError(
+                f"Choice time cost must be a non-negative integer: {choice_id}"
+            )
+
         before_scene = state.scene_id
         self._apply_effects(state, outcome.get("effects", []))
-        time_cost = int(choice.get("time_cost_minutes", 0))
-        if time_cost < 0:
-            raise RuleError(f"Choice time cost cannot be negative: {choice_id}")
         if time_cost:
             from .simulation import advance_time
 
