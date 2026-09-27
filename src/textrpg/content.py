@@ -1,0 +1,103 @@
+from __future__ import annotations
+
+import json
+from dataclasses import dataclass, fields
+from pathlib import Path
+from typing import Any, Dict, Mapping
+
+from .core import GameState, RuleError, RulesEngine
+from .stats import validate_player_stats
+from .validation import assert_valid_content_pack
+from .visuals import assert_valid_character_visuals
+
+
+@dataclass
+class LoadedContentPack:
+    content_id: str
+    title: str
+    canon_status: str
+    raw: Dict[str, Any]
+    state: GameState
+    engine: RulesEngine
+
+
+def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
+    """Validate and instantiate one authored playable content pack."""
+    if not isinstance(data, Mapping):
+        raise RuleError("Content pack must be an object")
+
+    content_id = data.get("content_id")
+    title = data.get("title")
+    canon_status = data.get("canon_status", "unspecified")
+
+    if not isinstance(content_id, str) or not content_id:
+        raise RuleError("Content pack requires content_id")
+    if not isinstance(title, str) or not title.strip():
+        raise RuleError("Content pack requires non-empty title")
+    if not isinstance(canon_status, str) or not canon_status:
+        raise RuleError("Content pack canon_status must be text")
+
+    scenes = data.get("scenes", {})
+    quests = data.get("quests", {})
+    characters = data.get("characters", {})
+    equipment_sets = data.get("equipment_sets", {})
+
+    if not isinstance(scenes, Mapping) or not scenes:
+        raise RuleError("Content pack requires non-empty scenes")
+    if not isinstance(quests, Mapping):
+        raise RuleError("Content pack quests must be an object")
+    if not isinstance(characters, Mapping):
+        raise RuleError("Content pack characters must be an object")
+    if not isinstance(equipment_sets, Mapping):
+        raise RuleError("Content pack equipment_sets must be an object")
+
+    assert_valid_content_pack(scenes, quests)
+    assert_valid_character_visuals(characters)
+
+    initial = data.get("initial_state")
+    if not isinstance(initial, Mapping):
+        raise RuleError("Content pack requires initial_state")
+
+    allowed = {field.name for field in fields(GameState)}
+    unknown = sorted(set(initial) - allowed)
+    if unknown:
+        raise RuleError(
+            "initial_state has unsupported fields: " + ", ".join(unknown)
+        )
+
+    state = GameState(**dict(initial))
+    if state.scene_id not in scenes:
+        raise RuleError(
+            f"initial_state.scene_id points to unknown scene: {state.scene_id}"
+        )
+
+    stat_errors = validate_player_stats(state)
+    if stat_errors:
+        raise RuleError("Invalid initial player stats:\n- " + "\n- ".join(stat_errors))
+
+    engine = RulesEngine(
+        scenes,
+        equipment_sets=equipment_sets,
+        quest_definitions=quests,
+    )
+
+    return LoadedContentPack(
+        content_id=content_id,
+        title=title,
+        canon_status=canon_status,
+        raw=dict(data),
+        state=state,
+        engine=engine,
+    )
+
+
+def load_content_pack(path: str | Path) -> LoadedContentPack:
+    """Load UTF-8 JSON authored content from disk and instantiate it safely."""
+    source = Path(path)
+    try:
+        data = json.loads(source.read_text(encoding="utf-8"))
+    except OSError as exc:
+        raise RuleError(f"Could not read content pack: {source}") from exc
+    except json.JSONDecodeError as exc:
+        raise RuleError(f"Invalid JSON content pack: {source}") from exc
+    return content_pack_from_mapping(data)
