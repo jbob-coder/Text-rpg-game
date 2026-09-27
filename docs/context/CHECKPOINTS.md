@@ -1232,3 +1232,118 @@ Reconciliation target remains the current seven-stat executable schema. Any late
 7. Fix observed regressions.
 8. Record exact V6 SHA and test evidence.
 9. Only then consolidate context histories.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-STATIC-RECONCILED-13
+
+Repository: `jbob-coder/Text-rpg-game`
+
+V5 preserved checkpoint: `fd36b9f1d14528f3dc5eb37e20e9120af25af036`
+
+Frozen foundation used for reconciliation: `b3340bc38e63e916c6cc7a8538ed1e8a34011112`
+
+Active V6 reconciliation head after static pass: `79849f4e77ac7861bcb2d099321c5020352d4d23`
+
+Branch: `integration/rules-ability-v6-reconcile`
+
+### CURRENT_OBJECTIVE
+
+[IN_PROGRESS] Finish convergence verification for foundation + V5. Source/content/test reconciliation against the frozen foundation snapshot is statically complete; exact runtime execution is the remaining promotion gate.
+
+### COMPLETED IN V6
+
+[VERIFIED STATIC] V6 was created from the exact V5 head, preserving V5 unchanged as a checkpoint.
+
+[VERIFIED STATIC] The 19 foundation-only commits were inventoried before source mutation.
+
+[IMPLEMENTED] Added the missing prerequisite-technique cross-reference invariant to V5's hardened power-definition validator:
+- reject self prerequisite;
+- reject unknown prerequisite technique;
+- inspect both discovery and normal technique requirement blocks.
+
+[IMPLEMENTED] Added the isolated regression for those cross-reference failures.
+
+[IMPLEMENTED] Recovered the exact missing latest foundation authored content tail for the first live Directional Trace use/recovery route.
+
+[VERIFIED STATIC] V6 `content/vertical_slice_01.json` now matches the frozen foundation content object for that file.
+
+[IMPLEMENTED] Reconciled the existing integration route tests rather than replacing V5 test files:
+- first Directional Trace use/resource/mastery/strain/knowledge/recovery assertions;
+- save/resume through first use and recovery.
+
+### STATIC AUDIT
+
+[VERIFIED STATIC]
+- JSON parse: OK
+- scenes: 16
+- choices: 25
+- unique choices: 25
+- quests: 3
+- powers: 1
+- knowledge registry IDs: 6
+- perk registry IDs: 1
+- item registry IDs: 2
+- condition registry IDs: 1
+- duplicate choice IDs: 0
+- audited missing scene/quest/power/technique/registry references: 0
+- static audit errors: 0
+- static audit warnings: 0
+
+[VERIFIED STATIC] V6 currently contains **200 authored test methods across 17 test files**.
+
+This is not a pass count.
+
+### SOURCE-INTENT RECONCILIATION RESULT
+
+[VERIFIED STATIC] The foundation-only behaviors below are present in V6 while retaining V5's evolved implementations:
+- `not_has_perk`
+- `technique_stage_min`
+- `skill_train`
+- `recover_resources`
+- authored validation for those rules
+- effective/set-aware power attribute and skill prerequisites
+- earned stabilization route
+- Directional Trace discovery
+- prerequisite-technique cross-reference validation
+- first live Directional Trace use/recovery content
+- associated route/persistence regression coverage
+
+### TEST / RUNTIME STATUS
+
+[REPORTED_VERIFICATION] Historical executed foundation evidence remains 103 passed / 0 failed for the earlier verified snapshot.
+
+[UNKNOWN] Exact V6 suite has not been executed.
+
+[BLOCKER] No registered Codex execution environment is available. Direct container network access to GitHub is unavailable, and no hosted GitHub Actions workflow is being introduced solely to manufacture a verification claim.
+
+V6 must remain:
+- IN PROGRESS
+- NOT GREEN-CLAIMED
+- NOT MERGE-READY
+- NOT PROMOTED
+
+until the exact branch is executed.
+
+### STAT MIGRATION
+
+[DECISION] Seven-to-eight stat migration remains explicitly outside V6 reconciliation.
+
+No canonical stat IDs, save schema, Dexterity bootstrap, or derived formula migration is changed in V6.
+
+### CONTEXT BRANCHES
+
+[DECISION] Do not merge `context/shared-game-context` into `shared/game-context` yet.
+
+Both are preserved until V6 has exact runtime evidence. After V6 verification, `shared/game-context` remains the intended canonical architecture branch and exclusive history from the other context branch can be imported with workstream provenance.
+
+### NEXT_ACTION
+
+1. Execute the exact V6 suite:
+   `PYTHONPATH=src python -m unittest discover -s tests -v`
+2. Fix any observed regression.
+3. Re-run to green.
+4. Record exact V6 SHA, command, test count, failures, and final content audit.
+5. Then perform the context-history consolidation.
+6. Only after a stable integrated seven-stat baseline exists should DEC-STAT-001 move into an executable migration workstream.
