@@ -175,5 +175,44 @@ class EquipmentTests(unittest.TestCase):
         self.assertNotIn("body", state.equipment)
 
 
+    def test_corrupt_player_container_is_rejected_before_equip(self):
+        state = GameState(seed="s", scene_id="A")
+        state.player = []
+        before_equipment = dict(state.equipment)
+
+        with self.assertRaises(RuleError):
+            equip_item(
+                state,
+                {
+                    "item_id": "ITEM_X",
+                    "slot": "body",
+                    "modifiers": {},
+                },
+            )
+
+        self.assertEqual(state.equipment, before_equipment)
+
+    def test_invalid_set_id_is_rejected_before_equip(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={"attributes": {}, "skills": {}},
+        )
+
+        for invalid_set_id in ("", [], True):
+            with self.subTest(set_id=invalid_set_id):
+                with self.assertRaises(RuleError):
+                    equip_item(
+                        state,
+                        {
+                            "item_id": "ITEM_X",
+                            "slot": "body",
+                            "set_id": invalid_set_id,
+                            "modifiers": {},
+                        },
+                    )
+                self.assertNotIn("body", state.equipment)
+
+
 if __name__ == "__main__":
     unittest.main()
