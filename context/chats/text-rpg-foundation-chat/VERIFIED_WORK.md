@@ -175,3 +175,27 @@ Verification boundary:
 - Do not report a higher repository-wide unittest count until the complete branch-equivalent suite is rerun after these latest changes.
 
 Current next step on the foundation branch is a complete suite rerun, then review/promotion or revision of the provisional opening before expanding the next content slice.
+
+
+## Update — playable CLI, route-state correction, and earned first power practice
+
+Foundation work after the earlier 58-test full-suite checkpoint:
+
+- Centralized effective modifier aggregation so scene checks and derived-stat formulas share one implementation contract.
+- Choice time now advances through the simulation clock, allowing timed conditions to expire during narrative choices.
+- Added negative player/NPC knowledge gates so content can distinguish unknown vs already-known information.
+- Added scene effects for NPC goal creation/progress and guarded story-state transitions.
+- Corrected `The Dead Relay` recovery route: after Tamsin recovers the destination, the decision scene no longer offers dialogue that falsely assumes she does not know it.
+- Added `src/textrpg/content.py` to validate/instantiate authored packs.
+- Added `src/textrpg/cli.py` so the current pack can be played locally from a terminal and saved/resumed without runtime AI.
+- Added explicit `discover_ability`; discovery starts at rank 0 / mastery 0.
+- Added time/resource-based `practice_technique` with diminishing returns and optional mentor bonus.
+- Extended the provisional-canon Gate Twelve sequence with `ABILITY_TRACE_ECHO` and `TECHNIQUE_SIGNAL_PULSE`. One normal hour from zero grants 8 technique XP, intentionally leaving the technique at `discovered`.
+- Added/expanded regression tests for negative knowledge, NPC goals/story state, choice-time condition expiration, content loading, CLI helpers, ability discovery, technique practice, and end-to-end opening/power routes.
+
+Verification boundary:
+- The last full branch-equivalent result on record remains **58 passed, 0 failed**.
+- Earlier documentation incorrectly stated that 13 newer focused checks had been executed; that claim has been removed from the foundation README/status because a corresponding observed run was not available in this chat.
+- The newest regression tests are authored but a complete latest branch-equivalent test run is still required before increasing the verified count.
+
+Current next engineering action: reconstruct/run the latest full suite, fix any regression, then review the provisional story/power material before promoting it to confirmed canon.
