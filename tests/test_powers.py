@@ -1229,5 +1229,38 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertTrue(any("unknown technique" in error for error in errors))
 
 
+    def test_failed_technique_discovery_does_not_create_empty_container(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            abilities={
+                "ABILITY_TRACE": {
+                    "rank": 0,
+                    "mastery_xp": 0.0,
+                    "mastery_stage": "discovered",
+                }
+            },
+        )
+        definition = {
+            "discovery_requirements": {
+                "rank_min": 1,
+            }
+        }
+        before = dict(state.abilities["ABILITY_TRACE"])
+        before_history = list(state.history)
+
+        with self.assertRaises(RuleError):
+            discover_technique(
+                state,
+                "ABILITY_TRACE",
+                "TECHNIQUE_LOCKED",
+                definition,
+            )
+
+        self.assertEqual(state.abilities["ABILITY_TRACE"], before)
+        self.assertEqual(state.history, before_history)
+        self.assertNotIn("techniques", state.abilities["ABILITY_TRACE"])
+
+
 if __name__ == "__main__":
     unittest.main()
