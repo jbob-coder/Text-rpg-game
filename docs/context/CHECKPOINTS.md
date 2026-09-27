@@ -1408,3 +1408,58 @@ Do not promote, merge, or call the branch green solely from this static fix.
 2. Execute the complete V6 suite as soon as an authorized exact runtime is available.
 3. Fix only observed runtime regressions.
 4. Record exact SHA + command + pass/fail result before promotion.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-TRAINING-ATOMICITY-15
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after this pass: `929b53eeb1dc468941962f198ab9bf866c2a04c3`
+
+### ISSUE FOUND
+
+[VERIFIED STATIC] Direct `simulation.train()` could normalize/write resource maxima before discovering that current Stamina/Focus were insufficient for the requested session.
+
+Although `initialize_resources()` is internally atomic, a later affordability failure meant the overall training operation could still leave resource normalization changes behind despite the training action failing.
+
+This violated the integration-level rule:
+
+`validate / plan -> commit -> record`
+
+for direct training calls.
+
+### FIX
+
+[IMPLEMENTED] Training now snapshots pre-training resource state before normalization.
+
+If affordability fails after normalization:
+- the exact previous resource mapping is restored;
+- no skill gain is written;
+- no time advances;
+- no history event is recorded.
+
+If the resource container did not exist before the attempt, a failed attempt removes the temporary initialized container.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added a direct simulation regression proving insufficient-resource training leaves:
+- resources unchanged;
+- skills unchanged;
+- time unchanged;
+- history unchanged.
+
+[VERIFIED STATIC] V6 now contains **202 authored test methods across 17 test files**.
+
+This is not an executed pass count.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 suite execution remains pending.
+
+### NEXT_ACTION
+
+Continue targeted static integration/atomicity review only where it can reveal concrete cross-system defects; avoid feature expansion. Exact runtime execution remains the promotion gate.
