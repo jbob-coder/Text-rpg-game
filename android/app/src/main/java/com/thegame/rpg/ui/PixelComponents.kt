@@ -24,6 +24,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.thegame.rpg.engine.GameChoice
+import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameIdentity
 
 @Composable
@@ -74,7 +75,15 @@ fun PixelChoiceCard(choice: GameChoice, busy: Boolean, onClick: () -> Unit) {
 }
 
 @Composable
-fun PlayerAvatarPanel(identity: GameIdentity, modifier: Modifier = Modifier) {
+fun PlayerAvatarPanel(
+    identity: GameIdentity,
+    equipment: List<GameEquipmentSlot> = emptyList(),
+    modifier: Modifier = Modifier,
+) {
+    val equippedSlots = equipment
+        .filter { it.equipped }
+        .associateBy { it.slot }
+
     PixelPanel(modifier = modifier.testTag("player-avatar"), title = identity.name ?: "Player") {
         Box(
             modifier = Modifier
@@ -89,36 +98,119 @@ fun PlayerAvatarPanel(identity: GameIdentity, modifier: Modifier = Modifier) {
                 fun block(x: Int, y: Int, w: Int, h: Int, color: Color) {
                     drawRect(color, Offset(x * px, y * px), Size(w * px, h * px))
                 }
+
                 val ox = ((size.width / px - 18f) / 2f).coerceAtLeast(0f)
                 translate(left = ox * px) {
+                    // Grounding shadow.
                     block(4, 28, 10, 2, Color(0xFF0A0E11))
+
+                    // Base body. Equipment is drawn over this layer and never owns state.
                     block(5, 20, 3, 7, Color(0xFF27333C))
                     block(10, 20, 3, 7, Color(0xFF27333C))
                     block(4, 26, 4, 2, Color(0xFF161C20))
                     block(10, 26, 4, 2, Color(0xFF161C20))
-                    block(4, 10, 10, 10, Color(0xFF3B5963))
-                    block(5, 11, 8, 2, PixelColors.Cyan)
+                    block(4, 10, 10, 10, Color(0xFF33434C))
                     block(7, 14, 4, 4, Color(0xFF263B44))
                     block(2, 11, 2, 8, Color(0xFF9C725B))
                     block(14, 11, 2, 8, Color(0xFF9C725B))
-                    block(1, 12, 2, 5, Color(0xFF384A54))
-                    block(15, 12, 2, 5, Color(0xFF384A54))
                     block(6, 3, 6, 7, Color(0xFFAD7D62))
                     block(5, 2, 8, 3, Color(0xFF20262B))
                     block(5, 4, 2, 3, Color(0xFF20262B))
                     block(7, 6, 1, 1, PixelColors.Paper)
                     block(10, 6, 1, 1, PixelColors.Paper)
-                    block(16, 14, 1, 10, PixelColors.Gold)
-                    block(15, 13, 3, 2, PixelColors.Gold)
+
+                    // Equipment paper-doll layers, driven only by player-safe equipped slots.
+                    if ("body" in equippedSlots) {
+                        block(3, 10, 12, 10, Color(0xFF3B5963))
+                        block(5, 11, 8, 2, PixelColors.Cyan)
+                        block(3, 15, 2, 4, Color(0xFF2A414A))
+                        block(13, 15, 2, 4, Color(0xFF2A414A))
+                    }
+                    if ("hands" in equippedSlots) {
+                        block(2, 16, 2, 4, Color(0xFF27343B))
+                        block(14, 16, 2, 4, Color(0xFF27343B))
+                        block(1, 18, 2, 2, Color(0xFF53656E))
+                        block(15, 18, 2, 2, Color(0xFF53656E))
+                    }
+                    if ("head" in equippedSlots) {
+                        block(5, 2, 8, 3, Color(0xFF4A5960))
+                        block(6, 1, 6, 2, Color(0xFF36454C))
+                        block(5, 5, 2, 2, Color(0xFF4A5960))
+                        block(11, 5, 2, 2, Color(0xFF4A5960))
+                    }
+                    if ("legs" in equippedSlots) {
+                        block(4, 19, 4, 7, Color(0xFF3D4D55))
+                        block(10, 19, 4, 7, Color(0xFF3D4D55))
+                        block(8, 20, 2, 2, PixelColors.Cyan)
+                    }
+                    if ("feet" in equippedSlots) {
+                        block(3, 25, 5, 3, Color(0xFF20282D))
+                        block(10, 25, 5, 3, Color(0xFF20282D))
+                        block(3, 27, 5, 1, PixelColors.Gold)
+                        block(10, 27, 5, 1, PixelColors.Gold)
+                    }
+                    if ("neck" in equippedSlots) {
+                        block(8, 9, 2, 1, PixelColors.Gold)
+                        block(8, 10, 2, 2, Color(0xFF7E6A42))
+                    }
+                    if ("ring_1" in equippedSlots) {
+                        block(1, 19, 1, 1, PixelColors.Gold)
+                    }
+                    if ("ring_2" in equippedSlots) {
+                        block(16, 19, 1, 1, PixelColors.Cyan)
+                    }
+                    if ("accessory_1" in equippedSlots) {
+                        block(4, 18, 10, 2, Color(0xFF6B5942))
+                        block(12, 19, 3, 5, Color(0xFF554632))
+                    }
+                    if ("accessory_2" in equippedSlots) {
+                        block(3, 12, 1, 9, PixelColors.Gold)
+                        block(14, 12, 1, 9, PixelColors.Gold)
+                    }
+                    if ("main_hand" in equippedSlots) {
+                        block(16, 13, 1, 12, PixelColors.Gold)
+                        block(15, 13, 3, 2, PixelColors.Gold)
+                    }
+                    if ("off_hand" in equippedSlots) {
+                        block(0, 13, 2, 9, Color(0xFF4B6773))
+                        block(0, 12, 3, 2, PixelColors.Cyan)
+                    }
                 }
             }
         }
+
         Spacer(modifier = Modifier.height(8.dp))
-        val descriptor = listOfNotNull(identity.path, identity.level?.let { "LV $it" }, identity.origin).joinToString(" • ")
+        val descriptor = listOfNotNull(
+            identity.path,
+            identity.level?.let { "LV $it" },
+            identity.origin,
+        ).joinToString(" • ")
         Text(
             text = descriptor.ifBlank { "ADVENTURER // LOADOUT ACTIVE" },
             color = PixelColors.Muted,
             style = MaterialTheme.typography.labelLarge,
         )
+
+        val visibleGear = equipment
+            .filter { it.equipped }
+            .map { slotDisplayNameForAvatar(it.slot) }
+        if (visibleGear.isNotEmpty()) {
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "VISIBLE GEAR // " + visibleGear.joinToString(" • "),
+                color = PixelColors.Gold,
+                style = MaterialTheme.typography.labelLarge,
+                modifier = Modifier.testTag("avatar-visible-gear"),
+            )
+        }
     }
+}
+
+private fun slotDisplayNameForAvatar(slot: String): String = when (slot) {
+    "body" -> "CHEST"
+    "ring_1" -> "RING I"
+    "ring_2" -> "RING II"
+    "accessory_1" -> "ACCESSORY I"
+    "accessory_2" -> "ACCESSORY II"
+    else -> slot.replace('_', ' ').uppercase()
 }

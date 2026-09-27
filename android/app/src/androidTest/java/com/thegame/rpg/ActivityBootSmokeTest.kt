@@ -8,6 +8,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performTextInput
 import org.junit.Rule
 import org.junit.Test
 
@@ -92,5 +93,42 @@ class ActivityBootSmokeTest {
         composeRule.onNodeWithTag("choice-USE_MAINTENANCE_SEAL")
             .performScrollTo()
             .assertIsDisplayed()
+    }
+
+    @Test
+    fun realActivityDeveloperDistrictCheatAndMapTravelOpenNarrativeScene() {
+        composeRule.waitUntil(timeoutMillis = 60_000) {
+            composeRule.onAllNodes(
+                androidx.compose.ui.test.hasTestTag("player-avatar")
+            ).fetchSemanticsNodes().isNotEmpty()
+        }
+
+        waitForClickableText("SETTINGS")
+        composeRule.onNodeWithText("SETTINGS").performClick()
+        composeRule.waitUntil(timeoutMillis = 30_000) {
+            composeRule.onAllNodes(
+                androidx.compose.ui.test.hasTestTag("cheat-input")
+            ).fetchSemanticsNodes().isNotEmpty()
+        }
+        composeRule.onNodeWithTag("cheat-input").performTextInput("DISTRICT")
+        waitForClickableText("APPLY CHEAT")
+        composeRule.onNodeWithText("APPLY CHEAT").performClick()
+        composeRule.onNodeWithText("CLOSE").performClick()
+
+        waitForText("The District Opens Up", timeoutMillis = 60_000)
+
+        waitForClickableText("Map")
+        composeRule.onNodeWithText("Map").performClick()
+        waitForClickableText("Municipal Archive", timeoutMillis = 30_000)
+        composeRule.onNodeWithText("Municipal Archive")
+            .performScrollTo()
+            .performClick()
+        waitForClickableText("TRAVEL HERE", timeoutMillis = 30_000)
+        composeRule.onNodeWithText("TRAVEL HERE")
+            .performScrollTo()
+            .performClick()
+
+        waitForText("The Municipal Archive", timeoutMillis = 60_000)
+        composeRule.onNodeWithText("The Municipal Archive").assertIsDisplayed()
     }
 }

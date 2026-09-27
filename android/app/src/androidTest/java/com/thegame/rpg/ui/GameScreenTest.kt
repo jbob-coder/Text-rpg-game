@@ -8,6 +8,8 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import com.thegame.rpg.engine.GameChoice
+import com.thegame.rpg.engine.GameEquipmentSlot
+import com.thegame.rpg.engine.GameInventory
 import com.thegame.rpg.engine.GameResource
 import com.thegame.rpg.engine.GameSnapshot
 import org.junit.Rule
@@ -62,5 +64,41 @@ class GameScreenTest {
         listOf("Stats", "Inventory", "Quests", "Map", "More").forEach { label ->
             composeRule.onNodeWithText(label).assertIsDisplayed().assertHasClickAction()
         }
+    }
+
+    @Test
+    fun equippedGearIsReflectedByTheVisibleAvatar() {
+        val equippedSnapshot = snapshot.copy(
+            inventory = GameInventory(
+                equipment = listOf(
+                    GameEquipmentSlot(
+                        slot = "body",
+                        equipped = true,
+                        itemId = "ITEM_DEPOT_JACKET",
+                        name = "Depot utility jacket",
+                    ),
+                    GameEquipmentSlot(
+                        slot = "ring_1",
+                        equipped = true,
+                        itemId = "ITEM_SIGNAL_RING",
+                        name = "Signal ring",
+                    ),
+                )
+            )
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                GameScreen(
+                    snapshot = equippedSnapshot,
+                    busy = false,
+                    onChoice = {},
+                    onNavigate = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("avatar-visible-gear").assertIsDisplayed()
+        composeRule.onNodeWithText("VISIBLE GEAR // CHEST • RING I").assertIsDisplayed()
     }
 }

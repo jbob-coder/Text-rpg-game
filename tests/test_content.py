@@ -51,6 +51,32 @@ class ContentPackTests(unittest.TestCase):
         self.assertIn("KNOW_TRACE_ECHO_PATTERN_STABLE", pack.registries["knowledge"])
         self.assertIn("COND_ECHO_STRAIN", pack.registries["conditions"])
 
+    def test_world_map_remains_optional_for_content_packs(self):
+        data = self.data()
+        del data["world_map"]
+        pack = content_pack_from_mapping(data)
+        self.assertEqual(pack.state.scene_id, "OPENING_DEPOT_BLACKOUT")
+
+    def test_world_map_scene_destination_must_exist(self):
+        data = self.data()
+        data["world_map"]["nodes"]["DISTRICT_ARCHIVE"]["scene_id"] = "SCENE_MISSING"
+        with self.assertRaisesRegex(RuleError, "unknown scene"):
+            content_pack_from_mapping(data)
+
+    def test_world_map_edges_must_reference_known_nodes(self):
+        data = self.data()
+        data["world_map"]["edges"].append(
+            {"from": "DISTRICT_PLAZA", "to": "MISSING_LOCATION"}
+        )
+        with self.assertRaisesRegex(RuleError, "unknown node"):
+            content_pack_from_mapping(data)
+
+    def test_world_map_travel_minutes_must_be_non_negative_integer(self):
+        data = self.data()
+        data["world_map"]["edges"][0]["travel_minutes"] = -1
+        with self.assertRaisesRegex(RuleError, "travel_minutes"):
+            content_pack_from_mapping(data)
+
     def test_unknown_initial_scene_is_rejected(self):
         data = self.data()
         data["initial_state"]["scene_id"] = "SCENE_MISSING"

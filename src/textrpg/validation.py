@@ -490,11 +490,110 @@ def assert_valid_scenes(scenes: Mapping[str, Dict[str, Any]]) -> None:
         raise RuleError("Invalid authored content:\n- " + "\n- ".join(errors))
 
 
+def validate_world_map(
+    world_map: Any,
+    scenes: Mapping[str, Dict[str, Any]],
+) -> List[str]:
+    """Validate authored map graph and optional scene destinations."""
+    errors: List[str] = []
+    if world_map is None:
+        return errors
+    if not isinstance(world_map, Mapping):
+        return ["world_map must be an object"]
+
+    nodes = world_map.get("nodes", {})
+    edges = world_map.get("edges", [])
+    if not isinstance(nodes, Mapping):
+        return ["world_map.nodes must be an object"]
+    if not isinstance(edges, list):
+        errors.append("world_map.edges must be a list")
+        edges = []
+
+    node_ids: set[str] = set()
+    scene_ids = set(scenes.keys()) if isinstance(scenes, Mapping) else set()
+
+    for location_id, node in nodes.items():
+        location = f"world_map.nodes.{location_id}"
+        _validate_id(location_id, "world_map node id", errors)
+        if isinstance(location_id, str):
+            node_ids.add(location_id)
+        if not isinstance(node, Mapping):
+            errors.append(f"{location} must be an object")
+            continue
+
+        for axis in ("x", "y"):
+            value = node.get(axis)
+            if (
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not isfinite(float(value))
+                or float(value) < 0
+                or float(value) > 100
+            ):
+                errors.append(
+                    f"{location}.{axis} must be finite numeric in range 0..100"
+                )
+
+        scene_id = node.get("scene_id")
+        if scene_id is not None:
+            if not isinstance(scene_id, str) or not scene_id:
+                errors.append(f"{location}.scene_id must be non-empty text")
+            elif scene_id not in scene_ids:
+                errors.append(
+                    f"{location}.scene_id references unknown scene {scene_id!r}"
+                )
+
+        discover_flag = node.get("discover_flag")
+        if discover_flag is not None and (
+            not isinstance(discover_flag, str) or not discover_flag
+        ):
+            errors.append(f"{location}.discover_flag must be non-empty text")
+
+    for index, edge in enumerate(edges):
+        location = f"world_map.edges[{index}]"
+        if not isinstance(edge, Mapping):
+            errors.append(f"{location} must be an object")
+            continue
+        start = edge.get("from")
+        end = edge.get("to")
+        if start not in node_ids:
+            errors.append(f"{location}.from references unknown node {start!r}")
+        if end not in node_ids:
+            errors.append(f"{location}.to references unknown node {end!r}")
+        travel_minutes = edge.get("travel_minutes", 10)
+        if (
+            isinstance(travel_minutes, bool)
+            or not isinstance(travel_minutes, int)
+            or travel_minutes < 0
+        ):
+            errors.append(
+                f"{location}.travel_minutes must be a non-negative integer"
+            )
+
+    if isinstance(scenes, Mapping):
+        for scene_id, scene in scenes.items():
+            if not isinstance(scene, Mapping):
+                continue
+            location_id = scene.get("location_id")
+            if (
+                location_id is not None
+                and isinstance(location_id, str)
+                and location_id not in node_ids
+            ):
+                errors.append(
+                    f"scene {scene_id!r} references unknown world_map node "
+                    f"{location_id!r}"
+                )
+
+    return errors
+
+
 def validate_content_pack(
     scenes: Mapping[str, Dict[str, Any]],
     quests: Mapping[str, Mapping[str, Any]] | None = None,
     powers: Mapping[str, Mapping[str, Any]] | None = None,
     registries: Mapping[str, Mapping[str, Any]] | None = None,
+    world_map: Mapping[str, Any] | None = None,
 ) -> List[str]:
     """Validate scenes, quest/power definitions, and authored cross-references."""
     from .powers import validate_power_definitions
@@ -505,6 +604,7 @@ def validate_content_pack(
     errors = list(validate_scenes(scenes))
     errors.extend(validate_quest_definitions(quest_definitions))
     errors.extend(validate_power_definitions(power_definitions))
+    errors.extend(validate_world_map(world_map, scenes))
 
     quest_lookup = quest_definitions if isinstance(quest_definitions, Mapping) else {}
     power_lookup = power_definitions if isinstance(power_definitions, Mapping) else {}
@@ -674,7 +774,8 @@ def assert_valid_content_pack(
     quests: Mapping[str, Mapping[str, Any]] | None = None,
     powers: Mapping[str, Mapping[str, Any]] | None = None,
     registries: Mapping[str, Mapping[str, Any]] | None = None,
+    world_map: Mapping[str, Any] | None = None,
 ) -> None:
-    errors = validate_content_pack(scenes, quests, powers, registries)
+    errors = validate_content_pack(scenes, quests, powers, registries, world_map)
     if errors:
         raise RuleError("Invalid authored content pack:\n- " + "\n- ".join(errors))
