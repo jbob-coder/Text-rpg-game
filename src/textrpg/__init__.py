@@ -36,7 +36,7 @@ from .quests import (
     validate_quest_definitions,
 )
 from .simulation import advance_time, apply_condition, recover, train, train_attribute
-from .status import build_status_view
+from .status import build_status_view, inspect_status_value
 from .social import (
     add_memory,
     adjust_relationship,
@@ -95,6 +95,7 @@ __all__ = [
     "assert_valid_scenes",
     "available_objectives",
     "build_status_view",
+    "inspect_status_value",
     "character_generation_contract",
     "complete_objective",
     "condition_modifiers",
