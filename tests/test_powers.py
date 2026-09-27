@@ -11,6 +11,7 @@ from textrpg.powers import (
     initialize_power_resource,
     practice_technique,
     recover_power_resource,
+    technique_discovery_status,
     technique_stage,
     technique_use_status,
     use_technique,
@@ -1093,6 +1094,166 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertTrue(any("maximum must be a finite number" in e for e in errors))
         self.assertTrue(any("starting must be a finite number" in e for e in errors))
         self.assertTrue(any("recovery_per_hour cannot be negative" in e for e in errors))
+
+    def test_technique_discovery_requirements_block_until_earned(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={
+                "attributes": {
+                    "might": 10,
+                    "agility": 10,
+                    "endurance": 10,
+                    "intellect": 10,
+                    "will": 45,
+                    "perception": 45,
+                    "presence": 10,
+                },
+                "skills": {"powers": 10},
+            },
+            inventory={"ITEM_TRACE_LENS": 1},
+            flags={"TRACE_RESEARCHED": True},
+        )
+        discover_ability(state, "ABILITY_TRACE")
+        discover_technique(state, "ABILITY_TRACE", "TECHNIQUE_PULSE")
+        definition = {
+            "discovery_requirements": {
+                "rank_min": 1,
+                "mastery_xp_min": 100,
+                "knowledge": ["KNOW_TRACE_PATTERN"],
+                "perks": ["PERK_TRACE_TOLERANCE"],
+                "attributes": {"perception": 45, "will": 45},
+                "skills": {"powers": 10},
+                "flags": {"TRACE_RESEARCHED": True},
+                "items": {"ITEM_TRACE_LENS": 1},
+                "techniques": {"TECHNIQUE_PULSE": "learned"},
+            }
+        }
+
+        status = technique_discovery_status(
+            state, "ABILITY_TRACE", "TECHNIQUE_DIRECTIONAL", definition
+        )
+        self.assertFalse(status["available"])
+        self.assertIn("rank", status["reasons"])
+        self.assertIn("knowledge:KNOW_TRACE_PATTERN", status["reasons"])
+        self.assertIn("perk:PERK_TRACE_TOLERANCE", status["reasons"])
+        self.assertIn(
+            "technique:TECHNIQUE_PULSE:learned",
+            status["reasons"],
+        )
+        with self.assertRaises(RuleError):
+            discover_technique(
+                state,
+                "ABILITY_TRACE",
+                "TECHNIQUE_DIRECTIONAL",
+                definition,
+            )
+
+        gain_ability_mastery(state, "ABILITY_TRACE", 100)
+        state.knowledge["KNOW_TRACE_PATTERN"] = {}
+        state.perks["PERK_TRACE_TOLERANCE"] = {"source": "training"}
+        gain_technique_mastery(state, "ABILITY_TRACE", "TECHNIQUE_PULSE", 40)
+
+        self.assertTrue(
+            technique_discovery_status(
+                state,
+                "ABILITY_TRACE",
+                "TECHNIQUE_DIRECTIONAL",
+                definition,
+            )["available"]
+        )
+        record = discover_technique(
+            state,
+            "ABILITY_TRACE",
+            "TECHNIQUE_DIRECTIONAL",
+            definition,
+        )
+        self.assertEqual(record["stage"], "discovered")
+
+    def test_discovery_requirements_use_effective_stats_and_sets(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={
+                "attributes": {
+                    "might": 10,
+                    "agility": 10,
+                    "endurance": 10,
+                    "intellect": 10,
+                    "will": 38,
+                    "perception": 40,
+                    "presence": 10,
+                },
+                "skills": {"powers": 10},
+            },
+            equipment={
+                "body": {
+                    "item_id": "ITEM_TRACE_BODY",
+                    "set_id": "SET_TRACE",
+                    "modifiers": {"attributes.will": 1},
+                },
+                "hands": {
+                    "item_id": "ITEM_TRACE_HANDS",
+                    "set_id": "SET_TRACE",
+                    "modifiers": {},
+                },
+            },
+            perks={
+                "PERK_FOCUS": {
+                    "modifiers": {"attributes.will": 1},
+                }
+            },
+        )
+        discover_ability(state, "ABILITY_TRACE")
+        definition = {
+            "discovery_requirements": {
+                "attributes": {"will": 42}
+            }
+        }
+        sets = {
+            "SET_TRACE": {
+                "thresholds": {
+                    "2": {"modifiers": {"attributes.will": 2}}
+                }
+            }
+        }
+        self.assertFalse(
+            technique_discovery_status(
+                state,
+                "ABILITY_TRACE",
+                "TECHNIQUE_DIRECTIONAL",
+                definition,
+            )["available"]
+        )
+        self.assertTrue(
+            technique_discovery_status(
+                state,
+                "ABILITY_TRACE",
+                "TECHNIQUE_DIRECTIONAL",
+                definition,
+                equipment_sets=sets,
+            )["available"]
+        )
+
+    def test_invalid_discovery_requirement_definition_is_rejected(self):
+        errors = validate_power_definitions({
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_DIRECTIONAL": {
+                        "discovery_requirements": {
+                            "rank_min": -1,
+                            "knowledge": ["bad-id"],
+                            "items": {"ITEM_X": 0},
+                            "techniques": {"TECHNIQUE_X": "impossible"},
+                        }
+                    }
+                }
+            }
+        })
+        self.assertTrue(any("rank_min" in error for error in errors))
+        self.assertTrue(any("knowledge" in error for error in errors))
+        self.assertTrue(any("items.ITEM_X" in error for error in errors))
+        self.assertTrue(any("unsupported stage" in error for error in errors))
 
 if __name__ == "__main__":
     unittest.main()
