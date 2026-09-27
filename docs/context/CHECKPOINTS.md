@@ -1646,3 +1646,68 @@ This is not an executed pass count.
 ### NEXT_ACTION
 
 Continue only targeted state-integrity review for concrete defects. Exact V6 runtime execution remains the required merge/promotion gate.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-GAMESTATE-BOUNDARY-19
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after this pass: `49baf7737483a225b588149e91f38d245c580dc6`
+
+### ISSUE FOUND
+
+[VERIFIED STATIC] Authored initial-state loading and save deserialization could construct a `GameState` with structurally invalid top-level containers or scalar identity/runtime fields.
+
+Examples included:
+- list-backed `player` or `knowledge`;
+- invalid party/history containers;
+- non-string seed/scene IDs;
+- boolean turn/time/schema values.
+
+Downstream systems assume these fields satisfy the durable GameState contract and could otherwise fail later with implementation exceptions or inconsistent behavior.
+
+### FIX
+
+[IMPLEMENTED] Added shared `validate_game_state_structure()` in `core.py`.
+
+It validates:
+- non-empty string seed and scene ID;
+- non-negative integer turn/time/schema with booleans rejected;
+- mutable mapping containers for all durable mapping-backed state;
+- list-backed party with non-empty string IDs;
+- list-backed history with mapping events.
+
+[IMPLEMENTED] The validator is now called:
+- after authored `initial_state` instantiation;
+- after save deserialization;
+- before save serialization.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added 6 tests covering:
+- invalid initial player container;
+- invalid initial knowledge container;
+- boolean initial turn;
+- corrupt nested save container;
+- invalid party entries;
+- corrupt runtime history at dump time.
+
+[VERIFIED STATIC] V6 now contains **227 authored test methods across 17 test files**.
+
+This is not an executed pass count.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 suite execution remains pending.
+
+### SCOPE CONTROL
+
+[DECISION] No feature expansion, no stat-schema migration, no V5/Foundation mutation, and no context-branch consolidation were performed.
+
+### NEXT_ACTION
+
+Continue only targeted integrity review for concrete defects. Exact V6 runtime execution remains the required promotion gate.
