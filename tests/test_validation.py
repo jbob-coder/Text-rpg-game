@@ -252,6 +252,42 @@ class ValidationTests(unittest.TestCase):
         self.assertTrue(any(".minutes must be an integer >= 1" in e for e in errors))
         self.assertTrue(any(".quality must be finite non-negative numeric" in e for e in errors))
 
+
+    def test_npc_goal_effect_contract_is_strict(self):
+        scenes = {
+            "SCENE_A": {"choices": [
+                {
+                    "id": "CHOICE_BAD_GOAL_CREATE",
+                    "text": "Create bad goal.",
+                    "outcomes": {"default": {"effects": [{
+                        "type": "npc_goal_create",
+                        "npc": "NPC_A",
+                        "goal_id": "GOAL_A",
+                        "priority": 12.5,
+                        "progress": float("nan"),
+                    }]}}
+                },
+                {
+                    "id": "CHOICE_BAD_GOAL_PROGRESS",
+                    "text": "Progress bad goal.",
+                    "outcomes": {"default": {"effects": [{
+                        "type": "npc_goal_progress",
+                        "npc": "NPC_A",
+                        "goal_id": "GOAL_A",
+                        "delta": float("inf"),
+                        "completion_threshold": 0,
+                    }]}}
+                },
+            ]}
+        }
+
+        errors = validate_scenes(scenes)
+
+        self.assertTrue(any(".priority must be an integer in range 0..100" in e for e in errors))
+        self.assertTrue(any(".progress must be finite numeric in range 0..100" in e for e in errors))
+        self.assertTrue(any(".delta must be finite numeric" in e for e in errors))
+        self.assertTrue(any(".completion_threshold must be finite numeric in range (0, 100]" in e for e in errors))
+
     def test_power_effect_ids_must_be_stable(self):
         scenes = {
             "SCENE_A": {"choices": [{
