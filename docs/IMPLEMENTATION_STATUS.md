@@ -51,6 +51,11 @@ The original `main` branch is not modified by this work.
 - Systems catalog documenting the stat/training/equipment/social contract.
 - Authored quest-graph runtime with prerequisite objectives, optional branches, failure routes, terminal stages, manual failure, and durable transition history.
 - Quest-definition validation and whole-content-pack validation, including scene-to-quest-stage cross-reference checks.
+- Scene effects can now start quest graphs, complete/fail graph objectives, and fail quests through the quest runtime instead of bypassing graph state.
+- Derived stats and resource maxima can now use effective equipment, set-bonus, perk, condition, and direct derived-stat modifiers without rewriting base attributes.
+- Canonical visual identity validation and normalized art-generation contracts are implemented in `src/textrpg/visuals.py`.
+- First original playable opening slice added at `content/vertical_slice_01.json` as **provisional canon**: `The Dead Relay`, with cooperative, solo, and recovery/recombination routes.
+- The vertical slice includes the first structured recurring-character identity record for `NPC_TAMSIN`.
 
 ## TESTS_RUN
 
@@ -60,18 +65,24 @@ Command used against a branch-equivalent reconstruction of the current remote fi
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Result: **58 tests passed, 0 failed**.
+Last full branch-equivalent suite result: **58 tests passed, 0 failed**.
 
-The verification covered scene rules, persistence, stats, training/recovery, conditions, equipment sets, effective modifier aggregation, power runtime/evolution, NPC relationships/goals/story state, quest graphs, deterministic information propagation, and content-pack validation.
+That full run predates the newest derived-stat, quest-effect, visual-identity, and vertical-slice additions.
+
+Latest focused local reconstruction after those additions: **13 focused checks passed** covering modifier-aware derived stats/resource maxima, effective-value parity with scene checks, graph-aware scene quest effects, quest transitions, and visual-identity validation.
+
+A new full branch-equivalent suite rerun is still required before the repository-wide pass count is increased.
 
 No GitHub Actions workflow was added; verification does not consume hosted CI minutes.
 
 ## NEXT_ACTION
 
-1. Define the first original playable vertical slice and its canon opening scenario.
-2. Add character visual identity records that can drive consistent pixel portrait/sprite generation.
-3. Integrate effective equipment/condition/perk modifiers into derived-stat/resource calculations without double counting.
-4. Connect the rules layer to the chosen pixel-art presentation runtime after the client technology is deliberately selected.
+1. Rerun the complete branch-equivalent test suite and resolve any integration regressions from the latest slice.
+2. Review/promote `The Dead Relay` from provisional canon to confirmed canon or revise it before expansion.
+3. Expand visual identity records to every recurring character introduced by the confirmed opening.
+4. Add authored NPC goal/story-state effects to scene data so the vertical slice exercises those systems directly.
+5. Add power discovery/training content to the next playable slice without granting power progression instantly.
+6. Connect the rules layer to the chosen pixel-art presentation runtime after the client technology is deliberately selected.
 
 ## BLOCKERS
 
@@ -97,4 +108,4 @@ The visual/runtime implementation should not be hard-wired yet because the final
 - Excessive branching can cause content explosion. Recombining branches around durable state is preferred over writing a completely separate story for every choice.
 - Hidden information must be scoped to the correct character/player knowledge stores or secrets can leak accidentally.
 - Progression and recovery numbers are provisional until a playable loop provides balancing evidence.
-- Effective-stat aggregation now applies direct equipment, reached set-bonus thresholds, perks, and active condition modifiers once each. Future derived-stat integration must preserve the same no-double-counting rule.
+- Effective-stat aggregation and derived-stat calculation now both account for direct equipment, reached set-bonus thresholds, perks, and active conditions. Their parity is covered by a focused regression check, but future refactoring should centralize the duplicated aggregation contract to reduce drift risk.
