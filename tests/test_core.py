@@ -937,5 +937,28 @@ class ExtendedStateTests(unittest.TestCase):
         )
 
 
+    def test_authored_goal_effect_preserves_strict_priority_type(self):
+        engine = RulesEngine({
+            "A": {"choices": [{
+                "id": "BAD_GOAL",
+                "text": "Create a malformed goal.",
+                "outcomes": {"default": {"effects": [{
+                    "type": "npc_goal_create",
+                    "npc": "NPC_A",
+                    "goal_id": "GOAL_A",
+                    "priority": 12.5,
+                }]}}
+            }]}
+        })
+        game_state = GameState(seed="goal-type", scene_id="A")
+
+        with self.assertRaises(RuleError):
+            engine.choose(game_state, "BAD_GOAL")
+
+        self.assertEqual(game_state.turn, 0)
+        self.assertEqual(game_state.npcs, {})
+        self.assertEqual(game_state.history, [])
+
+
 if __name__ == "__main__":
     unittest.main()
