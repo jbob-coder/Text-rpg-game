@@ -45,8 +45,8 @@ The CLI is a development client, not the final presentation layer. It runs autho
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Last full branch-equivalent suite verification on record: **58 tests passed, 0 failed**.
+Latest exact branch-equivalent verification: **89 tests passed, 0 failed**.
 
-That result predates the newest CLI/content-loader, modifier-centralization, NPC story-state, knowledge-gate, extended vertical-slice, and technique-practice commits. New regression tests are present, but the complete latest suite must be executed before the verified count is increased.
+The local verification copy was hash-checked against the live branch for all 14 source modules, 14 test modules, and both JSON content files used by the suite. Cooperative, solo, recovery, and first-power routes were also exercised across save/load round trips successfully.
 
 The prototype uses only the Python standard library. No hosted AI service or GitHub Actions workflow is required.
