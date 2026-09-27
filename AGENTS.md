@@ -23,6 +23,29 @@ Repository files and fresh execution evidence outrank remembered chat context.
 
 Use `docs/THE_GAME_MASTER_TASK_REGISTER.md` for the live status rather than copying this snapshot forward.
 
+## Default project permissions
+
+The project owner has granted standing authorization for routine project engineering work. Within a non-protected working branch, agents may proceed without repeatedly asking for permission to:
+
+- create, modify, move, or remove project source files, tests, documentation, tooling, configuration, and build files when the change serves the current objective;
+- refactor implementation while preserving behavior/contracts or providing an explicit migration;
+- add diagnostics, regression tests, developer tooling, build scripts, and repository-native continuity files;
+- create working branches and commits, update handoff/status documentation, and choose internal file placement/organization;
+- run available tests, builds, static checks, local tooling, and debugging steps;
+- repair defects and make small reversible improvements discovered while working, when they are directly relevant and verified.
+
+Routine confirmation is not required for those actions. Prefer reversible changes, keep evidence, and update the task register.
+
+This standing authorization does **not** remove safeguards for actions with external, irreversible, security, or financial consequences. Do not treat it as permission to:
+
+- expose, create, rotate, transmit, or change credentials/secrets without the appropriate secure flow;
+- incur charges, enable paid services, make purchases, or change billing;
+- delete repositories, destroy durable user data, rewrite shared history, force-push, or delete important branches without a specific need and explicit confirmation when the consequence is irreversible;
+- merge/promote `main`, change the canonical/default branch, publish a release/store build, or change repository visibility merely because routine engineering permission exists;
+- alter external account/security settings or bypass product, safety, legal, or platform approval requirements.
+
+When a proposed action falls outside routine reversible project engineering, stop at the smallest necessary approval boundary. Otherwise proceed, verify, and document the result.
+
 ## Engineering rules
 
 - Inspect current files/HEAD before repository-specific claims.
