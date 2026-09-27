@@ -94,7 +94,7 @@ class SaveResumeRouteTests(unittest.TestCase):
                 "PRACTICE_SIGNAL_PULSE_ONE_HOUR",
                 "USE_SIGNAL_PULSE_ON_RELAY",
                 "RECOVER_TRACE_RESONANCE_THIRTY_MINUTES",
-                "END_TRACE_ECHO_FOUNDATION_SLICE",
+                "BEGIN_TRACE_STABILIZATION_PLAN",
             ],
         )
         technique = state.abilities["ABILITY_TRACE_ECHO"]["techniques"][
@@ -104,6 +104,11 @@ class SaveResumeRouteTests(unittest.TestCase):
         self.assertEqual(technique["stage"], "unstable")
         self.assertEqual(state.player["power_resources"]["trace_resonance"], 9.0)
         self.assertTrue(state.flags["vertical_slice_01.power_session_complete"])
+        self.assertEqual(state.scene_id, "TRACE_STABILIZATION_HUB")
+        self.assertEqual(
+            state.quests["QUEST_TRACE_STABILIZATION"]["status"],
+            "active",
+        )
 
 
 if __name__ == "__main__":
