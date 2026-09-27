@@ -4,12 +4,15 @@ from .persistence import CURRENT_SCHEMA_VERSION, dumps_state, load_state, loads_
 from .progression import gain_ability_mastery, mastery_stage, technique_available
 from .powers import (
     ability_evolution_status,
+    ability_player_view,
     discover_technique,
     evolve_ability,
     gain_technique_mastery,
     technique_stage,
     technique_use_status,
     use_technique,
+    validate_evolution_definition,
+    validate_technique_definition,
 )
 from .quests import (
     assert_valid_quest_definitions,
@@ -51,6 +54,7 @@ __all__ = [
     "SKILL_CATALOG",
     "active_set_bonuses",
     "ability_evolution_status",
+    "ability_player_view",
     "discover_technique",
     "evolve_ability",
     "add_memory",
@@ -96,6 +100,8 @@ __all__ = [
     "train",
     "train_attribute",
     "use_technique",
+    "validate_evolution_definition",
+    "validate_technique_definition",
     "validate_character_visuals",
     "validate_content_pack",
     "validate_player_stats",
