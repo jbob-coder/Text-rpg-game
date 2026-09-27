@@ -6,6 +6,7 @@ from textrpg import (
     RuleError,
     RulesEngine,
     build_status_view,
+    inspect_status_value,
     discover_ability,
     discover_technique,
     gain_ability_mastery,
@@ -201,6 +202,35 @@ class StatusProjectionTests(unittest.TestCase):
         with self.assertRaises(RuleError):
             build_status_view(state, engine)
 
+
+    def test_deep_status_inspection_uses_rules_explainability(self):
+        state, engine = self.state_and_engine()
+
+        might = inspect_status_value(state, engine, "attributes.might")
+        self.assertEqual(might["total"], 15.0)
+        self.assertEqual(might["breakdown"]["base"], 10.0)
+        self.assertEqual(might["breakdown"]["equipment:body"], 2.0)
+        self.assertEqual(might["breakdown"]["set:SET_STATUS:2"], 3.0)
+        self.assertEqual(might["breakdown"]["perk:PERK_STATUS"], 1.0)
+        self.assertEqual(might["breakdown"]["condition:COND_VISIBLE"], -1.0)
+
+        health = inspect_status_value(state, engine, "derived.max_health")
+        self.assertEqual(health["kind"], "derived")
+        self.assertIn("inputs", health["breakdown"])
+        self.assertIn("direct_modifiers", health["breakdown"])
+
+    def test_deep_status_inspection_rejects_hidden_or_raw_paths(self):
+        state, engine = self.state_and_engine()
+        for path in (
+            "quests.QUEST_SECRET",
+            "abilities.ABILITY_TRACE",
+            "relationships.NPC_SECRET",
+            "attributes.unknown",
+            "skills.unknown",
+            "derived.unknown",
+        ):
+            with self.assertRaises(RuleError):
+                inspect_status_value(state, engine, path)
 
 if __name__ == "__main__":
     unittest.main()
