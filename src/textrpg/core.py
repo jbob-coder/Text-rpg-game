@@ -303,6 +303,28 @@ class RulesEngine:
                 rank = state.abilities.get(condition["ability_id"], {}).get("rank", 0)
                 if rank < condition["value"]:
                     return False
+            elif kind == "technique_discoverable":
+                from .powers import technique_discovery_status
+
+                ability_id = condition["ability_id"]
+                technique_id = condition["technique_id"]
+                power_definition = self.power_definitions.get(ability_id)
+                if not isinstance(power_definition, Mapping):
+                    return False
+                techniques = power_definition.get("techniques", {})
+                if not isinstance(techniques, Mapping):
+                    return False
+                technique_definition = techniques.get(technique_id)
+                if not isinstance(technique_definition, Mapping):
+                    return False
+                if not technique_discovery_status(
+                    state,
+                    ability_id,
+                    technique_id,
+                    technique_definition,
+                    equipment_sets=self.equipment_sets,
+                )["available"]:
+                    return False
             elif kind == "has_perk":
                 if condition["perk_id"] not in state.perks:
                     return False
@@ -560,10 +582,27 @@ class RulesEngine:
             elif kind == "technique_discover":
                 from .powers import discover_technique
 
+                ability_id = effect["ability_id"]
+                technique_id = effect["technique_id"]
+                power_definition = self.power_definitions.get(ability_id)
+                technique_definition = None
+                if power_definition is not None:
+                    techniques = power_definition.get("techniques", {})
+                    if not isinstance(techniques, Mapping):
+                        raise RuleError(
+                            f"Power techniques definition must be an object: {ability_id}"
+                        )
+                    technique_definition = techniques.get(technique_id)
+                    if not isinstance(technique_definition, Mapping):
+                        raise RuleError(
+                            f"Unknown technique definition: {ability_id}/{technique_id}"
+                        )
                 discover_technique(
                     state,
-                    effect["ability_id"],
-                    effect["technique_id"],
+                    ability_id,
+                    technique_id,
+                    technique_definition,
+                    equipment_sets=self.equipment_sets,
                 )
             elif kind == "technique_practice":
                 from .powers import practice_technique
