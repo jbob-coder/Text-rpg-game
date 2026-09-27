@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
                     onLoad = gameViewModel::load,
                     onNarrate = narration::speak,
                     onStopNarration = narration::stop,
+                    onCheat = gameViewModel::applyCheat,
                 )
             }
         }
