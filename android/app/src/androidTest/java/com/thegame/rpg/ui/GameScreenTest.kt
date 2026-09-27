@@ -7,6 +7,8 @@ import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import com.thegame.rpg.engine.GameChoice
 import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameInventory
