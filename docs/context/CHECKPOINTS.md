@@ -2053,3 +2053,64 @@ None. Documentation-only checkpoint.
 ### NEXT_ACTION
 
 Continue Stage 3 without user-dependent manual QA. Preserve the exact-runtime-suite gate and continue only evidence-driven hardening until free/local execution is available.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-EQUIPMENT-GOAL-BOUNDARY-26
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after implementation/docs in this pass: `280f99c940235cc7284006d7e5b1f76c554fb8f3`
+
+### ISSUES FOUND
+
+[VERIFIED STATIC] `equip_item()` could accept a malformed non-null equipment `set_id`, persist it, and only fail later when the strict modifier/set pipeline evaluated equipment.
+
+[VERIFIED STATIC] `equip_item()` also assumed `state.player` was mapping-shaped before reading requirement inputs.
+
+[VERIFIED STATIC] The RulesEngine authored adapters for NPC goal creation/progress coerced values before calling the hardened social APIs. A fractional authored goal priority could therefore be truncated by `int(...)` instead of being rejected by the strict social contract.
+
+[VERIFIED STATIC] The static scene validator did not enforce the corresponding NPC-goal numeric boundaries.
+
+### FIXES
+
+[IMPLEMENTED]
+- preflight mapping-shaped player state before equipment requirement reads;
+- reject non-null equipment set IDs unless they are non-empty strings before equipment commit;
+- pass authored NPC-goal priority/progress/delta/threshold values to social APIs without coercion;
+- validate authored goal IDs, priority, initial progress, progress delta, and completion threshold at the scene-validation boundary.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added 4 regression methods covering:
+- corrupt player container before equip;
+- invalid equipment set ID before equip;
+- no coercion of fractional authored goal priority;
+- strict authored NPC-goal numeric validation.
+
+[VERIFIED STATIC] V6 now contains **255 authored test methods across 17 test files**.
+
+This is not an executed pass count.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 suite execution remains pending.
+
+[VERIFIED] A fresh Codex Tasks environment check during this pass returned zero registered runtime environments.
+
+### PROTECTED BRANCHES
+
+[VERIFIED] `foundation/text-rpg-systems` remained at `b3340bc38e63e916c6cc7a8538ed1e8a34011112`.
+
+[VERIFIED] `integration/rules-ability-v5` remained at `fd36b9f1d14528f3dc5eb37e20e9120af25af036`.
+
+### SCOPE CONTROL
+
+[DECISION] No feature expansion, no seven-to-eight stat migration, no V5/Foundation mutation, and no context-history consolidation were performed.
+
+### NEXT_ACTION
+
+Continue evidence-driven Stage 3 integrity review without user-dependent manual QA. Exact free/local runtime execution remains the promotion gate.
