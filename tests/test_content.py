@@ -51,6 +51,12 @@ class ContentPackTests(unittest.TestCase):
         self.assertIn("KNOW_TRACE_ECHO_PATTERN_STABLE", pack.registries["knowledge"])
         self.assertIn("COND_ECHO_STRAIN", pack.registries["conditions"])
 
+    def test_world_map_remains_optional_for_content_packs(self):
+        data = self.data()
+        del data["world_map"]
+        pack = content_pack_from_mapping(data)
+        self.assertEqual(pack.state.scene_id, "OPENING_DEPOT_BLACKOUT")
+
     def test_world_map_scene_destination_must_exist(self):
         data = self.data()
         data["world_map"]["nodes"]["DISTRICT_ARCHIVE"]["scene_id"] = "SCENE_MISSING"

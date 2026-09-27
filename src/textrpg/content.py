@@ -44,7 +44,7 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
     equipment_sets = data.get("equipment_sets", {})
     powers = data.get("powers", {})
     registries = data.get("registries")
-    world_map = data.get("world_map", {})
+    world_map = data.get("world_map")
 
     if not isinstance(scenes, Mapping) or not scenes:
         raise RuleError("Content pack requires non-empty scenes")
@@ -58,7 +58,7 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
         raise RuleError("Content pack powers must be an object")
     if registries is not None and not isinstance(registries, Mapping):
         raise RuleError("Content pack registries must be an object")
-    if not isinstance(world_map, Mapping):
+    if world_map is not None and not isinstance(world_map, Mapping):
         raise RuleError("Content pack world_map must be an object")
 
     assert_valid_content_pack(scenes, quests, powers, registries, world_map)
