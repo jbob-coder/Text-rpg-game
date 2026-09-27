@@ -82,6 +82,9 @@ The original `main` branch is not modified by this work.
 - Power attribute/skill prerequisites now use effective values, so earned perk modifiers can satisfy specialized technique requirements without mutating base attributes.
 - `PERK_TRACE_TOLERANCE` is earned through a six-hour authored protocol and grants effective +5 Perception / +5 Will for Trace Echo prerequisite calculations.
 - Directional Trace is tuned as a reachable mid-tier discovery in the current prototype: 20 ability mastery, learned Signal Pulse, Powers 10, stable-pattern knowledge, Trace Tolerance, and effective Perception/Will 45.
+- The prototype now continues through the first live Directional Trace use: it spends 5 Focus + 4 Trace Resonance, applies severity-2 Echo Strain for 35 minutes, grants 3 technique mastery, and reveals a deeper residual route below Gate Twelve.
+- A one-hour post-use recovery restores only 2 Trace Resonance and naturally clears the 35-minute strain through the shared simulation clock.
+- Power-definition validation now rejects self-referential and unknown prerequisite-technique dependencies.
 
 ## TESTS_RUN
 
@@ -95,7 +98,7 @@ Latest **fully executed** branch-equivalent suite result remains: **103 tests pa
 
 That 103-test run predates the newest stabilization-loop, training/recovery-effect, effective-power-prerequisite, and Directional Trace route commits.
 
-The newest content JSON was parsed successfully and a structural audit found **14 scenes, 23 choices, 3 quests, 1 power definition, and 0 duplicate/missing scene/quest/power/technique references**. New regression tests were added for the stabilization route, technique-stage/perk gates, training/recovery effects, and Directional Trace save/resume continuity.
+The newest content JSON was parsed successfully and a structural audit found **16 scenes, 25 unique choices, 3 quests, 1 power definition, 6 registered knowledge IDs, and 0 duplicate/missing scene/quest/power/technique/registry references in the audited categories**. Five new regression tests have been authored since the 103-test checkpoint, covering the stabilization route, technique-stage/perk gates, training/recovery effects, Directional Trace save/resume continuity, and prerequisite-technique validation.
 
 A new complete Python suite run is still required before increasing the verified test count beyond 103.
 
@@ -121,9 +124,9 @@ No GitHub Actions workflow was added; verification does not consume hosted CI mi
 
 ## NEXT_ACTION
 
-1. Execute the complete latest Python suite in a connected code environment and fix any regression before raising the verified count.
-2. Add the first real `TECHNIQUE_DIRECTIONAL_TRACE` use scene with cost, drawback, information gain, and cooldown consequences.
-3. Decide whether the stabilization loop should remain one continuous hub or split into day/session milestones for better pacing.
+1. Execute the complete latest Python suite in a connected code environment and fix any regression before raising the verified count beyond 103.
+2. Split the stabilization hub into authored day/session milestones if the current repeatable loop proves too grind-like in play.
+3. Add the first downstream choice about whether to follow, hide, or share the deeper Directional Trace result.
 4. Review `The Dead Relay`, Gate Twelve, Tamsin, and Trace Echo as provisional story material before promoting any of them to confirmed canon.
 5. Continue save/resume end-to-end coverage for every new major route.
 6. Connect the rules layer to a selected pixel-art presentation runtime only after the client technology is deliberately chosen.
