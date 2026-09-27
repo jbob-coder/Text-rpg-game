@@ -758,5 +758,31 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertEqual(state.abilities["ABILITY_FLUX"].get("form"), before_form)
         self.assertNotIn("PERK_BAD", state.perks)
 
+    def test_discover_technique_requires_non_empty_id_and_valid_container(self):
+        state = self.state()
+        with self.assertRaises(RuleError):
+            discover_technique(state, "ABILITY_FLUX", "")
+
+        state.abilities["ABILITY_FLUX"]["techniques"] = []
+        with self.assertRaises(RuleError):
+            discover_technique(state, "ABILITY_FLUX", "TECHNIQUE_NEW")
+
+    def test_corrupt_technique_mastery_is_rejected_without_mutation(self):
+        state = self.state()
+        technique = state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]
+        technique["mastery_xp"] = float("nan")
+        original_stage = technique["stage"]
+
+        with self.assertRaises(RuleError):
+            gain_technique_mastery(
+                state,
+                "ABILITY_FLUX",
+                "TECHNIQUE_PULSE",
+                10,
+            )
+
+        self.assertTrue(str(technique["mastery_xp"]) == "nan")
+        self.assertEqual(technique["stage"], original_stage)
+
 if __name__ == "__main__":
     unittest.main()
