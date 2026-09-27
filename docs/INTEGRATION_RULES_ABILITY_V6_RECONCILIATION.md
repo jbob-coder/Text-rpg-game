@@ -301,6 +301,40 @@ The static authored-test count is now **221** across 17 test files.
 
 This remains static/source validation only. The exact V6 suite still has not been executed.
 
+
+## Durable GameState boundary validation
+
+A later pass found that both content loading and save deserialization could construct a `GameState` whose top-level containers had the wrong runtime types.
+
+Examples included:
+- `player=[]`
+- `knowledge=[]`
+- non-list `party`
+- non-list `history`
+- boolean turn/time/schema values
+
+Several downstream systems assume those containers are mutable mappings/lists and would otherwise fail later with implementation exceptions or partial behavior.
+
+V6 now defines a shared top-level `validate_game_state_structure()` contract in `core.py`.
+
+It validates:
+- non-empty string `seed` and `scene_id`;
+- non-negative integer `turn`, `time_minutes`, and `schema_version` with booleans rejected;
+- mutable mapping containers for player/flags/relationships/knowledge/inventory/quests/NPCs/abilities/equipment/perks;
+- list-backed party with non-empty string member IDs;
+- list-backed history whose entries are mapping objects.
+
+The validator is now used:
+- immediately after authored `initial_state` becomes a `GameState`;
+- after a save payload is converted to `GameState`;
+- before serializing a runtime state through `dumps_state()`.
+
+Six regressions were added for malformed initial-state containers, invalid turn type, corrupt save containers/party entries, and invalid runtime history during save.
+
+The static authored-test count is now **227** across 17 test files.
+
+This remains source/test hardening only; exact runtime execution is still pending.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
@@ -312,7 +346,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 221 authored test methods;
+- V6 has 227 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
