@@ -4,6 +4,7 @@ from .persistence import CURRENT_SCHEMA_VERSION, dumps_state, load_state, loads_
 from .progression import gain_ability_mastery, mastery_stage, technique_available
 from .powers import (
     ability_evolution_status,
+    ability_player_view,
     discover_technique,
     evolve_ability,
     gain_technique_mastery,
@@ -46,6 +47,7 @@ __all__ = [
     "SKILL_CATALOG",
     "active_set_bonuses",
     "ability_evolution_status",
+    "ability_player_view",
     "discover_technique",
     "evolve_ability",
     "add_memory",
