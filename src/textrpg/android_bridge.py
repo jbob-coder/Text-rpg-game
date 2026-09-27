@@ -56,6 +56,9 @@ class AndroidGameSession:
         )
 
     def _view_for(self, state: GameState) -> Dict[str, Any]:
+        location = state.flags.get("location_id")
+        if not isinstance(location, str) or not location:
+            location = state.scene_id
         return {
             "scene": self.engine.build_scene_view(state),
             "status": self._status_view_for(state),
@@ -65,6 +68,7 @@ class AndroidGameSession:
                 "turn": state.turn,
                 "time_minutes": state.time_minutes,
                 "schema_version": state.schema_version,
+                "location": location,
             },
         }
 
@@ -125,7 +129,6 @@ class AndroidGameSession:
         target = self._resolve_save_path(path)
         try:
             candidate = load_state(target)
-            # Validate the candidate against this exact content pack before assignment.
             self.engine.get_scene(candidate)
             candidate_view = self._view_for(candidate)
         except (OSError, RuleError, ValueError, TypeError) as exc:
