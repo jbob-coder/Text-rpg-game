@@ -362,9 +362,37 @@ class VerticalSliceTests(unittest.TestCase):
             "completed",
         )
 
+        resonance_before = state.player["power_resources"]["trace_resonance"]
+        engine.choose(state, "TRY_DIRECTIONAL_TRACE_ON_SERVICE_FORK")
+        self.assertEqual(
+            state.player["power_resources"]["trace_resonance"],
+            resonance_before - 4,
+        )
+        self.assertEqual(directional["mastery_xp"], 3.0)
+        self.assertEqual(directional["stage"], "discovered")
+        self.assertIn("COND_ECHO_STRAIN", state.player["conditions"])
+        self.assertEqual(
+            state.player["conditions"]["COND_ECHO_STRAIN"]["severity"],
+            2,
+        )
+        self.assertIn(
+            "KNOW_DIRECTIONAL_TRACE_POINTS_DEEPER",
+            state.knowledge,
+        )
+
+        engine.choose(state, "RECOVER_DIRECTIONAL_TRACE_ONE_HOUR")
+        self.assertEqual(
+            state.player["power_resources"]["trace_resonance"],
+            resonance_before - 2,
+        )
+        self.assertNotIn("COND_ECHO_STRAIN", state.player["conditions"])
+
         engine.choose(state, "END_DIRECTIONAL_TRACE_PROTOTYPE")
         self.assertTrue(
             state.flags["vertical_slice_01.directional_trace_discovered"]
+        )
+        self.assertTrue(
+            state.flags["vertical_slice_01.directional_trace_first_use_complete"]
         )
 
 
