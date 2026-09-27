@@ -2,7 +2,14 @@ import json
 import unittest
 from pathlib import Path
 
-from textrpg import RuleError, assert_valid_content_pack, assert_valid_scenes, validate_content_pack, validate_scenes
+from textrpg import (
+    RuleError,
+    assert_valid_content_pack,
+    assert_valid_scenes,
+    validate_content_pack,
+    validate_registries,
+    validate_scenes,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -259,6 +266,83 @@ class ValidationTests(unittest.TestCase):
         errors = validate_scenes(scenes)
         self.assertTrue(any("ability_id must be a stable uppercase ID" in e for e in errors))
         self.assertTrue(any("technique_id must be a stable uppercase ID" in e for e in errors))
+
+    def test_registry_validation_and_scene_cross_reference(self):
+        scenes = {
+            "SCENE_A": {"choices": [{
+                "id": "CHOICE_KNOW",
+                "text": "Learn it.",
+                "outcomes": {"default": {"effects": [{
+                    "type": "learn",
+                    "knowledge_id": "KNOW_MISSING",
+                }]}}
+            }]}
+        }
+        registries = {
+            "knowledge": {"KNOW_OTHER": {}},
+            "perks": {},
+            "items": {},
+            "conditions": {},
+        }
+        self.assertEqual(validate_registries(registries), [])
+        errors = validate_content_pack(scenes, {}, {}, registries)
+        self.assertTrue(any("unknown knowledge" in error for error in errors))
+
+    def test_registry_cross_reference_checks_power_drawback_condition(self):
+        powers = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_PULSE": {
+                        "drawbacks": [{
+                            "type": "condition",
+                            "condition_id": "COND_MISSING",
+                        }]
+                    }
+                }
+            }
+        }
+        registries = {
+            "knowledge": {},
+            "perks": {},
+            "items": {},
+            "conditions": {"COND_OTHER": {}},
+        }
+        errors = validate_content_pack({}, {}, powers, registries)
+        self.assertTrue(any("unknown condition" in error for error in errors))
+
+    def test_technique_discoverable_gate_cross_reference_is_validated(self):
+        scenes = {
+            "SCENE_A": {"choices": [{
+                "id": "CHOICE_GATE",
+                "text": "Try.",
+                "requires": [{
+                    "type": "technique_discoverable",
+                    "ability_id": "ABILITY_TRACE",
+                    "technique_id": "TECHNIQUE_MISSING",
+                }],
+                "outcomes": {"default": {}},
+            }]}
+        }
+        powers = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_OTHER": {}
+                }
+            }
+        }
+        errors = validate_content_pack(scenes, {}, powers)
+        self.assertTrue(any("unknown technique" in error for error in errors))
+
+    def test_registry_categories_and_ids_are_strict(self):
+        errors = validate_registries({
+            "knowledge": {"bad-id": {}},
+            "perks": {},
+            "items": {},
+            "conditions": {},
+            "unexpected": {},
+        })
+        self.assertTrue(any("unsupported category" in error for error in errors))
+        self.assertTrue(any("stable uppercase ID" in error for error in errors))
 
 if __name__ == "__main__":
     unittest.main()
