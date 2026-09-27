@@ -105,28 +105,52 @@ def eligible_leak_targets(
     knowledge_id: str,
     network: Mapping[str, Iterable[str]],
 ) -> list[str]:
-    """Return deterministic candidates for an authored gossip/leak step.
+    """Return deterministic candidates without mutating NPC state.
 
-    This function does not randomly leak information. It exposes which connected
-    characters qualify so content can choose when a propagation event occurs.
+    Eligibility is a query. Merely asking who could receive a leak must not create
+    NPC shells, relationship entries, knowledge containers, or other durable state.
     """
-    npc = ensure_npc(state, holder)
-    record = npc["knowledge"].get(knowledge_id)
+    npc = state.npcs.get(holder)
+    if npc is None:
+        return []
+    if not isinstance(npc, Mapping):
+        raise RuleError(f"NPC state must be an object: {holder}")
+
+    knowledge = npc.get("knowledge", {})
+    if not isinstance(knowledge, Mapping):
+        raise RuleError(f"NPC knowledge must be an object: {holder}")
+    record = knowledge.get(knowledge_id)
     if not record:
         return []
+    if not isinstance(record, Mapping):
+        raise RuleError(
+            f"NPC knowledge record must be an object: {holder}/{knowledge_id}"
+        )
+
     secrecy = int(record.get("secrecy", 0))
     personality = npc.get("personality", {})
+    if not isinstance(personality, Mapping):
+        raise RuleError(f"NPC personality must be an object: {holder}")
     discipline = float(personality.get("discipline", 50))
     honesty = float(personality.get("honesty", 50))
     pressure = (100 - discipline) + max(0.0, honesty - 70.0) - secrecy * 12
     if pressure < 35:
         return []
+
     targets = []
     for target in network.get(holder, []):
         if target == holder:
             continue
-        target_knows = ensure_npc(state, target)["knowledge"]
-        if knowledge_id not in target_knows:
+        target_state = state.npcs.get(target)
+        if target_state is None:
+            target_knowledge: Mapping[str, Any] = {}
+        else:
+            if not isinstance(target_state, Mapping):
+                raise RuleError(f"NPC state must be an object: {target}")
+            target_knowledge = target_state.get("knowledge", {})
+            if not isinstance(target_knowledge, Mapping):
+                raise RuleError(f"NPC knowledge must be an object: {target}")
+        if knowledge_id not in target_knowledge:
             targets.append(target)
     return sorted(set(targets))
 
@@ -201,25 +225,37 @@ def adjust_relationship(
     *,
     source: str = "unknown",
 ) -> Dict[str, Any]:
-    """Apply bounded changes to independent relationship axes.
+    """Apply bounded independent-axis changes as one atomic relationship update."""
+    if not isinstance(changes, Mapping):
+        raise RuleError("Relationship changes must be an object")
+    if not isinstance(state.history, list):
+        raise RuleError("state.history must be a list")
 
-    Relationship axes remain separate. This function deliberately does not collapse
-    trust, fear, affection, suspicion, or the other dimensions into one friendship score.
-    """
-    ensure_npc(state, npc_id)
-    relationship = state.relationships[npc_id]
+    existing = state.relationships.get(npc_id, {})
+    if not isinstance(existing, Mapping):
+        raise RuleError(f"Relationship state must be an object: {npc_id}")
+
     before: Dict[str, float] = {}
     after: Dict[str, float] = {}
-
     for axis, delta_raw in changes.items():
         if axis not in RELATIONSHIP_AXES:
             raise RuleError(f"Unknown relationship axis: {axis}")
-        if not isinstance(delta_raw, (int, float)):
+        if isinstance(delta_raw, bool) or not isinstance(delta_raw, (int, float)):
             raise RuleError(f"Relationship change must be numeric: {axis}")
-        before[axis] = float(relationship.get(axis, 0))
-        value = before[axis] + float(delta_raw)
-        relationship[axis] = max(-100.0, min(100.0, value))
-        after[axis] = relationship[axis]
+        try:
+            current = float(existing.get(axis, 0))
+        except (TypeError, ValueError) as exc:
+            raise RuleError(
+                f"Relationship state must be numeric: {npc_id}/{axis}"
+            ) from exc
+        before[axis] = current
+        value = current + float(delta_raw)
+        after[axis] = max(-100.0, min(100.0, value))
+
+    # All axes validate before durable state is created or modified.
+    ensure_npc(state, npc_id)
+    relationship = state.relationships[npc_id]
+    relationship.update(after)
 
     event = {
         "type": "relationship_change",
