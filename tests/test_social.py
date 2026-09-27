@@ -232,5 +232,71 @@ class SocialTests(unittest.TestCase):
             update_goal_progress(state, "NPC_A", "GOAL_SHORT", 1)
 
 
+    def test_leak_eligibility_query_does_not_create_missing_npcs(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            npcs={
+                "NPC_A": {
+                    "personality": {"discipline": 10, "honesty": 90},
+                    "knowledge": {
+                        "KNOW_X": {
+                            "source": "PLAYER",
+                            "confidence": 1.0,
+                            "truth": "unknown",
+                            "secrecy": 1,
+                            "turn_learned": 0,
+                        }
+                    },
+                    "memories": [],
+                    "goals": {},
+                    "story_state": {},
+                }
+            },
+        )
+        before_npcs = dict(state.npcs)
+        before_relationships = dict(state.relationships)
+
+        targets = eligible_leak_targets(
+            state,
+            holder="NPC_A",
+            knowledge_id="KNOW_X",
+            network={"NPC_A": ["NPC_MISSING"]},
+        )
+
+        self.assertEqual(targets, ["NPC_MISSING"])
+        self.assertEqual(state.npcs, before_npcs)
+        self.assertEqual(state.relationships, before_relationships)
+        self.assertNotIn("NPC_MISSING", state.npcs)
+
+    def test_relationship_adjustment_rejects_invalid_axis_without_partial_mutation(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            relationships={"NPC_A": {"trust": 10}},
+        )
+        before_relationships = {
+            npc_id: dict(values)
+            for npc_id, values in state.relationships.items()
+        }
+        before_npcs = dict(state.npcs)
+        before_history = list(state.history)
+
+        with self.assertRaises(RuleError):
+            adjust_relationship(
+                state,
+                "NPC_A",
+                {
+                    "trust": 5,
+                    "not_an_axis": 1,
+                },
+                source="TEST",
+            )
+
+        self.assertEqual(state.relationships, before_relationships)
+        self.assertEqual(state.npcs, before_npcs)
+        self.assertEqual(state.history, before_history)
+
+
 if __name__ == "__main__":
     unittest.main()
