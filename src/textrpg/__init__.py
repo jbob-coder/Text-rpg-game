@@ -1,6 +1,15 @@
 from .content import LoadedContentPack, content_pack_from_mapping, load_content_pack
 from .core import GameState, RuleError, RulesEngine
 from .equipment import active_set_bonuses, equip_item, equipment_modifiers, set_counts
+from .modifiers import (
+    condition_modifiers,
+    modifier_breakdown,
+    modifier_totals,
+    perk_modifiers,
+    validate_modifier_mapping,
+    validate_modifier_path,
+    validate_set_definitions,
+)
 from .persistence import CURRENT_SCHEMA_VERSION, dumps_state, load_state, loads_state, save_state
 from .progression import gain_ability_mastery, mastery_stage, technique_available
 from .powers import (
@@ -37,7 +46,16 @@ from .social import (
     transition_story_state,
     update_goal_progress,
 )
-from .stats import ATTRIBUTE_SPECS, SKILL_CATALOG, derived_stats, effective_player_value, initialize_resources, validate_player_stats
+from .stats import (
+    ATTRIBUTE_SPECS,
+    SKILL_CATALOG,
+    derived_stat_breakdown,
+    derived_stats,
+    effective_player_value,
+    initialize_resources,
+    validate_player_stats,
+)
+from .schema import DERIVED_FORMULAS, DERIVED_STAT_SPECS
 from .validation import assert_valid_content_pack, assert_valid_scenes, validate_content_pack, validate_scenes
 from .visuals import (
     assert_valid_character_visuals,
@@ -48,6 +66,8 @@ from .visuals import (
 __all__ = [
     "ATTRIBUTE_SPECS",
     "CURRENT_SCHEMA_VERSION",
+    "DERIVED_FORMULAS",
+    "DERIVED_STAT_SPECS",
     "load_content_pack",
     "content_pack_from_mapping",
     "LoadedContentPack",
@@ -71,6 +91,8 @@ __all__ = [
     "available_objectives",
     "character_generation_contract",
     "complete_objective",
+    "condition_modifiers",
+    "derived_stat_breakdown",
     "derived_stats",
     "effective_player_value",
     "dumps_state",
@@ -88,7 +110,10 @@ __all__ = [
     "load_state",
     "loads_state",
     "mastery_stage",
+    "modifier_breakdown",
+    "modifier_totals",
     "npc_learn",
+    "perk_modifiers",
     "relationship_meets",
     "recover",
     "save_state",
@@ -106,7 +131,10 @@ __all__ = [
     "use_technique",
     "validate_character_visuals",
     "validate_content_pack",
+    "validate_modifier_mapping",
+    "validate_modifier_path",
     "validate_player_stats",
+    "validate_set_definitions",
     "validate_quest_definitions",
     "validate_scenes",
 ]
