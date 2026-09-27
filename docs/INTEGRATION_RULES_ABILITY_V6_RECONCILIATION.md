@@ -524,6 +524,36 @@ Two regression methods cover the RulesEngine no-coercion behavior and the author
 
 This is not an executed pass count. Exact runtime execution remains pending.
 
+## Persistence and quest-definition boundary hardening
+
+A further Stage 3 pass found two concrete data-integrity gaps.
+
+### Strict JSON persistence
+
+The persistence layer described saves as JSON, but Python's default JSON behavior still permitted non-standard numeric constants such as `NaN` and `Infinity`. It could also surface raw `TypeError`/`ValueError` exceptions when otherwise mapping-shaped runtime state contained a nested value that was not JSON-serializable.
+
+V6 now:
+- serializes with `allow_nan=False`;
+- rejects non-finite JSON constants during load through `parse_constant`;
+- wraps serialization failures as `RuleError` so the persistence API exposes one rule-domain error boundary.
+
+Two regression methods cover non-finite values on load/dump and non-JSON-serializable nested runtime values.
+
+### Quest objective metadata validation
+
+`validate_quest_definitions()` previously iterated `requires_objectives` without validating its container shape. A malformed value such as `null` could therefore raise a Python `TypeError` instead of returning authored validation errors. The same validator also did not enforce the boolean contract of an objective's `required` field.
+
+V6 now:
+- requires `required` to be boolean when present;
+- requires `requires_objectives` to be a list;
+- validates each prerequisite as a stable ID before checking its stage-local reference.
+
+One regression method verifies malformed objective metadata is reported without validator failure.
+
+[VERIFIED STATIC] V6 now contains **258 authored test methods across 17 test files**.
+
+This remains static/source verification only. The exact runtime suite is still pending.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
@@ -535,7 +565,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 255 authored test methods;
+- V6 has 258 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
