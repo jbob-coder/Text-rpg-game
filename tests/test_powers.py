@@ -10,6 +10,8 @@ from textrpg.powers import (
     technique_stage,
     technique_use_status,
     use_technique,
+    validate_evolution_definition,
+    validate_technique_definition,
 )
 from textrpg.simulation import advance_time
 
@@ -302,6 +304,66 @@ class PowerRuntimeTests(unittest.TestCase):
         state.abilities["ABILITY_FLUX"]["control"] = True
         with self.assertRaises(RuleError):
             ability_player_view(state, "ABILITY_FLUX")
+
+    def test_invalid_technique_definition_is_rejected_before_mutation(self):
+        state = self.state()
+        before_focus = state.player["resources"]["focus"]
+        before_flux = state.player["power_resources"]["flux"]
+        before_uses = state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["uses"]
+
+        invalid = self.definition()
+        invalid["drawbacks"] = [
+            {
+                "type": "condition",
+                "condition_id": "",
+                "severity": True,
+                "duration_minutes": -1,
+            }
+        ]
+        self.assertTrue(validate_technique_definition(invalid))
+        with self.assertRaises(RuleError):
+            use_technique(state, "ABILITY_FLUX", "TECHNIQUE_PULSE", invalid)
+
+        self.assertEqual(state.player["resources"]["focus"], before_focus)
+        self.assertEqual(state.player["power_resources"]["flux"], before_flux)
+        self.assertEqual(
+            state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["uses"],
+            before_uses,
+        )
+
+    def test_invalid_evolution_definition_is_rejected_before_mutation(self):
+        state = self.state()
+        state.knowledge["KNOW_FLUX_PATTERN"] = {}
+        gain_technique_mastery(state, "ABILITY_FLUX", "TECHNIQUE_PULSE", 40)
+        invalid = {
+            "requirements": {
+                "rank_min": 2,
+                "knowledge": ["KNOW_FLUX_PATTERN"],
+                "techniques": {"TECHNIQUE_PULSE": "learned"},
+            },
+            "result": {
+                "form": "bad_form",
+                "rank_floor": -1,
+                "consume_items": {"ITEM_CORE_SHARD": -1},
+                "grant_perks": {"PERK_BAD": "not-an-object"},
+            },
+        }
+        before_inventory = dict(state.inventory)
+        before_form = state.abilities["ABILITY_FLUX"].get("form")
+        self.assertTrue(validate_evolution_definition(invalid))
+        with self.assertRaises(RuleError):
+            evolve_ability(state, "ABILITY_FLUX", "EVOLUTION_BAD", invalid)
+        self.assertEqual(state.inventory, before_inventory)
+        self.assertEqual(state.abilities["ABILITY_FLUX"].get("form"), before_form)
+        self.assertNotIn("PERK_BAD", state.perks)
+
+    def test_boolean_power_resource_is_rejected(self):
+        state = self.state()
+        state.player["power_resources"]["flux"] = True
+        with self.assertRaises(RuleError):
+            technique_use_status(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition()
+            )
 
 if __name__ == "__main__":
     unittest.main()
