@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 from textrpg import GameState, RuleError, RulesEngine
+from textrpg.stats import derived_stats
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -829,6 +830,111 @@ class ExtendedStateTests(unittest.TestCase):
             state.player["resources"]["focus"], focus_after_training
         )
         self.assertEqual(state.time_minutes, 600)
+
+
+    def test_authored_training_and_recovery_preserve_equipment_set_resource_context(self):
+        set_definitions = {
+            "SET_RECOVERY": {
+                "thresholds": {
+                    "2": {
+                        "modifiers": {
+                            "derived.max_stamina": 20,
+                            "derived.max_focus": 10,
+                        }
+                    }
+                }
+            }
+        }
+        engine = RulesEngine(
+            {
+                "A": {
+                    "choices": [{
+                        "id": "TRAIN_WITH_SET",
+                        "text": "Train while the set is equipped.",
+                        "outcomes": {
+                            "default": {
+                                "effects": [{
+                                    "type": "skill_train",
+                                    "skill": "powers",
+                                    "minutes": 60,
+                                }],
+                                "next_scene": "B",
+                            }
+                        },
+                    }]
+                },
+                "B": {
+                    "choices": [{
+                        "id": "REST_WITH_SET",
+                        "text": "Recover while the set is equipped.",
+                        "outcomes": {
+                            "default": {
+                                "effects": [{
+                                    "type": "recover_resources",
+                                    "minutes": 60,
+                                }]
+                            }
+                        },
+                    }]
+                },
+            },
+            set_definitions=set_definitions,
+        )
+        state = GameState(
+            seed="set-context",
+            scene_id="A",
+            player={
+                "attributes": {
+                    "might": 30,
+                    "agility": 30,
+                    "endurance": 40,
+                    "intellect": 40,
+                    "will": 40,
+                    "perception": 30,
+                    "presence": 30,
+                },
+                "skills": {},
+                "resources": {
+                    "health": 100,
+                    "stamina": 100,
+                    "focus": 100,
+                    "resolve": 50,
+                },
+            },
+            equipment={
+                "body": {
+                    "item_id": "ITEM_SET_BODY",
+                    "set_id": "SET_RECOVERY",
+                    "modifiers": {},
+                },
+                "hands": {
+                    "item_id": "ITEM_SET_HANDS",
+                    "set_id": "SET_RECOVERY",
+                    "modifiers": {},
+                },
+            },
+        )
+        expected = derived_stats(state, set_definitions)
+
+        engine.choose(state, "TRAIN_WITH_SET")
+        self.assertEqual(
+            state.player["resources"]["max_stamina"],
+            expected["max_stamina"],
+        )
+        self.assertEqual(
+            state.player["resources"]["max_focus"],
+            expected["max_focus"],
+        )
+
+        engine.choose(state, "REST_WITH_SET")
+        self.assertEqual(
+            state.player["resources"]["max_stamina"],
+            expected["max_stamina"],
+        )
+        self.assertEqual(
+            state.player["resources"]["max_focus"],
+            expected["max_focus"],
+        )
 
 
 if __name__ == "__main__":
