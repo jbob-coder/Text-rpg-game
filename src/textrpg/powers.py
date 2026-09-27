@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 from typing import Any, Dict, Mapping, MutableMapping
 
-from .core import GameState, RuleError
+from .core import GameState, RuleError, effective_player_value
 from .progression import gain_ability_mastery, technique_available
 from .simulation import advance_time, apply_condition
 
@@ -586,14 +586,12 @@ def _extra_requirements_met(
 ) -> list[str]:
     reasons: list[str] = []
 
-    attributes = state.player.get("attributes", {})
     for key, minimum in requirements.get("attributes", {}).items():
-        if float(attributes.get(key, 0)) < float(minimum):
+        if effective_player_value(state, f"attributes.{key}") < float(minimum):
             reasons.append(f"attribute:{key}")
 
-    skills = state.player.get("skills", {})
     for key, minimum in requirements.get("skills", {}).items():
-        if float(skills.get(key, 0)) < float(minimum):
+        if effective_player_value(state, f"skills.{key}") < float(minimum):
             reasons.append(f"skill:{key}")
 
     for key, expected in requirements.get("flags", {}).items():
