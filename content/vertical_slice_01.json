@@ -40,7 +40,11 @@
       }
     },
     "inventory": {
-      "ITEM_MAINTENANCE_SEAL": 1
+      "ITEM_MAINTENANCE_SEAL": 1,
+      "ITEM_DEPOT_JACKET": 1,
+      "ITEM_WORK_GLOVES": 1,
+      "ITEM_SIGNAL_RING": 1,
+      "ITEM_COURIER_NECKTAG": 1
     },
     "npcs": {
       "NPC_TAMSIN": {
@@ -1476,6 +1480,57 @@
       },
       "ITEM_DEAD_RELAY": {
         "label": "Dead municipal relay"
+      },
+      "ITEM_DEPOT_JACKET": {
+        "label": "Depot utility jacket",
+        "slot": "body",
+        "quality": "standard",
+        "modifiers": {
+          "attributes.endurance": 2
+        },
+        "tags": [
+          "armor",
+          "utility"
+        ],
+        "source": "opening_loadout"
+      },
+      "ITEM_WORK_GLOVES": {
+        "label": "Insulated work gloves",
+        "slot": "hands",
+        "quality": "standard",
+        "modifiers": {
+          "skills.technical_systems": 1
+        },
+        "tags": [
+          "utility"
+        ],
+        "source": "opening_loadout"
+      },
+      "ITEM_SIGNAL_RING": {
+        "label": "Signal ring",
+        "slot": "ring_1",
+        "quality": "uncommon",
+        "modifiers": {
+          "attributes.perception": 1
+        },
+        "tags": [
+          "accessory",
+          "signal"
+        ],
+        "source": "opening_loadout"
+      },
+      "ITEM_COURIER_NECKTAG": {
+        "label": "Courier neck tag",
+        "slot": "neck",
+        "quality": "standard",
+        "modifiers": {
+          "attributes.presence": 1
+        },
+        "tags": [
+          "accessory",
+          "identity"
+        ],
+        "source": "opening_loadout"
       }
     },
     "conditions": {
