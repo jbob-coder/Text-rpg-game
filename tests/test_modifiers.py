@@ -325,5 +325,35 @@ class ModifierPipelineTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             effective_player_value(state, "attributes.might")
 
+
+    def test_corrupt_equipment_record_is_rejected_as_modifier_contract_error(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={"attributes": {"might": 10}},
+            equipment={"body": "corrupt"},
+        )
+
+        with self.assertRaises(ValueError):
+            effective_player_value(state, "attributes.might")
+
+    def test_corrupt_perk_record_is_rejected_as_modifier_contract_error(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            player={"attributes": {"might": 10}},
+            perks={"PERK_BAD": []},
+        )
+
+        with self.assertRaises(ValueError):
+            effective_player_value(state, "attributes.might")
+
+    def test_corrupt_player_container_is_rejected_by_modifier_pipeline(self):
+        state = GameState(seed="s", scene_id="A")
+        state.player = []
+
+        with self.assertRaises(ValueError):
+            effective_player_value(state, "attributes.might")
+
 if __name__ == "__main__":
     unittest.main()
