@@ -8,11 +8,14 @@ from textrpg.powers import (
     discover_technique,
     evolve_ability,
     gain_technique_mastery,
+    initialize_power_resource,
     practice_technique,
+    recover_power_resource,
     technique_stage,
     technique_use_status,
     use_technique,
     validate_evolution_definition,
+    validate_power_definitions,
     validate_technique_definition,
 )
 from textrpg.simulation import advance_time
@@ -934,6 +937,162 @@ class PowerRuntimeTests(unittest.TestCase):
         with self.assertRaises(RuleError):
             discover_ability(state, "ABILITY_NEW", tags=42)
         self.assertEqual(state.abilities, {})
+
+    def test_power_definition_resource_contract_and_atomic_recovery(self):
+        definition = {
+            "family": "sensory",
+            "resource": {
+                "label": "Trace Resonance",
+                "path": "power_resources.trace_resonance",
+                "maximum": 10,
+                "starting": 10,
+                "recovery_per_hour": 2,
+            },
+            "techniques": {},
+        }
+        self.assertEqual(
+            validate_power_definitions({"ABILITY_TRACE": definition}),
+            [],
+        )
+
+        state = GameState(seed="x", scene_id="A")
+        ability = discover_ability(
+            state,
+            "ABILITY_TRACE",
+            definition=definition,
+        )
+        self.assertEqual(ability["family"], "sensory")
+        self.assertEqual(state.player["power_resources"]["trace_resonance"], 10.0)
+
+        state.player["power_resources"]["trace_resonance"] = 6.0
+        event = recover_power_resource(
+            state,
+            "ABILITY_TRACE",
+            definition,
+            minutes=30,
+        )
+        self.assertEqual(state.player["power_resources"]["trace_resonance"], 7.0)
+        self.assertEqual(event["gained"], 1.0)
+        self.assertEqual(state.time_minutes, 30)
+
+    def test_power_recovery_preflights_time_before_resource_mutation(self):
+        definition = {
+            "resource": {
+                "path": "power_resources.trace",
+                "maximum": 10,
+                "starting": 5,
+                "recovery_per_hour": 4,
+            },
+            "techniques": {},
+        }
+        state = GameState(seed="x", scene_id="A")
+        discover_ability(state, "ABILITY_TRACE", definition=definition)
+        state.player["power_resources"]["trace"] = 3.0
+        state.player["conditions"] = {
+            "COND_BAD": {
+                "duration_minutes": True,
+                "severity": 1,
+                "source": "test",
+                "tags": [],
+                "modifiers": {},
+            }
+        }
+        before = state.player["power_resources"]["trace"]
+        before_history = list(state.history)
+
+        with self.assertRaises(RuleError):
+            recover_power_resource(
+                state,
+                "ABILITY_TRACE",
+                definition,
+                minutes=30,
+            )
+
+        self.assertEqual(state.player["power_resources"]["trace"], before)
+        self.assertEqual(state.time_minutes, 0)
+        self.assertEqual(state.history, before_history)
+
+    def test_invalid_power_definition_does_not_create_ability_or_resource(self):
+        state = GameState(seed="x", scene_id="A")
+        invalid = {
+            "resource": {
+                "path": "resources.focus",
+                "maximum": 10,
+                "starting": 10,
+                "recovery_per_hour": 1,
+            },
+            "techniques": {},
+        }
+        with self.assertRaises(RuleError):
+            discover_ability(
+                state,
+                "ABILITY_BAD",
+                definition=invalid,
+            )
+        self.assertNotIn("ABILITY_BAD", state.abilities)
+        self.assertNotIn("power_resources", state.player)
+        self.assertEqual(state.history, [])
+
+    def test_power_resource_rejects_boolean_nan_and_over_cap_state(self):
+        definition = {
+            "resource": {
+                "path": "power_resources.trace",
+                "maximum": 10,
+                "starting": 5,
+                "recovery_per_hour": 2,
+            },
+            "techniques": {},
+        }
+        for bad_value in (True, float("nan"), float("inf"), 11.0, -1.0):
+            state = GameState(seed="x", scene_id="A")
+            discover_ability(state, "ABILITY_TRACE", definition=definition)
+            state.player["power_resources"]["trace"] = bad_value
+            with self.assertRaises(RuleError):
+                initialize_power_resource(state, "ABILITY_TRACE", definition)
+
+    def test_player_view_supports_canonical_power_resource_schema(self):
+        definition = {
+            "name": "Trace",
+            "family": "sensory",
+            "resource": {
+                "label": "Trace Resonance",
+                "path": "power_resources.trace",
+                "maximum": 10,
+                "starting": 8,
+                "recovery_per_hour": 2,
+            },
+            "techniques": {},
+        }
+        state = GameState(seed="x", scene_id="A")
+        discover_ability(state, "ABILITY_TRACE", definition=definition)
+
+        view = ability_player_view(state, "ABILITY_TRACE", definition)
+        self.assertEqual(
+            view["resource"],
+            {
+                "label": "Trace Resonance",
+                "current": 8.0,
+                "max": 10.0,
+                "recovery_per_hour": 2.0,
+            },
+        )
+
+    def test_power_definition_rejects_non_finite_or_invalid_resource_values(self):
+        invalid = {
+            "ABILITY_TRACE": {
+                "resource": {
+                    "path": "power_resources.trace",
+                    "maximum": float("nan"),
+                    "starting": True,
+                    "recovery_per_hour": -1,
+                },
+                "techniques": {},
+            }
+        }
+        errors = validate_power_definitions(invalid)
+        self.assertTrue(any("maximum must be a finite number" in e for e in errors))
+        self.assertTrue(any("starting must be a finite number" in e for e in errors))
+        self.assertTrue(any("recovery_per_hour cannot be negative" in e for e in errors))
 
 if __name__ == "__main__":
     unittest.main()
