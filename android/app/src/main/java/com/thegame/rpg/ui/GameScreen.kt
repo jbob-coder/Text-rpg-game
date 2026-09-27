@@ -883,6 +883,7 @@ private fun MapSection(
                     PixelTextButton(
                         label = if (node.current) "> ${node.title} [YOU]" else node.title,
                         onClick = { selectedId = node.id },
+                        modifier = Modifier.testTag("map-node-${node.id}"),
                     )
                     Spacer(Modifier.height(6.dp))
                 }
@@ -901,6 +902,7 @@ private fun MapSection(
                                 onClick = {
                                     if (!busy) onTravel(selected.id)
                                 },
+                                modifier = Modifier.testTag("map-travel"),
                             )
                         } else {
                             Text(
@@ -960,6 +962,7 @@ private fun BottomPixelNav(selected: GameSection, onSelect: (GameSection) -> Uni
 private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) {
     Box(
         modifier = Modifier
+            .testTag("nav-${label.lowercase()}")
             .background(if (active) PixelColors.Cyan else PixelColors.Deep)
             .border(2.dp, if (active) PixelColors.Paper else PixelColors.Muted)
             .clickable(role = Role.Tab, onClick = onClick)
@@ -974,9 +977,13 @@ private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) 
 }
 
 @Composable
-private fun PixelTextButton(label: String, onClick: () -> Unit) {
+private fun PixelTextButton(
+    label: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .background(PixelColors.PanelAlt)
             .border(2.dp, PixelColors.Cyan)
             .clickable(role = Role.Button, onClick = onClick)
