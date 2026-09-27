@@ -133,17 +133,11 @@ class GameScreenTest {
                     GameEquipmentSlot(
                         slot = "body",
                         equipped = true,
-                        itemId = "ITEM_DEPOT_JACKET",
-                        name = "Depot utility jacket",
+                        itemId = "FIELD_JACKET",
+                        itemName = "Field Jacket",
                     ),
-                    GameEquipmentSlot(
-                        slot = "ring_1",
-                        equipped = true,
-                        itemId = "ITEM_SIGNAL_RING",
-                        name = "Signal ring",
-                    ),
-                )
-            )
+                ),
+            ),
         )
 
         composeRule.setContent {
@@ -157,7 +151,7 @@ class GameScreenTest {
             }
         }
 
-        composeRule.onNodeWithTag("avatar-visible-gear").assertIsDisplayed()
-        composeRule.onNodeWithText("VISIBLE GEAR // CHEST • RING I").assertIsDisplayed()
+        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        composeRule.onNodeWithTag("avatar-equipped-body").assertIsDisplayed()
     }
 }
