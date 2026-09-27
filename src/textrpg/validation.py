@@ -21,6 +21,8 @@ SUPPORTED_CONDITIONS: Set[str] = {
     "ability_rank_min",
     "technique_discoverable",
     "has_perk",
+    "not_has_perk",
+    "technique_stage_min",
     "item_min",
 }
 SUPPORTED_EFFECTS: Set[str] = {
@@ -48,6 +50,8 @@ SUPPORTED_EFFECTS: Set[str] = {
     "technique_practice",
     "technique_use",
     "power_recover",
+    "skill_train",
+    "recover_resources",
 }
 
 
@@ -74,6 +78,28 @@ def _walk_conditions(conditions: Iterable[Mapping[str, Any]], location: str, err
                 f"{condition_location}.technique_id",
                 errors,
             )
+        if kind == "technique_stage_min":
+            _validate_id(
+                condition.get("ability_id"),
+                f"{condition_location}.ability_id",
+                errors,
+            )
+            _validate_id(
+                condition.get("technique_id"),
+                f"{condition_location}.technique_id",
+                errors,
+            )
+            if condition.get("stage") not in {
+                "discovered",
+                "unstable",
+                "learned",
+                "practiced",
+                "mastered",
+            }:
+                errors.append(
+                    f"{condition_location}.stage has unsupported value "
+                    f"{condition.get('stage')!r}"
+                )
 
 
 def _walk_effects(effects: Iterable[Mapping[str, Any]], location: str, errors: List[str]) -> None:
@@ -114,13 +140,17 @@ def _walk_effects(effects: Iterable[Mapping[str, Any]], location: str, errors: L
                 f"{effect_location}.technique_id",
                 errors,
             )
-        if kind in {"technique_practice", "power_recover"}:
+        if kind in {"technique_practice", "power_recover", "skill_train", "recover_resources"}:
             minutes = effect.get("minutes")
             minimum = 30 if kind == "technique_practice" else 1
             if not isinstance(minutes, int) or minutes < minimum:
                 errors.append(
                     f"{effect_location}.minutes must be an integer >= {minimum}"
                 )
+        if kind == "skill_train":
+            skill = effect.get("skill")
+            if not isinstance(skill, str) or not skill:
+                errors.append(f"{effect_location}.skill must be non-empty text")
 
 
 REGISTRY_CATEGORIES = ("knowledge", "perks", "items", "conditions")
