@@ -258,6 +258,49 @@ The static authored-test count is now **213** across 17 test files.
 
 These are source/test hardening results only. Exact V6 runtime execution remains the promotion gate.
 
+
+## Equipment and persistence boundary hardening
+
+A subsequent static review covered equipment mutation and save deserialization.
+
+### Equipment preflight
+
+`equip_item()` now validates all failure-prone state before replacing an equipped slot or consuming inventory.
+
+Hardening includes:
+- require the item payload to be an object;
+- require mutable equipment state;
+- require `consume_inventory` to be boolean;
+- when consuming inventory, require a mutable inventory container and a positive integer quantity;
+- require attribute/skill source containers to be mappings;
+- reject boolean/non-numeric/non-finite requirement source stats instead of allowing invalid values through comparisons;
+- require equipment `tags` and `passive_perks` to be lists of non-empty strings;
+- compute remaining inventory quantity before the equipment commit.
+
+Regression coverage verifies:
+- immutable inventory is rejected before equipment mutation;
+- corrupt/non-finite requirement source stats do not equip the item;
+- malformed tag metadata is rejected before slot mutation.
+
+### Save deserialization
+
+`loads_state()` previously assumed the JSON root was an object and silently dropped unknown top-level fields that were not members of `GameState`.
+
+That behavior could turn a malformed/current-schema save into a partially loaded state without surfacing potential data loss.
+
+V6 now:
+- wraps invalid JSON as `RuleError`;
+- rejects non-object JSON roots;
+- rejects boolean/non-integer schema versions;
+- requires non-empty string `seed` and `scene_id`;
+- rejects unknown top-level fields for the current schema instead of silently discarding them.
+
+Regression coverage verifies each of those boundaries.
+
+The static authored-test count is now **221** across 17 test files.
+
+This remains static/source validation only. The exact V6 suite still has not been executed.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
@@ -269,7 +312,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 213 authored test methods;
+- V6 has 221 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
