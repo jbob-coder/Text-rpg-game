@@ -4,13 +4,14 @@ import json
 from pathlib import Path
 from typing import Any, Dict
 
-from .core import GameState, RuleError
+from .core import GameState, RuleError, validate_game_state_structure
 
 
 CURRENT_SCHEMA_VERSION = 1
 
 
 def dumps_state(state: GameState) -> str:
+    validate_game_state_structure(state)
     payload = state.snapshot()
     payload["schema_version"] = CURRENT_SCHEMA_VERSION
     return json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True)
@@ -55,7 +56,9 @@ def loads_state(raw: str) -> GameState:
         )
 
     kwargs = {key: value for key, value in payload.items() if key in fields}
-    return GameState(**kwargs)
+    state = GameState(**kwargs)
+    validate_game_state_structure(state)
+    return state
 
 
 def save_state(path: str | Path, state: GameState) -> None:
