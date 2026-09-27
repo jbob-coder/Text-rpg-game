@@ -181,5 +181,32 @@ class SimulationTests(unittest.TestCase):
         self.assertEqual(state.time_minutes, before_time)
         self.assertEqual(state.player["attributes"]["might"], float("inf"))
 
+    def test_insufficient_training_resources_do_not_normalize_or_mutate_state(self):
+        state = self.state()
+        state.player["resources"] = {
+            "health": 1,
+            "stamina": 1,
+            "focus": 1,
+            "resolve": 1,
+        }
+        before_resources = dict(state.player["resources"])
+        before_skills = dict(state.player["skills"])
+        before_time = state.time_minutes
+        before_history = list(state.history)
+
+        with self.assertRaises(RuleError):
+            train(
+                state,
+                skill="technical_systems",
+                minutes=60,
+                intensity=1.0,
+            )
+
+        self.assertEqual(state.player["resources"], before_resources)
+        self.assertEqual(state.player["skills"], before_skills)
+        self.assertEqual(state.time_minutes, before_time)
+        self.assertEqual(state.history, before_history)
+
+
 if __name__ == "__main__":
     unittest.main()
