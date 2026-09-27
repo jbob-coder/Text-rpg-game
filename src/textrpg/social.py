@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import Any, Dict, Iterable, Mapping
+from typing import Any, Dict, Iterable, Mapping, MutableMapping
 
 from .core import GameState, RuleError
 
@@ -79,22 +79,60 @@ def share_knowledge(
     knowledge_id: str,
     voluntary: bool = True,
 ) -> Dict[str, Any]:
-    speaker_state = ensure_npc(state, speaker)
-    if knowledge_id not in speaker_state["knowledge"]:
+    """Transfer knowledge only after both source and recipient state preflight."""
+    speaker_state = state.npcs.get(speaker)
+    if speaker_state is None:
         raise RuleError(f"{speaker} does not know {knowledge_id}")
-    source = speaker_state["knowledge"][knowledge_id]
-    copied = deepcopy(source)
+    if not isinstance(speaker_state, Mapping):
+        raise RuleError(f"NPC state must be an object: {speaker}")
+
+    speaker_knowledge = speaker_state.get("knowledge", {})
+    if not isinstance(speaker_knowledge, Mapping):
+        raise RuleError(f"NPC knowledge must be an object: {speaker}")
+    if knowledge_id not in speaker_knowledge:
+        raise RuleError(f"{speaker} does not know {knowledge_id}")
+
+    source = speaker_knowledge[knowledge_id]
+    if not isinstance(source, Mapping):
+        raise RuleError(
+            f"NPC knowledge record must be an object: {speaker}/{knowledge_id}"
+        )
+    try:
+        importance = max(1, int(source.get("secrecy", 0)))
+    except (TypeError, ValueError) as exc:
+        raise RuleError(
+            f"Knowledge secrecy must be integer-like: {speaker}/{knowledge_id}"
+        ) from exc
+    if importance > 5:
+        raise RuleError("Memory importance must be in range 1..5")
+
+    existing_recipient = state.npcs.get(recipient)
+    if existing_recipient is not None:
+        if not isinstance(existing_recipient, MutableMapping):
+            raise RuleError(f"NPC state must be mutable: {recipient}")
+        recipient_knowledge = existing_recipient.get("knowledge", {})
+        recipient_memories = existing_recipient.get("memories", [])
+        if not isinstance(recipient_knowledge, MutableMapping):
+            raise RuleError(f"NPC knowledge must be mutable: {recipient}")
+        if not isinstance(recipient_memories, list):
+            raise RuleError(f"NPC memories must be a list: {recipient}")
+
+    copied = deepcopy(dict(source))
     copied["source"] = speaker
     copied["turn_learned"] = state.turn
-    ensure_npc(state, recipient)["knowledge"][knowledge_id] = copied
-    add_memory(
-        state,
-        recipient,
-        f"MEM_HEARD_{knowledge_id}_FROM_{speaker}",
-        importance=max(1, int(source.get("secrecy", 0))),
-        tags=("knowledge_transfer", "voluntary" if voluntary else "leak"),
-        data={"knowledge_id": knowledge_id, "speaker": speaker},
-    )
+    memory = {
+        "memory_id": f"MEM_HEARD_{knowledge_id}_FROM_{speaker}",
+        "importance": importance,
+        "turn": state.turn,
+        "time_minutes": state.time_minutes,
+        "tags": ["knowledge_transfer", "voluntary" if voluntary else "leak"],
+        "data": {"knowledge_id": knowledge_id, "speaker": speaker},
+    }
+
+    # All failure-prone validation is complete before recipient state mutation.
+    recipient_state = ensure_npc(state, recipient)
+    recipient_state["knowledge"][knowledge_id] = copied
+    recipient_state["memories"].append(memory)
     return copied
 
 
@@ -321,10 +359,20 @@ def set_goal(
     if status not in GOAL_STATUSES:
         raise RuleError(f"Unsupported goal status: {status}")
 
+    if not isinstance(state.history, list):
+        raise RuleError("state.history must be a list")
+    existing_npc = state.npcs.get(npc_id)
+    if existing_npc is not None:
+        if not isinstance(existing_npc, Mapping):
+            raise RuleError(f"NPC state must be an object: {npc_id}")
+        existing_goals = existing_npc.get("goals", {})
+        if not isinstance(existing_goals, Mapping):
+            raise RuleError(f"NPC goals must be an object: {npc_id}")
+        if goal_id in existing_goals:
+            raise RuleError(f"Goal already exists for {npc_id}: {goal_id}")
+
     npc = ensure_npc(state, npc_id)
     goals = npc["goals"]
-    if goal_id in goals:
-        raise RuleError(f"Goal already exists for {npc_id}: {goal_id}")
 
     record = {
         "goal_id": goal_id,
@@ -362,14 +410,22 @@ def update_goal_progress(
 ) -> Dict[str, Any]:
     if completion_threshold <= 0 or completion_threshold > 100:
         raise RuleError("Goal completion threshold must be in range (0, 100]")
-    npc = ensure_npc(state, npc_id)
-    goal = npc["goals"].get(goal_id)
-    if not goal:
+    if isinstance(delta, bool) or not isinstance(delta, (int, float)):
+        raise RuleError("Goal progress delta must be numeric")
+    if not isinstance(state.history, list):
+        raise RuleError("state.history must be a list")
+
+    npc = state.npcs.get(npc_id)
+    if not isinstance(npc, Mapping):
+        raise RuleError(f"Unknown goal for {npc_id}: {goal_id}")
+    goals = npc.get("goals", {})
+    if not isinstance(goals, Mapping):
+        raise RuleError(f"NPC goals must be an object: {npc_id}")
+    goal = goals.get(goal_id)
+    if not isinstance(goal, MutableMapping):
         raise RuleError(f"Unknown goal for {npc_id}: {goal_id}")
     if goal.get("status") in {"completed", "failed"}:
         raise RuleError(f"Cannot progress closed goal: {goal_id}")
-    if not isinstance(delta, (int, float)):
-        raise RuleError("Goal progress delta must be numeric")
 
     before = float(goal.get("progress", 0))
     after = max(0.0, min(100.0, before + float(delta)))
@@ -402,13 +458,22 @@ def transition_story_state(
     reason: str = "unknown",
     data: Mapping[str, Any] | None = None,
 ) -> Dict[str, Any]:
-    """Move one authored NPC story track through an explicit guarded transition."""
+    """Move one authored NPC story track through a preflighted transition."""
     if not isinstance(to_state, str) or not to_state:
         raise RuleError("Story state must be a non-empty string")
+    if not isinstance(state.history, list):
+        raise RuleError("state.history must be a list")
 
-    npc = ensure_npc(state, npc_id)
-    story_state = npc["story_state"]
-    previous = story_state.get(track_id)
+    existing_npc = state.npcs.get(npc_id)
+    if existing_npc is None:
+        previous = None
+    else:
+        if not isinstance(existing_npc, Mapping):
+            raise RuleError(f"NPC state must be an object: {npc_id}")
+        existing_story = existing_npc.get("story_state", {})
+        if not isinstance(existing_story, Mapping):
+            raise RuleError(f"NPC story_state must be an object: {npc_id}")
+        previous = existing_story.get(track_id)
 
     if allowed_from is not None:
         allowed = tuple(allowed_from)
@@ -418,6 +483,9 @@ def transition_story_state(
                 f"{previous!r} -> {to_state!r}"
             )
 
+    # Successful transition may create the NPC shell, but failed preflight cannot.
+    npc = ensure_npc(state, npc_id)
+    story_state = npc["story_state"]
     story_state[track_id] = to_state
     event = {
         "type": "npc_story_transition",
