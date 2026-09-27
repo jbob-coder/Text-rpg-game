@@ -620,3 +620,87 @@ None by this chat on a byte-for-byte checkout of `feature/ability-progression-v2
 4. Execute the full suite on the final synchronized branch state.
 5. Keep `feature/ability-progression-v1` as superseded work history; do not use it as the active branch.
 6. Continue the stat-schema migration design separately from ability runtime implementation.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-CROSS-BRANCH-COMPAT-08
+
+Repository: `jbob-coder/Text-rpg-game`
+Context branch: `shared/game-context`
+Active review branch: `review/effective-stat-contract-hardening`
+Active ability branch: `feature/ability-progression-v2`
+
+### CURRENT_OBJECTIVE
+
+[IN_PROGRESS] Keep independently evolving rules workstreams compatible while the foundation continues advancing, without falsely marking either feature as complete.
+
+### VERIFIED FINDING
+
+[VERIFIED] Cross-branch review identified a concrete API regression risk: the current foundation/ability code uses the public keyword `equipment_sets=` for effective/derived stat calculations, while the hardening review had introduced `set_definitions=` as the replacement name.
+
+Without an adapter, a future combined branch would break existing callers such as ability prerequisite checks even though the underlying semantics were compatible.
+
+### IMPLEMENTED HARDENING RESPONSE
+
+[IMPLEMENTED] `review/effective-stat-contract-hardening` now accepts both:
+- `equipment_sets=`
+- `set_definitions=`
+
+Conflicting simultaneous values are rejected.
+
+[IMPLEMENTED] Compatibility coverage was added for:
+- `effective_player_value(..., equipment_sets=...)`
+- `derived_stats(..., equipment_sets=...)`
+- `initialize_resources(..., equipment_sets=...)`
+
+[IMPLEMENTED] Additional hardening now rejects non-finite modifier values, non-finite equipment requirements, and non-finite player attributes/skills.
+
+[IMPLEMENTED] Simulation contracts were tightened so condition metadata, time advancement, recovery, skill training, and attribute training reject malformed boolean/non-finite/time inputs before mutating state where covered.
+
+### ABILITY V2 EVOLUTION
+
+[IMPLEMENTED] Ability V2 player projection was further hardened so:
+- resource projection paths are limited to `resources.<id>` or `power_resources.<id>`
+- non-string known evolution requirements are rejected instead of being copied into UI data
+- non-finite control/resource values are rejected
+- malformed technique projection state (uses/mastery/cooldown fields) is rejected
+
+This closes a potential hidden-data/projection hole where arbitrary nested data could otherwise be surfaced through player-visible fields.
+
+### DOCUMENTATION
+
+[VERIFIED] Added `docs/context/BRANCH_INTEGRATION_CONTRACT.md` and made it required reading.
+
+It records:
+- branch responsibilities
+- effective-value API compatibility
+- no-double-counting invariant
+- permanent vs effective invariant
+- disclosure invariant
+- numeric/time safety invariants
+- source overlap hotspots
+- required integration/promotion sequence
+
+### TESTS_RUN
+
+No byte-for-byte remote-branch suite was executed by this chat for the newest compatibility/hardening changes.
+
+### TEST_RESULTS
+
+[UNKNOWN] New tests have been added and inspected, but prior reconstructed-suite results do not verify the latest commits.
+
+### RISKS
+
+[RISK] The foundation continues moving. Every promotion attempt requires a fresh comparison.
+[RISK] Hardening and ability V2 both modify package exports; `__init__.py` will require deliberate integration.
+[RISK] Ability V2 depends on effective-value semantics, so a combined branch must verify no double counting with the hardened modifier pipeline.
+[RISK] Seven-vs-eight core attributes remains a separate design/migration decision.
+
+### NEXT_ACTION
+
+1. Continue static review for remaining compatibility holes.
+2. Keep public foundation APIs stable unless an explicit migration contract replaces them.
+3. Recompare both active branches against foundation before any integration branch is created.
+4. Build a combined integration branch only when the parent baseline is intentionally frozen for verification.
+5. Run focused + persistence + full-suite tests on that combined state before promotion.
