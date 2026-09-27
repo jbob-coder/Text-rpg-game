@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, Mapping
 
-from .core import GameState, RuleError
-from .equipment import equipment_modifiers
+from .core import GameState, RuleError, effective_player_value as core_effective_player_value
 
 
 ATTRIBUTE_SPECS: Dict[str, Dict[str, Any]] = {
@@ -79,52 +78,18 @@ def validate_player_stats(state: GameState) -> list[str]:
     return errors
 
 
-def _modifier_totals(
-    state: GameState,
-    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
-) -> Dict[str, float]:
-    """Aggregate temporary/equipment modifier paths exactly once.
-
-    Direct equipment plus reached set bonuses come from equipment_modifiers().
-    Perks and active conditions are then added once each. Base player values are
-    never rewritten by this aggregation.
-    """
-    total = equipment_modifiers(state, equipment_sets)
-
-    for perk_id, perk in state.perks.items():
-        if not isinstance(perk, Mapping):
-            raise RuleError(f"Perk record must be an object: {perk_id}")
-        for path, value in perk.get("modifiers", {}).items():
-            total[path] = total.get(path, 0.0) + float(value)
-
-    conditions = state.player.get("conditions", {})
-    if conditions is not None and not isinstance(conditions, Mapping):
-        raise RuleError("player.conditions must be an object")
-    for condition_id, condition in (conditions or {}).items():
-        if not isinstance(condition, Mapping):
-            raise RuleError(f"Condition record must be an object: {condition_id}")
-        for path, value in condition.get("modifiers", {}).items():
-            total[path] = total.get(path, 0.0) + float(value)
-
-    return total
-
-
 def effective_player_value(
     state: GameState,
     path: str,
     *,
     equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> float:
-    current: Any = state.player
-    for part in path.split("."):
-        if not isinstance(current, Mapping) or part not in current:
-            current = 0
-            break
-        current = current[part]
-    if not isinstance(current, (int, float)):
-        raise RuleError(f"Player value is not numeric: {path}")
-    modifiers = _modifier_totals(state, equipment_sets)
-    return float(current) + float(modifiers.get(path, 0.0))
+    """Public stats-layer alias for the shared core aggregation contract."""
+    return core_effective_player_value(
+        state,
+        path,
+        equipment_sets=equipment_sets,
+    )
 
 
 def derived_stats(
@@ -132,23 +97,13 @@ def derived_stats(
     *,
     equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, float]:
-    """Calculate derived values from effective attributes/skills.
-
-    Attribute/skill modifiers affect formulas, while modifiers authored directly
-    against derived.<name> are added once after the formula is calculated.
-    """
-    modifiers = _modifier_totals(state, equipment_sets)
-
+    """Calculate derived values from the shared effective-value contract."""
     def effective(path: str) -> float:
-        current: Any = state.player
-        for part in path.split("."):
-            if not isinstance(current, Mapping) or part not in current:
-                current = 0
-                break
-            current = current[part]
-        if not isinstance(current, (int, float)):
-            raise RuleError(f"Player value is not numeric: {path}")
-        return float(current) + float(modifiers.get(path, 0.0))
+        return core_effective_player_value(
+            state,
+            path,
+            equipment_sets=equipment_sets,
+        )
 
     might = effective("attributes.might")
     agility = effective("attributes.agility")
@@ -175,7 +130,7 @@ def derived_stats(
     }
 
     for key in list(values):
-        values[key] += float(modifiers.get(f"derived.{key}", 0.0))
+        values[key] += effective(f"derived.{key}")
         values[key] = round(values[key], 2)
     return values
 
