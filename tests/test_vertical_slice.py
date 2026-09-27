@@ -22,7 +22,7 @@ class VerticalSliceTests(unittest.TestCase):
     def test_content_pack_and_visual_identities_are_valid(self):
         data = load_slice()
         self.assertEqual(
-            validate_content_pack(data["scenes"], data["quests"]),
+            validate_content_pack(data["scenes"], data["quests"], data.get("powers", {})),
             [],
         )
         self.assertEqual(
@@ -36,6 +36,7 @@ class VerticalSliceTests(unittest.TestCase):
         engine = RulesEngine(
             data["scenes"],
             quest_definitions=data["quests"],
+            power_definitions=data.get("powers", {}),
         )
 
         engine.choose(state, "TAKE_DEAD_RELAY")
@@ -99,6 +100,7 @@ class VerticalSliceTests(unittest.TestCase):
         engine = RulesEngine(
             data["scenes"],
             quest_definitions=data["quests"],
+            power_definitions=data.get("powers", {}),
         )
 
         engine.choose(state, "TAKE_DEAD_RELAY")
@@ -135,6 +137,7 @@ class VerticalSliceTests(unittest.TestCase):
         engine = RulesEngine(
             data["scenes"],
             quest_definitions=data["quests"],
+            power_definitions=data.get("powers", {}),
         )
 
         engine.choose(state, "TAKE_DEAD_RELAY")
@@ -191,6 +194,7 @@ class VerticalSliceTests(unittest.TestCase):
         engine = RulesEngine(
             data["scenes"],
             quest_definitions=data["quests"],
+            power_definitions=data.get("powers", {}),
         )
 
         engine.choose(state, "TAKE_DEAD_RELAY")
@@ -222,11 +226,27 @@ class VerticalSliceTests(unittest.TestCase):
         self.assertEqual(technique["mastery_xp"], 8.0)
         self.assertEqual(technique["stage"], "discovered")
         self.assertEqual(
+            state.quests["QUEST_GATE_TWELVE_ECHO"]["stage"],
+            "STAGE_FIRST_USE",
+        )
+        self.assertEqual(state.player["power_resources"]["trace_resonance"], 10)
+
+        engine.choose(state, "USE_SIGNAL_PULSE_ON_RELAY")
+        self.assertEqual(state.player["power_resources"]["trace_resonance"], 8.0)
+        self.assertIn("COND_ECHO_STRAIN", state.player["conditions"])
+        self.assertIn("KNOW_GATE_TWELVE_RECENT_TRACE", state.knowledge)
+        self.assertEqual(technique["mastery_xp"], 10.0)
+        self.assertEqual(technique["stage"], "unstable")
+
+        engine.choose(state, "RECOVER_TRACE_RESONANCE_THIRTY_MINUTES")
+        self.assertEqual(state.player["power_resources"]["trace_resonance"], 9.0)
+        self.assertNotIn("COND_ECHO_STRAIN", state.player["conditions"])
+        self.assertEqual(
             state.quests["QUEST_GATE_TWELVE_ECHO"]["status"],
             "completed",
         )
 
-        engine.choose(state, "END_FIRST_POWER_SESSION")
+        engine.choose(state, "END_TRACE_ECHO_FOUNDATION_SLICE")
         self.assertTrue(state.flags["vertical_slice_01.power_session_complete"])
 
 
