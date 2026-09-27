@@ -199,3 +199,34 @@ Verification boundary:
 - The newest regression tests are authored but a complete latest branch-equivalent test run is still required before increasing the verified count.
 
 Current next engineering action: reconstruct/run the latest full suite, fix any regression, then review the provisional story/power material before promoting it to confirmed canon.
+
+
+## Update — exact 93-test suite and permanent save/resume regressions
+
+Verified on 2026-09-27.
+
+The current foundation branch was reconstructed locally from live GitHub file contents. The reconstruction's Git blob hashes matched the live repository for the source, test, and JSON content files used for verification. After the initial exact reconstruction passed 89 tests, a new permanent regression module was committed for save/resume route continuity and its Git blob was separately matched before the final rerun.
+
+Observed command:
+
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -v
+```
+
+Observed final result:
+
+```text
+Ran 93 tests in 0.027s
+
+OK
+```
+
+New permanent coverage in `tests/test_save_resume_routes.py` verifies JSON save/load continuity for:
+- cooperative direct route;
+- solo direct route;
+- failure/recovery route with Tamsin joining;
+- first Trace Echo power-practice route.
+
+This **93 passed / 0 failed** result supersedes the earlier intermediate 58-test checkpoint and the previously mentioned unverified “13 focused checks” note. The 13-check statement must not be used as current evidence.
+
+Current next engineering focus on `foundation/text-rpg-systems`: define the provisional `ABILITY_TRACE_ECHO` resource/drawback/recovery contract and strengthen cross-reference validation before adding stronger power content.
