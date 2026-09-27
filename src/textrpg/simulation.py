@@ -97,6 +97,8 @@ def advance_time(state: GameState, minutes: int) -> list[str]:
         duration = record.get("duration_minutes")
         if duration is None:
             continue
+        if not isinstance(record, dict):
+            raise RuleError(f"Timed condition record must be mutable: {condition_id}")
         next_duration = max(
             0,
             _minutes(
@@ -117,12 +119,7 @@ def advance_time(state: GameState, minutes: int) -> list[str]:
         state.player["conditions"] = conditions
 
     for condition_id, next_duration in duration_updates.items():
-        record = conditions[condition_id]
-        if not isinstance(record, dict):
-            # The Mapping check above deliberately allows read-only mappings in
-            # corrupted state; mutation requires a mutable dict.
-            raise RuleError(f"Condition record must be mutable: {condition_id}")
-        record["duration_minutes"] = next_duration
+        conditions[condition_id]["duration_minutes"] = next_duration
 
     for condition_id in expired:
         del conditions[condition_id]
