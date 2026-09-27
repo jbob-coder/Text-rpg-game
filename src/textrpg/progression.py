@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from math import isfinite
-from typing import Any, Dict, Iterable
+from typing import Any, Dict, Iterable, MutableMapping
 
 from .core import GameState, RuleError
 
@@ -71,8 +71,8 @@ def gain_ability_mastery(
             "mastery_stage": "discovered",
             "techniques": {},
         }
-    if not isinstance(existing, dict):
-        raise RuleError(f"Ability state must be an object: {ability_id}")
+    if not isinstance(existing, MutableMapping):
+        raise RuleError(f"Ability state must be mutable: {ability_id}")
 
     current_mastery = existing.get("mastery_xp", 0.0)
     if (
