@@ -314,5 +314,36 @@ class ExtendedStateTests(unittest.TestCase):
         )
 
 
+    def test_choice_time_advances_and_expires_timed_conditions(self):
+        engine = RulesEngine({
+            "A": {
+                "choices": [{
+                    "id": "WAIT",
+                    "text": "Wait five minutes.",
+                    "time_cost_minutes": 5,
+                    "outcomes": {"default": {"effects": []}},
+                }]
+            }
+        })
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            player={
+                "conditions": {
+                    "COND_SHORT": {
+                        "duration_minutes": 5,
+                        "severity": 1,
+                        "source": "test",
+                        "tags": [],
+                        "modifiers": {},
+                    }
+                }
+            },
+        )
+        engine.choose(state, "WAIT")
+        self.assertEqual(state.time_minutes, 5)
+        self.assertNotIn("COND_SHORT", state.player["conditions"])
+
+
 if __name__ == "__main__":
     unittest.main()
