@@ -2,7 +2,16 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from hashlib import sha256
+from math import isfinite
 from typing import Any, Dict, List, Mapping, MutableMapping, Optional
+
+from .modifiers import (
+    effective_player_value as _hardened_effective_player_value,
+    modifier_breakdown,
+    resolve_set_context,
+    validate_modifier_mapping,
+    validate_set_definitions,
+)
 
 
 class RuleError(ValueError):
@@ -32,8 +41,15 @@ def _set_path(data: MutableMapping[str, Any], path: str, value: Any) -> None:
 
 def _add_path(data: MutableMapping[str, Any], path: str, delta: float) -> None:
     current = _get_path(data, path, 0)
-    if not isinstance(current, (int, float)):
-        raise RuleError(f"Cannot add numeric delta to non-numeric path: {path}")
+    if (
+        isinstance(current, bool)
+        or not isinstance(current, (int, float))
+        or not isfinite(float(current))
+        or isinstance(delta, bool)
+        or not isinstance(delta, (int, float))
+        or not isfinite(float(delta))
+    ):
+        raise RuleError(f"Cannot add invalid numeric delta/value at path: {path}")
     _set_path(data, path, current + delta)
 
 
@@ -90,55 +106,23 @@ def effective_player_value(
     path: str,
     *,
     equipment_sets: Optional[Mapping[str, Mapping[str, Any]]] = None,
+    set_definitions: Optional[Mapping[str, Mapping[str, Any]]] = None,
 ) -> float:
-    """Return one effective numeric player value without mutating base state.
-
-    This is the single aggregation contract used by scene checks and derived-stat
-    formulas. It applies direct equipment, reached set thresholds, perks, and active
-    conditions exactly once.
-    """
-    base = _get_path(state.player, path, 0)
-    if not isinstance(base, (int, float)):
-        raise RuleError(f"Player value is not numeric: {path}")
-
-    total = float(base)
-    set_counts: Dict[str, int] = {}
-
-    for equipped in state.equipment.values():
-        if not isinstance(equipped, Mapping):
-            raise RuleError("Equipment records must be objects")
-        total += float(equipped.get("modifiers", {}).get(path, 0))
-        set_id = equipped.get("set_id")
-        if set_id:
-            set_counts[set_id] = set_counts.get(set_id, 0) + 1
-
-    definitions = equipment_sets or {}
-    for set_id, count in set_counts.items():
-        definition = definitions.get(set_id, {})
-        for pieces_raw, bonus in definition.get("thresholds", {}).items():
-            try:
-                pieces = int(pieces_raw)
-            except (TypeError, ValueError) as exc:
-                raise RuleError(
-                    f"Invalid equipment-set threshold for {set_id}: {pieces_raw}"
-                ) from exc
-            if count >= pieces:
-                total += float(bonus.get("modifiers", {}).get(path, 0))
-
-    for perk_id, perk in state.perks.items():
-        if not isinstance(perk, Mapping):
-            raise RuleError(f"Perk record must be an object: {perk_id}")
-        total += float(perk.get("modifiers", {}).get(path, 0))
-
-    conditions = state.player.get("conditions", {})
-    if conditions is not None and not isinstance(conditions, Mapping):
-        raise RuleError("player.conditions must be an object")
-    for condition_id, condition in (conditions or {}).items():
-        if not isinstance(condition, Mapping):
-            raise RuleError(f"Condition record must be an object: {condition_id}")
-        total += float(condition.get("modifiers", {}).get(path, 0))
-
-    return total
+    """Compatibility wrapper over the single hardened effective-value pipeline."""
+    try:
+        resolved = resolve_set_context(
+            set_definitions,
+            equipment_sets=equipment_sets,
+        )
+        return float(
+            _hardened_effective_player_value(
+                state,
+                path,
+                resolved,
+            )
+        )
+    except ValueError as exc:
+        raise RuleError(f"Invalid effective player value for {path}: {exc}") from exc
 
 
 class RulesEngine:
@@ -153,9 +137,20 @@ class RulesEngine:
         *,
         equipment_sets: Optional[Mapping[str, Mapping[str, Any]]] = None,
         quest_definitions: Optional[Mapping[str, Mapping[str, Any]]] = None,
+        set_definitions: Optional[Mapping[str, Mapping[str, Any]]] = None,
     ):
         self.scenes = dict(scenes)
-        self.equipment_sets = dict(equipment_sets or {})
+        try:
+            resolved_sets = resolve_set_context(
+                set_definitions,
+                equipment_sets=equipment_sets,
+            )
+            self.equipment_sets = dict(resolved_sets or {})
+            validate_set_definitions(self.equipment_sets)
+        except ValueError as exc:
+            raise RuleError(f"Invalid equipment-set definitions: {exc}") from exc
+        # Internal alias retained for hardening-era callers/documentation.
+        self.set_definitions = self.equipment_sets
         self.quest_definitions = dict(quest_definitions or {})
 
     def get_scene(self, state: GameState) -> Dict[str, Any]:
@@ -271,12 +266,42 @@ class RulesEngine:
                 raise RuleError(f"Unknown condition type: {kind}")
         return True
 
+    def explain_player_value(self, state: GameState, path: str) -> Dict[str, Any]:
+        """Explain one effective/derived value without duplicating rule arithmetic."""
+        if path.startswith("derived."):
+            # Local import avoids a module cycle: stats imports GameState/RuleError.
+            from .stats import derived_stat_breakdown
+
+            key = path.removeprefix("derived.")
+            breakdown = derived_stat_breakdown(
+                state,
+                key,
+                equipment_sets=self.equipment_sets,
+            )
+            return {
+                "kind": "derived",
+                "path": path,
+                "total": float(breakdown["total"]),
+                "breakdown": breakdown,
+            }
+
+        try:
+            breakdown = modifier_breakdown(
+                state,
+                path,
+                equipment_sets=self.equipment_sets,
+            )
+        except ValueError as exc:
+            raise RuleError(f"Invalid effective player value for {path}: {exc}") from exc
+        return {
+            "kind": "effective",
+            "path": path,
+            "total": float(breakdown["total"]),
+            "breakdown": breakdown,
+        }
+
     def _effective_player_value(self, state: GameState, path: str) -> float:
-        return effective_player_value(
-            state,
-            path,
-            equipment_sets=self.equipment_sets,
-        )
+        return float(self.explain_player_value(state, path)["total"])
 
     def _resolve_check(self, state: GameState, check: Dict[str, Any], choice_id: str) -> Dict[str, Any]:
         stat_path = check["stat"]
@@ -449,9 +474,18 @@ class RulesEngine:
                 if npc_id in state.party:
                     state.party.remove(npc_id)
             elif kind == "add_perk":
+                try:
+                    modifiers = validate_modifier_mapping(
+                        effect.get("modifiers", {}),
+                        source=f"perk:{effect['perk_id']}",
+                    )
+                except ValueError as exc:
+                    raise RuleError(
+                        f"Invalid perk modifiers for {effect['perk_id']}: {exc}"
+                    ) from exc
                 state.perks[effect["perk_id"]] = {
                     "source": effect.get("source", "unknown"),
-                    "modifiers": effect.get("modifiers", {}),
+                    "modifiers": modifiers,
                     "tags": effect.get("tags", []),
                 }
             else:
