@@ -3,6 +3,7 @@ import unittest
 from textrpg import GameState, RuleError, gain_ability_mastery
 from textrpg.powers import (
     ability_evolution_status,
+    ability_player_view,
     discover_technique,
     evolve_ability,
     gain_technique_mastery,
@@ -218,6 +219,89 @@ class PowerRuntimeTests(unittest.TestCase):
                 state, "ABILITY_FLUX", "EVOLUTION_STABLE", definition
             )
 
+
+    def test_player_view_shows_only_discovered_techniques_and_visible_evolutions(self):
+        state = self.state()
+        state.player["power_resources"]["max_flux"] = 20.0
+        ability = state.abilities["ABILITY_FLUX"]
+        ability["control"] = 12
+        ability["efficiency"] = 8
+        ability["evolution_visibility"] = {
+            "EVOLUTION_HIDDEN": {"state": "hidden"},
+            "EVOLUTION_HINTED": {
+                "state": "hinted",
+                "label": "Unknown evolution",
+                "hint": "A stable pattern may be required.",
+            },
+            "EVOLUTION_KNOWN": {
+                "state": "known",
+                "known_requirements": ["mastery", "TECHNIQUE_PULSE"],
+            },
+        }
+
+        definition = {
+            "name": "Flux",
+            "resource": {
+                "label": "Flux",
+                "current_path": "power_resources.flux",
+                "max_path": "power_resources.max_flux",
+            },
+            "techniques": {
+                "TECHNIQUE_PULSE": {"name": "Pulse"},
+                "TECHNIQUE_SECRET": {"name": "Secret Technique"},
+            },
+            "evolutions": {
+                "EVOLUTION_HIDDEN": {
+                    "name": "Hidden Form",
+                    "requirements": {"mastery_xp_min": 9999},
+                },
+                "EVOLUTION_HINTED": {
+                    "name": "Hinted Form",
+                    "requirements": {"rank_min": 4},
+                },
+                "EVOLUTION_KNOWN": {
+                    "name": "Stable Flux",
+                    "requirements": {"knowledge": ["KNOW_SECRET_PATTERN"]},
+                },
+            },
+        }
+
+        view = ability_player_view(state, "ABILITY_FLUX", definition)
+        self.assertEqual(view["name"], "Flux")
+        self.assertEqual(view["resource"], {"label": "Flux", "current": 12.0, "max": 20.0})
+        self.assertEqual(view["control"], 12.0)
+        self.assertEqual(view["efficiency"], 8.0)
+        self.assertEqual(
+            [item["technique_id"] for item in view["techniques"]],
+            ["TECHNIQUE_PULSE"],
+        )
+        self.assertEqual(
+            [item["evolution_id"] for item in view["evolutions"]],
+            ["EVOLUTION_HINTED", "EVOLUTION_KNOWN"],
+        )
+        self.assertNotIn("requirements", view["evolutions"][0])
+        self.assertNotIn("requirements", view["evolutions"][1])
+        self.assertEqual(view["evolutions"][0]["name"], "Unknown evolution")
+        self.assertEqual(view["evolutions"][1]["name"], "Stable Flux")
+
+    def test_player_view_reports_cooldown_remaining_without_advancing_time(self):
+        state = self.state()
+        use_technique(state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition())
+        view = ability_player_view(
+            state,
+            "ABILITY_FLUX",
+            {"techniques": {"TECHNIQUE_PULSE": {"name": "Pulse"}}},
+        )
+        technique = view["techniques"][0]
+        self.assertFalse(technique["ready"])
+        self.assertEqual(technique["cooldown_remaining_minutes"], 15)
+        self.assertEqual(state.time_minutes, 0)
+
+    def test_player_view_rejects_boolean_numeric_fields(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["control"] = True
+        with self.assertRaises(RuleError):
+            ability_player_view(state, "ABILITY_FLUX")
 
 if __name__ == "__main__":
     unittest.main()
