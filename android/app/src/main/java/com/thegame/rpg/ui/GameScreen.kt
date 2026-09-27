@@ -4,6 +4,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
@@ -797,8 +799,32 @@ private fun MapSection(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(220.dp)
+                        .testTag("world-map-canvas")
                         .background(PixelColors.Deep)
-                        .border(2.dp, PixelColors.Muted),
+                        .border(2.dp, PixelColors.Muted)
+                        .pointerInput(map.nodes) {
+                            detectTapGestures { tap ->
+                                val width = size.width.toFloat().coerceAtLeast(1f)
+                                val height = size.height.toFloat().coerceAtLeast(1f)
+                                val nearest = map.nodes.minByOrNull { node ->
+                                    val px = (node.x.coerceIn(0.0, 100.0) / 100.0 * width).toFloat()
+                                    val py = (node.y.coerceIn(0.0, 100.0) / 100.0 * height).toFloat()
+                                    val dx = tap.x - px
+                                    val dy = tap.y - py
+                                    dx * dx + dy * dy
+                                }
+                                if (nearest != null) {
+                                    val px = (nearest.x.coerceIn(0.0, 100.0) / 100.0 * width).toFloat()
+                                    val py = (nearest.y.coerceIn(0.0, 100.0) / 100.0 * height).toFloat()
+                                    val dx = tap.x - px
+                                    val dy = tap.y - py
+                                    val threshold = 30.dp.toPx()
+                                    if (dx * dx + dy * dy <= threshold * threshold) {
+                                        selectedId = nearest.id
+                                    }
+                                }
+                            }
+                        },
                 ) {
                     fun point(id: String): Offset? {
                         val node = map.nodes.firstOrNull { it.id == id } ?: return null
