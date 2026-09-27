@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from math import isfinite
-from typing import Any, Dict, Mapping
+from typing import Any, Dict, Mapping, MutableMapping
 
 from .core import GameState, RuleError
 from .modifiers import effective_player_value, modifier_breakdown, resolve_set_context
@@ -153,11 +153,24 @@ def initialize_resources(
     set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
     equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, float]:
+    """Normalize resource values atomically from authoritative derived maxima."""
     set_definitions = resolve_set_context(
         set_definitions,
         equipment_sets=equipment_sets,
     )
-    resources = state.player.setdefault("resources", {})
+    if not isinstance(state.player, MutableMapping):
+        raise RuleError("player state must be mutable")
+
+    existing = state.player.get("resources")
+    if existing is None:
+        resources: MutableMapping[str, Any] = {}
+        created = True
+    elif not isinstance(existing, MutableMapping):
+        raise RuleError("player.resources must be a mutable object")
+    else:
+        resources = existing
+        created = False
+
     derived = derived_stats(state, set_definitions)
     maxima = {
         "health": derived["max_health"],
@@ -165,11 +178,38 @@ def initialize_resources(
         "focus": derived["max_focus"],
         "resolve": derived["max_resolve"],
     }
+
+    planned = dict(resources)
     for key, maximum in maxima.items():
+        if (
+            isinstance(maximum, bool)
+            or not isinstance(maximum, (int, float))
+            or not isfinite(float(maximum))
+            or float(maximum) < 0
+        ):
+            raise RuleError(f"Derived resource maximum is invalid: {key}")
+
+        maximum = float(maximum)
         max_key = f"max_{key}"
-        resources[max_key] = maximum
+        planned[max_key] = maximum
+
         if refill or key not in resources:
-            resources[key] = maximum
-        else:
-            resources[key] = max(0.0, min(float(resources[key]), maximum))
+            planned[key] = maximum
+            continue
+
+        current = resources[key]
+        if (
+            isinstance(current, bool)
+            or not isinstance(current, (int, float))
+            or not isfinite(float(current))
+        ):
+            raise RuleError(f"Current resource must be a finite number: {key}")
+        planned[key] = max(0.0, min(float(current), maximum))
+
+    # All calculations and validation succeeded; now commit.
+    if created:
+        state.player["resources"] = planned
+    else:
+        resources.clear()
+        resources.update(planned)
     return maxima
