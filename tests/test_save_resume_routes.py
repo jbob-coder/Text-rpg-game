@@ -92,14 +92,17 @@ class SaveResumeRouteTests(unittest.TestCase):
             ],
             [
                 "PRACTICE_SIGNAL_PULSE_ONE_HOUR",
-                "END_FIRST_POWER_SESSION",
+                "USE_SIGNAL_PULSE_ON_RELAY",
+                "RECOVER_TRACE_RESONANCE_THIRTY_MINUTES",
+                "END_TRACE_ECHO_FOUNDATION_SLICE",
             ],
         )
         technique = state.abilities["ABILITY_TRACE_ECHO"]["techniques"][
             "TECHNIQUE_SIGNAL_PULSE"
         ]
-        self.assertEqual(technique["mastery_xp"], 8.0)
-        self.assertEqual(technique["stage"], "discovered")
+        self.assertEqual(technique["mastery_xp"], 10.0)
+        self.assertEqual(technique["stage"], "unstable")
+        self.assertEqual(state.player["power_resources"]["trace_resonance"], 9.0)
         self.assertTrue(state.flags["vertical_slice_01.power_session_complete"])
 
 
