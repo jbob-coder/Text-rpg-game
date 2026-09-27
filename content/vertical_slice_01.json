@@ -1218,17 +1218,79 @@
     },
     "TRACE_DIRECTIONAL_DISCOVERY_RESULT": {
       "title": "Direction, Not Mastery",
-      "body": "Directional Trace is finally reproducible enough to exist as a technique. It begins at zero technique mastery. The training that unlocked it does not make it mastered, cheap, or safe; it only gives you a reliable method for attempting it.",
+      "body": "Directional Trace is finally reproducible enough to exist as a technique, but it begins at zero mastery. The next safe step is one controlled attempt against the service fork below Gate Twelve, where the earlier trace is already documented.",
+      "choices": [
+        {
+          "id": "TRY_DIRECTIONAL_TRACE_ON_SERVICE_FORK",
+          "text": "Attempt one controlled Directional Trace on the service fork.",
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "technique_use",
+                  "ability_id": "ABILITY_TRACE_ECHO",
+                  "technique_id": "TECHNIQUE_DIRECTIONAL_TRACE"
+                },
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_DIRECTIONAL_TRACE_POINTS_DEEPER",
+                  "source": "TECHNIQUE_DIRECTIONAL_TRACE",
+                  "confidence": 0.7,
+                  "private": true
+                },
+                {
+                  "type": "set_flag",
+                  "key": "trace_echo.directional_first_use",
+                  "value": true
+                }
+              ],
+              "next_scene": "TRACE_DIRECTIONAL_AFTERSHOCK"
+            }
+          }
+        }
+      ]
+    },
+    "TRACE_DIRECTIONAL_AFTERSHOCK": {
+      "title": "A Stronger Echo, A Stronger Cost",
+      "body": "The directional impression is clearer than Signal Pulse, but the strain is immediately worse. The trace points deeper below the mapped service level. You stop before repeating the technique and let the result stand on its own.",
+      "choices": [
+        {
+          "id": "RECOVER_DIRECTIONAL_TRACE_ONE_HOUR",
+          "text": "Recover for one hour before ending the session.",
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "power_recover",
+                  "ability_id": "ABILITY_TRACE_ECHO",
+                  "minutes": 60,
+                  "quality": 1
+                }
+              ],
+              "next_scene": "TRACE_DIRECTIONAL_SESSION_END"
+            }
+          }
+        }
+      ]
+    },
+    "TRACE_DIRECTIONAL_SESSION_END": {
+      "title": "A New Route, Not a Free Upgrade",
+      "body": "Directional Trace is now real but still untrained. The first use produced actionable information, consumed a large share of Trace Resonance, and caused heavier sensory strain. Future progress will require practice, recovery, and decisions about whether to follow the deeper route.",
       "choices": [
         {
           "id": "END_DIRECTIONAL_TRACE_PROTOTYPE",
-          "text": "Record the new technique and end the current prototype branch.",
+          "text": "Record the result and end the current prototype branch.",
           "outcomes": {
             "default": {
               "effects": [
                 {
                   "type": "set_flag",
                   "key": "vertical_slice_01.directional_trace_discovered",
+                  "value": true
+                },
+                {
+                  "type": "set_flag",
+                  "key": "vertical_slice_01.directional_trace_first_use_complete",
                   "value": true
                 }
               ]
@@ -1371,6 +1433,10 @@
       },
       "KNOW_TRACE_ECHO_PATTERN_STABLE": {
         "label": "Stable Trace Echo pattern theory"
+      },
+      "KNOW_DIRECTIONAL_TRACE_POINTS_DEEPER": {
+        "label": "Directional Trace points deeper below Gate Twelve",
+        "description": "A controlled Directional Trace suggests the strongest recent residual path continues below the mapped service level."
       }
     },
     "perks": {
