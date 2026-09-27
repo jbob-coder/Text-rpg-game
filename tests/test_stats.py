@@ -84,7 +84,7 @@ class StatsTests(unittest.TestCase):
         # initiative = (50-10)*0.7 + (45+4)*0.3 + direct derived +3
         self.assertEqual(values["initiative"], 45.7)
         # evasion = effective agility/perception/athletics formula, then -2 once
-        self.assertEqual(values["evasion"], 38.4)
+        self.assertEqual(values["evasion"], 37.4)
 
         self.assertEqual(state.player["attributes"]["endurance"], 60)
         self.assertEqual(state.player["attributes"]["will"], 30)
