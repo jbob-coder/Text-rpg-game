@@ -12,6 +12,7 @@ from .powers import (
     gain_technique_mastery,
     practice_technique,
     recover_power_resource,
+    technique_discovery_status,
     technique_stage,
     technique_use_status,
     use_technique,
@@ -41,7 +42,7 @@ from .social import (
     update_goal_progress,
 )
 from .stats import ATTRIBUTE_SPECS, SKILL_CATALOG, derived_stats, effective_player_value, initialize_resources, validate_player_stats
-from .validation import assert_valid_content_pack, assert_valid_scenes, validate_content_pack, validate_scenes
+from .validation import assert_valid_content_pack, assert_valid_scenes, validate_content_pack, validate_registries, validate_scenes
 from .visuals import (
     assert_valid_character_visuals,
     character_generation_contract,
@@ -104,6 +105,7 @@ __all__ = [
     "transition_story_state",
     "update_goal_progress",
     "technique_available",
+    "technique_discovery_status",
     "technique_stage",
     "technique_use_status",
     "train",
@@ -111,6 +113,7 @@ __all__ = [
     "use_technique",
     "validate_character_visuals",
     "validate_content_pack",
+    "validate_registries",
     "validate_player_stats",
     "validate_power_definitions",
     "validate_quest_definitions",
