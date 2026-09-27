@@ -383,6 +383,44 @@ The static authored-test count is now **235** across 17 test files.
 
 This remains a static/source hardening result. Exact V6 runtime execution is still pending.
 
+
+## Condition application and progression boundary hardening
+
+A further static pass found two additional API-boundary classes where malformed caller/state data could either be silently accepted or surface as implementation exceptions rather than rule errors.
+
+### Condition application
+
+`apply_condition()` previously used `modifiers or {}`. A falsey but invalid value such as `[]` was therefore silently converted to an empty modifier mapping instead of being rejected.
+
+The same path attempted `list(tags)` after rejecting strings/bytes only, so a non-iterable tag value could raise a Python `TypeError` instead of a `RuleError`.
+
+V6 now:
+- requires non-null condition modifiers to be mappings;
+- preserves an explicit empty mapping without coercing invalid falsey objects;
+- requires tags to be a non-string iterable before materialization;
+- requires mutable player/condition containers;
+- attaches a newly-created condition container only after all metadata and structure have passed preflight.
+
+### Ability progression
+
+`gain_ability_mastery()` now:
+- requires a non-empty ability ID;
+- requires mutable top-level `state.abilities` before changing nested ability state;
+- rejects corrupt existing rank state instead of silently overwriting it during a mastery gain.
+
+`technique_available()`, which is also a public query API, now validates:
+- ability ID and requirement mapping shape;
+- ability/knowledge/perk state containers;
+- finite/non-negative rank/mastery state;
+- finite/non-negative rank/mastery requirements;
+- list-backed non-empty knowledge/perk requirement IDs.
+
+Five regression methods were added covering invalid condition modifiers/tags, immutable ability containers, corrupt rank state, and malformed technique-availability queries.
+
+The static authored-test count is now **240** across 17 test files.
+
+A fresh Codex runtime-environment check during this pass returned no registered environments, so exact suite execution remains unavailable here and no pass claim is made.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
@@ -394,7 +432,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 235 authored test methods;
+- V6 has 240 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
