@@ -67,13 +67,16 @@ This is an operational completion standard, not a claim that software can be mat
 
 ## Current application
 
-At the time this policy was recorded:
+The user has reconfirmed this policy: do not depend on intermediate user testing; continue development and internal verification until a final acceptance/release candidate is ready.
+
+Current verified repository reference for this policy refresh:
 
 - active stage: late Stage 3;
 - active implementation branch: `integration/rules-ability-v6-reconcile`;
-- exact referenced V6 SHA before this documentation-only context update: `7718cd422d69eb4515dfa5beb7dd4ab117c1c6fe`;
-- authored test inventory: 251 methods across 17 test files;
+- exact referenced V6 SHA: `7f5f104fb839068bdfaf5cec72f37129ae20d463`;
+- authored test inventory: 258 methods across 17 test files;
 - exact full runtime suite on that V6 SHA: not yet executed;
-- Foundation and V5 remain protected from this policy documentation change.
+- Foundation remains `b3340bc38e63e916c6cc7a8538ed1e8a34011112`;
+- V5 remains `fd36b9f1d14528f3dc5eb37e20e9120af25af036`.
 
-The runtime suite remains the principal promotion gate.
+The runtime suite remains the principal promotion gate. Static hardening and automated verification work may continue without requiring the user to test intermediate builds.
