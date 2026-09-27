@@ -513,9 +513,112 @@ def discover_ability(
     )
     return ability
 
-def discover_technique(state: GameState, ability_id: str, technique_id: str) -> Dict[str, Any]:
+def technique_discovery_status(
+    state: GameState,
+    ability_id: str,
+    technique_id: str,
+    definition: Mapping[str, Any] | None = None,
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
+) -> Dict[str, Any]:
+    """Report whether an authored technique may be discovered now."""
     if not isinstance(technique_id, str) or not technique_id:
         raise RuleError("Technique ID must be a non-empty string")
+    if definition is not None:
+        errors = validate_technique_definition(definition)
+        if errors:
+            raise RuleError(
+                "Invalid technique definition: " + "; ".join(errors)
+            )
+
+    ability = state.abilities.get(ability_id)
+    if ability is None:
+        return {
+            "available": False,
+            "reasons": ["ability_missing"],
+            "already_discovered": False,
+        }
+    rank, mastery_xp, _rank_floor = _ability_progression_state(
+        ability,
+        ability_id,
+    )
+
+    techniques = ability.get("techniques", {})
+    if techniques is None:
+        techniques = {}
+    if not isinstance(techniques, Mapping):
+        raise RuleError(f"Ability techniques must be an object: {ability_id}")
+    if technique_id in techniques:
+        record = techniques[technique_id]
+        if not isinstance(record, Mapping):
+            raise RuleError(f"Technique state must be an object: {technique_id}")
+        return {
+            "available": True,
+            "reasons": [],
+            "already_discovered": True,
+        }
+
+    if not isinstance(state.knowledge, Mapping):
+        raise RuleError("state.knowledge must be an object")
+    if not isinstance(state.perks, Mapping):
+        raise RuleError("state.perks must be an object")
+    if not isinstance(state.inventory, Mapping):
+        raise RuleError("state.inventory must be an object")
+    if not isinstance(state.flags, Mapping):
+        raise RuleError("state.flags must be an object")
+
+    requirements = (definition or {}).get("discovery_requirements", {})
+    reasons: list[str] = []
+
+    if rank < int(requirements.get("rank_min", 0)):
+        reasons.append("rank")
+    if mastery_xp < float(requirements.get("mastery_xp_min", 0)):
+        reasons.append("mastery_xp")
+
+    for knowledge_id in requirements.get("knowledge", []):
+        if knowledge_id not in state.knowledge:
+            reasons.append(f"knowledge:{knowledge_id}")
+    for perk_id in requirements.get("perks", []):
+        if perk_id not in state.perks:
+            reasons.append(f"perk:{perk_id}")
+
+    reasons.extend(
+        _extra_requirements_met(
+            state,
+            requirements,
+            equipment_sets=equipment_sets,
+        )
+    )
+
+    for required_id, stage_min in requirements.get("techniques", {}).items():
+        record = techniques.get(required_id)
+        if record is None:
+            reasons.append(f"technique:{required_id}:{stage_min}")
+            continue
+        if not isinstance(record, Mapping):
+            raise RuleError(f"Technique state must be an object: {required_id}")
+        if not _stage_at_least(record.get("stage", "unknown"), stage_min):
+            reasons.append(f"technique:{required_id}:{stage_min}")
+
+    return {
+        "available": not reasons,
+        "reasons": reasons,
+        "already_discovered": False,
+    }
+
+
+def discover_technique(
+    state: GameState,
+    ability_id: str,
+    technique_id: str,
+    definition: Mapping[str, Any] | None = None,
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
+) -> Dict[str, Any]:
+    if not isinstance(technique_id, str) or not technique_id:
+        raise RuleError("Technique ID must be a non-empty string")
+    if not _STABLE_ID.fullmatch(technique_id):
+        raise RuleError(f"Technique ID must be a stable uppercase ID: {technique_id!r}")
     _validate_history_container(state)
 
     ability = state.abilities.get(ability_id)
@@ -523,17 +626,34 @@ def discover_technique(state: GameState, ability_id: str, technique_id: str) -> 
         raise RuleError(f"Unknown or invalid ability state: {ability_id}")
     _ability_progression_state(ability, ability_id)
 
-    techniques = ability.get("techniques")
-    if techniques is None:
-        techniques = {}
-        ability["techniques"] = techniques
-    if not isinstance(techniques, MutableMapping):
+    existing_techniques = ability.get("techniques")
+    if existing_techniques is None:
+        techniques: MutableMapping[str, Any] = {}
+        create_container = True
+    elif not isinstance(existing_techniques, MutableMapping):
         raise RuleError(f"Ability techniques must be an object: {ability_id}")
+    else:
+        techniques = existing_techniques
+        create_container = False
+
     if technique_id in techniques:
         existing = techniques[technique_id]
         if not isinstance(existing, MutableMapping):
             raise RuleError(f"Technique state must be an object: {technique_id}")
         return existing
+
+    status = technique_discovery_status(
+        state,
+        ability_id,
+        technique_id,
+        definition,
+        equipment_sets=equipment_sets,
+    )
+    if not status["available"]:
+        raise RuleError(
+            f"Technique cannot be discovered: {technique_id} "
+            f"({', '.join(status['reasons'])})"
+        )
 
     record = {
         "mastery_xp": 0.0,
@@ -542,6 +662,10 @@ def discover_technique(state: GameState, ability_id: str, technique_id: str) -> 
         "ready_at_minutes": state.time_minutes,
         "discovered_at_minutes": state.time_minutes,
     }
+
+    # Discovery requirements/history/state are valid; commit now.
+    if create_container:
+        ability["techniques"] = techniques
     techniques[technique_id] = record
     state.history.append(
         {
