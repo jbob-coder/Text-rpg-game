@@ -1711,3 +1711,58 @@ This is not an executed pass count.
 ### NEXT_ACTION
 
 Continue only targeted integrity review for concrete defects. Exact V6 runtime execution remains the required promotion gate.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-STATUS-PROVENANCE-20
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after this pass: `931550e56db13e85a23407a160603392f703457f`
+
+### ISSUE FOUND
+
+[VERIFIED STATIC] `inspect_status_value()` returned raw modifier provenance from the rules engine.
+
+A mechanically active condition hidden from the player could therefore leak its stable condition ID through an explanation key such as:
+
+`condition:COND_HIDDEN`
+
+This violated the status-screen disclosure contract even though the normal conditions list filtered the condition correctly.
+
+### FIX
+
+[IMPLEMENTED] Player-facing status inspection now sanitizes condition provenance.
+
+- runtime-hidden conditions (`visible: false`) are redacted;
+- authored hidden conditions (`player_visible: false`) are redacted when definitions are supplied;
+- hidden stable condition IDs are not returned;
+- their aggregate numeric contribution is represented as `unidentified_modifier`;
+- the same sanitization applies recursively to derived-stat `direct_modifiers`.
+
+The authoritative final value remains unchanged.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added tests covering:
+- runtime-hidden condition ID redaction from an attribute explanation;
+- definition-hidden condition ID redaction from a derived-value explanation.
+
+[VERIFIED STATIC] V6 now contains **229 authored test methods across 17 test files**.
+
+This is not an executed pass count.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 suite execution remains pending.
+
+### SCOPE CONTROL
+
+[DECISION] No feature expansion, no stat-schema migration, no V5/Foundation mutation, and no context-branch consolidation were performed.
+
+### NEXT_ACTION
+
+Continue only targeted integrity/disclosure review for concrete defects. Exact V6 runtime execution remains the required promotion gate.
