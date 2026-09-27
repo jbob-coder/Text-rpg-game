@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from math import isfinite
 from typing import Any, Dict, Mapping
 
 from .schema import ATTRIBUTE_SPECS, DERIVED_STAT_SPECS, SKILL_CATALOG
@@ -34,8 +35,12 @@ def _get_path(data: Mapping[str, Any], path: str, default: Any = None) -> Any:
 
 
 def _numeric(value: Any, *, source: str, path: str) -> float:
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
-        raise ValueError(f"Non-numeric modifier/value at {source}:{path}")
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not isfinite(float(value))
+    ):
+        raise ValueError(f"Non-finite numeric modifier/value at {source}:{path}")
     return float(value)
 
 
