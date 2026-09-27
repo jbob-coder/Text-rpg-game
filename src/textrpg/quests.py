@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from typing import Any, Dict, Mapping
+from typing import Any, Dict, Mapping, MutableMapping
 
 from .core import GameState, RuleError
 
@@ -147,6 +147,10 @@ def start_quest(
     quest_id: str,
     definition: Mapping[str, Any],
 ) -> Dict[str, Any]:
+    if not isinstance(state.quests, MutableMapping):
+        raise RuleError("state.quests must be mutable")
+    if not isinstance(state.history, list):
+        raise RuleError("state.history must be a list")
     if quest_id in state.quests:
         raise RuleError(f"Quest already exists in state: {quest_id}")
 
@@ -212,7 +216,10 @@ def complete_objective(
     objective_id: str,
     definition: Mapping[str, Any],
 ) -> Dict[str, Any]:
-    quest = _active_quest(state, quest_id)
+    errors = validate_quest_definitions({quest_id: definition})
+    if errors:
+        raise RuleError("Invalid quest definition:\n- " + "\n- ".join(errors))
+    quest = _quest_for_mutation(state, quest_id)
     stage_id = quest["stage"]
     stage = _stage_definition(quest_id, stage_id, definition)
     objectives = stage.get("objectives", {})
@@ -258,7 +265,10 @@ def fail_objective(
     objective_id: str,
     definition: Mapping[str, Any],
 ) -> Dict[str, Any]:
-    quest = _active_quest(state, quest_id)
+    errors = validate_quest_definitions({quest_id: definition})
+    if errors:
+        raise RuleError("Invalid quest definition:\n- " + "\n- ".join(errors))
+    quest = _quest_for_mutation(state, quest_id)
     stage_id = quest["stage"]
     stage = _stage_definition(quest_id, stage_id, definition)
     objectives = stage.get("objectives", {})
@@ -302,7 +312,7 @@ def fail_quest(
     *,
     reason: str,
 ) -> Dict[str, Any]:
-    quest = _active_quest(state, quest_id)
+    quest = _quest_for_mutation(state, quest_id)
     quest["status"] = "failed"
     quest["updated_at_minutes"] = state.time_minutes
     event = {
@@ -318,12 +328,32 @@ def fail_quest(
     return event
 
 
-def _active_quest(state: GameState, quest_id: str) -> Dict[str, Any]:
+def _active_quest(state: GameState, quest_id: str) -> Mapping[str, Any]:
+    if not isinstance(state.quests, Mapping):
+        raise RuleError("state.quests must be an object")
     quest = state.quests.get(quest_id)
-    if not quest:
+    if not isinstance(quest, Mapping):
         raise RuleError(f"Quest is not active in state: {quest_id}")
     if quest.get("status") != "active":
         raise RuleError(f"Quest is not active: {quest_id}")
+    return quest
+
+
+def _quest_for_mutation(state: GameState, quest_id: str) -> MutableMapping[str, Any]:
+    quest = _active_quest(state, quest_id)
+    if not isinstance(quest, MutableMapping):
+        raise RuleError(f"Quest state must be mutable: {quest_id}")
+    if not isinstance(state.history, list):
+        raise RuleError("state.history must be a list")
+
+    for field in ("completed_objectives", "failed_objectives", "history"):
+        value = quest.get(field)
+        if not isinstance(value, list):
+            raise RuleError(f"Quest {field} must be a list: {quest_id}")
+
+    stage = quest.get("stage")
+    if not isinstance(stage, str) or not stage:
+        raise RuleError(f"Quest stage must be a non-empty string: {quest_id}")
     return quest
 
 
