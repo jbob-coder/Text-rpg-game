@@ -208,7 +208,7 @@ def _registry_reference_errors(
                     kind = condition.get("type")
                     if kind in {"knows", "not_knows", "npc_knows", "npc_not_knows"}:
                         require("knowledge", condition.get("knowledge_id"), location)
-                    elif kind == "has_perk":
+                    elif kind in {"has_perk", "not_has_perk"}:
                         require("perks", condition.get("perk_id"), location)
                     elif kind == "item_min":
                         require("items", condition.get("item_id"), location)
@@ -431,7 +431,10 @@ def validate_content_pack(
         for choice_index, choice in enumerate(scene.get("choices", [])):
             for gate_name in ("visible_if", "requires"):
                 for condition_index, condition in enumerate(choice.get(gate_name, [])):
-                    if condition.get("type") != "technique_discoverable":
+                    if condition.get("type") not in {
+                        "technique_discoverable",
+                        "technique_stage_min",
+                    }:
                         continue
                     location = (
                         f"{scene_id}.choices[{choice_index}].{gate_name}."
