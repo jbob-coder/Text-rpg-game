@@ -951,3 +951,99 @@ rather than interleaving validation and persistent writes.
 2. Apply the same validate-before-commit rule to other stateful systems where needed.
 3. Recompare integration V2 against foundation before every promotion decision.
 4. Execute the full suite on an exact checkout when a supported runtime is available.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-TRANSACTIONAL-INTEGRATION-11
+
+Repository: `jbob-coder/Text-rpg-game`
+Active integration branch: `integration/rules-ability-v2`
+
+### CURRENT_OBJECTIVE
+
+[IN_PROGRESS] Continue hardening the integrated rules/ability/status runtime so invalid authored data or corrupt persistent state cannot leave partial mutations.
+
+### FOUNDATION SYNC
+
+[VERIFIED] Foundation advanced during this workstream with updated project-status documentation and `tests/test_save_resume_routes.py`.
+
+[VERIFIED] Integration V2 was synchronized with foundation through a real two-parent merge commit rather than merely copying files:
+
+`c54ca69179599cb40fa5db151f1cec6d8be6ac75`
+
+Parents:
+- prior integration tip `c514d7b94cc922061dea2dca2698b93c14864bf9`
+- foundation head `3efc7f733fdbda1d60964cb73d6449c3c0808e1b`
+
+At the synchronization comparison, Integration V2 was **61 commits ahead and 0 behind foundation**.
+
+[REPORTED_VERIFICATION] Foundation's current `IMPLEMENTATION_STATUS.md` reports a hash-matched branch-equivalent execution of:
+
+`PYTHONPATH=src python -m unittest discover -s tests -v`
+
+with **93 tests passed, 0 failed**.
+
+That result verifies foundation, not the additional Integration V2 changes.
+
+### TRANSACTIONAL RULES HARDENING
+
+[IMPLEMENTED] `RulesEngine.choose()` now validates time cost, next-scene target, turn state, history container, and time-advance viability before effects.
+
+[IMPLEMENTED] Choice execution uses a deep `GameState` snapshot and restores it if any later authored effect fails. This prevents partial persistence from a multi-effect choice.
+
+[IMPLEMENTED] Invalid next-scene targets are rejected before effect mutation.
+
+### TIME / SIMULATION ATOMICITY
+
+[IMPLEMENTED] `advance_time()` validates the full timed-condition update plan before changing world time or durations.
+
+[IMPLEMENTED] Recovery, skill training, attribute training, and technique practice preflight time advancement before their own persistent changes.
+
+[IMPLEMENTED] Training validates existing skill/attribute state before committing progression.
+
+### RESOURCE ATOMICITY
+
+[IMPLEMENTED] `initialize_resources()` now plans and validates Health/Stamina/Focus/Resolve normalization before writing any current/max values.
+
+[IMPLEMENTED] Boolean, NaN, infinity, or otherwise invalid current resource state is rejected without partial `max_*` mutation.
+
+### ABILITY ATOMICITY
+
+[IMPLEMENTED] Technique use preflights mutable resource paths, mutable ability/technique records, history, condition container, mastery/rank-floor state, and authored modifier contracts before spending resources.
+
+[IMPLEMENTED] Ability evolution validates and plans form/rank/tags/item/perk/evolution/history changes before commit.
+
+[IMPLEMENTED] Direct ability and technique mastery progression computes valid next values before assignment.
+
+[IMPLEMENTED] Ability/technique discovery validates state containers and history before creating persistent records.
+
+### TEST COVERAGE AUTHORED
+
+[IMPLEMENTED] New tests cover:
+- invalid timed conditions without clock mutation
+- invalid training state without resource/stat mutation
+- atomic resource-normalization failures
+- invalid next-scene before choice effects
+- rollback when a later choice effect fails
+- invalid condition container before technique spend
+- invalid timed condition before technique practice
+- invalid evolution form/tags/inventory/history
+- corrupt ability/technique mastery without additional mutation
+- invalid ability/technique discovery state
+
+### PLUGIN / EXECUTION PATH
+
+[VERIFIED] GitHub remains the active connected repository tool.
+
+[BLOCKER] No registered Codex execution environment is available for exact branch execution in this chat.
+
+[OPTION] Remote Desktop Commander was surfaced as a suitable connector for running the exact repository suite on an authorized user computer. It is not connected yet, so no claim of local execution through it is made.
+
+### NEXT_ACTION
+
+1. Recompare Integration V2 against foundation because concurrent work may continue.
+2. Execute the exact Integration V2 suite when a terminal-capable authorized environment is connected.
+3. Fix any integration-only regression before promotion.
+4. Continue reviewing remaining stateful systems for validate-plan-commit/rollback behavior.
+5. Keep the seven-vs-eight core-stat decision separate from runtime hardening.
