@@ -55,5 +55,34 @@ class PersistenceTests(unittest.TestCase):
         loaded = loads_state(dumps_state(state))
         self.assertEqual(loaded.abilities, state.abilities)
 
+
+    def test_non_object_save_payload_is_rejected(self):
+        with self.assertRaises(RuleError):
+            loads_state("[]")
+
+    def test_invalid_json_is_wrapped_as_rule_error(self):
+        with self.assertRaises(RuleError):
+            loads_state("{not-json")
+
+    def test_boolean_schema_version_is_rejected(self):
+        raw = '{"schema_version":true,"seed":"x","scene_id":"A"}'
+        with self.assertRaises(RuleError):
+            loads_state(raw)
+
+    def test_unknown_current_schema_field_is_rejected_instead_of_dropped(self):
+        raw = (
+            '{"schema_version":1,"seed":"x","scene_id":"A",'
+            '"future_field":{"value":1}}'
+        )
+        with self.assertRaises(RuleError):
+            loads_state(raw)
+
+    def test_required_identity_fields_must_be_non_empty_strings(self):
+        with self.assertRaises(RuleError):
+            loads_state('{"schema_version":1,"seed":"","scene_id":"A"}')
+        with self.assertRaises(RuleError):
+            loads_state('{"schema_version":1,"seed":"x","scene_id":3}')
+
+
 if __name__ == "__main__":
     unittest.main()
