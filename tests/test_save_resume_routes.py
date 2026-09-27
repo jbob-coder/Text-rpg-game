@@ -140,19 +140,29 @@ class SaveResumeRouteTests(unittest.TestCase):
             ],
             [
                 "DISCOVER_DIRECTIONAL_TRACE",
+                "TRY_DIRECTIONAL_TRACE_ON_SERVICE_FORK",
+                "RECOVER_DIRECTIONAL_TRACE_ONE_HOUR",
                 "END_DIRECTIONAL_TRACE_PROTOTYPE",
             ],
         )
+        directional = state.abilities["ABILITY_TRACE_ECHO"]["techniques"][
+            "TECHNIQUE_DIRECTIONAL_TRACE"
+        ]
+        self.assertEqual(directional["mastery_xp"], 3.0)
         self.assertIn(
-            "TECHNIQUE_DIRECTIONAL_TRACE",
-            state.abilities["ABILITY_TRACE_ECHO"]["techniques"],
+            "KNOW_DIRECTIONAL_TRACE_POINTS_DEEPER",
+            state.knowledge,
         )
+        self.assertNotIn("COND_ECHO_STRAIN", state.player["conditions"])
         self.assertEqual(
             state.quests["QUEST_TRACE_STABILIZATION"]["status"],
             "completed",
         )
         self.assertTrue(
             state.flags["vertical_slice_01.directional_trace_discovered"]
+        )
+        self.assertTrue(
+            state.flags["vertical_slice_01.directional_trace_first_use_complete"]
         )
 
 
