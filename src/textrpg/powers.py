@@ -199,6 +199,26 @@ def validate_power_definitions(
                     errors.append(
                         f"{ability_id}.{technique_id} drawback condition_id must be stable uppercase ID"
                     )
+
+        technique_ids = set(techniques.keys())
+        for technique_id, technique in techniques.items():
+            if not isinstance(technique, Mapping):
+                continue
+            for field_name in ("discovery_requirements", "requirements"):
+                requirements = technique.get(field_name, {})
+                if not isinstance(requirements, Mapping):
+                    continue
+                for required_id in requirements.get("techniques", {}):
+                    if required_id == technique_id:
+                        errors.append(
+                            f"{ability_id}.{technique_id}.{field_name} "
+                            "cannot require itself"
+                        )
+                    elif required_id not in technique_ids:
+                        errors.append(
+                            f"{ability_id}.{technique_id}.{field_name} "
+                            f"references unknown technique {required_id!r}"
+                        )
     return errors
 
 
