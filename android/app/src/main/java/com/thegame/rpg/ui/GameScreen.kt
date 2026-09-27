@@ -353,13 +353,20 @@ private fun NarrativePanel(
     }
     val visibleBody = snapshot.body.take(visibleChars)
 
-    PixelPanel(modifier = modifier, title = snapshot.title) {
+    PixelPanel(modifier = modifier) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .testTag("narrative-scroll")
                 .verticalScroll(rememberScrollState()),
         ) {
+            Text(
+                text = snapshot.title,
+                color = PixelColors.Cyan,
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.testTag("scene-title"),
+            )
+            Spacer(Modifier.height(8.dp))
             SceneIllustration(
                 locationId = snapshot.location,
                 modifier = Modifier
