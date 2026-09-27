@@ -128,6 +128,16 @@ def validate_scenes(scenes: Mapping[str, Dict[str, Any]]) -> List[str]:
             if not isinstance(choice.get("text"), str) or not choice.get("text", "").strip():
                 errors.append(f"{location}.text must be non-empty")
 
+            time_cost = choice.get("time_cost_minutes", 0)
+            if (
+                isinstance(time_cost, bool)
+                or not isinstance(time_cost, int)
+                or time_cost < 0
+            ):
+                errors.append(
+                    f"{location}.time_cost_minutes must be a non-negative integer"
+                )
+
             _walk_conditions(choice.get("visible_if", []), f"{location}.visible_if", errors)
             _walk_conditions(choice.get("requires", []), f"{location}.requires", errors)
 
