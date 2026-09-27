@@ -4,7 +4,9 @@ from math import isfinite
 from typing import Any, Dict, Mapping, MutableMapping
 
 from .core import GameState, RuleError
+from .modifiers import validate_modifier_mapping
 from .progression import gain_ability_mastery, technique_available
+from .schema import ATTRIBUTE_SPECS, SKILL_CATALOG
 from .simulation import advance_time, apply_condition
 from .stats import effective_player_value
 
@@ -60,6 +62,18 @@ def _set_player_path(state: GameState, path: str, value: Any) -> None:
             current[part] = node
         current = node
     current[parts[-1]] = value
+
+
+
+def _validate_spendable_resource_path(path: Any, label: str) -> str:
+    if not isinstance(path, str) or not path:
+        raise RuleError(f"{label} must be a non-empty string")
+    parts = path.split(".")
+    if len(parts) != 2 or parts[0] not in {"resources", "power_resources"} or not parts[1]:
+        raise RuleError(
+            f"{label} must use resources.<id> or power_resources.<id>"
+        )
+    return path
 
 
 def _numeric_player_path(state: GameState, path: str) -> float:
@@ -431,7 +445,10 @@ def validate_technique_definition(definition: Any) -> list[str]:
     for section in ("attributes", "skills"):
         values = requirements.get(section, {})
         if isinstance(values, Mapping):
+            catalog = ATTRIBUTE_SPECS if section == "attributes" else SKILL_CATALOG
             for key, minimum in values.items():
+                if key not in catalog:
+                    errors.append(f"requirements.{section} has unknown ID {key!r}")
                 _number(
                     minimum,
                     f"requirements.{section}.{key}",
@@ -459,8 +476,10 @@ def validate_technique_definition(definition: Any) -> list[str]:
         errors.append("costs must be an object")
     else:
         for path, amount in costs.items():
-            if not isinstance(path, str) or not path:
-                errors.append("cost paths must be non-empty strings")
+            try:
+                _validate_spendable_resource_path(path, "Technique cost path")
+            except RuleError as exc:
+                errors.append(str(exc))
                 continue
             _number(amount, f"costs.{path}", errors, minimum=0.0)
 
@@ -503,16 +522,20 @@ def validate_technique_definition(definition: Any) -> list[str]:
                     errors.append(f"{location}.duration_minutes must be an integer or null")
                 elif duration < 0:
                     errors.append(f"{location}.duration_minutes must be >= 0")
+            tags = drawback.get("tags", [])
+            if isinstance(tags, (str, bytes)) or not isinstance(tags, (list, tuple)):
+                errors.append(f"{location}.tags must be a list/tuple of non-empty strings")
+            elif not all(isinstance(tag, str) and tag for tag in tags):
+                errors.append(f"{location}.tags must be a list/tuple of non-empty strings")
             modifiers = drawback.get("modifiers")
             if modifiers is not None:
-                if not isinstance(modifiers, Mapping):
-                    errors.append(f"{location}.modifiers must be an object")
-                else:
-                    for path, value in modifiers.items():
-                        if not isinstance(path, str) or not path:
-                            errors.append(f"{location}.modifier paths must be non-empty strings")
-                            continue
-                        _number(value, f"{location}.modifiers.{path}", errors)
+                try:
+                    validate_modifier_mapping(
+                        modifiers,
+                        source=f"technique.{location}",
+                    )
+                except ValueError as exc:
+                    errors.append(f"{location}.modifiers invalid: {exc}")
 
     return errors
 
@@ -546,7 +569,10 @@ def validate_evolution_definition(definition: Any) -> list[str]:
     for section in ("attributes", "skills"):
         values = requirements.get(section, {})
         if isinstance(values, Mapping):
+            catalog = ATTRIBUTE_SPECS if section == "attributes" else SKILL_CATALOG
             for key, minimum in values.items():
+                if key not in catalog:
+                    errors.append(f"requirements.{section} has unknown ID {key!r}")
                 _number(
                     minimum,
                     f"requirements.{section}.{key}",
@@ -620,14 +646,13 @@ def validate_evolution_definition(definition: Any) -> list[str]:
                 errors.append(f"{location} must be an object")
                 continue
             modifiers = perk.get("modifiers", {})
-            if not isinstance(modifiers, Mapping):
-                errors.append(f"{location}.modifiers must be an object")
-            else:
-                for path, value in modifiers.items():
-                    if not isinstance(path, str) or not path:
-                        errors.append(f"{location}.modifier paths must be non-empty strings")
-                        continue
-                    _number(value, f"{location}.modifiers.{path}", errors)
+            try:
+                validate_modifier_mapping(
+                    modifiers,
+                    source=location,
+                )
+            except ValueError as exc:
+                errors.append(f"{location}.modifiers invalid: {exc}")
             perk_tags = perk.get("tags", [])
             if not isinstance(perk_tags, list) or not all(
                 isinstance(v, str) and v for v in perk_tags
@@ -659,6 +684,30 @@ def technique_use_status(
     technique = ability.get("techniques", {}).get(technique_id)
     if not technique:
         return {"available": False, "reasons": ["technique_undiscovered"]}
+    if not isinstance(technique, Mapping):
+        raise RuleError(f"Technique state must be an object: {technique_id}")
+
+    technique_mastery = technique.get("mastery_xp", 0.0)
+    if (
+        isinstance(technique_mastery, bool)
+        or not isinstance(technique_mastery, (int, float))
+        or not isfinite(float(technique_mastery))
+        or float(technique_mastery) < 0
+    ):
+        raise RuleError(f"Technique mastery state is invalid: {technique_id}")
+
+    ability_mastery = ability.get("mastery_xp", 0.0)
+    if (
+        isinstance(ability_mastery, bool)
+        or not isinstance(ability_mastery, (int, float))
+        or not isfinite(float(ability_mastery))
+        or float(ability_mastery) < 0
+    ):
+        raise RuleError(f"Ability mastery state is invalid: {ability_id}")
+
+    uses = technique.get("uses", 0)
+    if isinstance(uses, bool) or not isinstance(uses, int) or uses < 0:
+        raise RuleError(f"Technique uses state is invalid: {technique_id}")
 
     requirements = definition.get("requirements", {})
     if not technique_available(state, ability_id, dict(requirements)):
@@ -676,7 +725,14 @@ def technique_use_status(
     if not _stage_at_least(technique.get("stage", "unknown"), minimum_stage):
         reasons.append(f"stage:{minimum_stage}")
 
-    ready_at = int(technique.get("ready_at_minutes", 0))
+    ready_at_raw = technique.get("ready_at_minutes", 0)
+    if (
+        isinstance(ready_at_raw, bool)
+        or not isinstance(ready_at_raw, int)
+        or ready_at_raw < 0
+    ):
+        raise RuleError(f"Technique ready_at_minutes is invalid: {technique_id}")
+    ready_at = ready_at_raw
     if state.time_minutes < ready_at:
         reasons.append(f"cooldown:{ready_at - state.time_minutes}")
 
@@ -949,14 +1005,7 @@ def _visible_text(value: Any, label: str, *, default: str | None = None) -> str:
 
 
 def _visible_resource_path(path: Any, label: str) -> str:
-    if not isinstance(path, str) or not path:
-        raise RuleError(f"{label} must be a non-empty string")
-    parts = path.split(".")
-    if len(parts) != 2 or parts[0] not in {"resources", "power_resources"} or not parts[1]:
-        raise RuleError(
-            f"{label} must use resources.<id> or power_resources.<id>"
-        )
-    return path
+    return _validate_spendable_resource_path(path, label)
 
 
 def ability_player_view(
