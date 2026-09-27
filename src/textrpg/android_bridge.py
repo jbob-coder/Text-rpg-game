@@ -6,6 +6,7 @@ from typing import Any, Dict, Mapping
 
 from .content import LoadedContentPack, load_content_pack
 from .core import GameState, RuleError
+from .equipment import DEFAULT_SLOTS, equip_item
 from .persistence import load_state, save_state
 from .status import build_status_view
 
@@ -90,26 +91,20 @@ class AndroidGameSession:
             if not isinstance(definition, Mapping):
                 definition = {}
             label = definition.get("label")
+            slot = definition.get("slot")
+            equippable = isinstance(slot, str) and slot in DEFAULT_SLOTS
             items.append(
                 {
                     "id": item_id,
                     "name": label if isinstance(label, str) and label else _pretty_id(item_id, "ITEM_"),
                     "quantity": quantity,
+                    "equippable": equippable,
+                    "slot": slot if equippable else None,
                 }
             )
 
         equipment: list[Dict[str, Any]] = []
-        for slot in (
-            "head",
-            "body",
-            "hands",
-            "legs",
-            "feet",
-            "main_hand",
-            "off_hand",
-            "accessory_1",
-            "accessory_2",
-        ):
+        for slot in DEFAULT_SLOTS:
             record = state.equipment.get(slot)
             if not isinstance(record, Mapping):
                 equipment.append({"slot": slot, "equipped": False})
@@ -426,6 +421,105 @@ class AndroidGameSession:
             raise AndroidBridgeError(
                 "TRAVEL_ERROR",
                 "Travel could not be completed.",
+                technical_detail=str(exc),
+            ) from exc
+
+    def equip(self, item_id: str) -> Dict[str, Any]:
+        """Equip one authored inventory item through the authoritative rules."""
+        if not isinstance(item_id, str) or not item_id:
+            raise AndroidBridgeError(
+                "EQUIP_ERROR",
+                "Choose a valid item to equip.",
+            )
+
+        definitions = self.content.registries.get("items", {})
+        definition = definitions.get(item_id) if isinstance(definitions, Mapping) else None
+        if not isinstance(definition, Mapping):
+            raise AndroidBridgeError(
+                "EQUIP_ERROR",
+                "That item cannot be equipped.",
+                technical_detail=f"Missing authored equipment definition: {item_id}",
+            )
+
+        before = deepcopy(self.state.snapshot())
+        try:
+            authored_item = dict(definition)
+            authored_item["item_id"] = item_id
+            previous = equip_item(
+                self.state,
+                authored_item,
+                consume_inventory=True,
+            )
+            if isinstance(previous, Mapping):
+                replaced_id = previous.get("item_id")
+                if isinstance(replaced_id, str) and replaced_id:
+                    self.state.inventory[replaced_id] = (
+                        self.state.inventory.get(replaced_id, 0) + 1
+                    )
+
+            self.state.history.append(
+                {
+                    "type": "equipment_changed",
+                    "action": "equip",
+                    "item_id": item_id,
+                    "slot": authored_item.get("slot"),
+                    "turn": self.state.turn,
+                    "time_minutes": self.state.time_minutes,
+                }
+            )
+            return self.scene_view()
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError(
+                "EQUIP_ERROR",
+                "That item could not be equipped.",
+                technical_detail=str(exc),
+            ) from exc
+
+    def unequip(self, slot: str) -> Dict[str, Any]:
+        """Return equipped gear to inventory without bypassing authoritative state."""
+        if not isinstance(slot, str) or slot not in DEFAULT_SLOTS:
+            raise AndroidBridgeError(
+                "EQUIP_ERROR",
+                "Choose a valid equipment slot.",
+            )
+
+        before = deepcopy(self.state.snapshot())
+        try:
+            record = self.state.equipment.get(slot)
+            if not isinstance(record, Mapping):
+                raise AndroidBridgeError(
+                    "EQUIP_ERROR",
+                    "That equipment slot is already empty.",
+                )
+            item_id = record.get("item_id")
+            if not isinstance(item_id, str) or not item_id:
+                raise RuleError(f"Equipped slot has no valid item_id: {slot}")
+
+            del self.state.equipment[slot]
+            self.state.inventory[item_id] = self.state.inventory.get(item_id, 0) + 1
+            self.state.history.append(
+                {
+                    "type": "equipment_changed",
+                    "action": "unequip",
+                    "item_id": item_id,
+                    "slot": slot,
+                    "turn": self.state.turn,
+                    "time_minutes": self.state.time_minutes,
+                }
+            )
+            return self.scene_view()
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError(
+                "EQUIP_ERROR",
+                "That item could not be unequipped.",
                 technical_detail=str(exc),
             ) from exc
 
