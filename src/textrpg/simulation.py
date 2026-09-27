@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from math import isfinite
 from typing import Any, Dict, Iterable, Mapping, MutableMapping
 
@@ -217,11 +218,19 @@ def train(
         maximum=100.0,
     )
 
+    had_resources = "resources" in state.player
+    resources_before = deepcopy(state.player.get("resources")) if had_resources else None
     initialize_resources(state, set_definitions=set_definitions)
     resources = state.player["resources"]
     stamina_cost = minutes / 60.0 * 8.0 * intensity
     focus_cost = minutes / 60.0 * 5.0 * intensity
     if resources["stamina"] < stamina_cost or resources["focus"] < focus_cost:
+        # Resource normalization is part of the training transaction. A failed
+        # session must not leave newly written maxima/clamps behind.
+        if had_resources:
+            state.player["resources"] = resources_before
+        else:
+            state.player.pop("resources", None)
         raise RuleError("Insufficient stamina or focus for this training session")
 
     if create_skills:
