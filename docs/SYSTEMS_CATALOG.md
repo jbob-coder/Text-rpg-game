@@ -203,6 +203,45 @@ Recovery advances the same simulation clock used by cooldowns and timed conditio
 
 A stronger provisional technique, `TECHNIQUE_DIRECTIONAL_TRACE`, is defined but not granted. Its authored requirements include later ability rank/mastery, specific knowledge, a tolerance perk, improved Perception/Will, and Power skill. This preserves the rule that stronger techniques are earned rather than automatically unlocked by discovering the ability.
 
+## Technique discovery gates
+
+Technique discovery is now distinct from technique use.
+
+A technique can define `discovery_requirements` using:
+- ability rank and mastery XP
+- required knowledge
+- required perks
+- attribute/skill minimums
+- flags
+- inventory items
+- mastery stage of prerequisite techniques
+
+Runtime discovery refuses to create the technique record until those requirements are satisfied. Choices can also use the `technique_discoverable` condition to present the opportunity as locked/available without duplicating the underlying rules.
+
+The provisional `TECHNIQUE_DIRECTIONAL_TRACE` contract currently requires:
+- Trace Echo rank 1
+- 100 ability mastery XP
+- `KNOW_TRACE_ECHO_PATTERN_STABLE`
+- `PERK_TRACE_TOLERANCE`
+- Perception 45
+- Will 45
+- Powers skill 10
+- `TECHNIQUE_SIGNAL_PULSE` at least `learned`
+
+These values remain provisional balancing data.
+
+## Stable content registries
+
+A content pack may define stable registries for:
+- knowledge
+- perks
+- items
+- conditions
+
+When registries are present, authored scene gates/effects and power requirements/drawbacks are cross-checked against them before play. Initial inventory, player knowledge, perks, and conditions are also checked by the content loader.
+
+Registries provide ID integrity and metadata ownership; they do not automatically grant the registered content.
+
 ## Ability discovery and practice
 
 Ability discovery is separate from mastery.
