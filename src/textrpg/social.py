@@ -176,14 +176,16 @@ def share_knowledge(
         raise RuleError(
             f"NPC knowledge record must be an object: {speaker}/{knowledge_id}"
         )
-    try:
-        importance = max(1, int(source.get("secrecy", 0)))
-    except (TypeError, ValueError) as exc:
+    source_secrecy = source.get("secrecy", 0)
+    if isinstance(source_secrecy, bool) or not isinstance(source_secrecy, int):
         raise RuleError(
-            f"Knowledge secrecy must be integer-like: {speaker}/{knowledge_id}"
-        ) from exc
-    if importance > 5:
-        raise RuleError("Memory importance must be in range 1..5")
+            f"Knowledge secrecy must be an integer: {speaker}/{knowledge_id}"
+        )
+    if source_secrecy < 0 or source_secrecy > 5:
+        raise RuleError(
+            f"Knowledge secrecy must be in range 0..5: {speaker}/{knowledge_id}"
+        )
+    importance = max(1, source_secrecy)
 
     existing_recipient = state.npcs.get(recipient)
     if existing_recipient is not None:
@@ -227,6 +229,13 @@ def eligible_leak_targets(
     Eligibility is a query. Merely asking who could receive a leak must not create
     NPC shells, relationship entries, knowledge containers, or other durable state.
     """
+    if not isinstance(holder, str) or not holder:
+        raise RuleError("Leak holder must be a non-empty string")
+    if not isinstance(knowledge_id, str) or not knowledge_id:
+        raise RuleError("Leak knowledge_id must be a non-empty string")
+    if not isinstance(network, Mapping):
+        raise RuleError("Leak network must be an object")
+
     npc = state.npcs.get(holder)
     if npc is None:
         return []
@@ -244,18 +253,37 @@ def eligible_leak_targets(
             f"NPC knowledge record must be an object: {holder}/{knowledge_id}"
         )
 
-    secrecy = int(record.get("secrecy", 0))
+    secrecy = record.get("secrecy", 0)
+    if isinstance(secrecy, bool) or not isinstance(secrecy, int):
+        raise RuleError(f"Knowledge secrecy must be an integer: {holder}/{knowledge_id}")
+    if secrecy < 0 or secrecy > 5:
+        raise RuleError(
+            f"Knowledge secrecy must be in range 0..5: {holder}/{knowledge_id}"
+        )
+
     personality = npc.get("personality", {})
     if not isinstance(personality, Mapping):
         raise RuleError(f"NPC personality must be an object: {holder}")
-    discipline = float(personality.get("discipline", 50))
-    honesty = float(personality.get("honesty", 50))
+    discipline = _finite_number(
+        personality.get("discipline", 50),
+        f"NPC discipline {holder}",
+    )
+    honesty = _finite_number(
+        personality.get("honesty", 50),
+        f"NPC honesty {holder}",
+    )
     pressure = (100 - discipline) + max(0.0, honesty - 70.0) - secrecy * 12
     if pressure < 35:
         return []
 
+    connected = network.get(holder, [])
+    if isinstance(connected, (str, bytes)) or not isinstance(connected, Iterable):
+        raise RuleError(f"Leak network targets must be iterable: {holder}")
+
     targets = []
-    for target in network.get(holder, []):
+    for target in connected:
+        if not isinstance(target, str) or not target:
+            raise RuleError("Leak network target IDs must be non-empty strings")
         if target == holder:
             continue
         target_state = state.npcs.get(target)
@@ -290,6 +318,16 @@ def execute_leak_event(
     """
     if isinstance(max_recipients, bool) or not isinstance(max_recipients, int) or max_recipients < 1:
         raise RuleError("Leak event max_recipients must be an integer >= 1")
+    if not isinstance(event_id, str) or not event_id:
+        raise RuleError("Leak event_id must be a non-empty string")
+    if recipients is not None:
+        if isinstance(recipients, (str, bytes)) or not isinstance(recipients, Iterable):
+            raise RuleError("Leak recipients must be an iterable of NPC IDs")
+        recipient_values = list(recipients)
+        if not all(isinstance(value, str) and value for value in recipient_values):
+            raise RuleError("Leak recipient IDs must be non-empty strings")
+    else:
+        recipient_values = None
     if not isinstance(state.history, list):
         raise RuleError("state.history must be a list")
 
@@ -300,10 +338,10 @@ def execute_leak_event(
         network=network,
     )
 
-    if recipients is None:
+    if recipient_values is None:
         selected = candidates[:max_recipients]
     else:
-        selected = sorted(set(recipients))
+        selected = sorted(set(recipient_values))
         if len(selected) > max_recipients:
             raise RuleError(
                 f"Leak event selected {len(selected)} recipients but max is {max_recipients}"
