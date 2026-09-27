@@ -1,0 +1,43 @@
+name: Android Pixel Client
+
+on:
+  push:
+    branches:
+      - feature/android-pixel-client-v1
+  pull_request:
+    paths:
+      - "android/**"
+      - "src/**"
+      - "tests/**"
+      - ".github/workflows/android-pixel-client.yml"
+
+jobs:
+  android-unit-and-assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Set up Gradle 9.4.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "9.4.1"
+
+      - name: Install Android API 37
+        run: sdkmanager "platforms;android-37" "build-tools;36.0.0"
+
+      - name: Run Android unit tests
+        run: gradle -p android testDebugUnitTest --stacktrace
+
+      - name: Assemble debug APK
+        run: gradle -p android :app:assembleDebug --stacktrace
