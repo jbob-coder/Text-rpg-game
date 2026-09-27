@@ -1,8 +1,56 @@
 from __future__ import annotations
 
+from math import isfinite
 from typing import Any, Dict, Mapping
 
 from .core import GameState, RuleError
+from .modifiers import (
+    active_set_bonuses,
+    equipment_modifiers,
+    set_counts,
+    validate_modifier_mapping,
+)
+from .schema import ATTRIBUTE_SPECS, SKILL_CATALOG
+
+
+def _validate_requirements(item_id: str, requirements: Any) -> tuple[Dict[str, float], Dict[str, float]]:
+    if requirements is None:
+        return {}, {}
+    if not isinstance(requirements, Mapping):
+        raise RuleError(f"Equipment requirements must be an object: {item_id}")
+
+    attr_requirements = requirements.get("attributes", {})
+    skill_requirements = requirements.get("skills", {})
+    if not isinstance(attr_requirements, Mapping):
+        raise RuleError(f"Equipment attribute requirements must be an object: {item_id}")
+    if not isinstance(skill_requirements, Mapping):
+        raise RuleError(f"Equipment skill requirements must be an object: {item_id}")
+
+    validated_attrs: Dict[str, float] = {}
+    for key, minimum in attr_requirements.items():
+        if key not in ATTRIBUTE_SPECS:
+            raise RuleError(f"Unknown equipment attribute requirement: {key}")
+        if (
+            isinstance(minimum, bool)
+            or not isinstance(minimum, (int, float))
+            or not isfinite(float(minimum))
+        ):
+            raise RuleError(f"Equipment attribute requirement must be finite numeric: {key}")
+        validated_attrs[key] = float(minimum)
+
+    validated_skills: Dict[str, float] = {}
+    for key, minimum in skill_requirements.items():
+        if key not in SKILL_CATALOG:
+            raise RuleError(f"Unknown equipment skill requirement: {key}")
+        if (
+            isinstance(minimum, bool)
+            or not isinstance(minimum, (int, float))
+            or not isfinite(float(minimum))
+        ):
+            raise RuleError(f"Equipment skill requirement must be finite numeric: {key}")
+        validated_skills[key] = float(minimum)
+
+    return validated_attrs, validated_skills
 
 
 DEFAULT_SLOTS = (
@@ -33,14 +81,27 @@ def equip_item(
     if consume_inventory and state.inventory.get(item_id, 0) < 1:
         raise RuleError(f"Item not present in inventory: {item_id}")
 
-    requirements = item.get("requirements", {})
+    try:
+        modifiers = validate_modifier_mapping(
+            item.get("modifiers", {}),
+            source=f"equipment:{item_id}",
+        )
+    except ValueError as exc:
+        raise RuleError(f"Invalid equipment modifiers for {item_id}: {exc}") from exc
+
+    # Equipment requirements deliberately use permanent/base values. Allowing one
+    # equipped item to qualify another can create circular or order-dependent builds.
+    attr_requirements, skill_requirements = _validate_requirements(
+        item_id,
+        item.get("requirements", {}),
+    )
     attrs = state.player.get("attributes", {})
     skills = state.player.get("skills", {})
-    for key, minimum in requirements.get("attributes", {}).items():
-        if float(attrs.get(key, 0)) < float(minimum):
+    for key, minimum in attr_requirements.items():
+        if float(attrs.get(key, 0)) < minimum:
             raise RuleError(f"Attribute requirement not met: {key} >= {minimum}")
-    for key, minimum in requirements.get("skills", {}).items():
-        if float(skills.get(key, 0)) < float(minimum):
+    for key, minimum in skill_requirements.items():
+        if float(skills.get(key, 0)) < minimum:
             raise RuleError(f"Skill requirement not met: {key} >= {minimum}")
 
     previous = state.equipment.get(slot)
@@ -48,7 +109,7 @@ def equip_item(
         "item_id": item_id,
         "slot": slot,
         "quality": item.get("quality", "standard"),
-        "modifiers": dict(item.get("modifiers", {})),
+        "modifiers": modifiers,
         "tags": list(item.get("tags", [])),
         "set_id": item.get("set_id"),
         "active_ability": item.get("active_ability"),
@@ -60,43 +121,3 @@ def equip_item(
         if state.inventory[item_id] <= 0:
             del state.inventory[item_id]
     return previous
-
-
-def set_counts(state: GameState) -> Dict[str, int]:
-    counts: Dict[str, int] = {}
-    for record in state.equipment.values():
-        set_id = record.get("set_id")
-        if set_id:
-            counts[set_id] = counts.get(set_id, 0) + 1
-    return counts
-
-
-def active_set_bonuses(
-    state: GameState,
-    set_definitions: Mapping[str, Mapping[str, Any]],
-) -> Dict[str, Dict[str, Any]]:
-    counts = set_counts(state)
-    active: Dict[str, Dict[str, Any]] = {}
-    for set_id, count in counts.items():
-        definition = set_definitions.get(set_id, {})
-        thresholds = definition.get("thresholds", {})
-        for pieces_raw, bonus in thresholds.items():
-            pieces = int(pieces_raw)
-            if count >= pieces:
-                active[f"{set_id}:{pieces}"] = dict(bonus)
-    return active
-
-
-def equipment_modifiers(
-    state: GameState,
-    set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
-) -> Dict[str, float]:
-    total: Dict[str, float] = {}
-    for record in state.equipment.values():
-        for path, value in record.get("modifiers", {}).items():
-            total[path] = total.get(path, 0.0) + float(value)
-    if set_definitions:
-        for bonus in active_set_bonuses(state, set_definitions).values():
-            for path, value in bonus.get("modifiers", {}).items():
-                total[path] = total.get(path, 0.0) + float(value)
-    return total
