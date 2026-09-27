@@ -6,7 +6,7 @@ Prototype branch: `prototype/medieval-crystal-combat-contracts`
 
 Base V6 SHA: `7f5f104fb839068bdfaf5cec72f37129ae20d463`
 
-Current prototype code/test HEAD before this status refresh: `8092edd4e106b0b44c983c78645a8793e975d444`
+Current prototype code/test HEAD before this status refresh: `6f0f8ed1b165d3de43f14ce0d58d0237259ddfe3`
 
 ## Purpose
 
@@ -151,6 +151,37 @@ Prototype staged forge/crystal integration contract:
 
 The prototype does not mutate persistent equipment yet. That remains intentionally deferred until the real GameState/save migration is designed after V6 verification.
 
+
+### `src/textrpg/wounds.py`
+
+Prototype persistent body-zone wound contract:
+
+- per-zone normalized integrity
+- ordered consequence thresholds
+- persistent wound/impairment tags
+- action locks caused by severe zone damage
+- aggregate body impairments
+- atomic per-zone damage application
+- core-zone damage can translate into harvest damage for the beast crystal
+- non-core zones can explicitly have zero crystal-damage effect
+
+This keeps anatomical injury consequences separate from the unresolved final damage formula. Combat can therefore decide how much normalized structural damage occurred while the wound subsystem owns persistent zone consequences.
+
+### Cross-system hunt prototype
+
+`tests/test_medieval_hunt_prototype.py` now connects the contracts end to end:
+
+1. initial combat geometry exposes only chest and foreleg;
+2. chest armor is detected while the foreleg is unarmored;
+3. repeated foreleg targeting creates a persistent wound;
+4. the beast records the observed targeting pattern and player retreat;
+5. behavioral adaptation readiness becomes available only after repeated evidence;
+6. changed battle state on rematch exposes the head without changing anatomy data;
+7. a separate core-exposed state makes the heart crystal targetable to a compatible piercing weapon;
+8. a direct core strike damages the future crystal harvest;
+9. reduced crystal integrity is preserved;
+10. the harvested beast crystal can still be checked against the spear's forge/socket contract.
+
 ## Tests authored on prototype branch
 
 - `tests/test_combat_targeting.py` — 11 tests
@@ -159,12 +190,14 @@ The prototype does not mutate persistent equipment yet. That remains intentional
 - `tests/test_weapons.py` — 12 tests
 - `tests/test_armor.py` — 11 tests
 - `tests/test_forge.py` — 10 tests
+- `tests/test_wounds.py` — 12 tests
+- `tests/test_medieval_hunt_prototype.py` — 3 cross-system integration tests
 
-Total new prototype tests: **69**.
+Total new prototype tests: **84**.
 
 ## Runtime evidence
 
-[VERIFIED ISOLATED] The six prototype modules were executed together in a local isolated package harness with the same committed module contents and a minimal compatible `RuleError` dependency.
+[VERIFIED ISOLATED] The seven prototype modules plus the cross-system hunt tests were executed together in a local isolated package harness with the same committed module contents and a minimal compatible `RuleError` dependency.
 
 Command form:
 
@@ -172,8 +205,8 @@ Command form:
 
 Observed result:
 
-- Ran 69 tests
-- 69 passed
+- Ran 84 tests
+- 84 passed
 - 0 failed
 - 0 errors
 
@@ -181,7 +214,7 @@ This proves the isolated contract logic exercised by those tests.
 
 [UNKNOWN] Full-repository integration remains unverified.
 
-The local shell could not clone the public repository because DNS resolution for `github.com` failed. Therefore the existing V6 258-test suite plus these 69 prototype tests has not been executed as one exact checkout.
+The local shell could not clone the public repository because DNS resolution for `github.com` failed. Therefore the existing V6 258-test suite plus these 84 prototype tests has not been executed as one exact checkout.
 
 No claim that the full repository is green is permitted.
 
@@ -198,10 +231,9 @@ No claim that the full repository is green is permitted.
 
 ## Next prototype work
 
-1. zone wound/consequence contract
-2. beast progression/level advancement policy
-3. authored adaptation definitions that consume adaptation readiness
-4. deterministic beast voice/bark projection
-5. region/territory state and coarse beast-vs-beast simulation
-6. one authored hunt scenario connecting weapon -> targeting -> armor -> wound/core exposure -> crystal harvest -> forge preview
-7. only after V6 verification: design the real GameState/persistence migration and integration path
+1. beast progression/level advancement policy
+2. authored adaptation definitions that consume adaptation readiness
+3. deterministic beast voice/bark projection
+4. region/territory state and coarse beast-vs-beast simulation
+5. expand the hunt prototype from contract-level interaction into authored content once integration infrastructure is ready
+6. only after V6 verification: design the real GameState/persistence migration and integration path
