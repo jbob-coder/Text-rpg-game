@@ -7,7 +7,7 @@ from .core import GameState, RuleError
 from .modifiers import validate_modifier_mapping
 from .progression import gain_ability_mastery, technique_available
 from .schema import ATTRIBUTE_SPECS, SKILL_CATALOG
-from .simulation import advance_time, apply_condition
+from .simulation import advance_time, apply_condition, validate_time_advance
 from .stats import effective_player_value
 
 
@@ -52,17 +52,32 @@ def _player_path(state: GameState, path: str) -> Any:
     return current
 
 
-def _set_player_path(state: GameState, path: str, value: Any) -> None:
+def _mutable_player_path_slot(
+    state: GameState,
+    path: str,
+) -> tuple[MutableMapping[str, Any], str]:
     parts = path.split(".")
+    if not parts or any(not part for part in parts):
+        raise RuleError(f"Invalid mutable player path: {path!r}")
+    if not isinstance(state.player, MutableMapping):
+        raise RuleError("player state must be mutable")
+
     current: MutableMapping[str, Any] = state.player
     for part in parts[:-1]:
         node = current.get(part)
         if not isinstance(node, MutableMapping):
-            node = {}
-            current[part] = node
+            raise RuleError(f"Player path is not mutable: {path}")
         current = node
-    current[parts[-1]] = value
 
+    leaf = parts[-1]
+    if leaf not in current:
+        raise RuleError(f"Player path is missing: {path}")
+    return current, leaf
+
+
+def _set_player_path(state: GameState, path: str, value: Any) -> None:
+    current, leaf = _mutable_player_path_slot(state, path)
+    current[leaf] = value
 
 
 def _validate_spendable_resource_path(path: Any, label: str) -> str:
@@ -275,6 +290,9 @@ def practice_technique(
     ability = state.abilities.get(ability_id)
     if not isinstance(ability, Mapping):
         raise RuleError(f"Unknown ability: {ability_id}")
+    _ability_progression_state(ability, ability_id)
+    validate_time_advance(state, minutes)
+    _validate_history_container(state)
     technique = ability.get("techniques", {}).get(technique_id)
     if not isinstance(technique, MutableMapping):
         raise RuleError(f"Technique has not been discovered: {technique_id}")
@@ -293,6 +311,8 @@ def practice_technique(
 
     stamina_before = _numeric_player_path(state, "resources.stamina")
     focus_before = _numeric_player_path(state, "resources.focus")
+    _mutable_player_path_slot(state, "resources.stamina")
+    _mutable_player_path_slot(state, "resources.focus")
     if stamina_before < stamina_cost or focus_before < focus_cost:
         raise RuleError("Insufficient stamina or focus for technique practice")
 
@@ -431,6 +451,48 @@ def _integer(value: Any, label: str, errors: list[str], *, minimum: int | None =
     if minimum is not None and value < minimum:
         errors.append(f"{label} must be >= {minimum}")
     return value
+
+
+def _validate_history_container(state: GameState) -> None:
+    if not isinstance(state.history, list):
+        raise RuleError("state.history must be a list")
+
+
+def _validate_condition_container(state: GameState) -> None:
+    conditions = state.player.get("conditions")
+    if conditions is not None and not isinstance(conditions, dict):
+        raise RuleError("player.conditions must be an object")
+
+
+def _ability_progression_state(
+    ability: Any,
+    ability_id: str,
+) -> tuple[int, float, int]:
+    if not isinstance(ability, Mapping):
+        raise RuleError(f"Ability state must be an object: {ability_id}")
+
+    rank = ability.get("rank", 0)
+    if isinstance(rank, bool) or not isinstance(rank, int) or rank < 0:
+        raise RuleError(f"Ability rank state is invalid: {ability_id}")
+
+    mastery = ability.get("mastery_xp", 0.0)
+    if (
+        isinstance(mastery, bool)
+        or not isinstance(mastery, (int, float))
+        or not isfinite(float(mastery))
+        or float(mastery) < 0
+    ):
+        raise RuleError(f"Ability mastery state is invalid: {ability_id}")
+
+    rank_floor = ability.get("rank_floor", 0)
+    if (
+        isinstance(rank_floor, bool)
+        or not isinstance(rank_floor, int)
+        or rank_floor < 0
+    ):
+        raise RuleError(f"Ability rank_floor state is invalid: {ability_id}")
+
+    return rank, float(mastery), rank_floor
 
 
 def validate_technique_definition(definition: Any) -> list[str]:
@@ -699,10 +761,14 @@ def technique_use_status(
 
     reasons: list[str] = []
     ability = state.abilities.get(ability_id)
-    if not ability:
+    if ability is None:
         return {"available": False, "reasons": ["ability_missing"]}
+    _ability_progression_state(ability, ability_id)
 
-    technique = ability.get("techniques", {}).get(technique_id)
+    techniques = ability.get("techniques", {})
+    if not isinstance(techniques, Mapping):
+        raise RuleError(f"Ability techniques must be an object: {ability_id}")
+    technique = techniques.get(technique_id)
     if not technique:
         return {"available": False, "reasons": ["technique_undiscovered"]}
     if not isinstance(technique, Mapping):
@@ -762,6 +828,7 @@ def technique_use_status(
         if amount < 0:
             raise RuleError(f"Technique cost cannot be negative: {path}")
         current = _numeric_player_path(state, path)
+        _mutable_player_path_slot(state, path)
         if current < amount:
             reasons.append(f"resource:{path}")
 
@@ -812,6 +879,10 @@ def use_technique(
         raise RuleError(
             f"Technique cannot be used: {technique_id} ({', '.join(status['reasons'])})"
         )
+
+    _validate_history_container(state)
+    if definition.get("drawbacks"):
+        _validate_condition_container(state)
 
     ability = state.abilities[ability_id]
     technique = ability["techniques"][technique_id]
