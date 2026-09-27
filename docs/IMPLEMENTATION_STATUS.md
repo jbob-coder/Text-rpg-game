@@ -72,6 +72,11 @@ The original `main` branch is not modified by this work.
 - `TECHNIQUE_DIRECTIONAL_TRACE` is defined but intentionally locked behind later rank/mastery, knowledge, perk, attribute, and skill requirements.
 - Content validation now validates power-definition structure and rejects scene effects that reference unknown powers or techniques; NPC/power effect IDs and practice/recovery durations receive structural validation.
 - Save/resume route regressions permanently cover cooperative, solo, failure/recovery, and first-power paths.
+- Technique discovery now has a separate authored prerequisite contract from technique use; locked techniques cannot be discovered early through runtime effects.
+- Choices can use the `technique_discoverable` condition to expose or lock authored discovery opportunities based on the current persistent state.
+- Stable content registries are now supported for knowledge, perks, items, and conditions; scene/power references can be cross-validated before play.
+- Initial-state inventory/knowledge/perk/condition IDs are checked against registries when a content pack opts into registry enforcement.
+- `TECHNIQUE_DIRECTIONAL_TRACE` now has explicit discovery prerequisites including Trace Echo rank/mastery, stable-pattern knowledge, Trace Tolerance, attributes, Power skill, and learned Signal Pulse.
 
 ## TESTS_RUN
 
@@ -81,9 +86,9 @@ Command used against a branch-equivalent reconstruction of the current remote fi
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-Latest exact branch-equivalent suite result: **97 tests passed, 0 failed**.
+Latest exact branch-equivalent suite result: **103 tests passed, 0 failed**.
 
-Verification was performed against a local reconstruction of the live `foundation/text-rpg-systems` branch. The local reconstruction was based on the previously exact 93-test branch snapshot. Every source/content/test file changed in the Trace Echo resource/validation slice was then Git-blob-hash matched against the live branch before relying on the final 97-test run.
+Verification was performed against a local reconstruction of the live `foundation/text-rpg-systems` branch. The local reconstruction started from the exact 97-test branch snapshot. Every source/content/test file changed in the technique-discovery/registry slice was Git-blob-hash matched against the live branch before the final 103-test run.
 
 Observed command:
 
@@ -94,7 +99,7 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 Observed result:
 
 ```text
-Ran 97 tests in 0.019s
+Ran 103 tests in 0.034s
 
 OK
 ```
@@ -105,11 +110,11 @@ No GitHub Actions workflow was added; verification does not consume hosted CI mi
 
 ## NEXT_ACTION
 
-1. Add explicit authored discovery requirements for future techniques so a technique definition cannot be discovered before its unlock prerequisites are satisfied.
-2. Add content-pack validation for referenced knowledge/perk/item IDs once those registries are formalized.
-3. Review `The Dead Relay`, Gate Twelve, Tamsin, and Trace Echo as provisional story material before promoting any of them to confirmed canon.
-4. Expand recurring-character visual identity records only when additional named characters are intentionally introduced.
-5. Continue adding save/resume end-to-end coverage for every new major route.
+1. Add authored acquisition paths for `KNOW_TRACE_ECHO_PATTERN_STABLE` and `PERK_TRACE_TOLERANCE` instead of granting either through debug/state edits.
+2. Add a real future training/research branch where `TECHNIQUE_DIRECTIONAL_TRACE` can eventually become discoverable through earned state.
+3. Extend stable registries to reusable content packs as more items/perks/conditions are introduced.
+4. Review `The Dead Relay`, Gate Twelve, Tamsin, and Trace Echo as provisional story material before promoting any of them to confirmed canon.
+5. Continue save/resume end-to-end coverage for every new major route.
 6. Connect the rules layer to a selected pixel-art presentation runtime only after the client technology is deliberately chosen.
 
 ## BLOCKERS
