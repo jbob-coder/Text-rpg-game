@@ -315,5 +315,15 @@ class ModifierPipelineTests(unittest.TestCase):
                 equipment_sets={"SET_B": {"thresholds": {}}},
             )
 
+    def test_non_finite_modifier_values_are_rejected(self):
+        state = GameState(
+            seed="finite",
+            scene_id="A",
+            player={"attributes": {"might": 10}},
+            perks={"PERK_BAD": {"modifiers": {"attributes.might": float("nan")}}},
+        )
+        with self.assertRaises(ValueError):
+            effective_player_value(state, "attributes.might")
+
 if __name__ == "__main__":
     unittest.main()
