@@ -1827,3 +1827,63 @@ This is not an executed pass count.
 ### NEXT_ACTION
 
 Continue only targeted integrity review for concrete defects. Exact V6 runtime execution remains the required promotion gate.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-V6-CONDITION-PROGRESSION-22
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Active reconciliation branch: `integration/rules-ability-v6-reconcile`
+
+V6 head after this pass: `a39f689382f1617fea56341cc4816fa87459e217`
+
+### ISSUES FOUND
+
+[VERIFIED STATIC] Two additional boundary classes remained:
+
+Condition application:
+- falsey invalid modifier payloads such as `[]` were silently coerced to `{}`;
+- non-iterable tag values could surface Python `TypeError` instead of `RuleError`;
+- container mutability was not explicitly preflighted.
+
+Ability progression:
+- `gain_ability_mastery()` could mutate nested ability state without first requiring mutable top-level `state.abilities`;
+- corrupt existing rank state could be silently replaced;
+- public `technique_available()` relied on caller/type assumptions and could fail with implementation comparisons/errors on malformed state or requirements.
+
+### FIXES
+
+[IMPLEMENTED]
+- strict condition modifier/tag/container preflight;
+- delayed creation of missing condition container until all validation passes;
+- ability ID/top-level mutability/current-rank preflight for mastery gain;
+- strict non-mutating validation for technique availability queries.
+
+### REGRESSION COVERAGE
+
+[IMPLEMENTED] Added 5 regression methods covering:
+- falsey non-mapping condition modifiers;
+- non-iterable condition tags;
+- immutable ability container before mastery gain;
+- corrupt ability rank before overwrite;
+- malformed technique availability query/state.
+
+[VERIFIED STATIC] V6 now contains **240 authored test methods across 17 test files**.
+
+This is not an executed pass count.
+
+### RUNTIME STATUS
+
+[UNKNOWN] Exact V6 suite execution remains pending.
+
+[VERIFIED] A fresh Codex Tasks environment check in this pass returned zero registered runtime environments.
+
+### SCOPE CONTROL
+
+[DECISION] No feature expansion, no stat-schema migration, no V5/Foundation mutation, and no context-branch consolidation were performed.
+
+### NEXT_ACTION
+
+Continue only targeted integrity review for concrete defects. Exact V6 runtime execution remains the required promotion gate.
