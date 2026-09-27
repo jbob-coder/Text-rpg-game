@@ -114,12 +114,9 @@ class ActivityBootSmokeTest {
         waitForClickableText("APPLY CHEAT")
         composeRule.onNodeWithText("APPLY CHEAT").performClick()
 
-        // Cheat execution crosses Kotlin -> Chaquopy -> Python on background I/O.
-        // Wait for the player-safe snapshot to report the new authoritative scene
-        // before closing Settings, rather than racing the async bridge.
-        waitForText("DISTRICT_HUB", timeoutMillis = 60_000)
-        composeRule.onNodeWithText("CLOSE").performClick()
-
+        // A successful authoritative scene change closes Settings automatically.
+        // Synchronize on the resulting narrative frame instead of racing the
+        // background Kotlin -> Chaquopy -> Python bridge with a manual Close tap.
         waitForText("The District Opens Up", timeoutMillis = 60_000)
 
         waitForClickableText("Map")
