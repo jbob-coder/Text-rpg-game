@@ -273,3 +273,26 @@ class AndroidBridgeTests(unittest.TestCase):
         self.assertEqual("DISTRICT_HUB", session.state.scene_id)
         self.assertTrue(session.state.flags["world.free_roam_unlocked"])
         self.assertEqual("DISTRICT_PLAZA", view["map"]["current_location"])
+
+
+    def test_opening_can_detour_into_district_and_resume_trace_quest(self):
+        session = create_session(CONTENT)
+        session.state.scene_id = "OPENING_END"
+
+        district = session.choose("RETURN_TO_DISTRICT_BEFORE_TRACE")
+
+        self.assertEqual("DISTRICT_HUB", session.state.scene_id)
+        self.assertTrue(session.state.flags["world.free_roam_unlocked"])
+        self.assertFalse(session.state.flags["world.trace_echo_quest_started"])
+        resume = next(
+            choice for choice in district["scene"]["choices"]
+            if choice["id"] == "RESUME_GATE_TWELVE_INVESTIGATION"
+        )
+        self.assertTrue(resume["enabled"])
+
+        resumed = session.choose("RESUME_GATE_TWELVE_INVESTIGATION")
+
+        self.assertEqual("POWER_GATE_TWELVE_SIGNAL", session.state.scene_id)
+        self.assertTrue(session.state.flags["world.trace_echo_quest_started"])
+        self.assertIn("QUEST_GATE_TWELVE_ECHO", session.state.quests)
+        self.assertEqual("A Signal With No Receiver", resumed["scene"]["title"])

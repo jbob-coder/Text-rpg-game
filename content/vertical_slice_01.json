@@ -67,7 +67,8 @@
     "flags": {
       "world.free_roam_unlocked": false,
       "world.district_notices_reviewed": false,
-      "world.workshop_rumor_heard": false
+      "world.workshop_rumor_heard": false,
+      "world.trace_echo_quest_started": false
     }
   },
   "characters": {
@@ -878,9 +879,36 @@
                 {
                   "type": "quest_start",
                   "quest_id": "QUEST_GATE_TWELVE_ECHO"
+                },
+                {
+                  "type": "set_flag",
+                  "key": "world.trace_echo_quest_started",
+                  "value": true
                 }
               ],
               "next_scene": "POWER_GATE_TWELVE_SIGNAL"
+            }
+          }
+        },
+        {
+          "id": "RETURN_TO_DISTRICT_BEFORE_TRACE",
+          "text": "Return to the district first. Gate Twelve can wait.",
+          "time_cost_minutes": 12,
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "vertical_slice_01.opening_complete",
+                  "value": true
+                },
+                {
+                  "type": "set_flag",
+                  "key": "world.free_roam_unlocked",
+                  "value": true
+                }
+              ],
+              "next_scene": "DISTRICT_HUB"
             }
           }
         }
@@ -1387,6 +1415,39 @@
                 }
               ],
               "next_scene": "DISTRICT_HUB"
+            }
+          }
+        },
+        {
+          "id": "RESUME_GATE_TWELVE_INVESTIGATION",
+          "text": "Return below Gate Twelve and continue the relay investigation.",
+          "time_cost_minutes": 12,
+          "visible_if": [
+            {
+              "type": "flag",
+              "key": "vertical_slice_01.opening_complete",
+              "equals": true
+            },
+            {
+              "type": "flag",
+              "key": "world.trace_echo_quest_started",
+              "equals": false
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "quest_start",
+                  "quest_id": "QUEST_GATE_TWELVE_ECHO"
+                },
+                {
+                  "type": "set_flag",
+                  "key": "world.trace_echo_quest_started",
+                  "value": true
+                }
+              ],
+              "next_scene": "POWER_GATE_TWELVE_SIGNAL"
             }
           }
         }
