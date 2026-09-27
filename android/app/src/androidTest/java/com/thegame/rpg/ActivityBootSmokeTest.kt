@@ -32,7 +32,7 @@ class ActivityBootSmokeTest {
     private fun scrollToChoiceAndClick(choiceId: String, timeoutMillis: Long = 30_000) {
         composeRule.waitUntil(timeoutMillis = timeoutMillis) {
             composeRule.onAllNodes(
-                androidx.compose.ui.test.hasTestTag("choice-$choiceId")
+                androidx.compose.ui.test.hasTestTag("choice-$choiceId") and hasClickAction()
             ).fetchSemanticsNodes().isNotEmpty()
         }
         composeRule.onNodeWithTag("choice-$choiceId")
@@ -81,7 +81,6 @@ class ActivityBootSmokeTest {
         // again rather than treating Compose idleness as proof that persistence
         // has completed.
         composeRule.onNodeWithText("CLOSE").performClick()
-        waitForClickableText("Use the maintenance seal to open the casing without damaging it.", timeoutMillis = 60_000)
         scrollToChoiceAndClick("USE_MAINTENANCE_SEAL", timeoutMillis = 60_000)
         waitForText("Gate Twelve", timeoutMillis = 30_000)
 
