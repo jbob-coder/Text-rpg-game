@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, Dict, Mapping
 
 from .core import GameState, RuleError
-from .modifiers import effective_player_value, modifier_breakdown
+from .modifiers import effective_player_value, modifier_breakdown, resolve_set_context
 from .schema import (
     ATTRIBUTE_SPECS,
     DERIVED_FORMULAS,
@@ -63,8 +63,14 @@ def derived_stat_breakdown(
     state: GameState,
     name: str,
     set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, Any]:
     """Explain one final derived value from formula inputs through modifiers/floor."""
+    set_definitions = resolve_set_context(
+        set_definitions,
+        equipment_sets=equipment_sets,
+    )
     if name not in DERIVED_FORMULAS or name not in DERIVED_STAT_SPECS:
         raise RuleError(f"Unknown derived stat: {name}")
 
@@ -116,7 +122,13 @@ def derived_stat_breakdown(
 def derived_stats(
     state: GameState,
     set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
+    *,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, float]:
+    set_definitions = resolve_set_context(
+        set_definitions,
+        equipment_sets=equipment_sets,
+    )
     return {
         name: float(derived_stat_breakdown(state, name, set_definitions)["total"])
         for name in DERIVED_FORMULAS
@@ -128,7 +140,12 @@ def initialize_resources(
     *,
     refill: bool = False,
     set_definitions: Mapping[str, Mapping[str, Any]] | None = None,
+    equipment_sets: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Dict[str, float]:
+    set_definitions = resolve_set_context(
+        set_definitions,
+        equipment_sets=equipment_sets,
+    )
     resources = state.player.setdefault("resources", {})
     derived = derived_stats(state, set_definitions)
     maxima = {
