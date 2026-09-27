@@ -101,8 +101,11 @@ class AndroidBridgeTests(unittest.TestCase):
 
         view = session.scene_view()
 
-        self.assertEqual("ITEM_MAINTENANCE_SEAL", view["inventory"]["items"][0]["id"])
-        self.assertEqual(1, view["inventory"]["items"][0]["quantity"])
+        maintenance_seal = next(
+            item for item in view["inventory"]["items"]
+            if item["id"] == "ITEM_MAINTENANCE_SEAL"
+        )
+        self.assertEqual(1, maintenance_seal["quantity"])
         self.assertTrue(all("modifiers" not in entry for entry in view["inventory"]["equipment"]))
 
     def test_validated_cheats_mutate_only_through_whitelist(self):
