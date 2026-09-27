@@ -683,5 +683,127 @@ class ExtendedStateTests(unittest.TestCase):
         self.assertEqual(state.turn, 0)
         self.assertEqual(state.history, [])
 
+    def test_technique_discoverable_condition_uses_authored_gate(self):
+        powers = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_DIRECTIONAL": {
+                        "discovery_requirements": {
+                            "knowledge": ["KNOW_PATTERN"],
+                            "attributes": {"perception": 12},
+                        }
+                    }
+                }
+            }
+        }
+        engine = RulesEngine(
+            {
+                "A": {
+                    "choices": [{
+                        "id": "DISCOVER_DIRECTIONAL",
+                        "text": "Learn it.",
+                        "requires": [{
+                            "type": "technique_discoverable",
+                            "ability_id": "ABILITY_TRACE",
+                            "technique_id": "TECHNIQUE_DIRECTIONAL",
+                        }],
+                        "outcomes": {
+                            "default": {
+                                "effects": [{
+                                    "type": "technique_discover",
+                                    "ability_id": "ABILITY_TRACE",
+                                    "technique_id": "TECHNIQUE_DIRECTIONAL",
+                                }]
+                            }
+                        },
+                    }]
+                }
+            },
+            power_definitions=powers,
+        )
+        state = GameState(
+            seed="x",
+            scene_id="A",
+            player={
+                "attributes": {
+                    "might": 10,
+                    "agility": 10,
+                    "endurance": 10,
+                    "intellect": 10,
+                    "will": 10,
+                    "perception": 12,
+                    "presence": 10,
+                }
+            },
+        )
+        from textrpg import discover_ability
+
+        discover_ability(state, "ABILITY_TRACE")
+        choices = {c["id"]: c for c in engine.available_choices(state)}
+        self.assertFalse(choices["DISCOVER_DIRECTIONAL"]["enabled"])
+
+        state.knowledge["KNOW_PATTERN"] = {}
+        choices = {c["id"]: c for c in engine.available_choices(state)}
+        self.assertTrue(choices["DISCOVER_DIRECTIONAL"]["enabled"])
+
+        engine.choose(state, "DISCOVER_DIRECTIONAL")
+        self.assertIn(
+            "TECHNIQUE_DIRECTIONAL",
+            state.abilities["ABILITY_TRACE"]["techniques"],
+        )
+
+    def test_technique_discovery_effect_rolls_back_if_gate_is_not_met(self):
+        powers = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_DIRECTIONAL": {
+                        "discovery_requirements": {
+                            "knowledge": ["KNOW_PATTERN"]
+                        }
+                    }
+                }
+            }
+        }
+        engine = RulesEngine(
+            {
+                "A": {
+                    "choices": [{
+                        "id": "FORCE_DISCOVERY",
+                        "text": "Try anyway.",
+                        "outcomes": {
+                            "default": {
+                                "effects": [
+                                    {
+                                        "type": "set_flag",
+                                        "key": "TEMP_FLAG",
+                                        "value": True,
+                                    },
+                                    {
+                                        "type": "technique_discover",
+                                        "ability_id": "ABILITY_TRACE",
+                                        "technique_id": "TECHNIQUE_DIRECTIONAL",
+                                    },
+                                ]
+                            }
+                        },
+                    }]
+                }
+            },
+            power_definitions=powers,
+        )
+        state = GameState(seed="x", scene_id="A")
+        from textrpg import discover_ability
+
+        discover_ability(state, "ABILITY_TRACE")
+        before_history = list(state.history)
+        with self.assertRaises(RuleError):
+            engine.choose(state, "FORCE_DISCOVERY")
+        self.assertNotIn("TEMP_FLAG", state.flags)
+        self.assertNotIn(
+            "TECHNIQUE_DIRECTIONAL",
+            state.abilities["ABILITY_TRACE"]["techniques"],
+        )
+        self.assertEqual(state.history, before_history)
+
 if __name__ == "__main__":
     unittest.main()
