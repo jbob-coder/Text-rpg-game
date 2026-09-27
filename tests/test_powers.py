@@ -365,5 +365,73 @@ class PowerRuntimeTests(unittest.TestCase):
                 state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition()
             )
 
+    def test_power_requirements_use_effective_attribute_values_with_sets(self):
+        state = self.state()
+        state.player["attributes"]["will"] = 35
+        state.player["conditions"] = {
+            "COND_DISTRACTED": {"modifiers": {"attributes.will": -1}}
+        }
+        state.perks["PERK_FOCUSED"] = {
+            "modifiers": {"attributes.will": 3}
+        }
+        state.equipment = {
+            "body": {
+                "item_id": "ITEM_ATTUNE_BODY",
+                "set_id": "SET_ATTUNE",
+                "modifiers": {"attributes.will": 1},
+            },
+            "hands": {
+                "item_id": "ITEM_ATTUNE_HANDS",
+                "set_id": "SET_ATTUNE",
+                "modifiers": {},
+            },
+        }
+        sets = {
+            "SET_ATTUNE": {
+                "thresholds": {
+                    "2": {"modifiers": {"attributes.will": 2}}
+                }
+            }
+        }
+
+        without_set = technique_use_status(
+            state,
+            "ABILITY_FLUX",
+            "TECHNIQUE_PULSE",
+            self.definition(),
+        )
+        self.assertFalse(without_set["available"])
+        self.assertIn("attribute:will", without_set["reasons"])
+
+        with_set = technique_use_status(
+            state,
+            "ABILITY_FLUX",
+            "TECHNIQUE_PULSE",
+            self.definition(),
+            equipment_sets=sets,
+        )
+        self.assertTrue(with_set["available"])
+
+    def test_evolution_requirements_use_effective_stats(self):
+        state = self.state()
+        state.player["attributes"]["will"] = 38
+        state.perks["PERK_TEMP_CONTROL"] = {
+            "modifiers": {"attributes.will": 2}
+        }
+        definition = {
+            "requirements": {
+                "rank_min": 2,
+                "attributes": {"will": 40},
+            },
+            "result": {"form": "effective_threshold_form"},
+        }
+        status = ability_evolution_status(
+            state,
+            "ABILITY_FLUX",
+            "EVOLUTION_EFFECTIVE",
+            definition,
+        )
+        self.assertTrue(status["available"])
+
 if __name__ == "__main__":
     unittest.main()
