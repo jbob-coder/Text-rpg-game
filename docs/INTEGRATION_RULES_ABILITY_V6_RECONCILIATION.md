@@ -486,6 +486,44 @@ The static authored-test count is now **251** across 17 test files.
 
 This remains static/source verification only. The complete suite still requires exact runtime execution before any green or merge-ready claim.
 
+## Equipment and authored-goal boundary hardening
+
+A further Stage 3 review found two concrete integration gaps.
+
+### Equipment boundary
+
+`equip_item()` validated item requirements and modifier paths, but it still assumed `state.player` was mapping-shaped and allowed malformed non-null `set_id` metadata to be persisted.
+
+That conflicted with the modifier pipeline, where `set_counts()` requires every non-null equipment `set_id` to be a non-empty string. An item could therefore equip successfully and only fail later when effective-stat/set evaluation ran.
+
+V6 now:
+- requires mapping-shaped `state.player` before reading equipment requirements;
+- rejects non-null equipment `set_id` values unless they are non-empty strings;
+- performs both checks before the equipment slot/inventory commit.
+
+Two regression methods cover corrupt player containers and invalid set IDs.
+
+### Authored NPC-goal adapter
+
+The RulesEngine adapter for `npc_goal_create` and `npc_goal_progress` coerced authored values with `int(...)`/`float(...)` before calling the hardened social APIs.
+
+That could silently turn a fractional priority such as `12.5` into `12`, bypassing `set_goal()`'s strict integer contract, and could surface Python conversion errors instead of the social rule boundary.
+
+V6 now passes raw authored goal values into the social APIs so their strict validation remains authoritative.
+
+The static scene validator now also rejects:
+- non-integer/out-of-range goal priority;
+- non-finite/out-of-range initial goal progress;
+- non-finite goal progress deltas;
+- invalid completion thresholds;
+- malformed goal IDs through the existing stable-ID rule.
+
+Two regression methods cover the RulesEngine no-coercion behavior and the authored validator contract.
+
+[VERIFIED STATIC] V6 now contains **255 authored test methods across 17 test files**.
+
+This is not an executed pass count. Exact runtime execution remains pending.
+
 ## Runtime verification boundary
 
 No exact V6 Python suite has been executed from this chat.
@@ -497,7 +535,7 @@ No GitHub Actions workflow is being introduced solely to obtain a pass claim.
 Therefore:
 - historical fully observed foundation evidence remains **103 passed / 0 failed**;
 - current foundation has 108 authored test methods;
-- V6 has 251 authored test methods;
+- V6 has 255 authored test methods;
 - V6 runtime result remains **UNKNOWN / NOT EXECUTED**.
 
 Do not call V6 green, merge-ready, complete, or verified as a whole until the exact branch is executed.
