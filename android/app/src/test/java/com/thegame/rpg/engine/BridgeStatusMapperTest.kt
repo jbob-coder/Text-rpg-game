@@ -35,6 +35,7 @@ class BridgeStatusMapperTest {
                 ),
                 "conditions" to emptyList<Any>(),
             ),
+            "visuals" to mapOf("relay_state" to "damaged"),
             "meta" to mapOf("turn" to 0, "time_minutes" to 0, "location" to "CITY"),
         )
 
@@ -47,5 +48,27 @@ class BridgeStatusMapperTest {
         assertTrue(snapshot.attributes.single().modified)
         assertEquals("physical", snapshot.skills.single().category)
         assertEquals("max_health", snapshot.derived.single().id)
+        assertEquals("damaged", snapshot.visuals.relayState)
     }
+    @Test
+    fun unsupportedRelayVisualStateIsRejected() {
+        val payload = mapOf(
+            "scene" to mapOf(
+                "id" to "SCENE",
+                "title" to "Scene",
+                "body" to "Body",
+                "choices" to emptyList<Any>(),
+            ),
+            "status" to mapOf(
+                "resources" to emptyList<Any>(),
+            ),
+            "visuals" to mapOf("relay_state" to "omniscient_future_state"),
+            "meta" to mapOf("turn" to 0, "time_minutes" to 0, "location" to "CITY"),
+        )
+
+        val failure = runCatching { BridgeSnapshotMapper.fromMap(payload) }.exceptionOrNull()
+
+        assertTrue(failure is IllegalArgumentException)
+    }
+
 }
