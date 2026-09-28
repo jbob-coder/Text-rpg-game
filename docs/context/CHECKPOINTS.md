@@ -2520,3 +2520,62 @@ Prototype base SHA: `7f5f104fb839068bdfaf5cec72f37129ae20d463`
 ### NEXT_ACTION
 
 Continue the isolated prototype with crystal/equipment instance integration and forging/harvest contracts, while preserving the same rule: do not promote any prototype claim to V6/canonical implementation until the full integration gate can be executed.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-CRYSTAL-FORGING-PROTOTYPE-30
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Prototype branch: `prototype/medieval-crystal-contracts`
+
+Latest prototype commit written in this pass: `afabe91423b0da99ebd2a6aa203b92e6e27dff9d`
+
+### IMPLEMENTED PROTOTYPE
+
+Added:
+- `src/textrpg/crystal_forging.py`
+- `tests/test_crystal_forging.py`
+
+The prototype now distinguishes equipment definitions from mutable equipment instances and supports authored crystal sockets with:
+- stable socket IDs
+- maximum crystal grade
+- allowed crystal source types
+- allowed resonance tags
+- allowed integration modes
+- occupied/empty state
+
+Crystal integration:
+- validates both the equipment instance and crystal instance before mutation
+- is copy-on-write
+- preserves beast/mine provenance and harvest integrity
+- records integration quality and optional smith ID
+- distinguishes removable socketing from permanent fusion
+- prevents silent removal of fused crystals
+- prevents a second crystal from occupying an already-filled socket
+
+### VERIFICATION
+
+[VERIFIED FOCUSED LOCAL] The isolated medieval/crystal prototype suite now executed:
+- 24 tests
+- 24 passed
+- 0 failed
+
+[VERIFIED FOCUSED LOCAL] Source/tests compile under Python.
+
+[VERIFIED] Remote GitHub blobs match the locally executed files byte-for-byte:
+- `src/textrpg/crystal_forging.py`: `fb2778a44359f20d80a1ea40465af8e534dc3ec4`
+- `tests/test_crystal_forging.py`: `98631da28ae2f3732bb673378b7a93b74cbbc471`
+
+### SCOPE BOUNDARY
+
+These results remain isolated prototype verification only. They do not satisfy the exact V6 full-suite promotion gate, do not alter `integration/rules-ability-v6-reconcile`, and do not authorize a canonical merge.
+
+### NEXT_ACTION
+
+Continue the prototype with the combat-to-harvest boundary:
+1. represent accumulated damage to the heart/core region without embedding loot logic in UI;
+2. convert combat/core damage into crystal harvest-integrity consequences through an authoritative rule;
+3. keep kill speed versus pristine-core value as an explicit tradeoff;
+4. then connect harvested crystals to the already-tested integration contract.
