@@ -28,6 +28,10 @@ Read in this order before generating or integrating visual assets:
    - exact reconstruction packet for assets 001, 002, 018, 021 and 022.
 13. [manifests/BATCH_001_WAVE_A.json](manifests/BATCH_001_WAVE_A.json)
    - machine-readable Wave A states, anchors, palettes, bindings and QA gates.
+14. [reference_briefs/PLAYER_BODYFRAME_A_TURNAROUND_REFERENCE_BRIEF.md](reference_briefs/PLAYER_BODYFRAME_A_TURNAROUND_REFERENCE_BRIEF.md)
+   - identity-neutral six-view player rig generation/selection contract.
+15. [reference_briefs/NPC_TAMSIN_TURNAROUND_REFERENCE_BRIEF.md](reference_briefs/NPC_TAMSIN_TURNAROUND_REFERENCE_BRIEF.md)
+   - canon-constrained Tamsin six-view generation/selection contract.
 
 ## Current phase
 
@@ -88,3 +92,10 @@ This small set validates the entire reference -> blueprint -> pixel master -> pa
 `REF_BATCH001_CONCEPT_BOARD_A` has been preserved in Google Drive and audited in `references/REF_BATCH001_CONCEPT_BOARD_A.md`.
 
 It is accepted only for broad style direction. Its invented item/NPC/location details are explicitly rejected as canon.
+
+
+## Second generated reference record
+
+`REF_BATCH001_CONCEPT_BOARD_B` is preserved in Google Drive and audited in `references/REF_BATCH001_CONCEPT_BOARD_B.md`.
+
+It improves the production-layout/style language over Board A but remains non-canon for player identity, Tamsin geometry where it conflicts with the identity contract, generic NPC identities, unsupported key items, relay-state expansion, and district topology.
