@@ -329,3 +329,87 @@ Additional task progress:
 - TASK-EQUIP-011 — PROTOTYPE IMPLEMENTED: replaceable socket vs permanent fusion distinction.
 - TASK-FORGE-004 — PROTOTYPE IMPLEMENTED: grade/source/resonance/mode compatibility gates.
 - TASK-FORGE-007 — PARTIAL: integration records quality and smith provenance; complete forge-step provenance remains.
+
+
+### Prototype extension — combat-to-harvest, crystal output, beast progression, and voice
+
+Status: [IMPLEMENTED PROTOTYPE] / [VERIFIED FOCUSED LOCAL] / NOT INTEGRATED
+
+Prototype branch: \`prototype/medieval-crystal-contracts\`
+
+Combat-to-harvest:
+- body-zone runtime state now tracks max integrity, accumulated damage, hits, and damage by cut/pierce/blunt type
+- damage application is copy-on-write and caps at the zone's maximum integrity
+- CrystalDefinition now carries stable crystal/core identity, grade, purity, stability, size, resonance tags, authored effect values, core-damage sensitivity, and optional post-mortem decay
+- beast crystal harvesting requires a dead beast and the correct authored core zone
+- direct damage to the heart/core lowers both harvest integrity and crystal stability
+- harvesting skill/tool quality can reduce extraction loss but cannot restore combat damage already inflicted on the crystal
+- elapsed time can reduce harvest integrity for crystals authored with post-mortem decay
+- harvested crystal instances retain source beast, core-damage percentage, extraction quality, elapsed time, and authored effect identity
+
+Crystal equipment output:
+- installed crystal effects now have an explainable effective output
+- material factor is derived from purity, stability, and harvest integrity
+- craft factor is derived from forge quality and crystal-integration quality
+- the output breakdown exposes base effect, material factor, craft factor, and final total
+- a crystal whose core was damaged in combat produces lower equipment output even when the authored base effect is identical
+- integration quality changes final equipment output without mutating the crystal's authored base effect
+
+Beast development:
+- deterministic total-XP level thresholds
+- configurable base XP, growth factor, max level, repeat decay, repeat floor, and per-event XP cap
+- meaningful survival/hunt/rival/territory/training/resource/maturation/evolution events can award development
+- repeated events with the same repeat key lose novelty value
+- nonmeaningful events award zero XP and do not consume novelty
+- a development event can level a beast up but cannot regress a previously established higher level
+- progression history and audit log remain structured state
+
+Beast voice:
+- voice lines are authored, not runtime-generated
+- eligibility can require minimum intelligence, minimum level, specific social role, and actual remembered observations
+- low-intelligence/low-level beasts remain limited to simple vocalization-style lines
+- commander lines require commander-compatible role in addition to stats
+- memory-specific lines appear only when the corresponding observation exists
+- final line selection is deterministic from beast ID, context, and eligible line IDs
+- player-facing voice projection returns only line ID and text; hidden gating metadata is not exposed
+
+[VERIFIED FOCUSED LOCAL] The isolated prototype suite now contains **51 passing tests / 0 failures**.
+
+[VERIFIED FOCUSED LOCAL] All prototype source and test files compile under Python.
+
+[VERIFIED] Newly changed/added GitHub blobs match the exact locally executed files:
+- \`src/textrpg/medieval.py\` -> \`a974d9f3e0fee4dda7564ea4b571e5b7d0215d8c\`
+- \`src/textrpg/beast_harvest.py\` -> \`234b9156625988b11acf1f95e427ee3be5b19d7f\`
+- \`src/textrpg/crystal_forging.py\` -> \`aaf99e38141bbe40263131b0ba4eba6b932c788e\`
+- \`tests/test_beast_harvest.py\` -> \`29874ca175772cde1aadc8d282d186dd1f274df3\`
+- \`tests/test_crystal_forging.py\` -> \`36b5b96a8ead3b88a956aef0a3addfe5e2c9292c\`
+- \`src/textrpg/beast_progression.py\` -> \`02e3ca90e7d61d9de11d2c5d8f65ebaca32c7703\`
+- \`tests/test_beast_progression.py\` -> \`6aa29a95aa1d14db35ac700edb1724735dc88ff4\`
+- \`src/textrpg/beast_voice.py\` -> \`8559e546eda5f3d1c7696a07163784953e1d5366\`
+- \`tests/test_beast_voice.py\` -> \`ae6b799b600618737329c74cfba2a1cb5782e1de\`
+
+Additional backlog progress:
+- TASK-CRYSTAL-002 — PROTOTYPE IMPLEMENTED: CrystalDefinition + CrystalInstance contracts now both exist.
+- TASK-CRYSTAL-003 — PARTIAL: grade, purity, size, stability, resonance/effect data, provenance, harvest integrity implemented; capacity/recharge remain future.
+- TASK-CRYSTAL-006 — PARTIAL: authored species/core definition can determine beast crystal identity/effects; full evolution inheritance remains.
+- TASK-CRYSTAL-007 — PROTOTYPE IMPLEMENTED: heart/core damage directly changes crystal harvest quality.
+- TASK-EQUIP-014 — PARTIAL: crystal output has explainable projection; complete equipment inspection projection remains.
+- TASK-FORGE-003 — PARTIAL: forge quality participates in effective crystal output; full material/forge construction outcome remains.
+- TASK-FORGE-007 — PROTOTYPE IMPLEMENTED for crystal integration/output provenance.
+- TASK-COMBAT-012 — PARTIAL: persistent zone-damage state exists; complete wound-condition system remains.
+- TASK-COMBAT-014 — PROTOTYPE IMPLEMENTED for heart/core loot-risk rule.
+- TASK-BEAST-004 — PROTOTYPE IMPLEMENTED: level and development XP progression.
+- TASK-BEAST-005 — PARTIAL: development event categories and award contract exist; world-event adapters remain.
+- TASK-BEAST-006 — PROTOTYPE IMPLEMENTED: repeated low-novelty events diminish toward an authored floor.
+- TASK-BEAST-012 — PROTOTYPE VERIFIED FOCUSED: deterministic level/progression tests are green.
+- TASK-VOICE-001 — PROTOTYPE IMPLEMENTED: authored voice profiles.
+- TASK-VOICE-002 — PROTOTYPE IMPLEMENTED: intelligence and level gate expression complexity.
+- TASK-VOICE-003 — PARTIAL: role/memory gates exist; emotion/wound/territory context remains.
+- TASK-VOICE-004 — PROTOTYPE IMPLEMENTED: structured encounter memory can gate authored references.
+- TASK-VOICE-005 — PROTOTYPE IMPLEMENTED: commander-only tactical lines are supported.
+- TASK-VOICE-006 — PROTOTYPE IMPLEMENTED: deterministic authored selection with no runtime generative-AI dependency.
+- TASK-VOICE-007 — PROTOTYPE IMPLEMENTED: safe line projection omits hidden eligibility metadata.
+- TASK-VOICE-008 — PROTOTYPE VERIFIED FOCUSED: intelligence/level/role/memory gating tests are green.
+- TASK-HUNT-008 — PARTIAL/PROTOTYPE: pristine vs damaged beast-core outcomes are mechanically distinguished.
+- TASK-HUNT-009 — PARTIAL/PROTOTYPE: harvested beast crystal can enter the forging/socket system.
+- TASK-HUNT-010 — PARTIAL/PROTOTYPE: harvested crystal quality now changes authoritative equipment effect output; actual combat-consumption adapter remains.
