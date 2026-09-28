@@ -719,7 +719,29 @@ private fun InventorySection(
                 Text("No carried items.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
             } else {
                 snapshot.inventory.items.forEach { item ->
-                    LabeledValue(item.name, "x${item.quantity}")
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        PixelItemIcon(
+                            itemId = item.id,
+                            modifier = Modifier.width(40.dp).height(40.dp),
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text(
+                                item.name,
+                                color = PixelColors.Paper,
+                                style = MaterialTheme.typography.bodyMedium,
+                            )
+                            Text(
+                                "x${item.quantity}",
+                                color = PixelColors.Muted,
+                                style = MaterialTheme.typography.labelLarge,
+                            )
+                        }
+                    }
+                    Spacer(Modifier.height(6.dp))
                     if (item.equippable) {
                         PixelTextButton(
                             label = if (busy) {
@@ -731,7 +753,7 @@ private fun InventorySection(
                                 if (!busy) onEquip(item.id)
                             },
                         )
-                        Spacer(Modifier.height(6.dp))
+                        Spacer(Modifier.height(8.dp))
                     }
                 }
             }
