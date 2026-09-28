@@ -279,9 +279,12 @@ The UI must not become the authoritative rules engine.
   - exact jacket mapping requires `ITEM_DEPOT_JACKET` + `body` slot, preventing unrelated chest items from inheriting its art;
   - temporary player hair is explicitly technical/non-canon and excluded from the production asset set;
   - PR #6 verification at `0f6e3101753901ded43794ef3a1b4321b149d1c9`: Python 300/300; Android unit/assemble gate passed; API 35 x86_64 emulator completed 7/7 connected tests with 0 failures; APK SHA-256 `9ba444a729e83a090dc8b0721546b6f3f1291100a1cd043dbeec04685a7ea8b3`;
-  - `PLAYER_BODYFRAME_A_TURNAROUND` and `NPC_TAMSIN_TURNAROUND` remain `BRIEF_LOCKED` pending dedicated reference generation/selection.
+  - `PLAYER_BODYFRAME_A_TURNAROUND` and `NPC_TAMSIN_TURNAROUND` remain `BRIEF_LOCKED`; mixed generated boards remain rejected for canonical geometry.
+  - Batch 001 assets 023–033 are now implemented/integrated: Work Gloves icon/layer, Signal Ring icon/layer, Courier Neck Tag icon/layer, Maintenance Seal icon, Dead Relay intact/opened/damaged/signal-lost visuals.
+  - relay visual state crosses the Python→Android boundary only as `visuals.relay_state = null|intact|opened|damaged|signal_lost`; Compose never reads raw story flags.
+  - exact-head integration evidence at `57151051ea2e0ac98810e5ee95cea9de1a2a4e97`, workflow `36378000460`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 8/8 with 0 failures; APK SHA-256 `9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3`.
 - LIMITATION: automated Compose/runtime coverage proves the new catalog renders and does not regress the tested client, but native-scale art review and physical Galaxy A03 visual QA are not yet claimed.
-- NEXT: generate/select the dedicated player and Tamsin six-view references, then perform visual QA on the integrated player/jacket assets before expanding Batch 001.
+- NEXT: keep player/Tamsin canonical reference selection isolated from implementation. Continue Batch 001 with the current named-location scene masters and replace one procedural `SceneIllustration` location at a time using source-native pixel assets, beginning with `PLATFORM_NINE` and `RELAY_WORKBENCH`. Preserve physical Galaxy A03 visual QA as a separate acceptance gate.
 - RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
 - DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
 - COMPLETED_AT: —
