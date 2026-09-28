@@ -7,6 +7,7 @@ A reference appearing here does **not** imply canon approval or production readi
 | Reference ID | Status | Scope | Persisted location | SHA-256 | Allowed use | Rejected use |
 | --- | --- | --- | --- | --- | --- | --- |
 | `REF_BATCH001_CONCEPT_BOARD_A` | `REFERENCE_GENERATED / STYLE_DIRECTION_ACCEPTED / CANON_GEOMETRY_REJECTED` | Broad Batch 001 style probe | Google Drive file ID `1JDvlmF_Mfy93rs_Llq5rB444EOUF5Gzr` | `2d52f5364cecd1338e3c4cd0eafdbba7d5575e980f4c3d7856db3c6119e83ec8` | Pixel-density direction, modular sheet layout, dark industrial value language, restrained cyan/gold accents, icon/scene/FX family coherence | Canon player face, canon Tamsin geometry, item existence, courier identity, district architecture, relay state contract |
+| `REF_BATCH001_CONCEPT_BOARD_B` | `REFERENCE_GENERATED / STYLE_DIRECTION_ACCEPTED / PRODUCTION_STRUCTURE_ACCEPTED / CANON_GEOMETRY_REJECTED` | Broad Batch 001 production-direction probe | Google Drive file ID `1QFjPo-Rd6wCNwsZU7MVSKMsX67x1o3Ko` | `f8f97ebcb9d99dfe8e419bd87536003b6c1f84f710834fc7c8dcb33f01edf83a` | Resolution hierarchy, paper-doll separation, portrait/gameplay distinction, icon silhouettes, location/map composition, dark industrial palette structure | Canon player identity, exact Tamsin geometry when conflicting with identity contract, courier identity, generic NPC canon, unsupported items, relay state expansion, district topology |
 
 ## Selection policy
 
