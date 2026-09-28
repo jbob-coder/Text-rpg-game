@@ -10,10 +10,67 @@ from textrpg import (
     discover_ability,
     discover_technique,
     gain_ability_mastery,
+    dumps_state,
+    loads_state,
 )
 
 
 class StatusProjectionTests(unittest.TestCase):
+    def test_hidden_perk_provenance_is_redacted_after_save_resume(self):
+        state, engine = self.state_and_engine()
+        state.perks["PERK_HIDDEN"] = {"visible": False, "modifiers": {"attributes.will": 4}}
+        state.perks["PERK_PUBLIC"] = {"modifiers": {"attributes.will": 2}}
+        for candidate in (state, loads_state(dumps_state(state))):
+            before = copy.deepcopy(candidate.snapshot())
+            view = inspect_status_value(candidate, engine, "attributes.will")
+            self.assertNotIn("PERK_HIDDEN", repr(view))
+            self.assertNotIn("COND_HIDDEN", repr(view))
+            self.assertEqual(view["total"], 18.0)
+            self.assertEqual(view["breakdown"]["unidentified_modifier"], 3.0)
+            self.assertEqual(view["breakdown"]["perk:PERK_PUBLIC"], 2.0)
+            self.assertEqual(candidate.snapshot(), before)
+            self.assertIn("PERK_HIDDEN", repr(engine.explain_player_value(candidate, "attributes.will")))
+
+    def test_definition_hidden_perks_are_redacted_in_derived_breakdowns(self):
+        state, engine = self.state_and_engine()
+        state.perks["PERK_SECRET_CAP"] = {"visible": True, "modifiers": {"derived.max_health": 7}}
+        state.player["conditions"]["COND_SECRET_CAP"] = {
+            "visible": False, "modifiers": {"derived.max_health": -4},
+        }
+        engine.perk_definitions = {"PERK_SECRET_CAP": {"player_visible": False}}
+        view = inspect_status_value(state, engine, "derived.max_health")
+        self.assertNotIn("PERK_SECRET_CAP", repr(view))
+        self.assertNotIn("COND_SECRET_CAP", repr(view))
+        self.assertEqual(view["total"], 92.0)
+        self.assertEqual(view["breakdown"]["direct_modifiers"]["unidentified_modifier"], 3.0)
+
+    def test_malformed_perk_visibility_cannot_silently_become_visible(self):
+        for bad in (0, None, "false", []):
+            with self.subTest(bad=bad):
+                state, engine = self.state_and_engine()
+                state.perks["PERK_STATUS"]["visible"] = bad
+                with self.assertRaises(RuleError):
+                    inspect_status_value(state, engine, "attributes.might")
+                del state.perks["PERK_STATUS"]["visible"]
+                engine.perk_definitions = {"PERK_STATUS": {"player_visible": bad}}
+                with self.assertRaises(RuleError):
+                    inspect_status_value(state, engine, "attributes.might")
+
+    def test_authored_hidden_perk_stays_hidden_after_grant_and_save(self):
+        state = GameState(seed="s", scene_id="SCENE_A", player={"attributes": {"will": 10}})
+        engine = RulesEngine({"SCENE_A": {"choices": [{
+            "id": "GRANT", "text": "Continue", "outcomes": {"default": {"effects": [{
+                "type": "add_perk", "perk_id": "PERK_HIDDEN", "visible": False,
+                "modifiers": {"attributes.will": 4},
+            }]}},
+        }]}})
+        engine.choose(state, "GRANT")
+        loaded = loads_state(dumps_state(state))
+        self.assertIs(loaded.perks["PERK_HIDDEN"].get("visible"), False)
+        view = inspect_status_value(loaded, engine, "attributes.will")
+        self.assertNotIn("PERK_HIDDEN", repr(view))
+        self.assertEqual(view["total"], 14.0)
+
     def state_and_engine(self):
         state = GameState(
             seed="status-seed",

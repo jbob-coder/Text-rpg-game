@@ -1,9 +1,36 @@
+import copy
+import tempfile
 import unittest
+from pathlib import Path
 
-from textrpg import GameState, RuleError, dumps_state, loads_state
+from textrpg import GameState, RuleError, dumps_state, loads_state, save_state
 
 
 class PersistenceTests(unittest.TestCase):
+    def test_saving_incompatible_schema_preserves_state_and_existing_save(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "save.json"
+            original = GameState(seed="s", scene_id="SCENE_A")
+            save_state(path, original)
+            original_bytes = path.read_bytes()
+            for version in (0, 2):
+                with self.subTest(version=version):
+                    state = GameState(seed="s", scene_id="SCENE_A", schema_version=version)
+                    before = copy.deepcopy(state.snapshot())
+                    with self.assertRaisesRegex(RuleError, "schema"):
+                        dumps_state(state)
+                    with self.assertRaisesRegex(RuleError, "schema"):
+                        save_state(path, state)
+                    self.assertEqual(state.snapshot(), before)
+                    self.assertEqual(path.read_bytes(), original_bytes)
+
+    def test_load_rejects_non_finite_numbers_in_arbitrary_metadata(self):
+        for token in ("NaN", "Infinity", "-Infinity", "1e400", "-1e400"):
+            with self.subTest(token=token):
+                raw = '{"schema_version":1,"seed":"s","scene_id":"A","flags":{"probe":' + token + '}}'
+                with self.assertRaisesRegex(RuleError, "strict JSON"):
+                    loads_state(raw)
+
     def test_round_trip_preserves_extended_state(self):
         state = GameState(
             seed="save-seed",

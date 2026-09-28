@@ -4,12 +4,11 @@ import re
 from math import isfinite
 from typing import Any, Dict, Mapping, MutableMapping
 
-from .core import GameState, RuleError
+from .core import GameState, RuleError, effective_player_value
 from .modifiers import validate_modifier_mapping
 from .progression import gain_ability_mastery, technique_available
 from .schema import ATTRIBUTE_SPECS, SKILL_CATALOG
 from .simulation import advance_time, apply_condition, validate_time_advance
-from .stats import effective_player_value
 
 
 TECHNIQUE_STAGES = (
@@ -1321,6 +1320,8 @@ def validate_evolution_definition(definition: Any) -> list[str]:
             if not isinstance(perk, Mapping):
                 errors.append(f"{location} must be an object")
                 continue
+            if "visible" in perk and not isinstance(perk["visible"], bool):
+                errors.append(f"{location}.visible must be boolean")
             modifiers = perk.get("modifiers", {})
             try:
                 validate_modifier_mapping(
@@ -1734,6 +1735,8 @@ def evolve_ability(
             "modifiers": dict(perk.get("modifiers", {})),
             "tags": list(perk.get("tags", [])),
         }
+        if "visible" in perk:
+            perk_records[perk_id]["visible"] = perk["visible"]
 
     record = {
         "evolution_id": evolution_id,

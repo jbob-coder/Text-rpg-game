@@ -13,10 +13,33 @@ from .modifiers import (
     validate_modifier_mapping,
     validate_set_definitions,
 )
+from .schema import RESOURCE_KEYS
 
 
 class RuleError(ValueError):
     """Raised when authored game data violates the engine contract."""
+
+
+def _player_visible_text(value: Any, label: str) -> str:
+    if not isinstance(value, str):
+        raise RuleError(f"{label} must be player-visible text")
+    return value
+
+
+def validate_resource_requirement(condition: Mapping[str, Any]) -> tuple[str, float]:
+    """Validate a current-resource gate without widening the modifier contract."""
+    resource = condition.get("resource")
+    if not isinstance(resource, str) or resource not in RESOURCE_KEYS:
+        raise RuleError("Resource requirement must name a registered current resource")
+    minimum = condition.get("value")
+    if (
+        isinstance(minimum, bool)
+        or not isinstance(minimum, (int, float))
+        or not isfinite(float(minimum))
+        or minimum < 0
+    ):
+        raise RuleError("Resource requirement value must be finite non-negative numeric")
+    return resource, float(minimum)
 
 
 def _get_path(data: Mapping[str, Any], path: str, default: Any = None) -> Any:
@@ -185,6 +208,7 @@ class RulesEngine:
         quest_definitions: Optional[Mapping[str, Mapping[str, Any]]] = None,
         power_definitions: Optional[Mapping[str, Mapping[str, Any]]] = None,
         set_definitions: Optional[Mapping[str, Mapping[str, Any]]] = None,
+        perk_definitions: Optional[Mapping[str, Mapping[str, Any]]] = None,
     ):
         self.scenes = dict(scenes)
         try:
@@ -199,14 +223,44 @@ class RulesEngine:
         self.set_definitions = self.equipment_sets
         self.quest_definitions = dict(quest_definitions or {})
         self.power_definitions = dict(power_definitions or {})
+        if perk_definitions is not None and not isinstance(perk_definitions, Mapping):
+            raise RuleError("perk_definitions must be an object")
+        self.perk_definitions = dict(perk_definitions) if perk_definitions is not None else {}
 
     def get_scene(self, state: GameState) -> Dict[str, Any]:
+        """Return raw authored data for engine/tooling use; clients use build_scene_view."""
         try:
             return self.scenes[state.scene_id]
         except KeyError as exc:
             raise RuleError(f"Unknown scene: {state.scene_id}") from exc
 
     def available_choices(self, state: GameState) -> List[Dict[str, Any]]:
+        """Return detached player choices, excluding authored conditions and outcomes."""
+        output: List[Dict[str, Any]] = []
+        for choice in self._available_authored_choices(state):
+            entry = {
+                "id": _player_visible_text(choice["id"], "Choice ID"),
+                "text": _player_visible_text(choice.get("text", choice["id"]), "Choice text"),
+                "enabled": choice["enabled"],
+            }
+            if not entry["enabled"]:
+                entry["disabled_reason"] = _player_visible_text(
+                    choice["disabled_reason"], "Choice disabled reason"
+                )
+            output.append(entry)
+        return output
+
+    def build_scene_view(self, state: GameState) -> Dict[str, Any]:
+        """Project only the current scene's visible text and available player choices."""
+        scene = self.get_scene(state)
+        return {
+            "id": _player_visible_text(state.scene_id, "Scene ID"),
+            "title": _player_visible_text(scene.get("title", state.scene_id), "Scene title"),
+            "body": _player_visible_text(scene.get("body", ""), "Scene body"),
+            "choices": self.available_choices(state),
+        }
+
+    def _available_authored_choices(self, state: GameState) -> List[Dict[str, Any]]:
         scene = self.get_scene(state)
         output: List[Dict[str, Any]] = []
         for choice in scene.get("choices", []):
@@ -219,7 +273,7 @@ class RulesEngine:
         return output
 
     def choose(self, state: GameState, choice_id: str) -> Dict[str, Any]:
-        choices = {c["id"]: c for c in self.available_choices(state)}
+        choices = {c["id"]: c for c in self._available_authored_choices(state)}
         if choice_id not in choices:
             raise RuleError(f"Choice is not currently visible: {choice_id}")
         choice = choices[choice_id]
@@ -304,6 +358,23 @@ class RulesEngine:
             elif kind == "stat_max":
                 actual = self._effective_player_value(state, condition["path"])
                 if actual > condition["value"]:
+                    return False
+            elif kind == "resource_min":
+                resource, minimum = validate_resource_requirement(condition)
+                if not isinstance(state.player, Mapping):
+                    raise RuleError("state.player must be an object")
+                resources = state.player.get("resources", {})
+                if not isinstance(resources, Mapping):
+                    raise RuleError("player.resources must be an object")
+                actual = resources.get(resource, 0)
+                if (
+                    isinstance(actual, bool)
+                    or not isinstance(actual, (int, float))
+                    or not isfinite(float(actual))
+                    or actual < 0
+                ):
+                    raise RuleError(f"Current resource must be finite non-negative numeric: {resource}")
+                if actual < minimum:
                     return False
             elif kind == "relationship_min":
                 actual = state.relationships.get(condition["npc"], {}).get(condition["axis"], 0)
@@ -587,6 +658,8 @@ class RulesEngine:
                 if npc_id in state.party:
                     state.party.remove(npc_id)
             elif kind == "add_perk":
+                if "visible" in effect and not isinstance(effect["visible"], bool):
+                    raise RuleError("Perk visible must be boolean")
                 try:
                     modifiers = validate_modifier_mapping(
                         effect.get("modifiers", {}),
@@ -601,6 +674,8 @@ class RulesEngine:
                     "modifiers": modifiers,
                     "tags": effect.get("tags", []),
                 }
+                if "visible" in effect:
+                    state.perks[effect["perk_id"]]["visible"] = effect["visible"]
             elif kind == "ability_discover":
                 from .powers import discover_ability
 

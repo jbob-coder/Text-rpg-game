@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Dict
 
 from .core import GameState, RuleError, validate_game_state_structure
+from .json_contract import loads_strict_json
 
 
 CURRENT_SCHEMA_VERSION = 1
@@ -12,8 +13,12 @@ CURRENT_SCHEMA_VERSION = 1
 
 def dumps_state(state: GameState) -> str:
     validate_game_state_structure(state)
+    if state.schema_version != CURRENT_SCHEMA_VERSION:
+        raise RuleError(
+            f"Unsupported save schema {state.schema_version!r}; expected {CURRENT_SCHEMA_VERSION}. "
+            "Add an explicit migration before saving this state."
+        )
     payload = state.snapshot()
-    payload["schema_version"] = CURRENT_SCHEMA_VERSION
     try:
         return json.dumps(
             payload,
@@ -26,15 +31,11 @@ def dumps_state(state: GameState) -> str:
         raise RuleError("Game state cannot be serialized as strict JSON") from exc
 
 
-def _reject_non_finite_constant(value: str) -> None:
-    raise ValueError(f"Non-finite JSON number is not allowed: {value}")
-
-
 def loads_state(raw: str) -> GameState:
     if not isinstance(raw, str):
         raise RuleError("Save payload must be JSON text")
     try:
-        parsed = json.loads(raw, parse_constant=_reject_non_finite_constant)
+        parsed = loads_strict_json(raw)
     except (json.JSONDecodeError, ValueError) as exc:
         raise RuleError("Save payload is not valid strict JSON") from exc
     if not isinstance(parsed, dict):

@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass, fields
 from pathlib import Path
 from typing import Any, Dict, Mapping
 
 from .core import GameState, RuleError, RulesEngine, validate_game_state_structure
+from .json_contract import loads_strict_json
 from .stats import validate_player_stats
 from .validation import assert_valid_content_pack
 from .visuals import assert_valid_character_visuals
@@ -109,6 +109,7 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
         equipment_sets=equipment_sets,
         quest_definitions=quests,
         power_definitions=powers,
+        perk_definitions=(registries or {}).get("perks", {}),
     )
 
     return LoadedContentPack(
@@ -126,9 +127,9 @@ def load_content_pack(path: str | Path) -> LoadedContentPack:
     """Load UTF-8 JSON authored content from disk and instantiate it safely."""
     source = Path(path)
     try:
-        data = json.loads(source.read_text(encoding="utf-8"))
+        data = loads_strict_json(source.read_text(encoding="utf-8"))
     except OSError as exc:
         raise RuleError(f"Could not read content pack: {source}") from exc
-    except json.JSONDecodeError as exc:
-        raise RuleError(f"Invalid JSON content pack: {source}") from exc
+    except ValueError as exc:
+        raise RuleError(f"Invalid strict JSON content pack: {source}") from exc
     return content_pack_from_mapping(data)

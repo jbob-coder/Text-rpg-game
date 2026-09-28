@@ -1,0 +1,81 @@
+test_choices_allow_only_visible_fields_and_preserve_locking (test_scene_projection.SceneProjectionTests.test_choices_allow_only_visible_fields_and_preserve_locking) ... FAIL
+test_projection_rejects_structured_data_in_visible_text_fields (test_scene_projection.SceneProjectionTests.test_projection_rejects_structured_data_in_visible_text_fields) ...
+  test_projection_rejects_structured_data_in_visible_text_fields (test_scene_projection.SceneProjectionTests.test_projection_rejects_structured_data_in_visible_text_fields) (scene_field='title') ... ERROR
+  test_projection_rejects_structured_data_in_visible_text_fields (test_scene_projection.SceneProjectionTests.test_projection_rejects_structured_data_in_visible_text_fields) (scene_field='body') ... ERROR
+  test_projection_rejects_structured_data_in_visible_text_fields (test_scene_projection.SceneProjectionTests.test_projection_rejects_structured_data_in_visible_text_fields) (choice_field='id') ... FAIL
+  test_projection_rejects_structured_data_in_visible_text_fields (test_scene_projection.SceneProjectionTests.test_projection_rejects_structured_data_in_visible_text_fields) (choice_field='text') ... FAIL
+  test_projection_rejects_structured_data_in_visible_text_fields (test_scene_projection.SceneProjectionTests.test_projection_rejects_structured_data_in_visible_text_fields) (choice_field='disabled_reason') ... FAIL
+test_scene_projection_is_detached_and_execution_uses_authored_rules (test_scene_projection.SceneProjectionTests.test_scene_projection_is_detached_and_execution_uses_authored_rules) ... ERROR
+
+======================================================================
+ERROR: test_projection_rejects_structured_data_in_visible_text_fields (test_scene_projection.SceneProjectionTests.test_projection_rejects_structured_data_in_visible_text_fields) (scene_field='title')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_scene_projection.py", line 85, in test_projection_rejects_structured_data_in_visible_text_fields
+    engine.build_scene_view(state)
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RulesEngine' object has no attribute 'build_scene_view'
+
+======================================================================
+ERROR: test_projection_rejects_structured_data_in_visible_text_fields (test_scene_projection.SceneProjectionTests.test_projection_rejects_structured_data_in_visible_text_fields) (scene_field='body')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_scene_projection.py", line 85, in test_projection_rejects_structured_data_in_visible_text_fields
+    engine.build_scene_view(state)
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RulesEngine' object has no attribute 'build_scene_view'
+
+======================================================================
+ERROR: test_scene_projection_is_detached_and_execution_uses_authored_rules (test_scene_projection.SceneProjectionTests.test_scene_projection_is_detached_and_execution_uses_authored_rules)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_scene_projection.py", line 61, in test_scene_projection_is_detached_and_execution_uses_authored_rules
+    view = engine.build_scene_view(state)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RulesEngine' object has no attribute 'build_scene_view'
+
+======================================================================
+FAIL: test_choices_allow_only_visible_fields_and_preserve_locking (test_scene_projection.SceneProjectionTests.test_choices_allow_only_visible_fields_and_preserve_locking)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_scene_projection.py", line 46, in test_choices_allow_only_visible_fields_and_preserve_locking
+    self.assertEqual(choices, [
+AssertionError: Lists differ: [{'id[45 chars]r', 'check': {'stat': 'attributes.might', 'dif[417 chars]lse}] != [{'id[45 chars]r', 'enabled': True}, {'id': 'CHOICE_LOCKED', [84 chars]t.'}]
+
+First differing element 0:
+{'id'[44 chars]r', 'check': {'stat': 'attributes.might', 'dif[225 chars]True}
+{'id'[44 chars]r', 'enabled': True}
+
+Diff is 751 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_projection_rejects_structured_data_in_visible_text_fields (test_scene_projection.SceneProjectionTests.test_projection_rejects_structured_data_in_visible_text_fields) (choice_field='id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_scene_projection.py", line 90, in test_projection_rejects_structured_data_in_visible_text_fields
+    with self.assertRaises(RuleError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+======================================================================
+FAIL: test_projection_rejects_structured_data_in_visible_text_fields (test_scene_projection.SceneProjectionTests.test_projection_rejects_structured_data_in_visible_text_fields) (choice_field='text')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_scene_projection.py", line 90, in test_projection_rejects_structured_data_in_visible_text_fields
+    with self.assertRaises(RuleError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+======================================================================
+FAIL: test_projection_rejects_structured_data_in_visible_text_fields (test_scene_projection.SceneProjectionTests.test_projection_rejects_structured_data_in_visible_text_fields) (choice_field='disabled_reason')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_scene_projection.py", line 90, in test_projection_rejects_structured_data_in_visible_text_fields
+    with self.assertRaises(RuleError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.018s
+
+FAILED (failures=4, errors=3)

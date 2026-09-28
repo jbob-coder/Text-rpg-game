@@ -1,3 +1,4 @@
+import copy
 import unittest
 
 from textrpg import GameState, RuleError, gain_ability_mastery
@@ -11,6 +12,7 @@ from textrpg.powers import (
     initialize_power_resource,
     practice_technique,
     recover_power_resource,
+    technique_discovery_status,
     technique_stage,
     technique_use_status,
     use_technique,
@@ -22,6 +24,24 @@ from textrpg.simulation import advance_time
 
 
 class PowerRuntimeTests(unittest.TestCase):
+    def test_evolution_preserves_granted_perk_visibility(self):
+        state = self.state()
+        definition = {"result": {"form": "stable", "grant_perks": {
+            "PERK_HIDDEN": {"visible": False, "modifiers": {"attributes.will": 2}},
+        }}}
+        evolve_ability(state, "ABILITY_FLUX", "EVOLUTION_PRIVATE", definition)
+        self.assertIs(state.perks["PERK_HIDDEN"].get("visible"), False)
+
+    def test_evolution_rejects_invalid_perk_visibility_without_mutation(self):
+        state = self.state()
+        definition = {"result": {"form": "stable", "grant_perks": {
+            "PERK_HIDDEN": {"visible": "false"},
+        }}}
+        before = copy.deepcopy(state.snapshot())
+        with self.assertRaises(RuleError):
+            evolve_ability(state, "ABILITY_FLUX", "EVOLUTION_PRIVATE", definition)
+        self.assertEqual(state.snapshot(), before)
+
     def state(self):
         state = GameState(
             seed="power-seed",
