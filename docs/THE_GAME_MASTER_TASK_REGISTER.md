@@ -267,14 +267,21 @@ The UI must not become the authoritative rules engine.
 ### TASK M-005 — Produce Batch 001 assets
 - STATUS: `IN_PROGRESS`
 - DEPENDS_ON: M-004
-- VERIFIED PRE-PRODUCTION STATE:
+- VERIFIED STATE:
   - complete v1 baseline: 500 unique planned units;
   - first broad concept board persisted as `REF_BATCH001_CONCEPT_BOARD_A` and audited as style-only, not canonical geometry;
   - Wave A reconstruction packet completed for assets 001, 002, 018, 021 and 022;
   - Wave A machine-readable manifest completed;
-  - `PLAYER_GAMEPLAY_FRONT_BASE`, `ITEM_DEPOT_JACKET_ICON`, and `ITEM_DEPOT_JACKET_PAPERDOLL` are `BLUEPRINTED`;
-  - `PLAYER_BODYFRAME_A_TURNAROUND` and `NPC_TAMSIN_TURNAROUND` are `BRIEF_LOCKED` pending dedicated reference generation/selection.
-- PRODUCTION ORDER: generate/select dedicated player neutral turnaround and Tamsin canonical turnaround references; reconstruct native player front base and Depot Jacket icon/paper-doll layer; then integrate the first paper-doll pair and run Android visual/equip/unequip QA before mass production.
+  - production branch: `feature/pixel-asset-wave-a`;
+  - draft PR: #6;
+  - `PLAYER_GAMEPLAY_FRONT_BASE`, `ITEM_DEPOT_JACKET_ICON`, and `ITEM_DEPOT_JACKET_PAPERDOLL` are implemented as source-native pixel maps and integrated into Compose;
+  - generated assets remain text-native/diffable rather than opaque binary blobs; PNG export can derive from the same authoritative pixel maps later;
+  - exact jacket mapping requires `ITEM_DEPOT_JACKET` + `body` slot, preventing unrelated chest items from inheriting its art;
+  - temporary player hair is explicitly technical/non-canon and excluded from the production asset set;
+  - PR #6 verification at `0f6e3101753901ded43794ef3a1b4321b149d1c9`: Python 300/300; Android unit/assemble gate passed; API 35 x86_64 emulator completed 7/7 connected tests with 0 failures; APK SHA-256 `9ba444a729e83a090dc8b0721546b6f3f1291100a1cd043dbeec04685a7ea8b3`;
+  - `PLAYER_BODYFRAME_A_TURNAROUND` and `NPC_TAMSIN_TURNAROUND` remain `BRIEF_LOCKED` pending dedicated reference generation/selection.
+- LIMITATION: automated Compose/runtime coverage proves the new catalog renders and does not regress the tested client, but native-scale art review and physical Galaxy A03 visual QA are not yet claimed.
+- NEXT: generate/select the dedicated player and Tamsin six-view references, then perform visual QA on the integrated player/jacket assets before expanding Batch 001.
 - RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
 - DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
 - COMPLETED_AT: —
