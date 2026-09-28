@@ -22,10 +22,16 @@ Read in this order before generating or integrating visual assets:
    - rules for using generated imagery only as reference and reconstructing it into native pixel masters.
 10. [ASSET_MANIFEST_SCHEMA.md](ASSET_MANIFEST_SCHEMA.md)
    - machine-readable lineage/state/QA contract for every asset.
+11. [REFERENCE_REGISTRY.md](REFERENCE_REGISTRY.md)
+   - durable generated-reference provenance and selection/rejection decisions.
+12. [production_packets/BATCH_001_WAVE_A_BLUEPRINTS.md](production_packets/BATCH_001_WAVE_A_BLUEPRINTS.md)
+   - exact reconstruction packet for assets 001, 002, 018, 021 and 022.
+13. [manifests/BATCH_001_WAVE_A.json](manifests/BATCH_001_WAVE_A.json)
+   - machine-readable Wave A states, anchors, palettes, bindings and QA gates.
 
 ## Current phase
 
-Documentation and planning are the authority.
+The 500-unit planning baseline is complete. Production Wave A is now in pre-build/reference-selection work; documentation and manifests remain the authority until reconstructed native pixel masters exist.
 
 No new generated visual is considered a production asset until the documentation pipeline advances it through:
 
@@ -75,3 +81,10 @@ Now that planning is complete, start generation/reconstruction with Batch 001 it
 
 This small set validates the entire reference -> blueprint -> pixel master -> paper-doll integration pipeline before mass generation.
 
+
+
+## First generated reference record
+
+`REF_BATCH001_CONCEPT_BOARD_A` has been preserved in Google Drive and audited in `references/REF_BATCH001_CONCEPT_BOARD_A.md`.
+
+It is accepted only for broad style direction. Its invented item/NPC/location details are explicitly rejected as canon.
