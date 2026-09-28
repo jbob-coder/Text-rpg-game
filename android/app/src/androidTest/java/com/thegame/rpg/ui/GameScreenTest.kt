@@ -154,6 +154,36 @@ class GameScreenTest {
     }
 
     @Test
+    fun allCurrentNamedSceneMastersRenderThroughCompose() {
+        val locations = listOf(
+            "PLATFORM_NINE",
+            "RELAY_WORKBENCH",
+            "GATE_TWELVE",
+            "SERVICE_TUNNEL",
+            "EVAC_STAIR",
+            "TRACE_CHAMBER",
+            "DISTRICT_PLAZA",
+            "DISTRICT_ARCHIVE",
+            "WORKSHOP_ROW",
+        )
+
+        locations.forEach { locationId ->
+            composeRule.setContent {
+                PixelTheme {
+                    SceneIllustration(
+                        locationId = locationId,
+                        relayState = if (locationId == "RELAY_WORKBENCH") "intact" else null,
+                        modifier = Modifier.size(256.dp, 128.dp),
+                    )
+                }
+            }
+
+            composeRule.onNodeWithTag("scene-illustration")
+                .assertIsDisplayed()
+        }
+    }
+
+    @Test
     fun equippedGearIsReflectedByTheVisibleAvatar() {
         val equippedSnapshot = snapshot.copy(
             inventory = GameInventory(
