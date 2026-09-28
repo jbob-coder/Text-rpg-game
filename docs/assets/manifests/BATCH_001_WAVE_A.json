@@ -89,7 +89,7 @@
       "number": 2,
       "asset_id": "PLAYER_GAMEPLAY_FRONT_BASE",
       "asset_family": "character_base",
-      "status": "BLUEPRINTED",
+      "status": "INTEGRATED",
       "canon_status": "technical",
       "source_game_ids": [
         "PLAYER"
@@ -201,7 +201,16 @@
         "android_scale_reviewed": false,
         "anchor_alignment_reviewed": false,
         "palette_reviewed": false,
-        "state_binding_reviewed": false
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36374202053,
+        "head_sha": "0f6e3101753901ded43794ef3a1b4321b149d1c9",
+        "python_tests": "300/300 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "7/7 connected tests passed, 0 failures",
+        "apk_sha256": "9ba444a729e83a090dc8b0721546b6f3f1291100a1cd043dbeec04685a7ea8b3",
+        "limitation": "Automated runtime rendering is green, but native-scale art review and physical-handset visual QA are still pending."
       }
     },
     {
@@ -271,7 +280,7 @@
       "number": 21,
       "asset_id": "ITEM_DEPOT_JACKET_ICON",
       "asset_family": "item_icon",
-      "status": "BLUEPRINTED",
+      "status": "INTEGRATED",
       "canon_status": "provisional",
       "source_game_ids": [
         "ITEM_DEPOT_JACKET"
@@ -321,14 +330,23 @@
         "native_scale_reviewed": false,
         "android_scale_reviewed": false,
         "palette_reviewed": false,
-        "state_binding_reviewed": false
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36374202053,
+        "head_sha": "0f6e3101753901ded43794ef3a1b4321b149d1c9",
+        "python_tests": "300/300 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "7/7 connected tests passed, 0 failures",
+        "apk_sha256": "9ba444a729e83a090dc8b0721546b6f3f1291100a1cd043dbeec04685a7ea8b3",
+        "limitation": "Automated runtime rendering is green, but native-scale art review and physical-handset visual QA are still pending."
       }
     },
     {
       "number": 22,
       "asset_id": "ITEM_DEPOT_JACKET_PAPERDOLL",
       "asset_family": "equipment_layer",
-      "status": "BLUEPRINTED",
+      "status": "INTEGRATED",
       "canon_status": "provisional",
       "source_game_ids": [
         "ITEM_DEPOT_JACKET"
@@ -412,7 +430,16 @@
         "android_scale_reviewed": false,
         "anchor_alignment_reviewed": false,
         "palette_reviewed": false,
-        "state_binding_reviewed": false
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36374202053,
+        "head_sha": "0f6e3101753901ded43794ef3a1b4321b149d1c9",
+        "python_tests": "300/300 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "7/7 connected tests passed, 0 failures",
+        "apk_sha256": "9ba444a729e83a090dc8b0721546b6f3f1291100a1cd043dbeec04685a7ea8b3",
+        "limitation": "Automated runtime rendering is green, but native-scale art review and physical-handset visual QA are still pending."
       }
     }
   ]
