@@ -8,6 +8,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performTextInput
 import org.junit.Rule
 import org.junit.Test
 
@@ -92,5 +93,46 @@ class ActivityBootSmokeTest {
         composeRule.onNodeWithTag("choice-USE_MAINTENANCE_SEAL")
             .performScrollTo()
             .assertIsDisplayed()
+    }
+
+    @Test
+    fun realActivityDeveloperDistrictCheatAndMapTravelOpenNarrativeScene() {
+        composeRule.waitUntil(timeoutMillis = 60_000) {
+            composeRule.onAllNodes(
+                androidx.compose.ui.test.hasTestTag("player-avatar")
+            ).fetchSemanticsNodes().isNotEmpty()
+        }
+
+        waitForClickableText("SETTINGS")
+        composeRule.onNodeWithText("SETTINGS").performClick()
+        waitForClickableText("CHEAT // DISTRICT FREE ROAM")
+        composeRule.onNodeWithText("CHEAT // DISTRICT FREE ROAM")
+            .performScrollTo()
+            .assertIsDisplayed()
+            .performClick()
+
+        // A successful authoritative scene change closes Settings automatically.
+        waitForText("The District Opens Up", timeoutMillis = 60_000)
+
+        composeRule.onNodeWithTag("nav-map")
+            .performScrollTo()
+            .assertIsDisplayed()
+            .performClick()
+        composeRule.waitUntil(timeoutMillis = 30_000) {
+            composeRule.onAllNodes(
+                androidx.compose.ui.test.hasTestTag("world-map-canvas")
+            ).fetchSemanticsNodes().isNotEmpty()
+        }
+        composeRule.onNodeWithTag("map-node-DISTRICT_ARCHIVE")
+            .performScrollTo()
+            .assertIsDisplayed()
+            .performClick()
+        composeRule.onNodeWithTag("map-travel")
+            .performScrollTo()
+            .assertIsDisplayed()
+            .performClick()
+
+        waitForText("The Municipal Archive", timeoutMillis = 60_000)
+        composeRule.onNodeWithText("The Municipal Archive").assertIsDisplayed()
     }
 }

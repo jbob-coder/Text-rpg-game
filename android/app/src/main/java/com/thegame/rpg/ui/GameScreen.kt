@@ -4,6 +4,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
@@ -182,6 +184,15 @@ private fun PixelGameShell(
 ) {
     var section by remember { mutableStateOf(GameSection.STORY) }
     var settingsOpen by remember { mutableStateOf(false) }
+    var lastSceneId by remember { mutableStateOf(snapshot.sceneId) }
+
+    LaunchedEffect(snapshot.sceneId) {
+        if (snapshot.sceneId != lastSceneId) {
+            section = GameSection.STORY
+            settingsOpen = false
+            lastSceneId = snapshot.sceneId
+        }
+    }
 
     LaunchedEffect(snapshot.sceneId, autoReadNarration) {
         if (autoReadNarration) {
@@ -289,7 +300,10 @@ private fun StorySection(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Column(Modifier.weight(0.36f).fillMaxHeight()) {
-                    PlayerAvatarPanel(snapshot.identity)
+                    PlayerAvatarPanel(
+                        identity = snapshot.identity,
+                        equipment = snapshot.inventory.equipment,
+                    )
                     Spacer(Modifier.height(8.dp))
                     ResourcePanel(snapshot)
                 }
@@ -309,9 +323,11 @@ private fun StorySection(
             ) {
                 PlayerAvatarPanel(
                     identity = snapshot.identity,
+                    equipment = snapshot.inventory.equipment,
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(0.42f),
+                    compact = true,
                 )
                 NarrativePanel(
                     snapshot = snapshot,
@@ -429,7 +445,11 @@ private fun CharacterSection(snapshot: GameSnapshot) {
                 .horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            PlayerAvatarPanel(snapshot.identity, Modifier.width(if (wideCharacterPanel) 320.dp else 260.dp))
+            PlayerAvatarPanel(
+                identity = snapshot.identity,
+                equipment = snapshot.inventory.equipment,
+                modifier = Modifier.width(if (wideCharacterPanel) 320.dp else 260.dp),
+            )
             PixelPanel(Modifier.width(if (wideCharacterPanel) 420.dp else 320.dp), "Character") {
                 LabeledValue("Name", snapshot.identity.name ?: "Unassigned")
                 LabeledValue("Level", snapshot.identity.level?.toString() ?: "—")
@@ -463,35 +483,61 @@ private fun StatsSection(snapshot: GameSnapshot) {
         }
         PixelPanel(title = "Core Attributes") {
             snapshot.attributes.forEach { stat ->
-                val bonus = if (stat.delta == 0.0) "" else " (${signed(stat.delta)})"
                 Text(
-                    "${stat.name.padEnd(14)} ${stat.effective.roundToInt()}$bonus",
+                    text = "${stat.name.uppercase()} // ${stat.effective.roundToInt()}",
                     color = if (stat.modified) PixelColors.Cyan else PixelColors.Paper,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.titleLarge,
                 )
+                Text(
+                    text = "BASE ${stat.base.roundToInt()}  •  EFFECTIVE ${stat.effective.roundToInt()}" +
+                        if (stat.delta == 0.0) "" else "  •  MOD ${signed(stat.delta)}",
+                    color = PixelColors.Muted,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+                if (!stat.role.isNullOrBlank()) {
+                    Text(
+                        text = stat.role,
+                        color = PixelColors.Paper,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+                Spacer(Modifier.height(10.dp))
             }
         }
         PixelPanel(title = "Derived") {
             snapshot.derived.forEach { stat ->
                 Text(
-                    "${stat.name.padEnd(18)} ${stat.value.roundToInt()}",
+                    text = "${stat.name.uppercase()} // ${stat.value.roundToInt()}",
                     color = PixelColors.Paper,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.titleLarge,
                 )
+                if (!stat.role.isNullOrBlank()) {
+                    Text(
+                        text = stat.role,
+                        color = PixelColors.Muted,
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
+                Spacer(Modifier.height(8.dp))
             }
         }
         PixelPanel(title = "Skills") {
             snapshot.skills.groupBy { it.category }.forEach { (category, skills) ->
                 Text("[${category.uppercase()}]", color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
                 skills.forEach { skill ->
-                    val bonus = if (skill.delta == 0.0) "" else " (${signed(skill.delta)})"
                     Text(
-                        "${skill.name.padEnd(18)} ${skill.effective.roundToInt()}$bonus",
+                        text = "${skill.name} // ${skill.effective.roundToInt()}",
                         color = if (skill.modified) PixelColors.Cyan else PixelColors.Paper,
                         style = MaterialTheme.typography.bodyMedium,
                     )
+                    Text(
+                        text = "BASE ${skill.base.roundToInt()}" +
+                            if (skill.delta == 0.0) "" else "  •  MOD ${signed(skill.delta)}",
+                        color = PixelColors.Muted,
+                        style = MaterialTheme.typography.labelLarge,
+                    )
                 }
-                Spacer(Modifier.height(6.dp))
+                Spacer(Modifier.height(8.dp))
             }
         }
         if (snapshot.conditions.isNotEmpty()) {
@@ -600,9 +646,21 @@ private fun SettingsPanel(
         PixelPanel(title = "Developer") {
             var cheatCode by remember { mutableStateOf("") }
             Text(
-                "Cheats are validated by the Python game layer. Available test codes: FULLRESTORE, CLEARCONDITIONS, GIVE_RELAY, MAXATTR, DEBUGMAP.",
+                "Cheats are validated by the Python game layer. Quick actions and manual codes use the same whitelist.",
                 color = PixelColors.Muted,
                 style = MaterialTheme.typography.bodyMedium,
+            )
+            Spacer(Modifier.height(8.dp))
+            PixelTextButton("CHEAT // DISTRICT FREE ROAM") { onCheat("DISTRICT") }
+            Spacer(Modifier.height(6.dp))
+            PixelTextButton("CHEAT // FULL RESTORE") { onCheat("FULLRESTORE") }
+            Spacer(Modifier.height(6.dp))
+            PixelTextButton("CHEAT // DEBUG MAP") { onCheat("DEBUGMAP") }
+            Spacer(Modifier.height(10.dp))
+            Text(
+                "Manual codes: FULLRESTORE, CLEARCONDITIONS, GIVE_RELAY, MAXATTR, DEBUGMAP, DISTRICT.",
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.labelLarge,
             )
             Spacer(Modifier.height(8.dp))
             OutlinedTextField(
@@ -610,7 +668,9 @@ private fun SettingsPanel(
                 onValueChange = { cheatCode = it.uppercase() },
                 label = { Text("CHEAT CODE") },
                 singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("cheat-input"),
             )
             Spacer(Modifier.height(8.dp))
             PixelTextButton("APPLY CHEAT") {
@@ -766,8 +826,32 @@ private fun MapSection(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(220.dp)
+                        .testTag("world-map-canvas")
                         .background(PixelColors.Deep)
-                        .border(2.dp, PixelColors.Muted),
+                        .border(2.dp, PixelColors.Muted)
+                        .pointerInput(map.nodes) {
+                            detectTapGestures { tap ->
+                                val width = size.width.toFloat().coerceAtLeast(1f)
+                                val height = size.height.toFloat().coerceAtLeast(1f)
+                                val nearest = map.nodes.minByOrNull { node ->
+                                    val px = (node.x.coerceIn(0.0, 100.0) / 100.0 * width).toFloat()
+                                    val py = (node.y.coerceIn(0.0, 100.0) / 100.0 * height).toFloat()
+                                    val dx = tap.x - px
+                                    val dy = tap.y - py
+                                    dx * dx + dy * dy
+                                }
+                                if (nearest != null) {
+                                    val px = (nearest.x.coerceIn(0.0, 100.0) / 100.0 * width).toFloat()
+                                    val py = (nearest.y.coerceIn(0.0, 100.0) / 100.0 * height).toFloat()
+                                    val dx = tap.x - px
+                                    val dy = tap.y - py
+                                    val threshold = 30.dp.toPx()
+                                    if (dx * dx + dy * dy <= threshold * threshold) {
+                                        selectedId = nearest.id
+                                    }
+                                }
+                            }
+                        },
                 ) {
                     fun point(id: String): Offset? {
                         val node = map.nodes.firstOrNull { it.id == id } ?: return null
@@ -799,6 +883,7 @@ private fun MapSection(
                     PixelTextButton(
                         label = if (node.current) "> ${node.title} [YOU]" else node.title,
                         onClick = { selectedId = node.id },
+                        modifier = Modifier.testTag("map-node-${node.id}"),
                     )
                     Spacer(Modifier.height(6.dp))
                 }
@@ -811,12 +896,21 @@ private fun MapSection(
                     }
                     if (!selected.current) {
                         Spacer(Modifier.height(8.dp))
-                        PixelTextButton(
-                            label = if (busy) "TRAVELING..." else "TRAVEL HERE",
-                            onClick = {
-                                if (!busy) onTravel(selected.id)
-                            },
-                        )
+                        if (selected.reachable) {
+                            PixelTextButton(
+                                label = if (busy) "TRAVELING..." else "TRAVEL HERE",
+                                onClick = {
+                                    if (!busy) onTravel(selected.id)
+                                },
+                                modifier = Modifier.testTag("map-travel"),
+                            )
+                        } else {
+                            Text(
+                                text = "NO DIRECT ROUTE FROM CURRENT LOCATION",
+                                color = PixelColors.Disabled,
+                                style = MaterialTheme.typography.labelLarge,
+                            )
+                        }
                     }
                 }
             }
@@ -868,6 +962,7 @@ private fun BottomPixelNav(selected: GameSection, onSelect: (GameSection) -> Uni
 private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) {
     Box(
         modifier = Modifier
+            .testTag("nav-${label.lowercase()}")
             .background(if (active) PixelColors.Cyan else PixelColors.Deep)
             .border(2.dp, if (active) PixelColors.Paper else PixelColors.Muted)
             .clickable(role = Role.Tab, onClick = onClick)
@@ -882,9 +977,23 @@ private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) 
 }
 
 @Composable
-private fun PixelTextButton(label: String, onClick: () -> Unit) {
+private fun PixelTextButton(
+    label: String,
+    onClick: () -> Unit,
+) = PixelTextButton(
+    label = label,
+    modifier = Modifier,
+    onClick = onClick,
+)
+
+@Composable
+private fun PixelTextButton(
+    label: String,
+    modifier: Modifier,
+    onClick: () -> Unit,
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .background(PixelColors.PanelAlt)
             .border(2.dp, PixelColors.Cyan)
             .clickable(role = Role.Button, onClick = onClick)

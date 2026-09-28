@@ -227,3 +227,104 @@ class AndroidBridgeTests(unittest.TestCase):
             if item["slot"] == slot
         )
         self.assertFalse(empty_slot["equipped"])
+
+
+    def test_free_roam_nodes_unlock_and_travel_changes_scene(self):
+        session = create_session(CONTENT)
+        session.state.scene_id = "DISTRICT_HUB"
+        session.state.flags["world.free_roam_unlocked"] = True
+
+        before = session.scene_view()
+        nodes = {node["id"]: node for node in before["map"]["nodes"]}
+
+        self.assertEqual("DISTRICT_PLAZA", before["map"]["current_location"])
+        self.assertTrue(nodes["DISTRICT_ARCHIVE"]["reachable"])
+        self.assertTrue(nodes["WORKSHOP_ROW"]["reachable"])
+
+        after = session.travel("DISTRICT_ARCHIVE")
+
+        self.assertEqual("DISTRICT_ARCHIVE", session.state.scene_id)
+        self.assertEqual("DISTRICT_ARCHIVE", after["map"]["current_location"])
+        self.assertEqual("The Municipal Archive", after["scene"]["title"])
+
+    def test_archive_lore_choice_changes_narrative_state_without_stat_reward(self):
+        session = create_session(CONTENT)
+        session.state.scene_id = "DISTRICT_ARCHIVE"
+        session.state.flags["world.free_roam_unlocked"] = True
+        attributes_before = deepcopy(session.state.player.get("attributes", {}))
+
+        view = session.choose("READ_PLATFORM_NINE_RECORDS")
+
+        self.assertIn("KNOW_PLATFORM_NINE_EVAC_PROTOCOL", session.state.knowledge)
+        self.assertEqual(attributes_before, session.state.player.get("attributes", {}))
+        lore = next(
+            quest for quest in view["quests"]
+            if quest["id"] == "QUEST_PLATFORM_NINE_RECORDS"
+        )
+        self.assertEqual("lore", lore["category"])
+        self.assertEqual("completed", lore["status"])
+
+    def test_directional_branch_continues_into_free_roam_hub(self):
+        session = create_session(CONTENT)
+        session.state.scene_id = "TRACE_DIRECTIONAL_SESSION_END"
+
+        view = session.choose("END_DIRECTIONAL_TRACE_PROTOTYPE")
+
+        self.assertEqual("DISTRICT_HUB", session.state.scene_id)
+        self.assertTrue(session.state.flags["world.free_roam_unlocked"])
+        self.assertEqual("DISTRICT_PLAZA", view["map"]["current_location"])
+
+
+    def test_opening_can_detour_into_district_and_resume_trace_quest(self):
+        session = create_session(CONTENT)
+        session.state.scene_id = "OPENING_END"
+
+        district = session.choose("RETURN_TO_DISTRICT_BEFORE_TRACE")
+
+        self.assertEqual("DISTRICT_HUB", session.state.scene_id)
+        self.assertTrue(session.state.flags["world.free_roam_unlocked"])
+        self.assertFalse(session.state.flags["world.trace_echo_quest_started"])
+        resume = next(
+            choice for choice in district["scene"]["choices"]
+            if choice["id"] == "RESUME_GATE_TWELVE_INVESTIGATION"
+        )
+        self.assertTrue(resume["enabled"])
+
+        resumed = session.choose("RESUME_GATE_TWELVE_INVESTIGATION")
+
+        self.assertEqual("POWER_GATE_TWELVE_SIGNAL", session.state.scene_id)
+        self.assertTrue(session.state.flags["world.trace_echo_quest_started"])
+        self.assertIn("QUEST_GATE_TWELVE_ECHO", session.state.quests)
+        self.assertEqual("A Signal With No Receiver", resumed["scene"]["title"])
+
+
+    def test_workshop_rumor_unlocks_delayed_archive_investigation(self):
+        session = create_session(CONTENT)
+        session.state.flags["world.free_roam_unlocked"] = True
+        session.state.scene_id = "DISTRICT_WORKSHOP"
+
+        session.choose("ASK_WORKERS_ABOUT_GATE_TWELVE")
+        self.assertTrue(session.state.flags["world.workshop_rumor_heard"])
+
+        session.state.scene_id = "DISTRICT_ARCHIVE"
+        archive = session.scene_view()
+        choices = {choice["id"] for choice in archive["scene"]["choices"]}
+        self.assertIn("CROSSCHECK_GATE_TWELVE_WORKSHOP_RUMOR", choices)
+
+        result = session.choose("CROSSCHECK_GATE_TWELVE_WORKSHOP_RUMOR")
+
+        self.assertIn("KNOW_GATE_TWELVE_CREW_WITHDRAWAL", session.state.knowledge)
+        self.assertEqual("DISTRICT_ARCHIVE", result["map"]["current_location"])
+
+
+    def test_district_cheat_is_explicit_and_player_safe(self):
+        session = create_session(CONTENT)
+
+        view = session.apply_cheat("district")
+
+        self.assertEqual("DISTRICT_HUB", session.state.scene_id)
+        self.assertTrue(session.state.flags["world.free_roam_unlocked"])
+        self.assertEqual("The District Opens Up", view["scene"]["title"])
+        node_ids = {node["id"] for node in view["map"]["nodes"]}
+        self.assertIn("DISTRICT_ARCHIVE", node_ids)
+        self.assertIn("WORKSHOP_ROW", node_ids)

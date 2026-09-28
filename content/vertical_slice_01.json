@@ -63,6 +63,12 @@
         "goals": {},
         "story_state": {}
       }
+    },
+    "flags": {
+      "world.free_roam_unlocked": false,
+      "world.district_notices_reviewed": false,
+      "world.workshop_rumor_heard": false,
+      "world.trace_echo_quest_started": false
     }
   },
   "characters": {
@@ -290,6 +296,29 @@
       "title": "Trace Stabilization",
       "category": "optional",
       "description": "Train Trace Echo through repeatable sessions, recovery, and controlled technique growth."
+    },
+    "QUEST_PLATFORM_NINE_RECORDS": {
+      "start_stage": "STAGE_READ_RECORDS",
+      "stages": {
+        "STAGE_READ_RECORDS": {
+          "objectives": {
+            "OBJ_READ_BLACKOUT_PROTOCOL": {
+              "required": true,
+              "on_complete": {
+                "next_stage": "STAGE_COMPLETE"
+              }
+            }
+          }
+        },
+        "STAGE_COMPLETE": {
+          "terminal": true,
+          "terminal_status": "completed",
+          "objectives": {}
+        }
+      },
+      "title": "Platform Nine Records",
+      "category": "lore",
+      "description": "Read the old municipal evacuation records and learn why maintenance routes remain accessible during blackouts."
     }
   },
   "scenes": {
@@ -850,9 +879,36 @@
                 {
                   "type": "quest_start",
                   "quest_id": "QUEST_GATE_TWELVE_ECHO"
+                },
+                {
+                  "type": "set_flag",
+                  "key": "world.trace_echo_quest_started",
+                  "value": true
                 }
               ],
               "next_scene": "POWER_GATE_TWELVE_SIGNAL"
+            }
+          }
+        },
+        {
+          "id": "RETURN_TO_DISTRICT_BEFORE_TRACE",
+          "text": "Return to the district first. Gate Twelve can wait.",
+          "time_cost_minutes": 12,
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "vertical_slice_01.opening_complete",
+                  "value": true
+                },
+                {
+                  "type": "set_flag",
+                  "key": "world.free_roam_unlocked",
+                  "value": true
+                }
+              ],
+              "next_scene": "DISTRICT_HUB"
             }
           }
         }
@@ -1307,7 +1363,7 @@
       "choices": [
         {
           "id": "END_DIRECTIONAL_TRACE_PROTOTYPE",
-          "text": "Record the result and end the current prototype branch.",
+          "text": "Record the result and return to the district.",
           "outcomes": {
             "default": {
               "effects": [
@@ -1320,13 +1376,185 @@
                   "type": "set_flag",
                   "key": "vertical_slice_01.directional_trace_first_use_complete",
                   "value": true
+                },
+                {
+                  "type": "set_flag",
+                  "key": "world.free_roam_unlocked",
+                  "value": true
                 }
-              ]
+              ],
+              "next_scene": "DISTRICT_HUB"
             }
           }
         }
       ],
       "location_id": "TRACE_CHAMBER"
+    },
+    "DISTRICT_HUB": {
+      "title": "The District Opens Up",
+      "body": "When you return above the service level, the blackout has changed the rhythm of the district rather than ending it. The depot plaza is still under emergency lighting, but foot traffic has begun to spread again. A public archive is operating on backup power to the east, while the workshop row to the west has reopened its shutters. Nothing forces you to follow the deeper Trace route immediately; the district is available to explore.",
+      "choices": [
+        {
+          "id": "REVIEW_DISTRICT_NOTICES",
+          "text": "Read the temporary district notices before deciding where to go.",
+          "time_cost_minutes": 10,
+          "visible_if": [
+            {
+              "type": "flag",
+              "key": "world.district_notices_reviewed",
+              "equals": false
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "world.district_notices_reviewed",
+                  "value": true
+                }
+              ],
+              "next_scene": "DISTRICT_HUB"
+            }
+          }
+        },
+        {
+          "id": "RESUME_GATE_TWELVE_INVESTIGATION",
+          "text": "Return below Gate Twelve and continue the relay investigation.",
+          "time_cost_minutes": 12,
+          "visible_if": [
+            {
+              "type": "flag",
+              "key": "vertical_slice_01.opening_complete",
+              "equals": true
+            },
+            {
+              "type": "flag",
+              "key": "world.trace_echo_quest_started",
+              "equals": false
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "quest_start",
+                  "quest_id": "QUEST_GATE_TWELVE_ECHO"
+                },
+                {
+                  "type": "set_flag",
+                  "key": "world.trace_echo_quest_started",
+                  "value": true
+                }
+              ],
+              "next_scene": "POWER_GATE_TWELVE_SIGNAL"
+            }
+          }
+        }
+      ],
+      "location_id": "DISTRICT_PLAZA"
+    },
+    "DISTRICT_ARCHIVE": {
+      "title": "The Municipal Archive",
+      "body": "Rows of old municipal records glow under low backup lighting. Most files concern ordinary infrastructure, evacuation law, and maintenance budgets. A clerk has left the Platform Nine emergency-routing ledger open beside a battery lamp. It contains no supernatural revelation, but it explains why some sealed service routes remain powered when public corridors go dark.",
+      "choices": [
+        {
+          "id": "READ_PLATFORM_NINE_RECORDS",
+          "text": "Read the Platform Nine emergency-routing ledger.",
+          "time_cost_minutes": 20,
+          "visible_if": [
+            {
+              "type": "not_knows",
+              "knowledge_id": "KNOW_PLATFORM_NINE_EVAC_PROTOCOL"
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "quest_start",
+                  "quest_id": "QUEST_PLATFORM_NINE_RECORDS"
+                },
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_PLATFORM_NINE_EVAC_PROTOCOL",
+                  "source": "DISTRICT_ARCHIVE",
+                  "confidence": 1,
+                  "private": false
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_PLATFORM_NINE_RECORDS",
+                  "objective_id": "OBJ_READ_BLACKOUT_PROTOCOL"
+                }
+              ],
+              "next_scene": "DISTRICT_ARCHIVE"
+            }
+          }
+        },
+        {
+          "id": "CROSSCHECK_GATE_TWELVE_WORKSHOP_RUMOR",
+          "text": "Cross-check the workshop rumor against old Gate Twelve maintenance bulletins.",
+          "time_cost_minutes": 15,
+          "visible_if": [
+            {
+              "type": "flag",
+              "key": "world.workshop_rumor_heard",
+              "equals": true
+            },
+            {
+              "type": "not_knows",
+              "knowledge_id": "KNOW_GATE_TWELVE_CREW_WITHDRAWAL"
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "learn",
+                  "knowledge_id": "KNOW_GATE_TWELVE_CREW_WITHDRAWAL",
+                  "source": "DISTRICT_ARCHIVE",
+                  "confidence": 0.85,
+                  "private": false
+                }
+              ],
+              "next_scene": "DISTRICT_ARCHIVE"
+            }
+          }
+        }
+      ],
+      "location_id": "DISTRICT_ARCHIVE"
+    },
+    "DISTRICT_WORKSHOP": {
+      "title": "Workshop Row",
+      "body": "Repair crews have dragged benches into the open air where the emergency lamps are brighter. Broken readers, tram relays, and field tools are being sorted into salvage trays. The workers are more interested in keeping the district functional than in chasing rumors, but they have heard enough about Gate Twelve to know that municipal crews stopped using it long before tonight.",
+      "choices": [
+        {
+          "id": "ASK_WORKERS_ABOUT_GATE_TWELVE",
+          "text": "Ask what the workshop crews remember about Gate Twelve.",
+          "time_cost_minutes": 15,
+          "visible_if": [
+            {
+              "type": "flag",
+              "key": "world.workshop_rumor_heard",
+              "equals": false
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "world.workshop_rumor_heard",
+                  "value": true
+                }
+              ],
+              "next_scene": "DISTRICT_WORKSHOP"
+            }
+          }
+        }
+      ],
+      "location_id": "WORKSHOP_ROW"
     }
   },
   "powers": {
@@ -1466,6 +1694,14 @@
       "KNOW_DIRECTIONAL_TRACE_POINTS_DEEPER": {
         "label": "Directional Trace points deeper below Gate Twelve",
         "description": "A controlled Directional Trace suggests the strongest recent residual path continues below the mapped service level."
+      },
+      "KNOW_PLATFORM_NINE_EVAC_PROTOCOL": {
+        "label": "Platform Nine evacuation protocol",
+        "description": "Municipal records show that Platform Nine's emergency routing was deliberately designed to preserve maintenance access during district evacuations."
+      },
+      "KNOW_GATE_TWELVE_CREW_WITHDRAWAL": {
+        "label": "Gate Twelve crew withdrawal",
+        "description": "Workshop recollections and archive maintenance bulletins agree that municipal crews stopped routine work at Gate Twelve earlier than public records suggest."
       }
     },
     "perks": {
@@ -1577,6 +1813,30 @@
         "description": "A controlled space used to reproduce and stabilize Trace Echo.",
         "x": 82,
         "y": 39
+      },
+      "DISTRICT_PLAZA": {
+        "title": "Depot Plaza",
+        "description": "The open space outside the tram depot, now serving as the district's temporary meeting point.",
+        "x": 48,
+        "y": 18,
+        "discover_flag": "world.free_roam_unlocked",
+        "scene_id": "DISTRICT_HUB"
+      },
+      "DISTRICT_ARCHIVE": {
+        "title": "Municipal Archive",
+        "description": "A public records annex running on backup power.",
+        "x": 66,
+        "y": 16,
+        "discover_flag": "world.free_roam_unlocked",
+        "scene_id": "DISTRICT_ARCHIVE"
+      },
+      "WORKSHOP_ROW": {
+        "title": "Workshop Row",
+        "description": "Repair shops and municipal contractors clustered west of the depot.",
+        "x": 29,
+        "y": 16,
+        "discover_flag": "world.free_roam_unlocked",
+        "scene_id": "DISTRICT_WORKSHOP"
       }
     },
     "edges": [
@@ -1603,6 +1863,16 @@
       {
         "from": "SERVICE_TUNNEL",
         "to": "TRACE_CHAMBER"
+      },
+      {
+        "from": "DISTRICT_PLAZA",
+        "to": "DISTRICT_ARCHIVE",
+        "travel_minutes": 8
+      },
+      {
+        "from": "DISTRICT_PLAZA",
+        "to": "WORKSHOP_ROW",
+        "travel_minutes": 7
       }
     ]
   }

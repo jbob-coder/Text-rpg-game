@@ -100,6 +100,7 @@ data class GameMapNode(
     val x: Double,
     val y: Double,
     val current: Boolean,
+    val reachable: Boolean = false,
 )
 
 data class GameMapEdge(val from: String, val to: String)
@@ -331,6 +332,7 @@ internal object BridgeSnapshotMapper {
                 x = number(node["x"], "map.nodes[$nodeIndex].x"),
                 y = number(node["y"], "map.nodes[$nodeIndex].y"),
                 current = boolean(node["current"], "map.nodes[$nodeIndex].current"),
+                reachable = optionalBoolean(node["reachable"]) ?: false,
             )
         }
         val mapEdges = optionalList(mapPayload["edges"], "map.edges").mapIndexed { edgeIndex, item ->

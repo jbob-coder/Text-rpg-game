@@ -96,6 +96,49 @@ fun SceneIllustration(
                 block(18, 15, 28, 2, Color(0xFF20353C))
                 block(8, 26, 48, 2, PixelColors.Gold)
             }
+            "DISTRICT_PLAZA" -> {
+                // Depot facade and the emergency-lit public square.
+                block(2, 8, 20, 15, Color(0xFF34444C))
+                block(5, 11, 5, 6, Color(0xFF17242B))
+                block(13, 11, 5, 6, Color(0xFF17242B))
+                block(26, 5, 34, 18, Color(0xFF3A4C55))
+                block(30, 9, 8, 8, Color(0xFF1B2A31))
+                block(43, 9, 8, 8, Color(0xFF1B2A31))
+                block(54, 11, 3, 12, PixelColors.Gold)
+                block(0, 25, 64, 2, Color(0xFF57636A))
+                block(6, 27, 52, 1, PixelColors.Cyan)
+                block(8, 21, 2, 4, PixelColors.Danger)
+                block(20, 20, 2, 5, PixelColors.Danger)
+            }
+            "DISTRICT_ARCHIVE" -> {
+                // Tall shelving, records terminals and backup lamps.
+                block(4, 4, 15, 20, Color(0xFF3D4D54))
+                block(22, 4, 15, 20, Color(0xFF3D4D54))
+                block(40, 4, 15, 20, Color(0xFF3D4D54))
+                for (y in 7..21 step 4) {
+                    block(6, y, 11, 2, Color(0xFF6A5941))
+                    block(24, y, 11, 2, Color(0xFF6A5941))
+                    block(42, y, 11, 2, Color(0xFF6A5941))
+                }
+                block(18, 18, 23, 4, Color(0xFF2B383E))
+                block(24, 16, 10, 2, PixelColors.Cyan)
+                block(28, 22, 3, 3, PixelColors.Gold)
+                block(0, 26, 64, 2, Color(0xFF56636A))
+            }
+            "WORKSHOP_ROW" -> {
+                // Open repair stalls and salvage benches.
+                block(2, 7, 18, 16, Color(0xFF38484F))
+                block(23, 5, 18, 18, Color(0xFF415159))
+                block(44, 8, 17, 15, Color(0xFF35454C))
+                block(4, 9, 14, 3, Color(0xFF18262C))
+                block(25, 8, 14, 3, Color(0xFF18262C))
+                block(46, 10, 13, 3, Color(0xFF18262C))
+                block(6, 18, 50, 4, Color(0xFF5A5548))
+                block(10, 15, 4, 3, PixelColors.Cyan)
+                block(28, 14, 5, 4, PixelColors.Gold)
+                block(48, 15, 4, 3, PixelColors.Danger)
+                block(0, 26, 64, 2, Color(0xFF57636A))
+            }
             else -> {
                 block(7, 9, 9, 14, Color(0xFF33444D))
                 block(19, 5, 12, 18, Color(0xFF3B4B53))
