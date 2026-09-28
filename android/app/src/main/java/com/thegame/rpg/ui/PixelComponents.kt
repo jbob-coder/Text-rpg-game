@@ -124,16 +124,23 @@ fun PlayerAvatarPanel(
                 drawPixelSprite(PixelAssetCatalog.playerFrontBase, px, ox, oy)
                 drawPixelSprite(PixelAssetCatalog.playerHairTechnicalPlaceholder, px, ox, oy)
 
-                // Wave A: the Depot Jacket is the first production equipment layer driven by
-                // exact item ID + authoritative equipped slot. Other slots keep temporary
-                // coordinate overlays until their own catalog assets replace them.
-                equippedSlots["body"]?.let { bodySlot ->
-                    PixelAssetCatalog.equipmentLayer(bodySlot.itemId, bodySlot.slot)?.let { sprite ->
-                        drawPixelSprite(sprite, px, ox, oy)
+                // Current authored equipment renders from exact item ID + authoritative slot.
+                // Unknown/future equipment never inherits another item's production art.
+                listOf("body", "neck", "hands", "ring_1").forEach { slotName ->
+                    equippedSlots[slotName]?.let { slot ->
+                        PixelAssetCatalog.equipmentLayer(slot.itemId, slot.slot)?.let { sprite ->
+                            drawPixelSprite(sprite, px, ox, oy)
+                        }
                     }
                 }
 
-                if ("hands" in equippedSlots) {
+                if (
+                    "hands" in equippedSlots &&
+                    PixelAssetCatalog.equipmentLayer(
+                        equippedSlots["hands"]?.itemId,
+                        "hands",
+                    ) == null
+                ) {
                     block(5, 30, 4, 5, Color(0xFF27343B))
                     block(23, 30, 4, 5, Color(0xFF27343B))
                     block(5, 33, 4, 2, Color(0xFF53656E))
@@ -156,11 +163,23 @@ fun PlayerAvatarPanel(
                     block(8, 46, 7, 1, PixelColors.Gold)
                     block(18, 46, 7, 1, PixelColors.Gold)
                 }
-                if ("neck" in equippedSlots) {
+                if (
+                    "neck" in equippedSlots &&
+                    PixelAssetCatalog.equipmentLayer(
+                        equippedSlots["neck"]?.itemId,
+                        "neck",
+                    ) == null
+                ) {
                     block(15, 13, 2, 2, PixelColors.Gold)
                     block(15, 15, 2, 2, Color(0xFF7E6A42))
                 }
-                if ("ring_1" in equippedSlots) {
+                if (
+                    "ring_1" in equippedSlots &&
+                    PixelAssetCatalog.equipmentLayer(
+                        equippedSlots["ring_1"]?.itemId,
+                        "ring_1",
+                    ) == null
+                ) {
                     block(5, 33, 1, 1, PixelColors.Gold)
                 }
                 if ("ring_2" in equippedSlots) {
