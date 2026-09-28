@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SceneIllustration(
     locationId: String,
+    relayState: String? = null,
     modifier: Modifier = Modifier,
 ) {
     Canvas(
@@ -63,6 +64,18 @@ fun SceneIllustration(
                 block(8, 6, 48, 2, Color(0xFF303E45))
                 block(11, 8, 2, 7, PixelColors.Gold)
                 block(50, 8, 2, 7, PixelColors.Gold)
+
+                PixelAssetCatalog.relayStateSprite(relayState)?.let { relay ->
+                    val relayPixel = cell * 0.42f
+                    val relayOriginX = ox + cell * (32f - relay.width * 0.42f / 2f)
+                    val relayOriginY = oy + cell * 8f
+                    drawPixelSprite(
+                        sprite = relay,
+                        pixelSize = relayPixel,
+                        originX = relayOriginX,
+                        originY = relayOriginY,
+                    )
+                }
             }
             "GATE_TWELVE" -> {
                 block(10, 5, 44, 20, Color(0xFF3A4449))
