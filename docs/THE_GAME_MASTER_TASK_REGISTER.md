@@ -245,6 +245,31 @@ The UI must not become the authoritative rules engine.
 - RESULT: root `AGENTS.md`, this task register, and README entrypoint were written to `fix/v6-runtime-boundaries` and fetched back from GitHub for verification.
 - COMPLETED_AT: `2026-09-27 14:21 AST`
 
+
+
+## Pixel asset production documentation
+
+### TASK M-004 — Pixel asset production system and Batch 001
+- STATUS: `DONE`
+- BRANCH: `docs/pixel-asset-production-plan-v1`
+- RESULT:
+  - pixel asset master production rules documented;
+  - detailed player paper-doll and NPC_TAMSIN blueprints documented;
+  - Batch 001 contains exactly 100 planned asset units with native sizes, exact game uses and production notes;
+  - generated-reference -> reverse-engineered pixel blueprint pipeline documented;
+  - machine-readable manifest/state-binding/QA schema documented;
+  - visual bible linked to the new production documents.
+- IMPORTANT: this task completes documentation/planning only. It does not claim that the 100 assets have been generated, reconstructed, integrated or verified.
+- COMPLETED_AT: `NOT_RECORDED`
+
+### TASK M-005 — Produce Batch 001 assets
+- STATUS: `PENDING`
+- DEPENDS_ON: M-004
+- PRODUCTION ORDER: validate the entire pipeline first with player body turnaround/front master, NPC_TAMSIN turnaround, and Depot Jacket icon/paper-doll layer; then continue Batch 001 in dependency waves.
+- RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
+- DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
+- COMPLETED_AT: —
+
 ## Known technical follow-ups
 
 These are not part of the Android black-screen fix unless directly implicated:
