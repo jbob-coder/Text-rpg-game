@@ -88,3 +88,11 @@ This small set validates the entire reference -> blueprint -> pixel master -> pa
 `REF_BATCH001_CONCEPT_BOARD_A` has been preserved in Google Drive and audited in `references/REF_BATCH001_CONCEPT_BOARD_A.md`.
 
 It is accepted only for broad style direction. Its invented item/NPC/location details are explicitly rejected as canon.
+
+
+## Verified runtime asset waves
+
+- `manifests/BATCH_001_WAVE_B_CURRENT_LOADOUT_RELAY.json` — current authored loadout and relay-state visuals.
+- `manifests/BATCH_001_WAVE_C_CURRENT_SCENES.json` — 9/9 current named-location base masters plus Gate Twelve, tunnel-aftershock and Trace Chamber training overlays.
+
+The Wave C runtime parent `1c7e54e548ab3c28819af0b85ae8cbba53aff827` passed workflow `36384772701`: Python 301/301, Android build/instrumentation gates, and API 35 emulator 10/10. Native-scale art review and physical Galaxy A03 visual QA remain pending.
