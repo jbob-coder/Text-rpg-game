@@ -273,6 +273,8 @@ The UI must not become the authoritative rules engine.
   - Wave A reconstruction packet completed for assets 001, 002, 018, 021 and 022;
   - Wave A machine-readable manifest completed;
   - dedicated player and Tamsin turnaround generation briefs locked with explicit rejection criteria and left/right identity constraints;
+  - Boards C and D were audited and rejected for canonical turnaround selection: player candidates leaked a fixed identity; Tamsin candidates inverted the heavy-fringe side and lost the one-sleeve asymmetry;
+  - canonical turnaround generation protocol added: one canonical asset per generated image, explicit anatomical/viewer-side verification, and mandatory prompt changes after each rejection;
   - `PLAYER_GAMEPLAY_FRONT_BASE`, `ITEM_DEPOT_JACKET_ICON`, and `ITEM_DEPOT_JACKET_PAPERDOLL` are `BLUEPRINTED`;
   - `PLAYER_BODYFRAME_A_TURNAROUND` and `NPC_TAMSIN_TURNAROUND` are `BRIEF_LOCKED` pending dedicated reference generation/selection.
 - PRODUCTION ORDER: generate/select dedicated player neutral turnaround and Tamsin canonical turnaround references; reconstruct native player front base and Depot Jacket icon/paper-doll layer; then integrate the first paper-doll pair and run Android visual/equip/unequip QA before mass production.
