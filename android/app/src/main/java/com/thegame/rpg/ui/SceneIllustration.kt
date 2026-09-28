@@ -11,6 +11,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import kotlin.math.floor
 
 @Composable
 fun SceneIllustration(
@@ -24,6 +25,37 @@ fun SceneIllustration(
             .background(PixelColors.Deep)
             .border(2.dp, PixelColors.Muted),
     ) {
+        PixelSceneCatalog.scene(locationId)?.let { scene ->
+            val scenePixel = floor(
+                minOf(size.width / scene.width.toFloat(), size.height / scene.height.toFloat())
+            ).coerceAtLeast(1f)
+            val sceneOriginX = floor((size.width - scene.width * scenePixel) / 2f)
+            val sceneOriginY = floor((size.height - scene.height * scenePixel) / 2f)
+
+            drawPixelSprite(
+                sprite = scene,
+                pixelSize = scenePixel,
+                originX = sceneOriginX,
+                originY = sceneOriginY,
+            )
+
+            if (locationId == "RELAY_WORKBENCH") {
+                PixelAssetCatalog.relayStateSprite(relayState)?.let { relay ->
+                    val relayPixel = floor(scenePixel / 2f).coerceAtLeast(1f)
+                    val relayWidth = relay.width * relayPixel
+                    val relayOriginX = floor(sceneOriginX + 64f * scenePixel - relayWidth / 2f)
+                    val relayOriginY = floor(sceneOriginY + 25f * scenePixel)
+                    drawPixelSprite(
+                        sprite = relay,
+                        pixelSize = relayPixel,
+                        originX = relayOriginX,
+                        originY = relayOriginY,
+                    )
+                }
+            }
+            return@Canvas
+        }
+
         val cell = minOf(size.width / 64f, size.height / 32f)
         val ox = (size.width - cell * 64f) / 2f
         val oy = (size.height - cell * 32f) / 2f
@@ -64,18 +96,6 @@ fun SceneIllustration(
                 block(8, 6, 48, 2, Color(0xFF303E45))
                 block(11, 8, 2, 7, PixelColors.Gold)
                 block(50, 8, 2, 7, PixelColors.Gold)
-
-                PixelAssetCatalog.relayStateSprite(relayState)?.let { relay ->
-                    val relayPixel = cell * 0.42f
-                    val relayOriginX = ox + cell * (32f - relay.width * 0.42f / 2f)
-                    val relayOriginY = oy + cell * 8f
-                    drawPixelSprite(
-                        sprite = relay,
-                        pixelSize = relayPixel,
-                        originX = relayOriginX,
-                        originY = relayOriginY,
-                    )
-                }
             }
             "GATE_TWELVE" -> {
                 block(10, 5, 44, 20, Color(0xFF3A4449))
