@@ -2579,3 +2579,106 @@ Continue the prototype with the combat-to-harvest boundary:
 2. convert combat/core damage into crystal harvest-integrity consequences through an authoritative rule;
 3. keep kill speed versus pristine-core value as an explicit tradeoff;
 4. then connect harvested crystals to the already-tested integration contract.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-MEDIEVAL-HUNT-ECOLOGY-PROTOTYPE-31
+
+Repository: \`jbob-coder/Text-rpg-game\`
+
+Prototype branch: \`prototype/medieval-crystal-contracts\`
+
+Latest prototype commit in this pass: \`ed3d8744e8b99e5bf97b884cd98f132cddbf18b6\`
+
+### OBJECTIVE
+
+[DECISION] Continue implementing the accepted medieval/crystal/beast design only on the isolated prototype branch while preserving the unresolved V6 promotion gate.
+
+### IMPLEMENTED PROTOTYPE
+
+Added/expanded:
+- \`src/textrpg/beast_harvest.py\`
+- \`src/textrpg/crystal_forging.py\`
+- \`src/textrpg/medieval.py\`
+- \`src/textrpg/beast_progression.py\`
+- \`src/textrpg/beast_voice.py\`
+- \`src/textrpg/beast_ecology.py\`
+- \`tests/test_beast_harvest.py\`
+- \`tests/test_crystal_forging.py\`
+- \`tests/test_beast_progression.py\`
+- \`tests/test_beast_voice.py\`
+- \`tests/test_beast_ecology.py\`
+- \`tests/test_medieval_hunt_slice.py\`
+
+### SYSTEMS NOW CONNECTED
+
+[VERIFIED FOCUSED LOCAL] Positional targeting -> core exposure -> body-zone damage -> beast crystal harvest -> crystal fitting -> explainable equipment effect output is covered by an end-to-end prototype test.
+
+[VERIFIED FOCUSED LOCAL] Retreat/encounter observations -> persistent memory -> meaningful survival development -> diminishing repeated XP -> adaptation eligibility -> memory-aware authored voice is covered by an end-to-end prototype test.
+
+[VERIFIED FOCUSED LOCAL] Coarse beast-vs-beast ecology now accounts for physical profile, tactics, intelligence, command/followers, injury penalties, controlled-territory defense, deterministic variance, and decisive territory transfer.
+
+### IMPORTANT DESIGN RESULTS
+
+[DECISION] Combat damage already inflicted on a heart/core cannot be repaired by high harvesting skill. Skill/tool quality only reduce additional extraction loss.
+
+[DECISION] Crystal effect potency is explainable from authored base effect plus crystal material state and craft quality:
+- purity
+- stability
+- harvest integrity
+- forge quality
+- integration quality
+
+[DECISION] Intelligence amplifies tactical use and command capability rather than acting as undifferentiated physical power.
+
+[DECISION] Repeated development events decay toward an authored minimum novelty factor, preventing full-value retreat/survival farming.
+
+[DECISION] Beast voice remains authored and deterministic. Intelligence, level, role, and actual memory can gate lines without exposing hidden eligibility data to the player.
+
+### VERIFICATION
+
+[VERIFIED FOCUSED LOCAL] Executed isolated prototype suite:
+- 62 tests run
+- 62 passed
+- 0 failed
+
+[VERIFIED FOCUSED LOCAL] \`python -m py_compile\` succeeded across the complete local prototype source/test set.
+
+[VERIFIED] Newly material prototype files were checked against their committed GitHub blob hashes:
+- \`src/textrpg/medieval.py\`: \`a974d9f3e0fee4dda7564ea4b571e5b7d0215d8c\`
+- \`src/textrpg/beast_harvest.py\`: \`234b9156625988b11acf1f95e427ee3be5b19d7f\`
+- \`src/textrpg/crystal_forging.py\`: \`aaf99e38141bbe40263131b0ba4eba6b932c788e\`
+- \`src/textrpg/beast_progression.py\`: \`02e3ca90e7d61d9de11d2c5d8f65ebaca32c7703\`
+- \`src/textrpg/beast_voice.py\`: \`8559e546eda5f3d1c7696a07163784953e1d5366\`
+- \`src/textrpg/beast_ecology.py\`: \`835aca4cd3e50c19c294c25967836b42b4194c88\`
+- \`tests/test_beast_harvest.py\`: \`29874ca175772cde1aadc8d282d186dd1f274df3\`
+- \`tests/test_crystal_forging.py\`: \`36b5b96a8ead3b88a956aef0a3addfe5e2c9292c\`
+- \`tests/test_beast_progression.py\`: \`6aa29a95aa1d14db35ac700edb1724735dc88ff4\`
+- \`tests/test_beast_voice.py\`: \`ae6b799b600618737329c74cfba2a1cb5782e1de\`
+- \`tests/test_beast_ecology.py\`: \`96eddbe9981a60f8fd5a85d8114653f99c951a7b\`
+- \`tests/test_medieval_hunt_slice.py\`: \`d3027e18b92df5cd775ea0b05d6639bb529be2f4\`
+
+### QA CORRECTION DURING THIS PASS
+
+[VERIFIED] The first remote commit of \`src/textrpg/beast_harvest.py\` did not match the locally executed blob because newline escapes inside Python error strings were transformed during the write path.
+
+[DECISION] That commit was not accepted as verified.
+
+[VERIFIED] The remote source was immediately replaced using a byte-preserving write and rechecked. The accepted blob is \`e6c4823e8dd606680efa208d9859fda6d8320200\` for the initial harvest slice and later \`234b9156625988b11acf1f95e427ee3be5b19d7f\` after the crystal-effect expansion.
+
+This discrepancy demonstrates why byte/hash verification remains required before treating remote commits as equivalent to locally executed code.
+
+### V6 STATUS
+
+[UNKNOWN] Exact full V6 suite remains unexecuted.
+
+[DECISION] No claim in this checkpoint promotes the isolated prototype to V6/canonical implementation.
+
+### NEXT_ACTION
+
+Continue on the prototype branch with one of the remaining integration boundaries:
+1. convert body-zone damage into persistent wound/impairment effects that alter future targetability/actions;
+2. add WorldRegionState/event scheduling so coarse beast ecology can persist/migrate across map regions;
+3. connect crystal equipment output to the actual combat-resolution adapter;
+4. then create authored medieval-hunt content only after those contracts are stable.
