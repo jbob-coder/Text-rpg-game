@@ -79,6 +79,20 @@ def validate_crystal_definition(definition: Any) -> List[str]:
     elif len(tags) != len(set(tags)):
         errors.append("crystal_definition.resonance_tags must not contain duplicates")
 
+    effects = definition.get("effects", {})
+    if not isinstance(effects, Mapping):
+        errors.append("crystal_definition.effects must be an object")
+    else:
+        for effect_id, value in effects.items():
+            if not _stable_id(effect_id):
+                errors.append(
+                    f"crystal_definition effect ID must be stable uppercase: {effect_id!r}"
+                )
+            if not _finite_number(value, minimum=0.0):
+                errors.append(
+                    f"crystal_definition.effects.{effect_id} must be finite non-negative numeric"
+                )
+
     return errors
 
 
@@ -217,6 +231,10 @@ def harvest_beast_crystal(
         "harvest_integrity": harvest_integrity,
         "size": float(crystal_definition["size"]),
         "resonance_tags": list(crystal_definition.get("resonance_tags", [])),
+        "effects": {
+            effect_id: float(value)
+            for effect_id, value in crystal_definition.get("effects", {}).items()
+        },
         "harvest": {
             "core_zone_id": core_zone_state["zone_id"],
             "core_damage_percent": round(core_damage_ratio * 100.0, 2),
