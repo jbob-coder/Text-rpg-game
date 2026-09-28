@@ -317,7 +317,7 @@ An asset is production-ready only when:
 
 Production is organized into numbered batches of exactly 100 planned asset units.
 
-Batch 001 establishes the reusable visual language for the current playable content. Later batches may add regions, NPCs, enemy families, equipment families, UI expansion and story-state variants, but they must inherit this master standard.
+Batch 001 establishes the reusable visual language for the current playable content. Batches 002–005 complete the v1 production baseline across character/NPC frameworks, equipment/items, world/environment construction, UI/FX/accessibility and developer QA. The complete roadmap is `ASSET_PRODUCTION_ROADMAP_001-500.md`. Future batches must inherit this master standard rather than resetting it.
 
 Do not begin bulk image generation until:
 
@@ -327,3 +327,23 @@ Do not begin bulk image generation until:
 - reference-to-blueprint rules exist;
 - manifest schema exists.
 
+
+
+## 17. V1 planning completion record
+
+The documented v1 baseline contains exactly **500 unique production units**:
+
+- Batch 001: 001–100
+- Batch 002: 101–200
+- Batch 003: 201–300
+- Batch 004: 301–400
+- Batch 005: 401–500
+
+Mechanical catalog verification found:
+
+- 500 total entries;
+- no missing numbers;
+- no duplicate numbers;
+- no duplicate stable asset IDs.
+
+This satisfies the planning prerequisite for beginning reference generation. It does **not** mark any asset generated, reconstructed, integrated or verified.
