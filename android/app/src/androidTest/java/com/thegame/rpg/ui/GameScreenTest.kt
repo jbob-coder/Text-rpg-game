@@ -18,6 +18,7 @@ import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameInventory
 import com.thegame.rpg.engine.GameResource
 import com.thegame.rpg.engine.GameSnapshot
+import com.thegame.rpg.engine.GameVisuals
 import org.junit.Rule
 import org.junit.Test
 
@@ -128,6 +129,28 @@ class GameScreenTest {
             composeRule.onNodeWithTag("item-icon-$itemId")
                 .assertIsDisplayed()
         }
+    }
+
+    @Test
+    fun projectedRelayStateRendersThroughNarrativeScene() {
+        val relaySnapshot = snapshot.copy(
+            location = "RELAY_WORKBENCH",
+            visuals = GameVisuals(relayState = "damaged"),
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                GameScreen(
+                    snapshot = relaySnapshot,
+                    busy = false,
+                    onChoice = {},
+                    onNavigate = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("scene-illustration")
+            .assertIsDisplayed()
     }
 
     @Test
