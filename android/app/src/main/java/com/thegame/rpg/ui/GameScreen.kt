@@ -889,14 +889,36 @@ private fun MapSection(
                         val to = point(edge.to)
                         if (from != null && to != null) drawLine(PixelColors.Muted, from, to, strokeWidth = 5f)
                     }
+                    val markerPixel = 2f
+                    val markerExtent = 16f * markerPixel
                     map.nodes.forEach { node ->
                         val p = point(node.id) ?: return@forEach
-                        val nodeSize = if (node.current) 18f else 13f
-                        drawRect(
-                            color = if (node.current) PixelColors.Gold else PixelColors.Cyan,
-                            topLeft = Offset(p.x - nodeSize / 2f, p.y - nodeSize / 2f),
-                            size = androidx.compose.ui.geometry.Size(nodeSize, nodeSize),
+                        val ox = p.x - markerExtent / 2f
+                        val oy = p.y - markerExtent / 2f
+
+                        drawPixelSprite(
+                            sprite = PixelMapMarkerCatalog.discoveredMarker,
+                            pixelSize = markerPixel,
+                            originX = ox,
+                            originY = oy,
                         )
+                        drawPixelSprite(
+                            sprite = PixelMapMarkerCatalog.stateOverlay(
+                                current = node.current,
+                                reachable = node.reachable,
+                            ),
+                            pixelSize = markerPixel,
+                            originX = ox,
+                            originY = oy,
+                        )
+                        if (node.current) {
+                            drawPixelSprite(
+                                sprite = PixelMapMarkerCatalog.playerMarker,
+                                pixelSize = markerPixel,
+                                originX = ox,
+                                originY = oy,
+                            )
+                        }
                     }
                 }
 
