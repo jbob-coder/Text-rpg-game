@@ -7,7 +7,7 @@ from textrpg.beast_harvest import (
     validate_crystal_definition,
 )
 from textrpg.core import RuleError
-from textrpg.crystal_forging import integrate_crystal
+from textrpg.crystal_forging import crystal_effect_output, integrate_crystal
 from textrpg.medieval import validate_crystal_instance
 
 
@@ -48,6 +48,7 @@ class BeastHarvestTests(unittest.TestCase):
             "base_stability": 90,
             "size": 1.1,
             "resonance_tags": ["frost"],
+            "effects": {"EFFECT_FROST_EDGE": 20},
             "core_damage_sensitivity": 1.0,
             "decay_per_hour": 2.0,
         }
@@ -182,6 +183,56 @@ class BeastHarvestTests(unittest.TestCase):
         self.assertEqual(installed["source_beast_id"], "BEAST_WHITE_FANG")
         self.assertEqual(installed["harvest_integrity"], crystal["harvest_integrity"])
         self.assertEqual(installed["harvest"]["core_damage_percent"], 20.0)
+
+
+    def test_core_damage_reduces_forged_equipment_crystal_output(self):
+        pristine = harvest_beast_crystal(
+            self.beast(), self.core_zone(), self.definition(),
+            instance_id="CRYSTALINSTANCE_OUTPUT_A",
+            harvest_skill=100, tool_quality=100,
+        )
+        damaged = harvest_beast_crystal(
+            self.beast(),
+            self.core_zone(damage_taken=50, hits=1, damage_by_type={"pierce": 50}),
+            self.definition(),
+            instance_id="CRYSTALINSTANCE_OUTPUT_B",
+            harvest_skill=100, tool_quality=100,
+        )
+        pristine_item = integrate_crystal(
+            self.equipment(), pristine, "SOCKET_PRIMARY",
+            integration_quality=100, smith_id="NPC_SMITH_1",
+        )
+        damaged_item = integrate_crystal(
+            self.equipment(), damaged, "SOCKET_PRIMARY",
+            integration_quality=100, smith_id="NPC_SMITH_1",
+        )
+        pristine_output = crystal_effect_output(
+            pristine_item, "SOCKET_PRIMARY", "EFFECT_FROST_EDGE"
+        )
+        damaged_output = crystal_effect_output(
+            damaged_item, "SOCKET_PRIMARY", "EFFECT_FROST_EDGE"
+        )
+        self.assertGreater(pristine_output["total"], damaged_output["total"])
+        self.assertEqual(pristine_output["base_value"], damaged_output["base_value"])
+        self.assertLess(damaged_output["material_factor"], pristine_output["material_factor"])
+
+    def test_integration_quality_changes_output_without_mutating_crystal_base_effect(self):
+        crystal = harvest_beast_crystal(
+            self.beast(), self.core_zone(), self.definition(),
+            instance_id="CRYSTALINSTANCE_CRAFT_A",
+            harvest_skill=100, tool_quality=100,
+        )
+        high = integrate_crystal(
+            self.equipment(), crystal, "SOCKET_PRIMARY", integration_quality=100
+        )
+        low = integrate_crystal(
+            self.equipment(), crystal, "SOCKET_PRIMARY", integration_quality=20
+        )
+        high_output = crystal_effect_output(high, "SOCKET_PRIMARY", "EFFECT_FROST_EDGE")
+        low_output = crystal_effect_output(low, "SOCKET_PRIMARY", "EFFECT_FROST_EDGE")
+        self.assertGreater(high_output["total"], low_output["total"])
+        self.assertEqual(high_output["base_value"], 20.0)
+        self.assertEqual(low_output["base_value"], 20.0)
 
     def test_zone_runtime_rejects_damage_above_maximum(self):
         errors = validate_body_zone_runtime(self.core_zone(damage_taken=101))
