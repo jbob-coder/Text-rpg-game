@@ -76,11 +76,13 @@ The Java activity never computes rule outcomes.
 
 CONFIRMED from repository design/source:
 - Existing engine exposes player-safe scene/status projections.
+- Host-side bridge regressions now cover initial safe projection, engine-backed choice execution, schema-1 save output, save/resume, invalid-choice rollback, and unsupported-schema rejection.
 - Existing persistence contract is schema 1.
 - Android bootstrap source and pinned wrapper are repository-owned on this working branch.
 - Android imports the existing engine/content paths instead of maintaining copies.
 
 NOT YET VERIFIED:
+- The newly added host-side Android bridge regression file has not been executed in this runtime because the repository checkout is not locally materialized here.
 - Gradle configuration resolves successfully on a JDK 17 + Android SDK host.
 - Debug APK assembles.
 - Expected ABIs/assets are present in the APK.

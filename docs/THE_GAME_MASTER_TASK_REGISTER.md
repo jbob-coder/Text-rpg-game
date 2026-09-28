@@ -70,7 +70,8 @@ The UI must not become the authoritative rules engine.
   - the app packages the existing `src/textrpg` engine and `content/` directly, so Android does not become a second rules engine;
   - the launcher renders a visible boot surface before Python initialization, then exposes catchable startup failures on-screen and through Logcat while redirecting native/Python stdout and stderr for diagnosis;
   - ABI coverage includes `armeabi-v7a`, `arm64-v8a`, and `x86_64`; Python 3.11 was selected specifically to retain 32-bit ARM support;
-  - the Python bridge exposes `build_scene_view()` and `build_status_view()` projections, applies choices through the existing engine, and persists schema-1 saves through Android internal storage.
+  - the Python bridge exposes `build_scene_view()` and `build_status_view()` projections, applies choices through the existing engine, and persists schema-1 saves through Android internal storage;
+  - `tests/test_android_bridge.py` now specifies host-side regressions for safe projection, choice execution, save/resume, rollback, and schema rejection; these tests are committed but not yet executed in this runtime.
 - CURRENT BLOCKER: the new Android source has not yet been assembled or installed in an Android SDK/device environment. The historical black-screen root cause therefore cannot be narrowed beyond the lost/ephemeral wrapper, and the replacement path is not yet runtime-verified.
 - REQUIRED CHECKS:
   - execute `./gradlew :app:assembleDebug` from `android/`;
