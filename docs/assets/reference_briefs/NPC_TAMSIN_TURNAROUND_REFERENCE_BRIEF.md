@@ -79,6 +79,24 @@ Generation must preserve the subject's left/right consistently across every view
 
 These asymmetries are identity anchors. A candidate failing even one should not be selected without explicit correction.
 
+
+## FRONT-VIEW LEFT/RIGHT CHECK
+
+For a **front-facing** Tamsin, use anatomical sides, not image-layout sides:
+
+- Tamsin's **LEFT** appears on the **viewer RIGHT**.
+  - heavy left-side fringe must occupy the viewer-right side;
+  - left-chest badge must be on viewer-right;
+  - left-hip tool loop must be on viewer-right.
+
+- Tamsin's **RIGHT** appears on the **viewer LEFT**.
+  - right-eyebrow notch must be on viewer-left;
+  - the **right sleeve only** must be rolled on viewer-left.
+
+The **left sleeve must remain visibly unrolled/full-length** enough that the asymmetry is unmistakable at 32x48. Do not roll both sleeves.
+
+This anatomical/viewer mapping must remain consistent in the three-quarter and back views as the body rotates.
+
 ## Silhouette priorities
 
 At gameplay scale, Tamsin should be identifiable through:
@@ -204,4 +222,4 @@ Only then advance asset 018 to `REFERENCE_SELECTED`.
 
 ## Prompt-ready generation specification
 
-Create a dedicated six-view orthographic turnaround reference for NPC_TAMSIN, a recurring adult municipal systems worker in a detailed modern-retro pixel-art text RPG. Show front, front three-quarter, left profile, right profile, rear three-quarter, and back views at equal height on one ground line, neutral stance, full body visible, crisp deliberate pixel clusters, no anti-aliasing or painterly rendering, neutral consistent lighting, plain dark-neutral presentation background. Tamsin is average height with a slim athletic build, slightly long forearms and compact stance; medium warm-brown skin; dark brown eyes; short angular layered near-black hair with muted cool highlights and a heavy fringe on Tamsin's left; a small notch through the right eyebrow; charcoal municipal utility jacket with high collar over a pale work shirt; dark practical work trousers; a narrow cross-body tool satchel; right sleeve rolled; small municipal systems badge on left chest; left-hip tool loop. Keep all left/right asymmetries consistent in every view. The satchel must remain a compact cross-body hip bag, never a backpack. No long hair, neon colors, armor, oversized weapons, dramatic pose, Trace effects, environment, invented text, or redesign. This is a canonical identity reference for reconstruction into 32x48 sprites and 64x64 portraits.
+Create a dedicated six-view orthographic turnaround reference for NPC_TAMSIN, a recurring adult municipal systems worker in a detailed modern-retro pixel-art text RPG. Show front, front three-quarter, left profile, right profile, rear three-quarter, and back views at equal height on one ground line, neutral stance, full body visible, crisp deliberate pixel clusters, no anti-aliasing or painterly rendering, neutral consistent lighting, plain dark-neutral presentation background. Tamsin is average height with a slim athletic build, slightly long forearms and compact stance; medium warm-brown skin; dark brown eyes; short angular layered near-black hair with muted cool highlights and a heavy fringe on Tamsin's left; a small notch through the right eyebrow; charcoal municipal utility jacket with high collar over a pale work shirt; dark practical work trousers; a narrow cross-body tool satchel; right sleeve rolled **only** while the left sleeve remains visibly unrolled/full-length; small municipal systems badge on left chest; left-hip tool loop. Keep all left/right asymmetries consistent in every view. The satchel must remain a compact cross-body hip bag, never a backpack. No long hair, neon colors, armor, oversized weapons, dramatic pose, Trace effects, environment, invented text, or redesign. This is a canonical identity reference for reconstruction into 32x48 sprites and 64x64 portraits.
