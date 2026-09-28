@@ -15,6 +15,11 @@ class PixelSceneCatalogTest {
                 PixelSceneCatalog.RELAY_WORKBENCH_SCENE_ID,
                 PixelSceneCatalog.GATE_TWELVE_SCENE_ID,
                 PixelSceneCatalog.SERVICE_TUNNEL_SCENE_ID,
+                PixelSceneCatalog.EVAC_STAIR_SCENE_ID,
+                PixelSceneCatalog.TRACE_CHAMBER_SCENE_ID,
+                PixelSceneCatalog.DISTRICT_PLAZA_SCENE_ID,
+                PixelSceneCatalog.DISTRICT_ARCHIVE_SCENE_ID,
+                PixelSceneCatalog.WORKSHOP_ROW_SCENE_ID,
             ),
             PixelSceneCatalog.productionScenes.map { it.assetId }.toSet(),
         )
@@ -38,23 +43,23 @@ class PixelSceneCatalogTest {
     }
 
     @Test
-    fun namedLocationsResolveOnlyToTheirOwnProductionScene() {
-        assertSame(
-            PixelSceneCatalog.platformNineBlackout,
-            PixelSceneCatalog.scene("PLATFORM_NINE"),
+    fun everyCurrentNamedLocationResolvesToItsOwnProductionScene() {
+        val expected = mapOf(
+            "PLATFORM_NINE" to PixelSceneCatalog.platformNineBlackout,
+            "RELAY_WORKBENCH" to PixelSceneCatalog.relayWorkbenchDefault,
+            "GATE_TWELVE" to PixelSceneCatalog.gateTwelveSealed,
+            "SERVICE_TUNNEL" to PixelSceneCatalog.serviceTunnelDefault,
+            "EVAC_STAIR" to PixelSceneCatalog.evacStairDefault,
+            "TRACE_CHAMBER" to PixelSceneCatalog.traceChamberIdle,
+            "DISTRICT_PLAZA" to PixelSceneCatalog.districtPlazaOpen,
+            "DISTRICT_ARCHIVE" to PixelSceneCatalog.districtArchiveDefault,
+            "WORKSHOP_ROW" to PixelSceneCatalog.workshopRowDefault,
         )
-        assertSame(
-            PixelSceneCatalog.relayWorkbenchDefault,
-            PixelSceneCatalog.scene("RELAY_WORKBENCH"),
-        )
-        assertSame(
-            PixelSceneCatalog.gateTwelveSealed,
-            PixelSceneCatalog.scene("GATE_TWELVE"),
-        )
-        assertSame(
-            PixelSceneCatalog.serviceTunnelDefault,
-            PixelSceneCatalog.scene("SERVICE_TUNNEL"),
-        )
+
+        expected.forEach { (locationId, scene) ->
+            assertSame(scene, PixelSceneCatalog.scene(locationId))
+        }
+        assertEquals(9, PixelSceneCatalog.productionScenes.size)
         assertNull(PixelSceneCatalog.scene("UNKNOWN_LOCATION"))
     }
 }
