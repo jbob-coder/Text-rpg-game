@@ -1038,16 +1038,16 @@ private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) 
             .background(if (active) PixelColors.Cyan else PixelColors.Deep)
             .border(2.dp, if (active) PixelColors.Paper else PixelColors.Muted)
             .clickable(role = Role.Tab, onClick = onClick)
-            .padding(horizontal = 10.dp, vertical = 8.dp),
+            .padding(horizontal = 6.dp, vertical = 5.dp),
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             PixelUiIcon(
                 sprite = PixelUiIconCatalog.navigation(label),
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(20.dp),
                 tint = if (active) PixelColors.Ink else PixelColors.Paper,
                 testTag = "nav-icon-${label.lowercase()}",
             )
-            Spacer(Modifier.width(6.dp))
+            Spacer(Modifier.height(2.dp))
             Text(
                 text = label,
                 color = if (active) PixelColors.Ink else PixelColors.Paper,
