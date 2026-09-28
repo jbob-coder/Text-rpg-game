@@ -250,12 +250,14 @@ private fun DrawScope.drawPixelSprite(
 ) {
     sprite.rows.forEachIndexed { y, row ->
         row.forEachIndexed { x, key ->
-            val color = sprite.palette[key] ?: return@forEachIndexed
-            drawRect(
-                color = color,
-                topLeft = Offset(originX + x * pixelSize, originY + y * pixelSize),
-                size = Size(pixelSize, pixelSize),
-            )
+            val color = sprite.palette[key]
+            if (color != null) {
+                drawRect(
+                    color = color,
+                    topLeft = Offset(originX + x * pixelSize, originY + y * pixelSize),
+                    size = Size(pixelSize, pixelSize),
+                )
+            }
         }
     }
 }
