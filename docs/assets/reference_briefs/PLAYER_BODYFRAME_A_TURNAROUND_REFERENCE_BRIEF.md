@@ -53,6 +53,8 @@ The subject must be intentionally non-specific:
 
 Use a close-fitting, plain, non-branded underlayer only to clarify anatomy.
 
+The head should be bald or featureless enough that no hairstyle identity is introduced. Facial features should be minimal construction marks only; no distinctive eyes, brows, nose, mouth, facial hair, or expression design.
+
 ## Proportion locks
 
 The generated reference must be compatible with the following 32x48 reconstruction envelope:
