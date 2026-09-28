@@ -134,6 +134,26 @@ class GameScreenTest {
     }
 
     @Test
+    fun productionUiIconCatalogRendersThroughCompose() {
+        composeRule.setContent {
+            PixelTheme {
+                Column {
+                    PixelUiIconCatalog.productionIcons.forEach { icon ->
+                        PixelUiIcon(
+                            sprite = icon,
+                            modifier = Modifier.size(24.dp),
+                            testTag = "production-ui-icon",
+                        )
+                    }
+                }
+            }
+        }
+
+        composeRule.onAllNodesWithTag("production-ui-icon")
+            .assertCountEquals(PixelUiIconCatalog.productionIcons.size)
+    }
+
+    @Test
     fun projectedRelayStateRendersThroughNarrativeScene() {
         val relaySnapshot = snapshot.copy(
             location = "RELAY_WORKBENCH",
