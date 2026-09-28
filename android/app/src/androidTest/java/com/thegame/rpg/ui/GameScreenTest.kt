@@ -4,10 +4,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasScrollAction
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -167,20 +169,22 @@ class GameScreenTest {
             "WORKSHOP_ROW",
         )
 
-        locations.forEach { locationId ->
-            composeRule.setContent {
-                PixelTheme {
-                    SceneIllustration(
-                        locationId = locationId,
-                        relayState = if (locationId == "RELAY_WORKBENCH") "intact" else null,
-                        modifier = Modifier.size(256.dp, 128.dp),
-                    )
+        composeRule.setContent {
+            PixelTheme {
+                Column {
+                    locations.forEach { locationId ->
+                        SceneIllustration(
+                            locationId = locationId,
+                            relayState = if (locationId == "RELAY_WORKBENCH") "intact" else null,
+                            modifier = Modifier.size(96.dp, 48.dp),
+                        )
+                    }
                 }
             }
-
-            composeRule.onNodeWithTag("scene-illustration")
-                .assertIsDisplayed()
         }
+
+        composeRule.onAllNodesWithTag("scene-illustration")
+            .assertCountEquals(locations.size)
     }
 
     @Test
