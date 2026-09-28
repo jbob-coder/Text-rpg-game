@@ -2433,3 +2433,90 @@ This includes combat, weapons, armor, crystals, forging, beast memory/adaptation
 3. Prototype intelligence-gated deterministic voice/bark selection.
 4. Prototype territory/region state and coarse beast-vs-beast simulation.
 5. Keep all persistence/GameState integration deferred until an exact V6 runtime becomes available and is green.
+
+
+---
+
+## CHECKPOINT_ID: CP-2026-09-27-MEDIEVAL-PROTOTYPE-CONTRACTS-29
+
+Repository: `jbob-coder/Text-rpg-game`
+
+Prototype branch: `prototype/medieval-crystal-contracts`
+
+Prototype base SHA: `7f5f104fb839068bdfaf5cec72f37129ae20d463`
+
+### OBJECTIVE
+
+[DECISION] Continue medieval/crystal system work without mutating or confusing the current V6 promotion candidate while its exact full runtime suite remains unavailable.
+
+### RUNTIME-GATE ATTEMPT
+
+[VERIFIED] A fresh local `git clone --depth 1 --branch integration/rules-ability-v6-reconcile` attempt failed because the execution container could not resolve `github.com`.
+
+[VERIFIED] Connected GitHub tooling was inspected for a repository/archive download path. No general repository archive operation was available.
+
+[DECISION] No GitHub Actions/paid or billing-risk CI was introduced merely to obtain test execution.
+
+[UNKNOWN] Exact V6 full-suite runtime status therefore remains unresolved.
+
+### PROTOTYPE WORK COMPLETED
+
+[IMPLEMENTED PROTOTYPE] Added `src/textrpg/medieval.py` containing:
+- medieval weapon-family/range/damage contracts
+- crystal-instance provenance/quality contract
+- body-zone definition contract
+- minimal combat-state contract
+- deterministic target-zone reachability
+- player-safe target projection
+- beast runtime-state validation
+- data-driven beast role eligibility
+
+[IMPLEMENTED PROTOTYPE] Added `src/textrpg/beast_memory.py` containing:
+- EncounterMemory validation
+- copy-on-write observation recording
+- observation count/confidence accumulation
+- evidence/time/intelligence-gated adaptation eligibility
+
+[IMPLEMENTED PROTOTYPE] Added:
+- `tests/test_medieval.py`
+- `tests/test_beast_memory.py`
+
+### FOCUSED LOCAL VERIFICATION
+
+[VERIFIED FOCUSED LOCAL] Executed the isolated prototype test suite against byte-identical prototype source:
+- 17 tests run
+- 17 passed
+- 0 failed
+
+[VERIFIED FOCUSED LOCAL] `python -m py_compile` succeeded for both prototype source modules and both prototype test files.
+
+[VERIFIED] Local Git blob hashes matched the committed GitHub blobs exactly:
+- `src/textrpg/medieval.py` -> `59ebae6a5a2a0d943e63635680cfc798a6910276`
+- `tests/test_medieval.py` -> `8a1c64d9f1df2b7dbef18289c21e9b1e3c1474fa`
+- `src/textrpg/beast_memory.py` -> `6b6224c256bf4fb37ec6d3cb383a5b5d0e65147e`
+- `tests/test_beast_memory.py` -> `b7317c3013210e4ae887dd5007d7579ed29a6395`
+
+### IMPORTANT DISTINCTION
+
+[DECISION] These are focused prototype passes, not a full repository/V6 verification result.
+
+[DECISION] The V6 promotion gate remains open.
+
+### DESIGN BEHAVIOR NOW PROVEN IN PROTOTYPE
+
+[VERIFIED FOCUSED LOCAL]
+- a front/reach combat state exposes only zones whose authored geometry allows them
+- flank plus a core-exposure state can unlock a heart/core target
+- an incompatible weapon range can make every target unavailable
+- an explicitly blocked zone stays unavailable
+- the target projection omits hidden authored access metadata and crystal-risk metadata
+- beast crystal records require beast provenance
+- level and intelligence remain separate
+- a high-level low-intelligence beast fails a commander-style role gate
+- encounter observations accumulate count/confidence without mutating the previous memory object
+- adaptations can independently fail on intelligence, elapsed time, observation count, or observation confidence
+- adaptation becomes eligible only after the authored evidence/time/intelligence gates are satisfied
+
+### NEXT_ACTION
+
+Continue the isolated prototype with crystal/equipment instance integration and forging/harvest contracts, while preserving the same rule: do not promote any prototype claim to V6/canonical implementation until the full integration gate can be executed.
