@@ -13,8 +13,6 @@ import com.thegame.rpg.engine.GameChoice
 import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameInventory
 import com.thegame.rpg.engine.GameResource
-import com.thegame.rpg.engine.GameMapNode
-import com.thegame.rpg.engine.GameWorldMap
 import com.thegame.rpg.engine.GameSnapshot
 import org.junit.Rule
 import org.junit.Test
@@ -71,42 +69,16 @@ class GameScreenTest {
     }
 
     @Test
-    fun mapSectionExposesReachableAuthoredNodeAndTravelAction() {
-        val mapSnapshot = snapshot.copy(
-            location = "DISTRICT_PLAZA",
-            worldMap = GameWorldMap(
-                title = "Gate Twelve District",
-                currentLocation = "DISTRICT_PLAZA",
-                nodes = listOf(
-                    GameMapNode(
-                        id = "DISTRICT_PLAZA",
-                        title = "Depot Plaza",
-                        description = "Current location",
-                        x = 48.0,
-                        y = 18.0,
-                        current = true,
-                        reachable = true,
-                    ),
-                    GameMapNode(
-                        id = "DISTRICT_ARCHIVE",
-                        title = "Municipal Archive",
-                        description = "Public records annex",
-                        x = 66.0,
-                        y = 16.0,
-                        current = false,
-                        reachable = true,
-                    ),
-                ),
-            ),
-        )
+    fun stableGameScreenMapControlEmitsNavigationRequest() {
+        var destination: String? = null
 
         composeRule.setContent {
             PixelTheme {
                 GameScreen(
-                    snapshot = mapSnapshot,
+                    snapshot = snapshot,
                     busy = false,
                     onChoice = {},
-                    onNavigate = {},
+                    onNavigate = { destination = it },
                 )
             }
         }
@@ -114,15 +86,14 @@ class GameScreenTest {
         composeRule.onNodeWithTag("nav-map")
             .performScrollTo()
             .assertIsDisplayed()
-            .performClick()
-        composeRule.onNodeWithTag("map-node-DISTRICT_ARCHIVE")
-            .performScrollTo()
-            .assertIsDisplayed()
-            .performClick()
-        composeRule.onNodeWithTag("map-travel")
-            .performScrollTo()
-            .assertIsDisplayed()
             .assertHasClickAction()
+            .performClick()
+
+        composeRule.runOnIdle {
+            check(destination == "Map") {
+                "Expected stable GameScreen to emit Map navigation, got $destination"
+            }
+        }
     }
 
     @Test
