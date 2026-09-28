@@ -186,6 +186,18 @@ def validate_crystal_instance(instance: Any) -> List[str]:
             label="crystal.resonance_tags",
         )
     )
+
+    effects = instance.get("effects", {})
+    if not isinstance(effects, Mapping):
+        errors.append("crystal.effects must be an object")
+    else:
+        for effect_id, value in effects.items():
+            if not _stable_id(effect_id):
+                errors.append(f"crystal effect ID must be stable uppercase: {effect_id!r}")
+            if not _finite_number(value, minimum=0.0):
+                errors.append(
+                    f"crystal.effects.{effect_id} must be finite non-negative numeric"
+                )
     return errors
 
 
