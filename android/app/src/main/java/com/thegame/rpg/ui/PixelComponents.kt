@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -206,6 +207,36 @@ fun PlayerAvatarPanel(
                 color = PixelColors.Gold,
                 style = MaterialTheme.typography.labelLarge,
                 modifier = Modifier.testTag("avatar-visible-gear"),
+            )
+        }
+    }
+}
+
+@Composable
+fun PixelItemIcon(
+    itemId: String,
+    modifier: Modifier = Modifier,
+) {
+    val sprite = PixelAssetCatalog.itemIcon(itemId)
+    Box(
+        modifier = modifier
+            .background(PixelColors.Deep)
+            .border(1.dp, PixelColors.Muted)
+            .testTag("item-icon-$itemId"),
+        contentAlignment = Alignment.Center,
+    ) {
+        if (sprite != null) {
+            Canvas(Modifier.fillMaxSize()) {
+                val px = floor(minOf(size.width / sprite.width, size.height / sprite.height)).coerceAtLeast(1f)
+                val ox = floor((size.width - sprite.width * px) / 2f)
+                val oy = floor((size.height - sprite.height * px) / 2f)
+                drawPixelSprite(sprite, px, ox, oy)
+            }
+        } else {
+            Text(
+                text = "?",
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.labelLarge,
             )
         }
     }
