@@ -232,6 +232,32 @@ fun PlayerAvatarPanel(
 }
 
 @Composable
+fun PixelUiIcon(
+    sprite: PixelSprite?,
+    modifier: Modifier = Modifier,
+    tint: Color? = null,
+    testTag: String? = null,
+) {
+    val taggedModifier = if (testTag != null) modifier.testTag(testTag) else modifier
+
+    Canvas(taggedModifier) {
+        if (sprite == null) return@Canvas
+        val px = floor(
+            minOf(size.width / sprite.width.toFloat(), size.height / sprite.height.toFloat())
+        ).coerceAtLeast(1f)
+        val ox = floor((size.width - sprite.width * px) / 2f)
+        val oy = floor((size.height - sprite.height * px) / 2f)
+        drawPixelSprite(
+            sprite = sprite,
+            pixelSize = px,
+            originX = ox,
+            originY = oy,
+            tint = tint,
+        )
+    }
+}
+
+@Composable
 fun PixelItemIcon(
     itemId: String,
     modifier: Modifier = Modifier,
@@ -266,10 +292,11 @@ internal fun DrawScope.drawPixelSprite(
     pixelSize: Float,
     originX: Float,
     originY: Float,
+    tint: Color? = null,
 ) {
     sprite.rows.forEachIndexed { y, row ->
         row.forEachIndexed { x, key ->
-            val color = sprite.palette[key]
+            val color = if (key == PixelSprite.TRANSPARENT_PIXEL) null else tint ?: sprite.palette[key]
             if (color != null) {
                 drawRect(
                     color = color,
