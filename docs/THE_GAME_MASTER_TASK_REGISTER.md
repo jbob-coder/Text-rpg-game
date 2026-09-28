@@ -255,17 +255,19 @@ The UI must not become the authoritative rules engine.
 - RESULT:
   - pixel asset master production rules documented;
   - detailed player paper-doll and NPC_TAMSIN blueprints documented;
-  - Batch 001 contains exactly 100 planned asset units with native sizes, exact game uses and production notes;
+  - full v1 roadmap contains five exact 100-unit batches, 500 unique planned asset units total;
+  - Batch 001 covers current playable content; Batches 002–005 cover technical/non-canon character, equipment, world, UI/FX/accessibility expansion frameworks;
   - generated-reference -> reverse-engineered pixel blueprint pipeline documented;
   - machine-readable manifest/state-binding/QA schema documented;
+  - mechanical verification confirms IDs 001–500 are continuous with no missing or duplicate numbers and no duplicate stable asset IDs;
   - visual bible linked to the new production documents.
-- IMPORTANT: this task completes documentation/planning only. It does not claim that the 100 assets have been generated, reconstructed, integrated or verified.
+- IMPORTANT: this task completes the v1 500-unit documentation/planning baseline only. It does not claim that any of the 500 assets have been generated, reconstructed, integrated or verified.
 - COMPLETED_AT: `NOT_RECORDED`
 
 ### TASK M-005 — Produce Batch 001 assets
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
 - DEPENDS_ON: M-004
-- PRODUCTION ORDER: validate the entire pipeline first with player body turnaround/front master, NPC_TAMSIN turnaround, and Depot Jacket icon/paper-doll layer; then continue Batch 001 in dependency waves.
+- PRODUCTION ORDER: planning prerequisite is complete. Validate the entire pipeline first with player body turnaround/front master, NPC_TAMSIN turnaround, and Depot Jacket icon/paper-doll layer; then continue Batch 001 in dependency waves.
 - RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
 - DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
 - COMPLETED_AT: —
