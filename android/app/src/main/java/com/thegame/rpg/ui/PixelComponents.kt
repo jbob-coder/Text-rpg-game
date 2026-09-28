@@ -261,7 +261,7 @@ fun PixelItemIcon(
     }
 }
 
-private fun DrawScope.drawPixelSprite(
+internal fun DrawScope.drawPixelSprite(
     sprite: PixelSprite,
     pixelSize: Float,
     originX: Float,
