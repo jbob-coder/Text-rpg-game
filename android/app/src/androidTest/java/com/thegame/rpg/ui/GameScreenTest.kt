@@ -1,5 +1,6 @@
 package com.thegame.rpg.ui
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assert
@@ -100,18 +101,33 @@ class GameScreenTest {
     }
 
     @Test
-    fun depotJacketCatalogIconRendersAsARealComposeAsset() {
+    fun currentCatalogIconsRenderAsRealComposeAssets() {
+        val itemIds = listOf(
+            "ITEM_DEPOT_JACKET",
+            "ITEM_WORK_GLOVES",
+            "ITEM_SIGNAL_RING",
+            "ITEM_COURIER_NECKTAG",
+            "ITEM_MAINTENANCE_SEAL",
+            "ITEM_DEAD_RELAY",
+        )
+
         composeRule.setContent {
             PixelTheme {
-                PixelItemIcon(
-                    itemId = "ITEM_DEPOT_JACKET",
-                    modifier = Modifier.size(48.dp),
-                )
+                Column {
+                    itemIds.forEach { itemId ->
+                        PixelItemIcon(
+                            itemId = itemId,
+                            modifier = Modifier.size(48.dp),
+                        )
+                    }
+                }
             }
         }
 
-        composeRule.onNodeWithTag("item-icon-ITEM_DEPOT_JACKET")
-            .assertIsDisplayed()
+        itemIds.forEach { itemId ->
+            composeRule.onNodeWithTag("item-icon-$itemId")
+                .assertIsDisplayed()
+        }
     }
 
     @Test
