@@ -21,6 +21,9 @@ class PixelAssetCatalogTest {
             PixelAssetCatalog.COURIER_NECKTAG_LAYER_ID to (32 to 48),
             PixelAssetCatalog.MAINTENANCE_SEAL_ICON_ID to (32 to 32),
             PixelAssetCatalog.DEAD_RELAY_ICON_ID to (32 to 32),
+            PixelAssetCatalog.DEAD_RELAY_OPENED_ID to (32 to 32),
+            PixelAssetCatalog.DEAD_RELAY_DAMAGED_ID to (32 to 32),
+            PixelAssetCatalog.DEAD_RELAY_SIGNAL_LOST_ID to (32 to 32),
         )
 
         assertEquals(
@@ -89,6 +92,19 @@ class PixelAssetCatalogTest {
         }
 
         assertNull(PixelAssetCatalog.itemIcon("ITEM_NOT_AUTHORED"))
+    }
+
+    @Test
+    fun relayStateVisualsMapOnlySupportedPlayerFacingStates() {
+        assertSame(PixelAssetCatalog.deadRelayIcon, PixelAssetCatalog.relayStateSprite("intact"))
+        assertSame(PixelAssetCatalog.deadRelayOpened, PixelAssetCatalog.relayStateSprite("opened"))
+        assertSame(PixelAssetCatalog.deadRelayDamaged, PixelAssetCatalog.relayStateSprite("damaged"))
+        assertSame(
+            PixelAssetCatalog.deadRelaySignalLost,
+            PixelAssetCatalog.relayStateSprite("signal_lost"),
+        )
+        assertNull(PixelAssetCatalog.relayStateSprite(null))
+        assertNull(PixelAssetCatalog.relayStateSprite("raw_hidden_flag"))
     }
 
     @Test
