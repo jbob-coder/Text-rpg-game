@@ -32,6 +32,8 @@ Read in this order before generating or integrating visual assets:
    - identity-neutral six-view player rig generation/selection contract.
 15. [reference_briefs/NPC_TAMSIN_TURNAROUND_REFERENCE_BRIEF.md](reference_briefs/NPC_TAMSIN_TURNAROUND_REFERENCE_BRIEF.md)
    - canon-constrained Tamsin six-view generation/selection contract.
+16. [CANONICAL_TURNAROUND_GENERATION_PROTOCOL.md](CANONICAL_TURNAROUND_GENERATION_PROTOCOL.md)
+   - one-asset-per-image selection protocol, anatomical-side verification, and rejection rules.
 
 ## Current phase
 
