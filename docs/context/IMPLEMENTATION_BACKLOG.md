@@ -413,3 +413,52 @@ Additional backlog progress:
 - TASK-HUNT-008 — PARTIAL/PROTOTYPE: pristine vs damaged beast-core outcomes are mechanically distinguished.
 - TASK-HUNT-009 — PARTIAL/PROTOTYPE: harvested beast crystal can enter the forging/socket system.
 - TASK-HUNT-010 — PARTIAL/PROTOTYPE: harvested crystal quality now changes authoritative equipment effect output; actual combat-consumption adapter remains.
+
+
+### Prototype extension — beast ecology and connected hunt slice
+
+[IMPLEMENTED PROTOTYPE] Added deterministic coarse beast-vs-beast conflict rules:
+- separate authored ecology combat profile for offense, defense, mobility, tactics, morale, and injury penalty
+- intelligence amplifies tactical use rather than directly increasing physical power
+- command roles can convert followers plus intelligence into bounded command value
+- injuries reduce coarse regional combat capability
+- a defender receives territory-defense benefit only when it actually controls that territory
+- conflict randomness is deterministic from world seed + event + participants + territory
+- decisive attacker wins can transfer territory without mutating the caller's input state
+- conflict results expose score breakdown, random swing, margin, winner/loser, injury severity, and territory change
+
+[IMPLEMENTED PROTOTYPE] Added connected vertical-slice regression coverage:
+- front-facing combat does not expose the heart/core
+- flank + authored core exposure makes the core targetable
+- core damage is applied
+- the dead beast's core is harvested
+- harvest retains the combat-damage consequence
+- the crystal is fitted to forged equipment
+- crystal quality changes final equipment effect output
+- repeated encounters record weapon/dodge observations
+- surviving the encounter grants diminishing development XP
+- enough evidence/time/intelligence makes adaptation eligible
+- memory-aware authored voice becomes available
+- repeated survival cannot be farmed at full XP value
+
+[VERIFIED FOCUSED LOCAL] The isolated medieval/crystal prototype suite now contains **62 passing tests / 0 failures**.
+
+[VERIFIED] Additional exact Git blob matches:
+- \`src/textrpg/beast_ecology.py\` -> \`835aca4cd3e50c19c294c25967836b42b4194c88\`
+- \`tests/test_beast_ecology.py\` -> \`96eddbe9981a60f8fd5a85d8114653f99c951a7b\`
+- \`tests/test_medieval_hunt_slice.py\` -> \`d3027e18b92df5cd775ea0b05d6639bb529be2f4\`
+
+Additional backlog progress:
+- TASK-ECO-001 — PARTIAL: TerritoryState contract exists; broader WorldRegionState remains.
+- TASK-ECO-003 — PROTOTYPE IMPLEMENTED: deterministic coarse beast-vs-beast conflict resolution.
+- TASK-ECO-004 — PARTIAL: injuries, group/command strength, intelligence/tactics, territory advantage, morale and deterministic variance are represented; hunger/crystal matchup/exhaustion remain.
+- TASK-ECO-005 — PARTIAL: territory transfer is produced as durable result data; world-state persistence adapter remains.
+- TASK-ECO-009 — PROTOTYPE VERIFIED FOCUSED: same seed/state produces the same conflict result.
+- TASK-HUNT-003 — PARTIAL: target knowledge/reachability mechanics exist; scouting/discovery content remains.
+- TASK-HUNT-005 — PROTOTYPE VERIFIED FOCUSED: battle-state change unlocks a previously unavailable core target.
+- TASK-HUNT-006 — PARTIAL/PROTOTYPE: retreat-memory state path exists; authored scene/escape integration remains.
+- TASK-HUNT-007 — PARTIAL/PROTOTYPE: re-encounter adaptation eligibility and remembered dialogue are connected; combat behavior adapter remains.
+- TASK-HUNT-008 — PROTOTYPE VERIFIED FOCUSED: damaged vs preserved heart/core produces distinct harvest outcomes.
+- TASK-HUNT-009 — PROTOTYPE VERIFIED FOCUSED: harvested crystal feeds forging/socket integration.
+- TASK-HUNT-010 — PROTOTYPE VERIFIED FOCUSED: crystal quality affects authoritative equipment effect output.
+- TASK-HUNT-012 — PARTIAL: 62-test isolated prototype regression suite is green; full integration/V6 suite remains blocked.
