@@ -250,15 +250,13 @@ object PixelSceneOverlayCatalog {
             "OPENING_END",
             "POWER_GATE_TWELVE_SIGNAL",
             "POWER_FIRST_LIVE_USE",
-            "POWER_TRACE_STRAIN",
-            -> gateTwelveEchoActive
+            "POWER_TRACE_STRAIN" -> gateTwelveEchoActive
 
             "TRACE_DIRECTIONAL_AFTERSHOCK" -> serviceTunnelAftershock
 
             "POWER_FIRST_PRACTICE",
             "POWER_FIRST_PRACTICE_RESULT",
-            "TRACE_DIRECTIONAL_DISCOVERY_RESULT",
-            -> traceChamberTraining
+            "TRACE_DIRECTIONAL_DISCOVERY_RESULT" -> traceChamberTraining
 
             else -> null
         }
