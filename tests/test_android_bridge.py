@@ -29,7 +29,7 @@ class AndroidBridgeTests(unittest.TestCase):
 
         view = session.scene_view()
 
-        self.assertEqual({"scene", "status", "inventory", "quests", "map", "meta"}, set(view))
+        self.assertEqual({"scene", "status", "inventory", "quests", "map", "visuals", "meta"}, set(view))
         self.assertIn("id", view["scene"])
         self.assertIn("title", view["scene"])
         self.assertIn("body", view["scene"])
@@ -43,6 +43,32 @@ class AndroidBridgeTests(unittest.TestCase):
 
         leaked = FORBIDDEN_AUTHORED_KEYS.intersection(set(walk_keys(view)))
         self.assertEqual(set(), leaked)
+
+    def test_relay_visual_projection_tracks_player_visible_story_state(self):
+        session = create_session(CONTENT)
+
+        initial = session.scene_view()
+        self.assertIsNone(initial["visuals"]["relay_state"])
+
+        intact = session.choose("TAKE_DEAD_RELAY")
+        self.assertEqual("intact", intact["visuals"]["relay_state"])
+
+        opened = session.choose("USE_MAINTENANCE_SEAL")
+        self.assertEqual("opened", opened["visuals"]["relay_state"])
+
+        damaged_session = create_session(CONTENT)
+        damaged_session.choose("TAKE_DEAD_RELAY")
+        damaged_session.state.flags["relay.casing_damaged"] = True
+        damaged = damaged_session.scene_view()
+        self.assertEqual("damaged", damaged["visuals"]["relay_state"])
+
+        damaged_session.state.flags["relay.signal_lost"] = True
+        lost = damaged_session.scene_view()
+        self.assertEqual("signal_lost", lost["visuals"]["relay_state"])
+
+        self.assertNotIn("flags", lost)
+        self.assertNotIn("relay.casing_damaged", set(walk_keys(lost)))
+        self.assertNotIn("relay.signal_lost", set(walk_keys(lost)))
 
     def test_quest_projection_exposes_category_without_authored_effects(self):
         session = create_session(CONTENT)
