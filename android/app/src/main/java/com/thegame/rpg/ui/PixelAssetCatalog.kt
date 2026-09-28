@@ -51,6 +51,9 @@ object PixelAssetCatalog {
     const val COURIER_NECKTAG_LAYER_ID = "ITEM_COURIER_NECKTAG_PAPERDOLL"
     const val MAINTENANCE_SEAL_ICON_ID = "ITEM_MAINTENANCE_SEAL_ICON"
     const val DEAD_RELAY_ICON_ID = "ITEM_DEAD_RELAY_ICON"
+    const val DEAD_RELAY_OPENED_ID = "ITEM_DEAD_RELAY_OPENED"
+    const val DEAD_RELAY_DAMAGED_ID = "ITEM_DEAD_RELAY_DAMAGED"
+    const val DEAD_RELAY_SIGNAL_LOST_ID = "ITEM_DEAD_RELAY_SIGNAL_LOST"
 
     val playerFrontBase = PixelSprite(
         assetId = PLAYER_FRONT_BASE_ID,
@@ -707,6 +710,152 @@ object PixelAssetCatalog {
         ),
     )
 
+
+    val deadRelayOpened = PixelSprite(
+        assetId = DEAD_RELAY_OPENED_ID,
+        width = 32,
+        height = 32,
+        palette = mapOf(
+            'O' to PixelColors.Ink,
+            'D' to Color(0xFF36454C),
+            'd' to Color(0xFF53656E),
+            'I' to Color(0xFF26363E),
+            'C' to PixelColors.Cyan,
+            'c' to Color(0xFF72AEB3),
+            'L' to Color(0xFFB6FFFF),
+            'H' to Color(0xFF8C7650),
+        ),
+        rows = listOf(
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        ".......HHH............HHH.......",
+        ".......HHH.dddddddddd.HHH.......",
+        ".....OOHHH.dIIIIIIIId.HHHOO.....",
+        ".....ODDDDDdICCCCCCIdDDDDDO.....",
+        ".....ODDDDDdICCCCCCIdDDDDDO.....",
+        ".....ODDDDDdICCCCCCIdDDDDDO.....",
+        ".....ODDDDDdICCCCCCIdDDDDDO.....",
+        ".....ODDDDDdIIIIIIIIdDDDDDO.....",
+        ".....ODDDDDdIIILLccIdDDDDDO.....",
+        ".....ODDDDDdIccIIccIdDDDDDO.....",
+        ".....ODDDDDdIccIIccIdDDDDDO.....",
+        ".....ODDDDDdIccIIccIdDDDDDO.....",
+        ".....ODDDDDdIccLLccIdDDDDDO.....",
+        ".....ODDDDDdIccIIccIdDDDDDO.....",
+        ".....ODDDDDdIccIIccIdDDDDDO.....",
+        ".....ODDDDDdIccIIccIdDDDDDO.....",
+        ".....ODDDDDdIccLLccIdDDDDDO.....",
+        ".....ODDDDDdIIIIIccIdDDDDDO.....",
+        ".....ODDDDDdIIIIIIIIdDDDDDO.....",
+        ".....OOOOO.dIIIIIIIId.OOOOO.....",
+        "...........dddddddddd...........",
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "................................"
+        ),
+    )
+
+    val deadRelayDamaged = PixelSprite(
+        assetId = DEAD_RELAY_DAMAGED_ID,
+        width = 32,
+        height = 32,
+        palette = mapOf(
+            'O' to PixelColors.Ink,
+            'D' to Color(0xFF36454C),
+            'd' to Color(0xFF53656E),
+            'C' to PixelColors.Cyan,
+            'c' to Color(0xFF72AEB3),
+            'X' to PixelColors.Danger,
+        ),
+        rows = listOf(
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "........OOOOOOOOOOOOOOOO........",
+        "........ODDDDDDDDDDDDDDO........",
+        "........ODXDDDDDDDDDDXDO........",
+        "........OXDddddddddddDXO........",
+        "........XDDdCCCCCCCCdDDO........",
+        "........ODDdCCCCCCCCdDDX........",
+        "........ODDdCCCCCCCCdDDO........",
+        "........ODDdCCCCCCCCdDDO........",
+        "........ODDddddddddddDDO........",
+        "........ODXDDDDDDDDDXDDO........",
+        ".......XODDXDDDDDDDXDDDO........",
+        "........XDDddddddddddDDO........",
+        "........ODDddddddddddDDOX.......",
+        "........ODDddccccccddDDX........",
+        "........ODDddccccccddDDO........",
+        "........ODDddccccccddDDO........",
+        "........ODDddccccccddDDO........",
+        "........ODDddddddddddDDO........",
+        "........ODDddddXdddddDDO........",
+        "........ODDDDDXDDDDDDDXO........",
+        "........OXDDDDDDDDDDDXDO........",
+        "........ODXDDDDDDDDDDDDO........",
+        "........OOOOOOOOOOOOOOOO........",
+        "................................",
+        "................................",
+        "................................",
+        "................................"
+        ),
+    )
+
+    val deadRelaySignalLost = PixelSprite(
+        assetId = DEAD_RELAY_SIGNAL_LOST_ID,
+        width = 32,
+        height = 32,
+        palette = mapOf(
+            'O' to PixelColors.Ink,
+            'D' to Color(0xFF2B3439),
+            'd' to Color(0xFF48535A),
+            'K' to Color(0xFF111A20),
+            'X' to PixelColors.Danger,
+        ),
+        rows = listOf(
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "................................",
+        "........OOOOOOOOOOOOOOOO........",
+        "........ODDDDDDDDDDDDDDO........",
+        "........ODXDDDDDDDDDDXDO........",
+        "........OXDddddddddddDXO........",
+        "........XDDdKKKKKKKKdDDO........",
+        "........ODDdKKKKKKKKdDDX........",
+        "........ODDdKKKKKKKKdDDO........",
+        "........ODDdKKKKKKKKdDDO........",
+        "........ODDddddddddddDDO........",
+        "........ODXDDDDDDDDDXDDO........",
+        ".......XODDXDDDDDDDXDDDO........",
+        "........XDDddddddddddDDO........",
+        "........ODDddddddddddDDOX.......",
+        "........ODDddKKKKKKddDDX........",
+        "........ODDddKKKKKKddDDO........",
+        "........ODDddKKKKKKddDDO........",
+        "........ODDddKKKKKKddDDO........",
+        "........ODDddddddddddDDO........",
+        "........ODDddddXdddddDDO........",
+        "........ODDDDDXDDDDDDDXO........",
+        "........OXDDDDDDDDDDDXDO........",
+        "........ODXDDDDDDDDDDDDO........",
+        "........OOOOOOOOOOOOOOOO........",
+        "................................",
+        "................................",
+        "................................",
+        "................................"
+        ),
+    )
+
     val waveAProductionAssets: List<PixelSprite> = listOf(
         playerFrontBase,
         depotJacketIcon,
@@ -722,6 +871,9 @@ object PixelAssetCatalog {
         courierNeckTagPaperdoll,
         maintenanceSealIcon,
         deadRelayIcon,
+        deadRelayOpened,
+        deadRelayDamaged,
+        deadRelaySignalLost,
     )
 
     fun equipmentLayer(itemId: String?, slot: String): PixelSprite? =
@@ -730,6 +882,15 @@ object PixelAssetCatalog {
             itemId == "ITEM_WORK_GLOVES" && slot == "hands" -> workGlovesPaperdoll
             itemId == "ITEM_SIGNAL_RING" && slot == "ring_1" -> signalRingPaperdoll
             itemId == "ITEM_COURIER_NECKTAG" && slot == "neck" -> courierNeckTagPaperdoll
+            else -> null
+        }
+
+    fun relayStateSprite(relayState: String?): PixelSprite? =
+        when (relayState) {
+            "intact" -> deadRelayIcon
+            "opened" -> deadRelayOpened
+            "damaged" -> deadRelayDamaged
+            "signal_lost" -> deadRelaySignalLost
             else -> null
         }
 
