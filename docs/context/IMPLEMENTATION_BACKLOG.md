@@ -245,3 +245,63 @@ Updated isolated runtime evidence:
 - total: **84 passed / 0 failed / 0 errors**
 
 These remain isolated prototype results, not full-repository V6 integration results.
+
+
+## Prototype implementation evidence — medieval/crystal contracts
+
+Status: [IMPLEMENTED PROTOTYPE] / [VERIFIED FOCUSED LOCAL] / NOT INTEGRATED
+
+Prototype branch: `prototype/medieval-crystal-contracts`
+
+The branch was created from exact V6 SHA `7f5f104fb839068bdfaf5cec72f37129ae20d463` so the experimental work cannot be mistaken for the current V6 promotion candidate.
+
+Implemented prototype contracts:
+- weapon-family, damage-profile, range-band, target-tag, and physical-property validation
+- beast/mine crystal instance provenance and finite numeric validation
+- body-zone definition validation
+- CombatState validation for facing, range, posture, elevation, exposure tags, and blocked zones
+- deterministic reachable-target query
+- player-safe targeting projection that omits authored access/weak-point rules
+- persistent beast runtime-state validation with level and intelligence represented separately
+- data-driven beast role eligibility using independent level, intelligence, follower, and territory gates
+- EncounterMemory validation
+- copy-on-write encounter observation recording with count/confidence accumulation
+- evidence/time/intelligence-gated adaptation eligibility
+
+Focused local verification:
+- 17 tests executed
+- 17 passed
+- 0 failed
+- both prototype source/test slices compiled with `python -m py_compile`
+- committed GitHub blob SHAs were compared against locally tested Git blob hashes and matched byte-for-byte
+
+Important limitation:
+- the exact full V6 suite is still NOT EXECUTED because the local container cannot resolve `github.com`, the connected GitHub tooling does not expose a general repository archive, and no paid/billing-risk CI was introduced.
+- these focused results do not satisfy TASK-STAGE3-001..008 and do not permit V6 promotion.
+
+Prototype task progress:
+- TASK-CRYSTAL-002 — PARTIAL: CrystalInstance contract exists; CrystalDefinition remains.
+- TASK-CRYSTAL-003 — PARTIAL: grade, purity, size, stability, resonance tags, provenance, and harvest integrity are represented; capacity/recharge/affinity definition work remains.
+- TASK-EQUIP-001 — PARTIAL: initial weapon-family registry exists in prototype.
+- TASK-EQUIP-002 — PARTIAL: weapon definition contract exists; full EquipmentInstance contract remains.
+- TASK-EQUIP-003 — PARTIAL: weight, reach, handling, momentum, guard, recovery, stamina burden, durability are validated.
+- TASK-EQUIP-004 — PROTOTYPE IMPLEMENTED: cut/pierce/blunt damage-profile contract.
+- TASK-EQUIP-006 — PARTIAL: range bands and target-access tags exist; optimal/minimum range balancing remains.
+- TASK-COMBAT-001 — PROTOTYPE IMPLEMENTED: minimal CombatState contract.
+- TASK-COMBAT-005 — PROTOTYPE IMPLEMENTED: BodyZoneDefinition contract.
+- TASK-COMBAT-006 — PROTOTYPE IMPLEMENTED: authoritative target-zone availability query.
+- TASK-COMBAT-007 — PROTOTYPE IMPLEMENTED: weapon range/target-tag constraints affect targetability.
+- TASK-COMBAT-009 — PARTIAL: posture is represented and zone-gated; grapple/stagger transitions remain.
+- TASK-COMBAT-010 — PROTOTYPE IMPLEMENTED: unavailable zones are absent from safe target selection.
+- TASK-COMBAT-015 — PARTIAL: changing facing/exposure state changes reachable zones; transition actions remain.
+- TASK-COMBAT-017 — PROTOTYPE IMPLEMENTED: player-safe targeting projection.
+- TASK-COMBAT-018 — PROTOTYPE VERIFIED FOCUSED: tests prove not all zones are selectable in every state.
+- TASK-COMBAT-019 — PROTOTYPE VERIFIED FOCUSED: exposure/facing state changes unlock previously unavailable zones.
+- TASK-BEAST-002 — PARTIAL: minimal persistent BeastRuntimeState contract.
+- TASK-ADAPT-001 — PROTOTYPE IMPLEMENTED: EncounterMemory contract.
+- TASK-ADAPT-002 — PARTIAL: generic observed-pattern recording exists; combat event adapter remains.
+- TASK-ADAPT-003 — PROTOTYPE IMPLEMENTED: confidence stored per observation.
+- TASK-ADAPT-008 — PROTOTYPE IMPLEMENTED: evidence/time/intelligence required before adaptation eligibility.
+- TASK-ADAPT-009 — PROTOTYPE VERIFIED FOCUSED: adaptation does not trigger merely because an encounter ended or the player escaped.
+- TASK-INTEL-003 — PARTIAL: role gate contract exists.
+- TASK-INTEL-004 — PROTOTYPE IMPLEMENTED: command eligibility can require independent intelligence/follower/territory gates.
