@@ -475,7 +475,7 @@ private fun CharacterSection(snapshot: GameSnapshot) {
                 Spacer(Modifier.height(6.dp))
                 snapshot.inventory.equipment.forEach { slot ->
                     val itemName = if (slot.equipped) slot.name ?: slot.itemId ?: "EQUIPPED" else "—"
-                    LabeledValue(slotDisplayName(slot.slot), itemName)
+                    EquipmentSlotValue(slotId = slot.slot, value = itemName)
                 }
             }
         }
@@ -718,7 +718,7 @@ private fun InventorySection(
                 } else {
                     "EMPTY"
                 }
-                LabeledValue(slotDisplayName(slot.slot), item)
+                EquipmentSlotValue(slotId = slot.slot, value = item)
                 if (slot.equipped) {
                     PixelTextButton(if (busy) "WORKING..." else "UNEQUIP") {
                         if (!busy) onUnequip(slot.slot)
@@ -1082,6 +1082,38 @@ private fun PixelTextButton(
     ) {
         Text(label, color = PixelColors.Paper, style = MaterialTheme.typography.labelLarge)
     }
+}
+
+@Composable
+private fun EquipmentSlotValue(
+    slotId: String,
+    value: String,
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        PixelUiIcon(
+            sprite = PixelEquipmentSlotCatalog.slot(slotId),
+            modifier = Modifier.size(24.dp),
+            tint = PixelColors.Paper,
+            testTag = "equipment-slot-icon-$slotId",
+        )
+        Spacer(Modifier.width(8.dp))
+        Column(Modifier.weight(1f)) {
+            Text(
+                slotDisplayName(slotId),
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.labelLarge,
+            )
+            Text(
+                value,
+                color = PixelColors.Paper,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
+    }
+    Spacer(Modifier.height(6.dp))
 }
 
 @Composable
