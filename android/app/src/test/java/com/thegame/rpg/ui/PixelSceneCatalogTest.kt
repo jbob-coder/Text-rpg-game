@@ -13,6 +13,8 @@ class PixelSceneCatalogTest {
             setOf(
                 PixelSceneCatalog.PLATFORM_NINE_SCENE_ID,
                 PixelSceneCatalog.RELAY_WORKBENCH_SCENE_ID,
+                PixelSceneCatalog.GATE_TWELVE_SCENE_ID,
+                PixelSceneCatalog.SERVICE_TUNNEL_SCENE_ID,
             ),
             PixelSceneCatalog.productionScenes.map { it.assetId }.toSet(),
         )
@@ -45,7 +47,14 @@ class PixelSceneCatalogTest {
             PixelSceneCatalog.relayWorkbenchDefault,
             PixelSceneCatalog.scene("RELAY_WORKBENCH"),
         )
-        assertNull(PixelSceneCatalog.scene("GATE_TWELVE"))
+        assertSame(
+            PixelSceneCatalog.gateTwelveSealed,
+            PixelSceneCatalog.scene("GATE_TWELVE"),
+        )
+        assertSame(
+            PixelSceneCatalog.serviceTunnelDefault,
+            PixelSceneCatalog.scene("SERVICE_TUNNEL"),
+        )
         assertNull(PixelSceneCatalog.scene("UNKNOWN_LOCATION"))
     }
 }
