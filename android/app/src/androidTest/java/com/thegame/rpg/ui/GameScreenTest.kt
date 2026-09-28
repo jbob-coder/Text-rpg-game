@@ -1,5 +1,7 @@
 package com.thegame.rpg.ui
 
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
@@ -9,6 +11,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.unit.dp
 import com.thegame.rpg.engine.GameChoice
 import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameInventory
@@ -94,6 +97,21 @@ class GameScreenTest {
                 "Expected stable GameScreen to emit Map navigation, got $destination"
             }
         }
+    }
+
+    @Test
+    fun depotJacketCatalogIconRendersAsARealComposeAsset() {
+        composeRule.setContent {
+            PixelTheme {
+                PixelItemIcon(
+                    itemId = "ITEM_DEPOT_JACKET",
+                    modifier = Modifier.size(48.dp),
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("item-icon-ITEM_DEPOT_JACKET")
+            .assertIsDisplayed()
     }
 
     @Test
