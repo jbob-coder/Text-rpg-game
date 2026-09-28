@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-27 14:23 AST  
+Updated: 2026-09-27 21:40 AST  
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -21,6 +21,7 @@ Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPL
 
 - Repository: `jbob-coder/Text-rpg-game`
 - Current stabilization branch: `fix/v6-runtime-boundaries`
+- Current Android working branch: `feature/android-runtime-bootstrap-v1`, based on `fix/v6-runtime-boundaries@7be1adef22a1bf9d4826691e665b7417235f53a5`.
 - Stabilization baseline before continuity work: `fcfe8115a72eb07036fa4e74a61a0094eaa3ff10`
 - V6 parent: `integration/rules-ability-v6-reconcile@7f5f104fb839068bdfaf5cec72f37129ae20d463`
 - `main`: placeholder; do not treat it as the canonical implementation.
@@ -60,19 +61,24 @@ The UI must not become the authoritative rules engine.
 - PRIORITY: `P0 / BLOCKING`
 - OBSERVED: Jack installed/opened the generated Android test APK and reported a black screen.
 - VERIFIED INVESTIGATION (2026-09-27 14:23 AST):
-  - the current repository tree contains no Android project, manifest, Gradle files, NativeActivity source, or persisted wrapper source;
-  - the previously generated `THE-GAME-V6-Android-Test.apk` is not available in the current runtime or searchable Library/conversation files;
+  - the repository at that checkpoint contained no Android project, manifest, Gradle files, NativeActivity source, or persisted wrapper source;
+  - the previously generated `THE-GAME-V6-Android-Test.apk` was not available in the runtime or searchable Library/conversation files;
   - unrelated Android/Godot artifacts from other projects were found and explicitly excluded from this diagnosis.
-- CURRENT BLOCKER: the failing APK cannot be reproduced or inspected from authoritative source because its packaging source/artifact was ephemeral.
+- REPOSITORY-OWNED REPAIR SLICE (2026-09-27 21:40 AST):
+  - `feature/android-runtime-bootstrap-v1` adds a reproducible Android project instead of recreating another ephemeral wrapper;
+  - the toolchain is pinned to AGP 9.2.1, Gradle 9.4.1, JDK 17, Chaquopy 17.0.0, and Python 3.11;
+  - the app packages the existing `src/textrpg` engine and `content/` directly, so Android does not become a second rules engine;
+  - the launcher renders a visible boot surface before Python initialization, then catches startup failures and exposes them on-screen and through Logcat;
+  - ABI coverage includes `armeabi-v7a`, `arm64-v8a`, and `x86_64`; Python 3.11 was selected specifically to retain 32-bit ARM support;
+  - the Python bridge exposes `build_scene_view()` and `build_status_view()` projections, applies choices through the existing engine, and persists schema-1 saves through Android internal storage.
+- CURRENT BLOCKER: the new Android source has not yet been assembled or installed in an Android SDK/device environment. The historical black-screen root cause therefore cannot be narrowed beyond the lost/ephemeral wrapper, and the replacement path is not yet runtime-verified.
 - REQUIRED CHECKS:
-  - launcher/entry activity and manifest;
-  - ABI/native-library packaging;
-  - surface/window initialization;
-  - packaged assets and asset paths;
-  - HTML/JS/native bridge if applicable;
-  - lifecycle/startup error handling;
-  - representative Android runtime/device logs.
-- DONE WHEN: root cause is identified, corrected, rebuilt, and visible gameplay is confirmed on representative Android runtime/device.
+  - execute `./gradlew :app:assembleDebug` from `android/`;
+  - inspect APK ABI/native-library and asset packaging;
+  - install/launch on a representative Android runtime/device;
+  - capture `TextRpgStartup`, `python.stdout`, `python.stderr`, and `AndroidRuntime` Logcat output;
+  - verify visible boot UI, first scene, choice resolution, autosave, relaunch/resume, and visible error handling.
+- DONE WHEN: root cause is identified or superseded by the repository-owned path, the replacement package builds, and visible gameplay is confirmed on a representative Android runtime/device.
 - COMPLETED_AT: —
 
 ### TASK A-002 — Rebuild corrected APK
@@ -257,4 +263,4 @@ Before ending meaningful work, update:
 
 ## Immediate next action
 
-Resume TASK A-001. Recover the original APK/wrapper source if possible; if it is unrecoverable, design a repository-owned reproducible Android client before attempting another APK build.
+Resume TASK A-001 on `feature/android-runtime-bootstrap-v1`: assemble the pinned Android project, inspect the generated APK, install it on a representative Android device/runtime, and capture startup Logcat. Do not mark A-001/A-002/A-003 complete or promote the branch until build plus device evidence exists.
