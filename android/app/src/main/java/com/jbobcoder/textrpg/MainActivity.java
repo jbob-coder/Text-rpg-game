@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -68,7 +69,9 @@ public final class MainActivity extends Activity {
         try {
             Log.i(TAG, "Android bootstrap started");
             if (!Python.isStarted()) {
-                Python.start(new AndroidPlatform(getApplication()));
+                AndroidPlatform platform = new AndroidPlatform(getApplication());
+                platform.redirectStdioToLogcat();
+                Python.start(platform);
             }
             Log.i(TAG, "Python runtime started");
 
@@ -419,9 +422,6 @@ public final class MainActivity extends Activity {
     }
 
     private String readSaveIfPresent() throws Exception {
-        if (!saveFile.getBaseFile().exists()) {
-            return "";
-        }
         try (FileInputStream input = saveFile.openRead();
              ByteArrayOutputStream output = new ByteArrayOutputStream()) {
             byte[] buffer = new byte[4096];
@@ -430,6 +430,8 @@ public final class MainActivity extends Activity {
                 output.write(buffer, 0, count);
             }
             return output.toString(StandardCharsets.UTF_8.name());
+        } catch (FileNotFoundException missing) {
+            return "";
         }
     }
 
@@ -440,7 +442,6 @@ public final class MainActivity extends Activity {
             OutputStreamWriter writer = new OutputStreamWriter(output, StandardCharsets.UTF_8);
             writer.write(saveJson);
             writer.flush();
-            output.getFD().sync();
             saveFile.finishWrite(output);
         } catch (Exception error) {
             if (output != null) {

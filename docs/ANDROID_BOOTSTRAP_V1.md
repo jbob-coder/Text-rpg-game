@@ -22,8 +22,9 @@ Base: `fix/v6-runtime-boundaries@7be1adef22a1bf9d4826691e665b7417235f53a5`
    remain separate tasks.
 3. **Show UI before Python startup.**
    `MainActivity` installs a visible boot surface first, then starts Python from a
-   single background executor. Python/native initialization failures are caught and
-   shown on-screen plus Logcat.
+   single background executor. Catchable Python/Java/native-linker initialization
+   failures are shown on-screen plus Logcat; native stdout/stderr are redirected for
+   startup diagnosis. A process-killing native crash still requires Logcat evidence.
 4. **Use only player-safe projections for rendering.**
    Scene rendering consumes `RulesEngine.build_scene_view()`; status rendering consumes
    `build_status_view()`. Authored requirements/outcomes, raw modifier provenance, and
@@ -63,7 +64,9 @@ The Java activity never computes rule outcomes.
 
 - Missing/malformed content: visible startup diagnostic.
 - Unsupported/corrupt save: visible startup diagnostic; existing save is retained.
-- Python/native startup failure: visible diagnostic + `TextRpgStartup` Logcat.
+- Catchable Python/native startup failure: visible diagnostic + `TextRpgStartup` Logcat.
+- Native/Python stdout and stderr: redirected to `native.stdout`, `native.stderr`,
+  `python.stdout`, and `python.stderr` Logcat tags.
 - Choice/rules failure: bridge restores the pre-choice deep-copied state before
   propagating the error; Java does not commit a new save.
 - Save write failure: `AtomicFile.failWrite()` preserves the previous committed save.
@@ -99,7 +102,7 @@ From `android/`:
 Then inspect/install the APK and capture:
 
 ```bash
-adb logcat -d -s TextRpgStartup python.stdout python.stderr AndroidRuntime
+adb logcat -d -s TextRpgStartup python.stdout python.stderr native.stdout native.stderr AndroidRuntime
 ```
 
 Any build/runtime defect should be repaired on this branch with the smallest focused

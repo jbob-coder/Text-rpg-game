@@ -34,12 +34,15 @@ chaquopy {
         version = "3.11"
         pyc {
             src = false
+            pip = false
+            stdlib = false
         }
     }
 
     sourceSets {
         getByName("main") {
-            srcDir("src/main/python")
+            // src/main/python is Chaquopy's default source root.
+            // Only add the repository engine root here.
             srcDir("../../src")
         }
     }

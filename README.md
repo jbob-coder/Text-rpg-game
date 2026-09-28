@@ -77,7 +77,7 @@ the existing Python engine rather than recreating gameplay rules in the client.
 The bootstrap is intentionally a diagnostic/vertical-slice client, not the final pixel
 presentation. It renders a visible startup surface before Python initialization, uses
 player-safe scene/status projections, autosaves to app-private storage, and surfaces
-fatal startup errors instead of silently presenting a black screen.
+catchable startup errors instead of silently presenting a black screen.
 
 Build/device execution is still required before the Android black-screen task can be
 called fixed. See `android/README.md` and `docs/ANDROID_BOOTSTRAP_V1.md`.

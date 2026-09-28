@@ -41,9 +41,11 @@ Python 3.11 is intentional: Chaquopy 17 supports both 32-bit and 64-bit ABIs thr
 Python 3.11. Keeping `armeabi-v7a` protects the bootstrap from failing on Android
 devices with a 32-bit userspace.
 
-The project does not use pip requirements or static proxies, and source `.pyc`
-compilation is disabled for this diagnostic build. This keeps the bootstrap close to
-the repository's standard-library-only engine and preserves readable Python tracebacks.
+The project does not use pip requirements or static proxies, and Chaquopy bytecode
+compilation is disabled for source, pip, and stdlib in this diagnostic build. This
+avoids making a matching host Python installation part of the bootstrap contract,
+keeps the build close to the repository's standard-library-only engine, and preserves
+readable Python tracebacks. The tradeoff is a larger/slower debug package.
 
 ## Build
 
@@ -90,7 +92,7 @@ Capture startup evidence:
 adb logcat -c
 adb shell am force-stop com.jbobcoder.textrpg
 adb shell am start -n com.jbobcoder.textrpg/.MainActivity
-adb logcat -d -s TextRpgStartup python.stdout python.stderr AndroidRuntime
+adb logcat -d -s TextRpgStartup python.stdout python.stderr native.stdout native.stderr AndroidRuntime
 ```
 
 Acceptance checks for this P0 slice:
@@ -102,7 +104,7 @@ Acceptance checks for this P0 slice:
 5. `save_v1.json` is committed to app-private storage after a successful choice.
 6. Force-stop/relaunch resumes from that save.
 7. A startup/runtime failure replaces the game view with a visible diagnostic and also
-   appears under Logcat tag `TextRpgStartup`.
+   appears under Logcat tag `TextRpgStartup`; native/Python stdout and stderr are also redirected to Logcat.
 8. APK inspection confirms the expected native ABI libraries and authored content asset.
 
 Do not mark TASK A-001/A-002/A-003 complete until the relevant build/device evidence
