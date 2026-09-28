@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -423,15 +424,26 @@ private fun ResourcePanel(snapshot: GameSnapshot) {
             val percent = if (resource.max > 0.0) {
                 ((resource.current / resource.max) * 100.0).coerceIn(0.0, 100.0).roundToInt()
             } else 0
-            Text(
-                "${resource.id.uppercase().padEnd(8)} ${resource.current.roundToInt()} / ${resource.max.roundToInt()} [$percent%]",
-                color = when {
-                    percent <= 25 -> PixelColors.Danger
-                    percent <= 50 -> PixelColors.Gold
-                    else -> PixelColors.Paper
-                },
-                style = MaterialTheme.typography.labelLarge,
-            )
+            val resourceColor = when {
+                percent <= 25 -> PixelColors.Danger
+                percent <= 50 -> PixelColors.Gold
+                else -> PixelColors.Paper
+            }
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                PixelUiIcon(
+                    sprite = PixelUiIconCatalog.resource(resource.id),
+                    modifier = Modifier.size(16.dp),
+                    tint = resourceColor,
+                    testTag = "resource-icon-${resource.id.lowercase()}",
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    "${resource.id.uppercase().padEnd(8)} ${resource.current.roundToInt()} / ${resource.max.roundToInt()} [$percent%]",
+                    color = resourceColor,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
             Spacer(Modifier.height(4.dp))
         }
     }
@@ -783,7 +795,21 @@ private fun QuestSection(snapshot: GameSnapshot) {
                 if (quests.isNotEmpty()) {
                     PixelPanel(title = category) {
                         quests.forEach { quest ->
-                            Text(quest.title, color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                PixelUiIcon(
+                                    sprite = PixelUiIconCatalog.quest(category),
+                                    modifier = Modifier.size(16.dp),
+                                    tint = when (category) {
+                                        "main" -> PixelColors.Gold
+                                        "side" -> PixelColors.Cyan
+                                        "optional" -> PixelColors.Paper
+                                        else -> PixelColors.Muted
+                                    },
+                                    testTag = "quest-icon-$category",
+                                )
+                                Spacer(Modifier.width(6.dp))
+                                Text(quest.title, color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
+                            }
                             if (quest.description.isNotBlank()) {
                                 Spacer(Modifier.height(4.dp))
                                 Text(quest.description, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
@@ -1012,13 +1038,22 @@ private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) 
             .background(if (active) PixelColors.Cyan else PixelColors.Deep)
             .border(2.dp, if (active) PixelColors.Paper else PixelColors.Muted)
             .clickable(role = Role.Tab, onClick = onClick)
-            .padding(horizontal = 12.dp, vertical = 10.dp),
+            .padding(horizontal = 10.dp, vertical = 8.dp),
     ) {
-        Text(
-            text = label,
-            color = if (active) PixelColors.Ink else PixelColors.Paper,
-            style = MaterialTheme.typography.labelLarge,
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            PixelUiIcon(
+                sprite = PixelUiIconCatalog.navigation(label),
+                modifier = Modifier.size(24.dp),
+                tint = if (active) PixelColors.Ink else PixelColors.Paper,
+                testTag = "nav-icon-${label.lowercase()}",
+            )
+            Spacer(Modifier.width(6.dp))
+            Text(
+                text = label,
+                color = if (active) PixelColors.Ink else PixelColors.Paper,
+                style = MaterialTheme.typography.labelLarge,
+            )
+        }
     }
 }
 
