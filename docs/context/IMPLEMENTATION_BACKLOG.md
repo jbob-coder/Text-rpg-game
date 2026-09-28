@@ -305,3 +305,27 @@ Prototype task progress:
 - TASK-ADAPT-009 — PROTOTYPE VERIFIED FOCUSED: adaptation does not trigger merely because an encounter ended or the player escaped.
 - TASK-INTEL-003 — PARTIAL: role gate contract exists.
 - TASK-INTEL-004 — PROTOTYPE IMPLEMENTED: command eligibility can require independent intelligence/follower/territory gates.
+
+
+### Prototype extension — equipment/crystal integration
+
+[IMPLEMENTED PROTOTYPE] On `prototype/medieval-crystal-contracts`:
+- EquipmentInstance validation now covers stable instance/definition/material IDs, forge quality, condition, crystal sockets, grade limits, accepted crystal sources, resonance compatibility, and integration modes.
+- Crystal fitting is copy-on-write and preserves the installed crystal's original source/provenance and harvest integrity.
+- Replaceable sockets and permanent fusion are distinct authored integration modes.
+- Fusion locks the crystal; ordinary removal rejects fused crystals rather than silently undoing a permanent craft.
+- Occupied sockets reject a second crystal.
+- Non-finite integration quality is rejected.
+
+[VERIFIED FOCUSED LOCAL] The isolated prototype suite now contains **24 passing tests / 0 failures**.
+
+[VERIFIED] Byte-for-byte Git blob matches for the added tested files:
+- `src/textrpg/crystal_forging.py` -> `fb2778a44359f20d80a1ea40465af8e534dc3ec4`
+- `tests/test_crystal_forging.py` -> `98631da28ae2f3732bb673378b7a93b74cbbc471`
+
+Additional task progress:
+- TASK-EQUIP-002 — PARTIAL: EquipmentInstance contract now exists in prototype; integration with legacy equipment state remains.
+- TASK-EQUIP-010 — PROTOTYPE IMPLEMENTED: crystal socket/channel-compatible metadata contract.
+- TASK-EQUIP-011 — PROTOTYPE IMPLEMENTED: replaceable socket vs permanent fusion distinction.
+- TASK-FORGE-004 — PROTOTYPE IMPLEMENTED: grade/source/resonance/mode compatibility gates.
+- TASK-FORGE-007 — PARTIAL: integration records quality and smith provenance; complete forge-step provenance remains.
