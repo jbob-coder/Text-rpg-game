@@ -20,8 +20,8 @@ Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPL
 ## Current repository baseline
 
 - Repository: `jbob-coder/Text-rpg-game`
-- Current Android integration branch: `feature/android-pixel-client-v1`
-- Current verified Android HEAD: `510851cc165702fbe19ef005083a03cbcd00a9f3`
+- Current Android integration branch: `integration/android-open-world-v1-reconcile`
+- Current verified pixel-asset runtime parent: `1c7e54e548ab3c28819af0b85ae8cbba53aff827` (PR #7)
 - Stabilization branch retained: `fix/v6-runtime-boundaries`
 - Stabilization baseline before continuity work: `fcfe8115a72eb07036fa4e74a61a0094eaa3ff10`
 - V6 parent: `integration/rules-ability-v6-reconcile@7f5f104fb839068bdfaf5cec72f37129ae20d463`
@@ -273,7 +273,7 @@ The UI must not become the authoritative rules engine.
   - Wave A reconstruction packet completed for assets 001, 002, 018, 021 and 022;
   - Wave A machine-readable manifest completed;
   - production branch: `feature/pixel-asset-wave-a`;
-  - draft PR: #6;
+  - active reconciliation draft PR: #7; PR #6 is closed as superseded;
   - `PLAYER_GAMEPLAY_FRONT_BASE`, `ITEM_DEPOT_JACKET_ICON`, and `ITEM_DEPOT_JACKET_PAPERDOLL` are implemented as source-native pixel maps and integrated into Compose;
   - generated assets remain text-native/diffable rather than opaque binary blobs; PNG export can derive from the same authoritative pixel maps later;
   - exact jacket mapping requires `ITEM_DEPOT_JACKET` + `body` slot, preventing unrelated chest items from inheriting its art;
@@ -283,8 +283,12 @@ The UI must not become the authoritative rules engine.
   - Batch 001 assets 023–033 are now implemented/integrated: Work Gloves icon/layer, Signal Ring icon/layer, Courier Neck Tag icon/layer, Maintenance Seal icon, Dead Relay intact/opened/damaged/signal-lost visuals.
   - relay visual state crosses the Python→Android boundary only as `visuals.relay_state = null|intact|opened|damaged|signal_lost`; Compose never reads raw story flags.
   - exact-head integration evidence at `57151051ea2e0ac98810e5ee95cea9de1a2a4e97`, workflow `36378000460`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 8/8 with 0 failures; APK SHA-256 `9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3`.
+  - all 9/9 currently authored named locations now resolve to source-native 128x64 scene masters: Platform Nine, Relay Workbench, Gate Twelve, Service Tunnel, Quiet Stair, Trace Chamber, Depot Plaza, Municipal Archive, Workshop Row;
+  - Batch 001 state overlays 046/048/051 are integrated: Gate Twelve Echo Active, Service Tunnel Aftershock, Trace Chamber Training;
+  - scene-state overlays are selected only from already player-facing `GameSnapshot.sceneId`; Compose does not read raw story flags;
+  - exact-head scene/overlay evidence at `1c7e54e548ab3c28819af0b85ae8cbba53aff827`, workflow `36384772701`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 10/10 with 0 failures; APK SHA-256 `18316402c65e9b614b80fa542817b125bed8a38be44eaf3ca89d187623f1897f`;
 - LIMITATION: automated Compose/runtime coverage proves the new catalog renders and does not regress the tested client, but native-scale art review and physical Galaxy A03 visual QA are not yet claimed.
-- NEXT: keep player/Tamsin canonical reference selection isolated from implementation. Continue Batch 001 with the current named-location scene masters and replace one procedural `SceneIllustration` location at a time using source-native pixel assets, beginning with `PLATFORM_NINE` and `RELAY_WORKBENCH`. Preserve physical Galaxy A03 visual QA as a separate acceptance gate.
+- NEXT: keep player/Tamsin canonical reference selection isolated from implementation. Base coverage is 9/9 and the first three player-safe state overlays are integrated. Continue Batch 001 with state-safe UI/map assets and only add further location variants when an existing player-safe projection can drive them. Preserve physical Galaxy A03 visual QA as a separate acceptance gate.
 - RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
 - DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
 - COMPLETED_AT: —
@@ -322,4 +326,4 @@ Before ending meaningful work, update:
 
 ## Immediate next action
 
-Promote and verify `feature/android-open-world-v1` on top of the green Android baseline without losing the verified Save/Continue and scroll/navigation fixes. Then run full Python + Android build gates and a selective emulator smoke for free-roam map travel. After that, produce a controlled downloadable APK artifact for physical-device testing.
+Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified slices. Next target: player-safe UI/map visual assets whose state is already projected (navigation/resource/quest/map markers). Do not block implementation on rejected mixed character references. Physical Galaxy A03 visual QA remains a separate acceptance gate before final visual approval.
