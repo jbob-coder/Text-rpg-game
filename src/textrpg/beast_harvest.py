@@ -131,9 +131,7 @@ def apply_body_zone_damage(
     """Apply already-resolved combat damage without deciding target availability here."""
     errors = validate_body_zone_runtime(zone_state)
     if errors:
-        raise RuleError("Invalid body-zone runtime state:
-- " + "
-- ".join(errors))
+        raise RuleError("Invalid body-zone runtime state:\n- " + "\n- ".join(errors))
     if not _finite_number(amount, minimum=0.000001):
         raise RuleError("body-zone damage amount must be finite numeric > 0")
     if damage_type not in DAMAGE_TYPES:
@@ -169,10 +167,8 @@ def harvest_beast_crystal(
     crystal_errors = validate_crystal_definition(crystal_definition)
     if beast_errors or zone_errors or crystal_errors:
         raise RuleError(
-            "Invalid beast crystal harvest contract:
-- "
-            + "
-- ".join(beast_errors + zone_errors + crystal_errors)
+            "Invalid beast crystal harvest contract:\n- "
+            + "\n- ".join(beast_errors + zone_errors + crystal_errors)
         )
 
     if beast_state.get("life_state") != "dead":
@@ -231,7 +227,5 @@ def harvest_beast_crystal(
 
     errors = validate_crystal_instance(crystal)
     if errors:
-        raise RuleError("Harvest produced invalid crystal instance:
-- " + "
-- ".join(errors))
+        raise RuleError("Harvest produced invalid crystal instance:\n- " + "\n- ".join(errors))
     return crystal
