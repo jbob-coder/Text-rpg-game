@@ -154,6 +154,26 @@ class GameScreenTest {
     }
 
     @Test
+    fun equipmentSlotIconSetRendersThroughCompose() {
+        composeRule.setContent {
+            PixelTheme {
+                Column {
+                    PixelEquipmentSlotCatalog.productionSlots.forEach { icon ->
+                        PixelUiIcon(
+                            sprite = icon,
+                            modifier = Modifier.size(24.dp),
+                            testTag = "production-equipment-slot-icon",
+                        )
+                    }
+                }
+            }
+        }
+
+        composeRule.onAllNodesWithTag("production-equipment-slot-icon")
+            .assertCountEquals(PixelEquipmentSlotCatalog.productionSlots.size)
+    }
+
+    @Test
     fun projectedRelayStateRendersThroughNarrativeScene() {
         val relaySnapshot = snapshot.copy(
             location = "RELAY_WORKBENCH",
