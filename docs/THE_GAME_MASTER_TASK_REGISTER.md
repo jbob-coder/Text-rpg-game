@@ -287,8 +287,12 @@ The UI must not become the authoritative rules engine.
   - Batch 001 state overlays 046/048/051 are integrated: Gate Twelve Echo Active, Service Tunnel Aftershock, Trace Chamber Training;
   - scene-state overlays are selected only from already player-facing `GameSnapshot.sceneId`; Compose does not read raw story flags;
   - exact-head scene/overlay evidence at `1c7e54e548ab3c28819af0b85ae8cbba53aff827`, workflow `36384772701`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 10/10 with 0 failures; APK SHA-256 `18316402c65e9b614b80fa542817b125bed8a38be44eaf3ca89d187623f1897f`;
+  - Batch 001 UI/map assets 076–095 are integrated: seven navigation icons, four resource icons, four quest-category icons, and five player-safe map markers;
+  - navigation/resource/quest icons remain decorative and consume only existing Compose/GameSnapshot state; map marker current/reachable/discovered semantics remain projection-owned;
+  - exact-head UI/map evidence at `61cd0ecba6d661522ef59e519f26b8e1697a113c`, workflow `36444738131`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 11/11 with 0 failures; APK SHA-256 `338f5024dfa0a07d67bfa3517bf19d802adc5ef58052abac77b7ee226d5370ab`;
+  - the first UI-icon emulator gate correctly caught a phone-layout regression where horizontal icons pushed More off-screen; the navigation composition was compacted vertically and the exact rerun passed.
 - LIMITATION: automated Compose/runtime coverage proves the new catalog renders and does not regress the tested client, but native-scale art review and physical Galaxy A03 visual QA are not yet claimed.
-- NEXT: keep player/Tamsin canonical reference selection isolated from implementation. Base coverage is 9/9 and the first three player-safe state overlays are integrated. Continue Batch 001 with state-safe UI/map assets and only add further location variants when an existing player-safe projection can drive them. Preserve physical Galaxy A03 visual QA as a separate acceptance gate.
+- NEXT: keep player/Tamsin canonical reference selection isolated from implementation. Base coverage is 9/9, the first three player-safe state overlays are integrated, and UI/map assets 076–095 are integrated. Continue with asset 040 `UI_EQUIPMENT_SLOT_ICON_SET` using projected slot IDs only; defer quality-frame behavior (039) until inventory/equipment quality presentation is explicitly defined. Preserve physical Galaxy A03 visual QA as a separate acceptance gate.
 - RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
 - DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
 - COMPLETED_AT: —
@@ -326,4 +330,4 @@ Before ending meaningful work, update:
 
 ## Immediate next action
 
-Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified slices. Next target: player-safe UI/map visual assets whose state is already projected (navigation/resource/quest/map markers). Do not block implementation on rejected mixed character references. Physical Galaxy A03 visual QA remains a separate acceptance gate before final visual approval.
+Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified slices. Next target: asset 040 `UI_EQUIPMENT_SLOT_ICON_SET`, then reassess remaining Batch 001 props/FX against player-safe state availability. Do not block implementation on rejected mixed character references. Physical Galaxy A03 visual QA remains a separate acceptance gate before final visual approval.
