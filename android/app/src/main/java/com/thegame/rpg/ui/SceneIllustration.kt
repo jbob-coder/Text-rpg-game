@@ -16,6 +16,7 @@ import kotlin.math.floor
 @Composable
 fun SceneIllustration(
     locationId: String,
+    sceneId: String? = null,
     relayState: String? = null,
     modifier: Modifier = Modifier,
 ) {
@@ -38,6 +39,15 @@ fun SceneIllustration(
                 originX = sceneOriginX,
                 originY = sceneOriginY,
             )
+
+            PixelSceneOverlayCatalog.forScene(sceneId)?.let { overlay ->
+                drawPixelSprite(
+                    sprite = overlay,
+                    pixelSize = scenePixel,
+                    originX = sceneOriginX,
+                    originY = sceneOriginY,
+                )
+            }
 
             if (locationId == "RELAY_WORKBENCH") {
                 PixelAssetCatalog.relayStateSprite(relayState)?.let { relay ->
