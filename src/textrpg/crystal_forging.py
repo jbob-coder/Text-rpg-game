@@ -94,6 +94,22 @@ def validate_equipment_instance(item: Any) -> List[str]:
             errors.extend(f"{label}.crystal: {error}" for error in crystal_errors)
             if socket.get("locked") not in (True, False, None):
                 errors.append(f"{label}.locked must be boolean when provided")
+
+            integration = socket.get("integration")
+            if not isinstance(integration, Mapping):
+                errors.append(f"{label}.integration must be an object when occupied")
+            else:
+                if integration.get("mode") not in INTEGRATION_MODES:
+                    errors.append(f"{label}.integration.mode is unsupported")
+                if not _percent(integration.get("quality")):
+                    errors.append(
+                        f"{label}.integration.quality must be finite numeric in range 0..100"
+                    )
+                smith_id = integration.get("smith_id")
+                if smith_id is not None and not _stable_id(smith_id):
+                    errors.append(
+                        f"{label}.integration.smith_id must be a stable uppercase ID"
+                    )
     return errors
 
 
@@ -206,3 +222,56 @@ def remove_socketed_crystal(
     socket.pop("integration", None)
     socket["locked"] = False
     return updated
+
+
+def crystal_effect_output(
+    item: Mapping[str, Any],
+    socket_id: str,
+    effect_id: str,
+) -> Dict[str, Any]:
+    """Explain effective crystal output after material and craft-quality losses."""
+    errors = validate_equipment_instance(item)
+    if errors:
+        raise RuleError("Invalid equipment instance:\n- " + "\n- ".join(errors))
+    if not _stable_id(socket_id):
+        raise RuleError("socket_id must be a stable uppercase ID")
+    if not _stable_id(effect_id):
+        raise RuleError("effect_id must be a stable uppercase ID")
+
+    socket = next(
+        (entry for entry in item["crystal_sockets"] if entry["socket_id"] == socket_id),
+        None,
+    )
+    if socket is None:
+        raise RuleError(f"Unknown crystal socket: {socket_id}")
+    crystal = socket.get("crystal")
+    if crystal is None:
+        raise RuleError(f"Crystal socket is empty: {socket_id}")
+
+    effects = crystal.get("effects", {})
+    if effect_id not in effects:
+        raise RuleError(f"Crystal does not provide effect: {effect_id}")
+
+    base_value = float(effects[effect_id])
+    purity = float(crystal["purity"])
+    stability = float(crystal["stability"])
+    harvest_integrity = float(crystal["harvest_integrity"])
+    forge_quality = float(item["forge_quality"])
+    integration_quality = float(socket["integration"]["quality"])
+
+    material_factor = (purity + stability + harvest_integrity) / 300.0
+    craft_factor = (forge_quality + integration_quality) / 200.0
+    total = round(base_value * material_factor * craft_factor, 4)
+
+    return {
+        "effect_id": effect_id,
+        "base_value": base_value,
+        "purity": purity,
+        "stability": stability,
+        "harvest_integrity": harvest_integrity,
+        "forge_quality": forge_quality,
+        "integration_quality": integration_quality,
+        "material_factor": round(material_factor, 4),
+        "craft_factor": round(craft_factor, 4),
+        "total": total,
+    }
