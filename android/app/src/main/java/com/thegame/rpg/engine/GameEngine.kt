@@ -76,6 +76,10 @@ data class GameInventory(
     val equipment: List<GameEquipmentSlot> = emptyList(),
 )
 
+data class GameVisuals(
+    val relayState: String? = null,
+)
+
 data class GameQuestObjective(
     val id: String,
     val title: String,
@@ -126,6 +130,7 @@ data class GameSnapshot(
     val inventory: GameInventory = GameInventory(),
     val quests: List<GameQuest> = emptyList(),
     val worldMap: GameWorldMap = GameWorldMap(),
+    val visuals: GameVisuals = GameVisuals(),
     val turn: Int,
     val timeMinutes: Int,
     val location: String,
@@ -349,6 +354,14 @@ internal object BridgeSnapshotMapper {
             edges = mapEdges,
         )
 
+        val visualsPayload = optionalObjectMap(payload["visuals"], "visuals")
+        val relayState = optionalText(visualsPayload["relay_state"])
+        val allowedRelayStates = setOf("intact", "opened", "damaged", "signal_lost")
+        if (relayState != null && relayState !in allowedRelayStates) {
+            throw IllegalArgumentException("visuals.relay_state is not a supported player-facing state")
+        }
+        val visuals = GameVisuals(relayState = relayState)
+
         return GameSnapshot(
             sceneId = sceneId,
             title = text(scene["title"], "scene.title"),
@@ -363,6 +376,7 @@ internal object BridgeSnapshotMapper {
             inventory = inventory,
             quests = quests,
             worldMap = worldMap,
+            visuals = visuals,
             turn = integer(meta["turn"], "meta.turn"),
             timeMinutes = integer(meta["time_minutes"], "meta.time_minutes"),
             location = optionalText(meta["location"]) ?: sceneId,
