@@ -2,6 +2,7 @@ import unittest
 
 from textrpg.core import RuleError
 from textrpg.crystal_forging import (
+    crystal_effect_output,
     crystal_socket_compatibility,
     integrate_crystal,
     remove_socketed_crystal,
@@ -41,6 +42,7 @@ class CrystalForgingTests(unittest.TestCase):
             "harvest_integrity": 96,
             "size": 1.0,
             "resonance_tags": ["frost"],
+            "effects": {"EFFECT_FROST_EDGE": 12},
         }
         crystal.update(changes)
         return crystal
@@ -119,6 +121,20 @@ class CrystalForgingTests(unittest.TestCase):
             "SOCKET_PRIMARY",
         )
         self.assertEqual(result, {"compatible": False, "reasons": ["occupied"]})
+
+
+    def test_effect_output_requires_installed_effect(self):
+        fitted = integrate_crystal(
+            self.item(),
+            self.crystal(),
+            "SOCKET_PRIMARY",
+            integration_quality=80,
+        )
+        result = crystal_effect_output(fitted, "SOCKET_PRIMARY", "EFFECT_FROST_EDGE")
+        self.assertGreater(result["total"], 0)
+        self.assertEqual(result["base_value"], 12.0)
+        with self.assertRaises(RuleError):
+            crystal_effect_output(fitted, "SOCKET_PRIMARY", "EFFECT_UNKNOWN")
 
     def test_nonfinite_integration_quality_is_rejected(self):
         with self.assertRaises(RuleError):
