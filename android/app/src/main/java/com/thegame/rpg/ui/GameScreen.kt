@@ -390,6 +390,7 @@ private fun NarrativePanel(
             Spacer(Modifier.height(8.dp))
             SceneIllustration(
                 locationId = snapshot.location,
+                relayState = snapshot.visuals.relayState,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp),
