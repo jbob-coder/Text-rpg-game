@@ -267,11 +267,17 @@ The UI must not become the authoritative rules engine.
 ### TASK M-005 — Produce Batch 001 assets
 - STATUS: `IN_PROGRESS`
 - DEPENDS_ON: M-004
-- PRODUCTION ORDER: planning prerequisite is complete. Validate the entire pipeline first with player body turnaround/front master, NPC_TAMSIN turnaround, and Depot Jacket icon/paper-doll layer; then continue Batch 001 in dependency waves.
+- VERIFIED PRE-PRODUCTION STATE:
+  - complete v1 baseline: 500 unique planned units;
+  - first broad concept board persisted as `REF_BATCH001_CONCEPT_BOARD_A` and audited as style-only, not canonical geometry;
+  - Wave A reconstruction packet completed for assets 001, 002, 018, 021 and 022;
+  - Wave A machine-readable manifest completed;
+  - `PLAYER_GAMEPLAY_FRONT_BASE`, `ITEM_DEPOT_JACKET_ICON`, and `ITEM_DEPOT_JACKET_PAPERDOLL` are `BLUEPRINTED`;
+  - `PLAYER_BODYFRAME_A_TURNAROUND` and `NPC_TAMSIN_TURNAROUND` are `BRIEF_LOCKED` pending dedicated reference generation/selection.
+- PRODUCTION ORDER: generate/select dedicated player neutral turnaround and Tamsin canonical turnaround references; reconstruct native player front base and Depot Jacket icon/paper-doll layer; then integrate the first paper-doll pair and run Android visual/equip/unequip QA before mass production.
 - RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
 - DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
 - COMPLETED_AT: —
-
 ## Known technical follow-ups
 
 These are not part of the Android black-screen fix unless directly implicated:
