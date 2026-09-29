@@ -4,6 +4,12 @@ Branch: `context/shared-game-context`
 
 Created: 2026-09-26
 
+## Read first for the narrated Jack Wilson campaign
+
+For the ChatGPT-narrated campaign, read `context/CURRENT_NARRATIVE_AUTHORITY.md` before older cross-project summaries. The current campaign authority is Jack Wilson with the ability `Steal`, with ChatGPT acting as narrator / Game Master. Android/APK, open-world Android, pixel-client work, unrelated Jack Wilson continuities, and any ability assignment replacing `Steal` are outside this campaign unless the user explicitly reintroduces them.
+
+The dated correction record is `context/chats/text-rpg-foundation-chat/NARRATIVE_CANON_CORRECTION_2026-09-29.md`.
+
 ## Purpose
 
 This branch is a shared continuity registry for multiple ChatGPT conversations working with the user on game projects. Each chat contributes **its own accessible context separately**. The files are not a claim that one chat can directly read another chat's private runtime context; the repository is the exchange layer.
