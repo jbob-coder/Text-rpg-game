@@ -18,7 +18,7 @@ The following are **not authoritative canon for this narrated campaign unless th
 - open-world Android UI work;
 - pixel-asset production work intended for an APK/client;
 - unrelated Jack Wilson variants from other campaigns;
-- any ability assignment that replaces `Steal`, including `Eyes of Judgment`.
+- any ability assignment that replaces `Steal`.
 
 Those materials may remain in repository history for provenance, but they must not be used to reconstruct this campaign's story state.
 
