@@ -2,13 +2,13 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-L-ENVIRONMENT-MODULES",
-  "status": "CANDIDATE_IMPLEMENTED_NOT_YET_INTEGRATED",
+  "status": "PRODUCED_AUTOMATED_GATE_GREEN_DEFERRED_INTEGRATION",
   "assets": [
     {
       "number": 58,
       "asset_id": "DEPOT_FACADE_EXTERIOR",
       "asset_family": "environment_module",
-      "status": "CANDIDATE",
+      "status": "PRODUCED_DEFERRED_INTEGRATION",
       "canon_status": "technical",
       "native_canvas": {
         "width": 128,
@@ -22,14 +22,20 @@
       "integration_path": "Reusable Depot Plaza/depot exterior arrival context. Current named-location scene master remains authoritative until a dedicated exterior/arrival surface consumes this module.",
       "state_contract": "Presentation-only. It does not decide travel, door, blackout, quest, or accessibility state.",
       "automated_verification": {
-        "status": "pending exact-head branch gate"
+        "workflow_run_id": 36772270632,
+        "head_sha": "b10d06adf7529f887d429b1a9638e96dd264ec38",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "c4bf5a2d651b1770592e8780708ce66a42ec7567b15cb58ad629f7465f372fbc",
+        "limitation": "Production/catalog contracts are green. Runtime scene integration is deliberately deferred until a legitimate arrival/connector/composition surface exists; physical Galaxy A03 and native-scale visual QA remain separate."
       }
     },
     {
       "number": 59,
       "asset_id": "MAINTENANCE_CORRIDOR_CONNECTOR",
       "asset_family": "environment_module",
-      "status": "CANDIDATE",
+      "status": "PRODUCED_DEFERRED_INTEGRATION",
       "canon_status": "technical",
       "native_canvas": {
         "width": 128,
@@ -43,14 +49,20 @@
       "integration_path": "Reusable future connector scene for maintenance traversal. It cannot replace a unique named location without authored scene/location support.",
       "state_contract": "Visual connector only; authoritative route and travel availability remain engine-owned.",
       "automated_verification": {
-        "status": "pending exact-head branch gate"
+        "workflow_run_id": 36772270632,
+        "head_sha": "b10d06adf7529f887d429b1a9638e96dd264ec38",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "c4bf5a2d651b1770592e8780708ce66a42ec7567b15cb58ad629f7465f372fbc",
+        "limitation": "Production/catalog contracts are green. Runtime scene integration is deliberately deferred until a legitimate arrival/connector/composition surface exists; physical Galaxy A03 and native-scale visual QA remain separate."
       }
     },
     {
       "number": 60,
       "asset_id": "MUNICIPAL_ARCHIVE_EXTERIOR",
       "asset_family": "environment_module",
-      "status": "CANDIDATE",
+      "status": "PRODUCED_DEFERRED_INTEGRATION",
       "canon_status": "technical",
       "native_canvas": {
         "width": 128,
@@ -64,14 +76,20 @@
       "integration_path": "Exterior identity for future archive arrival/travel presentation. Existing Municipal Archive interior remains the current playable scene.",
       "state_contract": "Presentation-only; archive discovery, reachability, quest availability and terminal interactions remain projected/engine-owned.",
       "automated_verification": {
-        "status": "pending exact-head branch gate"
+        "workflow_run_id": 36772270632,
+        "head_sha": "b10d06adf7529f887d429b1a9638e96dd264ec38",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "c4bf5a2d651b1770592e8780708ce66a42ec7567b15cb58ad629f7465f372fbc",
+        "limitation": "Production/catalog contracts are green. Runtime scene integration is deliberately deferred until a legitimate arrival/connector/composition surface exists; physical Galaxy A03 and native-scale visual QA remain separate."
       }
     },
     {
       "number": 61,
       "asset_id": "MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS",
       "asset_family": "environment_atlas",
-      "status": "CANDIDATE",
+      "status": "PRODUCED_DEFERRED_INTEGRATION",
       "canon_status": "technical",
       "native_canvas": {
         "width": 32,
@@ -85,7 +103,13 @@
       "integration_path": "Reusable wall, floor, panel and rail/vent tiles for future scene composition and expansion.",
       "state_contract": "Atlas tiles contain no gameplay state and cannot infer interactability or location identity.",
       "automated_verification": {
-        "status": "pending exact-head branch gate"
+        "workflow_run_id": 36772270632,
+        "head_sha": "b10d06adf7529f887d429b1a9638e96dd264ec38",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "c4bf5a2d651b1770592e8780708ce66a42ec7567b15cb58ad629f7465f372fbc",
+        "limitation": "Production/catalog contracts are green. Runtime scene integration is deliberately deferred until a legitimate arrival/connector/composition surface exists; physical Galaxy A03 and native-scale visual QA remain separate."
       }
     }
   ],
