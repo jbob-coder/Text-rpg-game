@@ -14,6 +14,7 @@ class PixelSceneOverlayCatalogTest {
                 PixelSceneOverlayCatalog.GATE_TWELVE_ECHO_ACTIVE_ID,
                 PixelSceneOverlayCatalog.SERVICE_TUNNEL_AFTERSHOCK_ID,
                 PixelSceneOverlayCatalog.TRACE_CHAMBER_TRAINING_ID,
+                PixelSceneOverlayCatalog.DISTRICT_PLAZA_BLACKOUT_ID,
             ),
             PixelSceneOverlayCatalog.productionOverlays.map { it.assetId }.toSet(),
         )
@@ -76,4 +77,15 @@ class PixelSceneOverlayCatalogTest {
         assertNull(PixelSceneOverlayCatalog.forScene(null))
         assertNull(PixelSceneOverlayCatalog.forScene("UNKNOWN_SCENE"))
     }
+
+    @Test
+    fun districtHubMapsOnlyToDepotPlazaBlackoutState() {
+        assertSame(
+            PixelSceneOverlayCatalog.districtPlazaBlackout,
+            PixelSceneOverlayCatalog.forScene("DISTRICT_HUB"),
+        )
+        assertNull(PixelSceneOverlayCatalog.forScene("DISTRICT_ARCHIVE"))
+        assertNull(PixelSceneOverlayCatalog.forScene("DISTRICT_WORKSHOP"))
+    }
+
 }
