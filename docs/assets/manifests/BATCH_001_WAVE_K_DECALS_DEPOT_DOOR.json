@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "batch_id": "BATCH_001",
+  "wave_id": "B001-WAVE-K-DECALS-DEPOT-DOOR",
+  "status": "CANDIDATE_PENDING_EXACT_HEAD_GATE",
+  "assets": [
+    {
+      "number": 64,
+      "asset_id": "EVACUATION_SIGNAGE_SET",
+      "asset_family": "environment_decal_set",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 24,
+        "height": 24,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentDecalCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "PLATFORM_NINE",
+        "EVAC_STAIR",
+        "DISTRICT_PLAZA"
+      ],
+      "state_contract": "Symbol-only signage is selected only from player-facing locationId. Route/accessibility and long instructions remain engine/UI-owned.",
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      }
+    },
+    {
+      "number": 65,
+      "asset_id": "DISTRICT_AMBIENT_DECAL_SET",
+      "asset_family": "environment_decal_set",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentDecalCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "PLATFORM_NINE",
+        "SERVICE_TUNNEL",
+        "DISTRICT_PLAZA"
+      ],
+      "state_contract": "Wear, caution and utility marks are presentation-only and selected solely by player-facing locationId.",
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      }
+    },
+    {
+      "number": 66,
+      "asset_id": "PROP_DEPOT_DOOR",
+      "asset_family": "environment_prop",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 32,
+        "height": 48,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentPropCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "PLATFORM_NINE",
+        "DISTRICT_PLAZA / DISTRICT_HUB"
+      ],
+      "state_contract": "Current integration is a default powered/closed depot landmark selected only from player-facing location/scene IDs. Door access remains engine-owned.",
+      "limitations": [
+        "Open and powered-off art states are explicitly deferred until those states are available through a player-safe projection."
+      ],
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      }
+    }
+  ],
+  "limitations": [
+    "Physical Galaxy A03 visual QA remains separate.",
+    "These assets are presentation-only and cannot decide route, door, quest, or interaction state."
+  ]
+}
