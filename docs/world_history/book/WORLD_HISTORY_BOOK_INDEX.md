@@ -51,6 +51,10 @@ Scientific precursors, state programs, social conditions, hidden anomaly researc
 
 Current chapters:
 - `BOOK_02_CHAPTER_01_THE_AGE_OF_MEASUREMENT.md` — approximately 1600–1896; measurement, fraud control, early scientific anomaly investigation, and the 1896 proof threshold.
+- `BOOK_02_CHAPTER_02_THE_STATE_LEARNS_TO_HIDE.md` — 1896–2228; classified bureaucracy, archives, wartime evaluation, postwar medicine, analytics, heredity research, and Meridian comparison.
+
+Next planned chapter:
+- 2228–2418 — Meridian convergence, sensor networks, lineage controversy, and early environmental convergence.
 
 ### BOOK_03 — Veinfall
 The 2473 cascade in full lived-in detail, including regional and civilian experience.
@@ -101,5 +105,6 @@ Every completed chapter must:
 ## Current status
 
 Architecture: COMPLETE
-Narrative chapter population: STARTED — PHASE 02 IN PROGRESS
-Next content phase after architecture: PHASE 02
+Narrative chapter population: PHASE 02 IN PROGRESS
+Completed through: 2228
+Next content unit: 2228–2418
