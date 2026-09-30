@@ -45,6 +45,8 @@ Future records should use:
 - SPATIAL_MATURE_CRYSTAL_INDUSTRIALIZATION_ATLAS_2529_2558_V1.md
 - SPATIAL_PORTAL_EXPANSION_ATLAS_2559_2605_V1.md
 - SPATIAL_CREATURE_HABITAT_ATLAS_V1.md
+- SPATIAL_INTERWORLD_FOUNDATION_ATLAS_2606_2620_V1.md
+- SPATIAL_KHARVORI_HOMEWORLD_CONTACT_ATLAS_V1.md
 
 ## Current persistent historical sites
 
@@ -177,16 +179,35 @@ Creature/habitat reference additions:
 - HABITAT_HAVEN03_SKYSAIL_ESCARPMENT_2582
 - HABITAT_HAVEN03_MIRECOIL_WETLAND_2584
 
+Interworld foundation 2606–2620 additions:
+- PORTAL_HUB_MERIDIAN_INTERWORLD_TERMINAL_2608
+- SETTLEMENT_HAVEN03_GATEWARD_2610_VERSION
+- FRAME_DESTINATION_CINDER_05_LOCAL_001
+- OUTPOST_CINDER05_ASTER_QUAY_2612
+- FRAME_DESTINATION_VERDANT_11_LOCAL_001
+- SETTLEMENT_VERDANT11_HARBORLIGHT_2616
+
+Kharvori / first-contact additions:
+- FRAME_VEYRA_GEODETIC_001
+- SITE_TALAR_ASTRONOMICAL_DATUM_001
+- CITY_TALAR_VEY_001
+- CITY_ORU_KESH_001
+- CITY_VASKAR_HETH_001
+- CITY_MEYRA_SAAL_001
+- PORTAL_HUB_VEYRA_SAR_KHEL_001
+- FRAME_NARETH_CONTACT_LOCAL_001
+- PORTAL_ENDPOINT_LANTERN14_HUMAN_2626
+- SITE_LANTERN14_HUMAN_OBSERVATION_2627
+- SITE_NARETH_KHARVORI_SURVEY_STATION_001
+- ZONE_FIRST_CONTACT_NARETH_2628
+
 ## Current chronological spatial boundary
 
 Locked scenario geometry currently reaches:
-2605.
-
-Creature habitat geometry:
-BASELINE BUILT for Earth and Haven_03 scenario testing.
+2628 first contact.
 
 Next spatial target:
-2606+ interworld expansion prerequisites and Kharvori homeworld/contact frames.
+2628–2631 diplomatic facilities, translation centers, mixed-species meeting spaces, customs, medical/quarantine compatibility, and early trade geometry.
 
 ## Rule
 
