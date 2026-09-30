@@ -249,7 +249,7 @@ Modifiers:
 TERRITORIAL, STEALTH in native brush, STRUCTURE_BREAKER.
 
 Abilities:
-- CAB_RESonance_SENSE;
+- CAB_RESONANCE_SENSE;
 - CAB_BURST_REGENERATION, limited.
 
 Regeneration constraint:
