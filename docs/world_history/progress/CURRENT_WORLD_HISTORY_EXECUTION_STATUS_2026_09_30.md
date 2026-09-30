@@ -38,10 +38,10 @@ SPATIAL_KHARVORI_HOMEWORLD_CONTACT_ATLAS_V1.md
 ## Future planning
 
 Latest exact 100-round future planning cycle:
-1111–1210 is complete as a plan.
+1211–1310 is complete as a plan.
 
-Next new planning cycle:
-1211–1310.
+Next unplanned future cycle:
+1311–1410.
 
 ## Authority note
 
