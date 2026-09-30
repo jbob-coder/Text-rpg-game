@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertDoesNotExist
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasScrollAction
@@ -291,6 +292,36 @@ class GameScreenTest {
 
         composeRule.onNodeWithTag("avatar-visible-gear").assertIsDisplayed()
         composeRule.onNodeWithText("VISIBLE GEAR // CHEST • RING I").assertIsDisplayed()
+    }
+
+    @Test
+    fun unmappedEquippedItemDoesNotInventVisibleAvatarLayer() {
+        val equippedSnapshot = snapshot.copy(
+            inventory = GameInventory(
+                equipment = listOf(
+                    GameEquipmentSlot(
+                        slot = "head",
+                        equipped = true,
+                        itemId = "ITEM_FUTURE_HELMET",
+                        name = "Future helmet",
+                    ),
+                )
+            )
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                GameScreen(
+                    snapshot = equippedSnapshot,
+                    busy = false,
+                    onChoice = {},
+                    onNavigate = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        composeRule.onNodeWithTag("avatar-visible-gear").assertDoesNotExist()
     }
 
     @Test
