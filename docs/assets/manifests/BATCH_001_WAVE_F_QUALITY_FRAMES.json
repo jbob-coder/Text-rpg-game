@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "batch_id": "BATCH_001",
+  "wave_id": "B001-WAVE-F-QUALITY-FRAMES",
+  "status": "CANDIDATE_PENDING_EXACT_HEAD_GATE",
+  "assets": [
+    {
+      "number": 39,
+      "asset_id": "UI_ITEM_QUALITY_FRAMES",
+      "asset_family": "ui_frame_set",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "variants": [
+          "standard",
+          "uncommon"
+        ],
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelItemQualityFrameCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelComponents.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt",
+        "android/app/src/main/java/com/thegame/rpg/engine/GameEngine.kt",
+        "src/textrpg/android_bridge.py"
+      ],
+      "integration_targets": [
+        "Android inventory item icons"
+      ],
+      "state_contract": "Quality comes only from explicit player-safe item-definition metadata projected by the Python bridge. Unsupported or absent quality values map to no frame; Compose never infers rarity from item ID, slot, color, modifiers, or tags.",
+      "supported_quality_values": [
+        "standard",
+        "uncommon"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "Only current authored standard/uncommon qualities are supported; future qualities require an explicit authored frame and mapping."
+      ]
+    }
+  ]
+}
