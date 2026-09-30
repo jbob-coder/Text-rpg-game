@@ -988,3 +988,41 @@ This project is complete only when the repository can answer, with traceable can
 - what the protagonists still do not know.
 
 The world should be detailed enough that future scenarios are selected from an existing living world rather than invented from nothing every time.
+
+
+---
+
+## 19. 100-round planning/documentation pass
+
+Status: COMPLETE
+
+Persistent index:
+- docs/world_history/planning_rounds/ROUND_001_100_EXECUTION_INDEX.md
+
+Round blocks:
+- 001–010 Pre-Crystal deepening
+- 011–020 Veinfall deep history
+- 021–030 Early Crystal Era
+- 031–040 Crystal Industrialization
+- 041–050 Portal Expansion
+- 051–060 Homunculus rebuild
+- 061–070 Creature system
+- 071–080 Ability/crystal/portal reference integration
+- 081–090 Kharvori/interworld-war groundwork
+- 091–100 Academy/present/scenario/QA
+
+Important:
+Completion of these rounds means the planning/documentation architecture is recorded. It does not falsely imply that every planned historical chapter is already written.
+
+Supporting specifications:
+- docs/world_history/reference/CREATURE_CLASSIFICATION_STANDARD_V1_DRAFT.md
+- docs/world_history/reference/SCENARIO_QUERY_MODEL_V1_DRAFT.md
+- docs/world_history/factions/HOMUNCULUS_REBUILD_SPEC.md
+- docs/world_history/species/KHARVORI_BUILD_SPEC.md
+- docs/world_history/wars/FIRST_INTERWORLD_WAR_BUILD_SPEC.md
+- docs/world_history/institutions/ACADEMY_HISTORY_BUILD_SPEC.md
+- docs/world_history/progress/ROUND_100_HANDOFF.md
+
+Current writing position after round 100:
+PHASE 02 remains active.
+Next safe content unit: UNIT 02.03 — Age of Measurement, approximately 1600–1896.
