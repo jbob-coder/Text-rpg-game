@@ -87,3 +87,18 @@ Do not connect these chapters to:
 
 Not yet passed.
 PHASE 02 continues.
+
+
+## 100-round planning support
+
+The broader project has now completed a separate 100-round planning/documentation pass.
+
+Relevant files:
+- docs/world_history/planning_rounds/ROUND_001_100_EXECUTION_INDEX.md
+- docs/world_history/planning_rounds/ROUNDS_001_010_PRECRYSTAL_DEEPENING.md
+- docs/world_history/progress/ROUND_100_HANDOFF.md
+
+This does not change PHASE 02 status.
+
+NEXT SAFE UNIT remains:
+UNIT 02.03 — approximately 1600–1896, Age of Measurement.
