@@ -12,6 +12,7 @@ class PixelEnvironmentPropCatalogTest {
             PixelEnvironmentPropCatalog.ARCHIVE_TERMINAL_ID to (32 to 32),
             PixelEnvironmentPropCatalog.WORKSHOP_BENCH_ID to (48 to 32),
             PixelEnvironmentPropCatalog.DISTRICT_NOTICE_BOARD_ID to (32 to 48),
+            PixelEnvironmentPropCatalog.DEPOT_DOOR_ID to (32 to 48),
             PixelEnvironmentPropCatalog.RELAY_WORKBENCH_ID to (64 to 32),
             PixelEnvironmentPropCatalog.GATE_TWELVE_DOOR_ID to (64 to 48),
             PixelEnvironmentPropCatalog.TUNNEL_PIPE_SET_ID to (32 to 32),
@@ -38,6 +39,9 @@ class PixelEnvironmentPropCatalogTest {
 
     @Test
     fun placementsUseOnlyPlayerFacingLocationAndSceneIds() {
+        val platform = PixelEnvironmentPropCatalog.placements("PLATFORM_NINE", "OPENING_RELAY_HANDOFF")
+        assertEquals(listOf(PixelEnvironmentPropCatalog.depotDoor), platform.map { it.sprite })
+
         val relay = PixelEnvironmentPropCatalog.placements("RELAY_WORKBENCH", "OPENING_RELAY_CASING")
         assertEquals(listOf(PixelEnvironmentPropCatalog.relayWorkbench), relay.map { it.sprite })
 
@@ -68,7 +72,10 @@ class PixelEnvironmentPropCatalogTest {
 
         val plaza = PixelEnvironmentPropCatalog.placements("DISTRICT_PLAZA", "DISTRICT_HUB")
         assertEquals(
-            listOf(PixelEnvironmentPropCatalog.districtNoticeBoard),
+            listOf(
+                PixelEnvironmentPropCatalog.depotDoor,
+                PixelEnvironmentPropCatalog.districtNoticeBoard,
+            ),
             plaza.map { it.sprite },
         )
 
