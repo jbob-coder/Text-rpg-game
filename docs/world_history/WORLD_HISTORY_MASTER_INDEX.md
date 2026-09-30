@@ -59,22 +59,38 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/eras/ERA_000_PREHUMAN_FOUNDATIONS.md` — deep-time physical/ecological baseline and human evolutionary bridge.
 - `docs/world_history/eras/ERA_010_HUMAN_PRECRYSTAL.md` — hidden anomalous humans, pre-Crystal institutions, public/classified/true history.
 - `docs/world_history/eras/ERA_030_EARLY_CRYSTAL_2473_2505.md` — emergency survival, classification, early regulation, ecology, economy, military use, and portal science after Veinfall.
+- `docs/world_history/eras/ERA_040_CRYSTAL_INDUSTRIALIZATION_2506_2558.md` — standardized crystals become regulated infrastructure, strategic commodities, and biological/portal engineering inputs.
+- `docs/world_history/eras/ERA_050_PORTAL_EXPANSION_2559_2605.md` — artificial portals, controlled transit, permanent offworld outposts, frontier settlement, and post-rebellion portal security.
 
 ### Foundational event registries
 - `docs/world_history/events/PRECRYSTAL_EVENT_REGISTRY.md`
 - `docs/world_history/events/EVENT_VEINFALL_2473.md`
+- `docs/world_history/events/CRYSTAL_INDUSTRIAL_MILESTONES_2506_2558.md`
+- `docs/world_history/events/PORTAL_EXPANSION_MILESTONES_2559_2605.md`
 
 ### Human lineages and biology
 - `docs/world_history/lineages/HUMAN_LINEAGE_ANOMALOUS_BASELINE_001.md`
 
 ### Ecosystems
 - `docs/world_history/ecosystems/ECOSYSTEM_PRECRYSTAL_EARTH_BASELINE_001.md`
+- `docs/world_history/ecosystems/ECOSYSTEM_CRYSTAL_TRANSITION_V1.md`
 
 ### Organizations
 - `docs/world_history/organizations/PRECRYSTAL_ORGANIZATION_REGISTRY.md`
 
+### Crystals, technology, laws, portals, and economy
+- `docs/world_history/crystals/CRYSTAL_STANDARD_CLASSIFICATION_V1.md`
+- `docs/world_history/technology/TECH_CRYSTAL_INFRASTRUCTURE_REGISTRY_2506_2558.md`
+- `docs/world_history/laws/LAW_CRYSTAL_ABILITY_FRAMEWORK_2506_2558.md`
+- `docs/world_history/portals/PORTAL_SCIENCE_PRE_EXPANSION_2506_2558.md`
+- `docs/world_history/portals/PORTAL_NETWORK_FOUNDATION_V1.md`
+- `docs/world_history/economy/PORTAL_FRONTIER_ECONOMY_2559_2605.md`
+
 ### Knowledge-state timelines
 - `docs/world_history/timelines/TIMELINE_PRECRYSTAL_LAYERED_V1.md`
+
+### Homunculus historical expansion
+- `docs/world_history/species/HOMUNCULUS_HISTORICAL_DEVELOPMENT_2556_2602.md`
 
 ## Current reconstruction boundary
 
@@ -85,19 +101,25 @@ Completed foundation:
 - first pre-Crystal organizations and event IDs;
 - layered PUBLIC / CLASSIFIED / TRUE timeline;
 - Veinfall primary 11-day cascade and approximately 18-month extended instability;
-- Early Crystal Era through 2505.
+- Early Crystal Era through 2505;
+- Crystal Industrialization through 2558;
+- multidimensional crystal classification;
+- industrial technology, law, and ecological transition frameworks;
+- Portal Expansion through 2605;
+- artificial portal milestones and frontier economy;
+- expanded homunculus origin, sapience recognition, reproductive lineage, rebellion causality, and 2602 aftermath.
 
 Next build sequence:
-1. ERA_CRYSTAL_INDUSTRIALIZATION.
-2. First stable beast-crystal science and standardized crystal taxonomy.
-3. Regional ecosystem reconstruction after Veinfall.
-4. Portal stabilization and artificial-portal research.
-5. Human political/economic divergence caused by crystal resources.
-6. Offworld settlement.
-7. Kharvori pre-contact history and first-contact chain.
-8. WAR_FIRST_INTERWORLD_2645_2659.
-9. EVENT_HALCYON_GATE_CONCORD_2660.
-10. Reconstruction to ERA_PRESENT_2670.
+1. ERA_INTERWORLD_EXPANSION_2606_2644.
+2. Kharvori biology, civilization, pre-contact history, and internal factions.
+3. Human/Kharvori first-contact chain.
+4. Interworld diplomacy, trade, territorial claims, and escalation.
+5. WAR_FIRST_INTERWORLD_2645_2659.
+6. EVENT_HALCYON_GATE_CONCORD_2660.
+7. Earth Bastion doctrine and postwar reconstruction.
+8. Asterline causal history tied to existing 2670 spatial atlas.
+9. Reconstruction to ERA_PRESENT_2670.
+10. Historical gameplay hooks, discoverable archives, museums, family memories, propaganda, and hidden records.
 
 ## Sapient nonhuman / engineered peoples
 
