@@ -15,4 +15,11 @@ Current player identity for this campaign:
 - Ability: **Steal**
 - ChatGPT role: narrator / Game Master, world simulation, and NPC portrayal.
 
+World-history authority added 2026-09-29:
+
+- `docs/world_history/WORLD_HISTORY_MASTER_INDEX.md` is the campaign world-history index.
+- Files under `docs/world_history/` marked ACTIVE_CAMPAIGN_CANON belong to this narrated campaign.
+- World-history reconstruction does not advance the live Jack/Elias gameplay clock.
+- PUBLIC, CLASSIFIED, and TRUE history layers must remain separate from character knowledge.
+
 Do not import Android/APK, open-world Android, pixel-client, or unrelated Jack Wilson campaign material into this narrative continuity unless the user explicitly reintroduces it.
