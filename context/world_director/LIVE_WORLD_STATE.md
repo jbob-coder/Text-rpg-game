@@ -3,59 +3,125 @@
 Status: ACTIVE_CAMPAIGN_STATE
 Updated: 2026-09-29
 Present-era anchor: 2670
-Live gameplay clock: NOT ADVANCED BY THIS DOCUMENTATION PASS
+Live gameplay clock: DAY -15, 08:19:46
+Checkpoint source: Google Drive / 12_GAMEPLAY_BRANCH / GAMEPLAY_CHECKPOINT_CURRENT.md (latest markdown copy modified 2026-09-11 15:49:37Z)
 
 ## Confirmed player continuity
 
 - PLAYER_ID: PERSON_JACK_WILSON
 - Player name: Jack Wilson
 - Primary ability: ABILITY_STEAL
-- Assistant role: narrator / Game Master / world director
-- The user retains Jack's voluntary decisions.
+- Assistant role: narrator / Game Master / omniscient world director
+- PLAYER_ACTION_AUTHORITY: USER_ONLY
+- Jack's voluntary decisions, dialogue, movement, purchases, ability use, attacks, and relationship choices remain user-controlled.
 
-## Confirmed continuity anchors
+## Current authoritative local anchor
 
-- The narrated campaign uses the 2670-era world.
-- Jack and Elias Voss belong to the active campaign continuity referenced by the world-history index.
-- Historical reconstruction does not itself advance Jack/Elias live time.
-- The Academy must remain a central narrative aspect.
-- PUBLIC, CLASSIFIED, TRUE, player knowledge, and NPC knowledge must remain distinct.
+### Elias Voss
+
+- Day: -15
+- Time: 08:19:46
+- Location: Visitor Services counter on the public/civilian side of the secured military-academy complex
+- Age: 16
+- Level: 1
+- XP: 0/100
+- HP: 10/10
+- Stamina: 10/10
+- Strength: 6
+- Speed: 6
+- Agility: 7
+- Endurance: 6
+- Perception: 8
+- Intelligence: 8
+- Willpower: 8
+- Luck: 2
+- Free Stat Points: 0
+- Credits: 10
+- Beast Crystals: 0
+- Beast Weapons: 0
+- Elite Equipment: none
+- Ability: Perfect Clone [Unique 1/1]
+- Active Clones: 0/2
+- Injuries/status: none
+
+### Current scene
+
+The Visitor Services clerk has recognized the surname Voss, asked whether Adrian Voss was Elias's father, and stated: "I knew of him."
+
+The basis, depth, and significance of that recognition remain UNKNOWN.
+
+Elias's immediate focus:
+- continue the conversation naturally;
+- obtain the intake information he came for;
+- carefully learn how the clerk knew Adrian Voss;
+- avoid overreacting or revealing unnecessary personal information.
+
+Secondary Elias focus:
+- continue learning what causes EVOLVE to react to environments, behavior, and social adaptation.
+
+### Elias current known acquaintances
+
+- Leah: incoming cadet, brief first contact, neutral-positive.
+- Derek: incoming cadet, stated provisional rating 3.8; Elias withheld final judgment.
+- Maya: incoming cadet, stated provisional rating 3.1; neutral/possibly positive first acquaintance.
+- Visitor Services clerk: older woman; name UNKNOWN; professionally neutral/positive interaction so far; recognizes Adrian Voss.
+
+No strong trust, hostility, loyalty, or relationship commitment has been established with these people.
+
+### EVOLVE observations already experienced
+
+- Academy recognized as a long-term developmental environment.
+- No immediate Evolution condition satisfied.
+- Behavioral pattern recorded: "Observation before conclusion."
+- Later display: "Social adaptation data accumulating."
+
+Elias currently suspects EVOLVE tracks social adaptation in addition to environmental and behavioral development. Exact mechanism remains UNKNOWN.
+
+## Jack Wilson current live state
+
+- Location: UNKNOWN
+- Exact current date/time relative to Elias beyond shared campaign continuity: UNKNOWN
+- Complete runtime sheet: UNKNOWN
+- Actions after restarted Day -15 timeline: NONE
+- Jack/Elias met: NO
+
+No Jack movement, speech, thoughts, spending, ability use, combat, or relationship choice has been generated to fill these unknowns.
+
+## Academy anchor
+
+ACADEMY_STATUS: ACTIVE_REQUIRED_PILLAR
+
+Confirmed in current live continuity:
+- secured military-academy complex exists;
+- public/civilian-facing Visitor Services exists outside the secured interior;
+- Elias is an incoming first-year cadet under standard intake;
+- the academy is treated by EVOLVE as a long-term developmental environment;
+- Jack's exact Academy relationship remains UNKNOWN.
+
+Still UNKNOWN:
+- academy canonical stable ID;
+- academy official name;
+- exact city/region;
+- exact absolute civil date corresponding to Day -15;
+- Jack's enrollment/status;
+- Jack dorm assignment;
+- full faculty roster;
+- full student roster;
+- exact current Academy schedule beyond facts already experienced.
 
 ## Current broad world conditions
 
 CONFIRMED_OR_DERIVED:
 - The world is in the post-2660 reconstruction era following the First Interworld War.
 - Portal civilization, crystal infrastructure, transformed ecosystems, nonhuman peoples, and interworld political consequences are established parts of the setting.
-- Historical tensions remain capable of producing present-day institutional, economic, social, and security consequences.
+- Historical tensions can produce present-day institutional, economic, social, ecological, and security consequences.
 
-These are world-scale conditions, not claims that Jack currently knows their full causes.
-
-## Academy anchor
-
-ACADEMY_STATUS: ACTIVE_REQUIRED_PILLAR
-
-The Academy is part of the intended current story structure. Exact live details that are not yet present in repository authority are intentionally not invented here.
-
-UNKNOWN until recovered or authored in a traceable campaign file:
-- academy canonical stable ID;
-- academy official name;
-- exact city/region;
-- exact current date/day/time of Jack's Academy arc;
-- Jack's current enrollment/status;
-- class schedule;
-- dorm assignment;
-- faculty roster;
-- student roster;
-- Elias's exact current relationship to the Academy;
-- current live scene;
-- current immediate objective.
-
-These UNKNOWN values are a protection against importing facts from unrelated military-school, APK, Pixel RPG, Veilbound, or older Jack variants.
+These are world-scale conditions and do not automatically become Jack or Elias knowledge.
 
 ## Active world-director clocks
 
-LIVE_GAMEPLAY_CLOCK: PAUSED_AT_LAST_CONFIRMED_LIVE_STATE
-ACADEMY_CLOCK: READY / requires exact local anchor
+LIVE_GAMEPLAY_CLOCK: 08:19:46 / PAUSED UNTIL NARRATION RESUMES
+ACADEMY_CLOCK: SYNCHRONIZED TO LIVE LOCAL ANCHOR
 FACTION_CLOCK: READY / no unrecorded advancement
 POLITICAL_CLOCK: READY / no unrecorded advancement
 ECOLOGY_CLOCK: READY / no unrecorded advancement
@@ -63,21 +129,32 @@ ECONOMY_CLOCK: READY / no unrecorded advancement
 SECRET_CLOCK: READY / no unrecorded advancement
 INTERWORLD_CLOCK: READY / no unrecorded advancement
 
-"READY" means the director is authorized to simulate the clock once live time resumes; it does not mean undocumented events have already happened.
+No clock advances merely because real-world chat time passes.
 
-## Current narrative rule
+## Active rules
 
-When live play resumes:
-1. recover the last confirmed local scene/state if it exists;
-2. establish the exact Academy temporal/spatial anchor;
-3. advance only the clocks justified by elapsed live time;
-4. select off-screen events by causal pressure, not arbitrary surprise;
-5. expose only information Jack could perceive or learn;
-6. append resulting changes to WORLD_EVENT_LEDGER.
+- Difficulty: HARD — LIVING WORLD
+- Fog of war: STRICT
+- Plot armor: OFF
+- Hidden mercy: OFF
+- World level scaling: OFF
+- Save mode: CONTINUOUS IRONMAN CONTINUITY
+- No silent time skips.
+- Story-first narration remains active.
+- Elias is independent and assistant-controlled.
+- Perfect Clone remains unused.
+- Combat: none.
+- Crystal consumption: none.
+- Purchases: none.
+- Relationship commitments: none.
+
+## Next legal transition
+
+CONTINUE_CONVERSATION_AT_DAY_MINUS_15_08_19_46_WITH_ELIAS_AND_THE_VISITOR_SERVICES_CLERK_WITHOUT_CONTROLLING_JACK
 
 ## Open world pressures available for future use
 
-DRAFT_CANON_PRESSURE_POOL — these are permitted story pressures, not yet events:
+DRAFT_CANON_PRESSURE_POOL — permitted story pressures, not yet live events:
 - postwar security doctrine affecting Academy training or recruitment;
 - competition over portal access and crystal resources;
 - unresolved Human/Kharvori distrust after the Concord;
@@ -88,4 +165,4 @@ DRAFT_CANON_PRESSURE_POOL — these are permitted story pressures, not yet event
 - institutional interest in unusual abilities if Jack exposes Steal;
 - conflict between public history and classified/true history.
 
-Nothing in this pressure pool is automatically active in Jack's immediate scene until promoted through play and recorded.
+Nothing in this pool becomes an event until causally activated and recorded.
