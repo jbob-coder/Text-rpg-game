@@ -1,6 +1,6 @@
 # PORTAL_EXPANSION_MILESTONES_2559_2605
 
-Status: ACTIVE_REGISTRY_WITH_DRAFT_DATES  
+Status: ACTIVE_REGISTRY_WITH_RECONSTRUCTION_GAPS
 Authority: USER_AUTHORIZED_2026-09-29
 
 ## EVENT_FIRST_ARTIFICIAL_MICROBREACH_2562
@@ -27,19 +27,14 @@ Several major jurisdictions establish legal frameworks for civilian frontier set
 ## EVENT_FRONTIER_QUARANTINE_CRISIS_2583
 An imported biological outbreak forces large-scale portal closures and demonstrates that interworld disease control is a strategic requirement.
 
-## EVENT_HOMUNCULUS_REBELLION_2587_2601
-Existing canonical conflict ID. Portal infrastructure becomes a major military, labor, and escape-route factor.
+## SUPERSEDED EVENT_HOMUNCULUS_REBELLION_2587_2601
+Do not use. Superseded by 2026-09-29 user direction.
 
-## LAW_HOMUNCULUS_CUSTODIAL_ORDER_2602
-Existing canonical post-rebellion legal order.
+## SUPERSEDED LAW_HOMUNCULUS_CUSTODIAL_ORDER_2602
+Do not use. Superseded by 2026-09-29 user direction.
 
-## EVENT_POSTREBELLION_PORTAL_SECURITY_DOCTRINE_2603
-Human authorities redesign major portal hubs around:
-- layered identity control;
-- military quick response;
-- quarantine;
-- sabotage resistance;
-- hard shutdown capability.
+## RECONSTRUCTION GAP 2587–2604
+Specific events in this interval require later rebuild. Do not silently repopulate the gap.
 
 ## EVENT_INTERWORLD_EXPANSION_THRESHOLD_2605
 Permanent settlement and resource networks become large enough that offworld governance is a standing political problem rather than an expeditionary exception.
