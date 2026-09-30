@@ -73,6 +73,6 @@ class PixelEnvironmentPropCatalogTest {
         )
 
         assertTrue(PixelEnvironmentPropCatalog.placements("DISTRICT_PLAZA", null).isEmpty())
-        assertTrue(PixelEnvironmentPropCatalog.placements("GATE_TWELVE", "POWER_GATE_TWELVE_SIGNAL").isEmpty())
+        assertTrue(PixelEnvironmentPropCatalog.placements("UNKNOWN_LOCATION", "UNKNOWN_SCENE").isEmpty())
     }
 }
