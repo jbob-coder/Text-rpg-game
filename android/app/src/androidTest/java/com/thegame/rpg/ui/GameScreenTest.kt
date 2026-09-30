@@ -236,6 +236,7 @@ class GameScreenTest {
             "GATE_TWELVE" to "POWER_GATE_TWELVE_SIGNAL",
             "SERVICE_TUNNEL" to "TRACE_DIRECTIONAL_AFTERSHOCK",
             "TRACE_CHAMBER" to "POWER_FIRST_PRACTICE",
+            "DISTRICT_PLAZA" to "DISTRICT_HUB",
         )
 
         composeRule.setContent {
