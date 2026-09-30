@@ -70,7 +70,8 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 
 - `docs/world_history/planning_rounds/ROUND_001_100_EXECUTION_INDEX.md` — first 100-round architecture pass.
 - `docs/world_history/planning_rounds/ROUND_101_200_STORY_SPATIAL_EXECUTION_INDEX.md` — second 100-round story + coordinates/dimensions pass.
-- `docs/world_history/progress/ROUND_200_HANDOFF.md` — current bounded handoff after planning through Round 200.
+- `docs/world_history/planning_rounds/ROUND_201_300_STORY_SPATIAL_EXECUTION_INDEX.md` — third 100-round execution cycle, continuing story + coordinates/dimensions through war/Academy prerequisites.
+- `docs/world_history/progress/ROUND_300_HANDOFF.md` — current bounded handoff after planning through Round 300.
 
 ## Active world-history files
 
@@ -96,6 +97,7 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 
 ### Organizations
 - `docs/world_history/organizations/PRECRYSTAL_ORGANIZATION_REGISTRY.md`
+- `docs/world_history/organizations/PRECRYSTAL_HIDDEN_PROGRAM_REGISTRY_1896_2228.md` — classified institutional bridge from first proof to Meridian exchange.
 
 ### Crystals, technology, laws, portals, and economy
 - `docs/world_history/crystals/CRYSTAL_STANDARD_CLASSIFICATION_V1.md`
@@ -110,7 +112,11 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/spatial/SPATIAL_REFERENCE_STANDARD_V1.md` — canonical coordinate, dimension, orientation, uncertainty, and temporal-validity rules.
 - `docs/world_history/spatial/SPATIAL_REGISTRY_INDEX.md` — persistent spatial-record index.
 - `docs/world_history/spatial/SPATIAL_STORY_ATLAS_1600_1896_V1.md` — first historical coordinate/dimension atlas.
+- `docs/world_history/spatial/SPATIAL_STORY_ATLAS_1896_2228_V1.md` — secure archives, field evaluation, medical variance, analytics, genomic study, and Meridian exchange coordinates/dimensions.
 - `docs/world_history/templates/SPATIAL_ENTITY_TEMPLATE.md` — reusable location/structure template.
+
+### Readable history-book progress
+- `docs/world_history/book/BOOK_02_CHAPTER_02_THE_STATE_LEARNS_TO_HIDE.md` — 1896–2228 hidden-program era; bureaucracy, war, medicine, analytics, heredity, and Meridian.
 
 ### Knowledge-state timelines
 - `docs/world_history/timelines/TIMELINE_PRECRYSTAL_LAYERED_V1.md`
@@ -138,8 +144,8 @@ Completed foundation:
 Next build sequence:
 1. PHASE 00 — canon audit and contradiction map. COMPLETE.
 2. PHASE 01 — master history-book / encyclopedia architecture. COMPLETE.
-3. PHASE 02 — pre-Crystal world expansion. IN PROGRESS; units 02.01–02.03 written.
-4. Next content unit: UNIT 02.04 — 1896–2228 hidden state/scientific programs, with spatial documentation.
+3. PHASE 02 — pre-Crystal world expansion. IN PROGRESS; units 02.01–02.04 written.
+4. Next content unit: UNIT 02.05 — 2228–2418 Meridian convergence, sensor networks, lineage controversy, and environmental-signature growth, with spatial documentation.
 5. Reconcile Homunculus canon with the latest user direction before war-era construction.
 6. Build creature threat classification, creature codex, and ability reference systems.
 7. ERA_INTERWORLD_EXPANSION_2606_2644.
