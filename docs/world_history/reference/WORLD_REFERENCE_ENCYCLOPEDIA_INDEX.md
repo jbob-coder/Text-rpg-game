@@ -107,9 +107,9 @@ Example:
 ## Current status
 
 Architecture: COMPLETE
-Threat classification: NOT BUILT
-Creature codex: NOT BUILT
-Ability encyclopedia: NOT BUILT
+Threat classification: BUILT / ACTIVE — CREATURE_CLASSIFICATION_STANDARD_V1
+Creature codex: CORE BASELINE BUILT — CREATURE_CODEX_CORE_FAMILIES_V1
+Ability encyclopedia: CREATURE ABILITY TAG BASELINE BUILT; HUMAN ABILITY ENCYCLOPEDIA STILL PENDING
 Existing crystal/portal/ecology files: TO BE INDEXED DURING LATER PHASES
 
 
@@ -119,3 +119,13 @@ Existing crystal/portal/ecology files: TO BE INDEXED DURING LATER PHASES
 - docs/world_history/reference/SCENARIO_QUERY_MODEL_V1_DRAFT.md — historical/geographic/ecological/legal/knowledge filtering model for scenario construction.
 
 These remain DRAFT until tested against complete reference entries.
+
+
+## Round 381–390 active references
+
+- CREATURE_CLASSIFICATION_STANDARD_V1.md — active T0–T6/TX operational threat system.
+- CREATURE_ABILITY_TAG_REGISTRY_V1.md — reusable creature ability tags.
+- CREATURE_CODEX_CORE_FAMILIES_V1.md — first eight scenario-ready species.
+- CREATURE_DISEASE_HARVEST_CROSSLINK_V1.md — disease, crystal yield, harvest-law integration.
+- ../spatial/SPATIAL_CREATURE_HABITAT_ATLAS_V1.md — territory, migration, nesting, and habitat geometry.
+- SCENARIO_FIT_TESTS_CREATURES_V1.md — 10 compatibility tests.
