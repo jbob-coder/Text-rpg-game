@@ -73,11 +73,13 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/planning_rounds/ROUND_201_300_STORY_SPATIAL_EXECUTION_INDEX.md` — third 100-round execution cycle, continuing story + coordinates/dimensions through war/Academy prerequisites.
 - `docs/world_history/planning_rounds/ROUND_301_400_STORY_SPATIAL_EXECUTION_INDEX.md` — fourth execution cycle; rounds 301–320 now complete.
 - `docs/world_history/planning_rounds/ROUND_311_410_CONTINUATION_INDEX.md` — 311–410 continuation window; 311–330 executed, later blocks planned.
-- `docs/world_history/planning_rounds/ROUND_411_510_STORY_SPATIAL_EXECUTION_INDEX.md` — next exact 100-round cycle from Kharvori execution through the 2670 scenario atlas and QA.
+- `docs/world_history/planning_rounds/ROUND_411_510_STORY_SPATIAL_EXECUTION_INDEX.md` — 100-round chronological cycle from Kharvori execution through the 2670 scenario atlas and QA.
+- `docs/world_history/planning_rounds/ROUND_511_610_REFERENCE_STORY_EXECUTION_INDEX.md` — next exact 100-round reference/story cycle for creatures, abilities, equipment, portals, cities, Academy, daily life, scenario queries, and global QA.
 - `docs/world_history/progress/ROUND_300_HANDOFF.md` — prior bounded handoff.
 - `docs/world_history/progress/ROUND_301_310_COMPLETION.md` — Veinfall Day 0–5 completion.
 - `docs/world_history/progress/ROUND_311_320_COMPLETION.md` — Veinfall biological cascade / manifestation / fragmentation completion.
 - `docs/world_history/progress/ROUND_321_330_COMPLETION.md` — extended instability 2473–2474 completion.
+- `docs/world_history/progress/ROUND_331_340_COMPLETION.md` — Early Crystal 2475–2488 institutionalization and rebuilding completion.
 
 ## Active world-history files
 
@@ -123,6 +125,7 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/spatial/SPATIAL_STORY_ATLAS_1896_2228_V1.md` — secure archives, field evaluation, medical variance, analytics, genomic study, and Meridian exchange coordinates/dimensions.
 - `docs/world_history/spatial/SPATIAL_STORY_ATLAS_2228_2418_V1.md` — Meridian analytics, lineage clinic, oceanic/boreal sensor systems, and environmental-anomaly monitoring.
 - `docs/world_history/spatial/SPATIAL_STORY_ATLAS_2418_2472_V1.md` — Kessel materials lab, Veilwatch operations center, spatial corridor, biological watch reserve, resilience district, and threshold network.
+- `docs/world_history/spatial/SPATIAL_EARLY_CRYSTAL_REBUILD_ATLAS_2475_2488_V1.md` — rebuilt settlement, crystal lab, field-response institute, and ability medical-center geometry.
 - `docs/world_history/templates/SPATIAL_ENTITY_TEMPLATE.md` — reusable location/structure template.
 
 ### Readable history-book progress
@@ -136,6 +139,8 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/book/BOOK_03_CHAPTER_05_WHEN_THE_HIDDEN_BECAME_PUBLIC.md` — human manifestation surge and secrecy collapse Day 3–11.
 - `docs/world_history/book/BOOK_03_CHAPTER_06_THE_WORLD_AFTER_ELEVEN_DAYS.md` — fragmentation and end of primary cascade Day 7–11.
 - `docs/world_history/book/BOOK_03_CHAPTER_07_EIGHTEEN_MONTHS_OF_NOT_NORMAL.md` — extended instability, displacement, survival logistics, and institutional permanence through approximately late 2474.
+- `docs/world_history/book/BOOK_04_CHAPTER_01_WHEN_EMERGENCY_BECAME_GOVERNMENT.md` — 2475–2478 institutional permanence and post-crisis government.
+- `docs/world_history/book/BOOK_04_CHAPTER_02_THE_FIRST_CRYSTAL_PROFESSIONS.md` — 2478–2488 specialist professions, standardization, occupational medicine, and rebuilt settlements.
 
 ### Knowledge-state timelines
 - `docs/world_history/timelines/TIMELINE_PRECRYSTAL_LAYERED_V1.md`
@@ -166,14 +171,15 @@ Next build sequence:
 3. PHASE 02 — pre-Crystal world expansion. CORE CHRONOLOGICAL BRIDGE COMPLETE THROUGH 2472; units 02.01–02.06 written.
 4. PHASE 03 / BOOK 03 primary Veinfall cascade — COMPLETE THROUGH DAY 11.
 5. PHASE 03 extended instability 2473–2474 — COMPLETE, including displacement, refugee districts, food/water systems, quarantine, early creature-response, black markets, and provisional medical classification.
-6. Next major unit: rounds 331–340 — Early Crystal 2475–2488.
-7. Reconcile Homunculus canon with the latest user direction before war-era construction.
-8. Build creature threat classification, creature codex, and ability reference systems.
-9. ERA_INTERWORLD_EXPANSION_2606_2644.
-10. Kharvori biology, civilization, pre-contact history, and first-contact chain.
-11. Interworld diplomacy, territorial/resource escalation, and WAR_FIRST_INTERWORLD_2645_2659.
-12. EVENT_HALCYON_GATE_CONCORD_2660 and reconstruction to ERA_PRESENT_2670.
-13. Academy causal history, scenario-query layer, historical gameplay hooks, and final narrative compilation.
+6. PHASE 04 Early Crystal 2475–2488 — COMPLETE, including permanent institutions, resettlement, beast ecology, ability-law conflict, specialist training, occupational medicine, and spatial rebuilding.
+7. Next major unit: rounds 341–350 — Early Crystal 2489–2505 regulated-use phase.
+8. Reconcile Homunculus canon with the latest user direction before war-era construction.
+9. Build creature threat classification, creature codex, and ability reference systems.
+10. ERA_INTERWORLD_EXPANSION_2606_2644.
+11. Kharvori biology, civilization, pre-contact history, and first-contact chain.
+12. Interworld diplomacy, territorial/resource escalation, and WAR_FIRST_INTERWORLD_2645_2659.
+13. EVENT_HALCYON_GATE_CONCORD_2660 and reconstruction to ERA_PRESENT_2670.
+14. Academy causal history, scenario-query layer, historical gameplay hooks, and final narrative compilation.
 
 Detailed execution authority:
 - `docs/world_history/WORLD_HISTORY_AND_REFERENCE_MASTER_BUILD_PLAN.md`
