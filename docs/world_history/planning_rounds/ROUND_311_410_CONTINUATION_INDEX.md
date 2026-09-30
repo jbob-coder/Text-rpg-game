@@ -114,8 +114,17 @@ Artifacts:
 ### 381–390 — Creature/ecology/ability reference execution
 Plan:
 - ROUNDS_381_390_CREATURE_ECOLOGY_ABILITY_EXECUTION.md
-Targets:
-scenario-ready threat system, first codex families, habitat dimensions, territory ranges, ability tags.
+Execution status:
+- COMPLETE
+Artifacts:
+- CREATURE_CLASSIFICATION_STANDARD_V1.md
+- CREATURE_ABILITY_TAG_REGISTRY_V1.md
+- CREATURE_CODEX_CORE_FAMILIES_V1.md
+- CREATURE_DISEASE_HARVEST_CROSSLINK_V1.md
+- SPATIAL_CREATURE_HABITAT_ATLAS_V1.md
+- SCENARIO_FIT_TESTS_CREATURES_V1.md
+- BOOK_06_EPILOGUE_THE_WORLD_HAS_TEETH.md
+- ROUND_381_390_COMPLETION.md
 
 ### 391–400 — Interworld prerequisites and QA
 Plan:
@@ -168,8 +177,8 @@ Every major creature reference:
 
 ## Current position
 
-Rounds 311–380: COMPLETE.
-Next execution round: 381.
+Rounds 311–390: COMPLETE.
+Next execution round: 391.
 
 Planned future cycles:
 - ROUND_411_510_STORY_SPATIAL_EXECUTION_INDEX.md
@@ -178,3 +187,4 @@ Planned future cycles:
 - ROUND_711_810_INSTITUTIONS_CULTURE_CAMPAIGN_REFERENCE_INDEX.md
 - ROUND_811_910_SYSTEMS_STRESS_TEST_STORY_INDEX.md
 - ROUND_911_1010_OPERATIONAL_REALISM_GENERATIONAL_STORY_INDEX.md
+- ROUND_1011_1110_LIVING_WORLD_SIMULATION_CAUSALITY_INDEX.md
