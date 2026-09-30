@@ -39,6 +39,7 @@ Future records should use:
 - SPATIAL_VEINFALL_GLOBAL_ATLAS_V1.md
 - SPATIAL_VEINFALL_DAY3_DAY11_ATLAS_V1.md
 - SPATIAL_EXTENDED_INSTABILITY_ATLAS_2473_2474_V1.md
+- SPATIAL_EARLY_CRYSTAL_REBUILD_ATLAS_2475_2488_V1.md
 
 ## Current persistent historical sites
 
@@ -106,13 +107,21 @@ Extended instability 2473–2474 additions:
 - SITE_MANIFESTATION_DIAGNOSTIC_CENTER_2474
 - ROUTE_CENTRAL_ASIA_EXCLUSION_BYPASS_2474
 
+Early Crystal 2475–2488 additions:
+- SETTLEMENT_CAROLINA_RESILIENCE_2482
+- SETTLEMENT_GREENVALE_BUFFER_TOWN_2484
+- SETTLEMENT_EAST_HARBOR_REBUILT_SECTOR_2486
+- SITE_KESSEL_CRYSTAL_CONTAINMENT_LAB_2478
+- CAMPUS_FIELD_RESPONSE_INSTITUTE_2482
+- SITE_ABILITY_CIVIL_MEDICAL_CENTER_2483
+
 ## Current chronological spatial boundary
 
 Locked scenario geometry currently reaches:
-approximately late 2474.
+2488.
 
 Next spatial target:
-2475–2488 permanent research institutions, early creature-response bases, legal/administrative zones, training predecessors, and recovery settlements.
+2489–2505 regulated crystal-market infrastructure, civilian power/medical sites, settlement growth, consolidated training institutions, and portal-observation facilities.
 
 ## Rule
 
