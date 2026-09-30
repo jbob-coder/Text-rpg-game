@@ -291,8 +291,10 @@ The UI must not become the authoritative rules engine.
   - navigation/resource/quest icons remain decorative and consume only existing Compose/GameSnapshot state; map marker current/reachable/discovered semantics remain projection-owned;
   - exact-head UI/map evidence at `61cd0ecba6d661522ef59e519f26b8e1697a113c`, workflow `36444738131`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 11/11 with 0 failures; APK SHA-256 `338f5024dfa0a07d67bfa3517bf19d802adc5ef58052abac77b7ee226d5370ab`;
   - the first UI-icon emulator gate correctly caught a phone-layout regression where horizontal icons pushed More off-screen; the navigation composition was compacted vertically and the exact rerun passed.
+  - asset 040 `UI_EQUIPMENT_SLOT_ICON_SET` is implemented as 12 distinct 24x24 source-native slot silhouettes and is wired into Character/Inventory through projected slot IDs; catalog and Compose rendering tests are present. Exact-head revalidation is pending the current workflow.
+  - asset 096 `FX_TRACE_ECHO_AMBIENT` is now a candidate: four deterministic 64x64 transparent frames, animated in `SceneIllustration`, selected only from player-facing Trace-related `sceneId` values. Exact-head automated verification is pending and this is not yet claimed integrated.
 - LIMITATION: automated Compose/runtime coverage proves the new catalog renders and does not regress the tested client, but native-scale art review and physical Galaxy A03 visual QA are not yet claimed.
-- NEXT: keep player/Tamsin canonical reference selection isolated from implementation. Base coverage is 9/9, the first three player-safe state overlays are integrated, and UI/map assets 076–095 are integrated. Continue with asset 040 `UI_EQUIPMENT_SLOT_ICON_SET` using projected slot IDs only; defer quality-frame behavior (039) until inventory/equipment quality presentation is explicitly defined. Preserve physical Galaxy A03 visual QA as a separate acceptance gate.
+- NEXT: validate the current exact head with asset 040 and candidate asset 096. If green, promote 096 to integrated evidence and continue with asset 097 `FX_SIGNAL_PULSE`; defer quality-frame behavior (039) until inventory/equipment quality presentation is explicitly defined. Keep player/Tamsin canonical reference selection isolated and preserve physical Galaxy A03 visual QA as a separate acceptance gate.
 - RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
 - DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
 - COMPLETED_AT: —
@@ -330,4 +332,4 @@ Before ending meaningful work, update:
 
 ## Immediate next action
 
-Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified slices. Next target: asset 040 `UI_EQUIPMENT_SLOT_ICON_SET`, then reassess remaining Batch 001 props/FX against player-safe state availability. Do not block implementation on rejected mixed character references. Physical Galaxy A03 visual QA remains a separate acceptance gate before final visual approval.
+Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified slices. Current exact-head gate covers the implemented equipment-slot icon set (040) plus candidate ambient Trace Echo FX (096). If green, record evidence and move to asset 097 `FX_SIGNAL_PULSE`. Do not block implementation on rejected mixed character references. Physical Galaxy A03 visual QA remains a separate acceptance gate before final visual approval.
