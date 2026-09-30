@@ -30,6 +30,21 @@ data class GameUiState(
     val travelTransition: TravelTransitionUiState? = null,
 )
 
+internal fun confirmedTravelTransition(
+    fromLocation: String?,
+    toLocation: String,
+    token: Long,
+): TravelTransitionUiState? =
+    if (fromLocation == null || fromLocation == toLocation) {
+        null
+    } else {
+        TravelTransitionUiState(
+            token = token,
+            fromLocation = fromLocation,
+            toLocation = toLocation,
+        )
+    }
+
 class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val engine: GameEngine = PythonGameEngine()
     private val saveRepository = SaveRepository(
@@ -167,15 +182,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             engine.travel(locationId).fold(
                 onSuccess = { snapshot ->
-                    val transition = if (fromLocation != null && fromLocation != snapshot.location) {
-                        travelTransitionToken += 1
-                        TravelTransitionUiState(
-                            token = travelTransitionToken,
-                            fromLocation = fromLocation,
-                            toLocation = snapshot.location,
-                        )
-                    } else {
-                        null
+                    val candidateToken = travelTransitionToken + 1
+                    val transition = confirmedTravelTransition(
+                        fromLocation = fromLocation,
+                        toLocation = snapshot.location,
+                        token = candidateToken,
+                    )
+                    if (transition != null) {
+                        travelTransitionToken = candidateToken
                     }
                     _uiState.update {
                         it.copy(
