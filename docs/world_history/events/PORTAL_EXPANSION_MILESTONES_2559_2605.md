@@ -1,7 +1,7 @@
 # PORTAL_EXPANSION_MILESTONES_2559_2605
 
-Status: ACTIVE_REGISTRY_WITH_RECONSTRUCTION_GAPS
-Authority: USER_AUTHORIZED_2026-09-29
+Status: ACTIVE_REGISTRY_WITH_DRAFT_RECONSTRUCTION
+Authority: USER_AUTHORIZED_2026-09-29 + USER_CONTINUATION_2026-09-30
 
 ## EVENT_FIRST_ARTIFICIAL_MICROBREACH_2562
 First deliberately produced aperture independent of an active natural breach.
@@ -18,6 +18,9 @@ First human crossing and return through an artificial portal system.
 ## EVENT_FIRST_PERMANENT_OFFWORLD_RESEARCH_OUTPOST_2575
 First continuously staffed human offworld research/security outpost.
 
+Operational destination:
+DESTINATION_HAVEN_03.
+
 ## EVENT_FIRST_COMMERCIAL_EXTRACTION_CORRIDOR_2579
 First economically sustainable portal-linked extraction operation.
 
@@ -27,14 +30,41 @@ Several major jurisdictions establish legal frameworks for civilian frontier set
 ## EVENT_FRONTIER_QUARANTINE_CRISIS_2583
 An imported biological outbreak forces large-scale portal closures and demonstrates that interworld disease control is a strategic requirement.
 
-## SUPERSEDED EVENT_HOMUNCULUS_REBELLION_2587_2601
-Do not use. Superseded by 2026-09-29 user direction.
+## EVENT_PORTAL_CORRIDOR_CERTIFICATION_2588
+Route certification expands to require safe failure, return capability, quarantine, rescue planning, redundancy, and event recording.
 
-## SUPERSEDED LAW_HOMUNCULUS_CUSTODIAL_ORDER_2602
-Do not use. Superseded by 2026-09-29 user direction.
+## EVENT_FRONTIER_RESCUE_COMPACT_2591
+Participating networks maintain compatible emergency rescue capacity and reserve transit support.
 
-## RECONSTRUCTION GAP 2587–2604
-Specific events in this interval require later rebuild. Do not silently repopulate the gap.
+## EVENT_OFFWORLD_JURISDICTION_TRIBUNAL_2594
+Standing procedures emerge for disputes among Earth law, frontier charters, corporate contracts, and emergency authority.
+
+## EVENT_PORTAL_CUSTOMS_IDENTITY_PROTOCOL_2597
+Major hubs adopt interoperable traveler identity, quarantine, residency/work, and cargo provenance controls.
+
+## EVENT_MULTI_HUB_REDUNDANCY_PROGRAM_2601
+Major networks build alternate Earth terminals and reserve routes to reduce single-hub isolation risk.
+
+## EVENT_FRONTIER_CIVIL_POPULATION_THRESHOLD_2603
+Selected settlement networks become sufficiently civilian and permanent that expeditionary administration is no longer adequate.
 
 ## EVENT_INTERWORLD_EXPANSION_THRESHOLD_2605
 Permanent settlement and resource networks become large enough that offworld governance is a standing political problem rather than an expeditionary exception.
+
+## Superseded records
+
+SUPERSEDED:
+- EVENT_HOMUNCULUS_REBELLION_2587_2601
+- LAW_HOMUNCULUS_CUSTODIAL_ORDER_2602
+
+Do not use these as Portal Expansion chronology.
+
+Replacement causal structure:
+QUARANTINE SHOCK
+-> ROUTE CERTIFICATION
+-> RESCUE COOPERATION
+-> FRONTIER JURISDICTION
+-> IDENTITY/CUSTOMS
+-> NETWORK REDUNDANCY
+-> CIVILIAN CONSOLIDATION
+-> INTERWORLD EXPANSION THRESHOLD.
