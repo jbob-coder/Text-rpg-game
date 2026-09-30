@@ -71,7 +71,11 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/planning_rounds/ROUND_001_100_EXECUTION_INDEX.md` — first 100-round architecture pass.
 - `docs/world_history/planning_rounds/ROUND_101_200_STORY_SPATIAL_EXECUTION_INDEX.md` — second 100-round story + coordinates/dimensions pass.
 - `docs/world_history/planning_rounds/ROUND_201_300_STORY_SPATIAL_EXECUTION_INDEX.md` — third 100-round execution cycle, continuing story + coordinates/dimensions through war/Academy prerequisites.
-- `docs/world_history/progress/ROUND_300_HANDOFF.md` — current bounded handoff after planning through Round 300.
+- `docs/world_history/planning_rounds/ROUND_301_400_STORY_SPATIAL_EXECUTION_INDEX.md` — fourth execution cycle; rounds 301–320 now complete.
+- `docs/world_history/planning_rounds/ROUND_311_410_CONTINUATION_INDEX.md` — exact 100-round continuation window requested after Round 310; 311–320 complete, 321 next, 401–410 Kharvori homeworld/first-contact foundation planned.
+- `docs/world_history/progress/ROUND_300_HANDOFF.md` — prior bounded handoff.
+- `docs/world_history/progress/ROUND_301_310_COMPLETION.md` — Veinfall Day 0–5 completion.
+- `docs/world_history/progress/ROUND_311_320_COMPLETION.md` — Veinfall biological cascade / manifestation / fragmentation completion.
 
 ## Active world-history files
 
@@ -123,6 +127,12 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/book/BOOK_02_CHAPTER_02_THE_STATE_LEARNS_TO_HIDE.md` — 1896–2228 hidden-program era.
 - `docs/world_history/book/BOOK_02_CHAPTER_03_THE_WORLD_BEGINS_TO_REPEAT_ITSELF.md` — 2228–2418 Meridian convergence and environmental comparison.
 - `docs/world_history/book/BOOK_02_CHAPTER_04_THE_LONG_WARNING.md` — 2418–2472 pre-Veinfall acceleration and final warning period.
+- `docs/world_history/book/BOOK_03_CHAPTER_01_THE_FIRST_SIX_HOURS.md` — Veinfall V+00:00–06:00.
+- `docs/world_history/book/BOOK_03_CHAPTER_02_WHEN_MATTER_CHANGED.md` — crystallization through V+30:00.
+- `docs/world_history/book/BOOK_03_CHAPTER_03_THE_FIRST_OPENINGS.md` — breach emergence through Day 5.
+- `docs/world_history/book/BOOK_03_CHAPTER_04_THE_LIVING_WORLD_BREAKS.md` — biological cascade Day 3–9.
+- `docs/world_history/book/BOOK_03_CHAPTER_05_WHEN_THE_HIDDEN_BECAME_PUBLIC.md` — human manifestation surge and secrecy collapse Day 3–11.
+- `docs/world_history/book/BOOK_03_CHAPTER_06_THE_WORLD_AFTER_ELEVEN_DAYS.md` — fragmentation and end of primary cascade Day 7–11.
 
 ### Knowledge-state timelines
 - `docs/world_history/timelines/TIMELINE_PRECRYSTAL_LAYERED_V1.md`
@@ -151,14 +161,15 @@ Next build sequence:
 1. PHASE 00 — canon audit and contradiction map. COMPLETE.
 2. PHASE 01 — master history-book / encyclopedia architecture. COMPLETE.
 3. PHASE 02 — pre-Crystal world expansion. CORE CHRONOLOGICAL BRIDGE COMPLETE THROUGH 2472; units 02.01–02.06 written.
-4. Next major unit: PHASE 03 / BOOK 03 — Veinfall 2473, beginning with the day-zero timing model and eleven-day global story atlas.
-5. Reconcile Homunculus canon with the latest user direction before war-era construction.
-6. Build creature threat classification, creature codex, and ability reference systems.
-7. ERA_INTERWORLD_EXPANSION_2606_2644.
-8. Kharvori biology, civilization, pre-contact history, and first-contact chain.
-9. Interworld diplomacy, territorial/resource escalation, and WAR_FIRST_INTERWORLD_2645_2659.
-10. EVENT_HALCYON_GATE_CONCORD_2660 and reconstruction to ERA_PRESENT_2670.
-11. Academy causal history, scenario-query layer, historical gameplay hooks, and final narrative compilation.
+4. PHASE 03 / BOOK 03 primary Veinfall cascade — COMPLETE THROUGH DAY 11, including biological cascade, human manifestation surge, six-region contrast, shelters, and fragmentation.
+5. Next major unit: rounds 321–330 — extended instability 2473–2474: displacement, refugee districts, food/water systems, quarantine, early creature-control and medical classification.
+6. Reconcile Homunculus canon with the latest user direction before war-era construction.
+7. Build creature threat classification, creature codex, and ability reference systems.
+8. ERA_INTERWORLD_EXPANSION_2606_2644.
+9. Kharvori biology, civilization, pre-contact history, and first-contact chain.
+10. Interworld diplomacy, territorial/resource escalation, and WAR_FIRST_INTERWORLD_2645_2659.
+11. EVENT_HALCYON_GATE_CONCORD_2660 and reconstruction to ERA_PRESENT_2670.
+12. Academy causal history, scenario-query layer, historical gameplay hooks, and final narrative compilation.
 
 Detailed execution authority:
 - `docs/world_history/WORLD_HISTORY_AND_REFERENCE_MASTER_BUILD_PLAN.md`
