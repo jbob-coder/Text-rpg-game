@@ -61,6 +61,7 @@ data class GameInventoryItem(
     val quantity: Int,
     val equippable: Boolean = false,
     val slot: String? = null,
+    val quality: String? = null,
 )
 
 data class GameEquipmentSlot(
@@ -276,6 +277,7 @@ internal object BridgeSnapshotMapper {
                 quantity = integer(value["quantity"], "inventory.items[$index].quantity"),
                 equippable = optionalBoolean(value["equippable"]) ?: false,
                 slot = optionalText(value["slot"]),
+                quality = optionalText(value["quality"]),
             )
         }
         val equipmentSlots = optionalList(
