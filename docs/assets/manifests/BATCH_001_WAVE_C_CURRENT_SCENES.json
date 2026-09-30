@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-C-CURRENT-SCENES",
-  "status": "INTEGRATED_WITH_053_PENDING_GATE",
+  "status": "INTEGRATED_AUTOMATED_GATE_GREEN",
   "runtime_verification_parent": "1c7e54e548ab3c28819af0b85ae8cbba53aff827",
   "state_contracts": {
     "base_scenes": "Location ID selects architecture only; location art does not own travel, discovery, reachability, or story state.",
@@ -475,7 +475,7 @@
       "number": 53,
       "asset_id": "DISTRICT_PLAZA_BLACKOUT_SCENE",
       "asset_family": "location_state",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "provisional",
       "source_content_ids": [
         "CONTENT_VERTICAL_SLICE_01"
@@ -511,7 +511,13 @@
         "state_binding_reviewed": true
       },
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36742882890,
+        "head_sha": "a9aa658580bfb659fd6b499fb6b59494db7a60a9",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "cfc83d9cad0550001bd71c4243f78c5c763bed125509e0f1c51b4b07e26bcc89",
+        "limitation": "Automated scene-state selection and Compose rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
       },
       "limitations": [
         "Physical Galaxy A03 visual QA remains separate.",
