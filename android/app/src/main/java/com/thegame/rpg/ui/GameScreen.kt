@@ -642,7 +642,7 @@ private fun CharacterEquipmentDetail(
     val equipped = record?.equipped == true
     val itemId = record?.itemId
     val overlay = if (equipped) PixelAssetCatalog.equipmentOverlay(itemId, selectedSlot) else null
-    val icon = itemId?.let(PixelAssetCatalog::itemIcon)
+    val icon = itemId?.let { PixelAssetCatalog.itemIcon(it) }
 
     PixelPanel(
         modifier = Modifier.testTag("character-equipment-detail"),
