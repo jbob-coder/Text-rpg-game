@@ -15,6 +15,7 @@ class PixelSceneOverlayCatalogTest {
                 PixelSceneOverlayCatalog.SERVICE_TUNNEL_AFTERSHOCK_ID,
                 PixelSceneOverlayCatalog.TRACE_CHAMBER_TRAINING_ID,
                 PixelSceneOverlayCatalog.DISTRICT_PLAZA_BLACKOUT_ID,
+                PixelSceneOverlayCatalog.RELAY_WORKBENCH_RELAY_OPEN_ID,
             ),
             PixelSceneOverlayCatalog.productionOverlays.map { it.assetId }.toSet(),
         )
@@ -86,6 +87,39 @@ class PixelSceneOverlayCatalogTest {
         )
         assertNull(PixelSceneOverlayCatalog.forScene("DISTRICT_ARCHIVE"))
         assertNull(PixelSceneOverlayCatalog.forScene("DISTRICT_WORKSHOP"))
+    }
+
+
+    @Test
+    fun relayWorkbenchStateOverlayUsesOnlyProjectedRelayVisualState() {
+        listOf("opened", "damaged", "signal_lost").forEach { relayState ->
+            assertSame(
+                PixelSceneOverlayCatalog.relayWorkbenchRelayOpen,
+                PixelSceneOverlayCatalog.forVisualState(
+                    locationId = "RELAY_WORKBENCH",
+                    relayState = relayState,
+                ),
+            )
+        }
+
+        assertNull(
+            PixelSceneOverlayCatalog.forVisualState(
+                locationId = "RELAY_WORKBENCH",
+                relayState = "intact",
+            )
+        )
+        assertNull(
+            PixelSceneOverlayCatalog.forVisualState(
+                locationId = "RELAY_WORKBENCH",
+                relayState = null,
+            )
+        )
+        assertNull(
+            PixelSceneOverlayCatalog.forVisualState(
+                locationId = "GATE_TWELVE",
+                relayState = "opened",
+            )
+        )
     }
 
 }
