@@ -1,6 +1,7 @@
 package com.thegame.rpg.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assert
@@ -15,6 +16,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.dp
+import com.thegame.rpg.TravelTransitionUiState
 import com.thegame.rpg.engine.GameChoice
 import com.thegame.rpg.engine.GameCondition
 import com.thegame.rpg.engine.GameEquipmentSlot
@@ -318,4 +320,41 @@ class GameScreenTest {
         composeRule.onNodeWithTag("player-avatar-canvas-trace-strain")
             .assertIsDisplayed()
     }
+
+    @Test
+    fun confirmedTravelTransitionRendersRouteAndFinishes() {
+        composeRule.mainClock.autoAdvance = false
+        var finishedToken: Long? = null
+
+        composeRule.setContent {
+            PixelTheme {
+                MapTravelTransitionOverlay(
+                    transition = TravelTransitionUiState(
+                        token = 7L,
+                        fromLocation = "DISTRICT_PLAZA",
+                        toLocation = "DISTRICT_ARCHIVE",
+                    ),
+                    onFinished = { finishedToken = it },
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("map-travel-transition")
+            .assertIsDisplayed()
+        composeRule.onNodeWithTag("map-travel-transition-canvas")
+            .assertIsDisplayed()
+        composeRule.onNodeWithText("DISTRICT PLAZA → DISTRICT ARCHIVE")
+            .assertIsDisplayed()
+
+        composeRule.mainClock.advanceTimeBy(900L)
+        composeRule.waitForIdle()
+        composeRule.runOnIdle {
+            check(finishedToken == 7L) {
+                "Expected travel transition token 7 to finish, got $finishedToken"
+            }
+        }
+        composeRule.mainClock.autoAdvance = true
+    }
+
 }
