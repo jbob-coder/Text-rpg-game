@@ -86,4 +86,39 @@ class PixelTraceFxCatalogTest {
         assertNull(PixelTraceFxCatalog.signalPulseForScene("POWER_GATE_TWELVE_SIGNAL"))
         assertNull(PixelTraceFxCatalog.signalPulseForScene(null))
     }
+
+    @Test
+    fun directionalTraceFramesUseSixExact64By64FramesAndOnlyMapToFirstUse() {
+        assertEquals(6, PixelTraceFxCatalog.directionalTraceFrames.size)
+        assertEquals(
+            6,
+            PixelTraceFxCatalog.directionalTraceFrames.map { it.assetId }.toSet().size,
+        )
+
+        PixelTraceFxCatalog.directionalTraceFrames.forEach { frame ->
+            assertTrue(frame.assetId.startsWith(PixelTraceFxCatalog.DIRECTIONAL_TRACE_ID))
+            assertEquals(64, frame.width)
+            assertEquals(64, frame.height)
+            assertEquals(64, frame.rows.size)
+            assertTrue(frame.rows.all { it.length == 64 })
+
+            val usedKeys = frame.rows
+                .flatMap { row -> row.toList() }
+                .filter { it != PixelSprite.TRANSPARENT_PIXEL }
+                .toSet()
+
+            assertTrue(
+                "${frame.assetId} contains an unmapped palette key",
+                usedKeys.all { it in frame.palette },
+            )
+        }
+
+        assertSame(
+            PixelTraceFxCatalog.directionalTraceFrames,
+            PixelTraceFxCatalog.directionalTraceForScene("TRACE_DIRECTIONAL_DISCOVERY_RESULT"),
+        )
+        assertNull(PixelTraceFxCatalog.directionalTraceForScene("TRACE_DIRECTIONAL_AFTERSHOCK"))
+        assertNull(PixelTraceFxCatalog.directionalTraceForScene("TRACE_DIRECTIONAL_SESSION_END"))
+        assertNull(PixelTraceFxCatalog.directionalTraceForScene(null))
+    }
 }
