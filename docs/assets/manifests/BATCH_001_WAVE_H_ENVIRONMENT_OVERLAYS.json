@@ -2,13 +2,13 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-H-ENVIRONMENT-OVERLAYS",
-  "status": "CANDIDATE_PENDING_EXACT_HEAD_GATE",
+  "status": "INTEGRATED_AUTOMATED_GATE_GREEN",
   "assets": [
     {
       "number": 62,
       "asset_id": "EMERGENCY_LIGHT_OVERLAY",
       "asset_family": "environment_overlay",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "technical",
       "native_canvas": {
         "width": 128,
@@ -32,7 +32,13 @@
         "state_binding_reviewed": true
       },
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36755094616,
+        "head_sha": "e388d9333ddb18228d6886f283a70047627b65b5",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "31067528314dac9e5052f48ce00a97a75d68518b602664dbc80d816a88eca75f",
+        "limitation": "Automated composition and runtime rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
       },
       "limitations": [
         "Physical Galaxy A03 visual QA remains separate.",
@@ -43,7 +49,7 @@
       "number": 63,
       "asset_id": "BLACKOUT_SHADOW_OVERLAY",
       "asset_family": "environment_overlay",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "technical",
       "native_canvas": {
         "width": 128,
@@ -67,7 +73,13 @@
         "state_binding_reviewed": true
       },
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36755094616,
+        "head_sha": "e388d9333ddb18228d6886f283a70047627b65b5",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "31067528314dac9e5052f48ce00a97a75d68518b602664dbc80d816a88eca75f",
+        "limitation": "Automated composition and runtime rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
       },
       "limitations": [
         "Physical Galaxy A03 visual QA remains separate.",
