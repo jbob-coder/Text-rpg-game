@@ -54,8 +54,18 @@ Artifacts:
 ### 341–350 — Early Crystal 2489–2505
 Plan:
 - ROUNDS_341_350_EARLY_CRYSTAL_2489_2505.md
-Targets:
-regulated markets, civilian adoption, settlement recovery, Academy institutional ancestry, city/site geometry.
+Execution status:
+- COMPLETE
+Artifacts:
+- BOOK_04_CHAPTER_03_THE_FIRST_SAFE_USES.md
+- BOOK_04_CHAPTER_04_A_WORLD_BUILT_AROUND_CAUTION.md
+- REGULATED_CRYSTAL_MARKET_REGISTRY_2489_2505.md
+- EARLY_ABILITY_JURISPRUDENCE_2489_2505.md
+- BEAST_HABITAT_HARVEST_POLICY_2489_2505.md
+- EDUCATION_ACADEMY_ANCESTRY_2489_2505.md
+- EARLY_CRYSTAL_STANDING_RESPONSE_DOCTRINE_2497_2505.md
+- SPATIAL_EARLY_REGULATED_USE_ATLAS_2489_2505_V1.md
+- ROUND_341_350_COMPLETION.md
 
 ### 351–360 — Industrialization 2506–2528
 Plan:
@@ -132,8 +142,10 @@ Every major creature reference:
 
 ## Current position
 
-Rounds 311–340: COMPLETE.
-Next execution round: 341.
+Rounds 311–350: COMPLETE.
+Next execution round: 351.
 
-Next planned 100-round cycle:
+Planned future cycles:
 - ROUND_411_510_STORY_SPATIAL_EXECUTION_INDEX.md
+- ROUND_511_610_REFERENCE_STORY_EXECUTION_INDEX.md
+- ROUND_611_710_REGIONAL_PLAYABLE_WORLD_EXECUTION_INDEX.md
