@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-30 19:27 AST  
+Updated: 2026-09-30 19:36 AST  
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -319,6 +319,24 @@ The UI must not become the authoritative rules engine.
 - APK SHA-256: `8e9f08f7281367621c9db05862215a041f0d519b5531348b5e2cac50345c416c`.
 - PHYSICAL QA: Galaxy A03 visual review and native-scale art approval remain separate.
 - NEXT: build product-facing Character/Equipment presentation on this contract; do not reintroduce generic slot geometry or bind held props without explicit player-safe presentation state.
+
+### Player-safe stat inspection / Stats UI slice
+- STATUS: `IN_PROGRESS`
+- BRANCH: `feature/player-safe-stat-inspection`
+- PARENT: `fix/avatar-overlay-rig-contract@7d4558ea5c9e3ad24bf29fe42c8f199ed0be60fe`.
+- OBJECTIVE: make the approved Stats screen inspectable without moving authoritative modifier arithmetic into Compose.
+- IMPLEMENTED CANDIDATE:
+  - Android bridge exposes on-demand `inspect_status(path)` through the existing rules-layer `inspect_status_value` projection;
+  - inspection is restricted by the rules layer to visible status namespaces and redacts hidden perk/condition provenance before Android receives it;
+  - inventory/equipment projection still omits raw modifier maps;
+  - Kotlin maps stat inspection into typed contribution records;
+  - Stats UI uses compact player/resource summary, selectable attributes and skills, and a dedicated selected-detail panel;
+  - equipment contribution rows derive from player-safe source keys such as `equipment:body`, never from duplicated UI arithmetic;
+  - inspection is serialized against engine mutations so a read cannot race equip/choice/travel state changes.
+- TESTS ADDED: Python bridge coverage for Endurance + Depot Jacket and Technical Systems + Work Gloves, invalid-path rollback, Kotlin mapper/error classification, and Compose request/render coverage for equipment contributions.
+- EXACT-HEAD GATE: pending.
+- BOUNDARY: derived-stat deep breakdown remains read-only summary in this slice; no raw authored rule maps are projected to Compose.
+- NEXT: run exact-head Python + Android unit/assemble + API 35 emulator gates; fix any failures before promotion.
 
 ## Known technical follow-ups
 
