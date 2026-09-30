@@ -78,14 +78,14 @@ Technical anchors:
 BOOK_03 primary-cascade state:
 COMPLETE through end of Day 11.
 
+Extended-instability chapter:
+- `BOOK_03_CHAPTER_07_EIGHTEEN_MONTHS_OF_NOT_NORMAL.md` — late 2473 through approximately late 2474: displacement, refugee districts, food/water logistics, quarantine, black markets, early creature-response teams, and medical classification.
+
+BOOK_03 state:
+CORE VEINFALL VOLUME COMPLETE through the approximately eighteen-month extended-instability period.
+
 Next major writing target:
-- approximately 18-month extended instability;
-- displacement and refugee districts;
-- emergency food/water systems;
-- portal quarantine doctrine;
-- first creature-control teams;
-- early medical distinction between natural ability and exposure-induced effects;
-- transition into BOOK_04.
+- BOOK_04 / Early Crystal Era 2475–2488.
 
 ### BOOK_04 — The Early Crystal Era
 2473–2505 survival, containment, refugee systems, early laws, first beast-response institutions.
@@ -135,4 +135,5 @@ Every completed chapter must:
 Architecture: COMPLETE
 PHASE 02 narrative bridge: COMPLETE THROUGH 2472
 PHASE 03 primary cascade: COMPLETE THROUGH VEINFALL DAY 11
-Next unit: extended instability 2473–2474 / Rounds 321–330
+PHASE 03 extended instability: COMPLETE THROUGH APPROXIMATELY LATE 2474
+Next unit: Early Crystal Era 2475–2488 / Rounds 331–340
