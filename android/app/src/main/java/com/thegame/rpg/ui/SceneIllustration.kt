@@ -26,7 +26,7 @@ fun SceneIllustration(
     relayState: String? = null,
     modifier: Modifier = Modifier,
 ) {
-    val traceFxFrames = PixelTraceFxCatalog.signalPulseForScene(sceneId) ?: PixelTraceFxCatalog.forScene(sceneId)
+    val traceFxFrames = PixelTraceFxCatalog.directionalTraceForScene(sceneId) ?: PixelTraceFxCatalog.signalPulseForScene(sceneId) ?: PixelTraceFxCatalog.forScene(sceneId)
     var traceFxFrameIndex by remember(sceneId) { mutableStateOf(0) }
 
     LaunchedEffect(sceneId, traceFxFrames) {
