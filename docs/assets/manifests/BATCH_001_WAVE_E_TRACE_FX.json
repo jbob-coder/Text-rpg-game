@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "batch_id": "BATCH_001",
+  "wave_id": "B001-WAVE-E-TRACE-FX",
+  "status": "IMPLEMENTED_PENDING_AUTOMATED_GATE",
+  "assets": [
+    {
+      "number": 96,
+      "asset_id": "FX_TRACE_ECHO_AMBIENT",
+      "asset_family": "trace_fx",
+      "status": "CANDIDATE",
+      "canon_status": "provisional",
+      "native_canvas": {
+        "width": 64,
+        "height": 64,
+        "frames": 4,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelTraceFxCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "state_contract": "FX eligibility is selected only from player-facing GameSnapshot.sceneId values. The FX never reads hidden story flags, computes Trace success, or changes gameplay state.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "The ambient loop is presentation-only and does not replace the stronger authored scene-state overlays."
+      ]
+    }
+  ]
+}
