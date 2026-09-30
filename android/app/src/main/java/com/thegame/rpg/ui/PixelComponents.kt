@@ -15,6 +15,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -26,8 +31,10 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.thegame.rpg.engine.GameChoice
+import com.thegame.rpg.engine.GameCondition
 import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameIdentity
+import kotlinx.coroutines.delay
 
 @Composable
 fun PixelPanel(
@@ -80,12 +87,30 @@ fun PixelChoiceCard(choice: GameChoice, busy: Boolean, onClick: () -> Unit) {
 fun PlayerAvatarPanel(
     identity: GameIdentity,
     equipment: List<GameEquipmentSlot> = emptyList(),
+    conditions: List<GameCondition> = emptyList(),
     modifier: Modifier = Modifier,
     compact: Boolean = false,
 ) {
     val equippedSlots = equipment
         .filter { it.equipped }
         .associateBy { it.slot }
+    val traceStrainFrames = PixelTraceStrainCatalog.avatarForConditions(
+        conditions.map { it.id }.toSet()
+    )
+    var traceStrainFrameIndex by remember(traceStrainFrames != null) { mutableStateOf(0) }
+
+    LaunchedEffect(traceStrainFrames) {
+        if (traceStrainFrames.isNullOrEmpty()) {
+            traceStrainFrameIndex = 0
+            return@LaunchedEffect
+        }
+
+        traceStrainFrameIndex = 0
+        while (true) {
+            delay(220L)
+            traceStrainFrameIndex = (traceStrainFrameIndex + 1) % traceStrainFrames.size
+        }
+    }
 
     PixelPanel(modifier = modifier.testTag("player-avatar"), title = identity.name ?: "Player") {
         Box(
@@ -100,11 +125,16 @@ fun PlayerAvatarPanel(
             contentAlignment = Alignment.Center,
         ) {
             Canvas(
-                modifier = if (compact) {
-                    Modifier.height(134.dp).aspectRatio(0.67f)
-                } else {
-                    Modifier.fillMaxWidth(0.78f).aspectRatio(0.67f)
-                }
+                modifier = (
+                    if (compact) {
+                        Modifier.height(134.dp).aspectRatio(0.67f)
+                    } else {
+                        Modifier.fillMaxWidth(0.78f).aspectRatio(0.67f)
+                    }
+                ).testTag(
+                    if (traceStrainFrames != null) "player-avatar-canvas-trace-strain"
+                    else "player-avatar-canvas"
+                )
             ) {
                 val px = floor(minOf(size.width / 32f, size.height / 48f)).coerceAtLeast(1f)
                 val ox = floor((size.width - 32f * px) / 2f)
@@ -200,6 +230,10 @@ fun PlayerAvatarPanel(
                 if ("off_hand" in equippedSlots) {
                     block(2, 22, 3, 14, Color(0xFF4B6773))
                     block(2, 21, 5, 3, PixelColors.Cyan)
+                }
+
+                traceStrainFrames?.getOrNull(traceStrainFrameIndex)?.let { strainFx ->
+                    drawPixelSprite(strainFx, px, ox, oy)
                 }
             }
         }
