@@ -2,13 +2,13 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-I-CURRENT-LOCATION-PROPS",
-  "status": "CANDIDATE_PENDING_EXACT_HEAD_GATE",
+  "status": "INTEGRATED_AUTOMATED_GATE_GREEN",
   "assets": [
     {
       "number": 72,
       "asset_id": "PROP_ARCHIVE_SHELF",
       "asset_family": "environment_prop",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "technical",
       "native_canvas": {
         "width": 32,
@@ -32,14 +32,20 @@
         "state_binding_reviewed": true
       },
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36756037495,
+        "head_sha": "96831c00614cb4932a5ef39eb3de4cfb4f7b4e43",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "02c9d366889a871d06f7cc8257be73fb590461025eba1b4d773f400b061fc989",
+        "limitation": "Automated prop placement and runtime rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
       }
     },
     {
       "number": 73,
       "asset_id": "PROP_ARCHIVE_TERMINAL",
       "asset_family": "environment_prop",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "technical",
       "native_canvas": {
         "width": 32,
@@ -63,7 +69,13 @@
         "state_binding_reviewed": true
       },
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36756037495,
+        "head_sha": "96831c00614cb4932a5ef39eb3de4cfb4f7b4e43",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "02c9d366889a871d06f7cc8257be73fb590461025eba1b4d773f400b061fc989",
+        "limitation": "Automated prop placement and runtime rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
       },
       "limitations": [
         "Active/idle interaction-specific terminal animation remains future work; current master represents the authored backup-power archive context."
@@ -73,7 +85,7 @@
       "number": 74,
       "asset_id": "PROP_WORKSHOP_BENCH",
       "asset_family": "environment_prop",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "technical",
       "native_canvas": {
         "width": 48,
@@ -97,14 +109,20 @@
         "state_binding_reviewed": true
       },
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36756037495,
+        "head_sha": "96831c00614cb4932a5ef39eb3de4cfb4f7b4e43",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "02c9d366889a871d06f7cc8257be73fb590461025eba1b4d773f400b061fc989",
+        "limitation": "Automated prop placement and runtime rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
       }
     },
     {
       "number": 75,
       "asset_id": "PROP_DISTRICT_NOTICE_BOARD",
       "asset_family": "environment_prop",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "technical",
       "native_canvas": {
         "width": 32,
@@ -128,7 +146,13 @@
         "state_binding_reviewed": true
       },
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36756037495,
+        "head_sha": "96831c00614cb4932a5ef39eb3de4cfb4f7b4e43",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "02c9d366889a871d06f7cc8257be73fb590461025eba1b4d773f400b061fc989",
+        "limitation": "Automated prop placement and runtime rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
       }
     }
   ],
