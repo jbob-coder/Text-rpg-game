@@ -138,7 +138,25 @@ Next major writing target:
 BOOK_06 / Portal Expansion 2559–2605.
 
 ### BOOK_06 — Portal Expansion
-2559–2605 portal science, accidents, frontier settlements, quarantine, social change.
+2559–2605 portal science, controlled transit, frontier settlements, quarantine, rescue, border law, and social change.
+
+Current chapters:
+- `BOOK_06_CHAPTER_01_THE_DOOR_WITH_AN_ADDRESS.md` — 2559–2572 artificial microbreach, target signatures, unmanned return, first human transit.
+- `BOOK_06_CHAPTER_02_THE_FIRST_NIGHT_OFF_EARTH.md` — 2572–2583 permanent outpost, extraction corridor, charter settlement, quarantine crisis.
+- `BOOK_06_CHAPTER_03_THE_FRONTIER_LEARNS_TO_CLOSE.md` — 2583–2594 route certification, rescue compact, frontier jurisdiction.
+- `BOOK_06_CHAPTER_04_THE_PORTAL_IS_A_BORDER.md` — 2595–2605 identity/customs, redundancy, civilian consolidation, interworld threshold.
+
+Technical anchors:
+- `events/PORTAL_EXPANSION_RECONSTRUCTION_2559_2605.md`
+- `portals/FRONTIER_QUARANTINE_AND_RESCUE_DOCTRINE_2572_2605.md`
+- `settlements/OFFWORLD_SETTLEMENT_LIFECYCLE_2575_2605.md`
+- `spatial/SPATIAL_PORTAL_EXPANSION_ATLAS_2559_2605_V1.md`
+
+BOOK_06 state:
+COMPLETE through 2605.
+
+Next narrative macro target:
+BOOK_07 / Interworld Expansion 2606–2644.
 
 ### BOOK_07 — Interworld Expansion
 2606–2644 settlement, competition, new worlds, Kharvori pre-contact and first contact.
@@ -182,4 +200,5 @@ PHASE 03 primary cascade: COMPLETE THROUGH VEINFALL DAY 11
 PHASE 03 extended instability: COMPLETE THROUGH APPROXIMATELY LATE 2474
 Early Crystal Era progress: COMPLETE THROUGH 2505
 Crystal Industrialization narrative progress: COMPLETE THROUGH 2558
-Next unit: Portal Expansion 2559–2605 / Rounds 371–380
+Portal Expansion narrative progress: COMPLETE THROUGH 2605
+Next execution unit: Rounds 381–390 — creature/ecology/ability reference execution
