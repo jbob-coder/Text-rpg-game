@@ -58,7 +58,12 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/WORLD_HISTORY_AND_REFERENCE_MASTER_BUILD_PLAN.md` — phased build plan for the history-book project, technical reference encyclopedia, canon reconciliation, creature/power systems, war construction, Academy history, scenario-query layer, and verification gates.
 - `docs/world_history/CANON_RECONCILIATION_REPORT.md` — completed PHASE 00 contradiction map and canon audit.
 - PHASE 00 status: COMPLETE.
-- Current execution gate: PHASE 01 master architecture before additional historical expansion.
+- PHASE 01 status: COMPLETE.
+- `docs/world_history/book/WORLD_HISTORY_BOOK_INDEX.md` — readable history-book architecture.
+- `docs/world_history/reference/WORLD_REFERENCE_ENCYCLOPEDIA_INDEX.md` — technical encyclopedia architecture.
+- `docs/world_history/templates/` — stable-ID, chapter, era, reference, creature, and phase templates.
+- `docs/world_history/progress/PHASE_01_COMPLETION.md` — verified Phase 01 handoff.
+- Current execution gate: PHASE 02 pre-Crystal world expansion.
 - The Homunculus historical model currently present in older files remains frozen pending the dedicated PHASE 07 reconciliation.
 
 ## Active world-history files
@@ -119,15 +124,16 @@ Completed foundation:
 
 Next build sequence:
 1. PHASE 00 — canon audit and contradiction map. COMPLETE.
-2. PHASE 01 — master history-book / encyclopedia architecture. NEXT.
-3. Expand the existing pre-Crystal through Portal Expansion eras into full lived-in history.
-4. Reconcile Homunculus canon with the latest user direction before war-era construction.
-5. Build creature threat classification, creature codex, and ability reference systems.
-6. ERA_INTERWORLD_EXPANSION_2606_2644.
-7. Kharvori biology, civilization, pre-contact history, and first-contact chain.
-8. Interworld diplomacy, territorial/resource escalation, and WAR_FIRST_INTERWORLD_2645_2659.
-9. EVENT_HALCYON_GATE_CONCORD_2660 and reconstruction to ERA_PRESENT_2670.
-10. Academy causal history, scenario-query layer, historical gameplay hooks, and final narrative compilation.
+2. PHASE 01 — master history-book / encyclopedia architecture. COMPLETE.
+3. PHASE 02 — pre-Crystal world expansion. NEXT.
+4. Expand Veinfall through Portal Expansion into full lived-in history.
+5. Reconcile Homunculus canon with the latest user direction before war-era construction.
+6. Build creature threat classification, creature codex, and ability reference systems.
+7. ERA_INTERWORLD_EXPANSION_2606_2644.
+8. Kharvori biology, civilization, pre-contact history, and first-contact chain.
+9. Interworld diplomacy, territorial/resource escalation, and WAR_FIRST_INTERWORLD_2645_2659.
+10. EVENT_HALCYON_GATE_CONCORD_2660 and reconstruction to ERA_PRESENT_2670.
+11. Academy causal history, scenario-query layer, historical gameplay hooks, and final narrative compilation.
 
 Detailed execution authority:
 - `docs/world_history/WORLD_HISTORY_AND_REFERENCE_MASTER_BUILD_PLAN.md`
