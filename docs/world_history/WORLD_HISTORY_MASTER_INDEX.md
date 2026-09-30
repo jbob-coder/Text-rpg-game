@@ -138,20 +138,25 @@ Next build sequence:
 Detailed execution authority:
 - `docs/world_history/WORLD_HISTORY_AND_REFERENCE_MASTER_BUILD_PLAN.md`
 
-## Sapient nonhuman / engineered peoples
+## Homunculus active canon
 
-### SPECIES_HOMUNCULUS_001 — Homunculus
+### FACTION_HOMUNCULUS_NETWORK_001 — Homunculus Network
 
-Canonical species file:
-- `docs/world_history/species/SPECIES_HOMUNCULUS_001.md`
+Active faction file:
+- `docs/world_history/factions/FACTION_HOMUNCULUS_NETWORK_001.md`
 
-Core confirmed direction:
-- Humanlike, beast-derived / crystal-adapted sapient beings are allowed in the setting.
-- Homunculi are fully sentient and capable of language, memory, planning, culture, rebellion, loyalty, deception, cooperation, and independent goals.
-- They became one of humanity's most feared historical enemies through a major rebellion against human rule.
-- Following their defeat, dominant human legal systems denied them human civic privileges and institutionalized their use as enslaved forced labor.
-- Their current legal oppression is a world-state fact and a major political/social consequence of earlier history.
-- Historical responsibility belongs to specific actors and factions; individual homunculi are not automatically hostile or morally identical.
+Current confirmed direction:
+- Homunculus is treated as a hidden hostile society/network, not as the authoritative name of one biological species.
+- The network is strategically hostile to humanity.
+- It is not the cause of the First Interworld War.
+- It must not become the universal explanation for crystals, portals, beasts, Kharvori conflict, or protagonist mysteries.
+- Knowing material collaboration is treated by human authorities as an extreme security offense; exact penalties depend on jurisdiction and era.
+- Biological composition, origin, hierarchy, scale, and full ideology remain intentionally unresolved pending PHASE 07.
+
+Legacy files:
+- `docs/world_history/species/SPECIES_HOMUNCULUS_001.md` — SUPERSEDED_PENDING_REBUILD.
+- `docs/world_history/species/HOMUNCULUS_HISTORICAL_DEVELOPMENT_2556_2602.md` — SUPERSEDED_PENDING_REBUILD.
+- `docs/world_history/CANON_RECONCILIATION_REPORT.md` — Phase 00 contradiction map and authority record.
 
 ## Required stable-ID families
 
