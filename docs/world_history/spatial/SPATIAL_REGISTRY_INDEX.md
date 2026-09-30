@@ -38,6 +38,7 @@ Future records should use:
 - SPATIAL_STORY_ATLAS_2418_2472_V1.md
 - SPATIAL_VEINFALL_GLOBAL_ATLAS_V1.md
 - SPATIAL_VEINFALL_DAY3_DAY11_ATLAS_V1.md
+- SPATIAL_EXTENDED_INSTABILITY_ATLAS_2473_2474_V1.md
 
 ## Current persistent historical sites
 
@@ -95,13 +96,23 @@ Existing sites with Veinfall temporal versions:
 - SITE_CIVIL_RESILIENCE_SHELTER_2473
 - ZONE_URBAN_BLOCK_BREACH_TESTCASE_2473
 
+Extended instability 2473–2474 additions:
+- DISTRICT_CAROLINA_RESILIENCE_REFUGEE_2473
+- SITE_RIVERSTONE_EMERGENCY_WATER_WORKS_2473
+- ROUTE_GREENVALE_CERTIFIED_FOOD_CORRIDOR_2473
+- SITE_EAST_HARBOR_PORTAL_QUARANTINE_YARD_2473
+- ROUTE_RED_BASIN_RECOVERY_SMUGGLING_2473
+- SITE_FIRST_COMBINED_FAUNA_RESPONSE_BASE_2474
+- SITE_MANIFESTATION_DIAGNOSTIC_CENTER_2474
+- ROUTE_CENTRAL_ASIA_EXCLUSION_BYPASS_2474
+
 ## Current chronological spatial boundary
 
 Locked scenario geometry currently reaches:
-Veinfall Day 11.
+approximately late 2474.
 
 Next spatial target:
-2473–2474 extended-instability shelters, refugee districts, water-treatment corridors, quarantine sites, black-market recovery routes, and early creature-response bases.
+2475–2488 permanent research institutions, early creature-response bases, legal/administrative zones, training predecessors, and recovery settlements.
 
 ## Rule
 
