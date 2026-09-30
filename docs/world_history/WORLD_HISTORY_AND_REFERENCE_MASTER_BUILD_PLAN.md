@@ -956,10 +956,16 @@ Verified output:
 - `docs/world_history/progress/PHASE_01_COMPLETION.md`
 
 PRIMARY NEXT ACTION:
-PHASE 02 — Pre-Crystal world expansion.
+PHASE 02 — continue pre-Crystal world expansion at UNIT 02.05 (2228–2418).
+
+Current completed story units:
+- UNIT 02.01 — deep-time and human emergence;
+- UNIT 02.02 — hidden anomalous humanity;
+- UNIT 02.03 — Age of Measurement, 1600–1896;
+- UNIT 02.04 — hidden state/scientific programs, 1896–2228.
 
 Reason:
-The architecture is now frozen enough to begin converting the pre-Crystal foundation into detailed, lived-in history without mixing narrative prose and technical reference ownership.
+The architecture is stable and the 1896–2228 bridge now has readable narrative, institutional reference, coordinates, and dimensions. The next chronological dependency is Meridian convergence and environmental-signature growth before the 2418 anomaly uptick.
 
 ---
 
@@ -1063,3 +1069,42 @@ Handoff:
 
 Important:
 Round numbering is an execution/planning structure, not a claim that all historical content through 2670 is already written.
+
+
+---
+
+## 21. Third story + spatial 100-round cycle
+
+Status: COMPLETE_AS_PLANNING_AND_DOCUMENTATION
+
+Persistent index:
+- docs/world_history/planning_rounds/ROUND_201_300_STORY_SPATIAL_EXECUTION_INDEX.md
+
+Purpose:
+- consume previously planned history as actual written content;
+- keep readable story and technical reference synchronized;
+- continue assigning coordinates, dimensions, temporal validity, and uncertainty to persistent historical places;
+- carry the spatial method through Veinfall, industrialization, portals, creatures, Kharvori history, war prerequisites, reconstruction, and Academy development.
+
+Actual content executed in this cycle:
+- docs/world_history/book/BOOK_02_CHAPTER_02_THE_STATE_LEARNS_TO_HIDE.md
+- docs/world_history/organizations/PRECRYSTAL_HIDDEN_PROGRAM_REGISTRY_1896_2228.md
+- docs/world_history/spatial/SPATIAL_STORY_ATLAS_1896_2228_V1.md
+- docs/world_history/progress/UNIT_02_04_COMPLETION.md
+
+New mapped historical sites:
+- SITE_NORTHMERE_SECURE_ARCHIVE_1904
+- SITE_BRAEWOOD_FIELD_EVALUATION_RANGE_1918
+- SITE_RAVELIN_MEDICAL_VARIANCE_CENTER_1946
+- SITE_HELIX_SIGNAL_ANALYTICS_CENTER_2038
+- SITE_KAIROU_GENOMIC_OBSERVATORY_2088
+- SITE_MERIDIAN_EXCHANGE_NODE_2228
+
+Current next safe unit:
+UNIT 02.05 — 2228–2418 Meridian convergence, sensor networks, lineage controversy, and early environmental-signature growth.
+
+Handoff:
+- docs/world_history/progress/ROUND_300_HANDOFF.md
+
+Important:
+Round numbering remains a bounded work/accounting structure. It never means unattended background execution.
