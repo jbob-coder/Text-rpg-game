@@ -243,9 +243,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun inspectStatus(path: String) {
-        if (path.isBlank() || _uiState.value.statInspectionBusy) return
+        if (path.isBlank() || _uiState.value.busy || _uiState.value.statInspectionBusy) return
         _uiState.update {
             it.copy(
+                busy = true,
                 statInspectionPath = path,
                 statInspection = null,
                 statInspectionBusy = true,
@@ -258,6 +259,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                     _uiState.update { current ->
                         if (current.statInspectionPath == path) {
                             current.copy(
+                                busy = false,
                                 statInspection = inspection,
                                 statInspectionBusy = false,
                                 statInspectionError = null,
@@ -274,6 +276,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                     _uiState.update { current ->
                         if (current.statInspectionPath == path) {
                             current.copy(
+                                busy = false,
                                 statInspection = null,
                                 statInspectionBusy = false,
                                 statInspectionError = engineFailure.publicMessage,
