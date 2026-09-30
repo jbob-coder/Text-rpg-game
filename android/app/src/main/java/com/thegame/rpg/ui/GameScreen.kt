@@ -257,7 +257,11 @@ private fun PixelGameShell(
                         onNarrate = onNarrate,
                         textDelayMs = textDelayMs,
                     )
-                    GameSection.CHARACTER -> CharacterSection(snapshot)
+                    GameSection.CHARACTER -> CharacterSection(
+                        snapshot = snapshot,
+                        busy = busy,
+                        onUnequip = onUnequip,
+                    )
                     GameSection.STATS -> StatsSection(
                         snapshot = snapshot,
                         selectedPath = statInspectionPath,
@@ -481,37 +485,304 @@ private fun ResourcePanel(snapshot: GameSnapshot) {
 }
 
 @Composable
-private fun CharacterSection(snapshot: GameSnapshot) {
-    BoxWithConstraints(Modifier.fillMaxSize()) {
-        val wideCharacterPanel = maxWidth > 700.dp
+private fun CharacterSection(
+    snapshot: GameSnapshot,
+    busy: Boolean,
+    onUnequip: (String) -> Unit,
+) {
+    val equippedSlots = snapshot.inventory.equipment
+    val preferredSlot = equippedSlots.firstOrNull { it.equipped }?.slot ?: "body"
+    var selectedSlot by remember(snapshot.sceneId) { mutableStateOf(preferredSlot) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        PixelPanel(title = "Character") {
+            Text(
+                snapshot.identity.name ?: "Unassigned",
+                color = PixelColors.Cyan,
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Text(
+                "LEVEL ${snapshot.identity.level ?: "—"} // ${snapshot.identity.path ?: "PATH UNASSIGNED"}",
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.labelLarge,
+            )
+            if (!snapshot.identity.origin.isNullOrBlank()) {
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    snapshot.identity.origin,
+                    color = PixelColors.Paper,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+        }
+
         Row(
             modifier = Modifier
-                .fillMaxSize()
-                .horizontalScroll(rememberScrollState()),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                .fillMaxWidth()
+                .testTag("character-loadout-board"),
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalAlignment = Alignment.Top,
         ) {
+            CharacterSlotRail(
+                slotIds = characterLeftSlots,
+                equipment = equippedSlots,
+                selectedSlot = selectedSlot,
+                onSelect = { selectedSlot = it },
+                modifier = Modifier.width(58.dp),
+            )
             PlayerAvatarPanel(
                 identity = snapshot.identity,
-                equipment = snapshot.inventory.equipment,
+                equipment = equippedSlots,
                 conditions = snapshot.conditions,
-                modifier = Modifier.width(if (wideCharacterPanel) 320.dp else 260.dp),
+                modifier = Modifier.weight(1f),
             )
-            PixelPanel(Modifier.width(if (wideCharacterPanel) 420.dp else 320.dp), "Character") {
-                LabeledValue("Name", snapshot.identity.name ?: "Unassigned")
-                LabeledValue("Level", snapshot.identity.level?.toString() ?: "—")
-                LabeledValue("Path", snapshot.identity.path ?: "—")
-                LabeledValue("Origin", snapshot.identity.origin ?: "—")
-                LabeledValue("Background", snapshot.identity.background ?: "—")
-                Spacer(Modifier.height(12.dp))
-                Text("EQUIPMENT SLOTS", color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
-                Spacer(Modifier.height(6.dp))
-                snapshot.inventory.equipment.forEach { slot ->
-                    val itemName = if (slot.equipped) slot.name ?: slot.itemId ?: "EQUIPPED" else "—"
-                    EquipmentSlotValue(slotId = slot.slot, value = itemName)
-                }
+            CharacterSlotRail(
+                slotIds = characterRightSlots,
+                equipment = equippedSlots,
+                selectedSlot = selectedSlot,
+                onSelect = { selectedSlot = it },
+                modifier = Modifier.width(58.dp),
+            )
+        }
+
+        CharacterEquipmentDetail(
+            snapshot = snapshot,
+            selectedSlot = selectedSlot,
+            busy = busy,
+            onUnequip = onUnequip,
+        )
+
+        CharacterUsefulStats(snapshot)
+    }
+}
+
+private val characterLeftSlots = listOf(
+    "head",
+    "body",
+    "hands",
+    "legs",
+    "feet",
+    "neck",
+)
+
+private val characterRightSlots = listOf(
+    "main_hand",
+    "off_hand",
+    "ring_1",
+    "ring_2",
+    "accessory_1",
+    "accessory_2",
+)
+
+@Composable
+private fun CharacterSlotRail(
+    slotIds: List<String>,
+    equipment: List<com.thegame.rpg.engine.GameEquipmentSlot>,
+    selectedSlot: String,
+    onSelect: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(5.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        slotIds.forEach { slotId ->
+            val equipped = equipment.firstOrNull { it.slot == slotId }?.equipped == true
+            val selected = selectedSlot == slotId
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("character-slot-${slotId}")
+                    .background(PixelColors.Deep)
+                    .border(
+                        1.dp,
+                        when {
+                            selected -> PixelColors.Gold
+                            equipped -> PixelColors.Cyan
+                            else -> PixelColors.Muted
+                        },
+                    )
+                    .clickable(role = Role.Button) { onSelect(slotId) }
+                    .padding(horizontal = 3.dp, vertical = 4.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                PixelUiIcon(
+                    sprite = PixelEquipmentSlotCatalog.slot(slotId),
+                    modifier = Modifier.size(28.dp),
+                )
+                Spacer(Modifier.height(2.dp))
+                Text(
+                    characterSlotShortLabel(slotId),
+                    color = when {
+                        selected -> PixelColors.Gold
+                        equipped -> PixelColors.Cyan
+                        else -> PixelColors.Muted
+                    },
+                    style = MaterialTheme.typography.labelSmall,
+                )
             }
         }
     }
+}
+
+@Composable
+private fun CharacterEquipmentDetail(
+    snapshot: GameSnapshot,
+    selectedSlot: String,
+    busy: Boolean,
+    onUnequip: (String) -> Unit,
+) {
+    val record = snapshot.inventory.equipment.firstOrNull { it.slot == selectedSlot }
+    val equipped = record?.equipped == true
+    val itemId = record?.itemId
+    val overlay = if (equipped) PixelAssetCatalog.equipmentOverlay(itemId, selectedSlot) else null
+    val icon = itemId?.let(PixelAssetCatalog::itemIcon)
+
+    PixelPanel(
+        modifier = Modifier.testTag("character-equipment-detail"),
+        title = "Selected Equipment",
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            if (itemId != null && icon != null) {
+                PixelItemIcon(
+                    itemId = itemId,
+                    quality = record?.quality,
+                    modifier = Modifier.size(54.dp),
+                )
+                Spacer(Modifier.width(10.dp))
+            }
+            Column(Modifier.weight(1f)) {
+                Text(
+                    slotDisplayName(selectedSlot),
+                    color = PixelColors.Gold,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+                Text(
+                    if (equipped) record?.name ?: itemId ?: "EQUIPPED" else "EMPTY",
+                    color = PixelColors.Paper,
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                record?.quality?.takeIf { it.isNotBlank() }?.let { quality ->
+                    Text(
+                        "QUALITY // ${quality.uppercase()}",
+                        color = PixelColors.Muted,
+                        style = MaterialTheme.typography.labelLarge,
+                    )
+                }
+            }
+        }
+
+        Spacer(Modifier.height(8.dp))
+        when {
+            !equipped -> Text(
+                "AVATAR LAYER // NONE",
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.testTag("character-overlay-status"),
+            )
+            overlay != null -> Text(
+                "AVATAR LAYER // AUTHORED 32x48 // Z ${overlay.zOrder}",
+                color = PixelColors.Cyan,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.testTag("character-overlay-status"),
+            )
+            else -> Text(
+                "AVATAR LAYER // NOT AUTHORED — LOGICAL EQUIPMENT ONLY",
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.testTag("character-overlay-status"),
+            )
+        }
+
+        if (equipped && itemId != null && icon == null) {
+            Spacer(Modifier.height(4.dp))
+            Text(
+                "ITEM ICON // NOT AUTHORED",
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.labelLarge,
+            )
+        }
+
+        if (equipped) {
+            Spacer(Modifier.height(10.dp))
+            PixelTextButton(
+                label = if (busy) "WORKING..." else "UNEQUIP",
+                onClick = {
+                    if (!busy) onUnequip(selectedSlot)
+                },
+            )
+        }
+    }
+}
+
+@Composable
+private fun CharacterUsefulStats(snapshot: GameSnapshot) {
+    PixelPanel(title = "Useful Stats") {
+        if (snapshot.resources.isNotEmpty()) {
+            snapshot.resources.chunked(2).forEach { pair ->
+                Row(Modifier.fillMaxWidth()) {
+                    pair.forEach { resource ->
+                        Column(Modifier.weight(1f)) {
+                            Text(
+                                resource.id.uppercase(),
+                                color = PixelColors.Muted,
+                                style = MaterialTheme.typography.labelLarge,
+                            )
+                            Text(
+                                "${resource.current.roundToInt()} / ${resource.max.roundToInt()}",
+                                color = PixelColors.Paper,
+                                style = MaterialTheme.typography.bodyLarge,
+                            )
+                        }
+                    }
+                    if (pair.size == 1) Spacer(Modifier.weight(1f))
+                }
+                Spacer(Modifier.height(6.dp))
+            }
+            Spacer(Modifier.height(4.dp))
+        }
+
+        snapshot.attributes.chunked(2).forEach { pair ->
+            Row(Modifier.fillMaxWidth()) {
+                pair.forEach { attribute ->
+                    Column(Modifier.weight(1f)) {
+                        Text(
+                            attribute.name.uppercase(),
+                            color = PixelColors.Muted,
+                            style = MaterialTheme.typography.labelLarge,
+                        )
+                        Text(
+                            attribute.effective.roundToInt().toString(),
+                            color = if (attribute.modified) PixelColors.Cyan else PixelColors.Paper,
+                            style = MaterialTheme.typography.titleLarge,
+                        )
+                    }
+                }
+                if (pair.size == 1) Spacer(Modifier.weight(1f))
+            }
+            Spacer(Modifier.height(6.dp))
+        }
+    }
+}
+
+private fun characterSlotShortLabel(slotId: String): String = when (slotId) {
+    "body" -> "CHEST"
+    "main_hand" -> "MAIN"
+    "off_hand" -> "OFF"
+    "ring_1" -> "RING I"
+    "ring_2" -> "RING II"
+    "accessory_1" -> "ACC I"
+    "accessory_2" -> "ACC II"
+    else -> slotId.replace('_', ' ').uppercase()
 }
 
 @Composable
