@@ -947,11 +947,19 @@ PHASE 00 STATUS: COMPLETE
 Verified output:
 - `docs/world_history/CANON_RECONCILIATION_REPORT.md`
 
+PHASE 01 STATUS: COMPLETE
+
+Verified output:
+- `docs/world_history/book/WORLD_HISTORY_BOOK_INDEX.md`
+- `docs/world_history/reference/WORLD_REFERENCE_ENCYCLOPEDIA_INDEX.md`
+- `docs/world_history/templates/`
+- `docs/world_history/progress/PHASE_01_COMPLETION.md`
+
 PRIMARY NEXT ACTION:
-PHASE 01 — Master architecture.
+PHASE 02 — Pre-Crystal world expansion.
 
 Reason:
-The contradiction map is now complete. Before writing additional history, the repository needs formal book/encyclopedia indexes, templates, stable-ID rules, cross-link rules, and a clean separation between narrative history and technical reference records.
+The architecture is now frozen enough to begin converting the pre-Crystal foundation into detailed, lived-in history without mixing narrative prose and technical reference ownership.
 
 ---
 
