@@ -66,6 +66,26 @@ Each event should include:
 - SOURCE_FILE_OR_SESSION: Google Drive 12_GAMEPLAY_BRANCH/GAMEPLAY_CHECKPOINT_CURRENT.md latest markdown copy plus ELIAS_PERSISTENT_BRAIN.md.
 - SUPERSEDES: only the placeholder UNKNOWN live-scene fields created during World Director bootstrap; it does not supersede historical gameplay records.
 
+### ADRIAN_VOSS_RECORD_CLARIFICATION_0001
+
+- EVENT_ID: EVENT_ADRIAN_VOSS_RECORD_CLARIFICATION_0001
+- CANON_STATE: SIMULATION_CREATED_CONSEQUENCE
+- WORLD_TIME: Day -15, 08:19:46–08:21:20
+- LOCAL_TIME_CONTEXT: Visitor Services conversation before Academy intake
+- ACTORS: Elias Voss; unnamed Visitor Services clerk
+- LOCATION: Visitor Services counter, public/civilian side of secured military-academy complex
+- CAUSE: Elias had a legitimate unresolved question after the clerk recognized Adrian Voss's surname.
+- ACTION: Elias calmly asked how she knew of his father. The clerk explained that she had not known Adrian personally; she remembered his name from supply-routing records and a closed discrepancy review in which Adrian was the person who flagged the discrepancy.
+- IMMEDIATE_EFFECT: Elias gains bounded new knowledge about the source of the clerk's recognition and reduces immediate suspicion toward her.
+- OFFSCREEN_PROPAGATION: none established.
+- PLAYER_VISIBLE: Elias's side of the exchange is narratively visible when resumed.
+- JACK_KNOWS: no; Jack has not been present and gains no knowledge from this event.
+- NPC_KNOWLEDGE_CHANGES: clerk knows Elias is Adrian Voss's son; no other new NPC knowledge established.
+- STATE_CHANGES: Elias now has a new unresolved thread concerning Adrian's discrepancy review.
+- CLOCKS_ADVANCED: LIVE_GAMEPLAY_CLOCK +1 minute 34 seconds; ACADEMY_CLOCK synchronized.
+- OPEN_CONSEQUENCES: nature of the discrepancy; identity of any reviewed party; reason for closure; surviving records; present-day relevance.
+- SOURCE_FILE_OR_SESSION: active narrated campaign, user authorization to continue under World Director mode.
+
 ## Rule
 
 Do not add fictional events retroactively merely to make the world appear busy. If an event was not previously established, either:
