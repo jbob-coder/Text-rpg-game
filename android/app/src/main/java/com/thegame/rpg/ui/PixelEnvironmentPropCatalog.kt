@@ -19,6 +19,11 @@ object PixelEnvironmentPropCatalog {
     const val ARCHIVE_TERMINAL_ID = "PROP_ARCHIVE_TERMINAL"
     const val WORKSHOP_BENCH_ID = "PROP_WORKSHOP_BENCH"
     const val DISTRICT_NOTICE_BOARD_ID = "PROP_DISTRICT_NOTICE_BOARD"
+    const val RELAY_WORKBENCH_ID = "PROP_RELAY_WORKBENCH"
+    const val GATE_TWELVE_DOOR_ID = "PROP_GATE_TWELVE_DOOR"
+    const val TUNNEL_PIPE_SET_ID = "PROP_TUNNEL_PIPE_SET"
+    const val TUNNEL_CABLE_SET_ID = "PROP_TUNNEL_CABLE_SET"
+    const val TRACE_CHAMBER_APPARATUS_ID = "PROP_TRACE_CHAMBER_APPARATUS"
 
     private val palette = mapOf(
         'D' to Color(0xFF162129),
@@ -163,20 +168,195 @@ object PixelEnvironmentPropCatalog {
         )
     }
 
+    private fun relayWorkbench(): PixelSprite {
+        val width = 64
+        val height = 32
+        val p = pixels(width, height)
+
+        fun rect(x: Int, y: Int, w: Int, h: Int, key: Char) {
+            for (yy in y until y + h) for (xx in x until x + w) {
+                if (xx in 0 until width && yy in 0 until height) p[yy][xx] = key
+            }
+        }
+
+        rect(3, 11, 58, 6, 'M')
+        rect(6, 17, 6, 13, 'L')
+        rect(52, 17, 6, 13, 'L')
+        rect(15, 5, 34, 4, 'D')
+        rect(20, 6, 8, 2, 'C')
+        rect(36, 6, 7, 2, 'G')
+        rect(13, 20, 38, 3, 'S')
+        rect(26, 17, 12, 4, 'D')
+
+        return PixelSprite(
+            assetId = RELAY_WORKBENCH_ID,
+            width = width,
+            height = height,
+            palette = palette,
+            rows = p.map { it.concatToString() },
+        )
+    }
+
+    private fun gateTwelveDoor(): PixelSprite {
+        val width = 64
+        val height = 48
+        val p = pixels(width, height)
+
+        fun rect(x: Int, y: Int, w: Int, h: Int, key: Char) {
+            for (yy in y until y + h) for (xx in x until x + w) {
+                if (xx in 0 until width && yy in 0 until height) p[yy][xx] = key
+            }
+        }
+
+        rect(4, 3, 56, 43, 'M')
+        rect(9, 7, 46, 39, 'D')
+        rect(12, 10, 18, 34, 'L')
+        rect(34, 10, 18, 34, 'L')
+        rect(31, 8, 2, 36, 'G')
+        rect(15, 16, 10, 3, 'C')
+        rect(39, 16, 10, 3, 'C')
+        rect(14, 35, 12, 4, 'M')
+        rect(38, 35, 12, 4, 'M')
+
+        return PixelSprite(
+            assetId = GATE_TWELVE_DOOR_ID,
+            width = width,
+            height = height,
+            palette = palette,
+            rows = p.map { it.concatToString() },
+        )
+    }
+
+    private fun tunnelPipeSet(): PixelSprite {
+        val width = 32
+        val height = 32
+        val p = pixels(width, height)
+
+        fun rect(x: Int, y: Int, w: Int, h: Int, key: Char) {
+            for (yy in y until y + h) for (xx in x until x + w) {
+                if (xx in 0 until width && yy in 0 until height) p[yy][xx] = key
+            }
+        }
+
+        rect(3, 3, 5, 26, 'M')
+        rect(8, 5, 18, 5, 'L')
+        rect(24, 8, 5, 20, 'M')
+        rect(10, 18, 14, 4, 'L')
+        rect(4, 12, 4, 3, 'G')
+        rect(24, 14, 5, 3, 'C')
+        rect(14, 17, 5, 6, 'D')
+
+        return PixelSprite(
+            assetId = TUNNEL_PIPE_SET_ID,
+            width = width,
+            height = height,
+            palette = palette,
+            rows = p.map { it.concatToString() },
+        )
+    }
+
+    private fun tunnelCableSet(): PixelSprite {
+        val width = 32
+        val height = 32
+        val p = pixels(width, height)
+
+        fun rect(x: Int, y: Int, w: Int, h: Int, key: Char) {
+            for (yy in y until y + h) for (xx in x until x + w) {
+                if (xx in 0 until width && yy in 0 until height) p[yy][xx] = key
+            }
+        }
+
+        rect(3, 5, 26, 4, 'M')
+        rect(5, 10, 22, 2, 'C')
+        rect(5, 14, 22, 2, 'G')
+        rect(5, 18, 22, 2, 'L')
+        rect(8, 21, 4, 8, 'D')
+        rect(20, 21, 4, 8, 'D')
+        rect(7, 24, 6, 3, 'M')
+        rect(19, 24, 6, 3, 'M')
+
+        return PixelSprite(
+            assetId = TUNNEL_CABLE_SET_ID,
+            width = width,
+            height = height,
+            palette = palette,
+            rows = p.map { it.concatToString() },
+        )
+    }
+
+    private fun traceChamberApparatus(): PixelSprite {
+        val width = 48
+        val height = 48
+        val p = pixels(width, height)
+
+        fun rect(x: Int, y: Int, w: Int, h: Int, key: Char) {
+            for (yy in y until y + h) for (xx in x until x + w) {
+                if (xx in 0 until width && yy in 0 until height) p[yy][xx] = key
+            }
+        }
+
+        rect(19, 4, 10, 40, 'M')
+        rect(10, 14, 28, 20, 'D')
+        rect(13, 17, 22, 14, 'C')
+        rect(16, 20, 16, 8, 'D')
+        rect(21, 15, 6, 18, 'G')
+        rect(6, 35, 36, 4, 'L')
+        rect(10, 39, 6, 7, 'M')
+        rect(32, 39, 6, 7, 'M')
+        rect(4, 22, 6, 3, 'C')
+        rect(38, 22, 6, 3, 'C')
+
+        return PixelSprite(
+            assetId = TRACE_CHAMBER_APPARATUS_ID,
+            width = width,
+            height = height,
+            palette = palette,
+            rows = p.map { it.concatToString() },
+        )
+    }
+
     val archiveShelf: PixelSprite = shelf()
     val archiveTerminal: PixelSprite = terminal()
     val workshopBench: PixelSprite = workshopBench()
     val districtNoticeBoard: PixelSprite = noticeBoard()
+    val relayWorkbench: PixelSprite = relayWorkbench()
+    val gateTwelveDoor: PixelSprite = gateTwelveDoor()
+    val tunnelPipeSet: PixelSprite = tunnelPipeSet()
+    val tunnelCableSet: PixelSprite = tunnelCableSet()
+    val traceChamberApparatus: PixelSprite = traceChamberApparatus()
 
     val productionProps: List<PixelSprite> = listOf(
         archiveShelf,
         archiveTerminal,
         workshopBench,
         districtNoticeBoard,
+        relayWorkbench,
+        gateTwelveDoor,
+        tunnelPipeSet,
+        tunnelCableSet,
+        traceChamberApparatus,
     )
 
     fun placements(locationId: String, sceneId: String?): List<PixelScenePropPlacement> =
         when (locationId) {
+            "RELAY_WORKBENCH" -> listOf(
+                PixelScenePropPlacement(relayWorkbench, x = 32, y = 28),
+            )
+
+            "GATE_TWELVE" -> listOf(
+                PixelScenePropPlacement(gateTwelveDoor, x = 32, y = 9),
+            )
+
+            "SERVICE_TUNNEL" -> listOf(
+                PixelScenePropPlacement(tunnelPipeSet, x = 5, y = 8),
+                PixelScenePropPlacement(tunnelCableSet, x = 48, y = 5),
+                PixelScenePropPlacement(tunnelPipeSet, x = 91, y = 8),
+            )
+
+            "TRACE_CHAMBER" -> listOf(
+                PixelScenePropPlacement(traceChamberApparatus, x = 40, y = 10),
+            )
+
             "DISTRICT_ARCHIVE" -> listOf(
                 PixelScenePropPlacement(archiveShelf, x = 7, y = 8),
                 PixelScenePropPlacement(archiveShelf, x = 89, y = 8),
