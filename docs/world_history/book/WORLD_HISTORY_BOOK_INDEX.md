@@ -65,20 +65,27 @@ Current chapters:
 - `BOOK_03_CHAPTER_01_THE_FIRST_SIX_HOURS.md` — V+00:00 to V+06:00 synchronization and recognition.
 - `BOOK_03_CHAPTER_02_WHEN_MATTER_CHANGED.md` — V+06:00 to V+30:00 crystallization, infrastructure risk, biological uncertainty.
 - `BOOK_03_CHAPTER_03_THE_FIRST_OPENINGS.md` — approximately V+34:00 through Day 5, first breach hazards and cross-ecology transfer.
+- `BOOK_03_CHAPTER_04_THE_LIVING_WORLD_BREAKS.md` — Day 3–9 biological cascade, mortality, adaptation, plants/fungi/microbes, early hostile fauna.
+- `BOOK_03_CHAPTER_05_WHEN_THE_HIDDEN_BECAME_PUBLIC.md` — Day 3–11 human manifestation surge and collapse of global secrecy.
+- `BOOK_03_CHAPTER_06_THE_WORLD_AFTER_ELEVEN_DAYS.md` — Day 7–11 fragmentation, shelters, regional divergence, end of primary cascade.
 
 Technical anchors:
 - `events/VEINFALL_TEMPORAL_MODEL_2473.md`
+- `events/VEINFALL_BIOLOGICAL_AND_MANIFESTATION_REGISTRY_2473.md`
 - `spatial/SPATIAL_VEINFALL_GLOBAL_ATLAS_V1.md`
+- `spatial/SPATIAL_VEINFALL_DAY3_DAY11_ATLAS_V1.md`
 
-BOOK_03 state:
-Written through end of Day 5.
+BOOK_03 primary-cascade state:
+COMPLETE through end of Day 11.
 
 Next major writing target:
-- Day 3–9 biological cascade;
-- Day 3–11 manifestation surge;
-- days 7–11 fragmentation;
-- six-region contrast;
-- 18-month extended instability.
+- approximately 18-month extended instability;
+- displacement and refugee districts;
+- emergency food/water systems;
+- portal quarantine doctrine;
+- first creature-control teams;
+- early medical distinction between natural ability and exposure-induced effects;
+- transition into BOOK_04.
 
 ### BOOK_04 — The Early Crystal Era
 2473–2505 survival, containment, refugee systems, early laws, first beast-response institutions.
@@ -127,5 +134,5 @@ Every completed chapter must:
 
 Architecture: COMPLETE
 PHASE 02 narrative bridge: COMPLETE THROUGH 2472
-PHASE 03 narrative progress: COMPLETE THROUGH VEINFALL DAY 5
-Next unit: Veinfall biological cascade / manifestation surge / fragmentation
+PHASE 03 primary cascade: COMPLETE THROUGH VEINFALL DAY 11
+Next unit: extended instability 2473–2474 / Rounds 321–330
