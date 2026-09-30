@@ -49,6 +49,9 @@ Current chapters:
 ### BOOK_02 — The Last Pre-Crystal Centuries
 Scientific precursors, state programs, social conditions, hidden anomaly research, warning signs.
 
+Current chapters:
+- `BOOK_02_CHAPTER_01_THE_AGE_OF_MEASUREMENT.md` — approximately 1600–1896; measurement, fraud control, early scientific anomaly investigation, and the 1896 proof threshold.
+
 ### BOOK_03 — Veinfall
 The 2473 cascade in full lived-in detail, including regional and civilian experience.
 
