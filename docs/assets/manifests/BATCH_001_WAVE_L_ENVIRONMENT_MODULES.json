@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "batch_id": "BATCH_001",
+  "wave_id": "B001-WAVE-L-ENVIRONMENT-MODULES",
+  "status": "CANDIDATE_IMPLEMENTED_NOT_YET_INTEGRATED",
+  "assets": [
+    {
+      "number": 58,
+      "asset_id": "DEPOT_FACADE_EXTERIOR",
+      "asset_family": "environment_module",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native deterministic pixel construction",
+        "alpha": false
+      },
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentModuleCatalog.kt"
+      ],
+      "integration_path": "Reusable Depot Plaza/depot exterior arrival context. Current named-location scene master remains authoritative until a dedicated exterior/arrival surface consumes this module.",
+      "state_contract": "Presentation-only. It does not decide travel, door, blackout, quest, or accessibility state.",
+      "automated_verification": {
+        "status": "pending exact-head branch gate"
+      }
+    },
+    {
+      "number": 59,
+      "asset_id": "MAINTENANCE_CORRIDOR_CONNECTOR",
+      "asset_family": "environment_module",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native deterministic pixel construction",
+        "alpha": false
+      },
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentModuleCatalog.kt"
+      ],
+      "integration_path": "Reusable future connector scene for maintenance traversal. It cannot replace a unique named location without authored scene/location support.",
+      "state_contract": "Visual connector only; authoritative route and travel availability remain engine-owned.",
+      "automated_verification": {
+        "status": "pending exact-head branch gate"
+      }
+    },
+    {
+      "number": 60,
+      "asset_id": "MUNICIPAL_ARCHIVE_EXTERIOR",
+      "asset_family": "environment_module",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native deterministic pixel construction",
+        "alpha": false
+      },
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentModuleCatalog.kt"
+      ],
+      "integration_path": "Exterior identity for future archive arrival/travel presentation. Existing Municipal Archive interior remains the current playable scene.",
+      "state_contract": "Presentation-only; archive discovery, reachability, quest availability and terminal interactions remain projected/engine-owned.",
+      "automated_verification": {
+        "status": "pending exact-head branch gate"
+      }
+    },
+    {
+      "number": 61,
+      "asset_id": "MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS",
+      "asset_family": "environment_atlas",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "format": "four source-native deterministic tile masters",
+        "alpha": true
+      },
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentModuleCatalog.kt"
+      ],
+      "integration_path": "Reusable wall, floor, panel and rail/vent tiles for future scene composition and expansion.",
+      "state_contract": "Atlas tiles contain no gameplay state and cannot infer interactability or location identity.",
+      "automated_verification": {
+        "status": "pending exact-head branch gate"
+      }
+    }
+  ],
+  "limitations": [
+    "This wave deliberately separates production from integration so named-location art is not silently replaced.",
+    "Physical Galaxy A03 visual QA and native-scale art review remain separate acceptance gates.",
+    "No player/Tamsin geometry is touched by this wave."
+  ]
+}
