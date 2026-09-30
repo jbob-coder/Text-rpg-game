@@ -63,7 +63,7 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/reference/WORLD_REFERENCE_ENCYCLOPEDIA_INDEX.md` — technical encyclopedia architecture.
 - `docs/world_history/templates/` — stable-ID, chapter, era, reference, creature, and phase templates.
 - `docs/world_history/progress/PHASE_01_COMPLETION.md` — verified Phase 01 handoff.
-- Current execution gate: PHASE 05 / Crystal Industrialization execution after completion of Early Crystal history through 2505.
+- Current execution gate: PHASE 06 complete through Portal Expansion 2605; next execution is creature/ecology/ability reference work in Rounds 381–390.
 - The Homunculus historical model currently present in older files remains frozen pending the dedicated PHASE 07 reconciliation.
 
 ## Planning cycles
@@ -77,7 +77,8 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/planning_rounds/ROUND_511_610_REFERENCE_STORY_EXECUTION_INDEX.md` — 100-round reference/story cycle for creatures, abilities, equipment, portals, cities, Academy, daily life, scenario queries, and global QA.
 - `docs/world_history/planning_rounds/ROUND_611_710_REGIONAL_PLAYABLE_WORLD_EXECUTION_INDEX.md` — 100-round regional/playable-space cycle for Earth regions, crystal biomes, interiors, Academy daily space, creature territories, portal worlds, Kharvori civilian geography, battlefields, economy, and microhistory.
 - `docs/world_history/planning_rounds/ROUND_711_810_INSTITUTIONS_CULTURE_CAMPAIGN_REFERENCE_INDEX.md` — 100-round institutions/culture/campaign-reference cycle covering demography, transport, healthcare, education, law, crime, culture, housing, civil defense, and benchmark scenarios.
-- `docs/world_history/planning_rounds/ROUND_811_910_SYSTEMS_STRESS_TEST_STORY_INDEX.md` — next exact 100-round living-systems stress-test cycle covering ecology, institutions, military logistics, creature lifecycles, ability-user society, economy, offworld settlements, intelligence, translation, and integrated causal cases.
+- `docs/world_history/planning_rounds/ROUND_811_910_SYSTEMS_STRESS_TEST_STORY_INDEX.md` — 100-round living-systems stress-test cycle covering ecology, institutions, military logistics, creature lifecycles, ability-user society, economy, offworld settlements, intelligence, translation, and integrated causal cases.
+- `docs/world_history/planning_rounds/ROUND_911_1010_OPERATIONAL_REALISM_GENERATIONAL_STORY_INDEX.md` — next exact 100-round operational-realism and generational-story cycle covering food, utilities, communications, maintenance, justice operations, NPC routines, creature encounter physics, aftermath, Academy operations, and generational QA.
 - `docs/world_history/progress/ROUND_300_HANDOFF.md` — prior bounded handoff.
 - `docs/world_history/progress/ROUND_301_310_COMPLETION.md` — Veinfall Day 0–5 completion.
 - `docs/world_history/progress/ROUND_311_320_COMPLETION.md` — Veinfall biological cascade / manifestation / fragmentation completion.
@@ -86,6 +87,8 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/progress/ROUND_341_350_COMPLETION.md` — Early Crystal 2489–2505 regulated-use, law, ecology, Academy ancestry, and spatial completion.
 - `docs/world_history/progress/ROUND_351_360_COMPLETION.md` — Crystal Industrialization 2506–2528 standards, infrastructure, labor, ecology, waste, and spatial completion.
 - `docs/world_history/progress/ROUND_361_370_COMPLETION.md` — mature Crystal Industrialization 2529–2558 economy, augmentation, biostabilization, portal anchors, and spatial completion.
+- `docs/world_history/progress/ROUND_371_380_COMPLETION.md` — Portal Expansion 2559–2605 artificial transit, offworld settlement, quarantine, frontier law, and spatial completion.
+- `docs/world_history/progress/ROUND_911_1010_PLANNING_HANDOFF.md` — planning handoff for the 911–1010 cycle.
 
 ## Active world-history files
 
@@ -94,7 +97,7 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/eras/ERA_010_HUMAN_PRECRYSTAL.md` — hidden anomalous humans, pre-Crystal institutions, public/classified/true history.
 - `docs/world_history/eras/ERA_030_EARLY_CRYSTAL_2473_2505.md` — emergency survival, classification, early regulation, ecology, economy, military use, and portal science after Veinfall.
 - `docs/world_history/eras/ERA_040_CRYSTAL_INDUSTRIALIZATION_2506_2558.md` — standardized crystals become regulated infrastructure, strategic commodities, and biological/portal engineering inputs.
-- `docs/world_history/eras/ERA_050_PORTAL_EXPANSION_2559_2605.md` — artificial portals, controlled transit, permanent offworld outposts, frontier settlement, and post-rebellion portal security.
+- `docs/world_history/eras/ERA_050_PORTAL_EXPANSION_2559_2605.md` — artificial portals, controlled transit, permanent offworld outposts, frontier settlement, quarantine, rescue, frontier law, and border consolidation.
 
 ### Foundational event registries
 - `docs/world_history/events/PRECRYSTAL_EVENT_REGISTRY.md`
@@ -122,6 +125,9 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/portals/PORTAL_SCIENCE_PRE_EXPANSION_2506_2558.md`
 - `docs/world_history/portals/PORTAL_NETWORK_FOUNDATION_V1.md`
 - `docs/world_history/economy/PORTAL_FRONTIER_ECONOMY_2559_2605.md`
+- `docs/world_history/events/PORTAL_EXPANSION_RECONSTRUCTION_2559_2605.md`
+- `docs/world_history/portals/FRONTIER_QUARANTINE_AND_RESCUE_DOCTRINE_2572_2605.md`
+- `docs/world_history/settlements/OFFWORLD_SETTLEMENT_LIFECYCLE_2575_2605.md`
 
 
 ### Spatial reference and coordinates
@@ -135,6 +141,7 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/spatial/SPATIAL_EARLY_REGULATED_USE_ATLAS_2489_2505_V1.md` — regional crystal market, secure freight, protected habitat, joint anomaly college, reserve depot, civilian medical unit, standing garrison, and natural-breach observation geometry.
 - `docs/world_history/spatial/SPATIAL_CRYSTAL_INDUSTRIALIZATION_ATLAS_2506_2528_V1.md` — standards congress, assay center, cell works, grid stabilizer, medical center, beast-processing depot, worker district, waste containment, and industrial-city geometry.
 - `docs/world_history/spatial/SPATIAL_MATURE_CRYSTAL_INDUSTRIALIZATION_ATLAS_2529_2558_V1.md` — commodity exchange, composite armor works, harvest-collapse region, adaptive prosthetic institute, augmentation black market, biostabilization campus, portal-anchor megaprojects, and research campus.
+- `docs/world_history/spatial/SPATIAL_PORTAL_EXPANSION_ATLAS_2559_2605_V1.md` — artificial-portal labs, human-transit complex, offworld local frame, research outpost, extraction field, charter settlement, quarantine expansion, mature hub, and strategic corridor.
 - `docs/world_history/templates/SPATIAL_ENTITY_TEMPLATE.md` — reusable location/structure template.
 
 ### Readable history-book progress
@@ -156,6 +163,10 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/book/BOOK_05_CHAPTER_02_WHEN_INFRASTRUCTURE_BECAME_DEPENDENT.md` — 2519–2528 public infrastructure dependence, medical certification, harvest industry, labor, waste, and city growth.
 - `docs/world_history/book/BOOK_05_CHAPTER_03_THE_PRICE_OF_SCALE.md` — 2529–2547 commodity markets, inequality, overharvest, advanced materials, and augmentation.
 - `docs/world_history/book/BOOK_05_CHAPTER_04_THE_THRESHOLD_OF_OTHER_WORLDS.md` — 2548–2558 biostabilization, portal-anchor megaprojects, resource disputes, and Portal Expansion threshold.
+- `docs/world_history/book/BOOK_06_CHAPTER_01_THE_DOOR_WITH_AN_ADDRESS.md` — 2559–2572 artificial aperture, addressing, return mission, and first human artificial-portal transit.
+- `docs/world_history/book/BOOK_06_CHAPTER_02_THE_FIRST_NIGHT_OFF_EARTH.md` — 2572–2583 permanent outpost, extraction, charter settlement, and quarantine crisis.
+- `docs/world_history/book/BOOK_06_CHAPTER_03_THE_FRONTIER_LEARNS_TO_CLOSE.md` — 2583–2594 route certification, rescue, and frontier jurisdiction.
+- `docs/world_history/book/BOOK_06_CHAPTER_04_THE_PORTAL_IS_A_BORDER.md` — 2595–2605 identity/customs, redundancy, civilian consolidation, and interworld threshold.
 
 ### Knowledge-state timelines
 - `docs/world_history/timelines/TIMELINE_PRECRYSTAL_LAYERED_V1.md`
@@ -178,7 +189,7 @@ Completed foundation:
 - industrial technology, law, and ecological transition frameworks;
 - Portal Expansion through 2605;
 - artificial portal milestones and frontier economy;
-- expanded homunculus origin, sapience recognition, reproductive lineage, rebellion causality, and 2602 aftermath.
+- Homunculus legacy material audited and superseded where it conflicted with the active hidden-network direction; obsolete rebellion/custodial-order causality is not used.
 
 Next build sequence:
 1. PHASE 00 — canon audit and contradiction map. COMPLETE.
@@ -188,14 +199,15 @@ Next build sequence:
 5. PHASE 03 extended instability 2473–2474 — COMPLETE, including displacement, refugee districts, food/water systems, quarantine, early creature-response, black markets, and provisional medical classification.
 6. PHASE 04 Early Crystal 2475–2505 — COMPLETE, including permanent institutions, resettlement, beast ecology, ability-law conflict, specialist training, regulated markets, civilian applications, standing response doctrine, Academy ancestry, and spatial rebuilding.
 7. PHASE 05 Crystal Industrialization 2506–2558 — COMPLETE, including standards, industrial scale, commodity markets, overharvest, augmentation, biostabilization, portal-anchor megaprojects, and spatial industrialization.
-8. Next major unit: rounds 371–380 — Portal Expansion 2559–2605.
-9. Reconcile Homunculus canon with the latest user direction before war-era construction.
-10. Build creature threat classification, creature codex, and ability reference systems.
-11. ERA_INTERWORLD_EXPANSION_2606_2644.
-12. Kharvori biology, civilization, pre-contact history, and first-contact chain.
-13. Interworld diplomacy, territorial/resource escalation, and WAR_FIRST_INTERWORLD_2645_2659.
-14. EVENT_HALCYON_GATE_CONCORD_2660 and reconstruction to ERA_PRESENT_2670.
-15. Academy causal history, scenario-query layer, historical gameplay hooks, and final narrative compilation.
+8. PHASE 06 Portal Expansion 2559–2605 — COMPLETE, including artificial apertures, addressing, return missions, human transit, offworld settlement, quarantine, rescue, frontier law, redundancy, and spatial route geometry.
+9. Next major unit: rounds 381–390 — creature/ecology/ability reference execution.
+10. Continue Homunculus reconciliation before war-era construction where any remaining legacy material appears.
+11. Build creature threat classification, creature codex, and ability reference systems.
+12. ERA_INTERWORLD_EXPANSION_2606_2644.
+13. Kharvori biology, civilization, pre-contact history, and first-contact chain.
+14. Interworld diplomacy, territorial/resource escalation, and WAR_FIRST_INTERWORLD_2645_2659.
+15. EVENT_HALCYON_GATE_CONCORD_2660 and reconstruction to ERA_PRESENT_2670.
+16. Academy causal history, scenario-query layer, historical gameplay hooks, and final narrative compilation.
 
 Detailed execution authority:
 - `docs/world_history/WORLD_HISTORY_AND_REFERENCE_MASTER_BUILD_PLAN.md`
