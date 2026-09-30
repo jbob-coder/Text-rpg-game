@@ -67,7 +67,7 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/reference/SCENARIO_FIT_TESTS_CREATURES_V1.md` — validated historical/ecological/spatial placement tests.
 - `docs/world_history/templates/` — stable-ID, chapter, era, reference, creature, and phase templates.
 - `docs/world_history/progress/PHASE_01_COMPLETION.md` — verified Phase 01 handoff.
-- Current execution gate: creature/ecology/ability reference baseline complete through Round 390; next execution is Rounds 391–400 Interworld prerequisites and QA.
+- Current execution gate: Kharvori homeworld and first contact complete through Round 410; next execution is Rounds 411–420 early Human/Kharvori diplomacy.
 - The Homunculus historical model currently present in older files remains frozen pending the dedicated PHASE 07 reconciliation.
 
 ## Planning cycles
@@ -83,7 +83,9 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/planning_rounds/ROUND_711_810_INSTITUTIONS_CULTURE_CAMPAIGN_REFERENCE_INDEX.md` — 100-round institutions/culture/campaign-reference cycle covering demography, transport, healthcare, education, law, crime, culture, housing, civil defense, and benchmark scenarios.
 - `docs/world_history/planning_rounds/ROUND_811_910_SYSTEMS_STRESS_TEST_STORY_INDEX.md` — 100-round living-systems stress-test cycle covering ecology, institutions, military logistics, creature lifecycles, ability-user society, economy, offworld settlements, intelligence, translation, and integrated causal cases.
 - `docs/world_history/planning_rounds/ROUND_911_1010_OPERATIONAL_REALISM_GENERATIONAL_STORY_INDEX.md` — 100-round operational-realism and generational-story cycle covering food, utilities, communications, maintenance, justice operations, NPC routines, creature encounter physics, aftermath, Academy operations, and generational QA.
-- `docs/world_history/planning_rounds/ROUND_1011_1110_LIVING_WORLD_SIMULATION_CAUSALITY_INDEX.md` — next exact 100-round living-world simulation cycle covering time, population, economy, institutional capacity, travel, relationships, generational replacement, world-event propagation, persistent consequences, and integrated simulations.
+- `docs/world_history/planning_rounds/ROUND_1011_1110_LIVING_WORLD_SIMULATION_CAUSALITY_INDEX.md` — 100-round living-world simulation cycle covering time, population, economy, institutional capacity, travel, relationships, generational replacement, world-event propagation, persistent consequences, and integrated simulations.
+- `docs/world_history/planning_rounds/ROUND_1111_1210_RUNTIME_WORLD_SIMULATION_INDEX.md` — runtime world-state cycle for regional snapshots, NPC agency, organizations, spatial versioning, ecology, administration, Academy integration, diplomacy, scene compatibility, and concurrency QA.
+- `docs/world_history/planning_rounds/ROUND_1211_1310_PLAYABLE_WORLD_MATERIAL_CULTURE_INDEX.md` — next exact 100-round playable-world/material-culture cycle for spatial graphs, interiors, objects, domestic life, professions, Kharvori culture, mixed-species operations, resilience, 2670 snapshots, and scenario validation.
 - `docs/world_history/progress/ROUND_300_HANDOFF.md` — prior bounded handoff.
 - `docs/world_history/progress/ROUND_301_310_COMPLETION.md` — Veinfall Day 0–5 completion.
 - `docs/world_history/progress/ROUND_311_320_COMPLETION.md` — Veinfall biological cascade / manifestation / fragmentation completion.
@@ -94,6 +96,9 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/progress/ROUND_361_370_COMPLETION.md` — mature Crystal Industrialization 2529–2558 economy, augmentation, biostabilization, portal anchors, and spatial completion.
 - `docs/world_history/progress/ROUND_371_380_COMPLETION.md` — Portal Expansion 2559–2605 artificial transit, offworld settlement, quarantine, frontier law, and spatial completion.
 - `docs/world_history/progress/ROUND_381_390_COMPLETION.md` — creature threat, core codex, abilities, disease/harvest cross-links, habitats, and scenario-fit completion.
+- `docs/world_history/progress/ROUND_391_400_COMPLETION.md` — human interworld foundation through 2620, first-contact evidence requirements, corridor and settlement spatialization.
+- `docs/world_history/progress/ROUND_401_410_COMPLETION.md` — Kharvori homeworld, biology, ecology, politics, technology, first-contact chain, and contact geometry.
+- `docs/world_history/progress/ROUND_1211_1310_PLANNING_HANDOFF.md` — planning handoff for the 1211–1310 cycle.
 - `docs/world_history/progress/ROUND_1011_1110_PLANNING_HANDOFF.md` — planning handoff for living-world simulation cycle.
 - `docs/world_history/progress/ROUND_911_1010_PLANNING_HANDOFF.md` — planning handoff for the 911–1010 cycle.
 
@@ -267,3 +272,18 @@ Use stable IDs for:
 - INSTITUTION_*
 
 Stable IDs are never reused after promotion.
+
+
+## Kharvori / first-contact active foundation
+
+- `docs/world_history/kharvori/KHARVORI_HOMEWORLD_VEYRA_BASELINE_V1.md`
+- `docs/world_history/kharvori/KHARVORI_BIOLOGY_BASELINE_V1.md`
+- `docs/world_history/kharvori/KHARVORI_ECOLOGY_PRECONTACT_V1.md`
+- `docs/world_history/kharvori/KHARVORI_POLITICAL_CIVILIZATION_PRECONTACT_2628.md`
+- `docs/world_history/kharvori/KHARVORI_TECH_INFRASTRUCTURE_BASELINE_2628.md`
+- `docs/world_history/kharvori/KHARVORI_PRECONTACT_HISTORY_SPINE_V1.md`
+- `docs/world_history/kharvori/KHARVORI_SETTLEMENT_HIERARCHY_PRECONTACT_V1.md`
+- `docs/world_history/contact/FIRST_HUMAN_KHARVORI_CONTACT_CHAIN_2626_2628.md`
+- `docs/world_history/contact/HUMAN_APPROACH_CORRIDOR_LANTERN14_2626.md`
+- `docs/world_history/spatial/SPATIAL_KHARVORI_HOMEWORLD_CONTACT_ATLAS_V1.md`
+- `docs/world_history/book/BOOK_07_CHAPTER_02_TWO_MAPS_OF_THE_SAME_WORLD.md`
