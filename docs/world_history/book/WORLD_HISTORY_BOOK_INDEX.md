@@ -50,14 +50,26 @@ Current chapters:
 Scientific precursors, state programs, social conditions, hidden anomaly research, warning signs.
 
 Current chapters:
-- `BOOK_02_CHAPTER_01_THE_AGE_OF_MEASUREMENT.md` — approximately 1600–1896; measurement, fraud control, early scientific anomaly investigation, and the 1896 proof threshold.
-- `BOOK_02_CHAPTER_02_THE_STATE_LEARNS_TO_HIDE.md` — 1896–2228; classified bureaucracy, archives, wartime evaluation, postwar medicine, analytics, heredity research, and Meridian comparison.
+- `BOOK_02_CHAPTER_01_THE_AGE_OF_MEASUREMENT.md` — approximately 1600–1896.
+- `BOOK_02_CHAPTER_02_THE_STATE_LEARNS_TO_HIDE.md` — 1896–2228.
+- `BOOK_02_CHAPTER_03_THE_WORLD_BEGINS_TO_REPEAT_ITSELF.md` — 2228–2418.
+- `BOOK_02_CHAPTER_04_THE_LONG_WARNING.md` — 2418–2472.
 
-Next planned chapter:
-- 2228–2418 — Meridian convergence, sensor networks, lineage controversy, and early environmental convergence.
+BOOK_02 state:
+Core pre-Veinfall narrative bridge COMPLETE through 2472.
 
 ### BOOK_03 — Veinfall
 The 2473 cascade in full lived-in detail, including regional and civilian experience.
+
+Next major writing target:
+- day-zero timing model;
+- hours 0–6 synchronization;
+- hours 6–30 crystallization;
+- days 2–5 spatial breaches;
+- biological cascade;
+- manifestation surge;
+- days 7–11 fragmentation;
+- 18-month extended instability.
 
 ### BOOK_04 — The Early Crystal Era
 2473–2505 survival, containment, refugee systems, early laws, first beast-response institutions.
@@ -105,6 +117,5 @@ Every completed chapter must:
 ## Current status
 
 Architecture: COMPLETE
-Narrative chapter population: PHASE 02 IN PROGRESS
-Completed through: 2228
-Next content unit: 2228–2418
+PHASE 02 narrative bridge: COMPLETE THROUGH 2472
+Next phase: PHASE 03 — Veinfall deep history
