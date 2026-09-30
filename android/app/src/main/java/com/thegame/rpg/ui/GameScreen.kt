@@ -72,29 +72,39 @@ fun TheGameRoot(
     onEquip: (String) -> Unit,
     onUnequip: (String) -> Unit,
     onTravel: (String) -> Unit,
+    onTravelTransitionFinished: (Long) -> Unit,
 ) {
     val snapshot = uiState.snapshot
     if (uiState.bootState == BootState.Ready && snapshot != null) {
-        PixelGameShell(
-            snapshot,
-            uiState.busy,
-            onChoice,
-            onSave,
-            onLoad,
-            onNarrate,
-            onReplayNarration,
-            onStopNarration,
-            autoReadNarration,
-            onAutoReadChange,
-            narrationRate,
-            onNarrationRateChange,
-            textDelayMs,
-            onTextDelayChange,
-            onCheat,
-            onEquip,
-            onUnequip,
-            onTravel,
-        )
+        Box(Modifier.fillMaxSize()) {
+            PixelGameShell(
+                snapshot,
+                uiState.busy,
+                onChoice,
+                onSave,
+                onLoad,
+                onNarrate,
+                onReplayNarration,
+                onStopNarration,
+                autoReadNarration,
+                onAutoReadChange,
+                narrationRate,
+                onNarrationRateChange,
+                textDelayMs,
+                onTextDelayChange,
+                onCheat,
+                onEquip,
+                onUnequip,
+                onTravel,
+            )
+            uiState.travelTransition?.let { transition ->
+                MapTravelTransitionOverlay(
+                    transition = transition,
+                    onFinished = onTravelTransitionFinished,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
+        }
     } else {
         PixelBootScreen(uiState.bootState)
     }
