@@ -48,6 +48,7 @@ enum class GameSection(val label: String) {
     STORY("Story"),
     CHARACTER("Character"),
     STATS("Stats"),
+    SKILLS("Skills"),
     INVENTORY("Inventory"),
     QUESTS("Quests"),
     MAP("Map"),
@@ -270,6 +271,14 @@ private fun PixelGameShell(
                         inspectionError = statInspectionError,
                         onInspect = onInspectStatus,
                     )
+                    GameSection.SKILLS -> SkillsSection(
+                        snapshot = snapshot,
+                        selectedPath = statInspectionPath,
+                        inspection = statInspection,
+                        inspectionBusy = statInspectionBusy,
+                        inspectionError = statInspectionError,
+                        onInspect = onInspectStatus,
+                    )
                     GameSection.INVENTORY -> InventorySection(
                         snapshot = snapshot,
                         busy = busy,
@@ -279,7 +288,7 @@ private fun PixelGameShell(
                     GameSection.QUESTS -> QuestSection(snapshot)
                     GameSection.MAP -> MapSection(snapshot, busy, onTravel)
                     GameSection.MORE -> MorePanel(
-                        onCharacter = { section = GameSection.CHARACTER },
+                        onSkills = { section = GameSection.SKILLS },
                         onSettings = { settingsOpen = true },
                     )
                 }
@@ -1044,6 +1053,65 @@ private fun prettyStatusToken(value: String): String =
         .uppercase()
 
 @Composable
+private fun SkillsSection(
+    snapshot: GameSnapshot,
+    selectedPath: String?,
+    inspection: GameStatInspection?,
+    inspectionBusy: Boolean,
+    inspectionError: String?,
+    onInspect: (String) -> Unit,
+) {
+    val selectedSkillPath = selectedPath?.takeIf { it.startsWith("skills.") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        PixelPanel(title = "Skills") {
+            Text(
+                "${snapshot.skills.size} ACTIVE SKILLS",
+                color = PixelColors.Cyan,
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Spacer(Modifier.height(4.dp))
+            Text(
+                "Only skills present in player-safe state are shown. Future learned skills appear here automatically.",
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
+
+        snapshot.skills.groupBy { it.category }.toSortedMap().forEach { (category, skills) ->
+            PixelPanel(title = category) {
+                skills.sortedBy { it.name }.forEach { skill ->
+                    val path = "skills.${skill.id}"
+                    InspectableStatRow(
+                        label = skill.name,
+                        effective = skill.effective,
+                        base = skill.base,
+                        delta = skill.delta,
+                        selected = selectedSkillPath == path,
+                        testTag = "skills-screen-row-${skill.id}",
+                        onClick = { onInspect(path) },
+                    )
+                    Spacer(Modifier.height(6.dp))
+                }
+            }
+        }
+
+        StatInspectionPanel(
+            snapshot = snapshot,
+            selectedPath = selectedSkillPath,
+            inspection = inspection,
+            inspectionBusy = inspectionBusy,
+            inspectionError = inspectionError,
+        )
+    }
+}
+
+@Composable
 private fun SettingsPanel(
     snapshot: GameSnapshot,
     onSave: () -> Unit,
@@ -1467,14 +1535,14 @@ private fun MapSection(
 }
 
 @Composable
-private fun MorePanel(onCharacter: () -> Unit, onSettings: () -> Unit) {
+private fun MorePanel(onSkills: () -> Unit, onSettings: () -> Unit) {
     PixelPanel(modifier = Modifier.fillMaxSize(), title = "More") {
-        PixelTextButton("CHARACTER / EQUIPMENT", onCharacter)
+        PixelTextButton("SKILLS", onSkills)
         Spacer(Modifier.height(8.dp))
         PixelTextButton("SETTINGS / SAVE / AUDIO", onSettings)
         Spacer(Modifier.height(12.dp))
         Text(
-            "Developer tools, accessibility, narration, and save management remain separated from the main story surface.",
+            "Skills remain player-safe and rules-driven. Developer tools, accessibility, narration, and save management stay separated from the main story surface.",
             color = PixelColors.Muted,
             style = MaterialTheme.typography.bodyMedium,
         )
@@ -1488,6 +1556,16 @@ private fun ComingPanel(title: String, body: String) {
     }
 }
 
+private val primaryBottomSections = listOf(
+    GameSection.STORY,
+    GameSection.CHARACTER,
+    GameSection.STATS,
+    GameSection.INVENTORY,
+    GameSection.QUESTS,
+    GameSection.MAP,
+    GameSection.MORE,
+)
+
 @Composable
 private fun BottomPixelNav(selected: GameSection, onSelect: (GameSection) -> Unit) {
     Row(
@@ -1496,10 +1574,11 @@ private fun BottomPixelNav(selected: GameSection, onSelect: (GameSection) -> Uni
             .horizontalScroll(rememberScrollState()),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        GameSection.entries.forEach { section ->
+        primaryBottomSections.forEach { section ->
+            val active = selected == section || (selected == GameSection.SKILLS && section == GameSection.MORE)
             PixelNavButton(
                 label = section.label,
-                active = selected == section,
+                active = active,
                 onClick = { onSelect(section) },
             )
         }
