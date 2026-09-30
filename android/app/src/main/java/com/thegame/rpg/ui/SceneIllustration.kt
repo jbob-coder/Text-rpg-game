@@ -71,6 +71,18 @@ fun SceneIllustration(
                 )
             }
 
+            PixelSceneOverlayCatalog.forVisualState(
+                locationId = locationId,
+                relayState = relayState,
+            )?.let { overlay ->
+                drawPixelSprite(
+                    sprite = overlay,
+                    pixelSize = scenePixel,
+                    originX = sceneOriginX,
+                    originY = sceneOriginY,
+                )
+            }
+
             traceFxFrames?.getOrNull(traceFxFrameIndex)?.let { fx ->
                 val fxOriginX = floor(
                     sceneOriginX + (scene.width - fx.width) * scenePixel / 2f
