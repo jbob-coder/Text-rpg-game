@@ -515,77 +515,106 @@ private fun CharacterSection(snapshot: GameSnapshot) {
 }
 
 @Composable
-private fun StatsSection(snapshot: GameSnapshot) {
+private fun StatsSection(
+    snapshot: GameSnapshot,
+    selectedPath: String?,
+    inspection: GameStatInspection?,
+    inspectionBusy: Boolean,
+    inspectionError: String?,
+    onInspect: (String) -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        PixelPanel(title = "Resources") {
+        PixelPanel(title = "Player Summary") {
+            Text(
+                snapshot.identity.name ?: "Unassigned",
+                color = PixelColors.Cyan,
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Text(
+                "LEVEL ${snapshot.identity.level ?: "—"} // ${snapshot.identity.path ?: "PATH UNASSIGNED"}",
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.labelLarge,
+            )
+            Spacer(Modifier.height(8.dp))
             snapshot.resources.forEach { resource ->
-                LabeledValue(resource.id, "${resource.current.roundToInt()} / ${resource.max.roundToInt()}")
+                LabeledValue(
+                    resource.id,
+                    "${resource.current.roundToInt()} / ${resource.max.roundToInt()}",
+                )
             }
         }
+
         PixelPanel(title = "Core Attributes") {
             snapshot.attributes.forEach { stat ->
-                Text(
-                    text = "${stat.name.uppercase()} // ${stat.effective.roundToInt()}",
-                    color = if (stat.modified) PixelColors.Cyan else PixelColors.Paper,
-                    style = MaterialTheme.typography.titleLarge,
+                val path = "attributes.${stat.id}"
+                InspectableStatRow(
+                    label = stat.name,
+                    effective = stat.effective,
+                    base = stat.base,
+                    delta = stat.delta,
+                    selected = selectedPath == path,
+                    testTag = "stat-row-${stat.id}",
+                    onClick = { onInspect(path) },
                 )
-                Text(
-                    text = "BASE ${stat.base.roundToInt()}  •  EFFECTIVE ${stat.effective.roundToInt()}" +
-                        if (stat.delta == 0.0) "" else "  •  MOD ${signed(stat.delta)}",
-                    color = PixelColors.Muted,
-                    style = MaterialTheme.typography.labelLarge,
-                )
-                if (!stat.role.isNullOrBlank()) {
-                    Text(
-                        text = stat.role,
-                        color = PixelColors.Paper,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                }
-                Spacer(Modifier.height(10.dp))
+                Spacer(Modifier.height(6.dp))
             }
         }
+
+        StatInspectionPanel(
+            snapshot = snapshot,
+            selectedPath = selectedPath,
+            inspection = inspection,
+            inspectionBusy = inspectionBusy,
+            inspectionError = inspectionError,
+        )
+
         PixelPanel(title = "Derived") {
             snapshot.derived.forEach { stat ->
-                Text(
-                    text = "${stat.name.uppercase()} // ${stat.value.roundToInt()}",
-                    color = PixelColors.Paper,
-                    style = MaterialTheme.typography.titleLarge,
-                )
-                if (!stat.role.isNullOrBlank()) {
+                Row(Modifier.fillMaxWidth()) {
                     Text(
-                        text = stat.role,
+                        stat.name.uppercase(),
                         color = PixelColors.Muted,
                         style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Text(
+                        stat.value.roundToInt().toString(),
+                        color = PixelColors.Paper,
+                        style = MaterialTheme.typography.titleLarge,
                     )
                 }
-                Spacer(Modifier.height(8.dp))
+                if (!stat.role.isNullOrBlank()) {
+                    Text(stat.role, color = PixelColors.Muted, style = MaterialTheme.typography.labelLarge)
+                }
+                Spacer(Modifier.height(6.dp))
             }
         }
+
         PixelPanel(title = "Skills") {
             snapshot.skills.groupBy { it.category }.forEach { (category, skills) ->
                 Text("[${category.uppercase()}]", color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
+                Spacer(Modifier.height(4.dp))
                 skills.forEach { skill ->
-                    Text(
-                        text = "${skill.name} // ${skill.effective.roundToInt()}",
-                        color = if (skill.modified) PixelColors.Cyan else PixelColors.Paper,
-                        style = MaterialTheme.typography.bodyMedium,
+                    val path = "skills.${skill.id}"
+                    InspectableStatRow(
+                        label = skill.name,
+                        effective = skill.effective,
+                        base = skill.base,
+                        delta = skill.delta,
+                        selected = selectedPath == path,
+                        testTag = "skill-row-${skill.id}",
+                        onClick = { onInspect(path) },
                     )
-                    Text(
-                        text = "BASE ${skill.base.roundToInt()}" +
-                            if (skill.delta == 0.0) "" else "  •  MOD ${signed(skill.delta)}",
-                        color = PixelColors.Muted,
-                        style = MaterialTheme.typography.labelLarge,
-                    )
+                    Spacer(Modifier.height(6.dp))
                 }
-                Spacer(Modifier.height(8.dp))
             }
         }
+
         if (snapshot.conditions.isNotEmpty()) {
             PixelPanel(title = "Conditions") {
                 snapshot.conditions.forEach { condition ->
@@ -599,6 +628,149 @@ private fun StatsSection(snapshot: GameSnapshot) {
         }
     }
 }
+
+@Composable
+private fun InspectableStatRow(
+    label: String,
+    effective: Double,
+    base: Double,
+    delta: Double,
+    selected: Boolean,
+    testTag: String,
+    onClick: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag(testTag)
+            .background(PixelColors.PanelAlt)
+            .border(1.dp, if (selected) PixelColors.Gold else PixelColors.Muted)
+            .clickable(role = Role.Button, onClick = onClick)
+            .padding(horizontal = 8.dp, vertical = 7.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f)) {
+            Text(
+                label.uppercase(),
+                color = if (selected) PixelColors.Gold else PixelColors.Paper,
+                style = MaterialTheme.typography.bodyLarge,
+            )
+            Text(
+                buildString {
+                    append("BASE ").append(base.roundToInt())
+                    if (delta != 0.0) append("  //  MOD ").append(signed(delta))
+                },
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.labelLarge,
+            )
+        }
+        Text(
+            effective.roundToInt().toString(),
+            color = if (delta != 0.0) PixelColors.Cyan else PixelColors.Paper,
+            style = MaterialTheme.typography.titleLarge,
+        )
+    }
+}
+
+@Composable
+private fun StatInspectionPanel(
+    snapshot: GameSnapshot,
+    selectedPath: String?,
+    inspection: GameStatInspection?,
+    inspectionBusy: Boolean,
+    inspectionError: String?,
+) {
+    val selectedAttribute = snapshot.attributes.firstOrNull { selectedPath == "attributes.${it.id}" }
+    val selectedSkill = snapshot.skills.firstOrNull { selectedPath == "skills.${it.id}" }
+    val selectedName = selectedAttribute?.name ?: selectedSkill?.name
+    val selectedRole = selectedAttribute?.role
+
+    PixelPanel(modifier = Modifier.testTag("stat-inspection-panel"), title = "Selected Detail") {
+        when {
+            selectedPath == null || selectedName == null -> {
+                Text(
+                    "Select an attribute or skill to inspect its authoritative contributions.",
+                    color = PixelColors.Muted,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+            inspectionBusy -> {
+                Text(
+                    "READING AUTHORITATIVE STATE // ${selectedName.uppercase()}",
+                    color = PixelColors.Cyan,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+            inspectionError != null -> {
+                Text(inspectionError, color = PixelColors.Danger, style = MaterialTheme.typography.bodyMedium)
+            }
+            inspection == null || inspection.path != selectedPath -> {
+                Text("No inspection data is available.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
+            }
+            else -> {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        selectedName.uppercase(),
+                        color = PixelColors.Gold,
+                        style = MaterialTheme.typography.titleLarge,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Text(
+                        inspection.total.roundToInt().toString(),
+                        color = PixelColors.Cyan,
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                }
+                if (!selectedRole.isNullOrBlank()) {
+                    Spacer(Modifier.height(4.dp))
+                    Text(selectedRole, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
+                }
+                Spacer(Modifier.height(8.dp))
+                inspection.contributions.forEach { contribution ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("stat-contribution-${contribution.source.replace(':', '-')}")
+                            .padding(vertical = 2.dp),
+                    ) {
+                        Text(
+                            statContributionLabel(contribution.source),
+                            color = PixelColors.Muted,
+                            style = MaterialTheme.typography.labelLarge,
+                            modifier = Modifier.weight(1f),
+                        )
+                        Text(
+                            if (contribution.source == "base") {
+                                contribution.value.roundToInt().toString()
+                            } else {
+                                signed(contribution.value)
+                            },
+                            color = if (contribution.value == 0.0) PixelColors.Muted else PixelColors.Paper,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+private fun statContributionLabel(source: String): String = when {
+    source == "base" -> "BASE"
+    source == "unidentified_modifier" -> "UNIDENTIFIED MODIFIER"
+    source.startsWith("equipment:") -> "EQUIPMENT // ${slotDisplayName(source.substringAfter(':'))}"
+    source.startsWith("set:") -> "SET BONUS"
+    source.startsWith("perk:") -> "PERK // ${prettyStatusToken(source.substringAfter(':'))}"
+    source.startsWith("condition:") -> "CONDITION // ${prettyStatusToken(source.substringAfter(':'))}"
+    else -> prettyStatusToken(source)
+}
+
+private fun prettyStatusToken(value: String): String =
+    value
+        .removePrefix("PERK_")
+        .removePrefix("COND_")
+        .replace('_', ' ')
+        .uppercase()
 
 @Composable
 private fun SettingsPanel(
