@@ -309,6 +309,17 @@ The UI must not become the authoritative rules engine.
 - RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
 - DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
 - COMPLETED_AT: —
+
+### Wave L parallel environment-module slice
+- STATUS: `IN_PROGRESS`
+- BRANCH: `feature/pixel-asset-wave-l-environment-modules`
+- PARENT: `dfb1246557def7ce9291856c145ae42930ededb7`
+- CANDIDATES: assets 058–061 — `DEPOT_FACADE_EXTERIOR`, `MAINTENANCE_CORRIDOR_CONNECTOR`, `MUNICIPAL_ARCHIVE_EXTERIOR`, `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`.
+- IMPLEMENTED: source-native deterministic module/atlas catalog plus JVM contract tests and Wave L manifest.
+- BOUNDARY: these assets are intentionally not wired over existing named-location masters yet. Their integration requires a real arrival/connector/composition surface rather than silently replacing authored scenes.
+- NEXT GATE: run exact-head Android unit/compile gate on this branch; after green evidence, keep them as produced/deferred-integration candidates until a legitimate runtime consumer exists.
+- PHYSICAL QA: Galaxy A03 visual review remains separate.
+
 ## Known technical follow-ups
 
 These are not part of the Android black-screen fix unless directly implicated:
