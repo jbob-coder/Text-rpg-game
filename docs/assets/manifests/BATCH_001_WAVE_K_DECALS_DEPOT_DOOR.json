@@ -2,13 +2,13 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-K-DECALS-DEPOT-DOOR",
-  "status": "CANDIDATE_PENDING_EXACT_HEAD_GATE",
+  "status": "INTEGRATED_AUTOMATED_GATE_GREEN",
   "assets": [
     {
       "number": 64,
       "asset_id": "EVACUATION_SIGNAGE_SET",
       "asset_family": "environment_decal_set",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "technical",
       "native_canvas": {
         "width": 24,
@@ -27,14 +27,20 @@
       ],
       "state_contract": "Symbol-only signage is selected only from player-facing locationId. Route/accessibility and long instructions remain engine/UI-owned.",
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36771650827,
+        "head_sha": "dfb1246557def7ce9291856c145ae42930ededb7",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "af351c5e642ee048d01269d8ef06334cfd0400d1cc584478e7ecfc16b1ee2790",
+        "limitation": "Automated catalog/binding/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
       }
     },
     {
       "number": 65,
       "asset_id": "DISTRICT_AMBIENT_DECAL_SET",
       "asset_family": "environment_decal_set",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "technical",
       "native_canvas": {
         "width": 32,
@@ -53,14 +59,20 @@
       ],
       "state_contract": "Wear, caution and utility marks are presentation-only and selected solely by player-facing locationId.",
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36771650827,
+        "head_sha": "dfb1246557def7ce9291856c145ae42930ededb7",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "af351c5e642ee048d01269d8ef06334cfd0400d1cc584478e7ecfc16b1ee2790",
+        "limitation": "Automated catalog/binding/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
       }
     },
     {
       "number": 66,
       "asset_id": "PROP_DEPOT_DOOR",
       "asset_family": "environment_prop",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "technical",
       "native_canvas": {
         "width": 32,
@@ -81,7 +93,13 @@
         "Open and powered-off art states are explicitly deferred until those states are available through a player-safe projection."
       ],
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36771650827,
+        "head_sha": "dfb1246557def7ce9291856c145ae42930ededb7",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "af351c5e642ee048d01269d8ef06334cfd0400d1cc584478e7ecfc16b1ee2790",
+        "limitation": "Automated catalog/binding/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
       }
     }
   ],
