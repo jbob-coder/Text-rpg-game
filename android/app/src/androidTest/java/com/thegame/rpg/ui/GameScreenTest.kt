@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
-import androidx.compose.ui.test.assertDoesNotExist
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasScrollAction
@@ -321,7 +320,7 @@ class GameScreenTest {
         }
 
         composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
-        composeRule.onNodeWithTag("avatar-visible-gear").assertDoesNotExist()
+        composeRule.onAllNodesWithTag("avatar-visible-gear").assertCountEquals(0)
     }
 
     @Test
