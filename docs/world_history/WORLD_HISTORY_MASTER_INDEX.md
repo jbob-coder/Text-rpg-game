@@ -87,6 +87,7 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/planning_rounds/ROUND_1111_1210_RUNTIME_WORLD_SIMULATION_INDEX.md` — runtime world-state cycle for regional snapshots, NPC agency, organizations, spatial versioning, ecology, administration, Academy integration, diplomacy, scene compatibility, and concurrency QA.
 - `docs/world_history/planning_rounds/ROUND_1211_1310_PLAYABLE_WORLD_MATERIAL_CULTURE_INDEX.md` — next exact 100-round playable-world/material-culture cycle for spatial graphs, interiors, objects, domestic life, professions, Kharvori culture, mixed-species operations, resilience, 2670 snapshots, and scenario validation.
 - `docs/world_history/planning_rounds/ROUND_1311_1410_GLOBAL_ATLAS_MICROHISTORY_INDEX.md` — exact 100-round global-atlas/microhistory cycle for temporal spatial versioning, climate/hazards, urban/rural geography, transport, interiors, creature encounter geometry, civil defense, Academy spatial history, and scenario QA.
+- `docs/world_history/planning_rounds/ROUND_1411_1510_PLACE_HISTORY_LIVED_GEOGRAPHY_INDEX.md` — exact 100-round place-history/lived-geography cycle covering settlement lineages, Veinfall local case studies, reconstruction cities, industrial corridors, portal frontiers, Kharvori regional places, mixed contact settlements, disputed frontiers, war-damage/reconstruction, and the 2670 living atlas.
 - `docs/world_history/progress/ROUND_300_HANDOFF.md` — prior bounded handoff.
 - `docs/world_history/progress/ROUND_301_310_COMPLETION.md` — Veinfall Day 0–5 completion.
 - `docs/world_history/progress/ROUND_311_320_COMPLETION.md` — Veinfall biological cascade / manifestation / fragmentation completion.
@@ -101,6 +102,7 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/progress/ROUND_401_410_COMPLETION.md` — Kharvori homeworld, biology, ecology, politics, technology, first-contact chain, and contact geometry.
 - `docs/world_history/progress/ROUND_1211_1310_PLANNING_HANDOFF.md` — planning handoff for the 1211–1310 cycle.
 - `docs/world_history/progress/ROUND_1311_1410_PLANNING_HANDOFF.md` — planning handoff for the 1311–1410 global-atlas/microhistory cycle.
+- `docs/world_history/progress/ROUND_1411_1510_PLANNING_HANDOFF.md` — planning handoff for the 1411–1510 place-history/lived-geography cycle.
 - `docs/world_history/progress/ROUND_1011_1110_PLANNING_HANDOFF.md` — planning handoff for living-world simulation cycle.
 - `docs/world_history/progress/ROUND_911_1010_PLANNING_HANDOFF.md` — planning handoff for the 911–1010 cycle.
 
