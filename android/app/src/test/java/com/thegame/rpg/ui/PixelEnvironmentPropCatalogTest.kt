@@ -12,6 +12,11 @@ class PixelEnvironmentPropCatalogTest {
             PixelEnvironmentPropCatalog.ARCHIVE_TERMINAL_ID to (32 to 32),
             PixelEnvironmentPropCatalog.WORKSHOP_BENCH_ID to (48 to 32),
             PixelEnvironmentPropCatalog.DISTRICT_NOTICE_BOARD_ID to (32 to 48),
+            PixelEnvironmentPropCatalog.RELAY_WORKBENCH_ID to (64 to 32),
+            PixelEnvironmentPropCatalog.GATE_TWELVE_DOOR_ID to (64 to 48),
+            PixelEnvironmentPropCatalog.TUNNEL_PIPE_SET_ID to (32 to 32),
+            PixelEnvironmentPropCatalog.TUNNEL_CABLE_SET_ID to (32 to 32),
+            PixelEnvironmentPropCatalog.TRACE_CHAMBER_APPARATUS_ID to (48 to 48),
         )
 
         assertEquals(expected.keys, PixelEnvironmentPropCatalog.productionProps.map { it.assetId }.toSet())
@@ -33,6 +38,23 @@ class PixelEnvironmentPropCatalogTest {
 
     @Test
     fun placementsUseOnlyPlayerFacingLocationAndSceneIds() {
+        val relay = PixelEnvironmentPropCatalog.placements("RELAY_WORKBENCH", "OPENING_RELAY_CASING")
+        assertEquals(listOf(PixelEnvironmentPropCatalog.relayWorkbench), relay.map { it.sprite })
+
+        val gate = PixelEnvironmentPropCatalog.placements("GATE_TWELVE", "POWER_GATE_TWELVE_SIGNAL")
+        assertEquals(listOf(PixelEnvironmentPropCatalog.gateTwelveDoor), gate.map { it.sprite })
+
+        val tunnel = PixelEnvironmentPropCatalog.placements("SERVICE_TUNNEL", "OPENING_TUNNEL")
+        assertEquals(3, tunnel.size)
+        assertEquals(2, tunnel.count { it.sprite === PixelEnvironmentPropCatalog.tunnelPipeSet })
+        assertEquals(1, tunnel.count { it.sprite === PixelEnvironmentPropCatalog.tunnelCableSet })
+
+        val chamber = PixelEnvironmentPropCatalog.placements("TRACE_CHAMBER", "POWER_FIRST_PRACTICE")
+        assertEquals(
+            listOf(PixelEnvironmentPropCatalog.traceChamberApparatus),
+            chamber.map { it.sprite },
+        )
+
         val archive = PixelEnvironmentPropCatalog.placements("DISTRICT_ARCHIVE", "DISTRICT_ARCHIVE")
         assertEquals(3, archive.size)
         assertEquals(2, archive.count { it.sprite === PixelEnvironmentPropCatalog.archiveShelf })
