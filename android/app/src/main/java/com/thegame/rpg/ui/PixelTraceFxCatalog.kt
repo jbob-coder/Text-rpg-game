@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 object PixelTraceFxCatalog {
     const val TRACE_ECHO_AMBIENT_ID = "FX_TRACE_ECHO_AMBIENT"
     const val SIGNAL_PULSE_ID = "FX_SIGNAL_PULSE"
+    const val DIRECTIONAL_TRACE_ID = "FX_DIRECTIONAL_TRACE"
 
     private val palette = mapOf(
         'C' to PixelColors.Cyan,
@@ -137,6 +138,58 @@ object PixelTraceFxCatalog {
 
     fun signalPulseForScene(sceneId: String?): List<PixelSprite>? =
         if (sceneId == "POWER_FIRST_LIVE_USE") signalPulseFrames else null
+
+    private fun directionalTraceFrame(index: Int): PixelSprite {
+        val pixels = MutableList(64) { CharArray(64) { PixelSprite.TRANSPARENT_PIXEL } }
+
+        fun plot(x: Int, y: Int, key: Char) {
+            if (x in 0 until 64 && y in 0 until 64) pixels[y][x] = key
+        }
+
+        val originX = 20
+        val originY = 32
+        val reach = listOf(8, 13, 18, 24, 30, 36)[index]
+        val halfSpread = listOf(9, 8, 6, 5, 3, 1)[index]
+        val edge = if (index < 4) 'C' else 'c'
+
+        // The early frames begin as a broad sensing sector and collapse into a directional ray.
+        for (dx in 0..reach) {
+            val progress = if (reach == 0) 1f else dx.toFloat() / reach.toFloat()
+            val spread = ((1f - progress) * halfSpread).toInt()
+            val x = originX + dx
+
+            if (spread > 0) {
+                plot(x, originY - spread, 'c')
+                plot(x, originY + spread, 'c')
+            }
+
+            if (index >= 3 || dx % 2 == 0) {
+                plot(x, originY, edge)
+            }
+        }
+
+        // Strong terminal cluster communicates direction without embedding destination data.
+        val tipX = (originX + reach).coerceAtMost(63)
+        for (dy in -2..2) {
+            plot(tipX, originY + dy, edge)
+        }
+        plot((tipX - 1).coerceAtLeast(0), originY, 'C')
+        plot((tipX - 2).coerceAtLeast(0), originY, 'C')
+
+        return PixelSprite(
+            assetId = "${DIRECTIONAL_TRACE_ID}_FRAME_${index + 1}",
+            width = 64,
+            height = 64,
+            palette = palette,
+            rows = pixels.map { it.concatToString() },
+        )
+    }
+
+    val directionalTraceFrames: List<PixelSprite> =
+        List(6) { index -> directionalTraceFrame(index) }
+
+    fun directionalTraceForScene(sceneId: String?): List<PixelSprite>? =
+        if (sceneId == "TRACE_DIRECTIONAL_DISCOVERY_RESULT") directionalTraceFrames else null
 
     fun forScene(sceneId: String?): List<PixelSprite>? =
         when (sceneId) {
