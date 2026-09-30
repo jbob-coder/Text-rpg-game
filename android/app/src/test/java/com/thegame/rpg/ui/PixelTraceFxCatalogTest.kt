@@ -51,4 +51,39 @@ class PixelTraceFxCatalogTest {
         assertNull(PixelTraceFxCatalog.forScene(null))
         assertNull(PixelTraceFxCatalog.forScene("UNKNOWN_SCENE"))
     }
+
+    @Test
+    fun signalPulseFramesUseSixExact64By64FramesAndOnlyMapToLiveUse() {
+        assertEquals(6, PixelTraceFxCatalog.signalPulseFrames.size)
+        assertEquals(
+            6,
+            PixelTraceFxCatalog.signalPulseFrames.map { it.assetId }.toSet().size,
+        )
+
+        PixelTraceFxCatalog.signalPulseFrames.forEach { frame ->
+            assertTrue(frame.assetId.startsWith(PixelTraceFxCatalog.SIGNAL_PULSE_ID))
+            assertEquals(64, frame.width)
+            assertEquals(64, frame.height)
+            assertEquals(64, frame.rows.size)
+            assertTrue(frame.rows.all { it.length == 64 })
+
+            val usedKeys = frame.rows
+                .flatMap { row -> row.toList() }
+                .filter { it != PixelSprite.TRANSPARENT_PIXEL }
+                .toSet()
+
+            assertTrue(
+                "${frame.assetId} contains an unmapped palette key",
+                usedKeys.all { it in frame.palette },
+            )
+        }
+
+        assertSame(
+            PixelTraceFxCatalog.signalPulseFrames,
+            PixelTraceFxCatalog.signalPulseForScene("POWER_FIRST_LIVE_USE"),
+        )
+        assertNull(PixelTraceFxCatalog.signalPulseForScene("POWER_TRACE_STRAIN"))
+        assertNull(PixelTraceFxCatalog.signalPulseForScene("POWER_GATE_TWELVE_SIGNAL"))
+        assertNull(PixelTraceFxCatalog.signalPulseForScene(null))
+    }
 }
