@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "batch_id": "BATCH_001",
+  "wave_id": "B001-WAVE-M-DIAGNOSTIC-READER",
+  "status": "PRODUCED_AUTOMATED_GATE_GREEN_DEFERRED_INTEGRATION",
+  "assets": [
+    {
+      "number": 34,
+      "asset_id": "PROP_DIAGNOSTIC_READER",
+      "asset_family": "held_prop",
+      "status": "PRODUCED_VERIFIED_DEFERRED_INTEGRATION",
+      "canon_status": "technical",
+      "native_masters": [
+        {
+          "asset_id": "PROP_DIAGNOSTIC_READER_ICON_MASTER",
+          "width": 32,
+          "height": 32,
+          "use": "inventory/reference icon master; not currently exposed as inventory state"
+        },
+        {
+          "asset_id": "PROP_DIAGNOSTIC_READER_HELD_FRONT_MASTER",
+          "width": 32,
+          "height": 48,
+          "use": "neutral held-prop master; runtime character binding deferred"
+        }
+      ],
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelHeldPropCatalog.kt"
+      ],
+      "source_support": [
+        "content/vertical_slice_01.json documents Tamsin using/pocketing a diagnostic reader and the reader detecting no carrier frequency below Gate Twelve."
+      ],
+      "integration_path": "Bind only after canonical player/Tamsin wrist/hand anchors or an explicit player-safe held-prop presentation state exists.",
+      "state_contract": "The prop art cannot infer possession, Tamsin pose, relay interaction, quest progress, or story state.",
+      "automated_verification": {
+        "status": "passed",
+        "implementation_head": "8bc179722b0b9666cfa3d5f1219a5a0cd529a95c",
+        "workflow_run_id": 36774172412,
+        "workflow_run_number": 214,
+        "python_tests": "301/301 passed",
+        "android_unit_instrumentation_compile_assemble_package": "passed",
+        "emulator_tests": "15/15 passed, 0 failed",
+        "apk_sha256": "d301b7b3d91c901b7dddac4a0e5ee15e98d34e2296893c290a684eae922e0918"
+      }
+    }
+  ],
+  "limitations": [
+    "No runtime binding is added by this wave.",
+    "Canonical player/Tamsin geometry remains blocked on selected reference/turnaround assets.",
+    "Physical Galaxy A03 visual QA and native-scale art review remain separate."
+  ]
+}
