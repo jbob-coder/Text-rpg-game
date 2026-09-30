@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-E-TRACE-FX",
-  "status": "INTEGRATED_096_097_WITH_098_PENDING_GATE",
+  "status": "INTEGRATED_096_097_098",
   "assets": [
     {
       "number": 96,
@@ -92,7 +92,7 @@
       "number": 98,
       "asset_id": "FX_DIRECTIONAL_TRACE",
       "asset_family": "trace_fx",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "provisional",
       "native_canvas": {
         "width": 64,
@@ -117,7 +117,13 @@
         "state_binding_reviewed": true
       },
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36735143906,
+        "head_sha": "9ac9f6417efabd963a3351c182a1b3d2ac584397",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "12/12 connected tests passed, 0 failures",
+        "apk_sha256": "d02adae48ce1a9e0c5732900cbfa6d3186288d39ab700354a9cf95da4062e751",
+        "limitation": "Automated runtime gates are green; physical Galaxy A03 and native-scale visual QA remain separate."
       },
       "limitations": [
         "Physical Galaxy A03 visual QA remains separate.",
