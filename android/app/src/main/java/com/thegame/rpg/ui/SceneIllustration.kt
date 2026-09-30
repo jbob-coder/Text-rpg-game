@@ -5,12 +5,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 import kotlin.math.floor
 
 @Composable
@@ -20,6 +26,22 @@ fun SceneIllustration(
     relayState: String? = null,
     modifier: Modifier = Modifier,
 ) {
+    val traceFxFrames = PixelTraceFxCatalog.forScene(sceneId)
+    var traceFxFrameIndex by remember(sceneId) { mutableStateOf(0) }
+
+    LaunchedEffect(sceneId, traceFxFrames) {
+        if (traceFxFrames.isNullOrEmpty()) {
+            traceFxFrameIndex = 0
+            return@LaunchedEffect
+        }
+
+        traceFxFrameIndex = 0
+        while (true) {
+            delay(180L)
+            traceFxFrameIndex = (traceFxFrameIndex + 1) % traceFxFrames.size
+        }
+    }
+
     Canvas(
         modifier = modifier
             .testTag("scene-illustration")
@@ -46,6 +68,21 @@ fun SceneIllustration(
                     pixelSize = scenePixel,
                     originX = sceneOriginX,
                     originY = sceneOriginY,
+                )
+            }
+
+            traceFxFrames?.getOrNull(traceFxFrameIndex)?.let { fx ->
+                val fxOriginX = floor(
+                    sceneOriginX + (scene.width - fx.width) * scenePixel / 2f
+                )
+                val fxOriginY = floor(
+                    sceneOriginY + (scene.height - fx.height) * scenePixel / 2f
+                )
+                drawPixelSprite(
+                    sprite = fx,
+                    pixelSize = scenePixel,
+                    originX = fxOriginX,
+                    originY = fxOriginY,
                 )
             }
 
