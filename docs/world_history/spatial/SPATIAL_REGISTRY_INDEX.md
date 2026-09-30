@@ -44,6 +44,7 @@ Future records should use:
 - SPATIAL_CRYSTAL_INDUSTRIALIZATION_ATLAS_2506_2528_V1.md
 - SPATIAL_MATURE_CRYSTAL_INDUSTRIALIZATION_ATLAS_2529_2558_V1.md
 - SPATIAL_PORTAL_EXPANSION_ATLAS_2559_2605_V1.md
+- SPATIAL_CREATURE_HABITAT_ATLAS_V1.md
 
 ## Current persistent historical sites
 
@@ -167,13 +168,25 @@ Portal Expansion 2559–2605 additions:
 Offworld local frame:
 - FRAME_DESTINATION_HAVEN_03_LOCAL_001
 
+Creature/habitat reference additions:
+- HABITAT_GREENVALE_SHARDTAIL_MOSAIC_2500
+- HABITAT_GREENVALE_GLASSFANG_RANGE_2510
+- HABITAT_RED_BASIN_VEINBORER_NETWORK_2532
+- HABITAT_STONECROWN_MIGRATION_CORRIDOR_2540
+- HABITAT_HAVEN03_CROWNBACK_TERRITORY_2580
+- HABITAT_HAVEN03_SKYSAIL_ESCARPMENT_2582
+- HABITAT_HAVEN03_MIRECOIL_WETLAND_2584
+
 ## Current chronological spatial boundary
 
 Locked scenario geometry currently reaches:
 2605.
 
+Creature habitat geometry:
+BASELINE BUILT for Earth and Haven_03 scenario testing.
+
 Next spatial target:
-2606+ interworld expansion prerequisites, creature/habitat reference geometry, and Kharvori homeworld/contact frames.
+2606+ interworld expansion prerequisites and Kharvori homeworld/contact frames.
 
 ## Rule
 
