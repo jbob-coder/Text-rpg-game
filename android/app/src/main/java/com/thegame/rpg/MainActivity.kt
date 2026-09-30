@@ -51,6 +51,7 @@ class MainActivity : ComponentActivity() {
                     onEquip = gameViewModel::equip,
                     onUnequip = gameViewModel::unequip,
                     onTravel = gameViewModel::travel,
+                    onTravelTransitionFinished = gameViewModel::finishTravelTransition,
                 )
             }
         }
