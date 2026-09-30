@@ -98,6 +98,8 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 ### Organizations
 - `docs/world_history/organizations/PRECRYSTAL_ORGANIZATION_REGISTRY.md`
 - `docs/world_history/organizations/PRECRYSTAL_HIDDEN_PROGRAM_REGISTRY_1896_2228.md` — classified institutional bridge from first proof to Meridian exchange.
+- `docs/world_history/organizations/MERIDIAN_CONVERGENCE_REGISTRY_2228_2418.md` — international comparison, false-positive reform, lineage review, and sensor convergence.
+- `docs/world_history/organizations/PREVEINFALL_WARNING_NETWORK_2418_2472.md` — Veilwatch, mineral/spatial/biological monitoring, exercises, and threshold-year coordination.
 
 ### Crystals, technology, laws, portals, and economy
 - `docs/world_history/crystals/CRYSTAL_STANDARD_CLASSIFICATION_V1.md`
@@ -113,10 +115,14 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/spatial/SPATIAL_REGISTRY_INDEX.md` — persistent spatial-record index.
 - `docs/world_history/spatial/SPATIAL_STORY_ATLAS_1600_1896_V1.md` — first historical coordinate/dimension atlas.
 - `docs/world_history/spatial/SPATIAL_STORY_ATLAS_1896_2228_V1.md` — secure archives, field evaluation, medical variance, analytics, genomic study, and Meridian exchange coordinates/dimensions.
+- `docs/world_history/spatial/SPATIAL_STORY_ATLAS_2228_2418_V1.md` — Meridian analytics, lineage clinic, oceanic/boreal sensor systems, and environmental-anomaly monitoring.
+- `docs/world_history/spatial/SPATIAL_STORY_ATLAS_2418_2472_V1.md` — Kessel materials lab, Veilwatch operations center, spatial corridor, biological watch reserve, resilience district, and threshold network.
 - `docs/world_history/templates/SPATIAL_ENTITY_TEMPLATE.md` — reusable location/structure template.
 
 ### Readable history-book progress
-- `docs/world_history/book/BOOK_02_CHAPTER_02_THE_STATE_LEARNS_TO_HIDE.md` — 1896–2228 hidden-program era; bureaucracy, war, medicine, analytics, heredity, and Meridian.
+- `docs/world_history/book/BOOK_02_CHAPTER_02_THE_STATE_LEARNS_TO_HIDE.md` — 1896–2228 hidden-program era.
+- `docs/world_history/book/BOOK_02_CHAPTER_03_THE_WORLD_BEGINS_TO_REPEAT_ITSELF.md` — 2228–2418 Meridian convergence and environmental comparison.
+- `docs/world_history/book/BOOK_02_CHAPTER_04_THE_LONG_WARNING.md` — 2418–2472 pre-Veinfall acceleration and final warning period.
 
 ### Knowledge-state timelines
 - `docs/world_history/timelines/TIMELINE_PRECRYSTAL_LAYERED_V1.md`
@@ -144,8 +150,8 @@ Completed foundation:
 Next build sequence:
 1. PHASE 00 — canon audit and contradiction map. COMPLETE.
 2. PHASE 01 — master history-book / encyclopedia architecture. COMPLETE.
-3. PHASE 02 — pre-Crystal world expansion. IN PROGRESS; units 02.01–02.04 written.
-4. Next content unit: UNIT 02.05 — 2228–2418 Meridian convergence, sensor networks, lineage controversy, and environmental-signature growth, with spatial documentation.
+3. PHASE 02 — pre-Crystal world expansion. CORE CHRONOLOGICAL BRIDGE COMPLETE THROUGH 2472; units 02.01–02.06 written.
+4. Next major unit: PHASE 03 / BOOK 03 — Veinfall 2473, beginning with the day-zero timing model and eleven-day global story atlas.
 5. Reconcile Homunculus canon with the latest user direction before war-era construction.
 6. Build creature threat classification, creature codex, and ability reference systems.
 7. ERA_INTERWORLD_EXPANSION_2606_2644.
