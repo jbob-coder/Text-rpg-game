@@ -42,6 +42,7 @@ Future records should use:
 - SPATIAL_EARLY_CRYSTAL_REBUILD_ATLAS_2475_2488_V1.md
 - SPATIAL_EARLY_REGULATED_USE_ATLAS_2489_2505_V1.md
 - SPATIAL_CRYSTAL_INDUSTRIALIZATION_ATLAS_2506_2528_V1.md
+- SPATIAL_MATURE_CRYSTAL_INDUSTRIALIZATION_ATLAS_2529_2558_V1.md
 
 ## Current persistent historical sites
 
@@ -138,13 +139,24 @@ Crystal Industrialization 2506–2528 additions:
 - SITE_RED_BASIN_CRYSTAL_WASTE_CONTAINMENT_2524
 - CITY_IRONVALE_CRYSTAL_INDUSTRIAL_WARD_2528
 
+Mature Crystal Industrialization 2529–2558 additions:
+- SITE_EAST_HARBOR_CRYSTAL_COMMODITY_EXCHANGE_2530
+- SITE_NORTHMERE_COMPOSITE_ARMOR_WORKS_2536
+- HABITAT_GREENVALE_HARVEST_COLLAPSE_REGION_2538
+- SITE_CAROLINA_ADAPTIVE_PROSTHETIC_INSTITUTE_2542
+- DISTRICT_IRONVALE_AUGMENTATION_BLACK_MARKET_2546
+- SITE_KESSEL_BIOSTABILIZATION_RESEARCH_CAMPUS_2549
+- PORTAL_SITE_NORTH_ATLANTIC_ANCHOR_MK1_2553
+- PORTAL_SITE_MERIDIAN_ANCHOR_MK3_2558
+- CAMPUS_ASTER_RESONANCE_AND_PORTAL_RESEARCH_2555
+
 ## Current chronological spatial boundary
 
 Locked scenario geometry currently reaches:
-2528.
+2558.
 
 Next spatial target:
-2529–2558 mature industrial dependence — commodity exchange, advanced materials, augmentation, biostabilization, major accident sites, strategic reserves, portal-anchor complexes, and associated cities/corridors.
+2559–2605 Portal Expansion — artificial portal research, controlled transit, quarantine hubs, offworld camps, frontier settlements, and route geometry.
 
 ## Rule
 
