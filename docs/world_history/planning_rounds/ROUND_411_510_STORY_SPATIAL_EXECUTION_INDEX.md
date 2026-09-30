@@ -9,23 +9,23 @@ Live-game clock effect: NONE
 
 Continue the world-history book and technical spatial encyclopedia beyond the existing 311–410 plan.
 
-This cycle is designed to carry the project from a fully grounded Kharvori pre-contact foundation through first contact, escalation, First Interworld War, Halcyon reconstruction, Earth Bastion normalization, Academy historical integration, and final 2670 scenario-readiness.
+This cycle is designed to carry the project from completed 2628 first contact through diplomacy, escalation, First Interworld War, Halcyon reconstruction, Earth Bastion normalization, Academy historical integration, and final 2670 scenario-readiness.
 
 Planning does not equal execution. Each block must later produce story, technical, spatial, and verification artifacts.
 
 ## Blocks
 
 411–420:
-Kharvori homeworld society, biology, cities, ecology, logistics, and pre-contact history execution.
+Early Human/Kharvori diplomacy 2628–2631: translation, public disclosure, quarantine compatibility, first trade rules, diplomatic facilities, and mixed-species spatial adaptation.
 
 421–430:
-Human/Kharvori first observation, translation, quarantine, diplomacy, cultural misunderstanding, trade, and contact-site geometry.
+Border and resource negotiation 2631–2636: settlement overlap, treaty attempts, disputed corridors, environmental jurisdiction, customs, and early intelligence competition.
 
 431–440:
-Resource competition, border definitions, settlement overlap, treaty attempts, disputed portal corridors, espionage, and escalation.
+Strategic competition 2636–2641: competing claims, corridor incidents, alliance politics, trade restrictions, security dilemmas, and escalation without a single-villain cause.
 
 441–450:
-Prewar militarization 2635–2644, fleet/base geometry, mobilization corridors, civil-defense preparation, failed crisis diplomacy.
+Prewar militarization 2641–2644: fleet/base geometry, mobilization corridors, civil-defense preparation, crisis diplomacy, and final unresolved disputes before 2645.
 
 451–460:
 First Interworld War opening 2645–2647: trigger, initial objectives, first campaigns, portal warfare, civilian evacuation.
