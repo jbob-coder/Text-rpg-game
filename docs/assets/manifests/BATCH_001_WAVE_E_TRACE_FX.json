@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-E-TRACE-FX",
-  "status": "INTEGRATED_096_097_098_WITH_099_PENDING_GATE",
+  "status": "INTEGRATED_096_097_098_099",
   "assets": [
     {
       "number": 96,
@@ -134,7 +134,7 @@
       "number": 99,
       "asset_id": "FX_TRACE_STRAIN",
       "asset_family": "trace_fx",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "provisional",
       "native_canvas": {
         "avatar": {
@@ -168,7 +168,13 @@
         "state_binding_reviewed": true
       },
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36736526973,
+        "head_sha": "5a1f966f469572cc6242573595392d702b11eb33",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "13/13 connected tests passed, 0 failures",
+        "apk_sha256": "e26fe7700956ab1e22aafa9c0782a0c984186ff88609a673be6f89da945cb366",
+        "limitation": "Automated condition binding and avatar rendering are green; physical Galaxy A03, native-scale art review, and dedicated portrait-surface integration remain separate."
       },
       "limitations": [
         "Physical Galaxy A03 visual QA remains separate.",
