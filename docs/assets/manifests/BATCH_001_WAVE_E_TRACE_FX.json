@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-E-TRACE-FX",
-  "status": "INTEGRATED_096_097_098",
+  "status": "INTEGRATED_096_097_098_WITH_099_PENDING_GATE",
   "assets": [
     {
       "number": 96,
@@ -128,6 +128,51 @@
       "limitations": [
         "Physical Galaxy A03 visual QA remains separate.",
         "The effect presents direction without adding destination text."
+      ]
+    },
+    {
+      "number": 99,
+      "asset_id": "FX_TRACE_STRAIN",
+      "asset_family": "trace_fx",
+      "status": "CANDIDATE",
+      "canon_status": "provisional",
+      "native_canvas": {
+        "avatar": {
+          "width": 32,
+          "height": 48,
+          "frames": 4
+        },
+        "portrait": {
+          "width": 64,
+          "height": 64,
+          "frames": 4
+        },
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelTraceStrainCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelComponents.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt"
+      ],
+      "integration_targets": [
+        "Android player avatar condition overlay",
+        "Future dedicated portrait surface"
+      ],
+      "state_contract": "Avatar FX is selected only from projected GameSnapshot.conditions containing COND_ECHO_STRAIN. No scene inference or raw rule-state lookup is used.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "The 64x64 portrait master is produced but portrait-surface integration is deferred because the current client has no dedicated portrait renderer."
       ]
     }
   ]
