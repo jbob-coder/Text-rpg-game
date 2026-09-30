@@ -83,6 +83,15 @@ fun SceneIllustration(
                 )
             }
 
+            PixelEnvironmentDecalCatalog.placements(locationId).forEach { placement ->
+                drawPixelSprite(
+                    sprite = placement.sprite,
+                    pixelSize = scenePixel,
+                    originX = floor(sceneOriginX + placement.x * scenePixel),
+                    originY = floor(sceneOriginY + placement.y * scenePixel),
+                )
+            }
+
             PixelEnvironmentPropCatalog.placements(
                 locationId = locationId,
                 sceneId = sceneId,
