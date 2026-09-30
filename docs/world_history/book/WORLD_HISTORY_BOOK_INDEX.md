@@ -90,6 +90,22 @@ Next major writing target:
 ### BOOK_04 — The Early Crystal Era
 2473–2505 survival, containment, refugee systems, early laws, first beast-response institutions.
 
+Current chapters:
+- `BOOK_04_CHAPTER_01_WHEN_EMERGENCY_BECAME_GOVERNMENT.md` — 2475–2478 permanent agencies, resettlement, ecology, rights conflict, training-school ancestry.
+- `BOOK_04_CHAPTER_02_THE_FIRST_CRYSTAL_PROFESSIONS.md` — 2478–2488 standardization, specialist careers, occupational medicine, rebuilt settlements.
+
+Technical anchors:
+- `organizations/EARLY_CRYSTAL_INSTITUTIONAL_REGISTRY_2475_2488.md`
+- `technology/EARLY_CRYSTAL_FIELD_MEDICAL_STANDARDS_2475_2488.md`
+- `laws/ABILITY_REGISTRATION_RIGHTS_CONFLICT_2475_2488.md`
+- `spatial/SPATIAL_EARLY_CRYSTAL_REBUILD_ATLAS_2475_2488_V1.md`
+
+BOOK_04 state:
+COMPLETE through 2488.
+
+Next major writing target:
+2489–2505 regulated civilian use, legal market formation, early infrastructure, and Academy institutional consolidation.
+
 ### BOOK_05 — Crystal Industrialization
 2506–2558 infrastructure, economy, medicine, labor, corporate/state power, ecological cost.
 
@@ -136,4 +152,5 @@ Architecture: COMPLETE
 PHASE 02 narrative bridge: COMPLETE THROUGH 2472
 PHASE 03 primary cascade: COMPLETE THROUGH VEINFALL DAY 11
 PHASE 03 extended instability: COMPLETE THROUGH APPROXIMATELY LATE 2474
-Next unit: Early Crystal Era 2475–2488 / Rounds 331–340
+Early Crystal Era progress: COMPLETE THROUGH 2488
+Next unit: Early Crystal Era 2489–2505 / Rounds 341–350
