@@ -12,6 +12,7 @@ object PixelSceneOverlayCatalog {
     const val GATE_TWELVE_ECHO_ACTIVE_ID = "GATE_TWELVE_ECHO_ACTIVE_SCENE"
     const val SERVICE_TUNNEL_AFTERSHOCK_ID = "SERVICE_TUNNEL_AFTERSHOCK_SCENE"
     const val TRACE_CHAMBER_TRAINING_ID = "TRACE_CHAMBER_TRAINING_SCENE"
+    const val DISTRICT_PLAZA_BLACKOUT_ID = "DISTRICT_PLAZA_BLACKOUT_SCENE"
 
     private val signalPalette = mapOf(
         'C' to PixelColors.Cyan,
@@ -239,10 +240,69 @@ object PixelSceneOverlayCatalog {
         ),
     )
 
+
+    private fun buildDistrictPlazaBlackout(): PixelSprite {
+        val pixels = MutableList(64) { CharArray(128) { PixelSprite.TRANSPARENT_PIXEL } }
+
+        fun plot(x: Int, y: Int, key: Char) {
+            if (x in 0 until 128 && y in 0 until 64) pixels[y][x] = key
+        }
+
+        fun rect(x: Int, y: Int, width: Int, height: Int, key: Char) {
+            for (yy in y until y + height) {
+                for (xx in x until x + width) plot(xx, yy, key)
+            }
+        }
+
+        // Reduced ambient light across upper architecture while keeping the public path readable.
+        rect(0, 0, 128, 10, 'D')
+        rect(4, 10, 36, 16, 'd')
+        rect(52, 8, 68, 18, 'd')
+        rect(0, 26, 18, 12, 'd')
+        rect(104, 26, 24, 12, 'd')
+
+        // Emergency lighting stays localized along the public route.
+        for (x in 8..116 step 18) {
+            rect(x, 50, 8, 2, 'R')
+            rect(x + 2, 52, 4, 1, 'G')
+        }
+
+        // Backup-power clusters on building edges give the blackout state a stable silhouette.
+        listOf(
+            12 to 18,
+            32 to 16,
+            62 to 14,
+            86 to 14,
+            110 to 18,
+        ).forEachIndexed { index, (x, y) ->
+            rect(x, y, 3, 3, if (index % 2 == 0) 'C' else 'G')
+        }
+
+        // Sparse ground guidance avoids flattening the scene into a full-screen tint.
+        for (x in 16..112 step 16) {
+            plot(x, 56, 'C')
+            plot(x + 1, 56, 'c')
+        }
+
+        return PixelSprite(
+            assetId = DISTRICT_PLAZA_BLACKOUT_ID,
+            width = 128,
+            height = 64,
+            palette = signalPalette + mapOf(
+                'D' to Color(0xCC10151A),
+                'd' to Color(0x99172128),
+            ),
+            rows = pixels.map { it.concatToString() },
+        )
+    }
+
+    val districtPlazaBlackout: PixelSprite = buildDistrictPlazaBlackout()
+
     val productionOverlays: List<PixelSprite> = listOf(
         gateTwelveEchoActive,
         serviceTunnelAftershock,
         traceChamberTraining,
+        districtPlazaBlackout,
     )
 
     fun forScene(sceneId: String?): PixelSprite? =
@@ -257,6 +317,8 @@ object PixelSceneOverlayCatalog {
             "POWER_FIRST_PRACTICE",
             "POWER_FIRST_PRACTICE_RESULT",
             "TRACE_DIRECTIONAL_DISCOVERY_RESULT" -> traceChamberTraining
+
+            "DISTRICT_HUB" -> districtPlazaBlackout
 
             else -> null
         }
