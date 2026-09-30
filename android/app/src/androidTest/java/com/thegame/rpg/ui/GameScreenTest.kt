@@ -357,4 +357,23 @@ class GameScreenTest {
         composeRule.mainClock.autoAdvance = true
     }
 
+
+    @Test
+    fun uncommonInventoryQualityRendersAsSeparateItemFrameOverlay() {
+        composeRule.setContent {
+            PixelTheme {
+                PixelItemIcon(
+                    itemId = "ITEM_SIGNAL_RING",
+                    quality = "uncommon",
+                    modifier = Modifier.size(48.dp),
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("item-icon-ITEM_SIGNAL_RING")
+            .assertIsDisplayed()
+        composeRule.onNodeWithTag("item-quality-frame-uncommon")
+            .assertIsDisplayed()
+    }
+
 }
