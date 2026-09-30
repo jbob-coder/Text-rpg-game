@@ -752,6 +752,7 @@ private fun InventorySection(
                     ) {
                         PixelItemIcon(
                             itemId = item.id,
+                            quality = item.quality,
                             modifier = Modifier.width(40.dp).height(40.dp),
                         )
                         Spacer(Modifier.width(8.dp))
