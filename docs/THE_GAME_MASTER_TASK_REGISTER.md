@@ -310,14 +310,14 @@ The UI must not become the authoritative rules engine.
 - DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
 - COMPLETED_AT: —
 ### Wave M diagnostic-reader slice
-- STATUS: `IN_PROGRESS`
+- STATUS: `VERIFIED_PRODUCED_DEFERRED_INTEGRATION`
 - BRANCH: `feature/pixel-asset-wave-m-diagnostic-reader`
 - PARENT: `a3970de6597c77939afccb5f30d6040bdf3d608d`
 - ASSET: 034 `PROP_DIAGNOSTIC_READER`.
 - IMPLEMENTED: source-native 32x32 icon/reference master plus 32x48 neutral held-front master in `PixelHeldPropCatalog`, with JVM geometry/palette contract tests and manifest.
 - SOURCE SUPPORT: the authored vertical slice explicitly depicts Tamsin holding/pocketing a diagnostic reader and later states that her diagnostic reader sees no carrier frequency below Gate Twelve.
+- VERIFIED IMPLEMENTATION HEAD: `8bc179722b0b9666cfa3d5f1219a5a0cd529a95c`, workflow run 214 / ID `36774172412`: Python 301/301; Android unit/instrumentation compilation/assemble/package passed; API 35 x86_64 emulator 15/15 with 0 failures; APK SHA-256 `d301b7b3d91c901b7dddac4a0e5ee15e98d34e2296893c290a684eae922e0918`.
 - BOUNDARY: no runtime binding yet. Character-specific wrist/hand placement is deferred until canonical player/Tamsin geometry or an explicit player-safe held-prop presentation state exists.
-- NEXT GATE: exact-head Android/Python workflow. If green, mark 034 produced/verified with deferred integration rather than falsely integrated.
 - PHYSICAL QA: Galaxy A03 visual review and native-scale approval remain separate.
 
 ## Known technical follow-ups
