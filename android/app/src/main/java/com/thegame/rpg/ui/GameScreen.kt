@@ -74,7 +74,6 @@ fun TheGameRoot(
     onUnequip: (String) -> Unit,
     onInspectStatus: (String) -> Unit,
     onTravel: (String) -> Unit,
-    onInspectStatus: (String) -> Unit,
     onTravelTransitionFinished: (Long) -> Unit,
 ) {
     val snapshot = uiState.snapshot
@@ -203,6 +202,7 @@ private fun PixelGameShell(
     onCheat: (String) -> Unit,
     onEquip: (String) -> Unit,
     onUnequip: (String) -> Unit,
+    onInspectStatus: (String) -> Unit,
     onTravel: (String) -> Unit,
 ) {
     var section by remember { mutableStateOf(GameSection.STORY) }
