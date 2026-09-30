@@ -117,6 +117,22 @@ BOOK_05 / Crystal Industrialization beginning 2506.
 ### BOOK_05 — Crystal Industrialization
 2506–2558 infrastructure, economy, medicine, labor, corporate/state power, ecological cost.
 
+Current chapters:
+- `BOOK_05_CHAPTER_01_THE_YEAR_EVERYONE_USED_THE_SAME_WORDS.md` — 2506–2518 standards congress, chain of custody, assay interoperability, certified cells, workforce professionalization.
+- `BOOK_05_CHAPTER_02_WHEN_INFRASTRUCTURE_BECAME_DEPENDENT.md` — 2519–2528 public-grid stabilization, medical certification, beast extraction, labor, waste, industrial-city growth.
+
+Technical anchors:
+- `economy/CRYSTAL_INDUSTRIAL_CHAIN_REGISTRY_2506_2528.md`
+- `labor/CRYSTAL_INDUSTRIAL_LABOR_ENVIRONMENT_2506_2528.md`
+- `environment/CRYSTAL_INDUSTRIAL_WASTE_POLICY_2506_2528.md`
+- `spatial/SPATIAL_CRYSTAL_INDUSTRIALIZATION_ATLAS_2506_2528_V1.md`
+
+BOOK_05 state:
+COMPLETE through 2528.
+
+Next major writing target:
+2529–2558 mature industrial dependence, commodity exchange, overharvest, augmentation, advanced materials, biostabilization, and portal-anchor threshold.
+
 ### BOOK_06 — Portal Expansion
 2559–2605 portal science, accidents, frontier settlements, quarantine, social change.
 
@@ -161,4 +177,5 @@ PHASE 02 narrative bridge: COMPLETE THROUGH 2472
 PHASE 03 primary cascade: COMPLETE THROUGH VEINFALL DAY 11
 PHASE 03 extended instability: COMPLETE THROUGH APPROXIMATELY LATE 2474
 Early Crystal Era progress: COMPLETE THROUGH 2505
-Next unit: Crystal Industrialization 2506–2528 / Rounds 351–360
+Crystal Industrialization narrative progress: COMPLETE THROUGH 2528
+Next unit: Crystal Industrialization 2529–2558 / Rounds 361–370
