@@ -56,8 +56,10 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 ## Execution plan
 
 - `docs/world_history/WORLD_HISTORY_AND_REFERENCE_MASTER_BUILD_PLAN.md` — phased build plan for the history-book project, technical reference encyclopedia, canon reconciliation, creature/power systems, war construction, Academy history, scenario-query layer, and verification gates.
-- Current execution gate: complete PHASE 00 canon audit before extending the chronology beyond 2605.
-- The Homunculus historical model currently present in older files is flagged for reconciliation against the user's 2026-09-29 direction before further war-era construction.
+- `docs/world_history/CANON_RECONCILIATION_REPORT.md` — completed PHASE 00 contradiction map and canon audit.
+- PHASE 00 status: COMPLETE.
+- Current execution gate: PHASE 01 master architecture before additional historical expansion.
+- The Homunculus historical model currently present in older files remains frozen pending the dedicated PHASE 07 reconciliation.
 
 ## Active world-history files
 
@@ -116,8 +118,8 @@ Completed foundation:
 - expanded homunculus origin, sapience recognition, reproductive lineage, rebellion causality, and 2602 aftermath.
 
 Next build sequence:
-1. PHASE 00 — canon audit and contradiction map.
-2. PHASE 01 — master history-book / encyclopedia architecture.
+1. PHASE 00 — canon audit and contradiction map. COMPLETE.
+2. PHASE 01 — master history-book / encyclopedia architecture. NEXT.
 3. Expand the existing pre-Crystal through Portal Expansion eras into full lived-in history.
 4. Reconcile Homunculus canon with the latest user direction before war-era construction.
 5. Build creature threat classification, creature codex, and ability reference systems.
