@@ -77,6 +77,29 @@ class PixelAssetCatalogTest {
     }
 
     @Test
+    fun equipmentOverlayRegistryUsesSharedCharacterRigAndExplicitLayerOrder() {
+        val overlays = PixelAssetCatalog.equipmentOverlays.sortedBy { it.zOrder }
+
+        assertEquals(
+            listOf("neck", "body", "hands", "ring_1"),
+            overlays.map { it.slot },
+        )
+        assertEquals(overlays.size, overlays.map { it.zOrder }.toSet().size)
+
+        overlays.forEach { overlay ->
+            assertEquals(32, overlay.sprite.width)
+            assertEquals(48, overlay.sprite.height)
+            assertSame(
+                overlay,
+                PixelAssetCatalog.equipmentOverlay(overlay.itemId, overlay.slot),
+            )
+        }
+
+        assertNull(PixelAssetCatalog.equipmentOverlay("ITEM_NOT_AUTHORED", "head"))
+        assertNull(PixelAssetCatalog.equipmentOverlay("ITEM_DEPOT_JACKET", "head"))
+    }
+
+    @Test
     fun currentAuthoredInventoryItemsHaveCatalogIcons() {
         val expected = mapOf(
             "ITEM_DEPOT_JACKET" to PixelAssetCatalog.depotJacketIcon,
