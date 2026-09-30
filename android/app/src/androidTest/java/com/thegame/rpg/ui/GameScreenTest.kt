@@ -16,6 +16,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.dp
 import com.thegame.rpg.engine.GameChoice
+import com.thegame.rpg.engine.GameCondition
 import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameInventory
 import com.thegame.rpg.engine.GameResource
@@ -287,5 +288,34 @@ class GameScreenTest {
 
         composeRule.onNodeWithTag("avatar-visible-gear").assertIsDisplayed()
         composeRule.onNodeWithText("VISIBLE GEAR // CHEST • RING I").assertIsDisplayed()
+    }
+
+    @Test
+    fun projectedEchoStrainConditionActivatesVisibleAvatarFx() {
+        val strainedSnapshot = snapshot.copy(
+            conditions = listOf(
+                GameCondition(
+                    id = PixelTraceStrainCatalog.ECHO_STRAIN_CONDITION_ID,
+                    name = "Echo Strain",
+                    severity = 2,
+                    durationMinutes = 35,
+                    tags = listOf("power", "sensory", "strain"),
+                )
+            )
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                GameScreen(
+                    snapshot = strainedSnapshot,
+                    busy = false,
+                    onChoice = {},
+                    onNavigate = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("player-avatar-canvas-trace-strain")
+            .assertIsDisplayed()
     }
 }
