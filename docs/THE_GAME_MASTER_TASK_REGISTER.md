@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-30 19:55 AST  
+Updated: 2026-09-30 19:57 AST  
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -134,7 +134,8 @@ The UI must not become the authoritative rules engine.
 - VERIFIED CONTRACT: `fix/avatar-overlay-rig-contract` / PR #10 requires exact `itemId + slot + zOrder + 32x48 sprite` mappings at one shared character origin. Unmapped equipment remains logically equipped and does not receive invented avatar geometry.
 - CURRENT AUTHORED STARTING OVERLAYS: Depot Jacket, Work Gloves, Signal Ring, Courier Neck Tag.
 - Planned slots: Head, Chest, Hands, Legs, Feet, Main Hand, Off Hand, Ring 1, Ring 2, Neck, Accessory 1, Accessory 2.
-- REMAINING: character/equipment selection UX, additional authored overlays, held-object anchor integration, and physical-device visual review.
+- VERIFIED UI: the phone-safe Character screen now surrounds the central 32x48 avatar with semantic slot rails, opens one selected-equipment detail panel, routes unequip through the authoritative engine, and labels unmapped equipped items as logical-only rather than inventing artwork.
+- REMAINING: additional authored overlays, held-object anchor integration, and physical-device visual review.
 - COMPLETED_AT: —
 
 ### TASK P-003 — Dedicated detailed Stats screen
@@ -351,7 +352,7 @@ The UI must not become the authoritative rules engine.
 - NEXT: improve the Character/Equipment screen on top of the verified paper-doll contract without inventing unmapped gear art.
 
 ### Character / Equipment paper-doll UI slice
-- STATUS: `IN_PROGRESS`
+- STATUS: `VERIFIED_IMPLEMENTATION`
 - BRANCH: `feature/character-equipment-paperdoll-ui`
 - PARENT: `feature/player-safe-stat-inspection@7cba26a4c31c31ce19562ff79e830d14e6bb96b3`.
 - OBJECTIVE: replace the horizontally scrolling Character placeholder with a phone-safe equipment presentation that directly reflects the verified 32x48 paper-doll contract.
@@ -364,8 +365,10 @@ The UI must not become the authoritative rules engine.
   - unequip actions route back through the authoritative Python equipment mutation path;
   - current projected resources and canonical attributes are summarized below the character without introducing an Appearance subsystem.
 - TESTS ADDED: authored Depot Jacket selection/overlay/unequip routing and an unmapped future-head-item case proving no visible avatar gear is fabricated.
-- EXACT-HEAD GATE: pending.
-- NEXT: run Android unit/Compose compilation/emulator gates and retain the screen only if the paper-doll and no-placeholder contracts stay green.
+- VERIFIED IMPLEMENTATION HEAD: `b324dd555922a13f0672752f005d74fff68a09aa`.
+- VERIFIED GATE: Android Pixel Client run 221 / ID `36793138990`: Python 303/303; Android unit tests, Compose instrumentation compilation, debug APK assembly/package checks passed; API 35 x86_64 emulator started 20 connected tests and completed successfully with 0 failures.
+- APK SHA-256: `c9e2d1f90b91b57af98de5620faa36bbd795d468de3febcfac73bc3bdd6b96bb`.
+- NEXT: retain this paper-doll contract while expanding player-facing Skills and later authored equipment detail.
 
 ### Dedicated player-safe Skills UI slice
 - STATUS: `IN_PROGRESS`
