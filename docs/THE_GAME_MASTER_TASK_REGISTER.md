@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-30 19:47 AST  
+Updated: 2026-09-30 19:55 AST  
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -151,6 +151,12 @@ The UI must not become the authoritative rules engine.
 - RESULT: Inventory and Equipment are separate from narrative; equip/unequip mutations run through Python and return updated player-safe state.
 - COMPLETED_AT: `2026-09-27 17:34 AST`
 - Separate from main narrative screen.
+- COMPLETED_AT: —
+
+### TASK P-005 — Dedicated Skills screen
+- STATUS: `IN_PROGRESS`
+- IMPLEMENTED CANDIDATE: a schema-driven player-safe Skills surface is reachable from `More` without adding another primary Galaxy-A03 bottom-navigation tab. Skills are grouped from projected categories, future learned skills appear automatically, and selecting a skill reuses the authoritative stat-inspection boundary for base/modifier contributions.
+- BOUNDARY: no skill formulas or progression rules are duplicated in Compose; only projected skill state and sanitized inspection data are rendered.
 - COMPLETED_AT: —
 
 ## World / map
@@ -360,6 +366,22 @@ The UI must not become the authoritative rules engine.
 - TESTS ADDED: authored Depot Jacket selection/overlay/unequip routing and an unmapped future-head-item case proving no visible avatar gear is fabricated.
 - EXACT-HEAD GATE: pending.
 - NEXT: run Android unit/Compose compilation/emulator gates and retain the screen only if the paper-doll and no-placeholder contracts stay green.
+
+### Dedicated player-safe Skills UI slice
+- STATUS: `IN_PROGRESS`
+- BRANCH: `feature/player-safe-skills-ui`
+- PARENT: `feature/character-equipment-paperdoll-ui@b324dd555922a13f0672752f005d74fff68a09aa`.
+- OBJECTIVE: deliver the missing Skills product surface without crowding the phone bottom bar or hard-coding the four starting skills.
+- IMPLEMENTED CANDIDATE:
+  - `Skills` is a secondary section opened from `More`, while the primary bottom navigation remains Story / Character / Stats / Inventory / Quests / Map / More;
+  - the redundant Character shortcut was removed from `More` because Character already has a primary bottom tab;
+  - rendered skills come from `snapshot.skills`, grouped and sorted by projected category/name;
+  - selecting a skill requests `skills.<id>` through the already-verified player-safe inspection boundary;
+  - equipment/perk/condition contributions render from sanitized provenance rather than UI-side modifier arithmetic;
+  - future learned skills appear automatically when the player-safe projection contains them.
+- TESTS ADDED: More -> Skills navigation/Technical Systems inspection request and rendering the Work Gloves `equipment:hands +1` contribution.
+- EXACT-HEAD GATE: pending.
+- NEXT: verify the stacked Character gate, then run exact-head Python + Android + emulator gates for this Skills slice.
 
 ## Known technical follow-ups
 
