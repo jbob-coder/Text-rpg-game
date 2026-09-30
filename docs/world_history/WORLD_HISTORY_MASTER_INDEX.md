@@ -53,6 +53,12 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 19. Missing connective canon may be authored as DRAFT_CANON without interrupting play, but major pillars must remain traceable and reversible.
 20. Historical documentation may cover population, climate, borders, cities, technology, disease, food, transport, education, economy, religion, crime, law, military affairs, language, culture, species, and ecosystems.
 
+## Execution plan
+
+- `docs/world_history/WORLD_HISTORY_AND_REFERENCE_MASTER_BUILD_PLAN.md` — phased build plan for the history-book project, technical reference encyclopedia, canon reconciliation, creature/power systems, war construction, Academy history, scenario-query layer, and verification gates.
+- Current execution gate: complete PHASE 00 canon audit before extending the chronology beyond 2605.
+- The Homunculus historical model currently present in older files is flagged for reconciliation against the user's 2026-09-29 direction before further war-era construction.
+
 ## Active world-history files
 
 ### Foundational eras
@@ -110,16 +116,19 @@ Completed foundation:
 - expanded homunculus origin, sapience recognition, reproductive lineage, rebellion causality, and 2602 aftermath.
 
 Next build sequence:
-1. ERA_INTERWORLD_EXPANSION_2606_2644.
-2. Kharvori biology, civilization, pre-contact history, and internal factions.
-3. Human/Kharvori first-contact chain.
-4. Interworld diplomacy, trade, territorial claims, and escalation.
-5. WAR_FIRST_INTERWORLD_2645_2659.
-6. EVENT_HALCYON_GATE_CONCORD_2660.
-7. Earth Bastion doctrine and postwar reconstruction.
-8. Asterline causal history tied to existing 2670 spatial atlas.
-9. Reconstruction to ERA_PRESENT_2670.
-10. Historical gameplay hooks, discoverable archives, museums, family memories, propaganda, and hidden records.
+1. PHASE 00 — canon audit and contradiction map.
+2. PHASE 01 — master history-book / encyclopedia architecture.
+3. Expand the existing pre-Crystal through Portal Expansion eras into full lived-in history.
+4. Reconcile Homunculus canon with the latest user direction before war-era construction.
+5. Build creature threat classification, creature codex, and ability reference systems.
+6. ERA_INTERWORLD_EXPANSION_2606_2644.
+7. Kharvori biology, civilization, pre-contact history, and first-contact chain.
+8. Interworld diplomacy, territorial/resource escalation, and WAR_FIRST_INTERWORLD_2645_2659.
+9. EVENT_HALCYON_GATE_CONCORD_2660 and reconstruction to ERA_PRESENT_2670.
+10. Academy causal history, scenario-query layer, historical gameplay hooks, and final narrative compilation.
+
+Detailed execution authority:
+- `docs/world_history/WORLD_HISTORY_AND_REFERENCE_MASTER_BUILD_PLAN.md`
 
 ## Sapient nonhuman / engineered peoples
 
