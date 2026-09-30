@@ -40,6 +40,7 @@ Future records should use:
 - SPATIAL_VEINFALL_DAY3_DAY11_ATLAS_V1.md
 - SPATIAL_EXTENDED_INSTABILITY_ATLAS_2473_2474_V1.md
 - SPATIAL_EARLY_CRYSTAL_REBUILD_ATLAS_2475_2488_V1.md
+- SPATIAL_EARLY_REGULATED_USE_ATLAS_2489_2505_V1.md
 
 ## Current persistent historical sites
 
@@ -115,13 +116,23 @@ Early Crystal 2475–2488 additions:
 - CAMPUS_FIELD_RESPONSE_INSTITUTE_2482
 - SITE_ABILITY_CIVIL_MEDICAL_CENTER_2483
 
+Early Crystal 2489–2505 additions:
+- SITE_EAST_HARBOR_LICENSED_CRYSTAL_EXCHANGE_2493
+- ROUTE_EAST_HARBOR_SECURE_CRYSTAL_FREIGHT_2494
+- HABITAT_GREENVALE_PROTECTED_CRYSTAL_FAUNA_RESERVE_2492
+- CAMPUS_JOINT_ANOMALY_COLLEGE_2498
+- SITE_NORTHMERE_CRYSTAL_RESERVE_DEPOT_2498
+- SITE_CAROLINA_CIVIL_CRYSTAL_MEDICAL_UNIT_2496
+- SITE_RED_BASIN_STANDING_RESPONSE_GARRISON_2500
+- PORTAL_SITE_NORTH_ATLANTIC_OBSERVATION_2503
+
 ## Current chronological spatial boundary
 
 Locked scenario geometry currently reaches:
-2488.
+2505.
 
 Next spatial target:
-2489–2505 regulated crystal-market infrastructure, civilian power/medical sites, settlement growth, consolidated training institutions, and portal-observation facilities.
+2506–2528 Crystal Industrialization — standards congress facilities, certified cell production, assay labs, grid experiments, medical certification sites, harvest logistics, and industrial freight geometry.
 
 ## Rule
 
