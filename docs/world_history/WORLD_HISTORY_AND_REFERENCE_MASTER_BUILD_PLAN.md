@@ -1030,36 +1030,36 @@ Next safe content unit: UNIT 02.03 — Age of Measurement, approximately 1600–
 
 ---
 
-## 19. 100-round planning/documentation pass
 
-Status: COMPLETE
+---
+
+## 20. Story + spatial 100-round cycle
+
+Status: COMPLETE_AS_PLANNING_AND_DOCUMENTATION
 
 Persistent index:
-- docs/world_history/planning_rounds/ROUND_001_100_EXECUTION_INDEX.md
+- docs/world_history/planning_rounds/ROUND_101_200_STORY_SPATIAL_EXECUTION_INDEX.md
 
-Round blocks:
-- 001–010 Pre-Crystal deepening
-- 011–020 Veinfall deep history
-- 021–030 Early Crystal Era
-- 031–040 Crystal Industrialization
-- 041–050 Portal Expansion
-- 051–060 Homunculus rebuild
-- 061–070 Creature system
-- 071–080 Ability/crystal/portal reference integration
-- 081–090 Kharvori/interworld-war groundwork
-- 091–100 Academy/present/scenario/QA
+Purpose:
+- continue readable history creation;
+- attach coordinates and dimensions to persistent locations;
+- establish spatial frames and temporal map validity;
+- map Veinfall, institutions, ecology, portals, war theaters, and Academy spaces only when prerequisites permit.
 
-Completion of these rounds means the planning/documentation architecture is recorded. It does not mean every planned historical chapter is already written.
+Spatial standards:
+- docs/world_history/spatial/SPATIAL_REFERENCE_STANDARD_V1.md
+- docs/world_history/spatial/SPATIAL_REGISTRY_INDEX.md
+- docs/world_history/templates/SPATIAL_ENTITY_TEMPLATE.md
 
-Supporting specifications:
-- docs/world_history/reference/CREATURE_CLASSIFICATION_STANDARD_V1_DRAFT.md
-- docs/world_history/reference/SCENARIO_QUERY_MODEL_V1_DRAFT.md
-- docs/world_history/factions/HOMUNCULUS_REBUILD_SPEC.md
-- docs/world_history/species/KHARVORI_BUILD_SPEC.md
-- docs/world_history/wars/FIRST_INTERWORLD_WAR_BUILD_SPEC.md
-- docs/world_history/institutions/ACADEMY_HISTORY_BUILD_SPEC.md
-- docs/world_history/progress/ROUND_100_HANDOFF.md
+Current actual content executed:
+- docs/world_history/book/BOOK_02_CHAPTER_01_THE_AGE_OF_MEASUREMENT.md
+- docs/world_history/spatial/SPATIAL_STORY_ATLAS_1600_1896_V1.md
 
-Current writing position after round 100:
-PHASE 02 remains active.
-Next safe content unit: UNIT 02.03 — Age of Measurement, approximately 1600–1896.
+Current next safe unit:
+UNIT 02.04 — 1896–2228 hidden state/scientific programs.
+
+Handoff:
+- docs/world_history/progress/ROUND_200_HANDOFF.md
+
+Important:
+Round numbering is an execution/planning structure, not a claim that all historical content through 2670 is already written.
