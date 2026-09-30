@@ -111,3 +111,11 @@ Threat classification: NOT BUILT
 Creature codex: NOT BUILT
 Ability encyclopedia: NOT BUILT
 Existing crystal/portal/ecology files: TO BE INDEXED DURING LATER PHASES
+
+
+## Draft standards added during 100-round planning
+
+- docs/world_history/reference/CREATURE_CLASSIFICATION_STANDARD_V1_DRAFT.md — operational creature threat framework, origin classes, encounter scales, modifiers, ecology gate, and response doctrine.
+- docs/world_history/reference/SCENARIO_QUERY_MODEL_V1_DRAFT.md — historical/geographic/ecological/legal/knowledge filtering model for scenario construction.
+
+These remain DRAFT until tested against complete reference entries.
