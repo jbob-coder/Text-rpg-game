@@ -20,8 +20,8 @@ Priority order:
 
 ## 100-round blocks
 
-- 301–310 — Veinfall Day Zero through Day 5: timing, synchronization, crystallization, first breaches, civilian geometry.
-- 311–320 — Veinfall Days 3–11: biological cascade, manifestation surge, fragmentation, six-region comparison.
+- 301–310 — Veinfall Day Zero through Day 5: COMPLETE.
+- 311–320 — Veinfall Days 3–11 biological cascade, manifestation surge, fragmentation, six-region comparison: COMPLETE.
 - 321–330 — Extended instability 2473–2474: shelters, exclusion zones, refugee routes, disease and food systems.
 - 331–340 — Early Crystal 2475–2488: first stable science, beast-response institutions, law, training predecessors.
 - 341–350 — Early Crystal 2489–2505: regulated markets, early civilian use, settlements, Academy precursors.
@@ -53,12 +53,13 @@ A round is complete only when its promised artifact exists and is reread. Planni
 
 ## Current execution position
 
-Round 301 begins at the last safe chronological boundary:
-2473, Veinfall.
+Rounds 301–320: COMPLETE.
 
-Initial execution artifacts for 301–310:
-- VEINFALL_TEMPORAL_MODEL_2473.md
-- BOOK_03_CHAPTER_01_THE_FIRST_SIX_HOURS.md
-- BOOK_03_CHAPTER_02_WHEN_MATTER_CHANGED.md
-- BOOK_03_CHAPTER_03_THE_FIRST_OPENINGS.md
-- SPATIAL_VEINFALL_GLOBAL_ATLAS_V1.md
+Current historical position:
+2473, end of primary Veinfall Day 11.
+
+Next execution block:
+Rounds 321–330 — extended instability 2473–2474.
+
+Continuation window requested by user:
+- docs/world_history/planning_rounds/ROUND_311_410_CONTINUATION_INDEX.md
