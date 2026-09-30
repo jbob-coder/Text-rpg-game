@@ -37,12 +37,15 @@ class PixelHeldPropCatalogTest {
     fun heldFrontMasterStaysTransparentOutsideTheReaderGeometry() {
         val sprite = PixelHeldPropCatalog.diagnosticReaderHeldFrontMaster
 
-        assertTrue(sprite.rows.first().all { it == PixelSprite.TRANSPARENT_PIXEL })
-        assertTrue(sprite.rows.last().all { it == PixelSprite.TRANSPARENT_PIXEL })
-        assertTrue(
-            sprite.rows
-                .flatMap { it.toList() }
-                .count { it != PixelSprite.TRANSPARENT_PIXEL } < 120
-        )
+        assertTrue(sprite.rows.take(18).all { row ->
+            row.all { it == PixelSprite.TRANSPARENT_PIXEL }
+        })
+        assertTrue(sprite.rows.drop(36).all { row ->
+            row.all { it == PixelSprite.TRANSPARENT_PIXEL }
+        })
+        sprite.rows.subList(18, 36).forEach { row ->
+            assertTrue(row.take(17).all { it == PixelSprite.TRANSPARENT_PIXEL })
+            assertTrue(row.drop(27).all { it == PixelSprite.TRANSPARENT_PIXEL })
+        }
     }
 }
