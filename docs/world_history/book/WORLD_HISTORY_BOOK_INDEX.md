@@ -61,14 +61,23 @@ Core pre-Veinfall narrative bridge COMPLETE through 2472.
 ### BOOK_03 — Veinfall
 The 2473 cascade in full lived-in detail, including regional and civilian experience.
 
+Current chapters:
+- `BOOK_03_CHAPTER_01_THE_FIRST_SIX_HOURS.md` — V+00:00 to V+06:00 synchronization and recognition.
+- `BOOK_03_CHAPTER_02_WHEN_MATTER_CHANGED.md` — V+06:00 to V+30:00 crystallization, infrastructure risk, biological uncertainty.
+- `BOOK_03_CHAPTER_03_THE_FIRST_OPENINGS.md` — approximately V+34:00 through Day 5, first breach hazards and cross-ecology transfer.
+
+Technical anchors:
+- `events/VEINFALL_TEMPORAL_MODEL_2473.md`
+- `spatial/SPATIAL_VEINFALL_GLOBAL_ATLAS_V1.md`
+
+BOOK_03 state:
+Written through end of Day 5.
+
 Next major writing target:
-- day-zero timing model;
-- hours 0–6 synchronization;
-- hours 6–30 crystallization;
-- days 2–5 spatial breaches;
-- biological cascade;
-- manifestation surge;
+- Day 3–9 biological cascade;
+- Day 3–11 manifestation surge;
 - days 7–11 fragmentation;
+- six-region contrast;
 - 18-month extended instability.
 
 ### BOOK_04 — The Early Crystal Era
@@ -118,4 +127,5 @@ Every completed chapter must:
 
 Architecture: COMPLETE
 PHASE 02 narrative bridge: COMPLETE THROUGH 2472
-Next phase: PHASE 03 — Veinfall deep history
+PHASE 03 narrative progress: COMPLETE THROUGH VEINFALL DAY 5
+Next unit: Veinfall biological cascade / manifestation surge / fragmentation
