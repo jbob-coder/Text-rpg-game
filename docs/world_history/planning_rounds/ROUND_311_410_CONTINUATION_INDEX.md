@@ -40,8 +40,16 @@ Artifacts:
 ### 331–340 — Early Crystal 2475–2488
 Plan:
 - ROUNDS_331_340_EARLY_CRYSTAL_2475_2488.md
-Targets:
-stable research institutions, first durable beast-response organizations, emergency-law normalization, training predecessors.
+Execution status:
+- COMPLETE
+Artifacts:
+- BOOK_04_CHAPTER_01_WHEN_EMERGENCY_BECAME_GOVERNMENT.md
+- BOOK_04_CHAPTER_02_THE_FIRST_CRYSTAL_PROFESSIONS.md
+- EARLY_CRYSTAL_INSTITUTIONAL_REGISTRY_2475_2488.md
+- EARLY_CRYSTAL_FIELD_MEDICAL_STANDARDS_2475_2488.md
+- ABILITY_REGISTRATION_RIGHTS_CONFLICT_2475_2488.md
+- SPATIAL_EARLY_CRYSTAL_REBUILD_ATLAS_2475_2488_V1.md
+- ROUND_331_340_COMPLETION.md
 
 ### 341–350 — Early Crystal 2489–2505
 Plan:
@@ -124,8 +132,8 @@ Every major creature reference:
 
 ## Current position
 
-Rounds 311–330: COMPLETE.
-Next execution round: 331.
+Rounds 311–340: COMPLETE.
+Next execution round: 341.
 
 Next planned 100-round cycle:
 - ROUND_411_510_STORY_SPATIAL_EXECUTION_INDEX.md
