@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "batch_id": "BATCH_001",
+  "wave_id": "B001-WAVE-H-ENVIRONMENT-OVERLAYS",
+  "status": "CANDIDATE_PENDING_EXACT_HEAD_GATE",
+  "assets": [
+    {
+      "number": 62,
+      "asset_id": "EMERGENCY_LIGHT_OVERLAY",
+      "asset_family": "environment_overlay",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentOverlayCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneOverlayCatalog.kt"
+      ],
+      "integration_targets": [
+        "DISTRICT_PLAZA_BLACKOUT_SCENE composition"
+      ],
+      "state_contract": "The asset has no gameplay state of its own. Higher-level scene/state selection remains player-safe; this layer contributes reusable emergency route and backup-power light clusters only.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "This overlay does not determine whether a blackout/emergency state is active."
+      ]
+    },
+    {
+      "number": 63,
+      "asset_id": "BLACKOUT_SHADOW_OVERLAY",
+      "asset_family": "environment_overlay",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentOverlayCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneOverlayCatalog.kt"
+      ],
+      "integration_targets": [
+        "DISTRICT_PLAZA_BLACKOUT_SCENE composition"
+      ],
+      "state_contract": "The asset has no gameplay state of its own. Higher-level scene/state selection remains player-safe; this layer darkens clustered noncritical regions while preserving scene silhouettes.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "This overlay is not a full-screen tint and must not hide interaction landmarks."
+      ]
+    }
+  ]
+}
