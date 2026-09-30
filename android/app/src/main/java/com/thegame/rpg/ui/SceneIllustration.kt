@@ -83,6 +83,18 @@ fun SceneIllustration(
                 )
             }
 
+            PixelEnvironmentPropCatalog.placements(
+                locationId = locationId,
+                sceneId = sceneId,
+            ).forEach { placement ->
+                drawPixelSprite(
+                    sprite = placement.sprite,
+                    pixelSize = scenePixel,
+                    originX = floor(sceneOriginX + placement.x * scenePixel),
+                    originY = floor(sceneOriginY + placement.y * scenePixel),
+                )
+            }
+
             traceFxFrames?.getOrNull(traceFxFrameIndex)?.let { fx ->
                 val fxOriginX = floor(
                     sceneOriginX + (scene.width - fx.width) * scenePixel / 2f
