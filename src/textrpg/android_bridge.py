@@ -92,6 +92,7 @@ class AndroidGameSession:
                 definition = {}
             label = definition.get("label")
             slot = definition.get("slot")
+            quality = definition.get("quality")
             equippable = isinstance(slot, str) and slot in DEFAULT_SLOTS
             items.append(
                 {
@@ -100,6 +101,7 @@ class AndroidGameSession:
                     "quantity": quantity,
                     "equippable": equippable,
                     "slot": slot if equippable else None,
+                    "quality": quality if isinstance(quality, str) and quality else None,
                 }
             )
 
