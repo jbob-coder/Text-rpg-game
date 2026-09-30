@@ -456,6 +456,143 @@ class GameScreenTest {
     }
 
     @Test
+    fun characterScreenSelectsAuthoredPaperDollSlotAndRoutesUnequip() {
+        var unequippedSlot: String? = null
+        val equippedSnapshot = snapshot.copy(
+            inventory = GameInventory(
+                equipment = listOf(
+                    GameEquipmentSlot(
+                        slot = "body",
+                        equipped = true,
+                        itemId = "ITEM_DEPOT_JACKET",
+                        name = "Depot utility jacket",
+                        quality = "standard",
+                    ),
+                    GameEquipmentSlot(
+                        slot = "hands",
+                        equipped = true,
+                        itemId = "ITEM_WORK_GLOVES",
+                        name = "Insulated work gloves",
+                        quality = "standard",
+                    ),
+                )
+            )
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                TheGameRoot(
+                    uiState = GameUiState(
+                        bootState = BootState.Ready,
+                        snapshot = equippedSnapshot,
+                    ),
+                    onChoice = {},
+                    onSave = {},
+                    onLoad = {},
+                    onNarrate = { false },
+                    onReplayNarration = { false },
+                    onStopNarration = {},
+                    autoReadNarration = false,
+                    onAutoReadChange = {},
+                    narrationRate = 0.92f,
+                    onNarrationRateChange = {},
+                    textDelayMs = 0,
+                    onTextDelayChange = {},
+                    onCheat = {},
+                    onEquip = {},
+                    onUnequip = { unequippedSlot = it },
+                    onInspectStatus = {},
+                    onTravel = {},
+                    onTravelTransitionFinished = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("nav-character")
+            .performScrollTo()
+            .performClick()
+        composeRule.onNodeWithTag("character-loadout-board")
+            .assertIsDisplayed()
+        composeRule.onNodeWithTag("character-slot-body")
+            .assertHasClickAction()
+            .performClick()
+        composeRule.onNodeWithTag("character-equipment-detail")
+            .performScrollTo()
+            .assertIsDisplayed()
+        composeRule.onNodeWithText("Depot utility jacket").assertIsDisplayed()
+        composeRule.onNodeWithText("AVATAR LAYER // AUTHORED 32x48 // Z 20")
+            .assertIsDisplayed()
+        composeRule.onNodeWithText("UNEQUIP")
+            .assertHasClickAction()
+            .performClick()
+
+        composeRule.runOnIdle {
+            check(unequippedSlot == "body") {
+                "Expected Character screen to route body unequip, got $unequippedSlot"
+            }
+        }
+    }
+
+    @Test
+    fun characterScreenKeepsUnmappedEquipmentLogicalOnly() {
+        val unmappedSnapshot = snapshot.copy(
+            inventory = GameInventory(
+                equipment = listOf(
+                    GameEquipmentSlot(
+                        slot = "head",
+                        equipped = true,
+                        itemId = "ITEM_FUTURE_HELMET",
+                        name = "Future helmet",
+                    ),
+                )
+            )
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                TheGameRoot(
+                    uiState = GameUiState(
+                        bootState = BootState.Ready,
+                        snapshot = unmappedSnapshot,
+                    ),
+                    onChoice = {},
+                    onSave = {},
+                    onLoad = {},
+                    onNarrate = { false },
+                    onReplayNarration = { false },
+                    onStopNarration = {},
+                    autoReadNarration = false,
+                    onAutoReadChange = {},
+                    narrationRate = 0.92f,
+                    onNarrationRateChange = {},
+                    textDelayMs = 0,
+                    onTextDelayChange = {},
+                    onCheat = {},
+                    onEquip = {},
+                    onUnequip = {},
+                    onInspectStatus = {},
+                    onTravel = {},
+                    onTravelTransitionFinished = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("nav-character")
+            .performScrollTo()
+            .performClick()
+        composeRule.onNodeWithTag("character-slot-head")
+            .assertHasClickAction()
+            .performClick()
+        composeRule.onNodeWithTag("character-equipment-detail")
+            .performScrollTo()
+            .assertIsDisplayed()
+        composeRule.onNodeWithText("Future helmet").assertIsDisplayed()
+        composeRule.onNodeWithText("AVATAR LAYER // NOT AUTHORED — LOGICAL EQUIPMENT ONLY")
+            .assertIsDisplayed()
+        composeRule.onAllNodesWithTag("avatar-visible-gear").assertCountEquals(0)
+    }
+
+    @Test
     fun projectedEchoStrainConditionActivatesVisibleAvatarFx() {
         val strainedSnapshot = snapshot.copy(
             conditions = listOf(
