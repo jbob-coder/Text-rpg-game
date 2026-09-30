@@ -3,8 +3,8 @@
 Status: ACTIVE_CAMPAIGN_STATE
 Updated: 2026-09-29
 Present-era anchor: 2670
-Live gameplay clock: DAY -15, 08:19:46
-Checkpoint source: Google Drive / 12_GAMEPLAY_BRANCH / GAMEPLAY_CHECKPOINT_CURRENT.md (latest markdown copy modified 2026-09-11 15:49:37Z)
+Live gameplay clock: DAY -15, 08:21:20
+Checkpoint source: Google Drive / 12_GAMEPLAY_BRANCH / GAMEPLAY_CHECKPOINT_CURRENT.md (native Doc updated after consequential scene)
 
 ## Confirmed player continuity
 
@@ -20,7 +20,7 @@ Checkpoint source: Google Drive / 12_GAMEPLAY_BRANCH / GAMEPLAY_CHECKPOINT_CURRE
 ### Elias Voss
 
 - Day: -15
-- Time: 08:19:46
+- Time: 08:21:20
 - Location: Visitor Services counter on the public/civilian side of the secured military-academy complex
 - Age: 16
 - Level: 1
@@ -46,25 +46,25 @@ Checkpoint source: Google Drive / 12_GAMEPLAY_BRANCH / GAMEPLAY_CHECKPOINT_CURRE
 
 ### Current scene
 
-The Visitor Services clerk has recognized the surname Voss, asked whether Adrian Voss was Elias's father, and stated: "I knew of him."
+Elias calmly asked how the Visitor Services clerk knew of Adrian Voss.
 
-The basis, depth, and significance of that recognition remain UNKNOWN.
+The clerk clarified:
+- she did not know Adrian personally;
+- before transferring to Visitor Services, she worked with supply-routing records;
+- Adrian's name remained familiar because of a discrepancy review involving his logistics chain;
+- Adrian was not the subject of the review; he was the person who flagged the discrepancy;
+- she would not discuss the closed matter further from the public desk.
 
-Elias's immediate focus:
-- continue the conversation naturally;
-- obtain the intake information he came for;
-- carefully learn how the clerk knew Adrian Voss;
-- avoid overreacting or revealing unnecessary personal information.
+Elias's immediate suspicion toward the clerk has decreased slightly. His curiosity about Adrian's old service record has increased.
 
-Secondary Elias focus:
-- continue learning what causes EVOLVE to react to environments, behavior, and social adaptation.
+The nature of the discrepancy, who or what was under review, why the matter was closed, and whether it has present-day significance remain UNKNOWN.
 
 ### Elias current known acquaintances
 
 - Leah: incoming cadet, brief first contact, neutral-positive.
 - Derek: incoming cadet, stated provisional rating 3.8; Elias withheld final judgment.
 - Maya: incoming cadet, stated provisional rating 3.1; neutral/possibly positive first acquaintance.
-- Visitor Services clerk: older woman; name UNKNOWN; professionally neutral/positive interaction so far; recognizes Adrian Voss.
+- Visitor Services clerk: older woman; name UNKNOWN; professionally neutral/positive; recognized Adrian through administrative/logistics records rather than an admitted personal relationship.
 
 No strong trust, hostility, loyalty, or relationship commitment has been established with these people.
 
@@ -75,7 +75,7 @@ No strong trust, hostility, loyalty, or relationship commitment has been establi
 - Behavioral pattern recorded: "Observation before conclusion."
 - Later display: "Social adaptation data accumulating."
 
-Elias currently suspects EVOLVE tracks social adaptation in addition to environmental and behavioral development. Exact mechanism remains UNKNOWN.
+No new EVOLVE message occurred during the Adrian Voss clarification.
 
 ## Jack Wilson current live state
 
@@ -120,7 +120,7 @@ These are world-scale conditions and do not automatically become Jack or Elias k
 
 ## Active world-director clocks
 
-LIVE_GAMEPLAY_CLOCK: 08:19:46 / PAUSED UNTIL NARRATION RESUMES
+LIVE_GAMEPLAY_CLOCK: 08:21:20 / PAUSED AT END OF RECORDED EXCHANGE
 ACADEMY_CLOCK: SYNCHRONIZED TO LIVE LOCAL ANCHOR
 FACTION_CLOCK: READY / no unrecorded advancement
 POLITICAL_CLOCK: READY / no unrecorded advancement
@@ -150,7 +150,7 @@ No clock advances merely because real-world chat time passes.
 
 ## Next legal transition
 
-CONTINUE_CONVERSATION_AT_DAY_MINUS_15_08_19_46_WITH_ELIAS_AND_THE_VISITOR_SERVICES_CLERK_WITHOUT_CONTROLLING_JACK
+CONTINUE_VISITOR_SERVICES_AT_DAY_MINUS_15_08_21_20_WITHOUT_CONTROLLING_JACK
 
 ## Open world pressures available for future use
 
