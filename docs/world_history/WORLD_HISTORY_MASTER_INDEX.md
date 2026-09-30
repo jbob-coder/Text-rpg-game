@@ -66,6 +66,12 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - Current execution gate: PHASE 02 pre-Crystal world expansion.
 - The Homunculus historical model currently present in older files remains frozen pending the dedicated PHASE 07 reconciliation.
 
+## Planning cycles
+
+- `docs/world_history/planning_rounds/ROUND_001_100_EXECUTION_INDEX.md` — first 100-round architecture pass.
+- `docs/world_history/planning_rounds/ROUND_101_200_STORY_SPATIAL_EXECUTION_INDEX.md` — second 100-round story + coordinates/dimensions pass.
+- `docs/world_history/progress/ROUND_200_HANDOFF.md` — current bounded handoff after planning through Round 200.
+
 ## Active world-history files
 
 ### Foundational eras
@@ -99,6 +105,13 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 - `docs/world_history/portals/PORTAL_NETWORK_FOUNDATION_V1.md`
 - `docs/world_history/economy/PORTAL_FRONTIER_ECONOMY_2559_2605.md`
 
+
+### Spatial reference and coordinates
+- `docs/world_history/spatial/SPATIAL_REFERENCE_STANDARD_V1.md` — canonical coordinate, dimension, orientation, uncertainty, and temporal-validity rules.
+- `docs/world_history/spatial/SPATIAL_REGISTRY_INDEX.md` — persistent spatial-record index.
+- `docs/world_history/spatial/SPATIAL_STORY_ATLAS_1600_1896_V1.md` — first historical coordinate/dimension atlas.
+- `docs/world_history/templates/SPATIAL_ENTITY_TEMPLATE.md` — reusable location/structure template.
+
 ### Knowledge-state timelines
 - `docs/world_history/timelines/TIMELINE_PRECRYSTAL_LAYERED_V1.md`
 
@@ -125,8 +138,8 @@ Completed foundation:
 Next build sequence:
 1. PHASE 00 — canon audit and contradiction map. COMPLETE.
 2. PHASE 01 — master history-book / encyclopedia architecture. COMPLETE.
-3. PHASE 02 — pre-Crystal world expansion. NEXT.
-4. Expand Veinfall through Portal Expansion into full lived-in history.
+3. PHASE 02 — pre-Crystal world expansion. IN PROGRESS; units 02.01–02.03 written.
+4. Next content unit: UNIT 02.04 — 1896–2228 hidden state/scientific programs, with spatial documentation.
 5. Reconcile Homunculus canon with the latest user direction before war-era construction.
 6. Build creature threat classification, creature codex, and ability reference systems.
 7. ERA_INTERWORLD_EXPANSION_2606_2644.
