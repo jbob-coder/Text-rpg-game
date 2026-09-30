@@ -1118,3 +1118,40 @@ Handoff:
 
 Important:
 Round numbering remains a bounded work/accounting structure. It never means unattended background execution.
+
+
+---
+
+## 22. Fourth story + spatial 100-round cycle
+
+Status: ACTIVE_EXECUTION_CYCLE
+
+Persistent index:
+- docs/world_history/planning_rounds/ROUND_301_400_STORY_SPATIAL_EXECUTION_INDEX.md
+
+Planning coverage:
+- 301–310 Veinfall Day 0–5
+- 311–320 Veinfall biological cascade / manifestation / fragmentation
+- 321–330 extended instability 2473–2474
+- 331–350 Early Crystal Era
+- 351–370 Crystal Industrialization
+- 371–380 Portal Expansion
+- 381–390 creature/ecology/ability reference execution
+- 391–400 interworld prerequisites + QA
+
+Actual content executed so far:
+- docs/world_history/events/VEINFALL_TEMPORAL_MODEL_2473.md
+- docs/world_history/book/BOOK_03_CHAPTER_01_THE_FIRST_SIX_HOURS.md
+- docs/world_history/book/BOOK_03_CHAPTER_02_WHEN_MATTER_CHANGED.md
+- docs/world_history/book/BOOK_03_CHAPTER_03_THE_FIRST_OPENINGS.md
+- docs/world_history/spatial/SPATIAL_VEINFALL_GLOBAL_ATLAS_V1.md
+- docs/world_history/progress/ROUND_301_310_COMPLETION.md
+
+Current actual writing position:
+Veinfall written through end of Day 5.
+
+Next safe execution block:
+Rounds 311–320 — biological cascade, manifestation surge, six-region comparison, days 7–11 fragmentation.
+
+Coordinate/dimension rule remains:
+No exact coordinate without frame + uncertainty + temporal validity. Persistent spaces must retain dimensions rather than resize for plot convenience.
