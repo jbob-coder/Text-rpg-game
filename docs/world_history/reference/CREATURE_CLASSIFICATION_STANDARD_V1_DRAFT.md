@@ -1,6 +1,6 @@
 # CREATURE_CLASSIFICATION_STANDARD_V1_DRAFT
 
-Status: DRAFT_REFERENCE_STANDARD
+Status: SUPERSEDED_BY_CREATURE_CLASSIFICATION_STANDARD_V1
 Authority: ROUNDS_061_070
 Purpose: operational creature classification for history and scenario selection
 
@@ -122,3 +122,11 @@ A creature is eligible for a scenario only when:
 YEAR + WORLD + REGION + BIOME + THREAT + KNOWLEDGE + RESPONSE_CAPABILITY are compatible.
 
 This standard remains DRAFT until tested against multiple complete species records.
+
+
+## Supersession
+
+Rounds 381–390 tested the framework against complete species, habitat, physical-fit, disease, harvest, and scenario cases.
+
+Active replacement:
+- CREATURE_CLASSIFICATION_STANDARD_V1.md
