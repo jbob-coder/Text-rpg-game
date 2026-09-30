@@ -3,16 +3,18 @@ package com.thegame.rpg.ui
 import androidx.compose.ui.graphics.Color
 
 /**
- * Transparent story-state layers for already player-facing scene IDs.
+ * Transparent story-state layers for already player-facing presentation state.
  *
- * These overlays never read raw engine flags. Selection is driven only by scene IDs already
- * present in GameSnapshot, preserving the GameState -> player-safe projection -> UI boundary.
+ * These overlays never read raw engine flags. Selection is driven only by scene IDs or visual
+ * fields already present in GameSnapshot, preserving the GameState -> player-safe projection -> UI
+ * boundary.
  */
 object PixelSceneOverlayCatalog {
     const val GATE_TWELVE_ECHO_ACTIVE_ID = "GATE_TWELVE_ECHO_ACTIVE_SCENE"
     const val SERVICE_TUNNEL_AFTERSHOCK_ID = "SERVICE_TUNNEL_AFTERSHOCK_SCENE"
     const val TRACE_CHAMBER_TRAINING_ID = "TRACE_CHAMBER_TRAINING_SCENE"
     const val DISTRICT_PLAZA_BLACKOUT_ID = "DISTRICT_PLAZA_BLACKOUT_SCENE"
+    const val RELAY_WORKBENCH_RELAY_OPEN_ID = "RELAY_WORKBENCH_RELAY_OPEN_SCENE"
 
     private val signalPalette = mapOf(
         'C' to PixelColors.Cyan,
@@ -298,11 +300,60 @@ object PixelSceneOverlayCatalog {
 
     val districtPlazaBlackout: PixelSprite = buildDistrictPlazaBlackout()
 
+    private fun buildRelayWorkbenchRelayOpen(): PixelSprite {
+        val pixels = MutableList(64) { CharArray(128) { PixelSprite.TRANSPARENT_PIXEL } }
+
+        fun plot(x: Int, y: Int, key: Char) {
+            if (x in 0 until 128 && y in 0 until 64) pixels[y][x] = key
+        }
+
+        fun rect(x: Int, y: Int, width: Int, height: Int, key: Char) {
+            for (yy in y until y + height) {
+                for (xx in x until x + width) plot(xx, yy, key)
+            }
+        }
+
+        // Localized inspection lighting around the relay placement zone. Exact relay casing pixels
+        // remain owned by ITEM_DEAD_RELAY_* and are selected independently from relayState.
+        rect(50, 18, 28, 2, 'c')
+        rect(48, 20, 32, 1, 'C')
+        rect(54, 22, 20, 1, 'G')
+
+        // Open-tool clutter on the workbench communicates an active inspection state without
+        // baking safe/damaged/signal-lost branching into the room art.
+        rect(38, 30, 8, 2, 'G')
+        rect(40, 28, 2, 6, 'c')
+        rect(82, 29, 10, 2, 'C')
+        rect(87, 26, 2, 7, 'G')
+        rect(31, 34, 5, 1, 'C')
+        rect(95, 35, 6, 1, 'c')
+
+        // Diagnostic response brackets frame the prop focal point but do not expose hidden data.
+        for (y in 24..38 step 4) {
+            plot(46, y, 'C')
+            plot(81, y, 'C')
+        }
+        for (x in 50..77 step 6) {
+            plot(x, 40, 'c')
+        }
+
+        return PixelSprite(
+            assetId = RELAY_WORKBENCH_RELAY_OPEN_ID,
+            width = 128,
+            height = 64,
+            palette = signalPalette,
+            rows = pixels.map { it.concatToString() },
+        )
+    }
+
+    val relayWorkbenchRelayOpen: PixelSprite = buildRelayWorkbenchRelayOpen()
+
     val productionOverlays: List<PixelSprite> = listOf(
         gateTwelveEchoActive,
         serviceTunnelAftershock,
         traceChamberTraining,
         districtPlazaBlackout,
+        relayWorkbenchRelayOpen,
     )
 
     fun forScene(sceneId: String?): PixelSprite? =
@@ -321,5 +372,15 @@ object PixelSceneOverlayCatalog {
             "DISTRICT_HUB" -> districtPlazaBlackout
 
             else -> null
+        }
+
+    fun forVisualState(locationId: String, relayState: String?): PixelSprite? =
+        if (
+            locationId == "RELAY_WORKBENCH" &&
+            relayState in setOf("opened", "damaged", "signal_lost")
+        ) {
+            relayWorkbenchRelayOpen
+        } else {
+            null
         }
 }
