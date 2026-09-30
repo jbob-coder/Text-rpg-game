@@ -956,16 +956,18 @@ Verified output:
 - `docs/world_history/progress/PHASE_01_COMPLETION.md`
 
 PRIMARY NEXT ACTION:
-PHASE 02 — continue pre-Crystal world expansion at UNIT 02.05 (2228–2418).
+PHASE 03 — Veinfall deep history.
 
 Current completed story units:
 - UNIT 02.01 — deep-time and human emergence;
 - UNIT 02.02 — hidden anomalous humanity;
 - UNIT 02.03 — Age of Measurement, 1600–1896;
-- UNIT 02.04 — hidden state/scientific programs, 1896–2228.
+- UNIT 02.04 — hidden state/scientific programs, 1896–2228;
+- UNIT 02.05 — Meridian convergence, 2228–2418;
+- UNIT 02.06 — pre-Veinfall acceleration, 2418–2472.
 
 Reason:
-The architecture is stable and the 1896–2228 bridge now has readable narrative, institutional reference, coordinates, and dimensions. The next chronological dependency is Meridian convergence and environmental-signature growth before the 2418 anomaly uptick.
+The pre-Crystal chronological bridge is now written through the final year before Veinfall with readable narrative, institutional reference, coordinates, dimensions, and knowledge-layer separation. The next dependency is the 2473 eleven-day cascade.
 
 ---
 
@@ -1088,9 +1090,17 @@ Purpose:
 
 Actual content executed in this cycle:
 - docs/world_history/book/BOOK_02_CHAPTER_02_THE_STATE_LEARNS_TO_HIDE.md
+- docs/world_history/book/BOOK_02_CHAPTER_03_THE_WORLD_BEGINS_TO_REPEAT_ITSELF.md
+- docs/world_history/book/BOOK_02_CHAPTER_04_THE_LONG_WARNING.md
 - docs/world_history/organizations/PRECRYSTAL_HIDDEN_PROGRAM_REGISTRY_1896_2228.md
+- docs/world_history/organizations/MERIDIAN_CONVERGENCE_REGISTRY_2228_2418.md
+- docs/world_history/organizations/PREVEINFALL_WARNING_NETWORK_2418_2472.md
 - docs/world_history/spatial/SPATIAL_STORY_ATLAS_1896_2228_V1.md
+- docs/world_history/spatial/SPATIAL_STORY_ATLAS_2228_2418_V1.md
+- docs/world_history/spatial/SPATIAL_STORY_ATLAS_2418_2472_V1.md
 - docs/world_history/progress/UNIT_02_04_COMPLETION.md
+- docs/world_history/progress/UNIT_02_05_COMPLETION.md
+- docs/world_history/progress/UNIT_02_06_COMPLETION.md
 
 New mapped historical sites:
 - SITE_NORTHMERE_SECURE_ARCHIVE_1904
@@ -1101,7 +1111,7 @@ New mapped historical sites:
 - SITE_MERIDIAN_EXCHANGE_NODE_2228
 
 Current next safe unit:
-UNIT 02.05 — 2228–2418 Meridian convergence, sensor networks, lineage controversy, and early environmental-signature growth.
+PHASE 03 / BOOK 03 — Veinfall 2473.
 
 Handoff:
 - docs/world_history/progress/ROUND_300_HANDOFF.md
