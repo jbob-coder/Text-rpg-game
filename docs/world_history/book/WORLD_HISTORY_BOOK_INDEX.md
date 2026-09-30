@@ -127,11 +127,15 @@ Technical anchors:
 - `environment/CRYSTAL_INDUSTRIAL_WASTE_POLICY_2506_2528.md`
 - `spatial/SPATIAL_CRYSTAL_INDUSTRIALIZATION_ATLAS_2506_2528_V1.md`
 
+Additional chapters:
+- `BOOK_05_CHAPTER_03_THE_PRICE_OF_SCALE.md` — 2529–2547 commodity exchange, geopolitical inequality, composite armor, harvest collapse, prosthetic success, augmentation controversy.
+- `BOOK_05_CHAPTER_04_THE_THRESHOLD_OF_OTHER_WORLDS.md` — 2548–2558 biostabilization, portal-anchor megaprojects, sovereignty disputes, and transition to Portal Expansion.
+
 BOOK_05 state:
-COMPLETE through 2528.
+COMPLETE through 2558.
 
 Next major writing target:
-2529–2558 mature industrial dependence, commodity exchange, overharvest, augmentation, advanced materials, biostabilization, and portal-anchor threshold.
+BOOK_06 / Portal Expansion 2559–2605.
 
 ### BOOK_06 — Portal Expansion
 2559–2605 portal science, accidents, frontier settlements, quarantine, social change.
@@ -177,5 +181,5 @@ PHASE 02 narrative bridge: COMPLETE THROUGH 2472
 PHASE 03 primary cascade: COMPLETE THROUGH VEINFALL DAY 11
 PHASE 03 extended instability: COMPLETE THROUGH APPROXIMATELY LATE 2474
 Early Crystal Era progress: COMPLETE THROUGH 2505
-Crystal Industrialization narrative progress: COMPLETE THROUGH 2528
-Next unit: Crystal Industrialization 2529–2558 / Rounds 361–370
+Crystal Industrialization narrative progress: COMPLETE THROUGH 2558
+Next unit: Portal Expansion 2559–2605 / Rounds 371–380
