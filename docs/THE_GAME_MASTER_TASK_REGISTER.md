@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-30 19:45 AST  
+Updated: 2026-09-30 19:47 AST  
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -343,6 +343,23 @@ The UI must not become the authoritative rules engine.
 - APK SHA-256: `da3b870542bbd4dd1f49b284f9a86b09bcf9c8e245cc4c14fb56311780a6b154`.
 - BOUNDARY: derived-stat deep breakdown remains read-only summary in this slice; no raw authored rule maps are projected to Compose.
 - NEXT: improve the Character/Equipment screen on top of the verified paper-doll contract without inventing unmapped gear art.
+
+### Character / Equipment paper-doll UI slice
+- STATUS: `IN_PROGRESS`
+- BRANCH: `feature/character-equipment-paperdoll-ui`
+- PARENT: `feature/player-safe-stat-inspection@7cba26a4c31c31ce19562ff79e830d14e6bb96b3`.
+- OBJECTIVE: replace the horizontally scrolling Character placeholder with a phone-safe equipment presentation that directly reflects the verified 32x48 paper-doll contract.
+- IMPLEMENTED CANDIDATE:
+  - left/right semantic slot rails surround the central player avatar using the 12 authoritative equipment slots;
+  - selecting a slot opens one focused equipment-detail panel rather than duplicating a quick-equipment strip;
+  - authored overlays report their explicit 32x48 / z-order contract;
+  - logically equipped items without an authored overlay are labeled `LOGICAL EQUIPMENT ONLY` and do not receive invented avatar geometry;
+  - missing item icons are reported as not authored instead of drawing a fake item shape;
+  - unequip actions route back through the authoritative Python equipment mutation path;
+  - current projected resources and canonical attributes are summarized below the character without introducing an Appearance subsystem.
+- TESTS ADDED: authored Depot Jacket selection/overlay/unequip routing and an unmapped future-head-item case proving no visible avatar gear is fabricated.
+- EXACT-HEAD GATE: pending.
+- NEXT: run Android unit/Compose compilation/emulator gates and retain the screen only if the paper-doll and no-placeholder contracts stay green.
 
 ## Known technical follow-ups
 
