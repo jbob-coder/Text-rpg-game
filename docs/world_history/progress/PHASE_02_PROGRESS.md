@@ -37,10 +37,28 @@ Covers:
 - why skepticism remains rational;
 - transition from miracle language toward anomaly investigation.
 
+### UNIT 02.03 — The Age of Measurement
+File:
+- `docs/world_history/book/BOOK_02_CHAPTER_01_THE_AGE_OF_MEASUREMENT.md`
+
+Covers:
+- approximately 1600–1896;
+- scientific skepticism and reproducibility;
+- medical/anatomical recordkeeping;
+- fraud-control methodology;
+- Greybridge, Vale, Merrow, and Calder historical cases;
+- development of state-linked secrecy;
+- EVENT_EARLY_SCIENTIFIC_ANOMALY_PROOF_1896;
+- spatial cross-links with coordinates and dimensions.
+
+Spatial support:
+- `docs/world_history/spatial/SPATIAL_REFERENCE_STANDARD_V1.md`
+- `docs/world_history/spatial/SPATIAL_STORY_ATLAS_1600_1896_V1.md`
+
 ## VERIFIED STATE
 
-Both chapters were reread after write.
-Both contain:
+Three completed chapters were reread after write.
+All contain:
 - knowledge-layer separation;
 - technical cross-links;
 - protagonist mystery boundary;
@@ -49,16 +67,17 @@ Both contain:
 
 ## NEXT UNIT
 
-UNIT 02.03 — The age of measurement, approximately 1600–1896.
+UNIT 02.04 — 1896–2228 hidden state/scientific programs.
 
 Goals:
-- development of scientific skepticism and reproducibility;
-- medical/anatomical records;
-- early statistical anomalies;
-- conflict between fraud, folklore, religion, and genuine cases;
-- first networks of investigators;
-- technological limits that still prevent proof;
-- path toward EVENT_EARLY_SCIENTIFIC_ANOMALY_PROOF_1896.
+- post-1896 bureaucracy;
+- state secrecy and intelligence competition;
+- military/medical program divergence;
+- first secure anomaly archives;
+- war-era recruitment, abuse, protection, and information loss;
+- instrumentation/genetics/computing growth;
+- multinational pressure leading toward Meridian Concordat;
+- coordinates and dimensions for key facilities and archives.
 
 ## FOLLOWING UNIT
 
@@ -100,5 +119,16 @@ Relevant files:
 
 This does not change PHASE 02 status.
 
-NEXT SAFE UNIT remains:
-UNIT 02.03 — approximately 1600–1896, Age of Measurement.
+NEXT SAFE UNIT is now:
+UNIT 02.04 — 1896–2228 hidden state/scientific programs.
+
+
+## Story + spatial cycle 101–200
+
+Planning/documentation index:
+- docs/world_history/planning_rounds/ROUND_101_200_STORY_SPATIAL_EXECUTION_INDEX.md
+
+Handoff:
+- docs/world_history/progress/ROUND_200_HANDOFF.md
+
+This cycle introduced the persistent coordinate/dimension standard and does not change PHASE 02 chronological prerequisites.
