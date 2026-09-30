@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-C-CURRENT-SCENES",
-  "status": "INTEGRATED_AUTOMATED_GATE_GREEN",
+  "status": "INTEGRATED_WITH_044_PENDING_GATE",
   "runtime_verification_parent": "1c7e54e548ab3c28819af0b85ae8cbba53aff827",
   "state_contracts": {
     "base_scenes": "Location ID selects architecture only; location art does not own travel, discovery, reachability, or story state.",
@@ -99,6 +99,57 @@
         "apk_sha256": "18316402c65e9b614b80fa542817b125bed8a38be44eaf3ca89d187623f1897f",
         "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
       }
+    },
+    {
+      "number": 44,
+      "asset_id": "RELAY_WORKBENCH_RELAY_OPEN_SCENE",
+      "asset_family": "location_state",
+      "status": "CANDIDATE",
+      "canon_status": "provisional",
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "source_game_ids": [
+        "RELAY_WORKBENCH"
+      ],
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native pixel overlay",
+        "alpha": true
+      },
+      "state_binding": {
+        "source": "GameSnapshot.visuals.relayState",
+        "location_id": "RELAY_WORKBENCH",
+        "allowed_values": [
+          "opened",
+          "damaged",
+          "signal_lost"
+        ]
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneOverlayCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt",
+        "android/app/src/test/java/com/thegame/rpg/ui/PixelSceneOverlayCatalogTest.kt"
+      ],
+      "integration_targets": [
+        "Android SceneIllustration"
+      ],
+      "state_contract": "The room-state overlay appears only at RELAY_WORKBENCH when the already projected relayState is opened, damaged, or signal_lost. Exact relay casing pixels remain owned by ITEM_DEAD_RELAY_* props; the scene overlay adds only local inspection lighting/tool context.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "The overlay does not distinguish hidden causes; exact relay prop state is rendered separately from player-safe relayState."
+      ]
     },
     {
       "number": 45,
