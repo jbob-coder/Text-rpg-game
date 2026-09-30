@@ -8,6 +8,7 @@ import com.thegame.rpg.boot.BootState
 import com.thegame.rpg.engine.EngineStartException
 import com.thegame.rpg.engine.GameEngine
 import com.thegame.rpg.engine.GameSnapshot
+import com.thegame.rpg.engine.GameStatInspection
 import com.thegame.rpg.engine.PythonGameEngine
 import com.thegame.rpg.save.ContinueResult
 import com.thegame.rpg.save.SaveRepository
@@ -28,6 +29,10 @@ data class GameUiState(
     val snapshot: GameSnapshot? = null,
     val busy: Boolean = false,
     val travelTransition: TravelTransitionUiState? = null,
+    val statInspectionPath: String? = null,
+    val statInspection: GameStatInspection? = null,
+    val statInspectionBusy: Boolean = false,
+    val statInspectionError: String? = null,
 )
 
 internal fun confirmedTravelTransition(
@@ -77,7 +82,19 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         _uiState.update { it.copy(busy = true) }
         viewModelScope.launch {
             engine.choose(choiceId).fold(
-                onSuccess = { snapshot -> _uiState.update { it.copy(bootState = BootState.Ready, snapshot = snapshot, busy = false) } },
+                onSuccess = { snapshot ->
+                    _uiState.update {
+                        it.copy(
+                            bootState = BootState.Ready,
+                            snapshot = snapshot,
+                            busy = false,
+                            statInspectionPath = null,
+                            statInspection = null,
+                            statInspectionBusy = false,
+                            statInspectionError = null,
+                        )
+                    }
+                },
                 onFailure = ::publishFailure,
             )
         }
@@ -112,6 +129,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                         bootState = BootState.Ready,
                         snapshot = result.snapshot,
                         busy = false,
+                            statInspectionPath = null,
+                            statInspection = null,
+                            statInspectionBusy = false,
+                            statInspectionError = null,
                     )
                 }
             }
@@ -129,6 +150,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                             bootState = BootState.Ready,
                             snapshot = snapshot,
                             busy = false,
+                            statInspectionPath = null,
+                            statInspection = null,
+                            statInspectionBusy = false,
+                            statInspectionError = null,
                         )
                     }
                 },
@@ -148,6 +173,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                             bootState = BootState.Ready,
                             snapshot = snapshot,
                             busy = false,
+                            statInspectionPath = null,
+                            statInspection = null,
+                            statInspectionBusy = false,
+                            statInspectionError = null,
                         )
                     }
                 },
@@ -167,6 +196,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                             bootState = BootState.Ready,
                             snapshot = snapshot,
                             busy = false,
+                            statInspectionPath = null,
+                            statInspection = null,
+                            statInspectionBusy = false,
+                            statInspectionError = null,
                         )
                     }
                 },
@@ -196,11 +229,60 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                             bootState = BootState.Ready,
                             snapshot = snapshot,
                             busy = false,
+                            statInspectionPath = null,
+                            statInspection = null,
+                            statInspectionBusy = false,
+                            statInspectionError = null,
                             travelTransition = transition,
                         )
                     }
                 },
                 onFailure = ::publishFailure,
+            )
+        }
+    }
+
+    fun inspectStatus(path: String) {
+        if (path.isBlank() || _uiState.value.statInspectionBusy) return
+        _uiState.update {
+            it.copy(
+                statInspectionPath = path,
+                statInspection = null,
+                statInspectionBusy = true,
+                statInspectionError = null,
+            )
+        }
+        viewModelScope.launch {
+            engine.inspectStatus(path).fold(
+                onSuccess = { inspection ->
+                    _uiState.update { current ->
+                        if (current.statInspectionPath == path) {
+                            current.copy(
+                                statInspection = inspection,
+                                statInspectionBusy = false,
+                                statInspectionError = null,
+                            )
+                        } else {
+                            current
+                        }
+                    }
+                },
+                onFailure = { failure ->
+                    val engineFailure = failure as? EngineStartException
+                        ?: PythonGameEngine.classifyFailure(failure)
+                    Log.e("TheGame", engineFailure.technicalDetail, engineFailure)
+                    _uiState.update { current ->
+                        if (current.statInspectionPath == path) {
+                            current.copy(
+                                statInspection = null,
+                                statInspectionBusy = false,
+                                statInspectionError = engineFailure.publicMessage,
+                            )
+                        } else {
+                            current
+                        }
+                    }
+                },
             )
         }
     }
