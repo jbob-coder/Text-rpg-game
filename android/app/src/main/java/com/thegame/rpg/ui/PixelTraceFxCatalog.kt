@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
  */
 object PixelTraceFxCatalog {
     const val TRACE_ECHO_AMBIENT_ID = "FX_TRACE_ECHO_AMBIENT"
+    const val SIGNAL_PULSE_ID = "FX_SIGNAL_PULSE"
 
     private val palette = mapOf(
         'C' to PixelColors.Cyan,
@@ -73,6 +74,69 @@ object PixelTraceFxCatalog {
         frame(index = 2, radius = 20),
         frame(index = 3, radius = 25),
     )
+
+    private fun signalPulseFrame(index: Int, radius: Int): PixelSprite {
+        val pixels = MutableList(64) { CharArray(64) { PixelSprite.TRANSPARENT_PIXEL } }
+
+        fun plot(x: Int, y: Int, key: Char) {
+            if (x in 0 until 64 && y in 0 until 64) pixels[y][x] = key
+        }
+
+        val centerX = 32
+        val centerY = 32
+        val edge = if (index < 3) 'C' else 'c'
+
+        // Controlled expanding pulse: sparse square-circle hybrid arcs stay crisp at native scale.
+        for (offset in -4..4) {
+            plot(centerX + offset, centerY - radius, edge)
+            plot(centerX + offset, centerY + radius, edge)
+            plot(centerX - radius, centerY + offset, edge)
+            plot(centerX + radius, centerY + offset, edge)
+        }
+
+        val diagonal = (radius * 0.72f).toInt()
+        listOf(
+            centerX - diagonal to centerY - diagonal,
+            centerX + diagonal to centerY - diagonal,
+            centerX - diagonal to centerY + diagonal,
+            centerX + diagonal to centerY + diagonal,
+        ).forEach { (x, y) ->
+            plot(x, y, edge)
+            plot(x + 1, y, edge)
+        }
+
+        // Bright source core peaks early and fades as the ring expands.
+        val core = when (index) {
+            0, 1 -> 2
+            2, 3 -> 1
+            else -> 0
+        }
+        for (y in -core..core) {
+            for (x in -core..core) {
+                plot(centerX + x, centerY + y, if (index < 4) 'C' else 'c')
+            }
+        }
+
+        return PixelSprite(
+            assetId = "${SIGNAL_PULSE_ID}_FRAME_${index + 1}",
+            width = 64,
+            height = 64,
+            palette = palette,
+            rows = pixels.map { it.concatToString() },
+        )
+    }
+
+    val signalPulseFrames: List<PixelSprite> = listOf(
+        signalPulseFrame(index = 0, radius = 4),
+        signalPulseFrame(index = 1, radius = 8),
+        signalPulseFrame(index = 2, radius = 13),
+        signalPulseFrame(index = 3, radius = 19),
+        signalPulseFrame(index = 4, radius = 25),
+        signalPulseFrame(index = 5, radius = 30),
+    )
+
+    fun signalPulseForScene(sceneId: String?): List<PixelSprite>? =
+        if (sceneId == "POWER_FIRST_LIVE_USE") signalPulseFrames else null
 
     fun forScene(sceneId: String?): List<PixelSprite>? =
         when (sceneId) {
