@@ -91,9 +91,12 @@ fun PlayerAvatarPanel(
     modifier: Modifier = Modifier,
     compact: Boolean = false,
 ) {
-    val equippedSlots = equipment
+    val equippedOverlays = equipment
         .filter { it.equipped }
         .associateBy { it.slot }
+        .values
+        .mapNotNull { slot -> PixelAssetCatalog.equipmentOverlay(slot.itemId, slot.slot) }
+        .sortedBy { it.zOrder }
     val traceStrainFrames = PixelTraceStrainCatalog.avatarForConditions(
         conditions.map { it.id }.toSet()
     )
@@ -154,82 +157,11 @@ fun PlayerAvatarPanel(
                 drawPixelSprite(PixelAssetCatalog.playerFrontBase, px, ox, oy)
                 drawPixelSprite(PixelAssetCatalog.playerHairTechnicalPlaceholder, px, ox, oy)
 
-                // Current authored equipment renders from exact item ID + authoritative slot.
-                // Unknown/future equipment never inherits another item's production art.
-                listOf("body", "neck", "hands", "ring_1").forEach { slotName ->
-                    equippedSlots[slotName]?.let { slot ->
-                        PixelAssetCatalog.equipmentLayer(slot.itemId, slot.slot)?.let { sprite ->
-                            drawPixelSprite(sprite, px, ox, oy)
-                        }
-                    }
-                }
-
-                if (
-                    "hands" in equippedSlots &&
-                    PixelAssetCatalog.equipmentLayer(
-                        equippedSlots["hands"]?.itemId,
-                        "hands",
-                    ) == null
-                ) {
-                    block(5, 30, 4, 5, Color(0xFF27343B))
-                    block(23, 30, 4, 5, Color(0xFF27343B))
-                    block(5, 33, 4, 2, Color(0xFF53656E))
-                    block(23, 33, 4, 2, Color(0xFF53656E))
-                }
-                if ("head" in equippedSlots) {
-                    block(10, 2, 12, 4, Color(0xFF4A5960))
-                    block(11, 1, 10, 2, Color(0xFF36454C))
-                    block(10, 6, 3, 3, Color(0xFF4A5960))
-                    block(19, 6, 3, 3, Color(0xFF4A5960))
-                }
-                if ("legs" in equippedSlots) {
-                    block(10, 29, 6, 14, Color(0xFF3D4D55))
-                    block(17, 29, 6, 14, Color(0xFF3D4D55))
-                    block(15, 31, 2, 3, PixelColors.Cyan)
-                }
-                if ("feet" in equippedSlots) {
-                    block(8, 43, 7, 4, Color(0xFF20282D))
-                    block(18, 43, 7, 4, Color(0xFF20282D))
-                    block(8, 46, 7, 1, PixelColors.Gold)
-                    block(18, 46, 7, 1, PixelColors.Gold)
-                }
-                if (
-                    "neck" in equippedSlots &&
-                    PixelAssetCatalog.equipmentLayer(
-                        equippedSlots["neck"]?.itemId,
-                        "neck",
-                    ) == null
-                ) {
-                    block(15, 13, 2, 2, PixelColors.Gold)
-                    block(15, 15, 2, 2, Color(0xFF7E6A42))
-                }
-                if (
-                    "ring_1" in equippedSlots &&
-                    PixelAssetCatalog.equipmentLayer(
-                        equippedSlots["ring_1"]?.itemId,
-                        "ring_1",
-                    ) == null
-                ) {
-                    block(5, 33, 1, 1, PixelColors.Gold)
-                }
-                if ("ring_2" in equippedSlots) {
-                    block(26, 33, 1, 1, PixelColors.Cyan)
-                }
-                if ("accessory_1" in equippedSlots) {
-                    block(10, 27, 12, 2, Color(0xFF6B5942))
-                    block(21, 28, 4, 7, Color(0xFF554632))
-                }
-                if ("accessory_2" in equippedSlots) {
-                    block(7, 19, 1, 14, PixelColors.Gold)
-                    block(24, 19, 1, 14, PixelColors.Gold)
-                }
-                if ("main_hand" in equippedSlots) {
-                    block(27, 22, 2, 18, PixelColors.Gold)
-                    block(26, 22, 4, 3, PixelColors.Gold)
-                }
-                if ("off_hand" in equippedSlots) {
-                    block(2, 22, 3, 14, Color(0xFF4B6773))
-                    block(2, 21, 5, 3, PixelColors.Cyan)
+                // Every equipped visual is a transparent 32x48 paper-doll overlay aligned to
+                // the same body origin. Unmapped equipment remains logically equipped but receives
+                // no invented placeholder geometry.
+                equippedOverlays.forEach { overlay ->
+                    drawPixelSprite(overlay.sprite, px, ox, oy)
                 }
 
                 traceStrainFrames?.getOrNull(traceStrainFrameIndex)?.let { strainFx ->
@@ -250,9 +182,8 @@ fun PlayerAvatarPanel(
             style = MaterialTheme.typography.labelLarge,
         )
 
-        val visibleGear = equipment
-            .filter { it.equipped }
-            .map { slotDisplayNameForAvatar(it.slot) }
+        val visibleGear = equippedOverlays
+            .map { overlay -> slotDisplayNameForAvatar(overlay.slot) }
         if (visibleGear.isNotEmpty()) {
             Spacer(modifier = Modifier.height(4.dp))
             Text(

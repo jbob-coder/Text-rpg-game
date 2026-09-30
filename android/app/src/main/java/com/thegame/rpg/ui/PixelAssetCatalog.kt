@@ -38,6 +38,19 @@ data class PixelSprite(
     }
 }
 
+data class PixelPaperDollOverlay(
+    val itemId: String,
+    val slot: String,
+    val zOrder: Int,
+    val sprite: PixelSprite,
+) {
+    init {
+        require(sprite.width == 32 && sprite.height == 48) {
+            "$itemId/$slot overlay must use the 32x48 player rig canvas"
+        }
+    }
+}
+
 object PixelAssetCatalog {
     const val PLAYER_FRONT_BASE_ID = "PLAYER_GAMEPLAY_FRONT_BASE"
     const val PLAYER_HAIR_PLACEHOLDER_ID = "PLAYER_HAIR_TECH_PLACEHOLDER"
@@ -876,14 +889,47 @@ object PixelAssetCatalog {
         deadRelaySignalLost,
     )
 
-    fun equipmentLayer(itemId: String?, slot: String): PixelSprite? =
-        when {
-            itemId == "ITEM_DEPOT_JACKET" && slot == "body" -> depotJacketPaperdoll
-            itemId == "ITEM_WORK_GLOVES" && slot == "hands" -> workGlovesPaperdoll
-            itemId == "ITEM_SIGNAL_RING" && slot == "ring_1" -> signalRingPaperdoll
-            itemId == "ITEM_COURIER_NECKTAG" && slot == "neck" -> courierNeckTagPaperdoll
-            else -> null
+    /**
+     * Exact paper-doll overlays for the front-facing 32x48 player rig.
+     *
+     * Every layer shares the body's coordinate space and ground pivot. The UI must render
+     * only entries from this registry; equipped items without a registered overlay remain
+     * logically equipped but do not receive invented placeholder geometry.
+     */
+    val equipmentOverlays: List<PixelPaperDollOverlay> = listOf(
+        PixelPaperDollOverlay(
+            itemId = "ITEM_COURIER_NECKTAG",
+            slot = "neck",
+            zOrder = 10,
+            sprite = courierNeckTagPaperdoll,
+        ),
+        PixelPaperDollOverlay(
+            itemId = "ITEM_DEPOT_JACKET",
+            slot = "body",
+            zOrder = 20,
+            sprite = depotJacketPaperdoll,
+        ),
+        PixelPaperDollOverlay(
+            itemId = "ITEM_WORK_GLOVES",
+            slot = "hands",
+            zOrder = 30,
+            sprite = workGlovesPaperdoll,
+        ),
+        PixelPaperDollOverlay(
+            itemId = "ITEM_SIGNAL_RING",
+            slot = "ring_1",
+            zOrder = 40,
+            sprite = signalRingPaperdoll,
+        ),
+    )
+
+    fun equipmentOverlay(itemId: String?, slot: String): PixelPaperDollOverlay? =
+        equipmentOverlays.firstOrNull { overlay ->
+            overlay.itemId == itemId && overlay.slot == slot
         }
+
+    fun equipmentLayer(itemId: String?, slot: String): PixelSprite? =
+        equipmentOverlay(itemId, slot)?.sprite
 
     fun relayStateSprite(relayState: String?): PixelSprite? =
         when (relayState) {

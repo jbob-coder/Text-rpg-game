@@ -294,6 +294,36 @@ class GameScreenTest {
     }
 
     @Test
+    fun unmappedEquippedItemDoesNotInventVisibleAvatarLayer() {
+        val equippedSnapshot = snapshot.copy(
+            inventory = GameInventory(
+                equipment = listOf(
+                    GameEquipmentSlot(
+                        slot = "head",
+                        equipped = true,
+                        itemId = "ITEM_FUTURE_HELMET",
+                        name = "Future helmet",
+                    ),
+                )
+            )
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                GameScreen(
+                    snapshot = equippedSnapshot,
+                    busy = false,
+                    onChoice = {},
+                    onNavigate = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        composeRule.onAllNodesWithTag("avatar-visible-gear").assertCountEquals(0)
+    }
+
+    @Test
     fun projectedEchoStrainConditionActivatesVisibleAvatarFx() {
         val strainedSnapshot = snapshot.copy(
             conditions = listOf(

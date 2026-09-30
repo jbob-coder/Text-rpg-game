@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-27 17:34 AST  
+Updated: 2026-09-30 19:27 AST  
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -309,6 +309,17 @@ The UI must not become the authoritative rules engine.
 - RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
 - DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
 - COMPLETED_AT: —
+### Avatar overlay rig contract closure
+- STATUS: `VERIFIED_IMPLEMENTATION`
+- BRANCH: `fix/avatar-overlay-rig-contract`
+- PR: #10 — `Enforce character-oriented paper-doll overlays`.
+- VERIFIED IMPLEMENTATION HEAD: `5097011f2cb15511e9695edc5475f2fd69c5f655`.
+- CONTRACT: visible character equipment is rendered only from explicit `itemId + slot + zOrder + 32x48 sprite` paper-doll mappings sharing the base character origin. Equipped items without an authored overlay remain logically equipped but render no invented placeholder geometry.
+- VERIFIED GATE: Android Pixel Client run 215 / ID `36778523620` completed successfully for the exact implementation head: Python 301/301; Android unit tests, Compose instrumentation compilation, debug APK assembly/package checks passed; API 35 x86_64 connected emulator completed 15 tests with 0 failures.
+- APK SHA-256: `8e9f08f7281367621c9db05862215a041f0d519b5531348b5e2cac50345c416c`.
+- PHYSICAL QA: Galaxy A03 visual review and native-scale art approval remain separate.
+- NEXT: build product-facing Character/Equipment presentation on this contract; do not reintroduce generic slot geometry or bind held props without explicit player-safe presentation state.
+
 ## Known technical follow-ups
 
 These are not part of the Android black-screen fix unless directly implicated:
