@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "batch_id": "BATCH_001",
+  "wave_id": "B001-WAVE-E-TRACE-FX",
+  "status": "INTEGRATED_096_097_098_099_100",
+  "assets": [
+    {
+      "number": 96,
+      "asset_id": "FX_TRACE_ECHO_AMBIENT",
+      "asset_family": "trace_fx",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "native_canvas": {
+        "width": 64,
+        "height": 64,
+        "frames": 4,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelTraceFxCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "state_contract": "FX eligibility is selected only from player-facing GameSnapshot.sceneId values. The FX never reads hidden story flags, computes Trace success, or changes gameplay state.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36732669582,
+        "head_sha": "3ac499ba229f97ea5363a151d7c74729bdfd61fc",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "12/12 connected tests passed, 0 failures",
+        "apk_sha256": "a66d2c1a94eec6cd8fa6d12d5b453f1f5646af62a9701dd5c221745e564f3cf7",
+        "limitation": "Automated state-binding and runtime rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "The ambient loop is presentation-only and does not replace the stronger authored scene-state overlays."
+      ]
+    },
+    {
+      "number": 97,
+      "asset_id": "FX_SIGNAL_PULSE",
+      "asset_family": "trace_fx",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "native_canvas": {
+        "width": 64,
+        "height": 64,
+        "frames": 6,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelTraceFxCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "state_contract": "Visible only for player-facing sceneId POWER_FIRST_LIVE_USE, where the authored content executes TECHNIQUE_SIGNAL_PULSE. The UI never reads technique-use flags or computes gameplay effects.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36734148687,
+        "head_sha": "d83eda284f0f3e390beb16d4e8d27a137ba791ef",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "12/12 connected tests passed, 0 failures",
+        "apk_sha256": "4f7321cf429133d2ac35ddbe22a1b884dc12f052eaa2aa1e3ec8cfb5cb01de4b",
+        "limitation": "Automated state-binding and runtime rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "Signal Pulse replaces the ambient Trace Echo animation only in POWER_FIRST_LIVE_USE to avoid stacked FX clutter."
+      ]
+    },
+    {
+      "number": 98,
+      "asset_id": "FX_DIRECTIONAL_TRACE",
+      "asset_family": "trace_fx",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "native_canvas": {
+        "width": 64,
+        "height": 64,
+        "frames": 6,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelTraceFxCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "state_contract": "Selected from the player-facing scene ID TRACE_DIRECTIONAL_DISCOVERY_RESULT. Presentation does not calculate gameplay results.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36735143906,
+        "head_sha": "9ac9f6417efabd963a3351c182a1b3d2ac584397",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "12/12 connected tests passed, 0 failures",
+        "apk_sha256": "d02adae48ce1a9e0c5732900cbfa6d3186288d39ab700354a9cf95da4062e751",
+        "limitation": "Automated runtime gates are green; physical Galaxy A03 and native-scale visual QA remain separate."
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "The effect presents direction without adding destination text."
+      ]
+    },
+    {
+      "number": 99,
+      "asset_id": "FX_TRACE_STRAIN",
+      "asset_family": "trace_fx",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "native_canvas": {
+        "avatar": {
+          "width": 32,
+          "height": 48,
+          "frames": 4
+        },
+        "portrait": {
+          "width": 64,
+          "height": 64,
+          "frames": 4
+        },
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelTraceStrainCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelComponents.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt"
+      ],
+      "integration_targets": [
+        "Android player avatar condition overlay",
+        "Future dedicated portrait surface"
+      ],
+      "state_contract": "Avatar FX is selected only from projected GameSnapshot.conditions containing COND_ECHO_STRAIN. No scene inference or raw rule-state lookup is used.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36736526973,
+        "head_sha": "5a1f966f469572cc6242573595392d702b11eb33",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "13/13 connected tests passed, 0 failures",
+        "apk_sha256": "e26fe7700956ab1e22aafa9c0782a0c984186ff88609a673be6f89da945cb366",
+        "limitation": "Automated condition binding and avatar rendering are green; physical Galaxy A03, native-scale art review, and dedicated portrait-surface integration remain separate."
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "The 64x64 portrait master is produced but portrait-surface integration is deferred because the current client has no dedicated portrait renderer."
+      ]
+    },
+    {
+      "number": 100,
+      "asset_id": "UI_MAP_TRAVEL_TRANSITION",
+      "asset_family": "ui_transition",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "frames": 8,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelMapTravelTransition.kt",
+        "android/app/src/main/java/com/thegame/rpg/GameViewModel.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt",
+        "android/app/src/main/java/com/thegame/rpg/MainActivity.kt"
+      ],
+      "integration_targets": [
+        "Android full-screen post-travel transition overlay"
+      ],
+      "state_contract": "GameViewModel emits TravelTransitionUiState only after engine.travel() succeeds and returns a changed player-facing location. The transition is never created from a button press alone and never fabricates arrival before authoritative state changes.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36738135641,
+        "head_sha": "ab6da2fcb3e60693240fd27c701e1e2b0e388080",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "14/14 connected tests passed, 0 failures",
+        "apk_sha256": "26e6998c1e5274f3ac399d7dc1f4b55354c35c132730d676de31a5dd95fdbf00",
+        "limitation": "Automated success-only travel binding and Compose rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "Transition is intentionally presentation-only; route reachability, time cost, destination and success remain engine-owned."
+      ]
+    }
+  ]
+}

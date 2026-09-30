@@ -179,3 +179,16 @@ A visual addition is acceptable only when it:
 4. remains readable and touch-usable on Android;
 5. has a repeatable asset/source path rather than existing only as an ephemeral chat image;
 6. can be replaced or evolved without rewriting gameplay rules.
+
+
+## Production asset documentation
+
+Detailed production rules live under `docs/assets/` and are normative for new pixel-art work:
+
+- `docs/assets/PIXEL_ASSET_MASTER_PLAN.md` — source resolutions, paper-doll rig, map/scene/item standards, naming, lifecycle and QA.
+- `docs/assets/CHARACTER_PIXEL_BLUEPRINTS.md` — player construction and canonical Tamsin blueprint.
+- `docs/assets/ASSET_BATCH_001_001-100.md` — first exact 100-unit production batch.
+- `docs/assets/REFERENCE_TO_BLUEPRINT_PIPELINE.md` — generated-reference to native-pixel reconstruction process.
+- `docs/assets/ASSET_MANIFEST_SCHEMA.md` — state binding, provenance and QA manifest contract.
+
+Generated/reference imagery is never accepted directly as the final shipped asset. It must be reconstructed into a documented native pixel master and pass the visual acceptance gate above.

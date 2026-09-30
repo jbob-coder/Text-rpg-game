@@ -20,8 +20,8 @@ Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPL
 ## Current repository baseline
 
 - Repository: `jbob-coder/Text-rpg-game`
-- Current Android integration branch: `feature/android-pixel-client-v1`
-- Current verified Android HEAD: `510851cc165702fbe19ef005083a03cbcd00a9f3`
+- Current Android integration branch: `integration/android-open-world-v1-reconcile`
+- Current verified pixel-asset runtime parent: `1c7e54e548ab3c28819af0b85ae8cbba53aff827` (PR #7)
 - Stabilization branch retained: `fix/v6-runtime-boundaries`
 - Stabilization baseline before continuity work: `fcfe8115a72eb07036fa4e74a61a0094eaa3ff10`
 - V6 parent: `integration/rules-ability-v6-reconcile@7f5f104fb839068bdfaf5cec72f37129ae20d463`
@@ -245,6 +245,70 @@ The UI must not become the authoritative rules engine.
 - RESULT: root `AGENTS.md`, this task register, and README entrypoint were written to `fix/v6-runtime-boundaries` and fetched back from GitHub for verification.
 - COMPLETED_AT: `2026-09-27 14:21 AST`
 
+
+
+## Pixel asset production documentation
+
+### TASK M-004 — Pixel asset production system and Batch 001
+- STATUS: `DONE`
+- BRANCH: `docs/pixel-asset-production-plan-v1`
+- RESULT:
+  - pixel asset master production rules documented;
+  - detailed player paper-doll and NPC_TAMSIN blueprints documented;
+  - full v1 roadmap contains five exact 100-unit batches, 500 unique planned asset units total;
+  - Batch 001 covers current playable content; Batches 002–005 cover technical/non-canon character, equipment, world, UI/FX/accessibility expansion frameworks;
+  - generated-reference -> reverse-engineered pixel blueprint pipeline documented;
+  - machine-readable manifest/state-binding/QA schema documented;
+  - mechanical verification confirms IDs 001–500 are continuous with no missing or duplicate numbers and no duplicate stable asset IDs;
+  - visual bible linked to the new production documents.
+- IMPORTANT: this task completes the v1 500-unit documentation/planning baseline only. It does not claim that any of the 500 assets have been generated, reconstructed, integrated or verified.
+- COMPLETED_AT: `NOT_RECORDED`
+
+### TASK M-005 — Produce Batch 001 assets
+- STATUS: `IN_PROGRESS`
+- DEPENDS_ON: M-004
+- VERIFIED STATE:
+  - complete v1 baseline: 500 unique planned units;
+  - first broad concept board persisted as `REF_BATCH001_CONCEPT_BOARD_A` and audited as style-only, not canonical geometry;
+  - Wave A reconstruction packet completed for assets 001, 002, 018, 021 and 022;
+  - Wave A machine-readable manifest completed;
+  - production branch: `feature/pixel-asset-wave-a`;
+  - active reconciliation draft PR: #7; PR #6 is closed as superseded;
+  - `PLAYER_GAMEPLAY_FRONT_BASE`, `ITEM_DEPOT_JACKET_ICON`, and `ITEM_DEPOT_JACKET_PAPERDOLL` are implemented as source-native pixel maps and integrated into Compose;
+  - generated assets remain text-native/diffable rather than opaque binary blobs; PNG export can derive from the same authoritative pixel maps later;
+  - exact jacket mapping requires `ITEM_DEPOT_JACKET` + `body` slot, preventing unrelated chest items from inheriting its art;
+  - temporary player hair is explicitly technical/non-canon and excluded from the production asset set;
+  - PR #6 verification at `0f6e3101753901ded43794ef3a1b4321b149d1c9`: Python 300/300; Android unit/assemble gate passed; API 35 x86_64 emulator completed 7/7 connected tests with 0 failures; APK SHA-256 `9ba444a729e83a090dc8b0721546b6f3f1291100a1cd043dbeec04685a7ea8b3`;
+  - `PLAYER_BODYFRAME_A_TURNAROUND` and `NPC_TAMSIN_TURNAROUND` remain `BRIEF_LOCKED`; mixed generated boards remain rejected for canonical geometry.
+  - Batch 001 assets 023–033 are now implemented/integrated: Work Gloves icon/layer, Signal Ring icon/layer, Courier Neck Tag icon/layer, Maintenance Seal icon, Dead Relay intact/opened/damaged/signal-lost visuals.
+  - relay visual state crosses the Python→Android boundary only as `visuals.relay_state = null|intact|opened|damaged|signal_lost`; Compose never reads raw story flags.
+  - exact-head integration evidence at `57151051ea2e0ac98810e5ee95cea9de1a2a4e97`, workflow `36378000460`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 8/8 with 0 failures; APK SHA-256 `9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3`.
+  - all 9/9 currently authored named locations now resolve to source-native 128x64 scene masters: Platform Nine, Relay Workbench, Gate Twelve, Service Tunnel, Quiet Stair, Trace Chamber, Depot Plaza, Municipal Archive, Workshop Row;
+  - Batch 001 state overlays 046/048/051 are integrated: Gate Twelve Echo Active, Service Tunnel Aftershock, Trace Chamber Training;
+  - scene-state overlays are selected only from already player-facing `GameSnapshot.sceneId`; Compose does not read raw story flags;
+  - exact-head scene/overlay evidence at `1c7e54e548ab3c28819af0b85ae8cbba53aff827`, workflow `36384772701`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 10/10 with 0 failures; APK SHA-256 `18316402c65e9b614b80fa542817b125bed8a38be44eaf3ca89d187623f1897f`;
+  - Batch 001 UI/map assets 076–095 are integrated: seven navigation icons, four resource icons, four quest-category icons, and five player-safe map markers;
+  - navigation/resource/quest icons remain decorative and consume only existing Compose/GameSnapshot state; map marker current/reachable/discovered semantics remain projection-owned;
+  - exact-head UI/map evidence at `61cd0ecba6d661522ef59e519f26b8e1697a113c`, workflow `36444738131`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 11/11 with 0 failures; APK SHA-256 `338f5024dfa0a07d67bfa3517bf19d802adc5ef58052abac77b7ee226d5370ab`;
+  - the first UI-icon emulator gate correctly caught a phone-layout regression where horizontal icons pushed More off-screen; the navigation composition was compacted vertically and the exact rerun passed.
+  - asset 039 `UI_ITEM_QUALITY_FRAMES` is integrated: separate 32x32 transparent standard/uncommon frame masters overlay existing item art without recoloring it. Inventory quality crosses the player-safe bridge only from explicit authored item-definition metadata; absent/unsupported values render no frame rather than being inferred. Exact-head evidence at `5bb0096d7570dca04a4eec3c6528985d84e23145`, workflow `36739855690`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 15/15 with 0 failures; APK SHA-256 `584727a5bd20c7a8a2e542aeb0807abd564e06bc9346b6e61f21bee2a6a5027a`.
+  - asset 040 `UI_EQUIPMENT_SLOT_ICON_SET` is integrated and formally evidenced: 12 distinct 24x24 source-native slot silhouettes map only from the 12 projected semantic slot IDs and are wired into Character/Inventory. The exact-head gate at `5bb0096d7570dca04a4eec3c6528985d84e23145`, workflow `36739855690`, includes its unit and Compose rendering tests: Python 301/301; Android unit/instrumentation/assemble/package gates passed; emulator 15/15 with 0 failures; APK SHA-256 `584727a5bd20c7a8a2e542aeb0807abd564e06bc9346b6e61f21bee2a6a5027a`.
+  - asset 053 `DISTRICT_PLAZA_BLACKOUT_SCENE` is integrated: a transparent 128x64 blackout/emergency-light overlay bound only to player-facing `sceneId = DISTRICT_HUB`, whose authored narrative explicitly says Depot Plaza remains under emergency lighting. Exact-head evidence at `a9aa658580bfb659fd6b499fb6b59494db7a60a9`, workflow `36742882890`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 15/15 with 0 failures; APK SHA-256 `cfc83d9cad0550001bd71c4243f78c5c763bed125509e0f1c51b4b07e26bcc89`.
+  - asset 044 `RELAY_WORKBENCH_RELAY_OPEN_SCENE` is integrated: a transparent 128x64 inspection-state overlay bound only to `GameSnapshot.visuals.relayState` values `opened`, `damaged`, or `signal_lost` while at `RELAY_WORKBENCH`. Exact casing state remains owned by relay prop assets 031–033. Exact-head evidence at `025a407b83568ebf3d4706737d75ae760a92a19f`, workflow `36754045934`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 15/15 with 0 failures; APK SHA-256 `3c8cdfd5b4c6f5fd563bedbcbc6f488ca6d42e3a259ab6cec539158d38cfc23e`.
+  - assets 062/063 `EMERGENCY_LIGHT_OVERLAY` / `BLACKOUT_SHADOW_OVERLAY` are integrated: two reusable 128x64 transparent masters consumed by asset 053 instead of duplicated shadow/light pixels. Exact-head evidence at `e388d9333ddb18228d6886f283a70047627b65b5`, workflow `36755094616`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 15/15 with 0 failures; APK SHA-256 `31067528314dac9e5052f48ce00a97a75d68518b602664dbc80d816a88eca75f`.
+  - assets 072–075 are integrated: reusable Archive shelf, Archive terminal, Workshop bench and District notice-board masters are source-native and placed through the shared `PixelEnvironmentPropCatalog`. Exact-head evidence at `96831c00614cb4932a5ef39eb3de4cfb4f7b4e43`, workflow `36756037495`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 15/15 with 0 failures; APK SHA-256 `02c9d366889a871d06f7cc8257be73fb590461025eba1b4d773f400b061fc989`.
+  - assets 067–071 are promoted INTEGRATED: reusable relay workbench, Gate Twelve door, tunnel pipe/cable sets and Trace Chamber apparatus masters render through the scene-pixel placement system using only player-facing location IDs. Exact-head evidence at `cedd6b5354e9890623bb9fdd1bef7fcb670e4463`, workflow `36757598567` / run 203: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 15/15 with 0 failures; APK SHA-256 `16f44cc92c463b004480c0713a05b65d0530c856b2d2e86a02847d6f6161a7ef`.
+  - asset 096 `FX_TRACE_ECHO_AMBIENT` is integrated: four deterministic 64x64 transparent frames, animated in `SceneIllustration`, selected only from player-facing Trace-related `sceneId` values. Exact-head evidence at `3ac499ba229f97ea5363a151d7c74729bdfd61fc`, workflow `36732669582`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 12/12 with 0 failures; APK SHA-256 `a66d2c1a94eec6cd8fa6d12d5b453f1f5646af62a9701dd5c221745e564f3cf7`.
+  - asset 097 `FX_SIGNAL_PULSE` is integrated: six deterministic 64x64 expanding-pulse frames, overriding ambient Trace FX only in player-facing scene `POWER_FIRST_LIVE_USE`. Exact-head evidence at `d83eda284f0f3e390beb16d4e8d27a137ba791ef`, workflow `36734148687`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 12/12 with 0 failures; APK SHA-256 `4f7321cf429133d2ac35ddbe22a1b884dc12f052eaa2aa1e3ec8cfb5cb01de4b`.
+  - asset 098 `FX_DIRECTIONAL_TRACE` is integrated: six deterministic 64x64 frames that collapse a broad sensing sector into a directional line only in player-facing scene `TRACE_DIRECTIONAL_DISCOVERY_RESULT`. Exact-head evidence at `9ac9f6417efabd963a3351c182a1b3d2ac584397`, workflow `36735143906`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 12/12 with 0 failures; APK SHA-256 `d02adae48ce1a9e0c5732900cbfa6d3186288d39ab700354a9cf95da4062e751`.
+  - Batch 001 now has 66/100 units integrated/accepted after promoting 067–071; assets 039/040, 044, 053, 062/063, 067–075 and 096–100 are green/evidenced.
+  - asset 099 `FX_TRACE_STRAIN` is integrated: four 32x48 avatar-overlay frames plus four 64x64 portrait-overlay masters. The avatar overlay activates only from projected `GameSnapshot.conditions` containing `COND_ECHO_STRAIN`; the portrait master is produced but its renderer remains deferred because the current client has no dedicated portrait surface. Exact-head evidence at `5a1f966f469572cc6242573595392d702b11eb33`, workflow `36736526973`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 13/13 with 0 failures; APK SHA-256 `e26fe7700956ab1e22aafa9c0782a0c984186ff88609a673be6f89da945cb366`.
+  - asset 100 `UI_MAP_TRAVEL_TRANSITION` is integrated: eight deterministic 128x64 route-preserving frames rendered as a full-screen Compose overlay. The ViewModel emits its transient `TravelTransitionUiState` only inside successful `engine.travel()` handling and only when the confirmed location changes; button press/busy state alone cannot trigger it. Exact-head evidence at `ab6da2fcb3e60693240fd27c701e1e2b0e388080`, workflow `36738135641`: Python 301/301; Android unit/instrumentation/assemble/package gates passed; API 35 x86_64 emulator 14/14 with 0 failures; APK SHA-256 `26e6998c1e5274f3ac399d7dc1f4b55354c35c132730d676de31a5dd95fdbf00`.
+- LIMITATION: automated Compose/runtime coverage proves the catalog/state binding and tested client behavior, but native-scale art review and physical Galaxy A03 visual QA are not yet claimed.
+- NEXT: assets 064–066 are now implemented as candidate presentation-only signage, ambient decals and a default depot-door landmark. Validate them on an exact-head workflow; if green, promote all three and continue with remaining low-risk environment modules/atlas 058–061 before returning to character-reference-blocked work. Do not invent door/access state in Compose. Do not unblock player/Tamsin canonical geometry by approximation. Physical Galaxy A03 visual QA remains a separate acceptance gate.
+- RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
+- DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
+- COMPLETED_AT: —
 ## Known technical follow-ups
 
 These are not part of the Android black-screen fix unless directly implicated:
@@ -279,4 +343,4 @@ Before ending meaningful work, update:
 
 ## Immediate next action
 
-Promote and verify `feature/android-open-world-v1` on top of the green Android baseline without losing the verified Save/Continue and scroll/navigation fixes. Then run full Python + Android build gates and a selective emulator smoke for free-roam map travel. After that, produce a controlled downloadable APK artifact for physical-device testing.
+Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified slices. Assets 039, 040, 044, 053, 062/063, 072–075 and 096–100 are green and evidenced. Candidate assets 067–071 are implemented as reusable presentation-only infrastructure props and now require an exact-head gate. Do not block implementation on rejected mixed character references. Physical Galaxy A03 visual QA remains a separate acceptance gate before final visual approval.

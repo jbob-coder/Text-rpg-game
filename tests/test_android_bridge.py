@@ -29,7 +29,7 @@ class AndroidBridgeTests(unittest.TestCase):
 
         view = session.scene_view()
 
-        self.assertEqual({"scene", "status", "inventory", "quests", "map", "meta"}, set(view))
+        self.assertEqual({"scene", "status", "inventory", "quests", "map", "visuals", "meta"}, set(view))
         self.assertIn("id", view["scene"])
         self.assertIn("title", view["scene"])
         self.assertIn("body", view["scene"])
@@ -43,6 +43,32 @@ class AndroidBridgeTests(unittest.TestCase):
 
         leaked = FORBIDDEN_AUTHORED_KEYS.intersection(set(walk_keys(view)))
         self.assertEqual(set(), leaked)
+
+    def test_relay_visual_projection_tracks_player_visible_story_state(self):
+        session = create_session(CONTENT)
+
+        initial = session.scene_view()
+        self.assertIsNone(initial["visuals"]["relay_state"])
+
+        intact = session.choose("TAKE_DEAD_RELAY")
+        self.assertEqual("intact", intact["visuals"]["relay_state"])
+
+        opened = session.choose("USE_MAINTENANCE_SEAL")
+        self.assertEqual("opened", opened["visuals"]["relay_state"])
+
+        damaged_session = create_session(CONTENT)
+        damaged_session.choose("TAKE_DEAD_RELAY")
+        damaged_session.state.flags["relay.casing_damaged"] = True
+        damaged = damaged_session.scene_view()
+        self.assertEqual("damaged", damaged["visuals"]["relay_state"])
+
+        damaged_session.state.flags["relay.signal_lost"] = True
+        lost = damaged_session.scene_view()
+        self.assertEqual("signal_lost", lost["visuals"]["relay_state"])
+
+        self.assertNotIn("flags", lost)
+        self.assertNotIn("relay.casing_damaged", set(walk_keys(lost)))
+        self.assertNotIn("relay.signal_lost", set(walk_keys(lost)))
 
     def test_quest_projection_exposes_category_without_authored_effects(self):
         session = create_session(CONTENT)
@@ -96,7 +122,7 @@ class AndroidBridgeTests(unittest.TestCase):
         self.assertEqual("TRAVEL_ERROR", caught.exception.code)
         self.assertEqual(before, session.state.snapshot())
 
-    def test_inventory_projection_exposes_items_and_slots_without_modifiers(self):
+    def test_inventory_projection_exposes_items_slots_and_explicit_quality_without_modifiers(self):
         session = create_session(CONTENT)
 
         view = session.scene_view()
@@ -105,8 +131,15 @@ class AndroidBridgeTests(unittest.TestCase):
             item for item in view["inventory"]["items"]
             if item["id"] == "ITEM_MAINTENANCE_SEAL"
         )
+        signal_ring = next(
+            item for item in view["inventory"]["items"]
+            if item["id"] == "ITEM_SIGNAL_RING"
+        )
         self.assertEqual(1, maintenance_seal["quantity"])
+        self.assertIsNone(maintenance_seal["quality"])
+        self.assertEqual("uncommon", signal_ring["quality"])
         self.assertTrue(all("modifiers" not in entry for entry in view["inventory"]["equipment"]))
+        self.assertTrue(all("modifiers" not in entry for entry in view["inventory"]["items"]))
 
     def test_validated_cheats_mutate_only_through_whitelist(self):
         session = create_session(CONTENT)

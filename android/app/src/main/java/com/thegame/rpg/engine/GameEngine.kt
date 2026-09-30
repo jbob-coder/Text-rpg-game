@@ -61,6 +61,7 @@ data class GameInventoryItem(
     val quantity: Int,
     val equippable: Boolean = false,
     val slot: String? = null,
+    val quality: String? = null,
 )
 
 data class GameEquipmentSlot(
@@ -74,6 +75,10 @@ data class GameEquipmentSlot(
 data class GameInventory(
     val items: List<GameInventoryItem> = emptyList(),
     val equipment: List<GameEquipmentSlot> = emptyList(),
+)
+
+data class GameVisuals(
+    val relayState: String? = null,
 )
 
 data class GameQuestObjective(
@@ -126,6 +131,7 @@ data class GameSnapshot(
     val inventory: GameInventory = GameInventory(),
     val quests: List<GameQuest> = emptyList(),
     val worldMap: GameWorldMap = GameWorldMap(),
+    val visuals: GameVisuals = GameVisuals(),
     val turn: Int,
     val timeMinutes: Int,
     val location: String,
@@ -271,6 +277,7 @@ internal object BridgeSnapshotMapper {
                 quantity = integer(value["quantity"], "inventory.items[$index].quantity"),
                 equippable = optionalBoolean(value["equippable"]) ?: false,
                 slot = optionalText(value["slot"]),
+                quality = optionalText(value["quality"]),
             )
         }
         val equipmentSlots = optionalList(
@@ -349,6 +356,14 @@ internal object BridgeSnapshotMapper {
             edges = mapEdges,
         )
 
+        val visualsPayload = optionalObjectMap(payload["visuals"], "visuals")
+        val relayState = optionalText(visualsPayload["relay_state"])
+        val allowedRelayStates = setOf("intact", "opened", "damaged", "signal_lost")
+        if (relayState != null && relayState !in allowedRelayStates) {
+            throw IllegalArgumentException("visuals.relay_state is not a supported player-facing state")
+        }
+        val visuals = GameVisuals(relayState = relayState)
+
         return GameSnapshot(
             sceneId = sceneId,
             title = text(scene["title"], "scene.title"),
@@ -363,6 +378,7 @@ internal object BridgeSnapshotMapper {
             inventory = inventory,
             quests = quests,
             worldMap = worldMap,
+            visuals = visuals,
             turn = integer(meta["turn"], "meta.turn"),
             timeMinutes = integer(meta["time_minutes"], "meta.time_minutes"),
             location = optionalText(meta["location"]) ?: sceneId,

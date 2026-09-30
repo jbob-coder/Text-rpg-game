@@ -5,24 +5,137 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
+import kotlin.math.floor
 
 @Composable
 fun SceneIllustration(
     locationId: String,
+    sceneId: String? = null,
+    relayState: String? = null,
     modifier: Modifier = Modifier,
 ) {
+    val traceFxFrames = PixelTraceFxCatalog.directionalTraceForScene(sceneId) ?: PixelTraceFxCatalog.signalPulseForScene(sceneId) ?: PixelTraceFxCatalog.forScene(sceneId)
+    var traceFxFrameIndex by remember(sceneId) { mutableStateOf(0) }
+
+    LaunchedEffect(sceneId, traceFxFrames) {
+        if (traceFxFrames.isNullOrEmpty()) {
+            traceFxFrameIndex = 0
+            return@LaunchedEffect
+        }
+
+        traceFxFrameIndex = 0
+        while (true) {
+            delay(180L)
+            traceFxFrameIndex = (traceFxFrameIndex + 1) % traceFxFrames.size
+        }
+    }
+
     Canvas(
         modifier = modifier
             .testTag("scene-illustration")
             .background(PixelColors.Deep)
             .border(2.dp, PixelColors.Muted),
     ) {
+        PixelSceneCatalog.scene(locationId)?.let { scene ->
+            val scenePixel = floor(
+                minOf(size.width / scene.width.toFloat(), size.height / scene.height.toFloat())
+            ).coerceAtLeast(1f)
+            val sceneOriginX = floor((size.width - scene.width * scenePixel) / 2f)
+            val sceneOriginY = floor((size.height - scene.height * scenePixel) / 2f)
+
+            drawPixelSprite(
+                sprite = scene,
+                pixelSize = scenePixel,
+                originX = sceneOriginX,
+                originY = sceneOriginY,
+            )
+
+            PixelSceneOverlayCatalog.forScene(sceneId)?.let { overlay ->
+                drawPixelSprite(
+                    sprite = overlay,
+                    pixelSize = scenePixel,
+                    originX = sceneOriginX,
+                    originY = sceneOriginY,
+                )
+            }
+
+            PixelSceneOverlayCatalog.forVisualState(
+                locationId = locationId,
+                relayState = relayState,
+            )?.let { overlay ->
+                drawPixelSprite(
+                    sprite = overlay,
+                    pixelSize = scenePixel,
+                    originX = sceneOriginX,
+                    originY = sceneOriginY,
+                )
+            }
+
+            PixelEnvironmentDecalCatalog.placements(locationId).forEach { placement ->
+                drawPixelSprite(
+                    sprite = placement.sprite,
+                    pixelSize = scenePixel,
+                    originX = floor(sceneOriginX + placement.x * scenePixel),
+                    originY = floor(sceneOriginY + placement.y * scenePixel),
+                )
+            }
+
+            PixelEnvironmentPropCatalog.placements(
+                locationId = locationId,
+                sceneId = sceneId,
+            ).forEach { placement ->
+                drawPixelSprite(
+                    sprite = placement.sprite,
+                    pixelSize = scenePixel,
+                    originX = floor(sceneOriginX + placement.x * scenePixel),
+                    originY = floor(sceneOriginY + placement.y * scenePixel),
+                )
+            }
+
+            traceFxFrames?.getOrNull(traceFxFrameIndex)?.let { fx ->
+                val fxOriginX = floor(
+                    sceneOriginX + (scene.width - fx.width) * scenePixel / 2f
+                )
+                val fxOriginY = floor(
+                    sceneOriginY + (scene.height - fx.height) * scenePixel / 2f
+                )
+                drawPixelSprite(
+                    sprite = fx,
+                    pixelSize = scenePixel,
+                    originX = fxOriginX,
+                    originY = fxOriginY,
+                )
+            }
+
+            if (locationId == "RELAY_WORKBENCH") {
+                PixelAssetCatalog.relayStateSprite(relayState)?.let { relay ->
+                    val relayPixel = floor(scenePixel / 2f).coerceAtLeast(1f)
+                    val relayWidth = relay.width * relayPixel
+                    val relayOriginX = floor(sceneOriginX + 64f * scenePixel - relayWidth / 2f)
+                    val relayOriginY = floor(sceneOriginY + 25f * scenePixel)
+                    drawPixelSprite(
+                        sprite = relay,
+                        pixelSize = relayPixel,
+                        originX = relayOriginX,
+                        originY = relayOriginY,
+                    )
+                }
+            }
+            return@Canvas
+        }
+
         val cell = minOf(size.width / 64f, size.height / 32f)
         val ox = (size.width - cell * 64f) / 2f
         val oy = (size.height - cell * 32f) / 2f

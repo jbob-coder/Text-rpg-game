@@ -17,11 +17,33 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+data class TravelTransitionUiState(
+    val token: Long,
+    val fromLocation: String,
+    val toLocation: String,
+)
+
 data class GameUiState(
     val bootState: BootState = BootState.Starting,
     val snapshot: GameSnapshot? = null,
     val busy: Boolean = false,
+    val travelTransition: TravelTransitionUiState? = null,
 )
+
+internal fun confirmedTravelTransition(
+    fromLocation: String?,
+    toLocation: String,
+    token: Long,
+): TravelTransitionUiState? =
+    if (fromLocation == null || fromLocation == toLocation) {
+        null
+    } else {
+        TravelTransitionUiState(
+            token = token,
+            fromLocation = fromLocation,
+            toLocation = toLocation,
+        )
+    }
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val engine: GameEngine = PythonGameEngine()
@@ -32,6 +54,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val _uiState = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()
     private var startRequested = false
+    private var travelTransitionToken = 0L
 
     fun startIfNeeded() {
         if (startRequested) return
@@ -154,20 +177,41 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun travel(locationId: String) {
         if (_uiState.value.busy) return
-        _uiState.update { it.copy(busy = true) }
+        val fromLocation = _uiState.value.snapshot?.location
+        _uiState.update { it.copy(busy = true, travelTransition = null) }
         viewModelScope.launch {
             engine.travel(locationId).fold(
                 onSuccess = { snapshot ->
+                    val candidateToken = travelTransitionToken + 1
+                    val transition = confirmedTravelTransition(
+                        fromLocation = fromLocation,
+                        toLocation = snapshot.location,
+                        token = candidateToken,
+                    )
+                    if (transition != null) {
+                        travelTransitionToken = candidateToken
+                    }
                     _uiState.update {
                         it.copy(
                             bootState = BootState.Ready,
                             snapshot = snapshot,
                             busy = false,
+                            travelTransition = transition,
                         )
                     }
                 },
                 onFailure = ::publishFailure,
             )
+        }
+    }
+
+    fun finishTravelTransition(token: Long) {
+        _uiState.update { current ->
+            if (current.travelTransition?.token == token) {
+                current.copy(travelTransition = null)
+            } else {
+                current
+            }
         }
     }
 

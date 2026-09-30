@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "batch_id": "BATCH_001",
+  "wave_id": "B001-WAVE-C-NAMED-SCENE-MASTERS",
+  "status": "INTEGRATED_AUTOMATED_GATE_GREEN",
+  "architecture_contract": "Every current vertical_slice_01 named location resolves to one source-native 128x64 base scene master. Story-state overlays remain separate from reusable architecture.",
+  "current_location_coverage": "9/9",
+  "assets": [
+    {
+      "number": 41,
+      "asset_id": "PLATFORM_NINE_BLACKOUT_SCENE",
+      "asset_family": "location_scene",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "location_id": "PLATFORM_NINE",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native pixel map",
+        "alpha": false
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36383975950,
+        "head_sha": "69c3dc15984febb14c924a7088b80a99b74f355a",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "9/9 connected tests passed, 0 failures",
+        "apk_sha256": "05da943c1b5e82c7f9acbbbd85a8f31a140a0debfb51bac303146b18eab8f2b4",
+        "limitation": "Automated structural and Compose/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
+      }
+    },
+    {
+      "number": 43,
+      "asset_id": "RELAY_WORKBENCH_DEFAULT_SCENE",
+      "asset_family": "location_scene",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "location_id": "RELAY_WORKBENCH",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native pixel map",
+        "alpha": false
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36383975950,
+        "head_sha": "69c3dc15984febb14c924a7088b80a99b74f355a",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "9/9 connected tests passed, 0 failures",
+        "apk_sha256": "05da943c1b5e82c7f9acbbbd85a8f31a140a0debfb51bac303146b18eab8f2b4",
+        "limitation": "Automated structural and Compose/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
+      }
+    },
+    {
+      "number": 45,
+      "asset_id": "GATE_TWELVE_SEALED_SCENE",
+      "asset_family": "location_scene",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "location_id": "GATE_TWELVE",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native pixel map",
+        "alpha": false
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36383975950,
+        "head_sha": "69c3dc15984febb14c924a7088b80a99b74f355a",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "9/9 connected tests passed, 0 failures",
+        "apk_sha256": "05da943c1b5e82c7f9acbbbd85a8f31a140a0debfb51bac303146b18eab8f2b4",
+        "limitation": "Automated structural and Compose/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
+      }
+    },
+    {
+      "number": 47,
+      "asset_id": "SERVICE_TUNNEL_DEFAULT_SCENE",
+      "asset_family": "location_scene",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "location_id": "SERVICE_TUNNEL",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native pixel map",
+        "alpha": false
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36383975950,
+        "head_sha": "69c3dc15984febb14c924a7088b80a99b74f355a",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "9/9 connected tests passed, 0 failures",
+        "apk_sha256": "05da943c1b5e82c7f9acbbbd85a8f31a140a0debfb51bac303146b18eab8f2b4",
+        "limitation": "Automated structural and Compose/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
+      }
+    },
+    {
+      "number": 49,
+      "asset_id": "EVAC_STAIR_DEFAULT_SCENE",
+      "asset_family": "location_scene",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "location_id": "EVAC_STAIR",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native pixel map",
+        "alpha": false
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36383975950,
+        "head_sha": "69c3dc15984febb14c924a7088b80a99b74f355a",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "9/9 connected tests passed, 0 failures",
+        "apk_sha256": "05da943c1b5e82c7f9acbbbd85a8f31a140a0debfb51bac303146b18eab8f2b4",
+        "limitation": "Automated structural and Compose/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
+      }
+    },
+    {
+      "number": 50,
+      "asset_id": "TRACE_CHAMBER_IDLE_SCENE",
+      "asset_family": "location_scene",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "location_id": "TRACE_CHAMBER",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native pixel map",
+        "alpha": false
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36383975950,
+        "head_sha": "69c3dc15984febb14c924a7088b80a99b74f355a",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "9/9 connected tests passed, 0 failures",
+        "apk_sha256": "05da943c1b5e82c7f9acbbbd85a8f31a140a0debfb51bac303146b18eab8f2b4",
+        "limitation": "Automated structural and Compose/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
+      }
+    },
+    {
+      "number": 52,
+      "asset_id": "DISTRICT_PLAZA_OPEN_SCENE",
+      "asset_family": "location_scene",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "location_id": "DISTRICT_PLAZA",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native pixel map",
+        "alpha": false
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36383975950,
+        "head_sha": "69c3dc15984febb14c924a7088b80a99b74f355a",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "9/9 connected tests passed, 0 failures",
+        "apk_sha256": "05da943c1b5e82c7f9acbbbd85a8f31a140a0debfb51bac303146b18eab8f2b4",
+        "limitation": "Automated structural and Compose/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
+      }
+    },
+    {
+      "number": 54,
+      "asset_id": "DISTRICT_ARCHIVE_DEFAULT_SCENE",
+      "asset_family": "location_scene",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "location_id": "DISTRICT_ARCHIVE",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native pixel map",
+        "alpha": false
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36383975950,
+        "head_sha": "69c3dc15984febb14c924a7088b80a99b74f355a",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "9/9 connected tests passed, 0 failures",
+        "apk_sha256": "05da943c1b5e82c7f9acbbbd85a8f31a140a0debfb51bac303146b18eab8f2b4",
+        "limitation": "Automated structural and Compose/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
+      }
+    },
+    {
+      "number": 56,
+      "asset_id": "WORKSHOP_ROW_DEFAULT_SCENE",
+      "asset_family": "location_scene",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "location_id": "WORKSHOP_ROW",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native pixel map",
+        "alpha": false
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36383975950,
+        "head_sha": "69c3dc15984febb14c924a7088b80a99b74f355a",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "9/9 connected tests passed, 0 failures",
+        "apk_sha256": "05da943c1b5e82c7f9acbbbd85a8f31a140a0debfb51bac303146b18eab8f2b4",
+        "limitation": "Automated structural and Compose/runtime verification is green; physical Galaxy A03 and native-scale visual QA remain separate."
+      }
+    }
+  ],
+  "intentionally_not_claimed": [
+    "042 PLATFORM_NINE_EVACUATED_SCENE",
+    "044 RELAY_WORKBENCH_RELAY_OPEN_SCENE",
+    "046 GATE_TWELVE_ECHO_ACTIVE_SCENE",
+    "048 SERVICE_TUNNEL_AFTERSHOCK_SCENE",
+    "051 TRACE_CHAMBER_TRAINING_SCENE",
+    "053 DISTRICT_PLAZA_BLACKOUT_SCENE",
+    "055 DISTRICT_ARCHIVE_TERMINAL_CLOSEUP",
+    "057 WORKSHOP_ROW_RUMOR_SCENE"
+  ]
+}

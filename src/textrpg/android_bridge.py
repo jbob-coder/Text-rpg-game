@@ -92,6 +92,7 @@ class AndroidGameSession:
                 definition = {}
             label = definition.get("label")
             slot = definition.get("slot")
+            quality = definition.get("quality")
             equippable = isinstance(slot, str) and slot in DEFAULT_SLOTS
             items.append(
                 {
@@ -100,6 +101,7 @@ class AndroidGameSession:
                     "quantity": quantity,
                     "equippable": equippable,
                     "slot": slot if equippable else None,
+                    "quality": quality if isinstance(quality, str) and quality else None,
                 }
             )
 
@@ -129,6 +131,22 @@ class AndroidGameSession:
                 }
             )
         return {"items": items, "equipment": equipment}
+
+    def _visuals_view_for(self, state: GameState) -> Dict[str, Any]:
+        """Project visual-only story state without exposing raw flags or private records."""
+        quantity = state.inventory.get("ITEM_DEAD_RELAY", 0)
+        if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0:
+            relay_state = None
+        elif state.flags.get("relay.signal_lost") is True:
+            relay_state = "signal_lost"
+        elif state.flags.get("relay.casing_damaged") is True:
+            relay_state = "damaged"
+        elif "KNOW_RELAY_DESTINATION_SERVICE_GATE_12" in state.knowledge:
+            relay_state = "opened"
+        else:
+            relay_state = "intact"
+
+        return {"relay_state": relay_state}
 
     def _quest_view_for(self, state: GameState) -> list[Dict[str, Any]]:
         definitions = self.content.raw.get("quests", {})
@@ -308,6 +326,7 @@ class AndroidGameSession:
             "inventory": self._inventory_view_for(state),
             "quests": self._quest_view_for(state),
             "map": self._map_view_for(state),
+            "visuals": self._visuals_view_for(state),
             "meta": {
                 "content_id": self.content.content_id,
                 "canon_status": self.content.canon_status,

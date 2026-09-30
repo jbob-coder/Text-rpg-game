@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -71,29 +72,39 @@ fun TheGameRoot(
     onEquip: (String) -> Unit,
     onUnequip: (String) -> Unit,
     onTravel: (String) -> Unit,
+    onTravelTransitionFinished: (Long) -> Unit,
 ) {
     val snapshot = uiState.snapshot
     if (uiState.bootState == BootState.Ready && snapshot != null) {
-        PixelGameShell(
-            snapshot,
-            uiState.busy,
-            onChoice,
-            onSave,
-            onLoad,
-            onNarrate,
-            onReplayNarration,
-            onStopNarration,
-            autoReadNarration,
-            onAutoReadChange,
-            narrationRate,
-            onNarrationRateChange,
-            textDelayMs,
-            onTextDelayChange,
-            onCheat,
-            onEquip,
-            onUnequip,
-            onTravel,
-        )
+        Box(Modifier.fillMaxSize()) {
+            PixelGameShell(
+                snapshot,
+                uiState.busy,
+                onChoice,
+                onSave,
+                onLoad,
+                onNarrate,
+                onReplayNarration,
+                onStopNarration,
+                autoReadNarration,
+                onAutoReadChange,
+                narrationRate,
+                onNarrationRateChange,
+                textDelayMs,
+                onTextDelayChange,
+                onCheat,
+                onEquip,
+                onUnequip,
+                onTravel,
+            )
+            uiState.travelTransition?.let { transition ->
+                MapTravelTransitionOverlay(
+                    transition = transition,
+                    onFinished = onTravelTransitionFinished,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
+        }
     } else {
         PixelBootScreen(uiState.bootState)
     }
@@ -303,6 +314,7 @@ private fun StorySection(
                     PlayerAvatarPanel(
                         identity = snapshot.identity,
                         equipment = snapshot.inventory.equipment,
+                        conditions = snapshot.conditions,
                     )
                     Spacer(Modifier.height(8.dp))
                     ResourcePanel(snapshot)
@@ -324,6 +336,7 @@ private fun StorySection(
                 PlayerAvatarPanel(
                     identity = snapshot.identity,
                     equipment = snapshot.inventory.equipment,
+                    conditions = snapshot.conditions,
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(0.42f),
@@ -390,6 +403,8 @@ private fun NarrativePanel(
             Spacer(Modifier.height(8.dp))
             SceneIllustration(
                 locationId = snapshot.location,
+                sceneId = snapshot.sceneId,
+                relayState = snapshot.visuals.relayState,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp),
@@ -421,15 +436,26 @@ private fun ResourcePanel(snapshot: GameSnapshot) {
             val percent = if (resource.max > 0.0) {
                 ((resource.current / resource.max) * 100.0).coerceIn(0.0, 100.0).roundToInt()
             } else 0
-            Text(
-                "${resource.id.uppercase().padEnd(8)} ${resource.current.roundToInt()} / ${resource.max.roundToInt()} [$percent%]",
-                color = when {
-                    percent <= 25 -> PixelColors.Danger
-                    percent <= 50 -> PixelColors.Gold
-                    else -> PixelColors.Paper
-                },
-                style = MaterialTheme.typography.labelLarge,
-            )
+            val resourceColor = when {
+                percent <= 25 -> PixelColors.Danger
+                percent <= 50 -> PixelColors.Gold
+                else -> PixelColors.Paper
+            }
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                PixelUiIcon(
+                    sprite = PixelUiIconCatalog.resource(resource.id),
+                    modifier = Modifier.size(16.dp),
+                    tint = resourceColor,
+                    testTag = "resource-icon-${resource.id.lowercase()}",
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    "${resource.id.uppercase().padEnd(8)} ${resource.current.roundToInt()} / ${resource.max.roundToInt()} [$percent%]",
+                    color = resourceColor,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
             Spacer(Modifier.height(4.dp))
         }
     }
@@ -448,6 +474,7 @@ private fun CharacterSection(snapshot: GameSnapshot) {
             PlayerAvatarPanel(
                 identity = snapshot.identity,
                 equipment = snapshot.inventory.equipment,
+                conditions = snapshot.conditions,
                 modifier = Modifier.width(if (wideCharacterPanel) 320.dp else 260.dp),
             )
             PixelPanel(Modifier.width(if (wideCharacterPanel) 420.dp else 320.dp), "Character") {
@@ -461,7 +488,7 @@ private fun CharacterSection(snapshot: GameSnapshot) {
                 Spacer(Modifier.height(6.dp))
                 snapshot.inventory.equipment.forEach { slot ->
                     val itemName = if (slot.equipped) slot.name ?: slot.itemId ?: "EQUIPPED" else "—"
-                    LabeledValue(slotDisplayName(slot.slot), itemName)
+                    EquipmentSlotValue(slotId = slot.slot, value = itemName)
                 }
             }
         }
@@ -704,7 +731,7 @@ private fun InventorySection(
                 } else {
                     "EMPTY"
                 }
-                LabeledValue(slotDisplayName(slot.slot), item)
+                EquipmentSlotValue(slotId = slot.slot, value = item)
                 if (slot.equipped) {
                     PixelTextButton(if (busy) "WORKING..." else "UNEQUIP") {
                         if (!busy) onUnequip(slot.slot)
@@ -719,7 +746,30 @@ private fun InventorySection(
                 Text("No carried items.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
             } else {
                 snapshot.inventory.items.forEach { item ->
-                    LabeledValue(item.name, "x${item.quantity}")
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        PixelItemIcon(
+                            itemId = item.id,
+                            quality = item.quality,
+                            modifier = Modifier.width(40.dp).height(40.dp),
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text(
+                                item.name,
+                                color = PixelColors.Paper,
+                                style = MaterialTheme.typography.bodyMedium,
+                            )
+                            Text(
+                                "x${item.quantity}",
+                                color = PixelColors.Muted,
+                                style = MaterialTheme.typography.labelLarge,
+                            )
+                        }
+                    }
+                    Spacer(Modifier.height(6.dp))
                     if (item.equippable) {
                         PixelTextButton(
                             label = if (busy) {
@@ -731,7 +781,7 @@ private fun InventorySection(
                                 if (!busy) onEquip(item.id)
                             },
                         )
-                        Spacer(Modifier.height(6.dp))
+                        Spacer(Modifier.height(8.dp))
                     }
                 }
             }
@@ -759,7 +809,21 @@ private fun QuestSection(snapshot: GameSnapshot) {
                 if (quests.isNotEmpty()) {
                     PixelPanel(title = category) {
                         quests.forEach { quest ->
-                            Text(quest.title, color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                PixelUiIcon(
+                                    sprite = PixelUiIconCatalog.quest(category),
+                                    modifier = Modifier.size(16.dp),
+                                    tint = when (category) {
+                                        "main" -> PixelColors.Gold
+                                        "side" -> PixelColors.Cyan
+                                        "optional" -> PixelColors.Paper
+                                        else -> PixelColors.Muted
+                                    },
+                                    testTag = "quest-icon-$category",
+                                )
+                                Spacer(Modifier.width(6.dp))
+                                Text(quest.title, color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
+                            }
                             if (quest.description.isNotBlank()) {
                                 Spacer(Modifier.height(4.dp))
                                 Text(quest.description, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
@@ -865,14 +929,36 @@ private fun MapSection(
                         val to = point(edge.to)
                         if (from != null && to != null) drawLine(PixelColors.Muted, from, to, strokeWidth = 5f)
                     }
+                    val markerPixel = 2f
+                    val markerExtent = 16f * markerPixel
                     map.nodes.forEach { node ->
                         val p = point(node.id) ?: return@forEach
-                        val nodeSize = if (node.current) 18f else 13f
-                        drawRect(
-                            color = if (node.current) PixelColors.Gold else PixelColors.Cyan,
-                            topLeft = Offset(p.x - nodeSize / 2f, p.y - nodeSize / 2f),
-                            size = androidx.compose.ui.geometry.Size(nodeSize, nodeSize),
+                        val ox = p.x - markerExtent / 2f
+                        val oy = p.y - markerExtent / 2f
+
+                        drawPixelSprite(
+                            sprite = PixelMapMarkerCatalog.discoveredMarker,
+                            pixelSize = markerPixel,
+                            originX = ox,
+                            originY = oy,
                         )
+                        drawPixelSprite(
+                            sprite = PixelMapMarkerCatalog.stateOverlay(
+                                current = node.current,
+                                reachable = node.reachable,
+                            ),
+                            pixelSize = markerPixel,
+                            originX = ox,
+                            originY = oy,
+                        )
+                        if (node.current) {
+                            drawPixelSprite(
+                                sprite = PixelMapMarkerCatalog.playerMarker,
+                                pixelSize = markerPixel,
+                                originX = ox,
+                                originY = oy,
+                            )
+                        }
                     }
                 }
 
@@ -966,13 +1052,22 @@ private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) 
             .background(if (active) PixelColors.Cyan else PixelColors.Deep)
             .border(2.dp, if (active) PixelColors.Paper else PixelColors.Muted)
             .clickable(role = Role.Tab, onClick = onClick)
-            .padding(horizontal = 12.dp, vertical = 10.dp),
+            .padding(horizontal = 6.dp, vertical = 5.dp),
     ) {
-        Text(
-            text = label,
-            color = if (active) PixelColors.Ink else PixelColors.Paper,
-            style = MaterialTheme.typography.labelLarge,
-        )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            PixelUiIcon(
+                sprite = PixelUiIconCatalog.navigation(label),
+                modifier = Modifier.size(20.dp),
+                tint = if (active) PixelColors.Ink else PixelColors.Paper,
+                testTag = "nav-icon-${label.lowercase()}",
+            )
+            Spacer(Modifier.height(2.dp))
+            Text(
+                text = label,
+                color = if (active) PixelColors.Ink else PixelColors.Paper,
+                style = MaterialTheme.typography.labelLarge,
+            )
+        }
     }
 }
 
@@ -1001,6 +1096,38 @@ private fun PixelTextButton(
     ) {
         Text(label, color = PixelColors.Paper, style = MaterialTheme.typography.labelLarge)
     }
+}
+
+@Composable
+private fun EquipmentSlotValue(
+    slotId: String,
+    value: String,
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        PixelUiIcon(
+            sprite = PixelEquipmentSlotCatalog.slot(slotId),
+            modifier = Modifier.size(24.dp),
+            tint = PixelColors.Paper,
+            testTag = "equipment-slot-icon-$slotId",
+        )
+        Spacer(Modifier.width(8.dp))
+        Column(Modifier.weight(1f)) {
+            Text(
+                slotDisplayName(slotId),
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.labelLarge,
+            )
+            Text(
+                value,
+                color = PixelColors.Paper,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
+    }
+    Spacer(Modifier.height(6.dp))
 }
 
 @Composable
