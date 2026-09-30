@@ -11,7 +11,7 @@ These are not human ability slots and do not imply Steal compatibility.
 
 ## Tags
 
-### CAB_RESonance_SENSE
+### CAB_RESONANCE_SENSE
 Detects crystal/field activity beyond ordinary sensory channels.
 
 Constraints:
