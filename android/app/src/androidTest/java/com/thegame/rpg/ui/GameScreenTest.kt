@@ -16,13 +16,18 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.dp
+import com.thegame.rpg.GameUiState
 import com.thegame.rpg.TravelTransitionUiState
+import com.thegame.rpg.boot.BootState
+import com.thegame.rpg.engine.GameAttribute
 import com.thegame.rpg.engine.GameChoice
 import com.thegame.rpg.engine.GameCondition
 import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameInventory
 import com.thegame.rpg.engine.GameResource
 import com.thegame.rpg.engine.GameSnapshot
+import com.thegame.rpg.engine.GameStatContribution
+import com.thegame.rpg.engine.GameStatInspection
 import com.thegame.rpg.engine.GameVisuals
 import org.junit.Rule
 import org.junit.Test
@@ -104,6 +109,133 @@ class GameScreenTest {
                 "Expected stable GameScreen to emit Map navigation, got $destination"
             }
         }
+    }
+
+    @Test
+    fun statsScreenRequestsPlayerSafeInspection() {
+        var requestedPath: String? = null
+        val statSnapshot = snapshot.copy(
+            attributes = listOf(
+                GameAttribute(
+                    id = "endurance",
+                    name = "Endurance",
+                    base = 35.0,
+                    effective = 37.0,
+                    delta = 2.0,
+                    modified = true,
+                    role = "sustained physical resilience",
+                )
+            )
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                TheGameRoot(
+                    uiState = GameUiState(
+                        bootState = BootState.Ready,
+                        snapshot = statSnapshot,
+                    ),
+                    onChoice = {},
+                    onSave = {},
+                    onLoad = {},
+                    onNarrate = { false },
+                    onReplayNarration = { false },
+                    onStopNarration = {},
+                    autoReadNarration = false,
+                    onAutoReadChange = {},
+                    narrationRate = 0.92f,
+                    onNarrationRateChange = {},
+                    textDelayMs = 0,
+                    onTextDelayChange = {},
+                    onCheat = {},
+                    onEquip = {},
+                    onUnequip = {},
+                    onInspectStatus = { requestedPath = it },
+                    onTravel = {},
+                    onTravelTransitionFinished = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("nav-stats")
+            .performScrollTo()
+            .performClick()
+        composeRule.onNodeWithTag("stat-row-endurance")
+            .performScrollTo()
+            .assertHasClickAction()
+            .performClick()
+
+        composeRule.runOnIdle {
+            check(requestedPath == "attributes.endurance") {
+                "Expected Endurance inspection request, got $requestedPath"
+            }
+        }
+    }
+
+    @Test
+    fun statsScreenRendersPlayerSafeEquipmentContribution() {
+        val statSnapshot = snapshot.copy(
+            attributes = listOf(
+                GameAttribute(
+                    id = "endurance",
+                    name = "Endurance",
+                    base = 35.0,
+                    effective = 37.0,
+                    delta = 2.0,
+                    modified = true,
+                    role = "sustained physical resilience",
+                )
+            )
+        )
+        val inspection = GameStatInspection(
+            path = "attributes.endurance",
+            kind = "attribute",
+            total = 37.0,
+            contributions = listOf(
+                GameStatContribution("base", 35.0),
+                GameStatContribution("equipment:body", 2.0),
+            ),
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                TheGameRoot(
+                    uiState = GameUiState(
+                        bootState = BootState.Ready,
+                        snapshot = statSnapshot,
+                        statInspectionPath = "attributes.endurance",
+                        statInspection = inspection,
+                    ),
+                    onChoice = {},
+                    onSave = {},
+                    onLoad = {},
+                    onNarrate = { false },
+                    onReplayNarration = { false },
+                    onStopNarration = {},
+                    autoReadNarration = false,
+                    onAutoReadChange = {},
+                    narrationRate = 0.92f,
+                    onNarrationRateChange = {},
+                    textDelayMs = 0,
+                    onTextDelayChange = {},
+                    onCheat = {},
+                    onEquip = {},
+                    onUnequip = {},
+                    onInspectStatus = {},
+                    onTravel = {},
+                    onTravelTransitionFinished = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("nav-stats")
+            .performScrollTo()
+            .performClick()
+        composeRule.onNodeWithTag("stat-contribution-equipment-body")
+            .performScrollTo()
+            .assertIsDisplayed()
+        composeRule.onNodeWithText("EQUIPMENT // CHEST").assertIsDisplayed()
+        composeRule.onNodeWithText("+2").assertIsDisplayed()
     }
 
     @Test
