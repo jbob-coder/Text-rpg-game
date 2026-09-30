@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-C-CURRENT-SCENES",
-  "status": "INTEGRATED_AUTOMATED_GATE_GREEN",
+  "status": "INTEGRATED_WITH_053_PENDING_GATE",
   "runtime_verification_parent": "1c7e54e548ab3c28819af0b85ae8cbba53aff827",
   "state_contracts": {
     "base_scenes": "Location ID selects architecture only; location art does not own travel, discovery, reachability, or story state.",
@@ -470,6 +470,53 @@
         "apk_sha256": "18316402c65e9b614b80fa542817b125bed8a38be44eaf3ca89d187623f1897f",
         "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
       }
+    },
+    {
+      "number": 53,
+      "asset_id": "DISTRICT_PLAZA_BLACKOUT_SCENE",
+      "asset_family": "location_state",
+      "status": "CANDIDATE",
+      "canon_status": "provisional",
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "source_game_ids": [
+        "DISTRICT_PLAZA"
+      ],
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "format": "source-native pixel overlay",
+        "alpha": true
+      },
+      "state_binding": {
+        "source": "GameSnapshot.sceneId",
+        "allowed_scene_ids": [
+          "DISTRICT_HUB"
+        ]
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneOverlayCatalog.kt",
+        "android/app/src/test/java/com/thegame/rpg/ui/PixelSceneOverlayCatalogTest.kt",
+        "android/app/src/androidTest/java/com/thegame/rpg/ui/GameScreenTest.kt"
+      ],
+      "integration_targets": [
+        "Android SceneIllustration"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "Blackout presentation is selected only by the player-facing DISTRICT_HUB scene ID and does not read raw world flags."
+      ]
     },
     {
       "number": 54,
