@@ -39,6 +39,18 @@ data class GameSkill(
     val modified: Boolean,
 )
 
+data class GameStatContribution(
+    val source: String,
+    val value: Double,
+)
+
+data class GameStatInspection(
+    val path: String,
+    val kind: String,
+    val total: Double,
+    val contributions: List<GameStatContribution>,
+)
+
 data class GameCondition(
     val id: String,
     val name: String,
@@ -175,9 +187,30 @@ interface GameEngine {
         Result.failure(UnsupportedOperationException("unequip is not implemented"))
     suspend fun travel(locationId: String): Result<GameSnapshot> =
         Result.failure(UnsupportedOperationException("travel is not implemented"))
+    suspend fun inspectStatus(path: String): Result<GameStatInspection> =
+        Result.failure(UnsupportedOperationException("stat inspection is not implemented"))
 }
 
 internal object BridgeSnapshotMapper {
+    fun statInspectionFromMap(payload: Map<String, Any?>): GameStatInspection {
+        val path = text(payload["path"], "inspection.path")
+        val kind = text(payload["kind"], "inspection.kind")
+        val total = number(payload["total"], "inspection.total")
+        val breakdown = objectMap(payload["breakdown"], "inspection.breakdown")
+        val contributions = breakdown.map { (source, rawValue) ->
+            GameStatContribution(
+                source = source,
+                value = number(rawValue, "inspection.breakdown.$source"),
+            )
+        }
+        return GameStatInspection(
+            path = path,
+            kind = kind,
+            total = total,
+            contributions = contributions,
+        )
+    }
+
     fun fromMap(payload: Map<String, Any?>): GameSnapshot {
         val scene = objectMap(payload["scene"], "scene")
         val status = objectMap(payload["status"], "status")

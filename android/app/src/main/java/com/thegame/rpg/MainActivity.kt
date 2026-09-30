@@ -50,6 +50,7 @@ class MainActivity : ComponentActivity() {
                     onCheat = gameViewModel::applyCheat,
                     onEquip = gameViewModel::equip,
                     onUnequip = gameViewModel::unequip,
+                    onInspectStatus = gameViewModel::inspectStatus,
                     onTravel = gameViewModel::travel,
                     onTravelTransitionFinished = gameViewModel::finishTravelTransition,
                 )

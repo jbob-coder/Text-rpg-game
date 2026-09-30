@@ -8,7 +8,7 @@ from .content import LoadedContentPack, load_content_pack
 from .core import GameState, RuleError
 from .equipment import DEFAULT_SLOTS, equip_item
 from .persistence import load_state, save_state
-from .status import build_status_view
+from .status import build_status_view, inspect_status_value
 
 
 class AndroidBridgeError(RuntimeError):
@@ -345,6 +345,31 @@ class AndroidGameSession:
             raise AndroidBridgeError(
                 "VIEW_ERROR",
                 "The current game state could not be displayed.",
+                technical_detail=str(exc),
+            ) from exc
+
+    def inspect_status(self, path: str) -> Dict[str, Any]:
+        """Return one on-demand player-safe stat explanation without exposing raw rules."""
+        if not isinstance(path, str) or not path:
+            raise AndroidBridgeError(
+                "STAT_INSPECTION_ERROR",
+                "Choose a valid stat to inspect.",
+                technical_detail="path must be non-empty text",
+            )
+        try:
+            registries = self.content.registries
+            return deepcopy(
+                inspect_status_value(
+                    self.state,
+                    self.engine,
+                    path,
+                    condition_definitions=registries.get("conditions", {}),
+                )
+            )
+        except RuleError as exc:
+            raise AndroidBridgeError(
+                "STAT_INSPECTION_ERROR",
+                "That stat cannot be inspected.",
                 technical_detail=str(exc),
             ) from exc
 
