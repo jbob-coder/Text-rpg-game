@@ -135,8 +135,21 @@ Targets:
 ### 401–410 — Kharvori homeworld and first-contact foundation
 Plan:
 - ROUNDS_401_410_KHARVORI_HOMEWORLD_FIRST_CONTACT_FOUNDATION.md
-Targets:
-homeworld datum, biomes, settlements, political geography, first human approach corridors, contact-site geometry, pre-war diplomatic staging.
+Execution status:
+- COMPLETE
+Artifacts:
+- KHARVORI_HOMEWORLD_VEYRA_BASELINE_V1.md
+- KHARVORI_BIOLOGY_BASELINE_V1.md
+- KHARVORI_ECOLOGY_PRECONTACT_V1.md
+- KHARVORI_POLITICAL_CIVILIZATION_PRECONTACT_2628.md
+- KHARVORI_TECH_INFRASTRUCTURE_BASELINE_2628.md
+- KHARVORI_PRECONTACT_HISTORY_SPINE_V1.md
+- KHARVORI_SETTLEMENT_HIERARCHY_PRECONTACT_V1.md
+- FIRST_HUMAN_KHARVORI_CONTACT_CHAIN_2626_2628.md
+- HUMAN_APPROACH_CORRIDOR_LANTERN14_2626.md
+- SPATIAL_KHARVORI_HOMEWORLD_CONTACT_ATLAS_V1.md
+- BOOK_07_CHAPTER_02_TWO_MAPS_OF_THE_SAME_WORLD.md
+- ROUND_401_410_COMPLETION.md
 
 ## Invariants for all 100 rounds
 
@@ -177,8 +190,8 @@ Every major creature reference:
 
 ## Current position
 
-Rounds 311–390: COMPLETE.
-Next execution round: 391.
+Rounds 311–410: COMPLETE.
+Next execution round: 411.
 
 Planned future cycles:
 - ROUND_411_510_STORY_SPATIAL_EXECUTION_INDEX.md
