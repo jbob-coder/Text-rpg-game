@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-E-TRACE-FX",
-  "status": "INTEGRATED_096_097_098_099",
+  "status": "INTEGRATED_096_097_098_099_WITH_100_PENDING_GATE",
   "assets": [
     {
       "number": 96,
@@ -179,6 +179,44 @@
       "limitations": [
         "Physical Galaxy A03 visual QA remains separate.",
         "The 64x64 portrait master is produced but portrait-surface integration is deferred because the current client has no dedicated portrait renderer."
+      ]
+    },
+    {
+      "number": 100,
+      "asset_id": "UI_MAP_TRAVEL_TRANSITION",
+      "asset_family": "ui_transition",
+      "status": "CANDIDATE",
+      "canon_status": "provisional",
+      "native_canvas": {
+        "width": 128,
+        "height": 64,
+        "frames": 8,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelMapTravelTransition.kt",
+        "android/app/src/main/java/com/thegame/rpg/GameViewModel.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt",
+        "android/app/src/main/java/com/thegame/rpg/MainActivity.kt"
+      ],
+      "integration_targets": [
+        "Android full-screen post-travel transition overlay"
+      ],
+      "state_contract": "GameViewModel emits TravelTransitionUiState only after engine.travel() succeeds and returns a changed player-facing location. The transition is never created from a button press alone and never fabricates arrival before authoritative state changes.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "Transition is intentionally presentation-only; route reachability, time cost, destination and success remain engine-owned."
       ]
     }
   ]
