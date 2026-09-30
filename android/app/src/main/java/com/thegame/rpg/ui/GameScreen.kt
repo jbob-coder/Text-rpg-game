@@ -304,6 +304,7 @@ private fun StorySection(
                     PlayerAvatarPanel(
                         identity = snapshot.identity,
                         equipment = snapshot.inventory.equipment,
+                        conditions = snapshot.conditions,
                     )
                     Spacer(Modifier.height(8.dp))
                     ResourcePanel(snapshot)
@@ -325,6 +326,7 @@ private fun StorySection(
                 PlayerAvatarPanel(
                     identity = snapshot.identity,
                     equipment = snapshot.inventory.equipment,
+                    conditions = snapshot.conditions,
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(0.42f),
@@ -462,6 +464,7 @@ private fun CharacterSection(snapshot: GameSnapshot) {
             PlayerAvatarPanel(
                 identity = snapshot.identity,
                 equipment = snapshot.inventory.equipment,
+                conditions = snapshot.conditions,
                 modifier = Modifier.width(if (wideCharacterPanel) 320.dp else 260.dp),
             )
             PixelPanel(Modifier.width(if (wideCharacterPanel) 420.dp else 320.dp), "Character") {
