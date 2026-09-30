@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-E-TRACE-FX",
-  "status": "INTEGRATED_AUTOMATED_GATE_GREEN",
+  "status": "INTEGRATED_096_WITH_097_PENDING_GATE",
   "assets": [
     {
       "number": 96,
@@ -44,6 +44,42 @@
       "limitations": [
         "Physical Galaxy A03 visual QA remains separate.",
         "The ambient loop is presentation-only and does not replace the stronger authored scene-state overlays."
+      ]
+    },
+    {
+      "number": 97,
+      "asset_id": "FX_SIGNAL_PULSE",
+      "asset_family": "trace_fx",
+      "status": "CANDIDATE",
+      "canon_status": "provisional",
+      "native_canvas": {
+        "width": 64,
+        "height": 64,
+        "frames": 6,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelTraceFxCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "Android narrative SceneIllustration"
+      ],
+      "state_contract": "Visible only for player-facing sceneId POWER_FIRST_LIVE_USE, where the authored content executes TECHNIQUE_SIGNAL_PULSE. The UI never reads technique-use flags or computes gameplay effects.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "Signal Pulse replaces the ambient Trace Echo animation only in POWER_FIRST_LIVE_USE to avoid stacked FX clutter."
       ]
     }
   ]
