@@ -942,12 +942,16 @@ CONFIRMED existing historical coverage:
 - Portal Expansion through 2605;
 - initial crystal, ecology, law, portal, economy, and Homunculus files.
 
+PHASE 00 STATUS: COMPLETE
+
+Verified output:
+- `docs/world_history/CANON_RECONCILIATION_REPORT.md`
+
 PRIMARY NEXT ACTION:
-PHASE 00 — Canon audit and contradiction map.
+PHASE 01 — Master architecture.
 
 Reason:
-Current Homunculus documentation contains historical assumptions that conflict with the latest user direction.
-Those conflicts must be resolved before building Interworld Expansion and the First Interworld War.
+The contradiction map is now complete. Before writing additional history, the repository needs formal book/encyclopedia indexes, templates, stable-ID rules, cross-link rules, and a clean separation between narrative history and technical reference records.
 
 ---
 
