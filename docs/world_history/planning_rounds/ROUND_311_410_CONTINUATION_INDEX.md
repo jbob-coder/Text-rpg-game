@@ -29,8 +29,13 @@ Artifacts:
 ### 321–330 — Extended instability 2473–2474
 Plan:
 - ROUNDS_321_330_EXTENDED_INSTABILITY_2473_2474.md
-Targets:
-displacement, refugee geometry, food/water systems, quarantine doctrine, black markets, first response teams, medical classification.
+Execution status:
+- COMPLETE
+Artifacts:
+- BOOK_03_CHAPTER_07_EIGHTEEN_MONTHS_OF_NOT_NORMAL.md
+- EXTENDED_INSTABILITY_REGISTRY_2473_2474.md
+- SPATIAL_EXTENDED_INSTABILITY_ATLAS_2473_2474_V1.md
+- ROUND_321_330_COMPLETION.md
 
 ### 331–340 — Early Crystal 2475–2488
 Plan:
@@ -119,5 +124,8 @@ Every major creature reference:
 
 ## Current position
 
-Rounds 311–320: COMPLETE.
-Next execution round: 321.
+Rounds 311–330: COMPLETE.
+Next execution round: 331.
+
+Next planned 100-round cycle:
+- ROUND_411_510_STORY_SPATIAL_EXECUTION_INDEX.md
