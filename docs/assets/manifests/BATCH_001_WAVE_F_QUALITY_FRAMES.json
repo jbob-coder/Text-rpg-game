@@ -2,13 +2,13 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-F-QUALITY-FRAMES",
-  "status": "CANDIDATE_PENDING_EXACT_HEAD_GATE",
+  "status": "INTEGRATED_AUTOMATED_GATE_GREEN",
   "assets": [
     {
       "number": 39,
       "asset_id": "UI_ITEM_QUALITY_FRAMES",
       "asset_family": "ui_frame_set",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "technical",
       "native_canvas": {
         "width": 32,
@@ -43,7 +43,13 @@
         "state_binding_reviewed": true
       },
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36739855690,
+        "head_sha": "5bb0096d7570dca04a4eec3c6528985d84e23145",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "584727a5bd20c7a8a2e542aeb0807abd564e06bc9346b6e61f21bee2a6a5027a",
+        "limitation": "Automated explicit-quality projection and Compose rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
       },
       "limitations": [
         "Physical Galaxy A03 visual QA remains separate.",
