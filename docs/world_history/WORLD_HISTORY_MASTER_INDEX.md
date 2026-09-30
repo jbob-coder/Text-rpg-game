@@ -53,6 +53,52 @@ The civil calendar remains year-number based. "Pre-Crystal Era" and "Crystal Era
 19. Missing connective canon may be authored as DRAFT_CANON without interrupting play, but major pillars must remain traceable and reversible.
 20. Historical documentation may cover population, climate, borders, cities, technology, disease, food, transport, education, economy, religion, crime, law, military affairs, language, culture, species, and ecosystems.
 
+## Active world-history files
+
+### Foundational eras
+- `docs/world_history/eras/ERA_000_PREHUMAN_FOUNDATIONS.md` — deep-time physical/ecological baseline and human evolutionary bridge.
+- `docs/world_history/eras/ERA_010_HUMAN_PRECRYSTAL.md` — hidden anomalous humans, pre-Crystal institutions, public/classified/true history.
+- `docs/world_history/eras/ERA_030_EARLY_CRYSTAL_2473_2505.md` — emergency survival, classification, early regulation, ecology, economy, military use, and portal science after Veinfall.
+
+### Foundational event registries
+- `docs/world_history/events/PRECRYSTAL_EVENT_REGISTRY.md`
+- `docs/world_history/events/EVENT_VEINFALL_2473.md`
+
+### Human lineages and biology
+- `docs/world_history/lineages/HUMAN_LINEAGE_ANOMALOUS_BASELINE_001.md`
+
+### Ecosystems
+- `docs/world_history/ecosystems/ECOSYSTEM_PRECRYSTAL_EARTH_BASELINE_001.md`
+
+### Organizations
+- `docs/world_history/organizations/PRECRYSTAL_ORGANIZATION_REGISTRY.md`
+
+### Knowledge-state timelines
+- `docs/world_history/timelines/TIMELINE_PRECRYSTAL_LAYERED_V1.md`
+
+## Current reconstruction boundary
+
+Completed foundation:
+- deep-time Earth baseline;
+- natural anomalous-human model;
+- pre-Crystal hidden-history structure;
+- first pre-Crystal organizations and event IDs;
+- layered PUBLIC / CLASSIFIED / TRUE timeline;
+- Veinfall primary 11-day cascade and approximately 18-month extended instability;
+- Early Crystal Era through 2505.
+
+Next build sequence:
+1. ERA_CRYSTAL_INDUSTRIALIZATION.
+2. First stable beast-crystal science and standardized crystal taxonomy.
+3. Regional ecosystem reconstruction after Veinfall.
+4. Portal stabilization and artificial-portal research.
+5. Human political/economic divergence caused by crystal resources.
+6. Offworld settlement.
+7. Kharvori pre-contact history and first-contact chain.
+8. WAR_FIRST_INTERWORLD_2645_2659.
+9. EVENT_HALCYON_GATE_CONCORD_2660.
+10. Reconstruction to ERA_PRESENT_2670.
+
 ## Sapient nonhuman / engineered peoples
 
 ### SPECIES_HOMUNCULUS_001 — Homunculus
