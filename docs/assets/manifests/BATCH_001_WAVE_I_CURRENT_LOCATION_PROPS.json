@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "batch_id": "BATCH_001",
+  "wave_id": "B001-WAVE-I-CURRENT-LOCATION-PROPS",
+  "status": "CANDIDATE_PENDING_EXACT_HEAD_GATE",
+  "assets": [
+    {
+      "number": 72,
+      "asset_id": "PROP_ARCHIVE_SHELF",
+      "asset_family": "environment_prop",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 32,
+        "height": 48,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentPropCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "DISTRICT_ARCHIVE scene placement"
+      ],
+      "state_contract": "Static prop placement is selected only from player-facing locationId DISTRICT_ARCHIVE; no quest or interaction state is inferred.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      }
+    },
+    {
+      "number": 73,
+      "asset_id": "PROP_ARCHIVE_TERMINAL",
+      "asset_family": "environment_prop",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentPropCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "DISTRICT_ARCHIVE scene placement"
+      ],
+      "state_contract": "Current backup-power terminal art is static at the player-facing archive location; it does not decide whether record interactions are available.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      },
+      "limitations": [
+        "Active/idle interaction-specific terminal animation remains future work; current master represents the authored backup-power archive context."
+      ]
+    },
+    {
+      "number": 74,
+      "asset_id": "PROP_WORKSHOP_BENCH",
+      "asset_family": "environment_prop",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 48,
+        "height": 32,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentPropCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "WORKSHOP_ROW scene placement"
+      ],
+      "state_contract": "Static repair/salvage bench placement is selected only from player-facing WORKSHOP_ROW location; it carries no interaction or rumor state.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      }
+    },
+    {
+      "number": 75,
+      "asset_id": "PROP_DISTRICT_NOTICE_BOARD",
+      "asset_family": "environment_prop",
+      "status": "CANDIDATE",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 32,
+        "height": 48,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentPropCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
+      ],
+      "integration_targets": [
+        "DISTRICT_PLAZA / DISTRICT_HUB scene placement"
+      ],
+      "state_contract": "Notice-board art is shown only from player-facing locationId DISTRICT_PLAZA plus sceneId DISTRICT_HUB. The board does not expose whether notices were already reviewed; authored notice text remains narrative/UI data.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "status": "pending exact-head workflow"
+      }
+    }
+  ],
+  "limitations": [
+    "Physical Galaxy A03 visual QA remains separate.",
+    "These props are presentation modules only; interactions remain engine-owned."
+  ]
+}
