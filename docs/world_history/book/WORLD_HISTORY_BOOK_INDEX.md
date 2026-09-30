@@ -37,8 +37,14 @@ PROTAGONIST_MYSTERY material may document the existence of a gap but must not re
 ### BOOK_00 — Foundations of Earth and Humanity
 Deep-time Earth, ordinary evolution, emergence of Homo sapiens, ecological baseline.
 
+Current chapters:
+- `BOOK_00_CHAPTER_01_THE_WORLD_BEFORE_IT_KNEW.md`
+
 ### BOOK_01 — Hidden Anomalous Humanity
 Rare natural ability users, lineages, myths, persecution/protection, fragmented records.
+
+Current chapters:
+- `BOOK_01_CHAPTER_01_THE_HIDDEN_FEW.md`
 
 ### BOOK_02 — The Last Pre-Crystal Centuries
 Scientific precursors, state programs, social conditions, hidden anomaly research, warning signs.
@@ -92,5 +98,5 @@ Every completed chapter must:
 ## Current status
 
 Architecture: COMPLETE
-Narrative chapter population: NOT STARTED
+Narrative chapter population: STARTED — PHASE 02 IN PROGRESS
 Next content phase after architecture: PHASE 02
