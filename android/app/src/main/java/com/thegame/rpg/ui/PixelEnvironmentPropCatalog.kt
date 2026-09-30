@@ -19,6 +19,7 @@ object PixelEnvironmentPropCatalog {
     const val ARCHIVE_TERMINAL_ID = "PROP_ARCHIVE_TERMINAL"
     const val WORKSHOP_BENCH_ID = "PROP_WORKSHOP_BENCH"
     const val DISTRICT_NOTICE_BOARD_ID = "PROP_DISTRICT_NOTICE_BOARD"
+    const val DEPOT_DOOR_ID = "PROP_DEPOT_DOOR"
     const val RELAY_WORKBENCH_ID = "PROP_RELAY_WORKBENCH"
     const val GATE_TWELVE_DOOR_ID = "PROP_GATE_TWELVE_DOOR"
     const val TUNNEL_PIPE_SET_ID = "PROP_TUNNEL_PIPE_SET"
@@ -161,6 +162,38 @@ object PixelEnvironmentPropCatalog {
 
         return PixelSprite(
             assetId = DISTRICT_NOTICE_BOARD_ID,
+            width = width,
+            height = height,
+            palette = palette,
+            rows = p.map { it.concatToString() },
+        )
+    }
+
+
+    private fun depotDoor(): PixelSprite {
+        val width = 32
+        val height = 48
+        val p = pixels(width, height)
+
+        fun rect(x: Int, y: Int, w: Int, h: Int, key: Char) {
+            for (yy in y until y + h) for (xx in x until x + w) {
+                if (xx in 0 until width && yy in 0 until height) p[yy][xx] = key
+            }
+        }
+
+        // Default powered/closed depot landmark. Open/powered-off variants remain deferred until
+        // those states cross the player-safe projection boundary.
+        rect(3, 2, 26, 45, 'M')
+        rect(6, 5, 20, 40, 'D')
+        rect(8, 8, 16, 34, 'L')
+        rect(15, 7, 2, 36, 'G')
+        rect(9, 12, 5, 3, 'C')
+        rect(18, 12, 5, 3, 'C')
+        rect(8, 35, 16, 4, 'M')
+        rect(23, 25, 2, 3, 'G')
+
+        return PixelSprite(
+            assetId = DEPOT_DOOR_ID,
             width = width,
             height = height,
             palette = palette,
@@ -319,6 +352,7 @@ object PixelEnvironmentPropCatalog {
     val archiveTerminal: PixelSprite = terminal()
     val workshopBench: PixelSprite = workshopBench()
     val districtNoticeBoard: PixelSprite = noticeBoard()
+    val depotDoor: PixelSprite = depotDoor()
     val relayWorkbench: PixelSprite = relayWorkbench()
     val gateTwelveDoor: PixelSprite = gateTwelveDoor()
     val tunnelPipeSet: PixelSprite = tunnelPipeSet()
@@ -330,6 +364,7 @@ object PixelEnvironmentPropCatalog {
         archiveTerminal,
         workshopBench,
         districtNoticeBoard,
+        depotDoor,
         relayWorkbench,
         gateTwelveDoor,
         tunnelPipeSet,
@@ -339,6 +374,10 @@ object PixelEnvironmentPropCatalog {
 
     fun placements(locationId: String, sceneId: String?): List<PixelScenePropPlacement> =
         when (locationId) {
+            "PLATFORM_NINE" -> listOf(
+                PixelScenePropPlacement(depotDoor, x = 88, y = 8),
+            )
+
             "RELAY_WORKBENCH" -> listOf(
                 PixelScenePropPlacement(relayWorkbench, x = 32, y = 28),
             )
@@ -369,7 +408,10 @@ object PixelEnvironmentPropCatalog {
 
             "DISTRICT_PLAZA" ->
                 if (sceneId == "DISTRICT_HUB") {
-                    listOf(PixelScenePropPlacement(districtNoticeBoard, x = 88, y = 9))
+                    listOf(
+                        PixelScenePropPlacement(depotDoor, x = 7, y = 8),
+                        PixelScenePropPlacement(districtNoticeBoard, x = 88, y = 9),
+                    )
                 } else {
                     emptyList()
                 }
