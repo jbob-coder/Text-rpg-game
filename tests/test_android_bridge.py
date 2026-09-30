@@ -122,7 +122,7 @@ class AndroidBridgeTests(unittest.TestCase):
         self.assertEqual("TRAVEL_ERROR", caught.exception.code)
         self.assertEqual(before, session.state.snapshot())
 
-    def test_inventory_projection_exposes_items_and_slots_without_modifiers(self):
+    def test_inventory_projection_exposes_items_slots_and_explicit_quality_without_modifiers(self):
         session = create_session(CONTENT)
 
         view = session.scene_view()
@@ -131,8 +131,15 @@ class AndroidBridgeTests(unittest.TestCase):
             item for item in view["inventory"]["items"]
             if item["id"] == "ITEM_MAINTENANCE_SEAL"
         )
+        signal_ring = next(
+            item for item in view["inventory"]["items"]
+            if item["id"] == "ITEM_SIGNAL_RING"
+        )
         self.assertEqual(1, maintenance_seal["quantity"])
+        self.assertIsNone(maintenance_seal["quality"])
+        self.assertEqual("uncommon", signal_ring["quality"])
         self.assertTrue(all("modifiers" not in entry for entry in view["inventory"]["equipment"]))
+        self.assertTrue(all("modifiers" not in entry for entry in view["inventory"]["items"]))
 
     def test_validated_cheats_mutate_only_through_whitelist(self):
         session = create_session(CONTENT)
