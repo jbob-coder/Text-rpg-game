@@ -41,6 +41,7 @@ Future records should use:
 - SPATIAL_EXTENDED_INSTABILITY_ATLAS_2473_2474_V1.md
 - SPATIAL_EARLY_CRYSTAL_REBUILD_ATLAS_2475_2488_V1.md
 - SPATIAL_EARLY_REGULATED_USE_ATLAS_2489_2505_V1.md
+- SPATIAL_CRYSTAL_INDUSTRIALIZATION_ATLAS_2506_2528_V1.md
 
 ## Current persistent historical sites
 
@@ -126,13 +127,24 @@ Early Crystal 2489–2505 additions:
 - SITE_RED_BASIN_STANDING_RESPONSE_GARRISON_2500
 - PORTAL_SITE_NORTH_ATLANTIC_OBSERVATION_2503
 
+Crystal Industrialization 2506–2528 additions:
+- SITE_GENEVA_CRYSTAL_STANDARDS_CONGRESS_2506
+- SITE_KESSEL_RESONANCE_ASSAY_CENTER_2510
+- SITE_NORTHMERE_CRYSTAL_CELL_WORKS_2511
+- SITE_EAST_HARBOR_GRID_STABILIZATION_STATION_2519
+- SITE_CAROLINA_BIOCRYSTAL_DIAGNOSTIC_CENTER_2522
+- SITE_GREENVALE_BEAST_PROCESSING_AND_RESEARCH_DEPOT_2526
+- DISTRICT_NORTHMERE_WORKER_WARD_2516
+- SITE_RED_BASIN_CRYSTAL_WASTE_CONTAINMENT_2524
+- CITY_IRONVALE_CRYSTAL_INDUSTRIAL_WARD_2528
+
 ## Current chronological spatial boundary
 
 Locked scenario geometry currently reaches:
-2505.
+2528.
 
 Next spatial target:
-2506–2528 Crystal Industrialization — standards congress facilities, certified cell production, assay labs, grid experiments, medical certification sites, harvest logistics, and industrial freight geometry.
+2529–2558 mature industrial dependence — commodity exchange, advanced materials, augmentation, biostabilization, major accident sites, strategic reserves, portal-anchor complexes, and associated cities/corridors.
 
 ## Rule
 
