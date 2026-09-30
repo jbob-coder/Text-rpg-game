@@ -152,6 +152,9 @@ Technical anchors:
 - `settlements/OFFWORLD_SETTLEMENT_LIFECYCLE_2575_2605.md`
 - `spatial/SPATIAL_PORTAL_EXPANSION_ATLAS_2559_2605_V1.md`
 
+Epilogue:
+- `BOOK_06_EPILOGUE_THE_WORLD_HAS_TEETH.md` — 2605 reference bridge explaining creature threat as ecology + location + scale rather than raw strength.
+
 BOOK_06 state:
 COMPLETE through 2605.
 
