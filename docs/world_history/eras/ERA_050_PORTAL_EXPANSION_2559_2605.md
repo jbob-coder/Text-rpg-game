@@ -1,7 +1,7 @@
 # ERA_050_PORTAL_EXPANSION_2559_2605 — Portal Expansion
 
-Status: ACTIVE_CAMPAIGN_CANON_WITH_RECONSTRUCTION_GAP
-Authority: USER_AUTHORIZED_2026-09-29
+Status: ACTIVE_CAMPAIGN_CANON_WITH_DRAFT_RECONSTRUCTION
+Authority: USER_AUTHORIZED_2026-09-29 + USER_CONTINUATION_2026-09-30
 Range: 2559–2605
 Predecessor: ERA_040_CRYSTAL_INDUSTRIALIZATION_2506_2558
 Successor: ERA_INTERWORLD_EXPANSION
@@ -11,108 +11,179 @@ Live-game clock effect: NONE
 
 The defining question changes from "Can a natural breach be stabilized?" to "Can humanity create, target, reopen, and economically use controlled portals?"
 
-PORTAL STABILIZATION -> ARTIFICIAL APERTURE -> REPEATABLE DESTINATION -> RETURN CORRIDOR -> FRONTIER BASE -> RESOURCE NETWORK
+PORTAL STABILIZATION -> ARTIFICIAL APERTURE -> REPEATABLE DESTINATION -> RETURN CORRIDOR -> FRONTIER BASE -> RESOURCE NETWORK -> POLITICAL BORDER
 
 ## Phase I — Artificial aperture research, 2559–2568
 
 Major powers create national portal programs.
 
-Early artificial openings are tiny, brief, expensive, dangerous, poorly targeted, and usually unsuitable for living transit.
-
 ### EVENT_FIRST_ARTIFICIAL_MICROBREACH_2562
-
 A laboratory creates a sub-second artificial aperture without a naturally active breach.
 
-Historical importance:
-humanity proves natural breaches can be imitated.
-
 ### EVENT_FIRST_REPEATABLE_TARGET_SIGNATURE_2566
+Researchers reopen an artificial aperture toward a previously sampled destination signature.
 
-Researchers reopen an artificial aperture to a previously sampled destination region using a stored resonance signature.
-
-This is the conceptual birth of portal addressing.
+Historical consequence:
+portal addressing becomes a reproducible science problem.
 
 ## Phase II — Controlled transit, 2569–2578
 
 ### EVENT_FIRST_UNMANNED_RETURN_MISSION_2569
-A probe crosses an artificial portal, gathers material, and returns through a separately stabilized return corridor.
+A probe crosses, gathers data/material, and returns through a separately stabilized return corridor.
 
 ### EVENT_FIRST_HUMAN_ARTIFICIAL_PORTAL_TRANSIT_2572
-A heavily protected human team completes a short-duration artificial-portal crossing and returns.
+A protected human team completes an artificial-portal crossing and return.
 
 ### EVENT_FIRST_PERMANENT_OFFWORLD_RESEARCH_OUTPOST_2575
-A small research/security outpost remains continuously staffed beyond Earth and depends on Earth resupply.
+A continuously staffed outpost is established at DESTINATION_HAVEN_03.
 
 ## Phase III — Frontier multiplication, 2579–2586
 
-Governments and corporations build portal research campuses, quarantine stations, extraction camps, agricultural trials, military perimeter bases, and offworld ecology observatories.
+### EVENT_FIRST_COMMERCIAL_EXTRACTION_CORRIDOR_2579
+A portal-linked extraction operation becomes economically sustainable.
 
-Disputes develop around:
-- destination territory;
-- indigenous ecosystems;
-- contamination;
-- extraction rights;
-- taxation;
-- labor law;
-- rescue liability;
-- military jurisdiction.
+### EVENT_PORTAL_SETTLEMENT_CHARTERS_2581
+Major jurisdictions create frameworks for civilian frontier settlement.
 
-## Phase IV — RECONSTRUCTION GAP, 2587–2601
+### EVENT_FRONTIER_QUARANTINE_CRISIS_2583
+A biological transfer causes route closures and exposes the strategic importance of interworld disease control.
 
-The previous file assigned this period to a Homunculus Rebellion.
+## Phase IV — Corridor consolidation and frontier law, 2587–2601
 
-That material is SUPERSEDED.
+The prior Homunculus-rebellion chronology is superseded and is not used.
 
-This interval is intentionally reopened for later historical construction.
+### EVENT_PORTAL_CORRIDOR_CERTIFICATION_2588
+Route certification expands from "can it open?" to "can the whole corridor fail safely?"
 
-Constraints:
-- do not use a Homunculus rebellion as the default explanation;
-- do not invent a replacement conflict merely to fill the gap;
-- preserve portal technological continuity unless later evidence changes it.
+Required elements include:
+- return capability;
+- quarantine;
+- emergency reserves;
+- rescue plan;
+- redundant power/control;
+- shutdown authority;
+- incident recording.
 
-## Phase V — Consolidation, 2602–2605
+### EVENT_FRONTIER_RESCUE_COMPACT_2591
+Multiple governments/operators maintain compatible rescue capacity and reserve transit support.
 
-The previous file tied this phase to a Homunculus custodial order. That claim is SUPERSEDED.
+### EVENT_OFFWORLD_JURISDICTION_TRIBUNAL_2594
+Standing procedures are established for disputes among:
+- Earth law;
+- frontier charter;
+- corporate contract;
+- emergency command.
 
-Still valid at broad level:
-- portal security grows more sophisticated;
-- strategic destinations become more important;
-- identity, quarantine, sabotage resistance, and shutdown procedures remain logical portal-network concerns.
+### EVENT_PORTAL_CUSTOMS_IDENTITY_PROTOCOL_2597
+Major hubs adopt interoperable identity, quarantine, residency/work, and cargo provenance controls.
 
-Exact causal events for 2602–2605 require reconstruction.
+### EVENT_MULTI_HUB_REDUNDANCY_PROGRAM_2601
+Networks build alternate Earth terminals and reserve corridors.
+
+## Phase V — Civilian consolidation, 2602–2605
+
+### EVENT_FRONTIER_CIVIL_POPULATION_THRESHOLD_2603
+Selected settlement networks become predominantly civilian communities rather than expeditionary installations.
+
+### EVENT_INTERWORLD_EXPANSION_THRESHOLD_2605
+Offworld settlement and resource networks become large enough that governance, borders, taxation, defense, and representation are standing political problems.
 
 ## Portal addressing
 
-By 2605, portal travel is still not equivalent to ordinary road or air travel.
-
-Reliable operation requires:
+By 2605, reliable operation requires:
 - destination signature;
 - calibrated anchor;
-- enormous power/control systems;
+- large power/control systems;
 - trained operators;
 - contamination screening;
 - return plan;
 - geopolitical authorization.
 
+Portal travel is not equivalent to ordinary road travel.
+
+## Route classes
+
+Operational language follows PORTAL_NETWORK_FOUNDATION_V1:
+- ROUTE-P0 natural recurring breach;
+- ROUTE-P1 anchored natural route;
+- ROUTE-P2 artificial experimental route;
+- ROUTE-P3 certified controlled route;
+- ROUTE-P4 strategic corridor;
+- ROUTE-PX unbounded/unknown.
+
+By 2605:
+- P3 routes are established;
+- a limited number of P4 corridors support civilian/resource networks.
+
 ## Ecology
 
-Portal expansion creates durable mixed ecosystems through agriculture, microbes, invasive species, predators, crystal-bearing organisms, and quarantine boundaries.
+Portal expansion creates durable mixed ecosystems through:
+- agriculture;
+- microbes;
+- invasive species;
+- predators;
+- crystal-bearing organisms;
+- quarantine boundaries.
 
 ## Economy
 
-High-value targets include crystals, rare metals, biological compounds, arable land, water, unusual organisms, and energy-rich geology.
+High-value targets include:
+- crystals;
+- rare metals;
+- biological compounds;
+- arable land;
+- water;
+- specialized agriculture;
+- strategic resources.
 
-Profitability remains constrained by transport, portal stability, security, disease, environment, politics, labor, and route failure.
+Profitability remains constrained by:
+- energy;
+- portal stability;
+- security;
+- disease;
+- environment;
+- labor;
+- insurance;
+- political risk.
+
+## Society
+
+A successful frontier settlement can progress:
+REMOTE SURVEY
+-> SECURITY/SCIENCE CAMP
+-> PERMANENT OUTPOST
+-> EXTRACTION/AGRICULTURE
+-> CHARTER SETTLEMENT
+-> FRONTIER TOWN/NETWORK.
+
+By 2605, some children are born and raised offworld.
+
+This creates political identities that cannot be reduced to temporary Earth assignments.
+
+## Homunculus correction
+
+SUPERSEDED:
+- EVENT_HOMUNCULUS_REBELLION_2587_2601
+- LAW_HOMUNCULUS_CUSTODIAL_ORDER_2602
+
+The Homunculus Network remains a separate hidden hostile society/network.
+It is not used as the cause of Portal Expansion, frontier governance, or the First Interworld War.
 
 ## End state, 2605
 
-Confirmed broad end state:
+Confirmed:
 - repeatable artificial portal technology;
 - multiple permanent offworld facilities;
-- early civilian settlements;
+- civilian settlements;
 - strategic resource corridors;
-- hardened portal security;
-- offworld governance becomes a standing political problem.
+- hardened quarantine/rescue/security;
+- multi-hub redundancy;
+- offworld governance as permanent political problem.
+
+Not established:
+- Kharvori contact;
+- routine universal portal travel;
+- perfectly safe portal operation.
 
 Next:
 ERA_INTERWORLD_EXPANSION_2606_2644.
