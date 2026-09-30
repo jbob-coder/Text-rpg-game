@@ -40,7 +40,7 @@ Labor systems range from:
 - voluntary settlers;
 - debt contracts;
 - prison labor in some jurisdictions;
-- coercive homunculus labor;
+- illegal coercive labor under some jurisdictions, criminal networks, or abusive contractors;
 - corporate indenture-like arrangements.
 
 This variation becomes a major political issue.
@@ -73,3 +73,10 @@ Portal resources reduce some shortages but increase inequality between:
 - disconnected regions.
 
 This inequality helps drive later geopolitical competition and interworld territorial disputes.
+
+
+## Homunculus clarification
+
+The Homunculus Network is not treated as a labor caste or ordinary economic population in this framework.
+
+Its active canon is a separate hidden hostile network. Portal-frontier labor systems must be modeled independently from Homunculus biology/origin assumptions.
