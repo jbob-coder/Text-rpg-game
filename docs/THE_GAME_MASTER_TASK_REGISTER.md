@@ -309,6 +309,19 @@ The UI must not become the authoritative rules engine.
 - RULE: generated images are reference-only until reconstructed into native pixel masters with manifests and QA.
 - DONE WHEN: all 100 Batch 001 units reach their documented integration/deferred-integration acceptance state.
 - COMPLETED_AT: —
+
+### Wave L parallel environment-module slice
+- STATUS: `VERIFIED_PRODUCED_DEFERRED_INTEGRATION`
+- BRANCH: `feature/pixel-asset-wave-l-environment-modules`
+- VERIFIED HEAD: `b10d06adf7529f887d429b1a9638e96dd264ec38`
+- PARENT: `dfb1246557def7ce9291856c145ae42930ededb7`
+- ASSETS: 058–061 — `DEPOT_FACADE_EXTERIOR`, `MAINTENANCE_CORRIDOR_CONNECTOR`, `MUNICIPAL_ARCHIVE_EXTERIOR`, `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`.
+- IMPLEMENTED: source-native deterministic module/atlas catalog plus JVM contract tests and Wave L manifest.
+- VERIFIED: workflow run `36772270632` / run 208 passed on the exact runtime head. Python engine: 301/301; Android unit/instrumentation compile/assemble/package gates passed; API 35 x86_64 emulator: 15/15 connected tests, 0 failures; APK SHA-256 `c4bf5a2d651b1770592e8780708ce66a42ec7567b15cb58ad629f7465f372fbc`.
+- BOUNDARY: these assets are intentionally not wired over existing named-location masters. They remain produced/deferred-integration until a legitimate arrival/connector/composition surface exists; no travel, access, quest, interaction, or hazard state is inferred.
+- NEXT: preserve the green module slice, continue only with assets that have a valid player-safe consumer, and do not force 042/055/057 or character-reference-blocked assets into runtime by approximation.
+- PHYSICAL QA: Galaxy A03 visual review and native-scale art approval remain separate.
+
 ## Known technical follow-ups
 
 These are not part of the Android black-screen fix unless directly implicated:
