@@ -8,7 +8,6 @@ Purpose: record state-changing events in the living campaign so future sessions 
 ## Event record schema
 
 Each event should include:
-
 - EVENT_ID
 - CANON_STATE
 - WORLD_TIME
@@ -45,6 +44,27 @@ Each event should include:
 - CLOCKS_ADVANCED: none.
 - OPEN_CONSEQUENCES: recover exact last live Academy scene before advancing local time.
 - SOURCE_FILE_OR_SESSION: user direction dated 2026-09-29.
+
+### LIVE_CHECKPOINT_RECOVERY_2026_09_29
+
+- EVENT_ID: EVENT_LIVE_CHECKPOINT_RECOVERY_2026_09_29
+- CANON_STATE: CONFIRMED_CANON
+- WORLD_TIME: Day -15, 08:19:46
+- LOCAL_TIME_CONTEXT: restarted early military-academy timeline
+- ACTORS: Elias Voss; Visitor Services clerk; repository continuity system
+- LOCATION: Visitor Services counter, public/civilian side of secured military-academy complex
+- CAUSE: World Director bootstrap required exact recovery of the last authoritative gameplay checkpoint before narration could resume.
+- ACTION: latest authoritative Google Drive checkpoint and Elias persistent brain were re-read and synchronized into repository live-world state.
+- IMMEDIATE_EFFECT: the previous UNKNOWN local scene in LIVE_WORLD_STATE is replaced by the recovered exact checkpoint.
+- OFFSCREEN_PROPAGATION: none; this is a continuity recovery operation, not a new in-world event.
+- PLAYER_VISIBLE: meta only; no new story action occurred.
+- JACK_KNOWS: unchanged.
+- NPC_KNOWLEDGE_CHANGES: none.
+- STATE_CHANGES: LIVE_WORLD_STATE now records Elias at Day -15 08:19:46, current Visitor Services conversation, EVOLVE observations, and unresolved Adrian Voss recognition.
+- CLOCKS_ADVANCED: none.
+- OPEN_CONSEQUENCES: clerk's connection to Adrian Voss remains unresolved; Elias may continue probing naturally. Jack state remains UNKNOWN and user-controlled.
+- SOURCE_FILE_OR_SESSION: Google Drive 12_GAMEPLAY_BRANCH/GAMEPLAY_CHECKPOINT_CURRENT.md latest markdown copy plus ELIAS_PERSISTENT_BRAIN.md.
+- SUPERSEDES: only the placeholder UNKNOWN live-scene fields created during World Director bootstrap; it does not supersede historical gameplay records.
 
 ## Rule
 
