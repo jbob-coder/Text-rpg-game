@@ -43,6 +43,7 @@ Future records should use:
 - SPATIAL_EARLY_REGULATED_USE_ATLAS_2489_2505_V1.md
 - SPATIAL_CRYSTAL_INDUSTRIALIZATION_ATLAS_2506_2528_V1.md
 - SPATIAL_MATURE_CRYSTAL_INDUSTRIALIZATION_ATLAS_2529_2558_V1.md
+- SPATIAL_PORTAL_EXPANSION_ATLAS_2559_2605_V1.md
 
 ## Current persistent historical sites
 
@@ -150,13 +151,29 @@ Mature Crystal Industrialization 2529–2558 additions:
 - PORTAL_SITE_MERIDIAN_ANCHOR_MK3_2558
 - CAMPUS_ASTER_RESONANCE_AND_PORTAL_RESEARCH_2555
 
+Portal Expansion 2559–2605 additions:
+- LAB_MERIDIAN_ARTIFICIAL_MICROBREACH_2562
+- CAMPUS_ASTER_DESTINATION_SIGNATURE_ARRAY_2566
+- PORTAL_SITE_SABLE_RETURN_MISSION_COMPLEX_2569
+- PORTAL_SITE_MERIDIAN_HUMAN_TRANSIT_COMPLEX_2572
+- PORTAL_ENDPOINT_HAVEN_03_2572
+- OUTPOST_HAVEN_03_RESEARCH_BASE_2575
+- SITE_HAVEN_03_EXTRACTION_FIELD_2579
+- SETTLEMENT_HAVEN_03_GATEWARD_2581
+- SITE_MERIDIAN_QUARANTINE_EXPANSION_2583
+- PORTAL_HUB_HAVEN_03_GATEWARD_2597
+- ROUTE_HAVEN_03_PRIMARY_CORRIDOR_2601
+
+Offworld local frame:
+- FRAME_DESTINATION_HAVEN_03_LOCAL_001
+
 ## Current chronological spatial boundary
 
 Locked scenario geometry currently reaches:
-2558.
+2605.
 
 Next spatial target:
-2559–2605 Portal Expansion — artificial portal research, controlled transit, quarantine hubs, offworld camps, frontier settlements, and route geometry.
+2606+ interworld expansion prerequisites, creature/habitat reference geometry, and Kharvori homeworld/contact frames.
 
 ## Rule
 
