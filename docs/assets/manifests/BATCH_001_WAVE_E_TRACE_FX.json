@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "BATCH_001",
   "wave_id": "B001-WAVE-E-TRACE-FX",
-  "status": "INTEGRATED_096_097_098_099_WITH_100_PENDING_GATE",
+  "status": "INTEGRATED_096_097_098_099_100",
   "assets": [
     {
       "number": 96,
@@ -185,7 +185,7 @@
       "number": 100,
       "asset_id": "UI_MAP_TRAVEL_TRANSITION",
       "asset_family": "ui_transition",
-      "status": "CANDIDATE",
+      "status": "INTEGRATED",
       "canon_status": "provisional",
       "native_canvas": {
         "width": 128,
@@ -212,7 +212,13 @@
         "state_binding_reviewed": true
       },
       "automated_verification": {
-        "status": "pending exact-head workflow"
+        "workflow_run_id": 36738135641,
+        "head_sha": "ab6da2fcb3e60693240fd27c701e1e2b0e388080",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "14/14 connected tests passed, 0 failures",
+        "apk_sha256": "26e6998c1e5274f3ac399d7dc1f4b55354c35c132730d676de31a5dd95fdbf00",
+        "limitation": "Automated success-only travel binding and Compose rendering are green; physical Galaxy A03 and native-scale visual QA remain separate."
       },
       "limitations": [
         "Physical Galaxy A03 visual QA remains separate.",
