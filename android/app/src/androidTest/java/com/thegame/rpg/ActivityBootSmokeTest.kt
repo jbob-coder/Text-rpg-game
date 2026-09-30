@@ -96,6 +96,35 @@ class ActivityBootSmokeTest {
     }
 
     @Test
+    fun realActivityCharacterEquipmentAndStatsFollowAuthoritativeEngine() {
+        composeRule.waitUntil(timeoutMillis = 60_000) {
+            composeRule.onAllNodes(androidx.compose.ui.test.hasTestTag("player-avatar"))
+                .fetchSemanticsNodes().isNotEmpty()
+        }
+        composeRule.onNodeWithTag("nav-character").performScrollTo().performClick()
+        composeRule.onNodeWithTag("character-slot-body").performScrollTo().performClick()
+        composeRule.onNodeWithTag("character-equip-ITEM_DEPOT_JACKET").performScrollTo().performClick()
+        waitForText("Endurance: +2")
+        composeRule.onNodeWithTag("character-detail-close").performScrollTo().performClick()
+
+        composeRule.onNodeWithTag("nav-stats").performScrollTo().performClick()
+        composeRule.onNodeWithTag("stats-attribute-endurance").performScrollTo().performClick()
+        composeRule.onNodeWithTag("stats-attribute-detail").performScrollTo().assertIsDisplayed()
+        composeRule.onNodeWithText("Effective 37 • Base 35").assertIsDisplayed()
+        composeRule.onNodeWithText("Depot utility jacket: +2").assertIsDisplayed()
+
+        composeRule.onNodeWithTag("nav-character").performScrollTo().performClick()
+        composeRule.onNodeWithTag("character-slot-body").performScrollTo().performClick()
+        composeRule.onNodeWithTag("character-unequip").performScrollTo().performClick()
+        waitForText("Empty slot")
+        composeRule.onNodeWithTag("character-detail-close").performScrollTo().performClick()
+        composeRule.onNodeWithTag("nav-stats").performScrollTo().performClick()
+        composeRule.onNodeWithTag("stats-attribute-endurance").performScrollTo().performClick()
+        composeRule.onNodeWithTag("stats-attribute-detail").performScrollTo().assertIsDisplayed()
+        composeRule.onNodeWithText("Effective 35 • Base 35").assertIsDisplayed()
+    }
+
+    @Test
     fun realActivityDeveloperDistrictCheatAndMapTravelOpenNarrativeScene() {
         composeRule.waitUntil(timeoutMillis = 60_000) {
             composeRule.onAllNodes(

@@ -12,6 +12,13 @@ data class GameChoice(
 
 data class GameResource(val id: String, val current: Double, val max: Double)
 
+data class GameStatContribution(
+    val kind: String,
+    val label: String,
+    val value: Double,
+    val slot: String? = null,
+)
+
 data class GameAttribute(
     val id: String,
     val name: String,
@@ -20,6 +27,7 @@ data class GameAttribute(
     val delta: Double,
     val modified: Boolean,
     val role: String? = null,
+    val contributions: List<GameStatContribution> = emptyList(),
 )
 
 data class GameDerivedStat(
@@ -37,6 +45,7 @@ data class GameSkill(
     val effective: Double,
     val delta: Double,
     val modified: Boolean,
+    val contributions: List<GameStatContribution> = emptyList(),
 )
 
 data class GameCondition(
@@ -213,6 +222,7 @@ internal object BridgeSnapshotMapper {
                 delta = number(attribute["delta"], "status.attributes[$index].delta"),
                 modified = boolean(attribute["modified"], "status.attributes[$index].modified"),
                 role = optionalText(attribute["role"]),
+                contributions = contributions(attribute["contributions"], "status.attributes[$index].contributions"),
             )
         }
 
@@ -240,6 +250,7 @@ internal object BridgeSnapshotMapper {
                             effective = number(skill["effective"], "status.skills.$category[$index].effective"),
                             delta = number(skill["delta"], "status.skills.$category[$index].delta"),
                             modified = boolean(skill["modified"], "status.skills.$category[$index].modified"),
+                            contributions = contributions(skill["contributions"], "status.skills.$category[$index].contributions"),
                         )
                     )
                 }
@@ -414,6 +425,25 @@ internal object BridgeSnapshotMapper {
         }
         return value
     }
+
+    private fun contributions(value: Any?, path: String): List<GameStatContribution> =
+        optionalList(value, path).mapIndexed { index, item ->
+            val record = objectMap(item, "$path[$index]")
+            val kind = text(record["kind"], "$path[$index].kind")
+            require(kind in setOf("equipment", "set", "perk", "condition", "unidentified")) {
+                "$path[$index].kind is unsupported"
+            }
+            val slot = optionalText(record["slot"])
+            require((kind == "equipment" && slot != null) || (kind != "equipment" && slot == null)) {
+                "$path[$index].slot must identify equipment only"
+            }
+            GameStatContribution(
+                kind = kind,
+                label = text(record["label"], "$path[$index].label"),
+                value = number(record["value"], "$path[$index].value"),
+                slot = slot,
+            )
+        }
 
     private fun optionalText(value: Any?): String? = when (value) {
         null -> null

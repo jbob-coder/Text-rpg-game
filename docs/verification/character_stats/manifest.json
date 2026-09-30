@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "objective": "Responsive Character loadout and selected Stats detail",
+  "branch": "feature/character-stats-inspection",
+  "base_head": "7d4558ea5c9e3ad24bf29fe42c8f199ed0be60fe",
+  "state": "IMPLEMENTED_PENDING_ANDROID_GATE",
+  "generated_at": "2026-09-30T19:48:25.456362-04:00",
+  "runtime_inputs": {
+    ".github/workflows/android-pixel-client.yml": "d2102dd1e85455ffe2d7fb2a5fb401c200ce35c9ac2bee3cf8df4075d7ff1738",
+    "src/textrpg/android_bridge.py": "366c7df0b1e02de1bcd1d8e29cf1ab3e663b847ad99bd54f3647ea22a5ed5370",
+    "tests/test_android_stat_contributions.py": "4e1d89b0445e6cd6bfa990fdcb41b781f254b19cc9893bb442dd7aa6c81e15e1",
+    "android/app/src/main/java/com/thegame/rpg/engine/GameEngine.kt": "ba22c2e31d8ff95c541bac97652eb1709200673bda0df48ab4c4304212ad5c97",
+    "android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt": "e6b24f75d3946dc39a66c107949c362d2dcb15de461dd15ea468021837aafc5e",
+    "android/app/src/main/java/com/thegame/rpg/ui/PixelComponents.kt": "e230ec17f190b8c15ce9cfad37748c46c0e1a098b699246e3ba69746efcffb06",
+    "android/app/src/main/java/com/thegame/rpg/ui/CharacterSection.kt": "ce99304cc08913ed6cc1f8a68ca58b04206f7fc1143e02fda897a98400202afd",
+    "android/app/src/main/java/com/thegame/rpg/ui/StatsSection.kt": "b32db4e777d2ab1beb9311577beb3ee0a0d004a1c4b87bc92707ca0e2ee54375",
+    "android/app/src/main/java/com/thegame/rpg/ui/StatusComponents.kt": "9315da2707798b0bd29831c8ff19cbb2ac7f1abdde6e265a80a1f20ad64fdab7",
+    "android/app/src/test/java/com/thegame/rpg/engine/StatContributionMapperTest.kt": "db6f5fc3241008d88a67922595c195750718442debdb7299207bffbfe6394d9c",
+    "android/app/src/test/java/com/thegame/rpg/ui/StatusComponentsTest.kt": "f59d9628a2b7b4fab4c061cbf0f44c796b205658ae6ac479bad99dc924f62e5b",
+    "android/app/src/androidTest/java/com/thegame/rpg/ui/CharacterStatsSectionTest.kt": "204375d5445f1b43be400a9dfcc9e72613c33867626064b1a93316634c2b8200",
+    "android/app/src/androidTest/java/com/thegame/rpg/ActivityBootSmokeTest.kt": "be25c979acd1b1f5203ab0e1ef7ee5d6b1ec818c664014585a983d80d1aba70b"
+  },
+  "local_python_tests": {
+    "count": 305,
+    "result": "passed"
+  },
+  "android_gate": "pending",
+  "physical_device": "unverified"
+}

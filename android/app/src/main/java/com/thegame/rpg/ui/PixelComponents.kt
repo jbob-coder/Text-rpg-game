@@ -90,6 +90,7 @@ fun PlayerAvatarPanel(
     conditions: List<GameCondition> = emptyList(),
     modifier: Modifier = Modifier,
     compact: Boolean = false,
+    showSummary: Boolean = true,
 ) {
     val equippedOverlays = equipment
         .filter { it.equipped }
@@ -170,28 +171,30 @@ fun PlayerAvatarPanel(
             }
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
-        val descriptor = listOfNotNull(
-            identity.path,
-            identity.level?.let { "LV $it" },
-            identity.origin,
-        ).joinToString(" • ")
-        Text(
-            text = descriptor.ifBlank { "ADVENTURER // LOADOUT ACTIVE" },
-            color = PixelColors.Muted,
-            style = MaterialTheme.typography.labelLarge,
-        )
-
-        val visibleGear = equippedOverlays
-            .map { overlay -> slotDisplayNameForAvatar(overlay.slot) }
-        if (visibleGear.isNotEmpty()) {
-            Spacer(modifier = Modifier.height(4.dp))
+        if (showSummary) {
+            Spacer(modifier = Modifier.height(8.dp))
+            val descriptor = listOfNotNull(
+                identity.path,
+                identity.level?.let { "LV $it" },
+                identity.origin,
+            ).joinToString(" • ")
             Text(
-                text = "VISIBLE GEAR // " + visibleGear.joinToString(" • "),
-                color = PixelColors.Gold,
+                text = descriptor.ifBlank { "ADVENTURER // LOADOUT ACTIVE" },
+                color = PixelColors.Muted,
                 style = MaterialTheme.typography.labelLarge,
-                modifier = Modifier.testTag("avatar-visible-gear"),
             )
+
+            val visibleGear = equippedOverlays
+                .map { overlay -> slotDisplayNameForAvatar(overlay.slot) }
+            if (visibleGear.isNotEmpty()) {
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "VISIBLE GEAR // " + visibleGear.joinToString(" • "),
+                    color = PixelColors.Gold,
+                    style = MaterialTheme.typography.labelLarge,
+                    modifier = Modifier.testTag("avatar-visible-gear"),
+                )
+            }
         }
     }
 }

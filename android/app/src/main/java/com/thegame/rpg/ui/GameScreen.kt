@@ -245,7 +245,7 @@ private fun PixelGameShell(
                         onNarrate = onNarrate,
                         textDelayMs = textDelayMs,
                     )
-                    GameSection.CHARACTER -> CharacterSection(snapshot)
+                    GameSection.CHARACTER -> CharacterSection(snapshot, busy, onEquip, onUnequip)
                     GameSection.STATS -> StatsSection(snapshot)
                     GameSection.INVENTORY -> InventorySection(
                         snapshot = snapshot,
@@ -457,126 +457,6 @@ private fun ResourcePanel(snapshot: GameSnapshot) {
                 )
             }
             Spacer(Modifier.height(4.dp))
-        }
-    }
-}
-
-@Composable
-private fun CharacterSection(snapshot: GameSnapshot) {
-    BoxWithConstraints(Modifier.fillMaxSize()) {
-        val wideCharacterPanel = maxWidth > 700.dp
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .horizontalScroll(rememberScrollState()),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            PlayerAvatarPanel(
-                identity = snapshot.identity,
-                equipment = snapshot.inventory.equipment,
-                conditions = snapshot.conditions,
-                modifier = Modifier.width(if (wideCharacterPanel) 320.dp else 260.dp),
-            )
-            PixelPanel(Modifier.width(if (wideCharacterPanel) 420.dp else 320.dp), "Character") {
-                LabeledValue("Name", snapshot.identity.name ?: "Unassigned")
-                LabeledValue("Level", snapshot.identity.level?.toString() ?: "—")
-                LabeledValue("Path", snapshot.identity.path ?: "—")
-                LabeledValue("Origin", snapshot.identity.origin ?: "—")
-                LabeledValue("Background", snapshot.identity.background ?: "—")
-                Spacer(Modifier.height(12.dp))
-                Text("EQUIPMENT SLOTS", color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
-                Spacer(Modifier.height(6.dp))
-                snapshot.inventory.equipment.forEach { slot ->
-                    val itemName = if (slot.equipped) slot.name ?: slot.itemId ?: "EQUIPPED" else "—"
-                    EquipmentSlotValue(slotId = slot.slot, value = itemName)
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun StatsSection(snapshot: GameSnapshot) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        PixelPanel(title = "Resources") {
-            snapshot.resources.forEach { resource ->
-                LabeledValue(resource.id, "${resource.current.roundToInt()} / ${resource.max.roundToInt()}")
-            }
-        }
-        PixelPanel(title = "Core Attributes") {
-            snapshot.attributes.forEach { stat ->
-                Text(
-                    text = "${stat.name.uppercase()} // ${stat.effective.roundToInt()}",
-                    color = if (stat.modified) PixelColors.Cyan else PixelColors.Paper,
-                    style = MaterialTheme.typography.titleLarge,
-                )
-                Text(
-                    text = "BASE ${stat.base.roundToInt()}  •  EFFECTIVE ${stat.effective.roundToInt()}" +
-                        if (stat.delta == 0.0) "" else "  •  MOD ${signed(stat.delta)}",
-                    color = PixelColors.Muted,
-                    style = MaterialTheme.typography.labelLarge,
-                )
-                if (!stat.role.isNullOrBlank()) {
-                    Text(
-                        text = stat.role,
-                        color = PixelColors.Paper,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                }
-                Spacer(Modifier.height(10.dp))
-            }
-        }
-        PixelPanel(title = "Derived") {
-            snapshot.derived.forEach { stat ->
-                Text(
-                    text = "${stat.name.uppercase()} // ${stat.value.roundToInt()}",
-                    color = PixelColors.Paper,
-                    style = MaterialTheme.typography.titleLarge,
-                )
-                if (!stat.role.isNullOrBlank()) {
-                    Text(
-                        text = stat.role,
-                        color = PixelColors.Muted,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                }
-                Spacer(Modifier.height(8.dp))
-            }
-        }
-        PixelPanel(title = "Skills") {
-            snapshot.skills.groupBy { it.category }.forEach { (category, skills) ->
-                Text("[${category.uppercase()}]", color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
-                skills.forEach { skill ->
-                    Text(
-                        text = "${skill.name} // ${skill.effective.roundToInt()}",
-                        color = if (skill.modified) PixelColors.Cyan else PixelColors.Paper,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                    Text(
-                        text = "BASE ${skill.base.roundToInt()}" +
-                            if (skill.delta == 0.0) "" else "  •  MOD ${signed(skill.delta)}",
-                        color = PixelColors.Muted,
-                        style = MaterialTheme.typography.labelLarge,
-                    )
-                }
-                Spacer(Modifier.height(8.dp))
-            }
-        }
-        if (snapshot.conditions.isNotEmpty()) {
-            PixelPanel(title = "Conditions") {
-                snapshot.conditions.forEach { condition ->
-                    Text(
-                        "${condition.name} // SEV ${condition.severity}",
-                        color = PixelColors.Danger,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                }
-            }
         }
     }
 }

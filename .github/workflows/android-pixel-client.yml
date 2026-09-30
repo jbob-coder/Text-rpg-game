@@ -126,4 +126,14 @@ jobs:
           profile: pixel_7_pro
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-snapshot
           disable-animations: true
-          script: gradle -p android connectedDebugAndroidTest --stacktrace
+          script: |
+            gradle -p android connectedDebugAndroidTest --stacktrace
+            adb pull /sdcard/Android/data/com.thegame.rpg/files/ui-qa android-ui-qa
+
+      - name: Upload small UI verification screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: THE-GAME-UI-QA-${{ github.run_id }}
+          path: android-ui-qa/*.png
+          if-no-files-found: error
+          retention-days: 1

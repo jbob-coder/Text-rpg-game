@@ -8,7 +8,7 @@ from .content import LoadedContentPack, load_content_pack
 from .core import GameState, RuleError
 from .equipment import DEFAULT_SLOTS, equip_item
 from .persistence import load_state, save_state
-from .status import build_status_view
+from .status import build_status_view, inspect_status_value
 
 
 class AndroidBridgeError(RuntimeError):
@@ -54,12 +54,58 @@ class AndroidGameSession:
 
     def _status_view_for(self, state: GameState) -> Dict[str, Any]:
         registries = self.content.registries
-        return build_status_view(
+        conditions = registries.get("conditions", {})
+        status = build_status_view(
             state,
             self.engine,
             ability_definitions=self.content.raw.get("powers", {}),
-            condition_definitions=registries.get("conditions", {}),
+            condition_definitions=conditions,
         )
+        equipment_names = {
+            record["slot"]: record["name"]
+            for record in self._inventory_view_for(state)["equipment"]
+            if record["equipped"]
+        }
+        condition_names = {record["id"]: record["name"] for record in status["conditions"]}
+        values = [("attributes", stat) for stat in status["attributes"]]
+        values.extend(
+            ("skills", stat) for group in status["skills"].values() for stat in group
+        )
+        for namespace, stat in values:
+            # Use the existing redaction boundary before resolving any source label.
+            # Compose receives display records, never raw modifier maps or secret IDs.
+            explanation = inspect_status_value(
+                state, self.engine, f"{namespace}.{stat['id']}",
+                condition_definitions=conditions,
+            )
+            contributions = []
+            for source, value in explanation["breakdown"].items():
+                if source in ("base", "total") or value == 0:
+                    continue
+                kind, _, key = source.partition(":")
+                slot = None
+                if kind == "equipment":
+                    slot = key
+                    label = equipment_names.get(key, "Equipped item")
+                elif kind == "condition":
+                    label = condition_names.get(key, "Condition")
+                elif kind == "perk":
+                    definition = self.engine.perk_definitions.get(key, {})
+                    label = definition.get("label")
+                    if not isinstance(label, str) or not label:
+                        label = _pretty_id(key, "PERK_")
+                elif kind == "set":
+                    label = "Equipment set bonus"
+                elif source == "unidentified_modifier":
+                    kind = "unidentified"
+                    label = "Unidentified modifier"
+                else:
+                    raise RuleError("Unsupported player-visible stat contribution")
+                contributions.append({
+                    "kind": kind, "label": label, "slot": slot, "value": value,
+                })
+            stat["contributions"] = contributions
+        return status
 
     def _location_for(self, state: GameState) -> str:
         override = state.flags.get("android.map_location_override")
