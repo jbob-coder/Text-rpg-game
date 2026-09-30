@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-30 19:36 AST  
+Updated: 2026-09-30 19:45 AST  
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -130,16 +130,20 @@ The UI must not become the authoritative rules engine.
 
 ### TASK P-002 — Equipment model + visual integration
 - STATUS: `IN_PROGRESS`
-- IMPLEMENTED: authoritative equipment slots, equip/unequip bridge and Android equipment panel. Visual paper-doll integration is being validated in `feature/android-open-world-v1`.
+- IMPLEMENTED: authoritative equipment slots, equip/unequip bridge, Android inventory/equipment controls, and verified 32x48 paper-doll presentation for explicitly authored overlays.
+- VERIFIED CONTRACT: `fix/avatar-overlay-rig-contract` / PR #10 requires exact `itemId + slot + zOrder + 32x48 sprite` mappings at one shared character origin. Unmapped equipment remains logically equipped and does not receive invented avatar geometry.
+- CURRENT AUTHORED STARTING OVERLAYS: Depot Jacket, Work Gloves, Signal Ring, Courier Neck Tag.
 - Planned slots: Head, Chest, Hands, Legs, Feet, Main Hand, Off Hand, Ring 1, Ring 2, Neck, Accessory 1, Accessory 2.
-- Equipment must affect authoritative state/rules and eventually appearance.
+- REMAINING: character/equipment selection UX, additional authored overlays, held-object anchor integration, and physical-device visual review.
 - COMPLETED_AT: —
 
 ### TASK P-003 — Dedicated detailed Stats screen
 - STATUS: `IN_PROGRESS`
-- IMPLEMENTED: separate Stats surface with resources, attributes, derived stats, skills and conditions from the player-safe projection. Deeper contribution/meaning presentation remains in progress.
-- Categories: Core, Combat, Resources, Social, Progression, Derived.
-- Inspectable base/equipment/passive contributions and gameplay meaning.
+- IMPLEMENTED: separate Stats surface with compact player/resources summary, the canonical seven attributes, derived stats, skills and conditions from the player-safe projection. Attributes and skills are now selectable and request on-demand authoritative contribution explanations instead of duplicating modifier math in Compose.
+- VERIFIED SLICE: `feature/player-safe-stat-inspection@4f1775e6812fba7133465a9cfcac8ee48f2b1c14`, PR #11, Android Pixel Client run 219 / ID `36792301545`: Python 303/303; Android unit/instrumentation compile/assemble/package passed; API 35 x86_64 emulator started 18 connected tests and completed successfully with 0 failures.
+- APK SHA-256: `da3b870542bbd4dd1f49b284f9a86b09bcf9c8e245cc4c14fb56311780a6b154`.
+- PLAYER-SAFE DETAIL: equipment sources appear through safe explanation provenance (for example `equipment:body`) while raw item modifier maps remain absent from the inventory/equipment projection.
+- REMAINING: deeper derived-stat explanation and later progression/social presentation where authoritative data exists.
 - COMPLETED_AT: —
 
 ### TASK P-004 — Inventory / Equipment panels
@@ -321,7 +325,7 @@ The UI must not become the authoritative rules engine.
 - NEXT: build product-facing Character/Equipment presentation on this contract; do not reintroduce generic slot geometry or bind held props without explicit player-safe presentation state.
 
 ### Player-safe stat inspection / Stats UI slice
-- STATUS: `IN_PROGRESS`
+- STATUS: `VERIFIED_IMPLEMENTATION`
 - BRANCH: `feature/player-safe-stat-inspection`
 - PARENT: `fix/avatar-overlay-rig-contract@7d4558ea5c9e3ad24bf29fe42c8f199ed0be60fe`.
 - OBJECTIVE: make the approved Stats screen inspectable without moving authoritative modifier arithmetic into Compose.
@@ -334,9 +338,11 @@ The UI must not become the authoritative rules engine.
   - equipment contribution rows derive from player-safe source keys such as `equipment:body`, never from duplicated UI arithmetic;
   - inspection is serialized against engine mutations so a read cannot race equip/choice/travel state changes.
 - TESTS ADDED: Python bridge coverage for Endurance + Depot Jacket and Technical Systems + Work Gloves, invalid-path rollback, Kotlin mapper/error classification, and Compose request/render coverage for equipment contributions.
-- EXACT-HEAD GATE: pending.
+- VERIFIED IMPLEMENTATION HEAD: `4f1775e6812fba7133465a9cfcac8ee48f2b1c14`.
+- VERIFIED GATE: Android Pixel Client run 219 / ID `36792301545`: Python 303/303; Android unit tests, Compose instrumentation compilation, debug APK assembly/package checks passed; API 35 x86_64 emulator started 18 connected tests and completed with 0 failures.
+- APK SHA-256: `da3b870542bbd4dd1f49b284f9a86b09bcf9c8e245cc4c14fb56311780a6b154`.
 - BOUNDARY: derived-stat deep breakdown remains read-only summary in this slice; no raw authored rule maps are projected to Compose.
-- NEXT: run exact-head Python + Android unit/assemble + API 35 emulator gates; fix any failures before promotion.
+- NEXT: improve the Character/Equipment screen on top of the verified paper-doll contract without inventing unmapped gear art.
 
 ## Known technical follow-ups
 
