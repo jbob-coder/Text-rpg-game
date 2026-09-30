@@ -164,6 +164,24 @@ BOOK_07 / Interworld Expansion 2606–2644.
 ### BOOK_07 — Interworld Expansion
 2606–2644 settlement, competition, new worlds, Kharvori pre-contact and first contact.
 
+Current chapters:
+- `BOOK_07_CHAPTER_01_WHEN_THE_FRONTIER_NEEDED_SCHOOLS.md` — 2606–2620 human multiworld consolidation, civilian institutions, corridor economics, and first-contact evidence preparation.
+- `BOOK_07_CHAPTER_02_TWO_MAPS_OF_THE_SAME_WORLD.md` — 2626–2628 Nareth/LANTERN_14 evidence sequence and first nonviolent Human/Kharvori contact.
+
+Technical anchors:
+- `../eras/ERA_INTERWORLD_EXPANSION_2606_2644.md`
+- `../kharvori/KHARVORI_HOMEWORLD_VEYRA_BASELINE_V1.md`
+- `../kharvori/KHARVORI_BIOLOGY_BASELINE_V1.md`
+- `../kharvori/KHARVORI_PRECONTACT_HISTORY_SPINE_V1.md`
+- `../contact/FIRST_HUMAN_KHARVORI_CONTACT_CHAIN_2626_2628.md`
+- `../spatial/SPATIAL_KHARVORI_HOMEWORLD_CONTACT_ATLAS_V1.md`
+
+BOOK_07 state:
+COMPLETE through first contact in 2628.
+
+Next major writing target:
+2628–2631 early diplomacy, translation, disclosure, trade rules, and mixed-species infrastructure.
+
 ### BOOK_08 — First Contact and Escalation
 Diplomacy, trade, misunderstandings, border pressure, failed agreements, militarization.
 
@@ -204,4 +222,5 @@ PHASE 03 extended instability: COMPLETE THROUGH APPROXIMATELY LATE 2474
 Early Crystal Era progress: COMPLETE THROUGH 2505
 Crystal Industrialization narrative progress: COMPLETE THROUGH 2558
 Portal Expansion narrative progress: COMPLETE THROUGH 2605
-Next execution unit: Rounds 381–390 — creature/ecology/ability reference execution
+Interworld Expansion narrative progress: COMPLETE THROUGH FIRST CONTACT 2628
+Next execution unit: Rounds 411–420 — early Human/Kharvori diplomacy
