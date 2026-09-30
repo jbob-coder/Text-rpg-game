@@ -27,6 +27,16 @@ class PythonGameEngineContractTest {
     }
 
     @Test
+    fun `stat inspection bridge failure maps to STAT_INSPECTION_ERROR`() {
+        val error = PythonGameEngine.classifyFailure(
+            IllegalStateException("STAT_INSPECTION_ERROR: That stat cannot be inspected.")
+        )
+
+        assertEquals("STAT_INSPECTION_ERROR", error.stageId)
+        assertEquals("That stat could not be inspected.", error.publicMessage)
+    }
+
+    @Test
     fun `safe bridge payload maps to snapshot and ignores unknown fields`() {
         val payload = mapOf(
             "scene" to mapOf(
