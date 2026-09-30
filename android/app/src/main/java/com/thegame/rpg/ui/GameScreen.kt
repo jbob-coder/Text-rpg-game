@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import com.thegame.rpg.GameUiState
 import com.thegame.rpg.boot.BootState
 import com.thegame.rpg.engine.GameSnapshot
+import com.thegame.rpg.engine.GameStatInspection
 import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
 
@@ -71,7 +72,9 @@ fun TheGameRoot(
     onCheat: (String) -> Unit,
     onEquip: (String) -> Unit,
     onUnequip: (String) -> Unit,
+    onInspectStatus: (String) -> Unit,
     onTravel: (String) -> Unit,
+    onInspectStatus: (String) -> Unit,
     onTravelTransitionFinished: (Long) -> Unit,
 ) {
     val snapshot = uiState.snapshot
@@ -80,6 +83,10 @@ fun TheGameRoot(
             PixelGameShell(
                 snapshot,
                 uiState.busy,
+                uiState.statInspectionPath,
+                uiState.statInspection,
+                uiState.statInspectionBusy,
+                uiState.statInspectionError,
                 onChoice,
                 onSave,
                 onLoad,
@@ -95,6 +102,7 @@ fun TheGameRoot(
                 onCheat,
                 onEquip,
                 onUnequip,
+                onInspectStatus,
                 onTravel,
             )
             uiState.travelTransition?.let { transition ->
@@ -176,6 +184,10 @@ private fun PixelBootScreen(state: BootState) {
 private fun PixelGameShell(
     snapshot: GameSnapshot,
     busy: Boolean,
+    statInspectionPath: String?,
+    statInspection: GameStatInspection?,
+    statInspectionBusy: Boolean,
+    statInspectionError: String?,
     onChoice: (String) -> Unit,
     onSave: () -> Unit,
     onLoad: () -> Unit,
@@ -246,7 +258,14 @@ private fun PixelGameShell(
                         textDelayMs = textDelayMs,
                     )
                     GameSection.CHARACTER -> CharacterSection(snapshot)
-                    GameSection.STATS -> StatsSection(snapshot)
+                    GameSection.STATS -> StatsSection(
+                        snapshot = snapshot,
+                        selectedPath = statInspectionPath,
+                        inspection = statInspection,
+                        inspectionBusy = statInspectionBusy,
+                        inspectionError = statInspectionError,
+                        onInspect = onInspectStatus,
+                    )
                     GameSection.INVENTORY -> InventorySection(
                         snapshot = snapshot,
                         busy = busy,
