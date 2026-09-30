@@ -294,9 +294,11 @@ fun PixelUiIcon(
 @Composable
 fun PixelItemIcon(
     itemId: String,
+    quality: String? = null,
     modifier: Modifier = Modifier,
 ) {
     val sprite = PixelAssetCatalog.itemIcon(itemId)
+    val qualityFrame = PixelItemQualityFrameCatalog.forQuality(quality)
     Box(
         modifier = modifier
             .background(PixelColors.Deep)
@@ -310,6 +312,20 @@ fun PixelItemIcon(
                 val ox = floor((size.width - sprite.width * px) / 2f)
                 val oy = floor((size.height - sprite.height * px) / 2f)
                 drawPixelSprite(sprite, px, ox, oy)
+            }
+            qualityFrame?.let { frame ->
+                Canvas(
+                    Modifier
+                        .fillMaxSize()
+                        .testTag("item-quality-frame-${quality?.lowercase()}")
+                ) {
+                    val px = floor(
+                        minOf(size.width / frame.width, size.height / frame.height)
+                    ).coerceAtLeast(1f)
+                    val ox = floor((size.width - frame.width * px) / 2f)
+                    val oy = floor((size.height - frame.height * px) / 2f)
+                    drawPixelSprite(frame, px, ox, oy)
+                }
             }
         } else {
             Text(
