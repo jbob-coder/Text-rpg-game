@@ -136,10 +136,12 @@ object PixelAssetCatalog {
         ),
     )
 
-    /*/**
-     * Temporary technical hair layer. This preserves the current visible-avatar quality
-     * while the planned PLAYER_HAIR_LAYER_KIT_A asset is still awaiting its own reference
-     * and blueprint pass. It is deliberately not a canonical player identity asset.
+    /**
+     * Neutral technical hair layer for the current system-master player.
+     *
+     * This is deliberately identity-light: it improves the shipped silhouette without
+     * declaring a canonical player face or hairstyle. Future customization can replace it
+     * through the documented PLAYER_HAIR_LAYER_KIT_A pipeline.
      */
     val playerHairTechnicalPlaceholder = PixelSprite(
         assetId = PLAYER_HAIR_PLACEHOLDER_ID,
