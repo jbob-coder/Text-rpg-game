@@ -77,6 +77,7 @@ class GameScreenTest {
 
         snapshot.choices.forEach { choice ->
             composeRule.onNodeWithTag("choice-${choice.id}")
+                .performScrollTo()
                 .assertIsDisplayed()
                 .assertHasClickAction()
         }
