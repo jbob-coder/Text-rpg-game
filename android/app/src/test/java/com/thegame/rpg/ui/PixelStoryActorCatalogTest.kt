@@ -9,15 +9,15 @@ class PixelStoryActorCatalogTest {
     fun productionActorsUseDefinedPalettesAndSceneScaleBounds() {
         assertEquals(
             setOf(
-                PixelStoryActorCatalog.TAMSIN_SCENE_ACTOR_ID,
-                PixelStoryActorCatalog.WOUNDED_COURIER_SCENE_ACTOR_ID,
+                PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID,
+                PixelStoryActorCatalog.SUPPORT_COURIER_ID,
             ),
             PixelStoryActorCatalog.productionActors.map { it.assetId }.toSet(),
         )
 
         PixelStoryActorCatalog.productionActors.forEach { sprite ->
-            assertTrue(sprite.width in 1..32)
-            assertTrue(sprite.height in 1..32)
+            assertEquals(32, sprite.width)
+            assertEquals(48, sprite.height)
             val usedKeys = sprite.rows
                 .flatMap { it.toList() }
                 .filter { it != PixelSprite.TRANSPARENT_PIXEL }
@@ -28,16 +28,16 @@ class PixelStoryActorCatalogTest {
 
     @Test
     fun tamsinKeepsSourceBackedSilhouetteAnchorsAtSceneScale() {
-        val sprite = PixelStoryActorCatalog.tamsin
+        val sprite = PixelStoryActorCatalog.tamsinFront
 
         // Heavy left fringe.
-        assertTrue((3..9).any { x -> sprite.rows[6][x] != PixelSprite.TRANSPARENT_PIXEL })
+        assertTrue((9..16).any { x -> sprite.rows[7][x] != PixelSprite.TRANSPARENT_PIXEL })
         // High collar / pale shirt wedge.
-        assertTrue((8..11).any { x -> sprite.rows[15][x] == 'P' })
+        assertTrue((14..19).any { x -> sprite.rows[17][x] == 'P' })
         // Cross-body satchel path and hip mass.
         assertTrue(sprite.rows.any { row -> 'B' in row || 'b' in row })
         // Rolled right sleeve leaves visible skin higher than the left hand.
-        assertTrue((16..17).any { x -> sprite.rows[23][x] == 'S' })
+        assertTrue((25..27).any { x -> sprite.rows[29][x] == 'S' })
     }
 
     @Test
