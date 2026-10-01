@@ -40,12 +40,12 @@ import kotlinx.coroutines.delay
 fun PixelPanel(
     modifier: Modifier = Modifier,
     title: String? = null,
+    chrome: PixelPanelChrome = PixelPanelChrome.STORY,
     content: @Composable () -> Unit,
 ) {
     Column(
         modifier = modifier
-            .background(PixelColors.Panel)
-            .border(2.dp, PixelColors.Muted)
+            .pixelChrome(PixelUiChromeCatalog.panel(chrome))
             .padding(12.dp),
     ) {
         if (title != null) {
@@ -59,15 +59,17 @@ fun PixelPanel(
 @Composable
 fun PixelChoiceCard(choice: GameChoice, busy: Boolean, onClick: () -> Unit) {
     val enabled = choice.enabled && !busy
-    val border = if (enabled) PixelColors.Cyan else PixelColors.Disabled
-    val background = if (enabled) PixelColors.PanelAlt else PixelColors.Deep
+    val chrome = if (enabled) {
+        PixelUiChromeCatalog.choiceEnabled
+    } else {
+        PixelUiChromeCatalog.choiceDisabled
+    }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .testTag("choice-${choice.id}")
-            .background(background)
-            .border(2.dp, border)
+            .pixelChrome(chrome)
             .clickable(enabled = enabled, role = Role.Button, onClick = onClick)
             .padding(horizontal = 14.dp, vertical = 12.dp),
     ) {
@@ -91,6 +93,7 @@ fun PlayerAvatarPanel(
     modifier: Modifier = Modifier,
     compact: Boolean = false,
     showSummary: Boolean = true,
+    panelChrome: PixelPanelChrome = PixelPanelChrome.STORY,
 ) {
     val equippedOverlays = equipment
         .filter { it.equipped }
@@ -116,7 +119,11 @@ fun PlayerAvatarPanel(
         }
     }
 
-    PixelPanel(modifier = modifier.testTag("player-avatar"), title = identity.name ?: "Player") {
+    PixelPanel(
+        modifier = modifier.testTag("player-avatar"),
+        title = identity.name ?: "Player",
+        chrome = panelChrome,
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -144,16 +151,14 @@ fun PlayerAvatarPanel(
                 val ox = floor((size.width - 32f * px) / 2f)
                 val oy = floor((size.height - 48f * px) / 2f)
 
-                fun block(x: Int, y: Int, w: Int, h: Int, color: Color) {
-                    drawRect(
-                        color = color,
-                        topLeft = Offset(ox + x * px, oy + y * px),
-                        size = Size(w * px, h * px),
-                    )
-                }
-
-                // Grounding shadow is a presentation layer rather than part of the body asset.
-                block(8, 46, 17, 2, Color(0xFF0A0E11))
+                // Asset 192: bottom-anchor the 32x16 staging shadow so its last source
+                // row aligns with the shared player ground pivot at y=47.
+                drawPixelSprite(
+                    sprite = PixelCharacterStagingCatalog.mediumGroundShadow,
+                    pixelSize = px,
+                    originX = ox,
+                    originY = oy + 32f * px,
+                )
 
                 drawPixelSprite(PixelAssetCatalog.playerFrontBase, px, ox, oy)
                 drawPixelSprite(PixelAssetCatalog.playerHairTechnicalPlaceholder, px, ox, oy)

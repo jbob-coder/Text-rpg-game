@@ -412,42 +412,61 @@ private fun NarrativePanel(
     }
 
     PixelPanel(modifier = modifier) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .testTag("narrative-scroll")
-                .verticalScroll(narrativeScroll),
-        ) {
-            Text(
-                text = snapshot.title,
-                color = PixelColors.Cyan,
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.testTag("scene-title"),
-            )
-            Spacer(Modifier.height(8.dp))
-            SceneIllustration(
-                locationId = snapshot.location,
-                sceneId = snapshot.sceneId,
-                relayState = snapshot.visuals.relayState,
+        Box(Modifier.fillMaxSize()) {
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp),
-            )
-            Spacer(Modifier.height(12.dp))
-            Text(
-                text = visibleBody,
-                color = PixelColors.Paper,
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.clickable(role = Role.Button) { onNarrate(snapshot.body) },
-            )
-            Spacer(Modifier.height(10.dp))
-            PixelTextButton("READ ALOUD") { onNarrate(snapshot.body) }
-            Spacer(Modifier.height(18.dp))
-            Text("DECIDE", color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
-            Spacer(Modifier.height(8.dp))
-            snapshot.choices.forEach { choice ->
-                PixelChoiceCard(choice, busy) { onChoice(choice.id) }
+                    .fillMaxSize()
+                    .padding(bottom = 22.dp)
+                    .testTag("narrative-scroll")
+                    .verticalScroll(narrativeScroll),
+            ) {
+                Text(
+                    text = snapshot.title,
+                    color = PixelColors.Cyan,
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.testTag("scene-title"),
+                )
                 Spacer(Modifier.height(8.dp))
+                SceneIllustration(
+                    locationId = snapshot.location,
+                    sceneId = snapshot.sceneId,
+                    relayState = snapshot.visuals.relayState,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(150.dp),
+                )
+                Spacer(Modifier.height(12.dp))
+                Text(
+                    text = visibleBody,
+                    color = PixelColors.Paper,
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.clickable(role = Role.Button) { onNarrate(snapshot.body) },
+                )
+                Spacer(Modifier.height(10.dp))
+                PixelIconTextButton(
+                    label = "READ ALOUD",
+                    icon = PixelUiUtilityCatalog.narrationIcon,
+                ) {
+                    onNarrate(snapshot.body)
+                }
+                Spacer(Modifier.height(18.dp))
+                Text("DECIDE", color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
+                Spacer(Modifier.height(8.dp))
+                snapshot.choices.forEach { choice ->
+                    PixelChoiceCard(choice, busy) { onChoice(choice.id) }
+                    Spacer(Modifier.height(8.dp))
+                }
+            }
+
+            if (narrativeScroll.value < narrativeScroll.maxValue) {
+                PixelUiIcon(
+                    sprite = PixelUiUtilityCatalog.scrollMarker,
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .size(18.dp)
+                        .background(PixelColors.PanelAlt),
+                    testTag = "narrative-scroll-marker",
+                )
             }
         }
     }
@@ -507,7 +526,7 @@ private fun SettingsPanel(
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        PixelPanel(title = "Settings") {
+        PixelPanel(title = "Settings", chrome = PixelPanelChrome.SETTINGS) {
             Text("Game settings live outside the narrative HUD.", color = PixelColors.Paper, style = MaterialTheme.typography.bodyLarge)
             Spacer(Modifier.height(12.dp))
             PixelTextButton("SAVE GAME", onSave)
@@ -519,7 +538,7 @@ private fun SettingsPanel(
             Spacer(Modifier.height(8.dp))
             PixelTextButton("CLOSE", onClose)
         }
-        PixelPanel(title = "Narration") {
+        PixelPanel(title = "Narration", chrome = PixelPanelChrome.SETTINGS) {
             Text(
                 "Tap the narrative text or READ ALOUD to use the device's native text-to-speech engine.",
                 color = PixelColors.Muted,
@@ -568,13 +587,13 @@ private fun SettingsPanel(
             Spacer(Modifier.height(8.dp))
             PixelTextButton("STOP NARRATION", onStopNarration)
         }
-        PixelPanel(title = "Session") {
+        PixelPanel(title = "Session", chrome = PixelPanelChrome.SETTINGS) {
             LabeledValue("Content", snapshot.contentId ?: "—")
             LabeledValue("Canon", snapshot.canonStatus ?: "—")
             LabeledValue("Scene", snapshot.sceneId)
             LabeledValue("Turn", snapshot.turn.toString())
         }
-        PixelPanel(title = "Developer") {
+        PixelPanel(title = "Developer", chrome = PixelPanelChrome.DEVELOPER) {
             var cheatCode by remember { mutableStateOf("") }
             Text(
                 "Cheats are validated by the Python game layer. Quick actions and manual codes use the same whitelist.",
@@ -625,7 +644,7 @@ private fun InventorySection(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        PixelPanel(title = "Equipment") {
+        PixelPanel(title = "Equipment", chrome = PixelPanelChrome.INVENTORY) {
             snapshot.inventory.equipment.forEach { slot ->
                 val item = if (slot.equipped) {
                     buildString {
@@ -645,7 +664,7 @@ private fun InventorySection(
             }
         }
 
-        PixelPanel(title = "Inventory") {
+        PixelPanel(title = "Inventory", chrome = PixelPanelChrome.INVENTORY) {
             if (snapshot.inventory.items.isEmpty()) {
                 Text("No carried items.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
             } else {
@@ -700,7 +719,7 @@ private fun QuestSection(snapshot: GameSnapshot) {
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         if (snapshot.quests.isEmpty()) {
-            PixelPanel(title = "Quests") {
+            PixelPanel(title = "Quests", chrome = PixelPanelChrome.QUEST) {
                 Text(
                     "No quest is active yet. Explore the current scene and the quest log will update from authoritative state.",
                     color = PixelColors.Muted,
@@ -711,7 +730,7 @@ private fun QuestSection(snapshot: GameSnapshot) {
             listOf("main", "side", "optional", "lore").forEach { category ->
                 val quests = snapshot.quests.filter { it.category == category }
                 if (quests.isNotEmpty()) {
-                    PixelPanel(title = category) {
+                    PixelPanel(title = category, chrome = PixelPanelChrome.QUEST) {
                         quests.forEach { quest ->
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 PixelUiIcon(
@@ -782,7 +801,7 @@ private fun MapSection(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        PixelPanel(title = map.title) {
+        PixelPanel(title = map.title, chrome = PixelPanelChrome.MAP) {
             if (map.nodes.isEmpty()) {
                 Text(
                     "No mapped location has been discovered yet.",
@@ -884,6 +903,21 @@ private fun MapSection(
                     if (selected.description.isNotBlank()) {
                         Text(selected.description, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
                     }
+                    if (PixelEnvironmentModuleCatalog.arrivalPreview(selected.id) != null) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(
+                            "ARRIVAL VIEW",
+                            color = PixelColors.Gold,
+                            style = MaterialTheme.typography.labelLarge,
+                        )
+                        Spacer(Modifier.height(4.dp))
+                        PixelEnvironmentArrivalPreview(
+                            locationId = selected.id,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(96.dp),
+                        )
+                    }
                     if (!selected.current) {
                         Spacer(Modifier.height(8.dp))
                         if (selected.reachable) {
@@ -910,7 +944,7 @@ private fun MapSection(
 
 @Composable
 private fun MorePanel(onCharacter: () -> Unit, onSettings: () -> Unit) {
-    PixelPanel(modifier = Modifier.fillMaxSize(), title = "More") {
+    PixelPanel(modifier = Modifier.fillMaxSize(), title = "More", chrome = PixelPanelChrome.SETTINGS) {
         PixelTextButton("CHARACTER / EQUIPMENT", onCharacter)
         Spacer(Modifier.height(8.dp))
         PixelTextButton("SETTINGS / SAVE / AUDIO", onSettings)
@@ -953,8 +987,10 @@ private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) 
     Box(
         modifier = Modifier
             .testTag("nav-${label.lowercase()}")
-            .background(if (active) PixelColors.Cyan else PixelColors.Deep)
-            .border(2.dp, if (active) PixelColors.Paper else PixelColors.Muted)
+            .pixelChrome(
+                if (active) PixelUiChromeCatalog.tabActive
+                else PixelUiChromeCatalog.tabInactive,
+            )
             .clickable(role = Role.Tab, onClick = onClick)
             .padding(horizontal = 6.dp, vertical = 5.dp),
     ) {
@@ -971,6 +1007,32 @@ private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) 
                 color = if (active) PixelColors.Ink else PixelColors.Paper,
                 style = MaterialTheme.typography.labelLarge,
             )
+        }
+    }
+}
+
+@Composable
+private fun PixelIconTextButton(
+    label: String,
+    icon: PixelSprite,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
+    Box(
+        modifier = modifier
+            .pixelChrome(PixelUiChromeCatalog.buttonPrimary)
+            .testTag("button-with-icon-${icon.assetId.lowercase()}")
+            .clickable(role = Role.Button, onClick = onClick)
+            .padding(horizontal = 12.dp, vertical = 8.dp),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            PixelUiIcon(
+                sprite = icon,
+                modifier = Modifier.size(20.dp),
+                testTag = "button-icon-${icon.assetId.lowercase()}",
+            )
+            Spacer(Modifier.width(8.dp))
+            Text(label, color = PixelColors.Paper, style = MaterialTheme.typography.labelLarge)
         }
     }
 }
@@ -993,8 +1055,7 @@ private fun PixelTextButton(
 ) {
     Box(
         modifier = modifier
-            .background(PixelColors.PanelAlt)
-            .border(2.dp, PixelColors.Cyan)
+            .pixelChrome(PixelUiChromeCatalog.buttonPrimary)
             .clickable(role = Role.Button, onClick = onClick)
             .padding(horizontal = 12.dp, vertical = 8.dp),
     ) {

@@ -71,9 +71,13 @@ class GameScreenTest {
             .assert(hasScrollAction())
         composeRule.onNodeWithText(snapshot.body).assertIsDisplayed()
         composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        composeRule.onNodeWithTag("button-with-icon-access_audio_narration_icon")
+            .performScrollTo()
+            .assertIsDisplayed()
 
         snapshot.choices.forEach { choice ->
             composeRule.onNodeWithTag("choice-${choice.id}")
+                .performScrollTo()
                 .assertIsDisplayed()
                 .assertHasClickAction()
         }
@@ -81,6 +85,32 @@ class GameScreenTest {
         listOf("Stats", "Inventory", "Quests", "Map", "More").forEach { label ->
             composeRule.onNodeWithText(label).assertIsDisplayed().assertHasClickAction()
         }
+    }
+
+    @Test
+    fun overflowingNarrativeShowsAuthoredScrollMarker() {
+        val longSnapshot = snapshot.copy(
+            body = List(24) {
+                "The maintenance corridor keeps narrowing while emergency relays pulse against the wall."
+            }.joinToString(" "),
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                androidx.compose.foundation.layout.Box(
+                    Modifier.size(width = 320.dp, height = 480.dp),
+                ) {
+                    GameScreen(
+                        snapshot = longSnapshot,
+                        busy = false,
+                        onChoice = {},
+                        onNavigate = {},
+                    )
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("narrative-scroll-marker").assertIsDisplayed()
     }
 
     @Test
