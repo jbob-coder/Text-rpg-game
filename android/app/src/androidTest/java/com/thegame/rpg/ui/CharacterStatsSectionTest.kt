@@ -30,6 +30,7 @@ import com.thegame.rpg.engine.GameResource
 import com.thegame.rpg.engine.GameSkill
 import com.thegame.rpg.engine.GameSnapshot
 import com.thegame.rpg.engine.GameStatusContribution
+import com.thegame.rpg.engine.GameVisuals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -91,6 +92,35 @@ class CharacterStatsSectionTest {
         composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
         composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
         saveScreenshot("story-scene-first-320dp")
+    }
+
+    @Test
+    fun relayWorkbenchStoryHasPhoneSizedArtEvidence() {
+        val relaySnapshot = snapshot.copy(
+            sceneId = "OPENING_RELAY_CASING",
+            title = "A Case That Should Be Empty",
+            body = "The relay is an obsolete municipal model. Its outer casing is cold, but a faint status pulse repeats from inside. The address plate has been physically scraped away.",
+            location = "RELAY_WORKBENCH",
+            visuals = GameVisuals(relayState = "intact"),
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
+                    GameScreen(
+                        snapshot = relaySnapshot,
+                        busy = false,
+                        onChoice = {},
+                        onNavigate = {},
+                    )
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("story-pixel-header").assertIsDisplayed()
+        composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
+        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        saveScreenshot("relay-workbench-320dp")
     }
 
     @Test
