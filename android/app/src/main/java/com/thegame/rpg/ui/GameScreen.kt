@@ -917,22 +917,23 @@ internal fun MapSection(
                         .testTag("world-map-canvas")
                         .background(PixelColors.Deep)
                         .border(2.dp, PixelColors.Muted)
-                        .pointerInput(map.nodes) {
+                        .pointerInput(map.nodes, map.title) {
                             detectTapGestures { tap ->
-                                val width = size.width.toFloat().coerceAtLeast(1f)
-                                val height = size.height.toFloat().coerceAtLeast(1f)
+                                val viewport = PixelMapArtCatalog.viewport(
+                                    mapTitle = map.title,
+                                    canvasWidth = size.width.toFloat(),
+                                    canvasHeight = size.height.toFloat(),
+                                )
                                 val nearest = map.nodes.minByOrNull { node ->
-                                    val px = (node.x.coerceIn(0.0, 100.0) / 100.0 * width).toFloat()
-                                    val py = (node.y.coerceIn(0.0, 100.0) / 100.0 * height).toFloat()
-                                    val dx = tap.x - px
-                                    val dy = tap.y - py
+                                    val p = viewport.point(node.x, node.y)
+                                    val dx = tap.x - p.x
+                                    val dy = tap.y - p.y
                                     dx * dx + dy * dy
                                 }
                                 if (nearest != null) {
-                                    val px = (nearest.x.coerceIn(0.0, 100.0) / 100.0 * width).toFloat()
-                                    val py = (nearest.y.coerceIn(0.0, 100.0) / 100.0 * height).toFloat()
-                                    val dx = tap.x - px
-                                    val dy = tap.y - py
+                                    val p = viewport.point(nearest.x, nearest.y)
+                                    val dx = tap.x - p.x
+                                    val dy = tap.y - p.y
                                     val threshold = 30.dp.toPx()
                                     if (dx * dx + dy * dy <= threshold * threshold) {
                                         selectedId = nearest.id
@@ -941,27 +942,23 @@ internal fun MapSection(
                             }
                         },
                 ) {
+                    val viewport = PixelMapArtCatalog.viewport(
+                        mapTitle = map.title,
+                        canvasWidth = size.width,
+                        canvasHeight = size.height,
+                    )
                     PixelMapArtCatalog.base(map.title)?.let { base ->
-                        val pixelSize = kotlin.math.min(
-                            size.width / base.width.toFloat(),
-                            size.height / base.height.toFloat(),
-                        )
-                        val originX = (size.width - base.width * pixelSize) / 2f
-                        val originY = (size.height - base.height * pixelSize) / 2f
                         drawPixelSprite(
                             sprite = base,
-                            pixelSize = pixelSize,
-                            originX = originX,
-                            originY = originY,
+                            pixelSize = viewport.pixelSize,
+                            originX = viewport.originX,
+                            originY = viewport.originY,
                         )
                     }
 
                     fun point(id: String): Offset? {
                         val node = map.nodes.firstOrNull { it.id == id } ?: return null
-                        return Offset(
-                            x = (node.x.coerceIn(0.0, 100.0) / 100.0 * size.width).toFloat(),
-                            y = (node.y.coerceIn(0.0, 100.0) / 100.0 * size.height).toFloat(),
-                        )
+                        return viewport.point(node.x, node.y)
                     }
                     map.edges.forEach { edge ->
                         val from = point(edge.from)
