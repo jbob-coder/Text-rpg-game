@@ -17,6 +17,7 @@ enum class PixelPanelChrome {
     MAP,
     SETTINGS,
     DEVELOPER,
+    MODAL,
 }
 
 data class PixelChromeAsset(
@@ -43,6 +44,7 @@ object PixelUiChromeCatalog {
     const val MAP_FRAME_ID = "UI_PANEL_MAP_FRAME"
     const val SETTINGS_FRAME_ID = "UI_PANEL_SETTINGS_FRAME"
     const val DEVELOPER_FRAME_ID = "UI_PANEL_DEVELOPER_FRAME"
+    const val MODAL_FRAME_ID = "UI_MODAL_FRAME"
     const val CHOICE_ENABLED_ID = "UI_CHOICE_CARD_ENABLED"
     const val CHOICE_DISABLED_ID = "UI_CHOICE_CARD_DISABLED"
     const val CHOICE_SELECTED_ID = "UI_CHOICE_CARD_SELECTED"
@@ -132,6 +134,14 @@ object PixelUiChromeCatalog {
         PixelColors.Gold,
         PixelColors.Danger,
     )
+    val modalFrame = asset(
+        MODAL_FRAME_ID,
+        PixelColors.Panel,
+        PixelColors.Gold,
+        PixelColors.Deep,
+        PixelColors.Cyan,
+        PixelColors.Gold,
+    )
 
     val choiceEnabled = asset(
         CHOICE_ENABLED_ID,
@@ -209,6 +219,7 @@ object PixelUiChromeCatalog {
         PixelPanelChrome.MAP -> mapFrame
         PixelPanelChrome.SETTINGS -> settingsFrame
         PixelPanelChrome.DEVELOPER -> developerFrame
+        PixelPanelChrome.MODAL -> modalFrame
     }
 
     val produced: List<PixelChromeAsset> = listOf(
@@ -220,6 +231,7 @@ object PixelUiChromeCatalog {
         mapFrame,
         settingsFrame,
         developerFrame,
+        modalFrame,
         choiceEnabled,
         choiceDisabled,
         choiceSelected,
