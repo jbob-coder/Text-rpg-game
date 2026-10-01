@@ -67,7 +67,7 @@ class CharacterStatsSectionTest {
     )
 
     private fun saveScreenshot(name: String, tag: String = "qa-phone") {
-        val directory = File(InstrumentationRegistry.getInstrumentation().targetContext.getExternalFilesDir(null), "ui-qa")
+        val directory = File(InstrumentationRegistry.getInstrumentation().targetContext.filesDir, "ui-qa")
         directory.mkdirs()
         File(directory, "$name.png").outputStream().use {
             assertTrue(composeRule.onNodeWithTag(tag).captureToImage().asAndroidBitmap().compress(Bitmap.CompressFormat.PNG, 100, it))
