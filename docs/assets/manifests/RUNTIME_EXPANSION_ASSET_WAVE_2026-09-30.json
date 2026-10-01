@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "wave_id": "RUNTIME-ASSET-EXPANSION-2026-09-30",
+  "branch": "feature/pixel-assets-runtime-expansion",
+  "base": "feature/character-stats-inspection@791a839b23d4c3b9c43b6b1a4f9f204008a8c7df",
+  "status": "CANDIDATE_PENDING_EXACT_HEAD_GATE",
+  "policy": [
+    "Reuse existing verified/provisionally verified pixel masters before creating replacements.",
+    "Presentation assets consume player-safe state only and never own rules, travel, equipment, or quest state.",
+    "Unmapped character equipment and locations receive no borrowed or invented visual geometry.",
+    "Canonical player/Tamsin geometry remains blocked until its documented reference/blueprint gates are satisfied."
+  ],
+  "assets": [
+    {
+      "number": 58,
+      "asset_id": "DEPOT_FACADE_EXTERIOR",
+      "source_wave": "B001-WAVE-L-ENVIRONMENT-MODULES",
+      "state": "CANDIDATE_INTEGRATED_MAP_PREVIEW",
+      "binding": "world_map selected location DISTRICT_PLAZA",
+      "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentModuleCatalog.kt"
+    },
+    {
+      "number": 59,
+      "asset_id": "MAINTENANCE_CORRIDOR_CONNECTOR",
+      "source_wave": "B001-WAVE-L-ENVIRONMENT-MODULES",
+      "state": "PRODUCED_DEFERRED_INTEGRATION",
+      "binding": null,
+      "reason": "No legitimate authored connector/arrival surface yet."
+    },
+    {
+      "number": 60,
+      "asset_id": "MUNICIPAL_ARCHIVE_EXTERIOR",
+      "source_wave": "B001-WAVE-L-ENVIRONMENT-MODULES",
+      "state": "CANDIDATE_INTEGRATED_MAP_PREVIEW",
+      "binding": "world_map selected location DISTRICT_ARCHIVE",
+      "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentModuleCatalog.kt"
+    },
+    {
+      "number": 61,
+      "asset_id": "MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS",
+      "source_wave": "B001-WAVE-L-ENVIRONMENT-MODULES",
+      "state": "PRODUCED_DEFERRED_INTEGRATION",
+      "binding": null,
+      "reason": "Future scene composition infrastructure; no runtime surface should infer layout from it."
+    },
+    {
+      "number": 192,
+      "asset_id": "CHARACTER_GROUND_SHADOW_MEDIUM",
+      "source_batch": "BATCH_002",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "PlayerAvatarPanel staging layer aligned to shared ground pivot",
+      "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelCharacterStagingCatalog.kt"
+    },
+    {
+      "number": 401,
+      "asset_id": "UI_PANEL_STORY_FRAME",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "default Story/PixelPanel chrome"
+    },
+    {
+      "number": 402,
+      "asset_id": "UI_PANEL_CHARACTER_FRAME",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "Character/avatar/equipment detail chrome"
+    },
+    {
+      "number": 403,
+      "asset_id": "UI_PANEL_STATS_FRAME",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "Stats summary/detail/skills/derived/conditions chrome"
+    },
+    {
+      "number": 404,
+      "asset_id": "UI_PANEL_INVENTORY_FRAME",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "Inventory and equipment chrome"
+    },
+    {
+      "number": 405,
+      "asset_id": "UI_PANEL_QUEST_FRAME",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "Quest/category chrome"
+    },
+    {
+      "number": 406,
+      "asset_id": "UI_PANEL_MAP_FRAME",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "Map chrome"
+    },
+    {
+      "number": 407,
+      "asset_id": "UI_PANEL_SETTINGS_FRAME",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "Settings/Narration/Session/More chrome"
+    },
+    {
+      "number": 408,
+      "asset_id": "UI_PANEL_DEVELOPER_FRAME",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "Developer panel chrome"
+    },
+    {
+      "number": 409,
+      "asset_id": "UI_CHOICE_CARD_ENABLED",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "enabled authoritative choice presentation"
+    },
+    {
+      "number": 410,
+      "asset_id": "UI_CHOICE_CARD_DISABLED",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "disabled/locked choice presentation"
+    },
+    {
+      "number": 411,
+      "asset_id": "UI_CHOICE_CARD_SELECTED",
+      "source_batch": "BATCH_005",
+      "state": "PRODUCED_DEFERRED_INTEGRATION",
+      "binding": null,
+      "reason": "No persistent selected-choice state is modeled; do not invent one."
+    },
+    {
+      "number": 412,
+      "asset_id": "UI_BUTTON_PRIMARY",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "current primary text/icon buttons"
+    },
+    {
+      "number": 413,
+      "asset_id": "UI_BUTTON_SECONDARY",
+      "source_batch": "BATCH_005",
+      "state": "PRODUCED_DEFERRED_INTEGRATION",
+      "binding": null,
+      "reason": "Button priority semantics are not yet explicitly typed at call sites."
+    },
+    {
+      "number": 414,
+      "asset_id": "UI_BUTTON_DANGER",
+      "source_batch": "BATCH_005",
+      "state": "PRODUCED_DEFERRED_INTEGRATION",
+      "binding": null,
+      "reason": "Destructive-action semantics are not yet explicitly typed at call sites."
+    },
+    {
+      "number": 415,
+      "asset_id": "UI_TAB_ACTIVE",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "active GameSection tab"
+    },
+    {
+      "number": 416,
+      "asset_id": "UI_TAB_INACTIVE",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "inactive GameSection tab"
+    },
+    {
+      "number": 417,
+      "asset_id": "UI_SCROLL_MARKER",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "shown only when narrative scroll state reports remaining content",
+      "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelUiUtilityCatalog.kt"
+    },
+    {
+      "number": 490,
+      "asset_id": "ACCESS_AUDIO_NARRATION_ICON",
+      "source_batch": "BATCH_005",
+      "state": "CANDIDATE_INTEGRATED",
+      "binding": "READ ALOUD button paired with existing native TTS action",
+      "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelUiUtilityCatalog.kt"
+    }
+  ],
+  "verification": {
+    "status": "PENDING",
+    "required": [
+      "Python unit suite",
+      "Android JVM/unit + Compose instrumentation compilation",
+      "debug APK assembly/package checks",
+      "API 35 connected emulator tests"
+    ]
+  }
+}
