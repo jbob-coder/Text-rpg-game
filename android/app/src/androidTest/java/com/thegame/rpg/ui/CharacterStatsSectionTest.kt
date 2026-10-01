@@ -73,6 +73,27 @@ class CharacterStatsSectionTest {
     }
 
     @Test
+    fun storyPhoneShowsSceneFirstPixelHeaderAndEquippedAvatar() {
+        composeRule.setContent {
+            PixelTheme {
+                Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
+                    GameScreen(
+                        snapshot = snapshot,
+                        busy = false,
+                        onChoice = {},
+                        onNavigate = {},
+                    )
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("story-pixel-header").assertIsDisplayed()
+        composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
+        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        saveScreenshot("story-scene-first-320dp")
+    }
+
+    @Test
     fun allTwelveSlotsAndAvatarFitPhoneWidthAndSelectedGearShowsItsEngineBonus() {
         var unequipped: String? = null
         composeRule.setContent {
