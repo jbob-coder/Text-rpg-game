@@ -31,6 +31,9 @@ import com.thegame.rpg.engine.GameSkill
 import com.thegame.rpg.engine.GameSnapshot
 import com.thegame.rpg.engine.GameStatusContribution
 import com.thegame.rpg.engine.GameVisuals
+import com.thegame.rpg.engine.GameMapEdge
+import com.thegame.rpg.engine.GameMapNode
+import com.thegame.rpg.engine.GameWorldMap
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -129,6 +132,44 @@ class CharacterStatsSectionTest {
         composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
         composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
         saveScreenshot("relay-workbench-320dp")
+    }
+
+    @Test
+    fun mapPhoneRendersAuthoredDistrictArtWithProjectedNodes() {
+        val mapSnapshot = snapshot.copy(
+            worldMap = GameWorldMap(
+                title = "Gate Twelve District",
+                currentLocation = "PLATFORM_NINE",
+                nodes = listOf(
+                    GameMapNode("PLATFORM_NINE", "Platform Nine", "Evacuation platform inside the municipal tram depot.", 18.0, 36.0, current = true, reachable = true),
+                    GameMapNode("RELAY_WORKBENCH", "Relay Workbench", "Maintenance bench.", 34.0, 31.0, current = false, reachable = true),
+                    GameMapNode("GATE_TWELVE", "Service Gate Twelve", "Sealed maintenance entrance.", 53.0, 48.0, current = false, reachable = true),
+                    GameMapNode("EVAC_STAIR", "Quiet Stair", "Maintenance stair.", 40.0, 70.0, current = false, reachable = true),
+                ),
+                edges = listOf(
+                    GameMapEdge("PLATFORM_NINE", "RELAY_WORKBENCH"),
+                    GameMapEdge("PLATFORM_NINE", "GATE_TWELVE"),
+                    GameMapEdge("PLATFORM_NINE", "EVAC_STAIR"),
+                ),
+            ),
+        )
+        composeRule.setContent {
+            PixelTheme {
+                Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
+                    GameScreen(
+                        snapshot = mapSnapshot,
+                        busy = false,
+                        onChoice = {},
+                        onNavigate = {},
+                    )
+                }
+            }
+        }
+
+        composeRule.onNodeWithText("MAP").performClick()
+        composeRule.onNodeWithTag("world-map-canvas").assertIsDisplayed()
+        composeRule.onNodeWithText("Gate Twelve District").assertIsDisplayed()
+        saveScreenshot("map-gate-twelve-320dp")
     }
 
     @Test
