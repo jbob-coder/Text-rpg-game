@@ -412,42 +412,61 @@ private fun NarrativePanel(
     }
 
     PixelPanel(modifier = modifier) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .testTag("narrative-scroll")
-                .verticalScroll(narrativeScroll),
-        ) {
-            Text(
-                text = snapshot.title,
-                color = PixelColors.Cyan,
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.testTag("scene-title"),
-            )
-            Spacer(Modifier.height(8.dp))
-            SceneIllustration(
-                locationId = snapshot.location,
-                sceneId = snapshot.sceneId,
-                relayState = snapshot.visuals.relayState,
+        Box(Modifier.fillMaxSize()) {
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp),
-            )
-            Spacer(Modifier.height(12.dp))
-            Text(
-                text = visibleBody,
-                color = PixelColors.Paper,
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.clickable(role = Role.Button) { onNarrate(snapshot.body) },
-            )
-            Spacer(Modifier.height(10.dp))
-            PixelTextButton("READ ALOUD") { onNarrate(snapshot.body) }
-            Spacer(Modifier.height(18.dp))
-            Text("DECIDE", color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
-            Spacer(Modifier.height(8.dp))
-            snapshot.choices.forEach { choice ->
-                PixelChoiceCard(choice, busy) { onChoice(choice.id) }
+                    .fillMaxSize()
+                    .padding(bottom = 22.dp)
+                    .testTag("narrative-scroll")
+                    .verticalScroll(narrativeScroll),
+            ) {
+                Text(
+                    text = snapshot.title,
+                    color = PixelColors.Cyan,
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.testTag("scene-title"),
+                )
                 Spacer(Modifier.height(8.dp))
+                SceneIllustration(
+                    locationId = snapshot.location,
+                    sceneId = snapshot.sceneId,
+                    relayState = snapshot.visuals.relayState,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(150.dp),
+                )
+                Spacer(Modifier.height(12.dp))
+                Text(
+                    text = visibleBody,
+                    color = PixelColors.Paper,
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.clickable(role = Role.Button) { onNarrate(snapshot.body) },
+                )
+                Spacer(Modifier.height(10.dp))
+                PixelIconTextButton(
+                    label = "READ ALOUD",
+                    icon = PixelUiUtilityCatalog.narrationIcon,
+                ) {
+                    onNarrate(snapshot.body)
+                }
+                Spacer(Modifier.height(18.dp))
+                Text("DECIDE", color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
+                Spacer(Modifier.height(8.dp))
+                snapshot.choices.forEach { choice ->
+                    PixelChoiceCard(choice, busy) { onChoice(choice.id) }
+                    Spacer(Modifier.height(8.dp))
+                }
+            }
+
+            if (narrativeScroll.value < narrativeScroll.maxValue) {
+                PixelUiIcon(
+                    sprite = PixelUiUtilityCatalog.scrollMarker,
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .size(18.dp)
+                        .background(PixelColors.PanelAlt),
+                    testTag = "narrative-scroll-marker",
+                )
             }
         }
     }
@@ -884,6 +903,21 @@ private fun MapSection(
                     if (selected.description.isNotBlank()) {
                         Text(selected.description, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
                     }
+                    if (PixelEnvironmentModuleCatalog.arrivalPreview(selected.id) != null) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(
+                            "ARRIVAL VIEW",
+                            color = PixelColors.Gold,
+                            style = MaterialTheme.typography.labelLarge,
+                        )
+                        Spacer(Modifier.height(4.dp))
+                        PixelEnvironmentArrivalPreview(
+                            locationId = selected.id,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(96.dp),
+                        )
+                    }
                     if (!selected.current) {
                         Spacer(Modifier.height(8.dp))
                         if (selected.reachable) {
@@ -971,6 +1005,32 @@ private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) 
                 color = if (active) PixelColors.Ink else PixelColors.Paper,
                 style = MaterialTheme.typography.labelLarge,
             )
+        }
+    }
+}
+
+@Composable
+private fun PixelIconTextButton(
+    label: String,
+    icon: PixelSprite,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
+    Box(
+        modifier = modifier
+            .background(PixelColors.PanelAlt)
+            .border(2.dp, PixelColors.Cyan)
+            .clickable(role = Role.Button, onClick = onClick)
+            .padding(horizontal = 12.dp, vertical = 8.dp),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            PixelUiIcon(
+                sprite = icon,
+                modifier = Modifier.size(20.dp),
+                testTag = "button-icon-${icon.assetId.lowercase()}",
+            )
+            Spacer(Modifier.width(8.dp))
+            Text(label, color = PixelColors.Paper, style = MaterialTheme.typography.labelLarge)
         }
     }
 }
