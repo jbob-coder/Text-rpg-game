@@ -32,13 +32,36 @@ object PixelRasterCatalog {
         PixelAssetCatalog.WORK_GLOVES_LAYER_ID -> R.drawable.pixel_item_work_gloves_paperdoll
         PixelAssetCatalog.SIGNAL_RING_ICON_ID -> R.drawable.pixel_item_signal_ring_icon
         PixelAssetCatalog.SIGNAL_RING_LAYER_ID -> R.drawable.pixel_item_signal_ring_paperdoll
+        PixelAssetCatalog.COURIER_NECKTAG_ICON_ID -> R.drawable.pixel_item_courier_necktag_icon
+        PixelAssetCatalog.COURIER_NECKTAG_LAYER_ID -> R.drawable.pixel_item_courier_necktag_paperdoll
+        PixelAssetCatalog.MAINTENANCE_SEAL_ICON_ID -> R.drawable.pixel_item_maintenance_seal_icon
+        PixelAssetCatalog.DEAD_RELAY_ICON_ID -> R.drawable.pixel_item_dead_relay_icon
+        PixelAssetCatalog.DEAD_RELAY_OPENED_ID -> R.drawable.pixel_item_dead_relay_opened
+        PixelAssetCatalog.DEAD_RELAY_DAMAGED_ID -> R.drawable.pixel_item_dead_relay_damaged
+        PixelAssetCatalog.DEAD_RELAY_SIGNAL_LOST_ID -> R.drawable.pixel_item_dead_relay_signal_lost
         PixelSceneCatalog.PLATFORM_NINE_SCENE_ID -> R.drawable.pixel_platform_nine_blackout_scene
+        PixelSceneCatalog.RELAY_WORKBENCH_SCENE_ID -> R.drawable.pixel_relay_workbench_default_scene
+        PixelSceneCatalog.GATE_TWELVE_SCENE_ID -> R.drawable.pixel_gate_twelve_sealed_scene
+        PixelSceneCatalog.SERVICE_TUNNEL_SCENE_ID -> R.drawable.pixel_service_tunnel_default_scene
+        PixelSceneCatalog.EVAC_STAIR_SCENE_ID -> R.drawable.pixel_evac_stair_default_scene
+        PixelSceneCatalog.TRACE_CHAMBER_SCENE_ID -> R.drawable.pixel_trace_chamber_idle_scene
+        PixelSceneCatalog.DISTRICT_PLAZA_SCENE_ID -> R.drawable.pixel_district_plaza_open_scene
+        PixelSceneCatalog.DISTRICT_ARCHIVE_SCENE_ID -> R.drawable.pixel_district_archive_default_scene
+        PixelSceneCatalog.WORKSHOP_ROW_SCENE_ID -> R.drawable.pixel_workshop_row_default_scene
         else -> null
     }
 
     @DrawableRes
     fun scene(locationId: String): Int? = when (locationId) {
         "PLATFORM_NINE" -> R.drawable.pixel_platform_nine_blackout_scene
+        "RELAY_WORKBENCH" -> R.drawable.pixel_relay_workbench_default_scene
+        "GATE_TWELVE" -> R.drawable.pixel_gate_twelve_sealed_scene
+        "SERVICE_TUNNEL" -> R.drawable.pixel_service_tunnel_default_scene
+        "EVAC_STAIR" -> R.drawable.pixel_evac_stair_default_scene
+        "TRACE_CHAMBER" -> R.drawable.pixel_trace_chamber_idle_scene
+        "DISTRICT_PLAZA" -> R.drawable.pixel_district_plaza_open_scene
+        "DISTRICT_ARCHIVE" -> R.drawable.pixel_district_archive_default_scene
+        "WORKSHOP_ROW" -> R.drawable.pixel_workshop_row_default_scene
         else -> null
     }
 }
