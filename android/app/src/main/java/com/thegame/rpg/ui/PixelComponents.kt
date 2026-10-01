@@ -93,6 +93,7 @@ fun PlayerAvatarPanel(
     modifier: Modifier = Modifier,
     compact: Boolean = false,
     showSummary: Boolean = true,
+    panelChrome: PixelPanelChrome = PixelPanelChrome.STORY,
 ) {
     val equippedOverlays = equipment
         .filter { it.equipped }
@@ -118,7 +119,11 @@ fun PlayerAvatarPanel(
         }
     }
 
-    PixelPanel(modifier = modifier.testTag("player-avatar"), title = identity.name ?: "Player") {
+    PixelPanel(
+        modifier = modifier.testTag("player-avatar"),
+        title = identity.name ?: "Player",
+        chrome = panelChrome,
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
