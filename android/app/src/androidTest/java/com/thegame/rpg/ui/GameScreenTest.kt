@@ -71,7 +71,9 @@ class GameScreenTest {
             .assert(hasScrollAction())
         composeRule.onNodeWithText(snapshot.body).assertIsDisplayed()
         composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
-        composeRule.onNodeWithTag("button-icon-access_audio_narration_icon").assertIsDisplayed()
+        composeRule.onNodeWithTag("button-icon-access_audio_narration_icon")
+            .performScrollTo()
+            .assertIsDisplayed()
 
         snapshot.choices.forEach { choice ->
             composeRule.onNodeWithTag("choice-${choice.id}")
