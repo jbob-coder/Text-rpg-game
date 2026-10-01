@@ -392,8 +392,13 @@ The UI must not become the authoritative rules engine.
 - VERIFIED GATE: Android Pixel Client run 239 / ID `36807128327` completed successfully: Python 308/308; Android unit tests passed; Compose instrumentation tests compiled; debug APK assembly/package verification passed; API 35 x86_64 emulator completed 27/27 connected tests with 0 failures; UI screenshot set verified/uploaded.
 - APK SHA-256: `a694d8e8796ebc55f3531f5a5d6aa32c747b848eea340c784075ed8310289c4a`.
 - UI-QA ARTIFACT: ID `11137599218`.
-- VERIFIED SCOPE: assets 058, 060, 192, 401–410, 412, 415–417 and 490 are promoted to verified/integrated in this slice. Assets 059, 061, 411, 413 and 414 remain produced/deferred until a legitimate runtime binding exists.
-- NEXT: continue with safe documented UI assets that already have a real client surface (modal/feedback/accessibility), while keeping canonical character/NPC geometry and unbound combat/feedback art blocked rather than fabricated.
+- VERIFIED SCOPE: assets 058, 060, 192, 401–410, 412, 415–417 and 490 are promoted to verified/integrated in the first slice. Assets 059, 061, 411, 413 and 414 remain produced/deferred until a legitimate runtime binding exists.
+- MODAL FOLLOW-UP: Batch 005 asset 419 `UI_MODAL_FRAME` is now produced and applied to the existing Character equipment-detail Dialog rather than a placeholder surface.
+- MODAL VERIFIED HEAD: `c55b4449b3449b7cd9ad3be22a3b52511d82657b`.
+- MODAL VERIFIED GATE: Android Pixel Client run 244 / ID `36807746344` completed successfully: Python 308/308; Android unit tests passed; Compose instrumentation tests compiled; debug APK assembly/package verification passed; API 35 x86_64 emulator completed 27/27 connected tests with 0 failures; UI screenshot set verified/uploaded.
+- MODAL APK SHA-256: `dc3637989bb67dcabdb143a07e1e40689039a4d7e627e8734d1c2cc9608f4859`.
+- MODAL UI-QA ARTIFACT: ID `11138368083`.
+- NEXT: continue only with safe documented UI/accessibility assets that have a real typed client surface; keep canonical character/NPC geometry and unbound combat/toast/feedback art blocked rather than fabricated.
 - COMPLETED_AT: —
 
 
