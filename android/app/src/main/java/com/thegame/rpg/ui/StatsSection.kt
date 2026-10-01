@@ -95,7 +95,11 @@ internal fun StatsSection(
             }
         }
         if (selectedName != null && selectedBase != null && selectedEffective != null) {
-            PixelPanel(Modifier.fillMaxWidth().testTag("stats-attribute-detail"), selectedName) {
+            PixelPanel(
+                Modifier.fillMaxWidth().testTag("stats-attribute-detail"),
+                selectedName,
+                chrome = PixelPanelChrome.STATS,
+            ) {
                 Text(
                     "Effective ${statValue(matchingInspection?.total ?: selectedEffective)} • Base ${statValue(selectedBase)}",
                     color = PixelColors.Paper,
@@ -146,7 +150,11 @@ internal fun StatsSection(
                 }
             }
         }
-        PixelPanel(Modifier.fillMaxWidth(), "Skills") {
+        PixelPanel(
+            Modifier.fillMaxWidth(),
+            "Skills",
+            chrome = PixelPanelChrome.STATS,
+        ) {
             snapshot.skills.groupBy { it.category }.forEach { (category, skills) ->
                 Text(category.uppercase(), color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
                 skills.forEach { skill ->
@@ -171,7 +179,11 @@ internal fun StatsSection(
                 Spacer(Modifier.height(8.dp))
             }
         }
-        PixelPanel(Modifier.fillMaxWidth(), "Derived") {
+        PixelPanel(
+            Modifier.fillMaxWidth(),
+            "Derived",
+            chrome = PixelPanelChrome.STATS,
+        ) {
             snapshot.derived.forEach { stat ->
                 Text("${stat.name}: ${statValue(stat.value)}", color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
                 stat.role?.takeIf { it.isNotBlank() }?.let {
@@ -181,7 +193,11 @@ internal fun StatsSection(
             }
         }
         if (snapshot.conditions.isNotEmpty()) {
-            PixelPanel(Modifier.fillMaxWidth(), "Conditions") {
+            PixelPanel(
+                Modifier.fillMaxWidth(),
+                "Conditions",
+                chrome = PixelPanelChrome.STATS,
+            ) {
                 snapshot.conditions.forEach { condition ->
                     Text("${condition.name} • Severity ${condition.severity}", color = PixelColors.Danger, style = MaterialTheme.typography.bodyMedium)
                 }
