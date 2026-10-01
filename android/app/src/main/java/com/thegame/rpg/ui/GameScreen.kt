@@ -1021,6 +1021,7 @@ private fun PixelIconTextButton(
     Box(
         modifier = modifier
             .pixelChrome(PixelUiChromeCatalog.buttonPrimary)
+            .testTag("button-with-icon-${icon.assetId.lowercase()}")
             .clickable(role = Role.Button, onClick = onClick)
             .padding(horizontal = 12.dp, vertical = 8.dp),
     ) {
