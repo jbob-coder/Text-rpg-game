@@ -27,6 +27,7 @@ fun SceneIllustration(
     modifier: Modifier = Modifier,
 ) {
     val traceFxFrames = PixelTraceFxCatalog.directionalTraceForScene(sceneId) ?: PixelTraceFxCatalog.signalPulseForScene(sceneId) ?: PixelTraceFxCatalog.forScene(sceneId)
+    val sceneRaster = rememberPixelRaster(PixelRasterCatalog.scene(locationId))
     var traceFxFrameIndex by remember(sceneId) { mutableStateOf(0) }
 
     LaunchedEffect(sceneId, traceFxFrames) {
@@ -55,12 +56,23 @@ fun SceneIllustration(
             val sceneOriginX = floor((size.width - scene.width * scenePixel) / 2f)
             val sceneOriginY = floor((size.height - scene.height * scenePixel) / 2f)
 
-            drawPixelSprite(
-                sprite = scene,
-                pixelSize = scenePixel,
-                originX = sceneOriginX,
-                originY = sceneOriginY,
-            )
+            if (sceneRaster != null) {
+                drawPixelRaster(
+                    image = sceneRaster,
+                    sourceWidth = scene.width,
+                    sourceHeight = scene.height,
+                    pixelSize = scenePixel,
+                    originX = sceneOriginX,
+                    originY = sceneOriginY,
+                )
+            } else {
+                drawPixelSprite(
+                    sprite = scene,
+                    pixelSize = scenePixel,
+                    originX = sceneOriginX,
+                    originY = sceneOriginY,
+                )
+            }
 
             PixelSceneOverlayCatalog.forScene(sceneId)?.let { overlay ->
                 drawPixelSprite(
