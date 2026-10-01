@@ -75,8 +75,12 @@ PR #10 remains the authored-overlay dependency. Concurrent screenshot fixes
   shell, so shell-local export variables do not persist between lines.
 - Screenshot capture now uses AndroidX `PlatformTestStorageRegistry` and
   Gradle's collected additional-test-output directory. A separate host step
-  verifies all four PNGs before uploading. The consolidated implementation
-  still needs its own fresh exact-head gate and screenshot review.
+  verifies all four PNGs before uploading. Run 228 / `36794782963` at
+  `93cce8c94401a692da07f8933fcaa9802b839ffc` passed Python 308/308 and
+  Android unit/compile/assemble/package, but 2 of 26 connected tests failed
+  while writing screenshots to an unsupported nested output directory.
+  Capture now writes flat filenames in the runner output root; the fixed
+  implementation still needs a fresh exact-head gate and screenshot review.
 - `git diff --check`: passed.
 - Local Android compilation/emulator execution: unavailable (no local SDK/Gradle).
   The consolidated workflow gate remains pending until observed; do not infer

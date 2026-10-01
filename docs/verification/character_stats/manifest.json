@@ -6,9 +6,9 @@
   "state": "IMPLEMENTED_PENDING_ANDROID_GATE",
   "generated_at": "2026-09-30T20:07:31.071461-04:00",
   "runtime_inputs": {
-    ".github/workflows/android-pixel-client.yml": "8e4d9a4bb3edd1fabc30beee3df00154bfdcb782c3b1930f6ce7902a0985be42",
+    ".github/workflows/android-pixel-client.yml": "5d93c872c20f29df739abca8a126235aa73bc753728e14cd75c80a23b040a9e9",
     "android/app/src/androidTest/java/com/thegame/rpg/ActivityBootSmokeTest.kt": "be25c979acd1b1f5203ab0e1ef7ee5d6b1ec818c664014585a983d80d1aba70b",
-    "android/app/src/androidTest/java/com/thegame/rpg/ui/CharacterStatsSectionTest.kt": "555ba83d4e9ef7454ebce5f5e6a115ed85a8bddf057d4b380eb1d52013583dcd",
+    "android/app/src/androidTest/java/com/thegame/rpg/ui/CharacterStatsSectionTest.kt": "358abe2d97d8f347b12a0ebda27cacd1000c18b88679189cefafe8e1f7f13065",
     "android/app/src/androidTest/java/com/thegame/rpg/ui/GameScreenTest.kt": "685928ed412042af22219a99a8f9163777494b2f9727cb6fdf9f8862bb716a02",
     "android/app/src/main/java/com/thegame/rpg/engine/GameEngine.kt": "9630171c1bbe182298c8d7ec4534f8503a176f455fc8d47dfa46c662889640fd",
     "android/app/src/main/java/com/thegame/rpg/ui/CharacterSection.kt": "4a36bb71f34a8cba366d73ac2ff45dea57444147fe421d973209ad97210913bc",
@@ -43,5 +43,15 @@
     "run_number": 226,
     "emulator_tests": 22,
     "result": "tests_passed_screenshot_collection_failed"
+  },
+  "failed_nested_output_gate": {
+    "head": "93cce8c94401a692da07f8933fcaa9802b839ffc",
+    "run_id": 36794782963,
+    "run_number": 228,
+    "python_tests": 308,
+    "android_build": "passed",
+    "emulator_tests": 26,
+    "emulator_failures": 2,
+    "result": "nested_screenshot_output_missing"
   }
 }

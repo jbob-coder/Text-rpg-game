@@ -136,9 +136,9 @@ jobs:
           import hashlib
           import struct
           root = Path('android/app/build/outputs/connected_android_test_additional_output')
-          files = sorted(root.rglob('ui-qa/*.png'))
+          files = sorted(root.rglob('*.png'))
           expected = {'character-320dp.png', 'equipment-jacket-detail.png', 'stats-320dp.png', 'stats-perception-detail.png'}
-          assert {file.name for file in files} == expected, f'Missing UI evidence: {[str(file) for file in files]}'
+          assert len(files) == len(expected) and {file.name for file in files} == expected, f'Missing UI evidence: {[str(file) for file in files]}'
           for file in files:
               content = file.read_bytes()
               assert content[:8] == b'\x89PNG\r\n\x1a\n' and content[12:16] == b'IHDR', f'Invalid PNG: {file}'
@@ -151,6 +151,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: THE-GAME-UI-QA-${{ github.run_id }}
-          path: android/app/build/outputs/connected_android_test_additional_output/**/ui-qa/*.png
+          path: android/app/build/outputs/connected_android_test_additional_output/**/*.png
           if-no-files-found: error
           retention-days: 1

@@ -67,7 +67,7 @@ class CharacterStatsSectionTest {
 
     private fun saveScreenshot(name: String, tag: String = "qa-phone") {
         // Gradle collects this runner-owned output before completing connected tests.
-        PlatformTestStorageRegistry.getInstance().openOutputFile("ui-qa/$name.png").use {
+        PlatformTestStorageRegistry.getInstance().openOutputFile("$name.png").use {
             assertTrue(composeRule.onNodeWithTag(tag).captureToImage().asAndroidBitmap().compress(Bitmap.CompressFormat.PNG, 100, it))
         }
     }
