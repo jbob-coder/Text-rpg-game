@@ -166,7 +166,7 @@ class CharacterStatsSectionTest {
         }
 
         composeRule.onNodeWithTag("world-map-canvas").assertIsDisplayed()
-        composeRule.onNodeWithText("Gate Twelve District").assertIsDisplayed()
+        composeRule.onNodeWithText("GATE TWELVE DISTRICT").assertIsDisplayed()
         saveScreenshot("map-gate-twelve-320dp")
     }
 
