@@ -76,6 +76,7 @@ internal fun CharacterSection(
                         conditions = snapshot.conditions,
                         modifier = Modifier.weight(1f),
                         showSummary = false,
+                        panelChrome = PixelPanelChrome.CHARACTER,
                     )
                     Column(Modifier.width(railWidth), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         slots.drop(midpoint).forEach { slot ->
@@ -88,8 +89,12 @@ internal fun CharacterSection(
                 }
             } else {
                 PlayerAvatarPanel(
-                    snapshot.identity, slots, snapshot.conditions,
-                    Modifier.fillMaxWidth(), showSummary = false,
+                    snapshot.identity,
+                    slots,
+                    snapshot.conditions,
+                    Modifier.fillMaxWidth(),
+                    showSummary = false,
+                    panelChrome = PixelPanelChrome.CHARACTER,
                 )
                 slots.chunked(2).forEach { pair ->
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -106,7 +111,11 @@ internal fun CharacterSection(
                 }
             }
             StatusResourceGrid(snapshot)
-            PixelPanel(Modifier.fillMaxWidth(), "Effective attributes") {
+            PixelPanel(
+                Modifier.fillMaxWidth(),
+                "Effective attributes",
+                chrome = PixelPanelChrome.CHARACTER,
+            ) {
                 snapshot.attributes.forEach { stat ->
                     Text(
                         "${stat.name}: ${statValue(stat.effective)}",
@@ -123,6 +132,7 @@ internal fun CharacterSection(
             PixelPanel(
                 Modifier.fillMaxWidth().fillMaxHeight(0.85f).testTag("character-equipment-detail"),
                 equipmentSlotLabel(selected.slot),
+                chrome = PixelPanelChrome.CHARACTER,
             ) {
                 Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     if (selected.equipped) {
