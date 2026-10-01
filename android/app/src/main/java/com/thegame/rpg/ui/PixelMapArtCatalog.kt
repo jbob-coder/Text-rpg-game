@@ -1,6 +1,23 @@
 package com.thegame.rpg.ui
 
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import kotlin.math.floor
+import kotlin.math.min
+
+data class PixelMapViewport(
+    val originX: Float,
+    val originY: Float,
+    val width: Float,
+    val height: Float,
+    val pixelSize: Float,
+) {
+    fun point(xPercent: Double, yPercent: Double): Offset = Offset(
+        x = originX + (xPercent.coerceIn(0.0, 100.0) / 100.0 * width).toFloat(),
+        y = originY + (yPercent.coerceIn(0.0, 100.0) / 100.0 * height).toFloat(),
+    )
+}
+
 
 /**
  * Presentation-only pixel map surface for the Gate Twelve district.
@@ -137,4 +154,35 @@ object PixelMapArtCatalog {
 
     fun base(mapTitle: String): PixelSprite? =
         if (mapTitle == "Gate Twelve District") gateTwelveDistrictBase else null
+
+    /**
+     * Keeps authored percentage coordinates, map art, route overlays and tap hit-testing
+     * inside the same letterboxed native-pixel viewport.
+     */
+    fun viewport(mapTitle: String, canvasWidth: Float, canvasHeight: Float): PixelMapViewport {
+        val safeWidth = canvasWidth.coerceAtLeast(1f)
+        val safeHeight = canvasHeight.coerceAtLeast(1f)
+        val sprite = base(mapTitle) ?: return PixelMapViewport(
+            originX = 0f,
+            originY = 0f,
+            width = safeWidth,
+            height = safeHeight,
+            pixelSize = 1f,
+        )
+
+        val rawScale = min(
+            safeWidth / sprite.width.toFloat(),
+            safeHeight / sprite.height.toFloat(),
+        )
+        val pixelSize = if (rawScale >= 1f) floor(rawScale) else rawScale.coerceAtLeast(0.01f)
+        val width = sprite.width * pixelSize
+        val height = sprite.height * pixelSize
+        return PixelMapViewport(
+            originX = (safeWidth - width) / 2f,
+            originY = (safeHeight - height) / 2f,
+            width = width,
+            height = height,
+            pixelSize = pixelSize,
+        )
+    }
 }
