@@ -128,7 +128,14 @@ jobs:
           disable-animations: true
           script: |
             gradle -p android connectedDebugAndroidTest --stacktrace
-            adb pull /sdcard/Android/data/com.thegame.rpg/files/ui-qa android-ui-qa
+            rm -rf android-ui-qa
+            mkdir -p android-ui-qa
+            SCREENSHOTS="$(adb shell run-as com.thegame.rpg ls files/ui-qa 2>/dev/null | tr -d '\r')"
+            test -n "$SCREENSHOTS"
+            for file in $SCREENSHOTS; do
+              adb exec-out run-as com.thegame.rpg cat "files/ui-qa/$file" > "android-ui-qa/$file"
+            done
+            test -n "$(find android-ui-qa -maxdepth 1 -type f -name '*.png' -print -quit)"
 
       - name: Upload small UI verification screenshots
         uses: actions/upload-artifact@v4
