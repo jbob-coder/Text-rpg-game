@@ -31,7 +31,7 @@ campaign or Godot Pixel RPG. External novel attachments were not imported.
 - PR #7 run 209 and PR #8 run 211 passed at their current heads. Environment modules
   058–061 remain deferred from scene integration.
 
-## IMPLEMENTED / PENDING ANDROID VERIFICATION
+## IMPLEMENTED / VERIFIED
 
 Branch: `feature/character-stats-inspection`, PR #13. Consolidates PR #11 stat
 inspection and PR #12 Character UI with responsive layout, equip-from-Bag details
@@ -80,11 +80,11 @@ PR #10 remains the authored-overlay dependency. Concurrent screenshot fixes
   Android unit/compile/assemble/package, but 2 of 26 connected tests failed
   while writing screenshots to an unsupported nested output directory.
   Capture now writes flat filenames in the runner output root; the fixed
-  implementation still needs a fresh exact-head gate and screenshot review.
+  implementation subsequently passed run 229; see the final delivery evidence below.
 - `git diff --check`: passed.
 - Local Android compilation/emulator execution: unavailable (no local SDK/Gradle).
-  The consolidated workflow gate remains pending until observed; do not infer
-  Android success from Python, predecessor gates or the authored tests.
+  Exact-source Android execution was subsequently observed in runs 229 and 233;
+  local Android/physical-device execution is still not claimed.
 
 New tests cover canonical values/bonuses, equip/unequip and save/load, hidden registry
 and runtime provenance, net cancellation, detached records, Kotlin mapping/formatting,
@@ -116,10 +116,11 @@ art approval and physical Galaxy A03 visual/performance/input/TTS checks remain 
 
 ## NEXT_ACTION
 
-Run exact-head Python/Android/emulator workflow, inspect the exported screenshots,
-repair observed failures, and record implementation SHA, tested merge/tree, run/jobs,
-test counts, APK hash and screenshot identities in `docs/verification/character_stats/`.
-Complete task P-005 only after the gate passes. Keep physical-device limitations visible.
+The Character/Stats candidate and APK delivery are complete. Use
+`docs/ANDROID_APK_DESKTOP_HANDOFF.md` for the exact tested source, desktop build
+commands, branch relationships and remaining physical Galaxy A03 acceptance.
+Keep canonical character approval, held-reader integration and production signing
+as separate gates.
 
 ## CONTINUITY GRAPH
 
@@ -132,3 +133,26 @@ Complete task P-005 only after the gate passes. Keep physical-device limitations
 | Character / Stats sections | consume | Authoritative snapshot and existing mutation callbacks |
 | Projection + JVM + Compose + Activity tests | verify | Boundaries and interactive presentation |
 | Task P-005 + verification manifest | track | This implementation slice and pending evidence |
+
+## FINAL APK / RECOVERY EVIDENCE
+
+Completed: 2026-09-30 21:21 AST. PR #15 consolidates PR #14 Skills ancestry and retains PR #13
+responsive screens. Implementation `f88453c38b8efd91a4af74b3cd4f59b6903a9a03`
+passed run 233 / `36799678887`: Python 308/308; Android unit/test compilation,
+assembly, ABI/content and signing checks; API 35 x86_64 connected tests 30/30.
+Tested merge `a59b12d9ad3f272086666cf50bf998da8ae4c3b4` and implementation
+have identical complete tree `f238a2e20665695ea2ed9a959251fbbf3c2962a9`.
+
+The APK was downloaded and its SHA-256 matched CI:
+`8decee3cb660015e8b048a495509a8856673023bdc2c9f99d4200148ef243fe3`.
+Size: 48,331,290 bytes. Android Debug certificate and APK Signature Scheme v2
+verified. Four final screenshots were downloaded, hash-verified and visually reviewed.
+The jacket detail wraps to 1120x899; dark background and shortened accessory labels
+were confirmed. The missing/malformed-save tests prove the current game remains
+playable and corrupt save bytes remain intact.
+
+Task P-005, A-002 and A-004 are complete for this scope. Full-game completion,
+physical Galaxy A03 approval, pixel-perfect original-mockup matching, canonical
+character-reference approval and release/store publication are not claimed.
+`docs/verification/character_stats/apk_delivery.json` records exact jobs, hashes,
+screenshot identities, runtime file hashes, delivery reference and failed-run history.
