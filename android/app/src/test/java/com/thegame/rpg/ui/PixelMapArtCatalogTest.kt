@@ -11,10 +11,10 @@ class PixelMapArtCatalogTest {
     fun gateTwelveDistrictBaseUsesFixedNativePixelGrid() {
         val map = PixelMapArtCatalog.gateTwelveDistrictBase
         assertEquals(PixelMapArtCatalog.GATE_TWELVE_DISTRICT_BASE_ID, map.assetId)
-        assertEquals(128, map.width)
-        assertEquals(72, map.height)
-        assertEquals(72, map.rows.size)
-        assertTrue(map.rows.all { it.length == 128 })
+        assertEquals(256, map.width)
+        assertEquals(144, map.height)
+        assertEquals(144, map.rows.size)
+        assertTrue(map.rows.all { it.length == 256 })
 
         val usedKeys = map.rows.flatMap { it.toList() }.toSet()
         assertTrue(usedKeys.all { it in map.palette })
@@ -27,7 +27,7 @@ class PixelMapArtCatalogTest {
             canvasWidth = 300f,
             canvasHeight = 220f,
         )
-        assertEquals(2f, viewport.pixelSize, 0.001f)
+        assertEquals(1f, viewport.pixelSize, 0.001f)
         assertEquals(22f, viewport.originX, 0.001f)
         assertEquals(38f, viewport.originY, 0.001f)
         assertEquals(256f, viewport.width, 0.001f)
