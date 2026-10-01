@@ -18,35 +18,41 @@ data class PixelMapViewport(
     )
 }
 
-
 /**
  * Presentation-only pixel map surface for the Gate Twelve district.
  *
  * The authored world-map coordinates/edges remain authoritative for node placement,
- * discovery, reachability, travel and tap hit-testing. This catalog only supplies a
- * coherent pixel-art backdrop so the map no longer reads as geometry on a flat panel.
+ * discovery, reachability, travel and tap hit-testing. This catalog supplies the visual
+ * district surface and never owns world-state decisions.
  */
 object PixelMapArtCatalog {
     const val GATE_TWELVE_DISTRICT_BASE_ID = "MAP_GATE_TWELVE_DISTRICT_BASE"
 
-    private const val WIDTH = 128
-    private const val HEIGHT = 72
+    // The asset master plan requires district/world maps to be at least 256x144.
+    private const val WIDTH = 256
+    private const val HEIGHT = 144
 
     private val palette = mapOf(
-        'I' to Color(0xFF11171A),
-        'D' to Color(0xFF1A2427),
-        'G' to Color(0xFF263238),
-        'S' to Color(0xFF3A4545),
-        'R' to Color(0xFF655E4E),
-        'L' to Color(0xFF817760),
-        'B' to Color(0xFF323C3B),
-        'W' to Color(0xFF59615B),
-        'A' to Color(0xFF756A52),
-        'P' to Color(0xFF9A8D6B),
+        'I' to Color(0xFF101417),
+        'D' to Color(0xFF1B2425),
+        'G' to Color(0xFF2B3331),
+        'S' to Color(0xFF48504A),
+        'R' to Color(0xFF5C594F),
+        'L' to Color(0xFF7A7462),
+        'B' to Color(0xFF30383A),
+        'W' to Color(0xFF4F5856),
+        'A' to Color(0xFF6A5A4C),
+        'P' to Color(0xFF8B8068),
+        'V' to Color(0xFF44543D),
+        'v' to Color(0xFF2C382D),
+        'T' to Color(0xFF765344),
+        'Y' to Color(0xFFC6A363),
+        'H' to Color(0xFFB6B09B),
+        'K' to Color(0xFF202729),
     )
 
     private fun pixels(): MutableList<CharArray> =
-        MutableList(HEIGHT) { CharArray(WIDTH) { 'I' } }
+        MutableList(HEIGHT) { CharArray(WIDTH) { 'D' } }
 
     private fun rect(
         pixels: MutableList<CharArray>,
@@ -95,53 +101,146 @@ object PixelMapArtCatalog {
     val gateTwelveDistrictBase: PixelSprite = run {
         val p = pixels()
 
-        // Ground/value breakup: practical municipal district, not neon/cyberpunk.
-        rect(p, 0, 0, WIDTH, 16, 'D')
-        rect(p, 0, 16, WIDTH, 28, 'G')
-        rect(p, 0, 44, WIDTH, 28, 'D')
-        rect(p, 5, 6, 118, 4, 'S')
-        rect(p, 3, 62, 122, 4, 'S')
+        fun outline(x: Int, y: Int, w: Int, h: Int, fill: Char, border: Char = 'I', t: Int = 2) {
+            rect(p, x, y, w, h, border)
+            rect(p, x + t, y + t, w - 2 * t, h - 2 * t, fill)
+        }
+        fun windows(x: Int, y: Int, count: Int, spacing: Int = 6) {
+            repeat(count) { index -> rect(p, x + index * spacing, y, 3, 2, 'Y') }
+        }
+        fun tree(x: Int, y: Int) {
+            rect(p, x, y + 5, 2, 4, 'A')
+            rect(p, x - 2, y + 1, 6, 6, 'v')
+            rect(p, x - 1, y, 4, 4, 'V')
+        }
+        fun lamp(x: Int, y: Int) {
+            rect(p, x, y, 1, 6, 'S')
+            rect(p, x - 1, y - 1, 3, 2, 'Y')
+        }
 
-        // Upper district road linking Workshop Row -> Depot Plaza -> Archive.
-        line(p, 28, 13, 61, 13, 'R', 5)
-        line(p, 61, 13, 84, 12, 'R', 5)
-        line(p, 28, 13, 61, 13, 'L', 1)
-        line(p, 61, 13, 84, 12, 'L', 1)
+        // Surface civic district, depot/service belt, then darker maintenance infrastructure.
+        rect(p, 0, 0, WIDTH, 48, 'G')
+        rect(p, 0, 48, WIDTH, 47, 'D')
+        rect(p, 0, 95, WIDTH, 49, 'K')
 
-        // Depot/service infrastructure routes mirror the authored graph as visual roads.
-        line(p, 23, 26, 44, 22, 'R', 4)
-        line(p, 23, 26, 68, 35, 'R', 4)
-        line(p, 23, 26, 51, 50, 'R', 4)
-        line(p, 68, 35, 90, 44, 'R', 4)
-        line(p, 68, 35, 105, 28, 'R', 4)
-        line(p, 90, 44, 105, 28, 'R', 4)
+        // Perimeter streets.
+        rect(p, 0, 5, WIDTH, 7, 'R')
+        rect(p, 0, 7, WIDTH, 2, 'L')
+        rect(p, 0, 126, WIDTH, 8, 'R')
+        rect(p, 0, 128, WIDTH, 2, 'L')
 
-        // Municipal blocks/buildings around the node corridors.
-        rect(p, 8, 17, 27, 14, 'B')   // depot/platform mass
-        rect(p, 12, 20, 19, 8, 'W')
-        rect(p, 34, 16, 20, 12, 'B')  // workbench/service annex
-        rect(p, 38, 19, 12, 6, 'W')
-        rect(p, 55, 26, 25, 17, 'B')  // Gate Twelve service block
-        rect(p, 60, 30, 15, 9, 'W')
-        rect(p, 82, 38, 24, 15, 'B')  // tunnel/service plant
-        rect(p, 87, 42, 14, 7, 'W')
-        rect(p, 42, 46, 18, 16, 'B')  // stair/utility block
-        rect(p, 46, 50, 10, 8, 'W')
-        rect(p, 98, 19, 23, 18, 'B')  // trace chamber
-        rect(p, 103, 23, 13, 10, 'W')
+        // Upper boulevard: Workshop Row -> Depot Plaza -> Municipal Archive.
+        line(p, 70, 23, 123, 26, 'R', 9)
+        line(p, 123, 26, 169, 23, 'R', 9)
+        line(p, 70, 23, 123, 26, 'L', 2)
+        line(p, 123, 26, 169, 23, 'L', 2)
 
-        // Upper free-roam district silhouettes.
-        rect(p, 20, 4, 19, 11, 'A')   // workshop row
-        rect(p, 23, 7, 4, 6, 'P')
-        rect(p, 29, 6, 7, 7, 'W')
-        rect(p, 53, 3, 18, 13, 'A')   // depot plaza edge / civic frontage
-        rect(p, 57, 6, 10, 7, 'P')
-        rect(p, 76, 3, 21, 12, 'A')   // archive
-        rect(p, 80, 6, 13, 7, 'W')
+        // Depot/service routes mirror the authored graph without owning route state.
+        listOf(
+            intArrayOf(46, 52, 87, 45),
+            intArrayOf(46, 52, 136, 69),
+            intArrayOf(46, 52, 102, 101),
+            intArrayOf(136, 69, 179, 88),
+            intArrayOf(136, 69, 210, 56),
+            intArrayOf(179, 88, 210, 56),
+        ).forEach { route ->
+            line(p, route[0], route[1], route[2], route[3], 'R', 7)
+            line(p, route[0], route[1], route[2], route[3], 'L', 1)
+        }
 
-        // Small material/detail clusters keep the surface authored at native scale.
-        for (x in 5..120 step 11) rect(p, x, 39 + (x % 3), 5, 2, 'S')
-        for (x in 8..116 step 18) rect(p, x, 57, 8, 2, 'G')
+        // Workshop Row: attached practical shops rather than a single abstract block.
+        outline(49, 8, 54, 22, 'A')
+        listOf(53, 65, 77, 89).forEach { x ->
+            outline(x, 12, 10, 13, 'B', t = 1)
+            rect(p, x + 2, 19, 6, 4, 'W')
+            rect(p, x + 3, 14, 4, 2, 'Y')
+        }
+        rect(p, 48, 28, 56, 3, 'S')
+
+        // Depot Plaza paving and civic frontage.
+        rect(p, 105, 8, 39, 32, 'P')
+        for (y in 12..38 step 6) rect(p, 109, y, 31, 1, 'L')
+        for (x in 110..140 step 7) rect(p, x, 12, 1, 24, 'L')
+        outline(108, 31, 33, 13, 'B')
+        windows(113, 35, 4, 6)
+        tree(108, 16)
+        tree(142, 16)
+        lamp(118, 14)
+        lamp(134, 14)
+
+        // Municipal Archive frontage/courtyard.
+        outline(151, 6, 46, 28, 'A')
+        rect(p, 157, 10, 34, 5, 'P')
+        listOf(159, 167, 175, 183).forEach { x ->
+            rect(p, x, 16, 4, 12, 'W')
+            rect(p, x + 1, 18, 2, 7, 'H')
+        }
+        rect(p, 154, 30, 40, 3, 'S')
+        tree(148, 18)
+        tree(200, 18)
+
+        // Platform Nine depot, platform roof and visible tram/maintenance tracks.
+        outline(20, 37, 64, 36, 'B')
+        rect(p, 25, 42, 54, 10, 'W')
+        windows(29, 45, 7, 7)
+        rect(p, 27, 56, 50, 5, 'S')
+        rect(p, 18, 69, 68, 3, 'R')
+        rect(p, 18, 75, 68, 3, 'R')
+        for (x in 21..84 step 8) rect(p, x, 68, 2, 11, 'L')
+
+        // Relay Workbench annex.
+        outline(75, 31, 31, 28, 'B')
+        rect(p, 80, 36, 21, 9, 'W')
+        rect(p, 83, 39, 15, 3, 'Y')
+        rect(p, 80, 49, 21, 6, 'A')
+        rect(p, 84, 51, 13, 2, 'H')
+
+        // Service Gate Twelve.
+        outline(119, 56, 36, 30, 'B')
+        rect(p, 125, 62, 24, 16, 'W')
+        rect(p, 133, 62, 8, 16, 'I')
+        rect(p, 136, 65, 2, 10, 'Y')
+        rect(p, 121, 82, 32, 3, 'S')
+
+        // Quiet Stair utility shaft.
+        outline(88, 89, 31, 35, 'B')
+        rect(p, 94, 95, 19, 22, 'W')
+        listOf(98, 102, 106, 110, 114).forEach { y -> rect(p, 97, y, 13, 2, 'L') }
+        rect(p, 91, 120, 25, 2, 'S')
+
+        // Service Tunnel plant and access ribs.
+        outline(161, 78, 39, 31, 'B')
+        rect(p, 167, 84, 27, 18, 'W')
+        for (x in 170..193 step 6) rect(p, x, 87, 2, 12, 'I')
+        rect(p, 164, 105, 33, 2, 'S')
+
+        // Trace Chamber remains grounded municipal infrastructure; no neon world palette.
+        outline(194, 40, 44, 32, 'B')
+        rect(p, 201, 47, 30, 18, 'W')
+        rect(p, 208, 51, 16, 10, 'I')
+        rect(p, 212, 54, 8, 4, 'H')
+        rect(p, 198, 68, 36, 2, 'S')
+
+        // Street furniture, sparse vegetation and material breakup.
+        listOf(
+            intArrayOf(12, 21), intArrayOf(32, 20), intArrayOf(215, 20),
+            intArrayOf(238, 22), intArrayOf(11, 91), intArrayOf(242, 88),
+            intArrayOf(145, 104), intArrayOf(67, 105),
+        ).forEach { tree(it[0], it[1]) }
+        listOf(
+            intArrayOf(16, 28), intArrayOf(42, 29), intArrayOf(214, 30),
+            intArrayOf(240, 31), intArrayOf(112, 53), intArrayOf(158, 63),
+        ).forEach { lamp(it[0], it[1]) }
+
+        for (x in 4..250 step 13) rect(p, x, 116 + (x % 4), 6, 1, 'S')
+        for (x in 7..248 step 17) rect(p, x, 135 + (x % 3), 8, 2, 'G')
+        listOf(
+            intArrayOf(57, 33), intArrayOf(66, 34), intArrayOf(224, 78),
+            intArrayOf(231, 82), intArrayOf(12, 112),
+        ).forEach {
+            rect(p, it[0], it[1], 7, 3, 'A')
+            rect(p, it[0] + 1, it[1] + 1, 5, 1, 'P')
+        }
 
         PixelSprite(
             assetId = GATE_TWELVE_DISTRICT_BASE_ID,
