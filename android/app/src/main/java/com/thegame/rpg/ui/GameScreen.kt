@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -383,6 +384,10 @@ private fun StorySection(
                         showSummary = false,
                     )
                 }
+                StoryResourceHud(
+                    snapshot = snapshot,
+                    modifier = Modifier.fillMaxWidth(),
+                )
                 NarrativePanel(
                     snapshot = snapshot,
                     busy = busy,
@@ -489,6 +494,79 @@ private fun NarrativePanel(
                         .size(18.dp)
                         .background(PixelColors.PanelAlt),
                     testTag = "narrative-scroll-marker",
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun StoryResourceHud(
+    snapshot: GameSnapshot,
+    modifier: Modifier = Modifier,
+) {
+    if (snapshot.resources.isEmpty()) return
+
+    Column(
+        modifier = modifier
+            .pixelChrome(PixelUiChromeCatalog.statsFrame)
+            .padding(horizontal = 8.dp, vertical = 6.dp)
+            .testTag("story-resource-hud"),
+        verticalArrangement = Arrangement.spacedBy(5.dp),
+    ) {
+        snapshot.resources.forEach { resource ->
+            val ratio = if (resource.max > 0.0) {
+                (resource.current / resource.max).coerceIn(0.0, 1.0)
+            } else {
+                0.0
+            }
+            val resourceColor = when (resource.id.lowercase()) {
+                "health" -> PixelColors.Health
+                "stamina" -> PixelColors.Stamina
+                "focus" -> PixelColors.Focus
+                "resolve" -> PixelColors.Resolve
+                else -> PixelColors.Paper
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                PixelUiIcon(
+                    sprite = PixelUiIconCatalog.resource(resource.id),
+                    modifier = Modifier.size(14.dp),
+                    tint = resourceColor,
+                    testTag = "story-resource-icon-${resource.id.lowercase()}",
+                )
+                Spacer(Modifier.width(5.dp))
+                Text(
+                    resource.id.uppercase(),
+                    color = PixelColors.Paper,
+                    style = MaterialTheme.typography.labelLarge,
+                    modifier = Modifier.widthIn(min = 58.dp),
+                )
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(10.dp)
+                        .background(PixelColors.Ink)
+                        .border(1.dp, PixelColors.Muted)
+                        .testTag("story-resource-bar-${resource.id.lowercase()}"),
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .fillMaxWidth(ratio.toFloat())
+                            .background(resourceColor)
+                            .testTag("story-resource-fill-${resource.id.lowercase()}"),
+                    )
+                }
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    "${statValue(resource.current)}/${statValue(resource.max)}",
+                    color = resourceColor,
+                    style = MaterialTheme.typography.labelLarge,
+                    modifier = Modifier.testTag("story-resource-value-${resource.id.lowercase()}"),
                 )
             }
         }
