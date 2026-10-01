@@ -78,8 +78,33 @@ jobs:
           grep -q "lib/x86_64/" android-apk-contents.txt
           grep -q "vertical_slice_01.json" android-apk-contents.txt
 
-      - name: Upload debug APK only for manual workflow runs
-        if: github.event_name == 'workflow_dispatch'
+      - name: Verify APK signing and record build source
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+          sdk = Path(os.environ['ANDROID_HOME'])
+          signers = sorted(sdk.glob('build-tools/*/apksigner'))
+          assert signers, 'Android APK signature verifier missing'
+          result = subprocess.run([str(signers[-1]), 'verify', '--verbose', '--print-certs', 'android/app/build/outputs/apk/debug/app-debug.apk'], text=True, capture_output=True, check=True)
+          Path('android-apk-signature.txt').write_text(result.stdout)
+          print(result.stdout)
+          source = {
+              'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+              'source_tree': subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),
+              'workflow_run_id': os.environ['GITHUB_RUN_ID'],
+              'event': os.environ['GITHUB_EVENT_NAME'],
+              'package': 'com.thegame.rpg',
+              'build_type': 'debug',
+          }
+          Path('android-apk-source.json').write_text(json.dumps(source, indent=2) + '\n')
+          print(json.dumps(source, indent=2))
+          PY
+
+      - name: Upload requested debug APK
+        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && github.head_ref == 'fix/player-hub-runtime-recovery')
         uses: actions/upload-artifact@v4
         with:
           name: THE-GAME-Android-Pixel-Client-${{ github.sha }}
@@ -87,8 +112,11 @@ jobs:
             android/app/build/outputs/apk/debug/app-debug.apk
             android-apk-sha256.txt
             android-apk-contents.txt
+            android-apk-signature.txt
+            android-apk-source.json
           if-no-files-found: error
           retention-days: 1
+          compression-level: 0
 
   android-emulator-smoke:
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' || contains(github.event.head_commit.message, '[emulator]')

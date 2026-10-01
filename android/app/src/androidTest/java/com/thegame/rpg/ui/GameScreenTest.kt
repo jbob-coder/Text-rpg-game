@@ -381,6 +381,148 @@ class GameScreenTest {
     }
 
     @Test
+    fun moreMenuOpensDedicatedSkillsAndRequestsInspection() {
+        var requestedPath: String? = null
+        val skillsSnapshot = snapshot.copy(
+            skills = listOf(
+                GameSkill(
+                    id = "athletics",
+                    name = "Athletics",
+                    category = "physical",
+                    base = 20.0,
+                    effective = 20.0,
+                    delta = 0.0,
+                    modified = false,
+                ),
+                GameSkill(
+                    id = "technical_systems",
+                    name = "Technical Systems",
+                    category = "technical",
+                    base = 25.0,
+                    effective = 26.0,
+                    delta = 1.0,
+                    modified = true,
+                ),
+            )
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                TheGameRoot(
+                    uiState = GameUiState(
+                        bootState = BootState.Ready,
+                        snapshot = skillsSnapshot,
+                    ),
+                    onChoice = {},
+                    onSave = {},
+                    onLoad = {},
+                    onNarrate = { false },
+                    onReplayNarration = { false },
+                    onStopNarration = {},
+                    autoReadNarration = false,
+                    onAutoReadChange = {},
+                    narrationRate = 0.92f,
+                    onNarrationRateChange = {},
+                    textDelayMs = 0,
+                    onTextDelayChange = {},
+                    onCheat = {},
+                    onEquip = {},
+                    onUnequip = {},
+                    onInspectStatus = { requestedPath = it },
+                    onTravel = {},
+                    onTravelTransitionFinished = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("nav-more")
+            .performScrollTo()
+            .performClick()
+        composeRule.onNodeWithText("SKILLS")
+            .assertHasClickAction()
+            .performClick()
+        composeRule.onNodeWithText("2 ACTIVE SKILLS").assertIsDisplayed()
+        composeRule.onNodeWithTag("skills-screen-row-technical_systems")
+            .performScrollTo()
+            .assertHasClickAction()
+            .performClick()
+
+        composeRule.runOnIdle {
+            check(requestedPath == "skills.technical_systems") {
+                "Expected Technical Systems inspection request, got $requestedPath"
+            }
+        }
+    }
+
+    @Test
+    fun skillsScreenRendersAuthoritativeEquipmentContribution() {
+        val skillsSnapshot = snapshot.copy(
+            skills = listOf(
+                GameSkill(
+                    id = "technical_systems",
+                    name = "Technical Systems",
+                    category = "technical",
+                    base = 25.0,
+                    effective = 26.0,
+                    delta = 1.0,
+                    modified = true,
+                ),
+            )
+        )
+        val inspection = GameStatInspection(
+            path = "skills.technical_systems",
+            kind = "skill",
+            total = 26.0,
+            contributions = listOf(
+                GameStatContribution("base", 25.0),
+                GameStatContribution("equipment:hands", 1.0),
+            ),
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                TheGameRoot(
+                    uiState = GameUiState(
+                        bootState = BootState.Ready,
+                        snapshot = skillsSnapshot,
+                        statInspectionPath = "skills.technical_systems",
+                        statInspection = inspection,
+                    ),
+                    onChoice = {},
+                    onSave = {},
+                    onLoad = {},
+                    onNarrate = { false },
+                    onReplayNarration = { false },
+                    onStopNarration = {},
+                    autoReadNarration = false,
+                    onAutoReadChange = {},
+                    narrationRate = 0.92f,
+                    onNarrationRateChange = {},
+                    textDelayMs = 0,
+                    onTextDelayChange = {},
+                    onCheat = {},
+                    onEquip = {},
+                    onUnequip = {},
+                    onInspectStatus = {},
+                    onTravel = {},
+                    onTravelTransitionFinished = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("nav-more")
+            .performScrollTo()
+            .performClick()
+        composeRule.onNodeWithText("SKILLS")
+            .performClick()
+        composeRule.onNodeWithTag("stat-contribution-equipment-hands")
+            .performScrollTo()
+            .assertIsDisplayed()
+        composeRule.onNodeWithText("EQUIPMENT // HANDS").assertIsDisplayed()
+        composeRule.onNodeWithText("+1").assertIsDisplayed()
+    }
+
+    @Test
     fun currentCatalogIconsRenderAsRealComposeAssets() {
         val itemIds = listOf(
             "ITEM_DEPOT_JACKET",

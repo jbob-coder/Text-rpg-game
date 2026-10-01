@@ -28,6 +28,7 @@ data class GameUiState(
     val bootState: BootState = BootState.Starting,
     val snapshot: GameSnapshot? = null,
     val busy: Boolean = false,
+    val operationError: String? = null,
     val travelTransition: TravelTransitionUiState? = null,
     val statInspectionPath: String? = null,
     val statInspection: GameStatInspection? = null,
@@ -64,7 +65,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun startIfNeeded() {
         if (startRequested) return
         startRequested = true
-        _uiState.update { it.copy(busy = true) }
+        _uiState.update { it.copy(busy = true, operationError = null) }
         viewModelScope.launch {
             engine.start(getApplication()) { stage ->
                 _uiState.update { current -> current.copy(bootState = stage, busy = true) }
@@ -79,7 +80,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun choose(choiceId: String) {
         if (_uiState.value.busy) return
-        _uiState.update { it.copy(busy = true) }
+        _uiState.update { it.copy(busy = true, operationError = null) }
         viewModelScope.launch {
             engine.choose(choiceId).fold(
                 onSuccess = { snapshot ->
@@ -102,7 +103,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun save() {
         if (_uiState.value.busy) return
-        _uiState.update { it.copy(busy = true) }
+        _uiState.update { it.copy(busy = true, operationError = null) }
         viewModelScope.launch {
             engine.save().fold(
                 onSuccess = { _uiState.update { it.copy(busy = false) } },
@@ -113,7 +114,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun load() {
         if (_uiState.value.busy) return
-        _uiState.update { it.copy(busy = true) }
+        _uiState.update { it.copy(busy = true, operationError = null) }
         viewModelScope.launch {
             when (val result = saveRepository.continueGame()) {
                 ContinueResult.Missing -> publishFailure(
@@ -141,7 +142,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun applyCheat(code: String) {
         if (_uiState.value.busy) return
-        _uiState.update { it.copy(busy = true) }
+        _uiState.update { it.copy(busy = true, operationError = null) }
         viewModelScope.launch {
             engine.applyCheat(code).fold(
                 onSuccess = { snapshot ->
@@ -164,7 +165,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun equip(itemId: String) {
         if (_uiState.value.busy) return
-        _uiState.update { it.copy(busy = true) }
+        _uiState.update { it.copy(busy = true, operationError = null) }
         viewModelScope.launch {
             engine.equip(itemId).fold(
                 onSuccess = { snapshot ->
@@ -187,7 +188,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun unequip(slot: String) {
         if (_uiState.value.busy) return
-        _uiState.update { it.copy(busy = true) }
+        _uiState.update { it.copy(busy = true, operationError = null) }
         viewModelScope.launch {
             engine.unequip(slot).fold(
                 onSuccess = { snapshot ->
@@ -211,7 +212,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun travel(locationId: String) {
         if (_uiState.value.busy) return
         val fromLocation = _uiState.value.snapshot?.location
-        _uiState.update { it.copy(busy = true, travelTransition = null) }
+        _uiState.update { it.copy(busy = true, operationError = null, travelTransition = null) }
         viewModelScope.launch {
             engine.travel(locationId).fold(
                 onSuccess = { snapshot ->
@@ -303,6 +304,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private fun publishFailure(failure: Throwable) {
         val engineFailure = failure as? EngineStartException ?: PythonGameEngine.classifyFailure(failure)
         Log.e("TheGame", engineFailure.technicalDetail, engineFailure)
-        _uiState.update { it.copy(bootState = engineFailure.toBootStateError(), busy = false) }
+        _uiState.update { current ->
+            if (current.snapshot != null) {
+                current.copy(bootState = BootState.Ready, busy = false, operationError = engineFailure.publicMessage)
+            } else {
+                current.copy(bootState = engineFailure.toBootStateError(), busy = false)
+            }
+        }
     }
 }

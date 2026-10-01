@@ -154,6 +154,12 @@ The UI must not become the authoritative rules engine.
 - Separate from main narrative screen.
 - COMPLETED_AT: —
 
+### TASK P-006 — Dedicated Skills screen
+- STATUS: `IN_PROGRESS`
+- IMPLEMENTED CANDIDATE: a schema-driven player-safe Skills surface is reachable from `More` without adding another primary Galaxy-A03 bottom-navigation tab. Skills are grouped from projected categories, future learned skills appear automatically, and selecting a skill reuses the authoritative stat-inspection boundary for base/modifier contributions.
+- BOUNDARY: no skill formulas or progression rules are duplicated in Compose; only projected skill state and sanitized inspection data are rendered.
+- COMPLETED_AT: —
+
 ## World / map
 
 ### TASK W-001 — Interactive map
@@ -364,6 +370,22 @@ The UI must not become the authoritative rules engine.
 - APK SHA-256: `c9e2d1f90b91b57af98de5620faa36bbd795d468de3febcfac73bc3bdd6b96bb`.
 - NEXT: retain this paper-doll contract while expanding player-facing Skills and later authored equipment detail.
 
+### Dedicated player-safe Skills UI slice
+- STATUS: `IN_PROGRESS`
+- BRANCH: `feature/player-safe-skills-ui`
+- PARENT: `feature/character-equipment-paperdoll-ui@b324dd555922a13f0672752f005d74fff68a09aa`.
+- OBJECTIVE: deliver the missing Skills product surface without crowding the phone bottom bar or hard-coding the four starting skills.
+- IMPLEMENTED CANDIDATE:
+  - `Skills` is a secondary section opened from `More`, while the primary bottom navigation remains Story / Character / Stats / Inventory / Quests / Map / More;
+  - the redundant Character shortcut was removed from `More` because Character already has a primary bottom tab;
+  - rendered skills come from `snapshot.skills`, grouped and sorted by projected category/name;
+  - selecting a skill requests `skills.<id>` through the already-verified player-safe inspection boundary;
+  - equipment/perk/condition contributions render from sanitized provenance rather than UI-side modifier arithmetic;
+  - future learned skills appear automatically when the player-safe projection contains them.
+- TESTS ADDED: More -> Skills navigation/Technical Systems inspection request and rendering the Work Gloves `equipment:hands +1` contribution.
+- EXACT-HEAD GATE: pending.
+- NEXT: verify the stacked Character gate, then run exact-head Python + Android + emulator gates for this Skills slice.
+
 ## Known technical follow-ups
 
 These are not part of the Android black-screen fix unless directly implicated:
@@ -425,3 +447,19 @@ Finish P-005 in PR #13 stacked above PR #12, preserving PR #11 inspection and PR
 Historical asset continuation guidance (superseded by the live evidence above):
 
 Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified slices. Assets 039, 040, 044, 053, 062/063, 072–075 and 096–100 are green and evidenced. Candidate assets 067–071 are implemented as reusable presentation-only infrastructure props and now require an exact-head gate. Do not block implementation on rejected mixed character references. Physical Galaxy A03 visual QA remains a separate acceptance gate before final visual approval.
+
+
+## APK delivery / recovery continuation — 2026-09-30
+
+### TASK A-004 — Deliver the Character/Stats Android candidate
+- STATUS: `IN_PROGRESS`
+- BRANCH: `fix/player-hub-runtime-recovery`, PR #15; based on PR #13 and consolidating PR #14 Skills source/tests.
+- USER REQUEST: finish the outstanding work, supply the Android APK, review rendered screens and leave an actionable desktop branch handoff.
+- OBSERVED BASELINE: run 229 / `36795598719` at PR #13 `0fe6a9f58601c00957ab5ccc4355f57e603e7534` passed all gates and 26 emulator tests; screenshot review found oversized equipment details and awkward accessory labels.
+- OBSERVED REGRESSIONS: run 230 / `36797063299` at PR #15 `9b9c7d9c8ea7fdd7a541e3a25b75174a8b0d2fac` passed Python/build but had 5 emulator failures. That commit contains regression tests without their runtime fixes.
+- IMPLEMENTED CANDIDATE: preserve playable snapshot after runtime load failures and show the public error inside the game; integrate the Skills surface with the existing inspection API; wrap/cap equipment dialogs, shorten accessory display labels while keeping full semantic labels; capture screenshots against the actual dark application background.
+- LOCAL VERIFICATION: 308 Python tests passed, `git diff --check` passed. Android verification remains pending. No canonical stats, authored bonuses, save schema, novel material or character-overlay geometry changed.
+- DELIVERY GATE: exact-source Android unit/compile/assembly, APK signature/payload verification, full connected tests and four reviewed screenshots; download/hash and deliver only after the complete gate is green.
+- APK retention: one day in Actions; only manual runs and this explicitly requested PR #15 delivery upload the APK. No release or store publication.
+- REMAINING: physical Galaxy A03 installation, appearance/input/performance/TTS review; canonical player/Tamsin reference and diagnostic-reader integration remain separate.
+- COMPLETED_AT: —

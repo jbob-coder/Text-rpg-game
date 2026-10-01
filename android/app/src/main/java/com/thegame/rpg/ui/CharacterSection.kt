@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -120,53 +119,55 @@ internal fun CharacterSection(
 
     if (detailOpen && selected != null) {
         Dialog(onDismissRequest = { detailOpen = false }) {
-            PixelPanel(
-                Modifier.fillMaxWidth().fillMaxHeight(0.85f).testTag("character-equipment-detail"),
-                equipmentSlotLabel(selected.slot),
-            ) {
-                Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    if (selected.equipped) {
-                        Text(selected.name ?: "Equipped item", color = PixelColors.Paper, style = MaterialTheme.typography.titleLarge)
-                        selected.quality?.let {
-                            Text(it.replaceFirstChar { c -> c.uppercase() }, color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
-                        }
-                        Text("Equipped", color = PixelColors.Cyan, style = MaterialTheme.typography.bodyMedium)
-                        Text("CURRENT ATTRIBUTE & SKILL BONUSES", color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
-                        val bonuses = buildList {
-                            snapshot.attributes.forEach { stat ->
-                                stat.contributions.filter { it.kind == "equipment" && it.slot == selected.slot }.forEach {
-                                    add("${stat.name}: ${signedStatValue(it.value)}")
+            BoxWithConstraints(propagateMinConstraints = false) {
+                PixelPanel(
+                    Modifier.fillMaxWidth().heightIn(max = maxHeight * 0.85f).testTag("character-equipment-detail"),
+                    equipmentSlotLabel(selected.slot),
+                ) {
+                    Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        if (selected.equipped) {
+                            Text(selected.name ?: "Equipped item", color = PixelColors.Paper, style = MaterialTheme.typography.titleLarge)
+                            selected.quality?.let {
+                                Text(it.replaceFirstChar { c -> c.uppercase() }, color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
+                            }
+                            Text("Equipped", color = PixelColors.Cyan, style = MaterialTheme.typography.bodyMedium)
+                            Text("CURRENT ATTRIBUTE & SKILL BONUSES", color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
+                            val bonuses = buildList {
+                                snapshot.attributes.forEach { stat ->
+                                    stat.contributions.filter { it.kind == "equipment" && it.slot == selected.slot }.forEach {
+                                        add("${stat.name}: ${signedStatValue(it.value)}")
+                                    }
+                                }
+                                snapshot.skills.forEach { skill ->
+                                    skill.contributions.filter { it.kind == "equipment" && it.slot == selected.slot }.forEach {
+                                        add("${skill.name}: ${signedStatValue(it.value)}")
+                                    }
                                 }
                             }
-                            snapshot.skills.forEach { skill ->
-                                skill.contributions.filter { it.kind == "equipment" && it.slot == selected.slot }.forEach {
-                                    add("${skill.name}: ${signedStatValue(it.value)}")
+                            if (bonuses.isEmpty()) Text("No listed attribute or skill bonuses.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
+                            bonuses.forEach {
+                                Text(it, color = PixelColors.Cyan, style = MaterialTheme.typography.bodyMedium)
+                            }
+                            CharacterActionButton("UNEQUIP", !busy, "character-unequip") { onUnequip(selected.slot) }
+                        } else {
+                            Text("Empty slot", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
+                        }
+                        val candidates = snapshot.inventory.items.filter { it.equippable && it.slot == selected.slot }
+                        if (candidates.isNotEmpty()) {
+                            Text("FROM YOUR BAG", color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
+                            candidates.forEach { item ->
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    PixelItemIcon(item.id, item.quality, Modifier.size(40.dp))
+                                    Spacer(Modifier.width(8.dp))
+                                    Text(item.name, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
                                 }
+                                CharacterActionButton("EQUIP", !busy, "character-equip-${item.id}") { onEquip(item.id) }
                             }
+                        } else if (!selected.equipped) {
+                            Text("No carried item fits this slot.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
                         }
-                        if (bonuses.isEmpty()) Text("No listed attribute or skill bonuses.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
-                        bonuses.forEach {
-                            Text(it, color = PixelColors.Cyan, style = MaterialTheme.typography.bodyMedium)
-                        }
-                        CharacterActionButton("UNEQUIP", !busy, "character-unequip") { onUnequip(selected.slot) }
-                    } else {
-                        Text("Empty slot", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
+                        CharacterActionButton("CLOSE", true, "character-detail-close") { detailOpen = false }
                     }
-                    val candidates = snapshot.inventory.items.filter { it.equippable && it.slot == selected.slot }
-                    if (candidates.isNotEmpty()) {
-                        Text("FROM YOUR BAG", color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
-                        candidates.forEach { item ->
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                PixelItemIcon(item.id, item.quality, Modifier.size(40.dp))
-                                Spacer(Modifier.width(8.dp))
-                                Text(item.name, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
-                            }
-                            CharacterActionButton("EQUIP", !busy, "character-equip-${item.id}") { onEquip(item.id) }
-                        }
-                    } else if (!selected.equipped) {
-                        Text("No carried item fits this slot.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
-                    }
-                    CharacterActionButton("CLOSE", true, "character-detail-close") { detailOpen = false }
                 }
             }
         }
@@ -176,6 +177,11 @@ internal fun CharacterSection(
 @Composable
 private fun CharacterSlotCard(slot: GameEquipmentSlot, active: Boolean, onSelect: () -> Unit) {
     val label = equipmentSlotLabel(slot.slot)
+    val cardLabel = when (slot.slot) {
+        "accessory_1" -> "Acc. I"
+        "accessory_2" -> "Acc. II"
+        else -> label
+    }
     val description = "$label: ${if (slot.equipped) slot.name ?: "Equipped item" else "Empty"}"
     Column(
         Modifier.fillMaxWidth()
@@ -193,7 +199,7 @@ private fun CharacterSlotCard(slot: GameEquipmentSlot, active: Boolean, onSelect
         } else {
             PixelUiIcon(PixelEquipmentSlotCatalog.slot(slot.slot), Modifier.size(24.dp), tint = PixelColors.Muted)
         }
-        Text(label, color = PixelColors.Paper, style = MaterialTheme.typography.labelLarge)
+        Text(cardLabel, color = PixelColors.Paper, style = MaterialTheme.typography.labelLarge)
     }
 }
 
