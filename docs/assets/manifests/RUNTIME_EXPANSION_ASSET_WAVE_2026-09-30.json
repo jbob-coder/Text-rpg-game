@@ -3,7 +3,7 @@
   "wave_id": "RUNTIME-ASSET-EXPANSION-2026-09-30",
   "branch": "feature/pixel-assets-runtime-expansion",
   "base": "feature/character-stats-inspection@791a839b23d4c3b9c43b6b1a4f9f204008a8c7df",
-  "status": "CANDIDATE_PENDING_EXACT_HEAD_GATE",
+  "status": "VERIFIED_EXACT_HEAD_GATE_GREEN",
   "policy": [
     "Reuse existing verified/provisionally verified pixel masters before creating replacements.",
     "Presentation assets consume player-safe state only and never own rules, travel, equipment, or quest state.",
@@ -15,7 +15,7 @@
       "number": 58,
       "asset_id": "DEPOT_FACADE_EXTERIOR",
       "source_wave": "B001-WAVE-L-ENVIRONMENT-MODULES",
-      "state": "CANDIDATE_INTEGRATED_MAP_PREVIEW",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "world_map selected location DISTRICT_PLAZA",
       "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentModuleCatalog.kt"
     },
@@ -31,7 +31,7 @@
       "number": 60,
       "asset_id": "MUNICIPAL_ARCHIVE_EXTERIOR",
       "source_wave": "B001-WAVE-L-ENVIRONMENT-MODULES",
-      "state": "CANDIDATE_INTEGRATED_MAP_PREVIEW",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "world_map selected location DISTRICT_ARCHIVE",
       "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentModuleCatalog.kt"
     },
@@ -47,7 +47,7 @@
       "number": 192,
       "asset_id": "CHARACTER_GROUND_SHADOW_MEDIUM",
       "source_batch": "BATCH_002",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "PlayerAvatarPanel staging layer aligned to shared ground pivot",
       "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelCharacterStagingCatalog.kt"
     },
@@ -55,70 +55,70 @@
       "number": 401,
       "asset_id": "UI_PANEL_STORY_FRAME",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "default Story/PixelPanel chrome"
     },
     {
       "number": 402,
       "asset_id": "UI_PANEL_CHARACTER_FRAME",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "Character/avatar/equipment detail chrome"
     },
     {
       "number": 403,
       "asset_id": "UI_PANEL_STATS_FRAME",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "Stats summary/detail/skills/derived/conditions chrome"
     },
     {
       "number": 404,
       "asset_id": "UI_PANEL_INVENTORY_FRAME",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "Inventory and equipment chrome"
     },
     {
       "number": 405,
       "asset_id": "UI_PANEL_QUEST_FRAME",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "Quest/category chrome"
     },
     {
       "number": 406,
       "asset_id": "UI_PANEL_MAP_FRAME",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "Map chrome"
     },
     {
       "number": 407,
       "asset_id": "UI_PANEL_SETTINGS_FRAME",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "Settings/Narration/Session/More chrome"
     },
     {
       "number": 408,
       "asset_id": "UI_PANEL_DEVELOPER_FRAME",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "Developer panel chrome"
     },
     {
       "number": 409,
       "asset_id": "UI_CHOICE_CARD_ENABLED",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "enabled authoritative choice presentation"
     },
     {
       "number": 410,
       "asset_id": "UI_CHOICE_CARD_DISABLED",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "disabled/locked choice presentation"
     },
     {
@@ -133,7 +133,7 @@
       "number": 412,
       "asset_id": "UI_BUTTON_PRIMARY",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "current primary text/icon buttons"
     },
     {
@@ -156,21 +156,21 @@
       "number": 415,
       "asset_id": "UI_TAB_ACTIVE",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "active GameSection tab"
     },
     {
       "number": 416,
       "asset_id": "UI_TAB_INACTIVE",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "inactive GameSection tab"
     },
     {
       "number": 417,
       "asset_id": "UI_SCROLL_MARKER",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "shown only when narrative scroll state reports remaining content",
       "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelUiUtilityCatalog.kt"
     },
@@ -178,18 +178,26 @@
       "number": 490,
       "asset_id": "ACCESS_AUDIO_NARRATION_ICON",
       "source_batch": "BATCH_005",
-      "state": "CANDIDATE_INTEGRATED",
+      "state": "INTEGRATED_VERIFIED",
       "binding": "READ ALOUD button paired with existing native TTS action",
       "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelUiUtilityCatalog.kt"
     }
   ],
   "verification": {
-    "status": "PENDING",
-    "required": [
-      "Python unit suite",
-      "Android JVM/unit + Compose instrumentation compilation",
-      "debug APK assembly/package checks",
-      "API 35 connected emulator tests"
-    ]
+    "status": "GREEN",
+    "implementation_head": "48d9f2c122709f78f51a2ff4041d65e66daf1e0a",
+    "workflow": "Android Pixel Client",
+    "run_number": 239,
+    "run_id": 36807128327,
+    "results": [
+      "Python engine: 308/308 tests passed.",
+      "Android unit tests passed.",
+      "Compose instrumentation tests compiled.",
+      "Debug APK assembled and package verification passed.",
+      "API 35 x86_64 emulator: 27/27 connected tests passed with 0 failures.",
+      "UI screenshot set verified and uploaded."
+    ],
+    "apk_sha256": "a694d8e8796ebc55f3531f5a5d6aa32c747b848eea340c784075ed8310289c4a",
+    "ui_qa_artifact_id": 11137599218
   }
 }
