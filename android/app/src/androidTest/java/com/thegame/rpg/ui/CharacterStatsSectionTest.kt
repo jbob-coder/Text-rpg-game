@@ -21,7 +21,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.platform.io.PlatformTestStorageRegistry
 import com.thegame.rpg.engine.GameAttribute
 import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameInventory
@@ -29,8 +29,7 @@ import com.thegame.rpg.engine.GameInventoryItem
 import com.thegame.rpg.engine.GameResource
 import com.thegame.rpg.engine.GameSkill
 import com.thegame.rpg.engine.GameSnapshot
-import com.thegame.rpg.engine.GameStatContribution
-import java.io.File
+import com.thegame.rpg.engine.GameStatusContribution
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -52,13 +51,13 @@ class CharacterStatsSectionTest {
         attributes = listOf(
             GameAttribute("might", "Might", 30.0, 30.0, 0.0, false, "raw physical force"),
             GameAttribute("agility", "Agility", 35.0, 35.0, 0.0, false, "movement, coordination, reaction"),
-            GameAttribute("endurance", "Endurance", 35.0, 37.0, 2.0, true, "fatigue tolerance and resilience", listOf(GameStatContribution("equipment", "Depot utility jacket", 2.0, "body"))),
+            GameAttribute("endurance", "Endurance", 35.0, 37.0, 2.0, true, "fatigue tolerance and resilience", listOf(GameStatusContribution("equipment", "Depot utility jacket", 2.0, "body"))),
             GameAttribute("intellect", "Intellect", 45.0, 45.0, 0.0, false, "reasoning and technical learning"),
             GameAttribute("will", "Will", 40.0, 40.0, 0.0, false, "mental resistance and discipline"),
-            GameAttribute("perception", "Perception", 40.0, 41.0, 1.0, true, "awareness, danger, and tells", listOf(GameStatContribution("equipment", "Signal ring", 1.0, "ring_1"))),
-            GameAttribute("presence", "Presence", 30.0, 31.0, 1.0, true, "social force and leadership", listOf(GameStatContribution("equipment", "Courier neck tag", 1.0, "neck"))),
+            GameAttribute("perception", "Perception", 40.0, 41.0, 1.0, true, "awareness, danger, and tells", listOf(GameStatusContribution("equipment", "Signal ring", 1.0, "ring_1"))),
+            GameAttribute("presence", "Presence", 30.0, 31.0, 1.0, true, "social force and leadership", listOf(GameStatusContribution("equipment", "Courier neck tag", 1.0, "neck"))),
         ),
-        skills = listOf(GameSkill("technical_systems", "Technical Systems", "technical", 25.0, 26.0, 1.0, true, listOf(GameStatContribution("equipment", "Insulated work gloves", 1.0, "hands")))),
+        skills = listOf(GameSkill("technical_systems", "Technical Systems", "technical", 25.0, 26.0, 1.0, true, listOf(GameStatusContribution("equipment", "Insulated work gloves", 1.0, "hands")))),
         inventory = GameInventory(equipment = slotIds.map { slot ->
             val item = items[slot]
             GameEquipmentSlot(slot, item != null, item?.first, item?.second)
@@ -67,9 +66,8 @@ class CharacterStatsSectionTest {
     )
 
     private fun saveScreenshot(name: String, tag: String = "qa-phone") {
-        val directory = File(InstrumentationRegistry.getInstrumentation().targetContext.filesDir, "ui-qa")
-        directory.mkdirs()
-        File(directory, "$name.png").outputStream().use {
+        // Gradle collects this runner-owned output before completing connected tests.
+        PlatformTestStorageRegistry.getInstance().openOutputFile("ui-qa/$name.png").use {
             assertTrue(composeRule.onNodeWithTag(tag).captureToImage().asAndroidBitmap().compress(Bitmap.CompressFormat.PNG, 100, it))
         }
     }

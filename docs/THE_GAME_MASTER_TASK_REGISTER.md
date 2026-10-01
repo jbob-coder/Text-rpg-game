@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-30 19:48 AST
+Updated: 2026-09-30 20:07 AST
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -130,16 +130,21 @@ The UI must not become the authoritative rules engine.
 
 ### TASK P-002 — Equipment model + visual integration
 - STATUS: `IN_PROGRESS`
-- IMPLEMENTED: authoritative equipment slots, equip/unequip bridge and Android equipment panel. Visual paper-doll integration is being validated in `feature/android-open-world-v1`.
+- IMPLEMENTED: authoritative equipment slots, equip/unequip bridge, Android inventory/equipment controls, and verified 32x48 paper-doll presentation for explicitly authored overlays.
+- VERIFIED CONTRACT: `fix/avatar-overlay-rig-contract` / PR #10 requires exact `itemId + slot + zOrder + 32x48 sprite` mappings at one shared character origin. Unmapped equipment remains logically equipped and does not receive invented avatar geometry.
+- CURRENT AUTHORED STARTING OVERLAYS: Depot Jacket, Work Gloves, Signal Ring, Courier Neck Tag.
 - Planned slots: Head, Chest, Hands, Legs, Feet, Main Hand, Off Hand, Ring 1, Ring 2, Neck, Accessory 1, Accessory 2.
-- Equipment must affect authoritative state/rules and eventually appearance.
+- VERIFIED UI: the phone-safe Character screen now surrounds the central 32x48 avatar with semantic slot rails, opens one selected-equipment detail panel, routes unequip through the authoritative engine, and labels unmapped equipped items as logical-only rather than inventing artwork.
+- REMAINING: additional authored overlays, held-object anchor integration, and physical-device visual review.
 - COMPLETED_AT: —
 
 ### TASK P-003 — Dedicated detailed Stats screen
 - STATUS: `IN_PROGRESS`
-- IMPLEMENTED: separate Stats surface with resources, attributes, derived stats, skills and conditions from the player-safe projection. Deeper contribution/meaning presentation remains in progress.
-- Categories: Core, Combat, Resources, Social, Progression, Derived.
-- Inspectable base/equipment/passive contributions and gameplay meaning.
+- IMPLEMENTED: separate Stats surface with compact player/resources summary, the canonical seven attributes, derived stats, skills and conditions from the player-safe projection. Attributes and skills are now selectable and request on-demand authoritative contribution explanations instead of duplicating modifier math in Compose.
+- VERIFIED SLICE: `feature/player-safe-stat-inspection@4f1775e6812fba7133465a9cfcac8ee48f2b1c14`, PR #11, Android Pixel Client run 219 / ID `36792301545`: Python 303/303; Android unit/instrumentation compile/assemble/package passed; API 35 x86_64 emulator started 18 connected tests and completed successfully with 0 failures.
+- APK SHA-256: `da3b870542bbd4dd1f49b284f9a86b09bcf9c8e245cc4c14fb56311780a6b154`.
+- PLAYER-SAFE DETAIL: equipment sources appear through safe explanation provenance (for example `equipment:body`) while raw item modifier maps remain absent from the inventory/equipment projection.
+- REMAINING: deeper derived-stat explanation and later progression/social presentation where authoritative data exists.
 - COMPLETED_AT: —
 
 ### TASK P-004 — Inventory / Equipment panels
@@ -320,6 +325,45 @@ The UI must not become the authoritative rules engine.
 - PHYSICAL QA: Galaxy A03 visual review and native-scale art approval remain separate.
 - NEXT: build product-facing Character/Equipment presentation on this contract; do not reintroduce generic slot geometry or bind held props without explicit player-safe presentation state.
 
+### Player-safe stat inspection / Stats UI slice
+- STATUS: `VERIFIED_IMPLEMENTATION`
+- BRANCH: `feature/player-safe-stat-inspection`
+- PARENT: `fix/avatar-overlay-rig-contract@7d4558ea5c9e3ad24bf29fe42c8f199ed0be60fe`.
+- OBJECTIVE: make the approved Stats screen inspectable without moving authoritative modifier arithmetic into Compose.
+- IMPLEMENTED CANDIDATE:
+  - Android bridge exposes on-demand `inspect_status(path)` through the existing rules-layer `inspect_status_value` projection;
+  - inspection is restricted by the rules layer to visible status namespaces and redacts hidden perk/condition provenance before Android receives it;
+  - inventory/equipment projection still omits raw modifier maps;
+  - Kotlin maps stat inspection into typed contribution records;
+  - Stats UI uses compact player/resource summary, selectable attributes and skills, and a dedicated selected-detail panel;
+  - equipment contribution rows derive from player-safe source keys such as `equipment:body`, never from duplicated UI arithmetic;
+  - inspection is serialized against engine mutations so a read cannot race equip/choice/travel state changes.
+- TESTS ADDED: Python bridge coverage for Endurance + Depot Jacket and Technical Systems + Work Gloves, invalid-path rollback, Kotlin mapper/error classification, and Compose request/render coverage for equipment contributions.
+- VERIFIED IMPLEMENTATION HEAD: `4f1775e6812fba7133465a9cfcac8ee48f2b1c14`.
+- VERIFIED GATE: Android Pixel Client run 219 / ID `36792301545`: Python 303/303; Android unit tests, Compose instrumentation compilation, debug APK assembly/package checks passed; API 35 x86_64 emulator started 18 connected tests and completed with 0 failures.
+- APK SHA-256: `da3b870542bbd4dd1f49b284f9a86b09bcf9c8e245cc4c14fb56311780a6b154`.
+- BOUNDARY: derived-stat deep breakdown remains read-only summary in this slice; no raw authored rule maps are projected to Compose.
+- NEXT: improve the Character/Equipment screen on top of the verified paper-doll contract without inventing unmapped gear art.
+
+### Character / Equipment paper-doll UI slice
+- STATUS: `VERIFIED_IMPLEMENTATION`
+- BRANCH: `feature/character-equipment-paperdoll-ui`
+- PARENT: `feature/player-safe-stat-inspection@7cba26a4c31c31ce19562ff79e830d14e6bb96b3`.
+- OBJECTIVE: replace the horizontally scrolling Character placeholder with a phone-safe equipment presentation that directly reflects the verified 32x48 paper-doll contract.
+- IMPLEMENTED CANDIDATE:
+  - left/right semantic slot rails surround the central player avatar using the 12 authoritative equipment slots;
+  - selecting a slot opens one focused equipment-detail panel rather than duplicating a quick-equipment strip;
+  - authored overlays report their explicit 32x48 / z-order contract;
+  - logically equipped items without an authored overlay are labeled `LOGICAL EQUIPMENT ONLY` and do not receive invented avatar geometry;
+  - missing item icons are reported as not authored instead of drawing a fake item shape;
+  - unequip actions route back through the authoritative Python equipment mutation path;
+  - current projected resources and canonical attributes are summarized below the character without introducing an Appearance subsystem.
+- TESTS ADDED: authored Depot Jacket selection/overlay/unequip routing and an unmapped future-head-item case proving no visible avatar gear is fabricated.
+- VERIFIED IMPLEMENTATION HEAD: `b324dd555922a13f0672752f005d74fff68a09aa`.
+- VERIFIED GATE: Android Pixel Client run 221 / ID `36793138990`: Python 303/303; Android unit tests, Compose instrumentation compilation, debug APK assembly/package checks passed; API 35 x86_64 emulator started 20 connected tests and completed successfully with 0 failures.
+- APK SHA-256: `c9e2d1f90b91b57af98de5620faa36bbd795d468de3febcfac73bc3bdd6b96bb`.
+- NEXT: retain this paper-doll contract while expanding player-facing Skills and later authored equipment detail.
+
 ## Known technical follow-ups
 
 These are not part of the Android black-screen fix unless directly implicated:
@@ -357,11 +401,12 @@ Before ending meaningful work, update:
 ### TASK P-005 — Responsive Character loadout and selected Stats detail
 - STATUS: `IN_PROGRESS`
 - BRANCH: `feature/character-stats-inspection`
-- BASE: `fix/avatar-overlay-rig-contract@7d4558ea5c9e3ad24bf29fe42c8f199ed0be60fe`; verified runtime parent `5097011f2cb15511e9695edc5475f2fd69c5f655`.
+- BASE: `feature/character-equipment-paperdoll-ui@40c95ec2e2b44aeb6a8ae1a23c28bbaf04e7a6d7` (PR #12), retaining PR #11 inspection and PR #10 rig-contract ancestry. PR #13 preserves concurrent screenshot-export fixes at `746e2152d617e4150f92d9fb604fbb1d3643d757`.
 - IMPLEMENTED: phone-width equipment slots surrounding the existing paper doll; selectable equipment detail with engine-owned equip/unequip; compact Stats summary, canonical attribute cards and one selected detail; player-safe attribute/skill contributions with existing hidden-source redaction.
 - REGRESSION COVERAGE: canonical values and bonuses, save/load, cancellation, detached projections and hidden perk/condition provenance; JVM mapper/formatting checks; phone/large-text Compose interactions; real Activity equip -> Stats -> unequip.
-- LOCAL VERIFICATION: `PYTHONPATH=src python -m unittest discover -s tests -v` — 305/305 passed; `git diff --check` passed. Four new Python tests were observed failing before implementation.
-- REQUIRED GATE: exact-head Android unit/compile/assemble/package and API 35 emulator workflow; inspect emitted UI screenshots before recording verification.
+- LOCAL VERIFICATION: `PYTHONPATH=src python -m unittest discover -s tests -v` — 308/308 passed after consolidation; `git diff --check` passed. Four new Python tests were observed failing before implementation.
+- PREDECESSOR GATE: run 222 / `36793210191` at `ad856cfc792e19e844a8fa49159bacb34b56114f` passed Python 305/305, Android unit/compile/assemble and 22/22 emulator tests, but failed screenshot retrieval after testing.
+- REQUIRED GATE: fresh consolidated exact-head Android unit/compile/assemble/package and API 35 emulator workflow; inspect emitted UI screenshots before recording verification.
 - LIMITATIONS: no local Android SDK/Gradle or physical Galaxy A03 runtime available; no new canonical character geometry, held-reader binding, stat migration or save migration.
 - HANDOFF: `docs/CHARACTER_STATS_INSPECTION_HANDOFF.md`.
 - COMPLETED_AT: —
@@ -375,7 +420,7 @@ Before ending meaningful work, update:
 
 ## Immediate next action
 
-Finish P-005 on its own branch/stacked PR; keep PR #10 as its rig-contract dependency and keep the validation head stable while CI runs. Inspect the real screenshots, repair any observed UI/CI defects, then record exact implementation evidence. Do not merge main or force held-reader/environment integration.
+Finish P-005 in PR #13 stacked above PR #12, preserving PR #11 inspection and PR #10 rig-contract dependencies and keep the validation head stable while CI runs. Inspect the real screenshots, repair any observed UI/CI defects, then record exact implementation evidence. Do not merge main or force held-reader/environment integration.
 
 Historical asset continuation guidance (superseded by the live evidence above):
 

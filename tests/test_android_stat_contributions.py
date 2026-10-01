@@ -113,6 +113,29 @@ class AndroidStatContributionTests(unittest.TestCase):
         self.assertEqual(before, session.state.snapshot())
         self.assertEqual(2, attribute(session.scene_view(), "endurance")["contributions"][0]["value"])
 
+    def test_snapshot_and_selected_inspection_share_authoritative_totals_and_redaction(self):
+        session = create_session(CONTENT)
+        session.equip("ITEM_DEPOT_JACKET")
+        session.equip("ITEM_WORK_GLOVES")
+        session.state.perks["PERK_PRIVATE_INSPECTION"] = {
+            "visible": False,
+            "modifiers": {"attributes.endurance": 1.5, "skills.technical_systems": -0.5},
+        }
+        before = deepcopy(session.state.snapshot())
+        view = session.scene_view()
+        for path, stat in (
+            ("attributes.endurance", attribute(view, "endurance")),
+            ("skills.technical_systems", skill(view, "technical_systems")),
+        ):
+            inspected = session.inspect_status(path)
+            self.assertEqual(stat["effective"], inspected["total"])
+            self.assertEqual(
+                sum(entry["value"] for entry in stat["contributions"]),
+                sum(value for key, value in inspected["breakdown"].items() if key not in {"base", "total"}),
+            )
+            self.assertNotIn("PERK_PRIVATE_INSPECTION", json.dumps(inspected))
+        self.assertEqual(before, session.state.snapshot())
+
 
 if __name__ == "__main__":
     unittest.main()

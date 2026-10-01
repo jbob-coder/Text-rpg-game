@@ -95,6 +95,15 @@ class PythonGameEngine internal constructor(
             }
         }
 
+    override suspend fun inspectStatus(path: String): Result<GameStatInspection> =
+        withContext(Dispatchers.IO) {
+            try {
+                Result.success(BridgeSnapshotMapper.statInspectionFromMap(gateway.inspectStatus(path)))
+            } catch (failure: Throwable) {
+                Result.failure(classifyFailure(failure))
+            }
+        }
+
     companion object {
         private val knownCodes = listOf(
             "CONTENT_ERROR",
@@ -107,6 +116,7 @@ class PythonGameEngine internal constructor(
             "CHEAT_ERROR",
             "EQUIP_ERROR",
             "TRAVEL_ERROR",
+            "STAT_INSPECTION_ERROR",
             "ENGINE_ERROR",
         )
 
@@ -133,6 +143,7 @@ class PythonGameEngine internal constructor(
                 "CHEAT_ERROR" -> "That cheat code could not be applied."
                 "EQUIP_ERROR" -> "Equipment could not be changed."
                 "TRAVEL_ERROR" -> "Travel could not be completed."
+                "STAT_INSPECTION_ERROR" -> "That stat could not be inspected."
                 else -> "The game engine could not start."
             }
             return EngineStartException(
@@ -154,6 +165,7 @@ internal interface PythonSessionGateway {
     fun equip(itemId: String): Map<String, Any?>
     fun unequip(slot: String): Map<String, Any?>
     fun travel(locationId: String): Map<String, Any?>
+    fun inspectStatus(path: String): Map<String, Any?>
 }
 
 private class ChaquopySessionGateway : PythonSessionGateway {
@@ -272,6 +284,18 @@ private class ChaquopySessionGateway : PythonSessionGateway {
         }
     }
 
+    override fun inspectStatus(path: String): Map<String, Any?> {
+        try {
+            return viewToMap(requireSession().callAttr("inspect_status", path))
+        } catch (failure: Throwable) {
+            throw classifyPythonBoundaryFailure(
+                failure = failure,
+                fallbackCode = "STAT_INSPECTION_ERROR",
+                fallbackMessage = "That stat could not be inspected.",
+            )
+        }
+    }
+
     override fun save() {
         try {
             requireSession().callAttr("save")
@@ -382,6 +406,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
             "CHEAT_ERROR",
             "EQUIP_ERROR",
             "TRAVEL_ERROR",
+            "STAT_INSPECTION_ERROR",
         ).firstOrNull { message.contains(it) }
 
         val code = known ?: fallbackCode

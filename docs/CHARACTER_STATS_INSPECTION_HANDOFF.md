@@ -33,8 +33,12 @@ campaign or Godot Pixel RPG. External novel attachments were not imported.
 
 ## IMPLEMENTED / PENDING ANDROID VERIFICATION
 
-Branch: `feature/character-stats-inspection`, based on PR #10 documentation head
-`7d4558ea5c9e3ad24bf29fe42c8f199ed0be60fe`.
+Branch: `feature/character-stats-inspection`, PR #13. Consolidates PR #11 stat
+inspection and PR #12 Character UI with responsive layout, equip-from-Bag details
+and bounded contribution labels. Stack base:
+`feature/character-equipment-paperdoll-ui@40c95ec2e2b44aeb6a8ae1a23c28bbaf04e7a6d7`.
+PR #10 remains the authored-overlay dependency. Concurrent screenshot fixes
+`699e6c7` / `746e2152d617e4150f92d9fb604fbb1d3643d757` are preserved.
 
 - Character uses width-constrained equipment cards around the central avatar, with
   a larger-text/narrow-container alternative and vertical scrolling.
@@ -43,6 +47,9 @@ Branch: `feature/character-stats-inspection`, based on PR #10 documentation head
   snapshot after mutations, without cached item state or a duplicate equipment strip.
 - Stats uses a compact player summary, resources, all seven canonical attributes,
   one selected attribute explanation, skills, derived values and visible conditions.
+- Attribute and skill selection keeps PR #11's asynchronous, mutation-serialized
+  inspection path and public loading/error state. Snapshot totals and on-demand
+  inspection are checked for consistency.
 - Attribute/skill display contributions are derived in Python from the existing
   `inspect_status_value()` redaction boundary before source labels are resolved.
   Hidden conditions/perks remain an anonymous numeric contribution.
@@ -57,11 +64,23 @@ Branch: `feature/character-stats-inspection`, based on PR #10 documentation head
 - Baseline: `PYTHONPATH=src python -m unittest discover -s tests -v` — 301/301 passed.
 - Four new projection tests observed failing before implementation (missing
   contribution field), then passing after implementation.
-- Current local full suite: **305/305 passed**, no failures/errors.
+- Current consolidated local full suite: **308/308 passed**, no failures/errors.
+- First PR #13 implementation `ad856cfc792e19e844a8fa49159bacb34b56114f`,
+  run 222 / `36793210191`: Python 305/305 and Android unit/compile/assemble passed;
+  all 22 emulator tests passed. The workflow failed afterward because the external
+  screenshot path did not exist. This is not a successful complete gate.
+- Run 226 / `36794005834` at `746e2152d617e4150f92d9fb604fbb1d3643d757`
+  again passed Android build and 22 emulator tests, but app-private screenshot
+  export failed. The emulator action executes each script line in a separate
+  shell, so shell-local export variables do not persist between lines.
+- Screenshot capture now uses AndroidX `PlatformTestStorageRegistry` and
+  Gradle's collected additional-test-output directory. A separate host step
+  verifies all four PNGs before uploading. The consolidated implementation
+  still needs its own fresh exact-head gate and screenshot review.
 - `git diff --check`: passed.
 - Local Android compilation/emulator execution: unavailable (no local SDK/Gradle).
-  Required workflow gate remains pending until observed; do not infer Android success
-  from Python or the authored tests.
+  The consolidated workflow gate remains pending until observed; do not infer
+  Android success from Python, predecessor gates or the authored tests.
 
 New tests cover canonical values/bonuses, equip/unequip and save/load, hidden registry
 and runtime provenance, net cancellation, detached records, Kotlin mapping/formatting,
@@ -86,7 +105,10 @@ art approval and physical Galaxy A03 visual/performance/input/TTS checks remain 
   unequipped-item comparison and dedicated Skills/Bag redesign are later slices.
 - Player/Tamsin canonical reference selection remains blocked; held-reader binding
   still requires authored pose/rig support and player-safe presentation state.
-- This stacked branch does not merge PRs #7–#10 or consolidate deferred asset branches.
+- Regular local feature merges preserve PR #11/#12 and screenshot-fix ancestry.
+  This does not merge any PR remotely or consolidate deferred asset branches.
+- PR #14 Skills work appeared concurrently; it is independent and is not overwritten
+  or silently incorporated into this Character/Stats gate.
 
 ## NEXT_ACTION
 

@@ -16,13 +16,18 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.dp
+import com.thegame.rpg.GameUiState
 import com.thegame.rpg.TravelTransitionUiState
+import com.thegame.rpg.boot.BootState
+import com.thegame.rpg.engine.GameAttribute
 import com.thegame.rpg.engine.GameChoice
 import com.thegame.rpg.engine.GameCondition
 import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameInventory
 import com.thegame.rpg.engine.GameResource
 import com.thegame.rpg.engine.GameSnapshot
+import com.thegame.rpg.engine.GameStatContribution
+import com.thegame.rpg.engine.GameStatInspection
 import com.thegame.rpg.engine.GameVisuals
 import org.junit.Rule
 import org.junit.Test
@@ -104,6 +109,132 @@ class GameScreenTest {
                 "Expected stable GameScreen to emit Map navigation, got $destination"
             }
         }
+    }
+
+    @Test
+    fun statsScreenRequestsPlayerSafeInspection() {
+        var requestedPath: String? = null
+        val statSnapshot = snapshot.copy(
+            attributes = listOf(
+                GameAttribute(
+                    id = "endurance",
+                    name = "Endurance",
+                    base = 35.0,
+                    effective = 37.0,
+                    delta = 2.0,
+                    modified = true,
+                    role = "sustained physical resilience",
+                )
+            )
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                TheGameRoot(
+                    uiState = GameUiState(
+                        bootState = BootState.Ready,
+                        snapshot = statSnapshot,
+                    ),
+                    onChoice = {},
+                    onSave = {},
+                    onLoad = {},
+                    onNarrate = { false },
+                    onReplayNarration = { false },
+                    onStopNarration = {},
+                    autoReadNarration = false,
+                    onAutoReadChange = {},
+                    narrationRate = 0.92f,
+                    onNarrationRateChange = {},
+                    textDelayMs = 0,
+                    onTextDelayChange = {},
+                    onCheat = {},
+                    onEquip = {},
+                    onUnequip = {},
+                    onInspectStatus = { requestedPath = it },
+                    onTravel = {},
+                    onTravelTransitionFinished = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("nav-stats")
+            .performScrollTo()
+            .performClick()
+        composeRule.onNodeWithTag("stats-attribute-endurance")
+            .performScrollTo()
+            .assertHasClickAction()
+            .performClick()
+
+        composeRule.runOnIdle {
+            check(requestedPath == "attributes.endurance") {
+                "Expected Endurance inspection request, got $requestedPath"
+            }
+        }
+    }
+
+    @Test
+    fun statsScreenRendersPlayerSafeEquipmentContribution() {
+        val statSnapshot = snapshot.copy(
+            attributes = listOf(
+                GameAttribute(
+                    id = "endurance",
+                    name = "Endurance",
+                    base = 35.0,
+                    effective = 37.0,
+                    delta = 2.0,
+                    modified = true,
+                    role = "sustained physical resilience",
+                )
+            )
+        )
+        val inspection = GameStatInspection(
+            path = "attributes.endurance",
+            kind = "attribute",
+            total = 37.0,
+            contributions = listOf(
+                GameStatContribution("base", 35.0),
+                GameStatContribution("equipment:body", 2.0),
+            ),
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                TheGameRoot(
+                    uiState = GameUiState(
+                        bootState = BootState.Ready,
+                        snapshot = statSnapshot,
+                        statInspectionPath = "attributes.endurance",
+                        statInspection = inspection,
+                    ),
+                    onChoice = {},
+                    onSave = {},
+                    onLoad = {},
+                    onNarrate = { false },
+                    onReplayNarration = { false },
+                    onStopNarration = {},
+                    autoReadNarration = false,
+                    onAutoReadChange = {},
+                    narrationRate = 0.92f,
+                    onNarrationRateChange = {},
+                    textDelayMs = 0,
+                    onTextDelayChange = {},
+                    onCheat = {},
+                    onEquip = {},
+                    onUnequip = {},
+                    onInspectStatus = {},
+                    onTravel = {},
+                    onTravelTransitionFinished = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("nav-stats")
+            .performScrollTo()
+            .performClick()
+        composeRule.onNodeWithTag("stats-attribute-detail")
+            .performScrollTo()
+            .assertIsDisplayed()
+        composeRule.onNodeWithText("Chest: +2").assertIsDisplayed()
     }
 
     @Test
@@ -320,6 +451,137 @@ class GameScreenTest {
         }
 
         composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        composeRule.onAllNodesWithTag("avatar-visible-gear").assertCountEquals(0)
+    }
+
+    @Test
+    fun characterScreenSelectsAuthoredPaperDollSlotAndRoutesUnequip() {
+        var unequippedSlot: String? = null
+        val equippedSnapshot = snapshot.copy(
+            inventory = GameInventory(
+                equipment = listOf(
+                    GameEquipmentSlot(
+                        slot = "body",
+                        equipped = true,
+                        itemId = "ITEM_DEPOT_JACKET",
+                        name = "Depot utility jacket",
+                        quality = "standard",
+                    ),
+                    GameEquipmentSlot(
+                        slot = "hands",
+                        equipped = true,
+                        itemId = "ITEM_WORK_GLOVES",
+                        name = "Insulated work gloves",
+                        quality = "standard",
+                    ),
+                )
+            )
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                TheGameRoot(
+                    uiState = GameUiState(
+                        bootState = BootState.Ready,
+                        snapshot = equippedSnapshot,
+                    ),
+                    onChoice = {},
+                    onSave = {},
+                    onLoad = {},
+                    onNarrate = { false },
+                    onReplayNarration = { false },
+                    onStopNarration = {},
+                    autoReadNarration = false,
+                    onAutoReadChange = {},
+                    narrationRate = 0.92f,
+                    onNarrationRateChange = {},
+                    textDelayMs = 0,
+                    onTextDelayChange = {},
+                    onCheat = {},
+                    onEquip = {},
+                    onUnequip = { unequippedSlot = it },
+                    onInspectStatus = {},
+                    onTravel = {},
+                    onTravelTransitionFinished = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("nav-character")
+            .performScrollTo()
+            .performClick()
+        composeRule.onNodeWithTag("character-loadout-board")
+            .assertIsDisplayed()
+        composeRule.onNodeWithTag("character-slot-body")
+            .assertHasClickAction()
+            .performClick()
+        composeRule.onNodeWithTag("character-equipment-detail")
+            .assertIsDisplayed()
+        composeRule.onNodeWithText("Depot utility jacket").assertIsDisplayed()
+        composeRule.onNodeWithText("UNEQUIP")
+            .assertHasClickAction()
+            .performClick()
+
+        composeRule.runOnIdle {
+            check(unequippedSlot == "body") {
+                "Expected Character screen to route body unequip, got $unequippedSlot"
+            }
+        }
+    }
+
+    @Test
+    fun characterScreenKeepsUnmappedEquipmentLogicalOnly() {
+        val unmappedSnapshot = snapshot.copy(
+            inventory = GameInventory(
+                equipment = listOf(
+                    GameEquipmentSlot(
+                        slot = "head",
+                        equipped = true,
+                        itemId = "ITEM_FUTURE_HELMET",
+                        name = "Future helmet",
+                    ),
+                )
+            )
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                TheGameRoot(
+                    uiState = GameUiState(
+                        bootState = BootState.Ready,
+                        snapshot = unmappedSnapshot,
+                    ),
+                    onChoice = {},
+                    onSave = {},
+                    onLoad = {},
+                    onNarrate = { false },
+                    onReplayNarration = { false },
+                    onStopNarration = {},
+                    autoReadNarration = false,
+                    onAutoReadChange = {},
+                    narrationRate = 0.92f,
+                    onNarrationRateChange = {},
+                    textDelayMs = 0,
+                    onTextDelayChange = {},
+                    onCheat = {},
+                    onEquip = {},
+                    onUnequip = {},
+                    onInspectStatus = {},
+                    onTravel = {},
+                    onTravelTransitionFinished = {},
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("nav-character")
+            .performScrollTo()
+            .performClick()
+        composeRule.onNodeWithTag("character-slot-head")
+            .assertHasClickAction()
+            .performClick()
+        composeRule.onNodeWithTag("character-equipment-detail")
+            .assertIsDisplayed()
+        composeRule.onNodeWithText("Future helmet").assertIsDisplayed()
         composeRule.onAllNodesWithTag("avatar-visible-gear").assertCountEquals(0)
     }
 

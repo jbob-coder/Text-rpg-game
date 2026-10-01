@@ -394,6 +394,31 @@ class AndroidGameSession:
                 technical_detail=str(exc),
             ) from exc
 
+    def inspect_status(self, path: str) -> Dict[str, Any]:
+        """Return one on-demand player-safe stat explanation without exposing raw rules."""
+        if not isinstance(path, str) or not path:
+            raise AndroidBridgeError(
+                "STAT_INSPECTION_ERROR",
+                "Choose a valid stat to inspect.",
+                technical_detail="path must be non-empty text",
+            )
+        try:
+            registries = self.content.registries
+            return deepcopy(
+                inspect_status_value(
+                    self.state,
+                    self.engine,
+                    path,
+                    condition_definitions=registries.get("conditions", {}),
+                )
+            )
+        except RuleError as exc:
+            raise AndroidBridgeError(
+                "STAT_INSPECTION_ERROR",
+                "That stat cannot be inspected.",
+                technical_detail=str(exc),
+            ) from exc
+
     def choose(self, choice_id: str) -> Dict[str, Any]:
         """Apply one visible choice and return the updated player-safe projection."""
         if not isinstance(choice_id, str) or not choice_id:

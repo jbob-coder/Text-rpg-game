@@ -61,7 +61,7 @@ internal fun CharacterSection(
         ) {
             PlayerStatusSummary(snapshot)
             if (surroundRig) {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Row(Modifier.fillMaxWidth().testTag("character-loadout-board"), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Column(Modifier.width(railWidth), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         slots.take(midpoint).forEach { slot ->
                             CharacterSlotCard(slot, selectedId == slot.slot) {

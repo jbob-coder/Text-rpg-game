@@ -128,19 +128,29 @@ jobs:
           disable-animations: true
           script: |
             gradle -p android connectedDebugAndroidTest --stacktrace
-            rm -rf android-ui-qa
-            mkdir -p android-ui-qa
-            SCREENSHOTS="$(adb shell run-as com.thegame.rpg ls files/ui-qa 2>/dev/null | tr -d '\r')"
-            test -n "$SCREENSHOTS"
-            for file in $SCREENSHOTS; do
-              adb exec-out run-as com.thegame.rpg cat "files/ui-qa/$file" > "android-ui-qa/$file"
-            done
-            test -n "$(find android-ui-qa -maxdepth 1 -type f -name '*.png' -print -quit)"
+
+      - name: Verify collected UI screenshot set
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import struct
+          root = Path('android/app/build/outputs/connected_android_test_additional_output')
+          files = sorted(root.rglob('ui-qa/*.png'))
+          expected = {'character-320dp.png', 'equipment-jacket-detail.png', 'stats-320dp.png', 'stats-perception-detail.png'}
+          assert {file.name for file in files} == expected, f'Missing UI evidence: {[str(file) for file in files]}'
+          for file in files:
+              content = file.read_bytes()
+              assert content[:8] == b'\x89PNG\r\n\x1a\n' and content[12:16] == b'IHDR', f'Invalid PNG: {file}'
+              width, height = struct.unpack('>II', content[16:24])
+              assert width > 0 and height > 0, f'Empty PNG: {file}'
+              print(f'{file.name}: {width}x{height}; SHA-256 {hashlib.sha256(content).hexdigest()}')
+          PY
 
       - name: Upload small UI verification screenshots
         uses: actions/upload-artifact@v4
         with:
           name: THE-GAME-UI-QA-${{ github.run_id }}
-          path: android-ui-qa/*.png
+          path: android/app/build/outputs/connected_android_test_additional_output/**/ui-qa/*.png
           if-no-files-found: error
           retention-days: 1

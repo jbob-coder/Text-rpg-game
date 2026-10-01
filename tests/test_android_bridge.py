@@ -141,6 +141,36 @@ class AndroidBridgeTests(unittest.TestCase):
         self.assertTrue(all("modifiers" not in entry for entry in view["inventory"]["equipment"]))
         self.assertTrue(all("modifiers" not in entry for entry in view["inventory"]["items"]))
 
+    def test_stat_inspection_reports_player_safe_equipment_contributions(self):
+        session = create_session(CONTENT)
+        session.equip("ITEM_DEPOT_JACKET")
+        session.equip("ITEM_WORK_GLOVES")
+        before = deepcopy(session.state.snapshot())
+
+        endurance = session.inspect_status("attributes.endurance")
+        technical = session.inspect_status("skills.technical_systems")
+
+        self.assertEqual("attributes.endurance", endurance["path"])
+        self.assertEqual(37.0, endurance["total"])
+        self.assertEqual(35.0, endurance["breakdown"]["base"])
+        self.assertEqual(2.0, endurance["breakdown"]["equipment:body"])
+        self.assertEqual("skills.technical_systems", technical["path"])
+        self.assertEqual(26.0, technical["total"])
+        self.assertEqual(1.0, technical["breakdown"]["equipment:hands"])
+        self.assertEqual(before, session.state.snapshot())
+        leaked = FORBIDDEN_AUTHORED_KEYS.intersection(set(walk_keys(endurance)))
+        self.assertEqual(set(), leaked)
+
+    def test_stat_inspection_rejects_non_status_paths_without_mutation(self):
+        session = create_session(CONTENT)
+        before = deepcopy(session.state.snapshot())
+
+        with self.assertRaises(AndroidBridgeError) as caught:
+            session.inspect_status("quests.QUEST_DEAD_RELAY")
+
+        self.assertEqual("STAT_INSPECTION_ERROR", caught.exception.code)
+        self.assertEqual(before, session.state.snapshot())
+
     def test_validated_cheats_mutate_only_through_whitelist(self):
         session = create_session(CONTENT)
         session.state.player["resources"]["stamina"] = 1

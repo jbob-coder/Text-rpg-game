@@ -12,7 +12,7 @@ data class GameChoice(
 
 data class GameResource(val id: String, val current: Double, val max: Double)
 
-data class GameStatContribution(
+data class GameStatusContribution(
     val kind: String,
     val label: String,
     val value: Double,
@@ -27,7 +27,7 @@ data class GameAttribute(
     val delta: Double,
     val modified: Boolean,
     val role: String? = null,
-    val contributions: List<GameStatContribution> = emptyList(),
+    val contributions: List<GameStatusContribution> = emptyList(),
 )
 
 data class GameDerivedStat(
@@ -45,7 +45,19 @@ data class GameSkill(
     val effective: Double,
     val delta: Double,
     val modified: Boolean,
-    val contributions: List<GameStatContribution> = emptyList(),
+    val contributions: List<GameStatusContribution> = emptyList(),
+)
+
+data class GameStatContribution(
+    val source: String,
+    val value: Double,
+)
+
+data class GameStatInspection(
+    val path: String,
+    val kind: String,
+    val total: Double,
+    val contributions: List<GameStatContribution>,
 )
 
 data class GameCondition(
@@ -184,9 +196,30 @@ interface GameEngine {
         Result.failure(UnsupportedOperationException("unequip is not implemented"))
     suspend fun travel(locationId: String): Result<GameSnapshot> =
         Result.failure(UnsupportedOperationException("travel is not implemented"))
+    suspend fun inspectStatus(path: String): Result<GameStatInspection> =
+        Result.failure(UnsupportedOperationException("stat inspection is not implemented"))
 }
 
 internal object BridgeSnapshotMapper {
+    fun statInspectionFromMap(payload: Map<String, Any?>): GameStatInspection {
+        val path = text(payload["path"], "inspection.path")
+        val kind = text(payload["kind"], "inspection.kind")
+        val total = number(payload["total"], "inspection.total")
+        val breakdown = objectMap(payload["breakdown"], "inspection.breakdown")
+        val contributions = breakdown.map { (source, rawValue) ->
+            GameStatContribution(
+                source = source,
+                value = number(rawValue, "inspection.breakdown.$source"),
+            )
+        }
+        return GameStatInspection(
+            path = path,
+            kind = kind,
+            total = total,
+            contributions = contributions,
+        )
+    }
+
     fun fromMap(payload: Map<String, Any?>): GameSnapshot {
         val scene = objectMap(payload["scene"], "scene")
         val status = objectMap(payload["status"], "status")
@@ -426,7 +459,7 @@ internal object BridgeSnapshotMapper {
         return value
     }
 
-    private fun contributions(value: Any?, path: String): List<GameStatContribution> =
+    private fun contributions(value: Any?, path: String): List<GameStatusContribution> =
         optionalList(value, path).mapIndexed { index, item ->
             val record = objectMap(item, "$path[$index]")
             val kind = text(record["kind"], "$path[$index].kind")
@@ -437,7 +470,7 @@ internal object BridgeSnapshotMapper {
             require((kind == "equipment" && slot != null) || (kind != "equipment" && slot == null)) {
                 "$path[$index].slot must identify equipment only"
             }
-            GameStatContribution(
+            GameStatusContribution(
                 kind = kind,
                 label = text(record["label"], "$path[$index].label"),
                 value = number(record["value"], "$path[$index].value"),
