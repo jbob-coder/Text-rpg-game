@@ -40,12 +40,12 @@ import kotlinx.coroutines.delay
 fun PixelPanel(
     modifier: Modifier = Modifier,
     title: String? = null,
+    chrome: PixelPanelChrome = PixelPanelChrome.STORY,
     content: @Composable () -> Unit,
 ) {
     Column(
         modifier = modifier
-            .background(PixelColors.Panel)
-            .border(2.dp, PixelColors.Muted)
+            .pixelChrome(PixelUiChromeCatalog.panel(chrome))
             .padding(12.dp),
     ) {
         if (title != null) {
@@ -59,15 +59,17 @@ fun PixelPanel(
 @Composable
 fun PixelChoiceCard(choice: GameChoice, busy: Boolean, onClick: () -> Unit) {
     val enabled = choice.enabled && !busy
-    val border = if (enabled) PixelColors.Cyan else PixelColors.Disabled
-    val background = if (enabled) PixelColors.PanelAlt else PixelColors.Deep
+    val chrome = if (enabled) {
+        PixelUiChromeCatalog.choiceEnabled
+    } else {
+        PixelUiChromeCatalog.choiceDisabled
+    }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .testTag("choice-${choice.id}")
-            .background(background)
-            .border(2.dp, border)
+            .pixelChrome(chrome)
             .clickable(enabled = enabled, role = Role.Button, onClick = onClick)
             .padding(horizontal = 14.dp, vertical = 12.dp),
     ) {
