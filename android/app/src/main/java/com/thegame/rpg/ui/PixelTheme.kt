@@ -19,6 +19,12 @@ object PixelColors {
     val Cyan = Color(0xFF63D8D1)
     val Gold = Color(0xFFE2B65F)
     val Danger = Color(0xFFD66B66)
+    // Muted, material-oriented resource accents. Keep the HUD readable without
+    // pushing the game's overall presentation toward neon/cyberpunk shorthand.
+    val Health = Color(0xFFC96A62)
+    val Stamina = Color(0xFF8FAF70)
+    val Focus = Color(0xFF6F9FB5)
+    val Resolve = Color(0xFFC29A62)
     val Disabled = Color(0xFF59666D)
 }
 
