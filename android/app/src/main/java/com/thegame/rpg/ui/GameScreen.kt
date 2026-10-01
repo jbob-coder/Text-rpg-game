@@ -526,7 +526,7 @@ private fun SettingsPanel(
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        PixelPanel(title = "Settings") {
+        PixelPanel(title = "Settings", chrome = PixelPanelChrome.SETTINGS) {
             Text("Game settings live outside the narrative HUD.", color = PixelColors.Paper, style = MaterialTheme.typography.bodyLarge)
             Spacer(Modifier.height(12.dp))
             PixelTextButton("SAVE GAME", onSave)
@@ -538,7 +538,7 @@ private fun SettingsPanel(
             Spacer(Modifier.height(8.dp))
             PixelTextButton("CLOSE", onClose)
         }
-        PixelPanel(title = "Narration") {
+        PixelPanel(title = "Narration", chrome = PixelPanelChrome.SETTINGS) {
             Text(
                 "Tap the narrative text or READ ALOUD to use the device's native text-to-speech engine.",
                 color = PixelColors.Muted,
@@ -587,13 +587,13 @@ private fun SettingsPanel(
             Spacer(Modifier.height(8.dp))
             PixelTextButton("STOP NARRATION", onStopNarration)
         }
-        PixelPanel(title = "Session") {
+        PixelPanel(title = "Session", chrome = PixelPanelChrome.SETTINGS) {
             LabeledValue("Content", snapshot.contentId ?: "—")
             LabeledValue("Canon", snapshot.canonStatus ?: "—")
             LabeledValue("Scene", snapshot.sceneId)
             LabeledValue("Turn", snapshot.turn.toString())
         }
-        PixelPanel(title = "Developer") {
+        PixelPanel(title = "Developer", chrome = PixelPanelChrome.DEVELOPER) {
             var cheatCode by remember { mutableStateOf("") }
             Text(
                 "Cheats are validated by the Python game layer. Quick actions and manual codes use the same whitelist.",
@@ -644,7 +644,7 @@ private fun InventorySection(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        PixelPanel(title = "Equipment") {
+        PixelPanel(title = "Equipment", chrome = PixelPanelChrome.INVENTORY) {
             snapshot.inventory.equipment.forEach { slot ->
                 val item = if (slot.equipped) {
                     buildString {
@@ -664,7 +664,7 @@ private fun InventorySection(
             }
         }
 
-        PixelPanel(title = "Inventory") {
+        PixelPanel(title = "Inventory", chrome = PixelPanelChrome.INVENTORY) {
             if (snapshot.inventory.items.isEmpty()) {
                 Text("No carried items.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
             } else {
@@ -719,7 +719,7 @@ private fun QuestSection(snapshot: GameSnapshot) {
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         if (snapshot.quests.isEmpty()) {
-            PixelPanel(title = "Quests") {
+            PixelPanel(title = "Quests", chrome = PixelPanelChrome.QUEST) {
                 Text(
                     "No quest is active yet. Explore the current scene and the quest log will update from authoritative state.",
                     color = PixelColors.Muted,
@@ -730,7 +730,7 @@ private fun QuestSection(snapshot: GameSnapshot) {
             listOf("main", "side", "optional", "lore").forEach { category ->
                 val quests = snapshot.quests.filter { it.category == category }
                 if (quests.isNotEmpty()) {
-                    PixelPanel(title = category) {
+                    PixelPanel(title = category, chrome = PixelPanelChrome.QUEST) {
                         quests.forEach { quest ->
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 PixelUiIcon(
@@ -801,7 +801,7 @@ private fun MapSection(
         modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        PixelPanel(title = map.title) {
+        PixelPanel(title = map.title, chrome = PixelPanelChrome.MAP) {
             if (map.nodes.isEmpty()) {
                 Text(
                     "No mapped location has been discovered yet.",
@@ -944,7 +944,7 @@ private fun MapSection(
 
 @Composable
 private fun MorePanel(onCharacter: () -> Unit, onSettings: () -> Unit) {
-    PixelPanel(modifier = Modifier.fillMaxSize(), title = "More") {
+    PixelPanel(modifier = Modifier.fillMaxSize(), title = "More", chrome = PixelPanelChrome.SETTINGS) {
         PixelTextButton("CHARACTER / EQUIPMENT", onCharacter)
         Spacer(Modifier.height(8.dp))
         PixelTextButton("SETTINGS / SAVE / AUDIO", onSettings)
@@ -987,8 +987,10 @@ private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) 
     Box(
         modifier = Modifier
             .testTag("nav-${label.lowercase()}")
-            .background(if (active) PixelColors.Cyan else PixelColors.Deep)
-            .border(2.dp, if (active) PixelColors.Paper else PixelColors.Muted)
+            .pixelChrome(
+                if (active) PixelUiChromeCatalog.tabActive
+                else PixelUiChromeCatalog.tabInactive,
+            )
             .clickable(role = Role.Tab, onClick = onClick)
             .padding(horizontal = 6.dp, vertical = 5.dp),
     ) {
@@ -1018,8 +1020,7 @@ private fun PixelIconTextButton(
 ) {
     Box(
         modifier = modifier
-            .background(PixelColors.PanelAlt)
-            .border(2.dp, PixelColors.Cyan)
+            .pixelChrome(PixelUiChromeCatalog.buttonPrimary)
             .clickable(role = Role.Button, onClick = onClick)
             .padding(horizontal = 12.dp, vertical = 8.dp),
     ) {
@@ -1053,8 +1054,7 @@ private fun PixelTextButton(
 ) {
     Box(
         modifier = modifier
-            .background(PixelColors.PanelAlt)
-            .border(2.dp, PixelColors.Cyan)
+            .pixelChrome(PixelUiChromeCatalog.buttonPrimary)
             .clickable(role = Role.Button, onClick = onClick)
             .padding(horizontal = 12.dp, vertical = 8.dp),
     ) {
