@@ -175,6 +175,14 @@
       "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelUiUtilityCatalog.kt"
     },
     {
+      "number": 419,
+      "asset_id": "UI_MODAL_FRAME",
+      "source_batch": "BATCH_005",
+      "state": "INTEGRATED_VERIFIED",
+      "binding": "Character equipment detail Dialog frame",
+      "production_file": "android/app/src/main/java/com/thegame/rpg/ui/PixelUiChromeCatalog.kt"
+    },
+    {
       "number": 490,
       "asset_id": "ACCESS_AUDIO_NARRATION_ICON",
       "source_batch": "BATCH_005",
@@ -185,19 +193,22 @@
   ],
   "verification": {
     "status": "GREEN",
-    "implementation_head": "48d9f2c122709f78f51a2ff4041d65e66daf1e0a",
+    "implementation_head": "c55b4449b3449b7cd9ad3be22a3b52511d82657b",
     "workflow": "Android Pixel Client",
-    "run_number": 239,
-    "run_id": 36807128327,
+    "run_number": 244,
+    "run_id": 36807746344,
     "results": [
       "Python engine: 308/308 tests passed.",
       "Android unit tests passed.",
       "Compose instrumentation tests compiled.",
       "Debug APK assembled and package verification passed.",
       "API 35 x86_64 emulator: 27/27 connected tests passed with 0 failures.",
-      "UI screenshot set verified and uploaded."
+      "UI screenshot set verified and uploaded.",
+      "UI_MODAL_FRAME is bound to the existing Character equipment Dialog."
     ],
-    "apk_sha256": "a694d8e8796ebc55f3531f5a5d6aa32c747b848eea340c784075ed8310289c4a",
-    "ui_qa_artifact_id": 11137599218
+    "apk_sha256": "dc3637989bb67dcabdb143a07e1e40689039a4d7e627e8734d1c2cc9608f4859",
+    "ui_qa_artifact_id": 11138368083,
+    "predecessor_verified_head": "48d9f2c122709f78f51a2ff4041d65e66daf1e0a",
+    "predecessor_run_id": 36807128327
   }
 }
