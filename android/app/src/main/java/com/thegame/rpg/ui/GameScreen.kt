@@ -704,6 +704,7 @@ private fun SkillsSection(
     }
 }
 
+@Composable
 private fun SettingsPanel(
     snapshot: GameSnapshot,
     onSave: () -> Unit,
