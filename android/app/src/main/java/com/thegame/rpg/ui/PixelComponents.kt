@@ -144,16 +144,14 @@ fun PlayerAvatarPanel(
                 val ox = floor((size.width - 32f * px) / 2f)
                 val oy = floor((size.height - 48f * px) / 2f)
 
-                fun block(x: Int, y: Int, w: Int, h: Int, color: Color) {
-                    drawRect(
-                        color = color,
-                        topLeft = Offset(ox + x * px, oy + y * px),
-                        size = Size(w * px, h * px),
-                    )
-                }
-
-                // Grounding shadow is a presentation layer rather than part of the body asset.
-                block(8, 46, 17, 2, Color(0xFF0A0E11))
+                // Asset 192: bottom-anchor the 32x16 staging shadow so its last source
+                // row aligns with the shared player ground pivot at y=47.
+                drawPixelSprite(
+                    sprite = PixelCharacterStagingCatalog.mediumGroundShadow,
+                    pixelSize = px,
+                    originX = ox,
+                    originY = oy + 32f * px,
+                )
 
                 drawPixelSprite(PixelAssetCatalog.playerFrontBase, px, ox, oy)
                 drawPixelSprite(PixelAssetCatalog.playerHairTechnicalPlaceholder, px, ox, oy)
