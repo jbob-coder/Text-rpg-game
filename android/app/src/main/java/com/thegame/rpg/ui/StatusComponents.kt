@@ -36,8 +36,14 @@ internal fun equipmentSlotLabel(slot: String): String = when (slot) {
 }
 
 @Composable
-internal fun PlayerStatusSummary(snapshot: GameSnapshot) {
-    PixelPanel(Modifier.fillMaxWidth().testTag("player-status-summary")) {
+internal fun PlayerStatusSummary(
+    snapshot: GameSnapshot,
+    chrome: PixelPanelChrome = PixelPanelChrome.STATS,
+) {
+    PixelPanel(
+        Modifier.fillMaxWidth().testTag("player-status-summary"),
+        chrome = chrome,
+    ) {
         Text(
             snapshot.identity.name ?: "Player",
             color = PixelColors.Paper,
@@ -56,14 +62,20 @@ internal fun PlayerStatusSummary(snapshot: GameSnapshot) {
 }
 
 @Composable
-internal fun StatusResourceGrid(snapshot: GameSnapshot) {
+internal fun StatusResourceGrid(
+    snapshot: GameSnapshot,
+    chrome: PixelPanelChrome = PixelPanelChrome.STATS,
+) {
     BoxWithConstraints(Modifier.fillMaxWidth()) {
         val columns = if (maxWidth < 300.dp || LocalDensity.current.fontScale > 1.4f) 1 else 2
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             snapshot.resources.chunked(columns).forEach { pair ->
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     pair.forEach { resource ->
-                        PixelPanel(Modifier.weight(1f)) {
+                        PixelPanel(
+                            Modifier.weight(1f),
+                            chrome = chrome,
+                        ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 PixelUiIcon(
                                     sprite = PixelUiIconCatalog.resource(resource.id),
