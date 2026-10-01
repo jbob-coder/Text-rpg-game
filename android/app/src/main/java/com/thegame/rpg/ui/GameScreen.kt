@@ -941,6 +941,21 @@ private fun MapSection(
                             }
                         },
                 ) {
+                    PixelMapArtCatalog.base(map.title)?.let { base ->
+                        val pixelSize = kotlin.math.min(
+                            size.width / base.width.toFloat(),
+                            size.height / base.height.toFloat(),
+                        )
+                        val originX = (size.width - base.width * pixelSize) / 2f
+                        val originY = (size.height - base.height * pixelSize) / 2f
+                        drawPixelSprite(
+                            sprite = base,
+                            pixelSize = pixelSize,
+                            originX = originX,
+                            originY = originY,
+                        )
+                    }
+
                     fun point(id: String): Offset? {
                         val node = map.nodes.firstOrNull { it.id == id } ?: return null
                         return Offset(
