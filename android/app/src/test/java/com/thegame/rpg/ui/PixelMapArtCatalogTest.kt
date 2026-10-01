@@ -21,6 +21,37 @@ class PixelMapArtCatalogTest {
     }
 
     @Test
+    fun authoredMapViewportUsesIntegerPixelScaleAndSharedPercentageCoordinates() {
+        val viewport = PixelMapArtCatalog.viewport(
+            mapTitle = "Gate Twelve District",
+            canvasWidth = 300f,
+            canvasHeight = 220f,
+        )
+        assertEquals(2f, viewport.pixelSize, 0.001f)
+        assertEquals(22f, viewport.originX, 0.001f)
+        assertEquals(38f, viewport.originY, 0.001f)
+        assertEquals(256f, viewport.width, 0.001f)
+        assertEquals(144f, viewport.height, 0.001f)
+
+        val platform = viewport.point(18.0, 36.0)
+        assertEquals(68.08f, platform.x, 0.01f)
+        assertEquals(89.84f, platform.y, 0.01f)
+    }
+
+    @Test
+    fun unknownMapViewportPreservesLegacyFullCanvasProjection() {
+        val viewport = PixelMapArtCatalog.viewport(
+            mapTitle = "Unknown District",
+            canvasWidth = 300f,
+            canvasHeight = 220f,
+        )
+        assertEquals(0f, viewport.originX, 0.001f)
+        assertEquals(0f, viewport.originY, 0.001f)
+        assertEquals(300f, viewport.width, 0.001f)
+        assertEquals(220f, viewport.height, 0.001f)
+    }
+
+    @Test
     fun mapArtLookupIsExplicitAndNeverBorrowsUnrelatedArt() {
         assertSame(
             PixelMapArtCatalog.gateTwelveDistrictBase,
