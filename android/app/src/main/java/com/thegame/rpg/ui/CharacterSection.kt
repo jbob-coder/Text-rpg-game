@@ -59,7 +59,7 @@ internal fun CharacterSection(
             Modifier.fillMaxSize().verticalScroll(rememberScrollState()).testTag("character-scroll"),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            PlayerStatusSummary(snapshot)
+            PlayerStatusSummary(snapshot, chrome = PixelPanelChrome.CHARACTER)
             if (surroundRig) {
                 Row(Modifier.fillMaxWidth().testTag("character-loadout-board"), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Column(Modifier.width(railWidth), verticalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -110,7 +110,7 @@ internal fun CharacterSection(
                     }
                 }
             }
-            StatusResourceGrid(snapshot)
+            StatusResourceGrid(snapshot, chrome = PixelPanelChrome.CHARACTER)
             PixelPanel(
                 Modifier.fillMaxWidth(),
                 "Effective attributes",
