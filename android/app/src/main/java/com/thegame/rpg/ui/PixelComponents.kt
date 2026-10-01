@@ -104,6 +104,12 @@ fun PlayerAvatarPanel(
     val traceStrainFrames = PixelTraceStrainCatalog.avatarForConditions(
         conditions.map { it.id }.toSet()
     )
+    val rasterSprites = rememberPixelRasters(
+        listOf(
+            PixelAssetCatalog.playerFrontBase.assetId,
+            PixelAssetCatalog.playerHairTechnicalPlaceholder.assetId,
+        ) + equippedOverlays.map { it.sprite.assetId }
+    )
     var traceStrainFrameIndex by remember(traceStrainFrames != null) { mutableStateOf(0) }
 
     LaunchedEffect(traceStrainFrames) {
@@ -164,14 +170,41 @@ fun PlayerAvatarPanel(
                     originY = oy + 32f * px,
                 )
 
-                drawPixelSprite(PixelAssetCatalog.playerFrontBase, px, ox, oy)
-                drawPixelSprite(PixelAssetCatalog.playerHairTechnicalPlaceholder, px, ox, oy)
+                rasterSprites[PixelAssetCatalog.playerFrontBase.assetId]?.let { raster ->
+                    drawPixelRaster(
+                        image = raster,
+                        sourceWidth = PixelAssetCatalog.playerFrontBase.width,
+                        sourceHeight = PixelAssetCatalog.playerFrontBase.height,
+                        pixelSize = px,
+                        originX = ox,
+                        originY = oy,
+                    )
+                } ?: drawPixelSprite(PixelAssetCatalog.playerFrontBase, px, ox, oy)
 
-                // Every equipped visual is a transparent 32x48 paper-doll overlay aligned to
-                // the same body origin. Unmapped equipment remains logically equipped but receives
-                // no invented placeholder geometry.
+                rasterSprites[PixelAssetCatalog.playerHairTechnicalPlaceholder.assetId]?.let { raster ->
+                    drawPixelRaster(
+                        image = raster,
+                        sourceWidth = PixelAssetCatalog.playerHairTechnicalPlaceholder.width,
+                        sourceHeight = PixelAssetCatalog.playerHairTechnicalPlaceholder.height,
+                        pixelSize = px,
+                        originX = ox,
+                        originY = oy,
+                    )
+                } ?: drawPixelSprite(PixelAssetCatalog.playerHairTechnicalPlaceholder, px, ox, oy)
+
+                // Every equipped visual shares the 32x48 rig. PNG-backed layers are preferred;
+                // source-native sprites remain the exact fallback for assets not exported yet.
                 equippedOverlays.forEach { overlay ->
-                    drawPixelSprite(overlay.sprite, px, ox, oy)
+                    rasterSprites[overlay.sprite.assetId]?.let { raster ->
+                        drawPixelRaster(
+                            image = raster,
+                            sourceWidth = overlay.sprite.width,
+                            sourceHeight = overlay.sprite.height,
+                            pixelSize = px,
+                            originX = ox,
+                            originY = oy,
+                        )
+                    } ?: drawPixelSprite(overlay.sprite, px, ox, oy)
                 }
 
                 traceStrainFrames?.getOrNull(traceStrainFrameIndex)?.let { strainFx ->
@@ -240,6 +273,7 @@ fun PixelItemIcon(
     modifier: Modifier = Modifier,
 ) {
     val sprite = PixelAssetCatalog.itemIcon(itemId)
+    val raster = rememberPixelRaster(sprite?.let { PixelRasterCatalog.sprite(it.assetId) })
     val qualityFrame = PixelItemQualityFrameCatalog.forQuality(quality)
     Box(
         modifier = modifier
@@ -253,7 +287,18 @@ fun PixelItemIcon(
                 val px = floor(minOf(size.width / sprite.width, size.height / sprite.height)).coerceAtLeast(1f)
                 val ox = floor((size.width - sprite.width * px) / 2f)
                 val oy = floor((size.height - sprite.height * px) / 2f)
-                drawPixelSprite(sprite, px, ox, oy)
+                if (raster != null) {
+                    drawPixelRaster(
+                        image = raster,
+                        sourceWidth = sprite.width,
+                        sourceHeight = sprite.height,
+                        pixelSize = px,
+                        originX = ox,
+                        originY = oy,
+                    )
+                } else {
+                    drawPixelSprite(sprite, px, ox, oy)
+                }
             }
             qualityFrame?.let { frame ->
                 Canvas(
