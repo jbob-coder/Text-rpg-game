@@ -887,7 +887,7 @@ private fun QuestSection(snapshot: GameSnapshot) {
 }
 
 @Composable
-private fun MapSection(
+internal fun MapSection(
     snapshot: GameSnapshot,
     busy: Boolean,
     onTravel: (String) -> Unit,
