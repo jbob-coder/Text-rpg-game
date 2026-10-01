@@ -364,6 +364,34 @@ The UI must not become the authoritative rules engine.
 - APK SHA-256: `c9e2d1f90b91b57af98de5620faa36bbd795d468de3febcfac73bc3bdd6b96bb`.
 - NEXT: retain this paper-doll contract while expanding player-facing Skills and later authored equipment detail.
 
+
+### TASK M-006 — Apply existing runtime assets and safe visual expansion
+- STATUS: `IN_PROGRESS`
+- BRANCH: `feature/pixel-assets-runtime-expansion`
+- BASE: `feature/character-stats-inspection@791a839b23d4c3b9c43b6b1a4f9f204008a8c7df`
+- OBJECTIVE: reuse already-produced game assets first, then implement only safe documented visual assets that can be bound to existing player-safe UI state without inventing canon or gameplay semantics.
+- EXISTING ASSETS APPLIED:
+  - Batch 001 Wave-L `DEPOT_FACADE_EXTERIOR` (058) now has an exact Map arrival-preview binding for `DISTRICT_PLAZA`;
+  - Batch 001 Wave-L `MUNICIPAL_ARCHIVE_EXTERIOR` (060) now has an exact Map arrival-preview binding for `DISTRICT_ARCHIVE`;
+  - `MAINTENANCE_CORRIDOR_CONNECTOR` (059) and `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS` (061) remain produced/deferred because no legitimate runtime composition surface currently consumes them.
+- NEW DOCUMENTED ASSETS PRODUCED/APPLIED:
+  - Batch 002 asset 192 `CHARACTER_GROUND_SHADOW_MEDIUM` replaces the old hard-coded PlayerAvatarPanel shadow and remains aligned to the shared character ground pivot;
+  - Batch 005 panel assets 401–408 are implemented as hard-edged scalable pixel chrome and bound to Story, Character, Stats, Inventory, Quest, Map, Settings and Developer surfaces;
+  - choice states 409/410, primary button 412 and tab states 415/416 are bound to existing player-safe/Compose state;
+  - asset 417 `UI_SCROLL_MARKER` appears only when the narrative scroll state has remaining content;
+  - asset 490 `ACCESS_AUDIO_NARRATION_ICON` is applied to the existing READ ALOUD action;
+  - 411/413/414 are produced but deliberately deferred because selected-choice and secondary/danger button semantics are not yet explicitly represented at their call sites.
+- CONTRACTS PRESERVED:
+  - no canonical player/Tamsin geometry was fabricated;
+  - no unmapped equipment receives fake paper-doll geometry;
+  - Map previews use exact stable location IDs only and do not decide reachability/travel;
+  - UI chrome remains presentation-only and does not own rules, availability, or persistence state.
+- MANIFEST: `docs/assets/manifests/RUNTIME_EXPANSION_ASSET_WAVE_2026-09-30.json`.
+- TEST COVERAGE ADDED: environment module exact-binding tests; character staging master test; UI utility master tests; UI chrome ID/mapping tests; Compose narration-icon and overflowing-narrative scroll-marker coverage.
+- VERIFICATION: exact-head Python + Android JVM/Compose compile + debug APK/package + API 35 connected-emulator gate is still required before promoting candidate asset states to verified/integrated.
+- COMPLETED_AT: —
+
+
 ## Known technical follow-ups
 
 These are not part of the Android black-screen fix unless directly implicated:
