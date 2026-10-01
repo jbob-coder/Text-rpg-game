@@ -132,7 +132,11 @@ fun PlayerAvatarPanel(
                     else Modifier.aspectRatio(0.82f)
                 )
                 .background(PixelColors.Deep)
-                .border(2.dp, PixelColors.Cyan),
+                .border(2.dp, PixelColors.Cyan)
+                .then(
+                    if (equippedOverlays.isNotEmpty()) Modifier.testTag("avatar-visible-gear")
+                    else Modifier
+                ),
             contentAlignment = Alignment.Center,
         ) {
             Canvas(
@@ -197,7 +201,6 @@ fun PlayerAvatarPanel(
                     text = "VISIBLE GEAR // " + visibleGear.joinToString(" • "),
                     color = PixelColors.Gold,
                     style = MaterialTheme.typography.labelLarge,
-                    modifier = Modifier.testTag("avatar-visible-gear"),
                 )
             }
         }
