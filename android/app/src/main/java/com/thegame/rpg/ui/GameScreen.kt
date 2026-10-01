@@ -48,6 +48,7 @@ enum class GameSection(val label: String) {
     STORY("Story"),
     CHARACTER("Character"),
     STATS("Stats"),
+    SKILLS("Skills"),
     INVENTORY("Inventory"),
     QUESTS("Quests"),
     MAP("Map"),
@@ -86,6 +87,7 @@ fun TheGameRoot(
                 uiState.statInspection,
                 uiState.statInspectionBusy,
                 uiState.statInspectionError,
+                uiState.operationError,
                 onChoice,
                 onSave,
                 onLoad,
@@ -187,6 +189,7 @@ private fun PixelGameShell(
     statInspection: GameStatInspection?,
     statInspectionBusy: Boolean,
     statInspectionError: String?,
+    operationError: String?,
     onChoice: (String) -> Unit,
     onSave: () -> Unit,
     onLoad: () -> Unit,
@@ -230,6 +233,12 @@ private fun PixelGameShell(
             .padding(8.dp),
     ) {
         TopStatusBar(snapshot) { settingsOpen = !settingsOpen }
+        operationError?.let { message ->
+            Spacer(Modifier.height(8.dp))
+            PixelPanel(Modifier.fillMaxWidth().testTag("operation-error")) {
+                Text(message, color = PixelColors.Danger, style = MaterialTheme.typography.bodyMedium)
+            }
+        }
         Spacer(Modifier.height(8.dp))
         Box(Modifier.weight(1f)) {
             if (settingsOpen) {
@@ -271,6 +280,14 @@ private fun PixelGameShell(
                         inspectionError = statInspectionError,
                         onInspect = onInspectStatus,
                     )
+                    GameSection.SKILLS -> SkillsSection(
+                        snapshot = snapshot,
+                        selectedPath = statInspectionPath,
+                        inspection = statInspection,
+                        inspectionBusy = statInspectionBusy,
+                        inspectionError = statInspectionError,
+                        onInspect = onInspectStatus,
+                    )
                     GameSection.INVENTORY -> InventorySection(
                         snapshot = snapshot,
                         busy = busy,
@@ -280,7 +297,7 @@ private fun PixelGameShell(
                     GameSection.QUESTS -> QuestSection(snapshot)
                     GameSection.MAP -> MapSection(snapshot, busy, onTravel)
                     GameSection.MORE -> MorePanel(
-                        onCharacter = { section = GameSection.CHARACTER },
+                        onSkills = { section = GameSection.SKILLS },
                         onSettings = { settingsOpen = true },
                     )
                 }
@@ -482,6 +499,208 @@ private fun ResourcePanel(snapshot: GameSnapshot) {
             }
             Spacer(Modifier.height(4.dp))
         }
+    }
+}
+
+@Composable
+private fun InspectableStatRow(
+    label: String,
+    effective: Double,
+    base: Double,
+    delta: Double,
+    selected: Boolean,
+    testTag: String,
+    onClick: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag(testTag)
+            .background(PixelColors.PanelAlt)
+            .border(1.dp, if (selected) PixelColors.Gold else PixelColors.Muted)
+            .clickable(role = Role.Button, onClick = onClick)
+            .padding(horizontal = 8.dp, vertical = 7.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f)) {
+            Text(
+                label.uppercase(),
+                color = if (selected) PixelColors.Gold else PixelColors.Paper,
+                style = MaterialTheme.typography.bodyLarge,
+            )
+            Text(
+                buildString {
+                    append("BASE ").append(statValue(base))
+                    if (delta != 0.0) append("  //  MOD ").append(signedStatValue(delta))
+                },
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.labelLarge,
+            )
+        }
+        Text(
+            statValue(effective),
+            color = if (delta != 0.0) PixelColors.Cyan else PixelColors.Paper,
+            style = MaterialTheme.typography.titleLarge,
+        )
+    }
+}
+
+@Composable
+private fun StatInspectionPanel(
+    snapshot: GameSnapshot,
+    selectedPath: String?,
+    inspection: GameStatInspection?,
+    inspectionBusy: Boolean,
+    inspectionError: String?,
+) {
+    val selectedAttribute = snapshot.attributes.firstOrNull { selectedPath == "attributes.${it.id}" }
+    val selectedSkill = snapshot.skills.firstOrNull { selectedPath == "skills.${it.id}" }
+    val selectedName = selectedAttribute?.name ?: selectedSkill?.name
+    val selectedRole = selectedAttribute?.role
+
+    PixelPanel(modifier = Modifier.testTag("stat-inspection-panel"), title = "Selected Detail") {
+        when {
+            selectedPath == null || selectedName == null -> {
+                Text(
+                    "Select a skill to view its current value and bonuses.",
+                    color = PixelColors.Muted,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+            inspectionBusy -> {
+                Text(
+                    "LOADING // ${selectedName.uppercase()}",
+                    color = PixelColors.Cyan,
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+            inspectionError != null -> {
+                Text(inspectionError, color = PixelColors.Danger, style = MaterialTheme.typography.bodyMedium)
+            }
+            inspection == null || inspection.path != selectedPath -> {
+                Text("No inspection data is available.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
+            }
+            else -> {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        selectedName.uppercase(),
+                        color = PixelColors.Gold,
+                        style = MaterialTheme.typography.titleLarge,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Text(
+                        statValue(inspection.total),
+                        color = PixelColors.Cyan,
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                }
+                if (!selectedRole.isNullOrBlank()) {
+                    Spacer(Modifier.height(4.dp))
+                    Text(selectedRole, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
+                }
+                Spacer(Modifier.height(8.dp))
+                inspection.contributions.forEach { contribution ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("stat-contribution-${contribution.source.replace(':', '-')}")
+                            .padding(vertical = 2.dp),
+                    ) {
+                        Text(
+                            statContributionLabel(contribution.source),
+                            color = PixelColors.Muted,
+                            style = MaterialTheme.typography.labelLarge,
+                            modifier = Modifier.weight(1f),
+                        )
+                        Text(
+                            if (contribution.source == "base") {
+                                statValue(contribution.value)
+                            } else {
+                                signedStatValue(contribution.value)
+                            },
+                            color = if (contribution.value == 0.0) PixelColors.Muted else PixelColors.Paper,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+private fun statContributionLabel(source: String): String = when {
+    source == "base" -> "BASE"
+    source == "unidentified_modifier" -> "UNIDENTIFIED MODIFIER"
+    source.startsWith("equipment:") -> "EQUIPMENT // ${slotDisplayName(source.substringAfter(':'))}"
+    source.startsWith("set:") -> "SET BONUS"
+    source.startsWith("perk:") -> "PERK // ${prettyStatusToken(source.substringAfter(':'))}"
+    source.startsWith("condition:") -> "CONDITION // ${prettyStatusToken(source.substringAfter(':'))}"
+    else -> prettyStatusToken(source)
+}
+
+private fun prettyStatusToken(value: String): String =
+    value
+        .removePrefix("PERK_")
+        .removePrefix("COND_")
+        .replace('_', ' ')
+        .uppercase()
+
+@Composable
+private fun SkillsSection(
+    snapshot: GameSnapshot,
+    selectedPath: String?,
+    inspection: GameStatInspection?,
+    inspectionBusy: Boolean,
+    inspectionError: String?,
+    onInspect: (String) -> Unit,
+) {
+    val selectedSkillPath = selectedPath?.takeIf { it.startsWith("skills.") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        PixelPanel(title = "Skills") {
+            Text(
+                "${snapshot.skills.size} ACTIVE SKILLS",
+                color = PixelColors.Cyan,
+                style = MaterialTheme.typography.titleLarge,
+            )
+            Spacer(Modifier.height(4.dp))
+            Text(
+                "Select a skill to see its current value and bonuses.",
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
+
+        snapshot.skills.groupBy { it.category }.toSortedMap().forEach { (category, skills) ->
+            PixelPanel(title = category) {
+                skills.sortedBy { it.name }.forEach { skill ->
+                    val path = "skills.${skill.id}"
+                    InspectableStatRow(
+                        label = skill.name,
+                        effective = skill.effective,
+                        base = skill.base,
+                        delta = skill.delta,
+                        selected = selectedSkillPath == path,
+                        testTag = "skills-screen-row-${skill.id}",
+                        onClick = { onInspect(path) },
+                    )
+                    Spacer(Modifier.height(6.dp))
+                }
+            }
+        }
+
+        StatInspectionPanel(
+            snapshot = snapshot,
+            selectedPath = selectedSkillPath,
+            inspection = inspection,
+            inspectionBusy = inspectionBusy,
+            inspectionError = inspectionError,
+        )
     }
 }
 
@@ -909,14 +1128,14 @@ private fun MapSection(
 }
 
 @Composable
-private fun MorePanel(onCharacter: () -> Unit, onSettings: () -> Unit) {
+private fun MorePanel(onSkills: () -> Unit, onSettings: () -> Unit) {
     PixelPanel(modifier = Modifier.fillMaxSize(), title = "More") {
-        PixelTextButton("CHARACTER / EQUIPMENT", onCharacter)
+        PixelTextButton("SKILLS", onSkills)
         Spacer(Modifier.height(8.dp))
         PixelTextButton("SETTINGS / SAVE / AUDIO", onSettings)
         Spacer(Modifier.height(12.dp))
         Text(
-            "Developer tools, accessibility, narration, and save management remain separated from the main story surface.",
+            "Skills remain player-safe and rules-driven. Developer tools, accessibility, narration, and save management stay separated from the main story surface.",
             color = PixelColors.Muted,
             style = MaterialTheme.typography.bodyMedium,
         )
@@ -930,6 +1149,16 @@ private fun ComingPanel(title: String, body: String) {
     }
 }
 
+private val primaryBottomSections = listOf(
+    GameSection.STORY,
+    GameSection.CHARACTER,
+    GameSection.STATS,
+    GameSection.INVENTORY,
+    GameSection.QUESTS,
+    GameSection.MAP,
+    GameSection.MORE,
+)
+
 @Composable
 private fun BottomPixelNav(selected: GameSection, onSelect: (GameSection) -> Unit) {
     Row(
@@ -938,10 +1167,11 @@ private fun BottomPixelNav(selected: GameSection, onSelect: (GameSection) -> Uni
             .horizontalScroll(rememberScrollState()),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        GameSection.entries.forEach { section ->
+        primaryBottomSections.forEach { section ->
+            val active = selected == section || (selected == GameSection.SKILLS && section == GameSection.MORE)
             PixelNavButton(
                 label = section.label,
-                active = selected == section,
+                active = active,
                 onClick = { onSelect(section) },
             )
         }

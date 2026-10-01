@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-30 20:07 AST
+Updated: 2026-09-30 21:21 AST
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -20,8 +20,9 @@ Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPL
 ## Current repository baseline
 
 - Repository: `jbob-coder/Text-rpg-game`
+- Current verified Android UI/APK candidate: `fix/player-hub-runtime-recovery@f88453c38b8efd91a4af74b3cd4f59b6903a9a03` (PR #15), run 233 / `36799678887`; runtime evidence in `docs/verification/character_stats/apk_delivery.json`.
 - Current Android integration branch: `integration/android-open-world-v1-reconcile`
-- Current verified pixel-asset runtime parent: `1c7e54e548ab3c28819af0b85ae8cbba53aff827` (PR #7)
+- Verified pixel-asset baseline: `feature/pixel-asset-wave-a@a3970de6597c77939afccb5f30d6040bdf3d608d` (PR #7), run 209 / `36773072464` passed; earlier `1c7e54e…` is historical.
 - Stabilization branch retained: `fix/v6-runtime-boundaries`
 - Stabilization baseline before continuity work: `fcfe8115a72eb07036fa4e74a61a0094eaa3ff10`
 - V6 parent: `integration/rules-ability-v6-reconcile@7f5f104fb839068bdfaf5cec72f37129ae20d463`
@@ -31,7 +32,7 @@ Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPL
 - Verified base-client content record at Android HEAD: 16 scenes, 25 choices, 3 quests, 1 power definition.
 - Android runtime evidence: workflow run 65 / run ID 36351957867; Python 290/290 OK; Android build/compile gates OK; representative emulator API 35 x86_64 completed 3 tests successfully.
 - APK SHA-256 for exact Android HEAD: `94e325d55c5dd1404dbab8d0209dbfe1f8c0c29c5abecfdd582736851da4cd74`.
-- Physical handset validation and APK delivery remain separate gates.
+- Current APK delivery is complete (A-002/A-004); physical handset validation remains a separate acceptance gate.
 - Seven-attribute schema and save schema 1 remain; no stat/save migration has been performed.
 
 The 275-pass evidence is committed under `docs/verification/v6/`. It is historical evidence for that exact candidate, not proof for later code changes.
@@ -76,12 +77,12 @@ The UI must not become the authoritative rules engine.
 - COMPLETED_AT: `2026-09-27 17:34 AST`
 
 ### TASK A-002 — Rebuild corrected APK
-- STATUS: `IN_PROGRESS`
+- STATUS: `DONE`
 - DEPENDS_ON: A-001
 - VERIFIED: debug APK builds from repository source; package structure checks pass for ARM64, ARMv7, x86_64 and bundled content. Exact SHA-256 at `510851cc…`: `94e325d55c5dd1404dbab8d0209dbfe1f8c0c29c5abecfdd582736851da4cd74`.
-- REMAINING: produce/download the distributable artifact from a controlled build and deliver it to the user; physical handset install remains separate.
+- DELIVERED: the current debug APK at `f88453c…`, workflow run 233, was downloaded, verified against the CI SHA-256, checked for complete ZIP/ABI/content payload and saved for user download; APK Signature Scheme v2 verified in CI. Hash: `8decee3cb660015e8b048a495509a8856673023bdc2c9f99d4200148ef243fe3`. Physical handset installation remains separate.
 - DONE WHEN: package builds, integrity/signing is checked, and artifact is delivered.
-- COMPLETED_AT: —
+- COMPLETED_AT: `2026-09-30 21:21 AST`
 
 ### TASK A-003 — Physical/representative Android validation
 - STATUS: `DONE`
@@ -152,6 +153,12 @@ The UI must not become the authoritative rules engine.
 - RESULT: Inventory and Equipment are separate from narrative; equip/unequip mutations run through Python and return updated player-safe state.
 - COMPLETED_AT: `2026-09-27 17:34 AST`
 - Separate from main narrative screen.
+- COMPLETED_AT: —
+
+### TASK P-006 — Dedicated Skills screen
+- STATUS: `IN_PROGRESS`
+- IMPLEMENTED CANDIDATE: a schema-driven player-safe Skills surface is reachable from `More` without adding another primary Galaxy-A03 bottom-navigation tab. Skills are grouped from projected categories, future learned skills appear automatically, and selecting a skill reuses the authoritative stat-inspection boundary for base/modifier contributions.
+- BOUNDARY: no skill formulas or progression rules are duplicated in Compose; only projected skill state and sanitized inspection data are rendered.
 - COMPLETED_AT: —
 
 ## World / map
@@ -364,6 +371,22 @@ The UI must not become the authoritative rules engine.
 - APK SHA-256: `c9e2d1f90b91b57af98de5620faa36bbd795d468de3febcfac73bc3bdd6b96bb`.
 - NEXT: retain this paper-doll contract while expanding player-facing Skills and later authored equipment detail.
 
+### Dedicated player-safe Skills UI slice
+- STATUS: `IN_PROGRESS`
+- BRANCH: `feature/player-safe-skills-ui`
+- PARENT: `feature/character-equipment-paperdoll-ui@b324dd555922a13f0672752f005d74fff68a09aa`.
+- OBJECTIVE: deliver the missing Skills product surface without crowding the phone bottom bar or hard-coding the four starting skills.
+- IMPLEMENTED CANDIDATE:
+  - `Skills` is a secondary section opened from `More`, while the primary bottom navigation remains Story / Character / Stats / Inventory / Quests / Map / More;
+  - the redundant Character shortcut was removed from `More` because Character already has a primary bottom tab;
+  - rendered skills come from `snapshot.skills`, grouped and sorted by projected category/name;
+  - selecting a skill requests `skills.<id>` through the already-verified player-safe inspection boundary;
+  - equipment/perk/condition contributions render from sanitized provenance rather than UI-side modifier arithmetic;
+  - future learned skills appear automatically when the player-safe projection contains them.
+- TESTS ADDED: More -> Skills navigation/Technical Systems inspection request and rendering the Work Gloves `equipment:hands +1` contribution.
+- EXACT-HEAD GATE: pending.
+- NEXT: verify the stacked Character gate, then run exact-head Python + Android + emulator gates for this Skills slice.
+
 ## Known technical follow-ups
 
 These are not part of the Android black-screen fix unless directly implicated:
@@ -399,17 +422,17 @@ Before ending meaningful work, update:
 ## Character / Stats continuation — 2026-09-30
 
 ### TASK P-005 — Responsive Character loadout and selected Stats detail
-- STATUS: `IN_PROGRESS`
+- STATUS: `DONE`
 - BRANCH: `feature/character-stats-inspection`
 - BASE: `feature/character-equipment-paperdoll-ui@40c95ec2e2b44aeb6a8ae1a23c28bbaf04e7a6d7` (PR #12), retaining PR #11 inspection and PR #10 rig-contract ancestry. PR #13 preserves concurrent screenshot-export fixes at `746e2152d617e4150f92d9fb604fbb1d3643d757`.
 - IMPLEMENTED: phone-width equipment slots surrounding the existing paper doll; selectable equipment detail with engine-owned equip/unequip; compact Stats summary, canonical attribute cards and one selected detail; player-safe attribute/skill contributions with existing hidden-source redaction.
 - REGRESSION COVERAGE: canonical values and bonuses, save/load, cancellation, detached projections and hidden perk/condition provenance; JVM mapper/formatting checks; phone/large-text Compose interactions; real Activity equip -> Stats -> unequip.
 - LOCAL VERIFICATION: `PYTHONPATH=src python -m unittest discover -s tests -v` — 308/308 passed after consolidation; `git diff --check` passed. Four new Python tests were observed failing before implementation.
 - PREDECESSOR GATE: run 222 / `36793210191` at `ad856cfc792e19e844a8fa49159bacb34b56114f` passed Python 305/305, Android unit/compile/assemble and 22/22 emulator tests, but failed screenshot retrieval after testing.
-- REQUIRED GATE: fresh consolidated exact-head Android unit/compile/assemble/package and API 35 emulator workflow; inspect emitted UI screenshots before recording verification.
+- VERIFIED GATE: initial consolidation run 229 passed at `0fe6a9f…` with 26/26 connected tests. Visual/recovery follow-up at `f88453c…` passed run 233 / `36799678887`: Python 308/308, Android unit/compile/assembly/signature/payload gates, 30/30 connected tests and four inspected PNGs. Source and tested-merge trees match exactly. APK delivered; see `docs/ANDROID_APK_DESKTOP_HANDOFF.md`.
 - LIMITATIONS: no local Android SDK/Gradle or physical Galaxy A03 runtime available; no new canonical character geometry, held-reader binding, stat migration or save migration.
 - HANDOFF: `docs/CHARACTER_STATS_INSPECTION_HANDOFF.md`.
-- COMPLETED_AT: —
+- COMPLETED_AT: `2026-09-30 21:21 AST`
 
 ### Live PR evidence recovered
 - PR #7: `a3970de6597c77939afccb5f30d6040bdf3d608d`, run 209 / `36773072464`, success.
@@ -420,8 +443,24 @@ Before ending meaningful work, update:
 
 ## Immediate next action
 
-Finish P-005 in PR #13 stacked above PR #12, preserving PR #11 inspection and PR #10 rig-contract dependencies and keep the validation head stable while CI runs. Inspect the real screenshots, repair any observed UI/CI defects, then record exact implementation evidence. Do not merge main or force held-reader/environment integration.
+P-005 and APK delivery are complete at the verified PR #15 runtime `f88453c…`, retaining the PR #10–#14 dependencies. Follow `docs/ANDROID_APK_DESKTOP_HANDOFF.md` for computer checkout/build commands and physical Galaxy A03 acceptance. Keep current deferred assets and canonical-reference blockers explicit. Do not merge main or force held-reader/environment integration.
 
 Historical asset continuation guidance (superseded by the live evidence above):
 
 Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified slices. Assets 039, 040, 044, 053, 062/063, 072–075 and 096–100 are green and evidenced. Candidate assets 067–071 are implemented as reusable presentation-only infrastructure props and now require an exact-head gate. Do not block implementation on rejected mixed character references. Physical Galaxy A03 visual QA remains a separate acceptance gate before final visual approval.
+
+
+## APK delivery / recovery continuation — 2026-09-30
+
+### TASK A-004 — Deliver the Character/Stats Android candidate
+- STATUS: `DONE`
+- BRANCH: `fix/player-hub-runtime-recovery`, PR #15; based on PR #13 and consolidating PR #14 Skills source/tests.
+- USER REQUEST: finish the outstanding work, supply the Android APK, review rendered screens and leave an actionable desktop branch handoff.
+- OBSERVED BASELINE: run 229 / `36795598719` at PR #13 `0fe6a9f58601c00957ab5ccc4355f57e603e7534` passed all gates and 26 emulator tests; screenshot review found oversized equipment details and awkward accessory labels.
+- OBSERVED REGRESSIONS: run 230 / `36797063299` at PR #15 `9b9c7d9c8ea7fdd7a541e3a25b75174a8b0d2fac` passed Python/build but had 5 emulator failures. That commit contains regression tests without their runtime fixes.
+- IMPLEMENTED CANDIDATE: preserve playable snapshot after runtime load failures and show the public error inside the game; integrate the Skills surface with the existing inspection API; wrap/cap equipment dialogs, shorten accessory display labels while keeping full semantic labels; capture screenshots against the actual dark application background.
+- VERIFICATION: run 233 / `36799678887` passed at `f88453c…`: 308 Python tests, Android unit/compile/assembly/signature/ABI/content gates, 30 connected tests and four reviewed screenshots. Local Python 308/308 and `git diff --check` passed. APK downloaded/hash-verified and saved for user download. No canonical stats, authored bonuses, save schema, novel material or character-overlay geometry changed.
+- DELIVERY EVIDENCE: `docs/verification/character_stats/apk_delivery.json`; APK SHA-256 `8decee3cb660015e8b048a495509a8856673023bdc2c9f99d4200148ef243fe3`; complete tested/source Git trees both `f238a2e20665695ea2ed9a959251fbbf3c2962a9`.
+- APK retention: one day in Actions; only manual runs and this explicitly requested PR #15 delivery upload the APK. No release or store publication.
+- REMAINING: physical Galaxy A03 installation, appearance/input/performance/TTS review; canonical player/Tamsin reference and diagnostic-reader integration remain separate.
+- COMPLETED_AT: `2026-09-30 21:21 AST`

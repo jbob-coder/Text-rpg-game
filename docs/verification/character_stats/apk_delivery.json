@@ -1,10 +1,174 @@
 {
   "schema_version": 1,
-  "objective": "Responsive Character loadout and selected Stats detail",
-  "branch": "feature/character-stats-inspection",
-  "base_head": "40c95ec2e2b44aeb6a8ae1a23c28bbaf04e7a6d7",
-  "state": "VERIFIED",
-  "generated_at": "2026-09-30T21:21:48.820439-04:00",
+  "objective": "Finish the Character/Stats Android candidate and deliver its APK with desktop continuity",
+  "implementation_head": "f88453c38b8efd91a4af74b3cd4f59b6903a9a03",
+  "branch": "fix/player-hub-runtime-recovery",
+  "pull_request": 15,
+  "state": "VERIFIED_AND_DELIVERED",
+  "source_tree": "f238a2e20665695ea2ed9a959251fbbf3c2962a9",
+  "tested_merge": "a59b12d9ad3f272086666cf50bf998da8ae4c3b4",
+  "tested_merge_tree": "f238a2e20665695ea2ed9a959251fbbf3c2962a9",
+  "complete_tree_equality_verified": true,
+  "workflow": {
+    "run_id": 36799678887,
+    "run_number": 233,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/jbob-coder/Text-rpg-game/actions/runs/36799678887",
+    "jobs": [
+      {
+        "id": 110171007633,
+        "name": "android-emulator-smoke",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 110171007900,
+        "name": "android-unit-and-assemble",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 110171007905,
+        "name": "python-engine",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "python": {
+    "ci_count": 308,
+    "ci_result": "passed",
+    "local_count": 308,
+    "local_result": "passed"
+  },
+  "android": {
+    "unit_tests": "passed",
+    "instrumentation_compile": "passed",
+    "assemble_debug": "passed",
+    "package_checks": "passed",
+    "signature_verification": "passed",
+    "emulator_api": 35,
+    "emulator_arch": "x86_64",
+    "connected_tests": 30,
+    "failures": 0,
+    "skips": 0
+  },
+  "apk": {
+    "file_name": "THE-GAME-character-stats-f88453c.apk",
+    "size_bytes": 48331290,
+    "sha256": "8decee3cb660015e8b048a495509a8856673023bdc2c9f99d4200148ef243fe3",
+    "package": "com.thegame.rpg",
+    "build_type": "debug",
+    "min_sdk_declared": 24,
+    "abis": [
+      "armeabi-v7a",
+      "arm64-v8a",
+      "x86_64"
+    ],
+    "signing_scheme": "v2",
+    "signer_certificate_sha256": "144f73b0eee46e3079e0e4f7d658fa591320336da30e606736e704ed07df4407",
+    "artifact_id": 11135133619,
+    "artifact_zip_sha256": "5142f38a96b002ccf6c73f132892b81ef18100db112f6b6177d0bc41a425d1a9",
+    "delivery_file_id": "file_00000000fa7481f682c9e2a1c6ca06ba",
+    "delivery_library_file_id": "libfile_f4bb1a1c5ae08191ab69f95b079d6495"
+  },
+  "visual_review": {
+    "state": "reviewed",
+    "source": "actual Compose 320dp rendered fixtures",
+    "screenshot_artifact_id": 11135034575,
+    "artifact_zip_sha256": "74d26322abebcefe22d32a3bda6532ab2816bd551e2608751998e72d3d629675",
+    "findings": [
+      "Dark application background replaces the prior white fixture background.",
+      "Accessory labels fit without splitting the full word.",
+      "Jacket detail wraps to 1120x899 instead of the previous 1120x2387.",
+      "All seven canonical attributes and projected bonuses remain visible and selectable."
+    ],
+    "physical_device": "unverified",
+    "canonical_character_reference_approval": "not implied"
+  },
+  "preserved": {
+    "canonical_attributes": 7,
+    "save_schema": 1,
+    "authored_equipment_modifiers": "unchanged",
+    "paper_doll_canvas": [
+      32,
+      48
+    ],
+    "hidden_projection_boundary": "preserved",
+    "main_branch": "unchanged",
+    "release_publication": false
+  },
+  "repaired_gate_history": [
+    {
+      "run_id": 36797063299,
+      "number": 230,
+      "head": "9b9c7d9c8ea7fdd7a541e3a25b75174a8b0d2fac",
+      "workflow_result": "failure",
+      "connected_tests": 30,
+      "connected_failures": 5,
+      "reason": "Regression tests preceded missing runtime implementations"
+    },
+    {
+      "run_id": 36799010463,
+      "number": 231,
+      "head": "88ce446b7fe46935f67e46e32f439ed6a7dde57d",
+      "workflow_result": "cancelled",
+      "android_unit_job": "failure",
+      "reason": "Settings composable annotation omitted during merge resolution; corrected"
+    },
+    {
+      "run_id": 36799303705,
+      "number": 232,
+      "head": "58436030c9df5d7d48d86dbaa1e6c734ffc1caa3",
+      "workflow_result": "cancelled",
+      "android_unit_job": "failure",
+      "reason": "Duplicated Skills instrumentation test methods from automatic merge; corrected"
+    }
+  ],
+  "deferred": [
+    {
+      "pull_request": 8,
+      "head": "54a40bb5ad0aeafb428d128be7c1465f3d1a759b",
+      "run_id": 36773224465,
+      "status": "PRODUCED / VERIFIED / DEFERRED INTEGRATION",
+      "assets": "058-061"
+    },
+    {
+      "pull_request": 9,
+      "head": "063d5879413b81656cc5c7304be0afd02402f2fd",
+      "run_id": 36778591342,
+      "status": "PRODUCED / VERIFIED / DEFERRED INTEGRATION",
+      "asset": "034 diagnostic reader"
+    }
+  ],
+  "completed_at": "2026-09-30T21:21:48.820439-04:00",
+  "screenshots": [
+    {
+      "file": "equipment-jacket-detail.png",
+      "sha256": "1a6681ad1f1aee02ac7cd7ab398adc0569b1290c9cee5f1c0d6cc2517d3ab8c2",
+      "width": 1120,
+      "height": 899
+    },
+    {
+      "file": "stats-320dp.png",
+      "sha256": "5ef836cbcf10be925f353eea24b2fbd36f4bd6b18134341faee63dac8fee009b",
+      "width": 1120,
+      "height": 2240
+    },
+    {
+      "file": "character-320dp.png",
+      "sha256": "1ce3ba1780a1a1fdf329dcad2e7562f4536e62d42803bb3e69ba20bfca5501c1",
+      "width": 1120,
+      "height": 2240
+    },
+    {
+      "file": "stats-perception-detail.png",
+      "sha256": "190e43c722e70fbb95adce767f675149ffef6cd3a1907be23b1c8f1cb96d3337",
+      "width": 1120,
+      "height": 2240
+    }
+  ],
   "runtime_inputs": {
     ".github/workflows/android-pixel-client.yml": "a1144367b307fd083c2227ee5ef5ee054992bd8ac1e11efff8c83158887cdc46",
     "android/app/build.gradle.kts": "ab23d1d93343385de41e55d869b333a877d311d949ba600870b90d85e8a98eef",
@@ -103,71 +267,5 @@
     "tests/test_validation.py": "ad843d851562fb248b3389ed1c0fb81e89f000ebbe4369318c2bdda4c597d750",
     "tests/test_vertical_slice.py": "e51a316382895634e0217c8bcb1466416f19df74e94f0fe901310bae20c2b269",
     "tests/test_visuals.py": "e6082791ae7a297813a3dc09ec0187280ed1e8b135e036b276be434c564d78c7"
-  },
-  "local_python_tests": {
-    "count": 308,
-    "result": "passed"
-  },
-  "android_gate": "passed",
-  "physical_device": "unverified",
-  "preserved_screenshot_fix_head": "746e2152d617e4150f92d9fb604fbb1d3643d757",
-  "predecessor_gate": {
-    "implementation_head": "ad856cfc792e19e844a8fa49159bacb34b56114f",
-    "run_id": 36793210191,
-    "run_number": 222,
-    "python_tests": 305,
-    "emulator_tests": 22,
-    "result": "tests_passed_screenshot_collection_failed"
-  },
-  "screenshot_export": "AndroidX PlatformTestStorageRegistry / Gradle additional test output",
-  "failed_screenshot_repair": {
-    "head": "746e2152d617e4150f92d9fb604fbb1d3643d757",
-    "run_id": 36794005834,
-    "run_number": 226,
-    "emulator_tests": 22,
-    "result": "tests_passed_screenshot_collection_failed"
-  },
-  "failed_nested_output_gate": {
-    "head": "93cce8c94401a692da07f8933fcaa9802b839ffc",
-    "run_id": 36794782963,
-    "run_number": 228,
-    "python_tests": 308,
-    "android_build": "passed",
-    "emulator_tests": 26,
-    "emulator_failures": 2,
-    "result": "nested_screenshot_output_missing"
-  },
-  "implementation_head": "f88453c38b8efd91a4af74b3cd4f59b6903a9a03",
-  "verified_runtime_branch": "fix/player-hub-runtime-recovery",
-  "gate_evidence": {
-    "run_id": 36799678887,
-    "run_number": 233,
-    "status": "completed",
-    "conclusion": "success",
-    "url": "https://github.com/jbob-coder/Text-rpg-game/actions/runs/36799678887",
-    "jobs": [
-      {
-        "id": 110171007633,
-        "name": "android-emulator-smoke",
-        "status": "completed",
-        "conclusion": "success"
-      },
-      {
-        "id": 110171007900,
-        "name": "android-unit-and-assemble",
-        "status": "completed",
-        "conclusion": "success"
-      },
-      {
-        "id": 110171007905,
-        "name": "python-engine",
-        "status": "completed",
-        "conclusion": "success"
-      }
-    ]
-  },
-  "connected_tests": 30,
-  "apk_sha256": "8decee3cb660015e8b048a495509a8856673023bdc2c9f99d4200148ef243fe3",
-  "delivery_evidence": "apk_delivery.json",
-  "visual_review": "Four final PNGs reviewed; dark background, bounded dialog and short accessory labels confirmed."
+  }
 }
