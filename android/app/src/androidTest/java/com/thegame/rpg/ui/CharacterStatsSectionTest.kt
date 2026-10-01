@@ -156,17 +156,15 @@ class CharacterStatsSectionTest {
         composeRule.setContent {
             PixelTheme {
                 Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
-                    GameScreen(
+                    MapSection(
                         snapshot = mapSnapshot,
                         busy = false,
-                        onChoice = {},
-                        onNavigate = {},
+                        onTravel = {},
                     )
                 }
             }
         }
 
-        composeRule.onNodeWithText("MAP").performClick()
         composeRule.onNodeWithTag("world-map-canvas").assertIsDisplayed()
         composeRule.onNodeWithText("Gate Twelve District").assertIsDisplayed()
         saveScreenshot("map-gate-twelve-320dp")
