@@ -160,7 +160,7 @@ class GameScreenTest {
         composeRule.onNodeWithTag("nav-stats")
             .performScrollTo()
             .performClick()
-        composeRule.onNodeWithTag("stat-row-endurance")
+        composeRule.onNodeWithTag("stats-attribute-endurance")
             .performScrollTo()
             .assertHasClickAction()
             .performClick()
@@ -231,11 +231,10 @@ class GameScreenTest {
         composeRule.onNodeWithTag("nav-stats")
             .performScrollTo()
             .performClick()
-        composeRule.onNodeWithTag("stat-contribution-equipment-body")
+        composeRule.onNodeWithTag("stats-attribute-detail")
             .performScrollTo()
             .assertIsDisplayed()
-        composeRule.onNodeWithText("EQUIPMENT // CHEST").assertIsDisplayed()
-        composeRule.onNodeWithText("+2").assertIsDisplayed()
+        composeRule.onNodeWithText("Chest: +2").assertIsDisplayed()
     }
 
     @Test
@@ -517,11 +516,8 @@ class GameScreenTest {
             .assertHasClickAction()
             .performClick()
         composeRule.onNodeWithTag("character-equipment-detail")
-            .performScrollTo()
             .assertIsDisplayed()
         composeRule.onNodeWithText("Depot utility jacket").assertIsDisplayed()
-        composeRule.onNodeWithText("AVATAR LAYER // AUTHORED 32x48 // Z 20")
-            .assertIsDisplayed()
         composeRule.onNodeWithText("UNEQUIP")
             .assertHasClickAction()
             .performClick()
@@ -584,11 +580,8 @@ class GameScreenTest {
             .assertHasClickAction()
             .performClick()
         composeRule.onNodeWithTag("character-equipment-detail")
-            .performScrollTo()
             .assertIsDisplayed()
         composeRule.onNodeWithText("Future helmet").assertIsDisplayed()
-        composeRule.onNodeWithText("AVATAR LAYER // NOT AUTHORED — LOGICAL EQUIPMENT ONLY")
-            .assertIsDisplayed()
         composeRule.onAllNodesWithTag("avatar-visible-gear").assertCountEquals(0)
     }
 

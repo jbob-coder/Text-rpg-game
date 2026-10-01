@@ -78,8 +78,8 @@ jobs:
           grep -q "lib/x86_64/" android-apk-contents.txt
           grep -q "vertical_slice_01.json" android-apk-contents.txt
 
-      - name: Upload debug APK only for manual workflow runs
-        if: github.event_name == 'workflow_dispatch'
+      - name: Upload debug APK for delivery and manual workflow runs
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: THE-GAME-Android-Pixel-Client-${{ github.sha }}
@@ -126,4 +126,31 @@ jobs:
           profile: pixel_7_pro
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-snapshot
           disable-animations: true
-          script: gradle -p android connectedDebugAndroidTest --stacktrace
+          script: |
+            gradle -p android connectedDebugAndroidTest --stacktrace
+
+      - name: Verify collected UI screenshot set
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import struct
+          root = Path('android/app/build/outputs/connected_android_test_additional_output')
+          files = sorted(root.rglob('*.png'))
+          expected = {'character-320dp.png', 'equipment-jacket-detail.png', 'stats-320dp.png', 'stats-perception-detail.png'}
+          assert len(files) == len(expected) and {file.name for file in files} == expected, f'Missing UI evidence: {[str(file) for file in files]}'
+          for file in files:
+              content = file.read_bytes()
+              assert content[:8] == b'\x89PNG\r\n\x1a\n' and content[12:16] == b'IHDR', f'Invalid PNG: {file}'
+              width, height = struct.unpack('>II', content[16:24])
+              assert width > 0 and height > 0, f'Empty PNG: {file}'
+              print(f'{file.name}: {width}x{height}; SHA-256 {hashlib.sha256(content).hexdigest()}')
+          PY
+
+      - name: Upload small UI verification screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: THE-GAME-UI-QA-${{ github.run_id }}
+          path: android/app/build/outputs/connected_android_test_additional_output/**/*.png
+          if-no-files-found: error
+          retention-days: 1

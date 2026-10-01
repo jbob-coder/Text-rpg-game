@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-30 19:56 AST  
+Updated: 2026-09-30 20:07 AST
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -320,7 +320,7 @@ The UI must not become the authoritative rules engine.
 - PR: #10 — `Enforce character-oriented paper-doll overlays`.
 - VERIFIED IMPLEMENTATION HEAD: `5097011f2cb15511e9695edc5475f2fd69c5f655`.
 - CONTRACT: visible character equipment is rendered only from explicit `itemId + slot + zOrder + 32x48 sprite` paper-doll mappings sharing the base character origin. Equipped items without an authored overlay remain logically equipped but render no invented placeholder geometry.
-- VERIFIED GATE: Android Pixel Client run 215 / ID `36778523620` completed successfully for the exact implementation head: Python 301/301; Android unit tests, Compose instrumentation compilation, debug APK assembly/package checks passed; API 35 x86_64 connected emulator completed 15 tests with 0 failures.
+- VERIFIED GATE: Android Pixel Client run 215 / ID `36778523620` completed successfully for the exact implementation head: Python 301/301; Android unit tests, Compose instrumentation compilation, debug APK assembly/package checks passed; API 35 x86_64 connected emulator completed 16 tests with 0 failures (confirmed from job 110102441501 logs).
 - APK SHA-256: `8e9f08f7281367621c9db05862215a041f0d519b5531348b5e2cac50345c416c`.
 - PHYSICAL QA: Galaxy A03 visual review and native-scale art approval remain separate.
 - NEXT: build product-facing Character/Equipment presentation on this contract; do not reintroduce generic slot geometry or bind held props without explicit player-safe presentation state.
@@ -396,6 +396,32 @@ Before ending meaningful work, update:
 - next action;
 - task status and `COMPLETED_AT` if genuinely done.
 
+## Character / Stats continuation — 2026-09-30
+
+### TASK P-005 — Responsive Character loadout and selected Stats detail
+- STATUS: `IN_PROGRESS`
+- BRANCH: `feature/character-stats-inspection`
+- BASE: `feature/character-equipment-paperdoll-ui@40c95ec2e2b44aeb6a8ae1a23c28bbaf04e7a6d7` (PR #12), retaining PR #11 inspection and PR #10 rig-contract ancestry. PR #13 preserves concurrent screenshot-export fixes at `746e2152d617e4150f92d9fb604fbb1d3643d757`.
+- IMPLEMENTED: phone-width equipment slots surrounding the existing paper doll; selectable equipment detail with engine-owned equip/unequip; compact Stats summary, canonical attribute cards and one selected detail; player-safe attribute/skill contributions with existing hidden-source redaction.
+- REGRESSION COVERAGE: canonical values and bonuses, save/load, cancellation, detached projections and hidden perk/condition provenance; JVM mapper/formatting checks; phone/large-text Compose interactions; real Activity equip -> Stats -> unequip.
+- LOCAL VERIFICATION: `PYTHONPATH=src python -m unittest discover -s tests -v` — 308/308 passed after consolidation; `git diff --check` passed. Four new Python tests were observed failing before implementation.
+- PREDECESSOR GATE: run 222 / `36793210191` at `ad856cfc792e19e844a8fa49159bacb34b56114f` passed Python 305/305, Android unit/compile/assemble and 22/22 emulator tests, but failed screenshot retrieval after testing.
+- REQUIRED GATE: fresh consolidated exact-head Android unit/compile/assemble/package and API 35 emulator workflow; inspect emitted UI screenshots before recording verification.
+- LIMITATIONS: no local Android SDK/Gradle or physical Galaxy A03 runtime available; no new canonical character geometry, held-reader binding, stat migration or save migration.
+- HANDOFF: `docs/CHARACTER_STATS_INSPECTION_HANDOFF.md`.
+- COMPLETED_AT: —
+
+### Live PR evidence recovered
+- PR #7: `a3970de6597c77939afccb5f30d6040bdf3d608d`, run 209 / `36773072464`, success.
+- PR #8: `54a40bb5ad0aeafb428d128be7c1465f3d1a759b`, run 211 / `36773224465`, success; 058–061 remain deferred from runtime scene integration.
+- PR #9: `063d5879413b81656cc5c7304be0afd02402f2fd`, run 217 / `36778591342`, success: Python 301/301, Android gates, emulator 15/15. Diagnostic reader remains PRODUCED / VERIFIED / DEFERRED INTEGRATION. Current-head APK SHA-256: `9d113494e413e44a36bba13a724b4197e33e627a3154aa793a283ec0052a905c`.
+- PR #10: runtime `5097011f2cb15511e9695edc5475f2fd69c5f655`, run 215 / `36778523620`, success: Python 301/301, Android gates, emulator 16/16. Later documentation HEAD `7d4558ea5c9e3ad24bf29fe42c8f199ed0be60fe`, run 218 / `36791439179`, also completed successfully.
+- PR #9/#10 Actions checked out temporary merge commits; their complete Git trees were compared with their implementation heads and matched exactly. See handoff and PR descriptions for tree/hash evidence.
+
 ## Immediate next action
+
+Finish P-005 in PR #13 stacked above PR #12, preserving PR #11 inspection and PR #10 rig-contract dependencies and keep the validation head stable while CI runs. Inspect the real screenshots, repair any observed UI/CI defects, then record exact implementation evidence. Do not merge main or force held-reader/environment integration.
+
+Historical asset continuation guidance (superseded by the live evidence above):
 
 Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified slices. Assets 039, 040, 044, 053, 062/063, 072–075 and 096–100 are green and evidenced. Candidate assets 067–071 are implemented as reusable presentation-only infrastructure props and now require an exact-head gate. Do not block implementation on rejected mixed character references. Physical Galaxy A03 visual QA remains a separate acceptance gate before final visual approval.
