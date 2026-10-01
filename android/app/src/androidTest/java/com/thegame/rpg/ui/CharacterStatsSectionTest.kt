@@ -1,6 +1,7 @@
 package com.thegame.rpg.ui
 
 import android.graphics.Bitmap
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.CompositionLocalProvider
@@ -77,7 +78,7 @@ class CharacterStatsSectionTest {
         var unequipped: String? = null
         composeRule.setContent {
             PixelTheme {
-                Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
+                Box(Modifier.size(320.dp, 640.dp).background(PixelColors.Ink).testTag("qa-phone")) {
                     CharacterSection(snapshot, false, {}, { unequipped = it })
                 }
             }
@@ -95,6 +96,8 @@ class CharacterStatsSectionTest {
         composeRule.onNodeWithText("Depot utility jacket").assertIsDisplayed()
         composeRule.onNodeWithText("Endurance: +2").assertIsDisplayed()
         saveScreenshot("equipment-jacket-detail", "character-equipment-detail")
+        val detail = composeRule.onNodeWithTag("character-equipment-detail").fetchSemanticsNode().boundsInRoot
+        assertTrue("Short equipment details must wrap their content instead of filling the screen", detail.height < viewport.height * 0.75f)
         composeRule.onNodeWithTag("character-unequip").performClick()
         composeRule.runOnIdle { assertEquals("body", unequipped) }
     }
@@ -140,7 +143,7 @@ class CharacterStatsSectionTest {
     @Test
     fun statsUseSevenProjectedAttributesAndOneSelectableDetailWithoutPortrait() {
         composeRule.setContent {
-            PixelTheme { Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) { StatsSection(snapshot) } }
+            PixelTheme { Box(Modifier.size(320.dp, 640.dp).background(PixelColors.Ink).testTag("qa-phone")) { StatsSection(snapshot) } }
         }
         saveScreenshot("stats-320dp")
         composeRule.onAllNodesWithTag("player-avatar").assertCountEquals(0)
@@ -159,7 +162,7 @@ class CharacterStatsSectionTest {
     fun largeTextStillKeepsEveryAttributeInsidePhoneWidth() {
         composeRule.setContent {
             CompositionLocalProvider(LocalDensity provides Density(LocalDensity.current.density, 1.6f)) {
-                PixelTheme { Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) { StatsSection(snapshot) } }
+                PixelTheme { Box(Modifier.size(320.dp, 640.dp).background(PixelColors.Ink).testTag("qa-phone")) { StatsSection(snapshot) } }
             }
         }
         val viewport = composeRule.onNodeWithTag("qa-phone").fetchSemanticsNode().boundsInRoot

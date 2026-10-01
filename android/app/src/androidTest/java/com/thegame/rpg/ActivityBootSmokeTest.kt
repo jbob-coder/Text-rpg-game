@@ -9,6 +9,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
+import org.junit.Assert.assertArrayEquals
 import org.junit.Rule
 import org.junit.Test
 
@@ -40,6 +41,48 @@ class ActivityBootSmokeTest {
             .performScrollTo()
             .assertIsDisplayed()
             .performClick()
+    }
+
+    @Test
+    fun missingSaveShowsRecoverableErrorAndNextChoiceStillWorks() {
+        waitForClickableText("SETTINGS", timeoutMillis = 60_000)
+        val saveFile = composeRule.activity.filesDir.resolve("saves/slot-0.json")
+        val original = saveFile.takeIf { it.isFile }?.readBytes()
+        try {
+            saveFile.delete()
+            composeRule.onNodeWithText("SETTINGS").performClick()
+            waitForClickableText("LOAD / CONTINUE")
+            composeRule.onNodeWithText("LOAD / CONTINUE").performClick()
+            waitForText("No saved game exists yet.")
+            composeRule.onNodeWithTag("nav-story").assertIsDisplayed()
+            scrollToChoiceAndClick("TAKE_DEAD_RELAY")
+            waitForText("A Case That Should Be Empty")
+            composeRule.onNodeWithText("A Case That Should Be Empty").assertIsDisplayed()
+        } finally {
+            if (original != null) saveFile.writeBytes(original) else saveFile.delete()
+        }
+    }
+
+    @Test
+    fun malformedSavePreservesBytesAndCurrentGameRemainsPlayable() {
+        waitForClickableText("SETTINGS", timeoutMillis = 60_000)
+        val saveFile = composeRule.activity.filesDir.resolve("saves/slot-0.json")
+        val original = saveFile.takeIf { it.isFile }?.readBytes()
+        val malformed = "{ invalid save data".toByteArray()
+        try {
+            saveFile.parentFile?.mkdirs()
+            saveFile.writeBytes(malformed)
+            composeRule.onNodeWithText("SETTINGS").performClick()
+            waitForClickableText("LOAD / CONTINUE")
+            composeRule.onNodeWithText("LOAD / CONTINUE").performClick()
+            waitForText("The saved game could not be loaded.")
+            assertArrayEquals(malformed, saveFile.readBytes())
+            composeRule.onNodeWithTag("nav-story").assertIsDisplayed()
+            scrollToChoiceAndClick("TAKE_DEAD_RELAY")
+            waitForText("A Case That Should Be Empty")
+        } finally {
+            if (original != null) saveFile.writeBytes(original) else saveFile.delete()
+        }
     }
 
     @Test
