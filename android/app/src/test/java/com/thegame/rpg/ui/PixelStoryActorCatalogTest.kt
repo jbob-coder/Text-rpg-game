@@ -48,24 +48,24 @@ class PixelStoryActorCatalogTest {
         )
         assertEquals(
             listOf(
-                PixelStoryActorCatalog.WOUNDED_COURIER_SCENE_ACTOR_ID,
-                PixelStoryActorCatalog.TAMSIN_SCENE_ACTOR_ID,
+                PixelStoryActorCatalog.SUPPORT_COURIER_ID,
+                PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID,
             ),
             opening.map { it.sprite.assetId },
         )
 
         assertEquals(
-            listOf(PixelStoryActorCatalog.TAMSIN_SCENE_ACTOR_ID),
+            listOf(PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID),
             PixelStoryActorCatalog.placements("PLATFORM_NINE", "OPENING_DECISION")
                 .map { it.sprite.assetId },
         )
         assertEquals(
-            listOf(PixelStoryActorCatalog.TAMSIN_SCENE_ACTOR_ID),
+            listOf(PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID),
             PixelStoryActorCatalog.placements("RELAY_WORKBENCH", "OPENING_RECOVERY")
                 .map { it.sprite.assetId },
         )
         assertEquals(
-            listOf(PixelStoryActorCatalog.TAMSIN_SCENE_ACTOR_ID),
+            listOf(PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID),
             PixelStoryActorCatalog.placements("SERVICE_TUNNEL", "OPENING_TUNNEL")
                 .map { it.sprite.assetId },
         )
