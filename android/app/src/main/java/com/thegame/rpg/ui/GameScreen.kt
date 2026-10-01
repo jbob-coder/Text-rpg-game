@@ -357,15 +357,32 @@ private fun StorySection(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                PlayerAvatarPanel(
-                    identity = snapshot.identity,
-                    equipment = snapshot.inventory.equipment,
-                    conditions = snapshot.conditions,
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(0.42f),
-                    compact = true,
-                )
+                        .height(210.dp)
+                        .testTag("story-pixel-header"),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    SceneIllustration(
+                        locationId = snapshot.location,
+                        sceneId = snapshot.sceneId,
+                        relayState = snapshot.visuals.relayState,
+                        modifier = Modifier
+                            .weight(0.68f)
+                            .fillMaxHeight(),
+                    )
+                    PlayerAvatarPanel(
+                        identity = snapshot.identity,
+                        equipment = snapshot.inventory.equipment,
+                        conditions = snapshot.conditions,
+                        modifier = Modifier
+                            .weight(0.32f)
+                            .fillMaxHeight(),
+                        compact = true,
+                        showSummary = false,
+                    )
+                }
                 NarrativePanel(
                     snapshot = snapshot,
                     busy = busy,
@@ -374,7 +391,8 @@ private fun StorySection(
                     textDelayMs = textDelayMs,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(0.58f),
+                        .weight(1f),
+                    showSceneIllustration = false,
                 )
             }
         }
@@ -389,6 +407,7 @@ private fun NarrativePanel(
     onNarrate: (String) -> Boolean,
     textDelayMs: Int,
     modifier: Modifier,
+    showSceneIllustration: Boolean = true,
 ) {
     var visibleChars by remember(snapshot.sceneId, snapshot.body, textDelayMs) {
         mutableStateOf(if (textDelayMs <= 0) snapshot.body.length else 0)
@@ -426,16 +445,20 @@ private fun NarrativePanel(
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.testTag("scene-title"),
                 )
-                Spacer(Modifier.height(8.dp))
-                SceneIllustration(
-                    locationId = snapshot.location,
-                    sceneId = snapshot.sceneId,
-                    relayState = snapshot.visuals.relayState,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(150.dp),
-                )
-                Spacer(Modifier.height(12.dp))
+                if (showSceneIllustration) {
+                    Spacer(Modifier.height(8.dp))
+                    SceneIllustration(
+                        locationId = snapshot.location,
+                        sceneId = snapshot.sceneId,
+                        relayState = snapshot.visuals.relayState,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(150.dp),
+                    )
+                    Spacer(Modifier.height(12.dp))
+                } else {
+                    Spacer(Modifier.height(8.dp))
+                }
                 Text(
                     text = visibleBody,
                     color = PixelColors.Paper,

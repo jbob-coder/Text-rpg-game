@@ -451,7 +451,6 @@ class GameScreenTest {
         }
 
         composeRule.onNodeWithTag("avatar-visible-gear").assertIsDisplayed()
-        composeRule.onNodeWithText("VISIBLE GEAR // CHEST • RING I").assertIsDisplayed()
     }
 
     @Test
