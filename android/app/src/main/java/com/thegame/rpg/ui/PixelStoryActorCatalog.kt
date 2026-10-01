@@ -9,17 +9,21 @@ data class PixelStoryActorPlacement(
 )
 
 /**
- * Scene-scale story actors for already player-facing narrative scenes.
+ * Scene story actors from already-planned Batch 001 character assets.
  *
- * These sprites are presentation only. Selection is driven exclusively by projected location
- * and scene IDs; the catalog never reads raw flags, quest internals, or hidden NPC state.
+ * These are presentation-only front/pose masters on the shared 32x48 character grid.
+ * Selection is driven exclusively by projected location and scene IDs; the catalog never
+ * reads raw flags, quest internals, or hidden NPC state.
  */
 object PixelStoryActorCatalog {
-    const val TAMSIN_SCENE_ACTOR_ID = "NPC_TAMSIN_SCENE_ACTOR"
-    const val WOUNDED_COURIER_SCENE_ACTOR_ID = "SUPPORT_COURIER_01_SCENE_ACTOR"
+    const val TAMSIN_TURNAROUND_ID = "NPC_TAMSIN_TURNAROUND"
+    const val SUPPORT_COURIER_ID = "SUPPORT_COURIER_01"
 
-    private fun pixels(width: Int, height: Int): MutableList<CharArray> =
-        MutableList(height) { CharArray(width) { PixelSprite.TRANSPARENT_PIXEL } }
+    private const val WIDTH = 32
+    private const val HEIGHT = 48
+
+    private fun pixels(): MutableList<CharArray> =
+        MutableList(HEIGHT) { CharArray(WIDTH) { PixelSprite.TRANSPARENT_PIXEL } }
 
     private fun rect(
         p: MutableList<CharArray>,
@@ -34,14 +38,15 @@ object PixelStoryActorCatalog {
         }
     }
 
-    val tamsin: PixelSprite = run {
-        val width = 20
-        val height = 32
-        val p = pixels(width, height)
-
-        // Source-backed palette anchors from the authored Tamsin blueprint:
-        // charcoal municipal utility jacket, pale work shirt, dark trousers,
-        // medium warm-brown skin, near-black hair, restrained workwear accents.
+    /**
+     * Front gameplay master produced from planned asset 018, NPC_TAMSIN_TURNAROUND.
+     *
+     * It preserves the authored identity anchors: slim athletic build, long forearms,
+     * compact stance, heavy left fringe, high collar, rolled right sleeve, narrow satchel,
+     * left-chest systems badge and warm-brown skin. It is not a generic player reskin.
+     */
+    val tamsinFront: PixelSprite = run {
+        val p = pixels()
         val palette = mapOf(
             'O' to Color(0xFF111719),
             'H' to Color(0xFF1E2326),
@@ -57,73 +62,73 @@ object PixelStoryActorCatalog {
             'M' to Color(0xFF8B8D87),
         )
 
-        // Hair: compact crop with heavier left fringe.
-        rect(p, 6, 1, 8, 2, 'H')
-        rect(p, 4, 3, 11, 2, 'H')
-        rect(p, 3, 5, 7, 3, 'H')
-        rect(p, 10, 5, 5, 2, 'h')
-        rect(p, 3, 7, 4, 2, 'H')
+        // Compact angular crop with heavier left-side fringe.
+        rect(p, 12, 2, 9, 2, 'H')
+        rect(p, 10, 4, 13, 2, 'H')
+        rect(p, 9, 6, 8, 4, 'H')
+        rect(p, 17, 6, 6, 2, 'h')
+        rect(p, 9, 9, 5, 2, 'H')
 
-        // Face / ears.
-        rect(p, 5, 6, 10, 6, 'S')
-        rect(p, 4, 8, 1, 2, 's')
-        rect(p, 15, 8, 1, 2, 's')
-        rect(p, 7, 8, 2, 1, 'O')
-        rect(p, 12, 8, 2, 1, 'O')
-        rect(p, 9, 11, 3, 1, 's')
-        // Eyebrow notch marker on right side at this scale.
-        rect(p, 12, 7, 1, 1, 'S')
+        // Face and ears.
+        rect(p, 11, 7, 12, 7, 'S')
+        rect(p, 10, 10, 1, 2, 's')
+        rect(p, 23, 10, 1, 2, 's')
+        rect(p, 13, 10, 2, 1, 'O')
+        rect(p, 19, 10, 2, 1, 'O')
+        rect(p, 16, 13, 3, 1, 's')
+        // Right-eyebrow notch cue at gameplay scale.
+        rect(p, 20, 9, 1, 1, 'S')
 
-        // Neck + pale shirt wedge.
-        rect(p, 8, 12, 4, 2, 's')
-        rect(p, 8, 14, 4, 3, 'P')
+        // Neck and pale work shirt.
+        rect(p, 15, 14, 4, 2, 's')
+        rect(p, 14, 16, 6, 4, 'P')
 
         // High-collar charcoal utility jacket.
-        rect(p, 5, 14, 3, 3, 'J')
-        rect(p, 12, 14, 3, 3, 'J')
-        rect(p, 4, 16, 12, 9, 'J')
-        rect(p, 5, 17, 10, 2, 'j')
-        rect(p, 9, 16, 2, 8, 'P')
-        rect(p, 4, 20, 3, 5, 'j')
-        rect(p, 13, 20, 3, 5, 'j')
+        rect(p, 11, 16, 3, 4, 'J')
+        rect(p, 20, 16, 3, 4, 'J')
+        rect(p, 9, 19, 16, 13, 'J')
+        rect(p, 11, 20, 12, 2, 'j')
+        rect(p, 15, 19, 4, 10, 'P')
+        rect(p, 9, 26, 4, 6, 'j')
+        rect(p, 21, 26, 4, 6, 'j')
 
-        // Long forearms; right sleeve rolls higher.
-        rect(p, 2, 17, 2, 9, 'J')
-        rect(p, 16, 17, 2, 6, 'J')
-        rect(p, 2, 25, 2, 3, 'S')
-        rect(p, 16, 23, 2, 5, 'S')
+        // Long forearms; right sleeve ends higher because it is rolled.
+        rect(p, 6, 20, 3, 13, 'J')
+        rect(p, 25, 20, 3, 9, 'J')
+        rect(p, 6, 33, 3, 4, 'S')
+        rect(p, 25, 29, 3, 8, 'S')
 
-        // Badge on left chest.
-        rect(p, 5, 18, 2, 1, 'M')
+        // Small municipal systems badge on left chest.
+        rect(p, 11, 22, 2, 2, 'M')
 
-        // Narrow diagonal satchel strap and compact hip satchel.
-        for (i in 0..7) {
-            val x = 13 - i / 2
-            val y = 15 + i
-            rect(p, x, y, 1, 1, 'B')
+        // Narrow cross-body strap + compact hip satchel.
+        for (i in 0..11) {
+            rect(p, 22 - i / 2, 19 + i, 1, 1, 'B')
         }
-        rect(p, 5, 22, 4, 4, 'b')
-        rect(p, 6, 22, 3, 1, 'B')
+        rect(p, 10, 29, 6, 5, 'b')
+        rect(p, 11, 29, 5, 1, 'B')
 
-        // Practical dark trousers and boots.
-        rect(p, 6, 25, 3, 5, 'T')
-        rect(p, 11, 25, 3, 5, 'T')
-        rect(p, 5, 30, 4, 2, 'O')
-        rect(p, 11, 30, 4, 2, 'O')
+        // Dark practical trousers and compact stance.
+        rect(p, 12, 32, 4, 12, 'T')
+        rect(p, 18, 32, 4, 12, 'T')
+        rect(p, 11, 43, 5, 4, 'O')
+        rect(p, 18, 43, 5, 4, 'O')
 
         PixelSprite(
-            assetId = TAMSIN_SCENE_ACTOR_ID,
-            width = width,
-            height = height,
+            assetId = TAMSIN_TURNAROUND_ID,
+            width = WIDTH,
+            height = HEIGHT,
             palette = palette,
             rows = p.map { it.concatToString() },
         )
     }
 
+    /**
+     * Guarded injured pose for planned asset 035, SUPPORT_COURIER_01.
+     * The pose is non-graphic and keeps the courier visually distinct from Tamsin.
+     */
     val woundedCourier: PixelSprite = run {
-        val width = 28
-        val height = 14
-        val p = pixels(width, height)
+        val p = pixels()
         val palette = mapOf(
             'O' to Color(0xFF111719),
             'S' to Color(0xFFAD7D62),
@@ -133,54 +138,58 @@ object PixelStoryActorCatalog {
             'T' to Color(0xFF292F30),
             'R' to Color(0xFF9B5D57),
             'M' to Color(0xFF6B726D),
+            'G' to Color(0xFFB18B55),
         )
 
-        // Conscious injured maintenance courier, side-lying/kneeling rather than gore.
-        rect(p, 2, 4, 6, 5, 'S')
-        rect(p, 1, 3, 6, 2, 'O')
-        rect(p, 7, 5, 10, 5, 'U')
-        rect(p, 10, 7, 8, 3, 'u')
-        rect(p, 17, 8, 6, 3, 'T')
-        rect(p, 21, 10, 5, 2, 'T')
-        rect(p, 6, 9, 6, 2, 'S')
-        rect(p, 14, 5, 2, 2, 'R')
-        rect(p, 3, 9, 3, 2, 'M')
-        rect(p, 24, 9, 3, 3, 'O')
+        // Side-lying / braced posture low in the shared 32x48 rig.
+        rect(p, 3, 29, 7, 6, 'S')
+        rect(p, 2, 27, 7, 3, 'O')
+        rect(p, 9, 30, 11, 7, 'U')
+        rect(p, 12, 33, 9, 4, 'u')
+        rect(p, 20, 35, 6, 4, 'T')
+        rect(p, 24, 38, 5, 3, 'T')
+        rect(p, 8, 36, 7, 3, 'S')
+        rect(p, 17, 30, 2, 3, 'R')
+        rect(p, 4, 36, 3, 3, 'M')
+        rect(p, 27, 37, 3, 4, 'O')
+        // Courier identity plate/strap cue, not readable microtext.
+        rect(p, 11, 30, 1, 5, 'G')
+        rect(p, 12, 34, 2, 2, 'G')
 
         PixelSprite(
-            assetId = WOUNDED_COURIER_SCENE_ACTOR_ID,
-            width = width,
-            height = height,
+            assetId = SUPPORT_COURIER_ID,
+            width = WIDTH,
+            height = HEIGHT,
             palette = palette,
             rows = p.map { it.concatToString() },
         )
     }
 
-    val productionActors: List<PixelSprite> = listOf(tamsin, woundedCourier)
+    val productionActors: List<PixelSprite> = listOf(tamsinFront, woundedCourier)
 
     fun placements(locationId: String, sceneId: String?): List<PixelStoryActorPlacement> =
         when (sceneId) {
             "OPENING_DEPOT_BLACKOUT" ->
                 if (locationId == "PLATFORM_NINE") {
                     listOf(
-                        PixelStoryActorPlacement(woundedCourier, x = 34, y = 45),
-                        PixelStoryActorPlacement(tamsin, x = 66, y = 24),
+                        PixelStoryActorPlacement(woundedCourier, x = 34, y = 13),
+                        PixelStoryActorPlacement(tamsinFront, x = 62, y = 14),
                     )
                 } else emptyList()
 
             "OPENING_DECISION" ->
                 if (locationId == "PLATFORM_NINE") {
-                    listOf(PixelStoryActorPlacement(tamsin, x = 63, y = 24))
+                    listOf(PixelStoryActorPlacement(tamsinFront, x = 62, y = 14))
                 } else emptyList()
 
             "OPENING_RECOVERY" ->
                 if (locationId == "RELAY_WORKBENCH") {
-                    listOf(PixelStoryActorPlacement(tamsin, x = 88, y = 24))
+                    listOf(PixelStoryActorPlacement(tamsinFront, x = 90, y = 14))
                 } else emptyList()
 
             "OPENING_TUNNEL" ->
                 if (locationId == "SERVICE_TUNNEL") {
-                    listOf(PixelStoryActorPlacement(tamsin, x = 76, y = 24))
+                    listOf(PixelStoryActorPlacement(tamsinFront, x = 76, y = 14))
                 } else emptyList()
 
             else -> emptyList()
