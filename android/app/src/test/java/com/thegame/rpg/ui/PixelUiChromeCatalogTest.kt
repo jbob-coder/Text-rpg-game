@@ -10,8 +10,8 @@ class PixelUiChromeCatalogTest {
     fun plannedChromeAssetsHaveStableUniqueIds() {
         val assets = PixelUiChromeCatalog.produced
 
-        assertEquals(16, assets.size)
-        assertEquals(16, assets.map { it.assetId }.toSet().size)
+        assertEquals(17, assets.size)
+        assertEquals(17, assets.map { it.assetId }.toSet().size)
         assertTrue(assets.all { it.assetId.startsWith("UI_") })
     }
 
@@ -48,6 +48,10 @@ class PixelUiChromeCatalogTest {
         assertEquals(
             PixelUiChromeCatalog.DEVELOPER_FRAME_ID,
             PixelUiChromeCatalog.panel(PixelPanelChrome.DEVELOPER).assetId,
+        )
+        assertEquals(
+            PixelUiChromeCatalog.MODAL_FRAME_ID,
+            PixelUiChromeCatalog.panel(PixelPanelChrome.MODAL).assetId,
         )
     }
 
