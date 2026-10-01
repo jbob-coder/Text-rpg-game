@@ -1,6 +1,6 @@
 # Visual Integration Recovery Plan
 
-Status: planning / documentation only
+Status: active visual recovery plan
 Repository: jbob-coder/Text-rpg-game
 Baseline: PR #19 head c11133122d47009abc71e8c6e91c08aedbe91ae2
 Date: 2026-10-01
@@ -23,7 +23,7 @@ The current problem is not merely missing PNG delivery. Phone evidence and repos
 - Preserve paper-doll 32x48 coordinate space, shared origin/pivot, slot and z-order.
 - An equipped item without approved mapped geometry remains logically equipped without invented visual geometry.
 - Current technical player hair is non-canonical.
-- Do not invent final player/NPC anatomy without an approved reference.
+- Existing player/NPC references are reused first. Where no suitable visual exists, new art may be authored under the delegated art direction below.
 - Emulator QA and Galaxy A03 physical-device acceptance are separate gates.
 
 ## Visual gap to fix
@@ -84,7 +84,21 @@ Repository/history also records:
 - RELAY_WORKBENCH_RELAY_OPEN_SCENE
 - current raster resources in drawable-nodpi
 
-These must be reconciled before new visual assets are authored.
+These are reuse-first inputs. Missing or stylistically incompatible assets may be newly authored after the inventory identifies the gap.
+
+## Delegated art direction
+
+The project owner has delegated visual-direction decisions for implementation.
+
+- Target identity: cohesive pixel-art RPG; explicitly not cyberpunk.
+- Existing assets may be mixed across compatible families when the result remains coherent.
+- Compatibility is judged by perspective, pixel density, scale, palette/value structure, silhouette language, material treatment, and scene readability.
+- Reuse and adapt existing legitimate assets before generating replacements.
+- New assets are authorized when a required visual is missing, unusable, or cannot be adapted coherently.
+- Generated art must be normalized to the game's chosen pixel grid, palette/value hierarchy, perspective and runtime contracts before integration.
+- Avoid neon/cyberpunk visual shorthand unless a specific canonical object explicitly requires it; the overall game must not read as cyberpunk.
+- Visual polish must not alter gameplay IDs, state authority, collision/interaction semantics, equipment slots, or hidden-information boundaries.
+- Art-direction authority does not authorize unsupported story/lore changes.
 
 ## Execution order
 
@@ -149,7 +163,7 @@ Polish secondary panels, transitions, state FX and non-critical presentation aft
 
 ## Immediate next implementation slice
 
-Do not redraw more assets yet.
+Complete the Phase 0 provenance matrix first; immediately afterward continue asset integration and author missing assets as needed under the delegated art direction.
 
 First produce the Phase 0 provenance matrix. Then use it to decide exactly which existing Platform Nine tiles/scene/props replace geometric presentation and which player/HUD elements already have approved references.
 
