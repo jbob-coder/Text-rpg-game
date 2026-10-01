@@ -154,7 +154,7 @@ The UI must not become the authoritative rules engine.
 - Separate from main narrative screen.
 - COMPLETED_AT: —
 
-### TASK P-005 — Dedicated Skills screen
+### TASK P-006 — Dedicated Skills screen
 - STATUS: `IN_PROGRESS`
 - IMPLEMENTED CANDIDATE: a schema-driven player-safe Skills surface is reachable from `More` without adding another primary Galaxy-A03 bottom-navigation tab. Skills are grouped from projected categories, future learned skills appear automatically, and selecting a skill reuses the authoritative stat-inspection boundary for base/modifier contributions.
 - BOUNDARY: no skill formulas or progression rules are duplicated in Compose; only projected skill state and sanitized inspection data are rendered.
