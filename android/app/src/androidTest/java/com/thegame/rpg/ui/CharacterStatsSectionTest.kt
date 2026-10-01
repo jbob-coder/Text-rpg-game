@@ -91,6 +91,14 @@ class CharacterStatsSectionTest {
         composeRule.onNodeWithTag("story-pixel-header").assertIsDisplayed()
         composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
         composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        composeRule.onNodeWithTag("story-resource-hud").assertIsDisplayed()
+        composeRule.onNodeWithTag("story-resource-bar-health").assertIsDisplayed()
+        composeRule.onNodeWithTag("story-resource-fill-health").assertIsDisplayed()
+        composeRule.onNodeWithTag("story-resource-value-health").assertIsDisplayed()
+        composeRule.onNodeWithText("100/144").assertIsDisplayed()
+        composeRule.onNodeWithTag("story-resource-bar-stamina").assertIsDisplayed()
+        composeRule.onNodeWithTag("story-resource-bar-focus").assertIsDisplayed()
+        composeRule.onNodeWithTag("story-resource-bar-resolve").assertIsDisplayed()
         saveScreenshot("story-scene-first-320dp")
     }
 
