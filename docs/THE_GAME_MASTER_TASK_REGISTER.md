@@ -387,8 +387,13 @@ The UI must not become the authoritative rules engine.
   - Map previews use exact stable location IDs only and do not decide reachability/travel;
   - UI chrome remains presentation-only and does not own rules, availability, or persistence state.
 - MANIFEST: `docs/assets/manifests/RUNTIME_EXPANSION_ASSET_WAVE_2026-09-30.json`.
-- TEST COVERAGE ADDED: environment module exact-binding tests; character staging master test; UI utility master tests; UI chrome ID/mapping tests; Compose narration-icon and overflowing-narrative scroll-marker coverage.
-- VERIFICATION: exact-head Python + Android JVM/Compose compile + debug APK/package + API 35 connected-emulator gate is still required before promoting candidate asset states to verified/integrated.
+- TEST COVERAGE ADDED: environment module exact-binding tests; character staging master test; UI utility master tests; UI chrome ID/mapping tests; Compose narration-icon, scrollable-choice and overflowing-narrative scroll-marker coverage.
+- VERIFIED IMPLEMENTATION HEAD: `48d9f2c122709f78f51a2ff4041d65e66daf1e0a`.
+- VERIFIED GATE: Android Pixel Client run 239 / ID `36807128327` completed successfully: Python 308/308; Android unit tests passed; Compose instrumentation tests compiled; debug APK assembly/package verification passed; API 35 x86_64 emulator completed 27/27 connected tests with 0 failures; UI screenshot set verified/uploaded.
+- APK SHA-256: `a694d8e8796ebc55f3531f5a5d6aa32c747b848eea340c784075ed8310289c4a`.
+- UI-QA ARTIFACT: ID `11137599218`.
+- VERIFIED SCOPE: assets 058, 060, 192, 401–410, 412, 415–417 and 490 are promoted to verified/integrated in this slice. Assets 059, 061, 411, 413 and 414 remain produced/deferred until a legitimate runtime binding exists.
+- NEXT: continue with safe documented UI assets that already have a real client surface (modal/feedback/accessibility), while keeping canonical character/NPC geometry and unbound combat/feedback art blocked rather than fabricated.
 - COMPLETED_AT: —
 
 
