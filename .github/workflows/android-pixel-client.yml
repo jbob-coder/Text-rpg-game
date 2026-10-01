@@ -78,8 +78,8 @@ jobs:
           grep -q "lib/x86_64/" android-apk-contents.txt
           grep -q "vertical_slice_01.json" android-apk-contents.txt
 
-      - name: Upload debug APK only for manual workflow runs
-        if: github.event_name == 'workflow_dispatch'
+      - name: Upload debug APK for delivery and manual workflow runs
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: THE-GAME-Android-Pixel-Client-${{ github.sha }}
