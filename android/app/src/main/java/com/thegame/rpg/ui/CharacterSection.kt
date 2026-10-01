@@ -132,7 +132,7 @@ internal fun CharacterSection(
             PixelPanel(
                 Modifier.fillMaxWidth().fillMaxHeight(0.85f).testTag("character-equipment-detail"),
                 equipmentSlotLabel(selected.slot),
-                chrome = PixelPanelChrome.CHARACTER,
+                chrome = PixelPanelChrome.MODAL,
             ) {
                 Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     if (selected.equipped) {
