@@ -106,6 +106,34 @@ class CharacterStatsSectionTest {
     }
 
     @Test
+    fun openingDepotStoryCapturesTamsinAndCourierPixelArt() {
+        val openingSnapshot = snapshot.copy(
+            sceneId = "OPENING_DEPOT_BLACKOUT",
+            title = "The Last Light in Platform Nine",
+            body = "The district blackout reaches the tram depot before the evacuation order does.",
+            location = "PLATFORM_NINE",
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
+                    GameScreen(
+                        snapshot = openingSnapshot,
+                        busy = false,
+                        onChoice = {},
+                        onNavigate = {},
+                    )
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("story-pixel-header").assertIsDisplayed()
+        composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
+        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        saveScreenshot("story-opening-actors-320dp")
+    }
+
+    @Test
     fun relayWorkbenchStoryHasPhoneSizedArtEvidence() {
         val relaySnapshot = snapshot.copy(
             sceneId = "OPENING_RELAY_CASING",
