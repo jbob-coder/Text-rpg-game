@@ -158,7 +158,12 @@ internal fun CharacterSection(
                         bonuses.forEach {
                             Text(it, color = PixelColors.Cyan, style = MaterialTheme.typography.bodyMedium)
                         }
-                        CharacterActionButton("UNEQUIP", !busy, "character-unequip") { onUnequip(selected.slot) }
+                        CharacterActionButton(
+                            label = "UNEQUIP",
+                            enabled = !busy,
+                            tag = "character-unequip",
+                            chrome = PixelUiChromeCatalog.buttonSecondary,
+                        ) { onUnequip(selected.slot) }
                     } else {
                         Text("Empty slot", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
                     }
@@ -176,7 +181,12 @@ internal fun CharacterSection(
                     } else if (!selected.equipped) {
                         Text("No carried item fits this slot.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
                     }
-                    CharacterActionButton("CLOSE", true, "character-detail-close") { detailOpen = false }
+                    CharacterActionButton(
+                        label = "CLOSE",
+                        enabled = true,
+                        tag = "character-detail-close",
+                        chrome = PixelUiChromeCatalog.buttonSecondary,
+                    ) { detailOpen = false }
                 }
             }
         }
@@ -208,12 +218,27 @@ private fun CharacterSlotCard(slot: GameEquipmentSlot, active: Boolean, onSelect
 }
 
 @Composable
-private fun CharacterActionButton(label: String, enabled: Boolean, tag: String, onClick: () -> Unit) {
+private fun CharacterActionButton(
+    label: String,
+    enabled: Boolean,
+    tag: String,
+    chrome: PixelChromeAsset = PixelUiChromeCatalog.buttonPrimary,
+    onClick: () -> Unit,
+) {
+    val style = if (enabled) {
+        Modifier.pixelChrome(chrome)
+    } else {
+        Modifier
+            .background(PixelColors.PanelAlt)
+            .border(2.dp, PixelColors.Disabled)
+    }
     Box(
-        Modifier.fillMaxWidth().background(PixelColors.PanelAlt)
-            .border(2.dp, if (enabled) PixelColors.Cyan else PixelColors.Disabled)
+        Modifier.fillMaxWidth()
+            .then(style)
             .clickable(enabled = enabled, role = Role.Button, onClick = onClick)
-            .heightIn(min = 48.dp).padding(12.dp).testTag(tag),
+            .heightIn(min = 48.dp)
+            .padding(12.dp)
+            .testTag(tag),
         contentAlignment = Alignment.Center,
     ) {
         Text(label, color = if (enabled) PixelColors.Paper else PixelColors.Disabled, style = MaterialTheme.typography.labelLarge)
