@@ -173,6 +173,41 @@ This section supersedes older statements about the top-level product objective w
 - PRIORITY: `P0`
 - OUTPUT: screen/component -> player-safe projection -> asset packet -> domain owner -> tests/evidence mapping before broad UI replacement.
 
+### TASK D-022 — Trace expanded owner directive to repository authorities
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/OWNER_DIRECTIVE_TRACEABILITY_MATRIX_2026-10-02.md`
+- RESULT: every major clause of the expanded 2026-10-02 directive is mapped to an owner document, current state, and next action; missing child contracts are explicitly identified.
+- COMPLETED_AT: `2026-10-02 08:16 AST`
+
+### TASK D-023 — Player activities / life-loop master
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/systems/PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md`
+- RESULT: active/timed/scheduled/background activities, time, interruption, concurrency, training/study/work/recovery/social/diagnostic boundaries, persistence and UI projection are documented.
+- COMPLETED_AT: `2026-10-02 08:16 AST`
+
+### TASK D-024 — Operational world coordinate and scale standard
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/world/WORLD_COORDINATE_AND_SCALE_STANDARD.md`
+- RESULT: W0–W4 operational coordinate rules, units/origins/bounds/transforms, logical/presentation separation, route anchors, verticality, versioning and validation are documented.
+- COMPLETED_AT: `2026-10-02 08:16 AST`
+
+### TASK D-025 — Asset provenance registry seed
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/assets/ASSET_PROVENANCE_REGISTRY.md`
+- CURRENT: provenance schema and initial 24-raster seed/reconciliation queue documented.
+- REMAINING: exact source-master/hash/branch/consumer/QA reconciliation for each asset family.
+
+### TASK D-026 — Android consumer/projection map
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`
+- CURRENT: source-grounded `GameSnapshot`/`GameEngine` surface map plus major screen ownership and missing projection contracts documented.
+- REMAINING: line-by-line composable/ViewModel/bridge consumer audit and test mapping.
+
 ### TASK D-012 — Final APK keep/rebuild matrix and execution
 - STATUS: `BLOCKED`
 - PRIORITY: `LATE-STAGE`
