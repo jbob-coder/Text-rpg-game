@@ -379,7 +379,9 @@ Use separate layers for:
 
 Never paint a temporary game state permanently into the base district master.
 
-## 7. Current code-present versus planned-only scene states
+## 7. Exact scene-master ID presence on the source branch
+
+The checks below test whether the **exact Batch 001 scene/state stable ID** is present in the current Android visual catalogs. Absence of an exact scene-master ID does not prove that no related overlay or alternate visual implementation exists under another ID; related state layers must be audited separately before production.
 
 At the source branch used for this document:
 
