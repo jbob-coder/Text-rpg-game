@@ -28,6 +28,12 @@ Start here for current work:
 18. [World Settlement Catalog](docs/world/WORLD_SETTLEMENT_CATALOG.md)
 19. [World Travel and Routes](docs/world/WORLD_TRAVEL_AND_ROUTES.md)
 20. [Room Actor / Panel / Overlay / Reuse Standard](docs/assets/ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md)
+21. [World Ecosystems and Resources](docs/world/WORLD_ECOSYSTEM_AND_RESOURCES.md)
+22. [World Beast Zone Standard](docs/world/WORLD_BEAST_ZONE_STANDARD.md)
+23. [World Population / Citizen Hierarchy](docs/world/WORLD_POPULATION_AND_CITIZEN_HIERARCHY.md)
+24. [World Balance and Level Bands](docs/world/WORLD_BALANCE_AND_LEVEL_BANDS.md)
+25. [World Loot Provenance Standard](docs/world/WORLD_LOOT_PROVENANCE_STANDARD.md)
+26. [World NPC Population Standard](docs/world/WORLD_NPC_POPULATION_STANDARD.md)
 
 The default `main` branch remains a placeholder and is not implementation authority.
 
