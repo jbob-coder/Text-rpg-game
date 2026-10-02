@@ -1,0 +1,23 @@
+# THE GAME — Systems Documentation Index
+
+Parent authority: `../MASTER_GAME_DEVELOPMENT_PROGRAM.md`
+
+## Current system planning
+
+- [Gameplay System Rebuild Matrix](GAMEPLAY_SYSTEM_REBUILD_MATRIX.md) — current KEEP/EXTEND/REWORK/NEW decisions and dependency order.
+
+## Required master documents
+
+Planned:
+- `PROGRESSION_MASTER_PLAN.md`
+- `ITEM_ECONOMY_LOOT_MASTER_PLAN.md`
+- `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`
+- `TACTICAL_COMBAT_MASTER_PLAN.md`
+- `WORLD_BALANCE_INTEGRATION_PLAN.md`
+- `SAVE_AND_CONTENT_MIGRATION_MASTER_PLAN.md`
+
+## Authority rule
+
+Current repository source and exact-head verification outrank planning documents.
+
+Do not implement target-scale classes, ranks, tactical combat, persistent adversary systems, or economy expansion until their master contracts are written and linked here.
