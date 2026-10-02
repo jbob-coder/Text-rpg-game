@@ -493,3 +493,74 @@ Owns high-risk migration governance for stable IDs, save versions, quests, NPCs,
 Owns the future Android information architecture, Story/current-location surface, room character panels, Map hierarchy, Character/Stats/Skills/Equipment/Inventory/Quests, tactical mode, narration, accessibility and responsive behavior.
 
 All six are subordinate to `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`. Implementation remains gated by their unresolved decisions and exact live-source audits.
+
+
+---
+
+## 2026-10-02 corpus/world/visual child expansion
+
+### `docs/DOCUMENTATION_CORPUS_ARCHITECTURE.md`
+Owns:
+- long-range documentation volume structure;
+- unit types;
+- branch families;
+- cross-reference rules;
+- record-scale strategy;
+- ambiguous numeric-target tracking;
+- documentation-before-destruction gate.
+
+References:
+- master program;
+- directive breakdown;
+- progress ledger;
+- domain master documents.
+
+### `docs/world/WORLD_GEOGRAPHY_STANDARD.md`
+Owns:
+- spatial containment hierarchy;
+- W0–W4 coordinate roles;
+- geography boundaries;
+- terrain/water/climate placement logic;
+- resource/beast/political geography relationships;
+- scale policy.
+
+Must not invent final world size or missing Gate Twelve parent geography.
+
+### `docs/world/WORLD_POLITICAL_ENTITIES.md`
+Owns:
+- political entity schema;
+- government/institution layers;
+- territorial-control states;
+- social hierarchy and discrimination-policy documentation;
+- conflict/political-economy links.
+
+Current world-scale catalog remains unpopulated until canon is authored.
+
+### `docs/world/WORLD_SETTLEMENT_CATALOG.md`
+Owns:
+- settlement/district record schema;
+- population/service/economy/visual-packet requirements;
+- settlement production workflow.
+
+Gate Twelve is the current local proof region; its larger settlement parent remains undecided.
+
+### `docs/world/WORLD_TRAVEL_AND_ROUTES.md`
+Owns:
+- route classes;
+- endpoint/access/discovery/travel/risk record;
+- hierarchical travel;
+- route migration;
+- map-art versus route-authority separation.
+
+### `docs/assets/ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md`
+Owns:
+- per-area art packet;
+- actor-in-room contract;
+- room sprite/portrait/focus-panel identity consistency;
+- text/signage separation;
+- overlay classes;
+- animation ownership;
+- reuse compatibility signature;
+- visual QA.
+
+This child standard does not own NPC presence. Player-safe projected engine state does.
