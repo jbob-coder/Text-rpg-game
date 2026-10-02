@@ -749,3 +749,44 @@ Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified s
 - COMPLETED_AT: `2026-10-02 15:06 AST`.
 - NOT COMPLETE: D-006/D-021 full branch reconciliation, art approval, proposed actor projection, world-scale population, final APK, physical Galaxy A03 QA.
 - NEXT: reconcile source/raster revisions and implementation branch ancestry; author Gate Twelve parent-world proposal and bounded area packets.
+
+
+## 2026-10-02 final reconstruction integration update
+
+### TASK D-027 — Final game reconstruction integration blueprint
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md`
+- RESULT: cross-domain authority now connects change decisions, asset creation/stages/reuse, room actors/panels, world canon gaps, mechanics migration depth and final APK teardown/rebuild sequencing.
+- COMPLETED_AT: `2026-10-02 AST`
+
+### TASK D-028 — Reconcile implementation PR #7–#31
+- STATUS: `PENDING`
+- PRIORITY: `P0`
+- OUTPUT: branch/head/base/subsystem/files/CI/conflict/supersession/canonical-decision matrix.
+
+### TASK D-029 — Exactize asset provenance and production stage
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- OUTPUT: source master -> raster/export -> branch/head -> runtime consumer -> reuse signature -> QA -> canonical state for every current asset family.
+
+### TASK D-030 — Player-safe actor/panel projection contract
+- STATUS: `PENDING`
+- PRIORITY: `P0`
+- OUTPUT: projected actor identity/presence/pose/equipment/portrait/interactions with hidden-state-safe Android consumers.
+
+### TASK D-031 — Gate Twelve parent-world canon packet
+- STATUS: `PENDING`
+- PRIORITY: `P0`
+- OUTPUT: minimum parent settlement/region/political ownership/coordinate/routes/terrain-climate context needed before mass world population.
+
+### TASK D-032 — Mechanics schema/API migration packets
+- STATUS: `PENDING`
+- PRIORITY: `P0/P1`
+- OUTPUT: progression/social/items/combat/adversary target schemas mapped to existing engine APIs, saves, projections and tests.
+
+### TASK D-033 — APK teardown manifest
+- STATUS: `BLOCKED`
+- PRIORITY: `LATE-STAGE`
+- BLOCKED_BY: D-020/D-026/D-028/D-030/D-032 and final domain contracts.
+- OUTPUT: component-level keep/rework/replace/remove map with zero-consumer evidence before deletion.
