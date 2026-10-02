@@ -58,7 +58,7 @@ Preferred rendering families:
 5. stateful props
 6. decals/wear
 7. weather/hazard/event overlay
-8. characters
+8. visible actors/entities: player, NPCs, party members, and beasts when authoritatively present
 9. interaction/quest markers
 10. UI selection/feedback
 
@@ -74,14 +74,15 @@ The application may change visible portrait/panel composition based on authorita
 
 The panel may show:
 - player;
-- one focused speaker;
+- one focused character or focused beast;
 - multiple present characters;
 - party members;
+- one or more authoritatively present beasts;
 - relationship/emotion/status indicators if player-safe;
 - scene/location context;
 - actionable interaction affordances.
 
-The panel may not infer that an NPC is present merely because an asset exists.
+The panel may not infer that an NPC or beast is present merely because an asset exists.
 
 Presence source must come from engine/scene projection.
 
@@ -148,3 +149,12 @@ Locked ownership:
 Current scene-ID actor selection is documented as migration debt.
 
 The future-document item `CHARACTER_PANEL_CONTEXT_CONTRACT` is satisfied by this contract for the current architecture phase; implementation and broader-world expansion remain pending.
+
+
+## Beast visual integration
+
+Beasts use the same authority rule as characters: the engine/content determines presence and state; art/UI renders the player-safe result.
+
+Beast visual families are governed by `13_BEAST_ENTITY_ECOSYSTEM_AND_SCENE_PRESENCE_STANDARD.md`.
+
+Do not use generic “monster” as the normative entity category in project asset specifications.
