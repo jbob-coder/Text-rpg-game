@@ -28,11 +28,11 @@ This matrix does not measure progress by file count alone.
 | World hierarchy/maps | world spatial/ID/template/sequence docs | REVIEWABLE | actual world geography, WORLD_GEO decision, polities/regions |
 | Characters/NPC/social | program 04 + foundation/social docs | STRUCTURED | NPC v2 schema, autonomy, hierarchy, social systems |
 | Beasts/ecosystem | program 06 + beast standard + beast-zone/ecosystem schema | REVIEWABLE architecture | final taxonomy, actual species/zones, simulation depth and balance integration |
-| Progression/classes/ranks | program 05 + foundation | STRUCTURED | final class/rank/skill-tree architecture |
-| Tactical combat | program 05 | STRUCTURED | original action economy, terrain, AI, encounter and UI rules |
-| Persistent rivalry | program 05 | STRUCTURED | original persistent adversary schema/flow |
+| Progression/classes/ranks | program 05 + class/rank/skill-tree architecture | REVIEWABLE architecture | real class catalog, rank scales, tree schema details and migration |
+| Tactical combat | program 05 + tactical combat architecture | REVIEWABLE architecture | exact position model, turn order, formulas, AI, encounter and UI rules |
+| Persistent rivalry | program 05 + persistent adversary architecture | REVIEWABLE architecture | eligibility, memory/adaptation catalogs, recurrence and removal rules |
 | Economy/items | program 06 + existing equipment foundation | STRUCTURED | currency/value, loot, resource, crafting/service decisions |
-| World level/balance | program 05 | STRUCTURED | scaling philosophy, region threat, formulas/limits |
+| World level/balance | program 05 + world level/balance architecture | REVIEWABLE philosophy | numeric threat bands, caps, curves, region profiles and difficulty parameters |
 | Android/APK | program 07 + historical Android validation | REVIEWABLE architecture | current component keep/migrate/replace audit |
 | Final teardown/rebuild | program 07 | STRUCTURED | final rebuild matrix waits on upstream design stability |
 | Guides/process | program 08 + world templates | STRUCTURED | domain execution guides for each recurring content type |
@@ -92,3 +92,14 @@ Added:
 - `docs/assets/GLOBAL_ASSET_REUSE_OCCLUSION_MATRIX.md`.
 
 These additions improve specification quality but do not invent actual beast species, beast zones, ecosystem geography, loot tables, or combat values.
+
+
+## Audit update — progression/combat/balance
+
+Added:
+- `docs/systems/CLASS_RANK_SKILL_TREE_ARCHITECTURE.md`;
+- `docs/systems/TACTICAL_COMBAT_ARCHITECTURE.md`;
+- `docs/systems/PERSISTENT_ADVERSARY_SYSTEM.md`;
+- `docs/systems/WORLD_LEVEL_AND_BALANCE_ARCHITECTURE.md`.
+
+These documents define architecture and ownership. They do not claim final formulas, class catalogs, encounter values, or implementation.
