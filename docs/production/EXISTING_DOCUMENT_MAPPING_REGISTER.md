@@ -16,7 +16,6 @@ Prevent the numbered corpus from duplicating useful existing work.
 | docs/program/14_DOCUMENTATION_COVERAGE_AND_EXPECTATION_MATRIX.md | KEEP | coverage index |
 | docs/program/16_SESSION_DECISION_LOG_2026-10-02.md | KEEP | continuity log |
 | docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md | KEEP | first region pilot |
-
 | docs/world/GATE_TWELVE_EXTERNAL_CONNECTIONS_AND_EXPANSION_REGISTER.md | KEEP + UPDATE AS NEEDED | Gate Twelve outward-world boundary and expansion-edge register |
 
 A numbered document may reference, narrow, operationalize, or eventually supersede a mapped document. It must not copy prose solely to increase corpus size.
