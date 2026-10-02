@@ -201,3 +201,19 @@ Verified resume state:
 - attempted DOC_0000001–DOC_0000010 write did not land, so no partial cleanup is required.
 
 Resume from the checkpoint file before continuing.
+
+
+## CHECKPOINT — SB01 AFTER DOC_0000010
+
+New authoritative resume checkpoint:
+`docs/production/CHECKPOINT_2026-10-02_SB01_AFTER_DOC_0000010.md`
+
+Verified state:
+- DOC_0000001–DOC_0000010 created and read back;
+- completed: 10/100;
+- blocked: 0/100;
+- last_verified_id: `DOC_0000010`;
+- next_id: `DOC_0000011`;
+- no partial numbered document remains in progress.
+
+The earlier PRE_AUTHORING checkpoint remains historical evidence. Resume from the newer checkpoint above.
