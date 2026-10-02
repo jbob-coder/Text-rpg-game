@@ -199,6 +199,42 @@ class CharacterStatsSectionTest {
     }
 
     @Test
+    fun inventoryPhoneUsesPixelLoadoutStripBagGridAndItemDetail() {
+        val bagSnapshot = snapshot.copy(
+            inventory = snapshot.inventory.copy(
+                items = listOf(
+                    GameInventoryItem("ITEM_DEPOT_JACKET", "Depot utility jacket", 1, true, "body", "standard"),
+                    GameInventoryItem("ITEM_WORK_GLOVES", "Insulated work gloves", 1, true, "hands", "standard"),
+                    GameInventoryItem("ITEM_SIGNAL_RING", "Signal ring", 1, true, "ring_1", "uncommon"),
+                    GameInventoryItem("ITEM_COURIER_NECKTAG", "Courier neck tag", 1, true, "neck", "standard"),
+                    GameInventoryItem("ITEM_MAINTENANCE_SEAL", "Maintenance seal", 1, false, null, "standard"),
+                    GameInventoryItem("ITEM_DEAD_RELAY", "Dead municipal relay", 1, false, null, "standard"),
+                ),
+            ),
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
+                    InventorySection(
+                        snapshot = bagSnapshot,
+                        busy = false,
+                        onEquip = {},
+                        onUnequip = {},
+                    )
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("inventory-loadout-strip").assertIsDisplayed()
+        composeRule.onNodeWithTag("inventory-slot-body").assertIsDisplayed()
+        composeRule.onNodeWithTag("inventory-item-detail").assertIsDisplayed()
+        composeRule.onNodeWithTag("inventory-item-ITEM_DEPOT_JACKET").assertIsDisplayed()
+        composeRule.onNodeWithText("Depot utility jacket").assertIsDisplayed()
+        saveScreenshot("inventory-320dp")
+    }
+
+    @Test
     fun allTwelveSlotsAndAvatarFitPhoneWidthAndSelectedGearShowsItsEngineBonus() {
         var unequipped: String? = null
         composeRule.setContent {
