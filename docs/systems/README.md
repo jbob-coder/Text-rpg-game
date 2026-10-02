@@ -34,3 +34,7 @@ The following previously planned system masters now exist:
 - `SAVE_AND_CONTENT_MIGRATION_MASTER_PLAN.md`
 
 These remain documentation contracts. Their existence does not claim runtime implementation.
+
+
+## Activity / life loop
+- `PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md` — player time-use, training, study, work, recovery, social, diagnostics, scheduled/background activity, interruption/concurrency and safe UI projection.
