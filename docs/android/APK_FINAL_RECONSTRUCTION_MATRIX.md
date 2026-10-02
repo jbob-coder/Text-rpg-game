@@ -289,3 +289,27 @@ Required:
 - install/start on physical Galaxy A03 separately;
 - known limitations;
 - final documentation handoff.
+
+
+## 2026-10-02 final reconstruction integration update
+
+Before the final rebuild begins, create an **APK teardown manifest**. Every candidate component/file must record:
+- current path/component;
+- current callers/consumers;
+- projected fields/actions consumed;
+- asset dependencies;
+- save/state dependency;
+- test coverage;
+- target replacement;
+- migration order;
+- rollback path;
+- zero-consumer proof before removal.
+
+Deletion states:
+- **PRESERVE DURING MIGRATION**;
+- **REPLACEMENT READY**;
+- **CONSUMERS MIGRATED**;
+- **ZERO-CONSUMER VERIFIED**;
+- **REMOVE/ARCHIVE ALLOWED**.
+
+The app must never be “cleaned up” by deleting old paths first and hoping the replacement later covers them. The final APK is reconstructed from verified domain contracts and consumer evidence.
