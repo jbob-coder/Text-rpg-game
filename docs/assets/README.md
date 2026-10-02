@@ -32,6 +32,8 @@ Read in this order before generating or integrating visual assets:
 Map-specific application blueprint:
 - [GATE_TWELVE_MAP_PIXEL_ASSET_BLUEPRINT.md](GATE_TWELVE_MAP_PIXEL_ASSET_BLUEPRINT.md)
   - binds the existing 256x144 Gate Twelve geometry to textual pixel-art specifications, reusable asset families, current code-present IDs, production order and integration rules.
+- [GATE_TWELVE_MAP_ANIMATION_BLUEPRINT.md](GATE_TWELVE_MAP_ANIMATION_BLUEPRINT.md)
+  - defines static, ambient-loop and state-driven animation contracts for each Gate Twelve district region, including frame/timing guidance and the first three implementation tasks.
 
 ## Current phase
 
