@@ -1,5 +1,10 @@
 # THE GAME — Asset Reference Registry
 
+## Global program pointer
+
+This registry is governed by `docs/MASTER_DOCUMENTATION_PROGRAM.md` and `docs/PIXEL_ART_INTEGRATION_AND_REUSE_STANDARD.md`. References from external games/projects remain non-authoritative and may not silently become production/canon assets.
+
+
 This registry tracks generated/collected reference images separately from production pixel assets.
 
 A reference appearing here does **not** imply canon approval or production readiness.
