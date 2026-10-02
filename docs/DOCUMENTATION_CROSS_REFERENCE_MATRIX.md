@@ -151,6 +151,17 @@ Needs:
 - keep state-driven animations player-safe;
 - later animation implementation must attach to runtime composition layers.
 
+### `docs/assets/GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md`
+Owns:
+- Batch 001 exact-ID/status audit;
+- Gate Twelve per-area asset requirements;
+- manifest/code drift;
+- open-refinement separation;
+- production ordering.
+
+Current stage:
+- Step 7 evidence source.
+
 ### `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`
 Owns:
 - region authority;
@@ -160,8 +171,8 @@ Owns:
 - next: geometry contract, materials, asset decomposition, UX, state layers, loading, implementation, verification, migration.
 
 Current stage:
-- Steps 1–4 complete;
-- Step 5 next.
+- Steps 1–7 complete;
+- Step 8 Application UX plan next.
 
 ### `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`
 Owns:
