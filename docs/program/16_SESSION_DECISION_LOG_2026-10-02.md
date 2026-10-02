@@ -217,3 +217,19 @@ Verified state:
 - no partial numbered document remains in progress.
 
 The earlier PRE_AUTHORING checkpoint remains historical evidence. Resume from the newer checkpoint above.
+
+## CHECKPOINT — SB01 AFTER DOC_0000020
+
+New authoritative resume checkpoint:
+`docs/production/CHECKPOINT_2026-10-02_SB01_AFTER_DOC_0000020.md`
+
+Verified state:
+- DOC_0000001–DOC_0000020 are accounted for;
+- DOC_0000011–DOC_0000020 created and read back;
+- completed: 20/100;
+- blocked: 0/100;
+- last_verified_id: `DOC_0000020`;
+- next_id: `DOC_0000021`;
+- no numbered corpus document remains partially written.
+
+The older checkpoints remain historical evidence. Resume from the newest checkpoint above.
