@@ -1706,7 +1706,535 @@ These gaps should feed later content/system planning; they are not excuses to fa
 
 ---
 
-# 5. Planned authoring sequence
+
+
+# 5. Geometry contract
+
+Status: **COMPLETE — PRESENTATION GEOMETRY / ANCHOR CONTRACT LOCKED FOR ASSET PRODUCTION**
+
+This step converts the existing 256x144 Gate Twelve map master from an informal scaffold into an explicit production contract.
+
+Source of confirmed geometry:
+- `android/app/src/main/java/com/thegame/rpg/ui/PixelMapArtCatalog.kt`
+- `MAP_GATE_TWELVE_DISTRICT_BASE`
+- current authored world-map node percentages in `content/vertical_slice_01.json`
+
+This contract distinguishes:
+- **map presentation geometry**;
+- **world-map node anchors**;
+- **physical transition meaning**;
+- **reusable art modules**;
+- **reserved expansion space**.
+
+It does not change gameplay state or routes.
+
+## 5.1 Native district canvas
+
+Current map master:
+- width: **256 px**
+- height: **144 px**
+- origin: top-left `(0,0)`
+- x increases rightward;
+- y increases downward.
+
+This is a presentation coordinate system.
+
+It is not:
+- a meter scale;
+- a tactical-combat grid;
+- a world geographic coordinate system;
+- a substitute for travel-time data.
+
+## 5.2 Locked macrozone bands
+
+The current map base explicitly divides the canvas into:
+
+| Macro presentation band | Y range | Height | Planning role |
+| --- | ---: | ---: | --- |
+| Surface Civic | 0..47 | 48 px | Workshop Row, Depot Plaza, Archive |
+| Depot / Service | 48..94 | 47 px | Platform Nine, Workbench, Gate Twelve, upper Trace/service geometry |
+| Lower Maintenance | 95..143 | 49 px | Quiet Stair and deeper maintenance field |
+
+These band boundaries are now **production-stable**.
+
+They may be visually softened through materials, transitions and overlays, but asset production must not casually move whole locations across bands.
+
+Changing a band boundary requires:
+- explicit geometry-change proposal;
+- map-art update;
+- affected location review;
+- route/anchor review;
+- phone-scale QA.
+
+## 5.3 Confirmed perimeter infrastructure
+
+Upper perimeter street:
+- base road envelope: `y=5..11`
+- lighter road treatment inside that envelope: around `y=7..8`
+
+Lower perimeter street:
+- base road envelope: `y=126..133`
+- lighter road treatment: around `y=128..129`
+
+These are environmental infrastructure.
+
+They do not automatically represent player-travel edges.
+
+Production rule:
+- keep both streets visually continuous;
+- use modular asphalt/road, edge/curb and service-seam assets;
+- do not paint reachability or quest availability into them.
+
+## 5.4 Confirmed location footprint envelopes
+
+The following outer envelopes are taken directly from current map-art construction.
+
+| Location | Confirmed presentation envelope | Notes |
+| --- | --- | --- |
+| Workshop Row | `x=49..102, y=8..29` | four attached practical bays; front service strip extends around `x=48..103, y=28..30` |
+| Depot Plaza | paving `x=105..143, y=8..39`; frontage `x=108..140, y=31..43` | public hub; open-space identity must be preserved |
+| Municipal Archive | `x=151..196, y=6..33` | institutional building/courtyard zone |
+| Platform Nine | `x=20..83, y=37..72` | depot mass; track envelope extends beyond building |
+| Platform Nine tracks | approx. `x=18..85, y=68..78` | permanent infrastructure, not state overlay |
+| Relay Workbench | `x=75..105, y=31..58` | annex overlaps the depot/public transition area visually |
+| Gate Twelve | `x=119..154, y=56..85` | threshold landmark |
+| Quiet Stair | `x=88..118, y=89..123` | lower egress/shaft |
+| Service Tunnel | `x=161..199, y=78..108` | lower restricted infrastructure |
+| Trace Chamber | `x=194..237, y=40..71` | functionally Depot/Gate Core despite crossing presentation-band logic |
+
+### Footprint rule
+
+These envelopes are now **asset-fit targets**.
+
+A new facade, tile family, landmark or map module should fit the envelope rather than moving the location merely to accommodate artwork.
+
+Allowed inside an envelope without geometry migration:
+- window placement;
+- door ornament;
+- surface texture;
+- awning;
+- small equipment;
+- signage;
+- vegetation;
+- local wear;
+- small decorative projections that do not alter route readability.
+
+Not allowed without explicit geometry revision:
+- moving a whole named location;
+- swapping Workshop Row and Archive sides;
+- changing the depot/gate/maintenance ordering;
+- closing a required visual path with permanent architecture;
+- consuming an expansion boundary with an irreversible landmark;
+- moving map-node semantic anchors because art looks better elsewhere.
+
+## 5.5 Node render anchors
+
+The authored world-map uses percentage coordinates.
+
+On the 256x144 map master those project approximately to:
+
+| Stable location | Authored % | Presentation anchor |
+| --- | --- | --- |
+| `WORKSHOP_ROW` | (29,16) | (~74,23) |
+| `DISTRICT_PLAZA` | (48,18) | (~123,26) |
+| `DISTRICT_ARCHIVE` | (66,16) | (~169,23) |
+| `PLATFORM_NINE` | (18,36) | (~46,52) |
+| `RELAY_WORKBENCH` | (34,31) | (~87,45) |
+| `GATE_TWELVE` | (53,48) | (~136,69) |
+| `EVAC_STAIR` | (40,70) | (~102,101) |
+| `SERVICE_TUNNEL` | (70,61) | (~179,88) |
+| `TRACE_CHAMBER` | (82,39) | (~210,56) |
+
+These are **semantic marker anchors**, not necessarily doorway coordinates.
+
+Map marker/touch behavior must continue to derive from the projected world map.
+
+Do not move a marker to a decorative door merely because that looks visually convenient unless the underlying node coordinate is deliberately migrated.
+
+## 5.6 Current route geometry
+
+Current map art mirrors the authored graph with these service-route presentation segments:
+
+- `(46,52) -> (87,45)` — Platform Nine to Relay Workbench;
+- `(46,52) -> (136,69)` — Platform Nine to Gate Twelve;
+- `(46,52) -> (102,101)` — Platform Nine to Quiet Stair;
+- `(136,69) -> (179,88)` — Gate Twelve to Service Tunnel;
+- `(136,69) -> (210,56)` — Gate Twelve to Trace Chamber;
+- `(179,88) -> (210,56)` — Service Tunnel to Trace Chamber.
+
+Surface boulevard presentation:
+- `(70,23) -> (123,26)`;
+- `(123,26) -> (169,23)`.
+
+The visual route system does not own route legality.
+
+When route art is rebuilt:
+1. render neutral physical path/material;
+2. render graph edge if the UI uses an explicit route overlay;
+3. render discovered/current/reachable/unavailable markers separately;
+4. keep selected/travel preview separate.
+
+## 5.7 Depot Plaza -> Platform Nine target connector
+
+Step 3 established:
+
+`DISTRICT_PLAZA <-> PLATFORM_NINE`
+
+as required for the target circulation model.
+
+Geometry decision:
+- **do not create a new named location solely to bridge them**;
+- treat the transition as public exterior/plaza -> depot entrance -> Platform Nine interior;
+- preserve the existing Depot Plaza frontage and Platform Nine depot mass;
+- a later authored route edge may connect the two semantic nodes;
+- scene art should communicate the entrance/threshold;
+- district-map art does not need a literal wide road cutting through the intervening annex geometry.
+
+This avoids distorting the existing map merely to make the connection visually obvious.
+
+Implementation remains deferred:
+- no gameplay edge added in this documentation step;
+- no travel time chosen;
+- no unlock state chosen.
+
+## 5.8 Transition-anchor classes
+
+Each transition receives one of four anchor classes.
+
+### T1 — semantic node anchor
+Used by:
+- map marker;
+- selection;
+- hit testing.
+
+### T2 — physical scene entrance
+Used by:
+- doorway;
+- stair;
+- corridor mouth;
+- gate.
+
+### T3 — map-to-world expansion boundary
+Used by:
+- larger-world transition;
+- future adjacent region.
+
+### T4 — state transition overlay anchor
+Used by:
+- Echo response;
+- blackout;
+- powered/unpowered treatment;
+- temporary event art.
+
+Do not overload one coordinate to serve all four jobs.
+
+## 5.9 Reserved expansion boundaries
+
+### Depot Plaza surface-world boundary
+
+Status:
+- world-facing attachment remains required;
+- exact parent-city direction is **not yet decided**.
+
+Geometry rule:
+- preserve an outer-facing visual route from the plaza;
+- do not surround the plaza with permanent art that makes future surface-world attachment implausible;
+- exact edge/coordinate will be selected only after the parent city layout exists.
+
+### Quiet Stair external boundary
+
+Status:
+- egress-facing;
+- destination not authored.
+
+Geometry rule:
+- preserve the shaft/stair sense of continuation;
+- keep lower/outward connection visually plausible;
+- do not label a destination yet.
+
+### Service Tunnel deep boundary
+
+Status:
+- deeper-infrastructure expansion stub;
+- Directional Trace supports “deeper below mapped service level.”
+
+Geometry rule:
+- preserve a visual continuation/depth cue;
+- do not hard-close every corridor end in base art;
+- exact deeper map coordinate waits for the next region.
+
+## 5.10 Reusable surface modules
+
+Required surface families:
+
+### Civic surface family
+- civic slab;
+- curb;
+- asphalt;
+- utility seam;
+- drainage;
+- restrained lane/municipal marking;
+- civic wear decal.
+
+Primary consumers:
+- Depot Plaza;
+- Archive frontage;
+- Workshop Row approaches;
+- perimeter streets.
+
+### Depot/service family
+- depot concrete;
+- platform edge;
+- rail steel;
+- sleeper/track support;
+- painted utility metal;
+- service channel;
+- depot wall panel.
+
+Primary consumers:
+- Platform Nine;
+- Workbench annex;
+- Gate Twelve approaches.
+
+### Lower maintenance family
+- dark municipal concrete;
+- maintenance floor panel;
+- wall support;
+- vent;
+- drain;
+- pipe channel;
+- cable tray;
+- rail;
+- service plate.
+
+Primary consumers:
+- Quiet Stair;
+- Service Tunnel;
+- Trace Chamber.
+
+Rule:
+shared materials should look related without making every location identical.
+
+## 5.11 Reusable building modules
+
+Recommended families:
+
+### Municipal public
+- door;
+- practical window;
+- civic facade panel;
+- institutional trim;
+- notice/sign plate.
+
+### Workshop
+- bay shell;
+- shutter;
+- awning;
+- repair aperture;
+- work apron;
+- tool/scrap cluster.
+
+### Depot
+- broad frame;
+- roof/support;
+- platform panel;
+- service door;
+- track-edge module.
+
+### Restricted service
+- reinforced door frame;
+- heavy panel;
+- access hatch;
+- support rib;
+- service indicator;
+- maintenance seam.
+
+A named landmark may combine shared modules with a unique silhouette.
+
+## 5.12 Prop anchor policy
+
+Reusable props require:
+- stable asset ID;
+- origin/pivot;
+- native size;
+- perspective;
+- intended surface;
+- z-order;
+- state ownership;
+- allowed locations or material family.
+
+Current stable prop families already include examples such as:
+- depot door;
+- relay workbench;
+- Gate Twelve door;
+- tunnel pipes/cables;
+- Trace apparatus;
+- archive shelf/terminal;
+- workshop bench;
+- district notice board.
+
+Do not duplicate an existing prop under a new ID because a later scene needs a slightly different placement.
+
+Create a variant only when:
+- state differs;
+- view differs;
+- scale/perspective differs;
+- material identity genuinely differs.
+
+## 5.13 Scene geometry versus district-map geometry
+
+District map:
+- 256x144;
+- communicates place relationships and landmark masses.
+
+Narrative scene:
+- 128x64;
+- communicates one location's readable environment, actors and state.
+
+Character gameplay:
+- 32x48.
+
+Portrait:
+- 64x64.
+
+Therefore:
+- do not crop district map geometry and call it the scene master;
+- do not position room actors using district-map coordinates;
+- do not infer a room doorway from the map node marker;
+- each layer has its own documented coordinate space.
+
+## 5.14 Actor placement geometry
+
+Current transitional room-actor implementation uses 32x48 actors placed inside 128x64 scene masters.
+
+Known examples on a later actor branch:
+- Platform Nine opening: wounded courier + Tamsin;
+- Platform Nine decision: Tamsin;
+- Relay Workbench recovery: Tamsin;
+- Service Tunnel opening: Tamsin.
+
+Target rule:
+- current placements may be preserved as visual evidence;
+- long-term actor presence must move to player-safe projected actor data;
+- room-actor anchors should be defined per scene/location, not hard-coded as a hidden gameplay rule.
+
+Required future scene packet field:
+- actor safe zones;
+- actor ground line;
+- foreground occlusion zones;
+- interaction focal anchor;
+- portrait/panel safe zone.
+
+## 5.15 Geometry safe zones for UI and panels
+
+The world art must not be designed as if every pixel will remain unobstructed on phone.
+
+Each 128x64 scene production packet should reserve:
+- primary landmark zone;
+- actor zone;
+- interaction prop zone;
+- noncritical background zone;
+- text/panel-safe crop zone where possible.
+
+The app may overlay panels, but critical character faces, door landmarks or interaction props should not consistently sit beneath permanent UI.
+
+Specific per-scene safe-zone coordinates remain Step 7 asset-packet work rather than being invented globally here.
+
+## 5.16 Geometry that may be improved during art production
+
+Allowed without reopening the entire map plan:
+- facade detail;
+- paving pattern;
+- road texture;
+- material breakup;
+- window spacing;
+- small doorway position inside the same named footprint;
+- trees/lamps;
+- small props;
+- drains;
+- decals;
+- light fixtures;
+- surface wear;
+- map route line styling as presentation;
+- scene composition inside a location master.
+
+## 5.17 Geometry that requires explicit migration
+
+Requires an approved geometry-change record:
+- moving a named-location footprint;
+- changing relative ordering of major locations;
+- changing a semantic node coordinate;
+- adding/removing a gameplay route;
+- changing a route's destination;
+- adding a world exit;
+- blocking a current route;
+- changing map master resolution;
+- changing map projection semantics;
+- changing touch/hit-test coordinate mapping.
+
+## 5.18 Geometry-change record template
+
+Every intentional geometry revision must include:
+
+1. change ID;
+2. affected stable locations;
+3. old bounds;
+4. new bounds;
+5. reason;
+6. affected map nodes;
+7. affected edges;
+8. affected scene art;
+9. affected props;
+10. affected actor anchors;
+11. affected UI/hit testing;
+12. affected save/content IDs;
+13. tests;
+14. screenshot evidence;
+15. rollback plan.
+
+## 5.19 Asset-production consequence
+
+Step 5 unlocks detailed art production planning.
+
+After this step, asset briefs may safely assume:
+- map canvas;
+- bands;
+- named-location footprint targets;
+- semantic anchors;
+- existing route geometry;
+- shared surface families;
+- building module families;
+- separation of map/scene/actor coordinate systems.
+
+It does **not** yet lock:
+- final local palettes;
+- exact material ramps;
+- final lighting;
+- exact actor safe-zone coordinates;
+- final animation;
+- final loading cells;
+- final app UX.
+
+Those belong to Steps 6–10.
+
+## 5.20 Step 5 locked decisions
+
+1. The current 256x144 map master is the production geometry scaffold.
+2. Three macro presentation bands remain stable.
+3. Current named-location footprint envelopes are asset-fit targets.
+4. Authored percentage map nodes remain semantic marker anchors.
+5. Route art does not own travel legality.
+6. Depot Plaza -> Platform Nine should be represented as a depot entrance transition without forcing a major map-layout rewrite.
+7. World-facing expansion boundaries remain reserved but unlabeled until parent geography exists.
+8. Reusable surface/building/prop modules must preserve perspective, scale, material family and state ownership.
+9. District-map, scene, character and portrait coordinates remain separate coordinate spaces.
+10. Dynamic actors/panels may not convert hard-coded visual placement into hidden gameplay authority.
+11. Small decorative geometry can improve freely inside the contract.
+12. named footprints, semantic nodes, gameplay routes, exits and map projection require explicit migration when changed.
+
+---
+
+# 6. Planned authoring sequence
 
 The remaining master plan will be completed in this order:
 
@@ -1714,7 +2242,7 @@ The remaining master plan will be completed in this order:
 2. **Spatial hierarchy** — COMPLETE.
 3. **Circulation** — COMPLETE.
 4. **Per-zone function** — COMPLETE.
-5. **Geometry contract** — footprints, boundaries, anchors, reusable modules.
+5. **Geometry contract** — COMPLETE.
 6. **Material and visual language** — surfaces, architecture families, lighting.
 7. **Asset decomposition** — what must be built one asset at a time.
 8. **Application UX plan** — Map/Story/location navigation and high-use flows.
@@ -1729,7 +2257,7 @@ The remaining master plan will be completed in this order:
 
 # Continuity footnote / next-session handoff
 
-**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value.
+**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract.
 
 **Key decisions preserved for future sessions:**
 - active repository is `jbob-coder/Text-rpg-game`;
@@ -1742,6 +2270,6 @@ The remaining master plan will be completed in this order:
 - UI must not become the source of truth for gameplay state;
 - final map must be constructed as modular game content, piece by piece, not generated as one flattened image.
 
-**Next unfinished step:** Step 5 — define the geometry contract: exact presentation footprints/bounds, transition anchors, reserved expansion edges, reusable building/surface modules, and what geometry may or may not change before asset production.
+**Next unfinished step:** Step 6 — define material and visual language: palette families, material ramps, lighting direction, civic/depot/lower-infrastructure identity, landmark emphasis, and compatibility rules for new pixel-art assets.
 
-**Do not begin asset production before Step 5 is complete.**
+**Asset production planning may now use the locked geometry contract, but do not mass-produce assets before Step 6–7 define the visual language and exact asset decomposition.**
