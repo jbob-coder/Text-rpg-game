@@ -233,3 +233,16 @@ This matrix is intentionally high-level. The P0 existing-state audit still must 
 - tests/evidence.
 
 Until that audit is complete, UNKNOWN remains preferable to guessing.
+
+
+## 2026-10-02 final reconstruction integration update
+
+Additional decision locks from the integration blueprint:
+
+- PR #32 procedural Gate Twelve visible-map reconstruction: **REJECTED as final visible art**; preserve only useful topology/fallback logic after consumer audit.
+- PR #30 Quiet Stair refinement: **OPEN REFINEMENT / VERIFIED EXACT HEAD**, candidate for canonicalization during branch reconciliation.
+- PR #31 Service Tunnel ambient animation: **OPEN REFINEMENT / VERIFIED EXACT HEAD**, presentation-only candidate requiring reduced-motion policy and branch reconciliation.
+- transitional scene/location actor bindings: **KEEP temporarily / REWORK toward player-safe actor projection**.
+- current 24-raster family: **PRESERVE AS EVIDENCE / CLASSIFY PER ASSET**; existence does not equal CANON_APPROVED.
+- generic/provisional player identity: **REPLACE** with Jack production identity while preserving the 32x48 rig contract unless a separately approved rig migration supersedes it.
+- final APK presentation components: **NO DELETION YET**; every removal must be backed by the future teardown manifest and zero-consumer evidence.
