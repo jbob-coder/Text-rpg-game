@@ -172,11 +172,16 @@ Owns:
 - material/visual language;
 - asset decomposition;
 - Gate Twelve application UX;
-- next: state layers, loading/performance, implementation, verification, migration and execution handoff.
+- state layers;
+- loading/performance;
+- implementation order;
+- verification;
+- migration/removal;
+- execution handoff.
 
 Current stage:
-- Steps 1–8 complete;
-- Step 9 State-layer plan next.
+- Steps 1–14 complete as the first proof-region planning packet;
+- next consumer is exact implementation/asset reconciliation, not another region-planning step.
 
 ### `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`
 Owns:
