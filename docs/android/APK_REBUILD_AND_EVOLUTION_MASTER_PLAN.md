@@ -445,3 +445,16 @@ Immediate prerequisites:
 - build application UX master.
 
 Then this plan becomes executable rather than speculative.
+
+## Final reconstruction matrix companion
+
+See `APK_FINAL_RECONSTRUCTION_MATRIX.md` for the late-stage per-surface disposition model:
+- KEEP;
+- EXTEND;
+- REWORK;
+- REPLACE;
+- REMOVE.
+
+That matrix also owns the candidate final screen rebuild order, character-panel integration rules, tactical/adversary surface boundaries, removal gates and final APK acceptance criteria.
+
+Execution remains blocked by the domain documentation and migration contracts.
