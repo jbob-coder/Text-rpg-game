@@ -22,9 +22,9 @@ Prove the numbered documentation system end-to-end before scaling.
 - `docs/production/EXISTING_DOCUMENT_MAPPING_REGISTER.md`
 
 ## Checkpoint
-- last_verified_id: DOC_0000010
-- next_id: DOC_0000011
-- completed: 10/100
+- last_verified_id: DOC_0000020
+- next_id: DOC_0000021
+- completed: 20/100
 - blocked: 0/100
 
 ## Planned files
@@ -40,16 +40,16 @@ Prove the numbered documentation system end-to-end before scaling.
 | DOC_0000008 | DOC_0000008_CORPUS_PATH_NAMING_STANDARD.md | Define numbered file paths and naming grammar. | REVIEWABLE |
 | DOC_0000009 | DOC_0000009_EXISTING_DOCUMENT_REFERENCE_RULE.md | Define EXISTING:: references and non-duplication behavior. | REVIEWABLE |
 | DOC_0000010 | DOC_0000010_DOCUMENT_COLLISION_PREVENTION.md | Define ID/path collision checks before creation. | REVIEWABLE |
-| DOC_0000011 | DOC_0000011_DOCUMENT_STATUS_LIFECYCLE.md | Define document work-state transitions. | PLANNED |
-| DOC_0000012 | DOC_0000012_EVIDENCE_CLASSIFICATION_STANDARD.md | Operationalize confirmed/proposed/unknown/superseded evidence classes. | PLANNED |
-| DOC_0000013 | DOC_0000013_DOCUMENT_METADATA_MINIMUM.md | Define minimum document metadata. | PLANNED |
-| DOC_0000014 | DOC_0000014_DOCUMENT_OWNERSHIP_TEST.md | Define how a proposed file proves unique ownership. | PLANNED |
-| DOC_0000015 | DOC_0000015_DOCUMENT_SCOPE_BOUNDARY_RULE.md | Prevent unrelated systems from being merged into one file. | PLANNED |
-| DOC_0000016 | DOC_0000016_UPSTREAM_DEPENDENCY_RULE.md | Define upstream constraints. | PLANNED |
-| DOC_0000017 | DOC_0000017_DOWNSTREAM_CONSUMER_RULE.md | Define consumers and propagation obligations. | PLANNED |
-| DOC_0000018 | DOC_0000018_SUPERSESSION_TRACE_RULE.md | Define how newer decisions supersede older ones without erasing history. | PLANNED |
-| DOC_0000019 | DOC_0000019_DOCUMENT_REVISION_TRIGGER_RULE.md | Define what forces a document to be revisited. | PLANNED |
-| DOC_0000020 | DOC_0000020_DOCUMENT_ACCEPTANCE_GATE.md | Operationalize the normative documentation acceptance standard. | PLANNED |
+| DOC_0000011 | DOC_0000011_DOCUMENT_STATUS_LIFECYCLE.md | Define document work-state transitions. | REVIEWABLE |
+| DOC_0000012 | DOC_0000012_EVIDENCE_CLASSIFICATION_STANDARD.md | Operationalize confirmed/proposed/unknown/superseded evidence classes. | REVIEWABLE |
+| DOC_0000013 | DOC_0000013_DOCUMENT_METADATA_MINIMUM.md | Define minimum document metadata. | REVIEWABLE |
+| DOC_0000014 | DOC_0000014_DOCUMENT_OWNERSHIP_TEST.md | Define how a proposed file proves unique ownership. | REVIEWABLE |
+| DOC_0000015 | DOC_0000015_DOCUMENT_SCOPE_BOUNDARY_RULE.md | Prevent unrelated systems from being merged into one file. | REVIEWABLE |
+| DOC_0000016 | DOC_0000016_UPSTREAM_DEPENDENCY_RULE.md | Define upstream constraints. | REVIEWABLE |
+| DOC_0000017 | DOC_0000017_DOWNSTREAM_CONSUMER_RULE.md | Define consumers and propagation obligations. | REVIEWABLE |
+| DOC_0000018 | DOC_0000018_SUPERSESSION_TRACE_RULE.md | Define how newer decisions supersede older ones without erasing history. | REVIEWABLE |
+| DOC_0000019 | DOC_0000019_DOCUMENT_REVISION_TRIGGER_RULE.md | Define what forces a document to be revisited. | REVIEWABLE |
+| DOC_0000020 | DOC_0000020_DOCUMENT_ACCEPTANCE_GATE.md | Operationalize the normative documentation acceptance standard. | REVIEWABLE |
 | DOC_0000021 | DOC_0000021_SUBBATCH_MANIFEST_CONTRACT.md | Define mandatory sub-batch manifest contents. | PLANNED |
 | DOC_0000022 | DOC_0000022_SUBBATCH_CHECKPOINT_RULE.md | Define periodic recoverable checkpoints. | PLANNED |
 | DOC_0000023 | DOC_0000023_SESSION_RESUME_CONTRACT.md | Define how another session resumes without chat memory. | PLANNED |
