@@ -180,6 +180,17 @@ object PixelEnvironmentModuleCatalog {
         else -> null
     }
 
+    /**
+     * Optional authored detail strip for an arrival preview.
+     *
+     * These tiles are decorative composition only. They do not infer reachability, hazards,
+     * interactions, or travel state from a location ID.
+     */
+    fun arrivalDetailTiles(locationId: String): List<PixelSprite> = when (locationId) {
+        "SERVICE_TUNNEL" -> infrastructureTileAtlas.tiles
+        else -> emptyList()
+    }
+
 
     val productionModules: List<PixelSprite> = listOf(
         depotFacadeExterior,
