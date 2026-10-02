@@ -253,6 +253,9 @@ object PixelMapArtCatalog {
 
         // Platform Nine depot, platform roof and visible tram/maintenance tracks.
         outline(20, 37, 64, 36, 'B')
+        // Depot roof seams and structural posts stay within the authored Platform Nine shell.
+        rect(p, 23, 39, 58, 1, 'S')
+        listOf(31, 47, 63, 79).forEach { x -> rect(p, x, 40, 1, 28, 'I') }
         rect(p, 25, 42, 54, 10, 'W')
         windows(29, 45, 7, 7)
         rect(p, 27, 56, 50, 5, 'S')
@@ -263,8 +266,12 @@ object PixelMapArtCatalog {
 
         // Relay Workbench annex.
         outline(75, 31, 31, 28, 'B')
+        // Compact utility-panel language for the annex; no relay state is baked into the map.
+        rect(p, 78, 34, 25, 1, 'S')
+        rect(p, 78, 56, 25, 1, 'I')
         rect(p, 80, 36, 21, 9, 'W')
         rect(p, 83, 39, 15, 3, 'Y')
+        listOf(82, 99).forEach { x -> rect(p, x, 37, 1, 7, 'S') }
         rect(p, 80, 49, 21, 6, 'A')
         rect(p, 84, 51, 13, 2, 'H')
 
@@ -284,21 +291,34 @@ object PixelMapArtCatalog {
 
         // Quiet Stair utility shaft.
         outline(88, 89, 31, 35, 'B')
+        // Shaft rails and landing seams reinforce the stair identity without drawing new stairs.
+        rect(p, 91, 93, 2, 26, 'S')
+        rect(p, 114, 93, 2, 26, 'S')
         rect(p, 94, 95, 19, 22, 'W')
         listOf(98, 102, 106, 110, 114).forEach { y -> rect(p, 97, y, 13, 2, 'L') }
+        rect(p, 94, 96, 19, 1, 'I')
         rect(p, 91, 120, 25, 2, 'S')
 
         // Service Tunnel plant and access ribs.
         outline(161, 78, 39, 31, 'B')
         rect(p, 167, 84, 27, 18, 'W')
+        // Permanent pipe/cable runs provide tunnel material identity; signal effects remain overlays.
+        rect(p, 168, 85, 25, 2, 'S')
+        rect(p, 168, 100, 25, 1, 'H')
         for (x in 170..193 step 6) rect(p, x, 87, 2, 12, 'I')
+        listOf(172, 184).forEach { x -> rect(p, x, 85, 1, 16, 'L') }
         rect(p, 164, 105, 33, 2, 'S')
 
         // Trace Chamber remains grounded municipal infrastructure; no neon world palette.
         outline(194, 40, 44, 32, 'B')
+        // Controlled panel seams frame the chamber; active Trace rings remain state-driven.
+        rect(p, 198, 43, 36, 1, 'S')
+        listOf(202, 230).forEach { x -> rect(p, x, 45, 1, 21, 'S') }
         rect(p, 201, 47, 30, 18, 'W')
+        rect(p, 205, 49, 22, 1, 'L')
         rect(p, 208, 51, 16, 10, 'I')
         rect(p, 212, 54, 8, 4, 'H')
+        rect(p, 205, 63, 22, 1, 'L')
         rect(p, 198, 68, 36, 2, 'S')
 
         // Street furniture, sparse vegetation and material breakup.
