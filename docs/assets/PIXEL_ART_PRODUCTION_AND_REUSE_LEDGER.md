@@ -392,3 +392,25 @@ Before CANON_APPROVED:
 11. combat-specific character/effect art after combat contract.
 
 This ledger must be updated rather than replaced when new batches are created.
+
+
+## 2026-10-02 final reconstruction integration update
+
+The integration blueprint adds a mandatory production grouping for every future asset packet:
+
+1. **IDENTITY** — player/NPC body, face, hair, portrait, clothing identity layers.
+2. **AREA BASE** — environment/room/map base art.
+3. **STRUCTURE** — walls, doors, rails, platforms, roads, stairs, large fixtures.
+4. **PROP** — interactable/permanent small and medium objects.
+5. **STATE OVERLAY** — blackout, emergency, damage, power, weather, Trace/state effects.
+6. **ACTOR** — room actor/pose sprites.
+7. **EQUIPMENT/HELD** — paper-doll and held-object layers.
+8. **FX/ANIMATION** — transient or ambient motion.
+9. **PANEL/PORTRAIT** — contextual focus UI tied to projected actor identity.
+10. **TEXT/SIGNAGE** — environmental text-art only; ordinary UI text remains separate.
+11. **MAP** — base map, landmarks, routes, state overlays, markers, selection.
+12. **UI CHROME** — navigation, slots, frames, status/quest icons.
+
+Each row must record: stable asset ID, region/actor owner, stage, branch/HEAD, source master, raster/export, consumer, reuse class, overlay compatibility, QA evidence and replacement/supersession link.
+
+Priority creation gaps now explicitly include Jack six-view/portraits/directions, Tamsin turnaround/portraits/poses, Platform Nine evacuated state, Archive terminal close-up, Workshop rumor state, Trace Strain FX, final authored Gate Twelve map master, actor/panel anchors and final reusable emergency/shadow overlays.
