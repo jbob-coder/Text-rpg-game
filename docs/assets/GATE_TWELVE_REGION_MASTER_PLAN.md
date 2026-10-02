@@ -2871,7 +2871,278 @@ Every asset packet in Step 7 must specify:
 
 ---
 
-# 7. Planned authoring sequence
+
+
+# 7. Asset decomposition
+
+Status: **COMPLETE — PRODUCTION INVENTORY / CURRENT-STAGE AUDIT LOCKED**
+
+Detailed evidence matrix:
+`docs/assets/GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md`
+
+This step answers:
+- what Gate Twelve needs;
+- what already exists;
+- what exact stable IDs are present;
+- what manifests claim is integrated;
+- what remains provisional;
+- what exact planned IDs are missing;
+- what later draft PRs refine;
+- what must be reconciled before new art is created.
+
+## 7.1 Core rule
+
+Do not create a new asset merely because the visible game still looks weak.
+
+First determine whether the weakness comes from:
+- missing asset;
+- provisional/low-quality asset;
+- wrong runtime composition;
+- missing state overlay;
+- wrong actor placement;
+- missing pixel-raster export;
+- bad scaling;
+- palette/material mismatch;
+- branch drift;
+- unpromoted refinement;
+- missing QA.
+
+This prevents duplicated assets and repeated redesign.
+
+## 7.2 Stage vocabulary
+
+For Gate Twelve production planning, use:
+
+- **PLANNED** — catalog/brief exists only.
+- **BRIEF_LOCKED** — design contract exists.
+- **REFERENCE_SELECTED** — approved reference exists, not runtime art.
+- **CODE_PRESENT** — exact ID appears in current audited visual catalogs.
+- **INTEGRATED** — manifest/runtime binding exists on recorded implementation line.
+- **OPEN_PR_REFINEMENT** — later draft branch refines an existing asset; not promoted.
+- **QA_PENDING** — runtime may be integrated, but art review/phone/handset evidence remains.
+- **VERIFIED** — only when the relevant manifest/evidence actually proves the required gates.
+- **CANON_APPROVED** — final identity/art approval; stronger than automated runtime green.
+
+Do not collapse these states into a single “done.”
+
+## 7.3 Current asset-program baseline
+
+The v1 visual plan contains exactly 500 planned units.
+
+Batch 001 units 001–100 are the current playable-slice visual baseline.
+
+Step 7 audited all 100 Batch 001 entries against:
+- current code catalogs;
+- Wave A/B/C manifests;
+- current documentation branch ancestry;
+- relevant open refinement lines.
+
+The resulting matrix is the required pre-production check for this region.
+
+## 7.4 Current integrated/provisional strengths
+
+The current branch/manifests already provide substantial infrastructure:
+
+- player front paper-doll base;
+- starting equipment icons/layers;
+- relay item/state visuals;
+- nine named-location scene families, with several state overlays;
+- infrastructure modules/props;
+- map semantic markers;
+- navigation/resource/quest icons;
+- Trace FX families;
+- authored district map master;
+- transitional room-actor system.
+
+Therefore the next phase is **not** “generate everything again.”
+
+It is:
+- close exact missing IDs;
+- improve weak/provisional masters;
+- reconcile branch drift;
+- complete QA;
+- create missing actor/panel/identity assets;
+- then expand the world.
+
+## 7.5 Critical identity reconciliation
+
+Jack Wilson:
+- approved reference `UI_REFERENCE_CHARACTER_APPROVED_V1` exists;
+- it is now preserved in this documentation branch;
+- the 32x48 rig remains valid;
+- generic-player visual assumptions are superseded for final player identity;
+- the approved reference is not itself a runtime sprite.
+
+Required:
+- six-view technical turnaround;
+- directional masters;
+- portrait family;
+- animation masters only as gameplay needs them;
+- equipment alignment to Jack rather than a generic silhouette.
+
+Tamsin:
+- full authored identity exists;
+- a front room actor exists in code;
+- Wave A still describes the full turnaround as BRIEF_LOCKED;
+- manifest/code scope must be reconciled before the turnaround is declared complete.
+
+Courier:
+- current story-actor implementation exists;
+- needs explicit manifest/provenance if retained as production actor art.
+
+## 7.6 Exact current-region missing/gap priorities
+
+High-value planned exact IDs not found in the current audited catalogs include:
+- `PLATFORM_NINE_EVACUATED_SCENE`;
+- `DISTRICT_ARCHIVE_TERMINAL_CLOSEUP`;
+- `WORKSHOP_ROW_RUMOR_SCENE`;
+- `PROP_DIAGNOSTIC_READER`;
+- `FX_TRACE_STRAIN`;
+- `UI_MAP_TRAVEL_TRANSITION`;
+- reusable exact `EMERGENCY_LIGHT_OVERLAY`;
+- reusable exact `BLACKOUT_SHADOW_OVERLAY`.
+
+Caution:
+- missing exact ID does not prove no equivalent pixels/state treatment exist under another ID;
+- audit equivalents before creating anything new.
+
+## 7.7 Naming drift identified
+
+Batch unit 030 is planned as:
+`ITEM_DEAD_RELAY_INTACT`
+
+Current Wave B integration uses:
+`ITEM_DEAD_RELAY_ICON`
+
+This is an ID/contract reconciliation item.
+
+Do not create a second intact relay asset merely to satisfy the planned name.
+
+Resolve by choosing:
+- canonical ID;
+- compatibility alias;
+- manifest/catalog correction;
+- migration if necessary.
+
+## 7.8 Open refinement lines that must not be silently promoted
+
+Known draft refinement lines include:
+- PR #22 — player silhouette/current loadout and approved Jack reference work;
+- PR #27 — Service Tunnel scene refinement;
+- PR #28 — Service Tunnel/infrastructure atlas composition detail;
+- PR #30 — Quiet Stair scene refinement;
+- PR #31 — Service Tunnel ambient animation.
+
+They are evidence and candidate work.
+
+They are not automatically canonical merely because they are newer.
+
+Each must be:
+1. compared to current authority;
+2. reviewed for stable IDs/state ownership;
+3. verified at its exact head;
+4. either promoted deliberately or rejected/superseded.
+
+## 7.9 Per-area production packets
+
+The detailed matrix now defines the packet needs for:
+- Depot Plaza;
+- Workshop Row;
+- Municipal Archive;
+- Platform Nine;
+- Relay Workbench;
+- Gate Twelve;
+- Quiet Stair;
+- Service Tunnel;
+- Trace Chamber.
+
+Each future packet must include:
+- geometry envelope;
+- material family;
+- palette/lighting;
+- existing assets;
+- missing assets;
+- actors;
+- props;
+- state overlays;
+- animation;
+- panel-safe zones;
+- authoritative bindings;
+- QA.
+
+## 7.10 Character panels
+
+Step 7 confirms that character panels need their own asset/data contract.
+
+A future room panel may require:
+- canonical 64x64 portrait;
+- display name;
+- actor focus state;
+- relationship/status summary if player-safe;
+- role/faction marker if player-safe;
+- dialogue/emotion state;
+- interaction controls.
+
+The room actor and portrait must share identity.
+
+The panel cannot decide actor presence.
+
+Target prerequisite:
+a player-safe actor projection such as `GameSnapshot.actors`.
+
+## 7.11 Production ordering
+
+Gate Twelve production order after this audit:
+
+### P0 — reconciliation
+- approved Jack reference/blueprint;
+- manifest/code drift;
+- relay ID naming;
+- open refinement review.
+
+### P1 — missing current-region assets
+- Platform Nine evacuated;
+- Archive terminal closeup;
+- Workshop rumor state;
+- diagnostic reader;
+- Trace Strain;
+- reusable emergency/shadow overlays where no equivalent already satisfies the contract.
+
+### P2 — art-quality replacement
+- review current integrated scene masters at native scale;
+- replace weak geometric/provisional masters while preserving IDs/bindings;
+- review final map landmarks/materials.
+
+### P3 — actor/panel system
+- projected actor contract;
+- Tamsin/Jack portraits;
+- room actor variants;
+- panel composition.
+
+### P4 — animation
+- keep Service Tunnel ambient loop small and reusable;
+- state-driven Gate/Plaza effects;
+- character animation only when consumed by gameplay.
+
+### P5 — expansion
+- world-scale tiles/buildings/characters only after world schemas are locked.
+
+## 7.12 Step 7 locked decisions
+
+1. Batch 001 is an inventory baseline, not permission to regenerate assets blindly.
+2. Integrated runtime state and final art approval remain separate.
+3. The 100-unit current-slice matrix is now the required duplication-prevention audit.
+4. Jack's approved character reference is preserved as visual authority input.
+5. Tamsin/courier room-actor code and manifest scope need reconciliation.
+6. relay unit #030 naming drift must be resolved before duplicate production.
+7. exact missing scene/state assets are explicitly tracked.
+8. open PR refinements are candidates, not canonical promotion.
+9. character panels require player-safe actor projection.
+10. per-area asset packets are now safe to author using Steps 5–7.
+
+---
+
+# 8. Planned authoring sequence
 
 The remaining master plan will be completed in this order:
 
@@ -2881,7 +3152,7 @@ The remaining master plan will be completed in this order:
 4. **Per-zone function** — COMPLETE.
 5. **Geometry contract** — COMPLETE.
 6. **Material and visual language** — COMPLETE.
-7. **Asset decomposition** — what must be built one asset at a time.
+7. **Asset decomposition** — COMPLETE.
 8. **Application UX plan** — Map/Story/location navigation and high-use flows.
 9. **State-layer plan** — discovery, reachability, events, blackout, Trace effects.
 10. **Performance/section strategy** — loading boundaries and mobile constraints.
@@ -2894,7 +3165,7 @@ The remaining master plan will be completed in this order:
 
 # Continuity footnote / next-session handoff
 
-**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract; Step 6 — material and visual language.
+**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract; Step 6 — material and visual language; Step 7 — asset decomposition.
 
 **Key decisions preserved for future sessions:**
 - active repository is `jbob-coder/Text-rpg-game`;
@@ -2907,6 +3178,6 @@ The remaining master plan will be completed in this order:
 - UI must not become the source of truth for gameplay state;
 - final map must be constructed as modular game content, piece by piece, not generated as one flattened image.
 
-**Next unfinished step:** Step 7 — asset decomposition: enumerate the exact map/scene/building/prop/overlay/actor/panel assets needed per location, classify each as existing/integrated/provisional/missing/rebuild, and define production order/dependencies.
+**Next unfinished step:** Step 8 — Application UX plan: define how Story, room actors/panels, Map, location detail, navigation and high-use interactions work together on phone without moving authority into Compose.
 
-**Geometry and visual language are now sufficiently locked for asset packet authoring. Do not mass-produce world-scale assets before the Step 7 inventory prevents duplication.**
+**Steps 5–7 now permit bounded Gate Twelve asset packets and replacement work. World-scale mass production remains gated by world/system schemas.**
