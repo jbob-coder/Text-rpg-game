@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-30 20:07 AST
+Updated: 2026-10-02 07:32 AST
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -68,29 +68,88 @@ This section supersedes older statements about the top-level product objective w
 - DONE WHEN: Application UX, state layers, loading, implementation order, verification, migration and execution handoff are documented.
 
 ### TASK D-006 — Existing-state repository audit
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
 - PRIORITY: `P0`
+- CURRENT: `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md` exists and classifies major areas; exact code/consumer audit still needs to be completed against live branch HEADs.
 - OUTPUT: subsystem matrix with KEEP / EXTEND / REWORK / REPLACE / REMOVE / UNKNOWN and exact branch/HEAD evidence.
 
 ### TASK D-007 — Progression / class / rank master
-- STATUS: `PENDING`
+- STATUS: `DONE`
 - PRIORITY: `P1`
+- DOCUMENT: `docs/systems/PROGRESSION_MASTER_PLAN.md`
+- RESULT: progression/class/rank contract exists; implementation/migration remains separate.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
 
 ### TASK D-008 — NPC / social / dynamic-rival master
-- STATUS: `PENDING`
+- STATUS: `DONE`
 - PRIORITY: `P1`
+- DOCUMENT: `docs/systems/NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`
+- RESULT: NPC memory/social/hierarchy/persistent-adversary direction documented; implementation remains separate.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
 
 ### TASK D-009 — Tactical combat master
-- STATUS: `PENDING`
+- STATUS: `DONE`
 - PRIORITY: `P1`
+- DOCUMENT: `docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md`
+- RESULT: original tactical-combat contract created without adopting protected XCOM presentation/terminology.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
 
 ### TASK D-010 — Items / economy / loot master
-- STATUS: `PENDING`
+- STATUS: `DONE`
 - PRIORITY: `P1`
+- DOCUMENT: `docs/systems/ITEM_ECONOMY_LOOT_MASTER_PLAN.md`
+- RESULT: item/equipment/accessory/economy/loot provenance contract created.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
 
 ### TASK D-011 — Application UX master
-- STATUS: `PENDING`
+- STATUS: `DONE`
 - PRIORITY: `P1`
+- DOCUMENT: `docs/android/APPLICATION_UX_MASTER_PLAN.md`
+- RESULT: application-wide target surfaces and player-safe presentation ownership documented.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-013 — Documentation corpus architecture
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/DOCUMENTATION_CORPUS_ARCHITECTURE.md`
+- RESULT: long-range volume, branch, record, cross-reference, counting and reconstruction rules documented.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-014 — World geography standard
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/world/WORLD_GEOGRAPHY_STANDARD.md`
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-015 — Political entity standard/catalog seed
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/world/WORLD_POLITICAL_ENTITIES.md`
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-016 — Settlement catalog standard
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/world/WORLD_SETTLEMENT_CATALOG.md`
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-017 — World travel/route standard
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/world/WORLD_TRAVEL_AND_ROUTES.md`
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-018 — Room actor/panel/overlay reuse packet standard
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/assets/ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md`
+- RESULT: area packet, character-in-room, portrait/focus-panel, text/signage, overlay and reuse compatibility rules documented.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-019 — Reproducible documentation/world/asset inventory
+- STATUS: `PENDING`
+- PRIORITY: `P0`
+- OUTPUT: reproducible counts for active docs, words, records, assets, world entities, tasks, tests and evidence without assuming the owner's ambiguous numeric units.
 
 ### TASK D-012 — Final APK keep/rebuild matrix and execution
 - STATUS: `BLOCKED`
