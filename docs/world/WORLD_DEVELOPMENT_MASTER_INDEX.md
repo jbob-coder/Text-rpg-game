@@ -826,3 +826,35 @@ Still required at world scale:
 - loot provenance catalog;
 - exact Gate Twelve parent settlement/city decision;
 - macroregion and political-world canon.
+
+
+# 29. World schema coverage after 2026-10-02 batch
+
+Materialized child authorities now cover:
+- geography/coordinates;
+- political entities;
+- settlements;
+- routes/travel;
+- ecosystems/resources;
+- beast zones;
+- population/citizen hierarchy;
+- balance/level bands;
+- loot provenance;
+- NPC population/distribution.
+
+Therefore the next world-development phase is **catalog population and canon decisions**, not inventing more overlapping schemas.
+
+Still undecided and intentionally not filled:
+- Gate Twelve parent city/settlement;
+- macroregions/continents;
+- named kingdoms/states;
+- world political borders;
+- full ecosystem map;
+- resource belts;
+- beast taxonomy/species catalog;
+- population totals;
+- final world threat-band names;
+- full travel scale;
+- full world map.
+
+Those decisions should be made in ordered batches using the standards above.
