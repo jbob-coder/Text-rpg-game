@@ -8,6 +8,41 @@ The current Compose block avatar is a runtime placeholder. The following specifi
 
 # 1. Player Character — Reusable Paper-Doll Master
 
+## 1.0 Player identity authority update — Jack Wilson
+
+The earlier v1 blueprint described the first player master as a technically generic/customizable body-frame because no approved fixed visual identity had yet been available on that branch.
+
+That assumption is now superseded for the current player presentation by the owner-approved reference:
+
+- reference ID: `UI_REFERENCE_CHARACTER_APPROVED_V1`;
+- scope: Jack Wilson Character-tab visual identity/presentation;
+- durable reference audit: `docs/assets/references/UI_REFERENCE_CHARACTER_APPROVED_V1.md`;
+- reference source is not itself a runtime sprite.
+
+### Locked consequence
+
+The 32x48 rig, pivots, equipment anchors, paper-doll separation and source-native pixel rules below remain valid technical contracts.
+
+The **visual identity target is no longer generic**. Future player gameplay sprites, portraits, Character panels, equipment-aligned silhouettes and animation masters must preserve Jack Wilson's approved identity and the approved reference's human-readable non-chibi proportions, hair/face silhouette and layered-clothing/equipment presentation.
+
+### What the approved reference does not decide
+
+It does not define:
+- gameplay statistics;
+- inventory/equipment legality;
+- hidden state;
+- collision/hitboxes;
+- exact unseen turnaround views;
+- exact 32x48 anchor positions;
+- animation timing.
+
+Those remain governed by the engine and this technical blueprint.
+
+### Migration rule
+
+Any older generic player placeholder may remain as a fallback until a replacement is integrated and verified, but it must not be treated as the final visual identity. New art must not regenerate Jack from prose memory when the approved reference is available.
+
+
 ## 1.1 Role
 
 The player must remain visually present in the primary gameplay screen and Character screen. The visual is a projection of authoritative identity/equipment/status state.

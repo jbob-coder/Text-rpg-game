@@ -1,5 +1,8 @@
 # Conversation Context — Gate Twelve Map / Pixel Art / Animation
 
+> **Priority-program update (2026-10-01):** this Gate Twelve-specific log remains valid but is now subordinate to `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` and `docs/GAME_CONTEXT_LOGS/2026-10-01_MASTER_PROJECT_PRIORITY_AND_SCOPE.md`. Gate Twelve remains the first detailed proof region inside the larger documentation-first program.
+
+
 Recorded: 2026-10-01 AST
 Repository: `jbob-coder/Text-rpg-game`
 Working branch: `docs/gate-twelve-map-pixel-asset-blueprint`

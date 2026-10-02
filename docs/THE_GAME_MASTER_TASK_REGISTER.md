@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-30 20:07 AST
+Updated: 2026-10-02 08:16 AST
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -16,6 +16,203 @@ This is the repository-native operational index for future coding agents. It int
 6. Chat memory / historical summaries.
 
 Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPLETED_AT` in America/Puerto_Rico time. Unknown historical times use `NOT_RECORDED`.
+
+## 2026-10-01 PRIORITY OVERRIDE — MASTER DOCUMENTATION PROGRAM
+
+**Priority repository:** `jbob-coder/Text-rpg-game`  
+**Priority mode:** documentation-first; broad implementation expansion follows written contracts.  
+**Current program:** [`MASTER_GAME_DEVELOPMENT_PROGRAM.md`](MASTER_GAME_DEVELOPMENT_PROGRAM.md)  
+**Cross-reference:** [`DOCUMENTATION_CROSS_REFERENCE_MATRIX.md`](DOCUMENTATION_CROSS_REFERENCE_MATRIX.md)
+
+This section supersedes older statements about the top-level product objective while preserving their exact historical verification evidence.
+
+### TASK D-000 — Establish repository-wide master documentation authority
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- RESULT: master development program created; current repository designated priority game project; permissions, prohibitions, domain volumes, execution gates and final APK sequencing documented.
+- BRANCH: `docs/master-game-development-program`
+- COMPLETED_AT: `2026-10-01 AST`
+
+### TASK D-001 — Build documentation cross-reference matrix
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- RESULT: major existing and planned documents mapped to scope, dependencies, implementation consumers and required follow-ups.
+- COMPLETED_AT: `2026-10-01 AST`
+
+### TASK D-002 — Define pixel-art runtime composition
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- RESULT: environment/prop/overlay/room-actor/player/FX/panel composition contract documented, including reuse compatibility and current-vs-planned asset-stage guidance.
+- DOCUMENT: `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`
+- COMPLETED_AT: `2026-10-01 AST`
+
+### TASK D-003 — Establish world-development master index
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- RESULT: world hierarchy, coordinate layers, places, political entities, settlements, ecosystems, resources, beasts, loot/items, social hierarchy, NPCs, balance, tactical combat integration and dynamic-rival direction decomposed into future child standards.
+- DOCUMENT: `docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md`
+- COMPLETED_AT: `2026-10-01 AST`
+
+### TASK D-004 — Document final Android/APK rebuild program
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- RESULT: final APK work defined as late-stage keep/extend/rework/replace/remove migration driven by completed system contracts.
+- DOCUMENT: `docs/android/APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md`
+- COMPLETED_AT: `2026-10-01 AST`
+
+### TASK D-005 — Finish Gate Twelve region master plan Steps 8–14
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- RESULT: Steps 1–14 are complete as a first-pass proof-region contract covering UX, state layers, loading/performance, implementation order, verification, migration/removal, and execution handoff.
+- DOCUMENT: `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`
+- NEXT CONSUMER: TASK D-006 exact existing-state audit and Gate Twelve implementation/provenance reconciliation.
+- COMPLETED_AT: `2026-10-02 08:01 AST`.
+
+### TASK D-006 — Existing-state repository audit
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- CURRENT: `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md` classifies major areas and `docs/LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md` now records the live program HEAD, open-PR landscape, repository tree counts, current pixel/runtime families, world/system state, and immediate reconciliation controls.
+- REMAINING: complete file/consumer-level mapping against the stacked implementation PR heads and reconcile conflicting/stale implementations.
+- OUTPUT: subsystem matrix with KEEP / EXTEND / REWORK / REPLACE / REMOVE / UNKNOWN and exact branch/HEAD evidence.
+
+### TASK D-007 — Progression / class / rank master
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/systems/PROGRESSION_MASTER_PLAN.md`
+- RESULT: progression/class/rank contract exists; implementation/migration remains separate.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-008 — NPC / social / dynamic-rival master
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/systems/NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`
+- RESULT: NPC memory/social/hierarchy/persistent-adversary direction documented; implementation remains separate.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-009 — Tactical combat master
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md`
+- RESULT: original tactical-combat contract created without adopting protected XCOM presentation/terminology.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-010 — Items / economy / loot master
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/systems/ITEM_ECONOMY_LOOT_MASTER_PLAN.md`
+- RESULT: item/equipment/accessory/economy/loot provenance contract created.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-011 — Application UX master
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/android/APPLICATION_UX_MASTER_PLAN.md`
+- RESULT: application-wide target surfaces and player-safe presentation ownership documented.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-013 — Documentation corpus architecture
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/DOCUMENTATION_CORPUS_ARCHITECTURE.md`
+- RESULT: long-range volume, branch, record, cross-reference, counting and reconstruction rules documented.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-014 — World geography standard
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/world/WORLD_GEOGRAPHY_STANDARD.md`
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-015 — Political entity standard/catalog seed
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/world/WORLD_POLITICAL_ENTITIES.md`
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-016 — Settlement catalog standard
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/world/WORLD_SETTLEMENT_CATALOG.md`
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-017 — World travel/route standard
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/world/WORLD_TRAVEL_AND_ROUTES.md`
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-018 — Room actor/panel/overlay reuse packet standard
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/assets/ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md`
+- RESULT: area packet, character-in-room, portrait/focus-panel, text/signage, overlay and reuse compatibility rules documented.
+- COMPLETED_AT: `2026-10-02 07:32 AST`
+
+### TASK D-019 — Reproducible documentation/world/asset inventory
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- CURRENT:
+  - `docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-02.md` records exact recursive-tree structural counts for the audited program HEAD.
+  - `tools/documentation_inventory.py` provides a deterministic standard-library local inventory path for files, extensions, Markdown words, documentation families and test-source files.
+- REMAINING:
+  - execute/persist the tool from a complete checkout of the exact program HEAD;
+  - add structured world/domain record extractors;
+  - add asset-stage/manifest counts;
+  - separate executed-test evidence from test-source counts;
+  - define/confirm how owner numeric targets map to reproducible units.
+- OUTPUT: reproducible counts for active docs, words, records, assets, world entities, tasks, tests and evidence without assuming the owner's ambiguous numeric units.
+
+### TASK D-020 — Reconcile stacked pixel/application implementation branches
+- STATUS: `PENDING`
+- PRIORITY: `P0`
+- INPUT: live audit plus open PRs #7–#31.
+- OUTPUT: one branch/provenance matrix showing which visual/application implementation survives, which is superseded, and which needs migration.
+
+### TASK D-021 — Map Android consumers to final UX/domain contracts
+- STATUS: `PENDING`
+- PRIORITY: `P0`
+- OUTPUT: screen/component -> player-safe projection -> asset packet -> domain owner -> tests/evidence mapping before broad UI replacement.
+
+### TASK D-022 — Trace expanded owner directive to repository authorities
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/OWNER_DIRECTIVE_TRACEABILITY_MATRIX_2026-10-02.md`
+- RESULT: every major clause of the expanded 2026-10-02 directive is mapped to an owner document, current state, and next action; missing child contracts are explicitly identified.
+- COMPLETED_AT: `2026-10-02 08:16 AST`
+
+### TASK D-023 — Player activities / life-loop master
+- STATUS: `DONE`
+- PRIORITY: `P1`
+- DOCUMENT: `docs/systems/PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md`
+- RESULT: active/timed/scheduled/background activities, time, interruption, concurrency, training/study/work/recovery/social/diagnostic boundaries, persistence and UI projection are documented.
+- COMPLETED_AT: `2026-10-02 08:16 AST`
+
+### TASK D-024 — Operational world coordinate and scale standard
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/world/WORLD_COORDINATE_AND_SCALE_STANDARD.md`
+- RESULT: W0–W4 operational coordinate rules, units/origins/bounds/transforms, logical/presentation separation, route anchors, verticality, versioning and validation are documented.
+- COMPLETED_AT: `2026-10-02 08:16 AST`
+
+### TASK D-025 — Asset provenance registry seed
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/assets/ASSET_PROVENANCE_REGISTRY.md`
+- CURRENT: provenance schema and initial 24-raster seed/reconciliation queue documented.
+- REMAINING: exact source-master/hash/branch/consumer/QA reconciliation for each asset family.
+
+### TASK D-026 — Android consumer/projection map
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`
+- CURRENT: source-grounded `GameSnapshot`/`GameEngine` surface map plus major screen ownership and missing projection contracts documented.
+- REMAINING: line-by-line composable/ViewModel/bridge consumer audit and test mapping.
+
+### TASK D-012 — Final APK keep/rebuild matrix and execution
+- STATUS: `BLOCKED`
+- PRIORITY: `LATE-STAGE`
+- BLOCKED_BY: domain documentation contracts and migration plans.
+
 
 ## Current repository baseline
 
@@ -481,3 +678,58 @@ Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified s
 - VERIFICATION: repository files were created on `docs/gate-twelve-map-pixel-asset-blueprint`; runtime animation remains unimplemented and unverified.
 - NEXT: inspect the exact animation rendering path and start the smallest reversible Service Tunnel ambient slice only after confirming no existing asset/overlay duplicates it.
 - COMPLETED_AT: —
+
+## 2026-10-02 DOCUMENTATION EXPANSION BATCH
+
+### TASK D-013 — Decompose expanded owner directive
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md`
+- RESULT: documentation/world/system/visual/APK work split into ordered migration-gated phases.
+
+### TASK D-014 — Create rework decision matrix
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md`
+- NOTE: high-level matrix complete; deep per-file audit remains TASK D-006.
+
+### TASK D-015 — Create pixel art production/reuse ledger
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/assets/PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md`
+- RESULT: actor/panel/overlay/reuse rules and Gate Twelve production packet needs recorded.
+
+### TASK D-016 — Create world-scale coordinate/schema blueprint
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/world/WORLD_SCALE_DOCUMENTATION_BLUEPRINT.md`
+- RESULT: schema-first world hierarchy recorded; mass world generation remains gated.
+
+### TASK D-017 — Create gameplay rebuild matrix
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md`
+- RESULT: current systems and target stats/skills/classes/ranks/social/combat/adversary systems classified.
+
+### TASK D-018 — Create final APK reconstruction matrix
+- STATUS: `DONE`
+- PRIORITY: `P0 / LATE-STAGE AUTHORITY`
+- OUTPUT: `docs/android/APK_FINAL_RECONSTRUCTION_MATRIX.md`
+- RESULT: final screen/component keep/rework/replace/remove sequence documented; execution remains blocked.
+
+### TASK D-019 — Track requested documentation scale
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/DOCUMENTATION_PROGRESS_LEDGER.md`
+- RESULT: numeric targets preserved without inventing units; reproducible count audit still pending.
+
+### TASK D-020 — Finish Gate Twelve Step 8–14
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- CURRENT: Steps 1–7 complete; Application UX is next.
+
+### TASK D-021 — Deep source-file existing-state audit
+- STATUS: `PENDING`
+- PRIORITY: `P0`
+- OUTPUT: exact module/component/content/asset/save/test inventory with disposition and branch/HEAD evidence.
+- RELATED: TASK D-006.

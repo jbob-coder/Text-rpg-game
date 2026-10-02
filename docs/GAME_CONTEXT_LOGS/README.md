@@ -21,4 +21,6 @@ Routine reversible repository decisions may be made without repeated confirmatio
 
 ## Active records
 
+- [2026-10-01_MASTER_PROJECT_PRIORITY_AND_SCOPE.md](2026-10-01_MASTER_PROJECT_PRIORITY_AND_SCOPE.md) — repository priority, broad development permission, documentation-first program, world/pixel/APK scope.
+
 - [2026-10-01_GATE_TWELVE_MAP_ART_ANIMATION.md](2026-10-01_GATE_TWELVE_MAP_ART_ANIMATION.md)

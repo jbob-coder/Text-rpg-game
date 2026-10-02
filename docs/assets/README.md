@@ -2,6 +2,11 @@
 
 Read in this order before generating or integrating visual assets:
 
+0. [../MASTER_GAME_DEVELOPMENT_PROGRAM.md](../MASTER_GAME_DEVELOPMENT_PROGRAM.md)
+   - repository-wide priority, permissions, system volumes and execution gates.
+0. [PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md](PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md)
+   - runtime composition of environments, props, overlays, room actors, player, equipment, FX and character panels; includes reuse compatibility and migration rules.
+
 1. [PIXEL_ASSET_MASTER_PLAN.md](PIXEL_ASSET_MASTER_PLAN.md)
    - native grids, global pixel rules, character rig, scene/map/item standards, repository paths, lifecycle and quality gates.
 2. [CHARACTER_PIXEL_BLUEPRINTS.md](CHARACTER_PIXEL_BLUEPRINTS.md)
@@ -102,3 +107,22 @@ It is accepted only for broad style direction. Its invented item/NPC/location de
 - `manifests/BATCH_001_WAVE_C_CURRENT_SCENES.json` — 9/9 current named-location base masters plus Gate Twelve, tunnel-aftershock and Trace Chamber training overlays.
 
 The Wave C runtime parent `1c7e54e548ab3c28819af0b85ae8cbba53aff827` passed workflow `36384772701`: Python 301/301, Android build/instrumentation gates, and API 35 emulator 10/10. Native-scale art review and physical Galaxy A03 visual QA remain pending.
+
+- [GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md](GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md)
+  - Step-7 evidence matrix for all Batch 001 units plus Gate Twelve per-area asset decomposition, current stage, manifest/code drift, missing exact IDs and open refinement lines.
+
+## Pixel production/reuse ledger
+
+Use [PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md](PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md) for:
+- current-vs-required asset stages;
+- Jack/Tamsin production needs;
+- room actor + portrait/panel composition;
+- overlay/text/signage rules;
+- reuse compatibility;
+- Gate Twelve per-area production packets.
+
+It supplements, not replaces, the runtime composition standard and exact asset manifests.
+
+
+## Provenance
+- `ASSET_PROVENANCE_REGISTRY.md` — branch-aware source/reference/raster/code provenance, production stage, supersession, compatibility and reconciliation queue.
