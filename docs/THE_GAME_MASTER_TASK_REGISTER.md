@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-09-30 20:07 AST
+Updated: 2026-10-02 12:01 AST
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -16,6 +16,43 @@ This is the repository-native operational index for future coding agents. It int
 6. Chat memory / historical summaries.
 
 Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPLETED_AT` in America/Puerto_Rico time. Unknown historical times use `NOT_RECORDED`.
+
+## Current documentation priority
+
+- PRIORITY REPOSITORY: `jbob-coder/Text-rpg-game`
+- PROGRAM BRANCH: `docs/text-pixel-rpg-master-program`
+- PROGRAM AUTHORITY: `docs/DOCUMENTATION_MASTER_PROGRAM.md`
+- CROSS-REFERENCE INDEX: `docs/DOCUMENTATION_INDEX.md`
+- VISUAL/APPLICATION CONTRACT: `docs/PIXEL_ART_INTEGRATION_CONTRACT.md`
+- REGIONAL PLAN: `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`
+- MODE: documentation-first; implementation must follow explicit subsystem prerequisites.
+- DESTRUCTIVE APK RECONSTRUCTION: deferred until the application audit and KEEP/UPGRADE/REFACTOR/REPLACE/RETIRE matrix are documented.
+
+### TASK D-001 — Master documentation architecture
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- COMPLETED SO FAR:
+  - owner directive decomposed into a repository-native program;
+  - priority repository declared;
+  - documentation dependency graph created;
+  - external reference families classified;
+  - pixel-art/contextual presentation contract created;
+  - existing Gate Twelve Steps 1–4 retained and subordinated to the global program.
+- NEXT:
+  - global world/map schema;
+  - world atlas hierarchy;
+  - mechanics reconciliation;
+  - application audit/rebuild matrix.
+- DONE WHEN: the program has complete cross-referenced world/system/application/migration documentation sufficient to execute reconstruction without recovering intent from chat.
+- COMPLETED_AT: —
+
+### TASK D-002 — Pixel art/contextual panel integration
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- CURRENT CONTRACT: `docs/PIXEL_ART_INTEGRATION_CONTRACT.md`
+- IMPLEMENTATION: not started by this documentation task.
+- NEXT: audit player-safe character-presence projection and map each current asset family to the contract.
+- COMPLETED_AT: —
 
 ## Current repository baseline
 
