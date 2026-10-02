@@ -199,6 +199,37 @@ class CharacterStatsSectionTest {
     }
 
     @Test
+    fun mapServiceTunnelUsesExistingMaintenanceCorridorPixelArt() {
+        val mapSnapshot = snapshot.copy(
+            worldMap = GameWorldMap(
+                title = "Gate Twelve District",
+                currentLocation = "PLATFORM_NINE",
+                nodes = listOf(
+                    GameMapNode("PLATFORM_NINE", "Platform Nine", "Evacuation platform inside the municipal tram depot.", 18.0, 36.0, current = true, reachable = true),
+                    GameMapNode("SERVICE_TUNNEL", "Service Tunnel", "Maintenance traversal below the evacuation route.", 71.0, 61.0, current = false, reachable = true),
+                ),
+                edges = listOf(GameMapEdge("PLATFORM_NINE", "SERVICE_TUNNEL")),
+            ),
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
+                    MapSection(
+                        snapshot = mapSnapshot,
+                        busy = false,
+                        onTravel = {},
+                    )
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("map-node-SERVICE_TUNNEL").performScrollTo().performClick()
+        composeRule.onNodeWithTag("map-arrival-preview-SERVICE_TUNNEL").performScrollTo().assertIsDisplayed()
+        saveScreenshot("map-service-tunnel-preview-320dp")
+    }
+
+    @Test
     fun inventoryPhoneUsesPixelLoadoutStripBagGridAndItemDetail() {
         val bagSnapshot = snapshot.copy(
             inventory = snapshot.inventory.copy(

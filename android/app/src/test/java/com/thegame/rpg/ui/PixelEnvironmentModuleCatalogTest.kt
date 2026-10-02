@@ -69,7 +69,7 @@ class PixelEnvironmentModuleCatalogTest {
             PixelEnvironmentModuleCatalog.MUNICIPAL_ARCHIVE_EXTERIOR_ID,
             PixelEnvironmentModuleCatalog.arrivalPreview("DISTRICT_ARCHIVE")?.assetId,
         )
-        assertEquals(null, PixelEnvironmentModuleCatalog.arrivalPreview("SERVICE_TUNNEL"))
+        assertEquals(PixelEnvironmentModuleCatalog.MAINTENANCE_CORRIDOR_CONNECTOR_ID, PixelEnvironmentModuleCatalog.arrivalPreview("SERVICE_TUNNEL")?.assetId)
         assertEquals(null, PixelEnvironmentModuleCatalog.arrivalPreview("UNKNOWN_LOCATION"))
     }
 

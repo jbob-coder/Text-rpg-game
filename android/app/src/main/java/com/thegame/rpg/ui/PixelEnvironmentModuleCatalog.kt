@@ -176,6 +176,7 @@ object PixelEnvironmentModuleCatalog {
     fun arrivalPreview(locationId: String): PixelSprite? = when (locationId) {
         "DISTRICT_PLAZA" -> depotFacadeExterior
         "DISTRICT_ARCHIVE" -> municipalArchiveExterior
+        "SERVICE_TUNNEL" -> maintenanceCorridorConnector
         else -> null
     }
 
