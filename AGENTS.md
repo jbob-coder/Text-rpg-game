@@ -24,7 +24,7 @@ Repository files and fresh execution evidence outrank remembered chat context. O
 - Repository: `jbob-coder/Text-rpg-game`.
 - Program authority branch: `docs/master-game-development-program`.
 - Current mode: **documentation first**; broad implementation expansion follows written contracts.
-- Gate Twelve is the first proof region.
+- Gate Twelve is the first proof region; its Steps 1–14 planning packet is complete, and the next P0 work is exact implementation/asset audit plus reproducible corpus inventory.
 - `main` is not the canonical implementation branch. Do not promote, rewrite, or merge `main` merely because it is the default branch.
 - Historical V6 and Android branches remain evidence sources, not top-level product authority.
 - The old black-screen incident is historically closed by the repository-owned Compose/Chaquopy client on representative emulator evidence; physical Galaxy A03 validation remains a separate gate and must not be inferred from emulator results.
