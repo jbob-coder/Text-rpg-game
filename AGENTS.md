@@ -6,10 +6,13 @@ This file is the repository entry point for coding agents and automated assistan
 
 Before changing code or documentation, read these in order:
 
-1. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — current objective, task queue, blockers, completion timestamps, Android black-screen status, and cross-chat continuity.
-2. `docs/IMPLEMENTATION_STATUS.md` — verified engine/repository state.
-3. `docs/V6_STABILIZATION_HANDOFF.md` — exact V6 stabilization evidence, runtime defects, repairs, and verification boundaries.
-4. Relevant source/tests for the task you are actually changing.
+1. `docs/program/README.md` — current documentation-first program index and domain routing.
+2. `docs/program/00_OWNER_DIRECTIVE_2026-10-02.md` — preserved current owner mandate and priority direction.
+3. `docs/program/09_DECISION_GAP_REGISTER.md` — unresolved decisions that must not be silently treated as canon.
+4. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — operational task queue, blockers, implementation evidence, and historical continuity.
+5. `docs/IMPLEMENTATION_STATUS.md` — verified engine/repository state for the stabilization line.
+6. Relevant domain program under `docs/program/`, then the relevant source/tests for the task actually being changed.
+7. `docs/V6_STABILIZATION_HANDOFF.md` when the task touches V6 stabilization history/contracts.
 
 Repository files and fresh execution evidence outrank remembered chat context.
 
