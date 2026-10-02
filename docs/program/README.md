@@ -42,7 +42,8 @@ When a newer explicit decision supersedes an older note, preserve both and mark 
 8. [13 Beast Entity / Ecosystem / Scene Presence](13_BEAST_ENTITY_ECOSYSTEM_AND_SCENE_PRESENCE_STANDARD.md)
 9. [14 Documentation Coverage Matrix](14_DOCUMENTATION_COVERAGE_AND_EXPECTATION_MATRIX.md)
 10. [15 Contextual Beast Presence Addendum](15_CONTEXTUAL_BEAST_PRESENCE_ADDENDUM.md)
-11. Existing specialized documents referenced by the chosen domain.
+11. [16 Session Decision Log — 2026-10-02](16_SESSION_DECISION_LOG_2026-10-02.md)
+12. Existing specialized documents referenced by the chosen domain.
 
 ## Program rule
 
