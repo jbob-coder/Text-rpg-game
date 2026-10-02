@@ -1,5 +1,17 @@
 # AGENTS.md — Text RPG Game
 
+## Current program authority
+
+For THE GAME / Text RPG + Pixel Art Stack, begin with:
+1. `docs/PROJECT_PRIORITY_AND_CONTEXT_ROUTING.md`
+2. `docs/MASTER_DOCUMENTATION_PROGRAM.md`
+3. `docs/DOCUMENTATION_INDEX.md`
+4. `docs/DECISION_AND_GAP_REGISTER.md`
+5. `docs/THE_GAME_MASTER_TASK_REGISTER.md`
+
+`jbob-coder/Text-rpg-game` is the priority repository for this game. Other game repositories are non-authoritative unless the owner explicitly requests migration.
+
+
 This file is the repository entry point for coding agents and automated assistants.
 
 ## Read first
