@@ -172,3 +172,8 @@ PR #33 at this checkpoint reported:
 - 42 deletions.
 
 The inventory script itself was syntax-checked and smoke-tested against a temporary local fixture. A complete exact-checkout run remains required before its Markdown word counts or local-checkout counts are promoted as repository evidence.
+
+
+## 2026-10-02 reconstruction-blueprint continuity note
+
+The program branch advanced after the last structural checkpoint with the final reconstruction integration blueprint and linked documentation updates. The counts in this file remain valid only for the exact HEADs explicitly recorded above. This pass does not fabricate new totals; rerun `tools/documentation_inventory.py` from a complete checkout of the new exact HEAD before publishing refreshed file/word/domain counts.
