@@ -17,6 +17,87 @@ This is the repository-native operational index for future coding agents. It int
 
 Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPLETED_AT` in America/Puerto_Rico time. Unknown historical times use `NOT_RECORDED`.
 
+## 2026-10-01 PRIORITY OVERRIDE — MASTER DOCUMENTATION PROGRAM
+
+**Priority repository:** `jbob-coder/Text-rpg-game`  
+**Priority mode:** documentation-first; broad implementation expansion follows written contracts.  
+**Current program:** [`MASTER_GAME_DEVELOPMENT_PROGRAM.md`](MASTER_GAME_DEVELOPMENT_PROGRAM.md)  
+**Cross-reference:** [`DOCUMENTATION_CROSS_REFERENCE_MATRIX.md`](DOCUMENTATION_CROSS_REFERENCE_MATRIX.md)
+
+This section supersedes older statements about the top-level product objective while preserving their exact historical verification evidence.
+
+### TASK D-000 — Establish repository-wide master documentation authority
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- RESULT: master development program created; current repository designated priority game project; permissions, prohibitions, domain volumes, execution gates and final APK sequencing documented.
+- BRANCH: `docs/master-game-development-program`
+- COMPLETED_AT: `2026-10-01 AST`
+
+### TASK D-001 — Build documentation cross-reference matrix
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- RESULT: major existing and planned documents mapped to scope, dependencies, implementation consumers and required follow-ups.
+- COMPLETED_AT: `2026-10-01 AST`
+
+### TASK D-002 — Define pixel-art runtime composition
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- RESULT: environment/prop/overlay/room-actor/player/FX/panel composition contract documented, including reuse compatibility and current-vs-planned asset-stage guidance.
+- DOCUMENT: `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`
+- COMPLETED_AT: `2026-10-01 AST`
+
+### TASK D-003 — Establish world-development master index
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- RESULT: world hierarchy, coordinate layers, places, political entities, settlements, ecosystems, resources, beasts, loot/items, social hierarchy, NPCs, balance, tactical combat integration and dynamic-rival direction decomposed into future child standards.
+- DOCUMENT: `docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md`
+- COMPLETED_AT: `2026-10-01 AST`
+
+### TASK D-004 — Document final Android/APK rebuild program
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- RESULT: final APK work defined as late-stage keep/extend/rework/replace/remove migration driven by completed system contracts.
+- DOCUMENT: `docs/android/APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md`
+- COMPLETED_AT: `2026-10-01 AST`
+
+### TASK D-005 — Finish Gate Twelve region master plan Steps 5–14
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- CURRENT: Steps 1–4 complete. Step 5 geometry contract is next.
+- DOCUMENT: `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`
+- DONE WHEN: geometry, visual language, asset decomposition, UX, state layers, loading, implementation order, verification, migration and execution handoff are documented.
+
+### TASK D-006 — Existing-state repository audit
+- STATUS: `PENDING`
+- PRIORITY: `P0`
+- OUTPUT: subsystem matrix with KEEP / EXTEND / REWORK / REPLACE / REMOVE / UNKNOWN and exact branch/HEAD evidence.
+
+### TASK D-007 — Progression / class / rank master
+- STATUS: `PENDING`
+- PRIORITY: `P1`
+
+### TASK D-008 — NPC / social / dynamic-rival master
+- STATUS: `PENDING`
+- PRIORITY: `P1`
+
+### TASK D-009 — Tactical combat master
+- STATUS: `PENDING`
+- PRIORITY: `P1`
+
+### TASK D-010 — Items / economy / loot master
+- STATUS: `PENDING`
+- PRIORITY: `P1`
+
+### TASK D-011 — Application UX master
+- STATUS: `PENDING`
+- PRIORITY: `P1`
+
+### TASK D-012 — Final APK keep/rebuild matrix and execution
+- STATUS: `BLOCKED`
+- PRIORITY: `LATE-STAGE`
+- BLOCKED_BY: domain documentation contracts and migration plans.
+
+
 ## Current repository baseline
 
 - Repository: `jbob-coder/Text-rpg-game`
