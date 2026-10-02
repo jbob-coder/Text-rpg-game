@@ -214,7 +214,12 @@ object PixelMapArtCatalog {
             outline(x, 12, 10, 13, 'B', t = 1)
             rect(p, x + 2, 19, 6, 4, 'W')
             rect(p, x + 3, 14, 4, 2, 'Y')
+            // Static workshop-bay material cues stay inside the authored bay box.
+            rect(p, x + 1, 17, 8, 1, 'S')
+            rect(p, x + 1, 24, 8, 1, 'I')
         }
+        // Shared service canopy/utility seam: visual identity only, no footprint change.
+        rect(p, 52, 10, 48, 1, 'S')
         rect(p, 48, 28, 56, 3, 'S')
 
         // Depot Plaza paving and civic frontage.
@@ -259,6 +264,13 @@ object PixelMapArtCatalog {
         // Service Gate Twelve.
         outline(119, 56, 36, 30, 'B')
         rect(p, 125, 62, 24, 16, 'W')
+        // Reinforced jamb strips and bolt clusters stay within the sealed-gate rectangle.
+        rect(p, 127, 64, 2, 12, 'S')
+        rect(p, 145, 64, 2, 12, 'S')
+        listOf(66, 71).forEach { y ->
+            rect(p, 130, y, 1, 1, 'H')
+            rect(p, 143, y, 1, 1, 'H')
+        }
         rect(p, 133, 62, 8, 16, 'I')
         rect(p, 136, 65, 2, 10, 'Y')
         rect(p, 121, 82, 32, 3, 'S')
