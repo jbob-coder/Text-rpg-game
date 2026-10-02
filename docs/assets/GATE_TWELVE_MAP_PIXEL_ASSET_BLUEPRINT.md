@@ -1,5 +1,15 @@
 # Gate Twelve District — Map Geometry to Pixel Asset Blueprint
 
+## Global program pointer
+
+This blueprint is a visual-production child of:
+- `docs/MASTER_DOCUMENTATION_PROGRAM.md`
+- `docs/PIXEL_ART_INTEGRATION_AND_REUSE_STANDARD.md`
+- `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`
+
+The active game is `jbob-coder/Text-rpg-game`; external game maps are reference-only and cannot replace this project's authored geometry/canon.
+
+
 Status: production-planning document.  
 Source branch: `feature/service-tunnel-arrival-pixel-art@2f7f77d7925e94558d219d4ab2340fbb32476717`  
 Map master: `MAP_GATE_TWELVE_DISTRICT_BASE`, 256x144 native pixels.
