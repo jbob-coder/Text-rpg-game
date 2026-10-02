@@ -388,3 +388,8 @@ The program must first know exactly:
 - what can be reused without visual or semantic mismatch.
 
 This audit is a snapshot control for that process.
+
+
+## 2026-10-02 reconstruction-blueprint continuity note
+
+This audit remains an exact historical snapshot for the HEAD recorded at its top. The documentation branch has since advanced with `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` and linked authority/decision/world/visual/systems/APK/task updates. Do not reinterpret the older PR counts or audited HEAD as the current branch head. Fresh source and PR metadata continue to outrank this snapshot.
