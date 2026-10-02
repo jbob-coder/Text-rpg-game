@@ -137,7 +137,7 @@ jobs:
           import struct
           root = Path('android/app/build/outputs/connected_android_test_additional_output')
           files = sorted(root.rglob('*.png'))
-          expected = {'character-320dp.png', 'equipment-jacket-detail.png', 'inventory-320dp.png', 'map-gate-twelve-320dp.png', 'map-service-tunnel-preview-320dp.png', 'relay-workbench-320dp.png', 'service-tunnel-story-320dp.png', 'skills-320dp.png', 'stats-320dp.png', 'stats-perception-detail.png', 'story-opening-actors-320dp.png', 'story-scene-first-320dp.png'}
+          expected = {'character-320dp.png', 'equipment-jacket-detail.png', 'inventory-320dp.png', 'map-gate-twelve-320dp.png', 'map-service-tunnel-preview-320dp.png', 'quiet-stair-story-320dp.png', 'relay-workbench-320dp.png', 'service-tunnel-story-320dp.png', 'skills-320dp.png', 'stats-320dp.png', 'stats-perception-detail.png', 'story-opening-actors-320dp.png', 'story-scene-first-320dp.png'}
           assert len(files) == len(expected) and {file.name for file in files} == expected, f'Missing UI evidence: {[str(file) for file in files]}'
           for file in files:
               content = file.read_bytes()
