@@ -33,7 +33,7 @@ This does **not** erase historical implementation evidence below. Older branch/C
 ### TASK DOC-001 — Documentation program decomposition
 - STATUS: `IN_PROGRESS`
 - RESULT: owner directive preserved; program scaffold created; primary pointers updated; Gate Twelve Master Plan completed through Steps 1–14; contextual visual/panel contract documented; decision gaps synchronized.
-- NEXT: continue broader world/system domain documentation from the open decision-gap register. Global world foundation contracts (hierarchy, coordinate spaces, IDs, region/settlement template, map production sequence) are now present. Implementation remains separate; if implementation is requested, begin with GT-IMP-001 scene-presence projection.
+- NEXT: continue broader domain documentation from the open decision-gap register. A documentation expectation standard and coverage matrix now govern quality. Beast/ecosystem, asset reuse, classes/ranks/skill-tree, tactical combat, persistent adversary, and world-level/balance architectures are now documented at reviewable level. Implementation remains separate; if implementation is requested, begin with GT-IMP-001 scene-presence projection.
 - COMPLETED_AT: —
 
 ## Current repository baseline
