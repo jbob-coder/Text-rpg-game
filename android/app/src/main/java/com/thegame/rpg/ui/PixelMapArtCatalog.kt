@@ -49,6 +49,11 @@ object PixelMapArtCatalog {
         'Y' to Color(0xFFC6A363),
         'H' to Color(0xFFB6B09B),
         'K' to Color(0xFF202729),
+        // Static material accents. These are deliberately close to their parent surfaces so
+        // they read as texture at 1x instead of becoming a second geometry layer.
+        'c' to Color(0xFF343C39),
+        's' to Color(0xFF222C2D),
+        'm' to Color(0xFF171D1F),
     )
 
     private fun pixels(): MutableList<CharArray> =
@@ -117,11 +122,43 @@ object PixelMapArtCatalog {
             rect(p, x, y, 1, 6, 'S')
             rect(p, x - 1, y - 1, 3, 2, 'Y')
         }
+        fun surfaceTexture(
+            x: Int,
+            y: Int,
+            w: Int,
+            h: Int,
+            base: Char,
+            accent: Char,
+            cellWidth: Int,
+            cellHeight: Int,
+        ) {
+            for (yy in y until y + h) {
+                for (xx in x until x + w) {
+                    if (xx !in 0 until WIDTH || yy !in 0 until HEIGHT || p[yy][xx] != base) continue
+                    val localX = xx - x
+                    val localY = yy - y
+                    val row = localY / cellHeight
+                    val horizontalJoint =
+                        localY % cellHeight == cellHeight - 1 &&
+                            ((localX / cellWidth) + row) % 2 == 0
+                    val verticalJoint =
+                        localX % cellWidth == cellWidth - 1 &&
+                            localY % cellHeight in 2 until (cellHeight - 2)
+                    if (horizontalJoint || verticalJoint) p[yy][xx] = accent
+                }
+            }
+        }
 
         // Surface civic district, depot/service belt, then darker maintenance infrastructure.
         rect(p, 0, 0, WIDTH, 48, 'G')
         rect(p, 0, 48, WIDTH, 47, 'D')
         rect(p, 0, 95, WIDTH, 49, 'K')
+
+        // First static texture pass. It is stamped before roads and landmarks so authored
+        // geometry always wins when layers overlap.
+        surfaceTexture(0, 0, WIDTH, 48, 'G', 'c', cellWidth = 16, cellHeight = 8)
+        surfaceTexture(0, 48, WIDTH, 47, 'D', 's', cellWidth = 20, cellHeight = 12)
+        surfaceTexture(0, 95, WIDTH, 49, 'K', 'm', cellWidth = 24, cellHeight = 10)
 
         // Perimeter streets.
         rect(p, 0, 5, WIDTH, 7, 'R')
