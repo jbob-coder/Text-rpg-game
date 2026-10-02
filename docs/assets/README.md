@@ -131,3 +131,8 @@ It supplements, not replaces, the runtime composition standard and exact asset m
 ## Current operational evidence
 
 Earlier Wave A pre-build language is historical. Use [Raster delivery evidence](RASTER_DELIVERY_EVIDENCE_2026-10-02.md), the production ledger and [Room composition contract](ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md) for current source-grounded state. No uniform production stage applies to the entire 500-unit plan.
+
+
+## Operational reuse child
+
+- `GLOBAL_ASSET_REUSE_OCCLUSION_MATRIX.md` — R0–R5 reuse decision taxonomy, environment occlusion order, beast-layering cautions and hard compatibility boundaries. It is subordinate to `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md` and `ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md`.
