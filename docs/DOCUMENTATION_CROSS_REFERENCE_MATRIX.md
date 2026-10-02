@@ -380,3 +380,94 @@ Whenever a major new document is created:
 8. build application UX master;
 9. build final Android migration matrix;
 10. only then schedule broad system reconstruction.
+
+## 11. 2026-10-02 expansion documents
+
+### `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md`
+Owns:
+- ordered program phases;
+- broad permission interpretation;
+- stop rules;
+- dependency order.
+
+References:
+- Master Development Program;
+- task register;
+- all domain masters.
+
+### `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md`
+Owns:
+- top-level KEEP / EXTEND / REWORK / REPLACE / REMOVE / NEW decisions.
+
+Does not replace:
+- the deeper source-file audit still required by task D-006.
+
+### `docs/DOCUMENTATION_PROGRESS_LEDGER.md`
+Owns:
+- numeric target preservation;
+- separate corpus metrics;
+- completion-count rules.
+
+### `docs/assets/PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md`
+Owns:
+- production stages;
+- current-vs-required asset lists;
+- room actor/portrait/panel relationship;
+- reuse classes;
+- area packet requirements;
+- text/overlay rules.
+
+References:
+- runtime composition standard;
+- character blueprints;
+- Gate Twelve asset matrix;
+- manifests.
+
+### `docs/world/WORLD_SCALE_DOCUMENTATION_BLUEPRINT.md`
+Owns:
+- world coordinate layers;
+- place/political/settlement/resource/ecosystem/beast-zone/population schemas;
+- map-record tracking rules.
+
+References:
+- world master index;
+- future world child catalogs.
+
+### `docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md`
+Owns:
+- current system disposition;
+- target systems;
+- implementation dependency order.
+
+Defers detailed authority to future:
+- progression;
+- economy/items;
+- NPC/social/adversary;
+- tactical combat;
+- balance;
+- save migration masters.
+
+### `docs/android/APK_FINAL_RECONSTRUCTION_MATRIX.md`
+Owns:
+- late-stage screen/component disposition;
+- final rebuild sequence;
+- removal gates;
+- APK acceptance.
+
+References:
+- APK rebuild/evolution master;
+- final domain contracts.
+
+## 12. Updated documentation sequence
+
+1. Gate Twelve Steps 8–14;
+2. deep existing-state source audit;
+3. progression/class/rank master;
+4. NPC/social/adversary master;
+5. item/economy/loot master;
+6. tactical combat master;
+7. world child schemas/catalogs;
+8. application UX master;
+9. save/content migration master;
+10. final APK execution plan;
+11. broad implementation only after required contracts.
