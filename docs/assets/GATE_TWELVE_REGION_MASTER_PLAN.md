@@ -2288,6 +2288,241 @@ Do not use VERIFIED without observed integration/QA evidence.
 
 ---
 
+# 8. Application UX plan
+
+Status: **COMPLETE — OWNERSHIP AND HIGH-USE FLOW LOCKED FOR IMPLEMENTATION PLANNING**
+
+This step defines how Gate Twelve should be experienced inside the Android application.
+
+## 8.1 Current verified application structure
+
+The current Android client already contains separate surfaces for:
+- Story;
+- Character;
+- Stats;
+- Inventory;
+- Quests;
+- Map;
+- Settings/More;
+- Developer tools.
+
+The Story surface already combines:
+- location/scene context;
+- scene illustration;
+- narrative text;
+- resource HUD;
+- choices;
+- navigation to deeper panels.
+
+The Map surface already consumes a player-safe world-map projection and does not own travel rules.
+
+## 8.2 UX ownership rule
+
+Engine/content decides:
+- current scene;
+- current location;
+- available/locked choices;
+- map discovery;
+- map reachability;
+- party/presence;
+- equipment;
+- quests;
+- public-safe state.
+
+Android decides:
+- layout;
+- navigation;
+- panel framing;
+- touch targets;
+- selected visual focus;
+- responsive arrangement;
+- animation timing;
+- asset resolution and rendering.
+
+No screen may duplicate gameplay calculations merely to simplify presentation.
+
+## 8.3 Primary high-use loop
+
+Target Gate Twelve loop:
+
+`Story/Location -> inspect current scene -> make choice/interact -> optional Character/Stats/Inventory/Quests -> Map when travel is desired -> Story at destination`
+
+The player should not need to visit a generic menu hub between every narrative action.
+
+## 8.4 Story screen
+
+The Story screen remains the primary play surface.
+
+Required composition:
+1. compact location/scene/time context;
+2. scene illustration;
+3. contextual character/room panel behavior;
+4. player-safe resource/status feedback;
+5. readable narrative;
+6. choices/actions;
+7. persistent access to deeper screens.
+
+Detailed character/presence behavior is governed by:
+`docs/program/11_CONTEXTUAL_VISUAL_COMPOSITION_CONTRACT.md`.
+
+## 8.5 Contextual character/room panels
+
+The Story screen may change its visual character composition based on authoritative scene presence.
+
+Supported target modes:
+- environment only;
+- player + one focused character;
+- player + multiple present characters;
+- party/travel;
+- character inspection as a separate detailed surface.
+
+Current hard-coded actor selection by `sceneId + locationId` is accepted only as current implementation state.
+
+Target migration:
+`engine-owned scene presence -> player-safe bridge projection -> Android visual resolver`.
+
+The UI must not infer presence because an NPC asset exists.
+
+## 8.6 Map screen
+
+Map responsibilities:
+- show current known region;
+- show discovered nodes;
+- show current location;
+- show reachable/unavailable state;
+- show route preview;
+- show selected-location summary;
+- submit travel intent.
+
+Map must not:
+- create travel edges;
+- bypass discovery;
+- invent travel time;
+- reveal hidden destinations;
+- create quests/events because a marker exists.
+
+The future Plaza -> Platform Nine connector remains absent from runtime UI until the authored graph is migrated.
+
+## 8.7 Character screen
+
+Purpose:
+- persistent player identity;
+- paper-doll/equipment;
+- selected equipment detail;
+- visual state that reflects authoritative equipment.
+
+It is not a substitute for scene-presence panels.
+
+Character screen and Story panel should share approved character assets/rigs rather than maintain separate identities.
+
+## 8.8 Stats screen
+
+Purpose:
+- player-safe attributes;
+- skills;
+- derived values;
+- resources;
+- public-safe conditions;
+- contribution inspection where already supported.
+
+Stats calculations remain engine-owned.
+
+## 8.9 Inventory/equipment
+
+Inventory and equipment should:
+- expose stable items;
+- reflect authoritative quantities/equipped slots;
+- use consistent 32x32 icon families;
+- show paper-doll visuals only when an approved binding exists;
+- avoid inventing missing equipment geometry.
+
+## 8.10 Quests
+
+Quest presentation should distinguish:
+- main;
+- side;
+- optional;
+- lore/world.
+
+It may show current player-safe objectives and status.
+
+It must not expose hidden objective prerequisites or future outcomes.
+
+## 8.11 Navigation
+
+The navigation model should minimize screen churn.
+
+Rules:
+- Story is the default return surface after scene advancement.
+- Deep screens preserve enough context to return without losing the current scene.
+- Settings/save/developer controls remain separated from ordinary narrative choices.
+- Travel returns to Story at the resulting destination/state.
+- Character and Stats remain one action away from Story.
+- No duplicate navigation entry should exist merely because a reference image contained one.
+
+## 8.12 Touch/mobile requirements
+
+- primary actions must remain usable at phone width;
+- pixel styling may not reduce functional hit targets;
+- scrollable narrative must remain readable;
+- map markers must have forgiving hit areas independent of tiny sprite size;
+- character panels must collapse/reflow rather than shrink characters into unreadable noise;
+- decorative animation must not block input or obscure choices;
+- important states must not depend only on color.
+
+## 8.13 Visual-state fallback
+
+When a required approved visual is missing:
+1. preserve gameplay;
+2. preserve narrative/text identity;
+3. use a documented neutral/fallback presentation if available;
+4. do not substitute another NPC/item/location;
+5. log the missing asset as production debt.
+
+Missing art must never block correct state progression unless the art itself is explicitly required for the mechanic.
+
+## 8.14 Application implications by Gate Twelve location
+
+Depot Plaza:
+- strongest public Map/Story orientation point.
+
+Platform Nine:
+- strongest narrative/group character presentation in the opening.
+
+Relay Workbench:
+- focused technical scene composition.
+
+Gate Twelve:
+- strong threshold presentation; state overlays may change without replacing base ownership.
+
+Quiet Stair:
+- low-frequency, low-clutter route presentation.
+
+Service Tunnel:
+- investigation/travel context with evolving overlays.
+
+Trace Chamber:
+- repeatable training/research actions should remain location-bound rather than flattened into a universal training menu.
+
+Archive:
+- research/record interactions should surface conditionally from player-safe knowledge/quest state.
+
+Workshop Row:
+- practical/social context; no generic vendor screen until a real service/economy system exists.
+
+## 8.15 Step 8 locked decisions
+
+1. Story remains the primary gameplay surface.
+2. Map submits intent and renders engine-owned graph state.
+3. Contextual character panels require engine-owned scene presence.
+4. Character/Stats/Inventory/Quests remain specialized deeper surfaces.
+5. Visual fallback must preserve identity and never substitute incorrect canon.
+6. Mobile usability outranks strict visual imitation of low-resolution references.
+7. Final UI rework may break old presentation when migration and tests are documented.
+8. Gate Twelve location identity should remain visible through the application rather than being flattened into generic menus.
+
+---
+
 # 5. Planned authoring sequence
 
 The remaining master plan will be completed in this order:
@@ -2299,7 +2534,7 @@ The remaining master plan will be completed in this order:
 5. **Geometry contract** — COMPLETE.
 6. **Material and visual language** — COMPLETE.
 7. **Asset decomposition** — COMPLETE.
-8. **Application UX plan** — Map/Story/location navigation and high-use flows.
+8. **Application UX plan** — COMPLETE.
 9. **State-layer plan** — discovery, reachability, events, blackout, Trace effects.
 10. **Performance/section strategy** — loading boundaries and mobile constraints.
 11. **Implementation order** — smallest safe slices and dependency graph.
@@ -2311,7 +2546,7 @@ The remaining master plan will be completed in this order:
 
 # Continuity footnote / next-session handoff
 
-**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract; Step 6 — material and visual language; Step 7 — asset decomposition and production-state contract.
+**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract; Step 6 — material and visual language; Step 7 — asset decomposition and production-state contract; Step 8 — application UX and contextual panel ownership.
 
 **Key decisions preserved for future sessions:**
 - active repository is `jbob-coder/Text-rpg-game`;
@@ -2324,6 +2559,6 @@ The remaining master plan will be completed in this order:
 - UI must not become the source of truth for gameplay state;
 - final map must be constructed as modular game content, piece by piece, not generated as one flattened image.
 
-**Next unfinished step:** Step 8 — define the application UX plan: Story/Map/Character/location navigation, contextual character/room panels, high-use flows, touch/mobile behavior, and ownership boundaries.
+**Next unfinished step:** Step 9 — define the state-layer plan: discovery, reachability, blackout/emergency state, Trace effects, NPC presence, event overlays, and rules for what belongs in base art versus runtime projection.
 
 **Do not implement the final contextual character/room panel binding before Step 8 and the scene-presence projection contract are complete.**
