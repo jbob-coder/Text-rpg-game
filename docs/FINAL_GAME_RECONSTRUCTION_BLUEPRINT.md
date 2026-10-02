@@ -787,3 +787,19 @@ The target is a repository where:
 - Android is a safe presentation/application layer;
 - obsolete code is removed only after evidence proves it is no longer needed;
 - a final APK can be traced to exact source, data, assets, tests and device QA.
+
+
+## 24. 2026-10-02 execution and evidence children
+
+The following child documents were added on the same program branch and are part of the current documentation graph:
+
+- `docs/DECISION_AND_REBUILD_EXECUTION_REGISTER.md` — decomposes the owner directive into concrete deliverables, can/will/candidate decisions, migration gates and reconstruction acceptance.
+- `docs/DOCUMENTATION_CATALOG_2026-10-02.md` — exact baseline Markdown catalog with headings, word counts, hashes and literal references for its recorded baseline.
+- `docs/assets/ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md` — operational room actor/panel/overlay/raster-precedence contract; does not imply the proposed actor projection already exists.
+- `docs/world/WORLD_CANON_DECISION_QUEUE.md` — separates exact Gate Twelve map facts from unresolved parent-world/geography/politics/ecology/progression decisions.
+- `docs/assets/RASTER_DELIVERY_EVIDENCE_2026-10-02.md` — baseline PNG dimensions, hashes and catalog bindings.
+- `docs/evidence/documentation_catalog_2026-10-02.json` — machine-readable documentation evidence.
+- `docs/evidence/gate_twelve_map_baseline_2026-10-02.json` — machine-readable Gate Twelve map baseline evidence.
+- `docs/evidence/raster_bindings_2026-10-02.json` — machine-readable raster binding evidence.
+
+These evidence children supplement this blueprint. They do not override newer exact-head source/CI evidence and must not be interpreted as proof that future mechanics, world canon or art approval is complete.
