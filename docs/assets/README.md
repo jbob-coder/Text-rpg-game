@@ -23,10 +23,12 @@ Read in this order before generating or integrating visual assets:
 10. [ASSET_MANIFEST_SCHEMA.md](ASSET_MANIFEST_SCHEMA.md)
    - machine-readable lineage/state/QA contract for every asset.
 11. [REFERENCE_REGISTRY.md](REFERENCE_REGISTRY.md)
-   - durable generated-reference provenance and selection/rejection decisions.
-12. [production_packets/BATCH_001_WAVE_A_BLUEPRINTS.md](production_packets/BATCH_001_WAVE_A_BLUEPRINTS.md)
+   - durable generated/reference provenance and selection/rejection decisions.
+12. [references/UI_REFERENCE_CHARACTER_APPROVED_V1.md](references/UI_REFERENCE_CHARACTER_APPROVED_V1.md)
+   - approved Jack Wilson Character-tab visual reference persisted in Google Drive; defines character visual identity/presentation, not gameplay rules or hidden state.
+13. [production_packets/BATCH_001_WAVE_A_BLUEPRINTS.md](production_packets/BATCH_001_WAVE_A_BLUEPRINTS.md)
    - exact reconstruction packet for assets 001, 002, 018, 021 and 022.
-13. [manifests/BATCH_001_WAVE_A.json](manifests/BATCH_001_WAVE_A.json)
+14. [manifests/BATCH_001_WAVE_A.json](manifests/BATCH_001_WAVE_A.json)
    - machine-readable Wave A states, anchors, palettes, bindings and QA gates.
 
 ## Current phase
@@ -81,14 +83,17 @@ Now that planning is complete, start generation/reconstruction with Batch 001 it
 
 This small set validates the entire reference -> blueprint -> pixel master -> paper-doll integration pipeline before mass generation.
 
-
-
 ## First generated reference record
 
 `REF_BATCH001_CONCEPT_BOARD_A` has been preserved in Google Drive and audited in `references/REF_BATCH001_CONCEPT_BOARD_A.md`.
 
 It is accepted only for broad style direction. Its invented item/NPC/location details are explicitly rejected as canon.
 
+## Approved Character reference
+
+`UI_REFERENCE_CHARACTER_APPROVED_V1` is preserved in Google Drive and audited in `references/UI_REFERENCE_CHARACTER_APPROVED_V1.md`.
+
+It is the selected visual reference for Jack Wilson on the Character surface. It may guide identity, silhouette, layered clothing/equipment presentation and cross-UI visual consistency; it does not override authoritative gameplay state, technical rig anchors, hidden state or animation contracts.
 
 ## Verified runtime asset waves
 
