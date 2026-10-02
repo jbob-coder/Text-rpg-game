@@ -163,6 +163,34 @@ class CharacterStatsSectionTest {
     }
 
     @Test
+    fun serviceTunnelStoryHasPhoneSizedPixelArtEvidence() {
+        val tunnelSnapshot = snapshot.copy(
+            sceneId = "OPENING_TUNNEL",
+            title = "Below the Evacuation Route",
+            body = "The maintenance passage narrows beneath the evacuation route.",
+            location = "SERVICE_TUNNEL",
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
+                    GameScreen(
+                        snapshot = tunnelSnapshot,
+                        busy = false,
+                        onChoice = {},
+                        onNavigate = {},
+                    )
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("story-pixel-header").assertIsDisplayed()
+        composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
+        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        saveScreenshot("service-tunnel-story-320dp")
+    }
+
+    @Test
     fun mapPhoneRendersAuthoredDistrictArtWithProjectedNodes() {
         val mapSnapshot = snapshot.copy(
             worldMap = GameWorldMap(

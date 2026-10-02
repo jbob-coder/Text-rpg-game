@@ -43,6 +43,29 @@ class PixelSceneCatalogTest {
     }
 
     @Test
+    fun serviceTunnelMasterUsesMutedMunicipalPerspectiveAndRestrainedIndicators() {
+        val scene = PixelSceneCatalog.serviceTunnelDefault
+
+        assertEquals(128, scene.width)
+        assertEquals(64, scene.height)
+
+        val allPixels = scene.rows.joinToString("")
+        assertTrue("Service Tunnel should include structural ribs", allPixels.count { it == 'M' } > 150)
+        assertTrue("Service Tunnel should include warm maintenance lighting", allPixels.count { it == 'G' } >= 20)
+        assertTrue(
+            "Cool indicators must remain restrained instead of becoming a neon environment",
+            allPixels.count { it == 'C' } in 1..30,
+        )
+        assertTrue(
+            "Service Tunnel palette must not reuse the bright UI cyan anchor",
+            PixelColors.Cyan !in scene.palette.values,
+        )
+
+        assertTrue(scene.rows[31].substring(57, 72).any { it == 'B' || it == 'D' || it == 'L' })
+        assertTrue(scene.rows[59].substring(15, 113).any { it == 'R' || it == 'L' || it == 'A' })
+    }
+
+    @Test
     fun everyCurrentNamedLocationResolvesToItsOwnProductionScene() {
         val expected = mapOf(
             "PLATFORM_NINE" to PixelSceneCatalog.platformNineBlackout,
