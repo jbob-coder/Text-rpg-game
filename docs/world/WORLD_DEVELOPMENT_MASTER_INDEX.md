@@ -865,3 +865,32 @@ Those decisions should be made in ordered batches using the standards above.
 ## Current canon decision queue
 
 [World canon decision queue](WORLD_CANON_DECISION_QUEUE.md) owns the ordered unresolved decisions and exact current local map baseline. Schema documentation is established; world-scale catalog population is not complete.
+
+
+## 2026-10-02 final reconstruction integration update
+
+### Decided now
+- schema-first world hierarchy and stable-ID discipline;
+- distinct world/regional/settlement/local/presentation/tactical coordinate spaces;
+- Gate Twelve as the first proof district;
+- route legality/discovery owned outside UI;
+- separate political, settlement, ecosystem/resource, beast-zone, population, balance, loot-provenance and NPC-population schemas;
+- ecology/provenance-driven beasts/resources rather than arbitrary placement;
+- multidimensional social hierarchy/discrimination rather than one universal prejudice stat;
+- current seven attributes remain runtime reality until explicit migration.
+
+### Intentionally undecided
+Do not invent as canon yet:
+- Gate Twelve parent city/macroregion;
+- final nations/kingdoms/borders;
+- capitals/cities/villages beyond explicitly authored repository content;
+- concrete culture/institution networks;
+- biome/climate map;
+- concrete resource/economic flows;
+- beast taxonomy/distribution;
+- world threat bands;
+- world NPC population;
+- final world coordinates and travel network.
+
+### Next canon packet
+The first world-population decision should be the minimum parent chain needed to place Gate Twelve: parent settlement, parent region, political ownership if applicable, W0/W1 anchors, major routes, terrain/climate/material context. Mass world generation stays blocked until this parent chain is coherent.
