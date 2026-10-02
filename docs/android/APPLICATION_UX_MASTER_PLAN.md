@@ -232,3 +232,22 @@ UI must:
 - transition animations;
 - orientation support;
 - low-memory asset caching.
+
+
+## 19. Gate Twelve proof-region child contract
+
+The first region-specific application contract is now documented in:
+- `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`, Step 8.
+
+That child locks for Gate Twelve:
+- Story/current-location as the primary play surface;
+- Map as the spatial/travel companion;
+- projected actor -> room sprite -> optional focused portrait/panel flow;
+- one focused actor panel at a time by default;
+- explicit separation of UI text, world signage and PixelSprite/text-map source art;
+- composited overlays for temporary state instead of flattened duplicate scenes;
+- fit-to-district phone map behavior without mandatory zoom for the current nine-node district;
+- selection separate from authoritative travel;
+- presentation fallbacks that never change gameplay truth.
+
+Global navigation count, world-map zoom, orientation support and low-memory cache implementation remain application-wide decisions.
