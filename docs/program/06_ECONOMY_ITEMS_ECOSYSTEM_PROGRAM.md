@@ -101,3 +101,26 @@ Future design must decide:
 - BEAST_ZONE_SCHEMA
 - BEAST_RESOURCE_CHAIN
 - REGIONAL_ECONOMIES
+
+
+## Beast global standard
+
+See `13_BEAST_ENTITY_ECOSYSTEM_AND_SCENE_PRESENCE_STANDARD.md`.
+
+The global standard now locks:
+- bestia as the normative project term;
+- beast identity ownership;
+- scene-presence integration;
+- beast-zone responsibilities;
+- ecosystem relationships;
+- visual families;
+- combat/economy integration boundaries.
+
+Still unresolved here:
+- final taxonomy;
+- actual species;
+- actual beast zones;
+- exact loot formulas;
+- hunting/harvest economy;
+- mutation/evolution depth;
+- repopulation simulation depth.
