@@ -3,10 +3,12 @@ package com.thegame.rpg.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -150,35 +152,15 @@ internal fun StatsSection(
                 }
             }
         }
-        PixelPanel(
-            Modifier.fillMaxWidth(),
-            "Skills",
-            chrome = PixelPanelChrome.STATS,
-        ) {
-            snapshot.skills.groupBy { it.category }.forEach { (category, skills) ->
-                Text(category.uppercase(), color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
-                skills.forEach { skill ->
-                    Text(
-                        "${skill.name}: ${statValue(skill.effective)}",
-                        color = if (skill.modified) PixelColors.Cyan else PixelColors.Paper,
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)
-                            .selectable(path == "skills.${skill.id}", enabled = !inspectionBusy, role = Role.Button) {
-                                localPath = "skills.${skill.id}"
-                                onInspect?.invoke("skills.${skill.id}")
-                            }.testTag("skill-row-${skill.id}"),
-                    )
-                    skill.contributions.forEach { contribution ->
-                        Text(
-                            "${contribution.label}: ${signedStatValue(contribution.value)}",
-                            color = PixelColors.Muted,
-                            style = MaterialTheme.typography.labelLarge,
-                        )
-                    }
-                }
-                Spacer(Modifier.height(8.dp))
-            }
-        }
+        SkillsMatrix(
+            snapshot = snapshot,
+            selectedPath = path,
+            inspectionBusy = inspectionBusy,
+            onSelect = { skillPath ->
+                localPath = skillPath
+                onInspect?.invoke(skillPath)
+            },
+        )
         PixelPanel(
             Modifier.fillMaxWidth(),
             "Derived",
@@ -202,6 +184,145 @@ internal fun StatsSection(
                     Text("${condition.name} • Severity ${condition.severity}", color = PixelColors.Danger, style = MaterialTheme.typography.bodyMedium)
                 }
             }
+        }
+    }
+}
+
+
+@Composable
+private fun SkillsMatrix(
+    snapshot: GameSnapshot,
+    selectedPath: String?,
+    inspectionBusy: Boolean,
+    onSelect: (String) -> Unit,
+) {
+    PixelPanel(
+        Modifier.fillMaxWidth().testTag("skills-matrix"),
+        "Skills",
+        chrome = PixelPanelChrome.STATS,
+    ) {
+        if (snapshot.skills.isEmpty()) {
+            Text(
+                "No player-facing skills are available.",
+                color = PixelColors.Muted,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            return@PixelPanel
+        }
+
+        snapshot.skills.groupBy { it.category }.forEach { (category, skills) ->
+            val categoryColor = when (category.lowercase()) {
+                "combat" -> PixelColors.Health
+                "physical" -> PixelColors.Stamina
+                "technical" -> PixelColors.Focus
+                "social" -> PixelColors.Resolve
+                "knowledge" -> PixelColors.Gold
+                else -> PixelColors.Paper
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(PixelColors.Deep)
+                    .border(1.dp, categoryColor)
+                    .padding(horizontal = 8.dp, vertical = 6.dp)
+                    .testTag("skills-category-${category.lowercase()}"),
+            ) {
+                Text(
+                    "[${category.uppercase()}]",
+                    color = categoryColor,
+                    style = MaterialTheme.typography.labelLarge,
+                    modifier = Modifier.weight(1f),
+                )
+                Text(
+                    "${skills.size} SKILLS",
+                    color = PixelColors.Muted,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
+            Spacer(Modifier.height(6.dp))
+
+            BoxWithConstraints(Modifier.fillMaxWidth()) {
+                val columns = if (maxWidth < 300.dp || LocalDensity.current.fontScale > 1.4f) 1 else 2
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    skills.chunked(columns).forEach { group ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            group.forEach { skill ->
+                                val skillPath = "skills.${skill.id}"
+                                val active = selectedPath == skillPath
+                                val progress = (skill.effective / 100.0)
+                                    .coerceIn(0.0, 1.0)
+                                    .toFloat()
+
+                                Column(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .background(if (active) PixelColors.PanelAlt else PixelColors.Panel)
+                                        .border(
+                                            2.dp,
+                                            when {
+                                                active -> PixelColors.Gold
+                                                skill.modified -> categoryColor
+                                                else -> PixelColors.Muted
+                                            },
+                                        )
+                                        .selectable(
+                                            selected = active,
+                                            enabled = !inspectionBusy,
+                                            role = Role.Button,
+                                        ) {
+                                            onSelect(skillPath)
+                                        }
+                                        .heightIn(min = 96.dp)
+                                        .padding(8.dp)
+                                        .testTag("skill-row-${skill.id}"),
+                                ) {
+                                    Text(
+                                        skill.name,
+                                        color = PixelColors.Paper,
+                                        style = MaterialTheme.typography.bodyMedium,
+                                    )
+                                    Text(
+                                        statValue(skill.effective),
+                                        color = if (skill.modified) categoryColor else PixelColors.Paper,
+                                        style = MaterialTheme.typography.titleLarge,
+                                    )
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(6.dp)
+                                            .background(PixelColors.Ink)
+                                            .border(1.dp, PixelColors.Muted),
+                                    ) {
+                                        Box(
+                                            modifier = Modifier
+                                                .fillMaxHeight()
+                                                .fillMaxWidth(progress)
+                                                .background(categoryColor),
+                                        )
+                                    }
+                                    Spacer(Modifier.height(4.dp))
+                                    Text(
+                                        if (skill.modified) {
+                                            "BASE ${statValue(skill.base)}  ${signedStatValue(skill.delta)}"
+                                        } else {
+                                            "BASE ${statValue(skill.base)}"
+                                        },
+                                        color = PixelColors.Muted,
+                                        style = MaterialTheme.typography.labelLarge,
+                                    )
+                                }
+                            }
+                            if (group.size < columns) Spacer(Modifier.weight(1f))
+                        }
+                    }
+                }
+            }
+
+            Spacer(Modifier.height(10.dp))
         }
     }
 }
