@@ -714,3 +714,15 @@ Must not own:
 - [Gate Twelve parent-world proposal](world/GATE_TWELVE_PARENT_WORLD_PROPOSAL.md): proposed minimum settlement/region/municipal/route/terrain-climate parent chain; working names remain non-canon pending owner decision.
 
 These records narrow D-028/D-029/D-031. They do not promote divergent implementation branches, change runtime state, or convert proposed world names into canon.
+
+
+## 2026-10-02 moving-base crosswalk
+
+- [PR #33 moving-base drift reconciliation](PR33_MOVING_BASE_DRIFT_RECONCILIATION_2026-10-02.md): branch divergence, conflicting numerical-unit claim, duplicate-authority classification and no-blind-merge decision.
+- [Moving-base document crosswalk](BASE_BRANCH_DOCUMENT_CROSSWALK_2026-10-02.md): maps base-side program/system/world documents to current owners and dispositions.
+- [Global asset reuse and occlusion matrix](assets/GLOBAL_ASSET_REUSE_OCCLUSION_MATRIX.md): operational R0–R5 reuse taxonomy and explicit scene occlusion stack under current pixel/reuse parents.
+- [World entity ID/reference standard](world/WORLD_ENTITY_ID_AND_REFERENCE_STANDARD.md): semantic-ID lifetime, rename, merge/split and cross-reference rules.
+- [Region/settlement authoring template](world/REGION_SETTLEMENT_DOCUMENTATION_TEMPLATE.md): execution template subordinate to geography/settlement standards.
+- [Gate Twelve external connection register](world/GATE_TWELVE_EXTERNAL_CONNECTIONS_AND_EXPANSION_REGISTER.md): outward-edge unknown/proposal register compatible with the parent-world proposal.
+
+The moving-base `docs/program/*` hierarchy is not activated by these migrations.
