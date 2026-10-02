@@ -1,5 +1,7 @@
 # Implementation Status — V6 Stabilization
 
+> **Planning-priority note — 2026-10-02:** the repository-wide documentation-first program under `docs/program/` is now the current product-planning authority. This file remains authoritative evidence for the V6 stabilization state it records, but its older branch objective is not the current overall planning objective. Do not delete or rewrite the historical evidence; route new design work through the program index and decision-gap register.
+
 Updated: 2026-09-27. This record supersedes the foundation-oriented status previously
 present here; the earlier history remains at upstream V6 commit
 `7f5f104fb839068bdfaf5cec72f37129ae20d463`.
