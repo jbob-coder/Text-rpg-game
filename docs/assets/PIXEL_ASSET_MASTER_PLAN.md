@@ -1,5 +1,10 @@
 # THE GAME — Pixel Asset Master Production Plan v1
 
+## Global program pointer
+
+This asset plan now operates under `docs/MASTER_DOCUMENTATION_PROGRAM.md` and `docs/PIXEL_ART_INTEGRATION_AND_REUSE_STANDARD.md`. The 500-unit roadmap remains the v1 visual-production baseline; it is not a declaration that 500 assets are finished.
+
+
 Status: documentation-first; no generated image is canon or production-ready merely because it exists.
 
 ## 1. Objective
