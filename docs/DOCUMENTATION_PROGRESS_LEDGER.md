@@ -170,3 +170,22 @@ After the repository existing-state audit, add a reproducible corpus inventory s
 - world records.
 
 Until then, all exact corpus totals remain **UNKNOWN** rather than estimated.
+
+## 2026-10-02 system-master expansion
+
+New documentation units now present on the master-program branch:
+- tactical combat master;
+- NPC/social/persistent-adversary master;
+- items/economy/loot master;
+- world balance integration plan;
+- save/content migration master;
+- Android application UX master.
+
+This advances the systems/application contract layer. It does not change the numeric-target interpretation and does not claim implementation completion.
+
+Next high-value documentation:
+1. finish Gate Twelve Step 8–14;
+2. deepen progression/class/rank details;
+3. define world political/settlement/ecology child catalogs;
+4. audit exact runtime/source state against the rework matrix;
+5. create reproducible corpus/asset-status inventory.
