@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-10-02 07:32 AST
+Updated: 2026-10-02 08:16 AST
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -71,7 +71,8 @@ This section supersedes older statements about the top-level product objective w
 ### TASK D-006 — Existing-state repository audit
 - STATUS: `IN_PROGRESS`
 - PRIORITY: `P0`
-- CURRENT: `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md` exists and classifies major areas; exact code/consumer audit still needs to be completed against live branch HEADs.
+- CURRENT: `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md` classifies major areas and `docs/LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md` now records the live program HEAD, open-PR landscape, repository tree counts, current pixel/runtime families, world/system state, and immediate reconciliation controls.
+- REMAINING: complete file/consumer-level mapping against the stacked implementation PR heads and reconcile conflicting/stale implementations.
 - OUTPUT: subsystem matrix with KEEP / EXTEND / REWORK / REPLACE / REMOVE / UNKNOWN and exact branch/HEAD evidence.
 
 ### TASK D-007 — Progression / class / rank master
@@ -148,9 +149,29 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-02 07:32 AST`
 
 ### TASK D-019 — Reproducible documentation/world/asset inventory
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- CURRENT:
+  - `docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-02.md` records exact recursive-tree structural counts for the audited program HEAD.
+  - `tools/documentation_inventory.py` provides a deterministic standard-library local inventory path for files, extensions, Markdown words, documentation families and test-source files.
+- REMAINING:
+  - execute/persist the tool from a complete checkout of the exact program HEAD;
+  - add structured world/domain record extractors;
+  - add asset-stage/manifest counts;
+  - separate executed-test evidence from test-source counts;
+  - define/confirm how owner numeric targets map to reproducible units.
+- OUTPUT: reproducible counts for active docs, words, records, assets, world entities, tasks, tests and evidence without assuming the owner's ambiguous numeric units.
+
+### TASK D-020 — Reconcile stacked pixel/application implementation branches
 - STATUS: `PENDING`
 - PRIORITY: `P0`
-- OUTPUT: reproducible counts for active docs, words, records, assets, world entities, tasks, tests and evidence without assuming the owner's ambiguous numeric units.
+- INPUT: live audit plus open PRs #7–#31.
+- OUTPUT: one branch/provenance matrix showing which visual/application implementation survives, which is superseded, and which needs migration.
+
+### TASK D-021 — Map Android consumers to final UX/domain contracts
+- STATUS: `PENDING`
+- PRIORITY: `P0`
+- OUTPUT: screen/component -> player-safe projection -> asset packet -> domain owner -> tests/evidence mapping before broad UI replacement.
 
 ### TASK D-012 — Final APK keep/rebuild matrix and execution
 - STATUS: `BLOCKED`
