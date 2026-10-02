@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.math.floor
 
 @Composable
@@ -28,7 +29,13 @@ fun SceneIllustration(
 ) {
     val traceFxFrames = PixelTraceFxCatalog.directionalTraceForScene(sceneId) ?: PixelTraceFxCatalog.signalPulseForScene(sceneId) ?: PixelTraceFxCatalog.forScene(sceneId)
     val sceneRaster = rememberPixelRaster(PixelRasterCatalog.scene(locationId))
+    val ambientTracks = remember(locationId) {
+        PixelAmbientAnimationCatalog.forLocation(locationId)
+    }
     var traceFxFrameIndex by remember(sceneId) { mutableStateOf(0) }
+    var ambientFrameIndices by remember(locationId) {
+        mutableStateOf(ambientTracks.associate { it.trackId to 0 })
+    }
 
     LaunchedEffect(sceneId, traceFxFrames) {
         if (traceFxFrames.isNullOrEmpty()) {
@@ -40,6 +47,23 @@ fun SceneIllustration(
         while (true) {
             delay(180L)
             traceFxFrameIndex = (traceFxFrameIndex + 1) % traceFxFrames.size
+        }
+    }
+
+    LaunchedEffect(locationId, ambientTracks) {
+        ambientFrameIndices = ambientTracks.associate { it.trackId to 0 }
+        if (ambientTracks.isEmpty()) return@LaunchedEffect
+
+        ambientTracks.forEach { track ->
+            launch {
+                while (true) {
+                    delay(track.frameDurationMs)
+                    ambientFrameIndices = ambientFrameIndices.toMutableMap().apply {
+                        val current = get(track.trackId) ?: 0
+                        put(track.trackId, (current + 1) % track.frames.size)
+                    }
+                }
+            }
         }
     }
 
@@ -114,6 +138,18 @@ fun SceneIllustration(
                     originX = floor(sceneOriginX + placement.x * scenePixel),
                     originY = floor(sceneOriginY + placement.y * scenePixel),
                 )
+            }
+
+            ambientTracks.forEach { track ->
+                val frameIndex = ambientFrameIndices[track.trackId] ?: 0
+                track.frames.getOrNull(frameIndex)?.let { ambientFrame ->
+                    drawPixelSprite(
+                        sprite = ambientFrame,
+                        pixelSize = scenePixel,
+                        originX = sceneOriginX,
+                        originY = sceneOriginY,
+                    )
+                }
             }
 
             PixelStoryActorCatalog.placements(
