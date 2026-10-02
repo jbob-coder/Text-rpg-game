@@ -181,6 +181,14 @@ A visual addition is acceptable only when it:
 6. can be replaced or evolved without rewriting gameplay rules.
 
 
+## Application integration authority
+
+The visual bible defines the global pixel language. How those assets are composed inside scenes, reused, overlaid, bound to player-safe state, and shown in contextual character panels is defined by:
+
+- `docs/PIXEL_ART_INTEGRATION_CONTRACT.md`
+
+That integration contract may evolve application composition, but it may not weaken this bible's pixel-art, identity, provenance, or gameplay-authority rules.
+
 ## Production asset documentation
 
 Detailed production rules live under `docs/assets/` and are normative for new pixel-art work:
