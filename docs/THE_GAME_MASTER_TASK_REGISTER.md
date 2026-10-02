@@ -796,3 +796,19 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - PRIORITY: `LATE-STAGE`
 - BLOCKED_BY: D-020/D-026/D-028/D-030/D-032 and final domain contracts.
 - OUTPUT: component-level keep/rework/replace/remove map with zero-consumer evidence before deletion.
+
+
+### TASK D-044 — Reconcile PR #33 moving base
+- STATUS: `IN_PROGRESS / SAFE SELECTIVE MIGRATION COMPLETE`
+- PRIORITY: `P0`
+- OUTPUTS:
+  - `docs/PR33_MOVING_BASE_DRIFT_RECONCILIATION_2026-10-02.md`
+  - `docs/BASE_BRANCH_DOCUMENT_CROSSWALK_2026-10-02.md`
+- VERIFIED: PR #33 program branch and `docs/settlement-region-build-plan` diverged from merge base `c261b2aaf8bd978d27b46f8fea03435c0c5734d0`; inspected state showed 140 program-side commits versus 99 base-side commits after the merge base.
+- DECISION: no blind merge/rebase. Preserve current program authority, block the conflicting “2,000,000 separate files” interpretation, and migrate only unique non-conflicting children.
+- MIGRATED CHILDREN:
+  - `docs/assets/GLOBAL_ASSET_REUSE_OCCLUSION_MATRIX.md`
+  - `docs/world/WORLD_ENTITY_ID_AND_REFERENCE_STANDARD.md`
+  - `docs/world/REGION_SETTLEMENT_DOCUMENTATION_TEMPLATE.md`
+  - `docs/world/GATE_TWELVE_EXTERNAL_CONNECTIONS_AND_EXPANSION_REGISTER.md`
+- REMAINS: detailed shared-file diff for entrypoints/Gate Twelve, Class C unique-requirement extraction, and reassessment of PR mergeability/target branch after authority conflicts are resolved.
