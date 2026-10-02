@@ -36,6 +36,17 @@ class PixelMapArtCatalogTest {
         assertEquals('I', map.rows[87][170]) // Service Tunnel support rib.
     }
 
+
+    @Test
+    fun roadAndTrackTextureOnlyRecolorsExistingNeutralSurfaces() {
+        val map = PixelMapArtCatalog.gateTwelveDistrictBase
+
+        assertTrue(map.rows.any { 'r' in it })
+        assertEquals('L', map.rows[7][0])    // Perimeter street center strip.
+        assertEquals('L', map.rows[52][46])  // Authored service-route center line.
+        assertEquals('L', map.rows[69][21])  // Platform Nine track sleeper drawn over wear.
+    }
+
     @Test
     fun authoredMapViewportUsesIntegerPixelScaleAndSharedPercentageCoordinates() {
         val viewport = PixelMapArtCatalog.viewport(
