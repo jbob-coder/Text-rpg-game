@@ -189,3 +189,24 @@ Next high-value documentation:
 3. define world political/settlement/ecology child catalogs;
 4. audit exact runtime/source state against the rework matrix;
 5. create reproducible corpus/asset-status inventory.
+
+
+## 2026-10-02 corpus architecture + world child standards
+
+Added active documentation units:
+- `docs/DOCUMENTATION_CORPUS_ARCHITECTURE.md`;
+- `docs/world/WORLD_GEOGRAPHY_STANDARD.md`;
+- `docs/world/WORLD_POLITICAL_ENTITIES.md`;
+- `docs/world/WORLD_SETTLEMENT_CATALOG.md`;
+- `docs/world/WORLD_TRAVEL_AND_ROUTES.md`;
+- `docs/assets/ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md`.
+
+These additions materially advance:
+- corpus/branch planning;
+- world coordinate/geography structure;
+- political hierarchy;
+- settlement authoring;
+- routes/travel;
+- per-area pixel-art/actor/panel/reuse composition.
+
+No numeric target is declared complete. Reproducible inventory remains the next P0 measurement task.
