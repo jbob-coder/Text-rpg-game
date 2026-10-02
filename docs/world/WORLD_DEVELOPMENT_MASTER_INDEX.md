@@ -899,3 +899,14 @@ The first world-population decision should be the minimum parent chain needed to
 ## Gate Twelve parent-world proposal — 2026-10-02
 
 [Gate Twelve parent-world proposal](GATE_TWELVE_PARENT_WORLD_PROPOSAL.md) now supplies the requested minimum candidate parent chain for WD-001/003/004/005/006 review. It is a proposal, not confirmed canon: `Arden Crossing`, `Alder Basin`, the municipal-parent model, climate logic and parent-facing route stubs remain owner-decision inputs. Existing Gate Twelve local IDs, W3 coordinates and eight authored route records are unchanged.
+
+
+## Selective moving-base world migrations — 2026-10-02
+
+The moving PR base was not merged wholesale. Three narrow world children were adapted under current authority:
+
+- [World entity ID/reference standard](WORLD_ENTITY_ID_AND_REFERENCE_STANDARD.md)
+- [Region/settlement documentation template](REGION_SETTLEMENT_DOCUMENTATION_TEMPLATE.md)
+- [Gate Twelve external connections and expansion register](GATE_TWELVE_EXTERNAL_CONNECTIONS_AND_EXPANSION_REGISTER.md)
+
+These children do not confirm proposed parent-world names, final WORLD_GEO coordinates, external destinations, or the Plaza <-> Platform Nine route. The base-side `WORLD_SPATIAL_HIERARCHY_AND_COORDINATES.md` and `WORLD_MAP_PRODUCTION_SEQUENCE.md` were not imported as competing authorities because the active geography/coordinate standards already own those responsibilities.
