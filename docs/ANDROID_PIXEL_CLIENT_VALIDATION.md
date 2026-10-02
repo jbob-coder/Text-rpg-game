@@ -1,5 +1,7 @@
 # Android Pixel Client Validation
 
+> Current priority: `jbob-coder/Text-rpg-game`, [master documentation program](MASTER_GAME_DEVELOPMENT_PROGRAM.md) and [decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md). This report preserves its bounded historical/provisional scope; it is not the final world, current canonical branch, or final APK plan.
+
 Validated: 2026-09-27 17:34 AST  
 Repository: `jbob-coder/Text-rpg-game`  
 Branch: `feature/android-pixel-client-v1`  

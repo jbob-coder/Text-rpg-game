@@ -114,3 +114,14 @@ and the status/ability projections. Raw scenes, state, modifier breakdowns, and 
 history remain engine/developer data and are not player-facing projections.
 
 The prototype uses only the Python standard library. No hosted AI service or GitHub Actions workflow is required.
+
+
+## 2026-10-02 operational continuation
+
+- [Decision/rebuild execution register](docs/DECISION_AND_REBUILD_EXECUTION_REGISTER.md): decomposed owner requirements, can/will/candidate changes, migration gates and unresolved corpus units.
+- [Full baseline document catalog](docs/DOCUMENTATION_CATALOG_2026-10-02.md): every tracked Markdown file, actual headings, words, hashes and literal references; semantic audit remains separate.
+- [World canon decision queue](docs/world/WORLD_CANON_DECISION_QUEUE.md): exact nine-node/eight-edge baseline and ordered unresolved geography/politics/ecology/progression decisions.
+- [Room composition implementation contract](docs/assets/ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md): current actors versus proposed presence projection, focus panels, pixel/text reuse and raster-precedence gates.
+- [Raster delivery evidence](docs/assets/RASTER_DELIVERY_EVIDENCE_2026-10-02.md): all 24 baseline PNG dimensions, hashes and catalog bindings.
+
+These supplement existing masters. They do not supersede approved identity references or imply new gameplay APIs.

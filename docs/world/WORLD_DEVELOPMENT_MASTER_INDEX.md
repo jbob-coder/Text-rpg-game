@@ -860,3 +860,8 @@ Still undecided and intentionally not filled:
 - full world map.
 
 Those decisions should be made in ordered batches using the standards above.
+
+
+## Current canon decision queue
+
+[World canon decision queue](WORLD_CANON_DECISION_QUEUE.md) owns the ordered unresolved decisions and exact current local map baseline. Schema documentation is established; world-scale catalog population is not complete.

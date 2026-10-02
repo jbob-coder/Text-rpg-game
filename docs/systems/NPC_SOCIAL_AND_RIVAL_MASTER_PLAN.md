@@ -317,3 +317,8 @@ Named characters must not inherit another NPC's identity art.
 - procedural titles;
 - adversary cap per region;
 - persistence/performance budget.
+
+
+## Originality review qualification — 2026-10-02
+
+Original names, art and UI address expression reuse; they do not alone establish patent clearance. US10926179B2 and its linked family are a relevant design-review source: https://patents.google.com/patent/US10926179B2/en . Proposed combined promotion/encounter/traits/hierarchy behavior remains subject to claim-aware review; no legal clearance is asserted. Continue original social-memory/goals design and document alternatives; do not implement a branded system by renaming it.

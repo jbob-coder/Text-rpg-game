@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-10-02 08:16 AST
+Updated: 2026-10-02 15:06 AST
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -724,12 +724,28 @@ Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified s
 - RESULT: numeric targets preserved without inventing units; reproducible count audit still pending.
 
 ### TASK D-020 — Finish Gate Twelve Step 8–14
-- STATUS: `IN_PROGRESS`
+- STATUS: `DONE`
 - PRIORITY: `P0`
-- CURRENT: Steps 1–7 complete; Application UX is next.
+- CURRENT: Duplicate tracker reconciled with completed TASK D-005; Steps 1–14 first-pass contract exists. Runtime acceptance remains separate.
+- COMPLETED_AT: `2026-10-02 08:01 AST` (existing D-005 evidence).
 
 ### TASK D-021 — Deep source-file existing-state audit
 - STATUS: `PENDING`
 - PRIORITY: `P0`
 - OUTPUT: exact module/component/content/asset/save/test inventory with disposition and branch/HEAD evidence.
 - RELATED: TASK D-006.
+
+
+## Operational continuation — 2026-10-02 15:06 AST
+
+### TASK D-022 — Baseline documentation/raster evidence and execution contracts
+- STATUS: `DONE` (documentation deliverables; remote publication checked separately).
+- PRIORITY: `P0`
+- BASELINE: `4d596bcd27b6e2f8ef9ce3a93b9dab22f5f4812e`.
+- OUTPUT: decision/rebuild register; complete baseline Markdown catalog + JSON; raster delivery ledger + JSON; exact Gate Twelve map evidence; world canon queue; room composition contract; directive context log.
+- VERIFIED OBSERVATIONS: 76 baseline Markdown files / 123,707 words; 24 raster bindings; nine map nodes / eight edge records; fixed opening-actor lookup; preferred raster precedence.
+- VERIFICATION: `git diff --check` passed; JSON assertions passed for all 76 document records/123,707 words, 24 bound PNGs and nine nodes/eight edge records; local Markdown links in changed documents resolved.
+- TESTS: no runtime files changed; Python/Android runtime tests were not rerun for this documentation-only batch.
+- COMPLETED_AT: `2026-10-02 15:06 AST`.
+- NOT COMPLETE: D-006/D-021 full branch reconciliation, art approval, proposed actor projection, world-scale population, final APK, physical Galaxy A03 QA.
+- NEXT: reconcile source/raster revisions and implementation branch ancestry; author Gate Twelve parent-world proposal and bounded area packets.

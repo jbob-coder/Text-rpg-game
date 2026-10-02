@@ -176,3 +176,8 @@ If chat context is unavailable, start with:
 - the domain master relevant to the task.
 
 Do not rebuild intent from old prototype reports when these current authorities exist.
+
+
+## Operational coverage continuation
+
+The decision/rebuild register now decomposes the renewed directive. The full document catalog covers all 76 baseline Markdown files. The world decision queue preserves exact local coordinates and open canon decisions. The room composition contract documents current actors and proposed panels. All 24 baseline rasters have concrete hash/dimension/binding evidence; branch and artistic acceptance remain open. The activity/life-loop master already exists, superseding the earlier row saying it still needs creation. Persistent adversary design requires patent-aware review as well as original expression; no clearance is claimed.

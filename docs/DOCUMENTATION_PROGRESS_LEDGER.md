@@ -303,3 +303,10 @@ This batch closes four documentation gaps detected by the directive traceability
 - Android screen/projection consumer mapping.
 
 The new documents are contracts, not claims that their target runtime systems are complete.
+
+
+## Executed baseline inventory — 2026-10-02 15:06 AST
+
+Exact baseline `4d596bcd27b6e2f8ef9ce3a93b9dab22f5f4812e`: 239 tracked files; 76 Markdown files; 74 under docs; 123,707 repository Markdown words; 122,028 docs Markdown words; 24 PNGs; 13 world, 9 systems, 23 asset and 4 Android Markdown files. Command actually executed: `python tools/documentation_inventory.py --root .`. No unreadable Markdown reported.
+
+These measured quantities are baseline inventory, not completion of the owner's ambiguous numeric targets. New continuation files are excluded from the baseline snapshot. Full file-content catalog and 24 raster binding records are now stored under docs/evidence. World map baseline contains nine nodes and eight edge records. No 10,000-place or 2,000,000-unit completion is claimed.

@@ -1,5 +1,7 @@
 # Character and Stats inspection handoff
 
+> Current priority: `jbob-coder/Text-rpg-game`, [master documentation program](MASTER_GAME_DEVELOPMENT_PROGRAM.md) and [decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md). This report preserves its bounded historical/provisional scope; it is not the final world, current canonical branch, or final APK plan.
+
 ## CURRENT_OBJECTIVE
 
 Implement the approved phone Character/Equipment and Stats direction on the verified

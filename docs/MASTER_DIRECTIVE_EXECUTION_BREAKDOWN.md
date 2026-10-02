@@ -361,3 +361,8 @@ The following Phase 5–12 foundation contracts now exist:
 - `docs/android/APPLICATION_UX_MASTER_PLAN.md`.
 
 They turn several previously listed future outputs into real repository documents. Their unresolved decisions remain intentionally open; no runtime system is implied by document creation.
+
+
+## Current continuation
+
+See [Decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md) for operational steps and accepted versus candidate changes. The baseline catalog and raster audit now exist; branch reconciliation remains open.

@@ -1,5 +1,7 @@
 # Systems Catalog — Foundation v0.2
 
+> Current priority: `jbob-coder/Text-rpg-game`, [master documentation program](MASTER_GAME_DEVELOPMENT_PROGRAM.md) and [decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md). This report preserves its bounded historical/provisional scope; it is not the final world, current canonical branch, or final APK plan.
+
 This document is the canonical high-level map for player statistics and the first non-combat simulation systems. It exists to keep future content authors, UI work, and balancing consistent.
 
 ## Core attributes

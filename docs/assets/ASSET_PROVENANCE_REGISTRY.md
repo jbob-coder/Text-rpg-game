@@ -354,3 +354,8 @@ An asset becomes `CANON_APPROVED` only when:
 - replacement/supersession state is recorded.
 
 Presence in the APK is not enough.
+
+
+## Exact-baseline raster continuation
+
+[Raster delivery evidence](RASTER_DELIVERY_EVIDENCE_2026-10-02.md) and `docs/evidence/raster_bindings_2026-10-02.json` now provide dimensions, SHA-256, Git blob and catalog binding for all 24 program-baseline rasters. Source-authoring lineage, later-branch variant reconciliation, source/raster equality and canon approval remain open.

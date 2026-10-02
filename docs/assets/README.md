@@ -126,3 +126,8 @@ It supplements, not replaces, the runtime composition standard and exact asset m
 
 ## Provenance
 - `ASSET_PROVENANCE_REGISTRY.md` — branch-aware source/reference/raster/code provenance, production stage, supersession, compatibility and reconciliation queue.
+
+
+## Current operational evidence
+
+Earlier Wave A pre-build language is historical. Use [Raster delivery evidence](RASTER_DELIVERY_EVIDENCE_2026-10-02.md), the production ledger and [Room composition contract](ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md) for current source-grounded state. No uniform production stage applies to the entire 500-unit plan.

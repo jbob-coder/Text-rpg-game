@@ -223,7 +223,7 @@ Do not create thousands of fictional records before schemas and Gate Twelve proo
 
 ---
 
-## 5. Gameplay-system documentation still required
+## 5. Original requirements list — domain masters now materialized
 
 ### Progression master
 Planned:
@@ -377,7 +377,7 @@ Whenever a major new document is created:
 
 ---
 
-## 10. Next documentation sequence
+## 10. Historical initial sequence — superseded by operational continuation
 
 1. finish Gate Twelve Step 5–14;
 2. build existing-state audit;
@@ -467,7 +467,7 @@ References:
 - APK rebuild/evolution master;
 - final domain contracts.
 
-## 12. Updated documentation sequence
+## 12. Historical expansion sequence — superseded by operational continuation
 
 1. Gate Twelve Steps 8–14;
 2. deep existing-state source audit;
@@ -665,3 +665,14 @@ Owns:
 - screen/component consumer ownership;
 - safe actor/activity/world/combat projection gaps;
 - final line-by-line Android consumer-audit target.
+
+
+## 2026-10-02 operational continuation
+
+- [Decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md): decomposed owner requirements, can/will/candidate changes, migration gates and unresolved corpus units.
+- [Full baseline document catalog](DOCUMENTATION_CATALOG_2026-10-02.md): every tracked Markdown file, actual headings, words, hashes and literal references; semantic audit remains separate.
+- [World canon decision queue](world/WORLD_CANON_DECISION_QUEUE.md): exact nine-node/eight-edge baseline and ordered unresolved geography/politics/ecology/progression decisions.
+- [Room composition implementation contract](assets/ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md): current actors versus proposed presence projection, focus panels, pixel/text reuse and raster-precedence gates.
+- [Raster delivery evidence](assets/RASTER_DELIVERY_EVIDENCE_2026-10-02.md): all 24 baseline PNG dimensions, hashes and catalog bindings.
+
+These supplement existing masters. They do not supersede approved identity references or imply new gameplay APIs.

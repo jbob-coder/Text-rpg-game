@@ -1118,3 +1118,14 @@ These documents formalize:
 - how each room/area composes environment, player, NPC actors, equipment, panels, text, overlays, FX and reusable art coherently.
 
 Current priority remains documentation. Gate Twelve Steps 1–14 are now complete as the first proof-region planning packet. The next P0 tracks are the exact existing-state repository audit and a reproducible corpus/world/asset inventory before broad runtime migration.
+
+
+## 2026-10-02 operational continuation
+
+- [Decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md): decomposed owner requirements, can/will/candidate changes, migration gates and unresolved corpus units.
+- [Full baseline document catalog](DOCUMENTATION_CATALOG_2026-10-02.md): every tracked Markdown file, actual headings, words, hashes and literal references; semantic audit remains separate.
+- [World canon decision queue](world/WORLD_CANON_DECISION_QUEUE.md): exact nine-node/eight-edge baseline and ordered unresolved geography/politics/ecology/progression decisions.
+- [Room composition implementation contract](assets/ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md): current actors versus proposed presence projection, focus panels, pixel/text reuse and raster-precedence gates.
+- [Raster delivery evidence](assets/RASTER_DELIVERY_EVIDENCE_2026-10-02.md): all 24 baseline PNG dimensions, hashes and catalog bindings.
+
+These supplement existing masters. They do not supersede approved identity references or imply new gameplay APIs.

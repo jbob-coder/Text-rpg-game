@@ -1,5 +1,7 @@
 # Rules + Ability Integration V6 Reconciliation
 
+> Current priority: `jbob-coder/Text-rpg-game`, [master documentation program](MASTER_GAME_DEVELOPMENT_PROGRAM.md) and [decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md). This report preserves its bounded historical/provisional scope; it is not the final world, current canonical branch, or final APK plan.
+
 Status: **RUNTIME EXECUTED — BASELINE FAILURES REPAIRED ON STABILIZATION CANDIDATE**
 
 2026-09-27 update: exact upstream V6 source at `7f5f104fb839068bdfaf5cec72f37129ae20d463`

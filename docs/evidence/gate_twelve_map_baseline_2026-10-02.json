@@ -1,0 +1,107 @@
+{
+  "baseline_commit": "4d596bcd27b6e2f8ef9ce3a93b9dab22f5f4812e",
+  "canon_status": "provisional_canon",
+  "source": "content/vertical_slice_01.json",
+  "coordinate_meaning": "presentation map values; not physical distance",
+  "world_map": {
+    "title": "Gate Twelve District",
+    "nodes": {
+      "PLATFORM_NINE": {
+        "title": "Platform Nine",
+        "description": "Evacuation platform inside the municipal tram depot.",
+        "x": 18,
+        "y": 36
+      },
+      "RELAY_WORKBENCH": {
+        "title": "Relay Workbench",
+        "description": "A maintenance bench where the dead relay can be examined.",
+        "x": 34,
+        "y": 31
+      },
+      "GATE_TWELVE": {
+        "title": "Service Gate Twelve",
+        "description": "A sealed maintenance entrance below the depot.",
+        "x": 53,
+        "y": 48
+      },
+      "SERVICE_TUNNEL": {
+        "title": "Service Tunnel",
+        "description": "Restricted infrastructure running under the evacuation route.",
+        "x": 70,
+        "y": 61
+      },
+      "EVAC_STAIR": {
+        "title": "Quiet Stair",
+        "description": "A maintenance stair which exits away from the main evacuation flow.",
+        "x": 40,
+        "y": 70
+      },
+      "TRACE_CHAMBER": {
+        "title": "Trace Chamber",
+        "description": "A controlled space used to reproduce and stabilize Trace Echo.",
+        "x": 82,
+        "y": 39
+      },
+      "DISTRICT_PLAZA": {
+        "title": "Depot Plaza",
+        "description": "The open space outside the tram depot, now serving as the district's temporary meeting point.",
+        "x": 48,
+        "y": 18,
+        "discover_flag": "world.free_roam_unlocked",
+        "scene_id": "DISTRICT_HUB"
+      },
+      "DISTRICT_ARCHIVE": {
+        "title": "Municipal Archive",
+        "description": "A public records annex running on backup power.",
+        "x": 66,
+        "y": 16,
+        "discover_flag": "world.free_roam_unlocked",
+        "scene_id": "DISTRICT_ARCHIVE"
+      },
+      "WORKSHOP_ROW": {
+        "title": "Workshop Row",
+        "description": "Repair shops and municipal contractors clustered west of the depot.",
+        "x": 29,
+        "y": 16,
+        "discover_flag": "world.free_roam_unlocked",
+        "scene_id": "DISTRICT_WORKSHOP"
+      }
+    },
+    "edges": [
+      {
+        "from": "PLATFORM_NINE",
+        "to": "RELAY_WORKBENCH"
+      },
+      {
+        "from": "PLATFORM_NINE",
+        "to": "GATE_TWELVE"
+      },
+      {
+        "from": "PLATFORM_NINE",
+        "to": "EVAC_STAIR"
+      },
+      {
+        "from": "GATE_TWELVE",
+        "to": "SERVICE_TUNNEL"
+      },
+      {
+        "from": "GATE_TWELVE",
+        "to": "TRACE_CHAMBER"
+      },
+      {
+        "from": "SERVICE_TUNNEL",
+        "to": "TRACE_CHAMBER"
+      },
+      {
+        "from": "DISTRICT_PLAZA",
+        "to": "DISTRICT_ARCHIVE",
+        "travel_minutes": 8
+      },
+      {
+        "from": "DISTRICT_PLAZA",
+        "to": "WORKSHOP_ROW",
+        "travel_minutes": 7
+      }
+    ]
+  }
+}

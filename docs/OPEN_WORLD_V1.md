@@ -1,5 +1,7 @@
 # Open World V1 — Candidate Design and Handoff
 
+> Current priority: `jbob-coder/Text-rpg-game`, [master documentation program](MASTER_GAME_DEVELOPMENT_PROGRAM.md) and [decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md). This report preserves its bounded historical/provisional scope; it is not the final world, current canonical branch, or final APK plan.
+
 Updated: 2026-09-27 AST  
 Branch: `feature/android-open-world-v1`
 

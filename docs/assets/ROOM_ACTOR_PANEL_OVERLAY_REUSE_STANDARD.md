@@ -221,3 +221,8 @@ An area is visually ready only when:
 - no hidden-state visual leak exists;
 - phone screenshot QA passes;
 - provenance is recorded.
+
+
+## Operational child
+
+[Room composition implementation contract](ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md) records the actual fixed actor lookup, future safe presence/panel contract and raster-precedence acceptance requirements.
