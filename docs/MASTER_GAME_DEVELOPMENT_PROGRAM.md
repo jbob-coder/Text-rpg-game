@@ -1117,4 +1117,4 @@ These documents formalize:
 - how route legality remains world authority while art/UI visualize it;
 - how each room/area composes environment, player, NPC actors, equipment, panels, text, overlays, FX and reusable art coherently.
 
-Current priority remains documentation. The next P0 measurement task is a reproducible corpus/world/asset inventory. Gate Twelve Step 8–14 remains the first region-completion track.
+Current priority remains documentation. Gate Twelve Steps 1–14 are now complete as the first proof-region planning packet. The next P0 tracks are the exact existing-state repository audit and a reproducible corpus/world/asset inventory before broad runtime migration.
