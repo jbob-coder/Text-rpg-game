@@ -317,6 +317,45 @@ class CharacterStatsSectionTest {
     }
 
     @Test
+    fun skillsMatrixUsesAuthoritativeCategoriesAndPhoneReadableCards() {
+        val skillsSnapshot = snapshot.copy(
+            skills = listOf(
+                GameSkill("unarmed", "Unarmed", "combat", 18.0, 18.0, 0.0, false),
+                GameSkill("athletics", "Athletics", "physical", 24.0, 24.0, 0.0, false),
+                GameSkill(
+                    "technical_systems",
+                    "Technical Systems",
+                    "technical",
+                    25.0,
+                    26.0,
+                    1.0,
+                    true,
+                    listOf(GameStatusContribution("equipment", "Insulated work gloves", 1.0, "hands")),
+                ),
+                GameSkill("persuasion", "Persuasion", "social", 12.0, 12.0, 0.0, false),
+                GameSkill("investigation", "Investigation", "knowledge", 20.0, 20.0, 0.0, false),
+            ),
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
+                    StatsSection(skillsSnapshot)
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("skills-matrix").performScrollTo().assertIsDisplayed()
+        composeRule.onNodeWithTag("skills-category-combat").assertExists()
+        composeRule.onNodeWithTag("skills-category-physical").assertExists()
+        composeRule.onNodeWithTag("skills-category-technical").assertExists()
+        composeRule.onNodeWithTag("skills-category-social").assertExists()
+        composeRule.onNodeWithTag("skills-category-knowledge").assertExists()
+        composeRule.onNodeWithTag("skill-row-technical_systems").assertExists()
+        saveScreenshot("skills-320dp", "skills-matrix")
+    }
+
+    @Test
     fun largeTextStillKeepsEveryAttributeInsidePhoneWidth() {
         composeRule.setContent {
             CompositionLocalProvider(LocalDensity provides Density(LocalDensity.current.density, 1.6f)) {
