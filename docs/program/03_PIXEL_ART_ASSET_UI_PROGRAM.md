@@ -133,3 +133,18 @@ No generated reference skips directly to shipped art.
 - MOBILE_PIXEL_SCALING_STANDARD
 - UI_PANEL_NAVIGATION_STANDARD
 - ASSET_RETIREMENT_MIGRATION_LOG
+
+
+## Contextual composition contract now documented
+
+See `11_CONTEXTUAL_VISUAL_COMPOSITION_CONTRACT.md`.
+
+Locked ownership:
+- engine/content owns character presence;
+- bridge exposes player-safe presence;
+- Android owns layout/focus;
+- asset catalogs own approved visual variants/anchors.
+
+Current scene-ID actor selection is documented as migration debt.
+
+The future-document item `CHARACTER_PANEL_CONTEXT_CONTRACT` is satisfied by this contract for the current architecture phase; implementation and broader-world expansion remain pending.
