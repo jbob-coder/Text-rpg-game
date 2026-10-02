@@ -1704,6 +1704,590 @@ These gaps should feed later content/system planning; they are not excuses to fa
 
 ---
 
+# 5. Geometry contract
+
+Status: **COMPLETE — PRODUCTION GEOMETRY LOCKED UNLESS EXPLICITLY MIGRATED**
+
+This step converts the current Gate Twelve implementation into a production contract. Art, UI, overlays, future loading sections, and map improvements must fit this contract unless a later migration explicitly changes it.
+
+The purpose is to prevent visual production from silently redefining gameplay space.
+
+## 5.1 Geometry authorities
+
+Current sources:
+
+1. `android/app/src/main/java/com/thegame/rpg/ui/PixelMapArtCatalog.kt`
+   - owns the current 256x144 presentation master;
+   - confirms the major blocks, bands, roads, and six service-route lines.
+
+2. `docs/assets/GATE_TWELVE_MAP_PIXEL_ASSET_BLUEPRINT.md`
+   - translates that geometry into production-facing named bounds and reusable asset guidance.
+
+3. `content/vertical_slice_01.json`
+   - owns gameplay world-map node percentages and authored graph edges.
+
+4. this Master Plan
+   - owns the target spatial hierarchy, circulation intent, expansion boundaries, and migration decisions.
+
+The presentation map and gameplay graph are related but remain separate authorities.
+
+## 5.2 Coordinate-system contract
+
+### Presentation master
+- native grid: **256x144**
+- origin: upper-left
+- purpose: visual composition, building footprints, roads, map-surface alignment, reusable modules and overlay anchoring.
+
+### Gameplay map
+Current node positions are percentages:
+
+| Stable ID | X% | Y% |
+| --- | ---: | ---: |
+| `PLATFORM_NINE` | 18 | 36 |
+| `RELAY_WORKBENCH` | 34 | 31 |
+| `GATE_TWELVE` | 53 | 48 |
+| `SERVICE_TUNNEL` | 70 | 61 |
+| `EVAC_STAIR` | 40 | 70 |
+| `TRACE_CHAMBER` | 82 | 39 |
+| `DISTRICT_PLAZA` | 48 | 18 |
+| `DISTRICT_ARCHIVE` | 66 | 16 |
+| `WORKSHOP_ROW` | 29 | 16 |
+
+These values remain engine/content data. Do not replace them with raw pixel coordinates merely because the visual map uses a 256x144 master.
+
+## 5.3 Locked global bands
+
+| Band | Y range | Function |
+| --- | --- | --- |
+| Surface Civic District | 0..47 | public/civic map layer |
+| Depot / Service Belt | 48..94 | depot, gate and service infrastructure |
+| Lower Maintenance Infrastructure | 95..143 | lower service layer |
+
+Changing these boundaries later is a map migration, not an ordinary art edit.
+
+## 5.4 Locked named-location footprints
+
+The following current presentation bounds are production anchors.
+
+| Location | Confirmed presentation geometry |
+| --- | --- |
+| Workshop Row | main block x=49..102, y=8..29; linked bay frontage |
+| Depot Plaza | paving x=105..143, y=8..39; frontage x=108..140, y=31..43 |
+| Municipal Archive | x=151..196, y=6..33 |
+| Platform Nine | depot x=20..83, y=37..72; track field x=18..85 around y=69..78 |
+| Relay Workbench | x=75..105, y=31..58 |
+| Gate Twelve | x=119..154, y=56..85 |
+| Quiet Stair | x=88..118, y=89..123 |
+| Service Tunnel | x=161..199, y=78..108 |
+| Trace Chamber | x=194..237, y=40..71 |
+
+These bounds may receive improved internal art, materials, modules, props and overlays.
+
+They may not be silently expanded through another named location, road band, or expansion boundary.
+
+## 5.5 Existing presentation route anchors
+
+The current visual master uses these approximate route anchors:
+
+- Platform Nine: `(46,52)`
+- Relay Workbench: `(87,45)`
+- Gate Twelve: `(136,69)`
+- Quiet Stair: `(102,101)`
+- Service Tunnel: `(179,88)`
+- Trace Chamber: `(210,56)`
+
+Current six presentation segments:
+
+- Platform Nine -> Relay Workbench
+- Platform Nine -> Gate Twelve
+- Platform Nine -> Quiet Stair
+- Gate Twelve -> Service Tunnel
+- Gate Twelve -> Trace Chamber
+- Service Tunnel -> Trace Chamber
+
+These lines visualize existing authored connectivity. They do not own reachability.
+
+## 5.6 Depot Plaza -> Platform Nine reserved connector
+
+Step 3 approved `DISTRICT_PLAZA <-> PLATFORM_NINE` as necessary for the target circulation model.
+
+Step 5 reserves visual/architectural capacity for that connection but does **not** invent:
+- an exact pixel route;
+- doorway geometry;
+- travel minutes;
+- discovery rules;
+- a new JSON edge.
+
+Implementation requires a deliberate graph/content migration.
+
+Until that happens:
+- art must not make the connection appear mechanically available;
+- future Plaza and Platform art must avoid blocking the intended threshold;
+- route overlay logic must continue to reflect engine state.
+
+## 5.7 Expansion-edge reservations
+
+### Depot Plaza
+Reserve an outward-facing surface-world continuation.
+
+### Quiet Stair
+Reserve a distinct evacuation/service egress continuation.
+
+### Service Tunnel
+Reserve a deeper-infrastructure continuation.
+
+### Workshop Row and Municipal Archive
+Keep exterior edges visually compatible with surrounding urban fabric, but do not promote them to primary inter-region gateways.
+
+No destination is invented by this reservation.
+
+## 5.8 Reusable geometry modules
+
+Adopted from the external settlement references as an abstract production principle:
+
+- surface tiles;
+- road/curb/seam modules;
+- depot facade pieces;
+- municipal door/window families;
+- workshop bay modules;
+- institutional Archive facade pieces;
+- service wall/support modules;
+- stair/shaft modules;
+- track/rail modules;
+- fence/barrier modules when needed;
+- props and street furniture;
+- overlay anchors;
+- collision/navigation/loading metadata when a later runtime requires them.
+
+Rejected as authority:
+- exact 60x70 or 120x140 meter scales;
+- 1 meter tile assumption;
+- 5-section or 12-area subdivision;
+- exact gate widths;
+- exact street widths from the references;
+- medieval settlement architecture.
+
+## 5.9 Layer-stack model adopted
+
+The external references contain a useful layered-production model. Gate Twelve adopts the concept, translated to this project:
+
+1. world/map authority and coordinate contract;
+2. macrozone/subzone ownership;
+3. roads/routes/circulation;
+4. permanent location footprints;
+5. interiors/interaction anchors;
+6. permanent props/street furniture;
+7. NPC/activity projection;
+8. navigation/collision only if/when a runtime requires it;
+9. loading/section ownership;
+10. minimap/map markers/wayfinding;
+11. asset production queue;
+12. performance/mobile budgets;
+13. migration/retirement plan.
+
+This ordering is a documentation dependency model, not proof that all thirteen runtime layers currently exist.
+
+## 5.10 What may change without geometry migration
+
+Allowed:
+- palette and materials;
+- facade detail;
+- internal pixel clusters;
+- prop choice/placement inside safe footprint;
+- lighting;
+- decals;
+- temporary overlays;
+- scene illustrations;
+- UI framing;
+- marker design;
+- texture/module implementation.
+
+Requires migration review:
+- named-location outer bounds;
+- macrozone boundary;
+- road bands;
+- route anchor topology;
+- world-node percentages;
+- authored graph edges;
+- expansion-edge ownership;
+- map native size;
+- coordinate-system change.
+
+## 5.11 Step 5 locked decisions
+
+1. 256x144 remains the current Gate Twelve presentation master.
+2. Gameplay node percentages remain separate from map pixels.
+3. Nine named-location footprints are now production anchors.
+4. Existing graph/presentation lines remain authoritative until explicitly migrated.
+5. Plaza -> Platform Nine has reserved capacity but is not yet a gameplay edge.
+6. Three expansion directions are reserved without inventing destinations.
+7. Future art is modular and layered; it does not redraw the entire district as one flattened state image.
+8. Exact measurements and section counts from external references are rejected as authority.
+9. Geometry changes require migration evidence, not silent visual edits.
+
+---
+
+# 6. Material and visual language
+
+Status: **COMPLETE — VISUAL DIRECTION LOCKED FOR ASSET DECOMPOSITION**
+
+This step defines how Gate Twelve should look while preserving the geometry contract.
+
+## 6.1 Core visual identity
+
+Gate Twelve is a **modern grounded municipal/industrial pixel-art district**.
+
+It is not:
+- medieval fantasy;
+- cyberpunk neon city;
+- generic sci-fi laboratory;
+- photorealistic concept art pasted into the client.
+
+The external settlement images are useful for modularity, composition, section readability, and reusable kits only. Their medieval architecture is not adopted.
+
+## 6.2 Existing production standards remain authoritative
+
+Use:
+- 32x48 gameplay character masters;
+- 32x32 item/equipment icons;
+- 16x16 compact/map icons;
+- 64x64 portraits/effects where specified by the asset plan;
+- 128x64 scene illustrations;
+- 256x144 district/map masters;
+- integer/nearest-neighbor scaling;
+- no shipped anti-aliased sprite edges unless a documented FX exception applies;
+- stable palette/material families;
+- explicit anchors and z-order.
+
+If a newer versioned asset contract later changes a grid, record the migration.
+
+## 6.3 Macrozone material families
+
+### Surface Civic District
+Character:
+- public;
+- maintained but worn;
+- brighter value structure;
+- civic stone/concrete;
+- practical vegetation;
+- warm municipal lighting;
+- readable entrances and public-space edges.
+
+### Depot / Gate Core
+Character:
+- denser;
+- service-oriented;
+- rail/tram/depot materials;
+- painted utility metal;
+- reinforced concrete;
+- safety markings used sparingly;
+- stronger shadow blocks;
+- controlled practical lighting.
+
+### Lower Maintenance Network
+Character:
+- darker;
+- more restricted;
+- service concrete;
+- vents, ribs, pipe/cable families;
+- drains and maintenance markings;
+- guidance/emergency lighting;
+- stronger negative space and depth.
+
+## 6.4 Named-location visual differentiation
+
+Workshop Row:
+- linked practical work bays;
+- warmer industrial materials;
+- tools/benches/salvage as separable props.
+
+Depot Plaza:
+- open civic field;
+- restrained furniture;
+- clear directional paths;
+- temporary emergency state remains overlay-driven.
+
+Municipal Archive:
+- cleaner institutional facade;
+- ordered geometry;
+- records/terminal identity belongs mainly to scene/interior composition.
+
+Platform Nine:
+- heavy depot silhouette;
+- tracks/platform identity;
+- evacuation/crowd/blackout state remains separable.
+
+Relay Workbench:
+- compact technical annex;
+- diagnostic focal props;
+- no broad crafting-shop identity unless future systems justify it.
+
+Gate Twelve:
+- strongest threshold silhouette;
+- heavy service-door language;
+- Trace/lock/danger effects remain overlays.
+
+Quiet Stair:
+- sparse shaft/stair readability;
+- low visual clutter;
+- clear egress identity.
+
+Service Tunnel:
+- repeated structural ribs;
+- pipe/cable/support families;
+- corridor depth;
+- evidence/hazard/aftershock remain stateful.
+
+Trace Chamber:
+- controlled municipal test environment;
+- cleaner arrangement than Service Tunnel;
+- signal activity may use restrained cyan accents;
+- no permanent neon-lab treatment.
+
+## 6.5 Lighting rules
+
+- one dominant light direction per scene/location family;
+- warm practical public lighting above;
+- colder/restrained technical lighting below where useful;
+- emergency lighting is temporary state;
+- Trace lighting is effect state;
+- lighting may improve mood but may not hide required interaction silhouettes or mobile readability.
+
+## 6.6 Palette rules
+
+The existing UI anchor palette remains compatible guidance:
+- Ink / Deep / Panel values;
+- Paper;
+- Muted;
+- Cyan;
+- Gold;
+- Danger;
+- Disabled.
+
+World art may use local ramps.
+
+Cyan is not a blanket world color; use it for controlled technical/signal emphasis.
+
+Gold/amber supports practical/civic lighting and selected highlights.
+
+Danger colors are state feedback, not permanent architectural identity.
+
+## 6.7 Character and equipment visual consistency
+
+The supplied character reference sheets reinforce an already-existing rule:
+- recurring characters need turnarounds and stable identity anchors;
+- equipment is layered over a stable base;
+- asymmetry must not be lost through blind mirroring;
+- icons, portraits and gameplay sprites must represent the same identity.
+
+The references do not independently make any illustrated hairstyle, outfit, NPC, item, expression count or animation count canonical.
+
+Only repository-approved identity/asset records can do that.
+
+## 6.8 Scene composition
+
+Scene illustrations use a stable location base plus separable state where architecture is unchanged.
+
+Preferred layers:
+1. base environment;
+2. permanent architecture;
+3. permanent props;
+4. stateful props;
+5. characters;
+6. weather/hazard/event overlays;
+7. power/Trace FX;
+8. UI/contextual framing.
+
+Do not flatten all story branches into separate full-scene images when overlays or prop swaps are sufficient.
+
+## 6.9 Mobile readability
+
+At reduced phone presentation:
+- Tier 1 map anchors remain identifiable;
+- current/reachable/unavailable markers remain distinguishable;
+- player and focused-character silhouettes remain readable;
+- interaction states do not depend only on tiny text or subtle hue shifts;
+- decorative detail may reduce before functional landmarks reduce.
+
+## 6.10 Step 6 locked decisions
+
+1. Gate Twelve remains modern grounded municipal/industrial pixel art.
+2. Medieval external architecture is not adopted.
+3. Existing native asset grids remain the production baseline.
+4. Permanent identity and temporary state remain separate.
+5. Reusable material/module families are preferred over isolated flattened art.
+6. Character/equipment visual identity must remain stable across sprite, portrait, icon and panel use.
+7. Lighting and FX cannot become gameplay state owners.
+8. Mobile readability outranks decorative density.
+
+---
+
+# 7. Asset decomposition and production-state contract
+
+Status: **COMPLETE — ASSET WORK CAN NOW BE QUEUED WITHOUT REDESIGNING THE MAP**
+
+This step defines what is built as reusable families, what remains unique, and how existing versus missing assets are tracked.
+
+## 7.1 Production categories
+
+Every Gate Twelve visual belongs to one of:
+- BASE SURFACE
+- ARCHITECTURE MODULE
+- UNIQUE LANDMARK
+- PROP
+- DECAL
+- CHARACTER/NPC
+- EQUIPMENT LAYER
+- ITEM ICON
+- SCENE MASTER
+- STATE OVERLAY
+- FX
+- MAP MARKER
+- UI CHROME/PANEL
+
+## 7.2 Reusable environment families
+
+Required/reviewed families:
+- civic paving;
+- road/asphalt;
+- curb/edge;
+- service concrete;
+- lower-maintenance concrete;
+- track/rail;
+- drain/seam;
+- wall/floor panels;
+- rail/vent modules;
+- technical panels;
+- doors/windows;
+- workshop bay modules;
+- Archive facade modules;
+- depot facade modules;
+- service supports;
+- stair/shaft pieces;
+- pipes/cables;
+- lamps;
+- signs;
+- benches;
+- notice boards;
+- crates/bins;
+- planters/vegetation;
+- barriers/fences where context requires them.
+
+## 7.3 Unique location landmarks
+
+Keep unique:
+- Gate Twelve primary door/threshold;
+- Trace Chamber apparatus/focal structure;
+- Platform Nine depot identity;
+- Municipal Archive recognizable frontage;
+- Depot Plaza orientation composition;
+- Relay Workbench focal workbench/diagnostic station.
+
+Reusable modules may build around them.
+
+## 7.4 Existing current named-location scene masters
+
+The repository currently documents/code-binds base scene masters for:
+- Platform Nine blackout;
+- Relay Workbench default;
+- Gate Twelve sealed;
+- Service Tunnel default;
+- Quiet Stair default;
+- Trace Chamber idle;
+- Depot Plaza open;
+- Municipal Archive default;
+- Workshop Row default.
+
+A code-present ID means the asset binding exists; it does not by itself prove final visual approval.
+
+## 7.5 Planned/state variants requiring explicit tracking
+
+Examples already documented in the asset blueprint include:
+- Platform Nine evacuated;
+- Relay Workbench relay-open;
+- Gate Twelve Echo-active;
+- Service Tunnel aftershock;
+- Trace Chamber training;
+- Depot Plaza blackout;
+- Municipal Archive terminal close-up;
+- Workshop Row rumor state.
+
+Each remains a separate lifecycle record until produced/integrated/verified.
+
+## 7.6 Character/UI families
+
+The external character sheets are useful for identifying production families:
+- neutral player body;
+- approved player equipment layers;
+- recurring-character turnaround;
+- expression/portrait states;
+- NPC archetype base families;
+- item/equipment icons;
+- map icons;
+- ability/Trace FX;
+- location previews;
+- UI panels.
+
+Only existing project stable IDs and future approved records may populate these families.
+
+## 7.7 Contextual panel dependency
+
+Character/room panels are not a purely visual asset problem.
+
+Before final panel production, the client needs an authoritative scene-presence projection.
+
+Asset production may create neutral reusable panel chrome now, but final character-specific binding waits for:
+- present-character IDs;
+- focused speaker;
+- party/presence rules;
+- player-safe expression/status tags;
+- interaction/action state.
+
+This dependency is documented globally under `docs/program/`.
+
+## 7.8 Asset reuse rule
+
+Reuse when all remain compatible:
+- perspective;
+- native grid;
+- pivot/anchor;
+- material;
+- light direction;
+- z-order;
+- scale;
+- palette relationship;
+- world-state meaning.
+
+Do not reuse an asset simply because it fits geometrically if the lighting, perspective, identity or state meaning makes it look out of place.
+
+## 7.9 Production-state vocabulary
+
+Use:
+- PLANNED
+- REFERENCE_GENERATED
+- REFERENCE_SELECTED
+- BLUEPRINTED
+- PIXEL_MASTER_BUILT
+- INTEGRATED
+- VERIFIED
+- DEFERRED
+- REJECTED
+- RETIRED
+
+Do not use VERIFIED without observed integration/QA evidence.
+
+## 7.10 Step 7 locked decisions
+
+1. Asset production follows stable categories and lifecycle states.
+2. Unique landmarks sit on reusable material/module families.
+3. Temporary state is handled by variants/overlays rather than duplicating whole maps by default.
+4. Character contextual panels depend on engine-owned presence state.
+5. Reuse is conditional on perspective, anchor, light, material and meaning.
+6. Code presence and final visual approval remain separate statuses.
+7. Asset production may now proceed location-by-location without redesigning Gate Twelve's geometry.
+
+---
+
 # 5. Planned authoring sequence
 
 The remaining master plan will be completed in this order:
@@ -1712,9 +2296,9 @@ The remaining master plan will be completed in this order:
 2. **Spatial hierarchy** — COMPLETE.
 3. **Circulation** — COMPLETE.
 4. **Per-zone function** — COMPLETE.
-5. **Geometry contract** — footprints, boundaries, anchors, reusable modules.
-6. **Material and visual language** — surfaces, architecture families, lighting.
-7. **Asset decomposition** — what must be built one asset at a time.
+5. **Geometry contract** — COMPLETE.
+6. **Material and visual language** — COMPLETE.
+7. **Asset decomposition** — COMPLETE.
 8. **Application UX plan** — Map/Story/location navigation and high-use flows.
 9. **State-layer plan** — discovery, reachability, events, blackout, Trace effects.
 10. **Performance/section strategy** — loading boundaries and mobile constraints.
@@ -1727,7 +2311,7 @@ The remaining master plan will be completed in this order:
 
 # Continuity footnote / next-session handoff
 
-**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value.
+**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract; Step 6 — material and visual language; Step 7 — asset decomposition and production-state contract.
 
 **Key decisions preserved for future sessions:**
 - active repository is `jbob-coder/Text-rpg-game`;
@@ -1740,6 +2324,6 @@ The remaining master plan will be completed in this order:
 - UI must not become the source of truth for gameplay state;
 - final map must be constructed as modular game content, piece by piece, not generated as one flattened image.
 
-**Next unfinished step:** Step 5 — define the geometry contract: exact presentation footprints/bounds, transition anchors, reserved expansion edges, reusable building/surface modules, and what geometry may or may not change before asset production.
+**Next unfinished step:** Step 8 — define the application UX plan: Story/Map/Character/location navigation, contextual character/room panels, high-use flows, touch/mobile behavior, and ownership boundaries.
 
-**Do not begin asset production before Step 5 is complete.**
+**Do not implement the final contextual character/room panel binding before Step 8 and the scene-presence projection contract are complete.**
