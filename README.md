@@ -39,6 +39,11 @@ Start here for current work:
 27. [Live Repository State Audit — 2026-10-02](docs/LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md)
 28. [Repository Corpus Inventory Snapshot — 2026-10-02](docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-02.md)
 29. [Deterministic Documentation Inventory Tool](tools/documentation_inventory.py)
+30. [Owner Directive Traceability Matrix — 2026-10-02](docs/OWNER_DIRECTIVE_TRACEABILITY_MATRIX_2026-10-02.md)
+31. [Player Activities & Life-Loop Master Plan](docs/systems/PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md)
+32. [World Coordinate & Scale Standard](docs/world/WORLD_COORDINATE_AND_SCALE_STANDARD.md)
+33. [Asset Provenance Registry](docs/assets/ASSET_PROVENANCE_REGISTRY.md)
+34. [Android Consumer & Player-Safe Projection Map](docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md)
 
 The default `main` branch remains a placeholder and is not implementation authority.
 
