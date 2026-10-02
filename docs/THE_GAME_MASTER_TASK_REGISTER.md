@@ -65,7 +65,7 @@ This section supersedes older statements about the top-level product objective w
 - PRIORITY: `P0`
 - CURRENT: Steps 1–7 complete. Step 8 Application UX plan is next.
 - DOCUMENT: `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`
-- DONE WHEN: Application UX, state layers, loading, implementation order, verification, migration and execution handoff are documented.
+- DONE WHEN: State layers, loading/performance, implementation order, verification, migration and execution handoff are documented.
 
 ### TASK D-006 — Existing-state repository audit
 - STATUS: `IN_PROGRESS`
