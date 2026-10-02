@@ -136,3 +136,39 @@ The long-range documentation target must never be called complete until:
 - duplicates/stale material are classified;
 - cross-reference coverage is audited;
 - the owner accepts the measurement method.
+
+
+## 10. Post-expansion structural checkpoint
+
+After the live-audit, traceability and child-contract batch, the documentation-program branch advanced to:
+
+`836c550eeeae8a2b59ad04da0ef2b6f3ec48efb7`
+
+Recursive Git-tree counts at that exact HEAD:
+
+| Metric | Count |
+| --- | ---: |
+| tracked files | 239 |
+| tracked blob bytes | 2,705,931 |
+| files under `docs/` | 97 |
+| Markdown files repository-wide | 76 |
+| Markdown files under `docs/` | 74 |
+| PNG files | 24 |
+| Python files | 40 |
+| Kotlin files | 65 |
+| JSON files | 18 |
+| Python/Kotlin source files with `test` in path | 50 |
+| world Markdown documents | 13 |
+| systems Markdown documents | 9 |
+| asset Markdown documents | 23 |
+| Android Markdown documents | 4 |
+| Game Context Log Markdown documents | 3 |
+| files under `tools/` | 1 |
+
+PR #33 at this checkpoint reported:
+- 112 commits;
+- 54 changed files relative to its base;
+- 16,873 additions;
+- 42 deletions.
+
+The inventory script itself was syntax-checked and smoke-tested against a temporary local fixture. A complete exact-checkout run remains required before its Markdown word counts or local-checkout counts are promoted as repository evidence.
