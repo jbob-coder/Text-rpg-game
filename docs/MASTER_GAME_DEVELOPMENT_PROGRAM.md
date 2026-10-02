@@ -1011,3 +1011,87 @@ Read next:
 6. `docs/THE_GAME_MASTER_TASK_REGISTER.md`
 
 Do not start mass world generation, mass asset generation or final APK reconstruction until the corresponding contracts are written.
+
+# 20. 2026-10-02 directive-expansion batch
+
+The owner's expanded directive is now decomposed into dedicated decision documents rather than being left only in chat/context.
+
+New current documents:
+- `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — complete step order from documentation authority through world/system design and final APK promotion.
+- `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md` — KEEP / EXTEND / REWORK / REPLACE / REMOVE / NEW decisions.
+- `docs/DOCUMENTATION_PROGRESS_LEDGER.md` — preserves the 3,000 / 2,000 / 10,000 / 10,000 / 2,000,000 targets without inventing their unit.
+- `docs/assets/PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md` — current-vs-required pixel art, room actor/panel composition, overlay/reuse rules, area packet requirements.
+- `docs/world/WORLD_SCALE_DOCUMENTATION_BLUEPRINT.md` — coordinate hierarchy and schemas for places, political entities, settlements, resources, ecosystems, beast zones, population, loot and balance.
+- `docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md` — stats/skills/abilities/classes/ranks/social hierarchy/activities/combat/adversary/NPC/save decisions.
+- `docs/android/APK_FINAL_RECONSTRUCTION_MATRIX.md` — final keep/rework/replace/remove model for the Android client.
+
+These documents supplement this master program. They do not authorize mass implementation by themselves.
+
+## 20.1 Current program state
+
+Documentation remains the primary objective.
+
+Immediate order:
+1. finish Gate Twelve Steps 8–14;
+2. perform the deeper existing-state source audit;
+3. write the progression/class/rank master;
+4. write the NPC/social/adversary master;
+5. write the item/economy/loot master;
+6. write the tactical combat master;
+7. write the application UX master;
+8. write save/content migrations;
+9. then schedule broad rebuilds.
+
+## 20.2 Rebuild authority
+
+Broad development permission is recorded, but destructive work remains migration-gated.
+
+Presentation may be deliberately replaced once:
+- the target contract exists;
+- consumers are known;
+- replacement is implemented;
+- exact-head tests/evidence are green.
+
+Persistent state, stable IDs and save data require stronger migration gates.
+
+## 20.3 World-scale authoring rule
+
+Do not satisfy the requested world scale with filler.
+
+Each permanent world record must participate in:
+- coordinates;
+- containment;
+- routes;
+- polity/faction;
+- resources/ecology;
+- threat/balance;
+- NPC/population;
+- visual kit;
+- state/content hooks.
+
+The requested numerical scale is tracked in `DOCUMENTATION_PROGRESS_LEDGER.md` until its unit is explicitly accepted.
+
+## 20.4 Pixel-art rule
+
+Final visuals are assembled from reusable compatible layers rather than one flattened generated image.
+
+The production/reuse ledger is now the required companion for:
+- Jack;
+- Tamsin;
+- room actors;
+- panels;
+- Gate Twelve area packets;
+- world-map kits;
+- overlays;
+- text/signage;
+- animation;
+- asset-stage tracking.
+
+## 20.5 Final APK rule
+
+The current Android application is a verified foundation, not the final product.
+
+The late-stage APK rebuild must consume the final world/system/visual contracts, then classify every component as:
+KEEP / EXTEND / REWORK / REPLACE / REMOVE.
+
+No mass deletion is authorized before that audit/migration sequence.
