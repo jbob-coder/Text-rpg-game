@@ -1095,3 +1095,26 @@ The late-stage APK rebuild must consume the final world/system/visual contracts,
 KEEP / EXTEND / REWORK / REPLACE / REMOVE.
 
 No mass deletion is authorized before that audit/migration sequence.
+
+
+# 21. 2026-10-02 corpus-architecture continuation
+
+The full-scope directive is now decomposed one layer further.
+
+New active child authorities:
+- `docs/DOCUMENTATION_CORPUS_ARCHITECTURE.md`;
+- `docs/world/WORLD_GEOGRAPHY_STANDARD.md`;
+- `docs/world/WORLD_POLITICAL_ENTITIES.md`;
+- `docs/world/WORLD_SETTLEMENT_CATALOG.md`;
+- `docs/world/WORLD_TRAVEL_AND_ROUTES.md`;
+- `docs/assets/ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md`.
+
+These documents formalize:
+- how the very large documentation corpus is split into maintainable volumes and records;
+- how world coordinates and geography scale without forcing one coordinate system;
+- how kingdoms/states/political hierarchies will be represented without inventing canon prematurely;
+- how cities/villages/settlements are authored as functional places rather than names;
+- how route legality remains world authority while art/UI visualize it;
+- how each room/area composes environment, player, NPC actors, equipment, panels, text, overlays, FX and reusable art coherently.
+
+Current priority remains documentation. The next P0 measurement task is a reproducible corpus/world/asset inventory. Gate Twelve Step 8–14 remains the first region-completion track.
