@@ -81,6 +81,39 @@ class PixelMapArtCatalogTest {
         assertEquals('S', map.rows[30][154])
     }
 
+
+    @Test
+    fun remainingLandmarkMaterialDetailsStayInsideExistingFootprints() {
+        val map = PixelMapArtCatalog.gateTwelveDistrictBase
+
+        // Platform Nine.
+        assertEquals('I', map.rows[37][20])
+        assertEquals('S', map.rows[39][23])
+        assertEquals('I', map.rows[40][31])
+
+        // Relay Workbench.
+        assertEquals('I', map.rows[31][75])
+        assertEquals('S', map.rows[34][78])
+        assertEquals('S', map.rows[37][82])
+
+        // Quiet Stair.
+        assertEquals('I', map.rows[89][88])
+        assertEquals('S', map.rows[93][91])
+        assertEquals('I', map.rows[96][94])
+
+        // Service Tunnel.
+        assertEquals('I', map.rows[78][161])
+        assertEquals('S', map.rows[85][168])
+        assertEquals('I', map.rows[87][170])
+        assertEquals('L', map.rows[85][172])
+
+        // Trace Chamber.
+        assertEquals('I', map.rows[40][194])
+        assertEquals('S', map.rows[43][198])
+        assertEquals('S', map.rows[45][202])
+        assertEquals('L', map.rows[49][205])
+    }
+
     @Test
     fun authoredMapViewportUsesIntegerPixelScaleAndSharedPercentageCoordinates() {
         val viewport = PixelMapArtCatalog.viewport(
