@@ -10,7 +10,6 @@ import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assertCountEquals
-import androidx.compose.ui.test.assertExists
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.captureToImage
@@ -347,12 +346,12 @@ class CharacterStatsSectionTest {
         }
 
         composeRule.onNodeWithTag("skills-matrix").performScrollTo().assertIsDisplayed()
-        composeRule.onNodeWithTag("skills-category-combat").assertExists()
-        composeRule.onNodeWithTag("skills-category-physical").assertExists()
-        composeRule.onNodeWithTag("skills-category-technical").assertExists()
-        composeRule.onNodeWithTag("skills-category-social").assertExists()
-        composeRule.onNodeWithTag("skills-category-knowledge").assertExists()
-        composeRule.onNodeWithTag("skill-row-technical_systems").assertExists()
+        composeRule.onAllNodesWithTag("skills-category-combat").assertCountEquals(1)
+        composeRule.onAllNodesWithTag("skills-category-physical").assertCountEquals(1)
+        composeRule.onAllNodesWithTag("skills-category-technical").assertCountEquals(1)
+        composeRule.onAllNodesWithTag("skills-category-social").assertCountEquals(1)
+        composeRule.onAllNodesWithTag("skills-category-knowledge").assertCountEquals(1)
+        composeRule.onAllNodesWithTag("skill-row-technical_systems").assertCountEquals(1)
         saveScreenshot("skills-320dp", "skills-matrix")
     }
 
