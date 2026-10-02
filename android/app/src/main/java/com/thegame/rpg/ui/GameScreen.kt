@@ -40,6 +40,8 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.thegame.rpg.GameUiState
 import com.thegame.rpg.boot.BootState
+import com.thegame.rpg.engine.GameEquipmentSlot
+import com.thegame.rpg.engine.GameInventoryItem
 import com.thegame.rpg.engine.GameSnapshot
 import com.thegame.rpg.engine.GameStatInspection
 import kotlinx.coroutines.delay
@@ -735,80 +737,307 @@ private fun SettingsPanel(
 }
 
 @Composable
-private fun InventorySection(
+internal fun InventorySection(
     snapshot: GameSnapshot,
     busy: Boolean,
     onEquip: (String) -> Unit,
     onUnequip: (String) -> Unit,
 ) {
+    val slots = snapshot.inventory.equipment
+    val items = snapshot.inventory.items
+    var selectedSlotId by remember(slots) {
+        mutableStateOf(slots.firstOrNull { it.equipped }?.slot ?: slots.firstOrNull()?.slot)
+    }
+    var selectedItemId by remember(items) {
+        mutableStateOf(items.firstOrNull()?.id)
+    }
+    val selectedSlot = slots.firstOrNull { it.slot == selectedSlotId }
+    val selectedItem = items.firstOrNull { it.id == selectedItemId }
+
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .testTag("inventory-scroll"),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        PixelPanel(title = "Equipment", chrome = PixelPanelChrome.INVENTORY) {
-            snapshot.inventory.equipment.forEach { slot ->
-                val item = if (slot.equipped) {
-                    buildString {
-                        append(slot.name ?: slot.itemId ?: "EQUIPPED")
-                        if (!slot.quality.isNullOrBlank()) append(" // ").append(slot.quality.uppercase())
+        PixelPanel(title = "Loadout", chrome = PixelPanelChrome.INVENTORY) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                PixelUiIcon(
+                    sprite = PixelUiIconCatalog.navigation(GameSection.INVENTORY),
+                    modifier = Modifier.size(20.dp),
+                    tint = PixelColors.Gold,
+                    testTag = "inventory-loadout-icon",
+                )
+                Spacer(Modifier.width(6.dp))
+                Text(
+                    "EQUIPPED ${slots.count { it.equipped }} / ${slots.size}",
+                    color = PixelColors.Paper,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
+            Spacer(Modifier.height(8.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState())
+                    .testTag("inventory-loadout-strip"),
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                slots.forEach { slot ->
+                    InventorySlotTile(
+                        slot = slot,
+                        active = selectedSlotId == slot.slot,
+                        modifier = Modifier.width(66.dp),
+                    ) {
+                        selectedSlotId = slot.slot
                     }
-                } else {
-                    "EMPTY"
-                }
-                EquipmentSlotValue(slotId = slot.slot, value = item)
-                if (slot.equipped) {
-                    PixelTextButton(if (busy) "WORKING..." else "UNEQUIP") {
-                        if (!busy) onUnequip(slot.slot)
-                    }
-                    Spacer(Modifier.height(6.dp))
                 }
             }
-        }
 
-        PixelPanel(title = "Inventory", chrome = PixelPanelChrome.INVENTORY) {
-            if (snapshot.inventory.items.isEmpty()) {
-                Text("No carried items.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
-            } else {
-                snapshot.inventory.items.forEach { item ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
+            if (selectedSlot != null) {
+                Spacer(Modifier.height(10.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(PixelColors.Deep)
+                        .border(2.dp, if (selectedSlot.equipped) PixelColors.Gold else PixelColors.Muted)
+                        .padding(8.dp)
+                        .testTag("inventory-slot-detail"),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    if (selectedSlot.equipped && selectedSlot.itemId != null) {
                         PixelItemIcon(
-                            itemId = item.id,
-                            quality = item.quality,
-                            modifier = Modifier.width(40.dp).height(40.dp),
+                            itemId = selectedSlot.itemId,
+                            quality = selectedSlot.quality,
+                            modifier = Modifier.size(44.dp),
                         )
-                        Spacer(Modifier.width(8.dp))
-                        Column(Modifier.weight(1f)) {
+                    } else {
+                        PixelUiIcon(
+                            sprite = PixelEquipmentSlotCatalog.slot(selectedSlot.slot),
+                            modifier = Modifier.size(40.dp),
+                            tint = PixelColors.Muted,
+                        )
+                    }
+                    Spacer(Modifier.width(8.dp))
+                    Column(Modifier.weight(1f)) {
+                        Text(
+                            slotDisplayName(selectedSlot.slot),
+                            color = PixelColors.Gold,
+                            style = MaterialTheme.typography.labelLarge,
+                        )
+                        Text(
+                            if (selectedSlot.equipped) selectedSlot.name ?: selectedSlot.itemId ?: "Equipped"
+                            else "Empty slot",
+                            color = if (selectedSlot.equipped) PixelColors.Paper else PixelColors.Muted,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                        if (!selectedSlot.quality.isNullOrBlank()) {
                             Text(
-                                item.name,
-                                color = PixelColors.Paper,
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                            Text(
-                                "x${item.quantity}",
+                                selectedSlot.quality.uppercase(),
                                 color = PixelColors.Muted,
                                 style = MaterialTheme.typography.labelLarge,
                             )
                         }
                     }
+                }
+                if (selectedSlot.equipped) {
                     Spacer(Modifier.height(6.dp))
-                    if (item.equippable) {
+                    PixelTextButton(if (busy) "WORKING..." else "UNEQUIP") {
+                        if (!busy) onUnequip(selectedSlot.slot)
+                    }
+                }
+            }
+        }
+
+        PixelPanel(title = "Bag", chrome = PixelPanelChrome.INVENTORY) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    "CARRIED STACKS",
+                    color = PixelColors.Gold,
+                    style = MaterialTheme.typography.labelLarge,
+                    modifier = Modifier.weight(1f),
+                )
+                Text(
+                    items.size.toString(),
+                    color = PixelColors.Paper,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
+            Spacer(Modifier.height(8.dp))
+
+            if (items.isEmpty()) {
+                Text("No carried items.", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
+            } else {
+                if (selectedItem != null) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(PixelColors.Deep)
+                            .border(2.dp, PixelColors.Gold)
+                            .padding(8.dp)
+                            .testTag("inventory-item-detail"),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        PixelItemIcon(
+                            itemId = selectedItem.id,
+                            quality = selectedItem.quality,
+                            modifier = Modifier.size(54.dp),
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Column(Modifier.weight(1f)) {
+                            Text(
+                                selectedItem.name,
+                                color = PixelColors.Paper,
+                                style = MaterialTheme.typography.bodyMedium,
+                            )
+                            Text(
+                                "x${selectedItem.quantity}" +
+                                    if (!selectedItem.quality.isNullOrBlank()) " // ${selectedItem.quality.uppercase()}" else "",
+                                color = PixelColors.Muted,
+                                style = MaterialTheme.typography.labelLarge,
+                            )
+                            if (selectedItem.equippable && !selectedItem.slot.isNullOrBlank()) {
+                                Text(
+                                    "SLOT ${slotDisplayName(selectedItem.slot)}",
+                                    color = PixelColors.Gold,
+                                    style = MaterialTheme.typography.labelLarge,
+                                )
+                            }
+                        }
+                    }
+                    if (selectedItem.equippable) {
+                        Spacer(Modifier.height(6.dp))
                         PixelTextButton(
                             label = if (busy) {
                                 "WORKING..."
                             } else {
-                                "EQUIP // ${slotDisplayName(item.slot ?: "")}"
+                                "EQUIP // ${slotDisplayName(selectedItem.slot ?: "")}"
                             },
                             onClick = {
-                                if (!busy) onEquip(item.id)
+                                if (!busy) onEquip(selectedItem.id)
                             },
                         )
-                        Spacer(Modifier.height(8.dp))
                     }
+                    Spacer(Modifier.height(10.dp))
+                }
+
+                Text(
+                    "ITEMS",
+                    color = PixelColors.Muted,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+                Spacer(Modifier.height(6.dp))
+                items.chunked(2).forEach { pair ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        pair.forEach { item ->
+                            InventoryItemTile(
+                                item = item,
+                                active = selectedItemId == item.id,
+                                modifier = Modifier.weight(1f),
+                            ) {
+                                selectedItemId = item.id
+                            }
+                        }
+                        if (pair.size == 1) Spacer(Modifier.weight(1f))
+                    }
+                    Spacer(Modifier.height(6.dp))
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun InventorySlotTile(
+    slot: GameEquipmentSlot,
+    active: Boolean,
+    modifier: Modifier = Modifier,
+    onSelect: () -> Unit,
+) {
+    Column(
+        modifier = modifier
+            .height(72.dp)
+            .background(PixelColors.Deep)
+            .border(
+                2.dp,
+                when {
+                    active -> PixelColors.Gold
+                    slot.equipped -> PixelColors.Paper
+                    else -> PixelColors.Muted
+                },
+            )
+            .clickable(role = Role.Button, onClick = onSelect)
+            .padding(4.dp)
+            .testTag("inventory-slot-${slot.slot}"),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        if (slot.equipped && slot.itemId != null && PixelAssetCatalog.itemIcon(slot.itemId) != null) {
+            PixelItemIcon(
+                itemId = slot.itemId,
+                quality = slot.quality,
+                modifier = Modifier.size(34.dp),
+            )
+        } else {
+            PixelUiIcon(
+                sprite = PixelEquipmentSlotCatalog.slot(slot.slot),
+                modifier = Modifier.size(30.dp),
+                tint = PixelColors.Muted,
+            )
+        }
+        Text(
+            slotDisplayName(slot.slot),
+            color = if (active) PixelColors.Gold else PixelColors.Paper,
+            style = MaterialTheme.typography.labelLarge,
+        )
+    }
+}
+
+@Composable
+private fun InventoryItemTile(
+    item: GameInventoryItem,
+    active: Boolean,
+    modifier: Modifier = Modifier,
+    onSelect: () -> Unit,
+) {
+    Row(
+        modifier = modifier
+            .height(76.dp)
+            .background(PixelColors.Deep)
+            .border(2.dp, if (active) PixelColors.Gold else PixelColors.Muted)
+            .clickable(role = Role.Button, onClick = onSelect)
+            .padding(6.dp)
+            .testTag("inventory-item-${item.id}"),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        PixelItemIcon(
+            itemId = item.id,
+            quality = item.quality,
+            modifier = Modifier.size(42.dp),
+        )
+        Spacer(Modifier.width(6.dp))
+        Column(Modifier.weight(1f)) {
+            Text(
+                item.name,
+                color = PixelColors.Paper,
+                style = MaterialTheme.typography.labelLarge,
+            )
+            Text(
+                "x${item.quantity}",
+                color = if (active) PixelColors.Gold else PixelColors.Muted,
+                style = MaterialTheme.typography.labelLarge,
+            )
         }
     }
 }
