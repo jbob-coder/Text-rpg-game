@@ -41,7 +41,8 @@ When a newer explicit decision supersedes an older note, preserve both and mark 
 7. [12 Documentation Expectation & Acceptance](12_DOCUMENT_EXPECTATION_AND_ACCEPTANCE_STANDARD.md)
 8. [13 Beast Entity / Ecosystem / Scene Presence](13_BEAST_ENTITY_ECOSYSTEM_AND_SCENE_PRESENCE_STANDARD.md)
 9. [14 Documentation Coverage Matrix](14_DOCUMENTATION_COVERAGE_AND_EXPECTATION_MATRIX.md)
-10. Existing specialized documents referenced by the chosen domain.
+10. [15 Contextual Beast Presence Addendum](15_CONTEXTUAL_BEAST_PRESENCE_ADDENDUM.md)
+11. Existing specialized documents referenced by the chosen domain.
 
 ## Program rule
 
@@ -81,3 +82,9 @@ New and materially revised specifications must follow `12_DOCUMENT_EXPECTATION_A
 After meaningful documentation batches, update `14_DOCUMENTATION_COVERAGE_AND_EXPECTATION_MATRIX.md` and the decision-gap register.
 
 The program must distinguish documentation completeness from implementation completeness.
+
+
+## New global contracts
+
+- `docs/world/BEAST_ZONE_AND_ECOSYSTEM_SCHEMA.md` — ecosystem/beast-zone record requirements.
+- `docs/assets/GLOBAL_ASSET_REUSE_OCCLUSION_MATRIX.md` — reuse, overlay, perspective and occlusion decisions.
