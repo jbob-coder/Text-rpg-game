@@ -894,3 +894,8 @@ Do not invent as canon yet:
 
 ### Next canon packet
 The first world-population decision should be the minimum parent chain needed to place Gate Twelve: parent settlement, parent region, political ownership if applicable, W0/W1 anchors, major routes, terrain/climate/material context. Mass world generation stays blocked until this parent chain is coherent.
+
+
+## Gate Twelve parent-world proposal — 2026-10-02
+
+[Gate Twelve parent-world proposal](GATE_TWELVE_PARENT_WORLD_PROPOSAL.md) now supplies the requested minimum candidate parent chain for WD-001/003/004/005/006 review. It is a proposal, not confirmed canon: `Arden Crossing`, `Alder Basin`, the municipal-parent model, climate logic and parent-facing route stubs remain owner-decision inputs. Existing Gate Twelve local IDs, W3 coordinates and eight authored route records are unchanged.
