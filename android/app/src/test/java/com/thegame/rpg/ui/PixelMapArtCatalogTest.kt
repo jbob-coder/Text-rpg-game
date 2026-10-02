@@ -64,6 +64,23 @@ class PixelMapArtCatalogTest {
         assertEquals('Y', map.rows[65][136])
     }
 
+
+    @Test
+    fun plazaAndArchiveDetailsStayWithinTheirExistingFootprints() {
+        val map = PixelMapArtCatalog.gateTwelveDistrictBase
+
+        // Depot Plaza retains its authored paved bounds while gaining internal paver accents.
+        assertEquals('P', map.rows[8][105])
+        assertEquals('H', map.rows[9][111])
+        assertEquals('S', map.rows[16][106])
+
+        // Municipal Archive keeps the same shell and only gains internal institutional seams.
+        assertEquals('I', map.rows[6][151])
+        assertEquals('S', map.rows[8][155])
+        assertEquals('I', map.rows[15][164])
+        assertEquals('S', map.rows[30][154])
+    }
+
     @Test
     fun authoredMapViewportUsesIntegerPixelScaleAndSharedPercentageCoordinates() {
         val viewport = PixelMapArtCatalog.viewport(
