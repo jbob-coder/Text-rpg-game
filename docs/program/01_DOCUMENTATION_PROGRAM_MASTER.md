@@ -104,4 +104,13 @@ Produce one final implementation authority map stating exactly what survives, ch
 
 Existing repository documentation is substantial but fragmented across different historical branches/objectives. This program does not invalidate useful prior work; it re-indexes it under the current priority and marks stale operational pointers for later update.
 
-Gate Twelve Steps 1–4 are confirmed present. Step 5 was previously claimed as complete in chat but is not currently persisted in the Master Plan; therefore it remains unfinished until actually written and verified in the repository.
+Gate Twelve Steps 1–14 are now persisted in `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`. The pilot is documentation-complete for its current scope and has an explicit implementation handoff beginning with `GT-IMP-001`. Broader world, beast/ecosystem, progression, combat, economy, balance, and final APK domains remain incomplete and are tracked in `09_DECISION_GAP_REGISTER.md` and `14_DOCUMENTATION_COVERAGE_AND_EXPECTATION_MATRIX.md`.
+
+
+## Documentation acceptance authority
+
+All future substantive documents are governed by:
+- `12_DOCUMENT_EXPECTATION_AND_ACCEPTANCE_STANDARD.md`;
+- `14_DOCUMENTATION_COVERAGE_AND_EXPECTATION_MATRIX.md`.
+
+A domain is not “complete” because an architecture file exists. Its quality state must reflect whether it is DRAFT, STRUCTURED, REVIEWABLE, IMPLEMENTATION_READY, or VERIFIED_IMPLEMENTATION.
