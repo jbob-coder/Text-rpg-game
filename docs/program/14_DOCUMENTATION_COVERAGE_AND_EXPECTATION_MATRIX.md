@@ -23,11 +23,11 @@ This matrix does not measure progress by file count alone.
 |---|---|---|---|
 | Program governance | 00–12 program docs, task register, AGENTS, README | REVIEWABLE | machine-readable global cross-doc index |
 | Gate Twelve | Gate Twelve Region Master Plan + map/asset blueprints | IMPLEMENTATION_READY for documented pilot slices | implementation evidence for GT-IMP tasks |
-| Contextual visual composition | document 11 | REVIEWABLE | include beasts, then implement scene-presence projection |
-| Pixel art/assets/UI | program 03 + Visual Bible + asset master plan | REVIEWABLE | global reuse/occlusion matrix and remaining asset family specs |
+| Contextual visual composition | document 11 + beast addendum 15 | REVIEWABLE | implement unified character/bestia scene-presence projection |
+| Pixel art/assets/UI | program 03 + Visual Bible + asset master plan + global reuse/occlusion matrix | REVIEWABLE | remaining family-specific standards and implementation bindings |
 | World hierarchy/maps | world spatial/ID/template/sequence docs | REVIEWABLE | actual world geography, WORLD_GEO decision, polities/regions |
 | Characters/NPC/social | program 04 + foundation/social docs | STRUCTURED | NPC v2 schema, autonomy, hierarchy, social systems |
-| Beasts/ecosystem | program 06 + beast standard | STRUCTURED | final taxonomy, ecosystem schema, beast-zone schema, actual species/zones |
+| Beasts/ecosystem | program 06 + beast standard + beast-zone/ecosystem schema | REVIEWABLE architecture | final taxonomy, actual species/zones, simulation depth and balance integration |
 | Progression/classes/ranks | program 05 + foundation | STRUCTURED | final class/rank/skill-tree architecture |
 | Tactical combat | program 05 | STRUCTURED | original action economy, terrain, AI, encounter and UI rules |
 | Persistent rivalry | program 05 | STRUCTURED | original persistent adversary schema/flow |
@@ -81,3 +81,14 @@ Do not treat beasts as merely NPCs and do not use generic “monster” terminol
 8. define persistent adversary system;
 9. define world scaling/balance;
 10. audit current Android components against final-document expectations.
+
+
+## Audit update — beast/reuse contracts
+
+Added:
+- `13_BEAST_ENTITY_ECOSYSTEM_AND_SCENE_PRESENCE_STANDARD.md`;
+- `15_CONTEXTUAL_BEAST_PRESENCE_ADDENDUM.md`;
+- `docs/world/BEAST_ZONE_AND_ECOSYSTEM_SCHEMA.md`;
+- `docs/assets/GLOBAL_ASSET_REUSE_OCCLUSION_MATRIX.md`.
+
+These additions improve specification quality but do not invent actual beast species, beast zones, ecosystem geography, loot tables, or combat values.
