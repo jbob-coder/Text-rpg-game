@@ -17,6 +17,25 @@ This is the repository-native operational index for future coding agents. It int
 
 Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPLETED_AT` in America/Puerto_Rico time. Unknown historical times use `NOT_RECORDED`.
 
+## Current documentation-first priority — 2026-10-02
+
+The current planning priority is the repository-wide documentation program under `docs/program/`.
+
+Read:
+- `docs/program/README.md`;
+- `docs/program/00_OWNER_DIRECTIVE_2026-10-02.md`;
+- `docs/program/01_DOCUMENTATION_PROGRAM_MASTER.md`;
+- `docs/program/09_DECISION_GAP_REGISTER.md`;
+- the relevant domain program before creating new world/system/art/APK design.
+
+This does **not** erase historical implementation evidence below. Older branch/CI records remain authoritative for the exact revisions they describe, but they no longer define the overall product-planning priority.
+
+### TASK DOC-001 — Documentation program decomposition
+- STATUS: `IN_PROGRESS`
+- RESULT: owner directive preserved; ten-area program scaffold created; decision gaps and execution graph created; primary pointer updates underway.
+- NEXT: finish propagating priority pointers, persist Gate Twelve Step 5 correctly, then continue domain documentation according to dependency order.
+- COMPLETED_AT: —
+
 ## Current repository baseline
 
 - Repository: `jbob-coder/Text-rpg-game`
