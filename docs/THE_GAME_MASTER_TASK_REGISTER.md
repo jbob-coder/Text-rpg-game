@@ -61,11 +61,12 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-01 AST`
 
 ### TASK D-005 — Finish Gate Twelve region master plan Steps 8–14
-- STATUS: `IN_PROGRESS`
+- STATUS: `DONE`
 - PRIORITY: `P0`
-- CURRENT: Steps 1–7 complete. Step 8 Application UX plan is next.
+- RESULT: Steps 1–14 are complete as a first-pass proof-region contract covering UX, state layers, loading/performance, implementation order, verification, migration/removal, and execution handoff.
 - DOCUMENT: `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`
-- DONE WHEN: State layers, loading/performance, implementation order, verification, migration and execution handoff are documented.
+- NEXT CONSUMER: TASK D-006 exact existing-state audit and Gate Twelve implementation/provenance reconciliation.
+- COMPLETED_AT: `2026-10-02 08:01 AST`.
 
 ### TASK D-006 — Existing-state repository audit
 - STATUS: `IN_PROGRESS`
