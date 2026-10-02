@@ -1,8 +1,0 @@
-__pycache__/
-*.py[cod]
-.venv/
-*.egg-info/
-build/
-dist/
-local_save.json
-local_save.json.tmp
