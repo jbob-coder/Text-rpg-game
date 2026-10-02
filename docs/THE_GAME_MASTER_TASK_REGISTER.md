@@ -1,5 +1,16 @@
 # THE GAME — Repository Master Task Register
 
+## Documentation-program priority update
+
+Current documentation authority is now rooted at:
+- `docs/PROJECT_PRIORITY_AND_CONTEXT_ROUTING.md`
+- `docs/MASTER_DOCUMENTATION_PROGRAM.md`
+- `docs/DOCUMENTATION_INDEX.md`
+- `docs/DECISION_AND_GAP_REGISTER.md`
+
+This does not erase exact-head implementation evidence below. It establishes `jbob-coder/Text-rpg-game` as the priority project and makes documentation-first planning the current top-level program before large destructive rewrites.
+
+
 Updated: 2026-09-30 20:07 AST
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
