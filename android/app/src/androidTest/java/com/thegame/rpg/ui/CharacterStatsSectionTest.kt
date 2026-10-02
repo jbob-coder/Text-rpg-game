@@ -191,6 +191,34 @@ class CharacterStatsSectionTest {
     }
 
     @Test
+    fun quietStairStoryHasPhoneSizedPixelArtEvidence() {
+        val stairSnapshot = snapshot.copy(
+            sceneId = "OPENING_SOLO_EXIT",
+            title = "The Quiet Stair",
+            body = "You slip through the maintenance stair alone while the evacuation continues elsewhere.",
+            location = "EVAC_STAIR",
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
+                    GameScreen(
+                        snapshot = stairSnapshot,
+                        busy = false,
+                        onChoice = {},
+                        onNavigate = {},
+                    )
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("story-pixel-header").assertIsDisplayed()
+        composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
+        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        saveScreenshot("quiet-stair-story-320dp")
+    }
+
+    @Test
     fun mapPhoneRendersAuthoredDistrictArtWithProjectedNodes() {
         val mapSnapshot = snapshot.copy(
             worldMap = GameWorldMap(
