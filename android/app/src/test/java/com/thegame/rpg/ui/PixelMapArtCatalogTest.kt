@@ -43,7 +43,7 @@ class PixelMapArtCatalogTest {
 
         assertTrue(map.rows.any { 'r' in it })
         assertEquals('L', map.rows[7][0])    // Perimeter street center strip.
-        assertEquals('L', map.rows[52][46])  // Authored service-route center line.
+        assertEquals('L', map.rows[78][157]) // Authored service-route center line outside landmark footprints.
         assertEquals('L', map.rows[69][21])  // Platform Nine track sleeper drawn over wear.
     }
 
