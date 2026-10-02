@@ -124,7 +124,7 @@ The current documentation branch has established:
 - master program;
 - cross-reference matrix;
 - priority/context log;
-- Gate Twelve Steps 1–7;
+- Gate Twelve Steps 1–8;
 - pixel runtime composition standard;
 - asset status matrix;
 - character blueprint work;
@@ -184,7 +184,7 @@ New documentation units now present on the master-program branch:
 This advances the systems/application contract layer. It does not change the numeric-target interpretation and does not claim implementation completion.
 
 Next high-value documentation:
-1. finish Gate Twelve Step 8–14;
+1. finish Gate Twelve Steps 9–14;
 2. deepen progression/class/rank details;
 3. define world political/settlement/ecology child catalogs;
 4. audit exact runtime/source state against the rework matrix;
@@ -225,3 +225,17 @@ Added:
 The world schema layer now has materialized child standards for geography, political entities, settlements, routes, ecosystems/resources, beast zones, population/hierarchy, balance, loot provenance and NPC distribution.
 
 This does **not** mean the world itself has been populated. Large-scale canon records for macroregions, kingdoms/states, cities/villages, ecosystems, beasts and NPCs remain future authoring work.
+
+
+## 2026-10-02 Gate Twelve Step 8 continuation
+
+Completed on the master-program branch:
+- Gate Twelve Step 8 application UX contract;
+- Story/current-location composition ownership;
+- player-safe room-actor and focus-panel behavior;
+- district-map selection/travel contract;
+- overlay/text-art/fallback rules;
+- phone-first accessibility and loading behavior;
+- explicit KEEP / REWORK presentation boundaries for the proof region.
+
+Next regional documentation: Step 9 state-layer plan.
