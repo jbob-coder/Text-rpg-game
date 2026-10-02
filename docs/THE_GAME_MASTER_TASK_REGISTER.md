@@ -60,12 +60,12 @@ This section supersedes older statements about the top-level product objective w
 - DOCUMENT: `docs/android/APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md`
 - COMPLETED_AT: `2026-10-01 AST`
 
-### TASK D-005 — Finish Gate Twelve region master plan Steps 5–14
+### TASK D-005 — Finish Gate Twelve region master plan Steps 6–14
 - STATUS: `IN_PROGRESS`
 - PRIORITY: `P0`
-- CURRENT: Steps 1–4 complete. Step 5 geometry contract is next.
+- CURRENT: Steps 1–5 complete. Step 6 material and visual language is next.
 - DOCUMENT: `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`
-- DONE WHEN: geometry, visual language, asset decomposition, UX, state layers, loading, implementation order, verification, migration and execution handoff are documented.
+- DONE WHEN: visual language, asset decomposition, UX, state layers, loading, implementation order, verification, migration and execution handoff are documented.
 
 ### TASK D-006 — Existing-state repository audit
 - STATUS: `PENDING`
