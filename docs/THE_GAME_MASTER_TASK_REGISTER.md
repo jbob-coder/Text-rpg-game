@@ -28,6 +28,39 @@ This is the repository-native operational index for future coding agents. It int
 
 Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPLETED_AT` in America/Puerto_Rico time. Unknown historical times use `NOT_RECORDED`.
 
+## P0 — Master documentation program
+
+### TASK D-000 — Establish documentation-first global program
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0 / CURRENT PROGRAM`
+- BRANCH: `docs/master-documentation-program`
+- CREATED:
+  - `docs/MASTER_DOCUMENTATION_PROGRAM.md`;
+  - `docs/PROJECT_PRIORITY_AND_CONTEXT_ROUTING.md`;
+  - `docs/DOCUMENTATION_INDEX.md`;
+  - `docs/DECISION_AND_GAP_REGISTER.md`;
+  - `docs/PIXEL_ART_INTEGRATION_AND_REUSE_STANDARD.md`;
+  - `docs/WORLD_AND_MAP_DEVELOPMENT_PROGRAM.md`;
+  - `docs/MECHANICS_REWORK_AND_REBUILD_PROGRAM.md`;
+  - `docs/APK_EVOLUTION_AND_FINAL_REBUILD_PROGRAM.md`.
+- CURRENT OBJECTIVE: finish the documentation foundation, continue Gate Twelve Step 5–14, audit actual asset lifecycle stages, then expand world/system bibles before destructive reconstruction.
+- OWNER AUTHORITY: broad routine development/restructure authority granted; prior explicit safeguards and prohibitions remain in force.
+- DONE WHEN: global documentation graph, current-state census, domain bibles, migration matrices, and final APK rebuild documentation are sufficient for repository-native continuation without chat reconstruction.
+- COMPLETED_AT: —
+
+### TASK D-001 — Reconcile current asset lifecycle and provenance
+- STATUS: `PENDING`
+- Read manifests, source masters, Drive reference registry, runtime consumers, and exact-head visual QA.
+- Produce one authoritative current asset status/provenance matrix.
+- Do not infer `CANON_APPROVED` from integration alone.
+- COMPLETED_AT: —
+
+### TASK D-002 — Complete Gate Twelve master plan Steps 5–14
+- STATUS: `IN_PROGRESS`
+- Steps 1–4 are documented.
+- Next: Step 5 geometry contract.
+- COMPLETED_AT: —
+
 ## Current repository baseline
 
 - Repository: `jbob-coder/Text-rpg-game`
