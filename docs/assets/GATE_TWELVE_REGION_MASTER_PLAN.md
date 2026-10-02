@@ -2523,6 +2523,229 @@ Workshop Row:
 
 ---
 
+# 9. State-layer plan
+
+Status: **COMPLETE — STATE OWNERSHIP AND VISUAL-LAYER BOUNDARIES LOCKED**
+
+This step defines which changes belong to authoritative game state, player-safe projection, temporary visual overlays, or permanent base art.
+
+## 9.1 Core rule
+
+Permanent art describes what a place/object/character **is**.
+
+Runtime state describes what is **currently true**.
+
+Presentation overlays describe how currently true player-safe state is **shown**.
+
+No visual layer may become a hidden second rules engine.
+
+## 9.2 Current verified state channels
+
+The current Android path already demonstrates several state channels:
+
+### Map state
+Engine/bridge currently projects:
+- discovered locations;
+- current location;
+- reachable/unavailable state;
+- visible graph edges.
+
+`PixelMapMarkerCatalog` renders these states but never determines them.
+
+### Relay state
+The bridge currently projects a player-safe `relay_state` derived from authoritative inventory/flags/knowledge.
+
+Presentation may render:
+- intact;
+- opened;
+- damaged;
+- signal-lost.
+
+The visual catalog does not own those transitions.
+
+### Scene overlays
+`PixelSceneOverlayCatalog` currently selects player-facing scene overlays such as:
+- Gate Twelve Echo-active;
+- Service Tunnel aftershock;
+- Trace Chamber training;
+- Depot Plaza blackout;
+- Relay Workbench relay-open presentation.
+
+### Environment overlays
+Reusable visual layers include:
+- emergency lights;
+- blackout shadows.
+
+### Trace FX
+Reusable effect families include:
+- ambient Trace Echo;
+- Signal Pulse;
+- Directional Trace.
+
+These are presentation effects selected from player-safe scene/context data.
+
+## 9.3 State ownership matrix
+
+| State | Gameplay owner | Projection owner | Visual owner |
+| --- | --- | --- | --- |
+| current location | engine/world state | Android bridge | Map/Story UI |
+| discovery | engine/world state | Android bridge | markers |
+| reachability | authored graph + engine | Android bridge | marker/route styling |
+| travel legality | engine/content | bridge action result | UI feedback only |
+| blackout | world/scene state | player-safe visual tag/scene state | shadows/emergency-light overlay |
+| relay casing/signal state | inventory/flags/knowledge | visual projection | relay sprite/overlay |
+| Trace activity | ability/scene state | player-safe scene/power tags | FX/scene overlay |
+| NPC presence | scene/party/NPC state | scene-presence projection | actor placement/context panel |
+| injury/condition | engine condition state | player-safe status projection | status/injury overlay |
+| quest/event marker | quest/world state | player-safe map projection | marker/icon |
+| equipment appearance | equipment state | inventory/equipment projection | paper-doll layer |
+| selected UI focus | UI-local | none | UI chrome |
+| animation frame | UI-local | none | renderer |
+
+## 9.4 Base-art versus overlay rules
+
+Base art may include:
+- permanent architecture;
+- permanent terrain;
+- permanent location silhouette;
+- normal fixed fixtures;
+- stable character identity;
+- item identity.
+
+Overlay/state variant should normally handle:
+- blackout;
+- emergency lighting;
+- temporary damage;
+- alarm state;
+- Trace effects;
+- active training;
+- injuries;
+- quest/event indicators;
+- faction occupation/control if temporary;
+- weather;
+- locked/reachable/current state;
+- current equipment;
+- current actor presence.
+
+A permanent structural change caused by story may eventually justify a new base/location variant, but that transition must be explicitly authored.
+
+## 9.5 Discovery and reachability
+
+Discovery and reachability remain engine-derived.
+
+Visual requirements:
+- discovered-neutral state;
+- current-location state;
+- reachable state;
+- unavailable state;
+- selected state;
+- route preview.
+
+Rules:
+- hidden nodes must not be revealed by background art labels;
+- an unavailable node may remain visible only when discovery rules permit it;
+- map line art must not imply a usable edge that the engine does not expose;
+- the planned Plaza -> Platform Nine link remains visually reserved but mechanically hidden until migrated.
+
+## 9.6 Blackout/emergency state
+
+Blackout is temporary world/scene state.
+
+The district base remains neutral.
+
+Blackout presentation may combine:
+- shadow overlay;
+- emergency-light overlay;
+- scene-specific alarm treatment;
+- restricted visibility;
+- NPC/activity variation when authoritative state supports it.
+
+Do not create a second permanent blackout map.
+
+## 9.7 Trace state
+
+Trace presentation is layered:
+
+1. neutral environment;
+2. optional scene-state overlay;
+3. Trace effect;
+4. condition/resource UI feedback.
+
+FX may communicate:
+- ambient signal;
+- pulse;
+- directional trace;
+- strain/aftershock.
+
+FX must not imply technique availability, success, or hidden information beyond the projected state.
+
+## 9.8 NPC presence state
+
+The current scene-actor catalog keys some presence from `sceneId + locationId`.
+
+Target:
+`authoritative scene/NPC/party state -> player-safe scene_presence -> Android composition`.
+
+Until migration:
+- current actor placements remain accepted implementation state;
+- new complex presence logic should not be added by multiplying hard-coded UI scene cases;
+- new documentation should bind characters to authored scene presence first.
+
+See:
+`docs/program/11_CONTEXTUAL_VISUAL_COMPOSITION_CONTRACT.md`.
+
+## 9.9 Event and quest overlays
+
+A quest/event marker is a presentation of player-safe authored state.
+
+It must never:
+- start a quest by existing;
+- reveal hidden objectives;
+- reveal undiscovered locations;
+- imply completion before engine state changes.
+
+## 9.10 Damage and persistent world change
+
+Two categories:
+
+### Temporary/stateful damage
+Use overlays/props/decals.
+
+### Permanent structural change
+Requires:
+- authored world-state transition;
+- new stable visual variant or migrated base;
+- save compatibility review;
+- map/scene update;
+- test coverage.
+
+Do not permanently alter base geometry merely to depict a temporary consequence.
+
+## 9.11 State fallbacks
+
+If projection exists but art is missing:
+- keep state correct;
+- fall back to neutral presentation;
+- do not fabricate another state;
+- record missing asset.
+
+If art exists but projection does not:
+- do not display it as live state;
+- keep it deferred.
+
+## 9.12 Step 9 locked decisions
+
+1. Map markers remain pure presentation of engine-owned discovery/reachability.
+2. Relay, blackout, Trace, NPC presence and equipment are state-driven visual layers.
+3. Temporary state stays separate from base art.
+4. Permanent structural world changes require explicit authored migration.
+5. Missing art never changes gameplay truth.
+6. Existing hard-coded actor scene mapping is migration debt.
+7. Visual state may be richer only when player-safe projection supports it.
+8. Plaza -> Platform Nine remains mechanically absent until the authored graph changes.
+
+---
+
 # 5. Planned authoring sequence
 
 The remaining master plan will be completed in this order:
@@ -2535,7 +2758,7 @@ The remaining master plan will be completed in this order:
 6. **Material and visual language** — COMPLETE.
 7. **Asset decomposition** — COMPLETE.
 8. **Application UX plan** — COMPLETE.
-9. **State-layer plan** — discovery, reachability, events, blackout, Trace effects.
+9. **State-layer plan** — COMPLETE.
 10. **Performance/section strategy** — loading boundaries and mobile constraints.
 11. **Implementation order** — smallest safe slices and dependency graph.
 12. **Verification plan** — unit, emulator, screenshot, handset, regression.
@@ -2546,7 +2769,7 @@ The remaining master plan will be completed in this order:
 
 # Continuity footnote / next-session handoff
 
-**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract; Step 6 — material and visual language; Step 7 — asset decomposition and production-state contract; Step 8 — application UX and contextual panel ownership.
+**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract; Step 6 — material and visual language; Step 7 — asset decomposition and production-state contract; Step 8 — application UX and contextual panel ownership; Step 9 — state-layer ownership.
 
 **Key decisions preserved for future sessions:**
 - active repository is `jbob-coder/Text-rpg-game`;
@@ -2559,6 +2782,6 @@ The remaining master plan will be completed in this order:
 - UI must not become the source of truth for gameplay state;
 - final map must be constructed as modular game content, piece by piece, not generated as one flattened image.
 
-**Next unfinished step:** Step 9 — define the state-layer plan: discovery, reachability, blackout/emergency state, Trace effects, NPC presence, event overlays, and rules for what belongs in base art versus runtime projection.
+**Next unfinished step:** Step 10 — define the performance/section strategy: loading/ownership boundaries, asset budgets, animation limits, memory/phone constraints, and when Gate Twelve should remain one logical region versus multiple technical cells.
 
 **Do not implement the final contextual character/room panel binding before Step 8 and the scene-presence projection contract are complete.**
