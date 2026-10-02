@@ -351,3 +351,15 @@ A future session must start with:
 6. the relevant domain master.
 
 If repository source or exact-head evidence conflicts with a planning document, the source/evidence wins and the planning document must be corrected.
+
+## 2026-10-02 materialized contract update
+
+The following Phase 5–12 foundation contracts now exist:
+- `docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md`;
+- `docs/systems/NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`;
+- `docs/systems/ITEM_ECONOMY_LOOT_MASTER_PLAN.md`;
+- `docs/systems/WORLD_BALANCE_INTEGRATION_PLAN.md`;
+- `docs/systems/SAVE_AND_CONTENT_MIGRATION_MASTER_PLAN.md`;
+- `docs/android/APPLICATION_UX_MASTER_PLAN.md`.
+
+They turn several previously listed future outputs into real repository documents. Their unresolved decisions remain intentionally open; no runtime system is implied by document creation.
