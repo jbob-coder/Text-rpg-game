@@ -471,3 +471,25 @@ References:
 9. save/content migration master;
 10. final APK execution plan;
 11. broad implementation only after required contracts.
+
+## Newly materialized domain masters — 2026-10-02
+
+### `docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md`
+Owns the original tactical-combat contract: encounter state, tactical coordinates, turn/action model decision space, movement, cover, LOS, damage/injury, AI, beasts, party control, aftermath, Android tactical surface, pixel-art dependencies and verification.
+
+### `docs/systems/NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`
+Owns NPC memory/knowledge/goals/schedules, social hierarchy, institutions, fictional discrimination modeling, faction structure, and the original persistent-adversary framework.
+
+### `docs/systems/ITEM_ECONOMY_LOOT_MASTER_PLAN.md`
+Owns item schema, equipment/accessories, quality/rarity decisions, durability/crafting gates, loot provenance, beast materials, resources, economy, ownership/crime integration and visual requirements.
+
+### `docs/systems/WORLD_BALANCE_INTEGRATION_PLAN.md`
+Owns regional danger bands, progression/world integration, anti-snowball policy, encounter/loot/economy/training/rival/beast balance and future validation requirements.
+
+### `docs/systems/SAVE_AND_CONTENT_MIGRATION_MASTER_PLAN.md`
+Owns high-risk migration governance for stable IDs, save versions, quests, NPCs, items, map routes, visual IDs and rollback.
+
+### `docs/android/APPLICATION_UX_MASTER_PLAN.md`
+Owns the future Android information architecture, Story/current-location surface, room character panels, Map hierarchy, Character/Stats/Skills/Equipment/Inventory/Quests, tactical mode, narration, accessibility and responsive behavior.
+
+All six are subordinate to `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`. Implementation remains gated by their unresolved decisions and exact live-source audits.
