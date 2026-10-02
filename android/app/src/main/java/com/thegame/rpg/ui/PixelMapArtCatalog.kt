@@ -226,6 +226,9 @@ object PixelMapArtCatalog {
         rect(p, 105, 8, 39, 32, 'P')
         for (y in 12..38 step 6) rect(p, 109, y, 31, 1, 'L')
         for (x in 110..140 step 7) rect(p, x, 12, 1, 24, 'L')
+        // Plaza paver breaks remain inside the existing paved rectangle.
+        listOf(111, 125, 139).forEach { x -> rect(p, x, 9, 1, 30, 'H') }
+        listOf(16, 28).forEach { y -> rect(p, 106, y, 37, 1, 'S') }
         outline(108, 31, 33, 13, 'B')
         windows(113, 35, 4, 6)
         tree(108, 16)
@@ -236,10 +239,14 @@ object PixelMapArtCatalog {
         // Municipal Archive frontage/courtyard.
         outline(151, 6, 46, 28, 'A')
         rect(p, 157, 10, 34, 5, 'P')
+        // Institutional facade seams: restrained, regular and contained by the archive shell.
+        rect(p, 155, 8, 38, 1, 'S')
+        rect(p, 155, 28, 38, 1, 'S')
         listOf(159, 167, 175, 183).forEach { x ->
             rect(p, x, 16, 4, 12, 'W')
             rect(p, x + 1, 18, 2, 7, 'H')
         }
+        listOf(164, 180).forEach { x -> rect(p, x, 15, 1, 14, 'I') }
         rect(p, 154, 30, 40, 3, 'S')
         tree(148, 18)
         tree(200, 18)
