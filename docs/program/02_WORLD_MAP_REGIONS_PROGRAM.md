@@ -106,7 +106,7 @@ Gate Twelve authoritative inputs:
 
 ## Required next decisions
 
-- final Gate Twelve geometry contract;
+- Gate Twelve geometry contract is documented in the Master Plan; implementation/migration evidence remains pending where applicable;
 - Plaza <-> Platform Nine gameplay migration decision;
 - larger surface-world destination outside Depot Plaza;
 - Quiet Stair external destination;
