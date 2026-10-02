@@ -107,3 +107,6 @@ It is accepted only for broad style direction. Its invented item/NPC/location de
 - `manifests/BATCH_001_WAVE_C_CURRENT_SCENES.json` — 9/9 current named-location base masters plus Gate Twelve, tunnel-aftershock and Trace Chamber training overlays.
 
 The Wave C runtime parent `1c7e54e548ab3c28819af0b85ae8cbba53aff827` passed workflow `36384772701`: Python 301/301, Android build/instrumentation gates, and API 35 emulator 10/10. Native-scale art review and physical Galaxy A03 visual QA remain pending.
+
+- [GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md](GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md)
+  - Step-7 evidence matrix for all Batch 001 units plus Gate Twelve per-area asset decomposition, current stage, manifest/code drift, missing exact IDs and open refinement lines.
