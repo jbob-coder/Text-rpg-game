@@ -139,3 +139,8 @@ Still unresolved:
 - settlement density;
 - regional travel-time model;
 - beast/resource/ecosystem placement.
+
+
+## Gate Twelve outward-expansion subdocument
+
+- `docs/world/GATE_TWELVE_EXTERNAL_CONNECTIONS_AND_EXPANSION_REGISTER.md` — records the district's outward interfaces, unresolved destinations, route-creation gates, and separation between external expansion and the proposed internal Plaza <-> Platform Nine bridge.
