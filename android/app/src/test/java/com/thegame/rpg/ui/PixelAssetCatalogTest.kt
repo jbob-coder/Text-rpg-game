@@ -51,6 +51,37 @@ class PixelAssetCatalogTest {
     }
 
     @Test
+    fun refinedPlayerSystemMasterKeepsRigAnchorsAndMutedLoadoutReadable() {
+        fun hasOpaquePixel(sprite: PixelSprite, xRange: IntRange, yRange: IntRange): Boolean =
+            yRange.any { y ->
+                xRange.any { x ->
+                    sprite.rows[y][x] != PixelSprite.TRANSPARENT_PIXEL
+                }
+            }
+
+        val base = PixelAssetCatalog.playerFrontBase
+        assertTrue(hasOpaquePixel(base, 4..9, 29..35))
+        assertTrue(hasOpaquePixel(base, 22..27, 29..35))
+        assertTrue(hasOpaquePixel(base, 8..14, 44..46))
+        assertTrue(hasOpaquePixel(base, 17..24, 44..46))
+
+        val jacket = PixelAssetCatalog.depotJacketPaperdoll
+        assertTrue(hasOpaquePixel(jacket, 7..12, 15..22))
+        assertTrue(hasOpaquePixel(jacket, 20..25, 15..22))
+        assertTrue(
+            "World clothing should not use the UI cyan anchor as a large cyberpunk shorthand",
+            PixelColors.Cyan !in jacket.palette.values,
+        )
+
+        val hair = PixelAssetCatalog.playerHairTechnicalPlaceholder
+        assertTrue(hasOpaquePixel(hair, 9..22, 2..10))
+        assertTrue(
+            "Technical hair must leave facial space open",
+            (13..18).any { x -> hair.rows[9][x] == PixelSprite.TRANSPARENT_PIXEL },
+        )
+    }
+
+    @Test
     fun currentEquipmentLayersRequireExactItemAndSlotPairs() {
         assertSame(
             PixelAssetCatalog.depotJacketPaperdoll,

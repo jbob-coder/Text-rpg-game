@@ -70,7 +70,8 @@
       },
       "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
       "production_files": [
-        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt"
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt",
+        "android/app/src/main/res/drawable-nodpi/pixel_item_work_gloves_paperdoll.png"
       ],
       "integration_targets": [
         "PlayerAvatarPanel hands layer"
@@ -234,7 +235,8 @@
       },
       "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
       "production_files": [
-        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt"
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt",
+        "android/app/src/main/res/drawable-nodpi/pixel_item_courier_necktag_paperdoll.png"
       ],
       "integration_targets": [
         "PlayerAvatarPanel neck layer"

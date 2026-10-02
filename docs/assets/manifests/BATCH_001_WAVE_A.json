@@ -101,15 +101,18 @@
         "alpha": true
       },
       "palette": {
-        "max_colors": 7,
+        "max_colors": 10,
         "semantic": [
-          "SKIN_HI",
+          "OUTLINE_DEEP",
+          "SKIN_HIGHLIGHT",
           "SKIN_BASE",
-          "SKIN_MID",
-          "SKIN_DEEP",
+          "SKIN_SHADOW",
           "UNDERLAY_BASE",
           "UNDERLAY_SHADOW",
-          "OUTLINE_DEEP"
+          "UNDERLAY_HIGHLIGHT",
+          "TROUSER_BASE",
+          "TROUSER_SHADOW",
+          "BOOT_DEEP"
         ]
       },
       "anchors": {
@@ -192,7 +195,10 @@
       ],
       "reference_assets": [],
       "blueprint_path": "docs/assets/production_packets/BATCH_001_WAVE_A_BLUEPRINTS.md",
-      "production_files": [],
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt",
+        "android/app/src/main/res/drawable-nodpi/pixel_player_gameplay_front_base.png"
+      ],
       "integration_targets": [
         "android PlayerAvatarPanel replacement"
       ],
@@ -361,13 +367,14 @@
         "alpha": true
       },
       "palette": {
-        "max_colors": 5,
+        "max_colors": 6,
         "colors": [
-          "#172128",
-          "#2A414A",
-          "#3B5963",
-          "#53656E",
-          "#63D8D1"
+          "#182024",
+          "#2B3536",
+          "#4E5C59",
+          "#6B7770",
+          "#B18B55",
+          "#6D9A93"
         ]
       },
       "anchors": {
@@ -421,7 +428,10 @@
       ],
       "reference_assets": [],
       "blueprint_path": "docs/assets/production_packets/BATCH_001_WAVE_A_BLUEPRINTS.md",
-      "production_files": [],
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt",
+        "android/app/src/main/res/drawable-nodpi/pixel_item_depot_jacket_paperdoll.png"
+      ],
       "integration_targets": [
         "android PlayerAvatarPanel body-slot layer"
       ],
