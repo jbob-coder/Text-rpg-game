@@ -37,7 +37,8 @@ When a newer explicit decision supersedes an older note, preserve both and mark 
    - [07 Android / APK Rebuild](07_ANDROID_APK_REBUILD_PROGRAM.md)
    - [08 Documentation / Guide Scale](08_DOCUMENTATION_GUIDE_SCALE_PROGRAM.md)
 5. [10 Execution Coordination Graph](10_EXECUTION_COORDINATION_GRAPH.md)
-6. Existing specialized documents referenced by the chosen domain.
+6. [11 Contextual Visual Composition](11_CONTEXTUAL_VISUAL_COMPOSITION_CONTRACT.md)
+7. Existing specialized documents referenced by the chosen domain.
 
 ## Program rule
 
