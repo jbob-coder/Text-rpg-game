@@ -1,5 +1,24 @@
 # Text RPG Game
 
+## Current priority program
+
+**Priority repository:** `jbob-coder/Text-rpg-game`.
+
+Repository-wide game development is now documentation-first under [`docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`](docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md). The current objective is to finish the authority/world/visual/system/application contracts before broad implementation expansion or a final APK rebuild. The existing V6 stabilization material remains valid historical engine evidence, but it is not the top-level product objective.
+
+Start here for current work:
+
+1. [Master Development & Documentation Program](docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md)
+2. [Documentation Cross-Reference Matrix](docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md)
+3. [Master Task Register](docs/THE_GAME_MASTER_TASK_REGISTER.md)
+4. [Gate Twelve Region Master Plan](docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md)
+5. [Pixel Art Runtime Composition Standard](docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md)
+6. [World Development Master Index](docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md)
+7. [Android APK Rebuild & Evolution Master Plan](docs/android/APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md)
+
+The default `main` branch remains a placeholder and is not implementation authority.
+
+
 A data-driven, authored choice RPG where player decisions, stats, relationships, knowledge, equipment, powers, party composition, and previous conversations persist and alter later scenes.
 
 Current stabilization candidate: `fix/v6-runtime-boundaries`, based on
