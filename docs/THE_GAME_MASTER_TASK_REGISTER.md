@@ -481,3 +481,20 @@ Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified s
 - VERIFICATION: repository files were created on `docs/gate-twelve-map-pixel-asset-blueprint`; runtime animation remains unimplemented and unverified.
 - NEXT: inspect the exact animation rendering path and start the smallest reversible Service Tunnel ambient slice only after confirming no existing asset/overlay duplicates it.
 - COMPLETED_AT: —
+
+
+### TASK VIS-ANIM-001 — Service Tunnel ambient infrastructure
+- STATUS: `IN_PROGRESS`
+- PRIORITY: visual production / bounded runtime slice
+- BRANCH: `feature/service-tunnel-ambient-animation-stack`
+- PR: #31 (draft), stacked on PR #29 documentation/continuity branch.
+- IMPLEMENTED:
+  - presentation-only `PixelAmbientAnimationCatalog`;
+  - Service Tunnel fan (4 frames / 220 ms), panel indicator (3 frames / 450 ms), condensation drip (5 frames / 260 ms);
+  - location-scoped independent animation coroutines in `SceneIllustration`;
+  - JVM contract tests for grid/bounds/timing/mapping;
+  - Compose instrumentation test that advances 300 ms and requires visible pixel change with no story scene state.
+- SAFETY BOUNDARY: no map geometry, gameplay rules, quest state, hidden flags, routes, or `main` changes.
+- CURRENT EVIDENCE: Python job passed on Android Pixel Client run 283 / ID `36952046366`. Android unit/build/instrumentation/emulator jobs are still running and must pass before this task can be marked DONE.
+- NEXT: consume exact run-283 results; repair any failure on the same branch; then record APK/runtime evidence and phone-scale visual limitations.
+- COMPLETED_AT: —
