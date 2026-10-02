@@ -80,3 +80,34 @@ Next is Step 5 geometry contract.
 ## Next action
 
 Update repository indexes/status files to point to the master documentation program, then continue Gate Twelve Step 5 and create the next domain master documents.
+
+## 2026-10-02 directive expansion
+
+The owner expanded the documentation-first mandate and reiterated broad permission to redesign/rebuild the game while preserving prior prohibitions.
+
+New required coverage:
+- explicit what-can-change / what-will-change decisions;
+- pixel-art production stages;
+- actor-in-room and portrait/panel behavior;
+- text/signage/overlay/reuse compatibility;
+- document-to-document ownership/reference;
+- mechanics that may be reworked or broken/rebuilt;
+- large world coordinate/place/political/ecology/resource/beast/NPC/loot documentation;
+- skills/classes/ranks/citizen hierarchy/prejudice systems;
+- world level/balance;
+- original turn-based tactical combat;
+- original persistent adversary memory/evolution system;
+- final Android/APK decomposition and rebuild.
+
+The directive was decomposed into:
+- `MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md`;
+- `EXISTING_STATE_REWORK_DECISION_MATRIX.md`;
+- `DOCUMENTATION_PROGRESS_LEDGER.md`;
+- `PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md`;
+- `WORLD_SCALE_DOCUMENTATION_BLUEPRINT.md`;
+- `GAMEPLAY_SYSTEM_REBUILD_MATRIX.md`;
+- `APK_FINAL_RECONSTRUCTION_MATRIX.md`.
+
+Priority remains `jbob-coder/Text-rpg-game`.
+
+No `main` promotion or destructive runtime migration was performed by this documentation batch.
