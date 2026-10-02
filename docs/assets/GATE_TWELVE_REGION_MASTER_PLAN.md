@@ -3142,7 +3142,632 @@ Gate Twelve production order after this audit:
 
 ---
 
-# 8. Planned authoring sequence
+# 8. Application UX plan
+
+Status: **COMPLETE — GATE TWELVE PLAYER-EXPERIENCE CONTRACT LOCKED FOR LATER IMPLEMENTATION**
+
+Parent application authority:
+- `docs/android/APPLICATION_UX_MASTER_PLAN.md`
+
+Companion visual/runtime authorities:
+- `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`
+- `docs/assets/ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md`
+- `docs/assets/GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md`
+
+This step defines how Gate Twelve should actually feel inside the Android game: how the player sees the current place, present characters, narrative, actions, map, travel, resources, character panels, and location detail without turning Compose into a second rules engine.
+
+No runtime code is changed by Step 8.
+
+## 8.1 Primary experience rule
+
+For Gate Twelve, the application should prioritize:
+
+`place -> people -> situation -> action -> consequence -> travel/management when needed`
+
+The player should spend most of ordinary play time in a **current-location / Story experience**, not in a management dashboard.
+
+The application may have many supporting screens, but they must feel connected to the same world and state.
+
+## 8.2 What is preserved from the existing application
+
+The following concepts remain valid unless a later migration explicitly replaces them:
+
+- authoritative gameplay outside Compose;
+- player-safe projection boundary;
+- stable location/item/NPC/quest IDs;
+- Story as the main narrative surface;
+- Map as an interactive world-navigation surface;
+- separate Character / Stats / Equipment / Inventory / Skills / Quests surfaces where useful;
+- save/load through engine-owned persistence;
+- dynamic resource values rather than decorative static bars;
+- source-native pixel rendering and nearest-neighbor scaling;
+- the 32x48 player paper-doll contract;
+- semantic map-node anchors and authoritative route state;
+- explicit missing-asset fallback rather than crashing or inventing state;
+- developer tooling separated from normal play.
+
+Step 8 does not authorize moving any of those responsibilities into visual code merely for convenience.
+
+## 8.3 What is expected to change
+
+The following presentation areas are expected to be reworked materially:
+
+### Story/current-location presentation
+Current technical/prototype composition may be replaced by a richer layered room presentation that combines:
+- environment master;
+- structural modules;
+- state overlays;
+- props;
+- player sprite when appropriate;
+- present NPC room actors;
+- temporary FX;
+- focused actor panel when useful;
+- narrative;
+- choices/actions;
+- compact resource/status information.
+
+### Map presentation
+The current geometric/technical map look is a replacement candidate.
+
+Target:
+- authored 256x144 Gate Twelve map art;
+- permanent physical paths/background;
+- authoritative route/state overlays;
+- current-player marker;
+- discovered/current/reachable/unavailable states;
+- selected destination;
+- location detail/arrival preview;
+- travel action only when the projected state authorizes it.
+
+### Character presentation
+The generic/provisional player appearance is a replacement candidate.
+
+Target:
+- Jack-approved visual identity;
+- paper-doll equipment;
+- portrait identity;
+- visible player-safe conditions/status;
+- consistent appearance across Story, Character and panels.
+
+### Actor presentation
+Location/scene-specific hard-coded actor placement is transitional.
+
+Target:
+- player-safe projected room actors;
+- actor sprites selected from canonical identity;
+- panel availability driven by those projected actors;
+- no hidden-flag reconstruction in Compose.
+
+### Navigation/chrome
+Permanent chrome may be reduced/reorganized if it competes with the game world.
+
+The exact final navigation count remains an application-wide decision, but Gate Twelve requires fast access to:
+- Story/current location;
+- Map;
+- Character management;
+- Inventory/equipment;
+- Quests;
+- Settings/save.
+
+## 8.4 Story screen composition contract
+
+Default conceptual vertical order on a phone:
+
+1. compact location/context header;
+2. current-location visual stage;
+3. contextual actor focus/panel when needed;
+4. resource/status strip;
+5. narrative/dialogue text;
+6. player actions/choices;
+7. secondary contextual details only when requested.
+
+The visual stage must not become a tiny banner above an oversized wall of generic controls.
+
+Conversely, the art must not consume so much height that choices and narrative become difficult to use.
+
+The final exact dimensions remain responsive-layout implementation work.
+
+## 8.5 Room visual stage
+
+The room stage follows the runtime composition standard.
+
+Default order:
+
+1. environment master;
+2. permanent structures/modules;
+3. static props;
+4. rear state overlays;
+5. player sprite when composition calls for it;
+6. projected NPC room actors;
+7. held/equipment layers;
+8. foreground occluders;
+9. temporary FX;
+10. focus/selection treatment;
+11. UI actor panel above the world layer.
+
+Important:
+- a character is not drawn merely because the story document mentions them historically;
+- a character is drawn because player-safe current state says they are present;
+- the room art does not decide quest availability;
+- permanent room art does not bake temporary blackout/Trace/relationship state into the base master.
+
+## 8.6 Character-in-room and focus-panel behavior
+
+Target actor source:
+
+`player-safe projected actor list -> room actor -> optional portrait/focus panel`
+
+Focus priority:
+
+1. explicitly selected actor;
+2. current speaker;
+3. current interaction target;
+4. party-relevant actor;
+5. other present actor.
+
+When one important named actor is present:
+- show the room actor;
+- allow a focused portrait/name panel where useful;
+- preserve enough visible room art to maintain location context.
+
+When multiple actors are present:
+- do not open multiple large portrait panels simultaneously;
+- use compact selectable actor identifiers/chips/portraits if required;
+- one actor receives full focus at a time.
+
+When no named actor is present:
+- do not display a fabricated character panel.
+
+Panel content may include only projected/player-safe information such as:
+- display name;
+- portrait;
+- visible role/faction if intentionally known;
+- visible relationship/status summary if intentionally exposed;
+- dialogue/emotion;
+- available authored interactions.
+
+Panel content must not expose:
+- hidden goals;
+- private memories;
+- secret flags;
+- undiscovered faction state;
+- future quest outcomes;
+- raw AI/NPC simulation values.
+
+## 8.7 Gate Twelve actor/panel expectations by area
+
+These are composition expectations, not assertions that every actor is currently present.
+
+### Depot Plaza
+Typical target:
+- public actor slots;
+- temporary meeting-point NPCs only when projected;
+- no permanent full-screen NPC panel.
+
+Panel-safe priority:
+- preserve central plaza orientation and depot frontage.
+
+### Workshop Row
+Typical target:
+- workers/contractors when authored;
+- focused worker panel only during interaction;
+- tools/benches remain visible enough to preserve practical identity.
+
+### Municipal Archive
+Typical target:
+- clerk/visitor actors when authored;
+- research/document interaction may take focus without replacing the room permanently.
+
+### Platform Nine
+Current known actors include Tamsin and the injured courier in opening-related implementation evidence.
+
+Target:
+- strong support for one or more room actors;
+- speaker/focus changes without redrawing the environment;
+- evacuation-state overlays remain separate from actor art.
+
+### Relay Workbench
+Target:
+- Tamsin or another technically relevant actor when projected;
+- close technical interaction can use a focused panel/prop view;
+- relay/diagnostic object remains a separate stateful prop.
+
+### Gate Twelve
+Target:
+- actor panel is secondary to the threshold landmark;
+- do not cover the gate silhouette with persistent UI.
+
+### Quiet Stair
+Target:
+- normally sparse;
+- actor panel appears only for authored event/encounter presence.
+
+### Service Tunnel
+Target:
+- room actors may appear during investigation;
+- panel should not erase tunnel depth cue or future deep-route visual stub.
+
+### Trace Chamber
+Target:
+- supports training/research interactions;
+- present trainer/companion panel only when authoritative state says so;
+- Trace FX remain behind/around actors according to state and must not obscure action readability.
+
+## 8.8 Portrait contract
+
+Named recurring actors should use canonical portrait assets.
+
+Target portrait grid:
+- 64x64 source-native master unless a later global portrait migration replaces it.
+
+Portraits must share identity with:
+- room sprite;
+- gameplay sprite;
+- equipment/outfit state;
+- permanent marks;
+- hair/face silhouette;
+- role markers.
+
+The portrait is not a different redesign of the character.
+
+Emotion variants may change:
+- mouth/eyes/brow;
+- small pose/angle details;
+- controlled lighting where scene-appropriate.
+
+They must not silently change:
+- identity;
+- outfit ownership;
+- permanent marks;
+- body/face structure.
+
+## 8.9 Text, world signage and “text-art”
+
+Three different text responsibilities remain separate.
+
+### Narrative/UI text
+Rendered as readable UI typography.
+Used for:
+- dialogue;
+- narration;
+- choices;
+- labels;
+- descriptions;
+- system messages.
+
+### World signage
+Part of an environment/prop asset.
+Used for:
+- arrows;
+- location numbers;
+- public/service symbols;
+- large short identifiers.
+
+World signage must match:
+- area perspective;
+- pixel density;
+- material/lighting.
+
+### PixelSprite/text-map source definitions
+A code/text representation of pixel rows may remain a legitimate source master when intentionally authored.
+
+It is not treated as UI text and does not need to be replaced merely because its pixels are stored textually.
+
+## 8.10 Reuse and overlay UX rule
+
+The app should prefer compositing over duplicating entire screens/scenes.
+
+Reuse a base environment when:
+- architecture is unchanged;
+- state difference is temporary;
+- the same perspective/scale remains valid.
+
+Apply overlays for:
+- blackout;
+- emergency light;
+- powered/unpowered state when projected;
+- Trace/Echo state;
+- smoke/steam;
+- temporary damage;
+- selection/focus;
+- map current/reachable/selected state.
+
+Use a new full master only when:
+- architecture materially changes;
+- perspective changes;
+- silhouette changes enough that an overlay cannot preserve truth.
+
+This keeps the world visually coherent and prevents dozens of near-duplicate rooms from drifting apart.
+
+## 8.11 Map screen — Gate Twelve district mode
+
+Gate Twelve uses the 256x144 district master as its local map surface.
+
+Default district-mode decision:
+- fit the complete Gate Twelve district into the primary phone map viewport when practical;
+- do **not** require zoom merely to understand the nine current nodes;
+- secondary labels/details may appear only after selection;
+- touch targets may be larger than visible markers;
+- map marker positions remain tied to semantic node anchors.
+
+The current district is small enough that comprehension should come before elaborate camera controls.
+
+Future world/city maps may require pan/zoom; this step does not force that model onto Gate Twelve.
+
+## 8.12 Map visual stack
+
+Default order:
+
+1. district authored base;
+2. permanent route/surface geometry;
+3. permanent landmarks;
+4. safe environmental state overlays;
+5. discovered-node markers;
+6. current/reachable/unavailable state;
+7. player marker;
+8. selected destination;
+9. optional travel-preview route;
+10. location detail UI.
+
+The base map must not permanently encode:
+- current node;
+- reachable status;
+- quest status;
+- selected destination.
+
+## 8.13 Location selection and travel UX
+
+Selecting a discovered location should:
+- visually focus the node;
+- show player-facing title;
+- show player-facing description;
+- show arrival/location preview if available;
+- show travel availability/reason from authoritative projection;
+- provide travel action only when legal.
+
+Selecting does **not** immediately travel.
+
+Travel remains a deliberate action.
+
+Travel action must:
+- call authoritative engine/domain travel;
+- consume authoritative time/cost;
+- return the resulting snapshot;
+- update Story/current location;
+- update map state.
+
+No Compose-only teleport rule.
+
+## 8.14 Proposed Depot Plaza <-> Platform Nine connector UX
+
+Step 3 requires this future authored route.
+
+Until the content graph contains it:
+- map art may imply the physical depot entrance;
+- UI must not show it as a normal traversable edge;
+- no travel button may be fabricated.
+
+After content migration:
+- the route appears through normal projected adjacency;
+- selection/travel behavior needs no special hidden UI exception.
+
+## 8.15 Story <-> Map relationship
+
+Gate Twelve should make Story and Map feel like two views of one world.
+
+Target behavior:
+- Story shows current place and current situation;
+- Map shows spatial relationship and travel choices;
+- selecting/traveling changes authoritative current location;
+- returning to Story shows the new location/state.
+
+No duplicated independent “current location” state in Android.
+
+## 8.16 High-use actions and contextual shortcuts
+
+High-use location-specific actions should remain near the location that owns them.
+
+Examples:
+- Trace training belongs to Trace Chamber;
+- record research belongs to Archive;
+- relay diagnostics belongs to Workbench;
+- district notices belong to Depot Plaza.
+
+The app may offer a shortcut to a known location/action only if it still routes through authoritative state and does not bypass travel/access rules.
+
+Avoid one universal “Activities” menu that erases the meaning of place unless the final application UX later proves that such an aggregation is necessary.
+
+## 8.17 Resource/status presentation
+
+Story should keep a compact resource/status view.
+
+Requirements:
+- values come from projection;
+- bars reflect current/max;
+- color is not the only indicator;
+- exact numeric values remain readable where useful;
+- new ability-specific resource displays appear only when player-facing and relevant.
+
+The resource strip should not become a giant dashboard that pushes room/narrative content off-screen.
+
+## 8.18 Choice/action presentation
+
+Actions must communicate:
+- action text;
+- enabled/disabled state;
+- player-safe disabled reason where available;
+- important cost/time information only when intentionally exposed;
+- selected interaction context.
+
+Do not expose:
+- hidden difficulty formulas;
+- secret future outcomes;
+- raw branch conditions.
+
+Large action sets should use grouping/progressive disclosure rather than dozens of identical cards.
+
+## 8.19 Location detail / arrival preview
+
+Each named Gate Twelve location should eventually support a compact detail packet:
+
+- location ID;
+- player-facing title;
+- short purpose/description;
+- current/discovered/reachable state;
+- preview art;
+- selected state;
+- available travel action;
+- relevant visible activity badge only when projected;
+- known actor presence only if the application intentionally exposes it.
+
+The detail packet does not own gameplay.
+
+## 8.20 Navigation decision for this region
+
+Gate Twelve does not lock the final global navigation count.
+
+It does lock these usability requirements:
+- Story and Map are one-tap/high-priority destinations;
+- Settings/save are not allowed to dominate the play surface;
+- developer tools remain hidden/separate from ordinary play;
+- management surfaces must preserve a direct return to current Story/location;
+- contextual actor/location panels are not permanent global tabs.
+
+## 8.21 Phone-first behavior
+
+Gate Twelve must remain usable at small phone widths.
+
+Requirements:
+- no horizontal scrolling for ordinary narrative text;
+- primary choices have touch-safe targets;
+- map nodes have touch-safe hit regions;
+- focused portrait/panel can collapse;
+- long descriptions scroll independently without moving critical actions unpredictably;
+- pixel art scales by integer/nearest-neighbor strategy where possible;
+- no tiny embedded labels required for map comprehension;
+- no full-screen panel that permanently hides the location art.
+
+Galaxy A03-class constraints remain a performance/QA consideration, not proof of physical-device success.
+
+## 8.22 Motion and animation UX
+
+Animation supports state; it does not delay every interaction.
+
+Rules:
+- local/short-beat travel should not require long transitions;
+- ambient loops remain subtle;
+- reduced-motion mode must have a static/low-motion equivalent;
+- State-driven Trace/emergency FX may be stronger but bounded;
+- character animation should only be produced when a runtime interaction consumes it;
+- avoid whole-screen video for ordinary room animation.
+
+## 8.23 Loading and failure behavior
+
+Every Gate Twelve visual surface must have a safe degradation path.
+
+If environment art is missing:
+- use a documented fallback;
+- preserve location identity and actions;
+- do not crash.
+
+If an actor sprite is missing:
+- preserve actor presence in text/panel where safe;
+- use an explicit fallback only if the actor asset contract permits it;
+- do not silently show the wrong character.
+
+If a portrait is missing:
+- compact text identity is preferable to a wrong portrait.
+
+If map art is missing:
+- preserve authoritative node/route interaction with fallback presentation.
+
+Missing art must never change gameplay truth.
+
+## 8.24 Accessibility requirements
+
+Gate Twelve UI must support:
+- scalable/readable text;
+- sufficient contrast;
+- non-color-only state communication;
+- reduced motion;
+- touch target sizing;
+- narration/audio compatibility;
+- readable numeric resource status.
+
+Pixel-art authenticity is not an excuse for inaccessible text or ambiguous state.
+
+## 8.25 Application-state ownership table
+
+| Concern | Owner | Android responsibility |
+| --- | --- | --- |
+| current location | engine/world | render projected value |
+| actor presence | engine/player-safe projection | compose room actors/panels |
+| route legality | engine/world map | show projected reachable state, invoke travel |
+| quest availability | engine/quest/narrative | render available authored actions |
+| resources | engine/stats/powers | render values/bars |
+| environment identity | visual asset system | render correct master/module |
+| blackout/Trace state | engine projection + visual binding | select safe overlay |
+| actor identity | character blueprint/assets | render canonical sprite/portrait |
+| map selection | UI-local ephemeral state | highlight selected projected node |
+| panel focus | UI-local ephemeral state constrained to projected actors | choose which present actor is focused |
+| hidden NPC goals | engine private state | never render unless deliberately projected |
+
+## 8.26 Area packet UX additions
+
+Each Gate Twelve area production packet must now include:
+
+- Story visual-stage composition;
+- actor-safe ground positions;
+- portrait/panel-safe zone;
+- expected panel side/collapse behavior;
+- map arrival preview;
+- location-detail text ownership;
+- available overlay classes;
+- animation/reduced-motion variant;
+- fallback behavior;
+- phone screenshot target;
+- projected fields required by the area;
+- explicit statement of fields that remain hidden.
+
+This extends the Step 7 asset packet into an application-consumable packet.
+
+## 8.27 What remains undecided after Step 8
+
+Still open:
+- exact final global navigation bar/drawer structure;
+- final orientation support;
+- world-map pan/zoom model beyond Gate Twelve;
+- final portrait panel dimensions at every breakpoint;
+- actor chip visual design;
+- exact transition animation timing;
+- low-memory cache implementation;
+- whether Relationships/People and Knowledge/Logs become dedicated global surfaces;
+- whether future Activities gets a dedicated screen;
+- final tactical-combat entry/exit UX.
+
+Those decisions belong to application-wide work or later systems, not this region step.
+
+## 8.28 Step 8 locked decisions
+
+1. Story/current-location is the primary Gate Twelve play surface.
+2. Map is the primary spatial/travel companion surface.
+3. Room actors and actor panels are driven only by player-safe projected presence.
+4. One focused actor panel at a time is the default when multiple actors are present.
+5. Jack/Tamsin/other recurring portraits must match room/gameplay identity.
+6. UI text, world signage and textual PixelSprite source definitions remain separate concepts.
+7. State changes use overlays whenever architecture is unchanged.
+8. Gate Twelve district map defaults toward complete-district comprehension without mandatory zoom.
+9. Selection does not equal travel; travel remains an explicit authoritative action.
+10. Depot Plaza <-> Platform Nine must not appear as a legal route until the engine/content graph contains it.
+11. Story and Map share one authoritative current-location state.
+12. Location-owned activities remain contextual rather than being flattened into one generic menu by default.
+13. Current geometric/provisional Story/Map presentation may be replaced while stable IDs/state contracts remain.
+14. Missing visual assets degrade presentation, never gameplay truth.
+15. Phone readability/accessibility outrank decorative density.
+
+---
+
+# 9. Planned authoring sequence
 
 The remaining master plan will be completed in this order:
 
@@ -3153,7 +3778,7 @@ The remaining master plan will be completed in this order:
 5. **Geometry contract** — COMPLETE.
 6. **Material and visual language** — COMPLETE.
 7. **Asset decomposition** — COMPLETE.
-8. **Application UX plan** — Map/Story/location navigation and high-use flows.
+8. **Application UX plan** — COMPLETE.
 9. **State-layer plan** — discovery, reachability, events, blackout, Trace effects.
 10. **Performance/section strategy** — loading boundaries and mobile constraints.
 11. **Implementation order** — smallest safe slices and dependency graph.
@@ -3165,19 +3790,26 @@ The remaining master plan will be completed in this order:
 
 # Continuity footnote / next-session handoff
 
-**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract; Step 6 — material and visual language; Step 7 — asset decomposition.
+**Completed:** Steps 1–8.
 
-**Key decisions preserved for future sessions:**
-- active repository is `jbob-coder/Text-rpg-game`;
-- Gate Twelve District is a small but high-use region inside a larger world;
-- existing stable IDs, authored world-map graph, discovery/travel rules, and quest/state ownership remain authoritative until explicitly migrated;
-- existing 256x144 Gate Twelve presentation geometry is the current visual scaffold;
-- external material is inspiration only and may contain contradictory counts, dimensions, colors, and details;
-- do not choose “5 sections” or “12 areas” merely because the references contain those numbers;
-- design may improve or replace application presentation, including breaking old presentation behavior, when the replacement is documented and materially better;
-- UI must not become the source of truth for gameplay state;
-- final map must be constructed as modular game content, piece by piece, not generated as one flattened image.
+**Current documentation authority:**
+- repository: `jbob-coder/Text-rpg-game`;
+- program branch: `docs/master-game-development-program`;
+- region: Gate Twelve District;
+- region master: this document.
 
-**Next unfinished step:** Step 8 — Application UX plan: define how Story, room actors/panels, Map, location detail, navigation and high-use interactions work together on phone without moving authority into Compose.
+**Preserved project decisions:**
+- Text-rpg-game is the priority game repository;
+- documentation remains the primary objective before broad destructive implementation;
+- Gate Twelve is the first proof region;
+- stable gameplay IDs/state ownership remain authoritative until explicit migration;
+- external references contribute structure/ideas, not copied game content;
+- pixel art is modular/composited, not one flattened image per state;
+- characters/panels depend on player-safe projected actor presence;
+- current presentation may be broken/rebuilt when the documented replacement is materially better;
+- `main` remains a placeholder until a separate explicit promotion decision;
+- no physical handset result may be inferred from emulator evidence.
 
-**Steps 5–7 now permit bounded Gate Twelve asset packets and replacement work. World-scale mass production remains gated by world/system schemas.**
+**Next unfinished step:** Step 9 — State-layer plan. Define which state lives in permanent base art, reusable overlays, map markers, actor/equipment layers, event layers and transient FX; define discovery/reachability/blackout/Trace bindings and prevent hidden-state leaks.
+
+**Implementation remains gated:** Step 8 is a UX contract, not a claim that projected actor lists, final panels, final map art, or final Story composition are already implemented.
