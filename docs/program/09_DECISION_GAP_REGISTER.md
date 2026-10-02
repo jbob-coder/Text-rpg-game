@@ -9,7 +9,7 @@ Purpose: prevent proposals from silently turning into canon.
 |---|---|---|---|
 | GAP-001 | Gate Twelve | Step 5 geometry contract is persisted in the Master Plan | CLOSED — documented 2026-10-02 |
 | GAP-002 | Repository governance | old README/status pointers still describe earlier canonical branches/objectives | OPEN |
-| GAP-003 | World | larger world hierarchy/coordinates not locked | OPEN |
+| GAP-003 | World | hierarchy/coordinate-space contract documented; final WORLD_GEO representation and actual geography remain undecided | PARTIALLY SPECIFIED |
 | GAP-004 | World | Depot Plaza external world destination unknown | OPEN |
 | GAP-005 | World | Quiet Stair external destination unknown | OPEN |
 | GAP-006 | World | Service Tunnel deeper destination unknown | OPEN |
