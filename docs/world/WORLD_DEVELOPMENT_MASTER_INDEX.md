@@ -140,8 +140,10 @@ Used for:
 
 No coordinate system may silently substitute for another.
 
-Required future document:
+Operational child standard:
 `WORLD_COORDINATE_AND_SCALE_STANDARD.md`.
+
+Status: materialized on the master documentation branch; canonical W0/W1 spaces remain unpopulated until world-parent decisions are authored.
 
 ---
 
