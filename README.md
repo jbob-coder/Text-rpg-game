@@ -22,6 +22,12 @@ Start here for current work:
 12. [World-Scale Documentation Blueprint](docs/world/WORLD_SCALE_DOCUMENTATION_BLUEPRINT.md)
 13. [Gameplay System Rebuild Matrix](docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md)
 14. [Final APK Reconstruction Matrix](docs/android/APK_FINAL_RECONSTRUCTION_MATRIX.md)
+15. [Documentation Corpus Architecture](docs/DOCUMENTATION_CORPUS_ARCHITECTURE.md)
+16. [World Geography Standard](docs/world/WORLD_GEOGRAPHY_STANDARD.md)
+17. [World Political Entities](docs/world/WORLD_POLITICAL_ENTITIES.md)
+18. [World Settlement Catalog](docs/world/WORLD_SETTLEMENT_CATALOG.md)
+19. [World Travel and Routes](docs/world/WORLD_TRAVEL_AND_ROUTES.md)
+20. [Room Actor / Panel / Overlay / Reuse Standard](docs/assets/ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md)
 
 The default `main` branch remains a placeholder and is not implementation authority.
 
