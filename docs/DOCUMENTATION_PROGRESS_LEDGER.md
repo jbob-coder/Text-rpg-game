@@ -257,3 +257,31 @@ Next P0 measurement/control work:
 1. exact existing-state repository audit;
 2. reproducible documentation/world/asset inventory;
 3. Gate Twelve refinement/provenance reconciliation.
+
+
+## 2026-10-02 live-repository audit and inventory-control batch
+
+Added:
+- `docs/LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md`;
+- `docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-02.md`;
+- `tools/documentation_inventory.py`.
+
+Verified structural snapshot for `docs/master-game-development-program@f9981cdcd4d82c8eced330a2da081e60ee2ed510` before these additions:
+- 231 tracked files;
+- 90 files under `docs/`;
+- 69 Markdown files repository-wide;
+- 67 Markdown files under `docs/`;
+- 24 PNGs;
+- 39 Python files;
+- 65 Kotlin files;
+- 18 JSON files;
+- 50 Python/Kotlin source files with `test` in their path;
+- 12 world Markdown documents;
+- 8 systems Markdown documents;
+- 22 asset Markdown documents;
+- 3 Android Markdown documents;
+- 3 Game Context Log Markdown documents.
+
+These are exact structural counts for that Git tree, not completion percentages and not a chosen interpretation of the owner's 3,000 / 2,000 / 10,000 / 10,000 / 2,000,000 targets.
+
+The deterministic inventory tool has been added, but a persisted exact-checkout execution plus structured domain/asset-stage extraction remains P0 work.
