@@ -310,3 +310,22 @@ The new documents are contracts, not claims that their target runtime systems ar
 Exact baseline `4d596bcd27b6e2f8ef9ce3a93b9dab22f5f4812e`: 239 tracked files; 76 Markdown files; 74 under docs; 123,707 repository Markdown words; 122,028 docs Markdown words; 24 PNGs; 13 world, 9 systems, 23 asset and 4 Android Markdown files. Command actually executed: `python tools/documentation_inventory.py --root .`. No unreadable Markdown reported.
 
 These measured quantities are baseline inventory, not completion of the owner's ambiguous numeric targets. New continuation files are excluded from the baseline snapshot. Full file-content catalog and 24 raster binding records are now stored under docs/evidence. World map baseline contains nine nodes and eight edge records. No 10,000-place or 2,000,000-unit completion is claimed.
+
+
+## 2026-10-02 final reconstruction integration update
+
+Added integration authority:
+- `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md`.
+
+This is counted as a new durable documentation unit but does **not** resolve the owner's numeric-unit ambiguity and does not justify a completion percentage.
+
+The new blueprint adds structured decision coverage for:
+- change authority;
+- pixel asset stages and required creation families;
+- area packet composition;
+- actor/panel projection;
+- decided vs undecided world canon;
+- mechanics migration depth;
+- final APK teardown/rebuild order.
+
+Next measurable work remains branch-aware asset/implementation reconciliation and exact inventory execution.
