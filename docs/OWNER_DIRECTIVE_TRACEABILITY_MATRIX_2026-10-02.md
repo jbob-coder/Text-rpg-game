@@ -66,7 +66,7 @@ Status vocabulary:
 | Update old reports so they point at the current program | README, AGENTS, implementation-status pointer, V6 handoff pointer | DOCUMENTED/UPDATED | continue adding priority headers to any stale report discovered |
 | Preserve continuity for future sessions | context logs; task register; cross-reference; handoff sections | DOCUMENTED | every major batch records HEAD/evidence/next action |
 
-## 3. Immediate missing child contracts exposed by this matrix
+## 3. Child contracts exposed by this matrix
 
 The directive is now covered at a master-document level, but several child contracts remain necessary before mass implementation.
 
@@ -88,8 +88,10 @@ Needed for:
 - rewards/consequences;
 - Android presentation.
 
-Target child:
+Materialized child:
 `docs/systems/PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md`.
+
+Status: **DOCUMENTED / implementation remains future work**.
 
 ### B. Coordinate/scale operational contract
 
@@ -107,8 +109,10 @@ The geography/scale docs define layers, but mass map population needs an operati
 - validation;
 - versioning.
 
-Target child:
+Materialized child:
 `docs/world/WORLD_COORDINATE_AND_SCALE_STANDARD.md`.
+
+Status: **DOCUMENTED / canonical world spaces remain unpopulated**.
 
 ### C. Branch-aware asset provenance registry
 
@@ -122,16 +126,20 @@ Needed to reconcile:
 - canonical approval;
 - reuse compatibility signature.
 
-Target child or structured registry:
-`docs/assets/ASSET_PROVENANCE_REGISTRY.md` plus future machine-readable registry.
+Materialized child:
+`docs/assets/ASSET_PROVENANCE_REGISTRY.md`.
+
+Status: **SCHEMA + INITIAL RASTER SEED / exact branch-source reconciliation still in progress**.
 
 ### D. Android consumer map
 
 Needed to map:
 `screen/component -> projected field/action -> domain owner -> asset packet -> tests/evidence`.
 
-Target:
+Materialized child:
 `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`.
+
+Status: **FIRST-PASS SOURCE-GROUNDED MAP / line-by-line consumer audit still in progress**.
 
 ## 4. Directive execution rule
 
@@ -149,12 +157,11 @@ P0 order:
 
 1. complete branch/file/consumer existing-state audit;
 2. execute and extend reproducible inventory;
-3. create the dedicated activity/life-loop contract;
-4. create the coordinate/scale operational contract;
-5. create branch-aware asset provenance registry;
-6. create Android consumer/projection map;
-7. reconcile Gate Twelve implementation branches/assets;
-8. then resume bounded implementation against the documented target.
+3. populate the asset provenance registry with exact branch/hash/consumer evidence;
+4. complete the Android line-by-line consumer/projection audit;
+5. reconcile Gate Twelve implementation branches/assets;
+6. decide first canonical parent-world/geography records before large-scale world population;
+7. then resume bounded implementation against the documented target.
 
 ## 6. Continuity note
 
