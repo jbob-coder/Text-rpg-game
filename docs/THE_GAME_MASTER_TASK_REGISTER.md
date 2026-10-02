@@ -681,55 +681,57 @@ Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified s
 
 ## 2026-10-02 DOCUMENTATION EXPANSION BATCH
 
-### TASK D-013 — Decompose expanded owner directive
+Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2026-10-02 to eliminate collisions with earlier canonical D-013–D-022 task IDs. Task meaning/evidence was preserved.
+
+### TASK D-034 — Decompose expanded owner directive
 - STATUS: `DONE`
 - PRIORITY: `P0`
 - OUTPUT: `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md`
 - RESULT: documentation/world/system/visual/APK work split into ordered migration-gated phases.
 
-### TASK D-014 — Create rework decision matrix
+### TASK D-035 — Create rework decision matrix
 - STATUS: `DONE`
 - PRIORITY: `P0`
 - OUTPUT: `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md`
 - NOTE: high-level matrix complete; deep per-file audit remains TASK D-006.
 
-### TASK D-015 — Create pixel art production/reuse ledger
+### TASK D-036 — Create pixel art production/reuse ledger
 - STATUS: `DONE`
 - PRIORITY: `P0`
 - OUTPUT: `docs/assets/PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md`
 - RESULT: actor/panel/overlay/reuse rules and Gate Twelve production packet needs recorded.
 
-### TASK D-016 — Create world-scale coordinate/schema blueprint
+### TASK D-037 — Create world-scale coordinate/schema blueprint
 - STATUS: `DONE`
 - PRIORITY: `P0`
 - OUTPUT: `docs/world/WORLD_SCALE_DOCUMENTATION_BLUEPRINT.md`
 - RESULT: schema-first world hierarchy recorded; mass world generation remains gated.
 
-### TASK D-017 — Create gameplay rebuild matrix
+### TASK D-038 — Create gameplay rebuild matrix
 - STATUS: `DONE`
 - PRIORITY: `P0`
 - OUTPUT: `docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md`
 - RESULT: current systems and target stats/skills/classes/ranks/social/combat/adversary systems classified.
 
-### TASK D-018 — Create final APK reconstruction matrix
+### TASK D-039 — Create final APK reconstruction matrix
 - STATUS: `DONE`
 - PRIORITY: `P0 / LATE-STAGE AUTHORITY`
 - OUTPUT: `docs/android/APK_FINAL_RECONSTRUCTION_MATRIX.md`
 - RESULT: final screen/component keep/rework/replace/remove sequence documented; execution remains blocked.
 
-### TASK D-019 — Track requested documentation scale
+### TASK D-040 — Track requested documentation scale
 - STATUS: `DONE`
 - PRIORITY: `P0`
 - OUTPUT: `docs/DOCUMENTATION_PROGRESS_LEDGER.md`
 - RESULT: numeric targets preserved without inventing units; reproducible count audit still pending.
 
-### TASK D-020 — Finish Gate Twelve Step 8–14
+### TASK D-041 — Finish Gate Twelve Step 8–14
 - STATUS: `DONE`
 - PRIORITY: `P0`
 - CURRENT: Duplicate tracker reconciled with completed TASK D-005; Steps 1–14 first-pass contract exists. Runtime acceptance remains separate.
 - COMPLETED_AT: `2026-10-02 08:01 AST` (existing D-005 evidence).
 
-### TASK D-021 — Deep source-file existing-state audit
+### TASK D-042 — Deep source-file existing-state audit
 - STATUS: `PENDING`
 - PRIORITY: `P0`
 - OUTPUT: exact module/component/content/asset/save/test inventory with disposition and branch/HEAD evidence.
@@ -738,7 +740,7 @@ Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified s
 
 ## Operational continuation — 2026-10-02 15:06 AST
 
-### TASK D-022 — Baseline documentation/raster evidence and execution contracts
+### TASK D-043 — Baseline documentation/raster evidence and execution contracts
 - STATUS: `DONE` (documentation deliverables; remote publication checked separately).
 - PRIORITY: `P0`
 - BASELINE: `4d596bcd27b6e2f8ef9ce3a93b9dab22f5f4812e`.
@@ -747,7 +749,7 @@ Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified s
 - VERIFICATION: `git diff --check` passed; JSON assertions passed for all 76 document records/123,707 words, 24 bound PNGs and nine nodes/eight edge records; local Markdown links in changed documents resolved.
 - TESTS: no runtime files changed; Python/Android runtime tests were not rerun for this documentation-only batch.
 - COMPLETED_AT: `2026-10-02 15:06 AST`.
-- NOT COMPLETE: D-006/D-021 full branch reconciliation, art approval, proposed actor projection, world-scale population, final APK, physical Galaxy A03 QA.
+- NOT COMPLETE: D-006/D-042 full branch reconciliation, art approval, proposed actor projection, world-scale population, final APK, physical Galaxy A03 QA.
 - NEXT: reconcile source/raster revisions and implementation branch ancestry; author Gate Twelve parent-world proposal and bounded area packets.
 
 
