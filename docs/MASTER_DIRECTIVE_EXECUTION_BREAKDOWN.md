@@ -366,3 +366,20 @@ They turn several previously listed future outputs into real repository document
 ## Current continuation
 
 See [Decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md) for operational steps and accepted versus candidate changes. The baseline catalog and raster audit now exist; branch reconciliation remains open.
+
+
+## 2026-10-02 final reconstruction integration update
+
+The detailed integration/decision ledger is now `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md`.
+
+Execution order is refined to:
+1. reconcile PR #7–#31 branch ownership and exact-head evidence;
+2. exactize raster/source-native asset provenance and stage;
+3. complete Android composable/ViewModel/bridge/Python consumer mapping;
+4. design the player-safe room-actor projection and panel contract;
+5. author the minimum Gate Twelve parent-world canon packet;
+6. convert progression/social/items/combat/adversary contracts into migration/API tasks;
+7. create the APK teardown manifest before deleting any presentation path;
+8. only then resume broad runtime migration and world population.
+
+The numeric documentation targets remain preserved but unresolved in unit; the inventory/progress ledgers remain responsible for measurement.
