@@ -1,5 +1,10 @@
 # THE GAME — Pixel Asset Production Roadmap v1 (001–500)
 
+## Global program pointer
+
+This 001–500 roadmap is a child plan of `docs/MASTER_DOCUMENTATION_PROGRAM.md`. Asset production must follow `docs/PIXEL_ART_INTEGRATION_AND_REUSE_STANDARD.md` and the repository priority rules in `docs/PROJECT_PRIORITY_AND_CONTEXT_ROUTING.md`.
+
+
 ## Scope
 
 This roadmap defines the complete **v1 production baseline** before bulk visual generation begins.
