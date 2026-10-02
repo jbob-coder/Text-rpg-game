@@ -142,3 +142,16 @@ Materialized in this continuation:
 - master task-state reconciliation.
 
 Prior prohibitions remain active despite broad permission.
+
+
+## 2026-10-02 world schema completion batch
+
+The requested large-world documentation was expanded with child standards for:
+- ecosystems/resources;
+- beast zones/species;
+- population/citizen hierarchy;
+- world balance/level bands;
+- loot provenance;
+- NPC population/schedules/location fidelity.
+
+These standards deliberately avoid inventing the still-undecided world map, kingdoms, Gate Twelve parent city, beast species, currencies or demographic totals. The next world phase is controlled catalog population and canon decisions.
