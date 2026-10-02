@@ -20,6 +20,22 @@ class PixelMapArtCatalogTest {
         assertTrue(usedKeys.all { it in map.palette })
     }
 
+
+    @Test
+    fun gateTwelveDistrictUsesLayeredStaticMaterialTextureWithoutMovingLandmarks() {
+        val map = PixelMapArtCatalog.gateTwelveDistrictBase
+
+        assertTrue(map.rows.take(48).any { 'c' in it })
+        assertTrue(map.rows.slice(48..94).any { 's' in it })
+        assertTrue(map.rows.drop(95).any { 'm' in it })
+
+        // Representative landmark anchors remain authored by the geometry pass that follows
+        // the texture layer.
+        assertEquals('I', map.rows[8][49])   // Workshop Row outer frame.
+        assertEquals('Y', map.rows[65][136]) // Gate Twelve center indicator.
+        assertEquals('I', map.rows[87][170]) // Service Tunnel support rib.
+    }
+
     @Test
     fun authoredMapViewportUsesIntegerPixelScaleAndSharedPercentageCoordinates() {
         val viewport = PixelMapArtCatalog.viewport(
