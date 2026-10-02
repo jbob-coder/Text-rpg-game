@@ -285,3 +285,21 @@ Verified structural snapshot for `docs/master-game-development-program@f9981cdcd
 These are exact structural counts for that Git tree, not completion percentages and not a chosen interpretation of the owner's 3,000 / 2,000 / 10,000 / 10,000 / 2,000,000 targets.
 
 The deterministic inventory tool has been added, but a persisted exact-checkout execution plus structured domain/asset-stage extraction remains P0 work.
+
+
+## 2026-10-02 owner-directive traceability + missing-child closure batch
+
+Added:
+- `docs/OWNER_DIRECTIVE_TRACEABILITY_MATRIX_2026-10-02.md`;
+- `docs/systems/PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md`;
+- `docs/world/WORLD_COORDINATE_AND_SCALE_STANDARD.md`;
+- `docs/assets/ASSET_PROVENANCE_REGISTRY.md`;
+- `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`.
+
+This batch closes four documentation gaps detected by the directive traceability pass:
+- passive/active player activities and life-loop ownership;
+- operational coordinate/scale rules;
+- branch-aware visual provenance requirements;
+- Android screen/projection consumer mapping.
+
+The new documents are contracts, not claims that their target runtime systems are complete.
