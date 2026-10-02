@@ -2234,7 +2234,644 @@ Those belong to Steps 6–10.
 
 ---
 
-# 6. Planned authoring sequence
+
+
+# 6. Material and visual language
+
+Status: **COMPLETE — GATE TWELVE VISUAL LANGUAGE LOCKED FOR ASSET DECOMPOSITION**
+
+This step defines what Gate Twelve should look and feel like before individual production packets are created.
+
+Sources:
+- `docs/VISUAL_BIBLE.md`;
+- `docs/assets/PIXEL_ASSET_MASTER_PLAN.md`;
+- `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`;
+- current Gate Twelve map palette and geometry;
+- owner-supplied external map/settlement references as non-authoritative structural inspiration;
+- owner direction that the game should look like a cohesive pixel-art RPG and **not** default to cyberpunk/neon shorthand.
+
+## 6.1 Core visual identity
+
+Gate Twelve is:
+
+**grounded municipal infrastructure under emergency pressure**
+
+It is not:
+- cyberpunk nightclub architecture;
+- neon city spectacle;
+- fantasy medieval settlement copied from the external reference;
+- sterile sci-fi laboratory everywhere;
+- abstract UI geometry pretending to be world art.
+
+The area should communicate:
+- public civic infrastructure at the surface;
+- functional depot/transport engineering in the middle;
+- restricted maintenance systems below;
+- age, use and practical repair;
+- emergency conditions through state layers;
+- technological capability through believable infrastructure rather than excessive glow.
+
+## 6.2 Pixel-art density
+
+Final visible world art must use deliberate pixel clusters.
+
+Rules:
+- no anti-aliased shipping raster edges;
+- no smooth painting run through a pixel filter;
+- no tiny one-pixel noise fields used as texture;
+- silhouettes first;
+- material breaks second;
+- accents last;
+- nearest-neighbor/integer-safe scaling when source art is enlarged;
+- source-native map/scene/character grids remain separate.
+
+Map:
+- 256x144 native master.
+
+Narrative scene:
+- 128x64 native master.
+
+Gameplay character:
+- 32x48.
+
+Portrait:
+- 64x64.
+
+World art may use denser local clusters than a character sprite, but the visual language should still read as intentional pixel art at 1x and at phone scale.
+
+## 6.3 Global light logic
+
+Gate Twelve uses one principal visual-lighting rule:
+
+**environmental form is readable without emissive accents.**
+
+Emissive/status lights support form; they do not create it.
+
+### Surface Civic
+Default:
+- broader ambient illumination;
+- softer contrast;
+- practical warm/neutral civic fixtures;
+- daylight/ambient-world compatibility once the wider world is defined.
+
+Blackout/emergency:
+- darker base;
+- localized emergency red/orange;
+- sparse surviving warm lamps;
+- no full-scene saturated red wash.
+
+### Depot / Gate Core
+Default:
+- controlled industrial lighting;
+- stronger hard-edged shadows;
+- practical warm-white/amber indicators;
+- cooler service spaces only where material/fixture logic supports it.
+
+Emergency/Trace:
+- red/orange emergency light;
+- cyan/blue-green Trace response only in bounded areas;
+- active effects never recolor the entire architecture.
+
+### Lower Maintenance
+Default:
+- lower value;
+- isolated service lights;
+- visible silhouettes;
+- deeper shadow pockets;
+- practical guidance/maintenance illumination.
+
+State effects:
+- signal/aftershock/Trace response remains overlay-driven.
+
+## 6.4 UI colors versus world colors
+
+Current UI anchors include:
+- Ink;
+- Deep;
+- Panel;
+- PanelAlt;
+- Paper;
+- Muted;
+- Cyan;
+- Gold;
+- Danger;
+- resource colors.
+
+Decision:
+- these are **interface/feedback anchors**, not a mandatory world palette.
+
+World art may use related ramps, but:
+- Cyan is not “the color of all technology”;
+- Gold is not “the color of all lights”;
+- Danger is not permanently painted onto every emergency-related object;
+- panels should not make the environment look like a glowing HUD.
+
+## 6.5 Existing map palette status
+
+The current `PixelMapArtCatalog` palette establishes a useful grounded baseline:
+- dark ink/charcoal;
+- service gray;
+- muted concrete;
+- worn road brown-gray;
+- pale civic/stone values;
+- muted vegetation;
+- warm practical yellow;
+- restrained light neutral.
+
+Status:
+- **direction accepted**;
+- exact current colors may be refined;
+- palette relationships matter more than preserving every hex.
+
+Any replacement palette must preserve:
+- readable value separation;
+- material distinction;
+- macrozone distinction;
+- marker/UI readability;
+- non-neon world identity.
+
+## 6.6 Material families
+
+### 6.6.1 Civic masonry / slab
+
+Consumers:
+- Depot Plaza;
+- Archive;
+- public approaches.
+
+Visual properties:
+- medium-light neutral stone/concrete;
+- broad clean clusters;
+- moderate wear at edges;
+- occasional seams;
+- low-frequency stains;
+- no random speckle noise.
+
+### 6.6.2 Workshop masonry / sheet metal
+
+Consumers:
+- Workshop Row.
+
+Visual properties:
+- warmer and dirtier than Archive;
+- patched sheet metal;
+- shutters;
+- tool wear;
+- localized rust/brown oxidation;
+- open repair apertures.
+
+It should feel worked-in, not abandoned.
+
+### 6.6.3 Depot concrete / painted steel
+
+Consumers:
+- Platform Nine;
+- Workbench annex;
+- Gate approach.
+
+Visual properties:
+- heavy structural shapes;
+- broad painted steel;
+- dark track metal;
+- service markings;
+- worn platform edges;
+- practical maintenance access.
+
+### 6.6.4 Reinforced restricted infrastructure
+
+Consumers:
+- Gate Twelve;
+- Service Tunnel.
+
+Visual properties:
+- darker concrete;
+- heavy panel seams;
+- ribs/supports;
+- access plates;
+- cable/pipe channels;
+- restrained warning markings;
+- repeated modular engineering rhythm.
+
+### 6.6.5 Controlled technical chamber
+
+Consumer:
+- Trace Chamber.
+
+Visual properties:
+- same municipal infrastructure family as Service Tunnel;
+- cleaner arrangement;
+- deliberate measurement/calibration props;
+- more controlled symmetry;
+- bounded signal apparatus.
+
+It must not read as an unrelated futuristic laboratory.
+
+### 6.6.6 Rail / track steel
+
+Consumer:
+- Platform Nine.
+
+Visual properties:
+- near-black/dark steel;
+- limited highlights;
+- wear on contact edges;
+- sleepers/crossbars visibly separate from rail.
+
+### 6.6.7 Glass
+
+Use sparingly.
+
+Properties:
+- dark interior value;
+- one coherent reflection cluster;
+- no smooth transparency gradient in ordinary pixel masters.
+
+### 6.6.8 Cloth / character materials
+
+Character art must remain distinct from architecture:
+- softer value transitions;
+- clear garment silhouettes;
+- equipment layers readable against scene backgrounds.
+
+Characters should not disappear into municipal gray.
+
+## 6.7 Macrozone visual distinction
+
+The three macrozones must be distinguishable even if labels are hidden.
+
+### Surface Civic District
+
+Dominant cues:
+- lighter value range;
+- more open negative space;
+- trees/planters;
+- public lamps;
+- cleaner civic surfaces;
+- readable public facade silhouettes.
+
+Avoid:
+- dense pipes everywhere;
+- intense technical glow;
+- dungeon-like darkness.
+
+### Depot / Gate Core
+
+Dominant cues:
+- denser structures;
+- tracks/service lines;
+- steel/concrete;
+- controlled access;
+- stronger industrial rhythm;
+- practical safety markings.
+
+Avoid:
+- making Platform Nine visually identical to Service Tunnel.
+
+### Lower Maintenance Network
+
+Dominant cues:
+- darker values;
+- narrower negative spaces;
+- structural repetition;
+- vents/drains/rails;
+- longer depth cues;
+- sparse localized light.
+
+Avoid:
+- blacking out the area so much that paths/actors are unreadable.
+
+## 6.8 Location-specific signatures
+
+### Depot Plaza
+Signature:
+- open paving;
+- civic lamps/trees;
+- strong depot frontage;
+- clear west/east/inward directional read.
+
+Visual priority:
+negative space and orientation.
+
+### Workshop Row
+Signature:
+- repeated bays;
+- shutters/awnings;
+- benches/tools/scrap;
+- warmer repair-material accents.
+
+Visual priority:
+human work and practical activity.
+
+### Municipal Archive
+Signature:
+- institutional facade;
+- cleaner vertical window rhythm;
+- courtyard;
+- restrained backup lighting.
+
+Visual priority:
+ordered civic knowledge.
+
+### Platform Nine
+Signature:
+- broad depot mass;
+- tracks;
+- platform safety edge;
+- emergency strips during blackout;
+- room actor presence during opening.
+
+Visual priority:
+evacuation pressure + transit identity.
+
+### Relay Workbench
+Signature:
+- compact technical annex;
+- central bench;
+- diagnostic task lighting;
+- relay prop as stateful focal object.
+
+Visual priority:
+precision inspection.
+
+### Gate Twelve
+Signature:
+- heavy symmetric gate silhouette;
+- strong center seam;
+- reinforced frame;
+- bounded service indicators;
+- localized Echo response when active.
+
+Visual priority:
+threshold.
+
+### Quiet Stair
+Signature:
+- angular stair/landing rhythm;
+- rails;
+- sparse guidance lights;
+- empty/quiet negative space.
+
+Visual priority:
+alternate egress.
+
+### Service Tunnel
+Signature:
+- depth;
+- ribs;
+- pipes/cables;
+- access panels;
+- dark corridor opening;
+- restrained ambient machinery.
+
+Visual priority:
+continuation and uncertainty.
+
+### Trace Chamber
+Signature:
+- municipal room shell;
+- controlled apparatus;
+- calibration geometry;
+- bounded Trace FX.
+
+Visual priority:
+measured experimentation/training.
+
+## 6.9 Landmark emphasis hierarchy
+
+Tier 1:
+- Depot Plaza;
+- Platform Nine;
+- Gate Twelve.
+
+At phone map scale, these must remain identifiable from silhouette/value composition.
+
+Tier 2:
+- Workshop Row;
+- Municipal Archive;
+- Quiet Stair;
+- Service Tunnel;
+- Trace Chamber.
+
+Tier 3:
+- Relay Workbench.
+
+Rule:
+detail density must not make a Tier 3 feature visually dominate a Tier 1 anchor.
+
+## 6.10 Character readability inside rooms
+
+Room art must reserve enough contrast for:
+- player sprite;
+- recurring NPC;
+- supporting actor.
+
+Guidelines:
+- avoid placing same-value wall mass directly behind a character's silhouette;
+- use floor/ground contact shadow;
+- use local contrast rather than glowing outlines;
+- preserve canonical outfit colors;
+- do not recolor character identity to match a room;
+- state FX may overlap characters only when the gameplay state visibly affects them.
+
+## 6.11 Character panel visual integration
+
+Future actor/portrait panels should feel part of the same game without visually pretending to be room architecture.
+
+Panel direction:
+- dark grounded shell;
+- paper/light text;
+- restrained border;
+- portrait uses canonical 64x64 identity;
+- optional role/status markers;
+- no neon hologram treatment by default;
+- focused actor gets emphasis without covering the entire scene.
+
+When a character is present:
+- room sprite establishes physical presence;
+- portrait/panel provides readable identity/dialogue context.
+
+The two views must agree.
+
+## 6.12 Environmental animation language
+
+Ambient animation:
+- small fan/vent cycle;
+- lamp blink;
+- steam/drip;
+- subtle machinery;
+- controlled sign pulse.
+
+State-driven animation:
+- Echo response;
+- blackout failure/recovery;
+- event-specific machinery;
+- temporary damage response.
+
+Rule:
+the world should not shimmer everywhere.
+
+Animation density must decrease rather than increase in quiet/restricted spaces unless the scene state specifically demands motion.
+
+## 6.13 Vegetation
+
+Gate Twelve uses restrained municipal vegetation.
+
+Surface:
+- compact street trees;
+- planters;
+- minimal ground growth.
+
+Depot/service:
+- little to none except incidental edge growth.
+
+Lower maintenance:
+- normally none unless moisture/neglect later justifies it.
+
+Do not use lush fantasy greenery from external map references as a default.
+
+## 6.14 Signage and readable text
+
+Pixel world art should use:
+- icons;
+- arrows;
+- plates;
+- color/value codes;
+- large identifying numbers only when legible and authored.
+
+Narrative-detail text belongs to UI.
+
+Do not fill 128x64 scene art with pseudo-text noise.
+
+## 6.15 Wear and age
+
+Wear should tell a material story.
+
+Allowed:
+- edge chipping;
+- oil/drain marks;
+- track wear;
+- localized rust;
+- patched panels;
+- scuffed workshop apron;
+- dirt in service corners.
+
+Avoid:
+- uniform noise;
+- random cracks on every surface;
+- “post-apocalypse” degradation unless story state requires it.
+
+Gate Twelve is stressed infrastructure, not necessarily a ruined city.
+
+## 6.16 Emergency-state language
+
+Emergency visual grammar:
+- localized red/orange practical warning;
+- reduced ambient value;
+- intermittent lamp failure;
+- clear evacuation arrows;
+- preserved navigation readability.
+
+Do not:
+- full-screen red tint;
+- flashing every object;
+- use emergency styling in the normal base asset.
+
+## 6.17 Trace visual language
+
+Trace/Echo is a specific phenomenon, not generic “magic tech glow.”
+
+Visual principles:
+- spatial afterimage;
+- residual line/ring patterns;
+- localized response;
+- restrained cyan/blue-green family where current visual language already supports it;
+- signal intensity represented by shape/motion as well as color;
+- stronger effects reserved for confirmed active scenes.
+
+Never use Trace FX to reveal hidden future destinations.
+
+## 6.18 External-reference adaptation rule
+
+The owner-supplied external map/settlement material contributes:
+- modular section thinking;
+- clear central orientation;
+- distinct functional zones;
+- asset-by-asset decomposition;
+- reusable building/prop logic;
+- route readability.
+
+Rejected as authority:
+- exact medieval architecture;
+- exact sector count;
+- exact area count;
+- exact colors;
+- exact dimensions;
+- exact settlement identity.
+
+The result must look like this game's municipal/industrial world, not a reskin of the external reference.
+
+## 6.19 What may change from current visuals
+
+Allowed and expected:
+- current map palette refinement;
+- current simplistic scene geometry;
+- provisional building detailing;
+- placeholder props;
+- weak material differentiation;
+- generic avatar art;
+- actor scene composition;
+- panel styling;
+- current excessive reliance on rectangles;
+- asset-specific lighting.
+
+## 6.20 What should remain visually stable
+
+Preserve unless explicitly migrated:
+- overall pixel style;
+- source-native grid philosophy;
+- major Gate Twelve geometry;
+- map node semantic positions;
+- 32x48 character rig;
+- actor identity anchors;
+- equipment slot/paper-doll layering;
+- player-safe state separation;
+- map-marker semantic roles;
+- Tier 1 landmark identities.
+
+## 6.21 Material packet requirements
+
+Every asset packet in Step 7 must specify:
+- material family;
+- local palette/ramp;
+- darkest value;
+- lightest value;
+- accent colors;
+- light direction;
+- emissive behavior;
+- wear level;
+- texture frequency;
+- neighboring asset compatibility;
+- actor contrast requirement;
+- state-overlay compatibility.
+
+## 6.22 Step 6 locked decisions
+
+1. Gate Twelve is grounded municipal infrastructure, not neon/cyberpunk.
+2. World form must remain readable without emissive accents.
+3. UI semantic colors do not dictate world materials.
+4. Surface Civic, Depot/Gate, and Lower Maintenance use distinct value/material identities.
+5. Trace effects are bounded/localized state layers.
+6. emergency visuals are overlays, not permanent base styling.
+7. characters preserve canonical identity and remain readable against rooms.
+8. actor panels use canonical portraits and grounded pixel UI treatment.
+9. wear is purposeful and localized, not random noise.
+10. external reference contributes structure/modularity, not exact aesthetics.
+11. current weak/provisional visual details may be replaced.
+12. geometry, grids, identity anchors and state ownership remain stable unless explicitly migrated.
+
+---
+
+# 7. Planned authoring sequence
 
 The remaining master plan will be completed in this order:
 
@@ -2243,7 +2880,7 @@ The remaining master plan will be completed in this order:
 3. **Circulation** — COMPLETE.
 4. **Per-zone function** — COMPLETE.
 5. **Geometry contract** — COMPLETE.
-6. **Material and visual language** — surfaces, architecture families, lighting.
+6. **Material and visual language** — COMPLETE.
 7. **Asset decomposition** — what must be built one asset at a time.
 8. **Application UX plan** — Map/Story/location navigation and high-use flows.
 9. **State-layer plan** — discovery, reachability, events, blackout, Trace effects.
@@ -2257,7 +2894,7 @@ The remaining master plan will be completed in this order:
 
 # Continuity footnote / next-session handoff
 
-**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract.
+**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract; Step 6 — material and visual language.
 
 **Key decisions preserved for future sessions:**
 - active repository is `jbob-coder/Text-rpg-game`;
@@ -2270,6 +2907,6 @@ The remaining master plan will be completed in this order:
 - UI must not become the source of truth for gameplay state;
 - final map must be constructed as modular game content, piece by piece, not generated as one flattened image.
 
-**Next unfinished step:** Step 6 — define material and visual language: palette families, material ramps, lighting direction, civic/depot/lower-infrastructure identity, landmark emphasis, and compatibility rules for new pixel-art assets.
+**Next unfinished step:** Step 7 — asset decomposition: enumerate the exact map/scene/building/prop/overlay/actor/panel assets needed per location, classify each as existing/integrated/provisional/missing/rebuild, and define production order/dependencies.
 
-**Asset production planning may now use the locked geometry contract, but do not mass-produce assets before Step 6–7 define the visual language and exact asset decomposition.**
+**Geometry and visual language are now sufficiently locked for asset packet authoring. Do not mass-produce world-scale assets before the Step 7 inventory prevents duplication.**
