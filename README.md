@@ -36,6 +36,9 @@ Start here for current work:
 24. [World Balance and Level Bands](docs/world/WORLD_BALANCE_AND_LEVEL_BANDS.md)
 25. [World Loot Provenance Standard](docs/world/WORLD_LOOT_PROVENANCE_STANDARD.md)
 26. [World NPC Population Standard](docs/world/WORLD_NPC_POPULATION_STANDARD.md)
+27. [Live Repository State Audit — 2026-10-02](docs/LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md)
+28. [Repository Corpus Inventory Snapshot — 2026-10-02](docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-02.md)
+29. [Deterministic Documentation Inventory Tool](tools/documentation_inventory.py)
 
 The default `main` branch remains a placeholder and is not implementation authority.
 
