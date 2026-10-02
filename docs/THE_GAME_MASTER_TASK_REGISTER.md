@@ -776,9 +776,12 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - LATEST_SLICE: `docs/assets/SOURCE_RASTER_RECONCILIATION_2026-10-02.md` records the inherited nine-scene PNG baseline and exact divergent Service Tunnel/Quiet Stair source+raster candidates. Full every-family provenance remains incomplete.
 
 ### TASK D-030 — Player-safe actor/panel projection contract
-- STATUS: `PENDING`
+- STATUS: `DONE (DOCUMENTED) / IMPLEMENTATION PENDING`
 - PRIORITY: `P0`
-- OUTPUT: projected actor identity/presence/pose/equipment/portrait/interactions with hidden-state-safe Android consumers.
+- OUTPUT: `docs/android/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`.
+- VERIFIED BASELINE: durable `state.npcs` exists, Android bridge has no room actor projection, Kotlin `GameSnapshot` has no room actor model, and `PixelStoryActorCatalog.placements(locationId, sceneId)` still owns current opening actor presence.
+- RESULT: versioned player-safe `room` projection, redaction boundary, support-actor handling, semantic placement keys, Kotlin target types, mapper validation, opening-story equivalence fixtures, panel-selection lifecycle, save boundary and test gates are specified.
+- RUNTIME: not implemented by this documentation task; existing scene/location actor heuristic remains active until a later bounded code slice passes equivalence/CI gates.
 
 ### TASK D-031 — Gate Twelve parent-world canon packet
 - STATUS: `PROPOSAL_READY / OWNER_CANON_DECISION_REQUIRED`
