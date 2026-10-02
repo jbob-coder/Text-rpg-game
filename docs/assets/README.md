@@ -110,3 +110,15 @@ The Wave C runtime parent `1c7e54e548ab3c28819af0b85ae8cbba53aff827` passed work
 
 - [GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md](GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md)
   - Step-7 evidence matrix for all Batch 001 units plus Gate Twelve per-area asset decomposition, current stage, manifest/code drift, missing exact IDs and open refinement lines.
+
+## Pixel production/reuse ledger
+
+Use [PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md](PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md) for:
+- current-vs-required asset stages;
+- Jack/Tamsin production needs;
+- room actor + portrait/panel composition;
+- overlay/text/signage rules;
+- reuse compatibility;
+- Gate Twelve per-area production packets.
+
+It supplements, not replaces, the runtime composition standard and exact asset manifests.
