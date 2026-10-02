@@ -6,12 +6,23 @@ This file is the repository entry point for coding agents and automated assistan
 
 Before changing code or documentation, read these in order:
 
-1. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — current objective, task queue, blockers, completion timestamps, Android black-screen status, and cross-chat continuity.
-2. `docs/IMPLEMENTATION_STATUS.md` — verified engine/repository state.
-3. `docs/V6_STABILIZATION_HANDOFF.md` — exact V6 stabilization evidence, runtime defects, repairs, and verification boundaries.
-4. Relevant source/tests for the task you are actually changing.
+1. `docs/DOCUMENTATION_MASTER_PROGRAM.md` — current full-project design/documentation authority and reconstruction stages.
+2. `docs/DOCUMENTATION_INDEX.md` — cross-reference map showing what every normative document controls and what remains planned.
+3. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — current objective, task queue, blockers, completion timestamps, Android status, and execution continuity.
+4. `docs/IMPLEMENTATION_STATUS.md` — verified/historical engine and repository state.
+5. `docs/V6_STABILIZATION_HANDOFF.md` — exact V6 stabilization evidence, runtime defects, repairs, and verification boundaries.
+6. Relevant source/tests for the task you are actually changing.
+
+For current game design, the master documentation program outranks stale planning reports. For claims about code/runtime behavior, current source and fresh execution evidence still outrank documentation.
 
 Repository files and fresh execution evidence outrank remembered chat context.
+
+## Current project priority
+
+- Priority repository for THE GAME / Text Pixel RPG: `jbob-coder/Text-rpg-game`.
+- Active documentation-program branch: `docs/text-pixel-rpg-master-program`.
+- Gate Twelve is a subordinate regional plan, not the whole world.
+- Documentation is the current primary goal; destructive APK/client teardown is deferred until the target architecture and keep/rework/replace/retire matrix exist.
 
 ## Current working baseline
 
