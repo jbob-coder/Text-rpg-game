@@ -139,7 +139,7 @@ Gate Twelve is the first region used to prove:
 Current region master:
 `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`
 
-Current state: Steps 1–8 complete; Step 9 onward remains.
+Current state: Steps 1–14 complete as a first-pass proof-region contract; runtime implementation remains separate.
 
 ### Phase 4 — World-scale schema
 Before mass world creation, define:
@@ -329,16 +329,14 @@ Do not create art for a region merely because a blank area exists. First verify:
 
 ## 7. Current immediate order
 
-1. finish Gate Twelve Steps 9–14;
-2. deepen the existing-state rework audit;
-3. finalize world coordinate/place schemas;
-4. author progression/class/rank master;
-5. author NPC/social/rival master;
-6. author items/economy/loot/ecosystem master;
-7. author tactical combat master;
-8. author application UX master;
-9. create migration matrices;
-10. perform final APK reconstruction.
+1. deepen the exact existing-state rework audit against live implementation heads;
+2. create reproducible documentation/world/asset inventory counts;
+3. reconcile Gate Twelve visual/runtime refinement branches and asset provenance;
+4. begin bounded Gate Twelve implementation only where Steps 1–14 contracts are satisfied;
+5. populate world catalogs under the established geography/political/settlement/ecosystem/beast/population standards;
+6. deepen progression/social/items/combat balances as world records require;
+7. maintain save/content migration matrices for every breaking domain change;
+8. keep final APK reconstruction late-stage until domain contracts and migrations are mature.
 
 ## 8. Continuity handoff
 
