@@ -168,11 +168,15 @@ Owns:
 - spatial hierarchy;
 - circulation;
 - per-zone gameplay function;
-- next: geometry contract, materials, asset decomposition, UX, state layers, loading, implementation, verification, migration.
+- geometry contract;
+- material/visual language;
+- asset decomposition;
+- Gate Twelve application UX;
+- next: state layers, loading/performance, implementation, verification, migration and execution handoff.
 
 Current stage:
-- Steps 1–7 complete;
-- Step 8 Application UX plan next.
+- Steps 1–8 complete;
+- Step 9 State-layer plan next.
 
 ### `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`
 Owns:
