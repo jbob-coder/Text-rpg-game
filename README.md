@@ -1,5 +1,7 @@
 # Text RPG Game
 
+> **Current project priority (documentation program):** this repository is the authoritative home for the active Text Pixel RPG work. Start with [docs/DOCUMENTATION_MASTER_PROGRAM.md](docs/DOCUMENTATION_MASTER_PROGRAM.md), then [docs/DOCUMENTATION_INDEX.md](docs/DOCUMENTATION_INDEX.md), then [AGENTS.md](AGENTS.md). The master program does not by itself promote `main`; implementation/canonical branch governance remains explicit.
+
 A data-driven, authored choice RPG where player decisions, stats, relationships, knowledge, equipment, powers, party composition, and previous conversations persist and alter later scenes.
 
 Current stabilization candidate: `fix/v6-runtime-boundaries`, based on
