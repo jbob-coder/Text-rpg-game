@@ -181,3 +181,13 @@ Do not rebuild intent from old prototype reports when these current authorities 
 ## Operational coverage continuation
 
 The decision/rebuild register now decomposes the renewed directive. The full document catalog covers all 76 baseline Markdown files. The world decision queue preserves exact local coordinates and open canon decisions. The room composition contract documents current actors and proposed panels. All 24 baseline rasters have concrete hash/dimension/binding evidence; branch and artistic acceptance remain open. The activity/life-loop master already exists, superseding the earlier row saying it still needs creation. Persistent adversary design requires patent-aware review as well as original expression; no clearance is claimed.
+
+
+## 2026-10-02 final reconstruction integration update
+
+The directive now has an integration-level child: `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md`.
+
+It closes the previous cross-domain gap between requirements that were documented separately but not expressed as one execution chain. It explicitly links:
+`authority -> current-state audit -> asset stage/provenance -> area packet -> world canon -> mechanics migration -> Android consumer migration -> final APK teardown/rebuild -> verification`.
+
+The blueprint does not mark unfinished runtime systems complete. It is a coordination/decision authority only.
