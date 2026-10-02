@@ -19,11 +19,11 @@ Purpose: prevent proposals from silently turning into canon.
 | GAP-010 | Characters | scene-presence projection ownership/shape | SPECIFIED — exact implementation pending |
 | GAP-011 | Society | citizen classes/hierarchy not designed | OPEN |
 | GAP-012 | Society | fictional prejudice/discrimination rules not designed | OPEN |
-| GAP-013 | Progression | final class/specialization model not decided | OPEN |
-| GAP-014 | Progression | final rank model not decided | OPEN |
-| GAP-015 | Combat | tactical combat rules not designed | OPEN |
-| GAP-016 | Combat | persistent adversary/rival system not designed | OPEN |
-| GAP-017 | Balance | world level/scaling model not decided | OPEN |
+| GAP-013 | Progression | class/specialization architecture documented; class catalog, exact entry rules, respec and counts remain | REVIEWABLE ARCHITECTURE |
+| GAP-014 | Progression | rank namespaces documented; exact scales/caps remain undecided | REVIEWABLE ARCHITECTURE |
+| GAP-015 | Combat | tactical combat architecture documented; position, turn order, formulas, AI and exact action economy remain | REVIEWABLE ARCHITECTURE |
+| GAP-016 | Combat | persistent adversary architecture documented; eligibility, adaptation catalog, recurrence and removal rules remain | REVIEWABLE ARCHITECTURE |
+| GAP-017 | Balance | world-anchored balance philosophy documented; numeric bands, caps, curves and difficulty parameters remain | REVIEWABLE ARCHITECTURE |
 | GAP-018 | Economy | final currency/economy model not decided | OPEN |
 | GAP-019 | Economy | crafting/repair adoption not decided | OPEN |
 | GAP-020 | Ecology | beast/entity standard plus beast-zone/ecosystem schema documented; actual species/zones and simulation depth remain | REVIEWABLE SCHEMA — content pending |
