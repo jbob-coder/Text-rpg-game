@@ -767,7 +767,7 @@ internal fun InventorySection(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 PixelUiIcon(
-                    sprite = PixelUiIconCatalog.navigation(GameSection.INVENTORY),
+                    sprite = PixelUiIconCatalog.navigation(GameSection.INVENTORY.label),
                     modifier = Modifier.size(20.dp),
                     tint = PixelColors.Gold,
                     testTag = "inventory-loadout-icon",
@@ -906,7 +906,7 @@ internal fun InventorySection(
                             )
                             if (selectedItem.equippable && !selectedItem.slot.isNullOrBlank()) {
                                 Text(
-                                    "SLOT ${slotDisplayName(selectedItem.slot)}",
+                                    "SLOT ${slotDisplayName(selectedItem.slot ?: "")}",
                                     color = PixelColors.Gold,
                                     style = MaterialTheme.typography.labelLarge,
                                 )
