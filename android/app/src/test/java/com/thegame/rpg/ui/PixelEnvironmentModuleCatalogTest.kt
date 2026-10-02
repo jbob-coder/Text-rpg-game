@@ -60,6 +60,17 @@ class PixelEnvironmentModuleCatalogTest {
         }
     }
     @Test
+    fun serviceTunnelArrivalDetailUsesEntireInfrastructureAtlasOnly() {
+        assertEquals(
+            PixelEnvironmentModuleCatalog.infrastructureTileAtlas.tiles.map { it.assetId },
+            PixelEnvironmentModuleCatalog.arrivalDetailTiles("SERVICE_TUNNEL").map { it.assetId },
+        )
+        assertTrue(
+            PixelEnvironmentModuleCatalog.arrivalDetailTiles("UNKNOWN_LOCATION").isEmpty(),
+        )
+    }
+
+    @Test
     fun arrivalPreviewsUseOnlyExactAuthoredLocationBindings() {
         assertEquals(
             PixelEnvironmentModuleCatalog.DEPOT_FACADE_EXTERIOR_ID,
