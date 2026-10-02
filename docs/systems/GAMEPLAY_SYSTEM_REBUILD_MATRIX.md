@@ -364,3 +364,18 @@ Before new world scale:
 - `SAVE_AND_CONTENT_MIGRATION_MASTER_PLAN.md`
 
 This matrix is the decision bridge; those documents own the full specifications.
+
+
+## 2026-10-02 final reconstruction integration update
+
+The integration blueprint converts the system matrix into four migration depths:
+
+**Depth 0 — Preserve contract:** save/load, stable IDs, hidden-state boundary, deterministic engine ownership, existing quest/equipment/stat authority.
+
+**Depth 1 — Extend:** NPC memory/relationships/goals, quests, activities, abilities/techniques, validation, player-safe inspection.
+
+**Depth 2 — Rework with migration:** progression taxonomy, class/profession/rank/citizen-status layers, skill taxonomy, item/economy/loot depth, world-balance formulas, richer schedules/factions, actor-presence projection.
+
+**Depth 3 — New subsystem:** tactical positional combat, persistent adversary network, world-scale registries/population and tactical encounter terrain/AI.
+
+No Depth 2/3 change may silently mutate save fields or Android-visible contracts. Each must define schema/API owner, stable IDs, save migration, player-safe projection, tests and rollback before integration.
