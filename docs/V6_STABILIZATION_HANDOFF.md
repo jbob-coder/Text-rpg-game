@@ -1,5 +1,8 @@
 # V6 stabilization handoff — 2026-09-27
 
+> **Current-program pointer (2026-10-01):** this handoff is retained as exact historical engine evidence. Current product/documentation authority is [`MASTER_GAME_DEVELOPMENT_PROGRAM.md`](MASTER_GAME_DEVELOPMENT_PROGRAM.md). Do not use this historical V6 handoff to override newer world, pixel-art, application, or documentation decisions.
+
+
 ## CURRENT_OBJECTIVE
 
 Close the exact V6 execution gap and the four boundary defects identified in the
