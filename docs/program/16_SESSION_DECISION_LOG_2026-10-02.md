@@ -183,3 +183,21 @@ Repository existence/readback should be verified after writes.
 ## RESULTS
 
 The conversation's current governing decisions are now represented as repository documentation and can be used as the continuity source for the next session.
+
+
+## CHECKPOINT — SB01 PRE-AUTHORING
+
+A production checkpoint was created at:
+
+`docs/production/CHECKPOINT_2026-10-02_SB01_PRE_AUTHORING.md`
+
+Verified resume state:
+- production-control layer exists;
+- SB01 manifest contains exactly 100 planned IDs;
+- numbered corpus authoring has not started;
+- completed: 0/100;
+- last_verified_id: NONE;
+- next_id: `DOC_0000001`;
+- attempted DOC_0000001–DOC_0000010 write did not land, so no partial cleanup is required.
+
+Resume from the checkpoint file before continuing.
