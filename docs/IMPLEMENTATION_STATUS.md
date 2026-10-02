@@ -1,5 +1,7 @@
 # Implementation Status — V6 Stabilization
 
+> **Scope notice (2026-10-02):** this file remains authoritative historical/runtime evidence for the V6 stabilization work. It is no longer the primary design roadmap. Current full-project documentation authority is `docs/DOCUMENTATION_MASTER_PROGRAM.md`, indexed by `docs/DOCUMENTATION_INDEX.md`.
+
 Updated: 2026-09-27. This record supersedes the foundation-oriented status previously
 present here; the earlier history remains at upstream V6 commit
 `7f5f104fb839068bdfaf5cec72f37129ae20d463`.
