@@ -804,3 +804,25 @@ It defines:
 - loot provenance.
 
 Do not begin thousands of world records until those schema contracts are stable.
+
+
+---
+
+# 28. Materialized world child standards — 2026-10-02
+
+The following child standards now exist:
+- `WORLD_GEOGRAPHY_STANDARD.md` — hierarchy, W0–W4 coordinate roles, boundaries, terrain/climate/resource/beast/political geography and scale policy.
+- `WORLD_POLITICAL_ENTITIES.md` — political/government/territorial/social-hierarchy schema and catalog seed.
+- `WORLD_SETTLEMENT_CATALOG.md` — city/town/village/outpost/district record and production contract.
+- `WORLD_TRAVEL_AND_ROUTES.md` — route/access/travel/risk/migration and hierarchical travel contract.
+
+The earlier “required child documents” list contains provisional names from before these files materialized. Where names differ, these materialized files are the current child authorities unless a later migration explicitly replaces them.
+
+Still required at world scale:
+- ecosystem/resource catalog;
+- beast/zone catalog;
+- population/citizen hierarchy catalog;
+- world balance/level-band catalog;
+- loot provenance catalog;
+- exact Gate Twelve parent settlement/city decision;
+- macroregion and political-world canon.
