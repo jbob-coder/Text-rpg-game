@@ -122,3 +122,7 @@ Use [PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md](PIXEL_ART_PRODUCTION_AND_REUSE_LE
 - Gate Twelve per-area production packets.
 
 It supplements, not replaces, the runtime composition standard and exact asset manifests.
+
+
+## Provenance
+- `ASSET_PROVENANCE_REGISTRY.md` — branch-aware source/reference/raster/code provenance, production stage, supersession, compatibility and reconciliation queue.
