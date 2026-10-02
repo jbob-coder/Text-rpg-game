@@ -106,3 +106,19 @@ Required:
 ## Next action
 
 After this log is committed, begin with the smallest reversible animation candidate, currently Service Tunnel ambient infrastructure, unless fresh repository evidence shows a safer prerequisite.
+
+
+## Runtime implementation started
+
+- Branch: `feature/service-tunnel-ambient-animation-stack`
+- Draft PR: #31, based on the PR #29 documentation/continuity line.
+- First bounded slice: Service Tunnel ambient infrastructure.
+- Runtime tracks added:
+  - fan: 4 frames at 220 ms;
+  - panel indicator: 3 frames at 450 ms;
+  - condensation drip: 5 frames at 260 ms.
+- Ambient selection uses only visible `locationId`; no hidden quest/rules state is read.
+- Existing story-state overlays remain separate.
+- Tests added for frame contracts and Compose clock-driven visible animation.
+- Verification state at record update: Android Pixel Client run 283 / `36952046366`; Python job passed, Android unit/build/emulator work still pending.
+- Do not treat this slice as verified until the exact run finishes successfully.
