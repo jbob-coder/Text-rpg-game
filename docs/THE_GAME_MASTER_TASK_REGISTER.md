@@ -463,3 +463,21 @@ Finish P-005 in PR #13 stacked above PR #12, preserving PR #11 inspection and PR
 Historical asset continuation guidance (superseded by the live evidence above):
 
 Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified slices. Assets 039, 040, 044, 053, 062/063, 072–075 and 096–100 are green and evidenced. Candidate assets 067–071 are implemented as reusable presentation-only infrastructure props and now require an exact-head gate. Do not block implementation on rejected mixed character references. Physical Galaxy A03 visual QA remains a separate acceptance gate before final visual approval.
+
+
+## Cross-chat continuity — Gate Twelve visual production
+
+### TASK CTX-001 — Preserve map/art/animation decisions across sessions
+- STATUS: `IN_PROGRESS`
+- PRIORITY: continuity / safety
+- RESULT SO FAR:
+  - created `docs/GAME_CONTEXT_LOGS/README.md`;
+  - created `docs/GAME_CONTEXT_LOGS/2026-10-01_GATE_TWELVE_MAP_ART_ANIMATION.md`;
+  - recorded that authored map geometry is the fixed scaffold and pixel art/animation must adapt to it;
+  - recorded separation between this repository's engineering continuity and the separate private-RPG state/session hierarchy;
+  - recorded standing permission for conservative reversible safety decisions while preserving approval boundaries for destructive/irreversible/external actions.
+- RELATED: PR #29 documentation line.
+- RUNTIME IMPACT: none; documentation/continuity only.
+- VERIFICATION: repository files were created on `docs/gate-twelve-map-pixel-asset-blueprint`; runtime animation remains unimplemented and unverified.
+- NEXT: inspect the exact animation rendering path and start the smallest reversible Service Tunnel ambient slice only after confirming no existing asset/overlay duplicates it.
+- COMPLETED_AT: —
