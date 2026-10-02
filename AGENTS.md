@@ -4,24 +4,32 @@ This file is the repository entry point for coding agents and automated assistan
 
 ## Read first
 
+**Priority repository:** `jbob-coder/Text-rpg-game`.
+
 Before changing code or documentation, read these in order:
 
-1. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — current objective, task queue, blockers, completion timestamps, Android black-screen status, and cross-chat continuity.
-2. `docs/IMPLEMENTATION_STATUS.md` — verified engine/repository state.
-3. `docs/V6_STABILIZATION_HANDOFF.md` — exact V6 stabilization evidence, runtime defects, repairs, and verification boundaries.
-4. Relevant source/tests for the task you are actually changing.
+1. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
+2. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases for the owner's long-range directive.
+3. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — what each major document owns and what consumes it.
+4. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — operational task state, blockers, evidence and next action.
+5. `docs/IMPLEMENTATION_STATUS.md` — verified historical/current implementation evidence.
+6. Relevant domain master document for the work being changed.
+7. Relevant source/tests for the task being changed.
+8. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
 
-Repository files and fresh execution evidence outrank remembered chat context.
+Repository files and fresh execution evidence outrank remembered chat context. Older game repositories, prototypes and historical reports are not authority unless an explicit migration record says otherwise.
 
 ## Current working baseline
 
-- Repository: `jbob-coder/Text-rpg-game`
-- Stabilization branch at the time this entry point was added: `fix/v6-runtime-boundaries`
-- Parent V6 line: `integration/rules-ability-v6-reconcile`
+- Repository: `jbob-coder/Text-rpg-game`.
+- Program authority branch: `docs/master-game-development-program`.
+- Current mode: **documentation first**; broad implementation expansion follows written contracts.
+- Gate Twelve is the first proof region.
 - `main` is not the canonical implementation branch. Do not promote, rewrite, or merge `main` merely because it is the default branch.
-- The Android test APK has a user-reported black-screen startup defect. Do not claim Android is fixed until a rebuilt package is tested on a representative Android runtime/device.
+- Historical V6 and Android branches remain evidence sources, not top-level product authority.
+- The old black-screen incident is historically closed by the repository-owned Compose/Chaquopy client on representative emulator evidence; physical Galaxy A03 validation remains a separate gate and must not be inferred from emulator results.
 
-Use `docs/THE_GAME_MASTER_TASK_REGISTER.md` for the live status rather than copying this snapshot forward.
+Use the master program and task register for live status rather than copying historical snapshots forward.
 
 ## Default project permissions
 
