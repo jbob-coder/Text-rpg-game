@@ -47,6 +47,23 @@ class PixelMapArtCatalogTest {
         assertEquals('L', map.rows[69][21])  // Platform Nine track sleeper drawn over wear.
     }
 
+
+    @Test
+    fun workshopAndGateMaterialDetailsStayInsideExistingLandmarkFootprints() {
+        val map = PixelMapArtCatalog.gateTwelveDistrictBase
+
+        // Workshop Row keeps the same outer frame while gaining internal material seams.
+        assertEquals('I', map.rows[8][49])
+        assertEquals('S', map.rows[10][52])
+        assertEquals('S', map.rows[17][54])
+
+        // Gate Twelve keeps the same outer frame and center seam while receiving internal jamb detail.
+        assertEquals('I', map.rows[56][119])
+        assertEquals('S', map.rows[64][127])
+        assertEquals('I', map.rows[62][133])
+        assertEquals('Y', map.rows[65][136])
+    }
+
     @Test
     fun authoredMapViewportUsesIntegerPixelScaleAndSharedPercentageCoordinates() {
         val viewport = PixelMapArtCatalog.viewport(
