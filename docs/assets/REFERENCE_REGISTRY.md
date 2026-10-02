@@ -7,6 +7,7 @@ A reference appearing here does **not** imply canon approval or production readi
 | Reference ID | Status | Scope | Persisted location | SHA-256 | Allowed use | Rejected use |
 | --- | --- | --- | --- | --- | --- | --- |
 | `REF_BATCH001_CONCEPT_BOARD_A` | `REFERENCE_GENERATED / STYLE_DIRECTION_ACCEPTED / CANON_GEOMETRY_REJECTED` | Broad Batch 001 style probe | Google Drive file ID `1JDvlmF_Mfy93rs_Llq5rB444EOUF5Gzr` | `2d52f5364cecd1338e3c4cd0eafdbba7d5575e980f4c3d7856db3c6119e83ec8` | Pixel-density direction, modular sheet layout, dark industrial value language, restrained cyan/gold accents, icon/scene/FX family coherence | Canon player face, canon Tamsin geometry, item existence, courier identity, district architecture, relay state contract |
+| `UI_REFERENCE_CHARACTER_APPROVED_V1` | `REFERENCE_SELECTED / CHARACTER_TAB_APPROVED` | Jack Wilson Character-tab visual identity/presentation | Google Drive file ID `1OrLsw_mvbZ5HipFObfX8wdvA7vAPa-Ve` | `af453993693ff0447da3a1bf07e0276013f0c87f6a69442f86c5f3192487d867` | Jack visual identity, human proportions, silhouette, layered clothing/equipment presentation, character-art alignment across UI scales | Gameplay stat authority, hidden state, collision/hitbox geometry, exact 32x48 anchors, unseen turnaround views, animation timing |
 
 ## Selection policy
 
@@ -50,4 +51,3 @@ Production PNGs and manifests belong in the repository only after reconstruction
 - accepted observations;
 - rejected deviations;
 - related blueprint/manifests.
-
