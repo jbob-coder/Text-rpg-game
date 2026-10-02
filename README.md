@@ -11,8 +11,9 @@ Gate Twelve is the first proof region. Its region plan Steps 1–14 are now comp
 Start here for current work:
 
 1. [Master Development & Documentation Program](docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md)
-2. [Documentation Cross-Reference Matrix](docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md)
-3. [Master Task Register](docs/THE_GAME_MASTER_TASK_REGISTER.md)
+2. [Final Game Reconstruction Blueprint](docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md)
+3. [Documentation Cross-Reference Matrix](docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md)
+4. [Master Task Register](docs/THE_GAME_MASTER_TASK_REGISTER.md)
 4. [Gate Twelve Region Master Plan](docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md)
 5. [Pixel Art Runtime Composition Standard](docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md)
 6. [World Development Master Index](docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md)
