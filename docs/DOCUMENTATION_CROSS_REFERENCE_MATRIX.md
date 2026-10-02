@@ -705,3 +705,12 @@ Must not own:
 - exact low-level formulas already owned by a domain master;
 - implementation facts without exact source/HEAD evidence;
 - invented world canon.
+
+
+## 2026-10-02 branch/raster/parent-world continuation
+
+- [Implementation PR #7–#31 reconciliation](IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md): exact branch heads/bases, ancestry to the documentation program, workflow evidence, divergent survivor set and migration order.
+- [Source/raster branch reconciliation](assets/SOURCE_RASTER_RECONCILIATION_2026-10-02.md): inherited nine-scene raster baseline, Service Tunnel/Quiet Stair divergent source+raster revisions, runtime raster precedence and promotion gates.
+- [Gate Twelve parent-world proposal](world/GATE_TWELVE_PARENT_WORLD_PROPOSAL.md): proposed minimum settlement/region/municipal/route/terrain-climate parent chain; working names remain non-canon pending owner decision.
+
+These records narrow D-028/D-029/D-031. They do not promote divergent implementation branches, change runtime state, or convert proposed world names into canon.
