@@ -1,5 +1,10 @@
 # Implementation Status — V6 Stabilization
 
+## Current authority pointer
+
+This is a historical/implementation-status document for an earlier stabilization slice. For current project routing and documentation priorities, read `docs/PROJECT_PRIORITY_AND_CONTEXT_ROUTING.md` and `docs/MASTER_DOCUMENTATION_PROGRAM.md` first. The active project remains `jbob-coder/Text-rpg-game`; exact-head evidence in this file remains valid only for the commits/runs it names.
+
+
 Updated: 2026-09-27. This record supersedes the foundation-oriented status previously
 present here; the earlier history remains at upstream V6 commit
 `7f5f104fb839068bdfaf5cec72f37129ae20d463`.
