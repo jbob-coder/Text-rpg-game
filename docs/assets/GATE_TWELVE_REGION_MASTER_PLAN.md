@@ -3767,49 +3767,1064 @@ Those decisions belong to application-wide work or later systems, not this regio
 
 ---
 
-# 9. Planned authoring sequence
+# 9. State-layer plan
 
-The remaining master plan will be completed in this order:
+Status: **COMPLETE — VISUAL/GAMEPLAY STATE OWNERSHIP LOCKED**
 
-1. **Authority and design mandate** — COMPLETE.
-2. **Spatial hierarchy** — COMPLETE.
-3. **Circulation** — COMPLETE.
-4. **Per-zone function** — COMPLETE.
-5. **Geometry contract** — COMPLETE.
-6. **Material and visual language** — COMPLETE.
-7. **Asset decomposition** — COMPLETE.
-8. **Application UX plan** — COMPLETE.
-9. **State-layer plan** — discovery, reachability, events, blackout, Trace effects.
-10. **Performance/section strategy** — loading boundaries and mobile constraints.
-11. **Implementation order** — smallest safe slices and dependency graph.
-12. **Verification plan** — unit, emulator, screenshot, handset, regression.
-13. **Migration plan** — what old presentation code/assets are kept, replaced, or retired.
-14. **Execution handoff** — exact first implementation task and acceptance criteria.
+This step defines which Gate Twelve changes belong in permanent art, which belong in reusable visual layers, which belong in actor/equipment layers, and which must remain engine-only. It exists to prevent two failures: duplicating entire scenes for small state changes, and leaking hidden gameplay state into presentation.
+
+## 9.1 State ownership rule
+
+The visual stack may reflect state only when that state is intentionally player-safe.
+
+Target flow:
+
+`authoritative engine/world state -> player-safe projection -> visual binding -> asset/layer composition`
+
+The inverse is prohibited:
+
+`pixel color / hidden flag guess / Compose heuristic -> gameplay conclusion`
+
+Art never becomes the source of truth for:
+- discovery;
+- reachability;
+- quest completion;
+- actor presence;
+- item ownership;
+- relationship state;
+- ability discovery;
+- route legality;
+- hidden world events.
+
+## 9.2 Permanent base-art state
+
+Permanent base art owns what is physically stable for the location.
+
+Examples:
+- architecture;
+- floors;
+- roads;
+- tracks;
+- structural supports;
+- fixed material families;
+- permanent signage frames;
+- stable landmark silhouettes;
+- non-stateful furniture.
+
+Base art must not permanently encode:
+- blackout;
+- current quest;
+- selected map destination;
+- temporary damage;
+- temporary NPC presence;
+- Trace activation;
+- route availability;
+- current player position.
+
+## 9.3 Reusable environment-overlay classes
+
+Gate Twelve uses reusable overlays for temporary environmental state.
+
+Required classes:
+
+### Power / blackout
+Examples:
+- blackout shadow;
+- emergency-light contribution;
+- restored-power contribution;
+- bounded lamp/indicator changes.
+
+### Access / mechanical state
+Examples:
+- powered/off indicator;
+- door locked/open/closed only when projected;
+- terminal active/inactive.
+
+### Damage / emergency
+Examples:
+- temporary damage;
+- smoke;
+- steam;
+- debris;
+- emergency guidance.
+
+### Trace / signal
+Examples:
+- Echo-active response;
+- Signal Pulse;
+- Directional Trace;
+- Trace Strain;
+- residual signal afterimage.
+
+### Event decoration
+Examples:
+- evacuation remnants;
+- temporary notice;
+- temporary work setup;
+- event-specific safe prop.
+
+A full alternate base master is used only when physical architecture or major silhouette changes enough that overlays are no longer honest.
+
+## 9.4 Actor state layer
+
+Actor presence is a separate state layer.
+
+Target projected actor data should support:
+- stable actor/NPC ID;
+- room/location ID;
+- visible pose;
+- visible expression;
+- visible outfit/equipment state;
+- room-sprite asset ID or resolvable identity;
+- portrait asset ID where available;
+- player-safe interaction/focus information.
+
+Room actor rendering must not infer presence from hidden quest flags.
+
+Tamsin, courier and future actors use the same rule.
+
+## 9.5 Equipment state layer
+
+Player/NPC identity masters remain separate from visible equipment.
+
+For Jack:
+- base body/identity remains stable;
+- equipment overlays attach through the 32x48 rig;
+- held-object layers use documented anchors;
+- status effects are not painted into the identity master.
+
+If an item has no authored visual layer:
+- it remains logically equipped;
+- the UI may state that the visual is unavailable;
+- no invented generic shape is added.
+
+## 9.6 Prop state layer
+
+Stateful props remain separate where practical.
+
+Examples:
+- dead relay intact/opened/damaged/signal-lost;
+- diagnostic reader;
+- Gate Twelve door state;
+- archive terminal state;
+- notice board content/state.
+
+A prop-state change should not force a duplicated full environment master unless its physical footprint changes the scene materially.
+
+## 9.7 Map-state layer
+
+The district map keeps permanent geography separate from player state.
+
+Permanent:
+- road/surface geometry;
+- building/landmark silhouettes;
+- neutral physical route cues.
+
+Projected state:
+- discovered;
+- current;
+- reachable;
+- unavailable;
+- player marker;
+- selected destination;
+- travel preview;
+- safe visible event marker if later authored.
+
+Undiscovered/hidden destinations must not be named or revealed by a permanent label.
+
+## 9.8 UI-local ephemeral state
+
+The following may remain local to Android presentation because they do not change game truth:
+- selected map node;
+- currently focused actor among projected actors;
+- expanded/collapsed panel;
+- scroll position;
+- selected inventory item;
+- selected stat/skill detail;
+- temporary tab/surface choice.
+
+UI-local state must be discarded/rebuilt safely from the authoritative snapshot when game state changes.
+
+## 9.9 State precedence
+
+When multiple visual layers overlap, use this conceptual precedence:
+
+1. permanent environment;
+2. permanent modules/props;
+3. environment-state overlays;
+4. stateful interaction props;
+5. room actors;
+6. equipment/held layers;
+7. actor status layers;
+8. transient ability/event FX;
+9. selection/focus treatment;
+10. UI panels/text/actions.
+
+Rules:
+- a state overlay may darken or illuminate actors only through a documented visual effect;
+- an FX layer may not hide required interaction information;
+- selection/focus never permanently mutates source art;
+- UI panel visibility does not change actor presence.
+
+## 9.10 Gate Twelve location-state expectations
+
+### Depot Plaza
+Expected states:
+- normal/open civic state;
+- blackout/emergency state;
+- public notice/event overlays;
+- projected public actors.
+
+### Workshop Row
+Expected states:
+- default working state;
+- rumor/event-specific presentation if authored;
+- worker actors only when projected.
+
+### Municipal Archive
+Expected states:
+- default backup-power room;
+- terminal/research focus;
+- conditional record availability in UI, not painted spoilers.
+
+### Platform Nine
+Expected states:
+- blackout opening;
+- post-evacuation state;
+- room actors/crowd strategy;
+- emergency lighting;
+- relay/courier event props.
+
+### Relay Workbench
+Expected states:
+- default;
+- relay open/damaged/signal-lost prop state;
+- diagnostic focus;
+- Tamsin presence when projected.
+
+### Gate Twelve
+Expected states:
+- sealed/default;
+- Echo-active;
+- future powered/open variants only when engine state supports them.
+
+### Quiet Stair
+Expected states:
+- sparse default;
+- guidance/emergency state;
+- event actor only when projected.
+
+### Service Tunnel
+Expected states:
+- default;
+- aftershock;
+- ambient machinery;
+- projected investigators/companions;
+- deeper-continuation cue without revealing undiscovered destination.
+
+### Trace Chamber
+Expected states:
+- idle;
+- training;
+- Signal/Directional Trace FX;
+- Trace Strain;
+- projected actors;
+- research/training availability through authoritative actions.
+
+## 9.11 State-binding registry requirement
+
+Before broad visual implementation, every stateful asset should have a binding record with:
+- visual asset ID;
+- owner system;
+- player-safe projected field;
+- allowed values;
+- fallback;
+- z-order/layer class;
+- locations consuming it;
+- whether animation exists;
+- reduced-motion behavior;
+- QA case.
+
+This may live in a data manifest or generated registry after the schema is audited.
+
+## 9.12 Hidden-state leak tests
+
+Required future regression cases:
+- undiscovered node does not reveal its name through art/UI;
+- unreachable route does not receive normal active-route treatment;
+- absent NPC does not appear because a scene once used them;
+- private NPC goal/memory does not change visible panel unless explicitly projected;
+- future quest objective is not shown early;
+- Trace FX does not point to a hidden destination unless the technique result is known;
+- disabled action reason contains only player-safe explanation.
+
+## 9.13 Step 9 locked decisions
+
+1. permanent art owns stable physical identity only;
+2. blackout/emergency/Trace/event changes are layered when architecture is unchanged;
+3. actor presence is an explicit player-safe state layer;
+4. equipment remains separate from character identity;
+5. stateful props use variants/overlays before whole-scene duplication;
+6. map geography and map gameplay state remain separate layers;
+7. UI focus/selection is local ephemeral state, not gameplay authority;
+8. every stateful visual needs an auditable binding;
+9. hidden-state leak tests are mandatory before final integration.
+
+---
+
+# 10. Performance and section-loading strategy
+
+Status: **COMPLETE — MOBILE/SECTION STRATEGY LOCKED AT ARCHITECTURAL LEVEL**
+
+This step defines how Gate Twelve remains responsive while keeping modular pixel art and future world growth possible.
+
+It does not choose a final cache implementation or claim measured Galaxy A03 performance.
+
+## 10.1 Asset-size philosophy
+
+Keep source-native masters compact:
+- district map: 256x144;
+- narrative scene: 128x64;
+- gameplay actor: 32x48;
+- portrait: 64x64;
+- icons/props at documented source-native grids.
+
+Scale for display using nearest-neighbor/integer-safe methods where practical.
+
+Do not ship oversized smooth reference images as runtime substitutes.
+
+## 10.2 Loading unit
+
+The player-facing geography remains:
+`Region -> Macrozone -> Named Subzone`
+
+Technical loading may be finer.
+
+Recommended Gate Twelve loading unit:
+- one current narrative room/subzone packet;
+- actors/props/overlays required by that room;
+- shared UI/icon resources;
+- district map master and lightweight marker assets;
+- optionally the immediately likely next-room packets if profiling proves useful.
+
+Do not load all future world art merely because the world registry exists.
+
+## 10.3 Macrozone sections
+
+The three macrozones are useful technical grouping candidates:
+- Surface Civic District;
+- Depot / Gate Core;
+- Lower Maintenance Network.
+
+They are **not** hard loading walls by default.
+
+A player should not see an artificial “section boundary” unless a real physical transition supports it.
+
+## 10.4 Shared asset cache direction
+
+Shared reusable assets should be addressable by stable asset ID.
+
+Candidates for reuse:
+- infrastructure tiles;
+- doors;
+- pipes/cables;
+- signs;
+- marker icons;
+- resource icons;
+- actor portraits;
+- common equipment;
+- overlays/FX.
+
+Target behavior:
+- avoid decoding/recreating identical assets for every scene;
+- evict or release non-current heavy assets when needed;
+- preserve tiny common assets when cheaper than reload.
+
+Exact LRU/cache size remains implementation/profiling work.
+
+## 10.5 Animation budget
+
+Animation is bounded.
+
+Rules:
+- small ambient loops;
+- limited simultaneous animated layers;
+- no whole-scene continuous video;
+- reduced-motion alternative;
+- state-driven animation stops when state ends;
+- off-screen/non-current room animations do not run;
+- frame count/rate chosen from visual need, not maximal smoothness.
+
+## 10.6 Compose recomposition discipline
+
+Android implementation should:
+- keep authoritative snapshot stable/structured;
+- avoid rebuilding raster masters every recomposition;
+- remember/cache decoded art appropriately;
+- isolate frequently changing UI state from static scene art;
+- avoid per-frame recomposition for simple pixel loops when a bounded animation primitive is sufficient;
+- avoid large allocations during every text reveal tick.
+
+These are implementation requirements to verify, not claims about current code.
+
+## 10.7 Map performance
+
+Gate Twelve district map is small.
+
+Target:
+- one 256x144 base;
+- lightweight overlays/markers;
+- selection/focus state;
+- no need for an expensive tiled world renderer at this scale.
+
+Future city/world maps may need tile/LOD streaming; Gate Twelve should not prematurely adopt that complexity.
+
+## 10.8 Actor/panel performance
+
+Room actors:
+- only current-room actors are required;
+- portrait assets load when focus/panel needs them or remain in a small character cache if profiling supports it;
+- do not preload every world NPC portrait.
+
+## 10.9 Low-memory/failure behavior
+
+If memory pressure occurs:
+- drop non-current scene caches first;
+- preserve current room;
+- preserve UI/navigation essentials;
+- reload non-critical previews on demand;
+- use explicit fallback rather than corrupted/smoothed art.
+
+## 10.10 Performance evidence gates
+
+Before claiming mobile-ready:
+- Android unit/build passes;
+- emulator runtime passes;
+- 320dp/low-width screenshot QA;
+- memory/CPU observations on representative emulator;
+- physical Galaxy A03 install/start separately;
+- current-room transition timing observed;
+- animation/reduced-motion observed;
+- no visible smoothing/scaling corruption.
+
+## 10.11 Step 10 locked decisions
+
+1. Gate Twelve remains source-native and compact.
+2. current-room packet is the primary content-loading unit.
+3. macrozones may group resources but are not artificial player-visible loading walls.
+4. common assets use stable IDs and may be cached.
+5. animation is bounded and off-screen animation stops.
+6. district map remains simple; world-scale tiling is deferred.
+7. low-memory fallback must preserve gameplay truth.
+8. physical Galaxy A03 evidence remains a separate acceptance gate.
+
+---
+
+# 11. Implementation order and dependency graph
+
+Status: **COMPLETE — SAFE EXECUTION ORDER LOCKED**
+
+The documented target is now detailed enough to define implementation order, but not to skip exact-head audits.
+
+## 11.1 Phase A — exact current-state reconciliation
+
+Before code changes:
+- inspect live implementation branch/PR heads;
+- inspect open visual refinements;
+- compare current catalogs/manifests;
+- confirm current Story/Map/actor consumers;
+- confirm Jack approved-reference branch state;
+- confirm test/CI baseline.
+
+Required output:
+- updated exact-head rework matrix;
+- no assumptions from stale handoffs.
+
+## 11.2 Phase B — data/projection contracts
+
+Implement or formalize player-safe fields needed by documented UX:
+- projected room actors;
+- projected safe visual state;
+- projected prop/door state where needed;
+- safe map route/discovery/reachability;
+- safe visible relationship/status fields only if approved.
+
+Do this before UI begins guessing state.
+
+## 11.3 Phase C — asset/provenance reconciliation
+
+Resolve:
+- Jack final runtime identity path;
+- Tamsin room/portrait provenance;
+- courier manifest gap;
+- relay ID naming drift;
+- missing exact overlay equivalence;
+- Service Tunnel/Quiet Stair refinement branches;
+- missing current-region exact assets.
+
+Do not regenerate existing assets blindly.
+
+## 11.4 Phase D — Story/current-location composition
+
+Rework Story in bounded slices:
+1. layered scene host;
+2. actor rendering from safe projection;
+3. focused actor panel;
+4. resource/status integration;
+5. prop/state overlays;
+6. fallback behavior;
+7. phone layout.
+
+Keep choices/narrative authoritative.
+
+## 11.5 Phase E — Map presentation
+
+Rework map presentation while preserving:
+- semantic node positions;
+- hit targets;
+- discovered/reachable state;
+- authoritative travel.
+
+Sequence:
+1. authored base;
+2. permanent routes/landmarks;
+3. marker/state overlays;
+4. selection/detail;
+5. arrival preview;
+6. explicit travel;
+7. phone QA.
+
+## 11.6 Phase F — Character identity and equipment visuals
+
+Integrate:
+- Jack canonical gameplay master;
+- directional masters only when consumed;
+- equipment layers;
+- portrait;
+- status overlays;
+- Character-screen replacement of provisional/generic art.
+
+No equipment rule duplication in UI.
+
+## 11.7 Phase G — missing Gate Twelve production assets
+
+Create only after equivalence/provenance audit:
+- Platform Nine evacuated state;
+- Archive terminal closeup;
+- Workshop rumor state;
+- diagnostic reader;
+- Trace Strain;
+- reusable emergency/blackout overlays if true equivalents do not exist;
+- required actor/portrait assets.
+
+## 11.8 Phase H — route/content migration
+
+Only after content decisions are finalized:
+- add Depot Plaza <-> Platform Nine authoritative connection;
+- choose travel time;
+- choose discovery/unlock semantics;
+- validate graph;
+- update tests;
+- update map projection.
+
+Do not special-case the route solely in Android.
+
+## 11.9 Phase I — animation
+
+After static composition is verified:
+- Service Tunnel ambient;
+- emergency/Trace state animation;
+- actor animation only when gameplay consumes it;
+- reduced-motion paths.
+
+## 11.10 Phase J — verification/evidence
+
+Run all Step 12 gates and record:
+- exact branch;
+- exact SHA;
+- workflow;
+- artifacts;
+- screenshots;
+- known gaps.
+
+## 11.11 Dependency summary
+
+Critical chain:
+
+`exact audit -> safe projection -> asset reconciliation -> Story/Map composition -> missing art -> route/content migration -> animation -> full verification`
+
+Independent/parallel where safe:
+- documentation/world catalogs;
+- non-conflicting asset authoring after packet lock;
+- test authoring;
+- performance instrumentation.
+
+## 11.12 Step 11 locked decisions
+
+1. exact audit precedes implementation;
+2. projection contracts precede actor/panel UI;
+3. provenance reconciliation precedes duplicate asset generation;
+4. Story and Map are rebuilt in bounded independent slices;
+5. Jack identity/equipment integration remains a dedicated slice;
+6. the Plaza/Platform route is a content migration, not a UI shortcut;
+7. animation follows static correctness;
+8. verification/evidence closes every major slice.
+
+---
+
+# 12. Verification plan
+
+Status: **COMPLETE — REGIONAL ACCEPTANCE MATRIX LOCKED**
+
+## 12.1 Documentation verification
+
+Before implementation:
+- all referenced documents exist;
+- no contradictory active authority remains unmarked;
+- asset IDs resolve or are explicitly missing;
+- planned/current/refinement states are distinct;
+- world/gameplay unknowns remain labeled.
+
+## 12.2 Engine verification
+
+For runtime changes:
+- Python unit/regression suite;
+- content validation;
+- save/load tests;
+- route/discovery tests;
+- actor projection privacy tests;
+- equipment/prop state tests;
+- hidden-state redaction tests.
+
+Historical passing counts do not prove a new head.
+
+## 12.3 Android verification
+
+For UI changes:
+- Android unit tests;
+- instrumentation compile;
+- debug APK assembly;
+- package/resource checks;
+- representative emulator startup;
+- interaction smoke;
+- screenshot capture.
+
+## 12.4 Story-specific QA
+
+Required cases:
+- no actor;
+- one actor;
+- multiple actors;
+- focused actor changes;
+- missing portrait fallback;
+- missing room sprite fallback;
+- blackout;
+- Trace FX;
+- long narrative;
+- many choices;
+- disabled choice;
+- reduced motion;
+- resource changes.
+
+## 12.5 Map-specific QA
+
+Required cases:
+- undiscovered node;
+- discovered current node;
+- reachable node;
+- unavailable node;
+- selected node;
+- travel confirmation/action;
+- post-travel current-location update;
+- missing preview;
+- route connector after migration;
+- touch targets at phone width.
+
+## 12.6 Pixel-art QA
+
+For every production asset:
+- source-native size;
+- nearest-neighbor display;
+- no anti-aliasing/smoothing;
+- scale consistency;
+- perspective consistency;
+- lighting/material compatibility;
+- actor contrast;
+- panel-safe composition;
+- overlay compatibility;
+- provenance.
+
+## 12.7 State/privacy QA
+
+Must prove:
+- hidden NPC data remains hidden;
+- hidden destinations remain hidden;
+- UI does not derive actor presence from raw flags;
+- base art does not reveal unavailable route;
+- future quest state is not exposed;
+- fallback art does not imply false state.
+
+## 12.8 Performance QA
+
+Observe:
+- startup;
+- room switch;
+- map open/selection;
+- panel focus switch;
+- animation;
+- memory pressure/fallback;
+- no continuous off-screen loops;
+- low-end emulator behavior where available.
+
+## 12.9 Physical handset gate
+
+Galaxy A03 testing is separate.
+
+Record:
+- APK SHA;
+- install success;
+- cold start;
+- current-room render;
+- map;
+- Story choices;
+- save/load;
+- actor panels;
+- performance;
+- orientation if supported;
+- screenshots/photos where useful.
+
+Never infer this gate from emulator evidence.
+
+## 12.10 Exact-head evidence record
+
+Every verified implementation slice records:
+- repository;
+- branch;
+- commit SHA;
+- base SHA;
+- relevant PR;
+- workflow run ID;
+- job results;
+- artifact IDs;
+- APK SHA-256;
+- screenshot artifact;
+- tests;
+- known gaps.
+
+## 12.11 Step 12 locked decisions
+
+1. docs, engine, Android, pixel, privacy, performance and handset each have separate evidence.
+2. exact-head evidence is mandatory.
+3. screenshot QA is part of visual acceptance.
+4. emulator and physical handset evidence are not interchangeable.
+5. fallback/privacy cases are first-class tests.
+6. “builds” is not equivalent to “finished.”
+
+---
+
+# 13. Migration / replacement / removal plan
+
+Status: **COMPLETE — REGIONAL KEEP/EXTEND/REWORK/REPLACE/REMOVE CONTRACT LOCKED**
+
+This is the Gate Twelve regional migration layer. The final application-wide disposition remains governed by the APK reconstruction documents.
+
+## 13.1 KEEP
+
+Preserve unless later explicit migration proves otherwise:
+- stable Gate Twelve location IDs;
+- quest/item/NPC/knowledge stable IDs;
+- authoritative Python/domain ownership;
+- player-safe projection principle;
+- versioned save/persistence boundary;
+- authored route legality;
+- 256x144 Gate Twelve presentation scaffold;
+- 128x64 narrative scene source-native contract;
+- 32x48 character paper-doll rig;
+- 64x64 portrait target;
+- equipment slot semantics;
+- map semantic node anchors;
+- nearest-neighbor/source-native pixel policy;
+- existing verified tests/evidence as historical exact-head records.
+
+## 13.2 EXTEND
+
+Extend:
+- player-safe projection with room actors/visual state;
+- asset manifests/provenance;
+- actor/portrait mappings;
+- location-detail/arrival-preview packets;
+- world hierarchy around Gate Twelve;
+- state-binding registry;
+- visual QA/evidence metadata;
+- accessibility/reduced-motion support.
+
+## 13.3 REWORK
+
+Expected substantial rework:
+- Story/current-location layout;
+- Map visual presentation;
+- Character visual presentation;
+- actor focus/panel presentation;
+- scene composition host;
+- hard-coded actor placement once safe actor projection exists;
+- current asset catalog organization if scale proves it unmaintainable;
+- navigation chrome if it obstructs the primary world experience.
+
+Rework means the responsibility remains but structure/presentation changes.
+
+## 13.4 REPLACE
+
+Replacement candidates once verified alternatives exist:
+- generic/provisional Jack visuals;
+- flat geometric scene art where approved source-native art replaces it;
+- flat geometric district-map blocks where authored modular map art replaces them;
+- incorrect/duplicate raster exports;
+- scene-ID-specific actor heuristics superseded by projected actor presence;
+- duplicated flattened blackout/Trace scenes where a base+overlay stack accurately represents the same physical room.
+
+## 13.5 REMOVE
+
+Remove only after consumer audit, replacement and verification:
+- dead placeholder assets;
+- duplicate asset IDs/aliases after migration;
+- obsolete geometric renderer branches for locations fully covered by approved art;
+- stale UI components superseded by the final Story/Map composition;
+- unused debug-only presentation;
+- deprecated hard-coded visual-state rules;
+- obsolete tests that assert intentionally removed presentation rather than authoritative behavior.
+
+Removal does not erase Git history or provenance documents.
+
+## 13.6 ARCHIVE
+
+Archive/reference-only:
+- superseded concept boards;
+- rejected external-reference adaptations;
+- historical branch/PR screenshots;
+- old V6 status reports outside their exact evidence role;
+- superseded asset masters.
+
+Archive means “not active authority,” not “delete evidence.”
+
+## 13.7 Intentional breakage policy
+
+Presentation code may be intentionally broken/replaced when:
+- the replacement contract is documented;
+- old consumers are known;
+- authoritative state is preserved;
+- migration can be tested;
+- rollback is possible through Git.
+
+High-risk boundaries require stronger gates:
+- save schema;
+- stable IDs;
+- quest logic;
+- stat/progression schema;
+- inventory/equipment semantics;
+- hidden-state projection.
+
+Those are not changed merely to simplify UI work.
+
+## 13.8 Save/content migration rule
+
+If a later system change affects durable state:
+1. document old schema;
+2. document new schema;
+3. map IDs/fields;
+4. provide migration or explicitly document incompatibility;
+5. test old-save upgrade;
+6. test new-save round trip;
+7. reject unsupported versions safely;
+8. preserve backup/export strategy where appropriate.
+
+## 13.9 Gate Twelve connector migration
+
+The planned Plaza <-> Platform Nine route requires:
+- content graph update;
+- travel cost;
+- discovery/unlock semantics;
+- route validation;
+- map projection;
+- tests;
+- migration review if existing saves persist discovered/reachable graph state.
+
+It is not an art-only change.
+
+## 13.10 Step 13 locked decisions
+
+1. stable IDs/state authority are KEEP by default.
+2. Story/Map/Character presentation are authorized for major rework.
+3. generic/geometric visuals may be replaced after verified art exists.
+4. projected actor presence replaces hidden/scene heuristic logic.
+5. deletions occur only after replacement and consumer audit.
+6. save/content breaks require explicit migration.
+7. Git/history/provenance are preserved even when active assets are superseded.
+
+---
+
+# 14. Execution handoff
+
+Status: **COMPLETE — GATE TWELVE DOCUMENTATION PHASE 1–14 FINISHED**
+
+Gate Twelve now has a complete first-pass region-to-implementation plan.
+
+This does **not** mean the region is fully implemented or visually finished.
+
+## 14.1 Required reading order for execution
+
+Before Gate Twelve implementation:
+1. `README.md`;
+2. `AGENTS.md`;
+3. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`;
+4. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md`;
+5. `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md`;
+6. `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`;
+7. `docs/assets/GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md`;
+8. `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`;
+9. `docs/assets/ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md`;
+10. `docs/android/APPLICATION_UX_MASTER_PLAN.md`;
+11. relevant source/tests;
+12. live PR/branch/CI state.
+
+Live source/evidence overrides stale planning text and must cause documentation correction.
+
+## 14.2 First implementation action
+
+Do **not** start by drawing every missing asset.
+
+First implementation action:
+
+**Exact current-state visual/runtime reconciliation.**
+
+Record:
+- current intended implementation parent/head;
+- Story consumer;
+- Map consumer;
+- current actor-placement implementation;
+- current player-safe projection fields;
+- current visual catalogs/manifests;
+- Jack/Tamsin/courier asset provenance;
+- open PR refinements and exact heads;
+- exact tests/CI baseline.
+
+Then update:
+- `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md`;
+- `docs/assets/GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md`.
+
+## 14.3 First code-bearing slice after reconciliation
+
+Preferred first code-bearing slice:
+
+**player-safe room-actor projection contract**, if live source confirms it is still absent.
+
+Acceptance:
+- stable actor IDs;
+- current-room presence;
+- visible pose/expression/outfit fields only as needed;
+- no hidden goals/memory;
+- Android consumes projection;
+- existing Story behavior remains functional;
+- tests cover absent/one/multiple actors;
+- exact-head verification.
+
+If live source already has an equivalent safe actor projection, do not duplicate it. Move to the next unsatisfied dependency.
+
+## 14.4 Next implementation slices
+
+After actor projection:
+1. Story layered host + actor panel;
+2. Jack canonical player visual integration;
+3. authored Gate Twelve map composition while preserving map semantics;
+4. missing current-region asset reconciliation/production;
+5. state overlays;
+6. Plaza <-> Platform Nine content migration after travel/unlock decision;
+7. bounded animation;
+8. full regional regression/performance;
+9. physical handset gate.
+
+## 14.5 Decisions still intentionally open
+
+Gate Twelve documentation does not fabricate answers for:
+- Plaza <-> Platform Nine travel minutes;
+- connector discovery/unlock timing;
+- parent city/world coordinates;
+- exact future Quiet Stair destination;
+- exact deeper Service Tunnel destination;
+- final global navigation count;
+- global world-map zoom/LOD implementation;
+- final portrait panel dimensions at every device width;
+- final asset-cache implementation;
+- which open refinement PRs are promoted after exact-head comparison;
+- final Jack turnaround pixels before source production/approval;
+- large-world NPC/city/kingdom population records.
+
+These must be decided in the relevant parent system/world documents or exact implementation audit.
+
+## 14.6 Standing permissions
+
+Within routine reversible project engineering, work may:
+- create/rework/remove presentation code;
+- create original assets;
+- migrate visual catalogs;
+- add tests/tooling;
+- create branches/commits;
+- replace weak provisional art;
+- redesign Android screens;
+- expand engine projections safely;
+- build original world/system content under documented schemas.
+
+Standing restrictions remain:
+- no silent `main` promotion;
+- no force-push/shared-history rewrite;
+- no hidden-state leaks;
+- no silent stable-ID/save break;
+- no copyrighted map/art/character/UI copying;
+- no unrelated repository treated as authority without migration record;
+- no Code Assistant workflow previously prohibited;
+- no physical-device claim from emulator evidence.
+
+## 14.7 Documentation result
+
+Gate Twelve Steps 1–14 now define:
+- authority;
+- spatial hierarchy;
+- circulation;
+- per-zone function;
+- geometry;
+- materials;
+- asset inventory;
+- application UX;
+- state layers;
+- performance/loading;
+- implementation order;
+- verification;
+- migration/removal;
+- execution handoff.
+
+This makes Gate Twelve the first complete proof-region planning packet for the wider documentation program.
+
+## 14.8 Next repository-level priority
+
+After this regional documentation packet:
+1. perform exact existing-state repository audit;
+2. produce reproducible documentation/world/asset inventory;
+3. reconcile Gate Twelve open visual/runtime branches;
+4. begin bounded implementation only where contracts are satisfied;
+5. continue controlled population of world catalogs from the already-created geography/political/settlement/ecosystem/beast/population/balance schemas;
+6. keep final APK reconstruction late-stage until domain contracts and migrations are mature.
 
 ---
 
 # Continuity footnote / next-session handoff
 
-**Completed:** Steps 1–8.
+**Gate Twelve documentation:** Steps 1–14 COMPLETE on the master documentation branch.
 
-**Current documentation authority:**
-- repository: `jbob-coder/Text-rpg-game`;
-- program branch: `docs/master-game-development-program`;
-- region: Gate Twelve District;
-- region master: this document.
+**Current repository priority:** `jbob-coder/Text-rpg-game`.
 
-**Preserved project decisions:**
-- Text-rpg-game is the priority game repository;
-- documentation remains the primary objective before broad destructive implementation;
-- Gate Twelve is the first proof region;
-- stable gameplay IDs/state ownership remain authoritative until explicit migration;
-- external references contribute structure/ideas, not copied game content;
-- pixel art is modular/composited, not one flattened image per state;
-- characters/panels depend on player-safe projected actor presence;
-- current presentation may be broken/rebuilt when the documented replacement is materially better;
-- `main` remains a placeholder until a separate explicit promotion decision;
-- no physical handset result may be inferred from emulator evidence.
+**Current program branch:** `docs/master-game-development-program`.
 
-**Next unfinished step:** Step 9 — State-layer plan. Define which state lives in permanent base art, reusable overlays, map markers, actor/equipment layers, event layers and transient FX; define discovery/reachability/blackout/Trace bindings and prevent hidden-state leaks.
+**Implementation status:** documentation complete does not mean runtime implementation complete.
 
-**Implementation remains gated:** Step 8 is a UX contract, not a claim that projected actor lists, final panels, final map art, or final Story composition are already implemented.
+**Next exact action:** audit the live implementation heads and reconcile current code/assets against the complete Gate Twelve contract before creating or deleting runtime content.
+
+**Key non-negotiables:** preserve authoritative engine ownership, player-safe projection, stable IDs/save compatibility unless explicitly migrated, source-native pixel-art rules, provenance, exact-head verification, and separation between emulator and physical handset evidence.
