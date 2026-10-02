@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "batch_id": "BATCH_001",
+  "wave_id": "B001-WAVE-G-EQUIPMENT-SLOTS",
+  "status": "INTEGRATED_AUTOMATED_GATE_GREEN",
+  "assets": [
+    {
+      "number": 40,
+      "asset_id": "UI_EQUIPMENT_SLOT_ICON_SET",
+      "asset_family": "ui_icon_set",
+      "status": "INTEGRATED",
+      "canon_status": "technical",
+      "native_canvas": {
+        "width": 24,
+        "height": 24,
+        "variants": 12,
+        "format": "source-native deterministic pixel construction",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelEquipmentSlotCatalog.kt",
+        "android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt",
+        "android/app/src/androidTest/java/com/thegame/rpg/ui/GameScreenTest.kt",
+        "android/app/src/test/java/com/thegame/rpg/ui/PixelEquipmentSlotCatalogTest.kt"
+      ],
+      "integration_targets": [
+        "Android Character equipment slots",
+        "Android Inventory equipment slots"
+      ],
+      "state_contract": "Slot icons map only from projected semantic slot IDs: head, body, hands, legs, feet, main_hand, off_hand, ring_1, ring_2, neck, accessory_1, accessory_2. The catalog does not own equipment state, compatibility, or item identity.",
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36739855690,
+        "head_sha": "5bb0096d7570dca04a4eec3c6528985d84e23145",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "15/15 connected tests passed, 0 failures",
+        "apk_sha256": "584727a5bd20c7a8a2e542aeb0807abd564e06bc9346b6e61f21bee2a6a5027a",
+        "limitation": "Exact-head runtime includes the slot catalog and Compose rendering tests; physical Galaxy A03 and native-scale visual QA remain separate."
+      },
+      "limitations": [
+        "Physical Galaxy A03 visual QA remains separate.",
+        "Icons communicate slot semantics only and must never be treated as authoritative equip state."
+      ]
+    }
+  ]
+}

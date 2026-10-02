@@ -1,0 +1,466 @@
+{
+  "schema_version": 1,
+  "batch_id": "BATCH_001",
+  "wave_id": "B001-WAVE-B-CURRENT-LOADOUT-RELAY",
+  "status": "INTEGRATED_AUTOMATED_GATE_GREEN",
+  "reference_policy": "No mixed generated reference was promoted to canon. Assets were reconstructed from locked written contracts and current authored state.",
+  "state_contracts": {
+    "equipment": "Exact stable item ID + authoritative equipment slot. Unknown/future items cannot inherit another item's art.",
+    "relay": "Python projects only visuals.relay_state = null|intact|opened|damaged|signal_lost. Compose does not read raw flags."
+  },
+  "assets": [
+    {
+      "number": 23,
+      "asset_id": "ITEM_WORK_GLOVES_ICON",
+      "asset_family": "item_icon",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_game_ids": [
+        "ITEM_WORK_GLOVES"
+      ],
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "format": "source-native pixel map",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android Inventory item row"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36378000460,
+        "head_sha": "57151051ea2e0ac98810e5ee95cea9de1a2a4e97",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "8/8 connected tests passed, 0 failures",
+        "apk_sha256": "9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3",
+        "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
+      }
+    },
+    {
+      "number": 24,
+      "asset_id": "ITEM_WORK_GLOVES_PAPERDOLL",
+      "asset_family": "equipment_layer",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_game_ids": [
+        "ITEM_WORK_GLOVES"
+      ],
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "native_canvas": {
+        "width": 32,
+        "height": 48,
+        "format": "source-native pixel map",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt",
+        "android/app/src/main/res/drawable-nodpi/pixel_item_work_gloves_paperdoll.png"
+      ],
+      "integration_targets": [
+        "PlayerAvatarPanel hands layer"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36378000460,
+        "head_sha": "57151051ea2e0ac98810e5ee95cea9de1a2a4e97",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "8/8 connected tests passed, 0 failures",
+        "apk_sha256": "9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3",
+        "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
+      }
+    },
+    {
+      "number": 25,
+      "asset_id": "ITEM_SIGNAL_RING_ICON",
+      "asset_family": "item_icon",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_game_ids": [
+        "ITEM_SIGNAL_RING"
+      ],
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "format": "source-native pixel map",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android Inventory item row"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36378000460,
+        "head_sha": "57151051ea2e0ac98810e5ee95cea9de1a2a4e97",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "8/8 connected tests passed, 0 failures",
+        "apk_sha256": "9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3",
+        "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
+      }
+    },
+    {
+      "number": 26,
+      "asset_id": "ITEM_SIGNAL_RING_PAPERDOLL",
+      "asset_family": "equipment_layer",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_game_ids": [
+        "ITEM_SIGNAL_RING"
+      ],
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "native_canvas": {
+        "width": 32,
+        "height": 48,
+        "format": "source-native pixel map",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt"
+      ],
+      "integration_targets": [
+        "PlayerAvatarPanel ring_1 layer"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36378000460,
+        "head_sha": "57151051ea2e0ac98810e5ee95cea9de1a2a4e97",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "8/8 connected tests passed, 0 failures",
+        "apk_sha256": "9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3",
+        "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
+      }
+    },
+    {
+      "number": 27,
+      "asset_id": "ITEM_COURIER_NECKTAG_ICON",
+      "asset_family": "item_icon",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_game_ids": [
+        "ITEM_COURIER_NECKTAG"
+      ],
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "format": "source-native pixel map",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android Inventory item row"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36378000460,
+        "head_sha": "57151051ea2e0ac98810e5ee95cea9de1a2a4e97",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "8/8 connected tests passed, 0 failures",
+        "apk_sha256": "9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3",
+        "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
+      }
+    },
+    {
+      "number": 28,
+      "asset_id": "ITEM_COURIER_NECKTAG_PAPERDOLL",
+      "asset_family": "equipment_layer",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_game_ids": [
+        "ITEM_COURIER_NECKTAG"
+      ],
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "native_canvas": {
+        "width": 32,
+        "height": 48,
+        "format": "source-native pixel map",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt",
+        "android/app/src/main/res/drawable-nodpi/pixel_item_courier_necktag_paperdoll.png"
+      ],
+      "integration_targets": [
+        "PlayerAvatarPanel neck layer"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36378000460,
+        "head_sha": "57151051ea2e0ac98810e5ee95cea9de1a2a4e97",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "8/8 connected tests passed, 0 failures",
+        "apk_sha256": "9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3",
+        "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
+      }
+    },
+    {
+      "number": 29,
+      "asset_id": "ITEM_MAINTENANCE_SEAL_ICON",
+      "asset_family": "item_icon",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_game_ids": [
+        "ITEM_MAINTENANCE_SEAL"
+      ],
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "format": "source-native pixel map",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt"
+      ],
+      "integration_targets": [
+        "Android Inventory item row"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36378000460,
+        "head_sha": "57151051ea2e0ac98810e5ee95cea9de1a2a4e97",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "8/8 connected tests passed, 0 failures",
+        "apk_sha256": "9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3",
+        "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
+      }
+    },
+    {
+      "number": 30,
+      "asset_id": "ITEM_DEAD_RELAY_ICON",
+      "asset_family": "item_icon",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_game_ids": [
+        "ITEM_DEAD_RELAY"
+      ],
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "format": "source-native pixel map",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt"
+      ],
+      "integration_targets": [
+        "Inventory icon and intact relay story state"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36378000460,
+        "head_sha": "57151051ea2e0ac98810e5ee95cea9de1a2a4e97",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "8/8 connected tests passed, 0 failures",
+        "apk_sha256": "9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3",
+        "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
+      }
+    },
+    {
+      "number": 31,
+      "asset_id": "ITEM_DEAD_RELAY_OPENED",
+      "asset_family": "prop_state",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_game_ids": [
+        "ITEM_DEAD_RELAY"
+      ],
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "format": "source-native pixel map",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt"
+      ],
+      "integration_targets": [
+        "Relay Workbench opened story state"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36378000460,
+        "head_sha": "57151051ea2e0ac98810e5ee95cea9de1a2a4e97",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "8/8 connected tests passed, 0 failures",
+        "apk_sha256": "9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3",
+        "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
+      }
+    },
+    {
+      "number": 32,
+      "asset_id": "ITEM_DEAD_RELAY_DAMAGED",
+      "asset_family": "prop_state",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_game_ids": [
+        "ITEM_DEAD_RELAY"
+      ],
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "format": "source-native pixel map",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt"
+      ],
+      "integration_targets": [
+        "Relay Workbench damaged story state"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36378000460,
+        "head_sha": "57151051ea2e0ac98810e5ee95cea9de1a2a4e97",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "8/8 connected tests passed, 0 failures",
+        "apk_sha256": "9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3",
+        "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
+      }
+    },
+    {
+      "number": 33,
+      "asset_id": "ITEM_DEAD_RELAY_SIGNAL_LOST",
+      "asset_family": "prop_state",
+      "status": "INTEGRATED",
+      "canon_status": "provisional",
+      "source_game_ids": [
+        "ITEM_DEAD_RELAY"
+      ],
+      "source_content_ids": [
+        "CONTENT_VERTICAL_SLICE_01"
+      ],
+      "native_canvas": {
+        "width": 32,
+        "height": 32,
+        "format": "source-native pixel map",
+        "alpha": true
+      },
+      "blueprint_path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "production_files": [
+        "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt"
+      ],
+      "integration_targets": [
+        "Relay Workbench signal-lost story state"
+      ],
+      "qa": {
+        "native_scale_reviewed": false,
+        "android_scale_reviewed": false,
+        "palette_reviewed": false,
+        "state_binding_reviewed": true
+      },
+      "automated_verification": {
+        "workflow_run_id": 36378000460,
+        "head_sha": "57151051ea2e0ac98810e5ee95cea9de1a2a4e97",
+        "python_tests": "301/301 passed",
+        "android_unit_and_assemble": "passed",
+        "android_emulator": "8/8 connected tests passed, 0 failures",
+        "apk_sha256": "9df410a12a8052cd76ca9dee40e5a583f98f77043c2376ea948d43c063ef4ca3",
+        "limitation": "Automated runtime verification is green; native-scale art review and physical Galaxy A03 visual QA remain pending."
+      }
+    }
+  ]
+}

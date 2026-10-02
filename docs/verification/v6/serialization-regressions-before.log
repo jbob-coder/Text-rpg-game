@@ -1,0 +1,120 @@
+test_boolean_schema_version_is_rejected (test_persistence.PersistenceTests.test_boolean_schema_version_is_rejected) ... ok
+test_corrupt_nested_state_container_is_rejected_on_load (test_persistence.PersistenceTests.test_corrupt_nested_state_container_is_rejected_on_load) ... ok
+test_corrupt_party_entries_are_rejected_on_load (test_persistence.PersistenceTests.test_corrupt_party_entries_are_rejected_on_load) ... ok
+test_dumps_state_rejects_corrupt_runtime_structure (test_persistence.PersistenceTests.test_dumps_state_rejects_corrupt_runtime_structure) ... ok
+test_invalid_json_is_wrapped_as_rule_error (test_persistence.PersistenceTests.test_invalid_json_is_wrapped_as_rule_error) ... ok
+test_load_rejects_non_finite_numbers_in_arbitrary_metadata (test_persistence.PersistenceTests.test_load_rejects_non_finite_numbers_in_arbitrary_metadata) ...
+  test_load_rejects_non_finite_numbers_in_arbitrary_metadata (test_persistence.PersistenceTests.test_load_rejects_non_finite_numbers_in_arbitrary_metadata) (token='1e400') ... FAIL
+  test_load_rejects_non_finite_numbers_in_arbitrary_metadata (test_persistence.PersistenceTests.test_load_rejects_non_finite_numbers_in_arbitrary_metadata) (token='-1e400') ... FAIL
+test_non_finite_json_numbers_are_rejected_at_persistence_boundary (test_persistence.PersistenceTests.test_non_finite_json_numbers_are_rejected_at_persistence_boundary) ... ok
+test_non_json_serializable_nested_state_is_wrapped_as_rule_error (test_persistence.PersistenceTests.test_non_json_serializable_nested_state_is_wrapped_as_rule_error) ... ok
+test_non_object_save_payload_is_rejected (test_persistence.PersistenceTests.test_non_object_save_payload_is_rejected) ... ok
+test_required_identity_fields_must_be_non_empty_strings (test_persistence.PersistenceTests.test_required_identity_fields_must_be_non_empty_strings) ... ok
+test_round_trip_preserves_ability_discovery_and_visibility_state (test_persistence.PersistenceTests.test_round_trip_preserves_ability_discovery_and_visibility_state) ... ok
+test_round_trip_preserves_extended_state (test_persistence.PersistenceTests.test_round_trip_preserves_extended_state) ... ok
+test_saving_incompatible_schema_preserves_state_and_existing_save (test_persistence.PersistenceTests.test_saving_incompatible_schema_preserves_state_and_existing_save) ...
+  test_saving_incompatible_schema_preserves_state_and_existing_save (test_persistence.PersistenceTests.test_saving_incompatible_schema_preserves_state_and_existing_save) (version=0) ... FAIL
+  test_saving_incompatible_schema_preserves_state_and_existing_save (test_persistence.PersistenceTests.test_saving_incompatible_schema_preserves_state_and_existing_save) (version=2) ... FAIL
+test_unknown_current_schema_field_is_rejected_instead_of_dropped (test_persistence.PersistenceTests.test_unknown_current_schema_field_is_rejected_instead_of_dropped) ... ok
+test_unknown_schema_is_rejected (test_persistence.PersistenceTests.test_unknown_schema_is_rejected) ... ok
+test_file_loader_rejects_non_finite_numbers_in_metadata (test_content.ContentPackTests.test_file_loader_rejects_non_finite_numbers_in_metadata) ...
+  test_file_loader_rejects_non_finite_numbers_in_metadata (test_content.ContentPackTests.test_file_loader_rejects_non_finite_numbers_in_metadata) (token='NaN') ... FAIL
+  test_file_loader_rejects_non_finite_numbers_in_metadata (test_content.ContentPackTests.test_file_loader_rejects_non_finite_numbers_in_metadata) (token='Infinity') ... FAIL
+  test_file_loader_rejects_non_finite_numbers_in_metadata (test_content.ContentPackTests.test_file_loader_rejects_non_finite_numbers_in_metadata) (token='-Infinity') ... FAIL
+  test_file_loader_rejects_non_finite_numbers_in_metadata (test_content.ContentPackTests.test_file_loader_rejects_non_finite_numbers_in_metadata) (token='1e400') ... FAIL
+  test_file_loader_rejects_non_finite_numbers_in_metadata (test_content.ContentPackTests.test_file_loader_rejects_non_finite_numbers_in_metadata) (token='-1e400') ... FAIL
+test_invalid_character_visual_record_is_rejected (test_content.ContentPackTests.test_invalid_character_visual_record_is_rejected) ... ok
+test_invalid_initial_attribute_is_rejected (test_content.ContentPackTests.test_invalid_initial_attribute_is_rejected) ... ok
+test_invalid_initial_knowledge_container_is_rejected_cleanly (test_content.ContentPackTests.test_invalid_initial_knowledge_container_is_rejected_cleanly) ... ok
+test_invalid_initial_player_container_is_rejected_cleanly (test_content.ContentPackTests.test_invalid_initial_player_container_is_rejected_cleanly) ... ok
+test_invalid_initial_turn_type_is_rejected_cleanly (test_content.ContentPackTests.test_invalid_initial_turn_type_is_rejected_cleanly) ... ok
+test_load_vertical_slice_builds_state_and_engine (test_content.ContentPackTests.test_load_vertical_slice_builds_state_and_engine) ... ok
+test_unknown_initial_inventory_registry_id_is_rejected (test_content.ContentPackTests.test_unknown_initial_inventory_registry_id_is_rejected) ... ok
+test_unknown_initial_scene_is_rejected (test_content.ContentPackTests.test_unknown_initial_scene_is_rejected) ... ok
+test_unknown_initial_state_field_is_rejected (test_content.ContentPackTests.test_unknown_initial_state_field_is_rejected) ... ok
+
+======================================================================
+FAIL: test_load_rejects_non_finite_numbers_in_arbitrary_metadata (test_persistence.PersistenceTests.test_load_rejects_non_finite_numbers_in_arbitrary_metadata) (token='1e400')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_persistence.py", line 31, in test_load_rejects_non_finite_numbers_in_arbitrary_metadata
+    with self.assertRaisesRegex(RuleError, "strict JSON"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+======================================================================
+FAIL: test_load_rejects_non_finite_numbers_in_arbitrary_metadata (test_persistence.PersistenceTests.test_load_rejects_non_finite_numbers_in_arbitrary_metadata) (token='-1e400')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_persistence.py", line 31, in test_load_rejects_non_finite_numbers_in_arbitrary_metadata
+    with self.assertRaisesRegex(RuleError, "strict JSON"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+======================================================================
+FAIL: test_saving_incompatible_schema_preserves_state_and_existing_save (test_persistence.PersistenceTests.test_saving_incompatible_schema_preserves_state_and_existing_save) (version=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_persistence.py", line 20, in test_saving_incompatible_schema_preserves_state_and_existing_save
+    with self.assertRaisesRegex(RuleError, "schema"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+======================================================================
+FAIL: test_saving_incompatible_schema_preserves_state_and_existing_save (test_persistence.PersistenceTests.test_saving_incompatible_schema_preserves_state_and_existing_save) (version=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_persistence.py", line 20, in test_saving_incompatible_schema_preserves_state_and_existing_save
+    with self.assertRaisesRegex(RuleError, "schema"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+======================================================================
+FAIL: test_file_loader_rejects_non_finite_numbers_in_metadata (test_content.ContentPackTests.test_file_loader_rejects_non_finite_numbers_in_metadata) (token='NaN')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_content.py", line 24, in test_file_loader_rejects_non_finite_numbers_in_metadata
+    with self.assertRaisesRegex(RuleError, "strict JSON"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+======================================================================
+FAIL: test_file_loader_rejects_non_finite_numbers_in_metadata (test_content.ContentPackTests.test_file_loader_rejects_non_finite_numbers_in_metadata) (token='Infinity')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_content.py", line 24, in test_file_loader_rejects_non_finite_numbers_in_metadata
+    with self.assertRaisesRegex(RuleError, "strict JSON"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+======================================================================
+FAIL: test_file_loader_rejects_non_finite_numbers_in_metadata (test_content.ContentPackTests.test_file_loader_rejects_non_finite_numbers_in_metadata) (token='-Infinity')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_content.py", line 24, in test_file_loader_rejects_non_finite_numbers_in_metadata
+    with self.assertRaisesRegex(RuleError, "strict JSON"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+======================================================================
+FAIL: test_file_loader_rejects_non_finite_numbers_in_metadata (test_content.ContentPackTests.test_file_loader_rejects_non_finite_numbers_in_metadata) (token='1e400')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_content.py", line 24, in test_file_loader_rejects_non_finite_numbers_in_metadata
+    with self.assertRaisesRegex(RuleError, "strict JSON"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+======================================================================
+FAIL: test_file_loader_rejects_non_finite_numbers_in_metadata (test_content.ContentPackTests.test_file_loader_rejects_non_finite_numbers_in_metadata) (token='-1e400')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$REPO/tests/test_content.py", line 24, in test_file_loader_rejects_non_finite_numbers_in_metadata
+    with self.assertRaisesRegex(RuleError, "strict JSON"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuleError not raised
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.055s
+
+FAILED (failures=9)
