@@ -66,6 +66,26 @@ class PixelSceneCatalogTest {
     }
 
     @Test
+    fun quietStairMasterUsesCenteredDepthWarmUtilityLightAndNoUiCyan() {
+        val scene = PixelSceneCatalog.evacStairDefault
+
+        assertEquals(128, scene.width)
+        assertEquals(64, scene.height)
+
+        val allPixels = scene.rows.joinToString("")
+        assertTrue("Quiet Stair should keep substantial structural mass", allPixels.count { it == 'M' } > 200)
+        assertTrue("Quiet Stair should contain warm emergency/utility lighting", allPixels.count { it == 'G' } >= 20)
+        assertTrue("Quiet Stair should include highlighted lamp faces", allPixels.count { it == 'H' } >= 20)
+        assertTrue(
+            "Quiet Stair must not reuse the bright UI cyan anchor",
+            PixelColors.Cyan !in scene.palette.values,
+        )
+
+        assertTrue(scene.rows[17].substring(57, 71).any { it == 'B' || it == 'M' || it == 'G' })
+        assertTrue(scene.rows[57].substring(14, 114).count { it == 'A' || it == 'M' || it == 'L' } > 50)
+    }
+
+    @Test
     fun everyCurrentNamedLocationResolvesToItsOwnProductionScene() {
         val expected = mapOf(
             "PLATFORM_NINE" to PixelSceneCatalog.platformNineBlackout,
