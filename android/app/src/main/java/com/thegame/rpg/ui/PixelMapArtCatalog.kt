@@ -54,6 +54,7 @@ object PixelMapArtCatalog {
         'c' to Color(0xFF343C39),
         's' to Color(0xFF222C2D),
         'm' to Color(0xFF171D1F),
+        'r' to Color(0xFF514F48),
     )
 
     private fun pixels(): MutableList<CharArray> =
@@ -148,6 +149,24 @@ object PixelMapArtCatalog {
                 }
             }
         }
+        fun linearWear(
+            x: Int,
+            y: Int,
+            w: Int,
+            h: Int,
+            base: Char,
+            accent: Char,
+            xStep: Int,
+            yStep: Int,
+        ) {
+            for (yy in y until y + h step yStep) {
+                for (xx in x until x + w step xStep) {
+                    if (xx !in 0 until WIDTH || yy !in 0 until HEIGHT) continue
+                    if (p[yy][xx] == base) p[yy][xx] = accent
+                    if (xx + 1 in 0 until WIDTH && p[yy][xx + 1] == base) p[yy][xx + 1] = accent
+                }
+            }
+        }
 
         // Surface civic district, depot/service belt, then darker maintenance infrastructure.
         rect(p, 0, 0, WIDTH, 48, 'G')
@@ -184,6 +203,10 @@ object PixelMapArtCatalog {
             line(p, route[0], route[1], route[2], route[3], 'R', 7)
             line(p, route[0], route[1], route[2], route[3], 'L', 1)
         }
+
+        // Neutral asphalt/service-road wear. This only recolors already-authored road pixels;
+        // it cannot create, extend, enable, or disable a route.
+        linearWear(0, 0, WIDTH, HEIGHT, 'R', 'r', xStep = 13, yStep = 9)
 
         // Workshop Row: attached practical shops rather than a single abstract block.
         outline(49, 8, 54, 22, 'A')
@@ -223,6 +246,7 @@ object PixelMapArtCatalog {
         rect(p, 27, 56, 50, 5, 'S')
         rect(p, 18, 69, 68, 3, 'R')
         rect(p, 18, 75, 68, 3, 'R')
+        linearWear(18, 68, 68, 11, 'R', 'r', xStep = 11, yStep = 3)
         for (x in 21..84 step 8) rect(p, x, 68, 2, 11, 'L')
 
         // Relay Workbench annex.
