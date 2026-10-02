@@ -2746,6 +2746,596 @@ If art exists but projection does not:
 
 ---
 
+# 10. Performance and section strategy
+
+Status: **COMPLETE — TECHNICAL SECTIONING POLICY LOCKED; NUMERIC BUDGETS REQUIRE MEASUREMENT**
+
+## 10.1 Current Android baseline
+
+Current client facts relevant to this plan:
+- Kotlin/Jetpack Compose application;
+- Chaquopy Python engine bridge;
+- minimum Android SDK 24;
+- target SDK 37;
+- packaged ABIs: armeabi-v7a, arm64-v8a, x86_64;
+- source-native pixel rendering;
+- raster delivery prefers authored PNGs where available;
+- raster scaling uses no filtering;
+- missing raster entries fall back to source-native sprites rather than fabricated geometry.
+
+Historical validation exists for earlier exact SHAs; it does not automatically validate future changes.
+
+## 10.2 Logical region versus technical sections
+
+Gate Twelve remains **one player-facing region**.
+
+Do not split it into multiple named regions merely for implementation convenience.
+
+Technical section/loading cells may be introduced later if measurement requires them.
+
+Candidate technical partitions may align with:
+- Surface Civic District;
+- Depot / Gate Core;
+- Lower Maintenance Network.
+
+These are candidates, not mandatory runtime loading boundaries.
+
+## 10.3 Sectioning trigger
+
+Do not implement section streaming because an external reference contains a “streaming” layer.
+
+Introduce technical section loading only if one or more measured problems exist:
+- startup/load latency;
+- memory pressure;
+- raster decode pressure;
+- excessive recomposition/draw cost;
+- animation load;
+- future map scale beyond a single practical master;
+- too many simultaneous scene assets.
+
+Until then, simpler ownership wins.
+
+## 10.4 Asset loading rules
+
+Preferred:
+- load only the active scene master and required overlays/actors;
+- keep small reusable icon/chrome families available as appropriate;
+- avoid decoding every location scene at once;
+- reuse cached/remembered rasters where the current Compose lifecycle supports it;
+- prefer stable asset IDs over ad-hoc resource discovery;
+- fall back safely when a raster is absent.
+
+Avoid:
+- giant all-world atlases before measurement;
+- duplicating identical rasters for every scene state;
+- loading all animation frames for unrelated scenes;
+- background preloading that competes with interaction responsiveness without evidence.
+
+## 10.5 Animation policy
+
+Animation is allowed when it communicates state.
+
+Rules:
+- no permanent decorative animation requirement for every scene;
+- Trace/ability FX may animate only while relevant;
+- idle/environment loops should have bounded frame counts and stop when off-screen/not composed;
+- UI transitions should not block choices;
+- no animation may own gameplay timing.
+
+Exact FPS/frame-time budgets remain **UNDECIDED UNTIL PROFILING**.
+
+## 10.6 Pixel-rendering policy
+
+Keep:
+- integer-like/native scaling behavior;
+- nearest/no-filter raster treatment;
+- crisp edges;
+- source-grid discipline.
+
+Do not:
+- use bilinear filtering for final pixel assets;
+- scale multiple times through different intermediate representations;
+- regenerate source art at arbitrary phone resolution.
+
+## 10.7 Mobile layout policy
+
+The same gameplay state must remain usable across supported phone widths.
+
+Priorities:
+1. choice interaction;
+2. narrative readability;
+3. resource/status visibility;
+4. character/location identity;
+5. decorative scene detail.
+
+When constrained:
+- collapse/reflow secondary panels;
+- reduce decorative density;
+- preserve touch target size;
+- preserve meaningful labels;
+- never shrink critical interaction targets solely to keep a desktop-like composition.
+
+## 10.8 Performance evidence required later
+
+Before declaring the final APK performant, measure:
+- cold-start time;
+- scene-transition time;
+- map-open time;
+- peak/typical memory;
+- raster decode cost;
+- recomposition/render behavior on representative hardware;
+- animation smoothness;
+- save/load latency;
+- APK size by ABI/resource contribution.
+
+No numeric threshold is invented in this document.
+
+## 10.9 Step 10 locked decisions
+
+1. Gate Twelve remains one logical region.
+2. Technical streaming is evidence-driven, not reference-driven.
+3. Macrozone-aligned loading cells are allowed later but not required now.
+4. Active-scene assets should be loaded narrowly.
+5. Pixel scaling remains crisp/no-filter.
+6. Animation is state-serving and bounded.
+7. Exact performance budgets must come from profiling.
+
+---
+
+# 11. Implementation order
+
+Status: **COMPLETE — DEPENDENCY-ORDERED EXECUTION PLAN LOCKED**
+
+Implementation must follow the smallest safe slices rather than a large rewrite.
+
+## 11.1 Dependency graph
+
+`Documentation authority`
+-> `scene-presence projection contract`
+-> `Android bridge projection`
+-> `visual resolver/panel binding`
+-> `Gate Twelve map connector migration`
+-> `state overlay normalization`
+-> `asset completion`
+-> `UX refinements`
+-> `performance measurement`
+-> `migration/retirement`
+-> `release candidate`
+
+## 11.2 Slice 1 — Scene-presence projection
+
+Goal:
+move actor/panel presence authority out of hard-coded Android scene cases.
+
+Work:
+- define authored scene presence fields or derivation;
+- expose player-safe presence through the bridge;
+- preserve existing opening behavior;
+- add projection tests;
+- do not change art yet except adapters required to consume the projection.
+
+Done when:
+- existing current scenes produce equivalent visible actors;
+- absent characters cannot appear because of UI-only inference;
+- hidden state remains redacted.
+
+## 11.3 Slice 2 — Contextual panel resolver
+
+Goal:
+use projected presence to drive Story character composition.
+
+Work:
+- implement environment/focused/group/party panel modes;
+- bind approved assets only;
+- keep fallback safe;
+- preserve narrative and choices.
+
+Done when:
+- one-, multi-, and zero-character scenes render correctly at phone width;
+- wrong-character substitution is impossible by design.
+
+## 11.4 Slice 3 — Plaza <-> Platform Nine graph migration
+
+Goal:
+connect the two currently disconnected map components.
+
+Prerequisites:
+- final travel-time decision;
+- route/discovery decision;
+- target scene behavior decision;
+- tests.
+
+Work:
+- add authored edge;
+- add travel time if required;
+- ensure map projection shows it only when legitimate;
+- update route art/preview;
+- verify travel/save/resume.
+
+Done when:
+- engine and visual map agree;
+- no bypass of story gates occurs.
+
+## 11.5 Slice 4 — State-layer normalization
+
+Goal:
+reduce scene-ID-only visual logic where a stable player-safe state tag is more appropriate.
+
+Candidates:
+- blackout;
+- Trace active/training;
+- aftershock;
+- relay inspection;
+- future event states.
+
+Do not create generic state systems unless multiple real consumers justify them.
+
+## 11.6 Slice 5 — Asset completion
+
+Complete missing approved assets based on the Step 7 queue.
+
+Priority:
+1. assets required by implemented current scenes;
+2. contextual panel requirements;
+3. state overlays;
+4. map/route support;
+5. optional/deferred polish.
+
+## 11.7 Slice 6 — UX refinement
+
+Refine:
+- Story composition;
+- contextual panels;
+- Map details/travel feedback;
+- Character/Stats consistency;
+- navigation return behavior;
+- accessibility and narration.
+
+No UX refactor may duplicate engine rules.
+
+## 11.8 Slice 7 — Performance and release hardening
+
+Measure first.
+
+Then:
+- optimize proven bottlenecks;
+- decide if section loading is necessary;
+- run full regression;
+- inspect screenshots;
+- test representative Android runtime;
+- produce candidate artifact only after exact-head validation.
+
+## 11.9 Step 11 locked decisions
+
+1. Presence projection precedes contextual-panel refactor.
+2. Graph migration is isolated from visual refactors.
+3. State normalization follows observed duplication, not speculative abstraction.
+4. Asset work follows actual consumer demand.
+5. Performance optimization follows measurement.
+6. Major implementation slices remain independently reviewable and rollbackable.
+
+---
+
+# 12. Verification plan
+
+Status: **COMPLETE — TEST/QA EVIDENCE CONTRACT LOCKED**
+
+## 12.1 Evidence rule
+
+No task is complete because code compiles in theory or documentation says it should work.
+
+Required status vocabulary:
+- NOT RUN
+- FAILED
+- PARTIAL
+- PASSED
+- VERIFIED ON REPRESENTATIVE ANDROID
+- PHYSICAL-DEVICE VERIFIED
+
+Use the highest status actually observed.
+
+## 12.2 Python/engine verification
+
+For engine/content changes, run the repository's current Python test suite:
+
+`PYTHONPATH=src python -m unittest discover -s tests -v`
+
+Add focused regression tests for:
+- scene-presence projection;
+- hidden-state redaction;
+- map edge migration;
+- travel/save/resume;
+- state-layer projection.
+
+Historical pass counts are evidence for their exact commit only.
+
+## 12.3 Android JVM/unit verification
+
+For bridge/UI-model changes:
+- run Android unit tests;
+- verify mappers/resolvers;
+- verify stable asset mappings;
+- verify no duplicate rule calculations are introduced.
+
+## 12.4 Compose instrumentation
+
+Add/maintain tests for:
+- Story loads with correct panel mode;
+- no-NPC scene;
+- focused single NPC;
+- multi-character group scene;
+- map reachability;
+- travel transition;
+- Character/Stats navigation;
+- save/load restoration;
+- narration/accessibility controls where changed.
+
+## 12.5 Screenshot QA
+
+Capture representative screenshots for:
+- smallest supported target width used by project QA;
+- normal Story with no NPC;
+- focused NPC conversation;
+- group scene;
+- Gate Twelve threshold;
+- map current/reachable/unavailable;
+- Character paper-doll;
+- long narrative/choice overflow;
+- blackout/Trace overlay state.
+
+Review:
+- clipping;
+- pixel filtering;
+- z-order;
+- wrong actor;
+- hidden-state leakage;
+- touch/readability;
+- state consistency.
+
+## 12.6 Native-scale asset QA
+
+For new pixel assets verify:
+- intended native dimensions;
+- no unintended anti-aliasing;
+- silhouette at 1x;
+- anchor/pivot;
+- palette/material compatibility;
+- transparent edge behavior;
+- state ownership;
+- no accidental baked temporary state.
+
+## 12.7 Representative Android runtime
+
+Future release-quality claims require an exact-head Android run.
+
+At minimum verify:
+- app boot;
+- Python engine initialization;
+- visible gameplay;
+- navigation;
+- relevant modified feature;
+- save/load;
+- no black screen;
+- no crash on target path.
+
+Physical handset verification remains a separate stronger gate.
+
+## 12.8 Map verification
+
+For Gate Twelve:
+- all nine nodes project correctly;
+- known graph edges match;
+- hidden/nonexistent connector is not displayed before migration;
+- migrated connector becomes available only after authored change;
+- hit targets align with visible markers;
+- selection does not alter authoritative state until travel intent is submitted.
+
+## 12.9 Step 12 locked decisions
+
+1. Exact-head evidence is mandatory for completion claims.
+2. Historical CI is not evidence for later commits.
+3. Python tests alone cannot verify Android behavior.
+4. Screenshots are required for visual composition changes.
+5. Native-scale inspection is required for production pixel assets.
+6. Physical-device status must be reported separately from emulator status.
+
+---
+
+# 13. Migration plan
+
+Status: **COMPLETE — KEEP/REPLACE/RETIRE RULES DEFINED; EXECUTION WAITS FOR IMPLEMENTATION**
+
+This step defines what happens to current systems as the documented target is implemented.
+
+## 13.1 Classification vocabulary
+
+Every affected implementation component receives one decision:
+- KEEP
+- KEEP + CLEANUP
+- EXTEND
+- MIGRATE
+- REPLACE
+- RETIRE AFTER MIGRATION
+- DELETE AFTER VERIFIED REPLACEMENT
+- DEFER
+- UNKNOWN
+
+## 13.2 Current Gate Twelve migration decisions
+
+### Keep
+- authoritative Python game state/rules ownership;
+- player-safe bridge architecture;
+- stable world location IDs;
+- existing nine-location content;
+- existing map node percentage model unless later world redesign explicitly migrates it;
+- 256x144 Gate Twelve presentation master for this production phase;
+- approved native pixel grid standards;
+- raster fallback behavior;
+- no-filter pixel rendering.
+
+### Keep + cleanup
+- current Story/Map/Character/Stats surface separation;
+- current scene layering model;
+- current asset catalogs where stable IDs and responsibilities are sound.
+
+### Extend
+- player-safe visual projection;
+- map projection after connector migration;
+- asset manifests/status tracking;
+- contextual panel modes;
+- screenshot/instrumentation coverage.
+
+### Migrate
+- NPC/story actor presence selection from hard-coded Android scene cases to engine-owned scene-presence projection;
+- Plaza -> Platform Nine from reserved design connector to authored graph edge when its gameplay details are finalized;
+- any scene-ID-only visual state that becomes a reusable player-safe state tag with multiple real consumers.
+
+### Replace only if evidence supports it
+- broad Story layout;
+- Map interaction implementation;
+- scene renderer;
+- navigation shell.
+
+These may be substantially redesigned, but there is no current justification for deleting them before replacement behavior is proven.
+
+### Retire after migration
+- redundant hard-coded actor presence cases once the projection-driven resolver is verified;
+- obsolete visual-state branches after equivalent state projection exists;
+- superseded asset variants with a documented replacement and no live consumers.
+
+### Never delete merely for cleanup
+- migration evidence;
+- tests proving old/new behavior;
+- historical handoffs needed to understand compatibility;
+- stable IDs still referenced by saves/content.
+
+## 13.3 Save compatibility
+
+Any future change affecting:
+- stable IDs;
+- schema fields;
+- equipment records;
+- quests;
+- NPC state;
+- world map persistence;
+- presence/party persistence
+
+must determine whether save migration is required.
+
+No save-breaking change is authorized merely because presentation is being rebuilt.
+
+## 13.4 APK/client teardown rule
+
+The final APK rebuild phase may remove or replace large presentation areas, but only after:
+- consumer audit;
+- target contract;
+- replacement implementation;
+- tests;
+- representative runtime evidence;
+- recovery/rollback plan.
+
+“Full permission” means the project may be improved aggressively; it does not mean evidence can be skipped.
+
+## 13.5 Documentation migration
+
+Older status/handoff files are preserved as historical evidence.
+
+Active pointer files should route future sessions to:
+- `docs/program/README.md`;
+- owner directive;
+- decision-gap register;
+- relevant domain program;
+- current master/task register.
+
+Historical files must be marked with their scope/date rather than rewritten to pretend they described the new program.
+
+## 13.6 Step 13 locked decisions
+
+1. Engine authority survives UI rebuilds.
+2. Hard-coded presence logic is migration debt.
+3. Stable IDs are preserved unless a real migration exists.
+4. Old implementation is retired only after verified replacement.
+5. Historical evidence is preserved.
+6. Presentation can be aggressively improved without silently breaking saves/rules.
+
+---
+
+# 14. Execution handoff
+
+Status: **COMPLETE — GATE TWELVE MASTER PLAN READY FOR IMPLEMENTATION SLICES**
+
+## 14.1 Current objective
+
+Use Gate Twelve as the first fully documented region to validate the repository-wide documentation-first program.
+
+## 14.2 Verified/documented state
+
+- Steps 1 through 14 are documented.
+- Nine Gate Twelve locations remain the current region set.
+- Current graph has two components until the Plaza -> Platform Nine edge is implemented.
+- Current presentation master is 256x144.
+- Pixel-art/material/state/UX ownership is documented.
+- Contextual panel target is documented.
+- Implementation order, verification and migration rules are documented.
+
+## 14.3 First implementation task
+
+**GT-IMP-001 — Player-safe scene-presence projection**
+
+Goal:
+make authoritative scene/NPC presence available to Android without exposing hidden state.
+
+### Included
+- define the minimum presence data needed by current opening scenes;
+- project it through the Python Android bridge;
+- add Python tests;
+- add Android model/mapping support;
+- preserve current opening actor visibility.
+
+### Excluded
+- redesigning all Story UI;
+- new NPCs;
+- new quests;
+- changing Gate Twelve map graph;
+- creating new character art;
+- changing save schema unless implementation proves it is necessary.
+
+## 14.4 GT-IMP-001 acceptance criteria
+
+1. `OPENING_DEPOT_BLACKOUT` still shows wounded courier + Tamsin when appropriate.
+2. `OPENING_DECISION` shows Tamsin.
+3. `OPENING_RECOVERY` shows Tamsin at Relay Workbench.
+4. `OPENING_TUNNEL` shows Tamsin in Service Tunnel.
+5. a scene with no projected visible NPC renders no story actor.
+6. Android actor selection no longer needs to decide presence solely from scene ID.
+7. player-safe projection exposes no hidden relationship/knowledge/internal flags.
+8. Python regression suite passes at exact implementation head.
+9. Android unit/instrumentation gates relevant to the change pass.
+10. representative screenshots show equivalent or improved visible composition.
+
+## 14.5 Next tasks after GT-IMP-001
+
+- GT-IMP-002 contextual panel resolver;
+- GT-IMP-003 Plaza -> Platform Nine authored graph migration;
+- GT-IMP-004 state-layer normalization;
+- GT-IMP-005 required asset completion;
+- GT-IMP-006 UX refinement;
+- GT-IMP-007 performance profiling/hardening.
+
+## 14.6 Handoff rule
+
+Another session should be able to continue by reading, in order:
+1. `docs/program/README.md`
+2. `docs/program/00_OWNER_DIRECTIVE_2026-10-02.md`
+3. `docs/program/09_DECISION_GAP_REGISTER.md`
+4. this Gate Twelve Master Plan
+5. `docs/program/11_CONTEXTUAL_VISUAL_COMPOSITION_CONTRACT.md`
+6. relevant implementation files/tests.
+
+No hidden reasoning is required to recover the next action.
+
+---
+
 # 5. Planned authoring sequence
 
 The remaining master plan will be completed in this order:
@@ -2759,17 +3349,17 @@ The remaining master plan will be completed in this order:
 7. **Asset decomposition** — COMPLETE.
 8. **Application UX plan** — COMPLETE.
 9. **State-layer plan** — COMPLETE.
-10. **Performance/section strategy** — loading boundaries and mobile constraints.
-11. **Implementation order** — smallest safe slices and dependency graph.
-12. **Verification plan** — unit, emulator, screenshot, handset, regression.
-13. **Migration plan** — what old presentation code/assets are kept, replaced, or retired.
-14. **Execution handoff** — exact first implementation task and acceptance criteria.
+10. **Performance/section strategy** — COMPLETE.
+11. **Implementation order** — COMPLETE.
+12. **Verification plan** — COMPLETE.
+13. **Migration plan** — COMPLETE.
+14. **Execution handoff** — COMPLETE.
 
 ---
 
 # Continuity footnote / next-session handoff
 
-**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow; Step 4 — per-zone gameplay function and return value; Step 5 — geometry contract; Step 6 — material and visual language; Step 7 — asset decomposition and production-state contract; Step 8 — application UX and contextual panel ownership; Step 9 — state-layer ownership.
+**Completed:** Steps 1–14 of the Gate Twelve Region Master Plan. The region documentation now covers authority, spatial hierarchy, circulation, per-zone function, geometry, material language, asset decomposition, application UX, state layers, performance/section policy, implementation order, verification, migration, and execution handoff.
 
 **Key decisions preserved for future sessions:**
 - active repository is `jbob-coder/Text-rpg-game`;
@@ -2782,6 +3372,6 @@ The remaining master plan will be completed in this order:
 - UI must not become the source of truth for gameplay state;
 - final map must be constructed as modular game content, piece by piece, not generated as one flattened image.
 
-**Next unfinished step:** Step 10 — define the performance/section strategy: loading/ownership boundaries, asset budgets, animation limits, memory/phone constraints, and when Gate Twelve should remain one logical region versus multiple technical cells.
+**Next action:** begin implementation only when directed, starting with GT-IMP-001 — player-safe scene-presence projection. At the documentation-program level, continue expanding the broader world/system domains from the open gaps in `docs/program/09_DECISION_GAP_REGISTER.md`.
 
 **Do not implement the final contextual character/room panel binding before Step 8 and the scene-presence projection contract are complete.**
