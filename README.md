@@ -1,5 +1,7 @@
 # Text RPG Game
 
+> **Current documentation authority (2026-10-02):** start with [`docs/program/README.md`](docs/program/README.md) and [`docs/program/00_OWNER_DIRECTIVE_2026-10-02.md`](docs/program/00_OWNER_DIRECTIVE_2026-10-02.md). The documentation-first full-game program is the current planning priority for Text-rpg-game. Historical stabilization/implementation branch references below remain evidence for their exact work and must not be mistaken for the current planning objective.
+
 A data-driven, authored choice RPG where player decisions, stats, relationships, knowledge, equipment, powers, party composition, and previous conversations persist and alter later scenes.
 
 Current stabilization candidate: `fix/v6-runtime-boundaries`, based on
