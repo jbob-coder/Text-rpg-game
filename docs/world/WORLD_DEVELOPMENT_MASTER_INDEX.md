@@ -785,3 +785,22 @@ Do not fill these gaps silently.
 10. `WORLD_NPC_POPULATION_STANDARD.md`
 
 Gate Twelve documentation continues in parallel as the proof implementation.
+
+## World-scale schema companion
+
+`WORLD_SCALE_DOCUMENTATION_BLUEPRINT.md` is the schema-first companion for future mass world authoring.
+
+It defines:
+- coordinate layers;
+- stable place hierarchy;
+- political entity records;
+- settlement records;
+- resources/ecosystems;
+- beast zones;
+- population;
+- citizen hierarchy/discrimination distinctions;
+- world-level bands;
+- routes;
+- loot provenance.
+
+Do not begin thousands of world records until those schema contracts are stable.
