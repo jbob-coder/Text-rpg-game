@@ -111,3 +111,34 @@ The directive was decomposed into:
 Priority remains `jbob-coder/Text-rpg-game`.
 
 No `main` promotion or destructive runtime migration was performed by this documentation batch.
+
+
+## 2026-10-02 full-scope continuation directive
+
+The owner reiterated and expanded the documentation-first goal with broad development permission.
+
+Preserved requirements:
+- document what can change and what will change;
+- track what is created, what stage it is in, and what remains undecided;
+- document pixel-art use for areas, characters, equipment, room actors, portraits/focus panels, text/signage, overlays, FX and reuse;
+- preserve visual cohesion when assets are overlaid or reused;
+- document what every major file owns and references;
+- identify game mechanics that should be kept, extended, reworked, deliberately broken/rebuilt, replaced or removed;
+- build a large world-development corpus for coordinates, zones, cities, villages, political entities/kingdoms, ecosystems, resources, beast zones, NPCs, loot/items/accessories, hierarchy, progression and balance;
+- develop original tactical combat using broad turn-based tactical genre ideas without copying protected XCOM content;
+- develop an original persistent adversary/memory/evolution system without copying protected Nemesis-System presentation or proprietary implementation;
+- make final Android/APK decomposition and reconstruction a late-stage result of the final documentation corpus;
+- keep `jbob-coder/Text-rpg-game` as the priority game repository;
+- make other reports/handoffs point to this master program rather than competing with it.
+
+Materialized in this continuation:
+- documentation corpus architecture;
+- world geography standard;
+- political entity standard/catalog seed;
+- settlement catalog standard;
+- travel/route standard;
+- room actor/panel/overlay/reuse packet standard;
+- AGENTS entry-point priority update;
+- master task-state reconciliation.
+
+Prior prohibitions remain active despite broad permission.
