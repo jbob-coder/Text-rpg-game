@@ -21,6 +21,11 @@ fun PixelEnvironmentArrivalPreview(
     modifier: Modifier = Modifier,
 ) {
     val sprite = PixelEnvironmentModuleCatalog.arrivalPreview(locationId) ?: return
+    val detailTiles = PixelEnvironmentModuleCatalog.arrivalDetailTiles(locationId)
+    val detailWidth = detailTiles.sumOf { it.width }
+    val detailHeight = detailTiles.maxOfOrNull { it.height } ?: 0
+    val compositionWidth = maxOf(sprite.width, detailWidth)
+    val compositionHeight = sprite.height + detailHeight
 
     Canvas(
         modifier = modifier
@@ -29,15 +34,34 @@ fun PixelEnvironmentArrivalPreview(
             .testTag("map-arrival-preview-$locationId"),
     ) {
         val px = floor(
-            minOf(size.width / sprite.width.toFloat(), size.height / sprite.height.toFloat()),
+            minOf(
+                size.width / compositionWidth.toFloat(),
+                size.height / compositionHeight.toFloat(),
+            ),
         ).coerceAtLeast(1f)
-        val ox = floor((size.width - sprite.width * px) / 2f)
-        val oy = floor((size.height - sprite.height * px) / 2f)
+        val ox = floor((size.width - compositionWidth * px) / 2f)
+        val oy = floor((size.height - compositionHeight * px) / 2f)
+        val spriteOx = ox + floor((compositionWidth - sprite.width) * px / 2f)
+
         drawPixelSprite(
             sprite = sprite,
             pixelSize = px,
-            originX = ox,
+            originX = spriteOx,
             originY = oy,
         )
+
+        if (detailTiles.isNotEmpty()) {
+            var tileX = ox + floor((compositionWidth - detailWidth) * px / 2f)
+            val tileY = oy + sprite.height * px
+            detailTiles.forEach { tile ->
+                drawPixelSprite(
+                    sprite = tile,
+                    pixelSize = px,
+                    originX = tileX,
+                    originY = tileY,
+                )
+                tileX += tile.width * px
+            }
+        }
     }
 }
