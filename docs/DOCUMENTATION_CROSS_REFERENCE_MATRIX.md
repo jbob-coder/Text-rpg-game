@@ -573,3 +573,47 @@ Owns:
 - visual QA.
 
 This child standard does not own NPC presence. Player-safe projected engine state does.
+
+
+---
+
+## 2026-10-02 live audit and inventory controls
+
+### `docs/LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md`
+Owns:
+- exact audited program HEAD;
+- live open-PR/branch landscape snapshot;
+- current repository structural counts;
+- current implementation/pixel/world/system state;
+- what may change versus what remains protected;
+- immediate reconciliation controls.
+
+Consumes:
+- master program;
+- rework decision matrix;
+- task register;
+- live GitHub metadata/tree.
+
+Feeds:
+- branch/provenance reconciliation;
+- Android consumer map;
+- Gate Twelve implementation restart;
+- final APK reconstruction.
+
+### `docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-02.md`
+Owns:
+- exact structural counts for the audited program Git tree;
+- distinction between measurable repository quantities and ambiguous owner numeric targets;
+- inventory expansion requirements.
+
+### `tools/documentation_inventory.py`
+Owns:
+- deterministic local structural/documentation inventory;
+- Markdown word counting in a complete checkout;
+- extension/document-family/test-source counts.
+
+It does **not** own:
+- canon;
+- asset production status;
+- executed-test results;
+- target-unit interpretation.
