@@ -120,3 +120,22 @@ Gate Twelve authoritative inputs:
 ## Acceptance rule
 
 A map is implementation-ready only when geography, authored node IDs, route ownership, visual geometry, runtime states and expansion boundaries no longer contradict one another.
+
+
+## Global world foundation documents now created
+
+- `docs/world/WORLD_SPATIAL_HIERARCHY_AND_COORDINATES.md`
+- `docs/world/WORLD_ENTITY_ID_AND_REFERENCE_STANDARD.md`
+- `docs/world/REGION_SETTLEMENT_DOCUMENTATION_TEMPLATE.md`
+- `docs/world/WORLD_MAP_PRODUCTION_SEQUENCE.md`
+
+These documents lock the hierarchy and documentation method without inventing the actual world geography.
+
+Still unresolved:
+- actual global geography;
+- actual polity/kingdom list;
+- actual region list;
+- final WORLD_GEO coordinate representation;
+- settlement density;
+- regional travel-time model;
+- beast/resource/ecosystem placement.
