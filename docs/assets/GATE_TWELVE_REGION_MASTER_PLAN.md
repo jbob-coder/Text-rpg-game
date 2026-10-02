@@ -6,6 +6,11 @@ Working branch: `docs/settlement-region-build-plan`
 Started: 2026-10-01  
 Purpose: define, build, integrate, and verify the Gate Twelve region as a high-use playable area inside the larger game.
 
+Global parent authority: `docs/DOCUMENTATION_MASTER_PROGRAM.md`
+Cross-reference index: `docs/DOCUMENTATION_INDEX.md`
+
+Gate Twelve is a **regional child plan**. Its local decisions remain valid unless an explicit global-system decision requires a recorded migration. It must not be expanded into a substitute for the global world atlas.
+
 ---
 
 # 0. How this document is authored
