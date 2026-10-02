@@ -15,6 +15,13 @@ Start here for current work:
 5. [Pixel Art Runtime Composition Standard](docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md)
 6. [World Development Master Index](docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md)
 7. [Android APK Rebuild & Evolution Master Plan](docs/android/APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md)
+8. [Master Directive Execution Breakdown](docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md)
+9. [Existing-State Rework Decision Matrix](docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md)
+10. [Documentation Progress Ledger](docs/DOCUMENTATION_PROGRESS_LEDGER.md)
+11. [Pixel Art Production & Reuse Ledger](docs/assets/PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md)
+12. [World-Scale Documentation Blueprint](docs/world/WORLD_SCALE_DOCUMENTATION_BLUEPRINT.md)
+13. [Gameplay System Rebuild Matrix](docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md)
+14. [Final APK Reconstruction Matrix](docs/android/APK_FINAL_RECONSTRUCTION_MATRIX.md)
 
 The default `main` branch remains a placeholder and is not implementation authority.
 
