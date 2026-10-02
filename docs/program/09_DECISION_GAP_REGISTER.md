@@ -15,7 +15,7 @@ Purpose: prevent proposals from silently turning into canon.
 | GAP-006 | World | Service Tunnel deeper destination unknown | OPEN |
 | GAP-007 | Map | Plaza <-> Platform Nine connector not implemented in authored graph | OPEN |
 | GAP-008 | Art | contextual character/room panel contract | SPECIFIED — implementation pending |
-| GAP-009 | Art | reusable overlay/occlusion rules | PARTIALLY SPECIFIED — expand to global asset matrix |
+| GAP-009 | Art | reusable overlay/occlusion rules | REVIEWABLE — global reuse/occlusion matrix documented; implementation-specific bindings remain |
 | GAP-010 | Characters | scene-presence projection ownership/shape | SPECIFIED — exact implementation pending |
 | GAP-011 | Society | citizen classes/hierarchy not designed | OPEN |
 | GAP-012 | Society | fictional prejudice/discrimination rules not designed | OPEN |
@@ -26,7 +26,7 @@ Purpose: prevent proposals from silently turning into canon.
 | GAP-017 | Balance | world level/scaling model not decided | OPEN |
 | GAP-018 | Economy | final currency/economy model not decided | OPEN |
 | GAP-019 | Economy | crafting/repair adoption not decided | OPEN |
-| GAP-020 | Ecology | ecosystem/beast-zone schema not locked | OPEN |
+| GAP-020 | Ecology | beast/entity standard plus beast-zone/ecosystem schema documented; actual species/zones and simulation depth remain | REVIEWABLE SCHEMA — content pending |
 | GAP-021 | Android | full current-component keep/replace/retire audit not complete | OPEN |
 | GAP-022 | Android | final APK rebuild matrix not created | OPEN |
 | GAP-023 | Documentation | full cross-document machine-readable index not created | OPEN |
