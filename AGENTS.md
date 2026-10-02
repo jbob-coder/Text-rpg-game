@@ -9,13 +9,14 @@ This file is the repository entry point for coding agents and automated assistan
 Before changing code or documentation, read these in order:
 
 1. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
-2. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases for the owner's long-range directive.
-3. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — what each major document owns and what consumes it.
-4. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — operational task state, blockers, evidence and next action.
-5. `docs/IMPLEMENTATION_STATUS.md` — verified historical/current implementation evidence.
-6. Relevant domain master document for the work being changed.
-7. Relevant source/tests for the task being changed.
-8. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
+2. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
+3. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases for the owner's long-range directive.
+4. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — what each major document owns and what consumes it.
+5. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — operational task state, blockers, evidence and next action.
+6. `docs/IMPLEMENTATION_STATUS.md` — verified historical/current implementation evidence.
+7. Relevant domain master document for the work being changed.
+8. Relevant source/tests for the task being changed.
+9. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
 
 Repository files and fresh execution evidence outrank remembered chat context. Older game repositories, prototypes and historical reports are not authority unless an explicit migration record says otherwise.
 
