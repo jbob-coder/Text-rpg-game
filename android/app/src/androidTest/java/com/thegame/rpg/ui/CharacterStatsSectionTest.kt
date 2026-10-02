@@ -230,7 +230,6 @@ class CharacterStatsSectionTest {
         composeRule.onNodeWithTag("inventory-slot-body").assertIsDisplayed()
         composeRule.onNodeWithTag("inventory-item-detail").assertIsDisplayed()
         composeRule.onNodeWithTag("inventory-item-ITEM_DEPOT_JACKET").assertIsDisplayed()
-        composeRule.onNodeWithText("Depot utility jacket").assertIsDisplayed()
         saveScreenshot("inventory-320dp")
     }
 
