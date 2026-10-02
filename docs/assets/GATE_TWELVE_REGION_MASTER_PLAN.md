@@ -621,13 +621,436 @@ The following decisions are now locked for subsequent planning unless explicitly
 
 ---
 
-# 3. Planned authoring sequence
+
+# 3. Circulation and player flow
+
+Status: **COMPLETE — CIRCULATION MODEL LOCKED FOR LATER IMPLEMENTATION**
+
+This step defines how the player should move through Gate Twelve District, how routes are prioritized, how landmarks teach orientation, and how the district avoids becoming either a single corridor or a confusing set of disconnected nodes.
+
+No gameplay edge, travel cost, content JSON, or UI code is changed in this step.
+
+## 3.1 Circulation goals
+
+Gate Twelve circulation must satisfy six goals:
+
+1. **Teach the district through movement.**  
+   The player should understand "surface -> depot -> Gate Twelve -> lower infrastructure" by moving through it, not by memorizing a node list.
+
+2. **Keep high-use destinations close to recognizable hubs.**  
+   Repeated visits should not require excessive navigation overhead.
+
+3. **Support optional detours without destroying orientation.**  
+   Workshop Row, Municipal Archive, Relay Workbench, Quiet Stair, and Trace Chamber should feel like meaningful branches, not random map dots.
+
+4. **Provide at least one lower-level cross-link.**  
+   The existing `SERVICE_TUNNEL <-> TRACE_CHAMBER` edge is valuable because it prevents the restricted layer from becoming pure out-and-back traversal.
+
+5. **Preserve different route identities.**  
+   Public civic movement, depot movement, evacuation movement, and deep-maintenance movement should not all feel identical.
+
+6. **Allow later world expansion.**  
+   Surface, evacuation, and deep-service boundaries must remain available for future regions.
+
+## 3.2 Route hierarchy
+
+Routes are divided into four circulation classes.
+
+### Class A — District spine
+
+The intended principal route is:
+
+`FUTURE SURFACE WORLD -> DISTRICT_PLAZA -> PLATFORM_NINE -> GATE_TWELVE -> SERVICE_TUNNEL -> FUTURE DEEP INFRASTRUCTURE`
+
+Current implementation status:
+- `DISTRICT_PLAZA -> PLATFORM_NINE` is not yet authored;
+- future surface/deep destinations are not yet authored;
+- `PLATFORM_NINE -> GATE_TWELVE` and `GATE_TWELVE -> SERVICE_TUNNEL` already exist.
+
+Purpose:
+- gives the district one memorable through-line;
+- makes Gate Twelve feel like a threshold instead of a random node;
+- supports eventual expansion in both directions;
+- prevents the civic district and depot infrastructure from reading as unrelated maps.
+
+This route must receive the strongest landmark continuity and the clearest visual transitions.
+
+### Class B — Hub branches
+
+These connect a major hub to a destination with a clear local purpose:
+
+From Depot Plaza:
+- `DISTRICT_PLAZA <-> WORKSHOP_ROW`
+- `DISTRICT_PLAZA <-> DISTRICT_ARCHIVE`
+
+From Platform Nine:
+- `PLATFORM_NINE <-> RELAY_WORKBENCH`
+- `PLATFORM_NINE <-> EVAC_STAIR`
+
+From Gate Twelve:
+- `GATE_TWELVE <-> TRACE_CHAMBER`
+
+These routes should be easy to understand from their hub and should not visually compete with the district spine.
+
+### Class C — Lower-network cross-link
+
+- `SERVICE_TUNNEL <-> TRACE_CHAMBER`
+
+Purpose:
+- creates a partial loop in the restricted layer;
+- allows Trace Chamber to be approached from more than one direction;
+- reduces unnecessary return-to-Gate-Twelve behavior;
+- makes the lower network feel spatial rather than menu-like.
+
+This edge should remain visually more subordinate than the spine.
+
+### Class D — Future expansion stubs
+
+Reserved, not currently player-routable:
+- Depot Plaza -> larger surface world;
+- Quiet Stair -> future evacuation/service destination;
+- Service Tunnel -> deeper infrastructure.
+
+These should be implied by architecture and orientation but must not appear as usable destinations until content exists.
+
+## 3.3 Decision on the Depot Plaza <-> Platform Nine connector
+
+Step 3 upgrades the proposed connector from "possible" to **REQUIRED FOR THE TARGET CIRCULATION MODEL**, while still leaving implementation for a later step.
+
+Decision:
+
+`DISTRICT_PLAZA <-> PLATFORM_NINE`
+
+is approved as the preferred future authored connection.
+
+Why it is necessary:
+- the current graph is split into two disconnected components;
+- Depot Plaza is described as outside the tram depot;
+- Platform Nine is inside the depot;
+- the pair forms the natural public-to-depot threshold;
+- joining them creates one coherent district without inventing a new location;
+- it aligns with the visual geometry and with the intended mental model;
+- it avoids forcing the player through Workshop Row or Municipal Archive merely to reach the depot.
+
+Not decided yet:
+- travel-minute cost;
+- exact doorway/corridor geometry;
+- whether the transition is represented as an exterior entrance, concourse, short passage, or another authored spatial connector;
+- unlock timing beyond respecting existing free-roam/story state.
+
+Implementation rule:
+- when eventually added, it must be authored in the engine/content graph;
+- the UI must consume that route, not fabricate it locally.
+
+## 3.4 Primary player flows
+
+The district supports multiple flows depending on game phase.
+
+### Flow A — Opening / first exposure
+
+The opening already begins in Platform Nine.
+
+The intended mental sequence is:
+
+`PLATFORM_NINE -> RELAY_WORKBENCH -> decision point -> GATE_TWELVE / EVACUATION BRANCH`
+
+Design intent:
+- teach the depot core before exposing the larger civic district;
+- make Relay Workbench feel attached to Platform Nine rather than like a separate neighborhood;
+- make Gate Twelve the first major "deeper" landmark;
+- preserve Quiet Stair as an alternate spatial idea: escape/egress rather than investigation.
+
+The opening should not require the player to understand the whole district map immediately.
+
+### Flow B — First free-roam orientation
+
+Once free roam is available, Depot Plaza becomes the preferred orientation hub.
+
+Target sequence:
+- arrive/return to Depot Plaza;
+- immediately understand west = Workshop Row;
+- east = Municipal Archive;
+- inward/depot = Platform Nine;
+- outward = future larger world boundary.
+
+This is the point where the player learns that the opening locations are part of a larger district rather than a separate dungeon.
+
+### Flow C — Repeated civic errands
+
+Typical loop:
+`DEPOT PLAZA -> WORKSHOP ROW / MUNICIPAL ARCHIVE -> DEPOT PLAZA`
+
+Requirements:
+- short conceptual distance;
+- clear return path;
+- no need to traverse Platform Nine or Gate Twelve for ordinary civic errands;
+- locations should feel adjacent to the plaza but functionally distinct.
+
+### Flow D — Return to restricted investigation
+
+Target:
+`DEPOT PLAZA -> PLATFORM NINE -> GATE TWELVE -> SERVICE TUNNEL / TRACE CHAMBER`
+
+Requirements:
+- the public-to-restricted transition should be obvious;
+- each step should increase enclosure/infrastructure intensity;
+- the player should feel that Gate Twelve is a threshold, not simply another icon.
+
+### Flow E — Lower-network loop
+
+Existing loop-capable structure:
+`GATE_TWELVE -> SERVICE_TUNNEL -> TRACE_CHAMBER -> GATE_TWELVE`
+
+This should be preserved because it:
+- supports alternate approach/return;
+- reduces repetitive backtracking;
+- gives Trace Chamber a spatial relationship to both the gate and tunnel.
+
+### Flow F — Evacuation/alternate egress
+
+`PLATFORM_NINE -> EVAC_STAIR -> FUTURE EXTERNAL DESTINATION`
+
+For now the route ends at Quiet Stair.
+
+Its circulation identity must remain:
+- separate from Gate Twelve investigation;
+- practical;
+- evacuation-oriented;
+- visually readable as "away from the main flow."
+
+## 3.5 Hub design
+
+### Depot Plaza — public hub
+
+Depot Plaza should support four directional readings:
+
+- west: Workshop Row;
+- east: Municipal Archive;
+- inward/depot: Platform Nine;
+- outward: future surface world.
+
+The player should not need to open a detail panel to understand those relationships.
+
+The plaza should therefore have:
+- generous negative space;
+- visible or strongly implied destination silhouettes;
+- directional material changes;
+- minimal clutter along primary desire lines.
+
+### Platform Nine — internal hub
+
+Platform Nine should support three strong branches:
+
+- technical annex: Relay Workbench;
+- restricted threshold: Gate Twelve;
+- egress: Quiet Stair.
+
+Platform Nine must remain more enclosed than Depot Plaza but still function as an orientation point.
+
+### Gate Twelve — threshold hub, not social hub
+
+Gate Twelve should support:
+- return toward Platform Nine;
+- descent/continuation toward Service Tunnel;
+- technical spur toward Trace Chamber.
+
+It should not accumulate unrelated civic functions. Its identity depends on being a controlled threshold.
+
+## 3.6 Landmark visibility rules
+
+"Visibility" here means visual orientation at map/scene scale, not necessarily literal uninterrupted 3D line of sight.
+
+### From Depot Plaza
+The player should be able to identify or infer:
+- depot/Platform Nine entrance as the dominant inward landmark;
+- Workshop Row direction;
+- Municipal Archive direction;
+- surface-world continuation.
+
+### From Platform Nine
+The player should be able to identify or infer:
+- Gate Twelve direction as the strongest restricted landmark;
+- Relay Workbench as a nearby/local annex;
+- Quiet Stair as an egress route with distinct signage/geometry;
+- return toward Depot Plaza once the connector is implemented.
+
+### From Gate Twelve
+The player should be able to distinguish:
+- return/up toward Platform Nine;
+- deeper path toward Service Tunnel;
+- lateral technical path toward Trace Chamber.
+
+### From Service Tunnel
+The player should understand:
+- route back toward Gate Twelve;
+- cross-link toward Trace Chamber;
+- deeper continuation exists architecturally but is not currently available.
+
+### From Trace Chamber
+The player should understand:
+- it is a spur/cross-link location, not a dead isolated room;
+- one route returns toward Gate Twelve;
+- another route leads into Service Tunnel.
+
+## 3.7 Route readability and visual weight
+
+The map should not render every connection with equal emphasis.
+
+Target visual hierarchy:
+- district spine: strongest neutral route/readability;
+- hub branches: medium;
+- lower cross-link: lighter/subordinate;
+- unavailable/future stubs: environmental implication only, no false active route line.
+
+Reachable/current/selected state remains a separate overlay system and may temporarily override neutral visual emphasis.
+
+Permanent background art must not bake in "available now" semantics.
+
+## 3.8 Pacing without invented meter scale
+
+Because real-world dimensions are not yet locked, Step 3 uses **interaction pacing** rather than meters.
+
+### Short-beat branch
+Examples:
+- Platform Nine <-> Relay Workbench;
+- Plaza <-> immediate civic branch.
+
+Desired feeling:
+- local detour;
+- one functional destination away from hub;
+- minimal transition ceremony.
+
+### Medium-beat transition
+Examples:
+- Plaza <-> Platform Nine;
+- Platform Nine <-> Gate Twelve;
+- Gate Twelve <-> Trace Chamber.
+
+Desired feeling:
+- clear change of spatial identity;
+- enough transition to communicate entering a different functional zone;
+- not so long that frequent reuse becomes tedious.
+
+### Deep-beat transition
+Example:
+- Gate Twelve <-> Service Tunnel;
+- future Service Tunnel -> deeper infrastructure.
+
+Desired feeling:
+- stronger enclosure/depth shift;
+- more environmental transition;
+- should communicate that the player is leaving ordinary district space.
+
+Exact travel time values remain engine/content decisions for later migration.
+
+## 3.9 Backtracking policy
+
+Repeated-use comfort is a priority.
+
+Rules:
+- do not force civic errands through the restricted infrastructure;
+- do not force every lower-network return through the exact same sequence when an existing cross-link can avoid it;
+- preserve the Service Tunnel <-> Trace Chamber cross-link;
+- keep Relay Workbench close to Platform Nine conceptually;
+- do not create decorative dead ends unless the destination itself justifies the stop;
+- future world exits should attach to natural boundaries, not arbitrary side rooms.
+
+## 3.10 Choice and discovery policy
+
+Circulation can suggest possibilities without exposing hidden content.
+
+Allowed:
+- visible architecture suggesting a stair continues;
+- a tunnel visually extending deeper;
+- a depot entrance reading as important;
+- an unavailable route marker driven by player-safe state.
+
+Not allowed:
+- showing a secret destination name before discovery;
+- painting quest-specific availability into base art;
+- inventing route access in Compose;
+- using environmental art to reveal hidden future-state outcomes.
+
+## 3.11 Phone-map implications
+
+At phone width, route comprehension must survive reduction.
+
+Required future map behavior:
+- Tier 1 anchors remain identifiable: Depot Plaza, Platform Nine, Gate Twelve;
+- selected/current/reachable overlays remain readable above the map;
+- route crossings do not collapse into an indistinguishable line cluster;
+- labels/details may be progressive rather than all visible simultaneously;
+- the visual spine should remain understandable even if secondary labels are hidden;
+- touch targets may be larger than the visible marker, but must still map to authoritative nodes.
+
+No zoom system is locked yet; that belongs to the application UX step.
+
+## 3.12 Circulation risks identified
+
+### Risk A — connector overload
+If Depot Plaza <-> Platform Nine becomes too visually dominant, the surface branches may feel secondary or decorative.
+
+Mitigation:
+- keep Workshop Row and Archive as clear civic destinations;
+- use landmark identity, not only route thickness, to establish importance.
+
+### Risk B — Gate Twelve bottleneck
+Gate Twelve naturally concentrates restricted routes.
+
+Mitigation:
+- retain Service Tunnel <-> Trace Chamber cross-link;
+- avoid adding unrelated functions to Gate Twelve;
+- use clear directional differentiation.
+
+### Risk C — Quiet Stair feels pointless
+Because its external destination is not yet mapped, it may read as a dead end.
+
+Mitigation:
+- preserve strong egress identity;
+- give it legitimate local story/scene value;
+- leave expansion architecture visible without inventing a destination.
+
+### Risk D — map/scene mismatch
+A route may look physically plausible in the map art while the engine does not authorize it.
+
+Mitigation:
+- route overlays are always derived from authoritative graph state;
+- proposed paths are never rendered as normal active routes until content migration occurs.
+
+### Risk E — repeated travel fatigue
+High-use areas may become tedious if every interaction requires full traversal ceremony.
+
+Mitigation:
+- distinguish local, medium, and deep transition beats;
+- avoid over-animating local branch travel;
+- preserve direct hub logic.
+
+## 3.13 Step 3 locked decisions
+
+1. The district spine is `Depot Plaza -> Platform Nine -> Gate Twelve -> Service Tunnel`, with future world continuation at both ends.
+2. `DISTRICT_PLAZA <-> PLATFORM_NINE` is approved as a required future authored connector for the target map, but is not implemented yet.
+3. Depot Plaza is the public/free-roam orientation hub.
+4. Platform Nine is the internal depot hub.
+5. Gate Twelve is a threshold hub, not a general-purpose social hub.
+6. Workshop Row and Municipal Archive remain direct civic branches from Depot Plaza.
+7. Relay Workbench and Quiet Stair remain direct branches from Platform Nine.
+8. Trace Chamber is accessible from Gate Twelve and Service Tunnel in the target circulation model, matching current edges.
+9. Service Tunnel <-> Trace Chamber must be preserved as the lower-network cross-link.
+10. Quiet Stair and Service Tunnel represent different outward/deeper circulation roles.
+11. Route classes are: district spine, hub branches, lower cross-link, future expansion stubs.
+12. Travel pacing is classified as local / medium / deep until physical scale and exact travel costs are designed later.
+13. Permanent art never owns reachability or quest access.
+14. Phone presentation must preserve the spine and Tier 1 anchors even when secondary detail is reduced.
+
+---
+
+# 4. Planned authoring sequence
 
 The remaining master plan will be completed in this order:
 
 1. **Authority and design mandate** — COMPLETE.
 2. **Spatial hierarchy** — COMPLETE.
-3. **Circulation** — primary/secondary routes, player flow, landmark visibility.
+3. **Circulation** — COMPLETE.
 4. **Per-zone function** — what each named location contributes to play.
 5. **Geometry contract** — footprints, boundaries, anchors, reusable modules.
 6. **Material and visual language** — surfaces, architecture families, lighting.
@@ -644,7 +1067,7 @@ The remaining master plan will be completed in this order:
 
 # Continuity footnote / next-session handoff
 
-**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy.
+**Completed:** Step 1 — authority and design mandate; Step 2 — spatial hierarchy; Step 3 — circulation and player flow.
 
 **Key decisions preserved for future sessions:**
 - active repository is `jbob-coder/Text-rpg-game`;
@@ -657,6 +1080,6 @@ The remaining master plan will be completed in this order:
 - UI must not become the source of truth for gameplay state;
 - final map must be constructed as modular game content, piece by piece, not generated as one flattened image.
 
-**Next unfinished step:** Step 3 — define circulation: primary/secondary routes, player flow, transition pacing, route hierarchy, and landmark visibility. Step 3 must evaluate the proposed `DISTRICT_PLAZA <-> PLATFORM_NINE` connector without adding it to gameplay yet.
+**Next unfinished step:** Step 4 — define per-zone function: what each of the nine named locations contributes to gameplay, narrative, repeated use, player services/interactions, and why the player has a reason to return.
 
-**Do not skip directly to asset production before Steps 3–5 are documented.**
+**Do not skip directly to asset production before Steps 4–5 are documented.**
