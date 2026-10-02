@@ -1,5 +1,10 @@
 # V6 stabilization handoff — 2026-09-27
 
+## Current authority pointer
+
+This is a historical/implementation-status document for an earlier stabilization slice. For current project routing and documentation priorities, read `docs/PROJECT_PRIORITY_AND_CONTEXT_ROUTING.md` and `docs/MASTER_DOCUMENTATION_PROGRAM.md` first. The active project remains `jbob-coder/Text-rpg-game`; exact-head evidence in this file remains valid only for the commits/runs it names.
+
+
 ## CURRENT_OBJECTIVE
 
 Close the exact V6 execution gap and the four boundary defects identified in the
