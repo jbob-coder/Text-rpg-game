@@ -5,6 +5,8 @@ Repository: `jbob-coder/Text-rpg-game`
 Working branch: `docs/settlement-region-build-plan`  
 Started: 2026-10-01  
 Purpose: define, build, integrate, and verify the Gate Twelve region as a high-use playable area inside the larger game.
+Parent program: `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`
+Pixel composition companion: `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`
 
 ---
 
