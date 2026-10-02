@@ -139,7 +139,7 @@ Gate Twelve is the first region used to prove:
 Current region master:
 `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`
 
-Current state: Steps 1–7 complete; Step 8 onward remains.
+Current state: Steps 1–8 complete; Step 9 onward remains.
 
 ### Phase 4 — World-scale schema
 Before mass world creation, define:
@@ -329,7 +329,7 @@ Do not create art for a region merely because a blank area exists. First verify:
 
 ## 7. Current immediate order
 
-1. finish Gate Twelve Step 8–14;
+1. finish Gate Twelve Steps 9–14;
 2. deepen the existing-state rework audit;
 3. finalize world coordinate/place schemas;
 4. author progression/class/rank master;
