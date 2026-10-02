@@ -763,14 +763,17 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETED_AT: `2026-10-02 AST`
 
 ### TASK D-028 — Reconcile implementation PR #7–#31
-- STATUS: `PENDING`
+- STATUS: `DONE`
 - PRIORITY: `P0`
-- OUTPUT: branch/head/base/subsystem/files/CI/conflict/supersession/canonical-decision matrix.
+- OUTPUT: `docs/IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md`.
+- RESULT: PR #7–#31 exact heads/bases, ancestry versus the master documentation branch, workflow evidence, divergent survivor branches, conflict state and migration order recorded. Divergence does not equal rejection and ancestry does not equal promotion to `main`.
+- COMPLETED_AT: `2026-10-02 AST`.
 
 ### TASK D-029 — Exactize asset provenance and production stage
 - STATUS: `IN_PROGRESS`
 - PRIORITY: `P0`
 - OUTPUT: source master -> raster/export -> branch/head -> runtime consumer -> reuse signature -> QA -> canonical state for every current asset family.
+- LATEST_SLICE: `docs/assets/SOURCE_RASTER_RECONCILIATION_2026-10-02.md` records the inherited nine-scene PNG baseline and exact divergent Service Tunnel/Quiet Stair source+raster candidates. Full every-family provenance remains incomplete.
 
 ### TASK D-030 — Player-safe actor/panel projection contract
 - STATUS: `PENDING`
@@ -778,9 +781,10 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - OUTPUT: projected actor identity/presence/pose/equipment/portrait/interactions with hidden-state-safe Android consumers.
 
 ### TASK D-031 — Gate Twelve parent-world canon packet
-- STATUS: `PENDING`
+- STATUS: `PROPOSAL_READY / OWNER_CANON_DECISION_REQUIRED`
 - PRIORITY: `P0`
-- OUTPUT: minimum parent settlement/region/political ownership/coordinate/routes/terrain-climate context needed before mass world population.
+- OUTPUT: `docs/world/GATE_TWELVE_PARENT_WORLD_PROPOSAL.md`.
+- RESULT: a bounded original parent settlement/region/municipal/route/terrain-climate proposal exists without changing local IDs, local route data, W3 coordinates or higher sovereign canon. Working names remain non-canon until accepted/revised.
 
 ### TASK D-032 — Mechanics schema/API migration packets
 - STATUS: `PENDING`
