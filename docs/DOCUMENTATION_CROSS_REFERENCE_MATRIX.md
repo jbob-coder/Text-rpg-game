@@ -676,3 +676,32 @@ Owns:
 - [Raster delivery evidence](assets/RASTER_DELIVERY_EVIDENCE_2026-10-02.md): all 24 baseline PNG dimensions, hashes and catalog bindings.
 
 These supplement existing masters. They do not supersede approved identity references or imply new gameplay APIs.
+
+
+## 2026-10-02 final reconstruction integration update
+
+### `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md`
+Owns:
+- integration across documentation domains;
+- change authority vocabulary;
+- current/provisional/planned visual-stage summary;
+- Gate Twelve area production packet summary;
+- decided-versus-undecided world canon snapshot;
+- mechanics migration decision summary;
+- final APK demolition/rebuild dependency order;
+- P0 reconciliation packet.
+
+References/consumes:
+- master program;
+- live repository audit;
+- existing-state decision matrix;
+- pixel runtime/reuse/provenance documents;
+- Gate Twelve region/asset documents;
+- world child standards;
+- progression/social/items/combat/activity/migration masters;
+- Android UX/consumer/APK masters.
+
+Must not own:
+- exact low-level formulas already owned by a domain master;
+- implementation facts without exact source/HEAD evidence;
+- invented world canon.
