@@ -617,3 +617,51 @@ It does **not** own:
 - asset production status;
 - executed-test results;
 - target-unit interpretation.
+
+
+---
+
+## 2026-10-02 directive child-contract expansion
+
+### `docs/OWNER_DIRECTIVE_TRACEABILITY_MATRIX_2026-10-02.md`
+Owns:
+- requirement-by-requirement mapping of the expanded owner directive;
+- current document owner;
+- current state;
+- next action;
+- missing child-contract detection.
+
+### `docs/systems/PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md`
+Owns:
+- active/timed/scheduled/background activity classes;
+- time, interruption, concurrency, training, study, work, recovery, social, diagnostics and future gathering boundaries;
+- NPC/activity integration;
+- persistence and player-safe activity projection requirements.
+
+### `docs/world/WORLD_COORDINATE_AND_SCALE_STANDARD.md`
+Owns:
+- operational coordinate-space IDs;
+- units/origins/axes/bounds;
+- parent-child transforms;
+- logical versus presentation coordinates;
+- route anchors/distance types;
+- elevation/depth;
+- W0–W4 separation;
+- coordinate versioning/validation.
+
+### `docs/assets/ASSET_PROVENANCE_REGISTRY.md`
+Owns:
+- source/reference/raster/fallback provenance fields;
+- production stage;
+- branch/HEAD;
+- hashes/dimensions;
+- reuse compatibility;
+- supersession;
+- initial runtime-raster reconciliation queue.
+
+### `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`
+Owns:
+- current `GameSnapshot` and `GameEngine` Android-facing contract;
+- screen/component consumer ownership;
+- safe actor/activity/world/combat projection gaps;
+- final line-by-line Android consumer-audit target.
