@@ -562,3 +562,58 @@ Continue `feature/pixel-asset-wave-a` through draft PR #7 using small verified s
 - VERIFICATION: repository files were created on `docs/gate-twelve-map-pixel-asset-blueprint`; runtime animation remains unimplemented and unverified.
 - NEXT: inspect the exact animation rendering path and start the smallest reversible Service Tunnel ambient slice only after confirming no existing asset/overlay duplicates it.
 - COMPLETED_AT: —
+
+## 2026-10-02 DOCUMENTATION EXPANSION BATCH
+
+### TASK D-013 — Decompose expanded owner directive
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md`
+- RESULT: documentation/world/system/visual/APK work split into ordered migration-gated phases.
+
+### TASK D-014 — Create rework decision matrix
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md`
+- NOTE: high-level matrix complete; deep per-file audit remains TASK D-006.
+
+### TASK D-015 — Create pixel art production/reuse ledger
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/assets/PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md`
+- RESULT: actor/panel/overlay/reuse rules and Gate Twelve production packet needs recorded.
+
+### TASK D-016 — Create world-scale coordinate/schema blueprint
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/world/WORLD_SCALE_DOCUMENTATION_BLUEPRINT.md`
+- RESULT: schema-first world hierarchy recorded; mass world generation remains gated.
+
+### TASK D-017 — Create gameplay rebuild matrix
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md`
+- RESULT: current systems and target stats/skills/classes/ranks/social/combat/adversary systems classified.
+
+### TASK D-018 — Create final APK reconstruction matrix
+- STATUS: `DONE`
+- PRIORITY: `P0 / LATE-STAGE AUTHORITY`
+- OUTPUT: `docs/android/APK_FINAL_RECONSTRUCTION_MATRIX.md`
+- RESULT: final screen/component keep/rework/replace/remove sequence documented; execution remains blocked.
+
+### TASK D-019 — Track requested documentation scale
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- OUTPUT: `docs/DOCUMENTATION_PROGRESS_LEDGER.md`
+- RESULT: numeric targets preserved without inventing units; reproducible count audit still pending.
+
+### TASK D-020 — Finish Gate Twelve Step 8–14
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- CURRENT: Steps 1–7 complete; Application UX is next.
+
+### TASK D-021 — Deep source-file existing-state audit
+- STATUS: `PENDING`
+- PRIORITY: `P0`
+- OUTPUT: exact module/component/content/asset/save/test inventory with disposition and branch/HEAD evidence.
+- RELATED: TASK D-006.
