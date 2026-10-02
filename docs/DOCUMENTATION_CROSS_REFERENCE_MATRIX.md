@@ -726,3 +726,10 @@ These records narrow D-028/D-029/D-031. They do not promote divergent implementa
 - [Gate Twelve external connection register](world/GATE_TWELVE_EXTERNAL_CONNECTIONS_AND_EXPANSION_REGISTER.md): outward-edge unknown/proposal register compatible with the parent-world proposal.
 
 The moving-base `docs/program/*` hierarchy is not activated by these migrations.
+
+
+## D-030 player-safe actor projection
+
+- [Player-safe room actor & context panel projection contract](android/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md): exact current Python/Kotlin/Compose gap, versioned room payload, hidden-state redaction, opening actor equivalence, support-actor identity rule, semantic placement migration, contextual panel lifecycle and verification gates.
+
+This document is an implementation target, not evidence that room-actor projection already exists at runtime.
