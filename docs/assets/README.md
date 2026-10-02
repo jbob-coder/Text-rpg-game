@@ -2,6 +2,11 @@
 
 Read in this order before generating or integrating visual assets:
 
+0. [../MASTER_GAME_DEVELOPMENT_PROGRAM.md](../MASTER_GAME_DEVELOPMENT_PROGRAM.md)
+   - repository-wide priority, permissions, system volumes and execution gates.
+0. [PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md](PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md)
+   - runtime composition of environments, props, overlays, room actors, player, equipment, FX and character panels; includes reuse compatibility and migration rules.
+
 1. [PIXEL_ASSET_MASTER_PLAN.md](PIXEL_ASSET_MASTER_PLAN.md)
    - native grids, global pixel rules, character rig, scene/map/item standards, repository paths, lifecycle and quality gates.
 2. [CHARACTER_PIXEL_BLUEPRINTS.md](CHARACTER_PIXEL_BLUEPRINTS.md)
