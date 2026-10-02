@@ -1,6 +1,6 @@
 # BATCH_0001 — Sub-batch 01 Manifest
 
-Status: **PLANNED / READY FOR CONTROLLED AUTHORING**
+Status: **IN PROGRESS / CONTROLLED AUTHORING**
 Sub-batch: `BATCH_0001-SB01`
 Range: `DOC_0000001–DOC_0000100`
 Title: **Program Authority, Production Governance, and First Cross-Domain Handoffs**
@@ -22,24 +22,24 @@ Prove the numbered documentation system end-to-end before scaling.
 - `docs/production/EXISTING_DOCUMENT_MAPPING_REGISTER.md`
 
 ## Checkpoint
-- last_verified_id: NONE
-- next_id: DOC_0000001
-- completed: 0/100
+- last_verified_id: DOC_0000010
+- next_id: DOC_0000011
+- completed: 10/100
 - blocked: 0/100
 
 ## Planned files
 | ID | Filename | Unique purpose | Status |
 |---|---|---|---|
-| DOC_0000001 | DOC_0000001_PROGRAM_AUTHORITY_MAP.md | Map the active authority chain from owner directive to implementation evidence. | PLANNED |
-| DOC_0000002 | DOC_0000002_PRIORITY_REPOSITORY_CONTRACT.md | Define Text-rpg-game as priority repository and how other projects may be referenced. | PLANNED |
-| DOC_0000003 | DOC_0000003_DOCUMENTATION_FIRST_EXECUTION_RULE.md | Formalize documentation-before-large-implementation sequencing. | PLANNED |
-| DOC_0000004 | DOC_0000004_TWO_MILLION_FILE_MANDATE.md | Record the literal 2,000,000 separate-file target and boundaries. | PLANNED |
-| DOC_0000005 | DOC_0000005_ANTI_FILLER_ENFORCEMENT_RULE.md | Define rejection criteria for meaningless file creation. | PLANNED |
-| DOC_0000006 | DOC_0000006_GLOBAL_ID_IMMUTABILITY_RULE.md | Define immutable DOC IDs and retirement behavior. | PLANNED |
-| DOC_0000007 | DOC_0000007_BATCH_RANGE_CALCULATION_RULE.md | Define exact batch/sub-batch range arithmetic. | PLANNED |
-| DOC_0000008 | DOC_0000008_CORPUS_PATH_NAMING_STANDARD.md | Define numbered file paths and naming grammar. | PLANNED |
-| DOC_0000009 | DOC_0000009_EXISTING_DOCUMENT_REFERENCE_RULE.md | Define EXISTING:: references and non-duplication behavior. | PLANNED |
-| DOC_0000010 | DOC_0000010_DOCUMENT_COLLISION_PREVENTION.md | Define ID/path collision checks before creation. | PLANNED |
+| DOC_0000001 | DOC_0000001_PROGRAM_AUTHORITY_MAP.md | Map the active authority chain from owner directive to implementation evidence. | REVIEWABLE |
+| DOC_0000002 | DOC_0000002_PRIORITY_REPOSITORY_CONTRACT.md | Define Text-rpg-game as priority repository and how other projects may be referenced. | REVIEWABLE |
+| DOC_0000003 | DOC_0000003_DOCUMENTATION_FIRST_EXECUTION_RULE.md | Formalize documentation-before-large-implementation sequencing. | REVIEWABLE |
+| DOC_0000004 | DOC_0000004_TWO_MILLION_FILE_MANDATE.md | Record the literal 2,000,000 separate-file target and boundaries. | REVIEWABLE |
+| DOC_0000005 | DOC_0000005_ANTI_FILLER_ENFORCEMENT_RULE.md | Define rejection criteria for meaningless file creation. | REVIEWABLE |
+| DOC_0000006 | DOC_0000006_GLOBAL_ID_IMMUTABILITY_RULE.md | Define immutable DOC IDs and retirement behavior. | REVIEWABLE |
+| DOC_0000007 | DOC_0000007_BATCH_RANGE_CALCULATION_RULE.md | Define exact batch/sub-batch range arithmetic. | REVIEWABLE |
+| DOC_0000008 | DOC_0000008_CORPUS_PATH_NAMING_STANDARD.md | Define numbered file paths and naming grammar. | REVIEWABLE |
+| DOC_0000009 | DOC_0000009_EXISTING_DOCUMENT_REFERENCE_RULE.md | Define EXISTING:: references and non-duplication behavior. | REVIEWABLE |
+| DOC_0000010 | DOC_0000010_DOCUMENT_COLLISION_PREVENTION.md | Define ID/path collision checks before creation. | REVIEWABLE |
 | DOC_0000011 | DOC_0000011_DOCUMENT_STATUS_LIFECYCLE.md | Define document work-state transitions. | PLANNED |
 | DOC_0000012 | DOC_0000012_EVIDENCE_CLASSIFICATION_STANDARD.md | Operationalize confirmed/proposed/unknown/superseded evidence classes. | PLANNED |
 | DOC_0000013 | DOC_0000013_DOCUMENT_METADATA_MINIMUM.md | Define minimum document metadata. | PLANNED |
