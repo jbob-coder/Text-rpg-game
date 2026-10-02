@@ -210,3 +210,18 @@ These additions materially advance:
 - per-area pixel-art/actor/panel/reuse composition.
 
 No numeric target is declared complete. Reproducible inventory remains the next P0 measurement task.
+
+
+## 2026-10-02 world-standard completion batch
+
+Added:
+- ecosystem/resources;
+- beast zones;
+- population/citizen hierarchy;
+- world balance/level bands;
+- loot provenance;
+- world NPC population.
+
+The world schema layer now has materialized child standards for geography, political entities, settlements, routes, ecosystems/resources, beast zones, population/hierarchy, balance, loot provenance and NPC distribution.
+
+This does **not** mean the world itself has been populated. Large-scale canon records for macroregions, kingdoms/states, cities/villages, ecosystems, beasts and NPCs remain future authoring work.
