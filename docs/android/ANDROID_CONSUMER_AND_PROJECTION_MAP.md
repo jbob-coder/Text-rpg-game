@@ -512,3 +512,18 @@ Still required:
 - final navigation graph.
 
 This document is the first-pass contract, not a completed line-by-line Android audit.
+
+
+## D-030 exact projection child — 2026-10-02
+
+[Player-safe room actor & context panel projection contract](PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md) now owns the implementation-target schema for the missing actor-presence projection.
+
+Key decisions:
+- add a top-level versioned `room` projection rather than hiding actor presence inside visual-only state;
+- keep raw `state.npcs`, personality, knowledge, memories, goals, story state and raw relationships out of Android;
+- preserve current four opening actor compositions through semantic placement keys before removing `sceneId + locationId` inference;
+- keep the wounded courier as a support presentation unless game design deliberately promotes it to durable NPC state;
+- keep panel focus local/transient and out of saves;
+- keep existing scene choices authoritative until a separate actor-action mutation API exists.
+
+This closes the documentation requirement for D-030. Runtime migration remains separate and must pass the Python/Kotlin/Compose equivalence and redaction gates in that contract.
