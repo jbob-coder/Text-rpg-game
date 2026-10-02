@@ -1,5 +1,10 @@
 # Gate Twelve Region — Master Map & Application Plan
 
+## Global program pointer
+
+This Gate Twelve plan is a region-level child of `docs/MASTER_DOCUMENTATION_PROGRAM.md`. Project priority, cross-project routing, pixel-art reuse rules, mechanics rebuild planning, world expansion, and final APK reconstruction are governed by the global program documents. Gate Twelve Steps 1–4 remain valid and continue under that authority.
+
+
 Status: **ACTIVE / STEPWISE AUTHORING**  
 Repository: `jbob-coder/Text-rpg-game`  
 Working branch: `docs/settlement-region-build-plan`  
