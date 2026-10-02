@@ -6,6 +6,8 @@
 
 Repository-wide game development is now documentation-first under [`docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`](docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md). The current objective is to finish the authority/world/visual/system/application contracts before broad implementation expansion or a final APK rebuild. The existing V6 stabilization material remains valid historical engine evidence, but it is not the top-level product objective.
 
+Gate Twelve is the first proof region. Its region plan Steps 1–14 are now complete on the program branch; the next P0 work is exact live implementation/asset reconciliation plus reproducible documentation/world/asset inventory before broad runtime migration.
+
 Start here for current work:
 
 1. [Master Development & Documentation Program](docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md)
