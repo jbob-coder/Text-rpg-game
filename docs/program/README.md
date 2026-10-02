@@ -38,7 +38,10 @@ When a newer explicit decision supersedes an older note, preserve both and mark 
    - [08 Documentation / Guide Scale](08_DOCUMENTATION_GUIDE_SCALE_PROGRAM.md)
 5. [10 Execution Coordination Graph](10_EXECUTION_COORDINATION_GRAPH.md)
 6. [11 Contextual Visual Composition](11_CONTEXTUAL_VISUAL_COMPOSITION_CONTRACT.md)
-7. Existing specialized documents referenced by the chosen domain.
+7. [12 Documentation Expectation & Acceptance](12_DOCUMENT_EXPECTATION_AND_ACCEPTANCE_STANDARD.md)
+8. [13 Beast Entity / Ecosystem / Scene Presence](13_BEAST_ENTITY_ECOSYSTEM_AND_SCENE_PRESENCE_STANDARD.md)
+9. [14 Documentation Coverage Matrix](14_DOCUMENTATION_COVERAGE_AND_EXPECTATION_MATRIX.md)
+10. Existing specialized documents referenced by the chosen domain.
 
 ## Program rule
 
@@ -69,3 +72,12 @@ Do not import:
 ## Current pilot
 
 Gate Twelve District remains the first detailed spatial/application pilot. It validates the documentation process before the same contracts expand to the larger world.
+
+
+## Documentation quality gate
+
+New and materially revised specifications must follow `12_DOCUMENT_EXPECTATION_AND_ACCEPTANCE_STANDARD.md`.
+
+After meaningful documentation batches, update `14_DOCUMENTATION_COVERAGE_AND_EXPECTATION_MATRIX.md` and the decision-gap register.
+
+The program must distinguish documentation completeness from implementation completeness.
