@@ -1129,3 +1129,21 @@ Current priority remains documentation. Gate Twelve Steps 1–14 are now complet
 - [Raster delivery evidence](assets/RASTER_DELIVERY_EVIDENCE_2026-10-02.md): all 24 baseline PNG dimensions, hashes and catalog bindings.
 
 These supplement existing masters. They do not supersede approved identity references or imply new gameplay APIs.
+
+
+## 2026-10-02 final reconstruction integration update
+
+The program now has an integration-level execution authority at `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md`.
+
+It is subordinate to this master program and above domain-specific implementation planning. It consolidates:
+- exact change/preserve/rework/replace/remove vocabulary;
+- visual asset creation/stage/reuse decisions;
+- room actor + portrait/panel projection direction;
+- Gate Twelve per-area production gaps;
+- world facts already decided versus canon still intentionally undecided;
+- mechanics KEEP/EXTEND/REWORK/REPLACE/NEW decisions;
+- tactical-combat and persistent-adversary originality boundaries;
+- final APK deconstruction/rebuild gates;
+- immediate P0 reconciliation packets.
+
+New work must use the blueprint to choose the correct domain owner rather than creating another competing master document.
