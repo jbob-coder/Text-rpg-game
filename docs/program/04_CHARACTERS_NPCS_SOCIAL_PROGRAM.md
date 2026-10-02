@@ -102,3 +102,18 @@ Do not claim these are implemented until confirmed by code/tests.
 - RELATIONSHIP_BALANCE
 - KNOWLEDGE_PROPAGATION_V2
 - CHARACTER_PANEL_BINDINGS
+
+
+## Mixed character / beast scenes
+
+This domain owns character/NPC social state, not beast ecology.
+
+However, scene-presence composition must support mixed scenes containing:
+- player;
+- NPCs/characters;
+- party members;
+- bestias.
+
+Beast identity/ecology/zone ownership lives in `13_BEAST_ENTITY_ECOSYSTEM_AND_SCENE_PRESENCE_STANDARD.md` and the economy/ecosystem domain.
+
+The scene-presence projection must therefore be able to represent characters and beasts without collapsing both into one social model.
