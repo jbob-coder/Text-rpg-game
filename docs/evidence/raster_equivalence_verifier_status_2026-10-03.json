@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "repository": "jbob-coder/Text-rpg-game",
+  "branch": "docs/master-game-development-program",
+  "recorded_at": "2026-10-03 AST",
+  "branch_head_at_recording": "5eaa9875910923e23d8dbb8399156d3922a8df95",
+  "status": "IMPLEMENTED_EXECUTION_PENDING",
+  "tool": {
+    "path": "tools/verify_pixel_raster_equivalence.py",
+    "git_blob": "1c7f153ce0f676b15152f856b2ee0407162ad6ff",
+    "purpose": [
+      "parse current raster-bound Kotlin PixelSprite masters",
+      "decode current PNGs using Python standard library",
+      "compare native RGBA pixels",
+      "verify recorded SHA-256 and Git blob identity",
+      "verify current source blobs against raster lineage evidence",
+      "reconstruct deterministic source-native PNGs into a separate output tree"
+    ],
+    "safety": [
+      "standard library only",
+      "no arbitrary Kotlin parser claim",
+      "export requires explicit separate output directory",
+      "refuses repository-root export",
+      "historical exporter identity is not inferred from this new tool"
+    ]
+  },
+  "test": {
+    "path": "tests/test_pixel_raster_equivalence_tool.py",
+    "git_blob": "9e788cc22d7ff03fb4aac408ba913bfe4e908a79",
+    "assertions": [
+      "24 current raster bindings are present",
+      "verification status is PASS",
+      "24 assets match source pixels",
+      "zero pixel mismatches",
+      "all identity/lineage checks pass",
+      "independent exports are byte-deterministic",
+      "exported PNGs decode to expected dimensions",
+      "repository-root export raises ValueError"
+    ]
+  },
+  "execution": {
+    "observed_in_this_session": false,
+    "github_pull_request_workflow_run": null,
+    "codex_environment_available": false,
+    "result": null,
+    "rule": "Do not promote 24/24 pixel equivalence until this tool or test executes and the output is inspected."
+  },
+  "future_evidence_fields": [
+    "execution_commit_sha",
+    "workflow_or_environment",
+    "python_version",
+    "tool_git_blob",
+    "test_git_blob",
+    "asset_count",
+    "matched_assets",
+    "total_pixel_mismatches",
+    "report_path_or_artifact",
+    "result"
+  ]
+}
