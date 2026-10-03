@@ -33,8 +33,12 @@ SCENE_SOURCE = Path(
 THEME_SOURCE = Path(
     "android/app/src/main/java/com/thegame/rpg/ui/PixelTheme.kt"
 )
+RASTER_CATALOG_SOURCE = Path(
+    "android/app/src/main/java/com/thegame/rpg/ui/PixelRasterCatalog.kt"
+)
 BINDING_EVIDENCE = Path("docs/evidence/raster_bindings_2026-10-02.json")
 LINEAGE_EVIDENCE = Path("docs/evidence/raster_export_lineage_2026-10-03.json")
+EXPECTED_ASSET_COUNT = 24
 
 
 @dataclass(frozen=True)
@@ -453,6 +457,81 @@ def encode_png_rgba(
     )
 
 
+
+def parse_raster_catalog_bindings(source_text: str) -> dict[str, str]:
+    mappings: dict[str, str] = {}
+    for asset_symbol, resource_name in re.findall(
+        r"\b(Pixel(?:Asset|Scene)Catalog\.[A-Za-z0-9_]+)\s*"
+        r"->\s*R\.drawable\.([A-Za-z0-9_]+)",
+        source_text,
+    ):
+        previous = mappings.get(asset_symbol)
+        if previous is not None and previous != resource_name:
+            raise ValueError(
+                f"{asset_symbol} maps to conflicting raster resources: "
+                f"{previous} vs {resource_name}"
+            )
+        mappings[asset_symbol] = resource_name
+
+    if not mappings:
+        raise ValueError("No PixelRasterCatalog asset bindings found")
+    return mappings
+
+
+def _validate_binding_assets(bindings: dict) -> list[dict]:
+    assets = bindings.get("assets")
+    if not isinstance(assets, list):
+        raise ValueError("Raster binding evidence must contain an assets list")
+    if len(assets) != EXPECTED_ASSET_COUNT:
+        raise ValueError(
+            f"Expected {EXPECTED_ASSET_COUNT} raster bindings, found {len(assets)}"
+        )
+
+    seen_paths: set[str] = set()
+    seen_symbols: set[str] = set()
+    seen_resources: set[str] = set()
+
+    for index, binding in enumerate(assets):
+        if not isinstance(binding, dict):
+            raise ValueError(f"Raster binding {index} is not an object")
+
+        raw_path = binding.get("path")
+        asset_symbol = binding.get("asset_symbol")
+        resource_name = binding.get("resource_name")
+
+        if not isinstance(raw_path, str) or not raw_path.strip():
+            raise ValueError(f"Raster binding {index} has an invalid path")
+        normalized_path = raw_path.replace("\\", "/")
+        path_parts = normalized_path.split("/")
+        if (
+            Path(raw_path).is_absolute()
+            or normalized_path.startswith("/")
+            or re.match(r"^[A-Za-z]:", normalized_path)
+            or ".." in path_parts
+        ):
+            raise ValueError(
+                f"Raster binding path must stay repository-relative: {raw_path!r}"
+            )
+
+        if not isinstance(asset_symbol, str) or not asset_symbol:
+            raise ValueError(f"{raw_path}: invalid asset_symbol")
+        if not isinstance(resource_name, str) or not re.fullmatch(
+            r"[A-Za-z0-9_]+", resource_name
+        ):
+            raise ValueError(f"{raw_path}: invalid resource_name")
+
+        for label, value, seen in (
+            ("path", normalized_path, seen_paths),
+            ("asset_symbol", asset_symbol, seen_symbols),
+            ("resource_name", resource_name, seen_resources),
+        ):
+            if value in seen:
+                raise ValueError(f"Duplicate raster binding {label}: {value}")
+            seen.add(value)
+
+    return assets
+
+
 def _load_source_masters(
     root: Path,
 ) -> tuple[dict[Path, dict[str, PixelSpriteMaster]], dict]:
@@ -469,6 +548,7 @@ def _load_source_masters(
         ),
     }
     bindings = json.loads((root / BINDING_EVIDENCE).read_text(encoding="utf-8"))
+    _validate_binding_assets(bindings)
     return source_masters, bindings
 
 
@@ -544,13 +624,26 @@ def verify_repository(root: Path) -> dict:
     root = root.resolve()
 
     source_masters, bindings = _load_source_masters(root)
+    binding_assets = _validate_binding_assets(bindings)
+
     lineage = json.loads((root / LINEAGE_EVIDENCE).read_text(encoding="utf-8"))
-    lineage_by_path = {entry["path"]: entry for entry in lineage["assets"]}
+    lineage_assets = lineage.get("assets")
+    if not isinstance(lineage_assets, list):
+        raise ValueError("Raster lineage evidence must contain an assets list")
+    lineage_paths = [entry["path"] for entry in lineage_assets]
+    lineage_path_set = set(lineage_paths)
+    binding_path_set = {entry["path"].replace("\\", "/") for entry in binding_assets}
+    lineage_by_path = {entry["path"]: entry for entry in lineage_assets}
+
+    runtime_bindings = parse_raster_catalog_bindings(
+        (root / RASTER_CATALOG_SOURCE).read_text(encoding="utf-8")
+    )
+    binding_symbol_set = {entry["asset_symbol"] for entry in binding_assets}
 
     results: list[dict] = []
     total_pixel_mismatches = 0
 
-    for binding in bindings["assets"]:
+    for binding in binding_assets:
         path = Path(binding["path"])
         asset_symbol = binding["asset_symbol"]
         source_path = _asset_source_path(asset_symbol)
@@ -600,6 +693,24 @@ def verify_repository(root: Path) -> dict:
         source_bytes = (root / source_path).read_bytes()
         source_blob = git_blob_sha1(source_bytes)
 
+        binding_dimensions_match = (
+            binding.get("width") == master.width
+            and binding.get("height") == master.height
+        )
+        runtime_binding_matches = (
+            runtime_bindings.get(asset_symbol) == binding.get("resource_name")
+        )
+        lineage_metadata_matches = (
+            lineage_entry is not None
+            and lineage_entry.get("asset_symbol") == asset_symbol
+            and lineage_entry.get("resource_name") == binding.get("resource_name")
+            and lineage_entry.get("width") == binding.get("width")
+            and lineage_entry.get("height") == binding.get("height")
+            and lineage_entry.get("sha256") == binding.get("sha256")
+            and lineage_entry.get("current_git_blob") == binding.get("git_blob")
+            and lineage_entry.get("source_file") == source_path.as_posix()
+        )
+
         results.append(
             {
                 "path": path.as_posix(),
@@ -609,6 +720,9 @@ def verify_repository(root: Path) -> dict:
                 "source_blob": source_blob,
                 "dimensions": [png_width, png_height],
                 "dimension_match": dimension_match,
+                "binding_dimensions_match": binding_dimensions_match,
+                "runtime_binding_matches": runtime_binding_matches,
+                "lineage_metadata_matches": lineage_metadata_matches,
                 "sha256": sha256,
                 "sha256_matches_evidence": sha256 == binding["sha256"],
                 "git_blob": blob_sha,
@@ -623,9 +737,20 @@ def verify_repository(root: Path) -> dict:
             }
         )
 
-    expected_count = 24
     checks = {
-        "asset_count_is_24": len(results) == expected_count,
+        "asset_count_is_24": len(results) == EXPECTED_ASSET_COUNT,
+        "lineage_paths_are_unique": len(lineage_paths) == len(lineage_path_set),
+        "binding_lineage_path_sets_match": binding_path_set == lineage_path_set,
+        "runtime_binding_set_matches": set(runtime_bindings) == binding_symbol_set,
+        "all_runtime_bindings_match": all(
+            item["runtime_binding_matches"] for item in results
+        ),
+        "all_binding_dimensions_match": all(
+            item["binding_dimensions_match"] for item in results
+        ),
+        "all_lineage_metadata_match": all(
+            item["lineage_metadata_matches"] for item in results
+        ),
         "all_dimensions_match": all(item["dimension_match"] for item in results),
         "all_sha256_match_evidence": all(
             item["sha256_matches_evidence"] for item in results
@@ -652,7 +777,9 @@ def verify_repository(root: Path) -> dict:
         "notes": [
             "Transparent PNG pixels are canonicalized to RGBA 0,0,0,0 before comparison.",
             "The parser supports only the literal PixelSprite/Color forms used by the audited catalogs.",
-            "This verifies current raster/source equivalence; it is not a general Kotlin parser or authoring exporter.",
+            "Binding paths are required to remain unique and repository-relative before export.",
+            "PixelRasterCatalog mappings and binding/lineage metadata are checked for drift.",
+            "This verifies current raster/source equivalence; it is not a general Kotlin parser or historical authoring exporter.",
         ],
     }
 
@@ -661,6 +788,9 @@ def _summarize_failures(report: dict) -> Iterable[str]:
     for asset in report["assets"]:
         if (
             asset["pixel_match"]
+            and asset["binding_dimensions_match"]
+            and asset["runtime_binding_matches"]
+            and asset["lineage_metadata_matches"]
             and asset["sha256_matches_evidence"]
             and asset["git_blob_matches_evidence"]
             and asset["lineage_source_blob_matches"]
@@ -669,6 +799,9 @@ def _summarize_failures(report: dict) -> Iterable[str]:
         yield (
             f"{asset['path']}: pixel_match={asset['pixel_match']} "
             f"pixel_mismatches={asset['pixel_mismatches']} "
+            f"binding_dimensions={asset['binding_dimensions_match']} "
+            f"runtime_binding={asset['runtime_binding_matches']} "
+            f"lineage_metadata={asset['lineage_metadata_matches']} "
             f"sha256_evidence={asset['sha256_matches_evidence']} "
             f"git_blob_evidence={asset['git_blob_matches_evidence']} "
             f"source_blob_lineage={asset['lineage_source_blob_matches']}"
