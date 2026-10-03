@@ -322,3 +322,133 @@ Named characters must not inherit another NPC's identity art.
 ## Originality review qualification — 2026-10-02
 
 Original names, art and UI address expression reuse; they do not alone establish patent clearance. US10926179B2 and its linked family are a relevant design-review source: https://patents.google.com/patent/US10926179B2/en . Proposed combined promotion/encounter/traits/hierarchy behavior remains subject to claim-aware review; no legal clearance is asserted. Continue original social-memory/goals design and document alternatives; do not implement a branded system by renaming it.
+
+
+## 22. Selective persistent-adversary detail extraction — 2026-10-03
+
+Status: **PROPOSED DESIGN / BOUNDED TARGET DETAIL / IMPLEMENTATION NOT CLAIMED**
+
+Source provenance:
+- `docs/settlement-region-build-plan@65d2db8538c1b8302c314f2fbe9eb7a1b585b51d`;
+- `docs/systems/PERSISTENT_ADVERSARY_SYSTEM.md`;
+- source blob `d32d31a5f0f8243ae4d400270f7ec807fe6aecdf`;
+- selectively extracted under D-044.
+
+This section supplements the current Persistent Adversary Network design. It does not choose exact formulas, active-rival caps, recurrence timers or death policy.
+
+### 22.1 Eligibility
+
+Not every hostile entity becomes persistent.
+
+A future eligibility policy may admit, when its owning domain supports it:
+
+- hostile NPC;
+- faction operative;
+- criminal/bandit-type actor if such a category exists in canon;
+- rival hunter/competitor;
+- persistent beast;
+- another explicitly authored recurring adversary.
+
+Eligibility must be deliberate and inspectable.
+
+Do not persist every disposable encounter entity merely to make the system visible.
+
+### 22.2 Bounded adaptation
+
+After authoritative encounter memory exists, an adversary adaptation may affect:
+
+- tactics;
+- equipment where the entity can own equipment;
+- resistance/behavior within authored capability;
+- route choice;
+- allies/pack behavior;
+- territory;
+- retreat/engagement preference;
+- dialogue/presentation for characters where applicable.
+
+Hard rule:
+
+**adaptation must remain inside authored bounds and must not become arbitrary AI stat inflation.**
+
+The source event/memory that justifies an adaptation should be traceable.
+
+### 22.3 Beast adversaries
+
+A persistent beast may participate without being forced into a human social/rank model.
+
+Potential persistent beast state may include:
+
+- injury;
+- territory;
+- pack status;
+- fear/aggression toward the player;
+- learned response;
+- migration change;
+- response to hunting pressure.
+
+Exact beast intelligence/learning limits come from the beast species/world authority.
+
+### 22.4 Recurrence selection
+
+A recurring adversary should reappear only when the world state supports it.
+
+Candidate selection inputs include:
+
+- current location/territory;
+- world state;
+- availability/lifecycle state;
+- player/adversary encounter history;
+- faction/pack state;
+- authored cooldown/timing rule if adopted;
+- quest/event conditions.
+
+Do not inject a rival into unrelated scenes merely to keep the feature visible.
+
+Recurrence is subordinate to world/quest authority.
+
+### 22.5 Lifecycle states
+
+The system needs an explicit authoritative lifecycle rather than an implicit “exists/does not exist” flag.
+
+Candidate vocabulary:
+
+- `active`;
+- `injured`;
+- `recovering`;
+- `displaced`;
+- `captured`;
+- `retired`;
+- `dead`;
+- `unknown`.
+
+This vocabulary is **PROPOSED DESIGN** until the final schema is adopted.
+
+Permanent removal/death must remain authoritative and persistent.
+
+Replacement/succession may inherit a role/responsibility, but must not silently inherit private memories.
+
+### 22.6 Determinism and inspectability
+
+Selection/adaptation may use seeded deterministic variation if the final implementation needs variety.
+
+Regardless of randomization strategy:
+
+- state transitions must be inspectable;
+- the triggering input/event must be testable;
+- save/load must reproduce the authoritative state;
+- retries/reloads must not generate arbitrary contradictory outcomes merely because UI recomposed.
+
+### 22.7 Minimum implementation acceptance scenario
+
+A bounded first implementation is not accepted until one real eligible adversary can:
+
+1. enter persistent state through an authored rule;
+2. record one significant encounter;
+3. change in a traceable bounded way because of that encounter;
+4. become eligible to reappear only under valid world conditions;
+5. expose only player-safe learned/visible information;
+6. preserve authoritative rival state through save/load;
+7. retire/die/be removed without corrupting references;
+8. leave unrelated scenes unaffected.
+
+This is an acceptance target, not evidence that the system exists today.
