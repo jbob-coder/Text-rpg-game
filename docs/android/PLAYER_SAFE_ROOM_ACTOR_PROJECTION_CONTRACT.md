@@ -654,3 +654,71 @@ Runtime implementation is complete only when:
 - exact-head Android workflow and screenshot evidence pass.
 
 Physical Galaxy A03 acceptance remains a separate later gate.
+
+
+## 24. Held-prop presentation boundary
+
+This section is a compatible clarification of the existing target contract. It does not claim implementation.
+
+### Verified current evidence
+
+`content/vertical_slice_01.json` currently includes:
+
+- a Tamsin visual-identity pose labelled `holding diagnostic reader`;
+- later player-facing narrative that explicitly describes Tamsin's diagnostic reader.
+
+Divergent PR #9 contains technical source masters:
+
+- `PROP_DIAGNOSTIC_READER_ICON_MASTER` — 32x32;
+- `PROP_DIAGNOSTIC_READER_HELD_FRONT_MASTER` — 32x48.
+
+Its manifest explicitly states that:
+
+- the icon is not currently exposed as inventory state;
+- the held master has no runtime character binding;
+- prop art cannot infer possession, pose, relay interaction, quest progress or story state;
+- integration was deferred until character anchors or an explicit player-safe held-prop presentation state exists.
+
+### Target ownership
+
+The existing D-030 model already provides the required authority boundary:
+
+- engine/content decides the safe visible pose/presentation variant;
+- asset catalogs own held-object layers;
+- Android resolves approved art from the safe actor presentation record.
+
+Therefore a diagnostic reader shown in Tamsin's hand must be driven by an explicit player-safe actor presentation key, not by:
+
+- narrative-text matching;
+- scene ID alone;
+- location ID alone;
+- raw NPC equipment/private state;
+- hidden quest flags;
+- Android-local possession inference.
+
+### Target resolution path
+
+Conceptually:
+
+`GameSnapshot.room.actors[].poseKey`
+-> Tamsin visual-family resolver
+-> approved pose/layer mapping
+-> `PROP_DIAGNOSTIC_READER_HELD_FRONT_MASTER`
+-> scene composition
+
+The exact stable machine key for the authored pose is not locked by this clarification. If `holding diagnostic reader` is normalized to a machine key such as snake_case, the mapping must be explicit and migration-tested.
+
+The 32x32 diagnostic-reader icon is not authorized as a player inventory icon merely because it exists.
+
+### Implementation gate
+
+Do not integrate PR #9's held-prop source until:
+
+1. D-030 room actor projection is implemented or an equivalent approved safe presentation projection exists;
+2. Tamsin's selected sprite/turnaround has a verified hand/wrist anchor;
+3. the pose-to-held-layer mapping is explicit;
+4. hidden/private NPC state is absent from the payload;
+5. Compose consumes rather than owns the presentation choice;
+6. tests cover unknown pose fallback and no-prose/no-hidden-state inference.
+
+Until then the held-prop family remains `DEFERRED_INTEGRATION`.
