@@ -251,3 +251,40 @@ That child locks for Gate Twelve:
 - presentation fallbacks that never change gameplay truth.
 
 Global navigation count, world-map zoom, orientation support and low-memory cache implementation remain application-wide decisions.
+
+
+## 24. Ambient animation accessibility child contract
+
+The first exact reduced-motion/ambient-animation child is:
+
+- `docs/assets/SERVICE_TUNNEL_AMBIENT_ANIMATION_MIGRATION_CONTRACT_2026-10-03.md`
+
+### Current implementation reality
+
+At the audited source state:
+
+- reduced motion is required by this UX master plan;
+- current `MainActivity` owns narration/text presentation settings using Android-side `rememberSaveable`;
+- current `GameViewModel` and gameplay `GameEngine` do not own those presentation preferences;
+- no explicit reduced-motion setting/control was found in the inspected current runtime source;
+- Service Tunnel ambient animation exists only as divergent PR #31 branch evidence.
+
+### Ownership
+
+Reduced motion belongs to application presentation/accessibility.
+
+It does not belong in Python gameplay authority merely because the animation is shown during gameplay.
+
+Ambient motion must remain optional presentation over the same authoritative state.
+
+### Migration rule
+
+Do not promote PR #31 ambient animation until:
+
+1. the Service Tunnel static-art survivor is approved;
+2. an explicit reduced-motion path reaches the scene renderer;
+3. disabling motion preserves all player-visible/gameplay information;
+4. scene lifecycle/off-screen behavior is verified;
+5. destination-head tests/render evidence pass.
+
+Long-term durable application-preference storage remains separate from gameplay save data.
