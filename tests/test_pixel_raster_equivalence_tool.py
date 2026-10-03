@@ -72,6 +72,15 @@ class PixelRasterEquivalenceToolTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             verifier._validate_binding_assets(evidence)
 
+    def test_binding_validator_rejects_absolute_path(self) -> None:
+        evidence = json.loads(
+            (ROOT / verifier.BINDING_EVIDENCE).read_text(encoding="utf-8")
+        )
+        evidence["assets"][0]["path"] = "/tmp/escape.png"
+
+        with self.assertRaises(ValueError):
+            verifier._validate_binding_assets(evidence)
+
     def test_binding_validator_rejects_duplicate_path(self) -> None:
         evidence = json.loads(
             (ROOT / verifier.BINDING_EVIDENCE).read_text(encoding="utf-8")
