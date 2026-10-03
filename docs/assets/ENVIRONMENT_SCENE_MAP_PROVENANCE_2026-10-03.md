@@ -170,11 +170,23 @@ Stage:
 
 `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED`
 
+Exact PR #8 reconciliation:
+
+- PR #8 catalog blob: `d4cf93e1faa91e535a17aba4bf448e6555bce6b7`;
+- current catalog blob: `440b7d41141d70700d6eba7c84303cbf109c10f2`;
+- a line-level comparison found the four module/atlas visual definitions preserved without PR #8-only geometry loss;
+- the current catalog adds only the later player-safe `arrivalPreview(locationId)` mapping block for `DISTRICT_PLAZA`, `DISTRICT_ARCHIVE`, and `SERVICE_TUNNEL`;
+- `RUNTIME_EXPANSION_ASSET_WAVE_2026-09-30.json` explicitly records all four assets as sourced from `B001-WAVE-L-ENVIRONMENT-MODULES`: Depot Facade and Municipal Archive Exterior are integrated/verified, while Maintenance Corridor Connector and Municipal Infrastructure Tile Atlas remain produced/deferred.
+
+Decision:
+
+PR #8 remains historical branch/provenance evidence, but its four visual source definitions do **not** require separate migration into the current program ancestry because those definitions are already preserved in the current catalog. The branch itself still must not be blindly merged.
+
 Remaining:
 
-- file-level review of any unique PR #8-only material before declaring it superseded;
 - final material/palette approval;
-- raster export only if the runtime strategy later requires it.
+- raster export only if the runtime strategy later requires it;
+- separate PR #28 detail-candidate reconciliation against the selected Service Tunnel composition.
 
 ## 5. Environment prop family
 
