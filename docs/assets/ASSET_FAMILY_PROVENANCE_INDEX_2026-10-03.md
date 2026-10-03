@@ -205,8 +205,8 @@ Resolved in the current D-029 continuation:
 
 Still incomplete:
 
-1. persisted/reproducible source-to-PNG exporter implementation/tool invocation;
-2. fresh pixel-for-pixel source/raster equivalence execution;
+1. execute the repository-owned deterministic raster verifier/exporter on an exact checkout and persist its machine-readable report;
+2. confirm fresh 24/24 pixel equivalence or repair/document any mismatch found by that execution;
 3. owner visual/canon promotion decision for the Service Tunnel and Quiet Stair static survivors;
 4. runtime adoption of the infrastructure-atlas composition if approved, with destination visual QA;
 5. D-030 runtime actor-presentation projection plus Tamsin hand/wrist anchor verification for the held diagnostic reader;
