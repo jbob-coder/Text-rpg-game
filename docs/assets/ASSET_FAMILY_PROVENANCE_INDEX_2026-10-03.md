@@ -258,3 +258,13 @@ Current classification:
 - Platform Nine and Relay Workbench source/raster refinements are synchronized in their recorded commits.
 
 The repository still does not contain a persisted deterministic source-to-PNG exporter. The lineage is commit/PR-supported, but fresh pixel-for-pixel reproduction remains unverified until a repository-owned exporter/checker exists and runs.
+
+
+## 11. Service Tunnel ambient-animation migration decision
+
+- [Service Tunnel ambient animation migration contract](SERVICE_TUNNEL_AMBIENT_ANIMATION_MIGRATION_CONTRACT_2026-10-03.md) exactizes PR #31's survival/migration path.
+- PR #31 remains verified branch evidence, not current implementation.
+- Its three track IDs, timing and moving bounds are preserved as candidate source evidence.
+- Migration must be selectively reimplemented on the approved Service Tunnel static parent.
+- Reduced motion is an established Android/application accessibility requirement; current runtime has no explicit reduced-motion setting path.
+- The migration strategy is documented; runtime implementation and destination-head verification remain separate work.
