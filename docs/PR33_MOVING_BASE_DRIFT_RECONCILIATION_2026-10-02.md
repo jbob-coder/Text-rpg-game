@@ -9,6 +9,8 @@ Base head inspected: `de6b10e8c79103ce34b853234e9d917685b5268d`
 Merge base: `c261b2aaf8bd978d27b46f8fea03435c0c5734d0`  
 Status: **P0 / DO NOT BLIND-MERGE**
 
+> **2026-10-03 live revalidation:** the exact branch refs have advanced since this historical snapshot. The current shared-file audit is recorded in [PR #33 Live Shared-File Reconciliation](PR33_LIVE_SHARED_FILE_RECONCILIATION_2026-10-03.md). Its source audit resolved `docs/master-game-development-program@ab7c041d6916b2e37b75430523a2183f9483883b` versus `docs/settlement-region-build-plan@65d2db8538c1b8302c314f2fbe9eb7a1b585b51d`, still diverged from merge base `c261b2aa...`. It closes the active shared-file migration question for `AGENTS.md`, `README.md`, `docs/IMPLEMENTATION_STATUS.md`, and `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`: **KEEP PROGRAM / no whole-file migration required**. The older commit counts below remain historical evidence for the 2026-10-02 inspection and must not be read as the current branch heads.
+
 ## 1. Verified branch state
 
 The PR base moved after PR #33 was opened.
