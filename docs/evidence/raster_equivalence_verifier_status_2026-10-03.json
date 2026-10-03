@@ -3,17 +3,19 @@
   "repository": "jbob-coder/Text-rpg-game",
   "branch": "docs/master-game-development-program",
   "recorded_at": "2026-10-03 AST",
-  "branch_head_at_recording": "5eaa9875910923e23d8dbb8399156d3922a8df95",
-  "status": "IMPLEMENTED_EXECUTION_PENDING",
+  "branch_head_at_recording": "becbd74fbb6d39ad8d7293243e3970d126241881",
+  "status": "IMPLEMENTED_HARDENED_EXECUTION_PENDING",
   "tool": {
     "path": "tools/verify_pixel_raster_equivalence.py",
-    "git_blob": "1c7f153ce0f676b15152f856b2ee0407162ad6ff",
+    "git_blob": "116814f640beedaffb230b9214b6ccf920e586dd",
     "purpose": [
       "parse current raster-bound Kotlin PixelSprite masters",
       "decode current PNGs using Python standard library",
       "compare native RGBA pixels",
       "verify recorded SHA-256 and Git blob identity",
       "verify current source blobs against raster lineage evidence",
+      "validate PixelRasterCatalog asset-symbol to drawable bindings",
+      "validate binding-versus-lineage path and metadata alignment",
       "reconstruct deterministic source-native PNGs into a separate output tree"
     ],
     "safety": [
@@ -21,27 +23,34 @@
       "no arbitrary Kotlin parser claim",
       "export requires explicit separate output directory",
       "refuses repository-root export",
+      "rejects absolute or parent-traversal binding paths before export",
+      "rejects duplicate binding paths, asset symbols, and resource names",
       "historical exporter identity is not inferred from this new tool"
     ]
   },
   "test": {
     "path": "tests/test_pixel_raster_equivalence_tool.py",
-    "git_blob": "9e788cc22d7ff03fb4aac408ba913bfe4e908a79",
+    "git_blob": "d019bba15b0fb58409c675bcdc84920e7b8fe546",
     "assertions": [
       "24 current raster bindings are present",
       "verification status is PASS",
       "24 assets match source pixels",
       "zero pixel mismatches",
-      "all identity/lineage checks pass",
+      "all identity/lineage/runtime-binding checks pass",
       "independent exports are byte-deterministic",
       "exported PNGs decode to expected dimensions",
-      "repository-root export raises ValueError"
+      "repository-root export raises ValueError",
+      "parent-traversal binding paths are rejected",
+      "duplicate binding paths are rejected"
     ]
   },
   "execution": {
     "observed_in_this_session": false,
+    "checked_head": "becbd74fbb6d39ad8d7293243e3970d126241881",
     "github_pull_request_workflow_run": null,
+    "github_combined_statuses": [],
     "codex_environment_available": false,
+    "local_network_checkout_available": false,
     "result": null,
     "rule": "Do not promote 24/24 pixel equivalence until this tool or test executes and the output is inspected."
   },
@@ -56,5 +65,19 @@
     "total_pixel_mismatches",
     "report_path_or_artifact",
     "result"
-  ]
+  ],
+  "source_only_audit": {
+    "audited_head": "becbd74fbb6d39ad8d7293243e3970d126241881",
+    "raster_catalog_blob": "6bfc11c88df1d2edb473ed8b3cd3293e7f2822d8",
+    "binding_evidence_blob": "eff2b30cbfa75370c4a92aa5aed3ac1f0b244e49",
+    "lineage_evidence_blob": "9c799021b58acb83b8f5a86cd1e666b209e5ec0e",
+    "runtime_mapping_entries": 24,
+    "binding_records": 24,
+    "lineage_records": 24,
+    "binding_duplicate_paths": 0,
+    "lineage_duplicate_paths": 0,
+    "binding_lineage_path_sets_match": true,
+    "runtime_and_metadata_mismatch_count": 0,
+    "limitation": "This is source/evidence structure verification only. PNG bytes were not executed through the verifier in this session."
+  }
 }
