@@ -773,7 +773,16 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - STATUS: `IN_PROGRESS`
 - PRIORITY: `P0`
 - OUTPUT: source master -> raster/export -> branch/head -> runtime consumer -> reuse signature -> QA -> canonical state for every current asset family.
-- LATEST_SLICE: `docs/assets/SOURCE_RASTER_RECONCILIATION_2026-10-02.md` records the inherited nine-scene PNG baseline and exact divergent Service Tunnel/Quiet Stair source+raster candidates. Full every-family provenance remains incomplete.
+- CURRENT FAMILY SLICE:
+  - `docs/assets/ASSET_FAMILY_PROVENANCE_INDEX_2026-10-03.md`
+  - `docs/assets/CHARACTER_EQUIPMENT_ITEM_ACTOR_PROVENANCE_2026-10-03.md`
+  - `docs/assets/ENVIRONMENT_SCENE_MAP_PROVENANCE_2026-10-03.md`
+  - `docs/assets/UI_FX_ANIMATION_PROVENANCE_2026-10-03.md`
+- VERIFIED: current program-branch families are now separated into PNG-preferred raster-bound assets versus procedural Kotlin code masters; runtime consumers and dedicated QA sources are mapped; PR #22 tail is reference/docs-only relative to its inherited ancestor; PR #9 held-prop and PR #31 ambient animation remain non-integrated candidates; PR #27/#28/#30 static refinements remain candidate/survivor work rather than current authority.
+- PREVIOUS EXACT SLICE: `docs/assets/SOURCE_RASTER_RECONCILIATION_2026-10-02.md` owns the inherited nine-scene PNG baseline and divergent Service Tunnel/Quiet Stair source+raster evidence.
+- REMAINING: exact authoring-source lineage for all exported rasters; source/raster correspondence review; static-survivor selection; PR #8 unique-material review; typed held-prop consumer decision; ambient-animation migration/reduced-motion verification; final Jack/portrait production; owner/canon approval; destination-head visual QA and physical-device QA.
+- LATEST_SLICE_AT: `2026-10-03 AST`.
+- COMPLETENESS: partial reconstruction-grade family coverage; D-029 is not complete.
 
 ### TASK D-030 — Player-safe actor/panel projection contract
 - STATUS: `DONE (DOCUMENTED) / IMPLEMENTATION PENDING`
