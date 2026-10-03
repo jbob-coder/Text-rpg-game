@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -35,6 +36,32 @@ class PixelRasterEquivalenceToolTest(unittest.TestCase):
         self.assertEqual(24, report["matched_assets"])
         self.assertEqual(0, report["total_pixel_mismatches"])
         self.assertTrue(all(report["checks"].values()))
+
+    def test_exporter_reconstructs_all_bindings_deterministically(self) -> None:
+        with tempfile.TemporaryDirectory() as first_dir, tempfile.TemporaryDirectory() as second_dir:
+            first = verifier.export_repository_rasters(ROOT, Path(first_dir))
+            second = verifier.export_repository_rasters(ROOT, Path(second_dir))
+
+            self.assertEqual(24, first["asset_count"])
+            self.assertEqual(24, second["asset_count"])
+
+            first_assets = {item["path"]: item for item in first["assets"]}
+            second_assets = {item["path"]: item for item in second["assets"]}
+            self.assertEqual(set(first_assets), set(second_assets))
+
+            for relative_path in sorted(first_assets):
+                first_bytes = (Path(first_dir) / relative_path).read_bytes()
+                second_bytes = (Path(second_dir) / relative_path).read_bytes()
+                self.assertEqual(first_bytes, second_bytes, relative_path)
+
+                width, height, pixels = verifier.decode_png_rgba(first_bytes)
+                self.assertEqual(first_assets[relative_path]["width"], width)
+                self.assertEqual(first_assets[relative_path]["height"], height)
+                self.assertEqual(width * height, len(pixels))
+
+    def test_exporter_refuses_repository_root(self) -> None:
+        with self.assertRaises(ValueError):
+            verifier.export_repository_rasters(ROOT, ROOT)
 
 
 if __name__ == "__main__":
