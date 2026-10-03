@@ -259,7 +259,7 @@ Current classification:
 - the five PR #22 player/loadout raster refreshes are inherited by the current branch;
 - Platform Nine and Relay Workbench source/raster refinements are synchronized in their recorded commits.
 
-The repository still does not contain a persisted deterministic source-to-PNG exporter. The lineage is commit/PR-supported, but fresh pixel-for-pixel reproduction remains unverified until a repository-owned exporter/checker exists and runs.
+The historical PR #19 exporter remains unknown/not persisted. A new repository-owned deterministic verifier/reconstruction exporter now exists at `tools/verify_pixel_raster_equivalence.py`, with repository tests at `tests/test_pixel_raster_equivalence_tool.py`. It has not executed in this work session, so fresh 24/24 pixel equivalence remains unverified until its output is observed and persisted.
 
 
 ## 11. Service Tunnel ambient-animation migration decision
@@ -270,3 +270,12 @@ The repository still does not contain a persisted deterministic source-to-PNG ex
 - Migration must be selectively reimplemented on the approved Service Tunnel static parent.
 - Reduced motion is an established Android/application accessibility requirement; current runtime has no explicit reduced-motion setting path.
 - The migration strategy is documented; runtime implementation and destination-head verification remain separate work.
+
+
+## 12. Raster reconstruction tooling status
+
+- `tools/verify_pixel_raster_equivalence.py` — new standard-library verifier plus safe deterministic reconstruction exporter.
+- `tests/test_pixel_raster_equivalence_tool.py` — repository-level 24-binding equality/determinism/safety tests.
+- `docs/evidence/raster_equivalence_verifier_status_2026-10-03.json` — machine-readable `IMPLEMENTED_EXECUTION_PENDING` evidence.
+
+This new tool does not retroactively identify the historical PR #19 exporter. It exists to make future reconstruction/equality reproducible.
