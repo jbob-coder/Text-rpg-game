@@ -315,17 +315,48 @@ Not:
 - canon-approved;
 - evidence that a diagnostic-reader gameplay interaction exists.
 
-### 7.4 Promotion requirements
+### 7.4 Consumer/ownership decision
 
-Before integration:
+The current source audit changes the earlier open question.
 
-1. identify the authoritative gameplay item/interaction ID;
-2. define player-safe held-prop projection;
-3. define hand/anchor/orientation contract;
-4. reconcile with 32x48 avatar/equipment rig;
-5. add consumer without duplicating gameplay state in Compose;
+Verified current content already establishes the reader as part of Tamsin's authored visible presentation:
+
+- Tamsin's canonical visual identity pose set includes `holding diagnostic reader`;
+- Gate Twelve narrative explicitly refers to Tamsin's diagnostic reader;
+- there is no current inventory/equipment item record, bridge field, or Compose consumer for a diagnostic-reader item.
+
+D-030 already establishes the correct target boundary:
+
+- engine/content projection may expose a player-safe approved `pose_key`;
+- asset catalogs own equipment/held-object layers and pose art;
+- Android resolves approved art from that safe presentation key;
+- UI must not infer actor pose or possessions from prose, quest flags, hidden NPC state, or location alone.
+
+Decision:
+
+`PROP_DIAGNOSTIC_READER_HELD_FRONT_MASTER` is a **Tamsin actor-presentation held layer**, not a player inventory/equipment asset.
+
+It should become eligible for runtime use only when a D-030-compatible actor projection explicitly requests an approved Tamsin pose/presentation variant corresponding to holding the diagnostic reader. The exact machine key may preserve or explicitly normalize the authored pose label, but that mapping must be written; Android must not derive it from narrative prose.
+
+The 32x32 `PROP_DIAGNOSTIC_READER_ICON_MASTER` remains reference/inventory-capable art but has **no authorized current inventory consumer**.
+
+No fake gameplay item ID is required merely to display Tamsin holding the reader.
+
+### 7.5 Promotion requirements
+
+Before runtime integration:
+
+1. implement the D-030 player-safe room-actor projection or an equivalent approved presentation projection;
+2. map an explicit safe Tamsin pose/presentation key to the held-reader layer;
+3. define/verify wrist/hand anchor and orientation against the selected Tamsin sprite/turnaround;
+4. keep possession/story authority outside Compose;
+5. add source/asset resolver tests;
 6. run unit/instrumentation/render QA;
 7. only then promote.
+
+Current stage remains:
+
+`DEFERRED_INTEGRATION / BLOCKED_BY_D-030_RUNTIME_AND_TAMSIN_ANCHOR`.
 
 ## 8. Service Tunnel ambient-animation candidate — PR #31
 
