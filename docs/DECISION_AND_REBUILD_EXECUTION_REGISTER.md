@@ -64,3 +64,29 @@ Expand by functional coverage: authority -> evidence -> decisions -> original wo
 The uploaded MVS chapter files are not native game canon or runtime assets. No novel text, characters, names or distinctive world expression is imported in this batch. The attached private-campaign preservation rules were read; their private save hierarchy remains separate. This request explicitly authorizes repository documentation, without authorizing conversion of that separate campaign.
 
 For the persistent-adversary reference, copyright/art originality and patent clearance are separate questions. Patent publication US10926179B2 exists, and related family records are linked from its source: https://patents.google.com/patent/US10926179B2/en (checked 2026-10-02). This is a design-risk reference, not a legal clearance opinion. Renaming a copied mechanic is not a clearance method. Exact claim comparison and relevant jurisdiction/status review remain open before a commercial implementation is finalized. Ordinary NPC memory can continue to be designed; do not mark the entire future adversary combination cleared.
+
+
+## Moving-base gap-closure rule — 2026-10-03
+
+Source provenance:
+- `docs/settlement-region-build-plan@65d2db8538c1b8302c314f2fbe9eb7a1b585b51d`
+- `docs/program/09_DECISION_GAP_REGISTER.md`
+- source blob `8129f57d3d9458970c4c41c1dac5da9018534b83`
+- selectively extracted under D-044.
+
+The source GAP-001..GAP-024 table is a historical status snapshot and is **not** imported as a second active decision register.
+
+The durable closure rule is:
+
+A decision/gap closes only when all applicable conditions are true:
+
+1. the decision or resolution is written in the current repository authority;
+2. conflicting/superseded alternatives are reconciled or explicitly classified;
+3. downstream owner documents/indexes are updated;
+4. implementation-facing decisions define acceptance/verification criteria;
+5. any required migration/compatibility work is identified;
+6. the task/decision register records the resulting state.
+
+A chat statement alone does not close a repository gap.
+
+If a decision requires owner selection, keep it `OWNER DECISION REQUIRED` until that selection is durably recorded. If execution is required after design closure, separate **decision closed** from **implementation complete**.
