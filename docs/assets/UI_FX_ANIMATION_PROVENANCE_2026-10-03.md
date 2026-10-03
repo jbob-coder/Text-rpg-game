@@ -421,33 +421,57 @@ Historical workflow run 36952192376 succeeded.
 
 PR #31 is based on the documentation/map branch, not on the selected final static Service Tunnel survivor.
 
-Static source/raster selection must happen first.
+Technical static topology is now resolved:
 
-The candidate animation must then be rebased or reimplemented onto the selected static scene geometry.
+- current inherited Service Tunnel baseline and PR #27 refined Service Tunnel are the two promotion choices;
+- PR #30 only adds Quiet Stair on top of PR #27;
+- PR #28 is arrival-preview atlas composition, not a static-scene survivor.
+
+The remaining static choice is artistic/canon promotion and is `OWNER DECISION REQUIRED`.
+
+PR #31 must not determine that decision.
 
 ### 8.5 Accessibility/performance gap
 
-The project-level reconciliation requires:
+The project UX authority already requires reduced motion.
 
-- reduced-motion behavior;
-- stopping work when the scene is not active/off-screen where applicable;
-- bounded mobile cost.
+Current source inspection shows:
 
-The inspected candidate snippets show per-track `LaunchedEffect` loops, but this provenance pass does not establish a dedicated reduced-motion projection/hook.
+- `MainActivity` owns narration/text presentation preferences through Android-side `rememberSaveable` state;
+- current `GameViewModel` and `GameEngine` do not own those preferences;
+- no explicit reduced-motion field/control currently exists;
+- PR #31 advances per-track animation through location-keyed Compose `LaunchedEffect` loops.
 
-Therefore reduced-motion compliance remains **MIGRATION/VERIFICATION REQUIRED**.
+Therefore reduced-motion is an **Android presentation migration**, not gameplay-engine state.
+
+Detailed target contract:
+
+[SERVICE_TUNNEL_AMBIENT_ANIMATION_MIGRATION_CONTRACT_2026-10-03.md](SERVICE_TUNNEL_AMBIENT_ANIMATION_MIGRATION_CONTRACT_2026-10-03.md)
+
+That child specifies:
+
+- selective reimplementation after static-art selection;
+- track IDs, timing and moving bounds;
+- Android presentation-preference ownership;
+- reduced-motion gating;
+- scene lifecycle/off-screen verification;
+- layering;
+- low-end-device constraints;
+- tests and destination-head promotion gates.
 
 ### 8.6 Stage
 
-`DEFERRED_INTEGRATION / CANDIDATE`
+`VERIFIED_BRANCH_EVIDENCE + DEFERRED_INTEGRATION + REIMPLEMENT_ON_SELECTED_STATIC_PARENT`
 
-Do not mark `INTEGRATED` until:
+The migration strategy is now documented. Runtime integration remains blocked until:
 
-1. static Service Tunnel survivor is selected;
-2. animation is rebased/reimplemented;
-3. reduced-motion behavior is explicit;
-4. unit/instrumentation/build gates pass at the destination head;
+1. the Service Tunnel static visual survivor is approved;
+2. reduced-motion behavior is implemented;
+3. location/lifecycle behavior is verified at the destination head;
+4. unit/instrumentation/build gates pass;
 5. screenshot/device QA confirms no visual conflict.
+
+Historical PR #31 success does not satisfy those destination-head gates.
 
 ## 9. Raster/export status for this ledger
 
