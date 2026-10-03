@@ -223,3 +223,30 @@ If the implementation vanished, reconstruction should proceed in this order:
 10. only then approve/supersede assets.
 
 Do not reconstruct from screenshots alone, and do not treat the newest branch as canonical merely because it is newer.
+
+
+## 10. 2026-10-03 exact raster export continuation
+
+D-029 now also includes:
+
+- [Raster export and source correspondence](RASTER_EXPORT_AND_SOURCE_CORRESPONDENCE_2026-10-03.md)
+- `docs/evidence/raster_export_lineage_2026-10-03.json`
+
+This exact-lineage slice establishes, for all 24 current PNG assets:
+
+- the repository Kotlin source family;
+- the source revision commit;
+- the initial raster-export commit;
+- any later source/raster refresh commit;
+- the current source blob;
+- the current raster Git blob/hash;
+- whether the current raster remains from the initial export or was refreshed after a source revision.
+
+Current classification:
+
+- 17 current PNGs retain their initial export lineage;
+- 7 current PNGs have later source revisions followed by documented raster refresh/refinement;
+- the five PR #22 player/loadout raster refreshes are inherited by the current branch;
+- Platform Nine and Relay Workbench source/raster refinements are synchronized in their recorded commits.
+
+The repository still does not contain a persisted deterministic source-to-PNG exporter. The lineage is commit/PR-supported, but fresh pixel-for-pixel reproduction remains unverified until a repository-owned exporter/checker exists and runs.
