@@ -207,7 +207,7 @@ Still incomplete:
 2. fresh pixel-for-pixel source/raster equivalence execution;
 3. final static-survivor selection for Service Tunnel and Quiet Stair;
 4. legitimate runtime/composition consumer decision for `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`;
-5. typed-consumer decision for PR #9 diagnostic-reader held prop;
+5. PR #9 diagnostic-reader consumer ownership is resolved: held-reader art belongs to Tamsin actor-presentation via a future D-030-safe pose/held-layer mapping; runtime remains deferred until D-030 and Tamsin anchors exist;
 6. rebase/reimplementation decision for PR #31 ambient animation;
 7. final Jack production sprite and portrait family;
 8. Tamsin/courier portrait production family;
