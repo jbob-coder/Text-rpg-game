@@ -3,8 +3,8 @@
   "repository": "jbob-coder/Text-rpg-game",
   "branch": "docs/master-game-development-program",
   "recorded_at": "2026-10-03 AST",
-  "branch_head_at_recording": "becbd74fbb6d39ad8d7293243e3970d126241881",
-  "status": "IMPLEMENTED_HARDENED_EXECUTION_PENDING",
+  "branch_head_at_recording": "e8b85b398b1069c2ae3353d3dbeb9c952538c6d6",
+  "status": "IMPLEMENTED_HARDENED_EXECUTION_BLOCKED_BY_ENVIRONMENT",
   "tool": {
     "path": "tools/verify_pixel_raster_equivalence.py",
     "git_blob": "116814f640beedaffb230b9214b6ccf920e586dd",
@@ -30,7 +30,7 @@
   },
   "test": {
     "path": "tests/test_pixel_raster_equivalence_tool.py",
-    "git_blob": "d019bba15b0fb58409c675bcdc84920e7b8fe546",
+    "git_blob": "da2dd64e738bbc31174845bd4b1484a8dbeb692f",
     "assertions": [
       "24 current raster bindings are present",
       "verification status is PASS",
@@ -41,17 +41,25 @@
       "exported PNGs decode to expected dimensions",
       "repository-root export raises ValueError",
       "parent-traversal binding paths are rejected",
-      "duplicate binding paths are rejected"
+      "duplicate binding paths are rejected",
+      "duplicate asset symbols are rejected",
+      "duplicate resource names are rejected"
     ]
   },
   "execution": {
     "observed_in_this_session": false,
-    "checked_head": "becbd74fbb6d39ad8d7293243e3970d126241881",
+    "checked_head": "e8b85b398b1069c2ae3353d3dbeb9c952538c6d6",
+    "trigger_commit": "e8b85b398b1069c2ae3353d3dbeb9c952538c6d6",
+    "trigger_change": "tests/test_pixel_raster_equivalence_tool.py gained duplicate asset-symbol and duplicate resource-name rejection coverage, which matches the existing pull_request tests/** workflow path filter.",
     "github_pull_request_workflow_run": null,
+    "github_branch_workflow_run_count": 0,
     "github_combined_statuses": [],
+    "repository_pull_request_actions_latest_observed_at": "2026-10-02T02:45:29Z",
     "codex_environment_available": false,
     "local_network_checkout_available": false,
+    "local_network_checkout_error": "git clone could not resolve host github.com in the execution container",
     "result": null,
+    "blocker": "No executable exact-checkout environment was available and GitHub created no Actions run for PR #33 / docs/master-game-development-program after the trigger commit.",
     "rule": "Do not promote 24/24 pixel equivalence until this tool or test executes and the output is inspected."
   },
   "future_evidence_fields": [
@@ -67,10 +75,13 @@
     "result"
   ],
   "source_only_audit": {
-    "audited_head": "becbd74fbb6d39ad8d7293243e3970d126241881",
+    "audited_head": "e8b85b398b1069c2ae3353d3dbeb9c952538c6d6",
+    "pixel_asset_catalog_blob": "dc6f1d553dbb8abbccecef728ee67bbf54bad3c2",
+    "pixel_scene_catalog_blob": "b6126ddcab09d1005baa0352299ec57b301bf3d2",
+    "pixel_theme_blob": "2c16d6ec9d0ae56186d6b7baf62f76802a29d4a1",
     "raster_catalog_blob": "6bfc11c88df1d2edb473ed8b3cd3293e7f2822d8",
     "binding_evidence_blob": "eff2b30cbfa75370c4a92aa5aed3ac1f0b244e49",
-    "lineage_evidence_blob": "9c799021b58acb83b8f5a86cd1e666b209e5ec0e",
+    "lineage_evidence_blob": "f3dc38456c6dba64cbefdbe1015d3715d1432b1b",
     "runtime_mapping_entries": 24,
     "binding_records": 24,
     "lineage_records": 24,
@@ -78,6 +89,6 @@
     "lineage_duplicate_paths": 0,
     "binding_lineage_path_sets_match": true,
     "runtime_and_metadata_mismatch_count": 0,
-    "limitation": "This is source/evidence structure verification only. PNG bytes were not executed through the verifier in this session."
+    "limitation": "This is source/evidence structure verification only. PNG bytes were not executed through the repository verifier in this session."
   }
 }

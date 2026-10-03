@@ -285,22 +285,39 @@ The test source requires:
 
 ### Execution status
 
-No execution result is claimed yet.
+Fresh pixel-equality execution is still **blocked by environment**, not passed.
 
-At exact hardened-code head `becbd74fbb6d39ad8d7293243e3970d126241881`:
+The verifier test was deliberately strengthened and pushed at exact head `e8b85b398b1069c2ae3353d3dbeb9c952538c6d6`:
 
 - tool blob: `116814f640beedaffb230b9214b6ccf920e586dd`;
-- test blob: `d019bba15b0fb58409c675bcdc84920e7b8fe546`;
-- GitHub reported no pull-request workflow run or combined status for that head;
+- test blob: `da2dd64e738bbc31174845bd4b1484a8dbeb692f`;
+- the test now explicitly rejects duplicate binding paths, duplicate asset symbols and duplicate resource names;
+- the commit touched `tests/**`, which matches the existing `Android Pixel Client` pull-request workflow path filter.
+
+Observed execution evidence after that trigger:
+
+- PR #33 / branch `docs/master-game-development-program` still had **zero GitHub Actions runs**;
+- the exact commit had no combined status entries;
+- the repository pull-request Actions history visible through the connector had no run newer than `2026-10-02T02:45:29Z`;
 - no registered Codex execution environment was available;
-- local network checkout was unavailable in this session;
-- therefore the new repository test has not been observed running in this work session.
+- direct local checkout failed because the execution container could not resolve `github.com`.
 
-A separate source/evidence audit at that head confirmed 24 runtime mappings, 24 binding records, 24 lineage records, unique binding/lineage paths, equal path sets, and zero runtime-binding/metadata mismatches. That is **not** a PNG pixel-equivalence execution.
+A refreshed source/evidence structural audit at the same head confirmed:
 
-The tool is **implemented and hardened but unverified by execution**.
+- 24 runtime raster mappings;
+- 24 binding records;
+- 24 lineage records;
+- zero duplicate binding paths;
+- zero duplicate lineage paths;
+- equal binding/lineage path sets;
+- zero runtime-binding or metadata mismatches;
+- current lineage evidence blob `f3dc38456c6dba64cbefdbe1015d3715d1432b1b`.
 
-D-029 must not convert the intended 24/24 equality assertion into fact until the test or tool actually runs and its output is inspected.
+This structural audit is **not** PNG pixel-equivalence execution.
+
+The tool is therefore **implemented, hardened and structurally reconciled, but execution-blocked**.
+
+D-029 must not convert the intended 24/24 equality assertion into fact until the repository test or tool actually executes and its output is inspected.
 
 ## 8. Pixel-equality limitation
 
