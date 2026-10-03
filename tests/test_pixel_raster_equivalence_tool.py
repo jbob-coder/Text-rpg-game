@@ -81,6 +81,24 @@ class PixelRasterEquivalenceToolTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             verifier._validate_binding_assets(evidence)
 
+    def test_binding_validator_rejects_duplicate_asset_symbol(self) -> None:
+        evidence = json.loads(
+            (ROOT / verifier.BINDING_EVIDENCE).read_text(encoding="utf-8")
+        )
+        evidence["assets"][-1]["asset_symbol"] = evidence["assets"][0]["asset_symbol"]
+
+        with self.assertRaises(ValueError):
+            verifier._validate_binding_assets(evidence)
+
+    def test_binding_validator_rejects_duplicate_resource_name(self) -> None:
+        evidence = json.loads(
+            (ROOT / verifier.BINDING_EVIDENCE).read_text(encoding="utf-8")
+        )
+        evidence["assets"][-1]["resource_name"] = evidence["assets"][0]["resource_name"]
+
+        with self.assertRaises(ValueError):
+            verifier._validate_binding_assets(evidence)
+
 
 if __name__ == "__main__":
     unittest.main()
