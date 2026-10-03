@@ -359,3 +359,25 @@ Presence in the APK is not enough.
 ## Exact-baseline raster continuation
 
 [Raster delivery evidence](RASTER_DELIVERY_EVIDENCE_2026-10-02.md) and `docs/evidence/raster_bindings_2026-10-02.json` now provide dimensions, SHA-256, Git blob and catalog binding for all 24 program-baseline rasters. Source-authoring lineage, later-branch variant reconciliation, source/raster equality and canon approval remain open.
+
+
+## 2026-10-03 family-level provenance continuation
+
+D-029 now has a family-level operational index and three source-grounded child ledgers:
+
+- [Asset family provenance index](ASSET_FAMILY_PROVENANCE_INDEX_2026-10-03.md) — current-family coverage, runtime precedence, branch roots, QA interpretation, reconstruction order and unresolved work.
+- [Character, equipment, item, and actor provenance](CHARACTER_EQUIPMENT_ITEM_ACTOR_PROVENANCE_2026-10-03.md) — player/item/equipment rasters, staging, equipment slots, quality frames, opening actors, Jack reference relationship and portrait gaps.
+- [Environment, scene, and map provenance](ENVIRONMENT_SCENE_MAP_PROVENANCE_2026-10-03.md) — scene source/raster chain, modules, props, decals, overlays, map art/markers/travel and divergent static-scene candidates.
+- [UI, FX, held-prop, and animation provenance](UI_FX_ANIMATION_PROVENANCE_2026-10-03.md) — UI chrome/icons/utilities, Trace FX/strain, deferred diagnostic-reader masters and deferred Service Tunnel ambient animation.
+
+Authority relationship:
+
+- this registry remains the master provenance schema and stage vocabulary;
+- the family index is the operational D-029 navigation layer;
+- the child ledgers are complementary evidence records, not competing authorities;
+- exact raster hashes/dimensions remain owned by `RASTER_DELIVERY_EVIDENCE_2026-10-02.md` and `docs/evidence/raster_bindings_2026-10-02.json`;
+- exact divergent Service Tunnel/Quiet Stair source+raster evidence remains owned by `SOURCE_RASTER_RECONCILIATION_2026-10-02.md`.
+
+The family audit inspected the implementation at program-branch baseline `2ad50d7aff6f153b90036f8e0f61043242a09765`. Subsequent documentation commits do not by themselves change runtime source state.
+
+D-029 remains **IN_PROGRESS**. These ledgers do not establish final source-authoring lineage for every export, select the divergent static-art survivors, grant canon approval, implement D-030 actor projection, or provide physical-device visual QA.
