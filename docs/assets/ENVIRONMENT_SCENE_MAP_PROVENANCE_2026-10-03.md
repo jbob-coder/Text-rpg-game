@@ -432,13 +432,30 @@ Base:
 
 `feature/service-tunnel-arrival-pixel-art@2f7f77d7925e94558d219d4ab2340fbb32476717`
 
-This branch changes environment-module/detail composition, not the preferred named-scene PNG.
+Exact changed files:
+
+- `PixelEnvironmentModuleCatalog.kt`;
+- `PixelEnvironmentPreview.kt`;
+- `PixelEnvironmentModuleCatalogTest.kt`.
+
+Exact provenance conclusion:
+
+- PR #28 adds **no new module/tile pixel geometry**;
+- it adds `arrivalDetailTiles(locationId)`;
+- only `SERVICE_TUNNEL` maps to detail tiles;
+- the returned detail set is exactly the already-existing `infrastructureTileAtlas.tiles`;
+- the preview renderer then lays those existing tiles as a centered decorative strip beneath the existing Service Tunnel arrival preview;
+- tests assert that Service Tunnel uses the entire existing atlas and unknown locations receive no detail tiles.
+
+Therefore PR #28 is **not a competing source-master branch for the infrastructure atlas**. The asset source remains the preserved Wave-L/current `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`.
 
 Stage:
 
-`CANDIDATE_COMPOSITION_LAYER / NOT INTEGRATED`
+`CANDIDATE_COMPOSITION_BEHAVIOR / NOT INTEGRATED`
 
-It must be compared against both the current module source and the selected static Service Tunnel geometry.
+Decision:
+
+Preserve PR #28 as optional composition logic. If adopted later, selectively reimplement the arrival-detail behavior against the current catalog rather than merging the branch to obtain asset geometry. Final use still depends on the Service Tunnel visual/material packet and mobile preview QA.
 
 ### 12.3 Quiet Stair — PR #30
 
