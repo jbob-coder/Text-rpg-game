@@ -139,7 +139,7 @@ Covers:
 | UI utilities | Kotlin code master | no | yes | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` |
 | Trace FX | Kotlin frame code | no | yes | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` |
 | Trace strain visuals | Kotlin frame code | no | yes | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` |
-| Diagnostic-reader held prop | divergent PR #9 code master | no | no | `DEFERRED_INTEGRATION` |
+| Diagnostic-reader held prop | divergent PR #9 code master | no | no | `DEFERRED_INTEGRATION / BLOCKED_BY_D-030_RUNTIME_AND_TAMSIN_ANCHOR` |
 | Service Tunnel ambient animation | divergent PR #31 code/frame master | no | no | `DEFERRED_INTEGRATION / CANDIDATE` |
 
 `CANON_APPROVED` is deliberately not assigned merely because code or raster exists.
@@ -150,7 +150,7 @@ Exact open-PR evidence inspected for this slice:
 
 - PR #7 `feature/pixel-asset-wave-a@a3970de6597c77939afccb5f30d6040bdf3d608d` — historical root for the first broad pixel-asset catalogs.
 - PR #8 `feature/pixel-asset-wave-l-environment-modules@54a40bb5ad0aeafb428d128be7c1465f3d1a759b` — divergent historical Wave-L provenance. Its four visual definitions survive in current source. Current runtime later integrates all three 128x64 modules as exact Map arrival previews, while `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS` remains deferred with no main-UI consumer found.
-- PR #9 `feature/pixel-asset-wave-m-diagnostic-reader@063d5879413b81656cc5c7304be0afd02402f2fd` — divergent diagnostic-reader masters.
+- PR #9 `feature/pixel-asset-wave-m-diagnostic-reader@063d5879413b81656cc5c7304be0afd02402f2fd` — divergent diagnostic-reader masters. Consumer ownership is resolved: the 32x48 held master is Tamsin actor-presentation art under D-030's player-safe pose/visual-family boundary, not player inventory/equipment. Runtime remains blocked on D-030 projection plus verified Tamsin hand/wrist anchors; the 32x32 icon has no authorized current inventory consumer.
 - PR #16 `feature/pixel-assets-runtime-expansion@ddbb5f4250e26b99765999d0a8e81f59cb1ea26c` — inherited runtime asset expansion.
 - PR #19 `feature/png-pixel-art-runtime-a@c11133122d47009abc71e8c6e91c08aedbe91ae2` — inherited PNG raster delivery baseline.
 - PR #21 `feature/pixel-map-art-pass@59a1930961ae5fc961acab5624dcbfcc2f7e66cb` — inherited map-art implementation.

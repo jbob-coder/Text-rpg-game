@@ -741,7 +741,7 @@ This document is an implementation target, not evidence that room-actor projecti
 - [Asset family provenance index](assets/ASSET_FAMILY_PROVENANCE_INDEX_2026-10-03.md): operational navigation from current asset families to source/code master, raster/export, branch/head, runtime consumer, QA, production stage, migration risk and reconstruction sequence.
 - [Character, equipment, item, and actor provenance](assets/CHARACTER_EQUIPMENT_ITEM_ACTOR_PROVENANCE_2026-10-03.md): player/item/equipment/staging/actor family evidence, raster precedence, Jack-reference distinction and portrait gaps.
 - [Environment, scene, and map provenance](assets/ENVIRONMENT_SCENE_MAP_PROVENANCE_2026-10-03.md): nine-scene source/raster lineage, environment composition families, map families and divergent static-art candidates; also owns PR #8 source preservation, the current exact arrival-preview consumers, and the integrated-module versus deferred-infrastructure-atlas stage split.
-- [UI, FX, held-prop, and animation provenance](assets/UI_FX_ANIMATION_PROVENANCE_2026-10-03.md): UI/Trace families plus deferred PR #9 held-prop and PR #31 ambient-animation candidates.
+- [UI, FX, held-prop, and animation provenance](assets/UI_FX_ANIMATION_PROVENANCE_2026-10-03.md): UI/Trace families plus deferred PR #9 held-prop and PR #31 ambient-animation candidates; PR #9 consumer ownership is resolved as Tamsin actor-presentation art blocked on D-030 runtime projection and hand/wrist anchor verification.
 
 Authority classification:
 

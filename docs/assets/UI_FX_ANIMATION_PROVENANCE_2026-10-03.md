@@ -483,7 +483,7 @@ To reconstruct these families:
 - final UI art approval for chrome/icon families;
 - raster/export lineage if procedural families are later exported;
 - canonical portrait family;
-- typed held-prop projection/consumer;
+- D-030 actor-presentation projection implementation plus Tamsin held-reader hand/wrist anchor verification;
 - Service Tunnel static survivor;
 - ambient-animation migration;
 - reduced-motion contract implementation;
