@@ -404,6 +404,134 @@ def decode_png_rgba(
     return width, height, rgba
 
 
+def _png_chunk(chunk_type: bytes, data: bytes) -> bytes:
+    crc = zlib.crc32(chunk_type)
+    crc = zlib.crc32(data, crc) & 0xFFFFFFFF
+    return (
+        struct.pack(">I", len(data))
+        + chunk_type
+        + data
+        + struct.pack(">I", crc)
+    )
+
+
+def encode_png_rgba(
+    width: int,
+    height: int,
+    pixels: list[tuple[int, int, int, int]],
+) -> bytes:
+    if width <= 0 or height <= 0:
+        raise ValueError("PNG dimensions must be positive")
+    if len(pixels) != width * height:
+        raise ValueError(
+            f"Pixel count mismatch: {len(pixels)} != {width * height}"
+        )
+
+    scanlines = bytearray()
+    for y in range(height):
+        scanlines.append(0)  # PNG filter type 0: None
+        start = y * width
+        for red, green, blue, alpha in pixels[start : start + width]:
+            scanlines.extend((red, green, blue, alpha))
+
+    ihdr = struct.pack(
+        ">IIBBBBB",
+        width,
+        height,
+        8,  # bit depth
+        6,  # RGBA
+        0,  # compression
+        0,  # filter method
+        0,  # no interlace
+    )
+    compressed = zlib.compress(bytes(scanlines), level=9)
+    return (
+        PNG_SIGNATURE
+        + _png_chunk(b"IHDR", ihdr)
+        + _png_chunk(b"IDAT", compressed)
+        + _png_chunk(b"IEND", b"")
+    )
+
+
+def _load_source_masters(
+    root: Path,
+) -> tuple[dict[Path, dict[str, PixelSpriteMaster]], dict]:
+    theme_text = (root / THEME_SOURCE).read_text(encoding="utf-8")
+    pixel_colors = parse_pixel_colors(theme_text)
+    source_masters = {
+        ASSET_SOURCE: parse_pixel_sprite_masters(
+            (root / ASSET_SOURCE).read_text(encoding="utf-8"),
+            pixel_colors,
+        ),
+        SCENE_SOURCE: parse_pixel_sprite_masters(
+            (root / SCENE_SOURCE).read_text(encoding="utf-8"),
+            pixel_colors,
+        ),
+    }
+    bindings = json.loads((root / BINDING_EVIDENCE).read_text(encoding="utf-8"))
+    return source_masters, bindings
+
+
+def export_repository_rasters(root: Path, destination: Path) -> dict:
+    root = root.resolve()
+    destination = destination.resolve()
+    if destination == root:
+        raise ValueError(
+            "Refusing to export directly onto the repository root; "
+            "use a separate --export-dir."
+        )
+
+    source_masters, bindings = _load_source_masters(root)
+    exported: list[dict] = []
+
+    for binding in bindings["assets"]:
+        asset_symbol = binding["asset_symbol"]
+        source_path = _asset_source_path(asset_symbol)
+        constant_name = asset_symbol.split(".", 1)[1]
+        try:
+            master = source_masters[source_path][constant_name]
+        except KeyError as exc:
+            raise ValueError(
+                f"{binding['path']}: no parsed source master for {asset_symbol}"
+            ) from exc
+
+        relative_path = Path(binding["path"])
+        output_path = destination / relative_path
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        payload = encode_png_rgba(
+            master.width,
+            master.height,
+            master.rgba_pixels(),
+        )
+        output_path.write_bytes(payload)
+
+        exported.append(
+            {
+                "path": relative_path.as_posix(),
+                "asset_symbol": asset_symbol,
+                "asset_id": master.asset_id,
+                "width": master.width,
+                "height": master.height,
+                "sha256": hashlib.sha256(payload).hexdigest(),
+                "bytes": len(payload),
+            }
+        )
+
+    return {
+        "status": "PASS",
+        "root": str(root),
+        "destination": str(destination),
+        "asset_count": len(exported),
+        "assets": exported,
+        "notes": [
+            "Exports are deterministic 8-bit RGBA PNGs with filter type 0 and zlib level 9.",
+            "Export bytes need not match historical PNG compression/chunk layout; decoded source pixels are authoritative.",
+            "The exporter writes only under the explicit destination tree and refuses the repository root.",
+        ],
+    }
+
+
 def _asset_source_path(asset_symbol: str) -> Path:
     if asset_symbol.startswith("PixelAssetCatalog."):
         return ASSET_SOURCE
@@ -415,21 +543,7 @@ def _asset_source_path(asset_symbol: str) -> Path:
 def verify_repository(root: Path) -> dict:
     root = root.resolve()
 
-    theme_text = (root / THEME_SOURCE).read_text(encoding="utf-8")
-    pixel_colors = parse_pixel_colors(theme_text)
-
-    source_masters = {
-        ASSET_SOURCE: parse_pixel_sprite_masters(
-            (root / ASSET_SOURCE).read_text(encoding="utf-8"),
-            pixel_colors,
-        ),
-        SCENE_SOURCE: parse_pixel_sprite_masters(
-            (root / SCENE_SOURCE).read_text(encoding="utf-8"),
-            pixel_colors,
-        ),
-    }
-
-    bindings = json.loads((root / BINDING_EVIDENCE).read_text(encoding="utf-8"))
+    source_masters, bindings = _load_source_masters(root)
     lineage = json.loads((root / LINEAGE_EVIDENCE).read_text(encoding="utf-8"))
     lineage_by_path = {entry["path"]: entry for entry in lineage["assets"]}
 
@@ -564,7 +678,14 @@ def _summarize_failures(report: dict) -> Iterable[str]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=".", help="Repository root")
-    parser.add_argument("--output", help="Optional JSON output path")
+    parser.add_argument("--output", help="Optional JSON verification output path")
+    parser.add_argument(
+        "--export-dir",
+        help=(
+            "Optional separate directory where deterministic source-native PNG "
+            "reconstructions are written."
+        ),
+    )
     parser.add_argument(
         "--quiet",
         action="store_true",
@@ -572,11 +693,16 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    report = verify_repository(Path(args.root))
+    root = Path(args.root)
+    report = verify_repository(root)
     payload = json.dumps(report, indent=2, sort_keys=True)
 
     if args.output:
         Path(args.output).write_text(payload + "\n", encoding="utf-8")
+
+    export_report = None
+    if args.export_dir:
+        export_report = export_repository_rasters(root, Path(args.export_dir))
 
     if report["status"] == "PASS":
         if not args.quiet:
@@ -584,6 +710,11 @@ def main() -> int:
                 f"PASS: {report['matched_assets']}/{report['asset_count']} "
                 "raster assets match current source pixels and evidence."
             )
+            if export_report is not None:
+                print(
+                    f"EXPORTED: {export_report['asset_count']} deterministic "
+                    f"source-native PNGs to {export_report['destination']}."
+                )
         return 0
 
     print("FAIL: pixel raster equivalence verification failed.")
