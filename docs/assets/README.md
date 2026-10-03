@@ -137,6 +137,8 @@ The registry remains the schema authority; the family index and child ledgers ar
 - `RASTER_EXPORT_AND_SOURCE_CORRESPONDENCE_2026-10-03.md` — exact source-revision -> raster-export/refresh -> current-runtime correspondence for all 24 PNGs, plus exporter-tooling gaps.
 - `../evidence/raster_export_lineage_2026-10-03.json` — machine-readable per-raster lineage evidence.
 
+- `SERVICE_TUNNEL_AMBIENT_ANIMATION_MIGRATION_CONTRACT_2026-10-03.md` — PR #31 survival/migration contract, reduced-motion boundary, lifecycle/performance rules and promotion gates.
+
 ## Current operational evidence
 
 Earlier Wave A pre-build language is historical. Use [Raster delivery evidence](RASTER_DELIVERY_EVIDENCE_2026-10-02.md), the production ledger and [Room composition contract](ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md) for current source-grounded state. No uniform production stage applies to the entire 500-unit plan.
