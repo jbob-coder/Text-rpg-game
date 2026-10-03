@@ -733,3 +733,22 @@ The moving-base `docs/program/*` hierarchy is not activated by these migrations.
 - [Player-safe room actor & context panel projection contract](android/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md): exact current Python/Kotlin/Compose gap, versioned room payload, hidden-state redaction, opening actor equivalence, support-actor identity rule, semantic placement migration, contextual panel lifecycle and verification gates.
 
 This document is an implementation target, not evidence that room-actor projection already exists at runtime.
+
+
+## D-029 family-level asset provenance continuation
+
+- [Asset provenance registry](assets/ASSET_PROVENANCE_REGISTRY.md): master provenance schema, stage vocabulary, branch awareness and supersession rules.
+- [Asset family provenance index](assets/ASSET_FAMILY_PROVENANCE_INDEX_2026-10-03.md): operational navigation from current asset families to source/code master, raster/export, branch/head, runtime consumer, QA, production stage, migration risk and reconstruction sequence.
+- [Character, equipment, item, and actor provenance](assets/CHARACTER_EQUIPMENT_ITEM_ACTOR_PROVENANCE_2026-10-03.md): player/item/equipment/staging/actor family evidence, raster precedence, Jack-reference distinction and portrait gaps.
+- [Environment, scene, and map provenance](assets/ENVIRONMENT_SCENE_MAP_PROVENANCE_2026-10-03.md): nine-scene source/raster lineage, environment composition families, map families and divergent static-art candidates.
+- [UI, FX, held-prop, and animation provenance](assets/UI_FX_ANIMATION_PROVENANCE_2026-10-03.md): UI/Trace families plus deferred PR #9 held-prop and PR #31 ambient-animation candidates.
+
+Authority classification:
+
+- **master:** `ASSET_PROVENANCE_REGISTRY.md`;
+- **operational child index:** `ASSET_FAMILY_PROVENANCE_INDEX_2026-10-03.md`;
+- **complementary evidence children:** the three family ledgers;
+- **exact raster evidence:** `assets/RASTER_DELIVERY_EVIDENCE_2026-10-02.md` + `evidence/raster_bindings_2026-10-02.json`;
+- **exact static source/raster divergence evidence:** `assets/SOURCE_RASTER_RECONCILIATION_2026-10-02.md`.
+
+The family ledgers do not promote branch candidates, grant canon approval, or replace runtime/source authority. D-029 remains incomplete until the remaining source lineage, survivor, approval and QA gaps are closed.
