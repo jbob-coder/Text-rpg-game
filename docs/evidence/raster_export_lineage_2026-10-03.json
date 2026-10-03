@@ -28,7 +28,12 @@
     "pr22_source_refinement_commit": "d3367eb1242c9f73c6c5ed6ec2055b34228b5bc3",
     "pr22_source_validity_fix_commit": "a3f8aa7f85a3aad1c33677e11392e98f12210b35",
     "pr22_raster_refresh_commit": "f8b681c239b48ccd4e28be2ec9f5f0520c66f6ee",
-    "pr22_verified_head": "2a1c7f59843f0ff248daba97781ca99279829b6c"
+    "pr22_verified_head": "2a1c7f59843f0ff248daba97781ca99279829b6c",
+    "pr19_parent_source_context": "5a8151a56265e0b0b4a39fcb6f62aa1c4d8e4102",
+    "pr19_initial_export_source_blobs": {
+      "PixelAssetCatalog": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540",
+      "PixelSceneCatalog": "529231483cf1147cbb276fb45c9bbd9925b11efb"
+    }
   },
   "transformation_tooling": {
     "status": "NOT_PERSISTED_OR_NOT_FOUND",
@@ -57,7 +62,8 @@
       "current_raster_revision_commit": "c7f03fadffdd83fe05d9c33e9f450d7481f686f0",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "529231483cf1147cbb276fb45c9bbd9925b11efb"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_district_plaza_open_scene.png",
@@ -75,7 +81,8 @@
       "current_raster_revision_commit": "c7f03fadffdd83fe05d9c33e9f450d7481f686f0",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "529231483cf1147cbb276fb45c9bbd9925b11efb"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_evac_stair_default_scene.png",
@@ -93,7 +100,8 @@
       "current_raster_revision_commit": "c7f03fadffdd83fe05d9c33e9f450d7481f686f0",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "529231483cf1147cbb276fb45c9bbd9925b11efb"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_gate_twelve_sealed_scene.png",
@@ -111,7 +119,8 @@
       "current_raster_revision_commit": "d2f529c44452ebb3d9833ad07f2482bd69f405ff",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "529231483cf1147cbb276fb45c9bbd9925b11efb"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_courier_necktag_icon.png",
@@ -129,7 +138,8 @@
       "current_raster_revision_commit": "d2f529c44452ebb3d9833ad07f2482bd69f405ff",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_courier_necktag_paperdoll.png",
@@ -147,7 +157,8 @@
       "current_raster_revision_commit": "f8b681c239b48ccd4e28be2ec9f5f0520c66f6ee",
       "correspondence_class": "SOURCE_REVISED_THEN_RASTER_REFRESHED",
       "correspondence_evidence": "PR #22 states the five runtime-preferred PNG rasters were refreshed while retaining exact source-native Kotlin fallbacks",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_damaged.png",
@@ -165,7 +176,8 @@
       "current_raster_revision_commit": "d2f529c44452ebb3d9833ad07f2482bd69f405ff",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_icon.png",
@@ -183,7 +195,8 @@
       "current_raster_revision_commit": "d2f529c44452ebb3d9833ad07f2482bd69f405ff",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_opened.png",
@@ -201,7 +214,8 @@
       "current_raster_revision_commit": "d2f529c44452ebb3d9833ad07f2482bd69f405ff",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_signal_lost.png",
@@ -219,7 +233,8 @@
       "current_raster_revision_commit": "d2f529c44452ebb3d9833ad07f2482bd69f405ff",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_depot_jacket_icon.png",
@@ -237,7 +252,8 @@
       "current_raster_revision_commit": "9b2e2108eba5f22240286d3ebd02070e0b706c51",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_depot_jacket_paperdoll.png",
@@ -255,7 +271,8 @@
       "current_raster_revision_commit": "f8b681c239b48ccd4e28be2ec9f5f0520c66f6ee",
       "correspondence_class": "SOURCE_REVISED_THEN_RASTER_REFRESHED",
       "correspondence_evidence": "PR #22 states the five runtime-preferred PNG rasters were refreshed while retaining exact source-native Kotlin fallbacks",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_maintenance_seal_icon.png",
@@ -273,7 +290,8 @@
       "current_raster_revision_commit": "d2f529c44452ebb3d9833ad07f2482bd69f405ff",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_signal_ring_icon.png",
@@ -291,7 +309,8 @@
       "current_raster_revision_commit": "9b2e2108eba5f22240286d3ebd02070e0b706c51",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_signal_ring_paperdoll.png",
@@ -309,7 +328,8 @@
       "current_raster_revision_commit": "9b2e2108eba5f22240286d3ebd02070e0b706c51",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_work_gloves_icon.png",
@@ -327,7 +347,8 @@
       "current_raster_revision_commit": "9b2e2108eba5f22240286d3ebd02070e0b706c51",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_item_work_gloves_paperdoll.png",
@@ -345,7 +366,8 @@
       "current_raster_revision_commit": "f8b681c239b48ccd4e28be2ec9f5f0520c66f6ee",
       "correspondence_class": "SOURCE_REVISED_THEN_RASTER_REFRESHED",
       "correspondence_evidence": "PR #22 states the five runtime-preferred PNG rasters were refreshed while retaining exact source-native Kotlin fallbacks",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_platform_nine_blackout_scene.png",
@@ -363,7 +385,8 @@
       "current_raster_revision_commit": "f283b6592ed2342576e2461efa6fc01637bdb965",
       "correspondence_class": "SOURCE_REVISED_THEN_RASTER_REFRESHED",
       "correspondence_evidence": "source and raster changed together in the recorded fidelity-refinement commit",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "529231483cf1147cbb276fb45c9bbd9925b11efb"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_player_gameplay_front_base.png",
@@ -381,7 +404,8 @@
       "current_raster_revision_commit": "f8b681c239b48ccd4e28be2ec9f5f0520c66f6ee",
       "correspondence_class": "SOURCE_REVISED_THEN_RASTER_REFRESHED",
       "correspondence_evidence": "PR #22 states the five runtime-preferred PNG rasters were refreshed while retaining exact source-native Kotlin fallbacks",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_player_hair_tech_placeholder.png",
@@ -399,7 +423,8 @@
       "current_raster_revision_commit": "f8b681c239b48ccd4e28be2ec9f5f0520c66f6ee",
       "correspondence_class": "SOURCE_REVISED_THEN_RASTER_REFRESHED",
       "correspondence_evidence": "PR #22 states the five runtime-preferred PNG rasters were refreshed while retaining exact source-native Kotlin fallbacks",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "61b435ae1407c3cd0ebb156b3f7307b2cf05e540"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_relay_workbench_default_scene.png",
@@ -417,7 +442,8 @@
       "current_raster_revision_commit": "dea77b1c72686e72f448367784493b2882e5c14e",
       "correspondence_class": "SOURCE_REVISED_THEN_RASTER_REFRESHED",
       "correspondence_evidence": "source and raster changed together in the recorded fidelity-refinement commit",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "529231483cf1147cbb276fb45c9bbd9925b11efb"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_service_tunnel_default_scene.png",
@@ -435,7 +461,8 @@
       "current_raster_revision_commit": "c7f03fadffdd83fe05d9c33e9f450d7481f686f0",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "529231483cf1147cbb276fb45c9bbd9925b11efb"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_trace_chamber_idle_scene.png",
@@ -453,7 +480,8 @@
       "current_raster_revision_commit": "c7f03fadffdd83fe05d9c33e9f450d7481f686f0",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "529231483cf1147cbb276fb45c9bbd9925b11efb"
     },
     {
       "path": "android/app/src/main/res/drawable-nodpi/pixel_workshop_row_default_scene.png",
@@ -471,7 +499,8 @@
       "current_raster_revision_commit": "c7f03fadffdd83fe05d9c33e9f450d7481f686f0",
       "correspondence_class": "INITIAL_EXPORT_REMAINS_CURRENT",
       "correspondence_evidence": "PR #19 states PNGs were exported while original PixelSprite definitions remained exact fallback/reviewable source; no later visual revision for this asset was found",
-      "pixel_equality_reproduced_in_this_audit": false
+      "pixel_equality_reproduced_in_this_audit": false,
+      "initial_export_source_blob": "529231483cf1147cbb276fb45c9bbd9925b11efb"
     }
   ]
 }
