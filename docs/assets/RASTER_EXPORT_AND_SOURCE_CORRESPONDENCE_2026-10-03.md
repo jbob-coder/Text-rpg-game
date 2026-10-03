@@ -32,7 +32,7 @@ For each current PNG, the machine-readable evidence now records:
 
 `source file -> source revision -> initial export commit -> later refresh/refinement commit when any -> current raster blob -> runtime binding`
 
-The remaining limitation is the actual exporter implementation/tool invocation. That tooling is not presently reconstructable from repository evidence.
+The historical PR #19 exporter implementation/tool invocation remains unknown and is not reconstructable from repository evidence. A new repository-owned reconstruction verifier/exporter now exists, but it is a modern reconstruction utility rather than evidence of the historical authoring tool, and its current 24-PNG equality path remains execution-pending.
 
 ## 2. Confirmed source authority
 
@@ -260,34 +260,45 @@ Its verification path is designed to:
 5. compare dimensions and decoded RGBA pixels;
 6. recompute SHA-256 and Git blob SHA-1;
 7. compare those identities with `raster_bindings_2026-10-02.json`;
-8. compare current source Git blobs with `raster_export_lineage_2026-10-03.json`.
+8. compare current source Git blobs with `raster_export_lineage_2026-10-03.json`;
+9. verify `PixelRasterCatalog` still maps every documented asset symbol to the expected drawable;
+10. verify binding and lineage path sets/metadata have not silently diverged.
 
 Its reconstruction path adds a safe explicit `--export-dir` mode that:
 
 - writes deterministic 8-bit RGBA PNGs into a separate destination tree;
 - uses filter type 0 and deterministic zlib level 9 output;
 - refuses to export directly onto the repository root;
+- rejects absolute, parent-traversal and duplicate binding paths before export;
+- rejects duplicate asset-symbol/resource-name bindings;
 - preserves the repository-relative raster paths;
 - treats decoded source pixels, not historical PNG compression bytes, as reconstruction authority.
 
 The test source requires:
 
 - all 24 current raster bindings to match source masters/evidence;
+- runtime `PixelRasterCatalog` bindings and lineage metadata to remain aligned;
 - zero pixel mismatches;
 - deterministic reconstruction output across independent export directories;
-- rejection of repository-root export.
+- rejection of repository-root export;
+- rejection of parent-traversal and duplicate binding paths.
 
 ### Execution status
 
 No execution result is claimed yet.
 
-At exact branch head `bc4e17a650ca0599eb2999afea32b449bda022ab`:
+At exact hardened-code head `becbd74fbb6d39ad8d7293243e3970d126241881`:
 
-- GitHub had created no pull-request workflow run for this branch/head;
+- tool blob: `116814f640beedaffb230b9214b6ccf920e586dd`;
+- test blob: `d019bba15b0fb58409c675bcdc84920e7b8fe546`;
+- GitHub reported no pull-request workflow run or combined status for that head;
 - no registered Codex execution environment was available;
+- local network checkout was unavailable in this session;
 - therefore the new repository test has not been observed running in this work session.
 
-The tool is **implemented but unverified by execution**.
+A separate source/evidence audit at that head confirmed 24 runtime mappings, 24 binding records, 24 lineage records, unique binding/lineage paths, equal path sets, and zero runtime-binding/metadata mismatches. That is **not** a PNG pixel-equivalence execution.
+
+The tool is **implemented and hardened but unverified by execution**.
 
 D-029 must not convert the intended 24/24 equality assertion into fact until the test or tool actually runs and its output is inspected.
 
@@ -375,9 +386,9 @@ This closes a major part of the earlier “exact authoring-source lineage for ex
 
 ### Still incomplete
 
-- persisted/reproducible exporter implementation;
-- fresh pixel-for-pixel source/raster equivalence execution;
-- divergent Service Tunnel/Quiet Stair survivor selection;
+- observed execution of the repository-owned verifier/exporter on an exact checkout, with persisted machine-readable result;
+- fresh pixel-for-pixel source/raster equivalence execution and repair/documentation of any mismatch;
+- owner visual/canon promotion decision for the Service Tunnel and Quiet Stair survivor candidates;
 - final Jack production art/portrait lineage;
 - owner/canon approval;
 - final destination-head/device visual QA.
