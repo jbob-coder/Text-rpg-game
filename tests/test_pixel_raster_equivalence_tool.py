@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import sys
 import unittest
 from pathlib import Path
 
@@ -17,6 +18,7 @@ if _spec is None or _spec.loader is None:
     raise RuntimeError(f"Unable to load {TOOL_PATH}")
 
 verifier = importlib.util.module_from_spec(_spec)
+sys.modules[_spec.name] = verifier
 _spec.loader.exec_module(verifier)
 
 
