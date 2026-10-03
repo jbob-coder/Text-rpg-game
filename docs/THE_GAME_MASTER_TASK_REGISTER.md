@@ -820,16 +820,18 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 
 
 ### TASK D-044 — Reconcile PR #33 moving base
-- STATUS: `IN_PROGRESS / SAFE SELECTIVE MIGRATION COMPLETE`
+- STATUS: `IN_PROGRESS / SHARED-FILE RECONCILIATION COMPLETE / CLASS-C EXTRACTION REMAINS`
 - PRIORITY: `P0`
 - OUTPUTS:
   - `docs/PR33_MOVING_BASE_DRIFT_RECONCILIATION_2026-10-02.md`
   - `docs/BASE_BRANCH_DOCUMENT_CROSSWALK_2026-10-02.md`
-- VERIFIED: PR #33 program branch and `docs/settlement-region-build-plan` diverged from merge base `c261b2aaf8bd978d27b46f8fea03435c0c5734d0`; inspected state showed 140 program-side commits versus 99 base-side commits after the merge base.
+  - `docs/PR33_LIVE_SHARED_FILE_RECONCILIATION_2026-10-03.md`
+- VERIFIED: live ref audit resolved `docs/master-game-development-program@ab7c041d6916b2e37b75430523a2183f9483883b` and `docs/settlement-region-build-plan@65d2db8538c1b8302c314f2fbe9eb7a1b585b51d`; they remain diverged from merge base `c261b2aaf8bd978d27b46f8fea03435c0c5734d0` with 210 program-side commits and 99 target-side commits at that audit.
+- SHARED FILE RESULT: `AGENTS.md`, `README.md`, `docs/IMPLEMENTATION_STATUS.md`, and `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md` are `KEEP PROGRAM`. No whole-file migration or parallel active authority is required. Target Gate Twelve's GT-IMP-001 requirements are preserved by the current Gate Twelve plan and dedicated D-030 actor-projection contract.
 - DECISION: no blind merge/rebase. Preserve current program authority, block the conflicting “2,000,000 separate files” interpretation, and migrate only unique non-conflicting children.
 - MIGRATED CHILDREN:
   - `docs/assets/GLOBAL_ASSET_REUSE_OCCLUSION_MATRIX.md`
   - `docs/world/WORLD_ENTITY_ID_AND_REFERENCE_STANDARD.md`
   - `docs/world/REGION_SETTLEMENT_DOCUMENTATION_TEMPLATE.md`
   - `docs/world/GATE_TWELVE_EXTERNAL_CONNECTIONS_AND_EXPANSION_REGISTER.md`
-- REMAINS: detailed shared-file diff for entrypoints/Gate Twelve, Class C unique-requirement extraction, and reassessment of PR mergeability/target branch after authority conflicts are resolved.
+- REMAINS: inspect remaining live target Class C / `EXTRACT UNIQUE` documents for genuinely absent requirements; keep unit-dependent corpus machinery blocked; then re-resolve both branch refs and reassess PR mergeability/target-branch handling.
