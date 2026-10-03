@@ -3,7 +3,7 @@
   "repository": "jbob-coder/Text-rpg-game",
   "branch": "docs/master-game-development-program",
   "recorded_at": "2026-10-03 AST",
-  "branch_head_at_recording": "e8b85b398b1069c2ae3353d3dbeb9c952538c6d6",
+  "branch_head_at_recording": "d42d3e5a258cac150795c41059d2c635caf5789e",
   "status": "IMPLEMENTED_HARDENED_EXECUTION_BLOCKED_BY_ENVIRONMENT",
   "tool": {
     "path": "tools/verify_pixel_raster_equivalence.py",
@@ -30,7 +30,7 @@
   },
   "test": {
     "path": "tests/test_pixel_raster_equivalence_tool.py",
-    "git_blob": "da2dd64e738bbc31174845bd4b1484a8dbeb692f",
+    "git_blob": "959b2d8aa3deb97e1b51fb75b77c01302e596a50",
     "assertions": [
       "24 current raster bindings are present",
       "verification status is PASS",
@@ -41,6 +41,7 @@
       "exported PNGs decode to expected dimensions",
       "repository-root export raises ValueError",
       "parent-traversal binding paths are rejected",
+      "absolute binding paths are rejected",
       "duplicate binding paths are rejected",
       "duplicate asset symbols are rejected",
       "duplicate resource names are rejected"
@@ -48,18 +49,37 @@
   },
   "execution": {
     "observed_in_this_session": false,
-    "checked_head": "e8b85b398b1069c2ae3353d3dbeb9c952538c6d6",
-    "trigger_commit": "e8b85b398b1069c2ae3353d3dbeb9c952538c6d6",
-    "trigger_change": "tests/test_pixel_raster_equivalence_tool.py gained duplicate asset-symbol and duplicate resource-name rejection coverage, which matches the existing pull_request tests/** workflow path filter.",
+    "checked_head": "d42d3e5a258cac150795c41059d2c635caf5789e",
+    "trigger_attempts": [
+      {
+        "commit_sha": "e8b85b398b1069c2ae3353d3dbeb9c952538c6d6",
+        "write_path": "Git Data API create_commit + update_ref",
+        "qualifying_change": "tests/test_pixel_raster_equivalence_tool.py",
+        "observed_actions_runs": 0,
+        "observed_combined_statuses": 0
+      },
+      {
+        "commit_sha": "d42d3e5a258cac150795c41059d2c635caf5789e",
+        "write_path": "GitHub Contents API update_file",
+        "qualifying_change": "tests/test_pixel_raster_equivalence_tool.py",
+        "observed_actions_runs": 0,
+        "observed_combined_statuses": 0
+      }
+    ],
+    "workflow_base_branch": "docs/settlement-region-build-plan",
+    "workflow_base_blob": "6718af1b07d5815db5a81667c53151fe3e478fda",
+    "workflow_pull_request_paths_include_tests": true,
     "github_pull_request_workflow_run": null,
     "github_branch_workflow_run_count": 0,
     "github_combined_statuses": [],
     "repository_pull_request_actions_latest_observed_at": "2026-10-02T02:45:29Z",
     "codex_environment_available": false,
     "local_network_checkout_available": false,
-    "local_network_checkout_error": "git clone could not resolve host github.com in the execution container",
+    "local_network_checkout_error": "Execution container DNS lookup for github.com failed; curl reported 'Could not resolve host: github.com'.",
+    "archive_download_available": false,
     "result": null,
-    "blocker": "No executable exact-checkout environment was available and GitHub created no Actions run for PR #33 / docs/master-game-development-program after the trigger commit.",
+    "blocker": "No exact-checkout execution environment is currently available. PR #33 produced no Actions run after qualifying test commits written through either the Git Data API or the normal GitHub Contents API.",
+    "ruled_out_hypothesis": "The missing Actions run is not specific to the earlier low-level update_ref publishing path.",
     "rule": "Do not promote 24/24 pixel equivalence until this tool or test executes and the output is inspected."
   },
   "future_evidence_fields": [
@@ -75,7 +95,7 @@
     "result"
   ],
   "source_only_audit": {
-    "audited_head": "e8b85b398b1069c2ae3353d3dbeb9c952538c6d6",
+    "audited_head": "d42d3e5a258cac150795c41059d2c635caf5789e",
     "pixel_asset_catalog_blob": "dc6f1d553dbb8abbccecef728ee67bbf54bad3c2",
     "pixel_scene_catalog_blob": "b6126ddcab09d1005baa0352299ec57b301bf3d2",
     "pixel_theme_blob": "2c16d6ec9d0ae56186d6b7baf62f76802a29d4a1",

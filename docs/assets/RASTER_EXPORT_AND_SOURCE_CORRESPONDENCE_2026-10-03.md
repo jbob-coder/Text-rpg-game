@@ -285,39 +285,36 @@ The test source requires:
 
 ### Execution status
 
-Fresh pixel-equality execution is still **blocked by environment**, not passed.
+Fresh pixel-equality execution remains **blocked by environment**, not passed.
 
-The verifier test was deliberately strengthened and pushed at exact head `e8b85b398b1069c2ae3353d3dbeb9c952538c6d6`:
+The verifier test is hardened through exact code head `d42d3e5a258cac150795c41059d2c635caf5789e`:
 
 - tool blob: `116814f640beedaffb230b9214b6ccf920e586dd`;
-- test blob: `da2dd64e738bbc31174845bd4b1484a8dbeb692f`;
-- the test now explicitly rejects duplicate binding paths, duplicate asset symbols and duplicate resource names;
-- the commit touched `tests/**`, which matches the existing `Android Pixel Client` pull-request workflow path filter.
+- test blob: `959b2d8aa3deb97e1b51fb75b77c01302e596a50`;
+- the test explicitly rejects parent traversal, absolute paths, duplicate binding paths, duplicate asset symbols and duplicate resource names;
+- it still requires 24 assets, 24 pixel matches, zero pixel mismatches, all identity/lineage/runtime-binding checks, deterministic reconstruction output and repository-root export refusal.
 
-Observed execution evidence after that trigger:
+Two qualifying CI-trigger experiments were observed:
 
-- PR #33 / branch `docs/master-game-development-program` still had **zero GitHub Actions runs**;
-- the exact commit had no combined status entries;
-- the repository pull-request Actions history visible through the connector had no run newer than `2026-10-02T02:45:29Z`;
+1. `e8b85b398b1069c2ae3353d3dbeb9c952538c6d6` was published through Git Data API commit/ref operations and changed `tests/**`; no Actions run or combined status appeared.
+2. `d42d3e5a258cac150795c41059d2c635caf5789e` was published through GitHub's normal Contents API and changed `tests/**`; no Actions run or combined status appeared.
+
+PR #33 targets `docs/settlement-region-build-plan`. Its base-branch `Android Pixel Client` workflow blob `6718af1b07d5815db5a81667c53151fe3e478fda` has a `pull_request` path filter that explicitly includes `tests/**`.
+
+Therefore the missing CI run is **not explained by the earlier low-level ref-update publishing method**.
+
+Other execution routes were unavailable in this work session:
+
+- PR #33 / `docs/master-game-development-program` had zero observed Actions runs;
 - no registered Codex execution environment was available;
-- direct local checkout failed because the execution container could not resolve `github.com`.
+- the execution container could not resolve `github.com`;
+- the direct repository archive route could not be materialized.
 
-A refreshed source/evidence structural audit at the same head confirmed:
+The existing source/evidence structural audit remains valid for the audited code head: 24 runtime mappings, 24 binding records, 24 lineage records, equal binding/lineage path sets and zero runtime-binding/metadata mismatches.
 
-- 24 runtime raster mappings;
-- 24 binding records;
-- 24 lineage records;
-- zero duplicate binding paths;
-- zero duplicate lineage paths;
-- equal binding/lineage path sets;
-- zero runtime-binding or metadata mismatches;
-- current lineage evidence blob `f3dc38456c6dba64cbefdbe1015d3715d1432b1b`.
+That structural audit is **not** PNG pixel-equivalence execution.
 
-This structural audit is **not** PNG pixel-equivalence execution.
-
-The tool is therefore **implemented, hardened and structurally reconciled, but execution-blocked**.
-
-D-029 must not convert the intended 24/24 equality assertion into fact until the repository test or tool actually executes and its output is inspected.
+The tool is therefore **implemented, hardened and structurally reconciled, but execution-blocked**. D-029 must not promote the intended 24/24 pixel equality assertion until the repository test or tool actually executes and its output is inspected.
 
 ## 8. Pixel-equality limitation
 
