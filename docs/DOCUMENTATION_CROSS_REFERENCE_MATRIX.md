@@ -767,3 +767,11 @@ Authority classification:
 - **divergent static survivor evidence:** `assets/SOURCE_RASTER_RECONCILIATION_2026-10-02.md`.
 
 The export-lineage evidence does not claim that the historical exporter is persisted or that pixel equality was freshly reproduced.
+
+
+## D-029 ambient-animation migration child
+
+- [Service Tunnel ambient animation migration contract](assets/SERVICE_TUNNEL_AMBIENT_ANIMATION_MIGRATION_CONTRACT_2026-10-03.md): PR #31 exact branch evidence, stable track IDs/timing/bounds, static-art dependency, reduced-motion ownership, selective reimplementation sequence, lifecycle/performance rules and destination-head verification gates.
+- [Application UX master plan](android/APPLICATION_UX_MASTER_PLAN.md): parent accessibility authority; reduced motion is required and remains presentation/application state, not gameplay authority.
+
+This child resolves the provenance/migration strategy but does not claim the animation or reduced-motion path is implemented.
