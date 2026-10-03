@@ -63,6 +63,24 @@ class PixelRasterEquivalenceToolTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             verifier.export_repository_rasters(ROOT, ROOT)
 
+    def test_binding_validator_rejects_path_escape(self) -> None:
+        evidence = json.loads(
+            (ROOT / verifier.BINDING_EVIDENCE).read_text(encoding="utf-8")
+        )
+        evidence["assets"][0]["path"] = "../escape.png"
+
+        with self.assertRaises(ValueError):
+            verifier._validate_binding_assets(evidence)
+
+    def test_binding_validator_rejects_duplicate_path(self) -> None:
+        evidence = json.loads(
+            (ROOT / verifier.BINDING_EVIDENCE).read_text(encoding="utf-8")
+        )
+        evidence["assets"][-1]["path"] = evidence["assets"][0]["path"]
+
+        with self.assertRaises(ValueError):
+            verifier._validate_binding_assets(evidence)
+
 
 if __name__ == "__main__":
     unittest.main()
