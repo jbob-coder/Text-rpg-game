@@ -752,3 +752,18 @@ Authority classification:
 - **exact static source/raster divergence evidence:** `assets/SOURCE_RASTER_RECONCILIATION_2026-10-02.md`.
 
 The family ledgers do not promote branch candidates, grant canon approval, or replace runtime/source authority. D-029 remains incomplete until the remaining source lineage, survivor, approval and QA gaps are closed.
+
+
+## D-029 exact raster export lineage
+
+- [Raster export and source correspondence](assets/RASTER_EXPORT_AND_SOURCE_CORRESPONDENCE_2026-10-03.md): exact current source revision -> export/refresh commit -> runtime raster relationship for all 24 current PNGs.
+- `docs/evidence/raster_export_lineage_2026-10-03.json`: machine-readable per-raster lineage, current source/raster blobs and correspondence class.
+
+Authority classification:
+
+- **master schema:** `assets/ASSET_PROVENANCE_REGISTRY.md`;
+- **exact static raster identity:** `assets/RASTER_DELIVERY_EVIDENCE_2026-10-02.md` + `evidence/raster_bindings_2026-10-02.json`;
+- **export/history correspondence:** `assets/RASTER_EXPORT_AND_SOURCE_CORRESPONDENCE_2026-10-03.md` + `evidence/raster_export_lineage_2026-10-03.json`;
+- **divergent static survivor evidence:** `assets/SOURCE_RASTER_RECONCILIATION_2026-10-02.md`.
+
+The export-lineage evidence does not claim that the historical exporter is persisted or that pixel equality was freshly reproduced.
