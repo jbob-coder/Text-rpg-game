@@ -395,6 +395,23 @@ They record:
 - PR #22's five-raster player/loadout refresh;
 - Platform Nine and Relay Workbench paired source/raster refinements;
 - current source and raster blobs;
-- the explicit limitation that exporter tooling is not persisted and pixel equality was not freshly reproduced.
+- the historical-exporter limitation plus the current reconstructed-tooling state: the original PR #19 exporter is not persisted, while `tools/verify_pixel_raster_equivalence.py` now provides a deterministic verifier/reconstruction exporter whose execution is still pending; pixel equality has not yet been freshly reproduced.
 
 This registry remains the schema authority. The new lineage evidence is a child evidence record and does not itself grant `CANON_APPROVED`.
+
+
+## 2026-10-03 deterministic reconstruction tooling
+
+D-029 now includes a repository-owned reconstruction/verifier implementation:
+
+- `tools/verify_pixel_raster_equivalence.py`;
+- `tests/test_pixel_raster_equivalence_tool.py`;
+- `docs/evidence/raster_equivalence_verifier_status_2026-10-03.json`.
+
+Classification:
+
+- historical PR #19 exporter: `UNKNOWN / NOT PERSISTED`;
+- new reconstruction verifier/exporter: `IMPLEMENTED / EXECUTION PENDING`;
+- fresh current 24/24 pixel-equivalence claim: `NOT YET VERIFIED`.
+
+Do not conflate the new reconstruction implementation with historical authoring provenance.
