@@ -489,7 +489,75 @@ Stage:
 
 Do not merge the branch wholesale merely to obtain Quiet Stair art.
 
-## 13. Reconstruction sequence
+
+
+## 13. Static survivor decision boundary
+
+The exact PR topology and changed-file sets reduce the earlier survivor ambiguity.
+
+### Service Tunnel
+
+Current inherited baseline:
+
+- source/raster lineage remains the PR #19/current program version.
+
+Refined candidate:
+
+- PR #27 `feature/service-tunnel-scene-art-pass@d19e6edba4dec5345f1365bb358084b9b77eb7d9`;
+- changes exactly the Service Tunnel scene source, Service Tunnel PNG, related scene test, Story screenshot test/workflow evidence;
+- PR description states the PNG was refreshed from the same 128x64 source-native design;
+- exact-head run `36950023830` succeeded;
+- physical Galaxy A03 approval remains separate.
+
+PR #30 is stacked on PR #27 and changes only Quiet Stair-specific files plus shared scene/test files for that additional stair revision. It does **not** provide a second Service Tunnel PNG revision.
+
+Therefore the Service Tunnel static choice is:
+
+`CURRENT INHERITED BASELINE`
+vs
+`PR #27 REFINED CANDIDATE`
+
+not PR #27 vs PR #28 vs PR #30.
+
+### Quiet Stair / EVAC_STAIR
+
+Current inherited baseline:
+
+- current program-branch source/raster.
+
+Refined candidate:
+
+- PR #30 `feature/quiet-stair-scene-art-pass@7adacd474ae22908bba2fc72247f500312ea7483`;
+- stacked on PR #27;
+- changes the Quiet Stair scene source and preferred PNG plus its tests/evidence;
+- PR description states the PNG was refreshed from the same deterministic source-native 128x64 design;
+- historical workflow run `36950951038` succeeded;
+- physical Galaxy A03 approval remains separate.
+
+Therefore the Quiet Stair static choice is:
+
+`CURRENT INHERITED BASELINE`
+vs
+`PR #30 REFINED CANDIDATE`.
+
+### PR #28 relationship
+
+PR #28 does not participate as a static-scene survivor. It adds optional Service Tunnel arrival-preview composition using the already-existing infrastructure atlas and does not change the named Service Tunnel PNG.
+
+### Decision status
+
+Technical branch/survivor lineage: **RESOLVED**.
+
+Artistic promotion:
+
+- Service Tunnel PR #27: `OWNER DECISION REQUIRED / VISUAL PROMOTION PENDING`;
+- Quiet Stair PR #30: `OWNER DECISION REQUIRED / VISUAL PROMOTION PENDING`.
+
+No documentation agent should silently choose the refined candidate merely because its CI passed. CI verifies implementation integrity, not canon/art approval.
+
+If a refined candidate is approved, integrate it by file-level migration onto the selected implementation parent and re-run destination-head tests/screenshots rather than merging the divergent branch wholesale.
+
+## 14. Reconstruction sequence
 
 If these visual systems were lost:
 
@@ -504,7 +572,7 @@ If these visual systems were lost:
 9. do not adopt PR #27/#28/#30 until file-level survivor selection is recorded;
 10. run unit tests, native-scale render comparison, emulator screenshots and required device QA.
 
-## 14. Remaining gaps
+## 15. Remaining gaps
 
 - current 24-PNG commit-level export/refresh lineage is documented, but the deterministic exporter/tool invocation is not persisted/found;
 - fresh pixel-for-pixel source/raster equivalence has not been reproduced;
