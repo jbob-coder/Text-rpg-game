@@ -2,7 +2,8 @@
 
 Status: **ACTIVE / D-029 CHILD LEDGER / SOURCE-GROUNDED PARTIAL**  
 Repository: `jbob-coder/Text-rpg-game`  
-Inspected implementation baseline: `docs/master-game-development-program@2ad50d7aff6f153b90036f8e0f61043242a09765`  
+Inspected implementation baseline: `docs/master-game-development-program@58a61eb202bbb9443e01f8689e18e8ef0e99d3c7`  
+Runtime/content delta from prior D-029 baseline `2ad50d7aff6f153b90036f8e0f61043242a09765`: **none**; intervening changes are documentation/evidence only.  
 Parent: [Asset Family Provenance Index](ASSET_FAMILY_PROVENANCE_INDEX_2026-10-03.md)
 
 ## 1. Scope
@@ -166,9 +167,16 @@ No PNG raster export is currently required for this code-master family.
 - four reusable 32x32 infrastructure tiles;
 - explicit location-bound arrival previews.
 
-Stage:
+Current stage must be split by asset rather than assigned to the family as a whole:
 
-`SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED`
+| Asset | Current stage | Current consumer evidence |
+| --- | --- | --- |
+| `DEPOT_FACADE_EXTERIOR` | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` | exact `DISTRICT_PLAZA` Map arrival preview |
+| `MAINTENANCE_CORRIDOR_CONNECTOR` | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` | exact `SERVICE_TUNNEL` Map arrival preview |
+| `MUNICIPAL_ARCHIVE_EXTERIOR` | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` | exact `DISTRICT_ARCHIVE` Map arrival preview |
+| `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS` | `SOURCE_MASTER_PRESENT + CODE_PRESENT + DEFERRED_INTEGRATION` | no main-UI runtime consumer found |
+
+The older `RUNTIME_EXPANSION_ASSET_WAVE_2026-09-30.json` record is historical evidence for its own snapshot: it still marks `MAINTENANCE_CORRIDOR_CONNECTOR` deferred. Current source is newer and now binds that module through `arrivalPreview("SERVICE_TUNNEL")`. Historical manifest state must not override current runtime inspection.
 
 Exact PR #8 reconciliation:
 
@@ -176,7 +184,7 @@ Exact PR #8 reconciliation:
 - current catalog blob: `440b7d41141d70700d6eba7c84303cbf109c10f2`;
 - a line-level comparison found the four module/atlas visual definitions preserved without PR #8-only geometry loss;
 - the current catalog adds only the later player-safe `arrivalPreview(locationId)` mapping block for `DISTRICT_PLAZA`, `DISTRICT_ARCHIVE`, and `SERVICE_TUNNEL`;
-- `RUNTIME_EXPANSION_ASSET_WAVE_2026-09-30.json` explicitly records all four assets as sourced from `B001-WAVE-L-ENVIRONMENT-MODULES`: Depot Facade and Municipal Archive Exterior are integrated/verified, while Maintenance Corridor Connector and Municipal Infrastructure Tile Atlas remain produced/deferred.
+- `RUNTIME_EXPANSION_ASSET_WAVE_2026-09-30.json` records all four assets as sourced from `B001-WAVE-L-ENVIRONMENT-MODULES`; its Maintenance Corridor status is now historical because current source later added the exact `SERVICE_TUNNEL` arrival-preview binding. The atlas remains deferred.
 
 Decision:
 
@@ -184,6 +192,7 @@ PR #8 remains historical branch/provenance evidence, but its four visual source 
 
 Remaining:
 
+- legitimate composition/runtime consumer decision for `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`;
 - final material/palette approval;
 - raster export only if the runtime strategy later requires it;
 - separate PR #28 detail-candidate reconciliation against the selected Service Tunnel composition.
@@ -497,9 +506,9 @@ If these visual systems were lost:
 
 ## 14. Remaining gaps
 
-- authoring-source lineage for each scene PNG;
-- source/raster equality or intentional-difference record;
-- PR #8 unique-material review;
+- current 24-PNG commit-level export/refresh lineage is documented, but the deterministic exporter/tool invocation is not persisted/found;
+- fresh pixel-for-pixel source/raster equivalence has not been reproduced;
+- `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS` still lacks a legitimate runtime/composition consumer;
 - Service Tunnel static survivor;
 - Quiet Stair static survivor;
 - per-area asset packets for later Gate Twelve rooms;

@@ -2,7 +2,8 @@
 
 Status: **ACTIVE / D-029 FAMILY-LEVEL INDEX / PARTIAL SLICE**  
 Repository: `jbob-coder/Text-rpg-game`  
-Inspected implementation baseline: `docs/master-game-development-program@2ad50d7aff6f153b90036f8e0f61043242a09765`  
+Inspected implementation baseline: `docs/master-game-development-program@58a61eb202bbb9443e01f8689e18e8ef0e99d3c7`  
+Runtime/content delta from prior D-029 baseline `2ad50d7aff6f153b90036f8e0f61043242a09765`: **none**; intervening changes are documentation/evidence only.  
 Task: **D-029 — Exactize asset provenance and production stage**
 
 Parent authorities:
@@ -125,7 +126,7 @@ Covers:
 | Opening story actors | Kotlin code master | no | yes | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED`; actor-presence migration pending D-030 implementation |
 | Canonical portraits | no dedicated production family found on inspected program branch | no | no | `PLANNED / UNKNOWN SOURCE` |
 | Named scenes | Kotlin fallback + nine PNG bindings | yes | yes | `RASTER_PRESENT + CODE_PRESENT + INTEGRATED`; later divergent refinements unresolved |
-| Environment modules | Kotlin code master | no | yes | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` |
+| Environment modules / infrastructure atlas | Kotlin code masters | no | 3 modules: yes; atlas: no | three modules: `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED`; atlas: `SOURCE_MASTER_PRESENT + CODE_PRESENT + DEFERRED_INTEGRATION` |
 | Environment props | Kotlin code master | no | yes | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` |
 | Environment decals | Kotlin code master | no | yes | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` |
 | Environment overlays | Kotlin code master | no | yes | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` |
@@ -148,7 +149,7 @@ Covers:
 Exact open-PR evidence inspected for this slice:
 
 - PR #7 `feature/pixel-asset-wave-a@a3970de6597c77939afccb5f30d6040bdf3d608d` — historical root for the first broad pixel-asset catalogs.
-- PR #8 `feature/pixel-asset-wave-l-environment-modules@54a40bb5ad0aeafb428d128be7c1465f3d1a759b` — divergent environment-module source candidate/history.
+- PR #8 `feature/pixel-asset-wave-l-environment-modules@54a40bb5ad0aeafb428d128be7c1465f3d1a759b` — divergent historical Wave-L provenance. Its four visual definitions survive in current source. Current runtime later integrates all three 128x64 modules as exact Map arrival previews, while `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS` remains deferred with no main-UI consumer found.
 - PR #9 `feature/pixel-asset-wave-m-diagnostic-reader@063d5879413b81656cc5c7304be0afd02402f2fd` — divergent diagnostic-reader masters.
 - PR #16 `feature/pixel-assets-runtime-expansion@ddbb5f4250e26b99765999d0a8e81f59cb1ea26c` — inherited runtime asset expansion.
 - PR #19 `feature/png-pixel-art-runtime-a@c11133122d47009abc71e8c6e91c08aedbe91ae2` — inherited PNG raster delivery baseline.
@@ -193,12 +194,19 @@ Historical successful workflow evidence remains tied to the exact PR heads recor
 
 This slice is substantial but not the whole task.
 
+Resolved in the current D-029 continuation:
+
+- commit-level export/refresh lineage for all 24 current PNGs is recorded by `RASTER_EXPORT_AND_SOURCE_CORRESPONDENCE_2026-10-03.md` and its JSON evidence;
+- PR #8 environment-module source lineage is reconciled; no separate PR #8 geometry migration remains;
+- all three 128x64 PR #8-origin modules have current exact Map arrival-preview consumers;
+- the infrastructure atlas is explicitly separated as `DEFERRED_INTEGRATION`.
+
 Still incomplete:
 
-1. exact authoring-source lineage for every PNG export beyond its Git blob/hash and runtime binding;
-2. final static-survivor selection for Service Tunnel and Quiet Stair;
-3. visual comparison proving source/raster correspondence for every raster-bound family;
-4. PR #8 environment-module source lineage is reconciled: all four visual definitions survive in the current catalog, with only later arrival-preview bindings added; no separate PR #8 geometry migration remains;
+1. persisted/reproducible source-to-PNG exporter implementation/tool invocation;
+2. fresh pixel-for-pixel source/raster equivalence execution;
+3. final static-survivor selection for Service Tunnel and Quiet Stair;
+4. legitimate runtime/composition consumer decision for `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`;
 5. typed-consumer decision for PR #9 diagnostic-reader held prop;
 6. rebase/reimplementation decision for PR #31 ambient animation;
 7. final Jack production sprite and portrait family;
