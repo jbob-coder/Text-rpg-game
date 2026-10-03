@@ -784,3 +784,55 @@ This is reconstruction tooling, not evidence of the historical PR #19 exporter i
 - [Application UX master plan](android/APPLICATION_UX_MASTER_PLAN.md): parent accessibility authority; reduced motion is required and remains presentation/application state, not gameplay authority.
 
 This child resolves the provenance/migration strategy but does not claim the animation or reduced-motion path is implemented.
+
+
+## Reconstruction dependency-graph semantics — D-044 extraction
+
+Source provenance:
+- `docs/settlement-region-build-plan@65d2db8538c1b8302c314f2fbe9eb7a1b585b51d`
+- `docs/program/10_EXECUTION_COORDINATION_GRAPH.md`
+- source blob `22318ac60cad6164d2b8cc670e6d5dbd0a66c466`.
+
+This section preserves the useful graph vocabulary without activating the moving `docs/program/*` hierarchy as a second execution system.
+
+Conceptual documentation graph:
+
+`G = (V, E)`
+
+Useful node classes include:
+
+- requirement;
+- decision;
+- document;
+- world entity;
+- system;
+- repository file;
+- implementation task;
+- asset;
+- test;
+- risk;
+- evidence.
+
+Preferred relationship semantics include:
+
+- `Decision -> constrains -> Document`;
+- `Document -> specifies -> System`;
+- `System -> implemented_by -> File`;
+- `Test -> verifies -> Behavior`;
+- `Asset -> renders -> State`;
+- `Location -> belongs_to -> Region`;
+- `Route -> connects -> Location`;
+- `Gap -> blocks -> Task`;
+- `Decision -> supersedes -> Decision`.
+
+These are reconstruction/reference relationships. They do **not** require a graph database or runtime implementation.
+
+For consequential changes, graph/task handoff should also identify:
+
+- failure mode;
+- detection;
+- state/data that must survive;
+- rollback or compensating action;
+- evidence required before success.
+
+The active task register, current domain authorities and this cross-reference matrix remain the repository owners. This graph vocabulary is a way to express their relationships, not a replacement authority.
