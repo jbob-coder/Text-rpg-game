@@ -766,8 +766,16 @@ Authority classification:
 - **export/history correspondence:** `assets/RASTER_EXPORT_AND_SOURCE_CORRESPONDENCE_2026-10-03.md` + `evidence/raster_export_lineage_2026-10-03.json`;
 - **divergent static survivor evidence:** `assets/SOURCE_RASTER_RECONCILIATION_2026-10-02.md`.
 
-The export-lineage evidence does not claim that the historical exporter is persisted or that pixel equality was freshly reproduced.
+The historical PR #19 exporter remains unknown/not persisted. A new reconstruction verifier/exporter now exists, but pixel equality is not considered freshly reproduced until that tool executes and its report is inspected.
 
+
+## D-029 raster reconstruction tooling
+
+- `tools/verify_pixel_raster_equivalence.py`: deterministic standard-library current-source/PNG verifier and safe separate-tree reconstruction exporter.
+- `tests/test_pixel_raster_equivalence_tool.py`: 24-binding pixel/identity/lineage equality plus deterministic export and overwrite-safety tests.
+- `docs/evidence/raster_equivalence_verifier_status_2026-10-03.json`: machine-readable implementation status; currently `IMPLEMENTED_EXECUTION_PENDING`.
+
+This is reconstruction tooling, not evidence of the historical PR #19 exporter implementation.
 
 ## D-029 ambient-animation migration child
 
