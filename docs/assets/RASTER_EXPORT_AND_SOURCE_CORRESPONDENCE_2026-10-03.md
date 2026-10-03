@@ -229,55 +229,97 @@ This says nothing about divergent PR #27/#30 candidates; those remain separate s
 
 ## 7. Export tooling status
 
-### VERIFIED
+### Historical exporter — UNKNOWN / NOT PERSISTED
 
-The current recursive repository tree contains:
+The audited PR #19 export history establishes that PNGs were exported from the repository's reviewable source-native pixel masters, but the historical export implementation itself was not committed with those export commits.
 
-- `PixelRasterCatalog.kt`;
-- the 24 PNG files;
-- raster tests;
-- raster evidence documents.
+Repository evidence still does not establish:
 
-PR #19's PNG-export commits add the exported PNGs, but no dedicated exporter/generator script is part of those export commits.
+- the exact historical command used to generate the PNGs;
+- the historical exporter implementation language/tool;
+- whether that exporter was ephemeral/local;
+- whether every historical export used one identical tool version.
 
-A current-tree path search for export/raster/pixel tooling found no separate persisted source-to-PNG exporter utility.
+Do not rewrite this uncertainty. The new tool below is a reconstruction utility; it is **not evidence of what PR #19 originally used**.
 
-### UNKNOWN / NOT PERSISTED
+### New reconstruction verifier/exporter — IMPLEMENTED / EXECUTION PENDING
 
-Repository evidence does not currently establish:
+The documentation program branch now contains:
 
-- the exact command used to generate the PNGs;
-- the implementation language/tool used for export;
-- whether the exporter was ephemeral/local;
-- whether all exports used one identical tool version.
+- `tools/verify_pixel_raster_equivalence.py`;
+- `tests/test_pixel_raster_equivalence_tool.py`.
 
-Therefore:
+The tool is standard-library-only and is intentionally constrained to the literal `PixelSprite`/palette forms used by the current raster-bound catalogs.
 
-`Kotlin source -> PNG` lineage is source-controlled and commit-supported, but the **transformation tooling is not reconstructable yet**.
+Its verification path is designed to:
 
-This is a D-029 gap, not a reason to invent an exporter history.
+1. parse `PixelTheme.kt` named colors;
+2. parse current constant-backed `PixelSprite` masters from `PixelAssetCatalog.kt` and `PixelSceneCatalog.kt`;
+3. decode current 8-bit non-interlaced PNGs with PNG filters 0–4;
+4. canonicalize fully transparent pixels;
+5. compare dimensions and decoded RGBA pixels;
+6. recompute SHA-256 and Git blob SHA-1;
+7. compare those identities with `raster_bindings_2026-10-02.json`;
+8. compare current source Git blobs with `raster_export_lineage_2026-10-03.json`.
+
+Its reconstruction path adds a safe explicit `--export-dir` mode that:
+
+- writes deterministic 8-bit RGBA PNGs into a separate destination tree;
+- uses filter type 0 and deterministic zlib level 9 output;
+- refuses to export directly onto the repository root;
+- preserves the repository-relative raster paths;
+- treats decoded source pixels, not historical PNG compression bytes, as reconstruction authority.
+
+The test source requires:
+
+- all 24 current raster bindings to match source masters/evidence;
+- zero pixel mismatches;
+- deterministic reconstruction output across independent export directories;
+- rejection of repository-root export.
+
+### Execution status
+
+No execution result is claimed yet.
+
+At exact branch head `bc4e17a650ca0599eb2999afea32b449bda022ab`:
+
+- GitHub had created no pull-request workflow run for this branch/head;
+- no registered Codex execution environment was available;
+- therefore the new repository test has not been observed running in this work session.
+
+The tool is **implemented but unverified by execution**.
+
+D-029 must not convert the intended 24/24 equality assertion into fact until the test or tool actually runs and its output is inspected.
 
 ## 8. Pixel-equality limitation
 
-This audit did not independently:
+The repository now contains the deterministic verifier/checker required by the earlier audit, but it has not yet produced observed execution evidence.
 
-- execute a historical exporter;
-- decode each PNG and compare it against a freshly rendered Kotlin `PixelSprite`;
-- prove per-pixel equality through a reproducible current tool.
+Therefore this documentation may now say:
 
-Accordingly, the evidence file uses correspondence language rather than claiming fresh pixel-equality verification.
+- **tooling exists**;
+- **the expected equality test is encoded**;
+- **deterministic reconstruction output is encoded**;
 
-To upgrade this to independently reproducible equality, create a repository-owned deterministic exporter/checker that:
+but it still may not say:
 
-1. consumes the same `PixelSprite` palette/rows;
-2. emits deterministic RGBA PNG bytes or a canonical decoded pixel matrix;
-3. compares decoded PNG pixels to source rows;
-4. reports dimensions, alpha and palette mismatches;
-5. can run against all raster-bound assets;
-6. is covered by tests and CI;
-7. does not change runtime art merely to make hashes match.
+- all 24 current PNGs freshly passed pixel equality;
+- generated reconstructions were executed and compared;
+- CI passed for the new tool.
 
-That would convert lineage evidence into reproducible transformation evidence.
+The next evidence step is execution, not more inference.
+
+When the tool runs successfully, persist its JSON report with:
+
+- exact commit SHA;
+- tool blob;
+- source blobs;
+- 24 raster identities;
+- per-asset mismatch count;
+- aggregate pass/fail;
+- execution environment.
+
+Only then promote current source/raster equivalence from lineage-supported correspondence to freshly reproduced verification.
 
 ## 9. Runtime migration hazard
 
