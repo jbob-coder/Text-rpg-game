@@ -36,14 +36,14 @@
     }
   },
   "transformation_tooling": {
-    "status": "NOT_PERSISTED_OR_NOT_FOUND",
-    "evidence": "Current recursive tree contains raster catalog/PNGs/evidence but no dedicated exporter or raster-generation utility by path search; PR #19 export commits contain PNG deliveries but no persisted exporter script.",
-    "implication": "Source-to-raster lineage is commit/PR-supported, but the exact export command/tool is not reconstructable from repository evidence alone."
+    "status": "HISTORICAL_EXPORTER_NOT_PERSISTED_OR_FOUND",
+    "evidence": "PR #19 export commits establish PNG delivery from reviewable PixelSprite masters, but the exact historical exporter command/tool implementation is not present in repository evidence.",
+    "implication": "Historical source-to-raster lineage is commit/PR-supported, but the original PR #19 authoring/export tool cannot be reconstructed as historical fact."
   },
   "interpretation": {
     "source_authority": "Repository Kotlin PixelSprite masters are documented production source/reviewable fallback for this raster lineage.",
     "runtime_precedence": "Bound PNGs are preferred at runtime; source-native PixelSprite is fallback.",
-    "equality_limit": "This audit did not independently decode and compare every PNG pixel-for-pixel against a reproduced source render. correspondence_class records repository lineage evidence, not a fresh binary render-equivalence proof."
+    "equality_limit": "Repository-owned verifier/exporter code now exists, but this session did not observe it execute against the 24 PNGs. Per-asset pixel_equality_reproduced_in_this_audit remains false until an exact-checkout execution report is inspected and persisted."
   },
   "assets": [
     {
@@ -502,5 +502,29 @@
       "pixel_equality_reproduced_in_this_audit": false,
       "initial_export_source_blob": "529231483cf1147cbb276fb45c9bbd9925b11efb"
     }
-  ]
+  ],
+  "reconstruction_tooling": {
+    "status": "IMPLEMENTED_HARDENED_EXECUTION_PENDING",
+    "tool_path": "tools/verify_pixel_raster_equivalence.py",
+    "tool_git_blob": "116814f640beedaffb230b9214b6ccf920e586dd",
+    "test_path": "tests/test_pixel_raster_equivalence_tool.py",
+    "test_git_blob": "d019bba15b0fb58409c675bcdc84920e7b8fe546",
+    "status_record": "docs/evidence/raster_equivalence_verifier_status_2026-10-03.json",
+    "capabilities": [
+      "parse current constant-backed PixelSprite masters and PixelTheme colors",
+      "decode current PNGs and compare native RGBA pixels",
+      "verify recorded SHA-256 and Git blob identities",
+      "verify current source blobs against lineage evidence",
+      "verify PixelRasterCatalog asset-symbol to drawable mappings",
+      "verify binding-versus-lineage path and metadata alignment",
+      "reconstruct deterministic 8-bit RGBA PNGs into a separate output tree"
+    ],
+    "safety": [
+      "refuses repository-root export",
+      "rejects absolute or parent-traversal binding paths",
+      "rejects duplicate binding paths, asset symbols, and resource names"
+    ],
+    "execution_observed": false,
+    "result": null
+  }
 }
