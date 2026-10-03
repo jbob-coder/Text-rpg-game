@@ -381,3 +381,20 @@ Authority relationship:
 The family audit inspected the implementation at program-branch baseline `2ad50d7aff6f153b90036f8e0f61043242a09765`. Subsequent documentation commits do not by themselves change runtime source state.
 
 D-029 remains **IN_PROGRESS**. These ledgers do not establish final source-authoring lineage for every export, select the divergent static-art survivors, grant canon approval, implement D-030 actor projection, or provide physical-device visual QA.
+
+
+## 2026-10-03 raster export lineage continuation
+
+[Raster export and source correspondence](RASTER_EXPORT_AND_SOURCE_CORRESPONDENCE_2026-10-03.md) plus `docs/evidence/raster_export_lineage_2026-10-03.json` now exactize the 24 current PNG records beyond static hashes/bindings.
+
+They record:
+
+- initial source blobs at PR #19 export time;
+- exact initial export commits;
+- current visual-source revision commits;
+- PR #22's five-raster player/loadout refresh;
+- Platform Nine and Relay Workbench paired source/raster refinements;
+- current source and raster blobs;
+- the explicit limitation that exporter tooling is not persisted and pixel equality was not freshly reproduced.
+
+This registry remains the schema authority. The new lineage evidence is a child evidence record and does not itself grant `CANON_APPROVED`.
