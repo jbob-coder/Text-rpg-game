@@ -198,7 +198,7 @@ Still incomplete:
 1. exact authoring-source lineage for every PNG export beyond its Git blob/hash and runtime binding;
 2. final static-survivor selection for Service Tunnel and Quiet Stair;
 3. visual comparison proving source/raster correspondence for every raster-bound family;
-4. promotion decision for PR #8 unique environment-module material;
+4. PR #8 environment-module source lineage is reconciled: all four visual definitions survive in the current catalog, with only later arrival-preview bindings added; no separate PR #8 geometry migration remains;
 5. typed-consumer decision for PR #9 diagnostic-reader held prop;
 6. rebase/reimplementation decision for PR #31 ambient animation;
 7. final Jack production sprite and portrait family;
