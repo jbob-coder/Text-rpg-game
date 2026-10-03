@@ -226,3 +226,118 @@ An area is visually ready only when:
 ## Operational child
 
 [Room composition implementation contract](ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md) records the actual fixed actor lookup, future safe presence/panel contract and raster-precedence acceptance requirements.
+
+
+## 15. Target beast-presence extension — D-044 selective extraction
+
+Status: **PROPOSED DESIGN / VISUAL-PROJECTION EXTENSION / RUNTIME NOT IMPLEMENTED**
+
+Source provenance:
+- `docs/settlement-region-build-plan@65d2db8538c1b8302c314f2fbe9eb7a1b585b51d`;
+- `docs/program/13_BEAST_ENTITY_ECOSYSTEM_AND_SCENE_PRESENCE_STANDARD.md` blob `96fcb08649c5d5564bf27fca5b754ada5479ae23`;
+- `docs/program/15_CONTEXTUAL_BEAST_PRESENCE_ADDENDUM.md` blob `d1708154489f7320f75f285e4763acb79b3ac662`;
+- selectively extracted under D-044.
+
+This extension does not change the current D-030 actor-projection implementation status. It defines how future beast presence must fit the same authority principles when that domain is implemented.
+
+### 15.1 Presence authority
+
+A beast may render in a room/scene only when authoritative game/content state has produced a player-safe presence result for that beast/entity.
+
+Presentation may not invent beast presence from:
+
+- an available sprite;
+- a portrait;
+- a bestiary entry;
+- a location ID;
+- a scene ID;
+- beast-zone membership alone;
+- narrative prose;
+- hidden encounter state.
+
+### 15.2 Mixed-scene requirement
+
+The future composition layer must be capable of representing, when authoritative projection requires them:
+
+- player + NPC;
+- player + multiple NPCs;
+- player + beast;
+- player + multiple beasts;
+- player + NPCs + beasts;
+- party + beasts;
+- environment-only scene.
+
+Character and beast truth must not be collapsed into one social-state model merely for UI convenience.
+
+### 15.3 Beast focus information boundary
+
+When a beast is focused, presentation may show only player-safe/observed information such as:
+
+- known identity/species label;
+- visible condition;
+- visible injury;
+- focus/encounter state;
+- player-known scan/knowledge;
+- range/distance only if an authoritative system exposes it.
+
+Do not expose:
+
+- hidden stats;
+- hidden traits;
+- unobserved injury;
+- future behavior;
+- unseen group members;
+- secret ecology/population state;
+- AI intent;
+- unlearned weaknesses;
+- undiscovered loot/resource information.
+
+### 15.4 Group/pack identity
+
+When gameplay distinguishes individual persistent beasts, group composition must preserve those stable identities.
+
+When gameplay intentionally models an ordinary aggregate population, the UI must not fabricate individual persistent identities.
+
+### 15.5 Layering relationship
+
+Beast scene composition participates in the existing visual stack.
+
+A typical mixed scene may contain:
+
+1. base environment;
+2. architecture;
+3. permanent props;
+4. stateful props;
+5. environment overlays;
+6. NPC/story actors;
+7. beasts;
+8. player where composition requires;
+9. injury/status overlays;
+10. ability/Trace/other FX;
+11. interaction markers;
+12. contextual UI.
+
+Local occlusion may change draw order. It must not change state ownership.
+
+### 15.6 Fallback rule
+
+If authoritative projection says a beast is present but its final art is missing:
+
+- use an explicitly approved missing-art/placeholder policy;
+- preserve the correct stable identity;
+- do not substitute a different species because its sprite happens to exist;
+- do not remove the entity from authoritative state merely because presentation lacks art.
+
+### 15.7 Target verification
+
+A future beast-presence implementation should prove:
+
+- absent beasts do not render;
+- projected beasts render with the correct identity/family;
+- mixed NPC/beast scenes preserve every projected visible entity;
+- hidden beast state is not leaked;
+- missing art falls back without species substitution;
+- save/resume preserves the authoritative state from which presence is derived;
+- presentation changes do not mutate beast/world truth.
+
+The moving-base B0-B4 mode labels remain useful design shorthand, but this standard does not require those exact enum names in runtime code.
