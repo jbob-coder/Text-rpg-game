@@ -125,7 +125,13 @@ It supplements, not replaces, the runtime composition standard and exact asset m
 
 
 ## Provenance
-- `ASSET_PROVENANCE_REGISTRY.md` — branch-aware source/reference/raster/code provenance, production stage, supersession, compatibility and reconciliation queue.
+- `ASSET_PROVENANCE_REGISTRY.md` — master branch-aware source/reference/raster/code provenance schema, production stage, supersession, compatibility and reconciliation queue.
+- `ASSET_FAMILY_PROVENANCE_INDEX_2026-10-03.md` — D-029 operational family index linking current code-master/raster families to consumers, branch evidence, QA, stages and reconstruction rules.
+- `CHARACTER_EQUIPMENT_ITEM_ACTOR_PROVENANCE_2026-10-03.md` — player/equipment/item/staging/actor provenance and portrait gaps.
+- `ENVIRONMENT_SCENE_MAP_PROVENANCE_2026-10-03.md` — scene/raster, environment, overlay, map and static-candidate provenance.
+- `UI_FX_ANIMATION_PROVENANCE_2026-10-03.md` — UI, Trace FX, held-prop and ambient-animation provenance.
+
+The registry remains the schema authority; the family index and child ledgers are evidence/navigation children, not duplicate authorities.
 
 
 ## Current operational evidence
