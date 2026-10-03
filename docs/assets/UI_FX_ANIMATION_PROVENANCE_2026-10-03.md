@@ -508,7 +508,7 @@ To reconstruct these families:
 - raster/export lineage if procedural families are later exported;
 - canonical portrait family;
 - D-030 actor-presentation projection implementation plus Tamsin held-reader hand/wrist anchor verification;
-- Service Tunnel static survivor;
-- ambient-animation migration;
-- reduced-motion contract implementation;
+- owner visual/canon decision for the Service Tunnel static survivor;
+- ambient-animation reimplementation on the selected static parent;
+- reduced-motion runtime implementation plus destination-head lifecycle/build/render verification;
 - physical-device visual/performance QA.

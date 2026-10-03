@@ -140,7 +140,7 @@ Covers:
 | Trace FX | Kotlin frame code | no | yes | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` |
 | Trace strain visuals | Kotlin frame code | no | yes | `SOURCE_MASTER_PRESENT + CODE_PRESENT + INTEGRATED` |
 | Diagnostic-reader held prop | divergent PR #9 code master | no | no | `DEFERRED_INTEGRATION / BLOCKED_BY_D-030_RUNTIME_AND_TAMSIN_ANCHOR` |
-| Service Tunnel ambient animation | divergent PR #31 code/frame master | no | no | `DEFERRED_INTEGRATION / CANDIDATE` |
+| Service Tunnel ambient animation | divergent PR #31 code/frame master | no | no | `VERIFIED_BRANCH_EVIDENCE + DEFERRED_INTEGRATION + MIGRATION_CONTRACT_DOCUMENTED` |
 
 `CANON_APPROVED` is deliberately not assigned merely because code or raster exists.
 
@@ -199,20 +199,22 @@ Resolved in the current D-029 continuation:
 - commit-level export/refresh lineage for all 24 current PNGs is recorded by `RASTER_EXPORT_AND_SOURCE_CORRESPONDENCE_2026-10-03.md` and its JSON evidence;
 - PR #8 environment-module source lineage is reconciled; no separate PR #8 geometry migration remains;
 - all three 128x64 PR #8-origin modules have current exact Map arrival-preview consumers;
-- the infrastructure atlas is explicitly separated as `DEFERRED_INTEGRATION`.
+- the infrastructure atlas is explicitly separated as `DEFERRED_INTEGRATION`, with PR #28 retained as optional presentation-only composition logic rather than a new source master;
+- PR #9 diagnostic-reader consumer ownership is resolved: held-reader art belongs to Tamsin actor presentation under the D-030-safe pose/held-layer boundary; runtime remains deferred;
+- PR #31 migration strategy is documented in `SERVICE_TUNNEL_AMBIENT_ANIMATION_MIGRATION_CONTRACT_2026-10-03.md`; branch evidence survives without promoting the divergent branch.
 
 Still incomplete:
 
 1. persisted/reproducible source-to-PNG exporter implementation/tool invocation;
 2. fresh pixel-for-pixel source/raster equivalence execution;
-3. final static-survivor selection for Service Tunnel and Quiet Stair;
-4. legitimate runtime/composition consumer decision for `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`;
-5. PR #9 diagnostic-reader consumer ownership is resolved: held-reader art belongs to Tamsin actor-presentation via a future D-030-safe pose/held-layer mapping; runtime remains deferred until D-030 and Tamsin anchors exist;
-6. rebase/reimplementation decision for PR #31 ambient animation;
+3. owner visual/canon promotion decision for the Service Tunnel and Quiet Stair static survivors;
+4. runtime adoption of the infrastructure-atlas composition if approved, with destination visual QA;
+5. D-030 runtime actor-presentation projection plus Tamsin hand/wrist anchor verification for the held diagnostic reader;
+6. implementation of the documented PR #31 ambient-animation/reduced-motion contract on the selected Service Tunnel static parent, plus destination-head verification;
 7. final Jack production sprite and portrait family;
 8. Tamsin/courier portrait production family;
 9. per-family owner/canon approval;
-10. physical-device visual QA;
+10. physical-device visual/performance QA;
 11. machine-readable `content/visual/asset_provenance.json` after ID/schema lock.
 
 ## 9. Reconstruction rule
