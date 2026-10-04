@@ -1,8 +1,23 @@
 # THE GAME — Pixel Art Production & Reuse Ledger
 
-Status: **ACTIVE / PRODUCTION AUTHORITY COMPANION**  
+Status: **ACTIVE / DOCUMENTATION AUTHORITY COMPANION / ASSET PRODUCTION DEFERRED**  
 Parent: `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`  
 Region proof: `GATE_TWELVE_REGION_MASTER_PLAN.md`
+
+## 0. Current-phase execution boundary
+
+This ledger is currently a **documentation and future-production specification**, not authorization to produce assets.
+
+During the active documentation-first phase:
+
+- inspect and document existing asset state;
+- record provenance, consumers, reuse compatibility, requirements, briefs, future creation instructions, migration steps, and QA criteria;
+- preserve historical production/integration evidence as evidence only;
+- **do not create, redraw, modify, regenerate, export, replace, integrate, promote, or delete runtime assets**;
+- **do not execute the production order in section 16**;
+- **do not start or continue an asset batch because it appears in this ledger**.
+
+Asset production resumes only after an explicit owner instruction authorizes the relevant production/implementation work. Until then, every `Need`, `Required`, `Still required`, `Create`, `Create/reconcile`, `production list`, and `production order` entry below describes a **future requirement** to be documented, not a current command to generate or integrate art.
 
 ## 1. Purpose
 
@@ -377,7 +392,9 @@ Before CANON_APPROVED:
 - manifest update;
 - physical-device review when required.
 
-## 16. Production order
+## 16. Future production order — documented only, not authorized in the current phase
+
+The sequence below is retained so a later explicitly authorized production phase knows what order to follow. **Do not execute it during the current documentation-only phase.**
 
 1. reconcile current assets/status;
 2. finish Jack/Tamsin identity foundation;
