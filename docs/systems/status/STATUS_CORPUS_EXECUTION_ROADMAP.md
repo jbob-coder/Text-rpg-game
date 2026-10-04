@@ -240,22 +240,29 @@ All families now have:
 - knowledge review;
 - implementation/test blockers.
 
+Materialized normalization:
+- family-level conceptual state-owner/resolver matrix;
+- cross-family composition standard;
+- compact knowledge-profile reconciliation audit;
+- event-bound qualification governance;
+- numeric parameterization pilot.
+
 Open:
-- numeric coefficients;
+- record-level owner/write-target assignments;
 - final knowledge-row decisions;
-- explicit state-owner mapping;
-- cross-family resolver normalization;
-- named world institutions/history;
-- canon promotion.
+- numeric coefficients;
+- role-class then named world integration;
+- explicit canon review.
 
 ### Next order
 
-1. **Normalize cross-family passive resolver/state ownership.**
-2. **Complete remaining child rules inside shared ability standards.**
-3. **Apply the numeric calibration framework to selected mature records.**
-4. Begin controlled world/institution/history integration.
-5. Conduct explicit canon-review packets.
-6. Defer runtime implementation until design coherence.
+1. **Extend passive owner/resolver mapping from family-level to record-level.**
+2. **Reconcile flagged passive knowledge rows against world-role evidence.**
+3. **Begin role-class world integration for mature records.**
+4. Expand numeric parameterization once base units exist.
+5. Run explicit canon-review dry packets.
+6. Complete remaining child rules inside shared ability standards.
+7. Defer runtime implementation until design coherence.
 
 ## Phase D — world integration
 
