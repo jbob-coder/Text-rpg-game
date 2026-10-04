@@ -68,6 +68,15 @@ Materialized:
 - `PASSIVE_NUMERIC_CALIBRATION_PILOT_001.md` — parameterizes representative passives while leaving values TBD;
 - `STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md` — explicit record-by-record canon review shape.
 
+## World/canon preparation
+
+Materialized:
+- `STATUS_WORLD_INTEGRATION_ROLE_CLASS_PILOT_001.md`;
+- `CANON_REVIEW_DRY_RUN_PASSIVE_REC_0001.md`;
+- `CANON_REVIEW_DRY_RUN_ABILITY_RAR_003.md`.
+
+No named institution was invented and no record was canon-promoted.
+
 ## Next work
 
 1. extend family-level state ownership into record-level owner/write-target assignments;
