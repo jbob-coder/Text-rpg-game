@@ -259,8 +259,8 @@ Evidence:
 - `STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md`.
 
 Next passive work:
-1. per-record read-dependency and same-term overlap normalization;
-2. adjudicate Wave-A/B/C knowledge proposals against world evidence;
+1. adjudicate Wave-A/B/C knowledge proposals against world evidence;
+2. verify shared resolver keys/caps for the 38 confirmed same-term candidate edges;
 3. move selected role-class mappings to actual world entities only when supported;
 4. broader numeric parameterization;
 5. additional canon dry-review packets;
@@ -274,6 +274,17 @@ Evidence:
 - `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_A.md`;
 - `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_B.md`;
 - `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_C.md`.
+
+Read-dependency/overlap normalization:
+- 230 / 230 records mapped;
+- 93 candidate overlap edges adjudicated;
+- 38 SAME_TERM_CAPPED;
+- 30 ORDERED_STAGE_COMPOSITION;
+- 25 DISTINCT_STAGE_NO_SHARED_TERM.
+
+Evidence:
+- `PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_INDEX.md`;
+- `PASSIVE_OVERLAP_EDGE_ADJUDICATION_WAVE_001.md`.
 
 Knowledge reconciliation:
 - Wave A: 60 rows queued/review-dispositioned;
