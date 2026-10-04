@@ -262,7 +262,7 @@ Evidence:
 - `STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md`.
 
 Next passive work:
-1. materialize first parent-system range/test-fixture batches where base systems are mature enough;
+1. continue parent-system fixture batches and define actual range fixtures only after the parent resource/time scales are justified;
 2. use confirmed Gate Twelve local evidence to adjudicate only supported knowledge/world links;
 3. move selected role-class mappings to actual named entities only after parent-world canon approval;
 4. additional canon dry-review packets;
@@ -293,6 +293,14 @@ Knowledge reconciliation:
 - Wave A: 60 rows queued/review-dispositioned;
 - Wave B: 40 rows require concrete institutional/classification justification;
 - Wave C: 20 candidate false-belief records authored with provenance still required.
+
+First parent-system fixture batch:
+- Stamina recovery and prolonged Focus drain now have explicit qualitative fixture sets and transaction invariants;
+- both are `QUALITATIVE_FIXTURES_READY`, not `RANGE_FIXTURES_READY`;
+- final resource scales remain open.
+
+Evidence:
+- `STATUS_CORE_RESOURCE_PARENT_FIXTURE_BATCH_001_STAMINA_FOCUS.md`.
 
 Parent-fixture requirements:
 - all 20 canonical shared resolvers now identify required parent-system fixture sets and readiness gates;
