@@ -773,20 +773,24 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETED_AT: `2026-10-02 08:01 AST` (existing D-005 evidence).
 
 ### TASK D-042 — Deep source-file existing-state audit
-- STATUS: `IN_PROGRESS / CURRENT-HEAD PATH AND RESPONSIBILITY INVENTORY COMPLETE`
+- STATUS: `IN_PROGRESS / CURRENT-HEAD SOURCE INVENTORY COMPLETE / CROSS-BRANCH RECONCILIATION REMAINS`
 - PRIORITY: `P0`
 - DOCUMENT: `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`
 - AUDITED_HEAD: `docs/master-game-development-program@d0382aaf6cca2920a7f315d08153ac6b0dddc5dd`
-- COMPLETED CURRENT-HEAD SLICE:
-  - exact Python engine module inventory and disposition;
-  - exact Android runtime/application source inventory and grouped disposition;
-  - vertical-slice/sample content counts;
-  - exact durable GameState fields and save schema v1 boundary;
-  - exact 24-raster runtime inventory;
-  - exact Python/Android test-source inventory;
-  - workflow/build configuration inventory.
-- REMAINING: cross-branch consumer/survivor/deprecation reconciliation and exact runtime execution evidence are outside this current-head path slice and remain under D-006/D-020/D-021/D-026/D-029/D-044.
+- CURRENT:
+  - exact current-head inventory now covers 19 Python engine modules, 21 Python tests, 2 authored content JSON files, 35 Android main Kotlin files, 27 Android JVM/unit-test files, 3 instrumented-test files, 24 runtime PNGs, 2 workflows and 5 Android build/manifest configuration files;
+  - durable `GameState` fields and save schema v1 boundaries are recorded;
+  - current authored vertical-slice counts are recorded: 19 scenes, 31 choices, 4 quests, 1 character, 1 power, 9 world-map nodes and 8 edges;
+  - major engine/application/asset/test/build responsibilities now have KEEP / EXTEND / REWORK / REPLACE / NEW disposition guidance.
+- REMAINING:
+  - exact field-to-composable/ViewModel/bridge consumer mapping (D-026/D-021);
+  - per-catalog consumer and hardcoded/temporary visual-state audit;
+  - asset lineage/provenance completion (D-029);
+  - cross-branch survivor/migration reconciliation (D-020);
+  - remaining PR #33 Class-C unique-requirement extraction (D-044);
+  - zero-consumer/deprecation evidence before any final REMOVE classification.
 - RELATED: TASK D-006.
+- VERIFICATION: documentation/source inspection only; no runtime tests or builds were executed by this audit.
 
 ## Operational continuation — 2026-10-02 15:06 AST
 
