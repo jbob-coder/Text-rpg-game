@@ -259,11 +259,11 @@ Evidence:
 - `STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md`.
 
 Next passive work:
-1. move role-class knowledge recommendations toward actual entity/region/time evidence where supported;
-2. define base-system ranges/scenario anchors for the 20 canonical passive resolver terms before assigning coefficients;
-3. move selected role-class mappings to actual world entities only when supported;
-4. broader numeric parameterization;
-5. additional canon dry-review packets;
+1. use confirmed Gate Twelve local evidence to adjudicate only supported knowledge/world links;
+2. define parent-system numeric ranges/test fixtures for the 20 canonical passive resolver terms;
+3. move selected role-class mappings to actual named entities only after parent-world canon approval;
+4. additional canon dry-review packets;
+5. continue ability child-rule closure;
 6. implementation mapping after design coherence.
 
 Record-level passive owner/write-target baseline:
@@ -290,6 +290,20 @@ Knowledge reconciliation:
 - Wave A: 60 rows queued/review-dispositioned;
 - Wave B: 40 rows require concrete institutional/classification justification;
 - Wave C: 20 candidate false-belief records authored with provenance still required.
+
+Resolver scenario anchors:
+- 20 / 20 canonical shared resolvers now have BASELINE/FAVORABLE/ADVERSE/BOUNDARY qualitative anchors;
+- no numeric coefficient has been assigned.
+
+Evidence:
+- `PASSIVE_CANONICAL_RESOLVER_SCENARIO_ANCHORS_WAVE_001.md`.
+
+Local world-evidence integration:
+- Gate Twelve local evidence pilot materialized;
+- confirmed local civic/maintenance/records/evacuation/restricted contexts are kept separate from proposal-only parent-world names.
+
+Evidence:
+- `STATUS_GATE_TWELVE_LOCAL_WORLD_INTEGRATION_EVIDENCE_PILOT.md`.
 
 Base-term/unit preparation:
 - Status abstract unit taxonomy: COMPLETE baseline;
@@ -324,6 +338,10 @@ Recent progress:
 - Role-class world integration pilot: `STATUS_WORLD_INTEGRATION_ROLE_CLASS_PILOT_001.md`;
 - canon dry review: `CANON_REVIEW_DRY_RUN_PASSIVE_REC_0001.md`;
 - canon dry review: `CANON_REVIEW_DRY_RUN_ABILITY_RAR_003.md`.
+
+Additional dry-review evidence:
+- `CANON_REVIEW_DRY_RUN_PASSIVE_TEC_0006.md` — proposed eventual approval with open numeric/world-provenance fields;
+- `CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0002.md` — return for refinement pending credential/authorization world model.
 
 Dry-review outcomes:
 - Second Wind: conceptually mature enough for possible future approval with numeric fields open, but owner approval is still required;
