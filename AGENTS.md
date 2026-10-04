@@ -56,6 +56,24 @@ This standing authorization does **not** remove safeguards for actions with exte
 
 When a proposed action falls outside routine reversible project engineering, stop at the smallest necessary approval boundary. Otherwise proceed, verify, and document the result.
 
+## Task-completion synchronization
+
+The project has three synchronized tracks:
+- full reconstruction documentation;
+- Phase 1 solo playable integration;
+- synchronization/evidence.
+
+Before treating a meaningful task as operationally complete:
+- update `docs/THE_GAME_MASTER_TASK_REGISTER.md`;
+- update `docs/MASTER_DOCUMENTATION_RECORD.md` when domain status changed;
+- update `docs/FIRST_PASS_DOMAIN_DOCUMENTATION_QUOTAS.md` when documentation coverage changed;
+- update Phase 1 state/dependencies when the task affects `docs/PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md`;
+- record evidence appropriate to the claim;
+- identify dependencies unlocked/blocked;
+- replace stale NEXT instructions with the new direction.
+
+Do not leave the repository pointing future agents toward a task that has already been completed.
+
 ## Engineering rules
 
 - Inspect current files/HEAD before repository-specific claims.
