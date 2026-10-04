@@ -227,7 +227,40 @@ Open blockers:
 - system-strain/recovery model;
 - numeric and world integration.
 
-Next ability slice: **Unique 001**.
+## Unique deep-authoring
+
+- `calibration/PRIMARY_ABILITY_DETAIL_UNIQUE_001.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_UNIQUE_001.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_UNIQUE_001.md`
+- `calibration/ABILITY_COUNTER_DETAIL_UNIQUE_001.md`
+- `UNIQUE_ABILITY_ONTOLOGY_RARITY_AUDIT_001.md`
+
+Unique 001 now has:
+- 1 reconstruction-oriented ability record;
+- 4 individualized compact technique rows;
+- 4 detailed technique records;
+- 1 individualized awakening profile;
+- 1 individualized limitation/counter profile;
+- explicit Prime Legendary↔Unique ontology treatment.
+
+Key distinction:
+Origin Key is one-per-universe because of Status-system identity, not because it automatically has greater combat output than every Prime Legendary ability.
+
+Open blockers:
+- exclusivity/death/transfer semantics;
+- Level-100 interaction;
+- Status-layer taxonomy;
+- authentication/permission/safeguard model;
+- holder/world history.
+
+## Wave-001 detail coverage milestone
+
+All **47 / 47** Wave-001 primary ability identities now have a deep-authoring packet.
+
+See:
+- `PRIMARY_ABILITY_WAVE_001_REFINEMENT_COMPLETENESS_AUDIT.md`.
+
+Next ability work: cross-tier blocker standards, world/history integration, numeric calibration, and explicit canon review.
 
 ## Integration
 
