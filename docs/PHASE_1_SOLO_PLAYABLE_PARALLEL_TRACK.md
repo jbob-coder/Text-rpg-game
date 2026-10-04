@@ -252,7 +252,7 @@ The project must not keep stale direction after a task is completed.
 
 Requirement 9 (one tactical encounter):
 - mechanical documentation: **CONTRACT-READY**;
-- authored Gate Twelve encounter packet: **PENDING**;
+- authored Gate Twelve encounter packet: **PROPOSED PACKET EXISTS** — docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md;
 - Python tactical runtime: **NOT IMPLEMENTED**;
 - Android tactical projection/UI: **NOT IMPLEMENTED**;
 - exact-head tactical tests: **NOT IMPLEMENTED**.
@@ -260,7 +260,7 @@ Requirement 9 (one tactical encounter):
 Requirement 10 (persistent injury/condition):
 - generic injury/aftermath contract: **CONTRACT-READY**;
 - existing player condition primitive: **CURRENT RUNTIME FOUNDATION EXISTS**;
-- one specific Gate Twelve combat injury and recovery path: **PENDING**.
+- one specific Gate Twelve combat injury and recovery path: **PROPOSED IN THE ENCOUNTER PACKET**; runtime/catalog approval remains pending.
 
 What this unlocks:
 - a bounded Phase 1 combat schema/API migration packet can now be written without inventing core spatial/turn/LOS/cover/action rules;
@@ -274,3 +274,26 @@ What it does not unlock:
 - mass combat assets.
 
 Next Phase 1 combat action: author the Gate Twelve encounter packet, then map that packet to current Python state/projection APIs before code.
+
+
+## 12. Phase 1 readiness checkpoint — V05 social documentation
+
+Requirement 3 (recurring NPC relationship path):
+- current Tamsin seven-axis relationship state: **EXISTS**;
+- current trust/suspicion branching: **EXISTS**;
+- normalized relationship standard: **CONTRACT-READY**;
+- recurring-character packet: **CONTRACT-READY**;
+- explicit durable memory plus later memory-reactive content: **PENDING IMPLEMENTATION**.
+
+Requirement 4 (knowledge-gated chain):
+- player/NPC independent knowledge model: **EXISTS**;
+- Tamsin Gate Twelve knowledge branch: **EXISTS**;
+- npc_knows / npc_not_knows content gating: **EXISTS**;
+- privacy/knowledge standard: **CONTRACT-READY**;
+- final Phase 1 regression/save-load verification: **PENDING**.
+
+Track B combat update:
+- GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md now specifies a proposed Service Tunnel encounter, optional Tamsin participation, retreat-capable objective, four-actor cap, and a specific injury/recovery proposal;
+- content IDs/opponent identities remain proposed and must not be treated as canon until approved.
+
+Next breadth dependency: V10 Activities/Life Simulation for requirement 8.
