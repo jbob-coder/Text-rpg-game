@@ -67,12 +67,11 @@ Open:
 
 ## P1 — next ability slices
 
-1. **Super Rare 001–006 — NEXT**
-2. Epic 001–004.
-3. Super Epic 001–003.
-4. Legendary 001–002.
-5. Prime Legendary 001.
-6. Unique 001.
+1. **Epic 001–004 — NEXT**
+2. Super Epic 001–003.
+3. Legendary 001–002.
+4. Prime Legendary 001.
+5. Unique 001.
 
 Each slice must pass:
 - law overlap review;
@@ -83,11 +82,29 @@ Each slice must pass:
 - visual/content burden;
 - Level-100 compatibility.
 
-Super Rare deep-authoring must especially test:
+Super Rare 001–006 now completed:
+- deep ability packet;
+- 24 detailed techniques;
+- 24 individualized compact technique rows;
+- 6 individualized awakenings;
+- 6 individualized counters;
+- Rare↔Super Rare boundary treatment.
+
+Resolved/narrowed:
 - Gravity Well ↔ Mass Inversion;
 - Cryo Sink / Lightning Conduit ↔ Energy Devour;
 - Spatial Anchor ↔ Fold Step;
 - Knit Flesh ↔ Adaptive Regeneration.
+
+Still open:
+- temporal process model;
+- Fold Step transit/reference physics;
+- regeneration identity/material limits;
+- neural ethics/physiology;
+- Mass Inversion tag/end-state physics;
+- Energy Devour energy whitelist/reserve/output rules.
+
+Epic deep-authoring must next test whether Epic effects change governing laws rather than merely scaling Super Rare output.
 
 ## P1 — next passive families
 
