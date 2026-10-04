@@ -1,155 +1,76 @@
 # THE GAME — Passive Phase-C Progress Tracker
 
-Status: **ACTIVE / WAVE 001 REFINEMENT**
+Status: **ACTIVE / WAVE 001 FAMILY-BASELINE COVERAGE COMPLETE / REFINEMENT CONTINUES**
 
-Purpose: record deep-authoring progress without changing the structural 230-passive Wave-001 count.
+Purpose: track reconstruction-grade refinement of the existing 230-passive Wave-001 corpus without creating another shallow wave.
 
-## Completed family baselines
+## Milestone
 
-### Physical 0001–0010
-- detail packet;
-- scaling/state model;
-- knowledge refinement.
-
-### Recovery 0001–0010
-- detail packet;
-- scaling/state model.
-
-### Movement 0001–0010
-- detail packet;
-- scaling/state model;
-- knowledge refinement.
-
-### Sensory 0001–0010
-- detail packet;
-- scaling/state model;
-- knowledge refinement.
-
-### Mental / Will 0001–0010
-- detail packet location populated for all 10 IDs;
-- scaling/state model;
-- knowledge refinement.
+**23 / 23 passive families now have a Phase-C family refinement baseline.**
 
 Evidence:
-- `calibration/PASSIVE_DETAIL_MENTAL_WILL_0001_0010.md`
-- `PASSIVE_MENTAL_WILL_SCALING_STATE_MODEL_0001_0010.md`
-- `PASSIVE_MENTAL_WILL_KNOWLEDGE_REFINEMENT_0001_0010.md`
+- `PASSIVE_WAVE_001_PHASE_C_FAMILY_COVERAGE_AUDIT.md`
+- `PASSIVE_CROSS_FAMILY_COMPOSITION_STANDARD.md`
 
-### Cognitive / Learning 0001–0010
-- detail packet location initialized;
-- effect map covering all 10 IDs;
-- scaling/state model covering all 10 IDs;
-- knowledge refinement covering all 10 IDs.
+This milestone does not canon-promote any passive.
 
-Evidence:
-- `calibration/PASSIVE_DETAIL_COGNITIVE_0001_0010.md`
-- `PASSIVE_COGNITIVE_EFFECT_MAP_0001_0010.md`
-- `PASSIVE_COGNITIVE_SCALING_STATE_MODEL_0001_0010.md`
-- `PASSIVE_COGNITIVE_KNOWLEDGE_REFINEMENT_0001_0010.md`
+## Family coverage
 
-### Combat Habit 0001–0010
-- effect map covering all 10 IDs;
-- scaling/state model covering all 10 IDs;
-- knowledge refinement covering all 10 IDs.
+1. Physical 0001–0010 — detail + scaling/state + knowledge
+2. Recovery 0001–0010 — detail + scaling/state + knowledge
+3. Movement 0001–0010 — detail + scaling/state + knowledge
+4. Sensory 0001–0010 — detail + scaling/state + knowledge
+5. Mental / Will 0001–0010 — detail + scaling/state + knowledge
+6. Cognitive / Learning 0001–0010 — detail/effect + scaling/state + knowledge
+7. Combat Habit 0001–0010 — effect + scaling/state + knowledge
+8. Weapon Familiarity 0001–0010 — effect + scaling/state + knowledge
+9. Defensive Adaptation 0001–0010 — effect + scaling/state + knowledge
+10. Survival / Environmental 0001–0010 — effect + scaling/state + knowledge
+11. Social / Behavioral 0001–0010 — effect + scaling/state + knowledge
+12. Leadership / Coordination 0001–0010 — effect + scaling/state + knowledge
+13. Technical / Craft 0001–0010 — effect + scaling/state + knowledge
+14. Medical / Recovery Practice 0001–0010 — effect + scaling/state + knowledge
+15. Ability Synergy 0001–0010 — effect + scaling/state + knowledge
+16. Resistance 0001–0010 — effect + scaling/state + knowledge
+17. Creature / Beast Interaction 0001–0010 — effect + scaling/state + knowledge
+18. Injury / Scar Adaptation 0001–0010 — effect + scaling/state + knowledge
+19. Profession 0001–0010 — effect + scaling/state + knowledge
+20. Faction / Institutional 0001–0010 — effect + scaling/state + knowledge
+21. Unique Event 0001–0010 — effect + state + knowledge
+22. Cosmic / System 0001–0010 — effect + state + knowledge
+23. Unknown / Classified 0001–0010 — effect + state + knowledge
 
-Evidence:
-- `PASSIVE_CBT_EFFECT_MAP_0001_0010.md`
-- `PASSIVE_CBT_SCALING_STATE_MODEL_0001_0010.md`
-- `PASSIVE_CBT_KNOWLEDGE_REFINEMENT_0001_0010.md`
+## Shared cross-family standard
 
-### Weapon Familiarity 0001–0010
-- effect map covering all 10 IDs;
-- scaling/state model covering all 10 IDs;
-- knowledge refinement covering all 10 IDs.
+`PASSIVE_CROSS_FAMILY_COMPOSITION_STANDARD.md` now defines:
+- effect-stage separation;
+- same-term stacking through one capped resolver;
+- familiarity scoping;
+- core-resource protection;
+- damage/injury/condition separation;
+- knowledge and agency protection;
+- authorization protection;
+- event-bound passive rules;
+- exploit/debug requirements.
 
-Evidence:
-- `PASSIVE_WEAPON_FAMILIARITY_EFFECT_MAP_0001_0010.md`
-- `PASSIVE_WEAPON_FAMILIARITY_SCALING_STATE_MODEL_0001_0010.md`
-- `PASSIVE_WEAPON_FAMILIARITY_KNOWLEDGE_REFINEMENT_0001_0010.md`
+## Numeric calibration
 
-### Defensive Adaptation 0001–0010
-- effect map covering all 10 IDs;
-- scaling/state model covering all 10 IDs;
-- knowledge refinement covering all 10 IDs.
+`STATUS_NUMERIC_CALIBRATION_FRAMEWORK.md` now defines how future coefficients and thresholds are selected without false precision.
 
-Evidence:
-- `PASSIVE_DEFENSIVE_ADAPTATION_EFFECT_MAP_0001_0010.md`
-- `PASSIVE_DEFENSIVE_ADAPTATION_SCALING_STATE_MODEL_0001_0010.md`
-- `PASSIVE_DEFENSIVE_ADAPTATION_KNOWLEDGE_REFINEMENT_0001_0010.md`
+Compact Wave-001 unlock thresholds remain proposals until calibrated.
 
-### Survival / Environmental 0001–0010
-- effect map covering all 10 IDs;
-- scaling/state model covering all 10 IDs;
-- knowledge refinement covering all 10 IDs.
+## Next work
 
-Evidence:
-- `PASSIVE_SURVIVAL_ENVIRONMENT_EFFECT_MAP_0001_0010.md`
-- `PASSIVE_SURVIVAL_ENVIRONMENT_SCALING_STATE_MODEL_0001_0010.md`
-- `PASSIVE_SURVIVAL_ENVIRONMENT_KNOWLEDGE_REFINEMENT_0001_0010.md`
+1. normalize cross-family overlaps into explicit resolver ownership;
+2. assign authoritative state owners for every passive;
+3. resolve flagged knowledge-profile inconsistencies;
+4. map mature records into named world institutions/history;
+5. calibrate numeric coefficients and thresholds;
+6. conduct explicit record-by-record canon review;
+7. map implementation only after design coherence.
 
-### Social / Behavioral 0001–0010
-- effect map covering all 10 IDs;
-- scaling/state model covering all 10 IDs;
-- knowledge refinement covering all 10 IDs.
+## Stop condition
 
-Evidence:
-- `PASSIVE_SOCIAL_BEHAVIORAL_EFFECT_MAP_0001_0010.md`
-- `PASSIVE_SOCIAL_BEHAVIORAL_SCALING_STATE_MODEL_0001_0010.md`
-- `PASSIVE_SOCIAL_BEHAVIORAL_KNOWLEDGE_REFINEMENT_0001_0010.md`
+Do not add another broad passive wave merely to increase count.
 
-### Leadership / Coordination 0001–0010
-- effect map covering all 10 IDs;
-- scaling/state model covering all 10 IDs;
-- knowledge refinement covering all 10 IDs.
-
-Evidence:
-- `PASSIVE_LEADERSHIP_COORDINATION_EFFECT_MAP_0001_0010.md`
-- `PASSIVE_LEADERSHIP_COORDINATION_SCALING_STATE_MODEL_0001_0010.md`
-- `PASSIVE_LEADERSHIP_COORDINATION_KNOWLEDGE_REFINEMENT_0001_0010.md`
-
-### Technical / Craft 0001–0010
-- effect map covering all 10 IDs;
-- scaling/state model covering all 10 IDs;
-- knowledge refinement covering all 10 IDs.
-
-Evidence:
-- `PASSIVE_TECHNICAL_CRAFT_EFFECT_MAP_0001_0010.md`
-- `PASSIVE_TECHNICAL_CRAFT_SCALING_STATE_MODEL_0001_0010.md`
-- `PASSIVE_TECHNICAL_CRAFT_KNOWLEDGE_REFINEMENT_0001_0010.md`
-
-### Medical / Recovery Practice 0001–0010
-- effect map covering all 10 IDs;
-- scaling/state model covering all 10 IDs;
-- knowledge refinement covering all 10 IDs.
-
-Evidence:
-- `PASSIVE_MEDICAL_RECOVERY_PRACTICE_EFFECT_MAP_0001_0010.md`
-- `PASSIVE_MEDICAL_RECOVERY_PRACTICE_SCALING_STATE_MODEL_0001_0010.md`
-- `PASSIVE_MEDICAL_RECOVERY_PRACTICE_KNOWLEDGE_REFINEMENT_0001_0010.md`
-
-## Next family
-**Ability Synergy 0001–0010**.
-
-Then:
-- technical/craft;
-- medical/recovery practice;
-- ability synergy;
-- resistance;
-- creature/beast interaction;
-- injury/scar adaptation;
-- profession;
-- faction/institutional;
-- unique event;
-- cosmic/system;
-- unknown/classified.
-
-## Global open work
-- numeric coefficients;
-- final knowledge-row decisions;
-- concrete runtime state owners;
-- cross-family stacking;
-- named institutions and historical examples;
-- explicit canon promotion;
-- implementation mapping and tests.
-
-Do not add another shallow passive wave merely to increase count.
+The next value comes from deepening, reconciling, validating, world-integrating, and eventually canon-reviewing the existing 230-passive corpus.
