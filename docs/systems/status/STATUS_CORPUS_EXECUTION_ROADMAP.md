@@ -54,36 +54,74 @@ These records remain `CALIBRATION_PROPOSAL` unless separately promoted.
 
 Status: **IN PROGRESS.**
 
-Current deep-authoring slices:
+### Common ability slice 001–010
+
+Materialized:
 - `calibration/PRIMARY_ABILITY_DETAIL_COMMON_001_010.md`
 - `calibration/ABILITY_TECHNIQUE_DETAIL_COMMON_001_010.md`
-- `calibration/PASSIVE_DETAIL_PHYSICAL_0001_0010.md`
+- `COMMON_ABILITY_RARITY_OVERLAP_AUDIT_001_010.md`
 
-Common ability 001–010 linked records now also have:
-- 40 individualized compact technique rows;
+Linked compact records now also have:
+- 40 individualized technique rows;
 - 10 individualized awakening profiles;
 - 10 individualized counter profiles.
 
-The remaining audit/refinement work includes:
+Rarity/overlap audit result:
+- 5 PASS;
+- 5 PARTIAL;
+- 0 FAIL;
+- 0 recommended deletions.
+
+Flagged adjacency checks:
+- Kinetic Palm versus Vector Nudge;
+- Skin Reinforcement versus Stonehide;
+- Static Reservoir versus Lightning Conduit;
+- Water Draw versus Vapor Sculpt;
+- Impact Cushion versus Momentum Bank.
+
+These must be resolved while deep-authoring the adjacent higher-tier records.
+
+### Physical passive slice 0001–0010
+
+Materialized:
+- `calibration/PASSIVE_DETAIL_PHYSICAL_0001_0010.md`
+- `PASSIVE_PHYSICAL_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Knowledge refinement now covers:
+- military/security knowledge;
+- research knowledge;
+- false-rumor patterns;
+- over-classification review.
+
+Knowledge-posture review flags:
+- PASSIVE_PHY_0004 likely over-classified;
+- PASSIVE_PHY_0008 likely too unknown;
+- PASSIVE_PHY_0010 likely over-classified.
+
+No compact knowledge row was silently promoted or rewritten by that audit.
+
+### Remaining Phase-C work
+
+- physical passive scaling/cap detail;
+- authoritative hidden-progress ownership mapping;
+- implementation/test mapping;
+- named institutions and historical cases;
+- higher-tier ability deep authoring;
+- remaining passive families;
 - duplicate mechanics;
 - rarity drift;
-- ability-law overlap;
-- passive overlap;
 - impossible requirements;
 - hidden-information leaks;
 - world-integration gaps;
-- excessive art/content burden;
-- schema fields still left as `TBD`;
-- higher-tier template-heavy technique/counter records;
-- knowledge profiles that are still calibration patterns rather than named-world doctrine.
+- excessive art/content burden.
 
 ### Phase C next order
 
-1. Run overlap/rarity consistency review for Common abilities 001–010.
-2. Complete military/research knowledge and rumor detail for Physical passives 0001–0010.
-3. Individualize Physical passive scaling/caps and implementation/test ownership.
-4. Deep-author Uncommon abilities 001–010.
-5. Continue remaining passive families using the accepted Physical pattern.
+1. **Deep-author Uncommon abilities 001–010.**
+2. Resolve Common↔Uncommon adjacency flags during that slice.
+3. Finish Physical passive scaling/caps and state-owner mapping.
+4. Deep-author Recovery passives 0001–0010.
+5. Continue Rare abilities and remaining passive families.
 6. Do **not** create another thousand shallow records until the refinement pattern passes review.
 
 ## Phase D — world integration
