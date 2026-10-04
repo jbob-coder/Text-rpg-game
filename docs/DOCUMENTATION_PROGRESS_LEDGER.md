@@ -476,3 +476,28 @@ Final live ref recheck:
 - PR #33 remains open, draft and mergeable false.
 
 No blind merge/rebase was performed. Completion is documentation reconciliation, not branch promotion.
+
+
+## 2026-10-04 D-026 / D-021 Android consumer audit checkpoint
+
+Updated:
+- `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`.
+
+New source-grounded coverage:
+- Python player-safe projection envelope;
+- Kotlin snapshot mapper boundary;
+- GameViewModel engine-action and transient-state ownership;
+- major Compose field consumers;
+- current navigation graph;
+- functional Android test-source coverage.
+
+This closes the broad field/action mapping gap for the main current UI surfaces, but D-026/D-021 remain **IN_PROGRESS**.
+
+Remaining:
+- per-pixel-catalog consumers and zero-consumer candidates;
+- hardcoded/temporary presentation-state audit;
+- exact field/action-to-test gap matrix;
+- future activity/combat/hierarchical-map/adversary projections;
+- final APK destination migration map.
+
+No Android implementation or gameplay behavior changed in this documentation pass.
