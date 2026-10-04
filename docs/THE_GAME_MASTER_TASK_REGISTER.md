@@ -1059,3 +1059,49 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - Phase D world integration, Phase E canon promotion and Phase F implementation mapping.
 - IMPORTANT: older NEXT text naming rarity/schema/requirement/visibility/Level/awakening standards is superseded because those files now exist.
 - IMPLEMENTATION: deferred; current task remains documentation/design authority.
+
+
+### TASK D-052 — Complete V08 tactical-combat first-pass contract layer
+- STATUS: DONE
+- PRIORITY: P0 / TRACK A + PHASE 1 DEPENDENCY
+- OUTPUTS:
+  - docs/systems/TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md
+  - docs/systems/TURN_INITIATIVE_ACTION_BUDGET_STANDARD.md
+  - docs/systems/MOVEMENT_PATHING_AND_POSITIONING_STANDARD.md
+  - docs/systems/LOS_DETECTION_AND_COMBAT_KNOWLEDGE_STANDARD.md
+  - docs/systems/DIRECTIONAL_COVER_TERRAIN_STANDARD.md
+  - docs/systems/COMBAT_ACTION_TARGETING_RESOLUTION_STANDARD.md
+  - docs/systems/INJURY_CONDITION_AFTERMATH_STANDARD.md
+  - docs/systems/COMBAT_AI_OBJECTIVES_RETREAT_STANDARD.md
+- RESULT:
+  - V08 reaches 10 / 10 first-pass canonical documentation units when counted with the tactical master and camera/presentation standard;
+  - Phase 1 prototype defaults now exist for four-way movement, initiative, four-unit action budget, movement points, cover modifiers, deterministic attack contest, injury/aftermath, AI/objectives/retreat;
+  - current deterministic/hash, derived-stat, condition, social-memory and player-safe projection patterns were preserved as integration constraints;
+  - no tactical runtime or save-schema change was made.
+- PHASE 1 IMPACT:
+  - requirement 9 mechanical documentation -> CONTRACT-READY;
+  - requirement 10 generic injury/aftermath documentation -> CONTRACT-READY;
+  - authored encounter/runtime/UI/tests remain pending.
+- UNLOCKS: bounded Gate Twelve tactical encounter packet and later combat schema/API migration packet.
+- NEXT: TASK D-053, then Gate Twelve Phase 1 tactical encounter packet.
+- COMPLETED_AT: 2026-10-04 AST
+
+### TASK D-053 — Build V05 character/NPC/social first-pass child contracts
+- STATUS: IN_PROGRESS / NEXT BREADTH DOMAIN
+- PRIORITY: P0/P1
+- WHY NEXT:
+  - V05 is under-covered relative to its 12-unit floor;
+  - it directly unlocks Phase 1 recurring-NPC relationship requirement #3 and knowledge-gated requirement #4;
+  - it is an upstream dependency for final UI relationship/people surfaces and persistent adversaries.
+- FIRST CHILD LAYER:
+  - character identity/profile schema;
+  - personality standard;
+  - NPC memory standard;
+  - NPC knowledge/privacy standard;
+  - relationship-axis/state standard;
+  - goals/decision standard;
+  - schedule/presence standard;
+  - faction/hierarchy membership standard;
+  - social consequence/rumor standard;
+  - recurring character packet standard.
+- RULE: reuse current social.py structures where compatible; do not invent UI-first state.
