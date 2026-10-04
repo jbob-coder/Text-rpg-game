@@ -366,3 +366,37 @@ Control reconciliation performed in the same continuation:
 No gameplay runtime, save schema, stable IDs, Android implementation, pixel raster, or final APK behavior changed in this control-layer batch.
 
 Next measurement priority remains D-019: execute and persist a reproducible exact-current-head inventory with words, structured records, asset stages, test-source counts and executed-test evidence kept distinct.
+
+
+## 2026-10-04 D-019 exact structural inventory refresh
+
+Source HEAD:
+- `docs/master-game-development-program@991cd9b29ea0752fa1c303a19e8f210713efe4b5`.
+
+New persisted evidence:
+- `docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-04.md`;
+- `docs/evidence/repository_inventory_2026-10-04.json`.
+
+Exact structural source-head counts:
+- 490 tracked files;
+- 5,203,664 tracked blob bytes;
+- 320 Markdown files repository-wide;
+- 318 Markdown files under `docs/`;
+- 21 structured documentation paths;
+- 24 PNGs;
+- 42 Python files;
+- 68 Kotlin/KTS files;
+- 51 Python/Kotlin test-source paths;
+- 18 world Markdown files;
+- 216 systems Markdown files, including 204 Status-system Markdown files;
+- 33 asset Markdown files;
+- 5 Android Markdown files.
+
+Bounded structured counts added:
+- 13 asset manifests;
+- 104 manifest rows;
+- 95 unique asset IDs;
+- Status Wave 001: 1,019 structurally audited records from the repository-owned audit;
+- Gate Twelve baseline: 9 nodes and 8 edges.
+
+D-019 remains **IN_PROGRESS**. No current-head word count was fabricated. Complete-checkout word/heading counts, generalized domain extractors, provenance-normalized asset stages and executed-test evidence remain open.
