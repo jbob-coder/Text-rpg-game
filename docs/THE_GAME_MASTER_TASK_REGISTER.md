@@ -944,6 +944,25 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - PRIORITY: `P0/P1`
 - OUTPUT: progression/social/items/combat/adversary target schemas mapped to existing engine APIs, saves, projections and tests.
 
+### TASK D-049 — Application UI relationship architecture planning
+- STATUS: `PLANNING ONLY / DOMAIN-DEPENDENT / FINAL REFINEMENT DEFERRED`
+- PRIORITY: `P1`
+- OWNER DIRECTION: document the complete relationship model for the game's UI, but do not finalize the UI before the other major game domains are sufficiently documented.
+- CURRENT SCOPE:
+  - preserve/map current screen, ViewModel, bridge, projection, asset and test relationships;
+  - define provisional screen families, ownership rules, navigation principles, performance/accessibility constraints and required player-safe projections;
+  - record dependencies on world, progression, NPC/social, items/economy, quests, activities, combat, adversary/world-memory and save/migration systems.
+- DEFERRED:
+  - final navigation tree;
+  - final screen-by-screen layouts;
+  - final information architecture;
+  - final field/action contracts;
+  - final tactical HUD;
+  - final relationship/knowledge/progression/economy surfaces;
+  - final UI implementation sequencing.
+- REFINEMENT GATE: begin the dedicated detailed UI documentation wave only after the upstream domain documentation is reconstruction-grade enough to define stable player-facing requirements.
+- IMPLEMENTATION: not implied by this planning task.
+
 ### TASK D-033 — APK teardown manifest
 - STATUS: `BLOCKED`
 - PRIORITY: `LATE-STAGE`
