@@ -250,6 +250,13 @@ Sensory 0001–0010:
 - signal-versus-interpretation boundary defined;
 - false-positive/objective-truth requirements recorded.
 
+Mental / Will 0001–0010:
+- deep-authored at current Phase-C baseline;
+- scaling/caps/state ownership documented;
+- knowledge posture audited;
+- emotion/stress versus task-degradation boundaries documented;
+- Focus/Resolve and recovery reset semantics documented.
+
 Open:
 - numeric coefficients;
 - concrete runtime mapping;
@@ -258,8 +265,8 @@ Open:
 
 ### Next order
 
-1. **Deep-author Mental/Will passives 0001–0010.**
-2. Resolve the highest-priority cross-tier ability blockers documented in `PRIMARY_ABILITY_WAVE_001_REFINEMENT_COMPLETENESS_AUDIT.md`.
+1. **Resolve the spatial/reference-frame cross-tier ability blocker.**
+2. **Deep-author Cognitive/Learning passives 0001–0010.**
 3. Continue remaining passive families.
 4. Begin controlled world/institution/history integration for sufficiently mature records.
 5. Defer runtime implementation until design coherence.
