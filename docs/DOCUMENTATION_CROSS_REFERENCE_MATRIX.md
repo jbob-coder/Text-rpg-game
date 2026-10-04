@@ -1066,3 +1066,30 @@ Feeds:
 
 Track-B combat packet:
 - docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md consumes V08 rules and current Gate Twelve facts, but remains proposed content until canon review.
+
+
+## V10 activities/life-simulation first-pass child suite — 2026-10-04
+
+Parent:
+- docs/systems/PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md
+
+Children:
+- docs/systems/ACTIVITY_RECORD_AND_STATE_STANDARD.md
+- docs/systems/ACTIVITY_TIME_COST_ATOMICITY_STANDARD.md
+- docs/systems/TRAINING_AND_PRACTICE_ACTIVITY_STANDARD.md
+- docs/systems/RECOVERY_REST_TREATMENT_ACTIVITY_STANDARD.md
+- docs/systems/WORK_STUDY_RESEARCH_ACTIVITY_STANDARD.md
+- docs/systems/ACTIVITY_INTERRUPTION_CONCURRENCY_STANDARD.md
+- docs/systems/TRACE_CHAMBER_PHASE1_ACTIVITY_PROOF_PACKET.md
+
+V10 first-pass quota: 8 / 8 including the parent master.
+
+Feeds:
+- Phase 1 requirement #8;
+- progression/training facilities;
+- injury treatment;
+- NPC schedules/mentors;
+- future professions/economy;
+- final contextual Activity UI.
+
+The first proof intentionally uses existing Trace Chamber training rather than inventing a new work system.
