@@ -6,6 +6,16 @@ The current Compose block avatar is a runtime placeholder. The following specifi
 
 ---
 
+## No-geometric-character-art rule
+
+Character visuals must **not** be constructed from procedural rectangles, circles, polygons, vector primitives, block-figure geometry, or other geometric drawing logic as the final character art.
+
+The production character is an authored pixel-art asset generated through the project art workflow, then extracted/reconstructed, cleaned, layered, and animated as real sprite/portrait assets.
+
+Coordinates, pivots, bounding boxes, body-part anchors, occupied pixel ranges, and attachment points in this document are **measurement and alignment metadata only**. They define where finished pixel-art layers line up; they are not instructions to draw the human figure from geometry.
+
+Temporary historical block/procedural avatars may remain only as migration/debug fallbacks until the authored sprite replacement is integrated. They must never be treated as the final visual method for Jack, Tamsin, supporting NPCs, enemies, or other characters.
+
 # 1. Player Character — Reusable Paper-Doll Master
 
 ## 1.0 Player identity authority update — Jack Wilson
@@ -280,7 +290,7 @@ For a customizable player, initial expression templates are:
 - determined;
 - surprised.
 
-These are geometry templates, not a fixed face identity.
+These are expression/pose layout references, not geometric construction and not a fixed face identity.
 
 ## 2.3 Portrait-to-gameplay consistency
 
