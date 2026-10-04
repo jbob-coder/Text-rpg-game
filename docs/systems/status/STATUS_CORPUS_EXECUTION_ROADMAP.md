@@ -349,6 +349,16 @@ Result:
 - next numeric work is range-fixture construction, not additional qualitative scaffolding;
 - final coefficients remain blocked.
 
+### Range-fixture eligibility audit
+
+Materialized:
+- `PASSIVE_CANONICAL_RESOLVER_RANGE_FIXTURE_ELIGIBILITY_AUDIT_WAVE_001.md`.
+
+Result:
+- 0 / 20 canonical passive resolver families currently have enough parent-scale evidence for range fixtures;
+- no unsupported numbers were introduced;
+- prerequisite order is now explicit: world/simulation time -> core resource scales -> error/confidence representation -> physical contest/precision -> travel/fatigue/environment -> institutional workflow.
+
 ### Gate Twelve evidence-backed world integration
 
 Materialized:
@@ -416,6 +426,56 @@ Still open:
 - strain/recovery thresholds;
 - numeric duration/cost;
 - world/institution history.
+
+### Matter Recode child-rule progress
+
+Materialized:
+- `MATTER_RECODE_MATERIAL_COMPOSITION_ENERGY_STANDARD.md`.
+
+Resolved structurally:
+- nonliving matter eligibility;
+- source-material and target-model records;
+- mass/composition conservation;
+- composition knowledge/confidence;
+- energy budget and incomplete conversion;
+- impurity/byproduct handling;
+- T1–T4 technique envelopes;
+- product validity;
+- save/load and projection constraints.
+
+Still open:
+- material taxonomy/composition representation;
+- energy estimator;
+- scale/mass/precision caps;
+- output-quality model;
+- legal/industrial integration;
+- numeric values.
+
+### Probability Tilt child-rule progress
+
+Materialized:
+- `PROBABILITY_TILT_EVENT_RESOLUTION_EVIDENCE_STANDARD.md`.
+
+Resolved structurally:
+- eligible unresolved event;
+- plausible-outcome-set boundary;
+- near-equivalent weighting rather than selection;
+- bounded context;
+- observability/evidence/causation;
+- T1–T4 semantics;
+- commit point;
+- seeded save/load anti-reroll behavior;
+- parent-law/agency/conservation boundaries.
+
+Still open:
+- exact probability representation;
+- near-equivalent threshold;
+- maximum bias;
+- duration/event count;
+- detectability;
+- eligible parent domains;
+- world legal/economic/scientific doctrine;
+- numeric values.
 
 ### Cryo Sink child-rule progress
 
