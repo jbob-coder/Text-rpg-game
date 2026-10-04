@@ -257,21 +257,21 @@ Materialized:
 - family-level role-class world integration for 23 / 23 families.
 
 Open:
-- per-record read-dependency and same-term overlap normalization;
 - final knowledge-row decisions;
-- numeric coefficients;
+- parent-system numeric ranges and final coefficients;
 - named world integration where supported by parent world docs;
 - explicit canon review.
 
+Record-level read-dependency mapping and the 93-edge overlap adjudication are already materialized; they are no longer open baseline tasks.
+
 ### Next order
 
-1. **Progress role-class knowledge recommendations toward actual world entity/region/time evidence.**
-2. **Define scenario ranges/anchors for the base terms behind the 20 canonical shared passive resolvers.**
-3. **Progress supported role-class mappings toward actual world entities.**
-4. Expand numeric parameterization once base units exist.
-5. Run additional canon-review dry packets.
-6. Continue shared ability child-rule completion.
-7. Defer runtime implementation until design coherence.
+1. **Use confirmed Gate Twelve evidence to adjudicate supported local knowledge/world links.**
+2. **Define parent-system numeric ranges/test fixtures behind the 20 canonical shared passive resolvers.**
+3. **Progress named world-entity links only after parent-world canon decisions.**
+4. Run additional canon-review dry packets.
+5. Continue shared ability child-rule completion.
+6. Defer runtime implementation until design coherence.
 
 ### Knowledge role-class adjudication
 
@@ -305,6 +305,22 @@ Still open:
 - final confidence UI;
 - legal/institutional admissibility;
 - historical occurrence examples.
+
+### Numeric scenario-anchor preparation
+
+Materialized:
+- `PASSIVE_CANONICAL_RESOLVER_SCENARIO_ANCHORS_WAVE_001.md`.
+
+Result:
+- all 20 canonical shared passive resolvers now have qualitative BASELINE/FAVORABLE/ADVERSE/BOUNDARY anchors;
+- final scales and coefficients remain open.
+
+### Gate Twelve evidence-backed world integration
+
+Materialized:
+- `STATUS_GATE_TWELVE_LOCAL_WORLD_INTEGRATION_EVIDENCE_PILOT.md`.
+
+This anchors Status world integration to confirmed local Gate Twelve functions without promoting proposal-only Arden parent-world names.
 
 ### World integration preparation
 
@@ -342,6 +358,10 @@ Materialized:
 Results:
 - Second Wind: dry-review supports eventual approval with open numeric fields, pending owner decision;
 - Lightning Conduit: dry-review returns the record for refinement until throughput, branch, overload, and world-infrastructure calibration are resolved.
+
+Additional dry runs:
+- `CANON_REVIEW_DRY_RUN_PASSIVE_TEC_0006.md` — Repair Economy: proposed eventual approval with open numeric/world-provenance fields;
+- `CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0002.md` — Credential Navigation: return for refinement until credential/authorization world semantics exist.
 
 No record was canon-promoted.
 
