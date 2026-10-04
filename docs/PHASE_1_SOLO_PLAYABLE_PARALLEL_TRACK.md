@@ -246,3 +246,31 @@ At minimum, update:
 - implementation/evidence records when runtime work changes.
 
 The project must not keep stale direction after a task is completed.
+
+
+## 11. Phase 1 readiness checkpoint — tactical combat documentation
+
+Requirement 9 (one tactical encounter):
+- mechanical documentation: **CONTRACT-READY**;
+- authored Gate Twelve encounter packet: **PENDING**;
+- Python tactical runtime: **NOT IMPLEMENTED**;
+- Android tactical projection/UI: **NOT IMPLEMENTED**;
+- exact-head tactical tests: **NOT IMPLEMENTED**.
+
+Requirement 10 (persistent injury/condition):
+- generic injury/aftermath contract: **CONTRACT-READY**;
+- existing player condition primitive: **CURRENT RUNTIME FOUNDATION EXISTS**;
+- one specific Gate Twelve combat injury and recovery path: **PENDING**.
+
+What this unlocks:
+- a bounded Phase 1 combat schema/API migration packet can now be written without inventing core spatial/turn/LOS/cover/action rules;
+- a single authored Gate Twelve encounter can now be specified against stable first-pass rules.
+
+What it does not unlock:
+- broad tactical implementation across the full game;
+- final combat balance;
+- final combat UI;
+- mid-combat save;
+- mass combat assets.
+
+Next Phase 1 combat action: author the Gate Twelve encounter packet, then map that packet to current Python state/projection APIs before code.
