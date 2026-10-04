@@ -365,7 +365,7 @@ D-026/D-021 current-source consumer discovery is now complete at field/action, n
 | **V07 — Items / economy / loot** | **MASTER CONTRACT ESTABLISHED / CONTENT PARTIAL** | Existing equipment/items are not the final target economy | `ITEM_ECONOMY_LOOT_MASTER_PLAN.md`, world loot provenance standard, asset/item provenance docs | Full item taxonomy/catalog, economy source/sink model, vendor/services rules where approved, resource-to-item chains, loot tables, migration to existing IDs/save consumers. |
 | **V08 — Tactical combat** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | Final tactical runtime not implemented | Tactical master, camera/presentation standard, coordinate/occupancy, turn/action budget, movement, LOS/knowledge, cover/terrain, action resolution, injury/aftermath, AI/objective standards | Proposed Gate Twelve encounter packet now exists; remaining work is content/canon approval, combat schema/API migration, Android tactical projection/UI, final balance, low-end performance evidence and exact-head tests. |
 | **V09 — Persistent adversaries / world memory** | **PARTIAL** | Concepts exist; target system is not reconstruction-complete | `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, social engine evidence, world integration standards | Dedicated adversary/rival records, hierarchy changes, memory consequences, promotion/demotion rules, world event integration, save/state migration contract. |
-| **V10 — Activities / life simulation** | **MASTER CONTRACT ESTABLISHED / CONTENT PARTIAL** | Current simulation is narrower than target design | `PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md` | Activity catalog, training/work/study/recovery content, concurrency/interruption fixtures, facility links, world schedules, progression/economy/social integration. |
+| **V10 — Activities / life simulation** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 8 OF 8 MINIMUM UNITS** | Current time/train/recover/power-practice primitives and Trace Chamber actions exist; advanced scheduling/background life-sim is not implemented | Activity master plus record/state, time/atomicity, training, recovery/treatment, work/study/research, interruption/concurrency and Trace Chamber proof contracts | Final activity registry/migration, professions/economy integration, scheduled/background runtime, calendar/offline decision, final UI and exact-head Phase 1 verification. |
 | **V11 — Application UX / projection** | **PLANNING / DOMAIN-DEPENDENT — CURRENT CONSUMERS MAPPED, FINAL REFINEMENT DEFERRED** | Current Android client exists, but final UI must wait for upstream world/gameplay domains to define stable player-facing requirements | `APPLICATION_UX_MASTER_PLAN.md`, `ANDROID_CONSUMER_AND_PROJECTION_MAP.md`, `PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`, status UI contracts | Preserve current consumer/projection evidence and planning constraints now; defer full screen-by-screen refinement until world, progression, NPC/social, items/economy, activities, combat, adversary and migration contracts are sufficiently mature. Then perform a dedicated UI refinement wave. |
 | **V12 — Android / final APK reconstruction** | **PLANNED / BLOCKED FOR EXECUTION** | Final rebuild intentionally not started as a destructive rewrite | `APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md`, `APK_FINAL_RECONSTRUCTION_MATRIX.md`, final reconstruction blueprint | Mechanics migration packets, completed consumer map, teardown manifest, zero-consumer deletion evidence, final rebuild, exact-head CI, APK provenance and physical handset validation. |
 
@@ -793,3 +793,18 @@ Tamsin is the Phase 1 social proof rather than a newly invented recurring NPC.
 In parallel, GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md now supplies the first proposed authored tactical packet using confirmed Service Tunnel/Directional Trace facts. Its opponent identities and new content IDs remain proposed, not canon.
 
 Next breadth direction: V10 Activities/Life Simulation.
+
+
+## 13. 2026-10-04 V10 activity first-pass closure
+
+V10 reaches 8 / 8 minimum canonical units.
+
+The documentation preserves existing engine behavior rather than replacing it:
+- GameState.time_minutes remains authoritative;
+- simulation train/recover/condition-time logic remains the lower-level foundation;
+- powers technique practice/recovery remains separate ability authority;
+- current Trace Chamber actions remain content fixtures.
+
+Phase 1 requirement #8 now has a concrete current proof candidate, TRAIN_POWER_FUNDAMENTALS_TWO_HOURS. Runtime verification on the final Phase 1 integration head remains separate.
+
+Next breadth direction: V07 Items/Economy/Loot.
