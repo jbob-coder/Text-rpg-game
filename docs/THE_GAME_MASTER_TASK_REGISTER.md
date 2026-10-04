@@ -72,28 +72,32 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-02 08:01 AST`.
 
 ### TASK D-006 — Existing-state repository audit
-- STATUS: `IN_PROGRESS / CURRENT-HEAD SOURCE INVENTORY COMPLETE / CROSS-BRANCH CONSUMER RECONCILIATION REMAINS`
+- STATUS: `IN_PROGRESS / CURRENT-HEAD SOURCE + CURRENT ANDROID CONSUMER DISCOVERY COMPLETE`
 - PRIORITY: `P0`
-- CURRENT:
-  - `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md` owns high-level KEEP / EXTEND / REWORK / REPLACE / REMOVE / UNKNOWN policy.
-  - `docs/LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md` records earlier live program/PR landscape.
-  - `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md` now inventories the current audited HEAD at module/component/content/save/asset/test/build level and attaches current responsibility/disposition.
+- CURRENT AUTHORITIES:
+  - `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md` — subsystem KEEP / EXTEND / REWORK / REPLACE / REMOVE / UNKNOWN policy;
+  - `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md` — current-head engine/application/content/save/asset/test/build inventory;
+  - `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md` — field/action consumer map;
+  - `docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md` — navigation/transient-state map;
+  - `docs/android/PIXEL_MEMBER_ASSET_ID_CONSUMER_AUDIT_2026-10-04.md` — current member/asset-ID consumer/deletion-safety map;
+  - D-020 branch/provenance reconciliation is complete;
+  - D-044 moving-base Class-C extraction is complete.
 - CURRENT-HEAD AUDIT COVERAGE:
   - 19 Python engine modules;
   - 35 Android main Kotlin files;
   - 2 authored content JSON files;
   - exact GameState/save-schema fields;
-  - 24 runtime PNGs;
+  - 24 current runtime PNGs and their current consumer paths;
+  - current pixel member/asset-ID consumer pass;
   - 21 Python tests, 27 Android JVM tests and 3 Android instrumented tests;
   - 2 workflows and 5 Android build/manifest configuration files.
 - REMAINING:
-  - exact field-to-composable/ViewModel/bridge consumer map;
-  - per-catalog consumer and hardcoded-state audit;
-  - D-029 asset lineage/equivalence completion;
-  - D-020 cross-branch survivor/migration matrix;
-  - D-044 remaining Class-C extraction;
-  - zero-consumer/deprecation proof before any REMOVE action.
-- OUTPUT: subsystem matrix with KEEP / EXTEND / REWORK / REPLACE / REMOVE / UNKNOWN and exact branch/HEAD evidence.
+  - D-029 fresh raster-equivalence execution and final visual/canon promotion decisions;
+  - D-030 actor/room projection migration;
+  - future target-system projection/migration packets under D-032 and domain tasks;
+  - zero-consumer/deprecation proof must be refreshed again immediately before any actual REMOVE action;
+  - exact-head runtime/build/device execution evidence when implementation work resumes.
+- OUTPUT: reconstruction-grade existing-state truth plus explicit migration/deprecation boundaries.
 
 ### TASK D-007 — Progression / class / rank master
 - STATUS: `DONE`
@@ -207,27 +211,23 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-04 AST`
 
 ### TASK D-021 — Map Android consumers to final UX/domain contracts
-- STATUS: `IN_PROGRESS / MAJOR FIELD-ACTION + FILE-LEVEL PIXEL CONSUMERS + TEST GAPS MAPPED`
+- STATUS: `IN_PROGRESS / CURRENT FIELD-ACTION + NAVIGATION + MEMBER-ASSET CONSUMER AUDITS COMPLETE`
 - PRIORITY: `P0`
 - CURRENT:
-  - `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` maps the live Python projection envelope, Kotlin `BridgeSnapshotMapper`, `GameViewModel` action flow, major Compose field consumers and current navigation graph;
-  - all current pixel presentation files have a file-level direct-consumer map; no whole current pixel presentation file is proven zero-consumer at this audit level;
-  - transitional/hardcoded presentation state is explicitly classified;
-  - every current `GameSnapshot` field and `GameEngine` action now has a test-source coverage/gap disposition.
-- CONFIRMED TEST GAPS:
+  - `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` maps the live Python projection envelope, Kotlin `BridgeSnapshotMapper`, `GameViewModel` action flow, major Compose field consumers and current navigation graph.
+  - `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md` maps all 18 current `GameSnapshot` fields and current engine/ViewModel action paths.
+  - `docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md` separates navigation/application/Compose transient state from gameplay authority.
+  - `docs/android/PIXEL_MEMBER_ASSET_ID_CONSUMER_AUDIT_2026-10-04.md` closes the current member/asset-ID zero-consumer pass.
+- CONFIRMED CURRENT TEST GAPS:
   - dedicated QuestSection projection/render test;
   - direct contentId assertion;
   - direct canonStatus assertion;
   - dedicated derived-stat Compose assertion;
   - fuller identity projection/UI contract;
   - future actor/room, hierarchical-map, activity, combat and adversary projection tests.
-- NAVIGATION / EPHEMERAL STATE AUDIT:
-  - `docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md`
-  - current seven-section production navigation, Settings overlay, scene-change reset, ViewModel transient state, local Compose selections, presentation preferences and test/preview navigation are now classified.
 - REMAINING:
-  - member/asset-ID level consumer and zero-consumer matrix;
-  - D-030 actor projection implementation migration map;
-  - future projection records;
+  - D-030 actor/room projection implementation migration map;
+  - future activity/combat/hierarchical-map/adversary projection records;
   - final destination APK component migration map;
   - runtime execution evidence when implementation changes begin.
 - OUTPUT: screen/component -> player-safe projection -> asset packet -> domain owner -> tests/evidence mapping before broad UI replacement.
@@ -266,25 +266,30 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-04 AST`
 
 ### TASK D-026 — Android consumer/projection map
-- STATUS: `IN_PROGRESS / CURRENT MAJOR CONSUMER AND TEST-GAP AUDIT COMPLETE`
+- STATUS: `IN_PROGRESS / CURRENT-SOURCE CONSUMER DISCOVERY COMPLETE`
 - PRIORITY: `P0`
-- DOCUMENT: `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`
+- DOCUMENTS:
+  - `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`
+  - `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md`
+  - `docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md`
+  - `docs/android/PIXEL_MEMBER_ASSET_ID_CONSUMER_AUDIT_2026-10-04.md`
 - CURRENT:
   - Python safe projection root/child keys documented;
   - Kotlin mapper retention/redaction boundary documented;
   - `GameViewModel` action/transient-state ownership documented;
   - major Compose field consumers and current navigation graph documented;
-  - file-level pixel catalog consumers documented with no whole-file zero-consumer candidate proven;
+  - file-level pixel catalog consumers documented;
+  - member/asset-ID zero-consumer pass complete for current pixel presentation;
+  - 109 top-level visual IDs audited; only `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`, `UI_CHOICE_CARD_SELECTED`, and `UI_BUTTON_DANGER` lack a current production consumer path;
+  - four generated Trace-strain portrait frames have no current production consumer and remain reserved for a future portrait surface;
   - transitional/hardcoded presentation state classified;
   - `GameSnapshot` field and `GameEngine` action test-source coverage/gaps documented.
-- NAVIGATION / EPHEMERAL STATE AUDIT:
-  - `docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md`
-  - current seven-section production navigation, Settings overlay, scene-change reset, ViewModel transient state, local Compose selections, presentation preferences and test/preview navigation are now classified.
 - REMAINING:
-  - member/asset-ID level zero-consumer matrix;
   - actor/room projection implementation migration mapping;
   - future activity/combat/hierarchical-map/adversary projections;
-  - final APK destination migration map and exact-head runtime verification after code changes.
+  - final APK destination migration map;
+  - exact-head runtime verification after code changes.
+- NOTE: zero-current-consumer does not authorize deletion; current teardown remains gated by D-033/final APK evidence.
 
 ### TASK D-047 — Establish master documentation record
 - STATUS: `DONE`
