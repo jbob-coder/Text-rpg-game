@@ -102,6 +102,16 @@ Must not own:
 - raster-equivalence execution;
 - final deletion decisions after future architecture changes.
 
+### `docs/assets/VISUAL_SURVIVOR_OWNER_DECISION_PACKET_2026-10-04.md`
+Purpose:
+- isolate the two remaining D-029 static-scene owner choices;
+- prevent newer divergent branches from being mistaken for automatically preferred art;
+- define safe default and post-selection migration/verification gates.
+
+Decision IDs:
+- `D029-VIS-001` — Service Tunnel current baseline vs PR #27;
+- `D029-VIS-002` — Quiet Stair current baseline vs PR #30.
+
 ### `docs/GAME_FOUNDATION.md`
 Purpose:
 - core game direction;
