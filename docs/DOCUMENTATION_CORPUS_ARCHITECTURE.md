@@ -389,6 +389,30 @@ Gate Twelve remains the proof region before mass expansion.
 14. migration/removal;
 15. final device/release evidence.
 
+## 13.1 First-pass domain quota authority
+
+The active first-pass allocation is:
+- `docs/FIRST_PASS_DOMAIN_DOCUMENTATION_QUOTAS.md`.
+
+It assigns **148 minimum canonical documentation units** across V00–V12 plus cross-domain guide/planning and evidence/QA/migration coverage.
+
+This is a first-pass floor, not the final corpus target.
+
+Rules:
+- breadth is preferred over additional extreme depth while domains remain below first-pass coverage;
+- structured catalogs/records are tracked separately from canonical document count;
+- no filler, duplicate or artificial file splitting;
+- final quotas are recalibrated only after broad reconstruction-grade first-pass coverage and a fresh reproducible inventory.
+
+## 13.2 Parallel playable integration track
+
+The corpus program runs in parallel with:
+- `docs/PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md`.
+
+The Phase 1 track consumes only the contracts required for the bounded Gate Twelve solo vertical slice. It does not wait for unrelated full-game documentation.
+
+A task completion that changes domain maturity or implementation readiness must update both documentation direction and Phase 1 dependency state when applicable.
+
 ## 14. Completion gate
 
 The corpus is not “complete” merely because a target count is large.
