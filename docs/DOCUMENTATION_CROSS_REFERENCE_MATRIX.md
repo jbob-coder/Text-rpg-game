@@ -1005,3 +1005,32 @@ Owns the target player/world contract for Status fields, awakening, Level, prima
 Owns the reconstruction-grade record structure for large passive catalogs, including requirements, secrecy, world knowledge, evolution, validation and player-safe visibility.
 
 These documents supplement `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`. They do not claim runtime implementation.
+
+
+## V08 tactical-combat first-pass child suite — 2026-10-04
+
+Parent:
+- docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md
+
+Presentation:
+- docs/systems/CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md
+
+Implementation-detail children:
+- docs/systems/TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md — cells, topology, occupancy, cardinal adjacency, deterministic pathing boundaries;
+- docs/systems/TURN_INITIATIVE_ACTION_BUDGET_STANDARD.md — rounds, initiative, four-unit budget, reactions, reinforcement timing;
+- docs/systems/MOVEMENT_PATHING_AND_POSITIONING_STANDARD.md — movement-point costs, move/sprint, interruption, forced movement;
+- docs/systems/LOS_DETECTION_AND_COMBAT_KNOWLEDGE_STANDARD.md — supercover LOS, awareness, last-known position, hidden-state redaction;
+- docs/systems/DIRECTIONAL_COVER_TERRAIN_STANDARD.md — edge cover, terrain, concealment, hazards;
+- docs/systems/COMBAT_ACTION_TARGETING_RESOLUTION_STANDARD.md — action schema, legality, deterministic contest, damage/protection transaction;
+- docs/systems/INJURY_CONDITION_AFTERMATH_STANDARD.md — injury generation, condition reuse, persistent atomic aftermath, save boundary;
+- docs/systems/COMBAT_AI_OBJECTIVES_RETREAT_STANDARD.md — no-cheat deterministic AI, objectives, retreat, companion orders.
+
+Feeds:
+- Gate Twelve Phase 1 authored tactical encounter packet;
+- D-032 combat schema/API migration;
+- future player-safe combat projection;
+- final V11 tactical UI refinement;
+- combat asset specifications;
+- low-end performance/test packets.
+
+V08 first-pass minimum quota is satisfied. Runtime implementation remains separate.
