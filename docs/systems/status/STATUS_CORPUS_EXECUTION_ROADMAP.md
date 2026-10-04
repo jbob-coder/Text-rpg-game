@@ -271,6 +271,39 @@ Open:
 6. Continue shared ability child-rule completion.
 7. Defer runtime implementation until design coherence.
 
+### Knowledge role-class adjudication
+
+Materialized:
+- `PASSIVE_KNOWLEDGE_ROLE_CLASS_ADJUDICATION_WAVE_001.md`;
+- `PASSIVE_FALSE_BELIEF_PROVENANCE_ROLE_CLASS_MAP_0005.md`.
+
+Result:
+- 100 high-priority/context-required ordinary-family rows now have role-class-informed review direction;
+- 20 false-belief rows now have provenance-channel scaffolding;
+- compact registry remains unchanged pending explicit world/entity evidence.
+
+### Ability child-rule progress
+
+Memory Echo child standard materialized:
+- `MEMORY_ECHO_IMPRESSION_EVIDENCE_STANDARD.md`.
+
+Resolved structurally:
+- Echo-source identity;
+- decay direction;
+- overlap/contamination;
+- deliberate decoys;
+- raw impression versus interpretation;
+- confidence/corroboration;
+- save/load;
+- no-objective-truth boundary.
+
+Still open:
+- exact decay/fidelity values;
+- range;
+- final confidence UI;
+- legal/institutional admissibility;
+- historical occurrence examples.
+
 ### World integration preparation
 
 Role-class pilot materialized:
