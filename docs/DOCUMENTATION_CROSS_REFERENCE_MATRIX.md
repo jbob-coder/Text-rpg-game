@@ -1135,7 +1135,7 @@ Owns the first implementation-specific mapping from V08/Phase 1 encounter design
 - Kotlin mapper/ViewModel/Compose migration order;
 - rollback/test gates.
 
-It completes only the combat child of D-032. Other mechanics migration packets remain open.
+It completes the combat child of D-032. Persistent-adversary migration is now also materialized; progression, broader social and items/economy migration packets remain open.
 
 
 ## V09 persistent-adversary/world-memory first-pass child suite — 2026-10-04
@@ -1168,3 +1168,20 @@ Feeds:
 - D-032 adversary migration packet.
 
 Phase 1 does not depend on implementing V09.
+
+
+## D-032 persistent-adversary schema/API migration child — 2026-10-04
+
+`docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md`
+
+Owns the implementation-specific mapping from V09 contracts to:
+- existing stable NPC identity and `GameState.npcs`;
+- a proposed validated nested `npc.adversary` record rather than a competing top-level actor registry;
+- current social memory/knowledge/relationship primitives;
+- schema-v1 save compatibility gates and the explicit condition that any new top-level adversary field requires schema v2+;
+- deterministic recurrence/adaptation APIs;
+- player-safe `adversary_intel` projection boundaries;
+- typed Android migration only when a real consumer exists;
+- rollback, save-round-trip, privacy and low-end performance tests.
+
+It changes no runtime state and selects no canonical recurring Gate Twelve enemy.
