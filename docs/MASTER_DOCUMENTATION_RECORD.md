@@ -119,12 +119,31 @@ Authorities:
 
 This advances D-019 but does not complete it. Current-head Markdown word counts, generalized world/domain extractors, provenance-normalized asset-stage counts, and executed-test evidence remain open.
 
+## 2.2 Latest D-042 source-state checkpoint
+
+`docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md` now records the exact current-head implementation surface at audited source HEAD `d0382aaf6cca2920a7f315d08153ac6b0dddc5dd`.
+
+Current-head inventory includes:
+
+- 19 Python engine modules;
+- 35 Android main Kotlin files;
+- 2 authored content JSON files;
+- GameState's 17 durable top-level fields and save schema v1 boundary;
+- 24 runtime PNGs;
+- 21 Python tests;
+- 27 Android JVM/unit tests;
+- 3 Android instrumented tests;
+- 2 GitHub workflows;
+- 5 Android build/manifest configuration files.
+
+This closes basic current-head source discovery. D-006/D-042 remain open for cross-branch survivor, consumer, deprecation and exact-execution reconciliation.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
 |---|---|---|---|---|
 | **V00 — Program authority / governance** | **ESTABLISHED** | N/A | `MASTER_GAME_DEVELOPMENT_PROGRAM.md`, this record, `THE_GAME_MASTER_TASK_REGISTER.md`, `DOCUMENTATION_CROSS_REFERENCE_MATRIX.md`, `DOCUMENTATION_CORPUS_ARCHITECTURE.md` | Ongoing synchronization; eliminate stale status text when later files overtake older task entries. |
-| **V01 — Existing-state audit** | **IN_PROGRESS** | Repository contains several historical/implementation lines that are not fully reconciled | `LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md`, `EXISTING_STATE_REWORK_DECISION_MATRIX.md`, `IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md` | Finish file/consumer-level audit, stale implementation reconciliation, exact current-head inventory, and remaining PR #33 Class-C extraction. |
+| **V01 — Existing-state audit** | **IN_PROGRESS / CURRENT-HEAD SOURCE INVENTORY COMPLETE** | Current program HEAD is now inventoried at module/component/content/save/asset/test/build level; historical/feature lines are not yet fully reconciled | `DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`, `LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md`, `EXISTING_STATE_REWORK_DECISION_MATRIX.md`, `IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md` | Finish field/consumer mapping, per-catalog consumer audit, cross-branch survivor migration, asset lineage/equivalence, zero-consumer proof, and remaining PR #33 Class-C extraction. |
 | **V02 — Pixel-art / visual production** | **PARTIAL / IN_PROGRESS** | Many assets and runtime bindings exist, but canonical production/provenance/QA is not complete | `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`, `PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md`, `ASSET_PROVENANCE_REGISTRY.md`, provenance family indexes | Finish D-029 provenance; execute deterministic raster equivalence tooling; resolve remaining visual promotion decisions; finish Jack/portrait production and device QA. |
 | **V03 — Gate Twelve proof region** | **ESTABLISHED FIRST-PASS CONTRACT** | Implementation/acceptance remains incomplete | `GATE_TWELVE_REGION_MASTER_PLAN.md`, map/animation blueprints, asset status matrix, room composition contract | Parent-world proposal still requires owner canon decision; bounded runtime migration and physical-device acceptance remain future work. |
 | **V04 — World development** | **ESTABLISHED STANDARDS / PARTIAL POPULATION** | World is not populated at final scale | `WORLD_DEVELOPMENT_MASTER_INDEX.md`, geography/politics/settlement/routes/ecology/beast/population/balance/loot/NPC standards | Canon macroregions, sovereign entities, settlements, routes, ecosystems, populations, institutions, and large-scale structured records. |
@@ -245,8 +264,8 @@ Execution of the final APK reconstruction remains intentionally gated.
 
 ### 5.1 P0 — Documentation control and reconciliation
 
-1. **Finish the deep existing-state audit (D-006 / D-042).**  
-   Major subsystems are classified, but exact file/consumer reconciliation is not complete.
+1. **Continue the deep existing-state audit (D-006 / D-042).**  
+   The exact current-head path/responsibility slice is now documented in `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`: 19 Python engine modules, 35 Android main Kotlin files, 2 content packs, exact save fields/schema, 24 runtime PNGs, 51 Android/Python test-source files plus build/workflow surfaces. Remaining work is cross-branch and consumer-level reconciliation rather than basic current-head discovery.
 
 2. **Finish the reproducible current-head inventory (D-019).**  
    The repository has an inventory tool and historical exact snapshots, but current exact word/record/asset-stage/test-evidence totals still need a complete-checkout execution and persisted result.
