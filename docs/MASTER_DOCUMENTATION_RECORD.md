@@ -250,6 +250,25 @@ What remains separate:
 - branch deletion/promotion;
 - implementation survivor migration under D-020.
 
+## 2.6 D-020 implementation survivor reconciliation closure
+
+Added:
+- `docs/IMPLEMENTATION_SURVIVOR_MIGRATION_MATRIX_2026-10-04.md`.
+
+D-020 branch/provenance documentation reconciliation is now complete.
+
+Every implementation PR #7–#31 has an explicit current disposition:
+- current/inherited;
+- current contract with later presentation rework;
+- superseded as a final-current surface;
+- historical/fix-extraction only;
+- no separate migration required;
+- deferred selective migration;
+- owner decision required;
+- documentation only.
+
+This does not implement deferred candidates or make owner visual/canon decisions. Those remain under D-029/D-030/future implementation work.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
