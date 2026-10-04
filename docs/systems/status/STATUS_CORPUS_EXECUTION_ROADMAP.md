@@ -169,6 +169,31 @@ Open blockers:
 - World Gate anchor/reference/transit/energy rules;
 - world-scale institutional and legal integration.
 
+### Prime Legendary ability slice 001
+
+Materialized:
+- `calibration/PRIMARY_ABILITY_DETAIL_PRIME_LEGENDARY_001.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_PRIME_LEGENDARY_001.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_PRIME_LEGENDARY_001.md`
+- `calibration/ABILITY_COUNTER_DETAIL_PRIME_LEGENDARY_001.md`
+- `PRIME_LEGENDARY_ABILITY_RARITY_OVERLAP_AUDIT_001.md`
+
+Completed:
+- 1 deep ability record;
+- 4 detailed techniques;
+- 4 individualized compact technique rows;
+- 1 individualized awakening profile;
+- 1 individualized counter profile;
+- Legendary↔Prime Legendary boundary audit.
+
+Open blockers:
+- typed interaction-law model;
+- protected-rule policy;
+- knowledge validation;
+- linked-rule behavior;
+- system-strain/recovery semantics;
+- historical/institutional integration.
+
 ### Passive progress
 
 Physical 0001–0010:
@@ -181,17 +206,23 @@ Recovery 0001–0010:
 - scaling/caps/state ownership documented;
 - overlap/stacking requirements recorded.
 
+Movement 0001–0010:
+- deep-authored;
+- scaling/caps/state ownership documented;
+- knowledge posture audited;
+- overlap/stacking and safety requirements recorded.
+
 Open:
 - numeric coefficients;
 - concrete runtime mapping;
-- named world institutions/history.
+- named world institutions/history;
+- final knowledge-row decisions where flagged.
 
 ### Next order
 
-1. **Deep-author Prime Legendary 001.**
-2. **Deep-author Movement passives 0001–0010.**
-3. Continue Unique 001.
-4. Continue remaining passive families.
+1. **Deep-author Unique 001.**
+2. **Deep-author Sensory passives 0001–0010.**
+3. Continue remaining passive families.
 5. Perform world integration after enough accepted records exist.
 6. Defer runtime implementation until design coherence.
 
