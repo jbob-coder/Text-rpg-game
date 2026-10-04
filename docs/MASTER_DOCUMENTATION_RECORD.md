@@ -138,6 +138,30 @@ Current-head inventory includes:
 
 This closes basic current-head source discovery. D-006/D-042 remain open for cross-branch survivor, consumer, deprecation and exact-execution reconciliation.
 
+## 2.2 Deep current-head source audit checkpoint
+
+`docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md` now records a source-grounded D-042 checkpoint for audited HEAD `d0382aaf6cca2920a7f315d08153ac6b0dddc5dd`.
+
+Exact audited source inventory:
+
+- 19 Python engine modules;
+- 21 Python test files;
+- 2 authored content JSON files;
+- 35 Android main Kotlin files;
+- 27 Android JVM/unit-test files;
+- 3 Android instrumented-test files;
+- 24 runtime PNGs;
+- 2 GitHub workflows;
+- 5 Android Gradle/manifest configuration files.
+
+The audit also records:
+- all 17 durable `GameState` fields;
+- save schema version 1 boundaries;
+- current vertical-slice counts: 19 scenes, 31 choices, 4 quests, 1 character, 1 power, 9 map nodes and 8 edges;
+- current responsibility/disposition for every Python engine module and the principal Android/application surfaces.
+
+This closes the current-head path/source inventory portion of D-042. D-042 remains **IN_PROGRESS** because line-by-line consumer mapping, catalog consumers, asset lineage, cross-branch survivor reconciliation and zero-consumer evidence remain open.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
