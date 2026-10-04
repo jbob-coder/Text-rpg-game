@@ -51,6 +51,24 @@ Still needs:
 - final zero-consumer/deprecation evidence;
 - exact runtime execution evidence when implementation changes resume.
 
+### `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md`
+Purpose:
+- exact current Android field/action/screen consumer map;
+- connect Python player-safe payloads to Kotlin mapper, ViewModel actions, Compose consumers, direct pixel-catalog dependencies and test surfaces.
+
+Owns:
+- current-source consumer evidence only.
+
+Must not own:
+- future domain rules;
+- final projection schemas not yet accepted;
+- asset canon/provenance decisions.
+
+Still needs:
+- per-entry asset consumer/zero-consumer audit;
+- remaining navigation/temporary-state audit;
+- implementation/equivalence evidence for future projection migrations.
+
 ### `docs/GAME_FOUNDATION.md`
 Purpose:
 - core game direction;
