@@ -1034,3 +1034,35 @@ Feeds:
 - low-end performance/test packets.
 
 V08 first-pass minimum quota is satisfied. Runtime implementation remains separate.
+
+
+## V05 character/NPC/social first-pass child suite — 2026-10-04
+
+Parent:
+- docs/systems/NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md
+
+Children:
+- docs/systems/NPC_CHARACTER_IDENTITY_PROFILE_STANDARD.md
+- docs/systems/NPC_PERSONALITY_BEHAVIOR_STANDARD.md
+- docs/systems/NPC_MEMORY_EVENT_STANDARD.md
+- docs/systems/NPC_KNOWLEDGE_BELIEF_PRIVACY_STANDARD.md
+- docs/systems/NPC_RELATIONSHIP_STATE_STANDARD.md
+- docs/systems/NPC_GOALS_DECISION_STANDARD.md
+- docs/systems/NPC_SCHEDULE_PRESENCE_STANDARD.md
+- docs/systems/FACTION_HIERARCHY_MEMBERSHIP_STANDARD.md
+- docs/systems/SOCIAL_CONSEQUENCE_RUMOR_PROPAGATION_STANDARD.md
+- docs/systems/RECURRING_CHARACTER_PACKET_STANDARD.md
+- docs/systems/TAMSIN_PHASE1_SOCIAL_PROOF_PACKET.md
+
+V05 first-pass quota: 12 / 12 including the parent master.
+
+Feeds:
+- Phase 1 relationship/knowledge proof;
+- player-safe room actor migration;
+- future relationship/People UI;
+- V09 persistent adversaries;
+- tactical companion behavior;
+- world NPC population and schedules.
+
+Track-B combat packet:
+- docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md consumes V08 rules and current Gate Twelve facts, but remains proposed content until canon review.
