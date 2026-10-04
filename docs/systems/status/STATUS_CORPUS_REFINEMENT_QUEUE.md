@@ -2,86 +2,77 @@
 
 Status: **ACTIVE / PHASE C**
 
-Purpose: control the conversion from structurally complete calibration records to reconstruction-grade design.
+Purpose: control conversion from structurally complete calibration records to reconstruction-grade design.
 
-## P0 — completed refinement slices
+## Completed ability refinement slices
 
-### Primary abilities — Common 001–010
-
+### Common 001–010
 Completed:
-- deep-authoring packet;
+- full ability detail;
+- 40 detailed techniques;
+- compact technique/awakening/counter individualization;
+- rarity/overlap audit.
+
+### Uncommon 001–010
+Completed:
+- full ability detail;
+- 40 detailed techniques;
+- compact technique/awakening/counter individualization;
+- lower-tier adjacency treatment.
+
+### Rare 001–010
+Completed:
+- split deep-authoring packets 001–005 and 006–010;
 - full 40-technique detail packet;
 - 40 individualized compact technique rows;
 - 10 individualized awakening profiles;
 - 10 individualized counter profiles;
-- Common rarity/overlap audit.
+- Rare rarity/overlap audit.
 
-Evidence:
-- `calibration/PRIMARY_ABILITY_DETAIL_COMMON_001_010.md`
-- `calibration/ABILITY_TECHNIQUE_DETAIL_COMMON_001_010.md`
-- `COMMON_ABILITY_RARITY_OVERLAP_AUDIT_001_010.md`
+Resolved:
+- Static Reservoir ↔ Lightning Conduit;
+- Impact Cushion ↔ Momentum Bank;
+- Heat Shaping ↔ Cryo Sink;
+- Lumen Pulse ↔ Umbra Veil.
 
-Open:
-- numeric range/output/resource calibration;
-- exact occurrence-frequency bands;
-- named school/government/military/research handling;
-- known-user/history records;
-- final visual/content asset mapping;
-- Rare-tier adjacency checks for Static Reservoir/Lightning Conduit and Impact Cushion/Momentum Bank.
+Rare blockers:
+- Spatial Anchor reference-frame/contest rules;
+- Lightning throughput numbers;
+- Cryo Sink reserve accounting;
+- Momentum Bank reserve accounting;
+- Memory Echo evidence/uncertainty standard;
+- Crystal Resonance world-canon dependency;
+- named institutions/history;
+- numeric balance.
 
-### Primary abilities — Uncommon 001–010
-
-Completed:
-- deep-authoring packet;
-- full 40-technique detail packet;
-- 40 individualized compact technique rows;
-- 10 individualized awakening profiles;
-- 10 individualized counter profiles;
-- Common↔Uncommon adjacency treatment.
-
-Evidence:
-- `calibration/PRIMARY_ABILITY_DETAIL_UNCOMMON_001_010.md`
-- `calibration/ABILITY_TECHNIQUE_DETAIL_UNCOMMON_001_010.md`
-
-Resolved/narrowed:
-- Kinetic Palm ↔ Vector Nudge;
-- Skin Reinforcement ↔ Stonehide;
-- Water Draw ↔ Vapor Sculpt.
-
-Critical open blockers:
-- Blink Step momentum/collision/reference-frame rules;
-- Stonehide biological/mineral accounting;
-- numeric range/output/cost bands;
-- named institutions/history.
-
-### Passives — Physical 0001–0010
+## Physical passive 0001–0010
 
 Completed:
 - deep-authoring packet;
-- military/research knowledge refinement;
-- false-rumor patterns for Shock Acclimation and Repetition Tolerance;
-- secrecy review for 0004/0008/0009/0010.
+- knowledge refinement;
+- false-rumor/secrecy review;
+- scaling/cap/state-ownership design.
 
 Evidence:
 - `calibration/PASSIVE_DETAIL_PHYSICAL_0001_0010.md`
 - `PASSIVE_PHYSICAL_KNOWLEDGE_REFINEMENT_0001_0010.md`
+- `PASSIVE_PHYSICAL_SCALING_STATE_MODEL_0001_0010.md`
 
 Open:
-- individual scaling/cap rules;
-- authoritative hidden-progress state ownership;
-- implementation/test mapping;
-- explicit knowledge-row changes only after review;
-- named institutions/historical cases.
+- numeric coefficients;
+- actual runtime state-owner mapping;
+- named institutions/history;
+- explicit canon promotion;
+- final knowledge-row changes where approved.
 
 ## P1 — next ability slices
 
-1. **Rare 001–010 — NEXT**
-2. Super Rare 001–006.
-3. Epic 001–004.
-4. Super Epic 001–003.
-5. Legendary 001–002.
-6. Prime Legendary 001.
-7. Unique 001.
+1. **Super Rare 001–006 — NEXT**
+2. Epic 001–004.
+3. Super Epic 001–003.
+4. Legendary 001–002.
+5. Prime Legendary 001.
+6. Unique 001.
 
 Each slice must pass:
 - law overlap review;
@@ -92,17 +83,15 @@ Each slice must pass:
 - visual/content burden;
 - Level-100 compatibility.
 
-Rare deep-authoring must explicitly resolve:
-- Static Reservoir ↔ Lightning Conduit;
-- Impact Cushion ↔ Momentum Bank;
-and establish the next boundary above:
-- Heat Shaping ↔ Cryo Sink;
-- Blink Step ↔ Spatial Anchor;
-- Lumen Pulse ↔ Umbra Veil where relevant.
+Super Rare deep-authoring must especially test:
+- Gravity Well ↔ Mass Inversion;
+- Cryo Sink / Lightning Conduit ↔ Energy Devour;
+- Spatial Anchor ↔ Fold Step;
+- Knit Flesh ↔ Adaptive Regeneration.
 
 ## P1 — next passive families
 
-1. **recovery — NEXT after Physical completion**
+1. **Recovery 0001–0010 — NEXT**
 2. movement;
 3. sensory;
 4. mental/will;
@@ -127,12 +116,12 @@ and establish the next boundary above:
 
 ## P2 — world integration
 
-For each accepted ability/passive:
-- which schools teach it;
-- which government offices classify it;
+For accepted records define:
+- schools;
+- government offices;
 - military/security doctrine;
-- research ownership;
-- named factions;
+- research institutions;
+- factions;
 - profession value;
 - legal restrictions;
 - illicit-market interest;
@@ -157,6 +146,6 @@ Future mapping must identify:
 
 ## Stop condition
 
-Do not mass-generate the next thousand records simply to increase the count.
+Do not generate another large shallow wave merely to increase count.
 
-The next scale expansion begins only after the current refinement pattern proves that a future developer can reconstruct behavior without guessing.
+Continue deepening the existing corpus until reconstruction-grade patterns are stable.
