@@ -309,6 +309,22 @@ Until the owner explicitly decides, the current integrated baseline remains auth
 
 This removes ambiguity from D-029 without silently promoting divergent branch art.
 
+## 2.7 Android navigation / ephemeral-state checkpoint
+
+`docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md` now documents the current production navigation graph and separates domain state from ViewModel/application/local-Compose state.
+
+Resolved current-source areas include:
+
+- seven production `GameSection` destinations;
+- Settings overlay behavior;
+- automatic return to Story after an authoritative scene change;
+- ViewModel busy/travel/stat-inspection state;
+- local inventory/map/text-reveal/developer-input selection state;
+- MainActivity narration/text presentation preferences;
+- the distinct stable test/preview `GameScreen` contract.
+
+This closes the current navigation/temporary-state audit portion of D-026/D-021. Future projection schemas and code-only per-entry asset consumers remain open.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
