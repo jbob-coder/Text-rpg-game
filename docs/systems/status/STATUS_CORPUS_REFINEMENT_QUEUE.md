@@ -67,10 +67,9 @@ Open:
 
 ## P1 — next ability slices
 
-1. **Super Epic 001–003 — NEXT**
-2. Legendary 001–002.
-3. Prime Legendary 001.
-4. Unique 001.
+1. **Legendary 001–002 — NEXT**
+2. Prime Legendary 001.
+3. Unique 001.
 
 Each slice must pass:
 - law overlap review;
@@ -112,12 +111,34 @@ Epic 001–004 deep-authoring completed at the detailed-document layer:
 Epic design rule established:
 Epic effects must change the governing rule-space rather than merely scaling Super Rare output.
 
+Compact Epic technique/awakening/counter rows are now individualized.
+
 Still open:
-- compact Epic registry-row individualization;
 - causal property/coupling rules;
 - singularity physical model;
 - biological template/reversion rules;
 - spatial geometry/reference rules;
+- numeric/world integration.
+
+Super Epic 001–003 completed:
+- deep ability packet;
+- 12 detailed techniques;
+- 12 individualized compact technique rows;
+- 3 detailed awakening records and individualized compact awakenings;
+- 3 detailed counter records and individualized compact counters;
+- rarity/overlap audit.
+
+Evidence:
+- `calibration/PRIMARY_ABILITY_DETAIL_SUPER_EPIC_001_003.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_SUPER_EPIC_001_003.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_SUPER_EPIC_001_003.md`
+- `calibration/ABILITY_COUNTER_DETAIL_SUPER_EPIC_001_003.md`
+- `SUPER_EPIC_ABILITY_RARITY_OVERLAP_AUDIT_001_003.md`
+
+Super Epic blockers:
+- subjective-time/sensory/metabolic model;
+- material mass/energy/composition model;
+- probability-resolution semantics;
 - numeric/world integration.
 
 ## P1 — next passive families
