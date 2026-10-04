@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "repository": "jbob-coder/Text-rpg-game",
+  "branch": "docs/master-game-development-program",
+  "audited_head": "b79185fd673ff7838ef1b8f2814d1459230052fb",
+  "captured_date_ast": "2026-10-04",
+  "scope": "current Android pixel-presentation top-level ID constants and generated Trace-strain portrait-frame consumer status",
+  "top_level_id_constants": {
+    "total_id_like_constants": 110,
+    "visual_asset_ids": 109,
+    "non_visual_condition_trigger_ids": 1
+  },
+  "family_counts": {
+    "PixelAssetCatalog": 15,
+    "PixelCharacterStagingCatalog": 1,
+    "PixelEnvironmentDecalCatalog": 2,
+    "PixelEnvironmentModuleCatalog": 4,
+    "PixelEnvironmentOverlayCatalog": 2,
+    "PixelEnvironmentPropCatalog": 10,
+    "PixelEquipmentSlotCatalog": 12,
+    "PixelItemQualityFrameCatalog": 2,
+    "PixelMapArtCatalog": 1,
+    "PixelMapMarkerCatalog": 5,
+    "PixelMapTravelTransition": 1,
+    "PixelSceneCatalog": 9,
+    "PixelSceneOverlayCatalog": 5,
+    "PixelStoryActorCatalog": 2,
+    "PixelTraceFxCatalog": 3,
+    "PixelTraceStrainCatalog_visual": 1,
+    "PixelTraceStrainCatalog_condition_gate": 1,
+    "PixelUiChromeCatalog": 17,
+    "PixelUiIconCatalog": 15,
+    "PixelUiUtilityCatalog": 2
+  },
+  "zero_current_production_consumer_top_level_visual_ids": [
+    {
+      "asset_id": "MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS",
+      "symbol": "MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS_ID",
+      "file": "PixelEnvironmentModuleCatalog.kt",
+      "classification": "PRODUCED_DEFERRED_INTEGRATION",
+      "disposition": "KEEP_PROVENANCE_DEFER_RUNTIME_PROMOTION"
+    },
+    {
+      "asset_id": "UI_CHOICE_CARD_SELECTED",
+      "symbol": "CHOICE_SELECTED_ID",
+      "file": "PixelUiChromeCatalog.kt",
+      "classification": "NO_CURRENT_PRODUCTION_REFERENCE_FOUND",
+      "disposition": "KEEP_RESERVED_UNTIL_FINAL_UX_DECISION"
+    },
+    {
+      "asset_id": "UI_BUTTON_DANGER",
+      "symbol": "BUTTON_DANGER_ID",
+      "file": "PixelUiChromeCatalog.kt",
+      "classification": "NO_CURRENT_PRODUCTION_REFERENCE_FOUND",
+      "disposition": "KEEP_RESERVED_UNTIL_FINAL_UX_DECISION"
+    }
+  ],
+  "generated_member_zero_current_production_consumer": [
+    {
+      "family": "FX_TRACE_STRAIN portraitFrames",
+      "generated_ids": "FX_TRACE_STRAIN_PORTRAIT_FRAME_1..4",
+      "source_file": "PixelTraceStrainCatalog.kt",
+      "reason": "portraitForConditions exists but no current production consumer call was found",
+      "disposition": "KEEP_DEFERRED_FOR_FUTURE_PORTRAIT_SURFACE"
+    }
+  ],
+  "current_consumer_contract_notes": [
+    "All eight PixelPanelChrome panel kinds are currently reachable through PixelPanel use across Story, Character, Stats, Inventory, Quest, Map, Settings, Developer and Modal surfaces.",
+    "Map marker current/reachable/unavailable variants are reached through PixelMapMarkerCatalog.stateOverlay; discovered/player markers are directly consumed by MapSection.",
+    "All 12 equipment-slot members are returned by PixelEquipmentSlotCatalog.slot and the current UI calls that lookup for projected slots.",
+    "Both current item-quality frames are returned by forQuality; current authored content includes standard and uncommon qualities.",
+    "All nine scene masters have current raster/source lookup paths and authored location use.",
+    "All five scene-overlay members are returned by forScene or forVisualState.",
+    "Both story actors are returned by current scene/location placement rules.",
+    "Trace ambient/signal/directional FX have current SceneIllustration lookup paths.",
+    "Trace-strain avatar frames have a current PlayerAvatarPanel/PixelComponents condition-driven path; portrait frames do not.",
+    "Navigation/resource/quest icon members are covered by active mapping functions called by current UI; per-category activation depends on projected content."
+  ],
+  "deletion_authorized": [],
+  "verification_boundary": {
+    "tests_executed": false,
+    "builds_executed": false,
+    "note": "Static current-source consumer audit only. No runtime execution is claimed."
+  }
+}
