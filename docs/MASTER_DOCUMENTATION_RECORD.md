@@ -119,6 +119,22 @@ Authorities:
 
 This advances D-019 but does not complete it. Current-head Markdown word counts, generalized world/domain extractors, provenance-normalized asset-stage counts, and executed-test evidence remain open.
 
+## 2.3 D-044 moving-base reconciliation closure
+
+D-044 is now **DONE**.
+
+The seven selective Class-C migrations are present in current authorities, duplicate `docs/program/*` authority was not imported wholesale, and the conflicting numeric-unit interpretation remains blocked.
+
+Final recheck recorded:
+
+- program ref: `de8c76cc08da20099671b5cd8fc5d7d7acca1920`;
+- target ref: `65d2db8538c1b8302c314f2fbe9eb7a1b585b51d`;
+- merge base: `c261b2aaf8bd978d27b46f8fea03435c0c5734d0`;
+- branch comparison: diverged, program ahead 651 / behind 99;
+- PR #33: open, draft, mergeable false.
+
+This closes documentation extraction only. It does not authorize a blind merge/rebase or promotion.
+
 ## 2.2 Latest D-042 source-state checkpoint
 
 `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md` now records the exact current-head implementation surface at audited source HEAD `d0382aaf6cca2920a7f315d08153ac6b0dddc5dd`.
@@ -167,7 +183,7 @@ This closes the current-head path/source inventory portion of D-042. D-042 remai
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
 |---|---|---|---|---|
 | **V00 — Program authority / governance** | **ESTABLISHED** | N/A | `MASTER_GAME_DEVELOPMENT_PROGRAM.md`, this record, `THE_GAME_MASTER_TASK_REGISTER.md`, `DOCUMENTATION_CROSS_REFERENCE_MATRIX.md`, `DOCUMENTATION_CORPUS_ARCHITECTURE.md` | Ongoing synchronization; eliminate stale status text when later files overtake older task entries. |
-| **V01 — Existing-state audit** | **IN_PROGRESS / CURRENT-HEAD SOURCE INVENTORY COMPLETE** | Current program HEAD is now inventoried at module/component/content/save/asset/test/build level; historical/feature lines are not yet fully reconciled | `DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`, `LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md`, `EXISTING_STATE_REWORK_DECISION_MATRIX.md`, `IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md` | Finish field/consumer mapping, per-catalog consumer audit, cross-branch survivor migration, asset lineage/equivalence, zero-consumer proof, and remaining PR #33 Class-C extraction. |
+| **V01 — Existing-state audit** | **IN_PROGRESS / CURRENT-HEAD SOURCE INVENTORY COMPLETE** | Current program HEAD is now inventoried at module/component/content/save/asset/test/build level; historical/feature lines are not yet fully reconciled | `DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`, `LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md`, `EXISTING_STATE_REWORK_DECISION_MATRIX.md`, `IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md` | Finish field/consumer mapping, per-catalog consumer audit, cross-branch survivor migration, asset lineage/equivalence, zero-consumer proof, D-044 Class-C extraction is now complete. |
 | **V02 — Pixel-art / visual production** | **PARTIAL / IN_PROGRESS** | Many assets and runtime bindings exist, but canonical production/provenance/QA is not complete | `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`, `PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md`, `ASSET_PROVENANCE_REGISTRY.md`, provenance family indexes | Finish D-029 provenance; execute deterministic raster equivalence tooling; resolve remaining visual promotion decisions; finish Jack/portrait production and device QA. |
 | **V03 — Gate Twelve proof region** | **ESTABLISHED FIRST-PASS CONTRACT** | Implementation/acceptance remains incomplete | `GATE_TWELVE_REGION_MASTER_PLAN.md`, map/animation blueprints, asset status matrix, room composition contract | Parent-world proposal still requires owner canon decision; bounded runtime migration and physical-device acceptance remain future work. |
 | **V04 — World development** | **ESTABLISHED STANDARDS / PARTIAL POPULATION** | World is not populated at final scale | `WORLD_DEVELOPMENT_MASTER_INDEX.md`, geography/politics/settlement/routes/ecology/beast/population/balance/loot/NPC standards | Canon macroregions, sovereign entities, settlements, routes, ecosystems, populations, institutions, and large-scale structured records. |
@@ -429,7 +445,10 @@ The current strongest order is:
 2. **Reconcile the task register with the live 2026-10-04 tree**, removing stale NEXT statements without deleting historical evidence.
 3. **Complete D-019 current-head inventory** so file/word/record/asset/test totals are reproducible at the current program head.
 4. **Complete D-006/D-042 existing-state audit** at file/consumer level.
-5. **Complete D-044 remaining Class-C extraction** from the moving base.
+5. **D-044 moving-base reconciliation is complete.**  
+   Shared authority, unique child migrations and all seven Class-C selective extraction actions are reconciled. PR #33 remains divergent/non-mergeable; this is a branch-governance condition, not unfinished Class-C extraction.
+
+6. **
 6. **Complete D-029 asset provenance/equivalence evidence.**
 7. **Complete D-026/D-021 Android consumer mapping.**
 8. **Resolve D-031 Gate Twelve parent-world canon with the owner.**
