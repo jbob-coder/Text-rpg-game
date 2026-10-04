@@ -940,17 +940,23 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - RESULT: a bounded original parent settlement/region/municipal/route/terrain-climate proposal exists without changing local IDs, local route data, W3 coordinates or higher sovereign canon. Working names remain non-canon until accepted/revised.
 
 ### TASK D-032 — Mechanics schema/API migration packets
-- STATUS: `IN_PROGRESS / COMBAT CHILD COMPLETE`
+- STATUS: `IN_PROGRESS / COMBAT + PERSISTENT-ADVERSARY CHILDREN COMPLETE`
 - PRIORITY: `P0/P1`
 - OUTPUT TARGET: progression/social/items/combat/adversary target schemas mapped to existing engine APIs, saves, projections and tests.
-- COMPLETED CHILD:
+- COMPLETED CHILDREN:
   - `docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md`
+  - `docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md`
 - COMBAT DECISION:
   - Phase 1 tactical runtime state remains transient authoritative Python state;
   - durable GameState/save schema v1 is unchanged during combat;
   - validated aftermath commits durable consequences atomically;
   - optional top-level tactical content sections are proposed rather than widening the current fixed registry categories.
-- STILL OPEN: progression, social, items/economy and persistent-adversary migration packets; exact implementation/tests remain separate.
+- PERSISTENT-ADVERSARY DECISION:
+  - first runtime target extends the existing per-NPC durable record through `state.npcs[npc_id]["adversary"]` rather than adding a competing top-level registry;
+  - top-level save schema v1 may remain unchanged only if nested-record validation and old/new save round-trip tests pass;
+  - any new top-level `adversaries` field requires an explicit schema v2+ migration;
+  - no canonical Gate Twelve recurring enemy is selected by the migration packet.
+- STILL OPEN: progression, broader social and items/economy migration packets; exact implementation/tests remain separate.
 
 ### TASK D-049 — Application UI relationship architecture planning
 - STATUS: `PLANNING ONLY / DOMAIN-DEPENDENT / FINAL REFINEMENT DEFERRED`
@@ -1166,24 +1172,29 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETED_AT: 2026-10-04 AST
 
 ### TASK D-056 — Build V07 items/economy/loot first-pass child contracts
-- STATUS: IN_PROGRESS / NEXT BREADTH DOMAIN
+- STATUS: DONE
 - PRIORITY: P0/P1
-- WHY NEXT:
-  - V07 has a 10-unit first-pass floor and remains under-covered;
-  - it directly supports Phase 1 inventory/equipment requirement #6;
-  - it feeds combat loadouts, activity costs, world resources, loot provenance and later UI refinement.
-- TARGET FIRST LAYER:
-  - item identity/definition schema;
-  - inventory ownership/stacking standard;
-  - equipment legality/slot standard;
-  - item quality/rarity standard;
-  - item use/consumption standard;
-  - loot/drop/provenance standard;
-  - economy source/sink/value standard;
-  - vendor/service transaction standard;
-  - Gate Twelve Phase 1 item/equipment proof packet.
-- RULE: preserve current stable item IDs/equipment slots; do not invent currency/vendors/crafting where current canon has not approved them.
+- RESULT: V07 reaches 10 / 10 first-pass canonical units using the existing item/economy master plus nine child standards/packets.
+- PHASE 1 IMPACT: requirement #6 has a documented proof path using current inventory/equipment, Maintenance Seal consumption and Dead Relay acquisition; exact-head integration verification remains separate.
+- BOUNDARY: currency, vendors, crafting, durability, encumbrance, random loot and large catalogs are not claimed as runtime-complete.
+- RUNTIME: no behavior changed in the V07 documentation batch.
+- COMPLETED_AT: 2026-10-04 AST
 
+
+### TASK D-057 — Complete V09 persistent-adversary/world-memory first-pass contracts
+- STATUS: DONE
+- PRIORITY: P0/P1
+- OUTPUTS:
+  - docs/systems/PERSISTENT_ADVERSARY_WORLD_MEMORY_MASTER_PLAN.md
+  - docs/systems/ADVERSARY_ELIGIBILITY_IDENTITY_STANDARD.md
+  - docs/systems/ADVERSARY_ENCOUNTER_MEMORY_ADAPTATION_STANDARD.md
+  - docs/systems/ADVERSARY_LIFECYCLE_RECURRENCE_STANDARD.md
+  - docs/systems/ADVERSARY_HIERARCHY_SUCCESSION_STANDARD.md
+  - docs/systems/ADVERSARY_TERRITORY_ROUTING_STANDARD.md
+  - docs/systems/ADVERSARY_PLAYER_SAFE_INTEL_STANDARD.md
+  - docs/systems/GATE_TWELVE_ADVERSARY_PROOF_PACKET.md
+- MIGRATION CONSUMER: docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md under D-032.
+- COMPLETED_AT: 2026-10-04 AST
 
 #### D-057 closure — V09 first-pass breadth floor
 - RESULT: V09 reaches 8 / 8 canonical first-pass units through one dedicated master plus seven child standards/packets.
