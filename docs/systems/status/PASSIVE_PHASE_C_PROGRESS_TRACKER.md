@@ -115,6 +115,14 @@ Materialized:
 
 All 23 passive families now have family-level role-class relevance mapped without inventing named institutions.
 
+## Knowledge role-class adjudication
+
+Materialized:
+- `PASSIVE_KNOWLEDGE_ROLE_CLASS_ADJUDICATION_WAVE_001.md` — 100 ordinary-family 0003/0004/0008/0009/0010 rows now have role-class-informed recommended directions;
+- `PASSIVE_FALSE_BELIEF_PROVENANCE_ROLE_CLASS_MAP_0005.md` — 20 false-belief candidates now have origin/correction role-class channels.
+
+Compact knowledge rows remain unchanged pending entity-level world evidence and explicit review.
+
 ## World/canon preparation
 
 Materialized:
@@ -126,8 +134,8 @@ No named institution was invented and no record was canon-promoted.
 
 ## Next work
 
-1. resolve knowledge Wave-A/B/C rows against role-class/world evidence;
-2. assign/verify shared resolver keys and caps for the 38 SAME_TERM_CAPPED overlap edges;
+1. verify/adjudicate proposed knowledge directions against actual world entities when parent world docs support them;
+2. assign/verify cap semantics for the 38 SAME_TERM_CAPPED overlap edges;
 3. progress selected records from family role classes toward actual world entities only when parent world docs support them;
 4. expand numeric parameterization after base-system units are documented;
 5. run additional canon dry-review packets;
