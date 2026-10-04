@@ -329,3 +329,40 @@ The new blueprint adds structured decision coverage for:
 - final APK teardown/rebuild order.
 
 Next measurable work remains branch-aware asset/implementation reconciliation and exact inventory execution.
+
+
+## 2026-10-04 master documentation record control layer
+
+Added:
+- `docs/MASTER_DOCUMENTATION_RECORD.md`.
+
+Purpose:
+- provide one durable repository-native record of what documentation exists;
+- separate contract completion from runtime/content completion;
+- list completed areas, partial areas, missing work, blockers, authorities and next execution order;
+- prevent older task-register NEXT text and historical count snapshots from being mistaken for live state.
+
+Source audit used to establish the record:
+- `docs/master-game-development-program@28809b7abdaf6f7f05ccd58cf0d5e71efacf5e22`;
+- 489 tracked files;
+- 347 documentation-scope paths;
+- 319 Markdown documentation paths;
+- 21 structured documentation paths;
+- 216 paths under `docs/systems/`, including 204 under `docs/systems/status/`;
+- 18 world paths;
+- 46 asset paths;
+- 5 Android paths.
+
+These are structural path counts, not semantic-completion percentages and not a resolution of the owner's ambiguous numeric units.
+
+Control reconciliation performed in the same continuation:
+- repository entry points now route through the master documentation record;
+- cross-reference authority now includes the master record;
+- TASK D-047 records creation/maintenance of the master record;
+- D-020 moved from pending to in-progress because PR-level reconciliation exists through D-028 while survivor migration remains;
+- D-021 moved from pending to in-progress because D-026 already materialized the high-level Android consumer/projection map;
+- D-046 was reconciled to the live Status corpus: Phase A complete, Wave 001 structurally complete at 1,019 records, primary-ability detail coverage 47/47, passive family baseline 23/23, while Phase-C refinement/canon/runtime mapping remains active.
+
+No gameplay runtime, save schema, stable IDs, Android implementation, pixel raster, or final APK behavior changed in this control-layer batch.
+
+Next measurement priority remains D-019: execute and persist a reproducible exact-current-head inventory with words, structured records, asset stages, test-source counts and executed-test evidence kept distinct.
