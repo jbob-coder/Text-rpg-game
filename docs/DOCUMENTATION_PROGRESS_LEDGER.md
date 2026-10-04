@@ -735,3 +735,23 @@ Also added:
 The encounter packet is proposed content, not canon/runtime completion. It uses existing Service Tunnel and Directional Trace facts and deliberately keeps opponent identity unresolved.
 
 Next breadth area: V10 Activities/Life Simulation.
+
+
+## 2026-10-04 V10 activities/life-simulation first-pass batch
+
+Added seven child standards/packets, bringing V10 to 8 / 8 first-pass canonical units with its master.
+
+Coverage:
+- activity identity/state;
+- time/cost/atomicity;
+- training/practice;
+- recovery/rest/treatment;
+- work/study/research;
+- interruption/concurrency/scheduling;
+- Trace Chamber Phase 1 proof.
+
+No profession/economy/calendar/offline-progression implementation is claimed.
+
+Phase 1 requirement #8 has a current authored/runtime proof candidate but exact-head execution/save-load/Android verification remains pending.
+
+Next breadth area: V07 Items/Economy/Loot.
