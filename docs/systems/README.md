@@ -101,3 +101,12 @@ V09 now has 8 / 8 first-pass canonical units: a dedicated original persistent-ad
 The system is explicitly knowledge-driven and world-logical. It does not use arbitrary post-defeat stat inflation, forced cameos, memory inheritance across successors, or omniscient counter-preparation.
 
 The Gate Twelve proof intentionally does not promote the current unidentified Service Tunnel contacts into canon recurring enemies.
+
+
+## Persistent-adversary implementation migration — 2026-10-04
+
+- `PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md` — D-032 implementation mapping for the V09 contract layer.
+
+The first runtime target extends the existing per-NPC durable record rather than creating a second actor registry. The packet keeps top-level save schema v1 only behind explicit nested-record validation and round-trip tests; any new top-level adversary field requires a later schema migration.
+
+No runtime or canonical recurring enemy is created by this document.
