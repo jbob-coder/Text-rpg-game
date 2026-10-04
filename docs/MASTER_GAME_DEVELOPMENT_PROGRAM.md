@@ -890,6 +890,35 @@ Do not create hundreds of empty branches. Create a branch when a bounded documen
 
 ---
 
+# 14.1 Three-track execution direction
+
+The project now operates three synchronized tracks.
+
+## Track A — Full reconstruction corpus
+Expand the complete documentation graph across every game domain using the first-pass quota authority:
+- `docs/FIRST_PASS_DOMAIN_DOCUMENTATION_QUOTAS.md`.
+
+## Track B — Phase 1 solo playable
+Maintain a bounded Gate Twelve playable integration line governed by:
+- `docs/PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md`.
+
+Track B waits only for the direct contracts it consumes. It must not be blocked by unrelated long-range corpus expansion.
+
+## Track C — Synchronization and evidence
+Keep documentation, implementation and evidence aligned.
+
+Every meaningful task closure must update:
+- task status;
+- evidence;
+- affected domain/quota;
+- Phase 1 impact where relevant;
+- dependencies unlocked or newly blocked;
+- the next recommended direction;
+- stale NEXT instructions;
+- master/index documents whose status changed.
+
+A task is not operationally closed if the repository still points future agents toward an obsolete next action.
+
 # 15. Execution gates
 
 ## Gate 1 — documentation authority
