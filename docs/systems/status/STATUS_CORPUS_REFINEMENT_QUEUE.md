@@ -230,7 +230,7 @@ Unique blockers:
 
 ## P1 — next passive families
 
-1. **Medical / Recovery Practice 0001–0010 — NEXT**
+1. **Ability Synergy 0001–0010 — NEXT**
 
 8. technical/craft;
 9. medical/recovery practice;
@@ -243,6 +243,21 @@ Unique blockers:
 16. unique event;
 17. cosmic/system;
 18. unknown/classified.
+
+## Medical / Recovery Practice 0001–0010 completed
+
+Evidence:
+- `PASSIVE_MEDICAL_RECOVERY_PRACTICE_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_MEDICAL_RECOVERY_PRACTICE_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_MEDICAL_RECOVERY_PRACTICE_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Open:
+- numeric calibration;
+- final knowledge decisions;
+- medical-case/protocol state mapping;
+- cross-family stacking;
+- named health-service institutions;
+- canon promotion.
 
 ## Technical / Craft 0001–0010 completed
 
