@@ -35,10 +35,13 @@ Resolved:
 - Heat Shaping ↔ Cryo Sink;
 - Lumen Pulse ↔ Umbra Veil.
 
+Rare child-rule progress:
+- `CRYO_SINK_THERMAL_TRANSFER_RESERVE_STANDARD.md` now resolves Cryo Sink's non-numeric extraction accounting, thermal-energy reserve identity, material/insulation role, conduction/spillover, thermal-shock category, saturation, no-current-output-route boundary, and save/load invariants.
+
 Rare blockers:
 - Spatial Anchor reference-frame/contest rules;
 - Lightning throughput numbers;
-- Cryo Sink reserve accounting;
+- Cryo Sink numeric thermal unit/capacity/rate/lifecycle and living-target/world-policy decisions; structural transfer/reserve model now documented;
 - Momentum Bank numeric capacity/rate/efficiency/decay calibration; capture/release model now documented in `MOMENTUM_BANK_CAPTURE_RESERVE_RELEASE_STANDARD.md`;
 - Memory Echo exact decay/fidelity/legal calibration; structural evidence/contamination model now documented in `MEMORY_ECHO_IMPRESSION_EVIDENCE_STANDARD.md`;
 - Crystal Resonance world-canon dependency;
@@ -259,8 +262,8 @@ Evidence:
 - `STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md`.
 
 Next passive work:
-1. use confirmed Gate Twelve local evidence to adjudicate only supported knowledge/world links;
-2. define parent-system numeric ranges/test fixtures for the 20 canonical passive resolver terms;
+1. materialize first parent-system range/test-fixture batches where base systems are mature enough;
+2. use confirmed Gate Twelve local evidence to adjudicate only supported knowledge/world links;
 3. move selected role-class mappings to actual named entities only after parent-world canon approval;
 4. additional canon dry-review packets;
 5. continue ability child-rule closure;
@@ -291,12 +294,27 @@ Knowledge reconciliation:
 - Wave B: 40 rows require concrete institutional/classification justification;
 - Wave C: 20 candidate false-belief records authored with provenance still required.
 
+Parent-fixture requirements:
+- all 20 canonical shared resolvers now identify required parent-system fixture sets and readiness gates;
+- final parent ranges and passive coefficients remain unassigned.
+
+Evidence:
+- `PASSIVE_CANONICAL_RESOLVER_PARENT_FIXTURE_REQUIREMENTS_WAVE_001.md`.
+
 Resolver scenario anchors:
 - 20 / 20 canonical shared resolvers now have BASELINE/FAVORABLE/ADVERSE/BOUNDARY qualitative anchors;
 - no numeric coefficient has been assigned.
 
 Evidence:
 - `PASSIVE_CANONICAL_RESOLVER_SCENARIO_ANCHORS_WAVE_001.md`.
+
+Gate Twelve evidence-backed adjudication:
+- a bounded record set was checked against confirmed local place/function evidence;
+- local use-context support is separated from training/knowledge/policy/institution proof;
+- FAC_0002/FAC_0005 remain blocked by missing credential/clearance semantics.
+
+Evidence:
+- `STATUS_GATE_TWELVE_EVIDENCE_BACKED_KNOWLEDGE_WORLD_ADJUDICATION_001.md`.
 
 Local world-evidence integration:
 - Gate Twelve local evidence pilot materialized;
@@ -340,6 +358,9 @@ Recent progress:
 - canon dry review: `CANON_REVIEW_DRY_RUN_ABILITY_RAR_003.md`.
 
 Additional dry-review evidence:
+- `CANON_REVIEW_DRY_RUN_PASSIVE_PRO_0008.md` — Documentation Discipline: return for refinement pending individualized knowledge/world provenance and a parent documentation workflow;
+- `CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0005.md` — Clearance Awareness: return for refinement pending a real clearance/authorization model;
+
 - `CANON_REVIEW_DRY_RUN_PASSIVE_TEC_0006.md` — proposed eventual approval with open numeric/world-provenance fields;
 - `CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0002.md` — return for refinement pending credential/authorization world model.
 
