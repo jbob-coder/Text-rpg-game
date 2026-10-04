@@ -34,6 +34,23 @@ Maintenance:
 - reconcile stale task-register NEXT text when newer repository files materially change the state;
 - do not absorb full domain content that belongs in the linked master/child documents.
 
+### `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`
+Purpose:
+- exact current-head source inventory for Python engine modules, Android application/runtime files, authored content, durable save fields, raster assets, tests and build/workflow surfaces;
+- attach current KEEP / EXTEND / REWORK / replacement-direction dispositions without treating them as deletion permission.
+
+Consumes:
+- existing-state decision matrix;
+- live repository audit;
+- Android consumer map;
+- asset provenance work.
+
+Still needs:
+- field-level consumer mapping;
+- cross-branch survivor reconciliation;
+- final zero-consumer/deprecation evidence;
+- exact runtime execution evidence when implementation changes resume.
+
 ### `docs/GAME_FOUNDATION.md`
 Purpose:
 - core game direction;
