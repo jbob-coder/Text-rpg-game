@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "repository": "jbob-coder/Text-rpg-game",
+  "branch": "docs/master-game-development-program",
+  "audited_head": "a785cb0e105b7fbbd0dd61339235f4989aae046f",
+  "captured_date_ast": "2026-10-04",
+  "scope": "24 current drawable-nodpi PNGs bound by PixelRasterCatalog plus known deferred zero-consumer candidates",
+  "result": {
+    "current_png_count": 24,
+    "current_pngs_with_consumer_path": 24,
+    "current_png_zero_consumer_candidates": 0,
+    "deletion_authorized": 0
+  },
+  "current_rasters": [
+    {
+      "asset_id": "PLAYER_GAMEPLAY_FRONT_BASE",
+      "drawable": "pixel_player_gameplay_front_base",
+      "family": "player",
+      "consumer": "PixelComponents.PlayerAvatarPanel -> rememberPixelRasters -> PixelRasterCatalog.sprite",
+      "reachability": "always requested when player avatar renders",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "PLAYER_HAIR_TECH_PLACEHOLDER",
+      "drawable": "pixel_player_hair_tech_placeholder",
+      "family": "player",
+      "consumer": "PixelComponents.PlayerAvatarPanel -> rememberPixelRasters -> PixelRasterCatalog.sprite",
+      "reachability": "always requested when player avatar renders",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_DEPOT_JACKET_ICON",
+      "drawable": "pixel_item_depot_jacket_icon",
+      "family": "item_icon",
+      "consumer": "PixelItemIcon -> PixelAssetCatalog.itemIcon(ITEM_DEPOT_JACKET) -> PixelRasterCatalog.sprite",
+      "reachability": "ITEM_DEPOT_JACKET exists in current registry and initial inventory",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_DEPOT_JACKET_PAPERDOLL",
+      "drawable": "pixel_item_depot_jacket_paperdoll",
+      "family": "equipment_layer",
+      "consumer": "PlayerAvatarPanel -> PixelAssetCatalog.equipmentOverlay(ITEM_DEPOT_JACKET, body) -> rememberPixelRasters",
+      "reachability": "current registry item is equippable and present in initial inventory",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_WORK_GLOVES_ICON",
+      "drawable": "pixel_item_work_gloves_icon",
+      "family": "item_icon",
+      "consumer": "PixelItemIcon -> PixelAssetCatalog.itemIcon(ITEM_WORK_GLOVES) -> PixelRasterCatalog.sprite",
+      "reachability": "ITEM_WORK_GLOVES exists in current registry and initial inventory",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_WORK_GLOVES_PAPERDOLL",
+      "drawable": "pixel_item_work_gloves_paperdoll",
+      "family": "equipment_layer",
+      "consumer": "PlayerAvatarPanel -> PixelAssetCatalog.equipmentOverlay(ITEM_WORK_GLOVES, hands) -> rememberPixelRasters",
+      "reachability": "current registry item is equippable and present in initial inventory",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_SIGNAL_RING_ICON",
+      "drawable": "pixel_item_signal_ring_icon",
+      "family": "item_icon",
+      "consumer": "PixelItemIcon -> PixelAssetCatalog.itemIcon(ITEM_SIGNAL_RING) -> PixelRasterCatalog.sprite",
+      "reachability": "ITEM_SIGNAL_RING exists in current registry and initial inventory",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_SIGNAL_RING_PAPERDOLL",
+      "drawable": "pixel_item_signal_ring_paperdoll",
+      "family": "equipment_layer",
+      "consumer": "PlayerAvatarPanel -> PixelAssetCatalog.equipmentOverlay(ITEM_SIGNAL_RING, ring_1) -> rememberPixelRasters",
+      "reachability": "current registry item is equippable and present in initial inventory",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_COURIER_NECKTAG_ICON",
+      "drawable": "pixel_item_courier_necktag_icon",
+      "family": "item_icon",
+      "consumer": "PixelItemIcon -> PixelAssetCatalog.itemIcon(ITEM_COURIER_NECKTAG) -> PixelRasterCatalog.sprite",
+      "reachability": "ITEM_COURIER_NECKTAG exists in current registry and initial inventory",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_COURIER_NECKTAG_PAPERDOLL",
+      "drawable": "pixel_item_courier_necktag_paperdoll",
+      "family": "equipment_layer",
+      "consumer": "PlayerAvatarPanel -> PixelAssetCatalog.equipmentOverlay(ITEM_COURIER_NECKTAG, neck) -> rememberPixelRasters",
+      "reachability": "current registry item is equippable and present in initial inventory",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_MAINTENANCE_SEAL_ICON",
+      "drawable": "pixel_item_maintenance_seal_icon",
+      "family": "item_icon",
+      "consumer": "PixelItemIcon -> PixelAssetCatalog.itemIcon(ITEM_MAINTENANCE_SEAL) -> PixelRasterCatalog.sprite",
+      "reachability": "ITEM_MAINTENANCE_SEAL exists in current registry and initial inventory",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_DEAD_RELAY_ICON",
+      "drawable": "pixel_item_dead_relay_icon",
+      "family": "item_icon+story_state",
+      "consumer": "PixelItemIcon and SceneIllustration relay state -> PixelAssetCatalog.relayStateSprite(intact) -> PixelRasterCatalog.sprite",
+      "reachability": "ITEM_DEAD_RELAY is authored as an obtainable opening item; intact state exists before destination knowledge/damage flags",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_DEAD_RELAY_OPENED",
+      "drawable": "pixel_item_dead_relay_opened",
+      "family": "story_state",
+      "consumer": "SceneIllustration at RELAY_WORKBENCH -> relayStateSprite(opened) -> PixelRasterCatalog.sprite",
+      "reachability": "opened projection follows KNOW_RELAY_DESTINATION_SERVICE_GATE_12 while relay remains owned",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_DEAD_RELAY_DAMAGED",
+      "drawable": "pixel_item_dead_relay_damaged",
+      "family": "story_state",
+      "consumer": "SceneIllustration at RELAY_WORKBENCH -> relayStateSprite(damaged) -> PixelRasterCatalog.sprite",
+      "reachability": "authored force-casing failure sets relay.casing_damaged=true",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "ITEM_DEAD_RELAY_SIGNAL_LOST",
+      "drawable": "pixel_item_dead_relay_signal_lost",
+      "family": "story_state",
+      "consumer": "SceneIllustration at RELAY_WORKBENCH -> relayStateSprite(signal_lost) -> PixelRasterCatalog.sprite",
+      "reachability": "authored critical failure sets relay.signal_lost=true",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "PLATFORM_NINE_SCENE",
+      "drawable": "pixel_platform_nine_blackout_scene",
+      "family": "scene",
+      "consumer": "SceneIllustration -> PixelRasterCatalog.scene(PLATFORM_NINE)",
+      "reachability": "world-map node exists; authored scenes OPENING_DEPOT_BLACKOUT and OPENING_DECISION use PLATFORM_NINE",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "RELAY_WORKBENCH_SCENE",
+      "drawable": "pixel_relay_workbench_default_scene",
+      "family": "scene",
+      "consumer": "SceneIllustration -> PixelRasterCatalog.scene(RELAY_WORKBENCH)",
+      "reachability": "world-map node exists; authored relay/recovery scenes use RELAY_WORKBENCH",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "GATE_TWELVE_SCENE",
+      "drawable": "pixel_gate_twelve_sealed_scene",
+      "family": "scene",
+      "consumer": "SceneIllustration -> PixelRasterCatalog.scene(GATE_TWELVE)",
+      "reachability": "world-map node exists; multiple authored Gate Twelve scenes use this location",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "SERVICE_TUNNEL_SCENE",
+      "drawable": "pixel_service_tunnel_default_scene",
+      "family": "scene",
+      "consumer": "SceneIllustration -> PixelRasterCatalog.scene(SERVICE_TUNNEL)",
+      "reachability": "world-map node exists; OPENING_TUNNEL and TRACE_DIRECTIONAL_AFTERSHOCK use SERVICE_TUNNEL",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "EVAC_STAIR_SCENE",
+      "drawable": "pixel_evac_stair_default_scene",
+      "family": "scene",
+      "consumer": "SceneIllustration -> PixelRasterCatalog.scene(EVAC_STAIR)",
+      "reachability": "world-map node exists; OPENING_SOLO_EXIT uses EVAC_STAIR",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "TRACE_CHAMBER_SCENE",
+      "drawable": "pixel_trace_chamber_idle_scene",
+      "family": "scene",
+      "consumer": "SceneIllustration -> PixelRasterCatalog.scene(TRACE_CHAMBER)",
+      "reachability": "world-map node exists; current practice/stabilization scenes use TRACE_CHAMBER",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "DISTRICT_PLAZA_SCENE",
+      "drawable": "pixel_district_plaza_open_scene",
+      "family": "scene",
+      "consumer": "SceneIllustration -> PixelRasterCatalog.scene(DISTRICT_PLAZA)",
+      "reachability": "world-map node exists; DISTRICT_HUB uses DISTRICT_PLAZA",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "DISTRICT_ARCHIVE_SCENE",
+      "drawable": "pixel_district_archive_default_scene",
+      "family": "scene",
+      "consumer": "SceneIllustration -> PixelRasterCatalog.scene(DISTRICT_ARCHIVE)",
+      "reachability": "world-map node exists; DISTRICT_ARCHIVE scene uses DISTRICT_ARCHIVE",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    },
+    {
+      "asset_id": "WORKSHOP_ROW_SCENE",
+      "drawable": "pixel_workshop_row_default_scene",
+      "family": "scene",
+      "consumer": "SceneIllustration -> PixelRasterCatalog.scene(WORKSHOP_ROW)",
+      "reachability": "world-map node exists; DISTRICT_WORKSHOP uses WORKSHOP_ROW",
+      "status": "CURRENT_CONSUMER_PRESENT"
+    }
+  ],
+  "deferred_noncurrent_or_code_only_candidates": [
+    {
+      "id": "MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS",
+      "location": "current Kotlin source family",
+      "classification": "PRODUCED_DEFERRED_INTEGRATION",
+      "current_main_ui_consumer": "NONE_FOUND_IN_PRIOR_D-029_EXACT_AUDIT",
+      "action": "retain; optional PR #28 composition may be selectively reimplemented after visual/material review"
+    },
+    {
+      "id": "PR9_DIAGNOSTIC_READER_ICON",
+      "location": "divergent PR #9 evidence, not current program runtime",
+      "classification": "DEFERRED_INTEGRATION",
+      "current_authorized_inventory_consumer": "NONE",
+      "action": "retain provenance only; do not introduce inventory semantics without domain authorization"
+    },
+    {
+      "id": "PR9_DIAGNOSTIC_READER_HELD_MASTER",
+      "location": "divergent PR #9 evidence, not current program runtime",
+      "classification": "DEFERRED_INTEGRATION_BLOCKED_BY_D030",
+      "current_consumer": "NONE",
+      "action": "candidate Tamsin actor-presentation layer after player-safe actor projection and hand/wrist anchors"
+    },
+    {
+      "id": "PR31_SERVICE_TUNNEL_AMBIENT_ANIMATION",
+      "location": "divergent PR #31 evidence, not current program runtime",
+      "classification": "DEFERRED_REIMPLEMENTATION",
+      "current_consumer": "NONE",
+      "action": "reimplement on selected static Service Tunnel parent with reduced-motion support if approved"
+    }
+  ],
+  "verification_boundary": {
+    "tests_executed": false,
+    "build_executed": false,
+    "raster_equivalence_executed": false,
+    "note": "This is a source-consumer/reachability audit. It does not prove fresh pixel equality or runtime execution."
+  }
+}
