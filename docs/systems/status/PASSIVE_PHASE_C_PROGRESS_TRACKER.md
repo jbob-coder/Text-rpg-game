@@ -97,8 +97,18 @@ Evidence:
 - `PASSIVE_SOCIAL_BEHAVIORAL_SCALING_STATE_MODEL_0001_0010.md`
 - `PASSIVE_SOCIAL_BEHAVIORAL_KNOWLEDGE_REFINEMENT_0001_0010.md`
 
+### Leadership / Coordination 0001–0010
+- effect map covering all 10 IDs;
+- scaling/state model covering all 10 IDs;
+- knowledge refinement covering all 10 IDs.
+
+Evidence:
+- `PASSIVE_LEADERSHIP_COORDINATION_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_LEADERSHIP_COORDINATION_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_LEADERSHIP_COORDINATION_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
 ## Next family
-**Leadership / Coordination 0001–0010**.
+**Technical / Craft 0001–0010**.
 
 Then:
 - technical/craft;
