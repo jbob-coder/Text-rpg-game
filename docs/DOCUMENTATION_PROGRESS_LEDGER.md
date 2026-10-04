@@ -400,3 +400,30 @@ Bounded structured counts added:
 - Gate Twelve baseline: 9 nodes and 8 edges.
 
 D-019 remains **IN_PROGRESS**. No current-head word count was fabricated. Complete-checkout word/heading counts, generalized domain extractors, provenance-normalized asset stages and executed-test evidence remain open.
+
+
+## 2026-10-04 D-042 deep current-head source audit
+
+Added:
+- `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`.
+
+Audited source HEAD:
+- `docs/master-game-development-program@d0382aaf6cca2920a7f315d08153ac6b0dddc5dd`.
+
+Current-head inventory now explicitly covers:
+- 19 Python engine modules;
+- 35 Android main Kotlin files;
+- 2 authored content JSON files;
+- exact GameState/save schema v1 top-level fields and persistence boundary;
+- 24 runtime PNGs;
+- 21 Python test files;
+- 27 Android JVM/unit-test files;
+- 3 Android instrumented-test files;
+- 2 GitHub workflow files;
+- 5 Android Gradle/manifest configuration files.
+
+The audit records KEEP / EXTEND / REWORK / replacement-direction dispositions while preserving the no-deletion-before-consumer/migration-evidence rule.
+
+D-006/D-042 remain in progress because cross-branch survivor reconciliation, field-level Android consumer mapping, per-catalog consumer/deprecation proof, D-029 asset equivalence/provenance and D-044 remaining Class-C extraction are still open.
+
+No runtime or content files changed and no tests/builds were executed by this documentation pass.
