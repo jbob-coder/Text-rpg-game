@@ -1,6 +1,6 @@
 # THE GAME — First-Pass Quota Coverage Audit — 2026-10-04
 
-Status: **CURRENT SEMANTIC COVERAGE AUDIT / SOURCE HEAD b39ebdc94216f4d82b3dfa4a945a167d00f8c0a1**
+Status: **CURRENT SEMANTIC COVERAGE AUDIT / UPDATED AFTER V12 CLOSURE / CURRENT HEAD a24ce110897ff31fca614925c636c88e7f111a5a**
 Repository: jbob-coder/Text-rpg-game
 Branch: docs/master-game-development-program
 Parent:
@@ -49,15 +49,15 @@ Historical/superseded duplicates do not count.
 | V09 Persistent adversaries / world memory | 8 | 8 | SATISFIED |
 | V10 Activities / life simulation | 8 | 8 | SATISFIED |
 | V11 Application UI/UX planning | 8 | 8 | SATISFIED |
-| V12 Android / APK reconstruction | 8 | 3 | **DEFICIT 5** |
+| V12 Android / APK reconstruction | 8 | 8 | SATISFIED |
 | Cross-domain guides / planning | 10 | 10 | SATISFIED |
 | Cross-domain evidence / QA / migration | 10 | 10 | SATISFIED |
 
 Result:
-- all first-pass floors are semantically covered except V12;
-- V12 requires five additional nonduplicate planning/acceptance authorities;
+- **all first-pass quota floors are now semantically satisfied**;
 - this does not mean the full game documentation is reconstruction-complete;
-- structured content catalogs and runtime verification remain much larger future work.
+- structured content catalogs, deeper migration packets, content population and runtime verification remain much larger future work;
+- the first-pass phase should now stop creating quota-filler files and move to measured second-pass planning.
 
 ## 4. V00 counted units — 8 / 8
 
@@ -232,24 +232,23 @@ The V06 corpus greatly exceeds the floor. Further V06 work should be driven by k
 
 V11 remains intentionally planning/domain-dependent. Floor satisfaction does not trigger final screen-by-screen UI refinement.
 
-## 16. V12 counted units — 3 / 8
+## 16. V12 counted units — 8 / 8
 
-Current primary units:
 1. docs/android/APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md
 2. docs/android/APK_FINAL_RECONSTRUCTION_MATRIX.md
 3. docs/ANDROID_PIXEL_CLIENT_VALIDATION.md
+4. docs/android/ANDROID_RUNTIME_BRIDGE_ARCHITECTURE_STANDARD.md
+5. docs/android/ANDROID_BUILD_CONFIGURATION_RECONSTRUCTION_STANDARD.md
+6. docs/android/ANDROID_CI_AUTOMATED_ACCEPTANCE_STANDARD.md
+7. docs/android/ANDROID_DEVICE_PERFORMANCE_COMPATIBILITY_STANDARD.md
+8. docs/android/ANDROID_RELEASE_PROVENANCE_ROLLBACK_STANDARD.md
 
-Deficit:
-- 5 units.
-
-Needed first-pass coverage should focus on:
-1. Android runtime/bridge architecture;
-2. build/signing/configuration reconstruction contract without secrets;
-3. automated test/CI acceptance;
-4. physical-device/performance/compatibility acceptance;
-5. release provenance/rollback/reproducibility.
-
-This documentation may be created now without executing final APK teardown/rebuild.
+Status:
+- first-pass documentation floor satisfied;
+- final APK teardown/rebuild remains late-stage and blocked by implementation/migration gates;
+- production signing is not claimed configured;
+- current-head build/device acceptance is not claimed;
+- Galaxy A02-class remains a target, not verified compatibility.
 
 ## 17. Cross-domain guides/planning — 10 / 10
 
@@ -301,13 +300,14 @@ This is a documentation deduplication only. No gameplay content was changed.
 
 ## 20. Next action
 
-Close V12's five-unit deficit with planning/acceptance documents only.
+The first-pass quota phase is now complete at the semantic documentation-unit level.
 
-Do not start final APK demolition merely because the V12 documentation floor becomes satisfied.
+Next:
+1. execute a fresh reproducible repository corpus inventory on the current head;
+2. measure Markdown words/headings, structured-record counts, asset/evidence/test surfaces and current canonical ownership;
+3. create the second-pass/final quota revision from actual complexity rather than another flat file target;
+4. prioritize reconstruction-depth gaps and structured content population;
+5. continue Phase 1 implementation only through direct accepted contracts;
+6. keep final APK demolition/reconstruction blocked until migration/consumer/rollback gates are met.
 
-After V12 reaches 8 / 8:
-1. mark the **first-pass quota phase** complete;
-2. run a fresh corpus inventory;
-3. recalibrate the second-pass/final quotas by actual complexity and structured-record needs;
-4. keep Phase 1 playable integration moving independently by direct dependency;
-5. return to reconstruction-depth gaps and structured content population rather than creating filler files.
+Do not interpret 148/148 minimum coverage as final documentation completion.
