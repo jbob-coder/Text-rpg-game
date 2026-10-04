@@ -148,8 +148,6 @@ Wave-001 weapon-familiarity passives now have:
 - cross-family overlap watchlist;
 - knowledge-posture audit.
 
-Next passive family: **Defensive Adaptation 0001–0010**.
-
 ## Wave-001 Phase-C family coverage milestone
 
 All **23 / 23 passive families** now have a Phase-C family baseline.
@@ -170,6 +168,24 @@ It does **not** mean:
 - resolved cross-family stacking.
 
 Next work is normalization, numeric calibration, world integration, and explicit canon review.
+
+## Cross-family normalization
+
+Materialized:
+- `PASSIVE_STATE_OWNER_RESOLVER_MATRIX_WAVE_001.md`
+- `PASSIVE_KNOWLEDGE_PROFILE_RECONCILIATION_AUDIT_WAVE_001.md`
+- `PASSIVE_EVENT_QUALIFICATION_GOVERNANCE_STANDARD.md`
+- `PASSIVE_NUMERIC_CALIBRATION_PILOT_001.md`
+- `STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md`
+
+Key findings:
+- 23 / 23 families now have conceptual owner/resolver mapping;
+- the 200 ordinary-family compact knowledge rows are still exact ordinal templates rather than individualized world knowledge;
+- 60 rows at ordinals 0004/0008/0010 require highest-priority individualization;
+- 40 rows at ordinals 0003/0009 require concrete institutional asymmetry/classification rationale;
+- 20 false-belief rows at ordinal 0005 require actual authored rumor provenance;
+- UEV/COS/CLS event-bound qualification now has shared governance rules;
+- representative numeric parameters are defined with values intentionally left TBD.
 
 ## Audit
 
