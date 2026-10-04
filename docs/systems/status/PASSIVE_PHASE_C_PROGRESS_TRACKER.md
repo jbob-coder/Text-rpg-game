@@ -59,15 +59,23 @@ This milestone does not canon-promote any passive.
 
 Compact Wave-001 unlock thresholds remain proposals until calibrated.
 
+## Normalization progress
+
+Materialized:
+- `PASSIVE_STATE_OWNER_RESOLVER_MATRIX_WAVE_001.md` — conceptual owner and primary resolver mapping for all 23 families;
+- `PASSIVE_KNOWLEDGE_PROFILE_RECONCILIATION_AUDIT_WAVE_001.md` — confirms the 200 ordinary-family compact knowledge rows are ordinal templates and identifies 120 high-priority/context-required rows;
+- `PASSIVE_EVENT_QUALIFICATION_GOVERNANCE_STANDARD.md` — one-time event/packet qualification rules for UEV/COS/CLS families;
+- `PASSIVE_NUMERIC_CALIBRATION_PILOT_001.md` — parameterizes representative passives while leaving values TBD;
+- `STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md` — explicit record-by-record canon review shape.
+
 ## Next work
 
-1. normalize cross-family overlaps into explicit resolver ownership;
-2. assign authoritative state owners for every passive;
-3. resolve flagged knowledge-profile inconsistencies;
-4. map mature records into named world institutions/history;
-5. calibrate numeric coefficients and thresholds;
-6. conduct explicit record-by-record canon review;
-7. map implementation only after design coherence.
+1. extend family-level state ownership into record-level owner/write-target assignments;
+2. reconcile individual flagged knowledge rows using world-role evidence;
+3. begin role-class world integration for mature records without inventing named institutions;
+4. expand numeric parameterization after base-system units are documented;
+5. run canon-promotion dry-review packets without auto-promoting;
+6. map implementation only after design coherence.
 
 ## Stop condition
 
