@@ -1,4 +1,4 @@
-# THE GAME — Ability Counter Profiles Calibration Wave 001
+| COUNTER_COM_010 | ABILITY_COM_010 | Thread Command depends on available flexible lines with sufficient tensile strength and remains limited by simultaneous control/tension. | Cut, burn, tangle, overload, or deny usable lines; attack the user while they manage multiple strands; use rigid or line-free equipment. | Open line-free spaces, fire, high winds, sharp debris, rotating machinery, and clutter can destroy or confuse controlled threads. | The record fails if Thread Command becomes general telekinesis, ignores tensile strength, or creates invisible force without a physical line. | CALIBRATION_PROPOSAL |
 
 Status: **CALIBRATION_PROPOSAL / NOT CANON UNTIL PROMOTED / NOT IMPLEMENTED**
 
