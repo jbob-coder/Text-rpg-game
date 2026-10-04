@@ -187,15 +187,24 @@ This section supersedes older statements about the top-level product objective w
 - OUTPUT: reproducible counts for active docs, words, records, assets, world entities, tasks, tests and evidence without assuming the owner's ambiguous numeric units.
 
 ### TASK D-020 — Reconcile stacked pixel/application implementation branches
-- STATUS: `IN_PROGRESS / PR-LEVEL RECONCILIATION COMPLETE / SURVIVOR MIGRATION REMAINS`
+- STATUS: `DONE — BRANCH/PROVENANCE RECONCILIATION DOCUMENTED`
 - PRIORITY: `P0`
-- INPUT: live audit plus implementation PRs #7–#31.
-- CURRENT:
-  - D-028 / `docs/IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md` completed exact PR-head/base/ancestry/workflow reconciliation.
-  - D-029 now owns asset-family provenance and unresolved static/animation survivor decisions.
-  - D-026/D-021 own Android consumer/projection reconciliation.
-- REMAINING: consolidate the surviving visual/application implementation choices into the destination architecture and record which candidate branches are migrated, reimplemented, superseded or retained only as provenance.
-- OUTPUT: one final branch/provenance survivor matrix suitable for implementation migration.
+- OUTPUT:
+  - `docs/IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md`
+  - `docs/IMPLEMENTATION_SURVIVOR_MIGRATION_MATRIX_2026-10-04.md`
+- RESULT:
+  - every implementation PR #7–#31 now has one explicit current disposition and migration rule;
+  - current inherited survivor chain is separated from superseded historical surfaces and deferred branch-only candidates;
+  - PR #14 Skills is superseded by inherited PR #25 as current Skills baseline;
+  - PR #15 is retained only as bounded fix-extraction evidence;
+  - PR #22 tail requires no runtime migration;
+  - PR #27/#30 remain owner-decision static-art candidates;
+  - PR #28 remains optional composition reimplementation;
+  - PR #31 remains deferred animation migration on the selected static parent;
+  - PR #9 held-prop integration remains deferred to D-030-safe actor projection.
+- IMPORTANT: D-020 completion is documentation reconciliation only. It does not implement deferred candidates, choose owner visual decisions, merge branches, promote main, or delete historical evidence.
+- NEXT CONSUMERS: D-029 asset provenance/promotion, D-030 actor migration, D-032 mechanics migration and final APK reconstruction.
+- COMPLETED_AT: `2026-10-04 AST`
 
 ### TASK D-021 — Map Android consumers to final UX/domain contracts
 - STATUS: `IN_PROGRESS / MAJOR FIELD-ACTION + FILE-LEVEL PIXEL CONSUMERS + TEST GAPS MAPPED`
