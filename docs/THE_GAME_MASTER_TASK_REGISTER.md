@@ -963,6 +963,29 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - REFINEMENT GATE: begin the dedicated detailed UI documentation wave only after the upstream domain documentation is reconstruction-grade enough to define stable player-facing requirements.
 - IMPLEMENTATION: not implied by this planning task.
 
+### TASK D-050 — First-pass domain documentation quotas
+- STATUS: `ACTIVE / FIRST-PASS MINIMUM QUOTAS LOCKED / FINAL QUOTAS DEFERRED`
+- PRIORITY: `P0 PROGRAM CONTROL`
+- OUTPUT: `docs/FIRST_PASS_DOMAIN_DOCUMENTATION_QUOTAS.md`
+- RESULT:
+  - first-pass minimum is 148 canonical documentation units across V00–V12 plus cross-domain guides/planning and evidence/QA/migration;
+  - quotas are weighted by domain complexity rather than divided equally;
+  - structured records are counted separately from canonical document units;
+  - empty/duplicate/artificially split files do not satisfy quotas.
+- NEXT: track current-vs-minimum coverage as the cross-domain first pass advances; after all major domains reach reconstruction-grade first-pass coverage, execute a fresh inventory and recalibrate final quotas.
+- UPDATE RULE: every task that changes corpus coverage must update quota state, direction and unlocked dependencies.
+
+### TASK D-051 — Phase 1 solo playable parallel track
+- STATUS: `ACTIVE / REQUIREMENTS LOCKED / IMPLEMENTATION BY DEPENDENCY`
+- PRIORITY: `P0 PARALLEL INTEGRATION`
+- OUTPUT: `docs/PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md`
+- PURPOSE: keep a real playable integration line moving in parallel with the large documentation corpus.
+- BASELINE: Gate Twelve / `CONTENT_VERTICAL_SLICE_01` is the starting slice, currently containing 19 scenes, 31 choices, 4 quests, 1 character record, 1 power record and a 9-node / 8-edge map baseline.
+- MINIMUM PHASE-1 QUOTA: one bounded region; player state; one recurring-NPC relationship path; one knowledge-gated chain; one progression path; inventory/equipment loop; branching quest; life/activity action; tactical encounter; persistent injury/condition; world-state consequence; reliable save/load; minimal Android play surfaces; player-safe projection; deterministic verification; low-end performance path.
+- RULE: Phase 1 waits only for the direct contracts it consumes, not for completion of unrelated full-game documentation.
+- SYNC: every completed Track A/B/C task must update task state, quota impact, Phase-1 impact, unlocked dependencies and next direction.
+- EXIT: integrated playable core loop, persistence, exact-head tests/build evidence, no hidden-state leaks, documented performance evidence and synchronized master records.
+
 ### TASK D-033 — APK teardown manifest
 - STATUS: `BLOCKED`
 - PRIORITY: `LATE-STAGE`
