@@ -28,6 +28,20 @@ The production chain is:
 
 A generated reference may suggest silhouette, material, lighting, or composition. It may not bypass the reconstruction step.
 
+## 2.1 Assistant-owned generation/extraction workflow
+
+The intended source of newly created visual art for the evolved game is the project workflow itself: the assistant determines requirements from the documentation, generates the needed source/reference art, extracts or decomposes reusable visual pieces, and promotes cleaned native-grid pixel assets into the repository.
+
+This does **not** authorize untreated generated imagery as production art. The production artifact remains the native pixel asset after extraction/reconstruction, cleanup, palette control, transparency cleanup, anchor/layer definition, metadata, state binding and QA.
+
+Preferred production chain:
+
+`game/design requirement -> assistant-generated source or extraction board -> asset extraction/decomposition -> native pixel reconstruction/cleanup -> metadata/provenance -> integration -> runtime/phone QA -> canon approval`
+
+Generated boards should be deliberately composed to make extraction practical. Character, prop, building, tile, icon, portrait, FX and UI families should use separated subjects, clear silhouettes, consistent scale, minimal background contamination, and known target grids whenever feasible.
+
+This workflow is the default for new visual production unless a repository-approved existing asset already satisfies the requirement.
+
 ## 3. Pixel resolution hierarchy
 
 Use fixed native grids. Scale in the UI with integer or nearest-neighbor presentation.
