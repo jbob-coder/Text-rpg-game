@@ -65,18 +65,23 @@ Open:
 - explicit canon promotion;
 - final knowledge-row changes where approved.
 
-## P1 — next ability slices
+## P1 — primary ability rarity-slice status
 
-1. **Unique 001 — NEXT**
+**Wave 001 rarity-slice deep authoring: COMPLETE — 47 / 47 ability identities covered.**
 
-Each slice must pass:
-- law overlap review;
-- rarity fit;
-- resource burden;
-- counterplay;
-- world consequence;
-- visual/content burden;
-- Level-100 compatibility.
+Next ability work is blocker resolution rather than another shallow rarity wave:
+1. spatial/reference-frame standard;
+2. energy/reserve accounting standard;
+3. time/causal state standard;
+4. biological transformation/recovery standard;
+5. law/Status/Unique ontology standard;
+6. knowledge/evidence standard;
+7. world/institution/history integration;
+8. numeric calibration;
+9. explicit canon review.
+
+Evidence:
+- `PRIMARY_ABILITY_WAVE_001_REFINEMENT_COMPLETENESS_AUDIT.md`.
 
 Super Rare 001–006 now completed:
 - deep ability packet;
@@ -182,28 +187,71 @@ Prime Legendary blockers:
 - system-strain/recovery model;
 - historical/institutional integration.
 
+Unique 001 completed:
+- deep ability record;
+- 4 detailed techniques;
+- 4 individualized compact technique rows;
+- detailed + individualized awakening;
+- detailed + individualized limitation/counter profile;
+- Unique ontology/rarity audit.
+
+Evidence:
+- `calibration/PRIMARY_ABILITY_DETAIL_UNIQUE_001.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_UNIQUE_001.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_UNIQUE_001.md`
+- `calibration/ABILITY_COUNTER_DETAIL_UNIQUE_001.md`
+- `UNIQUE_ABILITY_ONTOLOGY_RARITY_AUDIT_001.md`
+
+Unique blockers:
+- exclusivity enforcement;
+- death/persistence/transfer rule;
+- Level-100 interaction;
+- Status-layer taxonomy;
+- authentication/permission/safeguard semantics;
+- holder history/world integration.
+
 ## P1 — next passive families
 
-1. **Sensory 0001–0010 — NEXT**
-2. mental/will;
-3. cognitive/learning;
-4. combat habit;
-5. weapon familiarity;
-6. defensive adaptation;
-7. survival/environmental;
-8. social/behavioral;
-9. leadership/coordination;
-10. technical/craft;
-11. medical/recovery practice;
-12. ability synergy;
-13. resistance;
-14. creature/beast interaction;
-15. injury/scar adaptation;
-16. profession;
-17. faction/institutional;
-18. unique event;
-19. cosmic/system;
-20. unknown/classified.
+1. **Mental/Will 0001–0010 — NEXT**
+2. cognitive/learning;
+3. combat habit;
+4. weapon familiarity;
+5. defensive adaptation;
+6. survival/environmental;
+7. social/behavioral;
+8. leadership/coordination;
+9. technical/craft;
+10. medical/recovery practice;
+11. ability synergy;
+12. resistance;
+13. creature/beast interaction;
+14. injury/scar adaptation;
+15. profession;
+16. faction/institutional;
+17. unique event;
+18. cosmic/system;
+19. unknown/classified.
+
+## Sensory passive 0001–0010
+
+Completed:
+- deep-authoring packet;
+- scaling/cap/state-ownership model;
+- knowledge posture audit;
+- sensory-signal/interpretation boundary rules;
+- false-positive and objective-truth separation.
+
+Evidence:
+- `calibration/PASSIVE_DETAIL_SENSORY_0001_0010.md`
+- `PASSIVE_SENSORY_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_SENSORY_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Open:
+- numeric signal/error coefficients;
+- final compact knowledge-row decisions;
+- concrete runtime sensory pipeline/state-owner mapping;
+- named training institutions/professions/history;
+- canon promotion.
 
 ## Movement passive 0001–0010
 
