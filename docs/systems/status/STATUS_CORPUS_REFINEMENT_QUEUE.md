@@ -230,8 +230,7 @@ Unique blockers:
 
 ## P1 — next passive families
 
-1. **Defensive Adaptation 0001–0010 — NEXT**
-2. survival/environmental;
+1. **Survival / Environmental 0001–0010 — NEXT**
 5. survival/environmental;
 6. social/behavioral;
 7. leadership/coordination;
@@ -246,6 +245,21 @@ Unique blockers:
 16. unique event;
 17. cosmic/system;
 18. unknown/classified.
+
+## Defensive Adaptation 0001–0010 completed
+
+Evidence:
+- `PASSIVE_DEFENSIVE_ADAPTATION_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_DEFENSIVE_ADAPTATION_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_DEFENSIVE_ADAPTATION_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Open:
+- numeric calibration;
+- final knowledge decisions;
+- defensive-state mapping;
+- cross-family stacking;
+- named training institutions;
+- canon promotion.
 
 ## Weapon Familiarity 0001–0010 completed
 
