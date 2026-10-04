@@ -147,6 +147,28 @@ Open blockers:
 - Probability Tilt resolution semantics;
 - numeric/world integration.
 
+### Legendary ability slice 001–002
+
+Materialized:
+- `calibration/PRIMARY_ABILITY_DETAIL_LEGENDARY_001_002.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_LEGENDARY_001_002.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_LEGENDARY_001_002.md`
+- `calibration/ABILITY_COUNTER_DETAIL_LEGENDARY_001_002.md`
+- `LEGENDARY_ABILITY_RARITY_OVERLAP_AUDIT_001_002.md`
+
+Completed:
+- 2 deep ability records;
+- 8 detailed techniques;
+- 8 individualized compact technique rows;
+- 2 individualized awakening profiles;
+- 2 individualized counter profiles;
+- lower-tier↔Legendary boundary audit.
+
+Open blockers:
+- Event Reversal state-snapshot/anchor/living-state rules;
+- World Gate anchor/reference/transit/energy rules;
+- world-scale institutional and legal integration.
+
 ### Passive progress
 
 Physical 0001–0010:
@@ -166,9 +188,9 @@ Open:
 
 ### Next order
 
-1. **Deep-author Legendary abilities 001–002.**
+1. **Deep-author Prime Legendary 001.**
 2. **Deep-author Movement passives 0001–0010.**
-3. Continue Prime Legendary → Unique.
+3. Continue Unique 001.
 4. Continue remaining passive families.
 5. Perform world integration after enough accepted records exist.
 6. Defer runtime implementation until design coherence.
