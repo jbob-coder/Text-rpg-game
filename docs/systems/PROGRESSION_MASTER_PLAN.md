@@ -298,3 +298,14 @@ Need:
 - save migration mapping.
 
 This v0 document is a design contract starter, not final balance.
+
+
+## 17. Evolved target-game child
+
+The current reference-game facts and starter constraints in this master feed the reconstruction-grade target design in:
+
+- `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`
+
+That child owns the deliberate evolution of this domain: how the current seven attributes, 23-skill foundation, derived values, resources, training, abilities and mastery expand into the intended class, specialization, profession, rank, mentor, facility, world-access and progression-content systems.
+
+This master remains a baseline authority. The evolved child does not claim its target features are implemented.
