@@ -692,3 +692,19 @@ D-026/D-021 current-source consumer discovery is now complete at field/action, n
 D-006 was updated to remove already-completed D-020/D-044 and already-finished current consumer discovery from its open-work list.
 
 No runtime files changed and no tests/builds were executed.
+
+
+## 2026-10-04 V08 tactical first-pass documentation batch
+
+Added eight canonical tactical-combat child standards.
+
+V08 first-pass count is now 10 / 10 when the existing tactical master and camera/presentation standard are included.
+
+This is a semantic first-pass quota closure, not runtime completion and not a resolution of the owner's long-range numeric units.
+
+Phase 1 impact:
+- tactical mechanical documentation is contract-ready;
+- generic persistent injury/aftermath documentation is contract-ready;
+- authored encounter packet, Python runtime, Android tactical UI/projection, performance evidence and tests remain pending.
+
+Breadth direction now moves to V05 Characters/NPC/Social while a bounded Gate Twelve encounter packet remains the next combat-specific document.
