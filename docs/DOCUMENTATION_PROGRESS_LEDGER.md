@@ -755,3 +755,28 @@ No profession/economy/calendar/offline-progression implementation is claimed.
 Phase 1 requirement #8 has a current authored/runtime proof candidate but exact-head execution/save-load/Android verification remains pending.
 
 Next breadth area: V07 Items/Economy/Loot.
+
+
+## 2026-10-04 V07 items/economy/loot first-pass batch
+
+Added nine canonical V07 child standards/packets, bringing the domain to 10 / 10 first-pass units with its master.
+
+Coverage:
+- item record/catalog;
+- inventory/stacks/containers;
+- equipment/loadout;
+- quality/rarity/condition separation;
+- material/resource/item provenance;
+- loot/rewards;
+- economy/currency/pricing architecture;
+- vendors/services/ownership;
+- Gate Twelve Phase 1 item/equipment proof.
+
+No currency, vendor runtime, crafting, durability, encumbrance, item-instance save migration or random-loot system is claimed.
+
+Also added:
+- docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md
+
+That packet advances D-032 for combat only. It explicitly keeps Phase 1 tactical state transient and preserves save schema v1 until a future mid-combat-save requirement justifies migration.
+
+Next breadth area: V09 Persistent Adversaries / World Memory.
