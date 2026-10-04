@@ -1125,15 +1125,15 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 ### TASK D-054 — Author Gate Twelve Phase 1 tactical encounter packet
 - STATUS: DONE / PROPOSED CONTENT PACKET
 - PRIORITY: P0 TRACK B
-- OUTPUT: docs/systems/GATE_TWELVE_PHASE_1_TACTICAL_ENCOUNTER_PACKET.md
+- OUTPUT: docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md
 - CURRENT FACTS USED: SERVICE_TUNNEL, fresh boot prints, Gate Twelve/Trace Chamber connectivity, KNOW_DIRECTIONAL_TRACE_POINTS_DEEPER, optional NPC_TAMSIN party branch.
 - PROPOSED CONTENT:
-  - ENCOUNTER_GATE12_SERVICE_TUNNEL_CONTACT_01;
+  - ENCOUNTER_GT_SERVICE_FORK_CONTACT_01;
   - 12x8 one-layer tactical map;
   - Jack + optional Tamsin + two encounter-local contact placeholders;
   - reach/interact/investigate objective with legal retreat;
   - maximum four active actors;
-  - proposed COND_MINOR_LEG_STRAIN and recovery path.
+  - proposed COND_TUNNEL_LEG_INJURY and recovery path.
 - CANON BOUNDARY: opposing identities, new knowledge IDs, injury naming/modifiers, Jack first combat loadout, Tamsin combat action, and narrative consequences remain proposed until content review.
 - RUNTIME: not implemented.
 - PHASE 1 IMPACT: requirement 9 now has an authored proposed encounter packet; requirement 10 has a specific proposed injury/recovery case.
