@@ -115,6 +115,17 @@ Materialized:
 
 All 23 passive families now have family-level role-class relevance mapped without inventing named institutions.
 
+## Shared resolver cap semantics
+
+Materialized:
+- `PASSIVE_SHARED_RESOLVER_CAP_SEMANTICS_WAVE_001.md`.
+
+Result:
+- 24 provisional same-term resolver keys consolidated to **20 canonical resolver families**;
+- duplicate recall, prolonged-Focus, and procedure-compliance resolver paths were merged;
+- symbolic cap/floor rules and anti-double-count rules are now documented;
+- exact coefficients remain `TBD`.
+
 ## Knowledge role-class adjudication
 
 Materialized:
@@ -135,7 +146,7 @@ No named institution was invented and no record was canon-promoted.
 ## Next work
 
 1. verify/adjudicate proposed knowledge directions against actual world entities when parent world docs support them;
-2. assign/verify cap semantics for the 38 SAME_TERM_CAPPED overlap edges;
+2. document base-system units/terms needed for numeric calibration of the 20 canonical shared resolvers;
 3. progress selected records from family role classes toward actual world entities only when parent world docs support them;
 4. expand numeric parameterization after base-system units are documented;
 5. run additional canon dry-review packets;
