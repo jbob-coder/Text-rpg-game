@@ -12,6 +12,7 @@ This file answers: **what does each major document own, what does it reference, 
 | Document | Owns | Must not own |
 | --- | --- | --- |
 | `MASTER_GAME_DEVELOPMENT_PROGRAM.md` | repository priority, program scope, permissions, documentation sequence | low-level implementation details |
+| `MASTER_DOCUMENTATION_RECORD.md` | consolidated documentation status: exists / done / partial / missing / blocked / next | detailed domain design or runtime facts not supported by source/evidence |
 | `THE_GAME_MASTER_TASK_REGISTER.md` | operational task state | gameplay canon |
 | `IMPLEMENTATION_STATUS.md` | verified current implementation snapshot | future design treated as implemented |
 | `GAME_CONTEXT_LOGS/*` | durable user decisions/context | overriding live source/evidence |
@@ -20,6 +21,18 @@ This file answers: **what does each major document own, what does it reference, 
 ---
 
 ## 2. Existing core documents
+
+### `docs/MASTER_DOCUMENTATION_RECORD.md`
+Purpose:
+- one canonical control record for what documentation exists;
+- separate completed contract layers from incomplete content/runtime work;
+- list missing work, blockers, authority links and next execution order;
+- preserve exact audited path-count context without treating counts as semantic completion.
+
+Maintenance:
+- update whenever a major documentation area's state, blocker, authority or next action changes;
+- reconcile stale task-register NEXT text when newer repository files materially change the state;
+- do not absorb full domain content that belongs in the linked master/child documents.
 
 ### `docs/GAME_FOUNDATION.md`
 Purpose:
