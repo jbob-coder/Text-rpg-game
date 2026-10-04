@@ -70,14 +70,21 @@ Open:
 **Wave 001 rarity-slice deep authoring: COMPLETE — 47 / 47 ability identities covered.**
 
 Next ability work is blocker resolution rather than another shallow rarity wave:
-1. **energy/reserve accounting standard — NEXT**;
-2. time/causal state standard;
-3. biological transformation/recovery standard;
-4. law/Status/Unique ontology standard;
-5. knowledge/evidence standard;
-6. world/institution/history integration;
-7. numeric calibration;
-8. explicit canon review.
+1. shared-standard child-rule completion;
+2. numeric calibration;
+3. world/institution/history integration;
+4. explicit canon review;
+5. implementation mapping after design coherence.
+
+Shared standards already materialized:
+- spatial/reference frames;
+- energy/reserve accounting;
+- time/causal snapshots;
+- biological repair/transformation;
+- law/Status/Unique ontology;
+- knowledge/evidence/confidence;
+- world-integration schema;
+- numeric calibration framework.
 
 Evidence:
 - `PRIMARY_ABILITY_WAVE_001_REFINEMENT_COMPLETENESS_AUDIT.md`.
@@ -228,21 +235,24 @@ Unique blockers:
 - authentication/permission/safeguard semantics;
 - holder history/world integration.
 
-## P1 — next passive families
+## P1 — passive family baseline status
 
-1. **Ability Synergy 0001–0010 — NEXT**
+**Wave 001 Phase-C family baseline coverage: COMPLETE — 23 / 23 families.**
 
-8. technical/craft;
-9. medical/recovery practice;
-10. ability synergy;
-11. resistance;
-12. creature/beast interaction;
-13. injury/scar adaptation;
-14. profession;
-15. faction/institutional;
-16. unique event;
-17. cosmic/system;
-18. unknown/classified.
+Evidence:
+- `PASSIVE_WAVE_001_PHASE_C_FAMILY_COVERAGE_AUDIT.md`
+- `PASSIVE_PHASE_C_PROGRESS_TRACKER.md`
+- `PASSIVE_CROSS_FAMILY_COMPOSITION_STANDARD.md`
+
+Next passive work:
+1. cross-family resolver/state-owner normalization;
+2. knowledge-profile reconciliation;
+3. numeric calibration;
+4. world/institution/history integration;
+5. explicit canon review;
+6. implementation mapping after design coherence.
+
+Do not create another shallow passive wave.
 
 ## Medical / Recovery Practice 0001–0010 completed
 
