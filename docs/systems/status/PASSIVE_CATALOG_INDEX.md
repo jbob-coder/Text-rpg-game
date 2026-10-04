@@ -67,8 +67,11 @@ Recovery 0001–0010 now have:
 - hidden-progress/state-ownership model;
 - stacking and test requirements.
 
+Recovery knowledge refinement now materialized:
+- `PASSIVE_RECOVERY_KNOWLEDGE_REFINEMENT_0001_0010.md`.
+
 Open:
-- knowledge-profile refinement;
+- final knowledge decisions;
 - numeric coefficients;
 - concrete runtime state-owner mapping;
 - named institutions/history;
@@ -186,6 +189,27 @@ Key findings:
 - 20 false-belief rows at ordinal 0005 require actual authored rumor provenance;
 - UEV/COS/CLS event-bound qualification now has shared governance rules;
 - representative numeric parameters are defined with values intentionally left TBD.
+
+## Record-level normalization coverage
+
+Coverage:
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_INDEX.md`
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_A.md`
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_B.md`
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_C.md`
+
+Result:
+**230 / 230 passive records** have conceptual owner/write-target baselines.
+
+Knowledge reconciliation:
+- `PASSIVE_KNOWLEDGE_RECONCILIATION_WAVE_A_0004_0008_0010.md`
+- `PASSIVE_KNOWLEDGE_RECONCILIATION_WAVE_B_0003_0009.md`
+- `PASSIVE_KNOWLEDGE_RECONCILIATION_WAVE_C_FALSE_BELIEFS_0005.md`
+
+World integration:
+- `PASSIVE_WORLD_INTEGRATION_ROLE_CLASS_MATRIX_WAVE_001.md`
+
+No compact registry row was silently rewritten and no passive was canon-promoted.
 
 ## Audit
 
