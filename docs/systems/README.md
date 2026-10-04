@@ -45,3 +45,5 @@ These remain documentation contracts. Their existence does not claim runtime imp
 - [Progression, Classes & Ranks: Evolved Game Design](PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md) — reconstruction-grade target design that uses the current game as reference evidence and defines the larger progression/class/profession/rank/training system to create before implementation.
 
 Working rule: current runtime facts and evolved target design stay explicitly separated. Migration/API work is downstream of target-game design.
+
+- [Evolved Skill Registry](EVOLVED_SKILL_REGISTRY.md) — full 23-skill target-game registry with training, world/tactical uses, class/profession affinities, content requirements and pixel-art presentation requirements.
