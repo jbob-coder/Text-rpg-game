@@ -4,7 +4,7 @@ Status: **ACTIVE / PHASE C**
 
 Purpose: control the conversion from structurally complete calibration records to reconstruction-grade design.
 
-## P0 — current slice
+## P0 — completed refinement slices
 
 ### Primary abilities — Common 001–010
 
@@ -27,9 +27,32 @@ Open:
 - named school/government/military/research handling;
 - known-user/history records;
 - final visual/content asset mapping;
-- five flagged adjacent-tier comparisons when Uncommon/Rare records are deep-authored.
+- Rare-tier adjacency checks for Static Reservoir/Lightning Conduit and Impact Cushion/Momentum Bank.
 
-Keep Level numeric scaling `TBD` until Level reward canon is resolved.
+### Primary abilities — Uncommon 001–010
+
+Completed:
+- deep-authoring packet;
+- full 40-technique detail packet;
+- 40 individualized compact technique rows;
+- 10 individualized awakening profiles;
+- 10 individualized counter profiles;
+- Common↔Uncommon adjacency treatment.
+
+Evidence:
+- `calibration/PRIMARY_ABILITY_DETAIL_UNCOMMON_001_010.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_UNCOMMON_001_010.md`
+
+Resolved/narrowed:
+- Kinetic Palm ↔ Vector Nudge;
+- Skin Reinforcement ↔ Stonehide;
+- Water Draw ↔ Vapor Sculpt.
+
+Critical open blockers:
+- Blink Step momentum/collision/reference-frame rules;
+- Stonehide biological/mineral accounting;
+- numeric range/output/cost bands;
+- named institutions/history.
 
 ### Passives — Physical 0001–0010
 
@@ -52,14 +75,13 @@ Open:
 
 ## P1 — next ability slices
 
-1. **Uncommon 001–010 — NEXT**
-2. Rare 001–010.
-3. Super Rare 001–006.
-4. Epic 001–004.
-5. Super Epic 001–003.
-6. Legendary 001–002.
-7. Prime Legendary 001.
-8. Unique 001.
+1. **Rare 001–010 — NEXT**
+2. Super Rare 001–006.
+3. Epic 001–004.
+4. Super Epic 001–003.
+5. Legendary 001–002.
+6. Prime Legendary 001.
+7. Unique 001.
 
 Each slice must pass:
 - law overlap review;
@@ -70,12 +92,13 @@ Each slice must pass:
 - visual/content burden;
 - Level-100 compatibility.
 
-Five Common adjacency flags must be resolved during higher-tier deep authoring:
-- Kinetic Palm ↔ Vector Nudge;
-- Skin Reinforcement ↔ Stonehide;
+Rare deep-authoring must explicitly resolve:
 - Static Reservoir ↔ Lightning Conduit;
-- Water Draw ↔ Vapor Sculpt;
-- Impact Cushion ↔ Momentum Bank.
+- Impact Cushion ↔ Momentum Bank;
+and establish the next boundary above:
+- Heat Shaping ↔ Cryo Sink;
+- Blink Step ↔ Spatial Anchor;
+- Lumen Pulse ↔ Umbra Veil where relevant.
 
 ## P1 — next passive families
 
