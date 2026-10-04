@@ -6,26 +6,53 @@ Purpose: control the conversion from structurally complete calibration records t
 
 ## P0 — current slice
 
-### Primary abilities
+### Primary abilities — Common 001–010
 
-- Common 001–010: deep-authoring packet exists.
-- Reconcile `TECH_COM_001_T1` through `TECH_COM_010_T4` with individualized names, prerequisites, cost, range, target, failure, counterplay, mastery, visibility, evolution, and FX.
-- Replace generic counter text with ability-specific institutional/tactical doctrine where needed.
-- Add exact world-knowledge fields after institutions are named.
-- Keep Level numeric scaling `TBD` until Level reward canon is resolved.
+Completed:
+- deep-authoring packet;
+- full 40-technique detail packet;
+- 40 individualized compact technique rows;
+- 10 individualized awakening profiles;
+- 10 individualized counter profiles;
+- Common rarity/overlap audit.
 
-### Passives
+Evidence:
+- `calibration/PRIMARY_ABILITY_DETAIL_COMMON_001_010.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_COMMON_001_010.md`
+- `COMMON_ABILITY_RARITY_OVERLAP_AUDIT_001_010.md`
 
-- Physical 0001–0010: deep-authoring packet exists.
-- Complete military and research knowledge scopes.
-- Author the false rumors referenced by knowledge profiles 0005 and 0010.
-- Review whether 0004/0008/0009/0010 secrecy levels make sense in world context.
-- Define scaling/cap rules without turning adaptation into immunity.
-- Map hidden-progress counters to future authoritative state owners.
+Open:
+- numeric range/output/resource calibration;
+- exact occurrence-frequency bands;
+- named school/government/military/research handling;
+- known-user/history records;
+- final visual/content asset mapping;
+- five flagged adjacent-tier comparisons when Uncommon/Rare records are deep-authored.
+
+Keep Level numeric scaling `TBD` until Level reward canon is resolved.
+
+### Passives — Physical 0001–0010
+
+Completed:
+- deep-authoring packet;
+- military/research knowledge refinement;
+- false-rumor patterns for Shock Acclimation and Repetition Tolerance;
+- secrecy review for 0004/0008/0009/0010.
+
+Evidence:
+- `calibration/PASSIVE_DETAIL_PHYSICAL_0001_0010.md`
+- `PASSIVE_PHYSICAL_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Open:
+- individual scaling/cap rules;
+- authoritative hidden-progress state ownership;
+- implementation/test mapping;
+- explicit knowledge-row changes only after review;
+- named institutions/historical cases.
 
 ## P1 — next ability slices
 
-1. Uncommon 001–010.
+1. **Uncommon 001–010 — NEXT**
 2. Rare 001–010.
 3. Super Rare 001–006.
 4. Epic 001–004.
@@ -43,9 +70,16 @@ Each slice must pass:
 - visual/content burden;
 - Level-100 compatibility.
 
+Five Common adjacency flags must be resolved during higher-tier deep authoring:
+- Kinetic Palm ↔ Vector Nudge;
+- Skin Reinforcement ↔ Stonehide;
+- Static Reservoir ↔ Lightning Conduit;
+- Water Draw ↔ Vapor Sculpt;
+- Impact Cushion ↔ Momentum Bank.
+
 ## P1 — next passive families
 
-1. recovery;
+1. **recovery — NEXT after Physical completion**
 2. movement;
 3. sensory;
 4. mental/will;
