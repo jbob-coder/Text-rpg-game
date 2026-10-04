@@ -854,3 +854,83 @@ Still open before D-026/D-021 can be marked DONE:
 The high-level projection map is no longer only conceptual: the live Python payload, Kotlin mapper, ViewModel action flow, major Compose consumers, current navigation graph and existing test-source coverage are now explicitly mapped.
 
 Status remains **IN_PROGRESS**, not DONE, because catalog-level consumers, hardcoded-state audit, future projections and final migration evidence remain open.
+
+
+## 30. Pixel catalog direct-consumer audit — 2026-10-04
+
+Audited source HEAD: `f906f83f778ac9f96a159365a96431ce26320bc3`.
+
+This is a file-level consumer map for the current Android pixel-presentation sources. It does not yet prove every individual constant/sprite/member is consumed.
+
+| Pixel source | Direct current consumers | Current disposition |
+| --- | --- | --- |
+| `PixelAssetCatalog.kt` | `CharacterSection.kt`, `GameScreen.kt`, `PixelComponents.kt`, `PixelRasterCatalog.kt`, `SceneIllustration.kt` | **KEEP / RECONCILE PER ASSET** |
+| `PixelCharacterStagingCatalog.kt` | `PixelComponents.kt` | **KEEP transitional staging contract / reconcile with final Jack art** |
+| `PixelEnvironmentDecalCatalog.kt` | `SceneIllustration.kt` | **KEEP / provenance audit** |
+| `PixelEnvironmentModuleCatalog.kt` | `GameScreen.kt`, `PixelEnvironmentPreview.kt` | **KEEP / map-arrival presentation** |
+| `PixelEnvironmentOverlayCatalog.kt` | `PixelSceneOverlayCatalog.kt` | **KEEP indirect overlay authority / reconcile provenance** |
+| `PixelEnvironmentPreview.kt` | `GameScreen.kt` through `PixelEnvironmentArrivalPreview` | **KEEP presentation-only** |
+| `PixelEnvironmentPropCatalog.kt` | `SceneIllustration.kt` | **KEEP / provenance audit** |
+| `PixelEquipmentSlotCatalog.kt` | `CharacterSection.kt`, `GameScreen.kt` | **KEEP slot semantics / rework art as needed** |
+| `PixelItemQualityFrameCatalog.kt` | `PixelComponents.kt` | **KEEP current quality-frame presentation** |
+| `PixelMapArtCatalog.kt` | `GameScreen.kt` | **KEEP semantic viewport/art binding / final map visual may be reworked** |
+| `PixelMapMarkerCatalog.kt` | `GameScreen.kt` | **KEEP semantic current/reachable markers / styling may change** |
+| `PixelMapTravelTransition.kt` | `GameScreen.kt` through `MapTravelTransitionOverlay` | **KEEP presentation-only / not gameplay route authority** |
+| `PixelRasterCatalog.kt` | `PixelComponents.kt`, `SceneIllustration.kt` | **KEEP raster binding / provenance-critical** |
+| `PixelSceneCatalog.kt` | `PixelRasterCatalog.kt`, `SceneIllustration.kt` | **KEEP current scene-master lookup / classify each scene asset** |
+| `PixelSceneOverlayCatalog.kt` | `SceneIllustration.kt` | **KEEP state-overlay separation** |
+| `PixelStoryActorCatalog.kt` | `SceneIllustration.kt` | **TRANSITIONAL / REWORK toward D-030 room actor projection** |
+| `PixelTheme.kt` | `MainActivity.kt` | **KEEP / visual tuning allowed** |
+| `PixelTraceFxCatalog.kt` | `SceneIllustration.kt` | **KEEP / selective FX provenance and accessibility review** |
+| `PixelTraceStrainCatalog.kt` | `PixelComponents.kt` | **KEEP condition-driven presentation** |
+| `PixelUiChromeCatalog.kt` | `CharacterSection.kt`, `GameScreen.kt`, `PixelComponents.kt` | **KEEP / presentation may evolve** |
+| `PixelUiIconCatalog.kt` | `GameScreen.kt`, `StatusComponents.kt` | **KEEP / presentation asset family** |
+| `PixelUiUtilityCatalog.kt` | `GameScreen.kt` | **KEEP / UI utility presentation** |
+
+### 30.1 File-level zero-consumer result
+
+At this audit level, **no listed current pixel presentation file is proven to be wholly zero-consumer**.
+
+That does **not** mean every member within those files is used.
+
+The next deletion-safe audit must operate at member/asset ID level:
+
+- sprite/constant/function symbol;
+- direct source consumers;
+- manifest/provenance entry;
+- test references;
+- runtime raster/source binding;
+- replacement candidate if any;
+- KEEP / MIGRATE / SUPERSEDE / REMOVE decision.
+
+No whole pixel catalog should be removed from the current evidence based only on visual preference.
+
+### 30.2 Hardcoded/transitional state found during consumer audit
+
+Confirmed transitional or presentation-local state includes:
+
+1. `PixelStoryActorCatalog` actor presence inferred from `sceneId + locationId`;
+2. `SceneIllustration` location-specific procedural fallback geometry;
+3. `SceneIllustration` special-case `RELAY_WORKBENCH` relay placement;
+4. `GameScreen` local section/settings/selected-map-node state;
+5. `GameViewModel` travel-transition token/from/to presentation state;
+6. Settings narration rate, auto-read and text-reveal controls;
+7. developer cheat-code text input.
+
+Classification:
+
+- items 4–7 are legitimate application/transient state and should remain outside authoritative saves unless a later product requirement says otherwise;
+- items 1–3 are presentation migration debt, not gameplay authority;
+- none of these findings justify raw-state access in Compose.
+
+## 31. Updated D-026 audit boundary
+
+The **file-level pixel catalog consumer audit is now complete** for the current source set.
+
+Still required before D-026/D-021 can be considered reconstruction-complete:
+
+1. member/asset-ID level zero-consumer matrix;
+2. exact `GameSnapshot` field/action -> test method coverage/gap matrix;
+3. D-030 actor projection implementation migration plan at field/consumer level;
+4. future activity/combat/hierarchical-map/adversary projection records;
+5. final destination APK component migration matrix.
