@@ -54,6 +54,26 @@ Structural validation: **230 / 230 passive IDs present and unique.**
 
 - `calibration/PASSIVE_DETAIL_PHYSICAL_0001_0010.md`
 
+## Recovery deep-authoring
+
+- `calibration/PASSIVE_DETAIL_RECOVERY_0001_0010.md`
+- `PASSIVE_RECOVERY_SCALING_STATE_MODEL_0001_0010.md`
+
+Recovery 0001–0010 now have:
+- 10 reconstruction-oriented effect records;
+- explicit boundaries against resistance/healing drift;
+- scaling direction;
+- caps;
+- hidden-progress/state-ownership model;
+- stacking and test requirements.
+
+Open:
+- knowledge-profile refinement;
+- numeric coefficients;
+- concrete runtime state-owner mapping;
+- named institutions/history;
+- canon promotion.
+
 ## Audit
 
 - `STATUS_CORPUS_WAVE_001_AUDIT.md`
