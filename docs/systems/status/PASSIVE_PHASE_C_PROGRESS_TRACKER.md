@@ -213,6 +213,24 @@ Result:
 
 This is an intentional numeric safety gate, not incomplete work.
 
+## Parent-scale semantic prerequisites
+
+Materialized:
+- `WORLD_SIMULATION_TIME_AND_DURATION_STANDARD.md`;
+- `STATUS_WORLD_TIME_PARENT_FIXTURE_BATCH_001.md`;
+- `CORE_RESOURCE_SCALE_AND_TRANSACTION_STANDARD.md`;
+- `STATUS_ERROR_CONFIDENCE_RESOLUTION_MODE_STANDARD.md`.
+
+Resolved at the semantic/convention level:
+- durable WORLD_TIME = authoritative integer simulation minutes for strategic world simulation;
+- encounter/process/subjective time remain separate;
+- core resources remain absolute amounts with dynamic effective maxima;
+- max-change, spend, recovery, and cross-resource isolation rules are explicit;
+- error/confidence resolution modes are explicit;
+- internal numeric confidence is compatible with 0..1 and is not truth probability.
+
+Range-fixture audit remains **0 / 20** because domain-specific target ranges are still intentionally open.
+
 ## Local world-evidence integration
 
 Materialized:
@@ -251,7 +269,7 @@ No named institution was invented and no record was canon-promoted.
 
 ## Next work
 
-1. resolve parent-scale prerequisites before any resolver advances to `RANGE_FIXTURES_READY`; current audit result is 0 / 20 eligible;
+1. define target resource range bands and physical contest/precision/distance conventions; semantic time/resource/error foundations are now materialized, but current audit remains 0 / 20 range-ready;
 2. continue evidence-backed Gate Twelve knowledge/world adjudication only where confirmed local context supports it;
 3. progress selected records toward actual world entities only after owner/world canon decisions;
 4. run additional canon dry-review packets;
