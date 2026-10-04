@@ -1093,3 +1093,46 @@ Feeds:
 - final contextual Activity UI.
 
 The first proof intentionally uses existing Trace Chamber training rather than inventing a new work system.
+
+
+## V07 items/economy/loot first-pass child suite — 2026-10-04
+
+Parent:
+- docs/systems/ITEM_ECONOMY_LOOT_MASTER_PLAN.md
+
+Children:
+- docs/systems/ITEM_RECORD_CATALOG_STANDARD.md
+- docs/systems/INVENTORY_STACK_CONTAINER_STANDARD.md
+- docs/systems/EQUIPMENT_SLOT_LOADOUT_STANDARD.md
+- docs/systems/ITEM_QUALITY_RARITY_CONDITION_STANDARD.md
+- docs/systems/MATERIAL_RESOURCE_ITEM_PROVENANCE_STANDARD.md
+- docs/systems/LOOT_REWARD_DISTRIBUTION_STANDARD.md
+- docs/systems/ECONOMY_CURRENCY_PRICING_STANDARD.md
+- docs/systems/VENDOR_SERVICE_OWNERSHIP_STANDARD.md
+- docs/systems/GATE_TWELVE_PHASE1_ITEM_EQUIPMENT_PACKET.md
+
+V07 first-pass quota: 10 / 10 including the parent master.
+
+Feeds:
+- Phase 1 inventory/equipment requirement #6;
+- tactical combat equipment modifiers and aftermath loot;
+- V10 work/services/recovery;
+- world resources and loot provenance;
+- final Inventory/Equipment/Economy UI;
+- D-032 item/economy migration.
+
+## D-032 Phase 1 combat schema/API migration child — 2026-10-04
+
+- docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md
+
+Owns the first implementation-specific mapping from V08/Phase 1 encounter design to:
+- optional tactical content sections and validators;
+- transient Python CombatSession/EncounterState;
+- grid/rules/AI/aftermath module boundaries;
+- unchanged GameState/save schema v1 during combat;
+- AndroidGameSession combat actions;
+- player-safe combat projection;
+- Kotlin mapper/ViewModel/Compose migration order;
+- rollback/test gates.
+
+It completes only the combat child of D-032. Other mechanics migration packets remain open.
