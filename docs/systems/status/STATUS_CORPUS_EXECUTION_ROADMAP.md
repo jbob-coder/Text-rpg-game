@@ -227,49 +227,35 @@ Open Unique blockers:
 
 ### Passive progress
 
-Physical 0001–0010:
-- deep-authored;
-- knowledge refined;
-- scaling/caps/state ownership documented.
+Wave-001 passive family baseline coverage is now **23 / 23 families complete at the Phase-C baseline layer**.
 
-Recovery 0001–0010:
-- deep-authored;
-- scaling/caps/state ownership documented;
-- overlap/stacking requirements recorded.
+Evidence:
+- `PASSIVE_WAVE_001_PHASE_C_FAMILY_COVERAGE_AUDIT.md`
+- `PASSIVE_PHASE_C_PROGRESS_TRACKER.md`
+- `PASSIVE_CROSS_FAMILY_COMPOSITION_STANDARD.md`
 
-Movement 0001–0010:
-- deep-authored;
-- scaling/caps/state ownership documented;
-- knowledge posture audited;
-- overlap/stacking and safety requirements recorded.
-
-Sensory 0001–0010:
-- deep-authored;
-- scaling/caps/state ownership documented;
-- knowledge posture audited;
-- signal-versus-interpretation boundary defined;
-- false-positive/objective-truth requirements recorded.
-
-Mental / Will 0001–0010:
-- deep-authored at current Phase-C baseline;
-- scaling/caps/state ownership documented;
-- knowledge posture audited;
-- emotion/stress versus task-degradation boundaries documented;
-- Focus/Resolve and recovery reset semantics documented.
+All families now have:
+- bounded effect/detail treatment;
+- state/scaling direction;
+- knowledge review;
+- implementation/test blockers.
 
 Open:
 - numeric coefficients;
-- concrete runtime mapping;
+- final knowledge-row decisions;
+- explicit state-owner mapping;
+- cross-family resolver normalization;
 - named world institutions/history;
-- final knowledge-row decisions where flagged.
+- canon promotion.
 
 ### Next order
 
-1. **Resolve the spatial/reference-frame cross-tier ability blocker.**
-2. **Deep-author Cognitive/Learning passives 0001–0010.**
-3. Continue remaining passive families.
-4. Begin controlled world/institution/history integration for sufficiently mature records.
-5. Defer runtime implementation until design coherence.
+1. **Normalize cross-family passive resolver/state ownership.**
+2. **Complete remaining child rules inside shared ability standards.**
+3. **Apply the numeric calibration framework to selected mature records.**
+4. Begin controlled world/institution/history integration.
+5. Conduct explicit canon-review packets.
+6. Defer runtime implementation until design coherence.
 
 ## Phase D — world integration
 
