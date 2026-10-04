@@ -354,3 +354,5 @@ If a survivor is later promoted into a recurring adversary, the promotion must f
 - save migration.
 
 This prevents V09 scope from blocking the minimum solo playable slice.
+
+The implementation mapping now exists at `docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md`. It preserves this boundary: Phase 1 may complete without V09 runtime, and no Service Tunnel contact is auto-promoted merely to exercise the system.
