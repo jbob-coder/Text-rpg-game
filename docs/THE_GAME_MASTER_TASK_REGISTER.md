@@ -72,10 +72,27 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-02 08:01 AST`.
 
 ### TASK D-006 — Existing-state repository audit
-- STATUS: `IN_PROGRESS`
+- STATUS: `IN_PROGRESS / CURRENT-HEAD SOURCE INVENTORY COMPLETE / CROSS-BRANCH CONSUMER RECONCILIATION REMAINS`
 - PRIORITY: `P0`
-- CURRENT: `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md` classifies major areas and `docs/LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md` now records the live program HEAD, open-PR landscape, repository tree counts, current pixel/runtime families, world/system state, and immediate reconciliation controls.
-- REMAINING: complete file/consumer-level mapping against the stacked implementation PR heads and reconcile conflicting/stale implementations.
+- CURRENT:
+  - `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md` owns high-level KEEP / EXTEND / REWORK / REPLACE / REMOVE / UNKNOWN policy.
+  - `docs/LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md` records earlier live program/PR landscape.
+  - `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md` now inventories the current audited HEAD at module/component/content/save/asset/test/build level and attaches current responsibility/disposition.
+- CURRENT-HEAD AUDIT COVERAGE:
+  - 19 Python engine modules;
+  - 35 Android main Kotlin files;
+  - 2 authored content JSON files;
+  - exact GameState/save-schema fields;
+  - 24 runtime PNGs;
+  - 21 Python tests, 27 Android JVM tests and 3 Android instrumented tests;
+  - 2 workflows and 5 Android build/manifest configuration files.
+- REMAINING:
+  - exact field-to-composable/ViewModel/bridge consumer map;
+  - per-catalog consumer and hardcoded-state audit;
+  - D-029 asset lineage/equivalence completion;
+  - D-020 cross-branch survivor/migration matrix;
+  - D-044 remaining Class-C extraction;
+  - zero-consumer/deprecation proof before any REMOVE action.
 - OUTPUT: subsystem matrix with KEEP / EXTEND / REWORK / REPLACE / REMOVE / UNKNOWN and exact branch/HEAD evidence.
 
 ### TASK D-007 — Progression / class / rank master
@@ -756,11 +773,20 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETED_AT: `2026-10-02 08:01 AST` (existing D-005 evidence).
 
 ### TASK D-042 — Deep source-file existing-state audit
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS / CURRENT-HEAD PATH AND RESPONSIBILITY INVENTORY COMPLETE`
 - PRIORITY: `P0`
-- OUTPUT: exact module/component/content/asset/save/test inventory with disposition and branch/HEAD evidence.
+- DOCUMENT: `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`
+- AUDITED_HEAD: `docs/master-game-development-program@d0382aaf6cca2920a7f315d08153ac6b0dddc5dd`
+- COMPLETED CURRENT-HEAD SLICE:
+  - exact Python engine module inventory and disposition;
+  - exact Android runtime/application source inventory and grouped disposition;
+  - vertical-slice/sample content counts;
+  - exact durable GameState fields and save schema v1 boundary;
+  - exact 24-raster runtime inventory;
+  - exact Python/Android test-source inventory;
+  - workflow/build configuration inventory.
+- REMAINING: cross-branch consumer/survivor/deprecation reconciliation and exact runtime execution evidence are outside this current-head path slice and remain under D-006/D-020/D-021/D-026/D-029/D-044.
 - RELATED: TASK D-006.
-
 
 ## Operational continuation — 2026-10-02 15:06 AST
 
