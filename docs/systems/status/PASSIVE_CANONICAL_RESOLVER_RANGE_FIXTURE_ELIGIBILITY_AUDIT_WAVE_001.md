@@ -17,6 +17,24 @@ This is a deliberate correctness result, not a failure.
 
 All 20 have qualitative fixtures. None yet has enough authoritative parent-scale evidence to assign candidate baseline ranges with reconstruction-grade confidence.
 
+## Prerequisite progress after initial audit
+
+Materialized after the initial 0/20 decision:
+- `WORLD_SIMULATION_TIME_AND_DURATION_STANDARD.md`;
+- `STATUS_WORLD_TIME_PARENT_FIXTURE_BATCH_001.md`;
+- `CORE_RESOURCE_SCALE_AND_TRANSACTION_STANDARD.md`;
+- `STATUS_ERROR_CONFIDENCE_RESOLUTION_MODE_STANDARD.md`.
+
+Closed at the **semantic/convention** level:
+- authoritative durable WORLD_TIME and its minute-level strategic unit;
+- separation of WORLD_TIME / encounter / process / subjective time;
+- core-resource min/max/current and transaction semantics;
+- general resolution modes;
+- numeric confidence compatibility range 0..1 and its separation from truth;
+- ERROR_BURDEN is explicitly not a universal probability.
+
+Still not enough to promote any resolver to `RANGE_FIXTURES_READY` because target domain ranges remain open.
+
 ## Gate categories
 
 ### RESOURCE/TIME SCALE BLOCKED
@@ -29,10 +47,14 @@ Affected:
 - RESOLVER_FATIGUE_PERFORMANCE_DECAY
 - RESOLVER_POST_EVENT_EMOTIONAL_RECOVERY
 
-Need:
-- authoritative time interval semantics;
-- final/effective resource scale logic;
+Resolved prerequisite:
+- authoritative world-time semantics;
+- core-resource current/base/effective-max conventions.
+
+Still need:
+- target representative resource maximum bands;
 - ordinary action/recovery ranges;
+- action/process duration ranges;
 - fatigue/sleep/emotional parent state ranges.
 
 ### ERROR/CONFIDENCE SCALE BLOCKED
@@ -45,10 +67,17 @@ Affected:
 - RESOLVER_SYSTEM_ANOMALY_RECOGNITION
 - RESOLVER_OBSERVED_AUDIENCE_CLIENT_CUE_INTERPRETATION
 
-Need:
-- one approved error/confidence representation;
-- deterministic/probabilistic/contest/hybrid policy;
-- relationship between confidence and actual correctness.
+Resolved prerequisite:
+- explicit resolution-mode taxonomy;
+- confidence 0..1 compatibility representation where numeric confidence is used;
+- confidence/truth separation;
+- deterministic seeded-resolution requirement.
+
+Still need:
+- domain-specific capability/difficulty/error ranges;
+- ERROR_BURDEN mapping ranges;
+- variance/contest ranges;
+- player-facing confidence-band thresholds where required.
 
 ### PHYSICAL/SPATIAL SCALE BLOCKED
 Affected:
@@ -95,13 +124,18 @@ Do not infer:
 
 ## Correct next dependency order
 
-1. define one authoritative simulation/world-time standard usable by actions, recovery, travel, and sustained effects;
-2. define core-resource effective max/spend/recovery scale conventions;
-3. define one general error/confidence representation compatible with knowledge/evidence systems;
-4. define physical contest/precision conventions;
-5. define travel/fatigue/environment parent scales;
-6. define institutional workflow model;
-7. revisit this audit and promote only supported resolver rows to `RANGE_FIXTURES_READY`.
+Completed semantic prerequisites:
+1. authoritative simulation/world-time standard;
+2. core-resource scale/transaction conventions;
+3. general error/confidence/resolution-mode representation.
+
+Next:
+1. define target core-resource **range calibration bands** and ordinary transaction ranges;
+2. define physical contest/precision and authoritative distance conventions;
+3. define travel/fatigue/environment parent scales;
+4. define institutional workflow model;
+5. define domain-specific error/difficulty/variance ranges;
+6. revisit this audit and promote only supported resolver rows to `RANGE_FIXTURES_READY`.
 
 ## Numeric safety rule
 
