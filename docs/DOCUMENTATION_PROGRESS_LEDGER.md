@@ -562,3 +562,19 @@ The matrix separates:
 - documentation-only ancestry.
 
 This does not implement PR #9/#27/#28/#30/#31 candidate work and does not make owner art decisions.
+
+
+## 2026-10-04 D-025 provenance registry seed closure
+
+D-025 is complete at the registry-seed boundary.
+
+The active provenance registry already defines:
+- stable asset identity;
+- provenance field schema;
+- authority/stage vocabularies;
+- reuse compatibility;
+- runtime layers;
+- branch-awareness;
+- initial 24-raster seed.
+
+Deep family reconciliation remains D-029 and is not double-counted as unfinished D-025 work.
