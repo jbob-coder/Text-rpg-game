@@ -458,3 +458,24 @@ See `APK_FINAL_RECONSTRUCTION_MATRIX.md` for the late-stage per-surface disposit
 That matrix also owns the candidate final screen rebuild order, character-panel integration rules, tactical/adversary surface boundaries, removal gates and final APK acceptance criteria.
 
 Execution remains blocked by the domain documentation and migration contracts.
+
+
+## 24. V12 first-pass reconstruction companion standards — 2026-10-04
+
+The late-stage master now has explicit companion authorities for:
+- Android runtime/Python bridge architecture;
+- current build/toolchain/configuration reconstruction;
+- CI and automated acceptance;
+- low-end/physical-device performance acceptance;
+- release provenance, signing continuity and rollback.
+
+Files:
+- ANDROID_RUNTIME_BRIDGE_ARCHITECTURE_STANDARD.md
+- ANDROID_BUILD_CONFIGURATION_RECONSTRUCTION_STANDARD.md
+- ANDROID_CI_AUTOMATED_ACCEPTANCE_STANDARD.md
+- ANDROID_DEVICE_PERFORMANCE_COMPATIBILITY_STANDARD.md
+- ANDROID_RELEASE_PROVENANCE_ROLLBACK_STANDARD.md
+
+This closes the V12 first-pass documentation floor.
+
+It does not lift the final rebuild execution gate.
