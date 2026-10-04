@@ -50,3 +50,15 @@ Gate Twelve local evidence pilot materialized:
 It separates confirmed local civic/maintenance/records/evacuation/restricted-infrastructure facts from proposal-only parent-world names and provides evidence-safe Status integration candidates.
 
 No proposed parent settlement, authority, or region is promoted by this work.
+
+
+### Time child-standard progress
+
+Materialized:
+- `TIME_PARTITION_SUBJECTIVE_PROCESSING_ACTION_LATENCY_STANDARD.md`.
+
+This resolves Time Partition's non-numeric separation between monotonic world time, subjective processing, sensory information, decision latency, physical action latency, strain, and exit reconciliation.
+
+Remaining blockers are numeric/physiological integration, final sensory-transduction treatment, cognitive saturation, strain/recovery thresholds, and world integration.
+
+No ability is canon-promoted.
