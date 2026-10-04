@@ -22,6 +22,28 @@ This file answers: **what does each major document own, what does it reference, 
 
 ## 2. Existing core documents
 
+### `docs/systems/CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md`
+Purpose:
+- lock the primary three-quarter 2D/2.5D camera language;
+- define exploration, tactical-combat and map framing relationships;
+- lock square-grid, turn-based, action-budget tactical direction;
+- define tap-first phone interaction, directional cover, LOS/detection/knowledge separation, companion control direction and persistent aftermath;
+- establish Galaxy A02-class hardware as a product target requirement without claiming current device verification.
+
+Consumes:
+- tactical combat master;
+- application UX master;
+- pixel-art runtime composition;
+- authoritative player-safe state rules.
+
+Feeds:
+- future tactical coordinate/schema work;
+- combat UI/projection work;
+- combat asset specifications;
+- performance-budget documentation;
+- bounded combat prototypes.
+
+
 ### `docs/MASTER_DOCUMENTATION_RECORD.md`
 Purpose:
 - one canonical control record for what documentation exists;
