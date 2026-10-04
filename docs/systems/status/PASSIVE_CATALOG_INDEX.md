@@ -298,6 +298,21 @@ Result:
 - existing content examples cannot be promoted into universal balance scales;
 - passive coefficients remain blocked.
 
+## Parent-scale semantic foundations
+
+Evidence:
+- `WORLD_SIMULATION_TIME_AND_DURATION_STANDARD.md`
+- `STATUS_WORLD_TIME_PARENT_FIXTURE_BATCH_001.md`
+- `CORE_RESOURCE_SCALE_AND_TRANSACTION_STANDARD.md`
+- `STATUS_ERROR_CONFIDENCE_RESOLUTION_MODE_STANDARD.md`
+
+Result:
+- durable world-time semantics and minute-level strategic authority are defined;
+- core-resource scale ownership and transaction semantics are defined;
+- error/confidence/resolution-mode semantics are defined;
+- current implementation formulas/values are preserved as reference evidence rather than silently canonized as final target balance;
+- resolver range readiness remains 0 / 20 pending domain-specific ranges.
+
 ## Gate Twelve local world evidence
 
 Evidence:
