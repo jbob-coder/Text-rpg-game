@@ -802,3 +802,21 @@ The Gate Twelve adversary proof does not select a canon recurring enemy and is n
 No runtime files, content JSON, assets, tests or builds changed.
 
 Next action: semantic all-volume quota coverage audit.
+
+
+## 2026-10-04 D-032 persistent-adversary migration child
+
+Added:
+- `docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md`.
+
+The packet maps V09 to the current engine without runtime changes:
+- stable NPC identity remains authoritative;
+- first implementation target is a validated nested `state.npcs[npc_id]["adversary"]` record;
+- top-level save schema v1 may remain unchanged only if old/new round-trip and nested validation tests pass;
+- any new top-level adversary container requires explicit schema v2+ migration;
+- raw adversary internals remain outside Compose;
+- Phase 1 remains unblocked because V09 runtime is not a minimum requirement.
+
+D-032 now has combat and persistent-adversary children complete. Progression, broader social and items/economy migration packets remain open.
+
+D-058 all-volume semantic quota coverage audit remains the next program-control action.
