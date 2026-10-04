@@ -77,8 +77,18 @@ Evidence:
 - `PASSIVE_DEFENSIVE_ADAPTATION_SCALING_STATE_MODEL_0001_0010.md`
 - `PASSIVE_DEFENSIVE_ADAPTATION_KNOWLEDGE_REFINEMENT_0001_0010.md`
 
+### Survival / Environmental 0001–0010
+- effect map covering all 10 IDs;
+- scaling/state model covering all 10 IDs;
+- knowledge refinement covering all 10 IDs.
+
+Evidence:
+- `PASSIVE_SURVIVAL_ENVIRONMENT_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_SURVIVAL_ENVIRONMENT_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_SURVIVAL_ENVIRONMENT_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
 ## Next family
-**Survival / Environmental 0001–0010**.
+**Social / Behavioral 0001–0010**.
 
 Then:
 - weapon familiarity;
