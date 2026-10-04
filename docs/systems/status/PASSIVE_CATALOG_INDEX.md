@@ -261,6 +261,16 @@ Result:
 - this completes the qualitative layer before parent-system numeric ranges/test fixtures;
 - final coefficients remain TBD.
 
+## Parent-fixture requirements
+
+Evidence:
+- `PASSIVE_CANONICAL_RESOLVER_PARENT_FIXTURE_REQUIREMENTS_WAVE_001.md`
+
+Result:
+- 20 / 20 canonical shared resolver families now define the parent-system fixture/range evidence needed before coefficient simulation;
+- readiness states prevent passive numbers from defining missing base systems backwards;
+- final values remain TBD.
+
 ## Gate Twelve local world evidence
 
 Evidence:
@@ -270,6 +280,16 @@ Result:
 - confirmed Gate Twelve local contexts now support cautious world-integration evidence;
 - proposal-only parent names remain excluded from confirmed canon;
 - local context relevance does not automatically prove knowledge, training, or regulation.
+
+## Gate Twelve evidence-backed adjudication
+
+Evidence:
+- `STATUS_GATE_TWELVE_EVIDENCE_BACKED_KNOWLEDGE_WORLD_ADJUDICATION_001.md`
+
+Result:
+- selected local maintenance, profession, institutional, emergency, traversal, and ability-use contexts were checked against confirmed Gate Twelve evidence;
+- use-context support does not imply local training, official knowledge, classification, or authorization;
+- proposal-only parent-world names remain non-canon.
 
 ## Knowledge role-class adjudication
 
