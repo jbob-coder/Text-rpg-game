@@ -117,8 +117,18 @@ Evidence:
 - `PASSIVE_TECHNICAL_CRAFT_SCALING_STATE_MODEL_0001_0010.md`
 - `PASSIVE_TECHNICAL_CRAFT_KNOWLEDGE_REFINEMENT_0001_0010.md`
 
+### Medical / Recovery Practice 0001–0010
+- effect map covering all 10 IDs;
+- scaling/state model covering all 10 IDs;
+- knowledge refinement covering all 10 IDs.
+
+Evidence:
+- `PASSIVE_MEDICAL_RECOVERY_PRACTICE_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_MEDICAL_RECOVERY_PRACTICE_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_MEDICAL_RECOVERY_PRACTICE_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
 ## Next family
-**Medical / Recovery Practice 0001–0010**.
+**Ability Synergy 0001–0010**.
 
 Then:
 - technical/craft;
