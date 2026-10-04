@@ -211,6 +211,17 @@ World integration:
 
 No compact registry row was silently rewritten and no passive was canon-promoted.
 
+## Shared resolver cap semantics
+
+Evidence:
+- `PASSIVE_SHARED_RESOLVER_CAP_SEMANTICS_WAVE_001.md`
+
+Result:
+- 38 shared-term overlap edges now feed 20 canonical resolver families;
+- duplicate resolver paths for recall, prolonged Focus drain, and procedure compliance were consolidated;
+- symbolic caps/floors and anti-double-count rules are documented;
+- numeric coefficients remain TBD.
+
 ## Read-dependency and overlap normalization
 
 Evidence:
