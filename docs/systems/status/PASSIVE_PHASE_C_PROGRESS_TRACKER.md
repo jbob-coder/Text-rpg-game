@@ -107,8 +107,18 @@ Evidence:
 - `PASSIVE_LEADERSHIP_COORDINATION_SCALING_STATE_MODEL_0001_0010.md`
 - `PASSIVE_LEADERSHIP_COORDINATION_KNOWLEDGE_REFINEMENT_0001_0010.md`
 
+### Technical / Craft 0001–0010
+- effect map covering all 10 IDs;
+- scaling/state model covering all 10 IDs;
+- knowledge refinement covering all 10 IDs.
+
+Evidence:
+- `PASSIVE_TECHNICAL_CRAFT_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_TECHNICAL_CRAFT_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_TECHNICAL_CRAFT_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
 ## Next family
-**Technical / Craft 0001–0010**.
+**Medical / Recovery Practice 0001–0010**.
 
 Then:
 - technical/craft;
