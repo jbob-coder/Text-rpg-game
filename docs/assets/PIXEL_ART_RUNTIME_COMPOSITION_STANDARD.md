@@ -263,7 +263,15 @@ Acceptable production form if intentionally authored and visually approved.
 It is not inferior merely because its pixel rows are represented in code.
 
 ## C. Procedural geometric fallback
-Migration-only fallback.
+Migration-only fallback for non-character presentation where no authored asset exists.
+
+### Character-specific prohibition
+
+Procedural geometry is **not** an acceptable final rendering path for characters. Jack, Tamsin, recurring NPCs, supporting actors, enemies, and other character identities must use authored pixel-art sprite/portrait assets.
+
+Character rig anchors, pivots and bounds remain metadata for sprite placement/equipment/animation only; they do not authorize drawing the character from rectangles, circles, polygons or other primitives.
+
+A historical block avatar may survive temporarily for debugging or migration safety, but it is explicitly a placeholder scheduled for replacement.
 
 It may:
 - preserve layout;
