@@ -198,19 +198,18 @@ This section supersedes older statements about the top-level product objective w
 - OUTPUT: one final branch/provenance survivor matrix suitable for implementation migration.
 
 ### TASK D-021 — Map Android consumers to final UX/domain contracts
-- STATUS: `IN_PROGRESS / MAJOR FIELD-ACTION CONSUMERS MAPPED`
+- STATUS: `IN_PROGRESS / CURRENT FIELD-ACTION MAP COMPLETE`
 - PRIORITY: `P0`
 - CURRENT:
-  - `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` now maps the live Python projection envelope, Kotlin `BridgeSnapshotMapper`, `GameViewModel` action flow, major Compose field consumers, current navigation graph and current Android test-source coverage.
-  - Story, Character, Stats, Inventory, Quests, Map, Settings/session and travel-transition consumers now have explicit player-safe ownership boundaries.
-  - transitional actor inference through `sceneId + locationId` is explicitly isolated and remains governed by D-030 migration direction.
+  - D-026 materialized `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`.
+  - `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md` now maps every current GameSnapshot field, current engine/ViewModel action path, major Compose screen, direct catalog dependency and test surface at exact-source level.
+- CURRENT RESULT: current screens/components are mapped to player-safe projection/domain ownership; Compose remains request/render authority rather than gameplay authority.
 - REMAINING:
-  - enumerate every pixel catalog's direct consumer and zero-consumer candidates;
-  - classify hardcoded visual/presentation state versus safe projected state;
-  - map every GameSnapshot field/action to exact test coverage and gaps;
-  - define/migrate future activity, tactical-combat, hierarchical-map and adversary-intel projections;
-  - reconcile final consumer graph against APK reconstruction architecture.
-- OUTPUT: screen/component -> player-safe projection -> asset packet -> domain owner -> tests/evidence mapping before broad UI replacement.
+  - future projection schemas for room actors, hierarchical world map, activities, tactical combat, persistent-adversary intel, world notifications and evolved progression;
+  - per-entry asset-catalog consumer/zero-consumer audit;
+  - complete navigation/hardcoded-presentation inventory;
+  - exact execution evidence after implementation changes.
+- OUTPUT: screen/component -> player-safe projection -> asset packet -> domain owner -> tests/evidence mapping.
 
 ### TASK D-022 — Trace expanded owner directive to repository authorities
 - STATUS: `DONE`
@@ -241,21 +240,23 @@ This section supersedes older statements about the top-level product objective w
 - REMAINING: exact source-master/hash/branch/consumer/QA reconciliation for each asset family.
 
 ### TASK D-026 — Android consumer/projection map
-- STATUS: `IN_PROGRESS / SOURCE-GROUNDED MAJOR CONSUMER MAP COMPLETE`
+- STATUS: `IN_PROGRESS / FIELD-ACTION-SCREEN AUDIT COMPLETE`
 - PRIORITY: `P0`
-- DOCUMENT: `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`
+- DOCUMENTS:
+  - `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`
+  - `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md`
 - CURRENT:
-  - source-grounded `GameSnapshot`/`GameEngine` surface map exists;
-  - Python safe projection root/child keys are documented;
-  - Kotlin mapper retention/redaction boundary is documented;
-  - `GameViewModel` action/transient-state ownership is documented;
-  - major Compose field consumers and current navigation graph are documented;
-  - existing Android unit/instrumentation test-source coverage is mapped at a functional level.
+  - source-grounded GameSnapshot/GameEngine surface map exists;
+  - exact current 18-field GameSnapshot consumer map exists;
+  - Python bridge -> Kotlin mapper -> ViewModel -> Compose action chain is documented;
+  - direct catalog dependencies for GameScreen, CharacterSection, StatusComponents and SceneIllustration are documented;
+  - current test-source coverage is mapped;
+  - transitional actor inference, bounded relay visual state and confirmed travel-transition UI state are explicitly classified.
 - REMAINING:
-  - per-pixel-catalog consumer and zero-consumer audit;
-  - temporary/hardcoded presentation-state audit;
-  - exact field/action -> test file/method gap matrix;
-  - final future-projection contracts and destination APK migration map.
+  - per-entry asset consumer/zero-consumer proof;
+  - complete navigation/temporary-state audit;
+  - future projection contracts not yet implemented;
+  - runtime migration/execution evidence.
 
 ### TASK D-047 — Establish master documentation record
 - STATUS: `DONE`
