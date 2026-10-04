@@ -87,15 +87,20 @@ Evidence:
 - `PASSIVE_SURVIVAL_ENVIRONMENT_SCALING_STATE_MODEL_0001_0010.md`
 - `PASSIVE_SURVIVAL_ENVIRONMENT_KNOWLEDGE_REFINEMENT_0001_0010.md`
 
+### Social / Behavioral 0001–0010
+- effect map covering all 10 IDs;
+- scaling/state model covering all 10 IDs;
+- knowledge refinement covering all 10 IDs.
+
+Evidence:
+- `PASSIVE_SOCIAL_BEHAVIORAL_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_SOCIAL_BEHAVIORAL_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_SOCIAL_BEHAVIORAL_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
 ## Next family
-**Social / Behavioral 0001–0010**.
+**Leadership / Coordination 0001–0010**.
 
 Then:
-- weapon familiarity;
-- defensive adaptation;
-- survival/environmental;
-- social/behavioral;
-- leadership/coordination;
 - technical/craft;
 - medical/recovery practice;
 - ability synergy;
