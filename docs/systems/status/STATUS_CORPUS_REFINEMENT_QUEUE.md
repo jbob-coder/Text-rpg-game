@@ -212,25 +212,46 @@ Unique blockers:
 
 ## P1 — next passive families
 
-1. **Mental/Will 0001–0010 — NEXT**
-2. cognitive/learning;
-3. combat habit;
-4. weapon familiarity;
-5. defensive adaptation;
-6. survival/environmental;
-7. social/behavioral;
-8. leadership/coordination;
-9. technical/craft;
-10. medical/recovery practice;
-11. ability synergy;
-12. resistance;
-13. creature/beast interaction;
-14. injury/scar adaptation;
-15. profession;
-16. faction/institutional;
-17. unique event;
-18. cosmic/system;
-19. unknown/classified.
+1. **Cognitive/Learning 0001–0010 — NEXT**
+2. combat habit;
+3. weapon familiarity;
+4. defensive adaptation;
+5. survival/environmental;
+6. social/behavioral;
+7. leadership/coordination;
+8. technical/craft;
+9. medical/recovery practice;
+10. ability synergy;
+11. resistance;
+12. creature/beast interaction;
+13. injury/scar adaptation;
+14. profession;
+15. faction/institutional;
+16. unique event;
+17. cosmic/system;
+18. unknown/classified.
+
+## Mental / Will passive 0001–0010
+
+Completed:
+- deep-authoring baseline for all 10 IDs;
+- scaling/cap/state-ownership model;
+- knowledge posture audit;
+- separation of emotion/stress, task degradation, Focus, Resolve, pain distraction, and injury authority;
+- hidden-progress and reset rules.
+
+Evidence:
+- `calibration/PASSIVE_DETAIL_MENTAL_WILL_0001_0010.md`
+- `PASSIVE_MENTAL_WILL_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_MENTAL_WILL_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Open:
+- numeric coefficients;
+- final knowledge-row decisions;
+- concrete runtime state-owner mapping;
+- cross-family stacking with Recovery/Cognitive/Combat;
+- named training/recovery institutions;
+- canon promotion.
 
 ## Sensory passive 0001–0010
 
