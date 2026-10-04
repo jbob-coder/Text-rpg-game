@@ -266,30 +266,29 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-04 AST`
 
 ### TASK D-026 — Android consumer/projection map
-- STATUS: `IN_PROGRESS / CURRENT-SOURCE CONSUMER DISCOVERY COMPLETE`
+- STATUS: `IN_PROGRESS / CURRENT-SOURCE CONSUMER DISCOVERY + D-030 MIGRATION MAP COMPLETE`
 - PRIORITY: `P0`
 - DOCUMENTS:
   - `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`
   - `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md`
   - `docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md`
   - `docs/android/PIXEL_MEMBER_ASSET_ID_CONSUMER_AUDIT_2026-10-04.md`
+  - `docs/android/ROOM_ACTOR_PROJECTION_IMPLEMENTATION_MIGRATION_MAP_2026-10-04.md`
 - CURRENT:
-  - Python safe projection root/child keys documented;
-  - Kotlin mapper retention/redaction boundary documented;
-  - `GameViewModel` action/transient-state ownership documented;
-  - major Compose field consumers and current navigation graph documented;
-  - file-level pixel catalog consumers documented;
-  - member/asset-ID zero-consumer pass complete for current pixel presentation;
-  - 109 top-level visual IDs audited; only `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`, `UI_CHOICE_CARD_SELECTED`, and `UI_BUTTON_DANGER` lack a current production consumer path;
-  - four generated Trace-strain portrait frames have no current production consumer and remain reserved for a future portrait surface;
-  - transitional/hardcoded presentation state classified;
-  - `GameSnapshot` field and `GameEngine` action test-source coverage/gaps documented.
+  - current player-safe projection/mapper/ViewModel/Compose consumers documented;
+  - current navigation/transient-state ownership documented;
+  - file-level and member/asset-ID pixel consumers documented;
+  - current test-source gaps documented;
+  - D-030 actor/room implementation migration is mapped file-by-file with equivalence, privacy, rollback and save boundaries.
 - REMAINING:
-  - actor/room projection implementation migration mapping;
-  - future activity/combat/hierarchical-map/adversary projections;
-  - final APK destination migration map;
-  - exact-head runtime verification after code changes.
-- NOTE: zero-current-consumer does not authorize deletion; current teardown remains gated by D-033/final APK evidence.
+  - future activity projection;
+  - tactical-combat projection;
+  - hierarchical world-map projection;
+  - persistent-adversary intel projection;
+  - evolved progression/status projection deltas;
+  - final APK destination component migration map;
+  - exact-head runtime/build verification after code changes.
+- NOTE: current-source discovery is no longer the blocker; future target projection architecture is.
 
 ### TASK D-047 — Establish master documentation record
 - STATUS: `DONE`
@@ -913,12 +912,24 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETENESS: partial reconstruction-grade family coverage; D-029 is not complete.
 
 ### TASK D-030 — Player-safe actor/panel projection contract
-- STATUS: `DONE (DOCUMENTED) / IMPLEMENTATION PENDING`
+- STATUS: `DONE (CONTRACT + IMPLEMENTATION MIGRATION MAP DOCUMENTED) / RUNTIME PENDING`
 - PRIORITY: `P0`
-- OUTPUT: `docs/android/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`.
-- VERIFIED BASELINE: durable `state.npcs` exists, Android bridge has no room actor projection, Kotlin `GameSnapshot` has no room actor model, and `PixelStoryActorCatalog.placements(locationId, sceneId)` still owns current opening actor presence.
-- RESULT: versioned player-safe `room` projection, redaction boundary, support-actor handling, semantic placement keys, Kotlin target types, mapper validation, opening-story equivalence fixtures, panel-selection lifecycle, save boundary and test gates are specified.
-- RUNTIME: not implemented by this documentation task; existing scene/location actor heuristic remains active until a later bounded code slice passes equivalence/CI gates.
+- OUTPUTS:
+  - `docs/android/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`
+  - `docs/android/ROOM_ACTOR_PROJECTION_IMPLEMENTATION_MIGRATION_MAP_2026-10-04.md`
+- VERIFIED BASELINE: durable `state.npcs` exists; Android bridge has no room actor projection; Kotlin `GameSnapshot` has no room actor model; `PixelStoryActorCatalog.placements(locationId, sceneId)` still owns current opening actor presence.
+- DOCUMENTED TARGET:
+  - versioned player-safe `room` projection;
+  - redaction boundary and support-actor handling;
+  - semantic placement keys instead of bridge pixel coordinates;
+  - Kotlin target types and strict mapper validation;
+  - opening-story equivalence fixtures;
+  - transient context-panel selection;
+  - unchanged save schema for phase one.
+- MIGRATION MAP:
+  - exact file-by-file order now covers `vertical_slice_01.json`, `validation.py`, `android_bridge.py`, Python tests, `GameEngine.kt`, mapper tests, semantic placement resolver, actor visual resolver, `SceneIllustration.kt`, `GameScreen.kt`, Compose tests and old-heuristic retirement.
+  - rollback boundary is documented before final heuristic removal.
+- RUNTIME: not implemented by this documentation task. Existing scene/location actor heuristic remains active until a bounded code slice passes equivalence/build/test gates.
 
 ### TASK D-031 — Gate Twelve parent-world canon packet
 - STATUS: `PROPOSAL_READY / OWNER_CANON_DECISION_REQUIRED`
