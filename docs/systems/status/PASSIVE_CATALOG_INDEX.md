@@ -74,6 +74,38 @@ Open:
 - named institutions/history;
 - canon promotion.
 
+## Movement deep-authoring
+
+- `calibration/PASSIVE_DETAIL_MOVEMENT_0001_0010.md`
+- `PASSIVE_MOVEMENT_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_MOVEMENT_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Movement 0001–0010 now have:
+- 10 reconstruction-oriented effect/acquisition records;
+- explicit boundaries against supernatural movement drift;
+- scaling directions and hard caps;
+- hidden-progress/state-ownership model;
+- stacking/overlap rules;
+- knowledge-posture audit;
+- unsafe-training and anti-farm protections.
+
+Knowledge review flags:
+- MOV_0003 likely over-classified;
+- MOV_0004 strongly over-classified;
+- MOV_0008 likely too unknown;
+- MOV_0010 likely over-classified.
+
+No compact knowledge row was silently rewritten by the audit.
+
+Open:
+- numeric coefficients;
+- final knowledge-profile decisions;
+- concrete runtime state-owner mapping;
+- named schools/professions/institutions/history;
+- canon promotion.
+
+Next passive slice: **Sensory 0001–0010**.
+
 ## Audit
 
 - `STATUS_CORPUS_WAVE_001_AUDIT.md`
