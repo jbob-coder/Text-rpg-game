@@ -850,3 +850,25 @@ For consequential changes, graph/task handoff should also identify:
 - evidence required before success.
 
 The active task register, current domain authorities and this cross-reference matrix remain the repository owners. This graph vocabulary is a way to express their relationships, not a replacement authority.
+
+
+## 2026-10-03 Status UI / ability / passive program
+
+### `docs/systems/STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`
+Owns:
+- human age-18 Status awakening;
+- one-primary-ability rule;
+- ability rarity hierarchy;
+- global Level as in-universe progression;
+- Level-100 ability-change exception;
+- passive acquisition and hidden-until-qualified behavior;
+- scalable documentation/catalog architecture;
+- knowledge asymmetry and classified unlock methods.
+
+### `docs/systems/status/STATUS_UI_CORE_CONTRACT.md`
+Owns the target player/world contract for Status fields, awakening, Level, primary ability, passives, hidden information and future privacy/access rules.
+
+### `docs/systems/status/PASSIVE_REGISTRY_SCHEMA.md`
+Owns the reconstruction-grade record structure for large passive catalogs, including requirements, secrecy, world knowledge, evolution, validation and player-safe visibility.
+
+These documents supplement `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`. They do not claim runtime implementation.
