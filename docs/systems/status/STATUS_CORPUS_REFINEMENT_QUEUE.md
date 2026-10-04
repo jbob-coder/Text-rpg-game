@@ -259,12 +259,29 @@ Evidence:
 - `STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md`.
 
 Next passive work:
-1. record-level owner/write-target normalization;
-2. individual knowledge-row reconciliation;
-3. broaden role-class world integration;
+1. per-record read-dependency and same-term overlap normalization;
+2. adjudicate Wave-A/B/C knowledge proposals against world evidence;
+3. move selected role-class mappings to actual world entities only when supported;
 4. broader numeric parameterization;
 5. additional canon dry-review packets;
 6. implementation mapping after design coherence.
+
+Record-level passive owner/write-target baseline:
+- **COMPLETE — 230 / 230 records** at conceptual design level.
+
+Evidence:
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_INDEX.md`;
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_A.md`;
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_B.md`;
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_C.md`.
+
+Knowledge reconciliation:
+- Wave A: 60 rows queued/review-dispositioned;
+- Wave B: 40 rows require concrete institutional/classification justification;
+- Wave C: 20 candidate false-belief records authored with provenance still required.
+
+World integration:
+- all 23 passive families now have role-class mapping in `PASSIVE_WORLD_INTEGRATION_ROLE_CLASS_MATRIX_WAVE_001.md`.
 
 Recent progress:
 - Role-class world integration pilot: `STATUS_WORLD_INTEGRATION_ROLE_CLASS_PILOT_001.md`;
@@ -273,7 +290,7 @@ Recent progress:
 
 Dry-review outcomes:
 - Second Wind: conceptually mature enough for possible future approval with numeric fields open, but owner approval is still required;
-- Lightning Conduit: return for refinement due to throughput/branching/safety/world-infrastructure blockers.
+- Lightning Conduit: return for refinement remains, but `LIGHTNING_CONDUIT_THROUGHPUT_PATH_SAFETY_STANDARD.md` now resolves the non-numeric source/path/branching/grounding/insulation/safety structure; numeric/world policy blockers remain.
 
 Do not create another shallow passive wave.
 
