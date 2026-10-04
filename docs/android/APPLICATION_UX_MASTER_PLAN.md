@@ -1,6 +1,6 @@
 # THE GAME — Android Application UX Master Plan
 
-Status: **FOUNDATIONAL / FINAL SCREEN HIERARCHY NOT YET LOCKED**
+Status: **PLANNING AUTHORITY / DOMAIN-DEPENDENT / FINAL UI REFINEMENT DEFERRED**
 Parents:
 - `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`
 - `docs/android/APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md`
@@ -8,6 +8,47 @@ Parents:
 
 Spatial/tactical presentation authority:
 - `docs/systems/CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md`
+
+## 0. Current planning-phase boundary
+
+This document is currently a **planning authority**, not the final detailed UI specification.
+
+The application UI must not be fully refined before the gameplay/world domains it consumes are reconstruction-grade enough to define their final player-facing needs.
+
+Required upstream dependencies include, at minimum:
+- world/place hierarchy and travel;
+- player/progression/classes/ranks/status;
+- NPC/social/relationships/knowledge;
+- items/equipment/economy/loot;
+- quests and activities/life loop;
+- tactical combat;
+- persistent adversary/world-memory;
+- save/content migration;
+- player-safe projection contracts.
+
+Current UI work may:
+- define ownership boundaries;
+- define provisional screen families;
+- define navigation principles;
+- identify required projections/actions;
+- record responsive/accessibility/performance constraints;
+- map current consumers and technical debt;
+- record cross-domain dependencies;
+- document candidate interaction patterns.
+
+Current UI work must **not** prematurely lock:
+- final screen count;
+- final navigation hierarchy;
+- final information density;
+- final field layouts;
+- final combat HUD;
+- final relationship/knowledge surfaces;
+- final progression/status presentation;
+- final map hierarchy interaction;
+- final item/economy workflows;
+- final visual composition where upstream domains are still changing.
+
+When the upstream domain corpus is sufficiently complete, this plan enters a dedicated UI refinement pass and is then expanded into screen-by-screen, state-by-state, action-by-action implementation contracts.
 
 ## 1. Product goal
 
