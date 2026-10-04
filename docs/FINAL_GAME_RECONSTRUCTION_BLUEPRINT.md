@@ -65,6 +65,21 @@ Every significant subsystem, document, asset family and world record should use 
 
 A planned replacement is not permission to delete the old system immediately.
 
+### 3.1 Current-phase asset-production boundary
+
+The current program is a **documentation/reconstruction-authority phase**, not an active asset-production phase.
+
+For the current phase:
+
+- existing assets may be inspected, inventoried, classified, traced to consumers, and documented;
+- future assets may receive briefs, technical specifications, native-grid requirements, composition rules, reuse classes, provenance requirements, QA gates, and implementation/migration instructions;
+- documents may identify which assets should later be created, reworked, replaced, promoted, or retired;
+- **no new runtime asset is to be created, modified, regenerated, exported, integrated, promoted, replaced, or deleted unless the owner explicitly authorizes that production/implementation step**;
+- a completed asset brief, provenance record, production packet, or migration map does **not** itself authorize production;
+- historical implementation branches remain evidence only unless separately selected for migration.
+
+When this blueprint uses words such as `create`, `produce`, `replace`, or `integrate` in target-state or future-sequence sections, read them as **future required work**, not current execution authority.
+
 ## 4. What is locked or presumed preserved
 
 Until a migration document says otherwise:
