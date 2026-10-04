@@ -40,7 +40,7 @@ Rare blockers:
 - Lightning throughput numbers;
 - Cryo Sink reserve accounting;
 - Momentum Bank reserve accounting;
-- Memory Echo evidence/uncertainty standard;
+- Memory Echo exact decay/fidelity/legal calibration; structural evidence/contamination model now documented in `MEMORY_ECHO_IMPRESSION_EVIDENCE_STANDARD.md`;
 - Crystal Resonance world-canon dependency;
 - named institutions/history;
 - numeric balance.
@@ -259,8 +259,8 @@ Evidence:
 - `STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md`.
 
 Next passive work:
-1. adjudicate Wave-A/B/C knowledge proposals against world evidence;
-2. verify shared resolver keys/caps for the 38 confirmed same-term candidate edges;
+1. move role-class knowledge recommendations toward actual entity/region/time evidence where supported;
+2. verify shared resolver keys/caps for the 38 SAME_TERM_CAPPED overlap edges;
 3. move selected role-class mappings to actual world entities only when supported;
 4. broader numeric parameterization;
 5. additional canon dry-review packets;
@@ -290,6 +290,15 @@ Knowledge reconciliation:
 - Wave A: 60 rows queued/review-dispositioned;
 - Wave B: 40 rows require concrete institutional/classification justification;
 - Wave C: 20 candidate false-belief records authored with provenance still required.
+
+Knowledge role-class adjudication:
+- 100 ordinary-family rows at 0003/0004/0008/0009/0010 now have role-class-informed recommended directions;
+- 20 false-belief candidates now have role-class provenance/correction channels;
+- compact registry remains unchanged.
+
+Evidence:
+- `PASSIVE_KNOWLEDGE_ROLE_CLASS_ADJUDICATION_WAVE_001.md`;
+- `PASSIVE_FALSE_BELIEF_PROVENANCE_ROLE_CLASS_MAP_0005.md`.
 
 World integration:
 - all 23 passive families now have role-class mapping in `PASSIVE_WORLD_INTEGRATION_ROLE_CLASS_MATRIX_WAVE_001.md`.
