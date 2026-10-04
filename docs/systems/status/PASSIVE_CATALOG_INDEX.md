@@ -251,6 +251,26 @@ Result:
 
 No runtime mapping or canon promotion is implied.
 
+## Resolver scenario anchors
+
+Evidence:
+- `PASSIVE_CANONICAL_RESOLVER_SCENARIO_ANCHORS_WAVE_001.md`
+
+Result:
+- 20 / 20 canonical shared resolver families now have qualitative BASELINE, FAVORABLE, ADVERSE, and BOUNDARY scenarios;
+- this completes the qualitative layer before parent-system numeric ranges/test fixtures;
+- final coefficients remain TBD.
+
+## Gate Twelve local world evidence
+
+Evidence:
+- `STATUS_GATE_TWELVE_LOCAL_WORLD_INTEGRATION_EVIDENCE_PILOT.md`
+
+Result:
+- confirmed Gate Twelve local contexts now support cautious world-integration evidence;
+- proposal-only parent names remain excluded from confirmed canon;
+- local context relevance does not automatically prove knowledge, training, or regulation.
+
 ## Knowledge role-class adjudication
 
 Evidence:
