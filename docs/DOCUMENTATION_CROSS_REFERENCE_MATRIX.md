@@ -87,6 +87,21 @@ Feeds:
 - D-032 mechanics migration;
 - D-033/final APK teardown.
 
+### `docs/assets/CURRENT_ASSET_CONSUMER_ZERO_CONSUMER_AUDIT_2026-10-04.md`
+Purpose:
+- resolve consumer presence for each of the 24 current runtime PNGs;
+- distinguish currently consumed rasters from deferred/noncurrent zero-consumer candidates;
+- provide deletion-safety evidence for D-029 and later APK teardown work.
+
+Result:
+- 24 / 24 current PNGs have a consumer path;
+- 0 current PNGs are zero-consumer deletion candidates.
+
+Must not own:
+- canon/visual approval;
+- raster-equivalence execution;
+- final deletion decisions after future architecture changes.
+
 ### `docs/GAME_FOUNDATION.md`
 Purpose:
 - core game direction;
