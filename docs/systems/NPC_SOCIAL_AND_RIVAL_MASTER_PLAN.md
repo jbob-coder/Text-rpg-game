@@ -1,6 +1,6 @@
 # THE GAME — NPC, Social Hierarchy & Persistent Adversary Master Plan
 
-Status: **FOUNDATIONAL / IMPLEMENTATION PARTIAL AT LOWER SCOPE**
+Status: **V05 FIRST-PASS CONTRACT LAYER ESTABLISHED / IMPLEMENTATION PARTIAL / V09 ADVERSARY DETAIL STILL PARTIAL**
 Parents:
 - `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`
 - `docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md`
@@ -452,3 +452,33 @@ A bounded first implementation is not accepted until one real eligible adversary
 8. leave unrelated scenes unaffected.
 
 This is an acceptance target, not evidence that the system exists today.
+
+
+## 23. V05 first-pass child contract suite — 2026-10-04
+
+The character/NPC/social first-pass layer now includes:
+
+- NPC_CHARACTER_IDENTITY_PROFILE_STANDARD.md
+- NPC_PERSONALITY_BEHAVIOR_STANDARD.md
+- NPC_MEMORY_EVENT_STANDARD.md
+- NPC_KNOWLEDGE_BELIEF_PRIVACY_STANDARD.md
+- NPC_RELATIONSHIP_STATE_STANDARD.md
+- NPC_GOALS_DECISION_STANDARD.md
+- NPC_SCHEDULE_PRESENCE_STANDARD.md
+- FACTION_HIERARCHY_MEMBERSHIP_STANDARD.md
+- SOCIAL_CONSEQUENCE_RUMOR_PROPAGATION_STANDARD.md
+- RECURRING_CHARACTER_PACKET_STANDARD.md
+- TAMSIN_PHASE1_SOCIAL_PROOF_PACKET.md
+
+Together with this master, V05 has 12 / 12 first-pass canonical units.
+
+This closes the V05 breadth floor only. It does not complete:
+- world-scale NPC population;
+- final faction catalog;
+- final daily schedules;
+- full rumor network;
+- persistent adversary V09 implementation;
+- final social UI;
+- runtime migration of normalized identity/schedule/memory fields.
+
+Phase 1 social proof should use NPC_TAMSIN rather than inventing a new recurring character.
