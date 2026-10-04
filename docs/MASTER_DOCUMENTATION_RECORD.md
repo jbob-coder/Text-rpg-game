@@ -31,6 +31,20 @@ This is a living control document. It must be updated whenever a major documenta
 
 ## 1. Authority and interpretation rules
 
+### 1.0 Current documentation-only asset rule
+
+The active program currently documents the game and its future reconstruction. Asset-related documentation may:
+
+- audit what already exists;
+- record provenance, consumers, status, and deficiencies;
+- define exactly how future assets should be created;
+- specify grids, layers, composition, reuse, naming, migration, QA, and acceptance criteria;
+- preserve historical asset-production evidence.
+
+It may **not** create, modify, redraw, regenerate, export, integrate, promote, replace, or delete runtime assets unless the owner gives a new explicit instruction authorizing that production/implementation work.
+
+This rule overrides older wording that could be read as an instruction to continue an asset-production batch. Production plans remain useful as future execution documentation, but are not active execution authority.
+
 ### 1.1 Evidence order
 
 When this record conflicts with newer repository evidence, use this order:
