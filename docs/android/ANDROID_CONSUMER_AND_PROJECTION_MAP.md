@@ -527,3 +527,330 @@ Key decisions:
 - keep existing scene choices authoritative until a separate actor-action mutation API exists.
 
 This closes the documentation requirement for D-030. Runtime migration remains separate and must pass the Python/Kotlin/Compose equivalence and redaction gates in that contract.
+
+
+## 28. Exact current consumer audit — 2026-10-04
+
+Audited against the live documentation-program branch after the D-042 source inventory.
+
+This section advances the previously-open requirement for exact field/action consumer mapping. It does not claim the final APK architecture is complete.
+
+### 28.1 Projection envelope from Python
+
+Current Python Android bridge returns one player-safe root object with:
+
+- `scene`;
+- `status`;
+- `inventory`;
+- `quests`;
+- `map`;
+- `visuals`;
+- `meta`.
+
+Observed child keys currently consumed by Kotlin:
+
+#### `scene`
+- `id`;
+- `title`;
+- `body`;
+- `choices[].id`;
+- `choices[].text`;
+- `choices[].enabled`;
+- optional `choices[].disabled_reason`.
+
+#### `status`
+- `resources[].id/current/max`;
+- `attributes[].id/name/base/effective/delta/modified/role/contributions`;
+- `derived[].id/name/value/role`;
+- grouped `skills.<category>[]` with id/name/base/effective/delta/modified/contributions;
+- `conditions[].id/name/severity/duration_minutes/tags`;
+- `identity.name/origin/background/path/level`.
+
+#### `inventory`
+- `items[].id/name/quantity/equippable/slot/quality`;
+- `equipment[].slot/equipped/item_id/name/quality`.
+
+#### `quests`
+- quest id/title/description/category/status/stage;
+- objective id/title/required/status.
+
+#### `map`
+- `title`;
+- `current_location`;
+- nodes: id/title/description/x/y/current/reachable;
+- edges: from/to.
+
+#### `visuals`
+- `relay_state`, restricted by the Kotlin mapper to:
+  - `intact`;
+  - `opened`;
+  - `damaged`;
+  - `signal_lost`.
+
+#### `meta`
+- `turn`;
+- `time_minutes`;
+- optional `location`;
+- optional `content_id`;
+- optional `canon_status`.
+
+The Python bridge also exposes `schema_version` in meta, but the current Kotlin `GameSnapshot` mapper does not retain it as a player-facing field. Save compatibility remains owned by persistence rather than by Compose.
+
+### 28.2 Kotlin projection boundary
+
+`BridgeSnapshotMapper.fromMap` converts the safe payload into `GameSnapshot`.
+
+Current `GameSnapshot` fields:
+
+- `sceneId`;
+- `title`;
+- `body`;
+- `choices`;
+- `resources`;
+- `attributes`;
+- `derived`;
+- `skills`;
+- `conditions`;
+- `identity`;
+- `inventory`;
+- `quests`;
+- `worldMap`;
+- `visuals`;
+- `turn`;
+- `timeMinutes`;
+- `location`;
+- `contentId`;
+- `canonStatus`.
+
+Unknown root/scene/status fields are not copied into `GameSnapshot`. Current unit evidence explicitly checks that secret authoring data and hidden modifier fields do not survive the mapper.
+
+### 28.3 Exact GameViewModel action flow
+
+`GameViewModel` currently owns the Android-side request flow:
+
+| UI request | Engine operation | Snapshot/result handling |
+| --- | --- | --- |
+| start | `engine.start(...)` | publishes full `GameUiState` with `BootState.Ready` |
+| choice | `engine.choose(choiceId)` | replaces snapshot; clears stat-inspection transient state |
+| save | `engine.save()` | no snapshot replacement |
+| load | `SaveRepository.continueGame()` -> engine load | replaces snapshot; clears stat-inspection transient state |
+| cheat | `engine.applyCheat(code)` | replaces snapshot; clears stat-inspection transient state |
+| equip | `engine.equip(itemId)` | replaces snapshot; clears stat-inspection transient state |
+| unequip | `engine.unequip(slot)` | replaces snapshot; clears stat-inspection transient state |
+| travel | `engine.travel(locationId)` | replaces snapshot and creates presentation-only travel transition if confirmed location changed |
+| stat inspection | `engine.inspectStatus(path)` | stores transient `GameStatInspection`; does not mutate gameplay snapshot |
+| travel animation complete | local ViewModel state only | clears transient travel-transition overlay |
+
+Current transient UI state kept outside authoritative saves:
+
+- boot state;
+- busy flag;
+- travel transition token/from/to;
+- selected stat-inspection path/result/busy/error.
+
+This separation should remain.
+
+### 28.4 Exact Compose field consumers
+
+#### Shell / global status
+
+`GameScreen.kt` consumes:
+
+- `snapshot.location` -> top status location;
+- `snapshot.turn` -> turn display;
+- `snapshot.timeMinutes` -> formatted game-time display;
+- `snapshot.sceneId` -> return to Story on scene change and narration/reveal reset;
+- `snapshot.body` -> auto-read narration and narrative text.
+
+#### Story surface
+
+`StorySection` consumes:
+
+- `title`;
+- `body`;
+- `choices`;
+- `location`;
+- `sceneId`;
+- `visuals.relayState`.
+
+`StoryResourceHud` / resource panels consume:
+- `resources[].id/current/max`.
+
+Choice selection emits only the projected choice ID through `onChoice`.
+
+#### Story visual composition
+
+`SceneIllustration` consumes:
+- projected `locationId`;
+- projected `sceneId`;
+- projected `relayState`.
+
+It then selects presentation-only assets through:
+- `PixelRasterCatalog`;
+- `PixelSceneCatalog`;
+- `PixelSceneOverlayCatalog`;
+- `PixelEnvironmentDecalCatalog`;
+- `PixelEnvironmentPropCatalog`;
+- `PixelStoryActorCatalog`;
+- `PixelTraceFxCatalog`;
+- `PixelAssetCatalog`.
+
+Important transitional inference:
+- `PixelStoryActorCatalog` chooses Tamsin/courier placements from `sceneId + locationId`;
+- it does not read raw NPC state;
+- D-030 remains the target replacement for this heuristic through a formal player-safe room/actor projection.
+
+Fallback geometry still exists inside `SceneIllustration` for locations without a selected scene master. This is a presentation fallback, not final authored art authority.
+
+#### Character surface
+
+`CharacterSection.kt` consumes:
+
+- `inventory.equipment`;
+- `inventory.items`;
+- `identity`;
+- `conditions`;
+- `attributes`;
+- `skills`.
+
+Actions:
+- emits `onEquip(itemId)`;
+- emits `onUnequip(slot)`.
+
+It does not mutate equipment locally.
+
+#### Stats surface
+
+`StatsSection.kt` consumes:
+
+- `attributes`;
+- `skills`;
+- `derived`;
+- `conditions`;
+- `inventory.equipment`;
+- transient `GameStatInspection`.
+
+It constructs safe inspection paths only from projected attribute/skill IDs:
+- `attributes.<id>`;
+- `skills.<id>`.
+
+It requests `onInspect(path)`; authoritative contribution resolution remains in Python.
+
+#### Inventory surface
+
+`InventorySection` consumes:
+
+- `inventory.equipment`;
+- `inventory.items`.
+
+Actions:
+- equip projected item ID;
+- unequip projected slot ID.
+
+#### Quest surface
+
+`QuestSection` consumes:
+
+- quest category/title/description/status/stage;
+- objective title/required/status.
+
+No quest mutation occurs in Compose.
+
+#### Map surface
+
+`MapSection` consumes:
+
+- `worldMap.title`;
+- `worldMap.currentLocation`;
+- node id/title/description/x/y/current/reachable;
+- edge from/to.
+
+Local-only UI state:
+- selected map-node ID.
+
+Travel is offered only when projected `reachable == true`, and the UI emits only `onTravel(selected.id)`.
+
+The UI renders geometry from projected nodes/edges but does not author route truth.
+
+#### Settings / session surface
+
+`SettingsPanel` consumes:
+
+- `contentId`;
+- `canonStatus`;
+- `sceneId`;
+- `turn`.
+
+It also owns application-only transient controls for:
+- narration auto-read;
+- narration speed;
+- text reveal speed;
+- narration stop/replay;
+- save/load buttons.
+
+Developer controls emit whitelisted/string cheat requests back to the engine; Compose does not directly mutate game state.
+
+### 28.5 Current navigation graph
+
+Current top-level `GameSection` states:
+
+- Story;
+- Character;
+- Stats;
+- Inventory;
+- Quests;
+- Map;
+- More.
+
+Settings is an overlay/state outside that enum.
+
+`More` currently routes to:
+- Character / Equipment;
+- Settings / Save / Audio.
+
+A scene-ID change automatically returns the active section to Story and closes Settings.
+
+This navigation is current implementation evidence, not final UX canon.
+
+### 28.6 Test coverage confirmed from source
+
+Current Android unit/instrumentation sources include coverage for:
+
+- safe bridge payload mapping and hidden-field dropping;
+- player-safe stats mapping;
+- stat-inspection contribution mapping;
+- rejection of unsupported relay visual states;
+- engine failure classification;
+- save repository missing/corrupt/unsupported-schema behavior;
+- travel-transition confirmation;
+- Story shell/navigation;
+- projected map navigation;
+- stat-inspection request routing;
+- player-safe equipment contribution rendering;
+- scene/overlay/raster rendering;
+- paper-doll equipment visibility;
+- no invented avatar layer for unmapped equipment;
+- condition-driven avatar FX;
+- travel-transition presentation;
+- inventory quality-frame rendering;
+- phone-layout evidence for story, map, inventory, character/stats and skills.
+
+Historical test-source presence is not equivalent to a current-head passing run.
+
+### 28.7 Remaining consumer-audit debt
+
+Still open before D-026/D-021 can be marked DONE:
+
+1. enumerate every pixel catalog's direct Compose consumer and zero-consumer candidates;
+2. classify hardcoded visual/presentation state versus safe projection state;
+3. map every `GameSnapshot` field to exact tests, including currently weak/untested fields;
+4. document the final actor/room projection migration from scene/location inference;
+5. define future activity, tactical-combat, hierarchical-map and adversary-intel projection models;
+6. reconcile this current consumer graph against the final APK target architecture;
+7. rerun the relevant test/build matrix when implementation changes are made.
+
+## 29. D-026 / D-021 checkpoint
+
+The high-level projection map is no longer only conceptual: the live Python payload, Kotlin mapper, ViewModel action flow, major Compose consumers, current navigation graph and existing test-source coverage are now explicitly mapped.
+
+Status remains **IN_PROGRESS**, not DONE, because catalog-level consumers, hardcoded-state audit, future projections and final migration evidence remain open.
