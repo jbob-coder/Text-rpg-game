@@ -934,3 +934,86 @@ Still required before D-026/D-021 can be considered reconstruction-complete:
 3. D-030 actor projection implementation migration plan at field/consumer level;
 4. future activity/combat/hierarchical-map/adversary projection records;
 5. final destination APK component migration matrix.
+
+
+## 32. GameSnapshot field / engine-action test coverage matrix — 2026-10-04
+
+This matrix is based on current Android test source, not a claim that the tests passed at the documentation HEAD.
+
+### 32.1 Snapshot fields
+
+| Field / group | Direct current test-source evidence | Coverage assessment |
+| --- | --- | --- |
+| `sceneId` | `PythonGameEngineContractTest`; `GameScreenTest`; `CharacterStatsSectionTest` | **COVERED** mapper + presentation |
+| `title` | `PythonGameEngineContractTest`; `BridgeStatusMapperTest`; UI instrumentation fixtures | **COVERED** |
+| `body` | `PythonGameEngineContractTest`; UI shell/narrative instrumentation; real-activity smoke | **COVERED** |
+| `choices` | `PythonGameEngineContractTest`; `GameScreenTest`; phone UI fixtures | **COVERED** |
+| `resources` | `PythonGameEngineContractTest`; `BridgeStatusMapperTest`; UI instrumentation fixtures | **COVERED** |
+| `attributes` | `BridgeStatusMapperTest`; `StatContributionMapperTest`; Stats/Character instrumentation | **COVERED** |
+| `derived` | `BridgeStatusMapperTest.playerSafeStatsAreMappedForDedicatedStatsScreen` | **PARTIAL** — mapper coverage exists; no dedicated current Compose assertion identified for derived-stat rendering |
+| `skills` | `BridgeStatusMapperTest`; `StatContributionMapperTest`; `CharacterStatsSectionTest.skillsMatrixUsesAuthoritativeCategoriesAndPhoneReadableCards` | **COVERED** |
+| `conditions` | `BridgeStatusMapperTest`; `GameScreenTest.projectedEchoStrainConditionActivatesVisibleAvatarFx` | **COVERED** for mapper + one visible condition path |
+| `identity` | `BridgeStatusMapperTest.playerSafeStatsAreMappedForDedicatedStatsScreen` | **PARTIAL** — mapper identity name/level checked; broader Character identity presentation lacks a dedicated field-by-field contract test |
+| `inventory` / equipment | GameScreen inventory/character tests; CharacterStats equipment/inventory tests; real-activity equipment smoke | **COVERED** |
+| `quests` | no direct current field-level or dedicated QuestSection test identified in the audited Android test sources | **GAP** |
+| `worldMap` | CharacterStats map instrumentation; map marker/art/module tests; travel request tests | **COVERED** for current district-map presentation |
+| `visuals.relayState` | `BridgeStatusMapperTest`; `GameScreenTest.projectedRelayStateRendersThroughNarrativeScene` | **COVERED** |
+| `turn` | `PythonGameEngineContractTest`; UI fixtures | **COVERED** |
+| `timeMinutes` | `PythonGameEngineContractTest`; UI fixtures | **COVERED** |
+| `location` | `PythonGameEngineContractTest`; travel transition and scene/map UI evidence | **COVERED** |
+| `contentId` | no direct assertion identified | **GAP** |
+| `canonStatus` | no direct assertion identified | **GAP** |
+
+### 32.2 Player-safe mapper/privacy tests
+
+Confirmed current unit-test boundaries include:
+
+- `PythonGameEngineContractTest.safe bridge payload maps to snapshot and ignores unknown fields`:
+  - checks safe scene/resource/meta mapping;
+  - checks unknown root/scene/status secret fields are not retained by `GameSnapshot`.
+- `BridgeStatusMapperTest.playerSafeStatsAreMappedForDedicatedStatsScreen`:
+  - checks identity, attribute, skill, derived and relay-state mapping.
+- `BridgeStatusMapperTest.playerSafeStatInspectionMapsContributionSources`:
+  - checks the player-safe contribution payload.
+- `BridgeStatusMapperTest.unsupportedRelayVisualStateIsRejected`:
+  - checks visual-state whitelist enforcement.
+
+### 32.3 Engine action test-source matrix
+
+| Engine action | Current test-source evidence | Assessment |
+| --- | --- | --- |
+| `start` | `ActivityBootSmokeTest.realActivityBootsAndAppliesFirstPythonChoice`; Python engine error-classification tests | **COVERED** |
+| `choose` | real-activity first-choice smoke; Story UI choice routing | **COVERED** |
+| `save` | `SaveRepositoryTest`; `ActivityBootSmokeTest.realActivitySaveLoadRoundTripRestoresPythonScene` | **COVERED** |
+| `load` | `SaveRepositoryTest`; real-activity save/load round trip | **COVERED** |
+| `applyCheat` | `ActivityBootSmokeTest.realActivityDeveloperDistrictCheatAndMapTravelOpenNarrativeScene`; failure classification | **COVERED** for current developer path |
+| `equip` | Character/Inventory UI tests; real-activity equipment smoke | **COVERED** |
+| `unequip` | `GameScreenTest.characterScreenSelectsAuthoredPaperDollSlotAndRoutesUnequip`; CharacterStats fresh-snapshot test | **COVERED** |
+| `travel` | map navigation test; `TravelTransitionContractTest`; real-activity district travel | **COVERED** |
+| `inspectStatus` | Stats request test; mapper inspection test; failure classification | **COVERED** |
+
+### 32.4 High-value test gaps to close during implementation work
+
+The current documentation audit identifies these concrete Android test gaps:
+
+1. dedicated `QuestSection` projection/render test for quest status/stage/objectives and hidden-future-objective boundary;
+2. direct `contentId` session-display mapping/render assertion;
+3. direct `canonStatus` session-display mapping/render assertion;
+4. dedicated derived-stat Compose presentation assertion;
+5. fuller identity projection/UI contract test for origin/background/path/level rather than only mapper name/level coverage;
+6. future D-030 actor/room projection privacy + rendering tests once implemented;
+7. future hierarchical-map/activity/combat/adversary projection tests when those contracts materialize.
+
+These are **documented gaps**, not current runtime failures.
+
+## 33. D-026 checkpoint after test-gap audit
+
+The exact current `GameSnapshot` field and `GameEngine` action test-source matrix is now documented.
+
+Remaining D-026/D-021 reconstruction work is reduced to:
+
+1. member/asset-ID level consumer/zero-consumer matrix;
+2. D-030 actor projection implementation migration map;
+3. future projection contracts;
+4. final destination APK migration mapping;
+5. runtime execution evidence when code changes begin.
