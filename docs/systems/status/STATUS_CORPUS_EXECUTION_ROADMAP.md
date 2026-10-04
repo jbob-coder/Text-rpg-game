@@ -249,6 +249,8 @@ Materialized normalization:
 
 Materialized:
 - record-level conceptual owner/write-target assignments for 230 / 230 passives;
+- record-level conceptual read-dependency assignments for 230 / 230 passives;
+- 93 candidate passive overlap edges adjudicated into capped/shared, ordered-stage, or distinct-stage classes;
 - knowledge reconciliation Waves A/B/C covering 120 priority/content-required rows;
 - family-level role-class world integration for 23 / 23 families.
 
@@ -261,8 +263,8 @@ Open:
 
 ### Next order
 
-1. **Normalize record-level read dependencies and overlap sets.**
-2. **Adjudicate passive knowledge Waves A/B/C using world-role evidence.**
+1. **Adjudicate passive knowledge Waves A/B/C using world-role evidence.**
+2. **Define cap semantics for the 38 SAME_TERM_CAPPED overlap edges.**
 3. **Progress supported role-class mappings toward actual world entities.**
 4. Expand numeric parameterization once base units exist.
 5. Run additional canon-review dry packets.
