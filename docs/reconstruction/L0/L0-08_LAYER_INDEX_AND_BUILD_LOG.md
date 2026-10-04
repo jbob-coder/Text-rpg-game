@@ -24,7 +24,7 @@ verified, and deliberately left open.
 
 | Layer | Directory | Status | Documents |
 | --- | --- | --- | ---: |
-| L0 | `docs/reconstruction/L0/` | **COMPLETE** | 10 |
+| L0 | `docs/reconstruction/L0/` | **COMPLETE** | 11 |
 | L1 | `docs/reconstruction/L1/` | **IN PROGRESS** | 3 + 3 JSON |
 | L2 | `docs/reconstruction/L2/` | PENDING | — |
 | L3 | `docs/reconstruction/L3/` | PENDING | — |
@@ -45,6 +45,7 @@ verified, and deliberately left open.
 | 07 | `L0-07_PROHIBITIONS_AND_FAILURE_MODES.md` | Catastrophic failures, 11 prohibition classes, anti-pattern table |
 | 08 | `L0-08_LAYER_INDEX_AND_BUILD_LOG.md` | Layer navigation and build log |
 | 09 | `L0-09_CORPUS_INTEGRITY_PROTOCOL.md` | Observed failure modes and the post-generation verification step |
+| 10 | `L0-10_LAYER_STACK_AUTHORITY_AND_SCENE_COMPOSITION.md` | The four published layer stacks, which to use when, and their reconciliation |
 
 ## 3. Planned layer contents
 Each remaining layer is scoped below with its intended deliverables, so a
@@ -379,3 +380,77 @@ documents that legitimately describe those defects.
 `L0-09_CORPUS_INTEGRITY_PROTOCOL.md` records the seven observed failures, the
 reasoning checks the harness cannot perform, and the persistence rule (commit
 per layer). Current state: **9/9 checks passing, 224,171 characters**.
+
+
+## 9. Corrections from delegated extraction
+
+Three subagents extracted canon from `docs/world/`, `docs/assets/` and
+`docs/systems/`. Their outputs were treated as self-reports and verified against
+source before anything was written. Two material corrections resulted, plus one
+significant addition.
+
+### 9.1 The Arden proposals exist — the earlier "empty catalog" claim was wrong
+
+L0-01 previously recorded political entities and parent settlements as
+"SCHEMA ONLY, EMPTY CATALOG". That was inaccurate.
+
+`GATE_TWELVE_PARENT_WORLD_PROPOSAL.md` does supply named candidates, and
+`WORLD_DEVELOPMENT_MASTER_INDEX.md` §901 confirms they are proposals awaiting
+owner decision:
+
+| Level | ID | Name | Status |
+| --- | --- | --- | --- |
+| WORLD | `WORLD_PRIMARY_01` | intentionally open | — |
+| REGION | `REGION_ALDER_BASIN_01` | Alder Basin | PROPOSED |
+| POLITICAL/ADMIN | `ADMIN_ARDEN_MUNICIPAL_01` | Arden Municipal Authority | PROPOSED, local authority only |
+| SETTLEMENT | `SETTLEMENT_ARDEN_CROSSING_01` | Arden Crossing | PROPOSED |
+
+Verified by grep against both source files before writing. L0-01 §1.1 now records
+these as **named but undecided**, with the correction stated in place.
+
+The distinction is not cosmetic: a name exists, but no decision has been taken,
+so a rebuild must not canonise it — nor discard it, because it is the owner's
+current expressed direction.
+
+### 9.2 The ability/passive corpora are structure, not canon
+
+Verified at `docs/systems/status/DOCUMENTATION_UNIT_LEDGER.md` lines 43–45:
+
+```
+design_status: CALIBRATION_PROPOSAL
+canon_status: NOT_CANON_UNTIL_PROMOTED
+implementation_status: NOT_IMPLEMENTED
+```
+
+This default applies to **every catalog record**. The corpora are mature as
+structure while being almost entirely un-promoted and unimplemented. Recorded at
+L0-01 §1.2, because a rebuild could easily mistake a fully-specified ability
+record for canon.
+
+### 9.3 Four layer stacks, not one
+
+Added `L0-10`. The project publishes **four distinct layer stacks** (13-layer
+scene stack, 10-layer production stack, 10-layer room default, 12-layer
+occlusion order) plus a 10-entry provenance taxonomy. They answer different
+questions and are not interchangeable.
+
+Verified verbatim against `PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md` §3 and
+`GLOBAL_ASSET_REUSE_OCCLUSION_MATRIX.md` §3 before writing.
+
+The governing rule, quoted: *"Scene perspective may override the numerical
+order, but never in a way that falsifies state."*
+
+The one substantive disagreement between stacks is where the player sits —
+stack A places the player at 9 (after room actors), stack C at 5 (before NPC
+room actors). This is exactly the kind of exception stack A permits if it is
+explicit, so L0-10 records it as a per-scene declared choice rather than a
+contradiction.
+
+### 9.4 The locked setting character
+
+Captured at L0-01 §2.2: Gate Twelve is **"grounded municipal infrastructure under
+emergency pressure"**, explicitly excluding cyberpunk nightclub architecture,
+neon city spectacle, fantasy medieval settlement, sterile sci-fi laboratory and
+abstract UI geometry. Owner direction requires the game "not default to
+cyberpunk/neon shorthand", and Trace/Echo is **"a specific phenomenon, not
+generic 'magic tech glow'"**.

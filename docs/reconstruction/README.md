@@ -58,6 +58,8 @@ L0 is understood.
 7. [L0-06 Stable ID and Naming Standard](L0/L0-06_STABLE_ID_AND_NAMING_STANDARD.md)
 8. [L0-07 Prohibitions and Failure Modes](L0/L0-07_PROHIBITIONS_AND_FAILURE_MODES.md)
 9. [L0-08 Layer Index and Build Log](L0/L0-08_LAYER_INDEX_AND_BUILD_LOG.md)
+10. [L0-09 Corpus Integrity Protocol](L0/L0-09_CORPUS_INTEGRITY_PROTOCOL.md)
+11. [L0-10 Layer Stack Authority and Scene Composition](L0/L0-10_LAYER_STACK_AUTHORITY_AND_SCENE_COMPOSITION.md)
 
 ## 3. Relationship to existing documentation
 

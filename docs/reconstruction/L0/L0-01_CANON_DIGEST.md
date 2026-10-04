@@ -28,16 +28,81 @@ invent content and present it as canon.
 | Knowledge facts (8) | **Authored** | `content/vertical_slice_01.json` → `registries.knowledge` |
 | Gate Twelve district map | **Authored, 9 nodes, 8 edges** | `content/vertical_slice_01.json` → `world_map` |
 | Locations outside the district | **NOT AUTHORED** | — |
-| Political entities / factions | **SCHEMA ONLY, EMPTY CATALOG** | `docs/world/WORLD_POLITICAL_ENTITIES.md` |
-| Settlements beyond the district | **SCHEMA ONLY, EMPTY CATALOG** | `docs/world/WORLD_SETTLEMENT_CATALOG.md` |
-| Wider world geography/scale | **SCHEMA ONLY, SCALE UNLOCKED** | `docs/world/WORLD_GEOGRAPHY_STANDARD.md` |
-| Ability/passive corpora | **LARGELY AUTHORED** (calibration waves) | `docs/systems/status/` |
+| Political entities / factions | **NAMED PROPOSALS, NOT CANON** | `docs/world/GATE_TWELVE_PARENT_WORLD_PROPOSAL.md` |
+| Parent region / settlement | **NAMED PROPOSALS, NOT CANON** | same |
+| Wider world geography/scale | **SCHEMA + PROPOSAL, SCALE UNLOCKED** | `docs/world/WORLD_GEOGRAPHY_STANDARD.md` |
+| Ability/passive corpora | **STRUCTURE AUTHORED, NOT PROMOTED** | `docs/systems/status/` |
 | Beasts / creatures | **NOT SPECIFIED IN DOCS** | — |
 | Player-visible identity of Jack beyond reference | **PARTIAL** | see §4 |
 
 `WORLD_POLITICAL_ENTITIES.md` and `WORLD_SETTLEMENT_CATALOG.md` explicitly state:
 "No kingdom or government is invented here solely to fill the catalog." That
 discipline is binding. **Empty means empty, not "to be invented casually".**
+
+**Correction (recorded 2026-10-03, after delegated extraction).** An earlier
+draft of this table stated that political entities and parent settlements were
+"empty catalogs". That was inaccurate. `GATE_TWELVE_PARENT_WORLD_PROPOSAL.md`
+does supply named candidates, and `WORLD_DEVELOPMENT_MASTER_INDEX.md` §901
+records them explicitly. They are **proposals awaiting owner decision**, not
+absent. The distinction matters: a name exists, but no decision has been taken,
+so a rebuild must not treat it as canon. See §1.1.
+
+## 1.1 The Arden proposals — named, not decided
+
+`docs/world/GATE_TWELVE_PARENT_WORLD_PROPOSAL.md` supplies a minimal candidate
+parent chain for owner decision. It is a **proposal, not confirmed canon** —
+`WORLD_DEVELOPMENT_MASTER_INDEX.md` §901 says so in terms.
+
+| Level | Proposed ID | Working name | Status |
+| --- | --- | --- | --- |
+| WORLD | `WORLD_PRIMARY_01` | unnamed — name intentionally open | — |
+| REGION | `REGION_ALDER_BASIN_01` | Alder Basin | **PROPOSED** |
+| POLITICAL/ADMIN | `ADMIN_ARDEN_MUNICIPAL_01` | Arden Municipal Authority | **PROPOSED**, local authority only |
+| SETTLEMENT | `SETTLEMENT_ARDEN_CROSSING_01` | Arden Crossing | **PROPOSED** |
+
+**Alder Basin** is proposed as a temperate low-basin transport region.
+**Arden Crossing** is proposed as a medium transit/repair city built around an
+old regional transport junction rather than a megacity.
+
+**Arden Municipal Authority** would own/operate or regulate civic transit/depot
+infrastructure and the Municipal Archive; Workshop Row "may contain private
+contractors operating under municipal…" contract.
+
+**How a rebuild must treat this.** These are the *only* named world-level
+entities in the project, and they are **undecided**. `WORLD_DEVELOPMENT_MASTER_INDEX.md`
+§901 lists them among owner-decision inputs alongside climate logic, the
+municipal-parent model and parent-facing route stubs.
+
+Therefore:
+
+- do not canonise `Alder Basin`, `Arden Crossing` or the `Arden Municipal
+  Authority` as settled;
+- do not delete them either — they are the current best candidate and a rebuild
+  that discards them loses the owner's expressed direction;
+- the world **name is deliberately open** and must stay open until decided;
+- existing Gate Twelve local IDs, W3 coordinates and the eight authored route
+  records are **unchanged** by the proposal, so content work proceeds normally.
+
+## 1.2 The ability/passive corpora are structure, not canon
+
+A second correction worth stating loudly, because it governs a large part of
+the project.
+
+`docs/systems/status/DOCUMENTATION_UNIT_LEDGER.md` lines 43–45 set the default
+for **every catalog record**:
+
+```
+design_status: CALIBRATION_PROPOSAL
+canon_status: NOT_CANON_UNTIL_PROMOTED
+implementation_status: NOT_IMPLEMENTED
+```
+
+The ability and passive corpora are therefore **mature as structure** —
+verified stable-ID units across ability, passive and technique records — while
+being **almost entirely un-promoted and unimplemented**.
+
+A rebuild must not treat an ability or passive record as canon merely because
+it is fully specified. Promotion is a separate act.
 
 ## 2. The world as authored
 Four condensed subsections follow: premise, technology, mystery, tone. The
@@ -76,6 +141,14 @@ message. The canon wording is explicit:
 > "The sensation is not a voice or a message; it is a spatial afterimage, as if
 > recent energy use has left a pressure pattern in the metal around you."
 > — `POWER_GATE_TWELVE_SIGNAL`
+
+**Setting character (locked).** `docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md`
+§6.1 defines Gate Twelve as **"grounded municipal infrastructure under emergency
+pressure"**, explicitly NOT: cyberpunk nightclub architecture, neon city
+spectacle, fantasy medieval settlement, sterile sci-fi laboratory, or abstract UI
+geometry. Owner direction requires the game "not default to cyberpunk/neon
+shorthand". §6.17 adds that Trace/Echo is **"a specific phenomenon, not generic
+'magic tech glow'"**.
 
 This single sentence is the most important tonal constraint in the project. The
 world does not explain itself through prophecy. It explains itself through
