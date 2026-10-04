@@ -99,6 +99,8 @@ These colors are interface anchors, not a mandate that every world object use th
 
 Gameplay characters use a 32x48 native body grid.
 
+**Character art must not be geometry-built.** The 32x48 grid, anchors and layer coordinates are alignment contracts for finished pixel sprites. They must not be interpreted as permission to synthesize the visible character from rectangles, circles, polygons, block primitives, vector shapes, or procedural body geometry. Character appearance comes from generated/extracted/cleaned authored pixel-art assets.
+
 ### Required anchor points
 
 Coordinates are expressed relative to the 32x48 sprite cell:
