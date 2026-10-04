@@ -1133,7 +1133,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETED_AT: 2026-10-04 AST
 
 ### TASK D-055 — Build V10 activities/life-simulation first-pass child contracts
-- STATUS: IN_PROGRESS / NEXT BREADTH DOMAIN
+- STATUS: DONE
 - PRIORITY: P0/P1
 - WHY NEXT:
   - V10 has an 8-unit first-pass floor and remains under-covered;
@@ -1148,3 +1148,30 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - interruption/concurrency/schedule standard;
   - Gate Twelve Phase 1 activity proof packet.
 - RULE: preserve authoritative time/resource/state mutation in Python; UI only requests and presents legal activities.
+
+
+#### D-055 closure — V10 first-pass breadth floor
+- RESULT: V10 reaches 8 / 8 first-pass canonical units using the activity master plus seven child standards/packets.
+- CURRENT FOUNDATION PRESERVED: simulation train/recover/time/conditions and powers practice/recovery remain implementation anchors.
+- PHASE 1 IMPACT: requirement #8 uses existing TRAIN_POWER_FUNDAMENTALS_TWO_HOURS in TRACE_CHAMBER as the proof candidate; exact-head save/load/Android verification remains pending.
+- RUNTIME: no behavior changed in this documentation batch.
+- COMPLETED_AT: 2026-10-04 AST
+
+### TASK D-056 — Build V07 items/economy/loot first-pass child contracts
+- STATUS: IN_PROGRESS / NEXT BREADTH DOMAIN
+- PRIORITY: P0/P1
+- WHY NEXT:
+  - V07 has a 10-unit first-pass floor and remains under-covered;
+  - it directly supports Phase 1 inventory/equipment requirement #6;
+  - it feeds combat loadouts, activity costs, world resources, loot provenance and later UI refinement.
+- TARGET FIRST LAYER:
+  - item identity/definition schema;
+  - inventory ownership/stacking standard;
+  - equipment legality/slot standard;
+  - item quality/rarity standard;
+  - item use/consumption standard;
+  - loot/drop/provenance standard;
+  - economy source/sink/value standard;
+  - vendor/service transaction standard;
+  - Gate Twelve Phase 1 item/equipment proof packet.
+- RULE: preserve current stable item IDs/equipment slots; do not invent currency/vendors/crafting where current canon has not approved them.
