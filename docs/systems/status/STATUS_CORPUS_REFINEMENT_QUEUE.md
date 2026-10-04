@@ -260,7 +260,7 @@ Evidence:
 
 Next passive work:
 1. move role-class knowledge recommendations toward actual entity/region/time evidence where supported;
-2. verify shared resolver keys/caps for the 38 SAME_TERM_CAPPED overlap edges;
+2. document base-system terms/units needed to calibrate the 20 canonical shared passive resolvers;
 3. move selected role-class mappings to actual world entities only when supported;
 4. broader numeric parameterization;
 5. additional canon dry-review packets;
@@ -290,6 +290,14 @@ Knowledge reconciliation:
 - Wave A: 60 rows queued/review-dispositioned;
 - Wave B: 40 rows require concrete institutional/classification justification;
 - Wave C: 20 candidate false-belief records authored with provenance still required.
+
+Shared passive resolver semantics:
+- 38 SAME_TERM_CAPPED edges normalized;
+- 24 provisional keys consolidated to 20 canonical resolver families;
+- symbolic cap/floor and anti-double-count behavior documented.
+
+Evidence:
+- `PASSIVE_SHARED_RESOLVER_CAP_SEMANTICS_WAVE_001.md`.
 
 Knowledge role-class adjudication:
 - 100 ordinary-family rows at 0003/0004/0008/0009/0010 now have role-class-informed recommended directions;
