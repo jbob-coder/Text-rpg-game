@@ -1136,3 +1136,35 @@ Owns the first implementation-specific mapping from V08/Phase 1 encounter design
 - rollback/test gates.
 
 It completes only the combat child of D-032. Other mechanics migration packets remain open.
+
+
+## V09 persistent-adversary/world-memory first-pass child suite — 2026-10-04
+
+Master:
+- docs/systems/PERSISTENT_ADVERSARY_WORLD_MEMORY_MASTER_PLAN.md
+
+Children:
+- docs/systems/ADVERSARY_ELIGIBILITY_IDENTITY_STANDARD.md
+- docs/systems/ADVERSARY_ENCOUNTER_MEMORY_ADAPTATION_STANDARD.md
+- docs/systems/ADVERSARY_LIFECYCLE_RECURRENCE_STANDARD.md
+- docs/systems/ADVERSARY_HIERARCHY_SUCCESSION_STANDARD.md
+- docs/systems/ADVERSARY_TERRITORY_ROUTING_STANDARD.md
+- docs/systems/ADVERSARY_PLAYER_SAFE_INTEL_STANDARD.md
+- docs/systems/GATE_TWELVE_ADVERSARY_PROOF_PACKET.md
+
+V09 first-pass quota: 8 / 8.
+
+Consumes:
+- V05 persistent character/memory/knowledge/relationship/faction contracts;
+- V08 tactical aftermath;
+- world routes/locations;
+- save/migration authority.
+
+Feeds:
+- future persistent-adversary runtime;
+- world/faction consequences;
+- tactical recurrence;
+- player-safe People/intel/map surfaces;
+- D-032 adversary migration packet.
+
+Phase 1 does not depend on implementing V09.
