@@ -200,3 +200,27 @@ Status: **FIRST-PASS QUOTA SATISFIED / CURRENT TRAIN-RECOVER-PRACTICE FOUNDATION
 Phase 1 requirement #8 now has an existing authored proof candidate: TRAIN_POWER_FUNDAMENTALS_TWO_HOURS at TRACE_CHAMBER. Exact-head execution/save-load/Android verification remains pending.
 
 Breadth direction after V10 closure: V07 Items/Economy/Loot because Phase 1 requirement #6 already has current inventory/equipment behavior but the larger item/economy documentation layer is under-covered and feeds combat, activities, world resources, and final UI.
+
+
+## 12. Live first-pass coverage checkpoint — V07 items/economy/loot
+
+V07 now has **10 / 10 minimum canonical first-pass units**:
+
+1. ITEM_ECONOMY_LOOT_MASTER_PLAN.md
+2. ITEM_RECORD_CATALOG_STANDARD.md
+3. INVENTORY_STACK_CONTAINER_STANDARD.md
+4. EQUIPMENT_SLOT_LOADOUT_STANDARD.md
+5. ITEM_QUALITY_RARITY_CONDITION_STANDARD.md
+6. MATERIAL_RESOURCE_ITEM_PROVENANCE_STANDARD.md
+7. LOOT_REWARD_DISTRIBUTION_STANDARD.md
+8. ECONOMY_CURRENCY_PRICING_STANDARD.md
+9. VENDOR_SERVICE_OWNERSHIP_STANDARD.md
+10. GATE_TWELVE_PHASE1_ITEM_EQUIPMENT_PACKET.md
+
+Status: **FIRST-PASS QUOTA SATISFIED / CURRENT INVENTORY-EQUIPMENT FOUNDATION EXISTS / FULL ECONOMY AND LARGE CATALOGS PENDING.**
+
+Phase 1 requirement #6 has a current proof path using the existing starting inventory, equip/unequip behavior, Maintenance Seal consumption, Dead Relay acquisition, projection and save/load.
+
+Exact-head regression/build/device evidence remains separate.
+
+Breadth direction after V07 closure: **V09 Persistent Adversaries / World Memory**. V05 and V08 now provide the social and tactical prerequisites needed to document that domain without cloning a branded external system.
