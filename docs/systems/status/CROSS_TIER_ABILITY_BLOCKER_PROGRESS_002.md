@@ -24,3 +24,17 @@ Next shared work:
 4. implementation mapping only after design coherence.
 
 None of these standards bulk-promotes Wave-001 calibration proposals.
+
+### Energy child standards
+
+Materialized:
+- `LIGHTNING_CONDUIT_THROUGHPUT_PATH_SAFETY_STANDARD.md`;
+- `MOMENTUM_BANK_CAPTURE_RESERVE_RELEASE_STANDARD.md`;
+- `ENERGY_DEVOUR_SOURCE_WHITELIST_OUTPUT_STANDARD.md`.
+
+These now resolve major non-numeric child structure for:
+- electrical routing;
+- kinetic capture/release;
+- generalized energy compatibility/output authorization.
+
+Remaining work is dominated by numeric calibration, final owner decisions on provisional choices, and world/institution integration.
