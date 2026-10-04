@@ -2,10 +2,13 @@
 
 Status: **PROVISIONAL CROSS-TIER DESIGN STANDARD / NOT CANON / NOT IMPLEMENTED**
 
+Parent:
+- `WORLD_SIMULATION_TIME_AND_DURATION_STANDARD.md`
+
 Purpose: define shared terminology for Temporal Drag, Causal Mark, Time Partition, and Event Reversal.
 
 ## Core model
-- The game retains one authoritative monotonic `world_time`.
+- The game retains one authoritative monotonic `world_time`; durable target semantics and the current `time_minutes` compatibility field are governed by `WORLD_SIMULATION_TIME_AND_DURATION_STANDARD.md`.
 - Temporal Drag is a bounded local process-rate effect; it does not move the global clock backward.
 - Time Partition is subjective processing; external world time and ordinary body mechanics remain authoritative.
 - Causal Mark records one approved property and may restore that property at the current world time.
