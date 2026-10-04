@@ -68,6 +68,35 @@ Materialized:
 - `PASSIVE_NUMERIC_CALIBRATION_PILOT_001.md` — parameterizes representative passives while leaving values TBD;
 - `STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md` — explicit record-by-record canon review shape.
 
+## Record-level normalization milestone
+
+Materialized:
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_INDEX.md`;
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_A.md`;
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_B.md`;
+- `PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_C.md`.
+
+Coverage:
+- **230 / 230 passive records** now have conceptual owner, primary effect stage, conceptual write target, qualification evidence class, and bounded effect recorded.
+
+This is conceptual design mapping only; no runtime module/field is claimed.
+
+## Knowledge reconciliation waves
+
+Materialized:
+- `PASSIVE_KNOWLEDGE_RECONCILIATION_WAVE_A_0004_0008_0010.md` — 60 highest-priority rows;
+- `PASSIVE_KNOWLEDGE_RECONCILIATION_WAVE_B_0003_0009.md` — 40 institutional-asymmetry rows;
+- `PASSIVE_KNOWLEDGE_RECONCILIATION_WAVE_C_FALSE_BELIEFS_0005.md` — 20 concrete candidate false-belief rows.
+
+Compact registry remains unchanged pending world evidence and explicit review.
+
+## World integration family coverage
+
+Materialized:
+- `PASSIVE_WORLD_INTEGRATION_ROLE_CLASS_MATRIX_WAVE_001.md`.
+
+All 23 passive families now have family-level role-class relevance mapped without inventing named institutions.
+
 ## World/canon preparation
 
 Materialized:
@@ -79,12 +108,13 @@ No named institution was invented and no record was canon-promoted.
 
 ## Next work
 
-1. extend family-level state ownership into record-level owner/write-target assignments;
-2. reconcile individual flagged knowledge rows using world-role evidence;
-3. begin role-class world integration for mature records without inventing named institutions;
+1. normalize per-record read dependencies and same-term overlap sets;
+2. resolve knowledge Wave-A/B/C rows against role-class/world evidence;
+3. progress selected records from family role classes toward actual world entities only when parent world docs support them;
 4. expand numeric parameterization after base-system units are documented;
-5. run canon-promotion dry-review packets without auto-promoting;
-6. map implementation only after design coherence.
+5. run additional canon dry-review packets;
+6. continue shared ability child-rule completion;
+7. map implementation only after design coherence.
 
 ## Stop condition
 
