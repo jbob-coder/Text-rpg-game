@@ -501,3 +501,23 @@ Remaining:
 - final APK destination migration map.
 
 No Android implementation or gameplay behavior changed in this documentation pass.
+
+
+## 2026-10-04 D-026 / D-021 Android consumer exact-source pass
+
+Added:
+- `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md`.
+
+Current exact-source documentation now maps:
+- all 18 `GameSnapshot` fields;
+- Python player-safe payload groups;
+- Kotlin bridge mapping;
+- ViewModel action paths;
+- Story/Map/Character/Stats/Inventory/Quests/Settings consumers;
+- direct pixel-catalog dependencies in core screens;
+- current test-source coverage;
+- transitional actor inference, relay visual state and travel transition.
+
+D-026/D-021 remain in progress because future target projections, per-entry asset zero-consumer evidence and complete navigation/temporary-state audit remain open.
+
+No Android/Python runtime files changed and no tests/builds were executed.
