@@ -427,3 +427,29 @@ The audit records KEEP / EXTEND / REWORK / replacement-direction dispositions wh
 D-006/D-042 remain in progress because cross-branch survivor reconciliation, field-level Android consumer mapping, per-catalog consumer/deprecation proof, D-029 asset equivalence/provenance and D-044 remaining Class-C extraction are still open.
 
 No runtime or content files changed and no tests/builds were executed by this documentation pass.
+
+
+## 2026-10-04 D-042 deep source audit checkpoint
+
+Added:
+- `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`.
+
+Audited source HEAD:
+- `docs/master-game-development-program@d0382aaf6cca2920a7f315d08153ac6b0dddc5dd`.
+
+Current-head source inventory captured:
+- 19 Python engine modules;
+- 21 Python test files;
+- 2 authored content JSON files;
+- 35 Android main Kotlin files;
+- 27 Android JVM/unit-test files;
+- 3 Android instrumented-test files;
+- 24 runtime PNGs;
+- 2 workflows;
+- 5 Android build/manifest configuration files.
+
+The audit records the 17-field durable GameState/save boundary, schema v1 behavior, current vertical-slice record counts, and source-level disposition guidance.
+
+D-042 remains **IN_PROGRESS** because line-by-line Android consumer mapping, catalog consumers, full asset lineage, cross-branch survivor migration and zero-consumer/deprecation proof remain open.
+
+No runtime tests/builds were executed and no gameplay/application source was changed by this audit.
