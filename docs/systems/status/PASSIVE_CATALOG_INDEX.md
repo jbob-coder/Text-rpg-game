@@ -271,6 +271,22 @@ Result:
 - readiness states prevent passive numbers from defining missing base systems backwards;
 - final values remain TBD.
 
+## Canonical resolver qualitative fixture coverage
+
+Evidence:
+- `STATUS_CORE_RESOURCE_PARENT_FIXTURE_BATCH_001_STAMINA_FOCUS.md`
+- `STATUS_PARENT_FIXTURE_BATCH_002_PROCEDURE_ACTION_PRECISION.md`
+- `STATUS_PARENT_FIXTURE_BATCH_003_KNOWLEDGE_EVIDENCE_INTERPRETATION.md`
+- `STATUS_PARENT_FIXTURE_BATCH_004_SPATIAL_TRAVEL_CONTEST.md`
+- `STATUS_PARENT_FIXTURE_BATCH_005_FATIGUE_ENVIRONMENT_RECOVERY_INSTITUTION.md`
+- `PASSIVE_CANONICAL_RESOLVER_FIXTURE_READINESS_INDEX_WAVE_001.md`
+
+Result:
+- **20 / 20 canonical shared resolver families** have qualitative parent fixtures;
+- every resolver has ordinary/adverse/favorable/boundary test structure;
+- none is yet range-certified or executable;
+- passive coefficients remain `TBD`.
+
 ## Gate Twelve local world evidence
 
 Evidence:
