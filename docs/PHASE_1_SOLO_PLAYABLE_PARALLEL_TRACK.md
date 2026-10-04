@@ -297,3 +297,22 @@ Track B combat update:
 - content IDs/opponent identities remain proposed and must not be treated as canon until approved.
 
 Next breadth dependency: V10 Activities/Life Simulation for requirement 8.
+
+
+## 13. Phase 1 readiness checkpoint — activities/life loop
+
+Requirement 8 (one life/activity action):
+- selected proof action: TRAIN_POWER_FUNDAMENTALS_TWO_HOURS;
+- authored location: TRACE_CHAMBER;
+- current skill_train effect: **EXISTS**;
+- current train/time/resource primitives: **EXIST**;
+- activity schema/time/training documentation: **CONTRACT-READY**;
+- save/load + exact-head regression execution: **PENDING**;
+- final Android contextual activity verification: **PENDING**.
+
+Status:
+**CURRENT RUNTIME FOUNDATION EXISTS / DOCUMENTATION-READY / FINAL EXACT-HEAD VERIFICATION PENDING.**
+
+This requirement does not need a new job/profession system for Phase 1.
+
+Next breadth dependency: V07 Items/Economy/Loot.
