@@ -103,12 +103,39 @@ Open blockers:
 - Mass Inversion tag/end-state physics;
 - Energy Devour whitelist/reserve/output rules.
 
+### Epic ability slice 001–004
+
+Materialized:
+- `calibration/PRIMARY_ABILITY_DETAIL_EPIC_001_004.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_EPIC_001_004.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_EPIC_001_004.md`
+- `calibration/ABILITY_COUNTER_DETAIL_EPIC_001_004.md`
+
+Completed at detailed-document layer:
+- 4 deep ability records;
+- 16 detailed techniques;
+- 4 awakening detail records;
+- 4 counterplay detail records.
+
+Open:
+- compact registry-row individualization;
+- causal property/coupling rules;
+- singularity physical model;
+- biological template/reversion rules;
+- spatial geometry/reference rules;
+- numeric/world integration.
+
 ### Passive progress
 
 Physical 0001–0010:
 - deep-authored;
 - knowledge refined;
 - scaling/caps/state ownership documented.
+
+Recovery 0001–0010:
+- deep-authored;
+- scaling/caps/state ownership documented;
+- overlap/stacking requirements recorded.
 
 Open:
 - numeric coefficients;
@@ -117,9 +144,9 @@ Open:
 
 ### Next order
 
-1. **Deep-author Epic abilities 001–004.**
-2. **Deep-author Recovery passives 0001–0010.**
-3. Continue Super Epic → Legendary → Prime Legendary → Unique.
+1. **Deep-author Super Epic abilities 001–003.**
+2. **Deep-author Movement passives 0001–0010.**
+3. Continue Legendary → Prime Legendary → Unique.
 4. Continue remaining passive families.
 5. Perform world integration after enough accepted records exist.
 6. Defer runtime implementation until design coherence.
