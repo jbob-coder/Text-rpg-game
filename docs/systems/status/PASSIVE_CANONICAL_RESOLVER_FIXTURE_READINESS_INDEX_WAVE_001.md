@@ -36,14 +36,14 @@ None is yet certified:
 
 | Canonical resolver | Qualitative fixture evidence | Current readiness | Main blocker before range fixtures |
 |---|---|---|---|
-| RESOLVER_KNOWN_INFORMATION_RECALL | Batch 003 | QUALITATIVE_FIXTURES_READY | recall/error resolution form and range |
-| RESOLVER_AUDITORY_SOURCE_SEPARATION | Batch 003 | QUALITATIVE_FIXTURES_READY | sensory signal/noise and confidence representation |
+| RESOLVER_KNOWN_INFORMATION_RECALL | Batch 003 | QUALITATIVE_FIXTURES_READY | domain recall difficulty/error ranges; resolution-mode semantics now defined |
+| RESOLVER_AUDITORY_SOURCE_SEPARATION | Batch 003 | QUALITATIVE_FIXTURES_READY | sensory signal/noise and domain error/confidence ranges; confidence semantics now defined |
 | RESOLVER_ENGAGEMENT_DISTANCE_JUDGMENT | Batch 004 | QUALITATIVE_FIXTURES_READY | authoritative distance/reach representation |
 | RESOLVER_IMMEDIATE_THREAT_PRIORITIZATION | Batch 003 | QUALITATIVE_FIXTURES_READY | threat-candidate/decision difficulty model |
 | RESOLVER_PROCEDURE_COMPLIANCE_ERROR | Batch 002 | QUALITATIVE_FIXTURES_READY | procedure error resolution and version/authorization model |
-| RESOLVER_PROLONGED_FOCUS_DRAIN | Batch 001 | QUALITATIVE_FIXTURES_READY | Focus scale plus authoritative task/time interval |
+| RESOLVER_PROLONGED_FOCUS_DRAIN | Batch 001 | QUALITATIVE_FIXTURES_READY | target Focus maximum/spend/drain ranges; world-time semantics now defined |
 | RESOLVER_PRACTICED_PROCEDURE_OVERHEAD | Batch 002 | QUALITATIVE_FIXTURES_READY | action/procedure timing representation |
-| RESOLVER_ANALYTICAL_CHECK_DISCIPLINE | Batch 003 | QUALITATIVE_FIXTURES_READY | evidence/check error resolution form |
+| RESOLVER_ANALYTICAL_CHECK_DISCIPLINE | Batch 003 | QUALITATIVE_FIXTURES_READY | domain analytical difficulty/error ranges; resolution modes now defined |
 | RESOLVER_SYSTEM_ANOMALY_RECOGNITION | Batch 003 | QUALITATIVE_FIXTURES_READY | observable Status-event/anomaly schema |
 | RESOLVER_EQUIPMENT_RETENTION | Batch 004 | QUALITATIVE_FIXTURES_READY | physical contest scale/equivalent |
 | RESOLVER_COMMAND_STRUCTURE_FAMILIARITY | Batch 005 | QUALITATIVE_FIXTURES_READY | actual institution/role/protocol model |
@@ -51,7 +51,7 @@ None is yet certified:
 | RESOLVER_TRAVEL_EFFICIENCY | Batch 004 | QUALITATIVE_FIXTURES_READY | travel distance/time/Stamina parent model |
 | RESOLVER_FATIGUE_PERFORMANCE_DECAY | Batch 005 | QUALITATIVE_FIXTURES_READY | fatigue accumulation/recovery model |
 | RESOLVER_OBSERVED_AUDIENCE_CLIENT_CUE_INTERPRETATION | Batch 003 | QUALITATIVE_FIXTURES_READY | social cue/evidence interpretation model |
-| RESOLVER_STAMINA_RECOVERY_OPPORTUNITY | Batch 001 | QUALITATIVE_FIXTURES_READY | Stamina max/spend/recovery ranges and time semantics |
+| RESOLVER_STAMINA_RECOVERY_OPPORTUNITY | Batch 001 | QUALITATIVE_FIXTURES_READY | target Stamina maximum/spend/recovery ranges; world-time semantics now defined |
 | RESOLVER_SLEEP_RESTORATION | Batch 005 | QUALITATIVE_FIXTURES_READY | sleep duration/quality and resource-recovery model |
 | RESOLVER_HEAT_PERFORMANCE_PENALTY | Batch 005 | QUALITATIVE_FIXTURES_READY | environment heat/exposure curve/bands |
 | RESOLVER_COLD_PERFORMANCE_PENALTY | Batch 005 | QUALITATIVE_FIXTURES_READY | environment cold/exposure curve/bands |
@@ -101,11 +101,16 @@ It does not mean:
 
 The next phase should build **range fixtures** in dependency order rather than assigning passive numbers directly.
 
-Recommended order:
-1. authoritative world/simulation time;
-2. core Stamina/Focus ranges and ordinary transaction ranges;
-3. action/procedure timing and contest representation;
-4. evidence/error/confidence representation;
+Completed semantic foundations:
+- authoritative world/simulation time;
+- core resource scale/transaction semantics;
+- error/confidence/resolution-mode semantics.
+
+Recommended next order:
+1. core Stamina/Focus target range bands and ordinary transaction ranges;
+2. physical distance/contest/precision representation;
+3. action/procedure duration ranges;
+4. domain-specific evidence/error/confidence ranges;
 5. travel/fatigue/environment;
 6. social/institution-specific ranges;
 7. passive coefficient simulation and caps.
