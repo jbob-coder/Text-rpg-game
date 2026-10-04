@@ -260,7 +260,7 @@ Evidence:
 
 Next passive work:
 1. move role-class knowledge recommendations toward actual entity/region/time evidence where supported;
-2. document base-system terms/units needed to calibrate the 20 canonical shared passive resolvers;
+2. define base-system ranges/scenario anchors for the 20 canonical passive resolver terms before assigning coefficients;
 3. move selected role-class mappings to actual world entities only when supported;
 4. broader numeric parameterization;
 5. additional canon dry-review packets;
@@ -290,6 +290,15 @@ Knowledge reconciliation:
 - Wave A: 60 rows queued/review-dispositioned;
 - Wave B: 40 rows require concrete institutional/classification justification;
 - Wave C: 20 candidate false-belief records authored with provenance still required.
+
+Base-term/unit preparation:
+- Status abstract unit taxonomy: COMPLETE baseline;
+- 20 / 20 canonical shared passive resolvers mapped to required base terms/unit classes;
+- final scales/coefficients remain open.
+
+Evidence:
+- `STATUS_BASE_RESOLUTION_TERM_UNIT_TAXONOMY.md`;
+- `PASSIVE_CANONICAL_RESOLVER_BASE_TERM_MAP_WAVE_001.md`.
 
 Shared passive resolver semantics:
 - 38 SAME_TERM_CAPPED edges normalized;
