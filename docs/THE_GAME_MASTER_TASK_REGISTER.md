@@ -152,15 +152,19 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-02 07:32 AST`
 
 ### TASK D-019 — Reproducible documentation/world/asset inventory
-- STATUS: `IN_PROGRESS`
+- STATUS: `IN_PROGRESS / EXACT STRUCTURAL SNAPSHOT REFRESHED`
 - PRIORITY: `P0`
 - CURRENT:
-  - `docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-02.md` records exact recursive-tree structural counts for the audited program HEAD.
-  - `tools/documentation_inventory.py` provides a deterministic standard-library local inventory path for files, extensions, Markdown words, documentation families and test-source files.
+  - `docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-04.md` records exact recursive-tree structural counts for source HEAD `991cd9b29ea0752fa1c303a19e8f210713efe4b5`.
+  - `docs/evidence/repository_inventory_2026-10-04.json` persists the same machine-readable checkpoint.
+  - exact source-head structure: 490 tracked files; 320 repository Markdown files; 318 under `docs/`; 21 structured documentation paths; 24 PNGs; 42 Python files; 68 Kotlin/KTS files; 51 Python/Kotlin test-source paths.
+  - bounded structured counts now include 104 asset-manifest rows / 95 unique asset IDs, the repository-owned 1,019-record Status Wave-001 structural audit, and the 9-node / 8-edge Gate Twelve baseline.
+  - `tools/documentation_inventory.py` remains the deterministic complete-checkout path for word counts and broader local inventory.
 - REMAINING:
-  - execute/persist the tool from a complete checkout of the exact program HEAD;
-  - add structured world/domain record extractors;
-  - add asset-stage/manifest counts;
+  - execute/persist the tool from a complete checkout of the exact current program HEAD;
+  - publish exact current-head Markdown word/heading counts;
+  - add generalized structured world/domain record extractors beyond already audited packets;
+  - reconcile asset-stage counts against provenance authority rather than last-seen manifest status;
   - separate executed-test evidence from test-source counts;
   - define/confirm how owner numeric targets map to reproducible units.
 - OUTPUT: reproducible counts for active docs, words, records, assets, world entities, tasks, tests and evidence without assuming the owner's ambiguous numeric units.
