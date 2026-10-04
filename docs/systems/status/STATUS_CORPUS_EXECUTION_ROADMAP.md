@@ -266,8 +266,8 @@ Record-level read-dependency mapping and the 93-edge overlap adjudication are al
 
 ### Next order
 
-1. **Use confirmed Gate Twelve evidence to adjudicate supported local knowledge/world links.**
-2. **Define parent-system numeric ranges/test fixtures behind the 20 canonical shared passive resolvers.**
+1. **Materialize parent-system range/test-fixture batches for sufficiently mature base terms.**
+2. **Use confirmed Gate Twelve evidence to adjudicate supported local knowledge/world links.**
 3. **Progress named world-entity links only after parent-world canon decisions.**
 4. Run additional canon-review dry packets.
 5. Continue shared ability child-rule completion.
@@ -315,12 +315,31 @@ Result:
 - all 20 canonical shared passive resolvers now have qualitative BASELINE/FAVORABLE/ADVERSE/BOUNDARY anchors;
 - final scales and coefficients remain open.
 
+### Parent-system fixture requirements
+
+Materialized:
+- `PASSIVE_CANONICAL_RESOLVER_PARENT_FIXTURE_REQUIREMENTS_WAVE_001.md`.
+
+Result:
+- 20 / 20 canonical passive resolver families have required parent-fixture contracts;
+- numeric readiness states are explicit;
+- passive coefficients remain blocked until parent ranges/test fixtures exist.
+
 ### Gate Twelve evidence-backed world integration
 
 Materialized:
 - `STATUS_GATE_TWELVE_LOCAL_WORLD_INTEGRATION_EVIDENCE_PILOT.md`.
 
 This anchors Status world integration to confirmed local Gate Twelve functions without promoting proposal-only Arden parent-world names.
+
+### Gate Twelve evidence adjudication
+
+Materialized:
+- `STATUS_GATE_TWELVE_EVIDENCE_BACKED_KNOWLEDGE_WORLD_ADJUDICATION_001.md`.
+
+Result:
+- local civic/maintenance/records/evacuation/restricted-access evidence now constrains selected Status world-integration claims;
+- no named parent institution or proposal-only parent-world entity was promoted.
 
 ### World integration preparation
 
@@ -349,6 +368,30 @@ Still open:
 - detailed loss equations;
 - world licensing/infrastructure policy.
 
+### Cryo Sink child-rule progress
+
+Materialized:
+- `CRYO_SINK_THERMAL_TRANSFER_RESERVE_STANDARD.md`.
+
+Resolved structurally:
+- thermal-energy rather than “cold” storage;
+- extraction accounting;
+- material/insulation and transfer-path behavior;
+- natural conduction/spillover;
+- Precision/Sustained/Emergency technique envelopes;
+- thermal-shock category;
+- capacity/input-rate separation;
+- no active thermal-release route in current Wave-001 techniques;
+- save/load and cross-ability isolation.
+
+Still open:
+- thermal unit/model;
+- capacity/rates/efficiency;
+- reserve lifecycle/unloading;
+- overload thresholds;
+- living-target policy;
+- world medical/industrial/legal integration.
+
 ### Canon-review dry runs
 
 Materialized:
@@ -362,6 +405,10 @@ Results:
 Additional dry runs:
 - `CANON_REVIEW_DRY_RUN_PASSIVE_TEC_0006.md` — Repair Economy: proposed eventual approval with open numeric/world-provenance fields;
 - `CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0002.md` — Credential Navigation: return for refinement until credential/authorization world semantics exist.
+
+Additional dry runs:
+- `CANON_REVIEW_DRY_RUN_PASSIVE_PRO_0008.md` — Documentation Discipline: RETURN_FOR_REFINEMENT;
+- `CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0005.md` — Clearance Awareness: RETURN_FOR_REFINEMENT.
 
 No record was canon-promoted.
 
