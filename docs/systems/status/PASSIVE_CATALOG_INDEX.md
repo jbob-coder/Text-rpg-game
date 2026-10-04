@@ -134,8 +134,6 @@ Open:
 - named schools/professions/institutions/history;
 - canon promotion.
 
-Next passive slice: **Mental/Will 0001–0010**.
-
 ## Weapon Familiarity refinement
 
 Evidence:
@@ -151,6 +149,27 @@ Wave-001 weapon-familiarity passives now have:
 - knowledge-posture audit.
 
 Next passive family: **Defensive Adaptation 0001–0010**.
+
+## Wave-001 Phase-C family coverage milestone
+
+All **23 / 23 passive families** now have a Phase-C family baseline.
+
+See:
+- `PASSIVE_WAVE_001_PHASE_C_FAMILY_COVERAGE_AUDIT.md`
+- `PASSIVE_PHASE_C_PROGRESS_TRACKER.md`
+- `PASSIVE_CROSS_FAMILY_COMPOSITION_STANDARD.md`
+- `STATUS_NUMERIC_CALIBRATION_FRAMEWORK.md`
+
+This means every family now has bounded effect/detail coverage, state/scaling direction, and knowledge review at the current Phase-C baseline.
+
+It does **not** mean:
+- canon promotion;
+- final numbers;
+- implementation readiness;
+- final world integration;
+- resolved cross-family stacking.
+
+Next work is normalization, numeric calibration, world integration, and explicit canon review.
 
 ## Audit
 
