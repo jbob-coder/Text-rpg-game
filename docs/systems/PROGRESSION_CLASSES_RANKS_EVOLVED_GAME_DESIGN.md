@@ -938,24 +938,49 @@ Civic/legal/social position recognized by a society.
 
 Perception by specific NPCs, groups, settlements, or institutions.
 
-These must never be compressed into a single displayed “Level.”
+These namespaces remain distinct even though the Status UI now includes a real global **Level**. Level must not be mistaken for profession grade, faction rank, institutional authority, class progression, or reputation.
 
 ---
 
-# 15. Global player level policy
+# 15. Global player Level policy — owner-canon update
 
-The target design does **not** use global player level as the authority for power.
+The evolved target now includes a real in-universe **Level** as part of the human Status UI.
 
-A summary level may eventually exist for:
+Owner-established rules:
 
-- onboarding;
-- broad content guidance;
-- quick save-slot comparison;
-- matchmaking-like debug categorization if ever required.
+- all humans receive the Status UI at age 18;
+- Level progression is tied to kills, including beasts and PK;
+- reaching Level 100 is extraordinarily rare;
+- only two humans in known history have reached Level 100 so far;
+- Level 100 creates the exceptional possibility of changing/replacing the otherwise fixed awakened primary ability.
 
-But it must not determine all stats, unlock all content, or force the world to scale.
+Level is therefore not merely a UI summary.
 
-The true character is the combination of attributes, skills, abilities, techniques, class development, equipment, conditions, knowledge, reputation, and world access.
+However, Level does **not** replace the rest of the progression network and must not automatically determine every capability.
+
+The true character remains the combination of:
+
+- Level;
+- attributes;
+- skills;
+- primary ability;
+- ability mastery and techniques;
+- passives;
+- class development;
+- profession;
+- equipment;
+- conditions;
+- knowledge;
+- reputation;
+- faction/institutional status;
+- world access.
+
+The full XP curve, kill-credit rules, assists/party contribution, anti-exploit behavior, level rewards, and exact Level-100 transition are owned by the Status/Abilities/Passives documentation program.
+
+Authority:
+- `STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`
+
+The world still must not automatically scale to Jack's Level.
 
 ---
 
