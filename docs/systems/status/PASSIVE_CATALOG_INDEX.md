@@ -287,6 +287,17 @@ Result:
 - none is yet range-certified or executable;
 - passive coefficients remain `TBD`.
 
+## Range-fixture eligibility
+
+Evidence:
+- `PASSIVE_CANONICAL_RESOLVER_RANGE_FIXTURE_ELIGIBILITY_AUDIT_WAVE_001.md`
+
+Result:
+- qualitative parent fixtures are complete for 20 / 20 canonical shared resolvers;
+- current range-fixture eligibility is **0 / 20** because parent system scales are not yet authoritative;
+- existing content examples cannot be promoted into universal balance scales;
+- passive coefficients remain blocked.
+
 ## Gate Twelve local world evidence
 
 Evidence:
