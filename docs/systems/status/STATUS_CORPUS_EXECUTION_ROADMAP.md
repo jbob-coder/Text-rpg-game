@@ -335,6 +335,20 @@ Result:
 - transaction deduplication, caps/floors, eligibility, save/load, and cross-resource isolation are specified;
 - final ranges and passive coefficients remain open.
 
+### Qualitative parent-fixture baseline complete
+
+Materialized:
+- `STATUS_PARENT_FIXTURE_BATCH_002_PROCEDURE_ACTION_PRECISION.md`;
+- `STATUS_PARENT_FIXTURE_BATCH_003_KNOWLEDGE_EVIDENCE_INTERPRETATION.md`;
+- `STATUS_PARENT_FIXTURE_BATCH_004_SPATIAL_TRAVEL_CONTEST.md`;
+- `STATUS_PARENT_FIXTURE_BATCH_005_FATIGUE_ENVIRONMENT_RECOVERY_INSTITUTION.md`;
+- `PASSIVE_CANONICAL_RESOLVER_FIXTURE_READINESS_INDEX_WAVE_001.md`.
+
+Result:
+- all 20 canonical shared passive resolver families now have qualitative parent fixtures;
+- next numeric work is range-fixture construction, not additional qualitative scaffolding;
+- final coefficients remain blocked.
+
 ### Gate Twelve evidence-backed world integration
 
 Materialized:
@@ -377,6 +391,31 @@ Still open:
 - overload thresholds;
 - detailed loss equations;
 - world licensing/infrastructure policy.
+
+### Time Partition child-rule progress
+
+Materialized:
+- `TIME_PARTITION_SUBJECTIVE_PROCESSING_ACTION_LATENCY_STANDARD.md`.
+
+Resolved structurally:
+- one monotonic world clock;
+- subjective-processing versus external-world rate separation;
+- sensory-information boundary;
+- no automatic physical speed;
+- decision queue/staleness and action revalidation;
+- cognitive versus physical action latency;
+- T1–T4 technique behavior;
+- strain/recovery category;
+- Temporal Drag/Bioelectric Overdrive boundaries;
+- save/load and player-safe projection.
+
+Still open:
+- subjective acceleration representation;
+- sensory-transduction detail;
+- cognitive saturation model;
+- strain/recovery thresholds;
+- numeric duration/cost;
+- world/institution history.
 
 ### Cryo Sink child-rule progress
 
