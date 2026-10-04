@@ -172,7 +172,6 @@ Open blockers:
 - probability-resolution model;
 - numeric calibration and world integration.
 
-Next ability slice: **Legendary 001–002**.
 
 ## Legendary deep-authoring
 
@@ -199,7 +198,36 @@ Open blockers:
 - gate anchor/reference/transit/energy semantics;
 - numeric calibration and world integration.
 
-Next ability slice: **Prime Legendary 001**.
+
+## Prime Legendary deep-authoring
+
+- `calibration/PRIMARY_ABILITY_DETAIL_PRIME_LEGENDARY_001.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_PRIME_LEGENDARY_001.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_PRIME_LEGENDARY_001.md`
+- `calibration/ABILITY_COUNTER_DETAIL_PRIME_LEGENDARY_001.md`
+- `PRIME_LEGENDARY_ABILITY_RARITY_OVERLAP_AUDIT_001.md`
+
+Prime Legendary 001 now has:
+- 1 reconstruction-oriented ability record;
+- 4 individualized compact technique rows;
+- 4 detailed technique records;
+- 1 individualized awakening profile;
+- 1 individualized counter profile;
+- explicit Legendary↔Prime Legendary boundary treatment.
+
+Key boundary:
+- Event Reversal / World Gate perform extraordinary bounded operations.
+- Law Silence intervenes at the level of one precisely modeled interaction rule.
+
+Open blockers:
+- targetable-law schema;
+- protected-rule policy;
+- knowledge-validation model;
+- linked-rule/rebound semantics;
+- system-strain/recovery model;
+- numeric and world integration.
+
+Next ability slice: **Unique 001**.
 
 ## Integration
 
