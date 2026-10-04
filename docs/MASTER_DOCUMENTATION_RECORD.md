@@ -231,6 +231,25 @@ Concrete current test gaps are now explicit for:
 
 This narrows D-026/D-021 remaining work to member/asset-ID consumer proof, future projection migration, final APK destination mapping and later exact-head execution evidence.
 
+## 2.5 D-044 reconciliation closure
+
+The repository already contained completion evidence in `docs/PR33_CLASS_C_UNIQUE_REQUIREMENT_EXTRACTION_2026-10-03.md`, including the explicit result:
+
+`D-044 CLASS-C EXTRACTION = COMPLETE`.
+
+The master task register has now been reconciled to that evidence.
+
+What is complete:
+- shared-file authority reconciliation;
+- Class-C / EXTRACT UNIQUE source inspection;
+- selective migration of unique non-conflicting requirements;
+- rejection/blocking of duplicate or conflicting program authority.
+
+What remains separate:
+- any future PR #33 merge/rebase/retarget decision;
+- branch deletion/promotion;
+- implementation survivor migration under D-020.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
@@ -363,8 +382,8 @@ Execution of the final APK reconstruction remains intentionally gated.
 2. **Finish the reproducible current-head inventory (D-019).**  
    The repository has an inventory tool and historical exact snapshots, but current exact word/record/asset-stage/test-evidence totals still need a complete-checkout execution and persisted result.
 
-3. **Finish PR #33 moving-base reconciliation (D-044).**  
-   Shared-file reconciliation is complete; remaining Class-C / EXTRACT UNIQUE documents must be inspected for genuinely unique requirements.
+3. **PR #33 moving-base requirement reconciliation (D-044) — DONE.**  
+   Shared-file and Class-C / EXTRACT UNIQUE reconciliation is complete. Unique non-conflicting requirements were selectively migrated; duplicate/conflicting program hierarchies remain historical or blocked. This does not authorize a blind merge/rebase or PR retargeting.
 
 4. **Reconcile stale task-register text against the live tree.**  
    Example: D-046's older NEXT text names several standards as future work even though files such as `ABILITY_RARITY_STANDARD.md`, `PRIMARY_ABILITY_REGISTRY_SCHEMA.md`, `PASSIVE_REQUIREMENT_LANGUAGE.md`, `STATUS_KNOWLEDGE_VISIBILITY_STANDARD.md`, `LEVEL_AND_XP_STANDARD.md`, `AWAKENING_EVENT_STANDARD.md`, and `LEVEL_100_EXCEPTION_STANDARD.md` now exist. The task remains in progress, but its next-step list must be refreshed rather than trusted literally.
