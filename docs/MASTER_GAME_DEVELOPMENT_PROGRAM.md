@@ -107,22 +107,21 @@ The owner explicitly grants broad permission to:
 
 This permission is not permission to ignore earlier explicit prohibitions.
 
-## 2.1.1 Current documentation-phase execution override
+## 2.1.1 Current execution authorization — updated 2026-10-04 AST
 
-The broad permissions above describe what may be authorized in later implementation/production phases. They are **not standing authorization to perform those actions during the current documentation-first phase**.
+The owner has now **explicitly authorized transition beyond documentation-only work** and granted broad project-development execution permission.
 
-Until the owner explicitly authorizes a transition from documentation into asset production or implementation:
+Current interpretation:
+- documentation remains a required authority layer and must stay synchronized with implementation;
+- bounded implementation, refactoring, tooling, testing, runtime work, and asset production may proceed when they serve the current objective;
+- agents do not need a second routine confirmation merely because work crosses from documentation into implementation or asset production;
+- changes should remain evidence-driven, reversible where practical, migration-aware, and performed on appropriate working branches;
+- implementation must not silently contradict current domain contracts; when design changes, update the contract and migration record;
+- broad permission does not convert destructive, externally consequential, security-sensitive, financial, or repository-governance actions into routine work.
 
-- **do not create new runtime assets**;
-- **do not modify, redraw, replace, regenerate, export, integrate, promote, or delete existing runtime assets**;
-- **do not move candidate/provisional art into production or canon state**;
-- **do not start an asset-production batch merely because its brief, contract, or production order is documented**;
-- asset work in the current phase is limited to **inspection, inventory, provenance, classification, requirements, specifications, creation instructions, composition rules, reuse rules, migration planning, QA criteria, and future production sequencing**;
-- documentation may state exactly how a future asset must be created, replaced, validated, or integrated without performing that production work;
-- historical asset-production evidence may be audited and preserved, but it does not reopen production;
-- an exception requires a new, explicit owner instruction authorizing the specific production/implementation work.
+The earlier documentation-only asset/implementation freeze is therefore **superseded as a current-phase restriction**. Its historical purpose remains relevant: documentation and contracts must exist before large or destructive expansion.
 
-This current-phase override is the controlling interpretation whenever older task text, production ledgers, roadmaps, or broad permissions could otherwise be read as permission to continue making assets.
+Standing safeguards in section 2.2 and repository-level approval boundaries remain in force.
 
 ## 2.2 Standing prohibitions still apply
 
