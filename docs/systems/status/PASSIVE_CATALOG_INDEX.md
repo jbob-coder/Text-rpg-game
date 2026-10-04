@@ -104,7 +104,37 @@ Open:
 - named schools/professions/institutions/history;
 - canon promotion.
 
-Next passive slice: **Sensory 0001–0010**.
+## Sensory deep-authoring
+
+- `calibration/PASSIVE_DETAIL_SENSORY_0001_0010.md`
+- `PASSIVE_SENSORY_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_SENSORY_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Sensory 0001–0010 now have:
+- 10 reconstruction-oriented effect/acquisition records;
+- explicit signal-versus-interpretation boundaries;
+- scaling directions and caps;
+- hidden-progress/state-ownership model;
+- false-positive/objective-truth separation;
+- knowledge-posture audit;
+- ability-assisted sensory compatibility requirements.
+
+Knowledge review flags:
+- SEN_0003 likely over-classified;
+- SEN_0004 strongly over-classified;
+- SEN_0008 likely too unknown;
+- SEN_0010 likely over-classified.
+
+No compact knowledge row was silently rewritten.
+
+Open:
+- numeric signal/error coefficients;
+- final knowledge decisions;
+- concrete sensory pipeline/state-owner mapping;
+- named schools/professions/institutions/history;
+- canon promotion.
+
+Next passive slice: **Mental/Will 0001–0010**.
 
 ## Audit
 
