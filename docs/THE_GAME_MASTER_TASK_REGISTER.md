@@ -901,7 +901,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 
 
 ### TASK D-044 — Reconcile PR #33 moving base
-- STATUS: `DONE`
+- STATUS: `DONE — CLASS-C UNIQUE-REQUIREMENT EXTRACTION COMPLETE`
 - PRIORITY: `P0`
 - OUTPUTS:
   - `docs/PR33_MOVING_BASE_DRIFT_RECONCILIATION_2026-10-02.md`
@@ -909,19 +909,13 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - `docs/PR33_LIVE_SHARED_FILE_RECONCILIATION_2026-10-03.md`
   - `docs/PR33_CLASS_C_UNIQUE_REQUIREMENT_EXTRACTION_2026-10-03.md`
 - RESULT:
-  - shared-file authority reconciled;
-  - duplicate moving-base hierarchy rejected as parallel authority;
-  - four unique child documents migrated earlier;
-  - all seven remaining Class-C selective extraction actions are now materialized in current authorities;
-  - unit-dependent “2,000,000 separate files” machinery remains blocked;
-  - no blind merge/rebase performed.
-- FINAL LIVE REF CHECK:
-  - program: `de8c76cc08da20099671b5cd8fc5d7d7acca1920`;
-  - target: `65d2db8538c1b8302c314f2fbe9eb7a1b585b51d`;
-  - merge base: `c261b2aaf8bd978d27b46f8fea03435c0c5734d0`;
-  - compare: diverged, ahead 651 / behind 99;
-  - PR #33 open + draft + mergeable false at recheck.
-- NOTE: D-044 completion does not authorize merging PR #33. Any retarget/merge/promotion decision remains separate repository governance.
+  - shared-file reconciliation retained current program authorities;
+  - unique non-conflicting child requirements were selectively migrated;
+  - conflicting `2,000,000 separate files` interpretation remains blocked rather than silently adopted;
+  - remaining Class-C / EXTRACT UNIQUE sources were audited and their unique requirements were either migrated into current authorities or intentionally retained only as historical evidence;
+  - no whole duplicate `docs/program/*` hierarchy was imported.
+- IMPORTANT: D-044 completion does **not** authorize blind merge/rebase, PR retargeting, main promotion, or branch deletion. Those are separate repository-governance decisions.
+- COMPLETION_EVIDENCE: `docs/PR33_CLASS_C_UNIQUE_REQUIREMENT_EXTRACTION_2026-10-03.md` section 14 records `D-044 CLASS-C EXTRACTION = COMPLETE`.
 - COMPLETED_AT: `2026-10-04 AST`
 
 ## 2026-10-03 evolved-game design continuation
