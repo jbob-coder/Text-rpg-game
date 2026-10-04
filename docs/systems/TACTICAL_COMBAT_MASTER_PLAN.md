@@ -6,6 +6,9 @@ Parent authority:
 - `docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md`
 - `docs/systems/PROGRESSION_MASTER_PLAN.md`
 
+Approved presentation/interaction child authority:
+- `docs/systems/CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md`
+
 ## 1. Purpose
 
 Define an original turn-based tactical combat system for THE GAME that can integrate with the existing authoritative state, NPC memory, equipment, abilities, world map, quests, and Android client.
@@ -66,6 +69,8 @@ Encounters may be:
 
 ## 4. Tactical coordinate space
 
+**Decision update:** the baseline tactical space uses a square grid. Exact tile size, diagonal policy, encounter footprint and cost formulas remain open.
+
 Combat needs a distinct tactical coordinate layer.
 
 Requirements:
@@ -82,22 +87,13 @@ Requirements:
 
 Tactical coordinates do not replace world or district coordinates.
 
-## 5. Turn structure — decision pending
+## 5. Turn structure — direction locked, ordering detail pending
 
-Candidate models:
-- individual initiative queue;
-- alternating team activations;
-- grouped phase system;
-- hybrid initiative with reactions.
+Combat is turn-based and resolves one bounded activation context at a time.
 
-The final model must be selected after testing:
-- readability on phone;
-- AI complexity;
-- party size;
-- combat length;
-- persistent-world integration.
+Each activation uses an action-budget model. The exact initiative ordering remains open and must be selected after testing readability on phone, AI complexity, party size, combat length and persistent-world integration.
 
-Until selected, no UI should hardcode a specific turn model.
+No UI should hardcode an initiative formula until that child decision is documented.
 
 ## 6. Action economy
 
@@ -322,11 +318,9 @@ Document:
 
 ## 17. Party / squad
 
-Need to decide:
-- player controls all party members;
-- player controls Jack only and gives orders;
-- hybrid direct/AI control;
-- temporary allied NPCs.
+**Target direction:** Jack is directly controlled by the player. Recurring companions use a hybrid order + constrained-autonomy model driven by deterministic authored state such as personality, discipline, loyalty/trust, fear, injuries, goals and faction doctrine.
+
+Temporary allied NPCs may use narrower order sets. Exact command vocabulary and override limits remain future detail work.
 
 Current narrative party state does not automatically define final combat control.
 
@@ -427,8 +421,8 @@ Required:
 ## 24. Open decisions
 
 Still unresolved:
-- grid shape/size;
-- turn model;
+- exact grid size/diagonal policy;
+- exact initiative ordering;
 - exact action budget;
 - exact cover model;
 - exact accuracy display;
