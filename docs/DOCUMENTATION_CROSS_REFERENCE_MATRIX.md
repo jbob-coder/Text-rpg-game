@@ -69,6 +69,24 @@ Still needs:
 - remaining navigation/temporary-state audit;
 - implementation/equivalence evidence for future projection migrations.
 
+### `docs/IMPLEMENTATION_SURVIVOR_MIGRATION_MATRIX_2026-10-04.md`
+Purpose:
+- one final D-020 survivor/migration classification for implementation PRs #7–#31;
+- distinguish inherited current behavior from superseded historical surfaces and deferred branch-only candidates;
+- define the migration rule and owner/technical blocker for every divergent implementation line.
+
+Consumes:
+- exact PR #7–#31 reconciliation;
+- source/raster provenance;
+- Android consumer audit;
+- ambient-animation migration contract.
+
+Feeds:
+- D-029 asset promotion/provenance;
+- D-030 actor/room projection migration;
+- D-032 mechanics migration;
+- D-033/final APK teardown.
+
 ### `docs/GAME_FOUNDATION.md`
 Purpose:
 - core game direction;
