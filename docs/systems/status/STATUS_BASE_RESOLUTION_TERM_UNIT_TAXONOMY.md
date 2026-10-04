@@ -165,45 +165,67 @@ It must remain separate from:
 
 ## 2. Canonical clock requirement
 
-Before numeric implementation, THE GAME needs one authoritative simulation-time representation.
+Clock semantics are now defined in:
+- `WORLD_SIMULATION_TIME_AND_DURATION_STANDARD.md`;
+- `STATUS_WORLD_TIME_PARENT_FIXTURE_BATCH_001.md`.
 
-Documentation may express durations conceptually until that choice is made.
+Resolved:
+- durable strategic `WORLD_TIME` uses integer simulation minutes;
+- current `GameState.time_minutes` remains the compatibility authority until explicit migration;
+- turns are not elapsed time;
+- sub-minute tactical/process timing remains a separate local domain;
+- device wall-clock time is not gameplay authority by default;
+- temporal abilities do not rewind the durable campaign clock under current laws.
 
-Required future mapping:
-- `WORLD_TIME`;
-- `SIMULATION_STEP`;
-- action duration/recovery;
-- save/load timestamp semantics;
-- pause/offline behavior where applicable.
+Still open before numeric lock:
+- tactical/sub-minute remainder representation;
+- action duration ranges;
+- encounter-to-world-time reconciliation values;
+- activity-specific duration ranges.
 
-No passive coefficient should hard-code a timing unit before this mapping exists.
+No passive coefficient should hard-code an unresolved local timing representation.
 
 ## 3. Resource-unit requirement
 
-Health, Stamina, Focus, and Resolve already exist as distinct core resources.
+Core resource semantics are now defined in:
+- `CORE_RESOURCE_SCALE_AND_TRANSACTION_STANDARD.md`.
 
-Before numeric lock define for each:
-- authoritative minimum;
-- authoritative maximum logic;
+Resolved:
+- Health, Stamina, Focus, Resolve remain distinct absolute resource amounts;
+- minimum is 0;
+- effective maxima are authoritative derived values;
+- current/base/effective maximum are separate concepts;
+- max increase does not automatically refill;
+- max decrease clamps current value when required;
+- spend/recovery are authoritative deduplicated transactions;
+- no default cross-resource conversion exists.
+
+Still open before numeric lock:
+- representative target maximum bands;
 - ordinary spend ranges;
 - ordinary recovery ranges;
-- regeneration/recovery timing;
-- overflow/underflow behavior;
-- effective versus base maximum changes.
+- zero-resource consequences;
+- final precision/rounding.
 
-Initial content values do not by themselves establish the universal scale.
+Initial content values and current formulas remain reference implementation evidence, not automatic target balance.
 
 ## 4. Probability versus deterministic score
 
-Error/recognition systems are not yet required to use literal probability.
+General resolution-mode semantics are now defined in:
+- `STATUS_ERROR_CONFIDENCE_RESOLUTION_MODE_STANDARD.md`.
 
-A future implementation may choose:
-- deterministic score/difficulty;
-- bounded probability;
-- contest;
-- hybrid model.
+Approved target modes:
+- `DETERMINISTIC_RULE`;
+- `MARGIN_CHECK`;
+- `SEEDED_VARIANCE_MARGIN`;
+- `OPPOSED_CONTEST`;
+- `WEIGHTED_OUTCOME`.
 
-Documentation should therefore use `ERROR_BURDEN`, `INTERPRETATION_CONFIDENCE`, or `CONTEST_MODIFIER` until the parent resolution model is selected.
+`ERROR_BURDEN` is not automatically a literal probability.
+
+Numeric knowledge/evidence confidence, where used internally, remains bounded 0..1 and is not objective truth probability. `SYSTEM_CONFIRMED` is an authority/provenance state rather than confidence=1.
+
+Domain-specific difficulty/error/variance ranges remain open.
 
 ## 5. Physical versus abstract units
 
