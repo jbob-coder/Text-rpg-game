@@ -38,3 +38,13 @@ These now resolve major non-numeric child structure for:
 - generalized energy compatibility/output authorization.
 
 Remaining work is dominated by numeric calibration, final owner decisions on provisional choices, and world/institution integration.
+
+
+### World-integration evidence progress
+
+Gate Twelve local evidence pilot materialized:
+- `STATUS_GATE_TWELVE_LOCAL_WORLD_INTEGRATION_EVIDENCE_PILOT.md`.
+
+It separates confirmed local civic/maintenance/records/evacuation/restricted-infrastructure facts from proposal-only parent-world names and provides evidence-safe Status integration candidates.
+
+No proposed parent settlement, authority, or region is promoted by this work.
