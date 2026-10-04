@@ -221,6 +221,9 @@ This section supersedes older statements about the top-level product objective w
   - dedicated derived-stat Compose assertion;
   - fuller identity projection/UI contract;
   - future actor/room, hierarchical-map, activity, combat and adversary projection tests.
+- NAVIGATION / EPHEMERAL STATE AUDIT:
+  - `docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md`
+  - current seven-section production navigation, Settings overlay, scene-change reset, ViewModel transient state, local Compose selections, presentation preferences and test/preview navigation are now classified.
 - REMAINING:
   - member/asset-ID level consumer and zero-consumer matrix;
   - D-030 actor projection implementation migration map;
@@ -274,6 +277,9 @@ This section supersedes older statements about the top-level product objective w
   - file-level pixel catalog consumers documented with no whole-file zero-consumer candidate proven;
   - transitional/hardcoded presentation state classified;
   - `GameSnapshot` field and `GameEngine` action test-source coverage/gaps documented.
+- NAVIGATION / EPHEMERAL STATE AUDIT:
+  - `docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md`
+  - current seven-section production navigation, Settings overlay, scene-change reset, ViewModel transient state, local Compose selections, presentation preferences and test/preview navigation are now classified.
 - REMAINING:
   - member/asset-ID level zero-consumer matrix;
   - actor/room projection implementation migration mapping;
