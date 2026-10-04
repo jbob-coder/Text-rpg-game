@@ -264,6 +264,25 @@ Open:
 6. Complete remaining child rules inside shared ability standards.
 7. Defer runtime implementation until design coherence.
 
+### World integration preparation
+
+Role-class pilot materialized:
+- `STATUS_WORLD_INTEGRATION_ROLE_CLASS_PILOT_001.md`.
+
+This maps mature abilities/passives to institutional role classes without inventing named world organizations.
+
+### Canon-review dry runs
+
+Materialized:
+- `CANON_REVIEW_DRY_RUN_PASSIVE_REC_0001.md`;
+- `CANON_REVIEW_DRY_RUN_ABILITY_RAR_003.md`.
+
+Results:
+- Second Wind: dry-review supports eventual approval with open numeric fields, pending owner decision;
+- Lightning Conduit: dry-review returns the record for refinement until throughput, branch, overload, and world-infrastructure calibration are resolved.
+
+No record was canon-promoted.
+
 ## Phase D — world integration
 
 Map accepted records into:
