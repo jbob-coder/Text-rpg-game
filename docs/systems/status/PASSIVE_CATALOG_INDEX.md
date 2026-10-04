@@ -136,6 +136,22 @@ Open:
 
 Next passive slice: **Mental/Will 0001–0010**.
 
+## Weapon Familiarity refinement
+
+Evidence:
+- `PASSIVE_WEAPON_FAMILIARITY_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_WEAPON_FAMILIARITY_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_WEAPON_FAMILIARITY_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Wave-001 weapon-familiarity passives now have:
+- bounded effect definitions;
+- equipment/familiarity state separation;
+- scaling and cap direction;
+- cross-family overlap watchlist;
+- knowledge-posture audit.
+
+Next passive family: **Defensive Adaptation 0001–0010**.
+
 ## Audit
 
 - `STATUS_CORPUS_WAVE_001_AUDIT.md`
