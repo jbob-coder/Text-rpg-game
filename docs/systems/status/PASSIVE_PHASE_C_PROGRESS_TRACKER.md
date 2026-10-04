@@ -200,6 +200,19 @@ Result:
 - **0 / 20** are yet certified `EXECUTABLE_FIXTURES_READY`;
 - passive coefficients remain blocked until parent-system scales/ranges are justified.
 
+## Range-fixture eligibility audit
+
+Materialized:
+- `PASSIVE_CANONICAL_RESOLVER_RANGE_FIXTURE_ELIGIBILITY_AUDIT_WAVE_001.md`.
+
+Result:
+- **0 / 20 canonical shared passive resolvers** currently qualify for `RANGE_FIXTURES_READY`;
+- all 20 remain `QUALITATIVE_FIXTURES_READY`;
+- blockers are now grouped into resource/time, error/confidence, physical/spatial, institution, and environment parent-scale dependencies;
+- current content-instance values are explicitly prohibited from being treated as universal scales.
+
+This is an intentional numeric safety gate, not incomplete work.
+
 ## Local world-evidence integration
 
 Materialized:
@@ -238,7 +251,7 @@ No named institution was invented and no record was canon-promoted.
 
 ## Next work
 
-1. begin parent-system **range-fixture** work only where scales are justified; the qualitative fixture baseline is complete for 20 / 20 canonical resolvers;
+1. resolve parent-scale prerequisites before any resolver advances to `RANGE_FIXTURES_READY`; current audit result is 0 / 20 eligible;
 2. continue evidence-backed Gate Twelve knowledge/world adjudication only where confirmed local context supports it;
 3. progress selected records toward actual world entities only after owner/world canon decisions;
 4. run additional canon dry-review packets;
