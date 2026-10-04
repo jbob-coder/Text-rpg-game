@@ -231,6 +231,21 @@ Resolved at the semantic/convention level:
 
 Range-fixture audit remains **0 / 20** because domain-specific target ranges are still intentionally open.
 
+## Physical / institutional parent semantics
+
+Materialized:
+- `STATUS_PHYSICAL_DISTANCE_CONTEST_PRECISION_STANDARD.md`;
+- `INSTITUTION_ROLE_AUTHORIZATION_PROTOCOL_STANDARD.md`.
+
+Resolved at the semantic level:
+- authoritative physical distance uses meters while presentation coordinates remain separate;
+- reach/range/route-time distinctions are explicit;
+- opposed physical contest and execution-variance roles are explicit;
+- institution, role, rank, credential, clearance, authorization, protocol, and command/responsibility structure are separated;
+- Faction/Institutional passives cannot create authorization.
+
+Numeric ranges and named world entities remain open.
+
 ## Local world-evidence integration
 
 Materialized:
@@ -265,11 +280,18 @@ Additional dry reviews:
 - `CANON_REVIEW_DRY_RUN_PASSIVE_TEC_0006.md` — Repair Economy appears conceptually mature enough for eventual approval with numeric/world-provenance fields open;
 - `CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0002.md` — Credential Navigation returns for refinement because actual credential/authorization world semantics are not yet authored.
 
+Super Epic dry review:
+- `CANON_REVIEW_DRY_RUN_SUPER_EPIC_001_003.md`;
+- Time Partition: RETURN_FOR_REFINEMENT;
+- Matter Recode: RETURN_FOR_REFINEMENT;
+- Probability Tilt: RETURN_FOR_REFINEMENT;
+- all three retain strong Super Epic identity; no deletion/merge/rarity change recommended.
+
 No named institution was invented and no record was canon-promoted.
 
 ## Next work
 
-1. define target resource range bands and physical contest/precision/distance conventions; semantic time/resource/error foundations are now materialized, but current audit remains 0 / 20 range-ready;
+1. define target resource range bands and travel/fatigue/environment ranges; physical distance/contest/precision and institutional semantics are now also materialized, while current audit remains 0 / 20 range-ready;
 2. continue evidence-backed Gate Twelve knowledge/world adjudication only where confirmed local context supports it;
 3. progress selected records toward actual world entities only after owner/world canon decisions;
 4. run additional canon dry-review packets;
