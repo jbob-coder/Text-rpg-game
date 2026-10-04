@@ -106,7 +106,7 @@ Exact current word counts and structured record counts remain governed by D-019 
 | **V03 — Gate Twelve proof region** | **ESTABLISHED FIRST-PASS CONTRACT** | Implementation/acceptance remains incomplete | `GATE_TWELVE_REGION_MASTER_PLAN.md`, map/animation blueprints, asset status matrix, room composition contract | Parent-world proposal still requires owner canon decision; bounded runtime migration and physical-device acceptance remain future work. |
 | **V04 — World development** | **ESTABLISHED STANDARDS / PARTIAL POPULATION** | World is not populated at final scale | `WORLD_DEVELOPMENT_MASTER_INDEX.md`, geography/politics/settlement/routes/ecology/beast/population/balance/loot/NPC standards | Canon macroregions, sovereign entities, settlements, routes, ecosystems, populations, institutions, and large-scale structured records. |
 | **V05 — Characters / NPC / social / rivals** | **PARTIAL** | Existing engine has social/memory concepts; target corpus is not exhaustive | `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, population/hierarchy standards, player-safe actor contract | Full character catalog, recurring-NPC packets, schedules/goals/factions, dynamic-rival hierarchy/evolution records, world integration and migration mapping. |
-| **V06 — Progression / stats / skills / abilities / passives / classes / ranks** | **LARGE ACTIVE CORPUS / IN_PROGRESS** | Target design substantially exceeds current runtime | `PROGRESSION_MASTER_PLAN.md`, `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`, `EVOLVED_SKILL_REGISTRY.md`, `STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`, `docs/systems/status/**` | Combat-class catalog; profession/rank/status packet; training/mentor/facility standard; progression Gate Twelve proof packet; progression UX contract; target-schema/API migration. |
+| **V06 — Progression / stats / skills / abilities / passives / classes / ranks** | **LARGE ACTIVE CORPUS / IN_PROGRESS** | Target design substantially exceeds current runtime | `PROGRESSION_MASTER_PLAN.md`, `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`, `EVOLVED_SKILL_REGISTRY.md`, `STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`, `docs/systems/status/**` | Status Phase A is complete; Wave 001 has 1,019 structurally audited records; primary-ability detail coverage is 47/47 and passive family baseline coverage is 23/23. Still missing: combat-class catalog; profession/rank/status packet; training/mentor/facility standard; progression Gate Twelve proof packet; progression UX contract; numeric/range fixtures; world/canon promotion; target-schema/API migration. |
 | **V07 — Items / economy / loot** | **MASTER CONTRACT ESTABLISHED / CONTENT PARTIAL** | Existing equipment/items are not the final target economy | `ITEM_ECONOMY_LOOT_MASTER_PLAN.md`, world loot provenance standard, asset/item provenance docs | Full item taxonomy/catalog, economy source/sink model, vendor/services rules where approved, resource-to-item chains, loot tables, migration to existing IDs/save consumers. |
 | **V08 — Tactical combat** | **MASTER CONTRACT ESTABLISHED / DETAIL PARTIAL** | Final tactical runtime not implemented | `TACTICAL_COMBAT_MASTER_PLAN.md`, balance integration docs | Combat class/archetype catalog, encounter/tactical-map standards, AI detail, action-economy calibration, progression/item/status integration, schema/API migration and tests. |
 | **V09 — Persistent adversaries / world memory** | **PARTIAL** | Concepts exist; target system is not reconstruction-complete | `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, social engine evidence, world integration standards | Dedicated adversary/rival records, hierarchy changes, memory consequences, promotion/demotion rules, world event integration, save/state migration contract. |
@@ -236,8 +236,8 @@ Execution of the final APK reconstruction remains intentionally gated.
 
 ### 5.2 P0 — Asset and implementation truth
 
-5. **Finish exact asset provenance (D-029).**  
-   Current family-level provenance is strong but incomplete. Deterministic raster equivalence still needs execution and persisted evidence.
+5. **Finish visual/application survivor reconciliation (D-020) and exact asset provenance (D-029).**  
+   PR-level reconciliation is complete through D-028, but final migration/reimplementation/supersession decisions still need to be consolidated. Current family-level provenance is strong but incomplete. Deterministic raster equivalence still needs execution and persisted evidence.
 
 6. **Finish Android consumer mapping (D-026 / D-021).**  
    The high-level map exists; line-by-line composable/ViewModel/bridge/test mapping is not complete.
@@ -250,13 +250,24 @@ Execution of the final APK reconstruction remains intentionally gated.
 
 ### 5.3 P1 — Reconstruction-depth domain work
 
-9. **Progression continuation (D-045).**  
-   Still missing as distinct reconstruction-grade children:
+9. **Progression continuation (D-045 / D-046).**  
+   Current Status/ability/passive work is materially ahead of the older task-register snapshot:
+   - Phase A governing standards are complete;
+   - Wave 001 structurally contains 1,019 records;
+   - primary-ability detail packet coverage is complete for 47 / 47 identities;
+   - passive Phase-C family baseline coverage is complete for 23 / 23 families;
+   - conceptual passive owner/write-target mapping covers 230 / 230 passive IDs.
+
+   Still missing as reconstruction-grade progression work:
    - combat class catalog;
    - profession/rank/status packet;
    - training/mentor/facility standard;
    - Gate Twelve progression proof packet;
-   - progression UX contract.
+   - progression UX contract;
+   - justified parent-system range/test fixtures and numeric envelopes;
+   - remaining world/knowledge integration and state-owner/runtime mappings;
+   - record-level canon promotion / owner approval;
+   - implementation migration packets.
 
 10. **World population.**  
     The standards exist, but final macroregions, political entities, settlements, routes, ecosystems, resource zones, beast populations, citizens, institutions and world events are not authored at target scale.
