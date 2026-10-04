@@ -453,3 +453,26 @@ The audit records the 17-field durable GameState/save boundary, schema v1 behavi
 D-042 remains **IN_PROGRESS** because line-by-line Android consumer mapping, catalog consumers, full asset lineage, cross-branch survivor migration and zero-consumer/deprecation proof remain open.
 
 No runtime tests/builds were executed and no gameplay/application source was changed by this audit.
+
+
+## 2026-10-04 D-044 moving-base reconciliation closure
+
+D-044 is complete.
+
+All seven Class-C selective extraction actions are now represented in current authorities:
+- documentation expectation/acceptance;
+- decision-gap closure;
+- graph/failure-handoff semantics;
+- beast scene presence;
+- beast-zone density/repopulation/pressure/readiness;
+- bounded persistent-adversary adaptation/recurrence/lifecycle;
+- L0-L4 map-detail production gate.
+
+Final live ref recheck:
+- program `de8c76cc08da20099671b5cd8fc5d7d7acca1920`;
+- target `65d2db8538c1b8302c314f2fbe9eb7a1b585b51d`;
+- merge base `c261b2aaf8bd978d27b46f8fea03435c0c5734d0`;
+- diverged: ahead 651 / behind 99;
+- PR #33 remains open, draft and mergeable false.
+
+No blind merge/rebase was performed. Completion is documentation reconciliation, not branch promotion.
