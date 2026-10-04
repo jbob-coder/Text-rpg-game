@@ -1,6 +1,6 @@
 # THE GAME — Player Activities & Life-Loop Master Plan
 
-Status: **FOUNDATIONAL / DESIGN CONTRACT / IMPLEMENTATION PARTIAL AT LOWER SCOPE**  
+Status: **V10 FIRST-PASS CONTRACT LAYER ESTABLISHED / IMPLEMENTATION PARTIAL AT LOWER SCOPE**  
 Repository: `jbob-coder/Text-rpg-game`  
 Parent authorities:
 - `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`
@@ -553,3 +553,31 @@ This master is complete enough for schema prototyping when:
 - first proof loop is selected.
 
 Mass activity content remains blocked until world/progression/economy dependencies are ready.
+
+
+## 32. V10 first-pass child contract suite — 2026-10-04
+
+The activity/life-simulation first-pass layer now includes:
+
+- ACTIVITY_RECORD_AND_STATE_STANDARD.md
+- ACTIVITY_TIME_COST_ATOMICITY_STANDARD.md
+- TRAINING_AND_PRACTICE_ACTIVITY_STANDARD.md
+- RECOVERY_REST_TREATMENT_ACTIVITY_STANDARD.md
+- WORK_STUDY_RESEARCH_ACTIVITY_STANDARD.md
+- ACTIVITY_INTERRUPTION_CONCURRENCY_STANDARD.md
+- TRACE_CHAMBER_PHASE1_ACTIVITY_PROOF_PACKET.md
+
+Together with this master, V10 has 8 / 8 first-pass canonical units.
+
+This closes the first-pass breadth floor only.
+
+Still later:
+- formal work/profession/economy integration;
+- scheduled/background activity runtime;
+- calendar/date model;
+- offline-progression decision;
+- broader facility/activity catalogs;
+- final activity UI;
+- exact-head Phase 1 regression/device evidence.
+
+Phase 1 should prove the existing Trace Chamber training path before inventing a new work/job loop.
