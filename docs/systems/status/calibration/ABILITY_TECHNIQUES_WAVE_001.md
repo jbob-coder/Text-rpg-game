@@ -1,4 +1,4 @@
-# THE GAME — Ability Techniques Calibration Wave 001
+| TECH_COM_010_T4 | ABILITY_COM_010 | Advanced | Tension Web | Maintains a prepared network of controlled lines under tension for restraint, support, detection, or redirection. | high focus+stamina | Lines can snap, burn, cut, tangle, or be bypassed; snapped-line recoil and self-entanglement are hazards. | CALIBRATION_PROPOSAL |
 
 Status: **CALIBRATION_PROPOSAL / NOT CANON UNTIL PROMOTED / NOT IMPLEMENTED**
 
