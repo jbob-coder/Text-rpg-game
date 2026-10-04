@@ -521,3 +521,25 @@ Current exact-source documentation now maps:
 D-026/D-021 remain in progress because future target projections, per-entry asset zero-consumer evidence and complete navigation/temporary-state audit remain open.
 
 No Android/Python runtime files changed and no tests/builds were executed.
+
+
+## 2026-10-04 Android catalog + field/action test-gap continuation
+
+Updated:
+- `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`.
+
+Completed documentation slices:
+- file-level direct-consumer mapping for all current pixel presentation sources;
+- whole-file zero-consumer checkpoint: none proven at current file level;
+- transitional/hardcoded presentation-state classification;
+- GameSnapshot field -> current test-source coverage/gap matrix;
+- GameEngine action -> current test-source coverage matrix.
+
+Documented current test gaps:
+- QuestSection projection/rendering;
+- contentId;
+- canonStatus;
+- dedicated derived-stat Compose assertion;
+- fuller identity UI contract.
+
+D-026/D-021 remain **IN_PROGRESS**. Member/asset-ID zero-consumer proof, future projections, destination APK mapping and runtime execution evidence remain open.
