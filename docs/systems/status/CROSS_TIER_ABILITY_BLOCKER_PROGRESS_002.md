@@ -76,3 +76,25 @@ The three Super Epic Wave-001 identities now all have dedicated non-numeric chil
 Remaining work is dominated by numeric calibration, final owner decisions, world/institution integration, and implementation mapping after design coherence.
 
 No Super Epic ability is canon-promoted.
+
+
+### Cross-system scale semantics
+
+Materialized:
+- `WORLD_SIMULATION_TIME_AND_DURATION_STANDARD.md`;
+- `CORE_RESOURCE_SCALE_AND_TRANSACTION_STANDARD.md`;
+- `STATUS_ERROR_CONFIDENCE_RESOLUTION_MODE_STANDARD.md`;
+- `STATUS_PHYSICAL_DISTANCE_CONTEST_PRECISION_STANDARD.md`;
+- `INSTITUTION_ROLE_AUTHORIZATION_PROTOCOL_STANDARD.md`.
+
+These establish non-numeric parent semantics for world time, core resources, uncertainty/confidence, physical distance/contests/precision, and institutional authorization.
+
+Final numeric ranges and named-world bindings remain open.
+
+
+### Super Epic dry-review result
+
+Materialized:
+- `CANON_REVIEW_DRY_RUN_SUPER_EPIC_001_003.md`.
+
+All three Super Epic records return for refinement but retain strong distinct identities. No rarity change or canon promotion is recommended yet.
