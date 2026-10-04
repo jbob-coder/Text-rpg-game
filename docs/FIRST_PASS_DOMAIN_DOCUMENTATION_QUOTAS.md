@@ -246,3 +246,43 @@ V09 reuses V05 identity/memory/knowledge/social authority and V08 encounter/afte
 The Gate Twelve packet is deliberately nonbinding: the current unidentified Service Tunnel contacts remain encounter-local unless a later explicit promotion/canon decision creates a persistent NPC.
 
 Breadth direction after V09 closure: perform an all-volume first-pass quota coverage audit before creating another batch. Do not assume the next domain is under-covered from raw file count alone.
+
+
+## 14. Live first-pass coverage checkpoint — V12 Android / APK reconstruction
+
+V12 now has **8 / 8 minimum canonical first-pass units**:
+
+1. APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md
+2. APK_FINAL_RECONSTRUCTION_MATRIX.md
+3. ../ANDROID_PIXEL_CLIENT_VALIDATION.md
+4. ANDROID_RUNTIME_BRIDGE_ARCHITECTURE_STANDARD.md
+5. ANDROID_BUILD_CONFIGURATION_RECONSTRUCTION_STANDARD.md
+6. ANDROID_CI_AUTOMATED_ACCEPTANCE_STANDARD.md
+7. ANDROID_DEVICE_PERFORMANCE_COMPATIBILITY_STANDARD.md
+8. ANDROID_RELEASE_PROVENANCE_ROLLBACK_STANDARD.md
+
+Status: **FIRST-PASS QUOTA SATISFIED / FINAL REBUILD STILL BLOCKED.**
+
+The new V12 coverage records:
+- current Kotlin/Compose/Chaquopy authority boundary;
+- exact current Gradle/SDK/ABI/toolchain configuration;
+- CI acceptance levels;
+- Galaxy A02-class physical/performance acceptance method;
+- release/signing/provenance/rollback requirements.
+
+It does not claim current-head APK success, production signing, physical-device acceptance or release readiness.
+
+## 15. First-pass quota phase closure
+
+The semantic coverage audit at:
+- docs/FIRST_PASS_QUOTA_COVERAGE_AUDIT_2026-10-04.md
+
+now records **all V00–V12 plus cross-domain first-pass floors as satisfied**.
+
+This closes only the first broad coverage pass.
+
+Next mandatory program action:
+- fresh reproducible current-head inventory;
+- second-pass/final quota recalibration based on actual complexity, structured records, migration risk, verification burden and remaining unknowns.
+
+Do not keep creating documents merely to increase the 148-unit first-pass count.
