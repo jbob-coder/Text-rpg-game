@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "repository": "jbob-coder/Text-rpg-game",
+  "branch": "docs/master-game-development-program",
+  "source_head": "991cd9b29ea0752fa1c303a19e8f210713efe4b5",
+  "captured_date_ast": "2026-10-04",
+  "method": {
+    "structural_counts": "GitHub recursive Git tree for exact source_head",
+    "asset_manifest_counts": "Parsed the 13 JSON asset manifests present at source_head",
+    "gate_twelve_map_counts": "Parsed docs/evidence/gate_twelve_map_baseline_2026-10-02.json",
+    "status_record_counts": "Carried from repository-owned structural audit docs/systems/status/STATUS_CORPUS_WAVE_001_AUDIT.md; not re-derived by this tree-only pass",
+    "markdown_word_counts": "NOT_EXECUTED_CURRENT_HEAD",
+    "local_inventory_tool": "NOT_EXECUTED_CURRENT_HEAD",
+    "executed_test_counts": "NOT_REEXECUTED_CURRENT_HEAD"
+  },
+  "structural_counts": {
+    "tracked_files": 490,
+    "tracked_blob_bytes": 5203664,
+    "files_under_docs": 346,
+    "markdown_files_repository_wide": 320,
+    "markdown_files_under_docs": 318,
+    "root_documentation_markdown_files": 2,
+    "documentation_scope_paths": 348,
+    "structured_documentation_paths": 21,
+    "png_files": 24,
+    "python_files": 42,
+    "kotlin_files": 68,
+    "json_files": 23,
+    "python_kotlin_source_files_with_test_in_path": 51,
+    "world_markdown_files": 18,
+    "systems_markdown_files": 216,
+    "status_markdown_files": 204,
+    "asset_markdown_files": 33,
+    "android_markdown_files": 5,
+    "context_log_markdown_files": 13,
+    "evidence_structured_files": 5,
+    "verification_files": 10,
+    "tools_files": 2
+  },
+  "structured_documentation_breakdown": {
+    "asset_manifest_json_files": 13,
+    "evidence_json_files": 5,
+    "verification_json_files": 3
+  },
+  "asset_manifest_inventory": {
+    "manifest_rows": 104,
+    "unique_asset_ids": 95,
+    "unique_asset_id_status_by_last_seen_manifest": {
+      "BRIEF_LOCKED": 2,
+      "INTEGRATED": 64,
+      "CANDIDATE": 5,
+      "INTEGRATED_VERIFIED": 19,
+      "PRODUCED_DEFERRED_INTEGRATION": 5
+    },
+    "caution": "Status-by-last-seen is an inventory aid only. Canonical asset authority remains the provenance and production ledgers; repeated IDs across manifests explain why 104 rows resolve to 95 unique IDs."
+  },
+  "status_wave_001_repository_audit": {
+    "primary_abilities": 47,
+    "passives": 230,
+    "techniques": 188,
+    "passive_unlock_paths": 230,
+    "passive_knowledge_profiles": 230,
+    "awakening_profiles": 47,
+    "counter_profiles": 47,
+    "total_structured_records": 1019,
+    "duplicate_ids": 0,
+    "dangling_ability_parent_references": 0,
+    "dangling_passive_parent_references": 0,
+    "source": "docs/systems/status/STATUS_CORPUS_WAVE_001_AUDIT.md",
+    "caveat": "Count-complete is not design-complete, canon-complete, world-integrated, numerically calibrated, or implemented."
+  },
+  "gate_twelve_baseline": {
+    "nodes": 9,
+    "edges": 8,
+    "source": "docs/evidence/gate_twelve_map_baseline_2026-10-02.json",
+    "caveat": "This is the preserved Gate Twelve baseline map record, not a world-scale place count."
+  },
+  "unresolved_inventory_dimensions": [
+    "current-head Markdown word count from complete checkout",
+    "current-head heading/section count",
+    "general world/place/route/political/settlement/ecosystem/beast/resource/NPC/item record extractors beyond specifically audited packets",
+    "asset production-stage reconciliation against provenance authority rather than last-seen manifest status",
+    "executed tests separated from test-source path counts",
+    "owner numeric-target unit definition/acceptance"
+  ]
+}
