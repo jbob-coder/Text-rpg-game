@@ -198,11 +198,19 @@ This section supersedes older statements about the top-level product objective w
 - OUTPUT: one final branch/provenance survivor matrix suitable for implementation migration.
 
 ### TASK D-021 — Map Android consumers to final UX/domain contracts
-- STATUS: `IN_PROGRESS`
+- STATUS: `IN_PROGRESS / MAJOR FIELD-ACTION CONSUMERS MAPPED`
 - PRIORITY: `P0`
-- CURRENT: D-026 materialized `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` with source-grounded GameSnapshot/GameEngine ownership and major screen mapping.
-- REMAINING: complete line-by-line composable/ViewModel/bridge consumer mapping, asset packet ownership, missing projection fields and exact test/evidence coverage before broad UI replacement.
-- OUTPUT: screen/component -> player-safe projection -> asset packet -> domain owner -> tests/evidence mapping.
+- CURRENT:
+  - `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` now maps the live Python projection envelope, Kotlin `BridgeSnapshotMapper`, `GameViewModel` action flow, major Compose field consumers, current navigation graph and current Android test-source coverage.
+  - Story, Character, Stats, Inventory, Quests, Map, Settings/session and travel-transition consumers now have explicit player-safe ownership boundaries.
+  - transitional actor inference through `sceneId + locationId` is explicitly isolated and remains governed by D-030 migration direction.
+- REMAINING:
+  - enumerate every pixel catalog's direct consumer and zero-consumer candidates;
+  - classify hardcoded visual/presentation state versus safe projected state;
+  - map every GameSnapshot field/action to exact test coverage and gaps;
+  - define/migrate future activity, tactical-combat, hierarchical-map and adversary-intel projections;
+  - reconcile final consumer graph against APK reconstruction architecture.
+- OUTPUT: screen/component -> player-safe projection -> asset packet -> domain owner -> tests/evidence mapping before broad UI replacement.
 
 ### TASK D-022 — Trace expanded owner directive to repository authorities
 - STATUS: `DONE`
@@ -233,11 +241,21 @@ This section supersedes older statements about the top-level product objective w
 - REMAINING: exact source-master/hash/branch/consumer/QA reconciliation for each asset family.
 
 ### TASK D-026 — Android consumer/projection map
-- STATUS: `IN_PROGRESS`
+- STATUS: `IN_PROGRESS / SOURCE-GROUNDED MAJOR CONSUMER MAP COMPLETE`
 - PRIORITY: `P0`
 - DOCUMENT: `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`
-- CURRENT: source-grounded `GameSnapshot`/`GameEngine` surface map plus major screen ownership and missing projection contracts documented.
-- REMAINING: line-by-line composable/ViewModel/bridge consumer audit and test mapping.
+- CURRENT:
+  - source-grounded `GameSnapshot`/`GameEngine` surface map exists;
+  - Python safe projection root/child keys are documented;
+  - Kotlin mapper retention/redaction boundary is documented;
+  - `GameViewModel` action/transient-state ownership is documented;
+  - major Compose field consumers and current navigation graph are documented;
+  - existing Android unit/instrumentation test-source coverage is mapped at a functional level.
+- REMAINING:
+  - per-pixel-catalog consumer and zero-consumer audit;
+  - temporary/hardcoded presentation-state audit;
+  - exact field/action -> test file/method gap matrix;
+  - final future-projection contracts and destination APK migration map.
 
 ### TASK D-047 — Establish master documentation record
 - STATUS: `DONE`
