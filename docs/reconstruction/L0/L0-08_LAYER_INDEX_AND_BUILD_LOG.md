@@ -16,14 +16,16 @@ verified, and deliberately left open.
 | Working branch | `docs/hermes-angle-documentation` |
 | Baseline HEAD | `2111addc18836c863809eb290f2843fc862cc533` |
 | L0 status | **COMPLETE** |
-| L1–L5 status | PENDING |
+| L1 status | **IN PROGRESS** (3 documents + 3 machine-readable files) |
+| L2–L5 status | PENDING |
+| Integrity harness | `tools/verify_reconstruction_corpus.py`, 9/9 passing |
 
 ## 2. Layer index
 
 | Layer | Directory | Status | Documents |
 | --- | --- | --- | ---: |
-| L0 | `docs/reconstruction/L0/` | **COMPLETE** | 9 |
-| L1 | `docs/reconstruction/L1/` | PENDING | — |
+| L0 | `docs/reconstruction/L0/` | **COMPLETE** | 10 |
+| L1 | `docs/reconstruction/L1/` | **IN PROGRESS** | 3 + 3 JSON |
 | L2 | `docs/reconstruction/L2/` | PENDING | — |
 | L3 | `docs/reconstruction/L3/` | PENDING | — |
 | L4 | `docs/reconstruction/L4/` | PENDING | — |
@@ -41,7 +43,8 @@ verified, and deliberately left open.
 | 05 | `L0-05_ASSET_UNIT_REGISTRY.md` | All 500 planned units with family, native master, view set, canon class |
 | 06 | `L0-06_STABLE_ID_AND_NAMING_STANDARD.md` | ID stability, namespaces, manifest contract, state bindings, supersession |
 | 07 | `L0-07_PROHIBITIONS_AND_FAILURE_MODES.md` | Catastrophic failures, 11 prohibition classes, anti-pattern table |
-| 08 | `L0-08_LAYER_INDEX_AND_BUILD_LOG.md` | This document |
+| 08 | `L0-08_LAYER_INDEX_AND_BUILD_LOG.md` | Layer navigation and build log |
+| 09 | `L0-09_CORPUS_INTEGRITY_PROTOCOL.md` | Observed failure modes and the post-generation verification step |
 
 ## 3. Planned layer contents
 Each remaining layer is scoped below with its intended deliverables, so a
@@ -301,3 +304,78 @@ assignment, ID and manifest contracts, and every prohibition.
 **Not ready.** The corpus does not yet contain per-unit angle specifications
 (L2–L4). Until L2–L4 exist, the art workload is enumerated but not specified
 view by view, and a rebuilder would still need to make per-view decisions.
+
+## 8. L1 — existing-state record (in progress)
+
+Deliberately built in the opposite order from the usual: **capture before
+interpret**. The owner has stated the beta APK will be broken down and that the
+reference photos and APK are what this reconstruction is planned from, so some
+evidence is perishable and must be recorded before it changes.
+
+### 2026-10-03 — L1a: preservation and perishable evidence
+
+`L1-00_PRESERVATION_PRIORITY_AND_PERISHABLE_EVIDENCE.md`
+
+Ranks perishable evidence by urgency and records each item's identity, hash,
+scope and permitted/rejected use. Key findings:
+
+- **The APK's real art surface is 192 distinct asset IDs**, not 24. 168 of them
+  exist only as Kotlin text-map definitions across 23 pixel catalogs in 8,621
+  lines, and would be lost with the client branches. These are Type B source
+  masters under `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md` §8.
+- The highest-value reference, `UI_REFERENCE_CHARACTER_APPROVED_V1`, is the only
+  approved source for Jack Wilson's visual identity and lives on Google Drive
+  with a recorded SHA-256.
+- Sibling-repo references are recorded but flagged as **not currently
+  reconstructible** — that repo's own notes say the full image is not supplied
+  and the Drive links required sign-in.
+- **60 remote branches**, corrected from the 64 shown by a pre-fetch listing.
+  Three branch pairs share a head SHA, so content comparison alone cannot
+  separate them.
+
+### 2026-10-03 — L1b: branch, runtime and raster evidence
+
+- `L1-01_BRANCH_AND_RUNTIME_SURFACE.md` + `L1-01_branch_inventory.json` —
+  full branch table, duplicate-head analysis, runtime composition.
+- `L1-02_EXISTING_RASTER_EVIDENCE.md` + `L1-02_raster_evidence.json` — per-pixel
+  measurements for all 24 rasters.
+
+Measured results:
+
+- **71 distinct colours** across the whole 24-asset corpus, with 75% of all
+  pixels in five dark ramp values. Accents are sparse and semantic: Cyan 1.67%,
+  Gold 0.88%, Danger 0.38%.
+- Every UI accent appears in the art **at its exact specified hex**.
+- Five scenes deliberately share one ramp family (district reuse); three depart
+  for specific reasons. Service Tunnel is the darkest; Trace Chamber has the
+  highest cyan density.
+- The Dead Relay state family verifies correct design: `damaged` and
+  `signal_lost` share **identical bounds** and differ only in indicator state,
+  and `signal_lost` has the fewest colours.
+- `pixel_item_signal_ring_paperdoll` is **2 pixels** — correct micro-layer
+  behaviour, not a broken asset.
+
+**Most consequential finding.** `pixel_player_gameplay_front_base` was measured
+pixel by pixel and its silhouette does **not** read as the documented male player
+figure: skin occupies the full outer edge of both arms from y19 to y33 with no
+sleeve mass, and the waist-to-hip flare reads feminine-coded. This conflicts with
+`CHARACTER_PIXEL_BLUEPRINTS.md` §1.0, which locks Jack Wilson's approved
+identity as the target. Recorded as a migration placeholder to be rebuilt from
+the approved reference — **not** to be reproduced. Measured deviations from the
+L0-03 cluster map (head 16 px wide starting y4 rather than 11 px at y2; feet
+wider than the declared anchors) are recorded rather than silently reconciled.
+
+Also recorded: `#8B5F4B`, Tamsin's authored skin-shadow anchor, appears in the
+*player* sprite at 14 pixels. Recorded as an observation with an explicit warning
+that palette-anchor presence is not identity evidence.
+
+### 2026-10-03 — Corpus integrity harness added
+
+`tools/verify_reconstruction_corpus.py` — nine checks, each encoding a defect
+actually observed during corpus construction, verified to catch truncation,
+unbalanced code fences and unescaped newlines, and verified not to fire on
+documents that legitimately describe those defects.
+
+`L0-09_CORPUS_INTEGRITY_PROTOCOL.md` records the seven observed failures, the
+reasoning checks the harness cannot perform, and the persistence rule (commit
+per layer). Current state: **9/9 checks passing, 224,171 characters**.
