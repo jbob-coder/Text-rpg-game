@@ -10,9 +10,10 @@ This directory owns the reconstruction-grade child contracts for human Status UI
 1. `../STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`
 2. `STATUS_UI_CORE_CONTRACT.md`
 3. rarity / registry / requirement / visibility standards
-4. catalog indexes
+4. authoring guides and catalog indexes
 5. individual catalog records and deep-authoring packets
-6. implementation mappings and tests
+6. cross-reference, UX, balance/test, implementation mappings
+7. runtime tests/evidence
 
 Runtime source remains the authority for what is implemented now. These documents own target-game design only where their status says so.
 
@@ -28,11 +29,17 @@ Runtime source remains the authority for what is implemented now. These document
 - `AWAKENING_EVENT_STANDARD.md`
 - `LEVEL_100_EXCEPTION_STANDARD.md`
 
+## Authoring guides
+
+- `ABILITY_CONTENT_AUTHORING_GUIDE.md`
+- `PASSIVE_CONTENT_AUTHORING_GUIDE.md`
+
 ## Catalog execution
 
 - `PRIMARY_ABILITY_CATALOG_INDEX.md`
 - `PASSIVE_CATALOG_INDEX.md`
 - `STATUS_CORPUS_EXECUTION_ROADMAP.md`
+- `STATUS_CORPUS_REFINEMENT_QUEUE.md`
 - `DOCUMENTATION_UNIT_LEDGER.md`
 - `STATUS_CORPUS_WAVE_001_AUDIT.md`
 
@@ -43,11 +50,12 @@ This number is a structural milestone, not a claim that 1,019 records are final 
 ## Current deep-authoring slices
 
 - `calibration/PRIMARY_ABILITY_DETAIL_COMMON_001_010.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_COMMON_001_010.md`
 - `calibration/PASSIVE_DETAIL_PHYSICAL_0001_0010.md`
 
-These files begin converting the calibration registry into reconstruction-grade records.
+The linked Common awakening/counter/technique table records have also begun individualized refinement.
 
-## Still-open child documents
+## Integration / UX / QA contracts
 
 - `ABILITY_PASSIVE_CROSS_REFERENCE.md`
 - `STATUS_UI_UX_CONTRACT.md`
@@ -75,5 +83,6 @@ After a structural wave reaches scale, priority shifts to:
 - individualized mechanics;
 - contradiction/overlap review;
 - world integration;
+- UX/privacy validation;
 - implementation/test mapping;
 - explicit canon promotion.
