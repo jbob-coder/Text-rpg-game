@@ -70,18 +70,36 @@ Open:
 **Wave 001 rarity-slice deep authoring: COMPLETE — 47 / 47 ability identities covered.**
 
 Next ability work is blocker resolution rather than another shallow rarity wave:
-1. spatial/reference-frame standard;
-2. energy/reserve accounting standard;
-3. time/causal state standard;
-4. biological transformation/recovery standard;
-5. law/Status/Unique ontology standard;
-6. knowledge/evidence standard;
-7. world/institution/history integration;
-8. numeric calibration;
-9. explicit canon review.
+1. **energy/reserve accounting standard — NEXT**;
+2. time/causal state standard;
+3. biological transformation/recovery standard;
+4. law/Status/Unique ontology standard;
+5. knowledge/evidence standard;
+6. world/institution/history integration;
+7. numeric calibration;
+8. explicit canon review.
 
 Evidence:
 - `PRIMARY_ABILITY_WAVE_001_REFINEMENT_COMPLETENESS_AUDIT.md`.
+
+Spatial/reference-frame blocker progress:
+- shared frame vocabulary and provisional transit behavior documented;
+- Blink Step atomic relocation baseline documented;
+- Spatial Anchor frame/contest structure documented;
+- Fold Step and World Gate endpoint-frame transforms documented;
+- Spatial Dominion field/path boundary documented.
+
+Evidence:
+- `SPATIAL_REFERENCE_FRAME_AND_TRANSIT_STANDARD.md`.
+
+Still open inside the spatial standard:
+- exact energy accounting;
+- angular-motion treatment;
+- aperture closure semantics;
+- numeric contest formula;
+- path taxonomy;
+- mass/volume limits;
+- barrier taxonomy.
 
 Super Rare 001–006 now completed:
 - deep ability packet;
