@@ -107,6 +107,23 @@ The owner explicitly grants broad permission to:
 
 This permission is not permission to ignore earlier explicit prohibitions.
 
+## 2.1.1 Current documentation-phase execution override
+
+The broad permissions above describe what may be authorized in later implementation/production phases. They are **not standing authorization to perform those actions during the current documentation-first phase**.
+
+Until the owner explicitly authorizes a transition from documentation into asset production or implementation:
+
+- **do not create new runtime assets**;
+- **do not modify, redraw, replace, regenerate, export, integrate, promote, or delete existing runtime assets**;
+- **do not move candidate/provisional art into production or canon state**;
+- **do not start an asset-production batch merely because its brief, contract, or production order is documented**;
+- asset work in the current phase is limited to **inspection, inventory, provenance, classification, requirements, specifications, creation instructions, composition rules, reuse rules, migration planning, QA criteria, and future production sequencing**;
+- documentation may state exactly how a future asset must be created, replaced, validated, or integrated without performing that production work;
+- historical asset-production evidence may be audited and preserved, but it does not reopen production;
+- an exception requires a new, explicit owner instruction authorizing the specific production/implementation work.
+
+This current-phase override is the controlling interpretation whenever older task text, production ledgers, roadmaps, or broad permissions could otherwise be read as permission to continue making assets.
+
 ## 2.2 Standing prohibitions still apply
 
 Do not:
