@@ -85,3 +85,10 @@ The first-pass quota is satisfied; runtime expansion remains separate. Persisten
 V10 now has 8 / 8 first-pass canonical units: the activity master plus seven child standards/packets covering activity records, time/cost atomicity, training/practice, recovery/treatment, work/study/research, interruption/concurrency, and the Trace Chamber Phase 1 proof.
 
 The current train/recover/technique-practice runtime is preserved as foundation. Full professions, scheduled/background activity, calendar, offline progression and final Activity UI remain future work.
+
+
+## V07 items/economy/loot first-pass closure — 2026-10-04
+
+V07 now has 10 / 10 first-pass canonical units: the item/economy master plus nine child standards/packets covering item records, inventory/stacks, equipment/loadouts, quality/rarity/condition, material/resource provenance, loot/rewards, economy/pricing architecture, vendors/services/ownership, and the Gate Twelve Phase 1 item/equipment proof.
+
+The current flat inventory and equipment runtime remain the Phase 1 foundation. Currency, vendors, crafting, durability, encumbrance and broad loot generation are not required for the first playable slice.
