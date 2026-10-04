@@ -780,3 +780,25 @@ Also added:
 That packet advances D-032 for combat only. It explicitly keeps Phase 1 tactical state transient and preserves save schema v1 until a future mid-combat-save requirement justifies migration.
 
 Next breadth area: V09 Persistent Adversaries / World Memory.
+
+
+## 2026-10-04 V09 persistent-adversary/world-memory first-pass batch
+
+Added eight canonical V09 units:
+- one dedicated master;
+- seven child standards/packets.
+
+V09 first-pass count is 8 / 8.
+
+The design reuses V05/V08/world contracts and explicitly prevents:
+- arbitrary defeat-based stat inflation;
+- omniscient adaptation;
+- forced recurrence;
+- invalid route teleportation;
+- successor memory inheritance.
+
+The Gate Twelve adversary proof does not select a canon recurring enemy and is not required for Phase 1.
+
+No runtime files, content JSON, assets, tests or builds changed.
+
+Next action: semantic all-volume quota coverage audit.
