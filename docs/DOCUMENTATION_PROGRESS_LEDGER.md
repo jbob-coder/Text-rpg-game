@@ -615,3 +615,20 @@ The remaining static-scene ambiguity is now reduced to two explicit owner decisi
 The safe default remains the current integrated baseline. PR #28 composition and PR #31 animation remain downstream/deferred until the Service Tunnel static parent is selected.
 
 No candidate was silently promoted and no runtime/raster migration was performed.
+
+
+## 2026-10-04 Android navigation and ephemeral-state audit
+
+Added:
+- `docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md`.
+
+Resolved current-source documentation for:
+- seven-section production navigation;
+- Settings overlay;
+- scene-change return-to-Story policy;
+- ViewModel transient state;
+- inventory/map/stat/local Compose selections;
+- narration/text presentation preferences;
+- stable test/preview GameScreen navigation surface.
+
+No gameplay authority was moved into UI documentation. No runtime files changed and no tests/builds were executed.
