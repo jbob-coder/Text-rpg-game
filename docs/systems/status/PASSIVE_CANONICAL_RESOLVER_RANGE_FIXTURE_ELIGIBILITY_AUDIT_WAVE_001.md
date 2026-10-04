@@ -23,7 +23,9 @@ Materialized after the initial 0/20 decision:
 - `WORLD_SIMULATION_TIME_AND_DURATION_STANDARD.md`;
 - `STATUS_WORLD_TIME_PARENT_FIXTURE_BATCH_001.md`;
 - `CORE_RESOURCE_SCALE_AND_TRANSACTION_STANDARD.md`;
-- `STATUS_ERROR_CONFIDENCE_RESOLUTION_MODE_STANDARD.md`.
+- `STATUS_ERROR_CONFIDENCE_RESOLUTION_MODE_STANDARD.md`;
+- `STATUS_PHYSICAL_DISTANCE_CONTEST_PRECISION_STANDARD.md`;
+- `INSTITUTION_ROLE_AUTHORIZATION_PROTOCOL_STANDARD.md`.
 
 Closed at the **semantic/convention** level:
 - authoritative durable WORLD_TIME and its minute-level strategic unit;
@@ -31,7 +33,10 @@ Closed at the **semantic/convention** level:
 - core-resource min/max/current and transaction semantics;
 - general resolution modes;
 - numeric confidence compatibility range 0..1 and its separation from truth;
-- ERROR_BURDEN is explicitly not a universal probability.
+- ERROR_BURDEN is explicitly not a universal probability;
+- target physical distance uses meters with presentation coordinates kept separate;
+- opposed physical contest / execution-variance semantics are explicit;
+- institution/role/credential/clearance/authorization/protocol semantics are explicit.
 
 Still not enough to promote any resolver to `RANGE_FIXTURES_READY` because target domain ranges remain open.
 
@@ -85,20 +90,32 @@ Affected:
 - RESOLVER_EQUIPMENT_RETENTION
 - RESOLVER_FINE_MOTOR_STEADINESS
 
-Need:
-- authoritative geometry/distance/reach representation;
-- physical contest model;
-- precision/variance representation.
+Resolved prerequisite:
+- physical distance unit and geometry/presentation separation;
+- reach/range semantic separation;
+- opposed contest form;
+- precision/variance and hard physical-floor semantics.
+
+Still need:
+- common reach/distance bands;
+- contest capability/context ranges;
+- execution-variance ranges;
+- tactical coordinate-to-meter mapping once tactical layout is chosen.
 
 ### INSTITUTION MODEL BLOCKED
 Affected:
 - RESOLVER_COMMAND_STRUCTURE_FAMILIARITY
 
-Need:
-- actual institution stable ID;
-- role/authority model;
-- protocol versioning;
-- workflow error representation.
+Resolved prerequisite:
+- institution/role/rank/credential/clearance/authorization/protocol schema;
+- protocol versioning semantics;
+- command/responsibility relationship model.
+
+Still need:
+- actual named institution stable ID;
+- real role/protocol records;
+- ordinary workflow error/overhead ranges;
+- Gate Twelve authority binding after world-canon approval.
 
 ### ENVIRONMENT SCALE BLOCKED
 Affected:
@@ -131,11 +148,10 @@ Completed semantic prerequisites:
 
 Next:
 1. define target core-resource **range calibration bands** and ordinary transaction ranges;
-2. define physical contest/precision and authoritative distance conventions;
-3. define travel/fatigue/environment parent scales;
-4. define institutional workflow model;
-5. define domain-specific error/difficulty/variance ranges;
-6. revisit this audit and promote only supported resolver rows to `RANGE_FIXTURES_READY`.
+2. define travel/fatigue/environment parent scales;
+3. define domain-specific error/difficulty/variance and physical contest ranges;
+4. instantiate at least one real institutional workflow after parent-world approval;
+5. revisit this audit and promote only supported resolver rows to `RANGE_FIXTURES_READY`.
 
 ## Numeric safety rule
 
