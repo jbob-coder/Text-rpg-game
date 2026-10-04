@@ -67,11 +67,10 @@ Open:
 
 ## P1 — next ability slices
 
-1. **Epic 001–004 — NEXT**
-2. Super Epic 001–003.
-3. Legendary 001–002.
-4. Prime Legendary 001.
-5. Unique 001.
+1. **Super Epic 001–003 — NEXT**
+2. Legendary 001–002.
+3. Prime Legendary 001.
+4. Unique 001.
 
 Each slice must pass:
 - law overlap review;
@@ -104,12 +103,27 @@ Still open:
 - Mass Inversion tag/end-state physics;
 - Energy Devour energy whitelist/reserve/output rules.
 
-Epic deep-authoring must next test whether Epic effects change governing laws rather than merely scaling Super Rare output.
+Epic 001–004 deep-authoring completed at the detailed-document layer:
+- 4 deep ability records;
+- 16 detailed techniques;
+- 4 awakening detail records;
+- 4 counterplay detail records.
+
+Epic design rule established:
+Epic effects must change the governing rule-space rather than merely scaling Super Rare output.
+
+Still open:
+- compact Epic registry-row individualization;
+- causal property/coupling rules;
+- singularity physical model;
+- biological template/reversion rules;
+- spatial geometry/reference rules;
+- numeric/world integration.
 
 ## P1 — next passive families
 
-1. **Recovery 0001–0010 — NEXT**
-2. movement;
+1. **Movement 0001–0010 — NEXT**
+2. sensory;
 3. sensory;
 4. mental/will;
 5. cognitive/learning;
@@ -130,6 +144,24 @@ Epic deep-authoring must next test whether Epic effects change governing laws ra
 20. unique event;
 21. cosmic/system;
 22. unknown/classified.
+
+## Recovery passive 0001–0010
+
+Completed:
+- deep-authoring packet;
+- scaling/cap/state-ownership model;
+- overlap and stacking requirements.
+
+Evidence:
+- `calibration/PASSIVE_DETAIL_RECOVERY_0001_0010.md`
+- `PASSIVE_RECOVERY_SCALING_STATE_MODEL_0001_0010.md`
+
+Open:
+- knowledge-profile refinement;
+- numeric coefficients;
+- concrete runtime mapping;
+- named institutions/history;
+- canon promotion.
 
 ## P2 — world integration
 
