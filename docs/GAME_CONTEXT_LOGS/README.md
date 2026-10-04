@@ -31,3 +31,6 @@ Routine reversible repository decisions may be made without repeated confirmatio
 - [2026-10-03_PIXEL_ART_GENERATION_EXTRACTION_DIRECTIVE.md](2026-10-03_PIXEL_ART_GENERATION_EXTRACTION_DIRECTIVE.md) — owner directive that new game visuals are produced through the assistant-led pixel-art generation, extraction/decomposition, native-grid cleanup, provenance, integration and QA workflow.
 
 - [2026-10-03_EVOLVED_GAME_DOCUMENTATION_FRAMING.md](2026-10-03_EVOLVED_GAME_DOCUMENTATION_FRAMING.md) — owner correction that the current game is reference evidence for designing the larger evolved game; documentation first, implementation later.
+
+
+- [2026-10-03_STATUS_UI_ABILITIES_PASSIVES_CANON.md](2026-10-03_STATUS_UI_ABILITIES_PASSIVES_CANON.md) — owner canon for age-18 Status awakening, one primary ability, rarity ladder, Level/Level-100 rules, many hidden passives and large-scale documentation mapping.
