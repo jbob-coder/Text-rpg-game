@@ -47,3 +47,11 @@ These remain documentation contracts. Their existence does not claim runtime imp
 Working rule: current runtime facts and evolved target design stay explicitly separated. Migration/API work is downstream of target-game design.
 
 - [Evolved Skill Registry](EVOLVED_SKILL_REGISTRY.md) — full 23-skill target-game registry with training, world/tactical uses, class/profession affinities, content requirements and pixel-art presentation requirements.
+
+
+## Status UI / abilities / passives
+
+- [Status UI, Abilities & Passives Master Plan](STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md) — target-game authority for age-18 awakening, global Level, one-primary-ability rule, rarity, Level-100 exception, scalable passive acquisition, hidden requirements, knowledge asymmetry and catalog architecture.
+- [Status subsystem index](status/README.md) — child contracts, registries, visibility rules and future catalog navigation.
+
+This program supplements the broader progression authority and owns the Status-specific rules.
