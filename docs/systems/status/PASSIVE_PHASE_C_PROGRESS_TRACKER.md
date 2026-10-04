@@ -153,6 +153,26 @@ Materialized:
 
 Compact knowledge rows remain unchanged pending entity-level world evidence and explicit review.
 
+## Resolver scenario-anchor milestone
+
+Materialized:
+- `PASSIVE_CANONICAL_RESOLVER_SCENARIO_ANCHORS_WAVE_001.md`.
+
+Result:
+- all **20 / 20 canonical shared passive resolvers** now have qualitative BASELINE, FAVORABLE, ADVERSE, and BOUNDARY scenario anchors;
+- no coefficient or final scale was invented;
+- next numeric step is parent-system range/test-fixture definition.
+
+## Local world-evidence integration
+
+Materialized:
+- `STATUS_GATE_TWELVE_LOCAL_WORLD_INTEGRATION_EVIDENCE_PILOT.md`.
+
+Result:
+- confirmed Gate Twelve civic/maintenance/records/evacuation/restricted-infrastructure contexts are separated from proposal-only parent-world names;
+- record-level local integration candidates are identified without claiming local training, regulation, or passive ownership;
+- the pilot can now support evidence-based adjudication of knowledge/world-integration proposals.
+
 ## World/canon preparation
 
 Materialized:
@@ -160,17 +180,20 @@ Materialized:
 - `CANON_REVIEW_DRY_RUN_PASSIVE_REC_0001.md`;
 - `CANON_REVIEW_DRY_RUN_ABILITY_RAR_003.md`.
 
+Additional dry reviews:
+- `CANON_REVIEW_DRY_RUN_PASSIVE_TEC_0006.md` — Repair Economy appears conceptually mature enough for eventual approval with numeric/world-provenance fields open;
+- `CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0002.md` — Credential Navigation returns for refinement because actual credential/authorization world semantics are not yet authored.
+
 No named institution was invented and no record was canon-promoted.
 
 ## Next work
 
-1. verify/adjudicate proposed knowledge directions against actual world entities when parent world docs support them;
-2. define parent-system ranges/scenario anchors for the canonical resolver base terms before assigning passive coefficients;
-3. progress selected records from family role classes toward actual world entities only when parent world docs support them;
-4. expand numeric parameterization after base-system units are documented;
-5. run additional canon dry-review packets;
-6. continue shared ability child-rule completion;
-7. map implementation only after design coherence.
+1. extend Gate Twelve evidence-backed knowledge/world adjudication only where confirmed local context supports it;
+2. define parent-system numeric ranges/test fixtures for the 20 canonical resolver base terms; qualitative scenario anchors are now complete;
+3. progress selected records toward actual world entities only after owner/world canon decisions;
+4. run additional canon dry-review packets;
+5. continue shared ability child-rule completion;
+6. map implementation only after design coherence.
 
 ## Stop condition
 
