@@ -211,6 +211,26 @@ Still open:
 
 This closes the basic current field/action discovery portion of D-026/D-021. Future projections and zero-consumer/deprecation evidence remain open.
 
+## 2.4 Android catalog and test-gap checkpoint
+
+The Android consumer audit now additionally records:
+
+- file-level direct consumers for all current pixel presentation source files;
+- no whole current pixel-presentation file proven zero-consumer at file level;
+- transitional/hardcoded presentation state classifications;
+- per-`GameSnapshot` field test-source coverage/gaps;
+- per-`GameEngine` action test-source coverage.
+
+Concrete current test gaps are now explicit for:
+- QuestSection rendering/projection;
+- `contentId`;
+- `canonStatus`;
+- derived-stat Compose presentation;
+- full identity presentation contract;
+- future actor/room and other future projections.
+
+This narrows D-026/D-021 remaining work to member/asset-ID consumer proof, future projection migration, final APK destination mapping and later exact-head execution evidence.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
