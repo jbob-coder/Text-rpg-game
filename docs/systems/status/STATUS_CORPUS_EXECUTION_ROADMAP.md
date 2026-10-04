@@ -118,11 +118,33 @@ Completed at detailed-document layer:
 - 4 counterplay detail records.
 
 Open:
-- compact registry-row individualization;
 - causal property/coupling rules;
 - singularity physical model;
 - biological template/reversion rules;
 - spatial geometry/reference rules;
+- numeric/world integration.
+
+### Super Epic ability slice 001–003
+
+Materialized:
+- `calibration/PRIMARY_ABILITY_DETAIL_SUPER_EPIC_001_003.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_SUPER_EPIC_001_003.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_SUPER_EPIC_001_003.md`
+- `calibration/ABILITY_COUNTER_DETAIL_SUPER_EPIC_001_003.md`
+- `SUPER_EPIC_ABILITY_RARITY_OVERLAP_AUDIT_001_003.md`
+
+Completed:
+- 3 deep ability records;
+- 12 detailed techniques;
+- 12 individualized compact technique rows;
+- 3 individualized awakening profiles;
+- 3 individualized counter profiles;
+- Epic↔Super Epic boundary audit.
+
+Open blockers:
+- subjective-time/sensory/metabolic model;
+- Matter Recode mass/energy/composition rules;
+- Probability Tilt resolution semantics;
 - numeric/world integration.
 
 ### Passive progress
@@ -144,9 +166,9 @@ Open:
 
 ### Next order
 
-1. **Deep-author Super Epic abilities 001–003.**
+1. **Deep-author Legendary abilities 001–002.**
 2. **Deep-author Movement passives 0001–0010.**
-3. Continue Legendary → Prime Legendary → Unique.
+3. Continue Prime Legendary → Unique.
 4. Continue remaining passive families.
 5. Perform world integration after enough accepted records exist.
 6. Defer runtime implementation until design coherence.
