@@ -847,5 +847,6 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - CURRENT OUTPUT: `docs/systems/PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`.
 - CURRENT RESULT: current progression/runtime facts are separated from target design; class/profession/rank/training/world-integration direction and creation requirements are documented.
 - ART RULE: final character presentation uses authored pixel-art sprites/portraits generated through the project workflow; no geometry-built final character art.
-- NEXT: create the 23-skill evolved registry, then class catalog, profession/rank/status packet, training/mentor/facility standard, Gate Twelve proof packet and progression UX contract.
+- MATERIALIZED CHILD: `docs/systems/EVOLVED_SKILL_REGISTRY.md` — all 23 current skills expanded into target-game records covering training, world/tactical uses, class/profession relationships, advanced gates, content and pixel-art requirements.
+- NEXT: create the combat class catalog, then profession/rank/status packet, training/mentor/facility standard, Gate Twelve proof packet and progression UX contract.
 - IMPLEMENTATION: deferred until design contracts are sufficiently coherent.
