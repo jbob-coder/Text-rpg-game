@@ -298,6 +298,17 @@ The deeper unresolved source/hash/consumer/QA/canon work remains under D-029 rat
 
 This closes the current-raster consumer subtask of D-029, but not D-029 itself. Raster-equivalence execution, visual promotion choices, final portrait/player production, canon approval and physical-device QA remain open.
 
+## 2.6 D-029 visual survivor owner-decision gate
+
+`docs/assets/VISUAL_SURVIVOR_OWNER_DECISION_PACKET_2026-10-04.md` now isolates the remaining static scene promotion choices:
+
+- `D029-VIS-001`: current Service Tunnel baseline vs PR #27 refined candidate;
+- `D029-VIS-002`: current Quiet Stair baseline vs PR #30 refined candidate.
+
+Until the owner explicitly decides, the current integrated baseline remains authoritative. PR #28 and PR #31 stay downstream of the Service Tunnel static-survivor choice.
+
+This removes ambiguity from D-029 without silently promoting divergent branch art.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
