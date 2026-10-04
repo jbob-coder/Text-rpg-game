@@ -166,15 +166,22 @@ This section supersedes older statements about the top-level product objective w
 - OUTPUT: reproducible counts for active docs, words, records, assets, world entities, tasks, tests and evidence without assuming the owner's ambiguous numeric units.
 
 ### TASK D-020 — Reconcile stacked pixel/application implementation branches
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS / PR-LEVEL RECONCILIATION COMPLETE / SURVIVOR MIGRATION REMAINS`
 - PRIORITY: `P0`
-- INPUT: live audit plus open PRs #7–#31.
-- OUTPUT: one branch/provenance matrix showing which visual/application implementation survives, which is superseded, and which needs migration.
+- INPUT: live audit plus implementation PRs #7–#31.
+- CURRENT:
+  - D-028 / `docs/IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md` completed exact PR-head/base/ancestry/workflow reconciliation.
+  - D-029 now owns asset-family provenance and unresolved static/animation survivor decisions.
+  - D-026/D-021 own Android consumer/projection reconciliation.
+- REMAINING: consolidate the surviving visual/application implementation choices into the destination architecture and record which candidate branches are migrated, reimplemented, superseded or retained only as provenance.
+- OUTPUT: one final branch/provenance survivor matrix suitable for implementation migration.
 
 ### TASK D-021 — Map Android consumers to final UX/domain contracts
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS`
 - PRIORITY: `P0`
-- OUTPUT: screen/component -> player-safe projection -> asset packet -> domain owner -> tests/evidence mapping before broad UI replacement.
+- CURRENT: D-026 materialized `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` with source-grounded GameSnapshot/GameEngine ownership and major screen mapping.
+- REMAINING: complete line-by-line composable/ViewModel/bridge consumer mapping, asset packet ownership, missing projection fields and exact test/evidence coverage before broad UI replacement.
+- OUTPUT: screen/component -> player-safe projection -> asset packet -> domain owner -> tests/evidence mapping.
 
 ### TASK D-022 — Trace expanded owner directive to repository authorities
 - STATUS: `DONE`
@@ -866,15 +873,25 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 
 
 ### TASK D-046 — Build Status UI / ability / passive reconstruction corpus
-- STATUS: `IN_PROGRESS`
+- STATUS: `IN_PROGRESS / PHASE A COMPLETE / WAVE 001 STRUCTURALLY COMPLETE / PHASE C REFINEMENT ACTIVE`
 - PRIORITY: `P0`
 - PARENT: D-045 evolved-game design continuation.
 - OWNER INTENT: devote substantial reconstruction-grade documentation to primary abilities, passive abilities, hidden requirements, rarity, discovery, evolution, knowledge, mapping, and related world/content systems.
 - MASTER: `docs/systems/STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`.
-- MATERIALIZED CHILDREN:
-  - `docs/systems/status/README.md`
-  - `docs/systems/status/STATUS_UI_CORE_CONTRACT.md`
-  - `docs/systems/status/PASSIVE_REGISTRY_SCHEMA.md`
-- CANON CAPTURED: Status at 18; public school awakening/classification event; one primary ability per human; Common -> Unique rarity; Unique = 1/1 in universe; Level gained through kills including beasts/PK; Level 100 permits primary-ability replacement; only two known humans have reached Level 100; many passives can be acquired; passives are hidden until requirements are satisfied; some known unlocks are deliberately kept secret.
-- NEXT: ability rarity standard, primary-ability registry schema, passive requirement language, knowledge-visibility standard, Level/XP standard, awakening-event standard, Level-100 exception standard, then catalog seeding.
-- IMPLEMENTATION: deferred; current task is documentation/design authority.
+- INDEX: `docs/systems/status/README.md`.
+- VERIFIED DOCUMENTATION MILESTONES:
+  - governing Status/ability/passive standards and authoring guides are materialized; Phase A is complete for the current design-authority layer;
+  - Wave 001 structurally contains 1,019 records: 47 primary abilities, 230 passives, 188 techniques, 230 passive unlock paths, 230 passive knowledge profiles, 47 awakening profiles and 47 counter profiles;
+  - structural audit reports 1,019 unique IDs, zero duplicate IDs and zero dangling parent references in the audited Wave-001 record classes;
+  - primary-ability rarity-slice deep-authoring packet coverage is 47 / 47 identities;
+  - passive Phase-C family baseline coverage is 23 / 23 families;
+  - conceptual passive record owner/write-target mapping covers 230 / 230 passive IDs.
+- CURRENT PHASE: reconstruction-grade Phase C refinement, blocker resolution, world evidence integration, normalization and canon-review preparation.
+- REMAINING:
+  - parent-system range/test fixtures and justified numeric envelopes;
+  - evidence-backed world/knowledge integration where current world canon supports it;
+  - unresolved state-owner/runtime projection mappings;
+  - record-by-record canon review and owner approval;
+  - Phase D world integration, Phase E canon promotion and Phase F implementation mapping.
+- IMPORTANT: older NEXT text naming rarity/schema/requirement/visibility/Level/awakening standards is superseded because those files now exist.
+- IMPLEMENTATION: deferred; current task remains documentation/design authority.
