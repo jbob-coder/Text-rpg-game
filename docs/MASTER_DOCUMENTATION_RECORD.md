@@ -198,6 +198,19 @@ Still open:
 - future activity/combat/hierarchical-map/adversary projections;
 - final APK destination migration map.
 
+## 2.4 Android consumer field/action checkpoint
+
+`docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md` now maps:
+
+- all 18 current `GameSnapshot` fields to current Compose consumers;
+- the Python `AndroidGameSession._view_for` payload groups to Kotlin `BridgeSnapshotMapper`;
+- ViewModel action paths for start/choose/save/load/cheat/equip/unequip/travel/inspect-status;
+- direct pixel-catalog consumers in the major current UI surfaces;
+- current mapper/save/Compose test-source coverage;
+- transitional actor inference, relay visual state and travel-transition presentation state.
+
+This closes the basic current field/action discovery portion of D-026/D-021. Future projections and zero-consumer/deprecation evidence remain open.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
