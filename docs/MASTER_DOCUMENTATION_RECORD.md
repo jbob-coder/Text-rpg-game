@@ -577,20 +577,38 @@ PR #33 is primarily a documentation program. Documentation commits do not prove 
 
 ---
 
+## 6.5 Parallel program direction
+
+Two new program authorities prevent documentation scale from drifting away from playable integration:
+
+- `docs/FIRST_PASS_DOMAIN_DOCUMENTATION_QUOTAS.md` — first-pass minimum coverage quotas by domain;
+- `docs/PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md` — bounded solo playable integration requirements.
+
+The operational model is:
+- Track A: full corpus;
+- Track B: Phase 1 playable slice;
+- Track C: synchronization/evidence.
+
+Domain completion and Phase 1 completion are separate claims.
+
 ## 7. Required update protocol
 
-Whenever meaningful documentation work is completed:
+Whenever meaningful documentation or implementation work is completed:
 
 1. verify the current branch/HEAD;
-2. create or update the domain document;
+2. create or update the owning domain/implementation document;
 3. update `docs/THE_GAME_MASTER_TASK_REGISTER.md`;
 4. update this master record if the area's state changed;
 5. update the cross-reference matrix when authority/dependency relationships changed;
 6. update `DOCUMENTATION_PROGRESS_LEDGER.md` when measurable corpus state changed;
-7. update evidence/inventory files when counts or verification changed;
-8. record blockers explicitly instead of implying completion;
-9. preserve superseded material only when it has historical/reconciliation value;
-10. never mark a domain complete merely because a master-plan file was created.
+7. update `FIRST_PASS_DOMAIN_DOCUMENTATION_QUOTAS.md` when coverage ownership/count state changed;
+8. update `PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md` or its task status when a Phase 1 requirement/dependency changed;
+9. update evidence/inventory files when counts or verification changed;
+10. record blockers explicitly instead of implying completion;
+11. identify which dependency was unlocked and set the new highest-priority next action;
+12. remove or rewrite stale NEXT instructions made obsolete by the completed task;
+13. preserve superseded material only when it has historical/reconciliation value;
+14. never mark a domain complete merely because a master-plan file was created.
 
 For a domain to move to **ESTABLISHED / reconstruction-grade**, the documentation should normally define:
 
