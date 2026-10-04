@@ -229,6 +229,17 @@ Result:
 
 No runtime mapping or canon promotion is implied.
 
+## Knowledge role-class adjudication
+
+Evidence:
+- `PASSIVE_KNOWLEDGE_ROLE_CLASS_ADJUDICATION_WAVE_001.md`
+- `PASSIVE_FALSE_BELIEF_PROVENANCE_ROLE_CLASS_MAP_0005.md`
+
+Result:
+- 100 priority/context rows now have role-class-based recommended knowledge direction;
+- 20 false-belief candidates now have origin/correction role-class channels;
+- no compact knowledge row was automatically rewritten.
+
 ## Audit
 
 - `STATUS_CORPUS_WAVE_001_AUDIT.md`
