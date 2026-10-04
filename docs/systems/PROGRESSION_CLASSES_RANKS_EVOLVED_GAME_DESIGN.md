@@ -1608,3 +1608,12 @@ Proceed in this order:
 
 Implementation follows the completed design; it is not the purpose of this document.
 
+
+
+# 38. Materialized child — Skill Registry
+
+The first reconstruction-grade child is now:
+
+- `EVOLVED_SKILL_REGISTRY.md`
+
+It expands all 23 current registered skills into target-game design records while preserving the distinction between current runtime facts and evolved content/system requirements.
