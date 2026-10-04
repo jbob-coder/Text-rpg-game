@@ -951,6 +951,16 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - OUTPUT: component-level keep/rework/replace/remove map with zero-consumer evidence before deletion.
 
 
+### TASK D-048 — Lock camera, tactical presentation and low-end target direction
+- STATUS: `DONE — DESIGN DIRECTION APPROVED / IMPLEMENTATION DETAILS REMAIN`
+- PRIORITY: `P0`
+- OUTPUT: `docs/systems/CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md`
+- OWNER DECISION: three-quarter 2D/2.5D orthographic presentation approved; exploration uses closer framing, combat uses a higher tactical framing, tactical movement uses a square grid, combat is turn-based with an action-budget activation model, Jack has direct control while companions target hybrid order/constrained autonomy, and Galaxy A02-class hardware is a product target requirement.
+- INTEGRATION: tactical combat master and Android UX master updated to consume this authority.
+- OPEN: exact angle/tile size/initiative numbers/action costs/cover modifiers/damage formulas/encounter budget/companion command vocabulary/performance thresholds.
+- IMPLEMENTATION: authorized in bounded evidence-backed slices under the current owner execution permission.
+- COMPLETED_AT: `2026-10-04 AST`
+
 ### TASK D-044 — Reconcile PR #33 moving base
 - STATUS: `DONE — CLASS-C UNIQUE-REQUIREMENT EXTRACTION COMPLETE`
 - PRIORITY: `P0`
