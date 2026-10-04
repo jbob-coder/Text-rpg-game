@@ -910,3 +910,52 @@ The moving PR base was not merged wholesale. Three narrow world children were ad
 - [Gate Twelve external connections and expansion register](GATE_TWELVE_EXTERNAL_CONNECTIONS_AND_EXPANSION_REGISTER.md)
 
 These children do not confirm proposed parent-world names, final WORLD_GEO coordinates, external destinations, or the Plaza <-> Platform Nine route. The base-side `WORLD_SPATIAL_HIERARCHY_AND_COORDINATES.md` and `WORLD_MAP_PRODUCTION_SEQUENCE.md` were not imported as competing authorities because the active geography/coordinate standards already own those responsibilities.
+
+
+# 30. Map-detail production gate — D-044 selective extraction
+
+Status: **ACTIVE PROCESS RULE / NOT A NEW COORDINATE AUTHORITY**
+
+Moving-base provenance:
+- source branch: `docs/settlement-region-build-plan@65d2db8538c1b8302c314f2fbe9eb7a1b585b51d`;
+- source document: `docs/world/WORLD_MAP_PRODUCTION_SEQUENCE.md`;
+- source blob: `dc309869f89a2f555266cc3b5bbc59c16240e89e`;
+- selectively extracted under D-044.
+
+The active geography and coordinate standards continue to own coordinate semantics. This section preserves only the useful production-order gate.
+
+## 30.1 Reusable map-detail hierarchy
+
+For production planning, use this descriptive hierarchy where applicable:
+
+- **L0 — world:** macro world relationships and global-scale context;
+- **L1 — region:** macroregion/subregion relationships, major political/ecological context and long routes;
+- **L2 — settlement:** city/town/village/outpost structure and major access;
+- **L3 — district/zone:** district, neighborhood, wilderness zone or equivalent internal area;
+- **L4 — location/interior:** individual site, building, room, encounter space or local gameplay node.
+
+These L0-L4 labels are production/detail labels only. They do not replace the active W0-W4 coordinate contract and do not require identical coordinate units between levels.
+
+## 30.2 Gate before detailed map art
+
+Before producing detailed map art for a scoped level, establish the applicable minimum:
+
+1. stable entity IDs;
+2. clear parent/child hierarchy;
+3. authored or explicitly proposed route relationships/endpoints;
+4. declared coordinate/presentation space;
+5. visible unresolved gaps rather than guessed filler;
+6. documented visual language/material/scale constraints;
+7. discovery/visibility rules for destinations that are not initially player-known.
+
+Do not:
+- draw detailed city blocks before the settlement/region purpose exists;
+- create route art before route entities/endpoints exist;
+- visually reveal hidden destinations before the discovery/projection contract allows it;
+- treat presentation coordinates as authoritative world coordinates.
+
+## 30.3 Production consequence
+
+Map art follows entity/route/schema authority.
+
+If a map concept exposes an unresolved world decision, record the decision gap first. Do not solve canon accidentally through illustration.
