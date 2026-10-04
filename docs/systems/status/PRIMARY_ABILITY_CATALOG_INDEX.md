@@ -9,9 +9,9 @@ Parents:
 
 ## Catalog policy
 
-New entries are not owner-approved canon merely because they appear in a calibration wave.
+Calibration records are not canon merely because they exist.
 
-The calibration registry establishes stable identity and core mechanics first. Reconstruction-grade detail is then layered onto the same stable IDs.
+Stable IDs and compact records establish the corpus. Reconstruction-grade detail then deepens the same IDs without silently changing their identity.
 
 ## Wave 001 realized set
 
@@ -26,7 +26,7 @@ The calibration registry establishes stable identity and core mechanics first. R
 - 1 Prime Legendary
 - 1 Unique
 
-Structural validation: **47 / 47 ability IDs present and unique.**
+Structural validation baseline: **47 / 47 ability IDs present and unique.**
 
 ## Core catalog files
 
@@ -41,7 +41,7 @@ Structural validation: **47 / 47 ability IDs present and unique.**
 - `calibration/ABILITY_TECHNIQUE_DETAIL_COMMON_001_010.md`
 - `COMMON_ABILITY_RARITY_OVERLAP_AUDIT_001_010.md`
 
-Common 001–010 now have:
+Common 001–010 have:
 - 10 reconstruction-oriented ability records;
 - 40 individualized compact technique rows;
 - 40 full technique-detail records;
@@ -54,22 +54,42 @@ Common 001–010 now have:
 - `calibration/PRIMARY_ABILITY_DETAIL_UNCOMMON_001_010.md`
 - `calibration/ABILITY_TECHNIQUE_DETAIL_UNCOMMON_001_010.md`
 
-Uncommon 001–010 now have:
+Uncommon 001–010 have:
 - 10 reconstruction-oriented ability records;
 - 40 individualized compact technique rows;
 - 40 full technique-detail records;
 - 10 individualized awakening profiles;
 - 10 individualized counter profiles;
-- internal adjacency audit against Common/higher-tier concepts.
+- Common↔Uncommon adjacency treatment.
 
-The Uncommon slice explicitly resolves or narrows:
+Resolved/narrowed:
 - Kinetic Palm ↔ Vector Nudge;
 - Skin Reinforcement ↔ Stonehide;
 - Water Draw ↔ Vapor Sculpt.
 
-The remaining Common adjacency flags require Rare deep-authoring:
+## Rare deep-authoring
+
+- `calibration/PRIMARY_ABILITY_DETAIL_RARE_001_005.md`
+- `calibration/PRIMARY_ABILITY_DETAIL_RARE_006_010.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_RARE_001_010.md`
+- `RARE_ABILITY_RARITY_OVERLAP_AUDIT_001_010.md`
+
+Rare 001–010 now have:
+- 10 reconstruction-oriented ability records;
+- 40 individualized compact technique rows;
+- 40 detailed technique records;
+- 10 individualized awakening profiles;
+- 10 individualized counter profiles;
+- rarity/overlap audit.
+
+Rare refinement explicitly resolves:
 - Static Reservoir ↔ Lightning Conduit;
-- Impact Cushion ↔ Momentum Bank.
+- Impact Cushion ↔ Momentum Bank;
+- Heat Shaping ↔ Cryo Sink;
+- Lumen Pulse ↔ Umbra Veil.
+
+Spatial Anchor is still blocked on reference-frame rules.
+Crystal Resonance remains blocked on THE GAME's crystal-world canon.
 
 ## Integration
 
@@ -84,7 +104,7 @@ The remaining Common adjacency flags require Rare deep-authoring:
 
 ## Promotion rule
 
-A calibration-row entry is not ready for canon promotion until:
+A record is not ready for canon promotion until:
 - full boundaries are authored;
 - Level/stat/skill/resource interactions are explicit or intentionally `TBD`;
 - techniques are individualized;
@@ -93,4 +113,4 @@ A calibration-row entry is not ready for canon promotion until:
 - visual/content dependencies are documented;
 - overlap/rarity review passes.
 
-No record in Wave 001 has been bulk-promoted.
+No Wave 001 record has been bulk-promoted.
