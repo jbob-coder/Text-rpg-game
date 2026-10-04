@@ -152,3 +152,31 @@ This does not mean tactical combat is finished. It means the first broad reconst
 New direction after this quota closure:
 - create one Gate Twelve Phase 1 tactical encounter packet;
 - then shift breadth effort to the next under-covered high-dependency domain, V05 Characters/NPC/Social, unless a higher-priority repository audit blocker intervenes.
+
+
+## 10. Live first-pass coverage checkpoint — V05 characters/NPC/social
+
+V05 now has **12 / 12 minimum canonical first-pass units**:
+
+1. NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md
+2. NPC_CHARACTER_IDENTITY_PROFILE_STANDARD.md
+3. NPC_PERSONALITY_BEHAVIOR_STANDARD.md
+4. NPC_MEMORY_EVENT_STANDARD.md
+5. NPC_KNOWLEDGE_BELIEF_PRIVACY_STANDARD.md
+6. NPC_RELATIONSHIP_STATE_STANDARD.md
+7. NPC_GOALS_DECISION_STANDARD.md
+8. NPC_SCHEDULE_PRESENCE_STANDARD.md
+9. FACTION_HIERARCHY_MEMBERSHIP_STANDARD.md
+10. SOCIAL_CONSEQUENCE_RUMOR_PROPAGATION_STANDARD.md
+11. RECURRING_CHARACTER_PACKET_STANDARD.md
+12. TAMSIN_PHASE1_SOCIAL_PROOF_PACKET.md
+
+Status: **FIRST-PASS QUOTA SATISFIED / CURRENT RUNTIME FOUNDATION PARTIAL / LARGE CONTENT CATALOGS STILL PENDING.**
+
+Phase 1 impact:
+- recurring NPC relationship architecture is contract-ready around Tamsin;
+- knowledge-gated social architecture is contract-ready and substantially exists in current content;
+- explicit memory proof still needs a bounded runtime/content addition;
+- final schedule/location runtime remains future work.
+
+Breadth direction after V05 closure: move to V10 Activities/Life Simulation because it has a smaller under-covered quota and directly blocks Phase 1 requirement #8. The Gate Twelve tactical encounter packet continues in parallel as Track B work.
