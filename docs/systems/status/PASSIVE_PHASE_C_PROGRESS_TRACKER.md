@@ -81,6 +81,24 @@ Coverage:
 
 This is conceptual design mapping only; no runtime module/field is claimed.
 
+## Read-dependency / overlap normalization
+
+Materialized:
+- `PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_INDEX.md`;
+- `PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_A.md`;
+- `PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_B.md`;
+- `PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_C.md`;
+- `PASSIVE_OVERLAP_EDGE_ADJUDICATION_WAVE_001.md`.
+
+Coverage:
+- **230 / 230 passive records** have conceptual read-dependency baselines;
+- **93 candidate overlap edges** reviewed;
+- 38 `SAME_TERM_CAPPED`;
+- 30 `ORDERED_STAGE_COMPOSITION`;
+- 25 `DISTINCT_STAGE_NO_SHARED_TERM`.
+
+No runtime field/module is claimed by this normalization.
+
 ## Knowledge reconciliation waves
 
 Materialized:
@@ -108,8 +126,8 @@ No named institution was invented and no record was canon-promoted.
 
 ## Next work
 
-1. normalize per-record read dependencies and same-term overlap sets;
-2. resolve knowledge Wave-A/B/C rows against role-class/world evidence;
+1. resolve knowledge Wave-A/B/C rows against role-class/world evidence;
+2. assign/verify shared resolver keys and caps for the 38 SAME_TERM_CAPPED overlap edges;
 3. progress selected records from family role classes toward actual world entities only when parent world docs support them;
 4. expand numeric parameterization after base-system units are documented;
 5. run additional canon dry-review packets;
