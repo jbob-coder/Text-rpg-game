@@ -224,3 +224,25 @@ Phase 1 requirement #6 has a current proof path using the existing starting inve
 Exact-head regression/build/device evidence remains separate.
 
 Breadth direction after V07 closure: **V09 Persistent Adversaries / World Memory**. V05 and V08 now provide the social and tactical prerequisites needed to document that domain without cloning a branded external system.
+
+
+## 13. Live first-pass coverage checkpoint — V09 persistent adversaries / world memory
+
+V09 now has **8 / 8 minimum canonical first-pass units**:
+
+1. PERSISTENT_ADVERSARY_WORLD_MEMORY_MASTER_PLAN.md
+2. ADVERSARY_ELIGIBILITY_IDENTITY_STANDARD.md
+3. ADVERSARY_ENCOUNTER_MEMORY_ADAPTATION_STANDARD.md
+4. ADVERSARY_LIFECYCLE_RECURRENCE_STANDARD.md
+5. ADVERSARY_HIERARCHY_SUCCESSION_STANDARD.md
+6. ADVERSARY_TERRITORY_ROUTING_STANDARD.md
+7. ADVERSARY_PLAYER_SAFE_INTEL_STANDARD.md
+8. GATE_TWELVE_ADVERSARY_PROOF_PACKET.md
+
+Status: **FIRST-PASS QUOTA SATISFIED / RUNTIME NOT IMPLEMENTED / NO CANON RECURRING ADVERSARY SELECTED.**
+
+V09 reuses V05 identity/memory/knowledge/social authority and V08 encounter/aftermath authority rather than creating duplicate state.
+
+The Gate Twelve packet is deliberately nonbinding: the current unidentified Service Tunnel contacts remain encounter-local unless a later explicit promotion/canon decision creates a persistent NPC.
+
+Breadth direction after V09 closure: perform an all-volume first-pass quota coverage audit before creating another batch. Do not assume the next domain is under-covered from raw file count alone.
