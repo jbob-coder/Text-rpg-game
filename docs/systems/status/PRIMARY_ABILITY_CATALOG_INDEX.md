@@ -118,6 +118,33 @@ Open blockers:
 - Mass Inversion tag/end-state physics;
 - Energy Devour whitelist/reserve/output model.
 
+## Epic deep-authoring
+
+- `calibration/PRIMARY_ABILITY_DETAIL_EPIC_001_004.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_EPIC_001_004.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_EPIC_001_004.md`
+- `calibration/ABILITY_COUNTER_DETAIL_EPIC_001_004.md`
+
+Epic 001–004 now have:
+- 4 reconstruction-oriented ability records;
+- 16 detailed technique records;
+- 4 detailed awakening records;
+- 4 detailed counterplay records;
+- explicit Super Rare↔Epic law-boundary treatment.
+
+Epic design principle:
+Epic must introduce a qualitative governing-rule change rather than merely multiplying Super Rare output.
+
+Open Epic blockers:
+- Causal Mark property whitelist/coupling/anti-duplication rules;
+- Singularity Seed physical model and naming semantics;
+- Adaptive Arsenal template/biomass/reversion rules;
+- Spatial Dominion geometry/reference/path rules;
+- numeric calibration;
+- institutions/history.
+
+Compact Epic technique/awakening/counter registry rows remain structurally valid but still use generic placeholder wording and require a later safe rewrite pass.
+
 ## Integration
 
 - `ABILITY_PASSIVE_CROSS_REFERENCE.md`
