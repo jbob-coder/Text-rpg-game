@@ -1,6 +1,6 @@
 # PR #33 Class-C Unique-Requirement Extraction — 2026-10-03
 
-Status: **ACTIVE D-044 EVIDENCE / EXTRACTION PLAN / NO WHOLE-HIERARCHY MIGRATION**
+Status: **D-044 EXTRACTION COMPLETE / HISTORICAL PROVENANCE RETAINED / NO WHOLE-HIERARCHY MIGRATION**
 
 Repository: `jbob-coder/Text-rpg-game`
 
@@ -437,3 +437,53 @@ This Class-C slice becomes complete when:
 Until then:
 
 `D-044 CLASS-C EXTRACTION = IN_PROGRESS`.
+
+
+## 14. Completion verification — 2026-10-04
+
+D-044's seven selective Class-C migration actions are now materialized in the current program authorities:
+
+1. **Documentation expectation/acceptance standard**  
+   -> `docs/DOCUMENTATION_EXPECTATION_AND_ACCEPTANCE_STANDARD.md`.
+
+2. **Decision/gap closure rule**  
+   -> `docs/DECISION_AND_REBUILD_EXECUTION_REGISTER.md`.
+
+3. **Graph node/edge semantics plus failure/recovery handoff**  
+   -> `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md`.
+
+4. **Player-safe beast presence / mixed-scene composition**  
+   -> `docs/assets/ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md` section 15.
+
+5. **Beast density / migration boundary / repopulation / pressure / readiness**  
+   -> `docs/world/WORLD_BEAST_ZONE_STANDARD.md` section 11.
+
+6. **Bounded persistent-adversary adaptation / recurrence / lifecycle**  
+   -> `docs/systems/NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md` section 22.
+
+7. **L0-L4 map-detail production gate**  
+   -> `docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md` section 30.
+
+The moving-base coverage/status matrix remains historical and was not promoted as a competing active authority.
+
+No unit-dependent “2,000,000 separate files” machinery was activated.
+
+### Live ref re-resolution
+
+Re-resolved on 2026-10-04:
+
+- program branch: `de8c76cc08da20099671b5cd8fc5d7d7acca1920`;
+- moving target branch: `65d2db8538c1b8302c314f2fbe9eb7a1b585b51d`;
+- merge base: `c261b2aaf8bd978d27b46f8fea03435c0c5734d0`;
+- compare result: **diverged**;
+- program side ahead by **651** commits;
+- program side behind target by **99** commits;
+- PR #33 remains **open**, **draft**, and GitHub currently reports **mergeable: false**.
+
+This does not change the earlier decision: **do not blind merge/rebase**. Unique non-conflicting requirements have been selectively migrated into current authorities; stale/duplicate authority hierarchy remains historical evidence.
+
+### D-044 result
+
+`D-044 CLASS-C EXTRACTION = COMPLETE`
+
+Completion here means the moving-base documentation reconciliation/extraction task is complete. It does **not** mean PR #33 should be merged, retargeted, or promoted. Any future branch-operation decision is separate repository governance work.
