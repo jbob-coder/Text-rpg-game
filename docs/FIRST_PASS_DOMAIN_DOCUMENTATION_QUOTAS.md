@@ -180,3 +180,23 @@ Phase 1 impact:
 - final schedule/location runtime remains future work.
 
 Breadth direction after V05 closure: move to V10 Activities/Life Simulation because it has a smaller under-covered quota and directly blocks Phase 1 requirement #8. The Gate Twelve tactical encounter packet continues in parallel as Track B work.
+
+
+## 11. Live first-pass coverage checkpoint — V10 activities/life simulation
+
+V10 now has **8 / 8 minimum canonical first-pass units**:
+
+1. PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md
+2. ACTIVITY_RECORD_AND_STATE_STANDARD.md
+3. ACTIVITY_TIME_COST_ATOMICITY_STANDARD.md
+4. TRAINING_AND_PRACTICE_ACTIVITY_STANDARD.md
+5. RECOVERY_REST_TREATMENT_ACTIVITY_STANDARD.md
+6. WORK_STUDY_RESEARCH_ACTIVITY_STANDARD.md
+7. ACTIVITY_INTERRUPTION_CONCURRENCY_STANDARD.md
+8. TRACE_CHAMBER_PHASE1_ACTIVITY_PROOF_PACKET.md
+
+Status: **FIRST-PASS QUOTA SATISFIED / CURRENT TRAIN-RECOVER-PRACTICE FOUNDATION EXISTS / ADVANCED LIFE-SIM RUNTIME DEFERRED.**
+
+Phase 1 requirement #8 now has an existing authored proof candidate: TRAIN_POWER_FUNDAMENTALS_TWO_HOURS at TRACE_CHAMBER. Exact-head execution/save-load/Android verification remains pending.
+
+Breadth direction after V10 closure: V07 Items/Economy/Loot because Phase 1 requirement #6 already has current inventory/equipment behavior but the larger item/economy documentation layer is under-covered and feeds combat, activities, world resources, and final UI.
