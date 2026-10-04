@@ -313,6 +313,18 @@ Result:
 - current implementation formulas/values are preserved as reference evidence rather than silently canonized as final target balance;
 - resolver range readiness remains 0 / 20 pending domain-specific ranges.
 
+## Physical / institutional parent semantics
+
+Evidence:
+- `STATUS_PHYSICAL_DISTANCE_CONTEST_PRECISION_STANDARD.md`
+- `INSTITUTION_ROLE_AUTHORIZATION_PROTOCOL_STANDARD.md`
+
+Result:
+- physical distance/reach/contest/precision semantics are defined without forcing map pixels into meters;
+- institutional membership, role, rank, credential, clearance, authorization, protocol, and reputation are separated;
+- institutional passives cannot grant permission or expose hidden clearance;
+- final numeric ranges and named institutions remain open.
+
 ## Gate Twelve local world evidence
 
 Evidence:
