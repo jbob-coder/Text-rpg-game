@@ -375,6 +375,19 @@ Result:
 - confidence is separated from objective truth;
 - 0 / 20 range-readiness remains correct because final domain ranges are still open.
 
+### Physical / institutional semantic foundations
+
+Materialized:
+- `STATUS_PHYSICAL_DISTANCE_CONTEST_PRECISION_STANDARD.md`;
+- `INSTITUTION_ROLE_AUTHORIZATION_PROTOCOL_STANDARD.md`.
+
+Result:
+- meters are the target physical distance unit;
+- map/presentation coordinates remain non-physical unless transformed;
+- opposed physical contests and precision floors are explicit;
+- institution/role/rank/credential/clearance/authorization/protocol concepts are separated;
+- Faction/Institutional passives have a parent authorization boundary without inventing named entities.
+
 ### Gate Twelve evidence-backed world integration
 
 Materialized:
@@ -516,6 +529,18 @@ Still open:
 - overload thresholds;
 - living-target policy;
 - world medical/industrial/legal integration.
+
+### Super Epic canon dry review
+
+Materialized:
+- `CANON_REVIEW_DRY_RUN_SUPER_EPIC_001_003.md`.
+
+Dry outcomes:
+- Time Partition — RETURN_FOR_REFINEMENT;
+- Matter Recode — RETURN_FOR_REFINEMENT;
+- Probability Tilt — RETURN_FOR_REFINEMENT.
+
+All three retain distinct Super Epic identities. Remaining blockers are numeric envelopes, world integration, state-owner/runtime mapping, and owner approval.
 
 ### Canon-review dry runs
 
