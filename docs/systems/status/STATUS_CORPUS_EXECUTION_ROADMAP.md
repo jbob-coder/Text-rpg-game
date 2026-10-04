@@ -194,6 +194,37 @@ Open blockers:
 - system-strain/recovery semantics;
 - historical/institutional integration.
 
+### Unique ability slice 001
+
+Materialized:
+- `calibration/PRIMARY_ABILITY_DETAIL_UNIQUE_001.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_UNIQUE_001.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_UNIQUE_001.md`
+- `calibration/ABILITY_COUNTER_DETAIL_UNIQUE_001.md`
+- `UNIQUE_ABILITY_ONTOLOGY_RARITY_AUDIT_001.md`
+
+Completed:
+- 1 deep ability record;
+- 4 detailed techniques;
+- 4 individualized compact technique rows;
+- 1 individualized awakening profile;
+- 1 individualized limitation/counter profile;
+- Prime Legendary↔Unique ontology boundary audit.
+
+Wave-001 primary ability detail coverage:
+- **47 / 47 primary ability identities now have deep-authoring packets.**
+
+See:
+- `PRIMARY_ABILITY_WAVE_001_REFINEMENT_COMPLETENESS_AUDIT.md`.
+
+Open Unique blockers:
+- exclusivity enforcement;
+- death/persistence/transfer;
+- Level-100 interaction;
+- Status-layer taxonomy;
+- authentication/permission/safeguard semantics;
+- holder history and institutional integration.
+
 ### Passive progress
 
 Physical 0001–0010:
@@ -212,6 +243,13 @@ Movement 0001–0010:
 - knowledge posture audited;
 - overlap/stacking and safety requirements recorded.
 
+Sensory 0001–0010:
+- deep-authored;
+- scaling/caps/state ownership documented;
+- knowledge posture audited;
+- signal-versus-interpretation boundary defined;
+- false-positive/objective-truth requirements recorded.
+
 Open:
 - numeric coefficients;
 - concrete runtime mapping;
@@ -220,11 +258,11 @@ Open:
 
 ### Next order
 
-1. **Deep-author Unique 001.**
-2. **Deep-author Sensory passives 0001–0010.**
+1. **Deep-author Mental/Will passives 0001–0010.**
+2. Resolve the highest-priority cross-tier ability blockers documented in `PRIMARY_ABILITY_WAVE_001_REFINEMENT_COMPLETENESS_AUDIT.md`.
 3. Continue remaining passive families.
-5. Perform world integration after enough accepted records exist.
-6. Defer runtime implementation until design coherence.
+4. Begin controlled world/institution/history integration for sufficiently mature records.
+5. Defer runtime implementation until design coherence.
 
 ## Phase D — world integration
 
