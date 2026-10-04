@@ -118,6 +118,39 @@ Target content:
 - QA;
 - release provenance.
 
+## 4.1 First-pass canonical document quotas
+
+The first concrete coverage floor is defined in:
+- `docs/FIRST_PASS_DOMAIN_DOCUMENTATION_QUOTAS.md`.
+
+First-pass minimum allocation:
+- V00 authority/governance: 8;
+- V01 existing-state audit: 10;
+- V02 visual/assets: 12;
+- V03 Gate Twelve proof region: 10;
+- V04 world: 12;
+- V05 characters/social: 12;
+- V06 progression: 12;
+- V07 items/economy/loot: 10;
+- V08 tactical combat: 10;
+- V09 persistent adversaries/world memory: 8;
+- V10 activities/life simulation: 8;
+- V11 application UI/UX planning: 8;
+- V12 Android/APK reconstruction: 8;
+- cross-domain guides/planning: 10;
+- cross-domain evidence/QA/migration: 10.
+
+Total first-pass floor: **148 canonical documentation units**.
+
+This is not a claim that 148 files equal completion. Structured records and semantic coverage remain separate metrics, and final quotas will be recalibrated after the first broad pass.
+
+## 4.2 Phase 1 playable progress must be tracked separately
+
+The parallel playable line is:
+- `docs/PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md`.
+
+Track its 16 minimum integrated requirements independently from the corpus-size metrics. Documentation can grow without falsely implying Phase 1 is playable, and implementation progress can advance without falsely implying the full corpus is complete.
+
 ## 5. Current program milestone
 
 The current documentation branch has established:
