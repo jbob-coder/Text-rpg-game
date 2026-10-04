@@ -72,3 +72,15 @@ Every major area/system packet should explicitly state:
 - QA and provenance status.
 
 This directive supplements the existing pixel-art production standards and does not weaken their no-smoothing, native-grid, state-ownership, provenance, or QA requirements.
+
+## No geometry for character creation
+
+The owner explicitly clarified that characters are not to be created from geometry.
+
+Locked interpretation:
+
+- no rectangle/circle/polygon/vector/block-primitive construction as the final visible character;
+- no procedural geometric character generator as the production identity system;
+- player/NPC/enemy character visuals come from authored pixel-art assets generated through this workflow and then extracted/reconstructed/cleaned for production;
+- sprite anchors, pivots, bounds and body-part coordinates remain valid only as alignment/animation/equipment metadata;
+- historical geometric/block character renderers may exist only as temporary migration/debug fallback and must not be promoted as final art.
