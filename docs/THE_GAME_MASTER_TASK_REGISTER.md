@@ -1,6 +1,6 @@
 # THE GAME — Repository Master Task Register
 
-Updated: 2026-10-02 15:06 AST
+Updated: 2026-10-04 AST
 Timezone: America/Puerto_Rico (AST, UTC-4)  
 Status: `PENDING` / `IN_PROGRESS` / `BLOCKED` / `DONE`
 
@@ -10,10 +10,12 @@ This is the repository-native operational index for future coding agents. It int
 
 1. Current repository files and exact branch/HEAD.
 2. Fresh build/test/runtime evidence.
-3. This task register.
-4. `docs/IMPLEMENTATION_STATUS.md`.
-5. `docs/V6_STABILIZATION_HANDOFF.md`.
-6. Chat memory / historical summaries.
+3. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`.
+4. `docs/MASTER_DOCUMENTATION_RECORD.md`.
+5. This task register.
+6. `docs/IMPLEMENTATION_STATUS.md`.
+7. `docs/V6_STABILIZATION_HANDOFF.md`.
+8. Chat memory / historical summaries.
 
 Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPLETED_AT` in America/Puerto_Rico time. Unknown historical times use `NOT_RECORDED`.
 
@@ -22,6 +24,7 @@ Do not mark a task `DONE` without evidence. Every `DONE` task must record `COMPL
 **Priority repository:** `jbob-coder/Text-rpg-game`  
 **Priority mode:** documentation-first; broad implementation expansion follows written contracts.  
 **Current program:** [`MASTER_GAME_DEVELOPMENT_PROGRAM.md`](MASTER_GAME_DEVELOPMENT_PROGRAM.md)  
+**Master documentation record:** [`MASTER_DOCUMENTATION_RECORD.md`](MASTER_DOCUMENTATION_RECORD.md)  
 **Cross-reference:** [`DOCUMENTATION_CROSS_REFERENCE_MATRIX.md`](DOCUMENTATION_CROSS_REFERENCE_MATRIX.md)
 
 This section supersedes older statements about the top-level product objective while preserving their exact historical verification evidence.
@@ -207,6 +210,16 @@ This section supersedes older statements about the top-level product objective w
 - DOCUMENT: `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`
 - CURRENT: source-grounded `GameSnapshot`/`GameEngine` surface map plus major screen ownership and missing projection contracts documented.
 - REMAINING: line-by-line composable/ViewModel/bridge consumer audit and test mapping.
+
+### TASK D-047 — Establish master documentation record
+- STATUS: `DONE`
+- PRIORITY: `P0`
+- DOCUMENT: `docs/MASTER_DOCUMENTATION_RECORD.md`
+- RESULT: one repository-native control record now consolidates documentation areas, exact audited path counts, completed contract layers, partial areas, missing work, blockers, authority links, update rules and immediate execution order.
+- AUDIT_BASE: `docs/master-game-development-program@28809b7abdaf6f7f05ccd58cf0d5e71efacf5e22`
+- CREATED_COMMIT: `5c06fe354816d7f454ca27f75806271278fc09ff`
+- MAINTENANCE_RULE: update the master record whenever a major documentation area's state, blocker, authority or next action materially changes.
+- COMPLETED_AT: `2026-10-04 AST`
 
 ### TASK D-012 — Final APK keep/rebuild matrix and execution
 - STATUS: `BLOCKED`
