@@ -1,6 +1,6 @@
 # THE GAME — Passive Catalog Index
 
-Status: **ACTIVE CATALOG NAVIGATION / CALIBRATION WAVE 001**
+Status: **ACTIVE CATALOG NAVIGATION / WAVE 001 STRUCTURALLY COMPLETE / REFINEMENT IN PROGRESS**
 
 Parents:
 - `PASSIVE_REGISTRY_SCHEMA.md`
@@ -9,23 +9,64 @@ Parents:
 
 ## Catalog policy
 
-A passive is not canon merely because it is generated for calibration.
+A passive is not canon merely because it appears in a calibration wave.
 
-Each entry must carry:
-- stable ID;
-- family;
-- effect;
-- acquisition class;
-- visibility;
-- design/canon/implementation state.
+Stable identity, effect, unlock logic, and knowledge state may be authored separately and then reconciled into a reconstruction-grade passive record.
 
-## Wave 001 target
+## Wave 001 realized set
 
 23 families x 10 proposal passives = **230 passive records**.
 
-Families include physical, recovery, movement, sensory, mental, cognitive, combat, weapon, defense, survival, social, leadership, technical, medical, ability synergy, resistance, beast interaction, injury/scar, profession, faction/institution, unique event, cosmic/system, and unknown/classified.
+Families:
+- physical;
+- recovery;
+- movement;
+- sensory;
+- mental;
+- cognitive;
+- combat;
+- weapon;
+- defense;
+- survival;
+- social;
+- leadership;
+- technical;
+- medical;
+- ability synergy;
+- resistance;
+- beast interaction;
+- injury/scar;
+- profession;
+- faction/institution;
+- unique event;
+- cosmic/system;
+- unknown/classified.
 
-See:
+Structural validation: **230 / 230 passive IDs present and unique.**
+
+## Core catalog files
+
 - `calibration/PASSIVES_WAVE_001.md`
 - `calibration/PASSIVE_UNLOCK_PATHS_WAVE_001.md`
 - `calibration/PASSIVE_KNOWLEDGE_WAVE_001.md`
+
+## Deep-authoring files
+
+- `calibration/PASSIVE_DETAIL_PHYSICAL_0001_0010.md`
+
+## Audit
+
+- `STATUS_CORPUS_WAVE_001_AUDIT.md`
+- `DOCUMENTATION_UNIT_LEDGER.md`
+
+## Promotion rule
+
+A passive is not reconstruction-grade until:
+- full effect/scaling/stack/cap behavior is defined;
+- acquisition logic is deterministic;
+- hidden-progress behavior is safe;
+- exploit/self-harm loops are controlled;
+- world knowledge includes all relevant scopes;
+- significance/secrecy/danger are defined;
+- evolution behavior is explicit;
+- implementation/content/test dependencies are mapped.
