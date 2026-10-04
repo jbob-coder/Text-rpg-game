@@ -1,4 +1,4 @@
-# THE GAME — Ability Awakening Profiles Calibration Wave 001
+| AWAKE_COM_010 | ABILITY_COM_010 | Loose thread, cord, fabric edge, or similar flexible material moves toward or around the user under involuntary control. | Entanglement, choking/snaring risk, snagged equipment, snapped-line recoil, or property damage from pulled materials. | Status may identify Thread Command and Common rarity; visible moving fibers may be obvious, but the controlled-material boundary must be verified before classification. | CALIBRATION_PROPOSAL |
 
 Status: **CALIBRATION_PROPOSAL / NOT CANON UNTIL PROMOTED / NOT IMPLEMENTED**
 
