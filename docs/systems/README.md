@@ -55,3 +55,19 @@ Working rule: current runtime facts and evolved target design stay explicitly se
 - [Status subsystem index](status/README.md) — child contracts, registries, visibility rules and future catalog navigation.
 
 This program supplements the broader progression authority and owns the Status-specific rules.
+
+
+## Tactical combat first-pass contract layer — 2026-10-04
+
+The V08 first-pass tactical documentation floor is now materialized through ten canonical units: the master plan, camera/presentation standard, and eight implementation-detail standards.
+
+- TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md
+- TURN_INITIATIVE_ACTION_BUDGET_STANDARD.md
+- MOVEMENT_PATHING_AND_POSITIONING_STANDARD.md
+- LOS_DETECTION_AND_COMBAT_KNOWLEDGE_STANDARD.md
+- DIRECTIONAL_COVER_TERRAIN_STANDARD.md
+- COMBAT_ACTION_TARGETING_RESOLUTION_STANDARD.md
+- INJURY_CONDITION_AFTERMATH_STANDARD.md
+- COMBAT_AI_OBJECTIVES_RETREAT_STANDARD.md
+
+This closes the first-pass documentation quota for V08 only. Tactical runtime remains unimplemented. The next combat document should be a bounded Gate Twelve Phase 1 encounter packet rather than more generic combat theory.
