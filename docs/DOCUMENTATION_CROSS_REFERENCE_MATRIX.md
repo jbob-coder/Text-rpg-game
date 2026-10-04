@@ -1185,3 +1185,35 @@ Owns the implementation-specific mapping from V09 contracts to:
 - rollback, save-round-trip, privacy and low-end performance tests.
 
 It changes no runtime state and selects no canonical recurring Gate Twelve enemy.
+
+
+## V12 Android/APK first-pass child suite — 2026-10-04
+
+Existing parents/evidence:
+- docs/android/APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md
+- docs/android/APK_FINAL_RECONSTRUCTION_MATRIX.md
+- docs/ANDROID_PIXEL_CLIENT_VALIDATION.md
+
+New first-pass children:
+- docs/android/ANDROID_RUNTIME_BRIDGE_ARCHITECTURE_STANDARD.md
+- docs/android/ANDROID_BUILD_CONFIGURATION_RECONSTRUCTION_STANDARD.md
+- docs/android/ANDROID_CI_AUTOMATED_ACCEPTANCE_STANDARD.md
+- docs/android/ANDROID_DEVICE_PERFORMANCE_COMPATIBILITY_STANDARD.md
+- docs/android/ANDROID_RELEASE_PROVENANCE_ROLLBACK_STANDARD.md
+
+V12 first-pass quota: 8 / 8.
+
+These define:
+- Python/Android authority;
+- current toolchain/build facts and safe migration;
+- CI evidence levels;
+- low-end/physical-device acceptance;
+- artifact/signing/update/provenance/rollback.
+
+Execution remains late-stage and gated.
+
+## First-pass quota audit authority
+
+- docs/FIRST_PASS_QUOTA_COVERAGE_AUDIT_2026-10-04.md
+
+This is the current semantic owner for V00–V12 first-pass quota attribution and duplicate-resistant counting.
