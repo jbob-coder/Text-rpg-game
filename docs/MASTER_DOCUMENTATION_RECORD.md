@@ -533,20 +533,21 @@ For a domain to move to **ESTABLISHED / reconstruction-grade**, the documentatio
 The current strongest order is:
 
 1. **Use this file as the master status index.**
-2. **Reconcile the task register with the live 2026-10-04 tree**, removing stale NEXT statements without deleting historical evidence.
-3. **Complete D-019 current-head inventory** so file/word/record/asset/test totals are reproducible at the current program head.
-4. **Complete D-006/D-042 existing-state audit** at file/consumer level.
-5. **D-044 moving-base reconciliation is complete.**  
-   Shared authority, unique child migrations and all seven Class-C selective extraction actions are reconciled. PR #33 remains divergent/non-mergeable; this is a branch-governance condition, not unfinished Class-C extraction.
+2. **Continue D-019 measurement work** with a complete-checkout current-head word/heading/domain/test-evidence inventory; the exact structural snapshot already exists.
+3. **Continue D-006/D-042 only on the remaining deep-audit gaps**: member/consumer-level evidence, asset lineage, zero-consumer proof and cross-system migration dependencies. The current-head source/path inventory is already complete.
+4. **Continue D-026/D-021 from the narrowed remainder**: member/asset-ID consumer proof, D-030 actor migration map, future projections and final APK destination mapping. Major current fields/actions/catalog files and test gaps are already mapped.
+5. **Continue D-029 asset provenance/equivalence work** without making owner visual/canon decisions by inference.
+6. **Resolve D-031 Gate Twelve parent-world canon with the owner** before promoting proposal-only higher-world names/relationships.
+7. **Continue D-045 progression children**, beginning with the combat class catalog and the remaining profession/rank/training/facility/UX packets.
+8. **Create D-032 mechanics schema/API migration packets** before broad runtime reconstruction.
+9. **Populate world/character/item/combat/life-loop content only against accepted standards and migration rules.**
+10. **Keep D-033/final APK teardown and reconstruction late-stage and gated.**
 
-6. **
-6. **Complete D-029 asset provenance/equivalence evidence.**
-7. **Complete D-026/D-021 Android consumer mapping.**
-8. **Resolve D-031 Gate Twelve parent-world canon with the owner.**
-9. **Continue D-045 progression children**, beginning with the combat class catalog.
-10. **Create D-032 migration packets** before broad runtime reconstruction.
-11. **Populate world/character/item/combat/life-loop content only against the accepted standards.**
-12. **Keep final APK teardown/rebuild late-stage and gated.**
+Completed control/reconciliation work that should not be reopened without new evidence:
+- D-044 moving-base Class-C/unique-requirement extraction;
+- D-020 PR #7–#31 branch/provenance survivor reconciliation;
+- D-028 exact PR #7–#31 reconciliation record;
+- D-047 establishment of this master documentation record.
 
 ---
 
@@ -567,9 +568,13 @@ The current strongest order is:
 
 - `docs/LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md`
 - `docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-02.md`
+- `docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-04.md`
+- `docs/evidence/repository_inventory_2026-10-04.json`
 - `docs/DOCUMENTATION_CATALOG_2026-10-02.md`
 - `docs/ALL_BRANCH_DOCUMENT_INDEX_2026-10-04.md`
+- `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`
 - `docs/IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md`
+- `docs/IMPLEMENTATION_SURVIVOR_MIGRATION_MATRIX_2026-10-04.md`
 - `docs/PR33_MOVING_BASE_DRIFT_RECONCILIATION_2026-10-02.md`
 - `docs/PR33_LIVE_SHARED_FILE_RECONCILIATION_2026-10-03.md`
 - `docs/PR33_CLASS_C_UNIQUE_REQUIREMENT_EXTRACTION_2026-10-03.md`
