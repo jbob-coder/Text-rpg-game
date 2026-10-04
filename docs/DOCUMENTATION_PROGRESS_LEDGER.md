@@ -601,3 +601,17 @@ Deferred/noncurrent zero-consumer candidates remain separate:
 D-029 remains in progress because fresh 24/24 pixel-equivalence execution, visual survivor decisions, final character/portrait production, canon approval and physical-device QA remain open.
 
 No runtime/assets were modified and no tests/builds/verifier execution occurred in this audit.
+
+
+## 2026-10-04 D-029 visual survivor owner-decision gate
+
+Added:
+- `docs/assets/VISUAL_SURVIVOR_OWNER_DECISION_PACKET_2026-10-04.md`.
+
+The remaining static-scene ambiguity is now reduced to two explicit owner decisions:
+- D029-VIS-001 — current Service Tunnel baseline vs PR #27 refined candidate;
+- D029-VIS-002 — current Quiet Stair baseline vs PR #30 refined candidate.
+
+The safe default remains the current integrated baseline. PR #28 composition and PR #31 animation remain downstream/deferred until the Service Tunnel static parent is selected.
+
+No candidate was silently promoted and no runtime/raster migration was performed.
