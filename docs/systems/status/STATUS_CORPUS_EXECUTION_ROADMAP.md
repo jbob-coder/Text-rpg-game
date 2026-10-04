@@ -266,7 +266,7 @@ Record-level read-dependency mapping and the 93-edge overlap adjudication are al
 
 ### Next order
 
-1. **Continue parent-system fixture batches; move to numeric ranges only where parent scales are justified.**
+1. **Define target resource range bands and physical contest/precision/distance conventions; semantic time/resource/error foundations are now documented.**
 2. **Use confirmed Gate Twelve evidence to adjudicate supported local knowledge/world links.**
 3. **Progress named world-entity links only after parent-world canon decisions.**
 4. Run additional canon-review dry packets.
@@ -358,6 +358,22 @@ Result:
 - 0 / 20 canonical passive resolver families currently have enough parent-scale evidence for range fixtures;
 - no unsupported numbers were introduced;
 - prerequisite order is now explicit: world/simulation time -> core resource scales -> error/confidence representation -> physical contest/precision -> travel/fatigue/environment -> institutional workflow.
+
+### Parent-scale semantic foundations
+
+Materialized:
+- `WORLD_SIMULATION_TIME_AND_DURATION_STANDARD.md`;
+- `STATUS_WORLD_TIME_PARENT_FIXTURE_BATCH_001.md`;
+- `CORE_RESOURCE_SCALE_AND_TRANSACTION_STANDARD.md`;
+- `STATUS_ERROR_CONFIDENCE_RESOLUTION_MODE_STANDARD.md`.
+
+Result:
+- strategic WORLD_TIME authority/unit is defined;
+- sub-minute encounter/process time is explicitly separated;
+- core resource current/base/effective-max and transaction semantics are defined;
+- general deterministic/margin/seeded/contest/weighted resolution modes are defined;
+- confidence is separated from objective truth;
+- 0 / 20 range-readiness remains correct because final domain ranges are still open.
 
 ### Gate Twelve evidence-backed world integration
 
