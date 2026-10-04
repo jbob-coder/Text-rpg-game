@@ -363,7 +363,7 @@ D-026/D-021 current-source consumer discovery is now complete at field/action, n
 | **V05 — Characters / NPC / social / rivals** | **PARTIAL** | Existing engine has social/memory concepts; target corpus is not exhaustive | `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, population/hierarchy standards, player-safe actor contract | Full character catalog, recurring-NPC packets, schedules/goals/factions, dynamic-rival hierarchy/evolution records, world integration and migration mapping. |
 | **V06 — Progression / stats / skills / abilities / passives / classes / ranks** | **LARGE ACTIVE CORPUS / IN_PROGRESS** | Target design substantially exceeds current runtime | `PROGRESSION_MASTER_PLAN.md`, `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`, `EVOLVED_SKILL_REGISTRY.md`, `STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`, `docs/systems/status/**` | Status Phase A is complete; Wave 001 has 1,019 structurally audited records; primary-ability detail coverage is 47/47 and passive family baseline coverage is 23/23. Still missing: combat-class catalog; profession/rank/status packet; training/mentor/facility standard; progression Gate Twelve proof packet; progression UX contract; numeric/range fixtures; world/canon promotion; target-schema/API migration. |
 | **V07 — Items / economy / loot** | **MASTER CONTRACT ESTABLISHED / CONTENT PARTIAL** | Existing equipment/items are not the final target economy | `ITEM_ECONOMY_LOOT_MASTER_PLAN.md`, world loot provenance standard, asset/item provenance docs | Full item taxonomy/catalog, economy source/sink model, vendor/services rules where approved, resource-to-item chains, loot tables, migration to existing IDs/save consumers. |
-| **V08 — Tactical combat** | **MASTER CONTRACT ESTABLISHED / CAMERA+TACTICAL DIRECTION LOCKED / DETAIL PARTIAL** | Final tactical runtime not implemented | `TACTICAL_COMBAT_MASTER_PLAN.md`, `CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md`, balance integration docs | Initiative/action-budget numbers, encounter/tactical-map detail, AI calibration, progression/item/status integration, schema/API migration, low-end performance budgets and tests. |
+| **V08 — Tactical combat** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | Final tactical runtime not implemented | Tactical master, camera/presentation standard, coordinate/occupancy, turn/action budget, movement, LOS/knowledge, cover/terrain, action resolution, injury/aftermath, AI/objective standards | Gate Twelve authored encounter packet, combat schema/API migration, Android tactical projection/UI, final balance calibration, low-end performance budgets and exact-head tests. |
 | **V09 — Persistent adversaries / world memory** | **PARTIAL** | Concepts exist; target system is not reconstruction-complete | `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, social engine evidence, world integration standards | Dedicated adversary/rival records, hierarchy changes, memory consequences, promotion/demotion rules, world event integration, save/state migration contract. |
 | **V10 — Activities / life simulation** | **MASTER CONTRACT ESTABLISHED / CONTENT PARTIAL** | Current simulation is narrower than target design | `PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md` | Activity catalog, training/work/study/recovery content, concurrency/interruption fixtures, facility links, world schedules, progression/economy/social integration. |
 | **V11 — Application UX / projection** | **PLANNING / DOMAIN-DEPENDENT — CURRENT CONSUMERS MAPPED, FINAL REFINEMENT DEFERRED** | Current Android client exists, but final UI must wait for upstream world/gameplay domains to define stable player-facing requirements | `APPLICATION_UX_MASTER_PLAN.md`, `ANDROID_CONSUMER_AND_PROJECTION_MAP.md`, `PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`, status UI contracts | Preserve current consumer/projection evidence and planning constraints now; defer full screen-by-screen refinement until world, progression, NPC/social, items/economy, activities, combat, adversary and migration contracts are sufficiently mature. Then perform a dedicated UI refinement wave. |
@@ -747,3 +747,33 @@ This record is successful when a new developer or AI agent can answer all of the
 - which completion claims are backed by evidence.
 
 The record must remain shorter than the full corpus and must point outward rather than absorb every detail into one unmaintainable file.
+
+
+## 11. 2026-10-04 V08 tactical first-pass closure
+
+V08 reached its first-pass floor of 10 canonical units without claiming runtime completion.
+
+New implementation-detail authorities:
+- TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md;
+- TURN_INITIATIVE_ACTION_BUDGET_STANDARD.md;
+- MOVEMENT_PATHING_AND_POSITIONING_STANDARD.md;
+- LOS_DETECTION_AND_COMBAT_KNOWLEDGE_STANDARD.md;
+- DIRECTIONAL_COVER_TERRAIN_STANDARD.md;
+- COMBAT_ACTION_TARGETING_RESOLUTION_STANDARD.md;
+- INJURY_CONDITION_AFTERMATH_STANDARD.md;
+- COMBAT_AI_OBJECTIVES_RETREAT_STANDARD.md.
+
+Important locked Phase 1 defaults include:
+- four-way grid movement;
+- round-start initiative snapshot;
+- four action-budget units;
+- six-point Move and ten-point Sprint prototype allowances;
+- supercover LOS;
+- explicit awareness states;
+- directional +0/+10/+20 cover modifiers;
+- deterministic margin-based attack resolution;
+- incapacitation rather than automatic death at zero health;
+- atomic aftermath;
+- deterministic no-cheat utility AI.
+
+Runtime state remains unchanged. The next breadth domain is V05 Characters/NPC/Social, while the next combat-specific artifact is one authored Gate Twelve Phase 1 encounter packet.
