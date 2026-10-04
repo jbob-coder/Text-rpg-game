@@ -316,3 +316,21 @@ Status:
 This requirement does not need a new job/profession system for Phase 1.
 
 Next breadth dependency: V07 Items/Economy/Loot.
+
+
+## 14. Phase 1 readiness checkpoint — items and equipment
+
+Requirement 6 (equipment/inventory loop):
+- current flat inventory authority: **EXISTS**;
+- current equip/unequip rules: **EXIST**;
+- current Android inventory/equipment projection: **EXISTS**;
+- current starting loadout: **EXISTS**;
+- Maintenance Seal authored consumption: **EXISTS**;
+- Dead Relay authored acquisition: **EXISTS**;
+- V07 normalized documentation: **CONTRACT-READY**;
+- exact-head Phase 1 regression/save-load verification: **PENDING**.
+
+The selected proof is documented in:
+- docs/systems/GATE_TWELVE_PHASE1_ITEM_EQUIPMENT_PACKET.md
+
+Phase 1 does not wait for currency, vendors, crafting, durability, encumbrance, random loot, or a large item catalog.
