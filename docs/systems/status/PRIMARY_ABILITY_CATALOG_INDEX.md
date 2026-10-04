@@ -143,7 +143,36 @@ Open Epic blockers:
 - numeric calibration;
 - institutions/history.
 
-Compact Epic technique/awakening/counter registry rows remain structurally valid but still use generic placeholder wording and require a later safe rewrite pass.
+Epic compact technique, awakening, and counter rows are individualized. Physics/world-integration blockers remain.
+
+## Super Epic deep-authoring
+
+- `calibration/PRIMARY_ABILITY_DETAIL_SUPER_EPIC_001_003.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_SUPER_EPIC_001_003.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_SUPER_EPIC_001_003.md`
+- `calibration/ABILITY_COUNTER_DETAIL_SUPER_EPIC_001_003.md`
+- `SUPER_EPIC_ABILITY_RARITY_OVERLAP_AUDIT_001_003.md`
+
+Super Epic 001–003 now have:
+- 3 reconstruction-oriented ability records;
+- 12 individualized compact technique rows;
+- 12 detailed technique records;
+- 3 individualized awakening profiles;
+- 3 individualized counter profiles;
+- explicit Epic↔Super Epic boundary treatment.
+
+Key boundaries:
+- Temporal Drag ↔ Time Partition: external physical-process slowing versus subjective cognition acceleration.
+- Adaptive Arsenal ↔ Matter Recode: self biological transformation versus external nonliving molecular rearrangement.
+- Causal Mark ↔ Probability Tilt: recorded-property restoration versus prospective probability weighting.
+
+Open blockers:
+- subjective-time/sensory/metabolic semantics;
+- mass/energy/composition model;
+- probability-resolution model;
+- numeric calibration and world integration.
+
+Next ability slice: **Legendary 001–002**.
 
 ## Integration
 
