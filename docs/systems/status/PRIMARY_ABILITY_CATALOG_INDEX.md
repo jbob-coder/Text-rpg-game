@@ -35,18 +35,41 @@ Structural validation: **47 / 47 ability IDs present and unique.**
 - `calibration/ABILITY_AWAKENING_PROFILES_WAVE_001.md`
 - `calibration/ABILITY_COUNTER_PROFILES_WAVE_001.md`
 
-## Deep-authoring files
+## Common deep-authoring
 
 - `calibration/PRIMARY_ABILITY_DETAIL_COMMON_001_010.md`
 - `calibration/ABILITY_TECHNIQUE_DETAIL_COMMON_001_010.md`
+- `COMMON_ABILITY_RARITY_OVERLAP_AUDIT_001_010.md`
 
-For Common 001–010:
-- compact technique rows have individualized names/effects/cost/failure text;
-- awakening profiles have individualized manifestation/hazard/public-signal text;
-- counter profiles have individualized natural/tactical/environmental counterplay;
-- full technique fields now exist in the Common technique detail packet.
+Common 001–010 now have:
+- 10 reconstruction-oriented ability records;
+- 40 individualized compact technique rows;
+- 40 full technique-detail records;
+- 10 individualized awakening profiles;
+- 10 individualized counter profiles;
+- rarity/overlap audit.
 
-The deep-authoring layer is the reconstruction-grade direction. It adds the fields required by the full registry schema without changing stable IDs.
+## Uncommon deep-authoring
+
+- `calibration/PRIMARY_ABILITY_DETAIL_UNCOMMON_001_010.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_UNCOMMON_001_010.md`
+
+Uncommon 001–010 now have:
+- 10 reconstruction-oriented ability records;
+- 40 individualized compact technique rows;
+- 40 full technique-detail records;
+- 10 individualized awakening profiles;
+- 10 individualized counter profiles;
+- internal adjacency audit against Common/higher-tier concepts.
+
+The Uncommon slice explicitly resolves or narrows:
+- Kinetic Palm ↔ Vector Nudge;
+- Skin Reinforcement ↔ Stonehide;
+- Water Draw ↔ Vapor Sculpt.
+
+The remaining Common adjacency flags require Rare deep-authoring:
+- Static Reservoir ↔ Lightning Conduit;
+- Impact Cushion ↔ Momentum Bank.
 
 ## Integration
 
@@ -69,3 +92,5 @@ A calibration-row entry is not ready for canon promotion until:
 - world knowledge/legal/social consequences are mapped;
 - visual/content dependencies are documented;
 - overlap/rarity review passes.
+
+No record in Wave 001 has been bulk-promoted.
