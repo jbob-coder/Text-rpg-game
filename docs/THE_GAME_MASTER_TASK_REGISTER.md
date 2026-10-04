@@ -251,11 +251,16 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-02 08:16 AST`
 
 ### TASK D-025 — Asset provenance registry seed
-- STATUS: `IN_PROGRESS`
+- STATUS: `DONE — REGISTRY SEED ESTABLISHED / DEEP RECONCILIATION MOVED TO D-029`
 - PRIORITY: `P0`
 - DOCUMENT: `docs/assets/ASSET_PROVENANCE_REGISTRY.md`
-- CURRENT: provenance schema and initial 24-raster seed/reconciliation queue documented.
-- REMAINING: exact source-master/hash/branch/consumer/QA reconciliation for each asset family.
+- RESULT:
+  - stable asset provenance identity/field schema exists;
+  - source-authority classes, production stages, reuse signature, runtime layers and branch-awareness rules are defined;
+  - initial 24-raster program-branch seed is recorded;
+  - later D-029 family-level ledgers now own the deeper source/hash/branch/consumer/QA/canon reconciliation.
+- NEXT CONSUMER: D-029.
+- COMPLETED_AT: `2026-10-04 AST`
 
 ### TASK D-026 — Android consumer/projection map
 - STATUS: `IN_PROGRESS / CURRENT MAJOR CONSUMER AND TEST-GAP AUDIT COMPLETE`
