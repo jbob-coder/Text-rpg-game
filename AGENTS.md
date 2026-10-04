@@ -9,14 +9,15 @@ This file is the repository entry point for coding agents and automated assistan
 Before changing code or documentation, read these in order:
 
 1. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
-2. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
-3. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases for the owner's long-range directive.
-4. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — what each major document owns and what consumes it.
-5. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — operational task state, blockers, evidence and next action.
-6. `docs/IMPLEMENTATION_STATUS.md` — verified historical/current implementation evidence.
-7. Relevant domain master document for the work being changed.
-8. Relevant source/tests for the task being changed.
-9. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
+2. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical master record of what documentation exists, what is complete, what is partial, what is missing, blockers, and next actions.
+3. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
+4. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases for the owner's long-range directive.
+5. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — what each major document owns and what consumes it.
+6. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — operational task state, blockers, evidence and next action.
+7. `docs/IMPLEMENTATION_STATUS.md` — verified historical/current implementation evidence.
+8. Relevant domain master document for the work being changed.
+9. Relevant source/tests for the task being changed.
+10. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
 
 Repository files and fresh execution evidence outrank remembered chat context. Older game repositories, prototypes and historical reports are not authority unless an explicit migration record says otherwise.
 
@@ -30,7 +31,7 @@ Repository files and fresh execution evidence outrank remembered chat context. O
 - Historical V6 and Android branches remain evidence sources, not top-level product authority.
 - The old black-screen incident is historically closed by the repository-owned Compose/Chaquopy client on representative emulator evidence; physical Galaxy A03 validation remains a separate gate and must not be inferred from emulator results.
 
-Use the master program and task register for live status rather than copying historical snapshots forward.
+Use the master program, master documentation record, and task register for live status rather than copying historical snapshots forward.
 
 ## Default project permissions
 
@@ -75,6 +76,7 @@ For meaningful work, update `docs/THE_GAME_MASTER_TASK_REGISTER.md`:
 - State: `PENDING`, `IN_PROGRESS`, `BLOCKED`, or `DONE`.
 - A `DONE` task must include `COMPLETED_AT` using `America/Puerto_Rico` time.
 - Record files changed, tests/commands actually run, results, blockers, and any changed assumptions.
+- Update `docs/MASTER_DOCUMENTATION_RECORD.md` whenever a major documentation area's state, blocker, authority, or next action changes.
 - Do not invent historical completion times; use `NOT_RECORDED` if the exact time was never captured.
 
 ## Verification commands
