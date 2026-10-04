@@ -27,3 +27,5 @@ Routine reversible repository decisions may be made without repeated confirmatio
 
 
 - [2026-10-02_DOCUMENTATION_EXECUTION_CONTINUATION.md](2026-10-02_DOCUMENTATION_EXECUTION_CONTINUATION.md) — renewed directive, operational evidence, current gaps and separate source boundaries.
+
+- [2026-10-03_PIXEL_ART_GENERATION_EXTRACTION_DIRECTIVE.md](2026-10-03_PIXEL_ART_GENERATION_EXTRACTION_DIRECTIVE.md) — owner directive that new game visuals are produced through the assistant-led pixel-art generation, extraction/decomposition, native-grid cleanup, provenance, integration and QA workflow.
