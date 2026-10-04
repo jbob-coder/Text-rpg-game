@@ -367,7 +367,7 @@ D-026/D-021 current-source consumer discovery is now complete at field/action, n
 | **V09 — Persistent adversaries / world memory** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 8 OF 8 MINIMUM UNITS** | Runtime not implemented; no canon recurring Gate Twelve adversary selected | Dedicated V09 master plus eligibility, encounter-memory/adaptation, lifecycle, hierarchy/succession, territory/routing, player-safe intel and Gate Twelve proof contracts | D-032 adversary schema/API migration packet now exists; remaining work is authored persistent-adversary content, runtime recurrence/adaptation, world/faction integration, typed Android consumption, save-round-trip evidence and low-end profiling. |
 | **V10 — Activities / life simulation** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 8 OF 8 MINIMUM UNITS** | Current time/train/recover/power-practice primitives and Trace Chamber actions exist; advanced scheduling/background life-sim is not implemented | Activity master plus record/state, time/atomicity, training, recovery/treatment, work/study/research, interruption/concurrency and Trace Chamber proof contracts | Final activity registry/migration, professions/economy integration, scheduled/background runtime, calendar/offline decision, final UI and exact-head Phase 1 verification. |
 | **V11 — Application UX / projection** | **PLANNING / DOMAIN-DEPENDENT — CURRENT CONSUMERS MAPPED, FINAL REFINEMENT DEFERRED** | Current Android client exists, but final UI must wait for upstream world/gameplay domains to define stable player-facing requirements | `APPLICATION_UX_MASTER_PLAN.md`, `ANDROID_CONSUMER_AND_PROJECTION_MAP.md`, `PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`, status UI contracts | Preserve current consumer/projection evidence and planning constraints now; defer full screen-by-screen refinement until world, progression, NPC/social, items/economy, activities, combat, adversary and migration contracts are sufficiently mature. Then perform a dedicated UI refinement wave. |
-| **V12 — Android / final APK reconstruction** | **PLANNED / BLOCKED FOR EXECUTION** | Final rebuild intentionally not started as a destructive rewrite | `APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md`, `APK_FINAL_RECONSTRUCTION_MATRIX.md`, final reconstruction blueprint | Mechanics migration packets, completed consumer map, teardown manifest, zero-consumer deletion evidence, final rebuild, exact-head CI, APK provenance and physical handset validation. |
+| **V12 — Android / final APK reconstruction** | **FIRST-PASS DOCUMENTATION FLOOR ESTABLISHED / 8 OF 8 / EXECUTION STILL BLOCKED** | Current Android foundation exists; final destructive rebuild not started | APK master/matrix plus runtime bridge, build configuration, CI acceptance, device/performance and release provenance/rollback standards | Remaining mechanics migrations, teardown manifest, final rebuild, exact-head CI, production signing decision, APK provenance and physical handset acceptance. |
 
 ---
 
@@ -862,3 +862,27 @@ No Gate Twelve contact has been made canon persistent.
 `docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md` now maps V09 onto the current per-NPC durable state. The preferred first runtime path is a validated nested `state.npcs[npc_id]["adversary"]` record with its own record version; any new top-level adversary container remains gated behind explicit GameState/save schema v2+ migration.
 
 Next program action: execute a semantic all-volume quota coverage audit before selecting another documentation batch.
+
+
+## 16. 2026-10-04 V12 and first-pass quota closure
+
+V12 reaches 8 / 8 first-pass units after adding:
+- ANDROID_RUNTIME_BRIDGE_ARCHITECTURE_STANDARD.md;
+- ANDROID_BUILD_CONFIGURATION_RECONSTRUCTION_STANDARD.md;
+- ANDROID_CI_AUTOMATED_ACCEPTANCE_STANDARD.md;
+- ANDROID_DEVICE_PERFORMANCE_COMPATIBILITY_STANDARD.md;
+- ANDROID_RELEASE_PROVENANCE_ROLLBACK_STANDARD.md.
+
+The current Android configuration is documented, including current applicationId, SDK levels, Java/Python/Gradle-plugin direction and ABI set, while remaining explicitly migratable.
+
+Important nonclaims:
+- no current-head Android build was executed in this documentation batch;
+- no production signing configuration is claimed;
+- no Galaxy A02 physical acceptance is claimed;
+- no final APK teardown/rebuild has begun.
+
+docs/FIRST_PASS_QUOTA_COVERAGE_AUDIT_2026-10-04.md now records all first-pass quota buckets as satisfied.
+
+Next program control action:
+- D-060 fresh reproducible current-head inventory;
+- then second-pass/final quota recalibration and ranked reconstruction-depth work.
