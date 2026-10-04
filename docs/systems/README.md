@@ -78,3 +78,10 @@ This closes the first-pass documentation quota for V08 only. Tactical runtime re
 V05 now has 12 / 12 minimum first-pass canonical units: the existing NPC/Social/Rival master plus eleven child standards/packets covering identity, personality, memory, knowledge/privacy, relationships, goals, schedule/presence, faction membership, rumor/social consequence, recurring-character authoring, and the Tamsin Phase 1 proof packet.
 
 The first-pass quota is satisfied; runtime expansion remains separate. Persistent-adversary depth continues under V09 rather than being treated as complete by this V05 closure.
+
+
+## V10 activities/life-simulation first-pass closure — 2026-10-04
+
+V10 now has 8 / 8 first-pass canonical units: the activity master plus seven child standards/packets covering activity records, time/cost atomicity, training/practice, recovery/treatment, work/study/research, interruption/concurrency, and the Trace Chamber Phase 1 proof.
+
+The current train/recover/technique-practice runtime is preserved as foundation. Full professions, scheduled/background activity, calendar, offline progression and final Activity UI remain future work.
