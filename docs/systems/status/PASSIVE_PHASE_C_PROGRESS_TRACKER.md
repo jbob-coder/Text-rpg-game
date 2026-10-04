@@ -173,6 +173,17 @@ Result:
 - readiness states now distinguish missing parent model, fixture schema, qualitative fixtures, range fixtures, and executable fixtures;
 - no final parent range or passive coefficient was invented.
 
+## First parent-system fixture batch
+
+Materialized:
+- `STATUS_CORE_RESOURCE_PARENT_FIXTURE_BATCH_001_STAMINA_FOCUS.md`.
+
+Result:
+- `RESOLVER_STAMINA_RECOVERY_OPPORTUNITY` and `RESOLVER_PROLONGED_FOCUS_DRAIN` now have concrete qualitative parent fixture sets;
+- both advance to `QUALITATIVE_FIXTURES_READY`;
+- current Dead Relay Stamina 70 / Focus 60 are explicitly preserved as content-instance regression evidence, not universal scales;
+- final resource ranges and passive coefficients remain blocked.
+
 ## Local world-evidence integration
 
 Materialized:
@@ -211,7 +222,7 @@ No named institution was invented and no record was canon-promoted.
 
 ## Next work
 
-1. materialize the first parent-system range/test-fixture batches for sufficiently mature base terms without inventing passive coefficients;
+1. continue parent-system fixture batches, then define actual range fixtures only where parent scales are justified; Stamina recovery and prolonged Focus drain now have qualitative fixture batches;
 2. continue evidence-backed Gate Twelve knowledge/world adjudication only where confirmed local context supports it;
 3. progress selected records toward actual world entities only after owner/world canon decisions;
 4. run additional canon dry-review packets;
