@@ -163,6 +163,16 @@ Result:
 - no coefficient or final scale was invented;
 - next numeric step is parent-system range/test-fixture definition.
 
+## Parent-fixture requirement milestone
+
+Materialized:
+- `PASSIVE_CANONICAL_RESOLVER_PARENT_FIXTURE_REQUIREMENTS_WAVE_001.md`.
+
+Result:
+- all **20 / 20 canonical shared passive resolvers** now identify the exact parent-system fixture evidence required before candidate passive coefficients are allowed;
+- readiness states now distinguish missing parent model, fixture schema, qualitative fixtures, range fixtures, and executable fixtures;
+- no final parent range or passive coefficient was invented.
+
 ## Local world-evidence integration
 
 Materialized:
@@ -173,6 +183,16 @@ Result:
 - record-level local integration candidates are identified without claiming local training, regulation, or passive ownership;
 - the pilot can now support evidence-based adjudication of knowledge/world-integration proposals.
 
+## Gate Twelve evidence-backed adjudication
+
+Materialized:
+- `STATUS_GATE_TWELVE_EVIDENCE_BACKED_KNOWLEDGE_WORLD_ADJUDICATION_001.md`.
+
+Result:
+- confirmed Gate Twelve local evidence was applied to a bounded set of Technical, Profession, Faction/Institutional, Leadership, Defensive, Movement, Mental/Will, and Lightning Conduit world-integration candidates;
+- local context support is explicitly separated from proof of training, classification, regulation, credential systems, or named institutions;
+- proposal-only parent-world names remain excluded from confirmed evidence.
+
 ## World/canon preparation
 
 Materialized:
@@ -181,6 +201,9 @@ Materialized:
 - `CANON_REVIEW_DRY_RUN_ABILITY_RAR_003.md`.
 
 Additional dry reviews:
+- `CANON_REVIEW_DRY_RUN_PASSIVE_PRO_0008.md` — Documentation Discipline returns for refinement because its all-unknown compact knowledge posture and parent professional-documentation workflow are not ready;
+- `CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0005.md` — Clearance Awareness returns for refinement because the world lacks an actual clearance/authorization model;
+
 - `CANON_REVIEW_DRY_RUN_PASSIVE_TEC_0006.md` — Repair Economy appears conceptually mature enough for eventual approval with numeric/world-provenance fields open;
 - `CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0002.md` — Credential Navigation returns for refinement because actual credential/authorization world semantics are not yet authored.
 
@@ -188,8 +211,8 @@ No named institution was invented and no record was canon-promoted.
 
 ## Next work
 
-1. extend Gate Twelve evidence-backed knowledge/world adjudication only where confirmed local context supports it;
-2. define parent-system numeric ranges/test fixtures for the 20 canonical resolver base terms; qualitative scenario anchors are now complete;
+1. materialize the first parent-system range/test-fixture batches for sufficiently mature base terms without inventing passive coefficients;
+2. continue evidence-backed Gate Twelve knowledge/world adjudication only where confirmed local context supports it;
 3. progress selected records toward actual world entities only after owner/world canon decisions;
 4. run additional canon dry-review packets;
 5. continue shared ability child-rule completion;
