@@ -115,6 +115,17 @@ Materialized:
 
 All 23 passive families now have family-level role-class relevance mapped without inventing named institutions.
 
+## Base-term / unit preparation
+
+Materialized:
+- `STATUS_BASE_RESOLUTION_TERM_UNIT_TAXONOMY.md`;
+- `PASSIVE_CANONICAL_RESOLVER_BASE_TERM_MAP_WAVE_001.md`.
+
+Result:
+- abstract unit classes now exist for resource amounts/rates, time, distance, penalties, error burden, execution variance, contest modifiers, interpretation confidence, procedure overhead, recovery, and performance decay;
+- all 20 canonical shared passive resolvers now identify the base term and abstract unit class they depend on;
+- final scales/coefficients remain `TBD`.
+
 ## Shared resolver cap semantics
 
 Materialized:
@@ -146,7 +157,7 @@ No named institution was invented and no record was canon-promoted.
 ## Next work
 
 1. verify/adjudicate proposed knowledge directions against actual world entities when parent world docs support them;
-2. document base-system units/terms needed for numeric calibration of the 20 canonical shared resolvers;
+2. define parent-system ranges/scenario anchors for the canonical resolver base terms before assigning passive coefficients;
 3. progress selected records from family role classes toward actual world entities only when parent world docs support them;
 4. expand numeric parameterization after base-system units are documented;
 5. run additional canon dry-review packets;
