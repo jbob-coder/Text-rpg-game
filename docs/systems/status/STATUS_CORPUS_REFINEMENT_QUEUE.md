@@ -230,10 +230,8 @@ Unique blockers:
 
 ## P1 — next passive families
 
-1. **Cognitive/Learning 0001–0010 — NEXT**
-2. combat habit;
-3. weapon familiarity;
-4. defensive adaptation;
+1. **Defensive Adaptation 0001–0010 — NEXT**
+2. survival/environmental;
 5. survival/environmental;
 6. social/behavioral;
 7. leadership/coordination;
@@ -248,6 +246,43 @@ Unique blockers:
 16. unique event;
 17. cosmic/system;
 18. unknown/classified.
+
+## Weapon Familiarity 0001–0010 completed
+
+Evidence:
+- `PASSIVE_WEAPON_FAMILIARITY_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_WEAPON_FAMILIARITY_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_WEAPON_FAMILIARITY_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Open:
+- numeric calibration;
+- final knowledge decisions;
+- equipment taxonomy relationships;
+- concrete runtime mapping;
+- named training institutions;
+- canon promotion.
+
+## Combat Habit 0001–0010 completed
+
+Evidence:
+- `PASSIVE_CBT_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_CBT_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_CBT_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Open:
+- numeric calibration;
+- final knowledge decisions;
+- action-state mapping;
+- cross-family stacking;
+- canon promotion.
+
+## Cognitive / Learning 0001–0010 completed at current Phase-C baseline
+
+Evidence:
+- `calibration/PASSIVE_DETAIL_COGNITIVE_0001_0010.md`
+- `PASSIVE_COGNITIVE_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_COGNITIVE_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_COGNITIVE_KNOWLEDGE_REFINEMENT_0001_0010.md`
 
 ## Mental / Will passive 0001–0010
 
