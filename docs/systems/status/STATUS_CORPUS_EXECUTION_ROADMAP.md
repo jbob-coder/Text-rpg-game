@@ -61,25 +61,38 @@ Materialized:
 - `calibration/ABILITY_TECHNIQUE_DETAIL_COMMON_001_010.md`
 - `COMMON_ABILITY_RARITY_OVERLAP_AUDIT_001_010.md`
 
-Linked compact records now also have:
+Completed linked refinement:
 - 40 individualized technique rows;
 - 10 individualized awakening profiles;
 - 10 individualized counter profiles.
 
-Rarity/overlap audit result:
+Rarity/overlap audit:
 - 5 PASS;
 - 5 PARTIAL;
 - 0 FAIL;
 - 0 recommended deletions.
 
-Flagged adjacency checks:
+### Uncommon ability slice 001–010
+
+Materialized:
+- `calibration/PRIMARY_ABILITY_DETAIL_UNCOMMON_001_010.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_UNCOMMON_001_010.md`
+
+Completed linked refinement:
+- 40 individualized technique rows;
+- 10 individualized awakening profiles;
+- 10 individualized counter profiles.
+
+Common↔Uncommon boundaries explicitly narrowed:
 - Kinetic Palm versus Vector Nudge;
 - Skin Reinforcement versus Stonehide;
-- Static Reservoir versus Lightning Conduit;
-- Water Draw versus Vapor Sculpt;
-- Impact Cushion versus Momentum Bank.
+- Water Draw versus Vapor Sculpt.
 
-These must be resolved while deep-authoring the adjacent higher-tier records.
+Uncommon critical blockers:
+- Blink Step momentum/collision/reference-frame rules;
+- Stonehide mineral/biological accounting;
+- numeric range/output/resource calibration;
+- named institutional/history records.
 
 ### Physical passive slice 0001–0010
 
@@ -87,13 +100,13 @@ Materialized:
 - `calibration/PASSIVE_DETAIL_PHYSICAL_0001_0010.md`
 - `PASSIVE_PHYSICAL_KNOWLEDGE_REFINEMENT_0001_0010.md`
 
-Knowledge refinement now covers:
+Knowledge refinement covers:
 - military/security knowledge;
 - research knowledge;
 - false-rumor patterns;
 - over-classification review.
 
-Knowledge-posture review flags:
+Knowledge-posture flags:
 - PASSIVE_PHY_0004 likely over-classified;
 - PASSIVE_PHY_0008 likely too unknown;
 - PASSIVE_PHY_0010 likely over-classified.
@@ -102,11 +115,11 @@ No compact knowledge row was silently promoted or rewritten by that audit.
 
 ### Remaining Phase-C work
 
+- Rare and higher-tier ability deep authoring;
 - physical passive scaling/cap detail;
 - authoritative hidden-progress ownership mapping;
 - implementation/test mapping;
 - named institutions and historical cases;
-- higher-tier ability deep authoring;
 - remaining passive families;
 - duplicate mechanics;
 - rarity drift;
@@ -117,11 +130,11 @@ No compact knowledge row was silently promoted or rewritten by that audit.
 
 ### Phase C next order
 
-1. **Deep-author Uncommon abilities 001–010.**
-2. Resolve Common↔Uncommon adjacency flags during that slice.
+1. **Deep-author Rare abilities 001–010.**
+2. Resolve Static Reservoir↔Lightning Conduit and Impact Cushion↔Momentum Bank.
 3. Finish Physical passive scaling/caps and state-owner mapping.
 4. Deep-author Recovery passives 0001–0010.
-5. Continue Rare abilities and remaining passive families.
+5. Continue Super Rare abilities and remaining passive families.
 6. Do **not** create another thousand shallow records until the refinement pattern passes review.
 
 ## Phase D — world integration
