@@ -6,6 +6,9 @@ Parents:
 - `docs/android/APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md`
 - `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`
 
+Spatial/tactical presentation authority:
+- `docs/systems/CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md`
+
 ## 1. Product goal
 
 The Android client should make the world/story space the primary experience.
@@ -155,14 +158,21 @@ Need:
 
 ## 12. Tactical combat
 
-Contextual full mode:
-- map;
+Contextual full mode uses the approved higher three-quarter orthographic tactical view over a square grid.
+
+Primary mobile interaction is tap-driven rather than joystick-driven.
+
+Surface includes:
+- tactical map;
 - units;
-- action selection;
+- legal cells/movement preview;
+- directional cover/LOS information that is player-safe;
+- action selection/action budget;
 - objective;
 - selected unit;
-- enemy intel if known;
-- combat log.
+- enemy intel only if known;
+- combat log;
+- bounded pan/zoom.
 
 ## 13. Narration/audio
 
@@ -193,7 +203,8 @@ Need:
 
 Primary targets:
 - phone portrait/landscape only if product supports;
-- Galaxy A03-class low-end device;
+- **Galaxy A02-class low-end device as a product target requirement**;
+- Galaxy A03-class historical/emulator evidence remains useful but does not substitute for A02 acceptance;
 - emulator sizes used in CI.
 
 No desktop-first layouts forced onto phone.
