@@ -334,3 +334,23 @@ The selected proof is documented in:
 - docs/systems/GATE_TWELVE_PHASE1_ITEM_EQUIPMENT_PACKET.md
 
 Phase 1 does not wait for currency, vendors, crafting, durability, encumbrance, random loot, or a large item catalog.
+
+
+## 15. Phase 1 boundary — persistent adversaries
+
+V09 persistent-adversary/world-memory documentation is now first-pass complete.
+
+Phase 1 does **not** require a persistent recurring adversary.
+
+The proposed Service Tunnel tactical encounter may ship its first playable proof with encounter-local unidentified contacts.
+
+If a survivor is later promoted into a recurring adversary, the promotion must follow:
+- explicit persistent identity;
+- perceived encounter memory;
+- bounded adaptation;
+- lifecycle;
+- valid world routing;
+- player-safe intel;
+- save migration.
+
+This prevents V09 scope from blocking the minimum solo playable slice.
