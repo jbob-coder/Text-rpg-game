@@ -1,0 +1,787 @@
+{
+ "PixelAssetCatalog": {
+  "file": "PixelAssetCatalog.kt",
+  "lines": 963,
+  "const_pairs": [
+   {
+    "symbol": "PLAYER_FRONT_BASE_ID",
+    "asset_id": "PLAYER_GAMEPLAY_FRONT_BASE"
+   },
+   {
+    "symbol": "PLAYER_HAIR_PLACEHOLDER_ID",
+    "asset_id": "PLAYER_HAIR_TECH_PLACEHOLDER"
+   },
+   {
+    "symbol": "DEPOT_JACKET_ICON_ID",
+    "asset_id": "ITEM_DEPOT_JACKET_ICON"
+   },
+   {
+    "symbol": "DEPOT_JACKET_LAYER_ID",
+    "asset_id": "ITEM_DEPOT_JACKET_PAPERDOLL"
+   },
+   {
+    "symbol": "WORK_GLOVES_ICON_ID",
+    "asset_id": "ITEM_WORK_GLOVES_ICON"
+   },
+   {
+    "symbol": "WORK_GLOVES_LAYER_ID",
+    "asset_id": "ITEM_WORK_GLOVES_PAPERDOLL"
+   },
+   {
+    "symbol": "SIGNAL_RING_ICON_ID",
+    "asset_id": "ITEM_SIGNAL_RING_ICON"
+   },
+   {
+    "symbol": "SIGNAL_RING_LAYER_ID",
+    "asset_id": "ITEM_SIGNAL_RING_PAPERDOLL"
+   },
+   {
+    "symbol": "COURIER_NECKTAG_ICON_ID",
+    "asset_id": "ITEM_COURIER_NECKTAG_ICON"
+   },
+   {
+    "symbol": "COURIER_NECKTAG_LAYER_ID",
+    "asset_id": "ITEM_COURIER_NECKTAG_PAPERDOLL"
+   },
+   {
+    "symbol": "MAINTENANCE_SEAL_ICON_ID",
+    "asset_id": "ITEM_MAINTENANCE_SEAL_ICON"
+   },
+   {
+    "symbol": "DEAD_RELAY_ICON_ID",
+    "asset_id": "ITEM_DEAD_RELAY_ICON"
+   },
+   {
+    "symbol": "DEAD_RELAY_OPENED_ID",
+    "asset_id": "ITEM_DEAD_RELAY_OPENED"
+   },
+   {
+    "symbol": "DEAD_RELAY_DAMAGED_ID",
+    "asset_id": "ITEM_DEAD_RELAY_DAMAGED"
+   },
+   {
+    "symbol": "DEAD_RELAY_SIGNAL_LOST_ID",
+    "asset_id": "ITEM_DEAD_RELAY_SIGNAL_LOST"
+   }
+  ],
+  "literal_asset_ids": [
+   "COURIER_NECKTAG_ICON_ID",
+   "COURIER_NECKTAG_LAYER_ID",
+   "DEAD_RELAY_DAMAGED_ID",
+   "DEAD_RELAY_ICON_ID",
+   "DEAD_RELAY_OPENED_ID",
+   "DEAD_RELAY_SIGNAL_LOST_ID",
+   "DEPOT_JACKET_ICON_ID",
+   "DEPOT_JACKET_LAYER_ID",
+   "MAINTENANCE_SEAL_ICON_ID",
+   "PLAYER_FRONT_BASE_ID",
+   "PLAYER_HAIR_PLACEHOLDER_ID",
+   "SIGNAL_RING_ICON_ID",
+   "SIGNAL_RING_LAYER_ID",
+   "WORK_GLOVES_ICON_ID",
+   "WORK_GLOVES_LAYER_ID"
+  ],
+  "pixel_sprites": 16,
+  "functions": [
+   "equipmentOverlay",
+   "equipmentLayer",
+   "relayStateSprite",
+   "itemIcon"
+  ]
+ },
+ "PixelCharacterStagingCatalog": {
+  "file": "PixelCharacterStagingCatalog.kt",
+  "lines": 51,
+  "const_pairs": [
+   {
+    "symbol": "MEDIUM_GROUND_SHADOW_ID",
+    "asset_id": "CHARACTER_GROUND_SHADOW_MEDIUM"
+   }
+  ],
+  "literal_asset_ids": [
+   "MEDIUM_GROUND_SHADOW_ID"
+  ],
+  "pixel_sprites": 1,
+  "functions": []
+ },
+ "PixelComponents": {
+  "file": "PixelComponents.kt",
+  "lines": 356,
+  "const_pairs": [],
+  "literal_asset_ids": [],
+  "pixel_sprites": 9,
+  "functions": []
+ },
+ "PixelEnvironmentDecalCatalog": {
+  "file": "PixelEnvironmentDecalCatalog.kt",
+  "lines": 129,
+  "const_pairs": [
+   {
+    "symbol": "EVACUATION_SIGNAGE_SET_ID",
+    "asset_id": "EVACUATION_SIGNAGE_SET"
+   },
+   {
+    "symbol": "DISTRICT_AMBIENT_DECAL_SET_ID",
+    "asset_id": "DISTRICT_AMBIENT_DECAL_SET"
+   }
+  ],
+  "literal_asset_ids": [
+   "DISTRICT_AMBIENT_DECAL_SET_ID",
+   "EVACUATION_SIGNAGE_SET_ID"
+  ],
+  "pixel_sprites": 2,
+  "functions": [
+   "placements"
+  ]
+ },
+ "PixelEnvironmentModuleCatalog": {
+  "file": "PixelEnvironmentModuleCatalog.kt",
+  "lines": 190,
+  "const_pairs": [
+   {
+    "symbol": "DEPOT_FACADE_EXTERIOR_ID",
+    "asset_id": "DEPOT_FACADE_EXTERIOR"
+   },
+   {
+    "symbol": "MAINTENANCE_CORRIDOR_CONNECTOR_ID",
+    "asset_id": "MAINTENANCE_CORRIDOR_CONNECTOR"
+   },
+   {
+    "symbol": "MUNICIPAL_ARCHIVE_EXTERIOR_ID",
+    "asset_id": "MUNICIPAL_ARCHIVE_EXTERIOR"
+   },
+   {
+    "symbol": "MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS_ID",
+    "asset_id": "MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS"
+   }
+  ],
+  "literal_asset_ids": [
+   "MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS_ID"
+  ],
+  "pixel_sprites": 2,
+  "functions": [
+   "arrivalPreview"
+  ]
+ },
+ "PixelEnvironmentOverlayCatalog": {
+  "file": "PixelEnvironmentOverlayCatalog.kt",
+  "lines": 125,
+  "const_pairs": [
+   {
+    "symbol": "EMERGENCY_LIGHT_OVERLAY_ID",
+    "asset_id": "EMERGENCY_LIGHT_OVERLAY"
+   },
+   {
+    "symbol": "BLACKOUT_SHADOW_OVERLAY_ID",
+    "asset_id": "BLACKOUT_SHADOW_OVERLAY"
+   }
+  ],
+  "literal_asset_ids": [
+   "BLACKOUT_SHADOW_OVERLAY_ID",
+   "EMERGENCY_LIGHT_OVERLAY_ID"
+  ],
+  "pixel_sprites": 3,
+  "functions": [
+   "compose"
+  ]
+ },
+ "PixelEnvironmentPreview": {
+  "file": "PixelEnvironmentPreview.kt",
+  "lines": 44,
+  "const_pairs": [],
+  "literal_asset_ids": [],
+  "pixel_sprites": 1,
+  "functions": []
+ },
+ "PixelEnvironmentPropCatalog": {
+  "file": "PixelEnvironmentPropCatalog.kt",
+  "lines": 422,
+  "const_pairs": [
+   {
+    "symbol": "ARCHIVE_SHELF_ID",
+    "asset_id": "PROP_ARCHIVE_SHELF"
+   },
+   {
+    "symbol": "ARCHIVE_TERMINAL_ID",
+    "asset_id": "PROP_ARCHIVE_TERMINAL"
+   },
+   {
+    "symbol": "WORKSHOP_BENCH_ID",
+    "asset_id": "PROP_WORKSHOP_BENCH"
+   },
+   {
+    "symbol": "DISTRICT_NOTICE_BOARD_ID",
+    "asset_id": "PROP_DISTRICT_NOTICE_BOARD"
+   },
+   {
+    "symbol": "DEPOT_DOOR_ID",
+    "asset_id": "PROP_DEPOT_DOOR"
+   },
+   {
+    "symbol": "RELAY_WORKBENCH_ID",
+    "asset_id": "PROP_RELAY_WORKBENCH"
+   },
+   {
+    "symbol": "GATE_TWELVE_DOOR_ID",
+    "asset_id": "PROP_GATE_TWELVE_DOOR"
+   },
+   {
+    "symbol": "TUNNEL_PIPE_SET_ID",
+    "asset_id": "PROP_TUNNEL_PIPE_SET"
+   },
+   {
+    "symbol": "TUNNEL_CABLE_SET_ID",
+    "asset_id": "PROP_TUNNEL_CABLE_SET"
+   },
+   {
+    "symbol": "TRACE_CHAMBER_APPARATUS_ID",
+    "asset_id": "PROP_TRACE_CHAMBER_APPARATUS"
+   }
+  ],
+  "literal_asset_ids": [
+   "ARCHIVE_SHELF_ID",
+   "ARCHIVE_TERMINAL_ID",
+   "DEPOT_DOOR_ID",
+   "DISTRICT_NOTICE_BOARD_ID",
+   "GATE_TWELVE_DOOR_ID",
+   "RELAY_WORKBENCH_ID",
+   "TRACE_CHAMBER_APPARATUS_ID",
+   "TUNNEL_CABLE_SET_ID",
+   "TUNNEL_PIPE_SET_ID",
+   "WORKSHOP_BENCH_ID"
+  ],
+  "pixel_sprites": 10,
+  "functions": [
+   "placements"
+  ]
+ },
+ "PixelEquipmentSlotCatalog": {
+  "file": "PixelEquipmentSlotCatalog.kt",
+  "lines": 456,
+  "const_pairs": [
+   {
+    "symbol": "HEAD_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_HEAD"
+   },
+   {
+    "symbol": "BODY_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_CHEST"
+   },
+   {
+    "symbol": "HANDS_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_HANDS"
+   },
+   {
+    "symbol": "LEGS_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_LEGS"
+   },
+   {
+    "symbol": "FEET_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_FEET"
+   },
+   {
+    "symbol": "MAIN_HAND_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_MAIN_HAND"
+   },
+   {
+    "symbol": "OFF_HAND_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_OFF_HAND"
+   },
+   {
+    "symbol": "RING_1_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_RING_1"
+   },
+   {
+    "symbol": "RING_2_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_RING_2"
+   },
+   {
+    "symbol": "NECK_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_NECK"
+   },
+   {
+    "symbol": "ACCESSORY_1_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_ACCESSORY_1"
+   },
+   {
+    "symbol": "ACCESSORY_2_ID",
+    "asset_id": "UI_EQUIPMENT_SLOT_ACCESSORY_2"
+   }
+  ],
+  "literal_asset_ids": [
+   "ACCESSORY_1_ID",
+   "ACCESSORY_2_ID",
+   "BODY_ID",
+   "FEET_ID",
+   "HANDS_ID",
+   "HEAD_ID",
+   "LEGS_ID",
+   "MAIN_HAND_ID",
+   "NECK_ID",
+   "OFF_HAND_ID",
+   "RING_1_ID",
+   "RING_2_ID"
+  ],
+  "pixel_sprites": 12,
+  "functions": [
+   "slot"
+  ]
+ },
+ "PixelItemQualityFrameCatalog": {
+  "file": "PixelItemQualityFrameCatalog.kt",
+  "lines": 76,
+  "const_pairs": [
+   {
+    "symbol": "STANDARD_ID",
+    "asset_id": "UI_ITEM_QUALITY_FRAME_STANDARD"
+   },
+   {
+    "symbol": "UNCOMMON_ID",
+    "asset_id": "UI_ITEM_QUALITY_FRAME_UNCOMMON"
+   }
+  ],
+  "literal_asset_ids": [],
+  "pixel_sprites": 1,
+  "functions": [
+   "forQuality"
+  ]
+ },
+ "PixelMapArtCatalog": {
+  "file": "PixelMapArtCatalog.kt",
+  "lines": 288,
+  "const_pairs": [
+   {
+    "symbol": "GATE_TWELVE_DISTRICT_BASE_ID",
+    "asset_id": "MAP_GATE_TWELVE_DISTRICT_BASE"
+   }
+  ],
+  "literal_asset_ids": [
+   "GATE_TWELVE_DISTRICT_BASE_ID"
+  ],
+  "pixel_sprites": 1,
+  "functions": [
+   "point",
+   "base",
+   "viewport"
+  ]
+ },
+ "PixelMapMarkerCatalog": {
+  "file": "PixelMapMarkerCatalog.kt",
+  "lines": 167,
+  "const_pairs": [
+   {
+    "symbol": "PLAYER_MARKER_ID",
+    "asset_id": "MAP_PLAYER_MARKER"
+   },
+   {
+    "symbol": "DISCOVERED_MARKER_ID",
+    "asset_id": "MAP_NODE_DISCOVERED"
+   },
+   {
+    "symbol": "CURRENT_MARKER_ID",
+    "asset_id": "MAP_NODE_CURRENT"
+   },
+   {
+    "symbol": "REACHABLE_MARKER_ID",
+    "asset_id": "MAP_NODE_REACHABLE"
+   },
+   {
+    "symbol": "UNAVAILABLE_MARKER_ID",
+    "asset_id": "MAP_NODE_UNAVAILABLE"
+   }
+  ],
+  "literal_asset_ids": [
+   "CURRENT_MARKER_ID",
+   "DISCOVERED_MARKER_ID",
+   "PLAYER_MARKER_ID",
+   "REACHABLE_MARKER_ID",
+   "UNAVAILABLE_MARKER_ID"
+  ],
+  "pixel_sprites": 5,
+  "functions": [
+   "stateOverlay"
+  ]
+ },
+ "PixelMapTravelTransitionCatalog": {
+  "file": "PixelMapTravelTransition.kt",
+  "lines": 169,
+  "const_pairs": [
+   {
+    "symbol": "ASSET_ID",
+    "asset_id": "UI_MAP_TRAVEL_TRANSITION"
+   }
+  ],
+  "literal_asset_ids": [],
+  "pixel_sprites": 2,
+  "functions": []
+ },
+ "PixelRasterCatalog": {
+  "file": "PixelRasterCatalog.kt",
+  "lines": 110,
+  "const_pairs": [],
+  "literal_asset_ids": [],
+  "pixel_sprites": 0,
+  "functions": [
+   "sprite",
+   "scene"
+  ]
+ },
+ "PixelSceneCatalog": {
+  "file": "PixelSceneCatalog.kt",
+  "lines": 824,
+  "const_pairs": [
+   {
+    "symbol": "PLATFORM_NINE_SCENE_ID",
+    "asset_id": "PLATFORM_NINE_BLACKOUT_SCENE"
+   },
+   {
+    "symbol": "RELAY_WORKBENCH_SCENE_ID",
+    "asset_id": "RELAY_WORKBENCH_DEFAULT_SCENE"
+   },
+   {
+    "symbol": "GATE_TWELVE_SCENE_ID",
+    "asset_id": "GATE_TWELVE_SEALED_SCENE"
+   },
+   {
+    "symbol": "SERVICE_TUNNEL_SCENE_ID",
+    "asset_id": "SERVICE_TUNNEL_DEFAULT_SCENE"
+   },
+   {
+    "symbol": "EVAC_STAIR_SCENE_ID",
+    "asset_id": "EVAC_STAIR_DEFAULT_SCENE"
+   },
+   {
+    "symbol": "TRACE_CHAMBER_SCENE_ID",
+    "asset_id": "TRACE_CHAMBER_IDLE_SCENE"
+   },
+   {
+    "symbol": "DISTRICT_PLAZA_SCENE_ID",
+    "asset_id": "DISTRICT_PLAZA_OPEN_SCENE"
+   },
+   {
+    "symbol": "DISTRICT_ARCHIVE_SCENE_ID",
+    "asset_id": "DISTRICT_ARCHIVE_DEFAULT_SCENE"
+   },
+   {
+    "symbol": "WORKSHOP_ROW_SCENE_ID",
+    "asset_id": "WORKSHOP_ROW_DEFAULT_SCENE"
+   }
+  ],
+  "literal_asset_ids": [
+   "DISTRICT_ARCHIVE_SCENE_ID",
+   "DISTRICT_PLAZA_SCENE_ID",
+   "EVAC_STAIR_SCENE_ID",
+   "GATE_TWELVE_SCENE_ID",
+   "PLATFORM_NINE_SCENE_ID",
+   "RELAY_WORKBENCH_SCENE_ID",
+   "SERVICE_TUNNEL_SCENE_ID",
+   "TRACE_CHAMBER_SCENE_ID",
+   "WORKSHOP_ROW_SCENE_ID"
+  ],
+  "pixel_sprites": 9,
+  "functions": [
+   "scene"
+  ]
+ },
+ "PixelSceneOverlayCatalog": {
+  "file": "PixelSceneOverlayCatalog.kt",
+  "lines": 336,
+  "const_pairs": [
+   {
+    "symbol": "GATE_TWELVE_ECHO_ACTIVE_ID",
+    "asset_id": "GATE_TWELVE_ECHO_ACTIVE_SCENE"
+   },
+   {
+    "symbol": "SERVICE_TUNNEL_AFTERSHOCK_ID",
+    "asset_id": "SERVICE_TUNNEL_AFTERSHOCK_SCENE"
+   },
+   {
+    "symbol": "TRACE_CHAMBER_TRAINING_ID",
+    "asset_id": "TRACE_CHAMBER_TRAINING_SCENE"
+   },
+   {
+    "symbol": "DISTRICT_PLAZA_BLACKOUT_ID",
+    "asset_id": "DISTRICT_PLAZA_BLACKOUT_SCENE"
+   },
+   {
+    "symbol": "RELAY_WORKBENCH_RELAY_OPEN_ID",
+    "asset_id": "RELAY_WORKBENCH_RELAY_OPEN_SCENE"
+   }
+  ],
+  "literal_asset_ids": [
+   "DISTRICT_PLAZA_BLACKOUT_ID",
+   "GATE_TWELVE_ECHO_ACTIVE_ID",
+   "RELAY_WORKBENCH_RELAY_OPEN_ID",
+   "SERVICE_TUNNEL_AFTERSHOCK_ID",
+   "TRACE_CHAMBER_TRAINING_ID"
+  ],
+  "pixel_sprites": 4,
+  "functions": [
+   "forScene",
+   "forVisualState"
+  ]
+ },
+ "PixelStoryActorCatalog": {
+  "file": "PixelStoryActorCatalog.kt",
+  "lines": 198,
+  "const_pairs": [
+   {
+    "symbol": "TAMSIN_TURNAROUND_ID",
+    "asset_id": "NPC_TAMSIN_TURNAROUND"
+   },
+   {
+    "symbol": "SUPPORT_COURIER_ID",
+    "asset_id": "SUPPORT_COURIER_01"
+   }
+  ],
+  "literal_asset_ids": [
+   "SUPPORT_COURIER_ID",
+   "TAMSIN_TURNAROUND_ID"
+  ],
+  "pixel_sprites": 2,
+  "functions": [
+   "placements"
+  ]
+ },
+ "PixelColors": {
+  "file": "PixelTheme.kt",
+  "lines": 62,
+  "const_pairs": [],
+  "literal_asset_ids": [],
+  "pixel_sprites": 0,
+  "functions": []
+ },
+ "PixelTraceFxCatalog": {
+  "file": "PixelTraceFxCatalog.kt",
+  "lines": 207,
+  "const_pairs": [
+   {
+    "symbol": "TRACE_ECHO_AMBIENT_ID",
+    "asset_id": "FX_TRACE_ECHO_AMBIENT"
+   },
+   {
+    "symbol": "SIGNAL_PULSE_ID",
+    "asset_id": "FX_SIGNAL_PULSE"
+   },
+   {
+    "symbol": "DIRECTIONAL_TRACE_ID",
+    "asset_id": "FX_DIRECTIONAL_TRACE"
+   }
+  ],
+  "literal_asset_ids": [],
+  "pixel_sprites": 3,
+  "functions": [
+   "signalPulseForScene",
+   "directionalTraceForScene",
+   "forScene"
+  ]
+ },
+ "PixelTraceStrainCatalog": {
+  "file": "PixelTraceStrainCatalog.kt",
+  "lines": 97,
+  "const_pairs": [
+   {
+    "symbol": "TRACE_STRAIN_ID",
+    "asset_id": "FX_TRACE_STRAIN"
+   },
+   {
+    "symbol": "ECHO_STRAIN_CONDITION_ID",
+    "asset_id": "COND_ECHO_STRAIN"
+   }
+  ],
+  "literal_asset_ids": [],
+  "pixel_sprites": 2,
+  "functions": [
+   "avatarForConditions",
+   "portraitForConditions"
+  ]
+ },
+ "PixelUiChromeCatalog": {
+  "file": "PixelUiChromeCatalog.kt",
+  "lines": 306,
+  "const_pairs": [
+   {
+    "symbol": "STORY_FRAME_ID",
+    "asset_id": "UI_PANEL_STORY_FRAME"
+   },
+   {
+    "symbol": "CHARACTER_FRAME_ID",
+    "asset_id": "UI_PANEL_CHARACTER_FRAME"
+   },
+   {
+    "symbol": "STATS_FRAME_ID",
+    "asset_id": "UI_PANEL_STATS_FRAME"
+   },
+   {
+    "symbol": "INVENTORY_FRAME_ID",
+    "asset_id": "UI_PANEL_INVENTORY_FRAME"
+   },
+   {
+    "symbol": "QUEST_FRAME_ID",
+    "asset_id": "UI_PANEL_QUEST_FRAME"
+   },
+   {
+    "symbol": "MAP_FRAME_ID",
+    "asset_id": "UI_PANEL_MAP_FRAME"
+   },
+   {
+    "symbol": "SETTINGS_FRAME_ID",
+    "asset_id": "UI_PANEL_SETTINGS_FRAME"
+   },
+   {
+    "symbol": "DEVELOPER_FRAME_ID",
+    "asset_id": "UI_PANEL_DEVELOPER_FRAME"
+   },
+   {
+    "symbol": "MODAL_FRAME_ID",
+    "asset_id": "UI_MODAL_FRAME"
+   },
+   {
+    "symbol": "CHOICE_ENABLED_ID",
+    "asset_id": "UI_CHOICE_CARD_ENABLED"
+   },
+   {
+    "symbol": "CHOICE_DISABLED_ID",
+    "asset_id": "UI_CHOICE_CARD_DISABLED"
+   },
+   {
+    "symbol": "CHOICE_SELECTED_ID",
+    "asset_id": "UI_CHOICE_CARD_SELECTED"
+   },
+   {
+    "symbol": "BUTTON_PRIMARY_ID",
+    "asset_id": "UI_BUTTON_PRIMARY"
+   },
+   {
+    "symbol": "BUTTON_SECONDARY_ID",
+    "asset_id": "UI_BUTTON_SECONDARY"
+   },
+   {
+    "symbol": "BUTTON_DANGER_ID",
+    "asset_id": "UI_BUTTON_DANGER"
+   },
+   {
+    "symbol": "TAB_ACTIVE_ID",
+    "asset_id": "UI_TAB_ACTIVE"
+   },
+   {
+    "symbol": "TAB_INACTIVE_ID",
+    "asset_id": "UI_TAB_INACTIVE"
+   }
+  ],
+  "literal_asset_ids": [],
+  "pixel_sprites": 0,
+  "functions": [
+   "panel"
+  ]
+ },
+ "PixelUiIconCatalog": {
+  "file": "PixelUiIconCatalog.kt",
+  "lines": 512,
+  "const_pairs": [
+   {
+    "symbol": "NAV_STORY_ID",
+    "asset_id": "UI_NAV_STORY_ICON"
+   },
+   {
+    "symbol": "NAV_CHARACTER_ID",
+    "asset_id": "UI_NAV_CHARACTER_ICON"
+   },
+   {
+    "symbol": "NAV_STATS_ID",
+    "asset_id": "UI_NAV_STATS_ICON"
+   },
+   {
+    "symbol": "NAV_INVENTORY_ID",
+    "asset_id": "UI_NAV_INVENTORY_ICON"
+   },
+   {
+    "symbol": "NAV_QUESTS_ID",
+    "asset_id": "UI_NAV_QUESTS_ICON"
+   },
+   {
+    "symbol": "NAV_MAP_ID",
+    "asset_id": "UI_NAV_MAP_ICON"
+   },
+   {
+    "symbol": "NAV_MORE_ID",
+    "asset_id": "UI_NAV_MORE_SETTINGS_ICON"
+   },
+   {
+    "symbol": "RESOURCE_HEALTH_ID",
+    "asset_id": "UI_RESOURCE_HEALTH_ICON"
+   },
+   {
+    "symbol": "RESOURCE_STAMINA_ID",
+    "asset_id": "UI_RESOURCE_STAMINA_ICON"
+   },
+   {
+    "symbol": "RESOURCE_FOCUS_ID",
+    "asset_id": "UI_RESOURCE_FOCUS_ICON"
+   },
+   {
+    "symbol": "RESOURCE_RESOLVE_ID",
+    "asset_id": "UI_RESOURCE_RESOLVE_ICON"
+   },
+   {
+    "symbol": "QUEST_MAIN_ID",
+    "asset_id": "UI_QUEST_MAIN_ICON"
+   },
+   {
+    "symbol": "QUEST_SIDE_ID",
+    "asset_id": "UI_QUEST_SIDE_ICON"
+   },
+   {
+    "symbol": "QUEST_OPTIONAL_ID",
+    "asset_id": "UI_QUEST_OPTIONAL_ICON"
+   },
+   {
+    "symbol": "QUEST_LORE_ID",
+    "asset_id": "UI_QUEST_LORE_ICON"
+   }
+  ],
+  "literal_asset_ids": [
+   "NAV_CHARACTER_ID",
+   "NAV_INVENTORY_ID",
+   "NAV_MAP_ID",
+   "NAV_MORE_ID",
+   "NAV_QUESTS_ID",
+   "NAV_STATS_ID",
+   "NAV_STORY_ID",
+   "QUEST_LORE_ID",
+   "QUEST_MAIN_ID",
+   "QUEST_OPTIONAL_ID",
+   "QUEST_SIDE_ID",
+   "RESOURCE_FOCUS_ID",
+   "RESOURCE_HEALTH_ID",
+   "RESOURCE_RESOLVE_ID",
+   "RESOURCE_STAMINA_ID"
+  ],
+  "pixel_sprites": 15,
+  "functions": [
+   "navigation",
+   "resource",
+   "quest"
+  ]
+ },
+ "PixelUiUtilityCatalog": {
+  "file": "PixelUiUtilityCatalog.kt",
+  "lines": 88,
+  "const_pairs": [
+   {
+    "symbol": "SCROLL_MARKER_ID",
+    "asset_id": "UI_SCROLL_MARKER"
+   },
+   {
+    "symbol": "AUDIO_NARRATION_ICON_ID",
+    "asset_id": "ACCESS_AUDIO_NARRATION_ICON"
+   }
+  ],
+  "literal_asset_ids": [
+   "AUDIO_NARRATION_ICON_ID",
+   "SCROLL_MARKER_ID"
+  ],
+  "pixel_sprites": 2,
+  "functions": []
+ }
+}

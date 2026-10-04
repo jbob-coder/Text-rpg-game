@@ -1,0 +1,1750 @@
+{
+ "schema_version": 1,
+ "baseline_commit": "4d596bcd27b6e2f8ef9ce3a93b9dab22f5f4812e",
+ "consumer": "PixelRasterCatalog -> SceneIllustration / PixelComponents",
+ "asset_count": 24,
+ "notes": [
+  "Decoded pixel-by-pixel with the Python standard library during L1 capture.",
+  "binary_transparency true for all 24 (zero partial-alpha pixels).",
+  "pixel_match_to_source_master true for all 24, per tools/verify_pixel_raster_equivalence.py execution."
+ ],
+ "assets": [
+  {
+   "resource_name": "pixel_district_archive_default_scene",
+   "file": "pixel_district_archive_default_scene.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_district_archive_default_scene.png",
+   "width": 128,
+   "height": 64,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "e7960ecd61e6a84cbf65ec90d1eca470b3ec4bd5418a65494bb85cf83178ba8a",
+   "git_blob": "f511c36c84690c76f39cbf9928b608cc00461d52",
+   "asset_symbol": "PixelSceneCatalog.DISTRICT_ARCHIVE_SCENE_ID",
+   "location_id": "DISTRICT_ARCHIVE",
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 8192,
+    "partial_px": 0,
+    "clear_px": 0,
+    "binary_transparency": true,
+    "fully_opaque": true
+   },
+   "occupied_bounds": {
+    "x_min": 0,
+    "x_max": 127,
+    "y_min": 0,
+    "y_max": 63,
+    "w": 128,
+    "h": 64,
+    "pivot_present": null
+   },
+   "distinct_colors": 10,
+   "palette": [
+    {
+     "hex": "#111A20",
+     "pixels": 2953,
+     "pct": 36.05
+    },
+    {
+     "hex": "#48535A",
+     "pixels": 1900,
+     "pct": 23.19
+    },
+    {
+     "hex": "#1B252C",
+     "pixels": 1664,
+     "pct": 20.31
+    },
+    {
+     "hex": "#6A5941",
+     "pixels": 720,
+     "pct": 8.79
+    },
+    {
+     "hex": "#26363E",
+     "pixels": 406,
+     "pct": 4.96
+    },
+    {
+     "hex": "#303E45",
+     "pixels": 252,
+     "pct": 3.08
+    },
+    {
+     "hex": "#65737A",
+     "pixels": 118,
+     "pct": 1.44
+    },
+    {
+     "hex": "#162129",
+     "pixels": 92,
+     "pct": 1.12
+    },
+    {
+     "hex": "#E2B65F",
+     "pixels": 54,
+     "pct": 0.66
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 33,
+     "pct": 0.4
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 32900,
+   "class": "location_scene"
+  },
+  {
+   "resource_name": "pixel_district_plaza_open_scene",
+   "file": "pixel_district_plaza_open_scene.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_district_plaza_open_scene.png",
+   "width": 128,
+   "height": 64,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "d3e1b0bf5543914d4e8327c6febe3617b6e51618b1ffbf0a2c2d7ddc701ed547",
+   "git_blob": "215ce07dbf78a15b5d7036c81ca02f3dd0e7ca79",
+   "asset_symbol": "PixelSceneCatalog.DISTRICT_PLAZA_SCENE_ID",
+   "location_id": "DISTRICT_PLAZA",
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 8192,
+    "partial_px": 0,
+    "clear_px": 0,
+    "binary_transparency": true,
+    "fully_opaque": true
+   },
+   "occupied_bounds": {
+    "x_min": 0,
+    "x_max": 127,
+    "y_min": 0,
+    "y_max": 63,
+    "w": 128,
+    "h": 64,
+    "pivot_present": null
+   },
+   "distinct_colors": 10,
+   "palette": [
+    {
+     "hex": "#111A20",
+     "pixels": 2285,
+     "pct": 27.89
+    },
+    {
+     "hex": "#1B252C",
+     "pixels": 1967,
+     "pct": 24.01
+    },
+    {
+     "hex": "#303E45",
+     "pixels": 1075,
+     "pct": 13.12
+    },
+    {
+     "hex": "#48535A",
+     "pixels": 1006,
+     "pct": 12.28
+    },
+    {
+     "hex": "#26363E",
+     "pixels": 860,
+     "pct": 10.5
+    },
+    {
+     "hex": "#65737A",
+     "pixels": 512,
+     "pct": 6.25
+    },
+    {
+     "hex": "#162129",
+     "pixels": 280,
+     "pct": 3.42
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 113,
+     "pct": 1.38
+    },
+    {
+     "hex": "#D66B66",
+     "pixels": 54,
+     "pct": 0.66
+    },
+    {
+     "hex": "#E2B65F",
+     "pixels": 40,
+     "pct": 0.49
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 32900,
+   "class": "location_scene"
+  },
+  {
+   "resource_name": "pixel_evac_stair_default_scene",
+   "file": "pixel_evac_stair_default_scene.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_evac_stair_default_scene.png",
+   "width": 128,
+   "height": 64,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "88f233d91ebd15d3aeac1f34dd537c562a5e86667e4398c5e37f9369496a8ae9",
+   "git_blob": "75a985e7cdee6e669b936c3d0a2d2e769939f394",
+   "asset_symbol": "PixelSceneCatalog.EVAC_STAIR_SCENE_ID",
+   "location_id": "EVAC_STAIR",
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 8192,
+    "partial_px": 0,
+    "clear_px": 0,
+    "binary_transparency": true,
+    "fully_opaque": true
+   },
+   "occupied_bounds": {
+    "x_min": 0,
+    "x_max": 127,
+    "y_min": 0,
+    "y_max": 63,
+    "w": 128,
+    "h": 64,
+    "pivot_present": null
+   },
+   "distinct_colors": 9,
+   "palette": [
+    {
+     "hex": "#111A20",
+     "pixels": 4802,
+     "pct": 58.62
+    },
+    {
+     "hex": "#1B252C",
+     "pixels": 1536,
+     "pct": 18.75
+    },
+    {
+     "hex": "#65737A",
+     "pixels": 465,
+     "pct": 5.68
+    },
+    {
+     "hex": "#48535A",
+     "pixels": 463,
+     "pct": 5.65
+    },
+    {
+     "hex": "#303E45",
+     "pixels": 430,
+     "pct": 5.25
+    },
+    {
+     "hex": "#162129",
+     "pixels": 256,
+     "pct": 3.12
+    },
+    {
+     "hex": "#26363E",
+     "pixels": 156,
+     "pct": 1.9
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 60,
+     "pct": 0.73
+    },
+    {
+     "hex": "#E2B65F",
+     "pixels": 24,
+     "pct": 0.29
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 32900,
+   "class": "location_scene"
+  },
+  {
+   "resource_name": "pixel_gate_twelve_sealed_scene",
+   "file": "pixel_gate_twelve_sealed_scene.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_gate_twelve_sealed_scene.png",
+   "width": 128,
+   "height": 64,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "1cd48cfd777c48ddf4c747b5da8448c3b3b5e6632953fd3fb9c2f758a06dd536",
+   "git_blob": "2c2b1838060c66cc794e945fe56bece691cacea6",
+   "asset_symbol": "PixelSceneCatalog.GATE_TWELVE_SCENE_ID",
+   "location_id": "GATE_TWELVE",
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 8192,
+    "partial_px": 0,
+    "clear_px": 0,
+    "binary_transparency": true,
+    "fully_opaque": true
+   },
+   "occupied_bounds": {
+    "x_min": 0,
+    "x_max": 127,
+    "y_min": 0,
+    "y_max": 63,
+    "w": 128,
+    "h": 64,
+    "pivot_present": null
+   },
+   "distinct_colors": 11,
+   "palette": [
+    {
+     "hex": "#263238",
+     "pixels": 1880,
+     "pct": 22.95
+    },
+    {
+     "hex": "#1B252C",
+     "pixels": 1636,
+     "pct": 19.97
+    },
+    {
+     "hex": "#111A20",
+     "pixels": 1420,
+     "pct": 17.33
+    },
+    {
+     "hex": "#4A555B",
+     "pixels": 844,
+     "pct": 10.3
+    },
+    {
+     "hex": "#3A4449",
+     "pixels": 774,
+     "pct": 9.45
+    },
+    {
+     "hex": "#66757C",
+     "pixels": 586,
+     "pct": 7.15
+    },
+    {
+     "hex": "#151E23",
+     "pixels": 576,
+     "pct": 7.03
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 234,
+     "pct": 2.86
+    },
+    {
+     "hex": "#E9E2CC",
+     "pixels": 118,
+     "pct": 1.44
+    },
+    {
+     "hex": "#E2B65F",
+     "pixels": 108,
+     "pct": 1.32
+    },
+    {
+     "hex": "#D66B66",
+     "pixels": 16,
+     "pct": 0.2
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 32900,
+   "class": "location_scene"
+  },
+  {
+   "resource_name": "pixel_item_courier_necktag_icon",
+   "file": "pixel_item_courier_necktag_icon.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_courier_necktag_icon.png",
+   "width": 32,
+   "height": 32,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "ffa024a2a1f0de523f7344d5b8ce389e8da5416f8f60ea9ab6097e6e6ad0061d",
+   "git_blob": "d8419b4363eaf236df2c216fe42c72af97ea2306",
+   "asset_symbol": "PixelAssetCatalog.COURIER_NECKTAG_ICON_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 138,
+    "partial_px": 0,
+    "clear_px": 886,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 8,
+    "x_max": 23,
+    "y_min": 5,
+    "y_max": 25,
+    "w": 16,
+    "h": 21,
+    "pivot_present": null
+   },
+   "distinct_colors": 5,
+   "palette": [
+    {
+     "hex": "#B08C55",
+     "pixels": 52,
+     "pct": 37.68
+    },
+    {
+     "hex": "#10151A",
+     "pixels": 38,
+     "pct": 27.54
+    },
+    {
+     "hex": "#8A734A",
+     "pixels": 28,
+     "pct": 20.29
+    },
+    {
+     "hex": "#E2B65F",
+     "pixels": 16,
+     "pct": 11.59
+    },
+    {
+     "hex": "#C9B57F",
+     "pixels": 4,
+     "pct": 2.9
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 4196,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_courier_necktag_paperdoll",
+   "file": "pixel_item_courier_necktag_paperdoll.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_courier_necktag_paperdoll.png",
+   "width": 32,
+   "height": 48,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "052232579cbffb9cc1e5467f82a1fae399ec302aa67d16ef0508b54949c09498",
+   "git_blob": "325a95cee3165eb96145cec335eff545bd8ab7f8",
+   "asset_symbol": "PixelAssetCatalog.COURIER_NECKTAG_LAYER_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 14,
+    "partial_px": 0,
+    "clear_px": 1522,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 14,
+    "x_max": 17,
+    "y_min": 16,
+    "y_max": 22,
+    "w": 4,
+    "h": 7,
+    "pivot_present": null
+   },
+   "distinct_colors": 3,
+   "palette": [
+    {
+     "hex": "#7E6A4C",
+     "pixels": 8,
+     "pct": 57.14
+    },
+    {
+     "hex": "#AB8F5E",
+     "pixels": 5,
+     "pct": 35.71
+    },
+    {
+     "hex": "#D3B470",
+     "pixels": 1,
+     "pct": 7.14
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 147,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_dead_relay_damaged",
+   "file": "pixel_item_dead_relay_damaged.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_damaged.png",
+   "width": 32,
+   "height": 32,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "1e82d73749737e3a5d4ad2d052a76093676419cb18bc1ca8a8102e9575e8f773",
+   "git_blob": "94e83ccc2b516b7bb90f1eff912a76d2cd03aba1",
+   "asset_symbol": "PixelAssetCatalog.DEAD_RELAY_DAMAGED_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 370,
+    "partial_px": 0,
+    "clear_px": 654,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 7,
+    "x_max": 24,
+    "y_min": 5,
+    "y_max": 27,
+    "w": 18,
+    "h": 23,
+    "pivot_present": null
+   },
+   "distinct_colors": 6,
+   "palette": [
+    {
+     "hex": "#36454C",
+     "pixels": 141,
+     "pct": 38.11
+    },
+    {
+     "hex": "#53656E",
+     "pixels": 83,
+     "pct": 22.43
+    },
+    {
+     "hex": "#10151A",
+     "pixels": 70,
+     "pct": 18.92
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 32,
+     "pct": 8.65
+    },
+    {
+     "hex": "#72AEB3",
+     "pixels": 24,
+     "pct": 6.49
+    },
+    {
+     "hex": "#D66B66",
+     "pixels": 20,
+     "pct": 5.41
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 4196,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_dead_relay_icon",
+   "file": "pixel_item_dead_relay_icon.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_icon.png",
+   "width": 32,
+   "height": 32,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "fd5f07531be5b8d76d65e8920e8fa2d8331c4e8dcc589a9162b5d16b3f4a1909",
+   "git_blob": "1e7e1be2f55b834b016d702c27cc8bdef4815129",
+   "asset_symbol": "PixelAssetCatalog.DEAD_RELAY_ICON_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 420,
+    "partial_px": 0,
+    "clear_px": 604,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 6,
+    "x_max": 25,
+    "y_min": 5,
+    "y_max": 27,
+    "w": 20,
+    "h": 23,
+    "pivot_present": null
+   },
+   "distinct_colors": 6,
+   "palette": [
+    {
+     "hex": "#36454C",
+     "pixels": 142,
+     "pct": 33.81
+    },
+    {
+     "hex": "#10151A",
+     "pixels": 120,
+     "pct": 28.57
+    },
+    {
+     "hex": "#53656E",
+     "pixels": 84,
+     "pct": 20.0
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 32,
+     "pct": 7.62
+    },
+    {
+     "hex": "#B6FFFF",
+     "pixels": 24,
+     "pct": 5.71
+    },
+    {
+     "hex": "#9FB0B9",
+     "pixels": 18,
+     "pct": 4.29
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 4196,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_dead_relay_opened",
+   "file": "pixel_item_dead_relay_opened.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_opened.png",
+   "width": 32,
+   "height": 32,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "45979921271aa8aa3fdcf21f774c12552bcf4706b8db70a8e3385fbe518db1fe",
+   "git_blob": "20574ff702fecdcce4c2655a087f0443d20ab5eb",
+   "asset_symbol": "PixelAssetCatalog.DEAD_RELAY_OPENED_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 424,
+    "partial_px": 0,
+    "clear_px": 600,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 5,
+    "x_max": 26,
+    "y_min": 6,
+    "y_max": 26,
+    "w": 22,
+    "h": 21,
+    "pivot_present": null
+   },
+   "distinct_colors": 8,
+   "palette": [
+    {
+     "hex": "#36454C",
+     "pixels": 160,
+     "pct": 37.74
+    },
+    {
+     "hex": "#26363E",
+     "pixels": 78,
+     "pct": 18.4
+    },
+    {
+     "hex": "#53656E",
+     "pixels": 56,
+     "pct": 13.21
+    },
+    {
+     "hex": "#10151A",
+     "pixels": 46,
+     "pct": 10.85
+    },
+    {
+     "hex": "#72AEB3",
+     "pixels": 36,
+     "pct": 8.49
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 24,
+     "pct": 5.66
+    },
+    {
+     "hex": "#8C7650",
+     "pixels": 18,
+     "pct": 4.25
+    },
+    {
+     "hex": "#B6FFFF",
+     "pixels": 6,
+     "pct": 1.42
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 4196,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_dead_relay_signal_lost",
+   "file": "pixel_item_dead_relay_signal_lost.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_signal_lost.png",
+   "width": 32,
+   "height": 32,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "9cf00814b1d5418b9f83786f99544492973a7ac56d0413d4169821a2e2bd5c56",
+   "git_blob": "2ebad7b1d0bf958746987fe27e93fb7629c9e9a6",
+   "asset_symbol": "PixelAssetCatalog.DEAD_RELAY_SIGNAL_LOST_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 370,
+    "partial_px": 0,
+    "clear_px": 654,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 7,
+    "x_max": 24,
+    "y_min": 5,
+    "y_max": 27,
+    "w": 18,
+    "h": 23,
+    "pivot_present": null
+   },
+   "distinct_colors": 5,
+   "palette": [
+    {
+     "hex": "#2B3439",
+     "pixels": 141,
+     "pct": 38.11
+    },
+    {
+     "hex": "#48535A",
+     "pixels": 83,
+     "pct": 22.43
+    },
+    {
+     "hex": "#10151A",
+     "pixels": 70,
+     "pct": 18.92
+    },
+    {
+     "hex": "#111A20",
+     "pixels": 56,
+     "pct": 15.14
+    },
+    {
+     "hex": "#D66B66",
+     "pixels": 20,
+     "pct": 5.41
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 4196,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_depot_jacket_icon",
+   "file": "pixel_item_depot_jacket_icon.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_depot_jacket_icon.png",
+   "width": 32,
+   "height": 32,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "a7fcfcc37e428414d0df61225748c19b7a2a7ac3e0372998a31546b9db5a428e",
+   "git_blob": "f7326020a190747d7d091d071bc0a1dd576e6c61",
+   "asset_symbol": "PixelAssetCatalog.DEPOT_JACKET_ICON_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 390,
+    "partial_px": 0,
+    "clear_px": 634,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 5,
+    "x_max": 26,
+    "y_min": 4,
+    "y_max": 26,
+    "w": 22,
+    "h": 23,
+    "pivot_present": null
+   },
+   "distinct_colors": 5,
+   "palette": [
+    {
+     "hex": "#3B5963",
+     "pixels": 200,
+     "pct": 51.28
+    },
+    {
+     "hex": "#2A414A",
+     "pixels": 92,
+     "pct": 23.59
+    },
+    {
+     "hex": "#172128",
+     "pixels": 86,
+     "pct": 22.05
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 8,
+     "pct": 2.05
+    },
+    {
+     "hex": "#53656E",
+     "pixels": 4,
+     "pct": 1.03
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 4196,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_depot_jacket_paperdoll",
+   "file": "pixel_item_depot_jacket_paperdoll.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_depot_jacket_paperdoll.png",
+   "width": 32,
+   "height": 48,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "ec0e216158db223847f13822b982e3129bb607bbee19347c148e208fcd5d0c81",
+   "git_blob": "b877935b3f637e95b863ae9533616d6771bc6e8b",
+   "asset_symbol": "PixelAssetCatalog.DEPOT_JACKET_LAYER_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 288,
+    "partial_px": 0,
+    "clear_px": 1248,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 6,
+    "x_max": 25,
+    "y_min": 14,
+    "y_max": 30,
+    "w": 20,
+    "h": 17,
+    "pivot_present": null
+   },
+   "distinct_colors": 6,
+   "palette": [
+    {
+     "hex": "#4E5C59",
+     "pixels": 137,
+     "pct": 47.57
+    },
+    {
+     "hex": "#182024",
+     "pixels": 80,
+     "pct": 27.78
+    },
+    {
+     "hex": "#2B3536",
+     "pixels": 48,
+     "pct": 16.67
+    },
+    {
+     "hex": "#6B7770",
+     "pixels": 19,
+     "pct": 6.6
+    },
+    {
+     "hex": "#B18B55",
+     "pixels": 3,
+     "pct": 1.04
+    },
+    {
+     "hex": "#6D9A93",
+     "pixels": 1,
+     "pct": 0.35
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 317,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_maintenance_seal_icon",
+   "file": "pixel_item_maintenance_seal_icon.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_maintenance_seal_icon.png",
+   "width": 32,
+   "height": 32,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "af182bbc09aff4ae8494f4682fa668f15f7add21700046d1647041d6e50ba25c",
+   "git_blob": "206393a8c653eab9b2ab40caae74c436ce35f6f2",
+   "asset_symbol": "PixelAssetCatalog.MAINTENANCE_SEAL_ICON_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 244,
+    "partial_px": 0,
+    "clear_px": 780,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 7,
+    "x_max": 24,
+    "y_min": 7,
+    "y_max": 24,
+    "w": 18,
+    "h": 18,
+    "pivot_present": null
+   },
+   "distinct_colors": 4,
+   "palette": [
+    {
+     "hex": "#8C7650",
+     "pixels": 100,
+     "pct": 40.98
+    },
+    {
+     "hex": "#B99A63",
+     "pixels": 80,
+     "pct": 32.79
+    },
+    {
+     "hex": "#53656E",
+     "pixels": 48,
+     "pct": 19.67
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 16,
+     "pct": 6.56
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 4196,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_signal_ring_icon",
+   "file": "pixel_item_signal_ring_icon.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_signal_ring_icon.png",
+   "width": 32,
+   "height": 32,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "56c316e4a8c6739935ecced351962aaef54c7a480c820ba5c5c81d8952bdd444",
+   "git_blob": "5708bc08004fcd09d70faf4272a6d5be6381e359",
+   "asset_symbol": "PixelAssetCatalog.SIGNAL_RING_ICON_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 130,
+    "partial_px": 0,
+    "clear_px": 894,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 7,
+    "x_max": 24,
+    "y_min": 4,
+    "y_max": 24,
+    "w": 18,
+    "h": 21,
+    "pivot_present": null
+   },
+   "distinct_colors": 4,
+   "palette": [
+    {
+     "hex": "#E2B65F",
+     "pixels": 92,
+     "pct": 70.77
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 18,
+     "pct": 13.85
+    },
+    {
+     "hex": "#8A734A",
+     "pixels": 12,
+     "pct": 9.23
+    },
+    {
+     "hex": "#B6FFFF",
+     "pixels": 8,
+     "pct": 6.15
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 4196,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_signal_ring_paperdoll",
+   "file": "pixel_item_signal_ring_paperdoll.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_signal_ring_paperdoll.png",
+   "width": 32,
+   "height": 48,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "1e3c7e36c6cc00cac4ec2c151b4b7b7a3425a3392555e77ef0b064520a1631ec",
+   "git_blob": "b2907465f1f2161903a9ef54690818864cf13ad3",
+   "asset_symbol": "PixelAssetCatalog.SIGNAL_RING_LAYER_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 4,
+    "partial_px": 0,
+    "clear_px": 1532,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 5,
+    "x_max": 6,
+    "y_min": 33,
+    "y_max": 34,
+    "w": 2,
+    "h": 2,
+    "pivot_present": null
+   },
+   "distinct_colors": 2,
+   "palette": [
+    {
+     "hex": "#E2B65F",
+     "pixels": 3,
+     "pct": 75.0
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 1,
+     "pct": 25.0
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 6260,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_work_gloves_icon",
+   "file": "pixel_item_work_gloves_icon.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_work_gloves_icon.png",
+   "width": 32,
+   "height": 32,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "82aff877b117d8c9b97773c1958de3060ae076bf60ced66c4a48978ee7008fdb",
+   "git_blob": "f9123fefd4689ed0faf5730a1f7ea1ecbe713f65",
+   "asset_symbol": "PixelAssetCatalog.WORK_GLOVES_ICON_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 308,
+    "partial_px": 0,
+    "clear_px": 716,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 4,
+    "x_max": 27,
+    "y_min": 7,
+    "y_max": 25,
+    "w": 24,
+    "h": 19,
+    "pivot_present": null
+   },
+   "distinct_colors": 4,
+   "palette": [
+    {
+     "hex": "#45545C",
+     "pixels": 180,
+     "pct": 58.44
+    },
+    {
+     "hex": "#10151A",
+     "pixels": 58,
+     "pct": 18.83
+    },
+    {
+     "hex": "#2B373D",
+     "pixels": 42,
+     "pct": 13.64
+    },
+    {
+     "hex": "#8DA0A9",
+     "pixels": 28,
+     "pct": 9.09
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 4196,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_item_work_gloves_paperdoll",
+   "file": "pixel_item_work_gloves_paperdoll.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_item_work_gloves_paperdoll.png",
+   "width": 32,
+   "height": 48,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "1656502a49b905ef469581d8a70d9c02c65977c2e27d048303cdabf2fbe16697",
+   "git_blob": "9354066c3149e60e0521509c4f7a38220c54049f",
+   "asset_symbol": "PixelAssetCatalog.WORK_GLOVES_LAYER_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 48,
+    "partial_px": 0,
+    "clear_px": 1488,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 5,
+    "x_max": 26,
+    "y_min": 30,
+    "y_max": 35,
+    "w": 22,
+    "h": 6,
+    "pivot_present": null
+   },
+   "distinct_colors": 4,
+   "palette": [
+    {
+     "hex": "#46504E",
+     "pixels": 24,
+     "pct": 50.0
+    },
+    {
+     "hex": "#10151A",
+     "pixels": 12,
+     "pct": 25.0
+    },
+    {
+     "hex": "#28302F",
+     "pixels": 8,
+     "pct": 16.67
+    },
+    {
+     "hex": "#8E978F",
+     "pixels": 4,
+     "pct": 8.33
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 194,
+   "class": "item_or_equipment"
+  },
+  {
+   "resource_name": "pixel_platform_nine_blackout_scene",
+   "file": "pixel_platform_nine_blackout_scene.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_platform_nine_blackout_scene.png",
+   "width": 128,
+   "height": 64,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "6a7e09df171e78761956ed146f2147a1bd1c54d6a784534fb5a56cb8edd3c222",
+   "git_blob": "591fa56cd17bdf5576774815ed330b3f40af4ccc",
+   "asset_symbol": "PixelSceneCatalog.PLATFORM_NINE_SCENE_ID",
+   "location_id": "PLATFORM_NINE",
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 8192,
+    "partial_px": 0,
+    "clear_px": 0,
+    "binary_transparency": true,
+    "fully_opaque": true
+   },
+   "occupied_bounds": {
+    "x_min": 0,
+    "x_max": 127,
+    "y_min": 0,
+    "y_max": 63,
+    "w": 128,
+    "h": 64,
+    "pivot_present": null
+   },
+   "distinct_colors": 12,
+   "palette": [
+    {
+     "hex": "#17242B",
+     "pixels": 1676,
+     "pct": 20.46
+    },
+    {
+     "hex": "#10181D",
+     "pixels": 1423,
+     "pct": 17.37
+    },
+    {
+     "hex": "#394850",
+     "pixels": 1112,
+     "pct": 13.57
+    },
+    {
+     "hex": "#53616A",
+     "pixels": 874,
+     "pct": 10.67
+    },
+    {
+     "hex": "#26363E",
+     "pixels": 856,
+     "pct": 10.45
+    },
+    {
+     "hex": "#1B252C",
+     "pixels": 756,
+     "pct": 9.23
+    },
+    {
+     "hex": "#304149",
+     "pixels": 689,
+     "pct": 8.41
+    },
+    {
+     "hex": "#111A20",
+     "pixels": 445,
+     "pct": 5.43
+    },
+    {
+     "hex": "#D66B66",
+     "pixels": 158,
+     "pct": 1.93
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 85,
+     "pct": 1.04
+    },
+    {
+     "hex": "#E9E2CC",
+     "pixels": 75,
+     "pct": 0.92
+    },
+    {
+     "hex": "#E2B65F",
+     "pixels": 43,
+     "pct": 0.52
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 1255,
+   "class": "location_scene"
+  },
+  {
+   "resource_name": "pixel_player_gameplay_front_base",
+   "file": "pixel_player_gameplay_front_base.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_player_gameplay_front_base.png",
+   "width": 32,
+   "height": 48,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "ba7ba95e041db5d8a5b7519386e809525a9ad46950a63dc5d1e1db772def5baa",
+   "git_blob": "d7cb5cd57a5e75dead06dd0db002a9e5894ffbeb",
+   "asset_symbol": "PixelAssetCatalog.PLAYER_FRONT_BASE_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 662,
+    "partial_px": 0,
+    "clear_px": 874,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 5,
+    "x_max": 26,
+    "y_min": 4,
+    "y_max": 46,
+    "w": 22,
+    "h": 43,
+    "pivot_present": null
+   },
+   "distinct_colors": 10,
+   "palette": [
+    {
+     "hex": "#10151A",
+     "pixels": 224,
+     "pct": 33.84
+    },
+    {
+     "hex": "#566564",
+     "pixels": 144,
+     "pct": 21.75
+    },
+    {
+     "hex": "#AD7D62",
+     "pixels": 126,
+     "pct": 19.03
+    },
+    {
+     "hex": "#3B4543",
+     "pixels": 70,
+     "pct": 10.57
+    },
+    {
+     "hex": "#343F3E",
+     "pixels": 40,
+     "pct": 6.04
+    },
+    {
+     "hex": "#27302F",
+     "pixels": 30,
+     "pct": 4.53
+    },
+    {
+     "hex": "#8B5F4B",
+     "pixels": 14,
+     "pct": 2.11
+    },
+    {
+     "hex": "#1F2625",
+     "pixels": 10,
+     "pct": 1.51
+    },
+    {
+     "hex": "#C79779",
+     "pixels": 2,
+     "pct": 0.3
+    },
+    {
+     "hex": "#7E8B84",
+     "pixels": 2,
+     "pct": 0.3
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 508,
+   "class": "character"
+  },
+  {
+   "resource_name": "pixel_player_hair_tech_placeholder",
+   "file": "pixel_player_hair_tech_placeholder.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_player_hair_tech_placeholder.png",
+   "width": 32,
+   "height": 48,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "8170cff7377a8375e1a4ec81a80182b690f42e6810dde66f1daed6f7753087f7",
+   "git_blob": "2cc4da04af11acfb332318c1e58df7b846530799",
+   "asset_symbol": "PixelAssetCatalog.PLAYER_HAIR_PLACEHOLDER_ID",
+   "location_id": null,
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 94,
+    "partial_px": 0,
+    "clear_px": 1442,
+    "binary_transparency": true,
+    "fully_opaque": false
+   },
+   "occupied_bounds": {
+    "x_min": 9,
+    "x_max": 22,
+    "y_min": 2,
+    "y_max": 10,
+    "w": 14,
+    "h": 9,
+    "pivot_present": null
+   },
+   "distinct_colors": 3,
+   "palette": [
+    {
+     "hex": "#2C302E",
+     "pixels": 57,
+     "pct": 60.64
+    },
+    {
+     "hex": "#191C1B",
+     "pixels": 29,
+     "pct": 30.85
+    },
+    {
+     "hex": "#4A4F4A",
+     "pixels": 8,
+     "pct": 8.51
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 215,
+   "class": "character"
+  },
+  {
+   "resource_name": "pixel_relay_workbench_default_scene",
+   "file": "pixel_relay_workbench_default_scene.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_relay_workbench_default_scene.png",
+   "width": 128,
+   "height": 64,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "e979f6414c9358bf63dfbc2613f26ff20b8c44c44f82a873c6acab6e03978e76",
+   "git_blob": "96612e083a9db37a4588049dd2c3a3f2aad304b4",
+   "asset_symbol": "PixelSceneCatalog.RELAY_WORKBENCH_SCENE_ID",
+   "location_id": "RELAY_WORKBENCH",
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 8192,
+    "partial_px": 0,
+    "clear_px": 0,
+    "binary_transparency": true,
+    "fully_opaque": true
+   },
+   "occupied_bounds": {
+    "x_min": 0,
+    "x_max": 127,
+    "y_min": 0,
+    "y_max": 63,
+    "w": 128,
+    "h": 64,
+    "pivot_present": null
+   },
+   "distinct_colors": 10,
+   "palette": [
+    {
+     "hex": "#1B252C",
+     "pixels": 2193,
+     "pct": 26.77
+    },
+    {
+     "hex": "#303E45",
+     "pixels": 1536,
+     "pct": 18.75
+    },
+    {
+     "hex": "#162129",
+     "pixels": 1415,
+     "pct": 17.27
+    },
+    {
+     "hex": "#48535A",
+     "pixels": 1196,
+     "pct": 14.6
+    },
+    {
+     "hex": "#26363E",
+     "pixels": 1026,
+     "pct": 12.52
+    },
+    {
+     "hex": "#65737A",
+     "pixels": 386,
+     "pct": 4.71
+    },
+    {
+     "hex": "#111A20",
+     "pixels": 260,
+     "pct": 3.17
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 104,
+     "pct": 1.27
+    },
+    {
+     "hex": "#E2B65F",
+     "pixels": 56,
+     "pct": 0.68
+    },
+    {
+     "hex": "#D29A55",
+     "pixels": 20,
+     "pct": 0.24
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 1182,
+   "class": "location_scene"
+  },
+  {
+   "resource_name": "pixel_service_tunnel_default_scene",
+   "file": "pixel_service_tunnel_default_scene.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_service_tunnel_default_scene.png",
+   "width": 128,
+   "height": 64,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "16968aa5bcc48928c9aa78786ad58a3a5249208e371ae0cdc59d715b5d579180",
+   "git_blob": "aa6e31fa37e3ebcadef84de9ccd47d93b6d065b1",
+   "asset_symbol": "PixelSceneCatalog.SERVICE_TUNNEL_SCENE_ID",
+   "location_id": "SERVICE_TUNNEL",
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 8192,
+    "partial_px": 0,
+    "clear_px": 0,
+    "binary_transparency": true,
+    "fully_opaque": true
+   },
+   "occupied_bounds": {
+    "x_min": 0,
+    "x_max": 127,
+    "y_min": 0,
+    "y_max": 63,
+    "w": 128,
+    "h": 64,
+    "pivot_present": null
+   },
+   "distinct_colors": 9,
+   "palette": [
+    {
+     "hex": "#0F171B",
+     "pixels": 2588,
+     "pct": 31.59
+    },
+    {
+     "hex": "#182228",
+     "pixels": 1710,
+     "pct": 20.87
+    },
+    {
+     "hex": "#47565D",
+     "pixels": 1060,
+     "pct": 12.94
+    },
+    {
+     "hex": "#263238",
+     "pixels": 1050,
+     "pct": 12.82
+    },
+    {
+     "hex": "#344147",
+     "pixels": 720,
+     "pct": 8.79
+    },
+    {
+     "hex": "#11191D",
+     "pixels": 564,
+     "pct": 6.88
+    },
+    {
+     "hex": "#66747B",
+     "pixels": 274,
+     "pct": 3.34
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 186,
+     "pct": 2.27
+    },
+    {
+     "hex": "#E2B65F",
+     "pixels": 40,
+     "pct": 0.49
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 32900,
+   "class": "location_scene"
+  },
+  {
+   "resource_name": "pixel_trace_chamber_idle_scene",
+   "file": "pixel_trace_chamber_idle_scene.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_trace_chamber_idle_scene.png",
+   "width": 128,
+   "height": 64,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "d906d21756ae8f02b0fc77f6291a47bd57b39c5db20454a0d3e0ff2c26c2a6f8",
+   "git_blob": "43f9919fef3e0ae0ad27c4e09e008064068a93ff",
+   "asset_symbol": "PixelSceneCatalog.TRACE_CHAMBER_SCENE_ID",
+   "location_id": "TRACE_CHAMBER",
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 8192,
+    "partial_px": 0,
+    "clear_px": 0,
+    "binary_transparency": true,
+    "fully_opaque": true
+   },
+   "occupied_bounds": {
+    "x_min": 0,
+    "x_max": 127,
+    "y_min": 0,
+    "y_max": 63,
+    "w": 128,
+    "h": 64,
+    "pivot_present": null
+   },
+   "distinct_colors": 9,
+   "palette": [
+    {
+     "hex": "#111A20",
+     "pixels": 3391,
+     "pct": 41.39
+    },
+    {
+     "hex": "#1B252C",
+     "pixels": 1792,
+     "pct": 21.88
+    },
+    {
+     "hex": "#162129",
+     "pixels": 1062,
+     "pct": 12.96
+    },
+    {
+     "hex": "#48535A",
+     "pixels": 544,
+     "pct": 6.64
+    },
+    {
+     "hex": "#26363E",
+     "pixels": 490,
+     "pct": 5.98
+    },
+    {
+     "hex": "#303E45",
+     "pixels": 408,
+     "pct": 4.98
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 289,
+     "pct": 3.53
+    },
+    {
+     "hex": "#E2B65F",
+     "pixels": 144,
+     "pct": 1.76
+    },
+    {
+     "hex": "#65737A",
+     "pixels": 72,
+     "pct": 0.88
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 32900,
+   "class": "location_scene"
+  },
+  {
+   "resource_name": "pixel_workshop_row_default_scene",
+   "file": "pixel_workshop_row_default_scene.png",
+   "path": "android/app/src/main/res/drawable-nodpi/pixel_workshop_row_default_scene.png",
+   "width": 128,
+   "height": 64,
+   "bit_depth": 8,
+   "color_type": 6,
+   "format": "RGBA8888",
+   "sha256": "864f8cb579856d682801a9d0d45afee93f08def5fecfaec401293712fcb97371",
+   "git_blob": "49a1e0789fcb83d84e872de04c521eb4dee5e1db",
+   "asset_symbol": "PixelSceneCatalog.WORKSHOP_ROW_SCENE_ID",
+   "location_id": "WORKSHOP_ROW",
+   "recorded_stage": "RASTER_PRESENT + CATALOG_BOUND",
+   "visual_approval": "NOT_ESTABLISHED_BY_THIS_AUDIT",
+   "alpha": {
+    "opaque_px": 8192,
+    "partial_px": 0,
+    "clear_px": 0,
+    "binary_transparency": true,
+    "fully_opaque": true
+   },
+   "occupied_bounds": {
+    "x_min": 0,
+    "x_max": 127,
+    "y_min": 0,
+    "y_max": 63,
+    "w": 128,
+    "h": 64,
+    "pivot_present": null
+   },
+   "distinct_colors": 10,
+   "palette": [
+    {
+     "hex": "#111A20",
+     "pixels": 2947,
+     "pct": 35.97
+    },
+    {
+     "hex": "#303E45",
+     "pixels": 2105,
+     "pct": 25.7
+    },
+    {
+     "hex": "#1B252C",
+     "pixels": 1678,
+     "pct": 20.48
+    },
+    {
+     "hex": "#6A5941",
+     "pixels": 432,
+     "pct": 5.27
+    },
+    {
+     "hex": "#162129",
+     "pixels": 389,
+     "pct": 4.75
+    },
+    {
+     "hex": "#48535A",
+     "pixels": 337,
+     "pct": 4.11
+    },
+    {
+     "hex": "#65737A",
+     "pixels": 148,
+     "pct": 1.81
+    },
+    {
+     "hex": "#E2B65F",
+     "pixels": 66,
+     "pct": 0.81
+    },
+    {
+     "hex": "#63D8D1",
+     "pixels": 60,
+     "pct": 0.73
+    },
+    {
+     "hex": "#D66B66",
+     "pixels": 30,
+     "pct": 0.37
+    }
+   ],
+   "pixel_match_to_source_master": true,
+   "file_bytes": 32900,
+   "class": "location_scene"
+  }
+ ]
+}

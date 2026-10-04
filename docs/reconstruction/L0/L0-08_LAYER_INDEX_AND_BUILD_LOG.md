@@ -119,7 +119,9 @@ Each entry records what was added, what was verified, and what was found.
 
 - Repository cloned and inspected. `main` contains one commit (`6f8d9c5 Initial
   commit`) and a two-line README only.
-- 64 remote branches enumerated; the substantive working tip is
+- 60 remote branches enumerated after a full fetch (the initial pre-fetch
+  listing showed 64 refs; the authoritative post-fetch count is 60); the
+  substantive working tip is
   `docs/master-game-development-program` (354 files, 210 under `docs/`,
   most recent commit 2026-10-03).
 - Existing corpus measured: 182 Markdown documents, 2,229,747 characters

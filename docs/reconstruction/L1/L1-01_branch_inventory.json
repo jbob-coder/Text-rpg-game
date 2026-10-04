@@ -1,0 +1,490 @@
+[
+ {
+  "branch": "HEAD -> main",
+  "head_sha": "origin/HEAD -> main",
+  "date": "",
+  "subject": "",
+  "files": 1,
+  "category": "Other"
+ },
+ {
+  "branch": "context/shared-game-context",
+  "head_sha": "817b957ba7b6cd2beb9f13b3a268d1bce5e9f096",
+  "date": "2026-09-30",
+  "subject": "world history: register 1411-1510 planning cycle",
+  "files": 369,
+  "category": "Shared context"
+ },
+ {
+  "branch": "docs/gate-twelve-map-pixel-asset-blueprint",
+  "head_sha": "b6e2d97c3675813c53f03460342d875a1bdc750e",
+  "date": "2026-10-01",
+  "subject": "Link Gate Twelve visual continuity in master task register",
+  "files": 195,
+  "category": "Documentation program"
+ },
+ {
+  "branch": "docs/master-documentation-program",
+  "head_sha": "9a7609521b8b63ac9bc40d634ff89602bd67693c",
+  "date": "2026-10-01",
+  "subject": "docs: add master documentation program tasks",
+  "files": 204,
+  "category": "Documentation program"
+ },
+ {
+  "branch": "docs/master-game-development-program",
+  "head_sha": "2111addc18836c863809eb290f2843fc862cc533",
+  "date": "2026-10-03",
+  "subject": "docs: index Sensory passive refinement",
+  "files": 354,
+  "category": "Documentation program"
+ },
+ {
+  "branch": "docs/pixel-asset-production-plan-v1",
+  "head_sha": "a997a3b25560ae948e868b30093b97fb6e6b65b6",
+  "date": "2026-09-27",
+  "subject": "docs: reject Wave A board E against turnaround contracts",
+  "files": 111,
+  "category": "Documentation program"
+ },
+ {
+  "branch": "docs/settlement-region-build-plan",
+  "head_sha": "65d2db8538c1b8302c314f2fbe9eb7a1b585b51d",
+  "date": "2026-10-02",
+  "subject": "docs(production): audit master game development source branch",
+  "files": 256,
+  "category": "Documentation program"
+ },
+ {
+  "branch": "docs/text-pixel-rpg-master-program",
+  "head_sha": "8bc462dfbecd28335c02c28de4dd3f0961ad512f",
+  "date": "2026-10-02",
+  "subject": "docs: subordinate Gate Twelve plan to global documentation program",
+  "files": 199,
+  "category": "Documentation program"
+ },
+ {
+  "branch": "docs/visual-integration-recovery-plan",
+  "head_sha": "fe83ad845361ee6b1774ec13e71872d4e34ff3ce",
+  "date": "2026-10-01",
+  "subject": "docs: record delegated pixel art direction",
+  "files": 188,
+  "category": "Documentation program"
+ },
+ {
+  "branch": "feature/ability-progression-v1",
+  "head_sha": "535a5d63e3e9b9b6c011b66db61747a042d05da7",
+  "date": "2026-09-26",
+  "subject": "test: cover power definition validation and atomic rejection",
+  "files": 29,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/ability-progression-v2",
+  "head_sha": "36aadb4be2a1b1ac5cac4122f6adf2db62dee8a0",
+  "date": "2026-09-26",
+  "subject": "test: harden ability projection disclosure and numeric safety",
+  "files": 34,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/ability-progression-v3",
+  "head_sha": "76794947220a8c53444d411111b3405e9d58c606",
+  "date": "2026-09-26",
+  "subject": "sync: update tests/test_vertical_slice.py from latest foundation",
+  "files": 37,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/ability-progression-v4",
+  "head_sha": "932bd74c4f2a0d067095ae325e08031d723da601",
+  "date": "2026-09-26",
+  "subject": "chore: port tests/test_persistence.py from ability v3 onto current foundation",
+  "files": 37,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/android-open-world-v1",
+  "head_sha": "3faec5d447fcefedca7d721b1f5e9d3c6c6e7067",
+  "date": "2026-09-27",
+  "subject": "fix(android): return to story after narrative map travel",
+  "files": 87,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/android-pixel-client-v1",
+  "head_sha": "17aac147429ed20f66798d7c9157c8acc0848d8f",
+  "date": "2026-09-27",
+  "subject": "docs(android): record green representative runtime gate",
+  "files": 87,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/android-runtime-bootstrap-v1",
+  "head_sha": "6a68b960e81cc71a4b49b1942673394b10f78f70",
+  "date": "2026-09-27",
+  "subject": "test(android): cover Python bridge contract",
+  "files": 75,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/character-equipment-paperdoll-ui",
+  "head_sha": "40c95ec2e2b44aeb6a8ae1a23c28bbaf04e7a6d7",
+  "date": "2026-09-30",
+  "subject": "docs: record verified character paper-doll UI gate",
+  "files": 142,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/character-stats-inspection",
+  "head_sha": "791a839b23d4c3b9c43b6b1a4f9f204008a8c7df",
+  "date": "2026-09-30",
+  "subject": "ci: retain verified PR APK for Drive delivery",
+  "files": 151,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/effective-stat-pipeline",
+  "head_sha": "1f9afb4e4c2242f3620e6dced13e83544da3db0d",
+  "date": "2026-09-26",
+  "subject": "test: cover derived-stat requirements in rules engine",
+  "files": 27,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/gate-twelve-map-surface-texture",
+  "head_sha": "b0e22782a9e27f883508c2df6457ad6f38001dc3",
+  "date": "2026-10-01",
+  "subject": "Fix route texture test to sample unobstructed authored line",
+  "files": 195,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/mobile-bag-pixel-art",
+  "head_sha": "f4f8d4c81e8161523cd4ce5317c098d1adc9bed3",
+  "date": "2026-10-01",
+  "subject": "test: avoid ambiguous duplicate Bag item text assertion",
+  "files": 191,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/mobile-skills-pixel-layout",
+  "head_sha": "141192bbdf01fea0b9d7f143bd7b448de5d7fb78",
+  "date": "2026-10-01",
+  "subject": "fix: use supported Compose node-count assertions",
+  "files": 191,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/opening-story-actor-pixel-art",
+  "head_sha": "9f3cf193619e1db3845c1bc71f4592c7ac62db76",
+  "date": "2026-10-01",
+  "subject": "ci: include opening actor screenshot evidence",
+  "files": 191,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/pixel-asset-wave-a",
+  "head_sha": "a3970de6597c77939afccb5f30d6040bdf3d608d",
+  "date": "2026-09-30",
+  "subject": "docs: promote Wave K assets after green gate",
+  "files": 142,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/pixel-asset-wave-l-environment-modules",
+  "head_sha": "54a40bb5ad0aeafb428d128be7c1465f3d1a759b",
+  "date": "2026-09-30",
+  "subject": "docs: close Wave L verification gate",
+  "files": 145,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/pixel-asset-wave-m-diagnostic-reader",
+  "head_sha": "063d5879413b81656cc5c7304be0afd02402f2fd",
+  "date": "2026-09-30",
+  "subject": "Record verified deferred Wave M status",
+  "files": 145,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/pixel-assets-existing-reuse-b",
+  "head_sha": "623cf9bb9381293b4503ae6c1676208b0f5979d4",
+  "date": "2026-09-30",
+  "subject": "Reuse secondary button chrome in character actions",
+  "files": 161,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/pixel-assets-runtime-expansion",
+  "head_sha": "ddbb5f4250e26b99765999d0a8e81f59cb1ea26c",
+  "date": "2026-09-30",
+  "subject": "Record verified modal asset follow-up",
+  "files": 161,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/pixel-map-art-pass",
+  "head_sha": "59a1930961ae5fc961acab5624dcbfcc2f7e66cb",
+  "date": "2026-10-01",
+  "subject": "test: match pixel panel map title casing",
+  "files": 189,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/player-avatar-art-pass",
+  "head_sha": "494f2b3f0dedbcb90c202aab7380694c4daf33f3",
+  "date": "2026-10-01",
+  "subject": "Index approved Jack character reference",
+  "files": 190,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/player-base-art-pass",
+  "head_sha": "59a1930961ae5fc961acab5624dcbfcc2f7e66cb",
+  "date": "2026-10-01",
+  "subject": "test: match pixel panel map title casing",
+  "files": 189,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/player-safe-skills-ui",
+  "head_sha": "2f50abe7787fd18cadddd49ad1d0e49087f638b4",
+  "date": "2026-09-30",
+  "subject": "docs: avoid parallel P-005 task collision",
+  "files": 142,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/player-safe-stat-inspection",
+  "head_sha": "7cba26a4c31c31ce19562ff79e830d14e6bb96b3",
+  "date": "2026-09-30",
+  "subject": "docs: record verified player-safe stats gate",
+  "files": 142,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/png-pixel-art-runtime-a",
+  "head_sha": "c11133122d47009abc71e8c6e91c08aedbe91ae2",
+  "date": "2026-09-30",
+  "subject": "Include Relay Workbench in UI QA evidence set",
+  "files": 187,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/quiet-stair-scene-art-pass",
+  "head_sha": "7adacd474ae22908bba2fc72247f500312ea7483",
+  "date": "2026-10-01",
+  "subject": "ci: require Quiet Stair scene evidence",
+  "files": 191,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/service-tunnel-ambient-animation",
+  "head_sha": "2f7f77d7925e94558d219d4ab2340fbb32476717",
+  "date": "2026-10-01",
+  "subject": "ci: require service-tunnel arrival art evidence",
+  "files": 191,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/service-tunnel-ambient-animation-stack",
+  "head_sha": "19807863e3d68cd3ffad0e627ad19130da9bdbed",
+  "date": "2026-10-01",
+  "subject": "Record Service Tunnel animation implementation start",
+  "files": 198,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/service-tunnel-arrival-pixel-art",
+  "head_sha": "2f7f77d7925e94558d219d4ab2340fbb32476717",
+  "date": "2026-10-01",
+  "subject": "ci: require service-tunnel arrival art evidence",
+  "files": 191,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/service-tunnel-atlas-detail",
+  "head_sha": "b5cb510408331446ec3fdfbc6ec188b8a5516c15",
+  "date": "2026-10-01",
+  "subject": "Test Service Tunnel atlas detail composition",
+  "files": 191,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/service-tunnel-scene-art-pass",
+  "head_sha": "d19e6edba4dec5345f1365bb358084b9b77eb7d9",
+  "date": "2026-10-01",
+  "subject": "ci: require Service Tunnel scene evidence",
+  "files": 191,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/story-pixel-resource-hud",
+  "head_sha": "d80aee8021058d0a7b26bb764b92ca0a987e035e",
+  "date": "2026-10-01",
+  "subject": "test: verify Story resource bars on phone",
+  "files": 187,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "feature/story-scene-first-pixel-art",
+  "head_sha": "5a8151a56265e0b0b4a39fcb6f62aa1c4d8e4102",
+  "date": "2026-09-30",
+  "subject": "Include scene-first Story screenshot in QA gate",
+  "files": 161,
+  "category": "Feature \u2014 art / client / systems"
+ },
+ {
+  "branch": "fix/avatar-overlay-rig-contract",
+  "head_sha": "7d4558ea5c9e3ad24bf29fe42c8f199ed0be60fe",
+  "date": "2026-09-30",
+  "subject": "docs: record verified avatar overlay rig gate",
+  "files": 142,
+  "category": "Hardening / review"
+ },
+ {
+  "branch": "fix/player-hub-runtime-recovery",
+  "head_sha": "93f8be13db0a9a683e0c85e39640cd333f4fc22b",
+  "date": "2026-09-30",
+  "subject": "Record verified APK delivery, UI evidence and desktop branch handoff",
+  "files": 153,
+  "category": "Hardening / review"
+ },
+ {
+  "branch": "fix/v6-runtime-boundaries",
+  "head_sha": "7be1adef22a1bf9d4826691e665b7417235f53a5",
+  "date": "2026-09-27",
+  "subject": "docs: lock pixel-art product direction",
+  "files": 60,
+  "category": "Hardening / review"
+ },
+ {
+  "branch": "foundation/text-rpg-systems",
+  "head_sha": "b3340bc38e63e916c6cc7a8538ed1e8a34011112",
+  "date": "2026-09-26",
+  "subject": "Document first Directional Trace use consequences",
+  "files": 38,
+  "category": "Prototype / foundation"
+ },
+ {
+  "branch": "integration/android-open-world-v1-reconcile",
+  "head_sha": "444063731f79bfc4e8e8e06fd05ad88e5e29f068",
+  "date": "2026-09-27",
+  "subject": "ci: package verified Android runtime artifact",
+  "files": 89,
+  "category": "Integration"
+ },
+ {
+  "branch": "integration/rules-ability-v1",
+  "head_sha": "7bb7b519ba61ec8e8febe9967ad9bca681e1a7e4",
+  "date": "2026-09-26",
+  "subject": "fix: use player-friendly fallback names for conditions",
+  "files": 42,
+  "category": "Integration"
+ },
+ {
+  "branch": "integration/rules-ability-v2",
+  "head_sha": "46deba017a09b2b3fcf0599c4d172ee5bd796362",
+  "date": "2026-09-26",
+  "subject": "merge: sync discovery gates registries and latest foundation",
+  "files": 44,
+  "category": "Integration"
+ },
+ {
+  "branch": "integration/rules-ability-v3",
+  "head_sha": "f7a2a685105ed06255d856afee1a9eee5390eecd",
+  "date": "2026-09-26",
+  "subject": "chore: sync latest foundation docs/SYSTEMS_CATALOG.md",
+  "files": 43,
+  "category": "Integration"
+ },
+ {
+  "branch": "integration/rules-ability-v4",
+  "head_sha": "f7a2a685105ed06255d856afee1a9eee5390eecd",
+  "date": "2026-09-26",
+  "subject": "chore: sync latest foundation docs/SYSTEMS_CATALOG.md",
+  "files": 43,
+  "category": "Integration"
+ },
+ {
+  "branch": "integration/rules-ability-v5",
+  "head_sha": "fd36b9f1d14528f3dc5eb37e20e9120af25af036",
+  "date": "2026-09-26",
+  "subject": "docs: record current-foundation integration v5 strategy",
+  "files": 44,
+  "category": "Integration"
+ },
+ {
+  "branch": "integration/rules-ability-v6-reconcile",
+  "head_sha": "7f5f104fb839068bdfaf5cec72f37129ae20d463",
+  "date": "2026-09-27",
+  "subject": "docs(v6): record persistence and quest boundary hardening",
+  "files": 45,
+  "category": "Integration"
+ },
+ {
+  "branch": "main",
+  "head_sha": "6f8d9c5bf6592275ac655e6200b38b7dfa26e23a",
+  "date": "2026-09-26",
+  "subject": "Initial commit",
+  "files": 1,
+  "category": "main (empty)"
+ },
+ {
+  "branch": "prototype/medieval-crystal-combat-contracts",
+  "head_sha": "29c69788bb71be8846d108360d59b026c8ee0ae0",
+  "date": "2026-09-27",
+  "subject": "test(ecology): add test_hierarchy.py coverage",
+  "files": 71,
+  "category": "Prototype / foundation"
+ },
+ {
+  "branch": "prototype/medieval-crystal-contracts",
+  "head_sha": "ed3d8744e8b99e5bf97b884cd98f132cddbf18b6",
+  "date": "2026-09-27",
+  "subject": "test(prototype): verify connected medieval hunt and retreat loops",
+  "files": 60,
+  "category": "Prototype / foundation"
+ },
+ {
+  "branch": "review/effective-stat-contract-hardening",
+  "head_sha": "08a4ff863eb9f28a0739e02c3c833c1990a14e43",
+  "date": "2026-09-26",
+  "subject": "test: reject non-finite modifier values",
+  "files": 29,
+  "category": "Hardening / review"
+ },
+ {
+  "branch": "review/effective-stat-contract-hardening-v2",
+  "head_sha": "eec7ca8a9e357357ce1e16beedbb81d1d0258689",
+  "date": "2026-09-26",
+  "subject": "test: port hardened coverage into current test_validation.py",
+  "files": 38,
+  "category": "Hardening / review"
+ },
+ {
+  "branch": "review/effective-stat-contract-hardening-v3",
+  "head_sha": "7212193c05bdf2a0e56107a3e7a469bf596050cb",
+  "date": "2026-09-26",
+  "subject": "test: validate authored choice time contract",
+  "files": 40,
+  "category": "Hardening / review"
+ },
+ {
+  "branch": "shared/game-context",
+  "head_sha": "76d5b305600ea35960d7aea378703dbdbb89b46b",
+  "date": "2026-09-27",
+  "subject": "docs(context): checkpoint connected medieval hunt and ecology prototype",
+  "files": 44,
+  "category": "Shared context"
+ },
+ {
+  "branch": "shared/game-context-ui-sync",
+  "head_sha": "1090c92046c8c0b1d3bee50e0aa1288e251a506b",
+  "date": "2026-09-26",
+  "subject": "context: record effective stat pipeline handoff",
+  "files": 35,
+  "category": "Shared context"
+ }
+]
