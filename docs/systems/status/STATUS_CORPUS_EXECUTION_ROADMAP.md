@@ -252,6 +252,7 @@ Materialized:
 - record-level conceptual read-dependency assignments for 230 / 230 passives;
 - 93 candidate passive overlap edges adjudicated into capped/shared, ordered-stage, or distinct-stage classes;
 - 38 shared-term edges consolidated into **20 canonical shared resolver families** with symbolic cap/floor semantics;
+- base-term/unit taxonomy plus a 20-resolver dependency map materialized for numeric preparation;
 - knowledge reconciliation Waves A/B/C covering 120 priority/content-required rows;
 - family-level role-class world integration for 23 / 23 families.
 
@@ -265,7 +266,7 @@ Open:
 ### Next order
 
 1. **Progress role-class knowledge recommendations toward actual world entity/region/time evidence.**
-2. **Document base-system terms/units for numeric calibration of the 20 canonical shared passive resolvers.**
+2. **Define scenario ranges/anchors for the base terms behind the 20 canonical shared passive resolvers.**
 3. **Progress supported role-class mappings toward actual world entities.**
 4. Expand numeric parameterization once base units exist.
 5. Run additional canon-review dry packets.
