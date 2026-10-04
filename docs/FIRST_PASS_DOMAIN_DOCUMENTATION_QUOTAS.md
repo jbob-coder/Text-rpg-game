@@ -128,3 +128,27 @@ Whenever a task materially changes corpus coverage:
 6. record any newly unlocked Phase 1 playable requirement.
 
 Raw file count alone is never sufficient evidence that a quota has been satisfied.
+
+
+## 9. Live first-pass coverage checkpoint — V08 tactical combat
+
+V08 now has **10 / 10 minimum canonical first-pass units**:
+
+1. TACTICAL_COMBAT_MASTER_PLAN.md
+2. CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md
+3. TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md
+4. TURN_INITIATIVE_ACTION_BUDGET_STANDARD.md
+5. MOVEMENT_PATHING_AND_POSITIONING_STANDARD.md
+6. LOS_DETECTION_AND_COMBAT_KNOWLEDGE_STANDARD.md
+7. DIRECTIONAL_COVER_TERRAIN_STANDARD.md
+8. COMBAT_ACTION_TARGETING_RESOLUTION_STANDARD.md
+9. INJURY_CONDITION_AFTERMATH_STANDARD.md
+10. COMBAT_AI_OBJECTIVES_RETREAT_STANDARD.md
+
+Status: **FIRST-PASS QUOTA SATISFIED / RUNTIME NOT IMPLEMENTED / CONTENT PACKET STILL REQUIRED.**
+
+This does not mean tactical combat is finished. It means the first broad reconstruction-grade contract layer now covers coordinates, turns, action budget, movement, LOS/detection/knowledge, directional cover/terrain, action resolution, injuries/aftermath, AI/objectives/retreat, and camera/presentation.
+
+New direction after this quota closure:
+- create one Gate Twelve Phase 1 tactical encounter packet;
+- then shift breadth effort to the next under-covered high-dependency domain, V05 Characters/NPC/Social, unless a higher-priority repository audit blocker intervenes.
