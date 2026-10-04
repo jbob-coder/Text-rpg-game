@@ -5,6 +5,7 @@ Status: **ACTIVE CATALOG NAVIGATION / WAVE 001 STRUCTURALLY COMPLETE / REFINEMEN
 Parents:
 - `PRIMARY_ABILITY_REGISTRY_SCHEMA.md`
 - `ABILITY_RARITY_STANDARD.md`
+- `ABILITY_CONTENT_AUTHORING_GUIDE.md`
 
 ## Catalog policy
 
@@ -37,8 +38,21 @@ Structural validation: **47 / 47 ability IDs present and unique.**
 ## Deep-authoring files
 
 - `calibration/PRIMARY_ABILITY_DETAIL_COMMON_001_010.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_COMMON_001_010.md`
+
+For Common 001–010:
+- compact technique rows have individualized names/effects/cost/failure text;
+- awakening profiles have individualized manifestation/hazard/public-signal text;
+- counter profiles have individualized natural/tactical/environmental counterplay;
+- full technique fields now exist in the Common technique detail packet.
 
 The deep-authoring layer is the reconstruction-grade direction. It adds the fields required by the full registry schema without changing stable IDs.
+
+## Integration
+
+- `ABILITY_PASSIVE_CROSS_REFERENCE.md`
+- `STATUS_UI_UX_CONTRACT.md`
+- `STATUS_BALANCE_AND_TEST_MATRIX.md`
 
 ## Audit
 
