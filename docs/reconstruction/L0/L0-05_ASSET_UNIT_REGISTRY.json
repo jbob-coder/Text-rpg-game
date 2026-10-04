@@ -1,0 +1,5030 @@
+{
+ "schema_version": 1,
+ "generated_by": "docs/reconstruction/L0/L0-05_ASSET_UNIT_REGISTRY.md",
+ "source_documents": [
+  "docs/assets/ASSET_BATCH_001_001-100.md",
+  "docs/assets/ASSET_BATCH_002_101-200.md",
+  "docs/assets/ASSET_BATCH_003_201-300.md",
+  "docs/assets/ASSET_BATCH_004_301-400.md",
+  "docs/assets/ASSET_BATCH_005_401-500.md"
+ ],
+ "view_set_rule": "L0-02 \u00a74; ID pattern dominates, family is fallback",
+ "verification": {
+  "total_units": 500,
+  "number_range": "001-500",
+  "missing_numbers": [],
+  "duplicate_asset_ids": [],
+  "mechanically_verified": true,
+  "asserted": "500 units, 500 unique numbers, 500 unique asset IDs"
+ },
+ "view_set_counts": {
+  "PRESENTATION_STATES": 167,
+  "TILE_AXES": 146,
+  "PROP_ANGLES": 71,
+  "SIX_VIEW_DEFERRED": 69,
+  "SIX_VIEW": 30,
+  "SCENE_CAMERA": 17
+ },
+ "units": [
+  {
+   "n": 1,
+   "id": "PLAYER_BODYFRAME_A_TURNAROUND",
+   "family": "Character",
+   "native": "1024+ reference -> 32x48 masters",
+   "use": "Six-view player construction reference used to lock anatomy and all later equipment alignment.",
+   "notes": "Front, front-3/4, L profile, R profile, rear-3/4, back; neutral adult 1:4 head ratio; reference-only board, then pixel reconstruction.",
+   "canon": null,
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 2,
+   "id": "PLAYER_GAMEPLAY_FRONT_BASE",
+   "family": "Character",
+   "native": "32x48",
+   "use": "Base front-facing paper-doll body under all equipment in Story/Character surfaces.",
+   "notes": "Transparent body layers only; no permanent armor; pivot (16,47); must expose standard head, shoulder, wrist, waist and foot anchors.",
+   "canon": null,
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 3,
+   "id": "PLAYER_GAMEPLAY_LEFT_PROFILE_BASE",
+   "family": "Character",
+   "native": "32x48",
+   "use": "Left directional body for future movement and side-view poses.",
+   "notes": "Not an automatic mirror of the right side; preserve directional anchor consistency and allow asymmetrical hair/equipment.",
+   "canon": null,
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 4,
+   "id": "PLAYER_GAMEPLAY_RIGHT_PROFILE_BASE",
+   "family": "Character",
+   "native": "32x48",
+   "use": "Right directional body for future movement and side-view poses.",
+   "notes": "Separate source master so scars, rolled sleeves, weapons or asymmetrical hair can remain correct.",
+   "canon": null,
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 5,
+   "id": "PLAYER_GAMEPLAY_BACK_BASE",
+   "family": "Character",
+   "native": "32x48",
+   "use": "Back-facing body for movement, rear equipment and map/exploration presentation.",
+   "notes": "Defines back hair, shoulder, belt, pack and footwear occlusion rules while sharing the same ground pivot.",
+   "canon": null,
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 6,
+   "id": "PLAYER_IDLE_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 4 frames",
+   "use": "Primary persistent avatar animation when the narrative screen is idle.",
+   "notes": "Four-frame restrained breathing loop; <=1 px whole-body shift; paper-doll anchors exported per frame.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 7,
+   "id": "PLAYER_WALK_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 6 frames/direction",
+   "use": "Future authored map/exploration movement without redesigning the character system.",
+   "notes": "Contact/down/passing cycle; feet alternate visibly; equipment attachments follow frame anchors without sliding.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 8,
+   "id": "PLAYER_RUN_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 8 frames/direction",
+   "use": "Future urgent traversal or combat-context movement.",
+   "notes": "Forward lean and larger arm swing than walk; same equipment rig; no motion blur or anti-aliased smear.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 9,
+   "id": "PLAYER_CROUCH_SHEET",
+   "family": "Animation",
+   "native": "32x48, 6 transition/loop frames",
+   "use": "Supports stealth, inspection and low-clearance interaction states when gameplay uses them.",
+   "notes": "2 enter + 2 idle + 2 exit; pelvis and head lower while foot anchors stay grounded.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 10,
+   "id": "PLAYER_INTERACT_TOOL_SHEET",
+   "family": "Animation",
+   "native": "32x48, 4-6 frames",
+   "use": "Generic inspect/use animation for relay, terminal, workbench and tools.",
+   "notes": "Hands move to stable tool anchors; designed to accept separate held-prop layers rather than baking a specific item into the body.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 11,
+   "id": "PLAYER_HURT_RECOVER_SHEET",
+   "family": "Animation",
+   "native": "32x48, 3-4 frames",
+   "use": "Readable reaction when visible injury/damage is applied.",
+   "notes": "Short recoil/recover sequence; persistent injury remains a separate state overlay rather than being encoded only in animation.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 12,
+   "id": "PLAYER_TRACE_ACTIVATION_SHEET",
+   "family": "Animation",
+   "native": "32x48, 6-8 frames",
+   "use": "Body motion for Trace Echo / Signal Pulse activation.",
+   "notes": "Body remains readable beneath independent FX; hands/head orient toward the signal source; no hidden mechanics disclosed.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 13,
+   "id": "PLAYER_PORTRAIT_NEUTRAL",
+   "family": "Portrait",
+   "native": "64x64",
+   "use": "Character sheet/dialogue baseline portrait for the current player identity configuration.",
+   "notes": "Bust crop, same hair/skin/equipment identity as gameplay sprite; neutral lighting and readable silhouette.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 14,
+   "id": "PLAYER_PORTRAIT_EMOTION_TEMPLATES",
+   "family": "Portrait",
+   "native": "64x64 set",
+   "use": "Reusable geometry templates for neutral, focused, concerned, hurt, determined and surprised player expressions.",
+   "notes": "Templates modify brow/eye/mouth/head posture while preserving identity layers; later character-creation faces inherit the expression geometry.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 15,
+   "id": "PLAYER_HAIR_LAYER_KIT_A",
+   "family": "Character layer",
+   "native": "32x48 + 64x64 portrait companion",
+   "use": "First reusable front/rear hair construction kit for player customization.",
+   "notes": "Separate rear/front masks; coherent highlight clusters; helmets can occlude hair through masks; asymmetric styles require directional masters.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 16,
+   "id": "PLAYER_FACE_SKIN_PALETTE_KIT_A",
+   "family": "Character layer",
+   "native": "32x48 + 64x64",
+   "use": "Defines first face-cluster and skin ramp system for reusable player construction.",
+   "notes": "Minimum highlight/base/mid/deep shadow ramp; face uses tiny eye/brow/mouth clusters; tested against dark UI and cyan/gold accents.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 17,
+   "id": "PLAYER_VISIBLE_STATUS_OVERLAYS",
+   "family": "Character overlay",
+   "native": "32x48",
+   "use": "Visible injury and status layer family over player body/equipment.",
+   "notes": "Initial masks reserve minor injury, major injury and Trace strain channels; only engine-visible conditions may activate an overlay.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 18,
+   "id": "NPC_TAMSIN_TURNAROUND",
+   "family": "Character",
+   "native": "1024+ reference -> 32x48 masters",
+   "use": "Canonical six-view identity source for Tamsin and all later sprites/portraits.",
+   "notes": "Locks slim athletic proportions, long forearms, compact stance, heavy left fringe, high collar, rolled right sleeve, satchel, badge and eyebrow notch.",
+   "canon": null,
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 19,
+   "id": "NPC_TAMSIN_PORTRAIT_EMOTIONS",
+   "family": "Portrait",
+   "native": "64x64 x 5",
+   "use": "Dialogue/relationship portrait family for Tamsin.",
+   "notes": "Neutral, focused, concerned, angry, relieved; eyebrow notch and hair silhouette fixed; expressions do not alter identity geometry.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 20,
+   "id": "NPC_TAMSIN_DIAGNOSTIC_POSE",
+   "family": "Character pose",
+   "native": "32x48 + 64x64 reference",
+   "use": "Story pose when Tamsin operates a diagnostic reader or works on the relay.",
+   "notes": "Left hand supports reader, right hand operates it; satchel strap and badge remain legible; reader cyan reflection is local only.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 21,
+   "id": "ITEM_DEPOT_JACKET_ICON",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Inventory icon for ITEM_DEPOT_JACKET.",
+   "notes": "Charcoal/blue-gray utility silhouette; readable collar and utility seams; quality border is separate from icon pixels.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 22,
+   "id": "ITEM_DEPOT_JACKET_PAPERDOLL",
+   "family": "Equipment layer",
+   "native": "32x48",
+   "use": "Visible chest layer when ITEM_DEPOT_JACKET is equipped.",
+   "notes": "Aligns to chest/shoulder anchors; covers torso shirt only; preserves arm masks; matches the authoritative body slot.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 23,
+   "id": "ITEM_WORK_GLOVES_ICON",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Inventory icon for ITEM_WORK_GLOVES.",
+   "notes": "Insulated work-glove pair with practical cuff silhouette; no combat-gauntlet exaggeration.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 24,
+   "id": "ITEM_WORK_GLOVES_PAPERDOLL",
+   "family": "Equipment layer",
+   "native": "32x48",
+   "use": "Hand/forearm overlay when insulated work gloves are equipped.",
+   "notes": "Covers hands and lower forearms; separate left/right masks so held-item grips remain correct.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 25,
+   "id": "ITEM_SIGNAL_RING_ICON",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Inventory icon for ITEM_SIGNAL_RING.",
+   "notes": "Small ring enlarged symbolically for readability; restrained signal accent links it to perception/signal theming without exposing hidden rules.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 26,
+   "id": "ITEM_SIGNAL_RING_PAPERDOLL",
+   "family": "Equipment micro-layer",
+   "native": "32x48",
+   "use": "Optional visible ring accent when hand scale and pose permit it.",
+   "notes": "One/few-pixel highlight at authored ring anchor; may be omitted in views where it would become visual noise.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 27,
+   "id": "ITEM_COURIER_NECKTAG_ICON",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Inventory icon for ITEM_COURIER_NECKTAG.",
+   "notes": "Municipal/courier identity tag with strap/plate silhouette; no readable tiny text baked into pixels.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 28,
+   "id": "ITEM_COURIER_NECKTAG_PAPERDOLL",
+   "family": "Equipment layer",
+   "native": "32x48",
+   "use": "Neck overlay for equipped courier tag.",
+   "notes": "Renders above base shirt and below high chest collars unless explicit mask metadata says otherwise.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 29,
+   "id": "ITEM_MAINTENANCE_SEAL_ICON",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Inventory/choice-support icon for ITEM_MAINTENANCE_SEAL.",
+   "notes": "Mechanical seal/tool token with municipal geometry; visually distinct from a key or generic badge.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 30,
+   "id": "ITEM_DEAD_RELAY_INTACT",
+   "family": "Item/prop",
+   "native": "32x32 icon + 64x64 close-up",
+   "use": "Initial dead municipal relay visual after courier handoff.",
+   "notes": "Cold obsolete casing, scraped address plate and faint pulse indicator; supports inventory and narrative close-up.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 31,
+   "id": "ITEM_DEAD_RELAY_OPENED",
+   "family": "Prop state",
+   "native": "64x64",
+   "use": "Relay state after safe opening with maintenance seal.",
+   "notes": "Shows opened casing and internal handshake/status components; same shell geometry as intact relay so state continuity is obvious.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 32,
+   "id": "ITEM_DEAD_RELAY_DAMAGED",
+   "family": "Prop state",
+   "native": "64x64",
+   "use": "Relay state after failed forced opening.",
+   "notes": "Bent/damaged casing and disrupted internals; non-graphic; used only when relay.casing_damaged is visible.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 33,
+   "id": "ITEM_DEAD_RELAY_SIGNAL_LOST",
+   "family": "Prop state",
+   "native": "64x64",
+   "use": "Relay state after critical failure removes the pulse.",
+   "notes": "Same damaged object with signal indicator fully dark; visual state follows authoritative flag and must not be used before failure occurs.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 34,
+   "id": "PROP_DIAGNOSTIC_READER",
+   "family": "Held prop",
+   "native": "32x32 + 32x48 held layer",
+   "use": "Tamsin/player technical device used in diagnostic poses.",
+   "notes": "Compact municipal reader with cyan display cluster; separate held orientation for front/3-4/profile poses.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 35,
+   "id": "SUPPORT_COURIER_01",
+   "family": "Supporting character",
+   "native": "32x48 + pose reference",
+   "use": "Visualizes the conscious injured maintenance courier in the opening scene without creating an unintended recurring named NPC.",
+   "notes": "Distinct workwear from Tamsin, guarded injury posture, relay/courier relationship readable, no gore.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 36,
+   "id": "NPC_TAMSIN_UTILITY_JACKET",
+   "family": "NPC clothing layer",
+   "native": "32x48",
+   "use": "Tamsin-specific charcoal municipal jacket.",
+   "notes": "High collar, rolled right sleeve, seam/pocket clusters; must preserve #30343B anchor and not become generic player armor.",
+   "canon": null,
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 37,
+   "id": "NPC_TAMSIN_SATCHEL",
+   "family": "NPC accessory layer",
+   "native": "32x48",
+   "use": "Tamsin identity accessory in all applicable views.",
+   "notes": "Narrow cross-body strap and compact hip satchel; never replaced by backpack; front/back occlusion masks authored separately.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 38,
+   "id": "NPC_TAMSIN_SYSTEMS_BADGE",
+   "family": "NPC identity micro-layer",
+   "native": "16x16 reference + 32x48 placement",
+   "use": "Small left-chest municipal systems marker.",
+   "notes": "Simplified emblem with no unreadable text; exact left-chest anchor documented for portraits and gameplay sprite.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 39,
+   "id": "UI_ITEM_QUALITY_FRAMES",
+   "family": "UI frame set",
+   "native": "32x32",
+   "use": "Consistent item-icon frames for current and future quality levels.",
+   "notes": "Frame color/ornament communicates quality without recoloring the item itself; standard/uncommon supported first.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 40,
+   "id": "UI_EQUIPMENT_SLOT_ICON_SET",
+   "family": "UI icon set",
+   "native": "24x24 x slots",
+   "use": "Slot silhouettes for Head, Chest, Hands, Legs, Feet, Main Hand, Off Hand, Ring 1/2, Neck, Accessory 1/2.",
+   "notes": "Used by Inventory/Equipment surfaces; semantic slot identity only, never authoritative equipment state.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 41,
+   "id": "PLATFORM_NINE_BLACKOUT_SCENE",
+   "family": "Location scene",
+   "native": "128x64",
+   "use": "Primary opening illustration for The Last Light in Platform Nine.",
+   "notes": "Tram depot, red emergency floor strips, evacuation pressure, relay handoff space; preserves readable safe zone for overlaid narrative UI.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 42,
+   "id": "PLATFORM_NINE_EVACUATED_SCENE",
+   "family": "Location state",
+   "native": "128x64",
+   "use": "Later/alternate Platform Nine state after crowd pressure falls or area clears.",
+   "notes": "Same architecture and camera as 041; fewer figures/lights and altered temporary overlays so state change is readable without inventing a new location.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 43,
+   "id": "RELAY_WORKBENCH_DEFAULT_SCENE",
+   "family": "Location scene",
+   "native": "128x64",
+   "use": "Narrative illustration for relay inspection/recovery scenes.",
+   "notes": "Maintenance bench, tool storage, diagnostic lighting and object focal area centered around relay work.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 44,
+   "id": "RELAY_WORKBENCH_RELAY_OPEN_SCENE",
+   "family": "Location state",
+   "native": "128x64",
+   "use": "Workbench state emphasizing opened/damaged relay depending story path.",
+   "notes": "Reuses 043 architecture; swaps relay prop/state and localized tool clutter rather than redrawing full room.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 45,
+   "id": "GATE_TWELVE_SEALED_SCENE",
+   "family": "Location scene",
+   "native": "128x64",
+   "use": "Canonical view of Service Gate Twelve before/around first discovery.",
+   "notes": "Heavy municipal maintenance door, sealed infrastructure, central seam, restrained gold/cyan technical cues.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 46,
+   "id": "GATE_TWELVE_ECHO_ACTIVE_SCENE",
+   "family": "Location state",
+   "native": "128x64",
+   "use": "Gate Twelve during active Trace Echo/Signal Pulse events.",
+   "notes": "Same geometry as 045 with independent cyan signal/echo overlay and localized environmental response.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 47,
+   "id": "SERVICE_TUNNEL_DEFAULT_SCENE",
+   "family": "Location scene",
+   "native": "128x64",
+   "use": "Restricted tunnel illustration for below-route exploration.",
+   "notes": "Pipes/cable trays, maintenance supports, dark central depth, cyan maintenance indicators and floor/service edge.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 48,
+   "id": "SERVICE_TUNNEL_AFTERSHOCK_SCENE",
+   "family": "Location state",
+   "native": "128x64",
+   "use": "Tunnel during Directional Trace aftershock or stronger echo consequence.",
+   "notes": "Architecture unchanged; adds signal distortion, local flicker and character-safe FX overlay without revealing hidden route data.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 49,
+   "id": "EVAC_STAIR_DEFAULT_SCENE",
+   "family": "Location scene",
+   "native": "128x64",
+   "use": "Quiet Stair route illustration for solo exit branch.",
+   "notes": "Angular maintenance stairs, sparse guidance lights, controlled depth; visually contrasts crowded Platform Nine.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 50,
+   "id": "TRACE_CHAMBER_IDLE_SCENE",
+   "family": "Location scene",
+   "native": "128x64",
+   "use": "Base controlled environment for Trace Echo practice.",
+   "notes": "Central apparatus/field area, calibration lines and restrained cyan accents; neutral state for training ledger.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 51,
+   "id": "TRACE_CHAMBER_TRAINING_SCENE",
+   "family": "Location state",
+   "native": "128x64",
+   "use": "Trace Chamber while training/practice is active.",
+   "notes": "Adds bounded signal ring/wave overlays and instrument response; room geometry remains identical to 050.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 52,
+   "id": "DISTRICT_PLAZA_OPEN_SCENE",
+   "family": "Location scene",
+   "native": "128x64",
+   "use": "Primary free-roam district hub illustration.",
+   "notes": "Depot facade, temporary public meeting space, emergency infrastructure and readable paths toward archive/workshop routes.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 53,
+   "id": "DISTRICT_PLAZA_BLACKOUT_SCENE",
+   "family": "Location state",
+   "native": "128x64",
+   "use": "Blackout/emergency variant of Depot Plaza.",
+   "notes": "Same camera/layout as 052 with reduced ambient light, stronger emergency strips and localized warning markers.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 54,
+   "id": "DISTRICT_ARCHIVE_DEFAULT_SCENE",
+   "family": "Location scene",
+   "native": "128x64",
+   "use": "Municipal Archive interior used by lore quest and free-roam travel.",
+   "notes": "Tall shelving, backup lamps, public records terminal, municipal storage palette; preserves clear terminal focal point.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 55,
+   "id": "DISTRICT_ARCHIVE_TERMINAL_CLOSEUP",
+   "family": "Location close-up",
+   "native": "128x64",
+   "use": "Close narrative composition for reading blackout protocol/records.",
+   "notes": "Terminal and nearby records fill frame; readable visual hierarchy but no tiny baked text\u2014actual record text stays in UI/narrative.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 56,
+   "id": "WORKSHOP_ROW_DEFAULT_SCENE",
+   "family": "Location scene",
+   "native": "128x64",
+   "use": "Workshop Row free-roam illustration.",
+   "notes": "Open repair stalls, salvage benches, municipal contractors and varied practical materials while retaining district palette.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 57,
+   "id": "WORKSHOP_ROW_RUMOR_SCENE",
+   "family": "Location state",
+   "native": "128x64",
+   "use": "Workshop Row state used when rumor/information interaction becomes active.",
+   "notes": "Same location master with selected stall/NPC cluster emphasized through lighting/prop arrangement, not a wholly new environment.",
+   "canon": null,
+   "view_set": "SCENE_CAMERA"
+  },
+  {
+   "n": 58,
+   "id": "DEPOT_FACADE_EXTERIOR",
+   "family": "Environment module",
+   "native": "128x64 / reusable chunks",
+   "use": "Exterior facade module reused in Depot Plaza establishing art and future approach views.",
+   "notes": "Doors, windows, municipal trim and emergency fixtures authored as separable clusters for reuse.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 59,
+   "id": "MAINTENANCE_CORRIDOR_CONNECTOR",
+   "family": "Environment module",
+   "native": "128x64",
+   "use": "Generic-but-setting-specific connective maintenance corridor for future scene transitions.",
+   "notes": "Uses district infrastructure materials and signage; cannot replace unique named locations but reduces one-off scene art.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 60,
+   "id": "MUNICIPAL_ARCHIVE_EXTERIOR",
+   "family": "Environment module",
+   "native": "128x64",
+   "use": "Exterior identity for the archive when map/travel presentation needs arrival context.",
+   "notes": "Matches interior institutional palette and backup-power motifs; no unsupported narrative signage.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 61,
+   "id": "MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS",
+   "family": "Environment atlas",
+   "native": "16x16/32x32 tiles",
+   "use": "Reusable walls, floor, panels, rails, vents and service surfaces across depot/tunnel/chamber locations.",
+   "notes": "Designed for cluster reuse and procedural composition while named locations retain unique landmarks.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 62,
+   "id": "EMERGENCY_LIGHT_OVERLAY",
+   "family": "Environment overlay",
+   "native": "128x64 alpha",
+   "use": "Reusable red/orange emergency-light strips/glow clusters for blackout states.",
+   "notes": "Overlay only; architecture stays separate; alpha use controlled and pixel-clustered.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 63,
+   "id": "BLACKOUT_SHADOW_OVERLAY",
+   "family": "Environment overlay",
+   "native": "128x64 alpha",
+   "use": "State overlay that darkens noncritical areas during blackout presentation.",
+   "notes": "Must preserve interactable silhouettes and UI readability; not a full black tint that destroys scene detail.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 64,
+   "id": "EVACUATION_SIGNAGE_SET",
+   "family": "Environment decal set",
+   "native": "16x16/24x24",
+   "use": "Directional arrows, evacuation symbols and municipal hazard signs used across depot routes.",
+   "notes": "Symbolic pixel icons only; long written instructions remain UI text for legibility/localization.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 65,
+   "id": "DISTRICT_AMBIENT_DECAL_SET",
+   "family": "Environment decal set",
+   "native": "16x16/32x32",
+   "use": "Reusable wear, utility markings, caution paint, drain covers and maintenance labels.",
+   "notes": "Adds setting texture without random visual noise; decals follow material and location rules.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 66,
+   "id": "PROP_DEPOT_DOOR",
+   "family": "Prop",
+   "native": "32x48 / scene-scale",
+   "use": "Reusable powered depot door cluster in Platform Nine/depot exterior scenes.",
+   "notes": "Closed/open/powered-off visual states; actual accessibility remains engine-owned.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 67,
+   "id": "PROP_RELAY_WORKBENCH",
+   "family": "Prop",
+   "native": "64x32 scene module",
+   "use": "Workbench structure reused in relay inspection compositions.",
+   "notes": "Surface, legs, tool rail and relay placement zone separated so relay states can swap cleanly.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 68,
+   "id": "PROP_GATE_TWELVE_DOOR",
+   "family": "Prop",
+   "native": "64x48 scene module",
+   "use": "Primary Gate Twelve door landmark.",
+   "notes": "Sealed door geometry with center seam and service hardware; echo FX remains separate overlay.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 69,
+   "id": "PROP_TUNNEL_PIPE_SET",
+   "family": "Prop set",
+   "native": "16x16/32x32 modules",
+   "use": "Pipe modules for Service Tunnel and maintenance spaces.",
+   "notes": "Straight/elbow/junction/valve variants; palette distinguishes metal from walls.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 70,
+   "id": "PROP_TUNNEL_CABLE_SET",
+   "family": "Prop set",
+   "native": "16x16/32x32 modules",
+   "use": "Cable trays, bundles and junction boxes for technical environments.",
+   "notes": "Clustered cables avoid 1px spaghetti noise; cyan indicators used sparingly.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 71,
+   "id": "PROP_TRACE_CHAMBER_APPARATUS",
+   "family": "Prop",
+   "native": "48x48 / scene module",
+   "use": "Central training/measurement apparatus in Trace Chamber.",
+   "notes": "Idle/calibrating/active indicator states; does not itself decide training success.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 72,
+   "id": "PROP_ARCHIVE_SHELF",
+   "family": "Prop module",
+   "native": "32x48",
+   "use": "Repeatable shelving unit for Municipal Archive.",
+   "notes": "Shelf frame and record-box/books clusters separated to create variation without changing architecture.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 73,
+   "id": "PROP_ARCHIVE_TERMINAL",
+   "family": "Prop",
+   "native": "32x32 + close-up",
+   "use": "Public records terminal for lore interaction.",
+   "notes": "Idle/active/backup-power states; display content is UI text, not baked microtext.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 74,
+   "id": "PROP_WORKSHOP_BENCH",
+   "family": "Prop",
+   "native": "48x32",
+   "use": "Repair/salvage bench module for Workshop Row.",
+   "notes": "Supports tool, scrap and component overlays; material ramp distinct from archive/depot furniture.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 75,
+   "id": "PROP_DISTRICT_NOTICE_BOARD",
+   "family": "Prop",
+   "native": "32x48 + close-up",
+   "use": "Public notice surface tied to district-notice review interactions.",
+   "notes": "Board frame/posted shapes are art; actual notices remain authored text and flags.",
+   "canon": null,
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 76,
+   "id": "UI_NAV_STORY_ICON",
+   "family": "UI icon",
+   "native": "24x24",
+   "use": "Bottom navigation identity for Story.",
+   "notes": "Readable page/speech-scene motif; active color applied by UI state, not baked into separate duplicate icon.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 77,
+   "id": "UI_NAV_CHARACTER_ICON",
+   "family": "UI icon",
+   "native": "24x24",
+   "use": "Navigation identity for Character.",
+   "notes": "Human silhouette tied to player inspection, not generic settings/person account icon.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 78,
+   "id": "UI_NAV_STATS_ICON",
+   "family": "UI icon",
+   "native": "24x24",
+   "use": "Navigation identity for Stats.",
+   "notes": "Compact bars/gauge motif consistent with pixel panel language.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 79,
+   "id": "UI_NAV_INVENTORY_ICON",
+   "family": "UI icon",
+   "native": "24x24",
+   "use": "Navigation identity for Inventory/Equipment.",
+   "notes": "Pack/grid/equipment motif with strong silhouette.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 80,
+   "id": "UI_NAV_QUESTS_ICON",
+   "family": "UI icon",
+   "native": "24x24",
+   "use": "Navigation identity for Quests.",
+   "notes": "Ledger/marker motif; category-specific icons remain separate assets 087-090.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 81,
+   "id": "UI_NAV_MAP_ICON",
+   "family": "UI icon",
+   "native": "24x24",
+   "use": "Navigation identity for Map.",
+   "notes": "Folded-map/node-route motif matched to district graph presentation.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 82,
+   "id": "UI_NAV_MORE_SETTINGS_ICON",
+   "family": "UI icon",
+   "native": "24x24",
+   "use": "Navigation identity for More/Settings.",
+   "notes": "Mechanical control/gear motif rendered in pixel language; does not resemble an item slot.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 83,
+   "id": "UI_RESOURCE_HEALTH_ICON",
+   "family": "HUD icon",
+   "native": "16x16",
+   "use": "Health identity beside resource values and future bars.",
+   "notes": "Distinct from injury status; uses Danger-compatible accent only as UI state permits.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 84,
+   "id": "UI_RESOURCE_STAMINA_ICON",
+   "family": "HUD icon",
+   "native": "16x16",
+   "use": "Stamina identity.",
+   "notes": "Motion/energy motif readable independently of color for accessibility.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 85,
+   "id": "UI_RESOURCE_FOCUS_ICON",
+   "family": "HUD icon",
+   "native": "16x16",
+   "use": "Focus identity.",
+   "notes": "Concentration/target motif; visually distinct from perception or map marker.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 86,
+   "id": "UI_RESOURCE_RESOLVE_ICON",
+   "family": "HUD icon",
+   "native": "16x16",
+   "use": "Resolve identity.",
+   "notes": "Stable shield/diamond motif emphasizing mental persistence without implying physical armor.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 87,
+   "id": "UI_QUEST_MAIN_ICON",
+   "family": "Quest icon",
+   "native": "16x16",
+   "use": "Marks main quests such as The Dead Relay.",
+   "notes": "Primary path marker; visual hierarchy strongest of quest-category icons.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 88,
+   "id": "UI_QUEST_SIDE_ICON",
+   "family": "Quest icon",
+   "native": "16x16",
+   "use": "Marks side quests such as Gate Twelve Echo.",
+   "notes": "Secondary but clearly active category; not merely recolored main icon.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 89,
+   "id": "UI_QUEST_OPTIONAL_ICON",
+   "family": "Quest icon",
+   "native": "16x16",
+   "use": "Marks optional progression such as Trace Stabilization.",
+   "notes": "Training/discovery motif communicating nonmandatory content.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 90,
+   "id": "UI_QUEST_LORE_ICON",
+   "family": "Quest icon",
+   "native": "16x16",
+   "use": "Marks lore/world investigation such as Platform Nine Records.",
+   "notes": "Archive/document motif aligned with discovery rather than reward priority.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 91,
+   "id": "MAP_PLAYER_MARKER",
+   "family": "Map icon",
+   "native": "16x16",
+   "use": "Shows authoritative current player location on the district map.",
+   "notes": "High-contrast directional/identity marker; location comes from engine projection.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 92,
+   "id": "MAP_NODE_DISCOVERED",
+   "family": "Map icon",
+   "native": "16x16",
+   "use": "Represents discovered but not current map nodes.",
+   "notes": "Neutral cyan-compatible node frame; no reachability implication.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 93,
+   "id": "MAP_NODE_CURRENT",
+   "family": "Map icon",
+   "native": "16x16",
+   "use": "Highlights the current authoritative location.",
+   "notes": "Gold/current-state treatment distinct from player marker so both can coexist.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 94,
+   "id": "MAP_NODE_REACHABLE",
+   "family": "Map icon",
+   "native": "16x16",
+   "use": "Marks a discovered destination that can currently be traveled to.",
+   "notes": "Adds route/selection affordance; shown only when engine projection says reachable.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 95,
+   "id": "MAP_NODE_UNAVAILABLE",
+   "family": "Map icon",
+   "native": "16x16",
+   "use": "Marks discovered nodes without a direct current route or temporarily inaccessible nodes.",
+   "notes": "Muted/blocked motif; never used to invent a lock reason that the engine did not provide.",
+   "canon": null,
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 96,
+   "id": "FX_TRACE_ECHO_AMBIENT",
+   "family": "FX",
+   "native": "64x64 loop",
+   "use": "Ambient visual language for sensing an impossible/weak trace.",
+   "notes": "Subtle clustered arcs/rings; low intensity; can overlay Gate Twelve/Trace Chamber without obscuring scene art.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 97,
+   "id": "FX_SIGNAL_PULSE",
+   "family": "FX",
+   "native": "64x64, 6-8 frames",
+   "use": "Visible technique effect for Signal Pulse.",
+   "notes": "Expanding controlled pulse centered on actor/source; clear start/peak/fade; no smooth radial blur.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 98,
+   "id": "FX_DIRECTIONAL_TRACE",
+   "family": "FX",
+   "native": "64x64, 6-8 frames",
+   "use": "Directional Trace presentation after discovery.",
+   "notes": "Signal collapses into directional line/sector rather than generic stronger glow; communicates direction without exposing hidden destination text.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 99,
+   "id": "FX_TRACE_STRAIN",
+   "family": "Status FX",
+   "native": "32x48 overlay + 64x64 portrait overlay",
+   "use": "Visible cost/strain presentation after heavy Trace use.",
+   "notes": "Edge noise/pulse and posture cue; does not replace condition UI and only appears when visible state warrants it.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 100,
+   "id": "UI_MAP_TRAVEL_TRANSITION",
+   "family": "UI/transition",
+   "native": "128x64 or fullscreen tiled sequence",
+   "use": "Short pixel transition when authoritative map travel succeeds.",
+   "notes": "Route/context-preserving wipe/pan of 6-10 frames; never fakes arrival before engine scene/location update succeeds.",
+   "canon": null,
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 101,
+   "id": "PLAYER_BODYFRAME_B",
+   "family": "Character base",
+   "native": "32x48",
+   "use": "Second neutral adult body-frame template for player customization without changing equipment anchors.",
+   "notes": "Same pivot and joint contract as Bodyframe A; changes shoulder/hip mass only; all standard equipment must still align.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 102,
+   "id": "PLAYER_BODYFRAME_C",
+   "family": "Character base",
+   "native": "32x48",
+   "use": "Third neutral adult body-frame template for broader player proportions.",
+   "notes": "Maintains 32x48 envelope, hand/foot anchors and 1:4-ish readable proportion; no equipment-specific geometry baked in.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 103,
+   "id": "PLAYER_HEAD_SHAPE_KIT_A",
+   "family": "Character layer",
+   "native": "32x48 + 64x64",
+   "use": "Reusable head/face silhouette kit A for player identity.",
+   "notes": "Defines jaw/ear/forehead cluster and portrait mapping while preserving helmet/hair masks.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 104,
+   "id": "PLAYER_HEAD_SHAPE_KIT_B",
+   "family": "Character layer",
+   "native": "32x48 + 64x64",
+   "use": "Reusable head/face silhouette kit B.",
+   "notes": "Alternative face shape with same eye-line and equipment anchors so portrait/helmet systems remain compatible.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 105,
+   "id": "PLAYER_HAIR_LAYER_KIT_B",
+   "family": "Character layer",
+   "native": "32x48 + 64x64",
+   "use": "Second reusable hairstyle family.",
+   "notes": "Rear/front split, directional masters and helmet occlusion metadata required.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 106,
+   "id": "PLAYER_HAIR_LAYER_KIT_C",
+   "family": "Character layer",
+   "native": "32x48 + 64x64",
+   "use": "Third reusable hairstyle family.",
+   "notes": "Designed around a different silhouette family rather than simple recolor; must survive 1x scale.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 107,
+   "id": "PLAYER_SKIN_RAMP_SET_B",
+   "family": "Palette layer",
+   "native": "shared",
+   "use": "Additional skin-value ramp for player customization.",
+   "notes": "Minimum highlight/base/mid/deep shadow; verified against Ink/Deep UI and current outfit accents.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 108,
+   "id": "PLAYER_SKIN_RAMP_SET_C",
+   "family": "Palette layer",
+   "native": "shared",
+   "use": "Additional skin-value ramp.",
+   "notes": "Same value-separation standard as other skin sets; no hue-shift that destroys facial readability.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 109,
+   "id": "PLAYER_IDENTITY_MARK_KIT",
+   "family": "Character micro-layer",
+   "native": "32x48 + 64x64",
+   "use": "Scars, freckles, eyebrow notches and small identity marks for authored/custom characters.",
+   "notes": "Marks are optional layers; directional asymmetry is stored explicitly rather than mirrored.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 110,
+   "id": "PLAYER_FACIAL_HAIR_KIT_A",
+   "family": "Character layer",
+   "native": "32x48 + 64x64",
+   "use": "First facial-hair construction set where player customization supports it.",
+   "notes": "Gameplay-scale cluster stays minimal; portrait carries detail; helmets/masks cannot erase unrelated face pixels.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 111,
+   "id": "PLAYER_WALK_FRONT_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 6",
+   "use": "Front-direction walk for future map/exploration movement.",
+   "notes": "Six key gait frames; frame anchors exported for equipment; no body-frame-specific item baked in.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 112,
+   "id": "PLAYER_WALK_BACK_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 6",
+   "use": "Rear-direction walk.",
+   "notes": "Back hair/accessories use rear z-order; feet remain readable against dark ground.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 113,
+   "id": "PLAYER_WALK_LEFT_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 6",
+   "use": "Left walk.",
+   "notes": "Not derived by runtime mirror when asymmetry exists; left/right equipment remains semantically correct.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 114,
+   "id": "PLAYER_WALK_RIGHT_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 6",
+   "use": "Right walk.",
+   "notes": "Independent directional master for scars, holsters, rolled sleeves and held items.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 115,
+   "id": "PLAYER_RUN_FRONT_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 8",
+   "use": "Front run for urgent traversal.",
+   "notes": "More lean/arm swing than walk; all equipment anchors tracked frame-by-frame.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 116,
+   "id": "PLAYER_RUN_BACK_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 8",
+   "use": "Rear run.",
+   "notes": "Rear equipment/cape/pack channels supported without changing body master.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 117,
+   "id": "PLAYER_RUN_LEFT_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 8",
+   "use": "Left run.",
+   "notes": "Directional master; preserves hand grip and foot contact timing.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 118,
+   "id": "PLAYER_RUN_RIGHT_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 8",
+   "use": "Right run.",
+   "notes": "Independent source sheet; same frame cadence as left.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 119,
+   "id": "PLAYER_TURN_IN_PLACE_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 4-6",
+   "use": "Short turn sequence between facing directions when future movement needs it.",
+   "notes": "Keeps silhouette coherent; avoids instant mirrored pop for asymmetrical loadouts.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 120,
+   "id": "PLAYER_PICKUP_INTERACT_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 4-6",
+   "use": "Generic pick-up/inspect motion for world items.",
+   "notes": "Hands move to world/item anchor; item remains separate prop layer.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 121,
+   "id": "PLAYER_TERMINAL_INTERACT_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 4-6",
+   "use": "Terminal/console use animation.",
+   "notes": "Upper-body action minimizes leg movement; suitable for archive/workbench devices.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 122,
+   "id": "PLAYER_DOOR_INTERACT_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 4-6",
+   "use": "Open/use-door interaction.",
+   "notes": "Hand reaches stable environment interaction anchor; actual door state remains world-authoritative.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 123,
+   "id": "PLAYER_SIT_IDLE_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 4",
+   "use": "Seated idle for narrative/rest scenes.",
+   "notes": "Separate seated rig state; equipment layers require seated compatibility masks.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 124,
+   "id": "PLAYER_KNEEL_INSPECT_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 4-6",
+   "use": "Kneeling inspection pose for relay/ground evidence.",
+   "notes": "Supports narrative inspection without inventing a new gameplay mechanic.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 125,
+   "id": "PLAYER_GUARD_READY_SHEET",
+   "family": "Animation",
+   "native": "32x48 x 4",
+   "use": "Neutral defensive/ready stance for combat-context presentation.",
+   "notes": "Technical animation template only; does not imply a weapon or combat state unless authoritative system selects it.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 126,
+   "id": "PLAYER_PORTRAIT_FOCUSED",
+   "family": "Portrait",
+   "native": "64x64",
+   "use": "Focused player expression for investigation/training dialogue.",
+   "notes": "Uses current configured identity layers; expression geometry changes only brow/eye/mouth/head posture.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 127,
+   "id": "PLAYER_PORTRAIT_CONCERNED",
+   "family": "Portrait",
+   "native": "64x64",
+   "use": "Concerned expression for risk/relationship scenes.",
+   "notes": "No identity geometry changes; subtle facial cluster shift.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 128,
+   "id": "PLAYER_PORTRAIT_HURT",
+   "family": "Portrait",
+   "native": "64x64",
+   "use": "Visible hurt expression when player-visible injury warrants it.",
+   "notes": "Works with injury overlay; not activated by hidden raw conditions.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 129,
+   "id": "PLAYER_PORTRAIT_DETERMINED",
+   "family": "Portrait",
+   "native": "64x64",
+   "use": "Determined expression for committed choices/training milestones.",
+   "notes": "Reserved emotion template; no exaggerated anime-style deformation.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 130,
+   "id": "PLAYER_PORTRAIT_SURPRISED",
+   "family": "Portrait",
+   "native": "64x64",
+   "use": "Surprise/revelation expression.",
+   "notes": "Eye/brow change remains within pixel budget; mouth cluster limited.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 131,
+   "id": "NPC_PORTRAIT_FRAME_STANDARD",
+   "family": "Portrait UI",
+   "native": "72x72 frame",
+   "use": "Consistent framing for recurring NPC portraits.",
+   "notes": "Frame separate from portrait pixels so relationship/status treatments can vary.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 132,
+   "id": "NPC_PORTRAIT_FRAME_URGENT",
+   "family": "Portrait UI",
+   "native": "72x72 frame",
+   "use": "Urgent-state portrait frame for time-sensitive narrative.",
+   "notes": "Danger treatment is UI state-driven; does not alter portrait source.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 133,
+   "id": "NPC_PORTRAIT_SILHOUETTE_UNKNOWN",
+   "family": "Portrait",
+   "native": "64x64",
+   "use": "Unknown/unrevealed person presentation.",
+   "notes": "Neutral silhouette avoids exposing identity, equipment or faction before discovery.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 134,
+   "id": "NPC_PORTRAIT_OFFSCREEN_MARKER",
+   "family": "Portrait/UI",
+   "native": "24x24",
+   "use": "Indicates speaker/actor not physically shown in current scene.",
+   "notes": "Technical speaker cue, not a substitute for a recurring character portrait.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 135,
+   "id": "NPC_EMOTION_NEUTRAL_TEMPLATE",
+   "family": "Portrait template",
+   "native": "64x64",
+   "use": "Neutral expression construction template for future recurring NPCs.",
+   "notes": "Geometry guide only; future named NPCs inherit while preserving their identity sheet.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 136,
+   "id": "NPC_EMOTION_FOCUSED_TEMPLATE",
+   "family": "Portrait template",
+   "native": "64x64",
+   "use": "Focused expression template.",
+   "notes": "Reusable brow/eye/mouth geometry; non-canon until applied to named identity.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 137,
+   "id": "NPC_EMOTION_CONCERNED_TEMPLATE",
+   "family": "Portrait template",
+   "native": "64x64",
+   "use": "Concerned expression template.",
+   "notes": "Subtle rather than caricatured expression; compatible with diverse face shapes.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 138,
+   "id": "NPC_EMOTION_ANGRY_TEMPLATE",
+   "family": "Portrait template",
+   "native": "64x64",
+   "use": "Angry expression template.",
+   "notes": "Avoids over-wide eyes/oversized mouth; designed for narrative seriousness.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 139,
+   "id": "NPC_EMOTION_RELIEVED_TEMPLATE",
+   "family": "Portrait template",
+   "native": "64x64",
+   "use": "Relieved expression template.",
+   "notes": "Softens brow/shoulders; does not change character silhouette.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 140,
+   "id": "NPC_EMOTION_SUSPICIOUS_TEMPLATE",
+   "family": "Portrait template",
+   "native": "64x64",
+   "use": "Suspicious expression template for relationship/knowledge scenes.",
+   "notes": "Useful for suspicion axis presentation only when narrative exposes that mood.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 141,
+   "id": "NPC_ARCHETYPE_MUNICIPAL_TECH_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Reusable municipal technical-worker base for future authored staff.",
+   "notes": "Neutral adult silhouette; no named identity; accepts role clothing layers.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 142,
+   "id": "NPC_ARCHETYPE_COURIER_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Reusable maintenance/courier body template.",
+   "notes": "Supports bags/tags and injured/working poses; distinct from SUPPORT_COURIER_01 identity.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 143,
+   "id": "NPC_ARCHETYPE_ARCHIVIST_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Future archive/public-record staff template.",
+   "notes": "Neutral civilian-professional base; no story identity until authored.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 144,
+   "id": "NPC_ARCHETYPE_WORKSHOP_MECHANIC_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Workshop/repair specialist template.",
+   "notes": "Tool-belt/stance compatibility but tools remain separate layers.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 145,
+   "id": "NPC_ARCHETYPE_SECURITY_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Municipal/security role template.",
+   "notes": "Protective silhouette without assuming enemy/friendly status.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 146,
+   "id": "NPC_ARCHETYPE_MEDIC_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Medical/support staff template.",
+   "notes": "Designed for medical-bag/glove overlays; no health outcome implied.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 147,
+   "id": "NPC_ARCHETYPE_EVACUEE_BASE_A",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Civilian evacuation crowd variant A.",
+   "notes": "Simple recognizable silhouette for scenes/crowds; low-detail but identity-safe.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 148,
+   "id": "NPC_ARCHETYPE_EVACUEE_BASE_B",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Civilian evacuation crowd variant B.",
+   "notes": "Different body/clothing silhouette to avoid clone crowds.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 149,
+   "id": "NPC_ARCHETYPE_VENDOR_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Future merchant/vendor template.",
+   "notes": "Neutral commerce role; inventory/business identity remains content-driven.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 150,
+   "id": "NPC_ARCHETYPE_CONTRACTOR_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Municipal/private contractor template.",
+   "notes": "Workwear-compatible body; does not define faction allegiance.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 151,
+   "id": "NPC_ARCHETYPE_INVESTIGATOR_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Future investigator/research role template.",
+   "notes": "Supports notebook/scanner props without implying canonical profession.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 152,
+   "id": "NPC_ARCHETYPE_SUPERVISOR_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Future supervisor/administrator template.",
+   "notes": "More formal silhouette options while reusing standard animation rig.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 153,
+   "id": "NPC_ARCHETYPE_TRAVELER_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Generic visitor/traveler template for district expansion.",
+   "notes": "Supports bag/outerwear layers; non-canon until authored.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 154,
+   "id": "NPC_ARCHETYPE_SCAVENGER_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Future salvage/scavenging role template.",
+   "notes": "Utility silhouette for dangerous-area expansion; not automatically hostile.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 155,
+   "id": "NPC_ARCHETYPE_TECHNICIAN_TRAINEE_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Junior technical-worker template.",
+   "notes": "Different proportions/clothing arrangement from municipal tech base; age remains authored content, not inferred by art.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 156,
+   "id": "NPC_ARCHETYPE_FIELD_OPERATOR_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Future field-response role template.",
+   "notes": "Supports protective gear and handheld devices; allegiance/state content-driven.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 157,
+   "id": "NPC_ARCHETYPE_RESEARCHER_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Future technical/research specialist template.",
+   "notes": "Supports lab/field variants via clothing layers.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 158,
+   "id": "NPC_ARCHETYPE_CIVILIAN_FORMAL_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Formal civilian template for offices/public spaces.",
+   "notes": "No faction markers baked into base.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 159,
+   "id": "NPC_ARCHETYPE_CIVILIAN_CASUAL_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Casual civilian template for public hubs.",
+   "notes": "Designed for crowd variation through clothing/hair swaps.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 160,
+   "id": "NPC_ARCHETYPE_INJURED_SUPPORT_BASE",
+   "family": "NPC archetype",
+   "native": "32x48",
+   "use": "Reusable injured-but-non-graphic support pose/body template.",
+   "notes": "Injury overlay/posture separated so severity remains state-driven.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW"
+  },
+  {
+   "n": 161,
+   "id": "NPC_ROLEKIT_MUNICIPAL_UTILITY",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Municipal utility jacket/trouser set for future technical NPCs.",
+   "notes": "Generic role kit distinct from Tamsin's canonical asymmetric jacket/satchel.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 162,
+   "id": "NPC_ROLEKIT_ARCHIVE_STAFF",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Archive/public-record worker clothing family.",
+   "notes": "Muted institutional palette; no unreadable text badges.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 163,
+   "id": "NPC_ROLEKIT_WORKSHOP_STAFF",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Repair/workshop role clothing.",
+   "notes": "Durable apron/jacket/tool-loop layers; tools separate.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 164,
+   "id": "NPC_ROLEKIT_SECURITY_LIGHT",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Light protective/security role gear.",
+   "notes": "Head/chest/belt layers; state/faction color applied only when authored.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 165,
+   "id": "NPC_ROLEKIT_MEDICAL",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Medical responder clothing.",
+   "notes": "High-readability medical motif without copying real-world trademarked uniforms.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 166,
+   "id": "NPC_ROLEKIT_COURIER",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Generic courier workwear.",
+   "notes": "Tag/bag attachment support; distinct from player Courier Neck Tag art.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 167,
+   "id": "NPC_ROLEKIT_CONTRACTOR",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Contractor/worksite clothing.",
+   "notes": "High-visibility accents kept within pixel palette; not a faction uniform.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 168,
+   "id": "NPC_ROLEKIT_CIVILIAN_WARM",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Warm-weather civilian clothing family.",
+   "notes": "Modular top/legs/footwear set for crowd variety.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 169,
+   "id": "NPC_ROLEKIT_CIVILIAN_COOL",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Cool/rain-weather civilian clothing family.",
+   "notes": "Layered outerwear while maintaining rig anchors.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 170,
+   "id": "NPC_ROLEKIT_FORMAL_OFFICE",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Office/formal clothing family.",
+   "notes": "Simple jacket/shirt/trouser silhouettes for municipal/administrative scenes.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 171,
+   "id": "NPC_ROLEKIT_FIELD_RAIN",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Rain-protection layer set.",
+   "notes": "Coat/hood overlap masks; weather visibility driven by scene state.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 172,
+   "id": "NPC_ROLEKIT_FIELD_DUST",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Dust/debris-protection layer set.",
+   "notes": "Mask/goggle compatibility; does not imply hazardous zone unless content does.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 173,
+   "id": "NPC_ROLEKIT_RESEARCH",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Research/analysis clothing family.",
+   "notes": "Supports handheld instruments; no canonical institution logo.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 174,
+   "id": "NPC_ROLEKIT_SALVAGE",
+   "family": "NPC clothing kit",
+   "native": "32x48",
+   "use": "Salvage/repair outerwear.",
+   "notes": "Reinforced gloves/belt/boots; neutral allegiance.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 175,
+   "id": "NPC_ROLEKIT_EMERGENCY_BLANKET",
+   "family": "NPC clothing overlay",
+   "native": "32x48",
+   "use": "Emergency blanket/wrap for evacuation scenes.",
+   "notes": "Temporary overlay for visible scene state; not a permanent outfit.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 176,
+   "id": "NPC_ROLEKIT_INJURY_SLING",
+   "family": "NPC status clothing",
+   "native": "32x48",
+   "use": "Visible arm-sling overlay.",
+   "notes": "Only used when injury is player-visible; does not encode mechanics itself.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 177,
+   "id": "NPC_ROLEKIT_TOOL_BELT",
+   "family": "NPC accessory kit",
+   "native": "32x48",
+   "use": "Generic tool-belt attachment family.",
+   "notes": "Separate pouches/loops; can inherit role palette.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 178,
+   "id": "NPC_ROLEKIT_SATCHEL_GENERIC",
+   "family": "NPC accessory kit",
+   "native": "32x48",
+   "use": "Generic cross-body satchel family.",
+   "notes": "Must remain visually distinct from Tamsin's canonical satchel.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 179,
+   "id": "NPC_ROLEKIT_BACKPACK_GENERIC",
+   "family": "NPC accessory kit",
+   "native": "32x48",
+   "use": "Generic backpack family for non-Tamsin characters.",
+   "notes": "Rear/front strap masks; explicitly forbidden for Tamsin.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 180,
+   "id": "NPC_ROLEKIT_ID_BADGE_GENERIC",
+   "family": "NPC accessory kit",
+   "native": "16x16 ref + 32x48 placement",
+   "use": "Generic institutional badge system.",
+   "notes": "Shape/color can be authored later; no tiny unreadable text.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 181,
+   "id": "SOCIAL_EMOTE_TRUST_UP",
+   "family": "Social UI",
+   "native": "16x16",
+   "use": "Subtle trust-improvement indicator when UI chooses to expose relationship feedback.",
+   "notes": "Technical icon only; does not reveal hidden numeric relationship values.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 182,
+   "id": "SOCIAL_EMOTE_TRUST_DOWN",
+   "family": "Social UI",
+   "native": "16x16",
+   "use": "Trust-decrease indicator.",
+   "notes": "Shown only when design exposes feedback; separate from raw relationship state.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 183,
+   "id": "SOCIAL_EMOTE_SUSPICION",
+   "family": "Social UI",
+   "native": "16x16",
+   "use": "Suspicion/mistrust narrative cue.",
+   "notes": "Must not surface hidden suspicion values automatically.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 184,
+   "id": "SOCIAL_EMOTE_DEBT",
+   "family": "Social UI",
+   "native": "16x16",
+   "use": "Debt/obligation cue for visible relationship state.",
+   "notes": "Symbolic marker; numeric detail remains UI text if exposed.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 185,
+   "id": "SOCIAL_EMOTE_LOYALTY",
+   "family": "Social UI",
+   "native": "16x16",
+   "use": "Loyalty/commitment cue.",
+   "notes": "Used only when player-safe projection permits it.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 186,
+   "id": "NPC_STATUS_INJURY_MINOR",
+   "family": "NPC overlay",
+   "native": "32x48",
+   "use": "Minor visible injury overlay.",
+   "notes": "Non-graphic; local bandage/posture clusters; condition-driven.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 187,
+   "id": "NPC_STATUS_INJURY_MAJOR",
+   "family": "NPC overlay",
+   "native": "32x48",
+   "use": "Major visible injury overlay.",
+   "notes": "Stronger posture/bandage cues without gore; hidden injuries cannot use it.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 188,
+   "id": "NPC_STATUS_EXHAUSTED",
+   "family": "NPC overlay",
+   "native": "32x48",
+   "use": "Visible fatigue/exhaustion presentation.",
+   "notes": "Posture/eye/shoulder cue; no global recolor.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 189,
+   "id": "NPC_STATUS_TRACE_AFFECTED",
+   "family": "NPC overlay",
+   "native": "32x48",
+   "use": "Visible Trace-related effect template for future authored NPC exposure.",
+   "notes": "Technical framework only; must be bound to an explicit visible state.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 190,
+   "id": "NPC_STATUS_UNKNOWN_MASK",
+   "family": "NPC overlay",
+   "native": "32x48",
+   "use": "Privacy/obscured-state presentation when identity/details are intentionally withheld.",
+   "notes": "Silhouette/mask treatment avoids leaking hidden identity.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 191,
+   "id": "CHARACTER_GROUND_SHADOW_SMALL",
+   "family": "Character staging",
+   "native": "32x16",
+   "use": "Small grounding shadow for narrow/light body frames.",
+   "notes": "Consistent with 32x48 pivot; scene lighting may tint but not soften with blur.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 192,
+   "id": "CHARACTER_GROUND_SHADOW_MEDIUM",
+   "family": "Character staging",
+   "native": "32x16",
+   "use": "Default grounding shadow.",
+   "notes": "Used by most player/NPC bodies; supports integer scaling.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 193,
+   "id": "CHARACTER_GROUND_SHADOW_LARGE",
+   "family": "Character staging",
+   "native": "40x16",
+   "use": "Wider grounding shadow for bulky gear/body frames.",
+   "notes": "Separate asset avoids stretching medium shadow.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 194,
+   "id": "CHARACTER_SPEAKER_FOCUS_RING",
+   "family": "Character staging",
+   "native": "40x56",
+   "use": "Optional pixel focus frame for active speaker/selected character.",
+   "notes": "UI selection only; does not imply relationship/faction.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 195,
+   "id": "CHARACTER_INTERACTION_MARKER",
+   "family": "Character staging",
+   "native": "16x16",
+   "use": "Indicates interactable character in future exploration mode.",
+   "notes": "Visibility comes from interaction projection, not distance guessed by art.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 196,
+   "id": "CHARACTER_PARTY_MARKER",
+   "family": "Character staging",
+   "native": "16x16",
+   "use": "Marks current party member where party UI needs it.",
+   "notes": "Technical marker; party membership remains state-owned.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 197,
+   "id": "CHARACTER_OFFSCREEN_DIRECTION_MARKER",
+   "family": "Character staging",
+   "native": "16x16",
+   "use": "Points toward relevant offscreen character in spatial presentation.",
+   "notes": "Used only if future exploration camera warrants it.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 198,
+   "id": "CHARACTER_HIGH_CONTRAST_SILHOUETTE",
+   "family": "Accessibility",
+   "native": "32x48 mask",
+   "use": "Optional high-contrast character accessibility mask.",
+   "notes": "Derived from production silhouette; preserves equipment outline where possible.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 199,
+   "id": "CHARACTER_COLORBLIND_ROLE_MARKERS",
+   "family": "Accessibility",
+   "native": "16x16 set",
+   "use": "Shape-based role markers independent of hue.",
+   "notes": "Used as optional accessibility supplement; never encodes hidden faction.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 200,
+   "id": "CHARACTER_DEBUG_ANCHOR_OVERLAY",
+   "family": "Developer asset",
+   "native": "32x48 grid",
+   "use": "Developer-only visual showing rig joints/attachment anchors.",
+   "notes": "Never shipped in normal player UI; supports paper-doll QA and animation alignment.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 201,
+   "id": "EQUIP_TEMPLATE_HEAD_LIGHT",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Reusable light headgear paper-doll shell for future authored items.",
+   "notes": "Defines hair occlusion and profile/back masks; no item stats or faction identity baked in.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 202,
+   "id": "EQUIP_TEMPLATE_HEAD_HEAVY",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Bulkier protective headgear shell.",
+   "notes": "Uses same head anchor; wider silhouette requires overscan rule rather than moving body rig.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 203,
+   "id": "EQUIP_TEMPLATE_CHEST_LIGHT",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Light chest-clothing/armor alignment template.",
+   "notes": "Preserves arms and neck layers; used to prototype future authored chest items.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 204,
+   "id": "EQUIP_TEMPLATE_CHEST_HEAVY",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Heavy chest-layer alignment template.",
+   "notes": "Supports shoulder overlap masks while keeping hand/weapon anchors stable.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 205,
+   "id": "EQUIP_TEMPLATE_HANDS_LIGHT",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Light glove/handwear alignment template.",
+   "notes": "Separate left/right masks and grip cutouts.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 206,
+   "id": "EQUIP_TEMPLATE_HANDS_HEAVY",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Bulky glove/gauntlet alignment template.",
+   "notes": "Grip area must remain compatible with held-item layer and not hide wrist anchors.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 207,
+   "id": "EQUIP_TEMPLATE_LEGS_LIGHT",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Light trouser/leg equipment shell.",
+   "notes": "Covers pelvis/legs only; footwear remains separate.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 208,
+   "id": "EQUIP_TEMPLATE_LEGS_HEAVY",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Heavy leg protection shell.",
+   "notes": "Preserves knee/foot animation readability; no automatic stat meaning.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 209,
+   "id": "EQUIP_TEMPLATE_FEET_LIGHT",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Light shoe/boot alignment template.",
+   "notes": "Uses final 5\u20137 vertical pixels without changing ground pivot.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 210,
+   "id": "EQUIP_TEMPLATE_FEET_HEAVY",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Heavy boot alignment template.",
+   "notes": "May widen foot silhouette but not change left/right foot anchors.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 211,
+   "id": "EQUIP_TEMPLATE_NECK_SMALL",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Small neck item template for tags/amulets.",
+   "notes": "Renders over shirt and under collars by default.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 212,
+   "id": "EQUIP_TEMPLATE_NECK_LARGE",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Larger scarf/collar/neck accessory template.",
+   "notes": "Defines front/rear masks so chest layers can occlude correctly.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 213,
+   "id": "EQUIP_TEMPLATE_RING_LEFT",
+   "family": "Equipment micro-layer",
+   "native": "32x48",
+   "use": "Generic ring_1 visibility template.",
+   "notes": "Only a few pixels at gameplay scale; portrait/item icon carries detail.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 214,
+   "id": "EQUIP_TEMPLATE_RING_RIGHT",
+   "family": "Equipment micro-layer",
+   "native": "32x48",
+   "use": "Generic ring_2 visibility template.",
+   "notes": "Independent anchor prevents mirroring wrong hand.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 215,
+   "id": "EQUIP_TEMPLATE_ACCESSORY_REAR",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Back/rear accessory shell for packs/capes/tool rigs.",
+   "notes": "Lives below base torso/front layers in z-order.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 216,
+   "id": "EQUIP_TEMPLATE_ACCESSORY_FRONT",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Front accessory shell for straps/pouches/holsters.",
+   "notes": "Explicit occlusion with chest/arms; no permanent identity meaning.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 217,
+   "id": "EQUIP_TEMPLATE_MAIN_HAND_SMALL",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Small main-hand object grip template.",
+   "notes": "Defines hand grip/pivot/orientation; item art remains separate.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 218,
+   "id": "EQUIP_TEMPLATE_MAIN_HAND_LARGE",
+   "family": "Equipment template",
+   "native": "32x48 + overscan",
+   "use": "Large main-hand object grip template.",
+   "notes": "Supports overscan cell while preserving actor pivot and collision-independent presentation.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 219,
+   "id": "EQUIP_TEMPLATE_OFF_HAND_SMALL",
+   "family": "Equipment template",
+   "native": "32x48",
+   "use": "Small off-hand object grip template.",
+   "notes": "Independent from main-hand slot; supports shield/tool/book-like silhouettes.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 220,
+   "id": "EQUIP_TEMPLATE_OFF_HAND_LARGE",
+   "family": "Equipment template",
+   "native": "32x48 + overscan",
+   "use": "Large off-hand object template.",
+   "notes": "Supports broad defensive/tool silhouettes; no gameplay block/guard implication by art alone.",
+   "canon": "technical/non-canon framework",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 221,
+   "id": "TOOL_ARCHETYPE_DIAGNOSTIC_SCANNER",
+   "family": "Held tool",
+   "native": "32x32 + 32x48 layer",
+   "use": "Generic scanner for technical interactions and future authored equipment.",
+   "notes": "Separate idle/held orientations; cyan display accent optional and state-driven.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 222,
+   "id": "TOOL_ARCHETYPE_REPAIR_WRENCH",
+   "family": "Held tool",
+   "native": "32x32 + 32x48 layer",
+   "use": "Generic repair wrench for workshop/maintenance scenes.",
+   "notes": "Readable silhouette at 32x32; not a weapon by default.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 223,
+   "id": "TOOL_ARCHETYPE_CUTTER",
+   "family": "Held tool",
+   "native": "32x32 + 32x48 layer",
+   "use": "Utility cutting tool template.",
+   "notes": "Blade/edge remains practical and non-ornamental; use depends on authored item.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 224,
+   "id": "TOOL_ARCHETYPE_MULTITOOL",
+   "family": "Held tool",
+   "native": "32x32 + 32x48 layer",
+   "use": "Compact multi-tool presentation.",
+   "notes": "Can support open/closed visual states if an authored item requires them.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 225,
+   "id": "TOOL_ARCHETYPE_FLASHLIGHT",
+   "family": "Held tool",
+   "native": "32x32 + 32x48 layer",
+   "use": "Portable light source template.",
+   "notes": "Beam is separate FX/lighting overlay; art does not decide visibility mechanics.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 226,
+   "id": "TOOL_ARCHETYPE_MEDKIT",
+   "family": "Held/pack item",
+   "native": "32x32 + 32x48 layer",
+   "use": "Medical kit container template.",
+   "notes": "No healing amount encoded visually; role iconography remains generic/original.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 227,
+   "id": "TOOL_ARCHETYPE_DATA_READER",
+   "family": "Held tool",
+   "native": "32x32 + 32x48 layer",
+   "use": "Handheld record/data reader template.",
+   "notes": "Screen text stays UI-driven; close-up can show abstract blocks only.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 228,
+   "id": "TOOL_ARCHETYPE_PRYBAR",
+   "family": "Held tool",
+   "native": "32x32 + 32x48 layer",
+   "use": "Pry/opening tool template.",
+   "notes": "Practical silhouette; any combat use requires explicit authored system support.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 229,
+   "id": "TOOL_ARCHETYPE_ROPE_KIT",
+   "family": "Held/pack item",
+   "native": "32x32",
+   "use": "Traversal rope/line kit template.",
+   "notes": "Inventory visual only until traversal system explicitly consumes it.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 230,
+   "id": "TOOL_ARCHETYPE_FIELD_METER",
+   "family": "Held tool",
+   "native": "32x32 + 32x48 layer",
+   "use": "Generic environmental/signal meter.",
+   "notes": "Needle/display state can vary, but measurement truth stays engine-owned.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 231,
+   "id": "WEAPON_ARCHETYPE_UNARMED_GUARD",
+   "family": "Combat presentation",
+   "native": "32x48 pose overlay",
+   "use": "Technical unarmed combat-ready hand/stance template.",
+   "notes": "No item ID; used only if combat presentation invokes unarmed state.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 232,
+   "id": "WEAPON_ARCHETYPE_SHORT_BLADE",
+   "family": "Held weapon template",
+   "native": "32x32 + 32x48 layer",
+   "use": "Generic short-blade silhouette for future authored weapon items.",
+   "notes": "Non-canon template; must not be added to inventory without stable item definition.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 233,
+   "id": "WEAPON_ARCHETYPE_LONG_BLADE",
+   "family": "Held weapon template",
+   "native": "32x32 + overscan layer",
+   "use": "Generic longer blade shell.",
+   "notes": "Defines grip/overscan and directional masks only.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 234,
+   "id": "WEAPON_ARCHETYPE_BATON",
+   "family": "Held weapon template",
+   "native": "32x32 + 32x48 layer",
+   "use": "Generic baton/club shell.",
+   "notes": "Neutral technical silhouette, no faction markings.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 235,
+   "id": "WEAPON_ARCHETYPE_COMPACT_RANGED",
+   "family": "Held weapon template",
+   "native": "32x32 + 32x48 layer",
+   "use": "Generic compact ranged-device silhouette.",
+   "notes": "No real-world branded firearm design; combat stats/ammo remain authored systems.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 236,
+   "id": "WEAPON_ARCHETYPE_LONG_RANGED",
+   "family": "Held weapon template",
+   "native": "32x32 + overscan layer",
+   "use": "Generic long ranged-device silhouette.",
+   "notes": "Original abstract design; shoulder/hand anchor compatibility documented.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 237,
+   "id": "WEAPON_ARCHETYPE_THROWN",
+   "family": "Held weapon template",
+   "native": "32x32 + 32x48 layer",
+   "use": "Generic thrown-tool/weapon visual shell.",
+   "notes": "Projectile flight FX separate; item type remains authored.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 238,
+   "id": "DEFENSE_ARCHETYPE_LIGHT_SHIELD",
+   "family": "Off-hand template",
+   "native": "32x32 + 32x48 layer",
+   "use": "Generic light shield/barrier plate shell.",
+   "notes": "Block state/guard value are rules-engine concerns.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 239,
+   "id": "DEFENSE_ARCHETYPE_HEAVY_SHIELD",
+   "family": "Off-hand template",
+   "native": "32x32 + overscan layer",
+   "use": "Generic larger shield/barrier shell.",
+   "notes": "Occlusion mask prevents hiding entire actor silhouette; no stat meaning baked in.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 240,
+   "id": "WEAPON_FX_GENERIC_HIT_SPARK",
+   "family": "Combat FX",
+   "native": "32x32, 4 frames",
+   "use": "Abstract impact spark for confirmed visible contact.",
+   "notes": "Material-specific variants may inherit later; never used to infer whether an attack hit.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 241,
+   "id": "CONSUMABLE_TEMPLATE_HEALTH_SMALL",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Small recovery-consumable icon template.",
+   "notes": "No numeric healing encoded; future item inherits with stable ID.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 242,
+   "id": "CONSUMABLE_TEMPLATE_STAMINA_SMALL",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Small stamina/resource consumable template.",
+   "notes": "Shape-coded as well as color-coded for accessibility.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 243,
+   "id": "CONSUMABLE_TEMPLATE_FOCUS_SMALL",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Focus/resource consumable template.",
+   "notes": "Technical family only; effect magnitude remains rules data.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 244,
+   "id": "CONSUMABLE_TEMPLATE_RESOLVE_SMALL",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Resolve-resource consumable template.",
+   "notes": "Distinct silhouette from health/stamina/focus.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 245,
+   "id": "CONSUMABLE_TEMPLATE_FIELD_RATION",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Generic field ration/food item shell.",
+   "notes": "No branded packaging; future hunger/rest use must be authored.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 246,
+   "id": "CONSUMABLE_TEMPLATE_WATER",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Generic potable-water container shell.",
+   "notes": "No survival mechanic implied unless implemented.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 247,
+   "id": "CONSUMABLE_TEMPLATE_STIMULANT",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Generic stimulant/booster presentation.",
+   "notes": "Avoid real-world drug branding; exact effect requires authored item.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 248,
+   "id": "CONSUMABLE_TEMPLATE_ANTISEPTIC",
+   "family": "Item icon",
+   "native": "32x32",
+   "use": "Generic medical-use bottle/pack.",
+   "notes": "Medical effect remains rules-owned.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 249,
+   "id": "MATERIAL_TEMPLATE_SCRAP_METAL",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Generic metal salvage material.",
+   "notes": "Used by crafting/salvage UI if system exists; no value implied.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 250,
+   "id": "MATERIAL_TEMPLATE_WIRE",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Wire/conductor material.",
+   "notes": "Clustered spool/bundle silhouette; color not sole identifier.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 251,
+   "id": "MATERIAL_TEMPLATE_CIRCUIT",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Electronic component material.",
+   "notes": "Abstract original board/component arrangement.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 252,
+   "id": "MATERIAL_TEMPLATE_GLASS",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Glass/transparent material shell.",
+   "notes": "Uses high-contrast edge clusters rather than smooth transparency.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 253,
+   "id": "MATERIAL_TEMPLATE_CLOTH",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Cloth/textile crafting material.",
+   "notes": "Folded cluster silhouette distinct from paper.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 254,
+   "id": "MATERIAL_TEMPLATE_RUBBER",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Rubber/polymer material shell.",
+   "notes": "Dark material needs highlight ramp to remain visible on Deep background.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 255,
+   "id": "MATERIAL_TEMPLATE_CERAMIC",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Ceramic/insulating material shell.",
+   "notes": "Angular fragments/components; no noisy speckle.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 256,
+   "id": "MATERIAL_TEMPLATE_BATTERY_CELL",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Generic power-cell component.",
+   "notes": "Original geometry; charge state is separate overlay if exposed.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 257,
+   "id": "MATERIAL_TEMPLATE_SIGNAL_COMPONENT",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Signal/relay-related technical component.",
+   "notes": "Can visually connect to current relay language without implying Trace-specific properties.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 258,
+   "id": "MATERIAL_TEMPLATE_ADHESIVE",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Repair adhesive/sealant material.",
+   "notes": "Readable tube/roll/container silhouette; no brand marks.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 259,
+   "id": "MATERIAL_TEMPLATE_FASTENERS",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Bolts/screws/fastener material pile.",
+   "notes": "Grouped into deliberate clusters so 1x icon remains readable.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 260,
+   "id": "MATERIAL_TEMPLATE_UNKNOWN_SAMPLE",
+   "family": "Material icon",
+   "native": "32x32",
+   "use": "Placeholder for unidentified material/sample.",
+   "notes": "Neutral sealed sample icon that does not reveal actual identity until discovered.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 261,
+   "id": "KEYITEM_TEMPLATE_DOCUMENT",
+   "family": "Key item icon",
+   "native": "32x32",
+   "use": "Generic important document/record item.",
+   "notes": "Actual readable text stays narrative/UI; icon communicates significance only.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 262,
+   "id": "KEYITEM_TEMPLATE_ACCESS_PASS",
+   "family": "Key item icon",
+   "native": "32x32",
+   "use": "Generic pass/credential item.",
+   "notes": "No real-world ID design; permissions remain rules-owned.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 263,
+   "id": "KEYITEM_TEMPLATE_KEYCARD",
+   "family": "Key item icon",
+   "native": "32x32",
+   "use": "Generic electronic access token.",
+   "notes": "Does not automatically indicate which doors it opens.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 264,
+   "id": "KEYITEM_TEMPLATE_MECHANICAL_KEY",
+   "family": "Key item icon",
+   "native": "32x32",
+   "use": "Generic physical key.",
+   "notes": "Distinct from Maintenance Seal; no lock binding encoded in art.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 265,
+   "id": "KEYITEM_TEMPLATE_MAP_FRAGMENT",
+   "family": "Key item icon",
+   "native": "32x32",
+   "use": "Map/data fragment item shell.",
+   "notes": "Discovery state may swap to revealed map art later.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 266,
+   "id": "KEYITEM_TEMPLATE_AUDIO_LOG",
+   "family": "Key item icon",
+   "native": "32x32",
+   "use": "Generic audio-recording/log object.",
+   "notes": "Playback/narration remains UI/system behavior.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 267,
+   "id": "KEYITEM_TEMPLATE_PHOTO",
+   "family": "Key item icon",
+   "native": "32x32",
+   "use": "Generic photograph/evidence item.",
+   "notes": "Thumbnail avoids revealing hidden details unless content makes them known.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 268,
+   "id": "KEYITEM_TEMPLATE_BADGE",
+   "family": "Key item icon",
+   "native": "32x32",
+   "use": "Generic badge/emblem item shell.",
+   "notes": "Future faction/role symbol must be authored before visual specialization.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 269,
+   "id": "KEYITEM_TEMPLATE_SEALED_PACKAGE",
+   "family": "Key item icon",
+   "native": "32x32",
+   "use": "Generic sealed parcel/package.",
+   "notes": "Contents remain hidden; art should not leak shape of internal item.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 270,
+   "id": "KEYITEM_TEMPLATE_DATA_CORE",
+   "family": "Key item icon",
+   "native": "32x32",
+   "use": "Generic data/storage core.",
+   "notes": "Original abstract technical geometry; no implied power.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 271,
+   "id": "CONTAINER_TEMPLATE_SMALL_CASE",
+   "family": "Container prop",
+   "native": "32x32 + open state",
+   "use": "Small equipment/key-item case.",
+   "notes": "Closed/open states separated; contents depend on inventory/world state.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 272,
+   "id": "CONTAINER_TEMPLATE_TOOLBOX",
+   "family": "Container prop",
+   "native": "32x32 + open state",
+   "use": "Toolbox/maintenance container.",
+   "notes": "Supports workshop/depot placement and loot interaction.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 273,
+   "id": "CONTAINER_TEMPLATE_LOCKER",
+   "family": "Container prop",
+   "native": "32x48 + open state",
+   "use": "Tall locker/storage unit.",
+   "notes": "Lock/open state is visual projection of world state.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 274,
+   "id": "CONTAINER_TEMPLATE_CRATE",
+   "family": "Container prop",
+   "native": "32x32 + open state",
+   "use": "Generic utility crate.",
+   "notes": "Used for world dressing or inventory interaction; content remains state-owned.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 275,
+   "id": "CONTAINER_TEMPLATE_ARCHIVE_BOX",
+   "family": "Container prop",
+   "native": "32x32 + open state",
+   "use": "Archive records/storage box.",
+   "notes": "Supports Municipal Archive and future records locations.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 276,
+   "id": "CONTAINER_TEMPLATE_MEDICAL_CASE",
+   "family": "Container prop",
+   "native": "32x32 + open state",
+   "use": "Medical supply case.",
+   "notes": "No healing outcome implied; generic original markings.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 277,
+   "id": "CONTAINER_TEMPLATE_SIGNAL_CASE",
+   "family": "Container prop",
+   "native": "32x32 + open state",
+   "use": "Technical signal-component case.",
+   "notes": "Can visually relate to relay infrastructure while remaining non-canon until authored.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 278,
+   "id": "CONTAINER_TEMPLATE_PERSONAL_BAG",
+   "family": "Container prop",
+   "native": "32x32 + open state",
+   "use": "Generic personal bag.",
+   "notes": "Owner/content identity remains authored; avoids accidental named-character association.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 279,
+   "id": "CONTAINER_TEMPLATE_SALVAGE_BIN",
+   "family": "Container prop",
+   "native": "32x32 + state",
+   "use": "Workshop salvage-bin shell.",
+   "notes": "Supports empty/filled visual states; quantities remain UI data.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 280,
+   "id": "CONTAINER_TEMPLATE_UNKNOWN_LOCKBOX",
+   "family": "Container prop",
+   "native": "32x32 + state",
+   "use": "Generic locked mystery container.",
+   "notes": "Art reveals no contents; lock state only if player-visible.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 281,
+   "id": "UI_INVENTORY_CATEGORY_ALL",
+   "family": "Inventory UI icon",
+   "native": "16x16",
+   "use": "All-items filter.",
+   "notes": "Technical filter marker; no gameplay meaning.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 282,
+   "id": "UI_INVENTORY_CATEGORY_EQUIPMENT",
+   "family": "Inventory UI icon",
+   "native": "16x16",
+   "use": "Equipment filter.",
+   "notes": "Matches equipment silhouette system without duplicating slot icons.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 283,
+   "id": "UI_INVENTORY_CATEGORY_CONSUMABLE",
+   "family": "Inventory UI icon",
+   "native": "16x16",
+   "use": "Consumables filter.",
+   "notes": "Shape-coded for accessibility.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 284,
+   "id": "UI_INVENTORY_CATEGORY_MATERIAL",
+   "family": "Inventory UI icon",
+   "native": "16x16",
+   "use": "Materials/crafting filter.",
+   "notes": "Distinct component/stack motif.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 285,
+   "id": "UI_INVENTORY_CATEGORY_KEYITEM",
+   "family": "Inventory UI icon",
+   "native": "16x16",
+   "use": "Key/quest item filter.",
+   "notes": "Important-item marker; does not expose hidden quest linkage.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 286,
+   "id": "UI_ITEM_STATE_EQUIPPED",
+   "family": "Inventory UI",
+   "native": "16x16",
+   "use": "Marks currently equipped item.",
+   "notes": "Driven by authoritative equipment projection.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 287,
+   "id": "UI_ITEM_STATE_LOCKED",
+   "family": "Inventory UI",
+   "native": "16x16",
+   "use": "Marks unusable/locked item state when reason is player-visible.",
+   "notes": "Cannot infer requirements from hidden rules.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 288,
+   "id": "UI_ITEM_STATE_NEW",
+   "family": "Inventory UI",
+   "native": "16x16",
+   "use": "Newly acquired/unreviewed item marker.",
+   "notes": "Pure UI state; should clear through UI logic, not inventory mutation.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 289,
+   "id": "UI_ITEM_STATE_DAMAGED",
+   "family": "Inventory UI",
+   "native": "16x16",
+   "use": "Visible damaged-condition marker.",
+   "notes": "Only bound to an explicit item-condition state if system supports it.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 290,
+   "id": "UI_ITEM_STATE_QUEST_RELEVANT",
+   "family": "Inventory UI",
+   "native": "16x16",
+   "use": "Optional player-safe marker that an item is relevant to an active quest.",
+   "notes": "Must be driven by authored visible quest projection; no future-spoiler linkage.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 291,
+   "id": "UI_ITEM_COMPARE_UP",
+   "family": "Inventory UI",
+   "native": "16x16",
+   "use": "Indicates a visible compared stat increases.",
+   "notes": "Computed by UI from player-safe comparison data; not baked into item icon.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 292,
+   "id": "UI_ITEM_COMPARE_DOWN",
+   "family": "Inventory UI",
+   "native": "16x16",
+   "use": "Indicates a visible compared stat decreases.",
+   "notes": "Shape-coded plus color-coded.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 293,
+   "id": "UI_ITEM_COMPARE_MIXED",
+   "family": "Inventory UI",
+   "native": "16x16",
+   "use": "Mixed tradeoff comparison marker.",
+   "notes": "Avoids false green/red winner when multiple values change.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 294,
+   "id": "UI_ITEM_STACK_FRAME",
+   "family": "Inventory UI",
+   "native": "32x32 overlay",
+   "use": "Stack-count frame/background for material/consumable icons.",
+   "notes": "Count text remains native UI text, not pixels baked into asset.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 295,
+   "id": "UI_LOOT_PICKUP_FLASH",
+   "family": "Loot UI FX",
+   "native": "32x32, 4 frames",
+   "use": "Small confirmation effect after successful item pickup.",
+   "notes": "Only runs after authoritative inventory update succeeds.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 296,
+   "id": "UI_CRAFT_RECIPE_ICON",
+   "family": "Craft UI icon",
+   "native": "16x16",
+   "use": "Recipe/crafting-entry marker for future crafting UI.",
+   "notes": "No crafting system assumed; technical reserved asset.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 297,
+   "id": "UI_CRAFT_MISSING_PART",
+   "family": "Craft UI icon",
+   "native": "16x16",
+   "use": "Missing-component marker.",
+   "notes": "Shown only from player-safe recipe validation.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 298,
+   "id": "UI_CRAFT_READY",
+   "family": "Craft UI icon",
+   "native": "16x16",
+   "use": "Ready-to-craft marker.",
+   "notes": "Does not execute craft or own requirements.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 299,
+   "id": "UI_ITEM_INSPECT_CURSOR",
+   "family": "Inventory UI",
+   "native": "16x16",
+   "use": "Inspect/detail affordance.",
+   "notes": "Pure UI/navigation icon.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 300,
+   "id": "UI_ITEM_BLUEPRINT_DEBUG_GRID",
+   "family": "Developer asset",
+   "native": "32x32 grid",
+   "use": "Developer-only icon alignment/palette checker.",
+   "notes": "Never player-facing; supports item/paper-doll QA.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 301,
+   "id": "ARCH_TILE_CONCRETE_WALL_A",
+   "family": "Architecture module",
+   "native": "16x16 tile",
+   "use": "Base concrete wall material for municipal interiors/exteriors.",
+   "notes": "Limited 4\u20136 color ramp; seams/wear separated from permanent base tile.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 302,
+   "id": "ARCH_TILE_CONCRETE_WALL_B",
+   "family": "Architecture module",
+   "native": "16x16 tile",
+   "use": "Alternate concrete wall cluster to break repetition.",
+   "notes": "Same material family/value ramp as A; pattern variation only.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 303,
+   "id": "ARCH_TILE_METAL_PANEL_A",
+   "family": "Architecture module",
+   "native": "16x16 tile",
+   "use": "Service-panel wall/floor module for infrastructure locations.",
+   "notes": "Distinct metallic highlights; avoids mirroring concrete value ramp.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 304,
+   "id": "ARCH_TILE_METAL_PANEL_B",
+   "family": "Architecture module",
+   "native": "16x16 tile",
+   "use": "Alternate metal panel module.",
+   "notes": "Seam placement differs but joins cleanly to A.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 305,
+   "id": "ARCH_TILE_BRICK_MASONRY_A",
+   "family": "Architecture module",
+   "native": "16x16 tile",
+   "use": "Older masonry texture for district expansion.",
+   "notes": "No random noise; mortar/brick rhythm designed as coherent clusters.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 306,
+   "id": "ARCH_TILE_PLASTER_A",
+   "family": "Architecture module",
+   "native": "16x16 tile",
+   "use": "Public/civilian interior wall surface.",
+   "notes": "Supports decals/signage overlays rather than baked labels.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 307,
+   "id": "ARCH_TILE_TILE_FLOOR_A",
+   "family": "Architecture module",
+   "native": "16x16 tile",
+   "use": "Institutional tiled floor.",
+   "notes": "Grid aligns across repeats; perspective variants handled by scene composition.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 308,
+   "id": "ARCH_TILE_CONCRETE_FLOOR_A",
+   "family": "Architecture module",
+   "native": "16x16 tile",
+   "use": "Industrial/depot floor surface.",
+   "notes": "Wear overlay separate to support location-specific use.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 309,
+   "id": "ARCH_TILE_GRATE_FLOOR_A",
+   "family": "Architecture module",
+   "native": "16x16 tile",
+   "use": "Service-tunnel grate/floor module.",
+   "notes": "High-contrast gaps preserved at 1x; no transparency unless explicitly needed.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 310,
+   "id": "ARCH_TILE_ROAD_ASPHALT_A",
+   "family": "Architecture module",
+   "native": "16x16 tile",
+   "use": "District road/plaza asphalt module.",
+   "notes": "Paint/markings are separate decals to reuse surface.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 311,
+   "id": "ARCH_EDGE_CURB_A",
+   "family": "Architecture module",
+   "native": "16x16/32x16",
+   "use": "Road/plaza curb edge.",
+   "notes": "Supports straight/corner/endcap pieces; integer alignment required.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 312,
+   "id": "ARCH_EDGE_RAIL_A",
+   "family": "Architecture module",
+   "native": "16x32",
+   "use": "Safety railing module.",
+   "notes": "Foreground/background variants preserve perspective and character readability.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 313,
+   "id": "ARCH_WINDOW_PUBLIC_A",
+   "family": "Architecture module",
+   "native": "32x32",
+   "use": "Public-building window module.",
+   "notes": "Lit/unlit state handled with overlay/variant, not separate architecture geometry.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 314,
+   "id": "ARCH_WINDOW_INDUSTRIAL_A",
+   "family": "Architecture module",
+   "native": "32x32",
+   "use": "Industrial/depot window module.",
+   "notes": "Stronger frame/mesh silhouette; broken state deferred until authored.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 315,
+   "id": "ARCH_DOOR_PUBLIC_A",
+   "family": "Architecture module",
+   "native": "32x48",
+   "use": "Generic public door visual shell.",
+   "notes": "Open/closed/accessibility state separate; lock ownership remains world state.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 316,
+   "id": "ARCH_DOOR_SERVICE_A",
+   "family": "Architecture module",
+   "native": "32x48",
+   "use": "Generic service/maintenance door shell.",
+   "notes": "Designed for depot/tunnel use; no Gate Twelve-specific markings.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 317,
+   "id": "ARCH_STAIRS_INDUSTRIAL_A",
+   "family": "Architecture module",
+   "native": "64x48",
+   "use": "Industrial stairs module.",
+   "notes": "Reusable in service/maintenance scenes; handrails separable.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 318,
+   "id": "ARCH_STAIRS_PUBLIC_A",
+   "family": "Architecture module",
+   "native": "64x48",
+   "use": "Public-building stair module.",
+   "notes": "Cleaner institutional geometry; accessibility ramps remain separate assets.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 319,
+   "id": "ARCH_ROOFLINE_URBAN_A",
+   "family": "Architecture module",
+   "native": "64x32",
+   "use": "District building roof/parapet module.",
+   "notes": "Supports establishing scenes without unique full-building redraw.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 320,
+   "id": "ARCH_STOREFRONT_MODULAR_A",
+   "family": "Architecture module",
+   "native": "64x48",
+   "use": "Reusable workshop/commercial frontage module.",
+   "notes": "Sign panel left blank for authored location symbol/text rendered separately.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 321,
+   "id": "INTERIOR_MODULE_SMALL_OFFICE",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Reusable compact office composition for future administrative scenes.",
+   "notes": "Desk/wall/storage layers modular; no named office canon.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 322,
+   "id": "INTERIOR_MODULE_PUBLIC_LOBBY",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic public-building lobby.",
+   "notes": "Reception, seating and route geometry separated for state changes.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 323,
+   "id": "INTERIOR_MODULE_WORKSHOP_BAY",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic repair bay.",
+   "notes": "Bench/tool/scrap layers inherit Workshop Row materials but remain non-canon.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 324,
+   "id": "INTERIOR_MODULE_MEDICAL_ROOM",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic clinic/first-aid room.",
+   "notes": "Original medical visual language; no real-world logo/trademark.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 325,
+   "id": "INTERIOR_MODULE_STORAGE_ROOM",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic storage interior.",
+   "notes": "Shelves/containers modular; inventory contents remain state-owned.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 326,
+   "id": "INTERIOR_MODULE_SECURITY_POST",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic checkpoint/security post.",
+   "notes": "Barrier/console/door modules; faction friendliness not implied.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 327,
+   "id": "INTERIOR_MODULE_CONTROL_ROOM",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic technical control room.",
+   "notes": "Terminal banks and status screens use abstract pixels; readable text remains UI.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 328,
+   "id": "INTERIOR_MODULE_APARTMENT_SMALL",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Future civilian residence template.",
+   "notes": "Furniture swaps create variation; not attached to a named NPC.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 329,
+   "id": "INTERIOR_MODULE_DORM_ROOM",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Shared/temporary sleeping-space template.",
+   "notes": "Supports rest scenes if authored; no fixed inhabitants.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 330,
+   "id": "INTERIOR_MODULE_CANTEEN",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic public/workplace eating space.",
+   "notes": "Tables/counter/seating layers reusable.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 331,
+   "id": "INTERIOR_MODULE_MARKET_STALL",
+   "family": "Interior/module",
+   "native": "64x64",
+   "use": "Generic vendor stall shell.",
+   "notes": "Merchandise layers separate; does not create commerce mechanics alone.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 332,
+   "id": "INTERIOR_MODULE_ARCHIVE_STACKS",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Expanded archive-shelving module for future archive scenes.",
+   "notes": "Builds on Batch 001 shelves while supporting new layouts.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 333,
+   "id": "INTERIOR_MODULE_SERVER_ROOM",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Technical data/server space.",
+   "notes": "Original rack/cable visual language; no cyberpunk neon overload.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 334,
+   "id": "INTERIOR_MODULE_TRAINING_ROOM",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic controlled training room.",
+   "notes": "Does not replace canonical Trace Chamber; future skills can inherit layout.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 335,
+   "id": "INTERIOR_MODULE_LOCKER_ROOM",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Utility changing/storage area.",
+   "notes": "Lockers, benches and hooks are modular props.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 336,
+   "id": "INTERIOR_MODULE_SERVICE_SHAFT",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Vertical/maintenance shaft scene template.",
+   "notes": "Ladders/cables/railings layered; traversal truth remains authored.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 337,
+   "id": "INTERIOR_MODULE_BASEMENT",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic basement/sublevel.",
+   "notes": "Material palette from infrastructure set; lighting state overlay-driven.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 338,
+   "id": "INTERIOR_MODULE_PUBLIC_RECORD_DESK",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic records/help desk scene.",
+   "notes": "Complements archive content without replacing named Municipal Archive.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 339,
+   "id": "INTERIOR_MODULE_SMALL_SHOP",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic retail/service interior.",
+   "notes": "Shelving/counter/stock modular; commerce state external.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 340,
+   "id": "INTERIOR_MODULE_TRANSIT_WAITING",
+   "family": "Interior module",
+   "native": "128x64",
+   "use": "Generic transit waiting area.",
+   "notes": "Seats/signage/doors modular; can extend depot world without cloning Platform Nine.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 341,
+   "id": "PROP_BENCH_PUBLIC",
+   "family": "World prop",
+   "native": "32x16",
+   "use": "Public seating prop for plaza/transit interiors.",
+   "notes": "Occupied/unoccupied state handled by character placement, not prop duplication.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 342,
+   "id": "PROP_CHAIR_OFFICE",
+   "family": "World prop",
+   "native": "16x24",
+   "use": "Office chair prop.",
+   "notes": "Front/side variants; animation seating anchor documented.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 343,
+   "id": "PROP_TABLE_SMALL",
+   "family": "World prop",
+   "native": "32x16",
+   "use": "Small table/desk surface.",
+   "notes": "Supports prop overlays and interaction anchors.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 344,
+   "id": "PROP_DESK_TERMINAL",
+   "family": "World prop",
+   "native": "48x24",
+   "use": "Desk with terminal placement zone.",
+   "notes": "Terminal itself remains separate asset for state swapping.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 345,
+   "id": "PROP_TRASH_BIN",
+   "family": "World prop",
+   "native": "16x24",
+   "use": "Public/utility bin.",
+   "notes": "No loot implication unless world state exposes interaction.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 346,
+   "id": "PROP_TOOL_RACK",
+   "family": "World prop",
+   "native": "32x32",
+   "use": "Workshop/maintenance wall rack.",
+   "notes": "Tool silhouettes are dressing unless actual item pickups are authored.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 347,
+   "id": "PROP_PIPE_VALVE",
+   "family": "World prop",
+   "native": "16x16",
+   "use": "Valve/control prop for tunnel/service areas.",
+   "notes": "Open/closed position can visualize explicit world state.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 348,
+   "id": "PROP_WALL_PANEL",
+   "family": "World prop",
+   "native": "16x24",
+   "use": "Maintenance access panel.",
+   "notes": "Closed/open/damaged variants deferred to authored states.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 349,
+   "id": "PROP_FUSE_BOX",
+   "family": "World prop",
+   "native": "16x24",
+   "use": "Electrical/service box.",
+   "notes": "Indicator light state can reflect player-safe world power state.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 350,
+   "id": "PROP_GENERATOR_SMALL",
+   "family": "World prop",
+   "native": "32x32",
+   "use": "Portable/small backup generator.",
+   "notes": "Running/off indicator separate; fuel/mechanics remain game data.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 351,
+   "id": "PROP_GENERATOR_LARGE",
+   "family": "World prop",
+   "native": "48x32",
+   "use": "Fixed backup-power unit.",
+   "notes": "Useful in archive/depot expansion; no automatic interactability.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 352,
+   "id": "PROP_LAMP_FLOOR",
+   "family": "World prop",
+   "native": "16x32",
+   "use": "Portable/backup standing light.",
+   "notes": "Glow is separate lighting overlay.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 353,
+   "id": "PROP_LAMP_WALL",
+   "family": "World prop",
+   "native": "16x16",
+   "use": "Wall-mounted utility lamp.",
+   "notes": "On/off states through overlay or variant.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 354,
+   "id": "PROP_BARRICADE_LIGHT",
+   "family": "World prop",
+   "native": "32x16",
+   "use": "Temporary barrier.",
+   "notes": "World collision/accessibility remains engine-owned.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 355,
+   "id": "PROP_CONE_WARNING",
+   "family": "World prop",
+   "native": "16x16",
+   "use": "Warning cone/marker.",
+   "notes": "Used sparingly for maintenance dressing; not a path blocker by art alone.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 356,
+   "id": "PROP_SIGN_POST",
+   "family": "World prop",
+   "native": "16x32",
+   "use": "Generic post for route/district signs.",
+   "notes": "Symbol/text layer separate for reuse/localization.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 357,
+   "id": "PROP_PALLET",
+   "family": "World prop",
+   "native": "32x16",
+   "use": "Utility pallet.",
+   "notes": "Stackable dressing; collision/loot behavior not implied.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 358,
+   "id": "PROP_CART_MAINTENANCE",
+   "family": "World prop",
+   "native": "32x24",
+   "use": "Maintenance push cart.",
+   "notes": "Supports tools/material overlays; can appear in depot/workshop scenes.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 359,
+   "id": "PROP_CRATE_STACK",
+   "family": "World prop",
+   "native": "32x32",
+   "use": "Non-interactive crate stack dressing.",
+   "notes": "Distinct from interactive CONTAINER_TEMPLATE_CRATE through manifest role.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 360,
+   "id": "PROP_EMERGENCY_STRETCHER",
+   "family": "World prop",
+   "native": "48x16",
+   "use": "Emergency/medical scene prop.",
+   "notes": "Non-graphic; character occupancy separate.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PROP_ANGLES"
+  },
+  {
+   "n": 361,
+   "id": "ENV_OVERLAY_RAIN_LIGHT",
+   "family": "Environment overlay",
+   "native": "128x64 loop",
+   "use": "Light-rain weather layer for exterior scenes.",
+   "notes": "Sparse diagonal clusters; integer animation; scene state decides activation.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 362,
+   "id": "ENV_OVERLAY_RAIN_HEAVY",
+   "family": "Environment overlay",
+   "native": "128x64 loop",
+   "use": "Heavy-rain layer.",
+   "notes": "Higher density plus ground splash overlay; preserves silhouettes and text readability.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 363,
+   "id": "ENV_OVERLAY_FOG_LIGHT",
+   "family": "Environment overlay",
+   "native": "128x64 alpha",
+   "use": "Light haze/fog layer.",
+   "notes": "Clustered translucent bands only where alpha budget allows; no smooth blur.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 364,
+   "id": "ENV_OVERLAY_DUST_LIGHT",
+   "family": "Environment overlay",
+   "native": "128x64 loop",
+   "use": "Dust/debris atmosphere for damaged/active work zones.",
+   "notes": "Particle clusters sparse; not used to imply danger level by itself.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 365,
+   "id": "ENV_OVERLAY_WIND_DEBRIS",
+   "family": "Environment overlay",
+   "native": "128x64 loop",
+   "use": "Wind-driven paper/leaves/debris.",
+   "notes": "Directional animation can support weather/world events.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 366,
+   "id": "ENV_OVERLAY_DAY_CLEAR",
+   "family": "Lighting overlay",
+   "native": "128x64",
+   "use": "Daylight exterior lighting treatment.",
+   "notes": "Color/value overlay mapped to scene masters; does not change architecture.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 367,
+   "id": "ENV_OVERLAY_DUSK",
+   "family": "Lighting overlay",
+   "native": "128x64",
+   "use": "Dusk/twilight lighting treatment.",
+   "notes": "Warmer highlights/cooler shadows within palette budget.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 368,
+   "id": "ENV_OVERLAY_NIGHT",
+   "family": "Lighting overlay",
+   "native": "128x64",
+   "use": "Night exterior treatment.",
+   "notes": "Maintains landmarks/interactables; does not crush scene to black.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 369,
+   "id": "ENV_OVERLAY_EMERGENCY_RED",
+   "family": "Lighting overlay",
+   "native": "128x64",
+   "use": "Emergency-red state for alarms/blackouts.",
+   "notes": "Designed to combine with base art while preserving skin/UI readability.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 370,
+   "id": "ENV_OVERLAY_BACKUP_POWER",
+   "family": "Lighting overlay",
+   "native": "128x64",
+   "use": "Backup-power lighting state.",
+   "notes": "Localized lamps/terminals rather than full-scene recolor.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 371,
+   "id": "ENV_OVERLAY_POWER_OFF",
+   "family": "Lighting overlay",
+   "native": "128x64",
+   "use": "Power-off/dark state.",
+   "notes": "Leaves minimal ambient structure so player understands location.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 372,
+   "id": "ENV_OVERLAY_POWER_RESTORED",
+   "family": "Lighting overlay",
+   "native": "128x64",
+   "use": "Restored-normal-power treatment.",
+   "notes": "Used only after explicit world-state restoration.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 373,
+   "id": "ENV_OVERLAY_FIRELIGHT_SAFE",
+   "family": "Lighting overlay",
+   "native": "128x64 loop",
+   "use": "Warm flicker template for controlled fire/heat sources.",
+   "notes": "Not used to imply destructive fire unless authored.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 374,
+   "id": "ENV_OVERLAY_HAZARD_WARNING",
+   "family": "Environment overlay",
+   "native": "128x64",
+   "use": "Generic visible hazard-light treatment.",
+   "notes": "Warning stripes/beacons separate from actual hazard mechanics.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 375,
+   "id": "ENV_OVERLAY_TRACE_INTERFERENCE",
+   "family": "Environment/FX overlay",
+   "native": "128x64 loop",
+   "use": "Trace-related environmental distortion layer.",
+   "notes": "Must not disclose hidden source/direction unless ability projection makes it visible.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 376,
+   "id": "ENV_OVERLAY_CROWD_LOW",
+   "family": "Scene overlay",
+   "native": "128x64",
+   "use": "Low-density crowd silhouette layer.",
+   "notes": "Modular generic NPC silhouettes; avoids duplicating named characters.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 377,
+   "id": "ENV_OVERLAY_CROWD_HIGH",
+   "family": "Scene overlay",
+   "native": "128x64",
+   "use": "Higher-density evacuation/public crowd layer.",
+   "notes": "Multiple archetype silhouettes with depth/value separation.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 378,
+   "id": "ENV_OVERLAY_DAMAGE_MINOR",
+   "family": "Scene overlay",
+   "native": "128x64",
+   "use": "Minor environmental damage/dust layer.",
+   "notes": "Cracks/debris separate so same location can transition states.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 379,
+   "id": "ENV_OVERLAY_DAMAGE_MAJOR",
+   "family": "Scene overlay",
+   "native": "128x64",
+   "use": "Major visible environment damage layer.",
+   "notes": "Does not alter navigability unless world state also changes.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 380,
+   "id": "ENV_OVERLAY_CLEANUP_RECOVERY",
+   "family": "Scene overlay",
+   "native": "128x64",
+   "use": "Post-event cleanup/recovery layer.",
+   "notes": "Barriers/tools/work crews can signal world progression without a whole new location master.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 381,
+   "id": "MAP_TILE_DISTRICT_BASE_A",
+   "family": "Map module",
+   "native": "32x32",
+   "use": "Base map terrain/block tile for district map construction.",
+   "notes": "Abstract pixel cartography; not a literal satellite view.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 382,
+   "id": "MAP_TILE_DISTRICT_ROAD",
+   "family": "Map module",
+   "native": "32x32",
+   "use": "Road/route tile.",
+   "notes": "Visual route only; authoritative graph edges determine travel.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 383,
+   "id": "MAP_TILE_DISTRICT_BUILDING",
+   "family": "Map module",
+   "native": "32x32",
+   "use": "Building footprint tile.",
+   "notes": "Used to establish density/landmarks; selectable nodes remain separate.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 384,
+   "id": "MAP_TILE_DISTRICT_PLAZA",
+   "family": "Map module",
+   "native": "32x32",
+   "use": "Open-space/plaza tile.",
+   "notes": "Supports Depot Plaza and future hubs without redefining node state.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 385,
+   "id": "MAP_TILE_WATER_DRAIN",
+   "family": "Map module",
+   "native": "32x32",
+   "use": "Canal/drain/water infrastructure map tile.",
+   "notes": "Pure cartography until content defines traversal.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 386,
+   "id": "MAP_TILE_GREENSPACE",
+   "family": "Map module",
+   "native": "32x32",
+   "use": "Small park/green-space tile.",
+   "notes": "Non-canon structural map template.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 387,
+   "id": "MAP_ROUTE_NORMAL",
+   "family": "Map route",
+   "native": "variable 16px segments",
+   "use": "Standard traversable route line.",
+   "notes": "Shown only for projected/discovered edges.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 388,
+   "id": "MAP_ROUTE_SELECTED",
+   "family": "Map route",
+   "native": "variable 16px segments",
+   "use": "Selected route highlight.",
+   "notes": "Pure UI state after user selects reachable destination.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 389,
+   "id": "MAP_ROUTE_BLOCKED",
+   "family": "Map route",
+   "native": "variable 16px segments",
+   "use": "Visible blocked/unavailable route treatment.",
+   "notes": "Reason must come from player-safe projection; art never invents blockage.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 390,
+   "id": "MAP_ROUTE_UNKNOWN",
+   "family": "Map route",
+   "native": "variable 16px segments",
+   "use": "Undiscovered/unknown route presentation.",
+   "notes": "May be omitted entirely depending fog-of-war policy; no hidden endpoint leakage.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 391,
+   "id": "MAP_FOG_UNDISCOVERED",
+   "family": "Map overlay",
+   "native": "256x144 mask",
+   "use": "Masks undiscovered district regions.",
+   "notes": "Generated from discovered-state projection rather than a permanent image.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 392,
+   "id": "MAP_EVENT_MARKER",
+   "family": "Map icon",
+   "native": "16x16",
+   "use": "Generic current event marker.",
+   "notes": "Only displayed for player-visible events.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 393,
+   "id": "MAP_QUEST_MARKER",
+   "family": "Map icon",
+   "native": "16x16",
+   "use": "Quest-relevant location marker.",
+   "notes": "Category/priority may combine with Batch 001 quest icons.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 394,
+   "id": "MAP_DANGER_MARKER",
+   "family": "Map icon",
+   "native": "16x16",
+   "use": "Known hazard/danger marker.",
+   "notes": "Must come from known/player-safe information; no omniscient warning.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 395,
+   "id": "MAP_SERVICE_MARKER",
+   "family": "Map icon",
+   "native": "16x16",
+   "use": "Generic service/facility marker.",
+   "notes": "Specific meaning supplied by authored location metadata.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 396,
+   "id": "TRAVEL_TRANSITION_WALK",
+   "family": "Travel transition",
+   "native": "128x64, 6-10 frames",
+   "use": "Short walking travel transition between nearby nodes.",
+   "notes": "Runs only after/while authoritative travel action succeeds; preserves origin/destination context.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 397,
+   "id": "TRAVEL_TRANSITION_INTERIOR",
+   "family": "Travel transition",
+   "native": "128x64, 4-8 frames",
+   "use": "Door/corridor transition between connected interiors.",
+   "notes": "Avoids fake load screen; does not change world state itself.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 398,
+   "id": "TRAVEL_TRANSITION_STAIRS",
+   "family": "Travel transition",
+   "native": "128x64, 4-8 frames",
+   "use": "Vertical stair/level transition.",
+   "notes": "Useful for Gate Twelve/service sublevels when route action confirms.",
+   "canon": "technical/non-canon framework",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 399,
+   "id": "WORLD_INTERACT_HIGHLIGHT",
+   "family": "World/UI overlay",
+   "native": "16x16/outline",
+   "use": "Generic interaction highlight for future exploration mode.",
+   "notes": "Only attached to objects exposed as interactable by gameplay projection.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 400,
+   "id": "WORLD_DEBUG_COLLISION_OVERLAY",
+   "family": "Developer asset",
+   "native": "scene/grid overlay",
+   "use": "Developer-only collision/node/interaction debug layer.",
+   "notes": "Never player-facing; helps verify art anchors versus future spatial interaction data.",
+   "canon": "technical/non-canon framework",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 401,
+   "id": "UI_PANEL_STORY_FRAME",
+   "family": "UI shell",
+   "native": "9-slice / pixel frame",
+   "use": "Primary narrative panel frame.",
+   "notes": "Crisp integer corners; scalable through 9-slice-like construction without smoothing; text remains native Compose.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 402,
+   "id": "UI_PANEL_CHARACTER_FRAME",
+   "family": "UI shell",
+   "native": "9-slice / pixel frame",
+   "use": "Character/equipment inspection frame.",
+   "notes": "Shares panel language with Story while reserving portrait/avatar space.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 403,
+   "id": "UI_PANEL_STATS_FRAME",
+   "family": "UI shell",
+   "native": "9-slice / pixel frame",
+   "use": "Stats surface frame.",
+   "notes": "Supports grouped attributes/derived/skills without ornamental clutter.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 404,
+   "id": "UI_PANEL_INVENTORY_FRAME",
+   "family": "UI shell",
+   "native": "9-slice / pixel frame",
+   "use": "Inventory/equipment panel frame.",
+   "notes": "Designed for 32x32 item icons and slot rows.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 405,
+   "id": "UI_PANEL_QUEST_FRAME",
+   "family": "UI shell",
+   "native": "9-slice / pixel frame",
+   "use": "Quest log frame.",
+   "notes": "Supports main/side/optional/lore category markers.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 406,
+   "id": "UI_PANEL_MAP_FRAME",
+   "family": "UI shell",
+   "native": "9-slice / pixel frame",
+   "use": "Map surface frame.",
+   "notes": "Provides pixel border/legend space without reducing interactive map hit area.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 407,
+   "id": "UI_PANEL_SETTINGS_FRAME",
+   "family": "UI shell",
+   "native": "9-slice / pixel frame",
+   "use": "Settings/save/audio panel frame.",
+   "notes": "Technical shell only; controls remain accessible native UI elements.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 408,
+   "id": "UI_PANEL_DEVELOPER_FRAME",
+   "family": "UI shell",
+   "native": "9-slice / pixel frame",
+   "use": "Developer/cheat surface frame.",
+   "notes": "Visually distinct from player-facing panels and never confused with normal gameplay.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 409,
+   "id": "UI_CHOICE_CARD_ENABLED",
+   "family": "UI state",
+   "native": "stretchable pixel card",
+   "use": "Enabled narrative choice treatment.",
+   "notes": "State controlled by player-safe choice projection; visible border does not own availability.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 410,
+   "id": "UI_CHOICE_CARD_DISABLED",
+   "family": "UI state",
+   "native": "stretchable pixel card",
+   "use": "Disabled/locked choice treatment.",
+   "notes": "Reason stays UI text; asset does not reveal hidden requirements.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 411,
+   "id": "UI_CHOICE_CARD_SELECTED",
+   "family": "UI state",
+   "native": "stretchable pixel card",
+   "use": "Pressed/selected feedback.",
+   "notes": "Short-lived interaction state; no permanent branch implication.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 412,
+   "id": "UI_BUTTON_PRIMARY",
+   "family": "UI state",
+   "native": "stretchable pixel button",
+   "use": "Primary action button art.",
+   "notes": "Touch target may exceed visible pixel frame; accessibility preserved.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 413,
+   "id": "UI_BUTTON_SECONDARY",
+   "family": "UI state",
+   "native": "stretchable pixel button",
+   "use": "Secondary action treatment.",
+   "notes": "Lower visual priority without lowering hit target.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 414,
+   "id": "UI_BUTTON_DANGER",
+   "family": "UI state",
+   "native": "stretchable pixel button",
+   "use": "Destructive/critical action treatment inside UI.",
+   "notes": "Use sparingly; action semantics remain code-owned.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 415,
+   "id": "UI_TAB_ACTIVE",
+   "family": "UI state",
+   "native": "stretchable tab",
+   "use": "Active navigation tab treatment.",
+   "notes": "Current section selection only.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 416,
+   "id": "UI_TAB_INACTIVE",
+   "family": "UI state",
+   "native": "stretchable tab",
+   "use": "Inactive navigation tab treatment.",
+   "notes": "Matches active dimensions exactly to avoid layout shift.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 417,
+   "id": "UI_SCROLL_MARKER",
+   "family": "UI icon",
+   "native": "16x16",
+   "use": "Pixel affordance indicating more scrollable content.",
+   "notes": "Decorative hint only; native scroll behavior remains Compose-owned.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 418,
+   "id": "UI_TOOLTIP_POINTER",
+   "family": "UI element",
+   "native": "16x16 / 9-slice",
+   "use": "Pointer/callout element for contextual explanations.",
+   "notes": "Text stays native; arrow direction variants reuse same style.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 419,
+   "id": "UI_MODAL_FRAME",
+   "family": "UI shell",
+   "native": "9-slice / pixel frame",
+   "use": "Confirmation/important-message modal frame.",
+   "notes": "Must remain readable over darkened background and preserve Android accessibility semantics.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 420,
+   "id": "UI_TOAST_FRAME",
+   "family": "UI shell",
+   "native": "stretchable pixel frame",
+   "use": "Short confirmation/error toast presentation.",
+   "notes": "Used for save/equip/travel result feedback after authoritative action response.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 421,
+   "id": "COMBAT_TARGET_MARKER",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Target-selection marker for future combat context.",
+   "notes": "Only shown for valid player-safe target candidates.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 422,
+   "id": "COMBAT_ACTIVE_TURN_MARKER",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Marks current active actor if turn-based presentation uses it.",
+   "notes": "Turn order comes from combat state, not animation.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 423,
+   "id": "COMBAT_GUARD_MARKER",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Visible guard/defensive state marker.",
+   "notes": "Shown only when guard state is exposed.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 424,
+   "id": "COMBAT_EVADE_MARKER",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Evade/miss feedback marker.",
+   "notes": "Appears after resolved outcome; does not predict result.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 425,
+   "id": "COMBAT_HIT_MARKER",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Confirmed hit feedback.",
+   "notes": "Outcome-driven; paired with material/impact FX if appropriate.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 426,
+   "id": "COMBAT_CRITICAL_MARKER",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Critical-success/hit feedback template.",
+   "notes": "Only after rules resolution; no pre-roll implication.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 427,
+   "id": "COMBAT_BLOCK_MARKER",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Block/mitigation feedback.",
+   "notes": "Generic; exact reduction remains text/rules data.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 428,
+   "id": "COMBAT_STAGGER_MARKER",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Visible stagger state.",
+   "notes": "Bound to explicit state if combat system exposes one.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 429,
+   "id": "COMBAT_DOWNED_MARKER",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Downed/incapacitated presentation.",
+   "notes": "Does not imply death unless rules state says so.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 430,
+   "id": "COMBAT_RECOVER_MARKER",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Recovery/return-to-action feedback.",
+   "notes": "Used after confirmed recovery transition.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 431,
+   "id": "COMBAT_RANGE_NEAR",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Near-range category marker.",
+   "notes": "Technical range band icon; actual distance comes from combat context.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 432,
+   "id": "COMBAT_RANGE_MID",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Mid-range category marker.",
+   "notes": "Shape distinct from near/far; not color-only.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 433,
+   "id": "COMBAT_RANGE_FAR",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Far-range category marker.",
+   "notes": "Used only if combat system models range.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 434,
+   "id": "COMBAT_COVER_LIGHT",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Light-cover marker.",
+   "notes": "Does not calculate cover value.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 435,
+   "id": "COMBAT_COVER_HEAVY",
+   "family": "Combat UI",
+   "native": "16x16",
+   "use": "Heavy-cover marker.",
+   "notes": "Distinct geometry from light cover.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 436,
+   "id": "INTERACT_SUCCESS_FLASH",
+   "family": "Interaction FX",
+   "native": "32x32, 4 frames",
+   "use": "Generic successful world/technical interaction feedback.",
+   "notes": "Runs after authoritative success, e.g. terminal/door/tool action.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 437,
+   "id": "INTERACT_FAILURE_FLASH",
+   "family": "Interaction FX",
+   "native": "32x32, 4 frames",
+   "use": "Generic failed interaction feedback.",
+   "notes": "Does not expose hidden reason; UI text may provide player-safe explanation.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 438,
+   "id": "CHECK_SUCCESS_MARKER",
+   "family": "Rules feedback",
+   "native": "16x16",
+   "use": "Visible check-success feedback where design surfaces resolution.",
+   "notes": "Generic degree marker; exact roll/math remains hidden unless intentionally exposed.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 439,
+   "id": "CHECK_FAILURE_MARKER",
+   "family": "Rules feedback",
+   "native": "16x16",
+   "use": "Visible check-failure feedback.",
+   "notes": "Used after resolution only.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 440,
+   "id": "CHECK_CRITICAL_MARKER",
+   "family": "Rules feedback",
+   "native": "16x16",
+   "use": "Visible critical result marker.",
+   "notes": "Reusable for authored four-degree resolution presentation.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 441,
+   "id": "FX_ABILITY_DISCOVERY_REVEAL",
+   "family": "Ability FX",
+   "native": "64x64, 6-8 frames",
+   "use": "Generic technique/ability discovery reveal.",
+   "notes": "Silhouette-to-visible progression; used only when ability becomes player-known.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 442,
+   "id": "FX_ABILITY_UNSTABLE_AURA",
+   "family": "Ability FX",
+   "native": "64x64 loop",
+   "use": "Generic unstable-technique state.",
+   "notes": "Irregular clustered edge; does not identify a specific power family.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 443,
+   "id": "FX_ABILITY_LEARNED_AURA",
+   "family": "Ability FX",
+   "native": "64x64 loop",
+   "use": "Generic learned/stabilized technique state.",
+   "notes": "Cleaner than unstable variant; subtle enough for narrative UI.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 444,
+   "id": "FX_ABILITY_MASTERED_AURA",
+   "family": "Ability FX",
+   "native": "64x64 loop",
+   "use": "Generic mastery-state visual vocabulary.",
+   "notes": "Sharper/tighter motion rather than simply brighter/bigger.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 445,
+   "id": "FX_RESOURCE_DRAIN_HEALTH",
+   "family": "Resource FX",
+   "native": "32x32, 4 frames",
+   "use": "Health loss feedback.",
+   "notes": "UI effect after resource update; no screen-filling red flash requirement.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 446,
+   "id": "FX_RESOURCE_DRAIN_STAMINA",
+   "family": "Resource FX",
+   "native": "32x32, 4 frames",
+   "use": "Stamina drain feedback.",
+   "notes": "Distinct shape/motion from health.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 447,
+   "id": "FX_RESOURCE_DRAIN_FOCUS",
+   "family": "Resource FX",
+   "native": "32x32, 4 frames",
+   "use": "Focus drain feedback.",
+   "notes": "Technical presentation; can accompany ability use.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 448,
+   "id": "FX_RESOURCE_DRAIN_RESOLVE",
+   "family": "Resource FX",
+   "native": "32x32, 4 frames",
+   "use": "Resolve drain feedback.",
+   "notes": "Distinct silhouette from focus.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 449,
+   "id": "FX_RESOURCE_RECOVER_HEALTH",
+   "family": "Resource FX",
+   "native": "32x32, 4 frames",
+   "use": "Health recovery feedback.",
+   "notes": "Runs after confirmed recovery.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 450,
+   "id": "FX_RESOURCE_RECOVER_STAMINA",
+   "family": "Resource FX",
+   "native": "32x32, 4 frames",
+   "use": "Stamina recovery feedback.",
+   "notes": "Subtle bar/icon animation companion.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 451,
+   "id": "FX_RESOURCE_RECOVER_FOCUS",
+   "family": "Resource FX",
+   "native": "32x32, 4 frames",
+   "use": "Focus recovery feedback.",
+   "notes": "No particle overload.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 452,
+   "id": "FX_RESOURCE_RECOVER_RESOLVE",
+   "family": "Resource FX",
+   "native": "32x32, 4 frames",
+   "use": "Resolve recovery feedback.",
+   "notes": "Uses stable rising/settling motif.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 453,
+   "id": "FX_CONDITION_APPLIED",
+   "family": "Status FX",
+   "native": "32x32, 4 frames",
+   "use": "Generic visible condition-applied cue.",
+   "notes": "Condition icon/content remains specific; this is transition feedback.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 454,
+   "id": "FX_CONDITION_CLEARED",
+   "family": "Status FX",
+   "native": "32x32, 4 frames",
+   "use": "Generic condition-cleared cue.",
+   "notes": "Used after authoritative removal.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 455,
+   "id": "FX_COOLDOWN_READY",
+   "family": "Ability UI FX",
+   "native": "32x32, 4 frames",
+   "use": "Cooldown-ready feedback for visible techniques.",
+   "notes": "Cooldown truth remains ability state.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 456,
+   "id": "FX_COOLDOWN_LOCKED",
+   "family": "Ability UI FX",
+   "native": "32x32 loop",
+   "use": "Unavailable/cooldown visual treatment.",
+   "notes": "Does not reveal hidden duration unless projected.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 457,
+   "id": "FX_TRACE_DISCOVERY",
+   "family": "Trace-specific FX",
+   "native": "64x64, 6-8 frames",
+   "use": "Trace Echo discovery presentation distinct from active Signal Pulse.",
+   "notes": "Builds on Batch 001 trace language; grounded in current ability content.",
+   "canon": "current/provisional canon + technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 458,
+   "id": "FX_TRACE_TOLERANCE_GAIN",
+   "family": "Trace-specific FX",
+   "native": "64x64, 6 frames",
+   "use": "Visible milestone feedback when Trace tolerance is earned.",
+   "notes": "Milestone-only; not every training tick.",
+   "canon": "current/provisional canon + technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 459,
+   "id": "FX_TRACE_DIRECTION_LOCK",
+   "family": "Trace-specific FX",
+   "native": "64x64, 6-8 frames",
+   "use": "Directional Trace stabilization/lock effect.",
+   "notes": "Communicates direction emerging from noise without showing hidden location text.",
+   "canon": "current/provisional canon + technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 460,
+   "id": "FX_TRACE_RECOVERY_SETTLE",
+   "family": "Trace-specific FX",
+   "native": "64x64, 6 frames",
+   "use": "Trace strain/recovery settling visual.",
+   "notes": "Paired with visible recovery state; calmer waveform rather than generic heal glow.",
+   "canon": "current/provisional canon + technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 461,
+   "id": "UI_QUEST_STARTED",
+   "family": "Quest feedback",
+   "native": "32x32, 4 frames",
+   "use": "Quest-start notification accent.",
+   "notes": "Runs only after quest enters active state.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 462,
+   "id": "UI_QUEST_OBJECTIVE_COMPLETE",
+   "family": "Quest feedback",
+   "native": "32x32, 4 frames",
+   "use": "Objective completion feedback.",
+   "notes": "No reward implication beyond state change.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 463,
+   "id": "UI_QUEST_OBJECTIVE_FAILED",
+   "family": "Quest feedback",
+   "native": "32x32, 4 frames",
+   "use": "Objective failure feedback.",
+   "notes": "Failure icon distinct from whole-quest failure.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 464,
+   "id": "UI_QUEST_COMPLETED",
+   "family": "Quest feedback",
+   "native": "32x32, 6 frames",
+   "use": "Quest-complete milestone.",
+   "notes": "Reserved stronger animation than ordinary objective completion.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 465,
+   "id": "UI_QUEST_FAILED",
+   "family": "Quest feedback",
+   "native": "32x32, 6 frames",
+   "use": "Quest-failure milestone.",
+   "notes": "Readable but not sensationalized; exact consequence in narrative/state.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 466,
+   "id": "UI_KNOWLEDGE_LEARNED",
+   "family": "Knowledge feedback",
+   "native": "32x32, 4 frames",
+   "use": "New player-known fact feedback if UX exposes it.",
+   "notes": "Must not reveal the knowledge payload before narrative/UI presents it.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 467,
+   "id": "UI_KNOWLEDGE_UPDATED",
+   "family": "Knowledge feedback",
+   "native": "32x32, 4 frames",
+   "use": "Confidence/source update cue.",
+   "notes": "Technical; only if knowledge UI later exists.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 468,
+   "id": "UI_RELATIONSHIP_SHIFT",
+   "family": "Social feedback",
+   "native": "32x32, 4 frames",
+   "use": "Generic visible relationship change cue.",
+   "notes": "Does not expose exact axis/value unless design intentionally shows it.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 469,
+   "id": "UI_TIME_ADVANCE",
+   "family": "World feedback",
+   "native": "32x32, 4 frames",
+   "use": "World-time progression cue after time-cost actions.",
+   "notes": "Clock/day text remains native UI.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 470,
+   "id": "UI_LOCATION_DISCOVERED",
+   "family": "World feedback",
+   "native": "32x32, 4 frames",
+   "use": "Location discovery notification.",
+   "notes": "Only after discovery state becomes player-visible.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 471,
+   "id": "UI_LOCATION_ARRIVED",
+   "family": "World feedback",
+   "native": "32x32, 4 frames",
+   "use": "Arrival confirmation after successful travel.",
+   "notes": "Destination title remains native UI text.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 472,
+   "id": "UI_WORLD_FLAG_VISIBLE_CHANGE",
+   "family": "World feedback",
+   "native": "32x32, 4 frames",
+   "use": "Generic world-change notification where authored UX exposes a consequence.",
+   "notes": "Never binds directly to hidden/raw flags.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 473,
+   "id": "TRANSITION_SCENE_CUT",
+   "family": "Scene transition",
+   "native": "128x64, 4 frames",
+   "use": "Short hard-cut/pixel shutter between narrative scenes.",
+   "notes": "Used when continuity needs clear scene change without implying travel.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 474,
+   "id": "TRANSITION_FADE_PIXEL",
+   "family": "Scene transition",
+   "native": "128x64, 6 frames",
+   "use": "Pixel-cluster fade transition.",
+   "notes": "No smooth alpha gradient dependence; compatible with location/scene changes.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 475,
+   "id": "TRANSITION_FLASHBACK",
+   "family": "Scene transition",
+   "native": "128x64, 6-8 frames",
+   "use": "Reserved visual language for future authored memory/flashback scenes.",
+   "notes": "Technical template only; no flashback content invented.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 476,
+   "id": "TRANSITION_DISCOVERY",
+   "family": "Scene transition",
+   "native": "128x64, 6-8 frames",
+   "use": "Location/knowledge discovery reveal.",
+   "notes": "Stronger than normal scene cut but less than major ability evolution.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 477,
+   "id": "TRANSITION_QUEST_MILESTONE",
+   "family": "Scene transition",
+   "native": "128x64, 6-8 frames",
+   "use": "Major quest-stage milestone presentation.",
+   "notes": "Does not replace narrative text.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 478,
+   "id": "TRANSITION_ABILITY_EVOLUTION",
+   "family": "Scene transition",
+   "native": "128x64, 8-12 frames",
+   "use": "Major ability evolution sequence framework.",
+   "notes": "Only used for actual authored evolution, not routine mastery gain.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 479,
+   "id": "TRANSITION_SAVE_COMPLETE",
+   "family": "System transition",
+   "native": "64x32, 4 frames",
+   "use": "Small save-complete visual confirmation.",
+   "notes": "Shown only after persistence succeeds.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 480,
+   "id": "TRANSITION_LOAD_COMPLETE",
+   "family": "System transition",
+   "native": "64x32, 4 frames",
+   "use": "Small load/continue confirmation.",
+   "notes": "Runs after loaded state is actually restored.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 481,
+   "id": "ACCESS_HIGH_CONTRAST_UI_FRAME",
+   "family": "Accessibility",
+   "native": "9-slice",
+   "use": "High-contrast alternate panel border set.",
+   "notes": "Preserves semantic hierarchy using shape/value, not only hue.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 482,
+   "id": "ACCESS_HIGH_CONTRAST_ICON_MASKS",
+   "family": "Accessibility",
+   "native": "16x16/24x24 set",
+   "use": "High-contrast versions/masks for core UI icons.",
+   "notes": "Derived from canonical silhouettes, not separately reinterpreted icons.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 483,
+   "id": "ACCESS_COLORBLIND_QUEST_SHAPES",
+   "family": "Accessibility",
+   "native": "16x16 set",
+   "use": "Shape-coded quest-category markers.",
+   "notes": "Supplements color so main/side/optional/lore remain distinguishable.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 484,
+   "id": "ACCESS_COLORBLIND_RESOURCE_SHAPES",
+   "family": "Accessibility",
+   "native": "16x16 set",
+   "use": "Shape-coded health/stamina/focus/resolve markers.",
+   "notes": "Works even if accent colors are indistinguishable.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 485,
+   "id": "ACCESS_TEXT_BACKPLATE",
+   "family": "Accessibility UI",
+   "native": "stretchable panel",
+   "use": "Optional stronger text contrast backplate behind narrative captions/labels.",
+   "notes": "Does not reduce text size or touch targets.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 486,
+   "id": "ACCESS_FOCUS_OUTLINE",
+   "family": "Accessibility UI",
+   "native": "stretchable outline",
+   "use": "Keyboard/controller/accessibility-focus indicator.",
+   "notes": "Separate from selection/active state so semantics remain clear.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 487,
+   "id": "ACCESS_LARGE_ICON_VARIANTS",
+   "family": "Accessibility",
+   "native": "32x32 set",
+   "use": "Larger semantic icons for high-scale UI mode.",
+   "notes": "Not simple blurred scaling; reconstructed on larger grid if needed.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 488,
+   "id": "ACCESS_REDUCED_MOTION_STATIC_TRACE",
+   "family": "Accessibility FX",
+   "native": "64x64 static",
+   "use": "Reduced-motion substitute for looping Trace FX.",
+   "notes": "Preserves state meaning without animation.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 489,
+   "id": "ACCESS_REDUCED_MOTION_STATIC_TRANSITION",
+   "family": "Accessibility transition",
+   "native": "128x64 static/2-frame",
+   "use": "Reduced-motion alternative to longer travel/scene transitions.",
+   "notes": "Uses instant state change plus brief static confirmation.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 490,
+   "id": "ACCESS_AUDIO_NARRATION_ICON",
+   "family": "Accessibility/UI",
+   "native": "24x24",
+   "use": "Read-aloud/narration control icon.",
+   "notes": "Pairs with native TTS; state indicates play/replay/stop through variants.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 491,
+   "id": "DEV_GRID_8PX",
+   "family": "Developer asset",
+   "native": "overlay",
+   "use": "8px visual grid for icon/sprite QA.",
+   "notes": "Never player-facing; checks integer alignment.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 492,
+   "id": "DEV_GRID_16PX",
+   "family": "Developer asset",
+   "native": "overlay",
+   "use": "16px tile grid for scene/map construction.",
+   "notes": "Developer-only.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 493,
+   "id": "DEV_SAFE_CROP_SCENE",
+   "family": "Developer asset",
+   "native": "128x64 overlay",
+   "use": "Safe narrative scene crop/landmark guide.",
+   "notes": "Used while authoring location art; excluded from production packaging.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 494,
+   "id": "DEV_PAPERDOLL_ZORDER_LEGEND",
+   "family": "Developer asset",
+   "native": "32x48 overlay",
+   "use": "Visual legend for 19-layer character z-order.",
+   "notes": "Supports debugging layer mistakes.",
+   "canon": "technical",
+   "view_set": "SIX_VIEW_DEFERRED"
+  },
+  {
+   "n": 495,
+   "id": "DEV_PALETTE_SWATCH_MASTER",
+   "family": "Developer asset",
+   "native": "swatch sheet",
+   "use": "Project palette + material-ramp inspection board.",
+   "notes": "Tracks PixelColors and approved world ramps; not shipped in player UI.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 496,
+   "id": "DEV_ALPHA_HALO_TEST",
+   "family": "Developer asset",
+   "native": "checkerboard test",
+   "use": "Tests sprite transparency/edge contamination.",
+   "notes": "QA utility for exported PNGs.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 497,
+   "id": "DEV_ANIMATION_ONION_SKIN_GUIDE",
+   "family": "Developer asset",
+   "native": "32x48 overlay",
+   "use": "Frame alignment/onion-skin reference for character animation.",
+   "notes": "Stores pivot/joint landmarks.",
+   "canon": "technical",
+   "view_set": "PRESENTATION_STATES"
+  },
+  {
+   "n": 498,
+   "id": "DEV_MAP_NODE_HITBOX_OVERLAY",
+   "family": "Developer asset",
+   "native": "256x144 overlay",
+   "use": "Visualizes map node touch targets versus icon centers.",
+   "notes": "Ensures mobile hit target exceeds tiny pixel marker.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 499,
+   "id": "DEV_ASSET_MISSING_PLACEHOLDER",
+   "family": "Developer/runtime fallback",
+   "native": "32x32",
+   "use": "Obvious missing-asset fallback used only in debug/development builds.",
+   "notes": "Prevents silent blank visuals; release build should log/handle missing manifest entry.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  },
+  {
+   "n": 500,
+   "id": "DEV_REFERENCE_NOT_FOR_SHIPPING_WATERMARK",
+   "family": "Reference utility",
+   "native": "reference-size overlay",
+   "use": "Reference-board watermark that marks generated concepts as non-production.",
+   "notes": "Applied only to concept/reference storage, never to reconstructed production assets.",
+   "canon": "technical",
+   "view_set": "TILE_AXES"
+  }
+ ]
+}
