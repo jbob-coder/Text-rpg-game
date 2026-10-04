@@ -38,3 +38,10 @@ These remain documentation contracts. Their existence does not claim runtime imp
 
 ## Activity / life loop
 - `PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md` — player time-use, training, study, work, recovery, social, diagnostics, scheduled/background activity, interruption/concurrency and safe UI projection.
+
+
+## Evolved target-game design — 2026-10-03
+
+- [Progression, Classes & Ranks: Evolved Game Design](PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md) — reconstruction-grade target design that uses the current game as reference evidence and defines the larger progression/class/profession/rank/training system to create before implementation.
+
+Working rule: current runtime facts and evolved target design stay explicitly separated. Migration/API work is downstream of target-game design.
