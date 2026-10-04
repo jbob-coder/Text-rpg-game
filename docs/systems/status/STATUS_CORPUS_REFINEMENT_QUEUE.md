@@ -39,7 +39,7 @@ Rare blockers:
 - Spatial Anchor reference-frame/contest rules;
 - Lightning throughput numbers;
 - Cryo Sink reserve accounting;
-- Momentum Bank reserve accounting;
+- Momentum Bank numeric capacity/rate/efficiency/decay calibration; capture/release model now documented in `MOMENTUM_BANK_CAPTURE_RESERVE_RELEASE_STANDARD.md`;
 - Memory Echo exact decay/fidelity/legal calibration; structural evidence/contamination model now documented in `MEMORY_ECHO_IMPRESSION_EVIDENCE_STANDARD.md`;
 - Crystal Resonance world-canon dependency;
 - named institutions/history;
@@ -128,7 +128,7 @@ Still open:
 - regeneration identity/material limits;
 - neural ethics/physiology;
 - Mass Inversion tag/end-state physics;
-- Energy Devour energy whitelist/reserve/output rules.
+- Energy Devour owner approval + numeric whitelist efficiency/rates/output-technique decisions; source/output architecture now documented in `ENERGY_DEVOUR_SOURCE_WHITELIST_OUTPUT_STANDARD.md`.
 
 Epic 001–004 deep-authoring completed at the detailed-document layer:
 - 4 deep ability records;
@@ -328,6 +328,16 @@ Recent progress:
 Dry-review outcomes:
 - Second Wind: conceptually mature enough for possible future approval with numeric fields open, but owner approval is still required;
 - Lightning Conduit: return for refinement remains, but `LIGHTNING_CONDUIT_THROUGHPUT_PATH_SAFETY_STANDARD.md` now resolves the non-numeric source/path/branching/grounding/insulation/safety structure; numeric/world policy blockers remain.
+
+Additional ability child-rule progress:
+- `MEMORY_ECHO_IMPRESSION_EVIDENCE_STANDARD.md`;
+- `MOMENTUM_BANK_CAPTURE_RESERVE_RELEASE_STANDARD.md`;
+- `ENERGY_DEVOUR_SOURCE_WHITELIST_OUTPUT_STANDARD.md`;
+- `CANON_REVIEW_DRY_RUN_ABILITY_RAR_007.md`.
+
+Memory Echo dry review:
+- proposed outcome: APPROVE_WITH_OPEN_NUMERIC_FIELDS, owner decision required;
+- no canon promotion occurred.
 
 Do not create another shallow passive wave.
 
