@@ -362,7 +362,7 @@ D-026/D-021 current-source consumer discovery is now complete at field/action, n
 | **V04 — World development** | **ESTABLISHED STANDARDS / PARTIAL POPULATION** | World is not populated at final scale | `WORLD_DEVELOPMENT_MASTER_INDEX.md`, geography/politics/settlement/routes/ecology/beast/population/balance/loot/NPC standards | Canon macroregions, sovereign entities, settlements, routes, ecosystems, populations, institutions, and large-scale structured records. |
 | **V05 — Characters / NPC / social / rivals** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 12 OF 12 MINIMUM UNITS** | Current social primitives and Tamsin branch exist; normalized identity/schedule/memory runtime remains partial | NPC/social master plus identity, personality, memory, knowledge/privacy, relationship, goal, schedule/presence, faction, rumor, recurring-character, and Tamsin proof contracts | Runtime migration for normalized presence/memory/profile fields; broader character/faction catalogs; final social projection/UI; world-scale population. Persistent-adversary depth remains V09 work. |
 | **V06 — Progression / stats / skills / abilities / passives / classes / ranks** | **LARGE ACTIVE CORPUS / IN_PROGRESS** | Target design substantially exceeds current runtime | `PROGRESSION_MASTER_PLAN.md`, `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`, `EVOLVED_SKILL_REGISTRY.md`, `STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`, `docs/systems/status/**` | Status Phase A is complete; Wave 001 has 1,019 structurally audited records; primary-ability detail coverage is 47/47 and passive family baseline coverage is 23/23. Still missing: combat-class catalog; profession/rank/status packet; training/mentor/facility standard; progression Gate Twelve proof packet; progression UX contract; numeric/range fixtures; world/canon promotion; target-schema/API migration. |
-| **V07 — Items / economy / loot** | **MASTER CONTRACT ESTABLISHED / CONTENT PARTIAL** | Existing equipment/items are not the final target economy | `ITEM_ECONOMY_LOOT_MASTER_PLAN.md`, world loot provenance standard, asset/item provenance docs | Full item taxonomy/catalog, economy source/sink model, vendor/services rules where approved, resource-to-item chains, loot tables, migration to existing IDs/save consumers. |
+| **V07 — Items / economy / loot** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | Current flat inventory/equipment exists; full economy is not implemented | Item/economy master plus item catalog, inventory, equipment, quality/rarity/condition, provenance, loot, pricing, vendor/ownership and Phase 1 proof contracts | Large item/material/resource catalogs, final currency/prices, vendor population, loot tables, later migration/verification and final economy UI. |
 | **V08 — Tactical combat** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | Final tactical runtime not implemented | Tactical master, camera/presentation standard, coordinate/occupancy, turn/action budget, movement, LOS/knowledge, cover/terrain, action resolution, injury/aftermath, AI/objective standards | Proposed Gate Twelve encounter packet now exists; remaining work is content/canon approval, combat schema/API migration, Android tactical projection/UI, final balance, low-end performance evidence and exact-head tests. |
 | **V09 — Persistent adversaries / world memory** | **PARTIAL** | Concepts exist; target system is not reconstruction-complete | `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, social engine evidence, world integration standards | Dedicated adversary/rival records, hierarchy changes, memory consequences, promotion/demotion rules, world event integration, save/state migration contract. |
 | **V10 — Activities / life simulation** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 8 OF 8 MINIMUM UNITS** | Current time/train/recover/power-practice primitives and Trace Chamber actions exist; advanced scheduling/background life-sim is not implemented | Activity master plus record/state, time/atomicity, training, recovery/treatment, work/study/research, interruption/concurrency and Trace Chamber proof contracts | Final activity registry/migration, professions/economy integration, scheduled/background runtime, calendar/offline decision, final UI and exact-head Phase 1 verification. |
@@ -808,3 +808,27 @@ The documentation preserves existing engine behavior rather than replacing it:
 Phase 1 requirement #8 now has a concrete current proof candidate, TRAIN_POWER_FUNDAMENTALS_TWO_HOURS. Runtime verification on the final Phase 1 integration head remains separate.
 
 Next breadth direction: V07 Items/Economy/Loot.
+
+
+## 14. 2026-10-04 V07 item/economy first-pass closure
+
+V07 reaches 10 / 10 minimum canonical units.
+
+Current runtime-compatible decisions were preserved:
+- GameState.inventory remains the Phase 1 possession authority;
+- current equipment slots remain unchanged;
+- equip requirements continue to use permanent/base values;
+- current item IDs and current Gate Twelve loadout remain authoritative;
+- quality is not treated as proof of a universal rarity ladder.
+
+The documentation separates:
+- item definition from inventory/equipment state;
+- quality from rarity/scarcity, condition and uniqueness;
+- in-world item provenance from visual-asset provenance;
+- vendors/services from generic UI menus.
+
+Phase 1 requirement #6 uses existing inventory/equipment/story-item behavior; broader economy features are not prerequisites.
+
+Next breadth domain: V09 Persistent Adversaries / World Memory.
+
+D-032 has also advanced: the combat schema/API migration child now exists, but the overall mechanics-migration task remains in progress for the other domains.
