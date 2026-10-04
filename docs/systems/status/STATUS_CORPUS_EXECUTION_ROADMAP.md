@@ -266,7 +266,7 @@ Record-level read-dependency mapping and the 93-edge overlap adjudication are al
 
 ### Next order
 
-1. **Materialize parent-system range/test-fixture batches for sufficiently mature base terms.**
+1. **Continue parent-system fixture batches; move to numeric ranges only where parent scales are justified.**
 2. **Use confirmed Gate Twelve evidence to adjudicate supported local knowledge/world links.**
 3. **Progress named world-entity links only after parent-world canon decisions.**
 4. Run additional canon-review dry packets.
@@ -324,6 +324,16 @@ Result:
 - 20 / 20 canonical passive resolver families have required parent-fixture contracts;
 - numeric readiness states are explicit;
 - passive coefficients remain blocked until parent ranges/test fixtures exist.
+
+### First parent-system fixture batch
+
+Materialized:
+- `STATUS_CORE_RESOURCE_PARENT_FIXTURE_BATCH_001_STAMINA_FOCUS.md`.
+
+Result:
+- Stamina recovery and prolonged Focus drain now have concrete qualitative parent fixtures;
+- transaction deduplication, caps/floors, eligibility, save/load, and cross-resource isolation are specified;
+- final ranges and passive coefficients remain open.
 
 ### Gate Twelve evidence-backed world integration
 
