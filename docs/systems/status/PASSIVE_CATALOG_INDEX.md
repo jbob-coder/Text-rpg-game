@@ -211,6 +211,17 @@ World integration:
 
 No compact registry row was silently rewritten and no passive was canon-promoted.
 
+## Base-term and unit preparation
+
+Evidence:
+- `STATUS_BASE_RESOLUTION_TERM_UNIT_TAXONOMY.md`
+- `PASSIVE_CANONICAL_RESOLVER_BASE_TERM_MAP_WAVE_001.md`
+
+Result:
+- abstract measurable unit classes are now documented;
+- all 20 canonical shared resolvers identify their required base term/unit class;
+- no final coefficient or runtime scale is implied.
+
 ## Shared resolver cap semantics
 
 Evidence:
