@@ -174,6 +174,33 @@ Open blockers:
 
 Next ability slice: **Legendary 001–002**.
 
+## Legendary deep-authoring
+
+- `calibration/PRIMARY_ABILITY_DETAIL_LEGENDARY_001_002.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_LEGENDARY_001_002.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_LEGENDARY_001_002.md`
+- `calibration/ABILITY_COUNTER_DETAIL_LEGENDARY_001_002.md`
+- `LEGENDARY_ABILITY_RARITY_OVERLAP_AUDIT_001_002.md`
+
+Legendary 001–002 now have:
+- 2 reconstruction-oriented ability records;
+- 8 individualized compact technique rows;
+- 8 detailed technique records;
+- 2 individualized awakening profiles;
+- 2 individualized counter profiles;
+- explicit lower-tier↔Legendary boundary treatment.
+
+Key boundaries:
+- Causal Mark ↔ Event Reversal: one recorded property versus bounded recent zone-state restoration.
+- Fold Step / Spatial Dominion ↔ World Gate: local path manipulation versus prepared civilization-scale anchor connection.
+
+Open blockers:
+- snapshot/living-state/anchor semantics;
+- gate anchor/reference/transit/energy semantics;
+- numeric calibration and world integration.
+
+Next ability slice: **Prime Legendary 001**.
+
 ## Integration
 
 - `ABILITY_PASSIVE_CROSS_REFERENCE.md`
