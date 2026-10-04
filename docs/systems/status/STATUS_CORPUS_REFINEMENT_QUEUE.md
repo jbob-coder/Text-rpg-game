@@ -67,8 +67,7 @@ Open:
 
 ## P1 — next ability slices
 
-1. **Prime Legendary 001 — NEXT**
-2. Unique 001.
+1. **Unique 001 — NEXT**
 
 Each slice must pass:
 - law overlap review;
@@ -160,30 +159,72 @@ Legendary blockers:
 - World Gate anchor/reference/transit/energy/world-infrastructure semantics;
 - numeric and institutional integration.
 
+Prime Legendary 001 completed:
+- deep ability record;
+- 4 detailed techniques;
+- 4 individualized compact technique rows;
+- detailed + individualized awakening;
+- detailed + individualized counterplay;
+- rarity/overlap audit.
+
+Evidence:
+- `calibration/PRIMARY_ABILITY_DETAIL_PRIME_LEGENDARY_001.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_PRIME_LEGENDARY_001.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_PRIME_LEGENDARY_001.md`
+- `calibration/ABILITY_COUNTER_DETAIL_PRIME_LEGENDARY_001.md`
+- `PRIME_LEGENDARY_ABILITY_RARITY_OVERLAP_AUDIT_001.md`
+
+Prime Legendary blockers:
+- typed interaction-law schema;
+- protected/unsuppressible rule policy;
+- knowledge-validation model;
+- linked-rule/rebound semantics;
+- system-strain/recovery model;
+- historical/institutional integration.
+
 ## P1 — next passive families
 
-1. **Movement 0001–0010 — NEXT**
-2. sensory;
-3. sensory;
-4. mental/will;
-5. cognitive/learning;
-6. combat habit;
-7. weapon familiarity;
-8. defensive adaptation;
-9. survival/environmental;
-10. social/behavioral;
-11. leadership/coordination;
-12. technical/craft;
-13. medical/recovery practice;
-14. ability synergy;
-15. resistance;
-16. creature/beast interaction;
-17. injury/scar adaptation;
-18. profession;
-19. faction/institutional;
-20. unique event;
-21. cosmic/system;
-22. unknown/classified.
+1. **Sensory 0001–0010 — NEXT**
+2. mental/will;
+3. cognitive/learning;
+4. combat habit;
+5. weapon familiarity;
+6. defensive adaptation;
+7. survival/environmental;
+8. social/behavioral;
+9. leadership/coordination;
+10. technical/craft;
+11. medical/recovery practice;
+12. ability synergy;
+13. resistance;
+14. creature/beast interaction;
+15. injury/scar adaptation;
+16. profession;
+17. faction/institutional;
+18. unique event;
+19. cosmic/system;
+20. unknown/classified.
+
+## Movement passive 0001–0010
+
+Completed:
+- deep-authoring packet;
+- scaling/cap/state-ownership model;
+- knowledge posture audit;
+- movement-family overlap watchlist;
+- anti-farm and anti-unsafe-training rules.
+
+Evidence:
+- `calibration/PASSIVE_DETAIL_MOVEMENT_0001_0010.md`
+- `PASSIVE_MOVEMENT_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_MOVEMENT_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Open:
+- numeric coefficients;
+- final compact knowledge-row decisions;
+- concrete runtime state-owner mapping;
+- named schools/professions/institutions/history;
+- canon promotion.
 
 ## Recovery passive 0001–0010
 
