@@ -245,6 +245,20 @@ Must define:
 - resources;
 - balance.
 
+### Progression evolved target design
+
+`docs/systems/PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`
+
+Owns:
+- CURRENT REALITY versus EVOLVED GAME DESIGN separation for progression;
+- preservation of the current seven-attribute / 23-skill / mastery foundation as reference-game identity;
+- target progression network across skills, abilities, techniques, classes, specializations, professions, ranks, knowledge and world access;
+- training, mentors, facilities, injury/recovery, equipment, world, NPC and tactical-combat integration;
+- Gate Twelve progression proof requirements;
+- child-document and content-creation requirements.
+
+Supplements rather than replaces `PROGRESSION_MASTER_PLAN.md`. It is target-game design, not evidence that target features already exist.
+
 ### Combat master
 Planned:
 `docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md`
