@@ -1,6 +1,6 @@
 # THE GAME — NPC, Social Hierarchy & Persistent Adversary Master Plan
 
-Status: **V05 FIRST-PASS CONTRACT LAYER ESTABLISHED / IMPLEMENTATION PARTIAL / V09 ADVERSARY DETAIL STILL PARTIAL**
+Status: **V05 FIRST-PASS CONTRACT LAYER ESTABLISHED / IMPLEMENTATION PARTIAL / V09 SPECIALIZED CHILD LAYER ESTABLISHED**
 Parents:
 - `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`
 - `docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md`
@@ -482,3 +482,18 @@ This closes the V05 breadth floor only. It does not complete:
 - runtime migration of normalized identity/schedule/memory fields.
 
 Phase 1 social proof should use NPC_TAMSIN rather than inventing a new recurring character.
+
+
+## 24. V09 specialized authority — 2026-10-04
+
+Persistent-adversary/world-memory detail now continues under:
+- `docs/systems/PERSISTENT_ADVERSARY_WORLD_MEMORY_MASTER_PLAN.md`;
+- its seven V09 first-pass child standards/packets;
+- `docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md` for D-032 implementation mapping.
+
+Authority split:
+- this document remains the parent authority for shared NPC identity, memory, knowledge, goals, relationships, social hierarchy and faction concepts;
+- the specialized V09 master owns persistent-adversary eligibility, lifecycle, recurrence, bounded adaptation, adversary routing/intel and their integration;
+- the migration packet owns the mapping to current GameState/social/save/Android boundaries;
+- none of these documents claims runtime implementation;
+- the V09 child master does not supersede V05 social ownership or create a second NPC identity system.
