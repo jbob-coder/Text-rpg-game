@@ -835,3 +835,17 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - `docs/world/REGION_SETTLEMENT_DOCUMENTATION_TEMPLATE.md`
   - `docs/world/GATE_TWELVE_EXTERNAL_CONNECTIONS_AND_EXPANSION_REGISTER.md`
 - REMAINS: inspect remaining live target Class C / `EXTRACT UNIQUE` documents for genuinely absent requirements; keep unit-dependent corpus machinery blocked; then re-resolve both branch refs and reassess PR mergeability/target-branch handling.
+
+
+## 2026-10-03 evolved-game design continuation
+
+### TASK D-045 — Create evolved game through reconstruction-grade domain documentation
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- OWNER INTENT: use the current Text-rpg-game as the reference game, preserve its identity, and deliberately design a larger/upgraded version through documentation before broad implementation.
+- FIRST DOMAIN: progression / classes / ranks.
+- CURRENT OUTPUT: `docs/systems/PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`.
+- CURRENT RESULT: current progression/runtime facts are separated from target design; class/profession/rank/training/world-integration direction and creation requirements are documented.
+- ART RULE: final character presentation uses authored pixel-art sprites/portraits generated through the project workflow; no geometry-built final character art.
+- NEXT: create the 23-skill evolved registry, then class catalog, profession/rank/status packet, training/mentor/facility standard, Gate Twelve proof packet and progression UX contract.
+- IMPLEMENTATION: deferred until design contracts are sufficiently coherent.
