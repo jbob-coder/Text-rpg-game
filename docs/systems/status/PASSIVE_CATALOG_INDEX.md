@@ -211,6 +211,24 @@ World integration:
 
 No compact registry row was silently rewritten and no passive was canon-promoted.
 
+## Read-dependency and overlap normalization
+
+Evidence:
+- `PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_INDEX.md`
+- `PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_A.md`
+- `PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_B.md`
+- `PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_C.md`
+- `PASSIVE_OVERLAP_EDGE_ADJUDICATION_WAVE_001.md`
+
+Result:
+- 230 / 230 passive records have conceptual read-dependency baselines;
+- 93 candidate overlap edges reviewed;
+- 38 require one capped shared-term resolver;
+- 30 compose in ordered stages;
+- 25 remain adjacent but use distinct terms.
+
+No runtime mapping or canon promotion is implied.
+
 ## Audit
 
 - `STATUS_CORPUS_WAVE_001_AUDIT.md`
