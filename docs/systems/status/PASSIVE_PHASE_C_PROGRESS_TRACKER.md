@@ -47,8 +47,18 @@ Evidence:
 - `PASSIVE_COGNITIVE_SCALING_STATE_MODEL_0001_0010.md`
 - `PASSIVE_COGNITIVE_KNOWLEDGE_REFINEMENT_0001_0010.md`
 
+### Combat Habit 0001–0010
+- effect map covering all 10 IDs;
+- scaling/state model covering all 10 IDs;
+- knowledge refinement covering all 10 IDs.
+
+Evidence:
+- `PASSIVE_CBT_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_CBT_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_CBT_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
 ## Next family
-**Combat Habit 0001–0010**.
+**Weapon Familiarity 0001–0010**.
 
 Then:
 - weapon familiarity;
