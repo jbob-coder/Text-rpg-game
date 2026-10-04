@@ -184,6 +184,22 @@ Result:
 - current Dead Relay Stamina 70 / Focus 60 are explicitly preserved as content-instance regression evidence, not universal scales;
 - final resource ranges and passive coefficients remain blocked.
 
+## Qualitative parent-fixture baseline complete
+
+Materialized:
+- `STATUS_PARENT_FIXTURE_BATCH_002_PROCEDURE_ACTION_PRECISION.md`;
+- `STATUS_PARENT_FIXTURE_BATCH_003_KNOWLEDGE_EVIDENCE_INTERPRETATION.md`;
+- `STATUS_PARENT_FIXTURE_BATCH_004_SPATIAL_TRAVEL_CONTEST.md`;
+- `STATUS_PARENT_FIXTURE_BATCH_005_FATIGUE_ENVIRONMENT_RECOVERY_INSTITUTION.md`;
+- `PASSIVE_CANONICAL_RESOLVER_FIXTURE_READINESS_INDEX_WAVE_001.md`.
+
+Result:
+- all **20 / 20 canonical shared passive resolvers** now have explicit qualitative parent fixture sets;
+- each resolver is at least `QUALITATIVE_FIXTURES_READY`;
+- **0 / 20** are yet certified `RANGE_FIXTURES_READY`;
+- **0 / 20** are yet certified `EXECUTABLE_FIXTURES_READY`;
+- passive coefficients remain blocked until parent-system scales/ranges are justified.
+
 ## Local world-evidence integration
 
 Materialized:
@@ -222,7 +238,7 @@ No named institution was invented and no record was canon-promoted.
 
 ## Next work
 
-1. continue parent-system fixture batches, then define actual range fixtures only where parent scales are justified; Stamina recovery and prolonged Focus drain now have qualitative fixture batches;
+1. begin parent-system **range-fixture** work only where scales are justified; the qualitative fixture baseline is complete for 20 / 20 canonical resolvers;
 2. continue evidence-backed Gate Twelve knowledge/world adjudication only where confirmed local context supports it;
 3. progress selected records toward actual world entities only after owner/world canon decisions;
 4. run additional canon dry-review packets;
