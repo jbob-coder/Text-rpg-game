@@ -55,6 +55,25 @@ Do not generate 100 unrelated assets in one image. For example:
 
 A batch may contain multiple candidates for the same brief, but they remain alternatives until one is selected.
 
+## Stage 2A — Extraction-oriented generation
+
+When the goal is to produce game assets rather than only study a composition, generate the source image or sheet so that later extraction is intentional.
+
+Requirements:
+
+- isolate each requested subject or view;
+- avoid overlapping unrelated objects;
+- use clean or transparent/simple backgrounds where possible;
+- preserve consistent subject scale within a family;
+- reserve visible spacing between sprites/props/views;
+- keep lighting/material decisions consistent with the target area packet;
+- avoid baked UI labels and unnecessary text;
+- keep asymmetric identity details visible;
+- generate families according to known target grids and layer needs;
+- identify which parts are expected to become separate runtime assets.
+
+The assistant owns the follow-through: generated source material is inspected, useful components are selected, extracted/decomposed, reconstructed or cleaned on the native pixel grid, named, versioned, bound and QA-checked before integration.
+
 ## Stage 3 — Reference review
 
 Score the reference against the written brief.
