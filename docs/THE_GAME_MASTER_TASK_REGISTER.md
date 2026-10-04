@@ -875,8 +875,10 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETED_AT: `2026-10-02 AST`.
 
 ### TASK D-029 — Exactize asset provenance and production stage
-- STATUS: `IN_PROGRESS / CURRENT 24-RASTER CONSUMER AUDIT COMPLETE`
+- STATUS: `IN_PROGRESS / CURRENT 24-RASTER CONSUMER AUDIT COMPLETE / DOCUMENTATION ONLY`
 - PRIORITY: `P0`
+- CURRENT-PHASE SCOPE: documentation/audit only. D-029 may inspect, inventory, classify, trace provenance/consumers, define future asset requirements, write creation specifications, record QA criteria, and document future migration/production order. It does **not** authorize creating, modifying, regenerating, exporting, integrating, promoting, replacing, or deleting runtime assets.
+- PRODUCTION GATE: any asset production or runtime integration requires a separate explicit owner instruction after the documentation phase; completion of a brief, provenance record, production packet, or migration map is not authorization by itself.
 - OUTPUT: source master -> raster/export -> branch/head -> runtime consumer -> reuse signature -> QA -> canonical state for every current asset family.
 - CURRENT FAMILY SLICE:
   - `docs/assets/ASSET_FAMILY_PROVENANCE_INDEX_2026-10-03.md`
