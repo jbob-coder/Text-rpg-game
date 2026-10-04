@@ -82,6 +82,27 @@ Open Rare blockers:
 - crystal-world canon;
 - institutions/history.
 
+### Super Rare ability slice 001–006
+
+Materialized:
+- `calibration/PRIMARY_ABILITY_DETAIL_SUPER_RARE_001_006.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_SUPER_RARE_001_006.md`
+
+Completed linked refinement:
+- 24 individualized technique rows;
+- 6 individualized awakening profiles;
+- 6 individualized counter profiles.
+
+Rare↔Super Rare boundaries are explicitly documented.
+
+Open blockers:
+- temporal process model;
+- Fold Step transit/reference physics;
+- regeneration biomass/identity limits;
+- neural ethics/physiology;
+- Mass Inversion tag/end-state physics;
+- Energy Devour whitelist/reserve/output rules.
+
 ### Passive progress
 
 Physical 0001–0010:
@@ -96,10 +117,10 @@ Open:
 
 ### Next order
 
-1. **Deep-author Super Rare abilities 001–006.**
+1. **Deep-author Epic abilities 001–004.**
 2. **Deep-author Recovery passives 0001–0010.**
-3. Resolve Rare↔Super Rare boundaries.
-4. Continue Epic+ ability tiers and remaining passive families.
+3. Continue Super Epic → Legendary → Prime Legendary → Unique.
+4. Continue remaining passive families.
 5. Perform world integration after enough accepted records exist.
 6. Defer runtime implementation until design coherence.
 
