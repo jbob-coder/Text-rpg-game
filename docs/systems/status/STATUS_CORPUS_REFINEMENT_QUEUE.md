@@ -261,10 +261,19 @@ Evidence:
 Next passive work:
 1. record-level owner/write-target normalization;
 2. individual knowledge-row reconciliation;
-3. role-class world integration;
+3. broaden role-class world integration;
 4. broader numeric parameterization;
-5. canon dry-review packets;
+5. additional canon dry-review packets;
 6. implementation mapping after design coherence.
+
+Recent progress:
+- Role-class world integration pilot: `STATUS_WORLD_INTEGRATION_ROLE_CLASS_PILOT_001.md`;
+- canon dry review: `CANON_REVIEW_DRY_RUN_PASSIVE_REC_0001.md`;
+- canon dry review: `CANON_REVIEW_DRY_RUN_ABILITY_RAR_003.md`.
+
+Dry-review outcomes:
+- Second Wind: conceptually mature enough for possible future approval with numeric fields open, but owner approval is still required;
+- Lightning Conduit: return for refinement due to throughput/branching/safety/world-infrastructure blockers.
 
 Do not create another shallow passive wave.
 
