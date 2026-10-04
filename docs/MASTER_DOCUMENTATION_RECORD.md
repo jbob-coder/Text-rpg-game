@@ -31,19 +31,19 @@ This is a living control document. It must be updated whenever a major documenta
 
 ## 1. Authority and interpretation rules
 
-### 1.0 Current documentation-only asset rule
+### 1.0 Current execution authorization
 
-The active program currently documents the game and its future reconstruction. Asset-related documentation may:
+On 2026-10-04 AST, the owner explicitly authorized moving beyond the documentation-only restriction.
 
-- audit what already exists;
-- record provenance, consumers, status, and deficiencies;
-- define exactly how future assets should be created;
-- specify grids, layers, composition, reuse, naming, migration, QA, and acceptance criteria;
-- preserve historical asset-production evidence.
+Current rule:
+- documentation remains mandatory authority and continuity;
+- implementation, runtime work, tests/tooling, and asset production may proceed in bounded, evidence-backed slices when they advance the accepted design;
+- completed documentation may now be consumed by implementation without another routine permission request;
+- asset production is allowed when it follows the documented identity/composition/provenance/QA requirements;
+- implementation or production does not automatically promote work to canon or final acceptance; verification and provenance still apply;
+- destructive/external/repository-governance actions retain their separate approval boundaries.
 
-It may **not** create, modify, redraw, regenerate, export, integrate, promote, replace, or delete runtime assets unless the owner gives a new explicit instruction authorizing that production/implementation work.
-
-This rule overrides older wording that could be read as an instruction to continue an asset-production batch. Production plans remain useful as future execution documentation, but are not active execution authority.
+The earlier documentation-only asset freeze is retained only as historical context and is superseded by this explicit authorization.
 
 ### 1.1 Evidence order
 
@@ -363,7 +363,7 @@ D-026/D-021 current-source consumer discovery is now complete at field/action, n
 | **V05 — Characters / NPC / social / rivals** | **PARTIAL** | Existing engine has social/memory concepts; target corpus is not exhaustive | `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, population/hierarchy standards, player-safe actor contract | Full character catalog, recurring-NPC packets, schedules/goals/factions, dynamic-rival hierarchy/evolution records, world integration and migration mapping. |
 | **V06 — Progression / stats / skills / abilities / passives / classes / ranks** | **LARGE ACTIVE CORPUS / IN_PROGRESS** | Target design substantially exceeds current runtime | `PROGRESSION_MASTER_PLAN.md`, `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`, `EVOLVED_SKILL_REGISTRY.md`, `STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`, `docs/systems/status/**` | Status Phase A is complete; Wave 001 has 1,019 structurally audited records; primary-ability detail coverage is 47/47 and passive family baseline coverage is 23/23. Still missing: combat-class catalog; profession/rank/status packet; training/mentor/facility standard; progression Gate Twelve proof packet; progression UX contract; numeric/range fixtures; world/canon promotion; target-schema/API migration. |
 | **V07 — Items / economy / loot** | **MASTER CONTRACT ESTABLISHED / CONTENT PARTIAL** | Existing equipment/items are not the final target economy | `ITEM_ECONOMY_LOOT_MASTER_PLAN.md`, world loot provenance standard, asset/item provenance docs | Full item taxonomy/catalog, economy source/sink model, vendor/services rules where approved, resource-to-item chains, loot tables, migration to existing IDs/save consumers. |
-| **V08 — Tactical combat** | **MASTER CONTRACT ESTABLISHED / DETAIL PARTIAL** | Final tactical runtime not implemented | `TACTICAL_COMBAT_MASTER_PLAN.md`, balance integration docs | Combat class/archetype catalog, encounter/tactical-map standards, AI detail, action-economy calibration, progression/item/status integration, schema/API migration and tests. |
+| **V08 — Tactical combat** | **MASTER CONTRACT ESTABLISHED / CAMERA+TACTICAL DIRECTION LOCKED / DETAIL PARTIAL** | Final tactical runtime not implemented | `TACTICAL_COMBAT_MASTER_PLAN.md`, `CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md`, balance integration docs | Initiative/action-budget numbers, encounter/tactical-map detail, AI calibration, progression/item/status integration, schema/API migration, low-end performance budgets and tests. |
 | **V09 — Persistent adversaries / world memory** | **PARTIAL** | Concepts exist; target system is not reconstruction-complete | `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, social engine evidence, world integration standards | Dedicated adversary/rival records, hierarchy changes, memory consequences, promotion/demotion rules, world event integration, save/state migration contract. |
 | **V10 — Activities / life simulation** | **MASTER CONTRACT ESTABLISHED / CONTENT PARTIAL** | Current simulation is narrower than target design | `PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md` | Activity catalog, training/work/study/recovery content, concurrency/interruption fixtures, facility links, world schedules, progression/economy/social integration. |
 | **V11 — Application UX / projection** | **PARTIAL / IN_PROGRESS — MAJOR CURRENT CONSUMERS MAPPED** | Current Android client exists but is not final target UX | `APPLICATION_UX_MASTER_PLAN.md`, `ANDROID_CONSUMER_AND_PROJECTION_MAP.md`, `PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`, status UI contracts | Major Python/Kotlin/ViewModel/Compose consumers are now mapped. Remaining: per-catalog/zero-consumer audit, hardcoded visual-state audit, exact test-gap matrix, future player-safe projections, progression/status UX integration and final migration/QA map. |
