@@ -325,6 +325,18 @@ Resolved current-source areas include:
 
 This closes the current navigation/temporary-state audit portion of D-026/D-021. Future projection schemas and code-only per-entry asset consumers remain open.
 
+## 2.8 Pixel member / asset-ID checkpoint
+
+`docs/android/PIXEL_MEMBER_ASSET_ID_CONSUMER_AUDIT_2026-10-04.md` now records the current member-level consumer pass.
+
+Result:
+- 109 top-level visual IDs audited;
+- three top-level visual IDs have no current production consumer path: `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`, `UI_CHOICE_CARD_SELECTED`, and `UI_BUTTON_DANGER`;
+- four generated Trace-strain portrait frames also have no current production consumer;
+- these remain reserved/deferred evidence, not automatically discarded.
+
+D-026/D-021 current-source consumer discovery is now complete at field/action, navigation/transient-state, file, and member/asset-ID levels. Remaining work is future projection/migration design, D-030 actor migration, final APK mapping, and execution evidence.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
