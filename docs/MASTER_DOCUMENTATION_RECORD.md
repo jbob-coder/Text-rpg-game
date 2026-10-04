@@ -269,6 +269,22 @@ Every implementation PR #7–#31 has an explicit current disposition:
 
 This does not implement deferred candidates or make owner visual/canon decisions. Those remain under D-029/D-030/future implementation work.
 
+## 2.7 D-025 provenance-registry seed closure
+
+D-025 is now closed at its intended **seed** boundary.
+
+`docs/assets/ASSET_PROVENANCE_REGISTRY.md` already establishes:
+- stable asset provenance identity;
+- required provenance fields;
+- source-authority classes;
+- production-stage vocabulary;
+- reuse compatibility signature;
+- runtime-layer classification;
+- branch-awareness rules;
+- initial 24-raster seed.
+
+The deeper unresolved source/hash/consumer/QA/canon work remains under D-029 rather than keeping both D-025 and D-029 open for the same responsibility.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
