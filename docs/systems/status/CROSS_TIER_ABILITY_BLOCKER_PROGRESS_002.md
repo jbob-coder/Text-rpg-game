@@ -14,8 +14,11 @@ Previously materialized:
 - `ABILITY_ENERGY_RESERVE_ACCOUNTING_STANDARD.md`;
 - `TIME_CAUSAL_STATE_AND_SNAPSHOT_STANDARD.md`.
 
+Numeric calibration framework now materialized:
+- `STATUS_NUMERIC_CALIBRATION_FRAMEWORK.md`.
+
 Next shared work:
-1. numeric calibration framework;
+1. complete child-rule gaps inside the existing standards;
 2. explicit canon-promotion review packets;
 3. named world institutions/history after parent world authorities are ready;
 4. implementation mapping only after design coherence.
