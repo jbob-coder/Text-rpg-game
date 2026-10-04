@@ -169,10 +169,16 @@ Evidence:
 Time Partition child-rule progress:
 - `TIME_PARTITION_SUBJECTIVE_PROCESSING_ACTION_LATENCY_STANDARD.md` resolves the world-time/subjective-processing split, sensory-information boundary, decision-queue staleness, physical action-latency boundary, technique behavior, strain category, cross-ability composition, save/load, and projection rules.
 
+Matter Recode child-rule progress:
+- `MATTER_RECODE_MATERIAL_COMPOSITION_ENERGY_STANDARD.md` resolves nonliving-target eligibility, source/target-model separation, mass/composition conservation, composition knowledge, energy accounting, impurity/byproduct handling, technique envelopes, product validity, and save/load.
+
+Probability Tilt child-rule progress:
+- `PROBABILITY_TILT_EVENT_RESOLUTION_EVIDENCE_STANDARD.md` resolves unresolved-event eligibility, plausible outcome sets, near-equivalent weighting, bounded contexts, evidence/causation boundaries, technique semantics, commit point, seeded anti-reroll behavior, and parent-law boundaries.
+
 Super Epic blockers:
 - Time Partition numeric acceleration/sensory-transduction/strain-recovery model; structural subjective-processing/action-latency rules now documented in `TIME_PARTITION_SUBJECTIVE_PROCESSING_ACTION_LATENCY_STANDARD.md`;
-- material mass/energy/composition model;
-- probability-resolution semantics;
+- Matter Recode numeric material taxonomy/energy estimator/mass-scale/precision/world-industry integration; structural model now documented;
+- Probability Tilt numeric probability representation/near-equivalent threshold/max bias/domain eligibility/world doctrine; structural semantics now documented;
 - numeric/world integration.
 
 Legendary 001–002 completed:
