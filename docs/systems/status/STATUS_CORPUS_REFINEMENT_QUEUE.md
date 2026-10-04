@@ -230,7 +230,7 @@ Unique blockers:
 
 ## P1 — next passive families
 
-1. **Leadership / Coordination 0001–0010 — NEXT**
+1. **Technical / Craft 0001–0010 — NEXT**
 
 8. technical/craft;
 9. medical/recovery practice;
@@ -243,6 +243,21 @@ Unique blockers:
 16. unique event;
 17. cosmic/system;
 18. unknown/classified.
+
+## Leadership / Coordination 0001–0010 completed
+
+Evidence:
+- `PASSIVE_LEADERSHIP_COORDINATION_EFFECT_MAP_0001_0010.md`
+- `PASSIVE_LEADERSHIP_COORDINATION_SCALING_STATE_MODEL_0001_0010.md`
+- `PASSIVE_LEADERSHIP_COORDINATION_KNOWLEDGE_REFINEMENT_0001_0010.md`
+
+Open:
+- numeric calibration;
+- final knowledge decisions;
+- team/trust/assignment state mapping;
+- cross-family stacking;
+- named command/training institutions;
+- canon promotion.
 
 ## Social / Behavioral 0001–0010 completed
 
