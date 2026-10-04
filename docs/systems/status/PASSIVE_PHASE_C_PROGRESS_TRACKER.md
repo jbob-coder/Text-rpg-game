@@ -115,6 +115,14 @@ Materialized:
 
 All 23 passive families now have family-level role-class relevance mapped without inventing named institutions.
 
+## Numeric base-term dependency milestone
+
+Materialized:
+- `STATUS_BASE_RESOLUTION_TERM_UNIT_TAXONOMY.md`;
+- `PASSIVE_CANONICAL_RESOLVER_BASE_TERM_MAP_WAVE_001.md`.
+
+All 20 canonical shared passive resolvers now identify the base term and abstract unit class required before coefficient calibration.
+
 ## Base-term / unit preparation
 
 Materialized:
