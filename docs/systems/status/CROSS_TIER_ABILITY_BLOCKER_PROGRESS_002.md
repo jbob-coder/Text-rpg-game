@@ -29,11 +29,13 @@ None of these standards bulk-promotes Wave-001 calibration proposals.
 
 Materialized:
 - `LIGHTNING_CONDUIT_THROUGHPUT_PATH_SAFETY_STANDARD.md`;
+- `CRYO_SINK_THERMAL_TRANSFER_RESERVE_STANDARD.md`;
 - `MOMENTUM_BANK_CAPTURE_RESERVE_RELEASE_STANDARD.md`;
 - `ENERGY_DEVOUR_SOURCE_WHITELIST_OUTPUT_STANDARD.md`.
 
 These now resolve major non-numeric child structure for:
 - electrical routing;
+- Cryo Sink thermal extraction/storage and no-current-output-route boundaries;
 - kinetic capture/release;
 - generalized energy compatibility/output authorization.
 
