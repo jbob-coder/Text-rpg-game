@@ -244,12 +244,26 @@ Evidence:
 - `PASSIVE_PHASE_C_PROGRESS_TRACKER.md`
 - `PASSIVE_CROSS_FAMILY_COMPOSITION_STANDARD.md`
 
+Passive normalization progress:
+- family-level resolver/state-owner matrix: BASELINE COMPLETE;
+- compact knowledge-profile reconciliation audit: BASELINE COMPLETE;
+- event-bound qualification governance: BASELINE COMPLETE;
+- numeric calibration: PARAMETER PILOT STARTED;
+- canon review: PACKET TEMPLATE READY.
+
+Evidence:
+- `PASSIVE_STATE_OWNER_RESOLVER_MATRIX_WAVE_001.md`;
+- `PASSIVE_KNOWLEDGE_PROFILE_RECONCILIATION_AUDIT_WAVE_001.md`;
+- `PASSIVE_EVENT_QUALIFICATION_GOVERNANCE_STANDARD.md`;
+- `PASSIVE_NUMERIC_CALIBRATION_PILOT_001.md`;
+- `STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md`.
+
 Next passive work:
-1. cross-family resolver/state-owner normalization;
-2. knowledge-profile reconciliation;
-3. numeric calibration;
-4. world/institution/history integration;
-5. explicit canon review;
+1. record-level owner/write-target normalization;
+2. individual knowledge-row reconciliation;
+3. role-class world integration;
+4. broader numeric parameterization;
+5. canon dry-review packets;
 6. implementation mapping after design coherence.
 
 Do not create another shallow passive wave.
