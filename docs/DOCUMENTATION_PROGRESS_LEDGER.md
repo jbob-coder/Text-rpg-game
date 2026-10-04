@@ -708,3 +708,30 @@ Phase 1 impact:
 - authored encounter packet, Python runtime, Android tactical UI/projection, performance evidence and tests remain pending.
 
 Breadth direction now moves to V05 Characters/NPC/Social while a bounded Gate Twelve encounter packet remains the next combat-specific document.
+
+
+## 2026-10-04 V05 social first-pass + Phase 1 encounter continuation
+
+Added eleven V05 child standards/packets.
+
+V05 first-pass count is now 12 / 12 when NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md is included.
+
+Semantic coverage now includes:
+- stable character identity;
+- personality;
+- memory;
+- knowledge/belief/privacy;
+- relationships;
+- goals/decision;
+- schedules/presence;
+- faction/hierarchy membership;
+- social consequence/rumor;
+- recurring-character packet format;
+- Tamsin Phase 1 social proof.
+
+Also added:
+- docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md.
+
+The encounter packet is proposed content, not canon/runtime completion. It uses existing Service Tunnel and Directional Trace facts and deliberately keeps opponent identity unresolved.
+
+Next breadth area: V10 Activities/Life Simulation.
