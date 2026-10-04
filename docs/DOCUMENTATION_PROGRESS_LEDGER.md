@@ -632,3 +632,30 @@ Resolved current-source documentation for:
 - stable test/preview GameScreen navigation surface.
 
 No gameplay authority was moved into UI documentation. No runtime files changed and no tests/builds were executed.
+
+
+## 2026-10-04 D-026 member asset-ID audit
+
+Added:
+- `docs/android/PIXEL_MEMBER_ASSET_ID_CONSUMER_AUDIT_2026-10-04.md`;
+- `docs/evidence/pixel_member_consumer_audit_2026-10-04.json`.
+
+Audited source HEAD:
+- `docs/master-game-development-program@b79185fd673ff7838ef1b8f2814d1459230052fb`.
+
+Result:
+- 110 top-level ID-like constants inspected;
+- 109 visual asset IDs;
+- one non-visual condition trigger (`COND_ECHO_STRAIN`);
+- three top-level visual IDs have no current production consumer:
+  - `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`;
+  - `UI_CHOICE_CARD_SELECTED`;
+  - `UI_BUTTON_DANGER`;
+- four generated Trace-strain portrait frames also have no current production consumer;
+- none are approved for removal by this audit.
+
+D-026/D-021 current-source consumer discovery is now complete at field/action, navigation/transient-state, file, and member/asset-ID levels.
+
+D-006 was updated to remove already-completed D-020/D-044 and already-finished current consumer discovery from its open-work list.
+
+No runtime files changed and no tests/builds were executed.
