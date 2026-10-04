@@ -14,7 +14,12 @@ Materialized:
 - knowledge visibility;
 - Level/XP;
 - awakening event;
-- Level-100 exception.
+- Level-100 exception;
+- ability authoring guide;
+- passive authoring guide;
+- Status UX contract;
+- balance/test matrix;
+- ability/passive cross-reference.
 
 Result: **COMPLETE for current design authority layer.**
 
@@ -49,33 +54,37 @@ These records remain `CALIBRATION_PROPOSAL` unless separately promoted.
 
 Status: **IN PROGRESS.**
 
-First deep-authoring slices now materialized:
+Current deep-authoring slices:
 - `calibration/PRIMARY_ABILITY_DETAIL_COMMON_001_010.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_COMMON_001_010.md`
 - `calibration/PASSIVE_DETAIL_PHYSICAL_0001_0010.md`
 
-The audit must continue across:
+Common ability 001–010 linked records now also have:
+- 40 individualized compact technique rows;
+- 10 individualized awakening profiles;
+- 10 individualized counter profiles.
+
+The remaining audit/refinement work includes:
 - duplicate mechanics;
 - rarity drift;
 - ability-law overlap;
 - passive overlap;
 - impossible requirements;
 - hidden-information leaks;
-- missing counters;
 - world-integration gaps;
 - excessive art/content burden;
 - schema fields still left as `TBD`;
-- template-heavy technique/counter records;
+- higher-tier template-heavy technique/counter records;
 - knowledge profiles that are still calibration patterns rather than named-world doctrine.
 
-### Phase C order
+### Phase C next order
 
-1. Complete full-schema detail for Common abilities 001–010.
-2. Reconcile their 40 linked technique records with individualized names/effects.
-3. Complete full-schema detail for Physical passives 0001–0010.
-4. Define military/research knowledge for those ten passives.
-5. Run overlap and contradiction review for the refined slice.
-6. Use the accepted pattern to continue remaining Common/Uncommon/Rare abilities and passive families.
-7. Do **not** create another thousand shallow records until the refinement pattern passes review.
+1. Run overlap/rarity consistency review for Common abilities 001–010.
+2. Complete military/research knowledge and rumor detail for Physical passives 0001–0010.
+3. Individualize Physical passive scaling/caps and implementation/test ownership.
+4. Deep-author Uncommon abilities 001–010.
+5. Continue remaining passive families using the accepted Physical pattern.
+6. Do **not** create another thousand shallow records until the refinement pattern passes review.
 
 ## Phase D — world integration
 
@@ -88,7 +97,7 @@ Map selected records into:
 - professions;
 - beast ecology;
 - laws;
-- black markets;
+- illicit markets;
 - classified programs;
 - historical events.
 
