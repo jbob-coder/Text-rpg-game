@@ -285,13 +285,26 @@ D-025 is now closed at its intended **seed** boundary.
 
 The deeper unresolved source/hash/consumer/QA/canon work remains under D-029 rather than keeping both D-025 and D-029 open for the same responsibility.
 
+## 2.5 Current asset consumer / zero-consumer checkpoint
+
+`docs/assets/CURRENT_ASSET_CONSUMER_ZERO_CONSUMER_AUDIT_2026-10-04.md` and its JSON companion now resolve the current runtime PNG consumer question:
+
+- 24 / 24 current drawable-nodpi PNGs have a current source consumer path;
+- 0 / 24 current PNGs qualify as zero-consumer deletion candidates;
+- all nine scene PNGs are tied to authored current world nodes/scene locations;
+- player/loadout/item rasters are tied to current avatar/inventory/equipment consumers;
+- intact/opened/damaged/signal-lost relay variants have authored state reachability;
+- deferred noncurrent/unconsumed candidates remain explicitly separated rather than misclassified as current dead assets.
+
+This closes the current-raster consumer subtask of D-029, but not D-029 itself. Raster-equivalence execution, visual promotion choices, final portrait/player production, canon approval and physical-device QA remain open.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
 |---|---|---|---|---|
 | **V00 — Program authority / governance** | **ESTABLISHED** | N/A | `MASTER_GAME_DEVELOPMENT_PROGRAM.md`, this record, `THE_GAME_MASTER_TASK_REGISTER.md`, `DOCUMENTATION_CROSS_REFERENCE_MATRIX.md`, `DOCUMENTATION_CORPUS_ARCHITECTURE.md` | Ongoing synchronization; eliminate stale status text when later files overtake older task entries. |
 | **V01 — Existing-state audit** | **IN_PROGRESS / CURRENT-HEAD SOURCE INVENTORY COMPLETE** | Current program HEAD is now inventoried at module/component/content/save/asset/test/build level; historical/feature lines are not yet fully reconciled | `DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`, `LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md`, `EXISTING_STATE_REWORK_DECISION_MATRIX.md`, `IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md` | Finish field/consumer mapping, per-catalog consumer audit, cross-branch survivor migration, asset lineage/equivalence, zero-consumer proof, D-044 Class-C extraction is now complete. |
-| **V02 — Pixel-art / visual production** | **PARTIAL / IN_PROGRESS** | Many assets and runtime bindings exist, but canonical production/provenance/QA is not complete | `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`, `PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md`, `ASSET_PROVENANCE_REGISTRY.md`, provenance family indexes | Finish D-029 provenance; execute deterministic raster equivalence tooling; resolve remaining visual promotion decisions; finish Jack/portrait production and device QA. |
+| **V02 — Pixel-art / visual production** | **PARTIAL / CURRENT 24-RASTER CONSUMERS RESOLVED** | Many assets and runtime bindings exist, but canonical production/provenance/QA is not complete | `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`, `PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md`, `ASSET_PROVENANCE_REGISTRY.md`, provenance family indexes, `CURRENT_ASSET_CONSUMER_ZERO_CONSUMER_AUDIT_2026-10-04.md` | All 24 current PNGs have consumer paths; none are zero-consumer deletion candidates. Still required: deterministic raster equality execution, visual survivor promotion, Jack/portrait production, canon approval and device QA. |
 | **V03 — Gate Twelve proof region** | **ESTABLISHED FIRST-PASS CONTRACT** | Implementation/acceptance remains incomplete | `GATE_TWELVE_REGION_MASTER_PLAN.md`, map/animation blueprints, asset status matrix, room composition contract | Parent-world proposal still requires owner canon decision; bounded runtime migration and physical-device acceptance remain future work. |
 | **V04 — World development** | **ESTABLISHED STANDARDS / PARTIAL POPULATION** | World is not populated at final scale | `WORLD_DEVELOPMENT_MASTER_INDEX.md`, geography/politics/settlement/routes/ecology/beast/population/balance/loot/NPC standards | Canon macroregions, sovereign entities, settlements, routes, ecosystems, populations, institutions, and large-scale structured records. |
 | **V05 — Characters / NPC / social / rivals** | **PARTIAL** | Existing engine has social/memory concepts; target corpus is not exhaustive | `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, population/hierarchy standards, player-safe actor contract | Full character catalog, recurring-NPC packets, schedules/goals/factions, dynamic-rival hierarchy/evolution records, world integration and migration mapping. |
