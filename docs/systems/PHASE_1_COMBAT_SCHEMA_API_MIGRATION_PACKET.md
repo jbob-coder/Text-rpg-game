@@ -5,7 +5,7 @@ Repository: jbob-coder/Text-rpg-game
 Parents:
 - docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md
 - docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md
-- docs/systems/GATE_TWELVE_PHASE_1_TACTICAL_ENCOUNTER_PACKET.md
+- docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md
 - docs/systems/SAVE_AND_CONTENT_MIGRATION_MASTER_PLAN.md
 - docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md
 
@@ -452,7 +452,7 @@ Do not dump the entire tactical event log into GameState.history.
 
 ## 18. Condition migration
 
-The proposed COND_MINOR_LEG_STRAIN must be added to registries.conditions before any effect references it.
+The proposed COND_TUNNEL_LEG_INJURY must be added to registries.conditions before any effect references it.
 
 Validate its modifier paths against the existing modifier contract.
 
