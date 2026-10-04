@@ -850,3 +850,18 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - MATERIALIZED CHILD: `docs/systems/EVOLVED_SKILL_REGISTRY.md` — all 23 current skills expanded into target-game records covering training, world/tactical uses, class/profession relationships, advanced gates, content and pixel-art requirements.
 - NEXT: create the combat class catalog, then profession/rank/status packet, training/mentor/facility standard, Gate Twelve proof packet and progression UX contract.
 - IMPLEMENTATION: deferred until design contracts are sufficiently coherent.
+
+
+### TASK D-046 — Build Status UI / ability / passive reconstruction corpus
+- STATUS: `IN_PROGRESS`
+- PRIORITY: `P0`
+- PARENT: D-045 evolved-game design continuation.
+- OWNER INTENT: devote substantial reconstruction-grade documentation to primary abilities, passive abilities, hidden requirements, rarity, discovery, evolution, knowledge, mapping, and related world/content systems.
+- MASTER: `docs/systems/STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`.
+- MATERIALIZED CHILDREN:
+  - `docs/systems/status/README.md`
+  - `docs/systems/status/STATUS_UI_CORE_CONTRACT.md`
+  - `docs/systems/status/PASSIVE_REGISTRY_SCHEMA.md`
+- CANON CAPTURED: Status at 18; public school awakening/classification event; one primary ability per human; Common -> Unique rarity; Unique = 1/1 in universe; Level gained through kills including beasts/PK; Level 100 permits primary-ability replacement; only two known humans have reached Level 100; many passives can be acquired; passives are hidden until requirements are satisfied; some known unlocks are deliberately kept secret.
+- NEXT: ability rarity standard, primary-ability registry schema, passive requirement language, knowledge-visibility standard, Level/XP standard, awakening-event standard, Level-100 exception standard, then catalog seeding.
+- IMPLEMENTATION: deferred; current task is documentation/design authority.
