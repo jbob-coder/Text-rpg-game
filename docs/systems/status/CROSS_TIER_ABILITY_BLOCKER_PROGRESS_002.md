@@ -62,3 +62,17 @@ This resolves Time Partition's non-numeric separation between monotonic world ti
 Remaining blockers are numeric/physiological integration, final sensory-transduction treatment, cognitive saturation, strain/recovery thresholds, and world integration.
 
 No ability is canon-promoted.
+
+
+### Super Epic child-standard progress
+
+Materialized:
+- `TIME_PARTITION_SUBJECTIVE_PROCESSING_ACTION_LATENCY_STANDARD.md`;
+- `MATTER_RECODE_MATERIAL_COMPOSITION_ENERGY_STANDARD.md`;
+- `PROBABILITY_TILT_EVENT_RESOLUTION_EVIDENCE_STANDARD.md`.
+
+The three Super Epic Wave-001 identities now all have dedicated non-numeric child standards covering their defining foundational resolution dimension.
+
+Remaining work is dominated by numeric calibration, final owner decisions, world/institution integration, and implementation mapping after design coherence.
+
+No Super Epic ability is canon-promoted.
