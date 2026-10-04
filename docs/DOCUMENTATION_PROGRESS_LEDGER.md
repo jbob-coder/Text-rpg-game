@@ -543,3 +543,22 @@ Documented current test gaps:
 - fuller identity UI contract.
 
 D-026/D-021 remain **IN_PROGRESS**. Member/asset-ID zero-consumer proof, future projections, destination APK mapping and runtime execution evidence remain open.
+
+
+## 2026-10-04 D-020 implementation survivor reconciliation closure
+
+Added:
+- `docs/IMPLEMENTATION_SURVIVOR_MIGRATION_MATRIX_2026-10-04.md`.
+
+D-020 documentation reconciliation is now complete for PRs #7–#31.
+
+The matrix separates:
+- inherited/current survivor behavior;
+- current contracts that may be visually reworked later;
+- superseded historical surfaces;
+- branch-only candidate migrations;
+- owner-decision-required static art;
+- historical fix-extraction sources;
+- documentation-only ancestry.
+
+This does not implement PR #9/#27/#28/#30/#31 candidate work and does not make owner art decisions.
