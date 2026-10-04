@@ -91,6 +91,33 @@ Rare refinement explicitly resolves:
 Spatial Anchor is still blocked on reference-frame rules.
 Crystal Resonance remains blocked on THE GAME's crystal-world canon.
 
+## Super Rare deep-authoring
+
+- `calibration/PRIMARY_ABILITY_DETAIL_SUPER_RARE_001_006.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_SUPER_RARE_001_006.md`
+
+Super Rare 001–006 now have:
+- 6 reconstruction-oriented ability records;
+- 24 individualized compact technique rows;
+- 24 detailed technique records;
+- 6 individualized awakening profiles;
+- 6 individualized counter profiles;
+- explicit Rare↔Super Rare boundary treatment.
+
+Key boundaries:
+- Gravity Well ↔ Mass Inversion: external attraction field versus tagged gravitational-response reversal.
+- Spatial Anchor ↔ Fold Step: positional denial versus temporary folded transit.
+- Knit Flesh ↔ Adaptive Regeneration: natural-repair acceleration versus deep self-regeneration with injury-pattern adaptation.
+- Lightning Conduit / Cryo Sink ↔ Energy Devour: domain-specific routing/storage versus defined multi-energy absorption into a generalized reserve.
+
+Open blockers:
+- temporal-process model;
+- Fold Step endpoint/momentum/reference-frame physics;
+- regeneration biomass/identity limits;
+- neural ethics/physiology;
+- Mass Inversion tag/end-state physics;
+- Energy Devour whitelist/reserve/output model.
+
 ## Integration
 
 - `ABILITY_PASSIVE_CROSS_REFERENCE.md`
