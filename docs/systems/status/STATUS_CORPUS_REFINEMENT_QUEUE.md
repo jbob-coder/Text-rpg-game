@@ -166,8 +166,11 @@ Evidence:
 - `calibration/ABILITY_COUNTER_DETAIL_SUPER_EPIC_001_003.md`
 - `SUPER_EPIC_ABILITY_RARITY_OVERLAP_AUDIT_001_003.md`
 
+Time Partition child-rule progress:
+- `TIME_PARTITION_SUBJECTIVE_PROCESSING_ACTION_LATENCY_STANDARD.md` resolves the world-time/subjective-processing split, sensory-information boundary, decision-queue staleness, physical action-latency boundary, technique behavior, strain category, cross-ability composition, save/load, and projection rules.
+
 Super Epic blockers:
-- subjective-time/sensory/metabolic model;
+- Time Partition numeric acceleration/sensory-transduction/strain-recovery model; structural subjective-processing/action-latency rules now documented in `TIME_PARTITION_SUBJECTIVE_PROCESSING_ACTION_LATENCY_STANDARD.md`;
 - material mass/energy/composition model;
 - probability-resolution semantics;
 - numeric/world integration.
