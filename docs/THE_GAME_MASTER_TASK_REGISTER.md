@@ -1087,7 +1087,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETED_AT: 2026-10-04 AST
 
 ### TASK D-053 — Build V05 character/NPC/social first-pass child contracts
-- STATUS: IN_PROGRESS / NEXT BREADTH DOMAIN
+- STATUS: DONE
 - PRIORITY: P0/P1
 - WHY NEXT:
   - V05 is under-covered relative to its 12-unit floor;
@@ -1105,3 +1105,46 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - social consequence/rumor standard;
   - recurring character packet standard.
 - RULE: reuse current social.py structures where compatible; do not invent UI-first state.
+
+
+#### D-053 closure — V05 first-pass breadth floor
+- RESULT: V05 reaches 12 / 12 canonical first-pass units using the NPC/Social/Rival master plus eleven new child standards/packets.
+- PHASE 1: Tamsin relationship/knowledge proof is documented against current content; explicit durable-memory reaction remains a bounded implementation gap.
+- RUNTIME: no Python/Android behavior changed.
+- UNLOCKS: bounded social migration work, future People/Relationship UI requirements, and later V09 adversary integration.
+- COMPLETED_AT: 2026-10-04 AST
+
+### TASK D-054 — Author Gate Twelve Phase 1 tactical encounter packet
+- STATUS: DONE / PROPOSED CONTENT PACKET
+- PRIORITY: P0 TRACK B
+- OUTPUT: docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md
+- CURRENT FACTS USED: SERVICE_TUNNEL, fresh boot prints, Gate Twelve/Trace Chamber connectivity, KNOW_DIRECTIONAL_TRACE_POINTS_DEEPER, optional NPC_TAMSIN party branch.
+- PROPOSED CONTENT:
+  - ENCOUNTER_GT_SERVICE_FORK_CONTACT_01;
+  - 12x8 one-layer tactical map;
+  - Jack + optional Tamsin + two encounter-local contact placeholders;
+  - reach/interact/investigate objective with legal retreat;
+  - maximum four active actors;
+  - proposed COND_TUNNEL_LEG_INJURY and recovery path.
+- CANON BOUNDARY: opposing identities, new knowledge IDs, injury naming/modifiers, Jack first combat loadout, Tamsin combat action, and narrative consequences remain proposed until content review.
+- RUNTIME: not implemented.
+- PHASE 1 IMPACT: requirement 9 now has an authored proposed encounter packet; requirement 10 has a specific proposed injury/recovery case.
+- NEXT TECHNICAL CONSUMER: D-032 combat schema/API migration packet.
+- COMPLETED_AT: 2026-10-04 AST
+
+### TASK D-055 — Build V10 activities/life-simulation first-pass child contracts
+- STATUS: IN_PROGRESS / NEXT BREADTH DOMAIN
+- PRIORITY: P0/P1
+- WHY NEXT:
+  - V10 has an 8-unit first-pass floor and remains under-covered;
+  - it directly blocks Phase 1 requirement #8;
+  - current simulation.py already contains train, recover, time/condition primitives that can be documented rather than replaced.
+- TARGET CHILDREN:
+  - activity record/schema standard;
+  - time/cost/atomicity standard;
+  - training/practice standard;
+  - recovery/rest/treatment standard;
+  - work/study/research activity standard;
+  - interruption/concurrency/schedule standard;
+  - Gate Twelve Phase 1 activity proof packet.
+- RULE: preserve authoritative time/resource/state mutation in Python; UI only requests and presents legal activities.
