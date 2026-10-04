@@ -71,3 +71,10 @@ The V08 first-pass tactical documentation floor is now materialized through ten 
 - COMBAT_AI_OBJECTIVES_RETREAT_STANDARD.md
 
 This closes the first-pass documentation quota for V08 only. Tactical runtime remains unimplemented. The next combat document should be a bounded Gate Twelve Phase 1 encounter packet rather than more generic combat theory.
+
+
+## V05 character/NPC/social first-pass closure — 2026-10-04
+
+V05 now has 12 / 12 minimum first-pass canonical units: the existing NPC/Social/Rival master plus eleven child standards/packets covering identity, personality, memory, knowledge/privacy, relationships, goals, schedule/presence, faction membership, rumor/social consequence, recurring-character authoring, and the Tamsin Phase 1 proof packet.
+
+The first-pass quota is satisfied; runtime expansion remains separate. Persistent-adversary depth continues under V09 rather than being treated as complete by this V05 closure.
