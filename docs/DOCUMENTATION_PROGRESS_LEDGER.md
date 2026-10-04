@@ -578,3 +578,26 @@ The active provenance registry already defines:
 - initial 24-raster seed.
 
 Deep family reconciliation remains D-029 and is not double-counted as unfinished D-025 work.
+
+
+## 2026-10-04 D-029 current raster consumer / zero-consumer audit
+
+Added:
+- `docs/assets/CURRENT_ASSET_CONSUMER_ZERO_CONSUMER_AUDIT_2026-10-04.md`;
+- `docs/evidence/current_asset_consumer_audit_2026-10-04.json`.
+
+Result:
+- 24 / 24 current drawable-nodpi PNGs have a current source consumer path;
+- zero current PNGs qualify for REMOVE on zero-consumer grounds;
+- all nine scene PNGs have authored current node/scene reachability;
+- all current player/loadout/item raster bindings have avatar/inventory/equipment consumers;
+- all four Dead Relay visual states have authored bridge/content reachability.
+
+Deferred/noncurrent zero-consumer candidates remain separate:
+- municipal infrastructure atlas;
+- PR #9 diagnostic reader icon/held master;
+- PR #31 Service Tunnel ambient animation.
+
+D-029 remains in progress because fresh 24/24 pixel-equivalence execution, visual survivor decisions, final character/portrait production, canon approval and physical-device QA remain open.
+
+No runtime/assets were modified and no tests/builds/verifier execution occurred in this audit.
