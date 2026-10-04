@@ -1,13 +1,23 @@
 # THE GAME — Tactical Combat Master Plan
 
-Status: **FOUNDATIONAL / ORIGINAL SYSTEM / IMPLEMENTATION NOT STARTED**
+Status: **FIRST-PASS CONTRACT LAYER ESTABLISHED / ORIGINAL SYSTEM / RUNTIME NOT IMPLEMENTED**
 Parent authority:
 - `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`
 - `docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md`
 - `docs/systems/PROGRESSION_MASTER_PLAN.md`
 
 Approved presentation/interaction child authority:
-- `docs/systems/CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md`
+- docs/systems/CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md
+
+First-pass child contracts:
+- docs/systems/TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md
+- docs/systems/TURN_INITIATIVE_ACTION_BUDGET_STANDARD.md
+- docs/systems/MOVEMENT_PATHING_AND_POSITIONING_STANDARD.md
+- docs/systems/LOS_DETECTION_AND_COMBAT_KNOWLEDGE_STANDARD.md
+- docs/systems/DIRECTIONAL_COVER_TERRAIN_STANDARD.md
+- docs/systems/COMBAT_ACTION_TARGETING_RESOLUTION_STANDARD.md
+- docs/systems/INJURY_CONDITION_AFTERMATH_STANDARD.md
+- docs/systems/COMBAT_AI_OBJECTIVES_RETREAT_STANDARD.md
 
 ## 1. Purpose
 
@@ -418,20 +428,40 @@ Required:
 - performance;
 - persistent aftermath checks.
 
-## 24. Open decisions
+## 24. First-pass decisions now resolved
 
-Still unresolved:
-- exact grid size/diagonal policy;
-- exact initiative ordering;
-- exact action budget;
-- exact cover model;
-- exact accuracy display;
-- exact damage formula;
-- party control;
-- morale;
-- ammo;
-- destructibility;
-- body-part targeting;
-- encounter generation.
+The child standards now lock the Phase 1 prototype structure:
+- cardinal four-way movement; no diagonal movement;
+- one-cell actor footprints;
+- explicit vertical transitions;
+- round-start initiative snapshot from resolved initiative;
+- stable actor-ID initiative ties;
+- four action-budget units per activation;
+- move action budget separated from movement points;
+- deterministic reserved-budget reactions;
+- supercover LOS tracing;
+- awareness states UNKNOWN / SUSPECTED / DETECTED / IDENTIFIED;
+- edge-based directional cover with Phase 1 +0/+10/+20 defense modifiers;
+- deterministic margin-based attack contest;
+- health zero => incapacitated by default, not automatic death;
+- atomic persistent aftermath;
+- deterministic utility-based AI using only actor-known information;
+- companion order vocabulary HOLD / ADVANCE / FOCUS_TARGET / ASSIST / WITHDRAW.
 
-Keep them UNKNOWN until tested/documented.
+## 25. Still unresolved or deliberately tunable
+
+Still open:
+- exact tactical map footprint limits;
+- final movement/action tuning beyond Phase 1 defaults;
+- final attack/damage/armor calibration;
+- exact player-facing probability/impact display;
+- morale as a dedicated system;
+- ammunition policy;
+- destructibility scope;
+- larger-unit footprints;
+- advanced anatomy/body-part targeting;
+- encounter generation policy;
+- final companion autonomy calibration;
+- full tactical save/resume policy.
+
+The structural contracts are implementation-ready enough for a bounded Phase 1 encounter. Tuning remains evidence-driven.
