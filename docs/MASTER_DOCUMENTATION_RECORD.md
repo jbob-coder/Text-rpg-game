@@ -178,6 +178,26 @@ The audit also records:
 
 This closes the current-head path/source inventory portion of D-042. D-042 remains **IN_PROGRESS** because line-by-line consumer mapping, catalog consumers, asset lineage, cross-branch survivor reconciliation and zero-consumer evidence remain open.
 
+## 2.3 Android consumer/projection audit checkpoint
+
+`docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` now includes a source-grounded current consumer audit covering:
+
+- Python player-safe projection root and child keys;
+- Kotlin `BridgeSnapshotMapper` retention/redaction boundary;
+- `GameViewModel` engine action flow and transient UI state;
+- major Story / Character / Stats / Inventory / Quests / Map / Settings field consumers;
+- current top-level navigation graph;
+- current Android unit/instrumentation test-source coverage at a functional level.
+
+This materially advances D-026/D-021.
+
+Still open:
+- every pixel catalog's direct consumer and zero-consumer status;
+- hardcoded/temporary presentation-state classification;
+- exact per-field/per-action test gap matrix;
+- future activity/combat/hierarchical-map/adversary projections;
+- final APK destination migration map.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
@@ -193,7 +213,7 @@ This closes the current-head path/source inventory portion of D-042. D-042 remai
 | **V08 — Tactical combat** | **MASTER CONTRACT ESTABLISHED / DETAIL PARTIAL** | Final tactical runtime not implemented | `TACTICAL_COMBAT_MASTER_PLAN.md`, balance integration docs | Combat class/archetype catalog, encounter/tactical-map standards, AI detail, action-economy calibration, progression/item/status integration, schema/API migration and tests. |
 | **V09 — Persistent adversaries / world memory** | **PARTIAL** | Concepts exist; target system is not reconstruction-complete | `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, social engine evidence, world integration standards | Dedicated adversary/rival records, hierarchy changes, memory consequences, promotion/demotion rules, world event integration, save/state migration contract. |
 | **V10 — Activities / life simulation** | **MASTER CONTRACT ESTABLISHED / CONTENT PARTIAL** | Current simulation is narrower than target design | `PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md` | Activity catalog, training/work/study/recovery content, concurrency/interruption fixtures, facility links, world schedules, progression/economy/social integration. |
-| **V11 — Application UX / projection** | **PARTIAL / IN_PROGRESS** | Current Android client exists but is not final target UX | `APPLICATION_UX_MASTER_PLAN.md`, `ANDROID_CONSUMER_AND_PROJECTION_MAP.md`, `PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`, status UI contracts | Finish line-by-line consumer/ViewModel/bridge mapping, complete missing player-safe projections, progression/status UX integration, migration and QA mapping. |
+| **V11 — Application UX / projection** | **PARTIAL / IN_PROGRESS — MAJOR CURRENT CONSUMERS MAPPED** | Current Android client exists but is not final target UX | `APPLICATION_UX_MASTER_PLAN.md`, `ANDROID_CONSUMER_AND_PROJECTION_MAP.md`, `PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`, status UI contracts | Major Python/Kotlin/ViewModel/Compose consumers are now mapped. Remaining: per-catalog/zero-consumer audit, hardcoded visual-state audit, exact test-gap matrix, future player-safe projections, progression/status UX integration and final migration/QA map. |
 | **V12 — Android / final APK reconstruction** | **PLANNED / BLOCKED FOR EXECUTION** | Final rebuild intentionally not started as a destructive rewrite | `APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md`, `APK_FINAL_RECONSTRUCTION_MATRIX.md`, final reconstruction blueprint | Mechanics migration packets, completed consumer map, teardown manifest, zero-consumer deletion evidence, final rebuild, exact-head CI, APK provenance and physical handset validation. |
 
 ---
