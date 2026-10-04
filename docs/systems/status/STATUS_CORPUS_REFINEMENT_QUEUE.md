@@ -67,9 +67,8 @@ Open:
 
 ## P1 — next ability slices
 
-1. **Legendary 001–002 — NEXT**
-2. Prime Legendary 001.
-3. Unique 001.
+1. **Prime Legendary 001 — NEXT**
+2. Unique 001.
 
 Each slice must pass:
 - law overlap review;
@@ -140,6 +139,26 @@ Super Epic blockers:
 - material mass/energy/composition model;
 - probability-resolution semantics;
 - numeric/world integration.
+
+Legendary 001–002 completed:
+- deep ability packet;
+- 8 detailed techniques;
+- 8 individualized compact technique rows;
+- 2 detailed awakening records and individualized compact awakenings;
+- 2 detailed counter records and individualized compact counters;
+- rarity/overlap audit.
+
+Evidence:
+- `calibration/PRIMARY_ABILITY_DETAIL_LEGENDARY_001_002.md`
+- `calibration/ABILITY_TECHNIQUE_DETAIL_LEGENDARY_001_002.md`
+- `calibration/ABILITY_AWAKENING_DETAIL_LEGENDARY_001_002.md`
+- `calibration/ABILITY_COUNTER_DETAIL_LEGENDARY_001_002.md`
+- `LEGENDARY_ABILITY_RARITY_OVERLAP_AUDIT_001_002.md`
+
+Legendary blockers:
+- Event Reversal snapshot/living-state/anchor semantics;
+- World Gate anchor/reference/transit/energy/world-infrastructure semantics;
+- numeric and institutional integration.
 
 ## P1 — next passive families
 
