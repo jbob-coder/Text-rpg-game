@@ -140,3 +140,28 @@ Required:
 Lightning Conduit has a **strong Rare-tier identity and good counterplay**, but should return for refinement until throughput, branching, safety, and world-infrastructure calibration are documented.
 
 No canon promotion occurs.
+
+
+## 13. Progress after child standard
+
+`LIGHTNING_CONDUIT_THROUGHPUT_PATH_SAFETY_STANDARD.md` now resolves the non-numeric structure for:
+- valid source classes;
+- conductive path graphs;
+- path ambiguity;
+- branching conservation;
+- dynamic topology changes;
+- grounding and insulation;
+- overload categories;
+- user-safety boundaries;
+- technology-control limits;
+- save/load transaction requirements.
+
+This materially narrows the refinement return.
+
+Still blocking promotion:
+- actual throughput/branch/distance/duration calibration;
+- overload thresholds/loss equations;
+- world licensing/infrastructure policy;
+- owner review.
+
+Dry-run outcome remains **RETURN_FOR_REFINEMENT**.
