@@ -92,3 +92,12 @@ The current train/recover/technique-practice runtime is preserved as foundation.
 V07 now has 10 / 10 first-pass canonical units: the item/economy master plus nine child standards/packets covering item records, inventory/stacks, equipment/loadouts, quality/rarity/condition, material/resource provenance, loot/rewards, economy/pricing architecture, vendors/services/ownership, and the Gate Twelve Phase 1 item/equipment proof.
 
 The current flat inventory and equipment runtime remain the Phase 1 foundation. Currency, vendors, crafting, durability, encumbrance and broad loot generation are not required for the first playable slice.
+
+
+## V09 persistent-adversary/world-memory first-pass closure — 2026-10-04
+
+V09 now has 8 / 8 first-pass canonical units: a dedicated original persistent-adversary/world-memory master plus seven child contracts covering eligibility/identity, encounter memory/adaptation, lifecycle/recurrence, hierarchy/succession, territory/routing, player-safe intel, and a Gate Twelve bounded proof packet.
+
+The system is explicitly knowledge-driven and world-logical. It does not use arbitrary post-defeat stat inflation, forced cameos, memory inheritance across successors, or omniscient counter-preparation.
+
+The Gate Twelve proof intentionally does not promote the current unidentified Service Tunnel contacts into canon recurring enemies.
