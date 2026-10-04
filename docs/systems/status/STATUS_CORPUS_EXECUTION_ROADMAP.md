@@ -247,21 +247,26 @@ Materialized normalization:
 - event-bound qualification governance;
 - numeric parameterization pilot.
 
+Materialized:
+- record-level conceptual owner/write-target assignments for 230 / 230 passives;
+- knowledge reconciliation Waves A/B/C covering 120 priority/content-required rows;
+- family-level role-class world integration for 23 / 23 families.
+
 Open:
-- record-level owner/write-target assignments;
+- per-record read-dependency and same-term overlap normalization;
 - final knowledge-row decisions;
 - numeric coefficients;
-- role-class then named world integration;
+- named world integration where supported by parent world docs;
 - explicit canon review.
 
 ### Next order
 
-1. **Extend passive owner/resolver mapping from family-level to record-level.**
-2. **Reconcile flagged passive knowledge rows against world-role evidence.**
-3. **Begin role-class world integration for mature records.**
+1. **Normalize record-level read dependencies and overlap sets.**
+2. **Adjudicate passive knowledge Waves A/B/C using world-role evidence.**
+3. **Progress supported role-class mappings toward actual world entities.**
 4. Expand numeric parameterization once base units exist.
-5. Run explicit canon-review dry packets.
-6. Complete remaining child rules inside shared ability standards.
+5. Run additional canon-review dry packets.
+6. Continue shared ability child-rule completion.
 7. Defer runtime implementation until design coherence.
 
 ### World integration preparation
@@ -270,6 +275,26 @@ Role-class pilot materialized:
 - `STATUS_WORLD_INTEGRATION_ROLE_CLASS_PILOT_001.md`.
 
 This maps mature abilities/passives to institutional role classes without inventing named world organizations.
+
+### Ability child-rule progress
+
+Lightning Conduit child standard materialized:
+- `LIGHTNING_CONDUIT_THROUGHPUT_PATH_SAFETY_STANDARD.md`.
+
+Resolved structurally:
+- source classes;
+- conductive path graph;
+- branching conservation;
+- dynamic topology revalidation;
+- grounding/insulation behavior;
+- overload/safety categories;
+- technology-control boundary.
+
+Still open:
+- throughput/branch/distance/duration numeric values;
+- overload thresholds;
+- detailed loss equations;
+- world licensing/infrastructure policy.
 
 ### Canon-review dry runs
 
