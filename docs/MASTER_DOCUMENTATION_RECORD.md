@@ -96,6 +96,29 @@ Exact current word counts and structured record counts remain governed by D-019 
 
 ---
 
+## 2.1 Latest D-019 inventory checkpoint
+
+A newer bounded inventory checkpoint now exists for source HEAD `991cd9b29ea0752fa1c303a19e8f210713efe4b5`:
+
+- 490 tracked files;
+- 320 Markdown files repository-wide;
+- 318 Markdown files under `docs/`;
+- 21 structured documentation paths;
+- 24 PNG files;
+- 42 Python files;
+- 68 Kotlin/KTS files;
+- 51 Python/Kotlin test-source paths;
+- 104 asset-manifest rows resolving to 95 unique asset IDs;
+- repository-owned Status Wave-001 audit: 1,019 structured records;
+- Gate Twelve baseline: 9 nodes / 8 edges.
+
+Authorities:
+
+- `docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-04.md`
+- `docs/evidence/repository_inventory_2026-10-04.json`
+
+This advances D-019 but does not complete it. Current-head Markdown word counts, generalized world/domain extractors, provenance-normalized asset-stage counts, and executed-test evidence remain open.
+
 ## 3. Master documentation map
 
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
