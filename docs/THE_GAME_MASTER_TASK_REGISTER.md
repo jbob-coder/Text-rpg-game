@@ -940,9 +940,17 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - RESULT: a bounded original parent settlement/region/municipal/route/terrain-climate proposal exists without changing local IDs, local route data, W3 coordinates or higher sovereign canon. Working names remain non-canon until accepted/revised.
 
 ### TASK D-032 — Mechanics schema/API migration packets
-- STATUS: `PENDING`
+- STATUS: `IN_PROGRESS / COMBAT CHILD COMPLETE`
 - PRIORITY: `P0/P1`
-- OUTPUT: progression/social/items/combat/adversary target schemas mapped to existing engine APIs, saves, projections and tests.
+- OUTPUT TARGET: progression/social/items/combat/adversary target schemas mapped to existing engine APIs, saves, projections and tests.
+- COMPLETED CHILD:
+  - `docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md`
+- COMBAT DECISION:
+  - Phase 1 tactical runtime state remains transient authoritative Python state;
+  - durable GameState/save schema v1 is unchanged during combat;
+  - validated aftermath commits durable consequences atomically;
+  - optional top-level tactical content sections are proposed rather than widening the current fixed registry categories.
+- STILL OPEN: progression, social, items/economy and persistent-adversary migration packets; exact implementation/tests remain separate.
 
 ### TASK D-049 — Application UI relationship architecture planning
 - STATUS: `PLANNING ONLY / DOMAIN-DEPENDENT / FINAL REFINEMENT DEFERRED`
@@ -1117,15 +1125,15 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 ### TASK D-054 — Author Gate Twelve Phase 1 tactical encounter packet
 - STATUS: DONE / PROPOSED CONTENT PACKET
 - PRIORITY: P0 TRACK B
-- OUTPUT: docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md
+- OUTPUT: docs/systems/GATE_TWELVE_PHASE_1_TACTICAL_ENCOUNTER_PACKET.md
 - CURRENT FACTS USED: SERVICE_TUNNEL, fresh boot prints, Gate Twelve/Trace Chamber connectivity, KNOW_DIRECTIONAL_TRACE_POINTS_DEEPER, optional NPC_TAMSIN party branch.
 - PROPOSED CONTENT:
-  - ENCOUNTER_GT_SERVICE_FORK_CONTACT_01;
+  - ENCOUNTER_GATE12_SERVICE_TUNNEL_CONTACT_01;
   - 12x8 one-layer tactical map;
   - Jack + optional Tamsin + two encounter-local contact placeholders;
   - reach/interact/investigate objective with legal retreat;
   - maximum four active actors;
-  - proposed COND_TUNNEL_LEG_INJURY and recovery path.
+  - proposed COND_MINOR_LEG_STRAIN and recovery path.
 - CANON BOUNDARY: opposing identities, new knowledge IDs, injury naming/modifiers, Jack first combat loadout, Tamsin combat action, and narrative consequences remain proposed until content review.
 - RUNTIME: not implemented.
 - PHASE 1 IMPACT: requirement 9 now has an authored proposed encounter packet; requirement 10 has a specific proposed injury/recovery case.
