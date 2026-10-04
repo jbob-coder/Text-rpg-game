@@ -54,11 +54,12 @@ When prior chats, older handoffs, other game repositories, experimental prototyp
 1. exact current repository source on the branch being worked;
 2. exact-head tests/build/runtime evidence;
 3. this Master Development & Documentation Program;
-4. `docs/THE_GAME_MASTER_TASK_REGISTER.md`;
-5. current domain master documents;
-6. current context logs;
-7. older handoffs and historical summaries;
-8. memory/chat recollection.
+4. `docs/MASTER_DOCUMENTATION_RECORD.md` for the consolidated done/partial/missing/blocker state;
+5. `docs/THE_GAME_MASTER_TASK_REGISTER.md`;
+6. current domain master documents;
+7. current context logs;
+8. older handoffs and historical summaries;
+9. memory/chat recollection.
 
 The default `main` branch is still a placeholder and is not implementation authority merely because it is the default branch.
 
@@ -305,6 +306,7 @@ The program will be authored as linked volumes, not one unmaintainable file.
 ## Volume 00 — Program authority
 Documents:
 - this file;
+- `docs/MASTER_DOCUMENTATION_RECORD.md` — consolidated documentation state, completed work, gaps, blockers and next actions;
 - task register;
 - cross-reference matrix;
 - context-log index;
