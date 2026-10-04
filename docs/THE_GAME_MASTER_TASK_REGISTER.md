@@ -1205,7 +1205,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETED_AT: 2026-10-04 AST
 
 ### TASK D-058 — Audit first-pass quota coverage across all volumes
-- STATUS: IN_PROGRESS / NEXT PROGRAM CONTROL ACTION
+- STATUS: DONE
 - PRIORITY: P0
 - PURPOSE:
   - determine which V00–V12 and cross-domain quotas are genuinely satisfied by canonical semantic units;
@@ -1213,3 +1213,44 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - prevent creating unnecessary documents in domains that already exceed their floor;
   - choose the next breadth domain from evidence rather than raw file totals.
 - OUTPUT TARGET: one current first-pass quota coverage audit plus synchronized quota/master/task direction.
+
+
+#### D-058 closure — semantic quota audit
+- OUTPUT: docs/FIRST_PASS_QUOTA_COVERAGE_AUDIT_2026-10-04.md
+- RESULT:
+  - one primary quota owner assigned per counted unit;
+  - duplicate/superseded files excluded;
+  - all areas were already at their floor except V12;
+  - duplicate Gate Twelve tactical encounter packet was discovered and removed;
+  - canonical retained packet: docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md.
+- COMPLETED_AT: 2026-10-04 AST
+
+### TASK D-059 — Complete V12 Android/APK first-pass documentation floor
+- STATUS: DONE
+- PRIORITY: P0 PROGRAM BREADTH / LATE-STAGE EXECUTION REMAINS BLOCKED
+- OUTPUTS:
+  - docs/android/ANDROID_RUNTIME_BRIDGE_ARCHITECTURE_STANDARD.md
+  - docs/android/ANDROID_BUILD_CONFIGURATION_RECONSTRUCTION_STANDARD.md
+  - docs/android/ANDROID_CI_AUTOMATED_ACCEPTANCE_STANDARD.md
+  - docs/android/ANDROID_DEVICE_PERFORMANCE_COMPATIBILITY_STANDARD.md
+  - docs/android/ANDROID_RELEASE_PROVENANCE_ROLLBACK_STANDARD.md
+- RESULT:
+  - V12 reaches 8 / 8 first-pass units with the existing APK master, reconstruction matrix and historical bounded validation report;
+  - current build configuration is recorded without freezing those dependency versions forever;
+  - production signing remains unresolved and no secrets are introduced;
+  - Galaxy A02-class acceptance is defined but unverified.
+- RUNTIME: no build/test/device execution occurred.
+- COMPLETED_AT: 2026-10-04 AST
+
+### TASK D-060 — Execute fresh corpus inventory and second-pass quota recalibration
+- STATUS: IN_PROGRESS / NEXT PROGRAM CONTROL ACTION
+- PRIORITY: P0
+- BLOCKER:
+  - exact word/heading/current-record totals require a complete-checkout execution or equivalent exhaustive current-head inventory process;
+  - do not fabricate totals from partial connector reads.
+- OUTPUT TARGETS:
+  - fresh current-head inventory evidence;
+  - second-pass/final quota revision;
+  - ranked reconstruction-depth/content/migration backlog;
+  - explicit Phase 1 dependency impact.
+- RULE: first-pass 148/148 coverage is a floor closure, not final documentation completion.
