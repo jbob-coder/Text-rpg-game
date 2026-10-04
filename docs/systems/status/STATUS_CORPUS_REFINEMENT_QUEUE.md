@@ -641,3 +641,16 @@ Future mapping must identify:
 Do not generate another large shallow wave merely to increase count.
 
 Continue deepening the existing corpus until reconstruction-grade patterns are stable.
+
+
+## Super Epic canon dry review
+
+Evidence:
+- `CANON_REVIEW_DRY_RUN_SUPER_EPIC_001_003.md`.
+
+Result:
+- Time Partition: RETURN_FOR_REFINEMENT;
+- Matter Recode: RETURN_FOR_REFINEMENT;
+- Probability Tilt: RETURN_FOR_REFINEMENT;
+- no deletion, merge, demotion, or rarity promotion recommended;
+- numeric/world/state-owner blockers remain.
