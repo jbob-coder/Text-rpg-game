@@ -20,6 +20,26 @@ This file answers: **what does each major document own, what does it reference, 
 
 ---
 
+## 1.1 Parallel execution authorities
+
+Two program-level companions now govern breadth and playable integration:
+
+### `docs/FIRST_PASS_DOMAIN_DOCUMENTATION_QUOTAS.md`
+Owns:
+- first-pass minimum canonical documentation quotas by V00–V12;
+- anti-filler counting rules;
+- breadth-before-extreme-depth direction;
+- later quota recalibration gate.
+
+### `docs/PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md`
+Owns:
+- bounded Gate Twelve solo-playable requirements;
+- Track A / Track B / Track C synchronization model;
+- Phase 1 implementation gate and exit criteria;
+- task-completion impact/update requirements.
+
+Every domain master should feed one or both of these authorities when its maturity changes.
+
 ## 2. Existing core documents
 
 ### `docs/systems/CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md`
