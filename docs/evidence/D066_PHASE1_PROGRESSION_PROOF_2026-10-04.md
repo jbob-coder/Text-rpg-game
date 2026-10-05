@@ -17,12 +17,12 @@ Selected route:
 - gain durable technique and ability mastery;
 - pay stamina/focus and world time;
 - persist through save/load;
-- reproduce the same result with and without a save boundary;
+- reproduce the same selected result with and without a save boundary;
 - project only player-safe discovered progression into Android.
 
 ## 2. Authority implementation
 
-Relevant authority-branch implementation commits include:
+Authority-branch implementation commits:
 - `58c6ae25b9b31d998e82b5ab4932585b7acf1ef1` — stable ability ID added to Python player-safe projection;
 - `ee0e01d10288722700ece98b944dc41f071da02d` — deterministic save-boundary progression regression;
 - `e3a77da21d708cde70a3533ce3d14e016c0889ef` — typed Android ability/technique/resource mapping;
@@ -30,90 +30,107 @@ Relevant authority-branch implementation commits include:
 - `e259c31f0fcbd7e4dd1115f0d8f1a4ed72460c8d` — bounded Stats ability consumer;
 - `a06a60f6c0b4265545bc9cad462f26dc29bd0645` — Compose progression assertion.
 
-Current authority blobs were rechecked after parallel merges:
-- `src/textrpg/powers.py`: `d75ab4099f171dd4950bd7f852a0ad7d9f560e6f`;
-- `tests/test_status.py`: `785a6b8db92c7c92fc036ea36be71b922592032c`;
-- `tests/test_save_resume_routes.py`: `f021bc84f4941771784af3b475b69f88057630e9`;
-- `android/app/src/main/java/com/thegame/rpg/ui/StatsSection.kt`: `fba4f4314d366d584bd1161c023efc6c6ef8fae2`;
-- `android/app/src/androidTest/java/com/thegame/rpg/ui/CharacterStatsSectionTest.kt`: `fdf64e34baa8b144a38b259824d7a4fc7d475c4a`.
+The authority branch has continued to receive parallel room/inventory/social work after these commits. D-066 was therefore verified on an isolated tree rather than claiming that a later multi-agent authority HEAD was globally equivalent.
 
-The authority `GameEngine.kt` also retains all D-066 DTO/mapper/privacy markers after concurrent room/inventory work:
-`GameAbilityResource`, `GameTechnique`, `GameAbility`, `GameSnapshot.abilities`, `status["abilities"]` mapping, forbidden authored-progression guard, and final `abilities = abilities` snapshot assignment.
+The current authority implementation retains the D-066 contract:
+- Python `ability_player_view` emits stable ability ID;
+- the save/resume deterministic progression regression remains present;
+- `GameAbilityResource`, `GameTechnique`, `GameAbility`, and `GameSnapshot.abilities` remain present;
+- `status["abilities"]` is mapped through the typed Kotlin bridge;
+- raw authored `requirements`, `discovery_requirements`, and `effects` are rejected at that boundary;
+- Stats renders projected progression without owning mutation or unlock arithmetic;
+- the D-066 JVM and Compose assertions remain present.
 
-## 3. Isolated exact verification tree
+## 3. Isolated verification tree
 
-Because the live authority branch was simultaneously receiving D-064/D-065/D-067 changes, D-066 was also verified on a clean isolated tree:
+Parallel D-064/D-065/D-067 changes were active on the authority branch, so Veyra created a verification-only PR from the frozen D-066 claim checkpoint.
 
 - verification base branch: `ai/veyra-d066-proof-base`;
 - base SHA: `4b038103380491866ecb1c686d5f81c0b4ecbb3f`;
 - verification branch: `ai/veyra-d066-phase1-proof`;
-- final verification head: `48ce6223fb84c3d31457c7f1dacaec87ce0d3df2`;
+- final verification head: `c60f2ca1f52caf95ced00272a57b432e7740a866`;
 - verification PR: **#42**;
-- PR diff: only the seven D-066 files needed for Python projection/persistence plus Android mapping/UI tests.
+- PR merge checkout verified by Actions: `1bc7939ba6100c99db0ab442fc6939aa9af44ed4`;
+- PR state after verification: **closed, unmerged**.
 
-The verification tree intentionally excluded concurrent D-064 room runtime changes. A first verification attempt exposed copied D-064 room assertions in the shared `BridgeStatusMapperTest.kt`; Veyra rebuilt that verification test file from the clean claim-head version plus only the three D-066 mapper tests before the final run.
+Final proof diff:
+- seven D-066 implementation/test files;
+- one verification-only workflow adjustment installing `pytest` so the frozen base's pre-existing pytest-style room test could be collected by the repository Python job.
+
+The workflow-only dependency adjustment was not merged into the authority branch and does not alter gameplay/runtime behavior.
 
 ## 4. GitHub Actions evidence
 
 Workflow: **Android Pixel Client**
-Final D-066 verification run: **#312**
-Run ID: `37250124885`
-Verification head: `48ce6223fb84c3d31457c7f1dacaec87ce0d3df2`
 
-### Python progression evidence
+### 4.1 Final fully green run
 
-The workflow's aggregate Python job reports one unrelated environment error because the unchanged clean-base `tests/test_room_projection.py` imports `pytest` while the workflow installs no pytest package.
+- workflow run number: **319**;
+- run ID: `37250623837`;
+- final proof head: `c60f2ca1f52caf95ced00272a57b432e7740a866`;
+- PR merge checkout: `1bc7939ba6100c99db0ab442fc6939aa9af44ed4`;
+- result: **SUCCESS**.
 
-Observed aggregate result:
-- **320 tests discovered**;
-- **1 error**: `ModuleNotFoundError: No module named 'pytest'`;
-- no D-066 test failure.
+### 4.2 Python engine
 
-D-066-relevant executed tests observed **PASS**:
-- `test_first_power_practice_is_deterministic_across_save_boundary`;
-- `test_first_power_practice_survives_save_resume`;
-- `test_status_projection_uses_rules_and_does_not_mutate_state`;
-- `test_first_power_requires_discovery_then_paid_practice`.
+Command executed by workflow:
 
-Therefore the repository-wide Python gate is not claimed green, but the D-066 authoritative progression/persistence/projection tests executed successfully.
+`PYTHONPATH=src python -m unittest discover -s tests -v`
 
-### Android JVM / build evidence
+Observed result:
+- **319 tests run**;
+- **319 passed**;
+- **0 failures/errors**;
+- D-066 deterministic save-boundary test passed;
+- D-066 status/player-safe projection regression passed.
+
+The first isolated attempt, run #312 / `37250124885`, exposed a pre-existing verification-harness mismatch: `tests/test_room_projection.py` imported `pytest` while the workflow did not install it. Veyra fixed only the proof workflow by installing `pytest`, then reran the complete gate. The final acceptance evidence is run #319, not the earlier partially red run.
+
+### 4.3 Android JVM / compile / package
 
 Job: `android-unit-and-assemble` — **SUCCESS**
 
 Observed successful steps:
-- Android unit tests;
-- Compose instrumentation-test compilation;
-- debug APK assembly;
-- APK content verification;
-- APK SHA-256 generation;
-- artifact upload.
+- `gradle -p android testDebugUnitTest --stacktrace`;
+- `gradle -p android :app:assembleDebugAndroidTest --stacktrace`;
+- `gradle -p android :app:assembleDebug --stacktrace`;
+- APK payload verification;
+- APK artifact upload.
 
 APK SHA-256:
-`a14ee38462da6a77a159225b71d2506bb0e18a051430b3a5f90e9a291eb81d8d`
 
-Uploaded artifact:
-- artifact ID: `11319893955`;
-- uploaded ZIP SHA-256: `83815f2b4cdb3cd84db9b61b68f7e1271959b55c07c55cdda6a17db171fec207`.
+`e7066e937c01e61d33541822c4532b4ce41c55cc61f8b63a40f5f9c901e7b441`
 
-### Android emulator / Compose evidence
+APK artifact:
+- name: `THE-GAME-Android-Pixel-Client-1bc7939ba6100c99db0ab442fc6939aa9af44ed4`;
+- artifact ID: `11320763236`;
+- artifact digest: `sha256:397516ebda57978a61fa266d4e76ea135e080585bd1110d0b72cb4eda790bf29`.
+
+### 4.4 Android emulator / Compose
 
 Job: `android-emulator-smoke` — **SUCCESS**
 
 Observed:
+- API 35 x86_64 emulator;
 - `gradle -p android connectedDebugAndroidTest --stacktrace`;
-- **35 tests started** on API 35 emulator;
+- **35 tests started**;
 - **35 tests finished**;
 - Gradle **BUILD SUCCESSFUL**;
-- expected screenshot evidence set verified successfully and uploaded.
+- expected UI screenshot set verified;
+- screenshot artifact upload succeeded.
 
-The D-066 Compose test is an ordinary, unfiltered instrumentation `@Test` in that connected test target; the connected suite completed without failures.
+UI QA artifact:
+- name: `THE-GAME-UI-QA-37250623837`;
+- artifact ID: `11320783554`;
+- digest: `sha256:a2fb3ca743375e4e60a5f7a48a00430d2cbbfc6a2ee3030130e9f9b6fb6be3f7`.
+
+The D-066 Compose progression assertion is an ordinary unfiltered instrumentation `@Test` in the connected test target; the full connected suite completed with no failures.
 
 ## 5. Player-safe projection boundary
 
 D-066 adds only discovered/player-safe progression data to Android:
 - stable ability ID;
-- display name/fallback;
+- display name;
 - rank;
 - mastery stage/XP;
 - form/state;
@@ -123,18 +140,43 @@ D-066 adds only discovered/player-safe progression data to Android:
 
 The typed mapper rejects authored `requirements`, `discovery_requirements`, and `effects` if they attempt to cross the Android progression boundary.
 
-No Android mutation endpoint was added. Mastery/resource/time/unlock authority remains in Python.
+No Android progression mutation endpoint was added. Mastery/resource/time/unlock authority remains in Python.
 
-## 6. Result
+## 6. Deterministic bonus proof — D-066-B
+
+The regression compares the same authored Gate Twelve progression sequence:
+- uninterrupted;
+- with an inserted save/load boundary before one-hour Signal Pulse practice.
+
+The selected fingerprint is equal across both paths:
+- ability mastery XP/stage;
+- technique mastery XP/stage;
+- stamina;
+- focus;
+- world time;
+- quest stage;
+- player-safe projected ability view.
+
+This closes **D-066-B**.
+
+## 7. Result
 
 **Phase 1 requirement 5 is satisfied by a bounded implemented proof.**
 
-This does **not** mean the final progression/class/profession/rank design is complete. It proves one reusable Gate Twelve progression path:
-authoritative action -> mastery/resource/time change -> save/load -> deterministic replay -> safe typed Android projection -> real Compose/emulator consumption.
+The proven chain is:
 
-## 7. Remaining repository-level issue
+authoritative authored action
+-> mastery/resource/time change
+-> save/load
+-> deterministic replay
+-> safe typed Android projection
+-> real Compose/emulator consumption.
 
-The global Python workflow remains red until the separate room-projection test/environment mismatch is resolved:
-`tests/test_room_projection.py` imports `pytest`, but the workflow's Python job does not install pytest.
+This does **not** mean the final evolved progression/classes/professions/ranks design is complete.
 
-That issue is outside D-066 and was not modified to manufacture a green result.
+## 8. Remaining limitations
+
+- No physical-device validation is claimed.
+- PR #42 was verification-only and was not merged.
+- The proof does not claim every later multi-agent authority HEAD is globally green; it proves the D-066 slice on the isolated claim-based verification tree and records the authority implementation commits that carry the slice.
+- Future progression/class/profession/rank expansion remains under its own migration/domain tasks.
