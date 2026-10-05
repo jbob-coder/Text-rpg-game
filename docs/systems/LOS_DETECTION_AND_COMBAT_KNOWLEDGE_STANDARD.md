@@ -45,6 +45,22 @@ Possible blockers:
 
 Movement blocking does not automatically imply LOS blocking.
 
+### 4.1 Opaque directional edge representation
+
+Phase 1 authored/canonical cells use `los_blocked_edges` for opaque N/E/S/W boundaries.
+
+A shared boundary is blocked when either adjacent cell declares that boundary:
+- source cell declares the outgoing edge; **or**
+- destination cell declares the opposite edge.
+
+Example:
+- A is immediately west of B;
+- the A/B boundary is opaque if A has `E` in `los_blocked_edges` or B has `W`.
+
+LOS queries must apply the same either-side rule in both ray directions, so one authored wall cannot become direction-dependent.
+
+`cover` remains independent. Partial/strong cover does not block LOS unless the same boundary is explicitly present in `los_blocked_edges`.
+
 ## 5. Awareness states
 
 Phase 1 enum:
