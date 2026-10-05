@@ -1,0 +1,73 @@
+{
+  "OPENING_DEPOT_BLACKOUT": [
+    {
+      "presentation_id": "NPC_TAMSIN",
+      "actor_id": "NPC_TAMSIN",
+      "public_name": "Tamsin",
+      "visual_family": "NPC_TAMSIN",
+      "placement_key": "PLATFORM_NINE_TAMSIN_RIGHT",
+      "pose_key": "front",
+      "outfit_key": "default",
+      "visible_tags": [],
+      "inspectable": true,
+      "dialogue_available": false,
+      "actions": []
+    },
+    {
+      "presentation_id": "SUPPORT_WOUNDED_COURIER",
+      "public_name": "Wounded courier",
+      "visual_family": "SUPPORT_WOUNDED_COURIER",
+      "placement_key": "PLATFORM_NINE_COURIER_LEFT",
+      "pose_key": "wounded",
+      "visible_tags": ["injured"],
+      "inspectable": true,
+      "dialogue_available": false,
+      "actions": []
+    }
+  ],
+  "OPENING_DECISION": [
+    {
+      "presentation_id": "NPC_TAMSIN",
+      "actor_id": "NPC_TAMSIN",
+      "public_name": "Tamsin",
+      "visual_family": "NPC_TAMSIN",
+      "placement_key": "PLATFORM_NINE_TAMSIN_RIGHT",
+      "pose_key": "front",
+      "outfit_key": "default",
+      "visible_tags": [],
+      "inspectable": true,
+      "dialogue_available": false,
+      "actions": []
+    }
+  ],
+  "OPENING_RECOVERY": [
+    {
+      "presentation_id": "NPC_TAMSIN",
+      "actor_id": "NPC_TAMSIN",
+      "public_name": "Tamsin",
+      "visual_family": "NPC_TAMSIN",
+      "placement_key": "RELAY_WORKBENCH_TAMSIN_RIGHT",
+      "pose_key": "front",
+      "outfit_key": "default",
+      "visible_tags": [],
+      "inspectable": true,
+      "dialogue_available": false,
+      "actions": []
+    }
+  ],
+  "OPENING_TUNNEL": [
+    {
+      "presentation_id": "NPC_TAMSIN",
+      "actor_id": "NPC_TAMSIN",
+      "public_name": "Tamsin",
+      "visual_family": "NPC_TAMSIN",
+      "placement_key": "SERVICE_TUNNEL_TAMSIN_RIGHT",
+      "pose_key": "front",
+      "outfit_key": "default",
+      "visible_tags": [],
+      "inspectable": true,
+      "dialogue_available": false,
+      "actions": []
+    }
+  ]
+}
