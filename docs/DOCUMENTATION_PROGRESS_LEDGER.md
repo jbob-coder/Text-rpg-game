@@ -841,3 +841,17 @@ records all first-pass domain/cross-domain floors as satisfied.
 No Android build, test suite, APK generation, signing operation, emulator run or physical-device test was executed by this documentation batch.
 
 The next measurable milestone is a fresh exhaustive current-head corpus inventory followed by second-pass quota recalibration.
+
+## 2026-10-04 D-060 second-pass recalibration
+
+D-060 corrected the inventory measurement contract and refreshed immutable structural evidence.
+
+Measured source HEAD `4570005b4d544f56db1222623955139a3b23c01a` contains 561 tracked files and 387 Markdown files. These counts do not reinterpret the owner's historical 3,000 / 2,000 / 10,000 / 10,000 / 2,000,000 targets.
+
+The 148-unit first-pass semantic floor remains closed. Second-pass progress is measured by domain closure gates, structured records, migration readiness, runtime proof, persistence, player-safe projection, consumer evidence, asset provenance/QA, performance and integrated Phase 1 evidence.
+
+Authority:
+- `docs/SECOND_PASS_DOCUMENTATION_RECALIBRATION_2026-10-04.md`
+- `docs/evidence/repository_inventory_d060_exact_revision_2026-10-04.json`
+
+Exact Markdown word/heading totals for a complete current checkout remain an open D-019 measurement, not an inferred number.
