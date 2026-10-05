@@ -823,24 +823,29 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETED_AT: `2026-10-02 08:01 AST` (existing D-005 evidence).
 
 ### TASK D-042 — Deep source-file existing-state audit
-- STATUS: `IN_PROGRESS / CURRENT-HEAD SOURCE INVENTORY COMPLETE / CROSS-BRANCH RECONCILIATION REMAINS`
+- STATUS: `IN_PROGRESS / CURRENT-HEAD INVENTORY COMPLETE / P5 BOUNDED CROSS-BRANCH SURVIVOR SLICE COMPLETE`
 - PRIORITY: `P0`
 - DOCUMENT: `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`
 - AUDITED_HEAD: `docs/master-game-development-program@d0382aaf6cca2920a7f315d08153ac6b0dddc5dd`
 - CURRENT:
-  - exact current-head inventory now covers 19 Python engine modules, 21 Python tests, 2 authored content JSON files, 35 Android main Kotlin files, 27 Android JVM/unit-test files, 3 instrumented-test files, 24 runtime PNGs, 2 workflows and 5 Android build/manifest configuration files;
+  - exact current-head inventory covers the recorded Python/Android/content/save/asset/test/build surfaces;
   - durable `GameState` fields and save schema v1 boundaries are recorded;
-  - current authored vertical-slice counts are recorded: 19 scenes, 31 choices, 4 quests, 1 character, 1 power, 9 world-map nodes and 8 edges;
-  - major engine/application/asset/test/build responsibilities now have KEEP / EXTEND / REWORK / REPLACE / NEW disposition guidance.
+  - major engine/application/asset/test/build responsibilities have KEEP / EXTEND / REWORK / REPLACE / NEW disposition guidance;
+  - Parallel P5 / Quorix reconciled the divergent PR #27/#28/#30/#31 Service Tunnel / Quiet Stair survivor family at audit head `f5c3731d0c494dd3948f88481a3d5b2d3d0f4138`;
+  - D-064, D-065/D-068 and D-067 completion heads were independently confirmed as ancestors of that authority head rather than stranded divergent histories;
+  - PR #27 and #30 are deferred D-029 source+raster migration candidates; #28 is a deferred arrival-preview candidate; #31 must be reimplemented before migration because its ambient loop lacks the required reduced-motion path;
+  - the previous remainder statements naming D-020 and D-044 as unfinished were corrected: both tasks are already DONE.
+- P5_EVIDENCE:
+  - `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`;
+  - `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_MATRIX_2026-10-05.json`.
 - REMAINING:
-  - exact field-to-composable/ViewModel/bridge consumer mapping (D-026/D-021);
-  - per-catalog consumer and hardcoded/temporary visual-state audit;
-  - asset lineage/provenance completion (D-029);
-  - cross-branch survivor/migration reconciliation (D-020);
-  - remaining PR #33 Class-C unique-requirement extraction (D-044);
-  - zero-consumer/deprecation evidence before any final REMOVE classification.
+  - exact field-to-composable/ViewModel/bridge consumer mapping remains D-026/D-021;
+  - per-catalog consumer/hardcoded visual-state gaps not already covered by task-local audits;
+  - asset lineage/provenance and visual promotion remain D-029;
+  - zero-consumer/deprecation evidence immediately before any final REMOVE classification;
+  - additional historical branch families only when materially unclassified after existing D-020/D-044/P5 evidence is consulted.
 - RELATED: TASK D-006.
-- VERIFICATION: documentation/source inspection only; no runtime tests or builds were executed by this audit.
+- VERIFICATION: P5 used exact branch/PR/blob/consumer inspection only; no runtime tests, builds, emulator, device or asset promotion was performed.
 
 ## Operational continuation — 2026-10-02 15:06 AST
 
