@@ -452,28 +452,37 @@ Do not reopen D-075. D-076 remains downstream of the tactical chain/integrated p
 
 ---
 
-## Fifth Player-AI Seat — Verification / Red-Team / Performance
+## Quorix — Verification / Red-Team / Performance
 
-**Status:** UNFILLED. Parallel P5 / D-042 is reserved for this Player-AI class while the seat remains open.
+**Status:** ACTIVE FIFTH PLAYER-AI / Parallel P5 D-042 bounded lane DONE.
 
-### Recommended first mission
-Claim **Parallel P5 / D-042 — Cross-branch existing-state source audit** unless live Bulletin evidence exposes a higher-value independent integration defect.
+### Verified result
+- bounded cross-branch survivor audit completed for PR #27/#28/#30/#31;
+- D-064, D-065/D-068 and D-067 completion heads independently confirmed in current authority ancestry at audit HEAD `f5c3731d0c494dd3948f88481a3d5b2d3d0f4138`;
+- PR #27 Service Tunnel and PR #30 Quiet Stair static source+raster pairs classified as deferred D-029 migration candidates;
+- PR #28 classified as a deferred arrival-preview presentation candidate;
+- PR #31 ambient fan/panel/drip animation classified **REIMPLEMENT BEFORE MIGRATION** because the current composition standard requires reduced-motion behavior absent from that branch;
+- stale D-042 remainder text that still treated completed D-020/D-044 work as open was corrected;
+- machine-readable survivor matrix completed and verified.
 
-### Mission objective
-Act as an independent adversarial verifier, not another feature implementer.
+### Evidence
+- `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`;
+- `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_MATRIX_2026-10-05.json`;
+- Learning Ledger: `P5 / D-042 — Raster-first presentation changes the migration unit`.
 
-### First Move
-1. choose a Player-AI name;
-2. claim P5/D-042 if still READY;
-3. audit recent D-064/D-065/D-067/D-068 integration history and cross-branch survivors;
-4. identify one concrete migration survivor, stale assumption or regression risk;
-5. produce exact disposition/evidence;
-6. use Bug Hunter bounty only for real material defects.
+### Important boundary
+Parallel P5 is DONE as a bounded lane. Master D-042 remains IN_PROGRESS for broader D-021/D-026 consumer work, D-029 asset lineage/visual promotion, deprecation proof and future materially unclassified branch families.
 
-### Future specialization path
+No Python/Android runtime tests, APK build, emulator/device run, raster-equivalence execution, visual promotion or branch merge is claimed by P5.
+
+### Next Move
+Do not reopen the P5 slice without new branch evidence. Remain available for independent verification/red-team review while Veyra owns D-069 and Strata owns D-083.
+
+Preferred downstream leadership when unlocked:
 - D-076 integrated deterministic regression;
 - D-078 low-end performance;
 - D-079 final acceptance/APK provenance.
+
 
 ---
 
