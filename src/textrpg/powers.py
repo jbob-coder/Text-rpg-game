@@ -1821,6 +1821,7 @@ def ability_player_view(
         raise RuleError(f"Ability mastery_xp must be a finite non-negative number: {ability_id}")
 
     output: Dict[str, Any] = {
+        "id": ability_id,
         "name": _visible_text(
             definition.get("name", ability.get("name")),
             "ability display name",
