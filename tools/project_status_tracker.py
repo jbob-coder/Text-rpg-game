@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Deterministic project-status tracker for THE GAME.
+"""Deterministic project-status and repository-manifest tracker for THE GAME.
 
-This tool reports repository structure and task progress for an immutable Git
-revision. It does not infer semantic completion from file counts. Task progress
-comes only from docs/THE_GAME_MASTER_TASK_REGISTER.md at the same revision.
+Reports are built from immutable Git revisions. Working-tree state is ignored.
+Task progress comes from docs/THE_GAME_MASTER_TASK_REGISTER.md at the same
+revision. D-019 remains the detailed corpus-inventory authority.
 
-Standard library only. Requires the requested revision in the local Git object
+Standard library only; requires requested revisions in the local Git object
 database.
 """
 
@@ -21,8 +21,8 @@ from pathlib import Path, PurePosixPath
 TASK_REGISTER = PurePosixPath("docs/THE_GAME_MASTER_TASK_REGISTER.md")
 STRUCTURED_DOC_SUFFIXES = {".json", ".yaml", ".yml", ".csv"}
 TASK_HEADING_RE = re.compile(r"^### TASK (D-\d+)\s+—\s+(.+?)\s*$")
-STATUS_RE = re.compile(r"^- STATUS:\s*`?([^`]+?)`?\s*$")
-PRIORITY_RE = re.compile(r"^- PRIORITY:\s*`?([^`]+?)`?\s*$")
+STATUS_RE = re.compile(r"^- STATUS:\s*\`?([^\`]+?)\`?\s*$")
+PRIORITY_RE = re.compile(r"^- PRIORITY:\s*\`?([^\`]+?)\`?\s*$")
 
 
 def _git(repo_root: Path, *args: str, text: bool = True) -> subprocess.CompletedProcess:
@@ -151,6 +151,75 @@ def _suffix(path: PurePosixPath) -> str:
     return path.suffix.lower() or "(none)"
 
 
+def is_document_like(path: PurePosixPath) -> bool:
+    if path.as_posix() in {"AGENTS.md", "README.md"}:
+        return True
+    return bool(
+        path.parts
+        and path.parts[0] == "docs"
+        and (
+            path.suffix.lower() == ".md"
+            or path.suffix.lower() in STRUCTURED_DOC_SUFFIXES
+        )
+    )
+
+
+def is_test_path(path: PurePosixPath) -> bool:
+    posix = f"/{path.as_posix()}"
+    return bool(
+        (path.parts and path.parts[0] == "tests")
+        or "/src/test/" in posix
+        or "/src/androidTest/" in posix
+    )
+
+
+def path_kind(path: PurePosixPath) -> str:
+    posix = path.as_posix()
+    if is_document_like(path):
+        return "document"
+    if is_test_path(path):
+        return "test"
+    if posix.startswith(".github/workflows/"):
+        return "workflow"
+    if path.parts and path.parts[0] == "src":
+        return "source"
+    if path.parts and path.parts[0] == "android":
+        return "android"
+    if path.parts and path.parts[0] == "tools":
+        return "tool"
+    if path.parts and path.parts[0] == "content":
+        return "content"
+    if path.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}:
+        return "asset"
+    if path.parts and path.parts[0] == "docs":
+        return "documentation_evidence_or_other"
+    return "other"
+
+
+def manifest_entry(row: dict) -> dict:
+    path: PurePosixPath = row["path"]
+    return {
+        "path": path.as_posix(),
+        "sha": row["sha"],
+        "bytes": row["size"],
+        "extension": _suffix(path),
+        "top_level": path.parts[0] if len(path.parts) > 1 else "(root)",
+        "docs_area": (
+            path.parts[1]
+            if len(path.parts) > 2 and path.parts[0] == "docs"
+            else "(docs-root)"
+            if len(path.parts) == 2 and path.parts[0] == "docs"
+            else None
+        ),
+        "kind": path_kind(path),
+        "document_like": is_document_like(path),
+    }
+
+
+def build_manifest(rows: list[dict]) -> list[dict]:
+    return [manifest_entry(row) for row in sorted(rows, key=lambda item: item["path"].as_posix())]
+
+
 def _group_rows(rows: list[dict], key_fn) -> dict[str, dict]:
     groups: dict[str, dict] = defaultdict(lambda: {"files": 0, "bytes": 0})
     for row in rows:
@@ -160,7 +229,117 @@ def _group_rows(rows: list[dict], key_fn) -> dict[str, dict]:
     return dict(sorted(groups.items(), key=lambda item: (-item[1]["files"], item[0])))
 
 
-def build_report(root: Path, revision: str = "HEAD") -> dict:
+def _tasks_for_revision(repo_root: Path, source_head: str, path_set: set[str]) -> list[dict]:
+    if TASK_REGISTER.as_posix() not in path_set:
+        return []
+    return parse_task_register(_show_text(repo_root, source_head, TASK_REGISTER))
+
+
+def compare_revisions(
+    repo_root: Path,
+    base_head: str,
+    source_head: str,
+    base_rows: list[dict],
+    source_rows: list[dict],
+) -> dict:
+    base_by_path = {row["path"].as_posix(): row for row in base_rows}
+    source_by_path = {row["path"].as_posix(): row for row in source_rows}
+    base_paths = set(base_by_path)
+    source_paths = set(source_by_path)
+
+    added = sorted(source_paths - base_paths)
+    removed = sorted(base_paths - source_paths)
+    common = base_paths & source_paths
+    changed = sorted(
+        path for path in common if base_by_path[path]["sha"] != source_by_path[path]["sha"]
+    )
+
+    def doc_paths(by_path: dict[str, dict]) -> set[str]:
+        return {
+            path
+            for path, row in by_path.items()
+            if is_document_like(row["path"])
+        }
+
+    base_docs = doc_paths(base_by_path)
+    source_docs = doc_paths(source_by_path)
+    docs_added = sorted(source_docs - base_docs)
+    docs_removed = sorted(base_docs - source_docs)
+    docs_changed = sorted(
+        path
+        for path in base_docs & source_docs
+        if base_by_path[path]["sha"] != source_by_path[path]["sha"]
+    )
+
+    base_tasks = _tasks_for_revision(repo_root, base_head, base_paths)
+    source_tasks = _tasks_for_revision(repo_root, source_head, source_paths)
+    base_task_by_id = {task["id"]: task for task in base_tasks}
+    source_task_by_id = {task["id"]: task for task in source_tasks}
+
+    task_ids_added = sorted(set(source_task_by_id) - set(base_task_by_id))
+    task_ids_removed = sorted(set(base_task_by_id) - set(source_task_by_id))
+    task_transitions = []
+    for task_id in sorted(set(base_task_by_id) & set(source_task_by_id)):
+        before = base_task_by_id[task_id]
+        after = source_task_by_id[task_id]
+        if before["state"] != after["state"] or before["status"] != after["status"]:
+            task_transitions.append(
+                {
+                    "id": task_id,
+                    "title": after["title"],
+                    "from_state": before["state"],
+                    "to_state": after["state"],
+                    "from_status": before["status"],
+                    "to_status": after["status"],
+                }
+            )
+
+    base_summary = _task_summary(base_tasks)
+    source_summary = _task_summary(source_tasks)
+
+    return {
+        "base_head": base_head,
+        "source_head": source_head,
+        "files": {
+            "added_count": len(added),
+            "removed_count": len(removed),
+            "changed_count": len(changed),
+            "added": added,
+            "removed": removed,
+            "changed": changed,
+        },
+        "documents": {
+            "added_count": len(docs_added),
+            "removed_count": len(docs_removed),
+            "changed_count": len(docs_changed),
+            "net_count_delta": len(source_docs) - len(base_docs),
+            "added": docs_added,
+            "removed": docs_removed,
+            "changed": docs_changed,
+        },
+        "tasks": {
+            "base_total": base_summary["total"],
+            "source_total": source_summary["total"],
+            "base_done": base_summary["done"],
+            "source_done": source_summary["done"],
+            "base_completion_pct": base_summary["completion_pct"],
+            "source_completion_pct": source_summary["completion_pct"],
+            "completion_pct_delta": round(
+                source_summary["completion_pct"] - base_summary["completion_pct"], 2
+            ),
+            "added_task_ids": task_ids_added,
+            "removed_task_ids": task_ids_removed,
+            "transitions": task_transitions,
+        },
+    }
+
+
+def build_report(
+    root: Path,
+    revision: str = "HEAD",
+    base_revision: str | None = None,
+    include_manifest: bool = False,
+) -> dict:
     repo_root = _repository_root(root)
     source_head = _resolve_commit(repo_root, revision)
     rows = _ls_tree(repo_root, source_head)
@@ -170,8 +349,7 @@ def build_report(root: Path, revision: str = "HEAD") -> dict:
     if TASK_REGISTER.as_posix() not in path_set:
         raise FileNotFoundError(f"Missing task register at {source_head}: {TASK_REGISTER}")
 
-    task_text = _show_text(repo_root, source_head, TASK_REGISTER)
-    tasks = parse_task_register(task_text)
+    tasks = _tasks_for_revision(repo_root, source_head, path_set)
 
     top_level = _group_rows(
         rows,
@@ -195,35 +373,11 @@ def build_report(root: Path, revision: str = "HEAD") -> dict:
         and path.parts[0] == "docs"
         and path.suffix.lower() in STRUCTURED_DOC_SUFFIXES
     ]
-    document_like = [
-        path
-        for path in paths
-        if (
-            path.as_posix() in {"AGENTS.md", "README.md"}
-            or (
-                path.parts
-                and path.parts[0] == "docs"
-                and (
-                    path.suffix.lower() == ".md"
-                    or path.suffix.lower() in STRUCTURED_DOC_SUFFIXES
-                )
-            )
-        )
-    ]
+    document_like = [path for path in paths if is_document_like(path)]
+    tests = [path for path in paths if is_test_path(path)]
 
-    tests = [
-        path
-        for path in paths
-        if (
-            path.parts
-            and path.parts[0] == "tests"
-            or "/src/test/" in f"/{path.as_posix()}"
-            or "/src/androidTest/" in f"/{path.as_posix()}"
-        )
-    ]
-
-    return {
-        "schema_version": 1,
+    report = {
+        "schema_version": 2,
         "requested_revision": revision,
         "source_head": source_head,
         "inventory_mode": "git_ls_tree_exact_revision",
@@ -264,10 +418,26 @@ def build_report(root: Path, revision: str = "HEAD") -> dict:
             "Repository counts are bound to source_head and ignore working-tree state.",
             "Completion percentages are task-register metrics, not semantic estimates of total game/content completion.",
             "A document path existing does not prove its domain or runtime implementation is complete.",
-            "Executed test pass counts require separate execution evidence; test_paths is structural only.",
+            "Executed test pass counts require separate test evidence; test_paths is structural only.",
             "D-019 remains the detailed corpus/inventory authority; this tracker aggregates status for reporting.",
         ],
     }
+
+    if include_manifest:
+        report["manifest"] = build_manifest(rows)
+
+    if base_revision is not None:
+        base_head = _resolve_commit(repo_root, base_revision)
+        base_rows = _ls_tree(repo_root, base_head)
+        report["delta"] = compare_revisions(
+            repo_root,
+            base_head,
+            source_head,
+            base_rows,
+            rows,
+        )
+
+    return report
 
 
 def render_markdown(report: dict) -> str:
@@ -279,8 +449,8 @@ def render_markdown(report: dict) -> str:
     lines = [
         "# THE GAME — Project Status Snapshot",
         "",
-        f"Source HEAD: `{report['source_head']}`",
-        f"Inventory mode: `{report['inventory_mode']}`",
+        f"Source HEAD: \`{report['source_head']}\`",
+        f"Inventory mode: \`{report['inventory_mode']}\`",
         "",
         "## Executive status",
         "",
@@ -292,22 +462,42 @@ def render_markdown(report: dict) -> str:
         f"- Repository Markdown documents: **{docs['repository_markdown_documents']}**.",
         f"- Markdown documents under docs/: **{docs['docs_markdown_documents']}**.",
         f"- Structured documentation records under docs/: **{docs['structured_docs_under_docs']}**.",
-        f"- Document-like paths (defined below): **{docs['document_like_paths']}**.",
+        f"- Document-like paths: **{docs['document_like_paths']}**.",
         "",
         "Completion % is deliberately conservative: DONE tasks divided by all registered tasks. "
         "It is not a claim that the total game, world content, art, Android release, or documentation depth is equally complete.",
         "",
-        "## Task states",
-        "",
     ]
+
+    if "delta" in report:
+        delta = report["delta"]
+        lines.extend(
+            [
+                "## Revision delta",
+                "",
+                f"Base HEAD: \`{delta['base_head']}\`",
+                f"- Files added / removed / changed: **{delta['files']['added_count']} / "
+                f"{delta['files']['removed_count']} / {delta['files']['changed_count']}**.",
+                f"- Documents added / removed / changed: **{delta['documents']['added_count']} / "
+                f"{delta['documents']['removed_count']} / {delta['documents']['changed_count']}**.",
+                f"- Net document-count delta: **{delta['documents']['net_count_delta']:+d}**.",
+                f"- Completion change: **{delta['tasks']['completion_pct_delta']:+.2f} percentage points**.",
+                "",
+            ]
+        )
+
+    lines.extend(["## Task states", ""])
     for state, count in sorted(tasks["by_state"].items()):
         lines.append(f"- {state}: **{count}**")
+
     lines.extend(["", "## Top-level repository map", ""])
     for name, item in repo["top_level"].items():
-        lines.append(f"- `{name}`: {item['files']} files / {item['bytes']} bytes")
+        lines.append(f"- \`{name}\`: {item['files']} files / {item['bytes']} bytes")
+
     lines.extend(["", "## Documentation-area map", ""])
     for name, item in docs["areas"].items():
-        lines.append(f"- `docs/{name}`: {item['files']} files / {item['bytes']} bytes")
+        lines.append(f"- \`docs/{name}\`: {item['files']} files / {item['bytes']} bytes")
+
     lines.extend(
         [
             "",
@@ -332,6 +522,7 @@ def render_markdown(report: dict) -> str:
             f"- {task['id']} — {task['state']} — {task['title']} "
             f"(raw status: {task['status'] or 'NOT_RECORDED'})"
         )
+
     lines.extend(["", "## Reporting boundaries", ""])
     for note in report["notes"]:
         lines.append(f"- {note}")
@@ -346,11 +537,37 @@ def main() -> int:
         default="HEAD",
         help="Git revision resolved to an immutable commit before reporting",
     )
-    parser.add_argument("--json-output", help="Optional JSON output path")
-    parser.add_argument("--markdown-output", help="Optional Markdown output path")
+    parser.add_argument(
+        "--base-revision",
+        help="Optional historical revision used to report file/document/task deltas",
+    )
+    parser.add_argument("--json-output", help="Optional JSON status output path")
+    parser.add_argument("--markdown-output", help="Optional Markdown status output path")
+    parser.add_argument(
+        "--manifest-output",
+        help="Optional JSON file containing every tracked path and classification",
+    )
     args = parser.parse_args()
 
-    report = build_report(Path(args.root), args.revision)
+    report = build_report(
+        Path(args.root),
+        args.revision,
+        base_revision=args.base_revision,
+        include_manifest=bool(args.manifest_output),
+    )
+
+    if args.manifest_output:
+        manifest_payload = {
+            "schema_version": report["schema_version"],
+            "source_head": report["source_head"],
+            "tracked_files": report["repository"]["tracked_files"],
+            "manifest": report.pop("manifest"),
+        }
+        Path(args.manifest_output).write_text(
+            json.dumps(manifest_payload, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+
     json_payload = json.dumps(report, indent=2, sort_keys=True) + "\n"
     markdown_payload = render_markdown(report)
 
