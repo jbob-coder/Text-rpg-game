@@ -138,6 +138,36 @@ data class GameWorldMap(
     val edges: List<GameMapEdge> = emptyList(),
 )
 
+data class GameAbilityResource(
+    val label: String,
+    val current: Double,
+    val max: Double? = null,
+    val recoveryPerHour: Double? = null,
+)
+
+data class GameTechnique(
+    val id: String,
+    val name: String,
+    val stage: String,
+    val masteryXp: Double,
+    val uses: Int,
+    val ready: Boolean,
+    val cooldownRemainingMinutes: Int,
+)
+
+data class GameAbility(
+    val id: String,
+    val name: String,
+    val rank: Int,
+    val masteryStage: String,
+    val masteryXp: Double,
+    val form: String? = null,
+    val state: String,
+    val resource: GameAbilityResource? = null,
+    val techniques: List<GameTechnique> = emptyList(),
+    val completedEvolutionIds: List<String> = emptyList(),
+)
+
 data class GameSnapshot(
     val sceneId: String,
     val title: String,
@@ -158,6 +188,7 @@ data class GameSnapshot(
     val location: String,
     val contentId: String? = null,
     val canonStatus: String? = null,
+    val abilities: List<GameAbility> = emptyList(),
 )
 
 class EngineStartException(
@@ -288,6 +319,67 @@ internal object BridgeSnapshotMapper {
                     )
                 }
             }
+        }
+
+        val abilities = optionalList(status["abilities"], "status.abilities").mapIndexed { abilityIndex, item ->
+            val path = "status.abilities[$abilityIndex]"
+            val ability = objectMap(item, path)
+            require("requirements" !in ability && "discovery_requirements" !in ability && "effects" !in ability) {
+                "$path contains forbidden authored progression internals"
+            }
+            val masteryXp = nonNegativeNumber(ability["mastery_xp"], "$path.mastery_xp")
+            val resource = ability["resource"]?.let { rawResource ->
+                val resourcePath = "$path.resource"
+                val value = objectMap(rawResource, resourcePath)
+                val current = nonNegativeNumber(value["current"], "$resourcePath.current")
+                val max = optionalNumber(value["max"], "$resourcePath.max")?.also {
+                    require(it > 0.0) { "$resourcePath.max must be positive" }
+                    require(current <= it) { "$resourcePath.current cannot exceed max" }
+                }
+                val recovery = optionalNumber(value["recovery_per_hour"], "$resourcePath.recovery_per_hour")?.also {
+                    require(it >= 0.0) { "$resourcePath.recovery_per_hour must be non-negative" }
+                }
+                GameAbilityResource(
+                    label = text(value["label"], "$resourcePath.label"),
+                    current = current,
+                    max = max,
+                    recoveryPerHour = recovery,
+                )
+            }
+            val techniques = optionalList(ability["techniques"], "$path.techniques").mapIndexed { techniqueIndex, rawTechnique ->
+                val techniquePath = "$path.techniques[$techniqueIndex]"
+                val technique = objectMap(rawTechnique, techniquePath)
+                require("requirements" !in technique && "discovery_requirements" !in technique && "effects" !in technique) {
+                    "$techniquePath contains forbidden authored progression internals"
+                }
+                GameTechnique(
+                    id = stableId(technique["technique_id"], "$techniquePath.technique_id"),
+                    name = text(technique["name"], "$techniquePath.name"),
+                    stage = text(technique["stage"], "$techniquePath.stage"),
+                    masteryXp = nonNegativeNumber(technique["mastery_xp"], "$techniquePath.mastery_xp"),
+                    uses = integer(technique["uses"], "$techniquePath.uses"),
+                    ready = boolean(technique["ready"], "$techniquePath.ready"),
+                    cooldownRemainingMinutes = integer(
+                        technique["cooldown_remaining_minutes"],
+                        "$techniquePath.cooldown_remaining_minutes",
+                    ),
+                )
+            }
+            GameAbility(
+                id = stableId(ability["id"], "$path.id"),
+                name = text(ability["name"], "$path.name"),
+                rank = integer(ability["rank"], "$path.rank"),
+                masteryStage = text(ability["mastery_stage"], "$path.mastery_stage"),
+                masteryXp = masteryXp,
+                form = optionalText(ability["form"]),
+                state = text(ability["state"], "$path.state"),
+                resource = resource,
+                techniques = techniques,
+                completedEvolutionIds = stableIdList(
+                    ability["completed_evolutions"],
+                    "$path.completed_evolutions",
+                ),
+            )
         }
 
         val conditions = optionalList(status["conditions"], "status.conditions").mapIndexed { index, item ->
@@ -428,6 +520,7 @@ internal object BridgeSnapshotMapper {
             location = optionalText(meta["location"]) ?: sceneId,
             contentId = optionalText(meta["content_id"]),
             canonStatus = optionalText(meta["canon_status"]),
+            abilities = abilities,
         )
     }
 
@@ -458,6 +551,17 @@ internal object BridgeSnapshotMapper {
         }
         return value
     }
+
+    private val stableIdPattern = Regex("^[A-Z][A-Z0-9_]*$")
+
+    private fun stableId(value: Any?, label: String): String = text(value, label).also {
+        require(stableIdPattern.matches(it)) { "$label must be a stable uppercase ID" }
+    }
+
+    private fun stableIdList(value: Any?, label: String): List<String> =
+        optionalList(value, label).mapIndexed { index, item ->
+            stableId(item, "$label[$index]")
+        }
 
     private fun contributions(value: Any?, path: String): List<GameStatusContribution> =
         optionalList(value, path).mapIndexed { index, item ->
@@ -495,6 +599,14 @@ internal object BridgeSnapshotMapper {
         if (!output.isFinite()) throw IllegalArgumentException("$label must be finite")
         return output
     }
+
+    private fun nonNegativeNumber(value: Any?, label: String): Double =
+        number(value, label).also {
+            require(it >= 0.0) { "$label must be non-negative" }
+        }
+
+    private fun optionalNumber(value: Any?, label: String): Double? =
+        if (value == null) null else number(value, label)
 
     private fun integer(value: Any?, label: String): Int {
         if (value !is Number) throw IllegalArgumentException("$label must be numeric")
