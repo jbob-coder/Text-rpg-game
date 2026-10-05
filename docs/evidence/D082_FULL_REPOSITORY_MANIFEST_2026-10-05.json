@@ -1,0 +1,6285 @@
+{
+  "schema_version": 2,
+  "task": "D-082",
+  "base_head": "1721b71952733702c16cac6aa6f83f624e4db089",
+  "source_head": "5f36fb3859424f113a1c6fd5df25c3332fb293e0",
+  "tree_sha": "b0f182737d04def275689f4987800ed586274f27",
+  "tree_truncated": false,
+  "summary": {
+    "tracked_files": 622,
+    "document_like_paths": 452,
+    "repository_markdown_documents": 426,
+    "docs_markdown_documents": 424,
+    "structured_docs_under_docs": 26,
+    "tasks_total": 83,
+    "tasks_done": 56,
+    "completion_pct": 67.47
+  },
+  "delta": {
+    "files": {
+      "added_count": 0,
+      "removed_count": 0,
+      "changed_count": 6,
+      "added": [],
+      "removed": [],
+      "changed": [
+        "docs/AI_COORDINATION_ROOM.md",
+        "docs/AI_TASK_BULLETIN_BOARD.md",
+        "docs/PROJECT_STATUS_TRACKING_STANDARD.md",
+        "docs/THE_GAME_MASTER_TASK_REGISTER.md",
+        "tests/test_project_status_tracker.py",
+        "tools/project_status_tracker.py"
+      ]
+    },
+    "documents": {
+      "added_count": 0,
+      "removed_count": 0,
+      "changed_count": 4,
+      "net_count_delta": 0,
+      "added": [],
+      "removed": [],
+      "changed": [
+        "docs/AI_COORDINATION_ROOM.md",
+        "docs/AI_TASK_BULLETIN_BOARD.md",
+        "docs/PROJECT_STATUS_TRACKING_STANDARD.md",
+        "docs/THE_GAME_MASTER_TASK_REGISTER.md"
+      ]
+    },
+    "tasks": {
+      "base_total": 82,
+      "source_total": 83,
+      "base_done": 56,
+      "source_done": 56,
+      "base_completion_pct": 68.29,
+      "source_completion_pct": 67.47,
+      "completion_pct_delta": -0.82,
+      "added_task_ids": [
+        "D-082"
+      ],
+      "removed_task_ids": [],
+      "transitions": []
+    }
+  },
+  "manifest": [
+    {
+      "path": ".github/workflows/android-apk-artifact.yml",
+      "sha": "d59d723047f5b0e470897c6c19b518c659290c7b",
+      "bytes": 2419,
+      "extension": ".yml",
+      "top_level": ".github",
+      "docs_area": null,
+      "kind": "workflow",
+      "document_like": false
+    },
+    {
+      "path": ".github/workflows/android-pixel-client.yml",
+      "sha": "6718af1b07d5815db5a81667c53151fe3e478fda",
+      "bytes": 5538,
+      "extension": ".yml",
+      "top_level": ".github",
+      "docs_area": null,
+      "kind": "workflow",
+      "document_like": false
+    },
+    {
+      "path": ".gitignore",
+      "sha": "f607f63f2f92d7fb4282a51c19e74ef6217d32b7",
+      "bytes": 91,
+      "extension": ".gitignore",
+      "top_level": "(root)",
+      "docs_area": null,
+      "kind": "other",
+      "document_like": false
+    },
+    {
+      "path": "AGENTS.md",
+      "sha": "7b6caf81e095bb3a29a8043819c9b00f885cf038",
+      "bytes": 16651,
+      "extension": ".md",
+      "top_level": "(root)",
+      "docs_area": null,
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "android/app/build.gradle.kts",
+      "sha": "0c1b1abf4c3dcb70b9df67b7be043d20df6ebd86",
+      "bytes": 1803,
+      "extension": ".kts",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/androidTest/java/com/thegame/rpg/ActivityBootSmokeTest.kt",
+      "sha": "809b6f984bcd73452fe3fd5689a00721763c78a0",
+      "bytes": 7335,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/androidTest/java/com/thegame/rpg/ui/CharacterStatsSectionTest.kt",
+      "sha": "fdf64e34baa8b144a38b259824d7a4fc7d475c4a",
+      "bytes": 22066,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/androidTest/java/com/thegame/rpg/ui/GameScreenTest.kt",
+      "sha": "0759909527fff5456f4e42c9a851b9367da345ab",
+      "bytes": 23301,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/AndroidManifest.xml",
+      "sha": "d2852fe6e8c9b016c8de12ba447f2577a4b8f2d8",
+      "bytes": 788,
+      "extension": ".xml",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/audio/NarrationController.kt",
+      "sha": "a9d05455634ad80325bcfcdf71dbe48ab532021d",
+      "bytes": 1885,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/boot/BootState.kt",
+      "sha": "72383a3a7d30b73d479f0bf3a6053991b65c8149",
+      "bytes": 640,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/engine/GameEngine.kt",
+      "sha": "6a339cc1b00db80bb0b78c25054f368008e94213",
+      "bytes": 23616,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/engine/PlayerSafeSnapshotMapper.kt",
+      "sha": "f9412afa54b1c87d7770aa429e992d9865421844",
+      "bytes": 670,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/engine/PythonGameEngine.kt",
+      "sha": "73d028d0720897a547509e83d5d6021ef5bcad8c",
+      "bytes": 15176,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/engine/RoomProjection.kt",
+      "sha": "15175138eac026ae9f0020ff5a1171d90a57b1b1",
+      "bytes": 202,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/engine/RoomProjectionContract.kt",
+      "sha": "c6e777dc7d9f756828a0b7cd44a02c5a07955350",
+      "bytes": 840,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/GameViewModel.kt",
+      "sha": "d3d9392efa451570f573f339220e6dffb96d5609",
+      "bytes": 11354,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/MainActivity.kt",
+      "sha": "2cc00c3ded79dedd1afaf19942e3ce10062ad12b",
+      "bytes": 2643,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/save/SaveRepository.kt",
+      "sha": "60947cc9b82f87c99ace25af593d6635a90652da",
+      "bytes": 2348,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/CharacterSection.kt",
+      "sha": "5fb30a6044c71a27c206cc4c67c3b21eb45528e7",
+      "bytes": 11985,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt",
+      "sha": "6b6af3ad19a5ca755b11b2748bacedd29f347866",
+      "bytes": 57475,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelAssetCatalog.kt",
+      "sha": "dc6f1d553dbb8abbccecef728ee67bbf54bad3c2",
+      "bytes": 36745,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelCharacterStagingCatalog.kt",
+      "sha": "b21a8a15913da87764b524c3b0d8fd22a55de48a",
+      "bytes": 1609,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelComponents.kt",
+      "sha": "c07a0cc784b9b49171bc44ce16485d0f3348c17a",
+      "bytes": 13308,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentDecalCatalog.kt",
+      "sha": "7c3b35a571b519820c357efc411cf4a6617eeee2",
+      "bytes": 4075,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentModuleCatalog.kt",
+      "sha": "440b7d41141d70700d6eba7c84303cbf109c10f2",
+      "bytes": 6316,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentOverlayCatalog.kt",
+      "sha": "58c2d3d6a2bb7752eae8115bba317c5e2df946f3",
+      "bytes": 4189,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentPreview.kt",
+      "sha": "c82ecd09a4f84297764dc504bd17c25b3535625e",
+      "bytes": 1376,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelEnvironmentPropCatalog.kt",
+      "sha": "9340f3d7663e9d5b99a81b7a2542f02432f3a2c8",
+      "bytes": 13338,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelEquipmentSlotCatalog.kt",
+      "sha": "f274a970ba4cba6c9917441a387784e546efe263",
+      "bytes": 14126,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelItemQualityFrameCatalog.kt",
+      "sha": "6da86938167c63cc2fb361f603ec1abdf96248a1",
+      "bytes": 2514,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelMapArtCatalog.kt",
+      "sha": "04a958bf3a6809977145aa088791d207d819449e",
+      "bytes": 9910,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelMapMarkerCatalog.kt",
+      "sha": "d6266f05407c4f51433beb9245b38b238b0dd2d0",
+      "bytes": 4504,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelMapTravelTransition.kt",
+      "sha": "3f364a0e7e937e09f45f02f28ee9e78c46d0186e",
+      "bytes": 5976,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelRasterCatalog.kt",
+      "sha": "6bfc11c88df1d2edb473ed8b3cd3293e7f2822d8",
+      "bytes": 5342,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneCatalog.kt",
+      "sha": "b6126ddcab09d1005baa0352299ec57b301bf3d2",
+      "bytes": 88902,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelSceneOverlayCatalog.kt",
+      "sha": "3f27dde95dcc0d338b8064de8f4701d0e72f4560",
+      "bytes": 31526,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelStoryActorCatalog.kt",
+      "sha": "8714a2f1aa5aed497bd6a71f3d50acc0ac980783",
+      "bytes": 6588,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelStoryActorPlacementResolver.kt",
+      "sha": "00fd8e5a86e8c2e2bac014f02b1c52744ead1271",
+      "bytes": 1168,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelTheme.kt",
+      "sha": "2c16d6ec9d0ae56186d6b7baf62f76802a29d4a1",
+      "bytes": 2377,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelTraceFxCatalog.kt",
+      "sha": "093617194e5761494b6649ef3704c794dd5b0137",
+      "bytes": 7237,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelTraceStrainCatalog.kt",
+      "sha": "cc06b89f5d22992fd140b43160fd7d2f6efba38b",
+      "bytes": 3471,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelUiChromeCatalog.kt",
+      "sha": "8defc127e424c953cac9bf9e95f4562e2b72664d",
+      "bytes": 8491,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelUiIconCatalog.kt",
+      "sha": "625e4136240c9a1673eda8c47adfdf56c25f6c3f",
+      "bytes": 14836,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/PixelUiUtilityCatalog.kt",
+      "sha": "48fc74e267fa1249aca82cd60a7100521b7ccc6f",
+      "bytes": 2568,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt",
+      "sha": "619c9cf5f6610f9ab9e118b8cab3ab3a875031f4",
+      "bytes": 11810,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/StatsSection.kt",
+      "sha": "fba4f4314d366d584bd1161c023efc6c6ef8fae2",
+      "bytes": 18509,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/java/com/thegame/rpg/ui/StatusComponents.kt",
+      "sha": "840a04908a006f5111ca99fbfc8967c2f645cc18",
+      "bytes": 4327,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_district_archive_default_scene.png",
+      "sha": "f511c36c84690c76f39cbf9928b608cc00461d52",
+      "bytes": 32900,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_district_plaza_open_scene.png",
+      "sha": "215ce07dbf78a15b5d7036c81ca02f3dd0e7ca79",
+      "bytes": 32900,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_evac_stair_default_scene.png",
+      "sha": "75a985e7cdee6e669b936c3d0a2d2e769939f394",
+      "bytes": 32900,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_gate_twelve_sealed_scene.png",
+      "sha": "2c2b1838060c66cc794e945fe56bece691cacea6",
+      "bytes": 32900,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_courier_necktag_icon.png",
+      "sha": "d8419b4363eaf236df2c216fe42c72af97ea2306",
+      "bytes": 4196,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_courier_necktag_paperdoll.png",
+      "sha": "325a95cee3165eb96145cec335eff545bd8ab7f8",
+      "bytes": 147,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_damaged.png",
+      "sha": "94e83ccc2b516b7bb90f1eff912a76d2cd03aba1",
+      "bytes": 4196,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_icon.png",
+      "sha": "1e7e1be2f55b834b016d702c27cc8bdef4815129",
+      "bytes": 4196,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_opened.png",
+      "sha": "20574ff702fecdcce4c2655a087f0443d20ab5eb",
+      "bytes": 4196,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_dead_relay_signal_lost.png",
+      "sha": "2ebad7b1d0bf958746987fe27e93fb7629c9e9a6",
+      "bytes": 4196,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_depot_jacket_icon.png",
+      "sha": "f7326020a190747d7d091d071bc0a1dd576e6c61",
+      "bytes": 4196,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_depot_jacket_paperdoll.png",
+      "sha": "b877935b3f637e95b863ae9533616d6771bc6e8b",
+      "bytes": 317,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_maintenance_seal_icon.png",
+      "sha": "206393a8c653eab9b2ab40caae74c436ce35f6f2",
+      "bytes": 4196,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_signal_ring_icon.png",
+      "sha": "5708bc08004fcd09d70faf4272a6d5be6381e359",
+      "bytes": 4196,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_signal_ring_paperdoll.png",
+      "sha": "b2907465f1f2161903a9ef54690818864cf13ad3",
+      "bytes": 6260,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_work_gloves_icon.png",
+      "sha": "f9123fefd4689ed0faf5730a1f7ea1ecbe713f65",
+      "bytes": 4196,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_item_work_gloves_paperdoll.png",
+      "sha": "9354066c3149e60e0521509c4f7a38220c54049f",
+      "bytes": 194,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_platform_nine_blackout_scene.png",
+      "sha": "591fa56cd17bdf5576774815ed330b3f40af4ccc",
+      "bytes": 1255,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_player_gameplay_front_base.png",
+      "sha": "d7cb5cd57a5e75dead06dd0db002a9e5894ffbeb",
+      "bytes": 508,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_player_hair_tech_placeholder.png",
+      "sha": "2cc4da04af11acfb332318c1e58df7b846530799",
+      "bytes": 215,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_relay_workbench_default_scene.png",
+      "sha": "96612e083a9db37a4588049dd2c3a3f2aad304b4",
+      "bytes": 1182,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_service_tunnel_default_scene.png",
+      "sha": "aa6e31fa37e3ebcadef84de9ccd47d93b6d065b1",
+      "bytes": 32900,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_trace_chamber_idle_scene.png",
+      "sha": "43f9919fef3e0ae0ad27c4e09e008064068a93ff",
+      "bytes": 32900,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/main/res/drawable-nodpi/pixel_workshop_row_default_scene.png",
+      "sha": "49a1e0789fcb83d84e872de04c521eb4dee5e1db",
+      "bytes": 32900,
+      "extension": ".png",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/boot/BootStateTest.kt",
+      "sha": "8ff02b91ece1d5921d29ca903b30a59446f2bc32",
+      "bytes": 907,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/engine/BridgeInventoryMapperTest.kt",
+      "sha": "758c5ae13c8a468a4919f75758052f003e2cb97a",
+      "bytes": 4733,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/engine/BridgeStatusMapperTest.kt",
+      "sha": "4441ab1263e526626a310068df9062e8710de342",
+      "bytes": 11204,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/engine/PythonGameEngineContractTest.kt",
+      "sha": "92cefdbf156a17a69ae3bf8ea138709887596673",
+      "bytes": 10487,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/engine/RoomProjectionMapperTest.kt",
+      "sha": "d687eb564b07d72c3f8067f68f73bbe1f884d977",
+      "bytes": 3660,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/engine/StatContributionMapperTest.kt",
+      "sha": "83e78427956cdd16604555c37a06aab353581e9a",
+      "bytes": 2849,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/save/SaveRepositoryTest.kt",
+      "sha": "4c6108bd40819f7abc3937b4096bdb04d2434c07",
+      "bytes": 4489,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/TravelTransitionContractTest.kt",
+      "sha": "2a65c1a2bf15321eb2229dff3b6f347ded9c737d",
+      "bytes": 1035,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelAssetCatalogTest.kt",
+      "sha": "9974215642f0cacf87ade9218f2d7e4dace548c7",
+      "bytes": 7209,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelCharacterStagingCatalogTest.kt",
+      "sha": "734affa2492f185e15e5c8be9a2b4ff243eab859",
+      "bytes": 865,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelEnvironmentDecalCatalogTest.kt",
+      "sha": "7eb484d8f8c730236ee91f3c8dc6f71364585dc9",
+      "bytes": 2141,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelEnvironmentModuleCatalogTest.kt",
+      "sha": "1e93c31702846b41ebcf63ae68e3f76a25f4996c",
+      "bytes": 2882,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelEnvironmentOverlayCatalogTest.kt",
+      "sha": "fe2c22c3d76cb5ceca9985b5d8ad5c9475afcb01",
+      "bytes": 2009,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelEnvironmentPropCatalogTest.kt",
+      "sha": "df9d54f1289bd41946fcf623ed4b33f047925391",
+      "bytes": 4101,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelEquipmentSlotCatalogTest.kt",
+      "sha": "0f41f652c2c9b0fe8f08b565e039bea0c517e97c",
+      "bytes": 2159,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelItemQualityFrameCatalogTest.kt",
+      "sha": "f51c3ff757bcab49c8abc4df83846b98fed261c5",
+      "bytes": 1573,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelMapArtCatalogTest.kt",
+      "sha": "d3d1c3d9ef67ace9e10e98a8c5a6d0b29e1795d9",
+      "bytes": 2162,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelMapMarkerCatalogTest.kt",
+      "sha": "4167d3995e58580d7fbee83c223ea58621bdfa92",
+      "bytes": 2073,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelMapTravelTransitionCatalogTest.kt",
+      "sha": "c4eaf73f4857db1057ee07bd1f4e3c31993c3322",
+      "bytes": 975,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelRasterCatalogTest.kt",
+      "sha": "e4f9f4c1b8bd00169ae74a70173fae9503703738",
+      "bytes": 1890,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelSceneCatalogTest.kt",
+      "sha": "b41c0754e1499d4d679b0577ba38b5e34886d775",
+      "bytes": 2594,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelSceneOverlayCatalogTest.kt",
+      "sha": "e81027cb6e3e5b6f7f1de383899188adc3c71613",
+      "bytes": 4244,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelStoryActorCatalogTest.kt",
+      "sha": "314fb71166ff7f2088022dcf9e54c9be5b5e86fe",
+      "bytes": 2966,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelStoryActorPlacementResolverTest.kt",
+      "sha": "2cb7d023039335126aa30b9b887d668dbd29e46b",
+      "bytes": 1096,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelTraceFxCatalogTest.kt",
+      "sha": "0c87022798a31e6bfadce86903e89f36f7582567",
+      "bytes": 4813,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelTraceStrainCatalogTest.kt",
+      "sha": "f56c7ad8377932daa670d5988474d8d9d8fab1e1",
+      "bytes": 2325,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelUiChromeCatalogTest.kt",
+      "sha": "e12a6f88c6dc6f0bfdad595451040f06015afd89",
+      "bytes": 2479,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelUiIconCatalogTest.kt",
+      "sha": "851e3d6dfff4adfdef71dee96d4148f887ec5842",
+      "bytes": 3842,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/PixelUiUtilityCatalogTest.kt",
+      "sha": "a9a29c3fee053198f3cb8735c16c2fdf36f23b9a",
+      "bytes": 1108,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/app/src/test/java/com/thegame/rpg/ui/StatusComponentsTest.kt",
+      "sha": "c83365c903064765096250f527fbf6592df101fa",
+      "bytes": 450,
+      "extension": ".kt",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "android/build.gradle.kts",
+      "sha": "7085d3293c78d62d329b30ebc181f5d3ef5f83ba",
+      "bytes": 206,
+      "extension": ".kts",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/gradle.properties",
+      "sha": "7a8e7a545d32a13b4cc64c2e71b2642f479bef21",
+      "bytes": 133,
+      "extension": ".properties",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "android/settings.gradle.kts",
+      "sha": "68541916a0ca55937d13109e71a338138f756963",
+      "bytes": 334,
+      "extension": ".kts",
+      "top_level": "android",
+      "docs_area": null,
+      "kind": "android",
+      "document_like": false
+    },
+    {
+      "path": "content/sample_scene.json",
+      "sha": "a9d4f7190f7e1bd45d1fbea0d0d8ebe3085a67e5",
+      "bytes": 3916,
+      "extension": ".json",
+      "top_level": "content",
+      "docs_area": null,
+      "kind": "content",
+      "document_like": false
+    },
+    {
+      "path": "content/vertical_slice_01_room_presence.json",
+      "sha": "d4e0a29ac10080c03f4f1317757d0787574a99b5",
+      "bytes": 1960,
+      "extension": ".json",
+      "top_level": "content",
+      "docs_area": null,
+      "kind": "content",
+      "document_like": false
+    },
+    {
+      "path": "content/vertical_slice_01.json",
+      "sha": "3eeeb9d684ef31759eb11aa595e4d111b16c4c82",
+      "bytes": 62912,
+      "extension": ".json",
+      "top_level": "content",
+      "docs_area": null,
+      "kind": "content",
+      "document_like": false
+    },
+    {
+      "path": "docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md",
+      "sha": "c5e8b77cdc75042aaecfde99e5a93b22ad857e10",
+      "bytes": 21829,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/AI_BRAG_ROOM.md",
+      "sha": "ccea578a58064c719e5f9b654324615746533169",
+      "bytes": 43559,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/AI_COMMAND_STRUCTURE.md",
+      "sha": "1aeaa424e1cca69b4bc779c13ebb48600b2d832f",
+      "bytes": 9531,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/AI_COORDINATION_ROOM.md",
+      "sha": "9e0c267807c3a1fed9a66cbc8b2a021b13bd8370",
+      "bytes": 58385,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/AI_COUNCIL_ROOM.md",
+      "sha": "6bf21394e861e5561a34a1b6dd2f68ec47aa8fc5",
+      "bytes": 32450,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md",
+      "sha": "82271d6b6bfa6a83fee999095a260c7a6342d262",
+      "bytes": 8517,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/AI_PARALLEL_WORK_LANES_2026-10-04.md",
+      "sha": "48a5a42e095d8307f2cbb8cb6edbb4b8db76980f",
+      "bytes": 7219,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/AI_PEER_REVIEW_BOUNTY.md",
+      "sha": "705c968532ed68e44c260cb72143e321bf0c294b",
+      "bytes": 5725,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/AI_RUNTIME_MERGE_STATE_GATE.md",
+      "sha": "c6cd6a9a19f4cb1b4597f26e927c230ff0ed77a8",
+      "bytes": 3456,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/AI_SCOREBOARD.md",
+      "sha": "bf1050c4c1242fae4a1104779ee9af1eb2820830",
+      "bytes": 8324,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/AI_TASK_BULLETIN_BOARD.md",
+      "sha": "021a1eddf326183887ac1c1f6ab1c901605eae5f",
+      "bytes": 55576,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/ALL_BRANCH_DOCUMENT_INDEX_2026-10-04.md",
+      "sha": "cdfdaaf315452e177a587ba5e239a71623d414d1",
+      "bytes": 37503,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/ANDROID_PIXEL_CLIENT_VALIDATION.md",
+      "sha": "564ace506fa44e3017c6ab99b4242f9db68c2706",
+      "bytes": 3411,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/ANDROID_BUILD_CONFIGURATION_RECONSTRUCTION_STANDARD.md",
+      "sha": "2cf33764e42842da61052143b198fe7a9fed7418",
+      "bytes": 4567,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/ANDROID_CI_AUTOMATED_ACCEPTANCE_STANDARD.md",
+      "sha": "e1b54a6befc4bd6a8b4650fd85ded40e285ffb00",
+      "bytes": 4249,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md",
+      "sha": "c6f683e0b8516e6d64a7cf5a8ee81bf13f7e2428",
+      "bytes": 32152,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md",
+      "sha": "a5bba00ab69096d939e52f31c88cfff753364b92",
+      "bytes": 18826,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/ANDROID_DEVICE_PERFORMANCE_COMPATIBILITY_STANDARD.md",
+      "sha": "501e7377dbaf8a3ce5d6af7945a3810eb0257acc",
+      "bytes": 4199,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md",
+      "sha": "c93d3348454098f2b76af1f76f69e17dae7f9797",
+      "bytes": 9152,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/ANDROID_RELEASE_PROVENANCE_ROLLBACK_STANDARD.md",
+      "sha": "279de4ce73d6396c8ce68e4e706eeb26b65d1c04",
+      "bytes": 5794,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/ANDROID_RUNTIME_BRIDGE_ARCHITECTURE_STANDARD.md",
+      "sha": "538fefaff1df302c6c31fe572659438feeec69f2",
+      "bytes": 5110,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/APK_FINAL_RECONSTRUCTION_MATRIX.md",
+      "sha": "6e67d015da71d4ca6b64eb4b7c784b61d0c637c2",
+      "bytes": 7880,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md",
+      "sha": "798df7cceaf630b06c9d310a767978158ae597d1",
+      "bytes": 10992,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/APPLICATION_UX_MASTER_PLAN.md",
+      "sha": "d5c7de021cea079c1a30dc125d57fcf377f4fdd5",
+      "bytes": 8869,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/PIXEL_MEMBER_ASSET_ID_CONSUMER_AUDIT_2026-10-04.md",
+      "sha": "554c9f6c76767819587d42d8d3ca3ea4fc4b8072",
+      "bytes": 8767,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md",
+      "sha": "ab00bca684ae44ad68cfed35cb6c30d0a1decfa0",
+      "bytes": 22111,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/android/ROOM_ACTOR_PROJECTION_IMPLEMENTATION_MIGRATION_MAP_2026-10-04.md",
+      "sha": "3f5627b80a5cf7de78b4c1e3d44656b9164b0af9",
+      "bytes": 15024,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "android",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ASSET_BATCH_001_001-100.md",
+      "sha": "4221980c03f17d4ebb17685d35411c203333f55c",
+      "bytes": 27087,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ASSET_BATCH_002_101-200.md",
+      "sha": "2237b49768b450ee9a6be916fd3bf7e07b5470a1",
+      "bytes": 23200,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ASSET_BATCH_003_201-300.md",
+      "sha": "3bfa4b51ab2746c3dafeef637f9fd9e14db341d0",
+      "bytes": 21565,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ASSET_BATCH_004_301-400.md",
+      "sha": "67f06a9f0dcdb4fe4335412ba0c9c2f11a76a95e",
+      "bytes": 20996,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ASSET_BATCH_005_401-500.md",
+      "sha": "4c131220ee4c6c044e32b5d453ef0d4f85035a51",
+      "bytes": 19237,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ASSET_FAMILY_PROVENANCE_INDEX_2026-10-03.md",
+      "sha": "9e4dc8dda7694ca75a1cc15aa0125a1b9b244e0c",
+      "bytes": 16468,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ASSET_MANIFEST_SCHEMA.md",
+      "sha": "0f4da2a0db86be9e0cb2478809fd15500ffa870c",
+      "bytes": 6535,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ASSET_PRODUCTION_ROADMAP_001-500.md",
+      "sha": "d2d0968b24356cb17749e486415ebfaf5efd36b9",
+      "bytes": 4066,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ASSET_PROVENANCE_REGISTRY.md",
+      "sha": "635ddd46131fc69acf8235f555c0d40abb1817d7",
+      "bytes": 12885,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/CHARACTER_EQUIPMENT_ITEM_ACTOR_PROVENANCE_2026-10-03.md",
+      "sha": "d77b3630708b59691e5f920c4c077e733792e05f",
+      "bytes": 14878,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/CHARACTER_PIXEL_BLUEPRINTS.md",
+      "sha": "26ba3fa71c76879db161a7e33c526407272b9986",
+      "bytes": 15710,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/CURRENT_ASSET_CONSUMER_ZERO_CONSUMER_AUDIT_2026-10-04.md",
+      "sha": "63f14255c2af81d0b08a4067a3b57af2274e9757",
+      "bytes": 12622,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ENVIRONMENT_SCENE_MAP_PROVENANCE_2026-10-03.md",
+      "sha": "6fae74512d65a7c75623100157ea8b7f65afa243",
+      "bytes": 20004,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/GATE_TWELVE_ASSET_STATUS_AND_PRODUCTION_MATRIX.md",
+      "sha": "621c3e0f37780d341666346dbad127374dfe0a59",
+      "bytes": 27939,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/GATE_TWELVE_MAP_ANIMATION_BLUEPRINT.md",
+      "sha": "ee01f9ff1912e7c37cbd64b8906d735cf21e0716",
+      "bytes": 9334,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/GATE_TWELVE_MAP_PIXEL_ASSET_BLUEPRINT.md",
+      "sha": "0e9b992e11c43d44d43a4b054ac8a38566a9839d",
+      "bytes": 22290,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/GATE_TWELVE_REGION_MASTER_PLAN.md",
+      "sha": "0d9e14f323b8d9d7ee9f57d63ef85c4186af3609",
+      "bytes": 150574,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/GLOBAL_ASSET_REUSE_OCCLUSION_MATRIX.md",
+      "sha": "1f6dbfea9c9cfc8a55896aceb412113ba1984426",
+      "bytes": 3903,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_A.json",
+      "sha": "751f62cf3dceb3e82b684cac21eb9d711ab869d8",
+      "bytes": 11764,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_B_CURRENT_LOADOUT_RELAY.json",
+      "sha": "70463e0cfbe582dc54446b2f0e590341a172ca29",
+      "bytes": 16627,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_C_CURRENT_SCENES.json",
+      "sha": "03e8184aaefc5deccb4d84732e7097527709e1f1",
+      "bytes": 23933,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_C_NAMED_SCENES.json",
+      "sha": "ab211df4b8de8be81eb8f59a65ce0a55029a229f",
+      "bytes": 13708,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_D_UI_MAP_ICONS.json",
+      "sha": "58f2af8ef17a4b169c95f34ea50cff35c35e9da7",
+      "bytes": 28167,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_E_TRACE_FX.json",
+      "sha": "1d0b53cc1fee209a00beab0023aff106f414c3a8",
+      "bytes": 9816,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_F_QUALITY_FRAMES.json",
+      "sha": "ae440d17e22d1653c7b272b8f1de5f5d62a1c6ca",
+      "bytes": 2420,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_G_EQUIPMENT_SLOTS.json",
+      "sha": "8db0d2bd13819ebbd4dddf42529695cdd084169b",
+      "bytes": 2280,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_H_ENVIRONMENT_OVERLAYS.json",
+      "sha": "022d7cb27421ffd89edd4e9a08f4818aadc25d06",
+      "bytes": 3836,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_I_CURRENT_LOCATION_PROPS.json",
+      "sha": "3cbd80064805be398002a5c0360b86703348990d",
+      "bytes": 6942,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_J_CURRENT_INFRASTRUCTURE_PROPS.json",
+      "sha": "f0715c1d2aab742f6cc8f50bc333cc4d076d8201",
+      "bytes": 6076,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/BATCH_001_WAVE_K_DECALS_DEPOT_DOOR.json",
+      "sha": "527fba80f0559acd25adbe096589a0b5f33992fa",
+      "bytes": 4598,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/manifests/RUNTIME_EXPANSION_ASSET_WAVE_2026-09-30.json",
+      "sha": "6754e992b657dc563ce37c87456088fd554668a3",
+      "bytes": 7602,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md",
+      "sha": "45a74502de7af5c60760cac22daab53adf957ae7",
+      "bytes": 13551,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md",
+      "sha": "ad37b656dd33f28999840d6e0d37a65328d8c8bf",
+      "bytes": 14770,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/PIXEL_ASSET_MASTER_PLAN.md",
+      "sha": "c2518a65dd584f17ef271d21815a8b5695cb610b",
+      "bytes": 12652,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/PR19_RASTER_EXPORTER_PROVENANCE_AUDIT_2026-10-04.md",
+      "sha": "aff2391dd921c5d978508bcfbb54f6f635d3c974",
+      "bytes": 3343,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/production_packets/BATCH_001_WAVE_A_BLUEPRINTS.md",
+      "sha": "744395cf6df0c583d32b14799d168b70e234c9ee",
+      "bytes": 12294,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/RASTER_DELIVERY_EVIDENCE_2026-10-02.md",
+      "sha": "67d9366c6feb5231a72283f1d8df956eb5c7de49",
+      "bytes": 3600,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/RASTER_EXPORT_AND_SOURCE_CORRESPONDENCE_2026-10-03.md",
+      "sha": "bbce3ed228cc05bea528c9034e8975cfb5222534",
+      "bytes": 17474,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/README.md",
+      "sha": "2f6714bab3c57c5ba820635db00fe9647e4a3ab4",
+      "bytes": 8841,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/REFERENCE_REGISTRY.md",
+      "sha": "5db93ef73898cef34f57478943faffc47ed8f40f",
+      "bytes": 2678,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/REFERENCE_TO_BLUEPRINT_PIPELINE.md",
+      "sha": "b82a823066090d4dde55b5fedecd6496e9097d00",
+      "bytes": 9460,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/references/REF_BATCH001_CONCEPT_BOARD_A.md",
+      "sha": "165e85bd081abd22b45190ee5ab79b739ba1abe2",
+      "bytes": 4479,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/references/UI_REFERENCE_CHARACTER_APPROVED_V1.md",
+      "sha": "fb998df6ac134ef57cac06c4eb055ac5409a6cbe",
+      "bytes": 3014,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md",
+      "sha": "e31b87904ec9703d444dda99e2a7b3aa7f9d53b8",
+      "bytes": 9641,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md",
+      "sha": "da4a6ba8ea92fccf4ec17e2ed12c478f835f6058",
+      "bytes": 7100,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/SERVICE_TUNNEL_AMBIENT_ANIMATION_MIGRATION_CONTRACT_2026-10-03.md",
+      "sha": "4134f36f521a26a385349af255d9cb52802ee41a",
+      "bytes": 15663,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/SOURCE_RASTER_RECONCILIATION_2026-10-02.md",
+      "sha": "be8235ee6c1f8f06bb49e791341530d034842efe",
+      "bytes": 6140,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/UI_FX_ANIMATION_PROVENANCE_2026-10-03.md",
+      "sha": "db8cac704482575ce518c7711f69bec43d880c03",
+      "bytes": 15606,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/assets/VISUAL_SURVIVOR_OWNER_DECISION_PACKET_2026-10-04.md",
+      "sha": "5d5b58a49f9ed192e3e0eefbe9ee094ffa34b225",
+      "bytes": 6609,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "assets",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/BASE_BRANCH_DOCUMENT_CROSSWALK_2026-10-02.md",
+      "sha": "9bb76235346decb17814bbc5adb9f6324316aa5c",
+      "bytes": 7820,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/CHARACTER_STATS_INSPECTION_HANDOFF.md",
+      "sha": "07b03b019d350118545c2a71ca8ea02ae73f5194",
+      "bytes": 8699,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/DECISION_AND_REBUILD_EXECUTION_REGISTER.md",
+      "sha": "4dad62e5689fcf92b011b49ec161a38a5da300b0",
+      "bytes": 9028,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md",
+      "sha": "1838541fd3253a45834c0b9b60b6f28f7e08e04a",
+      "bytes": 16441,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/DOCUMENTATION_CATALOG_2026-10-02.md",
+      "sha": "9f1648a3c66a22d76847cbda02d0fd3b90443551",
+      "bytes": 92343,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/DOCUMENTATION_CORPUS_ARCHITECTURE.md",
+      "sha": "6254a07a113f061e06bfe993825e748c28e2b2af",
+      "bytes": 11876,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md",
+      "sha": "aa1d561550153691fbf1d2454b0de594dc83d19f",
+      "bytes": 47993,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/DOCUMENTATION_EXPECTATION_AND_ACCEPTANCE_STANDARD.md",
+      "sha": "ba1216eeaf9773bb0b193c04ba0e9666e9d6af5d",
+      "bytes": 15928,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/DOCUMENTATION_PROGRESS_LEDGER.md",
+      "sha": "c87dea3a2ed9060554e3a3836e99e4f834edb983",
+      "bytes": 31080,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/CRITICAL_FIX_D067_BRIDGE_RECONCILIATION_2026-10-04.md",
+      "sha": "ebd29e247495eefe563805e236589e88d06f1e73",
+      "bytes": 4281,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/current_asset_consumer_audit_2026-10-04.json",
+      "sha": "d855f7ffd53e29bf970d19b2e525b0931fe66058",
+      "bytes": 11450,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md",
+      "sha": "67f89aa719aae9c6117a80eed0c897eb76af2a07",
+      "bytes": 10122,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/D065_TAMSIN_MEMORY_PROOF_2026-10-04.md",
+      "sha": "8c274d3e305b98a8d6209d4413cf894257370e0d",
+      "bytes": 2529,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/D066_PHASE1_PROGRESSION_PROOF_2026-10-04.md",
+      "sha": "c8e69df4db0a5e40acc0d2da0adc4bf5c5b6e9ce",
+      "bytes": 7445,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/D067_PHASE1_INVENTORY_EQUIPMENT_PROOF_2026-10-04.md",
+      "sha": "0254ee1987a2250328719be0fa0b771f773b5ebf",
+      "bytes": 2733,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md",
+      "sha": "38d4766b7fe76b0ac4f4b3d6eed4d934488ac58a",
+      "bytes": 7788,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md",
+      "sha": "690d9d4eb80a9e32f299192815958d7999110e7e",
+      "bytes": 9719,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/D075_PHASE1_QUEST_BRANCH_WORLD_CONSEQUENCE_2026-10-04.md",
+      "sha": "05dff76129e9d413b5c0af4549697c175cdb3ee8",
+      "bytes": 2780,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/D081_PROJECT_STATUS_BASELINE_2026-10-05.json",
+      "sha": "0e5b31f5ec47ba414a7d2c091fa01c66fed20191",
+      "bytes": 9522,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/documentation_catalog_2026-10-02.json",
+      "sha": "bad8e3d6d99393ef43f7a0b74694a83eaa841f03",
+      "bytes": 121375,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/gate_twelve_map_baseline_2026-10-02.json",
+      "sha": "460bf428e635e71ccaf7c76b49372d506dfbeeec",
+      "bytes": 3013,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/P4_D046_PHASE_C_PASSIVE_RUNTIME_DISPOSITION_2026-10-04.md",
+      "sha": "33e80d90f91934b225f1fea33db90b22a0b22462",
+      "bytes": 6697,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/pixel_member_consumer_audit_2026-10-04.json",
+      "sha": "eee0ed7d1fa56d76eb53d8dc2e7488fd19704c3e",
+      "bytes": 4043,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/raster_bindings_2026-10-02.json",
+      "sha": "eff2b30cbfa75370c4a92aa5aed3ac1f0b244e49",
+      "bytes": 13429,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/raster_equivalence_verifier_status_2026-10-03.json",
+      "sha": "f9e7025963cb3adf21aaed8667e67645f04fab30",
+      "bytes": 5243,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/raster_export_lineage_2026-10-03.json",
+      "sha": "f3dc38456c6dba64cbefdbe1015d3715d1432b1b",
+      "bytes": 34121,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/repository_inventory_2026-10-04.json",
+      "sha": "a99de187995df1a2124ce0f3af097dccf7637065",
+      "bytes": 3616,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/evidence/repository_inventory_d060_exact_revision_2026-10-04.json",
+      "sha": "0a77f2509a816c2c1baced8be009ecc8daf19492",
+      "bytes": 4290,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "evidence",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md",
+      "sha": "ce70eff63d59e40145e617c3a031f1e6177a02e5",
+      "bytes": 10164,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md",
+      "sha": "960555b1ca2246ec348574e5f34ed8859e4fe8a9",
+      "bytes": 31871,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/FIRST_PASS_DOMAIN_DOCUMENTATION_QUOTAS.md",
+      "sha": "abc28a27f00502f134ec17d1b234b5198a25b704",
+      "bytes": 15006,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/FIRST_PASS_QUOTA_COVERAGE_AUDIT_2026-10-04.md",
+      "sha": "d1bafa6b6e13d0a0462e3b6292f36e4be3d9c00f",
+      "bytes": 14470,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-01_GATE_TWELVE_MAP_ART_ANIMATION.md",
+      "sha": "d2c73405bab152bc7d4ff9b83ef34254de038fa2",
+      "bytes": 4914,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-01_MASTER_PROJECT_PRIORITY_AND_SCOPE.md",
+      "sha": "1923f1bc5b34b7a2e505bc223c0c61e93b0ee582",
+      "bytes": 6818,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-02_DOCUMENTATION_EXECUTION_CONTINUATION.md",
+      "sha": "1c8bc1daaeed0db8926780fb7e7c40e7cd049a8c",
+      "bytes": 1360,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-03_EVOLVED_GAME_DOCUMENTATION_FRAMING.md",
+      "sha": "0160cc908fc686bae3ac008bd4cc57a3d7a631df",
+      "bytes": 1194,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-03_PIXEL_ART_GENERATION_EXTRACTION_DIRECTIVE.md",
+      "sha": "79d6032215f164db62eeef2d2ee66a6128d65c4f",
+      "bytes": 4068,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-03_STATUS_UI_ABILITIES_PASSIVES_CANON.md",
+      "sha": "eb7b7362f19d0043ba528ad65040f175a316e49c",
+      "bytes": 1809,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-04_PARENT_SCALE_SEMANTICS_SUPER_EPIC_DRY_REVIEW_CHECKPOINT.md",
+      "sha": "d7d6f3c719176e6005d35d80ac8d7e1527b4e8b5",
+      "bytes": 7110,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-04_PASSIVE_QUALITATIVE_FIXTURE_BASELINE_TIME_PARTITION_CHECKPOINT.md",
+      "sha": "f37ffcd7cc339bd06d5e6537d258240cb74a9be1",
+      "bytes": 4717,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-04_STATUS_FIXTURE_WORLD_EVIDENCE_CHILD_RULE_CHECKPOINT.md",
+      "sha": "a903a6c2eaee76b23f64db398ed8190541266705",
+      "bytes": 4655,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-04_STATUS_PHASE_C_NORMALIZATION_CHECKPOINT.md",
+      "sha": "1eedb5d00c09d7ccd0a61cebb772f0ea3bb0d8be",
+      "bytes": 3080,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-04_STATUS_RECORD_LEVEL_NORMALIZATION_CHECKPOINT.md",
+      "sha": "aeb1facab027207e4bf3a18a66b9985708d836f4",
+      "bytes": 3161,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/2026-10-04_SUPER_EPIC_CHILD_STANDARDS_RANGE_FIXTURE_GATE_CHECKPOINT.md",
+      "sha": "354d74f6c6fbdfbbc1c69afa8adcdc4949a2ffaa",
+      "bytes": 4039,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_CONTEXT_LOGS/README.md",
+      "sha": "b895dfb64a3cdb0ba7567102238e46d1cf624c5f",
+      "bytes": 2251,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "GAME_CONTEXT_LOGS",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/GAME_FOUNDATION.md",
+      "sha": "a2d0020aa2d03c7334c438d09336f272d8ea8b01",
+      "bytes": 11903,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md",
+      "sha": "294b0330d6020eb307aa05c004e8cc898cc6d8ff",
+      "bytes": 9696,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/IMPLEMENTATION_STATUS.md",
+      "sha": "107752d22ad34d1a1996777cef254f996512a67a",
+      "bytes": 5972,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/IMPLEMENTATION_SURVIVOR_MIGRATION_MATRIX_2026-10-04.md",
+      "sha": "1faefa78710bc849bb55f58feb1f7be65d08b376",
+      "bytes": 11306,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/INTEGRATION_RULES_ABILITY_V5_REVIEW.md",
+      "sha": "713e3f79691565638f31a3a35e5e7fb051fab1bd",
+      "bytes": 6715,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/INTEGRATION_RULES_ABILITY_V6_RECONCILIATION.md",
+      "sha": "d2249fba64561450b61cc19883cf75c8843daf78",
+      "bytes": 27622,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md",
+      "sha": "df10f65fd5e5f2519236a2340434b8a00c5592ad",
+      "bytes": 13812,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md",
+      "sha": "d0587bca1fbe45dc9ec6735a114957899e5b78c5",
+      "bytes": 11593,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/MASTER_DOCUMENTATION_RECORD.md",
+      "sha": "85f7bedd14b0a6a7d1486850080556ab172252b5",
+      "bytes": 59300,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md",
+      "sha": "9d2a9a377f5249406eba97f30d5cb453b547883d",
+      "bytes": 36972,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/OPEN_WORLD_V1.md",
+      "sha": "c243d649e2d84b2056e8b6ebd5ade036d186a31e",
+      "bytes": 6592,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/OVERSEER_META_LOOP.md",
+      "sha": "e590583206af8e7bfa536aeb0faadea500e638ed",
+      "bytes": 4800,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md",
+      "sha": "48590b5fbc6a6af3ea58e3ae6ee7fe7e1dd3f96f",
+      "bytes": 8832,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "overseer",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/overseer/code_problems/CPR-001_d067_bridge_transition_contract_drift.md",
+      "sha": "c694f8133653c0622f3e3b745ff7ff454c9f9292",
+      "bytes": 4117,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "overseer",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/overseer/code_problems/CPR-002_d064_room_actor_unknown_field_strictness.md",
+      "sha": "7ae4e14cf29be834e90b6d610eb48d227929a9d6",
+      "bytes": 14950,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "overseer",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/overseer/code_problems/README.md",
+      "sha": "88773892f43ad0250ad43548248242fcac723c30",
+      "bytes": 1187,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "overseer",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/overseer/README.md",
+      "sha": "f37bbdcbb5e230fdfa7a37c2458aa875a4b89b7f",
+      "bytes": 3469,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "overseer",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/OWNER_DIRECTIVE_TRACEABILITY_MATRIX_2026-10-02.md",
+      "sha": "c45f45f36307310ad68d999e3beb47976f01816e",
+      "bytes": 12934,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md",
+      "sha": "83cba0c89949a66ed8cea93fcf1bd171f548ecff",
+      "bytes": 19724,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/PLAYER_AI_COORDINATION_PROMPT.md",
+      "sha": "0b0409911824dd531202a7c4dd5d63d6818b3daf",
+      "bytes": 3510,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/PLAYER_AI_ENTRY_PROMPT.md",
+      "sha": "b51728f429dbf527f048d4f3ad2fe69609a12b01",
+      "bytes": 6740,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/PLAYER_AI_MISSION_CONTROL.md",
+      "sha": "7f1fc32a80880e1f42d940031525c51f19c1303c",
+      "bytes": 24994,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md",
+      "sha": "d55996a74c18b55a86c1975496d612694dd197c8",
+      "bytes": 5065,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "player_guide",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/player_guide/PLAYER_LEARNING_LEDGER.md",
+      "sha": "e94ef88337468195a370cc65469616d32f12de34",
+      "bytes": 24854,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "player_guide",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/player_guide/README.md",
+      "sha": "6392f4dde7b5926ee02f9f957c9ef91774f17b2c",
+      "bytes": 4422,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "player_guide",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/PR33_CLASS_C_UNIQUE_REQUIREMENT_EXTRACTION_2026-10-03.md",
+      "sha": "ce1137634831545d99fd070a79e80574ff478abe",
+      "bytes": 17035,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/PR33_LIVE_SHARED_FILE_RECONCILIATION_2026-10-03.md",
+      "sha": "ade9391451fb10a8cef753bf61d7e2d1e3aadfc9",
+      "bytes": 15363,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/PR33_MOVING_BASE_DRIFT_RECONCILIATION_2026-10-02.md",
+      "sha": "51570355db6b0e1ccda0fe5493368f6d70794a43",
+      "bytes": 11366,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/PROJECT_OVERSEER_DECISION_LOG.md",
+      "sha": "3ff9dcffcd834de0d52730497bc2eb4a54d80bef",
+      "bytes": 32535,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/PROJECT_STATUS_SNAPSHOT_2026-10-05.md",
+      "sha": "041d16973334efab475ae37ddfc17485ef29a3a5",
+      "bytes": 5188,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/PROJECT_STATUS_TRACKING_STANDARD.md",
+      "sha": "dd19940ccec718f5fb0e0faaf7ee671f46257e84",
+      "bytes": 6544,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/REFERENCE_NOTES.md",
+      "sha": "703975f5ead4c8160ddcc17b407248e8a6abab04",
+      "bytes": 2049,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-02.md",
+      "sha": "b4bf6fe4e2a03882b0a311d717643757fc55384c",
+      "bytes": 5572,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-04.md",
+      "sha": "578359366a98dc635131c00f756be936c6fd2a8c",
+      "bytes": 5815,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/SECOND_PASS_DOCUMENTATION_RECALIBRATION_2026-10-04.md",
+      "sha": "6473cfc81915bfa26b8eae61b3832a59581a21ab",
+      "bytes": 9074,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/superpowers/plans/2026-09-27-android-pixel-client-v1.md",
+      "sha": "68fd153e2dfdb3fa923396d8262cd5b2d775c6ae",
+      "bytes": 10535,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "superpowers",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/SYSTEMS_CATALOG.md",
+      "sha": "897f043ed6818cadeafeaa7ef6ebb0b587a4922e",
+      "bytes": 11238,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ACTIVITY_INTERRUPTION_CONCURRENCY_STANDARD.md",
+      "sha": "0752e3e76fb600c33b4604431af6893cef73a250",
+      "bytes": 4671,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ACTIVITY_RECORD_AND_STATE_STANDARD.md",
+      "sha": "c166225920e3cc1315f944ced28eab618af39b58",
+      "bytes": 4796,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ACTIVITY_TIME_COST_ATOMICITY_STANDARD.md",
+      "sha": "2d54df17a07b62e778b7f9afe011b27bb1dace66",
+      "bytes": 3972,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ADVERSARY_ELIGIBILITY_IDENTITY_STANDARD.md",
+      "sha": "a1a4a3da63836299abdfa3a0162b610976fd6d30",
+      "bytes": 2938,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ADVERSARY_ENCOUNTER_MEMORY_ADAPTATION_STANDARD.md",
+      "sha": "f5dadd9b2ec22014ef5c90f785a513a3e21fa431",
+      "bytes": 3430,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ADVERSARY_HIERARCHY_SUCCESSION_STANDARD.md",
+      "sha": "63e3535ba0919074bead95d22f5ca52c509ebd88",
+      "bytes": 3278,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ADVERSARY_LIFECYCLE_RECURRENCE_STANDARD.md",
+      "sha": "a2421bf36a05bb6050869e95da81f36bf0bdf494",
+      "bytes": 2968,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ADVERSARY_PLAYER_SAFE_INTEL_STANDARD.md",
+      "sha": "6b6c0ad36ff49d7f73278e4995fb1681c85af8ab",
+      "bytes": 3296,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ADVERSARY_TERRITORY_ROUTING_STANDARD.md",
+      "sha": "9abb542c9d648901ba6571bebd8b122e382ec317",
+      "bytes": 3141,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md",
+      "sha": "05d3533dd4b31cdf359d7f08fd3a79c4c56cc032",
+      "bytes": 11538,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/COMBAT_ACTION_TARGETING_RESOLUTION_STANDARD.md",
+      "sha": "613876a69d4e2ee487d2222abea2e4dd1b256d78",
+      "bytes": 4859,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/COMBAT_AI_OBJECTIVES_RETREAT_STANDARD.md",
+      "sha": "ca757a59cfe0a31681d50d8dde3c02c21ef1e411",
+      "bytes": 4489,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/COMBAT_CLASS_CATALOG.md",
+      "sha": "b063d3f8691a142e169e124cfeaafe13587bd897",
+      "bytes": 47446,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/DIRECTIONAL_COVER_TERRAIN_STANDARD.md",
+      "sha": "d97a5a677868f9e321607a4cc63e8ce1287d4b83",
+      "bytes": 2805,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ECONOMY_CURRENCY_PRICING_STANDARD.md",
+      "sha": "2c328ba1e17ec605d1ce2d9b88eaae3397934cf9",
+      "bytes": 2915,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/EQUIPMENT_SLOT_LOADOUT_STANDARD.md",
+      "sha": "fe7b54348e09c6361275aa83ac202a8c8de66e01",
+      "bytes": 2981,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/EVOLVED_SKILL_REGISTRY.md",
+      "sha": "e39ffedde044fa7402715061a9a707ff6fcd27ff",
+      "bytes": 34330,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/FACTION_HIERARCHY_MEMBERSHIP_STANDARD.md",
+      "sha": "0cb7a2a7b131f739b8a71218bec42fe4943e5ba2",
+      "bytes": 4466,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md",
+      "sha": "097dd41ad9cb1ca3619769e65fec2db27eb6dc4e",
+      "bytes": 8872,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/GATE_TWELVE_ADVERSARY_PROOF_PACKET.md",
+      "sha": "ca9b5b51bd4129c3e7b8d6627babde9899d59fd8",
+      "bytes": 4726,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/GATE_TWELVE_PHASE1_ITEM_EQUIPMENT_PACKET.md",
+      "sha": "1f7d03d22f9cc3904afac586f16fcc1aa78ab3ef",
+      "bytes": 3815,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md",
+      "sha": "65b6edde5683ec3a444438ae744f522e7dc8aa94",
+      "bytes": 13020,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/INJURY_CONDITION_AFTERMATH_STANDARD.md",
+      "sha": "6a3b6662ae058d512e1c6b72948ae8dde82fcd71",
+      "bytes": 4642,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/INVENTORY_STACK_CONTAINER_STANDARD.md",
+      "sha": "2999383e6661e9ba7f2bc814365e525386a7baea",
+      "bytes": 3040,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ITEM_ECONOMY_LOOT_MASTER_PLAN.md",
+      "sha": "7df7052c73a594bc96c7b8d65739035f13d52e10",
+      "bytes": 6221,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ITEM_QUALITY_RARITY_CONDITION_STANDARD.md",
+      "sha": "c512d6ef243c222a5cd410476754a4ca2347e5ce",
+      "bytes": 2382,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/ITEM_RECORD_CATALOG_STANDARD.md",
+      "sha": "7735dd7b6e066614b15233cfeb2ae3869ab43db7",
+      "bytes": 3818,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/LOOT_REWARD_DISTRIBUTION_STANDARD.md",
+      "sha": "f08f6442daf304568ec7779949b01fad686c4951",
+      "bytes": 2811,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/LOS_DETECTION_AND_COMBAT_KNOWLEDGE_STANDARD.md",
+      "sha": "7063dc8b99804624ae6e17e1fc174f6098fe9764",
+      "bytes": 4001,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/MATERIAL_RESOURCE_ITEM_PROVENANCE_STANDARD.md",
+      "sha": "71de3f92092f48b76698dd50cb27d4d5848ae6f1",
+      "bytes": 3048,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/MOVEMENT_PATHING_AND_POSITIONING_STANDARD.md",
+      "sha": "da0fcce11b31f3133964addc2095c895b19df1f5",
+      "bytes": 3728,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/NPC_CHARACTER_IDENTITY_PROFILE_STANDARD.md",
+      "sha": "3da89d87a2fa4c1807021b34d92774c406078a79",
+      "bytes": 5971,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/NPC_GOALS_DECISION_STANDARD.md",
+      "sha": "0af1e61810047ad87f3f2458ae31b8c5d5d19f71",
+      "bytes": 4051,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/NPC_KNOWLEDGE_BELIEF_PRIVACY_STANDARD.md",
+      "sha": "8e3b9edfd29dba0994e1697ceec2e6abbe4c0dc3",
+      "bytes": 4129,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/NPC_MEMORY_EVENT_STANDARD.md",
+      "sha": "17f932948dfade45474c5cfa1f2416c645dcc5cc",
+      "bytes": 4292,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/NPC_PERSONALITY_BEHAVIOR_STANDARD.md",
+      "sha": "7c1fbd39aa8337c99fb3482c97bac9e2af695e3b",
+      "bytes": 5168,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/NPC_RELATIONSHIP_STATE_STANDARD.md",
+      "sha": "5778ee86b011f27554b5ef9596ae64c677505a9a",
+      "bytes": 4188,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/NPC_SCHEDULE_PRESENCE_STANDARD.md",
+      "sha": "4efe9a896bd3ccc6712f1edc5b7fc3bd903c0fc5",
+      "bytes": 5504,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md",
+      "sha": "3533f5f141571d2b137bf7b1a873bdb401026316",
+      "bytes": 13325,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md",
+      "sha": "ad39e6e9e21ce6a8018a98940848d663c6e5b11d",
+      "bytes": 18595,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/PERSISTENT_ADVERSARY_WORLD_MEMORY_MASTER_PLAN.md",
+      "sha": "d134ea6f762586772f58c8434adc9588fe270889",
+      "bytes": 7311,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md",
+      "sha": "ecaa68f1bcb619ada5acc18739055e2b5387f4ee",
+      "bytes": 15210,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/PHASE_1_ITEMS_ECONOMY_SCHEMA_API_MIGRATION_PACKET.md",
+      "sha": "6a2586dbc13ee0941b1541d7caac9050c0cc3360",
+      "bytes": 19985,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/PHASE_1_PROGRESSION_SCHEMA_API_MIGRATION_PACKET.md",
+      "sha": "8ffb07c30abc95fbf6d823fe106b4b25149c7704",
+      "bytes": 17656,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/PLAYER_ACTIVITIES_AND_LIFE_LOOP_MASTER_PLAN.md",
+      "sha": "1da4be564542dbddb40b12d183b048ed867946cb",
+      "bytes": 13991,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md",
+      "sha": "8371108b5c1b2039437abed3f80fd825748d5a25",
+      "bytes": 44533,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/PROGRESSION_MASTER_PLAN.md",
+      "sha": "a3b7efda62d5bf7a76bf333e0bda7b528a62be89",
+      "bytes": 6345,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/README.md",
+      "sha": "529f937ef619bb2a3981d19a1cbec7f2c3869fe7",
+      "bytes": 6959,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/RECOVERY_REST_TREATMENT_ACTIVITY_STANDARD.md",
+      "sha": "894e5b8140d60845582f3d0bb12bb5e2fff011a2",
+      "bytes": 4005,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/RECURRING_CHARACTER_PACKET_STANDARD.md",
+      "sha": "aa45d90dc5a0c72c09f6b34f63a5cb673dd5ac03",
+      "bytes": 4606,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/SAVE_AND_CONTENT_MIGRATION_MASTER_PLAN.md",
+      "sha": "9a500d2a1d7a7a5b0666f11c4a07a4e505dee839",
+      "bytes": 3643,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/SOCIAL_CONSEQUENCE_RUMOR_PROPAGATION_STANDARD.md",
+      "sha": "13c855b8609a985f610181e4c87fa6bbdf776855",
+      "bytes": 4738,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md",
+      "sha": "b200abab66e9a5a689edcb9fa88b14f0b2d19693",
+      "bytes": 26280,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md",
+      "sha": "0d727ab9071da8e0b2c4f776a95582a08b798560",
+      "bytes": 14160,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/ABILITY_CONTENT_AUTHORING_GUIDE.md",
+      "sha": "7ca555e5b09141d81a0248de7c42928a18242edf",
+      "bytes": 7112,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/ABILITY_ENERGY_RESERVE_ACCOUNTING_STANDARD.md",
+      "sha": "a7e36d48437a10a84a22b529b71ac7cea002a717",
+      "bytes": 10990,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/ABILITY_PASSIVE_CROSS_REFERENCE.md",
+      "sha": "d442cfe41839b44eb4121b8655fce2050e893123",
+      "bytes": 8996,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/ABILITY_RARITY_STANDARD.md",
+      "sha": "ab08e93b71b1907adc0f6e5e0a9a98b862bc3fb3",
+      "bytes": 9586,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/AWAKENING_EVENT_STANDARD.md",
+      "sha": "772990e2ed8a33bfde0c3ac192c9ce5858981c21",
+      "bytes": 4219,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/BIOLOGICAL_REPAIR_RESERVE_TRANSFORMATION_STANDARD.md",
+      "sha": "aafef7097abf5b99aa49cc5ba03f1d459b3d2a7a",
+      "bytes": 8794,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_AWAKENING_DETAIL_EPIC_001_004.md",
+      "sha": "fb88c696cce139eeb3d8fbf616277ecb5693b43a",
+      "bytes": 2058,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_AWAKENING_DETAIL_LEGENDARY_001_002.md",
+      "sha": "0e0dbd73fd6b884f0596d1ecdd49f017f2b793f8",
+      "bytes": 1514,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_AWAKENING_DETAIL_PRIME_LEGENDARY_001.md",
+      "sha": "4112c72cae828efc82b501e3bf092cdb663dfc90",
+      "bytes": 1595,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_AWAKENING_DETAIL_SUPER_EPIC_001_003.md",
+      "sha": "b4d6b4b071aba10e7dd907b4e14fdbf37656a609",
+      "bytes": 3015,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_AWAKENING_DETAIL_UNIQUE_001.md",
+      "sha": "950389a49c3c44f1676adef615ef98d1252e8680",
+      "bytes": 1416,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_AWAKENING_PROFILES_WAVE_001.md",
+      "sha": "5eb0b38891ea2572618e6a95608e0d6ee083e25d",
+      "bytes": 21599,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_COUNTER_DETAIL_EPIC_001_004.md",
+      "sha": "9bb6f72be34cc4cdf7808fe893d0cc50f3cdaafd",
+      "bytes": 2066,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_COUNTER_DETAIL_LEGENDARY_001_002.md",
+      "sha": "2e908d9ba97832a67c7a64ecd9a6a4d09165ce79",
+      "bytes": 1547,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_COUNTER_DETAIL_PRIME_LEGENDARY_001.md",
+      "sha": "0a03894f9165dd5880ef187a7fb75f7d9058ac1a",
+      "bytes": 1683,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_COUNTER_DETAIL_SUPER_EPIC_001_003.md",
+      "sha": "cbfe9a129193c067213a59d470973ac85517f79e",
+      "bytes": 2732,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_COUNTER_DETAIL_UNIQUE_001.md",
+      "sha": "43aabb38767ea8d2645beb7d592ceac26beaa2b0",
+      "bytes": 1402,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_COUNTER_PROFILES_WAVE_001.md",
+      "sha": "2f883c5cc23c0323055d0e3084c3bfd5b9d5d175",
+      "bytes": 29072,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_TECHNIQUE_DETAIL_COMMON_001_010.md",
+      "sha": "9a03c14bd845d0eb965dcbd4b681c97e7928ce1e",
+      "bytes": 16584,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_TECHNIQUE_DETAIL_EPIC_001_004.md",
+      "sha": "2a5c32cb95a5db9638c4614f81908a933ff45305",
+      "bytes": 5597,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_TECHNIQUE_DETAIL_LEGENDARY_001_002.md",
+      "sha": "673923855f90766aeb37ad317617676d1fc85cb9",
+      "bytes": 2821,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_TECHNIQUE_DETAIL_PRIME_LEGENDARY_001.md",
+      "sha": "cd772a7bc8827e7787c35c680897946342d89560",
+      "bytes": 1891,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_TECHNIQUE_DETAIL_RARE_001_010.md",
+      "sha": "6e87f36f7f34bbd3e132abc23215479e353c8d25",
+      "bytes": 13535,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_TECHNIQUE_DETAIL_SUPER_EPIC_001_003.md",
+      "sha": "3a65093bb1fcbdad92531ddd01031c9c75f36543",
+      "bytes": 3864,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_TECHNIQUE_DETAIL_SUPER_RARE_001_006.md",
+      "sha": "7af9095af0d91dfd455bf72ad18c02e2ea3badf6",
+      "bytes": 7672,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_TECHNIQUE_DETAIL_UNCOMMON_001_010.md",
+      "sha": "c2ad468a4fa73c4a4d00491fcd0d0b529fb9aa17",
+      "bytes": 15517,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_TECHNIQUE_DETAIL_UNIQUE_001.md",
+      "sha": "13c233829d3901761d6178df60264142cfd33acb",
+      "bytes": 1937,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/ABILITY_TECHNIQUES_WAVE_001.md",
+      "sha": "40950f4978f3a1b33daa235464a346db550f1516",
+      "bytes": 53656,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PASSIVE_DETAIL_COGNITIVE_0001_0010.md",
+      "sha": "490bd7db3a549c2a614048003813a3ec3300995c",
+      "bytes": 228,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PASSIVE_DETAIL_MENTAL_WILL_0001_0010.md",
+      "sha": "1f3807c95dbab05bd290c9b1eda44de4021b9364",
+      "bytes": 2475,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PASSIVE_DETAIL_MOVEMENT_0001_0010.md",
+      "sha": "eb8e2c95db12e19bad4f745dec244b4504cbb57a",
+      "bytes": 13084,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PASSIVE_DETAIL_PHYSICAL_0001_0010.md",
+      "sha": "f5baf3e2b6785036c7edd6fead57ff6252ac229b",
+      "bytes": 16568,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PASSIVE_DETAIL_RECOVERY_0001_0010.md",
+      "sha": "c003e6a0a869ff3230924d24bcee778b1dc28f97",
+      "bytes": 8724,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PASSIVE_DETAIL_SENSORY_0001_0010.md",
+      "sha": "39a3bc2b490a08c94fe41dff54eaac1cae0eb6a3",
+      "bytes": 10606,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PASSIVE_KNOWLEDGE_WAVE_001.md",
+      "sha": "255c43f6901ceac9ccb2ce11967b623edf6a0522",
+      "bytes": 43832,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PASSIVE_UNLOCK_PATHS_WAVE_001.md",
+      "sha": "adc4bebe1cfd43506f5553ddad023f8310e0ae35",
+      "bytes": 95840,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PASSIVES_WAVE_001.md",
+      "sha": "0e64051cfcf5f538cd0dff389e1824bc35c45e2a",
+      "bytes": 49837,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PRIMARY_ABILITIES_WAVE_001.md",
+      "sha": "c9e77fc2772d357b7a06ddf637d066a7365c25eb",
+      "bytes": 12969,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PRIMARY_ABILITY_DETAIL_COMMON_001_010.md",
+      "sha": "6b14d22596e20a1a774b813e7ec681942d13568a",
+      "bytes": 26781,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PRIMARY_ABILITY_DETAIL_EPIC_001_004.md",
+      "sha": "c3e7e4a9a44ad4f53ac4f7af5991d8f6cab2d83c",
+      "bytes": 10088,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PRIMARY_ABILITY_DETAIL_LEGENDARY_001_002.md",
+      "sha": "6d29f9765d822a9ddb491abfe119bb9827f3b0bc",
+      "bytes": 6000,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PRIMARY_ABILITY_DETAIL_PRIME_LEGENDARY_001.md",
+      "sha": "6649331d7ecd9e20c0c382fa7aeea765661f53a2",
+      "bytes": 8405,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PRIMARY_ABILITY_DETAIL_RARE_001_005.md",
+      "sha": "42ec17b5b10d805f60a1533d0fd8055ebd048f68",
+      "bytes": 6767,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PRIMARY_ABILITY_DETAIL_RARE_006_010.md",
+      "sha": "0375a12b1aa688d0a24357632e6a35711995ec71",
+      "bytes": 8204,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PRIMARY_ABILITY_DETAIL_SUPER_EPIC_001_003.md",
+      "sha": "58359bf09d9135b76d66ee9315abd7e2341916af",
+      "bytes": 5667,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PRIMARY_ABILITY_DETAIL_SUPER_RARE_001_006.md",
+      "sha": "340b701b3ac23814e5ef30f722ecaa0b45f599c8",
+      "bytes": 10084,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PRIMARY_ABILITY_DETAIL_UNCOMMON_001_010.md",
+      "sha": "752bb36b18c625be93c5446eb57433d017874d58",
+      "bytes": 29849,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/calibration/PRIMARY_ABILITY_DETAIL_UNIQUE_001.md",
+      "sha": "03f99754e7ff08e884f183fb5ee969bdec87c35d",
+      "bytes": 8318,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CANON_REVIEW_DRY_RUN_ABILITY_RAR_003.md",
+      "sha": "b99214f3b31d3fc54e656df2bcb66a5abf851276",
+      "bytes": 4464,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CANON_REVIEW_DRY_RUN_ABILITY_RAR_007.md",
+      "sha": "252cc6d02cd1e71ee9f4914972b825aa230c668b",
+      "bytes": 5954,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0002.md",
+      "sha": "ca529a518f11e862a313aebc1584e99335992a4d",
+      "bytes": 4566,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CANON_REVIEW_DRY_RUN_PASSIVE_FAC_0005.md",
+      "sha": "b21429b020689452ebb86eb60eeaa186fdbe0cd9",
+      "bytes": 4821,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CANON_REVIEW_DRY_RUN_PASSIVE_PRO_0008.md",
+      "sha": "a1f3d6b3c52dec3986a074e39f88da0216f9c7bc",
+      "bytes": 5388,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CANON_REVIEW_DRY_RUN_PASSIVE_REC_0001.md",
+      "sha": "2977e796b85453da4dbbb453edcd7439f62b3599",
+      "bytes": 3384,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CANON_REVIEW_DRY_RUN_PASSIVE_TEC_0006.md",
+      "sha": "e9eb72360a5ae5fab83cbf324a744c3f678ab40d",
+      "bytes": 4707,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CANON_REVIEW_DRY_RUN_SUPER_EPIC_001_003.md",
+      "sha": "f842bd211054326e0723edadc6fc39a0ee7d6862",
+      "bytes": 7823,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/COMMON_ABILITY_RARITY_OVERLAP_AUDIT_001_010.md",
+      "sha": "59c77fe83578d32e12cfdb9c6a80322436d61307",
+      "bytes": 11089,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CORE_RESOURCE_SCALE_AND_TRANSACTION_STANDARD.md",
+      "sha": "ee47ef02a35a86a5bde217a1e818f4ced8540aa4",
+      "bytes": 12278,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CROSS_TIER_ABILITY_BLOCKER_PROGRESS_002.md",
+      "sha": "48f5b53e1d6a439be4ddcde9750849297f660738",
+      "bytes": 4440,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CROSS_TIER_ABILITY_BLOCKER_PROGRESS.md",
+      "sha": "0973ecab27dce4040cd1e1558478d1011962efb1",
+      "bytes": 2443,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/CRYO_SINK_THERMAL_TRANSFER_RESERVE_STANDARD.md",
+      "sha": "a1ee2950ef7ff844638a1ebe22be06f39e5b3f2c",
+      "bytes": 12419,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/DOCUMENTATION_UNIT_LEDGER.md",
+      "sha": "69395194b2938a9de6b0d35fdc0549bb8bc35aaf",
+      "bytes": 3473,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/ENERGY_DEVOUR_SOURCE_WHITELIST_OUTPUT_STANDARD.md",
+      "sha": "c25a507b89ff406698af9e0fa448bf2a54eff458",
+      "bytes": 13443,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/INSTITUTION_ROLE_AUTHORIZATION_PROTOCOL_STANDARD.md",
+      "sha": "58444bd172defe9ad50957cfbc815193869856e7",
+      "bytes": 10493,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/KNOWLEDGE_EVIDENCE_CONFIDENCE_STANDARD.md",
+      "sha": "a1b86a5377aee33eb23ab125731d6495e875b92e",
+      "bytes": 4217,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/LAW_STATUS_UNIQUE_ONTOLOGY_STANDARD.md",
+      "sha": "df98d8be794af203dd53192799dbe71bf104f5b0",
+      "bytes": 3265,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/LEGENDARY_ABILITY_RARITY_OVERLAP_AUDIT_001_002.md",
+      "sha": "c991a5d10a2c100312a38912992fd625f8b0b6b1",
+      "bytes": 2914,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/LEVEL_100_EXCEPTION_STANDARD.md",
+      "sha": "9ac9cc06ff7334aa370cc95411dba4386f58a3ba",
+      "bytes": 4828,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/LEVEL_AND_XP_STANDARD.md",
+      "sha": "f2649065c13d87203959ef34a4b740e412f328ae",
+      "bytes": 3741,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/LIGHTNING_CONDUIT_THROUGHPUT_PATH_SAFETY_STANDARD.md",
+      "sha": "a9b03bbd58cc38be3b732226b16237b8871bcaf2",
+      "bytes": 8660,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/MATTER_RECODE_MATERIAL_COMPOSITION_ENERGY_STANDARD.md",
+      "sha": "3ff6dda4bf303c9408b2dde3d8d42bd0231b1c7b",
+      "bytes": 11057,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/MEMORY_ECHO_IMPRESSION_EVIDENCE_STANDARD.md",
+      "sha": "72ed530c89eee0810308b6dcc345a6f672f92f27",
+      "bytes": 9673,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/MOMENTUM_BANK_CAPTURE_RESERVE_RELEASE_STANDARD.md",
+      "sha": "77db3463706afa0b8d51ad23b5e0f7cbb37da1d9",
+      "bytes": 12256,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_ABILITY_SYNERGY_EFFECT_MAP_0001_0010.md",
+      "sha": "18a83a690edc8a6c0b448d8bc845202fe36b60d4",
+      "bytes": 2518,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_ABILITY_SYNERGY_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "f8bbb75ca917b9d25ea5edab2bf1bb0d9cac3501",
+      "bytes": 1925,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_ABILITY_SYNERGY_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "370eb39e88218757f6a9e5b33d1d06d65960b8e6",
+      "bytes": 3525,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_BEAST_INTERACTION_EFFECT_MAP_0001_0010.md",
+      "sha": "ea01ef67579799766d46173825576419fa57c67f",
+      "bytes": 1874,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_BEAST_INTERACTION_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "86615a9df97b8be6dc4f6e2f864c978e8c5c1687",
+      "bytes": 1289,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_BEAST_INTERACTION_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "8e627559e59fe34b7030fe546f07da777a42bac0",
+      "bytes": 1834,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CANONICAL_RESOLVER_BASE_TERM_MAP_WAVE_001.md",
+      "sha": "16efd0f4ed9c47ea24b2d800a32bdf763c35025b",
+      "bytes": 6011,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CANONICAL_RESOLVER_FIXTURE_READINESS_INDEX_WAVE_001.md",
+      "sha": "ab64e61caabe63cbacceb54d21c8afc5ddbfa982",
+      "bytes": 6284,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CANONICAL_RESOLVER_PARENT_FIXTURE_REQUIREMENTS_WAVE_001.md",
+      "sha": "32087a5215ae3e2d44ddd8aad73ca119095b28dd",
+      "bytes": 18792,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CANONICAL_RESOLVER_RANGE_FIXTURE_ELIGIBILITY_AUDIT_WAVE_001.md",
+      "sha": "8f47133f96c622933a8e9e22ff97cfee543fa6d3",
+      "bytes": 6052,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CANONICAL_RESOLVER_SCENARIO_ANCHORS_WAVE_001.md",
+      "sha": "26c30e97aadc8ae1ddbb115479470b9596e309bc",
+      "bytes": 14459,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CATALOG_INDEX.md",
+      "sha": "44dc0ca9f5b4d034500a6e400ad41a3ed9b9af4a",
+      "bytes": 12744,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CBT_EFFECT_MAP_0001_0010.md",
+      "sha": "bbadcfb6fb6f3190239704759f6a5977e7463bcc",
+      "bytes": 2265,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CBT_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "eba81da8631ba280cbdbe759c075cc942ea61ee3",
+      "bytes": 1762,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CBT_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "878bc7536876c246019ba8c9d8fd5da315ac5947",
+      "bytes": 2995,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CLASSIFIED_EFFECT_MAP_0001_0010.md",
+      "sha": "67539863b2f895762adfdb8fcc5b0e292e6fb748",
+      "bytes": 1752,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CLASSIFIED_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "bfcae345379f5599bde37380d0273a202e552f58",
+      "bytes": 893,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CLASSIFIED_STATE_MODEL_0001_0010.md",
+      "sha": "091384b5779bc280a43733ca5dcb3428b16e2794",
+      "bytes": 1033,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_COGNITIVE_EFFECT_MAP_0001_0010.md",
+      "sha": "2800103244ebf8459f5a644398d703b0419d48f5",
+      "bytes": 1072,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_COGNITIVE_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "136d254842678291f4e0a67b2a9885f6518dc0d2",
+      "bytes": 1850,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_COGNITIVE_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "a86224b9acbb2cac9f60b26b24bc70ea51ade41e",
+      "bytes": 2462,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CONTENT_AUTHORING_GUIDE.md",
+      "sha": "c5f40a6ac2674f9d434d14070c595d517468faaa",
+      "bytes": 6404,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_COSMIC_SYSTEM_EFFECT_MAP_0001_0010.md",
+      "sha": "f625b7ae88a7b960db280e06a97b7be23380bffb",
+      "bytes": 1814,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_COSMIC_SYSTEM_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "c1029911a7c86680c3dbb3d24a5d8e1ff4b03de5",
+      "bytes": 842,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_COSMIC_SYSTEM_STATE_MODEL_0001_0010.md",
+      "sha": "c7eedcec2215bdfc4ddf84503033bf3350ba2415",
+      "bytes": 1333,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_CROSS_FAMILY_COMPOSITION_STANDARD.md",
+      "sha": "adb390ebb224ee761c8df6ff2e47198f56b7d27f",
+      "bytes": 5501,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_DEFENSIVE_ADAPTATION_EFFECT_MAP_0001_0010.md",
+      "sha": "090235e6cc7c1f8ebf5d64e335563e620e9f937d",
+      "bytes": 2239,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_DEFENSIVE_ADAPTATION_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "03e68794546e90f4b1aac7223afe607d7952bbe2",
+      "bytes": 1781,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_DEFENSIVE_ADAPTATION_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "44be8e6fb50734d23542c5ce3bf759c2d3fb52f5",
+      "bytes": 3178,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_EVENT_QUALIFICATION_GOVERNANCE_STANDARD.md",
+      "sha": "f2628ebf3b5444ad5da975fc821a696964d8a2f2",
+      "bytes": 5035,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_FACTION_INSTITUTIONAL_EFFECT_MAP_0001_0010.md",
+      "sha": "a5a7497618c3fa8abe1ace21c9bb203f46ce48f6",
+      "bytes": 2220,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_FACTION_INSTITUTIONAL_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "0eaa354ca3bf65a7899a3dc39053166f2a022881",
+      "bytes": 1815,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_FACTION_INSTITUTIONAL_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "2617eb56f77f717bfff977e27c51fd6c59747cc9",
+      "bytes": 3254,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_FALSE_BELIEF_PROVENANCE_ROLE_CLASS_MAP_0005.md",
+      "sha": "889f86eac361eaf61dc4ac860921440615ea2d46",
+      "bytes": 4721,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_INJURY_SCAR_ADAPTATION_EFFECT_MAP_0001_0010.md",
+      "sha": "2220f33c327eef9c9bbadc879bb1c967b910d90f",
+      "bytes": 1940,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_INJURY_SCAR_ADAPTATION_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "60a9399c1b3944006bd507918c45c008f53d7016",
+      "bytes": 1253,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_INJURY_SCAR_ADAPTATION_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "720d37a66e083c8aeaa1ebdd2d3f82c5525bafb5",
+      "bytes": 1936,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_KNOWLEDGE_PROFILE_RECONCILIATION_AUDIT_WAVE_001.md",
+      "sha": "51f93e86a1d27f73f198ff5bd252307e3d4ff9b3",
+      "bytes": 6065,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_KNOWLEDGE_RECONCILIATION_WAVE_A_0004_0008_0010.md",
+      "sha": "0eda2a8a00e7f6c73582d6579646b26820b63308",
+      "bytes": 19799,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_KNOWLEDGE_RECONCILIATION_WAVE_B_0003_0009.md",
+      "sha": "f28a4ca1620844d69caf96cc76db98b3b302543c",
+      "bytes": 12001,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_KNOWLEDGE_RECONCILIATION_WAVE_C_FALSE_BELIEFS_0005.md",
+      "sha": "d097f07fe6189381fb7aaf1e5eb8bcffb8ae8f6e",
+      "bytes": 5803,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_KNOWLEDGE_ROLE_CLASS_ADJUDICATION_WAVE_001.md",
+      "sha": "0212068945f5bf7ae59b7cf63fa8ab027002da4f",
+      "bytes": 38593,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_LEADERSHIP_COORDINATION_EFFECT_MAP_0001_0010.md",
+      "sha": "209b23bf9601a959250a8996abd7fea8009a1e13",
+      "bytes": 2296,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_LEADERSHIP_COORDINATION_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "dd0362636cb1454de632da9bd35a5ef48aacb370",
+      "bytes": 1889,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_LEADERSHIP_COORDINATION_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "f42c5f7e34ab6f3833297edd619f3bb16778ea5c",
+      "bytes": 3339,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_MEDICAL_RECOVERY_PRACTICE_EFFECT_MAP_0001_0010.md",
+      "sha": "90a6b0732f074599b8a3dbdf6a9ed0bc37bf2b69",
+      "bytes": 2521,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_MEDICAL_RECOVERY_PRACTICE_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "de7d607dac55085d4560bfb699d6bedaba761f36",
+      "bytes": 1858,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_MEDICAL_RECOVERY_PRACTICE_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "4566aa0456336182eec2355c5754f60ebaa36377",
+      "bytes": 3522,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_MENTAL_WILL_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "6c2695216015db3cd58601b921b1ce005697c197",
+      "bytes": 3884,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_MENTAL_WILL_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "a1e0c2c1185645f7eafdbd592d8e3921d6f1b85e",
+      "bytes": 8011,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_MOVEMENT_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "850a3c9aef7ecff412bfdd5b9fe43f6389ee9ce6",
+      "bytes": 4516,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_MOVEMENT_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "51da070f24fa2d5fdaa1761af35d900572474852",
+      "bytes": 7448,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_NUMERIC_CALIBRATION_PILOT_001.md",
+      "sha": "54e67ede101cdd501524830adacd9489d774a592",
+      "bytes": 6355,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_OVERLAP_EDGE_ADJUDICATION_WAVE_001.md",
+      "sha": "55b92a4e34bf402c02b749357817481f428b741d",
+      "bytes": 30840,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_PHASE_C_PROGRESS_TRACKER.md",
+      "sha": "17d7e5dc742f796742c8f64261300102681ab70e",
+      "bytes": 16036,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_PHYSICAL_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "690105405937b9b0b868ae44d896d0fc32d742b1",
+      "bytes": 12398,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_PHYSICAL_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "c6f26472c8ae99cff6c5e4e199acdb1c956e7ebf",
+      "bytes": 12409,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_PROFESSION_EFFECT_MAP_0001_0010.md",
+      "sha": "7d1f3f87f862eb37513bcd3a1d8bc70cf4e1a412",
+      "bytes": 1747,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_PROFESSION_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "9b860306f75c6d1f07db3559aede3d746d510785",
+      "bytes": 1182,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_PROFESSION_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "803a8d195944caccbc37e896e08a02a1fd4f4253",
+      "bytes": 1737,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_A.md",
+      "sha": "4c94ba2bd7b7fd7c8fd560d790624a9ade176f64",
+      "bytes": 20888,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_B.md",
+      "sha": "dcdcdf19e0ac3ececb6b7c982b4affc547206a88",
+      "bytes": 20910,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_C.md",
+      "sha": "1699c657309f1dae4dccd5de6e65fabe14f84a13",
+      "bytes": 19754,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RECORD_OWNER_WRITE_TARGET_MATRIX_WAVE_001_INDEX.md",
+      "sha": "bdf1fb9b849750cc36371274d78b0fe5d6375661",
+      "bytes": 1205,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_A.md",
+      "sha": "f2032ebc6224f7dcc0f08779d84a071ebf2d0730",
+      "bytes": 20013,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_B.md",
+      "sha": "84aca730b9f951bc1ff1cf2386b9b5044ac4721f",
+      "bytes": 21038,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_C.md",
+      "sha": "ebb69b42e39e0f3fb8daa79dc84a9234756328c0",
+      "bytes": 18962,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RECORD_READ_DEPENDENCY_OVERLAP_MATRIX_WAVE_001_INDEX.md",
+      "sha": "32e391bae3231c3c1c62da61662f23f55b2ca0b8",
+      "bytes": 1291,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RECOVERY_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "36e704fdc889e3569e13201064cca70f6e176d2b",
+      "bytes": 9561,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RECOVERY_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "66ab23e7bc4597890b9601872ee3e7b5b3c076d4",
+      "bytes": 7583,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_REGISTRY_SCHEMA.md",
+      "sha": "42f95c0a47168c14455dcc6416e194fdff954c37",
+      "bytes": 5515,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_REQUIREMENT_LANGUAGE.md",
+      "sha": "62c4ab2765886a29ce4f10fe51179982b68fc9b8",
+      "bytes": 6047,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RESISTANCE_EFFECT_MAP_0001_0010.md",
+      "sha": "879fe0ad10f26a24ae4b813b3fc146507a805adf",
+      "bytes": 1928,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RESISTANCE_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "5c3c4b761dc02050ea6a52e4b309d33ff6042ae1",
+      "bytes": 1188,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RESISTANCE_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "517c6f727e119983fafa6ea20d04afb7c241bba9",
+      "bytes": 1738,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_RUNTIME_OWNER_PROJECTION_DISPOSITION_WAVE_001.md",
+      "sha": "b69518e2dca770f395710f6e468292855ca9f351",
+      "bytes": 20263,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_SENSORY_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "60a3b2b030dd05609bb3025ca92b40d6bf852631",
+      "bytes": 3715,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_SENSORY_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "c3168383ac504c3d24ecd84a3cd388c72d54f91d",
+      "bytes": 5158,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_SHARED_RESOLVER_CAP_SEMANTICS_WAVE_001.md",
+      "sha": "383a35ca77f116a6c9f261635cd83d28f136cb97",
+      "bytes": 10876,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_SOCIAL_BEHAVIORAL_EFFECT_MAP_0001_0010.md",
+      "sha": "59e307213ea13e543d3ebb25b78294f6f14fa9d8",
+      "bytes": 2573,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_SOCIAL_BEHAVIORAL_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "2e34f101bdc1e5c981d75897c49510473ac22ebc",
+      "bytes": 2000,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_SOCIAL_BEHAVIORAL_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "5f3c6fb4c5e6a8d974c1db41f0d3a71845e7c5c7",
+      "bytes": 3433,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_STATE_OWNER_RESOLVER_MATRIX_WAVE_001.md",
+      "sha": "c8d9027bfb082dec01d5334056c910cb33625c49",
+      "bytes": 8736,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_SURVIVAL_ENVIRONMENT_EFFECT_MAP_0001_0010.md",
+      "sha": "9327fd9059f5e23c46f2feeb553f64a07aa8a0d0",
+      "bytes": 2457,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_SURVIVAL_ENVIRONMENT_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "f5e6b6d421c6f48ac64fdab12ac7d2f0d01ca0f6",
+      "bytes": 1797,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_SURVIVAL_ENVIRONMENT_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "598675308c81f5530d60edc79ca05b0e962ca7a8",
+      "bytes": 3103,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_TECHNICAL_CRAFT_EFFECT_MAP_0001_0010.md",
+      "sha": "7da6e65d2c307937d9c2c25f671f8adfb1296b90",
+      "bytes": 2332,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_TECHNICAL_CRAFT_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "bab0684acb877e686ac7b626ab41ba61b7b60c91",
+      "bytes": 1837,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_TECHNICAL_CRAFT_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "e3ca80f85ed427e7fdacc485cad022c3d34ff804",
+      "bytes": 3376,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_UNIQUE_EVENT_EFFECT_MAP_0001_0010.md",
+      "sha": "2d2d08bc0586db575d37f5caf8d8b6414d816291",
+      "bytes": 1945,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_UNIQUE_EVENT_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "48f22ddf6dbeaf48406de4e298302aced3596138",
+      "bytes": 787,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_UNIQUE_EVENT_STATE_MODEL_0001_0010.md",
+      "sha": "d2ec82e0b7a2f78a9c594a361f38fe0fd47e923d",
+      "bytes": 1473,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_WAVE_001_PHASE_C_FAMILY_COVERAGE_AUDIT.md",
+      "sha": "4652b977db11dd3a61707f8e9e07475b51a93270",
+      "bytes": 4751,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_WEAPON_FAMILIARITY_EFFECT_MAP_0001_0010.md",
+      "sha": "7d286149a07790f45177b8b7102729c562da4e58",
+      "bytes": 2230,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_WEAPON_FAMILIARITY_KNOWLEDGE_REFINEMENT_0001_0010.md",
+      "sha": "ebdfecbb773dbcda14d7faa2f0b2736b890d5ee8",
+      "bytes": 1816,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_WEAPON_FAMILIARITY_SCALING_STATE_MODEL_0001_0010.md",
+      "sha": "e139c3db668e5f3b390cd5ef7b90be45ddec34da",
+      "bytes": 3048,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PASSIVE_WORLD_INTEGRATION_ROLE_CLASS_MATRIX_WAVE_001.md",
+      "sha": "5e73e5eb88232216eda50ba0950b62964d1b5d90",
+      "bytes": 6287,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PRIMARY_ABILITY_CATALOG_INDEX.md",
+      "sha": "12d2612229ca168e13e227790e6950e801e984fd",
+      "bytes": 9948,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PRIMARY_ABILITY_REGISTRY_SCHEMA.md",
+      "sha": "f898d1abda1991882b31fcbfd74b0e27da4ccf58",
+      "bytes": 7984,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PRIMARY_ABILITY_WAVE_001_REFINEMENT_COMPLETENESS_AUDIT.md",
+      "sha": "a0cf352c3e3f9742826ecc6ce81683f711e01dd5",
+      "bytes": 4652,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PRIME_LEGENDARY_ABILITY_RARITY_OVERLAP_AUDIT_001.md",
+      "sha": "ae6bb635ddd8d086f83699d37743f7afa95c59e4",
+      "bytes": 2527,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/PROBABILITY_TILT_EVENT_RESOLUTION_EVIDENCE_STANDARD.md",
+      "sha": "abfe4f4b64ed0c332d93b9e8776b52ccc1bef28c",
+      "bytes": 11960,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/RARE_ABILITY_RARITY_OVERLAP_AUDIT_001_010.md",
+      "sha": "eae2659c1267610e762796523a672188c22a1c21",
+      "bytes": 6949,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/README.md",
+      "sha": "0af830e7d9b063d496a3373457568853e2a35c01",
+      "bytes": 3346,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/SPATIAL_REFERENCE_FRAME_AND_TRANSIT_STANDARD.md",
+      "sha": "be1d7596bbe5ac6a8da413fcebb36d8495973697",
+      "bytes": 7563,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_ABILITY_PASSIVE_WORLD_INTEGRATION_STANDARD.md",
+      "sha": "f6d6c8ff62a37e30e39c2392bcc5f710c2bb2c05",
+      "bytes": 3304,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_BALANCE_AND_TEST_MATRIX.md",
+      "sha": "63f76fd8738ca061327a8cc2194fbca07a658e86",
+      "bytes": 10346,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_BASE_RESOLUTION_TERM_UNIT_TAXONOMY.md",
+      "sha": "4d47435bc44e2507c7d84439e7010388770f1951",
+      "bytes": 7691,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_CORE_RESOURCE_PARENT_FIXTURE_BATCH_001_STAMINA_FOCUS.md",
+      "sha": "e54d14b134b8c548ca4ff164e9350d1108297d5f",
+      "bytes": 10839,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_CORPUS_EXECUTION_ROADMAP.md",
+      "sha": "0720695b1e2bf49a600f7aa1699cf7e4d512ce3d",
+      "bytes": 19163,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_CORPUS_REFINEMENT_QUEUE.md",
+      "sha": "3ab9f0af3ef4ef038b7c30e8efa5a61b95a637c1",
+      "bytes": 23293,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_CORPUS_WAVE_001_AUDIT.md",
+      "sha": "2e4f0c095b5cd31cd472ef31ab1f2389def42b42",
+      "bytes": 5397,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_ERROR_CONFIDENCE_RESOLUTION_MODE_STANDARD.md",
+      "sha": "c63f6365802c99d65feaf55b74ec6128ded0bc73",
+      "bytes": 11370,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_GATE_TWELVE_EVIDENCE_BACKED_KNOWLEDGE_WORLD_ADJUDICATION_001.md",
+      "sha": "e3912b24f94c98cc96fb2182a5846e0eae6ba866",
+      "bytes": 9029,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_GATE_TWELVE_LOCAL_WORLD_INTEGRATION_EVIDENCE_PILOT.md",
+      "sha": "df757f237d89dcfb05d2c040eb20068d7a2a9f1b",
+      "bytes": 8523,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_KNOWLEDGE_VISIBILITY_STANDARD.md",
+      "sha": "19e94ad9273ac44432abae144bed9b7a6a9b0f68",
+      "bytes": 3551,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_NUMERIC_CALIBRATION_FRAMEWORK.md",
+      "sha": "6afc386aca0f43d08b6600b5883de11d7b24c85e",
+      "bytes": 2653,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_PARENT_FIXTURE_BATCH_002_PROCEDURE_ACTION_PRECISION.md",
+      "sha": "f8b75781b09bf602bd9f15619ee4591842c03070",
+      "bytes": 9376,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_PARENT_FIXTURE_BATCH_003_KNOWLEDGE_EVIDENCE_INTERPRETATION.md",
+      "sha": "091bbf3fdd5fe65e05806515709147f7a6526103",
+      "bytes": 9869,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_PARENT_FIXTURE_BATCH_004_SPATIAL_TRAVEL_CONTEST.md",
+      "sha": "569b3b5a45c0d466234f890024d6b2c4b46aefd1",
+      "bytes": 6861,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_PARENT_FIXTURE_BATCH_005_FATIGUE_ENVIRONMENT_RECOVERY_INSTITUTION.md",
+      "sha": "d64404d15826a31696f61ec6ca0aa22227bd4e1b",
+      "bytes": 8186,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_PHYSICAL_DISTANCE_CONTEST_PRECISION_STANDARD.md",
+      "sha": "4f93bb3db2db27704ce351ba52a8b6a81d598939",
+      "bytes": 10524,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_RECORD_CANON_PROMOTION_PACKET_TEMPLATE.md",
+      "sha": "167527f05e08305983344b8cbf7abbd9b0795836",
+      "bytes": 3724,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_UI_CORE_CONTRACT.md",
+      "sha": "063a384b3a57d207e88ad77f6316fbbbdde9c935",
+      "bytes": 5326,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_UI_UX_CONTRACT.md",
+      "sha": "4fb6c1d10b804e80a35a874cf7fc9d700e4d1a9c",
+      "bytes": 7023,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_WORLD_INTEGRATION_ROLE_CLASS_PILOT_001.md",
+      "sha": "7a9304a100cf9048b665aa6dc222d411256f4635",
+      "bytes": 5896,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/STATUS_WORLD_TIME_PARENT_FIXTURE_BATCH_001.md",
+      "sha": "e2264afe007e77f2cd649040a8eb6dbee5c4d0ab",
+      "bytes": 6198,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/SUPER_EPIC_ABILITY_RARITY_OVERLAP_AUDIT_001_003.md",
+      "sha": "7fbd9080e01b6da99cd0d139f7bba55d090e767e",
+      "bytes": 4164,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/TIME_CAUSAL_STATE_AND_SNAPSHOT_STANDARD.md",
+      "sha": "b60e3f36bab66d63aa5d7ce912083a0928adbda8",
+      "bytes": 2166,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/TIME_PARTITION_SUBJECTIVE_PROCESSING_ACTION_LATENCY_STANDARD.md",
+      "sha": "e65ec2eb199bd2da591e18978606937c1cb3ef25",
+      "bytes": 12203,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/UNIQUE_ABILITY_ONTOLOGY_RARITY_AUDIT_001.md",
+      "sha": "0e7bb00dc21ea6028b6506afd8266562f138ecb6",
+      "bytes": 3040,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/status/WORLD_SIMULATION_TIME_AND_DURATION_STANDARD.md",
+      "sha": "01c9c92809bdf6d2246e15384d8c8a81fa9d5606",
+      "bytes": 17332,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md",
+      "sha": "b72bef259e1d9ca157b4e574bbb84ca1ef8822ed",
+      "bytes": 11339,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md",
+      "sha": "98efaab8640966d550580a000238a999b5e50111",
+      "bytes": 6128,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/TAMSIN_PHASE1_SOCIAL_PROOF_PACKET.md",
+      "sha": "a38a4afd89ff3b1d2fdf3244bed047679afb207d",
+      "bytes": 7789,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/TRACE_CHAMBER_PHASE1_ACTIVITY_PROOF_PACKET.md",
+      "sha": "b471ffc1c85ac40bcc3d21148153a96888ee6d13",
+      "bytes": 5202,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/TRAINING_AND_PRACTICE_ACTIVITY_STANDARD.md",
+      "sha": "e4d7ee4ffd5a632ec8a5e1e536d6a7b7e04cb650",
+      "bytes": 4513,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/TURN_INITIATIVE_ACTION_BUDGET_STANDARD.md",
+      "sha": "b9a4213e91f23adb85d3b71590e045c9445c6f22",
+      "bytes": 4588,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/VENDOR_SERVICE_OWNERSHIP_STANDARD.md",
+      "sha": "5d56e2e6889c0405058ca682ec4f8548048f0045",
+      "bytes": 2826,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/WORK_STUDY_RESEARCH_ACTIVITY_STANDARD.md",
+      "sha": "7c4a0c3e94c96a503a3cd3d9146fde790722106d",
+      "bytes": 4699,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/systems/WORLD_BALANCE_INTEGRATION_PLAN.md",
+      "sha": "1ee66a92fa2f4c3b9521ba62d3fadd25e72e8561",
+      "bytes": 3718,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "systems",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/THE_GAME_MASTER_TASK_REGISTER.md",
+      "sha": "85506f15ca6fb903fdb1874449a08cec6fe987e0",
+      "bytes": 133277,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/V6_STABILIZATION_HANDOFF.md",
+      "sha": "3bb14b1793f70492abce9f93d33bb4a9ba4a414d",
+      "bytes": 10014,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/verification/character_stats/manifest.json",
+      "sha": "c4a3ecdc63d06db47fa4478ebdb7b40bf60ce21b",
+      "bytes": 3348,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "verification",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/verification/v6/baseline-source.json",
+      "sha": "65c7845e7b28c74e05f29cad28b89a6170824ce3",
+      "bytes": 7094,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "verification",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/verification/v6/baseline-tests.log",
+      "sha": "b3e3b3539b64bfa822ef33743afbd0119e15b58c",
+      "bytes": 56824,
+      "extension": ".log",
+      "top_level": "docs",
+      "docs_area": "verification",
+      "kind": "documentation_evidence_or_other",
+      "document_like": false
+    },
+    {
+      "path": "docs/verification/v6/candidate-runtime.json",
+      "sha": "f50cc440bcc4722accf342cdbb7c00082c8cfa6c",
+      "bytes": 8201,
+      "extension": ".json",
+      "top_level": "docs",
+      "docs_area": "verification",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/verification/v6/candidate-tests.log",
+      "sha": "a47587425eba4f4f40a1311adf904366af204956",
+      "bytes": 40826,
+      "extension": ".log",
+      "top_level": "docs",
+      "docs_area": "verification",
+      "kind": "documentation_evidence_or_other",
+      "document_like": false
+    },
+    {
+      "path": "docs/verification/v6/cli-smoke.log",
+      "sha": "1373da66dd3d7cc9db49c880e7c0d13df273639e",
+      "bytes": 2724,
+      "extension": ".log",
+      "top_level": "docs",
+      "docs_area": "verification",
+      "kind": "documentation_evidence_or_other",
+      "document_like": false
+    },
+    {
+      "path": "docs/verification/v6/perk-regressions-before.log",
+      "sha": "2aa99b448e9743e93c3967f3715b39111243a593",
+      "bytes": 26056,
+      "extension": ".log",
+      "top_level": "docs",
+      "docs_area": "verification",
+      "kind": "documentation_evidence_or_other",
+      "document_like": false
+    },
+    {
+      "path": "docs/verification/v6/resource-regressions-before.log",
+      "sha": "ebd4d59e39088ac1c65fc74ccc8fbeabde9c31df",
+      "bytes": 7087,
+      "extension": ".log",
+      "top_level": "docs",
+      "docs_area": "verification",
+      "kind": "documentation_evidence_or_other",
+      "document_like": false
+    },
+    {
+      "path": "docs/verification/v6/scene-regressions-before.log",
+      "sha": "89700e8148cd225beeec22cfb32c48e335f43389",
+      "bytes": 6353,
+      "extension": ".log",
+      "top_level": "docs",
+      "docs_area": "verification",
+      "kind": "documentation_evidence_or_other",
+      "document_like": false
+    },
+    {
+      "path": "docs/verification/v6/serialization-regressions-before.log",
+      "sha": "506dc4c52f89c8d36b5ff33f8f3473abfafb1aa7",
+      "bytes": 10873,
+      "extension": ".log",
+      "top_level": "docs",
+      "docs_area": "verification",
+      "kind": "documentation_evidence_or_other",
+      "document_like": false
+    },
+    {
+      "path": "docs/VISUAL_BIBLE.md",
+      "sha": "3b02283ccbe4b3c8d30db0b2bfe316a0183a8353",
+      "bytes": 9152,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "(docs-root)",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/GATE_TWELVE_EXTERNAL_CONNECTIONS_AND_EXPANSION_REGISTER.md",
+      "sha": "a2e160e8e1160eed1c08497a22a33873b771d4ab",
+      "bytes": 4128,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/GATE_TWELVE_PARENT_WORLD_PROPOSAL.md",
+      "sha": "3494d843bad61e7fed785ad6f03988953491c840",
+      "bytes": 8616,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/REGION_SETTLEMENT_DOCUMENTATION_TEMPLATE.md",
+      "sha": "3a85590d2cedb74868d1c94c02485435a4379337",
+      "bytes": 1800,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_BALANCE_AND_LEVEL_BANDS.md",
+      "sha": "055768f77b1aabb0173b8105af6fa223e7828539",
+      "bytes": 2646,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_BEAST_ZONE_STANDARD.md",
+      "sha": "65be0ff806becfd0404465329414eb49ab14d48e",
+      "bytes": 6536,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_CANON_DECISION_QUEUE.md",
+      "sha": "bde31ef5b8bde01497ffda737298638fde7e45d3",
+      "bytes": 5590,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_COORDINATE_AND_SCALE_STANDARD.md",
+      "sha": "09e14e2ac30b7ba1d3cab560e78d2ef1822ac586",
+      "bytes": 10010,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md",
+      "sha": "35ddd04b00bc2088eebe62e50bdcbb1ccb678ee5",
+      "bytes": 22397,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_ECOSYSTEM_AND_RESOURCES.md",
+      "sha": "37426ed3aa98bcca8e7b81c1c6f17e503c0df669",
+      "bytes": 3439,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_ENTITY_ID_AND_REFERENCE_STANDARD.md",
+      "sha": "c30d5a079d4dc5db97a1978b304f027803250977",
+      "bytes": 2281,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_GEOGRAPHY_STANDARD.md",
+      "sha": "ae70644c6e650d09ebb6c2724f1840f3ad90f538",
+      "bytes": 5312,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_LOOT_PROVENANCE_STANDARD.md",
+      "sha": "7ba8956ab881ae5257f33767efed12e900ca7c78",
+      "bytes": 2916,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_NPC_POPULATION_STANDARD.md",
+      "sha": "32efef4be07630fc120763fa01f68446638e8343",
+      "bytes": 2769,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_POLITICAL_ENTITIES.md",
+      "sha": "f0cc787e7ddc06dd69a276c7980ef2f453ea7d78",
+      "bytes": 4012,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_POPULATION_AND_CITIZEN_HIERARCHY.md",
+      "sha": "b6ad34e06ca394ff7f94ded37e73dc38cf85139b",
+      "bytes": 3642,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_SCALE_DOCUMENTATION_BLUEPRINT.md",
+      "sha": "cae37b52e18b42e38f707431f3a8a29132ecbb8e",
+      "bytes": 8562,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_SETTLEMENT_CATALOG.md",
+      "sha": "e78c8ac836606c056373c1df9c64e587a1e28a6f",
+      "bytes": 4195,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "docs/world/WORLD_TRAVEL_AND_ROUTES.md",
+      "sha": "a993ab3a49320c1c7d868afb515b28010f81879a",
+      "bytes": 3241,
+      "extension": ".md",
+      "top_level": "docs",
+      "docs_area": "world",
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "pyproject.toml",
+      "sha": "305218f1789bfb1bfe71bc45acae0cba6a1e126e",
+      "bytes": 293,
+      "extension": ".toml",
+      "top_level": "(root)",
+      "docs_area": null,
+      "kind": "other",
+      "document_like": false
+    },
+    {
+      "path": "README.md",
+      "sha": "d49e001ea31095ae12f348aee8c8b032b71ade4b",
+      "bytes": 9967,
+      "extension": ".md",
+      "top_level": "(root)",
+      "docs_area": null,
+      "kind": "document",
+      "document_like": true
+    },
+    {
+      "path": "src/textrpg/__init__.py",
+      "sha": "5a0c1fae1dd4966677e816b698c495e0ab1e2a8e",
+      "bytes": 4462,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/android_bridge.py",
+      "sha": "73aa4c59edb18ef4c413976d5a71cdd2879a399e",
+      "bytes": 28000,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/cli.py",
+      "sha": "6b87853d713792d717b37ab295f1e55370f546e6",
+      "bytes": 4960,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/content.py",
+      "sha": "99011a034f4813ffec4cab5ea6c9d30d5d2a70df",
+      "bytes": 6928,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/core.py",
+      "sha": "608b37e58fb652b78c921c0459fceb3753131ce3",
+      "bytes": 36568,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/equipment.py",
+      "sha": "7886ae58847b59262b8c5132517b3759b3e5e948",
+      "bytes": 9063,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/json_contract.py",
+      "sha": "d469d4bb38f4c584c641209a6ea9e161547f2672",
+      "bytes": 700,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/modifiers.py",
+      "sha": "0e0ccdf4b9f0a7450b401a41d5a5a74cb26492bf",
+      "bytes": 13256,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/persistence.py",
+      "sha": "fb2f0e7944126d474cbafd86a8c20bef811ae02b",
+      "bytes": 2907,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/powers.py",
+      "sha": "d75ab4099f171dd4950bd7f852a0ad7d9f560e6f",
+      "bytes": 78343,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/progression.py",
+      "sha": "1e4f60b46e78b96a12f2e82ba2d513e36db7d1eb",
+      "bytes": 7095,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/quests.py",
+      "sha": "3221dcca86cbf8aa0a60f4c181cf39e0aec09b2a",
+      "bytes": 16067,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/room_projection.py",
+      "sha": "6ba11cd19ae9dceb36ff02d070a7114ae7b894f7",
+      "bytes": 4293,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/schema.py",
+      "sha": "895115279918f48b6bed1e12d0ca51b368828c46",
+      "bytes": 3921,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/simulation.py",
+      "sha": "455b72ad6080a792761293fc51426a2c777d4b5a",
+      "bytes": 12287,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/social.py",
+      "sha": "c4f0ca616c5749be14b6860e756e5e1c989cf7d8",
+      "bytes": 25953,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/stats.py",
+      "sha": "9321af31cd492903d7b95e065220d3286a7d100f",
+      "bytes": 6985,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/status.py",
+      "sha": "3f06f670134e0e71b0d1bf3642fab32f5869585a",
+      "bytes": 15996,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/validation.py",
+      "sha": "3eede0ad4c314908ef753aa42b0e32e2794a6eb6",
+      "bytes": 34055,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "src/textrpg/visuals.py",
+      "sha": "61b2c6d2feda6d6e2b3e43e7ce7c519039c6561f",
+      "bytes": 6560,
+      "extension": ".py",
+      "top_level": "src",
+      "docs_area": null,
+      "kind": "source",
+      "document_like": false
+    },
+    {
+      "path": "tests/fixtures/d075_dead_relay_branch_diff.json",
+      "sha": "192df73b52af1f428fd22f1d2c432820cda0259a",
+      "bytes": 1414,
+      "extension": ".json",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_android_bridge.py",
+      "sha": "bd389dc04ae19990d7049f65818a3e8f843869d6",
+      "bytes": 16485,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_android_stat_contributions.py",
+      "sha": "eac9e7f6a821916eb322d9fc67c6a61b690b4d96",
+      "bytes": 6651,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_cli.py",
+      "sha": "ec1bc72bd6066ab347b7730b56b7c64cd247bdf4",
+      "bytes": 1280,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_content.py",
+      "sha": "b4a4201c5b27d54a0d8ea8d55b447933fbb0cb6a",
+      "bytes": 5551,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_core.py",
+      "sha": "3caa00b85fa8054fdaf8eb492b5df8cd11bd36c0",
+      "bytes": 37332,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_d064_room_projection_acceptance.py",
+      "sha": "b23fd6ae3e2044658939bf1d34723cc61718847c",
+      "bytes": 4147,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_documentation_inventory_tool.py",
+      "sha": "6587eecc386242f6fb45e4600ef46e9ada305156",
+      "bytes": 3289,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_equipment.py",
+      "sha": "5ad98722543226387f7a13a1654caf8d644c3003",
+      "bytes": 7696,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_modifiers.py",
+      "sha": "047b0f62dcfbed3f0d93630a499f07aa40b785d2",
+      "bytes": 12532,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_persistence.py",
+      "sha": "ac55794b86cd9b417953d91b75ff17a5bc5f0902",
+      "bytes": 6046,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_phase1_activity.py",
+      "sha": "095095e23a502e0bd58b659693d13a3d4d85e1a9",
+      "bytes": 6444,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_phase1_inventory_equipment_proof.py",
+      "sha": "ec7f50c2ecc27888b46c9285c32da702c7be6548",
+      "bytes": 8815,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_phase1_quest_branch_world_consequence.py",
+      "sha": "07d2c52892e989d51abe7fa6b6f630b3571c00cc",
+      "bytes": 7159,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_pixel_raster_equivalence_tool.py",
+      "sha": "959b2d8aa3deb97e1b51fb75b77c01302e596a50",
+      "bytes": 4413,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_powers.py",
+      "sha": "ebb621622761c840cd3a42bb0dcd3b9e73df809f",
+      "bytes": 49763,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_progression.py",
+      "sha": "0a33df3a1dd4f836e757853c5e4692b77c21dce0",
+      "bytes": 5830,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_project_status_tracker.py",
+      "sha": "fc7f4ddd2759f54caa982316ac89cd31596b8ce2",
+      "bytes": 6673,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_quests.py",
+      "sha": "3871a533a3498a4b5eccc3011cd66c3009b5c982",
+      "bytes": 11322,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_room_projection.py",
+      "sha": "ee7658b57defc3ed042b8fdfd1bae04d121e4542",
+      "bytes": 4348,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_save_resume_routes.py",
+      "sha": "f021bc84f4941771784af3b475b69f88057630e9",
+      "bytes": 9158,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_scene_projection.py",
+      "sha": "1a5e87a87170d8aa4dd29473b4fc03a882cd1ec6",
+      "bytes": 4345,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_simulation.py",
+      "sha": "19d092cf923e3e723d2cc935be97a5cfd36d816d",
+      "bytes": 10527,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_social.py",
+      "sha": "9a5257c734600492f96cc43dfa805be15fb11b7d",
+      "bytes": 19054,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_stats.py",
+      "sha": "5fc2dd388d08213baa3ed911f9107b82c9dc0fd4",
+      "bytes": 9533,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_status_phase_c_audit.py",
+      "sha": "6cf65989bba67ed62759ce841ad951bd7d8a2614",
+      "bytes": 3022,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_status.py",
+      "sha": "785a6b8db92c7c92fc036ea36be71b922592032c",
+      "bytes": 12927,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_tamsin_memory.py",
+      "sha": "94076e03d2d3dbe71d4b372d104267840cf168b4",
+      "bytes": 5528,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_validation.py",
+      "sha": "abd88105db5594ff143ad02a8d6e478c3fafb75c",
+      "bytes": 16085,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_vertical_slice.py",
+      "sha": "37ce925aba305ea3f102d457d86e3b88c0f01ff7",
+      "bytes": 17924,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tests/test_visuals.py",
+      "sha": "538df7507459ce3bb7c6279e147d6d8171c5be27",
+      "bytes": 3255,
+      "extension": ".py",
+      "top_level": "tests",
+      "docs_area": null,
+      "kind": "test",
+      "document_like": false
+    },
+    {
+      "path": "tools/documentation_inventory.py",
+      "sha": "0a59930bee2e9ad407a6e0c3cb1931fbad60d3f5",
+      "bytes": 7175,
+      "extension": ".py",
+      "top_level": "tools",
+      "docs_area": null,
+      "kind": "tool",
+      "document_like": false
+    },
+    {
+      "path": "tools/project_status_tracker.py",
+      "sha": "b43af6b2fdaf1bb62b64698954816ea4b75b7835",
+      "bytes": 21084,
+      "extension": ".py",
+      "top_level": "tools",
+      "docs_area": null,
+      "kind": "tool",
+      "document_like": false
+    },
+    {
+      "path": "tools/status_phase_c_audit.py",
+      "sha": "7549609506989b76bc9bc761a92a1e11d2234d03",
+      "bytes": 7435,
+      "extension": ".py",
+      "top_level": "tools",
+      "docs_area": null,
+      "kind": "tool",
+      "document_like": false
+    },
+    {
+      "path": "tools/verify_pixel_raster_equivalence.py",
+      "sha": "116814f640beedaffb230b9214b6ccf920e586dd",
+      "bytes": 31056,
+      "extension": ".py",
+      "top_level": "tools",
+      "docs_area": null,
+      "kind": "tool",
+      "document_like": false
+    }
+  ]
+}
