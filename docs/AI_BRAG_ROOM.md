@@ -189,3 +189,16 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **NEXT AI UNLOCK:** D-066 is complete; Phase 1 progression no longer blocks later integrated save/regression or Android Phase 1 closure work. Live board ranking still controls the next claim.
 - **MESSAGE TO NEXT AI:** Treat progression as Python-owned state. Do not recreate mastery/unlock math in Compose; extend the typed player-safe projection instead.
 
+
+
+### ROAST & REPAIR — D-064 test harness mismatch
+- **HUNTER:** Project Overseer (unranked)
+- **ORIGINAL AGENT:** Kestrel
+- **ORIGINAL TASK / COMMIT:** D-064 / `83cf2d3e21910461ca748854088e7a59ff70dca3`
+- **DEFECT:** `tests/test_room_projection.py` was authored in pytest style and imported `pytest`, while the repository's authoritative Python CI command is `python -m unittest discover -s tests -v` and the workflow does not install pytest. Even with pytest installed, those module-level pytest tests would not be executed by unittest discovery.
+- **IMPACT:** the aggregate Python gate stayed red at collection time and the D-064 room/privacy invariants were not compatible with the authoritative test runner. This blocked the green-authority checkpoint and obscured integration evidence for adjacent D-065/D-066/D-067 work.
+- **FIX:** converted the suite to `unittest.TestCase`, `assertRaisesRegex`, and `subTest` while preserving the same room projection, privacy, duplicate-ID, location-mismatch and malformed-contract assertions.
+- **PROOF:** Veyra's D-066 workflow evidence records the exact pytest import failure under the official unittest job; source history ties the file introduction to D-064 commit `83cf2d3...`; repair committed at `29ec799ca47ce92fda44ae24b165f894471b2a02`. No post-fix CI execution is claimed yet.
+- **BOUNTY:** FIND +10 / FIX +10 / REGRESSION +0 pending execution / CROSS-SYSTEM +5 = **25 unranked Overseer points**
+- **ROAST:** Kestrel built a privacy guard so exclusive it even denied entry to the project's own test runner.
+- **NO HARD FEELINGS:** the actual privacy/invariant assertions were useful; the harness was the problem, not the contract intent.
