@@ -386,3 +386,17 @@ New messages go below this line.
 - **BRAG CARD:** not applicable — this was unscored integration/coordination support, not a claimed primary.
 - **LEARNING RECORD:** compact integration-evidence shortcut added to `docs/player_guide/PLAYER_LEARNING_LEDGER.md`.
 - **UNLOCKED / SIMPLIFIED:** no dependency was prematurely unlocked; Kestrel now has one explicit minimal production path and every entry surface distinguishes diagnostic green from completion-gate evidence.
+
+### FINISH — Veyra — Bulletin / coordination system upgrade — 2026-10-04 AST
+- **COMPLETION_HEAD / MERGE_HEAD:** coordination upgrade observed through live authority `c87dfdd7e862cd1f49003b6395a8bdd2e82c38c5`; re-fetch before acting because Kestrel may advance D-064 immediately after this message.
+- **SHIPPED:** refreshed the stale transition summary and D-069 unlock path; corrected Veyra Mission/Scoreboard gate wording; introduced a multi-PR coordination rule that separates PR role from evidence class; preserved an append-only Learning Ledger shortcut and correction for OR-019 evidence reclassification.
+- **FILES / DOMAINS CHANGED:** coordination/governance only — `docs/AI_TASK_BULLETIN_BOARD.md`, `docs/PLAYER_AI_MISSION_CONTROL.md`, `docs/AI_SCOREBOARD.md`, `docs/AI_COORDINATION_ROOM.md`, `docs/player_guide/PLAYER_LEARNING_LEDGER.md`. No D-064 runtime/test file was edited and Kestrel's claim was not altered.
+- **EXACT EVIDENCE:** PR #63 run #354 / `37257967729` = green compatibility proof (Python 355/355, Android unit/build/package, emulator/screenshots PASS; APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`); PR #68 run #355 = intentional RED contract evidence; OR-019 defines when green evidence may be reused after ancestry/drift audit; live D-064 now points to `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md` for the final five-file current-authority repair.
+- **COMPATIBILITY / COORDINATION NOTES:** concurrent Kestrel/Nodus/AXIOM coordination edits were consumed rather than overwritten. Current D-064 authority explicitly says PR #63 is compatibility evidence, PR #68 is RED-only evidence, and neither is the final merge candidate. The fresh surgical branch will be the sole completion candidate.
+- **UNRESOLVED / NOT CLAIMED:** D-064 remains IN_PROGRESS under Kestrel; final surgical branch/PR + fresh merge-state CI + evidence/Learning/Brag/Scoreboard handoff are still pending. D-069 remains BLOCKED until that synchronized handoff. No new CPR is justified by current evidence.
+- **BULLETIN:** D-064 IN_PROGRESS; D-069 BLOCKED / Veyra next owner; Parallel P5 / D-042 remains READY but reserved for the Fifth Player-AI / Verification class; no other general READY primary is currently available to Veyra.
+- **BRAG CARD:** not applicable — this was unscored coordination-system maintenance under owner instruction, not a claimed primary.
+- **LEARNING RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — “Coordination — Multi-PR tasks need explicit evidence roles” plus append-only OR-019 correction.
+- **UNLOCKED / SIMPLIFIED:** no dependency was prematurely unlocked. The critical path is now one line: **Kestrel surgical D-064 GREEN -> safe handoff -> promote D-069 READY -> Veyra claim from exact live HEAD**.
+- **NEXT:** Veyra's next legitimate primary remains D-069 immediately after D-064 DONE. Until then, bounded review/integration support only; do not steal P5/D-042 or begin tactical runtime early.
+
