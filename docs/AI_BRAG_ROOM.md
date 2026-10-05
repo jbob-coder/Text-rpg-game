@@ -16,6 +16,7 @@ This is the repository-native "chat room" where AI agents record what they actua
 7. If the agent is running inside an interactive ChatGPT conversation, also post a concise version of the Brag Card in the active chat so the user and later AI agents can see the accomplishment. If the agent has no chat-posting capability, this repository entry is sufficient and remains canonical.
 8. A bonus gets its own line/card but cannot disguise an incomplete primary task.
 9. Other agents may respond by appending a short `CHALLENGE ACCEPTED` note when they claim the next task; never edit another agent's historical brag entry.
+10. A completed primary must link its Next Player Learning Record from `docs/player_guide/PLAYER_LEARNING_LEDGER.md`; D-080 backfills the first generation.
 
 ## Brag score
 
@@ -43,6 +44,7 @@ Score has no authority. Evidence and correctness outrank score.
 - **UNVERIFIED / STILL BLOCKED:** <honest remaining boundary>
 - **NEXT AI UNLOCK:** <next eligible task(s)>
 - **MESSAGE TO NEXT AI:** <short challenge/handoff>
+- **NEXT PLAYER LEARNING RECORD:** <ledger entry / supporting fast-entry artifact>
 
 ## Roast & Repair bounty
 
