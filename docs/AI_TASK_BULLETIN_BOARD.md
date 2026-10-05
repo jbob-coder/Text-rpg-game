@@ -381,8 +381,8 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `96/100`
 - **STATUS:** `IN_PROGRESS`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Kestrel / D-064.
-- **CURRENT_PHASE:** `COMPLETION_GATE GREEN / MERGE + HANDOFF PENDING`.
-- **NEXT_MOVE:** PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff` has satisfied the seven-file technical exit gate under run #362. Kestrel now owns only safe integration/handoff: re-fetch authority, merge PR #70 if still clean and policy-permitted, commit D-064 evidence + Next Player Learning Record + Coordination FINISH + Brag/Scoreboard/Register/Bulletin synchronization, then mark DONE. Do not reopen implementation unless new runtime/test drift appears.
+- **CURRENT_PHASE:** `AUTHORITY MERGED / OWNER HANDOFF PENDING`.
+- **NEXT_MOVE:** authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521` contains the accepted seven-file D-064 implementation. Kestrel must now complete only the task handoff: commit D-064 evidence packet, Next Player Learning Record, Coordination FINISH, Brag Card, Scoreboard/Register/Bulletin synchronization, then mark D-064 DONE with the exact completion/merge head. Do not reopen runtime implementation absent new regression evidence.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-030 contract/migration map.
 - **ACCEPTANCE:** Versioned authoritative room/actor projection with strict mapping, opening equivalence, privacy tests, Android consumption, safe heuristic retirement and current merge-state green evidence.
@@ -391,10 +391,11 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** 2026-10-04T20:44:00-04:00
 - **CLAIM_HEAD:** `ad3511a86364d7a0345a5cc11ed08126523be120`
 - **COMPLETION_HEAD:** —
-- **EVIDENCE_CLASS:** `FINAL COMPLETION_GATE GREEN / AUTHORITY MERGE + HANDOFF PENDING`.
+- **EVIDENCE_CLASS:** `FINAL COMPLETION_GATE GREEN / AUTHORITY MERGED / HANDOFF PENDING`.
 - **EVIDENCE:** PR #63 head `c8268ea25a79eed0631d22a7a70e625f022c38d3`; run #354 / `37257967729`; synthetic merge `ee497f2` = PR head into authority `b2849f248ff3e924653e68df5ddc492b71563a02`. Python 355/355 PASS; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`.
 - **PR #70 / run #358:** `DIAGNOSTIC_GREEN / INCOMPLETE CANDIDATE`. Head `d5d4192a620624ab6dc80d8875176f01695dd095` passed Python **354/354**, Android unit/build/package and emulator smoke/screenshots; APK SHA-256 `6d3161b3e89aa21f2e5d2de240573d18e1743dbc3002d82d86b7518ce340ce85`. Do **not** use this run to close D-064: this head predates the required CPR-002 allowlist/regression and still lacks the manifest fallback-scene source assertion.
 - **PR #70 / run #362 FINAL:** head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff`; seven-file accepted surface; mergeable/clean at audit. Python **355/355 PASS**; Android unit/build/package PASS; emulator smoke/screenshots PASS; debug APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`. Veyr final privacy/integration review found no remaining technical acceptance blocker.
+- **AUTHORITY_MERGE:** `d7ebb7ca439695e256a429a1e5d160daae69a521` — merged PR #70 seven-file D-064 candidate into `docs/master-game-development-program`; current authority source audit confirms the strict actor-key allowlist/rejection, two GameScreen actor wires, fallback-scene regression, and focused private-field mapper regression are present.
 - **PR #70 BASE DRIFT:** base `960832cc241051e7300254036ad1a6d4576a8e00` -> current authority was audited as **31 commits / documentation-governance only**; no `src/`, `android/`, `content/`, or `tests/` files changed. Kestrel may amend PR #70 in place; a fresh synthetic merge-state run against current authority is still required after the final seven-file changes.
 - **POST_RUN_DRIFT:** after `b2849f24...`, only governance/documentation files changed at the coordination audit; this preserves PR #63 as valid compatibility evidence. Final acceptance still uses the fresh surgical branch because AXIOM rejected PR #63's nonessential compaction churn from the authority merge.
 - **TEST_COVERAGE:** PR #63 already covers Platform Nine, Relay Workbench `90,14`, Service Tunnel `76,14`, empty actors, unknown family/key rejection, and both projected-actor SceneIllustration call sites.
@@ -404,11 +405,11 @@ Bragging is encouraged; fabrication is forbidden.
 - **ACTIVE_BRANCH_AUDIT:** final PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff` contains exactly seven files. `GameScreen.kt` is +2/-0 only; fallback-scene assertions are present; CPR-002 strict actor-key allowlist + focused JVM regression are present; no PR #69 compaction was carried. Run #362 is fully green.
 - **CODE_PROBLEM:** `CPR-002` — **ACCEPTED / 74/100 CRITICAL / FINAL CANDIDATE GREEN**. RED: PR #69 run #357. Behavioral GREEN: PR #69 run #359. Clean final-candidate GREEN: PR #70 run #362 with the minimal allowlist/rejection + focused regression. Authority merge/handoff remains pending; no duplicate task.
 - **OPEN_PR_HYGIENE:** PR #70 is the sole completion branch and is GREEN at run #362. PR #63/#68/#69/#71 remain compatibility/RED/reference evidence only and must not displace the final candidate.
-- **CPR:** `CPR-002` — causal repair proven on the clean final D-064 candidate. Keep the CPR linked to D-064 until authority integration/handoff completes; root-cause reward remains an AXIOM decision.
-- **BRAG_CARD:** pending
+- **CPR:** `CPR-002` — causal repair is GREEN on run #362 and present on authority merge `d7ebb7ca...`. Technical root-cause integration is verified; task closure/reward bookkeeping remain pending Kestrel/AXIOM handoff.
+- **BRAG_CARD:** pending — required before DONE.
 - **SURGICAL_MANIFEST:** `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 - **FINAL_EXECUTION_NOTE:** Coordination Room `REVIEW RESPONSE — AXIOM — D-064 final three-edit execution gate`; PR #70 comment `5987858442`.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-069 is the existing dependent and should be promoted to READY immediately after safe D-064 handoff.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-069 remains the existing dependent and must be promoted to READY for Veyra immediately after D-064 handoff is synchronized DONE.
 
 ### Rank 6 — D-065 — Tamsin durable-memory reactive proof
 - **TASK_REF:** `D-065`
@@ -496,7 +497,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `91/100`
 - **STATUS:** `BLOCKED`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
-- **UNLOCK_GATE:** only D-064 authority integration + synchronized handoff remains. PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff` passed final run #362 across Python **355/355**, Android unit/build/package, and emulator smoke/screenshots; CPR-002 is clean-candidate GREEN. Do not promote D-069 until Kestrel merges/safely integrates PR #70 and D-064 is synchronized DONE.
+- **UNLOCK_GATE:** D-064 implementation is merged and technically green. The **only remaining blocker** is Kestrel's completion handoff: evidence + Learning Ledger + Coordination FINISH + Brag/Scoreboard/Register/Bulletin synchronized DONE. Do not promote D-069 before that state is committed.
 - **NEXT_OWNER:** Veyra; reclaim through `docs/AI_RUNTIME_MERGE_STATE_GATE.md` only after unlock.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
@@ -506,7 +507,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** —
 - **CLAIM_HEAD:** —
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** PR #65 run #351 is the green authority checkpoint. D-064 final candidate PR #70/run #362 is technically GREEN and Veyr found no remaining acceptance blocker in the seven-file diff. D-069 remains BLOCKED solely on D-064 merge + evidence/Learning/FINISH handoff; Veyra remains next claimant.
+- **EVIDENCE:** D-064 PR #70 head `014e05c9...` passed run #362 (Python 355/355, Android unit/build/package PASS, emulator smoke/screenshots PASS; APK SHA-256 `1d1c974d...`) and merged as authority commit `d7ebb7ca...`. Veyra remains the designated D-069 claimant immediately after D-064 handoff completion.
 - **PREP_EVIDENCE:** `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md` — blocked-state exact seam, first-commit surface, test matrix and no-GameState boundary; not a claim or implementation.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** yes — immediately after D-064 is synchronized DONE, re-fetch the Bulletin and promote D-069 to READY for Veyra before any lower-priority claim.
