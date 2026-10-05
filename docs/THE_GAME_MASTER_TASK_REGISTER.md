@@ -1452,13 +1452,14 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - D-068 does not claim the repository-wide green authority checkpoint;
   - no physical-device validation is claimed.
 ### TASK D-069 — Implement tactical schemas, validators and pure grid core
-- STATUS: `BLOCKED / OR-009 TRANSITION GATE / VEYRA NEXT OWNER / PREIMPLEMENTATION AUDIT COMPLETE`
+- STATUS: `BLOCKED / D-064 HANDOFF ONLY / GREEN CHECKPOINT PASS / VEYRA NEXT OWNER`
 - PRIORITY: `P0 / RANK 10`
 - CLAIM_HEAD: released by OR-014; historical claim head `6f69012a8a7c8cbd21d791696f30f30a0c6e0d0f` retained for audit.
 - DEPENDS_ON:
   - D-060 DONE;
   - D-032 combat migration packet;
-  - OR-009 / OR-011 transition requirement: D-064–D-068 safe handoff plus one green authority checkpoint before substantive D-069 runtime work.
+  - OR-009 / OR-011 transition requirement: D-065, D-067 and D-068 are DONE; PR #65 run #351 satisfies the green authority checkpoint; **D-064 safe handoff is the only remaining gate**.
+- GREEN_CHECKPOINT: PR #65 / run #351 / `37253975755` — Python PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS.
 - CURRENT SOURCE REALITY:
   - no `combat_*.py`, tactical-grid, LOS or cover runtime module exists under `src/textrpg`;
   - `content_pack_from_mapping` currently validates scenes/quests/powers/registries/world_map and retains the raw authored pack;
