@@ -299,25 +299,6 @@ class AndroidGameSession:
                 technical_detail=str(exc),
             ) from exc
 
-    def apply_cheat(self, code: str) -> Dict[str, Any]:
-        if not isinstance(code, str) or not code: raise AndroidBridgeError("CHEAT_ERROR", "Enter a valid cheat code.")
-        normalized = code.strip().upper()
-        before = deepcopy(self.state.snapshot())
-        try:
-            if normalized == "FULL RESTORE":
-                self.state.health = self.state.max_health; self.state.stamina = self.state.max_stamina
-                self.state.history.append({"type": "android_debug_cheat", "code": "FULL_RESTORE", "turn": self.state.turn}); return self.scene_view()
-            if normalized == "REVEAL MAP":
-                self.state.flags["android_debug.discover_all_map"] = True
-                self.state.history.append({"type": "android_debug_cheat", "code": "REVEAL_MAP", "turn": self.state.turn}); return self.scene_view()
-            if normalized.startswith("SET TIME "):
-                value = normalized.removeprefix("SET TIME ").strip()
-                if not value.isdigit(): raise RuleError("SET TIME requires a non-negative integer")
-                self.state.time_minutes = int(value); self.state.history.append({"type": "android_debug_cheat", "code": "SET_TIME", "value": int(value), "turn": self.state.turn}); return self.scene_view()
-            raise RuleError("Unknown cheat code")
-        except AndroidBridgeError: self.state = GameState(**before); raise
-        except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("CHEAT_ERROR", "That cheat code is not available.", technical_detail=str(exc)) from exc
-
     def equip(self, item_id: str) -> Dict[str, Any]:
         if not isinstance(item_id, str) or not item_id: raise AndroidBridgeError("EQUIP_ERROR", "Choose a valid item to equip.")
         definitions = self.content.registries.get("items", {}); definition = definitions.get(item_id) if isinstance(definitions, Mapping) else None
