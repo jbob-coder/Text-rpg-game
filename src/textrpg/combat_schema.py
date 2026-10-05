@@ -36,7 +36,7 @@ def _canonical_edges(values: Iterable[str], label: str) -> tuple[str, ...]:
     edges = tuple(values)
     if len(set(edges)) != len(edges):
         raise ValueError(f"{label} cannot contain duplicate edges")
-    invalid = sorted(set(edges) - set(CARDINAL_DIRECTIONS))
+    invalid = sorted(set(edges) - set(CARDINAL_DIRECTIONS), key=str)
     if invalid:
         raise ValueError(f"{label} has unsupported edges: {', '.join(invalid)}")
     return tuple(edge for edge in CARDINAL_DIRECTIONS if edge in edges)
@@ -49,7 +49,7 @@ def _canonical_cover(
     edges = [edge for edge, _rating in cover]
     if len(set(edges)) != len(edges):
         raise ValueError("cover cannot contain duplicate edges")
-    invalid = sorted(set(edges) - set(CARDINAL_DIRECTIONS))
+    invalid = sorted(set(edges) - set(CARDINAL_DIRECTIONS), key=str)
     if invalid:
         raise ValueError(f"cover has unsupported edges: {', '.join(invalid)}")
     for edge, rating in cover:
@@ -385,7 +385,7 @@ def _reject_unknown_fields(
     allowed: set[str],
     label: str,
 ) -> None:
-    unknown = sorted(set(record) - allowed)
+    unknown = sorted(set(record) - allowed, key=str)
     if unknown:
         raise ValueError(
             f"{label} has unsupported fields: {', '.join(str(item) for item in unknown)}"
