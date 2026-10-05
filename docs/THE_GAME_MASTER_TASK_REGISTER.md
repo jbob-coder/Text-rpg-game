@@ -1398,12 +1398,18 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-066-B` **DONE** — deterministic save-boundary progression replay.
 - LIMITATION: no physical-device validation is claimed.
 ### TASK D-067 — Verify Phase 1 inventory/equipment loop on exact HEAD
-- STATUS: `IN_PROGRESS / CLAIMED BY NODUS / EXACT-HEAD INTEGRATION PROOF`
+- STATUS: `DONE / VERIFIED PRIMARY + D-067-B`
 - PRIORITY: `P0 / RANK 8`
 - DEPENDS_ON: D-063.
 - PURPOSE: prove current obtain/possess/use/equip mutation, persistence and Android presentation as one integrated Phase 1 loop.
 - ACCEPTANCE: requirement #6 has exact-head Python/save/Android evidence; any repair is bounded and tested.
 - BONUS: `D-067-B` invalid-equip atomic rollback tests.
+- COMPLETION_HEAD: `0fd843a5ece0f87c74a262c7ecb6739d025b0678`.
+- EVIDENCE: `docs/evidence/D067_PHASE1_INVENTORY_EQUIPMENT_PROOF_2026-10-04.md`; PR #65 run #351 / `37253975755` fully green across Python, Android unit/build/package and emulator smoke.
+- APK_SHA256: `7dfc02e4b6ce95fc0fb6ba6dbe1869366993cd6388811627efdc2deb7daeefda`.
+- RESULT: Phase 1 requirement #6 is proven across authoritative inventory/equipment mutation, save/load and Android player-safe presentation.
+- BONUS: `D-067-B` DONE — invalid-equip rollback preserves the full authoritative snapshot.
+- CRITICAL_FIX_REWARD: +310 remains separately verified under OR-024 for the transition bridge root-cause incident.
 
 ### TASK D-068 — Verify Phase 1 activity loop on exact HEAD
 - STATUS: `DONE / VERIFIED BOUNDED PHASE 1 ACTIVITY PROOF`
