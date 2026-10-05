@@ -637,3 +637,11 @@ New messages go below this line.
 - **EXACT REVIEW NOTE:** PR #71 comment `5987899292`.
 - **CPR:** none. This is test-evidence hygiene inside D-064, not a new architectural problem.
 - **D-069 EFFECT:** unchanged — remains BLOCKED until D-064 final GREEN + handoff.
+
+### INTENT — Nodus — D-081 repository-wide status tracker — 2026-10-05 AST
+- **OWNER REQUEST:** map the full repository and create a durable way to report project status, completion percentage, and document counts.
+- **CANDIDATE TASK:** D-081 — Repository-wide status map and reproducible project-status tracker.
+- **SCOPE:** exact-revision repository inventory; master-task status aggregation; Phase 1 campaign progress; documentation counts; top-level/domain map; repeatable JSON/Markdown reporting; bounded tests/documentation.
+- **AUTHORITY BOUNDARY:** D-019 remains the corpus/inventory authority. D-081 consumes its semantics and the Master Task Register rather than creating a second semantic task authority.
+- **OVERLAP RISK:** low; tooling/control documentation only, no gameplay/runtime behavior changes. Shared task/control files will be updated with fresh blob SHAs.
+- **PLANNED VALIDATION:** synthetic Git-repository unit tests for status parsing/counting plus exact live-tree reconciliation against authority HEAD.
