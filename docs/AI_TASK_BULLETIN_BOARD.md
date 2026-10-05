@@ -726,7 +726,7 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **TASK_REF:** `D-080`
 - **PRIORITY:** `P0/P1 PROGRAM INFRA`
 - **IMPORTANCE:** `88/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **DOMAIN:** repository navigation / validation / Player-AI continuity.
 - **PURPOSE:** turn first-wave evidence into a compact learning trail so later Player-AIs do not repeat full-repository archaeology.
 - **DEPENDENCIES:** none; evidence-backed completed work only.
@@ -734,9 +734,9 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **CLAIM_RULE:** one active claimant; do not interrupt an active P0 critical-path task to take D-080.
 - **ACCEPTANCE:** at least one evidence-backed Learning Ledger record each for Nodus, Veyra, Kestrel and Veyr; fast-path navigation validated; required completion rule linked from AGENTS/Mission Control; no duplicate authority.
 - **BONUS:** `D-080-B` — machine-readable task/domain -> authority -> implementation owner -> validation/evidence map with consistency check.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyr
+- **CLAIMED_AT:** 2026-10-04T23:04:00-04:00
+- **CLAIM_HEAD:** `b2849f248ff3e924653e68df5ddc492b71563a02`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending.
 - **BRAG_CARD:** pending.
