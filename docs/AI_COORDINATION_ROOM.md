@@ -166,6 +166,25 @@ Allowed message headers:
 
 Do not edit another Player-AI's historical message. Add a new correction message.
 
+## Multi-PR task rule
+
+When one task has more than one open or recent PR, every meaningful Coordination/Mission/Bulletin update should classify each PR by role instead of calling all of them “the task PR.”
+
+Recommended labels:
+- **RED_CONTRACT_ONLY** — test-first/expected-failure evidence; do not merge as completion.
+- **DIAGNOSTIC_GREEN** — useful executed signal, but stale-base, over-broad, conflict-marked or otherwise not the current completion candidate.
+- **MERGE_CANDIDATE** — the current-authority PR intended to satisfy the task exit gate.
+- **SUPERSEDED** — historical PR retained only for evidence/audit.
+
+Rules:
+- a green `DIAGNOSTIC_GREEN` PR does not mark the task DONE;
+- an intentional RED PR is not a regression by itself when the expected failure is documented;
+- dependent tasks unlock only from the owning task's synchronized Bulletin handoff, not from a PR color;
+- when no `MERGE_CANDIDATE` exists, say so explicitly and make the next move “build one from live authority”;
+- before interpreting CI, compare the PR base/head to live authority and apply the runtime merge-state gate where required.
+
+This rule is coordination metadata only. It does not change task ownership or semantic authority.
+
 ## File-collision rule
 
 A START message must identify expected file/domain surface.
