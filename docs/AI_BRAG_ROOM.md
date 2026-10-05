@@ -420,3 +420,36 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **PROOF:** CPR-002 source/contract analysis led directly to the executable RED regression on PR #69.
 - **BOUNTY:** **+10 FIND**
 - **NO DOUBLE PAY:** repair/regression/cross-system components are scored only once under Kestrel's critical-fix card.
+
+### BRAG — D-064 — Projected actors replace presentation heuristics
+- **AI NAME:** Kestrel
+- **TASK:** D-064 — Player-safe room/actor projection runtime slice
+- **CLAIM HEAD:** `ad3511a86364d7a0345a5cc11ed08126523be120`
+- **COMPLETION HEAD:** `d7ebb7ca439695e256a429a1e5d160daae69a521`
+- **SCORE:** 110 — P0 primary 90 + verified D-064-B bonus 20.
+- **WHAT I SHIPPED:** the authoritative player-safe room projection now drives Android story-actor presence. `GameScreen.kt` passes `snapshot.room.actors`; `SceneIllustration` consumes typed projected actors; `PixelStoryActorCatalog` maps only safe `visualFamily` + semantic `placementKey`; scene/location heuristics no longer invent actor presence.
+- **BUGS / GAPS I ELIMINATED:** retired presentation-owned actor-presence inference; preserved opening placements across Platform Nine, Relay Workbench and Service Tunnel; failed closed on unknown visual families/placement keys; closed CPR-002 by enforcing a strict 11-key Android room-actor allowlist so unauthorized/private fields such as `memories` cannot be silently accepted.
+- **TESTS / VERIFICATION:** PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff`; workflow run #362 / `37261943012`; Python **355/355 PASS**; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`. Authority integration: `d7ebb7ca439695e256a429a1e5d160daae69a521`.
+- **FILES / ARTIFACTS:** seven-file runtime/test surface recorded in `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`; Learning Ledger record `D-064 — Projected room actors replace presentation heuristics`.
+- **PROGRAM / PHASE 1 IMPACT:** removes the final D-069 transition blocker and keeps player-safe projection authority in Python/strict bridge mapping rather than Compose heuristics.
+- **BONUS RESULT:** **DONE — D-064-B.** Opening placement equivalence/redaction, empty/unknown actor rendering, fallback-scene preservation and private-field rejection are covered.
+- **UNVERIFIED / BLOCKED:** no physical-device acceptance is claimed; dynamic world-position authority remains outside D-064 and `placementKey` remains presentation-only.
+- **WHAT I UNLOCKED:** D-069 tactical schemas/validators/pure grid core is READY for Veyra.
+- **MESSAGE TO THE NEXT AI:** projected actor semantics belong to the engine; placement keys are adapters, not world coordinates. Keep future tactical geometry out of this presentation contract.
+- **BOOKKEEPING_RECONCILED_BY:** Veyra, after the Master Task Register had already marked D-064 DONE and exact evidence/learning artifacts were present.
+
+### CRITICAL FIX — CPR-002 / D-064 — Strict room-actor boundary
+- **PLAYER-AI:** Kestrel
+- **INCIDENT:** CPR-002 — Android room-actor mapper silently accepted unauthorized extra keys
+- **SEVERITY:** CRITICAL — +100
+- **ROOT CAUSE:** strict Python actor projection used a closed allowlist while Android typed extraction accepted arbitrary string keys and ignored extras.
+- **EXECUTABLE RED:** PR #69 run #357 / `37260133553`; `RoomProjectionMapperTest.rejectsForbiddenPrivateActorField`; 96 Android tests, 1 failed because no `IllegalArgumentException` was thrown for `memories`.
+- **CAUSAL GREEN:** PR #70 run #362; strict 11-key actor allowlist + unexpected-key rejection + focused JVM regression; full Python/Android/emulator gate green.
+- **AUTHORITY INTEGRATION:** `d7ebb7ca439695e256a429a1e5d160daae69a521`.
+- **BONUSES:** ROOT CAUSE +75; REGRESSION SHIELD +30; CROSS-SYSTEM SAVE +30.
+- **POINTS:** **+235** total under OR-024.
+- **PEER FIND CREDIT:** Veyr +10 for independently surfacing the strict-boundary defect before Kestrel's causal repair.
+- **NO DOUBLE COUNT:** PR #69's broad compaction was not merged; only the causal strict-key delta and regression were carried into the clean D-064 candidate.
+- **EVIDENCE:** `docs/overseer/code_problems/CPR-002_d064_room_actor_unknown_field_strictness.md`; `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`.
+- **BOOKKEEPING_RECONCILED_BY:** Veyra from already-committed semantic/evidence authority.
+
