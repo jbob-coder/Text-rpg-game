@@ -9,17 +9,18 @@ This file is the repository entry point for coding agents and automated assistan
 Before changing code or documentation, read these in order:
 
 1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue. Claim an eligible task here before discretionary project work; on completion, write the required Brag Card, refresh `docs/AI_SCOREBOARD.md`, create/refresh the next evidence-backed task, then claim a different one.
-2. `docs/AI_COMMAND_STRUCTURE.md` — current AI domain leads, review responsibilities and escalation paths. Peer defect bounties are governed by `docs/AI_PEER_REVIEW_BOUNTY.md`. Direct agent questions, proposals and Project Overseer rulings use `docs/AI_COUNCIL_ROOM.md` and `docs/PROJECT_OVERSEER_DECISION_LOG.md`. Runtime-impacting work after the current transition follows `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
-3. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
-4. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical master record of what documentation exists, what is complete, what is partial, what is missing, blockers, and next actions.
-5. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
-6. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases for the owner's long-range directive.
-7. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — what each major document owns and what consumes it.
-8. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — operational task state, blockers, evidence and next action.
-9. `docs/IMPLEMENTATION_STATUS.md` — verified historical/current implementation evidence.
-10. Relevant domain master document for the work being changed.
-11. Relevant source/tests for the task being changed.
-12. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
+2. `docs/AI_COMMAND_STRUCTURE.md` — current Player-AI specializations, review responsibilities and escalation paths.
+4. `docs/PLAYER_AI_MISSION_CONTROL.md` — fast-entry mission cards; use this to avoid rereading unrelated project material. Peer defect bounties are governed by `docs/AI_PEER_REVIEW_BOUNTY.md`. Direct agent questions, proposals and Project Overseer rulings use `docs/AI_COUNCIL_ROOM.md` and `docs/PROJECT_OVERSEER_DECISION_LOG.md`. Runtime-impacting work after the current transition follows `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+4. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
+5. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical master record of what documentation exists, what is complete, what is partial, what is missing, blockers, and next actions.
+6. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
+7. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases for the owner's long-range directive.
+8. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — what each major document owns and what consumes it.
+9. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — operational task state, blockers, evidence and next action.
+10. `docs/IMPLEMENTATION_STATUS.md` — verified historical/current implementation evidence.
+11. Relevant domain master document for the work being changed.
+12. Relevant source/tests for the task being changed.
+13. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
 
 Repository files and fresh execution evidence outrank remembered chat context. Older game repositories, prototypes and historical reports are not authority unless an explicit migration record says otherwise.
 
@@ -57,6 +58,18 @@ This standing authorization does **not** remove safeguards for actions with exte
 - alter external account/security settings or bypass product, safety, legal, or platform approval requirements.
 
 When a proposed action falls outside routine reversible project engineering, stop at the smallest necessary approval boundary. Otherwise proceed, verify, and document the result.
+
+## Player-AI ♾️ fast-entry mode
+
+When the user sends `♾️` to a Player-AI:
+- fetch live HEAD;
+- open `docs/PLAYER_AI_MISSION_CONTROL.md`;
+- re-fetch the Player-AI's current Bulletin task;
+- perform the mission card's **Next Move**;
+- verify its **Exit Gate**;
+- synchronize task/evidence/Brag/Scoreboard state.
+
+Do not restart repository-wide discovery unless the mission card or live drift requires it.
 
 ## AI bulletin-board execution loop
 
