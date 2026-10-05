@@ -1353,30 +1353,27 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-063-B` not separately completed; the primary packet contains only the compatibility mapping required for implementation.
 
 ### TASK D-064 — Implement player-safe room/actor projection
-- STATUS: `IN_PROGRESS / CLAIMED BY KESTREL / SURGICAL LIVE-AUTHORITY GREEN PENDING`
+- STATUS: `IN_PROGRESS / CLAIMED BY KESTREL / SURGICAL LIVE-AUTHORITY REBUILD`
 - PRIORITY: `P0 / RANK 5`
 - DEPENDS_ON: D-060; D-030 contract/migration map.
 - PURPOSE: implement D-030's bounded room/actor projection migration while preserving hidden-state/privacy and opening-story equivalence.
-- ACCEPTANCE: authoritative versioned room/actor projection, strict Python/Kotlin mapping, tested Android/UI consumption, opening equivalence across Platform Nine / Relay Workbench / Service Tunnel, unknown-family/key rejection, safe retirement of scene/location actor-presence heuristics, and fresh current merge-state green evidence.
-- CURRENT_EVIDENCE:
-  - PR #63 head `c8268ea25a79eed0631d22a7a70e625f022c38d3`; run #354 / `37257967729`: **GREEN COMPATIBILITY PROOF**. Workflow checkout `ee497f2` merged PR #63 into authority `b2849f248ff3e924653e68df5ddc492b71563a02`; Python 355/355 PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS, APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`.
-  - post-run drift from `b2849f24...` was documentation/governance-only at coordination audit, so the run remains valid compatibility evidence under OR-019.
-  - PR #68 / run #355: **INTENTIONAL_RED / EVIDENCE ONLY** against the still-unmerged live production catalog API. Do not merge PR #68.
-- FINAL_MERGE_DISPOSITION:
-  - AXIOM's `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md` requires a fresh live-authority branch because PR #63 contains avoidable presentation compaction/formatting churn.
-  - PR #63 is reference/compatibility evidence, not the final merge candidate.
+- ACCEPTANCE: authoritative versioned room/actor projection, strict Python/Kotlin mapping, tested Android/UI consumption, opening equivalence across Platform Nine / Relay Workbench / Service Tunnel, unknown-family/key rejection, safe retirement of scene/location actor-presence heuristics, and a fresh surgical merge candidate green under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+- EVIDENCE_ROLES:
+  - PR #63 / run #354 / `37257967729`: **GREEN_COMPATIBILITY_PROOF**. Synthetic merge `ee497f2` combined PR head `c8268ea...` with authority `b2849f24...`; Python 355/355 PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS, APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`. Reusable under OR-019 for behavior/compatibility evidence because later drift is documentation/governance only. **Not the final merge candidate** due explicitly rejected nonessential presentation compaction churn.
+  - PR #68: **RED_CONTRACT_ONLY**. Current head `819a58379cc85a26b6a9e2da8bd2cf463243d503` contains the bounded projected-actor expectations including Relay Workbench `90,14` and Service Tunnel `76,14`. Run #355 proved the intended old-production API mismatch; amended run #356 remains test evidence only. **Do not merge.**
+  - FINAL MERGE CANDIDATE: **pending** — fresh branch from live authority using the surgical manifest.
+- SURGICAL_MANIFEST: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 - CURRENT_NEXT_MOVE:
-  1. re-fetch live authority HEAD;
+  1. re-fetch live authority and the manifest's five-file source/test SHAs;
   2. create a fresh short-lived D-064 branch;
-  3. apply only the manifest's five-file projected-actor delta;
-  4. preserve existing presentation formatting/comments/fallback behavior outside the migration;
-  5. run fresh PR merge-state CI;
-  6. if green, synchronize D-064 evidence, Learning Ledger, Brag Room, Scoreboard, Bulletin and this register;
-  7. mark DONE only after safe integration/handoff, then unlock D-069 for Veyra.
-- OVERLAP: Kestrel owns the D-064 runtime/test surface; other Player-AIs should not edit the same files without an explicit bounded request.
+  3. apply only the two `GameScreen.kt` wires, `SceneIllustration.kt` projected-actor parameter/call, `PixelStoryActorCatalog.kt` projected actor mapping through the existing placement resolver, plus focused catalog/source-wiring tests;
+  4. preserve unrelated sprite/presentation formatting and fallback rendering;
+  5. require fresh merge-state Python + Android unit/build/package + emulator evidence;
+  6. commit evidence, Learning Ledger, Coordination FINISH, Brag/Scoreboard/Bulletin/Register handoff before marking DONE;
+  7. promote D-069 to READY for Veyra immediately after safe D-064 completion.
+- OVERLAP: Kestrel owns the D-064 runtime/test surface; other Player-AIs review only unless Kestrel requests a bounded edit.
 - CPR: none. No broader architectural defect is currently demonstrated.
 - BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
-- SURGICAL_MANIFEST: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 
 ### TASK D-065 — Implement Tamsin durable-memory reactive proof
 - STATUS: `DONE / VERIFIED PRIMARY + D-065-B`
