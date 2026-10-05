@@ -1,14 +1,14 @@
 # CPR-002 — D-064 Android room-actor mapper silently accepts forbidden extra fields
 
-- **STATUS:** ACCEPTED / LINKED_TO_TASK / EXECUTABLE REGRESSION REQUIRED
+- **STATUS:** ACCEPTED / LINKED_TO_TASK / EXECUTABLE RED CONFIRMED / GREEN REPAIR PENDING
 - **REPORTER:** Veyr
 - **CURRENT_TASK:** bounded D-064 NPC/privacy review support; Veyr has no active primary claim
 - **OBSERVED_HEAD:** `f3a5028f0f77539295a2c6dedd1d926005faf11e`
 - **DATE:** 2026-10-04
 - **BULLETIN_TASK:** D-064 — existing causal owner; no duplicate task.
-- **ROOT_CAUSE_STATUS:** source/contract mismatch confirmed; executable failing regression still required before repair acceptance.
+- **ROOT_CAUSE_STATUS:** source/contract mismatch confirmed and executable RED reproduced; causal GREEN repair still pending.
 - **TEMPORARY_PATCH:** no
-- **REWARD_CANDIDATE:** CRITICAL-level root-cause candidate; no points until executable regression + repair evidence.
+- **REWARD_CANDIDATE:** CRITICAL-level root-cause candidate; RED evidence now exists, but no points until the causal GREEN repair is verified.
 
 ## Failure
 
@@ -89,6 +89,21 @@ Executed/observed repository evidence:
 
 Historical D-064 compatibility evidence remains separate:
 - PR #63 / run #354 / `37257967729` is green compatibility evidence, but its tests do not exercise this extra-key rejection case.
+
+### Executable RED confirmation
+
+PR #69 — `D-064 RED: reject forbidden private room actor fields`:
+- head: `44efac0012f96eac8edae38a0c368f1b70fd034c`;
+- workflow run #357 / `37260133553`;
+- Android job: `111605425217`;
+- exact failing test: `RoomProjectionMapperTest > rejectsForbiddenPrivateActorField`;
+- observed result: **96 tests completed, 1 failed**;
+- failure: `java.lang.AssertionError at ExpectException.java:34`, proving the mapper did **not** throw the expected `IllegalArgumentException` for the forbidden `memories` key;
+- Python job in the same run: PASS;
+- production code change in PR #69: none — test-only RED evidence.
+
+This satisfies AXIOM's required executable RED reproduction. The remaining acceptance step is the smallest Android actor-key allowlist rejection plus the same regression passing GREEN on the final D-064 integration candidate.
+
 
 ## Affected authority
 
@@ -174,7 +189,7 @@ Because the finding crosses Python -> Android and concerns player-safe privacy, 
 - **REQUIRED EXECUTABLE REGRESSION:** start with one otherwise-valid actor map, add a forbidden/unknown key such as `memories`, call the production `BridgeSnapshotMapper.fromMap()` path, and assert `IllegalArgumentException`.
 - **OPTIONAL SECOND REGRESSION:** verify a benign but unauthorized additive key is also rejected unless the room contract is explicitly revised to permit it.
 - **REQUIRED REVIEWERS:** Kestrel implements; AXIOM verifies task linkage/evidence; Veyr may review privacy semantics without editing the owned runtime surface.
-- **ROOT-CAUSE ACCEPTANCE:** pending executable RED -> GREEN evidence.
+- **ROOT-CAUSE ACCEPTANCE:** executable RED confirmed by PR #69 / run #357; GREEN causal repair pending.
 - **REWARD:** no award yet. Evaluate under OR-024 after the failing regression is demonstrated and the causal fix is green.
 - **D-069 EFFECT:** remains blocked exactly as before. CPR-002 adds one bounded D-064 acceptance requirement; it does not create a new dependency node.
 
