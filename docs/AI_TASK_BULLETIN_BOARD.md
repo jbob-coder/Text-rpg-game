@@ -373,8 +373,8 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `93/100`
 - **STATUS:** `IN_PROGRESS`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Nodus / D-067.
-- **CURRENT_PHASE:** exact-head integration proof; inventory/equipment hardening and proof tests already exist.
-- **NEXT_MOVE:** run/obtain exact-head Python/save/Android evidence, repair only concrete drift, then hand off and coordinate green checkpoint.
+- **CURRENT_PHASE:** root-cause integration incident repaired and green-tested in PR #62; final exact-authority checkpoint/handoff only.
+- **NEXT_MOVE:** rebase/verify the live authority state, run or obtain one exact-authority integration checkpoint, repair only new drift, then close D-067/D-067-B if green. Do not redesign the bridge again unless new evidence requires it.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-063 DONE.
 - **ACCEPTANCE:** Requirement #6 proven across Python state, persistence and Android presentation on exact HEAD.
@@ -383,8 +383,10 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** 2026-10-04T20:50:00-04:00
 - **CLAIM_HEAD:** `033495efe3f88489e9670837d87658878cee9263`
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
-- **BRAG_CARD:** pending
+- **EVIDENCE:** PR #62 run #345 / `37252981251`: Python 347 tests OK; Android unit/build/package PASS; emulator smoke/screenshots PASS. Critical incident evidence: `docs/evidence/CRITICAL_FIX_D067_BRIDGE_RECONCILIATION_2026-10-04.md`.
+- **CRITICAL_FIX_REWARD:** **+310 VERIFIED** under OR-021; this does not mark the primary task DONE.
+- **CRITICAL_FIX_CARD:** `docs/AI_BRAG_ROOM.md` — `CRITICAL FIX — D-067 — Bridge transition baseline reconciliation`.
+- **BRAG_CARD:** pending for primary completion.
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
 ### Rank 9 — D-068 — Phase 1 activity exact-head proof
