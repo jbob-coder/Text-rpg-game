@@ -739,5 +739,5 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **CLAIM_HEAD:** `b2849f248ff3e924653e68df5ddc492b71563a02`
 - **COMPLETION_HEAD:** `9526fcbead1a37f4d1b0faaf8e3500e539efa691`
 - **EVIDENCE:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md`; `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`; 15/15 linked paths and required cross-links verified at acceptance HEAD.
-- **BRAG_CARD:** pending — completion record ready; Brag Room synchronization follows.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-080 — Four Player-AIs leave a map behind`.
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no — D-080 unlocks no direct dependency; D-064 remains the sole D-069 transition blocker.
