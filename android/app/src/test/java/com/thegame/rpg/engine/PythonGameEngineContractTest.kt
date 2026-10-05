@@ -165,6 +165,49 @@ class PythonGameEngineContractTest {
     }
 
     @Test
+    fun `engine choose maps a valid player safe snapshot without recursion`() = runBlocking {
+        val validPayload = mapOf(
+            "scene" to mapOf(
+                "id" to "SCENE_START",
+                "title" to "Arrival",
+                "body" to "The city gate is open.",
+                "choices" to emptyList<Any>(),
+            ),
+            "status" to mapOf("resources" to emptyList<Any>()),
+            "meta" to mapOf(
+                "turn" to 1,
+                "time_minutes" to 5,
+                "location" to "CITY_GATE",
+            ),
+        )
+
+        val gateway = object : PythonSessionGateway {
+            override fun start(
+                context: android.content.Context,
+                onContentLoading: () -> Unit,
+            ): Map<String, Any?> = validPayload
+
+            override fun choose(choiceId: String): Map<String, Any?> = validPayload
+            override fun save() = Unit
+            override fun load(): Map<String, Any?> = validPayload
+            override fun applyCheat(code: String): Map<String, Any?> = validPayload
+            override fun equip(itemId: String): Map<String, Any?> = validPayload
+            override fun unequip(slot: String): Map<String, Any?> = validPayload
+            override fun travel(locationId: String): Map<String, Any?> = validPayload
+            override fun inspectStatus(path: String): Map<String, Any?> = error("not used")
+        }
+
+        val result = PythonGameEngine(gateway).choose("CHOICE_TEST")
+
+        assertTrue(result.isSuccess)
+        val snapshot = result.getOrThrow()
+        assertEquals("SCENE_START", snapshot.sceneId)
+        assertEquals("CITY_GATE", snapshot.location)
+        assertEquals(1, snapshot.turn)
+        assertEquals(5, snapshot.timeMinutes)
+    }
+
+    @Test
     fun `engine startup exception converts to visible boot error`() {
         val failure = EngineStartException(
             stageId = "CONTENT_ERROR",
