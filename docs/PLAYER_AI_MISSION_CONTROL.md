@@ -437,36 +437,29 @@ If a mission card becomes stale:
 
 ---
 
-## Open program-infrastructure mission — D-080
+## D-080 — First-wave Player-AI repository learning trail — COMPLETED
 
-**State:** READY  
-**Purpose:** build the first-wave Player-AI repository learning trail.
+**Player-AI:** Veyr  
+**Mission state:** **DONE / VERIFIED PRIMARY / NEXT-PLAYER HANDOFF COMPLETE**.
 
-### Objective
-Backfill at least one evidence-backed Learning Ledger record from completed work by:
-- Nodus;
-- Veyra;
-- Kestrel;
-- Veyr.
+### Verified result
+- one evidence-backed Learning Ledger record each for Nodus D-067, Veyra D-068, Kestrel's completed Parallel P2 / D-029 provenance slice, and Veyr D-075;
+- each record names the smallest Read First set, proven facts, real implementation owner, trap, validation path, safe extension point, unresolved boundary and direct shortcut;
+- `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md` resolves four representative repository questions without a full master-corpus reread;
+- 15 / 15 referenced source/test/evidence paths resolved at acceptance HEAD `9526fcbead1a37f4d1b0faaf8e3500e539efa691`;
+- AGENTS, Mission Control and the field guide already require/link the Learning Ledger handoff;
+- D-080's own Next Player Learning Record is present.
 
-Then validate that a new Player-AI can answer:
-- where is the authority?
-- where is the implementation owner?
-- how is it validated?
-- what should not be rediscovered?
-- what is still blocked?
+### Evidence
+- `docs/player_guide/PLAYER_LEARNING_LEDGER.md`;
+- `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`;
+- Master Task Register D-080 completion record.
 
-without rereading the entire repository.
+### Boundary
+- no gameplay/runtime/build/device result is claimed by D-080;
+- the Ledger is navigation, not semantic authority;
+- the broader D-029 asset program remains open despite the completed Kestrel provenance slice;
+- D-080-B machine-readable map was intentionally not created without a concrete consumer/consistency need.
 
-### Preferred claimant
-Nodus or the Fifth Player-AI / Verification class while Kestrel remains focused on D-064. Any available Player-AI may claim under normal one-primary rules.
-
-### Bonus
-D-080-B: machine-readable task/domain -> authority -> implementation owner -> validation/evidence map plus consistency check.
-
-### Exit gate
-- four first-wave records exist;
-- all claims are evidence-backed;
-- AGENTS/Mission Control/player guide cross-link correctly;
-- no duplicate authority was created;
-- fast-path navigation audit passes.
+### Next Move
+Do not reopen D-080 merely to expand documentation volume. Future completed primary tasks should append compact task-local Learning Ledger records. Veyr returns to bounded narrative/social review availability unless the live Bulletin exposes another eligible task.
