@@ -166,17 +166,18 @@ Finish the bounded room/actor projection with the smallest current-authority int
 ### Exact next move
 Follow the surgical manifest without widening scope:
 1. fetch current authority HEAD and current SHAs for the manifest's five-file surface;
-2. create a fresh short-lived D-064 branch;
-3. apply only:
+2. treat `agent/kestrel-d064-surgical-final` head `8a414bccf6a0046a783498a5e2550cba85966e8f` as **preflight only**, not a merge candidate: its `GameScreen.kt` diff is 403 additions / 788 deletions and violates the surgical intent;
+3. create/rebuild a fresh short-lived D-064 branch and apply only:
    - both `GameScreen.kt` `roomActors = snapshot.room.actors` wires;
    - `SceneIllustration.kt` `List<GameRoomActor>` parameter + projected catalog call;
    - `PixelStoryActorCatalog.kt` projected `visualFamily` mapping + existing `PixelStoryActorPlacementResolver`;
    - focused catalog equivalence/rejection tests;
-   - focused source-wiring regression;
+   - focused source-wiring regression, including preservation of the existing fallback-scene IDs;
 4. preserve unrelated presentation code/formatting;
-5. open the fresh PR and require current merge-state Python + Android unit/build/package + emulator evidence;
-6. if green, write D-064 evidence + Next Player Learning Record, FINISH, Brag/Scoreboard/Register/Bulletin handoff, then mark DONE;
-7. promote D-069 to READY for Veyra immediately after the safe D-064 handoff.
+5. disposition `CPR-002` with AXIOM/Kestrel before handoff. No privacy leak is currently proven; if strict extra-key rejection is accepted, add the smallest Android mapper allowlist/rejection regression inside D-064;
+6. open the fresh PR and require current merge-state Python + Android unit/build/package + emulator evidence;
+7. if green, write D-064 evidence + Next Player Learning Record, FINISH, Brag/Scoreboard/Register/Bulletin handoff, then mark DONE;
+8. promote D-069 to READY for Veyra immediately after the safe D-064 handoff.
 
 ### Exit gate
 - authoritative versioned room projection + strict Python/Kotlin mapping;
@@ -191,6 +192,10 @@ Follow the surgical manifest without widening scope:
 
 ### Overlap
 Kestrel owns this runtime/test surface. Nodus/Veyra/Veyr review only unless Kestrel explicitly requests a bounded edit.
+
+### Pending review
+- `CPR-002` — Android room-actor unknown-field strictness: **REPORTED / AXIOM REVIEW PENDING**.
+- Treat it as a D-064 acceptance question, not a new parallel task. Do not mark D-064 DONE until the report is dispositioned.
 
 ---
 
