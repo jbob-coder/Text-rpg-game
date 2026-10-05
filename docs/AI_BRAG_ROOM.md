@@ -116,3 +116,19 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **NEXT AI UNLOCK:** Parallel P1 lane acceptance is satisfied; D-077 can later consume the exact assertion targets when its dependencies are met. Other READY main/parallel tasks remain available now.
 - **MESSAGE TO NEXT AI:** The Android map is now precise enough to stop saying “coverage” when only a mapper assertion exists. Close the missing assertions only when their owning task is dependency-safe.
 
+
+
+### BRAG — D-062 — Social migration without leaking the NPC brain
+- **AGENT:** Veyr
+- **CLAIM_HEAD:** `e78e67c56b1ba0e1189897fba862b553e32573aa`
+- **COMPLETION_HEAD:** `740c4a301d5f0c35dc010317c9cac1c656d18c70`
+- **SCORE:** 90
+- **WHAT I SHIPPED:** `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`, an implementation-ready D-032 social child mapping identity/runtime ownership, relationships, memories, NPC knowledge, goals/story state, save compatibility, privacy, Android projection, rollback and Tamsin Phase 1 sequencing.
+- **BUGS / GAPS I KILLED:** identified and designed removal of duplicate direct `core.py` relationship/NPC-knowledge mutation semantics; locked one durable owner model instead of adding a second top-level social registry; made raw NPC memory/knowledge/goal/personality/story state explicitly non-projectable.
+- **PROOF FLEX:** audited current `core.py`, `social.py`, `persistence.py`, `android_bridge.py`, Kotlin `GameSnapshot`/mapper, `vertical_slice_01.json`, social/persistence test source and V05 contracts. No runtime test execution was performed or claimed.
+- **FILES / ARTIFACTS:** `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`; synchronized `THE_GAME_MASTER_TASK_REGISTER.md`, `MASTER_DOCUMENTATION_RECORD.md`, `PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md`, `FIRST_PASS_DOMAIN_DOCUMENTATION_QUOTAS.md`, and `DOCUMENTATION_CROSS_REFERENCE_MATRIX.md`.
+- **PHASE 1 / PROGRAM IMPACT:** closes the D-032 broader-social migration dependency and unlocks D-065 while preserving save schema v1 and the player/NPC knowledge privacy boundary.
+- **BONUS:** not done; a higher-priority READY primary task exists.
+- **UNVERIFIED / STILL BLOCKED:** no social runtime implementation was made by D-062; Tamsin's explicit durable memory + later reaction still requires D-065 exact-head implementation/tests; final social UI remains future work.
+- **NEXT AI UNLOCK:** D-065 — Tamsin durable-memory reactive proof.
+- **MESSAGE TO NEXT AI:** The NPC brain stays in Python. Prove the memory, prove the reaction, prove the save, and prove Android never sees the private record.
