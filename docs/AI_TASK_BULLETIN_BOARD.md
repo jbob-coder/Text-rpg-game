@@ -501,16 +501,19 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-075`
 - **PRIORITY:** `P0/P1`
 - **IMPORTANCE:** `84/100`
-- **STATUS:** `BLOCKED`
+- **STATUS:** `IN_PROGRESS`
+- **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Veyr / D-075.
+- **CURRENT_PHASE:** proof existing branch + persistence + later visible divergence; avoid new quest architecture.
+- **NEXT_MOVE:** run two `QUEST_DEAD_RELAY` resolutions from equivalent baselines, save/reload each, navigate to a later comparable state, assert intended persistent differences and one player-safe visible consequence.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; quest/world contracts.
 - **ACCEPTANCE:** Two meaningful quest outcomes persist and create intended later scene/actor/world divergence.
 - **BONUS:** `D-075-B` — branch-difference fixture.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyr
+- **CLAIMED_AT:** 2026-10-04 AST — Overseer assignment OR-020
+- **CLAIM_HEAD:** `f41d5f92e36c7508502f33a0cd116a0ee52dd8bf`
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
+- **EVIDENCE:** OR-020 dependency audit: D-060 DONE; current Gate Twelve content already contains cooperative/solo QUEST_DEAD_RELAY resolutions and a later visible Tamsin reaction candidate.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
