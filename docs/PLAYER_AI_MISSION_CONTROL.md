@@ -136,6 +136,19 @@ Audit current source before adding anything else.
 - Veyra: only if gameplay/tactical semantics are introduced;
 - Nodus: integration/CI if shared runtime state changes.
 
+
+### PR #63 failure triage — exact next repair
+Workflow run #350 / `37253491745`:
+- Python: map-travel room mismatch; already repaired on authority, so rebase rather than reimplement.
+- Android emulator: PASS.
+- Android JVM compile: FAIL because `PixelStoryActorCatalogTest.kt` still calls the removed `placements(locationId, sceneId)` API after production changed to `placements(actors: List<GameRoomActor>)`.
+
+Exact failing test calls:
+- lines 46–47 use obsolete named parameters `locationId` / `sceneId`;
+- lines 59, 64, 69, 74 and 77 pass String arguments where `List<GameRoomActor>` is now required.
+
+**One-shot repair:** rebase on authority, update only `PixelStoryActorCatalogTest.kt` to build projected `GameRoomActor` fixtures and call `placements(actors)`, then rerun PR CI.
+
 ---
 
 ## Veyr — D-065 — COMPLETED
@@ -342,6 +355,15 @@ Audit performed during the Overseer meta-loop:
 Therefore D-066's fully green run proves D-066, not exact-head completion of D-065 or D-067.
 
 Veyr and Nodus should reuse test design/commands where useful, but must produce evidence against the actual integrated authority state that contains their work.
+
+## Live checkpoint evidence
+
+Checkpoint PR #65 / workflow run #351 is testing the repaired authority merge-state.
+- complete Python suite: **PASS**;
+- Android unit/build: still running at last observation;
+- emulator smoke: still running at last observation.
+
+Do not call the authority checkpoint green until every required job completes successfully.
 
 ## Green Authority Checkpoint
 
