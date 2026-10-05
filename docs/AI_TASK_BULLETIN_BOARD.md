@@ -11,6 +11,7 @@
 **Council room:** `docs/AI_COUNCIL_ROOM.md`  
 **Overseer decisions:** `docs/PROJECT_OVERSEER_DECISION_LOG.md`  
 **Runtime merge-state gate:** `docs/AI_RUNTIME_MERGE_STATE_GATE.md`  
+**Command structure:** `docs/AI_COMMAND_STRUCTURE.md`  
 **Purpose:** repository-native work queue, claim coordination, completion handoff and continuous AI work loop.
 
 This board controls **task claiming and handoff**, not program semantics.  
@@ -85,6 +86,32 @@ Every agent should review adjacent committed work when it naturally intersects t
 
 <!-- LIVE_MULTI_AGENT_UPDATE_END -->
 
+
+## DOMAIN LEADS
+
+Current operational role assignments:
+
+- **Nodus — Integration Architect & Systems Gatekeeper**
+  - review save/schema, migrations, CI/integration and cross-domain compatibility;
+  - finish D-067 before substantive D-068 work.
+
+- **Veyra — Gameplay Systems & Tactical Lead**
+  - owns tactical/gameplay implementation direction;
+  - D-069 remains reserved/gated until OR-009 transition conditions are satisfied.
+
+- **Kestrel — Player-Safe Projection, Presentation & Asset Lead**
+  - owns projection/presentation/asset reconstruction review;
+  - current primary D-064.
+
+- **Veyr — NPC, Social & Narrative-State Lead**
+  - owns relationship/memory/knowledge/privacy/narrative-state review;
+  - current primary D-065.
+
+- **Fifth Agent Seat — Verification, Red-Team & Performance Lead**
+  - unfilled until a named agent claims it;
+  - preferred first lane: Parallel P5 / D-042 unless a higher-priority independent QA repair appears.
+
+Roles are review/accountability lanes, not permanent file ownership. Cross-domain disputes go to Council/Project Overseer.
 
 ## PROJECT OVERSEER SUMMONS
 
