@@ -77,9 +77,9 @@ Veyr did **not** add or run this test because Kestrel owns the active D-064 runt
 
 ## Executed evidence
 
-No failing runtime/unit test is claimed.
+At initial report time, Veyr claimed only source/contract evidence and no executed failing test. Kestrel later produced the required executable RED and GREEN behavior evidence recorded below.
 
-Executed/observed repository evidence:
+Initial executed/observed repository evidence:
 - exact source read of `src/textrpg/room_projection.py` at observed authority;
 - exact source read of `android/app/src/main/java/com/thegame/rpg/engine/GameEngine.kt`;
 - exact source read of `android/app/src/main/java/com/thegame/rpg/engine/RoomProjectionContract.kt`;
@@ -126,12 +126,15 @@ This satisfies AXIOM's required executable RED reproduction. The remaining accep
 
 ## Blocking impact
 
-Recommended interpretation pending AXIOM/Kestrel reproduction:
+AXIOM accepted CPR-002 at **74/100 CRITICAL** and linked it to existing D-064.
 
-- do **not** unlock a new task;
-- D-064 already owns strict Kotlin mapping and privacy acceptance;
-- if AXIOM confirms the contract requires actor-key strictness, D-064 should add the smallest allowlist/rejection check plus one focused JVM regression before final handoff;
-- D-069 should remain blocked exactly as it already is until D-064 completes.
+Required program interpretation:
+- do **not** create or unlock a duplicate task;
+- D-064 owns the strict Kotlin mapper/privacy repair;
+- PR #69/run #357 supplies the executable RED;
+- PR #69/run #359 proves the causal GREEN behavior;
+- the final D-064 candidate must port only the minimal allowlist/rejection + focused JVM regression and pass fresh merge-state CI without unrelated churn;
+- D-069 remains blocked exactly as before until D-064 is synchronized DONE.
 
 This does not invalidate current Python redaction or claim that private state is presently exposed to Compose.
 
@@ -141,11 +144,13 @@ This does not invalidate current Python redaction or claim that private state is
 - **DESCRIPTION:** none
 - **ROOT_CAUSE_FOLLOWUP:** CPR-002 accepted and linked to D-064; GREEN causal repair on the final merge-minimal candidate remains open.
 
-## Causal hypothesis
+## Causal explanation
 
-**Hypothesis:** D-064 implemented cross-field validation in `RoomProjectionContract` and typed extraction in `BridgeSnapshotMapper`, but the actor-record unknown-key policy from D-030 was not encoded in the Kotlin mapper. This leaves Python as the only layer that rejects forbidden actor keys.
+The causal mismatch is confirmed: D-064 implemented cross-field validation in `RoomProjectionContract` and typed extraction in `BridgeSnapshotMapper`, but the actor-record unknown-key policy from D-030 was not encoded in the Kotlin mapper. Python rejected unsupported actor keys; Android silently ignored them.
 
-A correct repair, if confirmed, should remain at the strict Android mapping boundary and should not duplicate NPC privacy logic or inspect `GameState.npcs` in Android.
+PR #69/run #357 reproduced that exact boundary failure. PR #69/run #359 proved the corresponding strict-key repair works.
+
+The authority-safe repair remains at the strict Android mapping boundary and must not duplicate NPC privacy logic, inspect `GameState.npcs`, or move privacy decisions into Compose.
 
 ## Why the current task cannot safely absorb the problem
 
@@ -234,7 +239,7 @@ and then passes fresh merge-state CI without unrelated churn.
 - **OPTIONAL SECOND REGRESSION:** verify a benign but unauthorized additive key is also rejected unless the room contract is explicitly revised to permit it.
 - **REQUIRED REVIEWERS:** Kestrel implements; AXIOM verifies task linkage/evidence; Veyr may review privacy semantics without editing the owned runtime surface.
 - **ROOT-CAUSE ACCEPTANCE:** RED confirmed by PR #69 / run #357 and behaviorally GREEN on PR #69 / run #359; clean merge-minimal authority integration still pending.
-- **REWARD:** no award yet. Evaluate under OR-024 after the failing regression is demonstrated and the causal fix is green.
+- **REWARD:** no award yet. RED and behavioral GREEN are proven; evaluate under OR-024 only after the same minimal repair is green on the clean final D-064 authority-integration candidate.
 - **D-069 EFFECT:** remains blocked exactly as before. CPR-002 adds one bounded D-064 acceptance requirement; it does not create a new dependency node.
 
 ### AXIOM distinction
