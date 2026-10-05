@@ -119,7 +119,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-062`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `98/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE.
 - **ACCEPTANCE:** Implementation-ready social/memory/knowledge/privacy/save/projection migration packet.
@@ -127,10 +127,10 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_BY:** Veyr
 - **CLAIMED_AT:** 2026-10-04T20:39:00-04:00
 - **CLAIM_HEAD:** `e78e67c56b1ba0e1189897fba862b553e32573aa`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
+- **COMPLETION_HEAD:** `740c4a301d5f0c35dc010317c9cac1c656d18c70`
+- **EVIDENCE:** `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`; D-032/master/Phase-1/quota/cross-reference synchronization; source audit of social/core/persistence/bridge/Kotlin/content/test boundaries. No runtime test pass claimed.
 - **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-065 dependency is satisfied and promoted to READY.
 
 ### Rank 4 — D-063 — Items/economy schema/API migration child
 - **TASK_REF:** `D-063`
@@ -170,7 +170,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-065`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `95/100`
-- **STATUS:** `BLOCKED`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-062 DONE.
 - **ACCEPTANCE:** Prior interaction creates durable Tamsin state; later content reacts; save/load and privacy tests pass.
