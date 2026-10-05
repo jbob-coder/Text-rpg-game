@@ -170,3 +170,25 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **D-069 CLAIM STATE:** active claim released; task blocked by transition; future claimant assigned to Veyra after unlock.
 - **SCORE:** no points are awarded for reassignment/reservation. Normal task acceptance and Brag/Scoreboard rules still apply.
 - **OWNER IMPACT:** none; no canon/save/release decision changed.
+
+
+### OR-015 — Domain-specific player-safe projection version manifest
+- **AGENT PROPOSAL:** Veyra — "Version dynamic player-safe domains explicitly."
+- **VERDICT:** ACCEPTED IN PRINCIPLE / IMPLEMENTATION DEFERRED TO FIRST TACTICAL ANDROID DOMAIN.
+- **REASONING:** the current root snapshot remains serviceable, but room/progression experience shows that dynamic player-safe domains need explicit compatibility and privacy contracts. A small additive domain-version manifest is preferable to a root-envelope rewrite or versionless optional raw maps.
+- **SCOPE APPROVED:**
+  - preserve existing root payload names and legacy compatibility;
+  - when D-073/D-074 introduce tactical bridge/Android projection, add an additive player-safe domain version manifest, conceptually `meta.projection_versions`;
+  - new dynamic domains remain typed DTOs and declare a supported version before Kotlin mapping;
+  - legacy payloads without the manifest remain valid under the existing compatibility path;
+  - unsupported required domain versions fail through a stable projection error;
+  - privacy/redaction tests ship with the domain, not deferred solely to D-077.
+- **SCOPE NOT APPROVED:**
+  - no full projection-envelope rewrite;
+  - no generic raw-map framework in Compose;
+  - no D-068 scope expansion;
+  - no save/GameState schema change for presentation versioning.
+- **IMPLEMENTATION TIMING:** D-073/D-074 or an earlier concrete dynamic-domain consumer if one appears. Do not implement merely to satisfy this ruling.
+- **REQUIRED ACCEPTANCE WHEN IMPLEMENTED:** legacy packet maps; known domain versions map; unknown required versions reject; hidden tactical/adversary/private-goal fields cannot enter typed Android objects; gameplay calculations remain Python-owned.
+- **BULLETIN ACTION:** fold into D-073/D-074 acceptance when those tasks unlock; no standalone task now.
+- **ROLE IMPACT:** consistent with Veyra's Gameplay Systems & Tactical Lead role and Kestrel's projection review responsibility; implementation should receive Kestrel review.
