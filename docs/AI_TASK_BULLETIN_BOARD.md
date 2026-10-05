@@ -6,6 +6,7 @@
 **Campaign:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md`  
 **Parallel lanes:** `docs/AI_PARALLEL_WORK_LANES_2026-10-04.md`  
 **Brag room:** `docs/AI_BRAG_ROOM.md`  
+**Scoreboard:** `docs/AI_SCOREBOARD.md`  
 **Purpose:** repository-native work queue, claim coordination, completion handoff and continuous AI work loop.
 
 This board controls **task claiming and handoff**, not program semantics.  
@@ -25,13 +26,14 @@ Every AI agent that connects to this repository must:
 8. Before completion, run required verification and synchronize affected authoritative records.
 9. Mark the task `DONE` only when its acceptance criteria are genuinely met. Record completion HEAD and evidence.
 10. Append a **Brag Card** to `docs/AI_BRAG_ROOM.md` before claiming another primary task.
-11. If operating in an interactive ChatGPT conversation, also post a concise Brag Card in that active chat. Repository Brag Room remains canonical when chat posting is unavailable.
-12. Re-evaluate blocked dependents and change them to `READY` only when every dependency is satisfied.
-13. **Create or refresh the next evidence-backed task before moving on.**
+11. Update `docs/AI_SCOREBOARD.md` after the Brag Card so verified points, active potential and standings remain current.
+12. If operating in an interactive ChatGPT conversation, also post a concise Brag Card in that active chat. Repository Brag Room remains canonical when chat posting is unavailable.
+13. Re-evaluate blocked dependents and change them to `READY` only when every dependency is satisfied.
+14. **Create or refresh the next evidence-backed task before moving on.**
     - If the ranked next task already exists, revalidate its source/dependencies/acceptance against the new HEAD and mark `NEXT_TASK_CREATED_OR_REFRESHED: yes`.
     - If completed work reveals a genuinely new required task, register it in `THE_GAME_MASTER_TASK_REGISTER.md` first, then add it to this board after D-079 or as a clearly justified repair task.
     - Never manufacture filler work.
-14. Claim a **different** highest-ranked eligible task and repeat.
+15. Claim a **different** highest-ranked eligible task and repeat.
 
 ## Concurrency rules
 
@@ -507,6 +509,6 @@ These lanes are independent of D-060 completion and exist specifically so additi
 
 ## Queue maintenance
 
-D-060 is the only initial READY campaign task. Completing agents unlock direct dependents by evidence, not by rank alone.
+The queue is now live and multi-agent. Do not rely on the historical statement that D-060 was the only initial READY task. Re-fetch this board and the Scoreboard before every claim. Completing agents unlock direct dependents by evidence, not by rank alone.
 
 If all ranked tasks are DONE, use live evidence to create the next program task only if real work remains. If all remaining work requires owner input, record the exact owner decision and stop instead of fabricating a task.
