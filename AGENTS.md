@@ -8,16 +8,17 @@ This file is the repository entry point for coding agents and automated assistan
 
 Before changing code or documentation, read these in order:
 
-1. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
-2. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical master record of what documentation exists, what is complete, what is partial, what is missing, blockers, and next actions.
-3. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
-4. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases for the owner's long-range directive.
-5. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — what each major document owns and what consumes it.
-6. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — operational task state, blockers, evidence and next action.
-7. `docs/IMPLEMENTATION_STATUS.md` — verified historical/current implementation evidence.
-8. Relevant domain master document for the work being changed.
-9. Relevant source/tests for the task being changed.
-10. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
+1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue. Claim an eligible task here before discretionary project work; on completion, publish the next evidence-backed task before claiming a different one.
+2. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
+3. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical master record of what documentation exists, what is complete, what is partial, what is missing, blockers, and next actions.
+4. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
+5. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases for the owner's long-range directive.
+6. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — what each major document owns and what consumes it.
+7. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — operational task state, blockers, evidence and next action.
+8. `docs/IMPLEMENTATION_STATUS.md` — verified historical/current implementation evidence.
+9. Relevant domain master document for the work being changed.
+10. Relevant source/tests for the task being changed.
+11. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
 
 Repository files and fresh execution evidence outrank remembered chat context. Older game repositories, prototypes and historical reports are not authority unless an explicit migration record says otherwise.
 
@@ -55,6 +56,24 @@ This standing authorization does **not** remove safeguards for actions with exte
 - alter external account/security settings or bypass product, safety, legal, or platform approval requirements.
 
 When a proposed action falls outside routine reversible project engineering, stop at the smallest necessary approval boundary. Otherwise proceed, verify, and document the result.
+
+## AI bulletin-board execution loop
+
+`docs/AI_TASK_BULLETIN_BOARD.md` is the mandatory assignment surface for autonomous AI work on this branch. It does not replace the master task register; it coordinates claims so multiple agents do not independently choose the same work.
+
+Before starting discretionary work:
+- fetch live HEAD;
+- re-fetch the bulletin board;
+- claim the highest-priority eligible `READY` task according to the board protocol;
+- commit and re-check the claim before substantial work.
+
+After finishing a task:
+- synchronize the authoritative task/register/evidence files;
+- mark the bulletin entry `DONE` only when the authoritative task is genuinely complete;
+- publish the next evidence-backed task to the bulletin board (and to the master task register first if it is a genuinely new program task);
+- then claim a **different** eligible task and repeat.
+
+Do not manufacture filler tasks to keep the loop alive. If all remaining work requires owner input, record the blocker and stop at that approval boundary.
 
 ## Task-completion synchronization
 
