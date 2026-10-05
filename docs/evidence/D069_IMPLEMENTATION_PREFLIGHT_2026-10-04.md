@@ -318,9 +318,10 @@ Do not invent a structured edge-object schema in D-069.
 
 ### LOS
 - straight clear LOS;
-- opaque cell block;
+- opaque cell block, including symmetric distinct source/target endpoint opacity;
 - opaque edge block using `los_blocked_edges`;
 - reverse-direction symmetry across the same one-sided authored opaque boundary;
+- distinct opaque source/target endpoint symmetry;
 - cover/LOS-opacity separation;
 - invalid `los_blocked_edges` edge rejection;
 - movement-blocker / LOS-blocker separation;
