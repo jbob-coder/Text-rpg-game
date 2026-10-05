@@ -217,26 +217,35 @@ class AndroidGameSession:
         before = deepcopy(self.state.snapshot())
         try:
             from .simulation import advance_time
-            advance_time(self.state, travel_minutes); target_scene = target_node.get("scene_id")
-            if target_scene is not None:
-                if not isinstance(target_scene, str) or not target_scene or target_scene not in self.engine.scenes: raise RuleError(f"Map destination references invalid scene: {location_id}")
-                self.state.scene_id = target_scene; self.state.flags.pop("android.map_location_override", None)
-            else: self.state.flags["android.map_location_override"] = location_id
-            self.state.history.append({"type": "map_travel", "from": current, "to": location_id, "travel_minutes": travel_minutes, "turn": self.state.turn, "time_minutes": self.state.time_minutes}); return self.scene_view()
+            advance_time(self.state, travel_minutes, self.engine)
+            self.state.flags["android.map_location_override"] = location_id
+            self.state.history.append({"type": "travel", "from": current, "to": location_id, "turn": self.state.turn, "time_minutes": self.state.time_minutes})
+            return self.scene_view()
         except AndroidBridgeError: self.state = GameState(**before); raise
         except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("TRAVEL_ERROR", "Travel could not be completed.", technical_detail=str(exc)) from exc
 
-    def equip(self, item_id: str) -> Dict[str, Any]:
-        if not isinstance(item_id, str) or not item_id: raise AndroidBridgeError("EQUIP_ERROR", "Choose a valid item to equip.")
-        definitions = self.content.registries.get("items", {}); definition = definitions.get(item_id) if isinstance(definitions, Mapping) else None
-        if not isinstance(definition, Mapping): raise AndroidBridgeError("EQUIP_ERROR", "That item cannot be equipped.", technical_detail=f"Missing authored equipment definition: {item_id}")
+    def apply_cheat(self, code: str) -> Dict[str, Any]:
+        if not isinstance(code, str) or not code: raise AndroidBridgeError("CHEAT_ERROR", "Enter a valid cheat code.")
+        normalized = code.strip().upper()
         before = deepcopy(self.state.snapshot())
         try:
-            authored_item = dict(definition); authored_item["item_id"] = item_id; previous = equip_item(self.state, authored_item, consume_inventory=True)
-            if isinstance(previous, Mapping):
-                replaced_id = previous.get("item_id")
-                if isinstance(replaced_id, str) and replaced_id: self.state.inventory[replaced_id] = self.state.inventory.get(replaced_id, 0) + 1
-            self.state.history.append({"type": "equipment_changed", "action": "equip", "item_id": item_id, "slot": authored_item.get("slot"), "turn": self.state.turn, "time_minutes": self.state.time_minutes}); return self.scene_view()
+            if normalized == "FULL RESTORE":
+                self.state.health = self.state.max_health; self.state.stamina = self.state.max_stamina
+                self.state.history.append({"type": "android_debug_cheat", "code": "FULL_RESTORE", "turn": self.state.turn}); return self.scene_view()
+            if normalized == "REVEAL MAP":
+                self.state.flags["android_debug.discover_all_map"] = True
+                self.state.history.append({"type": "android_debug_cheat", "code": "REVEAL_MAP", "turn": self.state.turn}); return self.scene_view()
+            if normalized.startswith("SET TIME "):
+                value = normalized.removeprefix("SET TIME ").strip()
+                if not value.isdigit(): raise RuleError("SET TIME requires a non-negative integer")
+                self.state.time_minutes = int(value); self.state.history.append({"type": "android_debug_cheat", "code": "SET_TIME", "value": int(value), "turn": self.state.turn}); return self.scene_view()
+            raise RuleError("Unknown cheat code")
+        except AndroidBridgeError: self.state = GameState(**before); raise
+        except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("CHEAT_ERROR", "That cheat code is not available.", technical_detail=str(exc)) from exc
+
+    def equip(self, item_id: str) -> Dict[str, Any]:
+        before = deepcopy(self.state.snapshot())
+        try: equip_item(self.state, item_id, self.content.registries.get("items", {})); return self.scene_view()
         except AndroidBridgeError: self.state = GameState(**before); raise
         except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("EQUIP_ERROR", "That item could not be equipped.", technical_detail=str(exc)) from exc
 
@@ -245,7 +254,7 @@ class AndroidGameSession:
         before = deepcopy(self.state.snapshot())
         try:
             record = self.state.equipment.get(slot)
-            if not isinstance(record, Mapping): raise AndroidBridgeError("EQUIP_ERROR", "That equipment slot is already empty.")
+            if not isinstance(record, Mapping): raise RuleError(f"Nothing equipped in slot: {slot}")
             item_id = record.get("item_id")
             if not isinstance(item_id, str) or not item_id: raise RuleError(f"Equipped slot has no valid item_id: {slot}")
             del self.state.equipment[slot]; self.state.inventory[item_id] = self.state.inventory.get(item_id, 0) + 1
@@ -267,3 +276,8 @@ class AndroidGameSession:
 def open_android_session(content_path: str | Path, *, save_path: str | Path | None = None) -> AndroidGameSession:
     try: return AndroidGameSession(load_content_pack(content_path), save_path=save_path)
     except (OSError, RuleError, TypeError, ValueError) as exc: raise AndroidBridgeError("CONTENT_ERROR", "Game content could not be loaded.", technical_detail=str(exc)) from exc
+
+
+def create_session(content_path: str | Path, save_path: str | Path | None = None) -> AndroidGameSession:
+    """Compatibility entry point used by Chaquopy and established Android bridge callers."""
+    return open_android_session(content_path, save_path=save_path)
