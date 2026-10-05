@@ -13,6 +13,7 @@
 **Runtime merge-state gate:** `docs/AI_RUNTIME_MERGE_STATE_GATE.md`  
 **Command structure:** `docs/AI_COMMAND_STRUCTURE.md`  
 **Mission control:** `docs/PLAYER_AI_MISSION_CONTROL.md`  
+**Overseer meta loop:** `docs/OVERSEER_META_LOOP.md`  
 **Purpose:** repository-native work queue, claim coordination, completion handoff and continuous AI work loop.
 
 This board controls **task claiming and handoff**, not program semantics.  
@@ -638,7 +639,9 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **PRIORITY:** `P0/P1 PARALLEL`
 - **IMPORTANCE:** `85/100`
 - **STATUS:** `READY`
+- **RESERVED_FOR_CLASS:** Fifth Player-AI Seat — Verification / Red-Team / Performance
 - **DOMAIN:** source archaeology / branch survivor reconciliation.
+- **CLAIM_RULE:** Nodus/Veyra/Kestrel/Veyr should leave this READY lane for the fifth Player-AI unless the Overseer explicitly reassigns it.
 - **DEPENDENCIES:** current-head source inventory; no dependency on D-060 completion.
 - **ACCEPTANCE:** give a bounded unresolved set of cross-branch implementation differences exact dispositions and migration/consumer mappings; no merges or runtime changes.
 - **BONUS:** machine-readable branch/commit -> behavior -> disposition -> migration-consumer table.
