@@ -1407,12 +1407,65 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-068-B` activity interruption/atomicity regression.
 
 ### TASK D-069 — Implement tactical schemas, validators and pure grid core
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `IN_PROGRESS / CLAIMED BY VEYRA / OR-011 RUNTIME-GATED / PREIMPLEMENTATION AUDIT COMPLETE`
 - PRIORITY: `P0 / RANK 10`
-- DEPENDS_ON: D-060; D-032 combat migration packet.
-- PURPOSE: begin the bounded combat implementation with authored schema validation plus coordinate/occupancy/path/LOS/cover primitives.
-- ACCEPTANCE: old packs remain valid; malformed tactical records fail; deterministic pure-function tests pass.
-- BONUS: `D-069-B` grid/path/visibility/cover invariant regression set.
+- CLAIM_HEAD: `6f69012a8a7c8cbd21d791696f30f30a0c6e0d0f`.
+- DEPENDS_ON:
+  - D-060 DONE;
+  - D-032 combat migration packet;
+  - OR-009 / OR-011 transition requirement: D-064–D-068 safe handoff plus one green authority checkpoint before substantive D-069 runtime work.
+- CURRENT SOURCE REALITY:
+  - no `combat_*.py`, tactical-grid, LOS or cover runtime module exists under `src/textrpg`;
+  - `content_pack_from_mapping` currently validates scenes/quests/powers/registries/world_map and retains the raw authored pack;
+  - `validation.py` has a strict error-list + `assert_valid_content_pack` pattern suitable for additive tactical validators;
+  - current vertical-slice content must remain valid when tactical sections are absent.
+- LOCKED D-069 SCOPE AFTER THE GATE:
+  - add bounded authored tactical schema/validation support for optional `tactical_maps`, `combat_actions`, `combat_actor_archetypes`, and `encounters`;
+  - add pure tactical coordinate/grid primitives only: integer x/y/z, cardinal adjacency, occupancy, deterministic pathing, cell-center supercover LOS and incoming-edge cover resolution;
+  - preserve one-cell Phase-1 actor footprint and explicit vertical transitions;
+  - reject malformed authored topology instead of repairing it silently;
+  - preserve movement/LOS separation and keep tactical coordinates separate from world/room/screen coordinates.
+- INTENDED FIRST IMPLEMENTATION FILES:
+  - new `src/textrpg/combat_schema.py`;
+  - new `src/textrpg/combat_grid.py`;
+  - bounded additions to `src/textrpg/content.py`, `src/textrpg/validation.py`, and `src/textrpg/__init__.py`;
+  - new `tests/test_combat_schema.py` and `tests/test_combat_grid.py`;
+  - compatibility additions to `tests/test_content.py` / `tests/test_validation.py` only where needed.
+- EXPLICITLY OUT OF D-069:
+  - transient `CombatSession` / actor turn state (D-070);
+  - attack/action resolution, awareness AI, objectives/retreat, aftermath (later tactical tasks);
+  - Gate Twelve authored encounter content (D-073);
+  - Python Android bridge combat field/actions, Kotlin DTOs, ViewModel or Compose (D-073/D-074);
+  - save-schema v2 or mid-combat persistence.
+- PURE-GRID CONTRACT:
+  - cardinal neighbor enumeration order N -> E -> S -> W;
+  - no diagonal movement;
+  - Manhattan heuristic for same-z cardinal A* with stable tie tuple `(f_cost, h_cost, y, x, z, cell_key)`;
+  - movement cost comes from destination cell / explicit transition;
+  - two solid actors cannot end on one cell; enemy pass-through forbidden; ally pass-through policy explicit;
+  - LOS uses deterministic cell-center supercover and must include corner-touch cells;
+  - movement blockers do not automatically block LOS;
+  - cover uses target incoming edge with ratings 0 none / 1 partial / 2 strong; corner ties use one deterministic supercover edge rule.
+- REQUIRED D-069 TESTS:
+  - optional tactical sections preserve old-pack loading;
+  - unknown/non-mapping/malformed tactical records reject cleanly;
+  - duplicate/out-of-bounds cells, invalid anchors/transitions/exits and bad cover edges reject;
+  - four-way adjacency/no diagonal;
+  - blocked destination and enemy pass-through rejection;
+  - occupancy uniqueness and ally-pass policy;
+  - deterministic equal-cost path tie and explicit z transition;
+  - golden supercover corner cases plus appropriate LOS symmetry;
+  - movement-blocker versus LOS-blocker separation;
+  - incoming-edge cover consistency and corner determinism;
+  - no GameState/save-schema mutation.
+- RUNTIME MERGE-STATE PROCEDURE:
+  - after OR-011 opens the gate, create a short-lived D-069 task branch from the then-green authority HEAD;
+  - implement/test there;
+  - open PR targeting `docs/master-game-development-program`;
+  - record task-branch HEAD, authority merge base/current HEAD, PR workflow, merge-state result, resulting authority HEAD and any compatibility repair;
+  - do not mark D-069 DONE while required merge-state CI is red.
+- ACCEPTANCE: backward-compatible tactical schemas plus deterministic coordinate/occupancy/path/LOS/cover tests, with the OR-009 merge-state gate green.
+- BONUS: `D-069-B` — grid/path/visibility/cover invariants.
 
 ### TASK D-070 — Implement tactical transient state, turn and action engine
 - STATUS: `PENDING / BULLETIN QUEUED`
