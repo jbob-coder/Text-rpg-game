@@ -59,6 +59,23 @@ class PixelStoryActorCatalogTest {
     }
 
     @Test
+    fun projectedTamsinKeepsOpeningScenePlacementEquivalence() {
+        val relay = PixelStoryActorCatalog.placements(
+            listOf(actor("tamsin-relay", "NPC_TAMSIN", "RELAY_WORKBENCH_TAMSIN_RIGHT")),
+        )
+        val tunnel = PixelStoryActorCatalog.placements(
+            listOf(actor("tamsin-tunnel", "NPC_TAMSIN", "SERVICE_TUNNEL_TAMSIN_RIGHT")),
+        )
+
+        assertEquals(listOf(PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID), relay.map { it.sprite.assetId })
+        assertEquals(listOf(90), relay.map { it.x })
+        assertEquals(listOf(14), relay.map { it.y })
+        assertEquals(listOf(PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID), tunnel.map { it.sprite.assetId })
+        assertEquals(listOf(76), tunnel.map { it.x })
+        assertEquals(listOf(14), tunnel.map { it.y })
+    }
+
+    @Test
     fun unknownProjectedPresentationCannotInventVisualOrCoordinates() {
         assertTrue(
             PixelStoryActorCatalog.placements(
