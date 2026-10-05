@@ -1,5 +1,6 @@
 package com.thegame.rpg.ui
 
+import com.thegame.rpg.engine.GameRoomActor
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -41,41 +42,69 @@ class PixelStoryActorCatalogTest {
     }
 
     @Test
-    fun storyActorPlacementUsesOnlyProjectedSceneAndLocationIds() {
-        val opening = PixelStoryActorCatalog.placements(
-            locationId = "PLATFORM_NINE",
-            sceneId = "OPENING_DEPOT_BLACKOUT",
+    fun projectedActorsAloneDeterminePresenceAndPlacement() {
+        val placements = PixelStoryActorCatalog.placements(
+            listOf(
+                actor("courier", "SUPPORT_WOUNDED_COURIER", "PLATFORM_NINE_COURIER_LEFT"),
+                actor("tamsin", "NPC_TAMSIN", "PLATFORM_NINE_TAMSIN_RIGHT"),
+            ),
         )
         assertEquals(
             listOf(
                 PixelStoryActorCatalog.SUPPORT_COURIER_ID,
                 PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID,
             ),
-            opening.map { it.sprite.assetId },
+            placements.map { it.sprite.assetId },
         )
+        assertEquals(listOf(34, 62), placements.map { it.x })
+        assertEquals(listOf(13, 14), placements.map { it.y })
+        assertTrue(PixelStoryActorCatalog.placements(emptyList()).isEmpty())
+    }
 
-        assertEquals(
-            listOf(PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID),
-            PixelStoryActorCatalog.placements("PLATFORM_NINE", "OPENING_DECISION")
-                .map { it.sprite.assetId },
+    @Test
+    fun projectedTamsinPreservesRelayWorkbenchAndServiceTunnelCoordinates() {
+        val relay = PixelStoryActorCatalog.placements(
+            listOf(actor("tamsin-relay", "NPC_TAMSIN", "RELAY_WORKBENCH_TAMSIN_RIGHT")),
         )
-        assertEquals(
-            listOf(PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID),
-            PixelStoryActorCatalog.placements("RELAY_WORKBENCH", "OPENING_RECOVERY")
-                .map { it.sprite.assetId },
-        )
-        assertEquals(
-            listOf(PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID),
-            PixelStoryActorCatalog.placements("SERVICE_TUNNEL", "OPENING_TUNNEL")
-                .map { it.sprite.assetId },
-        )
+        assertEquals(listOf(90), relay.map { it.x })
+        assertEquals(listOf(14), relay.map { it.y })
 
+        val tunnel = PixelStoryActorCatalog.placements(
+            listOf(actor("tamsin-tunnel", "NPC_TAMSIN", "SERVICE_TUNNEL_TAMSIN_RIGHT")),
+        )
+        assertEquals(listOf(76), tunnel.map { it.x })
+        assertEquals(listOf(14), tunnel.map { it.y })
+    }
+
+    @Test
+    fun unknownProjectedPresentationCannotInventVisualOrCoordinates() {
         assertTrue(
-            PixelStoryActorCatalog.placements("PLATFORM_NINE", "UNRELATED_SCENE").isEmpty()
+            PixelStoryActorCatalog.placements(
+                listOf(actor("unknown", "UNKNOWN_FAMILY", "PLATFORM_NINE_TAMSIN_RIGHT")),
+            ).isEmpty(),
         )
         assertTrue(
-            PixelStoryActorCatalog.placements("DISTRICT_ARCHIVE", "OPENING_DEPOT_BLACKOUT")
-                .isEmpty()
+            PixelStoryActorCatalog.placements(
+                listOf(actor("tamsin", "NPC_TAMSIN", "UNKNOWN_PLACEMENT")),
+            ).isEmpty(),
         )
     }
+
+    private fun actor(
+        presentationId: String,
+        visualFamily: String,
+        placementKey: String,
+    ) = GameRoomActor(
+        presentationId = presentationId,
+        knownActorId = null,
+        displayName = presentationId,
+        visualFamily = visualFamily,
+        placementKey = placementKey,
+        poseKey = null,
+        outfitKey = null,
+        visibleTags = emptyList(),
+        inspectable = false,
+        dialogueAvailable = false,
+        actions = emptyList(),
+    )
 }
