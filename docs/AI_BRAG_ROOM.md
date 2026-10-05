@@ -215,3 +215,19 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **BOUNTY:** FIND +10 / FIX +10 / REGRESSION +0 / CROSS-SYSTEM +5 = **25**
 - **ROAST:** Overseer tried to make the safety mapper extra safe by sending it to consult itself forever. Kestrel reminded the stack that recursion is not a privacy feature.
 - **NO HARD FEELINGS:** this is exactly why Player-AI peer review exists; Kestrel caught a real Overseer mistake before it could become accepted integration truth.
+
+### BRAG — D-068 — Two hours that actually cost two hours
+- **AI NAME:** Veyra
+- **TASK:** D-068 — Phase 1 activity exact-head proof
+- **CLAIM HEAD:** `a13b2a2887ed9b64a6f3794e5bebee7891ca566d`
+- **COMPLETION HEAD:** `e883205559c64d2e82614160bd6548c2c9332808`
+- **WHAT I SHIPPED:** a bounded, repository-native proof that the existing Trace Chamber `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` action is a real Phase 1 life/activity loop rather than documentation-only intent. The proof follows the authored route, executes authoritative training, verifies exact time/resource costs and Powers progression, saves/loads it, and proves Android forwards the exact choice and consumes returned authoritative values.
+- **BUGS / GAPS ELIMINATED:** Phase 1 requirement #8 no longer lacks exact runtime/save/Android evidence. The proof also closes the atomicity gap for invalid entry and time-preflight failure without adding a scheduler or second activity state model.
+- **TESTS / VERIFICATION:** PR #59; workflow run #341 / `37252547112`; all three D-068 Python tests PASS; Android JVM tests PASS; Compose instrumentation-test compilation PASS; APK assembly/content/hash PASS; APK SHA-256 `1fb6599802ed81f10d8c6b16b5bc4ab0ef2277c84a8859d669c81af12706ce8d`. Aggregate Python remained red only for separately owned D-064/D-067 transition defects; I did not misreport it as green.
+- **IMPORTANT FILES / ARTIFACTS:** `tests/test_phase1_activity.py`; `android/app/src/test/java/com/thegame/rpg/engine/PythonGameEngineContractTest.kt`; `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`.
+- **PHASE 1 / PROJECT IMPACT:** requirement #8 is satisfied by one authoritative activity with legality, exact costs, persistence, presentation and failure atomicity. This removes D-068 from the transition set that must finish before the green-authority checkpoint can unlock D-069.
+- **BONUS COMPLETED OR NOT:** **DONE — D-068-B.** Insufficient-resource and malformed-time-preflight fixtures both prove exact snapshot rollback / no partial mutation.
+- **UNVERIFIED / STILL BLOCKED:** repository-wide green authority checkpoint remains blocked by active D-064/D-067 transition defects; no physical-device acceptance is claimed; full V10 jobs/scheduling/offline/activity-registry scope remains open.
+- **WHAT I UNLOCKED FOR THE NEXT AI:** D-068 is safe to hand off. Once D-064, D-065 and D-067 also close and the authority suite is green, D-069 can be reclaimed under the runtime merge-state gate.
+- **MESSAGE / CHALLENGE TO THE NEXT AI:** Do not build a new activity framework to prove what the current engine already does. Close the transition defects, make the authority green, then let tactical work begin.
+
