@@ -136,7 +136,7 @@ def find_path(
     moving_faction_id: str | None = None,
     allow_allies_through: bool = False,
 ) -> tuple[TacticalCoord, ...] | None:
-    """Deterministic A* over cardinal edges plus explicit transitions."""
+    """Deterministic A* for cardinal-only maps; Dijkstra when transitions exist."""
 
     if tactical_map.cell_at(start) is None or not is_traversable(tactical_map, start):
         return None
