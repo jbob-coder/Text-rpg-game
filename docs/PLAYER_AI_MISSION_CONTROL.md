@@ -149,6 +149,52 @@ Exact failing test calls:
 
 **One-shot repair:** rebase on authority, update only `PixelStoryActorCatalogTest.kt` to build projected `GameRoomActor` fixtures and call `placements(actors)`, then rerun PR CI.
 
+
+### Exact PR #63 test migration recipe
+
+Production in PR #63 already changes the actor catalog to:
+`placements(actors: List<GameRoomActor>)`.
+
+It maps:
+- `visualFamily = "NPC_TAMSIN"` -> Tamsin sprite;
+- `visualFamily = "SUPPORT_WOUNDED_COURIER"` -> courier sprite;
+- `placementKey` through `PixelStoryActorPlacementResolver`;
+- unknown family/key -> omitted.
+
+Use `com.thegame.rpg.engine.GameRoomActor` in `PixelStoryActorCatalogTest.kt`.
+
+Minimal fixture shape:
+```kotlin
+private fun actor(
+    presentationId: String,
+    visualFamily: String,
+    placementKey: String,
+) = GameRoomActor(
+    presentationId = presentationId,
+    knownActorId = null,
+    displayName = presentationId,
+    visualFamily = visualFamily,
+    placementKey = placementKey,
+    poseKey = null,
+    outfitKey = null,
+    visibleTags = emptyList(),
+    inspectable = false,
+    dialogueAvailable = false,
+    actions = emptyList(),
+)
+```
+
+Required bounded cases:
+1. courier + Tamsin using `PLATFORM_NINE_COURIER_LEFT` and `PLATFORM_NINE_TAMSIN_RIGHT`;
+2. Tamsin at `RELAY_WORKBENCH_TAMSIN_RIGHT`;
+3. Tamsin at `SERVICE_TUNNEL_TAMSIN_RIGHT`;
+4. unknown `visualFamily` -> empty;
+5. unknown `placementKey` -> empty.
+
+Direct PR conversation note: comment ID `5987024043`.
+
+**Do not carry unnecessary formatting/compaction churn forward.** Rebase/rebuild from current authority and apply only the actor-authority migration plus its tests where practical.
+
 ---
 
 ## Veyr — D-065 — COMPLETED
