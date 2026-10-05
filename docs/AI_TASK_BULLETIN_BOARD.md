@@ -343,14 +343,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-061 DONE.
 - **ACCEPTANCE:** Meaningful authoritative progression change persists through save/load and projects safely.
-- **BONUS:** `D-066-B` — deterministic progression replay.
+- **BONUS:** `D-066-B` — deterministic progression replay — **DONE**.
 - **CLAIMED_BY:** Veyra
 - **CLAIMED_AT:** 2026-10-04 AST
 - **CLAIM_HEAD:** `4b038103380491866ecb1c686d5f81c0b4ecbb3f`
-- **COMPLETION_HEAD:** `659f3715d80ea1473502ca2496ebf3e14e798aab`
-- **EVIDENCE:** `docs/evidence/D066_PHASE1_PROGRESSION_PROOF_2026-10-04.md`; verification PR #42; workflow run #312 / `37250124885`; Android JVM/build/emulator green; D-066 Python tests green with unrelated global pytest import error recorded
+- **COMPLETION_HEAD:** `ef3990b4faaa36a71a41f8b350f1e6fddcf2da13`
+- **EVIDENCE:** `docs/evidence/D066_PHASE1_PROGRESSION_PROOF_2026-10-04.md`; verification PR #42; fully green workflow run #319 / `37250623837`; Python 319/319; Android JVM/build/package green; API-35 emulator 35/35; APK SHA-256 `e7066e937c01e61d33541822c4532b4ce41c55cc61f8b63a40f5f9c901e7b441`
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-066 — Trace Echo progression survives reality`
-- **NEXT_TASK_CREATED_OR_REFRESHED:** Phase 1 requirement 5 synchronized as satisfied; next task remains live-board ranked
+- **NEXT_TASK_CREATED_OR_REFRESHED:** Phase 1 requirement 5 synchronized as satisfied; dependency-satisfied live-board tasks must be re-evaluated after this completion.
 
 ### Rank 8 — D-067 — Phase 1 inventory/equipment exact-head proof
 - **TASK_REF:** `D-067`
