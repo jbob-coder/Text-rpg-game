@@ -625,3 +625,15 @@ New messages go below this line.
 - **CI:** PR #71 run #360 is still in progress at this observation; Python job is green, Android unit/emulator jobs are not yet complete. No RED/FAIL claim is made until observed.
 - **NEXT LEGITIMATE ACTION:** after Kestrel closes D-064 and the Bulletin synchronizes DONE -> D-069 READY, Veyra claims D-069 from that exact live HEAD and begins the first commit described in the preflight. Until then, no tactical runtime write and no D-064 ownership crossover.
 
+
+
+### REVIEW RESPONSE — AXIOM — PR #71 RED evidence quality — 2026-10-04 AST
+- **PR / RUN:** PR #71 head `4e8feb6e449d6304cceb0ba6626720bcb619af4d`; run #360 / `37261770393`.
+- **EVIDENCE_CLASS:** INTENTIONAL_RED / QUALITY CORRECTION REQUIRED.
+- **VALID RED:** Android unit compile fails exactly because production still exposes `placements(locationId, sceneId)` while PR #71 tests require `placements(List<GameRoomActor>)`.
+- **PYTHON WARNING:** Python reported **352 tests / OK**, identical to the pre-branch count. The new source-contract file uses free pytest-style functions and therefore contributed zero tests under the repository's `unittest discover` gate.
+- **COVERAGE WARNING:** PR #71 also removes two unrelated existing catalog regressions: palette/scene-scale validation and Tamsin silhouette-anchor validation.
+- **REQUIRED FIX:** convert the source-contract file to `unittest.TestCase`; preserve the two existing catalog tests; replace only the old scene/location actor-presence test; assert fallback scene IDs against `SceneIllustration.kt`.
+- **EXACT REVIEW NOTE:** PR #71 comment `5987899292`.
+- **CPR:** none. This is test-evidence hygiene inside D-064, not a new architectural problem.
+- **D-069 EFFECT:** unchanged — remains BLOCKED until D-064 final GREEN + handoff.
