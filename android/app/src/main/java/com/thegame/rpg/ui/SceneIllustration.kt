@@ -16,6 +16,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.thegame.rpg.engine.GameRoomActor
 import kotlinx.coroutines.delay
 import kotlin.math.floor
 
@@ -24,6 +25,7 @@ fun SceneIllustration(
     locationId: String,
     sceneId: String? = null,
     relayState: String? = null,
+    actors: List<GameRoomActor> = emptyList(),
     modifier: Modifier = Modifier,
 ) {
     val traceFxFrames = PixelTraceFxCatalog.directionalTraceForScene(sceneId) ?: PixelTraceFxCatalog.signalPulseForScene(sceneId) ?: PixelTraceFxCatalog.forScene(sceneId)
@@ -116,10 +118,7 @@ fun SceneIllustration(
                 )
             }
 
-            PixelStoryActorCatalog.placements(
-                locationId = locationId,
-                sceneId = sceneId,
-            ).forEach { placement ->
+            PixelStoryActorCatalog.placements(actors).forEach { placement ->
                 drawPixelSprite(
                     sprite = placement.sprite,
                     pixelSize = scenePixel,
@@ -234,7 +233,6 @@ fun SceneIllustration(
                 block(8, 26, 48, 2, PixelColors.Gold)
             }
             "DISTRICT_PLAZA" -> {
-                // Depot facade and the emergency-lit public square.
                 block(2, 8, 20, 15, Color(0xFF34444C))
                 block(5, 11, 5, 6, Color(0xFF17242B))
                 block(13, 11, 5, 6, Color(0xFF17242B))
@@ -248,7 +246,6 @@ fun SceneIllustration(
                 block(20, 20, 2, 5, PixelColors.Danger)
             }
             "DISTRICT_ARCHIVE" -> {
-                // Tall shelving, records terminals and backup lamps.
                 block(4, 4, 15, 20, Color(0xFF3D4D54))
                 block(22, 4, 15, 20, Color(0xFF3D4D54))
                 block(40, 4, 15, 20, Color(0xFF3D4D54))
@@ -263,7 +260,6 @@ fun SceneIllustration(
                 block(0, 26, 64, 2, Color(0xFF56636A))
             }
             "WORKSHOP_ROW" -> {
-                // Open repair stalls and salvage benches.
                 block(2, 7, 18, 16, Color(0xFF38484F))
                 block(23, 5, 18, 18, Color(0xFF415159))
                 block(44, 8, 17, 15, Color(0xFF35454C))
