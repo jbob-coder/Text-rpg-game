@@ -470,3 +470,20 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **MASTER TASK STATUS:** D-042 remains IN_PROGRESS for broader D-021/D-026 consumer work, D-029 asset lineage/visual promotion, deprecation proof and future materially unclassified branch families. Only the bounded Parallel P5 lane is complete.
 - **WHAT I UNLOCKED:** later D-029/D-077 presentation work can consume explicit dispositions and migration units instead of re-auditing these divergent PRs.
 - **MESSAGE TO THE NEXT AI:** before migrating an old presentation branch, identify what actually renders first on current authority. File names and branch recency do not establish runtime ownership.
+
+
+### BRAG — D-069 — Geometry stopped being a suggestion
+- **AI NAME:** Veyra
+- **TASK:** D-069 — Tactical schemas, validators and pure grid core
+- **CLAIM HEAD:** `06bca70e2d004ca70635019b8c82afd7c916e05b`
+- **COMPLETION HEAD:** `8b2115cf8a6f04127bdf20dd1217abd947cf8150`
+- **SCORE:** 110 — P0 completion 90 + verified D-069-B grid/visibility invariant bonus 20. CPR-003/CPR-004 reward classification is pending AXIOM and is not included here.
+- **WHAT I SHIPPED:** backward-compatible tactical authored schemas, strict validators, deterministic coordinate/occupancy/path/LOS/cover primitives, explicit transition topology, authored directional LOS-edge opacity, and post-GameState durable NPC `persistent_ref` resolution.
+- **BUGS / GAPS I KILLED:** opaque-edge LOS had no authored owner (CPR-003); persistent refs could be syntactically valid but nonexistent (CPR-004); same-z transitions could bypass cardinal topology; source/target opacity could create LOS asymmetry; same-cell LOS violated the locked contract; Manhattan A* could become non-admissible with cheap z transitions; explicit null tactical lists and empty-world location references had strictness gaps.
+- **PROOF FLEX:** final PR #76 / run #390 (`37347612244`) — Python **402/402 PASS**, Android unit/build/package PASS, Compose instrumentation compilation PASS, emulator **35/35 PASS**, APK SHA-256 `9784a7f518b747147e7bc2346321aee9fd7e85b9fe4deef298b5cae1e47a17f1`. Authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
+- **FILES / ARTIFACTS:** `src/textrpg/combat_schema.py`; `src/textrpg/combat_grid.py`; bounded `content.py`, `validation.py`, `__init__.py` integration; `tests/test_combat_schema.py`; `tests/test_combat_grid.py`; `tests/test_content.py`; evidence `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md`; APK artifact `11360928330`; UI-QA artifact `11360963729`.
+- **PHASE 1 / PROGRAM IMPACT:** tactical authored data and pure geometry now have one executable authority. D-070 can build transient turns/actions on frozen schema/grid behavior instead of inventing movement/LOS/cover legality.
+- **BONUS:** **DONE — D-069-B.** Deterministic grid/path/visibility/cover invariants are regression-locked, including transition-aware optimality, same-cell LOS, one-sided edge opacity symmetry and preview non-mutation.
+- **UNVERIFIED / STILL BLOCKED:** no CombatSession, action-budget engine, reactions, awareness, attack/damage, objectives/retreat/AI, aftermath, Android combat projection or physical-device validation is claimed here. Canonical player persistent identity remains undefined.
+- **WHAT I UNLOCKED:** D-070 — tactical transient state, turn and action engine.
+- **MESSAGE TO NEXT AI:** Consume `combat_schema.py` and `combat_grid.py`; do not duplicate path legality. In D-070, separate action-budget cost from movement-point allowance and keep transient state out of GameState/save-v1.
