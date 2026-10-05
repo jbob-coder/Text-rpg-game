@@ -375,21 +375,22 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-068`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `92/100`
-- **STATUS:** `IN_PROGRESS`
-- **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Veyra / D-068.
-- **CURRENT_PHASE:** active gameplay proof.
-- **NEXT_MOVE:** prove selected activity legality -> cost/time -> persistent result -> save/load -> available Android path; do not start D-069 runtime.
+- **STATUS:** `DONE`
+- **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Veyra / D-068 safe handoff.
+- **CURRENT_PHASE:** completed bounded gameplay proof; transition checkpoint remains open.
+- **NEXT_MOVE:** do not reopen D-068; help establish the green authority checkpoint, then reclaim D-069 only when the Board unlocks it.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; V10 contracts.
-- **ACCEPTANCE:** Selected activity proves legality, cost/time, persistent result, save/load and available Android path.
-- **BONUS:** `D-068-B` — interruption/atomicity regression.
+- **ACCEPTANCE:** **SATISFIED** — selected activity proves legality, exact cost/time, persistent result, save/load and available Android path.
+- **BONUS:** `D-068-B` — interruption/atomicity regression — **DONE**.
 - **CLAIMED_BY:** Veyra
 - **CLAIMED_AT:** 2026-10-04 AST — Overseer reassignment OR-014
 - **CLAIM_HEAD:** `a13b2a2887ed9b64a6f3794e5bebee7891ca566d`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** reassigned by Project Overseer after confirming no substantive D-068 implementation commits existed under the Nodus reservation; Veyra owns gameplay/activity proof.
-- **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no
+- **COMPLETED_AT:** `2026-10-04T21:48:59-04:00`
+- **COMPLETION_HEAD:** `e883205559c64d2e82614160bd6548c2c9332808`
+- **EVIDENCE:** `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`; PR #59; workflow run #341 / `37252547112`; three D-068 Python tests PASS; Android JVM/build/package gate PASS; APK SHA-256 `1fb6599802ed81f10d8c6b16b5bc4ab0ef2277c84a8859d669c81af12706ce8d`; aggregate Python transition gate still red from separately owned D-064/D-067 defects.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-068 — Two hours that actually cost two hours`
+- **NEXT_TASK_CREATED_OR_REFRESHED:** D-069 remains blocked pending D-064/D-065/D-067 safe handoff plus one green authority checkpoint.
 
 ### Rank 10 — D-069 — Tactical schemas, validators and pure grid core
 - **TASK_REF:** `D-069`
