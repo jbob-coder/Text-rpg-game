@@ -147,56 +147,86 @@ The current transition job is to close D-064 without scope expansion. D-065, D-0
 ## Kestrel — D-064 — Projection / Presentation
 
 **Player-AI class:** Player-Safe Projection, Presentation & Asset Lead  
-**Mission state:** IN_PROGRESS — TDD RED established; build the minimal current-authority GREEN candidate.
+**Mission state:** **CLOSURE READY / GREEN MERGE-STATE EVIDENCE / MERGE + HANDOFF PENDING**.
 
 ### Mission objective
 Finish the bounded room/actor projection so authored player-safe actor presence reaches Android through the strict snapshot boundary while preserving opening-scene visual equivalence and hidden-state redaction.
 
-### Read first
-- `docs/systems/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md` / current D-030 projection authority;
+### Must Read
+- `docs/systems/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md` or current D-030 projection authority;
 - `src/textrpg/room_projection.py`;
+- room-presence content/sidecar used by current opening scenes;
 - `android/app/src/main/java/com/thegame/rpg/engine/PlayerSafeSnapshotMapper.kt`;
-- `android/app/src/main/java/com/thegame/rpg/ui/PixelStoryActorPlacementResolver.kt`;
-- live Bulletin D-064 entry and PR #68 comments before writing.
+- `android/app/src/main/java/com/thegame/rpg/engine/PythonGameEngine.kt`;
+- PR #63 changed files/tests;
+- live Bulletin D-064 entry before any merge.
 
-### Proven / do not rediscover
-- strict room projection and player-safe mapper already exist;
-- semantic actor coordinates are already owned by `PixelStoryActorPlacementResolver`; do not create a second coordinate map;
-- PR #63 / run #354 is fully green across Python, Android build/unit/package and emulator screenshots, but treat it as **DIAGNOSTIC_GREEN**, not completion evidence for the final current-authority minimal repair;
-- PR #68 / run #355 is the intended **RED** contract proof: Android unit compilation fails specifically because tests pass `List<GameRoomActor>` while production still exposes `placements(locationId, sceneId)`; Python and emulator smoke are green;
-- current RED fixture still needs Relay Workbench `90,14` and Service Tunnel `76,14` equivalence alongside Platform Nine and unknown-family/key rejection.
+### Already accomplished / do not redo
+- strict room projection invariants;
+- authored opening room presence;
+- production runtime routing through the player-safe mapper;
+- semantic story actor placement resolver;
+- opening actor placement equivalence tests;
+- unittest-native room projection acceptance;
+- recursive snapshot-helper repair;
+- projected-actor consumer migration in PR #63;
+- focused catalog/source-wiring regressions in PR #63.
 
-### Exact next move
-1. Amend PR #68's RED test fixture with the two missing equivalence cases. Keep #68 RED-only; do not merge it as production.
-2. Re-fetch live authority HEAD and cut a clean GREEN branch.
-3. Keep production changes minimal:
-   - `GameScreen.kt`: pass `roomActors = snapshot.room.actors` at both existing `SceneIllustration` calls;
-   - `SceneIllustration.kt`: accept `List<GameRoomActor>` and call `PixelStoryActorCatalog.placements(roomActors)`;
-   - `PixelStoryActorCatalog.kt`: map projected `GameRoomActor.visualFamily` to the existing sprites and resolve `placementKey` only through `PixelStoryActorPlacementResolver`.
-4. Port the focused `PixelStoryActorCatalogTest.kt` actor-list cases and the source-wiring regression; preserve current file formatting and unrelated presentation code.
-5. Open/update a GREEN PR against current authority and require `docs/AI_RUNTIME_MERGE_STATE_GATE.md` completion evidence.
-6. If green, write D-064 evidence, Next Player Learning Record, Brag/Scoreboard handoff, then mark DONE and unlock D-069 for Veyra.
+### Current proof
+PR #63 head `c8268ea25a79eed0631d22a7a70e625f022c38d3`.
 
-### Exit gate
+Workflow run #354 / `37257967729` checked out:
+`ee497f2 = merge(c8268ea..., b2849f24...)`.
+
+Observed:
+- Python **355/355 PASS**;
+- Android unit/build/package PASS;
+- emulator smoke/screenshots PASS;
+- APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`.
+
+Authority drift after `b2849f24...` was audited as governance/documentation-only at the Bulletin upgrade. No `src/`, `android/`, `content/` or `tests/` drift was present, so OR-019 permits evidence reuse while that remains true.
+
+PR #63 tests already include:
+- Platform Nine courier + Tamsin;
+- Relay Workbench Tamsin -> `90,14`;
+- Service Tunnel Tamsin -> `76,14`;
+- empty actor list;
+- unknown visual family;
+- unknown placement key;
+- both `GameScreen.kt` -> `SceneIllustration.kt` `snapshot.room.actors` call sites.
+
+PR #68 is **INTENTIONAL RED / EVIDENCE ONLY / DO NOT MERGE**. It is not a required successor to PR #63.
+
+### Exact Next Move
+1. Re-fetch live authority and confirm no runtime/test drift since `b2849f24...`.
+2. Review PR #63's presentation compaction once for unintended semantic churn.
+3. If scope is acceptable and PR stays clean, merge PR #63.
+4. If Kestrel chooses to rebuild only for a cleaner diff, rerun merge-state CI because code/test content changed.
+5. Write the D-064 evidence packet, Next Player Learning Record, Brag Card and Scoreboard/Bulletin/Register synchronization.
+6. Mark D-064 DONE only after safe handoff; then promote D-069 to READY for Veyra.
+
+### Exit Gate
 - versioned authoritative room projection;
 - Python + Kotlin strict mapping;
 - no raw private NPC state or raw pixel/world authority leakage;
-- opening presentation equivalence across Platform Nine / Relay Workbench / Service Tunnel;
-- unknown family/key cannot invent a visual or coordinate;
-- old scene/location presence heuristic retired from the actor catalog consumer path;
-- current merge-state Python + Android build/unit/package + required emulator evidence green.
+- opening actor-set/placement equivalence through semantic placement;
+- old heuristic retirement boundary explicit;
+- current merge-state tests/build evidence recorded;
+- PR merged or otherwise safely integrated into authority;
+- D-064 Learning Ledger handoff present.
 
-### Coordination / overlap
-- Kestrel owns the D-064 runtime/test surface.
-- Nodus/Veyra/Veyr review only unless Kestrel asks for a bounded edit.
-- Do not independently edit `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt`, or D-064 tests during the GREEN rebuild.
-- No CPR is currently warranted; AXIOM says the demonstrated defect remains inside D-064 unless new evidence shows a broader causal problem.
+### Do Not
+- invent a dynamic spatial model;
+- widen `placement_key` into simulation position;
+- redesign the root snapshot;
+- expand final art scope;
+- merge PR #68;
+- redo PR #63's already-green coverage solely because another PR number is newer.
 
-### Evidence shortcuts
-- PR #63 run #354 / `37257967729`: DIAGNOSTIC_GREEN.
-- PR #68 run #355 / `37258411701`: INTENTIONAL_RED.
-- PR #63 review comments: `5987398307`, `5987433139`.
-- PR #68 review comments: `5987447048`, `5987458735`.
+### Required cross-review
+- Veyr: NPC privacy fields only if the final diff touches private NPC/social projection;
+- Veyra: only if gameplay/tactical semantics are introduced;
+- Nodus: integration/CI only if shared runtime/save state changes.
 
 ---
 
