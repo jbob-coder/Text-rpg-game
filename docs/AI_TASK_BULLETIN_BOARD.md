@@ -24,31 +24,29 @@ This board controls **task claiming and handoff**, not program semantics.
 <!-- LIVE_MULTI_AGENT_UPDATE_START -->
 ## LIVE UPDATE FOR ALL PLAYER-AI — re-fetch before acting
 
-**Mission-control snapshot HEAD:** `4d906f44a60e75375f5b740fb9b62307409c2000` — historical once HEAD moves.
-
 Use `docs/PLAYER_AI_MISSION_CONTROL.md` for the shortest current path.
 
 ### Active primaries
-- **Kestrel:** D-064 — finish verification/handoff; do not redesign.
-- **Veyr:** D-065 — core memory/reaction work exists; prove persistence/determinism/privacy and close.
-- **Nodus:** D-067 — core inventory/equipment proof exists; finish exact-head integration evidence and close.
-- **Veyra:** D-068 — active gameplay/activity proof.
-- **D-069:** BLOCKED until D-064/D-065/D-067/D-068 handoff + one green authority checkpoint.
+- **Kestrel:** D-064 — **last transition blocker**; rebase PR #63, update stale `PixelStoryActorCatalogTest.kt` to `placements(actors)`, rerun CI, close if green.
+- **Veyr:** D-075 — persistent Dead Relay branch/world-consequence proof; PR #66 in verification.
+- **Veyra:** Parallel P4 / D-046 — active documentation/design lane while D-069 waits.
+- **Nodus:** no active primary; D-067 DONE. Available for integration review/checkpoint support.
+- **D-069:** BLOCKED only by D-064 safe handoff. Green authority checkpoint already PASS at PR #65 / run #351.
 
 ### Current verified score
-- **Nodus:** 280
-- **Veyra:** 200
+- **Nodus:** 700
+- **Veyra:** 420
+- **Veyr:** 200
 - **Kestrel:** 115
-- **Veyr:** 90
+
+### Critical-fix rewards
+OR-024 is active. Verified difficult root-cause fixes may earn up to **+455 on top of task points**. No score penalty exists for taking, reverting, or handing off hard tasks.
 
 ### Open fifth Player-AI seat
-The Verification / Red-Team / Performance class is still unfilled. Preferred entry: Parallel P5 / D-042 if still READY.
+Verification / Red-Team / Performance remains unfilled. Preferred entry: Parallel P5 / D-042 if still READY.
 
 ### Immediate completion strategy
-Do not expand scope. Close the four transition tasks, establish a green authority checkpoint, then unlock D-069 under the runtime merge-state gate.
-
-### Player-AI easy-mode rule
-When the user sends `♾️`, fetch live HEAD, open Mission Control, perform the current card's **Next Move**, verify the **Exit Gate**, and update evidence/handoff. Do not reread the entire repository unless the mission actually requires it.
+Close D-064 -> unlock D-069 to Veyra -> begin tactical chain. Do not reopen D-065/D-067/D-068.
 
 <!-- LIVE_MULTI_AGENT_UPDATE_END -->
 
@@ -416,7 +414,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `91/100`
 - **STATUS:** `BLOCKED`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
-- **UNLOCK_GATE:** D-064 + D-065 + D-067 + D-068 safe handoff, then one green authority checkpoint.
+- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE and PR #65 run #351 already established the green authority checkpoint.
 - **NEXT_OWNER:** Veyra; reclaim through `docs/AI_RUNTIME_MERGE_STATE_GATE.md` only after unlock.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
@@ -426,7 +424,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** —
 - **CLAIM_HEAD:** —
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** OR-014 released the premature active claim. D-069 is gated behind safe D-064/D-065/D-067/D-068 handoff + one green authority checkpoint; Veyra is the Overseer-assigned next claimant after unlock.
+- **EVIDENCE:** OR-014 released the premature claim. PR #65 run #351 is fully green across Python, Android build/unit and emulator smoke; D-065/D-067/D-068 are DONE. D-064 is the sole remaining unlock condition. Veyra remains next claimant.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
