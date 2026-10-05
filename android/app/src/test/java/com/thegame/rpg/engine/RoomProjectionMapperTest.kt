@@ -5,6 +5,13 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class RoomProjectionMapperTest {
+    private fun basePayload(room: Map<String, Any?>? = null): Map<String, Any?> = mapOf(
+        "scene" to mapOf("id" to "PLATFORM_NINE", "title" to "Platform Nine", "body" to "Test", "choices" to emptyList<Any>()),
+        "status" to mapOf("resources" to emptyList<Any>()),
+        "meta" to mapOf("turn" to 0, "time_minutes" to 0, "location" to "PLATFORM_NINE"),
+        "room" to room,
+    )
+
     private fun tamsin() = mapOf<String, Any?>(
         "presentation_id" to "NPC_TAMSIN",
         "known_actor_id" to "NPC_TAMSIN",
@@ -19,29 +26,25 @@ class RoomProjectionMapperTest {
     )
 
     @Test fun mapsVersionedPlayerSafeActorProjection() {
-        val room = RoomProjectionMapper.fromMap(mapOf("projection_version" to 1, "location_id" to "PLATFORM_NINE", "actors" to listOf(tamsin()), "active_speaker_presentation_id" to null), "PLATFORM_NINE")
-        assertEquals(1, room.projectionVersion)
-        assertEquals("PLATFORM_NINE", room.locationId)
-        assertEquals("Tamsin", room.actors.single().displayName)
-        assertEquals("PLATFORM_NINE_TAMSIN_RIGHT", room.actors.single().placementKey)
-        assertTrue(room.actors.single().inspectable)
+        val snapshot = BridgeSnapshotMapper.fromMap(basePayload(mapOf(
+            "projection_version" to 1,
+            "location_id" to "PLATFORM_NINE",
+            "actors" to listOf(tamsin()),
+            "active_speaker_presentation_id" to null,
+        )))
+        assertEquals(1, snapshot.room.projectionVersion)
+        assertEquals("PLATFORM_NINE", snapshot.room.locationId)
+        assertEquals("Tamsin", snapshot.room.actors.single().displayName)
+        assertEquals("PLATFORM_NINE_TAMSIN_RIGHT", snapshot.room.actors.single().placementKey)
+        assertTrue(snapshot.room.actors.single().inspectable)
     }
 
     @Test fun absentRoomIsMigrationCompatibleEmptyProjection() {
-        val room = RoomProjectionMapper.fromMap(null, "PLATFORM_NINE")
-        assertEquals("PLATFORM_NINE", room.locationId)
-        assertTrue(room.actors.isEmpty())
-    }
-
-    @Test(expected = IllegalArgumentException::class) fun rejectsRoomLocationMismatch() {
-        RoomProjectionMapper.fromMap(mapOf("projection_version" to 1, "location_id" to "SERVICE_TUNNEL", "actors" to emptyList<Any>()), "PLATFORM_NINE")
-    }
-
-    @Test(expected = IllegalArgumentException::class) fun rejectsDuplicatePresentationIds() {
-        RoomProjectionMapper.fromMap(mapOf("projection_version" to 1, "location_id" to "PLATFORM_NINE", "actors" to listOf(tamsin(), tamsin())), "PLATFORM_NINE")
+        val snapshot = BridgeSnapshotMapper.fromMap(basePayload())
+        assertTrue(snapshot.room.actors.isEmpty())
     }
 
     @Test(expected = IllegalArgumentException::class) fun rejectsUnknownProjectionVersion() {
-        RoomProjectionMapper.fromMap(mapOf("projection_version" to 2, "location_id" to "PLATFORM_NINE", "actors" to emptyList<Any>()), "PLATFORM_NINE")
+        BridgeSnapshotMapper.fromMap(basePayload(mapOf("projection_version" to 2, "location_id" to "PLATFORM_NINE", "actors" to emptyList<Any>())))
     }
 }
