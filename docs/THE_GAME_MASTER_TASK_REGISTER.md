@@ -1554,13 +1554,18 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-074-B` tactical accessibility/large-text/reduced-motion interaction checks.
 
 ### TASK D-075 — Verify Phase 1 quest branch and world consequence
-- STATUS: `IN_PROGRESS / CLAIMED BY VEYR / OR-020 PARALLEL PROOF`
+- STATUS: `DONE / VERIFIED PRIMARY + D-075-B`
 - CLAIM_NOTE: existing QUEST_DEAD_RELAY cooperative-vs-solo content selected as bounded proof candidate; no new quest architecture authorized.
 - PRIORITY: `P0/P1 / RANK 16`
 - DEPENDS_ON: D-060 and current quest/world contracts.
 - PURPOSE: prove one existing Gate Twelve quest has meaningful persistent branching and a visible later state consequence.
 - ACCEPTANCE: two proof resolutions persist across navigation/save/load and produce intended later divergence.
 - BONUS: `D-075-B` branch-difference evidence fixture.
+- COMPLETION_HEAD: `ad5767d312d9e6fef4b34c0f3cfa339c378826a4`.
+- EVIDENCE: `docs/evidence/D075_PHASE1_QUEST_BRANCH_WORLD_CONSEQUENCE_2026-10-04.md`; PR #66 run #352 / `37254171985` fully green across Python, Android unit/build/package and emulator smoke.
+- RESULT: cooperative and solo `QUEST_DEAD_RELAY` resolutions persist across save/load/navigation and create a later player-safe visible divergence without exposing private memory.
+- BONUS: `D-075-B` DONE — normalized machine-readable branch-difference fixture asserts only intended semantic differences.
+- APK_SHA256: `4bb7c133dcecfbc9958651f6b3e10e3f3d6aec594c42c2896a87118b735fb28b`.
 
 ### TASK D-076 — Execute integrated Phase 1 save/load and deterministic regression gate
 - STATUS: `PENDING / BULLETIN QUEUED`
