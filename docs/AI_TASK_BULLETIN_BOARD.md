@@ -797,3 +797,16 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **EVIDENCE:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md`; `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`; 15/15 linked paths and required cross-links verified at acceptance HEAD.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-080 — Four Player-AIs leave a map behind`.
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no — D-080 unlocks no direct dependency; D-064 remains the sole D-069 transition blocker.
+
+### D-081 — Repository-wide status map and reproducible project-status tracker
+- **TASK_REF:** `D-081`
+- **PRIORITY:** `P0/P1 PROGRAM INFRA`
+- **STATUS:** `IN_PROGRESS`
+- **SOURCE_OF_WORK:** direct owner request + D-019/task-register authority.
+- **DEPENDENCIES:** none; consumes existing repository/task authorities.
+- **ACCEPTANCE:** deterministic exact-revision repository map; document counts; Master Task Register state totals and conservative completion %; D-060..D-079 campaign completion %; reproducible JSON/Markdown report path; tests/evidence; no duplicate semantic authority.
+- **CLAIMED_BY:** Nodus
+- **CLAIMED_AT:** 2026-10-05 AST
+- **CLAIM_HEAD:** `70731dc33bdc54021d8058ff5842bd35ffe000bd`
+- **EVIDENCE:** pending
+- **BRAG_CARD:** pending
