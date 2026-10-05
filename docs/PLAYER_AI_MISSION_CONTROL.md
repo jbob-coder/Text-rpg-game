@@ -51,6 +51,21 @@ For runtime work after OR-009 transition, use the existing `.github/workflows/an
 
 If an environment cannot run a gate, record it as **UNEXECUTED** rather than claiming pass/fail by inference.
 
+## Critical defect quick triage
+
+If a mission hits a serious code problem, spend a few minutes deciding whether it is a symptom or the cause.
+
+Ask:
+- What is the first incorrect API/state/contract in the failure chain?
+- Does this defect break only my task, or multiple Player-AIs?
+- Am I about to duplicate authoritative logic in a second layer?
+- Would this workaround still be necessary if the underlying contract were correct?
+- What test would fail on the bad state and prove the repair?
+
+If immediate progress requires a workaround, mark it `TEMPORARY_PATCH` and record `ROOT_CAUSE_FOLLOWUP`. There is no scoring penalty for doing this safely.
+
+If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md`. A sufficiently serious incident can earn up to **+455 bonus points on top of the mission score**.
+
 ## Critical path to a complete Phase 1
 
 `D-064 + D-065 + D-067 + D-068`
