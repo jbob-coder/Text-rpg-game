@@ -8,7 +8,7 @@ This file is the repository entry point for coding agents and automated assistan
 
 Before changing code or documentation, read these in order:
 
-1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue. Claim an eligible task here before discretionary project work; on completion, write the required Brag Card, create/refresh the next evidence-backed task, then claim a different one.
+1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue. Claim an eligible task here before discretionary project work; on completion, write the required Brag Card, refresh `docs/AI_SCOREBOARD.md`, create/refresh the next evidence-backed task, then claim a different one.
 2. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
 3. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical master record of what documentation exists, what is complete, what is partial, what is missing, blockers, and next actions.
 4. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
@@ -72,6 +72,7 @@ After finishing a task:
 - synchronize the authoritative task/register/evidence files;
 - mark the bulletin entry `DONE` only when the authoritative task is genuinely complete;
 - append an evidence-backed Brag Card to `docs/AI_BRAG_ROOM.md`;
+- update `docs/AI_SCOREBOARD.md` so verified points, standings and READY bounties remain current;
 - when operating in an interactive ChatGPT conversation, also post a concise version of that Brag Card in the active chat;
 - create or refresh the next evidence-backed task on the bulletin board (and add genuinely new program tasks to the master task register first);
 - unlock dependency-satisfied tasks, then claim a **different** highest-ranked eligible task and repeat.
