@@ -366,7 +366,7 @@ D-026/D-021 current-source consumer discovery is now complete at field/action, n
 | **V07 — Items / economy / loot** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | Current flat inventory/equipment exists; full economy is not implemented | Item/economy master plus item catalog, inventory, equipment, quality/rarity/condition, provenance, loot, pricing, vendor/ownership and Phase 1 proof contracts | Large item/material/resource catalogs, final currency/prices, vendor population, loot tables, later migration/verification and final economy UI. |
 | **V08 — Tactical combat** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | Final tactical runtime not implemented | Tactical master, camera/presentation standard, coordinate/occupancy, turn/action budget, movement, LOS/knowledge, cover/terrain, action resolution, injury/aftermath, AI/objective standards | Proposed Gate Twelve encounter packet now exists; remaining work is content/canon approval, combat schema/API migration, Android tactical projection/UI, final balance, low-end performance evidence and exact-head tests. |
 | **V09 — Persistent adversaries / world memory** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 8 OF 8 MINIMUM UNITS** | Runtime not implemented; no canon recurring Gate Twelve adversary selected | Dedicated V09 master plus eligibility, encounter-memory/adaptation, lifecycle, hierarchy/succession, territory/routing, player-safe intel and Gate Twelve proof contracts | D-032 adversary schema/API migration packet now exists; remaining work is authored persistent-adversary content, runtime recurrence/adaptation, world/faction integration, typed Android consumption, save-round-trip evidence and low-end profiling. |
-| **V10 — Activities / life simulation** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 8 OF 8 MINIMUM UNITS** | Current time/train/recover/power-practice primitives and Trace Chamber actions exist; advanced scheduling/background life-sim is not implemented | Activity master plus record/state, time/atomicity, training, recovery/treatment, work/study/research, interruption/concurrency and Trace Chamber proof contracts | Final activity registry/migration, professions/economy integration, scheduled/background runtime, calendar/offline decision, final UI and exact-head Phase 1 verification. |
+| **V10 — Activities / life simulation** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 8 OF 8 MINIMUM UNITS / PHASE 1 BOUNDED ACTIVITY VERIFIED** | Current time/train/recover/power-practice primitives and Trace Chamber actions exist; D-068 verifies one integrated activity path; advanced scheduling/background life-sim is not implemented | Activity master plus record/state, time/atomicity, training, recovery/treatment, work/study/research, interruption/concurrency, Trace Chamber proof contracts, and `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md` | Final activity registry/migration, professions/economy integration, scheduled/background runtime, calendar/offline decision and final activity-specific UI remain open. |
 | **V11 — Application UX / projection** | **PLANNING / DOMAIN-DEPENDENT — CURRENT CONSUMERS MAPPED, FINAL REFINEMENT DEFERRED** | Current Android client exists, but final UI must wait for upstream world/gameplay domains to define stable player-facing requirements | `APPLICATION_UX_MASTER_PLAN.md`, `ANDROID_CONSUMER_AND_PROJECTION_MAP.md`, `PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`, status UI contracts | Preserve current consumer/projection evidence and planning constraints now; defer full screen-by-screen refinement until world, progression, NPC/social, items/economy, activities, combat, adversary and migration contracts are sufficiently mature. Then perform a dedicated UI refinement wave. |
 | **V12 — Android / final APK reconstruction** | **FIRST-PASS DOCUMENTATION FLOOR ESTABLISHED / 8 OF 8 / EXECUTION STILL BLOCKED** | Current Android foundation exists; final destructive rebuild not started | APK master/matrix plus runtime bridge, build configuration, CI acceptance, device/performance and release provenance/rollback standards | Remaining mechanics migrations, teardown manifest, final rebuild, exact-head CI, production signing decision, APK provenance and physical handset acceptance. |
 
@@ -819,7 +819,18 @@ The documentation preserves existing engine behavior rather than replacing it:
 - powers technique practice/recovery remains separate ability authority;
 - current Trace Chamber actions remain content fixtures.
 
-Phase 1 requirement #8 now has a concrete current proof candidate, TRAIN_POWER_FUNDAMENTALS_TWO_HOURS. Runtime verification on the final Phase 1 integration head remains separate.
+Phase 1 requirement #8 uses `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` as its concrete proof action.
+
+D-068 now supplies bounded runtime evidence:
+- the real authored route reaches the Trace Chamber activity;
+- the two-hour action spends the authoritative stamina/focus costs and advances world time exactly once;
+- Powers progress persists through save/load;
+- invalid entry and time-preflight failure are atomic;
+- Android forwards the choice and maps returned authoritative state without owning activity arithmetic;
+- evidence: `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`;
+- authority proof merge: `e883205559c64d2e82614160bd6548c2c9332808`.
+
+This closes the Phase 1 bounded activity requirement, not the full V10 target. The final integrated green-authority checkpoint still depends on the remaining D-064/D-065/D-067 transition work.
 
 Next breadth direction: V07 Items/Economy/Loot.
 
