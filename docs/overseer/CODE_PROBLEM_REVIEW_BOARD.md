@@ -146,7 +146,7 @@ AXIOM reviews:
 - **EXECUTABLE RED:** PR #69 / run #357 / `37260133553`, Android job `111605425217`: `RoomProjectionMapperTest > rejectsForbiddenPrivateActorField` failed as expected; 96 tests, 1 failed. Test-only branch; no production code changed.
 - **REQUIRED NEXT:** Kestrel repairs the Android mapper with the projected-actor key allowlist, carries the focused regression into the final D-064 candidate, and proves GREEN.
 - **D-069 IMPACT:** no new dependency node; D-069 remains blocked on D-064 completion.
-- **REWARD:** candidate only. No OR-024 award until RED -> GREEN causal repair evidence exists.
+- **REWARD:** candidate only. RED is now proven; no OR-024 award until GREEN causal repair evidence exists.
 
 No unresolved CPR is created merely to populate this board.
 
