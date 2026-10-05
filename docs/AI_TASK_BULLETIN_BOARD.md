@@ -4,6 +4,7 @@
 **Repository:** `jbob-coder/Text-rpg-game`  
 **Authority branch:** `docs/master-game-development-program`  
 **Campaign:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md`  
+**Parallel lanes:** `docs/AI_PARALLEL_WORK_LANES_2026-10-04.md`  
 **Brag room:** `docs/AI_BRAG_ROOM.md`  
 **Purpose:** repository-native work queue, claim coordination, completion handoff and continuous AI work loop.
 
@@ -17,7 +18,7 @@ Every AI agent that connects to this repository must:
 1. Read `AGENTS.md`, this board, the master task register and the relevant task/domain authorities.
 2. Fetch live HEAD.
 3. Re-fetch this board immediately before claiming.
-4. Select the **highest-ranked READY task** whose dependencies are actually satisfied.
+4. Select the **highest-ranked READY task** whose dependencies are actually satisfied. If the main ranked task is already claimed and its dependents are blocked, select the highest-priority READY task from the parallel-lane section.
 5. Claim it by setting `IN_PROGRESS`, `CLAIMED_BY`, `CLAIMED_AT`, and `CLAIM_HEAD`.
 6. Commit the claim before substantial work and re-fetch the board. First valid committed claim wins.
 7. Execute from live evidence. Do not invent implementation, test results, canon or device evidence.
@@ -40,7 +41,7 @@ Every AI agent that connects to this repository must:
 - If another agent wins a claim, choose another READY task.
 - If live HEAD moves, inspect drift before finalizing.
 - Shared authority writes must be reconciled, not blindly overwritten.
-- Multiple agents may work concurrently only on distinct dependency-safe tasks.
+- Multiple agents may work concurrently on distinct dependency-safe main tasks or explicit parallel lanes. Parallel lanes are designed to keep otherwise-idle agents productive while the main dependency chain advances.
 - A lower-ranked task may be taken before a higher-ranked one only when the higher-ranked task is not READY; record the reason.
 
 ## Status vocabulary
@@ -419,6 +420,90 @@ Bragging is encouraged; fabrication is forbidden.
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
+
+## Parallel lanes — five independent tasks available now
+
+These lanes are independent of D-060 completion and exist specifically so additional agents do not wait while the main chain is occupied. Detailed boundaries are in `docs/AI_PARALLEL_WORK_LANES_2026-10-04.md`.
+
+### Parallel P1 — D-021 — Android consumer/test contract audit
+- **TASK_REF:** `D-021`
+- **PRIORITY:** `P0 PARALLEL`
+- **IMPORTANCE:** `92/100`
+- **STATUS:** `READY`
+- **DOMAIN:** Android / projection / current consumer and test mapping.
+- **DEPENDENCIES:** current D-021/D-026 authorities; no dependency on D-060 completion.
+- **ACCEPTANCE:** deepen exact current consumer/test mapping; close documentation/audit gaps without implementing D-064 or tactical runtime; synchronize D-021/D-026 as needed.
+- **BONUS:** machine-readable screen -> field/action -> owner -> test-status matrix.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+- **COMPLETION_HEAD:** —
+- **EVIDENCE:** pending
+- **BRAG_CARD:** pending
+
+### Parallel P2 — D-029 — Asset provenance/reconstruction audit
+- **TASK_REF:** `D-029`
+- **PRIORITY:** `P0 PARALLEL`
+- **IMPORTANCE:** `91/100`
+- **STATUS:** `READY`
+- **DOMAIN:** asset provenance / reconstruction evidence.
+- **DEPENDENCIES:** existing D-029 ledgers and evidence; no dependency on D-060 completion.
+- **ACCEPTANCE:** close at least one real provenance/reconstruction ambiguity with exact evidence; do not generate/modify/promote/delete runtime assets or make owner visual decisions.
+- **BONUS:** one fully evidenced asset-family zero-to-runtime reconstruction checklist.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+- **COMPLETION_HEAD:** —
+- **EVIDENCE:** pending
+- **BRAG_CARD:** pending
+
+### Parallel P3 — D-045 — Evolved progression/classes design
+- **TASK_REF:** `D-045`
+- **PRIORITY:** `P0 PARALLEL`
+- **IMPORTANCE:** `90/100`
+- **STATUS:** `READY`
+- **DOMAIN:** full-game progression / classes / professions / ranks.
+- **DEPENDENCIES:** existing D-045 authority; no dependency on D-060 completion.
+- **ACCEPTANCE:** complete one bounded next D-045 child at reconstruction depth; preserve CURRENT/TARGET/PROPOSAL separation; do not implement runtime or override D-061.
+- **BONUS:** dependency map from classes/professions/ranks to skills, training, facilities and tactical roles.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+- **COMPLETION_HEAD:** —
+- **EVIDENCE:** pending
+- **BRAG_CARD:** pending
+
+### Parallel P4 — D-046 — Status / ability / passive Phase-C refinement
+- **TASK_REF:** `D-046`
+- **PRIORITY:** `P0 PARALLEL`
+- **IMPORTANCE:** `89/100`
+- **STATUS:** `READY`
+- **DOMAIN:** Status / abilities / passives reconstruction corpus.
+- **DEPENDENCIES:** existing D-046 authority and Wave-001 corpus; no dependency on D-060 completion.
+- **ACCEPTANCE:** materially reduce/close one real Phase-C gap without regenerating completed baseline work or promoting canon.
+- **BONUS:** automate one currently-manual Phase-C consistency check.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+- **COMPLETION_HEAD:** —
+- **EVIDENCE:** pending
+- **BRAG_CARD:** pending
+
+### Parallel P5 — D-042 — Cross-branch existing-state source audit
+- **TASK_REF:** `D-042`
+- **PRIORITY:** `P0/P1 PARALLEL`
+- **IMPORTANCE:** `85/100`
+- **STATUS:** `READY`
+- **DOMAIN:** source archaeology / branch survivor reconciliation.
+- **DEPENDENCIES:** current-head source inventory; no dependency on D-060 completion.
+- **ACCEPTANCE:** give a bounded unresolved set of cross-branch implementation differences exact dispositions and migration/consumer mappings; no merges or runtime changes.
+- **BONUS:** machine-readable branch/commit -> behavior -> disposition -> migration-consumer table.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+- **COMPLETION_HEAD:** —
+- **EVIDENCE:** pending
+- **BRAG_CARD:** pending
 
 ## Queue maintenance
 
