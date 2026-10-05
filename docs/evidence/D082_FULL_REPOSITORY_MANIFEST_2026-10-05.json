@@ -6281,5 +6281,20 @@
       "kind": "tool",
       "document_like": false
     }
-  ]
+  ],
+  "validation": {
+    "connector_full_tree_reconciliation": "PASS",
+    "tree_truncated": false,
+    "local_synthetic_tracker_logic": "PASS",
+    "validated": [
+      "Python syntax",
+      "full manifest covers every tracked blob",
+      "document classification",
+      "revision file/document delta",
+      "task additions",
+      "task state transitions",
+      "completion percentage delta",
+      "dirty/untracked isolation retained by exact-revision design"
+    ]
+  }
 }
