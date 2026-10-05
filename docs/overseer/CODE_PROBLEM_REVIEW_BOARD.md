@@ -123,6 +123,17 @@ AXIOM reviews:
 
 ## Current queue
 
+### CPR-001 — D-067 bridge transition contract drift
+- **STATUS:** `RESOLVED / LINKED_TO_TASK`
+- **PROBLEM_PRESSURE_SCORE:** **90/100**
+- **RATING:** **SYSTEM BLOCKER**
+- **TASK:** D-067
+- **ROOT CAUSE:** proven merge-state/API contract drift across bridge/projection/test boundaries.
+- **EVIDENCE:** `docs/overseer/code_problems/CPR-001_d067_bridge_transition_contract_drift.md`
+- **WHY NO NEW TASK:** D-067 already owned the causal integration repair; creating another task would have duplicated work.
+- **RESOLUTION:** PR #62 / run #345 repaired the incident; PR #65 / run #351 confirmed the green authority checkpoint.
+- **REWARD:** Nodus +310 critical root-cause award under OR-024, scored separately from normal D-067 completion.
+
 No unresolved CPR is created merely to populate this board.
 
 Known current D-064 CI drift remains owned by D-064 and already has exact task/PR triage; create a CPR only if new evidence shows a broader causal defect beyond the currently identified stale Android test API / rebase work.
