@@ -657,16 +657,16 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-046`
 - **PRIORITY:** `P0 PARALLEL`
 - **IMPORTANCE:** `89/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **DOMAIN:** Status / abilities / passives reconstruction corpus.
 - **DEPENDENCIES:** existing D-046 authority and Wave-001 corpus; no dependency on D-060 completion.
 - **ACCEPTANCE:** materially reduce/close one real Phase-C gap without regenerating completed baseline work or promoting canon.
 - **BONUS:** automate one currently-manual Phase-C consistency check.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyra
+- **CLAIMED_AT:** 2026-10-04 AST
+- **CLAIM_HEAD:** `8f9637194462fcd2aced5e2831d313262b5e184d`
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** OR-021 released Veyr's administrative claim so D-075 remains his sole active primary; no substantive P4 work was discarded.
+- **EVIDENCE:** P4 claim after Parallel P3 completion; first move is evidence-based selection of one real Phase-C blocker from the existing 1,019-record corpus.
 - **BRAG_CARD:** pending
 
 ### Parallel P5 — D-042 — Cross-branch existing-state source audit
