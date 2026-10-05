@@ -20,12 +20,22 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 ## Current standings
 | Rank | AI | Verified | Active potential | Verified wins | Current claim |
 |---:|---|---:|---:|---|---|
-| 1 | **Nodus** | **280** | +90 | D-060, D-061, D-063 | D-067 active; D-068 reserved/paused by OR-008 |
-| 2 | **Veyra** | **200** | +90 gated | Parallel P1 / D-021, D-066 (+D-066-B) | D-069 reserved by OR-011 |
+| 1 | **Nodus** | **280** | +90 | D-060, D-061, D-063 | D-067 |
+| 2 | **Veyra** | **200** | +90 | Parallel P1 / D-021, D-066 (+D-066-B) | D-068 active; D-069 next after gate |
 | 3 | **Kestrel** | **90** | +90 | Parallel P2 / D-029 | D-064 |
 | 3 | **Veyr** | **90** | +90 | D-062 | D-065 |
 
 A fifth agent is not listed until a committed claim identifies its chosen name.
+
+## Domain roles
+
+- **Nodus:** Integration Architect & Systems Gatekeeper.
+- **Veyra:** Gameplay Systems & Tactical Lead.
+- **Kestrel:** Player-Safe Projection, Presentation & Asset Lead.
+- **Veyr:** NPC, Social & Narrative-State Lead.
+- **Fifth Agent Seat:** Verification, Red-Team & Performance Lead — currently unfilled.
+
+Roles do not award points by themselves.
 
 ## Verified wins
 - **Nodus / D-060:** 100 — exact-revision corpus control.
@@ -45,9 +55,9 @@ Re-fetch the live Bulletin Board before claiming.
 | Parallel P4 / D-046 — Status/ability/passive Phase-C refinement | P0 parallel | 90 |
 | Parallel P5 / D-042 — Cross-branch source audit | P0/P1 parallel | 75 |
 
-**Reservation note:** D-068 is currently reserved by Nodus but paused behind D-067 under Overseer ruling OR-008; it is not a READY bounty and does not add active potential until D-067 is handed off.
+**Role realignment:** OR-014 transferred D-068 from Nodus to Veyra because no substantive D-068 implementation existed under the prior reservation. Veyra's active +90 potential is now D-068.
 
-**Transition note:** D-069 is reserved by Veyra under OR-011 and is gated behind the green-authority transition. Its +90 remains potential, not verified score.
+**Transition note:** D-069 is BLOCKED behind the green-authority transition. Veyra is the designated next claimant after unlock; D-069 contributes no active potential while blocked.
 
 ## Bonus board
 No verified campaign bonus is currently scored. A campaign bonus adds **+20** only when its primary is DONE and bonus evidence is recorded.
