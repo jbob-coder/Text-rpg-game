@@ -102,6 +102,16 @@ def add_memory(
     payload = dict(data or {})
 
     npc = ensure_npc(state, npc_id)
+    memories = npc["memories"]
+    for existing in memories:
+        if not isinstance(existing, Mapping):
+            raise RuleError(f"NPC memory record must be an object: {npc_id}")
+        existing_id = existing.get("memory_id")
+        if not isinstance(existing_id, str) or not existing_id:
+            raise RuleError(f"NPC memory ID must be non-empty text: {npc_id}")
+        if existing_id == memory_id:
+            raise RuleError(f"Memory already exists for {npc_id}: {memory_id}")
+
     record = {
         "memory_id": memory_id,
         "importance": importance,
@@ -110,8 +120,62 @@ def add_memory(
         "tags": tag_values,
         "data": payload,
     }
-    npc["memories"].append(record)
+    memories.append(record)
     return record
+
+
+def npc_remembers(
+    state: GameState,
+    npc_id: str,
+    memory_id: str | None = None,
+    *,
+    tags: Iterable[str] = (),
+) -> bool:
+    """Query durable NPC memory without creating or mutating social state."""
+    if not isinstance(npc_id, str) or not npc_id:
+        raise RuleError("NPC ID must be a non-empty string")
+    if memory_id is not None and (not isinstance(memory_id, str) or not memory_id):
+        raise RuleError("Memory ID must be a non-empty string")
+    if isinstance(tags, (str, bytes)) or not isinstance(tags, Iterable):
+        raise RuleError("Memory query tags must be an iterable of non-empty strings")
+    tag_values = list(tags)
+    if not all(isinstance(tag, str) and tag for tag in tag_values):
+        raise RuleError("Memory query tags must contain only non-empty strings")
+    if memory_id is None and not tag_values:
+        raise RuleError("Memory query requires a memory ID or at least one tag")
+
+    npc = state.npcs.get(npc_id)
+    if npc is None:
+        return False
+    if not isinstance(npc, Mapping):
+        raise RuleError(f"NPC state must be an object: {npc_id}")
+
+    memories = npc.get("memories", [])
+    if not isinstance(memories, list):
+        raise RuleError(f"NPC memories must be a list: {npc_id}")
+
+    for record in memories:
+        if not isinstance(record, Mapping):
+            raise RuleError(f"NPC memory record must be an object: {npc_id}")
+        record_id = record.get("memory_id")
+        if not isinstance(record_id, str) or not record_id:
+            raise RuleError(f"NPC memory ID must be non-empty text: {npc_id}")
+        raw_tags = record.get("tags", [])
+        if isinstance(raw_tags, (str, bytes)) or not isinstance(raw_tags, Iterable):
+            raise RuleError(f"NPC memory tags must be iterable: {npc_id}/{record_id}")
+        record_tags = list(raw_tags)
+        if not all(isinstance(tag, str) and tag for tag in record_tags):
+            raise RuleError(
+                f"NPC memory tags must contain only non-empty strings: {npc_id}/{record_id}"
+            )
+
+        if memory_id is not None and record_id != memory_id:
+            continue
+        if tag_values and not all(tag in record_tags for tag in tag_values):
+            continue
+        return True
+
+    return False
 
 
 def npc_learn(
