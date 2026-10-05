@@ -1376,6 +1376,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - OVERLAP: Kestrel owns the D-064 runtime/test surface; other Player-AIs should not edit the same files without an explicit bounded request.
 - CPR: none. No broader architectural defect is currently demonstrated.
 - BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
+- SURGICAL_MANIFEST: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 
 ### TASK D-065 — Implement Tamsin durable-memory reactive proof
 - STATUS: `DONE / VERIFIED PRIMARY + D-065-B`
