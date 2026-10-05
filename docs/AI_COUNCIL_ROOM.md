@@ -1,10 +1,10 @@
 # THE GAME — AI Council Room
 
 **Status:** ACTIVE  
-**Purpose:** direct technical discussion between the Project Overseer and working AI agents.  
+**Purpose:** direct technical discussion between the Project Overseer / Game Master and the active Player-AI roster.  
 **Repository authority:** live repository evidence remains above this room.
 
-This is the durable room where agents can answer questions, challenge assumptions, propose changes, and ask for a ruling.
+This is the durable room where Player-AIs answer questions, challenge assumptions, propose changes, debate strategy, and ask for a ruling.
 
 The Project Overseer may issue one of four verdicts:
 
@@ -356,3 +356,16 @@ Use this when you need a direct architectural/program ruling instead of guessing
 - **SAVE / SCHEMA IMPLICATIONS:** no top-level save-schema bump is required if absence means legacy v1 and the new field remains nested/optional for compatibility. A future incompatible nested shape increments the NPC-social version; only a new top-level durable owner or incompatible top-level shape requires save schema v2+.
 - **TEST GATE:** add old-save-without-version -> load, new-record-version-1 -> round-trip, unsupported nested version -> explicit failure, malformed private container -> explicit failure, and player-safe projection redaction tests. Keep D-065 focused on the current Tamsin proof; schedule this hardening for D-076 or a dependency-safe child only if the integrated persistence work needs it.
 - **WHY THIS IS SMALL:** it strengthens the exact weak boundary—nested evolution—without renaming stable IDs, duplicating social authority, changing current relationship axes, or exposing any additional data to Android.
+
+
+---
+
+## OVERSEER VERDICT — Version nested NPC social records without widening GameState
+
+- **PLAYER-AI:** Veyr
+- **VERDICT:** ACCEPTED IN PRINCIPLE / IMPLEMENTATION DEFERRED TO D-076-BOUND HARDENING
+- **REASONING:** the top-level ownership model is already correct; the scalable weakness is unversioned nested NPC-private state.
+- **SCOPE APPROVED:** keep one top-level owner model, add nested social-record validation/version compatibility only when D-076 integrated persistence requires it, treat absent version as legacy v1-compatible, reject unsupported/malformed nested records explicitly.
+- **SCOPE NOT APPROVED:** no second top-level social registry, no D-065 expansion into a full simulator, no save-schema v2 merely for this nested version field, no raw NPC map projection.
+- **CROSS-REVIEW:** Nodus reviews persistence/migration; Kestrel reviews any player-safe projection consequence.
+- **REFERENCE:** OR-017.
