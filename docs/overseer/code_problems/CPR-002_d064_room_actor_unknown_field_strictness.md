@@ -1,14 +1,14 @@
 # CPR-002 — D-064 Android room-actor mapper silently accepts forbidden extra fields
 
-- **STATUS:** ACCEPTED / LINKED_TO_TASK / RED→GREEN BEHAVIOR CONFIRMED / CLEAN FINAL INTEGRATION PENDING
+- **STATUS:** ROOT_CAUSE VERIFIED / AUTHORITY INTEGRATED / D-064 HANDOFF PENDING
 - **REPORTER:** Veyr
 - **CURRENT_TASK:** bounded D-064 NPC/privacy review support; Veyr has no active primary claim
 - **OBSERVED_HEAD:** `f3a5028f0f77539295a2c6dedd1d926005faf11e`
 - **DATE:** 2026-10-04
 - **BULLETIN_TASK:** D-064 — existing causal owner; no duplicate task.
-- **ROOT_CAUSE_STATUS:** source/contract mismatch confirmed; executable RED and behaviorally GREEN causal fix reproduced on PR #69; clean final integration remains pending.
+- **ROOT_CAUSE_STATUS:** source/contract mismatch confirmed; executable RED on PR #69/run #357; causal GREEN on PR #69/run #359; clean final-candidate GREEN on PR #70/run #362; authority integration at `d7ebb7ca439695e256a429a1e5d160daae69a521`.
 - **TEMPORARY_PATCH:** no
-- **REWARD_CANDIDATE:** CRITICAL-level root-cause candidate; RED→GREEN behavior is proven, but no points until the same minimal repair is verified on the clean final D-064 integration candidate.
+- **REWARD_CANDIDATE:** CRITICAL-level OR-024 candidate. RED, causal GREEN, clean final-candidate GREEN, and authority integration are all proven. AXIOM decides any award; Veyr does not self-award.
 
 ## Failure
 
@@ -164,9 +164,9 @@ Because the finding crosses Python -> Android and concerns player-safe privacy, 
 
 - no evidence shows current Python production emits forbidden private actor fields;
 - no user-visible privacy leak is claimed;
-- the GREEN causal repair has not yet been verified on the final merge-minimal D-064 candidate;
+- the GREEN causal repair **has** been verified on final PR #70/run #362 and merged to authority;
 - no physical-device privacy validation is claimed;
-- no critical-root-cause reward is awarded until the clean final candidate proves the repair under required merge-state evidence.
+- no critical-root-cause reward is self-awarded; AXIOM may evaluate now that clean final-candidate and authority-integration evidence exist.
 
 ## Executable RED evidence — PR #69
 
@@ -251,3 +251,29 @@ This CPR does **not** claim:
 - a second social/privacy architecture is needed.
 
 It claims one precise thing: the strict Android room-actor mapper currently lacks the actor-key rejection required by the documented player-safe boundary.
+
+
+## Final clean integration evidence — PR #70 / authority merge
+
+Kestrel's final completion candidate:
+- **PR:** #70
+- **HEAD:** `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff`
+- **WORKFLOW:** run #362 / `37261943012`
+- **SURFACE:** exactly seven accepted files
+- **Python:** **355/355 PASS**
+- **Android unit/build/package:** **PASS**
+- **emulator smoke/screenshots:** **PASS**
+- **debug APK SHA-256:** `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`
+
+Final diff evidence:
+- `GameEngine.kt` carries the 11-key `roomActorKeys` allowlist and unexpected-key rejection without PR #69's broad compaction;
+- `RoomProjectionMapperTest.kt` carries the focused `rejectsForbiddenPrivateActorField` regression;
+- projected-actor presentation migration remains bounded to the accepted D-064 files;
+- fallback-scene preservation regression is present;
+- unrelated GameScreen icon drift is absent.
+
+Authority integration:
+- merge commit `d7ebb7ca439695e256a429a1e5d160daae69a521`;
+- current authority source audit confirms the allowlist/rejection and focused regression are present.
+
+CPR-002's technical root cause is therefore verified and integrated. The remaining open state is D-064 task handoff/bookkeeping, not code repair.
