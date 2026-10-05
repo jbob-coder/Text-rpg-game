@@ -245,48 +245,28 @@ Until then Veyra may assist with bounded integration/checkpoint evidence or read
 ## Veyr — D-075 — Quest Branch / World Consequence
 
 **Player-AI class:** NPC, Social & Narrative-State Lead  
-**Mission state:** ACTIVE under OR-020.
+**Mission state:** **DONE / PRIMARY + D-075-B VERIFIED**.
 
-### Mission objective
-Prove one existing Gate Twelve quest has two meaningful persistent resolutions and a later visible consequence difference without inventing a new quest system.
+### Verified result
+- cooperative and solo `QUEST_DEAD_RELAY` resolutions start from equivalent baselines;
+- both complete and survive save/load;
+- both navigate to the same later `DISTRICT_HUB` checkpoint;
+- branch-specific NPC/relationship/route state remains durable;
+- `ASK_TAMSIN_ABOUT_SHARED_ENTRY` is visible only on the cooperative path;
+- private memory remains absent from player-safe projection;
+- normalized branch-difference fixture proves only intended semantic differences.
 
-### Selected proof candidate
-Use `QUEST_DEAD_RELAY`:
-- cooperative path: share Gate Twelve with Tamsin, joint entry, durable shared-entry memory;
-- solo path: keep Gate Twelve secret, leave alone;
-- later visible divergence candidate: `ASK_TAMSIN_ABOUT_SHARED_ENTRY` appears only on the shared-entry path.
-
-### Must Read
-- Phase 1 requirements #7 and #11 in `docs/PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md`;
-- `QUEST_DEAD_RELAY` and opening scenes in `content/vertical_slice_01.json`;
-- current quest/persistence/player-safe projection tests;
-- D-065 evidence only as a reusable social consequence, not as a substitute for branch proof.
+### Evidence
+- `docs/evidence/D075_PHASE1_QUEST_BRANCH_WORLD_CONSEQUENCE_2026-10-04.md`;
+- PR #66 / run #352 / `37254171985`;
+- Python 349 tests OK;
+- Android unit/build/package PASS;
+- emulator smoke/screenshots PASS;
+- APK SHA-256 `4bb7c133dcecfbc9958651f6b3e10e3f3d6aec594c42c2896a87118b735fb28b`.
 
 ### Next Move
-1. create two sessions from equivalent baseline/seed;
-2. complete cooperative vs solo Dead Relay resolutions;
-3. save/reload both;
-4. navigate both to a comparable later checkpoint;
-5. prove quest/route/NPC state remains intentionally different;
-6. prove at least one later player-visible action/scene/actor consequence differs;
-7. create a normalized diff fixture for D-075-B if primary is green.
+Do not reopen D-075. D-076 remains downstream of the tactical chain/integrated persistence prerequisites. Veyr is available for bounded narrative/social review without taking over another Player-AI's active primary.
 
-### Exit Gate
-- two meaningful resolutions;
-- both persist across save/load/navigation;
-- later divergence is visible/player-safe, not only hidden state;
-- only intended branch differences are asserted;
-- no new canon required unless existing content genuinely lacks a visible consequence.
-
-### Do Not
-- wait for tactical D-069;
-- create a generic quest framework;
-- widen NPC private projection;
-- turn D-075 into world simulation.
-
-### Required cross-review
-- Nodus only if save/persistence semantics must change;
-- Kestrel only if projection shape changes.
 
 ---
 
