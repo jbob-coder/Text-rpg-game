@@ -812,3 +812,16 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **EVIDENCE:** `docs/evidence/D081_PROJECT_STATUS_BASELINE_2026-10-05.json`; `docs/PROJECT_STATUS_SNAPSHOT_2026-10-05.md`; `docs/PROJECT_STATUS_TRACKING_STANDARD.md`; `tests/test_project_status_tracker.py`.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-081 — One status view, exact revision`.
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no direct dependency; D-064 remains the sole D-069 transition blocker.
+
+### D-082 — Full repository manifest and revision-delta tracking
+- **TASK_REF:** `D-082`
+- **PRIORITY:** `P0/P1 PROGRAM INFRA`
+- **STATUS:** `IN_PROGRESS`
+- **SOURCE_OF_WORK:** repeated direct owner request expanding D-081 from aggregate tracking to per-file + delta tracking.
+- **DEPENDENCIES:** D-081 DONE.
+- **ACCEPTANCE:** deterministic per-file manifest; added/removed/changed file and document counts between revisions; task-state transition delta; regression tests; exact-revision evidence snapshot; no duplicate semantic authority.
+- **CLAIMED_BY:** Nodus
+- **CLAIMED_AT:** 2026-10-05 AST
+- **CLAIM_HEAD:** `515270b51fe61b8855fa3ac2e39016dc73e71bc0`
+- **EVIDENCE:** pending
+- **BRAG_CARD:** pending
