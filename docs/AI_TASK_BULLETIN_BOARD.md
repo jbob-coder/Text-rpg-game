@@ -371,10 +371,10 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-067`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `93/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Nodus / D-067.
-- **CURRENT_PHASE:** root-cause integration incident repaired and green-tested in PR #62; final exact-authority checkpoint/handoff only.
-- **NEXT_MOVE:** rebase/verify the live authority state, run or obtain one exact-authority integration checkpoint, repair only new drift, then close D-067/D-067-B if green. Do not redesign the bridge again unless new evidence requires it.
+- **CURRENT_PHASE:** CLOSED — primary + D-067-B verified; critical root-cause award remains separate.
+- **NEXT_MOVE:** none for D-067 — handoff complete. Nodus remains available for integration support; do not reopen unless new exact evidence shows regression.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-063 DONE.
 - **ACCEPTANCE:** Requirement #6 proven across Python state, persistence and Android presentation on exact HEAD.
@@ -382,12 +382,12 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_BY:** Nodus
 - **CLAIMED_AT:** 2026-10-04T20:50:00-04:00
 - **CLAIM_HEAD:** `033495efe3f88489e9670837d87658878cee9263`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** PR #62 run #345 / `37252981251`: Python 347 tests OK; Android unit/build/package PASS; emulator smoke/screenshots PASS. Critical incident evidence: `docs/evidence/CRITICAL_FIX_D067_BRIDGE_RECONCILIATION_2026-10-04.md`.
+- **COMPLETION_HEAD:** `0fd843a5ece0f87c74a262c7ecb6739d025b0678`
+- **EVIDENCE:** `docs/evidence/D067_PHASE1_INVENTORY_EQUIPMENT_PROOF_2026-10-04.md`; PR #65 run #351 / `37253975755`: Python PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS; APK SHA-256 `7dfc02e4b6ce95fc0fb6ba6dbe1869366993cd6388811627efdc2deb7daeefda`.
 - **CRITICAL_FIX_REWARD:** **+310 VERIFIED** under OR-024; this does not mark the primary task DONE.
 - **CRITICAL_FIX_CARD:** `docs/AI_BRAG_ROOM.md` — `CRITICAL FIX — D-067 — Bridge transition baseline reconciliation`.
-- **BRAG_CARD:** pending for primary completion.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-067 — Inventory survives the checkpoint`.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — transition checkpoint is green; D-069 remains blocked only by D-064 handoff.
 
 ### Rank 9 — D-068 — Phase 1 activity exact-head proof
 - **TASK_REF:** `D-068`
