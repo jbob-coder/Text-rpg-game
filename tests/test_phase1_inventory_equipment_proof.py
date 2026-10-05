@@ -185,6 +185,43 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
 
         self.assertEqual(before, session.state.snapshot())
 
+    def test_player_safe_inventory_projection_is_complete_without_raw_modifiers(self) -> None:
+        session = open_android_session(CONTENT)
+
+        view = session.scene_view()
+        inventory = view["inventory"]
+
+        self.assertEqual(12, len(inventory["equipment"]))
+        self.assertEqual(
+            {
+                "head",
+                "body",
+                "hands",
+                "legs",
+                "feet",
+                "main_hand",
+                "off_hand",
+                "ring_1",
+                "ring_2",
+                "neck",
+                "accessory_1",
+                "accessory_2",
+            },
+            {slot["slot"] for slot in inventory["equipment"]},
+        )
+        self.assertTrue(all("modifiers" not in item for item in inventory["items"]))
+        self.assertTrue(all("modifiers" not in slot for slot in inventory["equipment"]))
+        self.assertEqual(
+            {
+                "ITEM_COURIER_NECKTAG",
+                "ITEM_DEPOT_JACKET",
+                "ITEM_MAINTENANCE_SEAL",
+                "ITEM_SIGNAL_RING",
+                "ITEM_WORK_GLOVES",
+            },
+            {item["id"] for item in inventory["items"]},
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
