@@ -136,3 +136,60 @@ Regression coverage lives at:
 - `tests/test_documentation_inventory_tool.py`.
 
 The D-081 tracker must preserve exact-revision behavior and must not allow dirty/untracked local state to contaminate a revision-bound report.
+
+
+## 10. Full repository manifest — D-082
+
+D-082 extends the tracker from aggregate status into a path-by-path structural map.
+
+Use:
+
+~~~bash
+python tools/project_status_tracker.py \
+  --revision HEAD \
+  --manifest-output /tmp/the-game-full-manifest.json
+~~~
+
+The manifest contains one entry for every tracked blob at the exact source revision:
+
+- repository path;
+- Git blob SHA;
+- committed byte size;
+- extension;
+- top-level area;
+- first-level documentation area when applicable;
+- structural kind;
+- whether the path counts as a document-like path.
+
+The manifest is structural evidence. It does not assign gameplay semantics or replace domain authorities.
+
+## 11. Revision-to-revision tracking
+
+To answer "what changed since the last snapshot?" use a base revision:
+
+~~~bash
+python tools/project_status_tracker.py \
+  --base-revision <OLDER_SHA> \
+  --revision <NEWER_SHA> \
+  --json-output /tmp/status-delta.json \
+  --markdown-output /tmp/status-delta.md \
+  --manifest-output /tmp/current-full-manifest.json
+~~~
+
+The delta reports:
+
+- files added, removed and changed;
+- documents added, removed and changed;
+- net document-count change;
+- tasks added or removed;
+- task state/status transitions;
+- completion-percentage movement.
+
+"Documents created" between two revisions means document-like paths present in the newer revision but not the older revision. A rename appears as one removed path plus one added path unless Git-level rename interpretation is performed separately.
+
+This gives Nodus two distinct answers:
+
+- **current document count** — how many document-like paths exist now;
+- **documents created since X** — how many document-like paths were added since an explicitly named base revision.
+
+Never report a "documents created" delta without identifying the base revision.
