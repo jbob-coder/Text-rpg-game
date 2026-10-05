@@ -30,6 +30,36 @@ data class GameMapNode(val id: String, val title: String, val description: Strin
 data class GameMapEdge(val from: String, val to: String)
 data class GameWorldMap(val title: String = "World", val currentLocation: String = "", val nodes: List<GameMapNode> = emptyList(), val edges: List<GameMapEdge> = emptyList())
 
+data class GameAbilityResource(
+    val label: String,
+    val current: Double,
+    val max: Double? = null,
+    val recoveryPerHour: Double? = null,
+)
+
+data class GameTechnique(
+    val id: String,
+    val name: String,
+    val stage: String,
+    val masteryXp: Double,
+    val uses: Int,
+    val ready: Boolean,
+    val cooldownRemainingMinutes: Int,
+)
+
+data class GameAbility(
+    val id: String,
+    val name: String,
+    val rank: Int,
+    val masteryStage: String,
+    val masteryXp: Double,
+    val form: String? = null,
+    val state: String,
+    val resource: GameAbilityResource? = null,
+    val techniques: List<GameTechnique> = emptyList(),
+    val completedEvolutionIds: List<String> = emptyList(),
+)
+
 data class GameRoomActor(
     val presentationId: String,
     val knownActorId: String?,
@@ -60,6 +90,7 @@ data class GameSnapshot(
     val worldMap: GameWorldMap = GameWorldMap(), val room: GameRoomProjection = GameRoomProjection(),
     val visuals: GameVisuals = GameVisuals(), val turn: Int, val timeMinutes: Int, val location: String,
     val contentId: String? = null, val canonStatus: String? = null,
+    val abilities: List<GameAbility> = emptyList(),
 )
 
 class EngineStartException(val stageId: String, val publicMessage: String, val technicalDetail: String, cause: Throwable? = null) : RuntimeException(publicMessage, cause) {
@@ -105,6 +136,66 @@ internal object BridgeSnapshotMapper {
         }
         val derived = optionalList(status["derived"], "status.derived").mapIndexed { index, item -> val s=objectMap(item,"status.derived[$index]"); GameDerivedStat(text(s["id"],"status.derived[$index].id"),text(s["name"],"status.derived[$index].name"),number(s["value"],"status.derived[$index].value"),optionalText(s["role"])) }
         val skills = buildList { optionalObjectMap(status["skills"], "status.skills").forEach { (category, raw) -> optionalList(raw,"status.skills.$category").forEachIndexed { index,item -> val s=objectMap(item,"status.skills.$category[$index]"); add(GameSkill(text(s["id"],"status.skills.$category[$index].id"),text(s["name"],"status.skills.$category[$index].name"),category,number(s["base"],"status.skills.$category[$index].base"),number(s["effective"],"status.skills.$category[$index].effective"),number(s["delta"],"status.skills.$category[$index].delta"),boolean(s["modified"],"status.skills.$category[$index].modified"),contributions(s["contributions"],"status.skills.$category[$index].contributions"))) } } }
+        val abilities = optionalList(status["abilities"], "status.abilities").mapIndexed { abilityIndex, item ->
+            val path = "status.abilities[$abilityIndex]"
+            val ability = objectMap(item, path)
+            require("requirements" !in ability && "discovery_requirements" !in ability && "effects" !in ability) {
+                "$path contains forbidden authored progression internals"
+            }
+            val masteryXp = nonNegativeNumber(ability["mastery_xp"], "$path.mastery_xp")
+            val resource = ability["resource"]?.let { rawResource ->
+                val resourcePath = "$path.resource"
+                val value = objectMap(rawResource, resourcePath)
+                val current = nonNegativeNumber(value["current"], "$resourcePath.current")
+                val max = optionalNumber(value["max"], "$resourcePath.max")?.also {
+                    require(it > 0.0) { "$resourcePath.max must be positive" }
+                    require(current <= it) { "$resourcePath.current cannot exceed max" }
+                }
+                val recovery = optionalNumber(value["recovery_per_hour"], "$resourcePath.recovery_per_hour")?.also {
+                    require(it >= 0.0) { "$resourcePath.recovery_per_hour must be non-negative" }
+                }
+                GameAbilityResource(
+                    label = text(value["label"], "$resourcePath.label"),
+                    current = current,
+                    max = max,
+                    recoveryPerHour = recovery,
+                )
+            }
+            val techniques = optionalList(ability["techniques"], "$path.techniques").mapIndexed { techniqueIndex, rawTechnique ->
+                val techniquePath = "$path.techniques[$techniqueIndex]"
+                val technique = objectMap(rawTechnique, techniquePath)
+                require("requirements" !in technique && "discovery_requirements" !in technique && "effects" !in technique) {
+                    "$techniquePath contains forbidden authored progression internals"
+                }
+                GameTechnique(
+                    id = stableId(technique["technique_id"], "$techniquePath.technique_id"),
+                    name = text(technique["name"], "$techniquePath.name"),
+                    stage = text(technique["stage"], "$techniquePath.stage"),
+                    masteryXp = nonNegativeNumber(technique["mastery_xp"], "$techniquePath.mastery_xp"),
+                    uses = integer(technique["uses"], "$techniquePath.uses"),
+                    ready = boolean(technique["ready"], "$techniquePath.ready"),
+                    cooldownRemainingMinutes = integer(
+                        technique["cooldown_remaining_minutes"],
+                        "$techniquePath.cooldown_remaining_minutes",
+                    ),
+                )
+            }
+            GameAbility(
+                id = stableId(ability["id"], "$path.id"),
+                name = text(ability["name"], "$path.name"),
+                rank = integer(ability["rank"], "$path.rank"),
+                masteryStage = text(ability["mastery_stage"], "$path.mastery_stage"),
+                masteryXp = masteryXp,
+                form = optionalText(ability["form"]),
+                state = text(ability["state"], "$path.state"),
+                resource = resource,
+                techniques = techniques,
+                completedEvolutionIds = stableIdList(
+                    ability["completed_evolutions"],
+                    "$path.completed_evolutions",
+                ),
+            )
+        }
         val conditions = optionalList(status["conditions"],"status.conditions").mapIndexed { index,item -> val c=objectMap(item,"status.conditions[$index]"); GameCondition(text(c["id"],"status.conditions[$index].id"),text(c["name"],"status.conditions[$index].name"),integer(c["severity"],"status.conditions[$index].severity"),optionalInteger(c["duration_minutes"],"status.conditions[$index].duration_minutes"),textList(c["tags"],"status.conditions[$index].tags")) }
         val im=optionalObjectMap(status["identity"],"status.identity"); val identity=GameIdentity(optionalText(im["name"]),optionalText(im["origin"]),optionalText(im["background"]),optionalText(im["path"]),optionalInteger(im["level"],"status.identity.level"))
         val ip=optionalObjectMap(payload["inventory"],"inventory")
@@ -135,7 +226,29 @@ internal object BridgeSnapshotMapper {
             GameRoomProjection(version, text(roomPayload["location_id"], "room.location_id"), actors, optionalText(roomPayload["active_speaker_presentation_id"]))
         }
         val vp=optionalObjectMap(payload["visuals"],"visuals"); val relay=optionalText(vp["relay_state"]); require(relay==null || relay in setOf("intact","opened","damaged","signal_lost")) { "visuals.relay_state is not a supported player-facing state" }; val visuals=GameVisuals(relay)
-        return GameSnapshot(sceneId,text(scene["title"],"scene.title"),text(scene["body"],"scene.body"),choices,resources,attributes,derived,skills,conditions,identity,inventory,quests,worldMap,room,visuals,integer(meta["turn"],"meta.turn"),integer(meta["time_minutes"],"meta.time_minutes"),optionalText(meta["location"])?:sceneId,optionalText(meta["content_id"]),optionalText(meta["canon_status"]))
+        return GameSnapshot(
+            sceneId = sceneId,
+            title = text(scene["title"], "scene.title"),
+            body = text(scene["body"], "scene.body"),
+            choices = choices,
+            resources = resources,
+            attributes = attributes,
+            derived = derived,
+            skills = skills,
+            conditions = conditions,
+            identity = identity,
+            inventory = inventory,
+            quests = quests,
+            worldMap = worldMap,
+            room = room,
+            visuals = visuals,
+            turn = integer(meta["turn"], "meta.turn"),
+            timeMinutes = integer(meta["time_minutes"], "meta.time_minutes"),
+            location = optionalText(meta["location"]) ?: sceneId,
+            contentId = optionalText(meta["content_id"]),
+            canonStatus = optionalText(meta["canon_status"]),
+            abilities = abilities,
+        )
     }
 
     private fun objectMap(value: Any?, label: String): Map<String, Any?> { if(value !is Map<*,*>) throw IllegalArgumentException("$label must be an object"); val out=LinkedHashMap<String,Any?>(); value.forEach { (k,v)-> if(k !is String) throw IllegalArgumentException("$label keys must be text"); out[k]=v }; return out }
@@ -144,10 +257,21 @@ internal object BridgeSnapshotMapper {
     private fun optionalList(value: Any?, label: String)=if(value==null) emptyList<Any?>() else list(value,label)
     private fun text(value: Any?, label: String): String { if(value !is String || value.isBlank()) throw IllegalArgumentException("$label must be non-empty text"); return value }
     private fun textList(value: Any?, label: String): List<String> = optionalList(value,label).mapIndexed { i,item -> text(item,"$label[$i]") }
+    private val stableIdPattern = Regex("^[A-Z][A-Z0-9_]*$")
+    private fun stableId(value: Any?, label: String): String = text(value, label).also {
+        require(stableIdPattern.matches(it)) { "$label must be a stable uppercase ID" }
+    }
+    private fun stableIdList(value: Any?, label: String): List<String> = optionalList(value, label).mapIndexed { index, item ->
+        stableId(item, "$label[$index]")
+    }
     private fun contributions(value: Any?, path: String)=optionalList(value,path).mapIndexed { i,item -> val r=objectMap(item,"$path[$i]"); val kind=text(r["kind"],"$path[$i].kind"); require(kind in setOf("equipment","set","perk","condition","unidentified")); val slot=optionalText(r["slot"]); require((kind=="equipment"&&slot!=null)||(kind!="equipment"&&slot==null)); GameStatusContribution(kind,text(r["label"],"$path[$i].label"),number(r["value"],"$path[$i].value"),slot) }
     private fun optionalText(value: Any?): String?=when(value){null->null;is String->value.takeIf{it.isNotBlank()};else->throw IllegalArgumentException("optional text field has invalid type")}
     private fun boolean(value: Any?, label:String):Boolean { if(value !is Boolean) throw IllegalArgumentException("$label must be boolean"); return value }
     private fun number(value:Any?,label:String):Double { if(value !is Number) throw IllegalArgumentException("$label must be numeric"); val o=value.toDouble(); if(!o.isFinite()) throw IllegalArgumentException("$label must be finite"); return o }
+    private fun nonNegativeNumber(value: Any?, label: String): Double = number(value, label).also {
+        require(it >= 0.0) { "$label must be non-negative" }
+    }
+    private fun optionalNumber(value: Any?, label: String): Double? = if (value == null) null else number(value, label)
     private fun integer(value:Any?,label:String):Int { if(value !is Number) throw IllegalArgumentException("$label must be numeric"); val l=value.toLong(); if(l<0||l>Int.MAX_VALUE||value.toDouble()!=l.toDouble()) throw IllegalArgumentException("$label must be a non-negative integer"); return l.toInt() }
     private fun optionalInteger(value:Any?,label:String)=if(value==null)null else integer(value,label)
     private fun optionalBoolean(value:Any?):Boolean?=when(value){null->null;is Boolean->value;else->throw IllegalArgumentException("optional boolean field has invalid type")}
