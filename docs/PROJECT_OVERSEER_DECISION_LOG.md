@@ -156,3 +156,17 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **PREFERRED ENTRY:** Parallel P5 / D-042 unless live evidence exposes a higher-priority independent QA/integration repair.
 - **DOWNSTREAM FOCUS:** D-076 integrated regression support, D-078 performance, D-079 final acceptance/provenance, peer-review bounties and test-harness integrity.
 - **RATIONALE:** the current four named agents are already domain owners; a fifth general feature implementer would increase overlap more than throughput. The missing capability is independent verification.
+
+
+### OR-014 — Reassign D-068 to Veyra and return D-069 to gate
+- **VERDICT:** ACCEPTED AS ACTIVE TASK REALIGNMENT.
+- **EVIDENCE:** repository history showed no substantive D-068 implementation/test commits under Nodus; its claim was only administrative reservation state. D-069 cannot begin substantive runtime work until OR-009 transition conditions are satisfied.
+- **ROLE ALIGNMENT:**
+  - Nodus remains focused on D-067 as Integration Architect & Systems Gatekeeper.
+  - Veyra takes D-068 as Gameplay Systems & Tactical Lead.
+  - D-069 returns to BLOCKED and Veyra is the designated next claimant after the green-authority transition.
+- **RATIONALE:** this restores one active primary task per named agent, advances a transition prerequisite in parallel, and avoids wasting Veyra on a gated task while Nodus holds two primaries.
+- **D-068 CLAIM TRANSFER:** Nodus -> Veyra.
+- **D-069 CLAIM STATE:** active claim released; task blocked by transition; future claimant assigned to Veyra after unlock.
+- **SCORE:** no points are awarded for reassignment/reservation. Normal task acceptance and Brag/Scoreboard rules still apply.
+- **OWNER IMPACT:** none; no canon/save/release decision changed.
