@@ -382,7 +382,7 @@ def has_line_of_sight(
     except ValueError:
         return False
 
-    for coord in touched[1:]:
+    for coord in touched:
         cell = tactical_map.cell_at(coord)
         if cell is None or cell.blocks_los:
             return False
