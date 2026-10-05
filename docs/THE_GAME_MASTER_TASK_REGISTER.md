@@ -1641,3 +1641,29 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-080-B` NOT COMPLETED — no machine-readable ownership map was added; avoid creating a second authority before a concrete consumer/consistency need exists.
 - OUT_OF_SCOPE: unchanged; D-080 did not alter gameplay, asset canon, runtime architecture or the active D-064/D-069 dependency chain.
 - BRAG_CARD: `docs/AI_BRAG_ROOM.md` — D-080 first-wave learning trail.
+
+### TASK D-081 — Repository-wide status map and reproducible project-status tracker
+- STATUS: `IN_PROGRESS / OWNER-DIRECTED / CLAIMED BY NODUS`
+- PRIORITY: `P0/P1 PROGRAM INFRA`
+- PURPOSE: provide one reproducible reporting path for exact-revision repository structure, documentation counts, Master Task Register completion, Phase 1 campaign completion, and unresolved-task status without replacing existing semantic authorities.
+- AUTHORITY BOUNDARIES:
+  - repository files and exact Git revision remain structural truth;
+  - `docs/THE_GAME_MASTER_TASK_REGISTER.md` remains task semantic/state authority;
+  - D-019 / `tools/documentation_inventory.py` remains detailed corpus/inventory authority;
+  - completion percentage is explicitly a task-register metric, not a claim that the total game/content is equally complete.
+- DELIVERABLES:
+  - `tools/project_status_tracker.py`;
+  - regression tests for task/status counting and exact-revision structure;
+  - `docs/PROJECT_STATUS_TRACKING_STANDARD.md`;
+  - exact source-revision baseline snapshot under `docs/evidence/`.
+- CLAIMED_BY: Nodus
+- CLAIMED_AT: `2026-10-05 AST`
+- CLAIM_HEAD: `70731dc33bdc54021d8058ff5842bd35ffe000bd`
+- ACCEPTANCE:
+  - report exact source commit and deterministic repository counts;
+  - report Markdown/document-like counts with definitions;
+  - report Master Task Register totals by state and conservative DONE/total completion percentage;
+  - report D-060..D-079 Phase 1 campaign totals and completion percentage;
+  - report top-level and documentation-area file maps;
+  - preserve D-019 and task-register authority instead of duplicating semantic truth;
+  - validation evidence is reproducible from a complete checkout.
