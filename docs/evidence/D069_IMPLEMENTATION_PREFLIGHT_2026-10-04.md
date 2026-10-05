@@ -244,6 +244,9 @@ Required properties:
 - stable enumeration;
 - movement blocking does not imply LOS blocking;
 - opaque cell/edge stops LOS;
+- canonical edge-opacity field is `los_blocked_edges`;
+- a shared boundary is opaque when either adjacent cell declares the corresponding edge/opposite edge;
+- cover ratings never imply LOS opacity;
 - golden corner cases are mandatory.
 
 ### Cover
@@ -260,6 +263,22 @@ Phase-1 modifiers (+0/+10/+20) belong to later attack resolution; D-069 only nee
 No hidden flank bonus.
 
 ---
+
+## 6.1 CPR-003 resolution — opaque edge authoring
+
+AXIOM resolved the schema ambiguity before D-069 completion.
+
+Locked representation:
+- canonical/authored cell field: `los_blocked_edges`;
+- allowed values: N/E/S/W only;
+- independent from `cover`;
+- a shared boundary is blocked if either adjacent cell declares that edge/opposite edge;
+- reciprocal duplicate authoring is allowed but not required;
+- runtime LOS must therefore produce the same blocked result A→B and B→A for one one-sided authored opaque boundary.
+
+The first D-069 schema/grid branch already uses this field and checks both sides of the boundary. Remaining work is to synchronize authored parsing/validation and add/retain symmetry + invalid-edge regressions.
+
+Do not invent a structured edge-object schema in D-069.
 
 ## 7. Minimum D-069 test matrix
 
@@ -300,7 +319,10 @@ No hidden flank bonus.
 ### LOS
 - straight clear LOS;
 - opaque cell block;
-- opaque edge block;
+- opaque edge block using `los_blocked_edges`;
+- reverse-direction symmetry across the same one-sided authored opaque boundary;
+- cover/LOS-opacity separation;
+- invalid `los_blocked_edges` edge rejection;
 - movement-blocker / LOS-blocker separation;
 - corner supercover golden case;
 - symmetry where contract says symmetry is appropriate.
