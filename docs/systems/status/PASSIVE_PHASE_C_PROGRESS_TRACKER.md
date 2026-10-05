@@ -81,6 +81,31 @@ Coverage:
 
 This is conceptual design mapping only; no runtime module/field is claimed.
 
+## Runtime owner / projection disposition
+
+Materialized:
+- `PASSIVE_RUNTIME_OWNER_PROJECTION_DISPOSITION_WAVE_001.md`;
+- `tools/status_phase_c_audit.py`;
+- `tests/test_status_phase_c_audit.py`.
+
+Current-runtime disposition now covers all **23 / 23 conceptual passive owner domains**:
+- 2 `REUSE_CURRENT_OWNER`;
+- 13 `COMPOSE_CURRENT_STATE`;
+- 6 `DOMAIN_RUNTIME_REQUIRED`;
+- 2 `LEDGER_CONTRACT_REQUIRED`.
+
+The mapping locks several implementation boundaries:
+- current durable `state.perks` is a real but narrow acquired-perk/modifier substrate, not a universal substitute for the 23 conceptual owners;
+- current perk modifiers support registered `attributes.*`, `skills.*` and `derived.*` effective-value paths;
+- current Status projection has no explicit player-facing passive list;
+- hidden perk IDs remain redacted in deep status inspection;
+- current Android has no passive-list DTO, although safe visible perk contributions may appear in inspected status breakdowns;
+- conceptual owners without equivalent current runtime domains remain future implementation/migration work rather than fake flags/perk tags.
+
+Automated ownership integrity now verifies **230 / 230** registry IDs against **230 / 230** owner/write-target rows, 23 families x 10 records, with duplicate/missing/extra/blank-row detection.
+
+This is a Phase-C design-to-implementation disposition, not Phase-F runtime implementation or canon promotion.
+
 ## Read-dependency / overlap normalization
 
 Materialized:
@@ -296,7 +321,7 @@ No named institution was invented and no record was canon-promoted.
 3. progress selected records toward actual world entities only after owner/world canon decisions;
 4. run additional canon dry-review packets;
 5. continue shared ability child-rule completion;
-6. map implementation only after design coherence.
+6. consume the runtime-owner/projection disposition when implementation mapping begins; do not remap conceptual owners into fake runtime fields.
 
 ## Stop condition
 
