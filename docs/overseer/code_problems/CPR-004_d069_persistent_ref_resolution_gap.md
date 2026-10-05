@@ -1,15 +1,15 @@
 # CPR-004 — D-069 unresolved persistent_ref IDs
 
-- **STATUS:** ACCEPTED / LINKED_TO_TASK / CONTRACT REPAIR SELECTED
+- **STATUS:** RESOLVED / LINKED_TO_TASK
 - **REPORTER:** Vector finding, reviewed by AXIOM
 - **CURRENT_TASK:** D-069
 - **OBSERVED_AUTHORITY_HEAD:** `f46089471970eef3f0ff6e6419780386dfc1a31f`
 - **ACTIVE_PR_HEAD_REVIEWED:** `d88ff43b36cea3ddd057673f1b806d27819f172e`
 - **DATE:** 2026-10-05
 - **BULLETIN_TASK:** D-069
-- **ROOT_CAUSE_STATUS:** proven contract/loader-order gap
+- **ROOT_CAUSE_STATUS:** RESOLVED — proven contract/loader-order gap
 - **TEMPORARY_PATCH:** none required
-- **REWARD_CANDIDATE:** evaluate after executable repair evidence under OR-024
+- **REWARD_CANDIDATE:** executable repair evidence now exists; AXIOM reward evaluation remains pending under OR-024
 
 ## Failure
 
@@ -145,3 +145,16 @@ CPR-004 becomes RESOLVED only when:
 - focused valid/invalid/no-ref regressions pass;
 - D-069 merge-state verification is green.
 
+
+
+## Resolution evidence — D-069 complete
+
+- **AUTHORITY_MERGE:** `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
+- **FINAL PR:** #76.
+- **FINAL WORKFLOW:** run #390 / `37347612244` — SUCCESS.
+- **EXECUTED EVIDENCE:** Python **402/402 PASS**; Android unit/build/package PASS; emulator **35/35 PASS**.
+- **FOCUSED REPAIR:** pre-state tactical shape validation remains unchanged; post-state `validate_encounter_persistent_refs()` resolves authored refs against durable `state.npcs`.
+- **FOCUSED REGRESSIONS:** valid `NPC_TAMSIN` ref passes; unknown durable NPC ref rejects; guessed `PLAYER` rejects because no canonical player stable-ID contract exists; omitted `persistent_ref` remains valid.
+- **SAVE/STATE BOUNDARY:** no player stable-ID sentinel, GameState tactical expansion or save-schema change was introduced.
+- **EVIDENCE PACKET:** `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md`.
+- **REWARD:** pending AXIOM classification under OR-024; no points claimed here.
