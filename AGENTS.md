@@ -9,22 +9,24 @@ This file is the repository entry point for coding agents and automated assistan
 Before changing code or documentation, read these in order:
 
 1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue and claim authority.
-2. `docs/AI_COMMAND_STRUCTURE.md` — Player-AI specializations, review responsibilities and escalation paths.
-3. `docs/PLAYER_AI_MISSION_CONTROL.md` — fast-entry mission cards; use this to avoid rereading unrelated project material.
-4. `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md` — mandatory escalation surface for large code/integration problems.
-5. `docs/player_guide/README.md` — fast repository-learning/navigation path.
-6. `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — lessons left by completed Player-AI work.
-7. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — top-level program authority, permissions, gates and final rebuild direction.
-8. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical documentation state and blockers.
-9. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration/reconstruction blueprint.
-10. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases.
-11. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — document ownership/consumers.
-12. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — semantic task scope/state/evidence.
-13. `docs/IMPLEMENTATION_STATUS.md` — verified implementation evidence.
-14. Relevant domain master document for the work being changed.
-15. Relevant source/tests for the task being changed.
-16. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
+2. `docs/AI_COORDINATION_ROOM.md` — Player-AI work announcements, overlap checks, help/blocker and finish/next handoffs.
+3. `docs/AI_COMMAND_STRUCTURE.md` — Player-AI specializations, review responsibilities and escalation paths.
+4. `docs/PLAYER_AI_MISSION_CONTROL.md` — fast-entry mission cards.
+5. `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md` — mandatory escalation for large code/integration problems.
+6. `docs/player_guide/README.md` — repository-learning/navigation path.
+7. `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — lessons left by completed work.
+8. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — top-level program authority.
+9. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical documentation state/blockers.
+10. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration/reconstruction blueprint.
+11. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases.
+12. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — document ownership/consumers.
+13. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — semantic task scope/state/evidence.
+14. `docs/IMPLEMENTATION_STATUS.md` — verified implementation evidence.
+15. Relevant domain master document.
+16. Relevant source/tests.
+17. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
 
+Coordination room: `docs/AI_COORDINATION_ROOM.md`.  
 Overseer area: `docs/overseer/README.md` (AXIOM).  
 Large code-problem intake: `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md`.  
 Player learning/navigation: `docs/player_guide/README.md` + `docs/player_guide/PLAYER_LEARNING_LEDGER.md`.  
@@ -39,7 +41,7 @@ Repository files and fresh execution evidence outrank remembered chat context. O
 - Repository: `jbob-coder/Text-rpg-game`.
 - Program authority branch: `docs/master-game-development-program`.
 - Current mode: **bounded Phase 1 implementation + exact-head verification**, using reconstruction-grade contracts as guardrails.
-- Gate Twelve is the first proof region. D-060–D-063 and D-066 are complete; the immediate P0 transition is D-064, D-065, D-067 and D-068 -> green authority checkpoint -> D-069 tactical core.
+- Gate Twelve is the first proof region. D-065/D-067/D-068 are DONE and the green authority checkpoint is PASS; D-064 is the sole remaining gate before D-069 tactical core.
 - `main` is not the canonical implementation branch. Do not promote, rewrite, or merge `main` merely because it is the default branch.
 - Historical V6 and Android branches remain evidence sources, not top-level product authority.
 - The old black-screen incident is historically closed by the repository-owned Compose/Chaquopy client on representative emulator evidence; physical Galaxy A03 validation remains a separate gate and must not be inferred from emulator results.
@@ -136,34 +138,37 @@ When a Player-AI encounters a serious code/integration defect:
 
 There are **no score penalties** for claiming or attempting hard tasks. Score never decreases because a difficult fix needed a revert or handoff. A temporary patch is permitted; it simply does not earn the ROOT CAUSE portion until the underlying defect is solved.
 
-## AI bulletin-board execution loop
+## AI bulletin-board + coordination execution loop
 
-`docs/AI_TASK_BULLETIN_BOARD.md` is the mandatory assignment surface for autonomous AI work on this branch. It does not replace the master task register; it coordinates claims so multiple agents do not independently choose the same work.
+The Bulletin owns task claims. The Coordination Room owns situational awareness.
 
-Before starting discretionary work:
+Before a new primary:
 - fetch live HEAD;
-- re-fetch the bulletin board;
-- claim the highest-priority eligible `READY` task according to the board protocol;
-- if the main ranked task is already claimed and its dependency chain is waiting, claim a `READY` task from `docs/AI_PARALLEL_WORK_LANES_2026-10-04.md` instead of idling;
-- check `docs/AI_COUNCIL_ROOM.md` for a direct summons; if named, respond at a safe checkpoint without abandoning the active task;
-- commit and re-check the claim before substantial work.
-- One active primary task per agent is the default. A second claim may only be a documented short reservation; substantive work on it waits for the first primary handoff unless the Project Overseer approves true parallel execution.
+- re-fetch Bulletin + Coordination Room;
+- append `INTENT` with candidate task, likely files/domains and overlap risk;
+- claim through the Bulletin; INTENT does not reserve work;
+- re-fetch the claim;
+- if you won, append `START` with claim head, branch/PR, scope, exit gate and reviewer/help request;
+- if you lost, append `INTENT WITHDRAWN` or `PIVOT` and choose another eligible task.
 
-After finishing a task:
-- synchronize the authoritative task/register/evidence files;
-- mark the bulletin entry `DONE` only when the authoritative task is genuinely complete;
-- append an evidence-backed Brag Card to `docs/AI_BRAG_ROOM.md`;
-- update `docs/AI_SCOREBOARD.md` so verified points, standings and READY bounties remain current;
-- refresh the relevant Mission Control card so the next Player-AI sees current Already Done / Next Move / Exit Gate information;
-- when you find and repair a real defect introduced by another AI, use `docs/AI_PEER_REVIEW_BOUNTY.md` and append a `ROAST & REPAIR` card before adding peer-review points;
-- if the Project Overseer has summoned you, answer the technical questions and submit one bounded evidence-backed improvement proposal in `docs/AI_COUNCIL_ROOM.md` before taking your next primary task;
-- when operating in an interactive ChatGPT conversation, also post a concise version of that Brag Card in the active chat;
-- create or refresh the next evidence-backed task on the bulletin board (and add genuinely new program tasks to the master task register first);
-- unlock dependency-satisfied tasks, then claim a **different** highest-ranked eligible task and repeat.
+During work:
+- post only meaningful `UPDATE`, `HELP`, `BLOCKED` or `REVIEW REQUEST` messages;
+- coordinate before modifying overlapping authoritative file families;
+- large code problems go through AXIOM CPR evidence/rating, not only chat.
 
-The ranked campaign for the current 20-task execution wave is `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md`. Bonus work is optional and never substitutes for primary acceptance.
+After finishing:
+- synchronize authoritative task/register/evidence files;
+- mark Bulletin DONE only when acceptance is real;
+- append Brag Card and update Scoreboard when applicable;
+- write the required Next Player Learning Record;
+- refresh Mission Control when downstream next moves change;
+- append `FINISH` to the Coordination Room with completion head, evidence, changed areas, limits and unlocks;
+- append `NEXT` naming the next candidate task;
+- choose the highest-value eligible READY task that avoids dependency/file collisions, or briefly justify a lower-ranked choice;
+- create new tasks only from genuine evidence-backed work;
+- return to INTENT -> CLAIM -> START.
 
-Do not manufacture filler tasks to keep the loop alive. If all remaining work requires owner input, record the blocker and stop at that approval boundary.
+Do not manufacture filler work. If no eligible work exists and owner input is required, record the blocker and stop at that boundary.
 
 ### Runtime merge-state gate
 
