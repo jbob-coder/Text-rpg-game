@@ -1062,6 +1062,47 @@ def validate_encounters(
     return errors
 
 
+def validate_encounter_persistent_refs(
+    encounters: Any,
+    npc_ids: Iterable[str],
+) -> List[str]:
+    """Resolve authored persistent encounter refs against durable NPC identity.
+
+    Phase 1 has a concrete durable NPC owner in GameState.npcs but no accepted
+    stable player identity field. Persistent refs therefore fail closed unless
+    they resolve to an authored durable NPC ID.
+    """
+
+    if not isinstance(encounters, Mapping):
+        return []
+
+    known_npcs = set(npc_ids)
+    errors: List[str] = []
+    for encounter_id, raw in encounters.items():
+        if not isinstance(raw, Mapping):
+            continue
+        participants = raw.get("participants")
+        if not isinstance(participants, list):
+            continue
+        for index, participant in enumerate(participants):
+            if not isinstance(participant, Mapping):
+                continue
+            persistent_ref = participant.get("persistent_ref")
+            if persistent_ref is None:
+                continue
+            if (
+                isinstance(persistent_ref, str)
+                and STABLE_ID.fullmatch(persistent_ref)
+                and persistent_ref not in known_npcs
+            ):
+                errors.append(
+                    f"encounters.{encounter_id}.participants[{index}].persistent_ref "
+                    f"{persistent_ref!r} does not resolve to initial_state.npcs; "
+                    "player persistent refs require an explicit player identity contract"
+                )
+    return errors
+
+
 def validate_tactical_content(
     tactical_maps: Any,
     combat_actions: Any,
