@@ -214,6 +214,7 @@ class StatusProjectionTests(unittest.TestCase):
         self.assertNotIn("modifiers", view["conditions"][0])
 
         ability = view["abilities"][0]
+        self.assertEqual(ability["id"], "ABILITY_TRACE")
         self.assertEqual(ability["name"], "Trace")
         self.assertEqual(
             [item["technique_id"] for item in ability["techniques"]],
