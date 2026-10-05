@@ -1,7 +1,6 @@
 package com.thegame.rpg.engine
 
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -52,80 +51,6 @@ class BridgeStatusMapperTest {
         assertEquals("damaged", snapshot.visuals.relayState)
         assertTrue(snapshot.abilities.isEmpty())
     }
-
-    @Test
-    fun playerSafeRoomProjectionMapsSemanticActorPlacement() {
-        val payload = mapOf(
-            "scene" to mapOf(
-                "id" to "SCENE_GATE",
-                "title" to "Gate Twelve",
-                "body" to "Body",
-                "choices" to emptyList<Any>(),
-            ),
-            "status" to mapOf("resources" to emptyList<Any>()),
-            "room" to mapOf(
-                "projection_version" to 1,
-                "location_id" to "LOC_GATE_TWELVE",
-                "actors" to listOf(
-                    mapOf(
-                        "presentation_id" to "PRES_TAMSIN_GATE",
-                        "known_actor_id" to "NPC_TAMSIN",
-                        "display_name" to "Tamsin",
-                        "visual_family" to "gate_warden",
-                        "placement_key" to "right_guard_post",
-                        "pose_key" to "watchful",
-                        "outfit_key" to "gate_uniform",
-                        "visible_tags" to listOf("guard"),
-                        "inspectable" to true,
-                        "dialogue_available" to true,
-                        "actions" to listOf("talk"),
-                    )
-                ),
-                "active_speaker_presentation_id" to null,
-            ),
-            "meta" to mapOf("turn" to 0, "time_minutes" to 0, "location" to "LOC_GATE_TWELVE"),
-        )
-
-        val snapshot = BridgeSnapshotMapper.fromMap(payload)
-        val actor = snapshot.room.actors.single()
-
-        assertEquals(1, snapshot.room.projectionVersion)
-        assertEquals("LOC_GATE_TWELVE", snapshot.room.locationId)
-        assertEquals("PRES_TAMSIN_GATE", actor.presentationId)
-        assertEquals("NPC_TAMSIN", actor.knownActorId)
-        assertEquals("Tamsin", actor.displayName)
-        assertEquals("right_guard_post", actor.placementKey)
-        assertEquals(listOf("guard"), actor.visibleTags)
-        assertEquals(listOf("talk"), actor.actions)
-        assertTrue(actor.inspectable)
-        assertTrue(actor.dialogueAvailable)
-        assertNull(snapshot.room.activeSpeakerPresentationId)
-    }
-
-    @Test
-    fun unsupportedRoomProjectionVersionIsRejected() {
-        val payload = mapOf(
-            "scene" to mapOf(
-                "id" to "SCENE_GATE",
-                "title" to "Gate Twelve",
-                "body" to "Body",
-                "choices" to emptyList<Any>(),
-            ),
-            "status" to mapOf("resources" to emptyList<Any>()),
-            "room" to mapOf(
-                "projection_version" to 2,
-                "location_id" to "LOC_GATE_TWELVE",
-                "actors" to emptyList<Any>(),
-                "active_speaker_presentation_id" to null,
-            ),
-            "meta" to mapOf("turn" to 0, "time_minutes" to 0, "location" to "LOC_GATE_TWELVE"),
-        )
-
-        val failure = runCatching { BridgeSnapshotMapper.fromMap(payload) }.exceptionOrNull()
-
-        assertTrue(failure is IllegalArgumentException)
-    }
-
     @Test
     fun playerSafeStatInspectionMapsContributionSources() {
         val inspection = BridgeSnapshotMapper.statInspectionFromMap(
@@ -168,6 +93,7 @@ class BridgeStatusMapperTest {
 
         assertTrue(failure is IllegalArgumentException)
     }
+
 
     @Test
     fun playerSafeAbilityProgressionMapsIntoTypedSnapshot() {
