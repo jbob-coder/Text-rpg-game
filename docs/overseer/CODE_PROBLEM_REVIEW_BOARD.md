@@ -134,6 +134,20 @@ AXIOM reviews:
 - **RESOLUTION:** PR #62 / run #345 repaired the incident; PR #65 / run #351 confirmed the green authority checkpoint.
 - **REWARD:** Nodus +310 critical root-cause award under OR-024, scored separately from normal D-067 completion.
 
+### CPR-002 — D-064 room-actor unknown-field strictness
+- **STATUS:** `REPORTED / AXIOM REVIEW PENDING`
+- **REPORTER:** Veyr
+- **CURRENT_TASK:** bounded D-064 privacy review support; Kestrel retains the active D-064 claim.
+- **TASK CANDIDATE:** existing D-064 — do **not** create a duplicate task unless review finds broader ownership.
+- **PROBLEM_PRESSURE_SCORE:** pending AXIOM review.
+- **RATING:** pending.
+- **FAILURE CLAIM:** no runtime leak claimed. Exact source audit shows Python rejects unsupported actor fields while Android `BridgeSnapshotMapper` currently extracts known room-actor keys without rejecting unexpected/private extra keys.
+- **EXPECTED:** D-030 strict mapper/privacy contract should reject malformed/forbidden actor payload fields unless an additive-field policy explicitly permits them.
+- **EVIDENCE:** `docs/overseer/code_problems/CPR-002_d064_room_actor_unknown_field_strictness.md`.
+- **BLOCKING IMPACT:** pending review; if confirmed, repair should remain inside D-064 before final handoff.
+- **TEMPORARY_PATCH:** none.
+- **WHY NO NEW TASK YET:** D-064 already owns strict Python/Kotlin mapping and privacy acceptance; this report requests classification/reproduction, not parallel implementation.
+
 No unresolved CPR is created merely to populate this board.
 
 Known current D-064 CI drift remains owned by D-064 and already has exact task/PR triage; create a CPR only if new evidence shows a broader causal defect beyond the currently identified stale Android test API / rebase work.
