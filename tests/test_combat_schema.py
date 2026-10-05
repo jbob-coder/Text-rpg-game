@@ -11,7 +11,9 @@ from textrpg.combat_schema import (
     TacticalMap,
     TacticalTransition,
     TacticalZone,
+    parse_tactical_map_definition,
 )
+from textrpg.validation import validate_tactical_content
 
 
 def cell(x: int, y: int, z: int = 0, **kwargs) -> TacticalCell:
@@ -162,6 +164,156 @@ class TacticalSchemaTests(unittest.TestCase):
             ((TacticalCoord(0, 0, 0), 2),),
             tactical_map.transition_targets(TacticalCoord(0, 0, 1)),
         )
+
+
+    def authored_bundle(self):
+        tactical_maps = {
+            "TACTICAL_MAP_TEST": {
+                "map_id": "TACTICAL_MAP_TEST",
+                "version": 1,
+                "width": 2,
+                "height": 2,
+                "z_layers": [0],
+                "default_cell": {
+                    "terrain_id": "TERRAIN_FLOOR",
+                    "movement_cost": 1,
+                    "blocks_movement": False,
+                    "blocks_los": False,
+                    "cover": {},
+                },
+                "overrides": {},
+                "transitions": {},
+                "deployment_zones": {"ZONE_ENTRY": ["0,0,0"]},
+                "objective_anchors": {"OBJECTIVE_TEST": "1,1,0"},
+                "exits": {"EXIT_TEST": "0,1,0"},
+            }
+        }
+        combat_actions = {
+            "ACTION_MOVE": {
+                "action_id": "ACTION_MOVE",
+                "category": "move",
+                "cost": 1,
+                "range_min": 0,
+                "range_max": 6,
+                "requires_los": False,
+                "tags": ["movement"],
+            }
+        }
+        archetypes = {
+            "ARCHETYPE_CONTACT": {
+                "archetype_id": "ARCHETYPE_CONTACT",
+                "action_ids": ["ACTION_MOVE"],
+                "footprint": 1,
+                "tags": ["contact"],
+            }
+        }
+        encounters = {
+            "ENCOUNTER_TEST": {
+                "encounter_id": "ENCOUNTER_TEST",
+                "map_id": "TACTICAL_MAP_TEST",
+                "location_id": "SERVICE_TUNNEL",
+                "trigger": {},
+                "participants": [
+                    {
+                        "actor_id": "CONTACT_A",
+                        "archetype_id": "ARCHETYPE_CONTACT",
+                        "faction_id": "FACTION_CONTACT",
+                        "action_ids": ["ACTION_MOVE"],
+                        "deployment_zone": "ZONE_ENTRY",
+                        "required": True,
+                    }
+                ],
+                "deployment": {},
+                "objective_set": {},
+                "retreat_policy": {},
+                "ai_profiles": {},
+                "aftermath_profile": {},
+                "time_cost_minutes": 10,
+                "canon_status": "PROPOSED",
+            }
+        }
+        world_map = {"nodes": {"SERVICE_TUNNEL": {}}}
+        return tactical_maps, combat_actions, archetypes, encounters, world_map
+
+    def test_authored_tactical_bundle_validates_cross_references(self) -> None:
+        sections = self.authored_bundle()
+        self.assertEqual([], validate_tactical_content(*sections))
+
+        parsed = parse_tactical_map_definition(
+            "TACTICAL_MAP_TEST",
+            sections[0]["TACTICAL_MAP_TEST"],
+        )
+        self.assertEqual(4, len(parsed.cells))
+        self.assertEqual(
+            TacticalCoord(0, 0, 0),
+            parsed.deployment_zones[0].cells[0],
+        )
+
+    def test_authored_map_rejects_out_of_bounds_override(self) -> None:
+        tactical_maps, actions, archetypes, encounters, world_map = self.authored_bundle()
+        tactical_maps["TACTICAL_MAP_TEST"]["overrides"] = {
+            "2,0,0": {"movement_cost": 2}
+        }
+        errors = validate_tactical_content(
+            tactical_maps,
+            actions,
+            archetypes,
+            encounters,
+            world_map,
+        )
+        self.assertTrue(any("out of bounds" in error for error in errors))
+
+    def test_action_and_archetype_unknown_fields_or_refs_reject(self) -> None:
+        tactical_maps, actions, archetypes, encounters, world_map = self.authored_bundle()
+        actions["ACTION_MOVE"]["mystery_rule"] = True
+        archetypes["ARCHETYPE_CONTACT"]["action_ids"] = ["ACTION_MISSING"]
+
+        errors = validate_tactical_content(
+            tactical_maps,
+            actions,
+            archetypes,
+            encounters,
+            world_map,
+        )
+
+        self.assertTrue(any("unsupported fields" in error for error in errors))
+        self.assertTrue(any("unknown combat action" in error for error in errors))
+
+    def test_encounter_rejects_unknown_map_archetype_action_and_location(self) -> None:
+        tactical_maps, actions, archetypes, encounters, world_map = self.authored_bundle()
+        encounter = encounters["ENCOUNTER_TEST"]
+        encounter["map_id"] = "TACTICAL_MAP_MISSING"
+        encounter["location_id"] = "LOCATION_MISSING"
+        encounter["participants"][0]["archetype_id"] = "ARCHETYPE_MISSING"
+        encounter["participants"][0]["action_ids"] = ["ACTION_MISSING"]
+
+        errors = validate_tactical_content(
+            tactical_maps,
+            actions,
+            archetypes,
+            encounters,
+            world_map,
+        )
+
+        self.assertTrue(any("unknown tactical map" in error for error in errors))
+        self.assertTrue(any("unknown world location" in error for error in errors))
+        self.assertTrue(any("unknown combat archetype" in error for error in errors))
+        self.assertTrue(any("unknown combat action" in error for error in errors))
+
+    def test_encounter_rejects_unknown_deployment_zone(self) -> None:
+        tactical_maps, actions, archetypes, encounters, world_map = self.authored_bundle()
+        encounters["ENCOUNTER_TEST"]["participants"][0][
+            "deployment_zone"
+        ] = "ZONE_MISSING"
+
+        errors = validate_tactical_content(
+            tactical_maps,
+            actions,
+            archetypes,
+            encounters,
+            world_map,
+        )
+        self.assertTrue(any("unknown deployment zone" in error for error in errors))
 
 
 if __name__ == "__main__":
