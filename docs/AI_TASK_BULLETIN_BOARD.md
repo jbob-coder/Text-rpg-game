@@ -827,3 +827,18 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **EVIDENCE:** `docs/evidence/D082_FULL_REPOSITORY_MANIFEST_2026-10-05.json`; `docs/PROJECT_STATUS_TRACKING_STANDARD.md` §§10–11; `tests/test_project_status_tracker.py`.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-082 — Every tracked path has a place`.
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no; D-064 remains the sole D-069 transition blocker.
+
+
+### D-083 — Phase 1 fixed-range status invariant + tracker output verification
+- **TASK_REF:** `D-083`
+- **PRIORITY:** `P0/P1 PROGRAM INFRA`
+- **STATUS:** `IN_PROGRESS`
+- **SOURCE_OF_WORK:** owner-directed independent verification of D-081/D-082.
+- **DEPENDENCIES:** D-081 DONE; D-082 DONE.
+- **ACCEPTANCE:** fixed D-060..D-079 denominator of 20 even if a register entry is missing; missing IDs counted UNKNOWN/incomplete; Markdown includes Phase 1 state counts; executable JSON/Markdown/manifest output regressions; exact recursive-tree reconciliation; no competing authority.
+- **CLAIMED_BY:** Strata
+- **CLAIMED_AT:** 2026-10-05 AST
+- **CLAIM_HEAD:** `56f831bc054c444cad026de2ce97bc412a8ba4a5`
+- **COMPLETION_HEAD:** —
+- **EVIDENCE:** pending.
+- **OVERLAP:** status tooling/tests/control docs only; no D-064/D-069 runtime/test surface edits.
