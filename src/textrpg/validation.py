@@ -881,8 +881,9 @@ def validate_encounters(
         else set()
     )
     parsed_maps = _valid_tactical_map_lookup(tactical_maps)
+    world_map_supplied = isinstance(world_map, Mapping)
     world_nodes: Set[str] = set()
-    if isinstance(world_map, Mapping):
+    if world_map_supplied:
         nodes = world_map.get("nodes", {})
         if isinstance(nodes, Mapping):
             world_nodes = set(nodes)
@@ -928,7 +929,11 @@ def validate_encounters(
 
         location_id = raw.get("location_id")
         _validate_id(location_id, f"{label}.location_id", errors)
-        if world_nodes and isinstance(location_id, str) and location_id not in world_nodes:
+        if (
+            world_map_supplied
+            and isinstance(location_id, str)
+            and location_id not in world_nodes
+        ):
             errors.append(f"{label} references unknown world location {location_id!r}")
 
         for field_name in (
