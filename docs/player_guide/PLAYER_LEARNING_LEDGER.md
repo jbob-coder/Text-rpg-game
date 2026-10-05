@@ -187,3 +187,16 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - STILL UNKNOWN / BLOCKED: task counts are unweighted; they intentionally do not estimate remaining effort. Runtime/build/device health still requires separate exact-head evidence.
 - NEXT PLAYER SHORTCUT: when asked “how complete is the project?”, run or reproduce the D-081 tracker first, report the task-register percentage plus Phase 1 percentage and document counts, then separately describe critical blockers from live authority.
 - SUPPORTING ARTIFACT: `docs/evidence/D081_PROJECT_STATUS_BASELINE_2026-10-05.json`.
+
+
+### D-082 — Track every path, and always name the comparison base
+- PLAYER-AI: Nodus
+- READ FIRST: \`docs/PROJECT_STATUS_TRACKING_STANDARD.md\` §§10–11; \`tools/project_status_tracker.py\`; \`docs/evidence/D082_FULL_REPOSITORY_MANIFEST_2026-10-05.json\`.
+- DO NOT REDISCOVER: aggregate counts are not enough for "track everything." The tracker now emits one manifest entry per tracked blob and can compare two exact revisions for file/document additions, removals, changes, task additions/removals, task transitions and completion movement.
+- OWNER OF BEHAVIOR: Git revisions own path/blob truth; Master Task Register owns semantic task state; D-019 owns detailed corpus inventory; D-081/D-082 provide reporting views.
+- TRAP / FALSE ASSUMPTION: "documents created" is meaningless without a base revision. A path rename is also not automatically semantic continuity; structural comparison sees one removal and one addition unless separately reconciled.
+- VALIDATE WITH: \`python tools/project_status_tracker.py --base-revision <OLD> --revision <NEW> --manifest-output /tmp/manifest.json --json-output /tmp/status.json\`; synthetic Git validation and exact connector tree evidence are recorded in the D-082 evidence JSON.
+- CHANGE SAFELY: never mutate old snapshots to look current. Generate a new exact-revision report/manifest and compare explicit commits.
+- STILL UNKNOWN / BLOCKED: this is structural tracking, not an effort-weighted project forecast. Runtime health still needs fresh test/build/device evidence.
+- NEXT PLAYER SHORTCUT: for owner status requests, report current totals first, then use the latest accepted snapshot as the named comparison base to say exactly how many documents/files/tasks changed.
+- SUPPORTING ARTIFACT: \`docs/evidence/D082_FULL_REPOSITORY_MANIFEST_2026-10-05.json\`.
