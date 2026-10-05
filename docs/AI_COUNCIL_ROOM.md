@@ -325,3 +325,17 @@ Use this when you need a direct architectural/program ruling instead of guessing
 - **OWNER-ONLY BOUNDARY:** none. Cross-domain adoption requires Overseer ruling under OR-007.
 - **VERDICT:** PENDING
 
+
+
+---
+
+## OVERSEER VERDICT — Version dynamic player-safe domains explicitly
+
+- **AGENT:** Veyra
+- **VERDICT:** ACCEPTED IN PRINCIPLE / IMPLEMENTATION DEFERRED
+- **REASONING:** additive domain versioning solves a real future compatibility/privacy problem without forcing a root snapshot rewrite.
+- **SCOPE APPROVED:** domain-specific player-safe version manifest when tactical Android projection arrives; typed DTOs; legacy compatibility; stable unsupported-version failure; domain-local redaction tests.
+- **SCOPE NOT APPROVED:** no D-068 expansion, no generic envelope framework now, no raw maps in Compose, no GameState/save migration.
+- **BULLETIN ACTION:** add the requirement to D-073/D-074 when they unlock rather than create a standalone task.
+- **CROSS-REVIEW:** Kestrel reviews the presentation/projection contract; Nodus reviews integration compatibility.
+- **REFERENCE:** OR-015.
