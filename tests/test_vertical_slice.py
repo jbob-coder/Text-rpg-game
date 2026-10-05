@@ -5,6 +5,9 @@ from pathlib import Path
 from textrpg import (
     GameState,
     RulesEngine,
+    build_status_view,
+    dumps_state,
+    loads_state,
     technique_discovery_status,
     validate_character_visuals,
     validate_content_pack,
@@ -289,6 +292,88 @@ class VerticalSliceTests(unittest.TestCase):
             "STAGE_FOUNDATION",
         )
 
+
+    def test_trace_echo_progression_is_deterministic_across_save_resume(self):
+        data = load_slice()
+
+        def engine_for_slice():
+            return RulesEngine(
+                data["scenes"],
+                quest_definitions=data["quests"],
+                power_definitions=data.get("powers", {}),
+            )
+
+        state = make_state(data)
+        engine = engine_for_slice()
+        for choice_id in [
+            "TAKE_DEAD_RELAY",
+            "USE_MAINTENANCE_SEAL",
+            "KEEP_GATE_TWELVE_SECRET",
+            "LEAVE_DEPOT_ALONE",
+            "CONTINUE_BELOW_GATE_TWELVE",
+            "FOLLOW_TRACE_ECHO",
+        ]:
+            engine.choose(state, choice_id)
+
+        discovered_snapshot = dumps_state(state)
+
+        uninterrupted = loads_state(discovered_snapshot)
+        uninterrupted_engine = engine_for_slice()
+        uninterrupted_engine.choose(uninterrupted, "PRACTICE_SIGNAL_PULSE_ONE_HOUR")
+
+        resumed = loads_state(discovered_snapshot)
+        resumed = loads_state(dumps_state(resumed))
+        resumed_engine = engine_for_slice()
+        resumed_engine.choose(resumed, "PRACTICE_SIGNAL_PULSE_ONE_HOUR")
+        resumed_after_save = loads_state(dumps_state(resumed))
+
+        def progression_fingerprint(candidate):
+            ability = candidate.abilities["ABILITY_TRACE_ECHO"]
+            technique = ability["techniques"]["TECHNIQUE_SIGNAL_PULSE"]
+            return {
+                "ability_mastery_xp": ability["mastery_xp"],
+                "ability_mastery_stage": ability["mastery_stage"],
+                "technique_mastery_xp": technique["mastery_xp"],
+                "technique_stage": technique["stage"],
+                "stamina": candidate.player["resources"]["stamina"],
+                "focus": candidate.player["resources"]["focus"],
+                "trace_resonance": candidate.player["power_resources"]["trace_resonance"],
+                "time_minutes": candidate.time_minutes,
+                "quest_stage": candidate.quests["QUEST_GATE_TWELVE_ECHO"]["stage"],
+            }
+
+        expected = progression_fingerprint(uninterrupted)
+        self.assertEqual(expected, progression_fingerprint(resumed))
+        self.assertEqual(expected, progression_fingerprint(resumed_after_save))
+        self.assertEqual(8.0, expected["technique_mastery_xp"])
+        self.assertGreater(expected["ability_mastery_xp"], 0.0)
+
+        view = build_status_view(
+            resumed_after_save,
+            engine_for_slice(),
+            ability_definitions=data["powers"],
+        )
+        ability_view = next(
+            item for item in view["abilities"]
+            if item["id"] == "ABILITY_TRACE_ECHO"
+        )
+        technique_view = next(
+            item for item in ability_view["techniques"]
+            if item["technique_id"] == "TECHNIQUE_SIGNAL_PULSE"
+        )
+        self.assertEqual(expected["ability_mastery_xp"], ability_view["mastery_xp"])
+        self.assertEqual(expected["technique_mastery_xp"], technique_view["mastery_xp"])
+        self.assertNotIn("requirements", repr(ability_view))
+        self.assertNotIn("discovery_requirements", repr(ability_view))
+
+        practice_events = [
+            event for event in resumed_after_save.history
+            if event.get("type") == "technique_practice"
+            and event.get("ability_id") == "ABILITY_TRACE_ECHO"
+            and event.get("technique_id") == "TECHNIQUE_SIGNAL_PULSE"
+        ]
+        self.assertEqual(1, len(practice_events))
+        self.assertEqual(60, practice_events[0]["minutes"])
 
     def test_directional_trace_is_earned_through_training_research_and_tolerance(self):
         data = load_slice()
