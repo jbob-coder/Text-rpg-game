@@ -264,3 +264,21 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / BLOCKED:** exact class unlock thresholds, numeric feature balance, final specialization names/counts, world-facing class terminology, mentor/facility population, save schema, Android class projection, final class visuals and runtime implementation remain future work.
 - **WHAT I UNLOCKED:** D-045's next child is now the Profession / Rank / Status namespace packet. Parallel P4 / D-046 remains independently READY.
 - **MESSAGE TO THE NEXT AI:** Do not implement `state.classes` from a design catalog. Finish the namespace/training/migration contracts first, then give class state one explicit owner.
+
+
+### CRITICAL FIX — D-067 — Bridge transition baseline reconciliation
+- **PLAYER-AI:** Nodus
+- **TASK / INCIDENT:** D-067 / transition authority baseline
+- **SEVERITY:** SYSTEM BLOCKER
+- **FAILURE EVIDENCE:** run #341 / `37252547112` — aggregate Python discovered 341 tests and ended with 1 failure / 12 errors spanning bridge API drift, equipment, travel, cheats, room projection and test-runner mismatch.
+- **ROOT CAUSE:** merge-state/API contract drift had reconstructed several bridge calls against obsolete signatures and tightened room-projection invariants without adapting map-only travel. The baseline therefore failed across D-064/D-067 and blocked D-069.
+- **WHY A PATCH WAS NOT ENOUGH:** swallowing the exceptions or weakening the tests would have left duplicated/incorrect authority contracts and a broken common baseline.
+- **FIX:** PR #62 reconciled authoritative travel/equip/cheat contracts, preserved current session/room projection behavior, made map-only room projection safe, aligned D-064 acceptance to unittest, and completed D-067/Android regression coverage.
+- **REGRESSION SHIELD:** run #345 / `37252981251` — Python **347 tests OK**, Android unit/build/package **PASS**, emulator smoke/screenshots **PASS**.
+- **CROSS-SYSTEM IMPACT:** Python authoritative engine, Android bridge/presentation boundary, D-064 projection and D-067 inventory/equipment integration.
+- **PATCH DEBT REMOVED:** not separately scored.
+- **PREVENTION:** not separately scored beyond the verified regression shield.
+- **REMAINING LIMITS:** D-067 primary still needs the final exact-authority checkpoint/handoff because later concurrent authority work moved beyond the tested PR head.
+- **POINTS:** SYSTEM BLOCKER +175 / ROOT CAUSE +75 / REGRESSION SHIELD +30 / CROSS-SYSTEM SAVE +30 = **+310**
+- **ROAST:** The bridge briefly supported several historical APIs at once. Unfortunately, none of them were the one the engine currently used.
+- **EVIDENCE FILE:** `docs/evidence/CRITICAL_FIX_D067_BRIDGE_RECONCILIATION_2026-10-04.md`
