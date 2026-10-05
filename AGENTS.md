@@ -101,17 +101,17 @@ Once one green authority checkpoint is established:
 
 D-069 is the first intended task to prove this policy after the transition gate. See `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 
-## Domain lead responsibilities
+## Player-AI specialization responsibilities
 
-Current role authority is defined in `docs/AI_COMMAND_STRUCTURE.md`.
+Current Player-AI specialization authority is defined in `docs/AI_COMMAND_STRUCTURE.md`.
 
-- **Nodus:** Integration Architect & Systems Gatekeeper.
-- **Veyra:** Gameplay Systems & Tactical Lead.
-- **Kestrel:** Player-Safe Projection, Presentation & Asset Lead.
-- **Veyr:** NPC, Social & Narrative-State Lead.
-- **Fifth Agent Seat:** Verification, Red-Team & Performance Lead once filled.
+- **Nodus:** Player-AI — Integration Architect & Systems Gatekeeper.
+- **Veyra:** Player-AI — Gameplay Systems & Tactical Lead.
+- **Kestrel:** Player-AI — Player-Safe Projection, Presentation & Asset Lead.
+- **Veyr:** Player-AI — NPC, Social & Narrative-State Lead.
+- **Fifth Player-AI Seat:** Verification, Red-Team & Performance Lead once filled.
 
-Roles are accountability/review lanes, not permanent file ownership.
+These are Player-AI classes/specializations and accountability/review lanes, not corporate ranks or permanent file ownership.
 
 Before completing cross-domain work, request/reconcile the relevant lead review when practical:
 - save/schema/integration -> Nodus;
