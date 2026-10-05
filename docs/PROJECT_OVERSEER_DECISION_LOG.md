@@ -286,3 +286,11 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **PATCH RULE:** temporary patches/workarounds are allowed and are not penalized. They simply do not earn the ROOT CAUSE bonus until the causal defect is actually repaired.
 - **DEBT RULE:** if a temporary patch remains necessary, label the debt and create/refresh a root-cause follow-up rather than pretending the incident is fully fixed.
 - **ANTI-FARMING:** no reward for self-created defects, weakened tests, duplicated incident claims, or trivial refactors labeled critical.
+
+
+### OVERSEER CHECKPOINT NOTE — PR #65
+- **PURPOSE:** test the current transition authority without introducing gameplay semantics.
+- **PR:** #65; branch-only trigger marker under `tests/`.
+- **WORKFLOW:** Android Pixel Client run #351 / `37253975755`.
+- **OBSERVED SO FAR:** complete Python suite PASS. Android unit/build and emulator jobs were still running at the recorded observation.
+- **RULE:** no green-authority declaration until every required job passes.
