@@ -6,6 +6,7 @@ from pathlib import Path
 
 from textrpg import (
     GameState,
+    RulesEngine,
     add_memory,
     load_content_pack,
     load_state,
@@ -48,6 +49,40 @@ class TamsinMemoryProofTests(unittest.TestCase):
         self.assertFalse(npc_remembers(state, "NPC_TAMSIN", "MEM_OTHER_EVENT"))
         self.assertFalse(npc_remembers(state, "NPC_MISSING", MEMORY_ID))
         self.assertEqual(before, state.snapshot())
+
+    def test_memory_effect_without_tags_matches_validator_defaults(self):
+        scenes = {
+            "SCENE_A": {
+                "title": "A",
+                "body": "B",
+                "choices": [
+                    {
+                        "id": "REMEMBER",
+                        "text": "Remember",
+                        "outcomes": {
+                            "default": {
+                                "effects": [
+                                    {
+                                        "type": "npc_memory_add",
+                                        "npc": "NPC_TAMSIN",
+                                        "memory_id": "MEM_NO_TAGS_REQUIRED",
+                                    }
+                                ]
+                            }
+                        },
+                    }
+                ],
+            }
+        }
+        self.assertEqual([], validate_scenes(scenes))
+
+        state = GameState(seed="memory", scene_id="SCENE_A")
+        engine = RulesEngine(scenes)
+        engine.choose(state, "REMEMBER")
+
+        memory = state.npcs["NPC_TAMSIN"]["memories"].single if False else state.npcs["NPC_TAMSIN"]["memories"][0]
+        self.assertEqual("MEM_NO_TAGS_REQUIRED", memory["memory_id"])
+        self.assertEqual([], memory["tags"])
 
     def test_validation_rejects_malformed_memory_effect(self):
         scenes = {
