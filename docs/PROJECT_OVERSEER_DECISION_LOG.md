@@ -224,3 +224,15 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **TEST EXPECTATION WHEN IMPLEMENTED:** legacy no-version load; v1 round trip; unsupported version rejection; malformed private-container rejection; player-safe redaction.
 - **BULLETIN ACTION:** fold into D-076 planning/acceptance when D-065 is complete; do not create a standalone task now unless integrated persistence evidence makes it independently blocking.
 - **CROSS-REVIEW:** Veyr owns social semantics; Nodus reviews persistence/migration compatibility; Kestrel reviews any player-safe projection consequences.
+
+
+### OR-018 — Mission Control + Overseer meta-loop
+- **VERDICT:** ACCEPTED AS ACTIVE PLAYER-EFFORT REDUCTION POLICY.
+- **OWNER INTENT:** complete THE GAME while making Player-AI work easier and more direct.
+- **PLAYER-AI COMMAND:** `♾️` means fetch live reality, open Mission Control, perform the current mission card's Next Move, verify the Exit Gate, and synchronize handoff/evidence.
+- **OVERSEER COMMAND:** `•♾️•` invokes the project-level meta loop in `docs/OVERSEER_META_LOOP.md`.
+- **MISSION CONTROL:** `docs/PLAYER_AI_MISSION_CONTROL.md` becomes the fast-entry operational surface after Bulletin/Command Structure.
+- **POLICY:** every active primary should expose objective, bounded Must Read, Already Done/Do Not Redo when useful, Next Move, Exit Gate, scope exclusions and material cross-review.
+- **ANTI-BUREAUCRACY:** new process/governance work must remove repeated discovery, resolve a real coordination gap, or unlock implementation.
+- **COMPLETION BIAS:** when design is adequate, prefer closing exact acceptance/evidence gaps over adding another planning layer.
+- **CURRENT CRITICAL PATH:** D-064 + D-065 + D-067 + D-068 -> green authority checkpoint -> D-069 under merge-state gate.
