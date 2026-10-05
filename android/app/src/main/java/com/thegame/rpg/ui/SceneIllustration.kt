@@ -16,6 +16,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.thegame.rpg.engine.GameRoomActor
 import kotlinx.coroutines.delay
 import kotlin.math.floor
 
@@ -24,6 +25,7 @@ fun SceneIllustration(
     locationId: String,
     sceneId: String? = null,
     relayState: String? = null,
+    roomActors: List<GameRoomActor> = emptyList(),
     modifier: Modifier = Modifier,
 ) {
     val traceFxFrames = PixelTraceFxCatalog.directionalTraceForScene(sceneId) ?: PixelTraceFxCatalog.signalPulseForScene(sceneId) ?: PixelTraceFxCatalog.forScene(sceneId)
@@ -116,10 +118,7 @@ fun SceneIllustration(
                 )
             }
 
-            PixelStoryActorCatalog.placements(
-                locationId = locationId,
-                sceneId = sceneId,
-            ).forEach { placement ->
+            PixelStoryActorCatalog.placements(roomActors).forEach { placement ->
                 drawPixelSprite(
                     sprite = placement.sprite,
                     pixelSize = scenePixel,

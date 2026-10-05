@@ -371,6 +371,7 @@ private fun StorySection(
                         locationId = snapshot.location,
                         sceneId = snapshot.sceneId,
                         relayState = snapshot.visuals.relayState,
+                        roomActors = snapshot.room.actors,
                         modifier = Modifier
                             .weight(0.68f)
                             .fillMaxHeight(),
@@ -458,6 +459,7 @@ private fun NarrativePanel(
                         locationId = snapshot.location,
                         sceneId = snapshot.sceneId,
                         relayState = snapshot.visuals.relayState,
+                        roomActors = snapshot.room.actors,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(150.dp),
@@ -536,7 +538,7 @@ private fun StoryResourceHud(
             ) {
                 PixelUiIcon(
                     sprite = PixelUiIconCatalog.resource(resource.id),
-                    modifier = Modifier.size(14.dp),
+                    modifier = Modifier.size(16.dp),
                     tint = resourceColor,
                     testTag = "story-resource-icon-${resource.id.lowercase()}",
                 )
