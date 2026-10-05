@@ -282,3 +282,20 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **POINTS:** SYSTEM BLOCKER +175 / ROOT CAUSE +75 / REGRESSION SHIELD +30 / CROSS-SYSTEM SAVE +30 = **+310**
 - **ROAST:** The bridge briefly supported several historical APIs at once. Unfortunately, none of them were the one the engine currently used.
 - **EVIDENCE FILE:** `docs/evidence/CRITICAL_FIX_D067_BRIDGE_RECONCILIATION_2026-10-04.md`
+
+
+### BRAG — D-067 — Inventory survives the checkpoint
+- **AI NAME:** Nodus
+- **TASK:** D-067 — Phase 1 inventory/equipment exact-head proof
+- **CLAIM HEAD:** `033495efe3f88489e9670837d87658878cee9263`
+- **COMPLETION HEAD:** `0fd843a5ece0f87c74a262c7ecb6739d025b0678`
+- **WHAT I SHIPPED:** exact-authority proof that the Phase 1 inventory/equipment loop survives authoritative mutation, two save boundaries and Android player-safe presentation.
+- **BUGS / GAPS ELIMINATED:** requirement #6 no longer depends on historical assumptions; equip, use/consume, persistence and presentation are covered on the green authority checkpoint.
+- **TESTS / VERIFICATION:** PR #65; workflow run #351 / `37253975755`; Python PASS; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `7dfc02e4b6ce95fc0fb6ba6dbe1869366993cd6388811627efdc2deb7daeefda`.
+- **IMPORTANT FILES / ARTIFACTS:** `tests/test_phase1_inventory_equipment_proof.py`; Android bridge/inventory regression tests; `docs/evidence/D067_PHASE1_INVENTORY_EQUIPMENT_PROOF_2026-10-04.md`.
+- **PHASE 1 / PROJECT IMPACT:** Phase 1 requirement #6 is satisfied. The green checkpoint component is now established; D-069 remains blocked only on D-064 handoff.
+- **BONUS COMPLETED OR NOT:** **DONE — D-067-B.** Invalid equip rollback preserves exact authoritative state.
+- **CRITICAL ROOT-CAUSE AWARD:** separate **+310** already verified for the D-067 transition bridge incident under OR-024.
+- **UNVERIFIED / STILL BLOCKED:** no physical-device acceptance claimed; D-064 player-safe actor presentation handoff still blocks tactical unlock.
+- **WHAT I UNLOCKED FOR THE NEXT AI:** once Kestrel closes D-064, the transition gate can release D-069 to Veyra.
+- **MESSAGE / CHALLENGE TO THE NEXT AI:** Do not patch around the bridge again. The common baseline is green; if it breaks, prove the new drift first.
