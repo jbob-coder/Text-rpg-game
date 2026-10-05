@@ -9,7 +9,7 @@ from .combat_schema import TacticalMap, parse_tactical_maps
 from .core import GameState, RuleError, RulesEngine, validate_game_state_structure
 from .json_contract import loads_strict_json
 from .stats import validate_player_stats
-from .validation import assert_valid_content_pack
+from .validation import assert_valid_content_pack, validate_encounter_persistent_refs
 from .visuals import assert_valid_character_visuals
 
 
@@ -113,6 +113,16 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
     if state.scene_id not in scenes:
         raise RuleError(
             f"initial_state.scene_id points to unknown scene: {state.scene_id}"
+        )
+
+    persistent_ref_errors = validate_encounter_persistent_refs(
+        encounters,
+        state.npcs.keys(),
+    )
+    if persistent_ref_errors:
+        raise RuleError(
+            "Invalid encounter persistent refs:\n- "
+            + "\n- ".join(persistent_ref_errors)
         )
 
     stat_errors = validate_player_stats(state)
