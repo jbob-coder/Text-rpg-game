@@ -374,3 +374,19 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **SURGICAL TASKS:** final branch should contain only task-required semantic edits, focused tests and explicitly accepted CPR repairs.
 - **RERUN RULE:** when the final cleaned branch materially differs from the previously green branch, rerun the applicable merge-state gate.
 - **NO PENALTY:** cleaning a branch or rebuilding a smaller candidate does not reduce task score.
+
+
+### OR-029 — D-064 transition gate closed; D-069 opened
+- **VERDICT:** ACCEPTED AS CURRENT CRITICAL-PATH STATE.
+- **D-064 OWNER:** Kestrel.
+- **FINAL PR:** #70, head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff`.
+- **FINAL CI:** run #362 / `37261943012` — Python 355/355 OK; Android unit/build/package PASS; emulator smoke/screenshots PASS.
+- **APK SHA-256:** `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`.
+- **AUTHORITY MERGE:** `d7ebb7ca439695e256a429a1e5d160daae69a521`.
+- **D-064 RESULT:** DONE / D-064-B VERIFIED.
+- **CPR-002:** RESOLVED at 74/100 CRITICAL. Kestrel +235 critical root-cause reward; Veyr +10 peer FIND credit.
+- **HANDOFF ARTIFACTS:** `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md` + D-064 Player Learning Ledger entry + Brag/Scoreboard/Bulletin synchronization.
+- **D-069:** promoted to READY.
+- **DESIGNATED NEXT CLAIMANT:** Veyra, through normal Coordination INTENT -> Bulletin CLAIM -> START protocol.
+- **D-069 SCOPE:** tactical schemas, validators and pure grid/LOS/cover primitives only; no D-070 transient turn/session runtime scope creep.
+- **PR HYGIENE:** older D-064 compatibility/RED/probe PRs may be closed as historical evidence because PR #70 is the integrated completion path.
