@@ -58,7 +58,16 @@ class AndroidGameSession:
     def _room_view_for(self, state: GameState) -> Dict[str, Any]:
         """Project authored visible presence without exposing durable NPC internals."""
         scene = self.engine.get_scene(state)
-        return build_room_projection(scene, self._location_for(state))
+        location_id = self._location_for(state)
+        authored_location = scene.get("location_id")
+        if isinstance(authored_location, str) and authored_location != location_id:
+            # Map-only travel can move the player to a discovered node without a
+            # dedicated narrative scene. Do not reuse actors from the stale scene.
+            return build_room_projection(
+                {"location_id": location_id, "actors": []},
+                location_id,
+            )
+        return build_room_projection(scene, location_id)
 
     def _status_view_for(self, state: GameState) -> Dict[str, Any]:
         registries = self.content.registries
