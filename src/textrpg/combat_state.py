@@ -197,6 +197,16 @@ class CombatSession:
             raise ValueError("combat session requires at least one actor")
         if any(not isinstance(actor, TacticalActorState) for actor in actor_list):
             raise ValueError("actors must contain TacticalActorState values")
+        actor_ids = [actor.actor_id for actor in actor_list]
+        if len(set(actor_ids)) != len(actor_ids):
+            duplicates = sorted(
+                actor_id
+                for actor_id in set(actor_ids)
+                if actor_ids.count(actor_id) > 1
+            )
+            raise ValueError(
+                "duplicate tactical actor id: " + ", ".join(duplicates)
+            )
 
         for actor in actor_list:
             cell = tactical_map.cell_at(actor.coord)
@@ -640,6 +650,49 @@ class CombatSession:
         except Exception:
             actor.reaction_reserve = reserve_before
             actor.reserved_reaction_id = reaction_id
+            self.event_index = event_index_before
+            del self.committed_events[event_count_before:]
+            raise
+
+
+    def commit_end_activation(
+        self,
+        *,
+        actor_id: str,
+        action_id: str,
+    ) -> CombatEvent:
+        """Commit authored zero-cost End Activation and expire unused budget."""
+
+        actor = self._active_actor(actor_id)
+        definition = self._action_definition(action_id)
+        if definition.get("category") != "end_activation":
+            raise ValueError("end action must use category end_activation")
+        cost = self._action_cost(action_id)
+        if cost != 0:
+            raise ValueError("Phase 1 End Activation must cost zero")
+
+        budget_before = actor.action_budget
+        state_before = actor.activation_state
+        event_index_before = self.event_index
+        event_count_before = len(self.committed_events)
+        try:
+            actor.activation_state = ACTIVATION_RESOLVING_ACTION
+            actor.action_budget = 0
+            event = self._append_event(
+                actor=actor,
+                action_id=action_id,
+                target_key="END_ACTIVATION",
+                budget_before=budget_before,
+                coord_before=actor.coord,
+                reserve_before=actor.reaction_reserve,
+                reserve_after=actor.reaction_reserve,
+            )
+            actor.activation_state = ACTIVATION_COMPLETE
+            self.active_actor_id = None
+            return event
+        except Exception:
+            actor.action_budget = budget_before
+            actor.activation_state = state_before
             self.event_index = event_index_before
             del self.committed_events[event_count_before:]
             raise
