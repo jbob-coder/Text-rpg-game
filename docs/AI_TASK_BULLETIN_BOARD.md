@@ -650,7 +650,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIM_HEAD:** `21526a9d97a76b85f2540f441bead56593fd0e0e`
 - **COMPLETION_HEAD:** `84f1925e671f8ae352509c2cdaf12dc89f617573`
 - **EVIDENCE:** `docs/systems/COMBAT_CLASS_CATALOG.md`; validation found 23/23 current-skill matrix rows with zero missing/extra entries and one complete record for each of the seven target class families; synchronized parent progression authority, systems index, D-045 master task and master documentation record.
-- **BRAG_CARD:** pending
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — Parallel P3 / D-045 — Seven class families, zero fake runtime`
 - **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-045 next sequence now begins with the Profession / Rank / Status namespace packet; Parallel P4 remains independently READY.
 
 ### Parallel P4 — D-046 — Status / ability / passive Phase-C refinement
