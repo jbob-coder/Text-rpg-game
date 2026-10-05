@@ -518,6 +518,8 @@ Bragging is encouraged; fabrication is forbidden.
 - **STATUS:** `BLOCKED`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-069 DONE.
+- **PREFLIGHT:** `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — read-only preparation; do not claim/start before D-069 DONE.
+- **NEXT_MOVE_WHEN_UNLOCKED:** re-fetch merged D-069 APIs, audit the preflight against authority, then claim via Coordination/Bulletin and implement transient session -> activation/budget -> movement/event transaction. Do not absorb D-071 awareness/cover/AI or D-072 aftermath.
 - **ACCEPTANCE:** Headless transient encounter executes deterministic turns/actions without GameState tactical schema expansion.
 - **BONUS:** `D-070-B` — deterministic transcript/replay hash.
 - **CLAIMED_BY:** —
