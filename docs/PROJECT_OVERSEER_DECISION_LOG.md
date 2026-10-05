@@ -417,3 +417,19 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **CURRENT IMPLEMENTATION:** Veyra's first branch already uses `TacticalCell.los_blocked_edges` and checks source edge OR destination opposite edge, matching this ruling in principle.
 - **SCOPE:** no structured edge-object schema, no D-070 state/turn work, no Android/save expansion.
 - **REWARD:** none at ruling time; prevention/root-cause credit may be evaluated after executable D-069 completion evidence.
+
+
+### OR-032 — D-069 persistent NPC ref resolution contract
+- **SOURCE:** CPR-004 — D-069 unresolved `persistent_ref` IDs.
+- **PROBLEM PRESSURE:** 65/100 CRITICAL.
+- **VERDICT:** ACCEPTED / LINKED TO EXISTING D-069 / NO DUPLICATE TASK.
+- **CAUSE:** tactical shape validation can run before `GameState` exists, so syntactically valid encounter `persistent_ref` values were not guaranteed to resolve to durable state IDs.
+- **DURABLE OWNER:** `GameState.npcs` / authored `initial_state.npcs`.
+- **VALIDATION MODEL:** retain pre-state tactical shape/stable-ID validation; after `GameState` construction, perform one bounded persistent-ref resolution pass against durable NPC IDs.
+- **UNKNOWN NPC REF:** reject with stable content-load error.
+- **PLAYER IDENTITY:** no canonical player stable-ID field currently exists. D-069 must not invent a player sentinel; player-backed participants omit `persistent_ref` until later runtime/bridge identity authority defines one.
+- **NO-REF PARTICIPANTS:** encounter-local actors may omit `persistent_ref`.
+- **CURRENT IMPLEMENTATION:** Veyra's PR #74 now contains `validate_encounter_persistent_refs()`, post-GameState loader integration, and valid/invalid ref regressions matching this ruling.
+- **D-069 LOCAL LOS REPAIR:** Veyra also changed cell-level LOS to inspect all supercover cells, including source, and added opaque-endpoint symmetry plus cover-vs-opacity and one-sided edge symmetry regressions.
+- **REMAINING GATE:** PR #74 merge-state CI, authority-drift review, final D-069 evidence/Learning/FINISH synchronization.
+- **REWARD:** none at ruling time. Evaluate CPR-003/CPR-004 prevention/root-cause credit only after executable D-069 completion evidence.
