@@ -32,3 +32,13 @@
 - **ROOT_CAUSE_STATUS:** contract gap proven by authority comparison; runtime manifestation not yet implemented.
 - **BULLETIN_TASK:** D-069 already owns the eventual implementation; do not create a duplicate task unless AXIOM rules the contract repair must be separated.
 - **REWARD_CANDIDATE:** none claimed by reporter.
+
+
+## Follow-up — first D-069 schema commit observed
+
+- **IMPLEMENTATION COMMIT:** `8897fcd2cb2bb9e8bca975808f643d5095738d29` — `feat: add canonical tactical schema primitives`, committed 2026-10-05T16:31:32Z on `agent/veyra-d069-tactical-core`.
+- **OBSERVATION:** `TacticalCell` now contains `los_blocked_edges: tuple[str, ...]` plus `blocks_los_through(edge)`. This is semantically separate from `cover`, so the implementation does not conflate cover strength with LOS opacity.
+- **CONTRACT STATUS:** the live documentation authorities still do not define `los_blocked_edges` or an equivalent authored field. Code therefore resolves the missing representation, but the content contract remains undocumented until authority is synchronized.
+- **SECONDARY INVARIANT RISK:** the current canonical schema validates each cell's blocked edge names but does not enforce reciprocal boundary consistency between adjacent cells. Example: cell A may declare E blocked while adjacent cell B omits W. If the future LOS tracer reads only the edge on the source/entered cell, the same wall can become direction-dependent. The LOS contract describes geometric cell/edge tracing and D-069 preflight requires symmetry where appropriate; a shared opaque wall boundary should therefore have one explicit ownership/reciprocity rule before completion.
+- **RECOMMENDED ACCEPTANCE ADDITION — NON-AUTHORITATIVE:** document whether an opaque boundary is owned by the entered cell, the exited cell, or both; normalize to one canonical rule and add a regression proving A->B and B->A agree for the same opaque shared boundary.
+- **NO CLAIM:** no runtime LOS/grid implementation or executable RED/GREEN test is claimed by Vector at this follow-up.
