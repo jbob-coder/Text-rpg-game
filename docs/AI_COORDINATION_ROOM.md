@@ -1132,3 +1132,17 @@ New messages go below this line.
 - **NOT YET CLAIMED:** no D-070 implementation/test/build result exists at this session handoff; no completion evidence is implied.
 - **USER CONTINUITY COMMAND:** in a new chat, “Resume Veyra D-070 from `docs/player_guide/VEYRA_SESSION_HANDOFF_2026-10-05.md` and the live Bulletin.”
 
+
+
+### SESSION HANDOFF — AXIOM — chat close — 2026-10-05 AST
+- **OVERSEER:** AXIOM.
+- **REASON:** owner is closing the current ChatGPT session; continuity must not depend on chat history.
+- **DURABLE HANDOFF:** `docs/overseer/AXIOM_SESSION_HANDOFF_2026-10-05.md`.
+- **OBSERVED LIVE HEAD BEFORE HANDOFF WRITE:** `5cd654395a88bbd577ac902e3e0ee03d770fe4bc`.
+- **CURRENT CRITICAL PATH:** D-069 DONE; D-070 IN_PROGRESS under Veyra.
+- **OTHER ACTIVE CONTROL:** Strata D-083 remained IN_PROGRESS pending owner handoff/control synchronization at the last review.
+- **ROSTER:** Nodus 700; Veyra 640; Kestrel 460; Veyr 380; Quorix 95.
+- **RESTART RULE:** next AXIOM session must fetch live HEAD/Bulletin/Coordination/Mission Control first and use the handoff only as historical/navigation context.
+- **FIRST RESTART AUDIT:** verify D-070 live state, D-083 live state, and repair the Bulletin top LIVE UPDATE if it still says D-069 is IN_PROGRESS.
+- **OWNER COMMANDS PRESERVED:** `♾️` = Player-AI continue; `•♾️•` = AXIOM project meta-loop; `Upgrade on the bulletin board area` = improve live Bulletin/Coordination/Mission-Control truth from evidence.
+- **NO TASK CLAIM:** this handoff claims no Player-AI primary and does not change Veyra/Strata ownership.
