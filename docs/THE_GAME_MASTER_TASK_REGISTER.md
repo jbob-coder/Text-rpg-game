@@ -1362,13 +1362,31 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-065-B` negative projection-leak regression.
 
 ### TASK D-066 — Implement and verify Phase 1 progression proof
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `DONE / VERIFIED BOUNDED PHASE 1 PROOF`
 - PRIORITY: `P0 / RANK 7`
 - DEPENDS_ON: D-061.
-- PURPOSE: turn one documented Gate Twelve-compatible progression route into exact-head persistent runtime proof.
-- ACCEPTANCE: meaningful authoritative progress/unlock/mastery change persists through save/load and is projected safely.
-- BONUS: `D-066-B` deterministic progression replay fixture.
-
+- RESULT:
+  - the existing Gate Twelve `ABILITY_TRACE_ECHO` -> `TECHNIQUE_SIGNAL_PULSE` route remains authoritative in Python;
+  - authored one-hour practice increases technique and ability mastery while paying stamina/focus and world time;
+  - the progression state survives save/load;
+  - D-066-B deterministic replay is proven across an inserted save/load boundary;
+  - Python player-safe ability projection now carries stable ability ID;
+  - Android now maps ability/technique/resource progression into typed DTOs and renders the discovered progression in Stats without local mutation or unlock arithmetic;
+  - authored `requirements`, `discovery_requirements`, and `effects` are rejected at the typed Android progression boundary.
+- VERIFICATION:
+  - evidence: `docs/evidence/D066_PHASE1_PROGRESSION_PROOF_2026-10-04.md`;
+  - isolated verification PR #42, head `48ce6223fb84c3d31457c7f1dacaec87ce0d3df2`;
+  - workflow run #312 / ID `37250124885`;
+  - D-066 Python route/persistence/determinism/status tests executed PASS;
+  - Android JVM tests PASS;
+  - Compose instrumentation compilation PASS;
+  - debug APK assembly/content/hash PASS;
+  - connected API-35 emulator suite: 35 / 35 tests PASS;
+  - APK SHA-256: `a14ee38462da6a77a159225b71d2506bb0e18a051430b3a5f90e9a291eb81d8d`.
+- KNOWN GLOBAL GATE ISSUE:
+  - the aggregate Python workflow is still red only because unchanged `tests/test_room_projection.py` imports `pytest` while the workflow does not install it; D-066 tests themselves passed.
+- ACCEPTANCE: **SATISFIED** — meaningful authoritative mastery progression persists through save/load and projects safely.
+- BONUS: `D-066-B` **DONE** — deterministic save-boundary progression replay.
 ### TASK D-067 — Verify Phase 1 inventory/equipment loop on exact HEAD
 - STATUS: `PENDING / BULLETIN QUEUED`
 - PRIORITY: `P0 / RANK 8`
