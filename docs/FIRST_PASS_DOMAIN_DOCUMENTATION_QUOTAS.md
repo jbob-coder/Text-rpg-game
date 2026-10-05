@@ -286,3 +286,14 @@ Next mandatory program action:
 - second-pass/final quota recalibration based on actual complexity, structured records, migration risk, verification burden and remaining unknowns.
 
 Do not keep creating documents merely to increase the 148-unit first-pass count.
+
+
+## D-062 second-pass social migration note
+
+`docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md` is a reconstruction-depth migration artifact created after the V05 12/12 first-pass floor closed.
+
+Accounting rule:
+- V05 remains **12 / 12** for the first-pass minimum;
+- D-062 does not inflate that floor by manufacturing an additional quota unit;
+- the packet advances second-pass migration readiness by mapping current social state/API/save/privacy/Android boundaries to D-065 implementation;
+- runtime memory/reactive behavior and exact-head verification remain separate evidence.
