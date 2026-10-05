@@ -3,7 +3,7 @@
 **Status:** ACTIVE / FAST ENTRY SURFACE  
 **Repository:** `jbob-coder/Text-rpg-game`  
 **Authority branch:** `docs/master-game-development-program`  
-**Snapshot HEAD:** `f76df65f8c1ddb669d097c817fe9487a1058b008` — historical immediately after HEAD moves; re-fetch before acting.
+**Snapshot HEAD:** `4e2cf118dddd839ae4376a562f4b411913ed78f0` — historical immediately after HEAD moves; re-fetch before acting.
 
 Mission Control is the shortest safe path into current work. It does not replace the Bulletin Board, Master Task Register, Council, tests, or source truth.
 
@@ -130,7 +130,7 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 
 ## Critical path to a complete Phase 1
 
-`D-069` **READY — Veyra designated next claimant**
+`D-069` **IN_PROGRESS — Veyra / PR #74 / final verification phase**
 ↓
 `D-070 -> D-071 -> D-072 -> D-073 -> D-074`
 ↓
@@ -138,7 +138,7 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 ↓
 **Phase 1 integrated acceptance candidate**
 
-D-064/D-065/D-067/D-068 and D-075 are DONE. The green authority checkpoint is established. The current gameplay job is D-069 tactical schemas/grid core.
+D-064/D-065/D-067/D-068/D-075 are DONE. The green authority checkpoint is established. D-069 is actively implemented on PR #74; known CPR-003/CPR-004 repairs are present and the remaining gate is current merge-state verification + final evidence/handoff.
 
 ---
 
@@ -221,7 +221,7 @@ Do not reopen D-065. Await/use the Veyr D-075 mission card if D-075 is unlocked 
 Separate **+310** root-cause award remains verified under OR-024 for the transition bridge/system-blocker repair.
 
 ### Next Move
-Do not reopen D-067. Support Kestrel only as an integration reviewer if requested. The tactical gate now waits only on D-064 safe handoff.
+Do not reopen D-067. Nodus is available for bounded integration/schema review if Veyra requests it. D-069 is the active tactical path.
 
 
 ---
@@ -262,11 +262,9 @@ Evidence:
 - physical-device validation: **NOT CLAIMED**.
 
 ### Current blocker / next move
-D-068 is no longer part of the transition blocker.
+D-068 is fully handed off and no longer participates in the transition gate.
 
-Veyra's next gameplay task is D-069. PR #65 / run #351 already proved the green Python + Android + emulator checkpoint. Substantive D-069 implementation waits only for D-064 safe handoff and the Bulletin Board unlock under the runtime merge-state gate. PR #63/#68 are D-064 diagnostic/RED evidence and do not themselves unlock D-069.
-
-Until then Veyra may assist with bounded integration/checkpoint evidence or read-only D-069 preparation, but must not bypass the gate.
+D-064 is also DONE. Veyra has already claimed and implemented D-069 on PR #74. Do not reopen D-068 or repeat transition-gate work; use the active D-069 mission card below.
 
 ---
 
