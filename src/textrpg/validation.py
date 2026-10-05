@@ -653,12 +653,456 @@ def validate_world_map(
     return errors
 
 
+_COMBAT_ACTION_FIELDS = {
+    "action_id",
+    "category",
+    "cost",
+    "range_min",
+    "range_max",
+    "requires_los",
+    "requires_detection",
+    "requires_identification",
+    "allows_last_known_position",
+    "allows_blind_area_targeting",
+    "tags",
+}
+_COMBAT_ARCHETYPE_FIELDS = {
+    "archetype_id",
+    "action_ids",
+    "footprint",
+    "tags",
+    "metadata",
+}
+_ENCOUNTER_FIELDS = {
+    "encounter_id",
+    "map_id",
+    "location_id",
+    "title",
+    "trigger",
+    "participants",
+    "deployment",
+    "objective_set",
+    "retreat_policy",
+    "ai_profiles",
+    "aftermath_profile",
+    "time_cost_minutes",
+    "canon_status",
+    "action_ids",
+    "archetype_ids",
+    "metadata",
+}
+_ENCOUNTER_PARTICIPANT_FIELDS = {
+    "actor_id",
+    "persistent_ref",
+    "archetype_id",
+    "faction_id",
+    "action_ids",
+    "deployment_zone",
+    "required",
+    "tags",
+}
+
+
+def _unknown_field_errors(
+    record: Mapping[str, Any],
+    allowed: Set[str],
+    label: str,
+) -> List[str]:
+    unknown = sorted(set(record) - allowed)
+    if not unknown:
+        return []
+    return [
+        f"{label} has unsupported fields: "
+        + ", ".join(str(field) for field in unknown)
+    ]
+
+
+def _validate_text_list(value: Any, label: str, errors: List[str]) -> List[str]:
+    if not isinstance(value, list):
+        errors.append(f"{label} must be a list")
+        return []
+    result: List[str] = []
+    for index, item in enumerate(value):
+        if not isinstance(item, str) or not item:
+            errors.append(f"{label}[{index}] must be non-empty text")
+            continue
+        result.append(item)
+    if len(set(result)) != len(result):
+        errors.append(f"{label} cannot contain duplicates")
+    return result
+
+
+def validate_tactical_maps(tactical_maps: Any) -> List[str]:
+    """Validate strict authored tactical maps and canonical topology."""
+
+    from .combat_schema import parse_tactical_map_definition
+
+    if not isinstance(tactical_maps, Mapping):
+        return ["tactical_maps must be an object"]
+    errors: List[str] = []
+    for map_id, definition in tactical_maps.items():
+        if not isinstance(map_id, str):
+            errors.append("tactical map IDs must be text")
+            continue
+        try:
+            parse_tactical_map_definition(map_id, definition)
+        except ValueError as exc:
+            errors.append(str(exc))
+    return errors
+
+
+def validate_combat_actions(combat_actions: Any) -> List[str]:
+    """Validate D-069 action definitions without resolving action behavior."""
+
+    if not isinstance(combat_actions, Mapping):
+        return ["combat_actions must be an object"]
+    errors: List[str] = []
+    for action_id, raw in combat_actions.items():
+        _validate_id(action_id, "combat action id", errors)
+        label = f"combat_actions.{action_id}"
+        if not isinstance(raw, Mapping):
+            errors.append(f"{label} must be an object")
+            continue
+        errors.extend(_unknown_field_errors(raw, _COMBAT_ACTION_FIELDS, label))
+        if raw.get("action_id") != action_id:
+            errors.append(f"{label}.action_id must equal mapping key {action_id}")
+        category = raw.get("category")
+        if not isinstance(category, str) or not category:
+            errors.append(f"{label}.category must be non-empty text")
+        cost = raw.get("cost")
+        if isinstance(cost, bool) or not isinstance(cost, int) or cost < 0:
+            errors.append(f"{label}.cost must be a non-negative integer")
+
+        range_min = raw.get("range_min", 0)
+        range_max = raw.get("range_max", range_min)
+        for field_name, value in (("range_min", range_min), ("range_max", range_max)):
+            if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                errors.append(
+                    f"{label}.{field_name} must be a non-negative integer"
+                )
+        if (
+            isinstance(range_min, int)
+            and not isinstance(range_min, bool)
+            and isinstance(range_max, int)
+            and not isinstance(range_max, bool)
+            and range_max < range_min
+        ):
+            errors.append(f"{label}.range_max cannot be less than range_min")
+
+        for field_name in (
+            "requires_los",
+            "requires_detection",
+            "requires_identification",
+            "allows_last_known_position",
+            "allows_blind_area_targeting",
+        ):
+            if field_name in raw and not isinstance(raw[field_name], bool):
+                errors.append(f"{label}.{field_name} must be boolean")
+        _validate_text_list(raw.get("tags", []), f"{label}.tags", errors)
+    return errors
+
+
+def validate_combat_actor_archetypes(
+    archetypes: Any,
+    combat_actions: Any,
+) -> List[str]:
+    """Validate actor archetype identities and their action references."""
+
+    if not isinstance(archetypes, Mapping):
+        return ["combat_actor_archetypes must be an object"]
+    action_ids = set(combat_actions) if isinstance(combat_actions, Mapping) else set()
+    errors: List[str] = []
+    for archetype_id, raw in archetypes.items():
+        _validate_id(archetype_id, "combat actor archetype id", errors)
+        label = f"combat_actor_archetypes.{archetype_id}"
+        if not isinstance(raw, Mapping):
+            errors.append(f"{label} must be an object")
+            continue
+        errors.extend(_unknown_field_errors(raw, _COMBAT_ARCHETYPE_FIELDS, label))
+        if raw.get("archetype_id") != archetype_id:
+            errors.append(
+                f"{label}.archetype_id must equal mapping key {archetype_id}"
+            )
+        footprint = raw.get("footprint", 1)
+        if isinstance(footprint, bool) or not isinstance(footprint, int):
+            errors.append(f"{label}.footprint must be integer 1 for Phase 1")
+        elif footprint != 1:
+            errors.append(f"{label}.footprint must be 1 for Phase 1")
+        for action_id in _validate_text_list(
+            raw.get("action_ids", []),
+            f"{label}.action_ids",
+            errors,
+        ):
+            _validate_id(action_id, f"{label}.action_ids", errors)
+            if action_id not in action_ids:
+                errors.append(
+                    f"{label} references unknown combat action {action_id!r}"
+                )
+        _validate_text_list(raw.get("tags", []), f"{label}.tags", errors)
+        metadata = raw.get("metadata", {})
+        if not isinstance(metadata, Mapping):
+            errors.append(f"{label}.metadata must be an object")
+    return errors
+
+
+def _valid_tactical_map_lookup(tactical_maps: Any) -> Dict[str, Any]:
+    from .combat_schema import parse_tactical_map_definition
+
+    result: Dict[str, Any] = {}
+    if not isinstance(tactical_maps, Mapping):
+        return result
+    for map_id, definition in tactical_maps.items():
+        if not isinstance(map_id, str):
+            continue
+        try:
+            result[map_id] = parse_tactical_map_definition(map_id, definition)
+        except ValueError:
+            pass
+    return result
+
+
+def validate_encounters(
+    encounters: Any,
+    tactical_maps: Any,
+    combat_actions: Any,
+    combat_actor_archetypes: Any,
+    world_map: Any = None,
+) -> List[str]:
+    """Validate encounter shells and cross-references owned by D-069."""
+
+    if not isinstance(encounters, Mapping):
+        return ["encounters must be an object"]
+
+    map_ids = set(tactical_maps) if isinstance(tactical_maps, Mapping) else set()
+    action_ids = set(combat_actions) if isinstance(combat_actions, Mapping) else set()
+    archetype_ids = (
+        set(combat_actor_archetypes)
+        if isinstance(combat_actor_archetypes, Mapping)
+        else set()
+    )
+    parsed_maps = _valid_tactical_map_lookup(tactical_maps)
+    world_nodes: Set[str] = set()
+    if isinstance(world_map, Mapping):
+        nodes = world_map.get("nodes", {})
+        if isinstance(nodes, Mapping):
+            world_nodes = set(nodes)
+
+    errors: List[str] = []
+    required = {
+        "encounter_id",
+        "map_id",
+        "location_id",
+        "trigger",
+        "participants",
+        "deployment",
+        "objective_set",
+        "retreat_policy",
+        "ai_profiles",
+        "aftermath_profile",
+        "time_cost_minutes",
+        "canon_status",
+    }
+
+    for encounter_id, raw in encounters.items():
+        _validate_id(encounter_id, "encounter id", errors)
+        label = f"encounters.{encounter_id}"
+        if not isinstance(raw, Mapping):
+            errors.append(f"{label} must be an object")
+            continue
+
+        errors.extend(_unknown_field_errors(raw, _ENCOUNTER_FIELDS, label))
+        missing = sorted(required - set(raw))
+        if missing:
+            errors.append(
+                f"{label} missing required fields: {', '.join(missing)}"
+            )
+        if raw.get("encounter_id") != encounter_id:
+            errors.append(
+                f"{label}.encounter_id must equal mapping key {encounter_id}"
+            )
+
+        map_id = raw.get("map_id")
+        _validate_id(map_id, f"{label}.map_id", errors)
+        if isinstance(map_id, str) and map_id not in map_ids:
+            errors.append(f"{label} references unknown tactical map {map_id!r}")
+
+        location_id = raw.get("location_id")
+        _validate_id(location_id, f"{label}.location_id", errors)
+        if world_nodes and isinstance(location_id, str) and location_id not in world_nodes:
+            errors.append(f"{label} references unknown world location {location_id!r}")
+
+        for field_name in (
+            "trigger",
+            "deployment",
+            "objective_set",
+            "retreat_policy",
+            "ai_profiles",
+            "aftermath_profile",
+            "metadata",
+        ):
+            if field_name in raw and not isinstance(raw[field_name], Mapping):
+                errors.append(f"{label}.{field_name} must be an object")
+
+        minutes = raw.get("time_cost_minutes")
+        if isinstance(minutes, bool) or not isinstance(minutes, int) or minutes < 0:
+            errors.append(
+                f"{label}.time_cost_minutes must be a non-negative integer"
+            )
+        canon_status = raw.get("canon_status")
+        if not isinstance(canon_status, str) or not canon_status:
+            errors.append(f"{label}.canon_status must be non-empty text")
+        if "title" in raw and (
+            not isinstance(raw["title"], str) or not raw["title"].strip()
+        ):
+            errors.append(f"{label}.title must be non-empty text")
+
+        for action_id in _validate_text_list(
+            raw.get("action_ids", []),
+            f"{label}.action_ids",
+            errors,
+        ):
+            _validate_id(action_id, f"{label}.action_ids", errors)
+            if action_id not in action_ids:
+                errors.append(
+                    f"{label} references unknown combat action {action_id!r}"
+                )
+        for archetype_id in _validate_text_list(
+            raw.get("archetype_ids", []),
+            f"{label}.archetype_ids",
+            errors,
+        ):
+            _validate_id(archetype_id, f"{label}.archetype_ids", errors)
+            if archetype_id not in archetype_ids:
+                errors.append(
+                    f"{label} references unknown combat archetype {archetype_id!r}"
+                )
+
+        participants = raw.get("participants")
+        if not isinstance(participants, list):
+            errors.append(f"{label}.participants must be a list")
+            continue
+
+        seen_actor_ids: Set[str] = set()
+        for index, participant in enumerate(participants):
+            item_label = f"{label}.participants[{index}]"
+            if not isinstance(participant, Mapping):
+                errors.append(f"{item_label} must be an object")
+                continue
+            errors.extend(
+                _unknown_field_errors(
+                    participant,
+                    _ENCOUNTER_PARTICIPANT_FIELDS,
+                    item_label,
+                )
+            )
+            actor_id = participant.get("actor_id")
+            _validate_id(actor_id, f"{item_label}.actor_id", errors)
+            if isinstance(actor_id, str):
+                if actor_id in seen_actor_ids:
+                    errors.append(
+                        f"{label} has duplicate participant actor_id {actor_id}"
+                    )
+                seen_actor_ids.add(actor_id)
+
+            archetype_id = participant.get("archetype_id")
+            if archetype_id is not None:
+                _validate_id(archetype_id, f"{item_label}.archetype_id", errors)
+                if isinstance(archetype_id, str) and archetype_id not in archetype_ids:
+                    errors.append(
+                        f"{item_label} references unknown combat archetype "
+                        f"{archetype_id!r}"
+                    )
+            persistent_ref = participant.get("persistent_ref")
+            if persistent_ref is not None:
+                _validate_id(
+                    persistent_ref,
+                    f"{item_label}.persistent_ref",
+                    errors,
+                )
+            faction_id = participant.get("faction_id")
+            if faction_id is not None:
+                _validate_id(faction_id, f"{item_label}.faction_id", errors)
+            if "required" in participant and not isinstance(
+                participant["required"], bool
+            ):
+                errors.append(f"{item_label}.required must be boolean")
+
+            for action_id in _validate_text_list(
+                participant.get("action_ids", []),
+                f"{item_label}.action_ids",
+                errors,
+            ):
+                _validate_id(action_id, f"{item_label}.action_ids", errors)
+                if action_id not in action_ids:
+                    errors.append(
+                        f"{item_label} references unknown combat action "
+                        f"{action_id!r}"
+                    )
+            _validate_text_list(
+                participant.get("tags", []),
+                f"{item_label}.tags",
+                errors,
+            )
+
+            zone_id = participant.get("deployment_zone")
+            if zone_id is not None:
+                _validate_id(zone_id, f"{item_label}.deployment_zone", errors)
+                parsed_map = parsed_maps.get(map_id)
+                if (
+                    parsed_map is not None
+                    and isinstance(zone_id, str)
+                    and zone_id
+                    not in {zone.zone_id for zone in parsed_map.deployment_zones}
+                ):
+                    errors.append(
+                        f"{item_label} references unknown deployment zone "
+                        f"{zone_id!r}"
+                    )
+
+    return errors
+
+
+def validate_tactical_content(
+    tactical_maps: Any,
+    combat_actions: Any,
+    combat_actor_archetypes: Any,
+    encounters: Any,
+    world_map: Any = None,
+) -> List[str]:
+    """Validate optional D-069 tactical authored sections as one cross-ref set."""
+
+    errors: List[str] = []
+    errors.extend(validate_tactical_maps(tactical_maps))
+    errors.extend(validate_combat_actions(combat_actions))
+    errors.extend(
+        validate_combat_actor_archetypes(
+            combat_actor_archetypes,
+            combat_actions,
+        )
+    )
+    errors.extend(
+        validate_encounters(
+            encounters,
+            tactical_maps,
+            combat_actions,
+            combat_actor_archetypes,
+            world_map,
+        )
+    )
+    return errors
+
+
 def validate_content_pack(
     scenes: Mapping[str, Dict[str, Any]],
     quests: Mapping[str, Mapping[str, Any]] | None = None,
     powers: Mapping[str, Mapping[str, Any]] | None = None,
     registries: Mapping[str, Mapping[str, Any]] | None = None,
     world_map: Mapping[str, Any] | None = None,
+    *,
+    tactical_maps: Mapping[str, Mapping[str, Any]] | None = None,
+    combat_actions: Mapping[str, Mapping[str, Any]] | None = None,
+    combat_actor_archetypes: Mapping[str, Mapping[str, Any]] | None = None,
+    encounters: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> List[str]:
     """Validate scenes, quest/power definitions, and authored cross-references."""
     from .powers import validate_power_definitions
@@ -670,6 +1114,15 @@ def validate_content_pack(
     errors.extend(validate_quest_definitions(quest_definitions))
     errors.extend(validate_power_definitions(power_definitions))
     errors.extend(validate_world_map(world_map, scenes))
+    errors.extend(
+        validate_tactical_content(
+            {} if tactical_maps is None else tactical_maps,
+            {} if combat_actions is None else combat_actions,
+            {} if combat_actor_archetypes is None else combat_actor_archetypes,
+            {} if encounters is None else encounters,
+            world_map,
+        )
+    )
 
     quest_lookup = quest_definitions if isinstance(quest_definitions, Mapping) else {}
     power_lookup = power_definitions if isinstance(power_definitions, Mapping) else {}
@@ -840,7 +1293,22 @@ def assert_valid_content_pack(
     powers: Mapping[str, Mapping[str, Any]] | None = None,
     registries: Mapping[str, Mapping[str, Any]] | None = None,
     world_map: Mapping[str, Any] | None = None,
+    *,
+    tactical_maps: Mapping[str, Mapping[str, Any]] | None = None,
+    combat_actions: Mapping[str, Mapping[str, Any]] | None = None,
+    combat_actor_archetypes: Mapping[str, Mapping[str, Any]] | None = None,
+    encounters: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> None:
-    errors = validate_content_pack(scenes, quests, powers, registries, world_map)
+    errors = validate_content_pack(
+        scenes,
+        quests,
+        powers,
+        registries,
+        world_map,
+        tactical_maps=tactical_maps,
+        combat_actions=combat_actions,
+        combat_actor_archetypes=combat_actor_archetypes,
+        encounters=encounters,
+    )
     if errors:
         raise RuleError("Invalid authored content pack:\n- " + "\n- ".join(errors))
