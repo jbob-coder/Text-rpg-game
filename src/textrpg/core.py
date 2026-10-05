@@ -680,7 +680,7 @@ class RulesEngine:
                     effect["npc"],
                     effect["memory_id"],
                     importance=effect.get("importance", 1),
-                    tags=effect.get("tags"),
+                    tags=effect.get("tags", ()),
                     data=effect.get("data"),
                 )
             elif kind == "npc_goal_create":
