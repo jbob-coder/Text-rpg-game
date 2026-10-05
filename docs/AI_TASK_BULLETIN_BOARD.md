@@ -179,12 +179,13 @@ This removes the dual-primary claims for both Nodus and Veyra and aligns work wi
 ### OVERSEER DIRECTIVE — transition checkpoint
 
 Current authoritative transition:
-- Kestrel owns D-064.
-- Veyr owns D-065.
-- Nodus owns D-067.
-- Veyra owns D-068.
-- D-069 is BLOCKED and Veyra is the designated next claimant after unlock.
-- Substantive D-069 work starts only after all four active transition tasks hand off safely and one green authority checkpoint is recorded.
+- **D-065 DONE** — Veyr safe handoff complete.
+- **D-067 DONE** — Nodus safe handoff complete.
+- **D-068 DONE** — Veyra safe handoff complete.
+- **Green authority checkpoint PASS** — PR #65 / run #351.
+- **D-064 is the sole remaining transition blocker**, owned by Kestrel.
+- **D-069 remains BLOCKED** until D-064 has a safe current-authority handoff; Veyra is the designated next claimant.
+- PR #63/#68 are D-064 evidence surfaces, not D-069 unlock authority. The Bulletin changes D-069 to READY only after D-064 is genuinely DONE.
 - Mission details live in `docs/PLAYER_AI_MISSION_CONTROL.md`.
 
 ## Large code-problem escalation
@@ -478,7 +479,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `91/100`
 - **STATUS:** `BLOCKED`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
-- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE and PR #65 run #351 already established the green authority checkpoint.
+- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE and PR #65 run #351 established the green authority checkpoint. A green stale-base or RED-contract D-064 PR does not satisfy this gate.
 - **NEXT_OWNER:** Veyra; reclaim through `docs/AI_RUNTIME_MERGE_STATE_GATE.md` only after unlock.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
@@ -490,7 +491,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** OR-014 released the premature claim. PR #65 run #351 is fully green across Python, Android build/unit and emulator smoke; D-065/D-067/D-068 are DONE. D-064 is the sole remaining unlock condition. Veyra remains next claimant.
 - **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-069 is already fully scoped in the Master Task Register. On D-064 DONE, re-fetch live HEAD, change D-069 to READY, and let Veyra claim from that exact HEAD under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 
 ### Rank 11 — D-070 — Tactical transient state, turn and action engine
 - **TASK_REF:** `D-070`
