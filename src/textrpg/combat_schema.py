@@ -343,3 +343,315 @@ class TacticalMap:
                 ),
             )
         )
+
+
+_MAP_FIELDS = {
+    "map_id",
+    "version",
+    "width",
+    "height",
+    "z_layers",
+    "default_cell",
+    "overrides",
+    "transitions",
+    "deployment_zones",
+    "objective_anchors",
+    "exits",
+}
+_CELL_FIELDS = {
+    "terrain_id",
+    "movement_cost",
+    "blocks_movement",
+    "blocks_los",
+    "los_blocked_edges",
+    "cover",
+    "concealment",
+    "hazard_ids",
+    "tags",
+}
+_TRANSITION_FIELDS = {"from", "to", "cost", "bidirectional"}
+
+
+def _mapping(value: object, label: str) -> dict:
+    from collections.abc import Mapping
+
+    if not isinstance(value, Mapping):
+        raise ValueError(f"{label} must be an object")
+    return dict(value)
+
+
+def _reject_unknown_fields(
+    record: dict,
+    allowed: set[str],
+    label: str,
+) -> None:
+    unknown = sorted(set(record) - allowed)
+    if unknown:
+        raise ValueError(
+            f"{label} has unsupported fields: {', '.join(str(item) for item in unknown)}"
+        )
+
+
+def _text_tuple(value: object, label: str) -> tuple[str, ...]:
+    if value is None:
+        return ()
+    if not isinstance(value, list):
+        raise ValueError(f"{label} must be a list")
+    result = tuple(value)
+    if any(not isinstance(item, str) or not item for item in result):
+        raise ValueError(f"{label} must contain non-empty text")
+    if len(set(result)) != len(result):
+        raise ValueError(f"{label} cannot contain duplicates")
+    return result
+
+
+def _cell_from_mapping(
+    coord: TacticalCoord,
+    value: object,
+    label: str,
+) -> TacticalCell:
+    record = _mapping(value, label)
+    _reject_unknown_fields(record, _CELL_FIELDS, label)
+
+    cover_raw = record.get("cover", {})
+    cover_mapping = _mapping(cover_raw, f"{label}.cover")
+    cover = tuple((str(edge), rating) for edge, rating in cover_mapping.items())
+
+    return TacticalCell(
+        coord=coord,
+        terrain_id=record.get("terrain_id"),
+        movement_cost=record.get("movement_cost", 1),
+        blocks_movement=record.get("blocks_movement", False),
+        blocks_los=record.get("blocks_los", False),
+        los_blocked_edges=_text_tuple(
+            record.get("los_blocked_edges", []),
+            f"{label}.los_blocked_edges",
+        ),
+        cover=cover,
+        concealment=record.get("concealment", 0),
+        hazard_ids=_text_tuple(
+            record.get("hazard_ids", []),
+            f"{label}.hazard_ids",
+        ),
+        tags=_text_tuple(record.get("tags", []), f"{label}.tags"),
+    )
+
+
+def _coord_from_value(value: object, label: str) -> TacticalCoord:
+    if not isinstance(value, str):
+        raise ValueError(f"{label} must be an x,y,z coordinate key")
+    try:
+        return TacticalCoord.from_key(value)
+    except ValueError as exc:
+        raise ValueError(f"{label} is invalid: {exc}") from exc
+
+
+def parse_tactical_map_definition(
+    map_id: str,
+    value: object,
+) -> TacticalMap:
+    """Parse one strict sparse authored map into canonical immutable cells."""
+
+    _require_stable_id(map_id, "tactical map id")
+    record = _mapping(value, f"tactical_maps.{map_id}")
+    _reject_unknown_fields(record, _MAP_FIELDS, f"tactical_maps.{map_id}")
+
+    required = {
+        "map_id",
+        "version",
+        "width",
+        "height",
+        "z_layers",
+        "default_cell",
+        "overrides",
+        "transitions",
+        "deployment_zones",
+        "objective_anchors",
+        "exits",
+    }
+    missing = sorted(required - set(record))
+    if missing:
+        raise ValueError(
+            f"tactical_maps.{map_id} missing required fields: {', '.join(missing)}"
+        )
+    if record["map_id"] != map_id:
+        raise ValueError(
+            f"tactical_maps.{map_id}.map_id must equal mapping key {map_id}"
+        )
+
+    version = _require_positive_int(record["version"], f"tactical_maps.{map_id}.version")
+    width = _require_positive_int(record["width"], f"tactical_maps.{map_id}.width")
+    height = _require_positive_int(record["height"], f"tactical_maps.{map_id}.height")
+
+    z_raw = record["z_layers"]
+    if not isinstance(z_raw, list) or not z_raw:
+        raise ValueError(f"tactical_maps.{map_id}.z_layers must be a non-empty list")
+    z_layers = tuple(
+        _require_plain_int(layer, f"tactical_maps.{map_id}.z_layers[{index}]")
+        for index, layer in enumerate(z_raw)
+    )
+    if len(set(z_layers)) != len(z_layers):
+        raise ValueError(f"tactical_maps.{map_id}.z_layers cannot contain duplicates")
+
+    default_cell = _mapping(
+        record["default_cell"],
+        f"tactical_maps.{map_id}.default_cell",
+    )
+    _reject_unknown_fields(
+        default_cell,
+        _CELL_FIELDS,
+        f"tactical_maps.{map_id}.default_cell",
+    )
+    overrides = _mapping(
+        record["overrides"],
+        f"tactical_maps.{map_id}.overrides",
+    )
+
+    override_by_coord: dict[TacticalCoord, dict] = {}
+    for raw_coord, override in overrides.items():
+        coord = _coord_from_value(
+            raw_coord,
+            f"tactical_maps.{map_id}.overrides key",
+        )
+        if coord in override_by_coord:
+            raise ValueError(
+                f"tactical_maps.{map_id}.overrides duplicates coordinate {coord.key}"
+            )
+        override_record = _mapping(
+            override,
+            f"tactical_maps.{map_id}.overrides.{coord.key}",
+        )
+        _reject_unknown_fields(
+            override_record,
+            _CELL_FIELDS,
+            f"tactical_maps.{map_id}.overrides.{coord.key}",
+        )
+        if not (
+            0 <= coord.x < width
+            and 0 <= coord.y < height
+            and coord.z in z_layers
+        ):
+            raise ValueError(
+                f"tactical_maps.{map_id}.overrides coordinate out of bounds: "
+                f"{coord.key}"
+            )
+        override_by_coord[coord] = override_record
+
+    cells: list[TacticalCell] = []
+    for z in z_layers:
+        for y in range(height):
+            for x in range(width):
+                coord = TacticalCoord(x, y, z)
+                merged = dict(default_cell)
+                merged.update(override_by_coord.get(coord, {}))
+                cells.append(
+                    _cell_from_mapping(
+                        coord,
+                        merged,
+                        f"tactical_maps.{map_id}.cells.{coord.key}",
+                    )
+                )
+
+    transitions_raw = _mapping(
+        record["transitions"],
+        f"tactical_maps.{map_id}.transitions",
+    )
+    transitions: list[TacticalTransition] = []
+    for transition_id, transition_value in transitions_raw.items():
+        _require_stable_id(transition_id, "tactical transition id")
+        transition_record = _mapping(
+            transition_value,
+            f"tactical_maps.{map_id}.transitions.{transition_id}",
+        )
+        _reject_unknown_fields(
+            transition_record,
+            _TRANSITION_FIELDS,
+            f"tactical_maps.{map_id}.transitions.{transition_id}",
+        )
+        missing_transition = {"from", "to"} - set(transition_record)
+        if missing_transition:
+            raise ValueError(
+                f"tactical_maps.{map_id}.transitions.{transition_id} missing "
+                f"required fields: {', '.join(sorted(missing_transition))}"
+            )
+        transitions.append(
+            TacticalTransition(
+                transition_id=transition_id,
+                start=_coord_from_value(
+                    transition_record["from"],
+                    f"tactical_maps.{map_id}.transitions.{transition_id}.from",
+                ),
+                end=_coord_from_value(
+                    transition_record["to"],
+                    f"tactical_maps.{map_id}.transitions.{transition_id}.to",
+                ),
+                cost=transition_record.get("cost", 1),
+                bidirectional=transition_record.get("bidirectional", True),
+            )
+        )
+
+    zones_raw = _mapping(
+        record["deployment_zones"],
+        f"tactical_maps.{map_id}.deployment_zones",
+    )
+    deployment_zones: list[TacticalZone] = []
+    for zone_id, zone_value in zones_raw.items():
+        _require_stable_id(zone_id, "deployment zone id")
+        if not isinstance(zone_value, list):
+            raise ValueError(
+                f"tactical_maps.{map_id}.deployment_zones.{zone_id} must be a list"
+            )
+        deployment_zones.append(
+            TacticalZone(
+                zone_id,
+                tuple(
+                    _coord_from_value(
+                        item,
+                        f"tactical_maps.{map_id}.deployment_zones."
+                        f"{zone_id}[{index}]",
+                    )
+                    for index, item in enumerate(zone_value)
+                ),
+            )
+        )
+
+    def parse_anchors(field: str) -> tuple[TacticalAnchor, ...]:
+        raw = _mapping(record[field], f"tactical_maps.{map_id}.{field}")
+        anchors: list[TacticalAnchor] = []
+        for anchor_id, coord_value in raw.items():
+            _require_stable_id(anchor_id, f"{field} id")
+            anchors.append(
+                TacticalAnchor(
+                    anchor_id,
+                    _coord_from_value(
+                        coord_value,
+                        f"tactical_maps.{map_id}.{field}.{anchor_id}",
+                    ),
+                )
+            )
+        return tuple(anchors)
+
+    return TacticalMap(
+        map_id=map_id,
+        version=version,
+        width=width,
+        height=height,
+        z_layers=z_layers,
+        cells=tuple(cells),
+        transitions=tuple(transitions),
+        deployment_zones=tuple(deployment_zones),
+        objective_anchors=parse_anchors("objective_anchors"),
+        exits=parse_anchors("exits"),
+    )
+
+
+def parse_tactical_maps(value: object) -> dict[str, TacticalMap]:
+    """Parse the optional top-level tactical map mapping."""
+
+    records = _mapping(value, "tactical_maps")
+    parsed: dict[str, TacticalMap] = {}
+    for map_id, definition in records.items():
+        if not isinstance(map_id, str):
+            raise ValueError("tactical map IDs must be text")
+        parsed[map_id] = parse_tactical_map_definition(map_id, definition)
+    return parsed
