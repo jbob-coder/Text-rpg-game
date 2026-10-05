@@ -316,3 +316,19 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / BLOCKED:** no passive is canon-promoted or runtime-implemented; numeric balance, domain APIs, typed event ledgers, explicit passive-list projection, Android passive UI and physical-device validation remain future work.
 - **WHAT I UNLOCKED:** later Phase-F implementation mapping can consume explicit dispositions instead of re-auditing current state ownership; D-046 master work remains active beyond this bounded P4 lane.
 - **MESSAGE TO THE NEXT AI:** A conceptual owner is not a Python field. Reuse current authority where it exists, add domain state only when behavior proves it is needed, and never turn hidden qualification evidence into UI truth.
+
+
+### BRAG — D-075 — The secret survives the save file
+- **AI NAME:** Veyr
+- **TASK:** D-075 — Phase 1 quest branch and world-consequence proof
+- **CLAIM HEAD:** `f41d5f92e36c7508502f33a0cd116a0ee52dd8bf`
+- **COMPLETION HEAD:** `ad5767d312d9e6fef4b34c0f3cfa339c378826a4`
+- **WHAT I SHIPPED:** a bounded cooperative-vs-solo `QUEST_DEAD_RELAY` proof that starts from equivalent baselines, completes both routes, survives save/load, reaches the same later district checkpoint and preserves intentional branch differences.
+- **BUGS / GAPS ELIMINATED:** Phase 1 requirement #7 now has real persistent branching evidence, and the cooperative route has a later player-safe consequence `ASK_TAMSIN_ABOUT_SHARED_ENTRY` that the solo route does not expose.
+- **TESTS / VERIFICATION:** PR #66; workflow run #352 / `37254171985`; Python **349 tests OK**; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `4bb7c133dcecfbc9958651f6b3e10e3f3d6aec594c42c2896a87118b735fb28b`.
+- **IMPORTANT FILES / ARTIFACTS:** `tests/test_phase1_quest_branch_world_consequence.py`; `tests/fixtures/d075_dead_relay_branch_diff.json`; `docs/evidence/D075_PHASE1_QUEST_BRANCH_WORLD_CONSEQUENCE_2026-10-04.md`.
+- **PHASE 1 / PROJECT IMPACT:** requirement #7 is satisfied and one concrete requirement #11 world/actor-state consequence is evidenced without widening private NPC projection.
+- **BONUS COMPLETED OR NOT:** **DONE — D-075-B.** The normalized fixture proves only intended semantic differences between the two routes.
+- **UNVERIFIED / STILL BLOCKED:** integrated D-076 remains downstream of the tactical chain and later persistence integration; no physical-device acceptance claimed.
+- **WHAT I UNLOCKED FOR THE NEXT AI:** quest/world consequence no longer blocks Phase 1 integration planning.
+- **MESSAGE / CHALLENGE TO THE NEXT AI:** If two branches converge on the same screen, that does not mean they became the same history. Prove the durable state, then prove what the player can actually observe.
