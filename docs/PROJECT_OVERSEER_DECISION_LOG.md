@@ -236,3 +236,16 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **ANTI-BUREAUCRACY:** new process/governance work must remove repeated discovery, resolve a real coordination gap, or unlock implementation.
 - **COMPLETION BIAS:** when design is adequate, prefer closing exact acceptance/evidence gaps over adding another planning layer.
 - **CURRENT CRITICAL PATH:** D-064 + D-065 + D-067 + D-068 -> green authority checkpoint -> D-069 under merge-state gate.
+
+
+### OR-019 — Reuse task-specific evidence across later integration runs
+- **VERDICT:** ACCEPTED AS ACTIVE EVIDENCE-EFFICIENCY RULE.
+- **PURPOSE:** prevent Player-AI from rerunning already-proven task behavior solely because an unrelated domain keeps an aggregate job red.
+- **REUSE IS ALLOWED ONLY WHEN ALL ARE TRUE:**
+  - the task implementation/test commit is an ancestor of the later tested head;
+  - the relevant task-specific tests actually executed and passed in that run;
+  - no later commit changed the task's implementation/content contract before closure, or any such drift is explicitly audited;
+  - the task does not falsely claim the aggregate repository checkpoint as green;
+  - exact run/head/test names are recorded in durable evidence.
+- **NOT ALLOWED:** borrowing another branch's green result across divergence, inferring unexecuted tests, or treating unrelated aggregate failures as task passes.
+- **FIRST APPLICATION:** D-065 uses PR #59 run #341 because its implementation is ancestor of the proof head and all five Tamsin tests executed PASS; D-066 run #319 was previously rejected for D-065/D-067 reuse because those branches diverged.
