@@ -398,6 +398,19 @@ class RulesEngine:
                 npc = state.npcs.get(condition["npc"], {})
                 if condition["knowledge_id"] in npc.get("knowledge", {}):
                     return False
+            elif kind in {"npc_remembers", "npc_not_remembers"}:
+                from .social import npc_remembers
+
+                remembers = npc_remembers(
+                    state,
+                    condition["npc"],
+                    condition.get("memory_id"),
+                    tags=condition.get("tags", ()),
+                )
+                if kind == "npc_remembers" and not remembers:
+                    return False
+                if kind == "npc_not_remembers" and remembers:
+                    return False
             elif kind == "party_has":
                 if condition["npc"] not in state.party:
                     return False
@@ -534,10 +547,14 @@ class RulesEngine:
             elif kind == "set_player":
                 _set_path(state.player, effect["path"], effect["value"])
             elif kind == "relationship":
-                npc = state.relationships.setdefault(effect["npc"], {})
-                axis = effect["axis"]
-                value = float(npc.get(axis, 0)) + float(effect["value"])
-                npc[axis] = max(-100.0, min(100.0, value))
+                from .social import adjust_relationship
+
+                adjust_relationship(
+                    state,
+                    effect["npc"],
+                    {effect["axis"]: effect["value"]},
+                    source=effect.get("source", "authored_scene"),
+                )
             elif kind == "learn":
                 state.knowledge[effect["knowledge_id"]] = {
                     "source": effect.get("source", "unknown"),
@@ -602,13 +619,28 @@ class RulesEngine:
                     reason=effect.get("reason", "authored_scene"),
                 )
             elif kind == "npc_learn":
-                npc = state.npcs.setdefault(effect["npc"], {})
-                knowledge = npc.setdefault("knowledge", {})
-                knowledge[effect["knowledge_id"]] = {
-                    "source": effect.get("source", "unknown"),
-                    "confidence": effect.get("confidence", 1.0),
-                    "turn_learned": state.turn,
-                }
+                from .social import npc_learn
+
+                npc_learn(
+                    state,
+                    effect["npc"],
+                    effect["knowledge_id"],
+                    source=effect.get("source", "unknown"),
+                    confidence=effect.get("confidence", 1.0),
+                    truth=effect.get("truth", "unknown"),
+                    secrecy=effect.get("secrecy", 0),
+                )
+            elif kind == "npc_memory_add":
+                from .social import add_memory
+
+                add_memory(
+                    state,
+                    effect["npc"],
+                    effect["memory_id"],
+                    importance=effect.get("importance", 1),
+                    tags=effect.get("tags", ()),
+                    data=effect.get("data"),
+                )
             elif kind == "npc_goal_create":
                 from .social import set_goal
 
