@@ -1346,7 +1346,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-063-B` not separately completed; the primary packet contains only the compatibility mapping required for implementation.
 
 ### TASK D-064 — Implement player-safe room/actor projection
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `IN_PROGRESS / CLAIMED BY KESTREL / VERIFICATION-HANDOFF PHASE`
 - PRIORITY: `P0 / RANK 5`
 - DEPENDS_ON: D-060; D-030 contract/migration map.
 - PURPOSE: implement D-030's bounded room/actor projection migration while preserving hidden-state/privacy and opening-story equivalence.
@@ -1354,7 +1354,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
 
 ### TASK D-065 — Implement Tamsin durable-memory reactive proof
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `IN_PROGRESS / CLAIMED BY VEYR / VERIFICATION-HANDOFF PHASE`
 - PRIORITY: `P0 / RANK 6`
 - DEPENDS_ON: D-062; D-064 recommended before Android presentation changes.
 - PURPOSE: satisfy the missing durable-memory/later-reaction portion of Phase 1 recurring-NPC proof.
@@ -1391,7 +1391,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-066-B` **DONE** — deterministic save-boundary progression replay.
 - LIMITATION: no physical-device validation is claimed.
 ### TASK D-067 — Verify Phase 1 inventory/equipment loop on exact HEAD
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `IN_PROGRESS / CLAIMED BY NODUS / EXACT-HEAD INTEGRATION PROOF`
 - PRIORITY: `P0 / RANK 8`
 - DEPENDS_ON: D-063.
 - PURPOSE: prove current obtain/possess/use/equip mutation, persistence and Android presentation as one integrated Phase 1 loop.
