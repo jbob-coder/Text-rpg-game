@@ -625,17 +625,18 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-045`
 - **PRIORITY:** `P0 PARALLEL`
 - **IMPORTANCE:** `90/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **DOMAIN:** full-game progression / classes / professions / ranks.
 - **DEPENDENCIES:** existing D-045 authority; no dependency on D-060 completion.
-- **ACCEPTANCE:** complete one bounded next D-045 child at reconstruction depth; preserve CURRENT/TARGET/PROPOSAL separation; do not implement runtime or override D-061.
-- **BONUS:** dependency map from classes/professions/ranks to skills, training, facilities and tactical roles.
+- **ACCEPTANCE:** **SATISFIED** — one bounded next D-045 child is reconstruction-grade, cross-referenced, preserves CURRENT/TARGET/PROPOSAL separation, and does not implement runtime or override D-061.
+- **BONUS:** **DONE** — dependency map links classes to all 23 current skills, training/facility families and tactical-role owners.
 - **CLAIMED_BY:** Veyra
 - **CLAIMED_AT:** 2026-10-04 AST
 - **CLAIM_HEAD:** `21526a9d97a76b85f2540f441bead56593fd0e0e`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** P3 claim; next bounded child is the combat class catalog from the existing D-045 NEXT sequence.
+- **COMPLETION_HEAD:** `84f1925e671f8ae352509c2cdaf12dc89f617573`
+- **EVIDENCE:** `docs/systems/COMBAT_CLASS_CATALOG.md`; validation found 23/23 current-skill matrix rows with zero missing/extra entries and one complete record for each of the seven target class families; synchronized parent progression authority, systems index, D-045 master task and master documentation record.
 - **BRAG_CARD:** pending
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-045 next sequence now begins with the Profession / Rank / Status namespace packet; Parallel P4 remains independently READY.
 
 ### Parallel P4 — D-046 — Status / ability / passive Phase-C refinement
 - **TASK_REF:** `D-046`
