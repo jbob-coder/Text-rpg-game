@@ -22,12 +22,15 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.test.platform.io.PlatformTestStorageRegistry
+import com.thegame.rpg.engine.GameAbility
+import com.thegame.rpg.engine.GameAbilityResource
 import com.thegame.rpg.engine.GameAttribute
 import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameInventory
 import com.thegame.rpg.engine.GameInventoryItem
 import com.thegame.rpg.engine.GameResource
 import com.thegame.rpg.engine.GameSkill
+import com.thegame.rpg.engine.GameTechnique
 import com.thegame.rpg.engine.GameSnapshot
 import com.thegame.rpg.engine.GameStatusContribution
 import com.thegame.rpg.engine.GameVisuals
@@ -384,6 +387,58 @@ class CharacterStatsSectionTest {
         composeRule.onAllNodesWithTag("skills-category-knowledge").assertCountEquals(1)
         composeRule.onAllNodesWithTag("skill-row-technical_systems").assertCountEquals(1)
         saveScreenshot("skills-320dp", "skills-matrix")
+    }
+
+    @Test
+    fun statsShowsOnlyProjectedAbilityProgressionData() {
+        val progressed = snapshot.copy(
+            abilities = listOf(
+                GameAbility(
+                    id = "ABILITY_TRACE_ECHO",
+                    name = "Trace Echo",
+                    rank = 0,
+                    masteryStage = "discovered",
+                    masteryXp = 2.8,
+                    form = "latent_trace",
+                    state = "ready",
+                    resource = GameAbilityResource(
+                        label = "Trace Resonance",
+                        current = 10.0,
+                        max = 10.0,
+                        recoveryPerHour = 2.0,
+                    ),
+                    techniques = listOf(
+                        GameTechnique(
+                            id = "TECHNIQUE_SIGNAL_PULSE",
+                            name = "Signal Pulse",
+                            stage = "discovered",
+                            masteryXp = 8.0,
+                            uses = 0,
+                            ready = true,
+                            cooldownRemainingMinutes = 0,
+                        )
+                    ),
+                )
+            ),
+        )
+
+        composeRule.setContent {
+            PixelTheme {
+                Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
+                    StatsSection(progressed)
+                }
+            }
+        }
+
+        composeRule.onNodeWithTag("abilities-panel").performScrollTo().assertIsDisplayed()
+        composeRule.onNodeWithTag("ability-ABILITY_TRACE_ECHO").performScrollTo().assertIsDisplayed()
+        composeRule.onNodeWithText("Trace Echo").assertIsDisplayed()
+        composeRule.onNodeWithText("Rank 0 • discovered • 2.8 mastery").assertIsDisplayed()
+        composeRule.onNodeWithText("Trace Resonance: 10/10").assertIsDisplayed()
+        composeRule.onNodeWithTag(
+            "ability-ABILITY_TRACE_ECHO-technique-TECHNIQUE_SIGNAL_PULSE"
+        ).performScrollTo().assertIsDisplayed()
+        composeRule.onNodeWithText("Signal Pulse: discovered • 8 mastery").assertIsDisplayed()
     }
 
     @Test
