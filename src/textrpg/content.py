@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass, fields
 from pathlib import Path
 from typing import Any, Dict, Mapping
@@ -126,8 +127,42 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
     )
 
 
+def _apply_room_presence_sidecar(source: Path, data: Any) -> Any:
+    """Merge optional authored room-presence records into scene definitions before validation."""
+    sidecar = source.with_name(f"{source.stem}_room_presence.json")
+    if not sidecar.exists():
+        return data
+    if not isinstance(data, Mapping):
+        return data
+    try:
+        presence = loads_strict_json(sidecar.read_text(encoding="utf-8"))
+    except OSError as exc:
+        raise RuleError(f"Could not read room presence sidecar: {sidecar}") from exc
+    except ValueError as exc:
+        raise RuleError(f"Invalid strict JSON room presence sidecar: {sidecar}") from exc
+    if not isinstance(presence, Mapping):
+        raise RuleError("Room presence sidecar must be an object keyed by scene ID")
+
+    merged = deepcopy(dict(data))
+    scenes = merged.get("scenes")
+    if not isinstance(scenes, dict):
+        raise RuleError("Room presence sidecar requires content scenes object")
+    for scene_id, actors in presence.items():
+        if not isinstance(scene_id, str) or not scene_id:
+            raise RuleError("Room presence sidecar scene IDs must be non-empty text")
+        scene = scenes.get(scene_id)
+        if not isinstance(scene, dict):
+            raise RuleError(f"Room presence sidecar references unknown scene: {scene_id}")
+        if "actors" in scene:
+            raise RuleError(f"Room presence sidecar duplicates inline actors for scene: {scene_id}")
+        if not isinstance(actors, list):
+            raise RuleError(f"Room presence sidecar actors must be a list: {scene_id}")
+        scene["actors"] = deepcopy(actors)
+    return merged
+
+
 def load_content_pack(path: str | Path) -> LoadedContentPack:
-    """Load UTF-8 JSON authored content from disk and instantiate it safely."""
+    """Load UTF-8 JSON authored content and its optional room-presence sidecar safely."""
     source = Path(path)
     try:
         data = loads_strict_json(source.read_text(encoding="utf-8"))
@@ -135,4 +170,4 @@ def load_content_pack(path: str | Path) -> LoadedContentPack:
         raise RuleError(f"Could not read content pack: {source}") from exc
     except ValueError as exc:
         raise RuleError(f"Invalid strict JSON content pack: {source}") from exc
-    return content_pack_from_mapping(data)
+    return content_pack_from_mapping(_apply_room_presence_sidecar(source, data))
