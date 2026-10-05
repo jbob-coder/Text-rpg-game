@@ -214,3 +214,17 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - **STILL UNKNOWN / BLOCKED:** no physical-device acceptance is claimed here. Dynamic world-position authority remains outside D-064; `placementKey` is a presentation adapter, not durable simulation coordinates.
 - **NEXT PLAYER SHORTCUT:** if an actor should appear or move, start by asking “is this actor in the player-safe room projection?”—do not patch `PixelStoryActorCatalog` with another scene-ID special case.
 - **SUPPORTING ARTIFACT:** `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`; CPR-002 for the strict-key lesson.
+
+
+### P5 / D-042 — Raster-first presentation changes the migration unit
+- **PLAYER-AI:** Quorix
+- **AUTHORITY / AUDIT HEAD:** `f5c3731d0c494dd3948f88481a3d5b2d3d0f4138`; P5 evidence accepted as a bounded cross-branch audit, not runtime promotion.
+- **READ FIRST:** `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`; `docs/IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md`; `android/app/src/main/java/com/thegame/rpg/ui/PixelRasterCatalog.kt`; `android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt`; `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`.
+- **DO NOT REDISCOVER:** D-064, D-065/D-068 and D-067 completion heads are in authority ancestry. The still-divergent visual survivor slice is PR #27/#28/#30/#31. #27/#30 static scene source+raster pairs remain D-029 candidates; #28 is a deferred arrival-preview composition; #31 is an ambient-animation candidate that must be reimplemented before migration.
+- **OWNER OF BEHAVIOR:** `PixelRasterCatalog.scene(locationId)` owns the primary current scene-raster binding; `SceneIllustration` renders that raster first; `PixelSceneCatalog` is fallback geometry. D-029 owns asset provenance/visual promotion. D-077/later V11 presentation owns future Android consumption where applicable.
+- **TRAP / FALSE ASSUMPTION:** changing `PixelSceneCatalog` alone does not necessarily change the visible Service Tunnel or Quiet Stair. Current rendering is raster-first, so a code-only transplant can look integrated while the player still sees the old PNG. Also, PR #31 advances ambient loops but does not implement the required reduced-motion path.
+- **VALIDATE WITH:** compare PR heads #27 `d19e6edb...`, #28 `b5cb5104...`, #30 `7adacd47...`, #31 `19807863...` to exact authority; inspect current raster bindings and `SceneIllustration`; parse `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_MATRIX_2026-10-05.json`.
+- **CHANGE SAFELY:** migrate a selected static scene as one source-master + raster + binding + tests/provenance unit. Reimplement #31 only after the static survivor is chosen and add explicit reduced-motion/lifecycle evidence. Never merge an old visual branch wholesale because it is newer.
+- **STILL UNKNOWN / BLOCKED:** no visual/canon winner is selected by P5; raster equivalence and owner visual approval remain D-029 boundaries. No runtime/build/emulator/device evidence was produced by this audit.
+- **NEXT PLAYER SHORTCUT:** before migrating any old presentation branch, ask “what file actually renders first on authority?” and identify the complete migration unit before comparing aesthetics.
+- **SUPPORTING ARTIFACT:** `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`; machine-readable companion `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_MATRIX_2026-10-05.json`.
