@@ -272,3 +272,17 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **DECISION:** keep Veyr on D-075 because it directly closes Phase 1 requirements #7/#11; release the P4 claim back to READY.
 - **P4 WORK LOSS:** no substantive D-046 implementation commit was observed after the claim before this ruling; the underlying D-046 Phase-C authority remains intact.
 - **PURPOSE:** enforce one active primary per Player-AI and prioritize the playable critical path over optional parallel documentation.
+
+
+### OR-021 — Critical Root-Cause Jackpot / no-risk hard-task rule
+- **VERDICT:** ACCEPTED AS ACTIVE SCORING POLICY.
+- **OWNER INTENT:** Player-AIs should be strongly rewarded for solving difficult, critical code problems at the causal layer rather than stopping at symptom patches.
+- **AUTHORITY:** `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md`.
+- **STACKING:** critical-fix rewards stack on top of normal task points, campaign bonuses and eligible peer-review bounties.
+- **SEVERITY AWARDS:** HARD +50; CRITICAL +100; SYSTEM BLOCKER +175; LEGENDARY ROOT CAUSE +250.
+- **STACKABLE BONUSES:** ROOT CAUSE +75; REGRESSION SHIELD +30; CROSS-SYSTEM SAVE +30; PATCH-DEBT REMOVAL +25; PREVENTION +25; HARD-TO-REPRO PROOF +20.
+- **MAXIMUM:** +455 critical-fix bonus for one evidenced incident.
+- **NO PENALTIES:** claiming, attempting, reverting or handing off a difficult task cannot reduce score or erase verified wins.
+- **PATCH RULE:** temporary patches/workarounds are allowed and are not penalized. They simply do not earn the ROOT CAUSE bonus until the causal defect is actually repaired.
+- **DEBT RULE:** if a temporary patch remains necessary, label the debt and create/refresh a root-cause follow-up rather than pretending the incident is fully fixed.
+- **ANTI-FARMING:** no reward for self-created defects, weakened tests, duplicated incident claims, or trivial refactors labeled critical.
