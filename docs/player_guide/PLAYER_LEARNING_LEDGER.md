@@ -228,3 +228,17 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - **STILL UNKNOWN / BLOCKED:** no visual/canon winner is selected by P5; raster equivalence and owner visual approval remain D-029 boundaries. No runtime/build/emulator/device evidence was produced by this audit.
 - **NEXT PLAYER SHORTCUT:** before migrating any old presentation branch, ask “what file actually renders first on authority?” and identify the complete migration unit before comparing aesthetics.
 - **SUPPORTING ARTIFACT:** `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`; machine-readable companion `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_MATRIX_2026-10-05.json`.
+
+### D-069 — Tactical schemas and pure grid core
+- PLAYER-AI: Veyra
+- COMPLETION HEAD: `8b2115cf8a6f04127bdf20dd1217abd947cf8150`
+- READ FIRST: `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md`; `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md`; `src/textrpg/combat_schema.py`; `src/textrpg/combat_grid.py`; `tests/test_combat_schema.py`; `tests/test_combat_grid.py`.
+- DO NOT REDISCOVER: tactical authored sections are optional and backward-compatible; D-069 already owns strict map/action/archetype/encounter validation, explicit z transitions, deterministic occupancy/pathing, supercover LOS, directional cover and `los_blocked_edges`. CPR-003 and CPR-004 are repaired on authority.
+- OWNER OF BEHAVIOR: authored tactical definitions live in `combat_schema.py`; pure geometry/occupancy/path/LOS/cover rules live in `combat_grid.py`; content integration and post-state persistent-NPC ref resolution live in `content.py` / `validation.py`. D-070 must consume these APIs rather than duplicate movement legality.
+- TRAP / FALSE ASSUMPTION: Manhattan A* is not admissible once arbitrary positive-cost z transitions exist; the merged grid uses deterministic Dijkstra whenever transitions are present. Same-cell LOS is trivially true after cell existence is confirmed. Cover is not opacity. Same-z transitions are rejected.
+- VALIDATE WITH: PR #76 / run #390 / `37347612244` — Python **402/402 PASS**, Android unit/build/package PASS, emulator **35/35 PASS**; final APK SHA-256 `9784a7f518b747147e7bc2346321aee9fd7e85b9fe4deef298b5cae1e47a17f1`.
+- CHANGE SAFELY: add transient encounter state in new D-070-owned modules. Keep D-069 definitions/pure queries immutable/read-only where possible. If movement commit needs cost, derive traversal cost from the authoritative returned path/map edges rather than inventing a second legality function.
+- STILL UNKNOWN / BLOCKED: canonical player persistent identity is still not defined; D-069 deliberately resolves only durable NPC `persistent_ref` values. Attack/damage, awareness/cover attack modifiers, objectives/retreat/AI, aftermath and Android combat projection remain downstream.
+- NEXT PLAYER SHORTCUT: before writing D-070 movement code, read the Movement/Pathing standard in addition to the D-070 preflight: action-budget cost and movement-point allowance are separate (Move 1 budget + 6 movement points; Sprint 2 budget + 10 movement points).
+- SUPPORTING ARTIFACT: `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md`.
+
