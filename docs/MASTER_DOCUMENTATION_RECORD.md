@@ -518,7 +518,7 @@ Execution of the final APK reconstruction remains intentionally gated.
    - combat class catalog;
    - profession/rank/status packet;
    - training/mentor/facility standard;
-   - Gate Twelve progression proof packet;
+   - broader progression proof/catalog coverage beyond the bounded verified D-066 Trace Echo path;
    - progression UX contract;
    - justified parent-system range/test fixtures and numeric envelopes;
    - remaining world/knowledge integration and state-owner/runtime mappings;
@@ -941,3 +941,29 @@ For items/economy specifically:
 - currency, vendors, crafting, durability, encumbrance and item-instance runtime remain deferred.
 
 D-032 completion does **not** imply those runtime tasks or Phase 1 requirements are implemented.
+
+## D-066 Phase 1 progression verification checkpoint — 2026-10-04
+
+D-066 is complete as a **bounded implementation/proof task** for Phase 1 requirement 5.
+
+Verified:
+- authored Gate Twelve Trace Echo / Signal Pulse progression remains Python-authoritative;
+- one-hour practice mutates technique mastery, ability mastery, stamina/focus and world time;
+- progression survives save/load;
+- deterministic replay matches across an inserted save boundary;
+- player-safe Python projection includes stable ability ID;
+- Android consumes typed ability/technique/resource DTOs and renders discovered progression without owning progression arithmetic;
+- Android mapper privacy guards reject authored requirement/effect structures.
+
+Evidence:
+- `docs/evidence/D066_PHASE1_PROGRESSION_PROOF_2026-10-04.md`;
+- isolated verification PR #42 at `48ce6223fb84c3d31457c7f1dacaec87ce0d3df2`;
+- Android Pixel Client run #312 / `37250124885`;
+- Android JVM tests, instrumentation compilation, debug APK build/content verification and API-35 connected suite all passed;
+- connected instrumentation: 35 / 35 tests passed;
+- APK SHA-256: `a14ee38462da6a77a159225b71d2506bb0e18a051430b3a5f90e9a291eb81d8d`.
+
+The workflow's aggregate Python job is not globally green because the unchanged room-projection test imports `pytest` while the job installs no pytest dependency. D-066's targeted progression/persistence/status tests executed successfully and no D-066 Python failure was observed.
+
+This checkpoint does not complete the full evolved progression corpus, class/profession/rank population, final balance, or final progression UX.
+
