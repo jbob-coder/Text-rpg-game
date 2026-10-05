@@ -356,3 +356,14 @@ If a survivor is later promoted into a recurring adversary, the promotion must f
 This prevents V09 scope from blocking the minimum solo playable slice.
 
 The implementation mapping now exists at `docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md`. It preserves this boundary: Phase 1 may complete without V09 runtime, and no Service Tunnel contact is auto-promoted merely to exercise the system.
+
+## D-060 control-gate update
+
+D-060 is complete as a program-control dependency.
+
+Effect on Track B:
+- the inventory/second-pass control gate no longer blocks progression, social, items, room-actor projection, activity or tactical implementation tasks whose other direct contracts are already satisfied;
+- D-060 itself proves no playable requirement;
+- each unlocked implementation/proof task must still satisfy its own save, privacy, deterministic, Android, performance and canon gates.
+
+Use `docs/AI_TASK_BULLETIN_BOARD.md` for live claim eligibility and `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` for ranked task intent.
