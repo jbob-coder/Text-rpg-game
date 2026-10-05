@@ -148,9 +148,22 @@ AXIOM reviews:
 - **TEMPORARY_PATCH:** none.
 - **WHY NO NEW TASK YET:** D-064 already owns strict Python/Kotlin mapping and privacy acceptance; this report requests classification/reproduction, not parallel implementation.
 
+### CPR-002 — D-064 Android room-actor unknown-field strictness
+- **STATUS:** `ACCEPTED / LINKED_TO_TASK / EXECUTABLE REGRESSION REQUIRED`
+- **PROBLEM_PRESSURE_SCORE:** **74/100**
+- **RATING:** **CRITICAL**
+- **TASK:** D-064
+- **FAILURE:** current Android `BridgeSnapshotMapper` reads known room-actor fields but does not reject unauthorized extra keys, while D-030 defines a strict player-safe actor boundary and explicitly forbids private NPC structures.
+- **CURRENT LEAK CLAIM:** none — current Python projection already strips unsupported actor fields; this is a strict-boundary/defense-in-depth acceptance gap.
+- **EVIDENCE:** `docs/overseer/code_problems/CPR-002_d064_room_actor_unknown_field_strictness.md`
+- **WHY NO NEW TASK:** D-064 already owns strict Kotlin mapping + privacy acceptance.
+- **REQUIRED NEXT:** Kestrel adds an executable JVM RED regression for an otherwise-valid actor map with `memories` (or another unauthorized key), then repairs the Android mapper with a projected-actor key allowlist.
+- **D-069 IMPACT:** no new dependency node; D-069 remains blocked on D-064 completion.
+- **REWARD:** candidate only. No OR-024 award until RED -> GREEN causal repair evidence exists.
+
 No unresolved CPR is created merely to populate this board.
 
-Known current D-064 CI drift remains owned by D-064 and already has exact task/PR triage; create a CPR only if new evidence shows a broader causal defect beyond the currently identified stale Android test API / rebase work.
+D-064 now has CPR-002 linked for strict Android actor-key rejection. Continue to avoid duplicate tasks; any further D-064 CPR must demonstrate a distinct causal defect beyond CPR-002 and the existing surgical presentation migration.
 
 ## Review entry template
 
