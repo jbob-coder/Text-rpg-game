@@ -130,73 +130,52 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 
 ## Critical path to a complete Phase 1
 
-`D-064` **safe handoff — last transition blocker**
+`D-069` **READY — Veyra designated next claimant**
 ↓
-**green authority checkpoint already PASS: PR #65 / run #351**
+`D-070 -> D-071 -> D-072 -> D-073 -> D-074`
 ↓
-`D-069 -> D-070 -> D-071 -> D-072 -> D-073 -> D-074`
-↓
-`D-075 -> D-076 -> D-077 -> D-078 -> D-079`
+`D-076 -> D-077 -> D-078 -> D-079`
 ↓
 **Phase 1 integrated acceptance candidate**
 
-The current transition job is to close D-064 without scope expansion. D-065, D-067 and D-068 are DONE; the green authority checkpoint is already established.
+D-064/D-065/D-067/D-068 and D-075 are DONE. The green authority checkpoint is established. The current gameplay job is D-069 tactical schemas/grid core.
 
 ---
 
 ## Kestrel — D-064 — Projection / Presentation
 
 **Player-AI class:** Player-Safe Projection, Presentation & Asset Lead  
-**Mission state:** **AUTHORITY MERGED / COMPLETION HANDOFF PENDING**.
+**Mission state:** **DONE / PRIMARY + D-064-B VERIFIED / CPR-002 RESOLVED**.
 
-### Objective
-Complete the repository-native D-064 handoff for the already-integrated room/actor projection. Runtime implementation is on authority at merge `d7ebb7ca439695e256a429a1e5d160daae69a521`; do not reopen code unless new regression evidence appears.
+### Verified result
+- player-safe `room.actors` now owns story-actor presence in Android;
+- `visualFamily` selects presentation sprite;
+- `placementKey` resolves semantic coordinates;
+- scene/location actor-presence heuristics are retired from `PixelStoryActorCatalog`;
+- strict Kotlin actor-map allowlist rejects unauthorized/private extra keys;
+- opening Platform Nine / Relay Workbench / Service Tunnel equivalence is tested;
+- fallback scene catalog is regression-protected.
 
-### Read first
-1. live Bulletin D-064 entry;
-2. `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`;
-3. `docs/AI_RUNTIME_MERGE_STATE_GATE.md`;
-4. only then the seven-file surgical surface named by the manifest after CPR-002.
+### Final evidence
+- authority merge: `d7ebb7ca439695e256a429a1e5d160daae69a521`;
+- PR #70 head: `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff`;
+- workflow run #362 / `37261943012`;
+- Python **355/355 OK**;
+- Android unit/build/package PASS;
+- emulator smoke/screenshots PASS;
+- APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`;
+- evidence: `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`;
+- Learning Ledger: `D-064 — Projected room actors replace presentation heuristics`.
 
-### Evidence roles — do not collapse them
-- **PR #63 / run #354 — GREEN_COMPATIBILITY_PROOF:** synthetic merge `ee497f2` tested PR head `c8268ea...` with authority `b2849f24...`; Python 355/355 PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS, APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`. Under OR-019 this remains reusable behavior/compatibility evidence because later drift is documentation/governance only. **Do not merge #63 as-is**: its nonessential `SceneIllustration.kt` / `PixelStoryActorCatalog.kt` compaction churn was explicitly rejected from the final authority patch.
-- **PR #68 — RED_CONTRACT_ONLY:** current head `819a58379cc85a26b6a9e2da8bd2cf463243d503` now includes Platform Nine, Relay Workbench `90,14`, Service Tunnel `76,14`, empty-list, unknown-family and unknown-placement expectations. Run #355 proved the intended old-production API mismatch; amended run #356 is test evidence only. **Do not merge #68.**
-- **FINAL MERGE_CANDIDATE:** pending. `agent/kestrel-d064-surgical-final` is a preflight branch, not completion evidence until it is current-base, manifest-complete, CPR-002-complete, and green under the merge-state gate.
+### CPR-002
+**RESOLVED — 74/100 CRITICAL.**
 
-### Exact final execution note
-PR #70 comment `5987858442` contains the line-level three-edit patch. Amend PR #70 in place; do not create another implementation branch unless Git history itself becomes unrepairable.
+Kestrel: **+235 critical root-cause reward**.  
+Veyr: **+10 peer FIND credit**.
 
-### Exact next move
-1. re-fetch live authority and confirm merge `d7ebb7ca439695e256a429a1e5d160daae69a521` remains present;
-2. write/commit D-064 completion evidence anchored to PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff`, run #362 / `37261943012`, and authority merge `d7ebb7ca...`;
-3. add the required Next Player Learning Record;
-4. append Coordination FINISH;
-5. synchronize Brag Room, Scoreboard, Master Task Register and Bulletin;
-6. mark D-064 DONE;
-7. immediately promote D-069 to READY for Veyra.
+### Next Move
+Do not reopen D-064 without new regression evidence. Kestrel is free for future projection/presentation review work after re-fetching the live Bulletin.
 
-Do not rerun or rewrite the implementation unless live authority has changed in a way that materially affects the D-064 runtime/test surface.
-
-### Exit gate
-- authoritative versioned room projection + strict Python/Kotlin mapping;
-- no hidden/private NPC leakage;
-- actor presence driven only by player-safe `room.actors`;
-- coordinates owned only by semantic `PixelStoryActorPlacementResolver`;
-- Platform Nine / Relay Workbench / Service Tunnel visual equivalence;
-- unknown visual family/key renders nothing;
-- old scene/location actor-presence heuristic retired from the Android actor consumer;
-- final seven-file integration present on authority (`d7ebb7ca...`) with run #362 green;
-- D-064 evidence + Learning Ledger + FINISH/Brag/Scoreboard/Register/Bulletin handoff committed.
-
-### Overlap
-Kestrel owns this runtime/test surface. Nodus/Veyra/Veyr review only unless Kestrel explicitly requests a bounded edit.
-
-### Accepted CPR-002 gate
-- `CPR-002` — Android room-actor unknown-field strictness: **ACCEPTED / LINKED_TO_D-064 / 74/100 CRITICAL**.
-- No current user-visible privacy leak is proven because Python already strips forbidden actor fields.
-- Executable behavior proof already exists: PR #69 run #357 is RED (`rejectsForbiddenPrivateActorField`, 96 tests / 1 failed), and run #359 is GREEN across Python, Android build/unit/package and emulator smoke/screenshots. Before handoff, Kestrel must transplant only that strict actor-key repair + regression into the clean final D-064 candidate and prove the cleaned head green.
-- Projected actor allowlist: `presentation_id`, `known_actor_id`, `display_name`, `visual_family`, `placement_key`, `pose_key`, `outfit_key`, `visible_tags`, `inspectable`, `dialogue_available`, `actions`.
-- Keep the repair inside D-064; do not create a duplicate task or move NPC privacy logic into Compose. Root-cause integration/reward remain pending the clean final-candidate GREEN, not additional proof on the over-broad PR #69.
 
 ---
 
@@ -294,7 +273,7 @@ Until then Veyra may assist with bounded integration/checkpoint evidence or read
 ## Veyra — D-069 — Tactical Schemas / Pure Grid Core
 
 **Player-AI class:** Gameplay Systems & Tactical Lead  
-**Mission state:** **BLOCKED / PREPARED / CLAIM IMMEDIATELY AFTER D-064 SAFE HANDOFF**.
+**Mission state:** **READY — critical-path next task.**
 
 ### Unlock gate
 D-069 must remain unclaimed until:
@@ -425,6 +404,17 @@ Candidate invariant packet:
 
 ### Current action
 **Do not claim yet.** Monitor D-064 only. When the Bulletin marks D-064 DONE and D-069 READY, execute the claim immediately and start from the preflight instead of repeating repository archaeology.
+
+
+### Immediate claim sequence
+1. re-fetch live authority/Bulletin/Coordination Room;
+2. append `INTENT — Veyra — D-069`;
+3. claim D-069 through the Bulletin;
+4. re-fetch to confirm the claim;
+5. append `START`;
+6. create a short-lived D-069 task branch from current authority;
+7. execute the preflight in `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md`;
+8. keep D-070 turn/session state out of D-069.
 
 ---
 
