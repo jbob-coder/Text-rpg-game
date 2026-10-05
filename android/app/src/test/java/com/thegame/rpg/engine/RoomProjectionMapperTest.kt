@@ -5,15 +5,18 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class RoomProjectionMapperTest {
-    private fun basePayload(room: Map<String, Any?>? = null): Map<String, Any?> = mapOf(
+    private fun basePayload(
+        room: Map<String, Any?>? = null,
+        location: String = "PLATFORM_NINE",
+    ): Map<String, Any?> = mapOf(
         "scene" to mapOf("id" to "PLATFORM_NINE", "title" to "Platform Nine", "body" to "Test", "choices" to emptyList<Any>()),
         "status" to mapOf("resources" to emptyList<Any>()),
-        "meta" to mapOf("turn" to 0, "time_minutes" to 0, "location" to "PLATFORM_NINE"),
+        "meta" to mapOf("turn" to 0, "time_minutes" to 0, "location" to location),
         "room" to room,
     )
 
-    private fun tamsin() = mapOf<String, Any?>(
-        "presentation_id" to "NPC_TAMSIN",
+    private fun tamsin(presentationId: String = "NPC_TAMSIN") = mapOf<String, Any?>(
+        "presentation_id" to presentationId,
         "known_actor_id" to "NPC_TAMSIN",
         "display_name" to "Tamsin",
         "visual_family" to "NPC_TAMSIN",
@@ -46,5 +49,35 @@ class RoomProjectionMapperTest {
 
     @Test(expected = IllegalArgumentException::class) fun rejectsUnknownProjectionVersion() {
         BridgeSnapshotMapper.fromMap(basePayload(mapOf("projection_version" to 2, "location_id" to "PLATFORM_NINE", "actors" to emptyList<Any>())))
+    }
+
+    @Test(expected = IllegalArgumentException::class) fun rejectsRoomLocationThatDoesNotMatchSnapshotLocation() {
+        BridgeSnapshotMapper.fromMap(basePayload(
+            room = mapOf(
+                "projection_version" to 1,
+                "location_id" to "SERVICE_TUNNEL",
+                "actors" to emptyList<Any>(),
+                "active_speaker_presentation_id" to null,
+            ),
+            location = "PLATFORM_NINE",
+        ))
+    }
+
+    @Test(expected = IllegalArgumentException::class) fun rejectsDuplicatePresentationIds() {
+        BridgeSnapshotMapper.fromMap(basePayload(mapOf(
+            "projection_version" to 1,
+            "location_id" to "PLATFORM_NINE",
+            "actors" to listOf(tamsin(), tamsin()),
+            "active_speaker_presentation_id" to null,
+        )))
+    }
+
+    @Test(expected = IllegalArgumentException::class) fun rejectsActiveSpeakerOutsideProjectedActors() {
+        BridgeSnapshotMapper.fromMap(basePayload(mapOf(
+            "projection_version" to 1,
+            "location_id" to "PLATFORM_NINE",
+            "actors" to listOf(tamsin()),
+            "active_speaker_presentation_id" to "NPC_NOT_PROJECTED",
+        )))
     }
 }
