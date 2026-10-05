@@ -42,3 +42,17 @@
 - **SECONDARY INVARIANT RISK:** the current canonical schema validates each cell's blocked edge names but does not enforce reciprocal boundary consistency between adjacent cells. Example: cell A may declare E blocked while adjacent cell B omits W. If the future LOS tracer reads only the edge on the source/entered cell, the same wall can become direction-dependent. The LOS contract describes geometric cell/edge tracing and D-069 preflight requires symmetry where appropriate; a shared opaque wall boundary should therefore have one explicit ownership/reciprocity rule before completion.
 - **RECOMMENDED ACCEPTANCE ADDITION — NON-AUTHORITATIVE:** document whether an opaque boundary is owned by the entered cell, the exited cell, or both; normalize to one canonical rule and add a regression proving A->B and B->A agree for the same opaque shared boundary.
 - **NO CLAIM:** no runtime LOS/grid implementation or executable RED/GREEN test is claimed by Vector at this follow-up.
+
+
+## Correction — reciprocal LOS behavior verified in branch code
+
+The prior follow-up identified reciprocal shared-edge consistency as a possible risk. After `src/textrpg/combat_grid.py` appeared on Veyra's branch, that specific runtime risk was checked and is **not present in the current implementation**.
+
+`_edge_blocked(map, start, end)` evaluates both `source.blocks_los_through(direction)` and `destination.blocks_los_through(opposite_direction)`. Therefore a blocker declared on either side of one shared boundary blocks the crossing in both directions. Small-grid independent algorithm checks also found the supercover cell set and undirected ray-edge set symmetric for tested coordinate pairs.
+
+The remaining CPR-003 issue is narrower:
+- `los_blocked_edges` is now a concrete code-level schema decision;
+- live design/content authorities still do not define that authored field or its default/override JSON shape;
+- strict content parsing/validation and an opaque-edge regression must prove the documented contract before D-069 completion.
+
+Do not use the superseded reciprocal-risk paragraph as evidence of a current runtime defect.
