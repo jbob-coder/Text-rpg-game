@@ -165,6 +165,80 @@ class PythonGameEngineContractTest {
     }
 
     @Test
+    fun `activity choice delegates exact id and maps authoritative progress`() = runBlocking {
+        var requestedChoice: String? = null
+        val progressedPayload = mapOf(
+            "scene" to mapOf(
+                "id" to "TRACE_STABILIZATION_HUB",
+                "title" to "Trace Echo Training Ledger",
+                "body" to "Training remains authoritative in Python.",
+                "choices" to listOf(
+                    mapOf(
+                        "id" to "TRAIN_POWER_FUNDAMENTALS_TWO_HOURS",
+                        "text" to "Train two hours of controlled power fundamentals and measurement.",
+                        "enabled" to true,
+                    )
+                ),
+            ),
+            "status" to mapOf(
+                "resources" to listOf(
+                    mapOf("id" to "stamina", "current" to 50.0, "max" to 70.0),
+                    mapOf("id" to "focus", "current" to 44.0, "max" to 60.0),
+                ),
+                "skills" to mapOf(
+                    "power" to listOf(
+                        mapOf(
+                            "id" to "powers",
+                            "name" to "Powers",
+                            "base" to 2.0,
+                            "effective" to 2.0,
+                            "delta" to 0.0,
+                            "modified" to false,
+                            "contributions" to emptyList<Any>(),
+                        )
+                    )
+                ),
+            ),
+            "meta" to mapOf(
+                "turn" to 12,
+                "time_minutes" to 777,
+                "location" to "TRACE_CHAMBER",
+            ),
+        )
+        val gateway = object : PythonSessionGateway {
+            override fun start(
+                context: android.content.Context,
+                onContentLoading: () -> Unit,
+            ): Map<String, Any?> = progressedPayload
+
+            override fun choose(choiceId: String): Map<String, Any?> {
+                requestedChoice = choiceId
+                return progressedPayload
+            }
+
+            override fun save() = Unit
+            override fun load(): Map<String, Any?> = progressedPayload
+            override fun applyCheat(code: String): Map<String, Any?> = progressedPayload
+            override fun equip(itemId: String): Map<String, Any?> = progressedPayload
+            override fun unequip(slot: String): Map<String, Any?> = progressedPayload
+            override fun travel(locationId: String): Map<String, Any?> = progressedPayload
+            override fun inspectStatus(path: String): Map<String, Any?> = error("not used")
+        }
+
+        val result = PythonGameEngine(gateway).choose("TRAIN_POWER_FUNDAMENTALS_TWO_HOURS")
+
+        assertTrue(result.isSuccess)
+        assertEquals("TRAIN_POWER_FUNDAMENTALS_TWO_HOURS", requestedChoice)
+        val snapshot = result.getOrThrow()
+        assertEquals(777, snapshot.timeMinutes)
+        assertEquals("TRACE_CHAMBER", snapshot.location)
+        assertEquals(50.0, snapshot.resources.single { it.id == "stamina" }.current, 0.0)
+        assertEquals(44.0, snapshot.resources.single { it.id == "focus" }.current, 0.0)
+        assertEquals(2.0, snapshot.skills.single { it.id == "powers" }.base, 0.0)
+        assertEquals(2.0, snapshot.skills.single { it.id == "powers" }.effective, 0.0)
+    }
+
+    @Test
     fun `engine startup exception converts to visible boot error`() {
         val failure = EngineStartException(
             stageId = "CONTENT_ERROR",
