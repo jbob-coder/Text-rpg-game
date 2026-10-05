@@ -500,6 +500,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** 2026-10-05T12:17:00-04:00
 - **CLAIM_HEAD:** `06bca70e2d004ca70635019b8c82afd7c916e05b`
 - **COMPLETION_HEAD:** —
+- **AUTHORITY_DRIFT_AUDIT:** PR #74 task files have zero overlap with authority changes since its base; any final branch refresh should be mechanical, not a tactical redesign.
 - **CURRENT_VERIFICATION_STATE:** PR #74 implementation covers the known CPR-003/CPR-004 + endpoint-LOS acceptance gaps; latest workflow is the remaining executable gate. Earlier cancelled runs were superseded by pushes, not failures.
 - **NEXT_MOVE:** PR #74 already contains CPR-003 edge-opacity parsing/regressions, opaque endpoint LOS symmetry, cover-vs-opacity separation, and CPR-004 post-state NPC `persistent_ref` resolution. Let the newest merge-state CI finish; then rebase/refresh only if authority drift affects the task surface, write exact D-069 evidence + Learning Record, and close if all gates are green. Keep D-070 runtime state out of scope.
 - **IMPLEMENTATION_AUDIT:** newest PR #74 branch fixes source-cell LOS asymmetry (`has_line_of_sight` checks all touched cells), includes one-sided edge symmetry + cover-only non-opacity regressions, and resolves encounter persistent refs after `GameState` construction. Do not reimplement these unless new evidence shows regression.
