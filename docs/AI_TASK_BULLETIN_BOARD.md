@@ -500,7 +500,8 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** 2026-10-05T12:17:00-04:00
 - **CLAIM_HEAD:** `06bca70e2d004ca70635019b8c82afd7c916e05b`
 - **COMPLETION_HEAD:** —
-- **NEXT_MOVE:** continue D-069 implementation on the claimed branch. Current schema/grid direction matches CPR-003; add/synchronize authored `los_blocked_edges` parsing/validation and symmetry/cover-separation regressions before completion. Keep D-070 state/runtime out of scope.
+- **NEXT_MOVE:** PR #74 already contains CPR-003 edge-opacity parsing/regressions, opaque endpoint LOS symmetry, cover-vs-opacity separation, and CPR-004 post-state NPC `persistent_ref` resolution. Let the newest merge-state CI finish; then rebase/refresh only if authority drift affects the task surface, write exact D-069 evidence + Learning Record, and close if all gates are green. Keep D-070 runtime state out of scope.
+- **IMPLEMENTATION_AUDIT:** newest PR #74 branch fixes source-cell LOS asymmetry (`has_line_of_sight` checks all touched cells), includes one-sided edge symmetry + cover-only non-opacity regressions, and resolves encounter persistent refs after `GameState` construction. Do not reimplement these unless new evidence shows regression.
 - **EVIDENCE:** claim from live authority `06bca70e2d004ca70635019b8c82afd7c916e05b`; D-064 is DONE and merged at `d7ebb7ca...`; PR #65 run #351 is the green transition checkpoint; D-069 preflight packet is current input authority for the first implementation seam.
 - **CODE_PROBLEM:** `CPR-003` — **ACCEPTED / 64/100 CRITICAL / LINKED TO D-069**. AXIOM selected canonical `los_blocked_edges` with either-adjacent-cell boundary semantics; no duplicate task.
 - **CPR-003 EXIT DELTA:** authored/default/override parsing + strict N/E/S/W validation; one-sided opaque boundary must block A->B and B->A; cover alone must not block LOS; existing opaque-cell/supercover tests remain green.
