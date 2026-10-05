@@ -1502,6 +1502,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - Gate Twelve authored encounter content (D-073);
   - Python Android bridge combat field/actions, Kotlin DTOs, ViewModel or Compose (D-073/D-074);
   - save-schema v2 or mid-combat persistence.
+- CPR-003: `docs/overseer/code_problems/CPR-003_d069_opaque_edge_los_schema_gap.md` — **ACCEPTED / 64/100 CRITICAL / LINKED TO D-069**. Canonical edge-opacity field is `los_blocked_edges`; shared boundary blocks LOS if either adjacent cell declares the matching edge/opposite edge; cover remains independent; no duplicate task.
 - PURE-GRID CONTRACT:
   - cardinal neighbor enumeration order N -> E -> S -> W;
   - no diagonal movement;
@@ -1509,6 +1510,9 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - movement cost comes from destination cell / explicit transition;
   - two solid actors cannot end on one cell; enemy pass-through forbidden; ally pass-through policy explicit;
   - LOS uses deterministic cell-center supercover and must include corner-touch cells;
+  - `los_blocked_edges` is the canonical N/E/S/W directional opacity field;
+  - a shared boundary is opaque if source declares outgoing edge OR destination declares opposite edge, so one-sided authoring must remain symmetric A->B/B->A;
+  - cover ratings do not imply LOS opacity;
   - movement blockers do not automatically block LOS;
   - cover uses target incoming edge with ratings 0 none / 1 partial / 2 strong; corner ties use one deterministic supercover edge rule.
 - REQUIRED D-069 TESTS:
@@ -1520,6 +1524,9 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - occupancy uniqueness and ally-pass policy;
   - deterministic equal-cost path tie and explicit z transition;
   - golden supercover corner cases plus appropriate LOS symmetry;
+  - one-sided `los_blocked_edges` boundary blocks LOS in both directions;
+  - invalid/non-cardinal `los_blocked_edges` authoring rejects;
+  - cover-only edge does not block LOS;
   - movement-blocker versus LOS-blocker separation;
   - incoming-edge cover consistency and corner determinism;
   - no GameState/save-schema mutation.
