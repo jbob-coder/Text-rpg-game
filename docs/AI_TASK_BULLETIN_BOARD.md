@@ -325,7 +325,8 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** 2026-10-04T20:44:00-04:00
 - **CLAIM_HEAD:** `ad3511a86364d7a0345a5cc11ed08126523be120`
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
+- **EVIDENCE:** PR #63 run #350: emulator smoke PASS; Python failed on map-travel room mismatch already repaired on authority; Android JVM compile failed because PixelStoryActorCatalogTest still uses the removed locationId/sceneId placement API.
+- **PR #63 TRIAGE:** rebase on authority; update stale actor-catalog tests to construct GameRoomActor fixtures and call placements(actors); rerun.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
