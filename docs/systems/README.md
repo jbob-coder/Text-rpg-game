@@ -48,6 +48,8 @@ Working rule: current runtime facts and evolved target design stay explicitly se
 
 - [Evolved Skill Registry](EVOLVED_SKILL_REGISTRY.md) — full 23-skill target-game registry with training, world/tactical uses, class/profession affinities, content requirements and pixel-art presentation requirements.
 
+- [Combat Class Catalog](COMBAT_CLASS_CATALOG.md) — reconstruction-grade catalog for the seven target combat/adventure class families, including acquisition evidence, current-skill dependencies, feature ownership, tactical/world roles, cross-training, specialization axes, training/facility dependencies and future migration/test boundaries.
+
 
 ## Status UI / abilities / passives
 
