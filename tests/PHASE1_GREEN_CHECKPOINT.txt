@@ -1,0 +1,11 @@
+THE GAME — Phase 1 green-authority checkpoint trigger
+
+Base authority HEAD at branch creation:
+ed14d1590dbe949e8729676373ec50d0acfd538d
+
+Purpose:
+- trigger the existing pull-request integration workflow;
+- test the current authority merge state after D-064/D-067 compatibility repairs;
+- produce evidence for the transition checkpoint before D-069.
+
+This marker has no gameplay semantics.
