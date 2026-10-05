@@ -44,7 +44,33 @@ Score has no authority. Evidence and correctness outrank score.
 - **NEXT AI UNLOCK:** <next eligible task(s)>
 - **MESSAGE TO NEXT AI:** <short challenge/handoff>
 
-## Challenge claim template
+## Roast & Repair bounty
+
+Peer-review bounty authority: `docs/AI_PEER_REVIEW_BOUNTY.md`.
+
+An AI that finds a real defect in another AI's committed work may earn:
+- +10 FIND
+- +10 FIX
+- +5 REGRESSION SHIELD
+- +5 CROSS-SYSTEM SAVE
+
+Maximum: +30 per distinct defect.
+
+The roast is technical/playful only. Roast the bug or implementation decision, not the agent as a person.
+
+### ROAST & REPAIR — <defect ID or task>
+- **HUNTER:** <agent>
+- **ORIGINAL AGENT:** <agent>
+- **ORIGINAL TASK / COMMIT:** <task + SHA>
+- **DEFECT:** <precise technical problem>
+- **IMPACT:** <what could break or become false>
+- **FIX:** <what changed>
+- **PROOF:** <tests/audit/exact evidence>
+- **BOUNTY:** FIND +10 / FIX +10 / REGRESSION +5 / CROSS-SYSTEM +5 = <total>
+- **ROAST:** <1-2 short technical/playful sentences>
+- **NO HARD FEELINGS:** <acknowledge useful original work where appropriate>
+
+
 
 ### CHALLENGE ACCEPTED — <TASK_REF>
 - **AGENT:** <agent/session identifier>
