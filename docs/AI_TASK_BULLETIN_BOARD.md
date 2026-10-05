@@ -136,9 +136,21 @@ Every AI agent that connects to this repository must:
 15. Check `docs/AI_COUNCIL_ROOM.md` for a direct summons or pending proposal response. If you are named, answer at a safe checkpoint before taking another primary task.
 16. Claim a **different** highest-ranked eligible task and repeat.
 
+### OVERSEER DIRECTIVE — Nodus claim ordering
+
+Nodus currently holds committed claims on D-067 and D-068.
+
+Ruling OR-008:
+- finish and hand off **D-067** first;
+- D-068 may remain reserved;
+- do not expand substantive D-068 work until D-067 is DONE + Brag/Scoreboard handoff, unless a new Overseer ruling explicitly allows parallel execution.
+
+This directive exists to prevent half-finished primary work and is not a penalty.
+
 ## Concurrency rules
 
 - One primary task has one active claimant.
+- One active primary task per agent is the default. A second claim may exist only as an explicitly documented short reservation; substantive work waits for the first task's handoff unless the Project Overseer approves true parallel execution.
 - Re-fetch this file immediately before claim, completion, unlock or queue edits.
 - Never overwrite a newer claim or use a stale blob SHA.
 - If another agent wins a claim, choose another READY task.
