@@ -77,6 +77,33 @@ def _add_path(data: MutableMapping[str, Any], path: str, delta: float) -> None:
     _set_path(data, path, current + delta)
 
 
+def inventory_quantity(state: "GameState", item_id: str) -> int:
+    """Return one validated carried-item quantity from authoritative state."""
+    if not isinstance(item_id, str) or not item_id:
+        raise RuleError("Inventory item_id must be a non-empty string")
+    if not isinstance(state.inventory, MutableMapping):
+        raise RuleError("state.inventory must be a mutable object")
+    quantity = state.inventory.get(item_id, 0)
+    if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity < 0:
+        raise RuleError(f"Inventory quantity must be a non-negative integer: {item_id}")
+    return quantity
+
+
+def adjust_inventory(state: "GameState", item_id: str, delta: int) -> int:
+    """Atomically apply one validated signed inventory delta."""
+    if isinstance(delta, bool) or not isinstance(delta, int) or delta == 0:
+        raise RuleError("Inventory delta must be a non-zero integer")
+    current = inventory_quantity(state, item_id)
+    updated = current + delta
+    if updated < 0:
+        raise RuleError(f"Inventory quantity cannot become negative: {item_id}")
+    if updated == 0:
+        state.inventory.pop(item_id, None)
+    else:
+        state.inventory[item_id] = updated
+    return updated
+
+
 @dataclass
 class GameState:
     """Authoritative mutable state for one playthrough.
@@ -162,6 +189,29 @@ def validate_game_state_structure(state: GameState) -> None:
         raise RuleError("state.history must be a list")
     if not all(isinstance(event, Mapping) for event in state.history):
         raise RuleError("state.history entries must be objects")
+
+
+    for item_id, quantity in state.inventory.items():
+        if not isinstance(item_id, str) or not item_id:
+            raise RuleError("state.inventory item IDs must be non-empty strings")
+        if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0:
+            raise RuleError(
+                f"state.inventory quantities must be positive integers: {item_id}"
+            )
+
+    for slot, record in state.equipment.items():
+        if not isinstance(slot, str) or not slot:
+            raise RuleError("state.equipment slot IDs must be non-empty strings")
+        if not isinstance(record, Mapping):
+            raise RuleError(f"state.equipment.{slot} must be an object")
+        item_id = record.get("item_id")
+        if not isinstance(item_id, str) or not item_id:
+            raise RuleError(f"state.equipment.{slot}.item_id must be non-empty text")
+        record_slot = record.get("slot")
+        if record_slot is not None and record_slot != slot:
+            raise RuleError(
+                f"state.equipment.{slot}.slot must match its equipment key"
+            )
 
 
 def _restore_snapshot(state: GameState, snapshot: Mapping[str, Any]) -> None:
@@ -447,7 +497,14 @@ class RulesEngine:
                 ):
                     return False
             elif kind == "item_min":
-                if state.inventory.get(condition["item_id"], 0) < condition.get("quantity", 1):
+                minimum = condition.get("quantity", 1)
+                if (
+                    isinstance(minimum, bool)
+                    or not isinstance(minimum, int)
+                    or minimum <= 0
+                ):
+                    raise RuleError("item_min quantity must be a positive integer")
+                if inventory_quantity(state, condition["item_id"]) < minimum:
                     return False
             else:
                 raise RuleError(f"Unknown condition type: {kind}")
@@ -546,10 +603,7 @@ class RulesEngine:
                     "turn_learned": state.turn,
                 }
             elif kind == "inventory":
-                item_id = effect["item_id"]
-                state.inventory[item_id] = state.inventory.get(item_id, 0) + effect["quantity"]
-                if state.inventory[item_id] <= 0:
-                    state.inventory.pop(item_id, None)
+                adjust_inventory(state, effect["item_id"], effect["quantity"])
             elif kind == "quest_stage":
                 # Legacy direct-stage effect. New authored content should prefer the
                 # graph-aware quest_start/quest_objective_* effects below.
