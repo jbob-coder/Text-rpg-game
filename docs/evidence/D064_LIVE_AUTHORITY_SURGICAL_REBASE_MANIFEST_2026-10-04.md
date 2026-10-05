@@ -190,6 +190,79 @@ From PR #63, do **not** carry:
 
 Those changes increase merge risk without contributing to D-064 acceptance.
 
+## CPR-002 strict Android mapper addendum
+
+AXIOM reviewed `CPR-002_d064_room_actor_unknown_field_strictness.md` as **74/100 CRITICAL / ACCEPTED / LINKED TO D-064**.
+
+This does **not** create a new task and does not claim that current Python production leaks private NPC state. Python already rejects unsupported actor fields before projection.
+
+D-064 nevertheless requires strict Android actor-map rejection before handoff because the documented room projection contract permits unknown additive fields only where forward compatibility is explicitly authorized, and no such exception exists for actor records.
+
+### Additional production file — GameEngine.kt
+
+File:
+`android/app/src/main/java/com/thegame/rpg/engine/GameEngine.kt`
+
+At the `BridgeSnapshotMapper` actor-map boundary, validate the map keys before constructing `GameRoomActor`.
+
+Projected actor key allowlist:
+
+```text
+presentation_id
+known_actor_id
+display_name
+visual_family
+placement_key
+pose_key
+outfit_key
+visible_tags
+inspectable
+dialogue_available
+actions
+```
+
+The check must:
+- reject every actor key outside that allowlist;
+- fail before the unknown value can be silently ignored;
+- remain scoped to the room actor payload;
+- not inspect `GameState.npcs`;
+- not move privacy rules into Compose;
+- not alter save schema.
+
+A small helper local to `BridgeSnapshotMapper` is acceptable when it reduces duplicated validation logic without widening scope.
+
+### Additional test file — RoomProjectionMapperTest.kt
+
+File:
+`android/app/src/test/java/com/thegame/rpg/engine/RoomProjectionMapperTest.kt`
+
+Required RED -> GREEN regression:
+
+1. start from an otherwise valid room actor map;
+2. add:
+   `"memories" to listOf("PRIVATE")`;
+3. send the payload through production `BridgeSnapshotMapper.fromMap()`;
+4. require `IllegalArgumentException`.
+
+Optional second regression:
+- add a benign but unauthorized key and prove it is rejected as well.
+
+Do not weaken this to merely prove that the typed `GameRoomActor` omits the field. The acceptance requirement is that the strict mapper **rejects** the unauthorized actor key.
+
+### Final surgical surface after CPR-002
+
+The intended current-authority completion patch is now bounded to:
+
+1. `GameScreen.kt`
+2. `SceneIllustration.kt`
+3. `PixelStoryActorCatalog.kt`
+4. `PixelStoryActorCatalogTest.kt`
+5. `tests/test_d064_android_scene_projection_source.py`
+6. `GameEngine.kt` — actor-key strictness only
+7. `RoomProjectionMapperTest.kt` — focused unauthorized-key regression only
+
+No additional gameplay, social, save, art, or room-schema work is authorized by CPR-002.
+
 ## Final branch workflow
 
 1. fetch live authority HEAD;
