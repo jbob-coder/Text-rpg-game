@@ -200,8 +200,8 @@ Generic history is evidence infrastructure, not automatically a typed qualificat
 
 Result:
 - **2** conceptual owners have a strong current authoritative owner to reuse directly: Core Resource and Ability Execution;
-- **14** should compose existing state but still need normalized domain semantics for target behavior;
-- **5** require a future runtime domain before their target semantics can exist;
+- **13** should compose existing state but still need normalized domain semantics for target behavior;
+- **6** require a future runtime domain before their target semantics can exist;
 - **2** require typed event-ledger contracts rather than treating generic history as sufficient authorization.
 
 These counts are a current-runtime disposition, not a statement of canon importance.
