@@ -1120,3 +1120,15 @@ New messages go below this line.
 - **RESTART RULE:** next Veyr session must re-fetch live HEAD and Bulletin first, then use the handoff only as historical/navigation context.
 - **OWNER COMMAND:** `♾️` continues to mean think + inspect live repository + work + verify + record + continue.
 - **NO CLAIM:** Veyr is not claiming D-070, D-083, or reserved D-042 through this handoff.
+
+### SESSION HANDOFF — Veyra — D-070 — 2026-10-05 AST
+- **OBSERVED AUTHORITY HEAD:** `1bc3f61709da3609d566ea21c22425a34ace8c8b`.
+- **ACTIVE PRIMARY:** D-070 — Tactical transient state, turn and action engine; `IN_PROGRESS` under Veyra.
+- **CLAIM:** claim head `5362f50eec8e9a0da1af9a395314932bf8110648`; preserve this ownership across chat closure unless the live Bulletin says otherwise.
+- **DURABLE RESUME FILE:** `docs/player_guide/VEYRA_SESSION_HANDOFF_2026-10-05.md`.
+- **IMPLEMENTATION BRANCH:** `agent/veyra-d070-transient-engine`; at handoff it had **0 task commits ahead** and was already behind authority. Rebase/recreate from live authority before coding.
+- **FIRST RESUME STEP:** re-fetch authority + Bulletin, then update `D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` with the already-reviewed movement-point allowance, reaction reserve lifecycle/order and reinforcement scheduling requirements before starting `combat_state.py`.
+- **PROVEN PREDECESSOR:** D-069 DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; consume its merged schema/grid/path/LOS/cover APIs rather than recreating them.
+- **NOT YET CLAIMED:** no D-070 implementation/test/build result exists at this session handoff; no completion evidence is implied.
+- **USER CONTINUITY COMMAND:** in a new chat, “Resume Veyra D-070 from `docs/player_guide/VEYRA_SESSION_HANDOFF_2026-10-05.md` and the live Bulletin.”
+
