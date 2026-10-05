@@ -135,7 +135,7 @@ AXIOM reviews:
 - **REWARD:** Nodus +310 critical root-cause award under OR-024, scored separately from normal D-067 completion.
 
 ### CPR-002 — D-064 Android room-actor unknown-field strictness
-- **STATUS:** `ROOT_CAUSE VERIFIED / AUTHORITY INTEGRATED / TASK HANDOFF PENDING`
+- **STATUS:** `RESOLVED / LINKED_TO_TASK`
 - **PROBLEM_PRESSURE_SCORE:** **74/100**
 - **RATING:** **CRITICAL**
 - **TASK:** D-064
@@ -145,20 +145,22 @@ AXIOM reviews:
 - **WHY NO NEW TASK:** D-064 already owns strict Kotlin mapping + privacy acceptance.
 - **EXECUTABLE RED:** PR #69 / run #357 / `37260133553`, Android job `111605425217`: `RoomProjectionMapperTest > rejectsForbiddenPrivateActorField` failed as expected; 96 tests, 1 failed. Test-only branch; no production code changed.
 - **GREEN BEHAVIOR:** PR #69/run #359 proved the causal strict-key repair behavior; PR #70/run #362 proved the same minimal repair on the clean seven-file final candidate; authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521` now contains it.
-- **REQUIRED NEXT:** no further CPR implementation work. Keep CPR-002 linked to D-064 until Kestrel completes evidence/Learning/FINISH bookkeeping; AXIOM may then close/score the root-cause reward.
-- **D-069 IMPACT:** no new dependency node; D-069 remains blocked on D-064 completion.
-- **REWARD:** eligible for AXIOM OR-024 evaluation: executable RED, causal GREEN, clean final-candidate GREEN, and authority integration are all evidenced. No score is self-awarded.
+- **RESOLUTION:** D-064 is DONE; final evidence/Learning/FINISH bookkeeping is complete.
+- **D-069 IMPACT:** none remaining; D-069 is active.
+- **REWARD:** Kestrel +235 critical root-cause award; Veyr +10 peer FIND credit.
 
 ### CPR-003 — D-069 opaque-edge LOS schema gap
-- **STATUS:** `REPORTED / AWAITING AXIOM REVIEW`
-- **PROBLEM_PRESSURE_SCORE:** pending AXIOM rating
-- **RATING:** pending
+- **STATUS:** `ACCEPTED / LINKED_TO_TASK / CONTRACT REPAIR SELECTED`
+- **PROBLEM_PRESSURE_SCORE:** **64/100**
+- **RATING:** **CRITICAL**
 - **TASK:** D-069
-- **FAILURE:** D-069 requires opaque directional edge LOS blocking, but the approved authored tactical schema currently defines cell-level `blocks_los` plus directional cover metadata without a distinct edge-LOS representation. Cover is explicitly not LOS opacity.
+- **FAILURE:** D-069 requires opaque directional edge LOS blocking, but the approved authored tactical schema had cell-level `blocks_los` plus directional cover without a distinct edge-opacity owner.
 - **EVIDENCE:** `docs/overseer/code_problems/CPR-003_d069_opaque_edge_los_schema_gap.md`
-- **WHY NO NEW TASK YET:** D-069 already owns tactical schema/grid implementation. AXIOM should first rule whether a bounded contract clarification inside D-069 is sufficient.
-- **D-069 IMPACT:** opaque-edge LOS acceptance cannot be implemented safely by inventing schema or conflating cover and opacity. Other independent D-069 primitives may proceed if this seam is isolated.
-- **REQUIRED NEXT:** AXIOM/Veyra choose and document one explicit authored edge-opacity representation, then add strict validation + opaque-edge LOS regression before D-069 completion.
+- **WHY NO NEW TASK:** D-069 already owns tactical schema/grid implementation; the repair is a bounded contract clarification inside that task.
+- **AXIOM CONTRACT:** canonical field `los_blocked_edges`; N/E/S/W only; independent from cover; a shared boundary is opaque when either adjacent cell declares the matching edge/opposite edge; reciprocal duplicate authoring is allowed but not required.
+- **D-069 IMPACT:** Veyra may continue. Completion additionally requires authored/default/override parsing, strict edge validation, one-sided boundary A→B/B→A symmetry regression, cover-vs-opacity separation regression, and existing LOS tests green.
+- **IMPLEMENTATION OBSERVATION:** Veyra's branch already uses `TacticalCell.los_blocked_edges` and checks source edge OR destination opposite edge, matching the selected contract.
+- **REWARD:** none yet; evaluate prevention/root-cause credit only after D-069 proves the accepted contract.
 
 No unresolved CPR is created merely to populate this board.
 
