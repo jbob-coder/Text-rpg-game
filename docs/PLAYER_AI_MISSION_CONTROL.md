@@ -147,115 +147,56 @@ The current transition job is to close D-064 without scope expansion. D-065, D-0
 ## Kestrel — D-064 — Projection / Presentation
 
 **Player-AI class:** Player-Safe Projection, Presentation & Asset Lead  
-**Mission state:** implementation materially advanced; finish verification/handoff, do not redesign.
+**Mission state:** IN_PROGRESS — TDD RED established; build the minimal current-authority GREEN candidate.
 
 ### Mission objective
 Finish the bounded room/actor projection so authored player-safe actor presence reaches Android through the strict snapshot boundary while preserving opening-scene visual equivalence and hidden-state redaction.
 
-### Must Read
-- `docs/systems/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md` or current D-030 projection authority;
+### Read first
+- `docs/systems/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md` / current D-030 projection authority;
 - `src/textrpg/room_projection.py`;
-- room-presence content/sidecar used by current opening scenes;
 - `android/app/src/main/java/com/thegame/rpg/engine/PlayerSafeSnapshotMapper.kt`;
-- `android/app/src/main/java/com/thegame/rpg/engine/PythonGameEngine.kt`;
-- D-064 Python/Kotlin/UI tests changed since claim.
+- `android/app/src/main/java/com/thegame/rpg/ui/PixelStoryActorPlacementResolver.kt`;
+- live Bulletin D-064 entry and PR #68 comments before writing.
 
-### Already accomplished / do not redo
-Recent repository history already contains:
-- strict room projection invariants;
-- authored opening room presence;
-- production runtime routing through the player-safe mapper;
-- semantic story actor placement resolver;
-- opening actor placement equivalence tests;
-- unittest-native room projection acceptance coverage;
-- repair of the recursive snapshot helper.
+### Proven / do not rediscover
+- strict room projection and player-safe mapper already exist;
+- semantic actor coordinates are already owned by `PixelStoryActorPlacementResolver`; do not create a second coordinate map;
+- PR #63 / run #354 is fully green across Python, Android build/unit/package and emulator screenshots, but treat it as **DIAGNOSTIC_GREEN**, not completion evidence for the final current-authority minimal repair;
+- PR #68 / run #355 is the intended **RED** contract proof: Android unit compilation fails specifically because tests pass `List<GameRoomActor>` while production still exposes `placements(locationId, sceneId)`; Python and emulator smoke are green;
+- current RED fixture still needs Relay Workbench `90,14` and Service Tunnel `76,14` equivalence alongside Platform Nine and unknown-family/key rejection.
 
-Audit current source before adding anything else.
+### Exact next move
+1. Amend PR #68's RED test fixture with the two missing equivalence cases. Keep #68 RED-only; do not merge it as production.
+2. Re-fetch live authority HEAD and cut a clean GREEN branch.
+3. Keep production changes minimal:
+   - `GameScreen.kt`: pass `roomActors = snapshot.room.actors` at both existing `SceneIllustration` calls;
+   - `SceneIllustration.kt`: accept `List<GameRoomActor>` and call `PixelStoryActorCatalog.placements(roomActors)`;
+   - `PixelStoryActorCatalog.kt`: map projected `GameRoomActor.visualFamily` to the existing sprites and resolve `placementKey` only through `PixelStoryActorPlacementResolver`.
+4. Port the focused `PixelStoryActorCatalogTest.kt` actor-list cases and the source-wiring regression; preserve current file formatting and unrelated presentation code.
+5. Open/update a GREEN PR against current authority and require `docs/AI_RUNTIME_MERGE_STATE_GATE.md` completion evidence.
+6. If green, write D-064 evidence, Next Player Learning Record, Brag/Scoreboard handoff, then mark DONE and unlock D-069 for Veyra.
 
-### Next Move
-1. run/obtain exact-head D-064 focused evidence and required aggregate gates;
-2. verify opening actor-set/placement equivalence;
-3. verify malformed/duplicate/location/speaker rejection and private-state absence;
-4. verify Android consumer mapping/screenshot behavior where acceptance requires it;
-5. write one D-064 evidence packet and close the task if green.
-
-### Exit Gate
+### Exit gate
 - versioned authoritative room projection;
 - Python + Kotlin strict mapping;
 - no raw private NPC state or raw pixel/world authority leakage;
-- current opening presentation equivalent through semantic placement;
-- old heuristic retirement boundary is explicit;
-- required exact-head tests/build evidence recorded.
+- opening presentation equivalence across Platform Nine / Relay Workbench / Service Tunnel;
+- unknown family/key cannot invent a visual or coordinate;
+- old scene/location presence heuristic retired from the actor catalog consumer path;
+- current merge-state Python + Android build/unit/package + required emulator evidence green.
 
-### Do Not
-- invent a dynamic spatial model now;
-- widen `placement_key` into simulation position;
-- redesign the root snapshot;
-- expand final art scope.
+### Coordination / overlap
+- Kestrel owns the D-064 runtime/test surface.
+- Nodus/Veyra/Veyr review only unless Kestrel asks for a bounded edit.
+- Do not independently edit `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt`, or D-064 tests during the GREEN rebuild.
+- No CPR is currently warranted; AXIOM says the demonstrated defect remains inside D-064 unless new evidence shows a broader causal problem.
 
-### Required cross-review
-- Veyr: NPC privacy fields if touched;
-- Veyra: only if gameplay/tactical semantics are introduced;
-- Nodus: integration/CI if shared runtime state changes.
-
-
-### PR #63 failure triage — exact next repair
-Workflow run #350 / `37253491745`:
-- Python: map-travel room mismatch; already repaired on authority, so rebase rather than reimplement.
-- Android emulator: PASS.
-- Android JVM compile: FAIL because `PixelStoryActorCatalogTest.kt` still calls the removed `placements(locationId, sceneId)` API after production changed to `placements(actors: List<GameRoomActor>)`.
-
-Exact failing test calls:
-- lines 46–47 use obsolete named parameters `locationId` / `sceneId`;
-- lines 59, 64, 69, 74 and 77 pass String arguments where `List<GameRoomActor>` is now required.
-
-**One-shot repair:** rebase on authority, update only `PixelStoryActorCatalogTest.kt` to build projected `GameRoomActor` fixtures and call `placements(actors)`, then rerun PR CI.
-
-
-### Exact PR #63 test migration recipe
-
-Production in PR #63 already changes the actor catalog to:
-`placements(actors: List<GameRoomActor>)`.
-
-It maps:
-- `visualFamily = "NPC_TAMSIN"` -> Tamsin sprite;
-- `visualFamily = "SUPPORT_WOUNDED_COURIER"` -> courier sprite;
-- `placementKey` through `PixelStoryActorPlacementResolver`;
-- unknown family/key -> omitted.
-
-Use `com.thegame.rpg.engine.GameRoomActor` in `PixelStoryActorCatalogTest.kt`.
-
-Minimal fixture shape:
-```kotlin
-private fun actor(
-    presentationId: String,
-    visualFamily: String,
-    placementKey: String,
-) = GameRoomActor(
-    presentationId = presentationId,
-    knownActorId = null,
-    displayName = presentationId,
-    visualFamily = visualFamily,
-    placementKey = placementKey,
-    poseKey = null,
-    outfitKey = null,
-    visibleTags = emptyList(),
-    inspectable = false,
-    dialogueAvailable = false,
-    actions = emptyList(),
-)
-```
-
-Required bounded cases:
-1. courier + Tamsin using `PLATFORM_NINE_COURIER_LEFT` and `PLATFORM_NINE_TAMSIN_RIGHT`;
-2. Tamsin at `RELAY_WORKBENCH_TAMSIN_RIGHT`;
-3. Tamsin at `SERVICE_TUNNEL_TAMSIN_RIGHT`;
-4. unknown `visualFamily` -> empty;
-5. unknown `placementKey` -> empty.
-
-Direct PR conversation note: comment ID `5987024043`.
-
-**Do not carry unnecessary formatting/compaction churn forward.** Rebase/rebuild from current authority and apply only the actor-authority migration plus its tests where practical.
+### Evidence shortcuts
+- PR #63 run #354 / `37257967729`: DIAGNOSTIC_GREEN.
+- PR #68 run #355 / `37258411701`: INTENTIONAL_RED.
+- PR #63 review comments: `5987398307`, `5987433139`.
+- PR #68 review comments: `5987447048`, `5987458735`.
 
 ---
 
