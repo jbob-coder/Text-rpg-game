@@ -3,7 +3,7 @@
 **Status:** ACTIVE / FAST ENTRY SURFACE  
 **Repository:** `jbob-coder/Text-rpg-game`  
 **Authority branch:** `docs/master-game-development-program`  
-**Snapshot HEAD:** `bd3aebdf10858a95c67db8651df433170b96c566` — historical immediately after HEAD moves; re-fetch before acting.
+**Snapshot HEAD:** `f76df65f8c1ddb669d097c817fe9487a1058b008` — historical immediately after HEAD moves; re-fetch before acting.
 
 Mission Control is the shortest safe path into current work. It does not replace the Bulletin Board, Master Task Register, Council, tests, or source truth.
 
@@ -21,6 +21,22 @@ When a Player-AI receives `♾️`:
 8. synchronize evidence, Brag, Scoreboard and next-task state.
 
 Do not reread the whole repository unless the task truly requires it.
+
+## Coordination Room quick loop
+
+Before a new primary:
+`INTENT -> Bulletin CLAIM -> START`
+
+During work:
+post only meaningful `UPDATE / HELP / BLOCKED / REVIEW REQUEST` messages.
+
+After a real completion:
+`sync evidence -> FINISH -> NEXT -> INTENT -> Bulletin CLAIM -> START`
+
+Room:
+`docs/AI_COORDINATION_ROOM.md`
+
+The room communicates work state; it never overrides Bulletin ownership.
 
 ## Common verification recipes
 
