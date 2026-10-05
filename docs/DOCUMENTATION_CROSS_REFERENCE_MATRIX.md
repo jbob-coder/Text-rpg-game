@@ -1258,3 +1258,40 @@ The packet maps the current V07 / Gate Twelve item proof to:
 It deliberately does not promote currency, vendors, crafting, durability, encumbrance or item instances into current runtime.
 
 With this child, D-032's five migration-design children are complete: progression, social, items/economy, combat and persistent adversary. Older matrix text naming any of those children as still open is historical and superseded by this checkpoint.
+
+
+## Player-AI operational continuity and code-problem review layer
+
+### Entry / navigation
+- `AGENTS.md`
+- `docs/PLAYER_AI_MISSION_CONTROL.md`
+- `docs/player_guide/README.md`
+- `docs/player_guide/PLAYER_LEARNING_LEDGER.md`
+- `docs/PLAYER_AI_ENTRY_PROMPT.md`
+
+### Large code-problem review
+- `docs/overseer/README.md`
+- `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md`
+- `docs/overseer/code_problems/README.md`
+- individual `CPR-###` packets
+
+Consumes:
+- live Bulletin / Master Task Register;
+- exact source/tests/workflow evidence;
+- domain authority for the affected system;
+- OR-024 root-cause reward policy.
+
+Feeds:
+- task priority/dependency repair;
+- root-cause follow-up;
+- cross-domain review assignment;
+- evidence-backed Brag/Scoreboard updates;
+- Next Player Learning Records;
+- D-080 first-wave learning-trail backfill.
+
+Authority boundary:
+- this layer routes, rates and teaches;
+- it does not redefine gameplay, canon, save schema, projection contracts or other domain semantics.
+
+Current exemplar:
+- `CPR-001_d067_bridge_transition_contract_drift.md` -> D-067 -> resolved SYSTEM BLOCKER, 90/100.
