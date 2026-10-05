@@ -21,8 +21,8 @@ from pathlib import Path, PurePosixPath
 TASK_REGISTER = PurePosixPath("docs/THE_GAME_MASTER_TASK_REGISTER.md")
 STRUCTURED_DOC_SUFFIXES = {".json", ".yaml", ".yml", ".csv"}
 TASK_HEADING_RE = re.compile(r"^### TASK (D-\d+)\s+—\s+(.+?)\s*$")
-STATUS_RE = re.compile(r"^- STATUS:\s*\`?([^\`]+?)\`?\s*$")
-PRIORITY_RE = re.compile(r"^- PRIORITY:\s*\`?([^\`]+?)\`?\s*$")
+STATUS_RE = re.compile(r"^- STATUS:\s*(?:`([^`]+)`(?:\s+.*)?|(.+?))\s*$")
+PRIORITY_RE = re.compile(r"^- PRIORITY:\s*`?([^`]+?)`?\s*$")
 
 
 def _git(repo_root: Path, *args: str, text: bool = True) -> subprocess.CompletedProcess:
@@ -103,7 +103,7 @@ def parse_task_register(text: str) -> list[dict]:
             continue
         status = STATUS_RE.match(line)
         if status and current["status"] is None:
-            current["status"] = status.group(1).strip()
+            current["status"] = (status.group(1) or status.group(2)).strip()
             continue
         priority = PRIORITY_RE.match(line)
         if priority and current["priority"] is None:
@@ -465,8 +465,8 @@ def render_markdown(report: dict) -> str:
     lines = [
         "# THE GAME — Project Status Snapshot",
         "",
-        f"Source HEAD: \`{report['source_head']}\`",
-        f"Inventory mode: \`{report['inventory_mode']}\`",
+        f"Source HEAD: `{report['source_head']}`",
+        f"Inventory mode: `{report['inventory_mode']}`",
         "",
         "## Executive status",
         "",
@@ -491,7 +491,7 @@ def render_markdown(report: dict) -> str:
             [
                 "## Revision delta",
                 "",
-                f"Base HEAD: \`{delta['base_head']}\`",
+                f"Base HEAD: `{delta['base_head']}`",
                 f"- Files added / removed / changed: **{delta['files']['added_count']} / "
                 f"{delta['files']['removed_count']} / {delta['files']['changed_count']}**.",
                 f"- Documents added / removed / changed: **{delta['documents']['added_count']} / "
@@ -512,16 +512,16 @@ def render_markdown(report: dict) -> str:
     if phase1["missing_task_ids"]:
         lines.append(
             "- Missing task registrations: "
-            + ", ".join(f"\`{task_id}\`" for task_id in phase1["missing_task_ids"])
+            + ", ".join(f"`{task_id}`" for task_id in phase1["missing_task_ids"])
         )
 
     lines.extend(["", "## Top-level repository map", ""])
     for name, item in repo["top_level"].items():
-        lines.append(f"- \`{name}\`: {item['files']} files / {item['bytes']} bytes")
+        lines.append(f"- `{name}`: {item['files']} files / {item['bytes']} bytes")
 
     lines.extend(["", "## Documentation-area map", ""])
     for name, item in docs["areas"].items():
-        lines.append(f"- \`docs/{name}\`: {item['files']} files / {item['bytes']} bytes")
+        lines.append(f"- `docs/{name}`: {item['files']} files / {item['bytes']} bytes")
 
     lines.extend(
         [
