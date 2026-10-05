@@ -422,6 +422,30 @@ Use `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md` as the direct im
 8. repair only demonstrated drift;
 9. evidence + Learning Ledger + FINISH + Brag/Scoreboard/Register/Bulletin.
 
+
+### CPR-003 accepted contract delta
+
+AXIOM rated CPR-003 **64/100 CRITICAL** and linked it to D-069.
+
+Locked Phase 1 representation:
+- `TacticalCell.los_blocked_edges`;
+- N/E/S/W only;
+- independent from `cover`;
+- shared boundary is opaque if source declares outgoing edge **or** destination declares opposite edge;
+- one-sided authored boundary must therefore block LOS in both directions;
+- reciprocal duplicate authoring is allowed but not required.
+
+Your current branch implementation shape already matches the selected runtime rule.
+
+Before completion, additionally prove:
+1. default/override authored parsing carries `los_blocked_edges`;
+2. malformed/non-cardinal edges reject;
+3. A→B and B→A both block for one one-sided edge declaration;
+4. cover alone does not block LOS;
+5. opaque-cell/supercover regressions remain green.
+
+Do not replace this with a structured edge-object schema or infer opacity from cover.
+
 ---
 
 ## Veyr — D-075 — Quest Branch / World Consequence
