@@ -75,6 +75,8 @@ class CombatEvent:
     coord_before: TacticalCoord
     coord_after: TacticalCoord
     digest: str
+    reserve_before: int = 0
+    reserve_after: int = 0
 
 
 def path_traversal_cost(
@@ -122,6 +124,10 @@ class TacticalActorState:
     action_budget: int = 0
     activation_state: str = ACTIVATION_PENDING
     incapacitated: bool = False
+    reaction_reserve: int = 0
+    reserved_reaction_id: str | None = None
+    sprinted_this_activation: bool = False
+    reinforcement_round: int = 1
 
     def __post_init__(self) -> None:
         self.actor_id = _require_non_empty_text(self.actor_id, "actor.actor_id")
@@ -145,6 +151,27 @@ class TacticalActorState:
             raise ValueError("actor.activation_state is unsupported")
         if not isinstance(self.incapacitated, bool):
             raise ValueError("actor.incapacitated must be boolean")
+        if isinstance(self.reaction_reserve, bool) or not isinstance(
+            self.reaction_reserve,
+            int,
+        ):
+            raise ValueError("actor.reaction_reserve must be an integer")
+        if self.reaction_reserve < 0:
+            raise ValueError("actor.reaction_reserve cannot be negative")
+        if self.reserved_reaction_id is not None:
+            _require_non_empty_text(
+                self.reserved_reaction_id,
+                "actor.reserved_reaction_id",
+            )
+        if not isinstance(self.sprinted_this_activation, bool):
+            raise ValueError("actor.sprinted_this_activation must be boolean")
+        if isinstance(self.reinforcement_round, bool) or not isinstance(
+            self.reinforcement_round,
+            int,
+        ):
+            raise ValueError("actor.reinforcement_round must be an integer")
+        if self.reinforcement_round < 1:
+            raise ValueError("actor.reinforcement_round must be at least 1")
 
 
 class CombatSession:
@@ -192,6 +219,7 @@ class CombatSession:
                 solid=not actor.incapacitated,
             )
             for actor in actor_list
+            if actor.reinforcement_round <= 1
         )
 
         self.tactical_map = tactical_map
@@ -215,8 +243,18 @@ class CombatSession:
             actor
             for actor in self.actors.values()
             if not actor.incapacitated
+            and actor.reinforcement_round <= self.round_index
         ]
-        eligible.sort(key=lambda actor: (-actor.initiative, actor.actor_id))
+        self.round_initiative = {
+            actor.actor_id: actor.initiative
+            for actor in eligible
+        }
+        eligible.sort(
+            key=lambda actor: (
+                -self.round_initiative[actor.actor_id],
+                actor.actor_id,
+            )
+        )
         return tuple(actor.actor_id for actor in eligible)
 
     def begin_next_activation(self) -> TacticalActorState | None:
@@ -241,6 +279,9 @@ class CombatSession:
                 actor.activation_state = ACTIVATION_SKIPPED
                 continue
 
+            actor.reaction_reserve = 0
+            actor.reserved_reaction_id = None
+            actor.sprinted_this_activation = False
             actor.action_budget = PHASE1_ACTION_BUDGET
             actor.activation_state = ACTIVATION_ACTIVE
             self.active_actor_id = actor_id
@@ -279,7 +320,9 @@ class CombatSession:
 
         if not self.round_is_complete():
             raise ValueError("cannot advance round while activations remain")
-        self.round_index += 1
+        next_round = self.round_index + 1
+        self._validate_round_occupancy(next_round)
+        self.round_index = next_round
         self.activation_index = 0
         for actor in self.actors.values():
             actor.action_budget = 0
@@ -301,10 +344,20 @@ class CombatSession:
             raise ValueError("active actor is not ready for a normal action")
         return actor
 
-    def _movement_action(self, action_id: str) -> tuple[int, int]:
+    def _action_definition(self, action_id: str) -> Mapping[str, object]:
         definition = self.combat_actions.get(action_id)
         if definition is None:
             raise ValueError(f"unknown combat action: {action_id}")
+        return definition
+
+    def _action_cost(self, action_id: str) -> int:
+        cost = self._action_definition(action_id).get("cost")
+        if isinstance(cost, bool) or not isinstance(cost, int) or cost < 0:
+            raise ValueError(f"combat action {action_id} has invalid budget cost")
+        return cost
+
+    def _movement_action(self, action_id: str) -> tuple[int, int]:
+        definition = self._action_definition(action_id)
         category = definition.get("category")
         if category == "move":
             allowance = PHASE1_MOVE_POINTS
@@ -312,12 +365,9 @@ class CombatSession:
             allowance = PHASE1_SPRINT_POINTS
         else:
             raise ValueError(f"combat action {action_id} is not a movement action")
-        cost = definition.get("cost")
-        if isinstance(cost, bool) or not isinstance(cost, int) or cost < 0:
-            raise ValueError(f"combat action {action_id} has invalid budget cost")
-        return cost, allowance
+        return self._action_cost(action_id), allowance
 
-    def _occupants(self) -> tuple[TacticalOccupant, ...]:
+    def _occupants_for_round(self, round_index: int) -> tuple[TacticalOccupant, ...]:
         return tuple(
             TacticalOccupant(
                 actor.actor_id,
@@ -326,7 +376,14 @@ class CombatSession:
                 solid=not actor.incapacitated,
             )
             for actor in self.actors.values()
+            if actor.reinforcement_round <= round_index
         )
+
+    def _occupants(self) -> tuple[TacticalOccupant, ...]:
+        return self._occupants_for_round(self.round_index)
+
+    def _validate_round_occupancy(self, round_index: int) -> None:
+        occupancy_by_coord(self._occupants_for_round(round_index))
 
     def preview_movement(
         self,
@@ -366,6 +423,42 @@ class CombatSession:
             action_budget_cost=budget_cost,
         )
 
+    def _append_event(
+        self,
+        *,
+        actor: TacticalActorState,
+        action_id: str,
+        target_key: str,
+        budget_before: int,
+        coord_before: TacticalCoord,
+        reserve_before: int = 0,
+        reserve_after: int = 0,
+    ) -> CombatEvent:
+        next_index = self.event_index + 1
+        digest_source = (
+            f"{self.seed}|{self.encounter_id}|{self.round_index}|"
+            f"{self.activation_index}|{next_index}|{actor.actor_id}|"
+            f"{action_id}|{target_key}"
+        )
+        event = CombatEvent(
+            event_index=next_index,
+            round_index=self.round_index,
+            activation_index=self.activation_index,
+            actor_id=actor.actor_id,
+            action_id=action_id,
+            target_key=target_key,
+            budget_before=budget_before,
+            budget_after=actor.action_budget,
+            coord_before=coord_before,
+            coord_after=actor.coord,
+            digest=hashlib.sha256(digest_source.encode("utf-8")).hexdigest(),
+            reserve_before=reserve_before,
+            reserve_after=reserve_after,
+        )
+        self.committed_events.append(event)
+        self.event_index = next_index
+        return event
+
     def _append_movement_event(
         self,
         *,
@@ -374,29 +467,13 @@ class CombatSession:
         budget_before: int,
         coord_before: TacticalCoord,
     ) -> CombatEvent:
-        next_index = self.event_index + 1
-        target_key = plan.path[-1].key
-        digest_source = (
-            f"{self.seed}|{self.encounter_id}|{self.round_index}|"
-            f"{self.activation_index}|{next_index}|{actor.actor_id}|"
-            f"{plan.action_id}|{target_key}"
-        )
-        event = CombatEvent(
-            event_index=next_index,
-            round_index=self.round_index,
-            activation_index=self.activation_index,
-            actor_id=actor.actor_id,
+        return self._append_event(
+            actor=actor,
             action_id=plan.action_id,
-            target_key=target_key,
+            target_key=plan.path[-1].key,
             budget_before=budget_before,
-            budget_after=actor.action_budget,
             coord_before=coord_before,
-            coord_after=actor.coord,
-            digest=hashlib.sha256(digest_source.encode("utf-8")).hexdigest(),
         )
-        self.committed_events.append(event)
-        self.event_index = next_index
-        return event
 
     def commit_movement(
         self,
@@ -420,11 +497,14 @@ class CombatSession:
         state_before = actor.activation_state
         event_index_before = self.event_index
         event_count_before = len(self.committed_events)
+        sprinted_before = actor.sprinted_this_activation
 
         try:
             actor.activation_state = ACTIVATION_RESOLVING_ACTION
             actor.action_budget -= plan.action_budget_cost
             actor.coord = plan.path[-1]
+            if self._action_definition(action_id).get("category") == "sprint":
+                actor.sprinted_this_activation = True
             event = self._append_movement_event(
                 actor=actor,
                 plan=plan,
@@ -437,6 +517,129 @@ class CombatSession:
             actor.coord = coord_before
             actor.action_budget = budget_before
             actor.activation_state = state_before
+            actor.sprinted_this_activation = sprinted_before
+            self.event_index = event_index_before
+            del self.committed_events[event_count_before:]
+            raise
+
+
+    def add_reinforcement(
+        self,
+        actor: TacticalActorState,
+        *,
+        arrival_mode: str = "next_round",
+    ) -> None:
+        """Schedule a normal reinforcement for the next round snapshot."""
+
+        if arrival_mode != "next_round":
+            raise ValueError("D-070 currently supports next_round reinforcements only")
+        if not isinstance(actor, TacticalActorState):
+            raise ValueError("reinforcement must be TacticalActorState")
+        if actor.actor_id in self.actors:
+            raise ValueError(f"duplicate tactical actor id: {actor.actor_id}")
+        cell = self.tactical_map.cell_at(actor.coord)
+        if cell is None:
+            raise ValueError(
+                f"actor {actor.actor_id} spawns on unknown cell {actor.coord.key}"
+            )
+        if cell.blocks_movement:
+            raise ValueError(
+                f"actor {actor.actor_id} spawns on blocked cell {actor.coord.key}"
+            )
+
+        actor.reinforcement_round = self.round_index + 1
+        actor.action_budget = 0
+        actor.activation_state = ACTIVATION_PENDING
+        actor.reaction_reserve = 0
+        actor.reserved_reaction_id = None
+        actor.sprinted_this_activation = False
+        self.actors[actor.actor_id] = actor
+
+    def reserve_reaction(
+        self,
+        *,
+        actor_id: str,
+        prepare_action_id: str,
+        reaction_id: str,
+    ) -> CombatEvent:
+        """Reserve authored budget for one later reaction."""
+
+        actor = self._active_actor(actor_id)
+        _require_non_empty_text(reaction_id, "reaction_id")
+        definition = self._action_definition(prepare_action_id)
+        if definition.get("category") != "prepare_reaction":
+            raise ValueError("prepare action must use category prepare_reaction")
+        if actor.sprinted_this_activation:
+            raise ValueError("Sprint prevents reserving a new reaction this activation")
+        if actor.reserved_reaction_id is not None or actor.reaction_reserve:
+            raise ValueError("actor already has a reserved reaction")
+        cost = self._action_cost(prepare_action_id)
+        if cost <= 0:
+            raise ValueError("normal reaction reservation cost must be positive")
+        if actor.action_budget < cost:
+            raise ValueError("insufficient action budget")
+
+        budget_before = actor.action_budget
+        reserve_before = actor.reaction_reserve
+        event_index_before = self.event_index
+        event_count_before = len(self.committed_events)
+        state_before = actor.activation_state
+        try:
+            actor.activation_state = ACTIVATION_RESOLVING_ACTION
+            actor.action_budget -= cost
+            actor.reaction_reserve = cost
+            actor.reserved_reaction_id = reaction_id
+            event = self._append_event(
+                actor=actor,
+                action_id=prepare_action_id,
+                target_key=reaction_id,
+                budget_before=budget_before,
+                coord_before=actor.coord,
+                reserve_before=reserve_before,
+                reserve_after=actor.reaction_reserve,
+            )
+            actor.activation_state = ACTIVATION_ACTIVE
+            return event
+        except Exception:
+            actor.action_budget = budget_before
+            actor.reaction_reserve = reserve_before
+            actor.reserved_reaction_id = None
+            actor.activation_state = state_before
+            self.event_index = event_index_before
+            del self.committed_events[event_count_before:]
+            raise
+
+    def consume_reaction(
+        self,
+        *,
+        actor_id: str,
+        reaction_id: str,
+    ) -> CombatEvent:
+        """Consume a previously reserved reaction budget deterministically."""
+
+        actor = self.actors.get(actor_id)
+        if actor is None:
+            raise ValueError(f"unknown combat actor: {actor_id}")
+        if actor.reserved_reaction_id != reaction_id or actor.reaction_reserve <= 0:
+            raise ValueError("actor has no matching reserved reaction")
+        reserve_before = actor.reaction_reserve
+        event_index_before = self.event_index
+        event_count_before = len(self.committed_events)
+        try:
+            actor.reaction_reserve = 0
+            actor.reserved_reaction_id = None
+            return self._append_event(
+                actor=actor,
+                action_id=reaction_id,
+                target_key="REACTION",
+                budget_before=actor.action_budget,
+                coord_before=actor.coord,
+                reserve_before=reserve_before,
+                reserve_after=0,
+            )
+        except Exception:
+            actor.reaction_reserve = reserve_before
+            actor.reserved_reaction_id = reaction_id
             self.event_index = event_index_before
             del self.committed_events[event_count_before:]
             raise
