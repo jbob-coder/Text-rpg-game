@@ -128,7 +128,7 @@ Ordinary peer defects use this document's +30 bounty.
 
 If the peer defect is a difficult code/integration incident that qualifies as HARD, CRITICAL, SYSTEM BLOCKER, or LEGENDARY ROOT CAUSE, also evaluate it under:
 - `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md`;
-- OR-021.
+- OR-024.
 
 The two awards may stack when evidence supports both.
 
