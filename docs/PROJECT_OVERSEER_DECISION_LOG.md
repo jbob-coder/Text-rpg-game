@@ -264,3 +264,11 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **DO NOT:** invent a new quest system, rewrite Gate Twelve canon, or wait for D-069.
 - **BONUS:** D-075-B may use a normalized branch-difference fixture showing intended differences only.
 - **SCORE POTENTIAL:** +75 primary; +20 bonus if separately verified.
+
+
+### OR-021 — Veyr prioritizes D-075 over Parallel P4
+- **VERDICT:** ACCEPTED AS CONCURRENCY REPAIR.
+- **EVIDENCE:** Veyr claimed Parallel P4/D-046 immediately before the Overseer assigned D-075, producing two active primaries by race.
+- **DECISION:** keep Veyr on D-075 because it directly closes Phase 1 requirements #7/#11; release the P4 claim back to READY.
+- **P4 WORK LOSS:** no substantive D-046 implementation commit was observed after the claim before this ruling; the underlying D-046 Phase-C authority remains intact.
+- **PURPOSE:** enforce one active primary per Player-AI and prioritize the playable critical path over optional parallel documentation.
