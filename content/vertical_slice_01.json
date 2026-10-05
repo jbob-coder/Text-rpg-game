@@ -599,6 +599,21 @@
                   "confidence": 1
                 },
                 {
+                  "type": "npc_memory_add",
+                  "npc": "NPC_TAMSIN",
+                  "memory_id": "MEM_TAMSIN_PLAYER_SHARED_GATE_TWELVE",
+                  "importance": 4,
+                  "tags": [
+                    "gate_twelve",
+                    "player_disclosure",
+                    "trust"
+                  ],
+                  "data": {
+                    "knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
+                    "choice_id": "TELL_TAMSIN_GATE_TWELVE"
+                  }
+                },
+                {
                   "type": "party_add",
                   "npc": "NPC_TAMSIN"
                 },
@@ -787,6 +802,57 @@
       "choices": [
         {
           "id": "ENTER_GATE_TWELVE_WITH_TAMSIN",
+          "text": "Enter the tunnel together; Tamsin answers your earlier trust with a steady nod.",
+          "time_cost_minutes": 5,
+          "requires": [
+            {
+              "type": "party_has",
+              "npc": "NPC_TAMSIN"
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "opening.route",
+                  "value": "tunnel_with_tamsin"
+                },
+                {
+                  "type": "quest_objective_complete",
+                  "quest_id": "QUEST_DEAD_RELAY",
+                  "objective_id": "OBJ_ENTER_TUNNEL"
+                },
+                {
+                  "type": "npc_goal_progress",
+                  "npc": "NPC_TAMSIN",
+                  "goal_id": "GOAL_UNDERSTAND_GATE_TWELVE",
+                  "delta": 30
+                },
+                {
+                  "type": "npc_story_transition",
+                  "npc": "NPC_TAMSIN",
+                  "track_id": "TRACK_RELAY_CASE",
+                  "to_state": "ENTERED_GATE_TWELVE",
+                  "allowed_from": [
+                    "JOINS_GATE_TWELVE"
+                  ],
+                  "reason": "PARTY_ENTERED_SERVICE_TUNNEL"
+                }
+              ],
+              "next_scene": "OPENING_END"
+            }
+          },
+          "visible_if": [
+            {
+              "type": "npc_remembers",
+              "npc": "NPC_TAMSIN",
+              "memory_id": "MEM_TAMSIN_PLAYER_SHARED_GATE_TWELVE"
+            }
+          ]
+        },
+        {
+          "id": "ENTER_GATE_TWELVE_WITH_TAMSIN_AFTER_RECOVERY",
           "text": "Enter the tunnel together.",
           "time_cost_minutes": 5,
           "requires": [
@@ -827,7 +893,14 @@
               ],
               "next_scene": "OPENING_END"
             }
-          }
+          },
+          "visible_if": [
+            {
+              "type": "npc_not_remembers",
+              "npc": "NPC_TAMSIN",
+              "memory_id": "MEM_TAMSIN_PLAYER_SHARED_GATE_TWELVE"
+            }
+          ]
         }
       ],
       "location_id": "SERVICE_TUNNEL"
