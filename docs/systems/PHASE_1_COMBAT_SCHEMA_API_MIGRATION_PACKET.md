@@ -221,6 +221,22 @@ Encounter-local actor IDs are allowed only inside the encounter namespace.
 
 Persistent NPC/player refs must resolve to existing authoritative state IDs.
 
+### 7.1 D-069 persistent-ref resolution rule
+
+The current durable state provides a canonical NPC ID owner through `GameState.npcs` / authored `initial_state.npcs`.
+
+D-069 therefore supports authored `persistent_ref` only when it resolves to an existing durable NPC ID.
+
+Validation is deliberately two-phase:
+- pre-state tactical validation checks shape and stable-ID syntax;
+- after `GameState` construction, a bounded persistent-ref validation pass resolves encounter participant refs against `set(state.npcs)`.
+
+Unknown NPC refs reject the content pack.
+
+The repository does not currently expose a canonical player stable-ID field. D-069 must not invent one. Until such an identity contract is introduced, player-backed tactical participants omit `persistent_ref` and use encounter-local `actor_id`; durable player binding belongs to a later runtime/bridge integration seam.
+
+This is CPR-004 and remains inside D-069.
+
 ## 8. Combat actor adapter
 
 Do not copy the full player/NPC state into tactical content.
