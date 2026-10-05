@@ -1466,9 +1466,9 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - D-068 does not claim the repository-wide green authority checkpoint;
   - no physical-device validation is claimed.
 ### TASK D-069 — Implement tactical schemas, validators and pure grid core
-- STATUS: `READY / D-064 HANDOFF COMPLETE / GREEN CHECKPOINT PASS / VEYRA NEXT OWNER`
+- STATUS: `IN_PROGRESS / CLAIMED BY VEYRA / GREEN CHECKPOINT PASS`
 - PRIORITY: `P0 / RANK 10`
-- CLAIM_HEAD: released by OR-014; historical claim head `6f69012a8a7c8cbd21d791696f30f30a0c6e0d0f` retained for audit.
+- CLAIM_HEAD: `06bca70e2d004ca70635019b8c82afd7c916e05b` (current winning claim). Historical OR-014-released claim head `6f69012a8a7c8cbd21d791696f30f30a0c6e0d0f` retained for audit.
 - DEPENDS_ON:
   - D-060 DONE;
   - D-032 combat migration packet;
@@ -1518,8 +1518,10 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - movement-blocker versus LOS-blocker separation;
   - incoming-edge cover consistency and corner determinism;
   - no GameState/save-schema mutation.
+- CLAIMED_BY: Veyra
+- CLAIMED_AT: `2026-10-05T12:17:00-04:00`
 - RUNTIME MERGE-STATE PROCEDURE:
-  - gate is OPEN; Veyra should claim through the live Bulletin, then create a short-lived D-069 task branch from the current authority HEAD;
+  - gate is OPEN and Veyra's claim is active; preserve the live Bulletin claim and use a short-lived D-069 task branch from the claim-era authority;
   - implement/test there;
   - open PR targeting `docs/master-game-development-program`;
   - record task-branch HEAD, authority merge base/current HEAD, PR workflow, merge-state result, resulting authority HEAD and any compatibility repair;
