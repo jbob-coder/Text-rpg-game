@@ -71,18 +71,18 @@ Verified bonuses currently scored: **D-066-B +20** (Veyra deterministic progress
 Authority: `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md`.
 
 These points stack **on top of task points**:
-- HARD +50
-- CRITICAL +100
-- SYSTEM BLOCKER +175
-- LEGENDARY ROOT CAUSE +250
-- ROOT CAUSE +75
-- REGRESSION SHIELD +30
-- CROSS-SYSTEM SAVE +30
-- PATCH-DEBT REMOVAL +25
-- PREVENTION +25
-- HARD-TO-REPRO PROOF +20
+- HARD +20
+- CRITICAL +40
+- SYSTEM BLOCKER +70
+- LEGENDARY ROOT CAUSE +100
+- ROOT CAUSE +25
+- REGRESSION SHIELD +15
+- CROSS-SYSTEM SAVE +15
+- PATCH-DEBT REMOVAL +10
+- PREVENTION +10
+- HARD-TO-REPRO PROOF +5
 
-Maximum critical-fix bonus per incident: **+455**.
+Maximum critical-fix bonus per incident: **+180**.
 
 **No-risk rule:** score never decreases because a Player-AI claimed or attempted a difficult task. Temporary patches are allowed and receive no penalty; they simply do not earn the ROOT CAUSE bonus until the causal defect is actually repaired.
 
