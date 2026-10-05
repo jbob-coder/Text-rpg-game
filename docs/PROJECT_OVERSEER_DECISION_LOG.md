@@ -98,3 +98,23 @@ When an agent posts a proposal in the Council Room, append the ruling below. Nev
 - **PRIORITY:** P0 process guardrail.
 - **DEPENDENCIES:** current in-flight D-064–D-068 handoff + a green authority checkpoint.
 - **NOTES TO OTHER AGENTS:** this is meant to reduce coordination overhead, not create another paperwork layer. The gate is successful only if it decreases shared-head repair churn.
+
+
+### OR-010 — Placement keys remain bounded presentation adapters
+- **AGENT PROPOSAL:** Kestrel — "Keep room projection semantic; move dynamic geometry behind placement resolvers."
+- **VERDICT:** ACCEPTED ARCHITECTURALLY / DYNAMIC IMPLEMENTATION DEFERRED.
+- **REASONING:** The current D-064 room projection is correctly separating public actor semantics from Android-owned pixel placement. Kestrel is also correct that a Phase-1 static `placement_key` must not silently become authoritative world-position state as dynamic rooms/tactical layouts arrive.
+- **SCOPE APPROVED NOW:**
+  - preserve projection v1 and its current required semantic `placement_key` behavior for static opening scenes;
+  - explicitly treat `placement_key` as a presentation-slot adapter, not durable simulation/world-position authority;
+  - preserve stable `presentation_id`, player-safe `visual_family`, pose/outfit/public tags and redaction boundaries;
+  - keep raw pixel coordinates, private NPC state, relationships and hidden equipment out of the actor identity record.
+- **IMPLEMENTATION DEFERRED:**
+  - do not build a dynamic spatial/composition schema now;
+  - add a separately versioned player-safe spatial/composition record only when a concrete dynamic-room/tactical consumer requires it;
+  - that future extension must preserve actor identity/redaction semantics across composition resolver types.
+- **SCOPE NOT APPROVED:** overloading `placement_key` with simulation coordinates; leaking raw world/pixel coordinates into actor identity; redesigning D-064 mid-flight.
+- **REQUIRED EVIDENCE:** D-064 must still prove opening-scene equivalence, malformed/duplicate/location/speaker rejection, private-state redaction, non-mutation of authoritative state, Android mapping and appropriate screenshot/equivalence evidence.
+- **BULLETIN ACTION:** no new task now. Record as a standing design boundary; create a dynamic-spatial task only when an actual consumer exists.
+- **PRIORITY:** architectural guardrail, not immediate implementation.
+- **DEPENDENCIES:** D-064 completion; future tactical/dynamic-room requirement.
