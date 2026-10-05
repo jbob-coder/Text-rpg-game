@@ -166,7 +166,7 @@ Finish the bounded room/actor projection with the smallest current-authority int
 ### Exact next move
 Follow the surgical manifest without widening scope:
 1. fetch current authority HEAD and current SHAs for the manifest's seven-file surface;
-2. treat `agent/kestrel-d064-surgical-final` head `9c38bb0df9af9dfc9d376c868883299949fd47dd` as the latest **preflight only**: the earlier `GameScreen.kt` collapse is fixed (current diff is 3 additions / 1 deletion), but the branch is still behind live authority; `tests/test_d064_android_scene_projection_source.py` still lacks the manifest-required fallback-scene preservation assertions, and CPR-002 RED -> GREEN remains outstanding;
+2. treat PR #70 head `d5d4192a620624ab6dc80d8875176f01695dd095` as **DIAGNOSTIC_GREEN / INCOMPLETE**: run #358 passed Python 354/354, Android unit/build/package and emulator smoke/screenshots, but the tested head still lacks fallback-scene source assertions, contains one unrelated `14.dp -> 16.dp` icon change, and predates the CPR-002 transplant;
 3. create/rebuild a fresh short-lived D-064 branch and apply only:
    - both `GameScreen.kt` `roomActors = snapshot.room.actors` wires;
    - `SceneIllustration.kt` `List<GameRoomActor>` parameter + projected catalog call;
@@ -174,7 +174,7 @@ Follow the surgical manifest without widening scope:
    - focused catalog equivalence/rejection tests;
    - focused source-wiring regression, including preservation of the existing fallback-scene IDs;
 4. preserve unrelated presentation code/formatting;
-5. satisfy accepted `CPR-002` (**74/100 CRITICAL / LINKED TO D-064**): add an executable JVM RED using an otherwise-valid room actor plus unauthorized `memories` (or equivalent), then add the projected-actor key allowlist rejection at the Android mapper boundary and prove GREEN; no duplicate task;
+5. absorb accepted `CPR-002` (**74/100 CRITICAL / LINKED TO D-064**) surgically: PR #69 run #357 already proves RED and run #359 proves the same strict-key repair GREEN (Python 352/352, Android unit/build/package, emulator smoke/screenshots PASS; APK SHA-256 `728737a0fe7f3353d7c0264658f1359853c8a3b9e97f97604551ee3cfee8e37e`). Port only the 11-key allowlist, unexpected-key rejection and focused JVM regression into the final PR #70 family; do not carry PR #69's `GameEngine.kt` compaction;
 6. open the fresh PR and require current merge-state Python + Android unit/build/package + emulator evidence;
 7. if green, write D-064 evidence + Next Player Learning Record, FINISH, Brag/Scoreboard/Register/Bulletin handoff, then mark DONE;
 8. promote D-069 to READY for Veyra immediately after the safe D-064 handoff.
@@ -196,9 +196,9 @@ Kestrel owns this runtime/test surface. Nodus/Veyra/Veyr review only unless Kest
 ### Accepted CPR-002 gate
 - `CPR-002` — Android room-actor unknown-field strictness: **ACCEPTED / LINKED_TO_D-064 / 74/100 CRITICAL**.
 - No current user-visible privacy leak is proven because Python already strips forbidden actor fields.
-- Before D-064 handoff, Kestrel must add one executable JVM RED showing an otherwise-valid actor map with an unauthorized key such as `memories` is rejected, then implement the smallest strict actor-key allowlist/rejection at the Android mapper boundary and prove GREEN.
+- Executable behavior proof already exists: PR #69 run #357 is RED (`rejectsForbiddenPrivateActorField`, 96 tests / 1 failed), and run #359 is GREEN across Python, Android build/unit/package and emulator smoke/screenshots. Before handoff, Kestrel must transplant only that strict actor-key repair + regression into the clean final D-064 candidate and prove the cleaned head green.
 - Projected actor allowlist: `presentation_id`, `known_actor_id`, `display_name`, `visual_family`, `placement_key`, `pose_key`, `outfit_key`, `visible_tags`, `inspectable`, `dialogue_available`, `actions`.
-- Keep the repair inside D-064; do not create a duplicate task or move NPC privacy logic into Compose. Root-cause acceptance/reward remain pending executed RED -> GREEN evidence.
+- Keep the repair inside D-064; do not create a duplicate task or move NPC privacy logic into Compose. Root-cause integration/reward remain pending the clean final-candidate GREEN, not additional proof on the over-broad PR #69.
 
 ---
 
