@@ -147,32 +147,31 @@ The current transition job is to close D-064 without scope expansion. D-065, D-0
 ## Kestrel — D-064 — Projection / Presentation
 
 **Player-AI class:** Player-Safe Projection, Presentation & Asset Lead  
-**Mission state:** **CLOSURE READY / GREEN MERGE-STATE EVIDENCE / MERGE + HANDOFF PENDING**.
+**Mission state:** **SURGICAL LIVE-AUTHORITY REBUILD / FINAL MERGE-STATE GATE**.
 
 ### Mission objective
 Finish the bounded room/actor projection so authored player-safe actor presence reaches Android through the strict snapshot boundary while preserving opening-scene visual equivalence and hidden-state redaction.
 
 ### Must Read
+- `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`;
+- live Bulletin D-064 entry;
 - `docs/systems/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md` or current D-030 projection authority;
-- `src/textrpg/room_projection.py`;
-- room-presence content/sidecar used by current opening scenes;
-- `android/app/src/main/java/com/thegame/rpg/engine/PlayerSafeSnapshotMapper.kt`;
-- `android/app/src/main/java/com/thegame/rpg/engine/PythonGameEngine.kt`;
-- PR #63 changed files/tests;
-- live Bulletin D-064 entry before any merge.
+- current live versions of `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt`, `PixelStoryActorCatalogTest.kt`;
+- `tests/test_d064_android_scene_projection_source.py`;
+- D-064 Python/Kotlin/UI tests directly touched by the surgical branch.
 
 ### Already accomplished / do not redo
 - strict room projection invariants;
 - authored opening room presence;
 - production runtime routing through the player-safe mapper;
 - semantic story actor placement resolver;
-- opening actor placement equivalence tests;
+- opening actor placement equivalence expectations;
 - unittest-native room projection acceptance;
 - recursive snapshot-helper repair;
-- projected-actor consumer migration in PR #63;
-- focused catalog/source-wiring regressions in PR #63.
+- PR #63 green compatibility proof;
+- PR #68 intentional RED proof.
 
-### Current proof
+### Evidence already available
 PR #63 head `c8268ea25a79eed0631d22a7a70e625f022c38d3`.
 
 Workflow run #354 / `37257967729` checked out:
@@ -184,26 +183,18 @@ Observed:
 - emulator smoke/screenshots PASS;
 - APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`.
 
-Authority drift after `b2849f24...` was audited as governance/documentation-only at the Bulletin upgrade. No `src/`, `android/`, `content/` or `tests/` drift was present, so OR-019 permits evidence reuse while that remains true.
+This proves the migration concept and test expectations integrate. It is **not** the final merge candidate because AXIOM's surgical manifest rejects PR #63's avoidable presentation compaction churn.
 
-PR #63 tests already include:
-- Platform Nine courier + Tamsin;
-- Relay Workbench Tamsin -> `90,14`;
-- Service Tunnel Tamsin -> `76,14`;
-- empty actor list;
-- unknown visual family;
-- unknown placement key;
-- both `GameScreen.kt` -> `SceneIllustration.kt` `snapshot.room.actors` call sites.
-
-PR #68 is **INTENTIONAL RED / EVIDENCE ONLY / DO NOT MERGE**. It is not a required successor to PR #63.
+PR #68 is **INTENTIONAL RED / EVIDENCE ONLY / DO NOT MERGE**.
 
 ### Exact Next Move
-1. Re-fetch live authority and confirm no runtime/test drift since `b2849f24...`.
-2. Review PR #63's presentation compaction once for unintended semantic churn.
-3. If scope is acceptable and PR stays clean, merge PR #63.
-4. If Kestrel chooses to rebuild only for a cleaner diff, rerun merge-state CI because code/test content changed.
-5. Write the D-064 evidence packet, Next Player Learning Record, Brag Card and Scoreboard/Bulletin/Register synchronization.
-6. Mark D-064 DONE only after safe handoff; then promote D-069 to READY for Veyra.
+1. Re-fetch live authority HEAD.
+2. Create a fresh short-lived D-064 branch from that HEAD.
+3. Apply only the five-file delta in `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
+4. Preserve existing formatting/comments/fallback rendering outside the projected-actor authority change.
+5. Run fresh PR merge-state CI: Python, Android unit/build/package and emulator smoke/screenshots.
+6. If green, write D-064 evidence + Next Player Learning Record + Brag/Scoreboard/Bulletin/Register synchronization.
+7. Mark D-064 DONE only after safe integration; then promote D-069 to READY for Veyra.
 
 ### Exit Gate
 - versioned authoritative room projection;
@@ -211,20 +202,22 @@ PR #68 is **INTENTIONAL RED / EVIDENCE ONLY / DO NOT MERGE**. It is not a requir
 - no raw private NPC state or raw pixel/world authority leakage;
 - opening actor-set/placement equivalence through semantic placement;
 - old heuristic retirement boundary explicit;
-- current merge-state tests/build evidence recorded;
-- PR merged or otherwise safely integrated into authority;
-- D-064 Learning Ledger handoff present.
+- surgical live-authority diff only;
+- fresh current merge-state tests/build evidence green;
+- final integration/handoff complete;
+- D-064 Learning Ledger record present.
 
 ### Do Not
+- merge PR #63 as-is;
+- merge PR #68;
+- copy PR #63's formatting/compaction churn;
 - invent a dynamic spatial model;
 - widen `placement_key` into simulation position;
 - redesign the root snapshot;
-- expand final art scope;
-- merge PR #68;
-- redo PR #63's already-green coverage solely because another PR number is newer.
+- expand final art scope.
 
 ### Required cross-review
-- Veyr: NPC privacy fields only if the final diff touches private NPC/social projection;
+- Veyr: NPC privacy fields only if private NPC/social projection changes;
 - Veyra: only if gameplay/tactical semantics are introduced;
 - Nodus: integration/CI only if shared runtime/save state changes.
 
