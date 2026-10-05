@@ -156,7 +156,7 @@ Current authoritative transition:
 
 ## Critical-problem reward rule
 
-When an active task exposes a difficult runtime/code/integration defect, the claimant may also earn the **Critical Root-Cause Jackpot** under OR-021.
+When an active task exposes a difficult runtime/code/integration defect, the claimant may also earn the **Critical Root-Cause Jackpot** under OR-024.
 
 - task points remain intact;
 - no score is deducted for taking, attempting, reverting, or handing off a difficult task;
@@ -384,7 +384,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIM_HEAD:** `033495efe3f88489e9670837d87658878cee9263`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** PR #62 run #345 / `37252981251`: Python 347 tests OK; Android unit/build/package PASS; emulator smoke/screenshots PASS. Critical incident evidence: `docs/evidence/CRITICAL_FIX_D067_BRIDGE_RECONCILIATION_2026-10-04.md`.
-- **CRITICAL_FIX_REWARD:** **+310 VERIFIED** under OR-021; this does not mark the primary task DONE.
+- **CRITICAL_FIX_REWARD:** **+310 VERIFIED** under OR-024; this does not mark the primary task DONE.
 - **CRITICAL_FIX_CARD:** `docs/AI_BRAG_ROOM.md` — `CRITICAL FIX — D-067 — Bridge transition baseline reconciliation`.
 - **BRAG_CARD:** pending for primary completion.
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
