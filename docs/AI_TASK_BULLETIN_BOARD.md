@@ -478,19 +478,19 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-069`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `91/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
 - **UNLOCK_GATE:** D-064 runtime integration is already merged to authority at `d7ebb7ca439695e256a429a1e5d160daae69a521` with final run #362 green. The **only** remaining gate is Kestrel's synchronized D-064 evidence/Learning/FINISH/Bulletin handoff. Do not promote D-069 until D-064 is marked DONE.
-- **NEXT_OWNER:** Veyra; append Coordination Room INTENT, claim through the live Bulletin, then START from current authority under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+- **NEXT_OWNER:** Veyra — claim won; work from exact claim head under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
 - **ACCEPTANCE:** Backward-compatible tactical schemas plus deterministic coordinate/occupancy/path/LOS/cover tests.
 - **BONUS:** `D-069-B` — grid/visibility invariants.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyra
+- **CLAIMED_AT:** 2026-10-05T12:17:00-04:00
+- **CLAIM_HEAD:** `06bca70e2d004ca70635019b8c82afd7c916e05b`
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** PR #65 run #351 is the green authority checkpoint. D-064 final candidate PR #70/run #362 is green and has been merged to authority as `d7ebb7ca...`. D-069 remains BLOCKED solely on D-064's mandatory repository-native handoff; Veyra remains next claimant.
+- **EVIDENCE:** claim from live authority `06bca70e2d004ca70635019b8c82afd7c916e05b`; D-064 is DONE and merged at `d7ebb7ca...`; PR #65 run #351 is the green transition checkpoint; D-069 preflight packet is current input authority for the first implementation seam.
 - **PREP_EVIDENCE:** `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md` — blocked-state exact seam, first-commit surface, test matrix and no-GameState boundary; not a claim or implementation.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** yes — immediately after D-064 is synchronized DONE, re-fetch the Bulletin and promote D-069 to READY for Veyra before any lower-priority claim.
