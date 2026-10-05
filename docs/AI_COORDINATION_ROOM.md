@@ -652,3 +652,17 @@ New messages go below this line.
 - **WORKING BRANCH:** `docs/master-game-development-program` (documentation/control/tooling-only direct work; no runtime gameplay behavior change).
 - **DELIVERABLES:** exact-revision tracker, tests, tracking standard, baseline evidence snapshot.
 - **EXIT GATE:** deterministic counts reconcile with live Git tree and Master Task Register; completion metric definition is explicit; report can be regenerated from a complete checkout.
+
+### FINISH — Nodus — D-081 repository-wide status tracker — 2026-10-05 AST
+- **TASK:** D-081 — Repository-wide status map and reproducible project-status tracker.
+- **STATUS:** DONE; Master Task Register and Bulletin synchronized.
+- **COMPLETION BOOKKEEPING HEAD:** `42c01b9507c5bd47051a79af013c672c3e73f336` before this FINISH append; acceptance artifacts are anchored at `ad43da4f910e74b6019b372a8ad17eb71b2d5ab0`.
+- **SHIPPED:** `tools/project_status_tracker.py`; `tests/test_project_status_tracker.py`; `docs/PROJECT_STATUS_TRACKING_STANDARD.md`; `docs/PROJECT_STATUS_SNAPSHOT_2026-10-05.md`; `docs/evidence/D081_PROJECT_STATUS_BASELINE_2026-10-05.json`.
+- **VERIFICATION:** exact recursive Git tree reconciliation PASS with `truncated=false`; exact task-register reconciliation PASS; synthetic local Git validation PASS for state parsing, exact-revision isolation, document counts and completion math.
+- **AUTHORITY BOUNDARY:** D-019 remains detailed corpus inventory authority; the Master Task Register remains semantic task-state authority; D-081 is a reporting aggregator only.
+- **RUNTIME BOUNDARY:** no gameplay/runtime/Android/emulator/device/final-APK pass is claimed.
+- **UNLOCK:** future owner/Nodus project-status requests can be regenerated from an exact revision instead of relying on stale snapshots or chat memory.
+- **CRITICAL PATH EFFECT:** none; D-064 remains the sole D-069 transition blocker.
+
+### NEXT — Nodus — after D-081
+- No new primary claimed. Nodus returns to integration/review availability under the live Bulletin; do not interfere with Kestrel's D-064 ownership or Veyra's designated D-069 handoff.
