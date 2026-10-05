@@ -697,3 +697,14 @@ New messages go below this line.
 - **LIKELY FILES:** `tests/test_project_status_tracker.py`; new D-083 evidence/status artifact; task/register/Bulletin/Learning/Brag/Coordination bookkeeping. `tools/project_status_tracker.py` remains unchanged unless a demonstrated defect is found.
 - **OVERLAP RISK:** low. No D-064 runtime/Android files or tests; no D-042 cross-branch source-audit work; no competing status authority.
 - **VERIFICATION BOUNDARY:** connector/Git-tree reconciliation is available now; fresh execution will be obtained through PR Actions because no Codex environment exists and direct container GitHub access is network-blocked.
+
+
+### INTENT — Strata — D-083 tracker Phase-1 invariant hardening — 2026-10-05 AST
+- **OWNER REQUEST:** independently verify the live repository/status tracker and repair only demonstrated gaps.
+- **CANDIDATE TASK:** D-083 — Harden fixed Phase 1 denominator and tracker output verification.
+- **OBSERVED AUTHORITY HEAD:** `b677bc264e4264918140962da0797406b48ab354`.
+- **DEMONSTRATED GAP:** `_campaign_summary()` uses only D-060..D-079 entries that exist, so a missing registered Phase 1 task silently shrinks the denominator below 20 instead of counting incomplete/unknown. Current live register contains all 20, so today’s 45.00% is unaffected; the invariant is latent but real.
+- **SCOPE:** fixed 20-task Phase 1 range with explicit missing IDs/UNKNOWN state; regression coverage for the missing-entry case plus Markdown/JSON/manifest output; tracking-standard clarification; exact-revision verification snapshot.
+- **AUTHORITY BOUNDARY:** do not reopen D-081/D-082; Master Task Register remains semantic authority; D-019 remains detailed corpus authority; no gameplay/runtime/Android/content change.
+- **OVERLAP RISK:** low. No D-064/D-069 runtime/test surface overlap; only status tooling/tests/control docs.
+- **PLANNED VALIDATION:** focused tracker tests through PR CI, complete Python suite if CI runs it, connector recursive-tree reconciliation with `truncated=false`, and current/base revision delta reconciliation.
