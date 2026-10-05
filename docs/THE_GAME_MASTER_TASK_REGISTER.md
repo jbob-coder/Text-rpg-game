@@ -173,17 +173,16 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-02 07:32 AST`
 
 ### TASK D-019 — Reproducible documentation/world/asset inventory
-- STATUS: `IN_PROGRESS / EXACT STRUCTURAL SNAPSHOT REFRESHED`
+- STATUS: `IN_PROGRESS / IMMUTABLE-REVISION TOOLING FIXED / STRUCTURAL SNAPSHOT REFRESHED`
 - PRIORITY: `P0`
 - CURRENT:
-  - `docs/REPOSITORY_CORPUS_INVENTORY_SNAPSHOT_2026-10-04.md` records exact recursive-tree structural counts for source HEAD `991cd9b29ea0752fa1c303a19e8f210713efe4b5`.
-  - `docs/evidence/repository_inventory_2026-10-04.json` persists the same machine-readable checkpoint.
-  - exact source-head structure: 490 tracked files; 320 repository Markdown files; 318 under `docs/`; 21 structured documentation paths; 24 PNGs; 42 Python files; 68 Kotlin/KTS files; 51 Python/Kotlin test-source paths.
-  - bounded structured counts now include 104 asset-manifest rows / 95 unique asset IDs, the repository-owned 1,019-record Status Wave-001 structural audit, and the 9-node / 8-edge Gate Twelve baseline.
-  - `tools/documentation_inventory.py` remains the deterministic complete-checkout path for word counts and broader local inventory.
+  - D-060 exact-revision evidence is persisted at `docs/evidence/repository_inventory_d060_exact_revision_2026-10-04.json` for immutable source HEAD `4570005b4d544f56db1222623955139a3b23c01a`.
+  - exact source-head structure: 561 tracked files; 387 repository Markdown files; 385 under `docs/`; 24 structured documentation paths; 24 PNGs; 43 Python files; 68 Kotlin/KTS files; 52 Python/Kotlin test-source paths.
+  - `tools/documentation_inventory.py` now resolves a requested Git revision to a commit SHA and inventories committed content from that revision instead of walking the mutable working tree.
+  - `tests/test_documentation_inventory_tool.py` proves untracked/dirty state cannot contaminate a revision report and proves distinct committed revisions produce distinct correct reports.
+  - the earlier `991cd9b29ea0752fa1c303a19e8f210713efe4b5` snapshot remains valid historical evidence for its own immutable revision; it is no longer the current structural checkpoint.
 - REMAINING:
-  - execute/persist the tool from a complete checkout of the exact current program HEAD;
-  - publish exact current-head Markdown word/heading counts;
+  - execute/persist the full inventory tool from a complete checkout of an exact current program revision and publish exact Markdown word/heading totals from that execution;
   - add generalized structured world/domain record extractors beyond already audited packets;
   - reconcile asset-stage counts against provenance authority rather than last-seen manifest status;
   - separate executed-test evidence from test-source counts;
@@ -1243,18 +1242,30 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETED_AT: 2026-10-04 AST
 
 ### TASK D-060 — Execute fresh corpus inventory and second-pass quota recalibration
-- STATUS: PENDING / BULLETIN READY / NEXT PROGRAM CONTROL ACTION
-- PRIORITY: P0
-- BLOCKER:
-  - exact word/heading/current-record totals require a complete-checkout execution or equivalent exhaustive current-head inventory process;
-  - do not fabricate totals from partial connector reads.
-- OUTPUT TARGETS:
-  - fresh current-head inventory evidence;
-  - second-pass/final quota revision;
-  - ranked reconstruction-depth/content/migration backlog;
-  - explicit Phase 1 dependency impact.
-- RULE: first-pass 148/148 coverage is a floor closure, not final documentation completion.
-
+- STATUS: DONE
+- PRIORITY: P0-CRITICAL
+- OUTPUTS:
+  - `tools/documentation_inventory.py` — immutable-revision inventory path;
+  - `tests/test_documentation_inventory_tool.py` — contamination/revision regression coverage;
+  - `docs/evidence/repository_inventory_d060_exact_revision_2026-10-04.json` — fresh immutable structural evidence;
+  - `docs/SECOND_PASS_DOCUMENTATION_RECALIBRATION_2026-10-04.md` — second-pass closure-gate recalibration and ranked backlog.
+- RESULT:
+  - working-tree contamination is removed from the inventory contract;
+  - source revision is recorded as an immutable commit SHA;
+  - fresh exact-tree evidence at `4570005b4d544f56db1222623955139a3b23c01a` records 561 tracked files, 387 Markdown files, 385 docs Markdown files, 24 structured documentation paths, 43 Python files, 68 Kotlin/KTS files and 52 test-source paths;
+  - D-058 remains valid at the 148 / 148 first-pass semantic floor and is not reopened;
+  - D-019 remains IN_PROGRESS for complete-checkout word/heading execution and broader structured-domain/evidence extraction;
+  - second-pass planning now uses migration/runtime/projection/persistence/integration closure gates instead of another arbitrary flat file quota.
+- VERIFICATION:
+  - `PYTHONPATH=. python -m unittest tests.test_documentation_inventory_tool -v` executed in isolated temporary Git repositories using the exact file bytes later committed: 2 tests passed, 0 failures/errors;
+  - committed tool/test blob SHAs match the executed local file blob hashes;
+  - recursive Git-tree evidence was collected from immutable source HEAD `4570005b4d544f56db1222623955139a3b23c01a`;
+  - no full engine suite, Android build, physical-device test or full-checkout inventory execution is claimed.
+- PHASE 1 IMPACT:
+  - removes the D-060 program-control dependency for migration and proof tasks;
+  - does not itself prove a playable Phase 1 requirement.
+- BONUS: D-060-B not claimed as a separate bonus.
+- COMPLETED_AT: 2026-10-04T20:32:24-04:00
 
 ## 2026-10-04 — Ranked 20-task AI execution campaign
 
