@@ -622,16 +622,16 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-045`
 - **PRIORITY:** `P0 PARALLEL`
 - **IMPORTANCE:** `90/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **DOMAIN:** full-game progression / classes / professions / ranks.
 - **DEPENDENCIES:** existing D-045 authority; no dependency on D-060 completion.
 - **ACCEPTANCE:** complete one bounded next D-045 child at reconstruction depth; preserve CURRENT/TARGET/PROPOSAL separation; do not implement runtime or override D-061.
 - **BONUS:** dependency map from classes/professions/ranks to skills, training, facilities and tactical roles.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyra
+- **CLAIMED_AT:** 2026-10-04 AST
+- **CLAIM_HEAD:** `21526a9d97a76b85f2540f441bead56593fd0e0e`
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
+- **EVIDENCE:** P3 claim; next bounded child is the combat class catalog from the existing D-045 NEXT sequence.
 - **BRAG_CARD:** pending
 
 ### Parallel P4 — D-046 — Status / ability / passive Phase-C refinement
