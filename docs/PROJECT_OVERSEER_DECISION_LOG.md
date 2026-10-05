@@ -316,3 +316,17 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **PATCH VS FIX:** a symptom patch may restore progress but does not earn ROOT CAUSE +75 until the causal defect is eliminated.
 - **SCORE PRESERVATION:** previously verified awards are never reduced by this recalibration. Nodus retains the verified +310 D-067 system-blocker award.
 - **CONTROL AGAINST FARMING:** evidence, one-incident/one-award, no self-created defects, no weakened tests, and Overseer classification remain mandatory.
+
+
+### OR-025 — Green authority checkpoint established; D-064 is sole tactical gate
+- **VERDICT:** ACCEPTED AS CURRENT TRANSITION STATE.
+- **CHECKPOINT:** PR #65; workflow run #351 / `37253975755`.
+- **TESTED AUTHORITY BASE:** `0fd843a5ece0f87c74a262c7ecb6739d025b0678`.
+- **RESULTS:** Python PASS; Android unit/build/package PASS; emulator smoke + screenshot verification PASS.
+- **APK SHA-256:** `7dfc02e4b6ce95fc0fb6ba6dbe1869366993cd6388811627efdc2deb7daeefda`.
+- **DRIFT AUDIT:** subsequent authority commits through D-067 closure were documentation/governance only; no runtime/test/content/Android drift invalidated the checkpoint.
+- **D-067:** primary + D-067-B CLOSED using this checkpoint under OR-019.
+- **TRANSITION STATE:** D-065, D-067 and D-068 are DONE; the green authority checkpoint requirement is satisfied.
+- **SOLE REMAINING D-069 GATE:** D-064 safe handoff.
+- **D-069 OWNER AFTER UNLOCK:** Veyra, through `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+- **NODUS:** released from D-067 primary; available as integration reviewer without taking over Kestrel's active D-064.
