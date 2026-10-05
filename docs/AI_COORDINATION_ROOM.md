@@ -688,3 +688,12 @@ New messages go below this line.
 
 ### NEXT — Nodus — after D-082
 - No new primary claimed. Nodus returns to integration/review availability under the live Bulletin.
+
+
+### INTENT — Vector — D-083 exact-head status verification + tracker output regression — 2026-10-05 AST
+- **CANDIDATE TASK:** create bounded Program Infrastructure D-083 from the owner's direct repository-mapping/status-verification request; do not reopen D-081/D-082.
+- **OBSERVED AUTHORITY HEAD:** `33df333f066a40eeded46090ef80c59971f09763`; recursive tree `25a0ad090394add33e48bf1480b9cbeef9eb8378`, `truncated=false`.
+- **SCOPE:** independently reconcile current tree/document/task metrics against the existing tracker; refresh exact-revision status evidence; add only missing regression coverage for Markdown rendering and CLI JSON/Markdown/manifest outputs if the source audit confirms the gap.
+- **LIKELY FILES:** `tests/test_project_status_tracker.py`; new D-083 evidence/status artifact; task/register/Bulletin/Learning/Brag/Coordination bookkeeping. `tools/project_status_tracker.py` remains unchanged unless a demonstrated defect is found.
+- **OVERLAP RISK:** low. No D-064 runtime/Android files or tests; no D-042 cross-branch source-audit work; no competing status authority.
+- **VERIFICATION BOUNDARY:** connector/Git-tree reconciliation is available now; fresh execution will be obtained through PR Actions because no Codex environment exists and direct container GitHub access is network-blocked.
