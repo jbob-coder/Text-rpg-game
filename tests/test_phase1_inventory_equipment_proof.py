@@ -7,7 +7,7 @@ from tempfile import TemporaryDirectory
 import unittest
 
 from textrpg import RuleError, content_pack_from_mapping, loads_state
-from textrpg.android_bridge import AndroidBridgeError, create_session
+from textrpg.android_bridge import AndroidBridgeError, open_android_session
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -95,7 +95,7 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
     def test_phase1_item_equipment_story_loop_survives_two_save_boundaries(self) -> None:
         with TemporaryDirectory() as directory:
             save_path = Path(directory) / "phase1-items.json"
-            session = create_session(CONTENT, save_path=save_path)
+            session = open_android_session(CONTENT, save_path=save_path)
 
             starting = {
                 item["id"]: item["quantity"]
@@ -129,7 +129,7 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
             self.assertEqual(2.0, endurance["breakdown"]["equipment:body"])
 
             session.save()
-            restored = create_session(CONTENT, save_path=save_path)
+            restored = open_android_session(CONTENT, save_path=save_path)
             restored.load()
             restored_body = next(
                 slot
@@ -159,7 +159,7 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
             self.assertEqual("opened", after_seal["visuals"]["relay_state"])
 
             restored.save()
-            final_session = create_session(CONTENT, save_path=save_path)
+            final_session = open_android_session(CONTENT, save_path=save_path)
             final_view = final_session.load()
             final_ids = {item["id"] for item in final_view["inventory"]["items"]}
             self.assertNotIn("ITEM_MAINTENANCE_SEAL", final_ids)
@@ -174,7 +174,7 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
             self.assertEqual("opened", final_view["visuals"]["relay_state"])
 
     def test_failed_equip_restores_full_authoritative_state(self) -> None:
-        session = create_session(CONTENT)
+        session = open_android_session(CONTENT)
         before = deepcopy(session.state.snapshot())
         session.content.registries["items"]["ITEM_DEPOT_JACKET"]["requirements"] = {
             "attributes": {"might": 999}
