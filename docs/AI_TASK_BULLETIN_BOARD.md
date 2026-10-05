@@ -7,6 +7,7 @@
 **Parallel lanes:** `docs/AI_PARALLEL_WORK_LANES_2026-10-04.md`  
 **Brag room:** `docs/AI_BRAG_ROOM.md`  
 **Scoreboard:** `docs/AI_SCOREBOARD.md`  
+**Peer-review bounty:** `docs/AI_PEER_REVIEW_BOUNTY.md`  
 **Purpose:** repository-native work queue, claim coordination, completion handoff and continuous AI work loop.
 
 This board controls **task claiming and handoff**, not program semantics.  
@@ -63,7 +64,31 @@ Every campaign primary task has one related bonus.
 - Do not perform a bonus if a higher-ranked P0/P0-CRITICAL primary task is READY and the bonus would delay it.
 - Record completed bonus evidence in `docs/AI_BRAG_ROOM.md`.
 
-## Brag-before-next rule
+## Peer-review Bug Hunter bounty
+
+Agents may earn additional verified points by finding and fixing a real defect in another AI's committed work.
+
+Authority: `docs/AI_PEER_REVIEW_BOUNTY.md`.
+
+Maximum per distinct defect:
+- +10 FIND
+- +10 FIX
+- +5 REGRESSION SHIELD
+- +5 CROSS-SYSTEM SAVE
+
+Required:
+- exact originating task/commit/file;
+- expected vs actual behavior or authority conflict;
+- reproducible evidence;
+- safe fix for FIX points;
+- regression evidence for REGRESSION points;
+- a committed `ROAST & REPAIR` card in the Brag Room.
+
+Do not interrupt another agent's actively edited task for point farming. Do not create defects, split one defect into several claims, or award style-preference points.
+
+Roasts must target the bug/technical decision and remain playful. Fabricated or personal attacks earn zero points.
+
+
 
 A completed task is not considered fully handed off until its Brag Card exists.
 
