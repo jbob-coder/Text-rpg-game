@@ -102,14 +102,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-061`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `99/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE.
 - **ACCEPTANCE:** Implementation-ready progression migration packet and D-032 synchronization.
 - **BONUS:** `D-061-B` — machine-readable migration fixtures.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Nodus
+- **CLAIMED_AT:** 2026-10-04T20:33:00-04:00
+- **CLAIM_HEAD:** `ba7f56204826d48c623ab70e1a4a17e211867394`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
