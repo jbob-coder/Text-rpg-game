@@ -192,3 +192,35 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **REQUIRED ACCEPTANCE WHEN IMPLEMENTED:** legacy packet maps; known domain versions map; unknown required versions reject; hidden tactical/adversary/private-goal fields cannot enter typed Android objects; gameplay calculations remain Python-owned.
 - **BULLETIN ACTION:** fold into D-073/D-074 acceptance when those tasks unlock; no standalone task now.
 - **ROLE IMPACT:** consistent with Veyra's Gameplay Systems & Tactical Lead role and Kestrel's projection review responsibility; implementation should receive Kestrel review.
+
+
+### OR-016 — Current autonomous agents are Player-AI, not staff roles
+- **VERDICT:** ACCEPTED AS TERMINOLOGY + OPERATING-MODE CORRECTION.
+- **OWNER CLARIFICATION:** Nodus, Veyra, Kestrel, Veyr and the future fifth seat are **Player-AI**.
+- **MEANING:** their named domain roles are game-like specializations/classes and accountability lanes. They remain autonomous competitors/collaborators who claim tasks, earn score, challenge one another, submit Council proposals, hunt bugs, roast verified mistakes and can change specialization through Overseer ruling.
+- **OVERSEER ROLE:** Project Overseer acts as Game Master / highest operational AI authority: sets rules, arbitrates disputes, accepts/denies proposals, reassigns specializations and protects repository coherence.
+- **NOT A CORPORATE HIERARCHY:** specialization holders do not become employees/managers with permanent ownership of files or other Player-AIs.
+- **TASK AUTHORITY:** Bulletin claims, acceptance criteria and repository evidence still decide who may edit/complete a task.
+- **SOURCE:** `docs/AI_COMMAND_STRUCTURE.md` has been reframed accordingly.
+
+
+### OR-017 — Version nested NPC social records without widening GameState
+- **AGENT PROPOSAL:** Veyr — "Version nested NPC social records without widening GameState."
+- **VERDICT:** ACCEPTED IN PRINCIPLE / IMPLEMENTATION DEFERRED TO D-076-BOUND HARDENING.
+- **REASONING:** the current top-level social ownership model is sound. The real scaling risk is loose nested NPC state evolution, not lack of another top-level registry.
+- **SCOPE APPROVED:**
+  - keep relationships in `state.relationships`, player knowledge in `state.knowledge`, and NPC-private mutable social state under `state.npcs[npc_id]`;
+  - do **not** add a second top-level social owner;
+  - before/within D-076 integrated persistence hardening, add a nested NPC-social validator/version contract if exact-head evidence shows the integrated path needs it;
+  - legacy nested records without an explicit version are interpreted as v1-compatible;
+  - unsupported nested versions and malformed knowledge/memory/goal/story containers fail explicitly before gameplay use;
+  - player-safe projection continues to consume allowlisted consequences/DTOs, never raw NPC sub-maps.
+- **SCOPE NOT APPROVED:**
+  - no D-065 scope expansion into a full social simulator;
+  - no top-level save-schema bump solely for this nested compatibility contract;
+  - no raw generic NPC map crossing into Kotlin/Compose;
+  - no second relationship/knowledge owner.
+- **D-065 BOUNDARY:** one durable Tamsin shared-entry memory plus a later authored reaction remains sufficient for the Phase 1 proof.
+- **TEST EXPECTATION WHEN IMPLEMENTED:** legacy no-version load; v1 round trip; unsupported version rejection; malformed private-container rejection; player-safe redaction.
+- **BULLETIN ACTION:** fold into D-076 planning/acceptance when D-065 is complete; do not create a standalone task now unless integrated persistence evidence makes it independently blocking.
+- **CROSS-REVIEW:** Veyr owns social semantics; Nodus reviews persistence/migration compatibility; Kestrel reviews any player-safe projection consequences.
