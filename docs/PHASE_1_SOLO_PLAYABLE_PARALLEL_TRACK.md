@@ -389,8 +389,38 @@ Migration decision:
 - add stable ability ID to the existing player-safe Python ability projection;
 - add typed Kotlin ability/technique mapping because current `GameSnapshot` drops `status.abilities`.
 
-D-066 may become READY after board synchronization. D-061 does not itself satisfy Phase 1 requirement 5 because no exact-head runtime proof has yet been executed.
+D-061 supplied the migration contract. D-066 now supplies the executed runtime proof.
 
+## D-066 Phase 1 progression proof
+
+Phase 1 requirement 5 is now **SATISFIED BY A BOUNDED IMPLEMENTED PROOF**.
+
+Verified Gate Twelve route:
+- `ABILITY_TRACE_ECHO` and discovered `TECHNIQUE_SIGNAL_PULSE`;
+- authored one-hour practice;
+- technique and ability mastery gain;
+- stamina/focus and world-time cost;
+- save/load preservation;
+- deterministic uninterrupted-vs-save-boundary replay;
+- stable player-safe ability identity;
+- typed Android ability/technique/resource projection;
+- bounded Stats presentation with no UI-owned progression arithmetic.
+
+Exact verification evidence:
+- `docs/evidence/D066_PHASE1_PROGRESSION_PROOF_2026-10-04.md`;
+- verification PR #42 at `48ce6223fb84c3d31457c7f1dacaec87ce0d3df2`;
+- Android Pixel Client run #312 / `37250124885`;
+- D-066 Python progression/persistence/determinism tests: PASS;
+- Android JVM tests: PASS;
+- Compose instrumentation compilation: PASS;
+- connected API-35 emulator suite: 35 / 35 PASS;
+- debug APK assembly/content verification: PASS.
+
+This proves one reusable Phase 1 progression route. It does **not** mark full classes, professions, global rank design, progression population, or final progression UX complete.
+
+Repository-level caveat:
+- the aggregate Python job remains red because the unchanged room-projection test imports `pytest` while the workflow does not install it;
+- no D-066 Python test failed.
 
 ## D-062 social migration gate
 
