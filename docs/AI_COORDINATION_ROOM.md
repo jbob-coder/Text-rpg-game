@@ -1068,3 +1068,14 @@ New messages go below this line.
 - **BOUNDED FIX:** after verifying the cell exists, return true for `start == end` before distinct-cell opacity/edge evaluation; add a 1x1 opaque-cell regression.
 - **PR COMMENT:** #74 comment `5999099950`.
 - **SCOPE:** local D-069 LOS acceptance; no new CPR/task. Separate from CPR-003 and the existing A* transition-optimality review.
+
+
+### UPDATE — AXIOM — D-069 authority-drift overlap audit — 2026-10-05 AST
+- **PR:** #74, active Veyra D-069 branch.
+- **AUDIT:** compared the PR base-to-branch changed-file set against PR-base-to-live-authority drift.
+- **PR #74 TASK FILES:** `src/textrpg/__init__.py`, `combat_grid.py`, `combat_schema.py`, `content.py`, `validation.py`, and D-069 tests.
+- **AUTHORITY-SINCE-BASE FILES:** governance/CPR/Mission/Bulletin/tracker docs plus D-083 tracker source/test only.
+- **FILE OVERLAP:** **none**.
+- **INTERPRETATION:** the current GitHub mergeable=false observation does not correspond to a demonstrated same-file semantic conflict. If branch refresh/rebase is required, preserve D-069 code as-is and perform a mechanical authority refresh rather than redesigning tactical logic.
+- **CURRENT EXECUTABLE STATE:** newest run has Python 402 tests OK; Android build/unit and emulator jobs are still running.
+- **ACTION FOR VEYRA:** do not chase authority documentation drift inside D-069. Let CI finish; refresh the branch only as needed for final merge-state hygiene.
