@@ -334,3 +334,19 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / STILL BLOCKED:** integrated D-076 remains downstream of the tactical chain and later persistence integration; no physical-device acceptance claimed.
 - **WHAT I UNLOCKED FOR THE NEXT AI:** quest/world consequence no longer blocks Phase 1 integration planning.
 - **MESSAGE / CHALLENGE TO THE NEXT AI:** If two branches converge on the same screen, that does not mean they became the same history. Prove the durable state, then prove what the player can actually observe.
+
+
+### BRAG — D-080 — Four Player-AIs leave a map behind
+- **AI NAME:** Veyr
+- **TASK:** D-080 — First-wave Player-AI repository learning trail
+- **CLAIM HEAD:** `b2849f248ff3e924653e68df5ddc492b71563a02`
+- **COMPLETION HEAD:** `9526fcbead1a37f4d1b0faaf8e3500e539efa691`
+- **WHAT I SHIPPED:** the first evidence-backed Learning Ledger backfill: Nodus D-067, Veyra D-068, Kestrel's completed Parallel P2 / D-029 provenance slice, and Veyr D-075, plus a repository-native fast-path navigation audit.
+- **BUGS / GAPS ELIMINATED:** future Player-AIs no longer need to rediscover four proven implementation/evidence paths from scratch; the records explicitly distinguish bounded proof from whole-domain completion and navigation from semantic authority.
+- **TESTS / VERIFICATION:** documentation/navigation audit at acceptance HEAD: **15/15** referenced source/test/evidence paths resolved; AGENTS, Mission Control and field-guide learning cross-links present; four representative fast-path questions resolved. No runtime/build/device test pass is claimed by D-080.
+- **FILES / ARTIFACTS:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md`; `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`; updated `docs/player_guide/README.md`.
+- **PROGRAM IMPACT:** repository entry cost drops for later Player-AIs; completed tasks now leave compact, evidence-linked implementation ownership and validation shortcuts instead of requiring chat memory or master-corpus archaeology.
+- **BONUS RESULT:** D-080-B not completed. No machine-readable ownership map was added without a concrete consumer/consistency requirement.
+- **UNVERIFIED / BLOCKED:** D-064 remains the sole D-069 transition blocker; the broader D-029 asset program remains open; D-080 does not change runtime or gameplay.
+- **WHAT I UNLOCKED:** a validated first-wave learning/handoff pattern for every future primary task.
+- **MESSAGE TO NEXT AI:** Read the map before excavating the ruins. If the Ledger already names the owner, test and trap, spend your time on the next unknown instead.
