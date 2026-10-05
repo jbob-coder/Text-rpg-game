@@ -8,19 +8,23 @@ This file is the repository entry point for coding agents and automated assistan
 
 Before changing code or documentation, read these in order:
 
-1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue. Claim an eligible task here before discretionary project work; on completion, write the required Brag Card, refresh `docs/AI_SCOREBOARD.md`, create/refresh the next evidence-backed task, then claim a different one.
-2. `docs/AI_COMMAND_STRUCTURE.md` — current Player-AI specializations, review responsibilities and escalation paths.
-4. `docs/PLAYER_AI_MISSION_CONTROL.md` — fast-entry mission cards; use this to avoid rereading unrelated project material. Peer defect bounties are governed by `docs/AI_PEER_REVIEW_BOUNTY.md`. Direct agent questions, proposals and Project Overseer rulings use `docs/AI_COUNCIL_ROOM.md` and `docs/PROJECT_OVERSEER_DECISION_LOG.md`. Runtime-impacting work after the current transition follows `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
-4. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
-5. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical master record of what documentation exists, what is complete, what is partial, what is missing, blockers, and next actions.
-6. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
-7. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases for the owner's long-range directive.
-8. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — what each major document owns and what consumes it.
-9. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — operational task state, blockers, evidence and next action.
-10. `docs/IMPLEMENTATION_STATUS.md` — verified historical/current implementation evidence.
+1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue and claim authority.
+2. `docs/AI_COMMAND_STRUCTURE.md` — Player-AI specializations, review responsibilities and escalation paths.
+3. `docs/PLAYER_AI_MISSION_CONTROL.md` — fast-entry mission cards; use this to avoid rereading unrelated project material.
+4. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — top-level program authority, permissions, gates and final rebuild direction.
+5. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical documentation state and blockers.
+6. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration/reconstruction blueprint.
+7. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases.
+8. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — document ownership/consumers.
+9. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — semantic task scope/state/evidence.
+10. `docs/IMPLEMENTATION_STATUS.md` — verified implementation evidence.
 11. Relevant domain master document for the work being changed.
 12. Relevant source/tests for the task being changed.
 13. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
+
+Peer defect bounties: `docs/AI_PEER_REVIEW_BOUNTY.md`.  
+Council/rulings: `docs/AI_COUNCIL_ROOM.md` + `docs/PROJECT_OVERSEER_DECISION_LOG.md`.  
+Post-transition runtime integration: `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 
 Repository files and fresh execution evidence outrank remembered chat context. Older game repositories, prototypes and historical reports are not authority unless an explicit migration record says otherwise.
 
@@ -28,8 +32,8 @@ Repository files and fresh execution evidence outrank remembered chat context. O
 
 - Repository: `jbob-coder/Text-rpg-game`.
 - Program authority branch: `docs/master-game-development-program`.
-- Current mode: **documentation first**; broad implementation expansion follows written contracts.
-- Gate Twelve is the first proof region; its Steps 1–14 planning packet is complete, and the next P0 work is exact implementation/asset audit plus reproducible corpus inventory.
+- Current mode: **bounded Phase 1 implementation + exact-head verification**, using reconstruction-grade contracts as guardrails.
+- Gate Twelve is the first proof region. D-060–D-063 and D-066 are complete; the immediate P0 transition is D-064, D-065, D-067 and D-068 -> green authority checkpoint -> D-069 tactical core.
 - `main` is not the canonical implementation branch. Do not promote, rewrite, or merge `main` merely because it is the default branch.
 - Historical V6 and Android branches remain evidence sources, not top-level product authority.
 - The old black-screen incident is historically closed by the repository-owned Compose/Chaquopy client on representative emulator evidence; physical Galaxy A03 validation remains a separate gate and must not be inferred from emulator results.
