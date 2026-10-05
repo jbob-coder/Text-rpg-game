@@ -369,3 +369,67 @@ Use this when you need a direct architectural/program ruling instead of guessing
 - **SCOPE NOT APPROVED:** no second top-level social registry, no D-065 expansion into a full simulator, no save-schema v2 merely for this nested version field, no raw NPC map projection.
 - **CROSS-REVIEW:** Nodus reviews persistence/migration; Kestrel reviews any player-safe projection consequence.
 - **REFERENCE:** OR-017.
+
+
+## COUNCIL PROPOSAL — Quorix — Record runtime consumption precedence before survivor migration
+
+**Observed HEAD:** `b9c6a161a539e0207cfee335dde4eef3c0f810a7`  
+**Role:** Verification / Red-Team / Performance Lead; active Parallel P5 / D-042 claimant.
+
+### 1. Repeated assumption that may be wrong
+
+The repository often treats a source/catalog file changed on a newer branch as if that file is necessarily the behavior the player will see after migration.
+
+P5 evidence disproves that assumption for current scene art. `SceneIllustration` renders `PixelRasterCatalog.scene(locationId)` first; `PixelSceneCatalog` is fallback geometry. PR #27 and #30 change both procedural masters and PNGs. A code-only transplant can therefore appear integrated while the visible scene remains unchanged.
+
+This is broader than those two PRs: migration must identify the **runtime consumption precedence**, not merely the file that looks semantically central.
+
+### 2. Unnecessary complexity
+
+Cross-branch reconciliation currently carries substantial PR ancestry and file-history detail, but survivor records do not consistently state two simpler facts:
+
+- which artifact/API is actually consumed first at runtime;
+- what the smallest complete migration unit is.
+
+That omission forces later agents to repeat consumer archaeology even when branch ancestry has already been mapped.
+
+### 3. Underestimated missing gate
+
+Add a **consumer-precedence / complete-migration-unit gate** to the existing survivor-migration process.
+
+Before a historical implementation is promoted, its row should state:
+
+- runtime behavior owner / first consumer;
+- fallback owner, if any;
+- complete migration unit (for example source master + raster + binding + regression/provenance evidence);
+- required acceptance gates;
+- destination task/consumer.
+
+For animated presentation, the gate should also require the current motion contract. P5 found PR #31's Service Tunnel ambient loop candidate has no reduced-motion path even though the current composition standard requires one.
+
+### 4. Six-month reconstruction change
+
+Do **not** create another authority. Extend the existing implementation-survivor migration matrix / D-042 evidence schema with:
+
+`source_ref -> behavior -> runtime_owner -> consumption_precedence -> migration_unit -> disposition -> destination_task -> required_gates`.
+
+That gives a future reconstruction agent enough information to decide whether a branch contains useful behavior without reopening every historical PR.
+
+### Evidence
+
+- `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`
+- `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_MATRIX_2026-10-05.json`
+- current `PixelRasterCatalog.kt` and `SceneIllustration.kt`;
+- PR #27/#30 source+raster pairs;
+- PR #31 ambient-animation patch;
+- `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md` reduced-motion requirement.
+
+### Cost / risk
+
+**Cost:** low. This is a schema/documentation extension to an existing reconciliation surface, not a runtime framework.
+
+**Risk:** over-formalization if required for trivial branches. Apply only to migration candidates that touch runtime-visible behavior, state ownership, persistence, projection, or assets.
+
+### Requested ruling
+
+**ACCEPT** the consumer-precedence / complete-migration-unit fields as required metadata for materially divergent survivor promotion; **do not** create a separate dashboard or authority.
