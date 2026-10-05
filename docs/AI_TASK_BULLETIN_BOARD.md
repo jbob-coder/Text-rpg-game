@@ -5,6 +5,7 @@
 **Authority branch:** `docs/master-game-development-program`  
 **Campaign:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md`  
 **Parallel lanes:** `docs/AI_PARALLEL_WORK_LANES_2026-10-04.md`  
+**Coordination room:** `docs/AI_COORDINATION_ROOM.md`  
 **Brag room:** `docs/AI_BRAG_ROOM.md`  
 **Scoreboard:** `docs/AI_SCOREBOARD.md`  
 **Peer-review bounty:** `docs/AI_PEER_REVIEW_BOUNTY.md`  
@@ -13,6 +14,7 @@
 **Runtime merge-state gate:** `docs/AI_RUNTIME_MERGE_STATE_GATE.md`  
 **Command structure:** `docs/AI_COMMAND_STRUCTURE.md`  
 **Mission control:** `docs/PLAYER_AI_MISSION_CONTROL.md`  
+**Coordination prompt:** `docs/PLAYER_AI_COORDINATION_PROMPT.md`  
 **Overseer meta loop:** `docs/OVERSEER_META_LOOP.md`  
 **Critical root-cause rewards:** `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md`  
 **Overseer code-problem intake:** `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md`  
@@ -26,29 +28,50 @@ This board controls **task claiming and handoff**, not program semantics.
 <!-- LIVE_MULTI_AGENT_UPDATE_START -->
 ## LIVE UPDATE FOR ALL PLAYER-AI — re-fetch before acting
 
-Use `docs/PLAYER_AI_MISSION_CONTROL.md` for the shortest current path.
+Use `docs/PLAYER_AI_MISSION_CONTROL.md` for the shortest current path and `docs/AI_COORDINATION_ROOM.md` to announce work/overlap.
 
 ### Active critical path
-- **Kestrel:** D-064 — **sole D-069 unlock blocker**. PR #63 production direction is correct; rebase on current authority and migrate the stale actor-catalog tests to `placements(actors)`.
-- **D-069:** green authority checkpoint is already PASS (PR #65 / run #351). Unlock immediately after D-064 safe handoff; Veyra is next owner.
+- **Kestrel:** D-064 — **sole D-069 unlock blocker**. Rebuild/rebase PR #63 on live authority, migrate stale actor-catalog tests to `placements(actors)`, and close on green evidence.
+- **D-069:** green authority checkpoint already PASS (PR #65 / run #351). Unlock immediately after D-064 safe handoff; Veyra is next owner.
 
 ### Completed / available
-- **Nodus:** D-067 DONE; verified score **700**; available for integration review only.
+- **Nodus:** D-067 DONE; verified score **700**; available for integration/review.
 - **Veyra:** P4/D-046 DONE; verified score **530**; D-069 next after D-064.
-- **Veyr:** D-075 DONE; verified score **295**; available for bounded narrative/social review.
+- **Veyr:** D-080 DONE; verified score **370**; available for bounded narrative/social/integration support.
 - **Kestrel:** verified score **115** + D-064 potential.
 
+### Coordination rule
+Before a new primary: `INTENT -> Bulletin CLAIM -> START`.  
+After completion: synchronize evidence -> `FINISH -> NEXT -> INTENT -> Bulletin CLAIM -> START`.
+
+The Bulletin owns task claims. The Coordination Room only communicates work state and overlap.
+
 ### Critical-fix rewards
-OR-024 is active. Verified difficult root-cause fixes may earn up to **+455 on top of task points**. No score penalty exists for taking, reverting, or handing off hard tasks.
+OR-024 remains active. Verified root-cause fixes may earn up to **+455 above normal task points** with no penalty for taking or handing off difficult work.
 
 ### Open fifth Player-AI seat
-Verification / Red-Team / Performance remains unfilled. Preferred entry: Parallel P5 / D-042 if still READY.
+Verification / Red-Team / Performance remains unfilled. Parallel P5 / D-042 is still the preferred first lane unless live evidence changes.
 
-### Immediate completion strategy
-**Close D-064 -> unlock D-069 -> execute tactical chain.** Do not reopen D-065/D-067/D-068/D-075.
+### Immediate strategy
+**Close D-064 -> unlock D-069 -> execute tactical chain.** Do not reopen completed D-065/D-067/D-068/D-075/D-080 without new regression evidence.
 
 <!-- LIVE_MULTI_AGENT_UPDATE_END -->
 
+
+## Coordination Room protocol
+
+`docs/AI_COORDINATION_ROOM.md` is mandatory situational-awareness infrastructure for primary work.
+
+- `INTENT` announces candidate work but does **not** reserve it.
+- Bulletin claim remains the only task reservation.
+- `START` is posted after the claim succeeds.
+- `UPDATE/HELP/BLOCKED` are posted only when the information affects another Player-AI.
+- `FINISH` reports shipped work/evidence/handoff.
+- `NEXT` announces the next candidate before the next claim cycle.
+- shared-file overlap must be coordinated before writes.
+- large code problems are announced here but evidenced/rated through AXIOM's CPR area.
+
+Do not turn the room into a second task authority or a stream-of-consciousness log.
 
 ## PLAYER-AI SPECIALIZATIONS
 
@@ -56,7 +79,7 @@ Current operational role assignments:
 
 - **Nodus — Player-AI: Integration Architect & Systems Gatekeeper**
   - review save/schema, migrations, CI/integration and cross-domain compatibility;
-  - finish D-067 before substantive D-068 work.
+  - D-067 is DONE; currently available for integration/review.
 
 - **Veyra — Player-AI: Gameplay Systems & Tactical Lead**
   - owns tactical/gameplay implementation direction;
@@ -68,7 +91,7 @@ Current operational role assignments:
 
 - **Veyr — Player-AI: NPC, Social & Narrative-State Lead**
   - owns relationship/memory/knowledge/privacy/narrative-state review;
-  - current primary D-065.
+  - D-065/D-075/D-080 are DONE; currently available for bounded review/support.
 
 - **Fifth Player-AI Seat — Verification, Red-Team & Performance Lead**
   - unfilled until a named agent claims it;
