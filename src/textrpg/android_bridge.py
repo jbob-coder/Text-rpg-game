@@ -56,7 +56,6 @@ class AndroidGameSession:
         return state.scene_id
 
     def _room_view_for(self, state: GameState) -> Dict[str, Any]:
-        """Project authored visible presence without exposing durable NPC internals."""
         scene = self.engine.get_scene(state)
         return build_room_projection(scene, self._location_for(state))
 
@@ -77,100 +76,144 @@ class AndroidGameSession:
                 kind, _, key = source.partition(":")
                 slot = None
                 if kind == "equipment":
-                    slot = key; label = equipment_names.get(key, "Equipped item")
-                elif kind == "condition": label = condition_names.get(key, "Condition")
+                    slot = key
+                    label = equipment_names.get(key, "Equipped item")
+                elif kind == "condition":
+                    label = condition_names.get(key, "Condition")
                 elif kind == "perk":
-                    definition = self.engine.perk_definitions.get(key, {}); label = definition.get("label")
-                    if not isinstance(label, str) or not label: label = _pretty_id(key, "PERK_")
-                elif kind == "set": label = "Equipment set bonus"
-                elif source == "unidentified_modifier": kind = "unidentified"; label = "Unidentified modifier"
-                else: raise RuleError("Unsupported player-visible stat contribution")
+                    definition = self.engine.perk_definitions.get(key, {})
+                    label = definition.get("label")
+                    if not isinstance(label, str) or not label:
+                        label = _pretty_id(key, "PERK_")
+                elif kind == "set":
+                    label = "Equipment set bonus"
+                elif source == "unidentified_modifier":
+                    kind = "unidentified"
+                    label = "Unidentified modifier"
+                else:
+                    raise RuleError("Unsupported player-visible stat contribution")
                 contributions.append({"kind": kind, "label": label, "slot": slot, "value": value})
             stat["contributions"] = contributions
         return status
 
     def _inventory_view_for(self, state: GameState) -> Dict[str, Any]:
         item_definitions = self.content.registries.get("items", {})
-        if not isinstance(item_definitions, Mapping): item_definitions = {}
+        if not isinstance(item_definitions, Mapping):
+            item_definitions = {}
         items = []
         for item_id in sorted(state.inventory):
             quantity = state.inventory[item_id]
-            if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0: continue
+            if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0:
+                continue
             definition = item_definitions.get(item_id, {})
-            if not isinstance(definition, Mapping): definition = {}
+            if not isinstance(definition, Mapping):
+                definition = {}
             label, slot, quality = definition.get("label"), definition.get("slot"), definition.get("quality")
             equippable = isinstance(slot, str) and slot in DEFAULT_SLOTS
             items.append({"id": item_id, "name": label if isinstance(label, str) and label else _pretty_id(item_id, "ITEM_"), "quantity": quantity, "equippable": equippable, "slot": slot if equippable else None, "quality": quality if isinstance(quality, str) and quality else None})
         equipment = []
         for slot in DEFAULT_SLOTS:
             record = state.equipment.get(slot)
-            if not isinstance(record, Mapping): equipment.append({"slot": slot, "equipped": False}); continue
+            if not isinstance(record, Mapping):
+                equipment.append({"slot": slot, "equipped": False})
+                continue
             item_id = record.get("item_id")
-            if not isinstance(item_id, str) or not item_id: equipment.append({"slot": slot, "equipped": False}); continue
+            if not isinstance(item_id, str) or not item_id:
+                equipment.append({"slot": slot, "equipped": False})
+                continue
             definition = item_definitions.get(item_id, {})
-            if not isinstance(definition, Mapping): definition = {}
+            if not isinstance(definition, Mapping):
+                definition = {}
             label = definition.get("label")
             equipment.append({"slot": slot, "equipped": True, "item_id": item_id, "name": label if isinstance(label, str) and label else _pretty_id(item_id, "ITEM_"), "quality": record.get("quality", "standard") if isinstance(record.get("quality", "standard"), str) else "standard"})
         return {"items": items, "equipment": equipment}
 
     def _visuals_view_for(self, state: GameState) -> Dict[str, Any]:
         quantity = state.inventory.get("ITEM_DEAD_RELAY", 0)
-        if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0: relay_state = None
-        elif state.flags.get("relay.signal_lost") is True: relay_state = "signal_lost"
-        elif state.flags.get("relay.casing_damaged") is True: relay_state = "damaged"
-        elif "KNOW_RELAY_DESTINATION_SERVICE_GATE_12" in state.knowledge: relay_state = "opened"
-        else: relay_state = "intact"
+        if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity <= 0:
+            relay_state = None
+        elif state.flags.get("relay.signal_lost") is True:
+            relay_state = "signal_lost"
+        elif state.flags.get("relay.casing_damaged") is True:
+            relay_state = "damaged"
+        elif "KNOW_RELAY_DESTINATION_SERVICE_GATE_12" in state.knowledge:
+            relay_state = "opened"
+        else:
+            relay_state = "intact"
         return {"relay_state": relay_state}
 
     def _quest_view_for(self, state: GameState) -> list[Dict[str, Any]]:
         definitions = self.content.raw.get("quests", {})
-        if not isinstance(definitions, Mapping): return []
+        if not isinstance(definitions, Mapping):
+            return []
         output = []
         for quest_id in sorted(state.quests):
             record = state.quests[quest_id]
-            if not isinstance(record, Mapping): continue
-            definition = definitions.get(quest_id, {}); definition = definition if isinstance(definition, Mapping) else {}
-            stage_id = record.get("stage"); stages = definition.get("stages", {}); stage = stages.get(stage_id, {}) if isinstance(stages, Mapping) else {}; objectives = stage.get("objectives", {}) if isinstance(stage, Mapping) else {}; objectives = objectives if isinstance(objectives, Mapping) else {}
+            if not isinstance(record, Mapping):
+                continue
+            definition = definitions.get(quest_id, {})
+            definition = definition if isinstance(definition, Mapping) else {}
+            stage_id = record.get("stage")
+            stages = definition.get("stages", {})
+            stage = stages.get(stage_id, {}) if isinstance(stages, Mapping) else {}
+            objectives = stage.get("objectives", {}) if isinstance(stage, Mapping) else {}
+            objectives = objectives if isinstance(objectives, Mapping) else {}
             completed, failed, visible_objectives = set(record.get("completed_objectives", [])), set(record.get("failed_objectives", [])), []
             for objective_id, objective in objectives.items():
-                if not isinstance(objective_id, str) or not isinstance(objective, Mapping): continue
-                if objective_id in completed: status = "completed"
-                elif objective_id in failed: status = "failed"
+                if not isinstance(objective_id, str) or not isinstance(objective, Mapping):
+                    continue
+                if objective_id in completed:
+                    status = "completed"
+                elif objective_id in failed:
+                    status = "failed"
                 else:
-                    prerequisites = objective.get("requires_objectives", []); prerequisites = prerequisites if isinstance(prerequisites, list) else []
+                    prerequisites = objective.get("requires_objectives", [])
+                    prerequisites = prerequisites if isinstance(prerequisites, list) else []
                     status = "active" if set(prerequisites).issubset(completed) else "locked"
                 visible_objectives.append({"id": objective_id, "title": objective.get("title") if isinstance(objective.get("title"), str) else _pretty_id(objective_id, "OBJ_"), "required": bool(objective.get("required", True)), "status": status})
-            category = definition.get("category", "optional"); category = category if category in ("main", "side", "optional", "lore") else "optional"
+            category = definition.get("category", "optional")
+            category = category if category in ("main", "side", "optional", "lore") else "optional"
             output.append({"id": quest_id, "title": definition.get("title") if isinstance(definition.get("title"), str) else _pretty_id(quest_id, "QUEST_"), "description": definition.get("description", "") if isinstance(definition.get("description", ""), str) else "", "category": category, "status": record.get("status", "active"), "stage": stage_id if isinstance(stage_id, str) else "", "objectives": visible_objectives})
         return output
 
     def _map_view_for(self, state: GameState) -> Dict[str, Any]:
         authored = self.content.raw.get("world_map", {})
-        if not isinstance(authored, Mapping): return {"title": "World", "current_location": self._location_for(state), "nodes": [], "edges": []}
+        if not isinstance(authored, Mapping):
+            return {"title": "World", "current_location": self._location_for(state), "nodes": [], "edges": []}
         raw_nodes, raw_edges = authored.get("nodes", {}), authored.get("edges", [])
-        if not isinstance(raw_nodes, Mapping) or not isinstance(raw_edges, list): raise RuleError("world_map must contain object nodes and list edges")
-        scene_defs = self.content.raw.get("scenes", {}); scene_defs = scene_defs if isinstance(scene_defs, Mapping) else {}
+        if not isinstance(raw_nodes, Mapping) or not isinstance(raw_edges, list):
+            raise RuleError("world_map must contain object nodes and list edges")
+        scene_defs = self.content.raw.get("scenes", {})
+        scene_defs = scene_defs if isinstance(scene_defs, Mapping) else {}
         discovered = {self._location_for(state)}
-        if state.flags.get("android_debug.discover_all_map") is True: discovered.update(location_id for location_id in raw_nodes if isinstance(location_id, str))
+        if state.flags.get("android_debug.discover_all_map") is True:
+            discovered.update(location_id for location_id in raw_nodes if isinstance(location_id, str))
         for event in state.history:
-            if not isinstance(event, Mapping): continue
+            if not isinstance(event, Mapping):
+                continue
             for key in ("scene", "next_scene"):
                 scene_id = event.get(key)
                 if isinstance(scene_id, str):
                     scene = scene_defs.get(scene_id, {})
-                    if isinstance(scene, Mapping) and isinstance(scene.get("location_id"), str) and scene.get("location_id"): discovered.add(scene["location_id"])
+                    if isinstance(scene, Mapping) and isinstance(scene.get("location_id"), str) and scene.get("location_id"):
+                        discovered.add(scene["location_id"])
         for location_id, node in raw_nodes.items():
             if isinstance(location_id, str) and isinstance(node, Mapping):
                 discover_flag = node.get("discover_flag")
-                if isinstance(discover_flag, str) and discover_flag and state.flags.get(discover_flag) is True: discovered.add(location_id)
+                if isinstance(discover_flag, str) and discover_flag and state.flags.get(discover_flag) is True:
+                    discovered.add(location_id)
         current_location = self._location_for(state)
         def is_reachable(location_id: str) -> bool:
-            if location_id == current_location: return True
+            if location_id == current_location:
+                return True
             return any(isinstance(edge, Mapping) and {edge.get("from"), edge.get("to")} == {current_location, location_id} and edge.get("from") in discovered and edge.get("to") in discovered for edge in raw_edges)
         nodes = []
         for location_id, node in raw_nodes.items():
-            if location_id not in discovered or not isinstance(location_id, str) or not isinstance(node, Mapping): continue
-            x, y = node.get("x", 0), node.get("y", 0); x = 0 if isinstance(x, bool) or not isinstance(x, (int, float)) else x; y = 0 if isinstance(y, bool) or not isinstance(y, (int, float)) else y
+            if location_id not in discovered or not isinstance(location_id, str) or not isinstance(node, Mapping):
+                continue
+            x, y = node.get("x", 0), node.get("y", 0)
+            x = 0 if isinstance(x, bool) or not isinstance(x, (int, float)) else x
+            y = 0 if isinstance(y, bool) or not isinstance(y, (int, float)) else y
             nodes.append({"id": location_id, "title": node.get("title") if isinstance(node.get("title"), str) else _pretty_id(location_id, ""), "description": node.get("description", "") if isinstance(node.get("description", ""), str) else "", "x": float(x), "y": float(y), "current": location_id == current_location, "reachable": is_reachable(location_id)})
         edges = [{"from": edge.get("from"), "to": edge.get("to")} for edge in raw_edges if isinstance(edge, Mapping) and isinstance(edge.get("from"), str) and isinstance(edge.get("to"), str) and edge.get("from") in discovered and edge.get("to") in discovered]
         return {"title": authored.get("title", "World") if isinstance(authored.get("title", "World"), str) else "World", "current_location": current_location, "nodes": nodes, "edges": edges}
@@ -179,91 +222,154 @@ class AndroidGameSession:
         return {"scene": self.engine.build_scene_view(state), "status": self._status_view_for(state), "inventory": self._inventory_view_for(state), "quests": self._quest_view_for(state), "map": self._map_view_for(state), "room": self._room_view_for(state), "visuals": self._visuals_view_for(state), "meta": {"content_id": self.content.content_id, "canon_status": self.content.canon_status, "turn": state.turn, "time_minutes": state.time_minutes, "schema_version": state.schema_version, "location": self._location_for(state)}}
 
     def scene_view(self) -> Dict[str, Any]:
-        try: return deepcopy(self._view_for(self.state))
-        except RuleError as exc: raise AndroidBridgeError("VIEW_ERROR", "The current game state could not be displayed.", technical_detail=str(exc)) from exc
+        try:
+            return deepcopy(self._view_for(self.state))
+        except RuleError as exc:
+            raise AndroidBridgeError("VIEW_ERROR", "The current game state could not be displayed.", technical_detail=str(exc)) from exc
 
     def inspect_status(self, path: str) -> Dict[str, Any]:
-        if not isinstance(path, str) or not path: raise AndroidBridgeError("STAT_INSPECTION_ERROR", "Choose a valid stat to inspect.", technical_detail="path must be non-empty text")
-        try: return deepcopy(inspect_status_value(self.state, self.engine, path, condition_definitions=self.content.registries.get("conditions", {})))
-        except RuleError as exc: raise AndroidBridgeError("STAT_INSPECTION_ERROR", "That stat cannot be inspected.", technical_detail=str(exc)) from exc
+        if not isinstance(path, str) or not path:
+            raise AndroidBridgeError("STAT_INSPECTION_ERROR", "Choose a valid stat to inspect.", technical_detail="path must be non-empty text")
+        try:
+            return deepcopy(inspect_status_value(self.state, self.engine, path, condition_definitions=self.content.registries.get("conditions", {})))
+        except RuleError as exc:
+            raise AndroidBridgeError("STAT_INSPECTION_ERROR", "That stat cannot be inspected.", technical_detail=str(exc)) from exc
 
     def choose(self, choice_id: str) -> Dict[str, Any]:
-        if not isinstance(choice_id, str) or not choice_id: raise AndroidBridgeError("CHOICE_ERROR", "That choice is not available.", technical_detail="choice_id must be non-empty text")
+        if not isinstance(choice_id, str) or not choice_id:
+            raise AndroidBridgeError("CHOICE_ERROR", "That choice is not available.", technical_detail="choice_id must be non-empty text")
         try:
-            self.engine.choose(self.state, choice_id); self.state.flags.pop("android.map_location_override", None); return self.scene_view()
-        except AndroidBridgeError: raise
-        except RuleError as exc: raise AndroidBridgeError("CHOICE_ERROR", "That choice is not available.", technical_detail=str(exc)) from exc
+            self.engine.choose(self.state, choice_id)
+            self.state.flags.pop("android.map_location_override", None)
+            return self.scene_view()
+        except AndroidBridgeError:
+            raise
+        except RuleError as exc:
+            raise AndroidBridgeError("CHOICE_ERROR", "That choice is not available.", technical_detail=str(exc)) from exc
 
     def travel(self, location_id: str) -> Dict[str, Any]:
-        if not isinstance(location_id, str) or not location_id: raise AndroidBridgeError("TRAVEL_ERROR", "Choose a valid destination.")
+        if not isinstance(location_id, str) or not location_id:
+            raise AndroidBridgeError("TRAVEL_ERROR", "Choose a valid destination.")
         authored = self.content.raw.get("world_map", {})
-        if not isinstance(authored, Mapping): raise AndroidBridgeError("TRAVEL_ERROR", "Travel is not available in this area.")
+        if not isinstance(authored, Mapping):
+            raise AndroidBridgeError("TRAVEL_ERROR", "Travel is not available in this area.")
         raw_nodes, raw_edges = authored.get("nodes", {}), authored.get("edges", [])
-        if not isinstance(raw_nodes, Mapping) or not isinstance(raw_edges, list): raise AndroidBridgeError("TRAVEL_ERROR", "Travel data is unavailable.")
-        if location_id not in raw_nodes: raise AndroidBridgeError("TRAVEL_ERROR", "That destination does not exist.")
+        if not isinstance(raw_nodes, Mapping) or not isinstance(raw_edges, list):
+            raise AndroidBridgeError("TRAVEL_ERROR", "Travel data is unavailable.")
+        if location_id not in raw_nodes:
+            raise AndroidBridgeError("TRAVEL_ERROR", "That destination does not exist.")
         current = self._location_for(self.state)
-        if current == location_id: return self.scene_view()
+        if current == location_id:
+            return self.scene_view()
         target_node = raw_nodes.get(location_id, {})
-        if not isinstance(target_node, Mapping): raise AndroidBridgeError("TRAVEL_ERROR", "Travel data for that destination is invalid.")
-        visible_map = self._map_view_for(self.state); discovered = {node["id"] for node in visible_map["nodes"] if isinstance(node, Mapping) and isinstance(node.get("id"), str)}
-        if location_id not in discovered: raise AndroidBridgeError("TRAVEL_ERROR", "That destination has not been discovered.")
+        if not isinstance(target_node, Mapping):
+            raise AndroidBridgeError("TRAVEL_ERROR", "Travel data for that destination is invalid.")
+        visible_map = self._map_view_for(self.state)
+        discovered = {node["id"] for node in visible_map["nodes"] if isinstance(node, Mapping) and isinstance(node.get("id"), str)}
+        if location_id not in discovered:
+            raise AndroidBridgeError("TRAVEL_ERROR", "That destination has not been discovered.")
         connected, travel_minutes = False, 5
         for edge in raw_edges:
             if isinstance(edge, Mapping) and {edge.get("from"), edge.get("to")} == {current, location_id}:
-                connected = True; authored_minutes = edge.get("travel_minutes", 5)
-                if isinstance(authored_minutes, bool) or not isinstance(authored_minutes, int) or authored_minutes < 0: raise AndroidBridgeError("TRAVEL_ERROR", "Travel time data is invalid.")
-                travel_minutes = authored_minutes; break
-        if not connected: raise AndroidBridgeError("TRAVEL_ERROR", "No discovered route connects those locations.")
+                connected = True
+                authored_minutes = edge.get("travel_minutes", 5)
+                if isinstance(authored_minutes, bool) or not isinstance(authored_minutes, int) or authored_minutes < 0:
+                    raise AndroidBridgeError("TRAVEL_ERROR", "Travel time data is invalid.")
+                travel_minutes = authored_minutes
+                break
+        if not connected:
+            raise AndroidBridgeError("TRAVEL_ERROR", "No discovered route connects those locations.")
         before = deepcopy(self.state.snapshot())
         try:
             from .simulation import advance_time
-            advance_time(self.state, travel_minutes); target_scene = target_node.get("scene_id")
-            if target_scene is not None:
-                if not isinstance(target_scene, str) or not target_scene or target_scene not in self.engine.scenes: raise RuleError(f"Map destination references invalid scene: {location_id}")
-                self.state.scene_id = target_scene; self.state.flags.pop("android.map_location_override", None)
-            else: self.state.flags["android.map_location_override"] = location_id
-            self.state.history.append({"type": "map_travel", "from": current, "to": location_id, "travel_minutes": travel_minutes, "turn": self.state.turn, "time_minutes": self.state.time_minutes}); return self.scene_view()
-        except AndroidBridgeError: self.state = GameState(**before); raise
-        except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("TRAVEL_ERROR", "Travel could not be completed.", technical_detail=str(exc)) from exc
+            advance_time(self.state, travel_minutes)
+            self.state.flags["android.map_location_override"] = location_id
+            self.state.history.append({"type": "travel", "from": current, "to": location_id, "minutes": travel_minutes, "turn": self.state.turn, "time_minutes": self.state.time_minutes})
+            return self.scene_view()
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError("TRAVEL_ERROR", "Travel could not be completed.", technical_detail=str(exc)) from exc
 
     def equip(self, item_id: str) -> Dict[str, Any]:
-        if not isinstance(item_id, str) or not item_id: raise AndroidBridgeError("EQUIP_ERROR", "Choose a valid item to equip.")
-        definitions = self.content.registries.get("items", {}); definition = definitions.get(item_id) if isinstance(definitions, Mapping) else None
-        if not isinstance(definition, Mapping): raise AndroidBridgeError("EQUIP_ERROR", "That item cannot be equipped.", technical_detail=f"Missing authored equipment definition: {item_id}")
+        if not isinstance(item_id, str) or not item_id:
+            raise AndroidBridgeError("EQUIP_ERROR", "Choose a valid item to equip.")
+        definitions = self.content.registries.get("items", {})
+        definition = definitions.get(item_id) if isinstance(definitions, Mapping) else None
+        if not isinstance(definition, Mapping):
+            raise AndroidBridgeError("EQUIP_ERROR", "That item cannot be equipped.")
+        slot = definition.get("slot")
+        if not isinstance(slot, str) or slot not in DEFAULT_SLOTS:
+            raise AndroidBridgeError("EQUIP_ERROR", "That item cannot be equipped.")
         before = deepcopy(self.state.snapshot())
         try:
-            authored_item = dict(definition); authored_item["item_id"] = item_id; previous = equip_item(self.state, authored_item, consume_inventory=True)
-            if isinstance(previous, Mapping):
-                replaced_id = previous.get("item_id")
-                if isinstance(replaced_id, str) and replaced_id: self.state.inventory[replaced_id] = self.state.inventory.get(replaced_id, 0) + 1
-            self.state.history.append({"type": "equipment_changed", "action": "equip", "item_id": item_id, "slot": authored_item.get("slot"), "turn": self.state.turn, "time_minutes": self.state.time_minutes}); return self.scene_view()
-        except AndroidBridgeError: self.state = GameState(**before); raise
-        except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("EQUIP_ERROR", "That item could not be equipped.", technical_detail=str(exc)) from exc
+            existing = self.state.equipment.get(slot)
+            if isinstance(existing, Mapping):
+                previous_id = existing.get("item_id")
+                if not isinstance(previous_id, str) or not previous_id:
+                    raise RuleError(f"Equipped slot has no valid item_id: {slot}")
+                del self.state.equipment[slot]
+                self.state.inventory[previous_id] = self.state.inventory.get(previous_id, 0) + 1
+            equip_item(self.state, item_id, slot, definition, consume_inventory=True)
+            self.state.history.append({"type": "equipment_changed", "action": "equip", "item_id": item_id, "slot": slot, "turn": self.state.turn, "time_minutes": self.state.time_minutes})
+            return self.scene_view()
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError("EQUIP_ERROR", "That item could not be equipped.", technical_detail=str(exc)) from exc
 
     def unequip(self, slot: str) -> Dict[str, Any]:
-        if not isinstance(slot, str) or slot not in DEFAULT_SLOTS: raise AndroidBridgeError("EQUIP_ERROR", "Choose a valid equipment slot.")
+        if not isinstance(slot, str) or slot not in DEFAULT_SLOTS:
+            raise AndroidBridgeError("EQUIP_ERROR", "Choose a valid equipment slot.")
         before = deepcopy(self.state.snapshot())
         try:
             record = self.state.equipment.get(slot)
-            if not isinstance(record, Mapping): raise AndroidBridgeError("EQUIP_ERROR", "That equipment slot is already empty.")
+            if not isinstance(record, Mapping):
+                raise AndroidBridgeError("EQUIP_ERROR", "That equipment slot is already empty.")
             item_id = record.get("item_id")
-            if not isinstance(item_id, str) or not item_id: raise RuleError(f"Equipped slot has no valid item_id: {slot}")
-            del self.state.equipment[slot]; self.state.inventory[item_id] = self.state.inventory.get(item_id, 0) + 1
-            self.state.history.append({"type": "equipment_changed", "action": "unequip", "item_id": item_id, "slot": slot, "turn": self.state.turn, "time_minutes": self.state.time_minutes}); return self.scene_view()
-        except AndroidBridgeError: self.state = GameState(**before); raise
-        except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("EQUIP_ERROR", "That item could not be unequipped.", technical_detail=str(exc)) from exc
+            if not isinstance(item_id, str) or not item_id:
+                raise RuleError(f"Equipped slot has no valid item_id: {slot}")
+            del self.state.equipment[slot]
+            self.state.inventory[item_id] = self.state.inventory.get(item_id, 0) + 1
+            self.state.history.append({"type": "equipment_changed", "action": "unequip", "item_id": item_id, "slot": slot, "turn": self.state.turn, "time_minutes": self.state.time_minutes})
+            return self.scene_view()
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError("EQUIP_ERROR", "That item could not be unequipped.", technical_detail=str(exc)) from exc
 
     def save(self) -> Dict[str, Any]:
-        if self._save_path is None: raise AndroidBridgeError("SAVE_ERROR", "No save destination is configured.")
-        try: save_state(self._save_path, self.state); return self.scene_view()
-        except (OSError, RuleError, TypeError, ValueError) as exc: raise AndroidBridgeError("SAVE_ERROR", "The game could not be saved.", technical_detail=str(exc)) from exc
+        if self._save_path is None:
+            raise AndroidBridgeError("SAVE_ERROR", "No save destination is configured.")
+        try:
+            save_state(self._save_path, self.state)
+            return self.scene_view()
+        except (OSError, RuleError, TypeError, ValueError) as exc:
+            raise AndroidBridgeError("SAVE_ERROR", "The game could not be saved.", technical_detail=str(exc)) from exc
 
     def load(self) -> Dict[str, Any]:
-        if self._save_path is None: raise AndroidBridgeError("LOAD_ERROR", "No save destination is configured.")
-        try: self.state = load_state(self._save_path); return self.scene_view()
-        except (OSError, RuleError, TypeError, ValueError) as exc: raise AndroidBridgeError("LOAD_ERROR", "The saved game could not be loaded.", technical_detail=str(exc)) from exc
+        if self._save_path is None:
+            raise AndroidBridgeError("LOAD_ERROR", "No save destination is configured.")
+        try:
+            self.state = load_state(self._save_path)
+            return self.scene_view()
+        except (OSError, RuleError, TypeError, ValueError) as exc:
+            raise AndroidBridgeError("LOAD_ERROR", "The saved game could not be loaded.", technical_detail=str(exc)) from exc
 
 
 def open_android_session(content_path: str | Path, *, save_path: str | Path | None = None) -> AndroidGameSession:
-    try: return AndroidGameSession(load_content_pack(content_path), save_path=save_path)
-    except (OSError, RuleError, TypeError, ValueError) as exc: raise AndroidBridgeError("CONTENT_ERROR", "Game content could not be loaded.", technical_detail=str(exc)) from exc
+    try:
+        return AndroidGameSession(load_content_pack(content_path), save_path=save_path)
+    except (OSError, RuleError, TypeError, ValueError) as exc:
+        raise AndroidBridgeError("CONTENT_ERROR", "Game content could not be loaded.", technical_detail=str(exc)) from exc
+
+
+def create_session(content_path: str | Path, *, save_path: str | Path | None = None) -> AndroidGameSession:
+    """Backward-compatible public constructor retained for existing clients and tests."""
+    return open_android_session(content_path, save_path=save_path)
