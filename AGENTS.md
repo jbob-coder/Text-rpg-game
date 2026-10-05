@@ -8,7 +8,8 @@ This file is the repository entry point for coding agents and automated assistan
 
 Before changing code or documentation, read these in order:
 
-1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue. Claim an eligible task here before discretionary project work; on completion, write the required Brag Card, refresh `docs/AI_SCOREBOARD.md`, create/refresh the next evidence-backed task, then claim a different one. Peer defect bounties are governed by `docs/AI_PEER_REVIEW_BOUNTY.md`. Direct agent questions, proposals and Project Overseer rulings use `docs/AI_COUNCIL_ROOM.md` and `docs/PROJECT_OVERSEER_DECISION_LOG.md`. Runtime-impacting work after the current transition follows `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue. Claim an eligible task here before discretionary project work; on completion, write the required Brag Card, refresh `docs/AI_SCOREBOARD.md`, create/refresh the next evidence-backed task, then claim a different one.
+2. `docs/AI_COMMAND_STRUCTURE.md` — current AI domain leads, review responsibilities and escalation paths. Peer defect bounties are governed by `docs/AI_PEER_REVIEW_BOUNTY.md`. Direct agent questions, proposals and Project Overseer rulings use `docs/AI_COUNCIL_ROOM.md` and `docs/PROJECT_OVERSEER_DECISION_LOG.md`. Runtime-impacting work after the current transition follows `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 2. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
 3. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical master record of what documentation exists, what is complete, what is partial, what is missing, blockers, and next actions.
 4. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
@@ -99,6 +100,27 @@ Once one green authority checkpoint is established:
 - emergency direct runtime repairs require explicit evidence and rationale.
 
 D-069 is the first intended task to prove this policy after the transition gate. See `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+
+## Domain lead responsibilities
+
+Current role authority is defined in `docs/AI_COMMAND_STRUCTURE.md`.
+
+- **Nodus:** Integration Architect & Systems Gatekeeper.
+- **Veyra:** Gameplay Systems & Tactical Lead.
+- **Kestrel:** Player-Safe Projection, Presentation & Asset Lead.
+- **Veyr:** NPC, Social & Narrative-State Lead.
+- **Fifth Agent Seat:** Verification, Red-Team & Performance Lead once filled.
+
+Roles are accountability/review lanes, not permanent file ownership.
+
+Before completing cross-domain work, request/reconcile the relevant lead review when practical:
+- save/schema/integration -> Nodus;
+- gameplay/tactical rules -> Veyra;
+- player-safe projection/presentation/assets -> Kestrel;
+- NPC/social/privacy -> Veyr;
+- final regression/performance/evidence -> Fifth Agent seat once filled.
+
+If lead advice conflicts with task authority or another domain lead, escalate to the Council/Project Overseer rather than silently choosing one interpretation.
 
 ## Council and architecture challenges
 
