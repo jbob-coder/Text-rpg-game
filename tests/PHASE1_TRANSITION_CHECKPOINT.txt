@@ -1,0 +1,11 @@
+THE GAME Phase 1 transition checkpoint marker
+
+Authority base at branch creation:
+449db3b0df63f12a4e29e28079ded9fba424cec3
+
+Purpose:
+- trigger the existing pull-request integration workflow against the current authority merge state;
+- verify the shared D-064/D-067 compatibility repairs;
+- produce evidence for the green-authority transition checkpoint.
+
+This file carries no gameplay semantics and may be deleted with the verification branch/PR.
