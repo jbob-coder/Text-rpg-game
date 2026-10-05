@@ -135,7 +135,7 @@ AXIOM reviews:
 - **REWARD:** Nodus +310 critical root-cause award under OR-024, scored separately from normal D-067 completion.
 
 ### CPR-002 — D-064 Android room-actor unknown-field strictness
-- **STATUS:** `ACCEPTED / LINKED_TO_TASK / RED→GREEN BEHAVIOR CONFIRMED / CLEAN FINAL INTEGRATION PENDING`
+- **STATUS:** `ROOT_CAUSE VERIFIED / AUTHORITY INTEGRATED / TASK HANDOFF PENDING`
 - **PROBLEM_PRESSURE_SCORE:** **74/100**
 - **RATING:** **CRITICAL**
 - **TASK:** D-064
@@ -144,10 +144,10 @@ AXIOM reviews:
 - **EVIDENCE:** `docs/overseer/code_problems/CPR-002_d064_room_actor_unknown_field_strictness.md`
 - **WHY NO NEW TASK:** D-064 already owns strict Kotlin mapping + privacy acceptance.
 - **EXECUTABLE RED:** PR #69 / run #357 / `37260133553`, Android job `111605425217`: `RoomProjectionMapperTest > rejectsForbiddenPrivateActorField` failed as expected; 96 tests, 1 failed. Test-only branch; no production code changed.
-- **GREEN BEHAVIOR:** PR #69 head `ef7e5a9acc28a9bf6921065a6ad79327b2d3fd7a`, run #359 / `37260351928`: Python 352/352 PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS; APK SHA-256 `728737a0fe7f3353d7c0264658f1359853c8a3b9e97f97604551ee3cfee8e37e`.
-- **REQUIRED NEXT:** transplant only the strict actor-key allowlist/rejection + focused regression into PR #70/final D-064 candidate without PR #69's broad `GameEngine.kt` compaction, then prove fresh merge-state GREEN.
+- **GREEN BEHAVIOR:** PR #69/run #359 proved the causal strict-key repair behavior; PR #70/run #362 proved the same minimal repair on the clean seven-file final candidate; authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521` now contains it.
+- **REQUIRED NEXT:** no further CPR implementation work. Keep CPR-002 linked to D-064 until Kestrel completes evidence/Learning/FINISH bookkeeping; AXIOM may then close/score the root-cause reward.
 - **D-069 IMPACT:** no new dependency node; D-069 remains blocked on D-064 completion.
-- **REWARD:** candidate only. RED is now proven; no OR-024 award until GREEN causal repair evidence exists.
+- **REWARD:** eligible for AXIOM OR-024 evaluation: executable RED, causal GREEN, clean final-candidate GREEN, and authority integration are all evidenced. No score is self-awarded.
 
 No unresolved CPR is created merely to populate this board.
 
