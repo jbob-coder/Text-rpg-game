@@ -76,12 +76,15 @@ class ProjectStatusTrackerTests(unittest.TestCase):
 - STATUS: PENDING / QUEUED
 ### TASK D-005 — E
 - STATUS: PROPOSAL_READY
+### TASK D-006 — F
+- STATUS: `DONE` (documentation deliverables; remote publication checked separately).
 """
         )
         self.assertEqual(
-            ["DONE", "IN_PROGRESS", "BLOCKED", "PENDING", "OTHER"],
+            ["DONE", "IN_PROGRESS", "BLOCKED", "PENDING", "OTHER", "DONE"],
             [task["state"] for task in tasks],
         )
+        self.assertEqual("DONE", tasks[-1]["status"])
 
     def test_exact_revision_report_ignores_dirty_and_untracked_files(self) -> None:
         temp, repo = self.make_repo()
