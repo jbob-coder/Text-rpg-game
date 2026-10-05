@@ -170,12 +170,13 @@ PR #70 comment `5987858442` contains the line-level three-edit patch. Amend PR #
 Follow the surgical manifest without widening scope:
 1. fetch current authority HEAD and current SHAs for the manifest's seven-file surface;
 2. treat PR #70 head `d5d4192a620624ab6dc80d8875176f01695dd095` as **DIAGNOSTIC_GREEN / INCOMPLETE**: run #358 passed Python 354/354, Android unit/build/package and emulator smoke/screenshots, but the tested head still lacks fallback-scene source assertions, contains one unrelated `14.dp -> 16.dp` icon change, and predates the CPR-002 transplant;
-3. create/rebuild a fresh short-lived D-064 branch and apply only:
+3. amend the existing PR #70 branch family in place and keep only:
    - both `GameScreen.kt` `roomActors = snapshot.room.actors` wires;
    - `SceneIllustration.kt` `List<GameRoomActor>` parameter + projected catalog call;
    - `PixelStoryActorCatalog.kt` projected `visualFamily` mapping + existing `PixelStoryActorPlacementResolver`;
    - focused catalog equivalence/rejection tests;
    - focused source-wiring regression, including preservation of the existing fallback-scene IDs;
+   - no unrelated UI/presentation drift;
 4. preserve unrelated presentation code/formatting;
 5. absorb accepted `CPR-002` (**74/100 CRITICAL / LINKED TO D-064**) surgically: PR #69 run #357 already proves RED and run #359 proves the same strict-key repair GREEN (Python 352/352, Android unit/build/package, emulator smoke/screenshots PASS; APK SHA-256 `728737a0fe7f3353d7c0264658f1359853c8a3b9e97f97604551ee3cfee8e37e`). Port only the 11-key allowlist, unexpected-key rejection and focused JVM regression into the final PR #70 family; do not carry PR #69's `GameEngine.kt` compaction;
 6. PR #70 may be amended in place because its base -> current authority drift is documentation/governance-only (31 commits; no runtime/content/test/Android source drift at Veyr audit); after the final seven-file changes, require a fresh synthetic merge-state Python + Android unit/build/package + emulator run against current authority;
