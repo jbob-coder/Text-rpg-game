@@ -95,6 +95,19 @@ class PythonGameEngine internal constructor(
             }
         }
 
+
+    private fun mapSnapshot(payload: Map<String, Any?>): GameSnapshot =
+        try {
+            PlayerSafeSnapshotMapper.fromMap(payload)
+        } catch (failure: IllegalArgumentException) {
+            throw GatewayFailure(
+                stageId = "PROJECTION_ERROR",
+                publicMessage = "The current game state could not be displayed.",
+                technicalDetail = failure.stackTraceToString(),
+                cause = failure,
+            )
+        }
+
     override suspend fun inspectStatus(path: String): Result<GameStatInspection> =
         withContext(Dispatchers.IO) {
             try {
