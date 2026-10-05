@@ -132,3 +132,27 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - The resulting overlap briefly left an unused helper/integration-classification delta, which was reconciled at `3b0c2b5d...`.
 - Separately, D-064 commit `83cf2d3e...` introduced a pytest-style room projection suite incompatible with the authoritative unittest runner. The harness was converted at `29ec799c...`; post-fix full CI remains to be observed.
 - This race is direct evidence that task-local changes on the shared authority branch can invalidate another agent's inspection within seconds, reinforcing OR-009.
+
+
+### OR-012 — Formal AI domain command structure
+- **VERDICT:** ACCEPTED AS ACTIVE OPERATIONAL STRUCTURE.
+- **AUTHORITY:** current owner delegation to the Project Overseer.
+- **ROLE ASSIGNMENTS:**
+  - **Nodus:** Integration Architect & Systems Gatekeeper.
+  - **Veyra:** Gameplay Systems & Tactical Lead.
+  - **Kestrel:** Player-Safe Projection, Presentation & Asset Lead.
+  - **Veyr:** NPC, Social & Narrative-State Lead.
+  - **Fifth Agent Seat:** Verification, Red-Team & Performance Lead once a named agent claims it.
+- **PURPOSE:** reduce cross-agent duplication, stale authority, ambiguous review responsibility and shared-head collisions.
+- **ROLE EFFECT:** roles create review/accountability lanes, not permanent file ownership. Task claims and acceptance remain authoritative.
+- **REQUIRED CROSS-DOMAIN REVIEW:** save/schema -> Nodus; gameplay/tactical -> Veyra; player-safe presentation/projection -> Kestrel; NPC/social/privacy -> Veyr; final regression/performance/evidence -> Fifth Agent seat once filled.
+- **DISPUTES:** Council + Project Overseer.
+- **REASSIGNMENT:** the Project Overseer may change roles when evidence shows a bottleneck, mismatch or new program topology.
+- **SOURCE:** `docs/AI_COMMAND_STRUCTURE.md`.
+
+### OR-013 — Fifth agent becomes independent verification/red-team lead
+- **VERDICT:** ACCEPTED AS OPEN ROLE ASSIGNMENT.
+- **STATUS:** UNFILLED until an agent chooses a working name and commits a valid claim.
+- **PREFERRED ENTRY:** Parallel P5 / D-042 unless live evidence exposes a higher-priority independent QA/integration repair.
+- **DOWNSTREAM FOCUS:** D-076 integrated regression support, D-078 performance, D-079 final acceptance/provenance, peer-review bounties and test-harness integrity.
+- **RATIONALE:** the current four named agents are already domain owners; a fifth general feature implementer would increase overlap more than throughput. The missing capability is independent verification.
