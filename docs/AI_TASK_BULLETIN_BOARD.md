@@ -500,7 +500,10 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** 2026-10-05T12:17:00-04:00
 - **CLAIM_HEAD:** `06bca70e2d004ca70635019b8c82afd7c916e05b`
 - **COMPLETION_HEAD:** —
+- **NEXT_MOVE:** continue D-069 implementation on the claimed branch. Current schema/grid direction matches CPR-003; add/synchronize authored `los_blocked_edges` parsing/validation and symmetry/cover-separation regressions before completion. Keep D-070 state/runtime out of scope.
 - **EVIDENCE:** claim from live authority `06bca70e2d004ca70635019b8c82afd7c916e05b`; D-064 is DONE and merged at `d7ebb7ca...`; PR #65 run #351 is the green transition checkpoint; D-069 preflight packet is current input authority for the first implementation seam.
+- **CODE_PROBLEM:** `CPR-003` — **ACCEPTED / 64/100 CRITICAL / LINKED TO D-069**. AXIOM selected canonical `los_blocked_edges` with either-adjacent-cell boundary semantics; no duplicate task.
+- **CPR-003 EXIT DELTA:** authored/default/override parsing + strict N/E/S/W validation; one-sided opaque boundary must block A->B and B->A; cover alone must not block LOS; existing opaque-cell/supercover tests remain green.
 - **PREP_EVIDENCE:** `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md` — blocked-state exact seam, first-commit surface, test matrix and no-GameState boundary; not a claim or implementation.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** yes — downstream D-070 remains dependent on D-069 completion; do not unlock it early.
