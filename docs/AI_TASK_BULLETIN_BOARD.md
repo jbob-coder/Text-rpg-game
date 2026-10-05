@@ -496,7 +496,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `91/100`
 - **STATUS:** `BLOCKED`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
-- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE and PR #65 run #351 established the green authority checkpoint. PR #63 run #354 is reusable D-064 GREEN_COMPATIBILITY_PROOF under OR-019. The latest surgical preflight has already corrected the earlier `GameScreen.kt` compaction; remaining D-064 gates are current-base integration, manifest-required fallback-scene regression coverage, accepted CPR-002 executable RED -> GREEN strict-mapper evidence, fresh merge-state CI, and full handoff synchronization. Do not promote D-069 until D-064 is synchronized DONE.
+- **UNLOCK_GATE:** only D-064 authority integration + synchronized handoff remains. PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff` passed final run #362 across Python **355/355**, Android unit/build/package, and emulator smoke/screenshots; CPR-002 is clean-candidate GREEN. Do not promote D-069 until Kestrel merges/safely integrates PR #70 and D-064 is synchronized DONE.
 - **NEXT_OWNER:** Veyra; reclaim through `docs/AI_RUNTIME_MERGE_STATE_GATE.md` only after unlock.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
@@ -506,10 +506,10 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** —
 - **CLAIM_HEAD:** —
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** OR-014 released the premature claim. PR #65 run #351 is green across Python, Android build/unit and emulator smoke. PR #63 run #354 proves the D-064 projected-actor behavior against its tested authority merge state, while PR #68 is RED_CONTRACT_ONLY. The final surgical D-064 merge candidate is still pending; Veyra remains next claimant after its green merge-state evidence and full handoff.
+- **EVIDENCE:** PR #65 run #351 is the green authority checkpoint. D-064 final candidate PR #70/run #362 is technically GREEN and Veyr found no remaining acceptance blocker in the seven-file diff. D-069 remains BLOCKED solely on D-064 merge + evidence/Learning/FINISH handoff; Veyra remains next claimant.
 - **PREP_EVIDENCE:** `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md` — blocked-state exact seam, first-commit surface, test matrix and no-GameState boundary; not a claim or implementation.
 - **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — after D-064 DONE, re-fetch and promote D-069 to READY for Veyra before any lower-priority claim.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — immediately after D-064 is synchronized DONE, re-fetch the Bulletin and promote D-069 to READY for Veyra before any lower-priority claim.
 
 ### Rank 11 — D-070 — Tactical transient state, turn and action engine
 - **TASK_REF:** `D-070`
