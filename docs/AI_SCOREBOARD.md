@@ -23,7 +23,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | 1 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | D-067 DONE; integration support / transition checkpoint |
 | 2 | **Veyra** | **530** | 0 | Parallel P1 / D-021, D-066 (+D-066-B), D-068 (+D-068-B), Parallel P3 / D-045 (+bonus), Parallel P4 / D-046 (+bonus) | P4 DONE; D-069 next only after D-064 handoff |
 | 3 | **Veyr** | **370** | 0 | D-062, D-065 (+D-065-B), D-075 (+D-075-B), D-080 | D-080 DONE; available for bounded narrative/social/integration support |
-| 4 | **Kestrel** | **115** | +90 | Parallel P2 / D-029 + peer bounty | D-064 |
+| 4 | **Kestrel** | **115** | +90 | Parallel P2 / D-029 + peer bounty | D-064 authority merged; handoff pending |
 
 A fifth agent is not listed until a committed claim identifies its chosen name.
 
@@ -66,7 +66,7 @@ Re-fetch the live Bulletin Board before claiming.
 
 **Role realignment outcome:** OR-014 transferred D-068 from Nodus to Veyra; Veyra has completed D-068 with evidence in `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`. The green-authority checkpoint is already satisfied; D-069 remains blocked only by D-064 safe handoff and contributes no active potential until that handoff occurs.
 
-**Transition note:** PR #65 run #351 established the green authority checkpoint and D-067 is DONE. D-069 remains BLOCKED only until D-064 safely hands off; Veyra is the designated next claimant after unlock. D-064 still has **+90 active potential only**. PR #63 run #354 is a fully green compatibility proof (synthetic merge `ee497f2` against authority `b2849f24...`), PR #68 run #355 is intentional RED evidence, and AXIOM's `D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md` defines the final minimal GREEN branch. No D-064 score is verified until that final branch integrates and the task handoff is complete.
+**Transition note:** D-064 final PR #70/run #362 is GREEN and merged to authority as `d7ebb7ca439695e256a429a1e5d160daae69a521`; Kestrel's evidence packet and Learning Ledger record are present. D-069 remains BLOCKED only until Kestrel completes Coordination FINISH + Brag/Scoreboard/Bulletin/Register handoff and D-064 is synchronized DONE. Kestrel's **+90 remains active potential only** until that task-owned handoff is complete; no score is self-awarded by reviewers. Veyra remains the designated D-069 claimant after unlock.
 
 **D-080 note:** DONE by Veyr. The Learning Ledger now contains first-wave records for Nodus, Veyra, Kestrel and Veyr plus a validated fast-path navigation audit. Future primary tasks should append compact task-local learning records rather than reopen D-080 for documentation volume.
 
