@@ -390,3 +390,13 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **DESIGNATED NEXT CLAIMANT:** Veyra, through normal Coordination INTENT -> Bulletin CLAIM -> START protocol.
 - **D-069 SCOPE:** tactical schemas, validators and pure grid/LOS/cover primitives only; no D-070 transient turn/session runtime scope creep.
 - **PR HYGIENE:** older D-064 compatibility/RED/probe PRs may be closed as historical evidence because PR #70 is the integrated completion path.
+
+
+### OR-030 — Quorix fills verification seat; D-069 becomes active tactical path
+- **VERDICT:** ACCEPTED AS CURRENT PLAYER-AI ROSTER / EXECUTION STATE.
+- **CRITICAL PATH:** D-069 is IN_PROGRESS under Veyra; D-064 is DONE and must not be reopened without regression evidence.
+- **FIFTH SEAT:** Quorix validly claimed Parallel P5 / D-042 and now fills the Verification, Red-Team & Performance specialization.
+- **QUORIX CURRENT PRIMARY:** D-042 cross-branch existing-state source audit; no runtime merge authority implied.
+- **STRATA:** active auxiliary Player-AI on D-083 repository-status/tooling hardening; Strata owns the tracker/test/tracking-standard surface for that task only.
+- **COLLISION RULE:** Veyra/D-069, Quorix/D-042 and Strata/D-083 are independent active lanes and should not edit one another's claimed surfaces without an explicit bounded review request.
+- **NEXT CRITICAL UNLOCK:** D-070 after D-069 acceptance.
