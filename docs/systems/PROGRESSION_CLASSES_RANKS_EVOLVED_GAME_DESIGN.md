@@ -1623,8 +1623,8 @@ If the documentation cannot answer these without guessing, this branch is not fi
 
 Proceed in this order:
 
-1. build the **Skill Registry** for the 23 current skills;
-2. build the **Combat Class Catalog** for the seven working class families;
+1. **DONE** — build the **Skill Registry** for the 23 current skills;
+2. **DONE** — build the **Combat Class Catalog** for the seven working class families;
 3. build the **Profession / Rank / Status namespace packet**;
 4. build the **Training / Mentor / Facility progression standard**;
 5. build the **Gate Twelve progression proof packet**;
@@ -1642,3 +1642,26 @@ The first reconstruction-grade child is now:
 - `EVOLVED_SKILL_REGISTRY.md`
 
 It expands all 23 current registered skills into target-game design records while preserving the distinction between current runtime facts and evolved content/system requirements.
+
+
+# 39. Materialized child — Combat Class Catalog
+
+The second reconstruction-grade D-045 child is now:
+
+- `COMBAT_CLASS_CATALOG.md`
+
+It expands the seven established target class families — Vanguard, Skirmisher, Operator, Field Specialist, Investigator, Envoy and Ability Specialist — into reconstruction-grade records covering acquisition evidence, current-skill dependencies, feature ownership, tactical/world roles, training/facility requirements, specialization axes, cross-training, equipment/knowledge boundaries, future save/migration constraints and test requirements.
+
+The catalog explicitly preserves:
+- CURRENT / TARGET / PROPOSAL separation;
+- all 23 current skill IDs and their existing class-affinity evidence;
+- class/profession/rank/global-Level namespace separation;
+- D-061's rule that current Phase 1 does not gain a new top-level progression owner;
+- V08 tactical authority over movement, action budget, LOS, cover, targeting, injury and encounter rules;
+- Python/game-engine authority over future class legality and mutation.
+
+Its dependency matrix covers all 23 current skills exactly once as matrix rows and maps each class to training/facility/tactical dependencies.
+
+No class runtime, save migration, numeric unlock threshold, canon institution, final specialization name or final class visual asset is claimed by this materialized child.
+
+The next D-045 child is the **Profession / Rank / Status namespace packet**.
