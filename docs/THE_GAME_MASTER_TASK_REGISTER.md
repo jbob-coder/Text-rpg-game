@@ -1084,12 +1084,16 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - structural audit reports 1,019 unique IDs, zero duplicate IDs and zero dangling parent references in the audited Wave-001 record classes;
   - primary-ability rarity-slice deep-authoring packet coverage is 47 / 47 identities;
   - passive Phase-C family baseline coverage is 23 / 23 families;
-  - conceptual passive record owner/write-target mapping covers 230 / 230 passive IDs.
+  - conceptual passive record owner/write-target mapping covers 230 / 230 passive IDs;
+  - Phase-C current-runtime disposition now covers all 23 conceptual passive owner domains: 2 direct current-owner reuse, 13 current-state composition cases, 6 future domain-runtime requirements and 2 typed-ledger requirements;
+  - current passive projection boundary is source-mapped: `state.perks` is durable and can contribute validated effective-value modifiers, hidden perk provenance is redacted in deep status inspection, and Android has no explicit passive-list DTO;
+  - `tools/status_phase_c_audit.py` + `tests/test_status_phase_c_audit.py` machine-check the 230-registry-ID / 230-owner-row one-to-one ownership milestone.
 - CURRENT PHASE: reconstruction-grade Phase C refinement, blocker resolution, world evidence integration, normalization and canon-review preparation.
 - REMAINING:
   - parent-system range/test fixtures and justified numeric envelopes;
   - evidence-backed world/knowledge integration where current world canon supports it;
-  - unresolved state-owner/runtime projection mappings;
+  - record-level Phase-F implementation mapping after required domain owners/APIs and passive definition schema are accepted;
+  - explicit player-safe passive-list projection contract and later Android consumer;
   - record-by-record canon review and owner approval;
   - Phase D world integration, Phase E canon promotion and Phase F implementation mapping.
 - IMPORTANT: older NEXT text naming rarity/schema/requirement/visibility/Level/awakening standards is superseded because those files now exist.
