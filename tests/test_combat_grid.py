@@ -309,5 +309,53 @@ class TacticalGridTests(unittest.TestCase):
         )
 
 
+    def test_los_is_symmetric_and_stable_for_static_geometry(self) -> None:
+        tactical_map = rectangular_map(
+            4,
+            3,
+            overrides={(2, 1, 0): {"blocks_los": True}},
+        )
+        start = TacticalCoord(0, 0)
+        end = TacticalCoord(3, 2)
+
+        forward_first = has_line_of_sight(tactical_map, start, end)
+        forward_second = has_line_of_sight(tactical_map, start, end)
+        reverse = has_line_of_sight(tactical_map, end, start)
+
+        self.assertEqual(forward_first, forward_second)
+        self.assertEqual(forward_first, reverse)
+
+    def test_preview_queries_do_not_mutate_occupancy(self) -> None:
+        tactical_map = rectangular_map(3, 2)
+        occupants = (
+            TacticalOccupant("PLAYER", "FACTION_A", TacticalCoord(0, 0)),
+            TacticalOccupant("ALLY", "FACTION_A", TacticalCoord(1, 0)),
+        )
+        before = occupants
+
+        path = find_path(
+            tactical_map,
+            TacticalCoord(0, 0),
+            TacticalCoord(2, 0),
+            occupants=occupants,
+            moving_actor_id="PLAYER",
+            moving_faction_id="FACTION_A",
+            allow_allies_through=True,
+        )
+        los = has_line_of_sight(
+            tactical_map,
+            TacticalCoord(0, 0),
+            TacticalCoord(2, 0),
+        )
+
+        self.assertIsNotNone(path)
+        self.assertTrue(los)
+        self.assertEqual(before, occupants)
+        self.assertEqual(
+            TacticalCoord(1, 0),
+            occupants[1].coord,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
