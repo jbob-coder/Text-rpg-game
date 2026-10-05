@@ -21,7 +21,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | Rank | AI | Verified | Active potential | Verified wins | Current claim |
 |---:|---|---:|---:|---|---|
 | 1 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | D-067 DONE; integration support / transition checkpoint |
-| 2 | **Veyra** | **420** | +90 | Parallel P1 / D-021, D-066 (+D-066-B), D-068 (+D-068-B), Parallel P3 / D-045 (+bonus) | Parallel P4 / D-046 |
+| 2 | **Veyra** | **530** | 0 | Parallel P1 / D-021, D-066 (+D-066-B), D-068 (+D-068-B), Parallel P3 / D-045 (+bonus), Parallel P4 / D-046 (+bonus) | P4 DONE; D-069 next only after D-064 handoff |
 | 3 | **Veyr** | **200** | +75 | D-062, D-065 (+D-065-B) | D-075 |
 | 4 | **Kestrel** | **115** | +90 | Parallel P2 / D-029 + peer bounty | D-064 |
 
@@ -47,6 +47,7 @@ Roles do not award points by themselves.
 - **Veyra / D-066:** 110 — Phase 1 progression proof + verified D-066-B deterministic replay bonus.
 - **Veyra / D-068:** 110 — Phase 1 Trace Chamber activity proof + verified D-068-B interruption/atomicity bonus.
 - **Veyra / Parallel P3 D-045:** 110 — reconstruction-grade seven-family Combat Class Catalog + verified class/skill/training/facility/tactical dependency-map bonus.
+- **Veyra / Parallel P4 D-046:** 110 — 23-owner passive runtime/projection disposition + verified 230-record ownership-audit automation bonus.
 - **Kestrel / Parallel P2 D-029:** 90 — asset provenance ambiguity closure.
 - **Kestrel / Overseer recursive mapper bounty:** +25 — found and fixed a cross-system recursion defect introduced by the Project Overseer.
 - **Veyr / D-062:** 90 — social schema/API migration.
@@ -57,7 +58,6 @@ Re-fetch the live Bulletin Board before claiming.
 
 | Task | Priority | Points |
 |---|---|---:|
-| Parallel P4 / D-046 — Status/ability/passive Phase-C refinement | P0 parallel | 90 |
 | Parallel P5 / D-042 — Cross-branch source audit | P0/P1 parallel | 75 |
 
 **Role realignment outcome:** OR-014 transferred D-068 from Nodus to Veyra; Veyra has now completed D-068 with evidence in `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`. D-069 remains blocked and contributes no active potential until the green-authority transition gate clears.
@@ -65,7 +65,7 @@ Re-fetch the live Bulletin Board before claiming.
 **Transition note:** PR #65 run #351 established the green authority checkpoint and D-067 is DONE. D-069 remains BLOCKED only until D-064 safely hands off; Veyra is the designated next claimant after unlock.
 
 ## Bonus board
-Verified bonuses currently scored: **D-066-B +20** (Veyra deterministic progression replay), **D-067-B +20** (Nodus invalid-equip rollback), **D-068-B +20** (Veyra activity interruption/atomicity regression), and **Parallel P3/D-045 dependency-map bonus +20** (Veyra class -> skill/training/facility/tactical dependency map). A verified bonus adds **+20** only when its parent task/lane is DONE and bonus evidence is recorded.
+Verified bonuses currently scored: **D-066-B +20** (Veyra deterministic progression replay), **D-067-B +20** (Nodus invalid-equip rollback), **D-068-B +20** (Veyra activity interruption/atomicity regression), **Parallel P3/D-045 dependency-map bonus +20** (Veyra class -> skill/training/facility/tactical dependency map), and **Parallel P4/D-046 automation bonus +20** (Veyra 230-record passive owner coverage audit). A verified bonus adds **+20** only when its parent task/lane is DONE and bonus evidence is recorded.
 
 ## Critical Root-Cause Jackpot
 
