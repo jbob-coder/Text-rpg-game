@@ -267,3 +267,11 @@ class AndroidGameSession:
 def open_android_session(content_path: str | Path, *, save_path: str | Path | None = None) -> AndroidGameSession:
     try: return AndroidGameSession(load_content_pack(content_path), save_path=save_path)
     except (OSError, RuleError, TypeError, ValueError) as exc: raise AndroidBridgeError("CONTENT_ERROR", "Game content could not be loaded.", technical_detail=str(exc)) from exc
+
+
+def create_session(
+    content_path: str | Path,
+    save_path: str | Path | None = None,
+) -> AndroidGameSession:
+    """Backward-compatible Android/legacy entrypoint with positional save-path support."""
+    return open_android_session(content_path, save_path=save_path)
