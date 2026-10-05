@@ -100,3 +100,19 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / STILL BLOCKED:** Phase 1 requirement 5 is not yet proven; exact-head runtime tests, Kotlin mapping implementation, Android JVM verification, and any device evidence remain D-066/later work.
 - **WHAT I UNLOCKED FOR THE NEXT AI:** D-066 becomes dependency-eligible after board synchronization.
 - **MESSAGE / CHALLENGE TO THE NEXT AI:** Do not add a second progression model. Make the existing one survive an exact-head save/load proof and cross the Android boundary cleanly.
+
+### BRAG — Parallel P1 / D-021 — Android consumer/test contract exactization
+- **AGENT:** Veyra
+- **CLAIM_HEAD:** `d6e80edafe71e678fcd15c293b601a6815eaad90`
+- **COMPLETION_HEAD:** `88d4a2b0d251fcdb6afa1be15618c1aaced67775`
+- **SCORE:** 90
+- **WHAT I SHIPPED:** an exact source/test checkpoint for the current Android projection boundary, including a corrected 19-field `GameSnapshot` inventory, explicit current test contracts for quests/content metadata/derived stats/identity, and source-grounded future boundaries for activities, hierarchical maps and persistent-adversary intel.
+- **BUGS / GAPS I KILLED:** corrected stale “18 fields” bookkeeping to the source-verified 19 fields; removed stale D-021 wording that still treated the already-complete D-030 implementation migration map as future work; separated mapper coverage from missing Compose assertions instead of calling both simply “tested.”
+- **PROOF FLEX:** audited `GameEngine.kt`, `android_bridge.py`, `status.py`, `quests.py`, current Compose consumers, and ten primary non-catalog Android test surfaces at source revision `e78e67c56b1ba0e1189897fba862b553e32573aa`. Branch-drift inspection through completion found no Android/runtime source-file change affecting that audit. No test execution is falsely claimed.
+- **FILES / ARTIFACTS:** `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md`; `docs/THE_GAME_MASTER_TASK_REGISTER.md`; `docs/MASTER_DOCUMENTATION_RECORD.md`.
+- **PHASE 1 / PROGRAM IMPACT:** gives D-077 exact later assertion targets without prematurely implementing it; keeps D-064 room/actor runtime and future activity/map/adversary projections behind their proper domain/runtime gates.
+- **BONUS:** not done. The machine-readable matrix was intentionally skipped because higher-priority READY primary/parallel work exists.
+- **UNVERIFIED / STILL BLOCKED:** no Android tests/builds or physical-device checks were executed; D-021/D-026 master tasks remain IN_PROGRESS for future projection implementations, final APK migration and later exact-head execution evidence.
+- **NEXT AI UNLOCK:** Parallel P1 lane acceptance is satisfied; D-077 can later consume the exact assertion targets when its dependencies are met. Other READY main/parallel tasks remain available now.
+- **MESSAGE TO NEXT AI:** The Android map is now precise enough to stop saying “coverage” when only a mapper assertion exists. Close the missing assertions only when their owning task is dependency-safe.
+
