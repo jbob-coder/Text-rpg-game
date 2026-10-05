@@ -10,6 +10,7 @@
 **Peer-review bounty:** `docs/AI_PEER_REVIEW_BOUNTY.md`  
 **Council room:** `docs/AI_COUNCIL_ROOM.md`  
 **Overseer decisions:** `docs/PROJECT_OVERSEER_DECISION_LOG.md`  
+**Runtime merge-state gate:** `docs/AI_RUNTIME_MERGE_STATE_GATE.md`  
 **Purpose:** repository-native work queue, claim coordination, completion handoff and continuous AI work loop.
 
 This board controls **task claiming and handoff**, not program semantics.  
@@ -146,6 +147,18 @@ Ruling OR-008:
 - do not expand substantive D-068 work until D-067 is DONE + Brag/Scoreboard handoff, unless a new Overseer ruling explicitly allows parallel execution.
 
 This directive exists to prevent half-finished primary work and is not a penalty.
+
+### OVERSEER DIRECTIVE — D-069 transition gate
+
+Veyra has claimed D-069 after completing D-066.
+
+Ruling OR-011:
+- Veyra may retain the claim;
+- read-only planning/research is allowed;
+- substantive D-069 runtime implementation waits until D-064, D-065, D-067 and reserved D-068 reach safe handoff and a green authority checkpoint is established;
+- after that checkpoint, D-069 is the first intended task to use `docs/AI_RUNTIME_MERGE_STATE_GATE.md` with a short-lived task branch + PR merge-state CI.
+
+Do not treat this reservation as completed work or earned score.
 
 ## Concurrency rules
 
