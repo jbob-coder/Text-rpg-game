@@ -939,11 +939,12 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - RESULT: a bounded original parent settlement/region/municipal/route/terrain-climate proposal exists without changing local IDs, local route data, W3 coordinates or higher sovereign canon. Working names remain non-canon until accepted/revised.
 
 ### TASK D-032 — Mechanics schema/API migration packets
-- STATUS: `IN_PROGRESS / PROGRESSION + COMBAT + PERSISTENT-ADVERSARY CHILDREN COMPLETE`
+- STATUS: `IN_PROGRESS / PROGRESSION + SOCIAL + COMBAT + PERSISTENT-ADVERSARY CHILDREN COMPLETE`
 - PRIORITY: `P0/P1`
 - OUTPUT TARGET: progression/social/items/combat/adversary target schemas mapped to existing engine APIs, saves, projections and tests.
 - COMPLETED CHILDREN:
   - `docs/systems/PHASE_1_PROGRESSION_SCHEMA_API_MIGRATION_PACKET.md`
+  - `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`
   - `docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md`
   - `docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md`
 - PROGRESSION DECISION:
@@ -952,6 +953,11 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - no new top-level progression owner or save schema is required for that proof;
   - current Python player-safe ability projection needs an additive stable ability `id`;
   - current Kotlin `GameSnapshot`/mapper drops `status.abilities`, so D-066 owns the bounded typed Android ability-projection migration and exact-head mastery/save/determinism proof.
+- SOCIAL DECISION:
+  - preserve existing schema-v1 `relationships`, player `knowledge`, per-NPC social containers, `party` and `history` rather than adding a duplicate top-level social owner;
+  - converge authored `relationship` and `npc_learn` writes on hardened `social.py` APIs;
+  - keep raw NPC memories/knowledge/goals/personality/story state out of Android; only explicit player-safe consequences may cross the bridge;
+  - D-065 owns the actual Tamsin durable-memory/reactive proof; D-064 separately owns room/actor projection.
 - COMBAT DECISION:
   - Phase 1 tactical runtime state remains transient authoritative Python state;
   - durable GameState/save schema v1 is unchanged during combat;
@@ -962,7 +968,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - top-level save schema v1 may remain unchanged only if nested-record validation and old/new save round-trip tests pass;
   - any new top-level `adversaries` field requires an explicit schema v2+ migration;
   - no canonical Gate Twelve recurring enemy is selected by the migration packet.
-- STILL OPEN: broader social and items/economy migration packets; exact implementation/tests remain separate.
+- STILL OPEN: items/economy migration packet; exact implementation/tests remain separate.
 
 ### TASK D-049 — Application UI relationship architecture planning
 - STATUS: `PLANNING ONLY / DOMAIN-DEPENDENT / FINAL REFINEMENT DEFERRED`
@@ -1301,12 +1307,21 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-061-B` not completed because higher-priority READY P0 work exists.
 
 ### TASK D-062 — Complete broader social schema/API migration child
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `DONE`
 - PRIORITY: `P0 / RANK 3`
 - DEPENDS_ON: D-060.
-- PURPOSE: complete the social portion of D-032 across identity, relationships, memory, knowledge/privacy, goals/story state and Android redaction.
-- ACCEPTANCE: implementation-ready social migration packet with save/privacy/projection/test boundaries.
-- BONUS: `D-062-B` positive/negative Tamsin privacy fixtures.
+- OUTPUT: `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`.
+- RESULT:
+  - current `relationships`, player `knowledge`, per-NPC `npcs[*]`, `party` and `history` remain the durable owners; no competing top-level social registry is introduced;
+  - authored relationship and NPC-knowledge effects are mapped to the hardened `social.py` mutation APIs instead of preserving duplicate direct-write semantics;
+  - the bounded Phase 1 path keeps save schema v1, stable Tamsin/knowledge/goal/story IDs, and defines explicit nested validation/round-trip gates;
+  - private NPC knowledge, memories, goals, personality and story-state maps remain engine-private; future Android consumption requires explicit player-safe DTOs;
+  - D-065 receives a bounded Tamsin memory-write/query/reaction path with rollback and regression requirements; D-064 retains room/actor projection ownership.
+- VERIFICATION:
+  - source/document audit against current `core.py`, `social.py`, `persistence.py`, `android_bridge.py`, Kotlin `GameSnapshot`/mapper, `vertical_slice_01.json`, social tests and V05 contracts;
+  - no runtime code changed and no test pass is claimed by D-062.
+- BONUS: `D-062-B` not completed; higher-priority READY primary work takes precedence.
+- COMPLETED_AT: 2026-10-04 AST.
 
 ### TASK D-063 — Complete items/economy schema/API migration child
 - STATUS: `PENDING / BULLETIN QUEUED`
