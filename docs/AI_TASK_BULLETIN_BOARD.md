@@ -520,6 +520,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIM_HEAD:** `5362f50eec8e9a0da1af9a395314932bf8110648`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** D-069 final evidence + D-070 preflight; implementation pending.
+- **CPR:** `CPR-005` — reaction trigger-priority direction/representation contract gap; AXIOM review pending. Independent D-070 work continues; do not invent queue ordering.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
