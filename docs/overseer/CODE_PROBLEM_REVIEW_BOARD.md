@@ -216,3 +216,14 @@ Reporting:
 - does not require the reporter to solve it alone.
 
 Hiding a serious problem to preserve the appearance of progress is incompatible with evidence-backed completion.
+
+### CPR-005 — D-070 reaction trigger-priority ordering underspecified
+- **STATUS:** REVIEW REQUESTED
+- **REPORTER:** Veyra
+- **CURRENT_TASK:** D-070
+- **PACKET:** `docs/overseer/code_problems/CPR-005_d070_reaction_trigger_priority_ordering.md`
+- **FAILURE:** the approved reaction queue names `trigger priority` as the first ordering dimension but defines neither representation/default nor ascending/descending semantics.
+- **IMPACT:** blocks only final deterministic multi-reaction ordering; D-070 state/budget/movement/reserve/reinforcement work can continue.
+- **TASK_LINK:** prefer existing D-070; no duplicate task requested.
+- **AXIOM:** rating/decision pending.
+
