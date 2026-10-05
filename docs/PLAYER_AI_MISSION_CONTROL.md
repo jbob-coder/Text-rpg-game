@@ -150,7 +150,7 @@ The current transition job is to close D-064 without scope expansion. D-065, D-0
 **Mission state:** **AUTHORITY MERGED / COMPLETION HANDOFF PENDING**.
 
 ### Objective
-Finish the bounded room/actor projection with the smallest current-authority integration delta. Do not redesign the room contract and do not merge historical/RED evidence PRs as the final patch.
+Complete the repository-native D-064 handoff for the already-integrated room/actor projection. Runtime implementation is on authority at merge `d7ebb7ca439695e256a429a1e5d160daae69a521`; do not reopen code unless new regression evidence appears.
 
 ### Read first
 1. live Bulletin D-064 entry;
@@ -167,32 +167,15 @@ Finish the bounded room/actor projection with the smallest current-authority int
 PR #70 comment `5987858442` contains the line-level three-edit patch. Amend PR #70 in place; do not create another implementation branch unless Git history itself becomes unrepairable.
 
 ### Exact next move
-Implementation is complete and merged.
+1. re-fetch live authority and confirm merge `d7ebb7ca439695e256a429a1e5d160daae69a521` remains present;
+2. write/commit D-064 completion evidence anchored to PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff`, run #362 / `37261943012`, and authority merge `d7ebb7ca...`;
+3. add the required Next Player Learning Record;
+4. append Coordination FINISH;
+5. synchronize Brag Room, Scoreboard, Master Task Register and Bulletin;
+6. mark D-064 DONE;
+7. immediately promote D-069 to READY for Veyra.
 
-Verified authority integration:
-- PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff`;
-- workflow run #362 / `37261943012`;
-- Python **355/355 PASS**;
-- Android unit/build/package PASS;
-- emulator smoke/screenshots PASS;
-- debug APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`;
-- authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521`.
-
-Current authority source audit confirms:
-- the 11-key strict room-actor allowlist and unexpected-key rejection;
-- both GameScreen projected-room-actor wires;
-- fallback-scene preservation regression;
-- focused forbidden-private-field mapper regression.
-
-Kestrel's remaining work is handoff only:
-1. write the D-064 evidence packet tied to PR #70/run #362/merge `d7ebb7ca...`;
-2. append the required D-064 Next Player Learning Record;
-3. append Coordination Room FINISH;
-4. add Brag Card and Scoreboard result;
-5. synchronize Master Task Register + Bulletin with exact completion/merge head and mark D-064 DONE;
-6. immediately promote D-069 to READY for Veyra.
-
-Do **not** reopen implementation unless new regression evidence appears.
+Do not rerun or rewrite the implementation unless live authority has changed in a way that materially affects the D-064 runtime/test surface.
 
 ### Exit gate
 - authoritative versioned room projection + strict Python/Kotlin mapping;
@@ -202,8 +185,8 @@ Do **not** reopen implementation unless new regression evidence appears.
 - Platform Nine / Relay Workbench / Service Tunnel visual equivalence;
 - unknown visual family/key renders nothing;
 - old scene/location actor-presence heuristic retired from the Android actor consumer;
-- fresh surgical merge candidate green under the runtime merge-state gate;
-- D-064 evidence + Learning Ledger handoff committed.
+- final seven-file integration present on authority (`d7ebb7ca...`) with run #362 green;
+- D-064 evidence + Learning Ledger + FINISH/Brag/Scoreboard/Register/Bulletin handoff committed.
 
 ### Overlap
 Kestrel owns this runtime/test surface. Nodus/Veyra/Veyr review only unless Kestrel explicitly requests a bounded edit.
