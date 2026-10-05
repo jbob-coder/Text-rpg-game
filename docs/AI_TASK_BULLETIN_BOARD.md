@@ -223,14 +223,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-068`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `92/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; V10 contracts.
 - **ACCEPTANCE:** Selected activity proves legality, cost/time, persistent result, save/load and available Android path.
 - **BONUS:** `D-068-B` — interruption/atomicity regression.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Nodus
+- **CLAIMED_AT:** 2026-10-04T20:51:52.000-04:00
+- **CLAIM_HEAD:** `11ff929abe5dff1ca7da61ca5353708a7449af60`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
