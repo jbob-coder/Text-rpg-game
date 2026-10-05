@@ -367,3 +367,26 @@ Effect on Track B:
 - each unlocked implementation/proof task must still satisfy its own save, privacy, deterministic, Android, performance and canon gates.
 
 Use `docs/AI_TASK_BULLETIN_BOARD.md` for live claim eligibility and `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` for ranked task intent.
+
+## D-061 progression migration gate
+
+D-061 is complete as the migration-design dependency for Phase 1 requirement 5.
+
+Selected proof path:
+- `ABILITY_TRACE_ECHO`;
+- `TECHNIQUE_SIGNAL_PULSE`;
+- authored one-hour practice;
+- durable technique mastery + ability mastery;
+- stamina/focus and world-time cost;
+- save/load persistence;
+- deterministic replay;
+- player-safe progression projection.
+
+Migration decision:
+- retain GameState save schema v1;
+- do not add a competing top-level progression owner;
+- keep progression mutation in Python;
+- add stable ability ID to the existing player-safe Python ability projection;
+- add typed Kotlin ability/technique mapping because current `GameSnapshot` drops `status.abilities`.
+
+D-066 may become READY after board synchronization. D-061 does not itself satisfy Phase 1 requirement 5 because no exact-head runtime proof has yet been executed.
