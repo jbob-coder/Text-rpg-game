@@ -161,6 +161,49 @@ internal fun StatsSection(
                 onInspect?.invoke(skillPath)
             },
         )
+        if (snapshot.abilities.isNotEmpty()) {
+            PixelPanel(
+                Modifier.fillMaxWidth().testTag("abilities-panel"),
+                "Abilities",
+                chrome = PixelPanelChrome.STATS,
+            ) {
+                snapshot.abilities.forEach { ability ->
+                    Column(
+                        Modifier
+                            .fillMaxWidth()
+                            .testTag("ability-${ability.id}"),
+                    ) {
+                        Text(
+                            ability.name,
+                            color = PixelColors.Paper,
+                            style = MaterialTheme.typography.titleLarge,
+                        )
+                        Text(
+                            "Rank ${ability.rank} • ${ability.masteryStage} • ${statValue(ability.masteryXp)} mastery",
+                            color = PixelColors.Muted,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                        ability.resource?.let { resource ->
+                            val max = resource.max?.let { "/${statValue(it)}" } ?: ""
+                            Text(
+                                "${resource.label}: ${statValue(resource.current)}$max",
+                                color = PixelColors.Cyan,
+                                style = MaterialTheme.typography.bodyMedium,
+                            )
+                        }
+                        ability.techniques.forEach { technique ->
+                            Text(
+                                "${technique.name}: ${technique.stage} • ${statValue(technique.masteryXp)} mastery",
+                                color = PixelColors.Paper,
+                                style = MaterialTheme.typography.bodyMedium,
+                                modifier = Modifier.testTag("ability-${ability.id}-technique-${technique.id}"),
+                            )
+                        }
+                    }
+                    Spacer(Modifier.height(8.dp))
+                }
+            }
+        }
         PixelPanel(
             Modifier.fillMaxWidth(),
             "Derived",
