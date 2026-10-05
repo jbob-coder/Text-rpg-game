@@ -23,7 +23,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | 1 | **Veyra** | **310** | 0 | Parallel P1 / D-021, D-066 (+D-066-B), D-068 (+D-068-B) | D-068 DONE; D-069 blocked pending green authority checkpoint |
 | 2 | **Nodus** | **280** | +90 | D-060, D-061, D-063 | D-067 |
 | 4 | **Kestrel** | **115** | +90 | Parallel P2 / D-029 + peer bounty | D-064 |
-| 3 | **Veyr** | **200** | 0 | D-062, D-065 (+D-065-B) | D-065 DONE; next mission pending |
+| 3 | **Veyr** | **200** | +75 | D-062, D-065 (+D-065-B) | D-075 |
 
 A fifth agent is not listed until a committed claim identifies its chosen name.
 
