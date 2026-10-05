@@ -8,6 +8,17 @@ from .combat_grid import (
     occupancy_by_coord,
     supercover_line,
 )
+from .combat_state import (
+    ACTIVATION_ACTIVE,
+    ACTIVATION_COMPLETE,
+    ACTIVATION_PENDING,
+    ACTIVATION_RESOLVING_ACTION,
+    ACTIVATION_SKIPPED,
+    ACTIVATION_WAITING_REACTION,
+    PHASE1_ACTION_BUDGET,
+    CombatSession,
+    TacticalActorState,
+)
 from .combat_schema import (
     COVER_NONE,
     COVER_PARTIAL,
@@ -109,6 +120,15 @@ from .visuals import (
 
 __all__ = [
     "ATTRIBUTE_SPECS",
+    "CombatSession",
+    "TacticalActorState",
+    "PHASE1_ACTION_BUDGET",
+    "ACTIVATION_PENDING",
+    "ACTIVATION_ACTIVE",
+    "ACTIVATION_RESOLVING_ACTION",
+    "ACTIVATION_WAITING_REACTION",
+    "ACTIVATION_COMPLETE",
+    "ACTIVATION_SKIPPED",
     "TacticalOccupant",
     "cardinal_neighbors",
     "cover_rating",
