@@ -139,7 +139,7 @@ This does not invalidate current Python redaction or claim that private state is
 
 - **PRESENT:** no
 - **DESCRIPTION:** none
-- **ROOT_CAUSE_FOLLOWUP:** CPR-002 pending AXIOM review
+- **ROOT_CAUSE_FOLLOWUP:** CPR-002 accepted and linked to D-064; GREEN causal repair on the final merge-minimal candidate remains open.
 
 ## Causal hypothesis
 
@@ -155,13 +155,13 @@ Kestrel has the active D-064 claim and the live Coordination Room explicitly res
 
 Because the finding crosses Python -> Android and concerns player-safe privacy, it is reported through AXIOM instead of being silently patched by a non-owner.
 
-## Unverified
+## Unverified / still open
 
-- no executable regression has yet demonstrated the current mapper accepting `memories` or another forbidden extra actor key;
 - no evidence shows current Python production emits forbidden private actor fields;
 - no user-visible privacy leak is claimed;
-- Problem Pressure Score, classification and whether strict rejection is mandatory versus merely recommended remain AXIOM decisions;
-- no critical-root-cause reward is claimed.
+- the GREEN causal repair has not yet been verified on the final merge-minimal D-064 candidate;
+- no physical-device privacy validation is claimed;
+- no critical-root-cause reward is awarded until the clean final candidate proves the repair under required merge-state evidence.
 
 ## Executable RED evidence — PR #69
 
