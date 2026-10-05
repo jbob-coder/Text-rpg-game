@@ -247,3 +247,20 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / STILL BLOCKED:** this evidence does not claim the repository-wide green checkpoint; unrelated D-064/D-067 integration failures existed in run #341.
 - **WHAT I UNLOCKED FOR THE NEXT AI:** Veyr is free for the next narrative/world-consequence mission; D-076 can later consume this proof.
 - **MESSAGE TO NEXT AI:** The NPC can remember without dumping its brain into the UI. Keep the consequence visible and the private record private.
+
+
+### BRAG — Parallel P3 / D-045 — Seven class families, zero fake runtime
+- **AI NAME:** Veyra
+- **TASK:** Parallel P3 / D-045 — Evolved progression/classes design, bounded Combat Class Catalog child
+- **CLAIM HEAD:** `21526a9d97a76b85f2540f441bead56593fd0e0e`
+- **COMPLETION HEAD:** `84f1925e671f8ae352509c2cdaf12dc89f617573`
+- **SCORE:** 110 — P0 parallel completion 90 + verified dependency-map bonus 20.
+- **WHAT I SHIPPED:** `docs/systems/COMBAT_CLASS_CATALOG.md`, a reconstruction-grade catalog for Vanguard, Skirmisher, Operator, Field Specialist, Investigator, Envoy and Ability Specialist. Each family now has explicit identity, attributes, current-skill anchors, acquisition evidence, feature ownership, tactical/world roles, training/facility dependencies, specialization axes, cross-training and future migration/test boundaries.
+- **BUGS / GAPS I ELIMINATED:** D-045 no longer stops at seven short class-family sketches. The class layer now says exactly what it owns, what it delegates to tactical/social/ability/item/activity systems, and where future schema migration is required. It also prevents profession, faction rank, institutional authority, global Level and combat class from silently collapsing into one field.
+- **TESTS / VERIFICATION:** documentation/source verification only. The catalog dependency matrix was compared against `EVOLVED_SKILL_REGISTRY.md`: **23/23** current skills present, zero missing, zero extra; exactly one full catalog record exists for each of the seven target families; seven unique proposed `CLASS_*` design IDs are explicitly marked proposal-only. No runtime tests/build/device execution was required or claimed.
+- **FILES / ARTIFACTS:** `docs/systems/COMBAT_CLASS_CATALOG.md`; synchronized `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`, `docs/systems/README.md`, `THE_GAME_MASTER_TASK_REGISTER.md`, and `MASTER_DOCUMENTATION_RECORD.md`.
+- **PROGRAM / PHASE 1 IMPACT:** this is evolved-game reconstruction depth, not a Phase 1 runtime requirement. It gives later class implementation a coherent semantic source while preserving D-061's no-second-progression-owner boundary and V08 tactical authority.
+- **BONUS RESULT:** **DONE.** The catalog contains an all-23-skill class affinity matrix plus a class -> training/facility -> tactical-owner dependency map and reconstruction graph.
+- **UNVERIFIED / BLOCKED:** exact class unlock thresholds, numeric feature balance, final specialization names/counts, world-facing class terminology, mentor/facility population, save schema, Android class projection, final class visuals and runtime implementation remain future work.
+- **WHAT I UNLOCKED:** D-045's next child is now the Profession / Rank / Status namespace packet. Parallel P4 / D-046 remains independently READY.
+- **MESSAGE TO THE NEXT AI:** Do not implement `state.classes` from a design catalog. Finish the namespace/training/migration contracts first, then give class state one explicit owner.
