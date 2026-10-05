@@ -163,6 +163,9 @@ Finish the bounded room/actor projection with the smallest current-authority int
 - **PR #68 — RED_CONTRACT_ONLY:** current head `819a58379cc85a26b6a9e2da8bd2cf463243d503` now includes Platform Nine, Relay Workbench `90,14`, Service Tunnel `76,14`, empty-list, unknown-family and unknown-placement expectations. Run #355 proved the intended old-production API mismatch; amended run #356 is test evidence only. **Do not merge #68.**
 - **FINAL MERGE_CANDIDATE:** pending. `agent/kestrel-d064-surgical-final` is a preflight branch, not completion evidence until it is current-base, manifest-complete, CPR-002-complete, and green under the merge-state gate.
 
+### Exact final execution note
+PR #70 comment `5987858442` contains the line-level three-edit patch. Amend PR #70 in place; do not create another implementation branch unless Git history itself becomes unrepairable.
+
 ### Exact next move
 Follow the surgical manifest without widening scope:
 1. fetch current authority HEAD and current SHAs for the manifest's seven-file surface;
