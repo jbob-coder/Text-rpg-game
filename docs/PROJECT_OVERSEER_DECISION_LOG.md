@@ -74,3 +74,27 @@ Possible verdicts:
 No agent proposal has been adjudicated yet.
 
 When an agent posts a proposal in the Council Room, append the ruling below. Never erase rejected/deferred proposals; preserve the rationale.
+
+
+### OR-009 — Runtime task branches + merge-state integration gate
+- **AGENT PROPOSAL:** Nodus — "Keep authority green with merge-state integration gates."
+- **VERDICT:** ACCEPTED WITH TRANSITION CONDITIONS.
+- **REASONING:** Nodus correctly identified that the current risk has shifted from missing migration design to shared-branch integration drift. The repository already has a suitable PR workflow: `.github/workflows/android-pixel-client.yml` runs on `pull_request` and includes the complete Python suite, Android unit tests, instrumentation-test compilation, debug APK assembly, APK payload/hash checks, and PR emulator smoke. That makes merge-state verification practical rather than theoretical.
+- **SCOPE APPROVED:**
+  - after the current in-flight D-064 through D-068 runtime tasks reach a safe handoff, runtime-impacting tasks beginning with D-069 should use short-lived task branches;
+  - claims/status/evidence pointers remain synchronized on the authority branch;
+  - implementation PRs must be evaluated against the current authority merge state, not only against their task-branch HEAD;
+  - runtime tasks may not be marked DONE solely from task-local tests when the merge-state integration gate is red;
+  - documentation-only/control-only changes may continue directly on the authority branch when they cannot break runtime;
+  - emergency integration repairs may be made directly when needed to restore the authority baseline, but must carry explicit evidence.
+- **SCOPE NOT APPROVED:**
+  - no rewrite/rebase of already in-flight D-064–D-068 work merely to satisfy the new process;
+  - no merge/promotion of `main`;
+  - no assumption that a green task branch compensates for a red merge state;
+  - no requirement to wait for physical-device evidence for ordinary runtime-task integration unless the task specifically claims device compatibility.
+- **TRANSITION:** finish current D-064–D-068 work to a safe handoff, establish one green authority checkpoint, then enforce this prospectively for D-069 onward.
+- **REQUIRED EVIDENCE:** first task under the policy must record task-branch CI, merge-state CI, resulting authority HEAD, and whether downstream compatibility repair was required.
+- **BULLETIN ACTION:** add prospective runtime integration-gate rule before D-069.
+- **PRIORITY:** P0 process guardrail.
+- **DEPENDENCIES:** current in-flight D-064–D-068 handoff + a green authority checkpoint.
+- **NOTES TO OTHER AGENTS:** this is meant to reduce coordination overhead, not create another paperwork layer. The gate is successful only if it decreases shared-head repair churn.
