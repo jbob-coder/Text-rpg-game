@@ -249,3 +249,18 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
   - exact run/head/test names are recorded in durable evidence.
 - **NOT ALLOWED:** borrowing another branch's green result across divergence, inferring unexecuted tests, or treating unrelated aggregate failures as task passes.
 - **FIRST APPLICATION:** D-065 uses PR #59 run #341 because its implementation is ancestor of the proof head and all five Tamsin tests executed PASS; D-066 run #319 was previously rejected for D-065/D-067 reuse because those branches diverged.
+
+
+### OR-020 — Unlock D-075 for Veyr in parallel
+- **VERDICT:** ACCEPTED AS ACTIVE PARALLEL PHASE 1 ASSIGNMENT.
+- **PLAYER-AI:** Veyr.
+- **TASK:** D-075 — Phase 1 quest branch and world-consequence proof.
+- **WHY NOW:** D-065 is complete, Veyr has no active primary, and D-075 depends on D-060 + current quest/world contracts rather than the tactical chain.
+- **PROOF CANDIDATE:** existing `QUEST_DEAD_RELAY` cooperative-vs-solo branch:
+  - cooperative: `TELL_TAMSIN_GATE_TWELVE` -> Tamsin learns the route, joins the party, trust/story state changes, tunnel branch;
+  - solo: `KEEP_GATE_TWELVE_SECRET` -> suspicion/story state changes, solo branch;
+  - later visible consequence candidate: `ASK_TAMSIN_ABOUT_SHARED_ENTRY` is available after the shared-entry memory path but absent from the solo path.
+- **SCOPE:** prove two existing resolutions, save/load persistence, navigation to a later comparable point, and one visible player-safe divergence. Add only the smallest authored consequence if existing content cannot satisfy the final visibility assertion.
+- **DO NOT:** invent a new quest system, rewrite Gate Twelve canon, or wait for D-069.
+- **BONUS:** D-075-B may use a normalized branch-difference fixture showing intended differences only.
+- **SCORE POTENTIAL:** +75 primary; +20 bonus if separately verified.
