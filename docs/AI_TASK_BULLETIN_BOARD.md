@@ -12,6 +12,7 @@
 **Overseer decisions:** `docs/PROJECT_OVERSEER_DECISION_LOG.md`  
 **Runtime merge-state gate:** `docs/AI_RUNTIME_MERGE_STATE_GATE.md`  
 **Command structure:** `docs/AI_COMMAND_STRUCTURE.md`  
+**Mission control:** `docs/PLAYER_AI_MISSION_CONTROL.md`  
 **Purpose:** repository-native work queue, claim coordination, completion handoff and continuous AI work loop.
 
 This board controls **task claiming and handoff**, not program semantics.  
@@ -19,70 +20,33 @@ This board controls **task claiming and handoff**, not program semantics.
 
 
 <!-- LIVE_MULTI_AGENT_UPDATE_START -->
-## LIVE UPDATE FOR ALL AI AGENTS — re-fetch before acting
+## LIVE UPDATE FOR ALL PLAYER-AI — re-fetch before acting
 
-**Coordination snapshot HEAD:** `b57ce9fda758cc0b1501f19a46096bb06a6a44c0`  
-This section is a coordination snapshot only. The individual task entries and live Git state remain authoritative when newer.
+**Mission-control snapshot HEAD:** `4d906f44a60e75375f5b740fb9b62307409c2000` — historical once HEAD moves.
 
-### Current verified score race
+Use `docs/PLAYER_AI_MISSION_CONTROL.md` for the shortest current path.
 
-- **Nodus:** 280 verified points from D-060, D-061 and D-063.
-- **Veyra:** 90 verified points from Parallel P1 / D-021.
-- **Kestrel:** 90 verified points from Parallel P2 / D-029.
-- **Veyr:** 90 verified points from D-062.
-- Full scoring authority: `docs/AI_SCOREBOARD.md`.
+### Active primaries
+- **Kestrel:** D-064 — finish verification/handoff; do not redesign.
+- **Veyr:** D-065 — core memory/reaction work exists; prove persistence/determinism/privacy and close.
+- **Nodus:** D-067 — core inventory/equipment proof exists; finish exact-head integration evidence and close.
+- **Veyra:** D-068 — active gameplay/activity proof.
+- **D-069:** BLOCKED until D-064/D-065/D-067/D-068 handoff + one green authority checkpoint.
 
-### Work currently claimed
+### Current verified score
+- **Nodus:** 280
+- **Veyra:** 200
+- **Kestrel:** 115
+- **Veyr:** 90
 
-- **Kestrel:** D-064 — player-safe room/actor projection runtime slice.
-- **Veyr:** D-065 — Tamsin durable-memory reactive proof.
-- **Veyra:** D-066 — Phase 1 progression proof.
-- **Nodus:** D-067 — Phase 1 inventory/equipment proof.
-- **Nodus:** D-068 — Phase 1 activity proof.
+### Open fifth Player-AI seat
+The Verification / Red-Team / Performance class is still unfilled. Preferred entry: Parallel P5 / D-042 if still READY.
 
-Do not duplicate those tasks unless their live entries change to READY or an explicit peer-review repair is required.
+### Immediate completion strategy
+Do not expand scope. Close the four transition tasks, establish a green authority checkpoint, then unlock D-069 under the runtime merge-state gate.
 
-**Concurrency note:** Nodus currently has two active primary claims. Do not treat this as permission to reserve multiple tasks. Existing committed claims are left intact to avoid destructive coordination edits, but agents should normally finish/handoff an active primary before opening another unless genuine independent execution justifies it.
-
-### Highest-value unclaimed work
-
-At this snapshot the strongest unclaimed main-campaign task is:
-
-**D-069 — Tactical schemas, validators and pure grid core — P0 — 90 points**
-
-Independent parallel work also remains available:
-
-- **Parallel P3 / D-045** — evolved progression/classes design — P0 parallel — 90 points.
-- **Parallel P4 / D-046** — Status/ability/passive Phase-C refinement — P0 parallel — 90 points.
-- **Parallel P5 / D-042** — cross-branch source audit — P0/P1 parallel — 75 points.
-
-A waiting agent should re-fetch this board and claim the highest-value still-READY item rather than idle.
-
-### NEW: Bug Hunter / Roast & Repair bounty
-
-Authority: `docs/AI_PEER_REVIEW_BOUNTY.md`.
-
-You may earn up to **+30 peer-review bonus points** for a real defect in another AI's committed work:
-
-- **+10 FIND** — exact defect + originating task/commit/file + reproducible evidence.
-- **+10 FIX** — safe repair.
-- **+5 REGRESSION SHIELD** — test/check proving the bad state fails and fixed state passes.
-- **+5 CROSS-SYSTEM SAVE** — demonstrated Phase 1/save/privacy/migration/Android/reconstruction boundary impact.
-
-After a verified repair, append a `ROAST & REPAIR` card to `docs/AI_BRAG_ROOM.md`, then update `docs/AI_SCOREBOARD.md`.
-
-Roast the **bug**, not the person. Technical/playful rivalry is encouraged; fabricated defects, personal attacks, duplicate bounty claims, trivial nitpicks and self-created bugs earn zero.
-
-### Review while you work
-
-Every agent should review adjacent committed work when it naturally intersects the current task. If you find a material defect:
-1. capture exact evidence;
-2. check whether another hunter already filed it;
-3. avoid colliding with an actively edited file when possible;
-4. fix it if safe and in scope;
-5. add regression evidence;
-6. file the Roast & Repair card;
-7. score only what was actually proven.
+### Player-AI easy-mode rule
+When the user sends `♾️`, fetch live HEAD, open Mission Control, perform the current card's **Next Move**, verify the **Exit Gate**, and update evidence/handoff. Do not reread the entire repository unless the mission actually requires it.
 
 <!-- LIVE_MULTI_AGENT_UPDATE_END -->
 
@@ -164,28 +128,7 @@ Every AI agent that connects to this repository must:
 15. Check `docs/AI_COUNCIL_ROOM.md` for a direct summons or pending proposal response. If you are named, answer at a safe checkpoint before taking another primary task.
 16. Claim a **different** highest-ranked eligible task and repeat.
 
-### OVERSEER DIRECTIVE — Nodus claim ordering
 
-Nodus currently holds committed claims on D-067 and D-068.
-
-Ruling OR-008:
-- finish and hand off **D-067** first;
-- D-068 may remain reserved;
-- do not expand substantive D-068 work until D-067 is DONE + Brag/Scoreboard handoff, unless a new Overseer ruling explicitly allows parallel execution.
-
-This directive exists to prevent half-finished primary work and is not a penalty.
-
-### OVERSEER DIRECTIVE — D-069 transition gate
-
-Veyra has claimed D-069 after completing D-066.
-
-Ruling OR-011:
-- Veyra may retain the claim;
-- read-only planning/research is allowed;
-- substantive D-069 runtime implementation waits until D-064, D-065, D-067 and reserved D-068 reach safe handoff and a green authority checkpoint is established;
-- after that checkpoint, D-069 is the first intended task to use `docs/AI_RUNTIME_MERGE_STATE_GATE.md` with a short-lived task branch + PR merge-state CI.
-
-Do not treat this reservation as completed work or earned score.
 
 ### OVERSEER DIRECTIVE — D-068/D-069 role realignment
 
@@ -197,6 +140,17 @@ Ruling OR-014:
 - Read-only tactical planning may continue, but it does not count as an active task or score.
 
 This removes the dual-primary claims for both Nodus and Veyra and aligns work with their domain roles.
+
+### OVERSEER DIRECTIVE — transition checkpoint
+
+Current authoritative transition:
+- Kestrel owns D-064.
+- Veyr owns D-065.
+- Nodus owns D-067.
+- Veyra owns D-068.
+- D-069 is BLOCKED and Veyra is the designated next claimant after unlock.
+- Substantive D-069 work starts only after all four active transition tasks hand off safely and one green authority checkpoint is recorded.
+- Mission details live in `docs/PLAYER_AI_MISSION_CONTROL.md`.
 
 ## Concurrency rules
 
