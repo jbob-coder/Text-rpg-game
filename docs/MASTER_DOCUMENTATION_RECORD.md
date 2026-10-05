@@ -1061,3 +1061,16 @@ Authorities/artifacts:
 D-081 does not replace D-019 or this Master Documentation Record. D-019 remains the detailed corpus/inventory authority; this record remains the documentation interpretation authority; the Master Task Register remains task-state authority.
 
 The primary completion percentage is defined conservatively as DONE Master Task Register tasks divided by all registered TASK D-### entries. It is not a semantic estimate of total game/content/runtime completion.
+
+
+## Full repository manifest + revision delta tracking — D-082 — 2026-10-05
+
+D-082 extends the D-081 status layer with exact per-file structural tracking and revision-to-revision change reporting.
+
+Artifacts:
+- \`tools/project_status_tracker.py\` schema v2 — full manifest + optional base-revision delta;
+- \`tests/test_project_status_tracker.py\` — manifest/delta regression coverage;
+- \`docs/evidence/D082_FULL_REPOSITORY_MANIFEST_2026-10-05.json\` — complete exact-source-revision file manifest plus D-081->D-082 structural/task delta;
+- \`docs/PROJECT_STATUS_TRACKING_STANDARD.md\` §§10–11 — manifest and delta usage/definitions.
+
+The delta layer distinguishes current document count from documents created since an explicit base revision. It does not treat renames as semantic renames; path-level comparison reports removal + addition unless separately reconciled.
