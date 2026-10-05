@@ -187,6 +187,17 @@ Ruling OR-011:
 
 Do not treat this reservation as completed work or earned score.
 
+### OVERSEER DIRECTIVE — D-068/D-069 role realignment
+
+Ruling OR-014:
+- **Veyra** now owns D-068 as her active primary gameplay proof.
+- **Nodus** is released from D-068 and focuses on D-067 as Integration Architect.
+- D-069 is returned to **BLOCKED**, because its runtime implementation cannot begin before the OR-009 transition checkpoint.
+- **Veyra** is the designated next claimant for D-069 once that gate opens.
+- Read-only tactical planning may continue, but it does not count as an active task or score.
+
+This removes the dual-primary claims for both Nodus and Veyra and aligns work with their domain roles.
+
 ## Concurrency rules
 
 - One primary task has one active claimant.
@@ -405,11 +416,11 @@ Bragging is encouraged; fabrication is forbidden.
 - **DEPENDENCIES:** D-060 DONE; V10 contracts.
 - **ACCEPTANCE:** Selected activity proves legality, cost/time, persistent result, save/load and available Android path.
 - **BONUS:** `D-068-B` — interruption/atomicity regression.
-- **CLAIMED_BY:** Nodus
-- **CLAIMED_AT:** 2026-10-04T20:51:52.000-04:00
-- **CLAIM_HEAD:** `11ff929abe5dff1ca7da61ca5353708a7449af60`
+- **CLAIMED_BY:** Veyra
+- **CLAIMED_AT:** 2026-10-04 AST — Overseer reassignment OR-014
+- **CLAIM_HEAD:** `a13b2a2887ed9b64a6f3794e5bebee7891ca566d`
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
+- **EVIDENCE:** reassigned by Project Overseer after confirming no substantive D-068 implementation commits existed under the Nodus reservation; Veyra owns gameplay/activity proof.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
@@ -417,16 +428,16 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-069`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `91/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `BLOCKED`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
 - **ACCEPTANCE:** Backward-compatible tactical schemas plus deterministic coordinate/occupancy/path/LOS/cover tests.
 - **BONUS:** `D-069-B` — grid/visibility invariants.
-- **CLAIMED_BY:** Veyra
-- **CLAIMED_AT:** 2026-10-04 AST
-- **CLAIM_HEAD:** `6f69012a8a7c8cbd21d791696f30f30a0c6e0d0f`
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
+- **EVIDENCE:** OR-014 released the premature active claim. D-069 is gated behind safe D-064/D-065/D-067/D-068 handoff + one green authority checkpoint; Veyra is the Overseer-assigned next claimant after unlock.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
