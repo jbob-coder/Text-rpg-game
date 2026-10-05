@@ -15,6 +15,8 @@
 **Mission control:** `docs/PLAYER_AI_MISSION_CONTROL.md`  
 **Overseer meta loop:** `docs/OVERSEER_META_LOOP.md`  
 **Critical root-cause rewards:** `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md`  
+**Overseer code-problem intake:** `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md`  
+**Player learning trail:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md`  
 **Purpose:** repository-native work queue, claim coordination, completion handoff and continuous AI work loop.
 
 This board controls **task claiming and handoff**, not program semantics.  
@@ -148,6 +150,32 @@ Current authoritative transition:
 - D-069 is BLOCKED and Veyra is the designated next claimant after unlock.
 - Substantive D-069 work starts only after all four active transition tasks hand off safely and one green authority checkpoint is recorded.
 - Mission details live in `docs/PLAYER_AI_MISSION_CONTROL.md`.
+
+## Large code-problem escalation
+
+If a Player-AI discovers a defect that is cross-system, P0-blocking, architectural, repeatedly red in CI/runtime, save/privacy/determinism-sensitive, or likely to require a workaround, report it through:
+
+`docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md`
+
+Use a `CPR-###` evidence packet under `docs/overseer/code_problems/`.
+
+AXIOM rates the problem from evidence. For accepted CRITICAL-or-higher problems:
+- link the CPR to an existing causal-owner task when one already exists;
+- otherwise register a new Master Task + Bulletin task;
+- never create duplicate tasks for the same causal incident;
+- temporary patches receive no penalty but must keep a root-cause follow-up open.
+
+A Player-AI may continue safe bounded work while review happens when doing so does not conceal or compound the defect.
+
+## Next-player learning completion gate
+
+Every primary task completed after this policy is active must append a **Next Player Learning Record** to:
+
+`docs/player_guide/PLAYER_LEARNING_LEDGER.md`
+
+The record must point to the smallest useful authority/source/test/evidence set, identify one trap or false assumption, and give the next Player-AI a direct validation/extension shortcut.
+
+A primary task is not fully handed off until this record exists. Keep it compact; do not duplicate master documents.
 
 ## Critical-problem reward rule
 
@@ -692,3 +720,24 @@ These lanes are independent of D-060 completion and exist specifically so additi
 The queue is now live and multi-agent. Do not rely on the historical statement that D-060 was the only initial READY task. Re-fetch this board and the Scoreboard before every claim. Completing agents unlock direct dependents by evidence, not by rank alone.
 
 If all ranked tasks are DONE, use live evidence to create the next program task only if real work remains. If all remaining work requires owner input, record the exact owner decision and stop instead of fabricating a task.
+
+
+### Program Infrastructure — D-080 — First-wave Player-AI repository learning trail
+- **TASK_REF:** `D-080`
+- **PRIORITY:** `P0/P1 PROGRAM INFRA`
+- **IMPORTANCE:** `88/100`
+- **STATUS:** `READY`
+- **DOMAIN:** repository navigation / validation / Player-AI continuity.
+- **PURPOSE:** turn first-wave evidence into a compact learning trail so later Player-AIs do not repeat full-repository archaeology.
+- **DEPENDENCIES:** none; evidence-backed completed work only.
+- **PREFERRED_CLAIMANTS:** Nodus or Fifth Player-AI / Verification class while Kestrel remains focused on D-064; any available Player-AI may claim normally.
+- **CLAIM_RULE:** one active claimant; do not interrupt an active P0 critical-path task to take D-080.
+- **ACCEPTANCE:** at least one evidence-backed Learning Ledger record each for Nodus, Veyra, Kestrel and Veyr; fast-path navigation validated; required completion rule linked from AGENTS/Mission Control; no duplicate authority.
+- **BONUS:** `D-080-B` — machine-readable task/domain -> authority -> implementation owner -> validation/evidence map with consistency check.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+- **COMPLETION_HEAD:** —
+- **EVIDENCE:** pending.
+- **BRAG_CARD:** pending.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** no.
