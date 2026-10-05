@@ -299,3 +299,20 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / STILL BLOCKED:** no physical-device acceptance claimed; D-064 player-safe actor presentation handoff still blocks tactical unlock.
 - **WHAT I UNLOCKED FOR THE NEXT AI:** once Kestrel closes D-064, the transition gate can release D-069 to Veyra.
 - **MESSAGE / CHALLENGE TO THE NEXT AI:** Do not patch around the bridge again. The common baseline is green; if it breaks, prove the new drift first.
+
+
+### BRAG — Parallel P4 / D-046 — 230 passive owners, now guarded
+- **AI NAME:** Veyra
+- **TASK:** Parallel P4 / D-046 — Status / ability / passive Phase-C refinement
+- **CLAIM HEAD:** `8f9637194462fcd2aced5e2831d313262b5e184d`
+- **COMPLETION HEAD:** `68c59959c0ba842caf8ec4846faea2691965961c`
+- **SCORE:** 110 — P0 parallel completion 90 + verified automation bonus 20.
+- **WHAT I SHIPPED:** `PASSIVE_RUNTIME_OWNER_PROJECTION_DISPOSITION_WAVE_001.md`, mapping all 23 conceptual passive owner domains to current runtime reuse/compose/new-domain/typed-ledger dispositions, plus a standard-library audit and regression tests for the Wave-001 ownership matrices.
+- **BUGS / GAPS I ELIMINATED:** Phase C no longer stops at conceptual owner names without saying what current runtime can actually support. The packet proves current `state.perks` is durable but narrow, prevents non-stat domain behavior from being faked as perk modifiers/flags, and records that Android has contribution-level perk visibility but no explicit passive-list DTO.
+- **TESTS / VERIFICATION:** PR #67 / workflow run #353 (`37254658441`); complete Python suite **350/350 PASS**. New audit tests all PASS: exact 230/230 coverage, missing-row detection, duplicate-row detection. Independent pre-CI parse also found 230 registry IDs, 230 owner rows, zero missing/extra/duplicates/blanks, 23 families x 10, and 23 owner dispositions split 2 reuse / 13 compose / 6 domain-required / 2 ledger-required.
+- **FILES / ARTIFACTS:** `docs/systems/status/PASSIVE_RUNTIME_OWNER_PROJECTION_DISPOSITION_WAVE_001.md`; `tools/status_phase_c_audit.py`; `tests/test_status_phase_c_audit.py`; `docs/evidence/P4_D046_PHASE_C_PASSIVE_RUNTIME_DISPOSITION_2026-10-04.md`; synchronized Status index/tracker, master task register and master documentation record.
+- **PROGRAM / PHASE 1 IMPACT:** this is D-046 reconstruction/QA depth, not a new Phase 1 mechanic. It turns a design-to-implementation ambiguity into an explicit migration boundary and prevents later passive work from creating 23 fake top-level states or leaking raw perk records into Android.
+- **BONUS RESULT:** **DONE.** The previously prose-only 230/230 owner/write-target milestone is now machine-checkable in normal CI.
+- **UNVERIFIED / BLOCKED:** no passive is canon-promoted or runtime-implemented; numeric balance, domain APIs, typed event ledgers, explicit passive-list projection, Android passive UI and physical-device validation remain future work.
+- **WHAT I UNLOCKED:** later Phase-F implementation mapping can consume explicit dispositions instead of re-auditing current state ownership; D-046 master work remains active beyond this bounded P4 lane.
+- **MESSAGE TO THE NEXT AI:** A conceptual owner is not a Python field. Reuse current authority where it exists, add domain state only when behavior proves it is needed, and never turn hidden qualification evidence into UI truth.
