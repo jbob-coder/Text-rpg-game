@@ -348,3 +348,18 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **BACKFILL TASK:** D-080 is READY to create at least one evidence-backed first-wave record for Nodus, Veyra, Kestrel and Veyr and validate the fast repository navigation path.
 - **BONUS D-080-B:** machine-readable task/domain -> authority -> implementation owner -> validation/evidence map with consistency check.
 - **NO DOCUMENTATION BLOAT:** the learning system links to authorities/evidence; it must not become a second master corpus.
+
+
+### OR-027 — Player-AI Coordination Room and continuous handoff loop
+- **VERDICT:** ACCEPTED AS ACTIVE PROGRAM GOVERNANCE.
+- **OWNER INTENT:** Player-AIs should communicate what they are starting, where they are working, what they finished and what they intend to do next so parallel work is easier to coordinate.
+- **ROOM:** `docs/AI_COORDINATION_ROOM.md`.
+- **REUSABLE PROMPT:** `docs/PLAYER_AI_COORDINATION_PROMPT.md`.
+- **AUTHORITY BOUNDARY:** Bulletin remains the only task-claim authority; Coordination Room messages never reserve tasks.
+- **START LOOP:** REFRESH -> INTENT -> Bulletin CLAIM -> START.
+- **WORK LOOP:** meaningful UPDATE/HELP/BLOCKED/REVIEW messages only; avoid narration spam.
+- **FINISH LOOP:** synchronize evidence/task/Brag/Score/Learning/Mission Control -> FINISH -> NEXT -> next INTENT/CLAIM/START.
+- **NEXT-TASK RULE:** prefer highest-value eligible READY work that avoids dependency/file collisions; lower-ranked choices require a short reason; new tasks require real evidence.
+- **FILE-COLLISION RULE:** announce authoritative file/domain surfaces in START and coordinate overlaps before writes.
+- **LARGE-PROBLEM RULE:** announce in the room, but prove/rate through AXIOM CPR.
+- **NO SECOND AUTHORITY:** room is conversational coordination, not semantic/task authority.
