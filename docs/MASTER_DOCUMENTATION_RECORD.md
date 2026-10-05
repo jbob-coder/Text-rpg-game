@@ -1046,3 +1046,18 @@ Operational coordination now includes:
 - `docs/PLAYER_AI_COORDINATION_PROMPT.md` — reusable coordination prompt.
 
 OR-027 preserves the Bulletin as claim authority while requiring visible work/handoff communication. This layer reduces overlapping edits and hidden task transitions without becoming a second semantic authority.
+
+## Repository-wide project-status tracking — D-081 — 2026-10-05
+
+The program now has a reproducible status aggregation layer for repository structure, task completion and document counts.
+
+Authorities/artifacts:
+- `tools/project_status_tracker.py` — exact-revision structural/task aggregator;
+- `tests/test_project_status_tracker.py` — regression coverage for status parsing, exact-revision isolation, document counts and completion math;
+- `docs/PROJECT_STATUS_TRACKING_STANDARD.md` — metric definitions and regeneration rules;
+- `docs/PROJECT_STATUS_SNAPSHOT_2026-10-05.md` — human-readable D-081 baseline;
+- `docs/evidence/D081_PROJECT_STATUS_BASELINE_2026-10-05.json` — machine-readable exact-source-revision evidence.
+
+D-081 does not replace D-019 or this Master Documentation Record. D-019 remains the detailed corpus/inventory authority; this record remains the documentation interpretation authority; the Master Task Register remains task-state authority.
+
+The primary completion percentage is defined conservatively as DONE Master Task Register tasks divided by all registered TASK D-### entries. It is not a semantic estimate of total game/content/runtime completion.
