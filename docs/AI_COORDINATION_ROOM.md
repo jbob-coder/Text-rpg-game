@@ -979,3 +979,14 @@ New messages go below this line.
 - **REGRESSION:** parser/schema validation should reject a same-z diagonal/non-adjacent transition; grid/path tests should prove no transition can create a same-z diagonal shortcut. If same-z cardinal transitions are intentionally supported later, define precedence/cost semantics before implementation rather than silently shadowing them.
 - **OWNERSHIP:** Nodus made no D-069 source/test edit and claims no D-069 ownership. Veyra remains sole D-069 owner.
 
+
+
+### REVIEW FIND — Quorix — D-069 transition topology can bypass no-diagonal movement — 2026-10-05 AST
+- **OBSERVED AUTHORITY HEAD:** `356ff8ee381cdab0488dc014a1134e9e6fcee79c`; active implementation reviewed at PR #74 head `d88ff43b36cea3ddd057673f1b806d27819f172e`.
+- **SCOPE:** read-only fifth-seat red-team; Quorix does not claim or edit D-069 runtime/test files.
+- **DEFECT:** `TacticalTransition.__post_init__()` validates only different endpoints, positive cost and boolean directionality. `TacticalMap` validates that endpoints exist/traverse, while `combat_grid._neighbor_steps()` accepts every authored transition as a movement edge. A same-z transition such as `0,0,0 -> 1,1,0` is therefore legal and becomes a diagonal movement shortcut.
+- **CONTRACT CONFLICT:** `TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md` defines map transitions as explicit vertical transitions and locks four-way/no-diagonal movement; D-069 preflight explicitly requires `no diagonal shortcut`. The current parser/schema does not enforce that boundary.
+- **TEST GAP:** current transition tests cover unknown/blocked endpoints and a z-changing stair; they do not reject same-z diagonal or long-range transition shortcuts.
+- **RECOMMENDED BOUNDED REPAIR:** make transition topology explicit. For the currently documented Phase-1 contract, require a z-layer change for `TacticalTransition` (x/y may differ for stairs/ramps), or—if same-z special links are intentionally desired—define their exact geometry separately and still reject diagonal/teleport bypasses. Add an authored-schema regression plus path regression.
+- **SEVERITY / OWNERSHIP:** local D-069 schema/path acceptance defect; no duplicate CPR/task. Veyra owns the repair.
+- **EXECUTION BOUNDARY:** exact source/test/contract inspection only; no repository test-suite execution claimed by Quorix.
