@@ -1399,17 +1399,18 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-067-B` invalid-equip atomic rollback tests.
 
 ### TASK D-068 — Verify Phase 1 activity loop on exact HEAD
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `IN_PROGRESS / CLAIMED BY VEYRA / OR-014 ROLE REALIGNMENT`
 - PRIORITY: `P0 / RANK 9`
+- CLAIM_NOTE: transferred from Nodus to Veyra after repository history showed no substantive D-068 implementation commits under the prior reservation; aligns with Veyra's Gameplay Systems & Tactical Lead role.
 - DEPENDS_ON: D-060 and current V10 contracts.
 - PURPOSE: verify the selected Trace Chamber training/activity proof across legality, cost, time, persistence and presentation.
 - ACCEPTANCE: requirement #8 has exact-head runtime/save evidence and Android evidence where the current consumer exists.
 - BONUS: `D-068-B` activity interruption/atomicity regression.
 
 ### TASK D-069 — Implement tactical schemas, validators and pure grid core
-- STATUS: `IN_PROGRESS / CLAIMED BY VEYRA / OR-011 RUNTIME-GATED / PREIMPLEMENTATION AUDIT COMPLETE`
+- STATUS: `BLOCKED / OR-009 TRANSITION GATE / VEYRA NEXT OWNER / PREIMPLEMENTATION AUDIT COMPLETE`
 - PRIORITY: `P0 / RANK 10`
-- CLAIM_HEAD: `6f69012a8a7c8cbd21d791696f30f30a0c6e0d0f`.
+- CLAIM_HEAD: released by OR-014; historical claim head `6f69012a8a7c8cbd21d791696f30f30a0c6e0d0f` retained for audit.
 - DEPENDS_ON:
   - D-060 DONE;
   - D-032 combat migration packet;
