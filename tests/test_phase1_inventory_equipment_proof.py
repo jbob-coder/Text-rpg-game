@@ -7,7 +7,7 @@ from tempfile import TemporaryDirectory
 import unittest
 
 from textrpg import RuleError, content_pack_from_mapping, loads_state
-from textrpg.android_bridge import AndroidBridgeError, open_android_session
+from textrpg.android_bridge import AndroidBridgeError, create_session, open_android_session
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -184,6 +184,42 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
             session.equip("ITEM_DEPOT_JACKET")
 
         self.assertEqual(before, session.state.snapshot())
+
+
+    def test_legacy_android_factory_accepts_positional_save_path(self) -> None:
+        with TemporaryDirectory() as directory:
+            save_path = Path(directory) / "compatibility.json"
+            session = create_session(CONTENT, save_path)
+            view = session.scene_view()
+            self.assertEqual("CONTENT_VERTICAL_SLICE_01", view["meta"]["content_id"])
+            self.assertEqual("PLATFORM_NINE", view["meta"]["location"])
+
+
+    def test_player_safe_inventory_projection_is_complete_without_raw_modifiers(self) -> None:
+        session = open_android_session(CONTENT)
+        inventory = session.scene_view()["inventory"]
+
+        self.assertEqual(12, len(inventory["equipment"]))
+        self.assertEqual(
+            {
+                "head", "body", "hands", "legs", "feet", "main_hand",
+                "off_hand", "ring_1", "ring_2", "neck", "accessory_1", "accessory_2",
+            },
+            {slot["slot"] for slot in inventory["equipment"]},
+        )
+        self.assertTrue(all("modifiers" not in item for item in inventory["items"]))
+        self.assertTrue(all("modifiers" not in slot for slot in inventory["equipment"]))
+        self.assertEqual(
+            {
+                "ITEM_COURIER_NECKTAG", "ITEM_DEPOT_JACKET",
+                "ITEM_MAINTENANCE_SEAL", "ITEM_SIGNAL_RING", "ITEM_WORK_GLOVES",
+            },
+            {item["id"] for item in inventory["items"]},
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()
 
 
 if __name__ == "__main__":
