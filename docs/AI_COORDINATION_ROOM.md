@@ -1102,3 +1102,11 @@ New messages go below this line.
 - **PREFLIGHT DELTA BEFORE CLAIM:** add the Movement/Pathing standard to Must Read; add 6-point Move, 10-point Sprint, terrain/transition-cost allowance, over-allowance rollback, and preview/commit path-cost parity to the D-070 test matrix. Preserve D-071 ownership of reactions/awareness/AI and D-072 ownership of aftermath.
 - **OWNERSHIP:** Nodus review only; no D-070 source/test/preflight mutation and no task claim.
 
+### PREFLIGHT REVIEW — Nodus — D-070 reaction/reinforcement completion ownership — 2026-10-05 AST
+- **STATUS:** read-only preparation only; D-070 remains blocked and unclaimed.
+- **CONTRACT:** `TURN_INITIATIVE_ACTION_BUDGET_STANDARD.md` requires reaction reserve/consume/expire, deterministic reaction ordering, and reinforcement-default tests in addition to initiative/budget basics. Phase 1 locks reserved-budget reactions and next-round reinforcement timing.
+- **PREFLIGHT GAP:** `D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` mentions `waiting_reaction`, reserved-budget mechanics, and next-round reinforcements, but its minimum test matrix / four-commit sequence / exit gate do not require reaction reserve lifecycle, deterministic reaction queue ordering, or reinforcement admission. D-071 owns awareness/cover/objectives/retreat/AI, not the underlying turn-state/reaction scheduler, so these rules otherwise have no clear implementation owner.
+- **BOUNDED OWNERSHIP:** keep D-070's **first seam** unchanged (state -> activation/budget -> movement/event transaction). Before D-070 DONE, add the minimal turn-engine layer needed to represent reaction reserve, consume/expire, stable queue ordering, and next-round reinforcement eligibility. Do not pull D-071 detection/cover/AI trigger-selection semantics into D-070; D-071 can later decide *when/why* a reaction candidate exists while D-070 owns deterministic scheduling/budget consumption.
+- **MINIMUM REGRESSIONS BEFORE D-070 FINISH:** reserve budget without underflow; consume reserve on committed reaction; expire unused reserve at next activation start; deterministic ordering by trigger priority -> round initiative -> actor_id -> reaction_id; normal reinforcement excluded from current round and admitted to next round.
+- **OWNERSHIP:** Nodus review only; no D-070 claim or source/preflight edit.
+
