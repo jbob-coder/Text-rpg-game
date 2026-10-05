@@ -297,6 +297,143 @@ Until then Veyra may assist with bounded integration/checkpoint evidence or read
 
 ---
 
+## Veyra — D-069 — Tactical Schemas / Pure Grid Core
+
+**Player-AI class:** Gameplay Systems & Tactical Lead  
+**Mission state:** **BLOCKED / PREPARED / CLAIM IMMEDIATELY AFTER D-064 SAFE HANDOFF**.
+
+### Unlock gate
+D-069 must remain unclaimed until:
+- D-064 is synchronized DONE;
+- the Bulletin promotes D-069 to READY;
+- Veyra re-fetches live authority and claims from that exact HEAD.
+
+The green authority checkpoint is already satisfied by PR #65 / run #351. D-064 is the only remaining dependency gate.
+
+### Read first after unlock
+1. live Bulletin D-069;
+2. `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md`;
+3. `docs/AI_RUNTIME_MERGE_STATE_GATE.md`;
+4. `docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md`;
+5. `docs/systems/TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md`;
+6. `docs/systems/LOS_DETECTION_AND_COMBAT_KNOWLEDGE_STANDARD.md`;
+7. `docs/systems/DIRECTIONAL_COVER_TERRAIN_STANDARD.md`;
+8. only the current source files named below.
+
+### Objective
+Add backward-compatible authored tactical schemas plus pure deterministic tactical-grid primitives.
+
+D-069 owns:
+- optional tactical content schema/validation;
+- integer x/y/z tactical coordinates;
+- cardinal N -> E -> S -> W adjacency;
+- bounds and occupancy queries;
+- deterministic pathfinding;
+- explicit vertical transitions;
+- deterministic cell-center supercover LOS;
+- incoming-edge cover resolution.
+
+D-069 does **not** own:
+- CombatSession or mutable tactical actor state;
+- turns/action budgets;
+- attack/damage;
+- awareness AI;
+- objectives/retreat runtime;
+- aftermath;
+- Gate Twelve encounter content;
+- Android combat bridge/DTO/UI;
+- save-schema v2 or mid-combat persistence.
+
+### First implementation surface
+New:
+- `src/textrpg/combat_schema.py`
+- `src/textrpg/combat_grid.py`
+- `tests/test_combat_schema.py`
+- `tests/test_combat_grid.py`
+
+Bounded additions:
+- `src/textrpg/content.py`
+- `src/textrpg/validation.py`
+- `src/textrpg/__init__.py`
+- compatibility tests only where required.
+
+### Recommended commit order
+**Commit 1 — pure foundations**
+- coordinate/map schema foundations;
+- coordinate keying;
+- N/E/S/W adjacency;
+- bounds/occupancy primitives;
+- focused schema/grid tests;
+- no content-loader integration yet.
+
+**Commit 2 — optional authored content**
+- optional `tactical_maps`;
+- optional `combat_actions`;
+- optional `combat_actor_archetypes`;
+- optional `encounters`;
+- validation/cross-reference coverage;
+- old packs without tactical sections remain valid.
+
+**Commit 3 — deterministic geometry**
+- equal-cost path tie rules;
+- explicit z transitions;
+- supercover LOS golden cases;
+- cover incoming-edge determinism;
+- D-069-B invariants when primary acceptance is coherent.
+
+### Locked deterministic rules
+- no diagonal movement;
+- cardinal enumeration N -> E -> S -> W;
+- same-z Manhattan heuristic;
+- stable path tie tuple `(f_cost, h_cost, y, x, z, cell_key)`;
+- movement cost comes from destination cell or explicit transition;
+- enemy pass-through forbidden;
+- ally-pass policy explicit;
+- one solid final occupant per Phase-1 cell;
+- no implicit z adjacency;
+- LOS uses deterministic cell-center supercover and includes corner-touch cells;
+- movement blocking does not automatically block LOS;
+- cover uses target incoming edge;
+- cover ratings: 0 none / 1 partial / 2 strong.
+
+### Runtime merge-state workflow
+After unlock:
+1. append Coordination Room `INTENT`;
+2. claim D-069 from live authority;
+3. append `START`;
+4. create a short-lived task branch;
+5. implement the bounded commit sequence;
+6. run focused/full Python tests;
+7. open PR to `docs/master-game-development-program`;
+8. require merge-state CI under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`;
+9. repair only demonstrated drift;
+10. evidence + Learning Ledger + FINISH + Brag/Scoreboard/Register/Bulletin.
+
+### Verification
+Required command:
+`PYTHONPATH=src python -m unittest discover -s tests -v`
+
+Record:
+- claim/task branch HEAD;
+- authority merge base/current HEAD;
+- test count/failures;
+- PR/workflow;
+- merge-state result;
+- resulting authority HEAD.
+
+### Bonus D-069-B
+Candidate invariant packet:
+- deterministic repeated path query;
+- deterministic repeated LOS query;
+- preview queries do not mutate occupancy;
+- same geometry returns same incoming cover edge;
+- no hidden occupancy introduced into public grid helpers.
+
+### Current action
+**Do not claim yet.** Monitor D-064 only. When the Bulletin marks D-064 DONE and D-069 READY, execute the claim immediately and start from the preflight instead of repeating repository archaeology.
+
+---
+
 ## Veyr — D-075 — Quest Branch / World Consequence
 
 **Player-AI class:** NPC, Social & Narrative-State Lead  
@@ -365,28 +502,28 @@ Veyr and Nodus should reuse test design/commands where useful, but must produce 
 
 ## Live checkpoint evidence
 
-Checkpoint PR #65 / workflow run #351 is testing the repaired authority merge-state.
-- complete Python suite: **PASS**;
-- Android unit/build: still running at last observation;
-- emulator smoke: still running at last observation.
+PR #65 / workflow run #351 is the established transition checkpoint.
 
-Do not call the authority checkpoint green until every required job completes successfully.
+Verified:
+- complete Python suite: **PASS**;
+- Android unit/build/package: **PASS**;
+- emulator smoke/screenshots: **PASS**;
+- APK SHA-256: `7dfc02e4b6ce95fc0fb6ba6dbe1869366993cd6388811627efdc2deb7daeefda`.
+
+D-065, D-067 and D-068 are DONE. D-064 safe handoff is the sole remaining transition gate before D-069.
 
 ## Green Authority Checkpoint
 
-This checkpoint is the unlock condition for substantive D-069 work.
+**Status:** SATISFIED by PR #65 / run #351.
 
-The checkpoint begins only after D-064, D-065, D-067 and D-068 are all safely handed off.
+This is no longer future work.
 
-Minimum evidence:
-- complete Python suite green on the authority merge state;
-- required Android unit/build gates green for changed surfaces;
-- no unresolved player-safe privacy leak;
-- no known save/schema incompatibility;
-- Bulletin/Master Register/Scoreboard synchronized;
-- exact authority HEAD recorded.
+Current tactical unlock rule:
+- D-064 synchronized DONE;
+- Bulletin promotes D-069 READY;
+- Veyra claims from the then-live authority HEAD under the runtime merge-state gate.
 
-Nodus coordinates the checkpoint. Veyra may then reclaim D-069 using `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+Do not rerun or recreate the transition checkpoint merely because documentation/governance HEAD moved. Re-run integration only when runtime/test/content drift makes new evidence necessary.
 
 ## Mission Control design principle
 
