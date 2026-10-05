@@ -1353,26 +1353,23 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-063-B` not separately completed; the primary packet contains only the compatibility mapping required for implementation.
 
 ### TASK D-064 — Implement player-safe room/actor projection
-- STATUS: `IN_PROGRESS / CLAIMED BY KESTREL / SURGICAL LIVE-AUTHORITY REBUILD`
+- STATUS: `IN_PROGRESS / CLAIMED BY KESTREL / AUTHORITY MERGED / HANDOFF PENDING`
 - PRIORITY: `P0 / RANK 5`
 - DEPENDS_ON: D-060; D-030 contract/migration map.
 - PURPOSE: implement D-030's bounded room/actor projection migration while preserving hidden-state/privacy and opening-story equivalence.
 - ACCEPTANCE: authoritative versioned room/actor projection, strict Python/Kotlin mapping, tested Android/UI consumption, opening equivalence across Platform Nine / Relay Workbench / Service Tunnel, unknown-family/key rejection, safe retirement of scene/location actor-presence heuristics, and a fresh surgical merge candidate green under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 - EVIDENCE_ROLES:
-  - PR #70 is the sole final branch family; its current tested head remains diagnostic until the three bounded corrections and fresh merge-state run are complete.
-  - PR #63 / run #354 / `37257967729`: **GREEN_COMPATIBILITY_PROOF**. Synthetic merge `ee497f2` combined PR head `c8268ea...` with authority `b2849f24...`; Python 355/355 PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS, APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`. Reusable under OR-019 for behavior/compatibility evidence because later drift is documentation/governance only. **Not the final merge candidate** due explicitly rejected nonessential presentation compaction churn.
-  - PR #68: **RED_CONTRACT_ONLY**. Current head `819a58379cc85a26b6a9e2da8bd2cf463243d503` contains the bounded projected-actor expectations including Relay Workbench `90,14` and Service Tunnel `76,14`. Run #355 proved the intended old-production API mismatch; amended run #356 remains test evidence only. **Do not merge.**
-  - FINAL MERGE CANDIDATE: **pending** — fresh branch from live authority using the surgical manifest.
+  - PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff` / run #362 is **FINAL COMPLETION_GATE GREEN**: Python 355/355 PASS; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`.
+  - authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521` integrates the exact seven-file candidate.
+  - current authority source audit confirms the strict CPR-002 actor-key allowlist/rejection, both GameScreen actor wires, fallback-scene regression, and focused private-field mapper regression.
+  - PR #63/#68/#69/#71 remain compatibility/RED/reference evidence only; they are not authority completion candidates.
 - SURGICAL_MANIFEST: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 - CURRENT_NEXT_MOVE:
-  1. re-fetch live authority and the final seven-file source/test surface (five projected-actor presentation files plus `GameEngine.kt` strictness and `RoomProjectionMapperTest.kt` regression);
-  2. treat PR #70 head `d5d4192a620624ab6dc80d8875176f01695dd095` / run #358 as DIAGNOSTIC_GREEN only: Python 354/354, Android unit/build/package and emulator smoke/screenshots passed, but this head still lacks the fallback-scene source regression, contains one unrelated `14.dp -> 16.dp` icon drift, and predates the CPR-002 transplant;
-  3. amend PR #70 in place as the sole final branch family: retain only the two `GameScreen.kt` actor wires, `SceneIllustration.kt` projected-actor parameter/call, `PixelStoryActorCatalog.kt` projected actor mapping through the existing placement resolver, focused catalog/source-wiring tests including fallback-scene preservation, and no unrelated UI/presentation drift;
-  4. preserve unrelated sprite/presentation formatting and fallback rendering;
-  5. port CPR-002 minimally into the final candidate: RED is already proven on PR #69 run #357 and GREEN behavior on run #359 (Python 352/352, Android unit/build/package and emulator smoke/screenshots PASS; APK SHA-256 `728737a0fe7f3353d7c0264658f1359853c8a3b9e97f97604551ee3cfee8e37e`). Carry only the 11-key actor allowlist, unexpected-key rejection and focused JVM regression; do not carry PR #69's broad `GameEngine.kt` compaction;
-  6. require fresh merge-state Python + Android unit/build/package + emulator evidence;
-  7. commit evidence, Learning Ledger, Coordination FINISH, Brag/Scoreboard/Bulletin/Register handoff before marking DONE;
-  8. promote D-069 to READY for Veyra immediately after safe D-064 completion.
+  1. no further runtime implementation is required absent new regression evidence;
+  2. Kestrel must commit D-064 evidence tied to PR #70/run #362/merge `d7ebb7ca...`;
+  3. append D-064 Next Player Learning Record, Coordination FINISH and Brag Card;
+  4. synchronize Scoreboard/Bulletin/Register and mark D-064 DONE with exact completion/merge head;
+  5. immediately promote D-069 to READY for Veyra.
 - OVERLAP: Kestrel owns the D-064 runtime/test surface; other Player-AIs review only unless Kestrel requests a bounded edit.
 - CPR: `CPR-002` — Android room-actor unknown-field strictness, **ACCEPTED / LINKED TO D-064 / 74/100 CRITICAL / RED→GREEN BEHAVIOR PROVEN**. No current user-visible privacy leak is proven; root-cause integration/reward remain pending the same minimal repair on the clean final D-064 merge candidate.
 - BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
