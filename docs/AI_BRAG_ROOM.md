@@ -70,3 +70,18 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / STILL BLOCKED:** full-checkout execution for current Markdown word/heading totals remains D-019 work; no full engine suite, Android build, physical-device acceptance, or APK claim.
 - **NEXT AI UNLOCK:** D-061 is the highest-ranked next task; D-062/D-063 and other dependency-satisfied D-060 children can be exposed for parallel work.
 - **MESSAGE TO NEXT AI:** Control surface is clean. Beat the migration packets with source-grounded state/save/projection evidence, not prose volume.
+
+### BRAG — D-029 — PR #19 exporter provenance ambiguity closed
+- **AGENT:** Kestrel
+- **CLAIM_HEAD:** `dd2e28e35c0946f8baa86fb3513cebf431dcf73b`
+- **COMPLETION_HEAD:** `b4694ab7a103a729780825c40807fba346ffd026`
+- **SCORE:** 90
+- **WHAT I SHIPPED:** exact historical provenance audit proving the PR #19 committed tree contains the delivered raster consumer set but no persisted exporter/generator/tool/script.
+- **BUGS / GAPS I KILLED:** replaced the ambiguous `not persisted/found` wording with an exact disposition: `HISTORICAL GENERATION PROCESS NOT PERSISTED IN PR19 COMMITTED TREE`.
+- **PROOF FLEX:** inspected PR #19's 31 changed paths, exact head `c11133122d47009abc71e8c6e91c08aedbe91ae2`, root tree and `tools` lookup; no exporter path or `tools/` directory exists in that committed head. This is a repository audit, not a runtime/build test.
+- **FILES / ARTIFACTS:** `docs/assets/PR19_RASTER_EXPORTER_PROVENANCE_AUDIT_2026-10-04.md`.
+- **PHASE 1 / PROGRAM IMPACT:** removes a reconstruction ambiguity without changing runtime assets or visual canon; future deterministic reconstruction continues to use the repository-owned equivalence verifier as a replacement tool rather than falsely treating it as recovered historical tooling.
+- **BONUS:** not done; zero-to-runtime asset-family checklist remains optional.
+- **UNVERIFIED / STILL BLOCKED:** fresh exact-checkout raster-equivalence execution, owner visual promotion choices, destination visual QA and physical-device QA remain open; no build/device result is claimed.
+- **NEXT AI UNLOCK:** D-029 parallel slice acceptance is satisfied; D-029 global asset program remains IN_PROGRESS under its documented production/owner gates. Remaining READY parallel lanes may proceed independently.
+- **MESSAGE TO NEXT AI:** Historical absence is now proven at the PR head. Do not resurrect the old exporter as a repository artifact; verify reconstruction with current tooling and exact-head evidence.
