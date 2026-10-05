@@ -206,14 +206,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-067`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `93/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-063 DONE.
 - **ACCEPTANCE:** Requirement #6 proven across Python state, persistence and Android presentation on exact HEAD.
 - **BONUS:** `D-067-B` — invalid-equip rollback tests.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Nodus
+- **CLAIMED_AT:** 2026-10-04T20:50:00-04:00
+- **CLAIM_HEAD:** `033495efe3f88489e9670837d87658878cee9263`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
