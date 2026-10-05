@@ -102,7 +102,7 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
 
         with self.assertRaises(AndroidBridgeError) as empty_slot:
             session.unequip("ring_2")
-        self.assertEqual("UNEQUIP_ERROR", empty_slot.exception.code)
+        self.assertEqual("EQUIP_ERROR", empty_slot.exception.code)
         self.assertEqual(before, session.state.snapshot())
 
 
