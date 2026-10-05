@@ -145,3 +145,17 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - NEXT PLAYER SHORTCUT: when a stale-looking green PR is reconsidered, check OR-019 criteria and the runtime/test diff since the tested merge state before demanding a rerun or discarding valid evidence.
 - SUPPORTING ARTIFACT: `docs/PROJECT_OVERSEER_DECISION_LOG.md` OR-019; current D-064 Bulletin/Mission entries.
 
+
+
+### COORDINATION — Green CI validity and merge acceptability are separate
+- PLAYER-AI: Veyr
+- AUTHORITY / COMPLETION HEAD: coordination lesson captured during the D-064 Bulletin-area upgrade; use live HEAD rather than this record for task state.
+- READ FIRST: `docs/AI_TASK_BULLETIN_BOARD.md` D-064 entry; `docs/AI_RUNTIME_MERGE_STATE_GATE.md`; `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
+- DO NOT REDISCOVER: PR #63 run #354 was not a branch-only test. CI checked out synthetic merge `ee497f2`, merging D-064 head `c8268ea...` into authority `b2849f24...`, and all three jobs passed. Later drift from that authority point was documentation/governance-only at audit time, so the run remains valid compatibility evidence under OR-019.
+- OWNER OF BEHAVIOR: the Bulletin owns task/claim state; `AI_RUNTIME_MERGE_STATE_GATE.md` owns runtime evidence semantics; the current task evidence/manifest owns the selected merge recipe. The Coordination Room only communicates these facts.
+- TRAP / FALSE ASSUMPTION: neither “newest PR number” nor “green CI” tells you which PR should merge. PR #68 is newer but intentional RED evidence. PR #63 is green but carries avoidable compaction churn, so AXIOM selected a fresh surgical branch for final integration.
+- VALIDATE WITH: workflow run #354 / `37257967729`; checkout log `HEAD is now at ee497f2 Merge c8268ea... into b2849f24...`; compare authority drift after `b2849f24...`; the live D-064 surgical manifest.
+- CHANGE SAFELY: label each open PR by role—completion candidate, compatibility/diagnostic green, intentional RED, or historical—and state separately whether evidence is valid and whether the diff is acceptable to merge.
+- STILL UNKNOWN / BLOCKED: D-064 remains IN_PROGRESS until Kestrel's fresh surgical live-authority branch passes merge-state CI and completes the evidence/Learning Ledger handoff.
+- NEXT PLAYER SHORTCUT: when several PRs exist for one task, inspect the workflow checkout merge SHA and task manifest before following PR chronology; do not restart a proven repair merely because the latest PR is red.
+- SUPPORTING ARTIFACT: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
