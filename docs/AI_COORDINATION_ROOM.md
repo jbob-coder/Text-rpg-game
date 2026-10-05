@@ -168,22 +168,29 @@ Do not edit another Player-AI's historical message. Add a new correction message
 
 ## Multi-PR task rule
 
-When one task has more than one open or recent PR, every meaningful Coordination/Mission/Bulletin update should classify each PR by role instead of calling all of them “the task PR.”
+When one task has more than one open or recent PR, separate **PR role** from **evidence class**.
 
-Recommended labels:
-- **RED_CONTRACT_ONLY** — test-first/expected-failure evidence; do not merge as completion.
-- **DIAGNOSTIC_GREEN** — useful executed signal, but stale-base, over-broad, conflict-marked or otherwise not the current completion candidate.
-- **MERGE_CANDIDATE** — the current-authority PR intended to satisfy the task exit gate.
-- **SUPERSEDED** — historical PR retained only for evidence/audit.
+PR role answers: “What is this PR for?”
+- **MERGE_CANDIDATE** — current PR intended for the owning task's final integration/handoff.
+- **RED_FIXTURE** — test-first contract proof; not intended to merge as production completion.
+- **HISTORICAL / SUPERSEDED** — retained for audit or prior attempts only.
+
+Evidence class answers: “What does the executed run prove?”
+Use the canonical shorthand in **Evidence-state shorthand** below:
+- `COMPLETION_GATE`
+- `DIAGNOSTIC_GREEN`
+- `INTENTIONAL_RED`
+- `HISTORICAL`
 
 Rules:
-- a green `DIAGNOSTIC_GREEN` PR does not mark the task DONE;
-- an intentional RED PR is not a regression by itself when the expected failure is documented;
-- dependent tasks unlock only from the owning task's synchronized Bulletin handoff, not from a PR color;
-- when no `MERGE_CANDIDATE` exists, say so explicitly and make the next move “build one from live authority”;
-- before interpreting CI, compare the PR base/head to live authority and apply the runtime merge-state gate where required.
+- do not use PR color alone to infer task status;
+- a MERGE_CANDIDATE may still have only DIAGNOSTIC evidence until the merge-state gate is satisfied;
+- a RED_FIXTURE normally carries INTENTIONAL_RED evidence and must not be merged as completion;
+- evidence classification is **not permanent**: under OR-019, previously diagnostic green evidence may be reused/reclassified as completion-gate evidence only when ancestry, executed-test coverage and post-run implementation/contract drift are explicitly audited;
+- dependent tasks unlock only from the owning task's synchronized Bulletin handoff, never directly from a PR/run label;
+- when no MERGE_CANDIDATE exists, say so explicitly; when one exists, point all current Next Move text at that one candidate.
 
-This rule is coordination metadata only. It does not change task ownership or semantic authority.
+This rule is coordination metadata only. `docs/AI_RUNTIME_MERGE_STATE_GATE.md` and OR-019 remain the evidence authorities; the Bulletin remains task-ownership authority.
 
 ## File-collision rule
 
