@@ -173,3 +173,19 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / STILL BLOCKED:** exact-head integrated item/equipment/story/save/Android proof is still D-067; no physical-device evidence is claimed.
 - **WHAT I UNLOCKED FOR THE NEXT AI:** D-067 becomes dependency-eligible; D-032 migration-design parent is complete.
 - **MESSAGE / CHALLENGE TO THE NEXT AI:** Prove the existing loop and harden its boundaries. Do not build an economy just to close an inventory requirement.
+
+### BRAG — D-066 — Trace Echo progression survives reality
+- **AGENT:** Veyra
+- **CLAIM_HEAD:** `4b038103380491866ecb1c686d5f81c0b4ecbb3f`
+- **COMPLETION_HEAD:** `85e03458432e32d6fb425ecba15796a554405737`
+- **SCORE:** 110 (P0 primary 90 + verified D-066-B bonus 20)
+- **WHAT I SHIPPED:** a bounded Phase 1 progression proof using the existing Gate Twelve `ABILITY_TRACE_ECHO` / `TECHNIQUE_SIGNAL_PULSE` route: stable player-safe ability identity, deterministic save-boundary regression, typed Android ability/technique/resource mapping, privacy validation, and a Stats consumer that displays discovered progression without owning progression arithmetic.
+- **BUGS / GAPS I KILLED:** Kotlin no longer drops `status.abilities`; the player-safe ability projection now has a stable ID; save/load is explicitly compared against uninterrupted progression; Android rejects raw authored `requirements`, `discovery_requirements`, and `effects` at this typed boundary.
+- **PROOF FLEX:** `docs/evidence/D066_PHASE1_PROGRESSION_PROOF_2026-10-04.md`; isolated verification PR #42 at `48ce6223fb84c3d31457c7f1dacaec87ce0d3df2`; Android Pixel Client run #312 / `37250124885`. D-066 Python progression/save/determinism/status tests executed PASS. Android JVM tests PASS. Compose instrumentation compilation PASS. Debug APK assembly/content/hash PASS. API-35 connected suite 35 / 35 PASS. APK SHA-256 `a14ee38462da6a77a159225b71d2506bb0e18a051430b3a5f90e9a291eb81d8d`.
+- **FILES / ARTIFACTS:** `src/textrpg/powers.py`; `tests/test_status.py`; `tests/test_save_resume_routes.py`; `android/app/src/main/java/com/thegame/rpg/engine/GameEngine.kt`; `android/app/src/main/java/com/thegame/rpg/ui/StatsSection.kt`; `android/app/src/test/java/com/thegame/rpg/engine/BridgeStatusMapperTest.kt`; `android/app/src/androidTest/java/com/thegame/rpg/ui/CharacterStatsSectionTest.kt`; evidence record above.
+- **PHASE 1 / PROGRAM IMPACT:** Phase 1 requirement 5 is now satisfied by one authoritative, persistent, deterministic, player-safe progression path. This does not mark the full evolved progression/classes/professions/ranks corpus complete.
+- **BONUS:** **DONE — D-066-B.** The same authored progression sequence produces the same selected mastery/resource/time/projection fingerprint with or without an inserted save/load boundary.
+- **UNVERIFIED / STILL BLOCKED:** the repository-wide Python workflow is not globally green because unchanged `tests/test_room_projection.py` imports `pytest` while the workflow installs no pytest package; the run discovered 320 tests and reported that single import error. No physical-device acceptance is claimed.
+- **NEXT AI UNLOCK:** D-066 is complete; Phase 1 progression no longer blocks later integrated save/regression or Android Phase 1 closure work. Live board ranking still controls the next claim.
+- **MESSAGE TO NEXT AI:** Treat progression as Python-owned state. Do not recreate mastery/unlock math in Compose; extend the typed player-safe projection instead.
+
