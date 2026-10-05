@@ -26,18 +26,15 @@ This board controls **task claiming and handoff**, not program semantics.
 
 Use `docs/PLAYER_AI_MISSION_CONTROL.md` for the shortest current path.
 
-### Active primaries
-- **Kestrel:** D-064 — **last transition blocker**; rebase PR #63, update stale `PixelStoryActorCatalogTest.kt` to `placements(actors)`, rerun CI, close if green.
-- **Veyr:** D-075 — persistent Dead Relay branch/world-consequence proof; PR #66 in verification.
-- **Veyra:** Parallel P4 / D-046 — active documentation/design lane while D-069 waits.
-- **Nodus:** no active primary; D-067 DONE. Available for integration review/checkpoint support.
-- **D-069:** BLOCKED only by D-064 safe handoff. Green authority checkpoint already PASS at PR #65 / run #351.
+### Active critical path
+- **Kestrel:** D-064 — **sole D-069 unlock blocker**. PR #63 production direction is correct; rebase on current authority and migrate the stale actor-catalog tests to `placements(actors)`.
+- **D-069:** green authority checkpoint is already PASS (PR #65 / run #351). Unlock immediately after D-064 safe handoff; Veyra is next owner.
 
-### Current verified score
-- **Nodus:** 700
-- **Veyra:** 420
-- **Veyr:** 200
-- **Kestrel:** 115
+### Completed / available
+- **Nodus:** D-067 DONE; verified score **700**; available for integration review only.
+- **Veyra:** P4/D-046 DONE; verified score **530**; D-069 next after D-064.
+- **Veyr:** D-075 DONE; verified score **295**; available for bounded narrative/social review.
+- **Kestrel:** verified score **115** + D-064 potential.
 
 ### Critical-fix rewards
 OR-024 is active. Verified difficult root-cause fixes may earn up to **+455 on top of task points**. No score penalty exists for taking, reverting, or handing off hard tasks.
@@ -46,7 +43,7 @@ OR-024 is active. Verified difficult root-cause fixes may earn up to **+455 on t
 Verification / Red-Team / Performance remains unfilled. Preferred entry: Parallel P5 / D-042 if still READY.
 
 ### Immediate completion strategy
-Close D-064 -> unlock D-069 to Veyra -> begin tactical chain. Do not reopen D-065/D-067/D-068.
+**Close D-064 -> unlock D-069 -> execute tactical chain.** Do not reopen D-065/D-067/D-068/D-075.
 
 <!-- LIVE_MULTI_AGENT_UPDATE_END -->
 
@@ -314,7 +311,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **STATUS:** `IN_PROGRESS`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Kestrel / D-064.
 - **CURRENT_PHASE:** verification + evidence + handoff; implementation is materially advanced.
-- **NEXT_MOVE:** run/obtain exact-head projection/privacy/equivalence/Android evidence; repair only concrete failures; close if green.
+- **NEXT_MOVE:** rebuild/rebase PR #63 on live authority; keep production delta minimal; migrate `PixelStoryActorCatalogTest.kt` from `placements(locationId, sceneId)` to `placements(List<GameRoomActor>)`; rerun PR CI; close if green.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-030 contract/migration map.
 - **ACCEPTANCE:** Versioned authoritative room/actor projection with strict mapping, equivalence and privacy tests.
@@ -324,7 +321,8 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIM_HEAD:** `ad3511a86364d7a0345a5cc11ed08126523be120`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** PR #63 run #350: emulator smoke PASS; Python failed on map-travel room mismatch already repaired on authority; Android JVM compile failed because PixelStoryActorCatalogTest still uses the removed locationId/sceneId placement API.
-- **PR #63 TRIAGE:** rebase on authority; update stale actor-catalog tests to construct GameRoomActor fixtures and call placements(actors); rerun.
+- **PR #63 TRIAGE:** direct Overseer comment `#5987024043` provides exact `GameRoomActor` fixture pattern. PR production maps `visualFamily` `NPC_TAMSIN` / `SUPPORT_WOUNDED_COURIER` and semantic `placementKey`; stale tests are the demonstrated Android compile blocker.
+- **SCOPE_RISK:** PR #63 also contains large formatting/compaction churn in `SceneIllustration.kt` / `PixelStoryActorCatalog.kt`; prefer a minimal rebased delta to reduce merge risk.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
