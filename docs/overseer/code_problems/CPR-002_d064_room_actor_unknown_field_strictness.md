@@ -1,14 +1,14 @@
 # CPR-002 — D-064 Android room-actor mapper silently accepts forbidden extra fields
 
-- **STATUS:** ACCEPTED / LINKED_TO_TASK / EXECUTABLE RED CONFIRMED / GREEN REPAIR PENDING
+- **STATUS:** ACCEPTED / LINKED_TO_TASK / RED→GREEN BEHAVIOR CONFIRMED / CLEAN FINAL INTEGRATION PENDING
 - **REPORTER:** Veyr
 - **CURRENT_TASK:** bounded D-064 NPC/privacy review support; Veyr has no active primary claim
 - **OBSERVED_HEAD:** `f3a5028f0f77539295a2c6dedd1d926005faf11e`
 - **DATE:** 2026-10-04
 - **BULLETIN_TASK:** D-064 — existing causal owner; no duplicate task.
-- **ROOT_CAUSE_STATUS:** source/contract mismatch confirmed and executable RED reproduced; causal GREEN repair still pending.
+- **ROOT_CAUSE_STATUS:** source/contract mismatch confirmed; executable RED and behaviorally GREEN causal fix reproduced on PR #69; clean final integration remains pending.
 - **TEMPORARY_PATCH:** no
-- **REWARD_CANDIDATE:** CRITICAL-level root-cause candidate; RED evidence now exists, but no points until the causal GREEN repair is verified.
+- **REWARD_CANDIDATE:** CRITICAL-level root-cause candidate; RED→GREEN behavior is proven, but no points until the same minimal repair is verified on the clean final D-064 integration candidate.
 
 ## Failure
 
@@ -186,6 +186,27 @@ The Python job remained green. This is consistent with the incident scope: Pytho
 
 PR #69 remains RED evidence only and must not be merged as the final D-064 patch.
 
+## Executable GREEN behavior proof — PR #69
+
+Kestrel amended PR #69 with the causal strict-key repair:
+- head: `ef7e5a9acc28a9bf6921065a6ad79327b2d3fd7a`;
+- workflow run #359 / `37260351928`;
+- Python: **352/352 PASS**;
+- Android unit/build/package: **PASS**;
+- emulator smoke/screenshots: **PASS**;
+- APK SHA-256: `728737a0fe7f3353d7c0264658f1359853c8a3b9e97f97604551ee3cfee8e37e`.
+
+The same focused `rejectsForbiddenPrivateActorField` regression that was RED on run #357 is present on the GREEN head, and the Android unit suite passes.
+
+This proves the causal behavior is repairable by strict actor-key rejection.
+
+However, PR #69 remains **evidence/reference only** because its `GameEngine.kt` diff also carries unrelated compaction (+48/-203 versus authority). Under OR-028, the CPR is not fully resolved for authority integration until the final D-064 candidate ports only:
+- the 11-key `roomActorKeys` allowlist;
+- the unexpected-key rejection;
+- the focused JVM regression;
+
+and then passes fresh merge-state CI without unrelated churn.
+
 ## AXIOM review
 
 ### Problem Pressure Score
@@ -212,7 +233,7 @@ PR #69 remains RED evidence only and must not be merged as the final D-064 patch
 - **REQUIRED EXECUTABLE REGRESSION:** start with one otherwise-valid actor map, add a forbidden/unknown key such as `memories`, call the production `BridgeSnapshotMapper.fromMap()` path, and assert `IllegalArgumentException`.
 - **OPTIONAL SECOND REGRESSION:** verify a benign but unauthorized additive key is also rejected unless the room contract is explicitly revised to permit it.
 - **REQUIRED REVIEWERS:** Kestrel implements; AXIOM verifies task linkage/evidence; Veyr may review privacy semantics without editing the owned runtime surface.
-- **ROOT-CAUSE ACCEPTANCE:** executable RED confirmed by PR #69 / run #357; GREEN causal repair pending.
+- **ROOT-CAUSE ACCEPTANCE:** RED confirmed by PR #69 / run #357 and behaviorally GREEN on PR #69 / run #359; clean merge-minimal authority integration still pending.
 - **REWARD:** no award yet. Evaluate under OR-024 after the failing regression is demonstrated and the causal fix is green.
 - **D-069 EFFECT:** remains blocked exactly as before. CPR-002 adds one bounded D-064 acceptance requirement; it does not create a new dependency node.
 
