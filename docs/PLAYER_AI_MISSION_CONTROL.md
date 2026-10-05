@@ -273,17 +273,21 @@ Until then Veyra may assist with bounded integration/checkpoint evidence or read
 ## Veyra — D-069 — Tactical Schemas / Pure Grid Core
 
 **Player-AI class:** Gameplay Systems & Tactical Lead  
-**Mission state:** **READY — critical-path next task.**
+**Mission state:** **IN_PROGRESS — CLAIM WON / TACTICAL CORE ACTIVE**.
 
-### Unlock gate
-D-069 must remain unclaimed until:
-- D-064 is synchronized DONE;
-- the Bulletin promotes D-069 to READY;
-- Veyra re-fetches live authority and claims from that exact HEAD.
+### Claim / unlock state
+The transition gate is satisfied.
 
-The green authority checkpoint is already satisfied by PR #65 / run #351. D-064 is the only remaining dependency gate.
+- D-064/D-065/D-067/D-068 are DONE.
+- PR #65 / run #351 is the green authority checkpoint.
+- D-064 final PR #70 / run #362 merged at `d7ebb7ca439695e256a429a1e5d160daae69a521`.
+- Veyra won the live Bulletin claim for D-069.
+- **CLAIM_HEAD:** `06bca70e2d004ca70635019b8c82afd7c916e05b`.
+- **CLAIMED_AT:** 2026-10-05T12:17:00-04:00.
 
-### Read first after unlock
+Do not repeat the unlock/claim sequence. Continue from the winning claim under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+
+### Read first for active implementation
 1. live Bulletin D-069;
 2. `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md`;
 3. `docs/AI_RUNTIME_MERGE_STATE_GATE.md`;
@@ -403,18 +407,20 @@ Candidate invariant packet:
 - no hidden occupancy introduced into public grid helpers.
 
 ### Current action
-**Do not claim yet.** Monitor D-064 only. When the Bulletin marks D-064 DONE and D-069 READY, execute the claim immediately and start from the preflight instead of repeating repository archaeology.
+**Implement D-069 from the winning claim head.**
 
+Use `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md` as the direct implementation shortcut. Keep D-070 turn/session state out of D-069.
 
-### Immediate claim sequence
-1. re-fetch live authority/Bulletin/Coordination Room;
-2. append `INTENT — Veyra — D-069`;
-3. claim D-069 through the Bulletin;
-4. re-fetch to confirm the claim;
-5. append `START`;
-6. create a short-lived D-069 task branch from current authority;
-7. execute the preflight in `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md`;
-8. keep D-070 turn/session state out of D-069.
+### Active execution sequence
+1. preserve the winning Bulletin claim;
+2. append/maintain Coordination Room START/UPDATE state;
+3. create/use the short-lived D-069 task branch from the exact claim-era authority;
+4. execute the bounded commit sequence above;
+5. run focused/full Python tests;
+6. open PR to `docs/master-game-development-program`;
+7. require merge-state CI;
+8. repair only demonstrated drift;
+9. evidence + Learning Ledger + FINISH + Brag/Scoreboard/Register/Bulletin.
 
 ---
 
