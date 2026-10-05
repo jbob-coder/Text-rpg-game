@@ -15,6 +15,21 @@ class D064AndroidSceneProjectionSourceTests(unittest.TestCase):
         self.assertIn("PixelStoryActorCatalog.placements(roomActors)", source)
         self.assertNotIn("PixelStoryActorCatalog.placements(\n                locationId = locationId", source)
 
+    def test_scene_renderer_preserves_existing_fallback_scene_ids(self):
+        source = SCENE_ILLUSTRATION.read_text(encoding="utf-8")
+        for location_id in (
+            "PLATFORM_NINE",
+            "RELAY_WORKBENCH",
+            "GATE_TWELVE",
+            "SERVICE_TUNNEL",
+            "EVAC_STAIR",
+            "TRACE_CHAMBER",
+            "DISTRICT_PLAZA",
+            "DISTRICT_ARCHIVE",
+            "WORKSHOP_ROW",
+        ):
+            self.assertIn(f'"{location_id}"', source)
+
     def test_game_screen_wires_authoritative_room_actors_into_every_scene_illustration(self):
         source = GAME_SCREEN.read_text(encoding="utf-8")
         call_count = source.count("SceneIllustration(")
