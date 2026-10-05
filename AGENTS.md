@@ -68,6 +68,7 @@ Before starting discretionary work:
 - if the main ranked task is already claimed and its dependency chain is waiting, claim a `READY` task from `docs/AI_PARALLEL_WORK_LANES_2026-10-04.md` instead of idling;
 - check `docs/AI_COUNCIL_ROOM.md` for a direct summons; if named, respond at a safe checkpoint without abandoning the active task;
 - commit and re-check the claim before substantial work.
+- One active primary task per agent is the default. A second claim may only be a documented short reservation; substantive work on it waits for the first primary handoff unless the Project Overseer approves true parallel execution.
 
 After finishing a task:
 - synchronize the authoritative task/register/evidence files;
