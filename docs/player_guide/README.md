@@ -21,6 +21,13 @@ Then read only:
 
 Read the full master corpus only when your task genuinely crosses those boundaries.
 
+## First-wave validated shortcut
+
+D-080's first-wave navigation audit is:
+`docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`.
+
+Use it as a worked example of how to move from the five-file fast path to one task's actual implementation owner, executable validation and unresolved boundary without rereading the complete repository.
+
 ## What this project is trying to achieve
 
 THE GAME has two intertwined goals:
