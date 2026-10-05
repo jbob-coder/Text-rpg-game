@@ -216,14 +216,15 @@ Still open:
 
 `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md` now maps:
 
-- all 18 current `GameSnapshot` fields to current Compose consumers;
+- all **19** current `GameSnapshot` fields to current Compose consumers;
 - the Python `AndroidGameSession._view_for` payload groups to Kotlin `BridgeSnapshotMapper`;
 - ViewModel action paths for start/choose/save/load/cheat/equip/unequip/travel/inspect-status;
 - direct pixel-catalog consumers in the major current UI surfaces;
 - current mapper/save/Compose test-source coverage;
-- transitional actor inference, relay visual state and travel-transition presentation state.
+- transitional actor inference, relay visual state and travel-transition presentation state;
+- Veyra's Parallel P1 exact consumer/test-contract checkpoint at source revision `e78e67c56b1ba0e1189897fba862b553e32573aa`, including the verified QuestSection, content/canon metadata, derived-stat and identity assertion gaps.
 
-This closes the basic current field/action discovery portion of D-026/D-021. Future projections and zero-consumer/deprecation evidence remain open.
+The prior “18 current fields” count was stale bookkeeping; `GameEngine.kt` currently defines 19 fields. This closes the basic current field/action and test-contract discovery portion of D-026/D-021. Future projection implementation, later exact-head test execution, and final APK migration remain open.
 
 ## 2.4 Android catalog and test-gap checkpoint
 
