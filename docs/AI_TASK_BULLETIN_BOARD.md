@@ -511,6 +511,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-069 DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
 - **PREFLIGHT:** `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — re-audit against merged D-069 before implementation.
+- **SESSION_HANDOFF:** `docs/player_guide/VEYRA_SESSION_HANDOFF_2026-10-05.md` — resume pointer for chat/session continuity; live repository state still outranks it.
 - **NEXT_MOVE:** re-read merged D-069 APIs plus Movement/Pathing and Turn/Initiative standards; update the preflight for movement-point allowance, reaction reserve lifecycle and reinforcement scheduling; then implement the smallest transient session/activation/budget/movement/event seam without GameState/save expansion.
 - **ACCEPTANCE:** Headless transient encounter executes deterministic legal turns/actions without GameState tactical schema expansion; previews do not consume event sequence.
 - **BONUS:** `D-070-B` — deterministic transcript/replay hash.
