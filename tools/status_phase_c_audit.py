@@ -168,8 +168,20 @@ def compare_passive_owner_coverage(
     }
 
 
+def _repository_root(root: Path) -> Path:
+    candidate = root.resolve()
+    if candidate.is_file():
+        candidate = candidate.parent
+    for path in (candidate, *candidate.parents):
+        if (path / REGISTRY_PATH).is_file():
+            return path
+    raise FileNotFoundError(
+        f"Could not locate repository root containing {REGISTRY_PATH.as_posix()}"
+    )
+
+
 def audit(root: Path) -> dict:
-    root = root.resolve()
+    root = _repository_root(root)
     registry_path = root / REGISTRY_PATH
     owner_paths = [root / path for path in OWNER_MATRIX_PATHS]
 
