@@ -939,12 +939,13 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - RESULT: a bounded original parent settlement/region/municipal/route/terrain-climate proposal exists without changing local IDs, local route data, W3 coordinates or higher sovereign canon. Working names remain non-canon until accepted/revised.
 
 ### TASK D-032 — Mechanics schema/API migration packets
-- STATUS: `IN_PROGRESS / PROGRESSION + SOCIAL + COMBAT + PERSISTENT-ADVERSARY CHILDREN COMPLETE`
+- STATUS: `DONE / ALL FIVE MIGRATION-DESIGN CHILDREN COMPLETE`
 - PRIORITY: `P0/P1`
 - OUTPUT TARGET: progression/social/items/combat/adversary target schemas mapped to existing engine APIs, saves, projections and tests.
 - COMPLETED CHILDREN:
   - `docs/systems/PHASE_1_PROGRESSION_SCHEMA_API_MIGRATION_PACKET.md`
   - `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`
+  - `docs/systems/PHASE_1_ITEMS_ECONOMY_SCHEMA_API_MIGRATION_PACKET.md`
   - `docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md`
   - `docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md`
 - PROGRESSION DECISION:
@@ -958,6 +959,11 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - converge authored `relationship` and `npc_learn` writes on hardened `social.py` APIs;
   - keep raw NPC memories/knowledge/goals/personality/story state out of Android; only explicit player-safe consequences may cross the bridge;
   - D-065 owns the actual Tamsin durable-memory/reactive proof; D-064 separately owns room/actor projection.
+- ITEMS / ECONOMY DECISION:
+  - Phase 1 keeps schema-v1 flat `inventory: item_id -> quantity` and slot-keyed `equipment`;
+  - current `registries.items`, `equip_item()`, story `inventory` effects and typed Android inventory/equipment DTOs remain the authority path;
+  - D-067 owns nested inventory/equipment save validation, full current item-definition/effect validation and exact-head obtain/use/equip/save/UI proof;
+  - currency, vendors, crafting, durability, encumbrance, item instances and generic loot remain deferred because they are not Phase 1 dependencies.
 - COMBAT DECISION:
   - Phase 1 tactical runtime state remains transient authoritative Python state;
   - durable GameState/save schema v1 is unchanged during combat;
@@ -968,7 +974,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - top-level save schema v1 may remain unchanged only if nested-record validation and old/new save round-trip tests pass;
   - any new top-level `adversaries` field requires an explicit schema v2+ migration;
   - no canonical Gate Twelve recurring enemy is selected by the migration packet.
-- STILL OPEN: items/economy migration packet; exact implementation/tests remain separate.
+- MIGRATION-DESIGN RESULT: progression, broader social, items/economy, combat and persistent-adversary packets are complete. Exact implementation/tests remain in their dependent tasks.
 
 ### TASK D-049 — Application UI relationship architecture planning
 - STATUS: `PLANNING ONLY / DOMAIN-DEPENDENT / FINAL REFINEMENT DEFERRED`
@@ -1324,12 +1330,20 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - COMPLETED_AT: 2026-10-04 AST.
 
 ### TASK D-063 — Complete items/economy schema/API migration child
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `DONE`
 - PRIORITY: `P0 / RANK 4`
-- DEPENDS_ON: D-060.
-- PURPOSE: complete D-032 mapping for current inventory/equipment/item behavior without forcing unrelated economy runtime.
-- ACCEPTANCE: implementation-ready item/equipment migration packet with save, projection, validation, rollback and test mapping.
-- BONUS: `D-063-B` Phase 1 item/equipment compatibility matrix.
+- DEPENDS_ON: D-060 — satisfied.
+- OUTPUT: `docs/systems/PHASE_1_ITEMS_ECONOMY_SCHEMA_API_MIGRATION_PACKET.md`.
+- RESULT:
+  - current flat inventory, slot-keyed equipment, registry item definitions, story acquisition/consumption, persistence, bridge projection, Kotlin DTOs, ViewModel actions and Compose inventory surface were mapped at source HEAD `db0d82e0fe5e9cbba0aa72d2578fd0e990f25f7d`;
+  - Phase 1 remains on save schema v1 and preserves current stable item/slot IDs;
+  - no currency/vendor/crafting/durability/encumbrance/item-instance runtime is forced into Phase 1;
+  - D-067 receives explicit nested save/content validation hardening, rollback and exact-head proof requirements;
+  - D-032 migration-design parent is now complete.
+- VERIFICATION:
+  - packet facts were checked against `core.py`, `equipment.py`, `validation.py`, `content.py`, `persistence.py`, `android_bridge.py`, current Gate Twelve content, Kotlin `GameEngine.kt`, ViewModel/Compose inventory wiring and direct equipment/bridge tests;
+  - no runtime/full-suite/Android-build/device pass is claimed by D-063 because it is migration design.
+- BONUS: `D-063-B` not separately completed; the primary packet contains only the compatibility mapping required for implementation.
 
 ### TASK D-064 — Implement player-safe room/actor projection
 - STATUS: `PENDING / BULLETIN QUEUED`
