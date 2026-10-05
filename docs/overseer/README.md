@@ -75,3 +75,11 @@ That record must answer:
 The goal is cumulative repository intelligence.
 
 The first Player-AIs are not only completing tasks. They are creating the map the next Player-AIs will use.
+
+
+## Latest AXIOM session continuity
+
+Before relying on old chat context, read live authority first and then:
+- `docs/overseer/AXIOM_SESSION_HANDOFF_2026-10-05.md`
+
+The handoff is historical/navigation context only. Live HEAD, Bulletin, Coordination Room and task evidence remain authoritative.
