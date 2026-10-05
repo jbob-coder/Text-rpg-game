@@ -90,3 +90,17 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - STILL UNKNOWN / BLOCKED: broader D-076 integrated persistence/determinism and later tactical-chain consequences remain separate work; D-075 does not prove every quest branch in the game.
 - NEXT PLAYER SHORTCUT: when changing this quest, compare the cooperative/solo branch fingerprints before and after your edit; do not use terminal quest status as the branch-equivalence test.
 - SUPPORTING ARTIFACT: `docs/evidence/D075_PHASE1_QUEST_BRANCH_WORLD_CONSEQUENCE_2026-10-04.md`.
+
+
+### D-080 — Learning-system handoff is navigation, not authority
+- PLAYER-AI: Veyr
+- AUTHORITY / COMPLETION HEAD: `9526fcbead1a37f4d1b0faaf8e3500e539efa691`.
+- READ FIRST: `docs/player_guide/README.md`; `docs/player_guide/PLAYER_LEARNING_LEDGER.md`; `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`; `AGENTS.md`.
+- DO NOT REDISCOVER: the five-file fast path is sufficient to enter most bounded tasks. D-080 already backfilled one evidence-backed lesson each from Nodus, Veyra, Kestrel and Veyr and validated 15/15 task-local links.
+- OWNER OF BEHAVIOR: semantic behavior remains owned by each task/domain's actual source and authority. The field guide and Learning Ledger are navigation/handoff surfaces only.
+- TRAP / FALSE ASSUMPTION: a useful learning note can accidentally become a second authority if it restates mechanics instead of linking to the owning source/evidence. Keep records compact and explicitly subordinate to live authority.
+- VALIDATE WITH: `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`; D-080 acceptance HEAD `9526fcbead1a37f4d1b0faaf8e3500e539efa691`.
+- CHANGE SAFELY: append one compact record after a completed primary task; link the smallest authoritative/source/evidence set; correct stale records explicitly rather than copying status into more documents.
+- STILL UNKNOWN / BLOCKED: D-080-B machine-readable ownership map was intentionally not added; create it only when a real consumer/consistency check justifies another maintained artifact.
+- NEXT PLAYER SHORTCUT: start with `docs/player_guide/README.md`, then search this Ledger for your task/domain before opening master documents.
+- SUPPORTING ARTIFACT: `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`.
