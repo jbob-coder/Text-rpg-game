@@ -1643,7 +1643,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BRAG_CARD: `docs/AI_BRAG_ROOM.md` — D-080 first-wave learning trail.
 
 ### TASK D-081 — Repository-wide status map and reproducible project-status tracker
-- STATUS: `IN_PROGRESS / OWNER-DIRECTED / CLAIMED BY NODUS`
+- STATUS: `DONE`
 - PRIORITY: `P0/P1 PROGRAM INFRA`
 - PURPOSE: provide one reproducible reporting path for exact-revision repository structure, documentation counts, Master Task Register completion, Phase 1 campaign completion, and unresolved-task status without replacing existing semantic authorities.
 - AUTHORITY BOUNDARIES:
@@ -1653,17 +1653,28 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - completion percentage is explicitly a task-register metric, not a claim that the total game/content is equally complete.
 - DELIVERABLES:
   - `tools/project_status_tracker.py`;
-  - regression tests for task/status counting and exact-revision structure;
+  - `tests/test_project_status_tracker.py`;
   - `docs/PROJECT_STATUS_TRACKING_STANDARD.md`;
-  - exact source-revision baseline snapshot under `docs/evidence/`.
+  - `docs/PROJECT_STATUS_SNAPSHOT_2026-10-05.md`;
+  - `docs/evidence/D081_PROJECT_STATUS_BASELINE_2026-10-05.json`.
 - CLAIMED_BY: Nodus
 - CLAIMED_AT: `2026-10-05 AST`
 - CLAIM_HEAD: `70731dc33bdc54021d8058ff5842bd35ffe000bd`
-- ACCEPTANCE:
-  - report exact source commit and deterministic repository counts;
-  - report Markdown/document-like counts with definitions;
-  - report Master Task Register totals by state and conservative DONE/total completion percentage;
-  - report D-060..D-079 Phase 1 campaign totals and completion percentage;
-  - report top-level and documentation-area file maps;
-  - preserve D-019 and task-register authority instead of duplicating semantic truth;
-  - validation evidence is reproducible from a complete checkout.
+- COMPLETION_HEAD: `ad43da4f910e74b6019b372a8ad17eb71b2d5ab0`
+- COMPLETED_AT: `2026-10-05 AST`
+- RESULT:
+  - exact-revision project-status aggregation is implemented and documented;
+  - baseline source revision `37cc88b6d068cdc160ecb5c69fdb9a1b0c1aeb7d` was independently reconciled against a complete recursive Git tree with `truncated=false`;
+  - task completion, Phase 1 completion, repository structure and document-count definitions are now reproducible;
+  - the reporting layer remains subordinate to D-019, the Master Task Register and fresh runtime evidence.
+- EVIDENCE:
+  - `docs/evidence/D081_PROJECT_STATUS_BASELINE_2026-10-05.json`;
+  - `docs/PROJECT_STATUS_SNAPSHOT_2026-10-05.md`;
+  - `docs/PROJECT_STATUS_TRACKING_STANDARD.md`;
+  - `tests/test_project_status_tracker.py`;
+  - `docs/player_guide/PLAYER_LEARNING_LEDGER.md` D-081 record.
+- VALIDATION:
+  - exact recursive Git-tree reconciliation PASS;
+  - exact task-register reconciliation PASS;
+  - synthetic local Git validation PASS for status parsing, dirty/untracked isolation, document counts and completion calculations.
+- VERIFICATION_BOUNDARY: documentation/tooling status infrastructure only; no runtime, Android build, emulator, physical-device or final-APK pass is claimed.
