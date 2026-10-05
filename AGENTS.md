@@ -77,7 +77,7 @@ Do not restart repository-wide discovery unless the mission card or live drift r
 
 ## Critical problem handling
 
-Authority: `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md` and OR-021.
+Authority: `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md` and OR-024.
 
 When a Player-AI encounters a serious code/integration defect:
 
