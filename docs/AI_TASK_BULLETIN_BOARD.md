@@ -668,7 +668,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIM_HEAD:** `8f9637194462fcd2aced5e2831d313262b5e184d`
 - **COMPLETION_HEAD:** `68c59959c0ba842caf8ec4846faea2691965961c`
 - **EVIDENCE:** `docs/evidence/P4_D046_PHASE_C_PASSIVE_RUNTIME_DISPOSITION_2026-10-04.md`; PR #67 merged as `f6b92b039f348dedc68d4b076345de87439999b7`; run #353 Python suite 350/350 green; 23/23 conceptual owners dispositioned; 230/230 passive ownership rows machine-checked.
-- **BRAG_CARD:** pending
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — Parallel P4 / D-046 — 230 passive owners, now guarded`
 - **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-046 remains active at master-task level for later numeric/world/canon/Phase-F work; P4 bounded lane is complete.
 
 ### Parallel P5 — D-042 — Cross-branch existing-state source audit
