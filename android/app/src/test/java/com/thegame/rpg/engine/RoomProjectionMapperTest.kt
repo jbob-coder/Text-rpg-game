@@ -65,6 +65,15 @@ class RoomProjectionMapperTest {
         BridgeSnapshotMapper.fromMap(basePayload(mapOf("projection_version" to 2, "location_id" to "PLATFORM_NINE", "actors" to emptyList<Any>())))
     }
 
+    @Test(expected = IllegalArgumentException::class) fun rejectsForbiddenPrivateActorField() {
+        BridgeSnapshotMapper.fromMap(basePayload(mapOf(
+            "projection_version" to 1,
+            "location_id" to "PLATFORM_NINE",
+            "actors" to listOf(tamsin() + ("memories" to listOf("PRIVATE"))),
+            "active_speaker_presentation_id" to null,
+        )))
+    }
+
     @Test(expected = IllegalArgumentException::class) fun contractRejectsRoomLocationThatDoesNotMatchSnapshotLocation() {
         RoomProjectionContract.validate(
             "PLATFORM_NINE",

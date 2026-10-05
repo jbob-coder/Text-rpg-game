@@ -538,7 +538,7 @@ private fun StoryResourceHud(
             ) {
                 PixelUiIcon(
                     sprite = PixelUiIconCatalog.resource(resource.id),
-                    modifier = Modifier.size(16.dp),
+                    modifier = Modifier.size(14.dp),
                     tint = resourceColor,
                     testTag = "story-resource-icon-${resource.id.lowercase()}",
                 )
