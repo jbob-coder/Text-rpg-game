@@ -68,9 +68,9 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 
 ## Critical path to a complete Phase 1
 
-`D-064 + D-065 + D-067 + D-068`
+`D-064` **safe handoff — last transition blocker**
 ↓
-**one green authority checkpoint**
+**green authority checkpoint already PASS: PR #65 / run #351**
 ↓
 `D-069 -> D-070 -> D-071 -> D-072 -> D-073 -> D-074`
 ↓
@@ -78,7 +78,7 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 ↓
 **Phase 1 integrated acceptance candidate**
 
-The current job is to close the four transition tasks without expanding them.
+The current transition job is to close D-064 without scope expansion. D-065, D-067 and D-068 are DONE; the green authority checkpoint is already established.
 
 ---
 
@@ -175,60 +175,26 @@ Do not reopen D-065. Await/use the Veyr D-075 mission card if D-075 is unlocked 
 ## Nodus — D-067 — Inventory / Equipment Integration Proof
 
 **Player-AI class:** Integration Architect & Systems Gatekeeper  
-**Mission state:** critical bridge/root-cause repair is proven green in PR #62; only final exact-authority checkpoint + primary handoff remain.
+**Mission state:** **DONE / PRIMARY + D-067-B VERIFIED**.
 
-### Mission objective
-Prove one bounded Phase 1 obtain/possess/equip/use loop across authoritative Python state, persistence and Android player-safe presentation.
+### Verified result
+- authoritative obtain/possess/equip/use loop;
+- save/load across equipment and story inventory changes;
+- Android player-safe inventory/equipment presentation;
+- invalid-equip full rollback;
+- exact authority checkpoint fully green.
 
-### Must Read
-- `docs/systems/PHASE_1_ITEMS_ECONOMY_SCHEMA_API_MIGRATION_PACKET.md`;
-- authoritative inventory/equipment state implementation;
-- D-067 proof tests including canonical session factory coverage;
-- Android inventory/equipment mapper/tests;
-- save/load path for inventory/equipment.
+### Evidence
+- `docs/evidence/D067_PHASE1_INVENTORY_EQUIPMENT_PROOF_2026-10-04.md`;
+- PR #65 / workflow run #351 / `37253975755`;
+- APK SHA-256 `7dfc02e4b6ce95fc0fb6ba6dbe1869366993cd6388811627efdc2deb7daeefda`.
 
-### Already accomplished / do not redo
-Repository history already contains:
-- authoritative inventory hardening;
-- integrated Phase 1 inventory/equipment proof test;
-- Android inventory projection hardening;
-- strict inventory projection mapping test;
-- canonical-session-factory D-067 regression.
+### Critical-fix credit
+Separate **+310** root-cause award remains verified under OR-024 for the transition bridge/system-blocker repair.
 
 ### Next Move
-1. fetch live authority HEAD;
-2. confirm the ported D-067 proof files and repaired bridge contracts have not drifted materially;
-3. run/obtain one exact-authority Python + Android integration checkpoint;
-4. if green, close D-067 and D-067-B and coordinate the transition checkpoint;
-5. if red, repair only the newly demonstrated drift — do **not** reopen already-proven bridge archaeology.
+Do not reopen D-067. Support Kestrel only as an integration reviewer if requested. The tactical gate now waits only on D-064 safe handoff.
 
-### Critical-fix credit already earned
-Nodus has **+310 verified points** for the D-067 transition system-blocker repair:
-- SYSTEM BLOCKER +175;
-- ROOT CAUSE +75;
-- REGRESSION SHIELD +30;
-- CROSS-SYSTEM SAVE +30.
-
-Evidence: `docs/evidence/CRITICAL_FIX_D067_BRIDGE_RECONCILIATION_2026-10-04.md`.
-
-
-### Exit Gate
-- acquisition/possession and at least one meaningful equipment/use mutation proven;
-- invalid mutation cannot partially corrupt state;
-- save/load preserves authoritative inventory/equipment;
-- Android renders player-safe current state;
-- exact-head evidence recorded.
-
-### Bonus
-D-067-B invalid-equip/rollback atomicity only after primary acceptance.
-
-### Do Not
-- add currency/vendor/crafting scope;
-- redesign item schema when bounded proof already works.
-
-### Required cross-review
-- Kestrel: Android presentation fields if mapper surface changes;
-- Veyra: only if equipment modifies gameplay/tactical contract.
 
 ---
 
@@ -270,11 +236,7 @@ Evidence:
 ### Current blocker / next move
 D-068 is no longer part of the transition blocker.
 
-Veyra's next gameplay task is D-069, but substantive tactical implementation must not begin until:
-1. D-064, D-065 and D-067 reach safe handoff;
-2. one complete Python authority checkpoint is green;
-3. required Android integration gates for the transition state are green;
-4. the Bulletin Board reopens D-069 under the runtime merge-state gate.
+Veyra's next gameplay task is D-069. PR #65 / run #351 already proved the green Python + Android + emulator checkpoint. Substantive D-069 implementation must wait only for D-064 safe handoff and the Bulletin Board unlock under the runtime merge-state gate.
 
 Until then Veyra may assist with bounded integration/checkpoint evidence or read-only D-069 preparation, but must not bypass the gate.
 
