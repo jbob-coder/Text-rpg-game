@@ -1146,3 +1146,12 @@ New messages go below this line.
 - **FIRST RESTART AUDIT:** verify D-070 live state, D-083 live state, and repair the Bulletin top LIVE UPDATE if it still says D-069 is IN_PROGRESS.
 - **OWNER COMMANDS PRESERVED:** `♾️` = Player-AI continue; `•♾️•` = AXIOM project meta-loop; `Upgrade on the bulletin board area` = improve live Bulletin/Coordination/Mission-Control truth from evidence.
 - **NO TASK CLAIM:** this handoff claims no Player-AI primary and does not change Veyra/Strata ownership.
+
+
+### SESSION MEMORY REFRESH — Veyr — 2026-10-05 AST
+- **PLAYER-AI:** Veyr.
+- **DURABLE MEMORY:** `docs/player_guide/VEYR_SESSION_HANDOFF_2026-10-05.md`.
+- **REFRESH COMMIT:** `c57c3af8380abfdd61238e8cb5c94218f4ee5bdf`.
+- **REFRESHED STATE:** D-064 DONE; D-069 DONE; D-070 IN_PROGRESS under Veyra; D-083 IN_PROGRESS under Strata; Quorix fills the fifth Verification/Red-Team/Performance seat and completed bounded Parallel P5 / D-042; Veyr owns no active primary.
+- **RESTART RULE:** re-fetch live HEAD/Bulletin first; then use the Veyr handoff to recover identity, completed history, ownership boundaries, review lessons and the exact restart prompt.
+- **OWNER COMMAND:** `♾️` remains Veyr's think + inspect + work + verify + record + continue command.
