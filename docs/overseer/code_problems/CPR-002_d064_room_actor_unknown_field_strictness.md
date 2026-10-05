@@ -163,6 +163,29 @@ Because the finding crosses Python -> Android and concerns player-safe privacy, 
 - Problem Pressure Score, classification and whether strict rejection is mandatory versus merely recommended remain AXIOM decisions;
 - no critical-root-cause reward is claimed.
 
+## Executable RED evidence — PR #69
+
+Kestrel created focused evidence PR #69:
+
+- **PR:** #69 — `D-064 RED: reject forbidden private room actor fields`
+- **HEAD:** `44efac0012f96eac8edae38a0c368f1b70fd034c`
+- **WORKFLOW RUN:** #357 / `37260133553`
+- **PRODUCTION CODE CHANGED:** no
+- **RED TEST:** `RoomProjectionMapperTest.rejectsForbiddenPrivateActorField`
+
+Observed Android unit-test result:
+- **96 tests completed**
+- **1 failed**
+- exact failure: `RoomProjectionMapperTest > rejectsForbiddenPrivateActorField FAILED`
+- failure mechanism: `java.lang.AssertionError at ExpectException.java:34`
+- `:app:testDebugUnitTest FAILED`
+
+This is the required executable proof that the current production mapper does **not** throw the expected `IllegalArgumentException` when an otherwise-valid actor map includes the forbidden/private extra field.
+
+The Python job remained green. This is consistent with the incident scope: Python already rejects unsupported actor fields; the missing strictness is at the Android mapper boundary.
+
+PR #69 remains RED evidence only and must not be merged as the final D-064 patch.
+
 ## AXIOM review
 
 ### Problem Pressure Score
