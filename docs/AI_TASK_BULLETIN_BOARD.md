@@ -491,7 +491,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `91/100`
 - **STATUS:** `BLOCKED`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
-- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE and PR #65 run #351 established the green authority checkpoint. PR #63 run #354 is reusable D-064 GREEN_COMPATIBILITY_PROOF under OR-019, but the final D-064 authority patch must still satisfy the surgical manifest, eliminate avoidable `GameScreen.kt` compaction, and satisfy accepted CPR-002 with executable RED -> GREEN strict-mapper evidence. Do not promote D-069 until the final D-064 merge candidate is green and D-064 is synchronized DONE.
+- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE and PR #65 run #351 established the green authority checkpoint. PR #63 run #354 is reusable D-064 GREEN_COMPATIBILITY_PROOF under OR-019. The latest surgical preflight has already corrected the earlier `GameScreen.kt` compaction; remaining D-064 gates are current-base integration, manifest-required fallback-scene regression coverage, accepted CPR-002 executable RED -> GREEN strict-mapper evidence, fresh merge-state CI, and full handoff synchronization. Do not promote D-069 until D-064 is synchronized DONE.
 - **NEXT_OWNER:** Veyra; reclaim through `docs/AI_RUNTIME_MERGE_STATE_GATE.md` only after unlock.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
