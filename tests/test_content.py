@@ -4,7 +4,13 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from textrpg import RuleError, content_pack_from_mapping, load_content_pack, inspect_status_value
+from textrpg import (
+    RuleError,
+    TacticalCoord,
+    content_pack_from_mapping,
+    inspect_status_value,
+    load_content_pack,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -216,15 +222,16 @@ class ContentPackTests(unittest.TestCase):
             }
         }
 
-        before_state = copy.deepcopy(data["initial_state"])
+        baseline_state = content_pack_from_mapping(self.data()).state.snapshot()
         pack = content_pack_from_mapping(data)
 
         tactical_map = pack.tactical_maps["TACTICAL_MAP_TEST"]
         self.assertEqual(2, tactical_map.width)
-        self.assertEqual(2, tactical_map.cell_at(
-            __import__("textrpg").TacticalCoord(1, 0, 0)
-        ).movement_cost)
-        self.assertEqual(before_state, pack.state.snapshot())
+        self.assertEqual(
+            2,
+            tactical_map.cell_at(TacticalCoord(1, 0, 0)).movement_cost,
+        )
+        self.assertEqual(baseline_state, pack.state.snapshot())
         self.assertEqual("ACTION_MOVE", pack.combat_actions["ACTION_MOVE"]["action_id"])
 
     def test_tactical_section_roots_must_be_objects(self):
