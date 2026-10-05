@@ -1678,3 +1678,19 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - exact task-register reconciliation PASS;
   - synthetic local Git validation PASS for status parsing, dirty/untracked isolation, document counts and completion calculations.
 - VERIFICATION_BOUNDARY: documentation/tooling status infrastructure only; no runtime, Android build, emulator, physical-device or final-APK pass is claimed.
+
+### TASK D-082 — Full repository manifest and revision-delta tracking
+- STATUS: `IN_PROGRESS / OWNER-DIRECTED / CLAIMED BY NODUS`
+- PRIORITY: `P0/P1 PROGRAM INFRA`
+- PURPOSE: extend D-081 so every tracked file is classifiable and revision-to-revision file/document changes can be reported exactly.
+- DEPENDS_ON: D-081 DONE.
+- DELIVERABLES:
+  - extend `tools/project_status_tracker.py` with full manifest generation;
+  - add optional base-revision comparison for added/removed/changed files and documents;
+  - add task-state transition/completion-delta reporting;
+  - add regression tests;
+  - persist an exact-revision current manifest/evidence snapshot.
+- AUTHORITY BOUNDARY: D-081 remains status aggregation authority; D-019 remains detailed corpus inventory authority; this task adds structural manifest/delta capability only.
+- CLAIMED_BY: Nodus
+- CLAIMED_AT: `2026-10-05 AST`
+- CLAIM_HEAD: `515270b51fe61b8855fa3ac2e39016dc73e71bc0`
