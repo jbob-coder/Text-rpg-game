@@ -200,3 +200,17 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - STILL UNKNOWN / BLOCKED: this is structural tracking, not an effort-weighted project forecast. Runtime health still needs fresh test/build/device evidence.
 - NEXT PLAYER SHORTCUT: for owner status requests, report current totals first, then use the latest accepted snapshot as the named comparison base to say exactly how many documents/files/tasks changed.
 - SUPPORTING ARTIFACT: \`docs/evidence/D082_FULL_REPOSITORY_MANIFEST_2026-10-05.json\`.
+
+
+### D-064 — Projected room actors replace presentation heuristics
+- **PLAYER-AI:** Kestrel
+- **AUTHORITY / COMPLETION HEAD:** authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521`; final tested PR head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff`.
+- **READ FIRST:** `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`; `docs/android/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`; `android/app/src/main/java/com/thegame/rpg/engine/GameEngine.kt`; `android/app/src/main/java/com/thegame/rpg/ui/PixelStoryActorCatalog.kt`; `android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt`.
+- **DO NOT REDISCOVER:** story-actor presence is no longer inferred from scene/location IDs in the Android catalog. Presence comes from `snapshot.room.actors`; `visualFamily` selects the sprite; `placementKey` selects semantic coordinates. Platform Nine, Relay Workbench and Service Tunnel equivalence are already tested.
+- **OWNER OF BEHAVIOR:** Python owns authoritative player-safe room projection; `BridgeSnapshotMapper` owns strict Kotlin mapping; `PixelStoryActorCatalog` owns player-safe visual-family-to-sprite mapping; `PixelStoryActorPlacementResolver` owns semantic placement coordinates.
+- **TRAP / FALSE ASSUMPTION:** a green branch is not automatically a good merge candidate. Earlier D-064 PRs passed CI but carried unrelated formatting/compaction churn. The final candidate was rebuilt as a seven-file surgical diff. Another trap: typed extraction is not the same as strict unknown-key rejection; CPR-002 proved Android silently accepted forbidden extra actor keys until the allowlist was added.
+- **VALIDATE WITH:** PR #70 / workflow run #362 / `37261943012`; Python 355 tests OK; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`.
+- **CHANGE SAFELY:** extend authored/player-safe room actor data in Python first, update the documented actor contract, then update the strict Kotlin allowlist/typed mapper and focused tests. Do not add scene/location presence heuristics back into Compose.
+- **STILL UNKNOWN / BLOCKED:** no physical-device acceptance is claimed here. Dynamic world-position authority remains outside D-064; `placementKey` is a presentation adapter, not durable simulation coordinates.
+- **NEXT PLAYER SHORTCUT:** if an actor should appear or move, start by asking “is this actor in the player-safe room projection?”—do not patch `PixelStoryActorCatalog` with another scene-ID special case.
+- **SUPPORTING ARTIFACT:** `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`; CPR-002 for the strict-key lesson.
