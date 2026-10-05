@@ -3,7 +3,7 @@
 **Status:** ACTIVE  
 **Purpose:** heavily reward Player-AIs who solve difficult, critical code/integration problems at the real causal layer instead of stopping at symptom patches.  
 **Authority:** subordinate to repository truth, task acceptance, tests, save/privacy/migration rules, and owner-only boundaries.  
-**Effective from:** OR-021.
+**Effective from:** OR-022.
 
 This program stacks **on top of** normal task points and ordinary campaign bonuses.
 
@@ -26,21 +26,21 @@ Score only moves upward. Zero bonus is not a penalty.
 
 One verified incident may receive one severity award:
 
-- **HARD — +50**
+- **HARD — +20**
   - difficult localized defect;
   - non-obvious failure requiring code archaeology or multi-file reasoning;
   - meaningful task blocker but not project-wide.
 
-- **CRITICAL — +100**
+- **CRITICAL — +40**
   - blocks a P0 task or important play path;
   - causes repeated CI/test failure, runtime crash, save incompatibility, player-safe projection failure, deterministic breakage, or comparable serious defect.
 
-- **SYSTEM BLOCKER — +175**
+- **SYSTEM BLOCKER — +70**
   - blocks multiple Player-AIs or multiple downstream tasks;
   - breaks the common authority baseline;
   - crosses major boundaries such as Python ↔ Android, save ↔ runtime, content ↔ validator, or tactical ↔ persistence.
 
-- **LEGENDARY ROOT CAUSE — +250**
+- **LEGENDARY ROOT CAUSE — +100**
   - systemic architecture/integration defect whose true cause is difficult to isolate;
   - resolving it removes several recurring failures/workarounds at once;
   - materially changes the project's ability to continue toward Phase 1/final game completion.
@@ -51,27 +51,27 @@ Severity must be justified by evidence. "It felt hard" is not evidence.
 
 On top of the severity award:
 
-- **ROOT CAUSE +75**
+- **ROOT CAUSE +25**
   - proves and repairs the causal defect rather than masking one symptom.
 
-- **REGRESSION SHIELD +30**
+- **REGRESSION SHIELD +15**
   - adds or strengthens a test/check that fails on the bad state and passes on the repair.
 
-- **CROSS-SYSTEM SAVE +30**
+- **CROSS-SYSTEM SAVE +15**
   - repair protects two or more meaningful domains/surfaces.
 
-- **PATCH-DEBT REMOVAL +25**
+- **PATCH-DEBT REMOVAL +10**
   - removes an existing workaround, duplicated compatibility branch, hard-coded exception, or temporary patch because the underlying defect is now fixed.
 
-- **PREVENTION +25**
+- **PREVENTION +10**
   - adds validation, invariants, migration checks, contract checks, or safer architecture that prevents the same defect class from returning.
 
-- **HARD-TO-REPRO PROOF +20**
+- **HARD-TO-REPRO PROOF +5**
   - converts an intermittent/merge-state/environment-sensitive problem into deterministic reproduction evidence.
 
-**Maximum critical-fix bonus per incident: +455 points.**
+**Maximum critical-fix bonus per incident: +180 points.**
 
-This maximum is intentionally much larger than ordinary task bonuses. Solving a project blocker cleanly is worth more than farming many easy microtasks.
+This maximum is intentionally meaningful but bounded. A legendary fix can beat one ordinary P0 task, but should not outweigh several completed critical-path missions.
 
 ## What counts as a root-cause fix
 
@@ -109,11 +109,7 @@ These may still be legitimate emergency fixes and receive **no penalty**, but by
 
 `docs/AI_PEER_REVIEW_BOUNTY.md` remains active for ordinary peer defects.
 
-A truly critical peer defect may earn **both**:
-- ordinary Bug Hunter / Roast & Repair points; and
-- this Critical Root-Cause reward.
-
-The evidence must clearly separate the two awards.
+A truly critical peer defect escalates to the **OR-022 Critical Root-Cause schedule**. The Roast & Repair card may still be used, but the same FIX / regression / cross-system evidence is scored once, not again under the ordinary peer bounty.
 
 ## Task stacking example
 
@@ -121,15 +117,15 @@ A P0 task worth +90 uncovers a system-blocking integration defect.
 
 If the Player-AI:
 - completes the P0 task: +90;
-- SYSTEM BLOCKER: +175;
-- ROOT CAUSE: +75;
-- REGRESSION SHIELD: +30;
-- CROSS-SYSTEM SAVE: +30;
-- PREVENTION: +25;
+- SYSTEM BLOCKER: +70;
+- ROOT CAUSE: +25;
+- REGRESSION SHIELD: +15;
+- CROSS-SYSTEM SAVE: +15;
+- PREVENTION: +10;
 
-the verified total for that work package is **+425**.
+the verified total for that work package is **+225**.
 
-That is intentional.
+That is intentionally strong without allowing one bug incident to dominate the championship.
 
 ## No-risk task rule
 
