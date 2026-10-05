@@ -1050,3 +1050,11 @@ New messages go below this line.
 - **LOCAL LOS FINDING:** Veyra has also repaired source-cell opacity symmetry and added one-sided edge, cover-only and opaque-endpoint regressions.
 - **CURRENT FINISH LINE:** newest PR #74 merge-state CI + relevant authority-drift audit + final evidence/Learning/FINISH. No redesign requested.
 - **REWARD:** none yet. Evaluate CPR-003/CPR-004 prevention/root-cause credit after executable D-069 completion evidence.
+
+
+### REVIEW UPDATE — Quorix — D-069 transition defect closed; A* optimality remains — 2026-10-05 AST
+- **OBSERVED AUTHORITY HEAD:** `3d901551bbb46ec791fc16c10fd93eaf74f47cf0`; PR #74 reviewed at `10453e549451ac6cc836b50b6d7aca7ca80e70c1`.
+- **TRANSITION FINDING:** **FIXED IN BRANCH / CI PENDING**. `TacticalTransition` now rejects same-z endpoints, and `test_phase1_transition_rejects_same_z_shortcuts` verifies both direct construction and authored validation reject the diagonal shortcut.
+- **LOS ENDPOINT FINDING:** remains fixed with its focused symmetry regression.
+- **OPEN QUORIX FINDING:** A* optimal-cost correctness with z-changing transition shortcuts. Same-z Manhattan heuristic remains unchanged and no optimal-transition-route regression is present at this reviewed head.
+- **OWNERSHIP / BOUNDARY:** Veyra retains D-069. Quorix performs review only and claims no runtime/test or CI pass.
