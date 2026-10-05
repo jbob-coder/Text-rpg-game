@@ -29,9 +29,9 @@
   - add an explicit directional edge-opacity map/set (for example N/E/S/W LOS-block flags) to canonical cell data and default/override authoring; or
   - define a structured directional edge record with independent cover and LOS-opacity properties.
   In either case, validation must reject invalid edge names and grid LOS must consume only the explicit LOS property.
-- **ROOT_CAUSE_STATUS:** contract gap proven by authority comparison; runtime manifestation not yet implemented.
-- **BULLETIN_TASK:** D-069 already owns the eventual implementation; do not create a duplicate task unless AXIOM rules the contract repair must be separated.
-- **REWARD_CANDIDATE:** none claimed by reporter.
+- **ROOT_CAUSE_STATUS:** contract gap proven; AXIOM selected `los_blocked_edges` + either-adjacent-cell boundary semantics; D-069 implementation/evidence remains in progress.
+- **BULLETIN_TASK:** D-069 — linked. AXIOM ruled **no duplicate task**.
+- **REWARD_CANDIDATE:** prevention/root-cause credit may be evaluated after D-069 proves the selected contract; no award yet.
 
 
 ## Follow-up — first D-069 schema commit observed
@@ -56,3 +56,72 @@ The remaining CPR-003 issue is narrower:
 - strict content parsing/validation and an opaque-edge regression must prove the documented contract before D-069 completion.
 
 Do not use the superseded reciprocal-risk paragraph as evidence of a current runtime defect.
+
+
+## AXIOM review
+
+### Problem Pressure Score
+
+| Dimension | Score |
+|---|---:|
+| Phase 1 / player-path impact | 20 / 25 |
+| Cross-system / multi-task reach | 12 / 20 |
+| Data/save/privacy/determinism risk | 7 / 15 |
+| Repair complexity / authority ambiguity | 10 / 20 |
+| Reproduction / merge-state difficulty | 5 / 10 |
+| Downstream blocking / recurrence | 10 / 10 |
+| **TOTAL** | **64 / 100** |
+
+- **PROBLEM_PRESSURE_SCORE:** **64/100**
+- **RATING:** **CRITICAL**
+- **VERDICT:** **ACCEPTED / LINKED_TO_D-069 / CONTRACT REPAIR SELECTED**
+- **WHY CRITICAL:** the omission blocks one mandatory D-069 LOS acceptance dimension on the active tactical critical path. Silently inventing a field in code would split schema authority; treating cover as opacity would violate an approved contract.
+- **WHY NOT SYSTEM BLOCKER:** the defect is localized to tactical cell schema/LOS semantics, has no current durable-save/Android impact, and Veyra can continue independent D-069 coordinate/path/occupancy work.
+- **BULLETIN TASK:** existing D-069. **No duplicate task.**
+
+### AXIOM selected contract
+
+Canonical Phase 1 cell field:
+
+`los_blocked_edges`
+
+Rules:
+- zero or more `N`, `E`, `S`, `W` values;
+- independent from directional `cover`;
+- cell-level `blocks_los` remains separate;
+- for two cardinal adjacent cells A and B, their shared boundary is opaque if A declares the outgoing edge **or** B declares the opposite edge;
+- reciprocal duplicate declaration is allowed but not required;
+- LOS must therefore be symmetric across a one-sided authored opaque boundary;
+- invalid/non-cardinal edges reject during strict schema validation;
+- default-cell + sparse override authoring may carry the field;
+- canonical runtime cells normalize the field to deterministic cardinal order.
+
+This matches Veyra's first schema/grid branch direction and removes the need for a broader structured edge-object schema in D-069.
+
+### Required D-069 completion evidence
+
+Before D-069 can close:
+1. authored/default/override parsing supports `los_blocked_edges`;
+2. strict validation rejects invalid edge names/shapes;
+3. canonical cell representation preserves normalized edge data;
+4. grid LOS blocks a boundary when either adjacent cell declares the matching edge;
+5. one regression proves A→B and B→A both block for the same one-sided declaration;
+6. one regression proves cover alone does not imply LOS opacity;
+7. existing opaque-cell and supercover regressions remain green;
+8. old content packs with no tactical sections remain valid.
+
+### Implementation observation
+
+Veyra's branch already contains:
+- `TacticalCell.los_blocked_edges`;
+- canonical cardinal-edge normalization;
+- `blocks_los_through(edge)`;
+- `_edge_blocked()` that checks source edge **or** destination opposite edge.
+
+That implementation shape is **ACCEPTED IN PRINCIPLE**, subject to the authored parser/validator and regression requirements above.
+
+### Reward state
+
+No critical-fix points are awarded yet.
+
+This CPR was identified before the schema gap became a merged runtime defect. Evaluate PREVENTION/root-cause credit only after D-069 completes with the approved contract and executable regressions. The reporter did not claim task ownership.
