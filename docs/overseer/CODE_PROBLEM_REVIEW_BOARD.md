@@ -163,7 +163,7 @@ AXIOM reviews:
 - **REWARD:** none yet; evaluate prevention/root-cause credit only after D-069 proves the accepted contract.
 
 ### CPR-004 — D-069 unresolved persistent_ref IDs
-- **STATUS:** `ACCEPTED / LINKED_TO_TASK / CONTRACT REPAIR SELECTED`
+- **STATUS:** `IMPLEMENTATION PRESENT / LINKED_TO_TASK / CI PENDING`
 - **PROBLEM_PRESSURE_SCORE:** **65/100**
 - **RATING:** **CRITICAL**
 - **TASK:** D-069
@@ -171,7 +171,8 @@ AXIOM reviews:
 - **EVIDENCE:** `docs/overseer/code_problems/CPR-004_d069_persistent_ref_resolution_gap.md`
 - **WHY NO NEW TASK:** D-069 already owns tactical content/schema validation; creating another task would duplicate acceptance work.
 - **AXIOM CONTRACT:** keep tactical shape validation pre-state; after `GameState` construction, validate every authored D-069 `persistent_ref` against durable NPC IDs. Unknown NPC refs reject. Player persistent refs are not authorable until a canonical player stable-ID contract exists; do not invent a sentinel in D-069.
-- **D-069 IMPACT:** add valid-NPC / invalid-NPC / no-ref regressions and a bounded post-state validation pass.
+- **D-069 IMPACT:** implementation is present on PR #74: post-GameState NPC-ref resolution, valid/invalid ref regression, and omitted-ref compatibility remain within D-069 scope.
+- **IMPLEMENTATION_EVIDENCE:** PR #74 current branch includes `validate_encounter_persistent_refs()`, loader call after `GameState` construction, valid `NPC_TAMSIN` pass and invalid `NPC_DOES_NOT_EXIST` / guessed `PLAYER` rejection.
 - **REWARD:** none yet; evaluate root-cause/prevention credit only after executable repair evidence.
 
 No unresolved CPR is created merely to populate this board.
