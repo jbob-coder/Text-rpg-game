@@ -1,0 +1,361 @@
+{
+  "schema_version": 1,
+  "task": "D-081",
+  "source_head": "37cc88b6d068cdc160ecb5c69fdb9a1b0c1aeb7d",
+  "tree_sha": "b06d1096dffcca1b29ad48b2c7a69447cb425499",
+  "tree_truncated": false,
+  "inventory_mode": "github_recursive_git_tree_exact_revision_plus_exact_task_register",
+  "validation": {
+    "independent_connector_reconciliation": "PASS",
+    "synthetic_local_tracker_validation": "PASS",
+    "synthetic_validation_scope": [
+      "status classification",
+      "exact-revision dirty/untracked isolation",
+      "document counts",
+      "task completion",
+      "D-060..D-079 campaign completion"
+    ]
+  },
+  "repository": {
+    "tracked_files": 620,
+    "tracked_blob_bytes": 6546962,
+    "top_level": {
+      "docs": {
+        "files": 455,
+        "bytes": 4866103
+      },
+      "android": {
+        "files": 101,
+        "bytes": 883400
+      },
+      "tests": {
+        "files": 31,
+        "bytes": 316205
+      },
+      "src": {
+        "files": 20,
+        "bytes": 318399
+      },
+      "(root)": {
+        "files": 4,
+        "bytes": 27002
+      },
+      "tools": {
+        "files": 4,
+        "bytes": 59108
+      },
+      "content": {
+        "files": 3,
+        "bytes": 68788
+      },
+      ".github": {
+        "files": 2,
+        "bytes": 7957
+      }
+    },
+    "extensions": {
+      ".md": {
+        "files": 425,
+        "bytes": 4384986
+      },
+      ".kt": {
+        "files": 72,
+        "bytes": 601994
+      },
+      ".py": {
+        "files": 54,
+        "bytes": 692298
+      },
+      ".json": {
+        "files": 29,
+        "bytes": 427194
+      },
+      ".png": {
+        "files": 24,
+        "bytes": 278142
+      },
+      ".log": {
+        "files": 7,
+        "bytes": 150743
+      },
+      ".kts": {
+        "files": 3,
+        "bytes": 2343
+      },
+      ".yml": {
+        "files": 2,
+        "bytes": 7957
+      },
+      ".gitignore": {
+        "files": 1,
+        "bytes": 91
+      },
+      ".properties": {
+        "files": 1,
+        "bytes": 133
+      },
+      ".toml": {
+        "files": 1,
+        "bytes": 293
+      },
+      ".xml": {
+        "files": 1,
+        "bytes": 788
+      }
+    },
+    "source_files": 20,
+    "android_files": 101,
+    "test_paths": 64,
+    "tool_files": 4,
+    "workflow_files": 2
+  },
+  "documentation": {
+    "documentation_scope_paths": 457,
+    "repository_markdown_documents": 425,
+    "docs_markdown_documents": 423,
+    "structured_docs_under_docs": 25,
+    "document_like_paths": 450,
+    "areas": {
+      "systems": {
+        "files": 268,
+        "bytes": 2182978
+      },
+      "(docs-root)": {
+        "files": 56,
+        "bytes": 1140731
+      },
+      "assets": {
+        "files": 49,
+        "bytes": 733977
+      },
+      "evidence": {
+        "files": 18,
+        "bytes": 254674
+      },
+      "world": {
+        "files": 18,
+        "bytes": 102092
+      },
+      "android": {
+        "files": 14,
+        "bytes": 157692
+      },
+      "GAME_CONTEXT_LOGS": {
+        "files": 13,
+        "bytes": 49176
+      },
+      "verification": {
+        "files": 10,
+        "bytes": 169386
+      },
+      "overseer": {
+        "files": 5,
+        "bytes": 32555
+      },
+      "player_guide": {
+        "files": 3,
+        "bytes": 32307
+      },
+      "superpowers": {
+        "files": 1,
+        "bytes": 10535
+      }
+    }
+  },
+  "tasks": {
+    "total": 82,
+    "done": 55,
+    "by_state": {
+      "DONE": 55,
+      "IN_PROGRESS": 10,
+      "BLOCKED": 3,
+      "UNKNOWN": 1,
+      "OTHER": 4,
+      "PENDING": 9
+    },
+    "completion_pct": 67.07,
+    "completion_definition": "DONE tasks / all registered TASK D-### entries; every non-DONE state counts as incomplete"
+  },
+  "phase1_campaign": {
+    "range": "D-060..D-079",
+    "total": 20,
+    "done": 9,
+    "by_state": {
+      "DONE": 9,
+      "IN_PROGRESS": 1,
+      "BLOCKED": 1,
+      "PENDING": 9
+    },
+    "completion_pct": 45
+  },
+  "active_or_blocking": [
+    {
+      "id": "D-006",
+      "state": "IN_PROGRESS",
+      "status": "IN_PROGRESS / CURRENT-HEAD SOURCE + CURRENT ANDROID CONSUMER DISCOVERY COMPLETE",
+      "title": "Existing-state repository audit"
+    },
+    {
+      "id": "D-019",
+      "state": "IN_PROGRESS",
+      "status": "IN_PROGRESS / IMMUTABLE-REVISION TOOLING FIXED / STRUCTURAL SNAPSHOT REFRESHED",
+      "title": "Reproducible documentation/world/asset inventory"
+    },
+    {
+      "id": "D-021",
+      "state": "IN_PROGRESS",
+      "status": "IN_PROGRESS / CURRENT 19-FIELD CONSUMER + TEST-CONTRACT AUDIT COMPLETE",
+      "title": "Map Android consumers to final UX/domain contracts"
+    },
+    {
+      "id": "D-026",
+      "state": "IN_PROGRESS",
+      "status": "IN_PROGRESS / CURRENT-SOURCE CONSUMER + TEST-CONTRACT + D-030 MIGRATION MAP COMPLETE",
+      "title": "Android consumer/projection map"
+    },
+    {
+      "id": "D-012",
+      "state": "BLOCKED",
+      "status": "BLOCKED",
+      "title": "Final APK keep/rebuild matrix and execution"
+    },
+    {
+      "id": "D-042",
+      "state": "IN_PROGRESS",
+      "status": "IN_PROGRESS / CURRENT-HEAD SOURCE INVENTORY COMPLETE / CROSS-BRANCH RECONCILIATION REMAINS",
+      "title": "Deep source-file existing-state audit"
+    },
+    {
+      "id": "D-043",
+      "state": "UNKNOWN",
+      "status": null,
+      "title": "Baseline documentation/raster evidence and execution contracts"
+    },
+    {
+      "id": "D-029",
+      "state": "IN_PROGRESS",
+      "status": "IN_PROGRESS / CURRENT 24-RASTER CONSUMER AUDIT COMPLETE / DOCUMENTATION ONLY",
+      "title": "Exactize asset provenance and production stage"
+    },
+    {
+      "id": "D-031",
+      "state": "OTHER",
+      "status": "PROPOSAL_READY / OWNER_CANON_DECISION_REQUIRED",
+      "title": "Gate Twelve parent-world canon packet"
+    },
+    {
+      "id": "D-049",
+      "state": "OTHER",
+      "status": "PLANNING ONLY / DOMAIN-DEPENDENT / FINAL REFINEMENT DEFERRED",
+      "title": "Application UI relationship architecture planning"
+    },
+    {
+      "id": "D-050",
+      "state": "OTHER",
+      "status": "ACTIVE / FIRST-PASS MINIMUM QUOTAS LOCKED / FINAL QUOTAS DEFERRED",
+      "title": "First-pass domain documentation quotas"
+    },
+    {
+      "id": "D-051",
+      "state": "OTHER",
+      "status": "ACTIVE / REQUIREMENTS LOCKED / IMPLEMENTATION BY DEPENDENCY",
+      "title": "Phase 1 solo playable parallel track"
+    },
+    {
+      "id": "D-033",
+      "state": "BLOCKED",
+      "status": "BLOCKED",
+      "title": "APK teardown manifest"
+    },
+    {
+      "id": "D-045",
+      "state": "IN_PROGRESS",
+      "status": "IN_PROGRESS",
+      "title": "Create evolved game through reconstruction-grade domain documentation"
+    },
+    {
+      "id": "D-046",
+      "state": "IN_PROGRESS",
+      "status": "IN_PROGRESS / PHASE A COMPLETE / WAVE 001 STRUCTURALLY COMPLETE / PHASE C REFINEMENT ACTIVE",
+      "title": "Build Status UI / ability / passive reconstruction corpus"
+    },
+    {
+      "id": "D-064",
+      "state": "IN_PROGRESS",
+      "status": "IN_PROGRESS / CLAIMED BY KESTREL / SURGICAL LIVE-AUTHORITY REBUILD",
+      "title": "Implement player-safe room/actor projection"
+    },
+    {
+      "id": "D-069",
+      "state": "BLOCKED",
+      "status": "BLOCKED / D-064 HANDOFF ONLY / GREEN CHECKPOINT PASS / VEYRA NEXT OWNER",
+      "title": "Implement tactical schemas, validators and pure grid core"
+    },
+    {
+      "id": "D-070",
+      "state": "PENDING",
+      "status": "PENDING / BULLETIN QUEUED",
+      "title": "Implement tactical transient state, turn and action engine"
+    },
+    {
+      "id": "D-071",
+      "state": "PENDING",
+      "status": "PENDING / BULLETIN QUEUED",
+      "title": "Implement tactical awareness, cover, objective, retreat and bounded AI"
+    },
+    {
+      "id": "D-072",
+      "state": "PENDING",
+      "status": "PENDING / BULLETIN QUEUED",
+      "title": "Implement tactical aftermath, injury and world consequence transaction"
+    },
+    {
+      "id": "D-073",
+      "state": "PENDING",
+      "status": "PENDING / BULLETIN QUEUED",
+      "title": "Materialize Gate Twelve tactical content and Python bridge"
+    },
+    {
+      "id": "D-074",
+      "state": "PENDING",
+      "status": "PENDING / BULLETIN QUEUED",
+      "title": "Implement Android tactical DTO/mapper/ViewModel/Compose surface"
+    },
+    {
+      "id": "D-076",
+      "state": "PENDING",
+      "status": "PENDING / BULLETIN QUEUED",
+      "title": "Execute integrated Phase 1 save/load and deterministic regression gate"
+    },
+    {
+      "id": "D-077",
+      "state": "PENDING",
+      "status": "PENDING / BULLETIN QUEUED",
+      "title": "Close Android Phase 1 consumer and test gaps"
+    },
+    {
+      "id": "D-078",
+      "state": "PENDING",
+      "status": "PENDING / BULLETIN QUEUED",
+      "title": "Profile low-end Phase 1 performance and lock bounded budgets"
+    },
+    {
+      "id": "D-079",
+      "state": "PENDING",
+      "status": "PENDING / BULLETIN QUEUED",
+      "title": "Run Phase 1 integrated acceptance candidate and APK provenance gate"
+    },
+    {
+      "id": "D-081",
+      "state": "IN_PROGRESS",
+      "status": "IN_PROGRESS / OWNER-DIRECTED / CLAIMED BY NODUS",
+      "title": "Repository-wide status map and reproducible project-status tracker"
+    }
+  ],
+  "boundaries": [
+    "Task-register completion is not an estimate of total game/content/runtime completion.",
+    "Document counts measure paths, not semantic completeness.",
+    "D-019 remains detailed corpus inventory authority.",
+    "Executed test pass totals require separate exact-head evidence."
+  ]
+}
