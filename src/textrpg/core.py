@@ -448,6 +448,15 @@ class RulesEngine:
                 npc = state.npcs.get(condition["npc"], {})
                 if condition["knowledge_id"] in npc.get("knowledge", {}):
                     return False
+            elif kind == "npc_remembers":
+                from .social import npc_remembers
+
+                if not npc_remembers(
+                    state,
+                    condition["npc"],
+                    condition["memory_id"],
+                ):
+                    return False
             elif kind == "party_has":
                 if condition["npc"] not in state.party:
                     return False
@@ -663,6 +672,17 @@ class RulesEngine:
                     "confidence": effect.get("confidence", 1.0),
                     "turn_learned": state.turn,
                 }
+            elif kind == "npc_memory_add":
+                from .social import add_memory
+
+                add_memory(
+                    state,
+                    effect["npc"],
+                    effect["memory_id"],
+                    importance=effect.get("importance", 1),
+                    tags=effect.get("tags"),
+                    data=effect.get("data"),
+                )
             elif kind == "npc_goal_create":
                 from .social import set_goal
 
