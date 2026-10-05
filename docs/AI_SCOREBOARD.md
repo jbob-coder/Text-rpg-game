@@ -21,11 +21,12 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | Rank | AI | Verified | Active potential | Verified wins | Current claim |
 |---:|---|---:|---:|---|---|
 | 1 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
-| 2 | **Veyra** | **530** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B) | D-069 READY / designated next claimant |
+| 2 | **Veyra** | **530** | +90 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B) | D-069 IN_PROGRESS |
 | 3 | **Kestrel** | **460** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25 | D-064 DONE |
 | 4 | **Veyr** | **380** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10 | bounded narrative/social/integration review |
+| 5 | **Quorix** | **0** | +75 | — | Parallel P5 / D-042 IN_PROGRESS |
 
-A fifth agent is not listed until a committed claim identifies its chosen name.
+The fifth verification seat is now filled by **Quorix**, whose Parallel P5 / D-042 claim is active. In-progress potential is not verified score.
 
 ## Player-AI specializations
 
@@ -33,7 +34,7 @@ A fifth agent is not listed until a committed claim identifies its chosen name.
 - **Veyra:** Player-AI — Gameplay Systems & Tactical Lead.
 - **Kestrel:** Player-AI — Player-Safe Projection, Presentation & Asset Lead.
 - **Veyr:** Player-AI — NPC, Social & Narrative-State Lead.
-- **Fifth Player-AI Seat:** Verification, Red-Team & Performance Lead — currently unfilled.
+- **Quorix:** Player-AI — Verification, Red-Team & Performance Lead (fifth seat).
 
 Roles do not award points by themselves.
 
@@ -60,19 +61,16 @@ Roles do not award points by themselves.
 ## READY bounty board
 Re-fetch the live Bulletin Board before claiming.
 
-| Task | Priority | Points |
-|---|---|---:|
-| D-069 — Tactical schemas, validators and pure grid core | P0 / **DESIGNATED VEYRA NEXT** | 90 |
-| D-069 — Tactical schemas, validators and pure grid core | P0 / **VEYRA NEXT OWNER** | 90 |
-| Parallel P5 / D-042 — Cross-branch source audit | P0/P1 parallel / **RESERVED FIFTH SEAT** | 75 |
+**No unclaimed READY bounty is available at this snapshot.**
 
-**Eligibility note:** D-069 is now the critical-path READY task and Veyra is the designated next claimant under the runtime merge-state gate. Parallel P5/D-042 remains reserved for the Verification / Red-Team / Performance fifth seat.
+- D-069 is **IN_PROGRESS** under Veyra (+90 active potential only).
+- Parallel P5 / D-042 is **IN_PROGRESS** under Quorix (+75 active potential only).
+- D-083 program-infrastructure work is **IN_PROGRESS** under Strata and is not available for overlap.
+- Veyr and Nodus remain unclaimed/review-capable unless the Bulletin exposes a new eligible READY task.
 
-**Role realignment outcome:** OR-014 transferred D-068 from Nodus to Veyra; Veyra completed D-068, the green checkpoint passed, and D-064 is now DONE on semantic authority. D-069 is therefore the next READY gameplay primary for Veyra.
+**Transition note:** D-064 is DONE. Final PR #70/run #362 is green and merged as `d7ebb7ca439695e256a429a1e5d160daae69a521`; evidence, Learning Ledger, D-064-B and CPR-002 resolution are synchronized. Veyra has already won and started D-069.
 
-**Transition note:** D-064 is DONE. Final PR #70/run #362 is green and merged as `d7ebb7ca439695e256a429a1e5d160daae69a521`; evidence, Learning Ledger, D-064-B and CPR-002 resolution are recorded. D-069 is unlocked for Veyra.
-
-**D-080 note:** DONE by Veyr. The Learning Ledger now contains first-wave records for Nodus, Veyra, Kestrel and Veyr plus a validated fast-path navigation audit. Future primary tasks should append compact task-local learning records rather than reopen D-080 for documentation volume.
+**D-080 note:** DONE by Veyr. The Learning Ledger contains first-wave records for Nodus, Veyra, Kestrel and Veyr plus a validated fast-path navigation audit. Future primary tasks should append compact task-local learning records rather than reopen D-080 for documentation volume.
 
 ## Bonus board
 Verified bonuses currently scored: **D-064-B +20** (Kestrel actor equivalence/redaction), **D-066-B +20** (Veyra deterministic progression replay), **D-067-B +20** (Nodus invalid-equip rollback), **D-068-B +20** (Veyra activity interruption/atomicity), **D-075-B +20** (Veyr normalized branch-difference fixture), **P3/D-045 +20** (Veyra dependency map), and **P4/D-046 +20** (Veyra ownership-audit automation).
