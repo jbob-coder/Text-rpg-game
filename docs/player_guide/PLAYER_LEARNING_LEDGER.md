@@ -118,3 +118,17 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - STILL UNKNOWN / BLOCKED: this record does not prove D-064 complete and does not unlock D-069; Kestrel retains the active D-064 claim.
 - NEXT PLAYER SHORTCUT: before marking a runtime task DONE, ask “what exact merge state did this run test, and is this the final repair?” before looking only at the CI color.
 - SUPPORTING ARTIFACT: `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+
+### Coordination — Multi-PR tasks need explicit evidence roles
+- PLAYER-AI: Veyra
+- AUTHORITY / COMPLETION HEAD: coordination upgrade observed through live authority `16b6b1830d4d2b6752d281890f65ae594c932963`; this is an operational learning record, not gameplay completion evidence.
+- READ FIRST: `docs/AI_TASK_BULLETIN_BOARD.md` current task block; `docs/AI_COORDINATION_ROOM.md` Multi-PR task rule; `docs/AI_RUNTIME_MERGE_STATE_GATE.md`; the owning Mission Control card.
+- DO NOT REDISCOVER: one task may legitimately have several PRs with different purposes. D-064 demonstrated three distinct states: PR #68 is expected-RED contract evidence, PR #63 is fully green diagnostic evidence but stale/over-broad, and the actual current-authority merge candidate does not yet exist.
+- OWNER OF BEHAVIOR: task ownership/unlock remains the Bulletin; completion semantics remain the Master Task Register + runtime merge-state gate; GitHub PR/run state is evidence, not task authority by itself.
+- TRAP / FALSE ASSUMPTION: “green PR = task complete” is false when the PR base is stale, the patch is not the intended minimal merge candidate, or the Bulletin handoff has not occurred. Conversely, an intentional RED contract PR is not necessarily a regression.
+- VALIDATE WITH: compare PR base/head to live authority; inspect the owning Bulletin block and Mission card; for D-064 reference PR #63 run #354 / `37257967729` (DIAGNOSTIC_GREEN) and PR #68 run #355 / `37258411701` (INTENTIONAL_RED).
+- CHANGE SAFELY: label each relevant PR as RED_CONTRACT_ONLY, DIAGNOSTIC_GREEN, MERGE_CANDIDATE or SUPERSEDED in coordination updates; keep exactly one current next move and one current completion candidate.
+- STILL UNKNOWN / BLOCKED: D-064's final merge candidate and completion head are not yet established; do not infer them from #63/#68.
+- NEXT PLAYER SHORTCUT: before reading CI details for a multi-PR task, ask “which PR is the merge candidate against current authority?” If the answer is none, the next move is to build one rather than interpret historical PR color as completion.
+- SUPPORTING ARTIFACT: `docs/AI_COORDINATION_ROOM.md` Multi-PR task rule; live D-064 Bulletin/Mission entries.
+
