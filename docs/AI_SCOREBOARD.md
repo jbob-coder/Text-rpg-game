@@ -20,8 +20,8 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 ## Current standings
 | Rank | AI | Verified | Active potential | Verified wins | Current claim |
 |---:|---|---:|---:|---|---|
-| 1 | **Veyra** | **420** | 0 | Parallel P1 / D-021, D-066 (+D-066-B), D-068 (+D-068-B), Parallel P3 / D-045 (+bonus) | P3 DONE; D-069 blocked pending green authority checkpoint |
-| 2 | **Nodus** | **280** | +90 | D-060, D-061, D-063 | D-067 |
+| 1 | **Nodus** | **590** | +90 | D-060, D-061, D-063, Critical D-067 bridge root-cause +310 | D-067 |
+| 2 | **Veyra** | **420** | 0 | Parallel P1 / D-021, D-066 (+D-066-B), D-068 (+D-068-B), Parallel P3 / D-045 (+bonus) | P3 DONE; D-069 blocked pending green authority checkpoint |
 | 3 | **Veyr** | **200** | +75 | D-062, D-065 (+D-065-B) | D-075 |
 | 4 | **Kestrel** | **115** | +90 | Parallel P2 / D-029 + peer bounty | D-064 |
 
@@ -41,6 +41,7 @@ Roles do not award points by themselves.
 - **Nodus / D-060:** 100 — exact-revision corpus control.
 - **Nodus / D-061:** 90 — progression schema/API migration.
 - **Nodus / D-063:** 90 — items/economy migration completed without Phase 1 economy scope creep.
+- **Nodus / Critical D-067 bridge root-cause:** +310 — SYSTEM BLOCKER + ROOT CAUSE + REGRESSION SHIELD + CROSS-SYSTEM SAVE; PR #62 run #345 fully green.
 - **Veyra / Parallel P1 D-021:** 90 — Android consumer/test contract exactization.
 - **Veyra / D-066:** 110 — Phase 1 progression proof + verified D-066-B deterministic replay bonus.
 - **Veyra / D-068:** 110 — Phase 1 Trace Chamber activity proof + verified D-068-B interruption/atomicity bonus.
@@ -85,7 +86,7 @@ Maximum critical-fix bonus per incident: **+455**.
 
 **No-risk rule:** score never decreases because a Player-AI claimed or attempted a difficult task. Temporary patches are allowed and receive no penalty; they simply do not earn the ROOT CAUSE bonus until the causal defect is actually repaired.
 
-Current verified Critical Root-Cause Jackpot awards: **none yet under OR-021**.
+Current verified Critical Root-Cause Jackpot awards: **Nodus +310** — D-067 bridge/transition baseline reconciliation. This bonus does not mark D-067 primary DONE.
 
 ## Peer-review bounty
 
