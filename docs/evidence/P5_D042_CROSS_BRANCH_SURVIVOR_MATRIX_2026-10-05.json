@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "task": "Parallel P5 / D-042",
+  "player_ai": "Quorix",
+  "audit_head": "f5c3731d0c494dd3948f88481a3d5b2d3d0f4138",
+  "audit_tree": "87f51737160050e5ed7f46b21932c838fd024e41",
+  "verification_boundary": "Source/branch archaeology only. No runtime, build, emulator, device, visual-canon promotion, merge, or asset modification claim.",
+  "recent_integration_ancestry": [
+    {
+      "task": "D-064",
+      "completion_head": "d7ebb7ca439695e256a429a1e5d160daae69a521",
+      "relation_to_audit_head": "ancestor",
+      "ahead_by": 31,
+      "behind_by": 0,
+      "disposition": "INHERITED_CURRENT_AUTHORITY"
+    },
+    {
+      "task": "D-065/D-068",
+      "completion_head": "e883205559c64d2e82614160bd6548c2c9332808",
+      "relation_to_audit_head": "ancestor",
+      "ahead_by": 317,
+      "behind_by": 0,
+      "disposition": "INHERITED_CURRENT_AUTHORITY"
+    },
+    {
+      "task": "D-067",
+      "completion_head": "0fd843a5ece0f87c74a262c7ecb6739d025b0678",
+      "relation_to_audit_head": "ancestor",
+      "ahead_by": 271,
+      "behind_by": 0,
+      "disposition": "INHERITED_CURRENT_AUTHORITY"
+    }
+  ],
+  "survivors": [
+    {
+      "pr": 27,
+      "head": "d19e6edba4dec5345f1365bb358084b9b77eb7d9",
+      "behavior": "Service Tunnel static scene refinement; procedural source master plus replacement runtime raster.",
+      "current_consumer": "PixelRasterCatalog.scene(\"SERVICE_TUNNEL\") -> pixel_service_tunnel_default_scene.png -> SceneIllustration raster-first draw; PixelSceneCatalog.serviceTunnelDefault is fallback geometry.",
+      "authority_match": false,
+      "disposition": "DEFERRED_MIGRATION_CANDIDATE_D029",
+      "migration_consumer": "D-029 asset provenance/equivalence and later presentation integration",
+      "rationale": "PR source and raster blobs differ from authority. Because the raster is the primary current rendering path, cherry-picking only PixelSceneCatalog would not promote the visible scene. Migrate source+raster as one provenance/equivalence unit only after visual approval."
+    },
+    {
+      "pr": 28,
+      "head": "b5cb510408331446ec3fdfbc6ec188b8a5516c15",
+      "behavior": "Adds Service Tunnel infrastructure-atlas detail strip below PixelEnvironmentArrivalPreview.",
+      "current_consumer": "PixelEnvironmentArrivalPreview currently consumes only PixelEnvironmentModuleCatalog.arrivalPreview(locationId); no arrivalDetailTiles consumer exists on authority.",
+      "authority_match": false,
+      "disposition": "DEFERRED_PRESENTATION_CANDIDATE",
+      "migration_consumer": "D-029 for atlas provenance; D-077/future V11 Android UX only if the arrival-preview composition survives final UX",
+      "rationale": "Unique behavior is absent from authority and is presentation-only. No current contract requires the extra strip, so retain as evidence rather than importing it."
+    },
+    {
+      "pr": 30,
+      "head": "7adacd474ae22908bba2fc72247f500312ea7483",
+      "behavior": "Quiet Stair / EVAC_STAIR static scene refinement; procedural source master plus replacement runtime raster.",
+      "current_consumer": "PixelRasterCatalog.scene(\"EVAC_STAIR\") -> pixel_evac_stair_default_scene.png -> SceneIllustration raster-first draw; PixelSceneCatalog.evacStairDefault is fallback geometry.",
+      "authority_match": false,
+      "disposition": "DEFERRED_MIGRATION_CANDIDATE_D029",
+      "migration_consumer": "D-029 asset provenance/equivalence and later presentation integration",
+      "rationale": "PR source and raster blobs differ from authority. The pair must be reviewed and migrated together; current art/canon authority does not justify promotion from branch age alone."
+    },
+    {
+      "pr": 31,
+      "head": "19807863e3d68cd3ffad0e627ad19130da9bdbed",
+      "behavior": "Service Tunnel fan/panel/drip ambient animation tracks and SceneIllustration playback.",
+      "current_consumer": "No PixelAmbientAnimationCatalog or ambient-animation tests exist on authority; intended consumer is SceneIllustration.",
+      "authority_match": false,
+      "disposition": "REIMPLEMENT_BEFORE_MIGRATION",
+      "migration_consumer": "D-077/future presentation integration after D-029 static-scene survivor decision",
+      "rationale": "Unique behavior is valuable but PR #31 lacks required reduced-motion behavior. Current standard requires restrained loops and reduced-motion behavior; PR tests prove track bounds and visible advancement only. Do not merge as-is."
+    }
+  ],
+  "stale_authority_findings": [
+    {
+      "file": "docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md",
+      "finding": "Section 12 still lists D-020 cross-branch migration matrix and D-044 PR #33 Class-C extraction as remaining even though both are already completed in live authority.",
+      "disposition": "UPDATE_STALE_REMAINDER"
+    }
+  ]
+}
