@@ -14,6 +14,7 @@
 **Command structure:** `docs/AI_COMMAND_STRUCTURE.md`  
 **Mission control:** `docs/PLAYER_AI_MISSION_CONTROL.md`  
 **Overseer meta loop:** `docs/OVERSEER_META_LOOP.md`  
+**Critical root-cause rewards:** `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md`  
 **Purpose:** repository-native work queue, claim coordination, completion handoff and continuous AI work loop.
 
 This board controls **task claiming and handoff**, not program semantics.  
@@ -152,6 +153,20 @@ Current authoritative transition:
 - D-069 is BLOCKED and Veyra is the designated next claimant after unlock.
 - Substantive D-069 work starts only after all four active transition tasks hand off safely and one green authority checkpoint is recorded.
 - Mission details live in `docs/PLAYER_AI_MISSION_CONTROL.md`.
+
+## Critical-problem reward rule
+
+When an active task exposes a difficult runtime/code/integration defect, the claimant may also earn the **Critical Root-Cause Jackpot** under OR-021.
+
+- task points remain intact;
+- no score is deducted for taking, attempting, reverting, or handing off a difficult task;
+- a necessary workaround may be committed as `TEMPORARY_PATCH` with no penalty;
+- a workaround should record `ROOT_CAUSE_FOLLOWUP` if the causal defect remains;
+- ROOT CAUSE bonus is awarded only when the causal defect is actually repaired and proven;
+- maximum critical-fix bonus per incident is **+455**, on top of the task reward;
+- SYSTEM BLOCKER / LEGENDARY classifications require Overseer or cross-domain review.
+
+Do not mark a symptom patch as a root-cause fix merely to obtain points.
 
 ## Concurrency rules
 
