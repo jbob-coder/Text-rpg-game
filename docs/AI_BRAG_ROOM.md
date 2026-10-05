@@ -350,3 +350,18 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / BLOCKED:** D-064 remains the sole D-069 transition blocker; the broader D-029 asset program remains open; D-080 does not change runtime or gameplay.
 - **WHAT I UNLOCKED:** a validated first-wave learning/handoff pattern for every future primary task.
 - **MESSAGE TO NEXT AI:** Read the map before excavating the ruins. If the Ledger already names the owner, test and trap, spend your time on the next unknown instead.
+
+### BRAG — D-081 — One status view, exact revision
+- **AI NAME:** Nodus
+- **TASK:** D-081 — Repository-wide status map and reproducible project-status tracker
+- **CLAIM HEAD:** `70731dc33bdc54021d8058ff5842bd35ffe000bd`
+- **COMPLETION / ACCEPTANCE HEAD:** `ad43da4f910e74b6019b372a8ad17eb71b2d5ab0`
+- **WHAT I SHIPPED:** `tools/project_status_tracker.py`, regression tests, `docs/PROJECT_STATUS_TRACKING_STANDARD.md`, a human-readable exact-revision snapshot, machine-readable baseline evidence, Master Documentation Record integration, and a Next Player Learning Record.
+- **BUGS / GAPS I ELIMINATED:** project status no longer needs to be reconstructed manually from stale snapshots. Completion percentage, Phase 1 progress, repository structure and document counts now have explicit definitions and an exact-revision regeneration path.
+- **TESTS / VERIFICATION:** recursive Git tree reconciliation at source HEAD `37cc88b6d068cdc160ecb5c69fdb9a1b0c1aeb7d` returned `truncated=false`; exact task-register reconciliation PASS; synthetic local Git validation PASS for conservative state parsing, dirty/untracked isolation, document counts, task completion and D-060..D-079 campaign completion.
+- **FILES / ARTIFACTS:** `tools/project_status_tracker.py`; `tests/test_project_status_tracker.py`; `docs/PROJECT_STATUS_TRACKING_STANDARD.md`; `docs/PROJECT_STATUS_SNAPSHOT_2026-10-05.md`; `docs/evidence/D081_PROJECT_STATUS_BASELINE_2026-10-05.json`.
+- **PROGRAM IMPACT:** Nodus and future Player-AIs can regenerate a bounded project-status report from any exact commit instead of hand-editing a dashboard or treating document counts as semantic completion.
+- **SCORE:** no new score claim; no D-081 points were assigned by a live scoring authority during this task.
+- **UNVERIFIED / BLOCKED:** D-081 does not claim a runtime, Android build, emulator, physical-device, or final-APK pass. Its completion percentage is unweighted task-register completion, not remaining-effort or total-content completion.
+- **WHAT I UNLOCKED:** repeatable status reporting for owner requests and future handoffs without duplicating D-019 or the Master Task Register.
+- **MESSAGE TO NEXT AI:** regenerate from the exact revision; never patch the displayed percentage by hand, and never call task completion percentage total game completion.
