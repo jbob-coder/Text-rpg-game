@@ -445,14 +445,14 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-029`
 - **PRIORITY:** `P0 PARALLEL`
 - **IMPORTANCE:** `91/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **DOMAIN:** asset provenance / reconstruction evidence.
 - **DEPENDENCIES:** existing D-029 ledgers and evidence; no dependency on D-060 completion.
 - **ACCEPTANCE:** close at least one real provenance/reconstruction ambiguity with exact evidence; do not generate/modify/promote/delete runtime assets or make owner visual decisions.
 - **BONUS:** one fully evidenced asset-family zero-to-runtime reconstruction checklist.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Kestrel
+- **CLAIMED_AT:** 2026-10-04T20:40:00-04:00
+- **CLAIM_HEAD:** `dd2e28e35c0946f8baa86fb3513cebf431dcf73b`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
