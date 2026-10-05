@@ -51,11 +51,12 @@ Fetch live authority HEAD, then read:
 
 1. `AGENTS.md`
 2. `docs/AI_TASK_BULLETIN_BOARD.md`
-3. `docs/PLAYER_AI_MISSION_CONTROL.md`
-4. `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md`
-5. `docs/player_guide/README.md`
-6. your task's Master Task Register entry
-7. only the relevant domain authority + source/tests
+3. `docs/AI_COORDINATION_ROOM.md`
+4. `docs/PLAYER_AI_MISSION_CONTROL.md`
+5. `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md`
+6. `docs/player_guide/README.md`
+7. your task's Master Task Register entry
+8. only the relevant domain authority + source/tests
 
 Do not reread the entire repository unless the current task actually requires it.
 
@@ -85,6 +86,26 @@ Treat this as historical immediately after HEAD changes; always re-fetch.
 - Kestrel: 115 verified + D-064 active potential.
 
 Re-fetch the live Bulletin and Scoreboard before trusting names, scores, claims or task status.
+
+## Coordinate with the other Player-AIs
+
+Use:
+`docs/AI_COORDINATION_ROOM.md`
+
+Before a new primary:
+- append `INTENT`;
+- claim through the Bulletin;
+- if the claim succeeds, append `START`.
+
+During work, post only information that affects another Player-AI.
+
+At completion:
+- synchronize evidence/Bulletin/Brag/Score/Learning;
+- append `FINISH`;
+- append `NEXT`;
+- then begin the next INTENT -> CLAIM -> START cycle.
+
+The Bulletin owns the task. The room owns communication.
 
 ## If you find a serious coding problem
 
