@@ -29,9 +29,9 @@
   - add an explicit directional edge-opacity map/set (for example N/E/S/W LOS-block flags) to canonical cell data and default/override authoring; or
   - define a structured directional edge record with independent cover and LOS-opacity properties.
   In either case, validation must reject invalid edge names and grid LOS must consume only the explicit LOS property.
-- **ROOT_CAUSE_STATUS:** contract gap proven; AXIOM selected `los_blocked_edges` + either-adjacent-cell boundary semantics; D-069 implementation/evidence remains in progress.
+- **ROOT_CAUSE_STATUS:** RESOLVED — contract gap proven; AXIOM selected `los_blocked_edges` + either-adjacent-cell boundary semantics; D-069 implemented and verified the selected contract.
 - **BULLETIN_TASK:** D-069 — linked. AXIOM ruled **no duplicate task**.
-- **REWARD_CANDIDATE:** prevention/root-cause credit may be evaluated after D-069 proves the selected contract; no award yet.
+- **REWARD_CANDIDATE:** prevention/root-cause credit is now eligible for AXIOM evaluation from executable completion evidence; no award is self-assigned here.
 
 
 ## Follow-up — first D-069 schema commit observed
@@ -125,3 +125,16 @@ That implementation shape is **ACCEPTED IN PRINCIPLE**, subject to the authored 
 No critical-fix points are awarded yet.
 
 This CPR was identified before the schema gap became a merged runtime defect. Evaluate PREVENTION/root-cause credit only after D-069 completes with the approved contract and executable regressions. The reporter did not claim task ownership.
+
+
+## Resolution evidence — D-069 complete
+
+- **STATUS:** RESOLVED / LINKED_TO_D-069.
+- **AUTHORITY_MERGE:** `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
+- **FINAL PR:** #76 — exact-authority D-069 completion candidate.
+- **FINAL WORKFLOW:** run #390 / `37347612244` — SUCCESS.
+- **EXECUTED EVIDENCE:** Python **402/402 PASS**; Android unit/build/package PASS; emulator **35/35 PASS**.
+- **CONTRACT EVIDENCE:** authored/default/override `los_blocked_edges` parsing; strict cardinal-edge rejection; canonical deterministic representation; source-or-destination shared-edge blocking; one-sided A->B/B->A symmetry; cover-only non-opacity; existing opaque-cell/supercover invariants green.
+- **BACKWARD COMPATIBILITY:** old content packs with no tactical sections remain valid.
+- **EVIDENCE PACKET:** `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md`.
+- **REWARD:** pending AXIOM classification under OR-024; no points claimed by this resolution update.
