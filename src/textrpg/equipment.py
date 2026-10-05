@@ -69,6 +69,62 @@ DEFAULT_SLOTS = (
 )
 
 
+def validate_item_definition(item_id: str, item: Mapping[str, Any]) -> None:
+    """Validate the current authored item/equipment definition shape."""
+    if not isinstance(item_id, str) or not item_id:
+        raise RuleError("Item definition requires a non-empty item_id")
+    if not isinstance(item, Mapping):
+        raise RuleError(f"Item definition must be an object: {item_id}")
+
+    label = item.get("label")
+    if label is not None and (not isinstance(label, str) or not label):
+        raise RuleError(f"Item label must be non-empty text: {item_id}")
+
+    slot = item.get("slot")
+    if slot is not None and slot not in DEFAULT_SLOTS:
+        raise RuleError(f"Unsupported equipment slot: {slot}")
+
+    quality = item.get("quality")
+    if quality is not None and (not isinstance(quality, str) or not quality):
+        raise RuleError(f"Item quality must be non-empty text: {item_id}")
+
+    try:
+        validate_modifier_mapping(
+            item.get("modifiers", {}),
+            source=f"item_definition:{item_id}",
+        )
+    except ValueError as exc:
+        raise RuleError(f"Invalid equipment modifiers for {item_id}: {exc}") from exc
+
+    _validate_requirements(item_id, item.get("requirements", {}))
+
+    set_id = item.get("set_id")
+    if set_id is not None and (not isinstance(set_id, str) or not set_id):
+        raise RuleError(f"Equipment set_id must be a non-empty string: {item_id}")
+
+    tags = item.get("tags", [])
+    if not isinstance(tags, list) or not all(isinstance(tag, str) and tag for tag in tags):
+        raise RuleError(f"Equipment tags must be a list of non-empty strings: {item_id}")
+
+    passive_perks = item.get("passive_perks", [])
+    if not isinstance(passive_perks, list) or not all(
+        isinstance(perk_id, str) and perk_id for perk_id in passive_perks
+    ):
+        raise RuleError(
+            f"Equipment passive_perks must be a list of non-empty strings: {item_id}"
+        )
+
+    active_ability = item.get("active_ability")
+    if active_ability is not None and (
+        not isinstance(active_ability, str) or not active_ability
+    ):
+        raise RuleError(f"Equipment active_ability must be non-empty text: {item_id}")
+
+    source = item.get("source")
+    if source is not None and (not isinstance(source, str) or not source):
+        raise RuleError(f"Item source must be non-empty text: {item_id}")
+
+
 def equip_item(
     state: GameState,
     item: Mapping[str, Any],
