@@ -58,7 +58,16 @@ class AndroidGameSession:
     def _room_view_for(self, state: GameState) -> Dict[str, Any]:
         """Project authored visible presence without exposing durable NPC internals."""
         scene = self.engine.get_scene(state)
-        return build_room_projection(scene, self._location_for(state))
+        location_id = self._location_for(state)
+        authored_location = scene.get("location_id")
+        if isinstance(authored_location, str) and authored_location != location_id:
+            # Map-only travel can move to a discovered location without switching
+            # narrative scenes. Never project actors from the stale scene there.
+            return build_room_projection(
+                {"location_id": location_id, "actors": []},
+                location_id,
+            )
+        return build_room_projection(scene, location_id)
 
     def _status_view_for(self, state: GameState) -> Dict[str, Any]:
         registries = self.content.registries
@@ -253,17 +262,130 @@ class AndroidGameSession:
         except AndroidBridgeError: self.state = GameState(**before); raise
         except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("EQUIP_ERROR", "That item could not be unequipped.", technical_detail=str(exc)) from exc
 
-    def save(self) -> Dict[str, Any]:
-        if self._save_path is None: raise AndroidBridgeError("SAVE_ERROR", "No save destination is configured.")
-        try: save_state(self._save_path, self.state); return self.scene_view()
-        except (OSError, RuleError, TypeError, ValueError) as exc: raise AndroidBridgeError("SAVE_ERROR", "The game could not be saved.", technical_detail=str(exc)) from exc
+    def apply_cheat(self, code: str) -> Dict[str, Any]:
+        """Apply an explicit developer cheat without exposing generic state mutation."""
+        if not isinstance(code, str) or not code.strip():
+            raise AndroidBridgeError("CHEAT_ERROR", "Enter a valid cheat code.")
 
-    def load(self) -> Dict[str, Any]:
-        if self._save_path is None: raise AndroidBridgeError("LOAD_ERROR", "No save destination is configured.")
-        try: self.state = load_state(self._save_path); return self.scene_view()
-        except (OSError, RuleError, TypeError, ValueError) as exc: raise AndroidBridgeError("LOAD_ERROR", "The saved game could not be loaded.", technical_detail=str(exc)) from exc
+        normalized = code.strip().upper()
+        before = deepcopy(self.state.snapshot())
+        try:
+            if normalized == "FULLRESTORE":
+                resources = self.state.player.setdefault("resources", {})
+                if not isinstance(resources, dict):
+                    raise RuleError("player.resources must be mutable")
+                for resource in self._status_view_for(self.state)["resources"]:
+                    resources[resource["id"]] = resource["max"]
+            elif normalized == "CLEARCONDITIONS":
+                self.state.player["conditions"] = {}
+            elif normalized == "GIVE_RELAY":
+                current = self.state.inventory.get("ITEM_DEAD_RELAY", 0)
+                if isinstance(current, bool) or not isinstance(current, int) or current < 0:
+                    raise RuleError(
+                        "ITEM_DEAD_RELAY inventory quantity must be a non-negative integer"
+                    )
+                self.state.inventory["ITEM_DEAD_RELAY"] = current + 1
+            elif normalized == "MAXATTR":
+                attributes = self.state.player.setdefault("attributes", {})
+                if not isinstance(attributes, dict):
+                    raise RuleError("player.attributes must be mutable")
+                for attribute in self._status_view_for(self.state)["attributes"]:
+                    attributes[attribute["id"]] = 100
+            elif normalized == "DEBUGMAP":
+                self.state.flags["android_debug.discover_all_map"] = True
+            elif normalized == "DISTRICT":
+                if "DISTRICT_HUB" not in self.engine.scenes:
+                    raise RuleError("DISTRICT cheat requires DISTRICT_HUB content")
+                self.state.flags["world.free_roam_unlocked"] = True
+                self.state.flags["vertical_slice_01.opening_complete"] = True
+                self.state.flags.pop("android.map_location_override", None)
+                self.state.scene_id = "DISTRICT_HUB"
+            else:
+                raise AndroidBridgeError(
+                    "CHEAT_ERROR",
+                    "Unknown cheat code.",
+                    technical_detail=f"Unsupported cheat code: {normalized}",
+                )
+
+            self.state.history.append(
+                {
+                    "type": "cheat_applied",
+                    "code": normalized,
+                    "turn": self.state.turn,
+                    "time_minutes": self.state.time_minutes,
+                }
+            )
+            return self.scene_view()
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError(
+                "CHEAT_ERROR",
+                "The cheat code could not be applied.",
+                technical_detail=str(exc),
+            ) from exc
+
+    def _resolve_save_path(self, path: str | Path | None) -> Path:
+        resolved = Path(path) if path is not None else self._save_path
+        if resolved is None:
+            raise AndroidBridgeError(
+                "SAVE_PATH_REQUIRED",
+                "No save location is configured.",
+            )
+        return resolved
+
+    def save(self, path: str | Path | None = None) -> None:
+        """Persist authoritative state through the versioned save contract."""
+        target = self._resolve_save_path(path)
+        try:
+            save_state(target, self.state)
+        except (OSError, RuleError, TypeError, ValueError) as exc:
+            raise AndroidBridgeError(
+                "SAVE_ERROR",
+                "The game could not be saved.",
+                technical_detail=str(exc),
+            ) from exc
+
+    def load(self, path: str | Path | None = None) -> Dict[str, Any]:
+        """Load transactionally; invalid saves never replace live state."""
+        target = self._resolve_save_path(path)
+        try:
+            candidate = load_state(target)
+            self.engine.get_scene(candidate)
+            candidate_view = self._view_for(candidate)
+        except (OSError, RuleError, TypeError, ValueError) as exc:
+            raise AndroidBridgeError(
+                "LOAD_ERROR",
+                "The saved game could not be loaded.",
+                technical_detail=str(exc),
+            ) from exc
+
+        self.state = candidate
+        return deepcopy(candidate_view)
 
 
-def open_android_session(content_path: str | Path, *, save_path: str | Path | None = None) -> AndroidGameSession:
-    try: return AndroidGameSession(load_content_pack(content_path), save_path=save_path)
-    except (OSError, RuleError, TypeError, ValueError) as exc: raise AndroidBridgeError("CONTENT_ERROR", "Game content could not be loaded.", technical_detail=str(exc)) from exc
+def create_session(
+    content_path: str | Path,
+    save_path: str | Path | None = None,
+) -> AndroidGameSession:
+    """Load one authored content pack and create the stable Android-facing facade."""
+    try:
+        content = load_content_pack(content_path)
+    except (OSError, RuleError, TypeError, ValueError) as exc:
+        raise AndroidBridgeError(
+            "CONTENT_ERROR",
+            "Game content could not be loaded.",
+            technical_detail=str(exc),
+        ) from exc
+    return AndroidGameSession(content, save_path=save_path)
+
+
+def open_android_session(
+    content_path: str | Path,
+    *,
+    save_path: str | Path | None = None,
+) -> AndroidGameSession:
+    """Compatibility alias retained for room-projection integration."""
+    return create_session(content_path, save_path=save_path)
