@@ -50,6 +50,7 @@ class BridgeStatusMapperTest {
         assertEquals("physical", snapshot.skills.single().category)
         assertEquals("max_health", snapshot.derived.single().id)
         assertEquals("damaged", snapshot.visuals.relayState)
+        assertTrue(snapshot.abilities.isEmpty())
     }
 
     @Test
@@ -167,4 +168,120 @@ class BridgeStatusMapperTest {
 
         assertTrue(failure is IllegalArgumentException)
     }
+
+    @Test
+    fun playerSafeAbilityProgressionMapsIntoTypedSnapshot() {
+        val payload = mapOf(
+            "scene" to mapOf(
+                "id" to "SCENE",
+                "title" to "Scene",
+                "body" to "Body",
+                "choices" to emptyList<Any>(),
+            ),
+            "status" to mapOf(
+                "resources" to emptyList<Any>(),
+                "abilities" to listOf(
+                    mapOf(
+                        "id" to "ABILITY_TRACE_ECHO",
+                        "name" to "Trace Echo",
+                        "rank" to 0,
+                        "mastery_stage" to "discovered",
+                        "mastery_xp" to 2.8,
+                        "form" to "latent_trace",
+                        "state" to "ready",
+                        "resource" to mapOf(
+                            "label" to "Trace Resonance",
+                            "current" to 10.0,
+                            "max" to 10.0,
+                            "recovery_per_hour" to 2.0,
+                        ),
+                        "techniques" to listOf(
+                            mapOf(
+                                "technique_id" to "TECHNIQUE_SIGNAL_PULSE",
+                                "name" to "Signal Pulse",
+                                "stage" to "discovered",
+                                "mastery_xp" to 8.0,
+                                "uses" to 0,
+                                "ready" to true,
+                                "cooldown_remaining_minutes" to 0,
+                            )
+                        ),
+                        "completed_evolutions" to emptyList<String>(),
+                    )
+                ),
+            ),
+            "meta" to mapOf("turn" to 7, "time_minutes" to 60, "location" to "TRACE_CHAMBER"),
+        )
+
+        val ability = BridgeSnapshotMapper.fromMap(payload).abilities.single()
+
+        assertEquals("ABILITY_TRACE_ECHO", ability.id)
+        assertEquals("Trace Echo", ability.name)
+        assertEquals(2.8, ability.masteryXp, 0.0)
+        assertEquals(10.0, ability.resource?.current ?: -1.0, 0.0)
+        assertEquals("TECHNIQUE_SIGNAL_PULSE", ability.techniques.single().id)
+        assertEquals(8.0, ability.techniques.single().masteryXp, 0.0)
+    }
+
+    @Test
+    fun malformedAbilityProgressionIsRejected() {
+        val payload = mapOf(
+            "scene" to mapOf(
+                "id" to "SCENE",
+                "title" to "Scene",
+                "body" to "Body",
+                "choices" to emptyList<Any>(),
+            ),
+            "status" to mapOf(
+                "resources" to emptyList<Any>(),
+                "abilities" to listOf(
+                    mapOf(
+                        "id" to "ABILITY_TRACE_ECHO",
+                        "name" to "Trace Echo",
+                        "rank" to 0,
+                        "mastery_stage" to "discovered",
+                        "mastery_xp" to -1.0,
+                        "state" to "ready",
+                    )
+                ),
+            ),
+            "meta" to mapOf("turn" to 0, "time_minutes" to 0, "location" to "CITY"),
+        )
+
+        val failure = runCatching { BridgeSnapshotMapper.fromMap(payload) }.exceptionOrNull()
+
+        assertTrue(failure is IllegalArgumentException)
+    }
+
+    @Test
+    fun authoredAbilityRequirementsCannotCrossTypedBridge() {
+        val payload = mapOf(
+            "scene" to mapOf(
+                "id" to "SCENE",
+                "title" to "Scene",
+                "body" to "Body",
+                "choices" to emptyList<Any>(),
+            ),
+            "status" to mapOf(
+                "resources" to emptyList<Any>(),
+                "abilities" to listOf(
+                    mapOf(
+                        "id" to "ABILITY_TRACE_ECHO",
+                        "name" to "Trace Echo",
+                        "rank" to 0,
+                        "mastery_stage" to "discovered",
+                        "mastery_xp" to 0.0,
+                        "state" to "ready",
+                        "requirements" to mapOf("secret" to true),
+                    )
+                ),
+            ),
+            "meta" to mapOf("turn" to 0, "time_minutes" to 0, "location" to "CITY"),
+        )
+
+        val failure = runCatching { BridgeSnapshotMapper.fromMap(payload) }.exceptionOrNull()
+
+        assertTrue(failure is IllegalArgumentException)
+    }
+
 }
