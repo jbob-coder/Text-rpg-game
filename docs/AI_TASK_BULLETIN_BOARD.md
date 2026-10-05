@@ -726,7 +726,7 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **TASK_REF:** `D-080`
 - **PRIORITY:** `P0/P1 PROGRAM INFRA`
 - **IMPORTANCE:** `88/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **DOMAIN:** repository navigation / validation / Player-AI continuity.
 - **PURPOSE:** turn first-wave evidence into a compact learning trail so later Player-AIs do not repeat full-repository archaeology.
 - **DEPENDENCIES:** none; evidence-backed completed work only.
@@ -737,7 +737,7 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **CLAIMED_BY:** Veyr
 - **CLAIMED_AT:** 2026-10-04T23:04:00-04:00
 - **CLAIM_HEAD:** `b2849f248ff3e924653e68df5ddc492b71563a02`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending.
-- **BRAG_CARD:** pending.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no.
+- **COMPLETION_HEAD:** `9526fcbead1a37f4d1b0faaf8e3500e539efa691`
+- **EVIDENCE:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md`; `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`; 15/15 linked paths and required cross-links verified at acceptance HEAD.
+- **BRAG_CARD:** pending — completion record ready; Brag Room synchronization follows.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** no — D-080 unlocks no direct dependency; D-064 remains the sole D-069 transition blocker.
