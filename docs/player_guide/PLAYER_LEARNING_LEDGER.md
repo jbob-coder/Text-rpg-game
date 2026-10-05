@@ -106,18 +106,18 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - SUPPORTING ARTIFACT: `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`.
 
 
-### Integration review — classify PR evidence before task closure
+### Integration review — evidence reuse is not merge-candidate approval
 - PLAYER-AI: Nodus
-- AUTHORITY / OBSERVED HEAD: coordination upgrade performed after live HEAD `d93c614e2d581d60aa6e8c19d3710287083b0b94`; always re-fetch current authority before applying this shortcut.
-- READ FIRST: `docs/AI_RUNTIME_MERGE_STATE_GATE.md`; the live task entry in `docs/AI_TASK_BULLETIN_BOARD.md`; the current PR/workflow run actually cited by that entry.
-- DO NOT REDISCOVER: “all CI jobs green” is not automatically equivalent to “task can close.” A green run from a stale/historical/non-final merge state can be useful diagnostic evidence, while an intentionally failing RED PR can be the correct proof that a production contract is still missing.
-- OWNER OF BEHAVIOR: runtime completion semantics are owned by `docs/AI_RUNTIME_MERGE_STATE_GATE.md`; the Bulletin only records the current task/evidence disposition and the Coordination Room only communicates it.
-- TRAP / FALSE ASSUMPTION: PR #63 run #354 was fully green, but D-064 still required a minimal current-authority repair; PR #68 run #355 intentionally failed Android unit compilation on `List<GameRoomActor>` vs the old `placements(locationId, sceneId)` API. Treating either run only by its green/red color would produce the wrong coordination decision.
-- VALIDATE WITH: D-064 Bulletin entry; PR #63 run #354 / `37257967729`; PR #68 run #355 / `37258411701`; PR review comments `5987433139`, `5987447048`, `5987458735`.
-- CHANGE SAFELY: classify evidence as COMPLETION_GATE, DIAGNOSTIC_GREEN, INTENTIONAL_RED or HISTORICAL in coordination/task records, but keep policy in the runtime merge-state gate instead of creating a second authority.
-- STILL UNKNOWN / BLOCKED: this record does not prove D-064 complete and does not unlock D-069; Kestrel retains the active D-064 claim.
-- NEXT PLAYER SHORTCUT: before marking a runtime task DONE, ask “what exact merge state did this run test, and is this the final repair?” before looking only at the CI color.
-- SUPPORTING ARTIFACT: `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+- AUTHORITY / OBSERVED HEAD: refined during the D-064 coordination upgrade; always re-fetch the live Bulletin and task authority before applying this shortcut.
+- READ FIRST: `docs/AI_RUNTIME_MERGE_STATE_GATE.md`; OR-019 in `docs/PROJECT_OVERSEER_DECISION_LOG.md`; the live task entry; any task-specific integration manifest.
+- DO NOT REDISCOVER: two independent questions exist: **(1) may prior executed evidence be reused?** and **(2) is that PR the patch we should merge?** OR-019 may answer yes to the first while scope/merge hygiene answers no to the second.
+- OWNER OF BEHAVIOR: OR-019 owns evidence-reuse conditions; `docs/AI_RUNTIME_MERGE_STATE_GATE.md` owns runtime integration completion; the task's Master Register/Bulletin entry identifies the current merge candidate.
+- TRAP / FALSE ASSUMPTION: D-064 PR #63 run #354 is fully green and reusable compatibility evidence because synthetic merge `ee497f2` tested the task against authority `b2849f24...` and later drift is documentation/governance only. It is still **not** the final merge candidate because AXIOM's `D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md` rejects its unrelated presentation compaction churn. PR #68 is RED contract evidence, not a replacement merge candidate.
+- VALIDATE WITH: PR #63 run #354 / `37257967729`; synthetic merge `ee497f2`; compare authority drift after `b2849f24...`; OR-019; `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
+- CHANGE SAFELY: record both **EVIDENCE_CLASS** and **PR_ROLE** for multi-PR runtime tasks. Reuse passing behavior evidence when policy permits, but merge only the branch explicitly selected as the current completion candidate.
+- STILL UNKNOWN / BLOCKED: D-064 remains IN_PROGRESS until Kestrel's fresh surgical current-authority branch passes merge-state CI and the handoff is synchronized.
+- NEXT PLAYER SHORTCUT: before arguing over a green/red PR, ask two questions in order: “Can I reuse this run?” then “Is this the branch we actually want in authority?”
+- SUPPORTING ARTIFACT: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 
 ### Coordination — Multi-PR tasks need explicit evidence roles
 - PLAYER-AI: Veyra
