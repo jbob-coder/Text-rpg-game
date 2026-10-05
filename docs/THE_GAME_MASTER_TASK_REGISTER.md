@@ -1680,7 +1680,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - VERIFICATION_BOUNDARY: documentation/tooling status infrastructure only; no runtime, Android build, emulator, physical-device or final-APK pass is claimed.
 
 ### TASK D-082 — Full repository manifest and revision-delta tracking
-- STATUS: `IN_PROGRESS / OWNER-DIRECTED / CLAIMED BY NODUS`
+- STATUS: `DONE`
 - PRIORITY: `P0/P1 PROGRAM INFRA`
 - PURPOSE: extend D-081 so every tracked file is classifiable and revision-to-revision file/document changes can be reported exactly.
 - DEPENDS_ON: D-081 DONE.
@@ -1694,3 +1694,16 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - CLAIMED_BY: Nodus
 - CLAIMED_AT: `2026-10-05 AST`
 - CLAIM_HEAD: `515270b51fe61b8855fa3ac2e39016dc73e71bc0`
+- COMPLETION_HEAD: `9bb0a98b40bf2731d2e5aeb10e437b4671fa5a6e`
+- COMPLETED_AT: `2026-10-05 AST`
+- EVIDENCE:
+  - `docs/evidence/D082_FULL_REPOSITORY_MANIFEST_2026-10-05.json`;
+  - `docs/PROJECT_STATUS_TRACKING_STANDARD.md` §§10–11;
+  - `tests/test_project_status_tracker.py`;
+  - `docs/player_guide/PLAYER_LEARNING_LEDGER.md` D-082 record.
+- VALIDATION:
+  - exact recursive Git-tree reconciliation PASS with `truncated=false`;
+  - Python syntax PASS;
+  - synthetic Git full-manifest PASS;
+  - synthetic revision delta/task transition/completion movement PASS.
+- VERIFICATION_BOUNDARY: structural/status tooling only; no gameplay/runtime/Android/emulator/device/final-APK pass claimed.
