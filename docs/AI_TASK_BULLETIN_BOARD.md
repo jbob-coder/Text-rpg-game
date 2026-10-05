@@ -362,7 +362,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `96/100`
 - **STATUS:** `DONE`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Kestrel / D-064.
-- **CURRENT_PHASE:** `AUTHORITY MERGED / OWNER HANDOFF PENDING`.
+- **CURRENT_PHASE:** `DONE / AUTHORITY MERGED / HANDOFF COMPLETE`.
 - **NEXT_MOVE:** none for D-064 — handoff complete. Do not reopen without new regression evidence.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-030 contract/migration map.
@@ -372,7 +372,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** 2026-10-04T20:44:00-04:00
 - **CLAIM_HEAD:** `ad3511a86364d7a0345a5cc11ed08126523be120`
 - **COMPLETION_HEAD:** `d7ebb7ca439695e256a429a1e5d160daae69a521`
-- **EVIDENCE_CLASS:** `FINAL COMPLETION_GATE GREEN / AUTHORITY MERGED / HANDOFF PENDING`.
+- **EVIDENCE_CLASS:** `FINAL COMPLETION_GATE GREEN / AUTHORITY MERGED / HANDOFF COMPLETE`.
 - **FINAL_EVIDENCE:** `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`; PR #70/run #362; authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521`; Python 355/355 PASS; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`.
 - **LEARNING_RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `D-064 — Projected room actors replace presentation heuristics`.
 - **EVIDENCE:** PR #63 head `c8268ea25a79eed0631d22a7a70e625f022c38d3`; run #354 / `37257967729`; synthetic merge `ee497f2` = PR head into authority `b2849f248ff3e924653e68df5ddc492b71563a02`. Python 355/355 PASS; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`.
@@ -385,14 +385,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **PR #68:** `INTENTIONAL_RED / EVIDENCE-ONLY / DO NOT MERGE`; useful TDD proof for the old live-authority catalog signature. Its required equivalence expectations are already enumerated in the surgical manifest.
 - **PR #71:** `INTENTIONAL_RED / LIVE-AUTHORITY TEST SPEC / QUALITY FIX REQUIRED`; run #360 Android compile RED is valid, but the new Python source-contract free functions were not discovered by `unittest` (Python remained 352 tests) and two unrelated catalog regressions were removed. Correct per PR #71 comment `5987899292` before treating #71 as final RED evidence.
 - **OVERLAP_WARNING:** Kestrel owns D-064 runtime/test edits. Nodus/Veyra/Veyr should review only unless Kestrel explicitly requests a bounded change. Do not independently edit `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt`, or D-064 tests.
-- **ACTIVE_BRANCH_AUDIT:** PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff` is now integrated on authority by merge commit `d7ebb7ca439695e256a429a1e5d160daae69a521`. Run #362 was fully green: Python **355/355**, Android unit/build/package PASS, emulator smoke/screenshots PASS, APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`. No technical D-064 implementation gate remains; task remains IN_PROGRESS only until Kestrel completes the mandatory repository-native handoff.
+- **ACTIVE_BRANCH_AUDIT:** PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff` is integrated on authority by merge commit `d7ebb7ca439695e256a429a1e5d160daae69a521`. Run #362 was fully green: Python **355/355**, Android unit/build/package PASS, emulator smoke/screenshots PASS, APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`. Evidence, Learning Ledger, Coordination FINISH, Brag, Scoreboard and task-state handoff are complete.
 - **CODE_PROBLEM:** `CPR-002` — **ACCEPTED / 74/100 CRITICAL / CAUSAL REPAIR GREEN ON AUTHORITY**. RED: PR #69 run #357. Behavioral GREEN: PR #69 run #359. Clean final-candidate GREEN: PR #70 run #362. The minimal strict-key repair is now integrated by authority merge `d7ebb7ca...`; root-cause reward disposition remains AXIOM-owned.
 - **OPEN_PR_HYGIENE:** PR #70 is the sole completion branch and is GREEN at run #362. PR #63/#68/#69/#71 remain compatibility/RED/reference evidence only and must not displace the final candidate.
-- **CPR:** `CPR-002` — causal repair is GREEN on run #362 and present on authority merge `d7ebb7ca...`. Technical root-cause integration is verified; task closure/reward bookkeeping remain pending Kestrel/AXIOM handoff.
-- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-064 — The room projection finally owns the actors`. — required before DONE.
+- **CPR:** `CPR-002` — RESOLVED / 74/100 CRITICAL. RED run #357, behavioral GREEN run #359, clean final GREEN run #362, authority integration `d7ebb7ca...`; Kestrel +235 critical-fix award and Veyr +10 peer FIND are synchronized.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-064 — The room projection finally owns the actors`.
 - **SURGICAL_MANIFEST:** `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 - **FINAL_EXECUTION_NOTE:** Coordination Room `REVIEW RESPONSE — AXIOM — D-064 final three-edit execution gate`; PR #70 comment `5987858442`.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-069 remains the existing dependent and must be promoted to READY for Veyra immediately after D-064 handoff is synchronized DONE.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-069 was unlocked and is now claimed IN_PROGRESS by Veyra.
 
 ### Rank 6 — D-065 — Tamsin durable-memory reactive proof
 - **TASK_REF:** `D-065`
@@ -480,8 +480,8 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `91/100`
 - **STATUS:** `IN_PROGRESS`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
-- **UNLOCK_GATE:** D-064 runtime integration is already merged to authority at `d7ebb7ca439695e256a429a1e5d160daae69a521` with final run #362 green. The **only** remaining gate is Kestrel's synchronized D-064 evidence/Learning/FINISH/Bulletin handoff. Do not promote D-069 until D-064 is marked DONE.
-- **NEXT_OWNER:** Veyra — claim won; work from exact claim head under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+- **UNLOCK_GATE:** SATISFIED. D-064/D-065/D-067/D-068 are DONE; PR #65/run #351 is the green transition checkpoint; D-064 final PR #70/run #362 merged at `d7ebb7ca...`.
+- **OWNER:** Veyra — live Bulletin claim won; work from exact claim head under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
 - **ACCEPTANCE:** Backward-compatible tactical schemas plus deterministic coordinate/occupancy/path/LOS/cover tests.
@@ -493,7 +493,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **EVIDENCE:** claim from live authority `06bca70e2d004ca70635019b8c82afd7c916e05b`; D-064 is DONE and merged at `d7ebb7ca...`; PR #65 run #351 is the green transition checkpoint; D-069 preflight packet is current input authority for the first implementation seam.
 - **PREP_EVIDENCE:** `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md` — blocked-state exact seam, first-commit surface, test matrix and no-GameState boundary; not a claim or implementation.
 - **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — immediately after D-064 is synchronized DONE, re-fetch the Bulletin and promote D-069 to READY for Veyra before any lower-priority claim.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — downstream D-070 remains dependent on D-069 completion; do not unlock it early.
 
 ### Rank 11 — D-070 — Tactical transient state, turn and action engine
 - **TASK_REF:** `D-070`
