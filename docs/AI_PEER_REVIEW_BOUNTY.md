@@ -130,6 +130,6 @@ If the peer defect is a difficult code/integration incident that qualifies as HA
 - `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md`;
 - OR-024.
 
-The two awards may stack when evidence supports both.
+The two programs may appear on the same incident, but **the same repair evidence is scored once**. A separate peer FIND may stack with the critical award; duplicate FIX / regression / cross-system components do not double-pay.
 
 A symptom-only patch can still earn ordinary FIND/FIX credit if it safely repairs the committed defect, but it does **not** automatically earn ROOT CAUSE +75. No penalty is applied for using a necessary temporary patch.
