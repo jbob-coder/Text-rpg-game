@@ -156,7 +156,7 @@ Finish the bounded room/actor projection with the smallest current-authority int
 1. live Bulletin D-064 entry;
 2. `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`;
 3. `docs/AI_RUNTIME_MERGE_STATE_GATE.md`;
-4. only then the five production/test files named by the surgical manifest.
+4. only then the seven-file surgical surface named by the manifest after CPR-002.
 
 ### Evidence roles — do not collapse them
 - **PR #63 / run #354 — GREEN_COMPATIBILITY_PROOF:** synthetic merge `ee497f2` tested PR head `c8268ea...` with authority `b2849f24...`; Python 355/355 PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS, APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`. Under OR-019 this remains reusable behavior/compatibility evidence because later drift is documentation/governance only. **Do not merge #63 as-is**: its nonessential `SceneIllustration.kt` / `PixelStoryActorCatalog.kt` compaction churn was explicitly rejected from the final authority patch.
@@ -165,7 +165,7 @@ Finish the bounded room/actor projection with the smallest current-authority int
 
 ### Exact next move
 Follow the surgical manifest without widening scope:
-1. fetch current authority HEAD and current SHAs for the manifest's five-file surface;
+1. fetch current authority HEAD and current SHAs for the manifest's seven-file surface;
 2. treat `agent/kestrel-d064-surgical-final` head `9c38bb0df9af9dfc9d376c868883299949fd47dd` as the latest **preflight only**: the earlier `GameScreen.kt` collapse is fixed (current diff is 3 additions / 1 deletion), but the branch is still behind live authority; `tests/test_d064_android_scene_projection_source.py` still lacks the manifest-required fallback-scene preservation assertions, and CPR-002 RED -> GREEN remains outstanding;
 3. create/rebuild a fresh short-lived D-064 branch and apply only:
    - both `GameScreen.kt` `roomActors = snapshot.room.actors` wires;
