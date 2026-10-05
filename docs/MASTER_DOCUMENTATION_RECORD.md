@@ -1009,3 +1009,32 @@ Result:
 - `tools/status_phase_c_audit.py` and `tests/test_status_phase_c_audit.py` convert the previously manual 230/230 passive owner-row milestone into a regression-checkable invariant.
 
 This is Phase-C refinement and QA hardening only. It does not canon-promote passives or implement the target passive corpus.
+
+
+## Player-AI operational continuity / Overseer review layer — 2026-10-04
+
+The program now has a dedicated operational continuity layer intended to reduce repeated repository archaeology without creating duplicate semantic authority.
+
+New surfaces:
+- `docs/overseer/README.md` — AXIOM Project Overseer identity, responsibilities and current strategic framing;
+- `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md` — canonical `CPR-###` intake/rating/disposition surface for large code/integration problems;
+- `docs/overseer/code_problems/` — evidence packets for individual reviewed incidents;
+- `docs/player_guide/README.md` — five-file fast path for new/returning Player-AIs;
+- `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — append-only next-player learning records;
+- `docs/PLAYER_AI_ENTRY_PROMPT.md` — reusable Player-AI entry prompt.
+
+Governance:
+- OR-026 names AXIOM as the Project Overseer identifier for this review flow;
+- accepted CRITICAL-or-higher `CPR-###` incidents must link to an existing causal-owner Bulletin task or create a new Master Task/Bulletin task when no owner exists;
+- duplicate tasks for one causal incident are explicitly disallowed;
+- every completed primary task must leave a compact Next Player Learning Record;
+- D-080 is READY to backfill at least one evidence-backed learning record from first-wave work by Nodus, Veyra, Kestrel and Veyr;
+- D-080-B proposes a machine-readable task/domain -> authority -> implementation owner -> validation/evidence map plus consistency check.
+
+This layer is navigation/review infrastructure only. It does not replace domain master documents, source truth, task acceptance, test evidence or owner-only decisions.
+
+The first reviewed exemplar is:
+- `CPR-001` — D-067 bridge transition contract drift;
+- AXIOM score: 90/100 SYSTEM BLOCKER;
+- linked to existing D-067 rather than duplicating the task;
+- resolved by PR #62/run #345 and final green checkpoint PR #65/run #351.
