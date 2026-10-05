@@ -175,7 +175,7 @@ Follow the surgical manifest without widening scope:
    - focused source-wiring regression, including preservation of the existing fallback-scene IDs;
 4. preserve unrelated presentation code/formatting;
 5. absorb accepted `CPR-002` (**74/100 CRITICAL / LINKED TO D-064**) surgically: PR #69 run #357 already proves RED and run #359 proves the same strict-key repair GREEN (Python 352/352, Android unit/build/package, emulator smoke/screenshots PASS; APK SHA-256 `728737a0fe7f3353d7c0264658f1359853c8a3b9e97f97604551ee3cfee8e37e`). Port only the 11-key allowlist, unexpected-key rejection and focused JVM regression into the final PR #70 family; do not carry PR #69's `GameEngine.kt` compaction;
-6. open the fresh PR and require current merge-state Python + Android unit/build/package + emulator evidence;
+6. PR #70 may be amended in place because its base -> current authority drift is documentation/governance-only (31 commits; no runtime/content/test/Android source drift at Veyr audit); after the final seven-file changes, require a fresh synthetic merge-state Python + Android unit/build/package + emulator run against current authority;
 7. if green, write D-064 evidence + Next Player Learning Record, FINISH, Brag/Scoreboard/Register/Bulletin handoff, then mark DONE;
 8. promote D-069 to READY for Veyra immediately after the safe D-064 handoff.
 
