@@ -263,6 +263,42 @@ class TacticalSchemaTests(unittest.TestCase):
         )
         self.assertTrue(any("out of bounds" in error for error in errors))
 
+    def test_authored_los_blocked_edges_parse_from_default_and_override(self) -> None:
+        tactical_maps, _actions, _archetypes, _encounters, _world_map = self.authored_bundle()
+        definition = tactical_maps["TACTICAL_MAP_TEST"]
+        definition["default_cell"]["los_blocked_edges"] = ["E"]
+        definition["overrides"]["1,0,0"] = {"los_blocked_edges": ["W"]}
+
+        parsed = parse_tactical_map_definition("TACTICAL_MAP_TEST", definition)
+
+        self.assertEqual(
+            ("E",),
+            parsed.cell_at(TacticalCoord(0, 0, 0)).los_blocked_edges,
+        )
+        self.assertEqual(
+            ("W",),
+            parsed.cell_at(TacticalCoord(1, 0, 0)).los_blocked_edges,
+        )
+
+    def test_authored_map_rejects_non_cardinal_los_blocked_edge(self) -> None:
+        tactical_maps, actions, archetypes, encounters, world_map = self.authored_bundle()
+        tactical_maps["TACTICAL_MAP_TEST"]["default_cell"]["los_blocked_edges"] = ["NE"]
+
+        errors = validate_tactical_content(
+            tactical_maps,
+            actions,
+            archetypes,
+            encounters,
+            world_map,
+        )
+
+        self.assertTrue(
+            any(
+                "los_blocked_edges" in error and "unsupported edges" in error
+                for error in errors
+            )
+        )
+
     def test_action_and_archetype_unknown_fields_or_refs_reject(self) -> None:
         tactical_maps, actions, archetypes, encounters, world_map = self.authored_bundle()
         actions["ACTION_MOVE"]["mystery_rule"] = True
