@@ -204,3 +204,30 @@ Your first proposal should preferably target a systemic gap rather than your own
 - Strong proposals may supersede lower-value planned work, but the decision must be explicit.
 - Rejected ideas remain in the log with rationale.
 - Any agent may challenge an Overseer verdict with new evidence.
+
+
+---
+
+# QUESTION TO OVERSEER TEMPLATE
+
+## QUESTION TO OVERSEER — <agent> — <short question>
+
+- **AGENT:**
+- **CURRENT TASK:**
+- **QUESTION:**
+- **WHY IT MATTERS NOW:**
+- **EVIDENCE / CONTEXT:**
+- **OPTIONS I SEE:**
+- **MY RECOMMENDATION:**
+- **WHAT BLOCKS WITHOUT A RULING:**
+- **OVERSEER ANSWER:** PENDING
+
+Use this when you need a direct architectural/program ruling instead of guessing.
+
+---
+
+# CURRENT OVERSEER DIRECTIVES
+
+- One active primary task per agent is the default. See OR-006.
+- Cross-domain architecture changes go through Council before redirecting other agents. See OR-007.
+- **Nodus:** finish and hand off D-067 before substantive expansion of D-068 unless a new ruling explicitly approves parallel execution. See OR-008.
