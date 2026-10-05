@@ -1,0 +1,313 @@
+from __future__ import annotations
+
+import unittest
+
+from textrpg.combat_grid import (
+    TacticalOccupant,
+    cardinal_neighbors,
+    cover_rating,
+    find_path,
+    has_line_of_sight,
+    incoming_cover_edge,
+    occupancy_by_coord,
+    supercover_line,
+)
+from textrpg.combat_schema import (
+    COVER_PARTIAL,
+    COVER_STRONG,
+    TacticalCell,
+    TacticalCoord,
+    TacticalMap,
+    TacticalTransition,
+)
+
+
+def open_cell(
+    x: int,
+    y: int,
+    z: int = 0,
+    *,
+    movement_cost: int = 1,
+    blocks_movement: bool = False,
+    blocks_los: bool = False,
+    los_blocked_edges: tuple[str, ...] = (),
+    cover: tuple[tuple[str, int], ...] = (),
+) -> TacticalCell:
+    return TacticalCell(
+        TacticalCoord(x, y, z),
+        movement_cost=movement_cost,
+        blocks_movement=blocks_movement,
+        blocks_los=blocks_los,
+        los_blocked_edges=los_blocked_edges,
+        cover=cover,
+    )
+
+
+def rectangular_map(
+    width: int,
+    height: int,
+    *,
+    overrides: dict[tuple[int, int, int], dict] | None = None,
+    z_layers: tuple[int, ...] = (0,),
+    transitions: tuple[TacticalTransition, ...] = (),
+) -> TacticalMap:
+    overrides = overrides or {}
+    cells = []
+    for z in z_layers:
+        for y in range(height):
+            for x in range(width):
+                cells.append(open_cell(x, y, z, **overrides.get((x, y, z), {})))
+    return TacticalMap(
+        "MAP_TEST",
+        1,
+        width,
+        height,
+        z_layers,
+        tuple(cells),
+        transitions,
+    )
+
+
+class TacticalGridTests(unittest.TestCase):
+    def test_cardinal_neighbors_are_north_east_south_west(self) -> None:
+        self.assertEqual(
+            (
+                TacticalCoord(4, 2, 1),
+                TacticalCoord(5, 3, 1),
+                TacticalCoord(4, 4, 1),
+                TacticalCoord(3, 3, 1),
+            ),
+            cardinal_neighbors(TacticalCoord(4, 3, 1)),
+        )
+
+    def test_occupancy_rejects_two_solid_actors_on_one_cell(self) -> None:
+        coord = TacticalCoord(1, 1)
+        with self.assertRaisesRegex(ValueError, "solid occupancy conflict"):
+            occupancy_by_coord(
+                (
+                    TacticalOccupant("ALLY_A", "FACTION_A", coord),
+                    TacticalOccupant("ALLY_B", "FACTION_A", coord),
+                )
+            )
+
+    def test_path_has_stable_equal_cost_tie(self) -> None:
+        tactical_map = rectangular_map(3, 3)
+        expected = (
+            TacticalCoord(0, 0),
+            TacticalCoord(1, 0),
+            TacticalCoord(2, 0),
+            TacticalCoord(2, 1),
+            TacticalCoord(2, 2),
+        )
+        first = find_path(tactical_map, TacticalCoord(0, 0), TacticalCoord(2, 2))
+        second = find_path(tactical_map, TacticalCoord(0, 0), TacticalCoord(2, 2))
+        self.assertEqual(expected, first)
+        self.assertEqual(first, second)
+
+    def test_path_uses_destination_movement_cost(self) -> None:
+        tactical_map = rectangular_map(
+            3,
+            2,
+            overrides={(1, 0, 0): {"movement_cost": 9}},
+        )
+        path = find_path(tactical_map, TacticalCoord(0, 0), TacticalCoord(2, 0))
+        self.assertEqual(
+            (
+                TacticalCoord(0, 0),
+                TacticalCoord(0, 1),
+                TacticalCoord(1, 1),
+                TacticalCoord(2, 1),
+                TacticalCoord(2, 0),
+            ),
+            path,
+        )
+
+    def test_path_rejects_blocked_destination_and_enemy_pass_through(self) -> None:
+        blocked_map = rectangular_map(
+            3,
+            1,
+            overrides={(2, 0, 0): {"blocks_movement": True}},
+        )
+        self.assertIsNone(
+            find_path(blocked_map, TacticalCoord(0, 0), TacticalCoord(2, 0))
+        )
+
+        tactical_map = rectangular_map(3, 1)
+        enemy = TacticalOccupant(
+            "ENEMY",
+            "FACTION_B",
+            TacticalCoord(1, 0),
+        )
+        self.assertIsNone(
+            find_path(
+                tactical_map,
+                TacticalCoord(0, 0),
+                TacticalCoord(2, 0),
+                occupants=(enemy,),
+                moving_actor_id="PLAYER",
+                moving_faction_id="FACTION_A",
+                allow_allies_through=True,
+            )
+        )
+
+    def test_ally_pass_through_is_explicit_and_endpoint_stays_blocked(self) -> None:
+        tactical_map = rectangular_map(3, 1)
+        ally = TacticalOccupant(
+            "ALLY",
+            "FACTION_A",
+            TacticalCoord(1, 0),
+        )
+        self.assertIsNone(
+            find_path(
+                tactical_map,
+                TacticalCoord(0, 0),
+                TacticalCoord(2, 0),
+                occupants=(ally,),
+                moving_actor_id="PLAYER",
+                moving_faction_id="FACTION_A",
+                allow_allies_through=False,
+            )
+        )
+        self.assertEqual(
+            (
+                TacticalCoord(0, 0),
+                TacticalCoord(1, 0),
+                TacticalCoord(2, 0),
+            ),
+            find_path(
+                tactical_map,
+                TacticalCoord(0, 0),
+                TacticalCoord(2, 0),
+                occupants=(ally,),
+                moving_actor_id="PLAYER",
+                moving_faction_id="FACTION_A",
+                allow_allies_through=True,
+            ),
+        )
+
+        occupied_goal = TacticalOccupant(
+            "ALLY_GOAL",
+            "FACTION_A",
+            TacticalCoord(2, 0),
+        )
+        self.assertIsNone(
+            find_path(
+                tactical_map,
+                TacticalCoord(0, 0),
+                TacticalCoord(2, 0),
+                occupants=(occupied_goal,),
+                moving_actor_id="PLAYER",
+                moving_faction_id="FACTION_A",
+                allow_allies_through=True,
+            )
+        )
+
+    def test_vertical_path_requires_explicit_transition(self) -> None:
+        no_transition = rectangular_map(1, 1, z_layers=(0, 1))
+        self.assertIsNone(
+            find_path(no_transition, TacticalCoord(0, 0, 0), TacticalCoord(0, 0, 1))
+        )
+
+        transition = TacticalTransition(
+            "STAIRS_UP",
+            TacticalCoord(0, 0, 0),
+            TacticalCoord(0, 0, 1),
+            cost=2,
+        )
+        tactical_map = rectangular_map(
+            1,
+            1,
+            z_layers=(0, 1),
+            transitions=(transition,),
+        )
+        self.assertEqual(
+            (TacticalCoord(0, 0, 0), TacticalCoord(0, 0, 1)),
+            find_path(
+                tactical_map,
+                TacticalCoord(0, 0, 0),
+                TacticalCoord(0, 0, 1),
+            ),
+        )
+
+    def test_supercover_includes_corner_touch_cells_in_stable_order(self) -> None:
+        self.assertEqual(
+            (
+                TacticalCoord(0, 0),
+                TacticalCoord(1, 0),
+                TacticalCoord(0, 1),
+                TacticalCoord(1, 1),
+                TacticalCoord(2, 1),
+                TacticalCoord(1, 2),
+                TacticalCoord(2, 2),
+            ),
+            supercover_line(TacticalCoord(0, 0), TacticalCoord(2, 2)),
+        )
+
+    def test_corner_touch_opaque_cell_blocks_los(self) -> None:
+        clear_map = rectangular_map(3, 3)
+        self.assertTrue(
+            has_line_of_sight(clear_map, TacticalCoord(0, 0), TacticalCoord(2, 2))
+        )
+
+        blocked_map = rectangular_map(
+            3,
+            3,
+            overrides={(1, 0, 0): {"blocks_los": True}},
+        )
+        self.assertFalse(
+            has_line_of_sight(blocked_map, TacticalCoord(0, 0), TacticalCoord(2, 2))
+        )
+
+    def test_movement_blocker_does_not_automatically_block_los(self) -> None:
+        tactical_map = rectangular_map(
+            3,
+            1,
+            overrides={(1, 0, 0): {"blocks_movement": True}},
+        )
+        self.assertTrue(
+            has_line_of_sight(tactical_map, TacticalCoord(0, 0), TacticalCoord(2, 0))
+        )
+
+    def test_opaque_edge_blocks_los(self) -> None:
+        tactical_map = rectangular_map(
+            3,
+            1,
+            overrides={(1, 0, 0): {"los_blocked_edges": ("E",)}},
+        )
+        self.assertFalse(
+            has_line_of_sight(tactical_map, TacticalCoord(0, 0), TacticalCoord(2, 0))
+        )
+
+    def test_incoming_cover_edge_and_rating_are_deterministic(self) -> None:
+        tactical_map = rectangular_map(
+            3,
+            3,
+            overrides={
+                (2, 2, 0): {
+                    "cover": (
+                        ("N", COVER_STRONG),
+                        ("W", COVER_PARTIAL),
+                    )
+                }
+            },
+        )
+        self.assertEqual(
+            "N",
+            incoming_cover_edge(TacticalCoord(0, 0), TacticalCoord(2, 2)),
+        )
+        self.assertEqual(
+            COVER_STRONG,
+            cover_rating(tactical_map, TacticalCoord(0, 0), TacticalCoord(2, 2)),
+        )
+        self.assertEqual(
+            "W",
+            incoming_cover_edge(TacticalCoord(0, 2), TacticalCoord(2, 2)),
+        )
+        self.assertEqual(
+            COVER_PARTIAL,
+            cover_rating(tactical_map, TacticalCoord(0, 2), TacticalCoord(2, 2)),
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()
