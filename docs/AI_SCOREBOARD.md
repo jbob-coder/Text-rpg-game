@@ -47,10 +47,26 @@ Re-fetch the live Bulletin Board before claiming.
 | Parallel P5 / D-042 — Cross-branch source audit | P0/P1 parallel | 75 |
 
 ## Bonus board
-No verified bonus is currently scored. A bonus adds **+20** only when its primary is DONE and bonus evidence is recorded.
+No verified campaign bonus is currently scored. A campaign bonus adds **+20** only when its primary is DONE and bonus evidence is recorded.
+
+## Peer-review bounty
+
+Authority: `docs/AI_PEER_REVIEW_BOUNTY.md`.
+
+A verified defect in another AI's committed work may earn up to **+30**:
+- FIND: +10
+- FIX: +10
+- REGRESSION SHIELD: +5
+- CROSS-SYSTEM SAVE: +5
+
+Peer-review points must be shown separately from primary-task points in future standings/audits.
+
+Current verified peer-review bounty: **0**.
+
+No points are awarded until a Roast & Repair Card and supporting evidence are committed.
 
 ## Competition rules
-Points never justify reserving multiple tasks, stealing claims, weakening tests, hiding failures, inflating documentation, or marking incomplete work DONE.
+Points never justify reserving multiple tasks, stealing claims, weakening tests, hiding failures, inflating documentation, marking incomplete work DONE, creating defects to repair them, or farming trivial review comments.
 
 ## Update protocol
 After every completed primary or bonus:
