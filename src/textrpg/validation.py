@@ -5,6 +5,7 @@ from math import isfinite
 from typing import Any, Dict, Iterable, List, Mapping, Set
 
 from .core import RuleError, validate_resource_requirement
+from .equipment import validate_item_definition
 from .modifiers import validate_modifier_mapping, validate_modifier_path
 
 
@@ -128,6 +129,16 @@ def _walk_conditions(conditions: Any, location: str, errors: List[str]) -> None:
                     f"{item_location}.stage has unsupported value "
                     f"{condition.get('stage')!r}"
                 )
+        if kind == "item_min":
+            quantity = condition.get("quantity", 1)
+            if (
+                isinstance(quantity, bool)
+                or not isinstance(quantity, int)
+                or quantity <= 0
+            ):
+                errors.append(
+                    f"{item_location}.quantity must be a positive integer"
+                )
 
 
 def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
@@ -181,6 +192,17 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
                 f"{item_location}.technique_id",
                 errors,
             )
+
+        if kind == "inventory":
+            quantity = effect.get("quantity")
+            if (
+                isinstance(quantity, bool)
+                or not isinstance(quantity, int)
+                or quantity == 0
+            ):
+                errors.append(
+                    f"{item_location}.quantity must be a non-zero integer"
+                )
 
         if kind in {"technique_practice", "power_recover", "skill_train", "recover_resources"}:
             minutes = effect.get("minutes")
@@ -319,6 +341,11 @@ def validate_registries(registries: Mapping[str, Mapping[str, Any]]) -> List[str
                 errors.append(
                     f"registries.{category}.{stable_id} metadata must be an object"
                 )
+            elif category == "items":
+                try:
+                    validate_item_definition(stable_id, metadata)
+                except RuleError as exc:
+                    errors.append(f"registries.items.{stable_id} is invalid: {exc}")
             elif category == "perks" and "player_visible" in metadata:
                 if not isinstance(metadata["player_visible"], bool):
                     errors.append(f"registries.perks.{stable_id}.player_visible must be boolean")
