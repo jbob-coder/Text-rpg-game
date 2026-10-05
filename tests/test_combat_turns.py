@@ -70,6 +70,11 @@ def actions() -> dict[str, dict[str, object]]:
             "category": "sprint",
             "cost": 2,
         },
+        "ACTION_PREPARE_REACTION": {
+            "action_id": "ACTION_PREPARE_REACTION",
+            "category": "prepare_reaction",
+            "cost": 1,
+        },
     }
 
 
@@ -271,6 +276,147 @@ class CombatMovementTests(unittest.TestCase):
         )
 
         self.assertEqual(event_a, event_b)
+
+
+    def test_reaction_reserve_persists_until_consumed_during_another_activation(self) -> None:
+        first = actor("ACTOR_FIRST", TacticalCoord(0, 0, 0), initiative=20)
+        second = actor("ACTOR_SECOND", TacticalCoord(2, 0, 0), initiative=10)
+        session = CombatSession(
+            encounter_id="ENCOUNTER_REACTION_TEST",
+            tactical_map=line_map(3),
+            seed=31,
+            actors=(first, second),
+            combat_actions=actions(),
+        )
+        session.begin_next_activation()
+
+        reserve_event = session.reserve_reaction(
+            actor_id=first.actor_id,
+            prepare_action_id="ACTION_PREPARE_REACTION",
+            reaction_id="REACTION_OVERWATCH",
+        )
+        self.assertEqual(3, first.action_budget)
+        self.assertEqual(1, first.reaction_reserve)
+        self.assertEqual("REACTION_OVERWATCH", first.reserved_reaction_id)
+        self.assertEqual(0, reserve_event.reserve_before)
+        self.assertEqual(1, reserve_event.reserve_after)
+
+        session.complete_active_activation()
+        self.assertEqual(1, first.reaction_reserve)
+        self.assertIs(second, session.begin_next_activation())
+
+        reaction_event = session.consume_reaction(
+            actor_id=first.actor_id,
+            reaction_id="REACTION_OVERWATCH",
+        )
+        self.assertEqual(0, first.reaction_reserve)
+        self.assertIsNone(first.reserved_reaction_id)
+        self.assertEqual(1, reaction_event.reserve_before)
+        self.assertEqual(0, reaction_event.reserve_after)
+        self.assertEqual(2, session.event_index)
+
+    def test_unused_reaction_reserve_expires_at_next_activation_start(self) -> None:
+        first = actor("ACTOR_FIRST", TacticalCoord(0, 0, 0), initiative=20)
+        second = actor("ACTOR_SECOND", TacticalCoord(2, 0, 0), initiative=10)
+        session = CombatSession(
+            encounter_id="ENCOUNTER_REACTION_TEST",
+            tactical_map=line_map(3),
+            seed=31,
+            actors=(first, second),
+            combat_actions=actions(),
+        )
+        session.begin_next_activation()
+        session.reserve_reaction(
+            actor_id=first.actor_id,
+            prepare_action_id="ACTION_PREPARE_REACTION",
+            reaction_id="REACTION_OVERWATCH",
+        )
+        session.complete_active_activation()
+        session.begin_next_activation()
+        session.complete_active_activation()
+        session.advance_round()
+
+        self.assertEqual(1, first.reaction_reserve)
+        self.assertEqual("REACTION_OVERWATCH", first.reserved_reaction_id)
+
+        self.assertIs(first, session.begin_next_activation())
+        self.assertEqual(0, first.reaction_reserve)
+        self.assertIsNone(first.reserved_reaction_id)
+        self.assertEqual(4, first.action_budget)
+
+    def test_sprint_prevents_new_reaction_reservation_same_activation(self) -> None:
+        session, primary = active_session(line_map(3))
+        session.commit_movement(
+            actor_id=primary.actor_id,
+            action_id="ACTION_SPRINT",
+            goal=TacticalCoord(2, 0, 0),
+        )
+
+        with self.assertRaisesRegex(ValueError, "Sprint prevents"):
+            session.reserve_reaction(
+                actor_id=primary.actor_id,
+                prepare_action_id="ACTION_PREPARE_REACTION",
+                reaction_id="REACTION_OVERWATCH",
+            )
+
+        self.assertEqual(2, primary.action_budget)
+        self.assertEqual(0, primary.reaction_reserve)
+
+    def test_next_round_reinforcement_does_not_reorder_current_round(self) -> None:
+        first = actor("ACTOR_FIRST", TacticalCoord(0, 0, 0), initiative=10)
+        session = CombatSession(
+            encounter_id="ENCOUNTER_REINFORCEMENT_TEST",
+            tactical_map=line_map(3),
+            seed=7,
+            actors=(first,),
+            combat_actions=actions(),
+        )
+        reinforcement = actor(
+            "ACTOR_REINFORCEMENT",
+            TacticalCoord(2, 0, 0),
+            initiative=99,
+        )
+
+        session.add_reinforcement(reinforcement)
+
+        self.assertEqual(("ACTOR_FIRST",), session.initiative_order)
+        self.assertEqual(2, reinforcement.reinforcement_round)
+        self.assertIs(first, session.begin_next_activation())
+        session.complete_active_activation()
+        self.assertTrue(session.round_is_complete())
+
+        next_order = session.advance_round()
+
+        self.assertEqual(
+            ("ACTOR_REINFORCEMENT", "ACTOR_FIRST"),
+            next_order,
+        )
+        self.assertEqual(2, session.round_index)
+
+    def test_reinforcement_spawn_conflict_rejects_round_advance_atomically(self) -> None:
+        first = actor("ACTOR_FIRST", TacticalCoord(0, 0, 0), initiative=10)
+        session = CombatSession(
+            encounter_id="ENCOUNTER_REINFORCEMENT_TEST",
+            tactical_map=line_map(3),
+            seed=7,
+            actors=(first,),
+            combat_actions=actions(),
+        )
+        session.add_reinforcement(
+            actor(
+                "ACTOR_REINFORCEMENT",
+                TacticalCoord(0, 0, 0),
+                initiative=99,
+            )
+        )
+        session.begin_next_activation()
+        session.complete_active_activation()
+
+        with self.assertRaisesRegex(ValueError, "solid occupancy conflict"):
+            session.advance_round()
+
+        self.assertEqual(1, session.round_index)
+        self.assertEqual(("ACTOR_FIRST",), session.initiative_order)
 
 
 if __name__ == "__main__":
