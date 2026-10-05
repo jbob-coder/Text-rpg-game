@@ -80,7 +80,7 @@ class TamsinMemoryProofTests(unittest.TestCase):
         engine = RulesEngine(scenes)
         engine.choose(state, "REMEMBER")
 
-        memory = state.npcs["NPC_TAMSIN"]["memories"].single if False else state.npcs["NPC_TAMSIN"]["memories"][0]
+        memory = state.npcs["NPC_TAMSIN"]["memories"][0]
         self.assertEqual("MEM_NO_TAGS_REQUIRED", memory["memory_id"])
         self.assertEqual([], memory["tags"])
 
