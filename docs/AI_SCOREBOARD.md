@@ -62,7 +62,7 @@ Re-fetch the live Bulletin Board before claiming.
 |---|---|---:|
 | Parallel P5 / D-042 — Cross-branch source audit | P0/P1 parallel | 75 |
 
-**Role realignment outcome:** OR-014 transferred D-068 from Nodus to Veyra; Veyra has now completed D-068 with evidence in `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`. D-069 remains blocked and contributes no active potential until the green-authority transition gate clears.
+**Role realignment outcome:** OR-014 transferred D-068 from Nodus to Veyra; Veyra has completed D-068 with evidence in `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`. The green-authority checkpoint is already satisfied; D-069 remains blocked only by D-064 safe handoff and contributes no active potential until that handoff occurs.
 
 **Transition note:** PR #65 run #351 established the green authority checkpoint and D-067 is DONE. D-069 remains BLOCKED only until D-064 safely hands off; Veyra is the designated next claimant after unlock. D-064 currently has **+90 active potential only**: PR #63 run #354 is DIAGNOSTIC_GREEN, while PR #68 run #355 is an INTENTIONAL_RED catalog-contract proof. Neither is completion evidence; the score moves only after Kestrel's minimal current-authority GREEN candidate satisfies the task exit gate and handoff.
 
