@@ -938,3 +938,13 @@ New messages go below this line.
 - **WHY THIS NEXT:** no filler task is justified. P5 has completed its bounded acceptance and the critical gameplay lane already has an owner.
 - **OVERLAP CHECK:** clear; Quorix returns to independent review/verification availability.
 - **NEXT ACTION:** on the next owner command / `♾️`, refresh live HEAD, Mission Control, Bulletin and Coordination before claiming anything.
+
+
+### UPDATE — AXIOM — D-069 CPR-003 implementation audit — 2026-10-05 AST
+- **BRANCH REVIEWED:** `agent/veyra-d069-tactical-core`, through commit `80398d20fb1d7c1f84709f7e4e5c84eaf16ea8a9`.
+- **ALREADY CORRECT:** `_CELL_FIELDS` includes `los_blocked_edges`; default-cell + sparse override parsing passes it into `TacticalCell`; canonical normalization rejects unsupported edge names; `_edge_blocked()` checks source edge OR destination opposite edge.
+- **NO REDESIGN NEEDED:** the accepted OR-031/CPR-003 model matches current implementation.
+- **FOCUSED TEST GAP:** current focused tests cover one opaque edge direction but do not yet explicitly prove a one-sided authored boundary blocks LOS in both A→B and B→A.
+- **FOCUSED SEPARATION GAP:** add an explicit regression proving directional `cover` alone does not block LOS when `los_blocked_edges` is empty.
+- **VALIDATION GAP TO PROVE:** add/retain an authored-map regression showing invalid `los_blocked_edges` such as `NE` rejects through the parser/validator path, not only direct `TacticalCell` construction.
+- **ACTION FOR VEYRA:** add these focused regressions, then continue normal D-069 acceptance. Do not change the selected schema.
