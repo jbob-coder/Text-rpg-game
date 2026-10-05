@@ -133,8 +133,8 @@ Required program interpretation:
 - D-064 owns the strict Kotlin mapper/privacy repair;
 - PR #69/run #357 supplies the executable RED;
 - PR #69/run #359 proves the causal GREEN behavior;
-- the final D-064 candidate must port only the minimal allowlist/rejection + focused JVM regression and pass fresh merge-state CI without unrelated churn;
-- D-069 remains blocked exactly as before until D-064 is synchronized DONE.
+- the final D-064 candidate ported only the minimal allowlist/rejection + focused JVM regression and passed fresh merge-state CI without unrelated churn;
+- D-069 may unlock once D-064 bookkeeping is synchronized DONE.
 
 This does not invalidate current Python redaction or claim that private state is presently exposed to Compose.
 
@@ -142,7 +142,7 @@ This does not invalidate current Python redaction or claim that private state is
 
 - **PRESENT:** no
 - **DESCRIPTION:** none
-- **ROOT_CAUSE_FOLLOWUP:** CPR-002 accepted and linked to D-064; GREEN causal repair on the final merge-minimal candidate remains open.
+- **ROOT_CAUSE_FOLLOWUP:** closed by PR #70/run #362 and authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521`.
 
 ## Causal explanation
 
@@ -238,8 +238,8 @@ and then passes fresh merge-state CI without unrelated churn.
 - **REQUIRED EXECUTABLE REGRESSION:** start with one otherwise-valid actor map, add a forbidden/unknown key such as `memories`, call the production `BridgeSnapshotMapper.fromMap()` path, and assert `IllegalArgumentException`.
 - **OPTIONAL SECOND REGRESSION:** verify a benign but unauthorized additive key is also rejected unless the room contract is explicitly revised to permit it.
 - **REQUIRED REVIEWERS:** Kestrel implements; AXIOM verifies task linkage/evidence; Veyr may review privacy semantics without editing the owned runtime surface.
-- **ROOT-CAUSE ACCEPTANCE:** RED confirmed by PR #69 / run #357 and behaviorally GREEN on PR #69 / run #359; clean merge-minimal authority integration still pending.
-- **REWARD:** no award yet. RED and behavioral GREEN are proven; evaluate under OR-024 only after the same minimal repair is green on the clean final D-064 authority-integration candidate.
+- **ROOT-CAUSE ACCEPTANCE:** RED confirmed by PR #69 / run #357; behaviorally GREEN on PR #69 / run #359; clean merge-minimal authority integration GREEN on PR #70 / run #362; merged at `d7ebb7ca439695e256a429a1e5d160daae69a521`.
+- **REWARD:** Kestrel +235 under OR-024 — CRITICAL +100, ROOT CAUSE +75, REGRESSION SHIELD +30, CROSS-SYSTEM SAVE +30. Veyr +10 ordinary FIND credit for the independent defect report; no duplicate repair/regression scoring.
 - **D-069 EFFECT:** remains blocked exactly as before. CPR-002 adds one bounded D-064 acceptance requirement; it does not create a new dependency node.
 
 ### AXIOM distinction
