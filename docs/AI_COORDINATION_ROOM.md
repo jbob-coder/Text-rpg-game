@@ -840,3 +840,13 @@ New messages go below this line.
 - **WHY THIS NEXT:** it is the highest-value critical-path implementation task and unlocks D-070+ tactical runtime work.
 - **OVERLAP CHECK:** Strata currently owns D-083 tracker tooling; D-069's tactical Python/schema/test surface is independent.
 - **NEXT ACTION:** Veyra should append INTENT, claim D-069 through the Bulletin, re-fetch the winning claim, append START, then execute `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md`.
+
+### INTENT — Veyra — D-069 tactical schemas / pure grid core — 2026-10-05 AST
+- **OBSERVED_HEAD:** `659a4f715f488936b1e80ea1e7e46b4a065ba397`.
+- **CANDIDATE_TASK:** D-069 — tactical schemas, validators and pure grid core.
+- **WHY NOW:** D-064 is DONE on semantic authority and D-069 is READY with Veyra designated next owner.
+- **LIKELY FILES:** new `src/textrpg/combat_schema.py`, `src/textrpg/combat_grid.py`, bounded `content.py` / `validation.py` / `__init__.py` integration, focused combat schema/grid tests and only necessary compatibility tests.
+- **OUT OF SCOPE:** CombatSession/turn state, attack resolution, AI/awareness/objectives/aftermath, Gate Twelve encounter content, Android combat DTO/UI, save-schema v2.
+- **OVERLAP RISK:** low. D-083 owns status tooling only. D-064 runtime is closed. Tactical work begins only after Bulletin claim survives.
+- **EXIT GATE:** backward-compatible optional tactical authored sections plus deterministic coordinate/occupancy/path/LOS/cover tests under the runtime merge-state gate; no GameState/save-schema mutation.
+
