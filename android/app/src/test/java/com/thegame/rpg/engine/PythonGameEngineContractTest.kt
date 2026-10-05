@@ -68,7 +68,7 @@ class PythonGameEngineContractTest {
             "unknown_root" to "drop me",
         )
 
-        val snapshot = BridgeSnapshotMapper.fromMap(payload)
+        val snapshot = PlayerSafeSnapshotMapper.fromMap(payload)
 
         assertEquals("SCENE_START", snapshot.sceneId)
         assertEquals("Arrival", snapshot.title)
@@ -86,6 +86,32 @@ class PythonGameEngineContractTest {
         assertFalse(snapshot.toString().contains("secret_authoring_data"))
         assertFalse(snapshot.toString().contains("raw_outcomes"))
         assertFalse(snapshot.toString().contains("hidden_modifier_source"))
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `production snapshot boundary rejects room location mismatch`() {
+        val payload = mapOf(
+            "scene" to mapOf(
+                "id" to "SCENE_START",
+                "title" to "Arrival",
+                "body" to "The city gate is open.",
+                "choices" to emptyList<Any>(),
+            ),
+            "status" to mapOf("resources" to emptyList<Any>()),
+            "room" to mapOf(
+                "projection_version" to 1,
+                "location_id" to "SERVICE_TUNNEL",
+                "actors" to emptyList<Any>(),
+                "active_speaker_presentation_id" to null,
+            ),
+            "meta" to mapOf(
+                "turn" to 0,
+                "time_minutes" to 0,
+                "location" to "PLATFORM_NINE",
+            ),
+        )
+
+        PlayerSafeSnapshotMapper.fromMap(payload)
     }
 
     @Test
