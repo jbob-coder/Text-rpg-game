@@ -1,6 +1,7 @@
 package com.thegame.rpg.engine
 
 import com.thegame.rpg.boot.BootState
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -112,6 +113,55 @@ class PythonGameEngineContractTest {
         )
 
         PlayerSafeSnapshotMapper.fromMap(payload)
+    }
+
+
+    @Test
+    fun `engine choose enforces player safe room invariants`() = runBlocking {
+        val mismatchedPayload = mapOf(
+            "scene" to mapOf(
+                "id" to "SCENE_START",
+                "title" to "Arrival",
+                "body" to "The city gate is open.",
+                "choices" to emptyList<Any>(),
+            ),
+            "status" to mapOf("resources" to emptyList<Any>()),
+            "room" to mapOf(
+                "projection_version" to 1,
+                "location_id" to "SERVICE_TUNNEL",
+                "actors" to emptyList<Any>(),
+                "active_speaker_presentation_id" to null,
+            ),
+            "meta" to mapOf(
+                "turn" to 0,
+                "time_minutes" to 0,
+                "location" to "PLATFORM_NINE",
+            ),
+        )
+
+        val gateway = object : PythonSessionGateway {
+            override fun start(
+                context: android.content.Context,
+                onContentLoading: () -> Unit,
+            ): Map<String, Any?> = mismatchedPayload
+
+            override fun choose(choiceId: String): Map<String, Any?> = mismatchedPayload
+            override fun save() = Unit
+            override fun load(): Map<String, Any?> = mismatchedPayload
+            override fun applyCheat(code: String): Map<String, Any?> = mismatchedPayload
+            override fun equip(itemId: String): Map<String, Any?> = mismatchedPayload
+            override fun unequip(slot: String): Map<String, Any?> = mismatchedPayload
+            override fun travel(locationId: String): Map<String, Any?> = mismatchedPayload
+            override fun inspectStatus(path: String): Map<String, Any?> = error("not used")
+        }
+
+        val result = PythonGameEngine(gateway).choose("CHOICE_TEST")
+
+        assertTrue(result.isFailure)
+        val failure = result.exceptionOrNull()
+        assertTrue(failure is EngineStartException)
+        assertEquals("PROJECTION_ERROR", (failure as EngineStartException).stageId)
+        assertEquals("The current game state could not be displayed.", failure.publicMessage)
     }
 
     @Test
