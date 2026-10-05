@@ -442,5 +442,52 @@ class CombatMovementTests(unittest.TestCase):
         self.assertEqual(0, event.budget_after)
 
 
+    def test_transcript_hash_is_deterministic_and_preview_neutral(self) -> None:
+        first, first_actor = active_session(line_map(4))
+        second, second_actor = active_session(line_map(4))
+
+        empty_hash = first.transcript_hash()
+        first.preview_movement(
+            actor_id=first_actor.actor_id,
+            action_id="ACTION_MOVE",
+            goal=TacticalCoord(3, 0, 0),
+        )
+        self.assertEqual(empty_hash, first.transcript_hash())
+        self.assertEqual(0, first.event_index)
+
+        first.commit_movement(
+            actor_id=first_actor.actor_id,
+            action_id="ACTION_MOVE",
+            goal=TacticalCoord(3, 0, 0),
+        )
+        second.commit_movement(
+            actor_id=second_actor.actor_id,
+            action_id="ACTION_MOVE",
+            goal=TacticalCoord(3, 0, 0),
+        )
+
+        self.assertEqual(first.normalized_transcript(), second.normalized_transcript())
+        self.assertEqual(first.transcript_hash(), second.transcript_hash())
+        self.assertNotEqual(empty_hash, first.transcript_hash())
+
+    def test_different_committed_sequence_changes_transcript_hash(self) -> None:
+        first, first_actor = active_session(line_map(4))
+        second, second_actor = active_session(line_map(4))
+
+        first.commit_movement(
+            actor_id=first_actor.actor_id,
+            action_id="ACTION_MOVE",
+            goal=TacticalCoord(2, 0, 0),
+        )
+        second.commit_movement(
+            actor_id=second_actor.actor_id,
+            action_id="ACTION_MOVE",
+            goal=TacticalCoord(3, 0, 0),
+        )
+
+        self.assertNotEqual(first.normalized_transcript(), second.normalized_transcript())
+        self.assertNotEqual(first.transcript_hash(), second.transcript_hash())
+
+
 if __name__ == "__main__":
     unittest.main()
