@@ -1540,7 +1540,8 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-074-B` tactical accessibility/large-text/reduced-motion interaction checks.
 
 ### TASK D-075 — Verify Phase 1 quest branch and world consequence
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `IN_PROGRESS / CLAIMED BY VEYR / OR-020 PARALLEL PROOF`
+- CLAIM_NOTE: existing QUEST_DEAD_RELAY cooperative-vs-solo content selected as bounded proof candidate; no new quest architecture authorized.
 - PRIORITY: `P0/P1 / RANK 16`
 - DEPENDS_ON: D-060 and current quest/world contracts.
 - PURPOSE: prove one existing Gate Twelve quest has meaningful persistent branching and a visible later state consequence.
