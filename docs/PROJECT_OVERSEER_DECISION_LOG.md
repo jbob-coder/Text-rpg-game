@@ -363,3 +363,14 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **FILE-COLLISION RULE:** announce authoritative file/domain surfaces in START and coordinate overlaps before writes.
 - **LARGE-PROBLEM RULE:** announce in the room, but prove/rate through AXIOM CPR.
 - **NO SECOND AUTHORITY:** room is conversational coordination, not semantic/task authority.
+
+
+### OR-028 — Merge-candidate hygiene is separate from green CI
+- **VERDICT:** ACCEPTED AS ACTIVE ENGINEERING GOVERNANCE.
+- **TRIGGER:** D-064 PR #63 and CPR-002 PR #69 each demonstrated useful/green behavior while also carrying avoidable unrelated formatting/compaction churn.
+- **RULE:** green tests prove behavior, not merge scope.
+- **FINAL-CANDIDATE REQUIREMENT:** compare against live authority and remove unrelated formatting/refactor/comment churn before handoff.
+- **EVIDENCE-ONLY PRs:** RED fixtures, compatibility probes and over-broad green references may remain evidence sources without becoming merge candidates.
+- **SURGICAL TASKS:** final branch should contain only task-required semantic edits, focused tests and explicitly accepted CPR repairs.
+- **RERUN RULE:** when the final cleaned branch materially differs from the previously green branch, rerun the applicable merge-state gate.
+- **NO PENALTY:** cleaning a branch or rebuilding a smaller candidate does not reduce task score.
