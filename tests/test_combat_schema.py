@@ -106,6 +106,35 @@ class TacticalSchemaTests(unittest.TestCase):
                 ),
             )
 
+    def test_phase1_transition_rejects_same_z_shortcuts(self) -> None:
+        with self.assertRaisesRegex(ValueError, "different z layers"):
+            TacticalTransition(
+                "TRANSITION_DIAGONAL",
+                TacticalCoord(0, 0, 0),
+                TacticalCoord(1, 1, 0),
+            )
+
+        tactical_maps, actions, archetypes, encounters, world_map = self.authored_bundle()
+        tactical_maps["TACTICAL_MAP_TEST"]["transitions"] = {
+            "TRANSITION_DIAGONAL": {
+                "from": "0,0,0",
+                "to": "1,1,0",
+                "cost": 1,
+                "bidirectional": True,
+            }
+        }
+        errors = validate_tactical_content(
+            tactical_maps,
+            actions,
+            archetypes,
+            encounters,
+            world_map,
+        )
+        self.assertTrue(
+            any("different z layers" in error for error in errors),
+            errors,
+        )
+
     def test_map_validates_deployment_objective_and_exit_anchors(self) -> None:
         tactical_map = TacticalMap(
             "MAP_TEST",
@@ -297,6 +326,43 @@ class TacticalSchemaTests(unittest.TestCase):
                 "los_blocked_edges" in error and "unsupported edges" in error
                 for error in errors
             )
+        )
+
+    def test_authored_cell_explicit_null_lists_reject(self) -> None:
+        for field_name in ("los_blocked_edges", "hazard_ids", "tags"):
+            with self.subTest(field_name=field_name):
+                tactical_maps, actions, archetypes, encounters, world_map = self.authored_bundle()
+                tactical_maps["TACTICAL_MAP_TEST"]["default_cell"][field_name] = None
+
+                errors = validate_tactical_content(
+                    tactical_maps,
+                    actions,
+                    archetypes,
+                    encounters,
+                    world_map,
+                )
+
+                self.assertTrue(
+                    any(
+                        field_name in error and "must be a list" in error
+                        for error in errors
+                    ),
+                    errors,
+                )
+
+    def test_encounter_location_rejects_when_explicit_world_map_has_no_nodes(self) -> None:
+        tactical_maps, actions, archetypes, encounters, _world_map = self.authored_bundle()
+        errors = validate_tactical_content(
+            tactical_maps,
+            actions,
+            archetypes,
+            encounters,
+            {"nodes": {}},
+        )
+
+        self.assertTrue(
+            any("unknown world location" in error for error in errors),
+            errors,
         )
 
     def test_action_and_archetype_unknown_fields_or_refs_reject(self) -> None:
