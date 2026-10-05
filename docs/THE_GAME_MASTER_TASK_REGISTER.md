@@ -1353,23 +1353,28 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-063-B` not separately completed; the primary packet contains only the compatibility mapping required for implementation.
 
 ### TASK D-064 — Implement player-safe room/actor projection
-- STATUS: `IN_PROGRESS / CLAIMED BY KESTREL / TDD-RED -> MINIMAL GREEN -> HANDOFF`
+- STATUS: `IN_PROGRESS / CLAIMED BY KESTREL / SURGICAL LIVE-AUTHORITY GREEN PENDING`
 - PRIORITY: `P0 / RANK 5`
 - DEPENDS_ON: D-060; D-030 contract/migration map.
 - PURPOSE: implement D-030's bounded room/actor projection migration while preserving hidden-state/privacy and opening-story equivalence.
-- ACCEPTANCE: authoritative versioned room/actor projection, strict Python/Kotlin mapping, tested Android/UI consumption, opening equivalence across Platform Nine / Relay Workbench / Service Tunnel, unknown-family/key rejection, safe retirement of scene/location actor-presence heuristics, and current merge-state green evidence.
+- ACCEPTANCE: authoritative versioned room/actor projection, strict Python/Kotlin mapping, tested Android/UI consumption, opening equivalence across Platform Nine / Relay Workbench / Service Tunnel, unknown-family/key rejection, safe retirement of scene/location actor-presence heuristics, and fresh current merge-state green evidence.
 - CURRENT_EVIDENCE:
-  - PR #63 run #354 / `37257967729`: **DIAGNOSTIC_GREEN** — Python PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS. Useful integration evidence, but not the final current-authority minimal repair gate.
-  - PR #68 run #355 / `37258411701`: **INTENTIONAL_RED** — Python PASS and emulator smoke PASS; Android unit compilation fails exactly because `PixelStoryActorCatalogTest.kt` passes `List<GameRoomActor>` while production still expects `placements(locationId, sceneId)`.
+  - PR #63 head `c8268ea25a79eed0631d22a7a70e625f022c38d3`; run #354 / `37257967729`: **GREEN COMPATIBILITY PROOF**. Workflow checkout `ee497f2` merged PR #63 into authority `b2849f248ff3e924653e68df5ddc492b71563a02`; Python 355/355 PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS, APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`.
+  - post-run drift from `b2849f24...` was documentation/governance-only at coordination audit, so the run remains valid compatibility evidence under OR-019.
+  - PR #68 / run #355: **INTENTIONAL_RED / EVIDENCE ONLY** against the still-unmerged live production catalog API. Do not merge PR #68.
+- FINAL_MERGE_DISPOSITION:
+  - AXIOM's `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md` requires a fresh live-authority branch because PR #63 contains avoidable presentation compaction/formatting churn.
+  - PR #63 is reference/compatibility evidence, not the final merge candidate.
 - CURRENT_NEXT_MOVE:
-  1. complete PR #68 RED equivalence cases for Relay Workbench `90,14` and Service Tunnel `76,14`;
-  2. build a fresh GREEN branch from live authority;
-  3. change only `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt` plus focused catalog/source-wiring tests;
-  4. reuse `PixelStoryActorPlacementResolver` as the sole coordinate owner;
-  5. require current merge-state CI under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`;
-  6. synchronize evidence, Learning Ledger, Brag/Scoreboard and Bulletin before marking DONE.
+  1. re-fetch live authority HEAD;
+  2. create a fresh short-lived D-064 branch;
+  3. apply only the manifest's five-file projected-actor delta;
+  4. preserve existing presentation formatting/comments/fallback behavior outside the migration;
+  5. run fresh PR merge-state CI;
+  6. if green, synchronize D-064 evidence, Learning Ledger, Brag Room, Scoreboard, Bulletin and this register;
+  7. mark DONE only after safe integration/handoff, then unlock D-069 for Veyra.
 - OVERLAP: Kestrel owns the D-064 runtime/test surface; other Player-AIs should not edit the same files without an explicit bounded request.
-- CPR: none. Existing AXIOM review says this remains D-064-owned API/rebase work unless new evidence proves a broader causal defect.
+- CPR: none. No broader architectural defect is currently demonstrated.
 - BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
 
 ### TASK D-065 — Implement Tamsin durable-memory reactive proof
