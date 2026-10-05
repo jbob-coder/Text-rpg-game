@@ -2,7 +2,7 @@
 
 **Player-AI:** Veyr  
 **Purpose:** durable continuity record created immediately before the owner closes the ChatGPT session.  
-**Observed authority HEAD:** `8acdd0ac4bf1ea6499c826e758260b63cbebe676`  
+**Observed authority HEAD at latest refresh:** `bb2b392211ddc326314ebe98fb859951680d7927`  
 **Authority branch:** `docs/master-game-development-program`
 
 > This file is a restart map, not a substitute for live repository authority. A new chat must re-fetch HEAD and the Bulletin before acting.
@@ -105,20 +105,26 @@ D-064 final authority:
 - Domain: repository status tracker fixed Phase-1 range/output verification.
 - Do not duplicate.
 
-### D-042
-- READY but reserved for the unfilled Verification / Red-Team / Performance fifth-seat class unless AXIOM explicitly reassigns it.
-- Veyr should not claim it merely because free.
+### Parallel P5 / D-042
+- The fifth Verification / Red-Team / Performance seat is now filled by **Quorix**.
+- Quorix completed the bounded Parallel P5 / D-042 survivor-audit lane and returned to independent verification/red-team availability.
+- Master D-042 remains broader/in-progress for delegated consumer/asset/deprecation gaps; Veyr should not treat it as a free primary.
+- Evidence: `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md` and its machine-readable matrix.
 
 ## Veyr current ownership
 
-At this handoff Veyr owns **no active primary task**.
+At this latest refresh Veyr owns **no active primary task**.
+
+Verified scoreboard state at refresh:
+- **Veyr: 380 verified points**;
+- completed/scored work includes D-062, D-065 (+B), D-075 (+B), D-080 and CPR-002 peer FIND +10.
 
 Safe role:
 - bounded narrative/social/privacy/integration review;
 - respond to explicit review requests;
-- monitor live Bulletin for a genuinely eligible READY task;
+- monitor the live Bulletin for a genuinely eligible READY task;
 - never take Veyra's D-070 or Strata's D-083;
-- never take reserved D-042 without reassignment.
+- do not duplicate Quorix's completed Parallel P5 work or treat broader D-042 as automatically claimable.
 
 ## Required restart path in a new chat
 
@@ -170,9 +176,31 @@ The Learning Ledger is navigation, not semantic authority.
 
 The owner expects autonomous repository progress from `♾️`, quality over speed, explicit verification, and durable repository-native handoffs. Do not depend on chat memory when repository evidence can carry the state.
 
+## Latest refresh — 2026-10-05 13:37 AST
+
+Live repository state at refresh:
+- authority HEAD: `bb2b392211ddc326314ebe98fb859951680d7927`;
+- D-064 DONE;
+- D-069 DONE;
+- D-070 IN_PROGRESS under Veyra;
+- D-083 IN_PROGRESS under Strata;
+- Parallel P5 / D-042 bounded lane DONE under Quorix; broader master D-042 is not Veyr's automatic claim;
+- Veyr owns no active primary and remains bounded narrative/social/privacy/integration review support.
+
+Recent Veyr review contribution worth remembering:
+- on D-069, Veyr identified the same-cell LOS contract edge case: after cell existence validation, `start == end` LOS must be trivially true before opacity checks. Veyra's final D-069 work later closed the task; do not reopen D-069 without new evidence.
+
+## Exact restart prompt for a new Veyr chat
+
+Use:
+
+`Resume Veyr from docs/player_guide/VEYR_SESSION_HANDOFF_2026-10-05.md. Fetch the live HEAD and Bulletin first, preserve Veyr's identity, then continue only the current legal work under repository authority. ♾️ means think + inspect + work + verify + record + continue.`
+
 ## Final session-close instruction
 
 When a new chat resumes:
-- do not trust this HEAD as current;
-- re-fetch live authority first;
-- use this document only to avoid rediscovering the completed history and Veyr's identity/role.
+- keep the identity **Veyr**;
+- do not trust the stored HEAD as current;
+- re-fetch live authority and Bulletin first;
+- use this document only to avoid rediscovering completed history, Veyr's role, proven traps and current ownership boundaries;
+- repository truth always outranks this handoff.
