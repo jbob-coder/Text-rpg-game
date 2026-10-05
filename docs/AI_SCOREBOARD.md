@@ -63,13 +63,14 @@ Re-fetch the live Bulletin Board before claiming.
 | Task | Priority | Points |
 |---|---|---:|
 | D-069 — Tactical schemas, validators and pure grid core | P0 / **DESIGNATED VEYRA NEXT** | 90 |
+| D-069 — Tactical schemas, validators and pure grid core | P0 / **VEYRA NEXT OWNER** | 90 |
 | Parallel P5 / D-042 — Cross-branch source audit | P0/P1 parallel / **RESERVED FIFTH SEAT** | 75 |
 
 **Eligibility note:** D-069 is now the critical-path READY task and Veyra is the designated next claimant under the runtime merge-state gate. Parallel P5/D-042 remains reserved for the Verification / Red-Team / Performance fifth seat.
 
-**Role realignment outcome:** OR-014 transferred D-068 from Nodus to Veyra; Veyra has completed D-068 with evidence in `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`. The green-authority checkpoint is already satisfied; D-069 remains blocked only by D-064 safe handoff and contributes no active potential until that handoff occurs.
+**Role realignment outcome:** OR-014 transferred D-068 from Nodus to Veyra; Veyra completed D-068, the green checkpoint passed, and D-064 is now DONE on semantic authority. D-069 is therefore the next READY gameplay primary for Veyra.
 
-**Transition note:** D-064 is DONE and merged at `d7ebb7ca439695e256a429a1e5d160daae69a521`; PR #70/run #362 is final green evidence and CPR-002 is resolved. D-069 is READY.
+**Transition note:** D-064 is DONE. Final PR #70/run #362 is green and merged as `d7ebb7ca439695e256a429a1e5d160daae69a521`; evidence, Learning Ledger, D-064-B and CPR-002 resolution are recorded. D-069 is unlocked for Veyra.
 
 **D-080 note:** DONE by Veyr. The Learning Ledger now contains first-wave records for Nodus, Veyra, Kestrel and Veyr plus a validated fast-path navigation audit. Future primary tasks should append compact task-local learning records rather than reopen D-080 for documentation volume.
 
