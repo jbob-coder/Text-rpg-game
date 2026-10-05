@@ -223,7 +223,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
             val bridge = python.getModule("textrpg.android_bridge")
             jsonModule = python.getModule("json")
             session = bridge.callAttr(
-                "open_android_session",
+                "create_session",
                 contentFile.absolutePath,
                 saveFile.absolutePath,
             )
