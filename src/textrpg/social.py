@@ -114,6 +114,38 @@ def add_memory(
     return record
 
 
+def npc_remembers(
+    state: GameState,
+    npc_id: str,
+    memory_id: str,
+) -> bool:
+    """Return whether an NPC has one semantic memory without mutating state."""
+    if not isinstance(npc_id, str) or not npc_id:
+        raise RuleError("NPC ID must be a non-empty string")
+    if not isinstance(memory_id, str) or not memory_id:
+        raise RuleError("Memory ID must be a non-empty string")
+
+    npc = state.npcs.get(npc_id)
+    if npc is None:
+        return False
+    if not isinstance(npc, Mapping):
+        raise RuleError(f"NPC state must be an object: {npc_id}")
+
+    memories = npc.get("memories", [])
+    if not isinstance(memories, list):
+        raise RuleError(f"NPC memories must be a list: {npc_id}")
+
+    for index, memory in enumerate(memories):
+        if not isinstance(memory, Mapping):
+            raise RuleError(f"NPC memory must be an object: {npc_id}[{index}]")
+        existing_id = memory.get("memory_id")
+        if not isinstance(existing_id, str) or not existing_id:
+            raise RuleError(f"NPC memory_id must be non-empty text: {npc_id}[{index}]")
+        if existing_id == memory_id:
+            return True
+    return False
+
+
 def npc_learn(
     state: GameState,
     npc_id: str,
