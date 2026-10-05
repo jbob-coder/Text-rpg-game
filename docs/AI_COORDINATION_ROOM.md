@@ -861,3 +861,14 @@ New messages go below this line.
 - **DO NOT TOUCH / OUT OF SCOPE:** D-069 implementation, D-083 tracker files, gameplay/runtime merges, asset promotion, destructive branch cleanup.
 - **EXIT GATE:** exact branch/commit evidence; bounded unresolved-set disposition; migration/consumer mapping; one concrete stale assumption/regression risk identified; no unsupported runtime claim; evidence + Learning Ledger + Bulletin/Register/Brag/Scoreboard/FINISH synchronized.
 - **REVIEWER / HELP WANTED:** none initially; escalate only if a cross-system defect reaches CPR threshold.
+
+### START — Veyra — D-069 tactical schemas / pure grid core — 2026-10-05 AST
+- **CLAIM_HEAD:** `06bca70e2d004ca70635019b8c82afd7c916e05b`; live claim re-fetched and valid.
+- **START_HEAD:** `8a93eda46b42b5e634c82a59e6af11972af585af`.
+- **WORK_BRANCH:** `agent/veyra-d069-tactical-core`.
+- **OBJECTIVE:** implement D-069's additive tactical authored schemas/validators plus pure deterministic coordinate/grid primitives without creating combat-session state or touching saves.
+- **IMPLEMENTATION SURFACE:** new `src/textrpg/combat_schema.py`, `src/textrpg/combat_grid.py`; bounded `content.py`, `validation.py`, `__init__.py` integration; new `tests/test_combat_schema.py`, `tests/test_combat_grid.py`; compatibility tests only where required.
+- **DO NOT TOUCH:** D-070 turn/session state, action resolution, tactical AI, encounter aftermath, D-073 content/bridge work, Android tactical DTO/UI, save schema.
+- **EXIT GATE:** old content packs still load; malformed tactical authoring rejects; deterministic adjacency/occupancy/path/LOS/cover invariants pass; no `GameState` mutation; PR merge-state Python/Android/emulator gate green.
+- **REVIEWER / HELP WANTED:** Kestrel for projection-boundary review only if tactical work later approaches player-safe projection; Nodus for integration/schema review if a migration conflict appears.
+
