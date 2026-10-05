@@ -98,7 +98,7 @@ class PythonGameEngine internal constructor(
 
     private fun mapSnapshot(payload: Map<String, Any?>): GameSnapshot =
         try {
-            mapSnapshot(payload)
+            PlayerSafeSnapshotMapper.fromMap(payload)
         } catch (failure: IllegalArgumentException) {
             throw GatewayFailure(
                 stageId = "PROJECTION_ERROR",
