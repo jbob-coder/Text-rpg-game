@@ -886,3 +886,22 @@ docs/FIRST_PASS_QUOTA_COVERAGE_AUDIT_2026-10-04.md now records all first-pass qu
 Next program control action:
 - D-060 fresh reproducible current-head inventory;
 - then second-pass/final quota recalibration and ranked reconstruction-depth work.
+
+## D-060 exact-revision inventory and second-pass recalibration
+
+D-060 is **DONE**.
+
+Current evidence:
+- `docs/evidence/repository_inventory_d060_exact_revision_2026-10-04.json`;
+- `docs/SECOND_PASS_DOCUMENTATION_RECALIBRATION_2026-10-04.md`;
+- immutable measured source HEAD `4570005b4d544f56db1222623955139a3b23c01a`.
+
+Control result:
+- the local inventory tool now inventories an immutable Git revision rather than mutable working-tree files;
+- regression tests prove dirty/untracked state cannot contaminate revision-bound counts;
+- fresh exact-tree structure is 561 tracked files, 387 Markdown files, 385 docs Markdown files, 24 structured documentation paths, 43 Python files, 68 Kotlin/KTS files and 52 test-source paths;
+- D-058's 148 / 148 first-pass semantic floor remains valid;
+- D-019 remains IN_PROGRESS for full-checkout word/heading execution and broader structured-record/evidence extraction;
+- second-pass work is now driven by migration/runtime/projection/persistence/integration closure gates rather than arbitrary file-count growth.
+
+No full engine suite, Android build, physical-device acceptance, or current-head Markdown word total is implied by this checkpoint.
