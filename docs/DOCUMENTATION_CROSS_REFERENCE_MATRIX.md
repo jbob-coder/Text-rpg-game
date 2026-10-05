@@ -1239,3 +1239,22 @@ Execution remains late-stage and gated.
 - docs/FIRST_PASS_QUOTA_COVERAGE_AUDIT_2026-10-04.md
 
 This is the current semantic owner for V00–V12 first-pass quota attribution and duplicate-resistant counting.
+
+## D-032 items/economy migration child and parent closure — 2026-10-04
+
+- `docs/systems/PHASE_1_ITEMS_ECONOMY_SCHEMA_API_MIGRATION_PACKET.md`
+
+The packet maps the current V07 / Gate Twelve item proof to:
+- schema-v1 flat `GameState.inventory`;
+- slot-keyed `GameState.equipment`;
+- `registries.items`;
+- transactional `RulesEngine` story-item effects;
+- `equipment.equip_item()` and Android bridge equip/unequip;
+- persistence validation boundaries;
+- player-safe Python inventory projection;
+- existing Kotlin inventory/equipment DTOs, ViewModel actions and Compose consumer;
+- D-067 exact-head validation/test/rollback work.
+
+It deliberately does not promote currency, vendors, crafting, durability, encumbrance or item instances into current runtime.
+
+With this child, D-032's five migration-design children are complete: progression, social, items/economy, combat and persistent adversary. Older matrix text naming any of those children as still open is historical and superseded by this checkpoint.
