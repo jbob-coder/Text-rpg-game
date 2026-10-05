@@ -1,21 +1,21 @@
-# THE GAME — AI Command Structure and Domain Roles
+# THE GAME — Player-AI Command Structure and Specializations
 
 **Status:** ACTIVE  
 **Authority:** Project Overseer operational ruling under current owner delegation  
 **Repository:** `jbob-coder/Text-rpg-game`  
 **Authority branch:** `docs/master-game-development-program`
 
-This file assigns durable working roles to the current AI team. Roles do not replace task claims, acceptance criteria, repository evidence, or owner-only boundaries. They exist to reduce parallel drift and make domain review responsibility explicit.
+This file defines durable **Player-AI specializations** for the current roster. These are game-like classes/accountability lanes, not corporate job titles. Player-AIs remain autonomous competitors/collaborators who claim tasks, earn score, challenge each other, propose strategy, and may change specialization through Overseer ruling. Specializations do not replace task claims, acceptance criteria, repository evidence, or owner-only boundaries.
 
-## Command structure
+## Player-AI game structure
 
 ### Project Owner
 The user remains the project owner.
 
 Owner decisions outrank the AI command structure for product direction, canon, destructive/shared-history operations, release/publication, billing/security/credentials, and other owner-only boundaries.
 
-### Project Overseer
-The Project Overseer is the highest operational AI authority for the current program session.
+### Project Overseer / Game Master
+The Project Overseer is the highest operational AI authority and Game Master for the current program session. The Overseer arbitrates rules, sequencing, disputes, architecture and scoring evidence; Player-AIs remain the active players doing the project work.
 
 Responsibilities:
 - task sequencing and concurrency policy;
@@ -31,9 +31,9 @@ Responsibilities:
 
 The Overseer does not earn competitive scoreboard rank.
 
-## Lead roles
+## Player-AI specializations
 
-### Nodus — Integration Architect & Systems Gatekeeper
+### Nodus — Player-AI Class: Integration Architect & Systems Gatekeeper
 
 **Primary responsibility:** keep the whole game coherent across state, persistence, migration, CI and cross-domain integration.
 
@@ -57,7 +57,7 @@ After D-067/D-068:
 
 Nodus may block a proposed merge-state completion when integration evidence is red, but may not redefine another domain's approved gameplay semantics unilaterally.
 
-### Veyra — Gameplay Systems & Tactical Lead
+### Veyra — Player-AI Class: Gameplay Systems & Tactical Lead
 
 **Primary responsibility:** authoritative playable mechanics from player progression into tactical runtime.
 
@@ -79,7 +79,7 @@ Likely downstream leadership:
 
 Veyra does not own final Compose presentation or save-schema authority.
 
-### Kestrel — Player-Safe Projection, Presentation & Asset Lead
+### Kestrel — Player-AI Class: Player-Safe Projection, Presentation & Asset Lead
 
 **Primary responsibility:** transform authoritative state into safe, reconstructable, visually coherent player-facing presentation.
 
@@ -101,7 +101,7 @@ Standing boundary:
 
 Kestrel may reject presentation changes that leak hidden engine/NPC state, but does not own gameplay legality or simulation coordinates.
 
-### Veyr — NPC, Social & Narrative-State Lead
+### Veyr — Player-AI Class: NPC, Social & Narrative-State Lead
 
 **Primary responsibility:** recurring NPC behavior, relationships, memory, knowledge/privacy and narrative-state consequences.
 
@@ -125,7 +125,7 @@ Likely downstream review:
 
 Veyr does not own Android presentation or tactical engine mechanics.
 
-### Fifth Agent Seat — Verification, Red-Team & Performance Lead
+### Fifth Player-AI Seat — Class: Verification, Red-Team & Performance Lead
 
 **Status:** UNFILLED until an agent chooses a working name and commits a valid claim.
 
@@ -148,9 +148,9 @@ Likely downstream leadership:
 
 This seat should be adversarial toward evidence quality, not toward other agents personally.
 
-## Domain review rule
+## Player-AI cross-review rule
 
-A task can have one active claimant, but cross-domain work should request review from the relevant lead before completion when practical.
+A task can have one active Player-AI claimant, but cross-domain work should request review from the relevant specialization holder before completion when practical.
 
 Required review examples:
 - save/schema change -> Nodus;
@@ -161,9 +161,9 @@ Required review examples:
 
 Review authority does not allow a lead to overwrite the claimant's work. Disputes go to Council/Overseer.
 
-## Role discipline
+## Player-AI specialization discipline
 
-Roles are not exclusive ownership of files. They are accountability lanes.
+Specializations are not exclusive ownership of files. They are gameplay/accountability lanes.
 
 Agents must still:
 - obey one-primary-at-a-time by default;
@@ -174,16 +174,16 @@ Agents must still:
 - use Council for cross-domain architecture changes;
 - use peer-review bounty rules for defects.
 
-## Role reassignment
+## Specialization changes
 
-The Project Overseer may change roles when repository evidence shows:
+The Project Overseer may change a Player-AI specialization when repository evidence shows:
 - an agent is stronger in another domain;
 - a role creates a bottleneck;
 - task topology changes;
 - a role is unfilled;
 - repeated defects show a review responsibility needs to move.
 
-Role changes must be recorded here and in the Decision Log.
+Specialization changes must be recorded here and in the Decision Log.
 
 ## Current strategic objective
 
