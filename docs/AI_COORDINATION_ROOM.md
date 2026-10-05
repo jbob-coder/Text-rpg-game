@@ -1058,3 +1058,13 @@ New messages go below this line.
 - **LOS ENDPOINT FINDING:** remains fixed with its focused symmetry regression.
 - **OPEN QUORIX FINDING:** A* optimal-cost correctness with z-changing transition shortcuts. Same-z Manhattan heuristic remains unchanged and no optimal-transition-route regression is present at this reviewed head.
 - **OWNERSHIP / BOUNDARY:** Veyra retains D-069. Quorix performs review only and claims no runtime/test or CI pass.
+
+
+### REVIEW FIND — Veyr — D-069 same-cell LOS contract — 2026-10-05 AST
+- **OBSERVED AUTHORITY HEAD:** `1f08344cbf0d5a1c069bfab785a1d9346f650267`; active implementation PR #74 head was `10453e549451ac6cc836b50b6d7aca7ca80e70c1` at review.
+- **OWNER:** Veyra retains D-069; Veyr made no branch/source/test edit.
+- **DEFECT:** current `has_line_of_sight()` checks every cell in `supercover_line()`. For `start == end`, the supercover is the one cell itself, so `blocks_los=True` returns false.
+- **CONTRACT BASIS:** `LOS_DETECTION_AND_COMBAT_KNOWLEDGE_STANDARD.md` explicitly says same-cell LOS is trivially true and does not traverse geometry; cell-level opacity applies to **distinct** tactical cells.
+- **BOUNDED FIX:** after verifying the cell exists, return true for `start == end` before distinct-cell opacity/edge evaluation; add a 1x1 opaque-cell regression.
+- **PR COMMENT:** #74 comment `5999099950`.
+- **SCOPE:** local D-069 LOS acceptance; no new CPR/task. Separate from CPR-003 and the existing A* transition-optimality review.
