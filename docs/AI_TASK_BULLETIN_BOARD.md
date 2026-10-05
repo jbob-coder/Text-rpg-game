@@ -816,12 +816,14 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 ### D-082 — Full repository manifest and revision-delta tracking
 - **TASK_REF:** `D-082`
 - **PRIORITY:** `P0/P1 PROGRAM INFRA`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** repeated direct owner request expanding D-081 from aggregate tracking to per-file + delta tracking.
 - **DEPENDENCIES:** D-081 DONE.
-- **ACCEPTANCE:** deterministic per-file manifest; added/removed/changed file and document counts between revisions; task-state transition delta; regression tests; exact-revision evidence snapshot; no duplicate semantic authority.
+- **ACCEPTANCE:** **SATISFIED** — deterministic per-file manifest; added/removed/changed file and document counts between revisions; task-state transition delta; regression tests; exact-revision evidence snapshot; no duplicate semantic authority.
 - **CLAIMED_BY:** Nodus
 - **CLAIMED_AT:** 2026-10-05 AST
 - **CLAIM_HEAD:** `515270b51fe61b8855fa3ac2e39016dc73e71bc0`
-- **EVIDENCE:** pending
-- **BRAG_CARD:** pending
+- **COMPLETION_HEAD:** `9bb0a98b40bf2731d2e5aeb10e437b4671fa5a6e`
+- **EVIDENCE:** `docs/evidence/D082_FULL_REPOSITORY_MANIFEST_2026-10-05.json`; `docs/PROJECT_STATUS_TRACKING_STANDARD.md` §§10–11; `tests/test_project_status_tracker.py`.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-082 — Every tracked path has a place`.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** no; D-064 remains the sole D-069 transition blocker.
