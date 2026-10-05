@@ -20,6 +20,7 @@ SUPPORTED_CONDITIONS: Set[str] = {
     "not_knows",
     "npc_knows",
     "npc_not_knows",
+    "npc_remembers",
     "party_has",
     "ability_rank_min",
     "technique_discoverable",
@@ -41,6 +42,7 @@ SUPPORTED_EFFECTS: Set[str] = {
     "quest_objective_fail",
     "quest_fail",
     "npc_learn",
+    "npc_memory_add",
     "npc_goal_create",
     "npc_goal_progress",
     "npc_story_transition",
@@ -86,6 +88,13 @@ def _walk_conditions(conditions: Any, location: str, errors: List[str]) -> None:
                 validate_resource_requirement(condition)
             except RuleError as exc:
                 errors.append(f"{item_location} has invalid resource requirement: {exc}")
+        if kind == "npc_remembers":
+            _validate_id(condition.get("npc"), f"{item_location}.npc", errors)
+            _validate_id(
+                condition.get("memory_id"),
+                f"{item_location}.memory_id",
+                errors,
+            )
         if kind == "technique_discoverable":
             _validate_id(
                 condition.get("ability_id"),
@@ -129,6 +138,7 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
     npc_effects = {
         "relationship",
         "npc_learn",
+        "npc_memory_add",
         "npc_goal_create",
         "npc_goal_progress",
         "npc_story_transition",
@@ -200,6 +210,34 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
             skill = effect.get("skill")
             if not isinstance(skill, str) or not skill:
                 errors.append(f"{item_location}.skill must be non-empty text")
+
+        if kind == "npc_memory_add":
+            _validate_id(
+                effect.get("memory_id"),
+                f"{item_location}.memory_id",
+                errors,
+            )
+            importance = effect.get("importance", 1)
+            if (
+                isinstance(importance, bool)
+                or not isinstance(importance, int)
+                or importance < 1
+                or importance > 5
+            ):
+                errors.append(
+                    f"{item_location}.importance must be an integer in range 1..5"
+                )
+            tags = effect.get("tags", [])
+            if (
+                not isinstance(tags, list)
+                or not all(isinstance(tag, str) and tag for tag in tags)
+            ):
+                errors.append(
+                    f"{item_location}.tags must be a list of non-empty strings"
+                )
+            data = effect.get("data")
+            if data is not None and not isinstance(data, Mapping):
+                errors.append(f"{item_location}.data must be an object")
 
         if kind == "npc_goal_create":
             _validate_id(effect.get("goal_id"), f"{item_location}.goal_id", errors)
