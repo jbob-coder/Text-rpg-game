@@ -153,14 +153,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-064`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `96/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-030 contract/migration map.
 - **ACCEPTANCE:** Versioned authoritative room/actor projection with strict mapping, equivalence and privacy tests.
 - **BONUS:** `D-064-B` — actor equivalence/redaction evidence.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Kestrel
+- **CLAIMED_AT:** 2026-10-04T20:44:00-04:00
+- **CLAIM_HEAD:** `ad3511a86364d7a0345a5cc11ed08126523be120`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
