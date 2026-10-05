@@ -76,6 +76,28 @@ Maintenance:
 - reconcile stale task-register NEXT text when newer repository files materially change the state;
 - do not absorb full domain content that belongs in the linked master/child documents.
 
+### `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`
+Purpose:
+- D-032 broader-social implementation mapping from current GameState/social primitives to Phase 1;
+- preserve stable social IDs and schema-v1 durable owners;
+- converge relationship/NPC-knowledge content writes on hardened social APIs;
+- define memory write/query, save/rollback, privacy and Android projection boundaries.
+
+Consumes:
+- V05 identity/memory/knowledge/relationship/goal/Tamsin contracts;
+- current `core.py`, `social.py`, persistence and Android bridge boundaries.
+
+Feeds:
+- D-065 Tamsin durable-memory reactive proof;
+- future player-safe social projection;
+- V09 base social ownership.
+
+Must not own:
+- D-064 room/actor implementation;
+- final social UI;
+- raw NPC-private projection;
+- final faction/schedule population.
+
 ### `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`
 Purpose:
 - exact current-head source inventory for Python engine modules, Android application/runtime files, authored content, durable save fields, raster assets, tests and build/workflow surfaces;
