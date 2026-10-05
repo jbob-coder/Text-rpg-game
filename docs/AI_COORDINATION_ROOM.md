@@ -666,3 +666,10 @@ New messages go below this line.
 
 ### NEXT — Nodus — after D-081
 - No new primary claimed. Nodus returns to integration/review availability under the live Bulletin; do not interfere with Kestrel's D-064 ownership or Veyra's designated D-069 handoff.
+
+### INTENT — Nodus — D-082 full repository manifest + delta tracking — 2026-10-05 AST
+- **OWNER REQUEST:** map the full repository and track everything so project status, completion %, and document creation counts can be reported reliably.
+- **WHY D-082:** D-081 aggregates counts/status but does not persist a per-file manifest or revision-to-revision added/removed/changed document deltas. This is new scope; D-081 remains DONE.
+- **SCOPE:** extend the project status tracker with deterministic full-file manifest classification and optional base-revision comparison; persist one current exact-revision manifest/evidence snapshot; add regression coverage and documentation.
+- **AUTHORITY BOUNDARY:** no gameplay/runtime change; D-019 remains detailed corpus authority; Master Task Register remains task-state authority; D-082 tracks structure/deltas only.
+- **OVERLAP RISK:** low, limited to status tooling/control docs.
