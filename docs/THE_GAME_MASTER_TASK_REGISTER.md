@@ -1504,8 +1504,11 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - LIMITATIONS: no CombatSession/turn engine, reactions, awareness/AI, attack/aftermath, Android combat projection, mid-combat persistence, physical-device validation, or canonical player persistent ID claimed.
 
 ### TASK D-070 — Implement tactical transient state, turn and action engine
-- STATUS: `READY / DEPENDENCY SATISFIED / BULLETIN CLAIM REQUIRED`
+- STATUS: `IN_PROGRESS / CLAIMED BY VEYRA`
 - PRIORITY: `P0 / RANK 11`
+- CLAIMED_BY: Veyra
+- CLAIMED_AT: `2026-10-05T13:26:00-04:00`
+- CLAIM_HEAD: `5362f50eec8e9a0da1af9a395314932bf8110648`
 - DEPENDS_ON: D-069 DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
 - PURPOSE: implement transient authoritative combat session, initiative/activations/action budget and deterministic committed action resolution without save-schema expansion.
 - ACCEPTANCE: headless encounter executes deterministic legal turns/actions; previews do not consume event sequence.
