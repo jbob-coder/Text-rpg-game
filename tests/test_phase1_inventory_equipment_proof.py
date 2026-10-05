@@ -185,7 +185,6 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
 
         self.assertEqual(before, session.state.snapshot())
 
-
     def test_legacy_android_factory_accepts_positional_save_path(self) -> None:
         with TemporaryDirectory() as directory:
             save_path = Path(directory) / "compatibility.json"
@@ -193,7 +192,6 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
             view = session.scene_view()
             self.assertEqual("CONTENT_VERTICAL_SLICE_01", view["meta"]["content_id"])
             self.assertEqual("PLATFORM_NINE", view["meta"]["location"])
-
 
     def test_player_safe_inventory_projection_is_complete_without_raw_modifiers(self) -> None:
         session = open_android_session(CONTENT)
@@ -216,10 +214,6 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
             },
             {item["id"] for item in inventory["items"]},
         )
-
-
-if __name__ == "__main__":
-    unittest.main()
 
 
 if __name__ == "__main__":
