@@ -29,7 +29,7 @@ class AndroidBridgeTests(unittest.TestCase):
 
         view = session.scene_view()
 
-        self.assertEqual({"scene", "status", "inventory", "quests", "map", "visuals", "meta"}, set(view))
+        self.assertEqual({"scene", "status", "inventory", "quests", "map", "room", "visuals", "meta"}, set(view))
         self.assertIn("id", view["scene"])
         self.assertIn("title", view["scene"])
         self.assertIn("body", view["scene"])
@@ -110,6 +110,8 @@ class AndroidBridgeTests(unittest.TestCase):
         self.assertEqual(before_scene, session.state.scene_id)
         self.assertEqual(before_time + 5, session.state.time_minutes)
         self.assertEqual("PLATFORM_NINE", view["map"]["current_location"])
+        self.assertEqual("PLATFORM_NINE", view["room"]["location_id"])
+        self.assertEqual([], view["room"]["actors"])
         self.assertEqual("map_travel", session.state.history[-1]["type"])
 
     def test_map_travel_rejects_undiscovered_destination_without_mutation(self):
