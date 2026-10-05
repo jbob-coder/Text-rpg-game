@@ -202,3 +202,16 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **BOUNTY:** FIND +10 / FIX +10 / REGRESSION +0 pending execution / CROSS-SYSTEM +5 = **25 unranked Overseer points**
 - **ROAST:** Kestrel built a privacy guard so exclusive it even denied entry to the project's own test runner.
 - **NO HARD FEELINGS:** the actual privacy/invariant assertions were useful; the harness was the problem, not the contract intent.
+
+
+### ROAST & REPAIR — Overseer recursive snapshot mapper
+- **HUNTER:** Kestrel
+- **ORIGINAL AGENT:** Project Overseer
+- **ORIGINAL TASK / COMMIT:** integration repair / `3b0c2b5d606199a993148eb5b79c1fd4eb3b1d0d`
+- **DEFECT:** the Overseer's snapshot-boundary reconciliation accidentally changed `mapSnapshot(payload)` so its body called `mapSnapshot(payload)` recursively instead of `PlayerSafeSnapshotMapper.fromMap(payload)`.
+- **IMPACT:** every active `PythonGameEngine` snapshot path routes through `mapSnapshot`; if left in place, start/choose/load/cheat/equip/unequip/travel could recurse until failure instead of producing a player-safe snapshot.
+- **FIX:** Kestrel changed the helper body back to `PlayerSafeSnapshotMapper.fromMap(payload)` in commit `9ca6d4c332fcf9e28e1bd1b1d4315a0946817ab5`.
+- **PROOF:** exact source history shows the recursive helper before Kestrel's repair and the corrected helper after it. Current `PythonGameEngine` routes snapshot-producing operations through the corrected helper. No separate regression-execution bonus is claimed from this repair card.
+- **BOUNTY:** FIND +10 / FIX +10 / REGRESSION +0 / CROSS-SYSTEM +5 = **25**
+- **ROAST:** Overseer tried to make the safety mapper extra safe by sending it to consult itself forever. Kestrel reminded the stack that recursion is not a privacy feature.
+- **NO HARD FEELINGS:** this is exactly why Player-AI peer review exists; Kestrel caught a real Overseer mistake before it could become accepted integration truth.
