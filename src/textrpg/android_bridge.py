@@ -195,72 +195,282 @@ class AndroidGameSession:
         except RuleError as exc: raise AndroidBridgeError("CHOICE_ERROR", "That choice is not available.", technical_detail=str(exc)) from exc
 
     def travel(self, location_id: str) -> Dict[str, Any]:
-        if not isinstance(location_id, str) or not location_id: raise AndroidBridgeError("TRAVEL_ERROR", "Choose a valid destination.")
+        """Move between discovered adjacent map nodes without bypassing story rules."""
+        if not isinstance(location_id, str) or not location_id:
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "Choose a valid destination.",
+            )
+
         authored = self.content.raw.get("world_map", {})
-        if not isinstance(authored, Mapping): raise AndroidBridgeError("TRAVEL_ERROR", "Travel is not available in this area.")
-        raw_nodes, raw_edges = authored.get("nodes", {}), authored.get("edges", [])
-        if not isinstance(raw_nodes, Mapping) or not isinstance(raw_edges, list): raise AndroidBridgeError("TRAVEL_ERROR", "Travel data is unavailable.")
-        if location_id not in raw_nodes: raise AndroidBridgeError("TRAVEL_ERROR", "That destination does not exist.")
+        if not isinstance(authored, Mapping):
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "Travel is not available in this area.",
+            )
+        raw_nodes = authored.get("nodes", {})
+        raw_edges = authored.get("edges", [])
+        if not isinstance(raw_nodes, Mapping) or not isinstance(raw_edges, list):
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "Travel data is unavailable.",
+            )
+        if location_id not in raw_nodes:
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "That destination does not exist.",
+            )
+
         current = self._location_for(self.state)
-        if current == location_id: return self.scene_view()
+        if current == location_id:
+            return self.scene_view()
         target_node = raw_nodes.get(location_id, {})
-        if not isinstance(target_node, Mapping): raise AndroidBridgeError("TRAVEL_ERROR", "Travel data for that destination is invalid.")
-        visible_map = self._map_view_for(self.state); discovered = {node["id"] for node in visible_map["nodes"] if isinstance(node, Mapping) and isinstance(node.get("id"), str)}
-        if location_id not in discovered: raise AndroidBridgeError("TRAVEL_ERROR", "That destination has not been discovered.")
-        connected, travel_minutes = False, 5
+        if not isinstance(target_node, Mapping):
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "Travel data for that destination is invalid.",
+            )
+
+        visible_map = self._map_view_for(self.state)
+        discovered = {
+            node["id"] for node in visible_map["nodes"]
+            if isinstance(node, Mapping) and isinstance(node.get("id"), str)
+        }
+        if location_id not in discovered:
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "That destination has not been discovered.",
+            )
+
+        connected = False
+        travel_minutes = 5
         for edge in raw_edges:
-            if isinstance(edge, Mapping) and {edge.get("from"), edge.get("to")} == {current, location_id}:
-                connected = True; authored_minutes = edge.get("travel_minutes", 5)
-                if isinstance(authored_minutes, bool) or not isinstance(authored_minutes, int) or authored_minutes < 0: raise AndroidBridgeError("TRAVEL_ERROR", "Travel time data is invalid.")
-                travel_minutes = authored_minutes; break
-        if not connected: raise AndroidBridgeError("TRAVEL_ERROR", "No discovered route connects those locations.")
+            if not isinstance(edge, Mapping):
+                continue
+            start = edge.get("from")
+            end = edge.get("to")
+            if {start, end} == {current, location_id}:
+                connected = True
+                authored_minutes = edge.get("travel_minutes", 5)
+                if (
+                    isinstance(authored_minutes, bool)
+                    or not isinstance(authored_minutes, int)
+                    or authored_minutes < 0
+                ):
+                    raise AndroidBridgeError(
+                        "TRAVEL_ERROR",
+                        "Travel time data is invalid.",
+                    )
+                travel_minutes = authored_minutes
+                break
+
+        if not connected:
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "No discovered route connects those locations.",
+            )
+
         before = deepcopy(self.state.snapshot())
         try:
             from .simulation import advance_time
-            advance_time(self.state, travel_minutes, self.engine)
-            self.state.flags["android.map_location_override"] = location_id
-            self.state.history.append({"type": "travel", "from": current, "to": location_id, "turn": self.state.turn, "time_minutes": self.state.time_minutes})
+
+            advance_time(self.state, travel_minutes)
+            target_scene = target_node.get("scene_id")
+            if target_scene is not None:
+                if (
+                    not isinstance(target_scene, str)
+                    or not target_scene
+                    or target_scene not in self.engine.scenes
+                ):
+                    raise RuleError(
+                        f"Map destination references invalid scene: {location_id}"
+                    )
+                self.state.scene_id = target_scene
+                self.state.flags.pop("android.map_location_override", None)
+            else:
+                self.state.flags["android.map_location_override"] = location_id
+            self.state.history.append(
+                {
+                    "type": "map_travel",
+                    "from": current,
+                    "to": location_id,
+                    "travel_minutes": travel_minutes,
+                    "turn": self.state.turn,
+                    "time_minutes": self.state.time_minutes,
+                }
+            )
             return self.scene_view()
-        except AndroidBridgeError: self.state = GameState(**before); raise
-        except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("TRAVEL_ERROR", "Travel could not be completed.", technical_detail=str(exc)) from exc
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError(
+                "TRAVEL_ERROR",
+                "Travel could not be completed.",
+                technical_detail=str(exc),
+            ) from exc
 
     def apply_cheat(self, code: str) -> Dict[str, Any]:
-        if not isinstance(code, str) or not code: raise AndroidBridgeError("CHEAT_ERROR", "Enter a valid cheat code.")
+        """Apply an explicit developer cheat without exposing generic state mutation."""
+        if not isinstance(code, str) or not code.strip():
+            raise AndroidBridgeError("CHEAT_ERROR", "Enter a valid cheat code.")
+
         normalized = code.strip().upper()
         before = deepcopy(self.state.snapshot())
         try:
-            if normalized == "FULL RESTORE":
-                self.state.health = self.state.max_health; self.state.stamina = self.state.max_stamina
-                self.state.history.append({"type": "android_debug_cheat", "code": "FULL_RESTORE", "turn": self.state.turn}); return self.scene_view()
-            if normalized == "REVEAL MAP":
+            if normalized == "FULLRESTORE":
+                resources = self.state.player.setdefault("resources", {})
+                if not isinstance(resources, dict):
+                    raise RuleError("player.resources must be mutable")
+                for resource in self._status_view_for(self.state)["resources"]:
+                    resources[resource["id"]] = resource["max"]
+            elif normalized == "CLEARCONDITIONS":
+                self.state.player["conditions"] = {}
+            elif normalized == "GIVE_RELAY":
+                self.state.inventory["ITEM_DEAD_RELAY"] = (
+                    self.state.inventory.get("ITEM_DEAD_RELAY", 0) + 1
+                )
+            elif normalized == "MAXATTR":
+                attributes = self.state.player.setdefault("attributes", {})
+                if not isinstance(attributes, dict):
+                    raise RuleError("player.attributes must be mutable")
+                for attribute in self._status_view_for(self.state)["attributes"]:
+                    attributes[attribute["id"]] = 100
+            elif normalized == "DEBUGMAP":
                 self.state.flags["android_debug.discover_all_map"] = True
-                self.state.history.append({"type": "android_debug_cheat", "code": "REVEAL_MAP", "turn": self.state.turn}); return self.scene_view()
-            if normalized.startswith("SET TIME "):
-                value = normalized.removeprefix("SET TIME ").strip()
-                if not value.isdigit(): raise RuleError("SET TIME requires a non-negative integer")
-                self.state.time_minutes = int(value); self.state.history.append({"type": "android_debug_cheat", "code": "SET_TIME", "value": int(value), "turn": self.state.turn}); return self.scene_view()
-            raise RuleError("Unknown cheat code")
-        except AndroidBridgeError: self.state = GameState(**before); raise
-        except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("CHEAT_ERROR", "That cheat code is not available.", technical_detail=str(exc)) from exc
+            elif normalized == "DISTRICT":
+                if "DISTRICT_HUB" not in self.engine.scenes:
+                    raise RuleError("DISTRICT cheat requires DISTRICT_HUB content")
+                self.state.flags["world.free_roam_unlocked"] = True
+                self.state.flags["vertical_slice_01.opening_complete"] = True
+                self.state.flags.pop("android.map_location_override", None)
+                self.state.scene_id = "DISTRICT_HUB"
+            else:
+                raise AndroidBridgeError(
+                    "CHEAT_ERROR",
+                    "Unknown cheat code.",
+                    technical_detail=f"Unsupported cheat code: {normalized}",
+                )
+
+            self.state.history.append(
+                {
+                    "type": "cheat_applied",
+                    "code": normalized,
+                    "turn": self.state.turn,
+                    "time_minutes": self.state.time_minutes,
+                }
+            )
+            return self.scene_view()
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError(
+                "CHEAT_ERROR",
+                "The cheat code could not be applied.",
+                technical_detail=str(exc),
+            ) from exc
 
     def equip(self, item_id: str) -> Dict[str, Any]:
+        """Equip one authored inventory item through the authoritative rules."""
+        if not isinstance(item_id, str) or not item_id:
+            raise AndroidBridgeError(
+                "EQUIP_ERROR",
+                "Choose a valid item to equip.",
+            )
+
+        definitions = self.content.registries.get("items", {})
+        definition = definitions.get(item_id) if isinstance(definitions, Mapping) else None
+        if not isinstance(definition, Mapping):
+            raise AndroidBridgeError(
+                "EQUIP_ERROR",
+                "That item cannot be equipped.",
+                technical_detail=f"Missing authored equipment definition: {item_id}",
+            )
+
         before = deepcopy(self.state.snapshot())
-        try: equip_item(self.state, item_id, self.content.registries.get("items", {})); return self.scene_view()
-        except AndroidBridgeError: self.state = GameState(**before); raise
-        except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("EQUIP_ERROR", "That item could not be equipped.", technical_detail=str(exc)) from exc
+        try:
+            authored_item = dict(definition)
+            authored_item["item_id"] = item_id
+            previous = equip_item(
+                self.state,
+                authored_item,
+                consume_inventory=True,
+            )
+            if isinstance(previous, Mapping):
+                replaced_id = previous.get("item_id")
+                if isinstance(replaced_id, str) and replaced_id:
+                    self.state.inventory[replaced_id] = (
+                        self.state.inventory.get(replaced_id, 0) + 1
+                    )
+
+            self.state.history.append(
+                {
+                    "type": "equipment_changed",
+                    "action": "equip",
+                    "item_id": item_id,
+                    "slot": authored_item.get("slot"),
+                    "turn": self.state.turn,
+                    "time_minutes": self.state.time_minutes,
+                }
+            )
+            return self.scene_view()
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError(
+                "EQUIP_ERROR",
+                "That item could not be equipped.",
+                technical_detail=str(exc),
+            ) from exc
 
     def unequip(self, slot: str) -> Dict[str, Any]:
-        if not isinstance(slot, str) or slot not in DEFAULT_SLOTS: raise AndroidBridgeError("EQUIP_ERROR", "Choose a valid equipment slot.")
+        """Return equipped gear to inventory without bypassing authoritative state."""
+        if not isinstance(slot, str) or slot not in DEFAULT_SLOTS:
+            raise AndroidBridgeError(
+                "EQUIP_ERROR",
+                "Choose a valid equipment slot.",
+            )
+
         before = deepcopy(self.state.snapshot())
         try:
             record = self.state.equipment.get(slot)
-            if not isinstance(record, Mapping): raise RuleError(f"Nothing equipped in slot: {slot}")
+            if not isinstance(record, Mapping):
+                raise AndroidBridgeError(
+                    "EQUIP_ERROR",
+                    "That equipment slot is already empty.",
+                )
             item_id = record.get("item_id")
-            if not isinstance(item_id, str) or not item_id: raise RuleError(f"Equipped slot has no valid item_id: {slot}")
-            del self.state.equipment[slot]; self.state.inventory[item_id] = self.state.inventory.get(item_id, 0) + 1
-            self.state.history.append({"type": "equipment_changed", "action": "unequip", "item_id": item_id, "slot": slot, "turn": self.state.turn, "time_minutes": self.state.time_minutes}); return self.scene_view()
-        except AndroidBridgeError: self.state = GameState(**before); raise
-        except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("EQUIP_ERROR", "That item could not be unequipped.", technical_detail=str(exc)) from exc
+            if not isinstance(item_id, str) or not item_id:
+                raise RuleError(f"Equipped slot has no valid item_id: {slot}")
+
+            del self.state.equipment[slot]
+            self.state.inventory[item_id] = self.state.inventory.get(item_id, 0) + 1
+            self.state.history.append(
+                {
+                    "type": "equipment_changed",
+                    "action": "unequip",
+                    "item_id": item_id,
+                    "slot": slot,
+                    "turn": self.state.turn,
+                    "time_minutes": self.state.time_minutes,
+                }
+            )
+            return self.scene_view()
+        except AndroidBridgeError:
+            self.state = GameState(**before)
+            raise
+        except (RuleError, TypeError, ValueError) as exc:
+            self.state = GameState(**before)
+            raise AndroidBridgeError(
+                "EQUIP_ERROR",
+                "That item could not be unequipped.",
+                technical_detail=str(exc),
+            ) from exc
 
     def save(self) -> Dict[str, Any]:
         if self._save_path is None: raise AndroidBridgeError("SAVE_ERROR", "No save destination is configured.")
