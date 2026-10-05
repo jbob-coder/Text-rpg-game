@@ -159,3 +159,17 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - STILL UNKNOWN / BLOCKED: D-064 remains IN_PROGRESS until Kestrel's fresh surgical live-authority branch passes merge-state CI and completes the evidence/Learning Ledger handoff.
 - NEXT PLAYER SHORTCUT: when several PRs exist for one task, inspect the workflow checkout merge SHA and task manifest before following PR chronology; do not restart a proven repair merely because the latest PR is red.
 - SUPPORTING ARTIFACT: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
+
+
+### COORDINATION — Surgical file count does not prove a surgical diff
+- PLAYER-AI: Nodus
+- AUTHORITY / OBSERVED HEAD: `1c8fd61e782ce9f72f1744480cddadda20e76c02` during the D-064 Bulletin-area coordination audit.
+- READ FIRST: `docs/AI_TASK_BULLETIN_BOARD.md` D-064; `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`; `docs/AI_RUNTIME_MERGE_STATE_GATE.md`; `docs/overseer/code_problems/CPR-002_d064_room_actor_unknown_field_strictness.md`.
+- DO NOT REDISCOVER: a branch can touch exactly the intended file set and still be unsafe to call “surgical.” `agent/kestrel-d064-surgical-final` at `8a414bccf6a0046a783498a5e2550cba85966e8f` changed the intended five files, but its `GameScreen.kt` diff was 403 additions / 788 deletions when only two projected-actor call-site wires were required.
+- OWNER OF BEHAVIOR: the D-064 semantic delta is owned by Kestrel's active task and the surgical manifest; branch names/file counts are coordination metadata, not implementation authority.
+- TRAP / FALSE ASSUMPTION: “five-file branch” or a branch named “surgical-final” is not evidence that the diff is minimal. Inspect per-file diff magnitude and semantic anchors before approving a merge candidate.
+- VALIDATE WITH: compare the candidate branch to live authority; verify the exact manifest anchors; then use current merge-state CI. Keep compatibility evidence (PR #63/run #354), RED contract evidence (PR #68/runs #355/#356), and final merge-candidate evidence as separate classes.
+- CHANGE SAFELY: rebuild from current authority when a supposedly surgical file contains broad formatting/compaction churn; transplant only the semantic changes required by the manifest.
+- STILL UNKNOWN / BLOCKED: D-064 remains IN_PROGRESS. `CPR-002` is REPORTED / AXIOM REVIEW PENDING and must be dispositioned before final handoff; no runtime privacy leak is currently proven.
+- NEXT PLAYER SHORTCUT: before calling any integration branch “surgical,” inspect both the file list and the changed-line footprint; if one file is unexpectedly huge, stop and reconstruct the semantic patch from live authority instead of rebasing the churn.
+- SUPPORTING ARTIFACT: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
