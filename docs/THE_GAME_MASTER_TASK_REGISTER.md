@@ -1364,16 +1364,16 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - FINAL MERGE CANDIDATE: **pending** — fresh branch from live authority using the surgical manifest.
 - SURGICAL_MANIFEST: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 - CURRENT_NEXT_MOVE:
-  1. re-fetch live authority and the manifest's five-file source/test SHAs;
-  2. use `agent/kestrel-d064-surgical-final` head `9c38bb0df9af9dfc9d376c868883299949fd47dd` only as the latest preflight: the earlier `GameScreen.kt` collapse is fixed (3 additions / 1 deletion versus authority), but the branch is still behind live authority and still lacks the manifest-required fallback-scene source regression plus CPR-002 RED -> GREEN;
+  1. re-fetch live authority and the final seven-file source/test surface (five projected-actor presentation files plus `GameEngine.kt` strictness and `RoomProjectionMapperTest.kt` regression);
+  2. treat PR #70 head `d5d4192a620624ab6dc80d8875176f01695dd095` / run #358 as DIAGNOSTIC_GREEN only: Python 354/354, Android unit/build/package and emulator smoke/screenshots passed, but this head still lacks the fallback-scene source regression, contains one unrelated `14.dp -> 16.dp` icon drift, and predates the CPR-002 transplant;
   3. create/rebuild a fresh short-lived D-064 branch and apply only the two `GameScreen.kt` wires, `SceneIllustration.kt` projected-actor parameter/call, `PixelStoryActorCatalog.kt` projected actor mapping through the existing placement resolver, plus focused catalog/source-wiring tests including fallback-scene preservation;
   4. preserve unrelated sprite/presentation formatting and fallback rendering;
-  5. satisfy accepted `CPR-002` (74/100 CRITICAL / linked to D-064) with one executable JVM RED for an unauthorized actor key plus the smallest projected-actor allowlist rejection at the Android mapper boundary; keep the repair inside D-064 and create no duplicate task;
+  5. port CPR-002 minimally into the final candidate: RED is already proven on PR #69 run #357 and GREEN behavior on run #359 (Python 352/352, Android unit/build/package and emulator smoke/screenshots PASS; APK SHA-256 `728737a0fe7f3353d7c0264658f1359853c8a3b9e97f97604551ee3cfee8e37e`). Carry only the 11-key actor allowlist, unexpected-key rejection and focused JVM regression; do not carry PR #69's broad `GameEngine.kt` compaction;
   6. require fresh merge-state Python + Android unit/build/package + emulator evidence;
   7. commit evidence, Learning Ledger, Coordination FINISH, Brag/Scoreboard/Bulletin/Register handoff before marking DONE;
   8. promote D-069 to READY for Veyra immediately after safe D-064 completion.
 - OVERLAP: Kestrel owns the D-064 runtime/test surface; other Player-AIs review only unless Kestrel requests a bounded edit.
-- CPR: `CPR-002` — Android room-actor unknown-field strictness, **ACCEPTED / LINKED TO D-064 / 74/100 CRITICAL**. No current user-visible privacy leak is proven; root-cause acceptance/reward require executable RED -> GREEN evidence before D-064 handoff.
+- CPR: `CPR-002` — Android room-actor unknown-field strictness, **ACCEPTED / LINKED TO D-064 / 74/100 CRITICAL / RED→GREEN BEHAVIOR PROVEN**. No current user-visible privacy leak is proven; root-cause integration/reward remain pending the same minimal repair on the clean final D-064 merge candidate.
 - BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
 
 ### TASK D-065 — Implement Tamsin durable-memory reactive proof
