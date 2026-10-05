@@ -1,0 +1,85 @@
+{
+  "schema_version": 2,
+  "task": "D-060",
+  "repository": "jbob-coder/Text-rpg-game",
+  "branch": "docs/master-game-development-program",
+  "source_head": "4570005b4d544f56db1222623955139a3b23c01a",
+  "captured_date_ast": "2026-10-04",
+  "inventory_contract": {
+    "tool": "tools/documentation_inventory.py",
+    "tool_blob_sha": "0a59930bee2e9ad407a6e0c3cb1931fbad60d3f5",
+    "test": "tests/test_documentation_inventory_tool.py",
+    "test_blob_sha": "6587eecc386242f6fb45e4600ef46e9ada305156",
+    "mode": "immutable Git revision",
+    "working_tree_included": false,
+    "revision_resolution": "requested revision -> immutable commit SHA -> git archive of that commit",
+    "current_tree_has_gitlinks": false,
+    "current_tree_has_symlinks": false
+  },
+  "verification": {
+    "regression_command": "PYTHONPATH=. python -m unittest tests.test_documentation_inventory_tool -v",
+    "regression_result": "2 tests passed, 0 failures/errors",
+    "execution_environment": "isolated temporary Git repositories using the exact file bytes later committed to the branch",
+    "committed_blob_identity_check": "git hash-object of executed local files matched the committed GitHub blob SHAs for both tool and test",
+    "full_repository_tool_execution": "NOT_EXECUTED_IN_CONNECTOR_ONLY_ENVIRONMENT",
+    "markdown_word_heading_counts": "NOT_EXECUTED_AT_SOURCE_HEAD",
+    "reason": "The connected repository API exposes immutable Git trees/files but does not provide a local checkout/archive execution environment. Structural counts below are exact for source_head; word/heading totals remain a D-019 execution item."
+  },
+  "structural_counts": {
+    "tracked_files": 561,
+    "tracked_blob_bytes": 5810858,
+    "files_under_docs": 416,
+    "markdown_files_repository_wide": 387,
+    "markdown_files_under_docs": 385,
+    "structured_documentation_paths": 24,
+    "png_files": 24,
+    "python_files": 43,
+    "kotlin_files": 65,
+    "kotlin_kts_files": 68,
+    "json_files": 26,
+    "python_kotlin_source_files_with_test_in_path": 52,
+    "world_markdown_files": 18,
+    "systems_markdown_files": 263,
+    "asset_markdown_files": 35,
+    "android_markdown_files": 14,
+    "context_log_markdown_files": 13,
+    "verification_files": 10,
+    "tools_files": 2
+  },
+  "prior_snapshot_comparison": {
+    "prior_source_head": "991cd9b29ea0752fa1c303a19e8f210713efe4b5",
+    "prior_evidence": "docs/evidence/repository_inventory_2026-10-04.json",
+    "delta": {
+      "tracked_files": 71,
+      "tracked_blob_bytes": 607194,
+      "files_under_docs": 70,
+      "markdown_files_repository_wide": 67,
+      "markdown_files_under_docs": 67,
+      "structured_documentation_paths": 3,
+      "png_files": 0,
+      "python_files": 1,
+      "kotlin_kts_files": 0,
+      "json_files": 3,
+      "python_kotlin_source_files_with_test_in_path": 1,
+      "world_markdown_files": 0,
+      "systems_markdown_files": 47,
+      "asset_markdown_files": 2,
+      "android_markdown_files": 9,
+      "context_log_markdown_files": 0,
+      "verification_files": 0,
+      "tools_files": 0
+    },
+    "interpretation": "The earlier snapshot remains valid historical evidence for its own immutable revision. The deltas are repository growth, not evidence that the earlier snapshot was incorrect."
+  },
+  "control_reconciliation": {
+    "D-058": "FIRST-PASS 148/148 SEMANTIC FLOOR REMAINS VALID; file growth does not alter semantic quota ownership.",
+    "D-019": "REMAINS IN_PROGRESS; exact-revision contamination defect is fixed and the structural checkpoint is refreshed, but full-repository word/heading execution, generalized structured-domain extractors, provenance-normalized asset-stage counts, executed-test evidence, and owner numeric-target unit mapping remain open.",
+    "D-060": "Primary acceptance supported by exact-revision tooling, regression tests, fresh immutable structural evidence, and second-pass recalibration authority."
+  },
+  "notes": [
+    "Evidence is revision-bound and excludes files committed after source_head, including this evidence file itself.",
+    "Test-source path count is not an executed-test pass count.",
+    "First-pass documentation-unit counts are semantic and must not be replaced by raw file counts.",
+    "No owner numeric target is reinterpreted by this inventory."
+  ]
+}
