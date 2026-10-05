@@ -68,7 +68,8 @@
       "world.free_roam_unlocked": false,
       "world.district_notices_reviewed": false,
       "world.workshop_rumor_heard": false,
-      "world.trace_echo_quest_started": false
+      "world.trace_echo_quest_started": false,
+      "opening.tamsin_shared_entry_reflected": false
     }
   },
   "characters": {
@@ -815,6 +816,16 @@
                   "delta": 30
                 },
                 {
+                  "type": "npc_memory_add",
+                  "npc": "NPC_TAMSIN",
+                  "memory_id": "MEM_TAMSIN_ENTERED_GATE_TWELVE_WITH_JACK",
+                  "importance": 4,
+                  "tags": [
+                    "gate_twelve",
+                    "shared_entry"
+                  ]
+                },
+                {
                   "type": "npc_story_transition",
                   "npc": "NPC_TAMSIN",
                   "track_id": "TRACK_RELAY_CASE",
@@ -865,6 +876,41 @@
       "title": "Gate Twelve: The First Echo",
       "body": "The relay case has brought you to the threshold of something the municipal records do not explain. Your route, party composition, Tamsin's knowledge, and the choices that got you here remain persistent.",
       "choices": [
+        {
+          "id": "ASK_TAMSIN_ABOUT_SHARED_ENTRY",
+          "text": "Ask Tamsin what she makes of entering Gate Twelve together.",
+          "time_cost_minutes": 2,
+          "visible_if": [
+            {
+              "type": "npc_remembers",
+              "npc": "NPC_TAMSIN",
+              "memory_id": "MEM_TAMSIN_ENTERED_GATE_TWELVE_WITH_JACK"
+            },
+            {
+              "type": "flag",
+              "key": "opening.tamsin_shared_entry_reflected",
+              "equals": false
+            }
+          ],
+          "outcomes": {
+            "default": {
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "opening.tamsin_shared_entry_reflected",
+                  "value": true
+                },
+                {
+                  "type": "relationship",
+                  "npc": "NPC_TAMSIN",
+                  "axis": "respect",
+                  "value": 1
+                }
+              ],
+              "next_scene": "OPENING_END"
+            }
+          }
+        },
         {
           "id": "CONTINUE_BELOW_GATE_TWELVE",
           "text": "Continue below Gate Twelve.",
