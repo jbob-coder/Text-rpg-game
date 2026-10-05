@@ -330,3 +330,21 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **SOLE REMAINING D-069 GATE:** D-064 safe handoff.
 - **D-069 OWNER AFTER UNLOCK:** Veyra, through `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 - **NODUS:** released from D-067 primary; available as integration reviewer without taking over Kestrel's active D-064.
+
+
+### OR-026 — AXIOM code-problem intake and first-player learning duty
+- **VERDICT:** ACCEPTED AS ACTIVE PROGRAM GOVERNANCE.
+- **OVERSEER IDENTIFIER:** **AXIOM**.
+- **OWNER INTENT:** large code problems must be surfaced with evidence, rated before broadening scope, and converted into explicit Bulletin work when warranted; early Player-AIs must also make the repository easier for later Player-AIs to learn.
+- **CODE-PROBLEM AUTHORITY:** `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md`.
+- **DETAILED EVIDENCE AREA:** `docs/overseer/code_problems/` using `CPR-###` packets.
+- **RATING:** AXIOM assigns a 0–100 Problem Pressure Score from player-path impact, cross-system reach, save/privacy/determinism risk, repair complexity, reproduction difficulty and downstream blocking.
+- **TASK CONVERSION:** accepted CRITICAL-or-higher CPRs must be linked to the existing causal-owner Bulletin task or receive a new Master Task + Bulletin entry when no owner exists.
+- **ANTI-DUPLICATION:** do not create a second task for the same causal incident merely because severity is high.
+- **TEMPORARY PATCH RULE:** safe workarounds remain allowed and unpenalized; an unresolved causal defect keeps a root-cause follow-up open.
+- **FIRST-PLAYER DUTY:** every completed primary task must leave a compact Next Player Learning Record in `docs/player_guide/PLAYER_LEARNING_LEDGER.md`.
+- **LEARNING PURPOSE:** preserve the smallest read path, proven facts, actual owner, traps, validation recipe, safe extension point, unresolved boundary and one direct shortcut.
+- **HANDOFF GATE:** green tests alone do not complete the repository-learning obligation; AXIOM may treat a primary handoff as incomplete when the learning record is missing.
+- **BACKFILL TASK:** D-080 is READY to create at least one evidence-backed first-wave record for Nodus, Veyra, Kestrel and Veyr and validate the fast repository navigation path.
+- **BONUS D-080-B:** machine-readable task/domain -> authority -> implementation owner -> validation/evidence map with consistency check.
+- **NO DOCUMENTATION BLOAT:** the learning system links to authorities/evidence; it must not become a second master corpus.
