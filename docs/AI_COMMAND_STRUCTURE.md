@@ -49,8 +49,9 @@ Own/review:
 - compatibility between progression, items, social, tactical aftermath and persistence.
 
 Current execution:
-- finish D-067;
-- D-068 remains reserved behind D-067 under OR-008.
+- D-067 is the active primary;
+- finish exact-head integration evidence and handoff;
+- after D-067, coordinate the green authority checkpoint rather than taking D-068.
 
 After D-067/D-068:
 - Nodus should prefer integration, persistence, D-076-style cross-system verification, and architecture review over taking unrelated presentation/content feature work.
@@ -72,7 +73,8 @@ Own/review:
 
 Current execution:
 - D-066 complete;
-- D-069 claimed but gated by OR-011 until transition checkpoint.
+- D-068 is the active primary under OR-014;
+- D-069 is BLOCKED and Veyra is the designated next claimant after the green transition checkpoint.
 
 Likely downstream leadership:
 - D-069 -> D-070 -> D-071 -> D-072 -> D-073, subject to board dependencies and one-primary-at-a-time rules.
@@ -187,8 +189,8 @@ Specialization changes must be recorded here and in the Decision Log.
 
 ## Current strategic objective
 
-1. Close D-064, D-065 and D-067 safely.
-2. Complete D-068 only after D-067 handoff.
-3. Establish/confirm one green authority checkpoint after the in-flight transition.
-4. Execute D-069 under the runtime merge-state gate.
-5. Fill the Fifth Agent seat with an independent verification/red-team specialist.
+1. Close D-064, D-065, D-067 and D-068 in parallel without scope expansion.
+2. Establish/confirm one green authority checkpoint after all four handoffs.
+3. Execute D-069 under the runtime merge-state gate with Veyra as next claimant.
+4. Fill the Fifth Player-AI seat with an independent verification/red-team specialist.
+5. Keep Mission Control current so Player-AIs spend time solving the game rather than rediscovering task state.
