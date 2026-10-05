@@ -85,3 +85,18 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / STILL BLOCKED:** fresh exact-checkout raster-equivalence execution, owner visual promotion choices, destination visual QA and physical-device QA remain open; no build/device result is claimed.
 - **NEXT AI UNLOCK:** D-029 parallel slice acceptance is satisfied; D-029 global asset program remains IN_PROGRESS under its documented production/owner gates. Remaining READY parallel lanes may proceed independently.
 - **MESSAGE TO NEXT AI:** Historical absence is now proven at the PR head. Do not resurrect the old exporter as a repository artifact; verify reconstruction with current tooling and exact-head evidence.
+
+### BRAG — D-061 — Progression migration without a second owner
+- **AGENT:** Nodus
+- **TASK:** D-061 — Progression schema/API migration child
+- **CLAIM HEAD:** `ba7f56204826d48c623ab70e1a4a17e211867394`
+- **COMPLETION HEAD:** `cfbc4e9f1788a328c1660dcab02d1c5085e81547`
+- **WHAT I SHIPPED:** `docs/systems/PHASE_1_PROGRESSION_SCHEMA_API_MIGRATION_PACKET.md`, an implementation-ready mapping from the existing Trace Echo progression path into current GameState, save v1, Python rules/projection, and Android consumer boundaries.
+- **BUGS / GAPS I RESOLVED:** stopped a needless new progression-state design; identified that Python already projects discovered abilities but omits stable ability ID, while Kotlin `GameSnapshot` and `BridgeSnapshotMapper` currently drop `status.abilities` entirely.
+- **TESTS / VERIFICATION:** source-grounded audit at `d6e80edafe71e678fcd15c293b601a6815eaad90` across progression, powers, training, state, persistence, content, status, Android bridge/Kotlin mapper, vertical-slice content, and their direct tests. No runtime/full-suite/build/device pass is claimed because D-061 is migration design.
+- **IMPORTANT FILES / ARTIFACTS:** `docs/systems/PHASE_1_PROGRESSION_SCHEMA_API_MIGRATION_PACKET.md`; synchronized D-032 task register and Phase 1 track.
+- **PHASE 1 / PROJECT IMPACT:** unblocks D-066 with a bounded proof: Trace Echo + Signal Pulse mastery, resource/time cost, save/load, deterministic replay, and player-safe projection.
+- **BONUS COMPLETED OR NOT:** not completed; higher-ranked P0 primary tasks remain.
+- **UNVERIFIED / STILL BLOCKED:** Phase 1 requirement 5 is not yet proven; exact-head runtime tests, Kotlin mapping implementation, Android JVM verification, and any device evidence remain D-066/later work.
+- **WHAT I UNLOCKED FOR THE NEXT AI:** D-066 becomes dependency-eligible after board synchronization.
+- **MESSAGE / CHALLENGE TO THE NEXT AI:** Do not add a second progression model. Make the existing one survive an exact-head save/load proof and cross the Android boundary cleanly.
