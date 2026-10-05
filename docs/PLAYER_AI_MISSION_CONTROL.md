@@ -226,48 +226,48 @@ D-067-B invalid-equip/rollback atomicity only after primary acceptance.
 ## Veyra — D-068 — Activity Proof
 
 **Player-AI class:** Gameplay Systems & Tactical Lead  
-**Mission state:** newly reassigned; this is the only active primary. D-069 stays blocked.
+**Mission state:** **DONE / SAFE HANDOFF**. D-069 remains blocked pending the green-authority checkpoint.
 
-### Mission objective
-Prove the selected Trace Chamber / training activity as one authoritative Phase 1 life-action loop: legality -> cost -> elapsed time -> persistent result -> save/load -> presentation.
+### Result
+D-068 proves the existing Trace Chamber `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` action as the bounded Phase 1 activity loop:
+- legal entry through the authored Gate Twelve / Trace Echo route;
+- exact +120 minutes;
+- exact -16 stamina / -10 focus;
+- Powers progress to 2.0 from zero under the current formula;
+- training + choice history;
+- player-safe projected result;
+- save/load preservation;
+- Android exact-choice delegation and authoritative returned-value mapping;
+- invalid-entry and time-preflight failure atomicity.
 
-### Must Read
-- current V10 activity contract / selected Trace Chamber activity authority;
-- authoritative training/activity execution source;
-- relevant progression/resource/time mutation code;
-- save/load tests;
-- Android consumer path if a current activity/result surface exists;
-- D-068 task acceptance.
+Authority proof merge:
+- `e883205559c64d2e82614160bd6548c2c9332808`.
 
-### Next Move
-1. locate the exact selected activity ID and its existing execution path;
-2. write the smallest focused failing test if any acceptance dimension is missing;
-3. repair only the missing dimension;
-4. prove legality, resource/time cost, persistent result, save/load and available Android projection;
-5. close D-068;
-6. participate in the green authority checkpoint;
-7. only then reclaim D-069 through the runtime merge-state gate.
+Evidence:
+- `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`;
+- PR #59;
+- workflow run #341 / `37252547112`.
 
 ### Exit Gate
-- legal activity entry is deterministic;
-- invalid entry rejects cleanly;
-- time/resource costs are authoritative and exact;
-- result persists;
-- save/load preserves result;
-- current player-facing projection exposes only intended outcome;
-- exact-head evidence recorded.
+- legal activity entry deterministic: **PASS**;
+- invalid entry rejects cleanly: **PASS**;
+- authoritative exact time/resource costs: **PASS**;
+- result persists: **PASS**;
+- save/load preserves result: **PASS**;
+- player-facing projection exposes intended outcome: **PASS**;
+- D-068-B atomicity regression: **PASS**;
+- physical-device validation: **NOT CLAIMED**.
 
-### Bonus
-D-068-B interruption/atomicity regression after primary acceptance.
+### Current blocker / next move
+D-068 is no longer part of the transition blocker.
 
-### Do Not
-- start D-069 runtime implementation yet;
-- use D-068 to redesign progression;
-- move activity legality/math into Kotlin/Compose.
+Veyra's next gameplay task is D-069, but substantive tactical implementation must not begin until:
+1. D-064, D-065 and D-067 reach safe handoff;
+2. one complete Python authority checkpoint is green;
+3. required Android integration gates for the transition state are green;
+4. the Bulletin Board reopens D-069 under the runtime merge-state gate.
 
-### Required cross-review
-- Nodus: persistence/integration;
-- Kestrel: only if Android projection shape changes.
+Until then Veyra may assist with bounded integration/checkpoint evidence or read-only D-069 preparation, but must not bypass the gate.
 
 ---
 
