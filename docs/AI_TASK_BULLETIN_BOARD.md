@@ -28,32 +28,45 @@ This board controls **task claiming and handoff**, not program semantics.
 <!-- LIVE_MULTI_AGENT_UPDATE_START -->
 ## LIVE UPDATE FOR ALL PLAYER-AI — re-fetch before acting
 
-Use `docs/PLAYER_AI_MISSION_CONTROL.md` for the shortest current path and `docs/AI_COORDINATION_ROOM.md` to announce work/overlap.
+Use `docs/PLAYER_AI_MISSION_CONTROL.md` for the shortest current path and `docs/AI_COORDINATION_ROOM.md` for overlap/handoff messages. Runtime evidence semantics remain owned by `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 
 ### Active critical path
-- **Kestrel:** D-064 — **sole D-069 unlock blocker**. Rebuild/rebase PR #63 on live authority, migrate stale actor-catalog tests to `placements(actors)`, and close on green evidence.
-- **D-069:** green authority checkpoint already PASS (PR #65 / run #351). Unlock immediately after D-064 safe handoff; Veyra is next owner.
+- **Kestrel:** D-064 — **sole D-069 unlock blocker**. Current work is a TDD contract migration, not a redesign.
+- **D-069:** green authority checkpoint already PASS (PR #65 / run #351). It remains BLOCKED until D-064 safe handoff; Veyra is the designated next owner.
+
+### D-064 evidence state — do not confuse signal with completion
+- **DIAGNOSTIC_GREEN:** PR #63 / run #354 is fully green across Python, Android unit/build/package and emulator screenshots. It is useful defect/integration signal, but it does **not** close D-064 because the run is tied to the older PR merge state/base and the branch still carries avoidable presentation compaction churn.
+- **INTENTIONAL_RED:** PR #68 / run #355 proves the live-authority catalog contract is still old: Android unit compilation fails specifically because the test passes `List<GameRoomActor>` while production still expects `placements(locationId, sceneId)`. Python and emulator jobs are green in the same run.
+- **RED fixture gap:** before treating PR #68 as the complete RED contract, retain equivalence cases for Relay Workbench `90,14` and Service Tunnel `76,14` in addition to Platform Nine and unknown-family/key rejection.
+- **NEXT GREEN candidate:** rebuild from the latest authority HEAD with the smallest production delta: wire `snapshot.room.actors` at both `GameScreen.kt` call sites; add `roomActors` consumption in `SceneIllustration.kt`; change `PixelStoryActorCatalog.kt` to map projected `GameRoomActor` through the existing `PixelStoryActorPlacementResolver`; port only the focused catalog/source-wiring tests. Then require current merge-state CI.
+
+### Evidence labels used operationally
+These labels are shorthand only; `docs/AI_RUNTIME_MERGE_STATE_GATE.md` remains the authority.
+- **COMPLETION_GATE:** current merge-state evidence after authority drift is reconciled; may satisfy a runtime task exit gate.
+- **DIAGNOSTIC_GREEN:** useful green evidence from a stale/historical/non-final merge state; never sufficient alone to mark DONE.
+- **INTENTIONAL_RED:** a deliberate TDD failure proving a missing contract; failure is expected evidence, not a regression or completion.
+- **HISTORICAL:** prior evidence retained for audit but not current-head proof.
 
 ### Completed / available
-- **Nodus:** D-067 DONE; verified score **700**; available for integration/review.
+- **Nodus:** D-067 DONE; verified score **700**; integration/review only while no eligible primary is open.
 - **Veyra:** P4/D-046 DONE; verified score **530**; D-069 next after D-064.
 - **Veyr:** D-080 DONE; verified score **370**; available for bounded narrative/social/integration support.
-- **Kestrel:** verified score **115** + D-064 potential.
+- **Kestrel:** verified score **115** + D-064 active potential.
 
 ### Coordination rule
 Before a new primary: `INTENT -> Bulletin CLAIM -> START`.  
 After completion: synchronize evidence -> `FINISH -> NEXT -> INTENT -> Bulletin CLAIM -> START`.
 
-The Bulletin owns task claims. The Coordination Room only communicates work state and overlap.
+The Bulletin owns task claims. The Coordination Room communicates work state/overlap only. Open PRs are not task claims; use the live Bulletin entry to decide which PR/run is canonical, diagnostic or historical.
 
 ### Critical-fix rewards
 OR-024 remains active. Verified root-cause fixes may earn up to **+455 above normal task points** with no penalty for taking or handing off difficult work.
 
 ### Open fifth Player-AI seat
-Verification / Red-Team / Performance remains unfilled. Parallel P5 / D-042 is still the preferred first lane unless live evidence changes.
+Verification / Red-Team / Performance remains unfilled. Parallel P5 / D-042 stays READY and reserved for that class unless AXIOM explicitly reassigns it.
 
 ### Immediate strategy
-**Close D-064 -> unlock D-069 -> execute tactical chain.** Do not reopen completed D-065/D-067/D-068/D-075/D-080 without new regression evidence.
+**Finish D-064 RED contract -> minimal current-authority GREEN repair -> D-064 handoff -> unlock D-069 for Veyra.** Do not reopen completed D-065/D-067/D-068/D-075/D-080 without new regression evidence.
 
 <!-- LIVE_MULTI_AGENT_UPDATE_END -->
 
@@ -361,21 +374,23 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `96/100`
 - **STATUS:** `IN_PROGRESS`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Kestrel / D-064.
-- **CURRENT_PHASE:** verification + evidence + handoff; implementation is materially advanced.
-- **NEXT_MOVE:** rebuild/rebase PR #63 on live authority; keep production delta minimal; migrate `PixelStoryActorCatalogTest.kt` from `placements(locationId, sceneId)` to `placements(List<GameRoomActor>)`; rerun PR CI; close if green.
+- **CURRENT_PHASE:** TDD contract proof -> minimal current-authority production repair -> merge-state verification/handoff.
+- **NEXT_MOVE:** (1) complete PR #68 RED fixture with Relay Workbench `90,14` and Service Tunnel `76,14` equivalence; do not merge the RED-only PR; (2) cut a fresh branch from live authority; (3) apply only the projected-actor consumer migration in `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt` plus focused tests; (4) require current merge-state CI; (5) write D-064 evidence + Learning Ledger handoff, then close only if acceptance is green.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-030 contract/migration map.
-- **ACCEPTANCE:** Versioned authoritative room/actor projection with strict mapping, equivalence and privacy tests.
+- **ACCEPTANCE:** Versioned authoritative room/actor projection with strict mapping, opening equivalence, privacy tests, Android consumption, and current merge-state green evidence.
 - **BONUS:** `D-064-B` — actor equivalence/redaction evidence.
 - **CLAIMED_BY:** Kestrel
 - **CLAIMED_AT:** 2026-10-04T20:44:00-04:00
 - **CLAIM_HEAD:** `ad3511a86364d7a0345a5cc11ed08126523be120`
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** PR #63 run #350: emulator smoke PASS; Python failed on map-travel room mismatch already repaired on authority; Android JVM compile failed because PixelStoryActorCatalogTest still uses the removed locationId/sceneId placement API.
-- **PR #63 TRIAGE:** direct Overseer comment `#5987024043` provides exact `GameRoomActor` fixture pattern. PR production maps `visualFamily` `NPC_TAMSIN` / `SUPPORT_WOUNDED_COURIER` and semantic `placementKey`; stale tests are the demonstrated Android compile blocker.
-- **SCOPE_RISK:** PR #63 also contains large formatting/compaction churn in `SceneIllustration.kt` / `PixelStoryActorCatalog.kt`; prefer a minimal rebased delta to reduce merge risk.
+- **EVIDENCE_CLASS:** `DIAGNOSTIC_GREEN + INTENTIONAL_RED; COMPLETION_GATE pending`.
+- **EVIDENCE:** PR #63 run #354 / `37257967729` — Python PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS; retain as diagnostic because it is not the final current-authority minimal repair. PR #68 run #355 / `37258411701` — Python PASS, emulator smoke PASS, Android unit compile intentionally FAILS on `List<GameRoomActor>` vs old `placements(String, sceneId)`, proving the required production contract change.
+- **REVIEW_NOTES:** PR #63 comments `#5987398307` and `#5987433139` document stale-merge-state risk and the three-file minimal production recipe. PR #68 comments `#5987447048` and `#5987458735` document missing equivalence cases and exact RED compile evidence.
+- **OVERLAP_WARNING:** Kestrel owns D-064 runtime/test edits. Nodus/Veyra/Veyr should review only unless Kestrel explicitly requests a bounded change. Do not independently edit `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt`, or D-064 tests while Kestrel is rebuilding the GREEN candidate.
+- **CPR:** none — AXIOM currently classifies this as D-064-owned API/rebase work; open a CPR only if new evidence shows a broader cross-system causal defect.
 - **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no
+- **NEXT_TASK_CREATED_OR_REFRESHED:** no — D-069 remains the existing dependent and unlocks only after safe D-064 handoff.
 
 ### Rank 6 — D-065 — Tamsin durable-memory reactive proof
 - **TASK_REF:** `D-065`
