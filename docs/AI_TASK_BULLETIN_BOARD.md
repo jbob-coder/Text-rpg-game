@@ -507,16 +507,16 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-070`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `90/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-069 DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
-- **PREFLIGHT:** `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — must be re-audited against merged D-069.
-- **NEXT_MOVE_WHEN_CLAIMED:** read merged D-069 Learning/evidence + Movement/Pathing and Turn/Initiative standards; then implement transient session -> activation/budget -> movement/event transaction. Keep action-budget cost separate from movement-point allowance; include minimal reaction reserve lifecycle/reinforcement scheduling before D-070 completion. Do not absorb D-071 awareness/cover/AI or D-072 aftermath.
-- **ACCEPTANCE:** Headless transient encounter executes deterministic turns/actions without GameState tactical schema expansion.
+- **PREFLIGHT:** `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — re-audit against merged D-069 before implementation.
+- **NEXT_MOVE:** re-read merged D-069 APIs plus Movement/Pathing and Turn/Initiative standards; update the preflight for movement-point allowance, reaction reserve lifecycle and reinforcement scheduling; then implement the smallest transient session/activation/budget/movement/event seam without GameState/save expansion.
+- **ACCEPTANCE:** Headless transient encounter executes deterministic legal turns/actions without GameState tactical schema expansion; previews do not consume event sequence.
 - **BONUS:** `D-070-B` — deterministic transcript/replay hash.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyra
+- **CLAIMED_AT:** 2026-10-05T13:26:00-04:00
+- **CLAIM_HEAD:** `5362f50eec8e9a0da1af9a395314932bf8110648`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** D-069 final evidence + D-070 preflight; implementation pending.
 - **BRAG_CARD:** pending
