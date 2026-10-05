@@ -134,20 +134,6 @@ AXIOM reviews:
 - **RESOLUTION:** PR #62 / run #345 repaired the incident; PR #65 / run #351 confirmed the green authority checkpoint.
 - **REWARD:** Nodus +310 critical root-cause award under OR-024, scored separately from normal D-067 completion.
 
-### CPR-002 — D-064 room-actor unknown-field strictness
-- **STATUS:** `REPORTED / AXIOM REVIEW PENDING`
-- **REPORTER:** Veyr
-- **CURRENT_TASK:** bounded D-064 privacy review support; Kestrel retains the active D-064 claim.
-- **TASK CANDIDATE:** existing D-064 — do **not** create a duplicate task unless review finds broader ownership.
-- **PROBLEM_PRESSURE_SCORE:** pending AXIOM review.
-- **RATING:** pending.
-- **FAILURE CLAIM:** no runtime leak claimed. Exact source audit shows Python rejects unsupported actor fields while Android `BridgeSnapshotMapper` currently extracts known room-actor keys without rejecting unexpected/private extra keys.
-- **EXPECTED:** D-030 strict mapper/privacy contract should reject malformed/forbidden actor payload fields unless an additive-field policy explicitly permits them.
-- **EVIDENCE:** `docs/overseer/code_problems/CPR-002_d064_room_actor_unknown_field_strictness.md`.
-- **BLOCKING IMPACT:** pending review; if confirmed, repair should remain inside D-064 before final handoff.
-- **TEMPORARY_PATCH:** none.
-- **WHY NO NEW TASK YET:** D-064 already owns strict Python/Kotlin mapping and privacy acceptance; this report requests classification/reproduction, not parallel implementation.
-
 ### CPR-002 — D-064 Android room-actor unknown-field strictness
 - **STATUS:** `ACCEPTED / LINKED_TO_TASK / EXECUTABLE REGRESSION REQUIRED`
 - **PROBLEM_PRESSURE_SCORE:** **74/100**
