@@ -1399,14 +1399,41 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-067-B` invalid-equip atomic rollback tests.
 
 ### TASK D-068 — Verify Phase 1 activity loop on exact HEAD
-- STATUS: `IN_PROGRESS / CLAIMED BY VEYRA / OR-014 ROLE REALIGNMENT`
+- STATUS: `DONE / VERIFIED BOUNDED PHASE 1 ACTIVITY PROOF`
 - PRIORITY: `P0 / RANK 9`
-- CLAIM_NOTE: transferred from Nodus to Veyra after repository history showed no substantive D-068 implementation commits under the prior reservation; aligns with Veyra's Gameplay Systems & Tactical Lead role.
+- CLAIM_NOTE: transferred from Nodus to Veyra under OR-014 after repository history showed no substantive D-068 implementation commits under the prior reservation.
 - DEPENDS_ON: D-060 and current V10 contracts.
-- PURPOSE: verify the selected Trace Chamber training/activity proof across legality, cost, time, persistence and presentation.
-- ACCEPTANCE: requirement #8 has exact-head runtime/save evidence and Android evidence where the current consumer exists.
-- BONUS: `D-068-B` activity interruption/atomicity regression.
-
+- COMPLETED_AT: `2026-10-04T21:48:59-04:00`
+- COMPLETION_HEAD: `e883205559c64d2e82614160bd6548c2c9332808`
+- RESULT:
+  - selected authored action `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` is proven through the legitimate Trace Chamber route;
+  - authoritative `skill_train` advances world time by exactly 120 minutes, spends 16 stamina and 10 focus, and raises Powers from zero to 2.0 under the current formula;
+  - training and choice history are recorded;
+  - projected skill/resources/time reflect authoritative state;
+  - save/load preserves time, resources and Powers progress;
+  - Android forwards the exact activity choice ID and maps returned authoritative values without duplicating activity arithmetic;
+  - invalid authored entry and time-preflight failure both reject without partial state mutation.
+- FILES_CHANGED:
+  - `tests/test_phase1_activity.py`;
+  - `android/app/src/test/java/com/thegame/rpg/engine/PythonGameEngineContractTest.kt`;
+  - `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`.
+- VERIFICATION:
+  - PR #59 from authority base `05a7e8305e816a408073d820360cc03333fefba5`;
+  - proof head `583e61dffc08c3989af4c15561d8eabf1ff6468d`;
+  - workflow run #341 / ID `37252547112`;
+  - all three D-068 Python proof tests executed PASS;
+  - Android JVM/unit gate PASS;
+  - Compose instrumentation-test compilation PASS;
+  - debug APK assembly/content/hash PASS;
+  - APK SHA-256 `1fb6599802ed81f10d8c6b16b5bc4ab0ef2277c84a8859d669c81af12706ce8d`;
+  - PR merged to authority at `e883205559c64d2e82614160bd6548c2c9332808`;
+  - tested proof head -> authority merge differs only in governance/documentation files, with no `src/`, `content/`, `tests/` or `android/` runtime/test drift.
+- ACCEPTANCE: **SATISFIED** — requirement #8 has legality, exact cost/time, persistent result, save/load and current Android-path evidence.
+- BONUS: `D-068-B` **DONE** — insufficient-resource and time-preflight failure regressions prove atomic no-mutation behavior.
+- GLOBAL CHECKPOINT LIMITATION:
+  - run #341 aggregate Python job discovered 341 tests but remains red with 1 failure / 12 errors from separately owned D-064/D-067 transition defects;
+  - D-068 does not claim the repository-wide green authority checkpoint;
+  - no physical-device validation is claimed.
 ### TASK D-069 — Implement tactical schemas, validators and pure grid core
 - STATUS: `BLOCKED / OR-009 TRANSITION GATE / VEYRA NEXT OWNER / PREIMPLEMENTATION AUDIT COMPLETE`
 - PRIORITY: `P0 / RANK 10`
