@@ -65,6 +65,7 @@ Before starting discretionary work:
 - fetch live HEAD;
 - re-fetch the bulletin board;
 - claim the highest-priority eligible `READY` task according to the board protocol;
+- if the main ranked task is already claimed and its dependency chain is waiting, claim a `READY` task from `docs/AI_PARALLEL_WORK_LANES_2026-10-04.md` instead of idling;
 - commit and re-check the claim before substantial work.
 
 After finishing a task:
