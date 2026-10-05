@@ -21,6 +21,16 @@ Phase 1 rating:
 
 Cover is separate from LOS blocking.
 
+### 2.1 Cover is not edge opacity
+
+Directional cover and directional LOS opacity are separate properties.
+
+- `cover` answers how much protection the target receives when a ray enters through a boundary.
+- `los_blocked_edges` answers whether that shared boundary is geometrically opaque.
+- cover rating 1 or 2 never implicitly adds the boundary to `los_blocked_edges`;
+- an opaque boundary may exist with cover rating 0 if authored geometry requires it;
+- LOS evaluates the boundary using the either-adjacent-cell rule defined by the tactical coordinate and LOS standards.
+
 ## 3. Which edge protects
 
 Trace the attack ray into the target cell. The boundary edge through which the ray first enters the target cell determines directional cover.
@@ -51,6 +61,7 @@ Cell fields may include:
 - movement_cost;
 - blocks_movement;
 - blocks_los;
+- los_blocked_edges;
 - concealment;
 - cover edges;
 - hazard_ids;
