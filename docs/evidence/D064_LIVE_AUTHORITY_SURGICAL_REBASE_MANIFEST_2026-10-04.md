@@ -267,7 +267,7 @@ No additional gameplay, social, save, art, or room-schema work is authorized by 
 
 1. fetch live authority HEAD;
 2. create a fresh short-lived D-064 integration branch from that HEAD;
-3. apply only the five-file surgical delta above;
+3. apply only the seven-file surgical surface defined above after CPR-002;
 4. include/port the focused source-contract test;
 5. run local focused tests when available;
 6. open/update PR against `docs/master-game-development-program`;
@@ -287,3 +287,22 @@ PR #63's green run proves the migration concept works.
 It does **not** prove current merge-state compatibility because the branch diverged from authority.
 
 The final proof must come from a fresh current-authority branch/PR with the minimal delta above.
+
+
+## PR #69 role — CPR-002 evidence/reference only
+
+PR #69 demonstrates the CPR-002 RED -> GREEN idea, but it is **not** an approved final merge candidate as currently shaped.
+
+Accepted semantic content:
+- one strict room-actor key allowlist in `BridgeSnapshotMapper`;
+- one unexpected-key rejection immediately after `objectMap(item, path)`;
+- one focused JVM regression proving a valid actor plus `memories` is rejected.
+
+Rejected merge noise:
+- unrelated compaction/reformatting of `GameEngine.kt`;
+- unrelated constructor/ability/inventory/helper formatting changes;
+- any semantic change outside room-actor key strictness.
+
+Port only the accepted semantic content into the surgical D-064 branch while preserving live-authority formatting and behavior elsewhere.
+
+The final merge candidate remains the surgical branch, not PR #63, PR #68, or PR #69.
