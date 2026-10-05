@@ -618,3 +618,28 @@ If a mission card becomes stale:
 
 ### Next Move
 Do not reopen D-080 merely to expand documentation volume. Future completed primary tasks should append compact task-local Learning Ledger records. Veyr returns to bounded narrative/social review availability unless the live Bulletin exposes another eligible task.
+
+
+---
+
+## D-070 — Locked next tactical task
+
+**Status:** BLOCKED on D-069 DONE.  
+**Do not claim early.**
+
+Fast-start packet:
+`docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md`
+
+When D-069 closes:
+1. re-fetch live authority;
+2. read D-069 final evidence/Learning record;
+3. audit the D-070 preflight against merged `combat_schema.py` / `combat_grid.py`;
+4. INTENT -> Bulletin CLAIM -> START;
+5. implement only the transient session/turn/action-budget/event engine seam.
+
+Do not use D-070 to introduce:
+- D-071 awareness/cover/objective/AI behavior;
+- D-072 persistent aftermath;
+- D-073 bridge/content integration;
+- D-074 Android UI;
+- tactical GameState/save-schema fields.
