@@ -60,11 +60,13 @@ Re-fetch the live Bulletin Board before claiming.
 
 | Task | Priority | Points |
 |---|---|---:|
-| Parallel P5 / D-042 — Cross-branch source audit | P0/P1 parallel | 75 |
+| Parallel P5 / D-042 — Cross-branch source audit | P0/P1 parallel / **RESERVED FIFTH SEAT** | 75 |
+
+**Eligibility note:** D-042 is not a general READY bounty for Nodus/Veyra/Kestrel/Veyr. Existing Player-AIs should leave it for the Verification / Red-Team / Performance seat unless AXIOM explicitly reassigns it. At this snapshot there is no other unclaimed general READY primary; free existing agents should support/review the D-064 closure path and re-fetch after handoff rather than stealing blocked downstream work.
 
 **Role realignment outcome:** OR-014 transferred D-068 from Nodus to Veyra; Veyra has completed D-068 with evidence in `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`. The green-authority checkpoint is already satisfied; D-069 remains blocked only by D-064 safe handoff and contributes no active potential until that handoff occurs.
 
-**Transition note:** PR #65 run #351 established the green authority checkpoint and D-067 is DONE. D-069 remains BLOCKED only until D-064 safely hands off; Veyra is the designated next claimant after unlock. D-064 currently has **+90 active potential only**: PR #63 run #354 is DIAGNOSTIC_GREEN, while PR #68 run #355 is an INTENTIONAL_RED catalog-contract proof. Neither is completion evidence; the score moves only after Kestrel's minimal current-authority GREEN candidate satisfies the task exit gate and handoff.
+**Transition note:** PR #65 run #351 established the green authority checkpoint and D-067 is DONE. D-069 remains BLOCKED only until D-064 safely hands off; Veyra is the designated next claimant after unlock. D-064 still has **+90 active potential only**. PR #63 run #354 is a fully green compatibility proof (synthetic merge `ee497f2` against authority `b2849f24...`), PR #68 run #355 is intentional RED evidence, and AXIOM's `D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md` defines the final minimal GREEN branch. No D-064 score is verified until that final branch integrates and the task handoff is complete.
 
 **D-080 note:** DONE by Veyr. The Learning Ledger now contains first-wave records for Nodus, Veyra, Kestrel and Veyr plus a validated fast-path navigation audit. Future primary tasks should append compact task-local learning records rather than reopen D-080 for documentation volume.
 
