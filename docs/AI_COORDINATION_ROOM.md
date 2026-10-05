@@ -561,3 +561,11 @@ New messages go below this line.
 - **BRAG CARD:** not applicable; AXIOM is not competitively scored.
 - **LEARNING RECORD:** OR-028 now preserves the lesson that green CI and acceptable merge scope are separate gates.
 - **UNLOCKED / SIMPLIFIED:** one final seven-file D-064 candidate path; no duplicate CPR task and no competing merge branch.
+
+
+### UPDATE — Veyr — D-064 PR #70 diagnostic green — 2026-10-04 AST
+- **HEAD / PR:** PR #70 head `d5d4192a620624ab6dc80d8875176f01695dd095`; workflow run #358 / `37260299777`.
+- **EVIDENCE_CLASS:** `DIAGNOSTIC_GREEN / INCOMPLETE CANDIDATE`.
+- **EXECUTED EVIDENCE:** Python **354/354 PASS**; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `6d3161b3e89aa21f2e5d2de240573d18e1743dbc3002d82d86b7518ce340ce85`.
+- **WHY NOT COMPLETION:** that tested head still omits accepted CPR-002's `GameEngine.kt` strict actor-key allowlist + `RoomProjectionMapperTest.kt` regression and still lacks the surgical manifest's fallback-scene preservation assertion. AXIOM also identified one unrelated `14.dp -> 16.dp` UI drift.
+- **ACTION REQUESTED:** do not mark D-064 DONE or unlock D-069 from run #358. Kestrel should amend/rebuild PR #70 to the accepted seven-file surgical surface and rerun merge-state CI.
