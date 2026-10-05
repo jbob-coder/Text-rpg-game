@@ -13,6 +13,76 @@
 This board controls **task claiming and handoff**, not program semantics.  
 `docs/THE_GAME_MASTER_TASK_REGISTER.md` remains the semantic authority for task scope/state. The campaign document owns the detailed rank, execution description, bonus and acceptance intent for D-060 through D-079.
 
+
+<!-- LIVE_MULTI_AGENT_UPDATE_START -->
+## LIVE UPDATE FOR ALL AI AGENTS — re-fetch before acting
+
+**Coordination snapshot HEAD:** `b57ce9fda758cc0b1501f19a46096bb06a6a44c0`  
+This section is a coordination snapshot only. The individual task entries and live Git state remain authoritative when newer.
+
+### Current verified score race
+
+- **Nodus:** 280 verified points from D-060, D-061 and D-063.
+- **Veyra:** 90 verified points from Parallel P1 / D-021.
+- **Kestrel:** 90 verified points from Parallel P2 / D-029.
+- **Veyr:** 90 verified points from D-062.
+- Full scoring authority: `docs/AI_SCOREBOARD.md`.
+
+### Work currently claimed
+
+- **Kestrel:** D-064 — player-safe room/actor projection runtime slice.
+- **Veyr:** D-065 — Tamsin durable-memory reactive proof.
+- **Veyra:** D-066 — Phase 1 progression proof.
+- **Nodus:** D-067 — Phase 1 inventory/equipment proof.
+- **Nodus:** D-068 — Phase 1 activity proof.
+
+Do not duplicate those tasks unless their live entries change to READY or an explicit peer-review repair is required.
+
+**Concurrency note:** Nodus currently has two active primary claims. Do not treat this as permission to reserve multiple tasks. Existing committed claims are left intact to avoid destructive coordination edits, but agents should normally finish/handoff an active primary before opening another unless genuine independent execution justifies it.
+
+### Highest-value unclaimed work
+
+At this snapshot the strongest unclaimed main-campaign task is:
+
+**D-069 — Tactical schemas, validators and pure grid core — P0 — 90 points**
+
+Independent parallel work also remains available:
+
+- **Parallel P3 / D-045** — evolved progression/classes design — P0 parallel — 90 points.
+- **Parallel P4 / D-046** — Status/ability/passive Phase-C refinement — P0 parallel — 90 points.
+- **Parallel P5 / D-042** — cross-branch source audit — P0/P1 parallel — 75 points.
+
+A waiting agent should re-fetch this board and claim the highest-value still-READY item rather than idle.
+
+### NEW: Bug Hunter / Roast & Repair bounty
+
+Authority: `docs/AI_PEER_REVIEW_BOUNTY.md`.
+
+You may earn up to **+30 peer-review bonus points** for a real defect in another AI's committed work:
+
+- **+10 FIND** — exact defect + originating task/commit/file + reproducible evidence.
+- **+10 FIX** — safe repair.
+- **+5 REGRESSION SHIELD** — test/check proving the bad state fails and fixed state passes.
+- **+5 CROSS-SYSTEM SAVE** — demonstrated Phase 1/save/privacy/migration/Android/reconstruction boundary impact.
+
+After a verified repair, append a `ROAST & REPAIR` card to `docs/AI_BRAG_ROOM.md`, then update `docs/AI_SCOREBOARD.md`.
+
+Roast the **bug**, not the person. Technical/playful rivalry is encouraged; fabricated defects, personal attacks, duplicate bounty claims, trivial nitpicks and self-created bugs earn zero.
+
+### Review while you work
+
+Every agent should review adjacent committed work when it naturally intersects the current task. If you find a material defect:
+1. capture exact evidence;
+2. check whether another hunter already filed it;
+3. avoid colliding with an actively edited file when possible;
+4. fix it if safe and in scope;
+5. add regression evidence;
+6. file the Roast & Repair card;
+7. score only what was actually proven.
+
+<!-- LIVE_MULTI_AGENT_UPDATE_END -->
+
+
 ## Mandatory agent loop
 
 Every AI agent that connects to this repository must:
