@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from textrpg.android_bridge import AndroidBridgeError, create_session
+from textrpg.android_bridge import AndroidBridgeError, open_android_session
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,7 +35,7 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
     def test_gate_twelve_inventory_equipment_story_and_save_loop(self) -> None:
         with TemporaryDirectory() as directory:
             save_path = Path(directory) / "phase1-items.json"
-            session = create_session(CONTENT, save_path=save_path)
+            session = open_android_session(CONTENT, save_path=save_path)
 
             initial = session.scene_view()
             self.assertEqual(1, item_quantity(initial, "ITEM_MAINTENANCE_SEAL"))
@@ -59,7 +59,7 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
             self.assertEqual(2.0, endurance["breakdown"]["equipment:body"])
 
             session.save()
-            restored = create_session(CONTENT, save_path=save_path)
+            restored = open_android_session(CONTENT, save_path=save_path)
             loaded = restored.load()
             self.assertEqual(0, item_quantity(loaded, "ITEM_DEPOT_JACKET"))
             self.assertEqual("ITEM_DEPOT_JACKET", equipment_slot(loaded, "body")["item_id"])
@@ -82,7 +82,7 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
             self.assertNotIn("ITEM_MAINTENANCE_SEAL", restored.state.inventory)
 
             restored.save()
-            final_session = create_session(CONTENT, save_path=save_path)
+            final_session = open_android_session(CONTENT, save_path=save_path)
             final_view = final_session.load()
             self.assertEqual(1, item_quantity(final_view, "ITEM_DEAD_RELAY"))
             self.assertEqual(0, item_quantity(final_view, "ITEM_MAINTENANCE_SEAL"))
@@ -91,7 +91,7 @@ class Phase1InventoryEquipmentProofTests(unittest.TestCase):
             self.assertEqual("opened", final_view["visuals"]["relay_state"])
 
     def test_failed_equipment_actions_do_not_partially_mutate_state(self) -> None:
-        session = create_session(CONTENT)
+        session = open_android_session(CONTENT)
         session.equip("ITEM_DEPOT_JACKET")
         before = deepcopy(session.state.snapshot())
 
