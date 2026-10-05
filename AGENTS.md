@@ -8,7 +8,7 @@ This file is the repository entry point for coding agents and automated assistan
 
 Before changing code or documentation, read these in order:
 
-1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue. Claim an eligible task here before discretionary project work; on completion, write the required Brag Card, refresh `docs/AI_SCOREBOARD.md`, create/refresh the next evidence-backed task, then claim a different one. Peer defect bounties are governed by `docs/AI_PEER_REVIEW_BOUNTY.md`.
+1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue. Claim an eligible task here before discretionary project work; on completion, write the required Brag Card, refresh `docs/AI_SCOREBOARD.md`, create/refresh the next evidence-backed task, then claim a different one. Peer defect bounties are governed by `docs/AI_PEER_REVIEW_BOUNTY.md`. Direct agent questions, proposals and Project Overseer rulings use `docs/AI_COUNCIL_ROOM.md` and `docs/PROJECT_OVERSEER_DECISION_LOG.md`.
 2. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
 3. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical master record of what documentation exists, what is complete, what is partial, what is missing, blockers, and next actions.
 4. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
@@ -66,6 +66,7 @@ Before starting discretionary work:
 - re-fetch the bulletin board;
 - claim the highest-priority eligible `READY` task according to the board protocol;
 - if the main ranked task is already claimed and its dependency chain is waiting, claim a `READY` task from `docs/AI_PARALLEL_WORK_LANES_2026-10-04.md` instead of idling;
+- check `docs/AI_COUNCIL_ROOM.md` for a direct summons; if named, respond at a safe checkpoint without abandoning the active task;
 - commit and re-check the claim before substantial work.
 
 After finishing a task:
@@ -74,6 +75,7 @@ After finishing a task:
 - append an evidence-backed Brag Card to `docs/AI_BRAG_ROOM.md`;
 - update `docs/AI_SCOREBOARD.md` so verified points, standings and READY bounties remain current;
 - when you find and repair a real defect introduced by another AI, use `docs/AI_PEER_REVIEW_BOUNTY.md` and append a `ROAST & REPAIR` card before adding peer-review points;
+- if the Project Overseer has summoned you, answer the technical questions and submit one bounded evidence-backed improvement proposal in `docs/AI_COUNCIL_ROOM.md` before taking your next primary task;
 - when operating in an interactive ChatGPT conversation, also post a concise version of that Brag Card in the active chat;
 - create or refresh the next evidence-backed task on the bulletin board (and add genuinely new program tasks to the master task register first);
 - unlock dependency-satisfied tasks, then claim a **different** highest-ranked eligible task and repeat.
@@ -81,6 +83,23 @@ After finishing a task:
 The ranked campaign for the current 20-task execution wave is `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md`. Bonus work is optional and never substitutes for primary acceptance.
 
 Do not manufacture filler tasks to keep the loop alive. If all remaining work requires owner input, record the blocker and stop at that approval boundary.
+
+## Council and architecture challenges
+
+Agents are allowed to challenge the current plan.
+
+Use `docs/AI_COUNCIL_ROOM.md` when:
+- the Project Overseer calls you by name;
+- you believe the task order is wrong;
+- you see a systemic architecture problem;
+- you think an existing contract should be replaced or simplified;
+- you need a ruling that affects multiple domains.
+
+Submit evidence, cost/risk and one concrete change. Do not silently redirect the project.
+
+The Project Overseer records the durable verdict in `docs/PROJECT_OVERSEER_DECISION_LOG.md` as `ACCEPTED`, `DENIED`, `DEFERRED`, or `NEEDS EVIDENCE`.
+
+An agent may challenge a verdict later with new evidence. Score/rank never decides architecture.
 
 ## Task-completion synchronization
 
