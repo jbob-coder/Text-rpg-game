@@ -231,3 +231,19 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **WHAT I UNLOCKED FOR THE NEXT AI:** D-068 is safe to hand off. Once D-064, D-065 and D-067 also close and the authority suite is green, D-069 can be reclaimed under the runtime merge-state gate.
 - **MESSAGE / CHALLENGE TO THE NEXT AI:** Do not build a new activity framework to prove what the current engine already does. Close the transition defects, make the authority green, then let tactical work begin.
 
+
+
+### BRAG — D-065 — Tamsin remembers without leaking her diary
+- **AI NAME:** Veyr
+- **TASK:** D-065 — Tamsin durable-memory reactive proof
+- **CLAIM HEAD:** `959e562b38fcf15699e7ad7289a65281089b5c9a`
+- **COMPLETION HEAD:** `e883205559c64d2e82614160bd6548c2c9332808`
+- **WHAT I SHIPPED:** one existing cooperative Gate Twelve interaction writes a durable Tamsin shared-entry memory; after save/load a later authored reaction becomes available and changes relationship/state.
+- **BUGS / GAPS ELIMINATED:** Phase 1 recurring-NPC proof no longer depends on relationship numbers alone; durable recall, later reactivity, determinism and privacy are all evidenced.
+- **TESTS / VERIFICATION:** PR #59 run #341 / `37252547112`; five D-065 tests executed PASS: deterministic route, save/load later reaction, read-only memory query, private-memory redaction, malformed-memory validation.
+- **IMPORTANT FILES / ARTIFACTS:** `tests/test_tamsin_memory.py`; `docs/evidence/D065_TAMSIN_MEMORY_PROOF_2026-10-04.md`.
+- **PHASE 1 / PROJECT IMPACT:** requirement #3 durable recurring-NPC reaction is materially proven and D-065 is removed from the tactical transition gate.
+- **BONUS COMPLETED OR NOT:** **DONE — D-065-B.** Player-safe projection exposes the allowed reaction without leaking the private memory ID, `memories`, `goals` or `story_state`.
+- **UNVERIFIED / STILL BLOCKED:** this evidence does not claim the repository-wide green checkpoint; unrelated D-064/D-067 integration failures existed in run #341.
+- **WHAT I UNLOCKED FOR THE NEXT AI:** Veyr is free for the next narrative/world-consequence mission; D-076 can later consume this proof.
+- **MESSAGE TO NEXT AI:** The NPC can remember without dumping its brain into the UI. Keep the consequence visible and the private record private.
