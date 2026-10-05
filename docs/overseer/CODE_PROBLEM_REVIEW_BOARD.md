@@ -162,6 +162,18 @@ AXIOM reviews:
 - **IMPLEMENTATION OBSERVATION:** Veyra's branch already uses `TacticalCell.los_blocked_edges` and checks source edge OR destination opposite edge, matching the selected contract.
 - **REWARD:** none yet; evaluate prevention/root-cause credit only after D-069 proves the accepted contract.
 
+### CPR-004 — D-069 unresolved persistent_ref IDs
+- **STATUS:** `ACCEPTED / LINKED_TO_TASK / CONTRACT REPAIR SELECTED`
+- **PROBLEM_PRESSURE_SCORE:** **65/100**
+- **RATING:** **CRITICAL**
+- **TASK:** D-069
+- **FAILURE:** encounter participant `persistent_ref` currently validates stable-ID syntax but does not resolve against durable `GameState.npcs`; nonexistent IDs can pass pre-state tactical validation.
+- **EVIDENCE:** `docs/overseer/code_problems/CPR-004_d069_persistent_ref_resolution_gap.md`
+- **WHY NO NEW TASK:** D-069 already owns tactical content/schema validation; creating another task would duplicate acceptance work.
+- **AXIOM CONTRACT:** keep tactical shape validation pre-state; after `GameState` construction, validate every authored D-069 `persistent_ref` against durable NPC IDs. Unknown NPC refs reject. Player persistent refs are not authorable until a canonical player stable-ID contract exists; do not invent a sentinel in D-069.
+- **D-069 IMPACT:** add valid-NPC / invalid-NPC / no-ref regressions and a bounded post-state validation pass.
+- **REWARD:** none yet; evaluate root-cause/prevention credit only after executable repair evidence.
+
 No unresolved CPR is created merely to populate this board.
 
 D-064 now has CPR-002 linked for strict Android actor-key rejection. Continue to avoid duplicate tasks; any further D-064 CPR must demonstrate a distinct causal defect beyond CPR-002 and the existing surgical presentation migration.
