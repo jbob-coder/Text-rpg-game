@@ -302,16 +302,22 @@ Next breadth dependency: V10 Activities/Life Simulation for requirement 8.
 ## 13. Phase 1 readiness checkpoint — activities/life loop
 
 Requirement 8 (one life/activity action):
-- selected proof action: TRAIN_POWER_FUNDAMENTALS_TWO_HOURS;
-- authored location: TRACE_CHAMBER;
-- current skill_train effect: **EXISTS**;
-- current train/time/resource primitives: **EXIST**;
+- selected proof action: `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS`;
+- authored location: `TRACE_CHAMBER`;
+- current `skill_train` effect: **EXISTS / VERIFIED THROUGH REAL CONTENT ROUTE**;
+- current train/time/resource primitives: **EXIST / VERIFIED**;
 - activity schema/time/training documentation: **CONTRACT-READY**;
-- save/load + exact-head regression execution: **PENDING**;
-- final Android contextual activity verification: **PENDING**.
+- exact time/resource result: **VERIFIED** (+120 minutes, -16 stamina, -10 focus, Powers -> 2.0 from zero);
+- save/load + exact runtime-tree regression execution: **VERIFIED**;
+- current Android activity request/result path: **VERIFIED** through generic choice delegation and authoritative snapshot mapping;
+- D-068-B invalid-entry/time-preflight atomic rollback: **VERIFIED**;
+- evidence: `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`;
+- authority proof merge: `e883205559c64d2e82614160bd6548c2c9332808`.
 
 Status:
-**CURRENT RUNTIME FOUNDATION EXISTS / DOCUMENTATION-READY / FINAL EXACT-HEAD VERIFICATION PENDING.**
+**PHASE 1 REQUIREMENT #8 SATISFIED / BOUNDED TRACE CHAMBER ACTIVITY PROOF VERIFIED.**
+
+This does not complete the broader V10 activity/life-simulation target. Activity registry/migration, professions/jobs/economy, scheduled/background/offline activities, calendar semantics and final activity-specific UX remain later work.
 
 This requirement does not need a new job/profession system for Phase 1.
 
