@@ -180,3 +180,45 @@ class CombatSession:
             return actor
 
         return None
+
+
+    def complete_active_activation(self) -> TacticalActorState:
+        """Complete the current normal activation and expire unused budget."""
+
+        if self.active_actor_id is None:
+            raise ValueError("no active combat actor")
+        actor = self.actors[self.active_actor_id]
+        if actor.activation_state not in {
+            ACTIVATION_ACTIVE,
+            ACTIVATION_RESOLVING_ACTION,
+            ACTIVATION_WAITING_REACTION,
+        }:
+            raise ValueError("active actor is not in a completable activation state")
+        actor.action_budget = 0
+        actor.activation_state = ACTIVATION_COMPLETE
+        self.active_actor_id = None
+        return actor
+
+    def round_is_complete(self) -> bool:
+        """Return whether the current round snapshot has no activation left."""
+
+        return (
+            self.active_actor_id is None
+            and self.activation_index >= len(self.initiative_order)
+        )
+
+    def advance_round(self) -> tuple[str, ...]:
+        """Advance after the current round completes and snapshot initiative again."""
+
+        if not self.round_is_complete():
+            raise ValueError("cannot advance round while activations remain")
+        self.round_index += 1
+        self.activation_index = 0
+        for actor in self.actors.values():
+            actor.action_budget = 0
+            if actor.incapacitated:
+                actor.activation_state = ACTIVATION_SKIPPED
+            else:
+                actor.activation_state = ACTIVATION_PENDING
+        self.initiative_order = self._snapshot_initiative_order()
+        return self.initiative_order
