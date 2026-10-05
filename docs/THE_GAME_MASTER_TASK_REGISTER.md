@@ -1598,3 +1598,50 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - PURPOSE: decide with exact-head evidence whether the Gate Twelve Phase 1 actually satisfies its exit gate.
 - ACCEPTANCE: complete exit checklist, Python + Android gates, debug/test APK when supported, APK SHA-256/source HEAD, persistence/determinism/no-known-leak/performance evidence, synchronized program records; otherwise exact failing gate and repair task.
 - BONUS: `D-079-B` final reconstruction handoff/evidence bundle index.
+
+
+### TASK D-080 — Build the first-wave Player-AI repository learning trail
+- STATUS: `READY / PROGRAM INFRASTRUCTURE / BULLETIN OPEN`
+- PRIORITY: `P0/P1 PROGRAM INFRA`
+- IMPORTANCE: `88/100`
+- PURPOSE: turn first-wave task evidence into a compact learning/navigation system so later Player-AIs can join THE GAME without repeating repository-wide archaeology.
+- SOURCE_OF_WORK:
+  - owner directive establishing first-player responsibility to teach later Player-AIs;
+  - `docs/player_guide/README.md`;
+  - `docs/player_guide/PLAYER_LEARNING_LEDGER.md`;
+  - `docs/overseer/README.md`.
+- DEPENDS_ON: none; use only committed/evidence-backed completed work.
+- PREFERRED_CLAIMANTS: Nodus or the Fifth Player-AI / Verification class while Kestrel remains focused on D-064. Any available Player-AI may claim under normal one-primary rules.
+- REQUIRED BACKFILL:
+  - at least one evidence-backed learning record from a completed Nodus work area;
+  - at least one from Veyra;
+  - at least one from Kestrel;
+  - at least one from Veyr.
+- EACH RECORD MUST IDENTIFY:
+  - smallest Read First set;
+  - facts later players must not rediscover;
+  - actual implementation/state/API/contract owner;
+  - one trap or false assumption;
+  - exact validation recipe/evidence;
+  - safe extension point;
+  - unresolved boundary;
+  - one next-player shortcut.
+- ACCEPTANCE:
+  - four first-wave records exist and cite committed evidence/source;
+  - `AGENTS.md`, Mission Control and the player guide cross-link the learning system;
+  - no record invents authority or duplicates a master document;
+  - a dry navigation audit can resolve at least four representative questions (where is authority? where is implementation? how is it tested? what is still blocked?) using the fast path instead of repository-wide rereading;
+  - future primary-task completion explicitly requires a Next Player Learning Record.
+- BONUS: `D-080-B` — machine-readable task/domain -> authority -> implementation owner -> validation/evidence map with a regression/consistency check.
+- OUT_OF_SCOPE:
+  - rewriting all master documentation;
+  - summarizing the complete game lore;
+  - copying source code into documentation;
+  - replacing domain authorities;
+  - changing gameplay merely to simplify documentation.
+- EVIDENCE: pending.
+- CLAIMED_BY: —
+- CLAIMED_AT: —
+- CLAIM_HEAD: —
+- COMPLETION_HEAD: —
+- BRAG_CARD: pending.
