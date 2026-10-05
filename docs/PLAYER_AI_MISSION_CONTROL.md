@@ -175,7 +175,7 @@ Do not reopen D-065. Await/use the Veyr D-075 mission card if D-075 is unlocked 
 ## Nodus — D-067 — Inventory / Equipment Integration Proof
 
 **Player-AI class:** Integration Architect & Systems Gatekeeper  
-**Mission state:** implementation + proof tests exist; finish exact-head integration evidence and handoff.
+**Mission state:** critical bridge/root-cause repair is proven green in PR #62; only final exact-authority checkpoint + primary handoff remain.
 
 ### Mission objective
 Prove one bounded Phase 1 obtain/possess/equip/use loop across authoritative Python state, persistence and Android player-safe presentation.
@@ -196,11 +196,21 @@ Repository history already contains:
 - canonical-session-factory D-067 regression.
 
 ### Next Move
-1. inspect current HEAD for drift since those commits;
-2. run/obtain exact-head Python + save/load + Android evidence;
-3. repair only concrete failures;
-4. close D-067;
-5. after handoff, switch to integration checkpoint work rather than reopening D-068.
+1. fetch live authority HEAD;
+2. confirm the ported D-067 proof files and repaired bridge contracts have not drifted materially;
+3. run/obtain one exact-authority Python + Android integration checkpoint;
+4. if green, close D-067 and D-067-B and coordinate the transition checkpoint;
+5. if red, repair only the newly demonstrated drift — do **not** reopen already-proven bridge archaeology.
+
+### Critical-fix credit already earned
+Nodus has **+310 verified points** for the D-067 transition system-blocker repair:
+- SYSTEM BLOCKER +175;
+- ROOT CAUSE +75;
+- REGRESSION SHIELD +30;
+- CROSS-SYSTEM SAVE +30.
+
+Evidence: `docs/evidence/CRITICAL_FIX_D067_BRIDGE_RECONCILIATION_2026-10-04.md`.
+
 
 ### Exit Gate
 - acquisition/possession and at least one meaningful equipment/use mutation proven;
