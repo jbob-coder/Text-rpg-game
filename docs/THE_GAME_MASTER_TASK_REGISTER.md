@@ -1370,23 +1370,26 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - authored one-hour practice increases technique and ability mastery while paying stamina/focus and world time;
   - the progression state survives save/load;
   - D-066-B deterministic replay is proven across an inserted save/load boundary;
-  - Python player-safe ability projection now carries stable ability ID;
-  - Android now maps ability/technique/resource progression into typed DTOs and renders the discovered progression in Stats without local mutation or unlock arithmetic;
+  - Python player-safe ability projection carries stable ability ID;
+  - Android maps ability/technique/resource progression into typed DTOs and renders discovered progression in Stats without local mutation or unlock arithmetic;
   - authored `requirements`, `discovery_requirements`, and `effects` are rejected at the typed Android progression boundary.
+- COMPLETION_HEAD: `ef3990b4faaa36a71a41f8b350f1e6fddcf2da13`.
 - VERIFICATION:
   - evidence: `docs/evidence/D066_PHASE1_PROGRESSION_PROOF_2026-10-04.md`;
-  - isolated verification PR #42, head `48ce6223fb84c3d31457c7f1dacaec87ce0d3df2`;
-  - workflow run #312 / ID `37250124885`;
-  - D-066 Python route/persistence/determinism/status tests executed PASS;
-  - Android JVM tests PASS;
-  - Compose instrumentation compilation PASS;
-  - debug APK assembly/content/hash PASS;
-  - connected API-35 emulator suite: 35 / 35 tests PASS;
-  - APK SHA-256: `a14ee38462da6a77a159225b71d2506bb0e18a051430b3a5f90e9a291eb81d8d`.
-- KNOWN GLOBAL GATE ISSUE:
-  - the aggregate Python workflow is still red only because unchanged `tests/test_room_projection.py` imports `pytest` while the workflow does not install it; D-066 tests themselves passed.
+  - isolated verification PR #42, final head `c60f2ca1f52caf95ced00272a57b432e7740a866`, closed unmerged;
+  - Actions PR merge checkout: `1bc7939ba6100c99db0ab442fc6939aa9af44ed4`;
+  - fully green workflow run #319 / ID `37250623837`;
+  - Python: **319 / 319 passed**;
+  - Android JVM tests: **PASS**;
+  - Compose instrumentation compilation: **PASS**;
+  - debug APK assembly/content/hash: **PASS**;
+  - connected API-35 emulator suite: **35 / 35 passed**;
+  - APK SHA-256: `e7066e937c01e61d33541822c4532b4ce41c55cc61f8b63a40f5f9c901e7b441`;
+  - APK artifact digest: `sha256:397516ebda57978a61fa266d4e76ea135e080585bd1110d0b72cb4eda790bf29`;
+  - UI-QA artifact digest: `sha256:a2fb3ca743375e4e60a5f7a48a00430d2cbbfc6a2ee3030130e9f9b6fb6be3f7`.
 - ACCEPTANCE: **SATISFIED** — meaningful authoritative mastery progression persists through save/load and projects safely.
 - BONUS: `D-066-B` **DONE** — deterministic save-boundary progression replay.
+- LIMITATION: no physical-device validation is claimed.
 ### TASK D-067 — Verify Phase 1 inventory/equipment loop on exact HEAD
 - STATUS: `PENDING / BULLETIN QUEUED`
 - PRIORITY: `P0 / RANK 8`
