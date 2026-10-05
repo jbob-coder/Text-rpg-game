@@ -1365,7 +1365,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - SURGICAL_MANIFEST: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 - CURRENT_NEXT_MOVE:
   1. re-fetch live authority and the manifest's five-file source/test SHAs;
-  2. do not use `agent/kestrel-d064-surgical-final` head `7dbbd7881d1ad3fb5fc5d5b840a813d1e887553f` as the final merge candidate: `GameScreen.kt` is still collapsed from 1,473 live lines to 173 branch lines (94 additions / 1,394 deletions), and its actor arguments are positional rather than the named source-contract form;
+  2. use `agent/kestrel-d064-surgical-final` head `9c38bb0df9af9dfc9d376c868883299949fd47dd` only as the latest preflight: the earlier `GameScreen.kt` collapse is fixed (3 additions / 1 deletion versus authority), but the branch is still behind live authority and still lacks the manifest-required fallback-scene source regression plus CPR-002 RED -> GREEN;
   3. create/rebuild a fresh short-lived D-064 branch and apply only the two `GameScreen.kt` wires, `SceneIllustration.kt` projected-actor parameter/call, `PixelStoryActorCatalog.kt` projected actor mapping through the existing placement resolver, plus focused catalog/source-wiring tests including fallback-scene preservation;
   4. preserve unrelated sprite/presentation formatting and fallback rendering;
   5. satisfy accepted `CPR-002` (74/100 CRITICAL / linked to D-064) with one executable JVM RED for an unauthorized actor key plus the smallest projected-actor allowlist rejection at the Android mapper boundary; keep the repair inside D-064 and create no duplicate task;
