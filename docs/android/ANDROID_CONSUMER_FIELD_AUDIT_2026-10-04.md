@@ -372,3 +372,96 @@ No Kotlin, Python, content, save, asset or runtime behavior was modified by this
 No tests/builds were executed.
 
 The audit is documentation derived from inspected source at the recorded source head.
+
+## 12. Parallel P1 D-021 exact consumer/test-contract checkpoint — Veyra
+
+**Lane claim HEAD:** `d6e80edafe71e678fcd15c293b601a6815eaad90`  
+**Audited source revision:** `e78e67c56b1ba0e1189897fba862b553e32573aa`  
+**Source-drift check:** subsequent branch commits inspected before this update did not modify the Android source/test files audited below.
+
+This checkpoint deepens the current consumer/test contract without implementing D-064 room actors, tactical Android runtime, activity runtime, hierarchical-map runtime, or adversary runtime.
+
+### 12.1 Correct current GameSnapshot field count
+
+`android/app/src/main/java/com/thegame/rpg/engine/GameEngine.kt` defines **19** current `GameSnapshot` fields, not 18:
+
+1. `sceneId`
+2. `title`
+3. `body`
+4. `choices`
+5. `resources`
+6. `attributes`
+7. `derived`
+8. `skills`
+9. `conditions`
+10. `identity`
+11. `inventory`
+12. `quests`
+13. `worldMap`
+14. `visuals`
+15. `turn`
+16. `timeMinutes`
+17. `location`
+18. `contentId`
+19. `canonStatus`
+
+The earlier “18 current fields” wording in higher-level status records was stale bookkeeping, not a runtime difference.
+
+### 12.2 High-priority current consumer/test contract matrix
+
+| Surface / field | Python/domain owner -> bridge path | Kotlin consumer | Current test-source evidence at audited revision | Contract status |
+| --- | --- | --- | --- | --- |
+| Quests / `quests` | `GameState.quests` + authored quest definitions -> `AndroidGameSession._quest_view_for` -> `BridgeSnapshotMapper` | `GameScreen.kt -> QuestSection` renders category/title/description/status/stage/objectives; no local quest mutation | Primary non-catalog Android test surfaces audited below contain no dedicated `GameQuest` fixture or `QuestSection` render assertion | **SOURCE-MAPPED / DEDICATED ASSERTION MISSING** |
+| Session content / `contentId` | `LoadedContentPack.content_id` -> `AndroidGameSession._view_for.meta.content_id` -> mapper | `SettingsPanel` renders `Content` | No direct `contentId` assertion found in the audited primary Android test surfaces | **SOURCE-MAPPED / DIRECT ASSERTION MISSING** |
+| Session canon / `canonStatus` | `LoadedContentPack.canon_status` -> `AndroidGameSession._view_for.meta.canon_status` -> mapper | `SettingsPanel` renders `Canon` | No direct `canonStatus` assertion found in the audited primary Android test surfaces | **SOURCE-MAPPED / DIRECT ASSERTION MISSING** |
+| Derived stats / `derived` | `status._derived_view` -> `RulesEngine.explain_player_value("derived.*")` -> bridge status -> mapper | `StatsSection` renders the `Derived` panel and each projected name/value/role | `BridgeStatusMapperTest` directly asserts mapped `snapshot.derived`; no dedicated Compose derived-render assertion found in the audited primary UI tests | **MAPPER COVERED / COMPOSE ASSERTION MISSING** |
+| Identity / `identity` | player-safe status identity -> bridge status -> mapper | Story avatar/status, `CharacterSection`, `PlayerStatusSummary`; summary renders name plus level/path/origin/background | `BridgeStatusMapperTest` directly asserts `identity.name` and `identity.level`; no direct audited assertion for origin/background/path or the complete identity presentation contract | **PARTIAL MAPPER COVERAGE / FULL PRESENTATION CONTRACT MISSING** |
+
+These are evidence gaps, not proof that the runtime values are wrong.
+
+### 12.3 Primary Android test surfaces audited for the matrix
+
+The following current test sources were inspected at the audited source revision:
+
+- `android/app/src/androidTest/java/com/thegame/rpg/ActivityBootSmokeTest.kt`
+- `android/app/src/androidTest/java/com/thegame/rpg/ui/CharacterStatsSectionTest.kt`
+- `android/app/src/androidTest/java/com/thegame/rpg/ui/GameScreenTest.kt`
+- `android/app/src/test/java/com/thegame/rpg/TravelTransitionContractTest.kt`
+- `android/app/src/test/java/com/thegame/rpg/boot/BootStateTest.kt`
+- `android/app/src/test/java/com/thegame/rpg/engine/BridgeStatusMapperTest.kt`
+- `android/app/src/test/java/com/thegame/rpg/engine/PythonGameEngineContractTest.kt`
+- `android/app/src/test/java/com/thegame/rpg/engine/StatContributionMapperTest.kt`
+- `android/app/src/test/java/com/thegame/rpg/save/SaveRepositoryTest.kt`
+- `android/app/src/test/java/com/thegame/rpg/ui/StatusComponentsTest.kt`
+
+Catalog-specific tests were not treated as evidence for quest/content/canon/derived/identity screen contracts merely because they exist.
+
+### 12.4 Future consumer contracts remain future-only
+
+The following are **not current GameSnapshot fields** and must not be invented in Compose:
+
+- **Activity:** `ACTIVITY_RECORD_AND_STATE_STANDARD.md` permits only player-safe preview/availability data and explicitly keeps authoritative time/resource/effect mutation in the engine. No normalized current Android activity projection exists.
+- **Hierarchical map:** current `worldMap` remains the Gate Twelve/district projection. `APPLICATION_UX_MASTER_PLAN.md` targets world -> macroregion -> region -> settlement -> district navigation, while `WORLD_COORDINATE_AND_SCALE_STANDARD.md` forbids treating current X/Y as universal world coordinates.
+- **Persistent adversary intel:** `ADVERSARY_PLAYER_SAFE_INTEL_STANDARD.md` requires knowledge-filtered intel and explicitly forbids sending the raw adversary record to Compose. No current adversary-intel GameSnapshot field exists.
+
+D-064 room/actor runtime projection and tactical Android runtime remain outside this lane by design.
+
+### 12.5 D-077 non-duplication boundary
+
+This audit specifies **what must be asserted**; it does not preempt D-077's later exact-head implementation/test-gap closure.
+
+When D-077 becomes dependency-safe, the current evidence-backed assertion targets are:
+
+1. dedicated QuestSection projection/render coverage;
+2. direct `contentId` assertion;
+3. direct `canonStatus` assertion;
+4. dedicated derived-stat Compose assertion;
+5. identity contract assertions for the fields actually intended to remain player-facing;
+6. new actor/activity/tactical/hierarchical-map/adversary assertions only after those projections genuinely exist.
+
+### 12.6 Verification boundary
+
+No Kotlin, Python, content, save, asset, or runtime behavior changed in this checkpoint.
+
+No Android tests/builds were executed. The evidence is an exact-source/test audit tied to the revision above.
+
