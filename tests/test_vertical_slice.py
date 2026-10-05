@@ -8,6 +8,7 @@ from textrpg import (
     build_status_view,
     dumps_state,
     loads_state,
+    npc_remembers,
     technique_discovery_status,
     validate_character_visuals,
     validate_content_pack,
@@ -83,6 +84,19 @@ class VerticalSliceTests(unittest.TestCase):
         self.assertIn(
             "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
             state.npcs["NPC_TAMSIN"]["knowledge"],
+        )
+        self.assertTrue(
+            npc_remembers(
+                state,
+                "NPC_TAMSIN",
+                "MEM_TAMSIN_PLAYER_SHARED_GATE_TWELVE",
+            )
+        )
+        tunnel_choices = {choice["id"] for choice in engine.available_choices(state)}
+        self.assertIn("ENTER_GATE_TWELVE_WITH_TAMSIN", tunnel_choices)
+        self.assertNotIn(
+            "ENTER_GATE_TWELVE_WITH_TAMSIN_AFTER_RECOVERY",
+            tunnel_choices,
         )
 
         engine.choose(state, "ENTER_GATE_TWELVE_WITH_TAMSIN")
@@ -199,6 +213,72 @@ class VerticalSliceTests(unittest.TestCase):
         self.assertEqual(
             state.npcs["NPC_TAMSIN"]["goals"]["GOAL_UNDERSTAND_GATE_TWELVE"]["progress"],
             25.0,
+        )
+        self.assertFalse(
+            npc_remembers(
+                state,
+                "NPC_TAMSIN",
+                "MEM_TAMSIN_PLAYER_SHARED_GATE_TWELVE",
+            )
+        )
+        tunnel_choices = {choice["id"] for choice in engine.available_choices(state)}
+        self.assertNotIn("ENTER_GATE_TWELVE_WITH_TAMSIN", tunnel_choices)
+        self.assertIn(
+            "ENTER_GATE_TWELVE_WITH_TAMSIN_AFTER_RECOVERY",
+            tunnel_choices,
+        )
+
+
+    def test_tamsin_memory_persists_and_changes_later_authored_choice(self):
+        data = load_slice()
+        engine = RulesEngine(
+            data["scenes"],
+            quest_definitions=data["quests"],
+            power_definitions=data.get("powers", {}),
+        )
+        state = make_state(data)
+
+        for choice_id in [
+            "TAKE_DEAD_RELAY",
+            "USE_MAINTENANCE_SEAL",
+            "TELL_TAMSIN_GATE_TWELVE",
+        ]:
+            engine.choose(state, choice_id)
+
+        memories = state.npcs["NPC_TAMSIN"]["memories"]
+        self.assertEqual(
+            ["MEM_TAMSIN_PLAYER_SHARED_GATE_TWELVE"],
+            [memory["memory_id"] for memory in memories],
+        )
+
+        resumed = loads_state(dumps_state(state))
+        self.assertTrue(
+            npc_remembers(
+                resumed,
+                "NPC_TAMSIN",
+                "MEM_TAMSIN_PLAYER_SHARED_GATE_TWELVE",
+                tags=["trust"],
+            )
+        )
+        visible = {
+            choice["id"]: choice["text"]
+            for choice in engine.available_choices(resumed)
+        }
+        self.assertIn("ENTER_GATE_TWELVE_WITH_TAMSIN", visible)
+        self.assertNotIn("ENTER_GATE_TWELVE_WITH_TAMSIN_AFTER_RECOVERY", visible)
+        self.assertIn("earlier trust", visible["ENTER_GATE_TWELVE_WITH_TAMSIN"])
+
+        engine.choose(resumed, "ENTER_GATE_TWELVE_WITH_TAMSIN")
+        self.assertEqual(
+            "ENTERED_GATE_TWELVE",
+            resumed.npcs["NPC_TAMSIN"]["story_state"]["TRACK_RELAY_CASE"],
+        )
+        self.assertEqual(
+            1,
+            sum(
+                memory["memory_id"] == "MEM_TAMSIN_PLAYER_SHARED_GATE_TWELVE"
+                for memory in resumed.npcs["NPC_TAMSIN"]["memories"]
+            ),
         )
 
 
