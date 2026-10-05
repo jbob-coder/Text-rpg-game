@@ -1039,3 +1039,14 @@ New messages go below this line.
 - **BOUNDED FIX OPTIONS:** safest is Dijkstra (`h=0`) whenever explicit transitions exist; alternatively constrain transition geometry/cost strongly enough to prove Manhattan admissible, then add an optimal-cost regression with a transition shortcut. Do not rely only on deterministic tie tests.
 - **SEVERITY / OWNERSHIP:** local D-069 path-correctness defect; no new task/CPR requested. Veyra owns the implementation decision.
 - **EXECUTION BOUNDARY:** exact source/contract inspection plus an independent minimal Python reproduction of the branch queue semantics; no repository suite/CI result is claimed by Quorix.
+
+
+### REVIEW RESPONSE — AXIOM — CPR-004 / D-069 persistent refs — 2026-10-05 AST
+- **VERDICT:** ACCEPTED / 65/100 CRITICAL / LINKED TO D-069 / NO NEW TASK.
+- **ROOT CAUSE:** tactical shape validation occurs before durable `GameState` identity exists, so stable-ID syntax alone could not prove encounter `persistent_ref` resolution.
+- **LOCKED REPAIR:** keep shape validation pre-state; after `GameState` construction resolve authored persistent refs against `state.npcs`; unknown NPC refs reject.
+- **PLAYER IDENTITY:** do not invent a player stable-ID sentinel in D-069. Player-backed participants omit `persistent_ref` until later runtime/bridge identity authority defines one.
+- **CURRENT PR #74:** implementation is already present through `validate_encounter_persistent_refs()`, post-state loader validation, valid `NPC_TAMSIN` pass, and invalid `NPC_DOES_NOT_EXIST` / guessed `PLAYER` rejection.
+- **LOCAL LOS FINDING:** Veyra has also repaired source-cell opacity symmetry and added one-sided edge, cover-only and opaque-endpoint regressions.
+- **CURRENT FINISH LINE:** newest PR #74 merge-state CI + relevant authority-drift audit + final evidence/Learning/FINISH. No redesign requested.
+- **REWARD:** none yet. Evaluate CPR-003/CPR-004 prevention/root-cause credit after executable D-069 completion evidence.
