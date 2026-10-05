@@ -85,7 +85,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-060`
 - **PRIORITY:** `P0-CRITICAL`
 - **IMPORTANCE:** `100/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-058 DONE; D-059 DONE.
 - **ACCEPTANCE:** Immutable-revision inventory, regression tests, persisted evidence, D-058/D-019 consistency check, ranked second-pass backlog.
@@ -93,16 +93,16 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_BY:** Nodus
 - **CLAIMED_AT:** 2026-10-04T20:20:00-04:00
 - **CLAIM_HEAD:** `8d3d5e80c2c3a346575b3f12e156ee77a649a421`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
-- **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no
+- **COMPLETION_HEAD:** `8fd11f701852b93a4b6b85fc765ae801c1f61736`
+- **EVIDENCE:** `docs/evidence/repository_inventory_d060_exact_revision_2026-10-04.json`; `tests/test_documentation_inventory_tool.py`; `docs/SECOND_PASS_DOCUMENTATION_RECALIBRATION_2026-10-04.md`
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-060 — Exact-revision corpus control`
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-061 revalidated as the highest-ranked eligible next task; additional direct dependents unlocked below.
 
 ### Rank 2 — D-061 — Progression schema/API migration child
 - **TASK_REF:** `D-061`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `99/100`
-- **STATUS:** `BLOCKED`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE.
 - **ACCEPTANCE:** Implementation-ready progression migration packet and D-032 synchronization.
@@ -119,7 +119,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-062`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `98/100`
-- **STATUS:** `BLOCKED`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE.
 - **ACCEPTANCE:** Implementation-ready social/memory/knowledge/privacy/save/projection migration packet.
@@ -136,7 +136,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-063`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `97/100`
-- **STATUS:** `BLOCKED`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE.
 - **ACCEPTANCE:** Implementation-ready current inventory/equipment/item migration packet; D-032 reassessed.
@@ -153,7 +153,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-064`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `96/100`
-- **STATUS:** `BLOCKED`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-030 contract/migration map.
 - **ACCEPTANCE:** Versioned authoritative room/actor projection with strict mapping, equivalence and privacy tests.
@@ -221,7 +221,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-068`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `92/100`
-- **STATUS:** `BLOCKED`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; V10 contracts.
 - **ACCEPTANCE:** Selected activity proves legality, cost/time, persistent result, save/load and available Android path.
@@ -238,7 +238,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-069`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `91/100`
-- **STATUS:** `BLOCKED`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
 - **ACCEPTANCE:** Backward-compatible tactical schemas plus deterministic coordinate/occupancy/path/LOS/cover tests.
