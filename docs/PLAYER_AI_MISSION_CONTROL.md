@@ -193,9 +193,12 @@ Follow the surgical manifest without widening scope:
 ### Overlap
 Kestrel owns this runtime/test surface. Nodus/Veyra/Veyr review only unless Kestrel explicitly requests a bounded edit.
 
-### Pending review
-- `CPR-002` — Android room-actor unknown-field strictness: **REPORTED / AXIOM REVIEW PENDING**.
-- Treat it as a D-064 acceptance question, not a new parallel task. Do not mark D-064 DONE until the report is dispositioned.
+### Accepted CPR-002 gate
+- `CPR-002` — Android room-actor unknown-field strictness: **ACCEPTED / LINKED_TO_D-064 / 74/100 CRITICAL**.
+- No current user-visible privacy leak is proven because Python already strips forbidden actor fields.
+- Before D-064 handoff, Kestrel must add one executable JVM RED showing an otherwise-valid actor map with an unauthorized key such as `memories` is rejected, then implement the smallest strict actor-key allowlist/rejection at the Android mapper boundary and prove GREEN.
+- Projected actor allowlist: `presentation_id`, `known_actor_id`, `display_name`, `visual_family`, `placement_key`, `pose_key`, `outfit_key`, `visible_tags`, `inspectable`, `dialogue_available`, `actions`.
+- Keep the repair inside D-064; do not create a duplicate task or move NPC privacy logic into Compose. Root-cause acceptance/reward remain pending executed RED -> GREEN evidence.
 
 ---
 
