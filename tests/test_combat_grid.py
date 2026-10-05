@@ -278,6 +278,42 @@ class TacticalGridTests(unittest.TestCase):
             has_line_of_sight(tactical_map, TacticalCoord(0, 0), TacticalCoord(2, 0))
         )
 
+    def test_one_sided_opaque_edge_blocks_los_in_both_directions(self) -> None:
+        tactical_map = rectangular_map(
+            2,
+            1,
+            overrides={(0, 0, 0): {"los_blocked_edges": ("E",)}},
+        )
+        left = TacticalCoord(0, 0)
+        right = TacticalCoord(1, 0)
+
+        self.assertFalse(has_line_of_sight(tactical_map, left, right))
+        self.assertFalse(has_line_of_sight(tactical_map, right, left))
+
+    def test_cover_alone_does_not_block_los(self) -> None:
+        tactical_map = rectangular_map(
+            2,
+            1,
+            overrides={(1, 0, 0): {"cover": (("W", COVER_STRONG),)}},
+        )
+        left = TacticalCoord(0, 0)
+        right = TacticalCoord(1, 0)
+
+        self.assertTrue(has_line_of_sight(tactical_map, left, right))
+        self.assertTrue(has_line_of_sight(tactical_map, right, left))
+
+    def test_opaque_endpoint_cell_blocks_los_symmetrically(self) -> None:
+        tactical_map = rectangular_map(
+            2,
+            1,
+            overrides={(0, 0, 0): {"blocks_los": True}},
+        )
+        opaque = TacticalCoord(0, 0)
+        clear = TacticalCoord(1, 0)
+
+        self.assertFalse(has_line_of_sight(tactical_map, opaque, clear))
+        self.assertFalse(has_line_of_sight(tactical_map, clear, opaque))
+
     def test_incoming_cover_edge_and_rating_are_deterministic(self) -> None:
         tactical_map = rectangular_map(
             3,
