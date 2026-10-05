@@ -390,3 +390,23 @@ Migration decision:
 - add typed Kotlin ability/technique mapping because current `GameSnapshot` drops `status.abilities`.
 
 D-066 may become READY after board synchronization. D-061 does not itself satisfy Phase 1 requirement 5 because no exact-head runtime proof has yet been executed.
+
+
+## D-062 social migration gate
+
+D-062 is complete as the migration-design dependency for Phase 1 requirements 3 and 4.
+
+Preserved authority:
+- stable `NPC_TAMSIN` identity and current seven relationship axes;
+- Jack/player knowledge remains separate from NPC-private knowledge;
+- current goal/story/party IDs and state owners remain unchanged;
+- save schema v1 remains the bounded target; no competing top-level social container is introduced.
+
+Implementation path:
+- converge authored relationship and NPC-knowledge effects on hardened `social.py` APIs;
+- add one explicit durable Tamsin memory through a semantic engine-owned write path;
+- add one later authoritative memory-reactive behavior;
+- prove save/load and deterministic behavior;
+- prove the private memory/knowledge/goal containers do not cross the player-safe bridge.
+
+D-065 may become READY after board synchronization. D-062 itself does not satisfy requirement 3 because the memory/reactive runtime proof is not implemented or executed yet. Requirement 4's existing knowledge branch remains current foundation pending final exact-head regression evidence.
