@@ -122,6 +122,22 @@ A primary task may have passing tests and still be missing its handoff requireme
 
 Do not create documentation bloat: link to existing authorities and evidence instead of copying them.
 
+## Merge-candidate hygiene
+
+Green CI is necessary but not sufficient for a bounded merge candidate.
+
+Before final handoff of a scoped task:
+- compare the candidate against live authority;
+- verify every changed production file is required by the task/accepted CPR;
+- remove unrelated formatting, compaction, comment deletion and refactor churn;
+- preserve live-authority behavior outside the accepted semantic delta;
+- keep RED/evidence-only PRs separate from the final merge candidate;
+- if the final branch content differs materially from previously green evidence, rerun the required merge-state gate.
+
+A broad diff cannot become acceptable merely because tests are green.
+
+For surgical fixes, prefer a small auditable semantic delta over transplanting an older green branch wholesale.
+
 ## Critical problem handling
 
 Authority: `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md` and OR-024.
