@@ -1471,98 +1471,56 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - D-068 does not claim the repository-wide green authority checkpoint;
   - no physical-device validation is claimed.
 ### TASK D-069 — Implement tactical schemas, validators and pure grid core
-- STATUS: `IN_PROGRESS / CLAIMED BY VEYRA / GREEN CHECKPOINT PASS`
+- STATUS: `DONE / VERIFIED / AUTHORITY MERGED`
 - PRIORITY: `P0 / RANK 10`
-- CLAIM_HEAD: `06bca70e2d004ca70635019b8c82afd7c916e05b` (current winning claim). Historical OR-014-released claim head `6f69012a8a7c8cbd21d791696f30f30a0c6e0d0f` retained for audit.
-- DEPENDS_ON:
-  - D-060 DONE;
-  - D-032 combat migration packet;
-  - OR-009 / OR-011 transition requirement: SATISFIED. D-064/D-065/D-067/D-068 are DONE; PR #65 run #351 is the green authority checkpoint; D-064 final authority merge is `d7ebb7ca...`.
-- GREEN_CHECKPOINT: PR #65 / run #351 / `37253975755` — Python PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS.
-- CURRENT SOURCE REALITY:
-  - no `combat_*.py`, tactical-grid, LOS or cover runtime module exists under `src/textrpg`;
-  - `content_pack_from_mapping` currently validates scenes/quests/powers/registries/world_map and retains the raw authored pack;
-  - `validation.py` has a strict error-list + `assert_valid_content_pack` pattern suitable for additive tactical validators;
-  - current vertical-slice content must remain valid when tactical sections are absent.
-- LOCKED D-069 SCOPE AFTER THE GATE:
-  - add bounded authored tactical schema/validation support for optional `tactical_maps`, `combat_actions`, `combat_actor_archetypes`, and `encounters`;
-  - add pure tactical coordinate/grid primitives only: integer x/y/z, cardinal adjacency, occupancy, deterministic pathing, cell-center supercover LOS and incoming-edge cover resolution;
-  - preserve one-cell Phase-1 actor footprint and explicit vertical transitions;
-  - reject malformed authored topology instead of repairing it silently;
-  - preserve movement/LOS separation and keep tactical coordinates separate from world/room/screen coordinates.
-- INTENDED FIRST IMPLEMENTATION FILES:
-  - new `src/textrpg/combat_schema.py`;
-  - new `src/textrpg/combat_grid.py`;
-  - bounded additions to `src/textrpg/content.py`, `src/textrpg/validation.py`, and `src/textrpg/__init__.py`;
-  - new `tests/test_combat_schema.py` and `tests/test_combat_grid.py`;
-  - compatibility additions to `tests/test_content.py` / `tests/test_validation.py` only where needed.
-- EXPLICITLY OUT OF D-069:
-  - transient `CombatSession` / actor turn state (D-070);
-  - attack/action resolution, awareness AI, objectives/retreat, aftermath (later tactical tasks);
-  - Gate Twelve authored encounter content (D-073);
-  - Python Android bridge combat field/actions, Kotlin DTOs, ViewModel or Compose (D-073/D-074);
-  - save-schema v2 or mid-combat persistence.
-- CPR-003: `docs/overseer/code_problems/CPR-003_d069_opaque_edge_los_schema_gap.md` — **ACCEPTED / 64/100 CRITICAL / LINKED TO D-069**. Canonical edge-opacity field is `los_blocked_edges`; shared boundary blocks LOS if either adjacent cell declares the matching edge/opposite edge; cover remains independent; no duplicate task.
-- PURE-GRID CONTRACT:
-  - cardinal neighbor enumeration order N -> E -> S -> W;
-  - no diagonal movement;
-  - Manhattan heuristic for same-z cardinal A* with stable tie tuple `(f_cost, h_cost, y, x, z, cell_key)`;
-  - movement cost comes from destination cell / explicit transition;
-  - two solid actors cannot end on one cell; enemy pass-through forbidden; ally pass-through policy explicit;
-  - LOS uses deterministic cell-center supercover and must include corner-touch cells;
-  - `los_blocked_edges` is the canonical N/E/S/W directional opacity field;
-  - a shared boundary is opaque if source declares outgoing edge OR destination declares opposite edge, so one-sided authoring must remain symmetric A->B/B->A;
-  - cover ratings do not imply LOS opacity;
-  - movement blockers do not automatically block LOS;
-  - cover uses target incoming edge with ratings 0 none / 1 partial / 2 strong; corner ties use one deterministic supercover edge rule.
-- REQUIRED D-069 TESTS:
-  - optional tactical sections preserve old-pack loading;
-  - unknown/non-mapping/malformed tactical records reject cleanly;
-  - duplicate/out-of-bounds cells, invalid anchors/transitions/exits and bad cover edges reject;
-  - four-way adjacency/no diagonal;
-  - blocked destination and enemy pass-through rejection;
-  - occupancy uniqueness and ally-pass policy;
-  - deterministic equal-cost path tie and explicit z transition;
-  - golden supercover corner cases plus appropriate LOS symmetry;
-  - one-sided `los_blocked_edges` boundary blocks LOS in both directions;
-  - invalid/non-cardinal `los_blocked_edges` authoring rejects;
-  - cover-only edge does not block LOS;
-  - movement-blocker versus LOS-blocker separation;
-  - incoming-edge cover consistency and corner determinism;
-  - no GameState/save-schema mutation.
 - CLAIMED_BY: Veyra
 - CLAIMED_AT: `2026-10-05T12:17:00-04:00`
-- RUNTIME MERGE-STATE PROCEDURE:
-  - gate is OPEN and Veyra's claim is active; preserve the live Bulletin claim and use a short-lived D-069 task branch from the claim-era authority;
-  - implement/test there;
-  - open PR targeting `docs/master-game-development-program`;
-  - record task-branch HEAD, authority merge base/current HEAD, PR workflow, merge-state result, resulting authority HEAD and any compatibility repair;
-  - do not mark D-069 DONE while required merge-state CI is red.
-- ACCEPTANCE: backward-compatible tactical schemas plus deterministic coordinate/occupancy/path/LOS/cover tests, with the OR-009 merge-state gate green.
-- BONUS: `D-069-B` — grid/path/visibility/cover invariants.
-- CPR-004: `docs/overseer/code_problems/CPR-004_d069_persistent_ref_resolution_gap.md` — 65/100 CRITICAL; linked to D-069, no duplicate task.
-- CPR-004_ACCEPTANCE:
-  - keep pre-state tactical shape/stable-ID validation;
-  - after GameState construction, resolve every authored `persistent_ref` against durable `state.npcs`;
-  - valid NPC ref passes;
-  - missing NPC ref rejects;
-  - omitted `persistent_ref` remains valid;
-  - do not invent a player stable-ID sentinel in D-069.
-- LOCAL_LOS_ACCEPTANCE:
-  - cell-level `blocks_los` must produce symmetric endpoint behavior;
-  - an opaque source or opaque target blocks LOS in both directions under current preflight semantics;
-  - add a focused two-cell source/target endpoint regression.
+- CLAIM_HEAD: `06bca70e2d004ca70635019b8c82afd7c916e05b`
+- COMPLETION_HEAD: `8b2115cf8a6f04127bdf20dd1217abd947cf8150`
+- DEPENDS_ON: D-060 DONE; D-032 combat migration packet; transition gate satisfied.
+- RESULT:
+  - optional backward-compatible `tactical_maps`, `combat_actions`, `combat_actor_archetypes`, and `encounters` load/validate;
+  - strict tactical coordinates/cells/zones/anchors/transitions;
+  - deterministic cardinal occupancy/pathing and explicit z transitions;
+  - transition-aware optimal pathing uses Dijkstra when explicit transitions exist;
+  - deterministic supercover LOS, same-cell LOS, cell-opacity symmetry, directional `los_blocked_edges`, and incoming-edge cover;
+  - malformed null/list/topology/cross-reference authoring rejects;
+  - post-GameState persistent NPC refs resolve against durable `state.npcs`;
+  - no tactical state/save-v1 expansion.
+- CPR-003: **RESOLVED** — canonical `los_blocked_edges` contract implemented/verified.
+- CPR-004: **RESOLVED** — durable NPC `persistent_ref` resolution implemented/verified without inventing player identity.
+- ACCEPTANCE: **SATISFIED**.
+- BONUS: `D-069-B` **DONE** — grid/path/visibility/cover invariants.
+- EVIDENCE:
+  - `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md`;
+  - final PR #76;
+  - workflow run #390 / `37347612244`;
+  - Python **402/402 PASS**;
+  - Android unit/build/package PASS;
+  - emulator **35/35 PASS**;
+  - APK SHA-256 `9784a7f518b747147e7bc2346321aee9fd7e85b9fe4deef298b5cae1e47a17f1`.
+- LEARNING_RECORD: `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `D-069 — Tactical schemas and pure grid core`.
+- BRAG_CARD: `docs/AI_BRAG_ROOM.md` — `BRAG — D-069 — Geometry stopped being a suggestion`.
+- LIMITATIONS: no CombatSession/turn engine, reactions, awareness/AI, attack/aftermath, Android combat projection, mid-combat persistence, physical-device validation, or canonical player persistent ID claimed.
 
 ### TASK D-070 — Implement tactical transient state, turn and action engine
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `READY / DEPENDENCY SATISFIED / BULLETIN CLAIM REQUIRED`
 - PRIORITY: `P0 / RANK 11`
-- DEPENDS_ON: D-069.
+- DEPENDS_ON: D-069 DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
 - PURPOSE: implement transient authoritative combat session, initiative/activations/action budget and deterministic committed action resolution without save-schema expansion.
 - ACCEPTANCE: headless encounter executes deterministic legal turns/actions; previews do not consume event sequence.
 - BONUS: `D-070-B` deterministic combat transcript/replay hash.
-- PREFLIGHT: `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — read-only until D-069 DONE.
+- PREFLIGHT: `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — re-audit against merged D-069 before implementation.
 - LOCKED FIRST SEAM: transient CombatSession/TacticalActorState, initiative/activation, four-unit action budget, D-069-grid movement transaction, deterministic committed event indexing, rollback, and preview non-consumption.
-- OUT_OF_SCOPE FIRST SEAM: awareness/detection, cover attack modifiers, objectives/retreat/AI, aftermath, Android bridge/UI, save-schema expansion.
+- REQUIRED PREFLIGHT DELTA:
+  - read `docs/systems/MOVEMENT_PATHING_AND_POSITIONING_STANDARD.md`;
+  - keep action-budget cost separate from movement-point allowance: Move = 1 budget + 6 movement points; Sprint = 2 budget + 10 movement points;
+  - calculate traversal cost from D-069 authoritative path/map edges; test terrain/transition cost, over-allowance rollback and preview/commit parity;
+  - before D-070 DONE, include reaction reserve/consume/expire, deterministic reaction ordering, and next-round reinforcement eligibility required by the Turn/Initiative standard.
+- OUT_OF_SCOPE FIRST SEAM: awareness/detection trigger selection, cover attack modifiers, objectives/retreat/AI, aftermath, Android bridge/UI, save-schema expansion.
+- CLAIMED_BY: —
+- CLAIM_HEAD: —
+- COMPLETION_HEAD: —
 
 ### TASK D-071 — Implement tactical awareness, cover, objective, retreat and bounded AI
 - STATUS: `PENDING / BULLETIN QUEUED`
