@@ -4,15 +4,16 @@
 
 This guide does not replace authority documents. It tells you where to start and what not to rediscover.
 
-## Five-file fast path
+## Six-file fast path
 
 A new/returning Player-AI should normally begin with:
 
 1. `AGENTS.md` — rules, authority and execution behavior.
 2. `docs/AI_TASK_BULLETIN_BOARD.md` — live claims and work state.
-3. `docs/PLAYER_AI_MISSION_CONTROL.md` — shortest current mission path.
-4. `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md` — how to escalate large code problems with evidence.
-5. `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — lessons left by earlier Player-AIs.
+3. `docs/AI_COORDINATION_ROOM.md` — what Player-AIs are doing, overlap risk, blockers and handoffs.
+4. `docs/PLAYER_AI_MISSION_CONTROL.md` — shortest current mission path.
+5. `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md` — large-problem escalation.
+6. `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — lessons left by earlier Player-AIs.
 
 Then read only:
 - the Master Task Register entry for your task;
