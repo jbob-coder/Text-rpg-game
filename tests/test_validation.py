@@ -280,6 +280,69 @@ class ValidationTests(unittest.TestCase):
         self.assertTrue(any(".quality must be finite non-negative numeric" in e for e in errors))
 
 
+    def test_npc_memory_condition_and_effect_contracts_are_strict(self):
+        scenes = {
+            "SCENE_A": {
+                "choices": [
+                    {
+                        "id": "CHOICE_MEMORY",
+                        "text": "Remember.",
+                        "visible_if": [{
+                            "type": "npc_remembers",
+                            "npc": "NPC_TAMSIN",
+                            "memory_id": "MEM_TAMSIN_SHARED_GATE",
+                        }],
+                        "outcomes": {"default": {"effects": [{
+                            "type": "npc_memory_add",
+                            "npc": "NPC_TAMSIN",
+                            "memory_id": "MEM_TAMSIN_SHARED_GATE",
+                            "importance": 4,
+                            "tags": ["trust"],
+                            "data": {"subject": "GATE_TWELVE"},
+                        }]}},
+                    }
+                ]
+            }
+        }
+        self.assertEqual(validate_scenes(scenes), [])
+
+        scenes["SCENE_A"]["choices"][0]["visible_if"][0]["memory_id"] = "bad memory"
+        scenes["SCENE_A"]["choices"][0]["outcomes"]["default"]["effects"][0].update(
+            memory_id="bad memory",
+            importance=0,
+            tags="trust",
+            data=[],
+        )
+        errors = validate_scenes(scenes)
+
+        self.assertTrue(any(".memory_id must be a stable uppercase ID" in e for e in errors))
+        self.assertTrue(any(".importance must be an integer in range 1..5" in e for e in errors))
+        self.assertTrue(any(".tags must be a list of non-empty strings" in e for e in errors))
+        self.assertTrue(any(".data must be an object" in e for e in errors))
+
+    def test_npc_learn_effect_metadata_is_strict(self):
+        scenes = {
+            "SCENE_A": {"choices": [{
+                "id": "CHOICE_LEARN",
+                "text": "Tell.",
+                "outcomes": {"default": {"effects": [{
+                    "type": "npc_learn",
+                    "npc": "NPC_A",
+                    "knowledge_id": "KNOW_X",
+                    "source": "PLAYER",
+                    "confidence": float("nan"),
+                    "truth": "",
+                    "secrecy": True,
+                }]}}
+            }]}
+        }
+
+        errors = validate_scenes(scenes)
+
+        self.assertTrue(any(".confidence must be finite numeric in range 0..1" in e for e in errors))
+        self.assertTrue(any(".truth must be non-empty text" in e for e in errors))
+        self.assertTrue(any(".secrecy must be an integer in range 0..5" in e for e in errors))
+
     def test_npc_goal_effect_contract_is_strict(self):
         scenes = {
             "SCENE_A": {"choices": [
