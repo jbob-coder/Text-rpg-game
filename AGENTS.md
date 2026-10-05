@@ -93,6 +93,7 @@ After finishing a task:
 - mark the bulletin entry `DONE` only when the authoritative task is genuinely complete;
 - append an evidence-backed Brag Card to `docs/AI_BRAG_ROOM.md`;
 - update `docs/AI_SCOREBOARD.md` so verified points, standings and READY bounties remain current;
+- refresh the relevant Mission Control card so the next Player-AI sees current Already Done / Next Move / Exit Gate information;
 - when you find and repair a real defect introduced by another AI, use `docs/AI_PEER_REVIEW_BOUNTY.md` and append a `ROAST & REPAIR` card before adding peer-review points;
 - if the Project Overseer has summoned you, answer the technical questions and submit one bounded evidence-backed improvement proposal in `docs/AI_COUNCIL_ROOM.md` before taking your next primary task;
 - when operating in an interactive ChatGPT conversation, also post a concise version of that Brag Card in the active chat;
