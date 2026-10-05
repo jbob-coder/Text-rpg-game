@@ -1028,8 +1028,8 @@ Governance:
 - accepted CRITICAL-or-higher `CPR-###` incidents must link to an existing causal-owner Bulletin task or create a new Master Task/Bulletin task when no owner exists;
 - duplicate tasks for one causal incident are explicitly disallowed;
 - every completed primary task must leave a compact Next Player Learning Record;
-- D-080 is READY to backfill at least one evidence-backed learning record from first-wave work by Nodus, Veyra, Kestrel and Veyr;
-- D-080-B proposes a machine-readable task/domain -> authority -> implementation owner -> validation/evidence map plus consistency check.
+- D-080 is DONE: the Learning Ledger now contains evidence-backed first-wave records for Nodus, Veyra, Kestrel and Veyr, and `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md` validates the compact navigation path;
+- D-080-B remains unimplemented by design; no machine-readable ownership map is maintained until a concrete consumer/consistency requirement justifies another artifact.
 
 This layer is navigation/review infrastructure only. It does not replace domain master documents, source truth, task acceptance, test evidence or owner-only decisions.
 
