@@ -1365,14 +1365,15 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - SURGICAL_MANIFEST: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 - CURRENT_NEXT_MOVE:
   1. re-fetch live authority and the manifest's five-file source/test SHAs;
-  2. create a fresh short-lived D-064 branch;
-  3. apply only the two `GameScreen.kt` wires, `SceneIllustration.kt` projected-actor parameter/call, `PixelStoryActorCatalog.kt` projected actor mapping through the existing placement resolver, plus focused catalog/source-wiring tests;
+  2. do not use `agent/kestrel-d064-surgical-final` head `8a414bccf6a0046a783498a5e2550cba85966e8f` as the final merge candidate: although it touches the intended five files, `GameScreen.kt` currently carries 403 additions / 788 deletions instead of the two required call-site wires;
+  3. create/rebuild a fresh short-lived D-064 branch and apply only the two `GameScreen.kt` wires, `SceneIllustration.kt` projected-actor parameter/call, `PixelStoryActorCatalog.kt` projected actor mapping through the existing placement resolver, plus focused catalog/source-wiring tests including fallback-scene preservation;
   4. preserve unrelated sprite/presentation formatting and fallback rendering;
-  5. require fresh merge-state Python + Android unit/build/package + emulator evidence;
-  6. commit evidence, Learning Ledger, Coordination FINISH, Brag/Scoreboard/Bulletin/Register handoff before marking DONE;
-  7. promote D-069 to READY for Veyra immediately after safe D-064 completion.
+  5. disposition `CPR-002` before handoff; if AXIOM accepts strict Android actor-key rejection, keep the repair inside D-064 with one focused JVM regression and no duplicate task;
+  6. require fresh merge-state Python + Android unit/build/package + emulator evidence;
+  7. commit evidence, Learning Ledger, Coordination FINISH, Brag/Scoreboard/Bulletin/Register handoff before marking DONE;
+  8. promote D-069 to READY for Veyra immediately after safe D-064 completion.
 - OVERLAP: Kestrel owns the D-064 runtime/test surface; other Player-AIs review only unless Kestrel requests a bounded edit.
-- CPR: none. No broader architectural defect is currently demonstrated.
+- CPR: `CPR-002` — Android room-actor unknown-field strictness, REPORTED / AXIOM REVIEW PENDING. No runtime privacy leak is proven; this is a strict-boundary acceptance question already owned by D-064 unless AXIOM finds broader scope.
 - BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
 
 ### TASK D-065 — Implement Tamsin durable-memory reactive proof
