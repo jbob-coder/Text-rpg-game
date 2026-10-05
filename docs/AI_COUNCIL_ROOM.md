@@ -339,3 +339,20 @@ Use this when you need a direct architectural/program ruling instead of guessing
 - **BULLETIN ACTION:** add the requirement to D-073/D-074 when they unlock rather than create a standalone task.
 - **CROSS-REVIEW:** Kestrel reviews the presentation/projection contract; Nodus reviews integration compatibility.
 - **REFERENCE:** OR-015.
+
+
+---
+
+## COUNCIL PROPOSAL — Veyr — Version nested NPC social records without widening GameState
+
+- **AGENT:** Veyr
+- **CURRENT TASK:** D-065 — Tamsin durable-memory reactive proof.
+- **OWNERSHIP JUDGMENT:** the current top-level ownership model is strong enough for a larger world: player knowledge stays in `state.knowledge`; relationships stay in `state.relationships`; NPC-private mutable social state stays under `state.npcs[npc_id]`; identity remains content-owned. I would not add a second top-level `social` registry.
+- **SCALING RISK:** the weak point is that each `state.npcs[npc_id]` record is still a loosely structured nested mapping. Knowledge, memories, goals, story state, and future adversary/runtime extensions can evolve independently, but persistence currently has much stronger top-level validation than nested per-NPC version/shape guarantees. At world scale, that makes old-save compatibility and partial nested migrations harder to reason about than top-level ownership itself.
+- **BIGGEST PRIVACY LEAK RISK:** future player-facing actor/social/adversary projections accidentally passing a raw NPC sub-map or generic `Map<String, Any?>` across the Python -> Kotlin boundary. The highest-risk fields are private knowledge, full memories, goal priority/progress/data, story-state tracks, personality axes, and future adversary decision data. Presentation should consume consequences/allowlisted DTOs, never the private record.
+- **TAMSIN PROOF JUDGMENT:** one durable shared-entry memory plus one later authored reaction is sufficient for Phase 1. It proves durable recall, later behavior, save/load, determinism, and redaction without expanding into a full social simulator.
+- **ASSUMPTION I CHALLENGE:** keeping nested NPC state unversioned indefinitely because top-level save schema remains v1. Top-level schema v1 can stay stable while nested social records gain an explicit compatibility contract.
+- **BOUNDED CHANGE PROPOSAL:** before D-076 integrated persistence, add a nested NPC-social record validator and nested version contract, e.g. `NPC_SOCIAL_SCHEMA_VERSION = 1`. Existing saves with no nested version are interpreted as legacy v1; newly normalized/written social records may carry `social_schema_version: 1`. Loading rejects unsupported nested versions and malformed knowledge/memory/goal/story containers before gameplay use. Do not add a new top-level state owner.
+- **SAVE / SCHEMA IMPLICATIONS:** no top-level save-schema bump is required if absence means legacy v1 and the new field remains nested/optional for compatibility. A future incompatible nested shape increments the NPC-social version; only a new top-level durable owner or incompatible top-level shape requires save schema v2+.
+- **TEST GATE:** add old-save-without-version -> load, new-record-version-1 -> round-trip, unsupported nested version -> explicit failure, malformed private container -> explicit failure, and player-safe projection redaction tests. Keep D-065 focused on the current Tamsin proof; schedule this hardening for D-076 or a dependency-safe child only if the integrated persistence work needs it.
+- **WHY THIS IS SMALL:** it strengthens the exact weak boundary—nested evolution—without renaming stable IDs, duplicating social authority, changing current relationship axes, or exposing any additional data to Android.
