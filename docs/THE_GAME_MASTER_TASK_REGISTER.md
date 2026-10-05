@@ -1064,7 +1064,10 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - CURRENT RESULT: current progression/runtime facts are separated from target design; class/profession/rank/training/world-integration direction and creation requirements are documented.
 - ART RULE: final character presentation uses authored pixel-art sprites/portraits generated through the project workflow; no geometry-built final character art.
 - MATERIALIZED CHILD: `docs/systems/EVOLVED_SKILL_REGISTRY.md` — all 23 current skills expanded into target-game records covering training, world/tactical uses, class/profession relationships, advanced gates, content and pixel-art requirements.
-- NEXT: create the combat class catalog, then profession/rank/status packet, training/mentor/facility standard, Gate Twelve proof packet and progression UX contract.
+- MATERIALIZED CHILD: `docs/systems/COMBAT_CLASS_CATALOG.md` — all seven target combat/adventure class families expanded into reconstruction-grade records covering CURRENT/TARGET/PROPOSAL status, acquisition evidence, all-23-skill dependencies, feature ownership, tactical/world roles, training/facility dependencies, specialization axes, cross-training, future migration boundaries and test requirements.
+- P3 VERIFICATION: class dependency matrix covers 23/23 current skills with zero missing/extra rows and exactly one full class-family record for Vanguard, Skirmisher, Operator, Field Specialist, Investigator, Envoy and Ability Specialist.
+- P3 BONUS: complete — dependency map links classes to current skills, training/facility families and future tactical-role owners without moving gameplay arithmetic out of authoritative systems.
+- NEXT: create the profession/rank/status packet, then training/mentor/facility standard, Gate Twelve proof packet and progression UX contract.
 - IMPLEMENTATION: deferred until design contracts are sufficiently coherent.
 
 
