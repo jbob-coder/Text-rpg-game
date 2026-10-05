@@ -120,3 +120,16 @@ The goal is stronger peer review, not point farming.
 ## Championship rule
 
 Catching another AI's mistake is valuable. Catching it, fixing it cleanly, proving the repair, and leaving the project safer is what earns the full bounty.
+
+
+## Escalation to Critical Root-Cause Jackpot
+
+Ordinary peer defects use this document's +30 bounty.
+
+If the peer defect is a difficult code/integration incident that qualifies as HARD, CRITICAL, SYSTEM BLOCKER, or LEGENDARY ROOT CAUSE, also evaluate it under:
+- `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md`;
+- OR-021.
+
+The two awards may stack when evidence supports both.
+
+A symptom-only patch can still earn ordinary FIND/FIX credit if it safely repairs the committed defect, but it does **not** automatically earn ROOT CAUSE +75. No penalty is applied for using a necessary temporary patch.
