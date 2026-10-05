@@ -572,3 +572,18 @@ For Phase 1:
 - prove the existing current item/equipment/story loop exact-head in D-067.
 
 The full economy remains a later domain implementation and is not a blocker for Gate Twelve Phase 1.
+
+
+## 23. Reconciliation note
+
+A concurrent D-063 work stream briefly created the near-duplicate path `PHASE_1_ITEM_EQUIPMENT_SCHEMA_API_MIGRATION_PACKET.md`.
+
+The canonical packet is this file: `PHASE_1_ITEMS_ECONOMY_SCHEMA_API_MIGRATION_PACKET.md`.
+
+Unique useful details from the duplicate are retained here:
+
+- initial inventory quantities must be validated as positive non-boolean integers during content loading, not only item IDs cross-referenced;
+- the authored signed `inventory` effect should use one bounded engine-owned mutation helper so current quantity, integer delta, zero-delta rejection and underflow rules are validated consistently;
+- Kotlin must continue to consume the resulting player-safe projection rather than duplicate those mutation rules.
+
+The duplicate file is removed after this reconciliation so D-032 has one items/economy child authority.
