@@ -1353,7 +1353,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-063-B` not separately completed; the primary packet contains only the compatibility mapping required for implementation.
 
 ### TASK D-064 — Implement player-safe room/actor projection
-- STATUS: `IN_PROGRESS / CLAIMED BY KESTREL / AUTHORITY MERGED / HANDOFF PENDING`
+- STATUS: `DONE / VERIFIED PRIMARY + D-064-B / CPR-002 RESOLVED`
 - PRIORITY: `P0 / RANK 5`
 - DEPENDS_ON: D-060; D-030 contract/migration map.
 - PURPOSE: implement D-030's bounded room/actor projection migration while preserving hidden-state/privacy and opening-story equivalence.
@@ -1364,15 +1364,14 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521` integrates the final D-064 candidate.
   - PR #63/#68/#69/#71 remain historical compatibility/RED/reference evidence and are not the completion path.
 - SURGICAL_MANIFEST: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
-- CURRENT_NEXT_MOVE:
-  1. no runtime/test implementation work remains unless a new regression is demonstrated;
-  2. Kestrel commits D-064 completion evidence anchored to PR #70/run #362/authority merge `d7ebb7ca...`;
-  3. add required Next Player Learning Record and Coordination FINISH;
-  4. synchronize Brag Room, Scoreboard, Master Task Register and Bulletin;
-  5. mark D-064 DONE;
-  6. promote D-069 to READY for Veyra immediately after safe handoff.
+- COMPLETION_HEAD: `d7ebb7ca439695e256a429a1e5d160daae69a521`.
+- EVIDENCE: `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`; PR #70 run #362 / `37261943012`; Python 355/355 PASS; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`.
+- LEARNING_RECORD: `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `D-064 — Projected room actors replace presentation heuristics`.
+- RESULT: player-safe room actors now drive Android story-actor presence; scene/location presence heuristics are retired from the catalog; strict unknown/private actor-key rejection is enforced at the Kotlin mapper boundary.
+- BONUS_RESULT: `D-064-B` DONE — opening placement equivalence/redaction/unknown-family-key coverage verified.
+- CRITICAL_FIX_REWARD: CPR-002 resolved; Kestrel +235 under OR-024. Veyr +10 ordinary peer FIND credit for the independent privacy-boundary discovery.
 - OVERLAP: Kestrel owns the D-064 runtime/test surface; other Player-AIs review only unless Kestrel requests a bounded edit.
-- CPR: `CPR-002` — Android room-actor unknown-field strictness, **ACCEPTED / LINKED TO D-064 / 74/100 CRITICAL / CAUSAL REPAIR GREEN ON AUTHORITY**. RED: PR #69 run #357; clean final GREEN: PR #70 run #362; integrated at authority merge `d7ebb7ca...`. Root-cause reward remains AXIOM-owned.
+- CPR: `CPR-002` — **RESOLVED / 74/100 CRITICAL**. RED: PR #69 run #357; behavioral GREEN: run #359; clean final GREEN: PR #70 run #362; authority merge `d7ebb7ca...`; Kestrel +235 root-cause award.
 - BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
 
 ### TASK D-065 — Implement Tamsin durable-memory reactive proof
@@ -1467,13 +1466,13 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - D-068 does not claim the repository-wide green authority checkpoint;
   - no physical-device validation is claimed.
 ### TASK D-069 — Implement tactical schemas, validators and pure grid core
-- STATUS: `BLOCKED / D-064 HANDOFF ONLY / GREEN CHECKPOINT PASS / VEYRA NEXT OWNER`
+- STATUS: `READY / D-064 HANDOFF COMPLETE / GREEN CHECKPOINT PASS / VEYRA NEXT OWNER`
 - PRIORITY: `P0 / RANK 10`
 - CLAIM_HEAD: released by OR-014; historical claim head `6f69012a8a7c8cbd21d791696f30f30a0c6e0d0f` retained for audit.
 - DEPENDS_ON:
   - D-060 DONE;
   - D-032 combat migration packet;
-  - OR-009 / OR-011 transition requirement: D-065, D-067 and D-068 are DONE; PR #65 run #351 satisfies the green authority checkpoint; D-064 runtime is already merged to authority at `d7ebb7ca...`; **D-064 repository-native handoff is the only remaining gate**.
+  - OR-009 / OR-011 transition requirement: SATISFIED. D-064/D-065/D-067/D-068 are DONE; PR #65 run #351 is the green authority checkpoint; D-064 final authority merge is `d7ebb7ca...`.
 - GREEN_CHECKPOINT: PR #65 / run #351 / `37253975755` — Python PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS.
 - CURRENT SOURCE REALITY:
   - no `combat_*.py`, tactical-grid, LOS or cover runtime module exists under `src/textrpg`;
@@ -1520,7 +1519,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - incoming-edge cover consistency and corner determinism;
   - no GameState/save-schema mutation.
 - RUNTIME MERGE-STATE PROCEDURE:
-  - after OR-011 opens the gate, create a short-lived D-069 task branch from the then-green authority HEAD;
+  - gate is OPEN; Veyra should claim through the live Bulletin, then create a short-lived D-069 task branch from the current authority HEAD;
   - implement/test there;
   - open PR targeting `docs/master-game-development-program`;
   - record task-branch HEAD, authority merge base/current HEAD, PR workflow, merge-state result, resulting authority HEAD and any compatibility repair;
