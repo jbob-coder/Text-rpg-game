@@ -318,10 +318,10 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-065`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `95/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Veyr / D-065.
-- **CURRENT_PHASE:** verification + persistence/determinism/privacy closure; core memory/reaction code already exists.
-- **NEXT_MOVE:** prove save/reload -> later Tamsin reaction deterministically and verify private-state redaction; close if green.
+- **CURRENT_PHASE:** CLOSED — primary + D-065-B verified.
+- **NEXT_MOVE:** none — handoff complete; Veyr may take the next dependency-safe narrative/world-state mission.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-062 DONE.
 - **ACCEPTANCE:** Prior interaction creates durable Tamsin state; later content reacts; save/load and privacy tests pass.
@@ -329,10 +329,10 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_BY:** Veyr
 - **CLAIMED_AT:** 2026-10-04T20:49:00-04:00
 - **CLAIM_HEAD:** `959e562b38fcf15699e7ad7289a65281089b5c9a`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
-- **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no
+- **COMPLETION_HEAD:** `e883205559c64d2e82614160bd6548c2c9332808`
+- **EVIDENCE:** `docs/evidence/D065_TAMSIN_MEMORY_PROOF_2026-10-04.md`; PR #59 run #341 executed all five D-065 tests PASS; implementation ancestry verified under OR-019.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-065 — Tamsin remembers without leaking her diary`
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-075 dependency review initiated by Overseer.
 
 ### Rank 7 — D-066 — Phase 1 progression proof
 - **TASK_REF:** `D-066`
