@@ -244,7 +244,7 @@ class CombatSession:
         self.activation_index = 0
         self.event_index = 0
         self.active_actor_id: str | None = None
-        self.committed_events: list[object] = []
+        self.committed_events: list[CombatEvent] = []
         self.encounter_status = "active"
         self.initiative_order = self._snapshot_initiative_order()
 
@@ -696,3 +696,34 @@ class CombatSession:
             self.event_index = event_index_before
             del self.committed_events[event_count_before:]
             raise
+
+
+    def normalized_transcript(self) -> tuple[str, ...]:
+        """Return a stable serialization of committed authoritative events."""
+
+        return tuple(
+            "|".join(
+                (
+                    str(event.event_index),
+                    str(event.round_index),
+                    str(event.activation_index),
+                    event.actor_id,
+                    event.action_id,
+                    event.target_key,
+                    str(event.budget_before),
+                    str(event.budget_after),
+                    event.coord_before.key,
+                    event.coord_after.key,
+                    str(event.reserve_before),
+                    str(event.reserve_after),
+                    event.digest,
+                )
+            )
+            for event in self.committed_events
+        )
+
+    def transcript_hash(self) -> str:
+        """Hash the normalized committed transcript for deterministic replay checks."""
+
+        payload = "\n".join(self.normalized_transcript())
+        return hashlib.sha256(payload.encode("utf-8")).hexdigest()
