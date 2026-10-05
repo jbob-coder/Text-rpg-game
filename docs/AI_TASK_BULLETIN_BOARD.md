@@ -487,7 +487,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `91/100`
 - **STATUS:** `BLOCKED`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
-- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE, PR #65 run #351 established the green checkpoint, and PR #63 run #354 provides newer green D-064 merge-state evidence. No extra checkpoint is required solely because documentation/governance moved.
+- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE and PR #65 run #351 established the green authority checkpoint. PR #63 run #354 is reusable D-064 GREEN_COMPATIBILITY_PROOF under OR-019, but the final D-064 authority patch is still the fresh surgical branch required by `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`. Do not promote D-069 until that branch is green and D-064 is synchronized DONE.
 - **NEXT_OWNER:** Veyra; reclaim through `docs/AI_RUNTIME_MERGE_STATE_GATE.md` only after unlock.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
@@ -497,7 +497,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** —
 - **CLAIM_HEAD:** —
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** OR-014 released the premature claim. PR #65 run #351 is green across Python, Android build/unit and emulator smoke. PR #63 run #354 is also green for the D-064 integration candidate; D-064 remains IN_PROGRESS only because merge/evidence/learning handoff is pending. Veyra remains next claimant.
+- **EVIDENCE:** OR-014 released the premature claim. PR #65 run #351 is green across Python, Android build/unit and emulator smoke. PR #63 run #354 proves the D-064 projected-actor behavior against its tested authority merge state, while PR #68 is RED_CONTRACT_ONLY. The final surgical D-064 merge candidate is still pending; Veyra remains next claimant after its green merge-state evidence and full handoff.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** yes — after D-064 DONE, re-fetch and promote D-069 to READY for Veyra before any lower-priority claim.
 
