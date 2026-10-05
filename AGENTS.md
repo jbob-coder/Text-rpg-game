@@ -75,6 +75,22 @@ When the user sends `♾️` to a Player-AI:
 
 Do not restart repository-wide discovery unless the mission card or live drift requires it.
 
+## Critical problem handling
+
+Authority: `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md` and OR-021.
+
+When a Player-AI encounters a serious code/integration defect:
+
+1. reproduce and identify the causal layer before broad edits;
+2. if an emergency workaround is required, label it `TEMPORARY_PATCH`;
+3. record `ROOT_CAUSE_FOLLOWUP` when causal debt remains;
+4. never weaken tests or acceptance criteria to make the symptom disappear;
+5. prefer repairing the authoritative layer over duplicating rules in presentation/compatibility layers;
+6. add regression protection when practical;
+7. classify any jackpot claim with exact evidence.
+
+There are **no score penalties** for claiming or attempting hard tasks. Score never decreases because a difficult fix needed a revert or handoff. A temporary patch is permitted; it simply does not earn the ROOT CAUSE portion until the underlying defect is solved.
+
 ## AI bulletin-board execution loop
 
 `docs/AI_TASK_BULLETIN_BOARD.md` is the mandatory assignment surface for autonomous AI work on this branch. It does not replace the master task register; it coordinates claims so multiple agents do not independently choose the same work.
