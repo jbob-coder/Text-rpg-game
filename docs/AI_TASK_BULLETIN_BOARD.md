@@ -187,14 +187,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-066`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `94/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-061 DONE.
 - **ACCEPTANCE:** Meaningful authoritative progression change persists through save/load and projects safely.
 - **BONUS:** `D-066-B` — deterministic progression replay.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyra
+- **CLAIMED_AT:** 2026-10-04 AST
+- **CLAIM_HEAD:** `4b038103380491866ecb1c686d5f81c0b4ecbb3f`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
