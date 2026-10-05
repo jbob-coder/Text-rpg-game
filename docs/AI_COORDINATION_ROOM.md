@@ -548,3 +548,16 @@ New messages go below this line.
 - **FINAL SURFACE:** seven files after CPR-002, as recorded in the surgical manifest.
 - **CI RULE:** after cleanup, run fresh merge-state Python + Android unit/build/package + emulator smoke/screenshots on the cleaned head. Existing green evidence is useful but cannot substitute for the final cleaned-head gate.
 - **D-069 EFFECT:** remains blocked until D-064 FINISH/handoff. Veyra stays next owner.
+
+
+### FINISH — AXIOM — D-064 critical-path review cycle — 2026-10-04 AST
+- **COMPLETION_HEAD / MERGE_HEAD:** authority observed at `eecee9ce5113907f4f16601658e221dbb00a97e2`; no D-064 runtime merge performed by AXIOM.
+- **SHIPPED:** D-064 surgical rebase manifest refinement, CPR-002 merge-hygiene ruling, PR #70 acceptance review, OR-028 merge-candidate hygiene governance, and synchronized seven-file Mission Control guidance.
+- **FILES / DOMAINS CHANGED BY AXIOM:** governance/coordination/evidence documentation only; no Kestrel-owned runtime/test file edited.
+- **EXACT EVIDENCE:** PR #63/run #354 = green compatibility proof; PR #68 = actor-contract RED evidence; CPR-002 PR #69 = RED->GREEN strict-key behavior reference but over-broad merge diff; PR #70/run #358 = final branch family with Python and Android unit/build gates green at reviewed head, cleanup/emulator/final-head gate still pending.
+- **COMPATIBILITY / COORDINATION NOTES:** PR #70 is the only intended completion branch family. PR #63/#68/#69 remain evidence/reference only.
+- **UNRESOLVED / NOT CLAIMED:** PR #70 still needs unrelated icon-size revert, fallback-scene source regression, minimal CPR-002 allowlist/regression port, then fresh all-gates green evidence on the cleaned head.
+- **BULLETIN:** D-064 remains IN_PROGRESS under Kestrel; D-069 remains BLOCKED and reserved for Veyra after safe handoff.
+- **BRAG CARD:** not applicable; AXIOM is not competitively scored.
+- **LEARNING RECORD:** OR-028 now preserves the lesson that green CI and acceptable merge scope are separate gates.
+- **UNLOCKED / SIMPLIFIED:** one final seven-file D-064 candidate path; no duplicate CPR task and no competing merge branch.
