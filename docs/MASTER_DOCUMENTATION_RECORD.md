@@ -362,7 +362,7 @@ D-026/D-021 current-source consumer discovery is now complete at field/action, n
 | **V03 — Gate Twelve proof region** | **ESTABLISHED FIRST-PASS CONTRACT** | Implementation/acceptance remains incomplete | `GATE_TWELVE_REGION_MASTER_PLAN.md`, map/animation blueprints, asset status matrix, room composition contract | Parent-world proposal still requires owner canon decision; bounded runtime migration and physical-device acceptance remain future work. |
 | **V04 — World development** | **ESTABLISHED STANDARDS / PARTIAL POPULATION** | World is not populated at final scale | `WORLD_DEVELOPMENT_MASTER_INDEX.md`, geography/politics/settlement/routes/ecology/beast/population/balance/loot/NPC standards | Canon macroregions, sovereign entities, settlements, routes, ecosystems, populations, institutions, and large-scale structured records. |
 | **V05 — Characters / NPC / social / rivals** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / D-032 SOCIAL MIGRATION CHILD COMPLETE** | Current social primitives and Tamsin branch exist; normalized identity/schedule/memory runtime remains partial | NPC/social master, V05 child contracts, Tamsin proof packet, and `SOCIAL_SCHEMA_API_MIGRATION_PACKET.md` | D-062 now fixes the implementation/save/privacy migration path without adding a second social owner. Runtime durable-memory/reactive proof remains D-065; broader character/faction catalogs, final social projection/UI and world-scale population remain open. Persistent-adversary depth remains V09 work. |
-| **V06 — Progression / stats / skills / abilities / passives / classes / ranks** | **LARGE ACTIVE CORPUS / IN_PROGRESS** | Target design substantially exceeds current runtime | `PROGRESSION_MASTER_PLAN.md`, `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`, `EVOLVED_SKILL_REGISTRY.md`, `STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`, `docs/systems/status/**` | Status Phase A is complete; Wave 001 has 1,019 structurally audited records; primary-ability detail coverage is 47/47 and passive family baseline coverage is 23/23. Still missing: combat-class catalog; profession/rank/status packet; training/mentor/facility standard; progression Gate Twelve proof packet; progression UX contract; numeric/range fixtures; world/canon promotion; target-schema/API migration. |
+| **V06 — Progression / stats / skills / abilities / passives / classes / ranks** | **LARGE ACTIVE CORPUS / IN_PROGRESS / COMBAT CLASS CATALOG MATERIALIZED** | Target design substantially exceeds current runtime | `PROGRESSION_MASTER_PLAN.md`, `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`, `EVOLVED_SKILL_REGISTRY.md`, `COMBAT_CLASS_CATALOG.md`, `STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`, `docs/systems/status/**` | Status Phase A is complete; Wave 001 has 1,019 structurally audited records; primary-ability detail coverage is 47/47 and passive family baseline coverage is 23/23. D-045 now also has a reconstruction-grade seven-family combat class catalog grounded in all 23 current skills. Still missing: profession/rank/status packet; training/mentor/facility standard; progression Gate Twelve proof packet; progression UX contract; numeric/range fixtures; world/canon promotion; target-schema/API migration. |
 | **V07 — Items / economy / loot** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | Current flat inventory/equipment exists; full economy is not implemented | Item/economy master plus item catalog, inventory, equipment, quality/rarity/condition, provenance, loot, pricing, vendor/ownership and Phase 1 proof contracts | Large item/material/resource catalogs, final currency/prices, vendor population, loot tables, later migration/verification and final economy UI. |
 | **V08 — Tactical combat** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | Final tactical runtime not implemented | Tactical master, camera/presentation standard, coordinate/occupancy, turn/action budget, movement, LOS/knowledge, cover/terrain, action resolution, injury/aftermath, AI/objective standards | Proposed Gate Twelve encounter packet now exists; remaining work is content/canon approval, combat schema/API migration, Android tactical projection/UI, final balance, low-end performance evidence and exact-head tests. |
 | **V09 — Persistent adversaries / world memory** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 8 OF 8 MINIMUM UNITS** | Runtime not implemented; no canon recurring Gate Twelve adversary selected | Dedicated V09 master plus eligibility, encounter-memory/adaptation, lifecycle, hierarchy/succession, territory/routing, player-safe intel and Gate Twelve proof contracts | D-032 adversary schema/API migration packet now exists; remaining work is authored persistent-adversary content, runtime recurrence/adaptation, world/faction integration, typed Android consumption, save-round-trip evidence and low-end profiling. |
@@ -514,8 +514,9 @@ Execution of the final APK reconstruction remains intentionally gated.
    - passive Phase-C family baseline coverage is complete for 23 / 23 families;
    - conceptual passive owner/write-target mapping covers 230 / 230 passive IDs.
 
+   D-045 combat-class reconstruction is now materialized in `docs/systems/COMBAT_CLASS_CATALOG.md`, covering all seven target class families and all 23 current-skill dependency rows.
+
    Still missing as reconstruction-grade progression work:
-   - combat class catalog;
    - profession/rank/status packet;
    - training/mentor/facility standard;
    - broader progression proof/catalog coverage beyond the bounded verified D-066 Trace Echo path;
@@ -639,7 +640,7 @@ The current strongest order is:
 4. **Continue D-026/D-021 from the narrowed remainder**: member/asset-ID consumer proof, D-030 actor migration map, future projections and final APK destination mapping. Major current fields/actions/catalog files and test gaps are already mapped.
 5. **Continue D-029 asset provenance/equivalence work** without making owner visual/canon decisions by inference.
 6. **Resolve D-031 Gate Twelve parent-world canon with the owner** before promoting proposal-only higher-world names/relationships.
-7. **Continue D-045 progression children**, beginning with the combat class catalog and the remaining profession/rank/training/facility/UX packets.
+7. **Continue D-045 progression children** from the now-materialized combat class catalog into the profession/rank/status packet, then training/mentor/facility and progression UX/proof packets.
 8. **Create D-032 mechanics schema/API migration packets** before broad runtime reconstruction.
 9. **Populate world/character/item/combat/life-loop content only against accepted standards and migration rules.**
 10. **Keep D-033/final APK teardown and reconstruction late-stage and gated.**
@@ -978,3 +979,19 @@ The workflow's aggregate Python job is not globally green because the unchanged 
 
 This checkpoint does not complete the full evolved progression corpus, class/profession/rank population, final balance, or final progression UX.
 
+
+
+## D-045 combat class catalog checkpoint — 2026-10-04
+
+Parallel P3 / D-045 materialized `docs/systems/COMBAT_CLASS_CATALOG.md` as the second reconstruction-grade child of the evolved progression authority.
+
+Verified documentation properties:
+- seven / seven target class families have full first-pass catalog records;
+- the dependency matrix covers 23 / 23 current skills with zero missing or extra skill rows;
+- CURRENT, TARGET and PROPOSAL states are explicit;
+- proposed class IDs and specialization axes are not treated as runtime/canon facts;
+- class feature ownership remains delegated to tactical, social, ability, item, knowledge and activity authorities instead of duplicating their formulas;
+- D-061's current-save boundary is preserved; no new class state or save schema is implied;
+- the bonus dependency map links class families to current skills, training/facility families and future tactical-role owners.
+
+The next D-045 child is the profession/rank/status namespace packet. Runtime implementation remains deferred.
