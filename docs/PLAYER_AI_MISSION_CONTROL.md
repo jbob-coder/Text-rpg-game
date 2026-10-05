@@ -166,7 +166,7 @@ Finish the bounded room/actor projection with the smallest current-authority int
 ### Exact next move
 Follow the surgical manifest without widening scope:
 1. fetch current authority HEAD and current SHAs for the manifest's five-file surface;
-2. treat `agent/kestrel-d064-surgical-final` head `8a414bccf6a0046a783498a5e2550cba85966e8f` as **preflight only**, not a merge candidate: its `GameScreen.kt` diff is 403 additions / 788 deletions and violates the surgical intent;
+2. treat `agent/kestrel-d064-surgical-final` head `7dbbd7881d1ad3fb5fc5d5b840a813d1e887553f` as **preflight only**, not a merge candidate: versus live authority its `GameScreen.kt` is 173 lines instead of 1,473 and carries 94 additions / 1,394 deletions; the two actor arguments are positional while the source-contract test requires named `roomActors = snapshot.room.actors` wires;
 3. create/rebuild a fresh short-lived D-064 branch and apply only:
    - both `GameScreen.kt` `roomActors = snapshot.room.actors` wires;
    - `SceneIllustration.kt` `List<GameRoomActor>` parameter + projected catalog call;
@@ -174,7 +174,7 @@ Follow the surgical manifest without widening scope:
    - focused catalog equivalence/rejection tests;
    - focused source-wiring regression, including preservation of the existing fallback-scene IDs;
 4. preserve unrelated presentation code/formatting;
-5. disposition `CPR-002` with AXIOM/Kestrel before handoff. No privacy leak is currently proven; if strict extra-key rejection is accepted, add the smallest Android mapper allowlist/rejection regression inside D-064;
+5. satisfy accepted `CPR-002` (**74/100 CRITICAL / LINKED TO D-064**): add an executable JVM RED using an otherwise-valid room actor plus unauthorized `memories` (or equivalent), then add the projected-actor key allowlist rejection at the Android mapper boundary and prove GREEN; no duplicate task;
 6. open the fresh PR and require current merge-state Python + Android unit/build/package + emulator evidence;
 7. if green, write D-064 evidence + Next Player Learning Record, FINISH, Brag/Scoreboard/Register/Bulletin handoff, then mark DONE;
 8. promote D-069 to READY for Veyra immediately after the safe D-064 handoff.
