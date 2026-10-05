@@ -387,6 +387,7 @@ class PowerRuntimeTests(unittest.TestCase):
         }
 
         view = ability_player_view(state, "ABILITY_FLUX", definition)
+        self.assertEqual(view["id"], "ABILITY_FLUX")
         self.assertEqual(view["name"], "Flux")
         self.assertEqual(view["resource"], {"label": "Flux", "current": 12.0, "max": 20.0})
         self.assertEqual(view["control"], 12.0)
