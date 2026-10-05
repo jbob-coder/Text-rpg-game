@@ -68,7 +68,7 @@ class Phase1ActivityProofTests(unittest.TestCase):
         self.assertIn(ACTIVITY_ID, choices)
         self.assertTrue(choices[ACTIVITY_ID]["enabled"])
 
-        before_skill = pack.state.player["skills"]["powers"]
+        before_skill = pack.state.player["skills"].get("powers", 0.0)
         before_stamina = pack.state.player["resources"]["stamina"]
         before_focus = pack.state.player["resources"]["focus"]
         before_time = pack.state.time_minutes
