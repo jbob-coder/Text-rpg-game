@@ -429,14 +429,14 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-021`
 - **PRIORITY:** `P0 PARALLEL`
 - **IMPORTANCE:** `92/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **DOMAIN:** Android / projection / current consumer and test mapping.
 - **DEPENDENCIES:** current D-021/D-026 authorities; no dependency on D-060 completion.
 - **ACCEPTANCE:** deepen exact current consumer/test mapping; close documentation/audit gaps without implementing D-064 or tactical runtime; synchronize D-021/D-026 as needed.
 - **BONUS:** machine-readable screen -> field/action -> owner -> test-status matrix.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyra
+- **CLAIMED_AT:** 2026-10-04 AST
+- **CLAIM_HEAD:** `d6e80edafe71e678fcd15c293b601a6815eaad90`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
