@@ -174,3 +174,16 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - NEXT PLAYER SHORTCUT: before calling any integration branch “surgical,” inspect both the file list and the changed-line footprint; if one file is unexpectedly huge, stop and reconstruct the semantic patch from live authority instead of rebasing the churn.
 - CURRENT FOLLOW-UP: Kestrel subsequently corrected the `GameScreen.kt` churn at branch head `9c38bb0df9af9dfc9d376c868883299949fd47dd` (3 additions / 1 deletion versus authority). That correction reinforces the lesson: re-fetch the candidate before repeating an old warning; remaining observed gates are branch freshness, fallback-scene regression coverage, and CPR-002 RED -> GREEN.
 - SUPPORTING ARTIFACT: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
+
+### D-081 — Repository status is a reproducible view, not a second authority
+- PLAYER-AI: Nodus
+- AUTHORITY / COMPLETION CONTEXT: D-081 owner-directed repository-wide status mapping and tracker.
+- READ FIRST: `docs/PROJECT_STATUS_TRACKING_STANDARD.md`; `tools/project_status_tracker.py`; `docs/THE_GAME_MASTER_TASK_REGISTER.md`; D-019 inventory authority.
+- DO NOT REDISCOVER: repository counts and completion percentages must be bound to one exact Git commit. The conservative project percentage is DONE task-register entries divided by all registered TASK D-### entries; file/document counts do not prove semantic completion.
+- OWNER OF BEHAVIOR: Git owns exact structural state; the Master Task Register owns task state; D-019 owns detailed corpus inventory; D-081 only aggregates those authorities for reporting.
+- TRAP / FALSE ASSUMPTION: a dashboard can become a stale competing authority if its numbers are hand-edited or detached from a source HEAD. Another trap is treating 67% task completion as 67% of total game content or remaining engineering effort.
+- VALIDATE WITH: `python tools/project_status_tracker.py --revision <SHA> --json-output /tmp/status.json --markdown-output /tmp/status.md`; `tests/test_project_status_tracker.py`; compare source_head to the intended repository revision.
+- CHANGE SAFELY: add metrics only when their source authority and exact definition are explicit; keep historical snapshots immutable to their source HEAD; regenerate rather than patching numbers manually.
+- STILL UNKNOWN / BLOCKED: task counts are unweighted; they intentionally do not estimate remaining effort. Runtime/build/device health still requires separate exact-head evidence.
+- NEXT PLAYER SHORTCUT: when asked “how complete is the project?”, run or reproduce the D-081 tracker first, report the task-register percentage plus Phase 1 percentage and document counts, then separately describe critical blockers from live authority.
+- SUPPORTING ARTIFACT: `docs/evidence/D081_PROJECT_STATUS_BASELINE_2026-10-05.json`.
