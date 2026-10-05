@@ -1,6 +1,6 @@
 # THE GAME — Deep Source Existing-State Audit — 2026-10-04
 
-Status: **ACTIVE / CURRENT-HEAD SOURCE INVENTORY COMPLETE / CROSS-BRANCH RECONCILIATION REMAINS**  
+Status: **ACTIVE / CURRENT-HEAD SOURCE INVENTORY COMPLETE / P5 BOUNDED CROSS-BRANCH SURVIVOR SLICE RECONCILED**  
 Repository: `jbob-coder/Text-rpg-game`  
 Branch: `docs/master-game-development-program`  
 Audited HEAD: `d0382aaf6cca2920a7f315d08153ac6b0dddc5dd`  
@@ -374,15 +374,30 @@ It also attaches a disposition to each major responsibility without silently del
 
 ## 12. What remains for D-006 / D-042
 
-D-042 is not fully DONE yet because the following still require reconciliation:
+### 2026-10-05 P5 / Quorix reconciliation update
+
+Parallel P5 has now independently reconciled the still-divergent Service Tunnel / Quiet Stair survivor family in PRs #27, #28, #30 and #31 against exact authority HEAD `f5c3731d0c494dd3948f88481a3d5b2d3d0f4138`.
+
+Authority:
+- `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`;
+- `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_MATRIX_2026-10-05.json`.
+
+Important corrections to this older remainder list:
+
+- D-020 cross-branch survivor/migration infrastructure is already **DONE**; do not send later agents back to it as unfinished setup.
+- D-044 PR #33 Class-C extraction is already **DONE**; it is not an open D-042 blocker.
+- PR #27 Service Tunnel static art and PR #30 Quiet Stair static art remain **D-029 migration candidates**, not implied runtime winners.
+- PR #28 remains a **deferred arrival-preview presentation candidate**.
+- PR #31 remains a **reimplement-before-migration ambient-animation candidate** because current presentation authority requires reduced-motion behavior that the branch does not implement.
+
+D-042 master work is still not globally DONE because the following broader boundaries remain delegated/open:
 
 1. exact field-to-composable/ViewModel/bridge consumer map — D-026/D-021;
-2. per-catalog consumer map and temporary/hardcoded visual-state audit;
-3. exact asset source-master/raster/runtime lineage completion — D-029;
-4. cross-branch survivor/migration matrix — D-020;
-5. remaining PR #33 Class-C unique requirement extraction — D-044;
-6. deprecated/zero-consumer proof before any final REMOVE classification;
-7. current-head execution of relevant tests/builds when implementation changes begin.
+2. per-catalog consumer map and temporary/hardcoded visual-state audit where not already covered by task-local audits;
+3. exact asset source-master/raster/runtime lineage and visual promotion — D-029;
+4. deprecated/zero-consumer proof immediately before any final REMOVE classification;
+5. exact-head execution evidence whenever future implementation work changes these surfaces;
+6. additional historical branch families only when they remain materially unclassified after existing D-020/D-044/P5 evidence is consulted.
 
 ## 13. Verification boundary
 
