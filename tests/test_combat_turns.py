@@ -75,6 +75,11 @@ def actions() -> dict[str, dict[str, object]]:
             "category": "prepare_reaction",
             "cost": 1,
         },
+        "ACTION_END": {
+            "action_id": "ACTION_END",
+            "category": "end_activation",
+            "cost": 0,
+        },
     }
 
 
@@ -417,6 +422,24 @@ class CombatMovementTests(unittest.TestCase):
 
         self.assertEqual(1, session.round_index)
         self.assertEqual(("ACTOR_FIRST",), session.initiative_order)
+
+
+    def test_end_activation_commits_event_and_expires_unused_budget(self) -> None:
+        session, primary = active_session(line_map(3))
+        primary.action_budget = 3
+
+        event = session.commit_end_activation(
+            actor_id=primary.actor_id,
+            action_id="ACTION_END",
+        )
+
+        self.assertEqual(0, primary.action_budget)
+        self.assertEqual("complete", primary.activation_state)
+        self.assertIsNone(session.active_actor_id)
+        self.assertEqual(1, session.event_index)
+        self.assertEqual("END_ACTIVATION", event.target_key)
+        self.assertEqual(3, event.budget_before)
+        self.assertEqual(0, event.budget_after)
 
 
 if __name__ == "__main__":
