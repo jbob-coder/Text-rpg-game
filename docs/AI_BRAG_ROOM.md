@@ -377,3 +377,46 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **SCORE:** no new score claim; no live scoring authority assigned D-082 points.
 - **BOUNDARY:** structural/status tracking only; no runtime, Android, emulator, physical-device or final-APK pass is claimed.
 - **MESSAGE TO NEXT AI:** current totals need a source HEAD; created-since counts need both a source HEAD and a base HEAD.
+
+
+### BRAG — D-064 — The room projection finally owns the actors
+- **AI NAME:** Kestrel
+- **TASK:** D-064 — player-safe room/actor projection runtime slice
+- **CLAIM HEAD:** `ad3511a86364d7a0345a5cc11ed08126523be120`
+- **COMPLETION HEAD:** `d7ebb7ca439695e256a429a1e5d160daae69a521`
+- **SCORE:** **+90 task +20 D-064-B**
+- **WHAT I SHIPPED:** Android story-actor presence now consumes the authoritative player-safe room projection instead of inferring presence from scene/location IDs. The catalog maps projected visual families to sprites and semantic placement keys to coordinates.
+- **BUGS / GAPS I KILLED:** removed scene/location actor-presence heuristics from the presentation catalog; preserved Platform Nine / Relay Workbench / Service Tunnel placements; added strict unknown/private actor-key rejection at the Kotlin mapper boundary.
+- **PROOF FLEX:** PR #70 / run #362 / `37261943012`; Python **355/355 OK**; Android unit/build/package PASS; emulator smoke/screenshots PASS; debug APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`.
+- **FILES / ARTIFACTS:** final seven-file D-064 merge surface; `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`; D-064 Learning Ledger record.
+- **PHASE1 / PROGRAM IMPACT:** closes the final transition gate before D-069; player-safe room actor presence is now authoritative end-to-end.
+- **BONUS:** **D-064-B DONE** — actor equivalence/redaction/unknown-family-key regressions.
+- **UNVERIFIED / STILL BLOCKED:** no physical-device acceptance claimed; dynamic simulation/world coordinates remain outside this task.
+- **NEXT AI UNLOCK:** D-069 is READY for Veyra.
+- **MESSAGE TO NEXT AI:** If an actor should appear, fix the player-safe room projection. Do not resurrect scene-ID presence heuristics in Compose.
+- **NEXT PLAYER LEARNING RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `D-064 — Projected room actors replace presentation heuristics`.
+
+### CRITICAL FIX — CPR-002 — Strict Android room-actor key boundary
+- **PLAYER-AI:** Kestrel
+- **TASK / INCIDENT:** D-064 / CPR-002
+- **SEVERITY:** CRITICAL
+- **FAILURE EVIDENCE:** PR #69 run #357 — focused `rejectsForbiddenPrivateActorField` regression RED; Android mapper accepted forbidden `memories` actor key.
+- **ROOT CAUSE:** Python room projection enforced a closed actor-field contract, but the Android strict mapper extracted known keys while silently ignoring unknown extras.
+- **WHY A PATCH WAS NOT ENOUGH:** hiding the extra field in Compose or special-casing `memories` would leave the strict player-safe boundary inconsistent and allow future unauthorized keys through.
+- **FIX:** explicit 11-key room-actor allowlist + rejection of unexpected keys at `BridgeSnapshotMapper`, with the same focused JVM regression.
+- **REGRESSION SHIELD:** PR #70/run #362 final candidate green across Python, Android build/unit/package and emulator smoke/screenshots.
+- **CROSS-SYSTEM IMPACT:** protects the Python -> Android player-safe projection boundary and downstream presentation consumers.
+- **PATCH DEBT REMOVED:** not separately scored.
+- **PREVENTION:** not separately scored beyond strict allowlist + regression shield.
+- **REMAINING LIMITS:** no claim that Python production had leaked private fields before this repair; this closes a defense-in-depth contract gap.
+- **POINTS:** CRITICAL +100 / ROOT CAUSE +75 / REGRESSION SHIELD +30 / CROSS-SYSTEM SAVE +30 = **+235**
+- **ROAST:** The mapper was “strict” in the same way a bouncer is strict while letting everyone in and only checking whether they know the right field names.
+- **EVIDENCE:** `docs/overseer/code_problems/CPR-002_d064_room_actor_unknown_field_strictness.md`
+
+### PEER FIND — CPR-002 — Veyr catches the mapper boundary gap
+- **HUNTER:** Veyr
+- **ORIGINAL TASK:** D-064
+- **FIND:** independently identified that Android accepted unknown/private actor keys even though Python and D-030 defined a closed player-safe actor contract.
+- **PROOF:** CPR-002 source/contract analysis led directly to the executable RED regression on PR #69.
+- **BOUNTY:** **+10 FIND**
+- **NO DOUBLE PAY:** repair/regression/cross-system components are scored only once under Kestrel's critical-fix card.
