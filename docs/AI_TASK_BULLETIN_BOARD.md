@@ -658,17 +658,18 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-046`
 - **PRIORITY:** `P0 PARALLEL`
 - **IMPORTANCE:** `89/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **DOMAIN:** Status / abilities / passives reconstruction corpus.
 - **DEPENDENCIES:** existing D-046 authority and Wave-001 corpus; no dependency on D-060 completion.
-- **ACCEPTANCE:** materially reduce/close one real Phase-C gap without regenerating completed baseline work or promoting canon.
-- **BONUS:** automate one currently-manual Phase-C consistency check.
+- **ACCEPTANCE:** **SATISFIED** — the conceptual passive-owner -> current-runtime/projection gap is materially reduced across all 23 owner domains without regenerating the corpus, promoting canon, or adding runtime behavior.
+- **BONUS:** **DONE** — `tools/status_phase_c_audit.py` + `tests/test_status_phase_c_audit.py` automate the 230-registry-ID / 230-owner-row consistency invariant.
 - **CLAIMED_BY:** Veyra
 - **CLAIMED_AT:** 2026-10-04 AST
 - **CLAIM_HEAD:** `8f9637194462fcd2aced5e2831d313262b5e184d`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** P4 claim after Parallel P3 completion; first move is evidence-based selection of one real Phase-C blocker from the existing 1,019-record corpus.
+- **COMPLETION_HEAD:** `68c59959c0ba842caf8ec4846faea2691965961c`
+- **EVIDENCE:** `docs/evidence/P4_D046_PHASE_C_PASSIVE_RUNTIME_DISPOSITION_2026-10-04.md`; PR #67 merged as `f6b92b039f348dedc68d4b076345de87439999b7`; run #353 Python suite 350/350 green; 23/23 conceptual owners dispositioned; 230/230 passive ownership rows machine-checked.
 - **BRAG_CARD:** pending
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-046 remains active at master-task level for later numeric/world/canon/Phase-F work; P4 bounded lane is complete.
 
 ### Parallel P5 — D-042 — Cross-branch existing-state source audit
 - **TASK_REF:** `D-042`
