@@ -361,7 +361,7 @@ D-026/D-021 current-source consumer discovery is now complete at field/action, n
 | **V02 — Pixel-art / visual production** | **PARTIAL / CURRENT 24-RASTER CONSUMERS RESOLVED** | Many assets and runtime bindings exist, but canonical production/provenance/QA is not complete | `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`, `PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md`, `ASSET_PROVENANCE_REGISTRY.md`, provenance family indexes, `CURRENT_ASSET_CONSUMER_ZERO_CONSUMER_AUDIT_2026-10-04.md` | All 24 current PNGs have consumer paths; none are zero-consumer deletion candidates. Still required: deterministic raster equality execution, visual survivor promotion, Jack/portrait production, canon approval and device QA. |
 | **V03 — Gate Twelve proof region** | **ESTABLISHED FIRST-PASS CONTRACT** | Implementation/acceptance remains incomplete | `GATE_TWELVE_REGION_MASTER_PLAN.md`, map/animation blueprints, asset status matrix, room composition contract | Parent-world proposal still requires owner canon decision; bounded runtime migration and physical-device acceptance remain future work. |
 | **V04 — World development** | **ESTABLISHED STANDARDS / PARTIAL POPULATION** | World is not populated at final scale | `WORLD_DEVELOPMENT_MASTER_INDEX.md`, geography/politics/settlement/routes/ecology/beast/population/balance/loot/NPC standards | Canon macroregions, sovereign entities, settlements, routes, ecosystems, populations, institutions, and large-scale structured records. |
-| **V05 — Characters / NPC / social / rivals** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 12 OF 12 MINIMUM UNITS** | Current social primitives and Tamsin branch exist; normalized identity/schedule/memory runtime remains partial | NPC/social master plus identity, personality, memory, knowledge/privacy, relationship, goal, schedule/presence, faction, rumor, recurring-character, and Tamsin proof contracts | Runtime migration for normalized presence/memory/profile fields; broader character/faction catalogs; final social projection/UI; world-scale population. Persistent-adversary depth remains V09 work. |
+| **V05 — Characters / NPC / social / rivals** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / D-032 SOCIAL MIGRATION CHILD COMPLETE** | Current social primitives and Tamsin branch exist; normalized identity/schedule/memory runtime remains partial | NPC/social master, V05 child contracts, Tamsin proof packet, and `SOCIAL_SCHEMA_API_MIGRATION_PACKET.md` | D-062 now fixes the implementation/save/privacy migration path without adding a second social owner. Runtime durable-memory/reactive proof remains D-065; broader character/faction catalogs, final social projection/UI and world-scale population remain open. Persistent-adversary depth remains V09 work. |
 | **V06 — Progression / stats / skills / abilities / passives / classes / ranks** | **LARGE ACTIVE CORPUS / IN_PROGRESS** | Target design substantially exceeds current runtime | `PROGRESSION_MASTER_PLAN.md`, `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`, `EVOLVED_SKILL_REGISTRY.md`, `STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`, `docs/systems/status/**` | Status Phase A is complete; Wave 001 has 1,019 structurally audited records; primary-ability detail coverage is 47/47 and passive family baseline coverage is 23/23. Still missing: combat-class catalog; profession/rank/status packet; training/mentor/facility standard; progression Gate Twelve proof packet; progression UX contract; numeric/range fixtures; world/canon promotion; target-schema/API migration. |
 | **V07 — Items / economy / loot** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | Current flat inventory/equipment exists; full economy is not implemented | Item/economy master plus item catalog, inventory, equipment, quality/rarity/condition, provenance, loot, pricing, vendor/ownership and Phase 1 proof contracts | Large item/material/resource catalogs, final currency/prices, vendor population, loot tables, later migration/verification and final economy UI. |
 | **V08 — Tactical combat** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | Final tactical runtime not implemented | Tactical master, camera/presentation standard, coordinate/occupancy, turn/action budget, movement, LOS/knowledge, cover/terrain, action resolution, injury/aftermath, AI/objective standards | Proposed Gate Twelve encounter packet now exists; remaining work is content/canon approval, combat schema/API migration, Android tactical projection/UI, final balance, low-end performance evidence and exact-head tests. |
@@ -795,6 +795,19 @@ In parallel, GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md now supplies the fi
 
 Next breadth direction: V10 Activities/Life Simulation.
 
+
+
+## 12.1 D-062 social schema/API migration checkpoint
+
+`docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md` now closes the broader-social documentation child of D-032.
+
+Locked migration direction:
+- keep current schema-v1 `relationships`, player `knowledge`, per-NPC social containers, `party` and `history` as the durable owners;
+- converge authored relationship and NPC-knowledge writes on the hardened `social.py` APIs rather than creating parallel mutation semantics;
+- keep raw NPC knowledge, memories, goals, personality and story-state maps private from Android;
+- use one explicit Tamsin memory + later authoritative reaction for D-065 without changing stable social IDs or introducing a second transaction/state model.
+
+This is migration-design completion only. No social runtime implementation or test-pass claim is implied. D-065 remains the bounded runtime proof.
 
 ## 13. 2026-10-04 V10 activity first-pass closure
 
