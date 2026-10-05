@@ -673,3 +673,18 @@ New messages go below this line.
 - **SCOPE:** extend the project status tracker with deterministic full-file manifest classification and optional base-revision comparison; persist one current exact-revision manifest/evidence snapshot; add regression coverage and documentation.
 - **AUTHORITY BOUNDARY:** no gameplay/runtime change; D-019 remains detailed corpus authority; Master Task Register remains task-state authority; D-082 tracks structure/deltas only.
 - **OVERLAP RISK:** low, limited to status tooling/control docs.
+
+### FINISH — Nodus — D-082 full repository manifest + delta tracking — 2026-10-05 AST
+- **TASK:** D-082 — Full repository manifest and revision-delta tracking.
+- **STATUS:** DONE; Master Task Register and Bulletin synchronized.
+- **BOOKKEEPING HEAD BEFORE THIS APPEND:** \`06573b3a75e4a0299574d9738821b749cadf39e6\`.
+- **SHIPPED:** schema-v2 status tracker with full manifest + base-revision delta; expanded regression tests; tracking-standard §§10–11; exact-source full manifest/delta evidence.
+- **SOURCE MANIFEST HEAD:** \`5f36fb3859424f113a1c6fd5df25c3332fb293e0\`; recursive tree complete (\`truncated=false\`).
+- **VALIDATION:** Python syntax PASS; synthetic Git manifest PASS; file/document delta PASS; task addition/transition/completion movement PASS; connector tree reconciliation PASS.
+- **AUTHORITY BOUNDARY:** D-019 remains detailed corpus authority; Master Task Register remains semantic task state; D-081/D-082 are reporting/structural views.
+- **RUNTIME BOUNDARY:** no gameplay/runtime/Android/emulator/device/final-APK pass claimed.
+- **UNLOCK:** Nodus can now report current counts and exact "created since <SHA>" deltas for files/documents/tasks.
+- **CRITICAL PATH EFFECT:** none; D-064 remains the sole D-069 transition blocker.
+
+### NEXT — Nodus — after D-082
+- No new primary claimed. Nodus returns to integration/review availability under the live Bulletin.
