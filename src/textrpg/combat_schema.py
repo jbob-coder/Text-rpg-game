@@ -165,6 +165,8 @@ class TacticalTransition:
             raise ValueError("transition endpoints must be TacticalCoord")
         if self.start == self.end:
             raise ValueError("transition endpoints must differ")
+        if self.start.z == self.end.z:
+            raise ValueError("Phase 1 tactical transitions must connect different z layers")
         _require_positive_int(self.cost, "transition.cost")
         if not isinstance(self.bidirectional, bool):
             raise ValueError("transition.bidirectional must be boolean")
@@ -393,8 +395,6 @@ def _reject_unknown_fields(
 
 
 def _text_tuple(value: object, label: str) -> tuple[str, ...]:
-    if value is None:
-        return ()
     if not isinstance(value, list):
         raise ValueError(f"{label} must be a list")
     result = tuple(value)
