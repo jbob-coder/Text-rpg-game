@@ -56,7 +56,7 @@ A tactical map record must define:
 - optional hazards;
 - optional authored spawn anchors.
 
-Each cell may define coord, terrain_id, movement_cost, blocks_movement, blocks_los, concealment, hazard_ids, edge cover metadata, interactable_id, and tags.
+Each cell may define coord, terrain_id, movement_cost, blocks_movement, blocks_los, los_blocked_edges, concealment, hazard_ids, edge cover metadata, interactable_id, and tags.
 
 Unknown fields should be rejected by strict validation once the runtime schema is implemented unless the schema explicitly allows extensions.
 
@@ -72,6 +72,23 @@ A valid tactical map must satisfy:
 7. cover edges use only N/E/S/W;
 8. interactable IDs are stable and unique within the encounter namespace;
 9. no tactical cell may silently become world-location authority.
+
+### 5.1 Directional LOS edge opacity
+
+`los_blocked_edges` is the canonical Phase 1 representation for opaque N/E/S/W cell boundaries.
+
+Rules:
+- value is a set/list/tuple of zero or more cardinal edge names: `N`, `E`, `S`, `W`;
+- it is independent from `cover`; cover strength never implies LOS opacity;
+- cell-level `blocks_los` still blocks LOS through the cell itself;
+- a shared boundary between two adjacent cells is opaque when **either** cell declares the corresponding boundary edge;
+- for A east-adjacent to B, the A→B boundary is opaque if A declares `E` **or** B declares `W`;
+- this either-side union rule makes LOS direction-independent without requiring authors to duplicate the same wall on both cells;
+- duplicate declarations on both adjacent cells are allowed and semantically equivalent to one declaration;
+- invalid/non-cardinal edge names are rejected by strict validation;
+- diagonal/corner traversal evaluates each cardinal boundary crossed by the deterministic supercover trace.
+
+This field belongs to tactical geometry, not world coordinates or screen presentation.
 
 ## 6. Occupancy model
 
