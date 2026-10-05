@@ -60,10 +60,13 @@ Re-fetch the live Bulletin Board before claiming.
 | Task | Priority | Points |
 |---|---|---:|
 | Parallel P5 / D-042 — Cross-branch source audit | P0/P1 parallel | 75 |
+| D-080 — First-wave Player-AI repository learning trail | P0/P1 program infra | 75 |
 
 **Role realignment outcome:** OR-014 transferred D-068 from Nodus to Veyra; Veyra has now completed D-068 with evidence in `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`. D-069 remains blocked and contributes no active potential until the green-authority transition gate clears.
 
 **Transition note:** PR #65 run #351 established the green authority checkpoint and D-067 is DONE. D-069 remains BLOCKED only until D-064 safely hands off; Veyra is the designated next claimant after unlock.
+
+**D-080 note:** this is a continuity/learning task, not an excuse to interrupt an active P0 critical-path task. Preferred claimant is Nodus or the Fifth Player-AI / Verification class while Kestrel remains on D-064.
 
 ## Bonus board
 Verified bonuses currently scored: **D-066-B +20** (Veyra deterministic progression replay), **D-067-B +20** (Nodus invalid-equip rollback), **D-068-B +20** (Veyra activity interruption/atomicity regression), **D-075-B +20** (Veyr normalized branch-difference fixture), **Parallel P3/D-045 +20** (Veyra dependency map), and **Parallel P4/D-046 +20** (Veyra ownership-audit automation). A verified bonus adds **+20** only when its parent task/lane is DONE and bonus evidence is recorded.
