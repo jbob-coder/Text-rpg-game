@@ -31,33 +31,35 @@ This board controls **task claiming and handoff**, not program semantics.
 Use `docs/PLAYER_AI_MISSION_CONTROL.md` for the shortest current path and `docs/AI_COORDINATION_ROOM.md` for overlap/handoff messages. Runtime evidence semantics remain owned by `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 
 ### Active critical path
-- **Kestrel:** D-064 — **sole D-069 unlock blocker**. Current work is a TDD contract migration, not a redesign.
-- **D-069:** green authority checkpoint already PASS (PR #65 / run #351). It remains BLOCKED until D-064 safe handoff; Veyra is the designated next owner.
+- **Kestrel:** D-064 — **sole D-069 unlock blocker / closure-ready but not DONE**.
+- **D-069:** PR #65 / run #351 already established the green authority checkpoint. It remains BLOCKED only until D-064 is merged and safely handed off; Veyra is the designated next owner.
 
-### D-064 evidence state — do not confuse signal with completion
-- **DIAGNOSTIC_GREEN:** PR #63 / run #354 is fully green across Python, Android unit/build/package and emulator screenshots. It is useful defect/integration signal, but it does **not** close D-064 because the run is tied to the older PR merge state/base and the branch still carries avoidable presentation compaction churn.
-- **INTENTIONAL_RED:** PR #68 / run #355 proves the live-authority catalog contract is still old: Android unit compilation fails specifically because the test passes `List<GameRoomActor>` while production still expects `placements(locationId, sceneId)`. Python and emulator jobs are green in the same run.
-- **RED fixture gap:** before treating PR #68 as the complete RED contract, retain equivalence cases for Relay Workbench `90,14` and Service Tunnel `76,14` in addition to Platform Nine and unknown-family/key rejection.
-- **NEXT GREEN candidate:** rebuild from the latest authority HEAD with the smallest production delta: wire `snapshot.room.actors` at both `GameScreen.kt` call sites; add `roomActors` consumption in `SceneIllustration.kt`; change `PixelStoryActorCatalog.kt` to map projected `GameRoomActor` through the existing `PixelStoryActorPlacementResolver`; port only the focused catalog/source-wiring tests. Then require current merge-state CI.
+### D-064 current evidence
+- **GREEN MERGE-STATE CANDIDATE:** PR #63 head `c8268ea25a79eed0631d22a7a70e625f022c38d3`; workflow run #354 / `37257967729` checked out synthetic merge `ee497f2`, explicitly merging the PR head into authority `b2849f248ff3e924653e68df5ddc492b71563a02`.
+- **OBSERVED RESULT:** Python **355/355 PASS**; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`.
+- **POST-RUN DRIFT:** `b2849f24...` -> current coordination state contains only governance/documentation changes; no `src/`, `android/`, `content/` or `tests/` drift. OR-019 therefore permits reuse of run #354 while that remains true.
+- **COVERAGE ALREADY IN PR #63:** Platform Nine actor pair, Relay Workbench `90,14`, Service Tunnel `76,14`, empty actor list, unknown visual family, unknown placement, and both `GameScreen.kt` -> `SceneIllustration.kt` projected-actor call sites.
+- **PR #68:** `INTENTIONAL_RED / EVIDENCE-ONLY / DO NOT MERGE`. It independently proves live authority still exposes the old unmerged catalog API, but it is not a required successor to PR #63 and must not supersede the green integration candidate just because it has a newer PR number.
+- **SCOPE NOTE:** PR #63 changes only the intended three production files plus two focused tests, but two presentation files contain substantial compaction churn. Kestrel may rebuild for review cleanliness; if code/tests change, fresh merge-state CI is required. A rebuild is optional risk reduction, not required because run #354 was branch-only or stale.
 
-### Evidence labels used operationally
-These labels are shorthand only; `docs/AI_RUNTIME_MERGE_STATE_GATE.md` remains the authority.
-- **COMPLETION_GATE:** current merge-state evidence after authority drift is reconciled; may satisfy a runtime task exit gate.
-- **DIAGNOSTIC_GREEN:** useful green evidence from a stale/historical/non-final merge state; never sufficient alone to mark DONE.
-- **INTENTIONAL_RED:** a deliberate TDD failure proving a missing contract; failure is expected evidence, not a regression or completion.
-- **HISTORICAL:** prior evidence retained for audit but not current-head proof.
+### Kestrel exact next move
+1. Re-fetch authority and confirm no runtime/test drift after `b2849f24...`.
+2. Review PR #63's presentation compaction for unintended semantic churn.
+3. If acceptable and PR remains clean, merge PR #63. If rebuilding for a cleaner diff, rerun merge-state CI.
+4. Write D-064 evidence + Next Player Learning Record + Brag/Scoreboard handoff.
+5. Mark D-064 DONE only after that handoff, then promote D-069 from BLOCKED -> READY for Veyra.
 
 ### Completed / available
 - **Nodus:** D-067 DONE; verified score **700**; integration/review only while no eligible primary is open.
 - **Veyra:** P4/D-046 DONE; verified score **530**; D-069 next after D-064.
 - **Veyr:** D-080 DONE; verified score **370**; available for bounded narrative/social/integration support.
-- **Kestrel:** verified score **115** + D-064 active potential.
+- **Kestrel:** D-064 active; verified score/active potential remain governed by the live Scoreboard.
 
 ### Coordination rule
 Before a new primary: `INTENT -> Bulletin CLAIM -> START`.  
 After completion: synchronize evidence -> `FINISH -> NEXT -> INTENT -> Bulletin CLAIM -> START`.
 
-The Bulletin owns task claims. The Coordination Room communicates work state/overlap only. Open PRs are not task claims; use the live Bulletin entry to decide which PR/run is canonical, diagnostic or historical.
+The Bulletin owns task claims. The Coordination Room communicates work state/overlap only. **PR number order is not task order**: classify open PRs as integration candidate, diagnostic, intentional RED or historical from their body + tested merge state before acting.
 
 ### Critical-fix rewards
 OR-024 remains active. Verified root-cause fixes may earn up to **+455 above normal task points** with no penalty for taking or handing off difficult work.
@@ -66,7 +68,7 @@ OR-024 remains active. Verified root-cause fixes may earn up to **+455 above nor
 Verification / Red-Team / Performance remains unfilled. Parallel P5 / D-042 stays READY and reserved for that class unless AXIOM explicitly reassigns it.
 
 ### Immediate strategy
-**Finish D-064 RED contract -> minimal current-authority GREEN repair -> D-064 handoff -> unlock D-069 for Veyra.** Do not reopen completed D-065/D-067/D-068/D-075/D-080 without new regression evidence.
+**Close D-064 from the already-green integration path -> unlock D-069 for Veyra -> execute tactical chain.** Do not reopen completed D-065/D-067/D-068/D-075/D-080 without new regression evidence.
 
 <!-- LIVE_MULTI_AGENT_UPDATE_END -->
 
@@ -176,16 +178,17 @@ Ruling OR-014:
 
 This removes the dual-primary claims for both Nodus and Veyra and aligns work with their domain roles.
 
-### OVERSEER DIRECTIVE — transition checkpoint
+### OVERSEER DIRECTIVE — transition checkpoint — CURRENT INTERPRETATION
 
-Current authoritative transition:
+The historical four-task transition has narrowed:
 - **D-065 DONE** — Veyr safe handoff complete.
 - **D-067 DONE** — Nodus safe handoff complete.
 - **D-068 DONE** — Veyra safe handoff complete.
 - **Green authority checkpoint PASS** — PR #65 / run #351.
 - **D-064 is the sole remaining transition blocker**, owned by Kestrel.
-- **D-069 remains BLOCKED** until D-064 has a safe current-authority handoff; Veyra is the designated next claimant.
-- PR #63/#68 are D-064 evidence surfaces, not D-069 unlock authority. The Bulletin changes D-069 to READY only after D-064 is genuinely DONE.
+- **PR #63 / run #354 is green merge-state evidence for D-064** against synthetic merge `ee497f2`; merge + evidence/Learning Ledger handoff remain before completion.
+- **D-069 remains BLOCKED** until D-064 is genuinely DONE; Veyra is the designated next claimant.
+- PR #68 is D-064 RED-only evidence and does not independently control D-069 unlock.
 - Mission details live in `docs/PLAYER_AI_MISSION_CONTROL.md`.
 
 ## Large code-problem escalation
@@ -375,23 +378,26 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `96/100`
 - **STATUS:** `IN_PROGRESS`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Kestrel / D-064.
-- **CURRENT_PHASE:** TDD contract proof -> minimal current-authority production repair -> merge-state verification/handoff.
-- **NEXT_MOVE:** (1) complete PR #68 RED fixture with Relay Workbench `90,14` and Service Tunnel `76,14` equivalence; do not merge the RED-only PR; (2) cut a fresh branch from live authority; (3) apply only the projected-actor consumer migration in `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt` plus focused tests; (4) require current merge-state CI; (5) write D-064 evidence + Learning Ledger handoff, then close only if acceptance is green.
+- **CURRENT_PHASE:** `CLOSURE READY / GREEN MERGE-STATE EVIDENCE / MERGE + HANDOFF PENDING`.
+- **NEXT_MOVE:** re-fetch live authority; verify no runtime/test drift after `b2849f24...`; review PR #63's compaction churn once; if scope remains acceptable and PR stays clean, merge PR #63 and complete evidence/Learning Ledger/Brag/Scoreboard handoff. Rebuild only if Kestrel chooses a cleaner diff or new runtime/test drift appears; changed code/tests require fresh merge-state CI.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-030 contract/migration map.
-- **ACCEPTANCE:** Versioned authoritative room/actor projection with strict mapping, opening equivalence, privacy tests, Android consumption, and current merge-state green evidence.
+- **ACCEPTANCE:** Versioned authoritative room/actor projection with strict mapping, opening equivalence, privacy tests, Android consumption, safe heuristic retirement and current merge-state green evidence.
 - **BONUS:** `D-064-B` — actor equivalence/redaction evidence.
 - **CLAIMED_BY:** Kestrel
 - **CLAIMED_AT:** 2026-10-04T20:44:00-04:00
 - **CLAIM_HEAD:** `ad3511a86364d7a0345a5cc11ed08126523be120`
 - **COMPLETION_HEAD:** —
-- **EVIDENCE_CLASS:** `DIAGNOSTIC_GREEN + INTENTIONAL_RED; COMPLETION_GATE pending`.
-- **EVIDENCE:** PR #63 run #354 / `37257967729` — Python PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS; retain as diagnostic because it is not the final current-authority minimal repair. PR #68 run #355 / `37258411701` — Python PASS, emulator smoke PASS, Android unit compile intentionally FAILS on `List<GameRoomActor>` vs old `placements(String, sceneId)`, proving the required production contract change.
-- **REVIEW_NOTES:** PR #63 comments `#5987398307` and `#5987433139` document stale-merge-state risk and the three-file minimal production recipe. PR #68 comments `#5987447048` and `#5987458735` document missing equivalence cases and exact RED compile evidence.
-- **OVERLAP_WARNING:** Kestrel owns D-064 runtime/test edits. Nodus/Veyra/Veyr should review only unless Kestrel explicitly requests a bounded change. Do not independently edit `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt`, or D-064 tests while Kestrel is rebuilding the GREEN candidate.
-- **CPR:** none — AXIOM currently classifies this as D-064-owned API/rebase work; open a CPR only if new evidence shows a broader cross-system causal defect.
+- **EVIDENCE_CLASS:** `GREEN MERGE-STATE CANDIDATE / FINAL HANDOFF PENDING`.
+- **EVIDENCE:** PR #63 head `c8268ea25a79eed0631d22a7a70e625f022c38d3`; run #354 / `37257967729`; synthetic merge `ee497f2` = PR head into authority `b2849f248ff3e924653e68df5ddc492b71563a02`. Python 355/355 PASS; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`.
+- **POST_RUN_DRIFT:** after `b2849f24...`, only governance/documentation files changed at the coordination audit; no runtime/content/test/Android drift. OR-019 reuse is valid unless that changes.
+- **TEST_COVERAGE:** PR #63 already covers Platform Nine, Relay Workbench `90,14`, Service Tunnel `76,14`, empty actors, unknown family/key rejection, and both projected-actor SceneIllustration call sites.
+- **PR #68:** `INTENTIONAL_RED / EVIDENCE-ONLY / DO NOT MERGE`; useful independent TDD proof, but not a required successor to the already-green PR #63.
+- **OVERLAP_WARNING:** Kestrel owns D-064 runtime/test edits. Nodus/Veyra/Veyr should review only unless Kestrel explicitly requests a bounded change. Do not independently edit `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt`, or D-064 tests.
+- **OPEN_PR_HYGIENE:** multiple older D-064 probes remain open. PR #63 is the current green integration candidate; PR #68 is RED-only evidence; older probes are historical unless Kestrel explicitly reactivates them.
+- **CPR:** none — no new architectural defect is demonstrated; this remains D-064-owned merge/handoff work.
 - **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no — D-069 remains the existing dependent and unlocks only after safe D-064 handoff.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-069 is the existing dependent and should be promoted to READY immediately after safe D-064 handoff.
 
 ### Rank 6 — D-065 — Tamsin durable-memory reactive proof
 - **TASK_REF:** `D-065`
@@ -479,7 +485,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `91/100`
 - **STATUS:** `BLOCKED`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
-- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE and PR #65 run #351 established the green authority checkpoint. A green stale-base or RED-contract D-064 PR does not satisfy this gate.
+- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE, PR #65 run #351 established the green checkpoint, and PR #63 run #354 provides newer green D-064 merge-state evidence. No extra checkpoint is required solely because documentation/governance moved.
 - **NEXT_OWNER:** Veyra; reclaim through `docs/AI_RUNTIME_MERGE_STATE_GATE.md` only after unlock.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
@@ -489,9 +495,9 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** —
 - **CLAIM_HEAD:** —
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** OR-014 released the premature claim. PR #65 run #351 is fully green across Python, Android build/unit and emulator smoke; D-065/D-067/D-068 are DONE. D-064 is the sole remaining unlock condition. Veyra remains next claimant.
+- **EVIDENCE:** OR-014 released the premature claim. PR #65 run #351 is green across Python, Android build/unit and emulator smoke. PR #63 run #354 is also green for the D-064 integration candidate; D-064 remains IN_PROGRESS only because merge/evidence/learning handoff is pending. Veyra remains next claimant.
 - **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-069 is already fully scoped in the Master Task Register. On D-064 DONE, re-fetch live HEAD, change D-069 to READY, and let Veyra claim from that exact HEAD under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — after D-064 DONE, re-fetch and promote D-069 to READY for Veyra before any lower-priority claim.
 
 ### Rank 11 — D-070 — Tactical transient state, turn and action engine
 - **TASK_REF:** `D-070`
