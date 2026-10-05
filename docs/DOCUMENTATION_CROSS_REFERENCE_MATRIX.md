@@ -1295,3 +1295,22 @@ Authority boundary:
 
 Current exemplar:
 - `CPR-001_d067_bridge_transition_contract_drift.md` -> D-067 -> resolved SYSTEM BLOCKER, 90/100.
+
+## Player-AI Coordination Room
+
+- `docs/AI_COORDINATION_ROOM.md`
+- `docs/PLAYER_AI_COORDINATION_PROMPT.md`
+
+Consumes:
+- Bulletin task claims;
+- Mission Control next moves;
+- task evidence/PR state;
+- AXIOM CPR links when blockers are large.
+
+Feeds:
+- overlap avoidance;
+- reviewer/help requests;
+- completion/handoff visibility;
+- next-task selection.
+
+Boundary: conversation only; Bulletin/Master Task Register remain authoritative.
