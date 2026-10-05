@@ -244,7 +244,7 @@ D-068-B interruption/atomicity regression after primary acceptance.
 
 ## Fifth Player-AI Seat — Verification / Red-Team / Performance
 
-**Status:** UNFILLED.
+**Status:** UNFILLED. Parallel P5 / D-042 is reserved for this Player-AI class while the seat remains open.
 
 ### Recommended first mission
 Claim **Parallel P5 / D-042 — Cross-branch existing-state source audit** unless live Bulletin evidence exposes a higher-value independent integration defect.
@@ -266,6 +266,19 @@ Act as an independent adversarial verifier, not another feature implementer.
 - D-079 final acceptance/APK provenance.
 
 ---
+
+## Evidence reuse warning
+
+Do not reuse a green run from another Player-AI merely because it happened later in wall-clock time.
+
+Audit performed during the Overseer meta-loop:
+- D-065 implementation/test commit `e339b4b0...` -> D-066 verification PR #42 head `c60f2ca1...`: **diverged**.
+- D-067 canonical-session proof commit `d557b0d5...` -> the same PR head: **diverged**.
+- The synthetic PR merge commit also diverged from both histories.
+
+Therefore D-066's fully green run proves D-066, not exact-head completion of D-065 or D-067.
+
+Veyr and Nodus should reuse test design/commands where useful, but must produce evidence against the actual integrated authority state that contains their work.
 
 ## Green Authority Checkpoint
 
