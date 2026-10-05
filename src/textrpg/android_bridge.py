@@ -253,6 +253,32 @@ class AndroidGameSession:
         except AndroidBridgeError: self.state = GameState(**before); raise
         except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("EQUIP_ERROR", "That item could not be unequipped.", technical_detail=str(exc)) from exc
 
+    def apply_cheat(self, code: str) -> Dict[str, Any]:
+        """Apply an explicit developer cheat without exposing generic state mutation."""
+        if not isinstance(code, str) or not code.strip():
+            raise AndroidBridgeError("CHEAT_ERROR", "Enter a valid cheat code.")
+        normalized = code.strip().upper()
+        before = deepcopy(self.state.snapshot())
+        try:
+            if normalized == "FULLRESTORE":
+                resources = self.state.player.setdefault("resources", {})
+                if not isinstance(resources, dict): raise RuleError("player.resources must be mutable")
+                for resource in self._status_view_for(self.state)["resources"]: resources[resource["id"]] = resource["max"]
+            elif normalized == "CLEARCONDITIONS": self.state.player["conditions"] = {}
+            elif normalized == "GIVE_RELAY": self.state.inventory["ITEM_DEAD_RELAY"] = self.state.inventory.get("ITEM_DEAD_RELAY", 0) + 1
+            elif normalized == "MAXATTR":
+                attributes = self.state.player.setdefault("attributes", {})
+                if not isinstance(attributes, dict): raise RuleError("player.attributes must be mutable")
+                for attribute in self._status_view_for(self.state)["attributes"]: attributes[attribute["id"]] = 100
+            elif normalized == "DEBUGMAP": self.state.flags["android_debug.discover_all_map"] = True
+            elif normalized == "DISTRICT":
+                if "DISTRICT_HUB" not in self.engine.scenes: raise RuleError("DISTRICT cheat requires DISTRICT_HUB content")
+                self.state.flags["world.free_roam_unlocked"] = True; self.state.flags["vertical_slice_01.opening_complete"] = True; self.state.flags.pop("android.map_location_override", None); self.state.scene_id = "DISTRICT_HUB"
+            else: raise AndroidBridgeError("CHEAT_ERROR", "Unknown cheat code.", technical_detail=f"Unsupported cheat code: {normalized}")
+            self.state.history.append({"type": "cheat_applied", "code": normalized, "turn": self.state.turn, "time_minutes": self.state.time_minutes}); return self.scene_view()
+        except AndroidBridgeError: self.state = GameState(**before); raise
+        except (RuleError, TypeError, ValueError) as exc: self.state = GameState(**before); raise AndroidBridgeError("CHEAT_ERROR", "The cheat code could not be applied.", technical_detail=str(exc)) from exc
+
     def save(self) -> Dict[str, Any]:
         if self._save_path is None: raise AndroidBridgeError("SAVE_ERROR", "No save destination is configured.")
         try: save_state(self._save_path, self.state); return self.scene_view()
@@ -267,3 +293,8 @@ class AndroidGameSession:
 def open_android_session(content_path: str | Path, *, save_path: str | Path | None = None) -> AndroidGameSession:
     try: return AndroidGameSession(load_content_pack(content_path), save_path=save_path)
     except (OSError, RuleError, TypeError, ValueError) as exc: raise AndroidBridgeError("CONTENT_ERROR", "Game content could not be loaded.", technical_detail=str(exc)) from exc
+
+
+def create_session(content_path: str | Path, save_path: str | Path | None = None) -> AndroidGameSession:
+    """Compatibility entry point retained for existing Android bridge callers."""
+    return open_android_session(content_path, save_path=save_path)
