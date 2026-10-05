@@ -199,7 +199,44 @@ internal object BridgeSnapshotMapper {
         val conditions = optionalList(status["conditions"],"status.conditions").mapIndexed { index,item -> val c=objectMap(item,"status.conditions[$index]"); GameCondition(text(c["id"],"status.conditions[$index].id"),text(c["name"],"status.conditions[$index].name"),integer(c["severity"],"status.conditions[$index].severity"),optionalInteger(c["duration_minutes"],"status.conditions[$index].duration_minutes"),textList(c["tags"],"status.conditions[$index].tags")) }
         val im=optionalObjectMap(status["identity"],"status.identity"); val identity=GameIdentity(optionalText(im["name"]),optionalText(im["origin"]),optionalText(im["background"]),optionalText(im["path"]),optionalInteger(im["level"],"status.identity.level"))
         val ip=optionalObjectMap(payload["inventory"],"inventory")
-        val inventory=GameInventory(optionalList(ip["items"],"inventory.items").mapIndexed { i,item -> val v=objectMap(item,"inventory.items[$i]"); GameInventoryItem(text(v["id"],"inventory.items[$i].id"),text(v["name"],"inventory.items[$i].name"),integer(v["quantity"],"inventory.items[$i].quantity"),optionalBoolean(v["equippable"])?:false,optionalText(v["slot"]),optionalText(v["quality"])) }, optionalList(ip["equipment"],"inventory.equipment").mapIndexed { i,item -> val v=objectMap(item,"inventory.equipment[$i]"); GameEquipmentSlot(text(v["slot"],"inventory.equipment[$i].slot"),boolean(v["equipped"],"inventory.equipment[$i].equipped"),optionalText(v["item_id"]),optionalText(v["name"]),optionalText(v["quality"])) })
+        val inventoryItems = optionalList(ip["items"], "inventory.items").mapIndexed { i, item ->
+            val v = objectMap(item, "inventory.items[$i]")
+            val quantity = integer(v["quantity"], "inventory.items[$i].quantity")
+            if (quantity <= 0) throw IllegalArgumentException("inventory.items[$i].quantity must be positive")
+            val equippable = optionalBoolean(v["equippable"]) ?: false
+            val slot = optionalText(v["slot"])
+            if (equippable && slot == null) {
+                throw IllegalArgumentException("inventory.items[$i].slot is required when equippable")
+            }
+            GameInventoryItem(
+                text(v["id"], "inventory.items[$i].id"),
+                text(v["name"], "inventory.items[$i].name"),
+                quantity,
+                equippable,
+                slot,
+                optionalText(v["quality"]),
+            )
+        }
+        val equipmentSlots = optionalList(ip["equipment"], "inventory.equipment").mapIndexed { i, item ->
+            val v = objectMap(item, "inventory.equipment[$i]")
+            val equipped = boolean(v["equipped"], "inventory.equipment[$i].equipped")
+            val itemId = optionalText(v["item_id"])
+            val name = optionalText(v["name"])
+            if (equipped && itemId == null) {
+                throw IllegalArgumentException("inventory.equipment[$i].item_id is required when equipped")
+            }
+            if (!equipped && (itemId != null || name != null)) {
+                throw IllegalArgumentException("inventory.equipment[$i] cannot expose item identity when unequipped")
+            }
+            GameEquipmentSlot(
+                text(v["slot"], "inventory.equipment[$i].slot"),
+                equipped,
+                itemId,
+                name,
+                optionalText(v["quality"]),
+            )
+        }
+        val inventory = GameInventory(inventoryItems, equipmentSlots)
         val quests=optionalList(payload["quests"],"quests").mapIndexed { qi,item -> val q=objectMap(item,"quests[$qi]"); val objectives=optionalList(q["objectives"],"quests[$qi].objectives").mapIndexed { oi,oitem -> val o=objectMap(oitem,"quests[$qi].objectives[$oi]"); GameQuestObjective(text(o["id"],"quests[$qi].objectives[$oi].id"),text(o["title"],"quests[$qi].objectives[$oi].title"),boolean(o["required"],"quests[$qi].objectives[$oi].required"),text(o["status"],"quests[$qi].objectives[$oi].status")) }; GameQuest(text(q["id"],"quests[$qi].id"),text(q["title"],"quests[$qi].title"),optionalText(q["description"])?:"",text(q["category"],"quests[$qi].category"),text(q["status"],"quests[$qi].status"),optionalText(q["stage"])?:"",objectives) }
         val mp=optionalObjectMap(payload["map"],"map"); val nodes=optionalList(mp["nodes"],"map.nodes").mapIndexed { i,item -> val n=objectMap(item,"map.nodes[$i]"); GameMapNode(text(n["id"],"map.nodes[$i].id"),text(n["title"],"map.nodes[$i].title"),optionalText(n["description"])?:"",number(n["x"],"map.nodes[$i].x"),number(n["y"],"map.nodes[$i].y"),boolean(n["current"],"map.nodes[$i].current"),optionalBoolean(n["reachable"])?:false) }; val edges=optionalList(mp["edges"],"map.edges").mapIndexed { i,item -> val e=objectMap(item,"map.edges[$i]"); GameMapEdge(text(e["from"],"map.edges[$i].from"),text(e["to"],"map.edges[$i].to")) }; val worldMap=GameWorldMap(optionalText(mp["title"])?:"World",optionalText(mp["current_location"])?:"",nodes,edges)
 
