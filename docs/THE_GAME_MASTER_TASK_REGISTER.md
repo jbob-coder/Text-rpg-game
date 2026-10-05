@@ -1359,19 +1359,20 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - PURPOSE: implement D-030's bounded room/actor projection migration while preserving hidden-state/privacy and opening-story equivalence.
 - ACCEPTANCE: authoritative versioned room/actor projection, strict Python/Kotlin mapping, tested Android/UI consumption, opening equivalence across Platform Nine / Relay Workbench / Service Tunnel, unknown-family/key rejection, safe retirement of scene/location actor-presence heuristics, and a fresh surgical merge candidate green under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 - EVIDENCE_ROLES:
-  - PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff` / run #362 is **FINAL COMPLETION_GATE GREEN**: Python 355/355 PASS; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`.
-  - authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521` integrates the exact seven-file candidate.
-  - current authority source audit confirms the strict CPR-002 actor-key allowlist/rejection, both GameScreen actor wires, fallback-scene regression, and focused private-field mapper regression.
-  - PR #63/#68/#69/#71 remain compatibility/RED/reference evidence only; they are not authority completion candidates.
+  - PR #70 head `014e05c9f5e451d8fb9eb552a9ba20e7cd1ed5ff` is the accepted seven-file completion candidate.
+  - run #362 / `37261943012`: Python 355/355 PASS; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `1d1c974dba2a65ac94d3ac5bfa9b60f8725d360c01eab9b4a36add7f9133bb46`.
+  - authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521` integrates the final D-064 candidate.
+  - PR #63/#68/#69/#71 remain historical compatibility/RED/reference evidence and are not the completion path.
 - SURGICAL_MANIFEST: `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 - CURRENT_NEXT_MOVE:
-  1. no further runtime implementation is required absent new regression evidence;
-  2. Kestrel must commit D-064 evidence tied to PR #70/run #362/merge `d7ebb7ca...`;
-  3. append D-064 Next Player Learning Record, Coordination FINISH and Brag Card;
-  4. synchronize Scoreboard/Bulletin/Register and mark D-064 DONE with exact completion/merge head;
-  5. immediately promote D-069 to READY for Veyra.
+  1. no runtime/test implementation work remains unless a new regression is demonstrated;
+  2. Kestrel commits D-064 completion evidence anchored to PR #70/run #362/authority merge `d7ebb7ca...`;
+  3. add required Next Player Learning Record and Coordination FINISH;
+  4. synchronize Brag Room, Scoreboard, Master Task Register and Bulletin;
+  5. mark D-064 DONE;
+  6. promote D-069 to READY for Veyra immediately after safe handoff.
 - OVERLAP: Kestrel owns the D-064 runtime/test surface; other Player-AIs review only unless Kestrel requests a bounded edit.
-- CPR: `CPR-002` — Android room-actor unknown-field strictness, **ACCEPTED / LINKED TO D-064 / 74/100 CRITICAL / RED→GREEN BEHAVIOR PROVEN**. No current user-visible privacy leak is proven; root-cause integration/reward remain pending the same minimal repair on the clean final D-064 merge candidate.
+- CPR: `CPR-002` — Android room-actor unknown-field strictness, **ACCEPTED / LINKED TO D-064 / 74/100 CRITICAL / CAUSAL REPAIR GREEN ON AUTHORITY**. RED: PR #69 run #357; clean final GREEN: PR #70 run #362; integrated at authority merge `d7ebb7ca...`. Root-cause reward remains AXIOM-owned.
 - BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
 
 ### TASK D-065 — Implement Tamsin durable-memory reactive proof
@@ -1472,7 +1473,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - DEPENDS_ON:
   - D-060 DONE;
   - D-032 combat migration packet;
-  - OR-009 / OR-011 transition requirement: D-065, D-067 and D-068 are DONE; PR #65 run #351 satisfies the green authority checkpoint; **D-064 safe handoff is the only remaining gate**.
+  - OR-009 / OR-011 transition requirement: D-065, D-067 and D-068 are DONE; PR #65 run #351 satisfies the green authority checkpoint; D-064 runtime is already merged to authority at `d7ebb7ca...`; **D-064 repository-native handoff is the only remaining gate**.
 - GREEN_CHECKPOINT: PR #65 / run #351 / `37253975755` — Python PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS.
 - CURRENT SOURCE REALITY:
   - no `combat_*.py`, tactical-grid, LOS or cover runtime module exists under `src/textrpg`;
