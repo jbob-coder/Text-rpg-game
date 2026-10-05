@@ -26,7 +26,7 @@ class PythonGameEngine internal constructor(
                 val payload = gateway.start(context.applicationContext) {
                     onStage(BootState.ContentLoading)
                 }
-                Result.success(BridgeSnapshotMapper.fromMap(payload))
+                Result.success(mapSnapshot(payload))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
@@ -36,7 +36,7 @@ class PythonGameEngine internal constructor(
     override suspend fun choose(choiceId: String): Result<GameSnapshot> =
         withContext(Dispatchers.IO) {
             try {
-                Result.success(BridgeSnapshotMapper.fromMap(gateway.choose(choiceId)))
+                Result.success(mapSnapshot(gateway.choose(choiceId)))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
@@ -53,7 +53,7 @@ class PythonGameEngine internal constructor(
 
     override suspend fun load(): Result<GameSnapshot> = withContext(Dispatchers.IO) {
         try {
-            Result.success(BridgeSnapshotMapper.fromMap(gateway.load()))
+            Result.success(mapSnapshot(gateway.load()))
         } catch (failure: Throwable) {
             Result.failure(classifyFailure(failure))
         }
@@ -62,7 +62,7 @@ class PythonGameEngine internal constructor(
     override suspend fun applyCheat(code: String): Result<GameSnapshot> =
         withContext(Dispatchers.IO) {
             try {
-                Result.success(BridgeSnapshotMapper.fromMap(gateway.applyCheat(code)))
+                Result.success(mapSnapshot(gateway.applyCheat(code)))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
@@ -71,7 +71,7 @@ class PythonGameEngine internal constructor(
     override suspend fun equip(itemId: String): Result<GameSnapshot> =
         withContext(Dispatchers.IO) {
             try {
-                Result.success(BridgeSnapshotMapper.fromMap(gateway.equip(itemId)))
+                Result.success(mapSnapshot(gateway.equip(itemId)))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
@@ -80,7 +80,7 @@ class PythonGameEngine internal constructor(
     override suspend fun unequip(slot: String): Result<GameSnapshot> =
         withContext(Dispatchers.IO) {
             try {
-                Result.success(BridgeSnapshotMapper.fromMap(gateway.unequip(slot)))
+                Result.success(mapSnapshot(gateway.unequip(slot)))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
@@ -89,10 +89,23 @@ class PythonGameEngine internal constructor(
     override suspend fun travel(locationId: String): Result<GameSnapshot> =
         withContext(Dispatchers.IO) {
             try {
-                Result.success(BridgeSnapshotMapper.fromMap(gateway.travel(locationId)))
+                Result.success(mapSnapshot(gateway.travel(locationId)))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
+        }
+
+
+    private fun mapSnapshot(payload: Map<String, Any?>): GameSnapshot =
+        try {
+            PlayerSafeSnapshotMapper.fromMap(payload)
+        } catch (failure: IllegalArgumentException) {
+            throw GatewayFailure(
+                stageId = "PROJECTION_ERROR",
+                publicMessage = "The current game state could not be displayed.",
+                technicalDetail = failure.stackTraceToString(),
+                cause = failure,
+            )
         }
 
     override suspend fun inspectStatus(path: String): Result<GameStatInspection> =
@@ -228,11 +241,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
         try {
             return viewToMap(requireSession().callAttr("choose", choiceId))
         } catch (failure: Throwable) {
-            throw classifyPythonBoundaryFailure(
-                failure = failure,
-                fallbackCode = "CHOICE_ERROR",
-                fallbackMessage = "That choice is not available.",
-            )
+            throw classifyPythonBoundaryFailure(failure, "CHOICE_ERROR", "That choice is not available.")
         }
     }
 
@@ -240,11 +249,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
         try {
             return viewToMap(requireSession().callAttr("apply_cheat", code))
         } catch (failure: Throwable) {
-            throw classifyPythonBoundaryFailure(
-                failure = failure,
-                fallbackCode = "CHEAT_ERROR",
-                fallbackMessage = "That cheat code could not be applied.",
-            )
+            throw classifyPythonBoundaryFailure(failure, "CHEAT_ERROR", "That cheat code could not be applied.")
         }
     }
 
@@ -252,11 +257,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
         try {
             return viewToMap(requireSession().callAttr("equip", itemId))
         } catch (failure: Throwable) {
-            throw classifyPythonBoundaryFailure(
-                failure = failure,
-                fallbackCode = "EQUIP_ERROR",
-                fallbackMessage = "Equipment could not be changed.",
-            )
+            throw classifyPythonBoundaryFailure(failure, "EQUIP_ERROR", "Equipment could not be changed.")
         }
     }
 
@@ -264,11 +265,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
         try {
             return viewToMap(requireSession().callAttr("unequip", slot))
         } catch (failure: Throwable) {
-            throw classifyPythonBoundaryFailure(
-                failure = failure,
-                fallbackCode = "EQUIP_ERROR",
-                fallbackMessage = "Equipment could not be changed.",
-            )
+            throw classifyPythonBoundaryFailure(failure, "EQUIP_ERROR", "Equipment could not be changed.")
         }
     }
 
@@ -276,11 +273,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
         try {
             return viewToMap(requireSession().callAttr("travel", locationId))
         } catch (failure: Throwable) {
-            throw classifyPythonBoundaryFailure(
-                failure = failure,
-                fallbackCode = "TRAVEL_ERROR",
-                fallbackMessage = "Travel could not be completed.",
-            )
+            throw classifyPythonBoundaryFailure(failure, "TRAVEL_ERROR", "Travel could not be completed.")
         }
     }
 
@@ -288,11 +281,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
         try {
             return viewToMap(requireSession().callAttr("inspect_status", path))
         } catch (failure: Throwable) {
-            throw classifyPythonBoundaryFailure(
-                failure = failure,
-                fallbackCode = "STAT_INSPECTION_ERROR",
-                fallbackMessage = "That stat could not be inspected.",
-            )
+            throw classifyPythonBoundaryFailure(failure, "STAT_INSPECTION_ERROR", "That stat could not be inspected.")
         }
     }
 
@@ -300,11 +289,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
         try {
             requireSession().callAttr("save")
         } catch (failure: Throwable) {
-            throw classifyPythonBoundaryFailure(
-                failure = failure,
-                fallbackCode = "SAVE_ERROR",
-                fallbackMessage = "The game could not be saved.",
-            )
+            throw classifyPythonBoundaryFailure(failure, "SAVE_ERROR", "The game could not be saved.")
         }
     }
 
@@ -312,11 +297,7 @@ private class ChaquopySessionGateway : PythonSessionGateway {
         try {
             return viewToMap(requireSession().callAttr("load"))
         } catch (failure: Throwable) {
-            throw classifyPythonBoundaryFailure(
-                failure = failure,
-                fallbackCode = "LOAD_ERROR",
-                fallbackMessage = "The saved game could not be loaded.",
-            )
+            throw classifyPythonBoundaryFailure(failure, "LOAD_ERROR", "The saved game could not be loaded.")
         }
     }
 
@@ -397,16 +378,8 @@ private class ChaquopySessionGateway : PythonSessionGateway {
             else -> failure.message.orEmpty()
         }
         val known = listOf(
-            "CONTENT_ERROR",
-            "VIEW_ERROR",
-            "LOAD_ERROR",
-            "SAVE_ERROR",
-            "SAVE_PATH_REQUIRED",
-            "CHOICE_ERROR",
-            "CHEAT_ERROR",
-            "EQUIP_ERROR",
-            "TRAVEL_ERROR",
-            "STAT_INSPECTION_ERROR",
+            "CONTENT_ERROR", "VIEW_ERROR", "LOAD_ERROR", "SAVE_ERROR", "SAVE_PATH_REQUIRED",
+            "CHOICE_ERROR", "CHEAT_ERROR", "EQUIP_ERROR", "TRAVEL_ERROR", "STAT_INSPECTION_ERROR",
         ).firstOrNull { message.contains(it) }
 
         val code = known ?: fallbackCode
