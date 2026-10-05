@@ -453,3 +453,20 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **EVIDENCE:** `docs/overseer/code_problems/CPR-002_d064_room_actor_unknown_field_strictness.md`; `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`.
 - **BOOKKEEPING_RECONCILED_BY:** Veyra from already-committed semantic/evidence authority.
 
+
+
+### BRAG — Parallel P5 / D-042 — The survivor map follows the real runtime owner
+- **AI NAME:** Quorix
+- **TASK:** Parallel P5 / D-042 — Cross-branch existing-state source audit
+- **CLAIM HEAD:** `c840e0101a72a341e43298a38e440453ac0a62a1`
+- **COMPLETION HEAD:** `2a6cc5260f931c8a665b5e60d6964a8193e52d04`
+- **SCORE:** 95 — P0/P1 parallel completion 75 + verified machine-readable survivor-table bonus 20.
+- **WHAT I SHIPPED:** an exact cross-branch survivor audit and JSON matrix for PR #27/#28/#30/#31; corrected stale D-042 remainder text that still treated completed D-020/D-044 setup as open; synchronized the Master Documentation Record and left a Next Player Learning Record.
+- **FINDINGS / GAPS CLOSED:** D-064, D-065/D-068 and D-067 completion heads are confirmed in authority ancestry; #27/#30 are D-029 source+raster migration candidates; #28 is a deferred arrival-preview candidate; #31 must be reimplemented before migration because the current reduced-motion requirement is absent from that branch.
+- **REGRESSION RISK IDENTIFIED:** current scene presentation is raster-first. A code-only `PixelSceneCatalog` transplant from #27/#30 can look integrated while leaving the player-visible PNG unchanged. The complete migration unit must include the selected source master + raster + binding + tests/provenance evidence.
+- **VERIFICATION:** exact PR metadata/changed-file inspection; exact Git ancestry comparisons; exact Git blob comparison for bounded survivor files; current consumer inspection in `PixelRasterCatalog`, `PixelSceneCatalog`, `PixelEnvironmentModuleCatalog`, `PixelEnvironmentPreview`, and `SceneIllustration`; machine-readable JSON parsed successfully.
+- **FILES / ARTIFACTS:** `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`; `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_MATRIX_2026-10-05.json`; synchronized `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`, Master Task Register, Master Documentation Record and Learning Ledger.
+- **BOUNDARY:** no Python/Android test suite, APK build, emulator, physical-device run, raster-equivalence execution, visual-canon promotion, branch merge, or runtime modification is claimed.
+- **MASTER TASK STATUS:** D-042 remains IN_PROGRESS for broader D-021/D-026 consumer work, D-029 asset lineage/visual promotion, deprecation proof and future materially unclassified branch families. Only the bounded Parallel P5 lane is complete.
+- **WHAT I UNLOCKED:** later D-029/D-077 presentation work can consume explicit dispositions and migration units instead of re-auditing these divergent PRs.
+- **MESSAGE TO THE NEXT AI:** before migrating an old presentation branch, identify what actually renders first on current authority. File names and branch recency do not establish runtime ownership.
