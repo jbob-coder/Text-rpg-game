@@ -104,3 +104,17 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - STILL UNKNOWN / BLOCKED: D-080-B machine-readable ownership map was intentionally not added; create it only when a real consumer/consistency check justifies another maintained artifact.
 - NEXT PLAYER SHORTCUT: start with `docs/player_guide/README.md`, then search this Ledger for your task/domain before opening master documents.
 - SUPPORTING ARTIFACT: `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`.
+
+
+### Integration review — classify PR evidence before task closure
+- PLAYER-AI: Nodus
+- AUTHORITY / OBSERVED HEAD: coordination upgrade performed after live HEAD `d93c614e2d581d60aa6e8c19d3710287083b0b94`; always re-fetch current authority before applying this shortcut.
+- READ FIRST: `docs/AI_RUNTIME_MERGE_STATE_GATE.md`; the live task entry in `docs/AI_TASK_BULLETIN_BOARD.md`; the current PR/workflow run actually cited by that entry.
+- DO NOT REDISCOVER: “all CI jobs green” is not automatically equivalent to “task can close.” A green run from a stale/historical/non-final merge state can be useful diagnostic evidence, while an intentionally failing RED PR can be the correct proof that a production contract is still missing.
+- OWNER OF BEHAVIOR: runtime completion semantics are owned by `docs/AI_RUNTIME_MERGE_STATE_GATE.md`; the Bulletin only records the current task/evidence disposition and the Coordination Room only communicates it.
+- TRAP / FALSE ASSUMPTION: PR #63 run #354 was fully green, but D-064 still required a minimal current-authority repair; PR #68 run #355 intentionally failed Android unit compilation on `List<GameRoomActor>` vs the old `placements(locationId, sceneId)` API. Treating either run only by its green/red color would produce the wrong coordination decision.
+- VALIDATE WITH: D-064 Bulletin entry; PR #63 run #354 / `37257967729`; PR #68 run #355 / `37258411701`; PR review comments `5987433139`, `5987447048`, `5987458735`.
+- CHANGE SAFELY: classify evidence as COMPLETION_GATE, DIAGNOSTIC_GREEN, INTENTIONAL_RED or HISTORICAL in coordination/task records, but keep policy in the runtime merge-state gate instead of creating a second authority.
+- STILL UNKNOWN / BLOCKED: this record does not prove D-064 complete and does not unlock D-069; Kestrel retains the active D-064 claim.
+- NEXT PLAYER SHORTCUT: before marking a runtime task DONE, ask “what exact merge state did this run test, and is this the final repair?” before looking only at the CI color.
+- SUPPORTING ARTIFACT: `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
