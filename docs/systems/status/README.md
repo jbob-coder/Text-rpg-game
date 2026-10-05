@@ -45,6 +45,8 @@ Runtime source remains the authority for what is implemented now. These document
 
 Wave 001 currently contains **1,019 structurally verified stable-ID documentation units**.
 
+Phase-C passive ownership coverage is regression-checked by `tools/status_phase_c_audit.py` / `tests/test_status_phase_c_audit.py`, which compare the 230 passive registry IDs against the 230 record-level owner/write-target rows.
+
 This number is a structural milestone, not a claim that 1,019 records are final canon or complete implementation specifications.
 
 ## Current deep-authoring slices
@@ -60,6 +62,7 @@ The linked Common awakening/counter/technique table records have also begun indi
 - `ABILITY_PASSIVE_CROSS_REFERENCE.md`
 - `STATUS_UI_UX_CONTRACT.md`
 - `STATUS_BALANCE_AND_TEST_MATRIX.md`
+- `PASSIVE_RUNTIME_OWNER_PROJECTION_DISPOSITION_WAVE_001.md` — maps all 23 conceptual passive owner domains to current runtime reuse/compose/new-domain/typed-ledger dispositions and locks the current player-safe perk projection boundary.
 
 ## Scale rule
 
