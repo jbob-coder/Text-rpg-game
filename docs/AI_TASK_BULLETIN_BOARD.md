@@ -742,16 +742,16 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-042`
 - **PRIORITY:** `P0/P1 PARALLEL`
 - **IMPORTANCE:** `85/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **RESERVED_FOR_CLASS:** Fifth Player-AI Seat — Verification / Red-Team / Performance
 - **DOMAIN:** source archaeology / branch survivor reconciliation.
-- **CLAIM_RULE:** Nodus/Veyra/Kestrel/Veyr should leave this READY lane for the fifth Player-AI unless the Overseer explicitly reassigns it.
+- **CLAIM_RULE:** Nodus/Veyra/Kestrel/Veyr should leave this lane for the fifth Player-AI unless the Overseer explicitly reassigns it.
 - **DEPENDENCIES:** current-head source inventory; no dependency on D-060 completion.
 - **ACCEPTANCE:** give a bounded unresolved set of cross-branch implementation differences exact dispositions and migration/consumer mappings; no merges or runtime changes.
 - **BONUS:** machine-readable branch/commit -> behavior -> disposition -> migration-consumer table.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Quorix
+- **CLAIMED_AT:** 2026-10-05 AST
+- **CLAIM_HEAD:** `c840e0101a72a341e43298a38e440453ac0a62a1`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
