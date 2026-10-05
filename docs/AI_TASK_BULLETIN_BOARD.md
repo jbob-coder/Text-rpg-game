@@ -84,14 +84,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-060`
 - **PRIORITY:** `P0-CRITICAL`
 - **IMPORTANCE:** `100/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-058 DONE; D-059 DONE.
 - **ACCEPTANCE:** Immutable-revision inventory, regression tests, persisted evidence, D-058/D-019 consistency check, ranked second-pass backlog.
 - **BONUS:** `D-060-B` — inventory delta evidence.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Nodus
+- **CLAIMED_AT:** 2026-10-04T20:20:00-04:00
+- **CLAIM_HEAD:** `8d3d5e80c2c3a346575b3f12e156ee77a649a421`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
