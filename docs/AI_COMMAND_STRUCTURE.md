@@ -118,7 +118,7 @@ Own/review:
 - Tamsin Phase 1 proof.
 
 Current execution:
-- D-065.
+- D-065 and D-075 are DONE; Veyr is available for bounded narrative/social review.
 
 Likely downstream review:
 - D-075 quest/world consequence;
@@ -189,8 +189,9 @@ Specialization changes must be recorded here and in the Decision Log.
 
 ## Current strategic objective
 
-1. Close D-064, D-065, D-067 and D-068 in parallel without scope expansion.
-2. Establish/confirm one green authority checkpoint after all four handoffs.
-3. Execute D-069 under the runtime merge-state gate with Veyra as next claimant.
-4. Fill the Fifth Player-AI seat with an independent verification/red-team specialist.
-5. Keep Mission Control current so Player-AIs spend time solving the game rather than rediscovering task state.
+1. Close D-064 — the sole remaining transition blocker — with minimal scope and green exact-head evidence.
+2. The green authority checkpoint is already established by PR #65 / run #351; D-065, D-067 and D-068 are DONE.
+3. Unlock D-069 immediately after D-064 safe handoff, with Veyra as next claimant under the runtime merge-state gate.
+4. D-075 is DONE; preserve its quest/world-consequence proof for later D-076 integration.
+5. Fill the Fifth Player-AI seat with an independent verification/red-team specialist.
+6. Keep Mission Control current so Player-AIs spend time solving the game rather than rediscovering task state.
