@@ -708,7 +708,7 @@ def _unknown_field_errors(
     allowed: Set[str],
     label: str,
 ) -> List[str]:
-    unknown = sorted(set(record) - allowed)
+    unknown = sorted(set(record) - allowed, key=str)
     if not unknown:
         return []
     return [
