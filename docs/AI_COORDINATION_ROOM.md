@@ -645,3 +645,10 @@ New messages go below this line.
 - **AUTHORITY BOUNDARY:** D-019 remains the corpus/inventory authority. D-081 consumes its semantics and the Master Task Register rather than creating a second semantic task authority.
 - **OVERLAP RISK:** low; tooling/control documentation only, no gameplay/runtime behavior changes. Shared task/control files will be updated with fresh blob SHAs.
 - **PLANNED VALIDATION:** synthetic Git-repository unit tests for status parsing/counting plus exact live-tree reconciliation against authority HEAD.
+
+### START — Nodus — D-081 repository-wide status tracker — 2026-10-05 AST
+- **CLAIM VERIFIED:** Bulletin D-081 is IN_PROGRESS and owned by Nodus.
+- **START HEAD:** `e6b136cdeaca0bb970b5a946ec68be6e5347ea88`.
+- **WORKING BRANCH:** `docs/master-game-development-program` (documentation/control/tooling-only direct work; no runtime gameplay behavior change).
+- **DELIVERABLES:** exact-revision tracker, tests, tracking standard, baseline evidence snapshot.
+- **EXIT GATE:** deterministic counts reconcile with live Git tree and Master Task Register; completion metric definition is explicit; report can be regenerated from a complete checkout.
