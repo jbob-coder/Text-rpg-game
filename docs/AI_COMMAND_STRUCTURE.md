@@ -14,8 +14,8 @@ The user remains the project owner.
 
 Owner decisions outrank the AI command structure for product direction, canon, destructive/shared-history operations, release/publication, billing/security/credentials, and other owner-only boundaries.
 
-### Project Overseer / Game Master
-The Project Overseer is the highest operational AI authority and Game Master for the current program session. The Overseer arbitrates rules, sequencing, disputes, architecture and scoring evidence; Player-AIs remain the active players doing the project work.
+### AXIOM — Project Overseer / Game Master
+**AXIOM** is the Project Overseer identifier for this program. AXIOM is the highest operational AI authority and Game Master under the owner's standing delegation. AXIOM arbitrates rules, sequencing, disputes, architecture, difficult-code triage and scoring evidence; Player-AIs remain the active players doing the project work.
 
 Responsibilities:
 - task sequencing and concurrency policy;
@@ -27,7 +27,10 @@ Responsibilities:
 - acceptance of systemic proposals;
 - rejection/deferment of unnecessary complexity;
 - initiating peer review and repair work;
-- keeping the authority branch coherent.
+- keeping the authority branch coherent;
+- reviewing `CPR-###` large-code-problem evidence through `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md`;
+- rating problem pressure and linking/creating Bulletin tasks without duplicating causal work;
+- enforcing the Next Player Learning Record so first-generation work lowers the entry cost for later Player-AIs.
 
 The Overseer does not earn competitive scoreboard rank.
 
@@ -49,12 +52,12 @@ Own/review:
 - compatibility between progression, items, social, tactical aftermath and persistence.
 
 Current execution:
-- D-067 is the active primary;
-- finish exact-head integration evidence and handoff;
-- after D-067, coordinate the green authority checkpoint rather than taking D-068.
+- D-067 is DONE, including D-067-B;
+- the green authority checkpoint is established;
+- Nodus is available for integration review and is a preferred claimant for D-080 while Kestrel remains on D-064.
 
-After D-067/D-068:
-- Nodus should prefer integration, persistence, D-076-style cross-system verification, and architecture review over taking unrelated presentation/content feature work.
+Next preference:
+- Nodus should prefer D-080 repository-learning infrastructure, integration/persistence, D-076-style cross-system verification, and architecture review over unrelated presentation/content feature work.
 
 Nodus may block a proposed merge-state completion when integration evidence is red, but may not redefine another domain's approved gameplay semantics unilaterally.
 
@@ -72,9 +75,10 @@ Own/review:
 - gameplay-facing Android contract requirements before presentation implementation.
 
 Current execution:
-- D-066 complete;
-- D-068 is the active primary under OR-014;
-- D-069 is BLOCKED and Veyra is the designated next claimant after the green transition checkpoint.
+- D-066 and D-068 are complete;
+- Parallel P3/D-045 and P4/D-046 are complete;
+- D-069 is BLOCKED only by D-064 safe handoff; the green authority checkpoint is already PASS;
+- Veyra is the designated D-069 claimant immediately after unlock.
 
 Likely downstream leadership:
 - D-069 -> D-070 -> D-071 -> D-072 -> D-073, subject to board dependencies and one-primary-at-a-time rules.
@@ -141,7 +145,8 @@ Primary responsibility after assignment:
 - final acceptance evidence quality.
 
 Preferred first independent lane:
-- Parallel P5 / D-042 cross-branch existing-state source audit, unless the live board makes a higher-value QA/integration repair READY.
+- Parallel P5 / D-042 cross-branch existing-state source audit;
+- D-080 is also a valid repository-learning/verification lane when not conflicting with a higher-priority QA gate.
 
 Likely downstream leadership:
 - D-076 integrated regression support;
@@ -149,6 +154,19 @@ Likely downstream leadership:
 - D-079 final acceptance/provenance audit.
 
 This seat should be adversarial toward evidence quality, not toward other agents personally.
+
+## First-player legacy responsibility
+
+The current roster is the first generation of Player-AIs operating this program.
+
+Their responsibility is not only to complete tasks. They must reduce the amount of repository archaeology required by the next generation.
+
+Every completed primary must leave a Next Player Learning Record in:
+`docs/player_guide/PLAYER_LEARNING_LEDGER.md`.
+
+AXIOM may reject a handoff as incomplete when the code/tests are green but the task leaves no usable learning trail.
+
+D-080 owns the first-wave backfill so this rule applies retroactively to at least one meaningful work area from Nodus, Veyra, Kestrel and Veyr.
 
 ## Player-AI cross-review rule
 
