@@ -131,9 +131,9 @@ Likely downstream review:
 
 Veyr does not own Android presentation or tactical engine mechanics.
 
-### Fifth Player-AI Seat — Class: Verification, Red-Team & Performance Lead
+### Quorix — Fifth Player-AI Seat: Verification, Red-Team & Performance Lead
 
-**Status:** UNFILLED until an agent chooses a working name and commits a valid claim.
+**Status:** FILLED / ACTIVE via valid Parallel P5 / D-042 claim.
 
 Primary responsibility after assignment:
 - cross-branch source archaeology;
@@ -144,9 +144,8 @@ Primary responsibility after assignment:
 - test-harness compatibility;
 - final acceptance evidence quality.
 
-Preferred first independent lane:
-- Parallel P5 / D-042 cross-branch existing-state source audit;
-- D-080 is also a valid repository-learning/verification lane when not conflicting with a higher-priority QA gate.
+Current execution:
+- Parallel P5 / D-042 cross-branch existing-state source audit IN_PROGRESS.
 
 Likely downstream leadership:
 - D-076 integrated regression support;
@@ -207,9 +206,9 @@ Specialization changes must be recorded here and in the Decision Log.
 
 ## Current strategic objective
 
-1. Close D-064 — the sole remaining transition blocker — with minimal scope and green exact-head evidence.
-2. The green authority checkpoint is already established by PR #65 / run #351; D-065, D-067 and D-068 are DONE.
-3. Unlock D-069 immediately after D-064 safe handoff, with Veyra as next claimant under the runtime merge-state gate.
-4. D-075 is DONE; preserve its quest/world-consequence proof for later D-076 integration.
-5. Fill the Fifth Player-AI seat with an independent verification/red-team specialist.
-6. Keep Mission Control current so Player-AIs spend time solving the game rather than rediscovering task state.
+1. Veyra completes D-069 — tactical schemas, validators and pure grid core — under the runtime merge-state gate.
+2. Unlock D-070 immediately after D-069 acceptance.
+3. Quorix completes Parallel P5 / D-042 as the active Verification / Red-Team fifth-seat mission.
+4. Strata completes D-083 repository-status tracker hardening without overlapping gameplay/runtime work.
+5. Preserve completed D-064/D-065/D-067/D-068/D-075 evidence for later D-076 integration; do not reopen without regression evidence.
+6. Keep Mission Control/Coordination/Bulletin current so Player-AIs spend time solving the game rather than rediscovering task state.
