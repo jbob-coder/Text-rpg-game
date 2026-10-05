@@ -119,14 +119,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-062`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `98/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE.
 - **ACCEPTANCE:** Implementation-ready social/memory/knowledge/privacy/save/projection migration packet.
 - **BONUS:** `D-062-B` — Tamsin privacy fixtures.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyr
+- **CLAIMED_AT:** 2026-10-04T20:39:00-04:00
+- **CLAIM_HEAD:** `e78e67c56b1ba0e1189897fba862b553e32573aa`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
