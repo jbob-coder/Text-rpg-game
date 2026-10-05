@@ -407,20 +407,36 @@ Candidate invariant packet:
 - no hidden occupancy introduced into public grid helpers.
 
 ### Current action
-**Implement D-069 from the winning claim head.**
+**Finish D-069 verification; do not redesign the schema.**
 
-Use `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md` as the direct implementation shortcut. Keep D-070 turn/session state out of D-069.
+Current PR #74 implementation already contains:
+- CPR-003 `los_blocked_edges` parsing/validation and one-sided edge symmetry;
+- explicit cover-vs-LOS separation regression;
+- opaque source/target endpoint LOS symmetry;
+- CPR-004 post-GameState persistent NPC-ref resolution;
+- valid NPC-ref and invalid unresolved/player-sentinel rejection coverage;
+- additional transition/list topology and explicit-empty-world-map hardening.
+
+Do not reimplement those areas unless CI or review proves a new defect.
+
+Remaining path:
+1. let the newest PR #74 merge-state workflow complete;
+2. if authority moved, audit the diff and rebase only when relevant task-surface drift requires it;
+3. run/confirm full Python + Android build/unit/package + emulator smoke gate;
+4. write final D-069 evidence;
+5. write/update the D-069 Learning Ledger record;
+6. resolve CPR-003/CPR-004 statuses from executable evidence;
+7. FINISH/Brag/Scoreboard/Register/Bulletin;
+8. only then unlock D-070.
 
 ### Active execution sequence
-1. preserve the winning Bulletin claim;
-2. append/maintain Coordination Room START/UPDATE state;
-3. create/use the short-lived D-069 task branch from the exact claim-era authority;
-4. execute the bounded commit sequence above;
-5. run focused/full Python tests;
-6. open PR to `docs/master-game-development-program`;
-7. require merge-state CI;
-8. repair only demonstrated drift;
-9. evidence + Learning Ledger + FINISH + Brag/Scoreboard/Register/Bulletin.
+1. preserve the winning Bulletin claim and current PR #74 branch;
+2. treat cancelled earlier workflow runs as superseded by later pushes, not failures;
+3. wait for the newest merge-state run;
+4. repair only newly demonstrated failures;
+5. audit authority drift before merge;
+6. evidence + Learning Ledger + FINISH + Brag/Scoreboard/Register/Bulletin;
+7. unlock D-070 only after D-069 is truly DONE.
 
 
 ### CPR-003 accepted contract delta
@@ -445,6 +461,24 @@ Before completion, additionally prove:
 5. opaque-cell/supercover regressions remain green.
 
 Do not replace this with a structured edge-object schema or infer opacity from cover.
+
+
+### CPR-004 accepted contract delta
+
+AXIOM rated CPR-004 **65/100 CRITICAL** and linked it to D-069.
+
+Locked rule:
+- `persistent_ref` is optional;
+- D-069-supported persistent refs resolve only to durable NPC IDs in `GameState.npcs`;
+- shape/stable-ID validation remains pre-state;
+- resolution happens after `GameState` construction;
+- unknown NPC refs reject;
+- do not invent a player stable-ID sentinel;
+- player-backed participants omit `persistent_ref` until later runtime identity authority exists.
+
+Your current PR #74 implementation already matches this rule through `validate_encounter_persistent_refs()` and the post-state loader call.
+
+Before completion, keep the valid/invalid/no-ref compatibility behavior green.
 
 ---
 
