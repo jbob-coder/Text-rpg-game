@@ -488,45 +488,37 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-069`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `91/100`
-- **STATUS:** `IN_PROGRESS`
-- **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
-- **UNLOCK_GATE:** SATISFIED. D-064/D-065/D-067/D-068 are DONE; PR #65/run #351 is the green transition checkpoint; D-064 final PR #70/run #362 merged at `d7ebb7ca...`.
-- **OWNER:** Veyra — live Bulletin claim won; work from exact claim head under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
-- **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
-- **ACCEPTANCE:** Backward-compatible tactical schemas plus deterministic coordinate/occupancy/path/LOS/cover tests.
-- **BONUS:** `D-069-B` — grid/visibility invariants.
+- **DEPENDENCIES:** satisfied.
+- **ACCEPTANCE:** **SATISFIED** — backward-compatible tactical schemas plus deterministic coordinate/occupancy/path/LOS/cover core are authority-merged and green.
+- **BONUS:** `D-069-B` — **DONE** — grid/path/visibility/cover invariants.
 - **CLAIMED_BY:** Veyra
 - **CLAIMED_AT:** 2026-10-05T12:17:00-04:00
 - **CLAIM_HEAD:** `06bca70e2d004ca70635019b8c82afd7c916e05b`
-- **COMPLETION_HEAD:** —
-- **AUTHORITY_DRIFT_AUDIT:** PR #74 task files have zero overlap with authority changes since its base; any final branch refresh should be mechanical, not a tactical redesign.
-- **CURRENT_VERIFICATION_STATE:** PR #74 implementation covers the known CPR-003/CPR-004 + endpoint-LOS acceptance gaps; latest workflow is the remaining executable gate. Earlier cancelled runs were superseded by pushes, not failures.
-- **NEXT_MOVE:** PR #74 already contains CPR-003 edge-opacity parsing/regressions, opaque endpoint LOS symmetry, cover-vs-opacity separation, and CPR-004 post-state NPC `persistent_ref` resolution. Let the newest merge-state CI finish; then rebase/refresh only if authority drift affects the task surface, write exact D-069 evidence + Learning Record, and close if all gates are green. Keep D-070 runtime state out of scope.
-- **IMPLEMENTATION_AUDIT:** newest PR #74 branch fixes source-cell LOS asymmetry (`has_line_of_sight` checks all touched cells), includes one-sided edge symmetry + cover-only non-opacity regressions, and resolves encounter persistent refs after `GameState` construction. Do not reimplement these unless new evidence shows regression.
-- **EVIDENCE:** claim from live authority `06bca70e2d004ca70635019b8c82afd7c916e05b`; D-064 is DONE and merged at `d7ebb7ca...`; PR #65 run #351 is the green transition checkpoint; D-069 preflight packet is current input authority for the first implementation seam.
-- **CODE_PROBLEM:** `CPR-003` — **ACCEPTED / 64/100 CRITICAL / LINKED TO D-069**. AXIOM selected canonical `los_blocked_edges` with either-adjacent-cell boundary semantics; no duplicate task.
-- **CPR-003 EXIT DELTA:** authored/default/override parsing + strict N/E/S/W validation; one-sided opaque boundary must block A->B and B->A; cover alone must not block LOS; existing opaque-cell/supercover tests remain green.
-- **PREP_EVIDENCE:** `docs/evidence/D069_IMPLEMENTATION_PREFLIGHT_2026-10-04.md` — blocked-state exact seam, first-commit surface, test matrix and no-GameState boundary; not a claim or implementation.
-- **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — downstream D-070 remains dependent on D-069 completion; do not unlock it early.
+- **COMPLETION_HEAD:** `8b2115cf8a6f04127bdf20dd1217abd947cf8150`
+- **EVIDENCE:** `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md`; final PR #76 / run #390 `37347612244`; Python **402/402 PASS**; Android unit/build/package PASS; emulator **35/35 PASS**; APK SHA-256 `9784a7f518b747147e7bc2346321aee9fd7e85b9fe4deef298b5cae1e47a17f1`.
+- **CPR:** CPR-003 **RESOLVED**; CPR-004 **RESOLVED**. AXIOM reward classification remains pending and is not self-awarded.
+- **LEARNING_RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `D-069 — Tactical schemas and pure grid core`.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-069 — Geometry stopped being a suggestion`.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-070 dependency is satisfied and is READY below.
 
 ### Rank 11 — D-070 — Tactical transient state, turn and action engine
 - **TASK_REF:** `D-070`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `90/100`
-- **STATUS:** `BLOCKED`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
-- **DEPENDENCIES:** D-069 DONE.
-- **PREFLIGHT:** `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — read-only preparation; do not claim/start before D-069 DONE.
-- **NEXT_MOVE_WHEN_UNLOCKED:** re-fetch merged D-069 APIs, audit the preflight against authority, then claim via Coordination/Bulletin and implement transient session -> activation/budget -> movement/event transaction. Do not absorb D-071 awareness/cover/AI or D-072 aftermath.
+- **DEPENDENCIES:** D-069 DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
+- **PREFLIGHT:** `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — must be re-audited against merged D-069.
+- **NEXT_MOVE_WHEN_CLAIMED:** read merged D-069 Learning/evidence + Movement/Pathing and Turn/Initiative standards; then implement transient session -> activation/budget -> movement/event transaction. Keep action-budget cost separate from movement-point allowance; include minimal reaction reserve lifecycle/reinforcement scheduling before D-070 completion. Do not absorb D-071 awareness/cover/AI or D-072 aftermath.
 - **ACCEPTANCE:** Headless transient encounter executes deterministic turns/actions without GameState tactical schema expansion.
 - **BONUS:** `D-070-B` — deterministic transcript/replay hash.
 - **CLAIMED_BY:** —
 - **CLAIMED_AT:** —
 - **CLAIM_HEAD:** —
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
+- **EVIDENCE:** D-069 final evidence + D-070 preflight; implementation pending.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
