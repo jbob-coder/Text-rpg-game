@@ -35,19 +35,20 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for the shortest current path and `docs/
 - **D-069:** PR #65 / run #351 already established the green authority checkpoint. It remains BLOCKED only until D-064 is merged and safely handed off; Veyra is the designated next owner.
 
 ### D-064 current evidence
-- **GREEN MERGE-STATE CANDIDATE:** PR #63 head `c8268ea25a79eed0631d22a7a70e625f022c38d3`; workflow run #354 / `37257967729` checked out synthetic merge `ee497f2`, explicitly merging the PR head into authority `b2849f248ff3e924653e68df5ddc492b71563a02`.
+- **GREEN COMPATIBILITY PROOF:** PR #63 head `c8268ea25a79eed0631d22a7a70e625f022c38d3`; workflow run #354 / `37257967729` checked out synthetic merge `ee497f2`, explicitly merging the PR head into authority `b2849f248ff3e924653e68df5ddc492b71563a02`.
 - **OBSERVED RESULT:** Python **355/355 PASS**; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`.
 - **POST-RUN DRIFT:** `b2849f24...` -> current coordination state contains only governance/documentation changes; no `src/`, `android/`, `content/` or `tests/` drift. OR-019 therefore permits reuse of run #354 while that remains true.
 - **COVERAGE ALREADY IN PR #63:** Platform Nine actor pair, Relay Workbench `90,14`, Service Tunnel `76,14`, empty actor list, unknown visual family, unknown placement, and both `GameScreen.kt` -> `SceneIllustration.kt` projected-actor call sites.
 - **PR #68:** `INTENTIONAL_RED / EVIDENCE-ONLY / DO NOT MERGE`. It independently proves live authority still exposes the old unmerged catalog API, but it is not a required successor to PR #63 and must not supersede the green integration candidate just because it has a newer PR number.
-- **SCOPE NOTE:** PR #63 changes only the intended three production files plus two focused tests, but two presentation files contain substantial compaction churn. Kestrel may rebuild for review cleanliness; if code/tests change, fresh merge-state CI is required. A rebuild is optional risk reduction, not required because run #354 was branch-only or stale.
+- **FINAL-MERGE DISPOSITION:** AXIOM's `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md` rejects carrying PR #63's avoidable presentation compaction into authority. Run #354 remains valuable proof that the migration concept integrates, but final D-064 completion requires a fresh live-authority five-file surgical branch and new merge-state CI.
 
 ### Kestrel exact next move
-1. Re-fetch authority and confirm no runtime/test drift after `b2849f24...`.
-2. Review PR #63's presentation compaction for unintended semantic churn.
-3. If acceptable and PR remains clean, merge PR #63. If rebuilding for a cleaner diff, rerun merge-state CI.
-4. Write D-064 evidence + Next Player Learning Record + Brag/Scoreboard handoff.
-5. Mark D-064 DONE only after that handoff, then promote D-069 from BLOCKED -> READY for Veyra.
+1. Read `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
+2. Re-fetch live authority and create the fresh short-lived D-064 branch from that HEAD.
+3. Apply only the manifest's five-file projected-actor delta; do not transplant PR #63 compaction churn.
+4. Run fresh merge-state CI (Python + Android unit/build/package + emulator smoke/screenshots).
+5. Write D-064 evidence + Next Player Learning Record + Brag/Scoreboard handoff.
+6. Mark D-064 DONE only after safe integration; then promote D-069 from BLOCKED -> READY for Veyra.
 
 ### Completed / available
 - **Nodus:** D-067 DONE; verified score **700**; integration/review only while no eligible primary is open.
@@ -68,7 +69,7 @@ OR-024 remains active. Verified root-cause fixes may earn up to **+455 above nor
 Verification / Red-Team / Performance remains unfilled. Parallel P5 / D-042 stays READY and reserved for that class unless AXIOM explicitly reassigns it.
 
 ### Immediate strategy
-**Close D-064 from the already-green integration path -> unlock D-069 for Veyra -> execute tactical chain.** Do not reopen completed D-065/D-067/D-068/D-075/D-080 without new regression evidence.
+**Use PR #63 as green compatibility evidence, execute the surgical live-authority D-064 rebuild, then unlock D-069 for Veyra.** Do not reopen completed D-065/D-067/D-068/D-075/D-080 without new regression evidence.
 
 <!-- LIVE_MULTI_AGENT_UPDATE_END -->
 
@@ -378,8 +379,8 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `96/100`
 - **STATUS:** `IN_PROGRESS`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Kestrel / D-064.
-- **CURRENT_PHASE:** `CLOSURE READY / GREEN MERGE-STATE EVIDENCE / MERGE + HANDOFF PENDING`.
-- **NEXT_MOVE:** re-fetch live authority; verify no runtime/test drift after `b2849f24...`; review PR #63's compaction churn once; if scope remains acceptable and PR stays clean, merge PR #63 and complete evidence/Learning Ledger/Brag/Scoreboard handoff. Rebuild only if Kestrel chooses a cleaner diff or new runtime/test drift appears; changed code/tests require fresh merge-state CI.
+- **CURRENT_PHASE:** `SURGICAL LIVE-AUTHORITY REBUILD / FINAL MERGE-STATE GATE`.
+- **NEXT_MOVE:** follow `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`: fresh branch from live authority, apply only the five-file projected-actor migration, rerun merge-state CI, then complete evidence/Learning Ledger/Brag/Scoreboard handoff. Do not merge PR #63 or PR #68 as-is.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-030 contract/migration map.
 - **ACCEPTANCE:** Versioned authoritative room/actor projection with strict mapping, opening equivalence, privacy tests, Android consumption, safe heuristic retirement and current merge-state green evidence.
@@ -388,15 +389,16 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** 2026-10-04T20:44:00-04:00
 - **CLAIM_HEAD:** `ad3511a86364d7a0345a5cc11ed08126523be120`
 - **COMPLETION_HEAD:** —
-- **EVIDENCE_CLASS:** `GREEN MERGE-STATE CANDIDATE / FINAL HANDOFF PENDING`.
+- **EVIDENCE_CLASS:** `GREEN COMPATIBILITY PROOF + INTENTIONAL RED; FINAL COMPLETION_GATE pending`.
 - **EVIDENCE:** PR #63 head `c8268ea25a79eed0631d22a7a70e625f022c38d3`; run #354 / `37257967729`; synthetic merge `ee497f2` = PR head into authority `b2849f248ff3e924653e68df5ddc492b71563a02`. Python 355/355 PASS; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `acaf6c8033ff187b5d9e2e2facfa0b47a5a60c20eb022a27a85e1fb353969e28`.
-- **POST_RUN_DRIFT:** after `b2849f24...`, only governance/documentation files changed at the coordination audit; no runtime/content/test/Android drift. OR-019 reuse is valid unless that changes.
+- **POST_RUN_DRIFT:** after `b2849f24...`, only governance/documentation files changed at the coordination audit; this preserves PR #63 as valid compatibility evidence. Final acceptance still uses the fresh surgical branch because AXIOM rejected PR #63's nonessential compaction churn from the authority merge.
 - **TEST_COVERAGE:** PR #63 already covers Platform Nine, Relay Workbench `90,14`, Service Tunnel `76,14`, empty actors, unknown family/key rejection, and both projected-actor SceneIllustration call sites.
-- **PR #68:** `INTENTIONAL_RED / EVIDENCE-ONLY / DO NOT MERGE`; useful independent TDD proof, but not a required successor to the already-green PR #63.
+- **PR #68:** `INTENTIONAL_RED / EVIDENCE-ONLY / DO NOT MERGE`; useful TDD proof for the old live-authority catalog signature. Its required equivalence expectations are already enumerated in the surgical manifest.
 - **OVERLAP_WARNING:** Kestrel owns D-064 runtime/test edits. Nodus/Veyra/Veyr should review only unless Kestrel explicitly requests a bounded change. Do not independently edit `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt`, or D-064 tests.
-- **OPEN_PR_HYGIENE:** multiple older D-064 probes remain open. PR #63 is the current green integration candidate; PR #68 is RED-only evidence; older probes are historical unless Kestrel explicitly reactivates them.
+- **OPEN_PR_HYGIENE:** multiple older D-064 probes remain open. PR #63 = green compatibility/reference implementation; PR #68 = RED-only evidence; neither is the final merge candidate. The fresh surgical branch created from live authority becomes the only completion candidate. Older probes are historical unless Kestrel explicitly reactivates them.
 - **CPR:** none — no new architectural defect is demonstrated; this remains D-064-owned merge/handoff work.
 - **BRAG_CARD:** pending
+- **SURGICAL_MANIFEST:** `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`.
 - **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-069 is the existing dependent and should be promoted to READY immediately after safe D-064 handoff.
 
 ### Rank 6 — D-065 — Tamsin durable-memory reactive proof
