@@ -1038,3 +1038,11 @@ The first reviewed exemplar is:
 - AXIOM score: 90/100 SYSTEM BLOCKER;
 - linked to existing D-067 rather than duplicating the task;
 - resolved by PR #62/run #345 and final green checkpoint PR #65/run #351.
+
+## Player-AI Coordination Room — 2026-10-04
+
+Operational coordination now includes:
+- `docs/AI_COORDINATION_ROOM.md` — append-only Player-AI INTENT/START/UPDATE/HELP/BLOCKED/FINISH/NEXT communication;
+- `docs/PLAYER_AI_COORDINATION_PROMPT.md` — reusable coordination prompt.
+
+OR-027 preserves the Bulletin as claim authority while requiring visible work/handoff communication. This layer reduces overlapping edits and hidden task transitions without becoming a second semantic authority.
