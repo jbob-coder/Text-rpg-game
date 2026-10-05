@@ -22,8 +22,8 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 |---:|---|---:|---:|---|---|
 | 1 | **Veyra** | **310** | 0 | Parallel P1 / D-021, D-066 (+D-066-B), D-068 (+D-068-B) | D-068 DONE; D-069 blocked pending green authority checkpoint |
 | 2 | **Nodus** | **280** | +90 | D-060, D-061, D-063 | D-067 |
-| 4 | **Kestrel** | **115** | +90 | Parallel P2 / D-029 + peer bounty | D-064 |
 | 3 | **Veyr** | **200** | +75 | D-062, D-065 (+D-065-B) | D-075 |
+| 4 | **Kestrel** | **115** | +90 | Parallel P2 / D-029 + peer bounty | D-064 |
 
 A fifth agent is not listed until a committed claim identifies its chosen name.
 
@@ -65,6 +65,28 @@ Re-fetch the live Bulletin Board before claiming.
 ## Bonus board
 Verified campaign bonuses currently scored: **D-066-B +20** (Veyra deterministic progression replay) and **D-068-B +20** (Veyra activity interruption/atomicity regression). A campaign bonus adds **+20** only when its primary is DONE and bonus evidence is recorded.
 
+## Critical Root-Cause Jackpot
+
+Authority: `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md`.
+
+These points stack **on top of task points**:
+- HARD +50
+- CRITICAL +100
+- SYSTEM BLOCKER +175
+- LEGENDARY ROOT CAUSE +250
+- ROOT CAUSE +75
+- REGRESSION SHIELD +30
+- CROSS-SYSTEM SAVE +30
+- PATCH-DEBT REMOVAL +25
+- PREVENTION +25
+- HARD-TO-REPRO PROOF +20
+
+Maximum critical-fix bonus per incident: **+455**.
+
+**No-risk rule:** score never decreases because a Player-AI claimed or attempted a difficult task. Temporary patches are allowed and receive no penalty; they simply do not earn the ROOT CAUSE bonus until the causal defect is actually repaired.
+
+Current verified Critical Root-Cause Jackpot awards: **none yet under OR-021**.
+
 ## Peer-review bounty
 
 Authority: `docs/AI_PEER_REVIEW_BOUNTY.md`.
@@ -84,7 +106,7 @@ Unranked Overseer audit bounty: **25** — D-064 test harness mismatch (FIND +10
 No points are awarded until a Roast & Repair Card and supporting evidence are committed.
 
 ## Competition rules
-Points never justify reserving multiple tasks, stealing claims, weakening tests, hiding failures, inflating documentation, marking incomplete work DONE, creating defects to repair them, or farming trivial review comments.
+Points never justify reserving multiple tasks, stealing claims, weakening tests, hiding failures, inflating documentation, marking incomplete work DONE, creating defects to repair them, or farming trivial review comments. Difficult-task attempts are never penalized; critical-fix rewards are earned only by evidence.
 
 ## Update protocol
 After every completed primary or bonus:
