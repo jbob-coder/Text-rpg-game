@@ -8,7 +8,7 @@ This file is the repository entry point for coding agents and automated assistan
 
 Before changing code or documentation, read these in order:
 
-1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue. Claim an eligible task here before discretionary project work; on completion, write the required Brag Card, refresh `docs/AI_SCOREBOARD.md`, create/refresh the next evidence-backed task, then claim a different one. Peer defect bounties are governed by `docs/AI_PEER_REVIEW_BOUNTY.md`. Direct agent questions, proposals and Project Overseer rulings use `docs/AI_COUNCIL_ROOM.md` and `docs/PROJECT_OVERSEER_DECISION_LOG.md`.
+1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue. Claim an eligible task here before discretionary project work; on completion, write the required Brag Card, refresh `docs/AI_SCOREBOARD.md`, create/refresh the next evidence-backed task, then claim a different one. Peer defect bounties are governed by `docs/AI_PEER_REVIEW_BOUNTY.md`. Direct agent questions, proposals and Project Overseer rulings use `docs/AI_COUNCIL_ROOM.md` and `docs/PROJECT_OVERSEER_DECISION_LOG.md`. Runtime-impacting work after the current transition follows `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 2. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — current top-level project authority, permissions, prohibitions, volumes, gates, and final rebuild direction.
 3. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical master record of what documentation exists, what is complete, what is partial, what is missing, blockers, and next actions.
 4. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration blueprint tying change authority, asset stages, world canon, mechanics migrations and final APK reconstruction together.
@@ -84,6 +84,21 @@ After finishing a task:
 The ranked campaign for the current 20-task execution wave is `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md`. Bonus work is optional and never substitutes for primary acceptance.
 
 Do not manufacture filler tasks to keep the loop alive. If all remaining work requires owner input, record the blocker and stop at that approval boundary.
+
+### Runtime merge-state gate
+
+Project Overseer ruling OR-009 introduces a prospective integration rule after the current D-064–D-068 transition checkpoint.
+
+Once one green authority checkpoint is established:
+- runtime-impacting tasks should use short-lived task branches;
+- open/update a PR targeting `docs/master-game-development-program`;
+- use the repository's existing pull-request CI as merge-state evidence;
+- task-local green is not enough when the merge-state is red;
+- do not mark a runtime task DONE until its required merge-state integration gate is green;
+- documentation/control-only changes may still write directly to the authority branch;
+- emergency direct runtime repairs require explicit evidence and rationale.
+
+D-069 is the first intended task to prove this policy after the transition gate. See `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 
 ## Council and architecture challenges
 
