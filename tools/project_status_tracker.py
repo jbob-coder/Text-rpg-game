@@ -137,13 +137,29 @@ def _task_summary(tasks: list[dict]) -> dict:
 
 
 def _campaign_summary(tasks: list[dict], first: int = 60, last: int = 79) -> dict:
-    selected = []
-    for task in tasks:
-        number = int(task["id"].split("-", 1)[1])
-        if first <= number <= last:
-            selected.append(task)
+    task_by_id = {task["id"]: task for task in tasks}
+    selected: list[dict] = []
+    missing_task_ids: list[str] = []
+
+    for number in range(first, last + 1):
+        task_id = f"D-{number:03d}"
+        task = task_by_id.get(task_id)
+        if task is None:
+            missing_task_ids.append(task_id)
+            task = {
+                "id": task_id,
+                "title": "Missing Master Task Register entry",
+                "status": None,
+                "priority": None,
+                "state": "UNKNOWN",
+                "missing_registration": True,
+            }
+        selected.append(task)
+
     summary = _task_summary(selected)
     summary["range"] = f"D-{first:03d}..D-{last:03d}"
+    summary["expected_total"] = last - first + 1
+    summary["missing_task_ids"] = missing_task_ids
     return summary
 
 
@@ -489,6 +505,15 @@ def render_markdown(report: dict) -> str:
     lines.extend(["## Task states", ""])
     for state, count in sorted(tasks["by_state"].items()):
         lines.append(f"- {state}: **{count}**")
+
+    lines.extend(["", "## Phase 1 task states", ""])
+    for state, count in sorted(phase1["by_state"].items()):
+        lines.append(f"- {state}: **{count}**")
+    if phase1["missing_task_ids"]:
+        lines.append(
+            "- Missing task registrations: "
+            + ", ".join(f"\`{task_id}\`" for task_id in phase1["missing_task_ids"])
+        )
 
     lines.extend(["", "## Top-level repository map", ""])
     for name, item in repo["top_level"].items():
