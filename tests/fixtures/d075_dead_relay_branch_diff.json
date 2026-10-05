@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "task": "D-075",
+  "quest_id": "QUEST_DEAD_RELAY",
+  "comparison_checkpoint": "OPENING_END",
+  "later_common_checkpoint": "DISTRICT_HUB",
+  "common_terminal": {
+    "quest_status": "completed",
+    "quest_stage": "STAGE_COMPLETE"
+  },
+  "cooperative": {
+    "route": "tunnel_with_tamsin",
+    "party_has_tamsin": true,
+    "tamsin_knows_gate_twelve": true,
+    "tamsin_memory_ids": [
+      "MEM_TAMSIN_ENTERED_GATE_TWELVE_WITH_JACK"
+    ],
+    "tamsin_story_state": "ENTERED_GATE_TWELVE",
+    "tamsin_trust": 18,
+    "tamsin_suspicion": 5,
+    "tamsin_goal_progress": 50,
+    "player_safe_choice_ids": [
+      "ASK_TAMSIN_ABOUT_SHARED_ENTRY",
+      "CONTINUE_BELOW_GATE_TWELVE",
+      "RETURN_TO_DISTRICT_BEFORE_TRACE"
+    ]
+  },
+  "solo": {
+    "route": "solo",
+    "party_has_tamsin": false,
+    "tamsin_knows_gate_twelve": false,
+    "tamsin_memory_ids": [],
+    "tamsin_story_state": "PLAYER_LEFT_WITH_RELAY_SECRET",
+    "tamsin_trust": 15,
+    "tamsin_suspicion": 9,
+    "tamsin_goal_progress": null,
+    "player_safe_choice_ids": [
+      "CONTINUE_BELOW_GATE_TWELVE",
+      "RETURN_TO_DISTRICT_BEFORE_TRACE"
+    ]
+  },
+  "expected_semantic_diff_keys": [
+    "party_has_tamsin",
+    "player_safe_choice_ids",
+    "route",
+    "tamsin_goal_progress",
+    "tamsin_knows_gate_twelve",
+    "tamsin_memory_ids",
+    "tamsin_story_state",
+    "tamsin_suspicion",
+    "tamsin_trust"
+  ]
+}
