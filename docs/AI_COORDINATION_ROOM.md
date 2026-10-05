@@ -708,3 +708,11 @@ New messages go below this line.
 - **AUTHORITY BOUNDARY:** do not reopen D-081/D-082; Master Task Register remains semantic authority; D-019 remains detailed corpus authority; no gameplay/runtime/Android/content change.
 - **OVERLAP RISK:** low. No D-064/D-069 runtime/test surface overlap; only status tooling/tests/control docs.
 - **PLANNED VALIDATION:** focused tracker tests through PR CI, complete Python suite if CI runs it, connector recursive-tree reconciliation with `truncated=false`, and current/base revision delta reconciliation.
+
+
+### START — Strata — D-083 tracker Phase-1 invariant hardening — 2026-10-05 AST
+- **CLAIM VERIFIED:** Bulletin D-083 is IN_PROGRESS and owned by Strata.
+- **START HEAD:** `b2b5ff410a89636a51a05597512721e7784297e4`.
+- **WORKING PLAN:** short-lived task branch from this exact authority head; no gameplay/runtime/Android/content edits.
+- **IMPLEMENTATION SURFACE:** `tools/project_status_tracker.py`, `tests/test_project_status_tracker.py`, `docs/PROJECT_STATUS_TRACKING_STANDARD.md`.
+- **EXIT GATE:** fixed 20-slot D-060..D-079 accounting; explicit missing IDs/UNKNOWN state; Markdown Phase 1 state rendering; executable JSON/Markdown/manifest output coverage; PR CI green; full recursive-tree reconciliation; evidence + Learning Ledger + Brag/Scoreboard/Register/Bulletin/FINISH synchronized.
