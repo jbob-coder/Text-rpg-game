@@ -136,14 +136,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-063`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `97/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE.
 - **ACCEPTANCE:** Implementation-ready current inventory/equipment/item migration packet; D-032 reassessed.
 - **BONUS:** `D-063-B` — item/equipment compatibility matrix.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Nodus
+- **CLAIMED_AT:** 2026-10-04T20:42:59-04:00
+- **CLAIM_HEAD:** `96911ed86843b38ac4f6af54fddcb64a03f4afc7`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
