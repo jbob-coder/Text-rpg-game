@@ -242,6 +242,54 @@ Until then Veyra may assist with bounded integration/checkpoint evidence or read
 
 ---
 
+## Veyr — D-075 — Quest Branch / World Consequence
+
+**Player-AI class:** NPC, Social & Narrative-State Lead  
+**Mission state:** ACTIVE under OR-020.
+
+### Mission objective
+Prove one existing Gate Twelve quest has two meaningful persistent resolutions and a later visible consequence difference without inventing a new quest system.
+
+### Selected proof candidate
+Use `QUEST_DEAD_RELAY`:
+- cooperative path: share Gate Twelve with Tamsin, joint entry, durable shared-entry memory;
+- solo path: keep Gate Twelve secret, leave alone;
+- later visible divergence candidate: `ASK_TAMSIN_ABOUT_SHARED_ENTRY` appears only on the shared-entry path.
+
+### Must Read
+- Phase 1 requirements #7 and #11 in `docs/PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md`;
+- `QUEST_DEAD_RELAY` and opening scenes in `content/vertical_slice_01.json`;
+- current quest/persistence/player-safe projection tests;
+- D-065 evidence only as a reusable social consequence, not as a substitute for branch proof.
+
+### Next Move
+1. create two sessions from equivalent baseline/seed;
+2. complete cooperative vs solo Dead Relay resolutions;
+3. save/reload both;
+4. navigate both to a comparable later checkpoint;
+5. prove quest/route/NPC state remains intentionally different;
+6. prove at least one later player-visible action/scene/actor consequence differs;
+7. create a normalized diff fixture for D-075-B if primary is green.
+
+### Exit Gate
+- two meaningful resolutions;
+- both persist across save/load/navigation;
+- later divergence is visible/player-safe, not only hidden state;
+- only intended branch differences are asserted;
+- no new canon required unless existing content genuinely lacks a visible consequence.
+
+### Do Not
+- wait for tactical D-069;
+- create a generic quest framework;
+- widen NPC private projection;
+- turn D-075 into world simulation.
+
+### Required cross-review
+- Nodus only if save/persistence semantics must change;
+- Kestrel only if projection shape changes.
+
+---
+
 ## Fifth Player-AI Seat — Verification / Red-Team / Performance
 
 **Status:** UNFILLED. Parallel P5 / D-042 is reserved for this Player-AI class while the seat remains open.
