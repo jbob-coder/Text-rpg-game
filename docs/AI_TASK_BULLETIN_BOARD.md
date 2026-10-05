@@ -377,14 +377,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-069`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `91/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
 - **ACCEPTANCE:** Backward-compatible tactical schemas plus deterministic coordinate/occupancy/path/LOS/cover tests.
 - **BONUS:** `D-069-B` — grid/visibility invariants.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyra
+- **CLAIMED_AT:** 2026-10-04 AST
+- **CLAIM_HEAD:** `6f69012a8a7c8cbd21d791696f30f30a0c6e0d0f`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
