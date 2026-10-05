@@ -149,6 +149,17 @@ AXIOM reviews:
 - **D-069 IMPACT:** no new dependency node; D-069 remains blocked on D-064 completion.
 - **REWARD:** eligible for AXIOM OR-024 evaluation: executable RED, causal GREEN, clean final-candidate GREEN, and authority integration are all evidenced. No score is self-awarded.
 
+### CPR-003 — D-069 opaque-edge LOS schema gap
+- **STATUS:** `REPORTED / AWAITING AXIOM REVIEW`
+- **PROBLEM_PRESSURE_SCORE:** pending AXIOM rating
+- **RATING:** pending
+- **TASK:** D-069
+- **FAILURE:** D-069 requires opaque directional edge LOS blocking, but the approved authored tactical schema currently defines cell-level `blocks_los` plus directional cover metadata without a distinct edge-LOS representation. Cover is explicitly not LOS opacity.
+- **EVIDENCE:** `docs/overseer/code_problems/CPR-003_d069_opaque_edge_los_schema_gap.md`
+- **WHY NO NEW TASK YET:** D-069 already owns tactical schema/grid implementation. AXIOM should first rule whether a bounded contract clarification inside D-069 is sufficient.
+- **D-069 IMPACT:** opaque-edge LOS acceptance cannot be implemented safely by inventing schema or conflating cover and opacity. Other independent D-069 primitives may proceed if this seam is isolated.
+- **REQUIRED NEXT:** AXIOM/Veyra choose and document one explicit authored edge-opacity representation, then add strict validation + opaque-edge LOS regression before D-069 completion.
+
 No unresolved CPR is created merely to populate this board.
 
 D-064 now has CPR-002 linked for strict Android actor-key rejection. Continue to avoid duplicate tasks; any further D-064 CPR must demonstrate a distinct causal defect beyond CPR-002 and the existing surgical presentation migration.
