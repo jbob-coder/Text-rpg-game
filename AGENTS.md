@@ -11,17 +11,23 @@ Before changing code or documentation, read these in order:
 1. `docs/AI_TASK_BULLETIN_BOARD.md` — mandatory live work queue and claim authority.
 2. `docs/AI_COMMAND_STRUCTURE.md` — Player-AI specializations, review responsibilities and escalation paths.
 3. `docs/PLAYER_AI_MISSION_CONTROL.md` — fast-entry mission cards; use this to avoid rereading unrelated project material.
-4. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — top-level program authority, permissions, gates and final rebuild direction.
-5. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical documentation state and blockers.
-6. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration/reconstruction blueprint.
-7. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases.
-8. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — document ownership/consumers.
-9. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — semantic task scope/state/evidence.
-10. `docs/IMPLEMENTATION_STATUS.md` — verified implementation evidence.
-11. Relevant domain master document for the work being changed.
-12. Relevant source/tests for the task being changed.
-13. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
+4. `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md` — mandatory escalation surface for large code/integration problems.
+5. `docs/player_guide/README.md` — fast repository-learning/navigation path.
+6. `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — lessons left by completed Player-AI work.
+7. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md` — top-level program authority, permissions, gates and final rebuild direction.
+8. `docs/MASTER_DOCUMENTATION_RECORD.md` — canonical documentation state and blockers.
+9. `docs/FINAL_GAME_RECONSTRUCTION_BLUEPRINT.md` — integration/reconstruction blueprint.
+10. `docs/MASTER_DIRECTIVE_EXECUTION_BREAKDOWN.md` — ordered execution phases.
+11. `docs/DOCUMENTATION_CROSS_REFERENCE_MATRIX.md` — document ownership/consumers.
+12. `docs/THE_GAME_MASTER_TASK_REGISTER.md` — semantic task scope/state/evidence.
+13. `docs/IMPLEMENTATION_STATUS.md` — verified implementation evidence.
+14. Relevant domain master document for the work being changed.
+15. Relevant source/tests for the task being changed.
+16. `docs/V6_STABILIZATION_HANDOFF.md` only when exact historical V6 evidence is needed.
 
+Overseer area: `docs/overseer/README.md` (AXIOM).  
+Large code-problem intake: `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md`.  
+Player learning/navigation: `docs/player_guide/README.md` + `docs/player_guide/PLAYER_LEARNING_LEDGER.md`.  
 Peer defect bounties: `docs/AI_PEER_REVIEW_BOUNTY.md`.  
 Council/rulings: `docs/AI_COUNCIL_ROOM.md` + `docs/PROJECT_OVERSEER_DECISION_LOG.md`.  
 Post-transition runtime integration: `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
@@ -74,6 +80,45 @@ When the user sends `♾️` to a Player-AI:
 - synchronize task/evidence/Brag/Scoreboard state.
 
 Do not restart repository-wide discovery unless the mission card or live drift requires it.
+
+## Mandatory large-problem report
+
+AXIOM is the Project Overseer identifier for repository problem triage.
+
+A Player-AI must create/update a `CPR-###` evidence packet and submit it through `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md` when a code/integration problem:
+- blocks P0 work or multiple downstream tasks;
+- crosses major authority boundaries;
+- repeatedly breaks CI/runtime/save/projection/determinism;
+- appears architectural or merge-state dependent;
+- would require a temporary patch because the causal fix is unclear;
+- may qualify for a large root-cause reward.
+
+Report exact HEAD, executed evidence, reproduction, affected files/APIs/domains, what is blocked and what remains unverified.
+
+Do not create a duplicate Bulletin task yourself when an existing task may already own the cause. AXIOM reviews the evidence, rates the problem, then links or creates the task.
+
+Reporting a difficult defect has no score penalty and does not surrender task ownership.
+
+## Next Player Learning Record — primary completion requirement
+
+The first Player-AIs are also responsible for making this repository easier for later Player-AIs to learn.
+
+Before a primary task is fully handed off, append one compact record to:
+`docs/player_guide/PLAYER_LEARNING_LEDGER.md`.
+
+The record must identify:
+- smallest Read First set;
+- proven facts the next agent should not rediscover;
+- actual behavior owner (source/API/state/contract);
+- one trap or false assumption;
+- exact validation command/test/evidence;
+- safest extension point;
+- unresolved boundary;
+- one direct Next Player Shortcut.
+
+A primary task may have passing tests and still be missing its handoff requirement if this learning record is absent.
+
+Do not create documentation bloat: link to existing authorities and evidence instead of copying them.
 
 ## Critical problem handling
 
