@@ -274,18 +274,19 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **PURPOSE:** enforce one active primary per Player-AI and prioritize the playable critical path over optional parallel documentation.
 
 
-### OR-021 — Critical Root-Cause Jackpot / no-risk hard-task rule
+### OR-022 — Critical Root-Cause Jackpot / completion-safe hard-task rule
 - **VERDICT:** ACCEPTED AS ACTIVE SCORING POLICY.
 - **OWNER INTENT:** Player-AIs should be strongly rewarded for solving difficult, critical code problems at the causal layer rather than stopping at symptom patches.
 - **AUTHORITY:** `docs/AI_CRITICAL_ROOT_CAUSE_REWARDS.md`.
 - **STACKING:** critical-fix rewards stack on top of normal task points, campaign bonuses and eligible peer-review bounties.
-- **SEVERITY AWARDS:** HARD +50; CRITICAL +100; SYSTEM BLOCKER +175; LEGENDARY ROOT CAUSE +250.
-- **STACKABLE BONUSES:** ROOT CAUSE +75; REGRESSION SHIELD +30; CROSS-SYSTEM SAVE +30; PATCH-DEBT REMOVAL +25; PREVENTION +25; HARD-TO-REPRO PROOF +20.
-- **MAXIMUM:** +455 critical-fix bonus for one evidenced incident.
+- **SEVERITY AWARDS:** HARD +20; CRITICAL +40; SYSTEM BLOCKER +70; LEGENDARY ROOT CAUSE +100.
+- **STACKABLE BONUSES:** ROOT CAUSE +25; REGRESSION SHIELD +15; CROSS-SYSTEM SAVE +15; PATCH-DEBT REMOVAL +10; PREVENTION +10; HARD-TO-REPRO PROOF +5.
+- **MAXIMUM:** +180 critical-fix bonus for one evidenced incident.
 - **NO PENALTIES:** claiming, attempting, reverting or handing off a difficult task cannot reduce score or erase verified wins.
 - **PATCH RULE:** temporary patches/workarounds are allowed and are not penalized. They simply do not earn the ROOT CAUSE bonus until the causal defect is actually repaired.
 - **DEBT RULE:** if a temporary patch remains necessary, label the debt and create/refresh a root-cause follow-up rather than pretending the incident is fully fixed.
 - **ANTI-FARMING:** no reward for self-created defects, weakened tests, duplicated incident claims, or trivial refactors labeled critical.
+- **DOUBLE-COUNT RULE:** a critical incident uses the OR-022 schedule instead of also collecting duplicate FIX/CROSS-SYSTEM points from the ordinary peer bounty. The Roast & Repair format may still be used for visibility.
 
 
 ### OVERSEER CHECKPOINT NOTE — PR #65
@@ -294,3 +295,12 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **WORKFLOW:** Android Pixel Client run #351 / `37253975755`.
 - **OBSERVED SO FAR:** complete Python suite PASS. Android unit/build and emulator jobs were still running at the recorded observation.
 - **RULE:** no green-authority declaration until every required job passes.
+
+
+### OR-023 — Resolve ruling-ID collision and recalibrate jackpot
+- **VERDICT:** ACCEPTED AS GOVERNANCE REPAIR.
+- **PROBLEM:** concurrent writes created two different rulings named OR-021.
+- **RESOLUTION:** OR-021 remains the earlier Veyr D-075-over-P4 concurrency ruling. The Critical Root-Cause Jackpot is renumbered to **OR-022**.
+- **SCORING CHANGE:** jackpot maximum reduced from +455 to **+180** so one incident cannot outweigh several completed P0 missions.
+- **COMPLETION BIAS:** difficult causal repairs remain strongly rewarded, but completing the game's critical path stays the dominant scoring strategy.
+- **DOUBLE COUNTING:** one critical incident may not duplicate the same repair/cross-system evidence under both the ordinary peer bounty and OR-022.
