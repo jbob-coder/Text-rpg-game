@@ -26,7 +26,7 @@ class PythonGameEngine internal constructor(
                 val payload = gateway.start(context.applicationContext) {
                     onStage(BootState.ContentLoading)
                 }
-                Result.success(BridgeSnapshotMapper.fromMap(payload))
+                Result.success(mapSnapshot(payload))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
@@ -36,7 +36,7 @@ class PythonGameEngine internal constructor(
     override suspend fun choose(choiceId: String): Result<GameSnapshot> =
         withContext(Dispatchers.IO) {
             try {
-                Result.success(BridgeSnapshotMapper.fromMap(gateway.choose(choiceId)))
+                Result.success(mapSnapshot(gateway.choose(choiceId)))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
@@ -53,7 +53,7 @@ class PythonGameEngine internal constructor(
 
     override suspend fun load(): Result<GameSnapshot> = withContext(Dispatchers.IO) {
         try {
-            Result.success(BridgeSnapshotMapper.fromMap(gateway.load()))
+            Result.success(mapSnapshot(gateway.load()))
         } catch (failure: Throwable) {
             Result.failure(classifyFailure(failure))
         }
@@ -62,7 +62,7 @@ class PythonGameEngine internal constructor(
     override suspend fun applyCheat(code: String): Result<GameSnapshot> =
         withContext(Dispatchers.IO) {
             try {
-                Result.success(BridgeSnapshotMapper.fromMap(gateway.applyCheat(code)))
+                Result.success(mapSnapshot(gateway.applyCheat(code)))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
@@ -71,7 +71,7 @@ class PythonGameEngine internal constructor(
     override suspend fun equip(itemId: String): Result<GameSnapshot> =
         withContext(Dispatchers.IO) {
             try {
-                Result.success(BridgeSnapshotMapper.fromMap(gateway.equip(itemId)))
+                Result.success(mapSnapshot(gateway.equip(itemId)))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
@@ -80,7 +80,7 @@ class PythonGameEngine internal constructor(
     override suspend fun unequip(slot: String): Result<GameSnapshot> =
         withContext(Dispatchers.IO) {
             try {
-                Result.success(BridgeSnapshotMapper.fromMap(gateway.unequip(slot)))
+                Result.success(mapSnapshot(gateway.unequip(slot)))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
@@ -89,10 +89,22 @@ class PythonGameEngine internal constructor(
     override suspend fun travel(locationId: String): Result<GameSnapshot> =
         withContext(Dispatchers.IO) {
             try {
-                Result.success(BridgeSnapshotMapper.fromMap(gateway.travel(locationId)))
+                Result.success(mapSnapshot(gateway.travel(locationId)))
             } catch (failure: Throwable) {
                 Result.failure(classifyFailure(failure))
             }
+        }
+
+    private fun mapSnapshot(payload: Map<String, Any?>): GameSnapshot =
+        try {
+            PlayerSafeSnapshotMapper.fromMap(payload)
+        } catch (failure: IllegalArgumentException) {
+            throw GatewayFailure(
+                stageId = "PROJECTION_ERROR",
+                publicMessage = "The current game state could not be displayed.",
+                technicalDetail = failure.stackTraceToString(),
+                cause = failure,
+            )
         }
 
     override suspend fun inspectStatus(path: String): Result<GameStatInspection> =
