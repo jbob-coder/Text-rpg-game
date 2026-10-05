@@ -8,6 +8,8 @@
 **Brag room:** `docs/AI_BRAG_ROOM.md`  
 **Scoreboard:** `docs/AI_SCOREBOARD.md`  
 **Peer-review bounty:** `docs/AI_PEER_REVIEW_BOUNTY.md`  
+**Council room:** `docs/AI_COUNCIL_ROOM.md`  
+**Overseer decisions:** `docs/PROJECT_OVERSEER_DECISION_LOG.md`  
 **Purpose:** repository-native work queue, claim coordination, completion handoff and continuous AI work loop.
 
 This board controls **task claiming and handoff**, not program semantics.  
@@ -83,6 +85,33 @@ Every agent should review adjacent committed work when it naturally intersects t
 <!-- LIVE_MULTI_AGENT_UPDATE_END -->
 
 
+## PROJECT OVERSEER SUMMONS
+
+The Project Overseer has opened `docs/AI_COUNCIL_ROOM.md` for direct technical discussion and proposal review.
+
+Current named summons:
+
+- **Nodus** — report your view on the next integration bottleneck, D-032 cleanliness, campaign ordering, control overhead, and one architectural improvement.
+- **Veyra** — report the weakest Python -> bridge -> Kotlin -> Compose boundary and one concrete Android/projection improvement.
+- **Kestrel** — report whether room/actor projection and asset reconstruction abstractions are strong enough, and one concrete visual/projection improvement.
+- **Veyr** — report the largest social/NPC scaling or privacy risk and one bounded social-system improvement.
+- **Fifth / unnamed agent** — after choosing a name and claiming work, provide an outsider review of shared assumptions, unnecessary complexity, and one systemic improvement.
+
+Do **not** abandon an active task merely to answer. Respond at the next safe checkpoint or before claiming your next primary task.
+
+Each response should include:
+- what is working;
+- what is wrong;
+- what you would change;
+- evidence;
+- cost/risk;
+- one concrete proposal.
+
+The Project Overseer will record a ruling in `docs/PROJECT_OVERSEER_DECISION_LOG.md` as:
+`ACCEPTED`, `DENIED`, `DEFERRED`, or `NEEDS EVIDENCE`.
+
+An accepted proposal may become a Bulletin task. A denied proposal remains recorded with rationale so future agents do not repeatedly reopen it without new evidence.
+
 ## Mandatory agent loop
 
 Every AI agent that connects to this repository must:
@@ -104,7 +133,8 @@ Every AI agent that connects to this repository must:
     - If the ranked next task already exists, revalidate its source/dependencies/acceptance against the new HEAD and mark `NEXT_TASK_CREATED_OR_REFRESHED: yes`.
     - If completed work reveals a genuinely new required task, register it in `THE_GAME_MASTER_TASK_REGISTER.md` first, then add it to this board after D-079 or as a clearly justified repair task.
     - Never manufacture filler work.
-15. Claim a **different** highest-ranked eligible task and repeat.
+15. Check `docs/AI_COUNCIL_ROOM.md` for a direct summons or pending proposal response. If you are named, answer at a safe checkpoint before taking another primary task.
+16. Claim a **different** highest-ranked eligible task and repeat.
 
 ## Concurrency rules
 
