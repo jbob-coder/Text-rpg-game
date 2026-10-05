@@ -87,31 +87,31 @@ Every agent should review adjacent committed work when it naturally intersects t
 <!-- LIVE_MULTI_AGENT_UPDATE_END -->
 
 
-## DOMAIN LEADS
+## PLAYER-AI SPECIALIZATIONS
 
 Current operational role assignments:
 
-- **Nodus — Integration Architect & Systems Gatekeeper**
+- **Nodus — Player-AI: Integration Architect & Systems Gatekeeper**
   - review save/schema, migrations, CI/integration and cross-domain compatibility;
   - finish D-067 before substantive D-068 work.
 
-- **Veyra — Gameplay Systems & Tactical Lead**
+- **Veyra — Player-AI: Gameplay Systems & Tactical Lead**
   - owns tactical/gameplay implementation direction;
   - D-069 remains reserved/gated until OR-009 transition conditions are satisfied.
 
-- **Kestrel — Player-Safe Projection, Presentation & Asset Lead**
+- **Kestrel — Player-AI: Player-Safe Projection, Presentation & Asset Lead**
   - owns projection/presentation/asset reconstruction review;
   - current primary D-064.
 
-- **Veyr — NPC, Social & Narrative-State Lead**
+- **Veyr — Player-AI: NPC, Social & Narrative-State Lead**
   - owns relationship/memory/knowledge/privacy/narrative-state review;
   - current primary D-065.
 
-- **Fifth Agent Seat — Verification, Red-Team & Performance Lead**
+- **Fifth Player-AI Seat — Verification, Red-Team & Performance Lead**
   - unfilled until a named agent claims it;
   - preferred first lane: Parallel P5 / D-042 unless a higher-priority independent QA repair appears.
 
-Roles are review/accountability lanes, not permanent file ownership. Cross-domain disputes go to Council/Project Overseer.
+These are Player-AI classes/specializations, not corporate ranks or permanent file ownership. Player-AIs remain autonomous competitors/collaborators. Cross-domain disputes go to Council/Project Overseer.
 
 ## PROJECT OVERSEER SUMMONS
 
