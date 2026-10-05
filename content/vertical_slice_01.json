@@ -371,35 +371,7 @@
           }
         }
       ],
-      "location_id": "PLATFORM_NINE",
-      "actors": [
-        {
-          "presentation_id": "NPC_TAMSIN",
-          "actor_id": "NPC_TAMSIN",
-          "public_name": "Tamsin",
-          "visual_family": "NPC_TAMSIN",
-          "placement_key": "PLATFORM_NINE_TAMSIN_RIGHT",
-          "pose_key": "front",
-          "outfit_key": "default",
-          "visible_tags": [],
-          "inspectable": true,
-          "dialogue_available": false,
-          "actions": []
-        },
-        {
-          "presentation_id": "SUPPORT_WOUNDED_COURIER",
-          "public_name": "Wounded courier",
-          "visual_family": "SUPPORT_WOUNDED_COURIER",
-          "placement_key": "PLATFORM_NINE_COURIER_LEFT",
-          "pose_key": "wounded",
-          "visible_tags": [
-            "injured"
-          ],
-          "inspectable": true,
-          "dialogue_available": false,
-          "actions": []
-        }
-      ]
+      "location_id": "PLATFORM_NINE"
     },
     "OPENING_RELAY_CASING": {
       "title": "A Case That Should Be Empty",
@@ -599,22 +571,7 @@
           }
         }
       ],
-      "location_id": "RELAY_WORKBENCH",
-      "actors": [
-        {
-          "presentation_id": "NPC_TAMSIN",
-          "actor_id": "NPC_TAMSIN",
-          "public_name": "Tamsin",
-          "visual_family": "NPC_TAMSIN",
-          "placement_key": "RELAY_WORKBENCH_TAMSIN_RIGHT",
-          "pose_key": "front",
-          "outfit_key": "default",
-          "visible_tags": [],
-          "inspectable": true,
-          "dialogue_available": false,
-          "actions": []
-        }
-      ]
+      "location_id": "RELAY_WORKBENCH"
     },
     "OPENING_DECISION": {
       "title": "Gate Twelve",
@@ -823,22 +780,7 @@
           }
         }
       ],
-      "location_id": "PLATFORM_NINE",
-      "actors": [
-        {
-          "presentation_id": "NPC_TAMSIN",
-          "actor_id": "NPC_TAMSIN",
-          "public_name": "Tamsin",
-          "visual_family": "NPC_TAMSIN",
-          "placement_key": "PLATFORM_NINE_TAMSIN_RIGHT",
-          "pose_key": "front",
-          "outfit_key": "default",
-          "visible_tags": [],
-          "inspectable": true,
-          "dialogue_available": false,
-          "actions": []
-        }
-      ]
+      "location_id": "PLATFORM_NINE"
     },
     "OPENING_TUNNEL": {
       "title": "Below the Evacuation Route",
@@ -899,22 +841,7 @@
           }
         }
       ],
-      "location_id": "SERVICE_TUNNEL",
-      "actors": [
-        {
-          "presentation_id": "NPC_TAMSIN",
-          "actor_id": "NPC_TAMSIN",
-          "public_name": "Tamsin",
-          "visual_family": "NPC_TAMSIN",
-          "placement_key": "SERVICE_TUNNEL_TAMSIN_RIGHT",
-          "pose_key": "front",
-          "outfit_key": "default",
-          "visible_tags": [],
-          "inspectable": true,
-          "dialogue_available": false,
-          "actions": []
-        }
-      ]
+      "location_id": "SERVICE_TUNNEL"
     },
     "OPENING_SOLO_EXIT": {
       "title": "The Quiet Stair",
