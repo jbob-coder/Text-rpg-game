@@ -36,7 +36,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **D-070+:** remain dependency-gated behind D-069.
 
 ### Other active work
-- **Quorix:** Parallel P5 / D-042 IN_PROGRESS — fifth-seat Verification / Red-Team / Performance lane.
+- **Quorix:** Parallel P5 / D-042 DONE — fifth-seat Verification / Red-Team / Performance lead returns to review availability.
 - **Strata:** D-083 tracker hardening IN_PROGRESS — owns tracker/test/tracking-standard surfaces.
 - Other Player-AIs should not duplicate either claim.
 
@@ -45,11 +45,11 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **Veyra:** 530 (+90 active potential on D-069)
 - **Kestrel:** 460
 - **Veyr:** 380
-- **Quorix:** 0 (+75 active potential on D-042)
+- **Quorix:** 95
 
 ### Immediate strategy
 1. Veyra completes D-069 under the runtime merge-state gate.
-2. Quorix completes D-042 independently without touching D-069/D-083.
+2. Quorix preserves the completed P5 survivor evidence for D-029/D-077 and independent review; do not reopen the slice without new evidence.
 3. Strata completes D-083 tracker hardening without touching gameplay/runtime.
 4. On D-069 completion, evaluate and unlock D-070 immediately.
 
@@ -99,7 +99,7 @@ Current operational role assignments:
 
 - **Quorix — Player-AI: Verification, Red-Team & Performance Lead**
   - fills the fifth Player-AI seat;
-  - current primary: **Parallel P5 / D-042 IN_PROGRESS**.
+  - Parallel P5 / D-042 bounded lane **DONE**; currently verification/red-team available.
 
 - **Strata — active auxiliary Player-AI: Repository Status / Tooling**
   - current primary: **D-083 IN_PROGRESS**;
@@ -755,19 +755,24 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-042`
 - **PRIORITY:** `P0/P1 PARALLEL`
 - **IMPORTANCE:** `85/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **RESERVED_FOR_CLASS:** Fifth Player-AI Seat — Verification / Red-Team / Performance
 - **DOMAIN:** source archaeology / branch survivor reconciliation.
-- **CLAIM_RULE:** Nodus/Veyra/Kestrel/Veyr should leave this lane for the fifth Player-AI unless the Overseer explicitly reassigns it.
 - **DEPENDENCIES:** current-head source inventory; no dependency on D-060 completion.
-- **ACCEPTANCE:** give a bounded unresolved set of cross-branch implementation differences exact dispositions and migration/consumer mappings; no merges or runtime changes.
-- **BONUS:** machine-readable branch/commit -> behavior -> disposition -> migration-consumer table.
+- **ACCEPTANCE:** **SATISFIED FOR THE BOUNDED P5 LANE** — PR #27/#28/#30/#31 received exact dispositions and current consumer/task mappings; no branches were merged and no runtime files were changed.
+- **BONUS:** **DONE** — machine-readable branch/commit -> behavior -> disposition -> migration-consumer table.
 - **CLAIMED_BY:** Quorix
 - **CLAIMED_AT:** 2026-10-05 AST
 - **CLAIM_HEAD:** `c840e0101a72a341e43298a38e440453ac0a62a1`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
-- **BRAG_CARD:** pending
+- **COMPLETION_HEAD:** `2a6cc5260f931c8a665b5e60d6964a8193e52d04`
+- **EVIDENCE:** `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`; `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_MATRIX_2026-10-05.json`; synchronized Deep Source Audit, Master Task Register, Master Documentation Record and Learning Ledger.
+- **RESULT:** D-064/D-065/D-068/D-067 completion heads are in authority ancestry; PR #27/#30 are D-029 source+raster candidates; #28 is deferred presentation evidence; #31 requires reimplementation before migration because reduced-motion support is absent.
+- **VERIFICATION_BOUNDARY:** exact PR/Git/blob/source inspection only; no Python/Android suite, APK build, emulator/device run, raster-equivalence execution, visual promotion or runtime merge claimed.
+- **MASTER_TASK_BOUNDARY:** master D-042 remains IN_PROGRESS for broader delegated consumer/asset/deprecation work; only Parallel P5 is DONE.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — Parallel P5 / D-042 — The survivor map follows the real runtime owner`.
+- **SCORE:** 95 — P0/P1 parallel 75 + verified machine-readable survivor-matrix bonus 20.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** no; Quorix returns to verification/red-team availability while D-069 and D-083 remain owned by Veyra and Strata.
+
 
 ## Queue maintenance
 
