@@ -939,12 +939,19 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - RESULT: a bounded original parent settlement/region/municipal/route/terrain-climate proposal exists without changing local IDs, local route data, W3 coordinates or higher sovereign canon. Working names remain non-canon until accepted/revised.
 
 ### TASK D-032 — Mechanics schema/API migration packets
-- STATUS: `IN_PROGRESS / COMBAT + PERSISTENT-ADVERSARY CHILDREN COMPLETE`
+- STATUS: `IN_PROGRESS / PROGRESSION + COMBAT + PERSISTENT-ADVERSARY CHILDREN COMPLETE`
 - PRIORITY: `P0/P1`
 - OUTPUT TARGET: progression/social/items/combat/adversary target schemas mapped to existing engine APIs, saves, projections and tests.
 - COMPLETED CHILDREN:
+  - `docs/systems/PHASE_1_PROGRESSION_SCHEMA_API_MIGRATION_PACKET.md`
   - `docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md`
   - `docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md`
+- PROGRESSION DECISION:
+  - Phase 1 reuses existing schema-v1 `player.skills`, `player.resources`, `abilities`, `perks`, `knowledge`, time and history state;
+  - Trace Echo / Signal Pulse is the selected smallest Gate Twelve-compatible proof path;
+  - no new top-level progression owner or save schema is required for that proof;
+  - current Python player-safe ability projection needs an additive stable ability `id`;
+  - current Kotlin `GameSnapshot`/mapper drops `status.abilities`, so D-066 owns the bounded typed Android ability-projection migration and exact-head mastery/save/determinism proof.
 - COMBAT DECISION:
   - Phase 1 tactical runtime state remains transient authoritative Python state;
   - durable GameState/save schema v1 is unchanged during combat;
@@ -955,7 +962,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - top-level save schema v1 may remain unchanged only if nested-record validation and old/new save round-trip tests pass;
   - any new top-level `adversaries` field requires an explicit schema v2+ migration;
   - no canonical Gate Twelve recurring enemy is selected by the migration packet.
-- STILL OPEN: progression, broader social and items/economy migration packets; exact implementation/tests remain separate.
+- STILL OPEN: broader social and items/economy migration packets; exact implementation/tests remain separate.
 
 ### TASK D-049 — Application UI relationship architecture planning
 - STATUS: `PLANNING ONLY / DOMAIN-DEPENDENT / FINAL REFINEMENT DEFERRED`
@@ -1277,12 +1284,21 @@ Campaign authority for ranking, detailed acceptance, bonus tasks, and execution 
 D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 primary tasks. Detailed implementation instructions and bonus acceptance remain in the campaign document; this register owns their program/task identity and state.
 
 ### TASK D-061 — Complete progression schema/API migration child
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `DONE`
 - PRIORITY: `P0 / RANK 2`
-- DEPENDS_ON: D-060.
-- PURPOSE: complete the progression portion of D-032 against current engine/save/content/Android authority.
-- ACCEPTANCE: implementation-ready progression migration packet with stable IDs, mutation/save/projection/test/rollback boundaries; D-032 synchronized.
-- BONUS: `D-061-B` machine-readable progression migration fixtures/checklist.
+- DEPENDS_ON: D-060 — satisfied.
+- OUTPUT: `docs/systems/PHASE_1_PROGRESSION_SCHEMA_API_MIGRATION_PACKET.md`.
+- RESULT:
+  - current progression/skills/powers/state/save/content/Android boundaries were inspected at source HEAD `d6e80edafe71e678fcd15c293b601a6815eaad90`;
+  - Phase 1 progression remains in existing schema-v1 authoritative state;
+  - Trace Echo / Signal Pulse is selected as the smallest current proof;
+  - stable IDs, mutation boundaries, save impact, redaction, Android DTO/mapper gap, rollback and exact D-066 test order are defined;
+  - no new top-level progression state is introduced;
+  - D-032 progression child is synchronized complete.
+- VERIFICATION:
+  - packet facts were checked against `core.py`, `progression.py`, `powers.py`, `simulation.py`, `status.py`, `persistence.py`, `content.py`, current vertical-slice content, Kotlin `GameEngine.kt`, and direct Python/Kotlin tests;
+  - no runtime implementation, full test-suite pass, Android build, or physical-device result is claimed by D-061.
+- BONUS: `D-061-B` not completed because higher-priority READY P0 work exists.
 
 ### TASK D-062 — Complete broader social schema/API migration child
 - STATUS: `PENDING / BULLETIN QUEUED`
