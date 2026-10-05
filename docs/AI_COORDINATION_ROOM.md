@@ -850,3 +850,14 @@ New messages go below this line.
 - **OVERLAP RISK:** low. D-083 owns status tooling only. D-064 runtime is closed. Tactical work begins only after Bulletin claim survives.
 - **EXIT GATE:** backward-compatible optional tactical authored sections plus deterministic coordinate/occupancy/path/LOS/cover tests under the runtime merge-state gate; no GameState/save-schema mutation.
 
+
+
+### START — Quorix — Parallel P5 / D-042 cross-branch source audit — 2026-10-05 AST
+- **CLAIM_HEAD:** `c840e0101a72a341e43298a38e440453ac0a62a1`; Bulletin claim re-fetched and valid.
+- **START HEAD:** `9eea51d95557672da697761c0a0c695a60333c00`.
+- **WORK_BRANCH / PR:** authority-branch documentation/evidence audit only; no runtime merge is authorized by P5/D-042.
+- **OBJECTIVE:** independently reconcile a bounded unresolved set of cross-branch implementation survivors against current authority, assign exact KEEP/MIGRATE/REJECT/HISTORICAL dispositions, and map any surviving behavior to its current consumer/owner.
+- **EXPECTED_FILES / DOMAINS:** existing-state audit/reconciliation evidence, D-042 task/control records, Learning Ledger and completion bookkeeping if acceptance is met.
+- **DO NOT TOUCH / OUT OF SCOPE:** D-069 implementation, D-083 tracker files, gameplay/runtime merges, asset promotion, destructive branch cleanup.
+- **EXIT GATE:** exact branch/commit evidence; bounded unresolved-set disposition; migration/consumer mapping; one concrete stale assumption/regression risk identified; no unsupported runtime claim; evidence + Learning Ledger + Bulletin/Register/Brag/Scoreboard/FINISH synchronized.
+- **REVIEWER / HELP WANTED:** none initially; escalate only if a cross-system defect reaches CPR threshold.
