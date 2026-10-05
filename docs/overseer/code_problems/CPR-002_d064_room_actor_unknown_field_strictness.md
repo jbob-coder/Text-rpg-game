@@ -1,14 +1,14 @@
 # CPR-002 — D-064 Android room-actor mapper silently accepts forbidden extra fields
 
-- **STATUS:** REPORTED
+- **STATUS:** ACCEPTED / LINKED_TO_TASK / EXECUTABLE REGRESSION REQUIRED
 - **REPORTER:** Veyr
 - **CURRENT_TASK:** bounded D-064 NPC/privacy review support; Veyr has no active primary claim
 - **OBSERVED_HEAD:** `f3a5028f0f77539295a2c6dedd1d926005faf11e`
 - **DATE:** 2026-10-04
-- **BULLETIN_TASK:** candidate existing owner D-064; do not create a duplicate task unless AXIOM finds broader ownership
-- **ROOT_CAUSE_STATUS:** hypothesis from exact source/contract audit; no failing runtime test executed
+- **BULLETIN_TASK:** D-064 — existing causal owner; no duplicate task.
+- **ROOT_CAUSE_STATUS:** source/contract mismatch confirmed; executable failing regression still required before repair acceptance.
 - **TEMPORARY_PATCH:** no
-- **REWARD_CANDIDATE:** undecided; AXIOM to classify only after reproduction/repair evidence
+- **REWARD_CANDIDATE:** CRITICAL-level root-cause candidate; no points until executable regression + repair evidence.
 
 ## Failure
 
@@ -150,9 +150,40 @@ Because the finding crosses Python -> Android and concerns player-safe privacy, 
 
 ## AXIOM review
 
-- **PROBLEM_PRESSURE_SCORE:** pending
-- **RATING:** pending
-- **VERDICT:** pending
-- **TASK LINK/CREATION:** recommend D-064 if accepted; do not create duplicate work
-- **REQUIRED REVIEWERS:** AXIOM + Kestrel; Veyr available for privacy review
-- **ROOT-CAUSE ACCEPTANCE:** pending executable regression / reviewer confirmation
+### Problem Pressure Score
+
+| Dimension | Score |
+|---|---:|
+| Phase 1 / player-path impact | 23 / 25 |
+| Cross-system / multi-task reach | 16 / 20 |
+| Data/save/privacy/determinism risk | 13 / 15 |
+| Repair complexity / authority ambiguity | 8 / 20 |
+| Reproduction / merge-state difficulty | 4 / 10 |
+| Downstream blocking / recurrence | 10 / 10 |
+| **TOTAL** | **74 / 100** |
+
+- **PROBLEM_PRESSURE_SCORE:** **74/100**
+- **RATING:** **CRITICAL**
+- **VERDICT:** **ACCEPTED / LINKED_TO_TASK**
+- **TASK LINK/CREATION:** link CPR-002 to existing D-064. **Do not create a duplicate task.**
+- **WHY ACCEPTED:** D-030 requires strict Android room mapping, explicitly forbids private NPC fields in the actor payload, and permits unknown additive fields only where the bridge contract already authorizes forward compatibility. No such exception is defined for room actor records. Current `BridgeSnapshotMapper` keeps arbitrary string keys and silently ignores extras.
+- **WHY NOT SYSTEM BLOCKER:** the gap crosses the Python -> Android privacy boundary and blocks D-064 acceptance/D-069 unlock, but current Python production already strips forbidden fields and no user-visible leak is demonstrated. The causal repair is localized and authority is clear.
+- **REQUIRED REPAIR OWNER:** Kestrel under D-064.
+- **REQUIRED REPAIR:** at the strict Android mapping boundary, reject actor-map keys outside the projected actor contract. Do not inspect `GameState.npcs` or duplicate NPC privacy logic in Compose.
+- **PROJECTED ACTOR ALLOWLIST:** `presentation_id`, `known_actor_id`, `display_name`, `visual_family`, `placement_key`, `pose_key`, `outfit_key`, `visible_tags`, `inspectable`, `dialogue_available`, `actions`.
+- **REQUIRED EXECUTABLE REGRESSION:** start with one otherwise-valid actor map, add a forbidden/unknown key such as `memories`, call the production `BridgeSnapshotMapper.fromMap()` path, and assert `IllegalArgumentException`.
+- **OPTIONAL SECOND REGRESSION:** verify a benign but unauthorized additive key is also rejected unless the room contract is explicitly revised to permit it.
+- **REQUIRED REVIEWERS:** Kestrel implements; AXIOM verifies task linkage/evidence; Veyr may review privacy semantics without editing the owned runtime surface.
+- **ROOT-CAUSE ACCEPTANCE:** pending executable RED -> GREEN evidence.
+- **REWARD:** no award yet. Evaluate under OR-024 after the failing regression is demonstrated and the causal fix is green.
+- **D-069 EFFECT:** remains blocked exactly as before. CPR-002 adds one bounded D-064 acceptance requirement; it does not create a new dependency node.
+
+### AXIOM distinction
+
+This CPR does **not** claim:
+- current Python production emits private actor fields;
+- Compose currently exposes private NPC state;
+- a save-schema problem exists;
+- a second social/privacy architecture is needed.
+
+It claims one precise thing: the strict Android room-actor mapper currently lacks the actor-key rejection required by the documented player-safe boundary.
