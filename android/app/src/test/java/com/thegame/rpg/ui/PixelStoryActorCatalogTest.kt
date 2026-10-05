@@ -1,5 +1,6 @@
 package com.thegame.rpg.ui
 
+import com.thegame.rpg.engine.GameRoomActor
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -30,52 +31,62 @@ class PixelStoryActorCatalogTest {
     fun tamsinKeepsSourceBackedSilhouetteAnchorsAtSceneScale() {
         val sprite = PixelStoryActorCatalog.tamsinFront
 
-        // Heavy left fringe.
         assertTrue((9..16).any { x -> sprite.rows[7][x] != PixelSprite.TRANSPARENT_PIXEL })
-        // High collar / pale shirt wedge.
         assertTrue((14..19).any { x -> sprite.rows[17][x] == 'P' })
-        // Cross-body satchel path and hip mass.
         assertTrue(sprite.rows.any { row -> 'B' in row || 'b' in row })
-        // Rolled right sleeve leaves visible skin higher than the left hand.
         assertTrue((25..27).any { x -> sprite.rows[29][x] == 'S' })
     }
 
     @Test
-    fun storyActorPlacementUsesOnlyProjectedSceneAndLocationIds() {
-        val opening = PixelStoryActorCatalog.placements(
-            locationId = "PLATFORM_NINE",
-            sceneId = "OPENING_DEPOT_BLACKOUT",
+    fun projectedActorsAloneDeterminePresenceAndPlacement() {
+        val actors = listOf(
+            actor("courier", "SUPPORT_WOUNDED_COURIER", "PLATFORM_NINE_COURIER_LEFT"),
+            actor("tamsin", "NPC_TAMSIN", "PLATFORM_NINE_TAMSIN_RIGHT"),
         )
+
+        val placements = PixelStoryActorCatalog.placements(actors)
+
         assertEquals(
             listOf(
                 PixelStoryActorCatalog.SUPPORT_COURIER_ID,
                 PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID,
             ),
-            opening.map { it.sprite.assetId },
+            placements.map { it.sprite.assetId },
         )
+        assertEquals(listOf(34, 62), placements.map { it.x })
+        assertEquals(listOf(13, 14), placements.map { it.y })
+        assertTrue(PixelStoryActorCatalog.placements(emptyList()).isEmpty())
+    }
 
-        assertEquals(
-            listOf(PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID),
-            PixelStoryActorCatalog.placements("PLATFORM_NINE", "OPENING_DECISION")
-                .map { it.sprite.assetId },
-        )
-        assertEquals(
-            listOf(PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID),
-            PixelStoryActorCatalog.placements("RELAY_WORKBENCH", "OPENING_RECOVERY")
-                .map { it.sprite.assetId },
-        )
-        assertEquals(
-            listOf(PixelStoryActorCatalog.TAMSIN_TURNAROUND_ID),
-            PixelStoryActorCatalog.placements("SERVICE_TUNNEL", "OPENING_TUNNEL")
-                .map { it.sprite.assetId },
-        )
-
+    @Test
+    fun unknownProjectedPresentationCannotInventVisualOrCoordinates() {
         assertTrue(
-            PixelStoryActorCatalog.placements("PLATFORM_NINE", "UNRELATED_SCENE").isEmpty()
+            PixelStoryActorCatalog.placements(
+                listOf(actor("unknown", "UNKNOWN_FAMILY", "PLATFORM_NINE_TAMSIN_RIGHT")),
+            ).isEmpty(),
         )
         assertTrue(
-            PixelStoryActorCatalog.placements("DISTRICT_ARCHIVE", "OPENING_DEPOT_BLACKOUT")
-                .isEmpty()
+            PixelStoryActorCatalog.placements(
+                listOf(actor("tamsin", "NPC_TAMSIN", "UNKNOWN_PLACEMENT")),
+            ).isEmpty(),
         )
     }
+
+    private fun actor(
+        presentationId: String,
+        visualFamily: String,
+        placementKey: String,
+    ) = GameRoomActor(
+        presentationId = presentationId,
+        knownActorId = null,
+        displayName = presentationId,
+        visualFamily = visualFamily,
+        placementKey = placementKey,
+        poseKey = null,
+        outfitKey = null,
+        visibleTags = emptyList(),
+        inspectable = false,
+        dialogueAvailable = false,
+        actions = emptyList(),
+    )
 }
