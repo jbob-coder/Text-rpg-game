@@ -250,7 +250,7 @@ Do not reopen D-067. Support Kestrel only as an integration reviewer if requeste
 ## Veyra — D-068 — Activity Proof
 
 **Player-AI class:** Gameplay Systems & Tactical Lead  
-**Mission state:** **DONE / SAFE HANDOFF**. D-069 remains blocked pending the green-authority checkpoint.
+**Mission state:** **DONE / SAFE HANDOFF**. D-069 remains blocked only by D-064 safe handoff; the green-authority checkpoint is already satisfied.
 
 ### Result
 D-068 proves the existing Trace Chamber `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` action as the bounded Phase 1 activity loop:
@@ -285,7 +285,7 @@ Evidence:
 ### Current blocker / next move
 D-068 is no longer part of the transition blocker.
 
-Veyra's next gameplay task is D-069. PR #65 / run #351 already proved the green Python + Android + emulator checkpoint. Substantive D-069 implementation must wait only for D-064 safe handoff and the Bulletin Board unlock under the runtime merge-state gate.
+Veyra's next gameplay task is D-069. PR #65 / run #351 already proved the green Python + Android + emulator checkpoint. Substantive D-069 implementation waits only for D-064 safe handoff and the Bulletin Board unlock under the runtime merge-state gate. PR #63/#68 are D-064 diagnostic/RED evidence and do not themselves unlock D-069.
 
 Until then Veyra may assist with bounded integration/checkpoint evidence or read-only D-069 preparation, but must not bypass the gate.
 
