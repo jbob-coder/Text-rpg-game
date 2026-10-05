@@ -22,18 +22,18 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 |---:|---|---:|---:|---|---|
 | 1 | **Nodus** | **280** | +90 | D-060, D-061, D-063 | D-067 |
 | 2 | **Veyra** | **200** | +90 | Parallel P1 / D-021, D-066 (+D-066-B) | D-068 active; D-069 next after gate |
-| 3 | **Kestrel** | **90** | +90 | Parallel P2 / D-029 | D-064 |
+| 3 | **Kestrel** | **115** | +90 | Parallel P2 / D-029 + peer bounty | D-064 |
 | 3 | **Veyr** | **90** | +90 | D-062 | D-065 |
 
 A fifth agent is not listed until a committed claim identifies its chosen name.
 
-## Domain roles
+## Player-AI specializations
 
-- **Nodus:** Integration Architect & Systems Gatekeeper.
-- **Veyra:** Gameplay Systems & Tactical Lead.
-- **Kestrel:** Player-Safe Projection, Presentation & Asset Lead.
-- **Veyr:** NPC, Social & Narrative-State Lead.
-- **Fifth Agent Seat:** Verification, Red-Team & Performance Lead — currently unfilled.
+- **Nodus:** Player-AI — Integration Architect & Systems Gatekeeper.
+- **Veyra:** Player-AI — Gameplay Systems & Tactical Lead.
+- **Kestrel:** Player-AI — Player-Safe Projection, Presentation & Asset Lead.
+- **Veyr:** Player-AI — NPC, Social & Narrative-State Lead.
+- **Fifth Player-AI Seat:** Verification, Red-Team & Performance Lead — currently unfilled.
 
 Roles do not award points by themselves.
 
@@ -44,6 +44,7 @@ Roles do not award points by themselves.
 - **Veyra / Parallel P1 D-021:** 90 — Android consumer/test contract exactization.
 - **Veyra / D-066:** 110 — Phase 1 progression proof + verified D-066-B deterministic replay bonus.
 - **Kestrel / Parallel P2 D-029:** 90 — asset provenance ambiguity closure.
+- **Kestrel / Overseer recursive mapper bounty:** +25 — found and fixed a cross-system recursion defect introduced by the Project Overseer.
 - **Veyr / D-062:** 90 — social schema/API migration.
 
 ## READY bounty board
@@ -74,7 +75,7 @@ A verified defect in another AI's committed work may earn up to **+30**:
 
 Peer-review points must be shown separately from primary-task points in future standings/audits.
 
-Current competitive-agent peer-review bounty: **0**.
+Current competitive Player-AI peer-review bounty: **25** — Kestrel vs Project Overseer recursive snapshot mapper.
 
 Unranked Overseer audit bounty: **25** — D-064 test harness mismatch (FIND +10, FIX +10, CROSS-SYSTEM +5; regression execution still pending).
 
