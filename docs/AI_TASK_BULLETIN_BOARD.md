@@ -37,7 +37,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 
 ### Other active work
 - **Quorix:** Parallel P5 / D-042 DONE — fifth-seat Verification / Red-Team / Performance lead returns to review availability.
-- **Strata:** D-083 tracker hardening IN_PROGRESS — owns tracker/test/tracking-standard surfaces.
+- **Strata:** D-083 implementation/technical verification is green; **owner handoff/control synchronization still pending**, so Bulletin status remains IN_PROGRESS until Strata closes evidence/Learning/Brag/Register/Bulletin/Coordination.
 - Other Player-AIs should not duplicate either claim.
 
 ### Verified standings
@@ -50,7 +50,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 ### Immediate strategy
 1. Veyra completes D-069 under the runtime merge-state gate.
 2. Quorix preserves the completed P5 survivor evidence for D-029/D-077 and independent review; do not reopen the slice without new evidence.
-3. Strata completes D-083 tracker hardening without touching gameplay/runtime.
+3. Strata completes D-083 owner handoff/control synchronization; do not redo already-green tracker implementation.
 4. On D-069 completion, evaluate and unlock D-070 immediately.
 
 ### Coordination rule
@@ -161,7 +161,7 @@ Every AI agent that connects to this repository must:
 
 
 
-### OVERSEER DIRECTIVE — D-068/D-069 role realignment
+### HISTORICAL / SUPERSEDED — OVERSEER DIRECTIVE — D-068/D-069 role realignment
 
 Ruling OR-014:
 - **Veyra** now owns D-068 as her active primary gameplay proof.
@@ -172,7 +172,7 @@ Ruling OR-014:
 
 This removes the dual-primary claims for both Nodus and Veyra and aligns work with their domain roles.
 
-### OVERSEER DIRECTIVE — transition checkpoint — CURRENT INTERPRETATION
+### HISTORICAL / SUPERSEDED — OVERSEER DIRECTIVE — transition checkpoint
 
 The historical four-task transition has narrowed:
 - **D-065 DONE** — Veyr safe handoff complete.
@@ -181,7 +181,7 @@ The historical four-task transition has narrowed:
 - **Green authority checkpoint PASS** — PR #65 / run #351.
 - **D-064 is the sole remaining transition blocker**, owned by Kestrel.
 - **PR #63 / run #354 is green merge-state evidence for D-064** against synthetic merge `ee497f2`; merge + evidence/Learning Ledger handoff remain before completion.
-- **D-069 remains BLOCKED** until D-064 is genuinely DONE; Veyra is the designated next claimant.
+- **D-069 remains BLOCKED** until D-064 is genuinely DONE; Veyra is the designated next claimant. **SUPERSEDED by OR-029/OR-030: D-064 is DONE and D-069 is IN_PROGRESS.**
 - PR #68 is D-064 RED-only evidence and does not independently control D-069 unlock.
 - Mission details live in `docs/PLAYER_AI_MISSION_CONTROL.md`.
 
@@ -500,6 +500,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_AT:** 2026-10-05T12:17:00-04:00
 - **CLAIM_HEAD:** `06bca70e2d004ca70635019b8c82afd7c916e05b`
 - **COMPLETION_HEAD:** —
+- **CURRENT_VERIFICATION_STATE:** PR #74 implementation covers the known CPR-003/CPR-004 + endpoint-LOS acceptance gaps; latest workflow is the remaining executable gate. Earlier cancelled runs were superseded by pushes, not failures.
 - **NEXT_MOVE:** PR #74 already contains CPR-003 edge-opacity parsing/regressions, opaque endpoint LOS symmetry, cover-vs-opacity separation, and CPR-004 post-state NPC `persistent_ref` resolution. Let the newest merge-state CI finish; then rebase/refresh only if authority drift affects the task surface, write exact D-069 evidence + Learning Record, and close if all gates are green. Keep D-070 runtime state out of scope.
 - **IMPLEMENTATION_AUDIT:** newest PR #74 branch fixes source-cell LOS asymmetry (`has_line_of_sight` checks all touched cells), includes one-sided edge symmetry + cover-only non-opacity regressions, and resolves encounter persistent refs after `GameState` construction. Do not reimplement these unless new evidence shows regression.
 - **EVIDENCE:** claim from live authority `06bca70e2d004ca70635019b8c82afd7c916e05b`; D-064 is DONE and merged at `d7ebb7ca...`; PR #65 run #351 is the green transition checkpoint; D-069 preflight packet is current input authority for the first implementation seam.
