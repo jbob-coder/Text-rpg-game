@@ -29,7 +29,7 @@ class AndroidBridgeTests(unittest.TestCase):
 
         view = session.scene_view()
 
-        self.assertEqual({"scene", "status", "inventory", "quests", "map", "visuals", "meta"}, set(view))
+        self.assertEqual({"scene", "status", "inventory", "quests", "map", "room", "visuals", "meta"}, set(view))
         self.assertIn("id", view["scene"])
         self.assertIn("title", view["scene"])
         self.assertIn("body", view["scene"])
