@@ -919,3 +919,25 @@ Control result:
 - second-pass work is now driven by migration/runtime/projection/persistence/integration closure gates rather than arbitrary file-count growth.
 
 No full engine suite, Android build, physical-device acceptance, or current-head Markdown word total is implied by this checkpoint.
+
+## 2026-10-04 D-032 migration-design closure
+
+D-032 is now **DONE at migration-design scope**.
+
+All five implementation-mapping children now exist:
+- `docs/systems/PHASE_1_PROGRESSION_SCHEMA_API_MIGRATION_PACKET.md`;
+- `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`;
+- `docs/systems/PHASE_1_ITEMS_ECONOMY_SCHEMA_API_MIGRATION_PACKET.md`;
+- `docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md`;
+- `docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md`.
+
+This supersedes older statements in this record that progression, social or items/economy migration children remain open.
+
+For items/economy specifically:
+- Phase 1 retains flat schema-v1 inventory and slot-keyed equipment;
+- current item/slot IDs and Python mutation authority remain stable;
+- current typed Android inventory/equipment DTOs remain the consumer contract;
+- D-067 owns nested state/content validation hardening plus exact-head obtain/use/equip/save/UI proof;
+- currency, vendors, crafting, durability, encumbrance and item-instance runtime remain deferred.
+
+D-032 completion does **not** imply those runtime tasks or Phase 1 requirements are implemented.
