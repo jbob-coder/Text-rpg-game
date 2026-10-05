@@ -274,3 +274,32 @@ Use this when you need a direct architectural/program ruling instead of guessing
 - **TEST / ACCEPTANCE PLAN:** D-064 safety is proven by: (1) exact opening actor-set equivalence for blackout/decision/recovery/tunnel; (2) semantic keys resolve to the existing 34,13 / 62,14 / 90,14 / 76,14 presentation positions without bridge x/y; (3) malformed/duplicate/location/speaker cases reject; (4) private NPC state and hidden relationship data are absent; (5) projection does not mutate authoritative state; (6) exact-head Android mapping and screenshot evidence pass. A later dynamic spatial extension must additionally prove actor identity/redaction remains unchanged when swapping composition resolver types.
 - **OWNER-ONLY BOUNDARY:** none. This is an architectural boundary proposal; cross-domain adoption should follow Overseer verdict under OR-007.
 - **VERDICT:** PENDING
+
+
+---
+
+## OVERSEER VERDICT — Keep authority green with merge-state integration gates
+
+- **AGENT:** Nodus
+- **VERDICT:** ACCEPTED WITH TRANSITION CONDITIONS
+- **REASONING:** the repository already has pull-request CI capable of evaluating the current authority merge state. Shared-head runtime drift has become a bigger risk than missing migration design.
+- **SCOPE APPROVED:** short-lived runtime task branches + PR merge-state CI after the D-064–D-068 transition checkpoint.
+- **SCOPE NOT APPROVED:** rewriting current in-flight work, merging/promoting main, or treating task-local green as sufficient when merge-state is red.
+- **REQUIRED TESTS / EVIDENCE:** first fully gated task must record branch HEAD, authority merge base/current head, PR CI, resulting authority HEAD and whether compatibility repair was needed.
+- **BULLETIN ACTION:** prospective policy for D-069 onward.
+- **PRIORITY:** P0 process guardrail.
+- **DEPENDENCIES:** safe D-064–D-068 handoff + one green authority checkpoint.
+- **NOTES TO OTHER AGENTS:** see OR-009 and `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+
+## OVERSEER VERDICT — Keep room projection semantic; move dynamic geometry behind placement resolvers
+
+- **AGENT:** Kestrel
+- **VERDICT:** ACCEPTED ARCHITECTURALLY / DYNAMIC IMPLEMENTATION DEFERRED
+- **REASONING:** `placement_key` is appropriate for the bounded static Phase-1 presentation contract but must not become simulation/world-position authority.
+- **SCOPE APPROVED:** keep projection v1, stable presentation identity/redaction, semantic placement adapter and Android-owned pixel composition.
+- **SCOPE NOT APPROVED:** dynamic spatial schema now; raw pixel/world coordinates in actor identity; D-064 redesign mid-flight.
+- **REQUIRED TESTS / EVIDENCE:** opening equivalence, malformed/duplicate/location/speaker rejection, privacy, non-mutation and Android mapping/equivalence evidence.
+- **BULLETIN ACTION:** no new task until a concrete dynamic/tactical consumer exists.
+- **PRIORITY:** architectural guardrail.
+- **DEPENDENCIES:** D-064 completion; future dynamic-room/tactical consumer.
+- **NOTES TO OTHER AGENTS:** see OR-010.
