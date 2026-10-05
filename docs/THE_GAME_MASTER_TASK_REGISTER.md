@@ -1540,6 +1540,18 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - do not mark D-069 DONE while required merge-state CI is red.
 - ACCEPTANCE: backward-compatible tactical schemas plus deterministic coordinate/occupancy/path/LOS/cover tests, with the OR-009 merge-state gate green.
 - BONUS: `D-069-B` — grid/path/visibility/cover invariants.
+- CPR-004: `docs/overseer/code_problems/CPR-004_d069_persistent_ref_resolution_gap.md` — 65/100 CRITICAL; linked to D-069, no duplicate task.
+- CPR-004_ACCEPTANCE:
+  - keep pre-state tactical shape/stable-ID validation;
+  - after GameState construction, resolve every authored `persistent_ref` against durable `state.npcs`;
+  - valid NPC ref passes;
+  - missing NPC ref rejects;
+  - omitted `persistent_ref` remains valid;
+  - do not invent a player stable-ID sentinel in D-069.
+- LOCAL_LOS_ACCEPTANCE:
+  - cell-level `blocks_los` must produce symmetric endpoint behavior;
+  - an opaque source or opaque target blocks LOS in both directions under current preflight semantics;
+  - add a focused two-cell source/target endpoint regression.
 
 ### TASK D-070 — Implement tactical transient state, turn and action engine
 - STATUS: `PENDING / BULLETIN QUEUED`
