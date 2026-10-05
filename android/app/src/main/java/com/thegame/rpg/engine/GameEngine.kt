@@ -111,6 +111,11 @@ interface GameEngine {
 }
 
 internal object BridgeSnapshotMapper {
+    private val roomActorKeys = setOf(
+        "presentation_id", "known_actor_id", "display_name", "visual_family", "placement_key",
+        "pose_key", "outfit_key", "visible_tags", "inspectable", "dialogue_available", "actions",
+    )
+
     fun statInspectionFromMap(payload: Map<String, Any?>): GameStatInspection {
         val path = text(payload["path"], "inspection.path")
         val kind = text(payload["kind"], "inspection.kind")
@@ -245,19 +250,24 @@ internal object BridgeSnapshotMapper {
             val version = integer(roomPayload["projection_version"], "room.projection_version")
             require(version == 1) { "room.projection_version is unsupported" }
             val actors = list(roomPayload["actors"], "room.actors").mapIndexed { index, item ->
-                val actor = objectMap(item, "room.actors[$index]")
+                val path = "room.actors[$index]"
+                val actor = objectMap(item, path)
+                val unexpected = actor.keys - roomActorKeys
+                require(unexpected.isEmpty()) {
+                    "$path contains unsupported fields: ${unexpected.sorted().joinToString(", ")}"
+                }
                 GameRoomActor(
-                    presentationId = text(actor["presentation_id"], "room.actors[$index].presentation_id"),
+                    presentationId = text(actor["presentation_id"], "$path.presentation_id"),
                     knownActorId = optionalText(actor["known_actor_id"]),
-                    displayName = text(actor["display_name"], "room.actors[$index].display_name"),
-                    visualFamily = text(actor["visual_family"], "room.actors[$index].visual_family"),
-                    placementKey = text(actor["placement_key"], "room.actors[$index].placement_key"),
+                    displayName = text(actor["display_name"], "$path.display_name"),
+                    visualFamily = text(actor["visual_family"], "$path.visual_family"),
+                    placementKey = text(actor["placement_key"], "$path.placement_key"),
                     poseKey = optionalText(actor["pose_key"]),
                     outfitKey = optionalText(actor["outfit_key"]),
-                    visibleTags = textList(actor["visible_tags"], "room.actors[$index].visible_tags"),
-                    inspectable = boolean(actor["inspectable"], "room.actors[$index].inspectable"),
-                    dialogueAvailable = boolean(actor["dialogue_available"], "room.actors[$index].dialogue_available"),
-                    actions = textList(actor["actions"], "room.actors[$index].actions"),
+                    visibleTags = textList(actor["visible_tags"], "$path.visible_tags"),
+                    inspectable = boolean(actor["inspectable"], "$path.inspectable"),
+                    dialogueAvailable = boolean(actor["dialogue_available"], "$path.dialogue_available"),
+                    actions = textList(actor["actions"], "$path.actions"),
                 )
             }
             GameRoomProjection(version, text(roomPayload["location_id"], "room.location_id"), actors, optionalText(roomPayload["active_speaker_presentation_id"]))

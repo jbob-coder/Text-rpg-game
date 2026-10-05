@@ -371,6 +371,7 @@ private fun StorySection(
                         locationId = snapshot.location,
                         sceneId = snapshot.sceneId,
                         relayState = snapshot.visuals.relayState,
+                        roomActors = snapshot.room.actors,
                         modifier = Modifier
                             .weight(0.68f)
                             .fillMaxHeight(),
@@ -458,6 +459,7 @@ private fun NarrativePanel(
                         locationId = snapshot.location,
                         sceneId = snapshot.sceneId,
                         relayState = snapshot.visuals.relayState,
+                        roomActors = snapshot.room.actors,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(150.dp),
