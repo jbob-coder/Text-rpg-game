@@ -229,6 +229,42 @@ class TacticalGridTests(unittest.TestCase):
             ),
         )
 
+    def test_transition_maps_use_optimal_dijkstra_route(self) -> None:
+        transitions = (
+            TacticalTransition(
+                "TRANSITION_SHORTCUT_UP",
+                TacticalCoord(0, 1, 0),
+                TacticalCoord(4, 0, 1),
+                cost=1,
+            ),
+            TacticalTransition(
+                "TRANSITION_SHORTCUT_DOWN",
+                TacticalCoord(4, 0, 1),
+                TacticalCoord(4, 0, 0),
+                cost=1,
+            ),
+        )
+        tactical_map = rectangular_map(
+            5,
+            2,
+            z_layers=(0, 1),
+            transitions=transitions,
+        )
+
+        self.assertEqual(
+            (
+                TacticalCoord(0, 0, 0),
+                TacticalCoord(0, 1, 0),
+                TacticalCoord(4, 0, 1),
+                TacticalCoord(4, 0, 0),
+            ),
+            find_path(
+                tactical_map,
+                TacticalCoord(0, 0, 0),
+                TacticalCoord(4, 0, 0),
+            ),
+        )
+
     def test_supercover_includes_corner_touch_cells_in_stable_order(self) -> None:
         self.assertEqual(
             (
@@ -242,6 +278,16 @@ class TacticalGridTests(unittest.TestCase):
             ),
             supercover_line(TacticalCoord(0, 0), TacticalCoord(2, 2)),
         )
+
+    def test_same_cell_los_is_true_even_when_cell_is_opaque(self) -> None:
+        tactical_map = rectangular_map(
+            1,
+            1,
+            overrides={(0, 0, 0): {"blocks_los": True}},
+        )
+        coord = TacticalCoord(0, 0)
+
+        self.assertTrue(has_line_of_sight(tactical_map, coord, coord))
 
     def test_corner_touch_opaque_cell_blocks_los(self) -> None:
         clear_map = rectangular_map(3, 3)
