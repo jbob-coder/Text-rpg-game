@@ -429,7 +429,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-021`
 - **PRIORITY:** `P0 PARALLEL`
 - **IMPORTANCE:** `92/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **DOMAIN:** Android / projection / current consumer and test mapping.
 - **DEPENDENCIES:** current D-021/D-026 authorities; no dependency on D-060 completion.
 - **ACCEPTANCE:** deepen exact current consumer/test mapping; close documentation/audit gaps without implementing D-064 or tactical runtime; synchronize D-021/D-026 as needed.
@@ -437,9 +437,9 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIMED_BY:** Veyra
 - **CLAIMED_AT:** 2026-10-04 AST
 - **CLAIM_HEAD:** `d6e80edafe71e678fcd15c293b601a6815eaad90`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
-- **BRAG_CARD:** pending
+- **COMPLETION_HEAD:** `88d4a2b0d251fcdb6afa1be15618c1aaced67775`
+- **EVIDENCE:** `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md` §12; synchronized D-021/D-026 task register and master documentation record
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — Parallel P1 / D-021 — Android consumer/test contract exactization`
 
 ### Parallel P2 — D-029 — Asset provenance/reconstruction audit
 - **TASK_REF:** `D-029`
