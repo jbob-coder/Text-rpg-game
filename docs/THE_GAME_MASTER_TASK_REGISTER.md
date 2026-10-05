@@ -1243,7 +1243,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - COMPLETED_AT: 2026-10-04 AST
 
 ### TASK D-060 — Execute fresh corpus inventory and second-pass quota recalibration
-- STATUS: IN_PROGRESS / NEXT PROGRAM CONTROL ACTION
+- STATUS: PENDING / BULLETIN READY / NEXT PROGRAM CONTROL ACTION
 - PRIORITY: P0
 - BLOCKER:
   - exact word/heading/current-record totals require a complete-checkout execution or equivalent exhaustive current-head inventory process;
@@ -1254,3 +1254,165 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - ranked reconstruction-depth/content/migration backlog;
   - explicit Phase 1 dependency impact.
 - RULE: first-pass 148/148 coverage is a floor closure, not final documentation completion.
+
+
+## 2026-10-04 — Ranked 20-task AI execution campaign
+
+Campaign authority for ranking, detailed acceptance, bonus tasks, and execution order:
+- `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md`
+- claim coordination: `docs/AI_TASK_BULLETIN_BOARD.md`
+- accomplishment/handoff log: `docs/AI_BRAG_ROOM.md`
+
+D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 primary tasks. Detailed implementation instructions and bonus acceptance remain in the campaign document; this register owns their program/task identity and state.
+
+### TASK D-061 — Complete progression schema/API migration child
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 2`
+- DEPENDS_ON: D-060.
+- PURPOSE: complete the progression portion of D-032 against current engine/save/content/Android authority.
+- ACCEPTANCE: implementation-ready progression migration packet with stable IDs, mutation/save/projection/test/rollback boundaries; D-032 synchronized.
+- BONUS: `D-061-B` machine-readable progression migration fixtures/checklist.
+
+### TASK D-062 — Complete broader social schema/API migration child
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 3`
+- DEPENDS_ON: D-060.
+- PURPOSE: complete the social portion of D-032 across identity, relationships, memory, knowledge/privacy, goals/story state and Android redaction.
+- ACCEPTANCE: implementation-ready social migration packet with save/privacy/projection/test boundaries.
+- BONUS: `D-062-B` positive/negative Tamsin privacy fixtures.
+
+### TASK D-063 — Complete items/economy schema/API migration child
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 4`
+- DEPENDS_ON: D-060.
+- PURPOSE: complete D-032 mapping for current inventory/equipment/item behavior without forcing unrelated economy runtime.
+- ACCEPTANCE: implementation-ready item/equipment migration packet with save, projection, validation, rollback and test mapping.
+- BONUS: `D-063-B` Phase 1 item/equipment compatibility matrix.
+
+### TASK D-064 — Implement player-safe room/actor projection
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 5`
+- DEPENDS_ON: D-060; D-030 contract/migration map.
+- PURPOSE: implement D-030's bounded room/actor projection migration while preserving hidden-state/privacy and opening-story equivalence.
+- ACCEPTANCE: authoritative versioned room/actor projection, strict Python/Kotlin mapping, tested UI consumption and safe retirement boundary for old heuristics.
+- BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
+
+### TASK D-065 — Implement Tamsin durable-memory reactive proof
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 6`
+- DEPENDS_ON: D-062; D-064 recommended before Android presentation changes.
+- PURPOSE: satisfy the missing durable-memory/later-reaction portion of Phase 1 recurring-NPC proof.
+- ACCEPTANCE: one existing interaction creates durable Tamsin state; later authored behavior reacts; save/load and deterministic tests pass; private state stays private.
+- BONUS: `D-065-B` negative projection-leak regression.
+
+### TASK D-066 — Implement and verify Phase 1 progression proof
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 7`
+- DEPENDS_ON: D-061.
+- PURPOSE: turn one documented Gate Twelve-compatible progression route into exact-head persistent runtime proof.
+- ACCEPTANCE: meaningful authoritative progress/unlock/mastery change persists through save/load and is projected safely.
+- BONUS: `D-066-B` deterministic progression replay fixture.
+
+### TASK D-067 — Verify Phase 1 inventory/equipment loop on exact HEAD
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 8`
+- DEPENDS_ON: D-063.
+- PURPOSE: prove current obtain/possess/use/equip mutation, persistence and Android presentation as one integrated Phase 1 loop.
+- ACCEPTANCE: requirement #6 has exact-head Python/save/Android evidence; any repair is bounded and tested.
+- BONUS: `D-067-B` invalid-equip atomic rollback tests.
+
+### TASK D-068 — Verify Phase 1 activity loop on exact HEAD
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 9`
+- DEPENDS_ON: D-060 and current V10 contracts.
+- PURPOSE: verify the selected Trace Chamber training/activity proof across legality, cost, time, persistence and presentation.
+- ACCEPTANCE: requirement #8 has exact-head runtime/save evidence and Android evidence where the current consumer exists.
+- BONUS: `D-068-B` activity interruption/atomicity regression.
+
+### TASK D-069 — Implement tactical schemas, validators and pure grid core
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 10`
+- DEPENDS_ON: D-060; D-032 combat migration packet.
+- PURPOSE: begin the bounded combat implementation with authored schema validation plus coordinate/occupancy/path/LOS/cover primitives.
+- ACCEPTANCE: old packs remain valid; malformed tactical records fail; deterministic pure-function tests pass.
+- BONUS: `D-069-B` grid/path/visibility/cover invariant regression set.
+
+### TASK D-070 — Implement tactical transient state, turn and action engine
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 11`
+- DEPENDS_ON: D-069.
+- PURPOSE: implement transient authoritative combat session, initiative/activations/action budget and deterministic committed action resolution without save-schema expansion.
+- ACCEPTANCE: headless encounter executes deterministic legal turns/actions; previews do not consume event sequence.
+- BONUS: `D-070-B` deterministic combat transcript/replay hash.
+
+### TASK D-071 — Implement tactical awareness, cover, objective, retreat and bounded AI
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 12`
+- DEPENDS_ON: D-070.
+- PURPOSE: complete knowledge-correct encounter decision behavior with detection, cover, objectives, retreat and bounded AI.
+- ACCEPTANCE: objective/retreat paths work deterministically without exposing hidden AI/private state.
+- BONUS: `D-071-B` developer-only AI diagnostic evidence with explicit player-safe exclusion tests.
+
+### TASK D-072 — Implement tactical aftermath, injury and world consequence transaction
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 13`
+- DEPENDS_ON: D-071.
+- PURPOSE: atomically commit validated combat aftermath into existing durable GameState owners, including the approved Phase 1 injury path when authorized by live content authority.
+- ACCEPTANCE: pre-commit rollback remains possible; post-commit injury/world/quest/social/time consequences persist correctly.
+- BONUS: `D-072-B` fault-injection aftermath atomicity tests.
+
+### TASK D-073 — Materialize Gate Twelve tactical content and Python bridge
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 14`
+- DEPENDS_ON: D-072.
+- PURPOSE: create the bounded Gate Twelve encounter records and authoritative player-safe combat bridge actions/projection without inventing unresolved canon.
+- ACCEPTANCE: one encounter starts, plays, resolves/retreats through Python bridge with hidden-state redaction and contracted save interruption behavior.
+- BONUS: `D-073-B` combat bridge redaction audit.
+
+### TASK D-074 — Implement Android tactical DTO/mapper/ViewModel/Compose surface
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 15`
+- DEPENDS_ON: D-073.
+- PURPOSE: expose the bounded encounter on Android through typed player-safe projection while Python remains sole gameplay authority.
+- ACCEPTANCE: Kotlin mapping, ViewModel delegation, minimal tactical Compose UI and relevant JVM/instrumentation tests pass.
+- BONUS: `D-074-B` tactical accessibility/large-text/reduced-motion interaction checks.
+
+### TASK D-075 — Verify Phase 1 quest branch and world consequence
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0/P1 / RANK 16`
+- DEPENDS_ON: D-060 and current quest/world contracts.
+- PURPOSE: prove one existing Gate Twelve quest has meaningful persistent branching and a visible later state consequence.
+- ACCEPTANCE: two proof resolutions persist across navigation/save/load and produce intended later divergence.
+- BONUS: `D-075-B` branch-difference evidence fixture.
+
+### TASK D-076 — Execute integrated Phase 1 save/load and deterministic regression gate
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0 / RANK 17`
+- DEPENDS_ON: relevant proof tasks D-065 through D-075.
+- PURPOSE: verify continuity/determinism across the integrated Phase 1 loop instead of isolated subsystem tests.
+- ACCEPTANCE: one exact-head sequence spans social/knowledge, progression, items, activity, quest and tactical aftermath; save/reload/continue and deterministic outcomes are proven.
+- BONUS: `D-076-B` corrupted/unsupported-save rejection fixture.
+
+### TASK D-077 — Close Android Phase 1 consumer and test gaps
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0/P1 / RANK 18`
+- DEPENDS_ON: D-064, D-067, D-068, D-074, D-075, D-076 where relevant.
+- PURPOSE: close D-021/D-026 projection/render/test gaps across the integrated Phase 1 surface.
+- ACCEPTANCE: QuestSection, contentId, canonStatus, derived stats and new actor/activity/tactical consumers have direct evidence; Android gates run where available.
+- BONUS: `D-077-B` machine-readable screen/projection/owner/test matrix.
+
+### TASK D-078 — Profile low-end Phase 1 performance and lock bounded budgets
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0/P1 / RANK 19`
+- DEPENDS_ON: D-077 and measurable integrated tactical/Android slice.
+- PURPOSE: create repeatable low-end performance evidence for the Galaxy A02-class product target without falsely claiming physical-device compatibility.
+- ACCEPTANCE: measurable budgets, representative profiling, environment distinction, bounded workload and evidence-backed hotspot repairs are recorded.
+- BONUS: `D-078-B` repeatable worst-case bounded Phase 1 performance scenario/ledger.
+
+### TASK D-079 — Run Phase 1 integrated acceptance candidate and APK provenance gate
+- STATUS: `PENDING / BULLETIN QUEUED`
+- PRIORITY: `P0-CRITICAL FINAL GATE / RANK 20`
+- DEPENDS_ON: all required Phase 1 proof tasks through D-078; owner-only boundaries explicitly separated.
+- PURPOSE: decide with exact-head evidence whether the Gate Twelve Phase 1 actually satisfies its exit gate.
+- ACCEPTANCE: complete exit checklist, Python + Android gates, debug/test APK when supported, APK SHA-256/source HEAD, persistence/determinism/no-known-leak/performance evidence, synchronized program records; otherwise exact failing gate and repair task.
+- BONUS: `D-079-B` final reconstruction handoff/evidence bundle index.
