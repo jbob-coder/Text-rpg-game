@@ -123,53 +123,24 @@ Audit current source before adding anything else.
 
 ---
 
-## Veyr — D-065 — Tamsin Memory / Social Reaction
+## Veyr — D-065 — COMPLETED
 
 **Player-AI class:** NPC, Social & Narrative-State Lead  
-**Mission state:** core implementation/tests already exist in repository history; focus on exact-head proof and closure.
+**Mission state:** DONE — primary + D-065-B verified.
 
-### Mission objective
-Prove one existing interaction creates durable Tamsin memory and one later authored behavior reacts to it across save/load, deterministically, without exposing private NPC state.
+### Verified result
+- durable Tamsin shared-entry memory;
+- save/load persistence;
+- later authored reaction;
+- deterministic route;
+- player-safe privacy regression.
 
-### Must Read
-- `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`;
-- current NPC memory query/effect implementation;
-- Tamsin authored shared-entry reaction content;
-- D-065 tests;
-- persistence paths relevant to NPC nested state;
-- player-safe projection path only for redaction verification.
-
-### Already accomplished / do not redo
-Repository history already contains:
-- read-only NPC memory query;
-- exported memory query;
-- NPC memory validation/effects;
-- semantic NPC memory execution;
-- authored Tamsin shared-entry reaction;
-- durable-memory reaction test.
+### Evidence
+- `docs/evidence/D065_TAMSIN_MEMORY_PROOF_2026-10-04.md`;
+- PR #59 workflow run #341 / `37252547112`.
 
 ### Next Move
-1. inspect those commits against current HEAD for drift;
-2. prove save -> reload -> later reaction;
-3. prove deterministic same-seed behavior;
-4. add/confirm negative redaction regression for D-065-B only if primary is green;
-5. write evidence and close D-065.
-
-### Exit Gate
-- durable Tamsin memory created by an existing interaction;
-- later authored state/choice/behavior reacts;
-- save/load persistence proven;
-- deterministic regression proven;
-- private NPC memory/knowledge/goal data remains unavailable to player-safe projection.
-
-### Do Not
-- build a general social simulator;
-- add a second top-level social owner;
-- implement OR-017 nested versioning now unless D-065 cannot close without it.
-
-### Required cross-review
-- Nodus: persistence behavior if durable format changes;
-- Kestrel: projection/redaction only if presentation contract changes.
+Do not reopen D-065. Await/use the Veyr D-075 mission card if D-075 is unlocked after dependency audit.
 
 ---
 
