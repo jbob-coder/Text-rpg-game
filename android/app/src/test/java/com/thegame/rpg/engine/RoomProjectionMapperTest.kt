@@ -28,6 +28,20 @@ class RoomProjectionMapperTest {
         "actions" to emptyList<String>(),
     )
 
+    private fun actor(presentationId: String = "NPC_TAMSIN") = GameRoomActor(
+        presentationId = presentationId,
+        knownActorId = "NPC_TAMSIN",
+        displayName = "Tamsin",
+        visualFamily = "NPC_TAMSIN",
+        placementKey = "PLATFORM_NINE_TAMSIN_RIGHT",
+        poseKey = "front",
+        outfitKey = null,
+        visibleTags = emptyList(),
+        inspectable = true,
+        dialogueAvailable = false,
+        actions = emptyList(),
+    )
+
     @Test fun mapsVersionedPlayerSafeActorProjection() {
         val snapshot = BridgeSnapshotMapper.fromMap(basePayload(mapOf(
             "projection_version" to 1,
@@ -51,33 +65,28 @@ class RoomProjectionMapperTest {
         BridgeSnapshotMapper.fromMap(basePayload(mapOf("projection_version" to 2, "location_id" to "PLATFORM_NINE", "actors" to emptyList<Any>())))
     }
 
-    @Test(expected = IllegalArgumentException::class) fun rejectsRoomLocationThatDoesNotMatchSnapshotLocation() {
-        BridgeSnapshotMapper.fromMap(basePayload(
-            room = mapOf(
-                "projection_version" to 1,
-                "location_id" to "SERVICE_TUNNEL",
-                "actors" to emptyList<Any>(),
-                "active_speaker_presentation_id" to null,
+    @Test(expected = IllegalArgumentException::class) fun contractRejectsRoomLocationThatDoesNotMatchSnapshotLocation() {
+        RoomProjectionContract.validate(
+            "PLATFORM_NINE",
+            GameRoomProjection(locationId = "SERVICE_TUNNEL"),
+        )
+    }
+
+    @Test(expected = IllegalArgumentException::class) fun contractRejectsDuplicatePresentationIds() {
+        RoomProjectionContract.validate(
+            "PLATFORM_NINE",
+            GameRoomProjection(locationId = "PLATFORM_NINE", actors = listOf(actor(), actor())),
+        )
+    }
+
+    @Test(expected = IllegalArgumentException::class) fun contractRejectsActiveSpeakerOutsideProjectedActors() {
+        RoomProjectionContract.validate(
+            "PLATFORM_NINE",
+            GameRoomProjection(
+                locationId = "PLATFORM_NINE",
+                actors = listOf(actor()),
+                activeSpeakerPresentationId = "NPC_NOT_PROJECTED",
             ),
-            location = "PLATFORM_NINE",
-        ))
-    }
-
-    @Test(expected = IllegalArgumentException::class) fun rejectsDuplicatePresentationIds() {
-        BridgeSnapshotMapper.fromMap(basePayload(mapOf(
-            "projection_version" to 1,
-            "location_id" to "PLATFORM_NINE",
-            "actors" to listOf(tamsin(), tamsin()),
-            "active_speaker_presentation_id" to null,
-        )))
-    }
-
-    @Test(expected = IllegalArgumentException::class) fun rejectsActiveSpeakerOutsideProjectedActors() {
-        BridgeSnapshotMapper.fromMap(basePayload(mapOf(
-            "projection_version" to 1,
-            "location_id" to "PLATFORM_NINE",
-            "actors" to listOf(tamsin()),
-            "active_speaker_presentation_id" to "NPC_NOT_PROJECTED",
-        )))
+        )
     }
 }
