@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+from copy import deepcopy
 import unittest
 
 from textrpg.combat_schema import TacticalCell, TacticalCoord, TacticalMap
+from textrpg.core import GameState
 from textrpg.combat_state import (
     ACTIVATION_ACTIVE,
     ACTIVATION_SKIPPED,
@@ -238,6 +240,43 @@ class CombatStateTests(unittest.TestCase):
 
         self.assertEqual(("ACTOR_SECOND",), session.advance_round())
         self.assertEqual(ACTIVATION_SKIPPED, first.activation_state)
+
+
+    def test_duplicate_future_round_actor_id_rejects(self) -> None:
+        current = actor("ACTOR_DUP", 0, 0)
+        future = actor("ACTOR_DUP", 1, 0)
+        future.reinforcement_round = 2
+
+        with self.assertRaisesRegex(ValueError, "duplicate tactical actor id"):
+            CombatSession(
+                encounter_id="ENCOUNTER_SESSION_TEST",
+                tactical_map=two_by_two_map(),
+                seed=1,
+                actors=(current, future),
+            )
+
+    def test_transient_session_does_not_mutate_game_state(self) -> None:
+        durable = GameState(
+            seed="DURABLE_SEED",
+            scene_id="SCENE_TEST",
+            player={"attributes": {"Strength": 5}},
+            flags={"FLAG_TEST": True},
+        )
+        before = deepcopy(durable.snapshot())
+        primary = actor("ACTOR_A", 0, 0)
+
+        session = CombatSession(
+            encounter_id="ENCOUNTER_SESSION_TEST",
+            tactical_map=two_by_two_map(),
+            seed=99,
+            actors=(primary,),
+        )
+        session.begin_next_activation()
+        session.complete_active_activation()
+
+        self.assertEqual(before, durable.snapshot())
+        self.assertFalse(hasattr(durable, "combat_session"))
+        self.assertFalse(hasattr(durable, "tactical_state"))
 
 
 if __name__ == "__main__":
