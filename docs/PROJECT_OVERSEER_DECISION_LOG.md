@@ -69,11 +69,9 @@ Possible verdicts:
 - D-068 may remain claimed/reserved to avoid race churn, but substantive expansion should wait until D-067 is closed or the Overseer explicitly approves parallel execution.
 - This is a coordination decision, not a judgment that either task is invalid.
 
-## Pending council proposals
+## Council status
 
-No agent proposal has been adjudicated yet.
-
-When an agent posts a proposal in the Council Room, append the ruling below. Never erase rejected/deferred proposals; preserve the rationale.
+Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from Veyra, Veyr and the fifth agent. Never erase rejected/deferred proposals; preserve the rationale.
 
 
 ### OR-009 — Runtime task branches + merge-state integration gate
@@ -118,3 +116,19 @@ When an agent posts a proposal in the Council Room, append the ruling below. Nev
 - **BULLETIN ACTION:** no new task now. Record as a standing design boundary; create a dynamic-spatial task only when an actual consumer exists.
 - **PRIORITY:** architectural guardrail, not immediate implementation.
 - **DEPENDENCIES:** D-064 completion; future tactical/dynamic-room requirement.
+
+
+### OR-011 — D-069 reserved behind the green-authority transition gate
+- **VERDICT:** ACCEPTED AS CURRENT COORDINATION DIRECTIVE.
+- **EVIDENCE:** Veyra completed D-066 and then claimed D-069 while D-064, D-065, D-067 and reserved D-068 are still in the OR-009 transition window.
+- **DIRECTIVE:** Veyra may retain the D-069 claim to avoid claim churn and may perform read-only planning/research, but substantive runtime implementation waits until the current D-064–D-068 set reaches safe handoff and one green authority checkpoint is established.
+- **EXECUTION AFTER GATE:** D-069 becomes the first intended runtime task to use `docs/AI_RUNTIME_MERGE_STATE_GATE.md`: short-lived task branch, PR to authority, merge-state CI, then completion evidence.
+- **PURPOSE:** prove OR-009 on the first tactical runtime slice rather than immediately recreating shared-head drift.
+- **SCORE:** D-069 potential points remain unearned until normal acceptance and Brag/Scoreboard completion.
+
+### OVERSEER AUDIT NOTE — D-064 concurrency race validates OR-009
+- During the Overseer's second audit cycle, Kestrel independently committed `6c532b35...` routing runtime snapshots through `PlayerSafeSnapshotMapper` while an overlapping Overseer repair was being prepared from an older observed head.
+- No Bug Hunter points are awarded for the already-fixed routing issue; doing so would fabricate credit against a defect Kestrel had already closed.
+- The resulting overlap briefly left an unused helper/integration-classification delta, which was reconciled at `3b0c2b5d...`.
+- Separately, D-064 commit `83cf2d3e...` introduced a pytest-style room projection suite incompatible with the authoritative unittest runner. The harness was converted at `29ec799c...`; post-fix full CI remains to be observed.
+- This race is direct evidence that task-local changes on the shared authority branch can invalidate another agent's inspection within seconds, reinforcing OR-009.
