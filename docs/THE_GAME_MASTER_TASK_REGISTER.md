@@ -1354,12 +1354,16 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
 
 ### TASK D-065 — Implement Tamsin durable-memory reactive proof
-- STATUS: `IN_PROGRESS / CLAIMED BY VEYR / VERIFICATION-HANDOFF PHASE`
+- STATUS: `DONE / VERIFIED PRIMARY + D-065-B`
 - PRIORITY: `P0 / RANK 6`
 - DEPENDS_ON: D-062; D-064 recommended before Android presentation changes.
 - PURPOSE: satisfy the missing durable-memory/later-reaction portion of Phase 1 recurring-NPC proof.
 - ACCEPTANCE: one existing interaction creates durable Tamsin state; later authored behavior reacts; save/load and deterministic tests pass; private state stays private.
 - BONUS: `D-065-B` negative projection-leak regression.
+- COMPLETION_HEAD: `e883205559c64d2e82614160bd6548c2c9332808`.
+- EVIDENCE: `docs/evidence/D065_TAMSIN_MEMORY_PROOF_2026-10-04.md`; PR #59 run #341 executed all five Tamsin memory/reaction/privacy tests PASS.
+- RESULT: durable shared-entry memory survives save/load, deterministically unlocks a later authored Tamsin reaction, and remains private in player-safe projection.
+- BONUS: `D-065-B` DONE — negative projection leak regression verified.
 
 ### TASK D-066 — Implement and verify Phase 1 progression proof
 - STATUS: `DONE / VERIFIED BOUNDED PHASE 1 PROOF`
