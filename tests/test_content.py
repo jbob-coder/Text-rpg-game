@@ -128,5 +128,118 @@ class ContentPackTests(unittest.TestCase):
             content_pack_from_mapping(data)
 
 
+    def test_tactical_sections_are_optional_and_empty_by_default(self):
+        pack = content_pack_from_mapping(self.data())
+        self.assertEqual({}, pack.tactical_maps)
+        self.assertEqual({}, pack.combat_actions)
+        self.assertEqual({}, pack.combat_actor_archetypes)
+        self.assertEqual({}, pack.encounters)
+        self.assertFalse(hasattr(pack.state, "tactical"))
+        self.assertFalse(hasattr(pack.state, "combat"))
+
+    def test_minimal_tactical_bundle_loads_without_mutating_game_state(self):
+        data = self.data()
+        data["tactical_maps"] = {
+            "TACTICAL_MAP_TEST": {
+                "map_id": "TACTICAL_MAP_TEST",
+                "version": 1,
+                "width": 2,
+                "height": 2,
+                "z_layers": [0],
+                "default_cell": {
+                    "terrain_id": "TERRAIN_FLOOR",
+                    "movement_cost": 1,
+                    "blocks_movement": False,
+                    "blocks_los": False,
+                    "cover": {},
+                },
+                "overrides": {
+                    "1,0,0": {
+                        "movement_cost": 2,
+                        "cover": {"W": 1},
+                    }
+                },
+                "transitions": {},
+                "deployment_zones": {
+                    "ZONE_PLAYER": ["0,0,0"],
+                },
+                "objective_anchors": {
+                    "OBJECTIVE_TEST": "1,1,0",
+                },
+                "exits": {
+                    "EXIT_TEST": "0,1,0",
+                },
+            }
+        }
+        data["combat_actions"] = {
+            "ACTION_MOVE": {
+                "action_id": "ACTION_MOVE",
+                "category": "move",
+                "cost": 1,
+                "range_min": 0,
+                "range_max": 6,
+                "requires_los": False,
+                "tags": ["movement"],
+            }
+        }
+        data["combat_actor_archetypes"] = {
+            "ARCHETYPE_CONTACT": {
+                "archetype_id": "ARCHETYPE_CONTACT",
+                "action_ids": ["ACTION_MOVE"],
+                "footprint": 1,
+                "tags": ["contact"],
+            }
+        }
+        data["encounters"] = {
+            "ENCOUNTER_TEST": {
+                "encounter_id": "ENCOUNTER_TEST",
+                "map_id": "TACTICAL_MAP_TEST",
+                "location_id": "SERVICE_TUNNEL",
+                "trigger": {},
+                "participants": [
+                    {
+                        "actor_id": "CONTACT_A",
+                        "archetype_id": "ARCHETYPE_CONTACT",
+                        "faction_id": "FACTION_CONTACT",
+                        "action_ids": ["ACTION_MOVE"],
+                        "deployment_zone": "ZONE_PLAYER",
+                        "required": True,
+                    }
+                ],
+                "deployment": {},
+                "objective_set": {},
+                "retreat_policy": {},
+                "ai_profiles": {},
+                "aftermath_profile": {},
+                "time_cost_minutes": 10,
+                "canon_status": "PROPOSED",
+            }
+        }
+
+        before_state = copy.deepcopy(data["initial_state"])
+        pack = content_pack_from_mapping(data)
+
+        tactical_map = pack.tactical_maps["TACTICAL_MAP_TEST"]
+        self.assertEqual(2, tactical_map.width)
+        self.assertEqual(2, tactical_map.cell_at(
+            __import__("textrpg").TacticalCoord(1, 0, 0)
+        ).movement_cost)
+        self.assertEqual(before_state, pack.state.snapshot())
+        self.assertEqual("ACTION_MOVE", pack.combat_actions["ACTION_MOVE"]["action_id"])
+
+    def test_tactical_section_roots_must_be_objects(self):
+        for field_name in (
+            "tactical_maps",
+            "combat_actions",
+            "combat_actor_archetypes",
+            "encounters",
+        ):
+            with self.subTest(field_name=field_name):
+                data = self.data()
+                data[field_name] = []
+                with self.assertRaisesRegex(RuleError, field_name):
+                    content_pack_from_mapping(data)
+
+
 if __name__ == "__main__":
     unittest.main()
