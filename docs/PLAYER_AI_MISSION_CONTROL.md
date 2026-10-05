@@ -3,7 +3,7 @@
 **Status:** ACTIVE / FAST ENTRY SURFACE  
 **Repository:** `jbob-coder/Text-rpg-game`  
 **Authority branch:** `docs/master-game-development-program`  
-**Snapshot HEAD:** `0ae5dae4df05cec19109ef4f9fad1674cbe2f4d3` — re-fetch before acting.
+**Snapshot HEAD:** `bd3aebdf10858a95c67db8651df433170b96c566` — historical immediately after HEAD moves; re-fetch before acting.
 
 Mission Control is the shortest safe path into current work. It does not replace the Bulletin Board, Master Task Register, Council, tests, or source truth.
 
@@ -50,6 +50,52 @@ gradle -p android :app:assembleDebug --stacktrace
 For runtime work after OR-009 transition, use the existing `.github/workflows/android-pixel-client.yml` pull-request workflow. It is the merge-state integration authority; do not invent a second CI path.
 
 If an environment cannot run a gate, record it as **UNEXECUTED** rather than claiming pass/fail by inference.
+
+## AXIOM — large code-problem escalation
+
+**Project Overseer:** AXIOM  
+**Intake:** `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md`  
+**Evidence packets:** `docs/overseer/code_problems/`
+
+Use AXIOM when the defect is bigger than ordinary local debugging: P0 blocking, cross-system, architectural, merge-state sensitive, save/privacy/determinism threatening, repeatedly red, or likely to require a workaround.
+
+Player-AI submission minimum:
+1. current task + exact observed HEAD;
+2. failure and expected behavior;
+3. smallest reproduction available;
+4. exact executed test/workflow/log evidence;
+5. affected files/APIs/domains;
+6. what downstream work is blocked;
+7. temporary patch status;
+8. causal hypothesis clearly marked as hypothesis;
+9. unverified facts.
+
+AXIOM assigns a Problem Pressure Score and disposition.
+
+For accepted CRITICAL-or-higher problems, AXIOM either:
+- links the CPR to the existing causal-owner Bulletin task; or
+- creates a Master Task Register + Bulletin task when no owner exists.
+
+Do not create duplicate tasks for the same causal incident.
+
+Reporting or attempting a difficult defect never reduces score.
+
+## Next-player learning handoff
+
+Before a primary task is fully handed off, append a compact Next Player Learning Record to:
+`docs/player_guide/PLAYER_LEARNING_LEDGER.md`.
+
+The required record is not a task summary. It is a shortcut for the next Player-AI:
+- smallest Read First set;
+- proven facts not to rediscover;
+- real behavior owner;
+- trap/false assumption;
+- exact validation recipe;
+- safe extension point;
+- unresolved boundary;
+- direct next-player shortcut.
+
+D-080 owns the first-wave backfill for Nodus, Veyra, Kestrel and Veyr.
 
 ## Critical defect quick triage
 
@@ -387,3 +433,40 @@ If a mission card becomes stale:
 - update the card from live evidence;
 - do not force the Player-AI to rediscover known completed work;
 - do not mark work DONE without proof.
+
+
+---
+
+## Open program-infrastructure mission — D-080
+
+**State:** READY  
+**Purpose:** build the first-wave Player-AI repository learning trail.
+
+### Objective
+Backfill at least one evidence-backed Learning Ledger record from completed work by:
+- Nodus;
+- Veyra;
+- Kestrel;
+- Veyr.
+
+Then validate that a new Player-AI can answer:
+- where is the authority?
+- where is the implementation owner?
+- how is it validated?
+- what should not be rediscovered?
+- what is still blocked?
+
+without rereading the entire repository.
+
+### Preferred claimant
+Nodus or the Fifth Player-AI / Verification class while Kestrel remains focused on D-064. Any available Player-AI may claim under normal one-primary rules.
+
+### Bonus
+D-080-B: machine-readable task/domain -> authority -> implementation owner -> validation/evidence map plus consistency check.
+
+### Exit gate
+- four first-wave records exist;
+- all claims are evidence-backed;
+- AGENTS/Mission Control/player guide cross-link correctly;
+- no duplicate authority was created;
+- fast-path navigation audit passes.
