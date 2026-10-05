@@ -2,10 +2,12 @@ import unittest
 
 from textrpg import GameState, RuleError
 from textrpg.social import (
+    add_memory,
     adjust_relationship,
     eligible_leak_targets,
     execute_leak_event,
     npc_learn,
+    npc_remembers,
     relationship_meets,
     set_goal,
     share_knowledge,
@@ -20,6 +22,77 @@ class SocialTests(unittest.TestCase):
         npc_learn(state, "NPC_A", "KNOW_SECRET", source="PLAYER", secrecy=5)
         self.assertIn("KNOW_SECRET", state.npcs["NPC_A"]["knowledge"])
         self.assertNotIn("KNOW_SECRET", state.knowledge)
+
+    def test_memory_query_is_read_only_and_duplicate_ids_are_rejected(self):
+        state = GameState(seed="s", scene_id="A")
+        add_memory(
+            state,
+            "NPC_A",
+            "MEM_SHARED_SECRET",
+            importance=4,
+            tags=["trust", "disclosure"],
+            data={"subject": "GATE_TWELVE"},
+        )
+        before_npcs = {
+            npc_id: {
+                key: (
+                    [dict(item) for item in value]
+                    if key == "memories"
+                    else dict(value)
+                    if isinstance(value, dict)
+                    else value
+                )
+                for key, value in record.items()
+            }
+            for npc_id, record in state.npcs.items()
+        }
+        before_relationships = {
+            npc_id: dict(values)
+            for npc_id, values in state.relationships.items()
+        }
+
+        self.assertTrue(
+            npc_remembers(
+                state,
+                "NPC_A",
+                "MEM_SHARED_SECRET",
+                tags=["trust"],
+            )
+        )
+        self.assertFalse(
+            npc_remembers(
+                state,
+                "NPC_A",
+                "MEM_UNKNOWN",
+            )
+        )
+        self.assertFalse(
+            npc_remembers(
+                state,
+                "NPC_MISSING",
+                "MEM_SHARED_SECRET",
+            )
+        )
+        self.assertEqual(before_npcs, state.npcs)
+        self.assertEqual(before_relationships, state.relationships)
+
+        with self.assertRaises(RuleError):
+            add_memory(state, "NPC_A", "MEM_SHARED_SECRET")
+
+        self.assertEqual(1, len(state.npcs["NPC_A"]["memories"]))
+
+    def test_memory_query_rejects_corrupt_memory_container_without_mutation(self):
+        state = GameState(
+            seed="s",
+            scene_id="A",
+            npcs={"NPC_A": {"memories": "corrupt"}},
+        )
+        before = dict(state.npcs["NPC_A"])
+
+        with self.assertRaises(RuleError):
+            npc_remembers(state, "NPC_A", "MEM_X")
+
+        self.assertEqual(before, state.npcs["NPC_A"])
 
     def test_share_creates_recipient_memory(self):
         state = GameState(seed="s", scene_id="A")
