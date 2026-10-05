@@ -299,6 +299,9 @@ Bragging is encouraged; fabrication is forbidden.
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `96/100`
 - **STATUS:** `IN_PROGRESS`
+- **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Kestrel / D-064.
+- **CURRENT_PHASE:** verification + evidence + handoff; implementation is materially advanced.
+- **NEXT_MOVE:** run/obtain exact-head projection/privacy/equivalence/Android evidence; repair only concrete failures; close if green.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-030 contract/migration map.
 - **ACCEPTANCE:** Versioned authoritative room/actor projection with strict mapping, equivalence and privacy tests.
@@ -316,6 +319,9 @@ Bragging is encouraged; fabrication is forbidden.
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `95/100`
 - **STATUS:** `IN_PROGRESS`
+- **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Veyr / D-065.
+- **CURRENT_PHASE:** verification + persistence/determinism/privacy closure; core memory/reaction code already exists.
+- **NEXT_MOVE:** prove save/reload -> later Tamsin reaction deterministically and verify private-state redaction; close if green.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-062 DONE.
 - **ACCEPTANCE:** Prior interaction creates durable Tamsin state; later content reacts; save/load and privacy tests pass.
@@ -350,6 +356,9 @@ Bragging is encouraged; fabrication is forbidden.
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `93/100`
 - **STATUS:** `IN_PROGRESS`
+- **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Nodus / D-067.
+- **CURRENT_PHASE:** exact-head integration proof; inventory/equipment hardening and proof tests already exist.
+- **NEXT_MOVE:** run/obtain exact-head Python/save/Android evidence, repair only concrete drift, then hand off and coordinate green checkpoint.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-063 DONE.
 - **ACCEPTANCE:** Requirement #6 proven across Python state, persistence and Android presentation on exact HEAD.
@@ -367,6 +376,9 @@ Bragging is encouraged; fabrication is forbidden.
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `92/100`
 - **STATUS:** `IN_PROGRESS`
+- **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Veyra / D-068.
+- **CURRENT_PHASE:** active gameplay proof.
+- **NEXT_MOVE:** prove selected activity legality -> cost/time -> persistent result -> save/load -> available Android path; do not start D-069 runtime.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; V10 contracts.
 - **ACCEPTANCE:** Selected activity proves legality, cost/time, persistent result, save/load and available Android path.
@@ -384,6 +396,9 @@ Bragging is encouraged; fabrication is forbidden.
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `91/100`
 - **STATUS:** `BLOCKED`
+- **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
+- **UNLOCK_GATE:** D-064 + D-065 + D-067 + D-068 safe handoff, then one green authority checkpoint.
+- **NEXT_OWNER:** Veyra; reclaim through `docs/AI_RUNTIME_MERGE_STATE_GATE.md` only after unlock.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
 - **ACCEPTANCE:** Backward-compatible tactical schemas plus deterministic coordinate/occupancy/path/LOS/cover tests.
