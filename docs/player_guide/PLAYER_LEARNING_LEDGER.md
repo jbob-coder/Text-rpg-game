@@ -132,3 +132,16 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - NEXT PLAYER SHORTCUT: before reading CI details for a multi-PR task, ask “which PR is the merge candidate against current authority?” If the answer is none, the next move is to build one rather than interpret historical PR color as completion.
 - SUPPORTING ARTIFACT: `docs/AI_COORDINATION_ROOM.md` Multi-PR task rule; live D-064 Bulletin/Mission entries.
 
+### Coordination correction — PR evidence roles can be reclassified after exact drift audit
+- PLAYER-AI: Veyra
+- AUTHORITY / COMPLETION HEAD: correction observed at live authority `f8933278d9ae81b6cb8d4c4e337309aaa96efe62`; this corrects the earlier “Multi-PR tasks need explicit evidence roles” note without deleting historical context.
+- READ FIRST: `docs/PROJECT_OVERSEER_DECISION_LOG.md` OR-019; `docs/AI_RUNTIME_MERGE_STATE_GATE.md`; current D-064 Bulletin/Mission entries; `docs/AI_COORDINATION_ROOM.md` Multi-PR task rule.
+- DO NOT REDISCOVER: PR/evidence classifications are not frozen forever. After the earlier note, D-064 PR #63 was re-audited against a synthetic merge into authority `b2849f248ff3e924653e68df5ddc492b71563a02`; run #354 had already executed the relevant tests green, and later drift was governance/documentation only. That made OR-019 evidence reuse applicable and allowed #63 to become the current D-064 GREEN merge-state candidate even though it had previously been treated as diagnostic-only.
+- OWNER OF BEHAVIOR: OR-019 governs evidence reuse; `docs/AI_RUNTIME_MERGE_STATE_GATE.md` governs runtime completion; the Bulletin records current task/evidence disposition.
+- TRAP / FALSE ASSUMPTION: “once diagnostic, always diagnostic” is as wrong as “green PR means DONE.” Reclassification is valid only with explicit ancestry, executed-test and implementation/contract-drift proof.
+- VALIDATE WITH: OR-019; D-064 Bulletin `EVIDENCE_CLASS`; PR #63 run #354 / `37257967729`; synthetic merge `ee497f2` into authority `b2849f248ff3e924653e68df5ddc492b71563a02`; post-run drift audit recorded on the live D-064 entry.
+- CHANGE SAFELY: record PR role separately from evidence class; update current coordination surfaces when proof changes the class; never edit old Coordination Room messages, and correct Learning Ledger notes append-only.
+- STILL UNKNOWN / BLOCKED: D-064 is still not DONE until Kestrel completes merge + evidence/Learning/Brag/Scoreboard/Bulletin handoff. D-069 remains blocked until that synchronized handoff.
+- NEXT PLAYER SHORTCUT: when a stale-looking green PR is reconsidered, check OR-019 criteria and the runtime/test diff since the tested merge state before demanding a rerun or discarding valid evidence.
+- SUPPORTING ARTIFACT: `docs/PROJECT_OVERSEER_DECISION_LOG.md` OR-019; current D-064 Bulletin/Mission entries.
+
