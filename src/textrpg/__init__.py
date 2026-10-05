@@ -1,3 +1,26 @@
+from .combat_grid import (
+    TacticalOccupant,
+    cardinal_neighbors,
+    cover_rating,
+    find_path,
+    has_line_of_sight,
+    incoming_cover_edge,
+    occupancy_by_coord,
+    supercover_line,
+)
+from .combat_schema import (
+    COVER_NONE,
+    COVER_PARTIAL,
+    COVER_STRONG,
+    TacticalAnchor,
+    TacticalCell,
+    TacticalCoord,
+    TacticalMap,
+    TacticalTransition,
+    TacticalZone,
+    parse_tactical_map_definition,
+    parse_tactical_maps,
+)
 from .content import LoadedContentPack, content_pack_from_mapping, load_content_pack
 from .core import GameState, RuleError, RulesEngine
 from .equipment import active_set_bonuses, equip_item, equipment_modifiers, set_counts
@@ -69,9 +92,14 @@ from .schema import DERIVED_FORMULAS, DERIVED_STAT_SPECS
 from .validation import (
     assert_valid_content_pack,
     assert_valid_scenes,
+    validate_combat_actions,
+    validate_combat_actor_archetypes,
     validate_content_pack,
+    validate_encounters,
     validate_registries,
     validate_scenes,
+    validate_tactical_content,
+    validate_tactical_maps,
 )
 from .visuals import (
     assert_valid_character_visuals,
@@ -81,6 +109,30 @@ from .visuals import (
 
 __all__ = [
     "ATTRIBUTE_SPECS",
+    "TacticalOccupant",
+    "cardinal_neighbors",
+    "cover_rating",
+    "find_path",
+    "has_line_of_sight",
+    "incoming_cover_edge",
+    "occupancy_by_coord",
+    "supercover_line",
+    "COVER_NONE",
+    "COVER_PARTIAL",
+    "COVER_STRONG",
+    "TacticalAnchor",
+    "TacticalCell",
+    "TacticalCoord",
+    "TacticalMap",
+    "TacticalTransition",
+    "TacticalZone",
+    "parse_tactical_map_definition",
+    "parse_tactical_maps",
+    "validate_combat_actions",
+    "validate_combat_actor_archetypes",
+    "validate_encounters",
+    "validate_tactical_content",
+    "validate_tactical_maps",
     "CURRENT_SCHEMA_VERSION",
     "DERIVED_FORMULAS",
     "DERIVED_STAT_SPECS",
