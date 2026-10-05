@@ -1353,11 +1353,23 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-063-B` not separately completed; the primary packet contains only the compatibility mapping required for implementation.
 
 ### TASK D-064 — Implement player-safe room/actor projection
-- STATUS: `IN_PROGRESS / CLAIMED BY KESTREL / VERIFICATION-HANDOFF PHASE`
+- STATUS: `IN_PROGRESS / CLAIMED BY KESTREL / TDD-RED -> MINIMAL GREEN -> HANDOFF`
 - PRIORITY: `P0 / RANK 5`
 - DEPENDS_ON: D-060; D-030 contract/migration map.
 - PURPOSE: implement D-030's bounded room/actor projection migration while preserving hidden-state/privacy and opening-story equivalence.
-- ACCEPTANCE: authoritative versioned room/actor projection, strict Python/Kotlin mapping, tested UI consumption and safe retirement boundary for old heuristics.
+- ACCEPTANCE: authoritative versioned room/actor projection, strict Python/Kotlin mapping, tested Android/UI consumption, opening equivalence across Platform Nine / Relay Workbench / Service Tunnel, unknown-family/key rejection, safe retirement of scene/location actor-presence heuristics, and current merge-state green evidence.
+- CURRENT_EVIDENCE:
+  - PR #63 run #354 / `37257967729`: **DIAGNOSTIC_GREEN** — Python PASS, Android unit/build/package PASS, emulator smoke/screenshots PASS. Useful integration evidence, but not the final current-authority minimal repair gate.
+  - PR #68 run #355 / `37258411701`: **INTENTIONAL_RED** — Python PASS and emulator smoke PASS; Android unit compilation fails exactly because `PixelStoryActorCatalogTest.kt` passes `List<GameRoomActor>` while production still expects `placements(locationId, sceneId)`.
+- CURRENT_NEXT_MOVE:
+  1. complete PR #68 RED equivalence cases for Relay Workbench `90,14` and Service Tunnel `76,14`;
+  2. build a fresh GREEN branch from live authority;
+  3. change only `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt` plus focused catalog/source-wiring tests;
+  4. reuse `PixelStoryActorPlacementResolver` as the sole coordinate owner;
+  5. require current merge-state CI under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`;
+  6. synchronize evidence, Learning Ledger, Brag/Scoreboard and Bulletin before marking DONE.
+- OVERLAP: Kestrel owns the D-064 runtime/test surface; other Player-AIs should not edit the same files without an explicit bounded request.
+- CPR: none. Existing AXIOM review says this remains D-064-owned API/rebase work unless new evidence proves a broader causal defect.
 - BONUS: `D-064-B` opening-scene actor equivalence/redaction evidence packet.
 
 ### TASK D-065 — Implement Tamsin durable-memory reactive proof
