@@ -1,6 +1,7 @@
 package com.thegame.rpg.ui
 
 import androidx.compose.ui.graphics.Color
+import com.thegame.rpg.engine.GameRoomActor
 
 data class PixelStoryActorPlacement(
     val sprite: PixelSprite,
@@ -12,8 +13,8 @@ data class PixelStoryActorPlacement(
  * Scene story actors from already-planned Batch 001 character assets.
  *
  * These are presentation-only front/pose masters on the shared 32x48 character grid.
- * Selection is driven exclusively by projected location and scene IDs; the catalog never
- * reads raw flags, quest internals, or hidden NPC state.
+ * Presence comes exclusively from the authoritative room projection. This catalog only
+ * resolves player-safe visual families and semantic placement keys into presentation data.
  */
 object PixelStoryActorCatalog {
     const val TAMSIN_TURNAROUND_ID = "NPC_TAMSIN_TURNAROUND"
@@ -167,31 +168,17 @@ object PixelStoryActorCatalog {
 
     val productionActors: List<PixelSprite> = listOf(tamsinFront, woundedCourier)
 
-    fun placements(locationId: String, sceneId: String?): List<PixelStoryActorPlacement> =
-        when (sceneId) {
-            "OPENING_DEPOT_BLACKOUT" ->
-                if (locationId == "PLATFORM_NINE") {
-                    listOf(
-                        PixelStoryActorPlacement(woundedCourier, x = 34, y = 13),
-                        PixelStoryActorPlacement(tamsinFront, x = 62, y = 14),
-                    )
-                } else emptyList()
+    private fun spriteFor(actor: GameRoomActor): PixelSprite? =
+        when (actor.visualFamily) {
+            "NPC_TAMSIN" -> tamsinFront
+            "SUPPORT_WOUNDED_COURIER" -> woundedCourier
+            else -> null
+        }
 
-            "OPENING_DECISION" ->
-                if (locationId == "PLATFORM_NINE") {
-                    listOf(PixelStoryActorPlacement(tamsinFront, x = 62, y = 14))
-                } else emptyList()
-
-            "OPENING_RECOVERY" ->
-                if (locationId == "RELAY_WORKBENCH") {
-                    listOf(PixelStoryActorPlacement(tamsinFront, x = 90, y = 14))
-                } else emptyList()
-
-            "OPENING_TUNNEL" ->
-                if (locationId == "SERVICE_TUNNEL") {
-                    listOf(PixelStoryActorPlacement(tamsinFront, x = 76, y = 14))
-                } else emptyList()
-
-            else -> emptyList()
+    fun placements(actors: List<GameRoomActor>): List<PixelStoryActorPlacement> =
+        actors.mapNotNull { actor ->
+            val sprite = spriteFor(actor) ?: return@mapNotNull null
+            val point = PixelStoryActorPlacementResolver.resolve(actor.placementKey) ?: return@mapNotNull null
+            PixelStoryActorPlacement(sprite = sprite, x = point.x, y = point.y)
         }
 }
