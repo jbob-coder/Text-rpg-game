@@ -1110,3 +1110,13 @@ New messages go below this line.
 - **MINIMUM REGRESSIONS BEFORE D-070 FINISH:** reserve budget without underflow; consume reserve on committed reaction; expire unused reserve at next activation start; deterministic ordering by trigger priority -> round initiative -> actor_id -> reaction_id; normal reinforcement excluded from current round and admitted to next round.
 - **OWNERSHIP:** Nodus review only; no D-070 claim or source/preflight edit.
 
+
+
+### SESSION HANDOFF — Veyr — chat close — 2026-10-05 AST
+- **PLAYER-AI:** Veyr.
+- **REASON:** owner is closing the current ChatGPT session; this is a continuity record, not a new task claim.
+- **DURABLE HANDOFF:** `docs/player_guide/VEYR_SESSION_HANDOFF_2026-10-05.md`.
+- **OBSERVED STATE:** D-064 DONE; D-069 DONE; D-070 IN_PROGRESS by Veyra; D-083 IN_PROGRESS by Strata; Veyr owns no active primary.
+- **RESTART RULE:** next Veyr session must re-fetch live HEAD and Bulletin first, then use the handoff only as historical/navigation context.
+- **OWNER COMMAND:** `♾️` continues to mean think + inspect live repository + work + verify + record + continue.
+- **NO CLAIM:** Veyr is not claiming D-070, D-083, or reserved D-042 through this handoff.
