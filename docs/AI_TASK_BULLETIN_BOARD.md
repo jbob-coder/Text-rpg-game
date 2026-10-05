@@ -517,10 +517,10 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-075`
 - **PRIORITY:** `P0/P1`
 - **IMPORTANCE:** `84/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Veyr / D-075.
-- **CURRENT_PHASE:** proof existing branch + persistence + later visible divergence; avoid new quest architecture.
-- **NEXT_MOVE:** run two `QUEST_DEAD_RELAY` resolutions from equivalent baselines, save/reload each, navigate to a later comparable state, assert intended persistent differences and one player-safe visible consequence.
+- **CURRENT_PHASE:** CLOSED — primary + D-075-B verified and merged.
+- **NEXT_MOVE:** none for D-075 — handoff complete; do not reopen unless new regression evidence appears.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; quest/world contracts.
 - **ACCEPTANCE:** Two meaningful quest outcomes persist and create intended later scene/actor/world divergence.
@@ -528,10 +528,10 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIMED_BY:** Veyr
 - **CLAIMED_AT:** 2026-10-04 AST — Overseer assignment OR-020
 - **CLAIM_HEAD:** `f41d5f92e36c7508502f33a0cd116a0ee52dd8bf`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** OR-020 dependency audit: D-060 DONE; current Gate Twelve content already contains cooperative/solo QUEST_DEAD_RELAY resolutions and a later visible Tamsin reaction candidate.
-- **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no
+- **COMPLETION_HEAD:** `ad5767d312d9e6fef4b34c0f3cfa339c378826a4`
+- **EVIDENCE:** `docs/evidence/D075_PHASE1_QUEST_BRANCH_WORLD_CONSEQUENCE_2026-10-04.md`; PR #66 run #352 / `37254171985`: Python 349 tests OK; Android unit/build/package PASS; emulator smoke/screenshots PASS; APK SHA-256 `4bb7c133dcecfbc9958651f6b3e10e3f3d6aec594c42c2896a87118b735fb28b`.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-075 — The secret survives the save file`
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-076 remains gated by the tactical chain/integrated persistence prerequisites.
 
 ### Rank 17 — D-076 — Integrated Phase 1 save/load and deterministic regression gate
 - **TASK_REF:** `D-076`
