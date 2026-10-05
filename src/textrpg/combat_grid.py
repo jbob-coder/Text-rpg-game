@@ -157,6 +157,12 @@ def find_path(
         return (start,)
 
     def heuristic(coord: TacticalCoord) -> int:
+        # Explicit cross-z transitions may have authored costs unrelated to
+        # x/y displacement, so same-z Manhattan is not guaranteed admissible
+        # when any transition is present. Use deterministic Dijkstra in that
+        # case and retain Manhattan A* only for cardinal-only maps.
+        if tactical_map.transitions:
+            return 0
         if coord.z != goal.z:
             return 0
         return abs(coord.x - goal.x) + abs(coord.y - goal.y)
@@ -376,6 +382,8 @@ def has_line_of_sight(
 
     if tactical_map.cell_at(start) is None or tactical_map.cell_at(end) is None:
         return False
+    if start == end:
+        return True
     try:
         touched = supercover_line(start, end)
         edge_pairs = _ray_edge_pairs(start, end)
