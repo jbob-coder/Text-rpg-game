@@ -61,6 +61,20 @@ LOS queries must apply the same either-side rule in both ray directions, so one 
 
 `cover` remains independent. Partial/strong cover does not block LOS unless the same boundary is explicitly present in `los_blocked_edges`.
 
+### 4.2 Opaque endpoint cells
+
+For LOS between **distinct** tactical cells, cell-level `blocks_los` applies to both endpoints as well as intermediate touched cells.
+
+Therefore:
+- opaque source -> clear destination is blocked;
+- clear source -> opaque destination is blocked;
+- the same geometry produces the same blocked result in reverse;
+- do not exempt the source cell while still checking the destination.
+
+Same-cell LOS is trivially true and does not traverse geometry.
+
+This endpoint rule is separate from directional `los_blocked_edges`, which is evaluated on crossed shared boundaries.
+
 ## 5. Awareness states
 
 Phase 1 enum:
