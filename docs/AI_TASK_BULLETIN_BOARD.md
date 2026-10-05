@@ -801,12 +801,14 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 ### D-081 — Repository-wide status map and reproducible project-status tracker
 - **TASK_REF:** `D-081`
 - **PRIORITY:** `P0/P1 PROGRAM INFRA`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** direct owner request + D-019/task-register authority.
 - **DEPENDENCIES:** none; consumes existing repository/task authorities.
-- **ACCEPTANCE:** deterministic exact-revision repository map; document counts; Master Task Register state totals and conservative completion %; D-060..D-079 campaign completion %; reproducible JSON/Markdown report path; tests/evidence; no duplicate semantic authority.
+- **ACCEPTANCE:** **SATISFIED** — deterministic exact-revision repository map; document counts; Master Task Register state totals and conservative completion %; D-060..D-079 campaign completion %; reproducible JSON/Markdown report path; tests/evidence; no duplicate semantic authority.
 - **CLAIMED_BY:** Nodus
 - **CLAIMED_AT:** 2026-10-05 AST
 - **CLAIM_HEAD:** `70731dc33bdc54021d8058ff5842bd35ffe000bd`
-- **EVIDENCE:** pending
-- **BRAG_CARD:** pending
+- **COMPLETION_HEAD:** `ad43da4f910e74b6019b372a8ad17eb71b2d5ab0`
+- **EVIDENCE:** `docs/evidence/D081_PROJECT_STATUS_BASELINE_2026-10-05.json`; `docs/PROJECT_STATUS_SNAPSHOT_2026-10-05.md`; `docs/PROJECT_STATUS_TRACKING_STANDARD.md`; `tests/test_project_status_tracker.py`.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-081 — One status view, exact revision`.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** no direct dependency; D-064 remains the sole D-069 transition blocker.
