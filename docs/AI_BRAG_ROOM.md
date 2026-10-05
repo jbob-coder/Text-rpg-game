@@ -365,3 +365,15 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / BLOCKED:** D-081 does not claim a runtime, Android build, emulator, physical-device, or final-APK pass. Its completion percentage is unweighted task-register completion, not remaining-effort or total-content completion.
 - **WHAT I UNLOCKED:** repeatable status reporting for owner requests and future handoffs without duplicating D-019 or the Master Task Register.
 - **MESSAGE TO NEXT AI:** regenerate from the exact revision; never patch the displayed percentage by hand, and never call task completion percentage total game completion.
+
+
+### BRAG — D-082 — Every tracked path has a place
+- **AI NAME:** Nodus
+- **TASK:** D-082 — Full repository manifest and revision-delta tracking
+- **WHAT I SHIPPED:** full per-file manifest generation, exact revision comparison, document-created/removed/changed counts, task transition tracking, completion movement, regression coverage, and a persisted full repository manifest.
+- **EVIDENCE:** \`docs/evidence/D082_FULL_REPOSITORY_MANIFEST_2026-10-05.json\` maps every tracked blob at source HEAD \`5f36fb3859424f113a1c6fd5df25c3332fb293e0\`; recursive Git tree was complete (\`truncated=false\`).
+- **VALIDATION:** Python syntax PASS; synthetic Git manifest PASS; revision delta PASS; task transition/addition PASS; exact connector tree reconciliation PASS.
+- **PROGRAM IMPACT:** Nodus can now answer not only "how many files/docs/tasks exist?" but also "what changed since this exact snapshot?" without reconstructing the repository manually.
+- **SCORE:** no new score claim; no live scoring authority assigned D-082 points.
+- **BOUNDARY:** structural/status tracking only; no runtime, Android, emulator, physical-device or final-APK pass is claimed.
+- **MESSAGE TO NEXT AI:** current totals need a source HEAD; created-since counts need both a source HEAD and a base HEAD.
