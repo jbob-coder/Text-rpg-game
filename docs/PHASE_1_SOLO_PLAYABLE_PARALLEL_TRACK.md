@@ -410,3 +410,27 @@ Implementation path:
 - prove the private memory/knowledge/goal containers do not cross the player-safe bridge.
 
 D-065 may become READY after board synchronization. D-062 itself does not satisfy requirement 3 because the memory/reactive runtime proof is not implemented or executed yet. Requirement 4's existing knowledge branch remains current foundation pending final exact-head regression evidence.
+
+## D-063 items/economy migration gate
+
+D-063 is complete as the migration-design dependency for Phase 1 requirement #6.
+
+Selected proof remains the existing Gate Twelve loop:
+- exact five-item starting inventory;
+- authoritative equip / unequip through current slots;
+- effective-stat contribution from equipped gear;
+- `TAKE_DEAD_RELAY` acquisition;
+- `USE_MAINTENANCE_SEAL` gate + consumption;
+- save/load;
+- player-safe Python -> Kotlin inventory/equipment projection;
+- existing Compose equip/unequip controls.
+
+Migration decision:
+- retain save schema v1;
+- retain flat `inventory` and slot-keyed `equipment`;
+- retain current item and slot stable IDs;
+- retain Python as rule owner and existing typed Android DTOs as consumer;
+- harden nested inventory/equipment state validation and current item/effect content validation in D-067;
+- do not require currency, vendors, crafting, durability, encumbrance or item instances.
+
+D-067 may become READY after board synchronization. D-063 does not itself satisfy requirement #6 because no exact-head integrated proof has yet been executed.
