@@ -1728,3 +1728,19 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - COMPLETED_AT: —
 - EVIDENCE: pending.
 - VERIFICATION_BOUNDARY: status tooling/tests/control documentation only; no gameplay/runtime/Android/emulator/device/final-APK pass claimed.
+
+
+### TASK D-083 — Harden fixed Phase 1 campaign denominator in project-status tracker
+- STATUS: `PENDING`
+- PRIORITY: `P1 PROGRAM INFRA / VERIFICATION`
+- PURPOSE: repair the verified D-081/D-082 reporting invariant so Phase 1 D-060..D-079 is always measured against exactly 20 expected task IDs, with missing entries surfaced conservatively as UNKNOWN rather than shrinking the denominator.
+- SOURCE: independent owner-directed tracker verification at authority HEAD `33df333f066a40eeded46090ef80c59971f09763`.
+- DEPENDS_ON: D-081 DONE; D-082 DONE.
+- ACCEPTANCE:
+  - Phase 1 total is fixed at 20 for D-060..D-079;
+  - a missing expected task ID counts as incomplete/UNKNOWN and is identified explicitly;
+  - all 20 present preserves current live Phase 1 output;
+  - focused regression test covers the missing-entry case;
+  - exact-tree/current-task reconciliation remains correct;
+  - evidence and required Learning/Bulletin/Coordination completion records are synchronized.
+- OUT_OF_SCOPE: gameplay/runtime/Android/content changes; reopening D-081/D-082; effort-weighted completion estimates.
