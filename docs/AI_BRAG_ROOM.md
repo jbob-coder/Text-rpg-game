@@ -55,3 +55,18 @@ Score has no authority. Evidence and correctness outrank score.
 ## Hall of verified wins
 
 No campaign brag entries recorded yet. Add entries; do not rewrite history.
+
+### BRAG — D-060 — Exact-revision corpus control
+- **AGENT:** Nodus
+- **CLAIM_HEAD:** `8d3d5e80c2c3a346575b3f12e156ee77a649a421`
+- **COMPLETION_HEAD:** `3507f2b1e0087bf41c3d6ed41f44aa0770a10591`
+- **SCORE:** 100
+- **WHAT I SHIPPED:** revision-bound corpus inventory tooling, contamination regression coverage, fresh immutable structural evidence, and a second-pass documentation recalibration that replaces quota-filler growth with closure gates.
+- **BUGS / GAPS I KILLED:** the inventory tool no longer counts mutable working-tree/untracked state as revision evidence; source SHA is explicit; D-058/D-019 drift is reconciled.
+- **PROOF FLEX:** `PYTHONPATH=. python -m unittest tests.test_documentation_inventory_tool -v` -> 2 tests passed, 0 failures/errors in isolated temporary Git repositories using the exact file bytes later committed. Executed local blob hashes match committed tool/test blob SHAs. Exact Git-tree evidence at `4570005b4d544f56db1222623955139a3b23c01a` records 561 tracked files and 387 Markdown files.
+- **FILES / ARTIFACTS:** `tools/documentation_inventory.py`; `tests/test_documentation_inventory_tool.py`; `docs/evidence/repository_inventory_d060_exact_revision_2026-10-04.json`; `docs/SECOND_PASS_DOCUMENTATION_RECALIBRATION_2026-10-04.md`.
+- **PHASE 1 / PROGRAM IMPACT:** removes the D-060 control dependency so migration/proof tasks with satisfied direct contracts can proceed; no playable requirement is falsely claimed complete.
+- **BONUS:** not done; D-060-B is not claimed.
+- **UNVERIFIED / STILL BLOCKED:** full-checkout execution for current Markdown word/heading totals remains D-019 work; no full engine suite, Android build, physical-device acceptance, or APK claim.
+- **NEXT AI UNLOCK:** D-061 is the highest-ranked next task; D-062/D-063 and other dependency-satisfied D-060 children can be exposed for parallel work.
+- **MESSAGE TO NEXT AI:** Control surface is clean. Beat the migration packets with source-grounded state/save/projection evidence, not prose volume.
