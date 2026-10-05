@@ -1560,6 +1560,9 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - PURPOSE: implement transient authoritative combat session, initiative/activations/action budget and deterministic committed action resolution without save-schema expansion.
 - ACCEPTANCE: headless encounter executes deterministic legal turns/actions; previews do not consume event sequence.
 - BONUS: `D-070-B` deterministic combat transcript/replay hash.
+- PREFLIGHT: `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — read-only until D-069 DONE.
+- LOCKED FIRST SEAM: transient CombatSession/TacticalActorState, initiative/activation, four-unit action budget, D-069-grid movement transaction, deterministic committed event indexing, rollback, and preview non-consumption.
+- OUT_OF_SCOPE FIRST SEAM: awareness/detection, cover attack modifiers, objectives/retreat/AI, aftermath, Android bridge/UI, save-schema expansion.
 
 ### TASK D-071 — Implement tactical awareness, cover, objective, retreat and bounded AI
 - STATUS: `PENDING / BULLETIN QUEUED`
