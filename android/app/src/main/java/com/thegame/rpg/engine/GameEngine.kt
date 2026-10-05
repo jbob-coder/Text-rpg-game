@@ -244,6 +244,11 @@ internal object BridgeSnapshotMapper {
         val room = if (roomPayload.isEmpty()) GameRoomProjection() else {
             val version = integer(roomPayload["projection_version"], "room.projection_version")
             require(version == 1) { "room.projection_version is unsupported" }
+            val roomLocation = text(roomPayload["location_id"], "room.location_id")
+            val snapshotLocation = optionalText(meta["location"]) ?: sceneId
+            require(roomLocation == snapshotLocation) {
+                "room.location_id must match meta.location"
+            }
             val actors = list(roomPayload["actors"], "room.actors").mapIndexed { index, item ->
                 val actor = objectMap(item, "room.actors[$index]")
                 GameRoomActor(
@@ -260,7 +265,15 @@ internal object BridgeSnapshotMapper {
                     actions = textList(actor["actions"], "room.actors[$index].actions"),
                 )
             }
-            GameRoomProjection(version, text(roomPayload["location_id"], "room.location_id"), actors, optionalText(roomPayload["active_speaker_presentation_id"]))
+            val presentationIds = actors.map { it.presentationId }
+            require(presentationIds.size == presentationIds.toSet().size) {
+                "room.actors contains duplicate presentation_id"
+            }
+            val activeSpeaker = optionalText(roomPayload["active_speaker_presentation_id"])
+            require(activeSpeaker == null || activeSpeaker in presentationIds) {
+                "room.active_speaker_presentation_id must reference a projected actor"
+            }
+            GameRoomProjection(version, roomLocation, actors, activeSpeaker)
         }
         val vp=optionalObjectMap(payload["visuals"],"visuals"); val relay=optionalText(vp["relay_state"]); require(relay==null || relay in setOf("intact","opened","damaged","signal_lost")) { "visuals.relay_state is not a supported player-facing state" }; val visuals=GameVisuals(relay)
         return GameSnapshot(
