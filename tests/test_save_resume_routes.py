@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from textrpg import load_content_pack, load_state, save_state
+from textrpg import build_status_view, load_content_pack, load_state, save_state
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -79,6 +79,78 @@ class SaveResumeRouteTests(unittest.TestCase):
             "ENTERED_GATE_TWELVE",
         )
         self.assertEqual(state.scene_id, "POWER_GATE_TWELVE_SIGNAL")
+
+    def test_first_power_practice_is_deterministic_across_save_boundary(self):
+        prefix = [
+            "TAKE_DEAD_RELAY",
+            "USE_MAINTENANCE_SEAL",
+            "KEEP_GATE_TWELVE_SECRET",
+            "LEAVE_DEPOT_ALONE",
+            "CONTINUE_BELOW_GATE_TWELVE",
+            "FOLLOW_TRACE_ECHO",
+        ]
+
+        uninterrupted = load_content_pack(SLICE)
+        for choice_id in prefix:
+            uninterrupted.engine.choose(uninterrupted.state, choice_id)
+        uninterrupted.engine.choose(
+            uninterrupted.state,
+            "PRACTICE_SIGNAL_PULSE_ONE_HOUR",
+        )
+
+        resumed = load_content_pack(SLICE)
+        for choice_id in prefix:
+            resumed.engine.choose(resumed.state, choice_id)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            save_path = Path(temp_dir) / "progression.json"
+            save_state(save_path, resumed.state)
+            resumed.state = load_state(save_path)
+        resumed.engine.choose(
+            resumed.state,
+            "PRACTICE_SIGNAL_PULSE_ONE_HOUR",
+        )
+
+        def progression_fingerprint(pack):
+            ability = pack.state.abilities["ABILITY_TRACE_ECHO"]
+            technique = ability["techniques"]["TECHNIQUE_SIGNAL_PULSE"]
+            status = build_status_view(
+                pack.state,
+                pack.engine,
+                ability_definitions=pack.raw.get("powers", {}),
+                condition_definitions=pack.registries.get("conditions", {}),
+            )
+            ability_view = next(
+                item
+                for item in status["abilities"]
+                if item["id"] == "ABILITY_TRACE_ECHO"
+            )
+            return {
+                "ability_mastery_xp": ability["mastery_xp"],
+                "ability_mastery_stage": ability["mastery_stage"],
+                "technique_mastery_xp": technique["mastery_xp"],
+                "technique_stage": technique["stage"],
+                "stamina": pack.state.player["resources"]["stamina"],
+                "focus": pack.state.player["resources"]["focus"],
+                "time_minutes": pack.state.time_minutes,
+                "quest_stage": pack.state.quests["QUEST_GATE_TWELVE_ECHO"]["stage"],
+                "ability_view": ability_view,
+            }
+
+        expected = progression_fingerprint(uninterrupted)
+        actual = progression_fingerprint(resumed)
+
+        self.assertEqual(expected, actual)
+        self.assertEqual(actual["technique_mastery_xp"], 8.0)
+        self.assertEqual(actual["quest_stage"], "STAGE_FIRST_USE")
+        self.assertEqual(actual["ability_view"]["id"], "ABILITY_TRACE_ECHO")
+        self.assertEqual(
+            [item["technique_id"] for item in actual["ability_view"]["techniques"]],
+            ["TECHNIQUE_SIGNAL_PULSE"],
+        )
+        projected = repr(actual["ability_view"])
+        self.assertNotIn("discovery_requirements", projected)
+        self.assertNotIn("requirements", projected)
+        self.assertNotIn("effects", projected)
 
     def test_first_power_practice_survives_save_resume(self):
         state = self.run_round_trip(
