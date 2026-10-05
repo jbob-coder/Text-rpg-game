@@ -1,0 +1,76 @@
+{
+  "task": "D-083",
+  "player_ai": "Strata",
+  "generated_date": "2026-10-05 AST",
+  "source_head": "caf0eadbbadb96e5b4c04641ac684f7da3f7a780",
+  "source_tree": "aac46fdcd90144232cc1b25f5e9deae62fa650cd",
+  "comparison_base": "5f36fb3859424f113a1c6fd5df25c3332fb293e0",
+  "comparison_base_authority": "D-082 exact full-manifest source revision",
+  "verification": {
+    "initial_independent_recursive_tree_head": "33df333f066a40eeded46090ef80c59971f09763",
+    "initial_independent_recursive_tree_sha": "25a0ad090394add33e48bf1480b9cbeef9eb8378",
+    "initial_recursive_tree_truncated": false,
+    "initial_tree_entries_including_trees": 681,
+    "initial_tracked_blobs": 623,
+    "initial_document_like_paths": 453,
+    "current_structural_reconciliation_method": "D-082 exact manifest baseline plus GitHub compare path delta, cross-checked against current Git tree identity",
+    "current_tracked_blobs": 628,
+    "current_document_like_paths": 457,
+    "current_repository_markdown": 443,
+    "current_docs_markdown": 440,
+    "current_structured_docs_under_docs": 15,
+    "current_top_level_file_counts": {
+      ".github/": 2,
+      "android/": 44,
+      "content/": 5,
+      "docs/": 508,
+      "repository_root": 6,
+      "src/": 28,
+      "tests/": 30,
+      "tools/": 5
+    },
+    "current_docs_first_level_file_counts": {
+      "systems/": 134,
+      "assets/": 94,
+      "evidence/": 70,
+      "docs_root": 47,
+      "world/": 46,
+      "android/": 36,
+      "player_guide/": 24,
+      "verification/": 15,
+      "GAME_CONTEXT_LOGS/": 14,
+      "overseer/": 13,
+      "legacy/": 10,
+      "archives/": 5
+    },
+    "task_register_total": 84,
+    "task_register_done_before_D083_close": 59,
+    "task_register_completion_pct_before_D083_close": 70.24,
+    "phase1_done": 10,
+    "phase1_total": 20,
+    "phase1_completion_pct": 50.0,
+    "phase1_state_counts": {
+      "DONE": 10,
+      "IN_PROGRESS": 1,
+      "BLOCKED": 0,
+      "PENDING": 9,
+      "OTHER_UNKNOWN": 0
+    }
+  },
+  "defects_found_and_repaired": [
+    "Phase 1 denominator previously shrank when D-060..D-079 entries were missing; fixed to 20 with missing IDs represented UNKNOWN/incomplete.",
+    "Qualified backticked task statuses such as D-043 DONE plus explanatory prose were parsed UNKNOWN; parser now consumes the backticked status token and ignores trailing qualifier prose.",
+    "Markdown output verification now covers Phase 1 state rendering and CLI JSON/Markdown/manifest outputs."
+  ],
+  "pull_requests": [73, 75],
+  "workflow_evidence": {
+    "pr73_run": 37340769845,
+    "pr73_result": "success",
+    "pr75_run": 37342120373,
+    "pr75_python_engine": "success",
+    "pr75_android_unit_tests_observed": "success",
+    "pr75_full_workflow_at_evidence_write": "in_progress"
+  },
+  "historical_snapshot_policy": "D-081 and D-082 exact-revision snapshots were not edited.",
+  "boundary": "Structural/status tooling verification only. No new gameplay, runtime, Android behavior, emulator, physical-device, or final-APK claim is made by D-083."
+}
