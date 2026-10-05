@@ -210,27 +210,27 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-04 AST`
 
 ### TASK D-021 — Map Android consumers to final UX/domain contracts
-- STATUS: `IN_PROGRESS / CURRENT FIELD-ACTION + NAVIGATION + MEMBER-ASSET CONSUMER AUDITS COMPLETE`
+- STATUS: `IN_PROGRESS / CURRENT 19-FIELD CONSUMER + TEST-CONTRACT AUDIT COMPLETE`
 - PRIORITY: `P0`
 - CURRENT:
   - `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` maps the live Python projection envelope, Kotlin `BridgeSnapshotMapper`, `GameViewModel` action flow, major Compose field consumers and current navigation graph.
-  - `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md` maps all 18 current `GameSnapshot` fields and current engine/ViewModel action paths.
+  - `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md` maps all **19** current `GameSnapshot` fields and current engine/ViewModel action paths, and now includes Veyra's exact consumer/test-contract checkpoint at source revision `e78e67c56b1ba0e1189897fba862b553e32573aa`.
   - `docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md` separates navigation/application/Compose transient state from gameplay authority.
   - `docs/android/PIXEL_MEMBER_ASSET_ID_CONSUMER_AUDIT_2026-10-04.md` closes the current member/asset-ID zero-consumer pass.
+  - D-030's actor/room **implementation migration map is complete** under D-026; D-064 owns runtime implementation/equivalence/redaction proof.
 - CONFIRMED CURRENT TEST GAPS:
   - dedicated QuestSection projection/render test;
-  - direct contentId assertion;
-  - direct canonStatus assertion;
-  - dedicated derived-stat Compose assertion;
-  - fuller identity projection/UI contract;
-  - future actor/room, hierarchical-map, activity, combat and adversary projection tests.
+  - direct `contentId` assertion;
+  - direct `canonStatus` assertion;
+  - dedicated derived-stat Compose assertion (mapper coverage exists);
+  - fuller identity projection/UI contract (current mapper evidence directly covers name/level only in the audited primary test surfaces);
+  - future actor/room, hierarchical-map, activity, combat and adversary projection tests after those projections exist.
 - REMAINING:
-  - D-030 actor/room projection implementation migration map;
-  - future activity/combat/hierarchical-map/adversary projection records;
+  - D-064 runtime actor/room projection implementation plus equivalence/privacy evidence; the migration-map documentation itself is no longer a blocker;
+  - future activity/combat/hierarchical-map/adversary projection implementation contracts and consumers;
   - final destination APK component migration map;
-  - runtime execution evidence when implementation changes begin.
+  - exact-head Android test/build execution when implementation/test changes are made.
 - OUTPUT: screen/component -> player-safe projection -> asset packet -> domain owner -> tests/evidence mapping before broad UI replacement.
-
 ### TASK D-022 — Trace expanded owner directive to repository authorities
 - STATUS: `DONE`
 - PRIORITY: `P0`
@@ -265,7 +265,7 @@ This section supersedes older statements about the top-level product objective w
 - COMPLETED_AT: `2026-10-04 AST`
 
 ### TASK D-026 — Android consumer/projection map
-- STATUS: `IN_PROGRESS / CURRENT-SOURCE CONSUMER DISCOVERY + D-030 MIGRATION MAP COMPLETE`
+- STATUS: `IN_PROGRESS / CURRENT-SOURCE CONSUMER + TEST-CONTRACT + D-030 MIGRATION MAP COMPLETE`
 - PRIORITY: `P0`
 - DOCUMENTS:
   - `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`
@@ -275,9 +275,10 @@ This section supersedes older statements about the top-level product objective w
   - `docs/android/ROOM_ACTOR_PROJECTION_IMPLEMENTATION_MIGRATION_MAP_2026-10-04.md`
 - CURRENT:
   - current player-safe projection/mapper/ViewModel/Compose consumers documented;
+  - the current Kotlin `GameSnapshot` inventory is source-verified at **19 fields**;
   - current navigation/transient-state ownership documented;
   - file-level and member/asset-ID pixel consumers documented;
-  - current test-source gaps documented;
+  - current test-source gaps are now exact-contract-mapped for quests, content/canon metadata, derived stats and identity;
   - D-030 actor/room implementation migration is mapped file-by-file with equivalence, privacy, rollback and save boundaries.
 - REMAINING:
   - future activity projection;
@@ -286,9 +287,8 @@ This section supersedes older statements about the top-level product objective w
   - persistent-adversary intel projection;
   - evolved progression/status projection deltas;
   - final APK destination component migration map;
-  - exact-head runtime/build verification after code changes.
-- NOTE: current-source discovery is no longer the blocker; future target projection architecture is.
-
+  - exact-head runtime/build verification after code/test changes.
+- NOTE: current-source discovery and current test-contract discovery are no longer the blocker; future target projection implementation and later execution evidence are.
 ### TASK D-047 — Establish master documentation record
 - STATUS: `DONE`
 - PRIORITY: `P0`
