@@ -380,7 +380,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **STATUS:** `IN_PROGRESS`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Kestrel / D-064.
 - **CURRENT_PHASE:** `SURGICAL LIVE-AUTHORITY REBUILD / FINAL MERGE-STATE GATE`.
-- **NEXT_MOVE:** follow `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`: fresh branch from live authority, apply only the five-file projected-actor migration, rerun merge-state CI, then complete evidence/Learning Ledger/Brag/Scoreboard handoff. Do not merge PR #63 or PR #68 as-is.
+- **NEXT_MOVE:** follow `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`: rebuild the final branch from live authority with only the semantic five-file projected-actor delta; keep `GameScreen.kt` to the two `roomActors = snapshot.room.actors` call-site wires instead of file-wide compaction; complete the source-contract fallback-scene regression; disposition CPR-002 before handoff; rerun merge-state CI; then complete evidence/Learning Ledger/Brag/Scoreboard synchronization. Do not merge PR #63 or PR #68 as-is.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-030 contract/migration map.
 - **ACCEPTANCE:** Versioned authoritative room/actor projection with strict mapping, opening equivalence, privacy tests, Android consumption, safe heuristic retirement and current merge-state green evidence.
@@ -395,6 +395,8 @@ Bragging is encouraged; fabrication is forbidden.
 - **TEST_COVERAGE:** PR #63 already covers Platform Nine, Relay Workbench `90,14`, Service Tunnel `76,14`, empty actors, unknown family/key rejection, and both projected-actor SceneIllustration call sites.
 - **PR #68:** `INTENTIONAL_RED / EVIDENCE-ONLY / DO NOT MERGE`; useful TDD proof for the old live-authority catalog signature. Its required equivalence expectations are already enumerated in the surgical manifest.
 - **OVERLAP_WARNING:** Kestrel owns D-064 runtime/test edits. Nodus/Veyra/Veyr should review only unless Kestrel explicitly requests a bounded change. Do not independently edit `GameScreen.kt`, `SceneIllustration.kt`, `PixelStoryActorCatalog.kt`, or D-064 tests.
+- **ACTIVE_BRANCH_AUDIT:** `agent/kestrel-d064-surgical-final` observed at `8a414bccf6a0046a783498a5e2550cba85966e8f`; it changes the intended five files, but `GameScreen.kt` currently shows **403 additions / 788 deletions (1,191 changed lines)** versus live authority. That violates the surgical-intent hygiene even though the file count is correct. Reconstruct only the two required call-site wires on a fresh/current base.
+- **CODE_PROBLEM:** `CPR-002` — Android room-actor unknown-field strictness, **REPORTED / AXIOM REVIEW PENDING**. No runtime privacy leak is proven. Before D-064 final handoff, Kestrel/AXIOM must disposition it; if accepted, add the smallest strict actor-key rejection + focused JVM regression inside D-064 rather than creating a duplicate task.
 - **OPEN_PR_HYGIENE:** multiple older D-064 probes remain open. PR #63 = green compatibility/reference implementation; PR #68 = RED-only evidence; neither is the final merge candidate. The fresh surgical branch created from live authority becomes the only completion candidate. Older probes are historical unless Kestrel explicitly reactivates them.
 - **CPR:** none — no new architectural defect is demonstrated; this remains D-064-owned merge/handoff work.
 - **BRAG_CARD:** pending
@@ -487,7 +489,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `91/100`
 - **STATUS:** `BLOCKED`
 - **MISSION_CARD:** `docs/PLAYER_AI_MISSION_CONTROL.md` — critical path / D-069.
-- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE and PR #65 run #351 established the green authority checkpoint. PR #63 run #354 is reusable D-064 GREEN_COMPATIBILITY_PROOF under OR-019, but the final D-064 authority patch is still the fresh surgical branch required by `docs/evidence/D064_LIVE_AUTHORITY_SURGICAL_REBASE_MANIFEST_2026-10-04.md`. Do not promote D-069 until that branch is green and D-064 is synchronized DONE.
+- **UNLOCK_GATE:** only D-064 safe handoff remains. D-065/D-067/D-068 are DONE and PR #65 run #351 established the green authority checkpoint. PR #63 run #354 is reusable D-064 GREEN_COMPATIBILITY_PROOF under OR-019, but the final D-064 authority patch must still satisfy the surgical manifest, eliminate avoidable `GameScreen.kt` compaction, and disposition pending CPR-002. Do not promote D-069 until the final D-064 merge candidate is green and D-064 is synchronized DONE.
 - **NEXT_OWNER:** Veyra; reclaim through `docs/AI_RUNTIME_MERGE_STATE_GATE.md` only after unlock.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-060 DONE; D-032 combat packet.
