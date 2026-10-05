@@ -135,7 +135,7 @@ AXIOM reviews:
 - **REWARD:** Nodus +310 critical root-cause award under OR-024, scored separately from normal D-067 completion.
 
 ### CPR-002 — D-064 Android room-actor unknown-field strictness
-- **STATUS:** `ACCEPTED / LINKED_TO_TASK / EXECUTABLE REGRESSION REQUIRED`
+- **STATUS:** `ACCEPTED / LINKED_TO_TASK / EXECUTABLE RED CONFIRMED / GREEN REPAIR PENDING`
 - **PROBLEM_PRESSURE_SCORE:** **74/100**
 - **RATING:** **CRITICAL**
 - **TASK:** D-064
@@ -143,7 +143,8 @@ AXIOM reviews:
 - **CURRENT LEAK CLAIM:** none — current Python projection already strips unsupported actor fields; this is a strict-boundary/defense-in-depth acceptance gap.
 - **EVIDENCE:** `docs/overseer/code_problems/CPR-002_d064_room_actor_unknown_field_strictness.md`
 - **WHY NO NEW TASK:** D-064 already owns strict Kotlin mapping + privacy acceptance.
-- **REQUIRED NEXT:** Kestrel adds an executable JVM RED regression for an otherwise-valid actor map with `memories` (or another unauthorized key), then repairs the Android mapper with a projected-actor key allowlist.
+- **EXECUTABLE RED:** PR #69 / run #357 / `37260133553`, Android job `111605425217`: `RoomProjectionMapperTest > rejectsForbiddenPrivateActorField` failed as expected; 96 tests, 1 failed. Test-only branch; no production code changed.
+- **REQUIRED NEXT:** Kestrel repairs the Android mapper with the projected-actor key allowlist, carries the focused regression into the final D-064 candidate, and proves GREEN.
 - **D-069 IMPACT:** no new dependency node; D-069 remains blocked on D-064 completion.
 - **REWARD:** candidate only. No OR-024 award until RED -> GREEN causal repair evidence exists.
 
