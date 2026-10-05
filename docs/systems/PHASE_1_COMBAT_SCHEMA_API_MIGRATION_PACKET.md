@@ -173,10 +173,33 @@ Validate:
 - bounds;
 - positive movement cost;
 - edge cover values;
+- `los_blocked_edges` cardinal values;
 - blockers;
 - unique anchors;
 - valid transitions;
 - valid exits.
+
+### 6.1 Canonical cell geometry fields
+
+The resolved/default/override cell contract must support these independent geometry properties:
+
+- `blocks_movement`: cell cannot be traversed/ended on;
+- `blocks_los`: the cell itself is opaque;
+- `los_blocked_edges`: zero or more opaque N/E/S/W shared boundaries;
+- `cover`: directional N/E/S/W cover ratings 0/1/2.
+
+`los_blocked_edges` is the canonical authored/API name for Phase 1 edge opacity.
+
+Authoring semantics:
+- `default_cell` may provide a default `los_blocked_edges` value;
+- sparse overrides may replace/override that cell's directional edge set;
+- strict validation rejects non-cardinal names and malformed values;
+- the runtime canonical cell stores the normalized cardinal-order set/tuple;
+- a boundary is opaque if either adjacent cell declares the corresponding edge/opposite edge;
+- authoring both sides is allowed but not required;
+- cover and LOS opacity remain independent.
+
+This is an additive Phase 1 schema clarification. Existing content packs with no tactical sections remain unchanged.
 
 ## 7. Encounter schema
 
