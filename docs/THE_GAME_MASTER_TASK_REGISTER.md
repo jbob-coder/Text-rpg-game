@@ -1601,47 +1601,26 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 
 
 ### TASK D-080 — Build the first-wave Player-AI repository learning trail
-- STATUS: `READY / PROGRAM INFRASTRUCTURE / BULLETIN OPEN`
+- STATUS: `DONE / VERIFIED PRIMARY / LEARNING HANDOFF COMPLETE`
 - PRIORITY: `P0/P1 PROGRAM INFRA`
 - IMPORTANCE: `88/100`
 - PURPOSE: turn first-wave task evidence into a compact learning/navigation system so later Player-AIs can join THE GAME without repeating repository-wide archaeology.
-- SOURCE_OF_WORK:
-  - owner directive establishing first-player responsibility to teach later Player-AIs;
-  - `docs/player_guide/README.md`;
+- RESULT:
+  - four evidence-backed Learning Ledger records now cover completed work by Nodus (D-067), Veyra (D-068), Kestrel (Parallel P2 / D-029 slice) and Veyr (D-075);
+  - every record identifies the smallest Read First set, proven facts, implementation owner, trap, validation path, safe extension point, unresolved boundary and direct shortcut;
+  - `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md` validates four representative navigation questions without a full master-corpus reread;
+  - all 15 referenced task-local source/test/evidence paths resolved at acceptance HEAD;
+  - `AGENTS.md`, Mission Control and `docs/player_guide/README.md` already enforce/link the Next Player Learning Record completion rule.
+- CLAIMED_BY: Veyr
+- CLAIMED_AT: `2026-10-04T23:04:00-04:00`
+- CLAIM_HEAD: `b2849f248ff3e924653e68df5ddc492b71563a02`
+- COMPLETION_HEAD: `9526fcbead1a37f4d1b0faaf8e3500e539efa691`
+- COMPLETED_AT: `2026-10-04T23:04:00-04:00` (acceptance artifacts completed in the same interactive session; exact later bookkeeping commits are not used as proof HEAD).
+- EVIDENCE:
   - `docs/player_guide/PLAYER_LEARNING_LEDGER.md`;
-  - `docs/overseer/README.md`.
-- DEPENDS_ON: none; use only committed/evidence-backed completed work.
-- PREFERRED_CLAIMANTS: Nodus or the Fifth Player-AI / Verification class while Kestrel remains focused on D-064. Any available Player-AI may claim under normal one-primary rules.
-- REQUIRED BACKFILL:
-  - at least one evidence-backed learning record from a completed Nodus work area;
-  - at least one from Veyra;
-  - at least one from Kestrel;
-  - at least one from Veyr.
-- EACH RECORD MUST IDENTIFY:
-  - smallest Read First set;
-  - facts later players must not rediscover;
-  - actual implementation/state/API/contract owner;
-  - one trap or false assumption;
-  - exact validation recipe/evidence;
-  - safe extension point;
-  - unresolved boundary;
-  - one next-player shortcut.
-- ACCEPTANCE:
-  - four first-wave records exist and cite committed evidence/source;
-  - `AGENTS.md`, Mission Control and the player guide cross-link the learning system;
-  - no record invents authority or duplicates a master document;
-  - a dry navigation audit can resolve at least four representative questions (where is authority? where is implementation? how is it tested? what is still blocked?) using the fast path instead of repository-wide rereading;
-  - future primary-task completion explicitly requires a Next Player Learning Record.
-- BONUS: `D-080-B` — machine-readable task/domain -> authority -> implementation owner -> validation/evidence map with a regression/consistency check.
-- OUT_OF_SCOPE:
-  - rewriting all master documentation;
-  - summarizing the complete game lore;
-  - copying source code into documentation;
-  - replacing domain authorities;
-  - changing gameplay merely to simplify documentation.
-- EVIDENCE: pending.
-- CLAIMED_BY: —
-- CLAIMED_AT: —
-- CLAIM_HEAD: —
-- COMPLETION_HEAD: —
-- BRAG_CARD: pending.
+  - `docs/player_guide/FIRST_WAVE_FAST_PATH_AUDIT_2026-10-04.md`;
+  - exact acceptance audit at `9526fcbead1a37f4d1b0faaf8e3500e539efa691`: 15/15 linked paths resolved; required cross-links/records present.
+- VERIFICATION_BOUNDARY: documentation/navigation audit only; no runtime/build/device test pass is claimed by D-080.
+- BONUS: `D-080-B` NOT COMPLETED — no machine-readable ownership map was added; avoid creating a second authority before a concrete consumer/consistency need exists.
+- OUT_OF_SCOPE: unchanged; D-080 did not alter gameplay, asset canon, runtime architecture or the active D-064/D-069 dependency chain.
+- BRAG_CARD: `docs/AI_BRAG_ROOM.md` — D-080 first-wave learning trail.
