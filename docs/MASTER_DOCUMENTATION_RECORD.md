@@ -166,7 +166,7 @@ Current-head inventory includes:
 - 2 GitHub workflows;
 - 5 Android build/manifest configuration files.
 
-This closes basic current-head source discovery. D-006/D-042 remain open for cross-branch survivor, consumer, deprecation and exact-execution reconciliation.
+This closes basic current-head source discovery. Parallel P5 / Quorix has since reconciled the bounded PR #27/#28/#30/#31 Service Tunnel / Quiet Stair survivor family; D-006/D-042 remain open for broader consumer, asset-lineage, deprecation and exact-execution reconciliation.
 
 ## 2.2 Deep current-head source audit checkpoint
 
@@ -190,7 +190,7 @@ The audit also records:
 - current vertical-slice counts: 19 scenes, 31 choices, 4 quests, 1 character, 1 power, 9 map nodes and 8 edges;
 - current responsibility/disposition for every Python engine module and the principal Android/application surfaces.
 
-This closes the current-head path/source inventory portion of D-042. D-042 remains **IN_PROGRESS** because line-by-line consumer mapping, catalog consumers, asset lineage, cross-branch survivor reconciliation and zero-consumer evidence remain open.
+This closes the current-head path/source inventory portion of D-042. Parallel P5 / Quorix additionally classified PR #27/#28/#30/#31 in `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`. D-042 remains **IN_PROGRESS** because broader consumer mapping, catalog gaps, D-029 asset lineage/visual promotion and zero-consumer evidence remain open.
 
 ## 2.3 Android consumer/projection audit checkpoint
 
@@ -357,7 +357,7 @@ D-026/D-021 current-source consumer discovery is now complete at field/action, n
 | Volume / area | Current documentation state | Runtime/content state | Primary authorities | What is still missing |
 |---|---|---|---|---|
 | **V00 — Program authority / governance** | **ESTABLISHED** | N/A | `MASTER_GAME_DEVELOPMENT_PROGRAM.md`, this record, `THE_GAME_MASTER_TASK_REGISTER.md`, `DOCUMENTATION_CROSS_REFERENCE_MATRIX.md`, `DOCUMENTATION_CORPUS_ARCHITECTURE.md` | Ongoing synchronization; eliminate stale status text when later files overtake older task entries. |
-| **V01 — Existing-state audit** | **IN_PROGRESS / CURRENT-HEAD SOURCE INVENTORY COMPLETE** | Current program HEAD is now inventoried at module/component/content/save/asset/test/build level; historical/feature lines are not yet fully reconciled | `DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`, `LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md`, `EXISTING_STATE_REWORK_DECISION_MATRIX.md`, `IMPLEMENTATION_PR_7_31_RECONCILIATION_2026-10-02.md` | Finish field/consumer mapping, per-catalog consumer audit, cross-branch survivor migration, asset lineage/equivalence, zero-consumer proof, D-044 Class-C extraction is now complete. |
+| **V01 — Existing-state audit** | **IN_PROGRESS / CURRENT-HEAD SOURCE INVENTORY COMPLETE / P5 BOUNDED SURVIVOR SLICE RECONCILED** | Current program HEAD is inventoried at module/component/content/save/asset/test/build level; the PR #27/#28/#30/#31 visual survivor family now has exact dispositions, while broader consumer/asset/deprecation work remains | `DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`, `P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`, `LIVE_REPOSITORY_STATE_AUDIT_2026-10-02.md`, `IMPLEMENTATION_SURVIVOR_MIGRATION_MATRIX_2026-10-04.md` | Finish D-021/D-026 consumer remainder, D-029 asset lineage/equivalence and visual promotion, plus zero-consumer proof before destructive removal. D-020 and D-044 are complete and should not be reopened as setup work. |
 | **V02 — Pixel-art / visual production** | **PARTIAL / CURRENT 24-RASTER CONSUMERS RESOLVED** | Many assets and runtime bindings exist, but canonical production/provenance/QA is not complete | `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`, `PIXEL_ART_PRODUCTION_AND_REUSE_LEDGER.md`, `ASSET_PROVENANCE_REGISTRY.md`, provenance family indexes, `CURRENT_ASSET_CONSUMER_ZERO_CONSUMER_AUDIT_2026-10-04.md` | All 24 current PNGs have consumer paths; none are zero-consumer deletion candidates. Still required: deterministic raster equality execution, visual survivor promotion, Jack/portrait production, canon approval and device QA. |
 | **V03 — Gate Twelve proof region** | **ESTABLISHED FIRST-PASS CONTRACT** | Implementation/acceptance remains incomplete | `GATE_TWELVE_REGION_MASTER_PLAN.md`, map/animation blueprints, asset status matrix, room composition contract | Parent-world proposal still requires owner canon decision; bounded runtime migration and physical-device acceptance remain future work. |
 | **V04 — World development** | **ESTABLISHED STANDARDS / PARTIAL POPULATION** | World is not populated at final scale | `WORLD_DEVELOPMENT_MASTER_INDEX.md`, geography/politics/settlement/routes/ecology/beast/population/balance/loot/NPC standards | Canon macroregions, sovereign entities, settlements, routes, ecosystems, populations, institutions, and large-scale structured records. |
@@ -479,7 +479,7 @@ Execution of the final APK reconstruction remains intentionally gated.
 ### 5.1 P0 — Documentation control and reconciliation
 
 1. **Continue the deep existing-state audit (D-006 / D-042).**  
-   The exact current-head path/responsibility slice is now documented in `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`: 19 Python engine modules, 35 Android main Kotlin files, 2 content packs, exact save fields/schema, 24 runtime PNGs, 51 Android/Python test-source files plus build/workflow surfaces. Remaining work is cross-branch and consumer-level reconciliation rather than basic current-head discovery.
+   The exact current-head path/responsibility slice is documented in `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`. Parallel P5 / Quorix has now classified the bounded PR #27/#28/#30/#31 survivor family. Remaining work is broader consumer mapping, D-029 asset lineage/visual promotion, deprecation proof and exact execution evidence rather than basic current-head discovery.
 
 2. **Finish the reproducible current-head inventory (D-019).**  
    The repository has an inventory tool and historical exact snapshots, but current exact word/record/asset-stage/test-evidence totals still need a complete-checkout execution and persisted result.
@@ -492,8 +492,8 @@ Execution of the final APK reconstruction remains intentionally gated.
 
 ### 5.2 P0 — Asset and implementation truth
 
-5. **Finish visual/application survivor reconciliation (D-020) and exact asset provenance (D-029).**  
-   PR-level reconciliation is complete through D-028, but final migration/reimplementation/supersession decisions still need to be consolidated. Current family-level provenance is strong but incomplete. Deterministic raster equivalence still needs execution and persisted evidence.
+5. **Continue exact asset provenance / visual survivor promotion (D-029); do not reopen completed D-020 setup.**  
+   D-020 branch/provenance reconciliation is complete. Parallel P5 has now assigned explicit dispositions to PR #27/#28/#30/#31. Final visual winner/promotion decisions, source+raster equivalence, provenance and persisted raster verification remain D-029 work.
 
 6. **Finish Android consumer mapping (D-026 / D-021).**  
    The high-level map exists; line-by-line composable/ViewModel/bridge/test mapping is not complete.
