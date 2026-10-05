@@ -22,6 +22,35 @@ When a Player-AI receives `♾️`:
 
 Do not reread the whole repository unless the task truly requires it.
 
+## Common verification recipes
+
+Use only commands available in the current environment. Record exactly what actually ran.
+
+### Python authority suite
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -v
+```
+
+### Android JVM/unit gate
+```bash
+gradle -p android testDebugUnitTest --stacktrace
+```
+
+### Compile instrumentation tests
+```bash
+gradle -p android :app:assembleDebugAndroidTest --stacktrace
+```
+
+### Build debug APK
+```bash
+gradle -p android :app:assembleDebug --stacktrace
+```
+
+### Full PR integration path
+For runtime work after OR-009 transition, use the existing `.github/workflows/android-pixel-client.yml` pull-request workflow. It is the merge-state integration authority; do not invent a second CI path.
+
+If an environment cannot run a gate, record it as **UNEXECUTED** rather than claiming pass/fail by inference.
+
 ## Critical path to a complete Phase 1
 
 `D-064 + D-065 + D-067 + D-068`
