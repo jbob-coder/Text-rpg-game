@@ -400,3 +400,20 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **STRATA:** active auxiliary Player-AI on D-083 repository-status/tooling hardening; Strata owns the tracker/test/tracking-standard surface for that task only.
 - **COLLISION RULE:** Veyra/D-069, Quorix/D-042 and Strata/D-083 are independent active lanes and should not edit one another's claimed surfaces without an explicit bounded review request.
 - **NEXT CRITICAL UNLOCK:** D-070 after D-069 acceptance.
+
+
+### OR-031 — D-069 opaque-edge LOS contract
+- **SOURCE:** CPR-003 — D-069 opaque-edge LOS schema gap.
+- **PROBLEM PRESSURE:** 64/100 CRITICAL.
+- **VERDICT:** ACCEPTED / LINKED TO EXISTING D-069 / NO DUPLICATE TASK.
+- **CAUSE:** approved tactical authorities required opaque directional wall-edge LOS blocking but had no explicit authored/canonical edge-opacity field distinct from cover.
+- **CANONICAL FIELD:** `los_blocked_edges`.
+- **ALLOWED VALUES:** N / E / S / W only.
+- **BOUNDARY RULE:** for cardinal adjacent cells A and B, their shared boundary blocks LOS when A declares the outgoing edge OR B declares the opposite edge.
+- **SYMMETRY:** one-sided authoring must block A->B and B->A; duplicate reciprocal authoring is allowed but not required.
+- **SEPARATION:** `cover` never implies LOS opacity; cell-level `blocks_los` remains independent.
+- **AUTHORING:** default-cell and sparse override records may carry `los_blocked_edges`; strict validation rejects malformed/non-cardinal values; canonical cells normalize deterministic cardinal order.
+- **D-069 ACCEPTANCE DELTA:** parsing/validation, reverse-direction one-sided boundary regression, cover-only non-opacity regression, opaque-cell/supercover regressions remain green.
+- **CURRENT IMPLEMENTATION:** Veyra's first branch already uses `TacticalCell.los_blocked_edges` and checks source edge OR destination opposite edge, matching this ruling in principle.
+- **SCOPE:** no structured edge-object schema, no D-070 state/turn work, no Android/save expansion.
+- **REWARD:** none at ruling time; prevention/root-cause credit may be evaluated after executable D-069 completion evidence.
