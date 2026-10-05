@@ -58,7 +58,7 @@ This is an **unweighted task-register completion metric**.
 
 It is **not** a claim that the total game, world content, art, documentation depth, Android client, final APK, or remaining engineering effort is complete by the same percentage. Tasks differ substantially in size.
 
-A separate Phase 1 metric is reported for D-060 through D-079 using the same DONE/total rule.
+A separate Phase 1 metric always covers the fixed 20 task IDs D-060 through D-079. Its denominator is 20; if any ID is absent from the register, the tracker records that slot as UNKNOWN/incomplete and lists it in `missing_task_ids` rather than shrinking the denominator.
 
 ## 4. Document counts
 

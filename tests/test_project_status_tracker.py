@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import json
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -114,8 +116,13 @@ class ProjectStatusTrackerTests(unittest.TestCase):
         self.assertEqual(1, report["tasks"]["done"])
         self.assertEqual(25.0, report["tasks"]["completion_pct"])
 
-        self.assertEqual(4, report["phase1_campaign"]["total"])
-        self.assertEqual(25.0, report["phase1_campaign"]["completion_pct"])
+        self.assertEqual(20, report["phase1_campaign"]["total"])
+        self.assertEqual(5.0, report["phase1_campaign"]["completion_pct"])
+        self.assertEqual(16, report["phase1_campaign"]["by_state"]["UNKNOWN"])
+        self.assertEqual(
+            [f"D-{number:03d}" for number in range(64, 80)],
+            report["phase1_campaign"]["missing_task_ids"],
+        )
 
     def test_full_manifest_contains_every_tracked_path_and_classification(self) -> None:
         temp, repo = self.make_repo()
@@ -131,6 +138,55 @@ class ProjectStatusTrackerTests(unittest.TestCase):
         self.assertEqual("test", by_path["tests/test_game.py"]["kind"])
         self.assertEqual("source", by_path["src/game.py"]["kind"])
         self.assertEqual("android", by_path["android/App.kt"]["kind"])
+
+    def test_cli_writes_json_markdown_and_manifest_outputs(self) -> None:
+        temp, repo = self.make_repo()
+        self.addCleanup(temp.cleanup)
+        outputs = tempfile.TemporaryDirectory()
+        self.addCleanup(outputs.cleanup)
+        output_dir = Path(outputs.name)
+
+        tracker = Path(__file__).resolve().parents[1] / "tools" / "project_status_tracker.py"
+        json_path = output_dir / "status.json"
+        markdown_path = output_dir / "status.md"
+        manifest_path = output_dir / "manifest.json"
+
+        subprocess.run(
+            [
+                sys.executable,
+                str(tracker),
+                "--root",
+                str(repo),
+                "--revision",
+                "HEAD",
+                "--json-output",
+                str(json_path),
+                "--markdown-output",
+                str(markdown_path),
+                "--manifest-output",
+                str(manifest_path),
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+        source_head = run_git(repo, "rev-parse", "HEAD")
+        status = json.loads(json_path.read_text(encoding="utf-8"))
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        markdown = markdown_path.read_text(encoding="utf-8")
+
+        self.assertEqual(source_head, status["source_head"])
+        self.assertEqual(20, status["phase1_campaign"]["total"])
+        self.assertEqual(
+            [f"D-{number:03d}" for number in range(64, 80)],
+            status["phase1_campaign"]["missing_task_ids"],
+        )
+        self.assertEqual(9, manifest["tracked_files"])
+        self.assertEqual(9, len(manifest["manifest"]))
+        self.assertIn(source_head, markdown)
+        self.assertIn("## Phase 1 task states", markdown)
+        self.assertIn("- UNKNOWN: **16**", markdown)
 
     def test_revision_delta_tracks_documents_files_and_task_transitions(self) -> None:
         temp, repo = self.make_repo()
