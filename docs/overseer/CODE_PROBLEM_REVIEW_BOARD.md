@@ -150,7 +150,7 @@ AXIOM reviews:
 - **REWARD:** Kestrel +235 critical root-cause award; Veyr +10 peer FIND credit.
 
 ### CPR-003 — D-069 opaque-edge LOS schema gap
-- **STATUS:** `ACCEPTED / LINKED_TO_TASK / CONTRACT REPAIR SELECTED`
+- **STATUS:** `RESOLVED / LINKED_TO_TASK`
 - **PROBLEM_PRESSURE_SCORE:** **64/100**
 - **RATING:** **CRITICAL**
 - **TASK:** D-069
@@ -158,12 +158,12 @@ AXIOM reviews:
 - **EVIDENCE:** `docs/overseer/code_problems/CPR-003_d069_opaque_edge_los_schema_gap.md`
 - **WHY NO NEW TASK:** D-069 already owns tactical schema/grid implementation; the repair is a bounded contract clarification inside that task.
 - **AXIOM CONTRACT:** canonical field `los_blocked_edges`; N/E/S/W only; independent from cover; a shared boundary is opaque when either adjacent cell declares the matching edge/opposite edge; reciprocal duplicate authoring is allowed but not required.
-- **D-069 IMPACT:** Veyra may continue. Completion additionally requires authored/default/override parsing, strict edge validation, one-sided boundary A→B/B→A symmetry regression, cover-vs-opacity separation regression, and existing LOS tests green.
+- **RESOLUTION:** authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; PR #76 / run #390 fully green. Authored/default/override parsing, strict edge validation, one-sided boundary symmetry, cover-vs-opacity separation and existing LOS invariants are verified.
 - **IMPLEMENTATION OBSERVATION:** Veyra's branch already uses `TacticalCell.los_blocked_edges` and checks source edge OR destination opposite edge, matching the selected contract.
-- **REWARD:** none yet; evaluate prevention/root-cause credit only after D-069 proves the accepted contract.
+- **REWARD:** pending AXIOM OR-024 classification; executable repair evidence is now available.
 
 ### CPR-004 — D-069 unresolved persistent_ref IDs
-- **STATUS:** `IMPLEMENTATION PRESENT / LINKED_TO_TASK / CI PENDING`
+- **STATUS:** `RESOLVED / LINKED_TO_TASK`
 - **PROBLEM_PRESSURE_SCORE:** **65/100**
 - **RATING:** **CRITICAL**
 - **TASK:** D-069
@@ -171,9 +171,9 @@ AXIOM reviews:
 - **EVIDENCE:** `docs/overseer/code_problems/CPR-004_d069_persistent_ref_resolution_gap.md`
 - **WHY NO NEW TASK:** D-069 already owns tactical content/schema validation; creating another task would duplicate acceptance work.
 - **AXIOM CONTRACT:** keep tactical shape validation pre-state; after `GameState` construction, validate every authored D-069 `persistent_ref` against durable NPC IDs. Unknown NPC refs reject. Player persistent refs are not authorable until a canonical player stable-ID contract exists; do not invent a sentinel in D-069.
-- **D-069 IMPACT:** implementation is present on PR #74: post-GameState NPC-ref resolution, valid/invalid ref regression, and omitted-ref compatibility remain within D-069 scope.
+- **RESOLUTION:** authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; PR #76 / run #390 fully green. Post-GameState NPC-ref resolution and valid/invalid/omitted-ref regressions are verified.
 - **IMPLEMENTATION_EVIDENCE:** PR #74 current branch includes `validate_encounter_persistent_refs()`, loader call after `GameState` construction, valid `NPC_TAMSIN` pass and invalid `NPC_DOES_NOT_EXIST` / guessed `PLAYER` rejection.
-- **REWARD:** none yet; evaluate root-cause/prevention credit only after executable repair evidence.
+- **REWARD:** pending AXIOM OR-024 classification; executable repair evidence is now available.
 
 No unresolved CPR is created merely to populate this board.
 
