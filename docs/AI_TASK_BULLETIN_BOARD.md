@@ -445,7 +445,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-029`
 - **PRIORITY:** `P0 PARALLEL`
 - **IMPORTANCE:** `91/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **DOMAIN:** asset provenance / reconstruction evidence.
 - **DEPENDENCIES:** existing D-029 ledgers and evidence; no dependency on D-060 completion.
 - **ACCEPTANCE:** close at least one real provenance/reconstruction ambiguity with exact evidence; do not generate/modify/promote/delete runtime assets or make owner visual decisions.
@@ -453,9 +453,9 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIMED_BY:** Kestrel
 - **CLAIMED_AT:** 2026-10-04T20:40:00-04:00
 - **CLAIM_HEAD:** `dd2e28e35c0946f8baa86fb3513cebf431dcf73b`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
-- **BRAG_CARD:** pending
+- **COMPLETION_HEAD:** `b4694ab7a103a729780825c40807fba346ffd026`
+- **EVIDENCE:** `docs/assets/PR19_RASTER_EXPORTER_PROVENANCE_AUDIT_2026-10-04.md` — exact PR #19 tree/changed-file audit proves no persisted exporter/generator/tool/script in committed head.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-029 — PR #19 exporter provenance ambiguity closed`
 
 ### Parallel P3 — D-045 — Evolved progression/classes design
 - **TASK_REF:** `D-045`
