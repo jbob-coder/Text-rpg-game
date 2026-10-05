@@ -1,115 +1,91 @@
 from __future__ import annotations
 
-from copy import deepcopy
 from typing import Any, Dict, Mapping
 
-from .core import RuleError
+
+class RoomProjectionError(ValueError):
+    """Raised when authored room-presence data cannot be projected safely."""
 
 
-ROOM_PROJECTION_VERSION = 1
-
-_ALLOWED_ACTOR_KEYS = {
-    "presentation_id",
-    "actor_id",
-    "public_name",
-    "visual_family",
-    "placement_key",
-    "pose_key",
-    "outfit_key",
-    "visible_tags",
-    "inspectable",
-    "dialogue_available",
-    "actions",
+_REQUIRED_TEXT = ("presentation_id", "public_name", "visual_family", "placement_key")
+_FORBIDDEN_PRESENTATION_KEYS = {
+    "x", "y", "z", "personality", "knowledge", "memories", "goals",
+    "story_state", "relationships", "flags", "visible_if", "requires",
 }
 
 
-def _required_text(record: Mapping[str, Any], key: str) -> str:
-    value = record.get(key)
-    if not isinstance(value, str) or not value:
-        raise RuleError(f"room actor {key} must be non-empty text")
-    return value
-
-
-def _optional_text(record: Mapping[str, Any], key: str) -> str | None:
-    value = record.get(key)
+def _optional_text(value: Any, field: str) -> str | None:
     if value is None:
         return None
-    if not isinstance(value, str) or not value:
-        raise RuleError(f"room actor {key} must be non-empty text when present")
+    if not isinstance(value, str) or not value.strip():
+        raise RoomProjectionError(f"{field} must be non-empty text when present")
     return value
 
 
-def _text_list(record: Mapping[str, Any], key: str) -> list[str]:
-    value = record.get(key, [])
-    if not isinstance(value, list) or any(not isinstance(item, str) or not item for item in value):
-        raise RuleError(f"room actor {key} must be a list of non-empty text values")
-    return list(value)
-
-
-def build_room_projection(scene: Mapping[str, Any], location_id: str) -> Dict[str, Any]:
-    """Build one detached, player-safe room projection from authored visible presence.
-
-    This function deliberately accepts only the public scene-level actor contract. It never
-    receives GameState.npcs and therefore cannot serialize NPC personality, knowledge, memories,
-    goals, or story state by accident.
-    """
+def build_room_projection(
+    scene: Mapping[str, Any],
+    *,
+    location_id: str,
+) -> Dict[str, Any]:
+    """Project authored scene presence into the version-1 player-safe room contract."""
+    if not isinstance(location_id, str) or not location_id.strip():
+        raise RoomProjectionError("location_id must be non-empty text")
     if not isinstance(scene, Mapping):
-        raise RuleError("room projection requires a scene mapping")
-    if not isinstance(location_id, str) or not location_id:
-        raise RuleError("room projection location_id must be non-empty text")
-
-    authored_location = scene.get("location_id")
-    if authored_location is not None and authored_location != location_id:
-        raise RuleError("room projection location does not match current scene location")
+        raise RoomProjectionError("scene must be an object")
 
     raw_actors = scene.get("actors", [])
     if not isinstance(raw_actors, list):
-        raise RuleError("scene actors must be a list")
+        raise RoomProjectionError("scene.actors must be a list")
 
     actors: list[Dict[str, Any]] = []
     seen: set[str] = set()
-    for raw in raw_actors:
+    for index, raw in enumerate(raw_actors):
         if not isinstance(raw, Mapping):
-            raise RuleError("scene actor entries must be objects")
-        unknown = set(raw) - _ALLOWED_ACTOR_KEYS
-        if unknown:
-            raise RuleError(f"room actor contains unsupported fields: {sorted(unknown)}")
-        if "x" in raw or "y" in raw:
-            raise RuleError("room actor records cannot contain presentation coordinates")
+            raise RoomProjectionError(f"scene.actors[{index}] must be an object")
+        forbidden = _FORBIDDEN_PRESENTATION_KEYS.intersection(raw)
+        if forbidden:
+            raise RoomProjectionError(
+                f"scene.actors[{index}] contains forbidden projection fields: "
+                + ", ".join(sorted(forbidden))
+            )
 
-        presentation_id = _required_text(raw, "presentation_id")
+        for field in _REQUIRED_TEXT:
+            value = raw.get(field)
+            if not isinstance(value, str) or not value.strip():
+                raise RoomProjectionError(
+                    f"scene.actors[{index}].{field} must be non-empty text"
+                )
+
+        presentation_id = raw["presentation_id"]
         if presentation_id in seen:
-            raise RuleError(f"duplicate room actor presentation_id: {presentation_id}")
+            raise RoomProjectionError(f"duplicate room presentation_id: {presentation_id}")
         seen.add(presentation_id)
 
-        inspectable = raw.get("inspectable", False)
-        dialogue_available = raw.get("dialogue_available", False)
-        if not isinstance(inspectable, bool):
-            raise RuleError("room actor inspectable must be boolean")
-        if not isinstance(dialogue_available, bool):
-            raise RuleError("room actor dialogue_available must be boolean")
+        visible_tags = raw.get("visible_tags", [])
+        if not isinstance(visible_tags, list) or any(
+            not isinstance(tag, str) or not tag.strip() for tag in visible_tags
+        ):
+            raise RoomProjectionError(
+                f"scene.actors[{index}].visible_tags must be a list of non-empty text"
+            )
 
-        actor = {
+        actors.append({
             "presentation_id": presentation_id,
-            "known_actor_id": _optional_text(raw, "actor_id"),
-            "display_name": _required_text(raw, "public_name"),
-            "visual_family": _required_text(raw, "visual_family"),
-            "placement_key": _required_text(raw, "placement_key"),
-            "pose_key": _optional_text(raw, "pose_key"),
-            "outfit_key": _optional_text(raw, "outfit_key"),
-            "visible_tags": _text_list(raw, "visible_tags"),
-            "inspectable": inspectable,
-            "dialogue_available": dialogue_available,
-            "actions": _text_list(raw, "actions"),
-        }
-        actors.append(actor)
+            "known_actor_id": _optional_text(raw.get("actor_id"), "actor_id"),
+            "display_name": raw["public_name"],
+            "visual_family": raw["visual_family"],
+            "placement_key": raw["placement_key"],
+            "pose_key": _optional_text(raw.get("pose_key"), "pose_key"),
+            "outfit_key": _optional_text(raw.get("outfit_key"), "outfit_key"),
+            "visible_tags": list(visible_tags),
+            "inspectable": bool(raw.get("inspectable", False)),
+            "dialogue_available": bool(raw.get("dialogue_available", False)),
+            "actions": [],
+        })
 
-    actors.sort(key=lambda actor: actor["presentation_id"])
-    return deepcopy(
-        {
-            "projection_version": ROOM_PROJECTION_VERSION,
-            "location_id": location_id,
-            "actors": actors,
-            "active_speaker_presentation_id": None,
-        }
-    )
+    return {
+        "projection_version": 1,
+        "location_id": location_id,
+        "actors": actors,
+        "active_speaker_presentation_id": None,
+    }
