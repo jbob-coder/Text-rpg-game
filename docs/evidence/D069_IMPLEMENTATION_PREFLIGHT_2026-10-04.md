@@ -280,6 +280,26 @@ The first D-069 schema/grid branch already uses this field and checks both sides
 
 Do not invent a structured edge-object schema in D-069.
 
+## 6.2 CPR-004 resolution — persistent NPC refs
+
+AXIOM resolved the content↔durable-state validation gap before D-069 completion.
+
+Locked rule:
+- `persistent_ref` remains optional;
+- when present in D-069, it must resolve to an existing durable NPC ID in `GameState.npcs`;
+- pre-state tactical validation owns shape/stable-ID syntax;
+- after `GameState` construction, perform a bounded second-pass resolution against durable NPC IDs;
+- unknown NPC refs reject;
+- no player stable-ID sentinel is invented in D-069;
+- player-backed participants omit `persistent_ref` until a canonical player identity contract exists.
+
+Required focused regressions:
+- existing NPC ref passes;
+- missing NPC ref rejects;
+- omitted `persistent_ref` passes.
+
+Do not duplicate full tactical validation after GameState construction.
+
 ## 7. Minimum D-069 test matrix
 
 ### Backward compatibility
@@ -298,7 +318,10 @@ Do not invent a structured edge-object schema in D-069.
 - invalid deployment/objective/exit anchor rejected;
 - encounter unknown map rejected;
 - encounter unknown action/archetype rejected;
-- existing condition/knowledge/item references validated where applicable.
+- existing condition/knowledge/item references validated where applicable;
+- valid persistent NPC ref resolves;
+- missing persistent NPC ref rejects;
+- participant without persistent_ref remains valid.
 
 ### Coordinate / occupancy
 - cell-key round trip;
