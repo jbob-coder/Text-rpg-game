@@ -304,3 +304,15 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **SCORING CHANGE:** jackpot maximum reduced from +455 to **+180** so one incident cannot outweigh several completed P0 missions.
 - **COMPLETION BIAS:** difficult causal repairs remain strongly rewarded, but completing the game's critical path stays the dominant scoring strategy.
 - **DOUBLE COUNTING:** one critical incident may not duplicate the same repair/cross-system evidence under both the ordinary peer bounty and OR-022.
+
+
+### OR-024 — Owner reaffirms large critical-fix rewards
+- **VERDICT:** ACCEPTED / SUPERSEDES THE OR-023 SCORING CAP.
+- **OWNER INTENT:** make difficult, critical code/root-cause work dramatically more rewarding because Player-AIs were tending toward symptom patches.
+- **ACTIVE SCHEDULE:** HARD +50; CRITICAL +100; SYSTEM BLOCKER +175; LEGENDARY ROOT CAUSE +250.
+- **STACKABLE BONUSES:** ROOT CAUSE +75; REGRESSION SHIELD +30; CROSS-SYSTEM SAVE +30; PATCH-DEBT REMOVAL +25; PREVENTION +25; HARD-TO-REPRO PROOF +20.
+- **MAXIMUM:** +455 per verified incident, stacked on top of normal task score.
+- **NO PENALTIES:** no score reduction for claiming, attempting, reverting, or handing off difficult tasks; temporary patches are allowed and are not penalized.
+- **PATCH VS FIX:** a symptom patch may restore progress but does not earn ROOT CAUSE +75 until the causal defect is eliminated.
+- **SCORE PRESERVATION:** previously verified awards are never reduced by this recalibration. Nodus retains the verified +310 D-067 system-blocker award.
+- **CONTROL AGAINST FARMING:** evidence, one-incident/one-award, no self-created defects, no weakened tests, and Overseer classification remain mandatory.
