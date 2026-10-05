@@ -4,7 +4,13 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from textrpg import RuleError, content_pack_from_mapping, load_content_pack, inspect_status_value
+from textrpg import (
+    RuleError,
+    TacticalCoord,
+    content_pack_from_mapping,
+    inspect_status_value,
+    load_content_pack,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -126,6 +132,205 @@ class ContentPackTests(unittest.TestCase):
         data["initial_state"]["turn"] = True
         with self.assertRaises(RuleError):
             content_pack_from_mapping(data)
+
+
+    def test_tactical_sections_are_optional_and_empty_by_default(self):
+        pack = content_pack_from_mapping(self.data())
+        self.assertEqual({}, pack.tactical_maps)
+        self.assertEqual({}, pack.combat_actions)
+        self.assertEqual({}, pack.combat_actor_archetypes)
+        self.assertEqual({}, pack.encounters)
+        self.assertFalse(hasattr(pack.state, "tactical"))
+        self.assertFalse(hasattr(pack.state, "combat"))
+
+    def test_minimal_tactical_bundle_loads_without_mutating_game_state(self):
+        data = self.data()
+        data["tactical_maps"] = {
+            "TACTICAL_MAP_TEST": {
+                "map_id": "TACTICAL_MAP_TEST",
+                "version": 1,
+                "width": 2,
+                "height": 2,
+                "z_layers": [0],
+                "default_cell": {
+                    "terrain_id": "TERRAIN_FLOOR",
+                    "movement_cost": 1,
+                    "blocks_movement": False,
+                    "blocks_los": False,
+                    "cover": {},
+                },
+                "overrides": {
+                    "1,0,0": {
+                        "movement_cost": 2,
+                        "cover": {"W": 1},
+                    }
+                },
+                "transitions": {},
+                "deployment_zones": {
+                    "ZONE_PLAYER": ["0,0,0"],
+                },
+                "objective_anchors": {
+                    "OBJECTIVE_TEST": "1,1,0",
+                },
+                "exits": {
+                    "EXIT_TEST": "0,1,0",
+                },
+            }
+        }
+        data["combat_actions"] = {
+            "ACTION_MOVE": {
+                "action_id": "ACTION_MOVE",
+                "category": "move",
+                "cost": 1,
+                "range_min": 0,
+                "range_max": 6,
+                "requires_los": False,
+                "tags": ["movement"],
+            }
+        }
+        data["combat_actor_archetypes"] = {
+            "ARCHETYPE_CONTACT": {
+                "archetype_id": "ARCHETYPE_CONTACT",
+                "action_ids": ["ACTION_MOVE"],
+                "footprint": 1,
+                "tags": ["contact"],
+            }
+        }
+        data["encounters"] = {
+            "ENCOUNTER_TEST": {
+                "encounter_id": "ENCOUNTER_TEST",
+                "map_id": "TACTICAL_MAP_TEST",
+                "location_id": "SERVICE_TUNNEL",
+                "trigger": {},
+                "participants": [
+                    {
+                        "actor_id": "CONTACT_A",
+                        "archetype_id": "ARCHETYPE_CONTACT",
+                        "faction_id": "FACTION_CONTACT",
+                        "action_ids": ["ACTION_MOVE"],
+                        "deployment_zone": "ZONE_PLAYER",
+                        "required": True,
+                    }
+                ],
+                "deployment": {},
+                "objective_set": {},
+                "retreat_policy": {},
+                "ai_profiles": {},
+                "aftermath_profile": {},
+                "time_cost_minutes": 10,
+                "canon_status": "PROPOSED",
+            }
+        }
+
+        baseline_state = content_pack_from_mapping(self.data()).state.snapshot()
+        pack = content_pack_from_mapping(data)
+
+        tactical_map = pack.tactical_maps["TACTICAL_MAP_TEST"]
+        self.assertEqual(2, tactical_map.width)
+        self.assertEqual(
+            2,
+            tactical_map.cell_at(TacticalCoord(1, 0, 0)).movement_cost,
+        )
+        self.assertEqual(baseline_state, pack.state.snapshot())
+        self.assertEqual("ACTION_MOVE", pack.combat_actions["ACTION_MOVE"]["action_id"])
+
+    def test_tactical_persistent_ref_must_resolve_to_durable_npc(self):
+        data = self.data()
+        data["tactical_maps"] = {
+            "TACTICAL_MAP_TEST": {
+                "map_id": "TACTICAL_MAP_TEST",
+                "version": 1,
+                "width": 1,
+                "height": 1,
+                "z_layers": [0],
+                "default_cell": {
+                    "movement_cost": 1,
+                    "blocks_movement": False,
+                    "blocks_los": False,
+                    "cover": {},
+                },
+                "overrides": {},
+                "transitions": {},
+                "deployment_zones": {"ZONE_ENTRY": ["0,0,0"]},
+                "objective_anchors": {},
+                "exits": {},
+            }
+        }
+        data["combat_actions"] = {
+            "ACTION_WAIT": {
+                "action_id": "ACTION_WAIT",
+                "category": "utility",
+                "cost": 1,
+                "range_min": 0,
+                "range_max": 0,
+                "requires_los": False,
+                "tags": [],
+            }
+        }
+        data["combat_actor_archetypes"] = {
+            "ARCHETYPE_CONTACT": {
+                "archetype_id": "ARCHETYPE_CONTACT",
+                "action_ids": ["ACTION_WAIT"],
+                "footprint": 1,
+                "tags": [],
+            }
+        }
+        data["encounters"] = {
+            "ENCOUNTER_TEST": {
+                "encounter_id": "ENCOUNTER_TEST",
+                "map_id": "TACTICAL_MAP_TEST",
+                "location_id": "SERVICE_TUNNEL",
+                "trigger": {},
+                "participants": [
+                    {
+                        "actor_id": "CONTACT_A",
+                        "persistent_ref": "NPC_TAMSIN",
+                        "archetype_id": "ARCHETYPE_CONTACT",
+                        "action_ids": ["ACTION_WAIT"],
+                        "deployment_zone": "ZONE_ENTRY",
+                        "required": True,
+                    }
+                ],
+                "deployment": {},
+                "objective_set": {},
+                "retreat_policy": {},
+                "ai_profiles": {},
+                "aftermath_profile": {},
+                "time_cost_minutes": 0,
+                "canon_status": "PROPOSED",
+            }
+        }
+
+        pack = content_pack_from_mapping(data)
+        self.assertEqual(
+            "NPC_TAMSIN",
+            pack.encounters["ENCOUNTER_TEST"]["participants"][0]["persistent_ref"],
+        )
+
+        for invalid_ref in ("NPC_DOES_NOT_EXIST", "PLAYER"):
+            with self.subTest(persistent_ref=invalid_ref):
+                invalid = copy.deepcopy(data)
+                invalid["encounters"]["ENCOUNTER_TEST"]["participants"][0][
+                    "persistent_ref"
+                ] = invalid_ref
+                with self.assertRaisesRegex(
+                    RuleError,
+                    "does not resolve to initial_state.npcs",
+                ):
+                    content_pack_from_mapping(invalid)
+
+    def test_tactical_section_roots_must_be_objects(self):
+        for field_name in (
+            "tactical_maps",
+            "combat_actions",
+            "combat_actor_archetypes",
+            "encounters",
+        ):
+            with self.subTest(field_name=field_name):
+                data = self.data()
+                data[field_name] = []
+                with self.assertRaisesRegex(RuleError, field_name):
+                    content_pack_from_mapping(data)
 
 
 if __name__ == "__main__":

@@ -1,14 +1,15 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, field, fields
 from pathlib import Path
 from typing import Any, Dict, Mapping
 
+from .combat_schema import TacticalMap, parse_tactical_maps
 from .core import GameState, RuleError, RulesEngine, validate_game_state_structure
 from .json_contract import loads_strict_json
 from .stats import validate_player_stats
-from .validation import assert_valid_content_pack
+from .validation import assert_valid_content_pack, validate_encounter_persistent_refs
 from .visuals import assert_valid_character_visuals
 
 
@@ -21,6 +22,10 @@ class LoadedContentPack:
     registries: Dict[str, Any]
     state: GameState
     engine: RulesEngine
+    tactical_maps: Dict[str, TacticalMap] = field(default_factory=dict)
+    combat_actions: Dict[str, Any] = field(default_factory=dict)
+    combat_actor_archetypes: Dict[str, Any] = field(default_factory=dict)
+    encounters: Dict[str, Any] = field(default_factory=dict)
 
 
 def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
@@ -46,6 +51,10 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
     powers = data.get("powers", {})
     registries = data.get("registries")
     world_map = data.get("world_map")
+    tactical_maps_raw = data.get("tactical_maps", {})
+    combat_actions = data.get("combat_actions", {})
+    combat_actor_archetypes = data.get("combat_actor_archetypes", {})
+    encounters = data.get("encounters", {})
 
     if not isinstance(scenes, Mapping) or not scenes:
         raise RuleError("Content pack requires non-empty scenes")
@@ -61,9 +70,32 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
         raise RuleError("Content pack registries must be an object")
     if world_map is not None and not isinstance(world_map, Mapping):
         raise RuleError("Content pack world_map must be an object")
+    if not isinstance(tactical_maps_raw, Mapping):
+        raise RuleError("Content pack tactical_maps must be an object")
+    if not isinstance(combat_actions, Mapping):
+        raise RuleError("Content pack combat_actions must be an object")
+    if not isinstance(combat_actor_archetypes, Mapping):
+        raise RuleError("Content pack combat_actor_archetypes must be an object")
+    if not isinstance(encounters, Mapping):
+        raise RuleError("Content pack encounters must be an object")
 
-    assert_valid_content_pack(scenes, quests, powers, registries, world_map)
+    assert_valid_content_pack(
+        scenes,
+        quests,
+        powers,
+        registries,
+        world_map,
+        tactical_maps=tactical_maps_raw,
+        combat_actions=combat_actions,
+        combat_actor_archetypes=combat_actor_archetypes,
+        encounters=encounters,
+    )
     assert_valid_character_visuals(characters)
+
+    try:
+        tactical_maps = parse_tactical_maps(tactical_maps_raw)
+    except ValueError as exc:
+        raise RuleError(f"Invalid tactical maps: {exc}") from exc
 
     initial = data.get("initial_state")
     if not isinstance(initial, Mapping):
@@ -81,6 +113,16 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
     if state.scene_id not in scenes:
         raise RuleError(
             f"initial_state.scene_id points to unknown scene: {state.scene_id}"
+        )
+
+    persistent_ref_errors = validate_encounter_persistent_refs(
+        encounters,
+        state.npcs.keys(),
+    )
+    if persistent_ref_errors:
+        raise RuleError(
+            "Invalid encounter persistent refs:\n- "
+            + "\n- ".join(persistent_ref_errors)
         )
 
     stat_errors = validate_player_stats(state)
@@ -124,6 +166,10 @@ def content_pack_from_mapping(data: Mapping[str, Any]) -> LoadedContentPack:
         registries=dict(registries or {}),
         state=state,
         engine=engine,
+        tactical_maps=tactical_maps,
+        combat_actions=dict(combat_actions),
+        combat_actor_archetypes=dict(combat_actor_archetypes),
+        encounters=dict(encounters),
     )
 
 
