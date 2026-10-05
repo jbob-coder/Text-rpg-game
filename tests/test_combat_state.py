@@ -172,5 +172,73 @@ class CombatStateTests(unittest.TestCase):
         self.assertEqual(("ACTOR_ACTIVE",), session.initiative_order)
 
 
+    def test_activation_completion_expires_budget_and_allows_next_actor(self) -> None:
+        first = actor("ACTOR_FIRST", 0, 0, initiative=20)
+        second = actor("ACTOR_SECOND", 1, 0, initiative=10)
+        session = CombatSession(
+            encounter_id="ENCOUNTER_SESSION_TEST",
+            tactical_map=two_by_two_map(),
+            seed=1,
+            actors=(first, second),
+        )
+
+        self.assertIs(first, session.begin_next_activation())
+        first.action_budget = 2
+        completed = session.complete_active_activation()
+
+        self.assertIs(first, completed)
+        self.assertEqual(0, first.action_budget)
+        self.assertIsNone(session.active_actor_id)
+
+        self.assertIs(second, session.begin_next_activation())
+        self.assertEqual(PHASE1_ACTION_BUDGET, second.action_budget)
+
+    def test_round_advance_resnapshots_initiative_only_after_round_completion(self) -> None:
+        first = actor("ACTOR_FIRST", 0, 0, initiative=20)
+        second = actor("ACTOR_SECOND", 1, 0, initiative=10)
+        session = CombatSession(
+            encounter_id="ENCOUNTER_SESSION_TEST",
+            tactical_map=two_by_two_map(),
+            seed=1,
+            actors=(first, second),
+        )
+
+        with self.assertRaisesRegex(ValueError, "activations remain"):
+            session.advance_round()
+
+        self.assertIs(first, session.begin_next_activation())
+        second.initiative = 30
+        session.complete_active_activation()
+        self.assertIs(second, session.begin_next_activation())
+        session.complete_active_activation()
+
+        self.assertTrue(session.round_is_complete())
+        self.assertIsNone(session.begin_next_activation())
+        self.assertEqual(("ACTOR_SECOND", "ACTOR_FIRST"), session.advance_round())
+        self.assertEqual(2, session.round_index)
+        self.assertEqual(0, session.activation_index)
+        self.assertEqual(0, first.action_budget)
+        self.assertEqual(0, second.action_budget)
+
+    def test_incapacitated_actor_stays_out_of_next_round_snapshot(self) -> None:
+        first = actor("ACTOR_FIRST", 0, 0, initiative=20)
+        second = actor("ACTOR_SECOND", 1, 0, initiative=10)
+        session = CombatSession(
+            encounter_id="ENCOUNTER_SESSION_TEST",
+            tactical_map=two_by_two_map(),
+            seed=1,
+            actors=(first, second),
+        )
+
+        session.begin_next_activation()
+        session.complete_active_activation()
+        session.begin_next_activation()
+        session.complete_active_activation()
+        first.incapacitated = True
+
+        self.assertEqual(("ACTOR_SECOND",), session.advance_round())
+        self.assertEqual(ACTIVATION_SKIPPED, first.activation_state)
+
+
 if __name__ == "__main__":
     unittest.main()
