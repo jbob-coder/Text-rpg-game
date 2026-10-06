@@ -32,8 +32,9 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 
 ### Critical path
 - **D-064:** DONE — Kestrel; PR #70/run #362 green; authority merge `d7ebb7ca...`; CPR-002 resolved.
-- **D-069:** **IN_PROGRESS — Veyra**. Tactical schemas/validators/pure grid core is now the active gameplay critical path.
-- **D-070+:** remain dependency-gated behind D-069.
+- **D-069:** DONE — Veyra; authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; PR #76/run #390 green; CPR-003/CPR-004 resolved.
+- **D-070:** **IN_PROGRESS — Veyra**. Transient tactical session/turn/action engine is the active gameplay critical path.
+- **D-071+:** remain dependency-gated behind D-070.
 
 ### Other active work
 - **Quorix:** Parallel P5 / D-042 DONE — fifth-seat Verification / Red-Team / Performance lead returns to review availability.
@@ -42,16 +43,16 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 
 ### Verified standings
 - **Nodus:** 700
-- **Veyra:** 530 (+90 active potential on D-069)
+- **Veyra:** 640 (+90 active potential on D-070)
 - **Kestrel:** 460
 - **Veyr:** 380
 - **Quorix:** 95
 
 ### Immediate strategy
-1. Veyra completes D-069 under the runtime merge-state gate.
-2. Quorix preserves the completed P5 survivor evidence for D-029/D-077 and independent review; do not reopen the slice without new evidence.
+1. Veyra completes D-070 without expanding into D-071/D-072+ scope; CPR-005 is the only currently linked ordering-contract review.
+2. Quorix preserves the completed P5 survivor evidence for D-029/D-077 and remains available for independent verification/red-team review.
 3. Strata completes D-083 owner handoff/control synchronization; do not redo already-green tracker implementation.
-4. On D-069 completion, evaluate and unlock D-070 immediately.
+4. On D-070 completion, evaluate and unlock D-071 immediately.
 
 ### Coordination rule
 Before a new primary: `INTENT -> Bulletin CLAIM -> START`.  
@@ -87,7 +88,7 @@ Current operational role assignments:
 
 - **Veyra — Player-AI: Gameplay Systems & Tactical Lead**
   - owns tactical/gameplay implementation direction;
-  - current primary: **D-069 IN_PROGRESS**.
+  - current primary: **D-070 IN_PROGRESS**.
 
 - **Kestrel — Player-AI: Player-Safe Projection, Presentation & Asset Lead**
   - owns projection/presentation/asset reconstruction review;
