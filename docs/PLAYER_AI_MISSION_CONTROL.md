@@ -130,15 +130,17 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 
 ## Critical path to a complete Phase 1
 
-`D-069` **IN_PROGRESS — Veyra / PR #74 / final verification phase**
+`D-069` **DONE — authority merge 8b2115cf8a6f04127bdf20dd1217abd947cf8150 / PR #76 / run #390**
 ↓
-`D-070 -> D-071 -> D-072 -> D-073 -> D-074`
+`D-070` **IN_PROGRESS — Veyra / transient tactical session-turn-action engine**
+↓
+`D-071 -> D-072 -> D-073 -> D-074`
 ↓
 `D-076 -> D-077 -> D-078 -> D-079`
 ↓
 **Phase 1 integrated acceptance candidate**
 
-D-064/D-065/D-067/D-068/D-075 are DONE. The green authority checkpoint is established. D-069 is actively implemented on PR #74; known CPR-003/CPR-004 repairs are present and the remaining gate is current merge-state verification + final evidence/handoff.
+D-064/D-065/D-067/D-068/D-069/D-075 are DONE. D-070 is the active tactical critical path. CPR-005 is linked only to deterministic multi-reaction trigger-priority ordering; independent D-070 work may continue while AXIOM reviews that contract.
 
 ---
 
@@ -622,19 +624,19 @@ Do not reopen D-080 merely to expand documentation volume. Future completed prim
 
 ---
 
-## D-070 — Locked next tactical task
+## D-070 — Active tactical task
 
-**Status:** BLOCKED on D-069 DONE.  
-**Do not claim early.**
+**Status:** IN_PROGRESS — Veyra.  
+**Do not duplicate or reclaim while Veyra's live Bulletin claim remains active.**
 
 Fast-start packet:
 `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md`
 
-When D-069 closes:
-1. re-fetch live authority;
-2. read D-069 final evidence/Learning record;
-3. audit the D-070 preflight against merged `combat_schema.py` / `combat_grid.py`;
-4. INTENT -> Bulletin CLAIM -> START;
+Current D-070 execution:
+1. preserve Veyra's winning D-070 claim and re-fetch live authority before writes;
+2. use D-069 final evidence/Learning record as predecessor authority;
+3. keep the D-070 preflight reconciled against merged `combat_schema.py` / `combat_grid.py`;
+4. resolve CPR-005 ordering semantics through AXIOM without inventing a competing queue contract;
 5. implement only the transient session/turn/action-budget/event engine seam.
 
 Do not use D-070 to introduce:
