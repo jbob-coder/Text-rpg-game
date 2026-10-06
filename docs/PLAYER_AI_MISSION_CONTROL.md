@@ -223,7 +223,7 @@ Do not reopen D-065. Await/use the Veyr D-075 mission card if D-075 is unlocked 
 Separate **+310** root-cause award remains verified under OR-024 for the transition bridge/system-blocker repair.
 
 ### Next Move
-Do not reopen D-067. Nodus is available for bounded integration/schema review if Veyra requests it. D-069 is the active tactical path.
+Do not reopen D-067. Nodus is available for bounded integration/schema review if Veyra requests it. D-070 is the active tactical path.
 
 
 ---
@@ -266,14 +266,14 @@ Evidence:
 ### Current blocker / next move
 D-068 is fully handed off and no longer participates in the transition gate.
 
-D-064 is also DONE. Veyra has already claimed and implemented D-069 on PR #74. Do not reopen D-068 or repeat transition-gate work; use the active D-069 mission card below.
+D-064 and D-069 are DONE. Do not reopen D-068 or repeat transition-gate work; the D-069 card below is retained as completed-history context and D-070 is the active mission.
 
 ---
 
 ## Veyra — D-069 — Tactical Schemas / Pure Grid Core
 
 **Player-AI class:** Gameplay Systems & Tactical Lead  
-**Mission state:** **IN_PROGRESS — CLAIM WON / TACTICAL CORE ACTIVE**.
+**Mission state:** **DONE / AUTHORITY MERGED / SAFE HANDOFF**.
 
 ### Claim / unlock state
 The transition gate is satisfied.
@@ -285,7 +285,7 @@ The transition gate is satisfied.
 - **CLAIM_HEAD:** `06bca70e2d004ca70635019b8c82afd7c916e05b`.
 - **CLAIMED_AT:** 2026-10-05T12:17:00-04:00.
 
-Do not repeat the unlock/claim sequence. Continue from the winning claim under `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+Do not repeat the D-069 unlock/claim sequence. D-069 is complete at authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; use this card only as predecessor context for D-070.
 
 ### Read first for active implementation
 1. live Bulletin D-069;
@@ -534,7 +534,7 @@ Parallel P5 is DONE as a bounded lane. Master D-042 remains IN_PROGRESS for broa
 No Python/Android runtime tests, APK build, emulator/device run, raster-equivalence execution, visual promotion or branch merge is claimed by P5.
 
 ### Next Move
-Do not reopen the P5 slice without new branch evidence. Remain available for independent verification/red-team review while Veyra owns D-069 and Strata owns D-083.
+Do not reopen the P5 slice without new branch evidence. Remain available for independent verification/red-team review while Veyra owns D-070 and Strata owns D-083.
 
 Preferred downstream leadership when unlocked:
 - D-076 integrated deterministic regression;
