@@ -114,6 +114,16 @@ Reaction queue:
 3. actor_id ascending;
 4. reaction_id ascending.
 
+Phase 1 trigger-priority contract:
+- each runtime reaction candidate may carry encounter-local `trigger_priority`;
+- `trigger_priority` is an integer; booleans/non-integers are invalid;
+- omitted `trigger_priority` defaults to `0`;
+- higher numeric `trigger_priority` resolves first;
+- the canonical comparison is equivalent to `(-trigger_priority, -round_initiative, actor_id, reaction_id)`;
+- D-070 owns candidate validation and deterministic scheduling only;
+- D-071 and later trigger-generation policy may decide why/when a candidate exists and may supply an authored priority value, but the scheduler treats that value as opaque ordering metadata;
+- `trigger_priority` is transient encounter state, not a Phase-1 save-schema field.
+
 ## 9. Delay and reinsertion
 
 Phase 1 does not require free-form delay/reinsert. Prepared reactions cover the initial need without timeline complexity.

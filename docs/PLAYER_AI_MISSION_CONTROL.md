@@ -140,7 +140,7 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 ↓
 **Phase 1 integrated acceptance candidate**
 
-D-064/D-065/D-067/D-068/D-069/D-075 are DONE. D-070 is the next tactical critical-path task but is currently unclaimed. CPR-005 remains linked to deterministic multi-reaction trigger-priority ordering. Preserve Veyra's PR #77 branch evidence; do not treat it as a live claim.
+D-064/D-065/D-067/D-068/D-069/D-075 are DONE. D-070 is the next tactical critical-path task but is currently unclaimed. CPR-005 is resolved by OR-033: integer `trigger_priority`, default `0`, higher numeric value first, then higher round initiative -> `actor_id` -> `reaction_id`. Preserve Veyra's PR #77 branch evidence; do not treat it as a live claim.
 
 ---
 
@@ -638,7 +638,7 @@ Current D-070 resume path:
 3. re-fetch live authority and confirm D-070 is still READY/unclaimed before any claim;
 4. use D-069 final evidence/Learning record as predecessor authority;
 5. keep the D-070 preflight reconciled against merged `combat_schema.py` / `combat_grid.py`;
-6. resolve CPR-005 ordering semantics through AXIOM without inventing a competing queue contract;
+6. apply resolved CPR-005 / OR-033 ordering semantics exactly; do not invent a competing queue contract;
 7. implement only the transient session/turn/action-budget/event engine seam after a valid new claim.
 
 Do not use D-070 to introduce:

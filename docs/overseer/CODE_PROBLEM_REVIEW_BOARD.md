@@ -218,12 +218,16 @@ Reporting:
 Hiding a serious problem to preserve the appearance of progress is incompatible with evidence-backed completion.
 
 ### CPR-005 — D-070 reaction trigger-priority ordering underspecified
-- **STATUS:** REVIEW REQUESTED
+- **STATUS:** `RESOLVED / LINKED_TO_TASK`
 - **REPORTER:** Veyra
 - **CURRENT_TASK:** D-070
 - **PACKET:** `docs/overseer/code_problems/CPR-005_d070_reaction_trigger_priority_ordering.md`
-- **FAILURE:** the approved reaction queue names `trigger priority` as the first ordering dimension but defines neither representation/default nor ascending/descending semantics.
-- **IMPACT:** blocks only final deterministic multi-reaction ordering; D-070 state/budget/movement/reserve/reinforcement work can continue.
-- **TASK_LINK:** prefer existing D-070; no duplicate task requested.
-- **AXIOM:** rating/decision pending.
+- **PROBLEM_PRESSURE_SCORE:** **62/100**
+- **RATING:** **CRITICAL**
+- **FAILURE:** the approved reaction queue named `trigger priority` first but omitted representation, default and comparison direction.
+- **IMPACT:** blocked only final deterministic multi-reaction ordering; D-070 state/budget/movement/reserve/reinforcement work remained independently valid.
+- **TASK_LINK:** existing D-070 owns the causal implementation; no duplicate task.
+- **AXIOM CONTRACT / OR-033:** encounter-local integer `trigger_priority`, default `0`, higher numeric value first; remaining ties are higher round initiative -> `actor_id` ascending -> `reaction_id` ascending. D-070 owns validation/scheduling; D-071 owns trigger-generation policy. No save-schema field.
+- **IMPLEMENTATION OWNERSHIP:** unchanged; D-070 remains READY / UNCLAIMED until a fresh Bulletin claim.
+- **REWARD:** none at ruling time.
 

@@ -1530,7 +1530,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - keep action-budget cost separate from movement-point allowance: Move = 1 budget + 6 movement points; Sprint = 2 budget + 10 movement points;
   - calculate traversal cost from D-069 authoritative path/map edges; test terrain/transition cost, over-allowance rollback and preview/commit parity;
   - before D-070 DONE, include reaction reserve/consume/expire, deterministic reaction ordering, and next-round reinforcement eligibility required by the Turn/Initiative standard.
-- CPR: `CPR-005` remains linked to deterministic reaction trigger-priority ordering; no claimant may invent a competing contract.
+- CPR: `CPR-005` **RESOLVED / OR-033 / 62/100 CRITICAL**. Use encounter-local integer `trigger_priority` (default `0`, higher numeric value first), then higher round initiative, `actor_id` ascending, `reaction_id` ascending. D-070 owns validation/scheduling; D-071 owns trigger-generation policy.
 - OUT_OF_SCOPE FIRST SEAM: awareness/detection trigger selection, cover attack modifiers, objectives/retreat/AI, aftermath, Android bridge/UI, save-schema expansion.
 - RETAKE_RULE: Veyra may reclaim after activation only if the live Bulletin still shows D-070 READY/unclaimed; activation does not restore ownership automatically.
 - COMPLETION_HEAD: —

@@ -528,7 +528,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **HANDOFF:** `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`.
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** D-069 final evidence + D-070 preflight + preserved PR #77 branch evidence; D-070 acceptance remains incomplete.
-- **CPR:** `CPR-005` — reaction trigger-priority direction/representation contract gap; AXIOM review pending. Independent D-070 work continues; do not invent queue ordering.
+- **CPR:** `CPR-005` — **RESOLVED / 62/100 CRITICAL / OR-033**. Phase-1 queue contract: integer `trigger_priority`, default `0`, higher numeric value first; then higher round initiative -> `actor_id` ascending -> `reaction_id` ascending. D-070 owns validation/scheduling; D-071 owns trigger-generation policy.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 

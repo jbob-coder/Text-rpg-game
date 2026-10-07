@@ -45,7 +45,7 @@ Preserve the live D-070 acceptance contract:
 - preview non-consumption / preview-commit parity;
 - round progression;
 - reaction reserve / consume / expire;
-- deterministic multi-reaction ordering, including CPR-005 contract resolution;
+- deterministic multi-reaction ordering under resolved CPR-005 / OR-033: integer `trigger_priority`, default `0`, higher numeric value first; remaining ties use higher round initiative -> `actor_id` ascending -> `reaction_id` ascending;
 - next-round reinforcement eligibility;
 - deterministic transcript/replay hash for D-070-B if pursued;
 - fresh authority-drift and merge-state verification before completion;

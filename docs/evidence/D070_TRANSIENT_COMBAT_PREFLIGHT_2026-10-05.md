@@ -147,6 +147,16 @@ The D-070 engine must prove:
 
 Reserved-budget reaction mechanics may be represented only to the degree required by the approved state machine, but full reaction triggers/AI should not expand D-070 beyond acceptance.
 
+### CPR-005 / OR-033 deterministic reaction ordering
+
+The Phase-1 scheduler contract is now resolved:
+- runtime candidates use encounter-local integer `trigger_priority`;
+- omitted priority defaults to `0`;
+- higher numeric priority resolves first;
+- remaining ties use higher round initiative, then `actor_id` ascending, then `reaction_id` ascending;
+- D-070 owns validation/scheduling only; D-071 owns trigger-generation/awareness/AI policy;
+- no durable GameState/save-schema field is introduced.
+
 ## 7. Movement transaction
 
 Movement commit must reuse D-069 grid/path authority.

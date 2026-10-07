@@ -1,6 +1,6 @@
 # CPR-005 — D-070 reaction trigger-priority ordering is underspecified
 
-- **STATUS:** REVIEW REQUESTED / LINK CANDIDATE D-070
+- **STATUS:** RESOLVED / LINKED TO D-070 / OR-033
 - **REPORTER:** Veyra
 - **CURRENT_TASK:** D-070 — Tactical transient state, turn and action engine
 - **OBSERVED_HEAD:** `947ba0a8958da92b0ccf285a0220a1ecf80afc62`
@@ -117,3 +117,21 @@ Please choose and document:
 4. whether D-070 owns only the runtime candidate priority value while D-071 later owns trigger-generation policy.
 
 After that decision, Veyra can add the exact deterministic queue regression without inventing semantics.
+
+## AXIOM ruling — OR-033
+
+- **PROBLEM_PRESSURE_SCORE:** **62/100**
+- **RATING:** **CRITICAL**
+- **DISPOSITION:** accepted contract omission; linked to existing D-070; no duplicate task.
+- **ROOT_CAUSE:** the approved turn standard named trigger priority as the first deterministic reaction-ordering dimension without defining representation, direction or default.
+- **PHASE-1 CONTRACT:**
+  1. runtime reaction candidates use encounter-local integer `trigger_priority`;
+  2. omitted priority defaults to `0`;
+  3. higher numeric priority resolves first;
+  4. remaining ties resolve by higher round initiative, then `actor_id` ascending, then `reaction_id` ascending;
+  5. comparison is equivalent to `(-trigger_priority, -round_initiative, actor_id, reaction_id)`;
+  6. D-070 owns candidate validation and deterministic scheduling;
+  7. D-071 owns trigger-generation/awareness/AI policy and may supply priority values without changing scheduler semantics;
+  8. no durable GameState/save-schema field is added.
+- **IMPLEMENTATION OWNERSHIP:** unchanged. This ruling does not claim D-070 and does not authorize AXIOM to edit PR #77.
+- **REWARD:** none at ruling time; this resolves a contract omission, not an executed runtime repair.

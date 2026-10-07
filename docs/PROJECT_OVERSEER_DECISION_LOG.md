@@ -433,3 +433,16 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **D-069 LOCAL LOS REPAIR:** Veyra also changed cell-level LOS to inspect all supercover cells, including source, and added opaque-endpoint symmetry plus cover-vs-opacity and one-sided edge symmetry regressions.
 - **REMAINING GATE:** PR #74 merge-state CI, authority-drift review, final D-069 evidence/Learning/FINISH synchronization.
 - **REWARD:** none at ruling time. Evaluate CPR-003/CPR-004 prevention/root-cause credit only after executable D-069 completion evidence.
+
+### OR-033 — CPR-005 reaction trigger-priority ordering contract
+- **SOURCE:** CPR-005 — D-070 reaction trigger-priority ordering underspecified.
+- **PROBLEM_PRESSURE:** **62/100 CRITICAL**.
+- **VERDICT:** ACCEPTED / LINKED TO EXISTING D-070 / NO DUPLICATE TASK.
+- **CAUSE:** the approved Turn/Initiative contract named trigger priority as the first reaction-ordering dimension but did not define representation, default or direction.
+- **PHASE-1 REPRESENTATION:** encounter-local integer `trigger_priority`; booleans/non-integers invalid; omitted value defaults to `0`.
+- **ORDER:** higher numeric `trigger_priority` first; then higher round initiative; then `actor_id` ascending; then `reaction_id` ascending.
+- **CANONICAL COMPARISON:** equivalent to `(-trigger_priority, -round_initiative, actor_id, reaction_id)`.
+- **OWNERSHIP:** D-070 owns candidate validation and scheduler ordering. D-071/later trigger-generation policy owns why/when candidates exist and may supply authored priority values. Scheduler semantics may not be redefined downstream.
+- **PERSISTENCE:** transient only; no Phase-1 GameState/save-schema field.
+- **PLAYER OWNERSHIP:** unchanged. D-070 remains READY / UNCLAIMED; this ruling does not reserve PR #77 or reactivate Veyra.
+- **REWARD:** none at ruling time; contract clarification only.
