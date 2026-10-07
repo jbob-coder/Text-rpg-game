@@ -132,7 +132,7 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 
 `D-069` **DONE — authority merge 8b2115cf8a6f04127bdf20dd1217abd947cf8150 / PR #76 / run #390**
 ↓
-`D-070` **IN_PROGRESS — Veyra / transient tactical session-turn-action engine**
+`D-070` **READY / UNCLAIMED — preserved Veyra work on PR #77; claim released because Veyra is inactive**
 ↓
 `D-071 -> D-072 -> D-073 -> D-074`
 ↓
@@ -140,7 +140,7 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 ↓
 **Phase 1 integrated acceptance candidate**
 
-D-064/D-065/D-067/D-068/D-069/D-075 are DONE. D-070 is the active tactical critical path. CPR-005 is linked only to deterministic multi-reaction trigger-priority ordering; independent D-070 work may continue while AXIOM reviews that contract.
+D-064/D-065/D-067/D-068/D-069/D-075 are DONE. D-070 is the next tactical critical-path task but is currently unclaimed. CPR-005 remains linked to deterministic multi-reaction trigger-priority ordering. Preserve Veyra's PR #77 branch evidence; do not treat it as a live claim.
 
 ---
 
@@ -223,7 +223,7 @@ Do not reopen D-065. Await/use the Veyr D-075 mission card if D-075 is unlocked 
 Separate **+310** root-cause award remains verified under OR-024 for the transition bridge/system-blocker repair.
 
 ### Next Move
-Do not reopen D-067. Nodus is available for bounded integration/schema review if Veyra requests it. D-070 is the active tactical path.
+Do not reopen D-067. Nodus is available for bounded integration/schema review. D-070 is READY/unclaimed and remains the next tactical path.
 
 
 ---
@@ -266,7 +266,7 @@ Evidence:
 ### Current blocker / next move
 D-068 is fully handed off and no longer participates in the transition gate.
 
-D-064 and D-069 are DONE. Do not reopen D-068 or repeat transition-gate work; the D-069 card below is retained as completed-history context and D-070 is the active mission.
+D-064 and D-069 are DONE. Do not reopen D-068 or repeat transition-gate work; the D-069 card below is retained as completed-history context and D-070 is now a released READY task.
 
 ---
 
@@ -534,7 +534,7 @@ Parallel P5 is DONE as a bounded lane. Master D-042 remains IN_PROGRESS for broa
 No Python/Android runtime tests, APK build, emulator/device run, raster-equivalence execution, visual promotion or branch merge is claimed by P5.
 
 ### Next Move
-Do not reopen the P5 slice without new branch evidence. Remain available for independent verification/red-team review while Veyra owns D-070 and Strata owns D-083.
+Do not reopen the P5 slice without new branch evidence. D-070 and D-083 are both released READY/unclaimed because Veyra and Strata are inactive; Quorix remains available for independent verification/red-team review.
 
 Preferred downstream leadership when unlocked:
 - D-076 integrated deterministic regression;
@@ -624,20 +624,22 @@ Do not reopen D-080 merely to expand documentation volume. Future completed prim
 
 ---
 
-## D-070 — Active tactical task
+## D-070 — Released tactical task / ready to retake
 
-**Status:** IN_PROGRESS — Veyra.  
-**Do not duplicate or reclaim while Veyra's live Bulletin claim remains active.**
+**Status:** READY / UNCLAIMED.  
+**Previous claimant:** Veyra — released by owner on 2026-10-07 because Veyra is inactive. Veyra may retake only after activation and a fresh Bulletin claim if D-070 remains available.**
 
 Fast-start packet:
 `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md`
 
-Current D-070 execution:
-1. preserve Veyra's winning D-070 claim and re-fetch live authority before writes;
-2. use D-069 final evidence/Learning record as predecessor authority;
-3. keep the D-070 preflight reconciled against merged `combat_schema.py` / `combat_grid.py`;
-4. resolve CPR-005 ordering semantics through AXIOM without inventing a competing queue contract;
-5. implement only the transient session/turn/action-budget/event engine seam.
+Current D-070 resume path:
+1. read `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`;
+2. preserve PR #77 / branch `agent/veyra-d070-transient-engine@05c0886f45e8acd6bdd9a1a32c938adbd087eb1f` as work evidence, not ownership;
+3. re-fetch live authority and confirm D-070 is still READY/unclaimed before any claim;
+4. use D-069 final evidence/Learning record as predecessor authority;
+5. keep the D-070 preflight reconciled against merged `combat_schema.py` / `combat_grid.py`;
+6. resolve CPR-005 ordering semantics through AXIOM without inventing a competing queue contract;
+7. implement only the transient session/turn/action-budget/event engine seam after a valid new claim.
 
 Do not use D-070 to introduce:
 - D-071 awareness/cover/objective/AI behavior;
@@ -645,3 +647,24 @@ Do not use D-070 to introduce:
 - D-073 bridge/content integration;
 - D-074 Android UI;
 - tactical GameState/save-schema fields.
+
+
+---
+
+## D-083 — Released program-infrastructure task
+
+**Status:** READY / UNCLAIMED.  
+**Previous claimant:** Strata — released by owner on 2026-10-07 because Strata is inactive.
+
+Technical work is preserved:
+- PR #73 merged;
+- PR #75 merged;
+- branch head `47a78de4c4ef85a59f17134161b83548b740a840`;
+- workflow run `37342120373` SUCCESS.
+
+The remaining work is primarily current-authority reconciliation and task-control handoff. Do not redo the tracker implementation unless fresh evidence shows a regression.
+
+Retake authority:
+`docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`
+
+Strata may retake only after activation and a fresh Bulletin claim if D-083 remains available.
