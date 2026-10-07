@@ -1504,25 +1504,35 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - LIMITATIONS: no CombatSession/turn engine, reactions, awareness/AI, attack/aftermath, Android combat projection, mid-combat persistence, physical-device validation, or canonical player persistent ID claimed.
 
 ### TASK D-070 — Implement tactical transient state, turn and action engine
-- STATUS: `IN_PROGRESS / CLAIMED BY VEYRA`
+- STATUS: `READY / UNCLAIMED / PRESERVED WORK AVAILABLE`
 - PRIORITY: `P0 / RANK 11`
-- CLAIMED_BY: Veyra
-- CLAIMED_AT: `2026-10-05T13:26:00-04:00`
-- CLAIM_HEAD: `5362f50eec8e9a0da1af9a395314932bf8110648`
+- CLAIMED_BY: —
+- CLAIMED_AT: —
+- CLAIM_HEAD: —
+- PREVIOUS_CLAIMED_BY: Veyra
+- PREVIOUS_CLAIMED_AT: `2026-10-05T13:26:00-04:00`
+- PREVIOUS_CLAIM_HEAD: `5362f50eec8e9a0da1af9a395314932bf8110648`
+- RELEASED_BY_OWNER: `2026-10-07` — Veyra confirmed inactive; active claim cleared.
 - DEPENDS_ON: D-069 DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
 - PURPOSE: implement transient authoritative combat session, initiative/activations/action budget and deterministic committed action resolution without save-schema expansion.
 - ACCEPTANCE: headless encounter executes deterministic legal turns/actions; previews do not consume event sequence.
 - BONUS: `D-070-B` deterministic combat transcript/replay hash.
 - PREFLIGHT: `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — re-audit against merged D-069 before implementation.
+- PRESERVED_BRANCH: `agent/veyra-d070-transient-engine`
+- PRESERVED_BRANCH_HEAD: `05c0886f45e8acd6bdd9a1a32c938adbd087eb1f`
+- PRESERVED_PR: #77 — open; first implementation seam only, not completion.
+- PRESERVED_WORKFLOW: `37351724319` — SUCCESS on `05c0886...` for Python engine, Android unit/build/assemble and Android emulator smoke.
+- PRESERVED_FILES: `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md`; `src/textrpg/__init__.py`; `src/textrpg/combat_state.py`; `tests/test_combat_state.py`; `tests/test_combat_turns.py`.
+- HANDOFF: `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`.
 - LOCKED FIRST SEAM: transient CombatSession/TacticalActorState, initiative/activation, four-unit action budget, D-069-grid movement transaction, deterministic committed event indexing, rollback, and preview non-consumption.
 - REQUIRED PREFLIGHT DELTA:
   - read `docs/systems/MOVEMENT_PATHING_AND_POSITIONING_STANDARD.md`;
   - keep action-budget cost separate from movement-point allowance: Move = 1 budget + 6 movement points; Sprint = 2 budget + 10 movement points;
   - calculate traversal cost from D-069 authoritative path/map edges; test terrain/transition cost, over-allowance rollback and preview/commit parity;
   - before D-070 DONE, include reaction reserve/consume/expire, deterministic reaction ordering, and next-round reinforcement eligibility required by the Turn/Initiative standard.
+- CPR: `CPR-005` remains linked to deterministic reaction trigger-priority ordering; no claimant may invent a competing contract.
 - OUT_OF_SCOPE FIRST SEAM: awareness/detection trigger selection, cover attack modifiers, objectives/retreat/AI, aftermath, Android bridge/UI, save-schema expansion.
-- CLAIMED_BY: —
-- CLAIM_HEAD: —
+- RETAKE_RULE: Veyra may reclaim after activation only if the live Bulletin still shows D-070 READY/unclaimed; activation does not restore ownership automatically.
 - COMPLETION_HEAD: —
 
 ### TASK D-071 — Implement tactical awareness, cover, objective, retreat and bounded AI
@@ -1697,7 +1707,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 
 
 ### TASK D-083 — Harden Phase 1 fixed-range status invariant and tracker output verification
-- STATUS: `IN_PROGRESS / CLAIMED BY STRATA`
+- STATUS: `READY / UNCLAIMED / TECHNICAL WORK PRESERVED`
 - PRIORITY: `P0/P1 PROGRAM INFRA`
 - PURPOSE: repair the verified D-081/D-082 regression risk where a missing D-060..D-079 task entry would shrink the Phase 1 denominator below the required fixed 20, and add executable coverage for tracker report outputs.
 - DEPENDS_ON: D-081 DONE; D-082 DONE.
@@ -1708,10 +1718,21 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - add regression coverage for missing Phase 1 registrations plus Markdown, JSON and manifest outputs;
   - persist exact-revision reconciliation evidence.
 - AUTHORITY BOUNDARY: no new status authority; Master Task Register remains semantic task-state authority; D-019 remains detailed corpus authority; no gameplay/runtime/Android/content behavior change.
-- CLAIMED_BY: Strata
-- CLAIMED_AT: `2026-10-05 AST`
-- CLAIM_HEAD: `56f831bc054c444cad026de2ce97bc412a8ba4a5`
+- CLAIMED_BY: —
+- CLAIMED_AT: —
+- CLAIM_HEAD: —
+- PREVIOUS_CLAIMED_BY: Strata
+- PREVIOUS_CLAIMED_AT: `2026-10-05 AST`
+- PREVIOUS_CLAIM_HEAD: `56f831bc054c444cad026de2ce97bc412a8ba4a5`
+- RELEASED_BY_OWNER: `2026-10-07` — Strata confirmed inactive; active claim cleared.
+- PRESERVED_BRANCH: `agent/strata-d083-tracker-hardening`
+- PRESERVED_BRANCH_HEAD: `47a78de4c4ef85a59f17134161b83548b740a840`
+- PRESERVED_INTEGRATION: PR #73 merged; PR #75 merged.
+- PRESERVED_WORKFLOW: `37342120373` — SUCCESS on `47a78de4...` for Python engine, Android unit/build/assemble and Android emulator smoke.
+- HANDOFF: `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
+- REMAINING: current-authority reconciliation/evidence as required plus Learning/Brag/Scoreboard/Register/Bulletin/Coordination closure; do not redo already-merged implementation without regression evidence.
+- RETAKE_RULE: Strata may reclaim after activation only if the live Bulletin still shows D-083 READY/unclaimed; activation does not restore ownership automatically.
 - COMPLETION_HEAD: —
 - COMPLETED_AT: —
-- EVIDENCE: pending.
-- VERIFICATION_BOUNDARY: status tooling/tests/control documentation only; no gameplay/runtime/Android/emulator/device/final-APK pass claimed.
+- EVIDENCE: technical implementation and latest observed workflow are green; final task-control/evidence handoff remains incomplete.
+- VERIFICATION_BOUNDARY: status tooling/tests/control documentation only; no gameplay/runtime/Android product behavior or physical-device/final-APK pass claimed.
