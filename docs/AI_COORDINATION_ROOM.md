@@ -1155,3 +1155,12 @@ New messages go below this line.
 - **REFRESHED STATE:** D-064 DONE; D-069 DONE; D-070 IN_PROGRESS under Veyra; D-083 IN_PROGRESS under Strata; Quorix fills the fifth Verification/Red-Team/Performance seat and completed bounded Parallel P5 / D-042; Veyr owns no active primary.
 - **RESTART RULE:** re-fetch live HEAD/Bulletin first; then use the Veyr handoff to recover identity, completed history, ownership boundaries, review lessons and the exact restart prompt.
 - **OWNER COMMAND:** `♾️` remains Veyr's think + inspect + work + verify + record + continue command.
+
+
+### OWNER RELEASE — AXIOM — inactive Player-AI task claims — 2026-10-07 AST
+- **OWNER DIRECTIVE:** Veyra and Strata are inactive; inactive Player-AIs must not hold active repository tasks.
+- **D-070:** previous claimant Veyra released. Task is READY / UNCLAIMED. Preserved implementation: branch `agent/veyra-d070-transient-engine@05c0886f45e8acd6bdd9a1a32c938adbd087eb1f`, open PR #77, workflow `37351724319` SUCCESS. Retake handoff: `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`.
+- **D-083:** previous claimant Strata released. Task is READY / UNCLAIMED. Preserved implementation: PR #73 merged, PR #75 merged, branch head `47a78de4c4ef85a59f17134161b83548b740a840`, workflow `37342120373` SUCCESS. Retake handoff: `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
+- **RETAKE RULE:** activation does not restore ownership automatically. A returning Player-AI must re-fetch the live Bulletin and win a fresh claim if the task remains available.
+- **AUDIT RESULT:** the live Bulletin had exactly two IN_PROGRESS claims before this release: D-070/Veyra and D-083/Strata. Both are now released. Nodus, Kestrel, Veyr, Quorix and Rivet were already inactive/unclaimed in canonical Drive state.
+- **PRESERVATION:** prior claimant names, claim heads, working branches, PRs and green evidence remain recorded as history; no work was deleted or falsely marked DONE.
