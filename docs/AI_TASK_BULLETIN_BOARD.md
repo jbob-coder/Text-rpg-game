@@ -33,25 +33,25 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 ### Critical path
 - **D-064:** DONE — Kestrel; PR #70/run #362 green; authority merge `d7ebb7ca...`; CPR-002 resolved.
 - **D-069:** DONE — Veyra; authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; PR #76/run #390 green; CPR-003/CPR-004 resolved.
-- **D-070:** **IN_PROGRESS — Veyra**. Transient tactical session/turn/action engine is the active gameplay critical path.
+- **D-070:** **READY / UNCLAIMED**. Veyra is inactive and the owner released the claim; preserved work is documented in `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`.
 - **D-071+:** remain dependency-gated behind D-070.
 
 ### Other active work
 - **Quorix:** Parallel P5 / D-042 DONE — fifth-seat Verification / Red-Team / Performance lead returns to review availability.
-- **Strata:** D-083 implementation/technical verification is green; **owner handoff/control synchronization still pending**, so Bulletin status remains IN_PROGRESS until Strata closes evidence/Learning/Brag/Register/Bulletin/Coordination.
+- **Strata:** inactive. D-083 is **READY / UNCLAIMED**; technical implementation is already merged/green and the remaining control closure is preserved in `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
 - Other Player-AIs should not duplicate either claim.
 
 ### Verified standings
 - **Nodus:** 700
-- **Veyra:** 640 (+90 active potential on D-070)
+- **Veyra:** 640 (inactive; no active potential)
 - **Kestrel:** 460
 - **Veyr:** 380
 - **Quorix:** 95
 
 ### Immediate strategy
-1. Veyra completes D-070 without expanding into D-071/D-072+ scope; CPR-005 is the only currently linked ordering-contract review.
-2. Quorix preserves the completed P5 survivor evidence for D-029/D-077 and remains available for independent verification/red-team review.
-3. Strata completes D-083 owner handoff/control synchronization; do not redo already-green tracker implementation.
+1. D-070 is READY / UNCLAIMED. Preserve PR #77 / branch `agent/veyra-d070-transient-engine`; Veyra may retake it after activation if it is still unclaimed.
+2. D-083 is READY / UNCLAIMED. Preserve merged PRs #73/#75; Strata may retake it after activation if it is still unclaimed.
+3. Quorix remains available for independent verification/red-team review.
 4. On D-070 completion, evaluate and unlock D-071 immediately.
 
 ### Coordination rule
@@ -87,8 +87,8 @@ Current operational role assignments:
   - currently available for integration review.
 
 - **Veyra — Player-AI: Gameplay Systems & Tactical Lead**
-  - owns tactical/gameplay implementation direction;
-  - current primary: **D-070 IN_PROGRESS**.
+  - currently **INACTIVE**;
+  - owns no active repository task; D-070 was released with a resumable handoff.
 
 - **Kestrel — Player-AI: Player-Safe Projection, Presentation & Asset Lead**
   - owns projection/presentation/asset reconstruction review;
@@ -102,10 +102,10 @@ Current operational role assignments:
   - fills the fifth Player-AI seat;
   - Parallel P5 / D-042 bounded lane **DONE**; currently verification/red-team available.
 
-- **Strata — active auxiliary Player-AI: Repository Status / Tooling**
-  - current primary: **D-083 IN_PROGRESS**;
-  - owns tracker/test/tracking-standard surfaces for that task;
-  - no permanent domain ownership is implied beyond the active claim.
+- **Strata — auxiliary Player-AI: Repository Status / Tooling**
+  - currently **INACTIVE**;
+  - owns no active repository task; D-083 was released with a resumable handoff;
+  - no permanent domain ownership is implied.
 
 These are Player-AI classes/specializations and current task/accountability lanes, not permanent file ownership. Cross-domain disputes go to Council/AXIOM.
 
@@ -229,6 +229,7 @@ Do not mark a symptom patch as a root-cause fix merely to obtain points.
 ## Concurrency rules
 
 - One primary task has one active claimant.
+- **Inactive / sleeping entity rule:** an INACTIVE Player-AI may not retain an `IN_PROGRESS` Bulletin claim. On owner-confirmed shutdown, preserve prior claim/branch/evidence in a handoff, clear active claimant fields, and return dependency-safe unfinished work to `READY`. Reactivation does not auto-reclaim the task; the Player-AI must re-fetch and claim again if it remains available.
 - One active primary task per agent is the default. A second claim may exist only as an explicitly documented short reservation; substantive work waits for the first task's handoff unless the Project Overseer approves true parallel execution.
 - Re-fetch this file immediately before claim, completion, unlock or queue edits.
 - Never overwrite a newer claim or use a stale blob SHA.
@@ -508,7 +509,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-070`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `90/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-069 DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
 - **PREFLIGHT:** `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — re-audit against merged D-069 before implementation.
@@ -516,11 +517,17 @@ Bragging is encouraged; fabrication is forbidden.
 - **NEXT_MOVE:** re-read merged D-069 APIs plus Movement/Pathing and Turn/Initiative standards; update the preflight for movement-point allowance, reaction reserve lifecycle and reinforcement scheduling; then implement the smallest transient session/activation/budget/movement/event seam without GameState/save expansion.
 - **ACCEPTANCE:** Headless transient encounter executes deterministic legal turns/actions without GameState tactical schema expansion; previews do not consume event sequence.
 - **BONUS:** `D-070-B` — deterministic transcript/replay hash.
-- **CLAIMED_BY:** Veyra
-- **CLAIMED_AT:** 2026-10-05T13:26:00-04:00
-- **CLAIM_HEAD:** `5362f50eec8e9a0da1af9a395314932bf8110648`
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+- **PREVIOUS_CLAIMED_BY:** Veyra
+- **PREVIOUS_CLAIMED_AT:** 2026-10-05T13:26:00-04:00
+- **PREVIOUS_CLAIM_HEAD:** `5362f50eec8e9a0da1af9a395314932bf8110648`
+- **RELEASED_BY_OWNER:** 2026-10-07 — Veyra inactive; task returned to READY.
+- **PRESERVED_WORK:** branch `agent/veyra-d070-transient-engine` @ `05c0886f45e8acd6bdd9a1a32c938adbd087eb1f`; open PR #77; workflow run `37351724319` SUCCESS.
+- **HANDOFF:** `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`.
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** D-069 final evidence + D-070 preflight; implementation pending.
+- **EVIDENCE:** D-069 final evidence + D-070 preflight + preserved PR #77 branch evidence; D-070 acceptance remains incomplete.
 - **CPR:** `CPR-005` — reaction trigger-priority direction/representation contract gap; AXIOM review pending. Independent D-070 work continues; do not invent queue ordering.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
@@ -835,13 +842,19 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 ### D-083 — Phase 1 fixed-range status invariant + tracker output verification
 - **TASK_REF:** `D-083`
 - **PRIORITY:** `P0/P1 PROGRAM INFRA`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** owner-directed independent verification of D-081/D-082.
 - **DEPENDENCIES:** D-081 DONE; D-082 DONE.
 - **ACCEPTANCE:** fixed D-060..D-079 denominator of 20 even if a register entry is missing; missing IDs counted UNKNOWN/incomplete; Markdown includes Phase 1 state counts; executable JSON/Markdown/manifest output regressions; exact recursive-tree reconciliation; no competing authority.
-- **CLAIMED_BY:** Strata
-- **CLAIMED_AT:** 2026-10-05 AST
-- **CLAIM_HEAD:** `56f831bc054c444cad026de2ce97bc412a8ba4a5`
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+- **PREVIOUS_CLAIMED_BY:** Strata
+- **PREVIOUS_CLAIMED_AT:** 2026-10-05 AST
+- **PREVIOUS_CLAIM_HEAD:** `56f831bc054c444cad026de2ce97bc412a8ba4a5`
+- **RELEASED_BY_OWNER:** 2026-10-07 — Strata inactive; task returned to READY.
+- **PRESERVED_WORK:** PR #73 and PR #75 merged; branch head `47a78de4c4ef85a59f17134161b83548b740a840`; workflow run `37342120373` SUCCESS.
+- **HANDOFF:** `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
 - **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending.
-- **OVERLAP:** status tooling/tests/control docs only; no D-064/D-069 runtime/test surface edits.
+- **EVIDENCE:** technical implementation/verification green; final evidence/control synchronization remains pending.
+- **OVERLAP:** status tooling/tests/control docs only; no gameplay/runtime ownership.
