@@ -778,7 +778,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **MASTER_TASK_BOUNDARY:** master D-042 remains IN_PROGRESS for broader delegated consumer/asset/deprecation work; only Parallel P5 is DONE.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — Parallel P5 / D-042 — The survivor map follows the real runtime owner`.
 - **SCORE:** 95 — P0/P1 parallel 75 + verified machine-readable survivor-matrix bonus 20.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no; Quorix returns to verification/red-team availability while D-069 and D-083 remain owned by Veyra and Strata.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** historical note — at that completion checkpoint D-069/D-083 were owned by Veyra/Strata. **SUPERSEDED 2026-10-07:** both inactive claims were released; D-070 and D-083 are READY/unclaimed.
 
 
 ## Queue maintenance
