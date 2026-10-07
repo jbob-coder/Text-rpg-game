@@ -38,7 +38,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 
 ### Other active work
 - **Quorix:** Parallel P5 / D-042 DONE — fifth-seat Verification / Red-Team / Performance lead returns to review availability.
-- **Strata:** inactive. D-083 is **READY / UNCLAIMED**; technical implementation is already merged/green and the remaining control closure is preserved in `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
+- **Strata:** inactive; prior D-083 implementation remains preserved. **Silex** has claimed D-083 for current-authority verification and completion handoff.
 - Other Player-AIs should not duplicate either claim.
 
 ### Verified standings
@@ -50,7 +50,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 
 ### Immediate strategy
 1. D-070 is READY / UNCLAIMED. Preserve PR #77 / branch `agent/veyra-d070-transient-engine`; Veyra may retake it after activation if it is still unclaimed.
-2. D-083 is READY / UNCLAIMED. Preserve merged PRs #73/#75; Strata may retake it after activation if it is still unclaimed.
+2. D-083 is IN_PROGRESS under Silex. Preserve merged PRs #73/#75; complete current-authority verification and task-control handoff.
 3. Quorix remains available for independent verification/red-team review.
 4. On D-070 completion, evaluate and unlock D-071 immediately.
 
@@ -842,13 +842,13 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 ### D-083 — Phase 1 fixed-range status invariant + tracker output verification
 - **TASK_REF:** `D-083`
 - **PRIORITY:** `P0/P1 PROGRAM INFRA`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** owner-directed independent verification of D-081/D-082.
 - **DEPENDENCIES:** D-081 DONE; D-082 DONE.
 - **ACCEPTANCE:** fixed D-060..D-079 denominator of 20 even if a register entry is missing; missing IDs counted UNKNOWN/incomplete; Markdown includes Phase 1 state counts; executable JSON/Markdown/manifest output regressions; exact recursive-tree reconciliation; no competing authority.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Silex
+- **CLAIMED_AT:** 2026-10-07T19:11:18-04:00
+- **CLAIM_HEAD:** `0c540693f72ac3c36f2a1bf83446b4b651030a3c`
 - **PREVIOUS_CLAIMED_BY:** Strata
 - **PREVIOUS_CLAIMED_AT:** 2026-10-05 AST
 - **PREVIOUS_CLAIM_HEAD:** `56f831bc054c444cad026de2ce97bc412a8ba4a5`

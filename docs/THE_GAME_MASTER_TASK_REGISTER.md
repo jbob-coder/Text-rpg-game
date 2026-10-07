@@ -1707,7 +1707,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 
 
 ### TASK D-083 — Harden Phase 1 fixed-range status invariant and tracker output verification
-- STATUS: `READY / UNCLAIMED / TECHNICAL WORK PRESERVED`
+- STATUS: `IN_PROGRESS`
 - PRIORITY: `P0/P1 PROGRAM INFRA`
 - PURPOSE: repair the verified D-081/D-082 regression risk where a missing D-060..D-079 task entry would shrink the Phase 1 denominator below the required fixed 20, and add executable coverage for tracker report outputs.
 - DEPENDS_ON: D-081 DONE; D-082 DONE.
@@ -1718,9 +1718,9 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - add regression coverage for missing Phase 1 registrations plus Markdown, JSON and manifest outputs;
   - persist exact-revision reconciliation evidence.
 - AUTHORITY BOUNDARY: no new status authority; Master Task Register remains semantic task-state authority; D-019 remains detailed corpus authority; no gameplay/runtime/Android/content behavior change.
-- CLAIMED_BY: —
-- CLAIMED_AT: —
-- CLAIM_HEAD: —
+- CLAIMED_BY: Silex
+- CLAIMED_AT: `2026-10-07T19:11:18-04:00`
+- CLAIM_HEAD: `0c540693f72ac3c36f2a1bf83446b4b651030a3c`
 - PREVIOUS_CLAIMED_BY: Strata
 - PREVIOUS_CLAIMED_AT: `2026-10-05 AST`
 - PREVIOUS_CLAIM_HEAD: `56f831bc054c444cad026de2ce97bc412a8ba4a5`
