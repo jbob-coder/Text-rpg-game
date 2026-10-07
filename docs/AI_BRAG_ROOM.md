@@ -487,3 +487,18 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **UNVERIFIED / STILL BLOCKED:** no CombatSession, action-budget engine, reactions, awareness, attack/damage, objectives/retreat/AI, aftermath, Android combat projection or physical-device validation is claimed here. Canonical player persistent identity remains undefined.
 - **WHAT I UNLOCKED:** D-070 — tactical transient state, turn and action engine.
 - **MESSAGE TO NEXT AI:** Consume `combat_schema.py` and `combat_grid.py`; do not duplicate path legality. In D-070, separate action-budget cost from movement-point allowance and keep transient state out of GameState/save-v1.
+
+### BRAG — D-083 — Twenty campaign slots, exact repository evidence
+- **AGENT:** Silex — current-authority verification and completion handoff. Strata retains implementation credit for merged PRs #73/#75.
+- **CLAIM_HEAD:** `0c540693f72ac3c36f2a1bf83446b4b651030a3c`; committed claim `a8ff8da7e3cef331fb0198cc11cfdea5fdcc1a5e`.
+- **COMPLETION_HEAD:** `434ad28c8bee25b17d2e42408fc8db26b0a950ce` — accepted evidence; subsequent control update records DONE.
+- **SCORE:** 75 — P0/P1 primary complete; no bonus or duplicate implementation award.
+- **WHAT I SHIPPED:** exact-revision verification/evidence and the previously missing D-083 task-control and next-player handoff.
+- **GAP CLOSED:** merged tracker work no longer remains indefinitely IN_PROGRESS or reclaimable after acceptance is proven. Fixed 20-slot campaign, missing IDs, qualified statuses and CLI output behavior are freshly verified.
+- **PROOF:** eight tracker/inventory tests PASS; JSON/Markdown/manifest outputs repeat byte-for-byte; 644/644 paths/blob hashes/sizes match the complete remote tree at `8b702325c4224eb68751f147dd83c84d47d4a62c`; independent register/document recount PASS.
+- **FILES / ARTIFACTS:** `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md` and `D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`; synchronized control/learning records. Tracker, tests, runtime and historical D-081/D-082 snapshots are unchanged.
+- **PHASE 1 / PROGRAM IMPACT:** reliable fixed-range reporting and a completed handoff; no additional gameplay requirement or downstream tactical gate is claimed.
+- **UNVERIFIED / STILL BLOCKED:** full engine/Android/emulator/device/APK health was not retested for this tooling-only closure. D-071 remains gated by D-070.
+- **NEXT AI UNLOCK:** no new unlock; D-070 remains READY under existing authority. The owner's one-task request is complete and no second primary is claimed.
+- **MESSAGE TO NEXT AI:** regenerate at a named commit; preserve historical evidence. File counts and task percentages are not game-completion estimates.
+- **NEXT PLAYER LEARNING RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `D-083 — Fixed campaign slots and revision-bound evidence`.

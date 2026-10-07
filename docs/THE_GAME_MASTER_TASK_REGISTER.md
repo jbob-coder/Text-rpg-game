@@ -1707,7 +1707,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 
 
 ### TASK D-083 — Harden Phase 1 fixed-range status invariant and tracker output verification
-- STATUS: `IN_PROGRESS`
+- STATUS: `DONE`
 - PRIORITY: `P0/P1 PROGRAM INFRA`
 - PURPOSE: repair the verified D-081/D-082 regression risk where a missing D-060..D-079 task entry would shrink the Phase 1 denominator below the required fixed 20, and add executable coverage for tracker report outputs.
 - DEPENDS_ON: D-081 DONE; D-082 DONE.
@@ -1730,9 +1730,12 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - PRESERVED_INTEGRATION: PR #73 merged; PR #75 merged.
 - PRESERVED_WORKFLOW: `37342120373` — SUCCESS on `47a78de4...` for Python engine, Android unit/build/assemble and Android emulator smoke.
 - HANDOFF: `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
-- REMAINING: current-authority reconciliation/evidence as required plus Learning/Brag/Scoreboard/Register/Bulletin/Coordination closure; do not redo already-merged implementation without regression evidence.
-- RETAKE_RULE: Strata may reclaim after activation only if the live Bulletin still shows D-083 READY/unclaimed; activation does not restore ownership automatically.
-- COMPLETION_HEAD: —
-- COMPLETED_AT: —
-- EVIDENCE: technical implementation and latest observed workflow are green; final task-control/evidence handoff remains incomplete.
+- RESULT: fixed 20-slot/missing-ID/Markdown/CLI requirements verified on current authority; all 644 tracked blobs reconciled against the complete GitHub recursive tree; qualified D-043 status verified; Learning/Brag/Scoreboard/Mission/Bulletin/Coordination handoff synchronized. Strata's implementation is preserved without source/test edits.
+- REMAINING: none within D-083 acceptance; reopen only on new regression evidence.
+- COMPLETION_HEAD: `434ad28c8bee25b17d2e42408fc8db26b0a950ce` — accepted evidence; this control update records DONE.
+- COMPLETED_AT: `2026-10-07T19:19:06-04:00`
+- EVIDENCE: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`; `docs/evidence/D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`.
+- VALIDATION: `PYTHONPATH=src:. python -m unittest tests.test_project_status_tracker tests.test_documentation_inventory_tool -v` — 8 PASS; actual JSON/Markdown/manifest CLI outputs deterministic; 644 paths/blob hashes/sizes match remote tree with `truncated=false`; independent task/document recount PASS at `8b702325c4224eb68751f147dd83c84d47d4a62c`.
+- FILES_CHANGED: two D-083 evidence artifacts; task/control/learning records only. D-081/D-082 historical snapshots and all tracker/runtime/test source remain unchanged.
+- NEXT: D-070 remains READY; this infrastructure completion does not unlock D-071 or count toward additional Phase 1 gameplay acceptance.
 - VERIFICATION_BOUNDARY: status tooling/tests/control documentation only; no gameplay/runtime/Android product behavior or physical-device/final-APK pass claimed.

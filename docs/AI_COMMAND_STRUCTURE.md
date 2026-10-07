@@ -146,7 +146,7 @@ Primary responsibility after assignment:
 
 Current execution:
 - Parallel P5 / D-042 bounded cross-branch survivor audit DONE; master D-042 remains IN_PROGRESS for broader delegated gaps.
-- Quorix is available for independent verification/red-team review without taking over Veyra's D-069 or Strata's D-083 claims.
+- Quorix is available for independent verification/red-team review; consult the live Bulletin for ownership. D-083 is complete following Silex's verification/handoff of Strata's implementation.
 
 Likely downstream leadership:
 - D-076 integrated regression support;
@@ -210,6 +210,6 @@ Specialization changes must be recorded here and in the Decision Log.
 1. Veyra completes D-069 — tactical schemas, validators and pure grid core — under the runtime merge-state gate.
 2. Unlock D-070 immediately after D-069 acceptance.
 3. Quorix preserves the completed Parallel P5 / D-042 survivor evidence and supports independent verification; preferred later gates remain D-076/D-078/D-079 when unlocked.
-4. Strata completes D-083 repository-status tracker hardening without overlapping gameplay/runtime work.
+4. D-083 is DONE: Strata's tracker implementation is preserved, and Silex completed current-authority verification and handoff. Reuse the Learning Ledger shortcut rather than reopening it without regression evidence.
 5. Preserve completed D-064/D-065/D-067/D-068/D-075 evidence for later D-076 integration; do not reopen without regression evidence.
 6. Keep Mission Control/Coordination/Bulletin current so Player-AIs spend time solving the game rather than rediscovering task state.

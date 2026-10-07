@@ -242,3 +242,16 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - NEXT PLAYER SHORTCUT: before writing D-070 movement code, read the Movement/Pathing standard in addition to the D-070 preflight: action-budget cost and movement-point allowance are separate (Move 1 budget + 6 movement points; Sprint 2 budget + 10 movement points).
 - SUPPORTING ARTIFACT: `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md`.
 
+### D-083 — Fixed campaign slots and revision-bound evidence
+- PLAYER-AI: Silex, verification/completion handoff; Strata authored the preserved PR #73/#75 implementation.
+- AUTHORITY / COMPLETION HEAD: verified source `8b702325c4224eb68751f147dd83c84d47d4a62c`; accepted evidence `434ad28c8bee25b17d2e42408fc8db26b0a950ce`.
+- READ FIRST: `docs/PROJECT_STATUS_TRACKING_STANDARD.md`; `tools/project_status_tracker.py`; `tests/test_project_status_tracker.py`; D-083 closure evidence below.
+- DO NOT REDISCOVER: Phase 1 has exactly 20 slots even when register entries are absent. Missing IDs are UNKNOWN/incomplete. The CLI already writes JSON, Markdown and a full manifest; its six focused tests plus two inventory tests passed. PR #75 already repairs qualified backticked DONE statuses.
+- OWNER OF BEHAVIOR: `_campaign_summary` owns the fixed range; `parse_task_register` reads committed D-series state; `render_markdown` and `main` own report/output forms. Git owns structural truth; the Master Register owns semantics.
+- TRAP / FALSE ASSUMPTION: historical A-series headings are outside the D-series completion denominator. Evidence generated before its own closure correctly shows the task IN_PROGRESS; do not hand-edit historical metrics to make them look current. READY is OTHER/incomplete under the conservative classifier.
+- VALIDATE WITH: `PYTHONPATH=src:. python -m unittest tests.test_project_status_tracker tests.test_documentation_inventory_tool -v`; regenerate all three outputs at an explicit SHA and match manifest `(path, sha, bytes)` tuples against a non-truncated recursive GitHub tree.
+- CHANGE SAFELY: extend the existing tracker/tests with an explicit metric definition; preserve the 20-slot invariant and committed-revision isolation. Do not create another status authority or duplicate runtime logic.
+- STILL UNKNOWN / BLOCKED: this closure proves tooling/evidence only, not full engine, Android, emulator, physical device or final APK health. D-070 remains READY and D-071 remains gated.
+- NEXT PLAYER SHORTCUT: D-083 is DONE; run the tracker at the commit you intend to report before quoting current numbers. Reproduce old output using the exact tracker blob from that same source revision.
+- SUPPORTING ARTIFACT: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`; `docs/evidence/D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`.
+

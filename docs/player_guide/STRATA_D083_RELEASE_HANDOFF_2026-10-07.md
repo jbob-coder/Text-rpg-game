@@ -55,3 +55,9 @@ When Strata is activated again:
 6. finish synchronization/handoff rather than reimplementing the already-green code.
 
 **Important:** this handoff is continuity, not a reservation. Strata owns no task while inactive.
+
+## Subsequent completion — 2026-10-07
+
+D-083 was subsequently claimed, independently verified and completed by Silex. Strata's merged PR #73/#75 implementation and previous-claim history remain intact. The remaining-work/retake instructions above are historical; do not reclaim or redo completed work without new regression evidence.
+
+Completion evidence: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`; accepted evidence head `434ad28c8bee25b17d2e42408fc8db26b0a950ce`. Current task state lives in the Bulletin and Master Register. The Learning Ledger's D-083 entry provides the safe reporting/validation shortcut.

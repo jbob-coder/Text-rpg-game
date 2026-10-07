@@ -534,7 +534,7 @@ Parallel P5 is DONE as a bounded lane. Master D-042 remains IN_PROGRESS for broa
 No Python/Android runtime tests, APK build, emulator/device run, raster-equivalence execution, visual promotion or branch merge is claimed by P5.
 
 ### Next Move
-Do not reopen the P5 slice without new branch evidence. D-070 and D-083 are both released READY/unclaimed because Veyra and Strata are inactive; Quorix remains available for independent verification/red-team review.
+Do not reopen the P5 slice without new branch evidence. D-070 remains released READY/unclaimed. D-083 is DONE after Silex's verification/handoff; Quorix remains available for independent verification/red-team review.
 
 Preferred downstream leadership when unlocked:
 - D-076 integrated deterministic regression;
@@ -651,20 +651,36 @@ Do not use D-070 to introduce:
 
 ---
 
-## D-083 — Released program-infrastructure task
+## D-083 — Status tracker verification — COMPLETED
 
-**Status:** READY / UNCLAIMED.  
-**Previous claimant:** Strata — released by owner on 2026-10-07 because Strata is inactive.
+**Status:** DONE / VERIFIED / HANDOFF COMPLETE.
+**Completion verifier:** Silex; **implementation author:** Strata, whose inactive claim was released by the owner on 2026-10-07.
 
-Technical work is preserved:
+### Verified result
+
+- fixed D-060..D-079 denominator of 20, with missing slots UNKNOWN/incomplete;
+- Markdown Phase 1 state counts and all three executable CLI outputs verified;
+- eight tracker/inventory regressions PASS;
+- 644/644 exact-revision file paths, blob hashes and sizes match the complete GitHub recursive tree;
+- independent task/document totals agree and repeat CLI outputs are byte-identical;
+- no tracker/runtime/test source changed for this closure.
+
+### Evidence
+
+- `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`;
+- `docs/evidence/D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`;
+- verified revision `8b702325c4224eb68751f147dd83c84d47d4a62c`; evidence head `434ad28c8bee25b17d2e42408fc8db26b0a950ce`;
+- Learning Ledger: `D-083 — Fixed campaign slots and revision-bound evidence`.
+
+### Preserved implementation history
+
 - PR #73 merged;
 - PR #75 merged;
 - branch head `47a78de4c4ef85a59f17134161b83548b740a840`;
-- workflow run `37342120373` SUCCESS.
+- historical workflow run `37342120373` SUCCESS, distinct from this closure's fresh tooling-only evidence.
 
-The remaining work is primarily current-authority reconciliation and task-control handoff. Do not redo the tracker implementation unless fresh evidence shows a regression.
+Release history: `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
 
-Retake authority:
-`docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`
+### Next move
 
-Strata may retake only after activation and a fresh Bulletin claim if D-083 remains available.
+Do not reclaim D-083 or redo merged tracker work without a new demonstrated regression. Regenerate reports at an explicit commit when current totals are needed; old evidence stays immutable. D-070 remains the next READY tactical task, with D-071 still gated. Silex has no active claim after completing the owner's one-task request.

@@ -38,8 +38,8 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 
 ### Other active work
 - **Quorix:** Parallel P5 / D-042 DONE — fifth-seat Verification / Red-Team / Performance lead returns to review availability.
-- **Strata:** inactive; prior D-083 implementation remains preserved. **Silex** has claimed D-083 for current-authority verification and completion handoff.
-- Other Player-AIs should not duplicate either claim.
+- **D-083:** DONE — Silex verified current authority and completed handoff; Strata's merged implementation in PRs #73/#75 is preserved. Evidence head `434ad28c8bee25b17d2e42408fc8db26b0a950ce`.
+- Re-fetch the task entry before claiming; completed D-083 work is not an active claim.
 
 ### Verified standings
 - **Nodus:** 700
@@ -47,10 +47,11 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **Kestrel:** 460
 - **Veyr:** 380
 - **Quorix:** 95
+- **Silex:** 75 — D-083 verified completion; prior implementation credited to Strata.
 
 ### Immediate strategy
 1. D-070 is READY / UNCLAIMED. Preserve PR #77 / branch `agent/veyra-d070-transient-engine`; Veyra may retake it after activation if it is still unclaimed.
-2. D-083 is IN_PROGRESS under Silex. Preserve merged PRs #73/#75; complete current-authority verification and task-control handoff.
+2. D-083 is DONE. Use its exact-revision evidence and Learning Ledger shortcut; reopen only for a new demonstrated regression.
 3. Quorix remains available for independent verification/red-team review.
 4. On D-070 completion, evaluate and unlock D-071 immediately.
 
@@ -104,8 +105,12 @@ Current operational role assignments:
 
 - **Strata — auxiliary Player-AI: Repository Status / Tooling**
   - currently **INACTIVE**;
-  - owns no active repository task; D-083 was released with a resumable handoff;
+  - owns no active repository task; D-083 implementation credit remains preserved after Silex completed verification/handoff;
   - no permanent domain ownership is implied.
+
+- **Silex — auxiliary Player-AI: Repository Status Verification / Handoff**
+  - D-083 **DONE**; no active primary claim;
+  - completed the owner's one-task request without changing tracker/runtime source.
 
 These are Player-AI classes/specializations and current task/accountability lanes, not permanent file ownership. Cross-domain disputes go to Council/AXIOM.
 
@@ -778,7 +783,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **MASTER_TASK_BOUNDARY:** master D-042 remains IN_PROGRESS for broader delegated consumer/asset/deprecation work; only Parallel P5 is DONE.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — Parallel P5 / D-042 — The survivor map follows the real runtime owner`.
 - **SCORE:** 95 — P0/P1 parallel 75 + verified machine-readable survivor-matrix bonus 20.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** historical note — at that completion checkpoint D-069/D-083 were owned by Veyra/Strata. **SUPERSEDED 2026-10-07:** both inactive claims were released; D-070 and D-083 are READY/unclaimed.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** historical note — at that completion checkpoint D-069/D-083 were owned by Veyra/Strata. **SUPERSEDED 2026-10-07:** both inactive claims were released; D-083 was subsequently completed by Silex. D-070 remains READY/unclaimed.
 
 
 ## Queue maintenance
@@ -842,7 +847,7 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 ### D-083 — Phase 1 fixed-range status invariant + tracker output verification
 - **TASK_REF:** `D-083`
 - **PRIORITY:** `P0/P1 PROGRAM INFRA`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** owner-directed independent verification of D-081/D-082.
 - **DEPENDENCIES:** D-081 DONE; D-082 DONE.
 - **ACCEPTANCE:** fixed D-060..D-079 denominator of 20 even if a register entry is missing; missing IDs counted UNKNOWN/incomplete; Markdown includes Phase 1 state counts; executable JSON/Markdown/manifest output regressions; exact recursive-tree reconciliation; no competing authority.
@@ -855,6 +860,9 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **RELEASED_BY_OWNER:** 2026-10-07 — Strata inactive; task returned to READY.
 - **PRESERVED_WORK:** PR #73 and PR #75 merged; branch head `47a78de4c4ef85a59f17134161b83548b740a840`; workflow run `37342120373` SUCCESS.
 - **HANDOFF:** `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** technical implementation/verification green; final evidence/control synchronization remains pending.
+- **COMPLETION_HEAD:** `434ad28c8bee25b17d2e42408fc8db26b0a950ce` — accepted evidence; this control update records DONE.
+- **COMPLETED_AT:** 2026-10-07T19:19:06-04:00
+- **EVIDENCE:** `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`; machine companion `D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`. Eight scoped tests PASS; all three CLI outputs repeat byte-for-byte; 644/644 remote blob paths/hashes/sizes match at verified revision `8b702325c4224eb68751f147dd83c84d47d4a62c`.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-083 — Twenty campaign slots, exact repository evidence`.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-070 revalidated READY with D-069 DONE and resolved CPR-005; D-071 remains gated. No second task claimed under the owner's one-task request.
 - **OVERLAP:** status tooling/tests/control docs only; no gameplay/runtime ownership.

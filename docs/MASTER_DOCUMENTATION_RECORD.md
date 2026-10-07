@@ -1074,3 +1074,13 @@ Artifacts:
 - \`docs/PROJECT_STATUS_TRACKING_STANDARD.md\` §§10–11 — manifest and delta usage/definitions.
 
 The delta layer distinguishes current document count from documents created since an explicit base revision. It does not treat renames as semantic renames; path-level comparison reports removal + addition unless separately reconciled.
+
+## Fixed Phase 1 denominator and tracker verification — D-083 — 2026-10-07
+
+**Status:** DONE. Strata's merged PRs #73/#75 implement the fixed 20-slot campaign denominator, explicit missing IDs, Phase 1 Markdown state counts, CLI output regressions and qualified-backtick status parsing. Silex completed current-authority reconciliation and the missing control handoff.
+
+Evidence: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md` and its machine-readable companion; accepted evidence head `434ad28c8bee25b17d2e42408fc8db26b0a950ce`.
+
+At verified revision `8b702325c4224eb68751f147dd83c84d47d4a62c`, eight tracker/inventory regressions pass, all three CLI outputs reproduce byte-for-byte, and all 644 manifest paths/blob hashes/sizes match GitHub's complete recursive tree. These snapshot figures precede D-083 completion bookkeeping. Old D-081/D-082 evidence remains unchanged; regenerate at the desired exact revision for current totals.
+
+The Master Register still owns task state and D-019 still owns detailed corpus inventory. No gameplay/Android behavior or Phase 1 downstream gate changed. Next: use the existing tracker for revision-bound reporting; D-070 remains the next READY tactical task.
