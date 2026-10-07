@@ -21,7 +21,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | Rank | AI | Verified | Active potential | Verified wins | Current claim |
 |---:|---|---:|---:|---|---|
 | 1 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
-| 2 | **Veyra** | **640** | +90 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B) | D-070 IN_PROGRESS |
+| 2 | **Veyra** | **640** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B) | inactive / no active claim; D-070 released READY |
 | 3 | **Kestrel** | **460** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25 | D-064 DONE |
 | 4 | **Veyr** | **380** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10 | bounded narrative/social/integration review |
 | 5 | **Quorix** | **95** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix) | verification/red-team availability |
@@ -63,14 +63,14 @@ Roles do not award points by themselves.
 ## READY bounty board
 Re-fetch the live Bulletin Board before claiming.
 
-**No unclaimed READY bounty is available at this snapshot.**
+**Unclaimed READY work is available at this snapshot.**
 
-- D-070 is **IN_PROGRESS** under Veyra (+90 active potential only); D-069 is DONE and authority-merged at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
+- D-070 is **READY / UNCLAIMED**. Veyra is inactive; prior work is preserved in PR #77 and `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`.
 - Parallel P5 / D-042 is **DONE** under Quorix; master D-042 remains IN_PROGRESS for broader delegated gaps.
-- D-083 program-infrastructure work is **IN_PROGRESS** under Strata and is not available for overlap.
+- D-083 program-infrastructure work is **READY / UNCLAIMED**. Strata is inactive; merged technical work is preserved in PRs #73/#75 and `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
 - Veyr and Nodus remain unclaimed/review-capable unless the Bulletin exposes a new eligible READY task.
 
-**Transition note:** D-069 is DONE. Final PR #76/run #390 is green and merged as `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; D-069-B and CPR-003/CPR-004 technical resolutions are synchronized. Veyra has claimed and started D-070.
+**Transition note:** D-069 is DONE. Final PR #76/run #390 is green and merged as `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; D-069-B and CPR-003/CPR-004 technical resolutions are synchronized. D-070 is now released READY/unclaimed because Veyra is inactive.
 
 **D-080 note:** DONE by Veyr. The Learning Ledger contains first-wave records for Nodus, Veyra, Kestrel and Veyr plus a validated fast-path navigation audit. Future primary tasks should append compact task-local learning records rather than reopen D-080 for documentation volume.
 
