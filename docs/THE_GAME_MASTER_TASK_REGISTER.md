@@ -181,6 +181,7 @@ This section supersedes older statements about the top-level product objective w
   - `tools/documentation_inventory.py` now resolves a requested Git revision to a commit SHA and inventories committed content from that revision instead of walking the mutable working tree.
   - `tests/test_documentation_inventory_tool.py` proves untracked/dirty state cannot contaminate a revision report and proves distinct committed revisions produce distinct correct reports.
   - the earlier `991cd9b29ea0752fa1c303a19e8f210713efe4b5` snapshot remains valid historical evidence for its own immutable revision; it is no longer the current structural checkpoint.
+- P6 / D-019 — source-revision checkpoint (bounded Wave 2): Nodus verified the non-truncated Git tree at `fae4dd58c692298d8d9aadafb9704f8843359463` / tree `9bfedd23f3dbbf251efb18718b4c274a878d0a5f` and persisted `docs/evidence/P6_D019_GIT_TREE_INVENTORY_2026-10-08.json` + `docs/evidence/P6_D019_EXACT_REVISION_CHECKPOINT_2026-10-08.md`: 662 files, 7,428,218 blob bytes, 447 Markdown (445 in docs), 30 structured docs, 72 test-source paths. Full word/heading extraction and test execution unavailable in this environment; counts are not semantic completion or runtime evidence. P6 does not close the D-019 parent.
 - REMAINING:
   - execute/persist the full inventory tool from a complete checkout of an exact current program revision and publish exact Markdown word/heading totals from that execution;
   - add generalized structured world/domain record extractors beyond already audited packets;
