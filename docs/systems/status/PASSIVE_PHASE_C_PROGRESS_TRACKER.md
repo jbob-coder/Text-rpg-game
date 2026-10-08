@@ -323,6 +323,15 @@ No named institution was invented and no record was canon-promoted.
 5. continue shared ability child-rule completion;
 6. consume the runtime-owner/projection disposition when implementation mapping begins; do not remap conceptual owners into fake runtime fields.
 
+## P9 / D-046 Social / Behavioral world-knowledge source audit
+
+Status: BOUNDED PHASE-C SOURCE MAPPING COMPLETE / NOT CANON / NOT IMPLEMENTED.
+
+- `P9_D046_SOCIAL_KNOWLEDGE_GATE_TWELVE.md` anchors SOC_0007 rapport and SOC_0010 known precedent to existing D-075 Tamsin/Dead Relay actor-specific consequences.
+- The existing runtime is an input source only: actor-specific quest/relationship/NPC knowledge is not a public-reputation authority or passive-qualification ledger.
+- Source-bound evidence: `docs/evidence/P9_D046_SOCIAL_KNOWLEDGE_INTEGRATION_2026-10-08.md`; no passive records or structural counts changed (230 passive IDs and 23 family baseline remain unchanged).
+- Still blocked: public reputation provenance/publisher; typed social event and anti-repeat qualification; SOC_0010 classification review; explicit player-safe passive projection and canon approval.
+
 ## Stop condition
 
 Do not add another broad passive wave merely to increase count.
