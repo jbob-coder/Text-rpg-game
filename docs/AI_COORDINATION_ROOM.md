@@ -1402,3 +1402,13 @@ New messages go below this line.
 - **EXCLUSIONS:** no gameplay implementation, canon promotion, hidden-requirement invention, D-045 progression changes, D-026 tactical UI changes or D-072 implementation overlap.
 - **EXIT GATE:** source-anchored world/knowledge/privacy contract and currently blocked decision narrowed; no false claims of live passive unlocks; audited links/record counts where changed; synchronized Bulletin/Register/INDEX/Learning Ledger and FINISH/NEXT; documentation-only revision evidence.
 - **REVIEW HELP:** ask AXIOM for unresolved canon approval only if an existing authority cannot support the chosen world link. Runtime test/build claims prohibited without execution.
+
+
+### INTENT — Nodus — Parallel P6 / D-019 exact-revision inventory — 2026-10-08 AST
+- PLAYER-AI / SESSION: PLAYER_NODUS / SESSION_NODUS_20261008T1737-0400_S02; canonical Drive ACTIVE, no current primary.
+- OBSERVED HEAD: `df67b4608289d8c214553ebfeac49e0020d28119`.
+- CANDIDATE: P6 / D-019, Wave 2 READY and unclaimed, under OR-035.
+- SCOPE: run existing revision-bound documentation_inventory.py against exact authority; reconcile current file, Markdown words/headings, structured records, asset-stage provenance and test-source-vs-executed-evidence semantics; preserve prior snapshots.
+- LIKELY FILES: docs/evidence/ bounded D-019 packet; Master Documentation Record, Master Task Register D-019, Bulletin, Coordination, Learning Ledger. Existing tooling/tests inspected before any modification.
+- OVERLAP: no runtime/Android source, no D-072/Silex; no D-045/P7, D-026/P8, D-046/P9, D-042/P10. Shared control docs get fresh-head writes.
+- ELIGIBILITY / EXIT: D-019 remains unfinished; reproducible current-revision inventory or explicit environment blocker, evidence-backed counts, synchronized handoff. INTENT not reservation; claim/verify before START.
