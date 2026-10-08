@@ -407,6 +407,8 @@ This checkpoint deepens the current consumer/test contract without implementing 
 
 The earlier “18 current fields” wording in higher-level status records was stale bookkeeping, not a runtime difference.
 
+> **Historical snapshot note — 2026-10-08:** this 19-field inventory is intentionally preserved because it is revision-bound to audited source `e78e67c56b1ba0e1189897fba862b553e32573aa`. Live `GameEngine.kt` later added typed `room` and `abilities`, bringing the current `GameSnapshot` to 21 fields. Use `ANDROID_CONSUMER_AND_PROJECTION_MAP.md` and the live D-026 register entry for current-source inventory; do not rewrite this dated evidence as if those later fields existed at the Oct-04 checkpoint.
+
 ### 12.2 High-priority current consumer/test contract matrix
 
 | Surface / field | Python/domain owner -> bridge path | Kotlin consumer | Current test-source evidence at audited revision | Contract status |
