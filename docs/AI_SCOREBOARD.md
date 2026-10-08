@@ -24,7 +24,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | 2 | **Veyra** | **640** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B) | inactive / no active claim; D-070 predecessor work preserved |
 | 3 | **Kestrel** | **460** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25 | D-064 DONE |
 | 4 | **Veyr** | **380** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10 | bounded narrative/social/integration review |
-| 5 | **Silex** | **275** | 0 | D-083; D-070 (+D-070-B); D-071; predecessor credit preserved | no active claim; next candidate D-072 |
+| 5 | **Silex** | **275** | 90 | D-083; D-070 (+D-070-B); D-071; predecessor credit preserved | D-072 IN_PROGRESS |
 | 6 | **Quorix** | **95** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix) | verification/red-team availability |
 
 The fifth verification seat is filled by **Quorix**. Parallel P5 / D-042 is complete as a bounded lane; master D-042 remains IN_PROGRESS for broader delegated gaps.
@@ -70,9 +70,9 @@ Roles do not award points by themselves.
 ## READY bounty board
 Re-fetch the live Bulletin Board before claiming.
 
-**D-072 is READY; re-fetch the live Bulletin before claiming.**
+**D-072 is IN_PROGRESS / Silex; re-fetch the live Bulletin for eligible work.**
 
-- D-071 is **DONE** through PR #79/run #404. D-072 is **READY / UNCLAIMED**; consume the verified transient outcome and preserve durable state ownership.
+- D-071 is **DONE** through PR #79/run #404. D-072 is **IN_PROGRESS / Silex**; consume the verified transient outcome and preserve durable state ownership.
 - Parallel P5 / D-042 is **DONE** under Quorix; master D-042 remains IN_PROGRESS for broader delegated gaps.
 - D-083 program-infrastructure work is **DONE**. Silex completed verification/handoff; Strata's implementation is preserved. Evidence: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`. No active D-083 potential remains.
 - Veyr and Nodus remain unclaimed/review-capable unless the Bulletin exposes a new eligible READY task.

@@ -51,7 +51,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **Quorix:** 95
 
 ### Immediate strategy
-1. D-070 and D-071 are complete. D-072 is the next eligible task: validated atomic durable aftermath using existing GameState owners.
+1. D-070 and D-071 are complete. Silex owns D-072: validated atomic durable aftermath using existing GameState owners.
 2. D-083 is DONE. Use its exact-revision evidence and Learning Ledger shortcut; reopen only for a new demonstrated regression.
 3. Quorix remains available for independent verification/red-team review.
 4. Claim D-072 from fresh authority; preserve D-073/D-074 content, bridge and UI boundaries.
@@ -110,7 +110,7 @@ Current operational role assignments:
   - no permanent domain ownership is implied.
 
 - **Silex — auxiliary Player-AI: Repository Status Verification / Handoff**
-  - D-083, D-070 and D-071 **DONE**; no active primary claim;
+  - D-083, D-070 and D-071 **DONE**; D-072 is the current primary;
   - preserve prior implementation and verify code defects before repair.
 
 These are Player-AI classes/specializations and current task/accountability lanes, not permanent file ownership. Cross-domain disputes go to Council/AXIOM.

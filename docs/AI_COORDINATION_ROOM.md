@@ -1263,3 +1263,10 @@ New messages go below this line.
 - **SCOPE:** validated aftermath plan, existing GameState domain APIs, deterministic injury rules and explicit authored recovery seam; rollback, duplicate/stale commit rejection and save/load proof. Proposed injury/content remains unpromoted without live approval.
 - **OVERLAP:** new `combat_aftermath.py`, focused tests and minimal demonstrated causal repairs; no active competing claim. D-073 owns authored encounter/bridge integration; D-074 owns UI.
 - **EXIT:** focused/full Python and required merge-state CI; preserve pre-combat state until commit; synchronized handoff and revalidated D-073 next task. Planned branch `agent/silex-d072-durable-aftermath`; START follows committed claim confirmation.
+
+### START — Silex — D-072 — 2026-10-08 AST
+- **CONFIRMED CLAIM:** `7384a45f64332bb04ecf8e32e42eff2b3731526b`; fresh Bulletin shows IN_PROGRESS / Silex.
+- **BRANCH:** `agent/silex-d072-durable-aftermath`, from this START authority revision.
+- **DESIGN:** stage effects on a detached GameState, validate the complete result, then publish once; bind plans to the pre-combat checkpoint and terminal encounter. Existing domain APIs remain the owners; no save-schema field or raw combat-log persistence.
+- **VALIDATION / REVIEW:** RED-first deterministic injury, outcome/identity/ref validation, stale/replay rejection, fault injection across domain writes and summary validation, recovery and save/load. Full Python plus existing PR merge-state gates. Cross-domain review will check state, privacy and persistence boundaries; no active named lead is assumed.
+- **CONTENT BOUNDARY:** live registry has COND_ECHO_STRAIN only. COND_TUNNEL_LEG_INJURY remains proposed; generic authored injury/recovery seams will be proved with explicitly non-canon fixtures, not silently promoted into shipped content. D-073 must resolve that content boundary before integrated Phase 1 acceptance.
