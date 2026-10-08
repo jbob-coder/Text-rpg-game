@@ -1200,3 +1200,9 @@ New messages go below this line.
 - **CLAIM:** Silex takes D-070 through the accompanying Bulletin/Master Register update; prior Veyra identity and implementation credit remain preserved.
 - **SCOPE:** audit preserved PR #77 against current contracts, retain valid code/tests, complete deterministic reaction scheduling and other evidenced acceptance gaps, run focused/full Python and required merge-state CI. Planned branch: `agent/silex-d070-transient-engine`.
 - **OVERLAP / EXIT:** transient tactical state/tests and task evidence only; no D-071 awareness/AI, D-072 aftermath, Android tactical UI or save-schema expansion. Shared records use fresh-head leases. START follows committed claim confirmation.
+
+### START — Silex — D-070 — 2026-10-08 AST
+- **CONFIRMED CLAIM:** `976f8356674e9130dc55ea9026d31d5323f67460`; live Bulletin reserves D-070 for Silex.
+- **BRANCH:** `agent/silex-d070-transient-engine`, from fresh authority; preserve PR #77 as predecessor work, carrying only its five scoped files after review.
+- **AUDIT FOCUS:** reaction ordering under OR-033; incapacitation legality; transaction rollback; reserve expiry; reinforcement entry; action/event determinism and durable-state isolation.
+- **EXIT:** executed regression coverage plus full Python and required PR merge-state gates, then synchronized evidence/learning/completion. Report qualifying cross-domain problems through AXIOM; do not hide known red checks.
