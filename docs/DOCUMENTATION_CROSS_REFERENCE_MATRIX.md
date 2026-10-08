@@ -1314,3 +1314,13 @@ Feeds:
 - next-task selection.
 
 Boundary: conversation only; Bulletin/Master Task Register remain authoritative.
+
+## D-026 / P8 — Tactical player-safe projection migration child
+
+- **Canonical child:** [D026 tactical player-safe projection migration map](android/D026_TACTICAL_PLAYER_SAFE_PROJECTION_MIGRATION_MAP_2026-10-08.md).
+- **Master owner:** `docs/THE_GAME_MASTER_TASK_REGISTER.md` D-026; broader D-026 remains IN_PROGRESS.
+- **Consumers:** D-073 Python tactical bridge/content (must first satisfy D-072 and OR-034), D-074 Android typed DTO/mapper/ViewModel/Compose, D-077 Phase 1 Android consumer-gap closure.
+- **Existing producers:** `combat_knowledge.py::CombatKnowledge.player_view` and `combat_rules.py::EncounterRules.player_view` (observer-filtered tactical view); `android_bridge.py::AndroidGameSession._view_for` has **no combat field yet**.
+- **Authority boundaries:** OR-010 static room slots are not tactical world coordinates; OR-015 domain-specific projection versioning; OR-034 non-canonical integration fixture; OR-035 P8 documentation claim only.
+- **Required tests (future D-073/D-074):** hidden actor and last-known redaction across all payload/visual/accessibility consumers; supported/unknown tactical domain versions; legacy narrative packet; legal action delegation; merge-state CI and emulator evidence.
+- **Evidence:** `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md` (committed source/path verification; **no new runtime tests**). No duplicate projection authority or permanent encounter canon was created.
