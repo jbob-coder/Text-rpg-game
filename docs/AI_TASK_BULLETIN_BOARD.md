@@ -830,7 +830,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-026`
 - **PREFERRED_CLAIMANT:** Kestrel
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **DOMAIN:** player-safe tactical projection / Android migration documentation.
 - **SCOPE:** exactize the future D-073 -> D-074 projection path using current D-069/D-070/D-071 contracts, D-072 boundary, OR-015 versioning and OR-034 provisional-content rules; map Python player-safe tactical fields -> typed Kotlin DTO/mapper -> ViewModel action delegation -> Compose/test consumers.
 - **DO NOT:** implement D-073 or D-074; expose raw CombatSession/private AI/NPC state; invent gameplay calculations in Kotlin/Compose; edit Silex's D-072 branch.
@@ -838,6 +838,11 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIMED_BY:** Kestrel
 - **CLAIMED_AT:** 2026-10-08T18:56:56-04:00
 - **CLAIM_HEAD:** `35546e6c8cd524d213cdb4d75be35a15f4a5ce94`
+- **COMPLETED_AT:** 2026-10-08T19:01:15-04:00
+- **COMPLETION_HEAD:** `fe178ad069812a7cbcbfec216f8bf98ab2ff1ef3` (Learning Ledger committed; this Bulletin commit records P8 DONE)
+- **EVIDENCE:** `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md`; `docs/android/D026_TACTICAL_PLAYER_SAFE_PROJECTION_MIGRATION_MAP_2026-10-08.md`. Six relative links and ten source/test paths verified; **no Python/Android runtime tests executed**.
+- **LEARNING_RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `P8/D-026 — Tactical projection contract before Android combat UI`.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-073 remains BLOCKED on Silex D-072 (OR-034 fixture authority), D-074 BLOCKED on D-073. Master D-026 remains IN_PROGRESS for other domains; no automatic new claim.
 
 ### Parallel P9 — D-046 — Ability/passive world + knowledge integration slice
 - **TASK_REF:** `D-046`
