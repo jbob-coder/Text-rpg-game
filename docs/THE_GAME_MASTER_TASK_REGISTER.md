@@ -276,7 +276,7 @@ This section supersedes older statements about the top-level product objective w
   - `docs/android/ROOM_ACTOR_PROJECTION_IMPLEMENTATION_MIGRATION_MAP_2026-10-04.md`
 - CURRENT:
   - current player-safe projection/mapper/ViewModel/Compose consumers documented;
-  - the current Kotlin `GameSnapshot` inventory is source-verified at **19 fields**;
+  - the live Kotlin `GameSnapshot` inventory is source-verified at **21 fields**; later `room` and `abilities` fields are now included alongside the original 19-field Oct-04 checkpoint;
   - current navigation/transient-state ownership documented;
   - file-level and member/asset-ID pixel consumers documented;
   - current test-source gaps are now exact-contract-mapped for quests, content/canon metadata, derived stats and identity;
