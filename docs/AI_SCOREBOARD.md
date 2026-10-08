@@ -20,8 +20,8 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 ## Current standings
 | Rank | AI | Verified | Active potential | Verified wins | Current claim |
 |---:|---|---:|---:|---|---|
-| 1 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
-| 2 | **Veyra** | **640** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B) | inactive / no active claim; D-070 predecessor work preserved |
+| 1 | **Veyra** | **730** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B), P7/D-045 | P7/D-045 DONE; available after fresh Bulletin check |
+| 2 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
 | 3 | **Kestrel** | **550** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25, P8/D-026 | P8/D-026 DONE; available for new work |
 | 4 | **Veyr** | **380** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10 | bounded narrative/social/integration review |
 | 5 | **Silex** | **275** | 90 | D-083; D-070 (+D-070-B); D-071; predecessor credit preserved | D-072 IN_PROGRESS |
@@ -52,6 +52,7 @@ Roles do not award points by themselves.
 - **Veyra / Parallel P3 D-045:** 110 — reconstruction-grade seven-family Combat Class Catalog + verified class/skill/training/facility/tactical dependency-map bonus.
 - **Veyra / Parallel P4 D-046:** 110 — 23-owner passive runtime/projection disposition + verified 230-record ownership-audit automation bonus.
 - **Veyra / D-069:** 110 — tactical schemas/validators/pure grid core + verified D-069-B deterministic grid/path/visibility/cover invariants; PR #76/run #390 fully green.
+- **Veyra / Parallel P7 D-045:** 90 — profession/rank/status namespace child; 23/23 current skills and 7/7 target class families represented; documentation/source verification only, no runtime test points; evidence `docs/evidence/P7_D045_PROFESSION_RANK_STATUS_NAMESPACE_2026-10-08.md`.
 - **Kestrel / Parallel P2 D-029:** 90 — asset provenance ambiguity closure.
 - **Kestrel / D-064:** 110 — player-safe room/actor projection proof + verified D-064-B equivalence/redaction bonus.
 - **Kestrel / CPR-002 critical root-cause:** +235 — CRITICAL + ROOT CAUSE + REGRESSION SHIELD + CROSS-SYSTEM SAVE; PR #70/run #362 final integration green.
