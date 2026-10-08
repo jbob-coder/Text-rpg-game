@@ -1081,7 +1081,10 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - MATERIALIZED CHILD: `docs/systems/COMBAT_CLASS_CATALOG.md` — all seven target combat/adventure class families expanded into reconstruction-grade records covering CURRENT/TARGET/PROPOSAL status, acquisition evidence, all-23-skill dependencies, feature ownership, tactical/world roles, training/facility dependencies, specialization axes, cross-training, future migration boundaries and test requirements.
 - P3 VERIFICATION: class dependency matrix covers 23/23 current skills with zero missing/extra rows and exactly one full class-family record for Vanguard, Skirmisher, Operator, Field Specialist, Investigator, Envoy and Ability Specialist.
 - P3 BONUS: complete — dependency map links classes to current skills, training/facility families and future tactical-role owners without moving gameplay arithmetic out of authoritative systems.
-- NEXT: create the profession/rank/status packet, then training/mentor/facility standard, Gate Twelve proof packet and progression UX contract.
+- MATERIALIZED CHILD: `docs/systems/PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md` — profession/job/class, profession grade, institutional rank, faction rank, role, civic/social status, reputation, global Level and ability/technique namespaces are separated with stable-ID, migration, privacy and player-safe projection guidance.
+- P7 VERIFICATION: current foundation cross-check found **23/23** registered skills and **7/7** target class families represented in the namespace packet, with zero missing names; current `GameState` remains without class/profession/rank/status top-level fields and D-061 schema-v1 ownership is preserved.
+- P7 EVIDENCE: `docs/evidence/P7_D045_PROFESSION_RANK_STATUS_NAMESPACE_2026-10-08.md`; materialized-child creation commit `aeef81e9101ba5a5b3e70f87182357957a3bbe1d`.
+- NEXT: create the Training / Mentor / Facility Progression Standard, then Gate Twelve proof packet and progression UX contract.
 - IMPLEMENTATION: deferred until design contracts are sufficiently coherent.
 
 
