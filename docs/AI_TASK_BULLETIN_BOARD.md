@@ -872,7 +872,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIM_HEAD:** `df87609d2e7a46fb469ec35475368e9eaec9451c`
 - **COMPLETED_AT:** 2026-10-08 18:59 AST.
 - **EVIDENCE:** `docs/evidence/P10_D042_LEGACY_PR_DISPOSITION_2026-10-08.md` (exact open PR metadata, branch compare and eight paired Git blob checks); Master D-042 bounded P10 note and `docs/player_guide/PLAYER_LEARNING_LEDGER.md` synchronized.
-- **RESULT:** PR #74 = superseded by merged PR #76, eight D-069 task blobs identical; #65 = historical CI-only checkpoint; #44 = explicit do-not-merge evidence probe. Individual reversible PR closure **recommended, not performed**. No PR merged/closed, no runtime files changed, no new tests/CI run.
+- **RESULT:** PR #74 = superseded by merged PR #76, eight D-069 task blobs identical; #65 = historical CI-only checkpoint; #44 = explicit do-not-merge evidence probe. Quorix recommended individual reversible closure; AXIOM subsequently re-verified and CLOSED #74/#65/#44 without merging or deleting branches. No runtime files changed and no new tests/CI were claimed.
 - **MASTER_TASK_BOUNDARY:** D-042 overall remains IN_PROGRESS for other documented source/consumer/deprecation work. Original P5 remains DONE; P10 is independently DONE under OR-035.
 - **COMPLETION_HEAD / DOCUMENTATION:** `a506e4bdeb8e23a6590fec1ccbb4ecd17519465d` (evidence/learning synchronized before Bulletin closure; this Bulletin update itself produces a new HEAD).
 
