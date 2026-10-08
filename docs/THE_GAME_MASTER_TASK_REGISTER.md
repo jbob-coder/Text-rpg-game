@@ -289,6 +289,11 @@ This section supersedes older statements about the top-level product objective w
   - final APK destination component migration map;
   - exact-head runtime/build verification after code/test changes.
 - NOTE: current-source discovery and current test-contract discovery are no longer the blocker; future target projection implementation and later execution evidence are.
+- WAVE_2_P8_SLICE: **DOCUMENTATION-ONLY TACTICAL PROJECTION MIGRATION CHILD DELIVERED — 2026-10-08 AST / Kestrel**; P8 closure bookkeeping still governed by live Bulletin.
+- WAVE_2_P8_DELIVERABLE: `docs/android/D026_TACTICAL_PLAYER_SAFE_PROJECTION_MIGRATION_MAP_2026-10-08.md`, committed `4cff510ce56b474120c45f94a3b88f387e0ba5a7`; parent `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` linked.
+- WAVE_2_P8_EVIDENCE: `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md`; path/link/source existence inspection at `413aaa4d56f1d785e2e2004a948b765a89a66b81` (6/6 relative links; 10/10 referenced code/test paths), **no Python/Android/emulator tests run**.
+- WAVE_2_P8_RESULT: D-069/D-070/D-071 existing projection/owner boundaries mapped through future D-073 Python combat bridge and future D-074 typed Kotlin DTO/mapper, ViewModel delegation, Compose and error/redaction/version/legacy tests. OR-015 domain versioning and OR-034 provisional-only content are explicit; no gameplay/runtime/save changes or D-073/D-074 claims.
+- WAVE_2_P8_REMAINING: Master D-026 intentionally **IN_PROGRESS** for activity, hierarchical-map, adversary intel, evolved status, final APK and future exact-head runtime acceptance. Tactical wire format/action parameters will be finalized only after D-073 implementation is approved.
 ### TASK D-047 — Establish master documentation record
 - STATUS: `DONE`
 - PRIORITY: `P0`
