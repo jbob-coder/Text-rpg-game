@@ -645,10 +645,10 @@ The current strongest order is:
 1. **Use this file as the master status index.**
 2. **Continue D-019 measurement work** with a complete-checkout current-head word/heading/domain/test-evidence inventory; the exact structural snapshot already exists.
 3. **Continue D-006/D-042 only on the remaining deep-audit gaps**: member/consumer-level evidence, asset lineage, zero-consumer proof and cross-system migration dependencies. The current-head source/path inventory is already complete.
-4. **Continue D-026/D-021 from the narrowed remainder**: member/asset-ID consumer proof, D-030 actor migration map, future projections and final APK destination mapping. Major current fields/actions/catalog files and test gaps are already mapped.
+4. **Continue D-026/D-021 from the narrowed remainder**: member/asset-ID consumer proof, future activity/hierarchical-map/adversary/evolved-status/tactical projection work, final APK destination mapping and later exact-head execution evidence. D-030 actor migration mapping and D-064 typed room projection are already complete; the live `GameSnapshot` inventory is 21 fields.
 5. **Continue D-029 asset provenance/equivalence work** without making owner visual/canon decisions by inference.
 6. **Resolve D-031 Gate Twelve parent-world canon with the owner** before promoting proposal-only higher-world names/relationships.
-7. **Continue D-045 progression children** from the now-materialized combat class catalog into the profession/rank/status packet, then training/mentor/facility and progression UX/proof packets.
+7. **Continue D-045 progression children** from the materialized combat class catalog and profession/rank/status namespace into the Training / Mentor / Facility Progression Standard, then progression UX/proof packets.
 8. **Create D-032 mechanics schema/API migration packets** before broad runtime reconstruction.
 9. **Populate world/character/item/combat/life-loop content only against accepted standards and migration rules.**
 10. **Keep D-033/final APK teardown and reconstruction late-stage and gated.**
