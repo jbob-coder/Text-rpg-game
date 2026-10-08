@@ -33,7 +33,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 ### Critical path
 - **D-064:** DONE — Kestrel; PR #70/run #362 green; authority merge `d7ebb7ca...`; CPR-002 resolved.
 - **D-069:** DONE — Veyra; authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; PR #76/run #390 green; CPR-003/CPR-004 resolved.
-- **D-070:** **READY / UNCLAIMED**. Veyra is inactive and the owner released the claim; preserved work is documented in `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`.
+- **D-070:** **IN_PROGRESS / Silex**. Preserve Veyra's PR #77 implementation; complete current-authority code audit, missing scheduler/acceptance work and merge-state verification.
 - **D-071+:** remain dependency-gated behind D-070.
 
 ### Other active work
@@ -50,7 +50,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **Silex:** 75 — D-083 verified completion; prior implementation credited to Strata.
 
 ### Immediate strategy
-1. D-070 is READY / UNCLAIMED. Preserve PR #77 / branch `agent/veyra-d070-transient-engine`; Veyra may retake it after activation if it is still unclaimed.
+1. Silex owns D-070. Preserve PR #77 as predecessor evidence; use a fresh task branch for verified repairs and completion.
 2. D-083 is DONE. Use its exact-revision evidence and Learning Ledger shortcut; reopen only for a new demonstrated regression.
 3. Quorix remains available for independent verification/red-team review.
 4. On D-070 completion, evaluate and unlock D-071 immediately.
@@ -109,8 +109,8 @@ Current operational role assignments:
   - no permanent domain ownership is implied.
 
 - **Silex — auxiliary Player-AI: Repository Status Verification / Handoff**
-  - D-083 **DONE**; no active primary claim;
-  - completed the owner's one-task request without changing tracker/runtime source.
+  - D-083 **DONE**; D-070 is the current primary under the owner's continuation request;
+  - preserve prior implementation and verify code defects before repair.
 
 These are Player-AI classes/specializations and current task/accountability lanes, not permanent file ownership. Cross-domain disputes go to Council/AXIOM.
 
@@ -514,7 +514,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-070`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `90/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-069 DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
 - **PREFLIGHT:** `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — re-audit against merged D-069 before implementation.
@@ -522,9 +522,9 @@ Bragging is encouraged; fabrication is forbidden.
 - **NEXT_MOVE:** re-read merged D-069 APIs plus Movement/Pathing and Turn/Initiative standards; update the preflight for movement-point allowance, reaction reserve lifecycle and reinforcement scheduling; then implement the smallest transient session/activation/budget/movement/event seam without GameState/save expansion.
 - **ACCEPTANCE:** Headless transient encounter executes deterministic legal turns/actions without GameState tactical schema expansion; previews do not consume event sequence.
 - **BONUS:** `D-070-B` — deterministic transcript/replay hash.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Silex
+- **CLAIMED_AT:** 2026-10-08T01:36:27-04:00
+- **CLAIM_HEAD:** `47a7cc82b6842321b1164b3ad4a3d74c7dda18ed`
 - **PREVIOUS_CLAIMED_BY:** Veyra
 - **PREVIOUS_CLAIMED_AT:** 2026-10-05T13:26:00-04:00
 - **PREVIOUS_CLAIM_HEAD:** `5362f50eec8e9a0da1af9a395314932bf8110648`

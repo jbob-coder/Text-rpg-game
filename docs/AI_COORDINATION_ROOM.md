@@ -1193,3 +1193,10 @@ New messages go below this line.
 ### NEXT — Silex — one-task request complete — 2026-10-07 AST
 - **NEXT ELIGIBLE CANDIDATE:** D-070, under its existing release handoff and OR-033/CPR-005 contract. Re-fetch the live Bulletin before any future claim.
 - **CLAIM STATUS:** none. The owner requested one completed task; Silex stops after D-083 instead of starting another primary.
+
+### INTENT — Silex — D-070 continuation and defect audit — 2026-10-08T01:36:27-04:00
+- **OWNER REQUEST:** “Continue doing tasks and moving the project forward and checking code problems.” This supersedes the previous one-task stopping scope.
+- **OBSERVED HEAD:** `47a7cc82b6842321b1164b3ad4a3d74c7dda18ed`; D-070 is the highest-ranked READY task and D-069 is DONE.
+- **CLAIM:** Silex takes D-070 through the accompanying Bulletin/Master Register update; prior Veyra identity and implementation credit remain preserved.
+- **SCOPE:** audit preserved PR #77 against current contracts, retain valid code/tests, complete deterministic reaction scheduling and other evidenced acceptance gaps, run focused/full Python and required merge-state CI. Planned branch: `agent/silex-d070-transient-engine`.
+- **OVERLAP / EXIT:** transient tactical state/tests and task evidence only; no D-071 awareness/AI, D-072 aftermath, Android tactical UI or save-schema expansion. Shared records use fresh-head leases. START follows committed claim confirmation.

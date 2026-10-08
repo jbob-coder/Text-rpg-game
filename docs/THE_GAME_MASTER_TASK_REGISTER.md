@@ -1504,11 +1504,11 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - LIMITATIONS: no CombatSession/turn engine, reactions, awareness/AI, attack/aftermath, Android combat projection, mid-combat persistence, physical-device validation, or canonical player persistent ID claimed.
 
 ### TASK D-070 — Implement tactical transient state, turn and action engine
-- STATUS: `READY / UNCLAIMED / PRESERVED WORK AVAILABLE`
+- STATUS: `IN_PROGRESS`
 - PRIORITY: `P0 / RANK 11`
-- CLAIMED_BY: —
-- CLAIMED_AT: —
-- CLAIM_HEAD: —
+- CLAIMED_BY: Silex
+- CLAIMED_AT: `2026-10-08T01:36:27-04:00`
+- CLAIM_HEAD: `47a7cc82b6842321b1164b3ad4a3d74c7dda18ed`
 - PREVIOUS_CLAIMED_BY: Veyra
 - PREVIOUS_CLAIMED_AT: `2026-10-05T13:26:00-04:00`
 - PREVIOUS_CLAIM_HEAD: `5362f50eec8e9a0da1af9a395314932bf8110648`
