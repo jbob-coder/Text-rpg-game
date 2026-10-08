@@ -1091,7 +1091,7 @@ Evidence: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md` and its mach
 
 At verified revision `8b702325c4224eb68751f147dd83c84d47d4a62c`, eight tracker/inventory regressions pass, all three CLI outputs reproduce byte-for-byte, and all 644 manifest paths/blob hashes/sizes match GitHub's complete recursive tree. These snapshot figures precede D-083 completion bookkeeping. Old D-081/D-082 evidence remains unchanged; regenerate at the desired exact revision for current totals.
 
-The Master Register still owns task state and D-019 still owns detailed corpus inventory. No gameplay/Android behavior or Phase 1 downstream gate changed. Next: use the existing tracker for revision-bound reporting; D-070/D-071 have completed and D-072 is READY.
+The Master Register still owns task state and D-019 still owns detailed corpus inventory. No gameplay/Android behavior or Phase 1 downstream gate changed. Next: use the existing tracker for revision-bound reporting; D-070/D-071 have completed and D-072 is IN_PROGRESS under Silex.
 
 ## Tactical transient engine — D-070 — 2026-10-08
 
@@ -1108,7 +1108,7 @@ requirement 9 still needs durable aftermath and authored content/bridge/UI accep
 Observer-specific knowledge, targeting/cover, eight objective kinds, atomic
 retreat/detection and bounded deterministic AI are verified headlessly.
 Evidence: `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`; PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
-D-072 is READY. Requirement 9 still needs durable aftermath, authored action/content
+D-072 is IN_PROGRESS under Silex. Requirement 9 still needs durable aftermath, authored action/content
 integration and player-safe bridge/UI acceptance. D-071-B is not yet claimed.
 
 ## D-026 tactical projection migration child — P8 Wave 2 — 2026-10-08
@@ -1119,4 +1119,4 @@ integration and player-safe bridge/UI acceptance. D-071-B is not yet claimed.
 
 **Dependency:** D-072 remains Silex's IN_PROGRESS primary; D-073 BLOCKED until D-072 DONE, with OR-034 non-canonical `PROVISIONAL_INTEGRATION` fixture boundary. D-074 follows D-073. OR-015 domain versioning and OR-010 placement boundary retained.
 
-**Master D-026 remains IN_PROGRESS** for activity, hierarchical map, adversary-intel, evolved status, final APK consumer contracts and later runtime evidence. This child improves documentation coverage without declaring Phase 1 or APK complete. Historical D-072 READY text above is superseded by live Bulletin.
+**Master D-026 remains IN_PROGRESS** for activity, hierarchical map, adversary-intel, evolved status, final APK consumer contracts and later runtime evidence. This child improves documentation coverage without declaring Phase 1 or APK complete. The live Bulletin remains the claim authority for D-072/D-073 state.
