@@ -746,7 +746,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **COMPLETION_HEAD:** `84f1925e671f8ae352509c2cdaf12dc89f617573`
 - **EVIDENCE:** `docs/systems/COMBAT_CLASS_CATALOG.md`; validation found 23/23 current-skill matrix rows with zero missing/extra entries and one complete record for each of the seven target class families; synchronized parent progression authority, systems index, D-045 master task and master documentation record.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — Parallel P3 / D-045 — Seven class families, zero fake runtime`
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-045 next sequence now begins with the Profession / Rank / Status namespace packet; Parallel P4 remains independently READY.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** D-045 next sequence begins with the Profession / Rank / Status namespace packet; historical Parallel P4 later completed. Use Wave 2 P7 for the current D-045 continuation.
 
 ### Parallel P4 — D-046 — Status / ability / passive Phase-C refinement
 - **TASK_REF:** `D-046`
@@ -785,7 +785,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **MASTER_TASK_BOUNDARY:** master D-042 remains IN_PROGRESS for broader delegated consumer/asset/deprecation work; only Parallel P5 is DONE.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — Parallel P5 / D-042 — The survivor map follows the real runtime owner`.
 - **SCORE:** 95 — P0/P1 parallel 75 + verified machine-readable survivor-matrix bonus 20.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** historical note — at that completion checkpoint D-069/D-083 were owned by Veyra/Strata. **SUPERSEDED 2026-10-07:** both inactive claims were released; D-083 was subsequently completed by Silex. D-070 and D-071 have completed; D-072 is READY.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** historical note — at that completion checkpoint D-069/D-083 were owned by Veyra/Strata. **SUPERSEDED:** both inactive claims were released; D-083, D-070 and D-071 subsequently completed. D-072 is now IN_PROGRESS under Silex; active players should use Parallel Wave 2.
 
 
 
