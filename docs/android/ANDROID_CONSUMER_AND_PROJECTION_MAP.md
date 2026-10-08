@@ -38,12 +38,14 @@ Current Kotlin `GameSnapshot` exposes:
 - `inventory`;
 - `quests`;
 - `worldMap`;
+- `room`;
 - `visuals`;
 - `turn`;
 - `timeMinutes`;
 - `location`;
 - `contentId`;
-- `canonStatus`.
+- `canonStatus`;
+- `abilities`.
 
 Current public `GameEngine` actions expose:
 - start;
@@ -368,28 +370,26 @@ Developer tools must remain:
 Decision:
 - **KEEP separate / EXTEND developer tooling**.
 
-## 18. Missing actor-presence projection
+## 18. Room actor-presence projection — implemented D-064
 
-Current `GameSnapshot` does not provide a formal room-actor list.
+Current `GameSnapshot.room` is a typed `GameRoomProjection` with projection version, location ID, player-safe actor records and optional active-speaker presentation ID.
 
-Target new safe record should eventually expose only player-known/currently visible actors, for example:
+Current `GameRoomActor` exposes only the typed presentation contract:
+- `presentationId`;
+- optional `knownActorId`;
+- `displayName`;
+- `visualFamily`;
+- `placementKey`;
+- optional `poseKey`;
+- optional `outfitKey`;
+- `visibleTags`;
+- `inspectable`;
+- `dialogueAvailable`;
+- safe `actions`.
 
-- actor ID;
-- display name;
-- portrait/visual identity key;
-- room anchor/pose key;
-- visible condition;
-- known role/faction;
-- available safe interactions.
+The mapper rejects unsupported actor fields, including private data that is not part of the allowlist. `RoomProjectionMapperTest` covers versioned mapping, migration-compatible absence, private-field rejection, room/location consistency, duplicate actors and active-speaker validity.
 
-It must not expose:
-- private goals;
-- secret knowledge;
-- hidden disposition;
-- off-screen position if not known;
-- future story state.
-
-This is a required dependency for dynamic room actors and character panels.
+This closes the former missing actor-presence projection gap. Later presentation work may extend rendering/accessibility behavior, but must preserve the current player-safe room contract rather than recreating actor presence from raw state.
 
 ## 19. Missing world-state notification projection
 
@@ -615,12 +615,14 @@ Current `GameSnapshot` fields:
 - `inventory`;
 - `quests`;
 - `worldMap`;
+- `room`;
 - `visuals`;
 - `turn`;
 - `timeMinutes`;
 - `location`;
 - `contentId`;
-- `canonStatus`.
+- `canonStatus`;
+- `abilities`.
 
 Unknown root/scene/status fields are not copied into `GameSnapshot`. Current unit evidence explicitly checks that secret authoring data and hidden modifier fields do not survive the mapper.
 
@@ -957,12 +959,14 @@ This matrix is based on current Android test source, not a claim that the tests 
 | `inventory` / equipment | GameScreen inventory/character tests; CharacterStats equipment/inventory tests; real-activity equipment smoke | **COVERED** |
 | `quests` | no direct current field-level or dedicated QuestSection test identified in the audited Android test sources | **GAP** |
 | `worldMap` | CharacterStats map instrumentation; map marker/art/module tests; travel request tests | **COVERED** for current district-map presentation |
+| `room` | `RoomProjectionMapperTest` mapping, unsupported-private-field rejection and room-contract tests | **COVERED** mapper/privacy/contract; presentation coverage remains a separate concern |
 | `visuals.relayState` | `BridgeStatusMapperTest`; `GameScreenTest.projectedRelayStateRendersThroughNarrativeScene` | **COVERED** |
 | `turn` | `PythonGameEngineContractTest`; UI fixtures | **COVERED** |
 | `timeMinutes` | `PythonGameEngineContractTest`; UI fixtures | **COVERED** |
 | `location` | `PythonGameEngineContractTest`; travel transition and scene/map UI evidence | **COVERED** |
 | `contentId` | no direct assertion identified | **GAP** |
 | `canonStatus` | no direct assertion identified | **GAP** |
+| `abilities` | `BridgeStatusMapperTest.playerSafeAbilityProgressionMapsIntoTypedSnapshot`; malformed/private-authoring rejection tests | **COVERED** typed mapper + validation/privacy boundary; dedicated Compose presentation remains separate |
 
 ### 32.2 Player-safe mapper/privacy tests
 
@@ -1001,7 +1005,7 @@ The current documentation audit identifies these concrete Android test gaps:
 3. direct `canonStatus` session-display mapping/render assertion;
 4. dedicated derived-stat Compose presentation assertion;
 5. fuller identity projection/UI contract test for origin/background/path/level rather than only mapper name/level coverage;
-6. future D-030 actor/room projection privacy + rendering tests once implemented;
+6. room-actor Compose rendering/accessibility coverage beyond the implemented mapper/privacy/contract regressions;
 7. future hierarchical-map/activity/combat/adversary projection tests when those contracts materialize.
 
 These are **documented gaps**, not current runtime failures.
