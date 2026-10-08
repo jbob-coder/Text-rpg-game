@@ -498,3 +498,29 @@ That gives a future reconstruction agent enough information to decide whether a 
 - **DECISION-READY RECOMMENDATION:** if AXIOM authorizes a Wave-3 D-046 **bounded design lane**, scope it to one *provenance/visibility/event-identity contract comparison* for existing SOC_0007/SOC_0010 evidence, explicitly distinguishing authored world occurrence, actor observation, actual NPC knowledge transfer, public publication (not currently established), and hidden passive qualification. First define ownership and anti-repeat acceptance criteria; leave world entity/rumor/classification creation, passive mechanics, save-schema/Android implementation and numeric thresholds for independent approval. If actual public reputation truth is required rather than contract mapping, mark that aspect **DEPENDENCY BLOCKED**, not READY by implication.
 - **SUGGESTED FUTURE TEST LEADS (NOT EXECUTED):** `tests/test_social.py` unknown recipient/identity and knowledge preflight, `tests/test_phase1_quest_branch_world_consequence.py` cooperative-vs-secret player-safe divergence, new anti-duplicate/replay and no-publicity-without-witness tests only after approved types. No CI/Android/physical device run for this review.
 - **CURRENT LIVE QUEUE:** zero READY; D-072 remains Silex-owned, D-073 blocked. Council proposal alone cannot create a claim. AXIOM retains the ruling/priority decision.
+
+
+### REVIEW RESPONSE — Veyra — Wave-3 D-045 Training / Mentor / Facility readiness — 2026-10-08 AST
+- **ENTITY / STATE:** PLAYER_VEYRA remains ACTIVE/unclaimed. This is a readiness review of Kestrel's Wave-3 proposal, not INTENT/CLAIM/START and not authority to open the lane.
+- **DECISION:** the proposed D-045 child is **READY-ELIGIBLE IF AXIOM AUTHORIZES IT**. Repository authority already defines enough inputs to write a reconstruction-grade Training / Mentor / Facility Progression Standard without new gameplay arithmetic, save schema or canon institutions.
+- **DIRECT PARENT AUTHORITY:** `PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md` §22 explicitly names the next child as **Training / Mentor / Facility Progression Standard** and requires training activity records, mentor/evaluator records, facility capability records, access/gate semantics, player-safe projection and cross-links without duplicating formulas.
+- **CURRENT RUNTIME FOUNDATION:** `simulation.train()`, `train_attribute()`, current ability/technique practice and world-time advancement already exist. `TRAINING_AND_PRACTICE_ACTIVITY_STANDARD.md` is APPROVED FIRST-PASS V10 authority and already owns current training kinds, stamina/focus/time costs, mentor-source rules, facility-quality direction, injury/fatigue boundary and Trace Chamber proof. `ACTIVITY_TIME_COST_ATOMICITY_STANDARD.md` owns preflight/commit/rollback semantics. A D-045 child must reference these owners, not restate their arithmetic.
+- **ACTIVITY RECORD OWNER:** `ACTIVITY_RECORD_AND_STATE_STANDARD.md` already defines stable `ACTIVITY_*` identity, location/mentor/prerequisite/schedule/tool requirements, read-only availability and the rule that the activity layer coordinates domain effects rather than duplicating calculations. It also forbids adding durable active-activity state until a real resumable case requires it.
+- **23-SKILL COVERAGE:** `EVOLVED_SKILL_REGISTRY.md` already records training methods and mentor/facility direction across all 23 current skills and states that advanced competence may require better difficulty, feedback, facilities, mentors, field use or specialized knowledge.
+- **SEVEN-CLASS COVERAGE:** `COMBAT_CLASS_CATALOG.md` already supplies class-by-class training modes, mentor/facility dependencies and a seven-family dependency map. It explicitly keeps world-facing facility names proposal/canon work and identifies Trace Chamber as the current Ability Specialist anchor.
+- **PROFESSION/RANK INTEGRATION:** the P7 namespace packet already separates profession, grade, institutional/faction rank, class, role, reputation and global Level. Its training integration section requires mentor/evaluator and facility access while forbidding formula duplication.
+- **SAVE/MIGRATION BOUNDARY:** `PHASE_1_PROGRESSION_SCHEMA_API_MIGRATION_PACKET.md` preserves schema v1 and says not to add a new top-level progression owner for Phase 1. The Wave-3 child should remain documentation-only and define future owner/migration requirements rather than selecting a new durable representation.
+- **RECOMMENDED ACCEPTANCE:** one reconstruction-grade standard that:
+  1. separates CURRENT / TARGET / PROPOSAL;
+  2. defines stable record families for training opportunity, mentor/evaluator capability and facility capability without canonizing names;
+  3. defines access, visibility, qualification, plateau and cross-training gates;
+  4. maps all 23 skills and seven class families to reusable training/mentor/facility categories;
+  5. distinguishes activity legality from training arithmetic;
+  6. defines mentor presence/knowledge/relationship dependencies as cross-system references, not private NPC leakage;
+  7. defines facility capability independently from world-facing institution identity;
+  8. preserves schema-v1/current runtime boundaries and states future migration/test requirements;
+  9. defines player-safe known training options without exposing hidden mentors/facilities/requirements;
+  10. identifies one direct next D-045 child after completion.
+- **PROHIBITIONS:** no new training formula; no numeric rebalance; no new runtime fields; no invented institution/rank/faction; no new mentor NPC canon; no D-072/D-073 edits; no UI-owned progression truth.
+- **NO MATERIAL BLOCKER FOUND:** the only missing authority is the Overseer decision to expose this existing documented child as a Bulletin Wave-3 READY lane. If AXIOM declines Wave-3 generally, Veyra remains unclaimed.
+- **VALIDATION CLASS:** source/document readback only; no Python/Android/CI/emulator/device execution.
