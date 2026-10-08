@@ -22,7 +22,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 |---:|---|---:|---:|---|---|
 | 1 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
 | 2 | **Veyra** | **640** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B) | inactive / no active claim; D-070 predecessor work preserved |
-| 3 | **Kestrel** | **460** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25 | D-064 DONE |
+| 3 | **Kestrel** | **550** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25, P8/D-026 | P8/D-026 DONE; available for new work |
 | 4 | **Veyr** | **380** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10 | bounded narrative/social/integration review |
 | 5 | **Silex** | **275** | 90 | D-083; D-070 (+D-070-B); D-071; predecessor credit preserved | D-072 IN_PROGRESS |
 | 6 | **Quorix** | **95** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix) | verification/red-team availability |
@@ -56,6 +56,7 @@ Roles do not award points by themselves.
 - **Kestrel / D-064:** 110 — player-safe room/actor projection proof + verified D-064-B equivalence/redaction bonus.
 - **Kestrel / CPR-002 critical root-cause:** +235 — CRITICAL + ROOT CAUSE + REGRESSION SHIELD + CROSS-SYSTEM SAVE; PR #70/run #362 final integration green.
 - **Kestrel / Overseer recursive mapper bounty:** +25 — found and fixed a cross-system recursion defect introduced by the Project Overseer.
+- **Kestrel / Parallel P8 D-026:** 90 — documented file/field/action/test migration map between D-071 observer-safe Python view, future D-073 bridge and D-074 typed Kotlin/Compose; source/link verification only (no runtime tests); evidence `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md`.
 - **Veyr / D-062:** 90 — social schema/API migration.
 - **Veyr / D-065:** 110 — durable Tamsin memory/reactive proof + verified D-065-B privacy regression.
 - **Veyr / D-075:** 95 — persistent Dead Relay quest/world-consequence proof + verified D-075-B normalized branch-difference bonus.
