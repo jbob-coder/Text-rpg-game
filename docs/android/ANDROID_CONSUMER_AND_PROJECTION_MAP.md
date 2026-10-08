@@ -1017,3 +1017,16 @@ Remaining D-026/D-021 reconstruction work is reduced to:
 3. future projection contracts;
 4. final destination APK migration mapping;
 5. runtime execution evidence when code changes begin.
+
+## 34. Wave-2 P8 / D-026 — Tactical projection migration boundary
+
+**Status:** FILE/FIELD/ACTION/TEST DOCUMENTATION MAP COMPLETE FOR P8, implementation and runtime evidence still gated on D-073/D-074. **Owner:** Kestrel. **Authority:** OR-015 (typed domain projection), OR-034 (provisional fixture), OR-035 (parallel Wave 2).
+
+**Canonical child:** [D026 tactical player-safe projection migration map](D026_TACTICAL_PLAYER_SAFE_PROJECTION_MIGRATION_MAP_2026-10-08.md). It records:
+- exact existing `CombatKnowledge.player_view` and `EncounterRules.player_view` source fields, with an explicit boundary between D-071 source and the **not-yet-implemented** D-073 bridge;
+- the Python bridge -> narrow Kotlin `GameEngine` gateway -> typed `GameSnapshot` DTO/mapper -> ViewModel -> Compose path, without transferring tactical legality into Android;
+- proposed domain-version manifest, legacy snapshot handling, type/privacy/unknown-required-version failure, observed versus last-known contact semantics;
+- named future test owners/paths, accessibility and hidden-contact screenshot/semantics gates, and merge-state/build evidence requirements;
+- OR-010 static room placement versus tactical geometry and OR-034 non-canonical contact/visual fixture limits.
+
+This is a **documentation-only D-026 child**, not D-073/D-074 completion, not a produced `combat` wire schema, not a new save field and not an Android runtime result. Retain the remaining D-026 activity, hierarchical-map, adversary-intel, evolved status and final-APK consumer work in the Master Task Register. Any future bridge JSON field name or action signature must be sourced from the completed D-073 contract before Kotlin implementation.
