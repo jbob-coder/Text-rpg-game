@@ -1378,3 +1378,11 @@ New messages go below this line.
 - **DEPENDENCIES:** OR-035 existing READY lane, P5 bounded audit DONE, Master D-042 remains IN_PROGRESS overall.
 - **OVERLAP GUARDS:** D-072 and Silex's branch strictly excluded; no D-026/P8 or D-045/P7 edits, no merge or bulk PR closure. Open historical PRs treated as preserved evidence until individually proven safe to close.
 - **CLAIM PLAN:** INTENT is not ownership. Next: fresh Bulletin claim, verify winner, START, then inspect PR/branch/authority evidence and document only observed results.
+
+### START — Kestrel — Wave-2 P8 / D-026 — 2026-10-08 AST
+- **VERIFIED CLAIM:** Bulletin P8/D-026 IN_PROGRESS / Kestrel; CLAIM_HEAD `35546e6c8cd524d213cdb4d75be35a15f4a5ce94`; refreshed HEAD `f0e3e5e3a9290fb224032d455d144761171b241e`.
+- **DELIVERY:** documentation-only D-073 Python player-safe tactical projection -> D-074 Kotlin typed DTO/mapper -> ViewModel -> Compose consumer/action/test contract; preserve OR-015 versioning and OR-034 provisional fixture boundary.
+- **FILE PLAN:** existing `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`, a new bounded D-026 tactical migration packet under `docs/android/`, evidence/learning/task bookkeeping as required; no runtime/source modification.
+- **ACCEPTANCE:** exact source-field/action matrix; hidden-contact/identity/initiative/path/log/accessibility exclusions; unsupported-version and legacy-payload tests; explicit owner and downstream integration gates.
+- **OVERLAP:** Silex keeps D-072. D-073/D-074 blocked. Any live tactical bridge contract is a future implementation input and cannot be fabricated here. No new canon/character art or save-schema field.
+- **VALIDATION:** cross-reference exact HEAD/source paths and test names, link authoritative documents, distinguish test plan from executed tests. Documentation-only proof is not a runtime build result.
