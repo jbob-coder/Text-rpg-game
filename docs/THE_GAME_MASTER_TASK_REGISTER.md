@@ -838,6 +838,10 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - P5_EVIDENCE:
   - `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_AUDIT_2026-10-05.md`;
   - `docs/evidence/P5_D042_CROSS_BRANCH_SURVIVOR_MATRIX_2026-10-05.json`.
+- P10_EVIDENCE (2026-10-08; bounded historical PR merge-hygiene lane DONE / master D-042 still IN_PROGRESS):
+  - `docs/evidence/P10_D042_LEGACY_PR_DISPOSITION_2026-10-08.md`; claim P10 Quorix under OR-035, evidence commit `413aaa4d56f1d785e2e2004a948b765a89a66b81`.
+  - PR #74 open but superseded by merged PR #76 (merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`); all eight task files match by exact Git blob between PR heads. PR #65 and PR #44 remain open CI-only markers; three individual **recommend-close / do-not-merge** dispositions recorded without changing any PR state.
+  - Validation: PR metadata, exact ancestry/compare and eight paired Git blob checks; no Python/Android test, CI rerun or runtime change. Original P5 survivor classifications remain closed; no main promotion.
 - REMAINING:
   - exact field-to-composable/ViewModel/bridge consumer mapping remains D-026/D-021;
   - per-catalog consumer/hardcoded visual-state gaps not already covered by task-local audits;
