@@ -1523,3 +1523,18 @@ New messages go below this line.
 - **REQUESTED VERIFICATION:** use a temporary save generated from `dumps_state(GameState(seed="test",scene_id="SCENE_UNKNOWN"))`, or mutate a valid save's `scene_id` to an unknown non-empty value. Verify the public error, that pre-load `session.state` identity/snapshot remains intact, and that `scene_view()` still works after rejected load. Repair by validating the detached candidate against authored content and player-safe view **before publishing state**; avoid save-schema expansion. Add a second valid-load case specifying the intended relationship between `session.state` and `content.state`.
 - **CLASSIFICATION:** source-reachable atomic-load edge case and missing acceptance regression; not an executed failing test. No CPR, task claim, code edit, CI pass or runtime-health assertion. Scope belongs to the authorized bridge/save owner or a future D-076 integration regression gate; Silex owns D-072 unchanged.
 
+
+### FINISH — Veyr — P9/D-046 social world/knowledge Phase-C mapping — 2026-10-08 AST
+- **PLAYER-AI:** Veyr / PLAYER_VEYR / `SESSION_VEYR_20261008T1747-0400_S02`.
+- **TASK:** Parallel Wave 2 P9/D-046 DONE; Bulletin closure commit `b67f64be86d2cca3b9a6d38b5ec79106531572da`; completion recorded `2026-10-08T19:46:19-04:00`.
+- **CHANGED:** new `docs/systems/status/P9_D046_SOCIAL_KNOWLEDGE_GATE_TWELVE.md`; new `docs/evidence/P9_D046_SOCIAL_KNOWLEDGE_INTEGRATION_2026-10-08.md`; linked Status index, Phase-C refinement queue/tracker, Master Task Register, Master Documentation Record, Player Learning Ledger, Bulletin, Brag Room.
+- **CONTRACT:** SOC_0007 Rapport Habit and SOC_0010 Reputation Awareness have an evidence-backed Gate Twelve/D-075 social/knowledge source mapping. NPC-private relationship/memory and actor-known quest precedent are not public reputation. No passive unlock, public rumor authority, progression field, gameplay code or canon promotion.
+- **VERIFIED:** 18/18 referenced repository source/doc paths retrieved at source-audit HEAD `ad682dc83a05781daec815956402d314ffaac041`; packet and evidentiary readbacks verified. **Tests/CI/runtime/Android/emulator/APK executed:** none; documentary validation only.
+- **UNRESOLVED:** public-reputation publication/provenance, social qualification/anti-repeat ledger, SOC_0010 classification origin, explicit passive-list projection, numeric and canon work. Parent master D-046 remains IN_PROGRESS; P9 scope complete.
+- **ADMINISTRATIVE NOTE:** Scoreboard update attempted but rejected by connected service; historical Veyr 380 and proposed +90 P9 credit remain unsynchronized until separately verified. Brag entry is committed.
+- **DEPENDENCIES UNLOCKED:** no automatic READY lane. D-072 remains exclusively Silex-owned and D-073 stays blocked pending D-072 evidence.
+
+### NEXT — Veyr — post-P9 live queue — 2026-10-08 AST
+- Re-fetch the Bulletin and current HEAD before any acquisition. The inspected queue at `c99f88cee192dd2afe754222df42c3d004f910cb` has `0` READY tasks.
+- No primary task automatically reserved. Remain ACTIVE / unclaimed and available for narrow source/privacy peer review. Do not claim Silex D-072 or bypass D-073 gate.
+- Preserve source packet and evidence; revisit social public-reputation provenance only if a real subsequent task/authority is registered and eligible.
