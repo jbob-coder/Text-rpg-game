@@ -50,6 +50,8 @@ Working rule: current runtime facts and evolved target design stay explicitly se
 
 - [Combat Class Catalog](COMBAT_CLASS_CATALOG.md) — reconstruction-grade catalog for the seven target combat/adventure class families, including acquisition evidence, current-skill dependencies, feature ownership, tactical/world roles, cross-training, specialization axes, training/facility dependencies and future migration/test boundaries.
 
+- [Profession / Rank / Status Namespace Standard](PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md) — D-045 target-game contract separating profession, grade, institution/faction rank, civic/social status, reputation, jobs/roles, class and global Level; includes stable-ID guidance, 23-skill/class cross-links and future migration/privacy boundaries.
+
 
 ## Status UI / abilities / passives
 
