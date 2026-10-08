@@ -1360,3 +1360,12 @@ New messages go below this line.
 - **SCOPE:** one evidence-backed Status/passive Phase-C world/knowledge/social/privacy integration blocker. `docs/systems/status/` new/updated bounded integration packet, status index/refinement queue/required source-bound audits, D-046 governance synchronization. Read `src/textrpg/social.py`/knowledge/world facts without editing runtime.
 - **OVERLAP / DEPENDENCIES:** P9 is independent of D-072, Silex owns tactical aftermath. Avoid D-045 progression namespace (P7/Veyra), player-safe tactical (P8/Kestrel) and D-042 PR audit (P10/Quorix). No canon promotion, passive implementation, hidden-requirement inventions or leaked NPC knowledge.
 - **NEXT:** INTENT is not reservation. Attempt live Bulletin CLAIM, re-fetch and verify winner, then START. Shared docs require fresh HEAD and minimal surgical updates.
+
+
+### START — Veyra — Parallel P7 / D-045 — 2026-10-08T18:57:04-04:00
+- **CONFIRMED CLAIM:** Bulletin commit `35546e6c8cd524d213cdb4d75be35a15f4a5ce94`; P7/D-045 is IN_PROGRESS / Veyra with CLAIM_HEAD `c03617a031a8b0e3a60e75fbb47a8c76115aa5b7`.
+- **WORK MODE:** documentation/design-only lane on authority with fresh-head leases; no runtime task branch is required because this slice changes no executable code. Any later runtime implementation remains outside this claim.
+- **READ SET:** D-045 evolved progression design, `EVOLVED_SKILL_REGISTRY.md`, `COMBAT_CLASS_CATALOG.md`, D-061 migration authority, and current training/facility/tactical-role references directly needed by the namespace packet.
+- **DELIVERABLE:** one profession/rank/status namespace and ownership contract separating CURRENT / TARGET / PROPOSAL, defining stable-ID families, class/profession/rank/status boundaries, migration ownership, cross-system references and validation rules.
+- **BOUNDARIES:** no D-072/D-073 tactical runtime edit; no D-061 override; no confirmed canon institution invention; no progression arithmetic or save-schema implementation.
+- **EXIT:** reconstructible packet + synchronized D-045 parent/register/Bulletin/learning handoff + one direct next child. Validation will be structural/cross-reference evidence appropriate to documentation-only work.
