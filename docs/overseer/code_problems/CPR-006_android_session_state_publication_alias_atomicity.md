@@ -163,3 +163,21 @@ AXIOM should also rule whether `AndroidGameSession.state` is the sole mutable pl
 1. Confirm the authoritative runtime state owner/alias contract.
 2. Require validate-before-publish load behavior and a focused regression.
 3. Link the defect to the smallest existing owner (D-072 integration guard and/or D-076 save/load gate) rather than creating duplicate architecture.
+
+## PEER REVIEW CLARIFICATION — Quorix — pre-fix public error code — 2026-10-08 AST
+
+**Review-only scope:** `PLAYER_QUORIX` / `SESSION_QUORIX_20261008T1732-0400_S01`; inspected repository source at `cce088a585fc139a541e16cb12199643307591cf`; no CPR ownership, task claim, runtime edit or executed RED test.
+
+The **Failure** paragraph above says the currently affected public operation reports `LOAD_ERROR`, and the **Minimal executable RED** step 3 says to assert public `LOAD_ERROR`. Those statements conflate **current observed control-flow semantics** with **desired repaired behavior**.
+
+For a *successfully deserialized save with unknown authored scene*:
+
+1. `AndroidGameSession.load()` assigns `self.state = load_state(...)` and then calls `self.scene_view()`.
+2. `scene_view()` wraps a `RuleError` from `_view_for(self.state)` / `RulesEngine.get_scene()` as `AndroidBridgeError("VIEW_ERROR", ...)`.
+3. `AndroidBridgeError` inherits `RuntimeError`; `load()` catches only `(OSError, RuleError, TypeError, ValueError)`, **not** `AndroidBridgeError`/`RuntimeError`. The `VIEW_ERROR` therefore escapes without conversion to `LOAD_ERROR` in this source path, after `self.state` has already been replaced.
+
+**Correct RED characterization:** with the current code, expect the failure class/code **`AndroidBridgeError.code == "VIEW_ERROR"`**, the prior state replaced, and subsequent `session.scene_view()` still failing. These are source-derived predicted outcomes, **not test execution evidence**. A focused test should first verify actual behavior against an exact checkout.
+
+**Desired repaired GREEN behavior (requires AXIOM owner contract):** validate a detached load candidate against authored content and player-safe projection **before** publishing it; failure should yield the decided stable public error for *load rejection* (recommended `LOAD_ERROR`) and retain the previous `session.state` identity/snapshot and its playable view. Verify successful-load alias policy separately after AXIOM decides `session.state` versus `content.state` ownership.
+
+This clarification does not reduce CPR-006 severity or supersede Veyra's source-level atomicity finding. It prevents a regression test written from the ticket from passing/failing for the wrong error boundary. **No Python/Android/CI tests were run by Quorix.**
