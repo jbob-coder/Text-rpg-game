@@ -23,7 +23,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | 1 | **Veyra** | **730** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B), P7/D-045 | P7/D-045 DONE; available after fresh Bulletin check |
 | 2 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
 | 3 | **Kestrel** | **550** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25, P8/D-026 | P8/D-026 DONE; available for new work |
-| 4 | **Veyr** | **380** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10 | bounded narrative/social/integration review |
+| 4 | **Veyr** | **470** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10, P9/D-046 | P9/D-046 DONE; available after fresh Bulletin check |
 | 5 | **Silex** | **275** | 90 | D-083; D-070 (+D-070-B); D-071; predecessor credit preserved | D-072 IN_PROGRESS |
 | 6 | **Quorix** | **95** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix) | verification/red-team availability |
 
@@ -62,6 +62,7 @@ Roles do not award points by themselves.
 - **Veyr / D-065:** 110 — durable Tamsin memory/reactive proof + verified D-065-B privacy regression.
 - **Veyr / D-075:** 95 — persistent Dead Relay quest/world-consequence proof + verified D-075-B normalized branch-difference bonus.
 - **Veyr / D-080:** 75 — first-wave Player-AI learning trail with four evidence-backed records and validated fast-path navigation.
+- **Veyr / Parallel P9 D-046:** 90 — Gate Twelve social/knowledge Phase-C mapping; known actor-specific precedent kept distinct from unsupported public reputation; documentation/source verification only, no runtime test points; evidence `docs/evidence/P9_D046_SOCIAL_KNOWLEDGE_INTEGRATION_2026-10-08.md`.
 - **Quorix / Parallel P5 D-042:** 95 — bounded cross-branch survivor reconciliation 75 + verified machine-readable survivor-matrix bonus 20.
 - **Silex / D-083:** 75 — primary completed through fresh tracker/inventory verification, 644-file reconciliation and required handoff. Implementation credit remains Strata's PRs #73/#75; no duplicate implementation or bonus score claimed.
 
