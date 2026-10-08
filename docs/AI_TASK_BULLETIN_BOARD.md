@@ -856,15 +856,15 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-042`
 - **PREFERRED_CLAIMANT:** Quorix
 - **PRIORITY:** `P0/P1 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **DOMAIN:** verification / source archaeology / merge-hygiene evidence.
 - **SOURCE_OF_WORK:** recent review identified open historical/evidence PRs such as #74, #65 and #44 that can be mistaken for live merge candidates even though their owning work is completed/superseded.
 - **SCOPE:** verify a bounded set of materially confusing open historical PRs against current authority; classify each as live candidate, historical evidence, superseded, deferred or do-not-merge; preserve evidence references; recommend/perform reversible PR closure only when current authority and provenance make that safe.
 - **DO NOT:** merge stale branches; mass-close unrelated PRs; rewrite shared history; reopen completed tasks without regression evidence.
 - **ACCEPTANCE:** a source-backed disposition table removes ambiguity for the audited PR set and updates D-042 evidence/consumer mapping as needed; any PR state change is individually justified and reversible.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Quorix (PLAYER_QUORIX / SESSION_QUORIX_20261008T1732-0400_S01)
+- **CLAIMED_AT:** 2026-10-08 AST
+- **CLAIM_HEAD:** `df87609d2e7a46fb469ec35475368e9eaec9451c`
 
 **Fallback rule:** if a preferred lane is already claimed, choose another READY Wave-2 lane only when it matches your expertise and has no file-family collision. If no READY lane remains, provide bounded review/support to an active claimant or stop at a real dependency boundary—do not manufacture work.
 
