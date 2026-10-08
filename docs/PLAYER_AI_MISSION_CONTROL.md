@@ -156,7 +156,7 @@ The original P1-P5 bounded lanes are DONE. Do not wait behind Silex's D-072 and 
 Re-fetch the Bulletin and use Wave 2:
 - Nodus-preferred: P6 / D-019 exact-revision inventory refresh.
 - Veyra-preferred: P7 / D-045 profession/rank/status namespace packet.
-- Kestrel-preferred: P8 / D-026 tactical projection migration contract.
+- Kestrel-preferred: P8 / D-026 tactical projection migration contract — DONE (bounded documentation child; see live Bulletin and `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md`). Master D-026 still IN_PROGRESS.
 - Veyr-preferred: P9 / D-046 world/knowledge integration slice.
 - Quorix-preferred: P10 / D-042 legacy PR/evidence disposition audit.
 
