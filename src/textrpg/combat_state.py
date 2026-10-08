@@ -145,6 +145,7 @@ class TacticalActorState:
     reserved_reaction_id: str | None = None
     sprinted_this_activation: bool = False
     reinforcement_round: int = 1
+    withdrawn: bool = False
 
     def __post_init__(self) -> None:
         self.actor_id = _require_non_empty_text(self.actor_id, "actor.actor_id")
@@ -168,6 +169,8 @@ class TacticalActorState:
             raise ValueError("actor.activation_state is unsupported")
         if not isinstance(self.incapacitated, bool):
             raise ValueError("actor.incapacitated must be boolean")
+        if not isinstance(self.withdrawn, bool):
+            raise ValueError("actor.withdrawn must be boolean")
         if isinstance(self.reaction_reserve, bool) or not isinstance(
             self.reaction_reserve,
             int,
@@ -246,7 +249,7 @@ class CombatSession:
                 solid=not actor.incapacitated,
             )
             for actor in actor_list
-            if actor.reinforcement_round <= 1
+            if actor.reinforcement_round <= 1 and not actor.withdrawn
         )
 
         self.tactical_map = tactical_map
@@ -272,6 +275,7 @@ class CombatSession:
             actor
             for actor in self.actors.values()
             if not actor.incapacitated
+            and not actor.withdrawn
             and actor.reinforcement_round <= round_index
         ]
         round_initiative = {
@@ -292,7 +296,7 @@ class CombatSession:
         self._require_active_encounter()
         if self.active_actor_id is not None:
             active = self.actors[self.active_actor_id]
-            if active.incapacitated:
+            if active.incapacitated or active.withdrawn:
                 self._skip_incapacitated_actor(active)
             elif active.activation_state in {
                 ACTIVATION_ACTIVE,
@@ -306,7 +310,7 @@ class CombatSession:
             actor_id = self.initiative_order[self.activation_index]
             self.activation_index += 1
             actor = self.actors[actor_id]
-            if actor.incapacitated:
+            if actor.incapacitated or actor.withdrawn:
                 self._skip_incapacitated_actor(actor)
                 continue
 
@@ -334,7 +338,7 @@ class CombatSession:
             ACTIVATION_WAITING_REACTION,
         }:
             raise ValueError("active actor is not in a completable activation state")
-        if actor.incapacitated:
+        if actor.incapacitated or actor.withdrawn:
             self._skip_incapacitated_actor(actor)
         else:
             actor.action_budget = 0
@@ -363,7 +367,7 @@ class CombatSession:
         self.activation_index = 0
         for actor in self.actors.values():
             actor.action_budget = 0
-            if actor.incapacitated:
+            if actor.incapacitated or actor.withdrawn:
                 self._skip_incapacitated_actor(actor)
             else:
                 actor.activation_state = ACTIVATION_PENDING
@@ -392,6 +396,8 @@ class CombatSession:
             raise ValueError(f"unknown combat actor: {actor_id}")
         if actor.incapacitated:
             raise ValueError("incapacitated actor cannot act")
+        if actor.withdrawn:
+            raise ValueError("withdrawn actor cannot act")
         if actor.activation_state != ACTIVATION_ACTIVE:
             raise ValueError("active actor is not ready for a normal action")
         return actor
@@ -428,7 +434,7 @@ class CombatSession:
                 solid=not actor.incapacitated,
             )
             for actor in self.actors.values()
-            if actor.reinforcement_round <= round_index
+            if actor.reinforcement_round <= round_index and not actor.withdrawn
         )
 
     def _occupants(self) -> tuple[TacticalOccupant, ...]:
@@ -703,6 +709,8 @@ class CombatSession:
             raise ValueError(f"unknown combat actor: {actor_id}")
         if actor.incapacitated:
             raise ValueError("incapacitated actor cannot react")
+        if actor.withdrawn:
+            raise ValueError("withdrawn actor cannot react")
         if actor.actor_id not in self.round_initiative:
             raise ValueError("reaction actor must belong to the current round snapshot")
         if actor.reserved_reaction_id != reaction_id or actor.reaction_reserve <= 0:
