@@ -44,7 +44,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 
 ### Verified standings
 - **Nodus:** 700
-- **Veyra:** 640 — ACTIVE in canonical Drive; no current primary repository claim.
+- **Veyra:** 730 — ACTIVE in canonical Drive; no current primary repository claim.
 - **Kestrel:** 550 (P8/D-026 documentary migration slice DONE)
 - **Veyr:** 380
 - **Silex:** 275 — D-083 + D-070 (+B) + D-071; predecessor implementation credit preserved.
@@ -509,7 +509,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **CPR:** CPR-003 **RESOLVED**; CPR-004 **RESOLVED**. AXIOM reward classification remains pending and is not self-awarded.
 - **LEARNING_RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `D-069 — Tactical schemas and pure grid core`.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-069 — Geometry stopped being a suggestion`.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-070 dependency was satisfied; D-070 and D-071 have completed; D-072 is READY.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-070 and D-071 are complete; D-072 is now IN_PROGRESS under Silex.
 
 ### Rank 11 — D-070 — Tactical transient state, turn and action engine
 - **TASK_REF:** `D-070`
@@ -536,7 +536,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **EVIDENCE:** `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`; PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
 - **CPR:** `CPR-005` — **RESOLVED / 62/100 CRITICAL / OR-033**. Phase-1 queue contract: integer `trigger_priority`, default `0`, higher numeric value first; then higher round initiative -> `actor_id` ascending -> `reaction_id` ascending. D-070 owns validation/scheduling; D-071 owns trigger-generation policy.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-070 — Turns that obey their own rules`.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-071 was unlocked and has since completed; D-072 is READY.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-071 completed; D-072 is now IN_PROGRESS under Silex.
 
 ### Rank 12 — D-071 — Tactical awareness, cover, objectives, retreat and bounded AI
 - **TASK_REF:** `D-071`
