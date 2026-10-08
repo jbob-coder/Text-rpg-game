@@ -286,7 +286,7 @@ Evidence:
 ### Current blocker / next move
 D-068 is fully handed off and no longer participates in the transition gate.
 
-D-064 and D-069 are DONE. Do not reopen D-068 or repeat transition-gate work; the D-069 card below is retained as completed-history context and D-070/D-071 are now DONE and D-072 is READY.
+D-064 and D-069 are DONE. Do not reopen D-068 or repeat transition-gate work; the D-069 card below is retained as completed-history context and D-070/D-071 are now DONE. D-072 is IN_PROGRESS under Silex; D-073 remains blocked until D-072 is genuinely DONE.
 
 ---
 
