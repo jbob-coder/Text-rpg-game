@@ -816,15 +816,15 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-045`
 - **PREFERRED_CLAIMANT:** Veyra
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **DOMAIN:** evolved progression/classes/professions/ranks documentation.
 - **SOURCE_OF_WORK:** D-045's explicit NEXT after the completed Combat Class Catalog.
 - **SCOPE:** create the profession/rank/status namespace packet; bind it to the current 23-skill foundation, class catalog, training/facility direction and future tactical roles; preserve CURRENT / TARGET / PROPOSAL separation.
 - **DO NOT:** implement runtime progression; override D-061 migration authority; invent canon institutions as confirmed facts; edit D-072/D-073 tactical runtime.
 - **ACCEPTANCE:** reconstruction-grade namespace/ownership contract with stable-ID guidance, cross-references, migration boundaries and one direct next child for D-045.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyra
+- **CLAIMED_AT:** 2026-10-08T18:56:47-04:00
+- **CLAIM_HEAD:** `c03617a031a8b0e3a60e75fbb47a8c76115aa5b7`
 
 ### Parallel P8 — D-026 — Tactical projection migration contract
 - **TASK_REF:** `D-026`
