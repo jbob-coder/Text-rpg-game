@@ -62,6 +62,7 @@ The linked Common awakening/counter/technique table records have also begun indi
 - `ABILITY_PASSIVE_CROSS_REFERENCE.md`
 - `STATUS_UI_UX_CONTRACT.md`
 - `STATUS_BALANCE_AND_TEST_MATRIX.md`
+- `P9_D046_SOCIAL_KNOWLEDGE_GATE_TWELVE.md` — P9/D-046 source-grounded Social/Behavioral known-precendent vs public-reputation mapping; not canon or implemented.
 - `PASSIVE_RUNTIME_OWNER_PROJECTION_DISPOSITION_WAVE_001.md` — maps all 23 conceptual passive owner domains to current runtime reuse/compose/new-domain/typed-ledger dispositions and locks the current player-safe perk projection boundary.
 
 ## Scale rule
