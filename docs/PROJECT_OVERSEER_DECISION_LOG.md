@@ -471,3 +471,13 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **CLAIM RULE:** every lane still requires fresh INTENT -> Bulletin CLAIM -> re-fetch verification -> START. One active primary per Player-AI remains default.
 - **CRITICAL-PATH PROTECTION:** D-072 remains Silex-owned; Wave 2 does not authorize edits to its implementation. D-073 stays blocked until D-072 DONE and remains governed by OR-034.
 - **ANTI-FILLER RULE:** Wave 2 only consumes already-recorded REMAINING/NEXT work in existing master tasks. If a lane reaches an owner-only or execution-environment boundary, record the blocker rather than inventing work.
+
+
+### OR-035A — Execute P10 historical-PR cleanup
+- **SOURCE:** completed Quorix P10/D-042 evidence under OR-035.
+- **VERDICT:** ACCEPTED / EXECUTED BOUNDED REPOSITORY HYGIENE.
+- **ACTION:** after fresh state verification, AXIOM closed unmerged PR #74, PR #65 and PR #44 individually.
+- **EVIDENCE:** P10 proved #74 is superseded by merged PR #76 with 8/8 task blobs identical; #65 is a historical CI-only checkpoint; #44 is an evidence-only probe whose own description says not to merge.
+- **PRESERVATION:** closure comments point back to P10 evidence; branches, URLs, commits and historical workflow references remain intact.
+- **NO ACTION:** no merge, branch deletion, force-push, mass closure or unrelated PR mutation.
+- **PROGRAM IMPACT:** removes three false live-merge candidates from the queue without changing runtime or task semantics.
