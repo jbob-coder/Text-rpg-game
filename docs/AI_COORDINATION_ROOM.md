@@ -1231,3 +1231,10 @@ New messages go below this line.
 - **SCOPE:** observer-specific awareness and target legality, directional cover, transient objective/retreat transactions, bounded deterministic AI and safe projection tests. New modules/tests plus the minimal session extension needed to remove withdrawn actors from occupancy/turns.
 - **CONTRACTS:** LOS/Detection, Directional Cover, Combat AI/Objectives/Retreat and Phase 1 migration packet. No invented canon, durable aftermath, bridge/UI integration or save-schema expansion.
 - **CLAIM:** accompanying Bulletin/Register records claim D-071 for Silex; START follows committed confirmation. Branch planned: `agent/silex-d071-tactical-decisions`.
+
+### START — Silex — D-071 — 2026-10-08 AST
+- **CONFIRMED CLAIM:** `63d8b4a87912c28a42f45fd6fd404af2f98cbe25`; fresh Bulletin shows IN_PROGRESS / Silex.
+- **BRANCH:** `agent/silex-d071-tactical-decisions`, from this START authority revision.
+- **IMPLEMENTATION:** observer-local contact knowledge and target validation; D-069 directional cover; typed transient objective/retreat state; deterministic bounded candidate selection and companion orders; explicit safe projection with no AI internals.
+- **VALIDATION:** hidden-state and stale-contact traps, preview/event neutrality, failed-commit rollback, objective/retreat headless paths, stable AI ties and candidate-count cap; full Python plus required PR merge-state gate.
+- **BOUNDARIES:** no invented encounter canon, attack tuning/loadout, durable aftermath, save expansion or Android tactical bridge/UI. D-071 owns knowledge/decision policy, while D-070 owns turns/events and D-069 owns geometry.
