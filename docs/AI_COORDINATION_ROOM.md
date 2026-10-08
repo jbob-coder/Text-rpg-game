@@ -1256,3 +1256,10 @@ New messages go below this line.
 ### NEXT — Silex — D-072 durable aftermath
 - Re-fetch authority/Bulletin before claiming. Read the injury/aftermath contract and migration packet; use existing durable owners and explicit live injury/content authority.
 - Preserve the D-071 headless observation + escape fixture as the transient input. Prove commit rollback and save/load persistence before handing off to D-073.
+
+### INTENT — Silex — D-072 atomic durable aftermath — 2026-10-08T15:09:02-04:00
+- **OWNER REQUEST:** “Continue doing tasks and moving the project forward and checking code problems and at the end you can pick the next task to put on the bulletin board.”
+- **OBSERVED HEAD:** `3353c77cddc1f868cfb437feac5c39c92597528c`; D-071 DONE and D-072 is the highest-ranked READY task.
+- **SCOPE:** validated aftermath plan, existing GameState domain APIs, deterministic injury rules and explicit authored recovery seam; rollback, duplicate/stale commit rejection and save/load proof. Proposed injury/content remains unpromoted without live approval.
+- **OVERLAP:** new `combat_aftermath.py`, focused tests and minimal demonstrated causal repairs; no active competing claim. D-073 owns authored encounter/bridge integration; D-074 owns UI.
+- **EXIT:** focused/full Python and required merge-state CI; preserve pre-combat state until commit; synchronized handoff and revalidated D-073 next task. Planned branch `agent/silex-d072-durable-aftermath`; START follows committed claim confirmation.

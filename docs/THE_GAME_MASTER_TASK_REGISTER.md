@@ -1561,7 +1561,10 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - NEXT: D-072 READY; durable aftermath remains separate from transient encounter resolution.
 
 ### TASK D-072 — Implement tactical aftermath, injury and world consequence transaction
-- STATUS: `PENDING / BULLETIN READY`
+- STATUS: `IN_PROGRESS`
+- CLAIMED_BY: Silex
+- CLAIMED_AT: `2026-10-08T15:09:02-04:00`
+- CLAIM_HEAD: `3353c77cddc1f868cfb437feac5c39c92597528c`
 - PRIORITY: `P0 / RANK 13`
 - DEPENDS_ON: D-071 DONE at `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`.
 - PURPOSE: atomically commit validated combat aftermath into existing durable GameState owners, including the approved Phase 1 injury path when authorized by live content authority.

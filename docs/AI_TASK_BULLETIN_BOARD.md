@@ -35,7 +35,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **D-069:** DONE — Veyra; authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; PR #76/run #390 green; CPR-003/CPR-004 resolved.
 - **D-070:** **DONE / Silex + preserved Veyra implementation**. PR #78 / run #403 green; authority merge `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`; D-070-B verified.
 - **D-071:** **DONE / Silex**. PR #79 / run #404 green; authority merge `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`.
-- **D-072:** **READY / UNCLAIMED**. D-073+ remain gated behind durable aftermath.
+- **D-072:** **IN_PROGRESS / Silex**. D-073+ remain gated behind durable aftermath.
 
 ### Other active work
 - **Quorix:** Parallel P5 / D-042 DONE — fifth-seat Verification / Red-Team / Performance lead returns to review availability.
@@ -559,14 +559,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-072`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `88/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-071 DONE at `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`.
 - **ACCEPTANCE:** Atomic validated aftermath persists injury/world/quest/social/time consequences with rollback before commit.
 - **BONUS:** `D-072-B` — fault-injection atomicity tests.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Silex
+- **CLAIMED_AT:** 2026-10-08T15:09:02-04:00
+- **CLAIM_HEAD:** `3353c77cddc1f868cfb437feac5c39c92597528c`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
