@@ -1558,7 +1558,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - FILES: `combat_knowledge.py`, `combat_rules.py`, `combat_ai.py`; minimal `combat_state.py` withdrawal eligibility; three D-071 test modules and synchronized handoff.
 - LEARNING_RECORD: `D-071 — Knowledge-safe decisions and atomic departure`.
 - BONUS_STATUS: D-071-B not claimed/scored; actual tactical bridge exclusion proof awaits D-073.
-- NEXT: D-072 READY; durable aftermath remains separate from transient encounter resolution.
+- NEXT: D-072 is now IN_PROGRESS under Silex; durable aftermath remains separate from transient encounter resolution.
 
 ### TASK D-072 — Implement tactical aftermath, injury and world consequence transaction
 - STATUS: `IN_PROGRESS`
@@ -1574,9 +1574,11 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 ### TASK D-073 — Materialize Gate Twelve tactical content and Python bridge
 - STATUS: `PENDING / BULLETIN QUEUED`
 - PRIORITY: `P0 / RANK 14`
-- DEPENDS_ON: D-072.
+- DEPENDS_ON: D-072 DONE.
 - PURPOSE: create the bounded Gate Twelve encounter records and authoritative player-safe combat bridge actions/projection without inventing unresolved canon.
-- ACCEPTANCE: one encounter starts, plays, resolves/retreats through Python bridge with hidden-state redaction and contracted save interruption behavior.
+- CONTENT_AUTHORITY: OR-034 authorizes a bounded `PROVISIONAL_INTEGRATION` Gate Twelve fixture for D-073 after D-072 is DONE. Encounter-local contacts, generic fixture combat actions and any fixture-only knowledge/condition records must remain explicitly non-canonical; no persistent faction/NPC/lore/art promotion is implied.
+- ACCEPTANCE: one encounter starts, plays, resolves/retreats through Python bridge with hidden-state redaction and contracted save interruption behavior; provisional fixture provenance is explicit and no proposed record is silently promoted to canon.
+- CANON_PROMOTION_GATE: final lore/content identity, permanent participant identity, final weapon/ability source and permanent art remain outside D-073 unless separately approved; resolve before final integrated acceptance if the fixture is to ship as canon.
 - BONUS: `D-073-B` combat bridge redaction audit.
 
 ### TASK D-074 — Implement Android tactical DTO/mapper/ViewModel/Compose surface

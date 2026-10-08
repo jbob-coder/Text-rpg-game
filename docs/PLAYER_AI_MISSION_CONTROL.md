@@ -140,13 +140,13 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 ↓
 `D-071` **DONE — PR #79 / run #404**
 ↓
-`D-072` **READY** -> `D-073 -> D-074`
+`D-072` **IN_PROGRESS / Silex** -> `D-073 -> D-074`
 ↓
 `D-076 -> D-077 -> D-078 -> D-079`
 ↓
 **Phase 1 integrated acceptance candidate**
 
-D-064/D-065/D-067/D-068/D-069/D-070/D-075 are DONE. D-071 is DONE; D-072 is the next READY tactical critical-path task. CPR-005 is resolved by OR-033: integer `trigger_priority`, default `0`, higher numeric value first, then higher round initiative -> `actor_id` -> `reaction_id`. Preserve Veyra's PR #77 branch evidence; do not treat it as a live claim.
+D-064/D-065/D-067/D-068/D-069/D-070/D-075 are DONE. D-071 is DONE; D-072 is IN_PROGRESS under Silex. D-073 is next after durable aftermath and is governed by OR-034 provisional-integration content authority. CPR-005 is resolved by OR-033: integer `trigger_priority`, default `0`, higher numeric value first, then higher round initiative -> `actor_id` -> `reaction_id`. Preserve Veyra's PR #77 branch evidence; do not treat it as a live claim.
 
 ---
 
@@ -229,7 +229,7 @@ Do not reopen D-065. Await/use the Veyr D-075 mission card if D-075 is unlocked 
 Separate **+310** root-cause award remains verified under OR-024 for the transition bridge/system-blocker repair.
 
 ### Next Move
-Do not reopen D-067. Nodus is available for bounded integration/schema review. D-070 is DONE; D-071 is DONE; D-072 is the next READY tactical task.
+Do not reopen D-067. Nodus is available for bounded integration/schema review. D-070 is DONE; D-071 is DONE; D-072 is IN_PROGRESS under Silex; do not claim it. D-073 is the next tactical task after D-072 DONE.
 
 
 ---
@@ -647,16 +647,13 @@ Read `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md` and the Learning Ledger
 **Proof:** PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS; 36 new D-071 regressions.
 Read `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md` and Learning Ledger `D-071 — Knowledge-safe decisions and atomic departure`.
 
-### Next Move — D-072
+### Next Move — D-072 / D-073 boundary
 
-Re-fetch the Bulletin and claim D-072 if READY. Read the injury/aftermath and
-Phase 1 migration contracts. Build a validated aftermath plan and atomic durable
-commit through existing condition, inventory, quest, social and time owners.
-Honor live injury/content authority; do not promote proposed canon implicitly.
+D-072 is currently IN_PROGRESS under Silex. Re-fetch the Bulletin and do not claim, edit, or supersede D-072 while that claim remains live.
 
-Exit gate: failure restores durable state; approved injury/consequences persist
-through save/load; full Python and required PR integration gates pass. Keep
-transient tactical state out of save v1 and preserve D-073/D-074 bridge/UI scope.
+After D-072 is genuinely DONE, D-073 may be promoted to READY under OR-034. D-073 is authorized to materialize a bounded `PROVISIONAL_INTEGRATION` Gate Twelve fixture using the existing tactical schemas and bridge contracts without inventing canon. Encounter-local contacts and generic fixture action/knowledge/condition records must remain explicitly non-canonical, player-safe, and auditable. Do not create permanent faction/NPC lore, permanent art, or a new save-state owner.
+
+D-073 exit gate: one bounded encounter starts, plays, resolves/retreats through the authoritative Python bridge; hidden-state redaction and pre-combat interruption behavior are proven; fixture provenance is explicit; no proposed record is silently promoted to canon. Preserve D-074 as the Android DTO/mapper/ViewModel/Compose consumer task.
 
 
 ---
@@ -693,4 +690,4 @@ Release history: `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
 
 ### Next move
 
-Do not reclaim D-083 or redo merged tracker work without a new demonstrated regression. Regenerate reports at an explicit commit when current totals are needed; old evidence stays immutable. D-070 has since completed; D-071 is DONE; D-072 is the next READY tactical task. The latest Bulletin controls current ownership.
+Do not reclaim D-083 or redo merged tracker work without a new demonstrated regression. Regenerate reports at an explicit commit when current totals are needed; old evidence stays immutable. D-070 has since completed; D-071 is DONE; D-072 is IN_PROGRESS under Silex; do not claim it. D-073 is the next tactical task after D-072 DONE. The latest Bulletin controls current ownership.

@@ -1,6 +1,6 @@
 # THE GAME — Gate Twelve Phase 1 Tactical Encounter Packet
 
-Status: **PROPOSED PHASE 1 CONTENT PACKET / MECHANICAL CONTRACT READY / NOT CANON OR IMPLEMENTED**
+Status: **PROVISIONAL PHASE 1 INTEGRATION FIXTURE AUTHORIZED BY OR-034 / NOT CANON / NOT YET IMPLEMENTED**
 Parents:
 - docs/PHASE_1_SOLO_PLAYABLE_PARALLEL_TRACK.md
 - docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md
@@ -394,9 +394,9 @@ Performance:
 - no continuous real-time simulation;
 - instrumentation records response time on representative Android target.
 
-## 24. Canon/content decisions still required
+## 24. Canon/content decisions still required before canon promotion
 
-Before integration:
+OR-034 removes these decisions as a blocker for **provisional D-073 integration only**. They remain required before the encounter or its records are represented as final canon:
 1. approve or replace opponent premise;
 2. decide whether the contacts are persistent NPCs, disposable encounter actors, beasts, or faction members;
 3. approve knowledge IDs;
@@ -404,6 +404,27 @@ Before integration:
 5. determine Jack's actual first combat action/weapon/ability source;
 6. decide Tamsin's combat-capable action, if any;
 7. approve narrative consequences.
+
+
+
+## 24A. OR-034 provisional D-073 integration authority
+
+D-073 may materialize this packet as a bounded integration fixture once D-072 is genuinely DONE.
+
+The fixture authority is deliberately narrower than canon approval:
+
+- use `ENCOUNTER_GT_SERVICE_FORK_CONTACT_01` and `TACTICAL_MAP_GT_SERVICE_FORK_01` as provisional integration identifiers;
+- keep `CONTACT_SERVICE_FORK_A` and `CONTACT_SERVICE_FORK_B` encounter-local with no permanent `persistent_ref`, faction lore, named-NPC identity or permanent art requirement;
+- a generic combat action definition may be authored strictly as a D-073 integration fixture when needed to prove attack/action routing. It must use the existing tactical action schema and must not imply a canonical weapon, item, ability or profession source;
+- Tamsin remains optional. D-073 must not invent a permanent Tamsin combat ability merely to satisfy the fixture;
+- `COND_TUNNEL_LEG_INJURY` and the proposed knowledge IDs may be used as explicitly provisional integration records only when the D-073/D-072 bridge proof requires them; their presence does not canonize wording, balance, lore or long-term recovery design;
+- the encounter/bridge evidence must label the material `PROVISIONAL_INTEGRATION` and identify every provisional record;
+- no save-schema expansion, permanent adversary promotion, new top-level state owner or final asset production is authorized by this ruling;
+- player-safe projection must continue to redact hidden contacts, AI utility/private thresholds and private NPC state.
+
+This fixture is sufficient to begin D-073 after D-072 completion. A separate owner/content decision is **not** required merely to prove the integration path.
+
+Before Phase 1 final integrated acceptance, any provisional record intended to ship as canon must either receive explicit canon/content approval or be replaced/isolated so the final product does not present provisional integration material as final lore.
 
 ## 25. Phase 1 impact
 

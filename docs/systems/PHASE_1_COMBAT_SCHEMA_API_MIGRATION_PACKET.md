@@ -146,6 +146,25 @@ The current vertical slice remains valid when all four sections are absent.
 Backward compatibility:
 - old content packs with no tactical records continue loading unchanged.
 
+
+
+### 5A. OR-034 provisional D-073 content rule
+
+D-073 may author the minimum tactical content needed to prove the bridge even though final Gate Twelve combat canon is not yet approved.
+
+Constraints:
+
+- the integration encounter is identified/evidenced as `PROVISIONAL_INTEGRATION`;
+- provisional contact actors remain encounter-local and omit permanent `persistent_ref` values;
+- generic fixture combat actions must use the existing `combat_actions` schema and runtime rules rather than creating a second weapon/ability system;
+- do not add unsupported schema fields merely to mark fixture status; carry provisional status through supported encounter metadata plus evidence/documentation;
+- fixture-only knowledge/condition records may exist only when needed for the bounded integration proof and must be enumerated in D-073 evidence;
+- D-073 owns Python content + player-safe bridge integration only. D-074 owns Android tactical DTO/mapper/ViewModel/Compose consumption;
+- OR-015 domain-versioning/redaction requirements apply when the tactical projection is introduced;
+- no permanent lore, art, faction identity, save-schema expansion or new GameState owner follows from the fixture.
+
+This removes canon ambiguity from the D-073 start gate without converting proposed content into final canon.
+
 ## 6. Tactical map schema
 
 Minimum map record:

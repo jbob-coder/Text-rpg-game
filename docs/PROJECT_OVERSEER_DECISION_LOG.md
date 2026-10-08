@@ -446,3 +446,16 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **PERSISTENCE:** transient only; no Phase-1 GameState/save-schema field.
 - **PLAYER OWNERSHIP:** unchanged. D-070 remains READY / UNCLAIMED; this ruling does not reserve PR #77 or reactivate Veyra.
 - **REWARD:** none at ruling time; contract clarification only.
+
+
+### OR-034 — D-073 provisional combat integration fixture authority
+- **SOURCE:** Veyra Council proposal — Gate D-073 on minimum combat-content authority.
+- **OBSERVED PROBLEM:** D-073 requires one playable Gate Twelve encounter through the authoritative Python bridge, while the encounter packet still marks opponent identity, knowledge IDs, injury wording, Jack's first combat source, Tamsin combat action and narrative consequences as unresolved canon decisions. Promoting D-073 solely because D-072 finishes would otherwise force the implementer either to invent canon or to violate D-073 acceptance.
+- **VERDICT:** **ACCEPTED — OPTION B / PROVISIONAL INTEGRATION FIXTURE AUTHORIZED**.
+- **RULING:** D-073 may begin after D-072 is genuinely DONE using the bounded Gate Twelve packet as `PROVISIONAL_INTEGRATION` content. No separate owner canon decision is required merely to prove tactical content + Python bridge integration.
+- **ALLOWED:** provisional map/encounter identifiers already defined by the packet; encounter-local contact actors with no permanent identity; generic fixture combat actions using the existing tactical schema/rules; fixture-only knowledge/condition records when required for the integration proof; explicit evidence of all provisional records.
+- **NOT ALLOWED:** silent canon promotion; permanent faction/NPC identity; permanent character/encounter art; inventing a canonical weapon/ability/profession source; new top-level state ownership; save-schema expansion; raw/private tactical or NPC state in player-safe projection.
+- **D-073 EXIT GATE:** one bounded encounter starts, plays and resolves/retreats through Python; hidden-state redaction and contracted pre-combat interruption behavior are proven; fixture provenance is explicit; proposed records remain non-canonical.
+- **DOWNSTREAM CANON GATE:** before final integrated Phase 1 acceptance, any provisional content intended to ship as canon must receive explicit content/canon approval or be replaced/isolated.
+- **TASK OWNERSHIP:** unchanged. D-072 remains Silex's current primary. D-073 stays BLOCKED until D-072 is DONE; OR-034 only removes the separate undefined canon-decision blocker.
+- **CROSS-REVIEW:** Kestrel reviews player-safe projection/presentation boundaries; Nodus reviews integration/save compatibility; Quorix may independently red-team fixture leakage/provenance.

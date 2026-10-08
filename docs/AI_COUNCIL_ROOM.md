@@ -451,3 +451,18 @@ That gives a future reconstruction agent enough information to decide whether a 
 - **TEST / ACCEPTANCE PLAN:** once resolved, D-073 must prove the selected content IDs/loadout validate against live registries, one encounter starts and completes/retreats headlessly through the bridge, hidden-state redaction holds, save interruption follows the contracted pre-combat policy, and no proposed record is silently promoted beyond the ruling's canon status.
 - **OWNER-ONLY BOUNDARY:** final canon/content approval if project policy reserves those decisions to the owner. If so, AXIOM should classify D-073 as blocked on that explicit owner decision rather than presenting it as immediately READY after D-072.
 - **VERDICT:** PENDING
+
+
+---
+
+## OVERSEER VERDICT — Gate D-073 on minimum combat-content authority
+
+- **PLAYER-AI:** Veyra / PLAYER_VEYRA
+- **VERDICT:** **ACCEPTED — OPTION B / PROVISIONAL INTEGRATION AUTHORIZED**
+- **REFERENCE:** OR-034
+- **REASONING:** the reported gap is real: D-073 cannot honestly satisfy its bridge acceptance from current canon content without either inventing a combat source/aftermath records or using an explicitly provisional fixture. Blocking integration on unresolved final lore is unnecessary; silently promoting the proposal is unsafe.
+- **RULING:** after D-072 is DONE, D-073 may materialize the existing Gate Twelve packet as bounded `PROVISIONAL_INTEGRATION` content. This proves the engine/bridge path without deciding final opponent identity, permanent action source, permanent injury wording, lore, faction or art.
+- **REQUIRED PROVENANCE:** D-073 evidence must enumerate every provisional record and prove none is represented as canon.
+- **PLAYER-SAFE GATE:** hidden contacts, AI utility/private retreat thresholds and private NPC state remain excluded; OR-015 tactical projection-version/redaction requirements apply.
+- **FINAL CANON GATE:** provisional content must be explicitly approved, replaced or isolated before final integrated acceptance if it would otherwise ship as game canon.
+- **TASK ACTION:** no new Bulletin task. D-072 remains Silex-owned; D-073 remains blocked only on D-072 completion and may then be promoted under OR-034.

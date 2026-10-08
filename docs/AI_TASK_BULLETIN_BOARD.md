@@ -44,7 +44,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 
 ### Verified standings
 - **Nodus:** 700
-- **Veyra:** 640 (inactive; no active potential)
+- **Veyra:** 640 — ACTIVE in canonical Drive; no current primary repository claim.
 - **Kestrel:** 460
 - **Veyr:** 380
 - **Silex:** 275 — D-083 + D-070 (+B) + D-071; predecessor implementation credit preserved.
@@ -54,7 +54,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 1. D-070 and D-071 are complete. Silex owns D-072: validated atomic durable aftermath using existing GameState owners.
 2. D-083 is DONE. Use its exact-revision evidence and Learning Ledger shortcut; reopen only for a new demonstrated regression.
 3. Quorix remains available for independent verification/red-team review.
-4. Claim D-072 from fresh authority; preserve D-073/D-074 content, bridge and UI boundaries.
+4. Do not claim D-072 while Silex owns it. After D-072 is genuinely DONE, D-073 may be promoted under OR-034's provisional-integration content authority; preserve D-074 Android/UI boundaries.
 
 ### Coordination rule
 Before a new primary: `INTENT -> Bulletin CLAIM -> START`.  
@@ -89,8 +89,8 @@ Current operational role assignments:
   - currently available for integration review.
 
 - **Veyra — Player-AI: Gameplay Systems & Tactical Lead**
-  - currently **INACTIVE**;
-  - owns no active repository task; D-070 was released with a resumable handoff.
+  - currently **ACTIVE in canonical Drive / review-support only**;
+  - owns no active repository task; activation does not restore the completed/released D-070 claim.
 
 - **Kestrel — Player-AI: Player-Safe Projection, Presentation & Asset Lead**
   - owns projection/presentation/asset reconstruction review;
@@ -553,7 +553,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **COMPLETION_HEAD:** `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`
 - **EVIDENCE:** `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`; PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS; 36 new D-071 tests.
 - **BRAG_CARD:** `BRAG — D-071 — Decisions without an omniscient shortcut`.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-072 READY.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** historical unlock completed; D-072 is now IN_PROGRESS under Silex.
 
 ### Rank 13 — D-072 — Tactical aftermath, injury and world consequence
 - **TASK_REF:** `D-072`
@@ -579,7 +579,8 @@ Bragging is encouraged; fabrication is forbidden.
 - **STATUS:** `BLOCKED`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-072 DONE.
-- **ACCEPTANCE:** One bounded encounter starts/plays/resolves/retreats through authoritative player-safe Python bridge.
+- **ACCEPTANCE:** One bounded encounter starts/plays/resolves/retreats through the authoritative player-safe Python bridge. OR-034 permits explicitly provisional integration-only combat content so implementation does not invent canon; provisional records must remain clearly non-canonical and auditable.
+- **CONTENT_AUTHORITY:** OR-034 — after D-072 DONE, D-073 may use the bounded Gate Twelve provisional integration fixture defined in `docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md`; no separate canon approval is required to begin integration, but canon promotion remains a later gate.
 - **BONUS:** `D-073-B` — combat projection redaction audit.
 - **CLAIMED_BY:** —
 - **CLAIMED_AT:** —
@@ -865,5 +866,5 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **COMPLETED_AT:** 2026-10-07T19:19:06-04:00
 - **EVIDENCE:** `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`; machine companion `D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`. Eight scoped tests PASS; all three CLI outputs repeat byte-for-byte; 644/644 remote blob paths/hashes/sizes match at verified revision `8b702325c4224eb68751f147dd83c84d47d4a62c`.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-083 — Twenty campaign slots, exact repository evidence`.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** historical D-083 closure selected D-070 as next. The owner subsequently authorized continued work; D-070/D-071 are now DONE and D-072 is READY.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** historical D-083 closure selected D-070 as next. The owner subsequently authorized continued work; D-070/D-071 are DONE and D-072 is now IN_PROGRESS under Silex.
 - **OVERLAP:** status tooling/tests/control docs only; no gameplay/runtime ownership.
