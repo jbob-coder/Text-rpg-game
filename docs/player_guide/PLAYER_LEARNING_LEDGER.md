@@ -305,3 +305,16 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - STILL UNKNOWN / BLOCKED: D-072 Silex aftermath; D-073 bridge actions and wire keys; D-074 actual Kotlin/UI/tests; low-end device, canonical contact art and remaining D-026 activity/map/adversary/final-APK work. D-026 master remains IN_PROGRESS after P8.
 - NEXT PLAYER SHORTCUT: first check Bulletin D-072/D-073/D-074; when D-073 is DONE, compare its verified public keys/action signatures against the P8 map, update only changed rows, then implement typed D-074 with a redaction/version/legacy test matrix.
 - SUPPORTING ARTIFACT: `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md` and `docs/android/D026_TACTICAL_PLAYER_SAFE_PROJECTION_MIGRATION_MAP_2026-10-08.md`.
+
+### P6 / D-019 — Exact-revision metadata without false word counts
+- PLAYER-AI: Nodus / PLAYER_NODUS.
+- AUTHORITY / COMPLETION HEAD: source commit `fae4dd58c692298d8d9aadafb9704f8843359463`, tree `9bfedd23f3dbbf251efb18718b4c274a878d0a5f`; bounded P6 evidence finalized 2026-10-08 AST.
+- READ FIRST: `docs/AI_TASK_BULLETIN_BOARD.md` Parallel P6; `docs/THE_GAME_MASTER_TASK_REGISTER.md` D-019; `tools/documentation_inventory.py`; P6 evidence JSON + Markdown.
+- DO NOT REDISCOVER: tree API `type=blob` paths at immutable commit give 662 files/7,428,218 committed bytes, 447 Markdown (445 in docs), 30 structured doc paths, 72 test-source paths. Full `git archive` words/headings were **not** measured; no tests ran. Old D-060 source snapshots remain valid.
+- OWNER OF BEHAVIOR: D-019 `tools/documentation_inventory.py` owns exact-revision content inventory; D-081/D-082 `tools/project_status_tracker.py` owns aggregate status; `docs/assets/ASSET_PROVENANCE_REGISTRY.md`/family records own canonical art stages.
+- TRAP / FALSE ASSUMPTION: Git tree metadata yields files and bytes, not Markdown words/headings or executed tests; 13 asset manifest files do not equal approved assets. Full connector blob scan exceeded the tool-call limit, and local git clone failed DNS resolution.
+- VALIDATE WITH: complete checkout: `PYTHONPATH=. python -m unittest tests.test_documentation_inventory_tool -v`; `python tools/documentation_inventory.py --revision fae4dd58c692298d8d9aadafb9704f8843359463 --output /tmp/d019.json`. Commands are instructions, **not executed test evidence** from P6.
+- CHANGE SAFELY: reproduce the immutable source commit on a full checkout, then extend content extractor coverage and join provenance by stable asset ID; never hand-edit historical evidence or duplicate D-081/D-082 semantics.
+- STILL UNKNOWN / BLOCKED: word/heading totals, broad world/domain record totals, current canonical asset-stage promotion, executed-test evidence, owner-target unit mapping; master D-019 remains IN_PROGRESS.
+- NEXT PLAYER SHORTCUT: open `docs/evidence/P6_D019_EXACT_REVISION_CHECKPOINT_2026-10-08.md`, run the documented complete-checkout recipe at its exact SHA and fill only measured missing word/heading/record fields under D-019.
+- SUPPORTING ARTIFACT: `docs/evidence/P6_D019_GIT_TREE_INVENTORY_2026-10-08.json`.
