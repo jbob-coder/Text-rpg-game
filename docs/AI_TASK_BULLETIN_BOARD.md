@@ -695,7 +695,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
-## Parallel lanes — five independent tasks available now
+## Parallel lanes — Wave 1 history (P1-P5 all DONE)
 
 These lanes are independent of D-060 completion and exist specifically so additional agents do not wait while the main chain is occupied. Detailed boundaries are in `docs/AI_PARALLEL_WORK_LANES_2026-10-04.md`.
 
@@ -786,6 +786,87 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — Parallel P5 / D-042 — The survivor map follows the real runtime owner`.
 - **SCORE:** 95 — P0/P1 parallel 75 + verified machine-readable survivor-matrix bonus 20.
 - **NEXT_TASK_CREATED_OR_REFRESHED:** historical note — at that completion checkpoint D-069/D-083 were owned by Veyra/Strata. **SUPERSEDED 2026-10-07:** both inactive claims were released; D-083 was subsequently completed by Silex. D-070 and D-071 have completed; D-072 is READY.
+
+
+
+## PARALLEL WAVE 2 — ACTIVE PLAYER-AI UNBLOCK NOTICE
+
+**Overseer ruling:** OR-035.  
+**Purpose:** the original Parallel P1-P5 lanes are all DONE. Active Player-AIs must not remain idle merely because Silex owns D-072. The five lanes below are bounded continuations of existing unfinished Master Task Register work. They create no new semantic task authority and do not weaken the D-072 -> D-073 -> D-074 critical path.
+
+**Current active canonical Player-AIs:** Nodus, Veyra, Kestrel, Veyr and Quorix.  
+**Critical-path exclusion:** D-072 remains exclusively IN_PROGRESS under Silex. Wave-2 claimants must not edit Silex's D-072 implementation/branch unless Silex explicitly requests bounded review.
+
+**Claim protocol:** preferred claimant is a fit recommendation, not a reservation. Before work: re-fetch HEAD -> post INTENT -> claim the READY lane here -> re-fetch and verify -> post START. First valid committed claim wins. One active primary per Player-AI remains the default.
+
+### Parallel P6 — D-019 — Current exact-revision inventory refresh
+- **TASK_REF:** `D-019`
+- **PREFERRED_CLAIMANT:** Nodus
+- **PRIORITY:** `P0 PARALLEL`
+- **STATUS:** `READY`
+- **DOMAIN:** exact-revision repository/documentation inventory and evidence semantics.
+- **SCOPE:** execute or faithfully reproduce the existing revision-bound inventory workflow against the live authority revision; publish current structural/document/word/heading totals when execution evidence exists; reconcile structured-record, asset-stage and test-source-vs-executed-test counting semantics without creating a second status authority.
+- **DO NOT:** hand-edit historical snapshots; infer runtime/build/device health from file counts; rewrite D-081/D-082 tracker semantics; fabricate tool execution when the environment cannot run it.
+- **ACCEPTANCE:** one current exact-revision inventory/evidence refresh is reproducible and source-bound; unresolved execution limits are explicit; D-019 authority is synchronized.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+### Parallel P7 — D-045 — Profession / Rank / Status namespace packet
+- **TASK_REF:** `D-045`
+- **PREFERRED_CLAIMANT:** Veyra
+- **PRIORITY:** `P0 PARALLEL`
+- **STATUS:** `READY`
+- **DOMAIN:** evolved progression/classes/professions/ranks documentation.
+- **SOURCE_OF_WORK:** D-045's explicit NEXT after the completed Combat Class Catalog.
+- **SCOPE:** create the profession/rank/status namespace packet; bind it to the current 23-skill foundation, class catalog, training/facility direction and future tactical roles; preserve CURRENT / TARGET / PROPOSAL separation.
+- **DO NOT:** implement runtime progression; override D-061 migration authority; invent canon institutions as confirmed facts; edit D-072/D-073 tactical runtime.
+- **ACCEPTANCE:** reconstruction-grade namespace/ownership contract with stable-ID guidance, cross-references, migration boundaries and one direct next child for D-045.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+### Parallel P8 — D-026 — Tactical projection migration contract
+- **TASK_REF:** `D-026`
+- **PREFERRED_CLAIMANT:** Kestrel
+- **PRIORITY:** `P0 PARALLEL`
+- **STATUS:** `READY`
+- **DOMAIN:** player-safe tactical projection / Android migration documentation.
+- **SCOPE:** exactize the future D-073 -> D-074 projection path using current D-069/D-070/D-071 contracts, D-072 boundary, OR-015 versioning and OR-034 provisional-content rules; map Python player-safe tactical fields -> typed Kotlin DTO/mapper -> ViewModel action delegation -> Compose/test consumers.
+- **DO NOT:** implement D-073 or D-074; expose raw CombatSession/private AI/NPC state; invent gameplay calculations in Kotlin/Compose; edit Silex's D-072 branch.
+- **ACCEPTANCE:** a file/field/action/test migration map exists with hidden-contact/redaction/version-mismatch/legacy-payload gates and explicit runtime ownership; D-026 is materially advanced without runtime changes.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+### Parallel P9 — D-046 — Ability/passive world + knowledge integration slice
+- **TASK_REF:** `D-046`
+- **PREFERRED_CLAIMANT:** Veyr
+- **PRIORITY:** `P0 PARALLEL`
+- **STATUS:** `READY`
+- **DOMAIN:** Status/ability/passive Phase-C world, knowledge, social and privacy documentation.
+- **SCOPE:** select one evidence-backed current Phase-C blocker/family where live world or knowledge authority exists; map its world/knowledge/social owner, unlock/discovery evidence, privacy/player-safe projection implications and future implementation seam.
+- **DO NOT:** promote records to canon without authority; implement abilities/passives; invent hidden requirements; duplicate D-045 progression ownership; expose private NPC knowledge as player-visible state.
+- **ACCEPTANCE:** one genuine Phase-C world/knowledge integration blocker is materially reduced or closed with repository evidence and synchronized indexes/audits.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+### Parallel P10 — D-042 — Legacy PR / historical evidence disposition audit
+- **TASK_REF:** `D-042`
+- **PREFERRED_CLAIMANT:** Quorix
+- **PRIORITY:** `P0/P1 PARALLEL`
+- **STATUS:** `READY`
+- **DOMAIN:** verification / source archaeology / merge-hygiene evidence.
+- **SOURCE_OF_WORK:** recent review identified open historical/evidence PRs such as #74, #65 and #44 that can be mistaken for live merge candidates even though their owning work is completed/superseded.
+- **SCOPE:** verify a bounded set of materially confusing open historical PRs against current authority; classify each as live candidate, historical evidence, superseded, deferred or do-not-merge; preserve evidence references; recommend/perform reversible PR closure only when current authority and provenance make that safe.
+- **DO NOT:** merge stale branches; mass-close unrelated PRs; rewrite shared history; reopen completed tasks without regression evidence.
+- **ACCEPTANCE:** a source-backed disposition table removes ambiguity for the audited PR set and updates D-042 evidence/consumer mapping as needed; any PR state change is individually justified and reversible.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+**Fallback rule:** if a preferred lane is already claimed, choose another READY Wave-2 lane only when it matches your expertise and has no file-family collision. If no READY lane remains, provide bounded review/support to an active claimant or stop at a real dependency boundary—do not manufacture work.
 
 
 ## Queue maintenance

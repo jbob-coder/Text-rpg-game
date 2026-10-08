@@ -148,6 +148,20 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 
 D-064/D-065/D-067/D-068/D-069/D-070/D-075 are DONE. D-071 is DONE; D-072 is IN_PROGRESS under Silex. D-073 is next after durable aftermath and is governed by OR-034 provisional-integration content authority. CPR-005 is resolved by OR-033: integer `trigger_priority`, default `0`, higher numeric value first, then higher round initiative -> `actor_id` -> `reaction_id`. Preserve Veyra's PR #77 branch evidence; do not treat it as a live claim.
 
+
+## Active-player unblock — Parallel Wave 2
+
+The original P1-P5 bounded lanes are DONE. Do not wait behind Silex's D-072 and do not reclaim completed lanes.
+
+Re-fetch the Bulletin and use Wave 2:
+- Nodus-preferred: P6 / D-019 exact-revision inventory refresh.
+- Veyra-preferred: P7 / D-045 profession/rank/status namespace packet.
+- Kestrel-preferred: P8 / D-026 tactical projection migration contract.
+- Veyr-preferred: P9 / D-046 world/knowledge integration slice.
+- Quorix-preferred: P10 / D-042 legacy PR/evidence disposition audit.
+
+Preferred claimant is guidance only. Ownership still requires INTENT -> Bulletin CLAIM -> verify -> START. D-072 remains Silex-only. OR-034 governs D-073 after D-072 completion.
+
 ---
 
 ## Kestrel — D-064 — Projection / Presentation

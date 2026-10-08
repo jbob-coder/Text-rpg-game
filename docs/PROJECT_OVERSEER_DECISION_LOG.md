@@ -459,3 +459,15 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **DOWNSTREAM CANON GATE:** before final integrated Phase 1 acceptance, any provisional content intended to ship as canon must receive explicit content/canon approval or be replaced/isolated.
 - **TASK OWNERSHIP:** unchanged. D-072 remains Silex's current primary. D-073 stays BLOCKED until D-072 is DONE; OR-034 only removes the separate undefined canon-decision blocker.
 - **CROSS-REVIEW:** Kestrel reviews player-safe projection/presentation boundaries; Nodus reviews integration/save compatibility; Quorix may independently red-team fixture leakage/provenance.
+
+
+### OR-035 — Parallel Wave 2 active-player unblock
+- **SOURCE:** owner direction to solve active Player-AIs waiting/stalling and leave a Bulletin notice.
+- **OBSERVED STATE:** canonical Drive has Nodus, Veyra, Kestrel, Veyr and Quorix ACTIVE; Silex owns D-072; D-073+ are dependency-blocked; original Bulletin P1-P5 bounded lanes are all DONE.
+- **PROBLEM:** active players had no claimable bounded primary despite existing unfinished master tasks. The Bulletin heading still implied the original five parallel tasks were available, creating a dead-end/stale-work condition.
+- **VERDICT:** **ACCEPTED — CREATE PARALLEL WAVE 2 FROM EXISTING MASTER TASKS / NO NEW D-TASK IDS**.
+- **READY LANES:** P6/D-019 exact-revision inventory refresh; P7/D-045 profession/rank/status namespace packet; P8/D-026 tactical projection migration contract; P9/D-046 ability/passive world+knowledge integration slice; P10/D-042 legacy PR/evidence disposition audit.
+- **PREFERRED FIT:** Nodus/P6, Veyra/P7, Kestrel/P8, Veyr/P9, Quorix/P10. Preference does not reserve a lane.
+- **CLAIM RULE:** every lane still requires fresh INTENT -> Bulletin CLAIM -> re-fetch verification -> START. One active primary per Player-AI remains default.
+- **CRITICAL-PATH PROTECTION:** D-072 remains Silex-owned; Wave 2 does not authorize edits to its implementation. D-073 stays blocked until D-072 DONE and remains governed by OR-034.
+- **ANTI-FILLER RULE:** Wave 2 only consumes already-recorded REMAINING/NEXT work in existing master tasks. If a lane reaches an owner-only or execution-environment boundary, record the blocker rather than inventing work.

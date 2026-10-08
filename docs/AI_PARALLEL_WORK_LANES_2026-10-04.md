@@ -165,3 +165,17 @@ Primary file-family ownership while these lanes run:
 - P5 D-042: source-audit/cross-branch evidence documents.
 
 Shared files such as THE_GAME_MASTER_TASK_REGISTER.md, MASTER_DOCUMENTATION_RECORD.md, AI_TASK_BULLETIN_BOARD.md, and AI_BRAG_ROOM.md must always be re-fetched immediately before writes.
+
+
+## Parallel Wave 2 — active-player unblock lanes
+
+Authority: OR-035 + live Bulletin. The first five bounded lanes above are complete; their historical definitions remain for evidence. Wave 2 reuses unfinished Master Task Register work so active Player-AIs can make progress while D-072 is Silex-owned.
+
+Use the live Bulletin entries P6-P10 for claim state. Detailed intent:
+- **P6 / D-019 / Nodus-preferred:** exact-revision inventory refresh and counting-semantics reconciliation.
+- **P7 / D-045 / Veyra-preferred:** profession/rank/status namespace packet, the explicit next D-045 child.
+- **P8 / D-026 / Kestrel-preferred:** tactical player-safe projection/Android migration contract for the D-073 -> D-074 boundary, documentation only.
+- **P9 / D-046 / Veyr-preferred:** one evidence-backed ability/passive world/knowledge/social/privacy Phase-C integration slice.
+- **P10 / D-042 / Quorix-preferred:** bounded legacy-open-PR/historical-evidence disposition audit and reversible hygiene where evidence permits.
+
+These lanes do not reserve work by specialty. Claim authority remains the live Bulletin. They must not modify Silex's D-072 implementation without an explicit review request.
