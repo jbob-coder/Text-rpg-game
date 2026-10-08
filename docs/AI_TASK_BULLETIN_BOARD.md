@@ -825,7 +825,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-045`
 - **PREFERRED_CLAIMANT:** Veyra
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **DOMAIN:** evolved progression/classes/professions/ranks documentation.
 - **SOURCE_OF_WORK:** D-045's explicit NEXT after the completed Combat Class Catalog.
 - **SCOPE:** create the profession/rank/status namespace packet; bind it to the current 23-skill foundation, class catalog, training/facility direction and future tactical roles; preserve CURRENT / TARGET / PROPOSAL separation.
@@ -834,6 +834,12 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIMED_BY:** Veyra
 - **CLAIMED_AT:** 2026-10-08T18:56:47-04:00
 - **CLAIM_HEAD:** `c03617a031a8b0e3a60e75fbb47a8c76115aa5b7`
+- **COMPLETED_AT:** 2026-10-08T19:04:29-04:00
+- **COMPLETION_HEAD:** `2c3a7e23493b3b8ca379d79598ee171abc1cbef8` (Learning Ledger and program synchronization present before this Bulletin closure)
+- **EVIDENCE:** `docs/evidence/P7_D045_PROFESSION_RANK_STATUS_NAMESPACE_2026-10-08.md`; primary child `docs/systems/PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md`; **23/23** current skills and **7/7** target class families represented; no runtime/Android tests executed.
+- **LEARNING_RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `P7 / D-045 — Keep profession, rank and status as separate owners`.
+- **BRAG_CARD:** pending post-Bulletin closure synchronization.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** no new D-task ID. Master D-045 remains IN_PROGRESS; its direct next documented child is the Training / Mentor / Facility Progression Standard and must be exposed/claimed through live Bulletin authority before work.
 
 ### Parallel P8 — D-026 — Tactical projection migration contract
 - **TASK_REF:** `D-026`
