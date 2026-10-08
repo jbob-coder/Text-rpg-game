@@ -1107,6 +1107,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - current passive projection boundary is source-mapped: `state.perks` is durable and can contribute validated effective-value modifiers, hidden perk provenance is redacted in deep status inspection, and Android has no explicit passive-list DTO;
   - `tools/status_phase_c_audit.py` + `tests/test_status_phase_c_audit.py` machine-check the 230-registry-ID / 230-owner-row one-to-one ownership milestone.
 - CURRENT PHASE: reconstruction-grade Phase C refinement, blocker resolution, world evidence integration, normalization and canon-review preparation.
+- P9 / D-046 bounded world/knowledge adjudication (Veyr): source-backed mapping for PASSIVE_SOC_0007 and PASSIVE_SOC_0010 distinguishes established D-075 Tamsin actor-specific relationship/known choice precedent from absent public reputation truth. Evidence: `docs/systems/status/P9_D046_SOCIAL_KNOWLEDGE_GATE_TWELVE.md` and `docs/evidence/P9_D046_SOCIAL_KNOWLEDGE_INTEGRATION_2026-10-08.md`. This is design-only (not canon/runtime); no passive IDs, compact knowledge rows or family counts changed. Missing public reputation publisher/provenance, repeated social qualification ledger, qualification/effect APIs, private-safe passive projection and classification approvals remain open. The larger master D-046 stays IN_PROGRESS until subsequent phases.
 - REMAINING:
   - parent-system range/test fixtures and justified numeric envelopes;
   - evidence-backed world/knowledge integration where current world canon supports it;
