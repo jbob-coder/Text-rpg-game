@@ -279,3 +279,16 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - CHANGE SAFELY: call EncounterRules movement/interaction/retreat commits so knowledge and objective state share rollback; bind resolved stats and known identities rather than copying private NPC records.
 - STILL UNKNOWN / BLOCKED: D-072 durable aftermath; D-073 canon/action effect binding/bridge and D-071-B bridge proof; D-074 tactical UI; handset budgets remain D-078.
 - NEXT PLAYER SHORTCUT: start D-072 from the observation + escape fixture in `test_combat_objectives.py`; its result is transient until an explicit aftermath transaction commits it.
+
+### P10 / D-042 — An open historical PR is not a new merge candidate
+- PLAYER-AI: Quorix (`PLAYER_QUORIX`), session `SESSION_QUORIX_20261008T1732-0400_S01`.
+- AUTHORITY / COMPLETION HEAD: OR-035 / Bulletin verified claim commit `510e8b458eb536b71474f71647c1bbc4b4f7b8c7`; evidence commit `413aaa4d56f1d785e2e2004a948b765a89a66b81`. This closes only bounded P10; master D-042 remains IN_PROGRESS.
+- READ FIRST: `docs/evidence/P10_D042_LEGACY_PR_DISPOSITION_2026-10-08.md`; `docs/AI_TASK_BULLETIN_BOARD.md` P10; Master Register D-042; GitHub PRs #74/#76/#65/#44.
+- DO NOT REDISCOVER: PR #74 remains open and diverged, but all eight D-069 file blob IDs are identical to final merged PR #76 head, which reached authority at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`. PR #65/#44 are open one-file CI marker-only branches, not new runtime work.
+- OWNER OF BEHAVIOR: D-069/CPR-003/CPR-004 merged Python tactical grid/schema authority; D-067 owns historical inventory/equipment acceptance; D-042 owns evidence/consumer archaeology. PR close decision belongs to individual authorized maintainers, not implicit ownership from this audit.
+- TRAP / FALSE ASSUMPTION: OPEN PR + historical green workflow ≠ live merge candidate; branch divergence ≠ missing functionality; old CI ≠ current-head test pass.
+- VALIDATE WITH: compare the actual PR head refs against an explicit current authority SHA (the audit used `510e8b458eb536b71474f71647c1bbc4b4f7b8c7`); query current PR states; verify the eight pairs of blob SHAs; check PR #76 merge ancestry and D-067 evidence. Source/PR checks **executed**; Python/Android tests, CI, emulator and device **not executed**.
+- CHANGE SAFELY: preserve PR URL and link to completed task evidence; individually close as superseded/evidence-only if current owner approves; do not merge archived marker branches or rewrite history. Keep exact D-042 consumer mapping with P5 evidence.
+- STILL UNKNOWN / BLOCKED: whether maintainers choose to close these PRs; full Master D-042 remaining D-026/D-021 consumer mapping, D-029 asset lineage, and verified deprecation/zero-consumer proof. D-072 remains Silex-owned.
+- NEXT PLAYER SHORTCUT: start from P10 disposition table, then fetch fresh PR states/HEAD before taking PR actions; do not redo D-069 or merge PR #74/#65/#44 merely to clear an open queue.
+- SUPPORTING ARTIFACT: `docs/evidence/P10_D042_LEGACY_PR_DISPOSITION_2026-10-08.md`.
