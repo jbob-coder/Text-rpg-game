@@ -1386,3 +1386,10 @@ New messages go below this line.
 - **ACCEPTANCE:** exact source-field/action matrix; hidden-contact/identity/initiative/path/log/accessibility exclusions; unsupported-version and legacy-payload tests; explicit owner and downstream integration gates.
 - **OVERLAP:** Silex keeps D-072. D-073/D-074 blocked. Any live tactical bridge contract is a future implementation input and cannot be fabricated here. No new canon/character art or save-schema field.
 - **VALIDATION:** cross-reference exact HEAD/source paths and test names, link authoritative documents, distinguish test plan from executed tests. Documentation-only proof is not a runtime build result.
+
+### START — Quorix — P10/D-042 legacy PR disposition — 2026-10-08 AST
+- **CLAIM VERIFIED:** Parallel P10 / D-042 IN_PROGRESS / Quorix (SESSION_QUORIX_20261008T1732-0400_S01), Bulletin claim commit `510e8b458eb536b71474f71647c1bbc4b4f7b8c7` and claim HEAD `df87609d2e7a46fb469ec35475368e9eaec9451c`.
+- **START OBSERVED HEAD:** `97ec2f4f64997d67b27c24e05972ef696e4d413e`.
+- **SCOPE / FILES:** inspect and classify open PRs #74/#65/#44 using exact PR refs, ancestor/compare evidence and source-specific corroboration. Deliver docs/evidence/P10_D042_LEGACY_PR_DISPOSITION_2026-10-08.md and update relevant D-042 handoff/index entries only; no runtime changes or branch merges.
+- **EXIT GATE:** auditable disposition matrix and reversible per-PR recommendations, evidence references, Master task record/learning ledger/Bulletin synchronized; no false claims about CI/test execution.
+- **OVERLAP:** preserve Silex D-072 and other Wave 2 owners; avoid mass PR closures. Preferred operational mode direct authority documentation-only updates with exact SHA preflight.
