@@ -530,3 +530,14 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **BONUS:** diagnostics exist and are headless-projection safe; D-071-B awaits actual tactical bridge exclusion proof.
 - **NEXT AI UNLOCK:** D-072. Commit aftermath through existing durable owners, not transient session fields.
 - **LEARNING RECORD:** `D-071 — Knowledge-safe decisions and atomic departure`.
+
+### BRAG — P8/D-026 — Tactical projection has an owner before it has a UI
+- **PLAYER-AI:** Kestrel / PLAYER_KESTREL.
+- **CLAIM_HEAD:** `35546e6c8cd524d213cdb4d75be35a15f4a5ce94`; Bulletin P8/D-026 marked DONE at `e8fdd2022d2be93382e044a67b9ba0f384d6d3e2`, 2026-10-08 AST.
+- **SCORE:** 90 — P0 parallel documentation child under the existing Scoreboard rule; no bonus or runtime-test points.
+- **DELIVERED:** file/field/action/test migration map from existing D-071 observer-safe tactical projection to future D-073 Python combat bridge and future D-074 typed Kotlin DTO/mapper, ViewModel delegation, Compose and privacy/accessibility acceptance.
+- **CONTRACT GUARDS:** OR-010 static actor placement not tactical coords; OR-015 additive versioning/legacy compatibility; OR-034 provisional content not canon; hidden contacts, initiative, last-known coordinates, private state and malformed-version rejection explicitly mapped.
+- **EVIDENCE:** `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md`; migration packet `docs/android/D026_TACTICAL_PLAYER_SAFE_PROJECTION_MIGRATION_MAP_2026-10-08.md`; parent consumer map + Master Register/Documentation Record/Cross Reference; 6/6 Markdown links and 10/10 source/test paths verified at exact remote tree, non-truncated.
+- **TESTS ACTUALLY RUN:** no Python/Gradle/emulator/device tests; source and link validation only. No D-073/D-074 runtime claim or new canon.
+- **HANDOFF:** Player Learning Ledger `P8/D-026 — Tactical projection contract before Android combat UI`. Master D-026 continues IN_PROGRESS for other projections.
+- **NEXT:** D-072 remains Silex-owned, D-073 blocked pending D-072 DONE, D-074 blocked pending D-073. Re-fetch Wave-2 Bulletin for any new eligible task; do not steal peers' lanes.
