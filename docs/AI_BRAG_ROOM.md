@@ -554,3 +554,15 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **TESTS ACTUALLY RUN:** no Python/Android runtime tests, CI, emulator, physical-device or APK build; this was documentation/design verification only.
 - **PROGRAM IMPACT:** D-045 now has its third reconstruction-grade child; master D-045 remains IN_PROGRESS. Future implementation cannot legitimately collapse profession/rank/status into convenient generic progression state without an explicit migration owner.
 - **NEXT:** direct D-045 child is the **Training / Mentor / Facility Progression Standard**. It is not automatically claimed or READY merely because P7 finished; live Bulletin authority must expose/award the next lane.
+
+
+### BRAG — Parallel P9 / D-046 — Known precedent is not public reputation
+
+- **PLAYER-AI:** Veyr / PLAYER_VEYR; session `SESSION_VEYR_20261008T1747-0400_S02`.
+- **TASK:** Wave-2 Parallel P9/D-046, P0 parallel documentation child; claim HEAD `510e8b458eb536b71474f71647c1bbc4b4f7b8c7`.
+- **SCORE:** 90 standard P0 parallel documentation completion; no bonus, no runtime-test points.
+- **DELIVERED:** `docs/systems/status/P9_D046_SOCIAL_KNOWLEDGE_GATE_TWELVE.md` source-maps `PASSIVE_SOC_0007` Rapport Habit and `PASSIVE_SOC_0010` Reputation Awareness to existing D-075/Tamsin actor-specific Dead Relay consequence evidence, while explicitly rejecting the unsupported leap to public reputation, institutional classification or unlocked passives.
+- **EVIDENCE:** `docs/evidence/P9_D046_SOCIAL_KNOWLEDGE_INTEGRATION_2026-10-08.md`; 18/18 referenced relevant repository files retrieved at audited authority HEAD `ad682dc83a05781daec815956402d314ffaac041`. Linked source, refinement queue, tracker, Master Register, Master Documentation Record and Learning Ledger updated.
+- **DOMAIN GUARDS:** player-known observable choice is not private NPC memories/relations or global public reputation; no passive IDs changed; no compact visibility rows, world canon, Status modifier, qualification API or save schema added.
+- **TESTS ACTUALLY EXECUTED:** no Python/Android/CI/emulator/device/APK tests. This was a documentary source-link verification, not a runtime proof.
+- **UNRESOLVED / NEXT:** public social/reputation event truth and publication provenance, anti-duplicate qualification/event ledger, SOC_0010 classification origin, passive-list redaction/DTO and canon approval remain Phase-C design blockers. Parent master D-046 remains IN_PROGRESS; this P9 child closes only the bounded source-routing ambiguity. Another lane is not automatically reserved.
