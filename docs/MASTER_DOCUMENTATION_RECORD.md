@@ -133,6 +133,14 @@ Authorities:
 
 This advances D-019 but does not complete it. Current-head Markdown word counts, generalized world/domain extractors, provenance-normalized asset-stage counts, and executed-test evidence remain open.
 
+## 2.2 P6 D-019 exact-revision inventory checkpoint — 2026-10-08
+
+**Bounded Parallel P6 source verification:** immutable program commit `fae4dd58c692298d8d9aadafb9704f8843359463`; Git tree `9bfedd23f3dbbf251efb18718b4c274a878d0a5f`. Non-truncated recursive tree metadata counted 662 tracked files, 7,428,218 blob bytes, 447 Markdown files (445 under `docs/`), 30 structured docs paths, 24 PNGs, 69 Python files, 75 Kotlin/KTS files, and 72 Python/Kotlin test-source paths. These values are exact for **that** source revision, not necessarily the latest mutable branch HEAD.
+
+**Evidence:** `docs/evidence/P6_D019_GIT_TREE_INVENTORY_2026-10-08.json` and `docs/evidence/P6_D019_EXACT_REVISION_CHECKPOINT_2026-10-08.md`. The source tree has no gitlinks/symlinks. D-081/D-082 task-status tracker semantics remain unchanged.
+
+**Execution limit:** the full `git archive` inventory CLI, Markdown word/heading scan, full structured-domain extractors, canonical provenance-normalized asset stages and executed-test audit did **not** run in this connector-only session. File counts never imply executed tests or accepted asset stages. Historic D-019 checkpoints stay immutable. Master D-019 remains IN_PROGRESS; P6 is a bounded refresh, not completion of the parent.
+
 ## 2.3 D-044 moving-base reconciliation closure
 
 D-044 is now **DONE**.
