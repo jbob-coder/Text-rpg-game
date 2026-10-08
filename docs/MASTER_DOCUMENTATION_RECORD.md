@@ -1102,3 +1102,13 @@ retreat/detection and bounded deterministic AI are verified headlessly.
 Evidence: `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`; PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
 D-072 is READY. Requirement 9 still needs durable aftermath, authored action/content
 integration and player-safe bridge/UI acceptance. D-071-B is not yet claimed.
+
+## D-026 tactical projection migration child — P8 Wave 2 — 2026-10-08
+
+**Documentation scope:** P8 tactical player-safe projection/Android migration child documented, source/path-checked. `docs/android/D026_TACTICAL_PLAYER_SAFE_PROJECTION_MIGRATION_MAP_2026-10-08.md` owns the tactical field/action/test/consumer mapping and references the existing parent Android Consumer & Projection Map. `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md` records exact-head source/link inspection (6/6 links and 10/10 inspected implementation/test paths present at `413aaa4d56f1d785e2e2004a948b765a89a66b81`). No runtime tests were executed.
+
+**Not implemented:** D-073 Python bridge `combat` payload/action routing, D-074 typed Kotlin/Compose tactical surface and Android privacy/execution gates. `CombatKnowledge.player_view` and `EncounterRules.player_view` exist headlessly; Android bridge/client still have no tactical domain at inspected source revision.
+
+**Dependency:** D-072 remains Silex's IN_PROGRESS primary; D-073 BLOCKED until D-072 DONE, with OR-034 non-canonical `PROVISIONAL_INTEGRATION` fixture boundary. D-074 follows D-073. OR-015 domain versioning and OR-010 placement boundary retained.
+
+**Master D-026 remains IN_PROGRESS** for activity, hierarchical map, adversary-intel, evolved status, final APK consumer contracts and later runtime evidence. This child improves documentation coverage without declaring Phase 1 or APK complete. Historical D-072 READY text above is superseded by live Bulletin.
