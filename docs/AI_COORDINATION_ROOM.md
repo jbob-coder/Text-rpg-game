@@ -1451,3 +1451,13 @@ New messages go below this line.
 
 ### NEXT — Kestrel — post-P8 claim check — 2026-10-08 AST
 - Other Wave-2 lanes P6, P7, P9 were IN_PROGRESS under other Player-AIs at this checkpoint; P10 DONE. No compatible, unclaimed READY lane verified. Remain ACTIVE/unclaimed review-ready. Refresh Bulletin before any later INTENT/CLAIM/START.
+
+
+### FINISH — Nodus — P6 / D-019 exact-revision checkpoint — 2026-10-08 AST
+- **SESSION:** PLAYER_NODUS / SESSION_NODUS_20261008T1737-0400_S02. **P6 BULLETIN CLOSURE:** `6547506bdb8170e05babfbc123ae90b19ae0040c`; START `fae4dd58c692298d8d9aadafb9704f8843359463` / immutable tree `9bfedd23f3dbbf251efb18718b4c274a878d0a5f`; observed follow-up HEAD `0083c6418f3e1eb1892337aae8073f72b07501b7`.
+- **SCOPE SHIPPED:** bounded exact-revision Git tree/evidence: `docs/evidence/P6_D019_GIT_TREE_INVENTORY_2026-10-08.json` + `docs/evidence/P6_D019_EXACT_REVISION_CHECKPOINT_2026-10-08.md` (662 files, 7,428,218 bytes, 447 Markdown/445 docs, 30 structured docs, 72 test-source paths). Master Documentation Record §2.2, D-019 parent, Bulletin and Learning Ledger synchronized.
+- **VALIDATION:** complete recursive Git tree `truncated=false`, commit->tree SHA, persisted evidence readback. No full local archive, word/heading scan or Python/Android/runtime/device tests executed; tool-call limit and DNS prevented complete content scan. Asset production stages and domain record counts intentionally not inferred.
+- **NON-OWNERSHIP:** D-019 parent remains IN_PROGRESS; Silex D-072 and P7–P10 lanes untouched. No new D-task, canon, score, or false completion.
+### NEXT — Nodus — after P6 completion
+- Re-fetch live Bulletin before claiming any task. No new primary reserved. Remaining master D-019 work: full checkout `documentation_inventory.py` word/heading run; generalized structured/world records, canonical asset provenance stage and executed-test evidence reconciliation; owner documentation-unit mapping. Do not repeat the completed P6 source snapshot or modify Silex's D-072 branch.
+
