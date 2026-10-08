@@ -33,8 +33,8 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 ### Critical path
 - **D-064:** DONE — Kestrel; PR #70/run #362 green; authority merge `d7ebb7ca...`; CPR-002 resolved.
 - **D-069:** DONE — Veyra; authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; PR #76/run #390 green; CPR-003/CPR-004 resolved.
-- **D-070:** **IN_PROGRESS / Silex**. Preserve Veyra's PR #77 implementation; complete current-authority code audit, missing scheduler/acceptance work and merge-state verification.
-- **D-071+:** remain dependency-gated behind D-070.
+- **D-070:** **DONE / Silex + preserved Veyra implementation**. PR #78 / run #403 green; authority merge `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`; D-070-B verified.
+- **D-071:** **READY / UNCLAIMED**. D-072+ remain dependency-gated behind the tactical decision layer.
 
 ### Other active work
 - **Quorix:** Parallel P5 / D-042 DONE — fifth-seat Verification / Red-Team / Performance lead returns to review availability.
@@ -46,14 +46,14 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **Veyra:** 640 (inactive; no active potential)
 - **Kestrel:** 460
 - **Veyr:** 380
+- **Silex:** 185 — D-083 + D-070 (+B); predecessor implementation credit preserved.
 - **Quorix:** 95
-- **Silex:** 75 — D-083 verified completion; prior implementation credited to Strata.
 
 ### Immediate strategy
-1. Silex owns D-070. Preserve PR #77 as predecessor evidence; use a fresh task branch for verified repairs and completion.
+1. D-070 is complete. D-071 is the next eligible tactical task; claim from fresh authority and consume the verified transient engine.
 2. D-083 is DONE. Use its exact-revision evidence and Learning Ledger shortcut; reopen only for a new demonstrated regression.
 3. Quorix remains available for independent verification/red-team review.
-4. On D-070 completion, evaluate and unlock D-071 immediately.
+4. D-071 is unlocked; keep D-072 aftermath and later bridge/UI work behind their own gates.
 
 ### Coordination rule
 Before a new primary: `INTENT -> Bulletin CLAIM -> START`.  
@@ -508,20 +508,20 @@ Bragging is encouraged; fabrication is forbidden.
 - **CPR:** CPR-003 **RESOLVED**; CPR-004 **RESOLVED**. AXIOM reward classification remains pending and is not self-awarded.
 - **LEARNING_RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `D-069 — Tactical schemas and pure grid core`.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-069 — Geometry stopped being a suggestion`.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-070 dependency is satisfied and is READY below.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-070 dependency was satisfied; D-070 has since completed and D-071 is READY.
 
 ### Rank 11 — D-070 — Tactical transient state, turn and action engine
 - **TASK_REF:** `D-070`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `90/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-069 DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
 - **PREFLIGHT:** `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — re-audit against merged D-069 before implementation.
 - **SESSION_HANDOFF:** `docs/player_guide/VEYRA_SESSION_HANDOFF_2026-10-05.md` — resume pointer for chat/session continuity; live repository state still outranks it.
-- **NEXT_MOVE:** re-read merged D-069 APIs plus Movement/Pathing and Turn/Initiative standards; update the preflight for movement-point allowance, reaction reserve lifecycle and reinforcement scheduling; then implement the smallest transient session/activation/budget/movement/event seam without GameState/save expansion.
+- **NEXT_MOVE:** consume the verified engine and Learning Ledger shortcut for D-071; do not reclaim completed D-070 without a new defect.
 - **ACCEPTANCE:** Headless transient encounter executes deterministic legal turns/actions without GameState tactical schema expansion; previews do not consume event sequence.
-- **BONUS:** `D-070-B` — deterministic transcript/replay hash.
+- **BONUS:** `D-070-B` — **DONE** — deterministic transcript/replay hash.
 - **CLAIMED_BY:** Silex
 - **CLAIMED_AT:** 2026-10-08T01:36:27-04:00
 - **CLAIM_HEAD:** `47a7cc82b6842321b1164b3ad4a3d74c7dda18ed`
@@ -529,21 +529,21 @@ Bragging is encouraged; fabrication is forbidden.
 - **PREVIOUS_CLAIMED_AT:** 2026-10-05T13:26:00-04:00
 - **PREVIOUS_CLAIM_HEAD:** `5362f50eec8e9a0da1af9a395314932bf8110648`
 - **RELEASED_BY_OWNER:** 2026-10-07 — Veyra inactive; task returned to READY.
-- **PRESERVED_WORK:** branch `agent/veyra-d070-transient-engine` @ `05c0886f45e8acd6bdd9a1a32c938adbd087eb1f`; open PR #77; workflow run `37351724319` SUCCESS.
+- **PRESERVED_WORK:** branch `agent/veyra-d070-transient-engine` @ `05c0886f45e8acd6bdd9a1a32c938adbd087eb1f`; closed predecessor PR #77 (superseded by #78); workflow run `37351724319` SUCCESS.
 - **HANDOFF:** `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`.
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** D-069 final evidence + D-070 preflight + preserved PR #77 branch evidence; D-070 acceptance remains incomplete.
+- **COMPLETION_HEAD:** `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`
+- **EVIDENCE:** `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`; PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
 - **CPR:** `CPR-005` — **RESOLVED / 62/100 CRITICAL / OR-033**. Phase-1 queue contract: integer `trigger_priority`, default `0`, higher numeric value first; then higher round initiative -> `actor_id` ascending -> `reaction_id` ascending. D-070 owns validation/scheduling; D-071 owns trigger-generation policy.
-- **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-070 — Turns that obey their own rules`.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-071 READY.
 
 ### Rank 12 — D-071 — Tactical awareness, cover, objectives, retreat and bounded AI
 - **TASK_REF:** `D-071`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `89/100`
-- **STATUS:** `BLOCKED`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
-- **DEPENDENCIES:** D-070 DONE.
+- **DEPENDENCIES:** D-070 DONE at `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`.
 - **ACCEPTANCE:** Knowledge-correct objective/retreat encounter behavior with bounded deterministic AI and no hidden-state leak.
 - **BONUS:** `D-071-B` — developer AI diagnostics.
 - **CLAIMED_BY:** —
@@ -783,7 +783,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **MASTER_TASK_BOUNDARY:** master D-042 remains IN_PROGRESS for broader delegated consumer/asset/deprecation work; only Parallel P5 is DONE.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — Parallel P5 / D-042 — The survivor map follows the real runtime owner`.
 - **SCORE:** 95 — P0/P1 parallel 75 + verified machine-readable survivor-matrix bonus 20.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** historical note — at that completion checkpoint D-069/D-083 were owned by Veyra/Strata. **SUPERSEDED 2026-10-07:** both inactive claims were released; D-083 was subsequently completed by Silex. D-070 remains READY/unclaimed.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** historical note — at that completion checkpoint D-069/D-083 were owned by Veyra/Strata. **SUPERSEDED 2026-10-07:** both inactive claims were released; D-083 was subsequently completed by Silex. D-070 has since completed; D-071 is READY.
 
 
 ## Queue maintenance
@@ -864,5 +864,5 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **COMPLETED_AT:** 2026-10-07T19:19:06-04:00
 - **EVIDENCE:** `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`; machine companion `D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`. Eight scoped tests PASS; all three CLI outputs repeat byte-for-byte; 644/644 remote blob paths/hashes/sizes match at verified revision `8b702325c4224eb68751f147dd83c84d47d4a62c`.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-083 — Twenty campaign slots, exact repository evidence`.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-070 revalidated READY with D-069 DONE and resolved CPR-005; D-071 remains gated. No second task claimed under the owner's one-task request.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** historical D-083 closure selected D-070 as next. The owner subsequently authorized continued work; D-070 is now DONE and D-071 is READY.
 - **OVERLAP:** status tooling/tests/control docs only; no gameplay/runtime ownership.

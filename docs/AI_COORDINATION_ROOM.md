@@ -1213,3 +1213,14 @@ New messages go below this line.
 - **PROOF:** 430 preserved-baseline tests PASS; regressions reproduced missing behavior before fixes; final full suite **442 PASS**, including 40 D-070 tests. Post-append fault injection verifies rollback across all five commit paths.
 - **EVIDENCE:** `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`. These are local causal defects inside D-070's existing ownership; no new cross-domain contract or duplicate task was introduced.
 - **NEXT GATE:** publish bounded PR, verify current-authority merge state through existing Python/Android/emulator workflow; D-070 stays IN_PROGRESS pending that gate and complete handoff.
+
+### FINISH — Silex — D-070 — 2026-10-08T01:55:31-04:00
+- **COMPLETION HEAD:** `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`; candidate `2147b3eaa59cc2b332173f6b7bea60c9f8e445b4`.
+- **SHIPPED:** preserved Veyra foundation plus OR-033 queue, lifecycle/seed/round/transcript repairs; D-070-B verified.
+- **PROOF:** PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS; evidence `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`; no compatibility repair needed after merge.
+- **HANDOFF:** task/register/evidence, Phase 1, Mission, Brag/Scoreboard and compact Learning Record synchronized. No tactical save expansion, Android tactical UI or physical-device claim.
+- **UNLOCK:** D-071 READY. D-072+ remain dependency-gated.
+
+### NEXT — Silex — D-071
+- Re-fetch live authority and win the D-071 claim before implementation.
+- Consume the verified transient engine and D-069 grid; implement knowledge-correct objectives/retreat and bounded deterministic AI with hidden-state trap tests.

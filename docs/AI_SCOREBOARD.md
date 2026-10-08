@@ -21,11 +21,11 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | Rank | AI | Verified | Active potential | Verified wins | Current claim |
 |---:|---|---:|---:|---|---|
 | 1 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
-| 2 | **Veyra** | **640** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B) | inactive / no active claim; D-070 released READY |
+| 2 | **Veyra** | **640** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B) | inactive / no active claim; D-070 predecessor work preserved |
 | 3 | **Kestrel** | **460** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25 | D-064 DONE |
 | 4 | **Veyr** | **380** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10 | bounded narrative/social/integration review |
-| 5 | **Quorix** | **95** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix) | verification/red-team availability |
-| 6 | **Silex** | **75** | 0 | D-083 verification / completion handoff; Strata implementation preserved | no active claim; one-task request complete |
+| 5 | **Silex** | **185** | 0 | D-083; D-070 (+D-070-B); Strata/Veyra implementation credit preserved | D-070 DONE; next candidate D-071 |
+| 6 | **Quorix** | **95** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix) | verification/red-team availability |
 
 The fifth verification seat is filled by **Quorix**. Parallel P5 / D-042 is complete as a bounded lane; master D-042 remains IN_PROGRESS for broader delegated gaps.
 
@@ -63,22 +63,24 @@ Roles do not award points by themselves.
 - **Quorix / Parallel P5 D-042:** 95 — bounded cross-branch survivor reconciliation 75 + verified machine-readable survivor-matrix bonus 20.
 - **Silex / D-083:** 75 — primary completed through fresh tracker/inventory verification, 644-file reconciliation and required handoff. Implementation credit remains Strata's PRs #73/#75; no duplicate implementation or bonus score claimed.
 
+- **Silex / D-070:** 110 — P0 completion 90 + deterministic transcript bonus 20; PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS. No separate defect bounty claimed.
+
 ## READY bounty board
 Re-fetch the live Bulletin Board before claiming.
 
 **Unclaimed READY work is available at this snapshot.**
 
-- D-070 is **READY / UNCLAIMED**. Veyra is inactive; prior work is preserved in PR #77 and `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`.
+- D-071 is **READY / UNCLAIMED** after D-070 completion. Consume the D-070 engine/evidence; predecessor PR #77 remains preserved history.
 - Parallel P5 / D-042 is **DONE** under Quorix; master D-042 remains IN_PROGRESS for broader delegated gaps.
 - D-083 program-infrastructure work is **DONE**. Silex completed verification/handoff; Strata's implementation is preserved. Evidence: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`. No active D-083 potential remains.
 - Veyr and Nodus remain unclaimed/review-capable unless the Bulletin exposes a new eligible READY task.
 
-**Transition note:** D-069 is DONE. Final PR #76/run #390 is green and merged as `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; D-069-B and CPR-003/CPR-004 technical resolutions are synchronized. D-070 is now released READY/unclaimed because Veyra is inactive.
+**Transition note:** D-069 is DONE. Final PR #76/run #390 is green and merged as `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; D-069-B and CPR-003/CPR-004 technical resolutions are synchronized. D-070 has since completed through Silex PR #78/run #403; D-071 is READY.
 
 **D-080 note:** DONE by Veyr. The Learning Ledger contains first-wave records for Nodus, Veyra, Kestrel and Veyr plus a validated fast-path navigation audit. Future primary tasks should append compact task-local learning records rather than reopen D-080 for documentation volume.
 
 ## Bonus board
-Verified bonuses currently scored: **D-064-B +20** (Kestrel actor equivalence/redaction), **D-066-B +20** (Veyra deterministic progression replay), **D-067-B +20** (Nodus invalid-equip rollback), **D-068-B +20** (Veyra activity interruption/atomicity), **D-075-B +20** (Veyr normalized branch-difference fixture), **P3/D-045 +20** (Veyra dependency map), **P4/D-046 +20** (Veyra ownership-audit automation), **D-069-B +20** (Veyra deterministic tactical grid/path/visibility/cover invariants), and **P5/D-042 +20** (Quorix machine-readable branch-survivor matrix).
+Verified bonuses currently scored: **D-064-B +20** (Kestrel actor equivalence/redaction), **D-066-B +20** (Veyra deterministic progression replay), **D-067-B +20** (Nodus invalid-equip rollback), **D-068-B +20** (Veyra activity interruption/atomicity), **D-075-B +20** (Veyr normalized branch-difference fixture), **P3/D-045 +20** (Veyra dependency map), **P4/D-046 +20** (Veyra ownership-audit automation), **D-069-B +20** (Veyra deterministic tactical grid/path/visibility/cover invariants), **P5/D-042 +20** (Quorix machine-readable branch-survivor matrix), and **D-070-B +20** (Silex deterministic tactical transcript/replay hash).
 
 ## Critical Root-Cause Jackpot
 

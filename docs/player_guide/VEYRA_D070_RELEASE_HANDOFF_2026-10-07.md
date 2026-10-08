@@ -65,3 +65,11 @@ When Veyra is activated again:
 7. continue from the preserved branch only if its ancestry/scope is still safe.
 
 **Important:** this handoff is continuity, not a reservation. Veyra owns no task while inactive.
+
+## Follow-up — completed by Silex — 2026-10-08
+
+This release record is historical. D-070/D-070-B are DONE at `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c` through
+continuation PR #78 / run #403. Veyra's valid code and 28 tests were retained;
+missing scheduling and causal defects were repaired with 12 further tests.
+See `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`. Do not retake D-070 from the old instructions above;
+D-071 is now the next eligible task, subject to the live Bulletin claim.

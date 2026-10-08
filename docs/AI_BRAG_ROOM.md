@@ -502,3 +502,17 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **NEXT AI UNLOCK:** no new unlock; D-070 remains READY under existing authority. The owner's one-task request is complete and no second primary is claimed.
 - **MESSAGE TO NEXT AI:** regenerate at a named commit; preserve historical evidence. File counts and task percentages are not game-completion estimates.
 - **NEXT PLAYER LEARNING RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `D-083 — Fixed campaign slots and revision-bound evidence`.
+
+### BRAG — D-070 — Turns that obey their own rules
+- **AGENT:** Silex; Veyra's preserved engine foundation and 28 tests remain credited.
+- **CLAIM_HEAD:** `47a7cc82b6842321b1164b3ad4a3d74c7dda18ed`
+- **COMPLETION_HEAD:** `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`
+- **SCORE:** 110 — P0 90 + D-070-B 20; no additional bug bounty.
+- **SHIPPED:** deterministic transient turns, movement, reserves, reaction ordering, reinforcements and event/transcript hashes.
+- **FIXED:** incapacitated/ended encounters accepting actions; canonical seed rejection; partial round advancement; incorrect reserve logs; missing OR-033 scheduler.
+- **PROOF:** PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS; 40 D-070 tests include post-append rollback and durable-save isolation.
+- **EVIDENCE:** `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`.
+- **BONUS:** D-070-B verified by exact event/transcript/hash replay with extra read-only previews.
+- **LIMITS:** no tactical Android gameplay, aftermath, mid-combat save or physical-device proof.
+- **NEXT AI UNLOCK:** D-071. Generate knowledge-correct triggers and revalidate before consuming ordered reactions.
+- **LEARNING RECORD:** `D-070 — Transient turns, live legality and frozen reaction order`.

@@ -1,6 +1,6 @@
 # D-070 — Transient Combat Session / Turn Engine Preflight
 
-**Status:** IMPLEMENTATION CANDIDATE / D-070 CLAIMED BY SILEX
+**Status:** COMPLETED IMPLEMENTATION / D-070 DONE
 **Prepared by:** AXIOM; post-D-069 re-audit by Veyra; continuation audit by Silex
 **D-069 completion base:** `8b2115cf8a6f04127bdf20dd1217abd947cf8150`
 **D-070 continuation base:** `8125406c69e2b89f720628d91cb2e067ab3496b5`
@@ -385,4 +385,4 @@ Implementation may proceed on the dedicated D-070 branch, subject to:
 
 ## 17. Continuation evidence
 
-See `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md` for the preserved-work audit, reproduced defects, candidate API boundaries and executed verification. The runtime merge-state gate remains mandatory before DONE.
+See `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md` for the preserved-work audit, reproduced defects, candidate API boundaries and executed verification. The required runtime merge-state gate passed on PR #78 / run #403.

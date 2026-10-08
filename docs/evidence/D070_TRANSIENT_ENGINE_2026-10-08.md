@@ -1,7 +1,7 @@
 # D-070 — Transient tactical engine continuation
 
 **Owner:** Silex
-**Status:** LOCAL PASS / PR MERGE-STATE GATE PENDING
+**Status:** DONE / REQUIRED MERGE-STATE GATE PASS
 **Authority base:** `8125406c69e2b89f720628d91cb2e067ab3496b5`
 **Task branch:** `agent/silex-d070-transient-engine`
 **Preserved predecessor:** Veyra PR #77 / `05c0886f45e8acd6bdd9a1a32c938adbd087eb1f`
@@ -48,8 +48,7 @@ and invalid next-round initiative. The final full suite passes with the repairs.
   hash identical; serialized GameState remains byte-for-byte unchanged.
 
 Local logs are session evidence; the committed regressions and PR workflow are
-reproducible durable proof. CI must still verify Python 3.10 and the existing
-Android build/unit/emulator/screenshot gates before this task is marked DONE.
+reproducible durable proof. CI subsequently verified Python 3.10 and the existing Android build/unit/emulator/screenshot gates, as recorded below.
 
 ## API handoff and limits
 
@@ -69,3 +68,18 @@ D-070-B supplies normalized event transcripts and SHA-256 replay comparison, not
 mid-combat persistence or a transcript deserializer. D-071 owns awareness, cover,
 objectives, retreat and AI; D-072 owns durable aftermath; later tasks own bridge/UI.
 No physical-device or playable tactical Android encounter claim is made here.
+
+## Final merge-state evidence
+
+- Candidate: `2147b3eaa59cc2b332173f6b7bea60c9f8e445b4`; authority base: `8125406c69e2b89f720628d91cb2e067ab3496b5`.
+- Tested PR merge: `d23e50b861ead649d5139f9257ddd503b8060f47`.
+- PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
+- Workflow: https://github.com/jbob-coder/Text-rpg-game/actions/runs/37734174295.
+- APK SHA-256: `faef9452bad0f1e39bf0b3455e79f46abab7a068281e2ed48a08d1871eebbc82`.
+- APK artifact: `11531101868`; UI-QA artifact: `11531127057`. CI artifacts have short retention; identifiers/hashes remain provenance after expiry.
+- Resulting authority merge: `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`; completed `2026-10-08T01:55:31-04:00`.
+- Fresh pre-merge authority still matched the tested base. Source scope remained two production files; no compatibility repair or main promotion.
+
+D-070 and D-070-B are complete. D-071 is dependency-ready. Learning, Bulletin,
+Register, Mission, Phase 1, Brag and Scoreboard records are synchronized by the
+documentation closure commit following this merge.

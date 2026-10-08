@@ -132,7 +132,7 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 
 `D-069` **DONE — authority merge 8b2115cf8a6f04127bdf20dd1217abd947cf8150 / PR #76 / run #390**
 ↓
-`D-070` **READY / UNCLAIMED — preserved Veyra work on PR #77; claim released because Veyra is inactive**
+`D-070` **DONE — Silex continuation of Veyra work / PR #78 / run #403**
 ↓
 `D-071 -> D-072 -> D-073 -> D-074`
 ↓
@@ -140,7 +140,7 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 ↓
 **Phase 1 integrated acceptance candidate**
 
-D-064/D-065/D-067/D-068/D-069/D-075 are DONE. D-070 is the next tactical critical-path task but is currently unclaimed. CPR-005 is resolved by OR-033: integer `trigger_priority`, default `0`, higher numeric value first, then higher round initiative -> `actor_id` -> `reaction_id`. Preserve Veyra's PR #77 branch evidence; do not treat it as a live claim.
+D-064/D-065/D-067/D-068/D-069/D-070/D-075 are DONE. D-071 is the next READY tactical critical-path task. CPR-005 is resolved by OR-033: integer `trigger_priority`, default `0`, higher numeric value first, then higher round initiative -> `actor_id` -> `reaction_id`. Preserve Veyra's PR #77 branch evidence; do not treat it as a live claim.
 
 ---
 
@@ -223,7 +223,7 @@ Do not reopen D-065. Await/use the Veyr D-075 mission card if D-075 is unlocked 
 Separate **+310** root-cause award remains verified under OR-024 for the transition bridge/system-blocker repair.
 
 ### Next Move
-Do not reopen D-067. Nodus is available for bounded integration/schema review. D-070 is READY/unclaimed and remains the next tactical path.
+Do not reopen D-067. Nodus is available for bounded integration/schema review. D-070 is DONE; D-071 is the next READY tactical task.
 
 
 ---
@@ -266,7 +266,7 @@ Evidence:
 ### Current blocker / next move
 D-068 is fully handed off and no longer participates in the transition gate.
 
-D-064 and D-069 are DONE. Do not reopen D-068 or repeat transition-gate work; the D-069 card below is retained as completed-history context and D-070 is now a released READY task.
+D-064 and D-069 are DONE. Do not reopen D-068 or repeat transition-gate work; the D-069 card below is retained as completed-history context and D-070 is now DONE and D-071 is READY.
 
 ---
 
@@ -534,7 +534,7 @@ Parallel P5 is DONE as a bounded lane. Master D-042 remains IN_PROGRESS for broa
 No Python/Android runtime tests, APK build, emulator/device run, raster-equivalence execution, visual promotion or branch merge is claimed by P5.
 
 ### Next Move
-Do not reopen the P5 slice without new branch evidence. D-070 remains released READY/unclaimed. D-083 is DONE after Silex's verification/handoff; Quorix remains available for independent verification/red-team review.
+Do not reopen the P5 slice without new branch evidence. D-070 is DONE and D-071 is READY. D-083 is DONE after Silex's verification/handoff; Quorix remains available for independent verification/red-team review.
 
 Preferred downstream leadership when unlocked:
 - D-076 integrated deterministic regression;
@@ -624,29 +624,26 @@ Do not reopen D-080 merely to expand documentation volume. Future completed prim
 
 ---
 
-## D-070 — Released tactical task / ready to retake
+## D-070 — Completed transient tactical engine
 
-**Status:** READY / UNCLAIMED.  
-**Previous claimant:** Veyra — released by owner on 2026-10-07 because Veyra is inactive. Veyra may retake only after activation and a fresh Bulletin claim if D-070 remains available.**
+**Status:** DONE / PRIMARY + D-070-B VERIFIED.
+**Owner:** Silex; predecessor implementation and 28 tests credited to Veyra.
+**Authority merge:** `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`.
+**Proof:** PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
 
-Fast-start packet:
-`docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md`
+Read `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md` and the Learning Ledger entry
+`D-070 — Transient turns, live legality and frozen reaction order`.
 
-Current D-070 resume path:
-1. read `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`;
-2. preserve PR #77 / branch `agent/veyra-d070-transient-engine@05c0886f45e8acd6bdd9a1a32c938adbd087eb1f` as work evidence, not ownership;
-3. re-fetch live authority and confirm D-070 is still READY/unclaimed before any claim;
-4. use D-069 final evidence/Learning record as predecessor authority;
-5. keep the D-070 preflight reconciled against merged `combat_schema.py` / `combat_grid.py`;
-6. apply resolved CPR-005 / OR-033 ordering semantics exactly; do not invent a competing queue contract;
-7. implement only the transient session/turn/action-budget/event engine seam after a valid new claim.
+### Next Move — D-071
 
-Do not use D-070 to introduce:
-- D-071 awareness/cover/objective/AI behavior;
-- D-072 persistent aftermath;
-- D-073 bridge/content integration;
-- D-074 Android UI;
-- tactical GameState/save-schema fields.
+Re-fetch the Bulletin, then claim D-071 if it remains READY. Read the LOS/Detection,
+Directional Cover and Combat AI/Objectives/Retreat standards. Build actor-safe
+knowledge, legal targeting, objective/retreat resolution and bounded AI on
+`combat_state.py` and the immutable D-069 grid. Recheck legality at commit time.
+
+Exit gate: deterministic objective/retreat paths, hidden-state trap tests, bounded
+candidate generation, full Python and required PR integration gates. Keep durable
+aftermath, bridge/content and Android tactical UI in D-072/D-073/D-074.
 
 
 ---
@@ -683,4 +680,4 @@ Release history: `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
 
 ### Next move
 
-Do not reclaim D-083 or redo merged tracker work without a new demonstrated regression. Regenerate reports at an explicit commit when current totals are needed; old evidence stays immutable. D-070 remains the next READY tactical task, with D-071 still gated. Silex has no active claim after completing the owner's one-task request.
+Do not reclaim D-083 or redo merged tracker work without a new demonstrated regression. Regenerate reports at an explicit commit when current totals are needed; old evidence stays immutable. D-070 has since completed; D-071 is the next READY tactical task. The latest Bulletin controls current ownership.

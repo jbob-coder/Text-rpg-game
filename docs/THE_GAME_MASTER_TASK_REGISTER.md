@@ -1504,7 +1504,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - LIMITATIONS: no CombatSession/turn engine, reactions, awareness/AI, attack/aftermath, Android combat projection, mid-combat persistence, physical-device validation, or canonical player persistent ID claimed.
 
 ### TASK D-070 — Implement tactical transient state, turn and action engine
-- STATUS: `IN_PROGRESS`
+- STATUS: `DONE / VERIFIED PRIMARY + D-070-B`
 - PRIORITY: `P0 / RANK 11`
 - CLAIMED_BY: Silex
 - CLAIMED_AT: `2026-10-08T01:36:27-04:00`
@@ -1516,11 +1516,11 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - DEPENDS_ON: D-069 DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`.
 - PURPOSE: implement transient authoritative combat session, initiative/activations/action budget and deterministic committed action resolution without save-schema expansion.
 - ACCEPTANCE: headless encounter executes deterministic legal turns/actions; previews do not consume event sequence.
-- BONUS: `D-070-B` deterministic combat transcript/replay hash.
+- BONUS: `D-070-B` DONE — deterministic combat transcript/replay hash.
 - PREFLIGHT: `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md` — re-audit against merged D-069 before implementation.
 - PRESERVED_BRANCH: `agent/veyra-d070-transient-engine`
 - PRESERVED_BRANCH_HEAD: `05c0886f45e8acd6bdd9a1a32c938adbd087eb1f`
-- PRESERVED_PR: #77 — open; first implementation seam only, not completion.
+- PRESERVED_PR: #77 — superseded by continuation PR #78; preserved branch retains Veyra provenance.
 - PRESERVED_WORKFLOW: `37351724319` — SUCCESS on `05c0886...` for Python engine, Android unit/build/assemble and Android emulator smoke.
 - PRESERVED_FILES: `docs/evidence/D070_TRANSIENT_COMBAT_PREFLIGHT_2026-10-05.md`; `src/textrpg/__init__.py`; `src/textrpg/combat_state.py`; `tests/test_combat_state.py`; `tests/test_combat_turns.py`.
 - HANDOFF: `docs/player_guide/VEYRA_D070_RELEASE_HANDOFF_2026-10-07.md`.
@@ -1532,13 +1532,19 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
   - before D-070 DONE, include reaction reserve/consume/expire, deterministic reaction ordering, and next-round reinforcement eligibility required by the Turn/Initiative standard.
 - CPR: `CPR-005` **RESOLVED / OR-033 / 62/100 CRITICAL**. Use encounter-local integer `trigger_priority` (default `0`, higher numeric value first), then higher round initiative, `actor_id` ascending, `reaction_id` ascending. D-070 owns validation/scheduling; D-071 owns trigger-generation policy.
 - OUT_OF_SCOPE FIRST SEAM: awareness/detection trigger selection, cover attack modifiers, objectives/retreat/AI, aftermath, Android bridge/UI, save-schema expansion.
-- RETAKE_RULE: Veyra may reclaim after activation only if the live Bulletin still shows D-070 READY/unclaimed; activation does not restore ownership automatically.
-- COMPLETION_HEAD: —
+- RETAKE_RULE: D-070 is complete; preserve predecessor work and use D-071 as the next eligible task.
+- COMPLETION_HEAD: `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`
+- COMPLETED_AT: `2026-10-08T01:55:31-04:00`
+- IMPLEMENTATION_HEAD: `2147b3eaa59cc2b332173f6b7bea60c9f8e445b4`
+- EVIDENCE: `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`; PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
+- FILES: `src/textrpg/combat_state.py`, package exports, `tests/test_combat_state.py`, `tests/test_combat_turns.py`, `tests/test_combat_scheduling.py`; synchronized preflight/control/learning records.
+- LEARNING_RECORD: `D-070 — Transient turns, live legality and frozen reaction order`.
+- NEXT: D-071 READY; D-072+ remain gated.
 
 ### TASK D-071 — Implement tactical awareness, cover, objective, retreat and bounded AI
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `PENDING / BULLETIN READY`
 - PRIORITY: `P0 / RANK 12`
-- DEPENDS_ON: D-070.
+- DEPENDS_ON: D-070 DONE at `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`.
 - PURPOSE: complete knowledge-correct encounter decision behavior with detection, cover, objectives, retreat and bounded AI.
 - ACCEPTANCE: objective/retreat paths work deterministically without exposing hidden AI/private state.
 - BONUS: `D-071-B` developer-only AI diagnostic evidence with explicit player-safe exclusion tests.
@@ -1737,5 +1743,5 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - EVIDENCE: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`; `docs/evidence/D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`.
 - VALIDATION: `PYTHONPATH=src:. python -m unittest tests.test_project_status_tracker tests.test_documentation_inventory_tool -v` — 8 PASS; actual JSON/Markdown/manifest CLI outputs deterministic; 644 paths/blob hashes/sizes match remote tree with `truncated=false`; independent task/document recount PASS at `8b702325c4224eb68751f147dd83c84d47d4a62c`.
 - FILES_CHANGED: two D-083 evidence artifacts; task/control/learning records only. D-081/D-082 historical snapshots and all tracker/runtime/test source remain unchanged.
-- NEXT: D-070 remains READY; this infrastructure completion does not unlock D-071 or count toward additional Phase 1 gameplay acceptance.
+- NEXT: D-083 remains closed. D-070 has since completed and D-071 is READY under its own evidence; the tracker closure itself adds no gameplay acceptance.
 - VERIFICATION_BOUNDARY: status tooling/tests/control documentation only; no gameplay/runtime/Android product behavior or physical-device/final-APK pass claimed.

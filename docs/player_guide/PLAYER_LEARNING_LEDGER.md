@@ -255,3 +255,15 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - NEXT PLAYER SHORTCUT: D-083 is DONE; run the tracker at the commit you intend to report before quoting current numbers. Reproduce old output using the exact tracker blob from that same source revision.
 - SUPPORTING ARTIFACT: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`; `docs/evidence/D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`.
 
+
+### D-070 — Transient turns, live legality and frozen reaction order
+- PLAYER-AI: Silex; preserved foundation by Veyra.
+- AUTHORITY / COMPLETION HEAD: `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`.
+- READ FIRST: `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`; `combat_state.py`; `tests/test_combat_scheduling.py`; Turn/Initiative and LOS/Detection standards.
+- DO NOT REDISCOVER: four-unit budget; Move 6 / Sprint 10 points; initiative frozen per round; normal reinforcement joins next round; reserve expires at the next activation. OR-033 queue order is priority, frozen initiative, actor ID, reaction ID.
+- OWNER OF BEHAVIOR: `CombatSession` owns transient commits/rollback; D-069 grid owns geometry; GameState remains the durable owner and is unchanged.
+- TRAP: sorted reaction candidates are not permission to fire. Recheck current knowledge/trigger legality; consumption also rejects incapacity, expired/mismatched reserves and ended encounters.
+- VALIDATE WITH: `PYTHONPATH=src python -m unittest discover -s tests -v` — 442 PASS; focused D-070 40 PASS; PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
+- CHANGE SAFELY: extend actor-safe decision rules on the existing session/grid, preserving preview non-consumption and rollback after event append. Use the actual string `GameState.seed`.
+- STILL UNKNOWN / BLOCKED: D-071 awareness/objectives/retreat/AI, D-072 aftermath, D-073 bridge/content and D-074 tactical UI remain separate acceptance gates.
+- NEXT PLAYER SHORTCUT: read the scheduling test's saved-game replay fixture before introducing any new tactical persistence or random source.
