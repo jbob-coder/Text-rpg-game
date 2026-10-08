@@ -830,14 +830,14 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-026`
 - **PREFERRED_CLAIMANT:** Kestrel
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **DOMAIN:** player-safe tactical projection / Android migration documentation.
 - **SCOPE:** exactize the future D-073 -> D-074 projection path using current D-069/D-070/D-071 contracts, D-072 boundary, OR-015 versioning and OR-034 provisional-content rules; map Python player-safe tactical fields -> typed Kotlin DTO/mapper -> ViewModel action delegation -> Compose/test consumers.
 - **DO NOT:** implement D-073 or D-074; expose raw CombatSession/private AI/NPC state; invent gameplay calculations in Kotlin/Compose; edit Silex's D-072 branch.
 - **ACCEPTANCE:** a file/field/action/test migration map exists with hidden-contact/redaction/version-mismatch/legacy-payload gates and explicit runtime ownership; D-026 is materially advanced without runtime changes.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Kestrel
+- **CLAIMED_AT:** 2026-10-08T18:56:56-04:00
+- **CLAIM_HEAD:** `35546e6c8cd524d213cdb4d75be35a15f4a5ce94`
 
 ### Parallel P9 — D-046 — Ability/passive world + knowledge integration slice
 - **TASK_REF:** `D-046`
