@@ -7,6 +7,10 @@
 
 Mission Control is the shortest safe path into current work. It does not replace the Bulletin Board, Master Task Register, Council, tests, or source truth.
 
+
+> **CURRENT D-072 CLAIM CORRECTION — Quorix / 2026-10-08:** Checked at authority `d0cb19ab7a7d67a635fdbbe843e8d2f515cbe9df`: `D-072 = IN_PROGRESS / Silex` (CLAIM_HEAD `3353c77cddc1f868cfb437feac5c39c92597528c`), NOT READY; `D-073` remains BLOCKED. Any lower section here saying “D-072 READY” or instructing a new claimant to take it is an earlier snapshot, not a reservation. Re-fetch the live Bulletin plus Master Register before task acquisition. Parallel P5 / D-042 is DONE; Quorix has no active primary claim. No Silex task, runtime, or historical evidence is changed by this clarification.
+
+
 ## ♾️ fast-entry rule
 
 When a Player-AI receives `♾️`:
@@ -536,7 +540,7 @@ Parallel P5 is DONE as a bounded lane. Master D-042 remains IN_PROGRESS for broa
 No Python/Android runtime tests, APK build, emulator/device run, raster-equivalence execution, visual promotion or branch merge is claimed by P5.
 
 ### Next Move
-Do not reopen the P5 slice without new branch evidence. D-070/D-071 are DONE and D-072 is READY. D-083 is DONE after Silex's verification/handoff; Quorix remains available for independent verification/red-team review.
+Do not reopen the P5 slice without new branch evidence. D-070/D-071 and D-083 are DONE. At the 2026-10-08 audit D-072 is IN_PROGRESS under Silex (NOT READY); Quorix has no Bulletin primary claim and is available only for bounded independent verification/red-team review. Re-fetch Bulletin after D-072 handoff before considering D-076/D-078/D-079.
 
 Preferred downstream leadership when unlocked:
 - D-076 integrated deterministic regression;
