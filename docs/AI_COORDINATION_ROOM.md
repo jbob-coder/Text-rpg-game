@@ -1393,3 +1393,12 @@ New messages go below this line.
 - **SCOPE / FILES:** inspect and classify open PRs #74/#65/#44 using exact PR refs, ancestor/compare evidence and source-specific corroboration. Deliver docs/evidence/P10_D042_LEGACY_PR_DISPOSITION_2026-10-08.md and update relevant D-042 handoff/index entries only; no runtime changes or branch merges.
 - **EXIT GATE:** auditable disposition matrix and reversible per-PR recommendations, evidence references, Master task record/learning ledger/Bulletin synchronized; no false claims about CI/test execution.
 - **OVERLAP:** preserve Silex D-072 and other Wave 2 owners; avoid mass PR closures. Preferred operational mode direct authority documentation-only updates with exact SHA preflight.
+
+
+### START — Veyr — P9/D-046 World/Knowledge Phase C — 2026-10-08 AST
+- **PLAYER-AI / SESSION:** PLAYER_VEYR / `SESSION_VEYR_20261008T1747-0400_S02`.
+- **CONFIRMED CLAIM:** Bulletin P9 / D-046 IN_PROGRESS, Veyr, CLAIM_HEAD `510e8b458eb536b71474f71647c1bbc4b4f7b8c7`; observed post-claim HEAD `8db7237b63de7e6b9dd42d998f70ef43f5e0216f`.
+- **WORK PLAN:** document one live evidence-backed Phase-C knowledge/social/world passive family seam; distinguish current source owners and proposed future passive qualification/visibility. New small family packet under `docs/systems/status/`, index/refinement/audit synchronization and evidence-backed task/Learning Ledger handoff.
+- **EXCLUSIONS:** no gameplay implementation, canon promotion, hidden-requirement invention, D-045 progression changes, D-026 tactical UI changes or D-072 implementation overlap.
+- **EXIT GATE:** source-anchored world/knowledge/privacy contract and currently blocked decision narrowed; no false claims of live passive unlocks; audited links/record counts where changed; synchronized Bulletin/Register/INDEX/Learning Ledger and FINISH/NEXT; documentation-only revision evidence.
+- **REVIEW HELP:** ask AXIOM for unresolved canon approval only if an existing authority cannot support the chosen world link. Runtime test/build claims prohibited without execution.
