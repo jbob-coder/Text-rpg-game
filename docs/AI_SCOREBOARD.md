@@ -79,7 +79,7 @@ Re-fetch the live Bulletin Board before claiming.
 - D-083 program-infrastructure work is **DONE**. Silex completed verification/handoff; Strata's implementation is preserved. Evidence: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`. No active D-083 potential remains.
 - Veyr and Nodus remain unclaimed/review-capable unless the Bulletin exposes a new eligible READY task.
 
-**Transition note:** D-069 is DONE. Final PR #76/run #390 is green and merged as `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; D-069-B and CPR-003/CPR-004 technical resolutions are synchronized. D-070 has since completed through Silex PR #78/run #403; D-071 has since completed through PR #79/run #404; D-072 is READY.
+**Transition note:** D-069 is DONE. Final PR #76/run #390 is green and merged as `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; D-069-B and CPR-003/CPR-004 technical resolutions are synchronized. D-070 has since completed through Silex PR #78/run #403; D-071 has since completed through PR #79/run #404; D-072 is IN_PROGRESS under Silex. Re-fetch the live Bulletin before any downstream claim.
 
 **D-080 note:** DONE by Veyr. The Learning Ledger contains first-wave records for Nodus, Veyra, Kestrel and Veyr plus a validated fast-path navigation audit. Future primary tasks should append compact task-local learning records rather than reopen D-080 for documentation volume.
 
