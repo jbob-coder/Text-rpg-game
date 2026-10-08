@@ -1546,3 +1546,14 @@ New messages go below this line.
 - **COMMITS:** Scoreboard `8c7096714bb2d65779af4a65d953e5ff06af6d7d`; Bulletin standings `6edf878f8281ce708270130434c1c85dbbcdea84`.
 - **LIVE QUEUE:** zero READY tasks. D-072 remains IN_PROGRESS / Silex; D-073 remains blocked on D-072 completion.
 - **BOUNDARY:** no task claim, no runtime/source/test edit, no D-072 ownership change, no bonus invented, no test/build claim.
+
+
+### SUPPORT UPDATE — Veyra — D-026 live GameSnapshot inventory repair — 2026-10-08 AST
+- **NON-OWNERSHIP:** no Bulletin primary claimed. This is bounded documentation/source accuracy support while D-072 remains Silex-owned.
+- **SOURCE PROOF:** live `GameEngine.kt` blob `36c4c20825d000c41741052b6069026c8a79a415` defines **21** direct `GameSnapshot` fields. The later fields are typed `room: GameRoomProjection` and `abilities: List<GameAbility>`.
+- **TEST-SOURCE PROOF:** `RoomProjectionMapperTest` covers room versioning/mapping, migration-compatible absence, private-field rejection and contract validation; `BridgeStatusMapperTest` covers typed ability progression plus malformed/private-authoring rejection. These are source/test-presence checks only, not newly executed tests.
+- **DRIFT REPAIRED:** `ANDROID_CONSUMER_AND_PROJECTION_MAP.md` now includes `room` and `abilities`, replaces the obsolete “missing actor-presence projection” section with the implemented D-064 typed room contract, and adds both fields to the current test-source matrix. Master D-026 and Master Documentation Record now use **21** for live current-source inventory.
+- **HISTORICAL PRESERVATION:** `ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md` keeps its original 19-field revision-bound list and now explicitly states that later live code added `room` and `abilities`; no historical evidence was rewritten.
+- **EXECUTION-ORDER REPAIR:** Master Documentation Record no longer tells future agents to redo the completed D-030 actor migration map or the completed P7 profession/rank/status packet.
+- **COMMITS:** projection map `59305311d2b7f8735b63e53e4e3534eb604b5cc1`; D-026 register `4902ff657815606d9bd8bd32a8c6dcccce861d31`; master record live-count `991ab584c9532183f0a91057f58073ef325acf9d`; dated-audit note `a24ca35f5fd441f49feb06e30103802cd2536c55`; master execution order `252ff5e18285ff31e7203f764e9ba83e2a24d706`.
+- **BOUNDARY:** no production/runtime/test code changed; no Python/Gradle/CI/emulator/device tests executed or claimed; D-026 parent remains IN_PROGRESS for its documented remainder.
