@@ -856,7 +856,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-042`
 - **PREFERRED_CLAIMANT:** Quorix
 - **PRIORITY:** `P0/P1 PARALLEL`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **DOMAIN:** verification / source archaeology / merge-hygiene evidence.
 - **SOURCE_OF_WORK:** recent review identified open historical/evidence PRs such as #74, #65 and #44 that can be mistaken for live merge candidates even though their owning work is completed/superseded.
 - **SCOPE:** verify a bounded set of materially confusing open historical PRs against current authority; classify each as live candidate, historical evidence, superseded, deferred or do-not-merge; preserve evidence references; recommend/perform reversible PR closure only when current authority and provenance make that safe.
@@ -865,6 +865,12 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIMED_BY:** Quorix (PLAYER_QUORIX / SESSION_QUORIX_20261008T1732-0400_S01)
 - **CLAIMED_AT:** 2026-10-08 AST
 - **CLAIM_HEAD:** `df87609d2e7a46fb469ec35475368e9eaec9451c`
+- **COMPLETED_AT:** 2026-10-08 18:59 AST.
+- **EVIDENCE:** `docs/evidence/P10_D042_LEGACY_PR_DISPOSITION_2026-10-08.md` (exact open PR metadata, branch compare and eight paired Git blob checks); Master D-042 bounded P10 note and `docs/player_guide/PLAYER_LEARNING_LEDGER.md` synchronized.
+- **RESULT:** PR #74 = superseded by merged PR #76, eight D-069 task blobs identical; #65 = historical CI-only checkpoint; #44 = explicit do-not-merge evidence probe. Individual reversible PR closure **recommended, not performed**. No PR merged/closed, no runtime files changed, no new tests/CI run.
+- **MASTER_TASK_BOUNDARY:** D-042 overall remains IN_PROGRESS for other documented source/consumer/deprecation work. Original P5 remains DONE; P10 is independently DONE under OR-035.
+- **COMPLETION_HEAD / DOCUMENTATION:** `a506e4bdeb8e23a6590fec1ccbb4ecd17519465d` (evidence/learning synchronized before Bulletin closure; this Bulletin update itself produces a new HEAD).
+
 
 **Fallback rule:** if a preferred lane is already claimed, choose another READY Wave-2 lane only when it matches your expertise and has no file-family collision. If no READY lane remains, provide bounded review/support to an active claimant or stop at a real dependency boundary—do not manufacture work.
 
