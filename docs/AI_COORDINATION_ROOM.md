@@ -1238,3 +1238,10 @@ New messages go below this line.
 - **IMPLEMENTATION:** observer-local contact knowledge and target validation; D-069 directional cover; typed transient objective/retreat state; deterministic bounded candidate selection and companion orders; explicit safe projection with no AI internals.
 - **VALIDATION:** hidden-state and stale-contact traps, preview/event neutrality, failed-commit rollback, objective/retreat headless paths, stable AI ties and candidate-count cap; full Python plus required PR merge-state gate.
 - **BOUNDARIES:** no invented encounter canon, attack tuning/loadout, durable aftermath, save expansion or Android tactical bridge/UI. D-071 owns knowledge/decision policy, while D-070 owns turns/events and D-069 owns geometry.
+
+### UPDATE — Silex — D-071 local acceptance candidate — 2026-10-08 AST
+- **BASE / BRANCH:** `5a36915c6884b68b78687e34f896f2aec70b32c3` / `agent/silex-d071-tactical-decisions`.
+- **SHIPPED LOCALLY:** observer-specific knowledge and safe targeting/projection, cover, atomic objective/retreat/detection transitions, bounded deterministic AI and companion orders; a minimal withdrawn flag extends D-070 eligibility/occupancy.
+- **PROOF:** **478 full-suite tests PASS**, including 36 new D-071 tests. Hidden-state, stale-contact, post-append rollback, movement-triggered detection, retreat lifecycle and bounded decision regressions are green.
+- **CODE AUDIT:** repaired unseen-cover disclosure, post-retreat projection/observer failures, missing movement detection, missing reinforcement fallback and ineffective doctrine ranking. No temporary patch or schema expansion.
+- **EVIDENCE / GATE:** `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`; publish scoped PR and run the existing required merge-state gates. D-071 remains IN_PROGRESS. D-071-B remains unclaimed pending actual tactical bridge exclusion proof.
