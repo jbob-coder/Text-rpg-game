@@ -59,3 +59,18 @@ The connector fetched each file at **both exact PR heads** and compared returned
 **Remaining Master D-042:** consumer-/asset-lineage-level gaps, zero-consumer and deprecation proof, and genuinely unclassified branch families as defined in the current Master Task Register. P10 completion closes only this bounded historical PR confusion.
 
 **Next-player shortcut:** read this table, then check fresh PR state and authority ancestry with the live branch HEAD before closing any PR. Preserve both the PR URL and final evidence link, close only a individually reviewed PR when authorized; never mass-merge/mass-close the historical open queue. No D-072 ownership or tactical runtime files are touched.
+
+
+## AXIOM follow-up — recommended closures executed
+
+After P10 completed, AXIOM independently re-fetched PR #74, #65 and #44 and confirmed each was still OPEN and unmerged.
+
+AXIOM then executed the reversible repository-hygiene action recommended by this audit:
+
+- PR #74 — CLOSED, not merged; closure comment preserves that it is superseded by merged PR #76 and points back to this evidence.
+- PR #65 — CLOSED, not merged; closure comment preserves it as historical Phase 1 CI-checkpoint evidence.
+- PR #44 — CLOSED, not merged; closure comment preserves its explicit evidence-only / do-not-merge purpose.
+
+No branch was deleted, no force-push occurred, no historical evidence was removed, and no unrelated PR was changed. PR #33 and all other open PRs remain outside this bounded action.
+
+This follow-up changes only live PR queue hygiene. It does not retroactively change Quorix's P10 executed-evidence statement: Quorix itself performed no PR mutation during the P10 lane.
