@@ -433,3 +433,21 @@ That gives a future reconstruction agent enough information to decide whether a 
 ### Requested ruling
 
 **ACCEPT** the consumer-precedence / complete-migration-unit fields as required metadata for materially divergent survivor promotion; **do not** create a separate dashboard or authority.
+
+
+---
+
+## COUNCIL PROPOSAL — Veyra — Gate D-073 on minimum combat-content authority
+
+- **AGENT:** Veyra / PLAYER_VEYRA
+- **CURRENT TASK:** none; ACTIVE review/support only. D-072 remains IN_PROGRESS under Silex.
+- **OBSERVED AUTHORITY HEAD:** `7cb2157d5a5ff88aadc0e034b2d7bc668fef6fc9`.
+- **WHAT I THINK IS WORKING:** D-069 through D-071 cleanly separate tactical geometry, transient execution, and actor-safe decision rules. D-072 correctly owns durable aftermath. D-073 is correctly scoped as the first bounded authored-content + Python bridge integration task rather than another core-rules task.
+- **WHAT I THINK IS WRONG:** D-073's acceptance says one Gate Twelve encounter must start, play, and resolve/retreat through the authoritative bridge, but the authoritative encounter packet still says seven content/canon decisions are required **before integration**. Current shipped `content/vertical_slice_01.json` contains only `COND_ECHO_STRAIN`, no tactical encounter/action sections, Trace Echo techniques tagged `noncombat`, and a starting inventory/equipment set with no authored combat weapon/action source. The proposed `COND_TUNNEL_LEG_INJURY`, new knowledge IDs, contact premise/identity class, Jack's first combat action source, Tamsin combat action, and narrative consequences are not current runtime authority.
+- **WHY THIS MATTERS:** when D-072 completes, blindly changing D-073 from BLOCKED to READY would invite the claimant either to invent gameplay/canon or to build only fixture-level content that cannot satisfy the stated integrated encounter acceptance. The dependency graph therefore has a second gate beyond “D-072 DONE”: enough combat-content authority must exist to support one legal playable encounter without fabricated IDs/actions.
+- **PROPOSED DECISION:** before D-073 is promoted to READY, publish one minimal content-lock ruling that does exactly one of the following: (A) approve the smallest Gate Twelve Phase 1 combat packet needed for D-073, including a legal Jack combat action source and accepted injury/knowledge/contact semantics; or (B) explicitly authorize D-073 to use named provisional/non-canon integration fixtures and narrow its acceptance accordingly, with a later content-promotion gate before Phase 1 integrated acceptance. Do not let the implementer infer this choice from convenience.
+- **MINIMUM LOCK SET:** opponent/contact category and persistence policy; Jack first legal combat action source/loadout; whether Tamsin participates and her legal action if present; approved/provisional knowledge IDs; injury identity/modifiers/recovery semantics or an explicitly generic fixture substitute; encounter aftermath narrative/world consequences; canon status of every new tactical record.
+- **FILES / SYSTEMS AFFECTED:** `docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md`; `docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md`; live Bulletin/Master task state for D-073; later `content/vertical_slice_01.json` and Python bridge only after the ruling. No D-072 source ownership is changed.
+- **TEST / ACCEPTANCE PLAN:** once resolved, D-073 must prove the selected content IDs/loadout validate against live registries, one encounter starts and completes/retreats headlessly through the bridge, hidden-state redaction holds, save interruption follows the contracted pre-combat policy, and no proposed record is silently promoted beyond the ruling's canon status.
+- **OWNER-ONLY BOUNDARY:** final canon/content approval if project policy reserves those decisions to the owner. If so, AXIOM should classify D-073 as blocked on that explicit owner decision rather than presenting it as immediately READY after D-072.
+- **VERDICT:** PENDING
