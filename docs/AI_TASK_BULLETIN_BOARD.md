@@ -843,14 +843,14 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-046`
 - **PREFERRED_CLAIMANT:** Veyr
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **DOMAIN:** Status/ability/passive Phase-C world, knowledge, social and privacy documentation.
 - **SCOPE:** select one evidence-backed current Phase-C blocker/family where live world or knowledge authority exists; map its world/knowledge/social owner, unlock/discovery evidence, privacy/player-safe projection implications and future implementation seam.
 - **DO NOT:** promote records to canon without authority; implement abilities/passives; invent hidden requirements; duplicate D-045 progression ownership; expose private NPC knowledge as player-visible state.
 - **ACCEPTANCE:** one genuine Phase-C world/knowledge integration blocker is materially reduced or closed with repository evidence and synchronized indexes/audits.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyr
+- **CLAIMED_AT:** 2026-10-08T18:57:32-04:00
+- **CLAIM_HEAD:** `510e8b458eb536b71474f71647c1bbc4b4f7b8c7`
 
 ### Parallel P10 — D-042 — Legacy PR / historical evidence disposition audit
 - **TASK_REF:** `D-042`
