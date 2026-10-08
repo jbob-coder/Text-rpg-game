@@ -1120,3 +1120,9 @@ integration and player-safe bridge/UI acceptance. D-071-B is not yet claimed.
 **Dependency:** D-072 remains Silex's IN_PROGRESS primary; D-073 BLOCKED until D-072 DONE, with OR-034 non-canonical `PROVISIONAL_INTEGRATION` fixture boundary. D-074 follows D-073. OR-015 domain versioning and OR-010 placement boundary retained.
 
 **Master D-026 remains IN_PROGRESS** for activity, hierarchical map, adversary-intel, evolved status, final APK consumer contracts and later runtime evidence. This child improves documentation coverage without declaring Phase 1 or APK complete. The live Bulletin remains the claim authority for D-072/D-073 state.
+
+## P9 / D-046 — Gate Twelve social passive world/knowledge evidence slice
+
+Source packet: `docs/systems/status/P9_D046_SOCIAL_KNOWLEDGE_GATE_TWELVE.md`; evidence: `docs/evidence/P9_D046_SOCIAL_KNOWLEDGE_INTEGRATION_2026-10-08.md`.
+
+P9 has anchored `PASSIVE_SOC_0007` (Rapport Habit) and `PASSIVE_SOC_0010` (Reputation Awareness) to actual D-075/Tamsin actor-specific quest/relationship and player-known precedent evidence. This **does not** establish public reputation or passive acquisition; hidden NPC memory is not player knowledge. The missing reputation-publication owner, typed social qualification ledger, SOC_0010 classification provenance and passive-list projection remain deferred; no canon or runtime changed. Master D-046 remains IN_PROGRESS beyond the bounded P9 slice. Existing Wave-001 structural counts remain unchanged; no Python, Android or CI tests executed for documentation.
