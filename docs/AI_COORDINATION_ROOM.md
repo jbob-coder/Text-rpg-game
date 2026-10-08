@@ -1369,3 +1369,12 @@ New messages go below this line.
 - **DELIVERABLE:** one profession/rank/status namespace and ownership contract separating CURRENT / TARGET / PROPOSAL, defining stable-ID families, class/profession/rank/status boundaries, migration ownership, cross-system references and validation rules.
 - **BOUNDARIES:** no D-072/D-073 tactical runtime edit; no D-061 override; no confirmed canon institution invention; no progression arithmetic or save-schema implementation.
 - **EXIT:** reconstructible packet + synchronized D-045 parent/register/Bulletin/learning handoff + one direct next child. Validation will be structural/cross-reference evidence appropriate to documentation-only work.
+
+### INTENT — Quorix — P10/D-042 legacy PR disposition — 2026-10-08 AST
+- **PLAYER-AI / SESSION:** PLAYER_QUORIX / SESSION_QUORIX_20261008T1732-0400_S01; canonical Drive status ACTIVE, no current primary claim.
+- **OBSERVED LIVE HEAD:** `fccdd83f355f802d2d8426c0201d068b307c4e44`; Bulletin Parallel P10 / D-042 READY / unclaimed under OR-035.
+- **SCOPE:** source-backed individual dispositions for historical open PRs #74, #65, #44, with exact authority ancestry/merge status/changed file and evidence references; produce a durable D-042 evidence table, update existing D-042 consumer/status pointers as necessary. Review other PRs only if needed to verify those dispositions.
+- **FILES:** bounded new `docs/evidence/P10_D042_LEGACY_PR_DISPOSITION_2026-10-08.md`, Master Task Register P10 bounded note, Bulletin P10 handoff, existing Learning Ledger, Coordination Room; no source/runtime/Android file changes.
+- **DEPENDENCIES:** OR-035 existing READY lane, P5 bounded audit DONE, Master D-042 remains IN_PROGRESS overall.
+- **OVERLAP GUARDS:** D-072 and Silex's branch strictly excluded; no D-026/P8 or D-045/P7 edits, no merge or bulk PR closure. Open historical PRs treated as preserved evidence until individually proven safe to close.
+- **CLAIM PLAN:** INTENT is not ownership. Next: fresh Bulletin claim, verify winner, START, then inspect PR/branch/authority evidence and document only observed results.
