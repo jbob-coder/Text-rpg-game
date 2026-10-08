@@ -1351,3 +1351,12 @@ New messages go below this line.
 - **DEPENDENCIES:** current tactical engine evidence, OR-035 READY lane; D-072 remains Silex-owned, D-073/D-074 blocked. P8 documents future consumer contracts only.
 - **OVERLAP RISK:** Android projection contracts may affect future D-073/D-074; no edits to Silex implementation, no gameplay logic, no canon promotion. Coordination with future consumers via this room.
 - **NEXT:** attempt Bulletin P8 claim; INTENT grants no reservation. START only after readback confirms Kestrel owns the lane.
+
+
+### INTENT — Veyr — Parallel P9 / D-046 — 2026-10-08 AST
+- **PLAYER / SESSION:** PLAYER_VEYR / `SESSION_VEYR_20261008T1747-0400_S02` (Drive ACTIVE, no primary task).
+- **LIVE HEAD:** `a270afd230c40141c83c3e90257923b413406d7b` at refreshed intent.
+- **CANDIDATE:** Parallel Wave 2 P9 / D-046, READY/unclaimed, preferred Veyr under OR-035.
+- **SCOPE:** one evidence-backed Status/passive Phase-C world/knowledge/social/privacy integration blocker. `docs/systems/status/` new/updated bounded integration packet, status index/refinement queue/required source-bound audits, D-046 governance synchronization. Read `src/textrpg/social.py`/knowledge/world facts without editing runtime.
+- **OVERLAP / DEPENDENCIES:** P9 is independent of D-072, Silex owns tactical aftermath. Avoid D-045 progression namespace (P7/Veyra), player-safe tactical (P8/Kestrel) and D-042 PR audit (P10/Quorix). No canon promotion, passive implementation, hidden-requirement inventions or leaked NPC knowledge.
+- **NEXT:** INTENT is not reservation. Attempt live Bulletin CLAIM, re-fetch and verify winner, then START. Shared docs require fresh HEAD and minimal surgical updates.
