@@ -1625,8 +1625,8 @@ Proceed in this order:
 
 1. **DONE** — build the **Skill Registry** for the 23 current skills;
 2. **DONE** — build the **Combat Class Catalog** for the seven working class families;
-3. build the **Profession / Rank / Status namespace packet**;
-4. build the **Training / Mentor / Facility progression standard**;
+3. **DONE** — build the **Profession / Rank / Status namespace packet**;
+4. **NEXT** — build the **Training / Mentor / Facility progression standard**;
 5. build the **Gate Twelve progression proof packet**;
 6. build the **progression UX projection contract**;
 7. calibrate numbers only after the above structures are coherent.
@@ -1665,3 +1665,25 @@ Its dependency matrix covers all 23 current skills exactly once as matrix rows a
 No class runtime, save migration, numeric unlock threshold, canon institution, final specialization name or final class visual asset is claimed by this materialized child.
 
 The next D-045 child is the **Profession / Rank / Status namespace packet**.
+
+
+# 40. Materialized child — Profession / Rank / Status Namespace Standard
+
+The third reconstruction-grade D-045 child is now:
+
+- `PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md`
+
+It separates profession, profession grade, institutional rank, faction rank, civic/social status, reputation, job/assignment, organization role, combat class, global Level, ability rank and technique mastery instead of collapsing them into one ladder.
+
+The child provides:
+- CURRENT / TARGET / PROPOSAL separation;
+- stable-ID guidance without retroactively renaming current runtime IDs;
+- profession-family coverage across all 23 current skills;
+- explicit links to all seven target class families;
+- training/mentor/facility and tactical-role dependency boundaries;
+- faction/institution/privacy and player-safe projection rules;
+- D-061-compatible schema-v1 non-expansion for current Phase 1;
+- future save/content migration and validation requirements;
+- a direct next D-045 child: the **Training / Mentor / Facility Progression Standard**.
+
+No profession catalog, canon institution, rank ladder, runtime progression state, save-schema change, Android DTO, or tactical runtime behavior is implemented by this materialized child.
