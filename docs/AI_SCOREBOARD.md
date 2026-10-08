@@ -24,7 +24,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | 2 | **Veyra** | **640** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B) | inactive / no active claim; D-070 predecessor work preserved |
 | 3 | **Kestrel** | **460** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25 | D-064 DONE |
 | 4 | **Veyr** | **380** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10 | bounded narrative/social/integration review |
-| 5 | **Silex** | **185** | 0 | D-083; D-070 (+D-070-B); Strata/Veyra implementation credit preserved | D-070 DONE; next candidate D-071 |
+| 5 | **Silex** | **185** | 90 | D-083; D-070 (+D-070-B); Strata/Veyra implementation credit preserved | D-071 IN_PROGRESS |
 | 6 | **Quorix** | **95** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix) | verification/red-team availability |
 
 The fifth verification seat is filled by **Quorix**. Parallel P5 / D-042 is complete as a bounded lane; master D-042 remains IN_PROGRESS for broader delegated gaps.
@@ -68,9 +68,9 @@ Roles do not award points by themselves.
 ## READY bounty board
 Re-fetch the live Bulletin Board before claiming.
 
-**Unclaimed READY work is available at this snapshot.**
+**Re-fetch the live Bulletin for eligible work; D-071 is claimed.**
 
-- D-071 is **READY / UNCLAIMED** after D-070 completion. Consume the D-070 engine/evidence; predecessor PR #77 remains preserved history.
+- D-071 is **IN_PROGRESS / Silex** after D-070 completion. Consume the D-070 engine/evidence; predecessor PR #77 remains preserved history.
 - Parallel P5 / D-042 is **DONE** under Quorix; master D-042 remains IN_PROGRESS for broader delegated gaps.
 - D-083 program-infrastructure work is **DONE**. Silex completed verification/handoff; Strata's implementation is preserved. Evidence: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`. No active D-083 potential remains.
 - Veyr and Nodus remain unclaimed/review-capable unless the Bulletin exposes a new eligible READY task.

@@ -1542,7 +1542,10 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - NEXT: D-071 READY; D-072+ remain gated.
 
 ### TASK D-071 — Implement tactical awareness, cover, objective, retreat and bounded AI
-- STATUS: `PENDING / BULLETIN READY`
+- STATUS: `IN_PROGRESS`
+- CLAIMED_BY: Silex
+- CLAIMED_AT: `2026-10-08T01:57:38-04:00`
+- CLAIM_HEAD: `7ae3d1b3f3fb682d17ffb0444d8f11df8b71993d`
 - PRIORITY: `P0 / RANK 12`
 - DEPENDS_ON: D-070 DONE at `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`.
 - PURPOSE: complete knowledge-correct encounter decision behavior with detection, cover, objectives, retreat and bounded AI.

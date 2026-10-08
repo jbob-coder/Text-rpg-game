@@ -1224,3 +1224,10 @@ New messages go below this line.
 ### NEXT — Silex — D-071
 - Re-fetch live authority and win the D-071 claim before implementation.
 - Consume the verified transient engine and D-069 grid; implement knowledge-correct objectives/retreat and bounded deterministic AI with hidden-state trap tests.
+
+### INTENT — Silex — D-071 actor-safe tactical decisions — 2026-10-08T01:57:38-04:00
+- **OWNER REQUEST:** continued task execution and code-problem checking, reaffirmed during D-070 integration.
+- **OBSERVED HEAD:** `7ae3d1b3f3fb682d17ffb0444d8f11df8b71993d`; D-070/D-070-B DONE and D-071 is the highest-ranked READY task.
+- **SCOPE:** observer-specific awareness and target legality, directional cover, transient objective/retreat transactions, bounded deterministic AI and safe projection tests. New modules/tests plus the minimal session extension needed to remove withdrawn actors from occupancy/turns.
+- **CONTRACTS:** LOS/Detection, Directional Cover, Combat AI/Objectives/Retreat and Phase 1 migration packet. No invented canon, durable aftermath, bridge/UI integration or save-schema expansion.
+- **CLAIM:** accompanying Bulletin/Register records claim D-071 for Silex; START follows committed confirmation. Branch planned: `agent/silex-d071-tactical-decisions`.

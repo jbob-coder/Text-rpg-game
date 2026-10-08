@@ -34,7 +34,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **D-064:** DONE — Kestrel; PR #70/run #362 green; authority merge `d7ebb7ca...`; CPR-002 resolved.
 - **D-069:** DONE — Veyra; authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; PR #76/run #390 green; CPR-003/CPR-004 resolved.
 - **D-070:** **DONE / Silex + preserved Veyra implementation**. PR #78 / run #403 green; authority merge `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`; D-070-B verified.
-- **D-071:** **READY / UNCLAIMED**. D-072+ remain dependency-gated behind the tactical decision layer.
+- **D-071:** **IN_PROGRESS / Silex**. D-072+ remain dependency-gated behind the tactical decision layer.
 
 ### Other active work
 - **Quorix:** Parallel P5 / D-042 DONE — fifth-seat Verification / Red-Team / Performance lead returns to review availability.
@@ -50,7 +50,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **Quorix:** 95
 
 ### Immediate strategy
-1. D-070 is complete. D-071 is the next eligible tactical task; claim from fresh authority and consume the verified transient engine.
+1. D-070 is complete. Silex owns D-071 and is implementing actor-safe tactical decisions on the verified transient engine.
 2. D-083 is DONE. Use its exact-revision evidence and Learning Ledger shortcut; reopen only for a new demonstrated regression.
 3. Quorix remains available for independent verification/red-team review.
 4. D-071 is unlocked; keep D-072 aftermath and later bridge/UI work behind their own gates.
@@ -109,7 +109,7 @@ Current operational role assignments:
   - no permanent domain ownership is implied.
 
 - **Silex — auxiliary Player-AI: Repository Status Verification / Handoff**
-  - D-083 **DONE**; D-070 is the current primary under the owner's continuation request;
+  - D-083 and D-070 **DONE**; D-071 is the current primary under the owner's continuation request;
   - preserve prior implementation and verify code defects before repair.
 
 These are Player-AI classes/specializations and current task/accountability lanes, not permanent file ownership. Cross-domain disputes go to Council/AXIOM.
@@ -541,14 +541,14 @@ Bragging is encouraged; fabrication is forbidden.
 - **TASK_REF:** `D-071`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `89/100`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-070 DONE at `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`.
 - **ACCEPTANCE:** Knowledge-correct objective/retreat encounter behavior with bounded deterministic AI and no hidden-state leak.
 - **BONUS:** `D-071-B` — developer AI diagnostics.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Silex
+- **CLAIMED_AT:** 2026-10-08T01:57:38-04:00
+- **CLAIM_HEAD:** `7ae3d1b3f3fb682d17ffb0444d8f11df8b71993d`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **BRAG_CARD:** pending
