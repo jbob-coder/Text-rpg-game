@@ -76,12 +76,14 @@ Own/review:
 
 Current execution:
 - D-066 and D-068 are complete;
-- Parallel P3/D-045 and P4/D-046 are complete;
-- D-069 is BLOCKED only by D-064 safe handoff; the green authority checkpoint is already PASS;
-- Veyra is the designated D-069 claimant immediately after unlock.
+- Parallel P3/D-045, P4/D-046, D-069 and Parallel P7/D-045 are complete;
+- D-070 and D-071 are complete under Silex with Veyra predecessor credit preserved where recorded;
+- D-072 is IN_PROGRESS under Silex; Veyra is ACTIVE with no current primary claim and remains the gameplay/tactical review lead.
 
-Likely downstream leadership:
-- D-069 -> D-070 -> D-071 -> D-072 -> D-073, subject to board dependencies and one-primary-at-a-time rules.
+Likely downstream leadership/review:
+- review D-072 gameplay/aftermath semantics without overriding Silex ownership;
+- D-073 becomes claim-eligible only after D-072 is genuinely DONE and the Bulletin promotes it;
+- D-074 remains presentation-owned downstream and does not move gameplay authority into Compose.
 
 Veyra does not own final Compose presentation or save-schema authority.
 
@@ -208,7 +210,7 @@ Specialization changes must be recorded here and in the Decision Log.
 ## Current strategic objective
 
 1. Preserve completed D-069 grid/schema and D-070 transient engine evidence; both passed the runtime merge-state gate.
-2. D-071 is DONE. D-072 is READY: validate and atomically commit durable aftermath through existing state owners after a fresh Bulletin claim.
+2. D-071 is DONE. D-072 is IN_PROGRESS under Silex: preserve that live claim and validate/commit durable aftermath through existing state owners; D-073 stays blocked until D-072 is genuinely DONE.
 3. Quorix preserves the completed Parallel P5 / D-042 survivor evidence and supports independent verification; preferred later gates remain D-076/D-078/D-079 when unlocked.
 4. D-083 is DONE: Strata's tracker implementation is preserved, and Silex completed current-authority verification and handoff. Reuse the Learning Ledger shortcut rather than reopening it without regression evidence.
 5. Preserve completed D-064/D-065/D-067/D-068/D-075 evidence for later D-076 integration; do not reopen without regression evidence.
