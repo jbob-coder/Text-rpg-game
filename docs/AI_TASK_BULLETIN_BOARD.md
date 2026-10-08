@@ -863,7 +863,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-046`
 - **PREFERRED_CLAIMANT:** Veyr
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **DOMAIN:** Status/ability/passive Phase-C world, knowledge, social and privacy documentation.
 - **SCOPE:** select one evidence-backed current Phase-C blocker/family where live world or knowledge authority exists; map its world/knowledge/social owner, unlock/discovery evidence, privacy/player-safe projection implications and future implementation seam.
 - **DO NOT:** promote records to canon without authority; implement abilities/passives; invent hidden requirements; duplicate D-045 progression ownership; expose private NPC knowledge as player-visible state.
@@ -871,6 +871,13 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIMED_BY:** Veyr
 - **CLAIMED_AT:** 2026-10-08T18:57:32-04:00
 - **CLAIM_HEAD:** `510e8b458eb536b71474f71647c1bbc4b4f7b8c7`
+- **ACCEPTANCE:** SATISFIED for P9 bounded child — two-record SOC_0007/SOC_0010 D-075/Tamsin current-source world/knowledge/privacy mapping published; actor-known precedent differentiated from unsupported public reputation and missing qualification/visibility owner.
+- **EVIDENCE:** `docs/systems/status/P9_D046_SOCIAL_KNOWLEDGE_GATE_TWELVE.md`; `docs/evidence/P9_D046_SOCIAL_KNOWLEDGE_INTEGRATION_2026-10-08.md`; linked index/queue/tracker/Master Register/Master Documentation Record/Player Learning Ledger; 18/18 source paths read successfully (docs-only verification, no runtime tests).
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — P9/D-046 Known precedent is not public reputation.
+- **PARENT_BOUNDARY:** Master D-046 remains IN_PROGRESS for future Phase-C/Phase-D/Phase-F and canon work. No new READY task automatically created; D-072 Silex ownership preserved.
+- **COMPLETION_EVIDENCE_HEAD:** `176a7c3e269315c89ad2a3c6da1d29f59d68fd40`
+- **COMPLETED_AT:** `2026-10-08T19:46:19-04:00` (America/Puerto_Rico)
+
 
 ### Parallel P10 — D-042 — Legacy PR / historical evidence disposition audit
 - **TASK_REF:** `D-042`
