@@ -134,13 +134,15 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 ↓
 `D-070` **DONE — Silex continuation of Veyra work / PR #78 / run #403**
 ↓
-`D-071 -> D-072 -> D-073 -> D-074`
+`D-071` **DONE — PR #79 / run #404**
+↓
+`D-072` **READY** -> `D-073 -> D-074`
 ↓
 `D-076 -> D-077 -> D-078 -> D-079`
 ↓
 **Phase 1 integrated acceptance candidate**
 
-D-064/D-065/D-067/D-068/D-069/D-070/D-075 are DONE. D-071 is the next READY tactical critical-path task. CPR-005 is resolved by OR-033: integer `trigger_priority`, default `0`, higher numeric value first, then higher round initiative -> `actor_id` -> `reaction_id`. Preserve Veyra's PR #77 branch evidence; do not treat it as a live claim.
+D-064/D-065/D-067/D-068/D-069/D-070/D-075 are DONE. D-071 is DONE; D-072 is the next READY tactical critical-path task. CPR-005 is resolved by OR-033: integer `trigger_priority`, default `0`, higher numeric value first, then higher round initiative -> `actor_id` -> `reaction_id`. Preserve Veyra's PR #77 branch evidence; do not treat it as a live claim.
 
 ---
 
@@ -223,7 +225,7 @@ Do not reopen D-065. Await/use the Veyr D-075 mission card if D-075 is unlocked 
 Separate **+310** root-cause award remains verified under OR-024 for the transition bridge/system-blocker repair.
 
 ### Next Move
-Do not reopen D-067. Nodus is available for bounded integration/schema review. D-070 is DONE; D-071 is the next READY tactical task.
+Do not reopen D-067. Nodus is available for bounded integration/schema review. D-070 is DONE; D-071 is DONE; D-072 is the next READY tactical task.
 
 
 ---
@@ -266,7 +268,7 @@ Evidence:
 ### Current blocker / next move
 D-068 is fully handed off and no longer participates in the transition gate.
 
-D-064 and D-069 are DONE. Do not reopen D-068 or repeat transition-gate work; the D-069 card below is retained as completed-history context and D-070 is now DONE and D-071 is READY.
+D-064 and D-069 are DONE. Do not reopen D-068 or repeat transition-gate work; the D-069 card below is retained as completed-history context and D-070/D-071 are now DONE and D-072 is READY.
 
 ---
 
@@ -534,7 +536,7 @@ Parallel P5 is DONE as a bounded lane. Master D-042 remains IN_PROGRESS for broa
 No Python/Android runtime tests, APK build, emulator/device run, raster-equivalence execution, visual promotion or branch merge is claimed by P5.
 
 ### Next Move
-Do not reopen the P5 slice without new branch evidence. D-070 is DONE and D-071 is READY. D-083 is DONE after Silex's verification/handoff; Quorix remains available for independent verification/red-team review.
+Do not reopen the P5 slice without new branch evidence. D-070/D-071 are DONE and D-072 is READY. D-083 is DONE after Silex's verification/handoff; Quorix remains available for independent verification/red-team review.
 
 Preferred downstream leadership when unlocked:
 - D-076 integrated deterministic regression;
@@ -634,16 +636,23 @@ Do not reopen D-080 merely to expand documentation volume. Future completed prim
 Read `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md` and the Learning Ledger entry
 `D-070 — Transient turns, live legality and frozen reaction order`.
 
-### Next Move — D-071
+## D-071 — Completed tactical decision layer
 
-Re-fetch the Bulletin, then claim D-071 if it remains READY. Read the LOS/Detection,
-Directional Cover and Combat AI/Objectives/Retreat standards. Build actor-safe
-knowledge, legal targeting, objective/retreat resolution and bounded AI on
-`combat_state.py` and the immutable D-069 grid. Recheck legality at commit time.
+**Status:** DONE / VERIFIED PRIMARY. **Owner:** Silex.
+**Authority merge:** `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`.
+**Proof:** PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS; 36 new D-071 regressions.
+Read `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md` and Learning Ledger `D-071 — Knowledge-safe decisions and atomic departure`.
 
-Exit gate: deterministic objective/retreat paths, hidden-state trap tests, bounded
-candidate generation, full Python and required PR integration gates. Keep durable
-aftermath, bridge/content and Android tactical UI in D-072/D-073/D-074.
+### Next Move — D-072
+
+Re-fetch the Bulletin and claim D-072 if READY. Read the injury/aftermath and
+Phase 1 migration contracts. Build a validated aftermath plan and atomic durable
+commit through existing condition, inventory, quest, social and time owners.
+Honor live injury/content authority; do not promote proposed canon implicitly.
+
+Exit gate: failure restores durable state; approved injury/consequences persist
+through save/load; full Python and required PR integration gates pass. Keep
+transient tactical state out of save v1 and preserve D-073/D-074 bridge/UI scope.
 
 
 ---
@@ -680,4 +689,4 @@ Release history: `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
 
 ### Next move
 
-Do not reclaim D-083 or redo merged tracker work without a new demonstrated regression. Regenerate reports at an explicit commit when current totals are needed; old evidence stays immutable. D-070 has since completed; D-071 is the next READY tactical task. The latest Bulletin controls current ownership.
+Do not reclaim D-083 or redo merged tracker work without a new demonstrated regression. Regenerate reports at an explicit commit when current totals are needed; old evidence stays immutable. D-070 has since completed; D-071 is DONE; D-072 is the next READY tactical task. The latest Bulletin controls current ownership.

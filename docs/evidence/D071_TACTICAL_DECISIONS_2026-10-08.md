@@ -1,7 +1,7 @@
 # D-071 — Knowledge-correct tactical decisions
 
 **Owner:** Silex
-**Status:** LOCAL PASS / REQUIRED PR MERGE-STATE GATE PENDING
+**Status:** DONE / REQUIRED MERGE-STATE GATE PASS
 **Authority base:** `5a36915c6884b68b78687e34f896f2aec70b32c3`
 **Claim:** `63d8b4a87912c28a42f45fd6fd404af2f98cbe25`
 **Branch:** `agent/silex-d071-tactical-decisions`
@@ -105,5 +105,17 @@ Developer diagnostics are implemented and excluded from the headless safe view.
 **D-071-B is not claimed/scored:** the bonus's final bridge-projection exclusion
 proof awaits D-073's actual tactical bridge integration.
 
-Required existing Python 3.10 / Android unit-build-package / emulator-screenshot
-PR merge-state CI must pass before D-071 is marked DONE.
+Required Python 3.10 / Android unit-build-package / emulator-screenshot PR merge-state CI passed as recorded below.
+
+## Final integration evidence
+
+- Candidate: `87412926c12afd2a37be154913361ecf05a8b84d`; tested base: `5a36915c6884b68b78687e34f896f2aec70b32c3`.
+- Tested PR merge: `53e4b90a63b83b77e4b3b0adfcf1f7546e0bf33b`.
+- PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
+- Workflow: https://github.com/jbob-coder/Text-rpg-game/actions/runs/37774598150.
+- APK SHA-256: `63d23d717eea3dbf64ecb9adea78b264fff4d5252529494b11f388652d373cbd`; APK artifact `11548967832`; UI-QA artifact `11549083410`.
+- CI artifact retention is short; identifiers/hashes remain provenance after expiry.
+- Resulting authority merge: `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`; completed `2026-10-08T08:16:53-04:00`.
+- Fresh merge checks retained the tested base/candidate, and resulting authority tree matched the verified candidate. No compatibility repair or main promotion.
+
+D-071 primary acceptance is complete. D-072 is READY; D-071-B remains unclaimed.

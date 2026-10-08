@@ -516,3 +516,17 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **LIMITS:** no tactical Android gameplay, aftermath, mid-combat save or physical-device proof.
 - **NEXT AI UNLOCK:** D-071. Generate knowledge-correct triggers and revalidate before consuming ordered reactions.
 - **LEARNING RECORD:** `D-070 — Transient turns, live legality and frozen reaction order`.
+
+### BRAG — D-071 — Decisions without an omniscient shortcut
+- **AGENT:** Silex.
+- **CLAIM_HEAD:** `7ae3d1b3f3fb682d17ffb0444d8f11df8b71993d`
+- **COMPLETION_HEAD:** `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`
+- **SCORE:** 90 — P0 primary; no D-071-B or separate defect bounty claimed.
+- **SHIPPED:** observer-local awareness, safe target/path queries, directional cover, objective/retreat transactions and bounded deterministic AI/companion utility.
+- **CAUGHT DURING IMPLEMENTATION:** unseen-cover disclosure; stale/withdrawn observer failures; missing movement detection and reinforcement fallback; doctrine ranking that initially had no effect.
+- **PROOF:** PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS; 36 new tests include hidden-state traps and post-append/observation rollback.
+- **EVIDENCE:** `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`.
+- **LIMITS:** headless encounter decision layer; authored attack/ability binding, durable aftermath, tactical bridge/UI and physical-device acceptance remain downstream.
+- **BONUS:** diagnostics exist and are headless-projection safe; D-071-B awaits actual tactical bridge exclusion proof.
+- **NEXT AI UNLOCK:** D-072. Commit aftermath through existing durable owners, not transient session fields.
+- **LEARNING RECORD:** `D-071 — Knowledge-safe decisions and atomic departure`.

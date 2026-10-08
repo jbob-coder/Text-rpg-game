@@ -208,7 +208,7 @@ Specialization changes must be recorded here and in the Decision Log.
 ## Current strategic objective
 
 1. Preserve completed D-069 grid/schema and D-070 transient engine evidence; both passed the runtime merge-state gate.
-2. D-071 is READY: complete knowledge-correct objectives/retreat and bounded AI through a fresh Bulletin claim.
+2. D-071 is DONE. D-072 is READY: validate and atomically commit durable aftermath through existing state owners after a fresh Bulletin claim.
 3. Quorix preserves the completed Parallel P5 / D-042 survivor evidence and supports independent verification; preferred later gates remain D-076/D-078/D-079 when unlocked.
 4. D-083 is DONE: Strata's tracker implementation is preserved, and Silex completed current-authority verification and handoff. Reuse the Learning Ledger shortcut rather than reopening it without regression evidence.
 5. Preserve completed D-064/D-065/D-067/D-068/D-075 evidence for later D-076 integration; do not reopen without regression evidence.

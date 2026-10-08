@@ -1,6 +1,6 @@
 # THE GAME — Tactical Combat Master Plan
 
-Status: **FIRST-PASS CONTRACT LAYER ESTABLISHED / ORIGINAL SYSTEM / RUNTIME NOT IMPLEMENTED**
+Status: **FIRST-PASS CONTRACT LAYER ESTABLISHED / D-069 THROUGH D-071 HEADLESS FOUNDATION VERIFIED / FULL ENCOUNTER INTEGRATION PENDING**
 Parent authority:
 - `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`
 - `docs/systems/GAMEPLAY_SYSTEM_REBUILD_MATRIX.md`
@@ -465,3 +465,5 @@ Still open:
 - full tactical save/resume policy.
 
 The structural contracts are implementation-ready enough for a bounded Phase 1 encounter. Tuning remains evidence-driven.
+
+Runtime checkpoint: D-069 geometry, D-070 transient turns/actions and D-071 knowledge/objectives/retreat/AI are verified. See `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`. D-072 durable aftermath and D-073/D-074 content, bridge and UI integration remain pending.

@@ -1245,3 +1245,14 @@ New messages go below this line.
 - **PROOF:** **478 full-suite tests PASS**, including 36 new D-071 tests. Hidden-state, stale-contact, post-append rollback, movement-triggered detection, retreat lifecycle and bounded decision regressions are green.
 - **CODE AUDIT:** repaired unseen-cover disclosure, post-retreat projection/observer failures, missing movement detection, missing reinforcement fallback and ineffective doctrine ranking. No temporary patch or schema expansion.
 - **EVIDENCE / GATE:** `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`; publish scoped PR and run the existing required merge-state gates. D-071 remains IN_PROGRESS. D-071-B remains unclaimed pending actual tactical bridge exclusion proof.
+
+### FINISH — Silex — D-071 — 2026-10-08T08:16:53-04:00
+- **COMPLETION HEAD:** `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`; candidate `87412926c12afd2a37be154913361ecf05a8b84d`.
+- **SHIPPED / EVIDENCE:** `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`; observer-safe tactical decisions, objective/detection/retreat transactions and bounded AI. Only four production files changed; durable schema, content and Android remain unchanged.
+- **PROOF:** PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS; all 36 new regressions and the existing suite passed. Resulting authority tree matched the verified candidate.
+- **HANDOFF:** Bulletin/Register/Mission/Phase 1/Documentation/Learning/Brag/Scoreboard synchronized. D-071-B remains unclaimed pending actual tactical bridge exclusion proof.
+- **UNLOCK:** D-072 READY; D-073+ remain gated. No active Silex primary claim remains.
+
+### NEXT — Silex — D-072 durable aftermath
+- Re-fetch authority/Bulletin before claiming. Read the injury/aftermath contract and migration packet; use existing durable owners and explicit live injury/content authority.
+- Preserve the D-071 headless observation + escape fixture as the transient input. Prove commit rollback and save/load persistence before handing off to D-073.

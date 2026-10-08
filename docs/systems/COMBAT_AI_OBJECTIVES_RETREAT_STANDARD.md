@@ -1,6 +1,6 @@
 # THE GAME — Combat AI, Objectives, Retreat & Companion Orders Standard
 
-Status: **APPROVED FIRST-PASS CONTRACT / IMPLEMENTATION NOT STARTED**
+Status: **APPROVED FIRST-PASS CONTRACT / D-071 HEADLESS IMPLEMENTATION VERIFIED**
 Parents:
 - docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md
 - docs/systems/LOS_DETECTION_AND_COMBAT_KNOWLEDGE_STANDARD.md
@@ -139,3 +139,5 @@ Required:
 ## 16. Next combat artifact
 
 The framework is implementable, but Phase 1 still needs one Gate Twelve encounter packet specifying map, actors, objective, exits, AI profiles, action loadouts, injury/aftermath hook, and success/failure consequences.
+
+Implementation evidence: `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`. Durable aftermath and bridge/UI integration remain D-072/D-073/D-074.

@@ -1539,10 +1539,10 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - EVIDENCE: `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`; PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
 - FILES: `src/textrpg/combat_state.py`, package exports, `tests/test_combat_state.py`, `tests/test_combat_turns.py`, `tests/test_combat_scheduling.py`; synchronized preflight/control/learning records.
 - LEARNING_RECORD: `D-070 — Transient turns, live legality and frozen reaction order`.
-- NEXT: D-071 READY; D-072+ remain gated.
+- NEXT: D-071 has since completed; D-072 READY, D-073+ remain gated.
 
 ### TASK D-071 — Implement tactical awareness, cover, objective, retreat and bounded AI
-- STATUS: `IN_PROGRESS`
+- STATUS: `DONE / VERIFIED PRIMARY`
 - CLAIMED_BY: Silex
 - CLAIMED_AT: `2026-10-08T01:57:38-04:00`
 - CLAIM_HEAD: `7ae3d1b3f3fb682d17ffb0444d8f11df8b71993d`
@@ -1551,11 +1551,19 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - PURPOSE: complete knowledge-correct encounter decision behavior with detection, cover, objectives, retreat and bounded AI.
 - ACCEPTANCE: objective/retreat paths work deterministically without exposing hidden AI/private state.
 - BONUS: `D-071-B` developer-only AI diagnostic evidence with explicit player-safe exclusion tests.
+- COMPLETION_HEAD: `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`
+- COMPLETED_AT: `2026-10-08T08:16:53-04:00`
+- IMPLEMENTATION_HEAD: `87412926c12afd2a37be154913361ecf05a8b84d`
+- EVIDENCE: `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`; PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
+- FILES: `combat_knowledge.py`, `combat_rules.py`, `combat_ai.py`; minimal `combat_state.py` withdrawal eligibility; three D-071 test modules and synchronized handoff.
+- LEARNING_RECORD: `D-071 — Knowledge-safe decisions and atomic departure`.
+- BONUS_STATUS: D-071-B not claimed/scored; actual tactical bridge exclusion proof awaits D-073.
+- NEXT: D-072 READY; durable aftermath remains separate from transient encounter resolution.
 
 ### TASK D-072 — Implement tactical aftermath, injury and world consequence transaction
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `PENDING / BULLETIN READY`
 - PRIORITY: `P0 / RANK 13`
-- DEPENDS_ON: D-071.
+- DEPENDS_ON: D-071 DONE at `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`.
 - PURPOSE: atomically commit validated combat aftermath into existing durable GameState owners, including the approved Phase 1 injury path when authorized by live content authority.
 - ACCEPTANCE: pre-commit rollback remains possible; post-commit injury/world/quest/social/time consequences persist correctly.
 - BONUS: `D-072-B` fault-injection aftermath atomicity tests.
@@ -1746,5 +1754,5 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - EVIDENCE: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`; `docs/evidence/D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`.
 - VALIDATION: `PYTHONPATH=src:. python -m unittest tests.test_project_status_tracker tests.test_documentation_inventory_tool -v` — 8 PASS; actual JSON/Markdown/manifest CLI outputs deterministic; 644 paths/blob hashes/sizes match remote tree with `truncated=false`; independent task/document recount PASS at `8b702325c4224eb68751f147dd83c84d47d4a62c`.
 - FILES_CHANGED: two D-083 evidence artifacts; task/control/learning records only. D-081/D-082 historical snapshots and all tracker/runtime/test source remain unchanged.
-- NEXT: D-083 remains closed. D-070 has since completed and D-071 is READY under its own evidence; the tracker closure itself adds no gameplay acceptance.
+- NEXT: D-083 remains closed. D-070 and D-071 have since completed; D-072 is READY under its own evidence; the tracker closure itself adds no gameplay acceptance.
 - VERIFICATION_BOUNDARY: status tooling/tests/control documentation only; no gameplay/runtime/Android product behavior or physical-device/final-APK pass claimed.

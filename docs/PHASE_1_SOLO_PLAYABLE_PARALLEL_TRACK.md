@@ -253,9 +253,9 @@ The project must not keep stale direction after a task is completed.
 Requirement 9 (one tactical encounter):
 - mechanical documentation: **CONTRACT-READY**;
 - authored Gate Twelve encounter packet: **PROPOSED PACKET EXISTS** — docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md;
-- Python tactical runtime: **D-069 GRID/SCHEMA + D-070 TRANSIENT ENGINE VERIFIED**; D-071 decision layer and later integration remain pending;
+- Python tactical runtime: **D-069/D-070 FOUNDATION + D-071 DECISION LAYER VERIFIED**; D-072 aftermath and later integration remain pending;
 - Android tactical projection/UI: **NOT IMPLEMENTED**;
-- exact-head tactical foundation tests: **VERIFIED** — PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS; see `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`.
+- exact-head tactical foundation and decision tests: **VERIFIED** — PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS; see `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`. Prior D-070 proof remains in `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`.
 
 Requirement 10 (persistent injury/condition):
 - generic injury/aftermath contract: **CONTRACT-READY**;
@@ -273,7 +273,7 @@ What it does not unlock:
 - mid-combat save;
 - mass combat assets.
 
-Next Phase 1 combat action: claim D-071 from live authority and implement actor-safe knowledge, objectives/retreat and bounded AI. Requirement 9 remains incomplete until the downstream authored encounter, bridge and Android UI are accepted.
+Next Phase 1 combat action: claim D-072 from live authority and implement validated atomic durable aftermath. D-071 is complete under PR #79/run #404; see `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`. Requirement 9 remains incomplete until the downstream authored encounter, bridge and Android UI are accepted.
 
 
 ## 12. Phase 1 readiness checkpoint — V05 social documentation

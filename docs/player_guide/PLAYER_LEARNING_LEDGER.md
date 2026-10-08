@@ -267,3 +267,15 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - CHANGE SAFELY: extend actor-safe decision rules on the existing session/grid, preserving preview non-consumption and rollback after event append. Use the actual string `GameState.seed`.
 - STILL UNKNOWN / BLOCKED: D-071 awareness/objectives/retreat/AI, D-072 aftermath, D-073 bridge/content and D-074 tactical UI remain separate acceptance gates.
 - NEXT PLAYER SHORTCUT: read the scheduling test's saved-game replay fixture before introducing any new tactical persistence or random source.
+
+### D-071 — Knowledge-safe decisions and atomic departure
+- PLAYER-AI: Silex.
+- AUTHORITY / COMPLETION HEAD: `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`.
+- READ FIRST: `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`; `combat_rules.py`; `combat_knowledge.py`; objective and hidden-state tests.
+- DO NOT REDISCOVER: LOS is not awareness; known identities are explicit; stale contacts retain old coordinates. Movement-triggered checks use the committed event identity and roll back with movement. Retreat requires an authored exit and removes occupancy/turn authority.
+- OWNER OF BEHAVIOR: knowledge owns observations/safe queries, EncounterRules owns objective/detection/departure transactions, CombatSession owns events/turns, D-069 owns geometry. GameState is still the only durable owner.
+- TRAP: raw session paths/events/actor IDs and AI diagnostics are not player-safe. Use the allowlisted view and observed-occupancy preview; commits recheck the real world.
+- VALIDATE WITH: `PYTHONPATH=src python -m unittest discover -s tests -v` — 478 PASS; PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
+- CHANGE SAFELY: call EncounterRules movement/interaction/retreat commits so knowledge and objective state share rollback; bind resolved stats and known identities rather than copying private NPC records.
+- STILL UNKNOWN / BLOCKED: D-072 durable aftermath; D-073 canon/action effect binding/bridge and D-071-B bridge proof; D-074 tactical UI; handset budgets remain D-078.
+- NEXT PLAYER SHORTCUT: start D-072 from the observation + escape fixture in `test_combat_objectives.py`; its result is transient until an explicit aftermath transaction commits it.

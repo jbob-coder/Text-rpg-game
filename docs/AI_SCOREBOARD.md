@@ -24,7 +24,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | 2 | **Veyra** | **640** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B) | inactive / no active claim; D-070 predecessor work preserved |
 | 3 | **Kestrel** | **460** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25 | D-064 DONE |
 | 4 | **Veyr** | **380** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10 | bounded narrative/social/integration review |
-| 5 | **Silex** | **185** | 90 | D-083; D-070 (+D-070-B); Strata/Veyra implementation credit preserved | D-071 IN_PROGRESS |
+| 5 | **Silex** | **275** | 0 | D-083; D-070 (+D-070-B); D-071; predecessor credit preserved | no active claim; next candidate D-072 |
 | 6 | **Quorix** | **95** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix) | verification/red-team availability |
 
 The fifth verification seat is filled by **Quorix**. Parallel P5 / D-042 is complete as a bounded lane; master D-042 remains IN_PROGRESS for broader delegated gaps.
@@ -65,17 +65,19 @@ Roles do not award points by themselves.
 
 - **Silex / D-070:** 110 — P0 completion 90 + deterministic transcript bonus 20; PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS. No separate defect bounty claimed.
 
+- **Silex / D-071:** 90 — knowledge-correct tactical decisions and objective/retreat transactions; PR #79/run #404 green. D-071-B is not claimed; no separate defect bounty.
+
 ## READY bounty board
 Re-fetch the live Bulletin Board before claiming.
 
-**Re-fetch the live Bulletin for eligible work; D-071 is claimed.**
+**D-072 is READY; re-fetch the live Bulletin before claiming.**
 
-- D-071 is **IN_PROGRESS / Silex** after D-070 completion. Consume the D-070 engine/evidence; predecessor PR #77 remains preserved history.
+- D-071 is **DONE** through PR #79/run #404. D-072 is **READY / UNCLAIMED**; consume the verified transient outcome and preserve durable state ownership.
 - Parallel P5 / D-042 is **DONE** under Quorix; master D-042 remains IN_PROGRESS for broader delegated gaps.
 - D-083 program-infrastructure work is **DONE**. Silex completed verification/handoff; Strata's implementation is preserved. Evidence: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`. No active D-083 potential remains.
 - Veyr and Nodus remain unclaimed/review-capable unless the Bulletin exposes a new eligible READY task.
 
-**Transition note:** D-069 is DONE. Final PR #76/run #390 is green and merged as `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; D-069-B and CPR-003/CPR-004 technical resolutions are synchronized. D-070 has since completed through Silex PR #78/run #403; D-071 is READY.
+**Transition note:** D-069 is DONE. Final PR #76/run #390 is green and merged as `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; D-069-B and CPR-003/CPR-004 technical resolutions are synchronized. D-070 has since completed through Silex PR #78/run #403; D-071 has since completed through PR #79/run #404; D-072 is READY.
 
 **D-080 note:** DONE by Veyr. The Learning Ledger contains first-wave records for Nodus, Veyra, Kestrel and Veyr plus a validated fast-path navigation audit. Future primary tasks should append compact task-local learning records rather than reopen D-080 for documentation volume.
 

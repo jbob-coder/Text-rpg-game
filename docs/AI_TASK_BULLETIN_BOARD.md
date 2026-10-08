@@ -34,7 +34,8 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **D-064:** DONE — Kestrel; PR #70/run #362 green; authority merge `d7ebb7ca...`; CPR-002 resolved.
 - **D-069:** DONE — Veyra; authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; PR #76/run #390 green; CPR-003/CPR-004 resolved.
 - **D-070:** **DONE / Silex + preserved Veyra implementation**. PR #78 / run #403 green; authority merge `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`; D-070-B verified.
-- **D-071:** **IN_PROGRESS / Silex**. D-072+ remain dependency-gated behind the tactical decision layer.
+- **D-071:** **DONE / Silex**. PR #79 / run #404 green; authority merge `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`.
+- **D-072:** **READY / UNCLAIMED**. D-073+ remain gated behind durable aftermath.
 
 ### Other active work
 - **Quorix:** Parallel P5 / D-042 DONE — fifth-seat Verification / Red-Team / Performance lead returns to review availability.
@@ -46,14 +47,14 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **Veyra:** 640 (inactive; no active potential)
 - **Kestrel:** 460
 - **Veyr:** 380
-- **Silex:** 185 — D-083 + D-070 (+B); predecessor implementation credit preserved.
+- **Silex:** 275 — D-083 + D-070 (+B) + D-071; predecessor implementation credit preserved.
 - **Quorix:** 95
 
 ### Immediate strategy
-1. D-070 is complete. Silex owns D-071 and is implementing actor-safe tactical decisions on the verified transient engine.
+1. D-070 and D-071 are complete. D-072 is the next eligible task: validated atomic durable aftermath using existing GameState owners.
 2. D-083 is DONE. Use its exact-revision evidence and Learning Ledger shortcut; reopen only for a new demonstrated regression.
 3. Quorix remains available for independent verification/red-team review.
-4. D-071 is unlocked; keep D-072 aftermath and later bridge/UI work behind their own gates.
+4. Claim D-072 from fresh authority; preserve D-073/D-074 content, bridge and UI boundaries.
 
 ### Coordination rule
 Before a new primary: `INTENT -> Bulletin CLAIM -> START`.  
@@ -109,7 +110,7 @@ Current operational role assignments:
   - no permanent domain ownership is implied.
 
 - **Silex — auxiliary Player-AI: Repository Status Verification / Handoff**
-  - D-083 and D-070 **DONE**; D-071 is the current primary under the owner's continuation request;
+  - D-083, D-070 and D-071 **DONE**; no active primary claim;
   - preserve prior implementation and verify code defects before repair.
 
 These are Player-AI classes/specializations and current task/accountability lanes, not permanent file ownership. Cross-domain disputes go to Council/AXIOM.
@@ -508,7 +509,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **CPR:** CPR-003 **RESOLVED**; CPR-004 **RESOLVED**. AXIOM reward classification remains pending and is not self-awarded.
 - **LEARNING_RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — `D-069 — Tactical schemas and pure grid core`.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-069 — Geometry stopped being a suggestion`.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-070 dependency was satisfied; D-070 has since completed and D-071 is READY.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-070 dependency was satisfied; D-070 and D-071 have completed; D-072 is READY.
 
 ### Rank 11 — D-070 — Tactical transient state, turn and action engine
 - **TASK_REF:** `D-070`
@@ -535,32 +536,32 @@ Bragging is encouraged; fabrication is forbidden.
 - **EVIDENCE:** `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`; PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
 - **CPR:** `CPR-005` — **RESOLVED / 62/100 CRITICAL / OR-033**. Phase-1 queue contract: integer `trigger_priority`, default `0`, higher numeric value first; then higher round initiative -> `actor_id` ascending -> `reaction_id` ascending. D-070 owns validation/scheduling; D-071 owns trigger-generation policy.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-070 — Turns that obey their own rules`.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-071 READY.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-071 was unlocked and has since completed; D-072 is READY.
 
 ### Rank 12 — D-071 — Tactical awareness, cover, objectives, retreat and bounded AI
 - **TASK_REF:** `D-071`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `89/100`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** D-070 DONE at `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`.
 - **ACCEPTANCE:** Knowledge-correct objective/retreat encounter behavior with bounded deterministic AI and no hidden-state leak.
-- **BONUS:** `D-071-B` — developer AI diagnostics.
+- **BONUS:** `D-071-B` — not claimed; diagnostics exist, actual tactical bridge exclusion proof remains D-073 integration.
 - **CLAIMED_BY:** Silex
 - **CLAIMED_AT:** 2026-10-08T01:57:38-04:00
 - **CLAIM_HEAD:** `7ae3d1b3f3fb682d17ffb0444d8f11df8b71993d`
-- **COMPLETION_HEAD:** —
-- **EVIDENCE:** pending
-- **BRAG_CARD:** pending
-- **NEXT_TASK_CREATED_OR_REFRESHED:** no
+- **COMPLETION_HEAD:** `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`
+- **EVIDENCE:** `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`; PR #79 / workflow #404 `37774598150`; Python 478/478 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS; 36 new D-071 tests.
+- **BRAG_CARD:** `BRAG — D-071 — Decisions without an omniscient shortcut`.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-072 READY.
 
 ### Rank 13 — D-072 — Tactical aftermath, injury and world consequence
 - **TASK_REF:** `D-072`
 - **PRIORITY:** `P0`
 - **IMPORTANCE:** `88/100`
-- **STATUS:** `BLOCKED`
+- **STATUS:** `READY`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
-- **DEPENDENCIES:** D-071 DONE.
+- **DEPENDENCIES:** D-071 DONE at `ffea9fcd4e0826b54c766b2e1c06468fb3afcbe7`.
 - **ACCEPTANCE:** Atomic validated aftermath persists injury/world/quest/social/time consequences with rollback before commit.
 - **BONUS:** `D-072-B` — fault-injection atomicity tests.
 - **CLAIMED_BY:** —
@@ -783,7 +784,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **MASTER_TASK_BOUNDARY:** master D-042 remains IN_PROGRESS for broader delegated consumer/asset/deprecation work; only Parallel P5 is DONE.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — Parallel P5 / D-042 — The survivor map follows the real runtime owner`.
 - **SCORE:** 95 — P0/P1 parallel 75 + verified machine-readable survivor-matrix bonus 20.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** historical note — at that completion checkpoint D-069/D-083 were owned by Veyra/Strata. **SUPERSEDED 2026-10-07:** both inactive claims were released; D-083 was subsequently completed by Silex. D-070 has since completed; D-071 is READY.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** historical note — at that completion checkpoint D-069/D-083 were owned by Veyra/Strata. **SUPERSEDED 2026-10-07:** both inactive claims were released; D-083 was subsequently completed by Silex. D-070 and D-071 have completed; D-072 is READY.
 
 
 ## Queue maintenance
@@ -864,5 +865,5 @@ If all ranked tasks are DONE, use live evidence to create the next program task 
 - **COMPLETED_AT:** 2026-10-07T19:19:06-04:00
 - **EVIDENCE:** `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`; machine companion `D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`. Eight scoped tests PASS; all three CLI outputs repeat byte-for-byte; 644/644 remote blob paths/hashes/sizes match at verified revision `8b702325c4224eb68751f147dd83c84d47d4a62c`.
 - **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — `BRAG — D-083 — Twenty campaign slots, exact repository evidence`.
-- **NEXT_TASK_CREATED_OR_REFRESHED:** historical D-083 closure selected D-070 as next. The owner subsequently authorized continued work; D-070 is now DONE and D-071 is READY.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** historical D-083 closure selected D-070 as next. The owner subsequently authorized continued work; D-070/D-071 are now DONE and D-072 is READY.
 - **OVERLAP:** status tooling/tests/control docs only; no gameplay/runtime ownership.
