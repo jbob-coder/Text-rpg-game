@@ -318,3 +318,17 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - STILL UNKNOWN / BLOCKED: word/heading totals, broad world/domain record totals, current canonical asset-stage promotion, executed-test evidence, owner-target unit mapping; master D-019 remains IN_PROGRESS.
 - NEXT PLAYER SHORTCUT: open `docs/evidence/P6_D019_EXACT_REVISION_CHECKPOINT_2026-10-08.md`, run the documented complete-checkout recipe at its exact SHA and fill only measured missing word/heading/record fields under D-019.
 - SUPPORTING ARTIFACT: `docs/evidence/P6_D019_GIT_TREE_INVENTORY_2026-10-08.json`.
+
+
+### P7 / D-045 — Keep profession, rank and status as separate owners
+- PLAYER-AI: Veyra / PLAYER_VEYRA; session `SESSION_VEYRA_20261007T1140-0400_S02`.
+- AUTHORITY / EVIDENCE: P7 claim `35546e6c8cd524d213cdb4d75be35a15f4a5ce94`; namespace child creation `aeef81e9101ba5a5b3e70f87182357957a3bbe1d`; bounded evidence `docs/evidence/P7_D045_PROFESSION_RANK_STATUS_NAMESPACE_2026-10-08.md`.
+- READ FIRST: `docs/systems/PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md`; `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`; `COMBAT_CLASS_CATALOG.md`; `PHASE_1_PROGRESSION_SCHEMA_API_MIGRATION_PACKET.md`; `FACTION_HIERARCHY_MEMBERSHIP_STANDARD.md`.
+- DO NOT REDISCOVER: current `GameState` has no class/profession/institution-rank/faction-rank/civic-status top-level fields. D-061 keeps current Phase 1 on save schema v1. Global Level is a separate target Status axis, not a replacement for profession, class, rank, skill, ability mastery or reputation.
+- OWNER OF BEHAVIOR: current skills/attributes remain schema/runtime authority; D-061 owns current Phase 1 progression migration; faction/hierarchy authority owns membership/rank/privacy semantics; V08 owns tactical legality; D-045 target documents own future profession/class/rank design until an explicit runtime migration chooses durable owners.
+- TRAP / FALSE ASSUMPTION: high skill does not equal profession qualification; profession does not equal class; reputation does not equal faction rank; organization role does not equal rank; a job assignment does not create permanent profession state. Do not implement a convenient `state.professions` or generic `ranks` map from this design packet.
+- VALIDATE WITH: P7 evidence records connector readback of the committed packet and structural coverage of **23/23** current skills plus **7/7** target class families, zero missing. No Python/Android runtime tests, CI, emulator, device or APK result was produced by P7.
+- CHANGE SAFELY: preserve stable semantic IDs; mark target/proposal records honestly; choose one future durable owner through migration design before adding save fields; validate parent references; preserve player-safe privacy for secret membership/clearance and hidden requirements.
+- STILL UNKNOWN / BLOCKED: final profession catalog, canon institutions and rank ladders, numeric grade/rank calibration, durable runtime representation, Training/Mentor/Facility child, Gate Twelve progression proof, progression UX, and later target-schema/API migration.
+- NEXT PLAYER SHORTCUT: D-045's direct next child is the **Training / Mentor / Facility Progression Standard**. Consume this namespace packet; do not create another occupational hierarchy. Re-fetch the Bulletin before claiming any next lane.
+- SUPPORTING ARTIFACT: `docs/evidence/P7_D045_PROFESSION_RANK_STATUS_NAMESPACE_2026-10-08.md`; primary child `docs/systems/PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md`.
