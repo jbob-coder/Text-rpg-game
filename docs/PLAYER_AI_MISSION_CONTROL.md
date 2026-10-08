@@ -554,7 +554,7 @@ Parallel P5 is DONE as a bounded lane. Master D-042 remains IN_PROGRESS for broa
 No Python/Android runtime tests, APK build, emulator/device run, raster-equivalence execution, visual promotion or branch merge is claimed by P5.
 
 ### Next Move
-Do not reopen the P5 slice without new branch evidence. D-070/D-071 and D-083 are DONE. At the 2026-10-08 audit D-072 is IN_PROGRESS under Silex (NOT READY); Quorix has no Bulletin primary claim and is available only for bounded independent verification/red-team review. Re-fetch Bulletin after D-072 handoff before considering D-076/D-078/D-079.
+P10 / D-042 OR-035 legacy PR disposition audit is DONE (2026-10-08). Evidence: `docs/evidence/P10_D042_LEGACY_PR_DISPOSITION_2026-10-08.md`; PR #74's eight D-069 blobs were already merged through PR #76; PR #65/#44 are historical CI markers. No PR state changed. Master D-042 remains IN_PROGRESS for broader consumer/asset/deprecation work. Quorix has no new claim after P10 closure. D-072 stays Silex-owned until the live Bulletin says otherwise; next eligible role is independent exact-head review or a fresh READY task under INTENT -> CLAIM -> verify -> START. Do not reopen P5/P10 or claim D-076/D-078/D-079 prematurely.
 
 Preferred downstream leadership when unlocked:
 - D-076 integrated deterministic regression;
