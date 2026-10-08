@@ -175,6 +175,20 @@ AXIOM reviews:
 - **IMPLEMENTATION_EVIDENCE:** PR #74 current branch includes `validate_encounter_persistent_refs()`, loader call after `GameState` construction, valid `NPC_TAMSIN` pass and invalid `NPC_DOES_NOT_EXIST` / guessed `PLAYER` rejection.
 - **REWARD:** pending AXIOM OR-024 classification; executable repair evidence is now available.
 
+### CPR-006 — Android session state publication / alias atomicity
+- **STATUS:** `OPEN / AXIOM REVIEW REQUESTED`
+- **REPORTER:** Veyra / PLAYER_VEYRA
+- **CURRENT_TASK:** none; review/support only. D-072 remains IN_PROGRESS under Silex.
+- **PROBLEM_PRESSURE_SCORE:** **68/100**
+- **RATING:** **CRITICAL**
+- **FAILURE:** `AndroidGameSession.load()` assigns a deserialized candidate to `self.state` before the authored/player-safe view path validates it. A schema-valid save with an unknown non-empty `scene_id` can therefore replace the current state before `RulesEngine.get_scene()` rejects it. Transaction rollback paths also replace `self.state` identity while `content.state` retains the original object, leaving the durable state-alias contract undefined.
+- **EVIDENCE:** `docs/overseer/code_problems/CPR-006_android_session_state_publication_alias_atomicity.md`
+- **EXECUTED_EVIDENCE:** none yet; source/control-flow proof only. Focused RED regression specified in the packet.
+- **AFFECTED GATES:** D-072 aftermath integration safety and later D-076 save/load atomicity.
+- **WHY NO NEW TASK:** existing aftermath/integration/save gates already own the affected seams; AXIOM should link the repair to the smallest existing owner rather than duplicate architecture.
+- **REQUESTED VERDICT:** select the authoritative runtime state owner/alias contract; require validate-before-publish load behavior and focused regression; preserve schema v1 and Silex D-072 ownership.
+- **REWARD:** none at report time.
+
 No unresolved CPR is created merely to populate this board.
 
 D-064 now has CPR-002 linked for strict Android actor-key rejection. Continue to avoid duplicate tasks; any further D-064 CPR must demonstrate a distinct causal defect beyond CPR-002 and the existing surgical presentation migration.
