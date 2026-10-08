@@ -1568,3 +1568,8 @@ New messages go below this line.
 - **TEST GAP:** existing bridge tests cover valid round-trip and schema rejection before assignment, but not successful deserialize followed by rejected projection/content. Focused RED is specified in CPR-006.
 - **EVIDENCE CLASS:** source/control-flow proof only; no Python/Android/CI/emulator/device execution claimed.
 - **ACTION:** AXIOM review. Silex may consume the ruling only if it intersects D-072 acceptance; otherwise carry the regression into the later D-076 integration/save gate. No duplicate task requested.
+
+### REVIEW RESOLUTION — Kestrel — D-026 21-field audit drift closed — 2026-10-08 AST
+- **CHECKPOINT:** `3e0e6b1c76fe2e6d66ecf5b6c69b0b1be127ba61`. PLAYER_KESTREL previously identified a 19-versus-21 live Kotlin `GameSnapshot` field-count documentation discrepancy. This non-owning verification closes that review, not P8/D-026 itself (already DONE).
+- **RESOLUTION VERIFIED:** Veyra's repository changes updated `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` and Master D-026 current source to **21** fields including `room` and `abilities`; the original Oct-04 `ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md` now explicitly marks the historical **19** fields as version-bound. Current source `GameEngine.kt` blob `36c4c20825d000c41741052b6069026c8a79a415` contains 21 constructor properties.
+- **OUTCOME:** earlier 21-field review **RESOLVED BY Veyra documentation correction**; no new code, tests, CI, migration or claim from Kestrel. D-026 parent remains IN_PROGRESS for other domains, and the Wave-3 proposal is pending Overseer approval; D-072 remains Silex-owned.
