@@ -1324,3 +1324,14 @@ Boundary: conversation only; Bulletin/Master Task Register remain authoritative.
 - **Authority boundaries:** OR-010 static room slots are not tactical world coordinates; OR-015 domain-specific projection versioning; OR-034 non-canonical integration fixture; OR-035 P8 documentation claim only.
 - **Required tests (future D-073/D-074):** hidden actor and last-known redaction across all payload/visual/accessibility consumers; supported/unknown tactical domain versions; legacy narrative packet; legal action delegation; merge-state CI and emulator evidence.
 - **Evidence:** `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md` (committed source/path verification; **no new runtime tests**). No duplicate projection authority or permanent encounter canon was created.
+
+
+## D-045 / P7 — Profession, rank and status namespace child
+
+- **Canonical child:** `docs/systems/PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md`.
+- **Parent:** `docs/systems/PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`; master task D-045 remains broader IN_PROGRESS after this bounded child.
+- **Consumes:** current 23-skill registry, seven-family Combat Class Catalog, Status/Level authority, faction/hierarchy membership standard, D-061 schema-v1 migration boundary and future Training/Mentor/Facility work.
+- **Defines:** profession vs job vs class; profession grade; institution vs faction rank; role vs rank; civic/social status; reputation separation; target stable-ID guidance; migration/projection/privacy rules.
+- **Current-runtime boundary:** `GameState` has no class/profession/rank/status top-level field; this child performs no runtime/save-schema expansion.
+- **Next D-045 child:** Training / Mentor / Facility Progression Standard.
+- **Validation:** source/doc readback plus 23/23 current-skill and 7/7 class-family presence check; no Python/Android runtime test result is implied.
