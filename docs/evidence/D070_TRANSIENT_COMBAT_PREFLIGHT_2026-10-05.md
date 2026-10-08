@@ -1,10 +1,11 @@
 # D-070 — Transient Combat Session / Turn Engine Preflight
 
-**Status:** READ-ONLY PREPARATION / DO NOT CLAIM BEFORE D-069 DONE  
-**Prepared by:** AXIOM  
-**Observed authority HEAD:** `bc9668a07656b2ad7f76b89601c7133f75471df8` — re-fetch after D-069 completion.  
+**Status:** IMPLEMENTATION CANDIDATE / D-070 CLAIMED BY SILEX
+**Prepared by:** AXIOM; post-D-069 re-audit by Veyra; continuation audit by Silex
+**D-069 completion base:** `8b2115cf8a6f04127bdf20dd1217abd947cf8150`
+**D-070 continuation base:** `8125406c69e2b89f720628d91cb2e067ab3496b5`
 **Task:** D-070 — Tactical transient state, turn and action engine  
-**Dependency:** D-069 DONE
+**Dependency:** D-069 DONE / SATISFIED
 
 This packet exists so the D-069 -> D-070 handoff does not require another repository-wide architecture pass.
 
@@ -18,11 +19,29 @@ Read in this order after D-069 closes:
 2. this preflight;
 3. `docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md`;
 4. `docs/systems/TURN_INITIATIVE_ACTION_BUDGET_STANDARD.md`;
-5. `docs/systems/TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md`;
-6. D-069 final evidence + Learning Ledger record;
-7. current `combat_schema.py` / `combat_grid.py`.
+5. `docs/systems/MOVEMENT_PATHING_AND_POSITIONING_STANDARD.md`;
+6. `docs/systems/TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md`;
+7. D-069 final evidence + Learning Ledger record;
+8. current `combat_schema.py` / `combat_grid.py`.
 
 Only then inspect broader combat documents if an acceptance gap genuinely requires them.
+
+## 1A. Post-D-069 locked delta
+
+The dependency is satisfied. Silex claimed D-070 after the owner released Veyra; preserved implementation credit remains with Veyra.
+
+Additional completion requirements confirmed during post-D-069 review:
+- action-budget cost and movement-point allowance are separate;
+- default Move = 1 budget + 6 movement points;
+- default Sprint = 2 budget + 10 movement points;
+- traversal cost comes from the authoritative D-069 path/map edges, including transition cost;
+- preview and commit must use the same path/cost authority;
+- pre-movement rejection spends neither budget nor movement;
+- before D-070 completion, the transient scheduler must cover reaction reserve/consume/expire and deterministic reaction ordering;
+- normal reinforcements are excluded from the current initiative snapshot and become eligible next round;
+- D-071 still owns awareness/AI trigger-selection semantics and must not be pulled into D-070.
+
+The first implementation seam remains session/actor state plus deterministic initiative/activation. Movement transactions and reaction/reinforcement scheduling follow only after that state model is coherent.
 
 ## 2. Locked D-070 responsibility
 
@@ -354,12 +373,16 @@ D-070 is DONE only when:
 - runtime merge-state policy is satisfied;
 - evidence + Learning Record + Coordination FINISH exist.
 
-## 16. Do not start early
+## 16. Start gate — satisfied
 
-Until D-069 is marked DONE:
-- do not claim D-070;
-- do not create combat_state/runtime code;
-- do not modify Veyra's D-069 branch;
-- read-only review/preflight is allowed.
+D-069 is DONE at `8b2115cf8a6f04127bdf20dd1217abd947cf8150`, and Silex confirmed the continuation claim at `976f8356674e9130dc55ea9026d31d5323f67460`.
 
-When D-069 closes, re-fetch live authority and audit this packet against the merged D-069 API before implementation.
+Implementation may proceed on the dedicated D-070 branch, subject to:
+- runtime merge-state policy;
+- D-069 schema/grid authority reuse;
+- no GameState/save-v1 tactical expansion;
+- D-071/D-072 scope boundaries above.
+
+## 17. Continuation evidence
+
+See `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md` for the preserved-work audit, reproduced defects, candidate API boundaries and executed verification. The runtime merge-state gate remains mandatory before DONE.

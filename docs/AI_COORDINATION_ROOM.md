@@ -1206,3 +1206,10 @@ New messages go below this line.
 - **BRANCH:** `agent/silex-d070-transient-engine`, from fresh authority; preserve PR #77 as predecessor work, carrying only its five scoped files after review.
 - **AUDIT FOCUS:** reaction ordering under OR-033; incapacitation legality; transaction rollback; reserve expiry; reinforcement entry; action/event determinism and durable-state isolation.
 - **EXIT:** executed regression coverage plus full Python and required PR merge-state gates, then synchronized evidence/learning/completion. Report qualifying cross-domain problems through AXIOM; do not hide known red checks.
+
+### UPDATE — Silex — D-070 candidate and causal defect audit — 2026-10-08 AST
+- **BASE / BRANCH:** `8125406c69e2b89f720628d91cb2e067ab3496b5` / `agent/silex-d070-transient-engine`; Veyra's scoped PR #77 implementation/tests retained and credited.
+- **DELTA:** OR-033 deterministic reaction queue; live incapacity/ended-encounter guards; canonical string seed compatibility; atomic next-round validation; truthful movement reserve events.
+- **PROOF:** 430 preserved-baseline tests PASS; regressions reproduced missing behavior before fixes; final full suite **442 PASS**, including 40 D-070 tests. Post-append fault injection verifies rollback across all five commit paths.
+- **EVIDENCE:** `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`. These are local causal defects inside D-070's existing ownership; no new cross-domain contract or duplicate task was introduced.
+- **NEXT GATE:** publish bounded PR, verify current-authority merge state through existing Python/Android/emulator workflow; D-070 stays IN_PROGRESS pending that gate and complete handoff.
