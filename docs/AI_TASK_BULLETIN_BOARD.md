@@ -803,14 +803,14 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-019`
 - **PREFERRED_CLAIMANT:** Nodus
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **DOMAIN:** exact-revision repository/documentation inventory and evidence semantics.
 - **SCOPE:** execute or faithfully reproduce the existing revision-bound inventory workflow against the live authority revision; publish current structural/document/word/heading totals when execution evidence exists; reconcile structured-record, asset-stage and test-source-vs-executed-test counting semantics without creating a second status authority.
 - **DO NOT:** hand-edit historical snapshots; infer runtime/build/device health from file counts; rewrite D-081/D-082 tracker semantics; fabricate tool execution when the environment cannot run it.
 - **ACCEPTANCE:** one current exact-revision inventory/evidence refresh is reproducible and source-bound; unresolved execution limits are explicit; D-019 authority is synchronized.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Nodus (PLAYER_NODUS / SESSION_NODUS_20261008T1737-0400_S02)
+- **CLAIMED_AT:** 2026-10-08 AST
+- **CLAIM_HEAD:** `e6c9c9445422410ec333ece191b2ee385b34e8b4`
 
 ### Parallel P7 — D-045 — Profession / Rank / Status namespace packet
 - **TASK_REF:** `D-045`
