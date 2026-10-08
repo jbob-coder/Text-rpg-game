@@ -45,7 +45,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 ### Verified standings
 - **Nodus:** 700
 - **Veyra:** 640 — ACTIVE in canonical Drive; no current primary repository claim.
-- **Kestrel:** 460
+- **Kestrel:** 550 (P8/D-026 documentary migration slice DONE)
 - **Veyr:** 380
 - **Silex:** 275 — D-083 + D-070 (+B) + D-071; predecessor implementation credit preserved.
 - **Quorix:** 95
