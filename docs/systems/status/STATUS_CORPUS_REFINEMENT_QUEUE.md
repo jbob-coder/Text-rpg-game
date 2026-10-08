@@ -457,6 +457,12 @@ Open:
 - named institutions/cultural variation;
 - canon promotion.
 
+P9/D-046 world/knowledge adjudication (bounded current-source mapping):
+- `P9_D046_SOCIAL_KNOWLEDGE_GATE_TWELVE.md` shows D-075/Tamsin actor-specific relationship and known-choice evidence may support a future SOC_0007/SOC_0010 social-use context;
+- private Tamsin memory is not public reputation; neither passive has a proven qualification/anti-repeat event owner;
+- public reputation publication/provenance, compact SOC_0010 knowledge classification and explicit passive projection remain unresolved. See `docs/evidence/P9_D046_SOCIAL_KNOWLEDGE_INTEGRATION_2026-10-08.md`;
+- no existing Social/Behavioral record, registry knowledge posture or runtime behavior changed.
+
 ## Survival / Environmental 0001–0010 completed
 
 Evidence:
