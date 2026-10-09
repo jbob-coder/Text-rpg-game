@@ -207,7 +207,7 @@ This section supersedes older statements about the top-level product objective w
   - PR #31 remains deferred animation migration on the selected static parent;
   - PR #9 held-prop integration remains deferred to D-030-safe actor projection.
 - IMPORTANT: D-020 completion is documentation reconciliation only. It does not implement deferred candidates, choose owner visual decisions, merge branches, promote main, or delete historical evidence.
-- NEXT CONSUMERS: D-029 asset provenance/promotion, D-030 actor migration, D-032 mechanics migration and final APK reconstruction.
+- HISTORICAL_HANDOFF: D-030's actor/projection contract and D-032's five mechanics migration-design packets have since completed. Remaining consumers of this reconciliation include D-029 asset provenance/promotion, D-021/D-026 ongoing player-safe consumer work and the later final APK reconstruction; do not reopen D-030/D-032 as setup.
 - COMPLETED_AT: `2026-10-04 AST`
 
 ### TASK D-021 — Map Android consumers to final UX/domain contracts
