@@ -4,7 +4,9 @@ Status: **ACTIVE / PRIMARY EXECUTION MAP**
 Repository: `jbob-coder/Text-rpg-game`  
 Program branch: `docs/master-game-development-program`  
 Parent authority: `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`  
-Priority: **P0 — documentation first**
+Priority: **P0 — documentation authority first**
+
+> **Current execution authorization — 2026-10-04+ AST:** documentation remains mandatory source-of-truth and continuity, but the owner has authorized bounded implementation, runtime work, tests/tooling and asset production when they consume accepted contracts and produce evidence. This breakdown must not be read as a documentation-only prohibition. Live task readiness/ownership is governed by the Bulletin and Master Task Register.
 
 ## 1. Purpose
 
@@ -101,7 +103,7 @@ Deliver:
 Output:
 `docs/EXISTING_STATE_REWORK_DECISION_MATRIX.md`
 
-Current state: **started by this program; deeper code audit still required**.
+Current state: **materially advanced, not complete**. D-042 source/consumer archaeology and D-019/P6 inventory checkpoints now provide reproducible source and corpus evidence; broader consumer/provenance/deprecation reconciliation and revision-bound inventory refreshes remain open.
 
 ### Phase 2 — Visual production authority
 Deliver:
@@ -327,7 +329,9 @@ Do not create art for a region merely because a blank area exists. First verify:
 - reusable assets;
 - app surface consuming the asset.
 
-## 7. Current immediate order
+## 7. Original immediate order / current authority boundary
+
+> **Current authority note — 2026-10-08 AST:** the numbered order below is the original decomposition sequence, not the live claim queue. Significant children have since completed, including D-064 room/actor projection and tactical D-069 through D-071, while D-072 is currently owned by Silex and later tactical tasks remain dependency-gated. Consult `AI_TASK_BULLETIN_BOARD.md`, `THE_GAME_MASTER_TASK_REGISTER.md`, Mission Control and current evidence before selecting work. Preserve this list as reconstruction obligations, not READY task state.
 
 1. deepen the exact existing-state rework audit against live implementation heads;
 2. create reproducible documentation/world/asset inventory counts;
