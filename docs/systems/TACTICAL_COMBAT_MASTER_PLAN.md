@@ -97,13 +97,23 @@ Requirements:
 
 Tactical coordinates do not replace world or district coordinates.
 
-## 5. Turn structure — direction locked, ordering detail pending
+## 5. Turn structure — Phase 1 ordering locked / D-070 verified
 
 Combat is turn-based and resolves one bounded activation context at a time.
 
-Each activation uses an action-budget model. The exact initiative ordering remains open and must be selected after testing readability on phone, AI complexity, party size, combat length and persistent-world integration.
+The Phase 1 ordering contract is now defined by `TURN_INITIATIVE_ACTION_BUDGET_STANDARD.md` and verified through D-070:
+- eligible actors are snapshotted for the round;
+- higher resolved initiative acts first;
+- initiative is frozen for the current round;
+- mid-round initiative changes apply on the next round snapshot;
+- ties resolve by stable `actor_id` ascending;
+- incapacitated actors are skipped;
+- ordinary reinforcements join on the next round;
+- each activation receives the bounded action budget and reaction-reserve lifecycle defined by the turn standard.
 
-No UI should hardcode an initiative formula until that child decision is documented.
+D-070 evidence: `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`; authority merge `6b7cf6be32f88eaae75bd8bb3682c851b6a0965c`; PR #78 / workflow #403 `37734174295`.
+
+Future tuning may revise the broader combat model through an explicit contract/migration, but UI code must not independently derive or hardcode a competing initiative order.
 
 ## 6. Action economy
 
