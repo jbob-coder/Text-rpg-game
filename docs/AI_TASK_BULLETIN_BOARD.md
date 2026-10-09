@@ -1037,14 +1037,14 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-046`
 - **PREFERRED_CLAIMANT:** Veyr
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** Master D-046 explicit remaining item: player-safe passive-list projection contract.
 - **SCOPE:** define the target engine-owned passive-list projection and privacy contract for owned/revealed passives, including unknown/hidden requirements, source provenance, NPC/social privacy, versioning, migration boundaries and future Android consumer/test responsibilities.
 - **DO NOT:** implement passives or Android DTOs, reveal hidden requirements, promote SOC_0007/SOC_0010 or other records to canon/runtime, invent coefficients/thresholds, or create new save fields.
 - **ACCEPTANCE:** explicit projection allowlist/denylist, ownership/reveal semantics, stable version/error boundary, source/provenance handling, current-vs-target mapping and future Python/Android test matrix; P14 privacy/provenance contract is consumed rather than duplicated.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyr (PLAYER_VEYR / SESSION_VEYR_20261008T1747-0400_S02)
+- **CLAIMED_AT:** 2026-10-08 AST
+- **CLAIM_HEAD:** `8e0286b83d17087917d1f3a7eceb1eb718a8b7ec`
 
 **Wave-4 claim rule:** fresh HEAD -> INTENT -> Bulletin CLAIM -> re-fetch/verify -> START. Preferred claimant is guidance only. One active primary per Player-AI.
 
