@@ -1333,7 +1333,7 @@ Boundary: conversation only; Bulletin/Master Task Register remain authoritative.
 - **Consumes:** current 23-skill registry, seven-family Combat Class Catalog, Status/Level authority, faction/hierarchy membership standard, D-061 schema-v1 migration boundary and future Training/Mentor/Facility work.
 - **Defines:** profession vs job vs class; profession grade; institution vs faction rank; role vs rank; civic/social status; reputation separation; target stable-ID guidance; migration/projection/privacy rules.
 - **Current-runtime boundary:** `GameState` has no class/profession/rank/status top-level field; this child performs no runtime/save-schema expansion.
-- **Follow-on:** P12 materialized the Training / Mentor / Facility Progression Standard; direct next D-045 child is the Gate Twelve Progression Proof Packet, followed by the Progression UX Contract.
+- **Follow-on:** P12 materialized the Training / Mentor / Facility Progression Standard and P16 has since materialized the Gate Twelve Progression Proof Packet; the direct next D-045 child is the Progression UX Contract.
 - **Validation:** source/doc readback plus 23/23 current-skill and 7/7 class-family presence check; no Python/Android runtime test result is implied.
 
 
