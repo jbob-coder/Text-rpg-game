@@ -1091,7 +1091,10 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - MATERIALIZED CHILD: `docs/systems/PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md` — profession/job/class, profession grade, institutional rank, faction rank, role, civic/social status, reputation, global Level and ability/technique namespaces are separated with stable-ID, migration, privacy and player-safe projection guidance.
 - P7 VERIFICATION: current foundation cross-check found **23/23** registered skills and **7/7** target class families represented in the namespace packet, with zero missing names; current `GameState` remains without class/profession/rank/status top-level fields and D-061 schema-v1 ownership is preserved.
 - P7 EVIDENCE: `docs/evidence/P7_D045_PROFESSION_RANK_STATUS_NAMESPACE_2026-10-08.md`; materialized-child creation commit `aeef81e9101ba5a5b3e70f87182357957a3bbe1d`.
-- NEXT: create the Training / Mentor / Facility Progression Standard, then Gate Twelve proof packet and progression UX contract.
+- MATERIALIZED CHILD: `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md` — P12 defines CURRENT/TARGET/PROPOSAL-separated training-path, mentor/evaluator-capability and facility-capability ownership without duplicating `ACTIVITY_*` identity, training arithmetic, NPC/world owners or D-061 schema-v1 boundaries.
+- P12 VERIFICATION: committed readback contains **23/23** current runtime skill IDs and **7/7** target class-family rows with zero missing; stable proposal namespaces, legality/plateau/access/privacy rules, migration/test seams and explicit no-runtime/no-canon boundaries are present.
+- P12 EVIDENCE: `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`; primary creation commit `a61f920296bd4d11eefb83595e77ce339609ea39`; readback blob `7430a51a13c9f02161e0bdab6a92a35ab628b7b4`.
+- NEXT: create the **Gate Twelve Progression Proof Packet**, then the Progression UX Contract.
 - IMPLEMENTATION: deferred until design contracts are sufficiently coherent.
 
 
