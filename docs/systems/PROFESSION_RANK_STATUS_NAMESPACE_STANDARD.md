@@ -866,24 +866,19 @@ This child is reconstruction-grade when a future developer can answer without gu
 
 ---
 
-# 22. Direct next D-045 child
+# 22. D-045 child handoff
 
-The next D-045 child is:
+The Training / Mentor / Facility Progression Standard named by this P7 packet is now materialized as:
 
-**Training / Mentor / Facility Progression Standard**
+`docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`
 
-Its job is to define:
-- training activity records;
-- mentor/evaluator records;
-- facility capability records;
-- plateau/unlock relationships;
-- time/resource/equipment prerequisites;
-- interruption/injury/recovery interaction;
-- profession/class/skill/ability consumption of those systems;
-- player-safe training projection;
-- migration/test boundaries.
+P12 consumed the profession/rank/status namespaces defined here rather than inventing another occupational hierarchy. It preserves existing activity/time/resource owners, separates mentor/evaluator capability from NPC identity and facility capability from world-location identity, and maps all 23 current skills plus all seven target class families.
 
-That child should consume the profession/rank/status namespaces defined here rather than inventing another occupational hierarchy.
+The direct next D-045 child is now:
+
+**Gate Twelve Progression Proof Packet**
+
+That proof packet should consume P7 + P12 rather than reopening their namespace/ownership work.
 
 ---
 
