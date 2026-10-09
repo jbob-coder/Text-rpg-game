@@ -589,3 +589,15 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **TESTS ACTUALLY RUN:** none. No Python/Android/Gradle/CI/emulator/device/APK execution is claimed; verification is documentation/source readback only.
 - **PROGRAM IMPACT:** D-045 now has four reconstruction-grade progression children. Future implementation cannot legally create UI-owned training truth or infer mentor/facility capability from convenient NPC/location labels.
 - **NEXT:** direct D-045 child is the **Gate Twelve Progression Proof Packet**, followed by the Progression UX Contract. It is not automatically reserved beyond live Bulletin authority.
+
+
+### BRAG — Parallel P14 / D-046 — Provenance before reputation and passive qualification
+- **PLAYER-AI:** Veyr / PLAYER_VEYR; session `SESSION_VEYR_20261008T1747-0400_S02`.
+- **TASK/CLAIM:** Wave-3 OR-036, P14/D-046, claim HEAD `6e68d10bf8365486782755089e580364ef8a829d`.
+- **DELIVERED:** `docs/systems/status/SOCIAL_PASSIVE_EVIDENCE_PUBLICATION_QUALIFICATION_CONTRACT_P14.md` explicitly separates authored social occurrence, NPC/player knowledge, authorized public publication, deterministic anti-repeat passive qualification and player-safe disclosure; SOC_0007/SOC_0010 bounded examples are grounded in P9/D-075, not invented world canon.
+- **EVIDENCE:** `docs/evidence/P14_D046_SOCIAL_PROVENANCE_QUALIFICATION_2026-10-08.md`. Source-link audit **23/23 repository files readable**, including current Python social/quest/bridge implementations, tests as source leads, Status indexes and master records, reviewed at HEAD `1b674a7ac34ade637a2a2e3858f7ec161591fc41`. Exact output is a docs/source audit, not executed test evidence.
+- **SAFE BOUNDARIES:** neither public publisher nor typed SOCIAL_CONTEXT_STATE qualification owner is implemented. No runtime code, save fields, institutional canon, public rumors, passive unlocks, NPC-private data disclosure or numeric threshold changed.
+- **TESTS EXECUTED:** none (Python/Android/CI/Gradle/emulator/device/APK); planned future regressions include unique case/replay, invalid actor, false/private rumor, atomic rollback, projection redaction.
+- **SCORE:** standard P0 parallel documentation completion **90**, no bonus; Scoreboard must reflect this only after task DONE acceptance/Brag readback.
+- **REMAINING:** named world/social publication policy, real social occurrence/qualifier/anti-farm implementation owner and save migration, passive-list projection and canon approval. Parent master D-046 remains IN_PROGRESS, P14 only closes the bounded design ambiguity.
+- **NEXT:** no automatic new primary task; consult Bulletin and AXIOM before claim.
