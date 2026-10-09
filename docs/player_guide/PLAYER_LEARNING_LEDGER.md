@@ -382,3 +382,17 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - STILL UNKNOWN / BLOCKED: final mentor/facility population, canon institution/location names, numeric plateau thresholds, durable qualification/certification representation, final profession/rank content, Gate Twelve evolved-progression proof and Progression UX Contract.
 - NEXT PLAYER SHORTCUT: the direct D-045 child is the **Gate Twelve Progression Proof Packet**. It should consume D-066 current Phase 1 proof + P7 + P12, not invent another training owner.
 - SUPPORTING ARTIFACT: `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`.
+
+
+### P17 / D-026 — Do not confuse adversary memories with player intel
+- PLAYER-AI: Kestrel / PLAYER_KESTREL / SESSION_KESTREL_20261008T1752-0400_S02; OR-037 P17.
+- AUTHORITY / EVIDENCE: Bulletin P17 claim `a972a1b05c8059dfa2bba4e5ac0db8c3cc34f60e`; `docs/android/P17_D026_PERSISTENT_ADVERSARY_INTEL_PROJECTION_MIGRATION_2026-10-08.md`; `docs/evidence/P17_D026_ADVERSARY_INTEL_PROJECTION_2026-10-08.md`.
+- READ FIRST: V09 `PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md` §§17–21 and `ADVERSARY_PLAYER_SAFE_INTEL_STANDARD.md`; P17 migration map; `android_bridge.py::_view_for` and `GameEngine.kt::GameSnapshot`.
+- DO NOT REDISCOVER: V09 is approved design, not implemented; ordinary `GameState.npcs` / `social.py` already own NPC memory/knowledge. Current Android bridge/Kotlin have no adversary-intel domain. Gate Twelve contact promotion is unapproved.
+- OWNER OF BEHAVIOR: authoritative Python NPC/social/player knowledge and future V09 domain; world/faction/location/aftermath owners; Kotlin typed mapper, ViewModel and Compose are display/request only.
+- TRAP / FALSE ASSUMPTION: internal `npc_id`, private memories, hidden current location/adaptation/recurrence, rumor and tactical `CONTACT_n` token are not verified player-known identity.
+- VALIDATE WITH: P17 source check: 7/7 relative links, 11/11 paths, non-truncated tree. Future Python knowledge/redaction, old/new domain version, malformed/private key rejection, last-known freshness, Compose accessibility, merge-state/device checks. No executable tests run for P17.
+- CHANGE SAFELY: only extend the NPC state after V09 validation/schema owner approval; future optional `adversary_intel` must be observer-filtered, separately versioned (OR-015), typed, and compatible with old narrative packets.
+- STILL UNKNOWN / BLOCKED: V09 implementation/canon, final wire shape/ID, authenticated public-token mapping, final UI and actual test execution. Master D-026 IN_PROGRESS; D-072/073/074 untouched.
+- NEXT PLAYER SHORTCUT: start with the P17 field/owner/test matrix and current source; do not fabricate an omniscient rival screen.
+- SUPPORTING ARTIFACT: `docs/evidence/P17_D026_ADVERSARY_INTEL_PROJECTION_2026-10-08.md`.
