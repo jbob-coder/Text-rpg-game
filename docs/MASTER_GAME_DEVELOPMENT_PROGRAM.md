@@ -1076,9 +1076,9 @@ These documents supplement this master program. They do not authorize mass imple
 
 ## 20.1 Current program state
 
-Documentation remains the primary objective.
+Documentation remains a primary authority layer, but bounded implementation/proof work is now active where the live Bulletin explicitly authorizes it.
 
-Immediate order:
+The following list is the **historical 2026-10-02 immediate order**, retained as decomposition history rather than a current task queue:
 1. finish Gate Twelve Steps 8–14;
 2. perform the deeper existing-state source audit;
 3. write the progression/class/rank master;
@@ -1088,6 +1088,17 @@ Immediate order:
 7. write the application UX master;
 8. write save/content migrations;
 9. then schedule broad rebuilds.
+
+Current continuation is controlled by `docs/AI_TASK_BULLETIN_BOARD.md` plus `docs/THE_GAME_MASTER_TASK_REGISTER.md`. At the 2026-10-08 checkpoint:
+- Gate Twelve planning Steps 1–14 are complete;
+- D-069, D-070 and D-071 have verified tactical runtime/proof evidence;
+- D-072 durable aftermath is IN_PROGRESS under Silex;
+- D-073 remains BLOCKED until D-072 is genuinely DONE, with D-074 downstream;
+- Wave-4 P16/P17/P18 bounded documentation children are DONE;
+- D-045's direct documented follow-on is the Progression UX Contract, but that document is not claimable until the live Bulletin explicitly publishes an eligible READY lane;
+- P11 / CPR-006 remains a separately owned D-076 precondition at this checkpoint.
+
+Do not infer ownership from this master program. Fresh Bulletin state controls claimability.
 
 ## 20.2 Rebuild authority
 
