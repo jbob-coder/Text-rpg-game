@@ -24,3 +24,14 @@ The accepted root-cause evidence names PR #62 and workflow #345 as a historical 
 - #62, #57: retain PR URLs, individual head SHAs and D-067 root-cause / primary acceptance links in any closure comment.
 - #41, #45: retain early test/bridge iteration URLs and refer to accepted D-067 final authority. Exact blob mismatch is expected; it is not proof that earlier tests executed on current HEAD.
 - #55: **HOLD** pending a destination for its Compose test `Phase1ActivityChoiceTest.kt`; it validates actual UI tap -> stable training choice ID, distinct from the current generic affordance test with `onChoice = {}`. No device execution by Quorix.
+
+## Handoff — failed PR comment and Drive status
+
+At latest observed head `1243ee487ba3b7fc8ac9bd4770593c8cf5699012`, Quorix still owns P15 in the GitHub Bulletin. The following writes were **attempted but did not succeed**:
+- A top-level GitHub PR #57 provenance comment was rejected by connector safety checks. PR #57 was **not closed**.
+- The canonical Drive Quorix `STATUS.json` `current_task` and `claim_reference` replacement requests were rejected; those fields remained null on the last read despite the verified GitHub Bulletin claim. The separate `CURRENT_STATE.md` checkpoint was saved.
+- The normal Coordination Room and Mission Control START append attempts failed; the START trace above in this repository evidence file succeeded.
+
+**Do not claim P15 completion or a PR close while the state differs.** The next reviewer should re-fetch exact PR metadata and the Bulletin before any new attempt; use a single per-PR closure comment containing the evidence link, preserve commits/CI, close only the PR independently justified, and verify the resulting GitHub state. The #55 training-specific Compose callback regression remains a distinct **deferred test-port candidate**.
+
+Direct source links: [#62](https://github.com/jbob-coder/Text-rpg-game/pull/62), [#57](https://github.com/jbob-coder/Text-rpg-game/pull/57), [#55](https://github.com/jbob-coder/Text-rpg-game/pull/55), [#45](https://github.com/jbob-coder/Text-rpg-game/pull/45), [#41](https://github.com/jbob-coder/Text-rpg-game/pull/41). D-067 proof: `docs/evidence/D067_PHASE1_INVENTORY_EQUIPMENT_PROOF_2026-10-04.md`; D-068 proof: `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`; D-067 repair lineage: `docs/evidence/CRITICAL_FIX_D067_BRIDGE_RECONCILIATION_2026-10-04.md`.
