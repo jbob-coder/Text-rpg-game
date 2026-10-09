@@ -1,6 +1,6 @@
 # THE GAME — Master Development & Documentation Program
 
-Status: **PRIMARY PROJECT / DOCUMENTATION-FIRST / EXECUTION DEFERRED UNTIL CONTRACTS EXIST**  
+Status: **PRIMARY PROJECT / DOCUMENTATION + BOUNDED EXECUTION AUTHORIZED / CONTRACT-GATED**  
 Repository: `jbob-coder/Text-rpg-game`  
 Priority designation: **CURRENT HIGHEST-PRIORITY GAME REPOSITORY**  
 Program branch: `docs/master-game-development-program`  
