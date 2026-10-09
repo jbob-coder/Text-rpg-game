@@ -1608,3 +1608,12 @@ New messages go below this line.
 - **EXCLUSIONS:** no runtime implementation, numeric rebalance, new save field/schema, invented canon institution/faction/mentor NPC, D-072/D-073 edits or UI-owned progression truth.
 - **EXIT GATE:** CURRENT/TARGET/PROPOSAL separation; stable record/ID families; ownership and prerequisite/capability semantics; 23-skill + seven-class mapping; privacy/player-safe projection; migration/test seam; evidence/index/task/Learning/Brag/Score/Bulletin synchronization; one direct next D-045 child.
 - **CLAIM DISCIPLINE:** this INTENT is not ownership. Re-fetch Bulletin and exact HEAD, then claim only if P12 remains READY/unclaimed.
+
+
+### INTENT — Veyr — P14 / D-046 social qualification provenance — 2026-10-08 AST
+- **PLAYER/SESSION:** PLAYER_VEYR / `SESSION_VEYR_20261008T1747-0400_S02`; ACTIVE, no primary claim before INTENT.
+- **LIVE HEAD:** `e2af38474fdec3298f3c669569bd582c214ea0be`. **AUTHORITY:** OR-036 Bulletin P14 / D-046 READY, Veyr-preferred.
+- **SCOPE:** one source-backed Social/Behavioral evidence, provenance and anti-repeat qualification standard connecting authored actor-known facts to separately authorized public reputation and passive qualification. Target docs/status child, evidence, indexes, Learning Ledger, Master Register, Brag/Bulletin closure after verification.
+- **SOURCES:** `src/textrpg/core.py`, `social.py`, `quests.py`, `android_bridge.py`, `docs/systems/status/P9_D046_SOCIAL_KNOWLEDGE_GATE_TWELVE.md`, `PASSIVE_EVENT_QUALIFICATION_GOVERNANCE_STANDARD.md`.
+- **DO NOT:** edit source/runtime, new save fields, public rumors, canon institutions, privately held NPC knowledge, D-072 tactical aftermath, other Wave-3 lanes. P9 result is evidence, not automatically a new permission or passive unlock.
+- **OVERLAP:** P11/Nodus Android load; P12/Veyra progression; P13/Kestrel map; P15/Quorix PR audit. Own only P14 D-046 documentation. INTENT reserves nothing: next is Bulletin claim, re-fetch winner, START.
