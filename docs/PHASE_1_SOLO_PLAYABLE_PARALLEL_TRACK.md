@@ -351,6 +351,26 @@ The selected proof remains documented in:
 Phase 1 does not wait for currency, vendors, crafting, durability, encumbrance, random loot, or a large item catalog. Broader V07 population/economy work remains separate.
 
 
+## Phase 1 readiness checkpoint — quest branching and later consequence
+
+Requirement 7 (one quest chain with persistent branching):
+- selected proof: existing `QUEST_DEAD_RELAY` cooperative-with-Tamsin versus solo/secret resolution;
+- both routes reach terminal quest completion;
+- both routes survive save/load into fresh sessions and navigate to the same later `DISTRICT_HUB` checkpoint;
+- later player-safe divergence: cooperative route exposes `ASK_TAMSIN_ABOUT_SHARED_ENTRY`; solo route does not;
+- private memory identifiers/raw memory container remain outside the player-safe view;
+- normalized D-075-B branch-difference fixture asserts exactly the intended semantic differences;
+- completion head: `ad5767d312d9e6fef4b34c0f3cfa339c378826a4`;
+- evidence: `docs/evidence/D075_PHASE1_QUEST_BRANCH_WORLD_CONSEQUENCE_2026-10-04.md`;
+- PR #66 / workflow run #352 `37254171985`: Python **349 tests / OK**, Android unit/build/package PASS, emulator smoke/screenshot PASS;
+- APK SHA-256: `4bb7c133dcecfbc9958651f6b3e10e3f3d6aec594c42c2896a87118b735fb28b`.
+
+Status:
+**PHASE 1 REQUIREMENT #7 SATISFIED / BOUNDED PERSISTENT QUEST-BRANCH PROOF VERIFIED.**
+
+D-075 also provides a concrete requirement #11 world/actor-state consequence candidate through the later visible divergence, but the integrated Phase-1 exit gate still depends on the tactical chain and downstream integrated persistence/acceptance work. Do not treat D-075 alone as final Phase-1 acceptance.
+
+
 ## 15. Phase 1 boundary — persistent adversaries
 
 V09 persistent-adversary/world-memory documentation is now first-pass complete.
