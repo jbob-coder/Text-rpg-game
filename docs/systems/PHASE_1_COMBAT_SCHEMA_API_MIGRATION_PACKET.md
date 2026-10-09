@@ -1,6 +1,6 @@
 # THE GAME — Phase 1 Combat Schema & API Migration Packet
 
-Status: **APPROVED MIGRATION DESIGN / D-032 COMBAT CHILD / IMPLEMENTATION NOT STARTED**
+Status: **APPROVED D-032 COMBAT MIGRATION DESIGN / IMPLEMENTATION IN PROGRESS — consult the live Bulletin for task state**
 Repository: jbob-coder/Text-rpg-game
 Parents:
 - docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md
@@ -15,7 +15,19 @@ Map the approved Phase 1 tactical design into the current Python engine, strict 
 
 This document is intentionally implementation-specific. It identifies the smallest safe migration path from current source to one playable Gate Twelve tactical encounter.
 
-## 2. Current source reality
+## Implementation-state checkpoint (2026-10-08 AST; source-backed, not a new task claim)
+
+This packet is the **D-032 migration design**, not the live task queue. The design's pre-implementation baseline below must not be mistaken for the source tree after subsequent Phase 1 implementation. Before action, re-fetch `docs/AI_TASK_BULLETIN_BOARD.md` for task ownership and `docs/THE_GAME_MASTER_TASK_REGISTER.md` for acceptance and completion evidence.
+
+- **D-069 — DONE:** tactical schemas, authoring/validation and pure grid core have been implemented in `src/textrpg/combat_schema.py`, `src/textrpg/combat_grid.py` and corresponding content/validation integration. Its accepted evidence is in the Master Task Register and D-069 Learning Ledger.
+- **D-070 — DONE:** transient `CombatSession`/actor state, turn and action engine, movement/reactions and deterministic resolution have been implemented. Refer to `src/textrpg/combat_state.py` and `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`.
+- **D-071 — DONE:** knowledge-safe tactical decisions, objective/retreat logic and bounded AI implementation are evidenced in `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`; see the source modules `combat_knowledge.py`, `combat_rules.py` and `combat_ai.py`.
+- **D-072 — IN_PROGRESS / Silex at this checkpoint:** durable aftermath, injury and world-state publication remain owned by that task. No completed aftermath transaction is claimed by this documentation correction.
+- **D-073/D-074 — BLOCKED at this checkpoint:** the provisional Gate Twelve fixture plus Python combat bridge, and then Android tactical consumption, are downstream of accepted D-072 completion. Do not treat a design sketch below as implemented bridge, UI, save capability or approved canon.
+
+The sections that follow preserve the **original migration intent and historical starting assumptions**, including names of prospective APIs. Some planned modules now exist; others remain prospective. Check current source and the relevant finished-task evidence before treating any `must add`, `currently` or `no validator` statement as a live deficiency. No save-schema expansion or permanent Gate Twelve lore is authorized by this status note.
+
+## 2. Historical source baseline before D-069 (not a live inventory)
 
 Current GameState durable fields:
 - seed;
