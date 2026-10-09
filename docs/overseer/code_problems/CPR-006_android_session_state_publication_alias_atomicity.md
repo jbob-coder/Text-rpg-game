@@ -29,7 +29,7 @@ return self.scene_view()
 
 `loads_state()` validates that `scene_id` is non-empty but does not require it to exist in `RulesEngine.scenes`. `scene_view()` then calls `RulesEngine.get_scene()`, which rejects an unknown scene.
 
-Therefore a structurally valid save such as one with `scene_id = "SCENE_UNKNOWN"` can deserialize successfully, replace `session.state`, and only then fail projection. The public operation reports `LOAD_ERROR`, but the session can be left holding an undisplayable candidate instead of its previous playable state.
+Therefore a structurally valid save such as one with `scene_id = "SCENE_UNKNOWN"` can deserialize successfully, replace `session.state`, and only then fail projection. In the current source path, `scene_view()` wraps the authored-scene `RuleError` as `AndroidBridgeError("VIEW_ERROR")`, and `load()` does not catch that `AndroidBridgeError`; the current predicted public code is therefore `VIEW_ERROR`, after state publication. The repaired load API should use whatever stable load-rejection code AXIOM selects (recommended `LOAD_ERROR`) while preserving the previous playable state.
 
 The same identity ambiguity is visible in rollback paths that do:
 
@@ -123,9 +123,9 @@ Create a valid schema-v1 save whose `scene_id` is a non-empty unknown authored s
 
 1. capture the pre-load state identity and snapshot;
 2. call `session.load()`;
-3. assert public `LOAD_ERROR`;
-4. assert `session.state` still represents the pre-load playable state;
-5. assert `session.scene_view()` still succeeds;
+3. for the current pre-fix source, assert `AndroidBridgeError.code == "VIEW_ERROR"` and verify that the candidate was already published;
+4. assert the current post-failure `session.scene_view()` remains unusable for the unknown scene;
+5. after the repair, assert the AXIOM-selected stable load-rejection code (recommended `LOAD_ERROR`), preservation of the pre-load state identity/snapshot, and continued successful `session.scene_view()`;
 6. separately document/assert the intended `session.state` / `content.state` relationship after a successful valid load.
 
 ## Repair direction
