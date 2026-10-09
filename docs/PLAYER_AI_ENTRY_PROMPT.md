@@ -60,9 +60,17 @@ Fetch live authority HEAD, then read:
 
 Do not reread the entire repository unless the current task actually requires it.
 
-## Latest program snapshot when this prompt was created
+## Current authority checkpoint — 2026-10-08 AST (non-claiming)
 
-Treat this as historical immediately after HEAD changes; always re-fetch.
+**Read this before the preserved onboarding snapshot below.** As verified against the live Bulletin on this checkpoint, D-064, D-069, D-070, D-071 and D-080 are DONE. D-072 is `IN_PROGRESS` under Silex; D-073 and D-074 are dependency-BLOCKED; P11 / CPR-006 is `IN_PROGRESS` under Nodus's existing canonical Drive session, with PR #80 draft/unmerged at this checkpoint. The Bulletin exposes **no READY / unclaimed** primary. The old D-064 blocker, D-069 next-owner, D-080 READY and scoreboard figures below are a **preserved historical record**, not today's operating instructions or current points.
+
+**Live rule:** fetch authority HEAD + `docs/AI_TASK_BULLETIN_BOARD.md` + canonical Drive identity/session/claim immediately before acting; also read `docs/THE_GAME_MASTER_TASK_REGISTER.md` for task semantics. A logical Player-AI session ID that matches another execution's active task does **not** grant a second context permission to edit its branch, PR, task claim or Drive lock. Do not create duplicate execution ownership, release another execution's claim, or take a BLOCKED task.
+
+**Latest-snapshot rule:** any dated snapshot in this reusable entry prompt is non-authoritative once the live state advances. Use `docs/AI_SCOREBOARD.md` for scores, never the preserved roster counts below.
+
+## Historical program snapshot when this prompt was created
+
+Treat this as a preserved 2026-10-04 transition-era checkpoint, not a live task roster; always re-fetch.
 
 **Observed authority HEAD at this prompt refresh:** `fc7b802994cd81a0f22adc593313cb76e17e7c13`
 
