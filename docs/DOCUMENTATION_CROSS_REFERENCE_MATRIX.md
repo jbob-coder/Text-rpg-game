@@ -222,15 +222,17 @@ Status:
 
 ### `docs/THE_GAME_MASTER_TASK_REGISTER.md`
 Purpose:
-- operational queue.
+- semantic task registry for scope, dependencies, acceptance criteria, durable completion evidence and parent/child task relationships.
 
-Required update:
-- P0 documentation program;
-- priority-repository marker;
-- Gate Twelve document sequence;
-- world master;
-- pixel runtime composition;
-- final APK rebuild as late-stage task.
+Current status:
+- P0 documentation program, Gate Twelve implementation/verification chain, world/system masters, pixel/runtime composition work and late-stage APK gates are registered;
+- bounded Wave children such as P16/P17/P18 remain durable task evidence without replacing their unfinished parent tasks;
+- live ownership/readiness is intentionally subordinate to the Bulletin when operational state moves faster than the Register.
+
+Maintenance:
+- keep task semantics and durable completion evidence synchronized after real state changes;
+- reconcile stale NEXT/status prose against the live Bulletin without overwriting valid claims;
+- do not use the Register itself as a task-claim mechanism.
 
 ---
 
