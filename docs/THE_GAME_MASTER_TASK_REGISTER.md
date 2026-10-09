@@ -295,6 +295,12 @@ This section supersedes older statements about the top-level product objective w
 - WAVE_2_P8_EVIDENCE: `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md`; path/link/source existence inspection at `413aaa4d56f1d785e2e2004a948b765a89a66b81` (6/6 relative links; 10/10 referenced code/test paths), **no Python/Android/emulator tests run**.
 - WAVE_2_P8_RESULT: D-069/D-070/D-071 existing projection/owner boundaries mapped through future D-073 Python combat bridge and future D-074 typed Kotlin DTO/mapper, ViewModel delegation, Compose and error/redaction/version/legacy tests. OR-015 domain versioning and OR-034 provisional-only content are explicit; no gameplay/runtime/save changes or D-073/D-074 claims.
 - WAVE_2_P8_REMAINING: Master D-026 intentionally **IN_PROGRESS** for activity, hierarchical-map, adversary intel, evolved status, final APK and future exact-head runtime acceptance. Tactical wire format/action parameters will be finalized only after D-073 implementation is approved.
+- WAVE_3_P13_SLICE: **HIERARCHICAL WORLD-MAP PROJECTION MIGRATION CHILD DOCUMENTED (Kestrel / 2026-10-08)**; bounded P13 closure is governed by the live Bulletin; Master D-026 intentionally remains IN_PROGRESS.
+- WAVE_3_P13_DELIVERABLE: `docs/android/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_MIGRATION_2026-10-08.md`; creation commit `a06d07a7e5df480bce9a7adc5b1e5d3713850352`; parent Android consumer map linked at `ff1d95d6fad30c3a5b1a712baed9c1d9b2d6b060`.
+- WAVE_3_P13_EVIDENCE: `docs/evidence/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_2026-10-08.md`; at revision `f19ca1773ca35bdfbeabf8bceccc6eb38007b216`, 2/2 artifact Markdown links and 10/10 named source/test paths present in non-truncated Git tree. **No Python/Android/CI/emulator/phone tests executed.**
+- WAVE_3_P13_BOUNDARY: current flat Python map/discovery/travel -> typed Kotlin/Compose path documented; future independently versioned hierarchy, hidden-place/redaction, legacy `GameWorldMap`, local-coordinates and future test/owner gates distinguished. No runtime world map, save-schema, D-072 or D-073/D-074 implementation change.
+- WAVE_3_P13_REMAINING: activity, adversary intel, evolved progression/status, actual hierarchy/tactical runtime consumers, final APK destination mapping, executed integration/build/device evidence. No invented universal coordinate or authored place canon.
+
 ### TASK D-047 — Establish master documentation record
 - STATUS: `DONE`
 - PRIORITY: `P0`
