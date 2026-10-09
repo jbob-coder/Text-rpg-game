@@ -307,6 +307,8 @@ This section supersedes older statements about the top-level product objective w
 - WAVE_4_P17_BOUNDARY: live `AndroidGameSession._view_for` and Kotlin `GameSnapshot` lack adversary intel; proposed V09 observer-safe field allowlist, private NPC/adaptation/hidden-routing denylist, OR-015 optional version/legacy failure, typed mapper, Python action authority, accessible concealment and future tests recorded. No V09 runtime, new canon recurring enemy, new top-level state owner/save migration, D-072/D-073/D-074 work or shipped Android screen.
 - WAVE_4_P17_REMAINING: activity, evolved status, final APK projection/component mapping, any actual V09 and tactical/hierarchy consumers and exact-head runtime/build/device tests; V09/D-032 owns future adversary runtime and canon approval gates.
 
+- UNCLAIMED_D026_ACTIVITY_CONSUMER_TRACE_20261008: Kestrel documentation-only source audit committed `3acb895675c59ea17903d8637a0bf621318561ac` in `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` §20.1. Current D-068 Trace Chamber `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` is an authored `GameChoice` routed through `GameViewModel.choose` to authoritative Python training, with public time/resources/Powers returned via existing `GameSnapshot` fields; it is **not** a normalized V10 `ACTIVITY_*` domain/DTO. 4/4 section links and 3/3 explicit source/test file paths resolved on a complete Git tree; historical D-068 executable evidence remains historical and **no new tests were run**. Master D-026 remains IN_PROGRESS for future normalized V10 activity projection and other outstanding work. No task ownership acquired.
+
 ### TASK D-047 — Establish master documentation record
 - STATUS: `DONE`
 - PRIORITY: `P0`
