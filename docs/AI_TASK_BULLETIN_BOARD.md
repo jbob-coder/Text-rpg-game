@@ -635,6 +635,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
 - **DEPENDENCIES:** Relevant D-065 through D-075 proof tasks DONE.
 - **ACCEPTANCE:** One exact-head integrated sequence survives save/reload/continue with deterministic authoritative outcomes.
+- **CPR-006 PRECONDITION:** before D-076 is claimable, P11 must resolve Android session load validate-before-publish atomicity and the session/content state-owner contract under OR-036.
 - **BONUS:** `D-076-B` — corrupted/unsupported-save fixture.
 - **CLAIMED_BY:** —
 - **CLAIMED_AT:** —
@@ -899,8 +900,89 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **COMPLETION_HEAD / DOCUMENTATION:** `a506e4bdeb8e23a6590fec1ccbb4ecd17519465d` (evidence/learning synchronized before Bulletin closure; this Bulletin update itself produces a new HEAD).
 
 
-**Fallback rule:** if a preferred lane is already claimed, choose another READY Wave-2 lane only when it matches your expertise and has no file-family collision. If no READY lane remains, provide bounded review/support to an active claimant or stop at a real dependency boundary—do not manufacture work.
+**Wave-2 closure:** P6-P10 are all complete. Do not reclaim them without new regression evidence. Active Player-AIs should use Parallel Wave 3 below.
 
+
+## PARALLEL WAVE 3 — COMPLETION CONTINUITY / BLOCKER REMOVAL
+
+**Overseer ruling:** OR-036.  
+**Purpose:** Wave 2 is complete. Keep every active Player-AI productive while Silex owns D-072, and remove one known future save/load blocker before it reaches D-076.
+
+**Current critical path:** D-072 IN_PROGRESS / Silex -> D-073 -> D-074 -> D-076 -> D-077 -> D-078 -> D-079.
+
+### Critical-path visibility checkpoint — Silex / D-072
+- The D-072 claim remains valid and is NOT reassigned.
+- At this audit checkpoint, the planned remote branch `agent/silex-d072-durable-aftermath` is not present and no open D-072 PR is visible.
+- At Silex's next safe checkpoint it must post one of: `UPDATE` with current branch/candidate/evidence, `HELP/BLOCKED` with the exact blocking condition, or `RELEASE` if it cannot continue.
+- No automatic timeout/takeover is created by this notice. Its purpose is to prevent an invisible critical-path stall.
+
+### Parallel P11 — D-076 precondition / CPR-006 — Android session load atomicity
+- **TASK_REF:** `D-076 PRECONDITION / CPR-006`
+- **PREFERRED_CLAIMANT:** Nodus
+- **PRIORITY:** `P0 CRITICAL PARALLEL PRECONDITION`
+- **STATUS:** `READY`
+- **SOURCE_OF_WORK:** CPR-006 + OR-036.
+- **SCOPE:** repair `AndroidGameSession` state publication so `session.state` is the sole mutable playthrough owner after construction; detach it from `LoadedContentPack.state` initialization state; validate a loaded candidate through authored/player-safe view semantics before publication; reject a valid-schema unknown-scene save as stable `LOAD_ERROR` without replacing the prior playable session state.
+- **REQUIRED RED/GREEN:** reproduce current unknown-scene post-deserialize failure first; then prove failed load preserves prior state identity/snapshot and playable view; prove successful load updates session state while the content-pack initialization state is not a live alias.
+- **DO NOT:** change save schema v1; move scene legality into persistence; edit Silex D-072; widen Android projection payload; hide failure by catch-and-repair after publication.
+- **MERGE GATE:** runtime branch + PR to authority; focused regressions + full Python suite + normal merge-state gate.
+- **ACCEPTANCE:** CPR-006 causal repair and regression evidence are verified; D-076 retains its other dependencies and stays blocked until the tactical chain is ready.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+### Parallel P12 — D-045 — Training / Mentor / Facility Progression Standard
+- **TASK_REF:** `D-045`
+- **PREFERRED_CLAIMANT:** Veyra
+- **PRIORITY:** `P0 PARALLEL`
+- **STATUS:** `READY`
+- **SOURCE_OF_WORK:** explicit D-045 NEXT after completed P7 namespace packet.
+- **SCOPE:** author the reconstruction-grade training/mentor/facility progression standard tying the 23 skills, seven class families and P7 profession/rank/status namespaces to acquisition/training evidence, facility capabilities and future runtime owners.
+- **DO NOT:** implement runtime progression; invent confirmed canon institutions; override D-061; edit D-072/D-073.
+- **ACCEPTANCE:** stable IDs/ownership, training prerequisites, facility/mentor capability model, CURRENT/TARGET/PROPOSAL separation, migration/test seams and the next D-045 child are explicit.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+### Parallel P13 — D-026 — Hierarchical world-map projection migration contract
+- **TASK_REF:** `D-026`
+- **PREFERRED_CLAIMANT:** Kestrel
+- **PRIORITY:** `P0 PARALLEL`
+- **STATUS:** `READY`
+- **SCOPE:** document the future hierarchical world-map player-safe projection from authoritative world/location owners through Python projection, typed Kotlin DTO/mapper, ViewModel delegation, Compose consumers and direct tests. Preserve the current flat map compatibility path.
+- **DO NOT:** implement world hierarchy runtime; make Compose authoritative; expose hidden/undiscovered locations; overlap D-073/D-074 tactical payload implementation.
+- **ACCEPTANCE:** field/action/version/privacy/test migration map exists, legacy compatibility is explicit, and D-026 current-vs-future boundaries are synchronized.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+### Parallel P14 — D-046 — Social qualification / public-reputation provenance contract
+- **TASK_REF:** `D-046`
+- **PREFERRED_CLAIMANT:** Veyr
+- **PRIORITY:** `P0 PARALLEL`
+- **STATUS:** `READY`
+- **SOURCE_OF_WORK:** unresolved P9 boundary.
+- **SCOPE:** define the evidence/provenance and anti-repeat qualification contract needed before actor-known social facts can contribute to future public-reputation/passive qualification. Identify authoritative publishers, private-vs-public knowledge boundary, repeat/ledger semantics, future effect API owner and player-safe visibility.
+- **DO NOT:** promote SOC_0007/SOC_0010 or any passive to canon/runtime; invent public rumor facts; add save fields without accepted owner; expose NPC-private memory.
+- **ACCEPTANCE:** one explicit qualification/provenance/anti-repeat contract closes the P9 ambiguity and identifies exact remaining implementation/canon gates.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+### Parallel P15 — D-042 — Completed-task open-PR disposition audit, wave B
+- **TASK_REF:** `D-042`
+- **PREFERRED_CLAIMANT:** Quorix
+- **PRIORITY:** `P0/P1 PARALLEL`
+- **STATUS:** `READY`
+- **SOURCE_OF_WORK:** live open-PR queue after P10.
+- **SCOPE:** individually audit the still-open completed-task candidates #62, #57, #55, #45 and #41 against current authority and accepted D-067/D-068 evidence; classify live/superseded/evidence-only/do-not-merge; close only when exact evidence makes reversible closure safe.
+- **DO NOT:** touch PR #33 or the historical visual PR family #7-#31 outside these five; mass-close; merge divergent history; infer CI from old badges.
+- **ACCEPTANCE:** source-backed disposition table and individually justified queue hygiene; preserved URLs/commits/workflow evidence; D-042 handoff updated without runtime changes.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+**Wave-3 claim rule:** re-fetch HEAD -> INTENT -> Bulletin CLAIM -> re-fetch/verify -> START. Preferred claimant is guidance, not reservation. One primary per Player-AI. If the lane reaches a real owner-only/environment boundary, report it; do not invent completion.
 
 ## Queue maintenance
 
