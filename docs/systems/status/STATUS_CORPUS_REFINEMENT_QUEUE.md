@@ -649,6 +649,11 @@ Do not generate another large shallow wave merely to increase count.
 Continue deepening the existing corpus until reconstruction-grade patterns are stable.
 
 
+
+### P14/D-046 social event/publication provenance contract (bounded design)
+- `SOCIAL_PASSIVE_EVIDENCE_PUBLICATION_QUALIFICATION_CONTRACT_P14.md` defines occurrence authority, actor-held assertion, separately authorized public publisher, anti-replay qualification and projection; `docs/evidence/P14_D046_SOCIAL_PROVENANCE_QUALIFICATION_2026-10-08.md` captures the source-review boundary.
+- SOC_0007 and SOC_0010 remain Phase-C proposals. A single D-075 branch does not grant repeated-habit credit; player-known interaction is not public reputation.
+- Open after this packet: actual publisher/world policy, typed event & qualification owner/migration, actor/witness authorization, numerical thresholds, passive-list UI, classification proof and canon decision. No runtime or registry rows changed.
 ## Super Epic canon dry review
 
 Evidence:
