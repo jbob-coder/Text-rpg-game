@@ -46,6 +46,8 @@ These remain documentation contracts. Their existence does not claim runtime imp
 
 Working rule: current runtime facts and evolved target design stay explicitly separated. Migration/API work is downstream of target-game design.
 
+- [Phase 1 Progression Schema & API Migration Packet](PHASE_1_PROGRESSION_SCHEMA_API_MIGRATION_PACKET.md) — historical pre-D-066 migration design with a current implementation overlay: D-066 is DONE at final proof head `c60f2ca1f52caf95ced00272a57b432e7740a866` / run #319 `37250623837`; schema v1 remains authoritative, stable ability ID + typed Kotlin ability/technique/resource mapping are implemented for the bounded proof, and evolved class/profession/rank state remains separate future work.
+
 - [Evolved Skill Registry](EVOLVED_SKILL_REGISTRY.md) — full 23-skill target-game registry with training, world/tactical uses, class/profession affinities, content requirements and pixel-art presentation requirements.
 
 - [Combat Class Catalog](COMBAT_CLASS_CATALOG.md) — reconstruction-grade catalog for the seven target combat/adventure class families, including acquisition evidence, current-skill dependencies, feature ownership, tactical/world roles, cross-training, specialization axes, training/facility dependencies and future migration/test boundaries.
