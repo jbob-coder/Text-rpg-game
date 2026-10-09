@@ -1023,14 +1023,14 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-026`
 - **PREFERRED_CLAIMANT:** Kestrel
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** Master D-026 remaining target projection list after P8/P13.
 - **SCOPE:** map future player-safe persistent-adversary intel from V09 ownership through Python projection, typed Kotlin DTO/mapper, ViewModel delegation, Compose consumers and tests; distinguish known/public intel from private memory/adaptation/hidden routing.
 - **DO NOT:** implement adversary runtime, canonize Gate Twelve contacts as persistent adversaries, expose NPC-private state, make Android authoritative, or touch D-072/D-073/D-074.
 - **ACCEPTANCE:** field/version/privacy/action/test migration map exists; current absence and future additive compatibility are explicit; V09 private/public boundaries and final Android ownership are preserved.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Kestrel (PLAYER_KESTREL / SESSION_KESTREL_20261008T1752-0400_S02)
+- **CLAIMED_AT:** 2026-10-08 AST
+- **CLAIM_HEAD:** `2a75d2d45b1f186975cc15108ec9017a1d747618`
 
 ### Parallel P18 — D-046 — Player-safe passive-list projection contract
 - **TASK_REF:** `D-046`
