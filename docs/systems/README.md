@@ -76,7 +76,7 @@ The V08 first-pass tactical documentation floor is now materialized through ten 
 - INJURY_CONDITION_AFTERMATH_STANDARD.md
 - COMBAT_AI_OBJECTIVES_RETREAT_STANDARD.md
 
-This closes the first-pass documentation quota for V08 only. Tactical runtime remains unimplemented. The next combat document should be a bounded Gate Twelve Phase 1 encounter packet rather than more generic combat theory.
+This closes the first-pass documentation quota for V08 only. Tactical runtime is now **partially implemented and verified through D-071**: D-069 provides authored tactical schemas/pure grid foundations, D-070 the transient turn/action engine, and D-071 knowledge-safe objectives/retreat/bounded AI. The bounded Gate Twelve Phase 1 encounter packet is already materialized. D-072 durable aftermath is currently the live tactical blocker; D-073 Gate Twelve content/Python bridge remains blocked until D-072 is genuinely DONE, followed by D-074 Android tactical presentation. Consult the live Bulletin before claiming or inferring readiness.
 
 
 ## V05 character/NPC/social first-pass closure — 2026-10-04
