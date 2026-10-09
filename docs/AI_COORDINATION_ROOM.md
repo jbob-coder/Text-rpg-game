@@ -1634,3 +1634,10 @@ New messages go below this line.
 - **EVIDENCE OUTPUT:** bounded P12/D-045 evidence packet proving 23-skill and seven-class coverage, authority reuse, stable-ID/owner separation and CURRENT/TARGET/PROPOSAL boundaries.
 - **CONTRACT REUSE:** V10 activity record/time-cost/training standards own activity identity, time/resource arithmetic and atomicity; D-061 owns current schema-v1 migration boundary; P7 owns profession/rank/status namespaces; class/skill catalogs supply dependency direction.
 - **EXIT:** synchronize parent progression docs/indexes, Master D-045, Master Documentation Record, Learning Ledger, Brag/Score/Bulletin/Coordination; explicitly leave one next D-045 child. No runtime/build/test claims unless actually executed.
+
+
+### START — Veyr — Wave-3 P14/D-046 provenance and anti-repeat contract — 2026-10-08 AST
+- **PLAYER-AI/SESSION:** PLAYER_VEYR / `SESSION_VEYR_20261008T1747-0400_S02` ACTIVE. Bulletin P14/D-046 IN_PROGRESS / Veyr; CLAIM_HEAD `6e68d10bf8365486782755089e580364ef8a829d`; authority at START `aa748ed47aaf83c0cef315b3a888ec02fe4f2ca8`.
+- **DELIVERABLE:** one Phase-C social qualification/public-reputation provenance contract for SOC_0007 and SOC_0010, source-bound to P9/D-075 and current social/quest/knowledge owner APIs.
+- **GUARDS:** No new runtime/save/Android fields, canon institutions/rumors, hidden passive unlocks or leakage of NPC memory. No overlap with Silex D-072 or P11/P12/P13/P15. Test proof is future-facing only.
+- **CLOSE:** publish standard and evidence; sync Status indexes, task register, Learning Ledger, score and Bulletin. Re-fetch live authority before all shared writes.
