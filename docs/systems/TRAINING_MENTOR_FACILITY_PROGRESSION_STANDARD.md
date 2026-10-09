@@ -799,11 +799,7 @@ This child is complete when repository evidence proves:
 
 # 22. Direct next D-045 child
 
-After this standard, the direct next D-045 child is:
-
-**Gate Twelve Progression Proof Packet**
-
-That packet should consume:
+P16 has now materialized the **Gate Twelve Progression Proof Packet** using:
 
 - the current D-066 Phase 1 progression evidence;
 - the 23-skill registry;
@@ -813,9 +809,9 @@ That packet should consume:
 - current Trace Chamber activity evidence;
 - accepted world/content authority.
 
-Its purpose should be to prove one bounded, source-authorized progression route through the evolved contracts without inventing final professions, ranks, mentors, facilities or UI state.
+That bounded proof preserves CURRENT/TARGET/PROPOSAL separation and does not invent final professions, ranks, mentors, facilities or UI state.
 
-After the Gate Twelve proof packet, D-045 should proceed to the **Progression UX Contract**.
+The direct next D-045 child is now the **Progression UX Contract**.
 
 ---
 
