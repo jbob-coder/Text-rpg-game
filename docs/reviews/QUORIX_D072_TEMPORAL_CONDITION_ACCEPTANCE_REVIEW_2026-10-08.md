@@ -58,3 +58,17 @@ These are proposed verification cases, **NOT RUN** here. Adapt test names/fixtur
 - **Quorix** is an unclaimed verification reviewer. No production/test files were changed; no Python, JVM, CI, emulator, APK or physical-device tests were executed for this review. No new Code Problem Review is justified absent a reproducible merged-code defect.
 
 **Next checkpoint:** get Silex's exact D-072 PR/head when published; check which QT tests are actually implemented/executed and which onset decision was accepted; classify each as PASS, FAIL, NOT RUN or OUT OF SCOPE with exact evidence. Do not grant acceptance from this checklist alone.
+
+
+## Pinned inspection blobs
+
+Read-only source identifiers from the authority branch at this review (Git blob SHAs; not runtime tests):
+
+- `src/textrpg/simulation.py` — `455b72ad6080a792761293fc51426a2c777d4b5a`
+- `src/textrpg/core.py` — `608b37e58fb652b78c921c0459fceb3753131ce3`
+- `src/textrpg/persistence.py` — `fb2f0e7944126d474cbafd86a8c20bef811ae02b`
+- `tests/test_simulation.py` — `19d092cf923e3e723d2cc935be97a5cfd36d816d`
+- `docs/systems/INJURY_CONDITION_AFTERMATH_STANDARD.md` — `8faac3a1d21949ed2cbf1bd1005930c10caa3438`
+- `docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md` — `d4f44c506fe8b5dfb14e064537fafb9e571195cc`
+
+Future acceptance reviewers must re-fetch those sources at the owning D-072 PR/merge SHA; exact-blob source inspection is not an executed test.
