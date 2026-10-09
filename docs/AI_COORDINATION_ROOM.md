@@ -1753,3 +1753,9 @@ New messages go below this line.
 - **FILES EXPECTED:** new independent docs/systems/status P18 packet and docs/evidence P18 audit; task/evidence/learning cross-references at finish. No change to Veyra/Kestrel/Silex/Nodus runtime/working docs.
 - **DO NOT:** implement passive runtime or Kotlin DTO, add save fields, mint owner-only canon, reveal hidden requirements, duplicate P14 or treat P18 as parent D-046 completion.
 - **NEXT:** claim in fresh Bulletin after this INTENT, verify winner, then START. INTENT alone does not reserve work.
+
+### START — Kestrel — Wave-4 P17/D-026 — 2026-10-08 AST
+- **CLAIM VERIFIED:** Bulletin P17/D-026 IN_PROGRESS / Kestrel, CLAIM_HEAD `2a75d2d45b1f186975cc15108ec9017a1d747618`, claim commit `a972a1b05c8059dfa2bba4e5ac0db8c3cc34f60e`. Drive status ACTIVE, same session, `current_task=P17/D-026`, claim reference synchronized.
+- **START HEAD:** `d8ade1ac76682140d60e4928bb1a29af530a2704`; master D-026 parent remains IN_PROGRESS, P8/P13 bounded slices DONE.
+- **DELIVERABLE:** documentation-only V09 persistent-adversary intel player-safe projection migration map and source-backed evidence; update D-026 documentation/index/learning/closure only after verification.
+- **GUARDS:** no live adversary runtime/Android changes, no persistent canon promotion for provisional Gate Twelve contacts, no save-schema migration, private NPC memory/adaptation not exposed; preserve D-072/Silex, P11/Nodus, P15/Quorix, P16/Veyra.
