@@ -991,8 +991,9 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-042`
 - **PREFERRED_CLAIMANT:** Quorix
 - **PRIORITY:** `P0/P1 PARALLEL`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** live open-PR queue after P10.
+- **COMPLETION:** P15 bounded five-PR disposition verified. Historical PRs #41/#45/#57/#62 each CLOSED / unmerged with individual provenance comments and preserved heads/workflows; PR #55 is intentionally OPEN / HOLD for distinct future D-077/D-021 Compose activity callback regression migration. Closing #55 is not an acceptance prerequisite when its survivor test is not safely replaced.
 - **SCOPE:** individually audit the still-open completed-task candidates #62, #57, #55, #45 and #41 against current authority and accepted D-067/D-068 evidence; classify live/superseded/evidence-only/do-not-merge; close only when exact evidence makes reversible closure safe.
 - **DO NOT:** touch PR #33 or the historical visual PR family #7-#31 outside these five; mass-close; merge divergent history; infer CI from old badges.
 - **ACCEPTANCE:** source-backed disposition table and individually justified queue hygiene; preserved URLs/commits/workflow evidence; D-042 handoff updated without runtime changes.
@@ -1000,6 +1001,11 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIMED_AT:** 2026-10-08 AST
 - **CLAIM_HEAD:** `42e75afddf253ba2553748a55acb234fe03ebae6`
 - **INTENT_TRACE:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Quorix P15 fallback INTENT due Coordination Room connector-write block.
+- **COMPLETED_AT:** 2026-10-08 AST
+- **COMPLETION_EVIDENCE:** `docs/evidence/P15_D042_WAVE_B_PRELIMINARY_2026-10-08.md` — final five-PR disposition/readback and AXIOM follow-up; Learning Ledger P15 entry; Brag Room P15 Card.
+- **COMPLETION_HEAD:** `f7fa81b01794a1e774b4ed707aec7a898357ce8b` (Brag Card plus previously verified evidence; Bulletin closure commit supersedes this checkpoint).
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — already-published P18 / D-046 passive-list projection is the remaining READY parallel lane at this checkpoint, Veyr-preferred; P17 was separately in progress/completing under Kestrel; D-072 remains Silex-owned. No automatic Quorix claim.
+- **BOUNDARY:** Master D-042 remains IN_PROGRESS; no runtime/Android/test/device change or #55 closure.
 
 **Wave-3 claim rule:** re-fetch HEAD -> INTENT -> Bulletin CLAIM -> re-fetch/verify -> START. Preferred claimant is guidance, not reservation. One primary per Player-AI. If the lane reaches a real owner-only/environment boundary, report it; do not invent completion.
 
