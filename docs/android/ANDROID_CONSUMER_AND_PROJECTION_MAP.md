@@ -1085,3 +1085,13 @@ This is a **documentation-only D-026 child**, not D-073/D-074 completion, not a 
 - **Version:** suggested future `hierarchical_map` is a *proposal*, not live wire API; unknown required versions and malformed references must fail closed without compromising historical flat maps.
 - **Tests:** existing Python bridge map discovery/adjacency and Android consumer/gateway paths are identified; new cross-domain redaction, mapper, phone UI and merge-state execution are **planned only**.
 - **Master boundary:** D-026 remains IN_PROGRESS for activity, adversary intel, evolved status, final APK, actual tactical/hierarchy consumers and executed runtime/build evidence; P13 does not mark those complete.
+
+## 36. Wave-4 P17 / D-026 — Persistent-adversary intel migration
+
+**Status:** OR-037 bounded documentation child delivered; V09 persistent-adversary runtime and Android intel projection NOT implemented. **Owner:** Kestrel / P17. The exact CURRENT/PROPOSED split, V09 social/NPC knowledge provenance, optional Python `adversary_intel` domain, typed Android consumer, player-safe allowlist/denylist, OR-015 projection version/error and legacy compatibility, action delegation and future test matrix are in the [P17 adversary-intel projection migration contract](P17_D026_PERSISTENT_ADVERSARY_INTEL_PROJECTION_MIGRATION_2026-10-08.md).
+
+- **Present:** `GameState.npcs` and `social.py` ordinary NPC memory/knowledge owners; `AndroidGameSession._view_for` and current 21-field Kotlin `GameSnapshot` have **no** adversary-intel domain or action.
+- **Proposed:** V09 nested adversary-specific state (not a second actor registry), public observer-knowledge-filtered intel, additive independent domain version, strict typed Kotlin mapper, no raw private memory/adaptation/hidden-location exposure in UI or accessibility.
+- **Canon:** OR-034 temporary combat contacts are not persistent V09 identities; Gate Twelve adversary proof remains proposed and non-Phase-1-required.
+- **Verification:** [P17 evidence](../evidence/P17_D026_ADVERSARY_INTEL_PROJECTION_2026-10-08.md): 7/7 relative document links and 11/11 named source/test paths verified on a non-truncated exact Git tree; no executable tests/CI/emulator/device.
+- **Remaining:** Master D-026 IN_PROGRESS for activity, evolved-status, final APK consumer migration, future V09/tactical/hierarchy implementation and runtime/build acceptance. P17 closes only the bounded **documentation** slice.
