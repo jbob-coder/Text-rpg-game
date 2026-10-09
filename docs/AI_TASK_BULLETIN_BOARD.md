@@ -1002,6 +1002,52 @@ These lanes are independent of D-060 completion and exist specifically so additi
 
 **Wave-3 claim rule:** re-fetch HEAD -> INTENT -> Bulletin CLAIM -> re-fetch/verify -> START. Preferred claimant is guidance, not reservation. One primary per Player-AI. If the lane reaches a real owner-only/environment boundary, report it; do not invent completion.
 
+## PARALLEL WAVE 4 — POST-WAVE-3 CONTINUATION
+
+**Purpose:** keep completed Wave-3 documentation players productive without interfering with Nodus P11, Quorix P15, or Silex D-072. These lanes are bounded children of existing unfinished master tasks.
+
+### Parallel P16 — D-045 — Gate Twelve Progression Proof Packet
+- **TASK_REF:** `D-045`
+- **PREFERRED_CLAIMANT:** Veyra
+- **PRIORITY:** `P0 PARALLEL`
+- **STATUS:** `READY`
+- **SOURCE_OF_WORK:** Master D-045 explicit NEXT after completed P12.
+- **SCOPE:** materialize the Gate Twelve Progression Proof Packet showing how the current 23-skill foundation, seven target class families, profession/rank/status namespaces and training/mentor/facility contracts can be evidenced in one bounded Gate Twelve progression scenario without implementing the progression runtime.
+- **DO NOT:** invent canonical institutions/mentors, alter runtime progression, override D-061 schema-v1 migration authority, or edit D-072/D-073.
+- **ACCEPTANCE:** one reconstruction-grade proof packet separates CURRENT/TARGET/PROPOSAL, identifies stable IDs and domain owners, shows evidence/acquisition/training/class/rank handoffs, defines future tests/migration seams and names the Progression UX Contract as the next D-045 child.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+### Parallel P17 — D-026 — Persistent-adversary intel projection migration contract
+- **TASK_REF:** `D-026`
+- **PREFERRED_CLAIMANT:** Kestrel
+- **PRIORITY:** `P0 PARALLEL`
+- **STATUS:** `READY`
+- **SOURCE_OF_WORK:** Master D-026 remaining target projection list after P8/P13.
+- **SCOPE:** map future player-safe persistent-adversary intel from V09 ownership through Python projection, typed Kotlin DTO/mapper, ViewModel delegation, Compose consumers and tests; distinguish known/public intel from private memory/adaptation/hidden routing.
+- **DO NOT:** implement adversary runtime, canonize Gate Twelve contacts as persistent adversaries, expose NPC-private state, make Android authoritative, or touch D-072/D-073/D-074.
+- **ACCEPTANCE:** field/version/privacy/action/test migration map exists; current absence and future additive compatibility are explicit; V09 private/public boundaries and final Android ownership are preserved.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+### Parallel P18 — D-046 — Player-safe passive-list projection contract
+- **TASK_REF:** `D-046`
+- **PREFERRED_CLAIMANT:** Veyr
+- **PRIORITY:** `P0 PARALLEL`
+- **STATUS:** `READY`
+- **SOURCE_OF_WORK:** Master D-046 explicit remaining item: player-safe passive-list projection contract.
+- **SCOPE:** define the target engine-owned passive-list projection and privacy contract for owned/revealed passives, including unknown/hidden requirements, source provenance, NPC/social privacy, versioning, migration boundaries and future Android consumer/test responsibilities.
+- **DO NOT:** implement passives or Android DTOs, reveal hidden requirements, promote SOC_0007/SOC_0010 or other records to canon/runtime, invent coefficients/thresholds, or create new save fields.
+- **ACCEPTANCE:** explicit projection allowlist/denylist, ownership/reveal semantics, stable version/error boundary, source/provenance handling, current-vs-target mapping and future Python/Android test matrix; P14 privacy/provenance contract is consumed rather than duplicated.
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+**Wave-4 claim rule:** fresh HEAD -> INTENT -> Bulletin CLAIM -> re-fetch/verify -> START. Preferred claimant is guidance only. One active primary per Player-AI.
+
+
 ## Queue maintenance
 
 The queue is now live and multi-agent. Do not rely on the historical statement that D-060 was the only initial READY task. Re-fetch this board and the Scoreboard before every claim. Completing agents unlock direct dependents by evidence, not by rank alone.
