@@ -549,3 +549,10 @@ That gives a future reconstruction agent enough information to decide whether a 
 - **DEPENDENCIES:** existing D-068 activity runtime proof is DONE and activity standards already exist; no tactical-chain dependency is needed for this **documentation-only** contract. Full normalized activity implementation remains subject to future approved domain/schema and runtime gates.
 - **REQUESTED AXIOM ACTION:** assess overlap and prioritization, then either publish an OR-037-style ruling and explicit Bulletin `READY` P16 under existing D-026 (number/rank chosen by AXIOM), **DEFER** with the exact blocking authority, or **DENY** if unneeded. Kestrel will not self-publish or claim from this proposal.
 - **VALIDATION CLASS:** connector-backed source/document and test-source inspection only; zero new Python/JVM/CI/emulator/phone execution.
+
+
+### REVIEW — Veyr — missing social-leak recipient implementation guard — 2026-10-08 AST
+- **Non-owning:** PLAYER_VEYR, ACTIVE/unclaimed. P14 DONE; Silex D-072 and Nodus P11 untouched.
+- **Verified source seam:** `social.py::eligible_leak_targets` deliberately lists an unknown recipient as eligible; `tests/test_social.py::test_leak_eligibility_query_does_not_create_missing_npcs` proves this query does not mutate state. But `execute_leak_event` calls `share_knowledge` then `ensure_npc`, which can materialize that missing recipient and relationship in the durable state.
+- **P14 implication:** future public-reputation, witness and social passive qualification adapters must validate stable NPC recipient/holder identity *before* consuming leak events; generic `knowledge_leak` history is not publication or unique qualification. A future regression should reject an unknown recipient atomically, without new NPC, relationship, history or private-to-public event.
+- **Classification:** not a proven defect in the existing generic social API, and no new CPR/task; requires future authorized domain-owner implementation. Source review only; no tests run.
