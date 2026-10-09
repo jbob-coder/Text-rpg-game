@@ -149,11 +149,11 @@ If you eliminate the real cause, evaluate the work under `docs/AI_CRITICAL_ROOT_
 D-064/D-065/D-067/D-068/D-069/D-070/D-075 are DONE. D-071 is DONE; D-072 is IN_PROGRESS under Silex. D-073 is next after durable aftermath and is governed by OR-034 provisional-integration content authority. CPR-005 is resolved by OR-033: integer `trigger_priority`, default `0`, higher numeric value first, then higher round initiative -> `actor_id` -> `reaction_id`. Preserve Veyra's PR #77 branch evidence; do not treat it as a live claim.
 
 
-## Active-player unblock — Parallel Wave 2
+## Parallel Wave 2 — CLOSED / historical handoff
 
-The original P1-P5 bounded lanes are DONE. Do not wait behind Silex's D-072 and do not reclaim completed lanes.
+The original P1-P5 bounded lanes are DONE, and Wave-2 P6-P10 are also DONE. Do not reclaim them merely because D-072 remains occupied.
 
-Re-fetch the Bulletin and use Wave 2:
+Historical Wave-2 lanes:
 - Nodus-preferred: P6 / D-019 exact-revision inventory refresh.
 - Veyra-preferred: P7 / D-045 profession/rank/status namespace packet.
 - Kestrel-preferred: P8 / D-026 tactical projection migration contract — DONE (bounded documentation child; see live Bulletin and `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md`). Master D-026 still IN_PROGRESS.
@@ -163,16 +163,16 @@ Re-fetch the Bulletin and use Wave 2:
 Preferred claimant is guidance only. Ownership still requires INTENT -> Bulletin CLAIM -> verify -> START. D-072 remains Silex-only. OR-034 governs D-073 after D-072 completion.
 
 
-## Active-player continuation — Parallel Wave 3
+## Parallel Wave 3 — P11 active / P12-P15 closed
 
-Wave 2 is complete. Re-fetch the Bulletin and use Wave 3:
+Wave 2 is complete. P12-P15 are complete; P11 / D-076 precondition / CPR-006 remains Nodus's active runtime lane at this checkpoint. The list below is the Wave-3 assignment history, not a fresh task menu:
 - Nodus-preferred: P11 / D-076 precondition / CPR-006 Android session load atomicity.
 - Veyra-preferred: P12 / D-045 Training / Mentor / Facility Progression Standard.
 - Kestrel-preferred: P13 / D-026 hierarchical world-map projection migration contract.
 - Veyr-preferred: P14 / D-046 social qualification/public-reputation provenance contract.
 - Quorix-preferred: P15 / D-042 completed-task open-PR disposition audit wave B.
 
-P11 is the only Wave-3 runtime lane and must use a short-lived branch/PR + merge-state gate. P12-P15 remain bounded existing-master work.
+P11 is the only still-active Wave-3 runtime lane and must use a short-lived branch/PR + merge-state gate. P12-P15 are completed bounded existing-master work and must not be reclaimed without new authorized scope.
 
 Silex still owns D-072. The planned D-072 remote branch was not visible at the OR-036 audit; Silex must post UPDATE, HELP/BLOCKED or RELEASE at its next safe checkpoint. Do not infer takeover permission from missing remote work.
 
