@@ -1075,6 +1075,27 @@ Classification:
 - room-actor **presence** is no longer part of this debt because D-064 moved it to the player-safe room projection;
 - none of these findings justify raw-state access in Compose.
 
+### 30.1G Exterior module, infrastructure atlas and prop-member consumers — 2026-10-08
+
+**Documentation-only / unclaimed bounded audit.** Source checked at `db777394f20e11f852914d00fd512a4b223c6331`: `PixelEnvironmentModuleCatalog.kt`, `PixelEnvironmentPropCatalog.kt`, `PixelEnvironmentPreview.kt`, `GameScreen.kt::MapSection`, `SceneIllustration.kt` and dedicated catalog tests. Historical origin and differing per-asset integration stages remain with [Environment/Scene/Map Asset Provenance](../assets/ENVIRONMENT_SCENE_MAP_PROVENANCE_2026-10-03.md), §§4–5. Do not infer that listing a master in a catalog means it is displayed for every scene.
+
+| Current member ID(s) | Explicit source selector / screen consumer | Source-grounded status |
+| --- | --- | --- |
+| `DEPOT_FACADE_EXTERIOR` (128×64) | `PixelEnvironmentModuleCatalog.arrivalPreview("DISTRICT_PLAZA")` -> `PixelEnvironmentArrivalPreview` -> `GameScreen.kt::MapSection` for a selected public map node | KEEP, map arrival-preview visual. The art does not itself establish player discovery or legal travel. |
+| `MAINTENANCE_CORRIDOR_CONNECTOR` (128×64) | `arrivalPreview("SERVICE_TUNNEL")` through the same read-only preview | KEEP, current source has the exact location binding even though older historical wave status had said deferred. |
+| `MUNICIPAL_ARCHIVE_EXTERIOR` (128×64) | `arrivalPreview("DISTRICT_ARCHIVE")` through the same read-only preview | KEEP, only for selected known location. |
+| `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS_WALL`, `_FLOOR`, `_PANEL`, `_RAIL_VENT` (32×32 each; atlas ID `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS`) | Four sprites are grouped in `PixelEnvironmentModuleCatalog.infrastructureTileAtlas.tiles`; **not consumed** by `arrivalPreview` or `PixelEnvironmentArrivalPreview`; historical provenance §4 marks atlas DEFERRED_INTEGRATION | RETAIN source/test-backed atlas, **no main UI renderer consumer established** by this bounded check. Do not silently tile a hidden district, declare it globally dead, or discard it solely because the map arrival-preview path does not use it. |
+| `PROP_DEPOT_DOOR`, `PROP_RELAY_WORKBENCH`, `PROP_GATE_TWELVE_DOOR`, `PROP_TRACE_CHAMBER_APPARATUS` | `PixelEnvironmentPropCatalog.placements(locationId,sceneId)` returns these for `PLATFORM_NINE` (also `DISTRICT_PLAZA` only with `DISTRICT_HUB`), `RELAY_WORKBENCH`, `GATE_TWELVE`, `TRACE_CHAMBER`; `SceneIllustration` draws the returned placements | KEEP, conditional scene/location decoration. Door artwork cannot open doors or approve crossing a sealed gate. |
+| `PROP_TUNNEL_PIPE_SET`, `PROP_TUNNEL_CABLE_SET` | `placements("SERVICE_TUNNEL",...)` places pipe twice and cable once; `SceneIllustration` draws each explicit position | KEEP, reused decorative props; not collision, route or hazard authority. |
+| `PROP_ARCHIVE_SHELF`, `PROP_ARCHIVE_TERMINAL` | `placements("DISTRICT_ARCHIVE",...)` returns two shelves and one terminal | KEEP, no hidden archive access/intel implication. |
+| `PROP_WORKSHOP_BENCH`, `PROP_DISTRICT_NOTICE_BOARD` | `placements("WORKSHOP_ROW",...)` and conditional `placements("DISTRICT_PLAZA","DISTRICT_HUB")` | KEEP; these objects do not grant work, quest or conversation actions. |
+
+**Input/consumer guardrails:** `MapSection` requests arrival art only for a **selected existing** public `GameWorldMap.nodes` member; actual `reachable` and `onTravel(selected.id)` remain distinct, engine-owned semantics. `SceneIllustration` uses public `locationId`/`sceneId` to layer prop placements after scene overlays and decals; authored placement coordinates are local drawing offsets, not world-map/tactical coordinates or physics. `DISTRICT_PLAZA` prop placement is guarded by `sceneId == "DISTRICT_HUB"` while the three exterior previews use exact location IDs alone. `arrivalPreview` returns null for unknown locations, and `placements` returns an empty list for unknown locations.
+
+**Existing test-source coverage and limits:** `PixelEnvironmentModuleCatalogTest.kt` checks three distinct 128×64 modules, four 32×32 atlas tiles with unique IDs/palette, exact three public location preview lookups, and unknown-location null. `PixelEnvironmentPropCatalogTest.kt` enumerates all ten prop masters with their individual grid/palette dimensions and tests positive placement cases, duplicated shelf/pipe counts and unknown/conditional plaza absence. These source assertions were inspected but **not executed in this pass**. No Compose pixel/occlusion screenshots, device frame-budget, route privacy, Gradle, emulator or APK build evidence was produced.
+
+**Disposition:** retain all three preview modules and all ten scene props as source-consumed; preserve the deferred four-tile atlas for a separately approved visual composition consumer and future target QA. This closes only the **bounded member-consumer documentation gap** for these catalogs. Master D-026/D-029 and final-APK destination, entire-asset zero-consumer, runtime and accessibility acceptance remain open; no catalog/runtime/save/art file was changed.
+
 ## 31. Updated D-026 audit boundary
 
 The **file-level pixel catalog consumer audit is now complete** for the current source set.
