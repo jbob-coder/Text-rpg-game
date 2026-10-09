@@ -526,7 +526,7 @@ Examples:
 
 P12 has now materialized the full Training / Mentor / Facility progression standard at `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`.
 
-This P7 packet still establishes only the profession/rank/status namespace boundary; consume the P12 standard for training-path, mentor/evaluator-capability and facility-capability semantics. The direct next D-045 child is the Gate Twelve Progression Proof Packet.
+This P7 packet still establishes only the profession/rank/status namespace boundary; consume the P12 standard for training-path, mentor/evaluator-capability and facility-capability semantics. P16 has since materialized the Gate Twelve Progression Proof Packet; the direct next D-045 child is now the Progression UX Contract.
 
 Profession/rank/status progression may consume:
 - training activities;
@@ -874,11 +874,11 @@ The Training / Mentor / Facility Progression Standard named by this P7 packet is
 
 P12 consumed the profession/rank/status namespaces defined here rather than inventing another occupational hierarchy. It preserves existing activity/time/resource owners, separates mentor/evaluator capability from NPC identity and facility capability from world-location identity, and maps all 23 current skills plus all seven target class families.
 
+P16 has now materialized the **Gate Twelve Progression Proof Packet** from P7 + P12 without reopening their namespace/ownership work.
+
 The direct next D-045 child is now:
 
-**Gate Twelve Progression Proof Packet**
-
-That proof packet should consume P7 + P12 rather than reopening their namespace/ownership work.
+**Progression UX Contract**
 
 ---
 
