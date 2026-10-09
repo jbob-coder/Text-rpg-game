@@ -433,18 +433,25 @@ The owner's requested final large documentation block belongs here.
 
 # 23. What should happen now
 
-Do **not** start the final rewrite yet.
+Do **not** start a blind final rewrite yet.
 
-Immediate prerequisites:
-- finish Gate Twelve region documentation;
-- build world master child standards;
-- build progression master;
-- build social/rival master;
-- build combat master;
-- reconcile character visual authority;
-- build application UX master.
+The original documentation-floor prerequisites have substantially materialized:
+- Gate Twelve region/system documentation exists at reconstruction depth;
+- world master standards and child schemas exist;
+- progression, social/rival and tactical-combat masters exist;
+- the Android UX/application authority exists;
+- V12 bridge/build/CI/device/release companion standards exist;
+- bounded runtime/projection slices have already been implemented and verified rather than waiting for a single late rewrite.
 
-Then this plan becomes executable rather than speculative.
+The remaining execution gate is therefore **integration readiness**, not absence of master plans. Before a final APK reconstruction wave:
+- finish the live Phase 1 dependency chain, including D-072 aftermath -> D-073 Gate Twelve combat bridge/content -> D-074 Android tactical surface -> D-076/D-077 integration gates;
+- preserve P11/CPR-006 session-load atomicity acceptance before integrated save/load claims;
+- resolve remaining character/asset provenance and final visual approvals needed by the surfaces actually shipping;
+- complete required world/canon decisions instead of inventing them in UI/art;
+- lock accepted save/content/API migrations and player-safe projection contracts;
+- execute current-head Android/Python/CI/emulator/device/performance/release gates appropriate to the final candidate.
+
+This master is therefore **partially executable through bounded, contract-backed migrations**, while the all-at-once final rebuild remains intentionally blocked. Use the live Bulletin for task claimability; this section is a release/reconstruction gate, not a work queue.
 
 ## Final reconstruction matrix companion
 
@@ -457,7 +464,7 @@ See `APK_FINAL_RECONSTRUCTION_MATRIX.md` for the late-stage per-surface disposit
 
 That matrix also owns the candidate final screen rebuild order, character-panel integration rules, tactical/adversary surface boundaries, removal gates and final APK acceptance criteria.
 
-Execution remains blocked by the domain documentation and migration contracts.
+Final-rebuild execution remains blocked by unfinished domain **implementation/integration evidence**, accepted migrations, canon/asset decisions and release acceptance gates; missing first-pass master documentation is no longer the primary blocker.
 
 
 ## 24. V12 first-pass reconstruction companion standards — 2026-10-04
