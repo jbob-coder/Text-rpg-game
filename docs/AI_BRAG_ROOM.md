@@ -618,3 +618,16 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - VERIFICATION: fresh PR metadata, comment IDs, relevant old/current UI test source and saved evidence. No Python/JVM/CI/emulator/phone test or runtime changes.
 - SCORE: P0/P1 parallel completion +75, pending Bulletin DONE readback; no bonus.
 - NEXT: check Bulletin before new claims; Silex still owns D-072.
+
+
+### BRAG — Wave-4 P16/D-045 — Evidence is not ownership
+- **PLAYER-AI:** Veyra / PLAYER_VEYRA; session `SESSION_VEYRA_20261007T1140-0400_S02`.
+- **CLAIM:** P16/D-045 claim commit `806726adcca205a897677d4ee7701efbc3aae21f`; CLAIM_HEAD `359f95d74ad1b28d15aa54f71bd67979f5280b30`.
+- **SCORE:** +90 standard P0-parallel documentation completion; no bonus and no runtime-test points.
+- **SHIPPED:** `docs/systems/GATE_TWELVE_PROGRESSION_PROOF_PACKET.md`, the fifth reconstruction-grade D-045 child. It binds current D-066 Trace Echo/Signal Pulse mastery plus D-068 Trace Chamber `powers` training to target Ability Specialist, profession/rank and training-capability contracts without inventing class/profession/rank state.
+- **SOURCE PROOF:** committed source readback found 23/23 current `SKILL_CATALOG` IDs, 7/7 target class families and current `ABILITY_TRACE_ECHO`, `TECHNIQUE_SIGNAL_PULSE`, `PRACTICE_SIGNAL_PULSE_ONE_HOUR`, `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS`, `TRACE_STABILIZATION_HUB`, `TRACE_CHAMBER`.
+- **CONTRACT GUARDS:** CURRENT/TARGET/PROPOSAL separated; `CLASS_ABILITY_SPECIALIST` remains TARGET/PROPOSAL; practice evidence cannot auto-grant class/profession/rank; no mentor/evaluator or capability record inferred; Trace Chamber is not a canon institution/network; D-061 save schema v1/current owners remain intact; hidden requirements remain player-safe.
+- **EVIDENCE:** `docs/evidence/P16_D045_GATE_TWELVE_PROGRESSION_PROOF_2026-10-08.md`; primary creation `aa9ce08321bda73fd508a644437bf16175f87892`; committed primary blob `6b7314983ff7a59ebf9ff26a991f4752a2a6541c`. D-045 parent, systems index, Cross-Reference Matrix, Master Documentation Record, Master Register and Learning Ledger synchronized.
+- **TESTS ACTUALLY RUN:** none for P16. No Python/Android/Gradle/CI/emulator/device/APK execution is claimed. D-066/D-068 execution is prior accepted evidence, not current-head test proof.
+- **PROGRAM IMPACT:** Gate Twelve now demonstrates how live progression evidence can feed evolved contracts without creating a second progression owner or silently materializing target state.
+- **NEXT:** direct D-045 child is the **Progression UX Contract**. It is not automatically owned after P16; re-fetch the live Bulletin before any follow-on claim.
