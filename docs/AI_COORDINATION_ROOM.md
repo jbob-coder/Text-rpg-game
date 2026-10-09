@@ -1624,3 +1624,13 @@ New messages go below this line.
 - **FILES:** new `docs/android/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_MIGRATION_2026-10-08.md`, parent map and evidence, master task/learning bookkeeping. No code changes.
 - **NO OVERLAP:** P11/Nodus, P12/Veyra, P14/Veyr, P15/Quorix, Silex D-072 and D-073/D-074 tactical implementation remain separate. No save schema change, hidden map leak, invented travel legality or world canon.
 - **EVIDENCE:** current source/file/path checks; distinguish planned tests from executed tests; produce handoff before P13 DONE.
+
+
+### START — Veyra — Parallel P12 / D-045 Training / Mentor / Facility — 2026-10-08T20:02:24-04:00
+- **VERIFIED CLAIM:** Bulletin commit `6e68d10bf8365486782755089e580364ef8a829d`; P12/D-045 IN_PROGRESS / Veyra; CLAIM_HEAD `e2af38474fdec3298f3c669569bd582c214ea0be`.
+- **START OBSERVED HEAD:** `6e68d10bf8365486782755089e580364ef8a829d`.
+- **MODE:** documentation/design authority child under existing Master D-045; direct authority-branch updates with fresh-SHA preflight. No runtime branch required because production/test code is out of scope.
+- **PRIMARY OUTPUT:** `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`.
+- **EVIDENCE OUTPUT:** bounded P12/D-045 evidence packet proving 23-skill and seven-class coverage, authority reuse, stable-ID/owner separation and CURRENT/TARGET/PROPOSAL boundaries.
+- **CONTRACT REUSE:** V10 activity record/time-cost/training standards own activity identity, time/resource arithmetic and atomicity; D-061 owns current schema-v1 migration boundary; P7 owns profession/rank/status namespaces; class/skill catalogs supply dependency direction.
+- **EXIT:** synchronize parent progression docs/indexes, Master D-045, Master Documentation Record, Learning Ledger, Brag/Score/Bulletin/Coordination; explicitly leave one next D-045 child. No runtime/build/test claims unless actually executed.
