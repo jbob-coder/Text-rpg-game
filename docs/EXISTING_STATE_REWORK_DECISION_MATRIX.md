@@ -145,9 +145,9 @@ Decision:
 
 ## 10. Tactical combat
 
-Current target-scale tactical combat is not established.
+Target-scale tactical combat is now **partially established**. D-069, D-070 and D-071 provide verified authored schemas/grid foundations, transient turn/action/reaction state, knowledge-safe objectives/retreat and bounded AI. Durable aftermath, bounded Gate Twelve bridge/content and Android tactical presentation remain unfinished under D-072 -> D-073 -> D-074.
 
-Decision: **NEW SYSTEM**, integrated with existing authoritative state.
+Decision: **NEW TARGET SYSTEM / PARTIALLY IMPLEMENTED**, integrated with existing authoritative state rather than replacing its durable owners.
 
 Broad goals:
 - turn-based positional combat;
