@@ -1024,7 +1024,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-026`
 - **PREFERRED_CLAIMANT:** Kestrel
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** Master D-026 remaining target projection list after P8/P13.
 - **SCOPE:** map future player-safe persistent-adversary intel from V09 ownership through Python projection, typed Kotlin DTO/mapper, ViewModel delegation, Compose consumers and tests; distinguish known/public intel from private memory/adaptation/hidden routing.
 - **DO NOT:** implement adversary runtime, canonize Gate Twelve contacts as persistent adversaries, expose NPC-private state, make Android authoritative, or touch D-072/D-073/D-074.
@@ -1032,6 +1032,15 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIMED_BY:** Kestrel (PLAYER_KESTREL / SESSION_KESTREL_20261008T1752-0400_S02)
 - **CLAIMED_AT:** 2026-10-08 AST
 - **CLAIM_HEAD:** `2a75d2d45b1f186975cc15108ec9017a1d747618`
+
+- **COMPLETED_AT:** 2026-10-08 AST
+- **COMPLETION_HEAD:** `2395f6c033792a2e7ac7f67a47ecf2003f9c04db` (source/parent/Master/Cross-Reference/Learning/Brag evidence assembled before Bulletin closure).
+- **DELIVERABLE:** `docs/android/P17_D026_PERSISTENT_ADVERSARY_INTEL_PROJECTION_MIGRATION_2026-10-08.md`; indexed Android consumer contract, Master D-026 and documentation cross-references.
+- **EVIDENCE:** `docs/evidence/P17_D026_ADVERSARY_INTEL_PROJECTION_2026-10-08.md`; 7/7 links and 11/11 referenced source/test paths at non-truncated exact Git tree. No runtime tests/CI/device builds executed.
+- **LEARNING_RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — P17 private NPC memory versus public adversary intel.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — P17 player-safe adversary intel contract.
+- **SCOPE_BOUNDARY:** documentation-only closure. Master D-026 remains IN_PROGRESS; no V09 runtime, new canon adversary, Android DTO or save schema change.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** no automatic next claim. Consult live Bulletin for P18 availability and unfinished master work; preserve D-072/Silex.
 
 ### Parallel P18 — D-046 — Player-safe passive-list projection contract
 - **TASK_REF:** `D-046`
