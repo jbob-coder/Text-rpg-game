@@ -1,6 +1,6 @@
 # THE GAME — Tactical Movement, Pathing & Positioning Standard
 
-Status: **APPROVED FIRST-PASS CONTRACT / PHASE 1 DEFAULTS LOCKED FOR PROTOTYPE**
+Status: **APPROVED FIRST-PASS CONTRACT / PHASE 1 DEFAULTS LOCKED / D-069 GRID + D-070 MOVEMENT SLICE VERIFIED**
 Parents:
 - docs/systems/TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md
 - docs/systems/TURN_INITIATIVE_ACTION_BUDGET_STANDARD.md
@@ -8,6 +8,17 @@ Parents:
 ## 1. Purpose
 
 Define movement points, terrain cost, path preview/commit, movement interruption, forced movement, and positioning rules.
+
+### Current bounded runtime checkpoint
+
+Verified implementation now covers the Phase 1 movement substrate without claiming every future movement rule:
+- D-069: cardinal occupancy/traversability, deterministic pathfinding, explicit z transitions and transition-aware optimal pathing;
+- D-070: committed movement/sprint transactions, action-budget enforcement, rollback, reinforcement/round interaction and deterministic event/transcript behavior;
+- D-071: movement commits that integrate observer-specific detection/objective updates under the same rollback boundary.
+
+Evidence: `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md`, `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`, and `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`.
+
+This checkpoint does not claim the D-073 authored encounter/bridge, D-074 Android tactical surface, final terrain balance, or future special movement abilities.
 
 ## 2. Phase 1 movement allowance
 
