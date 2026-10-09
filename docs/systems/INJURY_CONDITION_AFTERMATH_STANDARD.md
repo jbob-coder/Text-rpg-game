@@ -177,6 +177,22 @@ Required:
 - hidden consequence redaction;
 - save-before/after policy.
 
-## 16. Phase 1 acceptance
+## 16. Phase 1 acceptance — current checkpoint
 
-Requirement #10 becomes implementation-ready only after one specific Gate Twelve injury has a trigger, modifiers, recovery path, and save/load test plan.
+The specific Gate Twelve proposal now exists in `docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md`:
+- proposed ID `COND_TUNNEL_LEG_INJURY`;
+- qualifying severity-1/severity-2 leg-injury fixture trigger;
+- proposed Agility/Athletics modifiers;
+- proposed `FIELD_TREATMENT`-style recovery taking 120 world minutes;
+- atomic condition removal after valid recovery;
+- aftermath/save-load test expectations.
+
+This moves requirement #10 from “missing specific injury design” to **SPECIFIC INJURY/RECOVERY PROPOSAL EXISTS**. It does **not** make the injury current runtime/canon content.
+
+Current implementation boundary:
+- D-072 is the separately owned durable-aftermath transaction task and remains the live prerequisite at this checkpoint;
+- OR-034 permits `COND_TUNNEL_LEG_INJURY` to be used as explicitly `PROVISIONAL_INTEGRATION` material in D-073 only after D-072 is genuinely DONE;
+- provisional use does not canonize wording, numeric balance, item requirements or long-term recovery design;
+- Phase 1 requirement #10 is not implementation-verified until the accepted integration proves trigger -> durable condition -> save/load -> authored recovery/removal without partial aftermath or hidden-state leakage.
+
+Use the live Bulletin for D-072/D-073 ownership/readiness; this contract does not reserve either task.
