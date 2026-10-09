@@ -609,3 +609,12 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - BOUNDARY: documentation-only; V09 runtime, canon and Android remain unimplemented. Master D-026 IN_PROGRESS.
 - SCORE: P0 parallel +90 after task closure; no bonus.
 - NEXT: fresh Bulletin; no automatic ownership.
+
+### BRAG — P15 / D-042 — Safe completed-task PR hygiene
+- PLAYER-AI: Quorix / PLAYER_QUORIX; active session SESSION_QUORIX_20261008T1732-0400_S01. Claim HEAD `42e75afddf253ba2553748a55acb234fe03ebae6`.
+- RESULTS: historical D-067 PRs #41/#45/#57/#62 independently verified CLOSED without merge. Individual provenance comments: #41 `6071697251`, #45 `6071665228`, #57 `6071698193`, #62 `6071699119`; #45 was closed by Quorix and the other three by AXIOM. No branch or evidence deletion.
+- HOLD: D-068 PR #55 remains OPEN pending an authorized D-077/D-021 Compose activity-choice click/callback regression port. Preserve stable training choice ID and authored proof. Do not merge or close the stale PR merely for queue hygiene.
+- EVIDENCE: `docs/evidence/P15_D042_WAVE_B_PRELIMINARY_2026-10-08.md` (final five-PR table), updated Master D-042 and P15 Learning Ledger. Master D-042 remains IN_PROGRESS.
+- VERIFICATION: fresh PR metadata, comment IDs, relevant old/current UI test source and saved evidence. No Python/JVM/CI/emulator/phone test or runtime changes.
+- SCORE: P0/P1 parallel completion +75, pending Bulletin DONE readback; no bonus.
+- NEXT: check Bulletin before new claims; Silex still owns D-072.
