@@ -183,10 +183,14 @@ Purpose:
 - core game direction;
 - high-level rules-engine philosophy.
 
-Needs:
-- audit against current master program;
-- link to world/progression/combat/social volumes;
-- contradictions logged rather than silently edited.
+Current status:
+- linked to the current master program plus progression, tactical, NPC/social, world, Android UX and pixel-runtime authorities;
+- explicitly bounded as a durable v0.1 design foundation rather than live task/save-schema/domain implementation authority;
+- current source, persistence and accepted migration contracts override older recommended field/layout examples when they differ.
+
+Maintenance:
+- preserve design identity/pillars;
+- log substantive contradictions against current domain authorities rather than silently rewriting historical intent.
 
 ### `docs/VISUAL_BIBLE.md`
 Purpose:
