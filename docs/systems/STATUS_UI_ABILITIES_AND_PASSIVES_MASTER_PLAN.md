@@ -474,3 +474,9 @@ Character art remains authored pixel art. Status effects do not authorize geomet
 12. UX/balance/test packets
 
 The catalog can then scale incrementally without rewriting the governing rules.
+
+---
+
+# 15. P18 player-safe passive-list projection boundary — documentation closure
+
+Wave-4 P18/D-046 target contract: `docs/systems/status/P18_D046_PLAYER_SAFE_PASSIVE_LIST_PROJECTION_CONTRACT.md`; source audit `docs/evidence/P18_D046_PASSIVE_LIST_PROJECTION_AUDIT_2026-10-08.md`. Current `GameState.perks` additive effects, anonymized deep Status attribution, and absent explicit Android passive DTO are preserved. Future acquisition and reveal remain separate domain decisions; the candidate projection is allowlisted, versioned and privacy-safe, not shipped. Parent D-046 continues Phase C/Phase F, canon, migration, UI and execution gaps. No runtime tests or new production authority have been supplied.
