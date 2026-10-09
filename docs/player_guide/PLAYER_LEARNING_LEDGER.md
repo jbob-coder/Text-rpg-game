@@ -329,8 +329,8 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - TRAP / FALSE ASSUMPTION: high skill does not equal profession qualification; profession does not equal class; reputation does not equal faction rank; organization role does not equal rank; a job assignment does not create permanent profession state. Do not implement a convenient `state.professions` or generic `ranks` map from this design packet.
 - VALIDATE WITH: P7 evidence records connector readback of the committed packet and structural coverage of **23/23** current skills plus **7/7** target class families, zero missing. No Python/Android runtime tests, CI, emulator, device or APK result was produced by P7.
 - CHANGE SAFELY: preserve stable semantic IDs; mark target/proposal records honestly; choose one future durable owner through migration design before adding save fields; validate parent references; preserve player-safe privacy for secret membership/clearance and hidden requirements.
-- STILL UNKNOWN / BLOCKED: final profession catalog, canon institutions and rank ladders, numeric grade/rank calibration, durable runtime representation, Gate Twelve progression proof, progression UX, and later target-schema/API migration. The Training/Mentor/Facility child is now complete under P12.
-- NEXT PLAYER SHORTCUT: P12 has now materialized the Training / Mentor / Facility Progression Standard. Consume P7 + P12 together; the direct next D-045 child is the **Gate Twelve Progression Proof Packet**. Re-fetch the Bulletin before claiming any next lane.
+- STILL UNKNOWN / BLOCKED: final profession catalog, canon institutions and rank ladders, numeric grade/rank calibration, durable runtime representation, Progression UX Contract, and later target-schema/API migration. The Training/Mentor/Facility child and Gate Twelve Progression Proof Packet are now complete under P12/P16.
+- NEXT PLAYER SHORTCUT: consume P7 + P12 + P16 together. The Gate Twelve proof is already materialized; the direct next D-045 child is the **Progression UX Contract**. Re-fetch the Bulletin before claiming any next lane.
 - SUPPORTING ARTIFACT: `docs/evidence/P7_D045_PROFESSION_RANK_STATUS_NAMESPACE_2026-10-08.md`; primary child `docs/systems/PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md`.
 
 
@@ -379,8 +379,8 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - TRAP / FALSE ASSUMPTION: high skill does not eliminate advanced-training gates; friendship does not prove teaching/certification capability; entering a facility does not grant training access; profession/class/rank/reputation are not interchangeable; Trace Chamber does not prove a canon facility network for every ability.
 - VALIDATE WITH: P12 documentation readback found **23/23** current skill IDs and **7/7** class-family rows with zero missing, plus CURRENT/TARGET/PROPOSAL, schema-v1, stable-capability namespaces and no-runtime markers. No Python/Android/CI/emulator/device tests were executed.
 - CHANGE SAFELY: reuse `ACTIVITY_*`; bind concrete mentor NPC and facility location only through their authoritative registries; keep player-safe known/hidden requirements separate; add durable state only through explicit migration if a real resumable/certification/evidence ledger needs it.
-- STILL UNKNOWN / BLOCKED: final mentor/facility population, canon institution/location names, numeric plateau thresholds, durable qualification/certification representation, final profession/rank content, Gate Twelve evolved-progression proof and Progression UX Contract.
-- NEXT PLAYER SHORTCUT: the direct D-045 child is the **Gate Twelve Progression Proof Packet**. It should consume D-066 current Phase 1 proof + P7 + P12, not invent another training owner.
+- STILL UNKNOWN / BLOCKED: final mentor/facility population, canon institution/location names, numeric plateau thresholds, durable qualification/certification representation, final profession/rank content and Progression UX Contract. P16 has now materialized the Gate Twelve evolved-progression proof.
+- NEXT PLAYER SHORTCUT: consume P16 instead of recreating its evidence model. The direct D-045 child is now the **Progression UX Contract**, and it must keep the P12 owner/privacy boundaries.
 - SUPPORTING ARTIFACT: `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`.
 
 
