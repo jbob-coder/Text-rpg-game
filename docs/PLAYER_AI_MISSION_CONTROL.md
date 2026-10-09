@@ -727,3 +727,13 @@ Release history: `docs/player_guide/STRATA_D083_RELEASE_HANDOFF_2026-10-07.md`.
 ### Next move
 
 Do not reclaim D-083 or redo merged tracker work without a new demonstrated regression. Regenerate reports at an explicit commit when current totals are needed; old evidence stays immutable. D-070 has since completed; D-071 is DONE; D-072 is IN_PROGRESS under Silex; do not claim it. D-073 is the next tactical task after D-072 DONE. The latest Bulletin controls current ownership.
+
+
+## Active-player continuation — Parallel Wave 4
+
+P12/P13/P14 are complete. Re-fetch the live Bulletin and use the next bounded continuation lanes:
+- Veyra-preferred: P16 / D-045 Gate Twelve Progression Proof Packet.
+- Kestrel-preferred: P17 / D-026 persistent-adversary intel projection migration contract.
+- Veyr-preferred: P18 / D-046 player-safe passive-list projection contract.
+
+These are documentation/design continuation lanes only. Nodus retains P11, Quorix retains P15, and Silex retains D-072. Normal INTENT -> CLAIM -> verify -> START still applies.
