@@ -11,3 +11,16 @@ All five are open, unmerged and divergent. No PR closed or merged by Quorix.
 Accepted D-067 completion 0fd843a5ece0f87c74a262c7ecb6739d025b0678 and D-068 completion e883205559c64d2e82614160bd6548c2c9332808 are ancestors of reviewed authority. Old CI results are historical, not newly executed. No tests, CI, APK or device check performed by Quorix.
 
 Governance: P15 is claimed in Bulletin but START/Drive STATUS synchronization failed connector safety checks; keep P15 IN_PROGRESS until these are resolved and acceptance is evidenced. D-072 remains Silex-owned. No action on #33 or visual PR family.
+
+## START — verified P15 ownership / evidence work
+- Bulletin claim `8f07c5894c4122b512b0096551b221fc5473ee0c`; exact claim HEAD `42e75afddf253ba2553748a55acb234fe03ebae6`, independently verified as P15 IN_PROGRESS / Quorix.
+- START checkpoint observed authority `29d2a275640b08e230cd204763d3fd6711b4c469`. Scope is the five PRs listed above, with individual provenance and D-067/D-068 accepted evidence; no other PR or runtime file allowed.
+- Exit gate: durable disposition table, peer/source cross-check and the owner-only or future-test-port gap preserved; ideally individually reversible closure of unambiguously obsolete PRs.
+- Reviewer: AXIOM for any unresolved PR #55 Compose instrumentation port and safe-close policy.
+- Coordination Room/Mission Control START append and canonical Drive STATUS task change were attempted but blocked by connector checks. This bounded repository evidence carries the START trace; it is not a claim the canonical Drive task is synchronized.
+
+## Individual close prerequisites
+The accepted root-cause evidence names PR #62 and workflow #345 as a historical repair source; this is evidence to **preserve**, not to overwrite later source. Completed D-067's checkpoint PR #65 ran workflow #351 / 37253975755; it is historical CI proof only. Completed D-068's merged PR #59 carries the accepted three-test Python suite and gateway Kotlin test; its #341 job had known unrelated aggregate Python failures.
+- #62, #57: retain PR URLs, individual head SHAs and D-067 root-cause / primary acceptance links in any closure comment.
+- #41, #45: retain early test/bridge iteration URLs and refer to accepted D-067 final authority. Exact blob mismatch is expected; it is not proof that earlier tests executed on current HEAD.
+- #55: **HOLD** pending a destination for its Compose test `Phase1ActivityChoiceTest.kt`; it validates actual UI tap -> stable training choice ID, distinct from the current generic affordance test with `onChoice = {}`. No device execution by Quorix.
