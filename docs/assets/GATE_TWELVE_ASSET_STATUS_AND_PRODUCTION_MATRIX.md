@@ -321,7 +321,7 @@ P0:
 - reconcile Service Tunnel/Quiet Stair open refinements.
 
 P1:
-- actor-projection contract + room-panel assets;
+- build/QA room-panel and contextual actor presentation assets **against the completed D-064 player-safe room-actor projection contract**; do not recreate actor-presence authority in art/UI;
 - Tamsin turnaround/portraits/diagnostic pose;
 - Jack remaining directional/portrait/status masters;
 - diagnostic reader;
