@@ -149,3 +149,20 @@ The live Bulletin's `Parallel P11 — D-076 precondition / CPR-006` entry remain
 **Future integration reviewer check:** verify the resolved P11 candidate's candidate-first validation and detached `AndroidGameSession.state` ownership at its *actual merged HEAD*, then separately verify D-072's all-or-nothing durable aftermath and its viewer-safe handoff. A successful tactical-session rollback does not prove Android load atomicity, and a fixed Android load does not prove D-072 aftermath rollback. Neither contract may be credited to this unexecuted documentation review.
 
 **Editorial correction:** escaped Markdown backticks in the prior source-to-test matrix have been replaced by normal inline code delimiters; no test/source assertions, task owner, acceptance state or code were changed.
+
+
+## P11 candidate-vs-authority evidence gate — post-review addendum (2026-10-08 AST)
+
+This entry supersedes only the *freshness* of the earlier P11 checkpoint, not its task ownership or CPR-006 contract. A direct GitHub comparison checked P11 [PR #80](https://github.com/jbob-coder/Text-rpg-game/pull/80), the authority-branch bridge, and the live Bulletin after the P18 closeout:
+
+| Surface | Readback finding | Interpretation |
+|---|---|---|
+| Authority branch / `src/textrpg/android_bridge.py` | Blob `73aa4c59edb18ef4c413976d5a71cdd2879a399e` still assigns `self.state = content.state` and publishes deserialized state before its view; no accepted repair on authority at this checkpoint. | Existing CPR-006 remains an authority-branch concern; **not** a newly reported defect. |
+| PR #80 / Nodus candidate | Open, **draft**, unmerged at inspection. Diff changes initialization to `deepcopy(content.state)` and load to `candidate = load_state(...)`, `validated_view = deepcopy(self._view_for(candidate))` before `self.state = candidate`. | Candidate source shape addresses isolation/late projection failure; it does not change repository truth before merge. |
+| PR #80 test additions | Three dedicated regressions for content-template isolation between two sessions, unknown authored scene preserving the prior session object/snapshot/view, and successful load preserving template isolation. | The tests directly exercise the P11 causal paths, but do not execute D-072 aftermath or P14 publicity qualification. |
+| PR #80 CI evidence, **reported by project reviewers** | Quorix's PR comment identifies red run `37863493737` at test-first SHA `808f704d` (481 tests, three expected failures), green run `37863439739` at fix SHA `3b3ac9a5` (481/481 Python pass; Android unit/build and emulator jobs reported pass). AXIOM separately requires current-merge-candidate CI after branch synchronization. | These are **linked reviewer reports**, not logs replayed or tests executed by Veyr. Do not grant acceptance from them alone. |
+| Bulletin ownership | P11 = `IN_PROGRESS / Nodus`; D-072 = `IN_PROGRESS / Silex`; D-073 remains `BLOCKED`. | No claim transfer or D-073 unlock. |
+
+**Disjoint atomicity obligations.** P11 proves Android's candidate state can be rejected without replacing a *playable session* and without aliasing the content template. D-072 must separately prove durable combat-aftereffect rollback across NPC memories, relationships, quest, flags, conditions, history, time and replay semantics. P14/P18 must separately ensure neither private observation nor ownership/reveal data can be laundered into public passive projection. A single green P11 view test does not close the other gates.
+
+**Review action only:** once PR #80 is actually merged, re-read its final authority-branch implementation and exact merge-state tests; retire this historical candidate-vs-authority distinction then. Until that event, keep PR #82 as non-owning evidence, not a code-change or test-pass claim. This note makes no new CPR, status change, or canonical assertion.
