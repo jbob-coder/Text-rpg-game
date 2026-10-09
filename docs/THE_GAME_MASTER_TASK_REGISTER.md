@@ -218,7 +218,7 @@ This section supersedes older statements about the top-level product objective w
   - `docs/android/ANDROID_CONSUMER_FIELD_AUDIT_2026-10-04.md` maps all **19** current `GameSnapshot` fields and current engine/ViewModel action paths, and now includes Veyra's exact consumer/test-contract checkpoint at source revision `e78e67c56b1ba0e1189897fba862b553e32573aa`.
   - `docs/android/ANDROID_NAVIGATION_AND_EPHEMERAL_STATE_AUDIT_2026-10-04.md` separates navigation/application/Compose transient state from gameplay authority.
   - `docs/android/PIXEL_MEMBER_ASSET_ID_CONSUMER_AUDIT_2026-10-04.md` closes the current member/asset-ID zero-consumer pass.
-  - D-030's actor/room **implementation migration map is complete** under D-026; D-064 owns runtime implementation/equivalence/redaction proof.
+  - D-030's actor/room **implementation migration map is complete** under D-026; D-064 has since completed the runtime implementation/equivalence/redaction proof and must be treated as accepted predecessor evidence rather than pending work.
 - CONFIRMED CURRENT TEST GAPS:
   - dedicated QuestSection projection/render test;
   - direct `contentId` assertion;
@@ -227,7 +227,7 @@ This section supersedes older statements about the top-level product objective w
   - fuller identity projection/UI contract (current mapper evidence directly covers name/level only in the audited primary test surfaces);
   - future actor/room, hierarchical-map, activity, combat and adversary projection tests after those projections exist.
 - REMAINING:
-  - D-064 runtime actor/room projection implementation plus equivalence/privacy evidence; the migration-map documentation itself is no longer a blocker;
+  - preserve D-064 completed actor/room projection equivalence/privacy evidence; remaining actor work is broader context-panel/presentation coverage rather than reimplementing the completed projection;
   - future activity/combat/hierarchical-map/adversary projection implementation contracts and consumers;
   - final destination APK component migration map;
   - exact-head Android test/build execution when implementation/test changes are made.
