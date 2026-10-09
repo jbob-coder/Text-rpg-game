@@ -104,7 +104,7 @@ Own/review:
 - later tactical presentation handoff with Veyra.
 
 Verified historical execution:
-- D-064 is DONE. Later bounded P8/D-026 and P13/D-026 documentation slices are also DONE; current P17/D-026 ownership/availability must be read from the live Bulletin and canonical Drive STATUS.
+- D-064 is DONE. Bounded P8/D-026, P13/D-026 and P17/D-026 documentation slices are also DONE; Master D-026 remains IN_PROGRESS for normalized activity/evolved-status work, actual target consumer implementation, final APK mapping and executed acceptance. Current availability must be read from the live Bulletin and canonical Drive STATUS.
 
 Standing boundary:
 - OR-010 applies: `placement_key` is a bounded presentation adapter, not durable world-position authority.
@@ -126,7 +126,7 @@ Own/review:
 - Tamsin Phase 1 proof.
 
 Current execution:
-- D-065 and D-075 are DONE, as are the bounded P9/D-046 and P14/D-046 documentation slices. Veyr's current availability/primary must be read from the live Bulletin and canonical Drive STATUS, including Wave-4 claims.
+- D-065 and D-075 are DONE, as are the bounded P9/D-046, P14/D-046 and P18/D-046 documentation slices. Master D-046 remains IN_PROGRESS beyond those children; Veyr's current availability/primary must be read from the live Bulletin and canonical Drive STATUS.
 
 Likely downstream review:
 - D-075 quest/world consequence;
@@ -137,7 +137,7 @@ Veyr does not own Android presentation or tactical engine mechanics.
 
 ### Quorix — Fifth Player-AI Seat: Verification, Red-Team & Performance Lead
 
-**Status:** FILLED / ACTIVE at this documented checkpoint. Parallel P5 / D-042 bounded lane is complete; availability and later D-042 claims must be confirmed from the live Bulletin and canonical Drive STATUS.
+**Status:** FILLED / ACTIVE at this documented checkpoint. Parallel P5 / D-042 and Wave-3 P15 / D-042 bounded audit lanes are complete; Master D-042 remains IN_PROGRESS. Availability and any later D-042 claim must be confirmed from the live Bulletin and canonical Drive STATUS.
 
 Primary responsibility after assignment:
 - cross-branch source archaeology;
@@ -149,8 +149,8 @@ Primary responsibility after assignment:
 - final acceptance evidence quality.
 
 Current execution:
-- Parallel P5 / D-042 bounded cross-branch survivor audit DONE; master D-042 remains IN_PROGRESS for broader delegated gaps.
-- Quorix remains the verification/red-team specialist; any active primary (including Wave-3 P15/D-042) and availability must be confirmed from the live Bulletin and canonical Drive STATUS. D-083 is complete following Silex's verification/handoff of Strata's implementation.
+- Parallel P5 / D-042 bounded cross-branch survivor audit and Wave-3 P15 historical-PR disposition audit are DONE; Master D-042 remains IN_PROGRESS for broader delegated gaps.
+- Quorix remains the verification/red-team specialist; any new active primary and availability must be confirmed from the live Bulletin and canonical Drive STATUS. D-083 is complete following Silex's verification/handoff of Strata's implementation.
 
 Likely downstream leadership:
 - D-076 integrated regression support;
