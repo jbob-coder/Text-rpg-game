@@ -225,7 +225,7 @@ An area is visually ready only when:
 
 ## Operational child
 
-[Room composition implementation contract](ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md) records the actual fixed actor lookup, future safe presence/panel contract and raster-precedence acceptance requirements.
+[Room composition implementation contract](ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md) records the historical fixed-lookup baseline, the **implemented D-064 player-safe room-actor presence boundary**, remaining contextual-panel/presentation extensions and raster-precedence acceptance requirements.
 
 
 ## 15. Target beast-presence extension — D-044 selective extraction
@@ -238,7 +238,7 @@ Source provenance:
 - `docs/program/15_CONTEXTUAL_BEAST_PRESENCE_ADDENDUM.md` blob `d1708154489f7320f75f285e4763acb79b3ac662`;
 - selectively extracted under D-044.
 
-This extension does not change the current D-030 actor-projection implementation status. It defines how future beast presence must fit the same authority principles when that domain is implemented.
+D-064 has already implemented the human/NPC room-actor presence projection described by D-030. This extension does **not** imply beast presence is implemented; it defines how future beast presence must fit the same player-safe authority principles when that domain is introduced.
 
 ### 15.1 Presence authority
 
