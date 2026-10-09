@@ -4,7 +4,8 @@
 **Owner task:** D-081  
 **Primary tool:** `tools/project_status_tracker.py`  
 **Existing corpus authority:** D-019 / `tools/documentation_inventory.py`  
-**Task semantic authority:** `docs/THE_GAME_MASTER_TASK_REGISTER.md`
+**Live task operational authority:** `docs/AI_TASK_BULLETIN_BOARD.md` for READY/IN_PROGRESS/BLOCKED/DONE claim/readiness state  
+**Task semantic/completion authority:** `docs/THE_GAME_MASTER_TASK_REGISTER.md` for registered task scope and the conservative completion metric
 
 ## 1. Purpose
 
@@ -26,12 +27,13 @@ For a status report:
 
 1. exact Git revision / repository files;
 2. fresh runtime/build/test evidence for implementation claims;
-3. `docs/THE_GAME_MASTER_TASK_REGISTER.md` for semantic task state;
-4. D-019 / `tools/documentation_inventory.py` for detailed corpus inventory;
-5. `docs/MASTER_DOCUMENTATION_RECORD.md` for documentation-area interpretation;
-6. generated project-status report.
+3. `docs/AI_TASK_BULLETIN_BOARD.md` for live task readiness, claim ownership and operational blocked/DONE state;
+4. `docs/THE_GAME_MASTER_TASK_REGISTER.md` for registered task semantic scope and the unweighted DONE/total completion metric;
+5. D-019 / `tools/documentation_inventory.py` for detailed corpus inventory;
+6. `docs/MASTER_DOCUMENTATION_RECORD.md` for documentation-area interpretation;
+7. generated project-status report.
 
-If the generated report conflicts with a higher authority, fix the tracker or regenerate it. Do not edit the number by hand.
+The generated tracker remains intentionally Register-based for reproducible completion percentages. It does **not** replace the Bulletin's live claim/readiness overlay. If Bulletin and Master Register differ, report the divergence explicitly and use the Bulletin for current ownership/readiness while preserving the Register for semantic scope and the tracker percentage. If a generated report conflicts with its higher structural/semantic authority, fix or regenerate the tracker; do not edit generated numbers by hand.
 
 ## 3. Completion percentage
 
@@ -115,9 +117,11 @@ When Nodus or another Player-AI reports project status, include at minimum:
 5. repository Markdown count;
 6. docs/ Markdown count;
 7. document-like count;
-8. task states by category;
-9. major active/blocking tasks;
-10. explicit boundary that the task percentage is not a total-content estimate.
+8. Register task states by category;
+9. live Bulletin READY/IN_PROGRESS/BLOCKED summary with current claimants;
+10. any Bulletin ↔ Master Register state divergence that affects ownership/readiness;
+11. major active/blocking tasks;
+12. explicit boundary that the task percentage is not a total-content estimate.
 
 ## 8. Update rules
 
@@ -125,8 +129,9 @@ When Nodus or another Player-AI reports project status, include at minimum:
 - Regenerate from the desired exact revision.
 - When new tasks are added, the denominator legitimately changes.
 - When a task changes state, the percentage changes only if the Master Task Register changes.
+- A Bulletin-only claim/readiness transition may change the **live operational overlay** without changing the Register-derived completion percentage; report both rather than forcing one into the other.
 - Historical snapshots remain valid only for their recorded source HEAD.
-- D-019 remains the detailed corpus/inventory authority; D-081 is the reporting aggregator.
+- D-019 remains the detailed corpus/inventory authority; D-081 is the reporting aggregator, not the live task-claim authority.
 
 ## 9. Validation
 
