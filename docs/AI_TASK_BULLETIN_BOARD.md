@@ -960,14 +960,14 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-046`
 - **PREFERRED_CLAIMANT:** Veyr
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** unresolved P9 boundary.
 - **SCOPE:** define the evidence/provenance and anti-repeat qualification contract needed before actor-known social facts can contribute to future public-reputation/passive qualification. Identify authoritative publishers, private-vs-public knowledge boundary, repeat/ledger semantics, future effect API owner and player-safe visibility.
 - **DO NOT:** promote SOC_0007/SOC_0010 or any passive to canon/runtime; invent public rumor facts; add save fields without accepted owner; expose NPC-private memory.
 - **ACCEPTANCE:** one explicit qualification/provenance/anti-repeat contract closes the P9 ambiguity and identifies exact remaining implementation/canon gates.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyr
+- **CLAIMED_AT:** 2026-10-08T20:02:10-04:00
+- **CLAIM_HEAD:** `6e68d10bf8365486782755089e580364ef8a829d`
 
 ### Parallel P15 — D-042 — Completed-task open-PR disposition audit, wave B
 - **TASK_REF:** `D-042`
