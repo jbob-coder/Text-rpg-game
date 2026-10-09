@@ -76,12 +76,14 @@ Own/review:
 
 Current execution:
 - D-066 and D-068 are complete;
-- Parallel P3/D-045, P4/D-046, D-069 and Parallel P7/D-045 are complete;
+- Parallel P3/D-045, P4/D-046, D-069, Parallel P7/D-045 and Parallel P12/D-045 are complete;
+- P12 materialized `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md` as documentation/design authority only; Master D-045 remains IN_PROGRESS, and the direct documented follow-on is the Gate Twelve Progression Proof Packet, then the Progression UX Contract. P12 completion does not reserve either follow-on;
 - D-070 and D-071 are complete under Silex with Veyra predecessor credit preserved where recorded;
 - D-072 is IN_PROGRESS under Silex; Veyra is ACTIVE with no current primary claim and remains the gameplay/tactical review lead.
 
 Likely downstream leadership/review:
 - review D-072 gameplay/aftermath semantics without overriding Silex ownership;
+- claim another D-045 documentation child only when the live Bulletin explicitly makes an eligible lane READY/unclaimed;
 - D-073 becomes claim-eligible only after D-072 is genuinely DONE and the Bulletin promotes it;
 - D-074 remains presentation-owned downstream and does not move gameplay authority into Compose.
 
