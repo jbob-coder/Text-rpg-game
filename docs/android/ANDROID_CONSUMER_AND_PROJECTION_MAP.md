@@ -928,6 +928,24 @@ No whole pixel catalog should be removed from the current evidence based only on
 
 **Remaining work:** all other pixel catalog members, cross-file/transitive references, test-only assets, per-member provenance/replacement choices and actual runtime screenshots still require independent proof before any removal or promotion.
 
+### 30.1B UI icon/utility asset-ID consumer cross-check — 2026-10-08
+
+**Scope:** 17 existing catalog asset IDs (15 UI icons and two utilities), inspected at authority `9a75e1bb7090f9bbca5fa82a807e90028458224c`; source/test text inspection only. Historical roots, art stages and no-raster-export status remain in [UI, FX, Held-Prop, and Animation Provenance](../assets/UI_FX_ANIMATION_PROVENANCE_2026-10-03.md), sections 3–4. This is a **bounded documentation continuation**, not a D-026/D-021 completion, new runtime API, or claim on another player's lane.
+
+| Asset ID(s) | Catalog selector; present consumer | Condition and meaning |
+| --- | --- | --- |
+| `UI_NAV_STORY_ICON`, `UI_NAV_CHARACTER_ICON`, `UI_NAV_STATS_ICON`, `UI_NAV_INVENTORY_ICON`, `UI_NAV_QUESTS_ICON`, `UI_NAV_MAP_ICON`, `UI_NAV_MORE_SETTINGS_ICON` | `PixelUiIconCatalog.navigation(label)` in `GameScreen.kt::PixelNavButton` (the Inventory icon is also used in the Loadout header). | Seven 24x24 icons, chosen by public application section labels, with `Settings` sharing the More icon. They do not choose a destination or grant navigation access. |
+| `UI_RESOURCE_HEALTH_ICON`, `UI_RESOURCE_STAMINA_ICON`, `UI_RESOURCE_FOCUS_ICON`, `UI_RESOURCE_RESOLVE_ICON` | `PixelUiIconCatalog.resource(resource.id)` in `GameScreen.kt::StoryResourceHud`, `ResourcePanel`, and `StatusComponents.kt::StatusResourceGrid`. | Four 16x16 presentation icons mapped from projected public resource IDs. The icon does not calculate resources or change state. |
+| `UI_QUEST_MAIN_ICON`, `UI_QUEST_SIDE_ICON`, `UI_QUEST_OPTIONAL_ICON`, `UI_QUEST_LORE_ICON` | `PixelUiIconCatalog.quest(category)` in `GameScreen.kt::QuestSection`. | Four 16x16 icons. The screen groups **only** `snapshot.quests` with matching public category; the icon does not discover or fabricate quests. |
+| `UI_SCROLL_MARKER` | `PixelUiUtilityCatalog.scrollMarker` in `GameScreen.kt` Story narrative scroll surface. | Procedural 16x16 affordance displayed while `narrativeScroll.value < narrativeScroll.maxValue`; no authored world-state implication. |
+| `ACCESS_AUDIO_NARRATION_ICON` | `PixelUiUtilityCatalog.narrationIcon` in `GameScreen.kt` READ ALOUD button. | Procedural 24x24 affordance for `onNarrate(snapshot.body)`; the callback, not the sprite, owns the action. |
+
+**Renderer versus catalog ownership:** `PixelComponents.kt::PixelUiIcon` is the reusable renderer; it is **not** a direct `PixelUiIconCatalog` selector in the inspected source. `GameScreen.kt` and `StatusComponents.kt` call the catalog, then supply sprites to that renderer. Do not treat a renderer's presence as proof that every catalog asset is displayed in every session.
+
+**Existing test-source evidence:** `PixelUiIconCatalogTest.kt` enumerates all 15 icon IDs, asserts native sizes/palette coverage, checks seven section mappings plus the Settings alias, four public resource lookups, four quest-category lookups, and unknown-name null returns. `PixelUiUtilityCatalogTest.kt` checks the scroll marker and narration master dimensions/palette. These tests do **not** establish end-to-end Compose accessibility, narration service behavior or executed current-head acceptance. **No Gradle, instrumentation, emulator, APK or phone tests were executed in this documentation pass.**
+
+**Disposition:** KEEP as source-defined presentation members pending production QA; no member in these two catalogs is proven wholly unreferenced by this bounded source review. Whether a conditional icon is actually rendered depends on current public state and screen path. No deletion, private-state projection, change of state ownership, or migration to a second asset registry is authorized. Continue the per-member test/provenance/consumer audit for remaining catalogs before treating D-026/D-021 as complete.
+
 ### 30.2 Hardcoded/transitional state found during consumer audit
 
 Confirmed transitional or presentation-local state includes:
