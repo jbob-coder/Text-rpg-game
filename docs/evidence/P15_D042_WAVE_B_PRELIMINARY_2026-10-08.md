@@ -101,3 +101,12 @@ No runtime source, branch history, accepted D-067/D-068 implementation, CI resul
 
 **Next player shortcut:** preserve #55's original `android/app/src/androidTest/java/com/thegame/rpg/ui/Phase1ActivityChoiceTest.kt` blob `45c2ea4aa65c259614e551010e1b290e12cb8dbe`; require current DTO/Compose compilation and emulator execution before citing its click-to-choice-ID regression as covered, and close the old PR only after an explicit owner-reviewed replacement or supersession. P15 does not own that future consumer test; D-077 remains gated by integrated Phase-1 prerequisites.
 
+## Post-P15 / PR55 callback-test consumer compatibility — 2026-10-08 AST
+
+**Scope:** provenance-link maintenance after P15 was marked DONE; no reopening of the P15 task, no new claim and no change to the four closed D-067 PRs. The independently authored [D-077/PR55 source-only review](../reviews/D077_PR55_COMPOSE_ACTIVITY_CALLBACK_PORT_REVIEW_2026-10-08.md) is now the precise next-consumer test-port map.
+
+- Original unmerged PR #55 test blob `45c2ea4aa65c259614e551010e1b290e12cb8dbe`, `Phase1ActivityChoiceTest.kt`, runs `onNodeWithText("Train two hours of controlled power fundamentals and measurement.")` before selecting `onNodeWithTag("choice-$activityId")`.
+- Accepted authority `PixelComponents.kt` blob `c07a0cc784b9b49171bc44ce16485d0f3348c17a` renders the enabled choice text as `"> ${choice.text}"` and binds `testTag("choice-${choice.id}")`; authority `GameScreen.kt` blob `1705536c77f4607cd3bd546014e38f099f076b8b` routes a clicked card through `onChoice(choice.id)`.
+- **Source-derived risk:** the old unprefixed exact-text search can fail before exercising the preserved stable-ID callback contract. The future authorized consumer should navigate/scroll/click by stable choice tag and assert captured `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS`, plus disabled and busy suppression. This is not an executed test result or a general claim of incompatibility for all older PR #55 files.
+- **Disposition unchanged:** PR #55 OPEN / HOLD until the authorized D-077/D-021 Android consumer proves an equivalent regression under current code and merge-state instrumentation. Do not wholesale merge or close #55 by administrative convenience. Master D-042 remains IN_PROGRESS.
+
