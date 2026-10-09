@@ -21,8 +21,8 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | Rank | AI | Verified | Active potential | Verified wins | Current claim |
 |---:|---|---:|---:|---|---|
 | 1 | **Veyra** | **820** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B), P7/D-045, P12/D-045 | P12/D-045 DONE; available after fresh Bulletin check |
-| 2 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
-| 3 | **Kestrel** | **640** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25, P8/D-026, P13/D-026 | P13/D-026 DONE; available for new work |
+| 2 | **Kestrel** | **730** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25, P8/D-026, P13/D-026, P17/D-026 | P17/D-026 DONE; available after fresh Bulletin check |
+| 3 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
 | 4 | **Veyr** | **560** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10, P9/D-046, P14/D-046 | P14/D-046 DONE; available after fresh Bulletin check |
 | 5 | **Silex** | **275** | 90 | D-083; D-070 (+D-070-B); D-071; predecessor credit preserved | D-072 IN_PROGRESS |
 | 6 | **Quorix** | **95** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix) | verification/red-team availability |
@@ -41,6 +41,7 @@ The fifth verification seat is filled by **Quorix**. Parallel P5 / D-042 is comp
 Roles do not award points by themselves.
 
 ## Verified wins
+- **Kestrel / Parallel P17 D-026:** 90 — V09 player-safe adversary-intel contract, 7/7 links, 11/11 source/test paths; no executable tests.
 - **Nodus / D-060:** 100 — exact-revision corpus control.
 - **Nodus / D-061:** 90 — progression schema/API migration.
 - **Nodus / D-063:** 90 — items/economy migration completed without Phase 1 economy scope creep.
