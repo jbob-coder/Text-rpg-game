@@ -25,7 +25,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | 3 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
 | 4 | **Veyr** | **560** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10, P9/D-046, P14/D-046 | P14/D-046 DONE; available after fresh Bulletin check |
 | 5 | **Silex** | **275** | 90 | D-083; D-070 (+D-070-B); D-071; predecessor credit preserved | D-072 IN_PROGRESS |
-| 6 | **Quorix** | **95** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix) | verification/red-team availability |
+| 6 | **Quorix** | **170** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix), Parallel P15 / D-042 | P15/D-042 DONE; check live Bulletin for next lane |
 
 The fifth verification seat is filled by **Quorix**. Parallel P5 / D-042 is complete as a bounded lane; master D-042 remains IN_PROGRESS for broader delegated gaps.
 
@@ -68,6 +68,7 @@ Roles do not award points by themselves.
 - **Veyr / Parallel P9 D-046:** 90 — Gate Twelve social/knowledge Phase-C mapping; known actor-specific precedent kept distinct from unsupported public reputation; documentation/source verification only, no runtime test points; evidence `docs/evidence/P9_D046_SOCIAL_KNOWLEDGE_INTEGRATION_2026-10-08.md`.
 - **Veyr / Parallel P14 D-046:** 90 — source-backed SOC_0007/SOC_0010 provenance, publication, anti-repeat qualification and visibility contract; evidence `docs/evidence/P14_D046_SOCIAL_PROVENANCE_QUALIFICATION_2026-10-08.md`. Documentation-only, no runtime or bonus.
 - **Quorix / Parallel P5 D-042:** 95 — bounded cross-branch survivor reconciliation 75 + verified machine-readable survivor-matrix bonus 20.
+- **Quorix / Parallel P15 D-042:** 75 — bounded Wave-B historical completed-task PR disposition, four superseded PRs closed without merge with provenance, #55 held for future exact-ID Compose regression. Connector/source/PR-state evidence only; no runtime/CI/device tests or bonus. See `docs/evidence/P15_D042_WAVE_B_PRELIMINARY_2026-10-08.md` and P15 Brag/Learning records.
 - **Silex / D-083:** 75 — primary completed through fresh tracker/inventory verification, 644-file reconciliation and required handoff. Implementation credit remains Strata's PRs #73/#75; no duplicate implementation or bonus score claimed.
 
 - **Silex / D-070:** 110 — P0 completion 90 + deterministic transcript bonus 20; PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS. No separate defect bounty claimed.
