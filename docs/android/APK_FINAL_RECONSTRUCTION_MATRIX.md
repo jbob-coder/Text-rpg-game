@@ -168,17 +168,19 @@ The UI may collapse levels for usability, but authoritative place IDs and route 
 
 ## 7. Tactical combat surface
 
-When combat is implemented:
-- separate tactical surface or context mode;
-- same persistent character/state;
+The authoritative tactical engine is now **partially implemented through D-071**, but the APK tactical consumer is not. D-072 still owns durable aftermath, D-073 the bounded Gate Twelve content/Python bridge, and D-074 the typed Kotlin/ViewModel/Compose surface.
+
+The final APK tactical surface should provide:
+- a separate tactical surface or context mode;
+- the same persistent character/state after validated aftermath publication;
 - original UI;
-- turn/action state;
+- player-safe turn/action state;
 - cover/LOS/targeting;
 - ability/item actions;
-- combat log;
-- post-combat consequences.
+- a redacted player-safe combat log/projection rather than raw private tactical state;
+- post-combat consequences after authoritative Python commit.
 
-Do not bolt combat logic directly into ordinary Story Compose callbacks.
+Do not bolt combat logic directly into ordinary Story Compose callbacks, and do not treat the existence of the headless D-069–D-071 runtime as Android tactical completion.
 
 ## 8. Dynamic adversary surface
 
