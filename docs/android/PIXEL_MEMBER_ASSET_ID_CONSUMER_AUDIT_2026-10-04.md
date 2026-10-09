@@ -230,6 +230,12 @@ Both current utility assets are directly consumed:
 - scroll marker;
 - narration icon.
 
+### 5.1 Post-D-064 story actor consumer correction — 2026-10-08
+
+**History versus current:** The "Story actors" paragraph in section 5 is accurate for this audit's original October-04 source HEAD; the `sceneId + locationId` presence rule was subsequently replaced by completed D-064. Current authority inspection at `247b1305461194ba97a06e9ae652409c0b242ee9` confirms `PixelStoryActorCatalog.placements(actors: List<GameRoomActor>)` now consumes only player-safe projected room actors passed by `SceneIllustration`, not hardcoded scene/location combinations. `visualFamily` selects art, `placementKey` resolves presentation coordinates via `PixelStoryActorPlacementResolver`; unknown values produce no placement.
+
+Both `NPC_TAMSIN_TURNAROUND` and `SUPPORT_COURIER_01` remain production-consumed; **their top-level non-zero-consumer classification is unchanged**. The original 109-ID/three zero-consumer/four generated portrait-frame counts remain historical audit results, not a new recount at this HEAD. [D-064 executed evidence](../evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md) confirms historical integration and tests. Source readback only in this addendum; no new build/test pass or asset removal. D-030 contextual actor panels/interaction remain open independently from implemented room-presence mapping.
+
 ## 6. Environment members
 
 Current production location/scene placement rules consume the environment decal and prop members.
