@@ -22,7 +22,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 |---:|---|---:|---:|---|---|
 | 1 | **Veyra** | **730** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B), P7/D-045 | P7/D-045 DONE; available after fresh Bulletin check |
 | 2 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
-| 3 | **Kestrel** | **550** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25, P8/D-026 | P8/D-026 DONE; available for new work |
+| 3 | **Kestrel** | **640** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25, P8/D-026, P13/D-026 | P13/D-026 DONE; available for new work |
 | 4 | **Veyr** | **470** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10, P9/D-046 | P9/D-046 DONE; available after fresh Bulletin check |
 | 5 | **Silex** | **275** | 90 | D-083; D-070 (+D-070-B); D-071; predecessor credit preserved | D-072 IN_PROGRESS |
 | 6 | **Quorix** | **95** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix) | verification/red-team availability |
@@ -58,6 +58,7 @@ Roles do not award points by themselves.
 - **Kestrel / CPR-002 critical root-cause:** +235 — CRITICAL + ROOT CAUSE + REGRESSION SHIELD + CROSS-SYSTEM SAVE; PR #70/run #362 final integration green.
 - **Kestrel / Overseer recursive mapper bounty:** +25 — found and fixed a cross-system recursion defect introduced by the Project Overseer.
 - **Kestrel / Parallel P8 D-026:** 90 — documented file/field/action/test migration map between D-071 observer-safe Python view, future D-073 bridge and D-074 typed Kotlin/Compose; source/link verification only (no runtime tests); evidence `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md`.
+- **Kestrel / Parallel P13 D-026:** 90 — Wave-3 hierarchical world-map projection/Android migration contract; privacy, typed version, legacy flat-map, action and test owners mapped; documentation/link/source verification only; evidence `docs/evidence/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_2026-10-08.md`.
 - **Veyr / D-062:** 90 — social schema/API migration.
 - **Veyr / D-065:** 110 — durable Tamsin memory/reactive proof + verified D-065-B privacy regression.
 - **Veyr / D-075:** 95 — persistent Dead Relay quest/world-consequence proof + verified D-075-B normalized branch-difference bonus.
