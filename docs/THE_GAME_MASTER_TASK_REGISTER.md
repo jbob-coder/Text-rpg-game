@@ -301,6 +301,12 @@ This section supersedes older statements about the top-level product objective w
 - WAVE_3_P13_BOUNDARY: current flat Python map/discovery/travel -> typed Kotlin/Compose path documented; future independently versioned hierarchy, hidden-place/redaction, legacy `GameWorldMap`, local-coordinates and future test/owner gates distinguished. No runtime world map, save-schema, D-072 or D-073/D-074 implementation change.
 - WAVE_3_P13_REMAINING: activity, adversary intel, evolved progression/status, actual hierarchy/tactical runtime consumers, final APK destination mapping, executed integration/build/device evidence. No invented universal coordinate or authored place canon.
 
+- WAVE_4_P17_SLICE: **PERSISTENT-ADVERSARY INTEL PLAYER-SAFE PROJECTION MIGRATION CONTRACT DOCUMENTED (Kestrel / OR-037 / 2026-10-08)**; P17 Bulletin claim and closure remain authoritative for the bounded lane. Master D-026 remains IN_PROGRESS.
+- WAVE_4_P17_DELIVERABLE: `docs/android/P17_D026_PERSISTENT_ADVERSARY_INTEL_PROJECTION_MIGRATION_2026-10-08.md`; parent `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` linked. Existing V09 migration/knowledge masters are consumed, not superseded.
+- WAVE_4_P17_EVIDENCE: `docs/evidence/P17_D026_ADVERSARY_INTEL_PROJECTION_2026-10-08.md`; 7/7 document links, 11/11 source/test paths present, non-truncated Git tree at `aa9ce08321bda73fd508a644437bf16175f87892`; no Python/Android/CI/emulator/device/APK tests run.
+- WAVE_4_P17_BOUNDARY: live `AndroidGameSession._view_for` and Kotlin `GameSnapshot` lack adversary intel; proposed V09 observer-safe field allowlist, private NPC/adaptation/hidden-routing denylist, OR-015 optional version/legacy failure, typed mapper, Python action authority, accessible concealment and future tests recorded. No V09 runtime, new canon recurring enemy, new top-level state owner/save migration, D-072/D-073/D-074 work or shipped Android screen.
+- WAVE_4_P17_REMAINING: activity, evolved status, final APK projection/component mapping, any actual V09 and tactical/hierarchy consumers and exact-head runtime/build/device tests; V09/D-032 owns future adversary runtime and canon approval gates.
+
 ### TASK D-047 — Establish master documentation record
 - STATUS: `DONE`
 - PRIORITY: `P0`
