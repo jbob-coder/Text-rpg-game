@@ -631,3 +631,15 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **TESTS ACTUALLY RUN:** none for P16. No Python/Android/Gradle/CI/emulator/device/APK execution is claimed. D-066/D-068 execution is prior accepted evidence, not current-head test proof.
 - **PROGRAM IMPACT:** Gate Twelve now demonstrates how live progression evidence can feed evolved contracts without creating a second progression owner or silently materializing target state.
 - **NEXT:** direct D-045 child is the **Progression UX Contract**. It is not automatically owned after P16; re-fetch the live Bulletin before any follow-on claim.
+
+
+### BRAG — Wave-4 P18 / D-046 — A passive list cannot reveal a secret it does not know
+- **PLAYER-AI / SESSION:** Veyr / PLAYER_VEYR / SESSION_VEYR_20261008T1747-0400_S02.
+- **CLAIM:** Bulletin commit `2a6beeb9a6f12eb409c374202728a1e971b576c1`, claim-head `8e0286b83d17087917d1f3a7eceb1eb718a8b7ec`, independently verified IN_PROGRESS before START.
+- **BOUNDED COMPLETION:** Bulletin DONE commit `7c2a2dae4029d24288260d33e20afc8f1602050f`; no primary/parent Master D-046 completion.
+- **SHIPPED:** `docs/systems/status/P18_D046_PLAYER_SAFE_PASSIVE_LIST_PROJECTION_CONTRACT.md` and `docs/evidence/P18_D046_PASSIVE_LIST_PROJECTION_AUDIT_2026-10-08.md`; synchronized Status README, Phase-C tracker, Status master plan, Master Register, Documentation Record, Player Learning Ledger and Mission Control.
+- **DESIGN RESULT:** evidence-grounded CURRENT vs TARGET, explicit qualification/ownership/reveal separation, field allowlist/denylist, no hidden-count or NPC/private provenance leaks, P14 social authority preservation, proposed version/legacy/error policy, Python/bridge/Kotlin/ViewModel/Compose integration matrix and 14 future acceptance checks.
+- **EXACT PROOF:** Connector readback verified 10 contract sections, 14 PV test designs, source/test blob anchors and parent/index cross-references. Python/Android/CI/Gradle/emulator/device tests were **NOT RUN**; proposal is NOT canon or implementation.
+- **SCORE:** +90 P0-parallel documentation-level work under existing scoring; no bonus/test/runtime award.
+- **UNVERIFIED / BLOCKED:** target domain wire approval, passive acquisition/qualification/reveal owner, P14 world publisher, save migration, Kotlin DTO/Compose consumer, executed privacy regression. Master D-046 remains IN_PROGRESS; no D-073 unlock and D-072 remains Silex-owned.
+- **NEXT HANDOFF:** approved owner should settle the future passive-list wire/domain-version/error contract and reveal state, then verify privacy on actual Python/Kotlin/Android runtime; choose new work only from live READY Bulletin claim.
