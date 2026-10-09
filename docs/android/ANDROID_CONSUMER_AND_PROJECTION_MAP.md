@@ -417,6 +417,23 @@ Future activity system should expose:
 
 Implementation waits on activity master/schema.
 
+### 20.1 Source-exact Phase 1 activity consumer trace — 2026-10-08
+
+**Bounded unclaimed documentation audit, not a new V10 implementation claim.** Source inspected at `4cdba58d96959e8609800b3100b3a3243067115b`: [D-068 executed activity proof](../evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md) belongs to an earlier tested merge; the inspection here is source-only. The word *activity* covers two distinct maturity levels: an **implemented atomic authored-choice activity** and an **unimplemented normalized V10 activity record/preview/long-running-state projection**.
+
+| Stage | Exact current source / input | Existing authoritative behavior or Android consumer |
+| --- | --- | --- |
+| Authored choice | `content/vertical_slice_01.json`: `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` in `TRACE_STABILIZATION_HUB` (`TRACE_CHAMBER`); `skill_train` of `powers`, 120 minutes, intensity 1 | This is a **choice ID**, not a newly registered `ACTIVITY_*` record. The existing authored route and the requirement checks gate availability. |
+| Read-only eligibility | `src/textrpg/core.py::RulesEngine.available_choices`, `build_scene_view`; `AndroidGameSession._view_for` under `scene.choices[]` | Emits public `id`, `text`, `enabled`, conditional `disabled_reason`; no new registry list, hidden requirements, generic duration/cost preview or resumable activity progress. |
+| Android selection | `GameEngine.kt::GameChoice` and `BridgeSnapshotMapper.fromMap`; `GameScreen.kt` Story `PixelChoiceCard` -> `onChoice(choice.id)`; `GameViewModel.choose` -> `PythonGameEngine.choose` / `PythonSessionGateway.choose` | Forwards the exact authored ID; ViewModel updates the authoritative mapped snapshot only after engine response, not optimistic gameplay arithmetic. |
+| State mutation | `src/textrpg/core.py::RulesEngine.choose` -> `simulation.train`, `advance_time`; `AndroidGameSession.choose` | Python validates authored eligibility and time/resource legality, applies a snapshot-backed atomic transaction, records training and choice history; errors return `CHOICE_ERROR`, not partial Android progress. |
+| Post-result data | `AndroidGameSession._view_for` -> `meta.time_minutes`, `status.resources`, `status.skills` -> `BridgeSnapshotMapper.fromMap` -> `GameSnapshot.timeMinutes/resources/skills` | The current Android UI consumes the updated **existing status/time** fields, not an `activity_progress` DTO. The historical D-068 case proved +120 minutes, -16 stamina, -10 focus and Powers base/effective 2.0 for its exact test fixture. |
+| Verification owners | `tests/test_phase1_activity.py` (three test methods); `PythonGameEngineContractTest.kt` test `activity choice delegates exact id and maps authoritative progress` | Python proof checks legitimate authored route, full result/save-load, insufficient-resource no-mutation and invalid-time preflight rollback; Kotlin proof checks exact choice ID and returned value mapping. D-068 evidence reports focused tests passed and Android JVM/assemble succeeded in its historical run #341; its **full Python aggregate was not green**, and this audit did not rerun any test. |
+
+**V10 target still missing:** `ACTIVITY_*` stable registry/definition and read-only availability/preview, player-known duration/cost disclosure, activity-specific typed Kotlin model, interruption/cancel state and resumable progress, scheduling/background policy, durable migration and UI/test contracts when genuinely required. See [Activity Record and State](../systems/ACTIVITY_RECORD_AND_STATE_STANDARD.md) §§3–12, [Activity Time/Cost/Atomicity](../systems/ACTIVITY_TIME_COST_ATOMICITY_STANDARD.md) and [Activity Interruption/Concurrency](../systems/ACTIVITY_INTERRUPTION_CONCURRENCY_STANDARD.md). Atomic current actions need no invented `active_activity` save field. Existing `GameState.time_minutes` and domain-owned training arithmetic remain authoritative; the future projection must disclose only player-safe requirements and never silently grant activity access from a UI affordance.
+
+**Boundary:** This trace corrects the impression that *no* activity reaches Android. It does not close the missing normalized V10 activity projection, add a field to the 21-field `GameSnapshot`, mark D-026 DONE, or claim another agent's task. New executable verification and destination-head approval are required for future implementation.
+
 ## 21. Missing tactical combat projection
 
 Future combat needs a separate player-safe model for:
