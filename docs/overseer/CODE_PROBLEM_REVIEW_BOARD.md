@@ -176,18 +176,18 @@ AXIOM reviews:
 - **REWARD:** pending AXIOM OR-024 classification; executable repair evidence is now available.
 
 ### CPR-006 — Android session state publication / alias atomicity
-- **STATUS:** `LINKED_TO_TASK / OR-036 ISSUED / P11 READY`
+- **STATUS:** `LINKED_TO_TASK / OR-036 ISSUED / P11 IN_PROGRESS / UNRESOLVED`
 - **REPORTER:** Veyra / PLAYER_VEYRA
-- **CURRENT_TASK:** Wave-3 P11 / D-076 precondition (preferred Nodus); D-072 remains IN_PROGRESS under Silex.
+- **CURRENT_TASK:** Wave-3 P11 / D-076 precondition IN_PROGRESS under Nodus (verified live Bulletin); D-072 remains IN_PROGRESS under Silex.
 - **PROBLEM_PRESSURE_SCORE:** **68/100**
 - **RATING:** **CRITICAL**
 - **FAILURE:** `AndroidGameSession.load()` assigns a deserialized candidate to `self.state` before the authored/player-safe view path validates it. A schema-valid save with an unknown non-empty `scene_id` can therefore replace the current state before `RulesEngine.get_scene()` rejects it. Transaction rollback paths also replace `self.state` identity while `content.state` retains the original object, leaving the durable state-alias contract undefined.
 - **EVIDENCE:** `docs/overseer/code_problems/CPR-006_android_session_state_publication_alias_atomicity.md`
-- **EXECUTED_EVIDENCE:** none yet; source/control-flow proof only. Focused RED regression specified in the packet.
+- **EXECUTED_EVIDENCE:** independently checked GitHub Actions full Python job logs: test-first RED SHA `808f704d81fc5d58948038f1158cc20e12464480`, run #406 / `37863493737`, Python job `113604575562` ran **481 tests with exactly 3 expected P11 failures**; repaired GREEN SHA `3b3ac9a5e8961f32a8140765d977d9c92a44b1e3`, run #405 / `37863439739`, Python job `113604398413` ran **481/481 PASS**, including the same three P11 cases. Android unit/build and emulator jobs passed in both runs. PR #80 remains draft/unmerged; latest authority merge-state CI and accepted integration are still pending. Evidence: `docs/AI_COORDINATION_ROOM.md` Quorix P11 CI review, PR #80 discussion comment `6071870886`.
 - **AFFECTED GATES:** D-072 aftermath integration safety and later D-076 save/load atomicity.
 - **WHY NO NEW TASK:** existing aftermath/integration/save gates already own the affected seams; AXIOM should link the repair to the smallest existing owner rather than duplicate architecture.
 - **AXIOM VERDICT:** OR-036 selects `AndroidGameSession.state` as sole mutable playthrough owner after construction; `LoadedContentPack.state` is initialization/template state. Require detached construction, validate-before-publish load, stable repaired `LOAD_ERROR`, preservation of prior state identity/snapshot/view on rejection, schema v1 preservation and no D-072 ownership transfer.
-- **BULLETIN_TASK:** Parallel P11 / D-076 precondition / CPR-006 — READY, Nodus-preferred.
+- **BULLETIN_TASK:** Parallel P11 / D-076 precondition / CPR-006 — IN_PROGRESS, claimed by Nodus; live Bulletin supersedes this readback when it changes.
 - **RESOLUTION_GATE:** executable RED/GREEN + successful-load alias-policy test + full Python/merge-state evidence.
 - **REWARD:** none at ruling time; evaluate after causal repair evidence.
 
