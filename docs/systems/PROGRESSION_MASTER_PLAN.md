@@ -287,17 +287,21 @@ Current schema version remains 1 until migration implementation exists.
 
 ## 16. Next documents/decisions
 
-Need:
-- final skill catalog;
-- class families;
-- profession families;
-- rank scales;
-- world balance bands;
-- player creation rules;
-- XP/training curves;
-- save migration mapping.
+The evolved D-045 child chain has now materialized:
+- `EVOLVED_SKILL_REGISTRY.md` for the 23 current skills;
+- `COMBAT_CLASS_CATALOG.md` for the seven target class families;
+- `PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md` for profession/rank/status separation;
+- `TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md` for training-path, mentor/evaluator-capability and facility-capability ownership.
 
-This v0 document is a design contract starter, not final balance.
+Remaining reconstruction-grade progression work includes:
+- the Gate Twelve Progression Proof Packet;
+- the Progression UX Contract;
+- justified numeric/range fixtures and training/balance envelopes;
+- final profession/institution/rank content and world/canon promotion where owner authority is required;
+- player-creation and world-balance integration where not already owned by another domain;
+- target schema/API/save migration mapping before any breaking runtime representation change.
+
+Current schema version remains 1 until an accepted migration is implemented. This v0 document remains a design-contract baseline, not final balance and not proof that target progression features are live.
 
 
 ## 17. Evolved target-game child
