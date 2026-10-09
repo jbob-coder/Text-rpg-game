@@ -99,3 +99,42 @@ This is **test design only**, and the names below are check identifiers rather t
 - The reviewed existing tests express coverage assertions. This pass did not run the Python interpreter, CI, Gradle, emulator, or device. Do not report their result as PASS.
 - Existing test coverage should not be misrepresented as missing merely because it lives in another domain. The **unproven seam** is the *cross-domain durable commit + player-safe disclosure* on the actual D-072/D-073 implementation candidate.
 - D-072 claimant Silex controls implementation and final evidence; this PR #82 is a draft documentation review only. D-073 remains BLOCKED until the Bulletin independently records D-072 DONE.
+
+
+## P16/P17/P18 post-aftermath consumer audit — non-owning continuation (2026-10-08 AST)
+
+**Reason for this pass:** Wave-4 P16/D-045, P17/D-026 and P18/D-046 are now completed **documentation children**. Their cross-domain contracts could be mistaken for implemented destinations when Silex completes D-072 and D-073 eventually integrates combat. Source review shows they are future-facing; this review protects the current transaction boundary rather than redefining their owners.
+
+**Authority checked:** live Bulletin blob `26998093f487d7ed6a3b045fb99750eea0fdc6f9` (no READY tasks, D-072 `IN_PROGRESS / Silex`, D-073 `BLOCKED`); source:
+- `docs/systems/GATE_TWELVE_PROGRESSION_PROOF_PACKET.md` (blob `6b7314983ff7a59ebf9ff26a991f4752a2a6541c`) §§8.4, 9.4, 11: current Trace Chamber evidence does **not** instantiate a mentor/evaluator or create social status/reputation. Future mentor capability requires a real durable NPC, authored capability, location/schedule and specific consuming rule. Player-known next training requirements do not reveal hidden thresholds or private evaluator logic.
+- `docs/android/P17_D026_PERSISTENT_ADVERSARY_INTEL_PROJECTION_MIGRATION_2026-10-08.md` (blob `1d3338e2fd595d688fed5f402125800b26ca52ee`) §§2–4: persistent V09 nested adversary state and `adversary_intel` DTO are **not implemented**. Proposed intel requires player-known observer evidence and a public contact token. A combat-only transient contact or raw `npc_id` is not a reveal license; unseen injury and unseen position do not become current intel.
+- `docs/systems/status/P18_D046_PLAYER_SAFE_PASSIVE_LIST_PROJECTION_CONTRACT.md` (blob `9420354bb96677e331da94c9d86d09ece1f15810`) §§3–9: acquired passive, qualifying evidence and authorized viewer reveal are distinct; `status.passives` and `projection_version=1` are **candidate wire fields only**, not live Status/Android. NPC rumor, casualty, training or observed ability cannot automatically grant or reveal `PASSIVE_SOC_0007`, `PASSIVE_SOC_0010` or any other passive.
+- P14 provenance contract (blob `9c8281c7a893c4a8839914aedaf36b586161c229`) already separates occurrence, observer knowledge, publication, qualification and disclosure. OR-034 allows `PROVISIONAL_INTEGRATION` combat fixture contacts but no permanent faction/NPC promotion or raw/private tactical data crossing the player-safe bridge.
+
+### A. Domain consequence/visibility integration matrix — DESIGN TEST ONLY
+
+| D-072 event / observer situation | Durable authority that MAY decide a consequence | Player-safe result permitted **now** | Forbidden implicit cascade |
+|---|---|---|---|
+| Provisional encounter contact retreats or is defeated | Tactical encounter resolution plus separately approved durable GameState aftermath owner | Existing approved quest/story/Status-safe projection only | Generate `GameState.npcs` shell, V09 permanent adversary, `adversary_intel` public token, canon affiliation |
+| A known NPC witnesses a real injury | Approved aftermath condition/memory transaction; social owner maintains NPC-private knowledge | None from NPC witness alone; additional player observation/knowledge permission needed | Leak injury severity, observer identity, relationship/private memory, faction rank |
+| Jack performs authored training or combat technique | Existing progress/ability domain for specific allowed actions; future D-045 progression authority if approved | Existing D-066 ability and authored current training evidence only | Automatically award a class, `MENTOR_CAP_*`, profession grade, social reputation, known next secret requirement |
+| A social consequence makes a private NPC impression | `social.py` owns relationship/memory and separate publication eligibility | Player-known outcome when explicitly authored; no globally public fact by default | Publish town consensus, qualify social passive, reveal `source_summary` or a private publication ledger |
+| A passive already affects a current visible stat | Existing `state.perks` math + safe Status inspection | Approved stat contribution, with hidden attribution anonymized | Emit a new `status.passives` list, reverse-engineer hidden ID from numeric effect, invent hidden progress |
+| Encounter produces no authoritative viewer observation | Encounter observer-local contact state only | No new player intel or hidden map marker | Use raw `CombatSession` or `state.npcs` as player knowledge or sneak new Kotlin DTO keys into current payload |
+
+These are review rules inferred from the cited contracts, **not observed executions** of a D-072 implementation. Current absence of these target domains means a good D-072 implementation can legitimately do nothing in P16/P17/P18; that alone must not fail D-072 acceptance.
+
+### B. Future non-owning regression suggestions (X-01..X-06)
+
+1. **X-01 — transient-to-durable identity:** take OR-034 contact without `persistent_ref`, commit an otherwise valid aftermath and assert the persistent NPC ID set does not grow; a syntactically valid but absent permanent ref is rejected without mutation.
+2. **X-02 — no automatic progressed role:** ordinary Trace Chamber or combat achievement cannot create `MENTOR_CAP_*`, `EVAL_CAP_*`, `PROF_*`, new class or civic reputation in durable records without a separately approved producer. Existing actual progress must remain unaffected.
+3. **X-03 — observer-gated intel:** ensure observer A's legitimate detection does not reveal the enemy, its current hidden movement, condition or true faction to observer B/player; do not fabricate future `adversary_intel` domain.
+4. **X-04 — separate passive reveal:** change only NPC-private social evidence; public/Status projection and passive list (currently absent) do not change; hidden `PERK_*` attribution stays `unidentified_modifier` even after save/load.
+5. **X-05 — cross-owner late failure:** inject after a permitted durable side effect but before transaction completion; compare deep saved snapshot across player injury, quests, history, relationships, NPC memory, flags and time. No partial public safe view may survive.
+6. **X-06 — future protocol evolution:** when P17/P18 are *actually* implemented, test unsupported `meta.projection_versions.adversary_intel` and proposed nested passive-domain version independently, with fail-closed behavior. Their current **proposed** version locations are different; only the future D-026/Android owner may choose the final shared negotiation/error policy.
+
+### C. Explicit review verdict
+
+- **CONSISTENT AT DESIGN LAYER:** each Wave-4 packet forbids treating a mere encounter, training signal, private knowledge, or rules-owned modifier as general permission to mint durable actors, titles, passives or public intel.
+- **FUTURE DECISION, NOT VERIFIED DEFECT:** P17 proposes `meta.projection_versions.adversary_intel` while P18 sketches a nested `status.passives.projection_version`. Both are nonimplemented. Coordinate a single accepted compatibility/error model with the Android migration owner; do **not** file a CPR solely because the proposals differ.
+- **NO CLAIMED TEST RESULT:** X-01..X-06 are candidate tests, not run tests or D-072 acceptance. No implementation branch/PR was found by the scoped `D-072`/`aftermath` PR and branch discovery checks; that is not proof Silex has no local work. Do not take over Silex's D-072 task.
