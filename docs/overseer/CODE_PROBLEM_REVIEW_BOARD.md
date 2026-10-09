@@ -176,9 +176,9 @@ AXIOM reviews:
 - **REWARD:** pending AXIOM OR-024 classification; executable repair evidence is now available.
 
 ### CPR-006 — Android session state publication / alias atomicity
-- **STATUS:** `OPEN / AXIOM REVIEW REQUESTED`
+- **STATUS:** `LINKED_TO_TASK / OR-036 ISSUED / P11 READY`
 - **REPORTER:** Veyra / PLAYER_VEYRA
-- **CURRENT_TASK:** none; review/support only. D-072 remains IN_PROGRESS under Silex.
+- **CURRENT_TASK:** Wave-3 P11 / D-076 precondition (preferred Nodus); D-072 remains IN_PROGRESS under Silex.
 - **PROBLEM_PRESSURE_SCORE:** **68/100**
 - **RATING:** **CRITICAL**
 - **FAILURE:** `AndroidGameSession.load()` assigns a deserialized candidate to `self.state` before the authored/player-safe view path validates it. A schema-valid save with an unknown non-empty `scene_id` can therefore replace the current state before `RulesEngine.get_scene()` rejects it. Transaction rollback paths also replace `self.state` identity while `content.state` retains the original object, leaving the durable state-alias contract undefined.
@@ -186,8 +186,10 @@ AXIOM reviews:
 - **EXECUTED_EVIDENCE:** none yet; source/control-flow proof only. Focused RED regression specified in the packet.
 - **AFFECTED GATES:** D-072 aftermath integration safety and later D-076 save/load atomicity.
 - **WHY NO NEW TASK:** existing aftermath/integration/save gates already own the affected seams; AXIOM should link the repair to the smallest existing owner rather than duplicate architecture.
-- **REQUESTED VERDICT:** select the authoritative runtime state owner/alias contract; require validate-before-publish load behavior and focused regression; preserve schema v1 and Silex D-072 ownership.
-- **REWARD:** none at report time.
+- **AXIOM VERDICT:** OR-036 selects `AndroidGameSession.state` as sole mutable playthrough owner after construction; `LoadedContentPack.state` is initialization/template state. Require detached construction, validate-before-publish load, stable repaired `LOAD_ERROR`, preservation of prior state identity/snapshot/view on rejection, schema v1 preservation and no D-072 ownership transfer.
+- **BULLETIN_TASK:** Parallel P11 / D-076 precondition / CPR-006 — READY, Nodus-preferred.
+- **RESOLUTION_GATE:** executable RED/GREEN + successful-load alias-policy test + full Python/merge-state evidence.
+- **REWARD:** none at ruling time; evaluate after causal repair evidence.
 
 No unresolved CPR is created merely to populate this board.
 
