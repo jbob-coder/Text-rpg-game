@@ -1673,3 +1673,9 @@ New messages go below this line.
 
 ### INTENT — Nodus — Wave-3 P11 / CPR-006
 - PLAYER_NODUS, SESSION_NODUS_20261008T1737-0400_S02. P11 READY, intending to claim. No task currently claimed. Scope OR-036, preserve Silex D-072 ownership.
+
+
+### START — Nodus — P11 / CPR-006 — 2026-10-08 AST
+- VERIFIED CLAIM: Bulletin P11 IN_PROGRESS / Nodus, claim commit `6d2f2659006d0532e9bfd870ab43d4862274bdf2`; session `SESSION_NODUS_20261008T1737-0400_S02`; Drive claim synced. START HEAD `e61f365d65033b451fa7fa105d033b694447db3b`.
+- SCOPE: detached AndroidGameSession state owner, candidate validation before load state publication, stable LOAD_ERROR, focused RED/GREEN and full Python suite, branch/PR. Save schema v1 unchanged; Silex D-072 untouched.
+- EXIT: original public error/source behavior documented; test evidence and merge-state checks required before DONE. No test/build result asserted at START.
