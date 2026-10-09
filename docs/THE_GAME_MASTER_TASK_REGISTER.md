@@ -1647,7 +1647,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - APK_SHA256: `4bb7c133dcecfbc9958651f6b3e10e3f3d6aec594c42c2896a87118b735fb28b`.
 
 ### TASK D-076 — Execute integrated Phase 1 save/load and deterministic regression gate
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `BLOCKED / BULLETIN QUEUED`
 - PRIORITY: `P0 / RANK 17`
 - DEPENDS_ON: relevant proof tasks D-065 through D-075.
 - PURPOSE: verify continuity/determinism across the integrated Phase 1 loop instead of isolated subsystem tests.
