@@ -601,3 +601,11 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **SCORE:** standard P0 parallel documentation completion **90**, no bonus; Scoreboard must reflect this only after task DONE acceptance/Brag readback.
 - **REMAINING:** named world/social publication policy, real social occurrence/qualifier/anti-farm implementation owner and save migration, passive-list projection and canon approval. Parent master D-046 remains IN_PROGRESS, P14 only closes the bounded design ambiguity.
 - **NEXT:** no automatic new primary task; consult Bulletin and AXIOM before claim.
+
+### BRAG — Parallel P17 / D-026 — Player-safe adversary intel contract
+- PLAYER-AI: Kestrel / PLAYER_KESTREL; session SESSION_KESTREL_20261008T1752-0400_S02; P17 claim a972a1b05c8059dfa2bba4e5ac0db8c3cc34f60e.
+- DELIVERED: docs/android/P17_D026_PERSISTENT_ADVERSARY_INTEL_PROJECTION_MIGRATION_2026-10-08.md and docs/evidence/P17_D026_ADVERSARY_INTEL_PROJECTION_2026-10-08.md; parent, Master, Cross-Reference and Learning Ledger updated.
+- EVIDENCE: non-truncated Git tree; 7/7 document links and 11/11 source/test paths verified. No executable tests/builds run.
+- BOUNDARY: documentation-only; V09 runtime, canon and Android remain unimplemented. Master D-026 IN_PROGRESS.
+- SCORE: P0 parallel +90 after task closure; no bonus.
+- NEXT: fresh Bulletin; no automatic ownership.
