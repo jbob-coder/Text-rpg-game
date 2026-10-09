@@ -169,41 +169,41 @@ Primary file-family ownership while these lanes run:
 Shared files such as THE_GAME_MASTER_TASK_REGISTER.md, MASTER_DOCUMENTATION_RECORD.md, AI_TASK_BULLETIN_BOARD.md, and AI_BRAG_ROOM.md must always be re-fetched immediately before writes.
 
 
-## Parallel Wave 2 — active-player unblock lanes
+## Parallel Wave 2 — CLOSED / historical unblock lanes
 
-Authority: OR-035 + live Bulletin. The first five bounded lanes above are complete; their historical definitions remain for evidence. Wave 2 reuses unfinished Master Task Register work so active Player-AIs can make progress while D-072 is Silex-owned.
+Authority: OR-035 + live Bulletin. P6-P10 are DONE. Their definitions remain here only as durable scheduling/evidence history and must not be treated as claimable work.
 
-Use the live Bulletin entries P6-P10 for claim state. Detailed intent:
-- **P6 / D-019 / Nodus-preferred:** exact-revision inventory refresh and counting-semantics reconciliation.
-- **P7 / D-045 / Veyra-preferred:** profession/rank/status namespace packet, the explicit next D-045 child.
-- **P8 / D-026 / Kestrel-preferred:** tactical player-safe projection/Android migration contract for the D-073 -> D-074 boundary, documentation only.
-- **P9 / D-046 / Veyr-preferred:** one evidence-backed ability/passive world/knowledge/social/privacy Phase-C integration slice.
-- **P10 / D-042 / Quorix-preferred:** bounded legacy-open-PR/historical-evidence disposition audit and reversible hygiene where evidence permits.
+Historical Wave-2 lanes:
+- **P6 / D-019 / Nodus-preferred:** exact-revision inventory refresh and counting-semantics reconciliation — DONE.
+- **P7 / D-045 / Veyra-preferred:** profession/rank/status namespace packet — DONE.
+- **P8 / D-026 / Kestrel-preferred:** tactical player-safe projection/Android migration contract — DONE.
+- **P9 / D-046 / Veyr-preferred:** bounded ability/passive world/knowledge/social/privacy integration slice — DONE.
+- **P10 / D-042 / Quorix-preferred:** bounded legacy-open-PR/historical-evidence disposition audit — DONE.
 
-These lanes do not reserve work by specialty. Claim authority remains the live Bulletin. They must not modify Silex's D-072 implementation without an explicit review request.
+Claim authority remains the live Bulletin. Historical lane ownership or specialty preference does not reserve follow-on work.
 
 
-## Parallel Wave 3 — completion continuity / blocker removal
+## Parallel Wave 3 — P11 active / P12-P15 CLOSED
 
 Authority: OR-036 + live Bulletin.
 
-Wave 2 is complete. Wave 3 consumes existing unfinished master work and one accepted CPR:
-- **P11 / D-076 precondition / CPR-006 / Nodus-preferred:** Android session load validate-before-publish atomicity and state-owner repair.
-- **P12 / D-045 / Veyra-preferred:** Training / Mentor / Facility Progression Standard.
-- **P13 / D-026 / Kestrel-preferred:** hierarchical world-map player-safe projection migration contract.
-- **P14 / D-046 / Veyr-preferred:** social qualification/public-reputation provenance and anti-repeat contract.
-- **P15 / D-042 / Quorix-preferred:** exact disposition of open completed-task PRs #62/#57/#55/#45/#41.
+Current Wave-3 state at this documentation checkpoint:
+- **P11 / D-076 precondition / CPR-006 / Nodus-preferred:** IN_PROGRESS under Nodus; Android session load validate-before-publish atomicity and state-owner repair.
+- **P12 / D-045 / Veyra-preferred:** Training / Mentor / Facility Progression Standard — DONE.
+- **P13 / D-026 / Kestrel-preferred:** hierarchical world-map player-safe projection migration contract — DONE.
+- **P14 / D-046 / Veyr-preferred:** social qualification/public-reputation provenance and anti-repeat contract — DONE.
+- **P15 / D-042 / Quorix-preferred:** completed-task open-PR disposition audit wave B — DONE.
 
-Live claim state is owned by the Bulletin. D-072 remains Silex-owned; no Wave-3 lane may bypass D-073/D-074 dependencies.
+Live claim state is owned by the Bulletin. D-072 remains Silex-owned; P11 does not bypass D-072/D-073/D-074 dependencies, and completed P12-P15 lanes must not be reclaimed without new authorized scope.
 
 
-## Parallel Wave 4 — post-Wave-3 continuation
+## Parallel Wave 4 — CLOSED / historical continuation
 
 Authority: OR-037 + live Bulletin.
 
-After P12/P13/P14 completion:
-- **P16 / D-045 / Veyra-preferred:** Gate Twelve Progression Proof Packet.
-- **P17 / D-026 / Kestrel-preferred:** persistent-adversary intel player-safe projection migration contract.
-- **P18 / D-046 / Veyr-preferred:** player-safe passive-list projection/privacy contract.
+P16-P18 are DONE:
+- **P16 / D-045 / Veyra-preferred:** Gate Twelve Progression Proof Packet — DONE.
+- **P17 / D-026 / Kestrel-preferred:** persistent-adversary intel player-safe projection migration contract — DONE.
+- **P18 / D-046 / Veyr-preferred:** player-safe passive-list projection/privacy contract — DONE.
 
-These lanes remain documentation/design only and do not overlap Nodus P11, Quorix P15, Silex D-072 or downstream D-073/D-074 implementation.
+These bounded documentation/design lanes do not reserve their follow-ons. At this checkpoint, no new Wave-4 lane is claimable from this file; use the live Bulletin, where D-072 remains Silex-owned and P11 remains Nodus-owned.
