@@ -35,9 +35,9 @@ A technically correct change that leaves the next Player-AI unable to understand
 - `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — append-only lessons/handoffs produced by completed Player-AI work.
 - `docs/PLAYER_AI_ENTRY_PROMPT.md` — reusable prompt for a new or returning Player-AI.
 
-## Current strategic snapshot
+## Historical strategic snapshot at Overseer-area creation
 
-This is a convenience snapshot only. Re-fetch the Bulletin before acting.
+This is a convenience history snapshot only. Re-fetch the Bulletin before acting.
 
 At the snapshot used to create this area:
 - D-064 — Kestrel — IN_PROGRESS and the sole D-069 transition blocker.
@@ -46,6 +46,8 @@ At the snapshot used to create this area:
 - green authority checkpoint — PASS via PR #65 / run #351.
 - D-069 — waits only for D-064 safe handoff; Veyra is next owner after unlock.
 - OR-024 — large root-cause rewards active, up to +455 above normal task points, with no penalty for attempting difficult tasks.
+
+**Current checkpoint — 2026-10-08 AST:** D-064 and D-069 through D-071 are DONE; D-072 is IN_PROGRESS under Silex; P11/CPR-006 is IN_PROGRESS under Nodus; D-073 and downstream tactical/integration work remain dependency-gated. Use the live Bulletin for ownership/readiness rather than this historical list.
 
 ## Axiom's operating rule
 
