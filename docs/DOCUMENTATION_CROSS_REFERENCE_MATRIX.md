@@ -841,7 +841,7 @@ Owns:
 - [Decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md): decomposed owner requirements, can/will/candidate changes, migration gates and unresolved corpus units.
 - [Full baseline document catalog](DOCUMENTATION_CATALOG_2026-10-02.md): every tracked Markdown file, actual headings, words, hashes and literal references; semantic audit remains separate.
 - [World canon decision queue](world/WORLD_CANON_DECISION_QUEUE.md): exact nine-node/eight-edge baseline and ordered unresolved geography/politics/ecology/progression decisions.
-- [Room composition implementation contract](assets/ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md): current actors versus proposed presence projection, focus panels, pixel/text reuse and raster-precedence gates.
+- [Room composition implementation contract](assets/ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md): historical opening-actor baseline, **implemented D-064 player-safe room-actor projection**, remaining contextual focus-panel/coverage work, pixel/text reuse and raster-precedence gates.
 - [Raster delivery evidence](assets/RASTER_DELIVERY_EVIDENCE_2026-10-02.md): all 24 baseline PNG dimensions, hashes and catalog bindings.
 
 These supplement existing masters. They do not supersede approved identity references or imply new gameplay APIs.
@@ -898,11 +898,12 @@ These records narrow D-028/D-029/D-031. They do not promote divergent implementa
 The moving-base `docs/program/*` hierarchy is not activated by these migrations.
 
 
-## D-030 player-safe actor projection
+## D-030 / D-064 player-safe actor projection
 
-- [Player-safe room actor & context panel projection contract](android/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md): exact current Python/Kotlin/Compose gap, versioned room payload, hidden-state redaction, opening actor equivalence, support-actor identity rule, semantic placement migration, contextual panel lifecycle and verification gates.
+- [Player-safe room actor & context panel projection contract](android/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md): original implementation-target schema covering the versioned room payload, hidden-state redaction, opening actor equivalence, support-actor identity rule, semantic placement migration, contextual panel lifecycle and verification gates.
+- [D-064 final evidence](evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md): verifies the room-actor **presence** migration is implemented — Python player-safe projection, typed Android `GameRoomActor`, semantic placement consumption and forbidden/private-key rejection.
 
-This document is an implementation target, not evidence that room-actor projection already exists at runtime.
+Remaining D-030/D-064-adjacent work is contextual panel depth, broader authored actor/population coverage and final presentation/art integration; do not treat the old scene/location presence heuristic as current authority.
 
 
 ## D-029 family-level asset provenance continuation
