@@ -1039,6 +1039,24 @@ No whole pixel catalog should be removed from the current evidence based only on
 
 **Disposition:** KEEP all 14 source members; no zero-consumer claim is supported for these selectors. Do not replace slot IDs with item art IDs, infer hidden equipment, migrate quality legality to Compose or delete members based on a conditional absence in one screenshot. Future source-to-render regression tests should check the two distinct fallback paths and conditional quality frame visibility.
 
+
+### 30.1F Environment decals and composited overlay consumers
+
+**Bounded source-only audit, no task claim.** Four environment member IDs and their transitive consumers were compared against the existing provenance registry. This supplements, not replaces, [environment provenance](../assets/ENVIRONMENT_SCENE_MAP_PROVENANCE_2026-10-03.md) and the historical [member audit](PIXEL_MEMBER_ASSET_ID_CONSUMER_AUDIT_2026-10-04.md).
+
+| Asset ID | Selection and live consumer |
+| --- | --- |
+| `EVACUATION_SIGNAGE_SET` (24x24) | `PixelEnvironmentDecalCatalog.placements(locationId)` returns this for `PLATFORM_NINE`, `EVAC_STAIR`, `DISTRICT_PLAZA`; `SceneIllustration.kt` draws the returned sprite and position. |
+| `DISTRICT_AMBIENT_DECAL_SET` (32x32) | Same selector and renderer, for `PLATFORM_NINE`, `SERVICE_TUNNEL`, `DISTRICT_PLAZA`; unknown locations yield no decals. |
+| `BLACKOUT_SHADOW_OVERLAY` (128x64) | `PixelEnvironmentOverlayCatalog.blackoutShadows` is the first input to `PixelSceneOverlayCatalog.districtPlazaBlackout` via `compose(...)`. It is a used composite input, not a standalone scene selector. |
+| `EMERGENCY_LIGHT_OVERLAY` (128x64) | `PixelEnvironmentOverlayCatalog.emergencyLights` is the second input to the same composite; later nontransparent pixels overwrite earlier pixels. |
+
+`PixelSceneOverlayCatalog.forScene("DISTRICT_HUB")` returns the composite `DISTRICT_PLAZA_BLACKOUT` and `SceneIllustration.kt` draws it over the base scene, followed by visual-state overlay, decals and props. `DISTRICT_PLAZA` is a decal **location** selector whereas `DISTRICT_HUB` is a scene-overlay **scene** selector; neither key alone proves both render together. The catalog reads public location/scene keys, not hidden route/hazard legality. Visual emergency signage and light strips do not independently authorize travel or indicate that a hazard is safe.
+
+**Existing test-source evidence:** `PixelEnvironmentDecalCatalogTest.kt` covers both exact assets and four location lookups; `PixelEnvironmentOverlayCatalogTest.kt` covers both native masters and the two-layer composite; `PixelSceneOverlayCatalogTest.kt` defines scene-overlay selector assertions. These test files were read but **not run**. No Compose stacking screenshot, accessibility, performance, CI, Android build, emulator or phone verification was performed.
+
+**Disposition:** KEEP all four current source members; a source layer used in composition is not unused. Retain current owners, provenance and layer order. Any future removal or merge requires rendered replacement evidence and rollback review. This subsection does not close Master D-026/D-021 or create a new state owner.
+
 ### 30.2 Hardcoded/transitional state found during consumer audit
 
 The original audit found scene/location-derived actor presence. **D-064 resolved that item.** Current transitional or presentation-local state includes:
