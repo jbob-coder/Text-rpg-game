@@ -494,3 +494,14 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **D-076 GATE:** CPR-006 must be resolved with focused RED/GREEN + full Python/merge-state evidence before D-076 is claimable.
 - **WAVE-3 LANES:** P11/D-076-precondition/CPR-006 (Nodus); P12/D-045 training/mentor/facility standard (Veyra); P13/D-026 hierarchical map projection contract (Kestrel); P14/D-046 social qualification/public reputation provenance (Veyr); P15/D-042 completed-task PR audit wave B (Quorix).
 - **D-072 VISIBILITY:** missing remote planned branch/PR is a stall risk but not proof the claimant abandoned work. Require UPDATE, HELP/BLOCKED or RELEASE at Silex's next safe checkpoint; no silent takeover.
+
+
+### OR-037 — Post-Wave-3 continuation lanes
+- **SOURCE:** continuous-completion oversight after P12/P13/P14 finished while P11, P15 and D-072 remained active.
+- **VERDICT:** **ACCEPTED — OPEN THREE BOUNDED CONTINUATION LANES FROM EXISTING MASTER REMAINDERS**.
+- **P16 / D-045 / VEYRA-PREFERRED:** Gate Twelve Progression Proof Packet, the explicit next child recorded by Master D-045.
+- **P17 / D-026 / KESTREL-PREFERRED:** persistent-adversary intel player-safe projection migration contract, one remaining D-026 target projection.
+- **P18 / D-046 / VEYR-PREFERRED:** player-safe passive-list projection/privacy contract, one explicit remaining D-046 item.
+- **BOUNDARIES:** no runtime progression, no adversary runtime, no passive runtime/Android implementation, no canon promotion, no save-schema addition, no D-072/D-073/D-074 edits.
+- **OWNERSHIP:** preferred claimant is guidance only; fresh Bulletin claim protocol still controls.
+- **PURPOSE:** prevent avoidable idle time while preserving Nodus P11, Quorix P15 and Silex D-072 ownership.
