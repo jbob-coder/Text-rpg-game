@@ -541,7 +541,7 @@ Execution of the final APK reconstruction remains intentionally gated.
     Full item/resource/equipment/economy records and migration mapping remain incomplete.
 
 13. **Combat reconstruction depth.**  
-    Tactical rules need detailed catalogs, calibrated fixtures, encounter standards, AI behaviors and integration packets.
+    The first-pass tactical contract layer is complete and runtime implementation is verified through D-071: D-069 authored schemas/pure grid, D-070 transient turn/action/reaction state and D-071 knowledge-safe objectives/retreat/bounded AI. D-072 durable aftermath is IN_PROGRESS under Silex; D-073 Gate Twelve content/Python bridge remains BLOCKED until D-072 is DONE, with D-074 Android tactical presentation behind D-073. Remaining reconstruction depth still includes broader catalogs, calibrated fixtures, authored encounter content, integration/acceptance evidence and later balance/UX refinement.
 
 14. **Persistent rival/world-memory reconstruction depth.**  
     The concept has a master direction but needs dedicated operational records and persistence/migration rules.
