@@ -23,6 +23,22 @@ Each step must:
 
 The goal is not to create a decorative concept document. The goal is to make the document executable: another agent/session should be able to read it, understand what is authoritative, know what has been decided, and continue building the game without reconstructing intent from chat history.
 
+## Current implementation overlay — 2026-10-08
+
+This master preserves the original Steps 1–14 planning sequence below. Several implementation prerequisites named there have since been completed and must not be re-opened merely because older step text still describes them as future work.
+
+Current repository truth:
+- **D-064 room-actor presence projection is implemented and verified.** Python owns the player-safe room projection; Android consumes typed room actors and semantic placements; scene/location IDs no longer invent story-actor presence. Contextual focus panels, broader actor/pose/outfit coverage and some held-prop/presentation work remain separate.
+- **D-065 recurring Tamsin durable-memory proof is DONE.**
+- **D-067 bounded Gate Twelve inventory/equipment proof is DONE**, including invalid-equip rollback.
+- **D-068 bounded Trace Chamber activity proof is DONE.**
+- **D-069, D-070 and D-071 tactical runtime foundations are DONE** through the deterministic grid/schema core, transient turn/action engine and knowledge-safe objective/retreat/AI layer.
+- **D-072 durable tactical aftermath is currently IN_PROGRESS under Silex.**
+- **D-073 Gate Twelve tactical content/Python bridge remains BLOCKED until D-072 is DONE**; D-074 Android tactical presentation follows D-073.
+- Live task ownership/readiness comes from `docs/AI_TASK_BULLETIN_BOARD.md`; semantic task state comes from `docs/THE_GAME_MASTER_TASK_REGISTER.md`.
+
+Therefore, older statements such as “preferred first code-bearing slice: player-safe room-actor projection,” “hard-coded actor placement once safe projection exists,” or actor presence described as merely transitional are **historical planning context**. Preserve their design rationale, but use the current D-064/D-067/D-068/D-069–D-072 evidence chain when deciding what is actually unfinished.
+
 ---
 
 # 1. Project authority and design mandate
