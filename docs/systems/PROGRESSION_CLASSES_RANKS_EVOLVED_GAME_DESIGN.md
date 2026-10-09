@@ -1626,8 +1626,8 @@ Proceed in this order:
 1. **DONE** — build the **Skill Registry** for the 23 current skills;
 2. **DONE** — build the **Combat Class Catalog** for the seven working class families;
 3. **DONE** — build the **Profession / Rank / Status namespace packet**;
-4. **NEXT** — build the **Training / Mentor / Facility progression standard**;
-5. build the **Gate Twelve progression proof packet**;
+4. **DONE** — build the **Training / Mentor / Facility progression standard**;
+5. **NEXT** — build the **Gate Twelve progression proof packet**;
 6. build the **progression UX projection contract**;
 7. calibrate numbers only after the above structures are coherent.
 
@@ -1664,7 +1664,7 @@ Its dependency matrix covers all 23 current skills exactly once as matrix rows a
 
 No class runtime, save migration, numeric unlock threshold, canon institution, final specialization name or final class visual asset is claimed by this materialized child.
 
-The next D-045 child is the **Profession / Rank / Status namespace packet**.
+The Profession / Rank / Status namespace packet is now materialized; see section 40.
 
 
 # 40. Materialized child — Profession / Rank / Status Namespace Standard
@@ -1684,6 +1684,30 @@ The child provides:
 - faction/institution/privacy and player-safe projection rules;
 - D-061-compatible schema-v1 non-expansion for current Phase 1;
 - future save/content migration and validation requirements;
-- a direct next D-045 child: the **Training / Mentor / Facility Progression Standard**.
+- the handoff into the now-materialized **Training / Mentor / Facility Progression Standard**.
 
 No profession catalog, canon institution, rank ladder, runtime progression state, save-schema change, Android DTO, or tactical runtime behavior is implemented by this materialized child.
+
+# 41. Materialized child — Training / Mentor / Facility Progression Standard
+
+The fourth reconstruction-grade D-045 child is now:
+
+- `TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`
+
+It preserves existing V10 activity/time/resource owners while defining the target ownership network for training paths, mentor/evaluator capabilities and facility capabilities.
+
+Verified scope:
+- all 23 current runtime skill IDs are mapped;
+- all seven target class families are mapped;
+- mentor/evaluator capability is distinct from NPC identity;
+- facility capability is distinct from location/institution identity;
+- profession/rank/status namespaces are consumed rather than duplicated;
+- access, visibility, schedule, injury/condition, plateau and cross-training gates are explicit;
+- D-061 schema-v1/no-new-top-level-progression-owner boundary remains intact;
+- player-safe projection and future migration/test seams are defined.
+
+Evidence: `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`.
+
+No runtime training formula, balance value, mentor NPC, canon institution/faction, facility location, save field, Android DTO or tactical behavior is implemented by this child.
+
+The direct next D-045 child is the **Gate Twelve Progression Proof Packet**, followed by the **Progression UX Contract**.
