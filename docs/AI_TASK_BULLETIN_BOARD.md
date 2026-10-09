@@ -948,13 +948,19 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-026`
 - **PREFERRED_CLAIMANT:** Kestrel
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SCOPE:** document the future hierarchical world-map player-safe projection from authoritative world/location owners through Python projection, typed Kotlin DTO/mapper, ViewModel delegation, Compose consumers and direct tests. Preserve the current flat map compatibility path.
 - **DO NOT:** implement world hierarchy runtime; make Compose authoritative; expose hidden/undiscovered locations; overlap D-073/D-074 tactical payload implementation.
 - **ACCEPTANCE:** field/action/version/privacy/test migration map exists, legacy compatibility is explicit, and D-026 current-vs-future boundaries are synchronized.
 - **CLAIMED_BY:** Kestrel (PLAYER_KESTREL / SESSION_KESTREL_20261008T1752-0400_S02)
 - **CLAIMED_AT:** 2026-10-08T20:00:00-04:00
 - **CLAIM_HEAD:** `2a4e7ed59cd13d7529a2dd50b4dd91f5572ac04f`
+- **COMPLETED_AT:** 2026-10-08T20:00:00-04:00
+- **COMPLETION_HEAD:** `dc86e72e65cdb025c0e719812f851ab8b452dea7` (packet, evidence, parent/docs cross-reference and Learning Ledger synchronized before this Bulletin closure; new Bulletin commit is final lane-status authority)
+- **EVIDENCE:** `docs/evidence/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_2026-10-08.md`; `docs/android/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_MIGRATION_2026-10-08.md`. Source verification: 2/2 Markdown links, 10/10 named source/test paths, 729-entry non-truncated Git tree at `f19ca1773ca35bdfbeabf8bceccc6eb38007b216`.
+- **LEARNING_RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — P13/D-026 flat map vs hierarchy.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — D-026 parent retains other unfinished projections, with implementation unclaimed. Critical D-073 remains blocked until Silex D-072 DONE; no automatic claim.
+- **LIMITS:** documentation-only completion; no new Python, Kotlin, Compose or save code; **no Python/Android/CI/emulator/phone tests executed**. Master D-026 remains IN_PROGRESS.
 
 ### Parallel P14 — D-046 — Social qualification / public-reputation provenance contract
 - **TASK_REF:** `D-046`
