@@ -12,7 +12,7 @@ This register supplements the existing directive breakdown; it does not declare 
 | 1 | Preserve priority, permission, prohibitions and requested scale | Established; renewed by this directive | Master program, AGENTS, context log |
 | 2 | Inventory every document and its references | Exact-baseline catalog added in this batch | Documentation catalog and evidence JSON |
 | 3 | Inventory source, rasters, consumers and stages | 24 raster bindings audited on program baseline | Raster evidence ledger; later branches still require audit |
-| 4 | Specify room actors, panels, overlays and reuse | Operational child contract added | Room composition contract; no runtime API implied |
+| 4 | Specify room actors, panels, overlays and reuse | Operational child contract added; D-064 room-actor presence runtime verified | Room composition contract + D-064 evidence; contextual panels/broader presentation remain later work |
 | 5 | Distinguish decided world facts from missing canon | Decision queue added | Gate Twelve exact coordinates/routes; world parent remains open |
 | 6 | Reconcile implementation PR ancestry and survivors | IN_PROGRESS, not completed here | Future exact-head branch/file disposition matrix |
 | 7 | Resolve progression/combat/economy/social design | Domain masters exist; numerical rules remain incomplete | Rule examples, formulas, migrations and balance fixtures |
@@ -33,7 +33,7 @@ The requested targets remain 3,000 documentation, 2,000 guides/planning, 10,000 
 | Python authoritative rules / deterministic state | KEEP + EXTEND | New mechanics use existing state/projection ownership | Regression and save tests |
 | Seven attributes / stable content IDs | KEEP now; migration CANDIDATE | Final taxonomy/caps and any eighth stat require explicit decision | Versioned old-to-new mapping |
 | Equipment / modifiers / status inspection | KEEP contracts | More authored items and truthful visual mappings | Engine-owned math; no fake gear |
-| Scene/location actor lookup | REWORK target | Generalize to visible actor projection before autonomous NPC population | Hidden-state redaction + authored fixture equivalence |
+| Scene/location actor lookup / room presence | **D-064 IMPLEMENTED / KEEP + EXTEND** | Preserve player-safe typed room-actor projection and semantic placement; extend authored actor coverage/context panels without restoring scene/location presence inference | D-064 hidden-state redaction + opening fixture equivalence; future panel/coverage tests |
 | Character portraits / focus panels | NEW | Stable identity family, player-safe context and actions | Presence projection and portrait provenance |
 | Environment source/raster delivery | REWORK operational process | Synchronize source and PNG revisions; declare preferred variant | Hash/dimension/render comparison |
 | Gate Twelve map artwork | KEEP approved authored direction | Bind actual approved art directly once located; retain topology separately | Source provenance and coordinate overlay QA |
