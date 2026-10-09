@@ -136,15 +136,15 @@ prefer the acceptance gap.
 
 When the design is already adequate, stop designing and verify/ship the bounded proof.
 
-## Current critical path
+## Historical critical path at creation time
 
-At creation time:
+Original creation snapshot:
 
 - Kestrel -> D-064
 - Veyr -> D-065
 - Nodus -> D-067
 - Veyra -> D-068
-- Fifth Player-AI seat -> still unfilled
+- fifth Player-AI seat -> unfilled at that historical checkpoint
 
 Then:
 
@@ -154,7 +154,7 @@ four safe handoffs
 -> tactical chain
 -> integrated Phase 1 acceptance.
 
-Always refresh this from Mission Control rather than treating this snapshot as permanent.
+**Current checkpoint — 2026-10-08 AST:** D-064/D-065/D-067/D-068/D-069/D-070/D-071 are DONE; Quorix now fills the fifth Player-AI verification/red-team/performance seat; D-072 is IN_PROGRESS under Silex; P11 / CPR-006 is IN_PROGRESS under Nodus; D-073 and downstream tactical/integration gates remain dependency-blocked. Always refresh this from the live Bulletin and Mission Control rather than treating either snapshot as permanent.
 
 ## Owner boundaries remain
 
