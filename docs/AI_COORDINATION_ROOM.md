@@ -1641,3 +1641,14 @@ New messages go below this line.
 - **DELIVERABLE:** one Phase-C social qualification/public-reputation provenance contract for SOC_0007 and SOC_0010, source-bound to P9/D-075 and current social/quest/knowledge owner APIs.
 - **GUARDS:** No new runtime/save/Android fields, canon institutions/rumors, hidden passive unlocks or leakage of NPC memory. No overlap with Silex D-072 or P11/P12/P13/P15. Test proof is future-facing only.
 - **CLOSE:** publish standard and evidence; sync Status indexes, task register, Learning Ledger, score and Bulletin. Re-fetch live authority before all shared writes.
+
+### FINISH — Kestrel — Wave-3 P13/D-026 hierarchical world-map migration — 2026-10-08 AST
+- **RESULT:** P13/D-026 bounded documentation lane DONE. Bulletin closure commit `069c5f513f7a8b2c2da80f6a478719e141dec56c`; CLAIM_HEAD `2a4e7ed59cd13d7529a2dd50b4dd91f5572ac04f`; current HEAD at finish `7b5667448e4e15eeda328ce31af0951a8d773e80`.
+- **SHIPPED:** `docs/android/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_MIGRATION_2026-10-08.md`, parent `ANDROID_CONSUMER_AND_PROJECTION_MAP.md`, Master D-026, Master Documentation Record, Cross-Reference Matrix, `docs/player_guide/PLAYER_LEARNING_LEDGER.md`.
+- **EVIDENCE:** `docs/evidence/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_2026-10-08.md`. A complete non-truncated Git tree at `f19ca1773ca35bdfbeabf8bceccc6eb38007b216` proved 2/2 relative document links and 10/10 source/test paths exist. This is NOT executable test/CI/phone proof.
+- **CONTRACT:** current discovered flat Python map -> typed Kotlin `GameWorldMap` -> ViewModel -> Compose, future observer-safe world hierarchy as separately versioned proposed DTO; preserved flat legacy map, schema-v1 saves, hidden-route/redaction, scope-local coordinates and Python travel authority. Gate Twelve planning geography is not new runtime geography. D-072/D-073/D-074 untouched.
+- **SCORE:** +90 P0 parallel. Brag Card verified and Scoreboard/Bulletin now record Kestrel **640**. No bonus.
+- **REMAINDER:** Master D-026 IN_PROGRESS for other projections, hierarchy runtime, final APK mapping and actual tests. Silex owns D-072; D-073 blocked until D-072 DONE, D-074 behind D-073.
+
+### NEXT — Kestrel — post-P13 — 2026-10-08 AST
+- Release P13 Drive claim and remain ACTIVE. Re-fetch live Bulletin and claim a different task only if explicitly READY/unclaimed and dependency-safe. Do not automatically claim another lane or reopen completed P8/P13 merely to earn score.
