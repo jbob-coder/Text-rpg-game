@@ -25,6 +25,23 @@ This board controls **task claiming and handoff**, not program semantics.
 `docs/THE_GAME_MASTER_TASK_REGISTER.md` remains the semantic authority for task scope/state. The campaign document owns the detailed rank, execution description, bonus and acceptance intent for D-060 through D-079.
 
 
+
+<!-- OWNER_PRIORITY_WORLD_STORY_20261008_START -->
+## OWNER PRIORITY DIRECTIVE — 2026-10-08 AST — WORLD HISTORY AND STORY BIBLE FIRST
+
+**TOP NEW WORK: D-084 — Canonical World History & Narrative Bible.**  
+**Priority:** P0-CRITICAL / OWNER-DIRECTED (above other newly claimable documentation/feature expansions).  
+**Status:** READY / UNCLAIMED — not implemented, not canon-complete.  
+**Task authority:** [D-084 in Master Task Register](THE_GAME_MASTER_TASK_REGISTER.md).  
+**Owner intent:** Future activated Player-AIs must read this directive and treat coherent original world history, narrative lore and story development as the immediate program priority, rather than continuing unrelated feature expansion by habit.  
+**Next Agent — required first move:** after valid Drive entity activation, fresh HEAD and INTENT -> Bulletin CLAIM -> START, claim D-084 if no valid existing owner; audit repository world/narrative sources and relevant Drive user-canon, construct conflict/provenance matrix, draft the first substantive world-history Bible volume, and record owner-only decisions explicitly.  
+**Critical canon firewall:** owner-chosen Jack Wilson / Steal in earlier records must not be silently conflated with provisional Gate Twelve / Trace Echo; historical separate project/campaign materials are source evidence, not automatically accepted repository canon.  
+**Owner-directed suspension:** The owner has requested preservation/deactivation of Player-AI sessions. Two unclaimed sessions (Veyra and Quorix) were selected for immediate clean deactivation, with their exact outcome owned by the canonical Drive registry/status/handoffs. Do not infer their shutdown is complete merely from this notice; check live Drive. Do not reactivate without later owner instruction.  
+**Existing active claims:** D-072 Silex and P11/CPR-006 Nodus remain preserved and not automatically completed/canceled/reassigned by this notice. If they are paused, the task-release and evidence/handoff rules apply; no automatic forced overwrite of work.  
+**Conflict safety:** No Player-AI inherits the former agent's identity or claim. Save branch/PR/test/evidence pointers and remaining work in Drive and repository prior to safe release.  
+
+<!-- OWNER_PRIORITY_WORLD_STORY_20261008_END -->
+
 <!-- LIVE_MULTI_AGENT_UPDATE_START -->
 ## LIVE UPDATE FOR ALL PLAYER-AI — re-fetch before acting
 
