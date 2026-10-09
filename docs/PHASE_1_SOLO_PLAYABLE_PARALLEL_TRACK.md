@@ -423,19 +423,19 @@ Verified Gate Twelve route:
 
 Exact verification evidence:
 - `docs/evidence/D066_PHASE1_PROGRESSION_PROOF_2026-10-04.md`;
-- verification PR #42 at `48ce6223fb84c3d31457c7f1dacaec87ce0d3df2`;
-- Android Pixel Client run #312 / `37250124885`;
-- D-066 Python progression/persistence/determinism tests: PASS;
-- Android JVM tests: PASS;
+- verification PR #42 final proof head `c60f2ca1f52caf95ced00272a57b432e7740a866`;
+- PR merge checkout `1bc7939ba6100c99db0ab442fc6939aa9af44ed4`;
+- final Android Pixel Client run **#319 / `37250623837` — SUCCESS**;
+- Python engine: **319 / 319 passed, 0 failures/errors**;
+- Android JVM/build/package: PASS;
 - Compose instrumentation compilation: PASS;
-- connected API-35 emulator suite: 35 / 35 PASS;
-- debug APK assembly/content verification: PASS.
+- connected API-35 emulator suite: **35 / 35 PASS**;
+- debug APK assembly/content verification: PASS;
+- APK SHA-256: `e7066e937c01e61d33541822c4532b4ce41c55cc61f8b63a40f5f9c901e7b441`.
+
+Run #312 / `37250124885` was the earlier partially red verification attempt caused by the frozen base's `pytest` harness mismatch; it is historical troubleshooting evidence, **not** the D-066 acceptance run.
 
 This proves one reusable Phase 1 progression route. It does **not** mark full classes, professions, global rank design, progression population, or final progression UX complete.
-
-Repository-level caveat:
-- the aggregate Python job remains red because the unchanged room-projection test imports `pytest` while the workflow does not install it;
-- no D-066 Python test failed.
 
 ## D-062 social migration gate
 
