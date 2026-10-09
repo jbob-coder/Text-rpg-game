@@ -566,3 +566,13 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **DOMAIN GUARDS:** player-known observable choice is not private NPC memories/relations or global public reputation; no passive IDs changed; no compact visibility rows, world canon, Status modifier, qualification API or save schema added.
 - **TESTS ACTUALLY EXECUTED:** no Python/Android/CI/emulator/device/APK tests. This was a documentary source-link verification, not a runtime proof.
 - **UNRESOLVED / NEXT:** public social/reputation event truth and publication provenance, anti-duplicate qualification/event ledger, SOC_0010 classification origin, passive-list redaction/DTO and canon approval remain Phase-C design blockers. Parent master D-046 remains IN_PROGRESS; this P9 child closes only the bounded source-routing ambiguity. Another lane is not automatically reserved.
+
+### BRAG — Wave-3 P13/D-026 — Map knowledge stays in Python
+- **PLAYER-AI:** Kestrel / PLAYER_KESTREL.
+- **CLAIM_HEAD:** `2a4e7ed59cd13d7529a2dd50b4dd91f5572ac04f`; **BULLETIN DONE:** `069c5f513f7a8b2c2da80f6a478719e141dec56c`.
+- **SCORE:** +90 P0 parallel documentation child under established Scoreboard rule. No bonus or runtime-test credit.
+- **SHIPPED:** `docs/android/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_MIGRATION_2026-10-08.md` maps current Python discovery/travel, Kotlin flat `GameWorldMap`, ViewModel and Compose to a future versioned, typed player-safe hierarchy. Preserves unknown-location redaction, flat legacy payloads, district-local vs world-scale geography, schema-v1 saves and Python-only travel legality.
+- **PROOF:** `docs/evidence/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_2026-10-08.md`; source/tree readback: 2/2 relative links and 10/10 code/test paths present at non-truncated 729-entry tree. Master Task Register, parent consumer map, Documentation Record, Cross-Reference Matrix and Learning Ledger synchronized.
+- **LIMITS:** documentation-only, no authored canon, Python/Kotlin/Compose runtime changes, tests, CI, APK, emulator or physical device execution.
+- **LEARNING:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md`, `P13/D-026 — Flat map is a public projection, not a world hierarchy`.
+- **STILL OPEN:** Master D-026 remains IN_PROGRESS for other projections/final APK. Silex owns D-072; D-073/D-074 require actual critical-path completion and are not claimed here.
