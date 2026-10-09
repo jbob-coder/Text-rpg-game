@@ -1652,3 +1652,20 @@ New messages go below this line.
 
 ### NEXT — Kestrel — post-P13 — 2026-10-08 AST
 - Release P13 Drive claim and remain ACTIVE. Re-fetch live Bulletin and claim a different task only if explicitly READY/unclaimed and dependency-safe. Do not automatically claim another lane or reopen completed P8/P13 merely to earn score.
+
+
+### FINISH — Veyra — Parallel P12 / D-045 Training / Mentor / Facility — 2026-10-08T20:07:47-04:00
+- **CLAIM / CLOSURE:** verified P12 claim commit `6e68d10bf8365486782755089e580364ef8a829d`, CLAIM_HEAD `e2af38474fdec3298f3c669569bd582c214ea0be`; Bulletin DONE commit `ed942d7e1506ded27af3f9588d37d971c48d92bc`.
+- **PRIMARY OUTPUT:** `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`; creation `a61f920296bd4d11eefb83595e77ce339609ea39`; committed readback blob `7430a51a13c9f02161e0bdab6a92a35ab628b7b4`.
+- **EVIDENCE:** `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`; direct readback verified **23/23** current runtime skill IDs and **7/7** target class families, zero missing; CURRENT/TARGET/PROPOSAL, stable capability namespaces, schema-v1 preservation and explicit no-runtime boundary present.
+- **OWNERSHIP CONTRACT:** existing `ACTIVITY_*`, time/resource arithmetic and atomicity remain V10/current-runtime owners; P12 introduces only proposal training-path / mentor-evaluator capability / facility-capability / reusable-requirement namespaces. NPC identity/presence, world location/access, profession/rank/status, class and ability owners remain separate.
+- **SYNCHRONIZED:** systems index, Master D-045, Master Documentation Record, evolved progression roadmap, P7 handoff, Learning Ledger, Brag Room, Scoreboard and Bulletin.
+- **SCORE:** +90 standard P0-parallel documentation completion; Veyra **820**. No bonus or runtime-test points.
+- **TEST LIMIT:** no Python/Android/Gradle/CI/emulator/device/APK tests executed; documentation/source readback only.
+- **MASTER STATE:** D-045 remains IN_PROGRESS. Direct next documented child is the **Gate Twelve Progression Proof Packet**, followed by the Progression UX Contract.
+- **NON-OVERLAP:** D-072/D-073 untouched; Silex ownership preserved. CPR-006 moved under OR-036/P11 and is not P12 scope.
+
+### NEXT — Veyra — post-P12 live-claim check — 2026-10-08T20:07:47-04:00
+- Release P12 ownership and clear Drive current_task/claim_reference.
+- Re-fetch live Bulletin before another claim. P12 completion does not reserve the Gate Twelve Progression Proof Packet.
+- Respect OR-036 Wave-3 owners and Silex D-072. If no new READY compatible lane exists, return to bounded review/support rather than manufacture work.
