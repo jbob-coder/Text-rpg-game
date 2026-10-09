@@ -54,10 +54,10 @@ Own/review:
 Current execution:
 - D-067 is DONE, including D-067-B;
 - the green authority checkpoint is established;
-- Nodus is available for integration review and is a preferred claimant for D-080 while Kestrel remains on D-064.
+- Historical note: D-080 and D-064 are both DONE. Nodus's live primary/availability must be resolved from the Bulletin claim and canonical Drive STATUS, not this durable specialization description.
 
 Next preference:
-- Nodus should prefer D-080 repository-learning infrastructure, integration/persistence, D-076-style cross-system verification, and architecture review over unrelated presentation/content feature work.
+- Nodus should prefer integration/persistence, D-076-style cross-system verification, and architecture review over unrelated presentation/content feature work. A specific task is eligible only after a fresh Bulletin check and the normal claim protocol.
 
 Nodus may block a proposed merge-state completion when integration evidence is red, but may not redefine another domain's approved gameplay semantics unilaterally.
 
