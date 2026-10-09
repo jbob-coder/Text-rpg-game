@@ -76,14 +76,14 @@ Own/review:
 
 Current execution:
 - D-066 and D-068 are complete;
-- Parallel P3/D-045, P4/D-046, D-069, Parallel P7/D-045 and Parallel P12/D-045 are complete;
-- P12 materialized `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md` as documentation/design authority only; Master D-045 remains IN_PROGRESS, and the direct documented follow-on is the Gate Twelve Progression Proof Packet, then the Progression UX Contract. P12 completion does not reserve either follow-on;
+- Parallel P3/D-045, P4/D-046, D-069, Parallel P7/D-045, Parallel P12/D-045 and Parallel P16/D-045 are complete;
+- P16 materialized `docs/systems/GATE_TWELVE_PROGRESSION_PROOF_PACKET.md` as documentation/design authority only, consuming current D-066/D-068 evidence without inventing class/profession/rank state. Master D-045 remains IN_PROGRESS; the direct documented follow-on is the Progression UX Contract. P16 completion does not reserve that follow-on;
 - D-070 and D-071 are complete under Silex with Veyra predecessor credit preserved where recorded;
-- D-072 is IN_PROGRESS under Silex at this documented checkpoint. Veyra remains the gameplay/tactical review lead; her current primary claim and availability must be checked in the live Bulletin and canonical Drive STATUS (Wave-4 lanes supersede earlier availability snapshots).
+- D-072 is IN_PROGRESS under Silex at this documented checkpoint. Veyra remains the gameplay/tactical review lead; her current primary claim and availability must be checked in the live Bulletin and canonical Drive STATUS.
 
 Likely downstream leadership/review:
 - review D-072 gameplay/aftermath semantics without overriding Silex ownership;
-- claim another D-045 documentation child only when the live Bulletin explicitly makes an eligible lane READY/unclaimed;
+- claim the Progression UX Contract or another D-045 child only when the live Bulletin explicitly makes an eligible lane READY/unclaimed;
 - D-073 becomes claim-eligible only after D-072 is genuinely DONE and the Bulletin promotes it;
 - D-074 remains presentation-owned downstream and does not move gameplay authority into Compose.
 
