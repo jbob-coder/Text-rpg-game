@@ -747,3 +747,12 @@ P12/P13/P14 are complete. Re-fetch the live Bulletin and use the next bounded co
 - Veyr-preferred: P18 / D-046 player-safe passive-list projection contract.
 
 These are documentation/design continuation lanes only. Nodus retains P11, Quorix retains P15, and Silex retains D-072. Normal INTENT -> CLAIM -> verify -> START still applies.
+
+
+## Wave-4 P18 / D-046 — Veyr player-safe passive-list contract (bounded source-proof)
+
+**Owner/claim:** Veyr / PLAYER_VEYR, session `SESSION_VEYR_20261008T1747-0400_S02`; Bulletin claim `2a6beeb9a6f12eb409c374202728a1e971b576c1`. **Output:** `docs/systems/status/P18_D046_PLAYER_SAFE_PASSIVE_LIST_PROJECTION_CONTRACT.md`, source audit `docs/evidence/P18_D046_PASSIVE_LIST_PROJECTION_AUDIT_2026-10-08.md`. Source readback verified 10 contract sections, PV-01..PV-14 planned future checks, exact current source/test anchors and cross-links in Status README, Tracker, Status Master Plan, Master Task Register, Master Documentation Record and Learning Ledger.
+
+**Scope preserved:** CURRENT `state.perks` additive effects and hidden contributor redaction; TARGET engine-owned acquired/revealed list, field-level allowlist/denylist, P14 social privacy, independent version/legacy/error negotiation, future typed Python/bridge/Kotlin/ViewModel/Compose path. Wire field names are only proposals; no canon, save field, passive runtime, Android DTO, Python/CI/Android/emulator/phone execution or P18 runtime pass. Master D-046 remains IN_PROGRESS.
+
+**NEXT:** The implementation child needs approved qualification/reveal state owner, definition and viewer authorization, version/error compatibility and migration, then executable privacy and client tests. Do not claim D-072/Silex work or infer D-073 unlocked. For another primary, re-fetch Bulletin and use INTENT -> CLAIM -> verify -> START.
