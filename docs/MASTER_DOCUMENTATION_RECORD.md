@@ -52,12 +52,13 @@ When this record conflicts with newer repository evidence, use this order:
 1. exact repository files at the current branch/HEAD;
 2. fresh test/build/runtime evidence for implementation claims;
 3. `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`;
-4. this master documentation record;
-5. `docs/THE_GAME_MASTER_TASK_REGISTER.md`;
-6. current domain master documents;
-7. current context logs;
-8. historical handoffs and older branch snapshots;
-9. chat memory.
+4. `docs/AI_TASK_BULLETIN_BOARD.md` for **live task readiness, claim ownership and operational blocked/DONE state**;
+5. this master documentation record for consolidated documentation state;
+6. `docs/THE_GAME_MASTER_TASK_REGISTER.md` for task semantic scope, dependencies, acceptance criteria and durable evidence; it must not override a newer Bulletin claim/readiness state;
+7. current domain master documents;
+8. current context logs;
+9. historical handoffs and older branch snapshots;
+10. chat memory.
 
 ### 1.2 Status vocabulary
 
