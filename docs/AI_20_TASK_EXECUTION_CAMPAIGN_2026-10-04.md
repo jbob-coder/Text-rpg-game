@@ -8,6 +8,9 @@
 **Created from observed program HEAD:** `10967480dd1defeadcda1f8b4f7ea6fdc3b4e90f`  
 **Important:** the observed HEAD is historical context only. Every claimant must fetch live HEAD.
 
+
+> **Current execution checkpoint — 2026-10-08 AST:** this file remains the ranked campaign design, not live claim authority. The live Bulletin currently records D-069, D-070 and D-071 as completed tactical runtime/proof steps; D-072 is IN_PROGRESS under Silex; D-073 and D-074 are dependency-blocked; D-075 is complete; D-076 remains blocked while its separate P11/CPR-006 precondition is IN_PROGRESS under Nodus and the tactical chain is unfinished; D-077 through D-079 remain downstream-blocked. No row in the historical ranking becomes claimable merely because it appears next here. Use the Bulletin plus Master Task Register for current state and ownership.
+
 ## 1. Campaign objective
 
 Turn the completed first-pass documentation floor into an evidence-backed path toward a genuinely integrated Gate Twelve Phase 1 while continuing reconstruction-grade program control.
