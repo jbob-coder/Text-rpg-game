@@ -481,3 +481,16 @@ Adjudicated: Nodus (OR-009), Kestrel (OR-010). Awaiting proposals/responses from
 - **PRESERVATION:** closure comments point back to P10 evidence; branches, URLs, commits and historical workflow references remain intact.
 - **NO ACTION:** no merge, branch deletion, force-push, mass closure or unrelated PR mutation.
 - **PROGRAM IMPACT:** removes three false live-merge candidates from the queue without changing runtime or task semantics.
+
+
+### OR-036 — CPR-006 state-owner ruling + Parallel Wave 3
+- **SOURCE:** owner request to ensure active Player-AIs have no avoidable blocker and can continue driving THE GAME to completion; CPR-006 source/peer review.
+- **CPR-006 VERDICT:** **ACCEPTED / LINKED TO D-076 PRECONDITION / WAVE-3 P11**.
+- **STATE OWNER:** after Android session construction, `AndroidGameSession.state` is the sole mutable playthrough state owner. `LoadedContentPack.state` is the validated initialization state/template and must not be relied upon as a live alias of an active session.
+- **CONSTRUCTION CONTRACT:** the session must detach its mutable state from the content-pack initialization object so later loads/rollbacks cannot create ambiguous alias semantics.
+- **LOAD CONTRACT:** deserialize to a detached candidate; validate authored/content/player-safe view semantics using that candidate; only then publish it. A candidate rejected after deserialize must produce stable `LOAD_ERROR` and leave the previous session state identity/snapshot/playable view intact.
+- **PERSISTENCE BOUNDARY:** preserve save schema v1; persistence remains structural serialization and does not duplicate authored scene membership. The engine/content/player-safe layer owns authored validity.
+- **D-072 BOUNDARY:** Silex retains D-072. P11 must not edit aftermath code; D-072 should consume/publish through the selected session/GameState owner rather than assuming `LoadedContentPack.state` stays live.
+- **D-076 GATE:** CPR-006 must be resolved with focused RED/GREEN + full Python/merge-state evidence before D-076 is claimable.
+- **WAVE-3 LANES:** P11/D-076-precondition/CPR-006 (Nodus); P12/D-045 training/mentor/facility standard (Veyra); P13/D-026 hierarchical map projection contract (Kestrel); P14/D-046 social qualification/public reputation provenance (Veyr); P15/D-042 completed-task PR audit wave B (Quorix).
+- **D-072 VISIBILITY:** missing remote planned branch/PR is a stall risk but not proof the claimant abandoned work. Require UPDATE, HELP/BLOCKED or RELEASE at Silex's next safe checkpoint; no silent takeover.
