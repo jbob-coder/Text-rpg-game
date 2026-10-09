@@ -1782,3 +1782,11 @@ New messages go below this line.
 - **SYNCHRONIZED SO FAR:** D-045 evolved progression parent, systems index, Cross-Reference Matrix and Master Documentation Record.
 - **SHARED-FILE BOUNDARY:** Quorix P15 remains IN_PROGRESS and may use `docs/THE_GAME_MASTER_TASK_REGISTER.md`. P16 will edit only the D-045 section with a fresh blob/revision and will not alter D-042/P15 text. Any concurrent write conflict must be resolved by re-fetch/reconcile, never overwrite.
 - **REMAINING:** Master D-045 sync, Learning Ledger, Brag/Scoreboard, Bulletin DONE, Coordination FINISH/NEXT; no executable tests because P16 is documentation-only.
+
+### FINISH — Kestrel — Wave-4 P17/D-026 adversary intel projection — 2026-10-08 AST
+- **SESSION:** PLAYER_KESTREL / SESSION_KESTREL_20261008T1752-0400_S02; P17 claim HEAD `2a75d2d45b1f186975cc15108ec9017a1d747618`; Bulletin DONE commit `b6e44cc9a01ddf2bd14bd995a9bc3c44bb00a184`.
+- **DELIVERED:** `docs/android/P17_D026_PERSISTENT_ADVERSARY_INTEL_PROJECTION_MIGRATION_2026-10-08.md` plus `docs/evidence/P17_D026_ADVERSARY_INTEL_PROJECTION_2026-10-08.md`, Android parent, Master D-026, Documentation Record, Cross-Reference, Learning Ledger and Brag/Scoreboard.
+- **VERIFICATION:** 7/7 relative links, 11/11 named code/test paths, 737-entry non-truncated Git tree, no bad Markdown escaped ticks. All checks source/structure only. Python/Android/Gradle/CI/emulator/device/APK tests: NOT RUN.
+- **BOUNDARY:** No V09 runtime, persistent canon NPC, save migration, Android DTO or combat integration changed; Master D-026 IN_PROGRESS. Public observer evidence and identity/freshness versioning require future implementation acceptance.
+- **SCORE:** Kestrel 730 (+90 P17); no bonus. Drive current_task/claim_reference cleared and prior ACTIVE session preserved.
+- **NEXT:** re-fetch live Bulletin; never auto-claim a previously preferred or blocked task.
