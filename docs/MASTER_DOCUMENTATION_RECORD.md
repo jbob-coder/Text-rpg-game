@@ -496,8 +496,8 @@ Execution of the final APK reconstruction remains intentionally gated.
 3. **PR #33 moving-base requirement reconciliation (D-044) — DONE.**  
    Shared-file and Class-C / EXTRACT UNIQUE reconciliation is complete. Unique non-conflicting requirements were selectively migrated; duplicate/conflicting program hierarchies remain historical or blocked. This does not authorize a blind merge/rebase or PR retargeting.
 
-4. **Reconcile stale task-register text against the live tree.**  
-   Example: D-046's older NEXT text names several standards as future work even though files such as `ABILITY_RARITY_STANDARD.md`, `PRIMARY_ABILITY_REGISTRY_SCHEMA.md`, `PASSIVE_REQUIREMENT_LANGUAGE.md`, `STATUS_KNOWLEDGE_VISIBILITY_STANDARD.md`, `LEVEL_AND_XP_STANDARD.md`, `AWAKENING_EVENT_STANDARD.md`, and `LEVEL_100_EXCEPTION_STANDARD.md` now exist. The task remains in progress, but its next-step list must be refreshed rather than trusted literally.
+4. **Continue stale task-register reconciliation as maintenance; the known D-046 NEXT mismatch is resolved.**  
+   D-046 now explicitly states that its older NEXT list naming rarity/schema/requirement/visibility/Level/awakening standards is superseded because those files exist, and it records P14/P18 bounded children plus the current remaining work. Future stale NEXT/status text should still be reconciled against the live tree and Bulletin, but do not reopen the already-resolved D-046 checklist merely because an older snapshot mentions it.
 
 ### 5.2 P0 — Asset and implementation truth
 
@@ -510,8 +510,8 @@ Execution of the final APK reconstruction remains intentionally gated.
 7. **Resolve Gate Twelve parent-world canon (D-031).**  
    A proposal exists. It must remain non-canon until accepted or revised by the owner.
 
-8. **Create mechanics schema/API migration packets (D-032).**  
-   Target progression/social/items/combat/adversary designs must be mapped to current engine APIs, saves, projections and tests before broad code migration.
+8. **D-032 mechanics schema/API migration packets — DONE at migration-design scope.**  
+   Progression, social, items/economy, tactical combat and persistent-adversary mappings now exist. Broad runtime migration remains separate implementation work and must consume those packets, preserve current owners/schema boundaries, and use task-specific tests/evidence rather than recreating D-032 as setup.
 
 ### 5.3 P1 — Reconstruction-depth domain work
 
