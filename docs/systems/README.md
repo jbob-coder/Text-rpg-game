@@ -52,6 +52,8 @@ Working rule: current runtime facts and evolved target design stay explicitly se
 
 - [Profession / Rank / Status Namespace Standard](PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md) — D-045 target-game contract separating profession, grade, institution/faction rank, civic/social status, reputation, jobs/roles, class and global Level; includes stable-ID guidance, 23-skill/class cross-links and future migration/privacy boundaries.
 
+- [Training / Mentor / Facility Progression Standard](TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md) — D-045 P12 reconstruction contract preserving `ACTIVITY_*` training ownership while defining proposal-only training-path, mentor/evaluator-capability and facility-capability namespaces; maps all 23 current skills and seven class families, player-safe visibility, plateau/access gates and future migration/test seams.
+
 
 ## Status UI / abilities / passives
 
