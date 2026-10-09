@@ -72,4 +72,4 @@ This release record is historical. D-070/D-070-B are DONE at `6b7cf6be32f88eaae7
 continuation PR #78 / run #403. Veyra's valid code and 28 tests were retained;
 missing scheduling and causal defects were repaired with 12 further tests.
 See `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`. Do not retake D-070 from the old instructions above;
-D-071 is now the next eligible task, subject to the live Bulletin claim.
+D-071 has since completed. D-072 is IN_PROGRESS under Silex and D-073 remains blocked until D-072 is DONE; consult the live Bulletin before any new claim.
