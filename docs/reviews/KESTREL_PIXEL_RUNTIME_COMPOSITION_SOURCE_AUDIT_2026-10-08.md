@@ -65,3 +65,34 @@ These checks were **read**, not executed in this review. Historical D-064/asset 
 - Current live Bulletin recheck at observed HEAD: zero unclaimed ranked READY tasks; D-072 IN_PROGRESS/Silex; D-073/D-074 BLOCKED; other downstream ranked tasks BLOCKED.
 - Review status: **DOCUMENTED, UNCLAIMED, NO CODE/TEST/CANON CHANGE**.
 - The next player must refetch HEAD, Bulletin, source blobs, and owner decisions before treating any line of this packet as a still-current implementation state.
+
+## 7. Pass-two targeted acceptance matrix (after fresh blocked-queue recheck)
+
+**Queue observed immediately before this pass:** HEAD `956d39a0bd15d5f839418d3948126c02c0c37da8`; no ranked or parallel READY claims. D-072 = IN_PROGRESS/Silex, D-073/D-074 = BLOCKED. This author remains unclaimed.
+
+The matrix below is **future test design**, not executed evidence or authorization to add features. Use the smallest suitable owner: Python tests for player-safe projection/redaction, Kotlin JVM tests for pure resolver/catalog logic, Android UI tests for actual rendered composition, screenshots for visual QA, and separate handset profiling where needed.
+
+| Case | Fixture / change | Observable assertion | Current evidence / gap |
+| --- | --- | --- | --- |
+| VCOMP-01 | `roomActors=[]` in Platform Nine despite any named person mentioned in story prose | No story actor sprite; renderer must not recreate presence from scene ID | Existing `PixelStoryActorCatalogTest` empty-list assertion and D-064 source-contract assertion; no fresh execution |
+| VCOMP-02 | Opening blackout, decision, recovery and tunnel projected actors | Exact two/one/one/one visible actor identities with 34,13 / 62,14 / 90,14 / 76,14 sprite origins | Existing placement tests; **not** a foot/world-coordinate contract |
+| VCOMP-03 | Unknown visual family or unknown semantic placement key | Safe omission or approved truthful missing-art treatment; no substitute identity, no arbitrary position | Existing Kotlin negative catalog and resolver tests; future presentation QA needed |
+| VCOMP-04 | A visible actor record whose `poseKey`, `outfitKey`, `visibleTags` differ | Do not claim a visible variant unless authored, approved, and player-safe; unchanged appearance is not evidence the underlying condition vanished | Current `PixelStoryActorCatalog.spriteFor` matches only `visualFamily`, and `placements` uses `placementKey`; no actor pose/outfit/tag art routing is established |
+| VCOMP-05 | Same scene with projected overlay visual state switched | Only expected overlay/prop pixels differ; unchanged architecture stays aligned; state variants never invent quest/door legality | `PixelSceneOverlayCatalog` and current `SceneIllustration` routing are present; visual-difference capture not made in this review |
+| VCOMP-06 | An actor overlaps a fixed prop or a foreground partition | Approved per-area z/occlusion rule yields correct visibility without disclosing hidden actors | Current renderer has ordered pass buckets, not a per-instance occlusion mask; future fixture required before API design |
+| VCOMP-07 | Changed named-location `PixelSceneCatalog` source pixel and stale existing PNG | Detect mismatched rendered raster rather than accepting source-only diff | Existing `PixelRasterCatalogTest` verifies mapping existence only; consult source/raster correspondence ledger/tool for equality |
+| VCOMP-08 | No PNG binding or undecodable raster for a supported source sprite | Use source-native sprite, not procedural geometric room for a supported source | `SceneIllustration` has raster-to-sprite fallback; negative decode path needs targeted validation |
+| VCOMP-09 | Rapidly change scene ID while Trace FX animates | Old FX does not persist, and new scene's animation resets without visual carryover | `LaunchedEffect(sceneId, traceFxFrames)` resets frame index; UI timing behavior not tested here |
+| VCOMP-10 | Reduced-motion setting, narrow width, large text | Motion follows explicitly approved setting; narrative/buttons remain usable and room art remains legible | The inspected `SceneIllustration` effect runs when FX frames exist; no motion preference gate is visible inside it; no narrow/large-font UI run performed |
+| VCOMP-11 | Unknown actor identity or hidden tactical contact later proposed for room art | Never synthesize named art, portrait, equipment or a room-present person from an anonymous contact, last-known position, or raw AI state | D-064 projection and OR-010 static placement boundaries are established; D-073/D-074 remain gated |
+| VCOMP-12 | Portrait/focus model introduced in an authorized future child | One focused panel, only while actor remains projected and inspectable, clear on departure/load/room change | `ROOM_COMPOSITION_IMPLEMENTATION_CONTRACT.md` is target authority; not demonstrated by present `SceneIllustration`/actor catalog |
+
+### Handoff constraints
+
+1. Never promote VCOMP-04's present absence of variant drawing into a false claim that `visibleTags` or `poseKey` are invalid gameplay data; this is strictly current **visual consumer coverage**.
+2. Keep raster equivalence separate from story-state visual correctness: equal PNG/source pixels can still depict the wrong game state if the overlay/projection is misbound.
+3. Keep visual compliance separate from claim/completion: Kotlin source assertions, unit tests, device screenshots and physical Galaxy A03 checks are different evidence classes.
+4. If D-074 later becomes READY, the claimant should consume OR-015 typed/versioned tactical projection and OR-010 placement separation; this reviewer has not pre-claimed it.
+5. If new visual defects are reproduced, determine the causal owner and search existing CPR/evidence before opening a duplicate.
+
+**Pass-two disposition:** documentation appended after the second live Bulletin check; still no primary task, no tests executed, no gameplay/Android/canon edits.
