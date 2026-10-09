@@ -366,6 +366,16 @@ Therefore:
 - Tamsin silhouette anchors;
 - placements based only on projected scene/location IDs.
 
+### 9.6 Post-D-064 current-state addendum — 2026-10-08
+
+**Temporal correction:** Sections 9.1–9.5 above document the historical PR #23/October-03 state. Their phrases "current placements", `placements(locationId, sceneId)`, and "projection is not implemented" are **not the current authority-branch API/status**. Do not retroactively change the historical blob/QA provenance; use this addendum for present integration.
+
+At inspected authority HEAD `247b1305461194ba97a06e9ae652409c0b242ee9`, `src/textrpg/android_bridge.py::_room_view_for` projects authored visible presence, `GameEngine.kt::GameRoomProjection` / `GameRoomActor` map typed public records, and both Story scene consumers supply `snapshot.room.actors` to `SceneIllustration(roomActors)`. `SceneIllustration.kt` now calls **`PixelStoryActorCatalog.placements(roomActors)`**. `PixelStoryActorCatalog.kt` maps only allowlisted `visualFamily` values and `PixelStoryActorPlacementResolver.resolve(placementKey)` supplies local 128×64 scene-sheet art coordinates; unknown families/keys render no actor. Compose does **not** decide actor presence from scene/location IDs.
+
+The integrated art remains `NPC_TAMSIN_TURNAROUND` and `SUPPORT_COURIER_01` (32×48 each), but current `PixelStoryActorCatalog.kt` blob is `ef559b1248aa389e7fde5aeb3b7e5abab455f56e`, not the historical §9.2 blob. Current `PixelStoryActorCatalogTest.kt` checks projected-only actor lists, unknown-safe omission and equivalence at Platform Nine courier (34,13), Platform Nine Tamsin (62,14), Relay Workbench (90,14), Service Tunnel (76,14); §9.5's scene-ID-based test description is a historical checkpoint.
+
+**Verified implementation evidence:** [D-064 final room/actor projection evidence](../evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md) documents PR #70 merge `d7ebb7ca439695e256a429a1e5d160daae69a521` and historical workflow run #362 Python/Android/emulator acceptance. This addendum is source review only; those tests were **not rerun here**. D-064 room-presence migration is complete; D-030 broader context-panel/focus/actor interaction extensions are still separate work. Preserve `room` player-safe privacy and the 11-key mapper allowlist. Do not infer NPC identity/presence from artwork, scene name, location, or private social state.
+
 ## 10. Jack approved reference and PR #22 clarification
 
 PR #22 current head:
