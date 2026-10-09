@@ -1390,3 +1390,10 @@ Boundary: conversation only; Bulletin/Master Task Register remain authoritative.
 - **Future test contract:** compare full durable `GameState` plus independently player-safe `scene_view`, preserving `turn` and `time_minutes`, ordered history, save/reload replay and failure atomicity. Tactical event IDs are keyed by encounter seed/round/action data, and raw tactical sessions are transient; future D-073/074 and D-072 aftermath acceptance must precede integrated combat save/replay proof.
 - **P11 CI checkpoint:** [draft PR #80](https://github.com/jbob-coder/Text-rpg-game/pull/80) head `3b3ac9a5e8961f32a8140765d977d9c92a44b1e3`, [run 37863439739](https://github.com/jbob-coder/Text-rpg-game/actions/runs/37863439739) 3/3 jobs success at that PR head. **Not** proof of completed latest-head merged P11 or D-076 integration; re-fetch current PR/merge-state and actual task completion evidence.
 - **Evidence class:** connector-backed source and existing test-contract inspection. The Nodus review does **not** run Python, Android, CI, emulator or physical-device tests, and changes no runtime/gameplay, status, ownership, score or schema.
+
+
+## D-077 — PR #55 Compose activity callback port review
+
+- **Handoff:** [PR #55 Compose activity callback test port review](reviews/D077_PR55_COMPOSE_ACTIVITY_CALLBACK_PORT_REVIEW_2026-10-08.md).
+- **Scope:** source-only gap analysis: old exact-text selector disagrees with the current prefixed choice label; use the stable choice-ID tag for future instrumented tests.
+- **Authority:** D-077 remains dependency-gated. This review does not authorize a claim, close PR #55, or assert executed Android tests.
