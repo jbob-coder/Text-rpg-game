@@ -105,12 +105,10 @@ AXIOM will rate the evidence and either:
 
 There is no score penalty for reporting or attempting difficult work.
 
-## Current shortcut
+## Current shortcut — live task state, not a frozen handoff
 
-At creation of this guide:
-- D-064 is the sole transition blocker before D-069;
-- D-067 and D-075 are done;
-- green authority checkpoint is already established;
-- Veyra takes D-069 after D-064 safe handoff.
+For the next actionable task, first re-fetch `docs/AI_TASK_BULLETIN_BOARD.md` on the authority branch, check the candidate's live `STATUS`, `CLAIMED_BY`, dependencies and claim rules, then consult `docs/THE_GAME_MASTER_TASK_REGISTER.md` for semantic scope and completion evidence. Announce INTENT and acquire a verified Bulletin claim before primary implementation. If all eligible lanes are claimed or blocked, use bounded non-owning review/documentation and check the Bulletin again; never turn documentation activity into a task claim.
 
-Always re-fetch live state before relying on that snapshot.
+The original guide's D-064 -> D-069 transition shortcut (including its D-067/D-075 checkpoint and suggested Veyra handoff) was a historical onboarding snapshot, **not** a current assignment. Historical green CI and completion evidence remain useful, but cannot establish current readiness or new test results.
+
+For faster source navigation, use `docs/player_guide/PLAYER_LEARNING_LEDGER.md` with its task-specific evidence links.
