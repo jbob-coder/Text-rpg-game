@@ -408,3 +408,17 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - **STILL UNKNOWN / BLOCKED:** no executed current-authority Compose training callback regression; D-077 dependency-gated; do not infer device readiness or close #55 by administrative convenience. Master D-042 remains IN_PROGRESS for other consumer/asset/zero-usage proof.
 - **NEXT PLAYER SHORTCUT:** start at the P15 final disposition table, check #55's held Compose test, port it only after the Android task unlocks, and never rerun D-067/D-068 because a superseded PR was once open.
 - **SUPPORTING ARTIFACT:** `docs/evidence/P15_D042_WAVE_B_PRELIMINARY_2026-10-08.md`.
+
+
+### P16 / D-045 — Gate Twelve evidence is not class ownership
+- PLAYER-AI: Veyra / PLAYER_VEYRA; session `SESSION_VEYRA_20261007T1140-0400_S02`.
+- AUTHORITY / EVIDENCE: P16 claim commit `806726adcca205a897677d4ee7701efbc3aae21f`; primary creation `aa9ce08321bda73fd508a644437bf16175f87892`; committed primary blob `6b7314983ff7a59ebf9ff26a991f4752a2a6541c`; evidence `docs/evidence/P16_D045_GATE_TWELVE_PROGRESSION_PROOF_2026-10-08.md`.
+- READ FIRST: `docs/systems/GATE_TWELVE_PROGRESSION_PROOF_PACKET.md`; D-066 progression evidence; D-068 activity evidence; `COMBAT_CLASS_CATALOG.md` Ability Specialist; P7 profession/rank/status standard; P12 training/mentor/facility standard; D-061 migration packet.
+- DO NOT REDISCOVER: Gate Twelve already has CURRENT progression evidence: Trace Echo + Signal Pulse discovery/practice, deterministic mastery/resource/time persistence, and Trace Chamber `powers` training. Current source still has 23 registered skills; this bounded proof directly exercises `powers`. `CLASS_ABILITY_SPECIALIST` is TARGET/PROPOSAL and runtime-not-implemented.
+- OWNER OF BEHAVIOR: existing Python skill/ability/technique/activity/GameState owners perform mutation; D-061 preserves schema v1; P7 owns profession/rank/status namespace semantics; P12 defines target evidence/capability orchestration; future class/profession owners must explicitly accept evidence before acquisition.
+- TRAP / FALSE ASSUMPTION: practice evidence is not class acquisition; skill/mastery is not profession qualification; Trace Chamber is not proof of a canon institution/network; no mentor/evaluator may be inferred; training completion is not rank appointment.
+- VALIDATE WITH: P16 committed source readback — 23/23 `SKILL_CATALOG` IDs, 7/7 target class families, and current `ABILITY_TRACE_ECHO`, `TECHNIQUE_SIGNAL_PULSE`, `PRACTICE_SIGNAL_PULSE_ONE_HOUR`, `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS`, `TRACE_STABILIZATION_HUB`, `TRACE_CHAMBER` all present. P16 ran no Python/Android/Gradle/CI/emulator/device/APK tests.
+- CHANGE SAFELY: preserve current authored IDs and schema-v1 owners; if durable class/profession/rank/evidence state is later accepted, define one owner, migration, round-trip, rollback and player-safe projection before adding fields. Keep unknown requirements hidden.
+- STILL UNKNOWN / BLOCKED: durable class/profession/rank representation; final acquisition thresholds; evaluator/mentor bindings; canon profession/institution/facility population; numeric calibration; final progression projection/UX.
+- NEXT PLAYER SHORTCUT: the direct D-045 child is the **Progression UX Contract**. Consume P16's CURRENT/TARGET/PROPOSAL and allow/deny boundaries instead of reopening the Gate Twelve evidence model.
+- SUPPORTING ARTIFACT: `docs/evidence/P16_D045_GATE_TWELVE_PROGRESSION_PROOF_2026-10-08.md`.
