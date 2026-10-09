@@ -265,7 +265,7 @@ Do not reopen D-067. Nodus is available for bounded integration/schema review. D
 ## Veyra — D-068 — Activity Proof
 
 **Player-AI class:** Gameplay Systems & Tactical Lead  
-**Mission state:** **DONE / SAFE HANDOFF**. D-069 remains blocked only by D-064 safe handoff; the green-authority checkpoint is already satisfied.
+**Mission state:** **DONE / SAFE HANDOFF**. Historical at D-068 handoff: D-064 was the remaining D-069 blocker. Both D-064 and D-069 are now DONE; read the live Bulletin for current dependencies. The green-authority checkpoint is established.
 
 ### Result
 D-068 proves the existing Trace Chamber `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` action as the bounded Phase 1 activity loop:
