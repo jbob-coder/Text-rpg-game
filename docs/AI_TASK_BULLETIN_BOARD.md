@@ -941,16 +941,21 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-076 PRECONDITION / CPR-006`
 - **PREFERRED_CLAIMANT:** Nodus
 - **PRIORITY:** `P0 CRITICAL PARALLEL PRECONDITION`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `READY / OWNER-PAUSED / UNCLAIMED`
 - **SOURCE_OF_WORK:** CPR-006 + OR-036.
 - **SCOPE:** repair `AndroidGameSession` state publication so `session.state` is the sole mutable playthrough owner after construction; detach it from `LoadedContentPack.state` initialization state; validate a loaded candidate through authored/player-safe view semantics before publication; reject a valid-schema unknown-scene save as stable `LOAD_ERROR` without replacing the prior playable session state.
 - **REQUIRED RED/GREEN:** reproduce current unknown-scene post-deserialize failure first; then prove failed load preserves prior state identity/snapshot and playable view; prove successful load updates session state while the content-pack initialization state is not a live alias.
 - **DO NOT:** change save schema v1; move scene legality into persistence; edit Silex D-072; widen Android projection payload; hide failure by catch-and-repair after publication.
 - **MERGE GATE:** runtime branch + PR to authority; focused regressions + full Python suite + normal merge-state gate.
 - **ACCEPTANCE:** CPR-006 causal repair and regression evidence are verified; D-076 retains its other dependencies and stays blocked until the tactical chain is ready.
-- **CLAIMED_BY:** Nodus (PLAYER_NODUS / SESSION_NODUS_20261008T1737-0400_S02)
-- **CLAIMED_AT:** 2026-10-08 AST
-- **CLAIM_HEAD:** `04f36e71c349f8978fd84be88a974233fb0d236f`
+- **CLAIMED_BY:** —
+- **CLAIMED_AT:** —
+- **CLAIM_HEAD:** —
+
+- **OWNER_SHUTDOWN_RELEASE:** 2026-10-08 AST — owner deactivated canonical PLAYER_NODUS; preserve unfinished P11 work without claiming acceptance, merging the candidate, or reserving the old session.
+- **PREVIOUS_CLAIM:** Nodus / PLAYER_NODUS / SESSION_NODUS_20261008T1737-0400_S02 / 2026-10-08 AST / CLAIM_HEAD `04f36e71c349f8978fd84be88a974233fb0d236f`.
+- **PRESERVED_CANDIDATE:** PR #80 historically OPEN/DRAFT/UNMERGED, reviewed at candidate `3b3ac9a5e8961f32a8140765d977d9c92a44b1e3`; prior RED/GREEN and run `37863439739` reported from peer source; no exact-current merge-state acceptance evidenced in this release. Reinspect PR before future implementation/merge; do not reuse old CI as final acceptance.
+- **RESTART_POLICY:** Do not automatically resume P11. D-084 World History & Narrative Bible is the owner-directed P0-CRITICAL new-work priority. A future authorized agent may claim P11 through a fresh Bulletin claim only after D-084 priority and dependencies are respected. Other owner (Silex / D-072) is not modified by this release.
 
 ### Parallel P12 — D-045 — Training / Mentor / Facility Progression Standard
 - **TASK_REF:** `D-045`
