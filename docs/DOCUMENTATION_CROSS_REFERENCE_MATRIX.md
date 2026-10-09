@@ -1335,3 +1335,12 @@ Boundary: conversation only; Bulletin/Master Task Register remain authoritative.
 - **Current-runtime boundary:** `GameState` has no class/profession/rank/status top-level field; this child performs no runtime/save-schema expansion.
 - **Next D-045 child:** Training / Mentor / Facility Progression Standard.
 - **Validation:** source/doc readback plus 23/23 current-skill and 7/7 class-family presence check; no Python/Android runtime test result is implied.
+
+## D-026 / P13 — Hierarchical world-map player-safe migration child
+
+- **Canonical child:** [P13 Hierarchical World Map Projection Migration](android/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_MIGRATION_2026-10-08.md).
+- **Master owner:** `docs/THE_GAME_MASTER_TASK_REGISTER.md` D-026, broader IN_PROGRESS.
+- **Existing producer/consumer:** Python `android_bridge.py::_map_view_for` and `travel` -> typed Kotlin `GameWorldMap`/`BridgeSnapshotMapper` -> `GameViewModel.travel` -> `GameScreen.kt::MapSection`.
+- **Future target:** separately versioned player-safe hierarchy without replacing legacy flat `map`; world-scale levels explicit, discovered-only/public-place and route provenance preserved. Gate Twelve's region/macrozone/subzone model is design-only and is not a new runtime graph.
+- **Boundaries:** OR-010 static room placement is not geography; OR-015 additive projection versioning; OR-036 Wave-3 documentation-only scope; save schema v1 unchanged. D-073/D-074 combat coordinates and D-072 aftermath unaffected.
+- **Evidence:** `docs/evidence/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_2026-10-08.md` (2 document links + 10 existing source/test paths checked on exact non-truncated tree). Tests, CI, emulator, APK and device execution are **NOT CLAIMED**.
