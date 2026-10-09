@@ -35,3 +35,28 @@ This report supplies **source evidence**, not an executed failing test. There wa
 The problem may affect Phase 1 Android client behavior and the future integrated D-076 save/replay acceptance, but neither severity nor real-player reproduction is established. Do not invent a `CPR-###` identifier, mark a Bulletin task READY, patch `choose`, or assign ownership from this note. Submit the source-bound finding to AXIOM via the existing `docs/overseer/CODE_PROBLEM_REVIEW_BOARD.md` process **if an executed reproduction or contract decision establishes a qualifying cross-domain problem**. AXIOM decides whether this is an existing-task acceptance check or needs a distinct task.
 
 **Collision guard:** P11 / CPR-006 is actively claimed by a separate execution of Nodus's existing Drive session; D-072 belongs to Silex. This non-owning review changes no active branches, PRs, task state, session locks, gameplay runtime, save schema or score.
+
+
+## Client consequence: a failed projection replaces gameplay with the boot error screen
+
+This extends the Python-side finding above into the **current Android client**, without assuming a real authored failure has been reproduced:
+
+| Layer | Source readback | What the actual code does |
+| --- | --- | --- |
+| Python choice commit and view | `src/textrpg/android_bridge.py` blob `73aa4c59edb18ef4c413976d5a71cdd2879a399e` | The bridge invokes `engine.choose(self.state, choice_id)` before `scene_view()`. A later projection `RuleError` becomes a `VIEW_ERROR` exception without bridging rollback. |
+| Python-to-Kotlin gateway | `android/app/src/main/java/com/thegame/rpg/engine/PythonGameEngine.kt` blob `73d028d0720897a547509e83d5d6021ef5bcad8c` | `choose` invokes `Result.success(mapSnapshot(gateway.choose(choiceId)))`. Any gateway or **Kotlin snapshot mapping** exception becomes `Result.failure(classifyFailure(failure))`; `VIEW_ERROR` and `PROJECTION_ERROR` are known public failure codes. This is a second possible post-Python-commit failure boundary. |
+| ViewModel handling | `android/app/src/main/java/com/thegame/rpg/GameViewModel.kt` blob `d3d9392efa451570f573f339220e6dffb96d5609` | `choose` sets busy, publishes a new `snapshot` only on success, and sends all failures to `publishFailure`. That function assigns `bootState = engineFailure.toBootStateError()` and `busy = false`; it does not refresh the authoritative Python state, revert the choice, or expose an explicit recover-current-view transition. |
+| Gameplay root | `android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt` blob `1705536c77f4607cd3bd546014e38f099f076b8b` | `TheGameRoot` renders `PixelGameShell` only when `bootState == BootState.Ready` and `snapshot != null`. Otherwise it renders `PixelBootScreen`, which shows the error message on `BootState.Error`. Thus the client can **lose its gameplay screen after an error**, even while its Python session may have advanced. |
+
+**Conditional user-visible failure chain:** accepted choice -> Python state mutates -> Python `scene_view()` fails **or** Kotlin `mapSnapshot` rejects the returned projection -> Kotlin `Result.failure` -> ViewModel `publishFailure` -> gameplay replaced by boot error panel. These arrows are supported by source control flow; the antecedent failure has **not** been triggered by a run in this review. Do not claim a currently reproducible UI crash, data loss, or malformed production content.
+
+**Why this matters for D-076:** blindly retrying a choice after the UI error may be illegal, duplicate an action, or obscure a committed transition. The decision must be explicit: (A) rollback authored command if the public response cannot be produced, including the Kotlin mapping trust boundary, or (B) preserve the commit and provide a read-only fresh projection/recovery route with stable idempotency/reconciliation behavior. Python-only rollback cannot guarantee B-side snapshot mapping success, so the cross-language recovery policy needs both owners' input.
+
+**Suggested future executable regression shield (not run):**
+
+1. In Python, start with a legal authored choice and force a post-commit `_view_for` failure; assert the actual state/turn/history outcome and public error code.
+2. Through a fake `PythonSessionGateway`, return a payload whose story state was already accepted on the Python side but whose Kotlin `PlayerSafeSnapshotMapper` rejects an invalid *player-safe projection*; assert `PythonGameEngine.choose` returns `PROJECTION_ERROR`.
+3. In a ViewModel test, inject a `GameEngine` whose `choose` fails after a valid Ready snapshot; assert the actual `bootState`, retained prior snapshot and rendered `PixelBootScreen`. Then test the **authorized** recovery or atomic policy, not an invented one.
+4. Execute the combined Python/Kotlin/Compose acceptance against the **merged** P11 behavior with the relevant live test/CI gate and verify no duplicated history, lost accepted action, leaked private data or silent session aliasing.
+
+**Owner/status boundary:** this section remains an independent source inspection, not a new CPR, an implemented test, a P11 change, or authority to revise D-076 acceptance criteria. The live Bulletin and AXIOM determine whether a distinct scoped repair is warranted. No Python, Kotlin, Gradle, CI, emulator, APK or device execution is claimed.
