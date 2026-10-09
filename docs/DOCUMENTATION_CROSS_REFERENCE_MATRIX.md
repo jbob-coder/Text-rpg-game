@@ -1399,3 +1399,10 @@ Boundary: conversation only; Bulletin/Master Task Register remain authoritative.
 - **Handoff:** [PR #55 Compose activity callback test port review](reviews/D077_PR55_COMPOSE_ACTIVITY_CALLBACK_PORT_REVIEW_2026-10-08.md).
 - **Scope:** source-only gap analysis: old exact-text selector disagrees with the current prefixed choice label; use the stable choice-ID tag for future instrumented tests.
 - **Authority:** D-077 remains dependency-gated. This review does not authorize a claim, close PR #55, or assert executed Android tests.
+
+
+## Android bridge post-choice view-failure boundary — non-owning review
+
+- **Source-bound review:** [Post-commit projection failure atomicity analysis](reviews/NODUS_BRIDGE_POST_COMMIT_PROJECTION_FAILURE_REVIEW_2026-10-08.md).
+- **Finding to reproduce:** current `AndroidGameSession.choose` commits `RulesEngine.choose` before building its player-safe view; a later `VIEW_ERROR` does not visibly trigger bridge-level rollback. This is a conditional control-flow issue, **not** an executed failing test.
+- **Next authority decision:** distinguish committed-action/retryable-view semantics from atomic action-plus-projection behavior, then use a targeted fault-injection test. P11/CPR-006 remains separate and D-076 acceptance remains dependency-gated; no runtime/claim change or invented CPR number follows from this review.
