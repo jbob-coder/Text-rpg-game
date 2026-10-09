@@ -1627,8 +1627,8 @@ Proceed in this order:
 2. **DONE** — build the **Combat Class Catalog** for the seven working class families;
 3. **DONE** — build the **Profession / Rank / Status namespace packet**;
 4. **DONE** — build the **Training / Mentor / Facility progression standard**;
-5. **NEXT** — build the **Gate Twelve progression proof packet**;
-6. build the **progression UX projection contract**;
+5. **DONE** — build the **Gate Twelve Progression Proof Packet**;
+6. **NEXT** — build the **Progression UX Contract**;
 7. calibrate numbers only after the above structures are coherent.
 
 Implementation follows the completed design; it is not the purpose of this document.
@@ -1710,4 +1710,28 @@ Evidence: `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`.
 
 No runtime training formula, balance value, mentor NPC, canon institution/faction, facility location, save field, Android DTO or tactical behavior is implemented by this child.
 
-The direct next D-045 child is the **Gate Twelve Progression Proof Packet**, followed by the **Progression UX Contract**.
+The Gate Twelve Progression Proof Packet is now materialized; see section 42. The direct next D-045 child is the **Progression UX Contract**.
+
+
+# 42. Materialized child — Gate Twelve Progression Proof Packet
+
+The fifth reconstruction-grade D-045 child is now:
+
+- `GATE_TWELVE_PROGRESSION_PROOF_PACKET.md`
+
+P16 consumes the current D-066 Trace Echo / Signal Pulse progression proof and D-068 Trace Chamber Powers-training proof, then maps that evidence into the evolved skill/class/profession/training contracts without promoting target records to runtime or canon.
+
+Verified documentation result:
+- the current 23-skill foundation is preserved; the bounded scenario directly exercises the current `powers` skill;
+- all seven target class families remain intact, with Ability Specialist selected only as the explicit target relationship relevant to this route;
+- `ABILITY_TRACE_ECHO`, `TECHNIQUE_SIGNAL_PULSE`, `PRACTICE_SIGNAL_PULSE_ONE_HOUR`, `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS`, `TRACE_STABILIZATION_HUB` and `TRACE_CHAMBER` are source-bound current identities;
+- `CLASS_ABILITY_SPECIALIST` remains TARGET/PROPOSAL and runtime-not-implemented;
+- no profession, profession grade, institution/faction rank, mentor/evaluator, training-path or facility-capability record is inferred from current practice evidence;
+- D-061 save-schema-v1/current-owner boundaries remain unchanged;
+- player-safe visibility and future migration/test seams are explicit.
+
+Evidence: `docs/evidence/P16_D045_GATE_TWELVE_PROGRESSION_PROOF_2026-10-08.md`.
+
+No Python/Android/Gradle/CI/emulator/device/APK test execution is claimed by P16. No runtime, save schema, canon institution/mentor/facility, class/profession/rank state, or D-072/D-073 tactical behavior is changed.
+
+The direct next D-045 child is the **Progression UX Contract**.
