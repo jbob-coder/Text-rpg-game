@@ -291,10 +291,10 @@ The evolved D-045 child chain has now materialized:
 - `EVOLVED_SKILL_REGISTRY.md` for the 23 current skills;
 - `COMBAT_CLASS_CATALOG.md` for the seven target class families;
 - `PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md` for profession/rank/status separation;
-- `TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md` for training-path, mentor/evaluator-capability and facility-capability ownership.
+- `TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md` for training-path, mentor/evaluator-capability and facility-capability ownership;
+- `GATE_TWELVE_PROGRESSION_PROOF_PACKET.md` for the bounded current-evidence -> target-design handoff without implicit class/profession/rank acquisition.
 
 Remaining reconstruction-grade progression work includes:
-- the Gate Twelve Progression Proof Packet;
 - the Progression UX Contract;
 - justified numeric/range fixtures and training/balance envelopes;
 - final profession/institution/rank content and world/canon promotion where owner authority is required;
