@@ -217,8 +217,8 @@ Still open:
 - every pixel catalog's direct consumer and zero-consumer status;
 - hardcoded/temporary presentation-state classification;
 - exact per-field/per-action test gap matrix;
-- future activity/combat/hierarchical-map/adversary projections;
-- final APK destination migration map.
+- normalized activity projection plus implementation/acceptance for the already-documented tactical, hierarchical-map and persistent-adversary projection migrations;
+- evolved-status/progression projection deltas and final APK destination migration map.
 
 ## 2.4 Android consumer field/action checkpoint
 
@@ -252,7 +252,7 @@ Concrete current test gaps are now explicit for:
 - full identity presentation contract;
 - future actor/room and other future projections.
 
-This narrows D-026/D-021 remaining work to member/asset-ID consumer proof, future projection migration, final APK destination mapping and later exact-head execution evidence.
+This narrows D-026/D-021 remaining work to residual member/asset-ID consumer proof, a normalized activity projection contract, evolved-status deltas, implementation/acceptance of the completed P8/P13/P17 migration contracts, final APK destination mapping and later exact-head execution evidence.
 
 ## 2.5 D-044 reconciliation closure
 
