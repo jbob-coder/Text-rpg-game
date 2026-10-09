@@ -209,7 +209,7 @@ Current Player-AI specialization authority is defined in `docs/AI_COMMAND_STRUCT
 - **Veyra:** Player-AI — Gameplay Systems & Tactical Lead.
 - **Kestrel:** Player-AI — Player-Safe Projection, Presentation & Asset Lead.
 - **Veyr:** Player-AI — NPC, Social & Narrative-State Lead.
-- **Fifth Player-AI Seat:** Verification, Red-Team & Performance Lead once filled.
+- **Quorix:** Player-AI — Verification, Red-Team & Performance Lead.
 
 These are Player-AI classes/specializations and accountability/review lanes, not corporate ranks or permanent file ownership.
 
@@ -218,7 +218,7 @@ Before completing cross-domain work, request/reconcile the relevant lead review 
 - gameplay/tactical rules -> Veyra;
 - player-safe projection/presentation/assets -> Kestrel;
 - NPC/social/privacy -> Veyr;
-- final regression/performance/evidence -> Fifth Agent seat once filled.
+- final regression/performance/evidence -> Quorix.
 
 If lead advice conflicts with task authority or another domain lead, escalate to the Council/Project Overseer rather than silently choosing one interpretation.
 
