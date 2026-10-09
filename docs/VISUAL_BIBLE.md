@@ -1,5 +1,7 @@
 # Pixel Visual Bible — v0.2
 
+> **Authority boundary:** this bible owns visual language, identity consistency and acceptance principles. `docs/assets/PIXEL_ASSET_MASTER_PLAN.md` owns technical source grids, dimensions, anchors, naming and asset lifecycle. `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md` owns how room art, actors, equipment, props, overlays, FX and panels are composed at runtime. If a style example here conflicts with those technical/composition contracts or authoritative gameplay state, use the specialized authority rather than inventing a second visual-state owner.
+
 ## Product rule — non-negotiable
 
 The shipped game presentation is **pixel style**. This applies to the player avatar, recurring characters, equipment layers, scene illustrations, locations, map presentation, icons, HUD ornaments, menus, transitions, and major narrative moments.
@@ -186,6 +188,7 @@ A visual addition is acceptable only when it:
 Detailed production rules live under `docs/assets/` and are normative for new pixel-art work:
 
 - `docs/assets/PIXEL_ASSET_MASTER_PLAN.md` — source resolutions, paper-doll rig, map/scene/item standards, naming, lifecycle and QA.
+- `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md` — runtime layering/composition for rooms, actors, equipment, props, overlays, FX and contextual panels.
 - `docs/assets/CHARACTER_PIXEL_BLUEPRINTS.md` — player construction and canonical Tamsin blueprint.
 - `docs/assets/ASSET_BATCH_001_001-100.md` — first exact 100-unit production batch.
 - `docs/assets/REFERENCE_TO_BLUEPRINT_PIPELINE.md` — generated-reference to native-pixel reconstruction process.
