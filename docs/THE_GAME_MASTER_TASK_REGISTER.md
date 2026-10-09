@@ -941,19 +941,19 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - PR #28 COMPOSITION: exact diff shows no new environment asset geometry; the branch reuses the existing municipal infrastructure atlas as Service Tunnel arrival-preview detail. Treat as optional composition behavior, not a competing source-master asset.
 - INFRASTRUCTURE ATLAS DECISION: keep `MUNICIPAL_INFRASTRUCTURE_TILE_ATLAS` as `PRODUCED_DEFERRED_INTEGRATION`; PR #28 supplies a legitimate presentation-only Service Tunnel arrival-preview consumer by reusing the existing atlas without new geometry. Future adoption should selectively reimplement that composition after visual/material review rather than merge the divergent branch.
 - STATIC SURVIVOR TOPOLOGY: resolved technically. PR #30 is stacked on PR #27 and adds Quiet Stair only; it does not create a second Service Tunnel refinement. Remaining promotion choices are current baseline vs PR #27 for Service Tunnel and current baseline vs PR #30 for Quiet Stair. Both refined candidates remain `OWNER DECISION REQUIRED` for visual/canon promotion.
-- PR #9 HELD-PROP OWNERSHIP: resolved as Tamsin actor-presentation art under D-030's player-safe pose/visual-family boundary. The 32x48 held master is not a player inventory/equipment asset; runtime remains `DEFERRED_INTEGRATION` until D-030 actor projection and verified Tamsin hand/wrist anchors exist. The 32x32 icon has no authorized current inventory consumer.
+- PR #9 HELD-PROP OWNERSHIP: resolved as Tamsin actor-presentation art under D-030's player-safe pose/visual-family boundary. D-064 has since completed the room/actor projection prerequisite. The 32x48 held master is not a player inventory/equipment asset and remains `DEFERRED_INTEGRATION` until a verified Tamsin held-prop attachment/hand-wrist alignment contract and legitimate player-safe runtime binding are accepted. The 32x32 icon has no authorized current inventory consumer.
 - PR #31 AMBIENT DECISION: `docs/assets/SERVICE_TUNNEL_AMBIENT_ANIMATION_MIGRATION_CONTRACT_2026-10-03.md` classifies PR #31 as `VERIFIED_BRANCH_EVIDENCE + DEFERRED_INTEGRATION + REIMPLEMENT_ON_SELECTED_STATIC_PARENT`. Track IDs/timing/bounds are preserved; reduced motion is Android presentation/accessibility state, not gameplay authority. Migration strategy is documented; actual reduced-motion/animation runtime implementation and destination-head QA remain future implementation work.
 - LATEST_SLICE_BASELINE: `docs/master-game-development-program@58a61eb202bbb9443e01f8689e18e8ef0e99d3c7`; no runtime/content files changed from prior D-029 baseline `2ad50d7...` to this baseline.
 - LATEST_SLICE_AT: `2026-10-03 AST`.
 - COMPLETENESS: partial reconstruction-grade family coverage; D-029 is not complete.
 
 ### TASK D-030 — Player-safe actor/panel projection contract
-- STATUS: `DONE (CONTRACT + IMPLEMENTATION MIGRATION MAP DOCUMENTED) / RUNTIME PENDING`
+- STATUS: `DONE (CONTRACT + IMPLEMENTATION MIGRATION MAP DOCUMENTED) / RUNTIME SUBSEQUENTLY IMPLEMENTED BY D-064`
 - PRIORITY: `P0`
 - OUTPUTS:
   - `docs/android/PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md`
   - `docs/android/ROOM_ACTOR_PROJECTION_IMPLEMENTATION_MIGRATION_MAP_2026-10-04.md`
-- VERIFIED BASELINE: durable `state.npcs` exists; Android bridge has no room actor projection; Kotlin `GameSnapshot` has no room actor model; `PixelStoryActorCatalog.placements(locationId, sceneId)` still owns current opening actor presence.
+- HISTORICAL D-030 BASELINE: at contract authoring time, durable `state.npcs` existed while Android had no room-actor projection and scene/location heuristics owned opening actor presence. D-064 later superseded that runtime baseline with the verified player-safe room/actor projection.
 - DOCUMENTED TARGET:
   - versioned player-safe `room` projection;
   - redaction boundary and support-actor handling;
@@ -965,7 +965,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - MIGRATION MAP:
   - exact file-by-file order now covers `vertical_slice_01.json`, `validation.py`, `android_bridge.py`, Python tests, `GameEngine.kt`, mapper tests, semantic placement resolver, actor visual resolver, `SceneIllustration.kt`, `GameScreen.kt`, Compose tests and old-heuristic retirement.
   - rollback boundary is documented before final heuristic removal.
-- RUNTIME: not implemented by this documentation task. Existing scene/location actor heuristic remains active until a bounded code slice passes equivalence/build/test gates.
+- RUNTIME FOLLOW-UP: D-030 itself remained documentation-only, but D-064 later implemented and verified the bounded room/actor projection, strict privacy mapping, semantic placement and opening-scene equivalence; the old scene/location actor-presence heuristic is no longer the accepted runtime owner.
 
 ### TASK D-031 — Gate Twelve parent-world canon packet
 - STATUS: `PROPOSAL_READY / OWNER_CANON_DECISION_REQUIRED`
