@@ -935,14 +935,14 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-045`
 - **PREFERRED_CLAIMANT:** Veyra
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** explicit D-045 NEXT after completed P7 namespace packet.
 - **SCOPE:** author the reconstruction-grade training/mentor/facility progression standard tying the 23 skills, seven class families and P7 profession/rank/status namespaces to acquisition/training evidence, facility capabilities and future runtime owners.
 - **DO NOT:** implement runtime progression; invent confirmed canon institutions; override D-061; edit D-072/D-073.
 - **ACCEPTANCE:** stable IDs/ownership, training prerequisites, facility/mentor capability model, CURRENT/TARGET/PROPOSAL separation, migration/test seams and the next D-045 child are explicit.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyra
+- **CLAIMED_AT:** 2026-10-08T20:02:04-04:00
+- **CLAIM_HEAD:** `e2af38474fdec3298f3c669569bd582c214ea0be`
 
 ### Parallel P13 — D-026 — Hierarchical world-map projection migration contract
 - **TASK_REF:** `D-026`
