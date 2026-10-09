@@ -136,8 +136,8 @@ Required:
 - diagnostics redaction;
 - bounded candidate-count fixture.
 
-## 16. Next combat artifact
+## 16. Current downstream handoff
 
-The framework is implementable, but Phase 1 still needs one Gate Twelve encounter packet specifying map, actors, objective, exits, AI profiles, action loadouts, injury/aftermath hook, and success/failure consequences.
+The bounded Gate Twelve encounter packet is now materialized at `docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md`; it specifies the proposed Service Tunnel map/actors/objective/exits/AI/action/injury/aftermath integration shape and OR-034 provisional-integration boundary.
 
-Implementation evidence: `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`. Durable aftermath and bridge/UI integration remain D-072/D-073/D-074.
+Implementation evidence for this standard remains `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`. D-071 is DONE. Durable aftermath is **D-072 IN_PROGRESS under Silex**; D-073 Gate Twelve content/Python bridge remains BLOCKED until D-072 is genuinely DONE, and D-074 Android tactical presentation follows D-073. The encounter packet's existence does not itself implement or canonize those downstream layers.
