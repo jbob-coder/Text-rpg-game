@@ -196,10 +196,11 @@ Maintenance:
 Purpose:
 - general visual identity.
 
-Needs:
-- reconcile with current pixel-production standards;
-- explicitly defer technical grids/anchors to `PIXEL_ASSET_MASTER_PLAN.md`;
-- explicitly defer room/actor/overlay composition to `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`.
+Current status:
+- explicitly preserves the pixel-style visual language and identity acceptance rules;
+- defers technical grids, dimensions, anchors, naming and asset lifecycle to `PIXEL_ASSET_MASTER_PLAN.md`;
+- defers room/actor/equipment/prop/overlay/FX/panel layering to `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`;
+- specialized technical/composition authorities and authoritative gameplay state override conflicting style examples rather than creating a second state owner.
 
 ### `docs/IMPLEMENTATION_STATUS.md`
 Purpose:
