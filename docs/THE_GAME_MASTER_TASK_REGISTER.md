@@ -1623,6 +1623,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - DEPENDS_ON: relevant proof tasks D-065 through D-075.
 - PURPOSE: verify continuity/determinism across the integrated Phase 1 loop instead of isolated subsystem tests.
 - ACCEPTANCE: one exact-head sequence spans social/knowledge, progression, items, activity, quest and tactical aftermath; save/reload/continue and deterministic outcomes are proven.
+- PRECONDITION: CPR-006 / Wave-3 P11 must be resolved before D-076 claim. OR-036 defines `AndroidGameSession.state` as the sole mutable playthrough owner after construction and requires validate-before-publish load atomicity while preserving save schema v1.
 - BONUS: `D-076-B` corrupted/unsupported-save rejection fixture.
 
 ### TASK D-077 — Close Android Phase 1 consumer and test gaps
