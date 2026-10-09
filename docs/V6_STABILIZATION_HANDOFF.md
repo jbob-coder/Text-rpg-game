@@ -1,9 +1,9 @@
 # V6 stabilization handoff — 2026-09-27
 
-> **Current-program pointer (2026-10-01):** this handoff is retained as exact historical engine evidence. Current product/documentation authority is [`MASTER_GAME_DEVELOPMENT_PROGRAM.md`](MASTER_GAME_DEVELOPMENT_PROGRAM.md). Do not use this historical V6 handoff to override newer world, pixel-art, application, or documentation decisions.
+> **Current-program pointer (2026-10-01):** this handoff is retained as exact historical engine evidence. Current product/documentation authority is [`MASTER_GAME_DEVELOPMENT_PROGRAM.md`](MASTER_GAME_DEVELOPMENT_PROGRAM.md). Do not use this historical V6 handoff to override newer world, pixel-art, application, documentation, or live Bulletin decisions. The objective and next action below are preserved task-local history, not a current assignment.
 
 
-## CURRENT_OBJECTIVE
+## HISTORICAL CURRENT_OBJECTIVE AT HANDOFF
 
 Close the exact V6 execution gap and the four boundary defects identified in the
 user-supplied audit of `jbob-coder/Text-rpg-game`. This is Stage 3 engine stabilization.
@@ -144,7 +144,9 @@ The repair PR records the published commit and its final execution result.
 | Were all supported runtimes/platforms tested? | No | Python 3.12/Linux only |
 | Is the complete game ready for final acceptance? | No | This scope is the engine stabilization slice |
 
-## NEXT_ACTION / remaining risks
+## HISTORICAL NEXT_ACTION / remaining risks at handoff
+
+The following was the V6 task-local continuation plan at this checkpoint; it is not current claim authority.
 
 1. Review this repair candidate, then select/promote a canonical implementation branch.
 2. Refresh shared-context references and supersede obsolete PRs/branches deliberately.
