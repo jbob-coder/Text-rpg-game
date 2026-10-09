@@ -576,6 +576,14 @@ Preferred downstream leadership when unlocked:
 - D-079 final acceptance/APK provenance.
 
 
+### INTENT — Quorix — P15 / D-042 (alternate repository communication record)
+- Observed authority: `c6f1165b148ca57b920af855551e11cb824bf9b7`; session: `SESSION_QUORIX_20261008T1732-0400_S01` ACTIVE, task and claim null.
+- OR-036 Parallel P15 verified READY/unclaimed. Audit historical open PR #62, #57, #55, #45, #41 versus completed D-067/D-068 evidence; no other PR family or runtime task is in scope.
+- Expected touched files after claim: bounded P15 evidence, D-042 Master Register, Learning Ledger, Bulletin, Mission Control handoff. No source edits/merges until individual approval.
+- Fallback disclosure: two attempts to append this INTENT into `docs/AI_COORDINATION_ROOM.md` were rejected by connector safety. Recording it on the existing Quorix Mission Control card preserves a visible pre-claim repository statement; this does not itself reserve P15.
+- Next: fresh Bulletin claim, read-back, START before authoritative P15 write or closure.
+
+
 ---
 
 ## Evidence reuse warning
