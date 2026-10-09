@@ -79,7 +79,7 @@ Current execution:
 - Parallel P3/D-045, P4/D-046, D-069, Parallel P7/D-045 and Parallel P12/D-045 are complete;
 - P12 materialized `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md` as documentation/design authority only; Master D-045 remains IN_PROGRESS, and the direct documented follow-on is the Gate Twelve Progression Proof Packet, then the Progression UX Contract. P12 completion does not reserve either follow-on;
 - D-070 and D-071 are complete under Silex with Veyra predecessor credit preserved where recorded;
-- D-072 is IN_PROGRESS under Silex; Veyra is ACTIVE with no current primary claim and remains the gameplay/tactical review lead.
+- D-072 is IN_PROGRESS under Silex at this documented checkpoint. Veyra remains the gameplay/tactical review lead; her current primary claim and availability must be checked in the live Bulletin and canonical Drive STATUS (Wave-4 lanes supersede earlier availability snapshots).
 
 Likely downstream leadership/review:
 - review D-072 gameplay/aftermath semantics without overriding Silex ownership;
@@ -103,8 +103,8 @@ Own/review:
 - visual redaction boundaries;
 - later tactical presentation handoff with Veyra.
 
-Current execution:
-- D-064.
+Verified historical execution:
+- D-064 is DONE. Later bounded P8/D-026 and P13/D-026 documentation slices are also DONE; current P17/D-026 ownership/availability must be read from the live Bulletin and canonical Drive STATUS.
 
 Standing boundary:
 - OR-010 applies: `placement_key` is a bounded presentation adapter, not durable world-position authority.
@@ -126,7 +126,7 @@ Own/review:
 - Tamsin Phase 1 proof.
 
 Current execution:
-- D-065 and D-075 are DONE; Veyr is available for bounded narrative/social review.
+- D-065 and D-075 are DONE, as are the bounded P9/D-046 and P14/D-046 documentation slices. Veyr's current availability/primary must be read from the live Bulletin and canonical Drive STATUS, including Wave-4 claims.
 
 Likely downstream review:
 - D-075 quest/world consequence;
@@ -137,7 +137,7 @@ Veyr does not own Android presentation or tactical engine mechanics.
 
 ### Quorix — Fifth Player-AI Seat: Verification, Red-Team & Performance Lead
 
-**Status:** FILLED / ACTIVE — Parallel P5 / D-042 bounded lane complete; verification/red-team available.
+**Status:** FILLED / ACTIVE at this documented checkpoint. Parallel P5 / D-042 bounded lane is complete; availability and later D-042 claims must be confirmed from the live Bulletin and canonical Drive STATUS.
 
 Primary responsibility after assignment:
 - cross-branch source archaeology;
@@ -150,7 +150,7 @@ Primary responsibility after assignment:
 
 Current execution:
 - Parallel P5 / D-042 bounded cross-branch survivor audit DONE; master D-042 remains IN_PROGRESS for broader delegated gaps.
-- Quorix is available for independent verification/red-team review; consult the live Bulletin for ownership. D-083 is complete following Silex's verification/handoff of Strata's implementation.
+- Quorix remains the verification/red-team specialist; any active primary (including Wave-3 P15/D-042) and availability must be confirmed from the live Bulletin and canonical Drive STATUS. D-083 is complete following Silex's verification/handoff of Strata's implementation.
 
 Likely downstream leadership:
 - D-076 integrated regression support;
