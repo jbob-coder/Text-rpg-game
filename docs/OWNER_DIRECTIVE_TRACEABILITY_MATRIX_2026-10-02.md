@@ -1,5 +1,7 @@
 # THE GAME — Owner Directive Traceability Matrix — 2026-10-02
 
+> **CURRENT AUTHORITY OVERLAY — 2026-10-08 AST:** this file preserves the owner's 2026-10-02 requirement-to-document traceability baseline. Its row-level “Current state” and “Next action” cells are not a live task queue and some have since been superseded by later work. In particular, bounded implementation is authorized; D-064 is complete; tactical runtime is verified through D-071; D-072 is IN_PROGRESS under Silex with D-073/D-074 dependency-gated; D-045 has progressed through P16 with the Progression UX Contract documented as the next child but not automatically claimable; and later D-026/D-046 documentation children also exist. Use the live Bulletin for claim/readiness, the Master Task Register for semantic scope/acceptance, and the Master Documentation Record/current domain masters for current documentation gaps. Preserve the table below as directive traceability unless a row is explicitly refreshed.
+
 Status: **ACTIVE / P0 REQUIREMENTS TRACEABILITY**  
 Repository: `jbob-coder/Text-rpg-game`  
 Program branch: `docs/master-game-development-program`  
@@ -151,7 +153,9 @@ The domain documents answer **how that requirement works**.
 
 Implementation should proceed only when the relevant domain contract is sufficiently resolved and the migration/verification gate is known.
 
-## 5. Priority after this traceability pass
+## 5. Historical priority after the 2026-10-02 traceability pass
+
+> This sequence records the priority immediately after the original traceability pass. It is not the live 2026-10-08 claim order. Current task selection must come from the Bulletin and current dependency state.
 
 P0 order:
 
