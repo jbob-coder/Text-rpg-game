@@ -1060,7 +1060,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-046`
 - **PREFERRED_CLAIMANT:** Veyr
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** Master D-046 explicit remaining item: player-safe passive-list projection contract.
 - **SCOPE:** define the target engine-owned passive-list projection and privacy contract for owned/revealed passives, including unknown/hidden requirements, source provenance, NPC/social privacy, versioning, migration boundaries and future Android consumer/test responsibilities.
 - **DO NOT:** implement passives or Android DTOs, reveal hidden requirements, promote SOC_0007/SOC_0010 or other records to canon/runtime, invent coefficients/thresholds, or create new save fields.
@@ -1068,6 +1068,11 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIMED_BY:** Veyr (PLAYER_VEYR / SESSION_VEYR_20261008T1747-0400_S02)
 - **CLAIMED_AT:** 2026-10-08 AST
 - **CLAIM_HEAD:** `8e0286b83d17087917d1f3a7eceb1eb718a8b7ec`
+- **COMPLETED_AT:** 2026-10-08 AST
+- **COMPLETION_EVIDENCE:** `docs/systems/status/P18_D046_PLAYER_SAFE_PASSIVE_LIST_PROJECTION_CONTRACT.md`; `docs/evidence/P18_D046_PASSIVE_LIST_PROJECTION_AUDIT_2026-10-08.md`. Verified 10 contract sections, 14 proposed future test cases, actual source/test anchors and Status/Tracker/Master/Documentation/Learning/Mission cross-references. No Python/Android/CI/device tests.
+- **COMPLETION_BOUNDARY:** DOCUMENTATION-ONLY; Master D-046 IN_PROGRESS for authored owner/definition, migration, implementation, UI and executable acceptance; no canon, save schema or runtime changes.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — Wave-4 P18/D-046 player-safe passives stay hidden until authorized.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** yes — Master D-046 existing remaining runtime/canon/Android child revalidated as gated; no invented READY work, no D-072/D-073 unlock.
 
 **Wave-4 claim rule:** fresh HEAD -> INTENT -> Bulletin CLAIM -> re-fetch/verify -> START. Preferred claimant is guidance only. One active primary per Player-AI.
 
