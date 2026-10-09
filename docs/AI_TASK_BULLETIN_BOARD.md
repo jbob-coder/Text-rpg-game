@@ -44,7 +44,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 
 ### Verified standings
 - **Nodus:** 700
-- **Veyra:** 730 — ACTIVE in canonical Drive; no current primary repository claim.
+- **Veyra:** 820 — P12/D-045 DONE; ACTIVE/unclaimed after closure.
 - **Kestrel:** 640 (P8/D-026 and P13/D-026 documentary migration slices DONE)
 - **Veyr:** 470 — P9/D-046 DONE; ACTIVE/unclaimed after fresh Bulletin check.
 - **Silex:** 275 — D-083 + D-070 (+B) + D-071; predecessor implementation credit preserved.
@@ -935,14 +935,20 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-045`
 - **PREFERRED_CLAIMANT:** Veyra
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** explicit D-045 NEXT after completed P7 namespace packet.
 - **SCOPE:** author the reconstruction-grade training/mentor/facility progression standard tying the 23 skills, seven class families and P7 profession/rank/status namespaces to acquisition/training evidence, facility capabilities and future runtime owners.
 - **DO NOT:** implement runtime progression; invent confirmed canon institutions; override D-061; edit D-072/D-073.
-- **ACCEPTANCE:** stable IDs/ownership, training prerequisites, facility/mentor capability model, CURRENT/TARGET/PROPOSAL separation, migration/test seams and the next D-045 child are explicit.
+- **ACCEPTANCE:** SATISFIED — stable proposal IDs/ownership, training prerequisites, mentor/evaluator and facility capability model, CURRENT/TARGET/PROPOSAL separation, 23/23 skill + 7/7 class coverage, player-safe visibility, migration/test seams and the next D-045 child are explicit.
 - **CLAIMED_BY:** Veyra
 - **CLAIMED_AT:** 2026-10-08T20:02:04-04:00
 - **CLAIM_HEAD:** `e2af38474fdec3298f3c669569bd582c214ea0be`
+- **COMPLETED_AT:** 2026-10-08T20:07:47-04:00
+- **COMPLETION_HEAD:** `5c726b1045f07bf52fe58ba85880b79962034126` (primary/evidence/index/parent/Learning/Brag/Score synchronized before Bulletin closure)
+- **EVIDENCE:** `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`; primary `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`; committed readback 23/23 current skill IDs + 7/7 class families, zero missing; no runtime tests executed.
+- **LEARNING_RECORD:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md` — P12 capability-first training handoff.
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — Wave-3 P12/D-045 training capability without a second progression engine.
+- **NEXT_TASK_CREATED_OR_REFRESHED:** no automatic claim — Master D-045 remains IN_PROGRESS; direct next documented child is the Gate Twelve Progression Proof Packet.
 
 ### Parallel P13 — D-026 — Hierarchical world-map projection migration contract
 - **TASK_REF:** `D-026`
