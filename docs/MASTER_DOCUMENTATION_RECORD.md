@@ -490,8 +490,8 @@ Execution of the final APK reconstruction remains intentionally gated.
 1. **Continue the deep existing-state audit (D-006 / D-042).**  
    The exact current-head path/responsibility slice is documented in `docs/DEEP_SOURCE_EXISTING_STATE_AUDIT_2026-10-04.md`. Parallel P5 / Quorix has now classified the bounded PR #27/#28/#30/#31 survivor family. Remaining work is broader consumer mapping, D-029 asset lineage/visual promotion, deprecation proof and exact execution evidence rather than basic current-head discovery.
 
-2. **Finish the reproducible current-head inventory (D-019).**  
-   The repository has an inventory tool and historical exact snapshots, but current exact word/record/asset-stage/test-evidence totals still need a complete-checkout execution and persisted result.
+2. **Continue D-019 beyond the completed P6 exact-revision structural checkpoint.**  
+   P6 already persisted a reproducible non-truncated Git-tree checkpoint (662 files, 447 Markdown, 30 structured docs and 72 test-source paths at its exact source revision). Do not repeat that bounded structural audit as setup. Remaining D-019 work is complete-checkout word/heading execution, deeper structured world/domain extraction, provenance-authoritative asset-stage counts and a clear separation between test-source counts and actually executed test evidence.
 
 3. **PR #33 moving-base requirement reconciliation (D-044) — DONE.**  
    Shared-file and Class-C / EXTRACT UNIQUE reconciliation is complete. Unique non-conflicting requirements were selectively migrated; duplicate/conflicting program hierarchies remain historical or blocked. This does not authorize a blind merge/rebase or PR retargeting.
