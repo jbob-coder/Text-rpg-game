@@ -907,6 +907,27 @@ The next deletion-safe audit must operate at member/asset ID level:
 
 No whole pixel catalog should be removed from the current evidence based only on visual preference.
 
+### 30.1A Bounded map asset-ID consumer cross-check — 2026-10-08
+
+**Documentation-only / non-claiming review.** At inspected authority HEAD `0234bbf8bed4d440e706f1ae3a410f1804bdee2d`, a six-asset map subset has direct source consumers and tests. This is **not** the missing repository-wide, per-member zero-consumer proof; it does not close D-026/D-021 or authorize deletion. Historical provenance and production stages are already recorded in [Environment, Scene, and Map Asset Provenance](../assets/ENVIRONMENT_SCENE_MAP_PROVENANCE_2026-10-03.md), sections 9–10; this section links them to the *exact* Compose consumption behavior rather than making a second asset registry.
+
+| Existing asset ID | Source definition | Exact present consumer / behavior |
+| --- | --- | --- |
+| `MAP_GATE_TWELVE_DISTRICT_BASE` | `PixelMapArtCatalog.kt::gateTwelveDistrictBase` (256x144) | `GameScreen.kt::MapSection` calls `PixelMapArtCatalog.base(map.title)` and draws it beneath projected edges and markers only for the exact recognized title. |
+| `MAP_NODE_DISCOVERED` | `PixelMapMarkerCatalog.kt::discoveredMarker` (16x16) | `MapSection` draws for **each projected** `map.nodes` entry; it does not request additional undiscovered nodes. |
+| `MAP_NODE_CURRENT` | `PixelMapMarkerCatalog.kt::currentMarker` | `MapSection` calls `stateOverlay(node.current, node.reachable)`; current takes precedence over reachable. |
+| `MAP_NODE_REACHABLE` | `PixelMapMarkerCatalog.kt::reachableMarker` | Overlay when not current and `node.reachable` is true. |
+| `MAP_NODE_UNAVAILABLE` | `PixelMapMarkerCatalog.kt::unavailableMarker` | Overlay when neither current nor reachable; the node must already be present in the public map projection. |
+| `MAP_PLAYER_MARKER` | `PixelMapMarkerCatalog.kt::playerMarker` | `MapSection` additionally draws it **only** when `node.current` is true. |
+
+**Exact verification boundary:** `PixelMapArtCatalogTest.kt` contains native-grid, exact-title lookup, viewport/coordinate and unknown-map fallback tests; `PixelMapMarkerCatalogTest.kt` contains five asset-ID/grid/palette assertions and four projected-flag overlay cases. This review inspected source and test *text*; **no Gradle, instrumentation, emulator, device or APK tests were executed here**. Existing tests prove their intended coverage only when run at an identified revision.
+
+**Separation of owners:** projected `map.nodes` and `map.edges` determine drawn public locations/routes and `node.reachable` determines travel affordance; `onTravel(selected.id)` delegates via the engine. `PixelMapArtCatalog.base` produces only a background; unknown map titles fall back to a full-canvas viewport without borrowing Gate Twelve art. Local `x/y` are not a world hierarchy or tactical grid (P13 and OR-010).
+
+**Bounded future review question, not a confirmed bug:** `PixelMapArtCatalog.kt` also draws static road-like lines into the Gate Twelve background before projected edges are overlaid. If future discovery design treats an undiscovered route's *visual geometry* as secret, compare partially discovered maps against this fixed backdrop and explicitly decide whether route-like background details require masking or are permissible environment decoration. Do not infer a hidden-route data leak solely from static art.
+
+**Remaining work:** all other pixel catalog members, cross-file/transitive references, test-only assets, per-member provenance/replacement choices and actual runtime screenshots still require independent proof before any removal or promotion.
+
 ### 30.2 Hardcoded/transitional state found during consumer audit
 
 Confirmed transitional or presentation-local state includes:
