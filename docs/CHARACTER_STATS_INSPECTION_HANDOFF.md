@@ -1,8 +1,8 @@
 # Character and Stats inspection handoff
 
-> Current priority: `jbob-coder/Text-rpg-game`, [master documentation program](MASTER_GAME_DEVELOPMENT_PROGRAM.md) and [decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md). This report preserves its bounded historical/provisional scope; it is not the final world, current canonical branch, or final APK plan.
+> Current priority: `jbob-coder/Text-rpg-game`, [master documentation program](MASTER_GAME_DEVELOPMENT_PROGRAM.md) and [decision/rebuild execution register](DECISION_AND_REBUILD_EXECUTION_REGISTER.md). This report preserves its bounded historical/provisional scope; it is not the final world, current canonical branch, final APK plan, or a live task assignment. **Do not execute the objective/NEXT_ACTION below unless the live Bulletin explicitly publishes and grants a current claim for that work.**
 
-## CURRENT_OBJECTIVE
+## HISTORICAL CURRENT_OBJECTIVE AT HANDOFF
 
 Implement the approved phone Character/Equipment and Stats direction on the verified
 paper-doll contract. This continues the 2026-09-30 user instruction, not the private
@@ -116,7 +116,9 @@ art approval and physical Galaxy A03 visual/performance/input/TTS checks remain 
 - PR #14 Skills work appeared concurrently; it is independent and is not overwritten
   or silently incorporated into this Character/Stats gate.
 
-## NEXT_ACTION
+## HISTORICAL NEXT_ACTION AT HANDOFF
+
+The following was the task-local next action at this handoff checkpoint, not a current repository assignment:
 
 Run exact-head Python/Android/emulator workflow, inspect the exported screenshots,
 repair observed failures, and record implementation SHA, tested merge/tree, run/jobs,
