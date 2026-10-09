@@ -4,7 +4,7 @@ Status: **FOUNDATIONAL / NUMERIC MODEL NOT LOCKED**
 Parents:
 - `docs/systems/PROGRESSION_MASTER_PLAN.md`
 - `docs/world/WORLD_SCALE_DOCUMENTATION_BLUEPRINT.md`
-- `docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md` once combat is approved
+- `docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md`
 
 ## 1. Purpose
 
