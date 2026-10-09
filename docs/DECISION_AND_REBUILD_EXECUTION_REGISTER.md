@@ -1,7 +1,8 @@
 # Decision and rebuild execution register
 
-Repository: `jbob-coder/Text-rpg-game`. Priority: P0 documentation first.
+Repository: `jbob-coder/Text-rpg-game`. Priority: P0 documentation authority first, with bounded evidence-backed implementation now authorized.
 Parent: [Master program](MASTER_GAME_DEVELOPMENT_PROGRAM.md).
+Current task readiness and ownership come from the live Bulletin/Master Task Register; this register is a decision/rebuild map, not a claim queue.
 Evidence baseline: `4d596bcd27b6e2f8ef9ce3a93b9dab22f5f4812e` on `docs/master-game-development-program`.
 This register supplements the existing directive breakdown; it does not declare all implementation PRs reconciled.
 
@@ -41,7 +42,7 @@ The requested targets remain 3,000 documentation, 2,000 guides/planning, 10,000 
 | Skills UI / tree | EXTEND after rules | Tree only where authoritative prerequisites/nodes exist | No invented points or unlock buttons |
 | Classes, professions, ranks | NEW separate namespaces | Define combat, work, institutional and citizen status independently | Progression/social master decisions |
 | Activities / world simulation | EXTEND | Time, interruptions, schedules, off-screen budget | Determinism and save/resume |
-| Tactical combat | NEW original subsystem | Choose turn/action, range, cover, AI and aftermath contracts | Rules examples and isolated prototype |
+| Tactical combat | NEW original subsystem / PARTIALLY IMPLEMENTED | D-069 schemas/grid, D-070 transient turn/action/reaction engine and D-071 knowledge-safe objectives/retreat/AI are verified; D-072 durable aftermath is live under Silex; D-073/D-074 remain dependency-gated | Preserve verified merge-state evidence; complete aftermath, authored bridge/content, Android presentation and integrated acceptance without moving authority into UI |
 | Persistent adversaries | NEW original direction; design review needed | Social memory and independent goals; exact mechanic combination unresolved | Originality and patent-aware design review |
 | Economy / beast resources / loot | EXTEND or NEW by current domain | Concrete provenance, scarcity, rewards and sinks | Ecology + combat + balance fixtures |
 | Android navigation/screens | REWORK in final phase | Consume final contracts; retain usable verified slices until replacement | Migration, phone QA, accessibility |
