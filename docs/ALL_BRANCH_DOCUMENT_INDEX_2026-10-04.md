@@ -1,8 +1,10 @@
 # All-Branch Document Index — 2026-10-04
 
-Status: ACTIVE SNAPSHOT / PATH-LEVEL INVENTORY
+Status: **HISTORICAL EXACT-REVISION SNAPSHOT / PATH-LEVEL INVENTORY**
 Repository: `jbob-coder/Text-rpg-game`
-Canonical working branch: `docs/master-game-development-program`
+Canonical working branch at audit: `docs/master-game-development-program`
+
+> Every count and branch SHA in this file belongs to the 2026-10-04 audit set recorded below. This is branch-reconciliation evidence, not a current repository/document count and not a task queue. For current exact-revision counts use D-019/project-status tooling at the desired HEAD; for live task readiness/claims use the Bulletin.
 
 This index was generated from Git tree paths only. Document contents were not opened or interpreted. A path is counted once globally even when it exists on multiple branches.
 
