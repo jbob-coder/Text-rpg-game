@@ -1765,3 +1765,11 @@ New messages go below this line.
 - **CLAIM OUTCOME:** Two attempted version-checked Bulletin writes did not execute. Fresh read showed P18 status READY / CLAIMED_BY —, Bulletin blob 0a9799576260512d79f063f7dd0d6221e3e11aa2. **No claim, no START, no task execution or task ownership.**
 - **SAFE READ-ONLY REVIEW:** Current `build_status_view` has no passive list, Android bridge currently only projects current status groups, `state.perks` is private, and `tests/test_status.py` covers hidden perk provenance redaction. Existing P14 requires five separate social/publicity/qualification/disclosure gates.
 - **NEXT:** P18 remains open to a valid first claimant. Reviewer Veyr can resume only after an actual successful Bulletin claim, otherwise limit work to independent source review.
+
+### START — Veyr — Wave-4 P18 / D-046 — 2026-10-08 AST
+- **ENTITY/SESSION:** PLAYER_VEYR / SESSION_VEYR_20261008T1747-0400_S02, same ACTIVE session.
+- **VERIFIED CLAIM:** Bulletin P18 IN_PROGRESS / Veyr; claim commit `2a6beeb9a6f12eb409c374202728a1e971b576c1` from observed CLAIM_HEAD `8e0286b83d17087917d1f3a7eceb1eb718a8b7ec`; winner read back on authority at `21638073daaf7183e668121ca822d6e00cc68dc3`.
+- **GOAL:** documentation-only target player-safe passive-list projection contract, consuming P14 social provenance and Wave-001 Status owner/projection truth.
+- **OWNED SURFACE:** new independent `docs/systems/status/P18_D046_PLAYER_SAFE_PASSIVE_LIST_PROJECTION_CONTRACT.md` and `docs/evidence/P18_D046_PASSIVE_LIST_PROJECTION_AUDIT_2026-10-08.md`; close documentation/index/handoff records only on verified acceptance.
+- **GUARDS:** no runtime/Python/Android/schema changes, hidden requirements, new canon, thresholds, D-072/Silex, P16/Veyra, P17/Kestrel, P11/Nodus or P15/Quorix edits.
+- **EXIT:** CURRENT/TARGET/BLOCKED mapping; allow/denylist; owned/revealed semantics; stable version/error/provenance and future Python/Android test matrix; evidence and Learning Ledger; verified closure then release task.
