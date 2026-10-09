@@ -231,7 +231,14 @@ Do not make all enemies scale exactly to the player unless a specific mode requi
 
 ## 12. Tactical combat — original squad tactics
 
-Target: NEW.
+Target: **NEW TARGET / PARTIALLY IMPLEMENTED**.
+
+Current runtime checkpoint:
+- D-069 verified authored tactical schemas and pure grid/geometry foundations;
+- D-070 verified transient tactical state, turn/action budget and reaction scheduling;
+- D-071 verified knowledge-safe objectives, retreat and bounded deterministic AI;
+- D-072 durable aftermath is the current live tactical implementation step;
+- D-073 Gate Twelve content/Python bridge remains blocked until D-072 is DONE, followed by D-074 Android tactical presentation.
 
 Broad design inspiration may include turn-based squad tactics, but implementation must be original.
 
@@ -354,7 +361,9 @@ Before new world scale:
 9. integrate with vertical slice;
 10. expand world content.
 
-## 18. Required future documents
+## 18. Materialized master documents
+
+The following master contracts now exist:
 
 - `PROGRESSION_MASTER_PLAN.md`
 - `ITEM_ECONOMY_LOOT_MASTER_PLAN.md`
@@ -363,7 +372,7 @@ Before new world scale:
 - `WORLD_BALANCE_INTEGRATION_PLAN.md`
 - `SAVE_AND_CONTENT_MIGRATION_MASTER_PLAN.md`
 
-This matrix is the decision bridge; those documents own the full specifications.
+This matrix remains the decision bridge; those documents own the full specifications. Their existence does not by itself prove runtime completion, save migration, content population, Android integration or final balance.
 
 
 ## 2026-10-02 final reconstruction integration update
