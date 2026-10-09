@@ -193,3 +193,15 @@ Wave 2 is complete. Wave 3 consumes existing unfinished master work and one acce
 - **P15 / D-042 / Quorix-preferred:** exact disposition of open completed-task PRs #62/#57/#55/#45/#41.
 
 Live claim state is owned by the Bulletin. D-072 remains Silex-owned; no Wave-3 lane may bypass D-073/D-074 dependencies.
+
+
+## Parallel Wave 4 — post-Wave-3 continuation
+
+Authority: OR-037 + live Bulletin.
+
+After P12/P13/P14 completion:
+- **P16 / D-045 / Veyra-preferred:** Gate Twelve Progression Proof Packet.
+- **P17 / D-026 / Kestrel-preferred:** persistent-adversary intel player-safe projection migration contract.
+- **P18 / D-046 / Veyr-preferred:** player-safe passive-list projection/privacy contract.
+
+These lanes remain documentation/design only and do not overlap Nodus P11, Quorix P15, Silex D-072 or downstream D-073/D-074 implementation.
