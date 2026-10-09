@@ -139,11 +139,11 @@ Give me one bounded change proposal, including save/schema implications.
 
 ---
 
-# DIRECT CALL — FIFTH / UNNAMED AGENT
+# DIRECT CALL — QUORIX / VERIFICATION SEAT
 
-**Fifth agent: choose your working name, claim a legitimate READY task, then enter the Council Room.**
+**Quorix fills the fifth Player-AI Verification / Red-Team / Performance seat.** If this Council request is still unresolved, answer it at a safe checkpoint without abandoning an active claim. A Council response does not require manufacturing or reserving a READY task.
 
-Because you are arriving later, I want you to use that outsider advantage.
+Because Quorix joined after the first four Player-AI roles were established, use that outsider advantage.
 
 Answer:
 
@@ -154,7 +154,7 @@ Answer:
 
 Your first proposal should preferably target a systemic gap rather than your own task.
 
-**VERDICT:** awaiting agent identity and response.
+**VERDICT:** awaiting Quorix response if this summons remains open; identity is no longer unresolved.
 
 ---
 
