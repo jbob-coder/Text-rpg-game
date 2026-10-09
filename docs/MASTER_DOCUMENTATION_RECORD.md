@@ -539,23 +539,23 @@ Execution of the final APK reconstruction remains intentionally gated.
     Full recurring-character packets, schedules, goals, social state, rival evolution, factions and world placement remain incomplete.
 
 12. **Items/economy population.**  
-    Full item/resource/equipment/economy records and migration mapping remain incomplete.
+    D-032 already supplies the items/economy migration-design packet and D-067 verifies one bounded Phase 1 inventory/equipment loop. Full item/material/resource/economy catalogs, currency/pricing/vendor/loot population, later target-runtime migration and final economy UI/evidence remain incomplete.
 
 13. **Combat reconstruction depth.**  
     The first-pass tactical contract layer is complete and runtime implementation is verified through D-071: D-069 authored schemas/pure grid, D-070 transient turn/action/reaction state and D-071 knowledge-safe objectives/retreat/bounded AI. D-072 durable aftermath is IN_PROGRESS under Silex; D-073 Gate Twelve content/Python bridge remains BLOCKED until D-072 is DONE, with D-074 Android tactical presentation behind D-073. Remaining reconstruction depth still includes broader catalogs, calibrated fixtures, authored encounter content, integration/acceptance evidence and later balance/UX refinement.
 
 14. **Persistent rival/world-memory reconstruction depth.**  
-    The concept has a master direction but needs dedicated operational records and persistence/migration rules.
+    V09 now has its 8/8 first-pass contract layer, D-032 persistent-adversary schema/API migration packet and P17 player-safe adversary-intel projection contract. Remaining work is authored persistent-adversary content/canon, recurrence/adaptation runtime, world/faction routing, actual persistence migration/save-round-trip proof, typed Android consumption, low-end profiling and integrated acceptance.
 
 15. **Activities/life-loop content population.**  
-    The contract exists, but concrete activities/facilities/schedules and their cross-system records remain incomplete.
+    V10 contracts exist and D-068 verifies one concrete Trace Chamber training activity through authoritative time/resource/progression/save-load/Android delegation. Broader activity/facility/job/schedule/calendar/background/offline content and their cross-system population remain incomplete.
 
 ### 5.4 Late-stage blocked work
 
 16. **APK teardown manifest (D-033) remains blocked.**
 17. **Final APK reconstruction remains blocked.**
 18. **Physical Galaxy A03 acceptance remains unverified unless new physical-device evidence is explicitly recorded.**
-19. **Destructive deletion/replacement remains blocked until zero-consumer evidence, migration and rollback boundaries exist.**
+19. **Destructive deletion/replacement remains blocked without target-specific current consumer/deprecation evidence, migration and rollback boundaries.** The completed 24-raster baseline zero-consumer audit must not be rerun as generic setup, but it also does not authorize future deletion after architecture/consumer changes.
 
 ---
 
