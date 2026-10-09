@@ -524,3 +524,28 @@ That gives a future reconstruction agent enough information to decide whether a 
 - **PROHIBITIONS:** no new training formula; no numeric rebalance; no new runtime fields; no invented institution/rank/faction; no new mentor NPC canon; no D-072/D-073 edits; no UI-owned progression truth.
 - **NO MATERIAL BLOCKER FOUND:** the only missing authority is the Overseer decision to expose this existing documented child as a Bulletin Wave-3 READY lane. If AXIOM declines Wave-3 generally, Veyra remains unclaimed.
 - **VALIDATION CLASS:** source/document readback only; no Python/Android/CI/emulator/device execution.
+
+---
+
+## COUNCIL PROPOSAL — Kestrel — D-026 activity player-safe consumer migration
+
+- **AUTHOR:** PLAYER_KESTREL / `SESSION_KESTREL_20261008T1752-0400_S02`. **STATUS:** PROPOSED / OVERSEER DECISION REQUIRED. Kestrel is ACTIVE and UNCLAIMED; P13/D-026 is DONE. This is **not** a new task ID, Bulletin READY entry, task reservation, runtime implementation or competitive completion claim.
+- **AUTHORITY CHECK:** `29d2a275640b08e230cd204763d3fd6711b4c469`; live Bulletin has no READY primary task. P11/CPR-006 remains Nodus's live state atomicity lane, P15 Quorix's PR disposition lane, D-072 Silex-owned; D-073/D-074 BLOCKED. P12/P13/P14 are DONE. The proposal does not interfere with these lanes.
+- **EXISTING MASTER WORK:** `docs/THE_GAME_MASTER_TASK_REGISTER.md`, D-026 `REMAINING` expressly names `future activity projection`; D-021 lists future activity consumers. Previous Kestrel P8 and P13 only completed tactical and hierarchy **documentation** children respectively; neither covered activity.
+
+### Exact present-source basis
+
+1. `src/textrpg/simulation.py`: `advance_time`, `recover`, `train`, `train_attribute` own authoritative time/resources/progression. No Compose training arithmetic is permitted.
+2. `tests/test_phase1_activity.py` contains three source-listed Phase-1 Trace Chamber checks: time/cost/progression/save-load; failed requirement spends nothing; time-preflight failure rolls back. The Phase-1 activity is exposed through an existing authored `scene.choices` action, not via a normalized `activities` snapshot domain.
+3. `src/textrpg/android_bridge.py::_view_for` currently exposes `scene,status,inventory,quests,map,room,visuals,meta` but **no normalized activity projection or independent activity command**. `GameEngine.kt::GameSnapshot` currently has 21 fields and no `activities` DTO; `GameEngine` exposes `choose`, not a dedicated activity action. These are current boundaries, not proof of a runtime defect.
+4. `docs/systems/ACTIVITY_RECORD_AND_STATE_STANDARD.md` §12 permits player-safe `ID/label/category`, availability/reason, duration, known costs/outcomes, participant/location and cancelability; bars hidden thresholds, secret rewards, private NPC goals and undiscovered knowledge. §7 explicitly does not mandate durable `active_activity` for atomically resolved actions.
+5. `docs/systems/ACTIVITY_TIME_COST_ATOMICITY_STANDARD.md` preserves state/time arithmetic and rollback in the engine. `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` §20 names the current missing normalized activity projection and defers implementation.
+
+### Smallest dependency-safe task proposal
+
+- **SCOPE IF AUTHORIZED:** bounded Wave-4 P16/D-026 **documentation-only** activity projection/consumer migration child, using existing Trace Chamber activity/choice as equivalence proof. Map current authored choice and simulation/bridge producer to future optional typed `ActivityPreview`/availability/cost/outcome DTO, Kotlin mapper, ViewModel delegation, Compose presentation, privacy redaction, domain projection version, legacy `scene.choices` compatibility and named Python/JVM/UI test owners.
+- **ACCEPTANCE:** exact file+field+action+test migration table, current/runtime-vs-future/proposal terminology, no hidden rewards/NPC goals, no optimistic time/resource math, no unsupported future wire schema claim, no duplicate Phase-1 training engine or new save fields. Retain 21-field current snapshot and existing choices as legacy runtime until explicit release gate.
+- **PROHIBITIONS:** no implementation or gameplay arithmetic changes, no canon NPC/facility/institution, no new runtime effect API, no D-072–D-074 tactical edits, no P11 save-atomicity ownership, no unexecuted test claim. Parent D-026 stays IN_PROGRESS.
+- **DEPENDENCIES:** existing D-068 activity runtime proof is DONE and activity standards already exist; no tactical-chain dependency is needed for this **documentation-only** contract. Full normalized activity implementation remains subject to future approved domain/schema and runtime gates.
+- **REQUESTED AXIOM ACTION:** assess overlap and prioritization, then either publish an OR-037-style ruling and explicit Bulletin `READY` P16 under existing D-026 (number/rank chosen by AXIOM), **DEFER** with the exact blocking authority, or **DENY** if unneeded. Kestrel will not self-publish or claim from this proposal.
+- **VALIDATION CLASS:** connector-backed source/document and test-source inspection only; zero new Python/JVM/CI/emulator/phone execution.
