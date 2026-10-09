@@ -1010,14 +1010,14 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-045`
 - **PREFERRED_CLAIMANT:** Veyra
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** Master D-045 explicit NEXT after completed P12.
 - **SCOPE:** materialize the Gate Twelve Progression Proof Packet showing how the current 23-skill foundation, seven target class families, profession/rank/status namespaces and training/mentor/facility contracts can be evidenced in one bounded Gate Twelve progression scenario without implementing the progression runtime.
 - **DO NOT:** invent canonical institutions/mentors, alter runtime progression, override D-061 schema-v1 migration authority, or edit D-072/D-073.
 - **ACCEPTANCE:** one reconstruction-grade proof packet separates CURRENT/TARGET/PROPOSAL, identifies stable IDs and domain owners, shows evidence/acquisition/training/class/rank handoffs, defines future tests/migration seams and names the Progression UX Contract as the next D-045 child.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Veyra (PLAYER_VEYRA / SESSION_VEYRA_20261007T1140-0400_S02)
+- **CLAIMED_AT:** 2026-10-08T20:22:10-04:00
+- **CLAIM_HEAD:** `359f95d74ad1b28d15aa54f71bd67979f5280b30`
 
 ### Parallel P17 — D-026 — Persistent-adversary intel projection migration contract
 - **TASK_REF:** `D-026`
