@@ -41,7 +41,7 @@ Repository files and fresh execution evidence outrank remembered chat context. O
 - Repository: `jbob-coder/Text-rpg-game`.
 - Program authority branch: `docs/master-game-development-program`.
 - Current mode: **bounded Phase 1 implementation + exact-head verification**, using reconstruction-grade contracts as guardrails.
-- Gate Twelve is the first proof region. D-065/D-067/D-068 are DONE and the green authority checkpoint is PASS; D-064 is the sole remaining gate before D-069 tactical core.
+- Gate Twelve is the first Phase 1 proof region. **Do not use this entrypoint as a frozen task-readiness snapshot:** consult the live `docs/AI_TASK_BULLETIN_BOARD.md` for claiming and current dependencies, then `docs/THE_GAME_MASTER_TASK_REGISTER.md` for task scope and completion evidence. The D-064 -> D-069 transition is historical, not the current next task.
 - `main` is not the canonical implementation branch. Do not promote, rewrite, or merge `main` merely because it is the default branch.
 - Historical V6 and Android branches remain evidence sources, not top-level product authority.
 - The old black-screen incident is historically closed by the repository-owned Compose/Chaquopy client on representative emulator evidence; physical Galaxy A03 validation remains a separate gate and must not be inferred from emulator results.
@@ -188,7 +188,7 @@ Do not manufacture filler work. If no eligible work exists and owner input is re
 
 ### Runtime merge-state gate
 
-Project Overseer ruling OR-009 introduces a prospective integration rule after the current D-064–D-068 transition checkpoint.
+Project Overseer ruling OR-009 established the runtime merge-state gate during the historical D-064–D-068 transition. The integration policy below still applies to new runtime work.
 
 Once one green authority checkpoint is established:
 - runtime-impacting tasks should use short-lived task branches;
@@ -199,7 +199,7 @@ Once one green authority checkpoint is established:
 - documentation/control-only changes may still write directly to the authority branch;
 - emergency direct runtime repairs require explicit evidence and rationale.
 
-D-069 is the first intended task to prove this policy after the transition gate. See `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
+D-069 was the first intended adopter of the gate; that reference is historical and is not a current task assignment. See `docs/AI_RUNTIME_MERGE_STATE_GATE.md`.
 
 ## Player-AI specialization responsibilities
 
