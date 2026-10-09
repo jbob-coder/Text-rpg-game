@@ -147,3 +147,7 @@ Earlier Wave A pre-build language is historical. Use [Raster delivery evidence](
 ## Operational reuse child
 
 - `GLOBAL_ASSET_REUSE_OCCLUSION_MATRIX.md` — R0–R5 reuse decision taxonomy, environment occlusion order, beast-layering cautions and hard compatibility boundaries. It is subordinate to `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md` and `ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md`.
+
+## Current renderer source-review crosswalk
+
+- [Kestrel pixel runtime composition source audit — 2026-10-08](../reviews/KESTREL_PIXEL_RUNTIME_COMPOSITION_SOURCE_AUDIT_2026-10-08.md) — non-owning source-to-standard crosswalk for `SceneIllustration`, room-actor slot resolution, preferred scene rasters, observed draw order and a 12-case future acceptance matrix. It records **read-only source/test inspection**, not a claim of executed visual QA, runnable tests or a new asset-production task. The runtime composition standard and individual manifests remain authoritative.
