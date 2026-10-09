@@ -282,14 +282,14 @@ This section supersedes older statements about the top-level product objective w
   - current test-source gaps are now exact-contract-mapped for quests, content/canon metadata, derived stats and identity;
   - D-030 actor/room implementation migration is mapped file-by-file with equivalence, privacy, rollback and save boundaries.
 - REMAINING:
-  - future activity projection;
-  - tactical-combat projection;
-  - hierarchical world-map projection;
-  - persistent-adversary intel projection;
-  - evolved progression/status projection deltas;
+  - normalized future activity projection contract beyond the current generic-choice/D-068 trace;
+  - tactical-combat projection implementation and executable acceptance after the completed P8 migration contract and the D-073/D-074 runtime chain;
+  - hierarchical world-map runtime/typed-consumer implementation and acceptance after the completed P13 migration contract;
+  - persistent-adversary intel runtime/typed-consumer implementation and acceptance after the completed P17 migration contract;
+  - evolved progression/status projection deltas, including later Progression UX work where applicable;
   - final APK destination component migration map;
   - exact-head runtime/build verification after code/test changes.
-- NOTE: current-source discovery and current test-contract discovery are no longer the blocker; future target projection implementation and later execution evidence are.
+- NOTE: current-source discovery and the P8/P13/P17 target projection contracts are no longer the blocker; normalized activity/evolved-status contract work, target projection implementation, final APK mapping and later execution evidence remain.
 - WAVE_2_P8_SLICE: **DOCUMENTATION-ONLY TACTICAL PROJECTION MIGRATION CHILD DELIVERED — 2026-10-08 AST / Kestrel**; P8 closure bookkeeping still governed by live Bulletin.
 - WAVE_2_P8_DELIVERABLE: `docs/android/D026_TACTICAL_PLAYER_SAFE_PROJECTION_MIGRATION_MAP_2026-10-08.md`, committed `4cff510ce56b474120c45f94a3b88f387e0ba5a7`; parent `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` linked.
 - WAVE_2_P8_EVIDENCE: `docs/evidence/D026_P8_TACTICAL_PROJECTION_MIGRATION_2026-10-08.md`; path/link/source existence inspection at `413aaa4d56f1d785e2e2004a948b765a89a66b81` (6/6 relative links; 10/10 referenced code/test paths), **no Python/Android/emulator tests run**.
