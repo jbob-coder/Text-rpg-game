@@ -321,7 +321,7 @@ This does not complete the broader V10 activity/life-simulation target. Activity
 
 This requirement does not need a new job/profession system for Phase 1.
 
-Next breadth dependency: V07 Items/Economy/Loot.
+V07 requirement #6 is no longer a breadth blocker: D-067 verified the bounded Gate Twelve inventory/equipment loop. Broader V07 economy/loot expansion remains later work and is not required for Phase 1 acceptance.
 
 
 ## 14. Phase 1 readiness checkpoint — items and equipment
@@ -334,12 +334,18 @@ Requirement 6 (equipment/inventory loop):
 - Maintenance Seal authored consumption: **EXISTS**;
 - Dead Relay authored acquisition: **EXISTS**;
 - V07 normalized documentation: **CONTRACT-READY**;
-- exact-head Phase 1 regression/save-load verification: **PENDING**.
+- exact-head Phase 1 mutation/save-load/Android verification: **VERIFIED BY D-067**;
+- invalid-equip atomic rollback bonus D-067-B: **VERIFIED**;
+- completion head: `0fd843a5ece0f87c74a262c7ecb6739d025b0678`;
+- evidence: `docs/evidence/D067_PHASE1_INVENTORY_EQUIPMENT_PROOF_2026-10-04.md`; PR #65 / run #351.
 
-The selected proof is documented in:
-- docs/systems/GATE_TWELVE_PHASE1_ITEM_EQUIPMENT_PACKET.md
+Status:
+**PHASE 1 REQUIREMENT #6 SATISFIED / BOUNDED INVENTORY-EQUIPMENT LOOP VERIFIED.**
 
-Phase 1 does not wait for currency, vendors, crafting, durability, encumbrance, random loot, or a large item catalog.
+The selected proof remains documented in:
+- `docs/systems/GATE_TWELVE_PHASE1_ITEM_EQUIPMENT_PACKET.md`.
+
+Phase 1 does not wait for currency, vendors, crafting, durability, encumbrance, random loot, or a large item catalog. Broader V07 population/economy work remains separate.
 
 
 ## 15. Phase 1 boundary — persistent adversaries
