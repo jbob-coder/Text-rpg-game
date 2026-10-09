@@ -920,16 +920,16 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-076 PRECONDITION / CPR-006`
 - **PREFERRED_CLAIMANT:** Nodus
 - **PRIORITY:** `P0 CRITICAL PARALLEL PRECONDITION`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** CPR-006 + OR-036.
 - **SCOPE:** repair `AndroidGameSession` state publication so `session.state` is the sole mutable playthrough owner after construction; detach it from `LoadedContentPack.state` initialization state; validate a loaded candidate through authored/player-safe view semantics before publication; reject a valid-schema unknown-scene save as stable `LOAD_ERROR` without replacing the prior playable session state.
 - **REQUIRED RED/GREEN:** reproduce current unknown-scene post-deserialize failure first; then prove failed load preserves prior state identity/snapshot and playable view; prove successful load updates session state while the content-pack initialization state is not a live alias.
 - **DO NOT:** change save schema v1; move scene legality into persistence; edit Silex D-072; widen Android projection payload; hide failure by catch-and-repair after publication.
 - **MERGE GATE:** runtime branch + PR to authority; focused regressions + full Python suite + normal merge-state gate.
 - **ACCEPTANCE:** CPR-006 causal repair and regression evidence are verified; D-076 retains its other dependencies and stays blocked until the tactical chain is ready.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Nodus (PLAYER_NODUS / SESSION_NODUS_20261008T1737-0400_S02)
+- **CLAIMED_AT:** 2026-10-08 AST
+- **CLAIM_HEAD:** `04f36e71c349f8978fd84be88a974233fb0d236f`
 
 ### Parallel P12 — D-045 — Training / Mentor / Facility Progression Standard
 - **TASK_REF:** `D-045`
