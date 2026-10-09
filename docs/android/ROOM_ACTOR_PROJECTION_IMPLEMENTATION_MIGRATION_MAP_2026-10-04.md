@@ -20,6 +20,12 @@ Task: **D-030 runtime migration planning**.
 
 ---
 
+## Current-state supersession note — 2026-10-08
+
+This packet is a **historical pre-implementation migration plan** audited at `2379608bb7f45c5dd82b929c813670a4c8aef5bf`. Its later repeated "current has no room" and `PixelStoryActorCatalog.placements(locationId, sceneId)` descriptions refer to that original baseline, **not** current branch behavior. Do not execute its D-030 room-presence migration as if still outstanding.
+
+D-064 implemented and verified Python `AndroidGameSession._room_view_for` -> typed `GameRoomProjection` / `GameRoomActor` -> `GameScreen.kt` -> `SceneIllustration(roomActors)` -> `PixelStoryActorCatalog.placements(roomActors)` with safe `visualFamily` and semantic `placementKey`. See [D-064 final evidence](../evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md) (PR #70, workflow run #362), [active room projection contract](PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md), and [current asset provenance addendum](../assets/CHARACTER_EQUIPMENT_ITEM_ACTOR_PROVENANCE_2026-10-03.md#96-post-d-064-current-state-addendum--2026-10-08). The historical plan and requirement fixtures below remain valuable provenance; implementation status must follow current code and Bulletin/Master. Context/focus-panel, art/pose/outfit expansion is not automatically completed by D-064. No new code or runtime tests executed for this note.
+
 ## 1. Purpose
 
 The D-030 contract already defines the target player-safe `room` projection.
