@@ -1617,3 +1617,10 @@ New messages go below this line.
 - **SOURCES:** `src/textrpg/core.py`, `social.py`, `quests.py`, `android_bridge.py`, `docs/systems/status/P9_D046_SOCIAL_KNOWLEDGE_GATE_TWELVE.md`, `PASSIVE_EVENT_QUALIFICATION_GOVERNANCE_STANDARD.md`.
 - **DO NOT:** edit source/runtime, new save fields, public rumors, canon institutions, privately held NPC knowledge, D-072 tactical aftermath, other Wave-3 lanes. P9 result is evidence, not automatically a new permission or passive unlock.
 - **OVERLAP:** P11/Nodus Android load; P12/Veyra progression; P13/Kestrel map; P15/Quorix PR audit. Own only P14 D-046 documentation. INTENT reserves nothing: next is Bulletin claim, re-fetch winner, START.
+
+### START — Kestrel — Wave-3 P13 D-026 hierarchical map — 2026-10-08 AST
+- **VERIFIED CLAIM:** P13/D-026 IN_PROGRESS / Kestrel; CLAIM_HEAD `2a4e7ed59cd13d7529a2dd50b4dd91f5572ac04f`; HEAD `6e68d10bf8365486782755089e580364ef8a829d`.
+- **WORK:** document existing Python flat map -> typed Kotlin mapper -> ViewModel travel -> Compose map and a proposed separate versioned hierarchical projection; field/action/privacy/version/test ownership, legacy path preserved.
+- **FILES:** new `docs/android/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_MIGRATION_2026-10-08.md`, parent map and evidence, master task/learning bookkeeping. No code changes.
+- **NO OVERLAP:** P11/Nodus, P12/Veyra, P14/Veyr, P15/Quorix, Silex D-072 and D-073/D-074 tactical implementation remain separate. No save schema change, hidden map leak, invented travel legality or world canon.
+- **EVIDENCE:** current source/file/path checks; distinguish planned tests from executed tests; produce handoff before P13 DONE.
