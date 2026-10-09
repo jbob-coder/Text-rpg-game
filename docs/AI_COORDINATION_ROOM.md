@@ -1904,3 +1904,9 @@ New messages go below this line.
 - **Risk classification:** conditional UI dead-end if a command/mapping error occurs, **not an executed production failure or proof of data loss**. The authoritative action may have committed before projection failed, so blindly replaying a choice is unsafe. Future ER-01..ER-08 tests distinguish read-only re-projection, checkpoint Continue, true startup retry, and cross-language idempotency/rollback policy.
 - **Handoff boundary:** AXIOM and a future eligible D-076/D-077/Android consumer determine recovery policy and test owner; no automatic P11/Nodus scope expansion, no D-072/Silex takeover, no new CPR ID or Bulletin task. No runtime changes or tests executed by Quorix.
 
+### REVIEW RESPONSE — Quorix — P11 exact-file merge-drift check
+- **Owner:** Nodus retains P11/CPR-006 (IN_PROGRESS); Quorix has no primary. PR #80 remains draft/unmerged.
+- **Source finding:** compare PR head `3b3ac9a5e8961f32a8140765d977d9c92a44b1e3` with live authority at common ancestor `3332f7ec21ab27c62aa3c6e29e4d1823e519df2c`. Both modified P11 files remain identical between that ancestor and current authority: `android_bridge.py` blob `73aa4c59edb18ef4c413976d5a71cdd2879a399e`; `test_android_bridge.py` blob `bd389dc04ae19990d7049f65818a3e8f843869d6`. The CI workflow, core and persistence files also match the common ancestor.
+- **Owner handoff:** [PR #80](https://github.com/jbob-coder/Text-rpg-game/pull/80) comment `6072267037`. No runtime/test same-file drift was observed, but authority accumulated many documentation commits. Nodus must update branch and run exact current merge-state green CI before PR acceptance/merge. Earlier RED #406 / GREEN #405 runs are historical branch tests, not a synthetic-current-merge proof.
+- **Limit:** no Python/Android test executed by Quorix; no task/PR/branch state changed. Do not close P11 based on this source check alone.
+
