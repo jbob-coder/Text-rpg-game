@@ -963,6 +963,24 @@ No whole pixel catalog should be removed from the current evidence based only on
 
 **Disposition:** KEEP as source-defined presentation members pending production QA; no member in these two catalogs is proven wholly unreferenced by this bounded source review. Whether a conditional icon is actually rendered depends on current public state and screen path. No deletion, private-state projection, change of state ownership, or migration to a second asset registry is authorized. Continue the per-member test/provenance/consumer audit for remaining catalogs before treating D-026/D-021 as complete.
 
+### 30.1C Trace FX and strain frame-family consumer matrix — 2026-10-08
+
+**Documentation-only / no new task claim.** Inspected authority `f180f8338987c908cc3cf481c2f75f3852ffff64` and all 29 present `android/app/src/main/java/com/thegame/rpg/ui/*.kt` production source files (27 independent UI files plus these two catalogs), with the two dedicated catalog test sources. This is a bounded per-frame-family consumer audit, **not** global asset-deletion proof or a complete accessibility/animation QA run. Historical asset provenance already lives in [UI/FX provenance](../assets/UI_FX_ANIMATION_PROVENANCE_2026-10-03.md) §§5–6.
+
+| Generated asset ID family | Defined members / grid | Actual direct production consumer and selector |
+| --- | --- | --- |
+| `FX_TRACE_ECHO_AMBIENT_FRAME_1..4` | 4 procedural 64×64 frames in `PixelTraceFxCatalog.kt::frames` | `SceneIllustration.kt` falls back to `PixelTraceFxCatalog.forScene(sceneId)` for the seven listed player-facing scene IDs; unknown scenes return null. |
+| `FX_SIGNAL_PULSE_FRAME_1..6` | 6 procedural 64×64 frames, `signalPulseFrames` | `SceneIllustration.kt` uses `signalPulseForScene` for **exactly** `POWER_FIRST_LIVE_USE`, ahead of the ambient fallback. |
+| `FX_DIRECTIONAL_TRACE_FRAME_1..6` | 6 procedural 64×64 frames, `directionalTraceFrames` | `SceneIllustration.kt` uses `directionalTraceForScene` for **exactly** `TRACE_DIRECTIONAL_DISCOVERY_RESULT`, ahead of both pulse and ambient. |
+| `FX_TRACE_STRAIN_AVATAR_FRAME_1..4` | 4 procedural 32×48 frames in `PixelTraceStrainCatalog.kt::avatarFrames` | `PixelComponents.kt::PlayerAvatarPanel` calls `avatarForConditions(conditions.map { it.id }.toSet())`; only projected `COND_ECHO_STRAIN` yields frames, overlaid on the avatar canvas. |
+| `FX_TRACE_STRAIN_PORTRAIT_FRAME_1..4` | 4 procedural 64×64 frames in `PixelTraceStrainCatalog.kt::portraitFrames` | **No direct production call to `portraitForConditions` in the 29 audited Kotlin UI files.** The catalog and `PixelTraceStrainCatalogTest.kt` define/test the frames, but that is not current runtime portrait display proof. Keep as **DEFINED / TEST-REFERENCED / NO UI CONSUMER VERIFIED**; not a canonical portrait master or deletion authorization. |
+
+**Actual precedence and state boundary:** `SceneIllustration` selects `directionalTraceForScene ?: signalPulseForScene ?: forScene` and cycles only the chosen frames at 180 ms; scene IDs come from the player-facing snapshot. This visual rule does not expose hidden trace strength, target selection or engine state. Strain uses already projected condition IDs, not private condition registries. An absent recognized scene/condition yields no corresponding effect and must not be interpreted as a hidden gameplay verdict.
+
+**Existing test-source scope:** `PixelTraceFxCatalogTest.kt` asserts 4/6/6 frame counts, unique frame IDs, 64×64 size, palette coverage, known-scene mapping and null for unsupported scenes. `PixelTraceStrainCatalogTest.kt` asserts both 4-frame sets and 32×48 avatar/64×64 portrait sizes, palette keys and `COND_ECHO_STRAIN` gating. These are defined tests, **not executed** in this pass. Neither unit test demonstrates a live Compose portrait caller, performance on a low-end phone or full accessibility/reduced-motion behavior.
+
+**Retention decision:** KEEP used scene/strain-avatar members; RETAIN unused-for-UI portrait effect masters as possible future source art, but label **NO CURRENT PRODUCTION UI CONSUMER FOUND** rather than claiming the portrait feature is integrated. Before any removal, consult non-UI consumers, approved asset provenance/owner, planned portrait surfaces and real build/render test evidence. Do not create private-state-driven effects merely to turn test-only assets into UI assets.
+
 ### 30.2 Hardcoded/transitional state found during consumer audit
 
 Confirmed transitional or presentation-local state includes:
