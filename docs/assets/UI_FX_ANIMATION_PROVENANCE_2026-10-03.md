@@ -249,7 +249,7 @@ This family does not satisfy the planned Jack/Tamsin portrait requirement.
 ### Consumers
 
 - avatar strain effect: `PlayerAvatarPanel`;
-- portrait-compatible strain effect is available from the catalog for a future/current portrait surface consumer.
+- portrait-compatible strain effect is **defined and tested, but has no direct current production UI consumer in the inspected 29 Kotlin UI source files**; it remains a future presentation option, not an implemented portrait surface. See [Android consumer audit §30.1C](../android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md) for member/frame counts, selectors and audit boundary.
 
 ### QA
 
