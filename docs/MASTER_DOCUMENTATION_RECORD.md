@@ -522,13 +522,11 @@ Execution of the final APK reconstruction remains intentionally gated.
    - passive Phase-C family baseline coverage is complete for 23 / 23 families;
    - conceptual passive owner/write-target mapping covers 230 / 230 passive IDs.
 
-   D-045 combat-class reconstruction is now materialized in `docs/systems/COMBAT_CLASS_CATALOG.md`, covering all seven target class families and all 23 current-skill dependency rows.
+   D-045 now has three materialized reconstruction-grade children beyond the skill registry: `docs/systems/COMBAT_CLASS_CATALOG.md`, `docs/systems/PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md`, and `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`. Together they cover all seven target class families, all 23 current-skill dependency rows, namespace separation, and training/mentor/facility capability ownership without expanding the current schema-v1 progression owner.
 
    Still missing as reconstruction-grade progression work:
-   - profession/rank/status packet;
-   - training/mentor/facility standard;
-   - broader progression proof/catalog coverage beyond the bounded verified D-066 Trace Echo path;
-   - progression UX contract;
+   - the Gate Twelve Progression Proof Packet beyond the bounded verified D-066 Trace Echo path;
+   - the Progression UX Contract;
    - justified parent-system range/test fixtures and numeric envelopes;
    - remaining world/knowledge integration and state-owner/runtime mappings;
    - record-level canon promotion / owner approval;
