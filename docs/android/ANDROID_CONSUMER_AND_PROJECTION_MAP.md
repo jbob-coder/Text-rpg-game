@@ -1034,3 +1034,15 @@ Remaining D-026/D-021 reconstruction work is reduced to:
 - OR-010 static room placement versus tactical geometry and OR-034 non-canonical contact/visual fixture limits.
 
 This is a **documentation-only D-026 child**, not D-073/D-074 completion, not a produced `combat` wire schema, not a new save field and not an Android runtime result. Retain the remaining D-026 activity, hierarchical-map, adversary-intel, evolved status and final-APK consumer work in the Master Task Register. Any future bridge JSON field name or action signature must be sourced from the completed D-073 contract before Kotlin implementation.
+
+## 35. Wave-3 P13 / D-026 — Hierarchical world-map projection migration
+
+**Status:** **DOCUMENTATION-ONLY MIGRATION CHILD DELIVERED**, not a shipped hierarchical world runtime, Kotlin mapper, UI, gameplay map, canon or save migration. **Owner:** Kestrel under OR-036 / Wave-3 P13.
+
+[Canonical P13 migration contract](P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_MIGRATION_2026-10-08.md) maps the current `AndroidGameSession._map_view_for` discovered flat nodes/edges, `travel(locationId)` authoritative Python rules, Kotlin `GameWorldMap`, mapper, ViewModel and `MapSection` to a proposed independently versioned and typed world-scale hierarchy. It preserves the legacy flat view, the current **21-field** Kotlin `GameSnapshot`, schema-v1 saves, separation of world-scale geography from Gate Twelve's local `REGION -> MACROZONE -> NAMED SUBZONE` art plan, and the D-073/D-074 tactical coordinate separation.
+
+- **Privacy:** no hidden node names, parent IDs, route endpoints, breadcrumb counts, asset metadata, map labels or accessibility leaks.
+- **Ownership:** hierarchy expand/select/zoom is presentation-only. Actual travel, reachability, time and location remain Python-owned; no Compose pathfinding/route synthesis.
+- **Version:** suggested future `hierarchical_map` is a *proposal*, not live wire API; unknown required versions and malformed references must fail closed without compromising historical flat maps.
+- **Tests:** existing Python bridge map discovery/adjacency and Android consumer/gateway paths are identified; new cross-domain redaction, mapper, phone UI and merge-state execution are **planned only**.
+- **Master boundary:** D-026 remains IN_PROGRESS for activity, adversary intel, evolved status, final APK, actual tactical/hierarchy consumers and executed runtime/build evidence; P13 does not mark those complete.
