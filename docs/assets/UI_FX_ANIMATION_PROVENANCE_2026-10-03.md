@@ -121,7 +121,7 @@ Historical root: PR #7 `feature/pixel-asset-wave-a@a3970de6597c77939afccb5f30d60
 
 ### Consumers
 
-`GameScreen.kt` and `PixelComponents.kt` use the catalog as presentation mappings.
+`GameScreen.kt` directly selects navigation, resource, and quest sprites through `PixelUiIconCatalog`; `StatusComponents.kt` directly selects resource sprites. `PixelComponents.kt::PixelUiIcon` is the shared renderer that receives a selected sprite, not a catalog selector. See `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md` section 30.1B for the exact 15-icon consumer matrix.
 
 ### QA
 
