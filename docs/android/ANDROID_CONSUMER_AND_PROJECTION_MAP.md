@@ -531,19 +531,20 @@ Still required:
 This document is the first-pass contract, not a completed line-by-line Android audit.
 
 
-## D-030 exact projection child — 2026-10-02
+## D-030 exact projection child — 2026-10-02 / D-064 runtime update
 
-[Player-safe room actor & context panel projection contract](PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md) now owns the implementation-target schema for the missing actor-presence projection.
+[Player-safe room actor & context panel projection contract](PLAYER_SAFE_ROOM_ACTOR_PROJECTION_CONTRACT.md) originated as the implementation-target schema for the missing actor-presence projection. D-064 has since implemented and verified that **room-actor presence** slice.
 
-Key decisions:
-- add a top-level versioned `room` projection rather than hiding actor presence inside visual-only state;
-- keep raw `state.npcs`, personality, knowledge, memories, goals, story state and raw relationships out of Android;
-- preserve current four opening actor compositions through semantic placement keys before removing `sceneId + locationId` inference;
-- keep the wounded courier as a support presentation unless game design deliberately promotes it to durable NPC state;
-- keep panel focus local/transient and out of saves;
-- keep existing scene choices authoritative until a separate actor-action mutation API exists.
+Preserved decisions:
+- a top-level versioned `room` projection owns player-safe actor presence rather than visual-only inference;
+- raw `state.npcs`, personality, knowledge, memories, goals, story state and raw relationships remain outside Android;
+- the four opening actor compositions are preserved through semantic placement keys;
+- `sceneId + locationId` no longer decides story-actor presence;
+- the wounded courier remains a support presentation unless game design deliberately promotes it to durable NPC state;
+- panel focus remains local/transient and out of saves;
+- existing scene choices remain authoritative until a separate actor-action mutation API exists.
 
-This closes the documentation requirement for D-030. Runtime migration remains separate and must pass the Python/Kotlin/Compose equivalence and redaction gates in that contract.
+D-030 documentation is complete and D-064 verifies the room-presence runtime migration. Contextual panel/interaction depth, broader authored actor coverage and later presentation extensions remain separate work and must preserve the D-064 privacy/equivalence boundary.
 
 
 ## 28. Exact current consumer audit — 2026-10-04
