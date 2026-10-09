@@ -254,6 +254,69 @@ class AndroidBridgeTests(unittest.TestCase):
             self.assertEqual("LOAD_ERROR", caught.exception.code)
             self.assertEqual(before, session.state.snapshot())
 
+    def test_construction_detaches_live_state_from_content_template(self):
+        from textrpg.android_bridge import AndroidGameSession
+        from textrpg.content import load_content_pack
+
+        content = load_content_pack(CONTENT)
+        template_snapshot = deepcopy(content.state.snapshot())
+        first = AndroidGameSession(content)
+        second = AndroidGameSession(content)
+
+        self.assertIsNot(first.state, content.state)
+        self.assertIsNot(second.state, content.state)
+        self.assertIsNot(first.state, second.state)
+        first.choose("TAKE_DEAD_RELAY")
+        self.assertNotEqual(template_snapshot, first.state.snapshot())
+        self.assertEqual(template_snapshot, content.state.snapshot())
+        self.assertEqual(template_snapshot, second.state.snapshot())
+
+    def test_load_unknown_authored_scene_keeps_playable_session(self):
+        import json
+
+        with TemporaryDirectory() as directory:
+            save_path = Path(directory) / "save.json"
+            session = create_session(CONTENT, save_path=save_path)
+            before_object = session.state
+            before_snapshot = deepcopy(session.state.snapshot())
+            before_view = session.scene_view()
+
+            malformed_content_save = deepcopy(before_snapshot)
+            malformed_content_save["scene_id"] = "SCENE_UNKNOWN_P11_ATOMICITY"
+            save_path.write_text(json.dumps(malformed_content_save), encoding="utf-8")
+
+            with self.assertRaises(AndroidBridgeError) as caught:
+                session.load()
+
+            self.assertEqual("LOAD_ERROR", caught.exception.code)
+            self.assertIs(before_object, session.state)
+            self.assertEqual(before_snapshot, session.state.snapshot())
+            self.assertEqual(before_view, session.scene_view())
+
+    def test_successful_load_keeps_content_template_detached(self):
+        from textrpg.android_bridge import AndroidGameSession
+        from textrpg.content import load_content_pack
+
+        with TemporaryDirectory() as directory:
+            save_path = Path(directory) / "save.json"
+            content = load_content_pack(CONTENT)
+            template_snapshot = deepcopy(content.state.snapshot())
+            writer = AndroidGameSession(content, save_path=save_path)
+            writer.choose("TAKE_DEAD_RELAY")
+            writer.save()
+            expected_snapshot = deepcopy(writer.state.snapshot())
+
+            reader = AndroidGameSession(content, save_path=save_path)
+            before_load_object = reader.state
+            loaded_view = reader.load()
+
+            self.assertIsNot(before_load_object, reader.state)
+            self.assertIsNot(content.state, reader.state)
+            self.assertIsNot(writer.state, reader.state)
+            self.assertEqual(expected_snapshot, reader.state.snapshot())
+            self.assertEqual(template_snapshot, content.state.snapshot())
+            self.assertEqual(loaded_view, reader.scene_view())
+
     def test_authored_equipment_can_be_equipped_and_unequipped_transactionally(self):
         session = create_session(CONTENT)
         before = session.scene_view()

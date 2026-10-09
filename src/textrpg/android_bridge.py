@@ -39,7 +39,8 @@ class AndroidGameSession:
             raise TypeError("AndroidGameSession requires a LoadedContentPack")
         self.content = content
         self.engine = content.engine
-        self.state = content.state
+        # The content pack supplies a validated template; the session owns its live state.
+        self.state = deepcopy(content.state)
         self._save_path = Path(save_path) if save_path is not None else None
 
     def _location_for(self, state: GameState) -> str:
@@ -490,8 +491,18 @@ class AndroidGameSession:
 
     def load(self) -> Dict[str, Any]:
         if self._save_path is None: raise AndroidBridgeError("LOAD_ERROR", "No save destination is configured.")
-        try: self.state = load_state(self._save_path); return self.scene_view()
-        except (OSError, RuleError, TypeError, ValueError) as exc: raise AndroidBridgeError("LOAD_ERROR", "The saved game could not be loaded.", technical_detail=str(exc)) from exc
+        try:
+            # Preserve the current playable state until every view gate succeeds.
+            candidate = load_state(self._save_path)
+            validated_view = deepcopy(self._view_for(candidate))
+        except (OSError, RuleError, TypeError, ValueError, AndroidBridgeError) as exc:
+            raise AndroidBridgeError(
+                "LOAD_ERROR",
+                "The saved game could not be loaded.",
+                technical_detail=str(exc),
+            ) from exc
+        self.state = candidate
+        return validated_view
 
 
 def open_android_session(content_path: str | Path, *, save_path: str | Path | None = None) -> AndroidGameSession:
