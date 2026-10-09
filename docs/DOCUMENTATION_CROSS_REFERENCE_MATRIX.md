@@ -1346,7 +1346,20 @@ Boundary: conversation only; Bulletin/Master Task Register remain authoritative.
 - **Current-runtime boundary:** no new runtime progression field, save-schema version, canon mentor/institution/facility, Android DTO, or second progression/activity engine was introduced.
 - **Verified coverage:** committed readback contains 23/23 current runtime skill IDs and 7/7 target class-family rows with zero missing. Validation was documentation/source readback only; no Python/Android/Gradle/CI/emulator/device/APK test execution is claimed.
 - **Evidence:** `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`; primary creation commit `a61f920296bd4d11eefb83595e77ce339609ea39`; readback blob `7430a51a13c9f02161e0bdab6a92a35ab628b7b4`.
-- **Next D-045 child:** Gate Twelve Progression Proof Packet, followed by the Progression UX Contract. P12 completion does not reserve that follow-on work.
+- **Follow-on:** P16 has now materialized the Gate Twelve Progression Proof Packet. The direct next D-045 child is the Progression UX Contract; neither P12 nor P16 completion reserves that follow-on work.
+
+
+## D-045 / P16 — Gate Twelve progression proof child
+
+- **Canonical child:** `docs/systems/GATE_TWELVE_PROGRESSION_PROOF_PACKET.md`.
+- **Parent:** `docs/systems/PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`; Master D-045 remains broader IN_PROGRESS after this bounded child.
+- **CURRENT inputs:** D-066 Trace Echo / Signal Pulse progression proof; D-068 Trace Chamber `powers` training proof; current 23-skill catalog; authored `ABILITY_TRACE_ECHO`, `TECHNIQUE_SIGNAL_PULSE`, `PRACTICE_SIGNAL_PULSE_ONE_HOUR`, `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS`, `TRACE_STABILIZATION_HUB`, `TRACE_CHAMBER`.
+- **TARGET handoff:** Ability Specialist evidence interpretation, profession/rank namespace separation, P12 training/evidence/capability semantics, player-safe future UX, and future migration/test seams.
+- **Boundary:** `CLASS_ABILITY_SPECIALIST` remains TARGET/PROPOSAL and runtime-not-implemented; no profession/grade/rank, mentor/evaluator, `TRAINING_PATH_*`, or `FACILITY_CAP_*` record is inferred; save schema v1 remains current.
+- **Evidence:** `docs/evidence/P16_D045_GATE_TWELVE_PROGRESSION_PROOF_2026-10-08.md`; committed primary readback blob `6b7314983ff7a59ebf9ff26a991f4752a2a6541c`; 23/23 source skill IDs, 7/7 target class families, and all six current Gate Twelve proof IDs verified by source readback.
+- **Execution boundary:** documentation/source-contract cross-check only; no Python/Android/Gradle/CI/emulator/device/APK test execution is claimed by P16.
+- **Next D-045 child:** Progression UX Contract.
+
 
 ## D-026 / P13 — Hierarchical world-map player-safe migration child
 
