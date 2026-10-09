@@ -60,3 +60,19 @@ This extends the Python-side finding above into the **current Android client**, 
 4. Execute the combined Python/Kotlin/Compose acceptance against the **merged** P11 behavior with the relevant live test/CI gate and verify no duplicated history, lost accepted action, leaked private data or silent session aliasing.
 
 **Owner/status boundary:** this section remains an independent source inspection, not a new CPR, an implemented test, a P11 change, or authority to revise D-076 acceptance criteria. The live Bulletin and AXIOM determine whether a distinct scoped repair is warranted. No Python, Kotlin, Gradle, CI, emulator, APK or device execution is claimed.
+
+## Controlled choice rejection also triggers boot-error UI — separate source finding
+
+This case is **different** from the post-commit projection fault above. The existing Python test `tests/test_android_bridge.py::test_invalid_choice_is_controlled_and_does_not_mutate_state` (source blob `bd389dc04ae19990d7049f65818a3e8f843869d6`) sends `CHOICE_DOES_NOT_EXIST`, expects `CHOICE_ERROR`, and asserts the state snapshot remains unchanged. That is a controlled rejection, not a confirmed gameplay mutation or data loss.
+
+Nevertheless the current Kotlin path sends the same error to a boot-level screen:
+
+- `PythonGameEngine.kt` (blob `73d028d0720897a547509e83d5d6021ef5bcad8c`) maps `CHOICE_ERROR` into a failed `Result<GameSnapshot>`, with a safe public message.
+- `GameViewModel.kt::choose` (blob `d3d9392efa451570f573f339220e6dffb96d5609`) routes the failure to `publishFailure`, which assigns `bootState = engineFailure.toBootStateError()`.
+- `GameScreen.kt::TheGameRoot` (blob `1705536c77f4607cd3bd546014e38f099f076b8b`) renders gameplay only for `BootState.Ready`; otherwise, it renders `PixelBootScreen`. `BootState.Error` is defined by `BootState.kt` blob `72383a3a7d30b73d479f0bf3a6053991b65c8149`.
+
+**Test gap on inspected paths:** the complete repository tree at HEAD `19c030d4157d5d27491ef3ea378410b1d8e8ca1f` did not contain a `GameViewModelTest.kt`; `PythonGameEngineContractTest.kt` has separate gateway/projection tests, but not this Ready-gameplay retention check. This is not a claim that all UI tests were exhaustively inspected.
+
+**Proposed future NFC regression pair:** (1) A controlled invalid choice must preserve the backend state and, **if AXIOM authorizes recoverable gameplay errors**, keep the prior Ready snapshot visible with a nonfatal error presentation. (2) A post-commit projection/mapping error must follow an explicit recovery-or-rollback policy, with no blind replay of the already committed action. Keep a true startup/content failure fatal, and avoid exposing technical/private details. No UI policy change is authorized by this review.
+
+**Status:** source reasoning only; not an executed Android/Compose test, new CPR, task claim, P11 modification, or accepted resolution.
