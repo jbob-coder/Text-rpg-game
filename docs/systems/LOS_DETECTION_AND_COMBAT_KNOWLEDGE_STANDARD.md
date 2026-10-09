@@ -1,6 +1,6 @@
 # THE GAME — LOS, Detection & Combat Knowledge Standard
 
-Status: **APPROVED FIRST-PASS CONTRACT / PRIVACY-CRITICAL**
+Status: **APPROVED FIRST-PASS CONTRACT / PRIVACY-CRITICAL / D-069 LOS + D-071 OBSERVER-KNOWLEDGE SLICE VERIFIED**
 Parents:
 - docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md
 - docs/systems/TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md
@@ -13,6 +13,17 @@ Related current runtime:
 ## 1. Purpose
 
 Separate geometric visibility from awareness and knowledge so combat cannot leak hidden actors, intentions, weaknesses, or secret state.
+
+### Current bounded runtime checkpoint
+
+The core Phase 1 separation is now implemented and verified:
+- D-069 owns deterministic geometric LOS/supercover, cell opacity and directional blocked-edge geometry;
+- D-071 owns observer-specific UNKNOWN/SUSPECTED/DETECTED/IDENTIFIED contacts, stale positions, explicit identity knowledge, safe actor/cell targeting, movement-driven detection and allowlisted player-safe combat knowledge;
+- geometric LOS alone still does not identify a stranger or authorize hidden-state disclosure.
+
+Evidence: `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md` and `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`.
+
+The actual D-073 Python tactical bridge and D-074 Android consumer remain downstream; this standard does not claim those projection/integration gates are complete.
 
 ## 2. Distinct concepts
 
