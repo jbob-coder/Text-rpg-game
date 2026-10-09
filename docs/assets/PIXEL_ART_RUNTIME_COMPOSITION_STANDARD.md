@@ -107,36 +107,28 @@ UI does not own whether an NPC exists in the room.
 
 # 4. Character-in-room contract
 
-## 4.1 Current transitional state
+## 4.1 Current implemented room-presence boundary (D-064)
 
-A current implementation line contains `PixelStoryActorCatalog`, with actor placements selected from projected `locationId` and `sceneId`.
+The player-safe room-actor projection is **implemented**. Python `src/textrpg/room_projection.py` builds detached `room` projection version 1 from authored scene-visible actor entries; Android's typed `GameSnapshot.room.actors` is passed by both `GameScreen` scene call sites to `SceneIllustration`. `PixelStoryActorCatalog.placements(roomActors)` resolves the already-projected actors rather than selecting their presence from location/scene IDs. `PixelStoryActorPlacementResolver` maps semantic placement keys to art coordinates; the engine does not publish those pixel coordinates.
 
-Current known actor examples include:
-- Tamsin;
-- injured maintenance courier.
+Current integrated room sprite examples:
+- Tamsin (`NPC_TAMSIN`);
+- wounded maintenance courier (`SUPPORT_WOUNDED_COURIER`).
 
-This is acceptable as a bounded transitional system.
+This remains a **bounded static presentation-slot implementation**, not NPC navigation, simulated world positions, all character coverage or a universal actor-portrait/focus system. The four opening semantic slots are defined in the placement resolver. Unknown art family/slot is not license to invent visible actors. D-064 acceptance/evidence: `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`; current source-to-contract review: `docs/reviews/KESTREL_PIXEL_RUNTIME_COMPOSITION_SOURCE_AUDIT_2026-10-08.md`.
 
-## 4.2 Target state
+## 4.2 Existing record and future visual/panel extensions
 
-The target is a player-safe actor projection, conceptually:
+Current Android consumer: `GameSnapshot.room.actors[]` (not `GameSnapshot.actors[]`). Its player-safe actor records already carry a `presentationId`, optional `knownActorId`, `displayName`, `visualFamily`, semantic `placementKey`, optional `poseKey`/`outfitKey`, `visibleTags`, `inspectable`, `dialogueAvailable`, and an `actions` list (current Phase-1 scene action contracts do not delegate gameplay authority to actor art).
 
-`GameSnapshot.actors[]`
+Future authorized extensions may deepen:
+- visible expression and authored pose/outfit/equipment variant selection;
+- optional portrait and room-sprite asset IDs, with provenance;
+- explicit player-safe relationship summary, only if that domain grants publication;
+- panel priority/focus eligibility and transient actor selection;
+- broader actors/locations and area-approved depth/occlusion metadata.
 
-Each visible actor record should eventually support:
-- stable NPC/actor ID;
-- display name;
-- location;
-- visible pose;
-- visible expression;
-- visible outfit/equipment identity;
-- optional portrait asset ID;
-- optional room-sprite asset ID;
-- interaction availability;
-- player-safe relationship summary if intended;
-- panel priority/focus eligibility.
-
-Compose should render the actor list; it should not reconstruct presence by reading raw quest flags.
+These future details are **not** implemented merely because the typed actor payload exists. Compose should render the projected list, never recreate NPC presence from raw quest flags, internal AI state or narrative prose.
 
 ## 4.3 Panel behavior
 
@@ -575,7 +567,7 @@ Replacement must:
 
 1. finish Gate Twelve geometry contract;
 2. reconcile player identity reference with character blueprint;
-3. create actor-projection data contract;
+3. extend the already-implemented D-064 room-actor projection into separately approved pose/outfit, portrait/focus and depth consumers, without changing actor presence authority;
 4. build provenance matrix mapping every currently visible asset to:
    - ID;
    - source;
