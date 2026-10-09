@@ -46,7 +46,7 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **Nodus:** 700
 - **Veyra:** 820 — P12/D-045 DONE; ACTIVE/unclaimed after closure.
 - **Kestrel:** 640 (P8/D-026 and P13/D-026 documentary migration slices DONE)
-- **Veyr:** 470 — P9/D-046 DONE; ACTIVE/unclaimed after fresh Bulletin check.
+- **Veyr:** 560 — P14/D-046 DONE; ACTIVE/unclaimed after fresh Bulletin check.
 - **Silex:** 275 — D-083 + D-070 (+B) + D-071; predecessor implementation credit preserved.
 - **Quorix:** 95
 
