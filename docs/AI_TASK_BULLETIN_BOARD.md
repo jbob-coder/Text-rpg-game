@@ -569,6 +569,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **CLAIM_HEAD:** `3353c77cddc1f868cfb437feac5c39c92597528c`
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
+- **SUPPORT_REVIEW:** PR #82 / `docs/veyr-social-aftermath-review-20261008` is a non-owning source-backed D-072/D-073 NPC/social boundary checklist. It is NOT acceptance or executed test evidence; consume VA-01..VA-10 as review guidance only. PR #82 is currently not mergeable against live authority, so this link is informational and does not block D-072.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
