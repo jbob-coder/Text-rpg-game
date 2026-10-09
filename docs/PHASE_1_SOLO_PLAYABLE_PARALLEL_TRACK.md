@@ -273,7 +273,7 @@ What it does not unlock:
 - mid-combat save;
 - mass combat assets.
 
-Next Phase 1 combat action: claim D-072 from live authority and implement validated atomic durable aftermath. D-071 is complete under PR #79/run #404; see `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`. Requirement 9 remains incomplete until the downstream authored encounter, bridge and Android UI are accepted.
+Current Phase 1 combat action: D-072 validated atomic durable aftermath is **IN_PROGRESS under Silex**. Do not claim or supersede that work while the Bulletin claim remains live. After D-072 is genuinely DONE, D-073 may be promoted under OR-034 for the bounded Gate Twelve content/Python bridge, followed by D-074 Android tactical presentation. D-071 remains complete under PR #79/run #404; see `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`. Requirement 9 remains incomplete until the downstream authored encounter, bridge and Android UI are accepted.
 
 
 ## 12. Phase 1 readiness checkpoint — V05 social documentation
@@ -283,7 +283,7 @@ Requirement 3 (recurring NPC relationship path):
 - current trust/suspicion branching: **EXISTS**;
 - normalized relationship standard: **CONTRACT-READY**;
 - recurring-character packet: **CONTRACT-READY**;
-- explicit durable memory plus later memory-reactive content: **PENDING IMPLEMENTATION**.
+- explicit durable memory plus later memory-reactive content: **VERIFIED BY D-065** — completion head `e883205559c64d2e82614160bd6548c2c9332808`; evidence `docs/evidence/D065_TAMSIN_MEMORY_PROOF_2026-10-04.md`.
 
 Requirement 4 (knowledge-gated chain):
 - player/NPC independent knowledge model: **EXISTS**;
@@ -296,7 +296,7 @@ Track B combat update:
 - GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md now specifies a proposed Service Tunnel encounter, optional Tamsin participation, retreat-capable objective, four-actor cap, and a specific injury/recovery proposal;
 - content IDs/opponent identities remain proposed and must not be treated as canon until approved.
 
-Next breadth dependency: V10 Activities/Life Simulation for requirement 8.
+Requirement 8 is no longer a breadth blocker: V10's bounded Phase 1 activity path is verified by D-068. Broader life-simulation expansion remains separate from Phase 1 acceptance.
 
 
 ## 13. Phase 1 readiness checkpoint — activities/life loop
@@ -438,14 +438,14 @@ Preserved authority:
 - current goal/story/party IDs and state owners remain unchanged;
 - save schema v1 remains the bounded target; no competing top-level social container is introduced.
 
-Implementation path:
-- converge authored relationship and NPC-knowledge effects on hardened `social.py` APIs;
-- add one explicit durable Tamsin memory through a semantic engine-owned write path;
-- add one later authoritative memory-reactive behavior;
-- prove save/load and deterministic behavior;
-- prove the private memory/knowledge/goal containers do not cross the player-safe bridge.
+Implemented proof path:
+- D-065 converged the bounded Tamsin memory/reaction proof on the current social/state owners;
+- one explicit durable Tamsin memory is written through the authoritative engine path;
+- later authored behavior reacts to that memory;
+- save/load and deterministic behavior are verified;
+- the private memory/knowledge/goal containers remain outside player-safe projection.
 
-D-065 may become READY after board synchronization. D-062 itself does not satisfy requirement 3 because the memory/reactive runtime proof is not implemented or executed yet. Requirement 4's existing knowledge branch remains current foundation pending final exact-head regression evidence.
+D-065 is **DONE / VERIFIED PRIMARY + D-065-B** at completion head `e883205559c64d2e82614160bd6548c2c9332808`; evidence: `docs/evidence/D065_TAMSIN_MEMORY_PROOF_2026-10-04.md`. Do not reopen or advertise it as READY without new regression evidence. Requirement 4's broader exact-head knowledge-chain acceptance remains a separate concern.
 
 ## D-063 items/economy migration gate
 
@@ -469,4 +469,4 @@ Migration decision:
 - harden nested inventory/equipment state validation and current item/effect content validation in D-067;
 - do not require currency, vendors, crafting, durability, encumbrance or item instances.
 
-D-067 may become READY after board synchronization. D-063 does not itself satisfy requirement #6 because no exact-head integrated proof has yet been executed.
+D-067 is **DONE / VERIFIED PRIMARY + D-067-B** at completion head `0fd843a5ece0f87c74a262c7ecb6739d025b0678`; evidence: `docs/evidence/D067_PHASE1_INVENTORY_EQUIPMENT_PROOF_2026-10-04.md`, PR #65 / run #351. Phase 1 requirement #6 is therefore proven across authoritative inventory/equipment mutation, save/load and player-safe Android presentation. Do not reopen D-067 without new regression evidence.
