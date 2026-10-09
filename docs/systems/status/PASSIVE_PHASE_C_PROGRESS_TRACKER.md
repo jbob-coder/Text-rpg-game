@@ -340,6 +340,15 @@ Status: BOUNDED PHASE-C DESIGN CONTRACT / NOT IMPLEMENTED / NOT CANON.
 - Source evidence: `docs/evidence/P14_D046_SOCIAL_PROVENANCE_QUALIFICATION_2026-10-08.md`. No new passport, rumor, institution, event ID, runtime field or save schema. Baseline remains 23 families / 230 records.
 - Next blocked owners: publication policy/world canon; typed event and qualification ledger/anti-repeat runtime and migration; SOC knowledge classifications; Status player-safe passive projection; test/CI acceptance.
 
+## P18 / D-046 — explicit player-safe passive-list projection gate
+
+Status: BOUNDED TARGET CONTRACT / NO RUNTIME, SAVE, CANON, DTO OR DEVICE EXECUTION.
+
+- `P18_D046_PLAYER_SAFE_PASSIVE_LIST_PROJECTION_CONTRACT.md` specifies qualification vs ownership vs reveal, detached allowlisted fields, hidden NPC/social/status redaction, version/fail-closed/legacy boundaries and 14 planned Python/Android/Compose checks.
+- `docs/evidence/P18_D046_PASSIVE_LIST_PROJECTION_AUDIT_2026-10-08.md` captures exact current-source and test definitions. These tests were inspected as source, not run.
+- Wave-001 baseline unchanged: 23 owner families and 230 passive records; no canonical passive, owner, migration or Android consumer added.
+- Remaining: accepted passive definitions/eligibility owners, world/public source authority, actual runtime list, typed Kotlin/Compose consumer, migrations and executed regression evidence.
+
 ## Stop condition
 
 Do not add another broad passive wave merely to increase count.
