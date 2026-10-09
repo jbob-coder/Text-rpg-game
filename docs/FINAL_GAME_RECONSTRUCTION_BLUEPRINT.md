@@ -725,7 +725,9 @@ Final rebuild sequence:
 
 ## 21. Immediate P0 execution packet
 
-The next work must be evidence-producing, not broad invention:
+> **Current authority note — 2026-10-08 AST:** this P0-A…P0-G packet is the original reconstruction decomposition, not the live claim queue. The live Bulletin and Master Task Register control current task readiness/ownership. Since this packet was written, D-064 completed the typed room/actor projection migration, D-026 consumer/projection documentation has materially advanced through bounded P8/P13/P17 children, D-045 progression documentation has advanced through P16, and the tactical runtime is verified through D-071 while D-072 remains the live Silex-owned blocker. Keep the categories below as reconstruction obligations; do not infer READY status or reopen completed children from this section.
+
+The next work in this historical packet was required to be evidence-producing, not broad invention:
 
 ### P0-A — Branch reconciliation
 Create one matrix for PRs #7–#31:
