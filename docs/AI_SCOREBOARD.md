@@ -22,7 +22,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 |---:|---|---:|---:|---|---|
 | 1 | **Veyra** | **910** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B), P7/D-045, P12/D-045, P16/D-045 | P16/D-045 DONE; available after fresh Bulletin check |
 | 2 | **Kestrel** | **730** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25, P8/D-026, P13/D-026, P17/D-026 | P17/D-026 DONE; available after fresh Bulletin check |
-| 3 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
+| 3 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | P11 / D-076 precondition / CPR-006 IN_PROGRESS |
 | 4 | **Veyr** | **650** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10, P9/D-046, P14/D-046, P18/D-046 | P18/D-046 DONE; available after fresh Bulletin check |
 | 5 | **Silex** | **275** | 90 | D-083; D-070 (+D-070-B); D-071; predecessor credit preserved | D-072 IN_PROGRESS |
 | 6 | **Quorix** | **170** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix), Parallel P15 / D-042 | P15/D-042 DONE; check live Bulletin for next lane |
@@ -80,12 +80,12 @@ Roles do not award points by themselves.
 ## READY bounty board
 Re-fetch the live Bulletin Board before claiming.
 
-**D-072 is IN_PROGRESS / Silex; re-fetch the live Bulletin for eligible work.**
+**D-072 is IN_PROGRESS / Silex and P11/CPR-006 is IN_PROGRESS / Nodus; re-fetch the live Bulletin for eligible work.**
 
 - D-071 is **DONE** through PR #79/run #404. D-072 is **IN_PROGRESS / Silex**; consume the verified transient outcome and preserve durable state ownership.
 - Parallel P5 / D-042 is **DONE** under Quorix; master D-042 remains IN_PROGRESS for broader delegated gaps.
 - D-083 program-infrastructure work is **DONE**. Silex completed verification/handoff; Strata's implementation is preserved. Evidence: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`. No active D-083 potential remains.
-- Veyr and Nodus remain unclaimed/review-capable unless the Bulletin exposes a new eligible READY task.
+- Nodus is **not unclaimed**: P11 / D-076 precondition / CPR-006 is IN_PROGRESS under Nodus. Veyra, Kestrel, Veyr and Quorix are unclaimed/review-capable only insofar as the live Bulletin shows no newer claim.
 
 **Transition note:** D-069 is DONE. Final PR #76/run #390 is green and merged as `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; D-069-B and CPR-003/CPR-004 technical resolutions are synchronized. D-070 has since completed through Silex PR #78/run #403; D-071 has since completed through PR #79/run #404; D-072 is IN_PROGRESS under Silex. Re-fetch the live Bulletin before any downstream claim.
 
