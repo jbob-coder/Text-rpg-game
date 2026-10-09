@@ -854,6 +854,10 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - `docs/evidence/P10_D042_LEGACY_PR_DISPOSITION_2026-10-08.md`; claim P10 Quorix under OR-035, evidence commit `413aaa4d56f1d785e2e2004a948b765a89a66b81`.
   - PR #74 was superseded by merged PR #76 (merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`); all eight task files match by exact Git blob between PR heads. PR #65 and PR #44 are historical CI-only markers. After Quorix's P10 recommendation, AXIOM re-verified and closed #74/#65/#44 without merge or branch deletion; evidence/provenance remains preserved.
   - Validation: PR metadata, exact ancestry/compare and eight paired Git blob checks; no Python/Android test, CI rerun or runtime change. Original P5 survivor classifications remain closed; no main promotion.
+- P15_EVIDENCE (2026-10-08; bounded wave-B disposition IN_PROGRESS under Quorix, not parent completion):
+  - `docs/evidence/P15_D042_WAVE_B_PRELIMINARY_2026-10-08.md` inventories open historical D-067/D-068 PRs #62/#57/#55/#45/#41 with source/PR-head provenance. PR #45 has been individually **CLOSED / NOT MERGED** after a provenance comment; #41/#57/#62 remain OPEN because comment writes were connector-blocked; #55 deliberately remains OPEN for its activity-specific Compose click-to-choice-ID test-port candidate.
+  - The historical Python activity and Kotlin gateway proof are already accepted under D-068 / PR #59; the archived #55 Compose action-callback assertion remains distinct from the current generic choice affordance test. Future UI-test-port ownership belongs in an authorized D-077/D-021 consumer slice, not implicit P15 runtime work.
+  - Drive P15 task-status synchronization was connector-blocked despite the verified Bulletin claim. Evidence is documentation and PR metadata only: no runtime tests, CI/Android device run or additional PR closure is claimed. Master D-042 remains IN_PROGRESS.
 - REMAINING:
   - exact field-to-composable/ViewModel/bridge consumer mapping remains D-026/D-021;
   - per-catalog consumer/hardcoded visual-state gaps not already covered by task-local audits;
