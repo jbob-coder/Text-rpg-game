@@ -64,3 +64,19 @@ The existing authority [`GameScreenTest.kt`](https://github.com/jbob-coder/Text-
 - P15 remains **IN_PROGRESS** pending the failed Drive/coordination gate, per-PR hygiene, owner decision on the #55 Compose test port and acceptance/handoff synchronization. Do **not** mark P15 DONE merely because this evidence packet improved.
 
 **Next safe action:** retain P15 ownership; when integration permits, synchronize the canonical task/claim record and finish only reversible, individually evidenced PR disposals. Re-fetch HEAD/Bulletin and each PR before further writes. D-072 remains Silex-owned; D-073 is dependency-blocked.
+
+
+## AXIOM follow-up — P15 reversible hygiene executed
+
+AXIOM re-fetched PR #41, #57 and #62 after Quorix's classification and confirmed each was still OPEN and unmerged. Each received an individual provenance comment and was then CLOSED without merge or branch deletion.
+
+Executed results:
+- PR #41 — CLOSED / not merged; comment ID `6071697251`; preserved as early D-067 bridge/runner repair provenance.
+- PR #57 — CLOSED / not merged; comment ID `6071698193`; preserved as superseded D-067 green-checkpoint iteration.
+- PR #62 — CLOSED / not merged; comment ID `6071699119`; preserved as historical D-067 root-cause/repair and workflow #345 lineage.
+- PR #45 was already closed by Quorix with preserved provenance.
+- PR #55 remains OPEN / HOLD because its activity-specific Compose click -> stable choice-ID instrumentation regression has no proven current equivalent. Do not close #55 until that test has a destination or is explicitly superseded.
+
+AXIOM also repaired the canonical Drive continuity mismatch for `PLAYER_QUORIX`: the existing active session remains unchanged, while `current_task` and `claim_reference` now reflect the live P15 Bulletin claim. This does not alter GitHub task authority; it only makes Drive continuity consistent with it.
+
+No runtime source, branch history, accepted D-067/D-068 implementation, CI result, APK, emulator or device evidence was changed by this follow-up.
