@@ -1,13 +1,13 @@
 # THE GAME — Final Android/APK Reconstruction Matrix
 
-Status: **LATE-STAGE AUTHORITY / EXECUTION BLOCKED BY DOMAIN CONTRACTS**  
+Status: **LATE-STAGE AUTHORITY / FINAL REBUILD BLOCKED BY INTEGRATION + ACCEPTANCE GATES**  
 Parent: `docs/android/APK_REBUILD_AND_EVOLUTION_MASTER_PLAN.md`
 
 ## 1. Purpose
 
-The final Android APK is not rebuilt by randomly replacing screens. It is rebuilt from the final documented game architecture.
+The final Android APK is not rebuilt by randomly replacing screens. It is rebuilt from the accepted game architecture and current implementation evidence.
 
-This matrix records what is likely to be kept, extended, reworked, replaced, or removed. Classifications remain provisional until the existing-state audit and final domain contracts are complete.
+First-pass domain/master contracts and bounded implementation slices now exist across the program, so this matrix is no longer waiting merely for documentation to begin. It remains a **late-stage reconstruction authority**, not a READY task queue. Final classifications stay provisional until the relevant live domain implementations, migrations, canon/asset decisions, player-safe consumers and exact-head acceptance evidence are complete. In particular, the current tactical path still depends on D-072 -> D-073 -> D-074 and later integration gates; consult the live Bulletin before treating any candidate surface as executable work.
 
 ## 2. Non-negotiable application boundary
 
