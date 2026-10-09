@@ -72,3 +72,11 @@ Read-only source identifiers from the authority branch at this review (Git blob 
 - `docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md` — `d4f44c506fe8b5dfb14e064537fafb9e571195cc`
 
 Future acceptance reviewers must re-fetch those sources at the owning D-072 PR/merge SHA; exact-blob source inspection is not an executed test.
+
+## Supplemental validator review — non-owning, source only
+
+Observed current behavior: `core.validate_game_state_structure` checks top-level types and some inventory/equipment shape, but not individual `player.conditions` records. `persistence.dumps_state` applies this validator plus strict JSON; JSON-serializable nested invalid values are not thereby semantically valid. `simulation.apply_condition` validates new condition metadata. `simulation.validate_time_advance` checks existing timed player conditions. The player-safe `status._condition_view` skips hidden condition records before checking displayed condition duration/severity/tags.
+
+Proposed D-072 tests, NOT EXECUTED: (1) hidden invalid old timer fails durable aftermath preflight even when its status view is redacted; (2) new invalid severity/modifier rejects without partial writes; (3) post-state validation catches condition semantics beyond top-level structure; (4) detached-candidate rollback preserves time, NPCs, quest, inventory and history; (5) save serialization is not treated as adequate semantic acceptance. The exact validating owner and any new validation policy remain Silex/AXIOM decisions. No runtime changes, test executions or new CPR claimed.
+
+Source blobs: `core.py` 608b37e58fb652b78c921c0459fceb3753131ce3; `persistence.py` fb2f0e7944126d474cbafd86a8c20bef811ae02b; `simulation.py` 455b72ad6080a792761293fc51426a2c777d4b5a; `status.py` 3f06f670134e0e71b0d1bf3642fab32f5869585a.
