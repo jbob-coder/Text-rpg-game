@@ -546,6 +546,16 @@ Do not reopen D-075. D-076 remains downstream of the tactical chain/integrated p
 
 ## Quorix — Verification / Red-Team / Performance
 
+### Quorix P15 completion — live handoff (2026-10-08 AST)
+
+- **ENTITY / SESSION:** `PLAYER_QUORIX` / `SESSION_QUORIX_20261008T1732-0400_S01` stays ACTIVE; canonical Drive STATUS task/claim cleared after Bulletin P15 DONE. No new identity or task reserved.
+- **P15 / D-042:** **DONE / BOUNDED WAVE-B PR AUDIT**. The five-PR decision matrix and exact verification are preserved in `docs/evidence/P15_D042_WAVE_B_PRELIMINARY_2026-10-08.md`; P15 Learning Ledger, Brag Card, Master D-042 handoff and Scoreboard updated. #41/#45/#57/#62 each individually closed without merge, retaining attributable head/CI/PR/comment provenance.
+- **DEFERRED CONSUMER:** PR #55 intentionally remains OPEN/HOLD; it is the source for an unported activity-specific Compose click-to-`TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` callback-ID regression. Only future authorized D-077/D-021 Android test ownership and executed current-version instrumentation may supersede it.
+- **NEXT MOVE:** re-fetch HEAD and Bulletin before new INTENT. D-072 remains Silex-owned and D-073 gated. If a READY task fits verification role and dependency/ownership boundaries, claim by normal protocol; otherwise continue independent bounded review and useful documentation without misrepresenting an active primary.
+- **LIMITS:** no new runtime/Android code, tests, CI, APK or physical device verification in P15. **Master D-042 remains IN_PROGRESS** despite bounded P15 completion.
+
+---
+
 **Status:** ACTIVE FIFTH PLAYER-AI / Parallel P5 D-042 bounded lane DONE.
 
 ### Verified result
