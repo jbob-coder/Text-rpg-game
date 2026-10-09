@@ -38,9 +38,10 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 - **D-072:** **IN_PROGRESS / Silex**. D-073+ remain gated behind durable aftermath.
 
 ### Other active work
-- **Quorix:** Parallel P5 / D-042 DONE — fifth-seat Verification / Red-Team / Performance lead returns to review availability.
+- **P11 / D-076 precondition / CPR-006:** **IN_PROGRESS / Nodus**. PR #80 remains the runtime candidate; executed RED/GREEN evidence exists, but P11 is not DONE until Nodus completes current-authority merge-state/release evidence and handoff.
+- **Wave-3/4 bounded documentation closures:** P15/D-042, P16/D-045, P17/D-026 and P18/D-046 are DONE. Their parent master tasks remain broader IN_PROGRESS where recorded; completion does not reserve follow-on work.
 - **D-083:** DONE — Silex verified current authority and completed handoff; Strata's merged implementation in PRs #73/#75 is preserved. Evidence head `434ad28c8bee25b17d2e42408fc8db26b0a950ce`.
-- Re-fetch the task entry before claiming; completed D-083 work is not an active claim.
+- Re-fetch the task entry before claiming; completed bounded lanes and D-083 are not active claims.
 
 ### Verified standings
 - **Nodus:** 700
@@ -52,9 +53,10 @@ Use `docs/PLAYER_AI_MISSION_CONTROL.md` for execution and `docs/AI_COORDINATION_
 
 ### Immediate strategy
 1. D-070 and D-071 are complete. Silex owns D-072: validated atomic durable aftermath using existing GameState owners.
-2. D-083 is DONE. Use its exact-revision evidence and Learning Ledger shortcut; reopen only for a new demonstrated regression.
-3. Quorix remains available for independent verification/red-team review.
-4. Do not claim D-072 while Silex owns it. After D-072 is genuinely DONE, D-073 may be promoted under OR-034's provisional-integration content authority; preserve D-074 Android/UI boundaries.
+2. Nodus owns P11 / CPR-006 until its branch/PR merge-state and release evidence are complete; D-076 remains blocked beyond that precondition by the tactical chain.
+3. D-083 and bounded P15/P16/P17/P18 are DONE. Reuse their evidence/learning records; do not reopen them without new evidence or an explicitly published child lane.
+4. Quorix remains available for independent verification/red-team review.
+5. Do not claim D-072 while Silex owns it. After D-072 is genuinely DONE, D-073 may be promoted under OR-034's provisional-integration content authority; preserve D-074 Android/UI boundaries.
 
 ### Coordination rule
 Before a new primary: `INTENT -> Bulletin CLAIM -> START`.  
@@ -86,7 +88,7 @@ Current operational role assignments:
 
 - **Nodus — Player-AI: Integration Architect & Systems Gatekeeper**
   - review save/schema, migrations, CI/integration and cross-domain compatibility;
-  - currently available for integration review.
+  - currently owns **P11 / D-076 precondition / CPR-006**; do not treat Nodus as generally unclaimed until the live Bulletin releases/closes P11.
 
 - **Veyra — Player-AI: Gameplay Systems & Tactical Lead**
   - currently **ACTIVE in canonical Drive / review-support only**;
@@ -94,15 +96,15 @@ Current operational role assignments:
 
 - **Kestrel — Player-AI: Player-Safe Projection, Presentation & Asset Lead**
   - owns projection/presentation/asset reconstruction review;
-  - D-064 is DONE; currently available for bounded projection/presentation review.
+  - D-064 plus bounded P8/P13/P17 D-026 documentation slices are DONE; currently unclaimed unless the live Bulletin shows a newer claim.
 
 - **Veyr — Player-AI: NPC, Social & Narrative-State Lead**
   - owns relationship/memory/knowledge/privacy/narrative-state review;
-  - D-065/D-075/D-080 are DONE; currently available for bounded review/support.
+  - D-065/D-075/D-080 plus bounded P9/P14/P18 D-046 slices are DONE; currently unclaimed unless the live Bulletin shows a newer claim.
 
 - **Quorix — Player-AI: Verification, Red-Team & Performance Lead**
   - fills the fifth Player-AI seat;
-  - Parallel P5 / D-042 bounded lane **DONE**; currently verification/red-team available.
+  - Parallel P5/P10/P15 D-042 bounded audit lanes are **DONE**; currently unclaimed and available for verification/red-team support unless the live Bulletin shows a newer claim.
 
 - **Strata — auxiliary Player-AI: Repository Status / Tooling**
   - currently **INACTIVE**;
@@ -125,7 +127,7 @@ Current named summons:
 - **Veyra** — report the weakest Python -> bridge -> Kotlin -> Compose boundary and one concrete Android/projection improvement.
 - **Kestrel** — report whether room/actor projection and asset reconstruction abstractions are strong enough, and one concrete visual/projection improvement.
 - **Veyr** — report the largest social/NPC scaling or privacy risk and one bounded social-system improvement.
-- **Fifth / unnamed agent** — after choosing a name and claiming work, provide an outsider review of shared assumptions, unnecessary complexity, and one systemic improvement.
+- **Quorix** — provide an outsider verification/red-team review of shared assumptions, unnecessary complexity, evidence quality, and one systemic improvement when the Council request is still open.
 
 Do **not** abandon an active task merely to answer. Respond at the next safe checkpoint or before claiming your next primary task.
 
