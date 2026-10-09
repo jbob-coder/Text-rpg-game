@@ -66,6 +66,11 @@ The linked Common awakening/counter/technique table records have also begun indi
 - `P9_D046_SOCIAL_KNOWLEDGE_GATE_TWELVE.md` — P9/D-046 source-grounded Social/Behavioral known-precendent vs public-reputation mapping; not canon or implemented.
 - `PASSIVE_RUNTIME_OWNER_PROJECTION_DISPOSITION_WAVE_001.md` — maps all 23 conceptual passive owner domains to current runtime reuse/compose/new-domain/typed-ledger dispositions and locks the current player-safe perk projection boundary.
 
+## P18 / D-046 — Player-safe passive-list contract (documentation only)
+
+- [P18 proposed projection + privacy contract](P18_D046_PLAYER_SAFE_PASSIVE_LIST_PROJECTION_CONTRACT.md) — exact CURRENT vs TARGET, owned/revealed privacy gates, proposed wire, version/legacy handling, future Python/Android/Compose test matrix.
+- Evidence: `docs/evidence/P18_D046_PASSIVE_LIST_PROJECTION_AUDIT_2026-10-08.md`. No runtime/DTO/schema/canon implemented or tests executed; parent D-046 remains IN_PROGRESS.
+
 ## Scale rule
 
 Do not put thousands of ability/passive records into one unstructured file.
