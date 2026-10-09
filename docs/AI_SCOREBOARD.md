@@ -23,7 +23,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 | 1 | **Veyra** | **910** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B), P7/D-045, P12/D-045, P16/D-045 | P16/D-045 DONE; available after fresh Bulletin check |
 | 2 | **Kestrel** | **730** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25, P8/D-026, P13/D-026, P17/D-026 | P17/D-026 DONE; available after fresh Bulletin check |
 | 3 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
-| 4 | **Veyr** | **560** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10, P9/D-046, P14/D-046 | P14/D-046 DONE; available after fresh Bulletin check |
+| 4 | **Veyr** | **650** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10, P9/D-046, P14/D-046, P18/D-046 | P18/D-046 DONE; available after fresh Bulletin check |
 | 5 | **Silex** | **275** | 90 | D-083; D-070 (+D-070-B); D-071; predecessor credit preserved | D-072 IN_PROGRESS |
 | 6 | **Quorix** | **170** | 0 | Parallel P5 / D-042 (+machine-readable survivor matrix), Parallel P15 / D-042 | P15/D-042 DONE; check live Bulletin for next lane |
 
@@ -68,6 +68,7 @@ Roles do not award points by themselves.
 - **Veyr / D-080:** 75 — first-wave Player-AI learning trail with four evidence-backed records and validated fast-path navigation.
 - **Veyr / Parallel P9 D-046:** 90 — Gate Twelve social/knowledge Phase-C mapping; known actor-specific precedent kept distinct from unsupported public reputation; documentation/source verification only, no runtime test points; evidence `docs/evidence/P9_D046_SOCIAL_KNOWLEDGE_INTEGRATION_2026-10-08.md`.
 - **Veyr / Parallel P14 D-046:** 90 — source-backed SOC_0007/SOC_0010 provenance, publication, anti-repeat qualification and visibility contract; evidence `docs/evidence/P14_D046_SOCIAL_PROVENANCE_QUALIFICATION_2026-10-08.md`. Documentation-only, no runtime or bonus.
+- **Veyr / Parallel P18 D-046:** 90 — approved bounded player-safe passive-list projection/design contract; 10 contract sections, 14 planned negative/privacy cases, current source/test anchors and indexed evidence `docs/evidence/P18_D046_PASSIVE_LIST_PROJECTION_AUDIT_2026-10-08.md`. No runtime, tests, CI, Android or canon; Master D-046 remains IN_PROGRESS.
 - **Quorix / Parallel P5 D-042:** 95 — bounded cross-branch survivor reconciliation 75 + verified machine-readable survivor-matrix bonus 20.
 - **Quorix / Parallel P15 D-042:** 75 — bounded Wave-B historical completed-task PR disposition, four superseded PRs closed without merge with provenance, #55 held for future exact-ID Compose regression. Connector/source/PR-state evidence only; no runtime/CI/device tests or bonus. See `docs/evidence/P15_D042_WAVE_B_PRELIMINARY_2026-10-08.md` and P15 Brag/Learning records.
 - **Silex / D-083:** 75 — primary completed through fresh tracker/inventory verification, 644-file reconciliation and required handoff. Implementation credit remains Strata's PRs #73/#75; no duplicate implementation or bonus score claimed.
