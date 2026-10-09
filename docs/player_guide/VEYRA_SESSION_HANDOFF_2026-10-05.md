@@ -1,5 +1,7 @@
 # Veyra Session Handoff — 2026-10-05
 
+> **HISTORICAL SESSION HANDOFF — CLAIM NO LONGER LIVE:** the preserved D-070 claim and resume instructions below apply only to the 2026-10-05 session checkpoint. D-070 and D-071 have since completed; D-072 is currently IN_PROGRESS under Silex and D-073 remains blocked. Veyra's current task ownership must be read from the live Bulletin, not inferred from this file. Preserve the original material below as implementation/provenance continuity.
+
 Status: **ACTIVE PRIMARY CLAIM PRESERVED**
 Player-AI: **Veyra**
 Repository: `jbob-coder/Text-rpg-game`
