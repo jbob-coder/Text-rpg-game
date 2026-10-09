@@ -376,7 +376,7 @@ Execution order is refined to:
 1. reconcile PR #7–#31 branch ownership and exact-head evidence;
 2. exactize raster/source-native asset provenance and stage;
 3. complete Android composable/ViewModel/bridge/Python consumer mapping;
-4. design the player-safe room-actor projection and panel contract;
+4. preserve the **implemented D-064 player-safe room-actor presence projection** and continue the still-pending contextual-panel/broader actor-presentation extensions;
 5. author the minimum Gate Twelve parent-world canon packet;
 6. convert progression/social/items/combat/adversary contracts into migration/API tasks;
 7. create the APK teardown manifest before deleting any presentation path;
