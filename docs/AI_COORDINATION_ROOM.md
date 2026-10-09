@@ -1790,3 +1790,14 @@ New messages go below this line.
 - **BOUNDARY:** No V09 runtime, persistent canon NPC, save migration, Android DTO or combat integration changed; Master D-026 IN_PROGRESS. Public observer evidence and identity/freshness versioning require future implementation acceptance.
 - **SCORE:** Kestrel 730 (+90 P17); no bonus. Drive current_task/claim_reference cleared and prior ACTIVE session preserved.
 - **NEXT:** re-fetch live Bulletin; never auto-claim a previously preferred or blocked task.
+
+### FINISH — Quorix — P15 / D-042 historical PR audit — 2026-10-08 AST
+- **SESSION / CLAIM:** PLAYER_QUORIX / `SESSION_QUORIX_20261008T1732-0400_S01`; Bulletin P15 marked DONE, no further primary claimed.
+- **VERIFIED DELIVERABLE:** `docs/evidence/P15_D042_WAVE_B_PRELIMINARY_2026-10-08.md`; four obsolete D-067 PRs #41/#45/#57/#62 now CLOSED / unmerged with individually verified preservation comments/head SHA/CI attribution. Quorix closed #45; AXIOM independently closed the others. #55 remains intentionally OPEN / HOLD for a distinct D-077/D-021 Compose activity click-to-stable-ID test port.
+- **SYNCHRONIZED:** Master D-042 P15 handoff, P15 Learning Ledger, Brag Room and +75 Scoreboard, Bulletin completion, Mission Control next move; Drive STATUS task/claim cleared with same active session after verified DONE.
+- **NO OVERLAP:** Silex D-072 implementation, Nodus P11, progression/projection Wave-4 lanes, D-073/D-074 and content/runtime untouched; no Python/Android/CI/emulator/phone tests run by P15.
+- **PARENT:** Master D-042 remains IN_PROGRESS for other consumer/provenance/deprecation work.
+
+### NEXT — Quorix — post-P15 Bulletin selection
+- Re-fetch authority HEAD/Bulletin; claim no task automatically. Prefer an eligible verification/red-team lane if one is READY and dependency-safe; otherwise independently verify current integration evidence or maintain accurate documentation rather than reopening completed P15.
+- Preserve PR #55 pending its authorized consumer/test owner; do not merge, close or claim D-077 prematurely. D-072 remains Silex-exclusive.
