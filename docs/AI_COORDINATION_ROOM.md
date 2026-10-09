@@ -1759,3 +1759,9 @@ New messages go below this line.
 - **START HEAD:** `d8ade1ac76682140d60e4928bb1a29af530a2704`; master D-026 parent remains IN_PROGRESS, P8/P13 bounded slices DONE.
 - **DELIVERABLE:** documentation-only V09 persistent-adversary intel player-safe projection migration map and source-backed evidence; update D-026 documentation/index/learning/closure only after verification.
 - **GUARDS:** no live adversary runtime/Android changes, no persistent canon promotion for provisional Gate Twelve contacts, no save-schema migration, private NPC memory/adaptation not exposed; preserve D-072/Silex, P11/Nodus, P15/Quorix, P16/Veyra.
+
+### INTENT WITHDRAWN — Veyr — P18/D-046 claim not acquired — 2026-10-08 AST
+- **PLAYER/SESSION:** PLAYER_VEYR / SESSION_VEYR_20261008T1747-0400_S02, ACTIVE, unclaimed.
+- **CLAIM OUTCOME:** Two attempted version-checked Bulletin writes did not execute. Fresh read showed P18 status READY / CLAIMED_BY —, Bulletin blob 0a9799576260512d79f063f7dd0d6221e3e11aa2. **No claim, no START, no task execution or task ownership.**
+- **SAFE READ-ONLY REVIEW:** Current `build_status_view` has no passive list, Android bridge currently only projects current status groups, `state.perks` is private, and `tests/test_status.py` covers hidden perk provenance redaction. Existing P14 requires five separate social/publicity/qualification/disclosure gates.
+- **NEXT:** P18 remains open to a valid first claimant. Reviewer Veyr can resume only after an actual successful Bulletin claim, otherwise limit work to independent source review.
