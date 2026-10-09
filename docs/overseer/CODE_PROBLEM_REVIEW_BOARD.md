@@ -146,7 +146,7 @@ AXIOM reviews:
 - **EXECUTABLE RED:** PR #69 / run #357 / `37260133553`, Android job `111605425217`: `RoomProjectionMapperTest > rejectsForbiddenPrivateActorField` failed as expected; 96 tests, 1 failed. Test-only branch; no production code changed.
 - **GREEN BEHAVIOR:** PR #69/run #359 proved the causal strict-key repair behavior; PR #70/run #362 proved the same minimal repair on the clean seven-file final candidate; authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521` now contains it.
 - **RESOLUTION:** D-064 is DONE; final evidence/Learning/FINISH bookkeeping is complete.
-- **D-069 IMPACT:** none remaining; D-069 is active.
+- **D-069 IMPACT:** none remaining. **Historical checkpoint:** D-069 was active when CPR-002 was closed. **Current authoritative task state:** D-069 is DONE / VERIFIED / authority-merged; see the live Bulletin and Master Task Register.
 - **REWARD:** Kestrel +235 critical root-cause award; Veyr +10 peer FIND credit.
 
 ### CPR-003 — D-069 opaque-edge LOS schema gap
@@ -244,6 +244,6 @@ Hiding a serious problem to preserve the appearance of progress is incompatible 
 - **IMPACT:** blocked only final deterministic multi-reaction ordering; D-070 state/budget/movement/reserve/reinforcement work remained independently valid.
 - **TASK_LINK:** existing D-070 owns the causal implementation; no duplicate task.
 - **AXIOM CONTRACT / OR-033:** encounter-local integer `trigger_priority`, default `0`, higher numeric value first; remaining ties are higher round initiative -> `actor_id` ascending -> `reaction_id` ascending. D-070 owns validation/scheduling; D-071 owns trigger-generation policy. No save-schema field.
-- **IMPLEMENTATION OWNERSHIP:** unchanged; D-070 remains READY / UNCLAIMED until a fresh Bulletin claim.
+- **IMPLEMENTATION OWNERSHIP:** unchanged at the OR-033 ruling. **Historical checkpoint:** D-070 was then READY / UNCLAIMED until a fresh Bulletin claim. **Current authoritative task state:** D-070 and D-071 are DONE / VERIFIED; D-072 is IN_PROGRESS under Silex. Re-fetch the live Bulletin before new claims.
 - **REWARD:** none at ruling time.
 
