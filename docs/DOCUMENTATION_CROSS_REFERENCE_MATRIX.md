@@ -256,12 +256,13 @@ Owns:
 References:
 - character blueprints;
 - production roadmap;
-- manifests.
+- manifests;
+- `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md` for runtime layering/composition;
+- `docs/assets/references/UI_REFERENCE_CHARACTER_APPROVED_V1.md` for Jack Wilson's approved reference audit.
 
-Needs:
-- new link to runtime composition standard;
-- explicit distinction between source-native master and scene composition;
-- current player approved-reference pointer.
+Current status:
+- source-native asset authority is explicitly separated from scene/runtime composition authority;
+- the current approved player reference is linked but remains reference-only rather than a packaged/runtime sprite.
 
 ### `docs/assets/CHARACTER_PIXEL_BLUEPRINTS.md`
 Owns:
@@ -271,18 +272,22 @@ Owns:
 - equipment layering;
 - character animation principles.
 
-Needs:
-- reconcile old “customizable generic player master” language with the later owner-approved Jack reference where current branch evidence supports it;
-- never overwrite identity reference without provenance;
-- add actor-panel/portrait mapping once projected actor contract exists.
+Current status:
+- old generic/customizable player-master language is explicitly superseded for current player presentation by Jack Wilson's owner-approved `UI_REFERENCE_CHARACTER_APPROVED_V1`;
+- reference provenance and the distinction between reference image and runtime sprite are explicit.
+
+Remaining:
+- add actor-panel/portrait consumer mapping only when the relevant player-safe projection/UI consumer contract is accepted; do not infer that mapping from visual identity alone.
 
 ### `docs/assets/REFERENCE_TO_BLUEPRINT_PIPELINE.md`
 Owns:
 - how external/generated reference becomes original source-native pixel art.
 
-Needs:
-- continue to prohibit direct smooth-image shipping;
-- add exception only for already-valid deliberately authored pixel raster when QA proves it matches the production grid.
+Current status:
+- direct generated/smooth-reference shipping is explicitly prohibited; native pixel reconstruction, metadata/state binding and QA remain the production path.
+
+Remaining decision:
+- an exception for an already-valid deliberately authored pixel raster is not yet established here; add one only if source/provenance and production-grid QA justify bypassing reconstruction without weakening the acceptance gate.
 
 ### `docs/assets/ASSET_PRODUCTION_ROADMAP_001-500.md`
 Owns:
