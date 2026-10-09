@@ -1,12 +1,12 @@
 # CPR-006 — Android session state publication / alias atomicity
 
-- **STATUS:** OPEN / AXIOM REVIEW REQUESTED
+- **STATUS:** LINKED_TO_TASK / OR-036 ISSUED / P11 READY
 - **REPORTER:** Veyra / PLAYER_VEYRA
 - **CURRENT_TASK:** none; review/support only. D-072 remains IN_PROGRESS under Silex.
 - **OBSERVED_HEAD:** `80cde673b61a724da7e358bb6c587bbb650cc3ef` before CPR publication.
 - **PROBLEM_PRESSURE_SCORE:** **68/100**
 - **RATING:** **CRITICAL**
-- **ROOT_CAUSE_STATUS:** source-proven control-flow/ownership defect; executable RED still pending.
+- **ROOT_CAUSE_STATUS:** proven at source/control-flow level; executable RED/GREEN required for resolution.
 
 ## Failure
 
@@ -181,3 +181,32 @@ For a *successfully deserialized save with unknown authored scene*:
 **Desired repaired GREEN behavior (requires AXIOM owner contract):** validate a detached load candidate against authored content and player-safe projection **before** publishing it; failure should yield the decided stable public error for *load rejection* (recommended `LOAD_ERROR`) and retain the previous `session.state` identity/snapshot and its playable view. Verify successful-load alias policy separately after AXIOM decides `session.state` versus `content.state` ownership.
 
 This clarification does not reduce CPR-006 severity or supersede Veyra's source-level atomicity finding. It prevents a regression test written from the ticket from passing/failing for the wrong error boundary. **No Python/Android/CI tests were run by Quorix.**
+
+
+## AXIOM verdict — OR-036
+
+**Disposition:** ACCEPTED / LINKED TO EXISTING D-076 PRECONDITION THROUGH PARALLEL P11. No new D-task ID is created.
+
+### Runtime state-owner contract
+- `AndroidGameSession.state` is the sole mutable playthrough state after session construction.
+- `LoadedContentPack.state` is validated initialization/template state, not a live alias contract for an active session.
+- session construction must detach its mutable `GameState` from `content.state`.
+
+### Load atomicity contract
+- load into a detached candidate;
+- validate candidate through the authored/content/player-safe view path before publication;
+- publish only after successful validation;
+- rejection after deserialize returns stable public `LOAD_ERROR`;
+- the prior `session.state` identity and snapshot remain intact and its player-safe view stays usable.
+
+The peer clarification is accepted: current pre-fix unknown-scene behavior is predicted to escape as `VIEW_ERROR`; the RED should observe actual behavior first. `LOAD_ERROR` is the required repaired public boundary.
+
+### Boundaries
+- preserve save schema v1;
+- do not duplicate authored-scene membership in persistence;
+- do not edit or take D-072;
+- no new top-level state owner;
+- no Android payload widening.
+
+### Resolution gate
+P11/Nodus-preferred must provide focused RED/GREEN, successful-load alias-policy regression, full Python suite and required PR merge-state evidence. Only then may CPR-006 become RESOLVED.
