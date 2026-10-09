@@ -387,10 +387,10 @@ Do not create thousands of fictional records before schemas and Gate Twelve proo
 ## 5. Original requirements list — domain masters now materialized
 
 ### Progression master
-Planned:
+Materialized:
 `docs/systems/PROGRESSION_MASTER_PLAN.md`
 
-Must define:
+Required coverage owned by this master:
 - attributes;
 - derived stats;
 - skill taxonomy;
@@ -421,10 +421,10 @@ Owns:
 Supplements rather than replaces `PROGRESSION_MASTER_PLAN.md`. It is target-game design, not evidence that target features already exist.
 
 ### Combat master
-Planned:
+Materialized:
 `docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md`
 
-Must define:
+Required coverage owned by this master:
 - turn model;
 - action economy;
 - grid/positioning;
@@ -440,10 +440,10 @@ Must define:
 - tests.
 
 ### Social/NPC/rival master
-Planned:
+Materialized:
 `docs/systems/NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`
 
-Must define:
+Required coverage owned by this master:
 - memory;
 - goals;
 - schedules;
@@ -457,10 +457,10 @@ Must define:
 - original-system constraints.
 
 ### Economy/items master
-Planned:
+Materialized:
 `docs/systems/ITEM_ECONOMY_LOOT_MASTER_PLAN.md`
 
-Must define:
+Required coverage owned by this master:
 - item taxonomy;
 - accessories;
 - materials;
