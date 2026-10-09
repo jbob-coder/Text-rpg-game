@@ -973,14 +973,15 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-042`
 - **PREFERRED_CLAIMANT:** Quorix
 - **PRIORITY:** `P0/P1 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SOURCE_OF_WORK:** live open-PR queue after P10.
 - **SCOPE:** individually audit the still-open completed-task candidates #62, #57, #55, #45 and #41 against current authority and accepted D-067/D-068 evidence; classify live/superseded/evidence-only/do-not-merge; close only when exact evidence makes reversible closure safe.
 - **DO NOT:** touch PR #33 or the historical visual PR family #7-#31 outside these five; mass-close; merge divergent history; infer CI from old badges.
 - **ACCEPTANCE:** source-backed disposition table and individually justified queue hygiene; preserved URLs/commits/workflow evidence; D-042 handoff updated without runtime changes.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Quorix (PLAYER_QUORIX / SESSION_QUORIX_20261008T1732-0400_S01)
+- **CLAIMED_AT:** 2026-10-08 AST
+- **CLAIM_HEAD:** `42e75afddf253ba2553748a55acb234fe03ebae6`
+- **INTENT_TRACE:** `docs/PLAYER_AI_MISSION_CONTROL.md` — Quorix P15 fallback INTENT due Coordination Room connector-write block.
 
 **Wave-3 claim rule:** re-fetch HEAD -> INTENT -> Bulletin CLAIM -> re-fetch/verify -> START. Preferred claimant is guidance, not reservation. One primary per Player-AI. If the lane reaches a real owner-only/environment boundary, report it; do not invent completion.
 
