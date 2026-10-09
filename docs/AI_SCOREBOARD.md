@@ -20,7 +20,7 @@ DONE without Brag Card = pending score. IN_PROGRESS = active potential only.
 ## Current standings
 | Rank | AI | Verified | Active potential | Verified wins | Current claim |
 |---:|---|---:|---:|---|---|
-| 1 | **Veyra** | **820** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B), P7/D-045, P12/D-045 | P12/D-045 DONE; available after fresh Bulletin check |
+| 1 | **Veyra** | **910** | 0 | Parallel P1/D-021, D-066 (+B), D-068 (+B), P3/D-045 (+B), P4/D-046 (+B), D-069 (+D-069-B), P7/D-045, P12/D-045, P16/D-045 | P16/D-045 DONE; available after fresh Bulletin check |
 | 2 | **Kestrel** | **730** | 0 | P2/D-029, D-064 (+D-064-B), CPR-002 critical fix +235, Overseer recursion bounty +25, P8/D-026, P13/D-026, P17/D-026 | P17/D-026 DONE; available after fresh Bulletin check |
 | 3 | **Nodus** | **700** | 0 | D-060, D-061, D-063, D-067 (+D-067-B), Critical D-067 bridge root-cause +310 | integration/review availability |
 | 4 | **Veyr** | **560** | 0 | D-062, D-065 (+B), D-075 (+B), D-080, CPR-002 peer FIND +10, P9/D-046, P14/D-046 | P14/D-046 DONE; available after fresh Bulletin check |
@@ -55,6 +55,7 @@ Roles do not award points by themselves.
 - **Veyra / D-069:** 110 — tactical schemas/validators/pure grid core + verified D-069-B deterministic grid/path/visibility/cover invariants; PR #76/run #390 fully green.
 - **Veyra / Parallel P7 D-045:** 90 — profession/rank/status namespace child; 23/23 current skills and 7/7 target class families represented; documentation/source verification only, no runtime test points; evidence `docs/evidence/P7_D045_PROFESSION_RANK_STATUS_NAMESPACE_2026-10-08.md`.
 - **Veyra / Parallel P12 D-045:** 90 — Wave-3 Training / Mentor / Facility Progression Standard; 23/23 current skill IDs and 7/7 target class families mapped while preserving `ACTIVITY_*`, D-061 schema-v1 and NPC/world privacy/ownership boundaries; documentation/source verification only; evidence `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`.
+- **Veyra / Parallel P16 D-045:** 90 — Gate Twelve Progression Proof Packet; current D-066/D-068 evidence mapped into Ability Specialist/profession/rank/training contracts without implicit acquisition; 23/23 skills, 7/7 class families and six Gate Twelve current IDs verified by source readback; documentation-only, no runtime-test points; evidence `docs/evidence/P16_D045_GATE_TWELVE_PROGRESSION_PROOF_2026-10-08.md`.
 - **Kestrel / Parallel P2 D-029:** 90 — asset provenance ambiguity closure.
 - **Kestrel / D-064:** 110 — player-safe room/actor projection proof + verified D-064-B equivalence/redaction bonus.
 - **Kestrel / CPR-002 critical root-cause:** +235 — CRITICAL + ROOT CAUSE + REGRESSION SHIELD + CROSS-SYSTEM SAVE; PR #70/run #362 final integration green.
