@@ -8,7 +8,7 @@ Parent authority: `../MASTER_GAME_DEVELOPMENT_PROGRAM.md`
 
 ## Required master documents
 
-Planned:
+Materialized:
 - `PROGRESSION_MASTER_PLAN.md`
 - `ITEM_ECONOMY_LOOT_MASTER_PLAN.md`
 - `NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`
@@ -20,7 +20,7 @@ Planned:
 
 Current repository source and exact-head verification outrank planning documents.
 
-Do not implement target-scale classes, ranks, tactical combat, persistent adversary systems, or economy expansion until their master contracts are written and linked here.
+The required master contracts above now exist. Target-scale implementation still requires the applicable domain, migration, task, dependency, privacy/canon and verification gates; a materialized master plan is not by itself runtime authorization or completion evidence.
 
 ## Materialized master plans — 2026-10-02
 
