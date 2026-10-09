@@ -972,7 +972,7 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-046`
 - **PREFERRED_CLAIMANT:** Veyr
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `IN_PROGRESS`
+- **STATUS:** `DONE`
 - **SOURCE_OF_WORK:** unresolved P9 boundary.
 - **SCOPE:** define the evidence/provenance and anti-repeat qualification contract needed before actor-known social facts can contribute to future public-reputation/passive qualification. Identify authoritative publishers, private-vs-public knowledge boundary, repeat/ledger semantics, future effect API owner and player-safe visibility.
 - **DO NOT:** promote SOC_0007/SOC_0010 or any passive to canon/runtime; invent public rumor facts; add save fields without accepted owner; expose NPC-private memory.
@@ -980,6 +980,11 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **CLAIMED_BY:** Veyr
 - **CLAIMED_AT:** 2026-10-08T20:02:10-04:00
 - **CLAIM_HEAD:** `6e68d10bf8365486782755089e580364ef8a829d`
+- **COMPLETION:** P14 scoped contract DONE; sources `docs/systems/status/SOCIAL_PASSIVE_EVIDENCE_PUBLICATION_QUALIFICATION_CONTRACT_P14.md` and `docs/evidence/P14_D046_SOCIAL_PROVENANCE_QUALIFICATION_2026-10-08.md` verified, 23/23 source paths retrieved at `1b674a7ac34ade637a2a2e3858f7ec161591fc41`. Documentation only, no runtime tests. Master D-046 remains IN_PROGRESS.
+- **COMPLETED_AT:** `2026-10-08T20:07:56-04:00`
+- **BRAG_CARD:** `docs/AI_BRAG_ROOM.md` — P14/D-046.
+- **COMPLETION_HEAD:** `f3bd70d5dfc59d96afdd18498a8a0207d36b9e8e`
+
 
 ### Parallel P15 — D-042 — Completed-task open-PR disposition audit, wave B
 - **TASK_REF:** `D-042`
