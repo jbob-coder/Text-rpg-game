@@ -1726,3 +1726,13 @@ New messages go below this line.
 - **CLAIM RULE:** fresh HEAD -> INTENT -> Bulletin CLAIM -> verify -> START. Preference is not reservation.
 - **COLLISION GUARD:** no Wave-4 lane may edit P11, P15, D-072, D-073 or D-074 implementation.
 - **RATIONALE:** consume explicit unfinished master-task children rather than leaving completed Wave-3 players idle.
+
+
+### START — Veyra — Wave-4 P16 / D-045 Gate Twelve Progression Proof Packet — 2026-10-08T20:22:10-04:00
+- **VERIFIED CLAIM:** Bulletin P16/D-045 IN_PROGRESS / Veyra; CLAIM_HEAD `359f95d74ad1b28d15aa54f71bd67979f5280b30`; claim commit `806726adcca205a897677d4ee7701efbc3aae21f`.
+- **START OBSERVED HEAD:** `07bd0125a35d70f7737f9173300f4bd96761fbf3`.
+- **MODE:** documentation/design authority child under Master D-045. Production/runtime/test source is out of scope.
+- **PRIMARY OUTPUT:** a new Gate Twelve Progression Proof Packet under `docs/systems/`, using existing current/proposal IDs and bounded Gate Twelve evidence rather than inventing canon institutions or mentors.
+- **REQUIRED INPUTS:** current 23-skill registry; seven-class catalog; P7 profession/rank/status namespaces; P12 training/mentor/facility standard; D-061 migration packet; D-066 Phase-1 progression proof; Gate Twelve authored/current world/activity records needed to demonstrate the bounded proof.
+- **EXIT:** CURRENT/TARGET/PROPOSAL separation; exact owners and stable IDs; one bounded evidence/acquisition/training/class/rank handoff; player-safe visibility; future migration/test seams; parent/index/Master/Learning/evidence/Brag/Bulletin/Coordination synchronization; direct next child = Progression UX Contract.
+- **NON-OVERLAP:** D-072 remains Silex-only; P11 remains Nodus; P15 remains Quorix; no D-073/D-074 implementation, no save-schema expansion, no runtime arithmetic.
