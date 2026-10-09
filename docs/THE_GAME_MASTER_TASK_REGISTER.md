@@ -1653,7 +1653,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-076-B` corrupted/unsupported-save rejection fixture.
 
 ### TASK D-077 — Close Android Phase 1 consumer and test gaps
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `BLOCKED / BULLETIN QUEUED`
 - PRIORITY: `P0/P1 / RANK 18`
 - DEPENDS_ON: D-064, D-067, D-068, D-074, D-075, D-076 where relevant.
 - PURPOSE: close D-021/D-026 projection/render/test gaps across the integrated Phase 1 surface.
@@ -1661,7 +1661,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-077-B` machine-readable screen/projection/owner/test matrix.
 
 ### TASK D-078 — Profile low-end Phase 1 performance and lock bounded budgets
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `BLOCKED / BULLETIN QUEUED`
 - PRIORITY: `P0/P1 / RANK 19`
 - DEPENDS_ON: D-077 and measurable integrated tactical/Android slice.
 - PURPOSE: create repeatable low-end performance evidence for the Galaxy A02-class product target without falsely claiming physical-device compatibility.
@@ -1669,7 +1669,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-078-B` repeatable worst-case bounded Phase 1 performance scenario/ledger.
 
 ### TASK D-079 — Run Phase 1 integrated acceptance candidate and APK provenance gate
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `BLOCKED / BULLETIN QUEUED`
 - PRIORITY: `P0-CRITICAL FINAL GATE / RANK 20`
 - DEPENDS_ON: all required Phase 1 proof tasks through D-078; owner-only boundaries explicitly separated.
 - PURPOSE: decide with exact-head evidence whether the Gate Twelve Phase 1 actually satisfies its exit gate.
