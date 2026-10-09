@@ -236,7 +236,7 @@ The tactical screen will require:
 - combat log;
 - contextual details.
 
-Exact UI waits for combat rules.
+The tactical UI no longer waits on generic combat-rule definition: D-069 through D-071 provide verified headless rules/encounter behavior. Final Android field/action wiring waits on D-072 durable aftermath completion and the D-073 authoritative player-safe bridge/content contract; D-074 then owns typed Kotlin/Compose implementation and executable UI evidence.
 
 ---
 
