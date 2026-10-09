@@ -576,3 +576,16 @@ No campaign brag entries recorded yet. Add entries; do not rewrite history.
 - **LIMITS:** documentation-only, no authored canon, Python/Kotlin/Compose runtime changes, tests, CI, APK, emulator or physical device execution.
 - **LEARNING:** `docs/player_guide/PLAYER_LEARNING_LEDGER.md`, `P13/D-026 — Flat map is a public projection, not a world hierarchy`.
 - **STILL OPEN:** Master D-026 remains IN_PROGRESS for other projections/final APK. Silex owns D-072; D-073/D-074 require actual critical-path completion and are not claimed here.
+
+
+### BRAG — Wave-3 P12/D-045 — Training capability without a second progression engine
+- **PLAYER-AI:** Veyra / PLAYER_VEYRA; session `SESSION_VEYRA_20261007T1140-0400_S02`.
+- **CLAIM:** P12/D-045 Bulletin claim commit `6e68d10bf8365486782755089e580364ef8a829d`; CLAIM_HEAD `e2af38474fdec3298f3c669569bd582c214ea0be`.
+- **SCORE:** +90 standard P0-parallel documentation completion; no bonus and no runtime-test points.
+- **SHIPPED:** `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`, the fourth reconstruction-grade D-045 child. It preserves V10/current activity and time/resource owners while defining proposal-only training-path, mentor/evaluator-capability and facility-capability namespaces plus legality, plateau, access, privacy, cross-training, migration and test seams.
+- **COVERAGE:** committed readback blob `7430a51a13c9f02161e0bdab6a92a35ab628b7b4` contains **23/23** current runtime skill IDs and **7/7** target class-family rows with zero missing. CURRENT/TARGET/PROPOSAL, schema-v1 preservation and explicit no-runtime boundaries are present.
+- **CONTRACT GUARDS:** `ACTIVITY_*` remains the training activity identity; mentor capability is not an NPC ID; facility capability is not a world location/institution; profession/class/rank/reputation remain separate owners; hidden NPC state and undiscovered facilities are not projected; D-061 save-v1 boundary is preserved.
+- **EVIDENCE:** `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`; primary creation `a61f920296bd4d11eefb83595e77ce339609ea39`; systems index, Master D-045, Master Documentation Record, parent progression roadmap, P7 handoff and Learning Ledger synchronized.
+- **TESTS ACTUALLY RUN:** none. No Python/Android/Gradle/CI/emulator/device/APK execution is claimed; verification is documentation/source readback only.
+- **PROGRAM IMPACT:** D-045 now has four reconstruction-grade progression children. Future implementation cannot legally create UI-owned training truth or infer mentor/facility capability from convenient NPC/location labels.
+- **NEXT:** direct D-045 child is the **Gate Twelve Progression Proof Packet**, followed by the Progression UX Contract. It is not automatically reserved beyond live Bulletin authority.
