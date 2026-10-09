@@ -332,6 +332,14 @@ Status: BOUNDED PHASE-C SOURCE MAPPING COMPLETE / NOT CANON / NOT IMPLEMENTED.
 - Source-bound evidence: `docs/evidence/P9_D046_SOCIAL_KNOWLEDGE_INTEGRATION_2026-10-08.md`; no passive records or structural counts changed (230 passive IDs and 23 family baseline remain unchanged).
 - Still blocked: public reputation provenance/publisher; typed social event and anti-repeat qualification; SOC_0010 classification review; explicit player-safe passive projection and canon approval.
 
+## P14 / D-046 social qualification provenance gate
+
+Status: BOUNDED PHASE-C DESIGN CONTRACT / NOT IMPLEMENTED / NOT CANON.
+
+- `SOCIAL_PASSIVE_EVIDENCE_PUBLICATION_QUALIFICATION_CONTRACT_P14.md` separates source event identity, knowledge/observation, public publication, qualification and player-safe disclosure for SOC_0007 and SOC_0010; existing P9 actor-known case retained.
+- Source evidence: `docs/evidence/P14_D046_SOCIAL_PROVENANCE_QUALIFICATION_2026-10-08.md`. No new passport, rumor, institution, event ID, runtime field or save schema. Baseline remains 23 families / 230 records.
+- Next blocked owners: publication policy/world canon; typed event and qualification ledger/anti-repeat runtime and migration; SOC knowledge classifications; Status player-safe passive projection; test/CI acceptance.
+
 ## Stop condition
 
 Do not add another broad passive wave merely to increase count.
