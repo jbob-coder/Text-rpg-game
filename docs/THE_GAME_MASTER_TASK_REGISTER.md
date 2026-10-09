@@ -1169,7 +1169,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
   - requirement 10 generic injury/aftermath documentation -> CONTRACT-READY;
   - authored encounter/runtime/UI/tests remain pending.
 - UNLOCKS: bounded Gate Twelve tactical encounter packet and later combat schema/API migration packet.
-- NEXT: TASK D-053, then Gate Twelve Phase 1 tactical encounter packet.
+- HISTORICAL_HANDOFF: D-053 and the Gate Twelve Phase 1 tactical encounter packet (D-054) have since completed. Current tactical execution is D-072 IN_PROGRESS under Silex, with D-073 blocked behind it; do not use this D-052 handoff as current claim guidance.
 - COMPLETED_AT: 2026-10-04 AST
 
 ### TASK D-053 — Build V05 character/NPC/social first-pass child contracts
@@ -1195,7 +1195,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 
 #### D-053 closure — V05 first-pass breadth floor
 - RESULT: V05 reaches 12 / 12 canonical first-pass units using the NPC/Social/Rival master plus eleven new child standards/packets.
-- PHASE 1: Tamsin relationship/knowledge proof is documented against current content; explicit durable-memory reaction remains a bounded implementation gap.
+- PHASE 1: Tamsin relationship/knowledge proof is documented against current content; the former explicit durable-memory reaction gap was subsequently closed by D-065, which verified durable shared-entry memory, deterministic later reaction, save/load and private-state redaction.
 - RUNTIME: no Python/Android behavior changed.
 - UNLOCKS: bounded social migration work, future People/Relationship UI requirements, and later V09 adversary integration.
 - COMPLETED_AT: 2026-10-04 AST
