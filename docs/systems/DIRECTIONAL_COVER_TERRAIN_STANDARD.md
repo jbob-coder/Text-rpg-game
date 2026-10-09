@@ -1,6 +1,6 @@
 # THE GAME — Directional Cover & Tactical Terrain Standard
 
-Status: **APPROVED FIRST-PASS CONTRACT / PHASE 1 NUMERIC DEFAULTS**
+Status: **APPROVED FIRST-PASS CONTRACT / PHASE 1 NUMERIC DEFAULTS / D-069 EDGE-COVER + D-071 SAFE-COVER SLICE VERIFIED**
 Parents:
 - docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md
 - docs/systems/TACTICAL_COORDINATE_OCCUPANCY_STANDARD.md
@@ -9,6 +9,17 @@ Parents:
 ## 1. Purpose
 
 Define cover as directional edge data and define terrain properties shared by movement, LOS, attacks, AI, and UI.
+
+### Current bounded runtime checkpoint
+
+Verified Phase 1 foundations now include:
+- D-069 authoritative directional incoming-edge cover, independent LOS-edge opacity, deterministic cover resolution and cover/LOS non-equivalence regressions;
+- D-071 player-safe cover queries and decision logic using known geometry only, with hidden occupancy/unknown hazards prevented from leaking through previews or AI decisions;
+- current bounded cover ratings remain the standard's Phase 1 defaults, not final long-range balance.
+
+Evidence: `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md` and `docs/evidence/D071_TACTICAL_DECISIONS_2026-10-08.md`.
+
+D-073 encounter action/content integration and D-074 Android tactical presentation remain downstream and are not implied complete here.
 
 ## 2. Cover representation
 
