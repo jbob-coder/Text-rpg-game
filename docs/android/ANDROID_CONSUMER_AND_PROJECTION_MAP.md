@@ -860,19 +860,21 @@ Historical test-source presence is not equivalent to a current-head passing run.
 
 Still open before D-026/D-021 can be marked DONE:
 
-1. enumerate every pixel catalog's direct Compose consumer and zero-consumer candidates;
-2. classify hardcoded visual/presentation state versus safe projection state;
-3. map every `GameSnapshot` field to exact tests, including currently weak/untested fields;
-4. document the final actor/room projection migration from scene/location inference;
-5. define future activity, tactical-combat, hierarchical-map and adversary-intel projection models;
-6. reconcile this current consumer graph against the final APK target architecture;
+1. finish remaining pixel-catalog member-level consumer/provenance and zero-consumer proof where not already closed by bounded audits;
+2. finish remaining hardcoded visual/presentation-state classification against player-safe projection ownership;
+3. close weak/untested `GameSnapshot` and action contracts with exact tests and later exact-head execution evidence;
+4. materialize the normalized V10 activity projection contract beyond the current generic-choice/D-068 trace;
+5. implement and verify the already-materialized P8 tactical, P13 hierarchical-map and P17 adversary-intel migration contracts when their domain dependencies authorize runtime work, plus define remaining evolved-status projection deltas;
+6. reconcile the current consumer graph against the final APK target architecture;
 7. rerun the relevant test/build matrix when implementation changes are made.
+
+The D-030 actor/room migration map and D-064 typed room projection are already complete and must not be reopened as generic discovery work.
 
 ## 29. D-026 / D-021 checkpoint
 
 The high-level projection map is no longer only conceptual: the live Python payload, Kotlin mapper, ViewModel action flow, major Compose consumers, current navigation graph and existing test-source coverage are now explicitly mapped.
 
-Status remains **IN_PROGRESS**, not DONE, because catalog-level consumers, hardcoded-state audit, future projections and final migration evidence remain open.
+Status remains **IN_PROGRESS**, not DONE, because residual member-level consumer/provenance work, normalized activity/evolved-status projection design, P8/P13/P17 runtime implementation/acceptance, final APK migration and exact-head execution evidence remain open.
 
 
 ## 30. Pixel catalog direct-consumer audit — 2026-10-04
