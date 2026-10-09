@@ -1333,8 +1333,20 @@ Boundary: conversation only; Bulletin/Master Task Register remain authoritative.
 - **Consumes:** current 23-skill registry, seven-family Combat Class Catalog, Status/Level authority, faction/hierarchy membership standard, D-061 schema-v1 migration boundary and future Training/Mentor/Facility work.
 - **Defines:** profession vs job vs class; profession grade; institution vs faction rank; role vs rank; civic/social status; reputation separation; target stable-ID guidance; migration/projection/privacy rules.
 - **Current-runtime boundary:** `GameState` has no class/profession/rank/status top-level field; this child performs no runtime/save-schema expansion.
-- **Next D-045 child:** Training / Mentor / Facility Progression Standard.
+- **Follow-on:** P12 materialized the Training / Mentor / Facility Progression Standard; direct next D-045 child is the Gate Twelve Progression Proof Packet, followed by the Progression UX Contract.
 - **Validation:** source/doc readback plus 23/23 current-skill and 7/7 class-family presence check; no Python/Android runtime test result is implied.
+
+
+## D-045 / P12 — Training, mentor and facility progression child
+
+- **Canonical child:** `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`.
+- **Parent:** `docs/systems/PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`; master task D-045 remains broader IN_PROGRESS after this bounded child.
+- **Consumes:** the current 23-skill registry, seven-family Combat Class Catalog, P7 profession/rank/status namespace, V10 training/activity identity and time-cost/atomicity standards, NPC schedule/presence authority and D-061 schema-v1 migration boundary.
+- **Defines:** CURRENT/TARGET/PROPOSAL-separated `TRAINING_PATH_*`, `MENTOR_CAP_*`, `EVAL_CAP_*`, `FACILITY_CAP_*` and reusable `TRAINING_REQ_*` proposal namespaces; a read-only legality pipeline; capability-vs-identity separation; plateau/cross-training/access/privacy rules; migration and test seams.
+- **Current-runtime boundary:** no new runtime progression field, save-schema version, canon mentor/institution/facility, Android DTO, or second progression/activity engine was introduced.
+- **Verified coverage:** committed readback contains 23/23 current runtime skill IDs and 7/7 target class-family rows with zero missing. Validation was documentation/source readback only; no Python/Android/Gradle/CI/emulator/device/APK test execution is claimed.
+- **Evidence:** `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`; primary creation commit `a61f920296bd4d11eefb83595e77ce339609ea39`; readback blob `7430a51a13c9f02161e0bdab6a92a35ab628b7b4`.
+- **Next D-045 child:** Gate Twelve Progression Proof Packet, followed by the Progression UX Contract. P12 completion does not reserve that follow-on work.
 
 ## D-026 / P13 — Hierarchical world-map player-safe migration child
 
