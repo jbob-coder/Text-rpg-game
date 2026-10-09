@@ -51,15 +51,17 @@ Action:
 
 ## Room actor runtime
 
-Current transitional system:
-- `PixelStoryActorCatalog`;
-- Tamsin room actor;
-- injured courier actor;
-- scene/location placements.
+Current verified D-064 system:
+- Python player-safe room projection owns actor presence;
+- Android maps typed room-actor records;
+- `PixelStoryActorCatalog` remains the presentation placement/art resolver;
+- Tamsin and the injured courier retain opening-equivalence placements through semantic placement keys;
+- scene/location IDs no longer decide story-actor presence.
 
 Action:
-- preserve as transitional presentation;
-- design a player-safe projected actor contract before dynamic actor panels become authoritative.
+- preserve the D-064 privacy/presence boundary;
+- expand authored actor/pose/outfit/held-prop coverage only from projected player-safe state;
+- contextual focus panels remain later presentation work and must not recreate hidden-state or scene/location presence inference.
 
 ## Ambient animation runtime
 
