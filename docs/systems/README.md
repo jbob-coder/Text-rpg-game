@@ -54,6 +54,8 @@ Working rule: current runtime facts and evolved target design stay explicitly se
 
 - [Training / Mentor / Facility Progression Standard](TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md) — D-045 P12 reconstruction contract preserving `ACTIVITY_*` training ownership while defining proposal-only training-path, mentor/evaluator-capability and facility-capability namespaces; maps all 23 current skills and seven class families, player-safe visibility, plateau/access gates and future migration/test seams.
 
+- [Gate Twelve Progression Proof Packet](GATE_TWELVE_PROGRESSION_PROOF_PACKET.md) — D-045 P16 bounded reconstruction proof connecting current D-066 Trace Echo/Signal Pulse mastery and D-068 Trace Chamber Powers training to target Ability Specialist, profession/rank and training-capability contracts without inferring class/profession/rank acquisition or changing schema v1. Direct next D-045 child: Progression UX Contract.
+
 
 ## Status UI / abilities / passives
 
