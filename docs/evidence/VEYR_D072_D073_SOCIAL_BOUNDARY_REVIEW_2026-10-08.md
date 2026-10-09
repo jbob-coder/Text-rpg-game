@@ -66,3 +66,36 @@ The authority Bulletin was re-read on 2026-10-08 AST after the first document co
 - **OUT OF SCOPE:** An alternate combat AI strategy, NPC-wide reputation model, new named rival, social-passive thresholds, or a new world publisher. Each requires its own approved owner and dependency gate.
 
 **Review result at this checkpoint:** source-backed test-design guidance only; no Python test execution, live D-072 diff review, Android/CI run, task claim, source modification or canonical world decision. Do not mark VA-01..VA-10 PASS until an actual test run establishes the claim.
+
+
+## Source-to-test coverage audit — continuation pass, 2026-10-08 AST
+
+**Method:** read the named test definitions through the GitHub source connector on the current authority branch; the presence of an assertion is **static coverage evidence**, not proof it passes on today's HEAD. This section does not execute tests and is not a D-072 compliance ruling.
+
+| Existing exact test and source blob | Assertion actually inspected | Coverage limit / future cross-domain test |
+|---|---|---|
+| \`tests/test_combat_state.py::test_transient_session_does_not_mutate_game_state\` (blob \`784a8756dc9df27bf0eeb04d51a56a836c083b5b\`) | Captures \`durable.snapshot()\`, advances a separate \`CombatSession\`, and asserts that durable snapshot and absence of combat fields are unchanged. | Protects transient separation. It does not exercise any permitted post-combat aftermath write. |
+| \`tests/test_combat_scheduling.py::test_all_commits_roll_back_even_after_event_was_appended\` (blob \`a516c51fbc767d6b21e93e3ee0a500215faa09ea\`) | Injects \`_append_event\` failure across move/sprint/prepare/consume/end and compares transient \`session.__dict__\`. | Proves the authored **test checks** in-session atomicity, not a late failure after durable GameState/social/quest mutation. |
+| \`tests/test_combat_objectives.py::test_post_append_failures_restore_objective_departure_and_detection_state\` (blob \`6a37bf48dbfb972dcba88df41d2bd503fd9a6b08\`) | Fault injection on interact/retreat/detect/move; compares session internals, objective status and observer contacts after exception. | Covers encounter resolution invariants; not an after-encounter persistent transaction. |
+| \`tests/test_combat_knowledge.py::test_los_does_not_reveal_an_unknown_actor_or_private_state\` and \`test_detection_is_observer_specific_and_does_not_identify\` (blob \`ddb0642fa0f30e240b0b08a12912785fc7df885f\`) | No raw hidden actor/faction in untouched observer view; detection creates a DETECTED contact without identity, and a second observer remains unaware. | Confirms an existing encounter-local observer-view test contract, not a later Android aftermath payload or public social propagation. |
+| \`tests/test_social.py::test_multi_recipient_leak_rolls_back_when_later_recipient_is_invalid\` (blob \`9a5257c734600492f96cc43dfa805be15fb11b7d\`) | An invalid later NPC recipient raises \`RuleError\`; NPCs, relationships, history and earlier-recipient learned knowledge compare equal to pre-state. | Strong social-local failure proof; not a full encounter+injury+quest+time rollback. |
+| \`tests/test_social.py::test_leak_eligibility_query_does_not_create_missing_npcs\` (same blob) | The query may return \`NPC_MISSING\` as a *candidate* while not creating its NPC/relationship record. | Important distinction: **candidate eligibility is not approved durable identity nor successful execution**. Future aftermath must validate a real persistent ID before calling the mutating helper. |
+| \`tests/test_phase1_quest_branch_world_consequence.py::test_dead_relay_resolutions_persist_and_create_player_safe_divergence\` (blob \`07d2c52892e989d51abe7fa6b6f630b3571c00cc\`) | Cooperative and solo paths are saved/reloaded; authorized Tamsin-specific choice differs, while a private memory ID and raw \`memories\` key stay out of the player-safe payload. | Does not imply a public reputation publisher, combat-to-social causal credit, or \`SOC_0007/SOC_0010\` qualification. |
+| \`tests/test_android_bridge.py::test_new_session_returns_player_safe_scene_and_status\` (blob \`bd389dc04ae19990d7049f65818a3e8f843869d6\`) | Expects explicit eight-key current bridge view and no keys in \`FORBIDDEN_AUTHORED_KEYS\`. | Baseline noncombat projection, not authorization for a raw combat/session or hidden aftermath DTO. |
+| \`tests/test_android_bridge.py::test_load_failure_does_not_replace_current_state\` (same blob) | Unsupported save-schema load raises \`LOAD_ERROR\`; current GameState snapshot is unchanged. | A failed load is not a simulated partial D-072 aftermath commit or proof of future session loading migration behavior. |
+
+### Suggested minimal owner-executable verification sequence
+
+This is **test design only**, and the names below are check identifiers rather than existing test functions.
+
+1. **VA-01/02: durable identity isolation.** At a valid pre-combat checkpoint, obtain a real known NPC ID set. Resolve A/B as transient contacts (no \`persistent_ref\`) and separately try a syntactically valid but absent NPC ref. Compare the deep post-run NPC identity set and relationship keys to pre-run values; the invalid-ref variant must be rejected before mutation.
+2. **VA-04: whole-state rollback.** Use one valid planned aftermath effect and inject failure at a later phase after a first durable mutation has been attempted. Compare a *deep* \`GameState.snapshot()\`, including \`npcs\`, \`relationships\`, \`knowledge\`, \`quests\`, \`flags\`, \`history\`, \`player.conditions\` and world time. Record the exact exception and test head.
+3. **VA-05: duplicate credit.** After one committed approved result, replay the same specific transaction and then save/reload before replaying it again. Assert no extra authored consequence. A valid deduplication test depends on the D-072 owner's real transaction-identity contract; do not invent this field in documentation.
+4. **VA-06/07/10: disclosure.** Compare an identified authorized contact, an unidentified detected contact and a wholly unseen contact; add a deliberately private NPC-held assertion and check the *returned bridge projection*, not only encounter knowledge view. No accidental public rumor/passive inference.
+5. **VA-03/08/09: regression sweep.** Rerun established Tamsin branch/save/reload and social rollback tests after aftermath integration; combine provisional condition invalidation with the same all-or-nothing state fingerprint. Mark unrelated proposed status/passive features NOT IMPLEMENTED rather than FAIL.
+
+### Remaining limits and owner instructions
+
+- The reviewed existing tests express coverage assertions. This pass did not run the Python interpreter, CI, Gradle, emulator, or device. Do not report their result as PASS.
+- Existing test coverage should not be misrepresented as missing merely because it lives in another domain. The **unproven seam** is the *cross-domain durable commit + player-safe disclosure* on the actual D-072/D-073 implementation candidate.
+- D-072 claimant Silex controls implementation and final evidence; this PR #82 is a draft documentation review only. D-073 remains BLOCKED until the Bulletin independently records D-072 DONE.
