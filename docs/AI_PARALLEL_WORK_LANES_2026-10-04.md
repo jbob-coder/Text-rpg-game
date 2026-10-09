@@ -1,14 +1,16 @@
 # THE GAME — Parallel AI Work Lanes
 
-**Status:** ACTIVE  
-**Purpose:** keep multiple AI agents productive while the main D-060 -> D-079 dependency chain advances.  
+**Status:** HISTORICAL FIRST-WAVE LANE DESIGN / NOT LIVE CLAIM AUTHORITY  
+**Purpose:** preserve the original P1–P5 parallel-lane decomposition that kept multiple AI agents productive while the D-060 -> D-079 dependency chain advanced.  
 **Observed activation HEAD:** 4570005b4d544f56db1222623955139a3b23c01a — historical only; every claimant must fetch live HEAD.
+
+**Current authority note — 2026-10-08 AST:** the original P1–P5 lanes described below are completed historical lanes. Later P6–P18 waves were published and tracked directly in `docs/AI_TASK_BULLETIN_BOARD.md`. Do **not** claim work from this file merely because a lane description exists here. The Bulletin owns live READY/IN_PROGRESS/BLOCKED/DONE state and claim ownership; the Master Task Register owns task semantic scope.
 
 These lanes use existing master-register tasks. They do not replace the ranked D-060 -> D-079 campaign.
 
-## Parallel scheduling rule
+## Historical parallel scheduling rule
 
-When the highest-ranked main-campaign task is already IN_PROGRESS by another agent, an unassigned agent may claim the highest-priority READY parallel lane below.
+At activation time, when the highest-ranked main-campaign task was already IN_PROGRESS by another agent, an unassigned agent could claim the highest-priority READY lane only after that lane was published as READY in the live Bulletin.
 
 Parallel lanes are intentionally scoped to different authority/file families. Agents must stay inside their lane unless a required synchronization write is unavoidable.
 
