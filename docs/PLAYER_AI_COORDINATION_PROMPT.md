@@ -105,7 +105,13 @@ Do not allow two agents to independently change:
 
 without an explicit split or handoff.
 
-## Current strategic rule
+## Later authority checkpoint — 2026-10-08 AST
+
+**Snapshot only; fetch the live Bulletin, Master Task Register, canonical Player-AI Drive status and authority HEAD before every claim or handoff.** D-069, D-070 and D-071 are DONE. D-072 is Silex-owned IN_PROGRESS; D-073/D-074 are blocked. P11 / D-076 precondition / CPR-006 is Nodus-owned IN_PROGRESS; its runtime PR #80 is draft/unmerged at this checkpoint. There were no READY/unclaimed tasks on the verified Bulletin. D-080 is DONE, not READY. The original 2026-10-04 strategic statements below are preserved history only.
+
+**Same-session / different-execution guard:** a matching Player-AI name and active session ID is not permission to operate another conversation's claimed runtime task. Check execution handoff evidence before writing another task's branch, PR, coordination claim or Drive lock. If execution ownership cannot be established, remain non-owning and do bounded source-backed review.
+
+## Historical strategic rule at prompt creation
 
 Always re-fetch live state.
 
