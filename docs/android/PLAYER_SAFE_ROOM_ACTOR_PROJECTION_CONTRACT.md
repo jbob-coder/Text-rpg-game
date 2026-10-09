@@ -1,6 +1,6 @@
 # Player-Safe Room Actor & Context Panel Projection Contract
 
-Status: **ACTIVE TARGET CONTRACT / IMPLEMENTATION PENDING**  
+Status: **ACTIVE CONTRACT / D-064 ROOM-ACTOR PRESENCE IMPLEMENTED / CONTEXT-PANEL EXTENSIONS PENDING**  
 Repository: `jbob-coder/Text-rpg-game`  
 Program branch: `docs/master-game-development-program`  
 Source-audit baseline: `7703d67e7c6a80a0b2394312e8ad8895d2d88ae6`
@@ -17,7 +17,7 @@ Task: D-030.
 
 Define the exact player-safe projection boundary required to replace Android scene/location actor inference with engine/content-owned room presence while preserving the current opening-story visuals.
 
-This document specifies an API target. It does **not** claim the API is implemented.
+This document originated as the API target. D-064 has since implemented and verified the core room-actor **presence** boundary: Python player-safe projection, typed Android actor mapping, semantic placement consumption, opening-story equivalence and retirement of scene/location-derived actor presence. Contextual focus panels, broader actor/pose/outfit coverage and held-prop/presentation extensions in later sections remain target work. See `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`.
 
 ## 2. Verified current source state
 
@@ -451,9 +451,9 @@ data class GameRoom(
 )
 ```
 
-Then extend `GameSnapshot` with a defaulted `room: GameRoom = GameRoom()`.
+Then extend `GameSnapshot` with a defaulted room projection.
 
-These are target signatures, not implemented code.
+D-064 implemented the equivalent typed boundary. The current container is `GameRoomProjection`; current `GameRoomActor` fields are `presentationId`, optional `knownActorId`, `displayName`, `visualFamily`, `placementKey`, optional `poseKey`, optional `outfitKey`, `visibleTags`, `inspectable`, `dialogueAvailable`, and safe `actions`. Treat the code block above as the original design sketch, not the exact current class declaration.
 
 ## 13. Mapper validation
 
@@ -478,15 +478,15 @@ These are target signatures, not implemented code.
 -> `PixelStoryActorCatalog.placements(locationId, sceneId)`
 -> fixed actor sprites + fixed x/y.
 
-### Target
+### D-064 current path
 
 `GameSnapshot.room.actors`
 -> actor visual-family resolver
--> area/placement-key resolver
--> approved sprite/pose/outfit layers
+-> semantic placement resolver
+-> approved sprite/presentation layers
 -> scene composition.
 
-`sceneId` may continue to drive scene overlays/Trace FX where those contracts still require it. It must stop being the source of actor presence.
+`sceneId` may continue to drive scene overlays/Trace FX where those contracts still require it. It is no longer the source of story-actor presence.
 
 ## 15. Pixel catalog refactor boundary
 
@@ -500,7 +500,7 @@ Refactor responsibilities:
 - resolve visual family + pose to the existing sprite assets;
 - preserve source/raster/actor provenance.
 
-Only remove the old heuristic after projection equivalence tests pass.
+D-064 satisfied the opening-equivalence and redaction gates and retired the old actor-presence heuristic. Preserve that invariant while extending art, poses, panels or actor coverage.
 
 ## 16. Context panel behavior
 
@@ -624,36 +624,31 @@ If actor projection cannot be built safely:
 - a missing art mapping should omit/fallback presentation safely without falsifying domain presence;
 - presence truth outranks art availability.
 
-## 24. Implementation order
+## 24. Implementation checkpoint and remaining order
 
-1. add authored opening-scene presence records;
-2. add Python player-safe room projection;
-3. add Python redaction/equivalence tests;
-4. add Kotlin `GameRoom` / `GameRoomActor`;
-5. extend mapper validation;
-6. add mapper tests;
-7. create semantic placement-key -> scene x/y/z catalog;
-8. change `SceneIllustration` to consume projected actors;
-9. preserve existing opening coordinates through placement keys;
-10. add local transient focus-panel selection;
-11. add contextual panel shell;
-12. run Python + Android + emulator screenshot gates;
-13. only then delete the old scene/location presence heuristic.
+D-064 completed the room-actor presence slice:
+- player-safe Python room projection;
+- redaction/equivalence coverage;
+- typed Kotlin room/actor mapping and mapper validation;
+- semantic placement consumption in `SceneIllustration`;
+- opening-story placement equivalence;
+- strict unexpected/private actor-field rejection;
+- Python + Android + emulator/screenshot verification;
+- retirement of scene/location-derived story-actor presence.
+
+Remaining D-030 presentation work:
+1. broaden authored actor/population coverage and safe presentation variants;
+2. add local transient focus-panel selection when product/UI ownership is ready;
+3. add the contextual panel shell and accessibility behavior;
+4. extend held-prop/pose/outfit mappings only from player-safe projected state;
+5. preserve save compatibility and D-064 privacy/presence invariants;
+6. run exact-head Android/emulator/device gates for any new implementation slice.
 
 ## 25. Completion definition
 
-D-030 documentation is complete when this contract is indexed.
+D-030 documentation is complete and the D-064 room-actor presence runtime slice is verified.
 
-Runtime implementation is complete only when:
-- Android no longer decides actor presence from scene/location;
-- the four current opening actor compositions are equivalent;
-- hidden NPC state remains absent from bridge payloads;
-- typed mapping and failure cases pass;
-- panel selection is transient;
-- save compatibility is unchanged;
-- exact-head Android workflow and screenshot evidence pass.
-
-Physical Galaxy A03 acceptance remains a separate later gate.
+The broader room-actor/context-panel contract remains incomplete until the still-target panel/interaction and wider authored-presentation work is implemented and verified. Physical Galaxy A03 acceptance remains a separate later gate.
 
 
 ## 24. Held-prop presentation boundary
