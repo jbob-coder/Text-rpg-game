@@ -524,9 +524,9 @@ Examples:
 
 # 12. Training / mentor / facility integration
 
-D-045's next child will define the full Training / Mentor / Facility progression standard.
+P12 has now materialized the full Training / Mentor / Facility progression standard at `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`.
 
-This packet establishes only the namespace boundary.
+This P7 packet still establishes only the profession/rank/status namespace boundary; consume the P12 standard for training-path, mentor/evaluator-capability and facility-capability semantics. The direct next D-045 child is the Gate Twelve Progression Proof Packet.
 
 Profession/rank/status progression may consume:
 - training activities;
