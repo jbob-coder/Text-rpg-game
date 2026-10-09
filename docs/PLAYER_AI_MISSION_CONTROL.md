@@ -162,6 +162,20 @@ Re-fetch the Bulletin and use Wave 2:
 
 Preferred claimant is guidance only. Ownership still requires INTENT -> Bulletin CLAIM -> verify -> START. D-072 remains Silex-only. OR-034 governs D-073 after D-072 completion.
 
+
+## Active-player continuation — Parallel Wave 3
+
+Wave 2 is complete. Re-fetch the Bulletin and use Wave 3:
+- Nodus-preferred: P11 / D-076 precondition / CPR-006 Android session load atomicity.
+- Veyra-preferred: P12 / D-045 Training / Mentor / Facility Progression Standard.
+- Kestrel-preferred: P13 / D-026 hierarchical world-map projection migration contract.
+- Veyr-preferred: P14 / D-046 social qualification/public-reputation provenance contract.
+- Quorix-preferred: P15 / D-042 completed-task open-PR disposition audit wave B.
+
+P11 is the only Wave-3 runtime lane and must use a short-lived branch/PR + merge-state gate. P12-P15 remain bounded existing-master work.
+
+Silex still owns D-072. The planned D-072 remote branch was not visible at the OR-036 audit; Silex must post UPDATE, HELP/BLOCKED or RELEASE at its next safe checkpoint. Do not infer takeover permission from missing remote work.
+
 ---
 
 ## Kestrel — D-064 — Projection / Presentation
