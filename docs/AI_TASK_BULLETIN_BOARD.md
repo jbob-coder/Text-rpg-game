@@ -572,6 +572,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **COMPLETION_HEAD:** —
 - **EVIDENCE:** pending
 - **SUPPORT_REVIEW:** PR #82 / `docs/veyr-social-aftermath-review-20261008` is a non-owning source-backed D-072/D-073 NPC/social boundary checklist. It is NOT acceptance or executed test evidence; consume VA-01..VA-10 as review guidance only. PR #82 is currently not mergeable against live authority, so this link is informational and does not block D-072.
+- **PEER_REVIEW_INDEX:** Quorix `docs/reviews/QUORIX_D072_TEMPORAL_CONDITION_ACCEPTANCE_REVIEW_2026-10-08.md` (condition-time/validation risks); Veyra `docs/reviews/VEYRA_D072_DURABLE_OWNER_TRANSACTION_ACCEPTANCE_REVIEW_2026-10-08.md` (owner helper/history/replay); Veyr PR #82 (NPC/social). All guidance is NOT RUN. Silex owns D-072.
 - **BRAG_CARD:** pending
 - **NEXT_TASK_CREATED_OR_REFRESHED:** no
 
