@@ -1579,7 +1579,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - EVIDENCE: `docs/evidence/D070_TRANSIENT_ENGINE_2026-10-08.md`; PR #78 / workflow #403 `37734174295`; Python 442/442 PASS; Android unit/build/package PASS; emulator 35/35 PASS; screenshot gate PASS.
 - FILES: `src/textrpg/combat_state.py`, package exports, `tests/test_combat_state.py`, `tests/test_combat_turns.py`, `tests/test_combat_scheduling.py`; synchronized preflight/control/learning records.
 - LEARNING_RECORD: `D-070 — Transient turns, live legality and frozen reaction order`.
-- NEXT: D-071 has since completed; D-072 READY, D-073+ remain gated.
+- NEXT: D-071 has since completed; D-072 is IN_PROGRESS under Silex, and D-073+ remain dependency-gated.
 
 ### TASK D-071 — Implement tactical awareness, cover, objective, retreat and bounded AI
 - STATUS: `DONE / VERIFIED PRIMARY`
@@ -1612,7 +1612,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-072-B` fault-injection aftermath atomicity tests.
 
 ### TASK D-073 — Materialize Gate Twelve tactical content and Python bridge
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `BLOCKED / BULLETIN QUEUED`
 - PRIORITY: `P0 / RANK 14`
 - DEPENDS_ON: D-072 DONE.
 - PURPOSE: create the bounded Gate Twelve encounter records and authoritative player-safe combat bridge actions/projection without inventing unresolved canon.
@@ -1622,7 +1622,7 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - BONUS: `D-073-B` combat bridge redaction audit.
 
 ### TASK D-074 — Implement Android tactical DTO/mapper/ViewModel/Compose surface
-- STATUS: `PENDING / BULLETIN QUEUED`
+- STATUS: `BLOCKED / BULLETIN QUEUED`
 - PRIORITY: `P0 / RANK 15`
 - DEPENDS_ON: D-073.
 - PURPOSE: expose the bounded encounter on Android through typed player-safe projection while Python remains sole gameplay authority.
@@ -1800,5 +1800,5 @@ D-060 is rank 1. The following D-061 through D-079 tasks are the remaining 19 pr
 - EVIDENCE: `docs/evidence/D083_STATUS_TRACKER_CLOSURE_2026-10-07.md`; `docs/evidence/D083_STATUS_TRACKER_RECONCILIATION_2026-10-07.json`.
 - VALIDATION: `PYTHONPATH=src:. python -m unittest tests.test_project_status_tracker tests.test_documentation_inventory_tool -v` — 8 PASS; actual JSON/Markdown/manifest CLI outputs deterministic; 644 paths/blob hashes/sizes match remote tree with `truncated=false`; independent task/document recount PASS at `8b702325c4224eb68751f147dd83c84d47d4a62c`.
 - FILES_CHANGED: two D-083 evidence artifacts; task/control/learning records only. D-081/D-082 historical snapshots and all tracker/runtime/test source remain unchanged.
-- NEXT: D-083 remains closed. D-070 and D-071 have since completed; D-072 is READY under its own evidence; the tracker closure itself adds no gameplay acceptance.
+- NEXT: D-083 remains closed. D-070 and D-071 have since completed; D-072 is IN_PROGRESS under Silex, and the tracker closure itself adds no gameplay acceptance.
 - VERIFICATION_BOUNDARY: status tooling/tests/control documentation only; no gameplay/runtime/Android product behavior or physical-device/final-APK pass claimed.
