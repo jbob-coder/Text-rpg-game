@@ -285,6 +285,9 @@ Requirement 3 (recurring NPC relationship path):
 - recurring-character packet: **CONTRACT-READY**;
 - explicit durable memory plus later memory-reactive content: **VERIFIED BY D-065** — completion head `e883205559c64d2e82614160bd6548c2c9332808`; evidence `docs/evidence/D065_TAMSIN_MEMORY_PROOF_2026-10-04.md`.
 
+Status:
+**PHASE 1 REQUIREMENT #3 SATISFIED / BOUNDED TAMSIN DURABLE-MEMORY REACTIVE PROOF VERIFIED.**
+
 Requirement 4 (knowledge-gated chain):
 - player/NPC independent knowledge model: **EXISTS**;
 - Tamsin Gate Twelve knowledge branch: **EXISTS**;
