@@ -836,9 +836,9 @@ D-068 now supplies bounded runtime evidence:
 - evidence: `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md`;
 - authority proof merge: `e883205559c64d2e82614160bd6548c2c9332808`.
 
-This closes the Phase 1 bounded activity requirement, not the full V10 target. The final integrated green-authority checkpoint still depends on the remaining D-064/D-065/D-067 transition work.
+This closes the Phase 1 bounded activity requirement, not the full V10 target. **Later authority update:** D-064, D-065 and D-067 have since completed, so they are no longer transition blockers. D-067 also verifies the bounded V07 inventory/equipment requirement. Current downstream gating is controlled by the live tactical chain and integrated Phase-1 tasks in the Bulletin/Master Register, not by those completed transition tasks.
 
-Next breadth direction: V07 Items/Economy/Loot.
+Broader V07 economy/loot expansion remains later work, but it is not a Phase-1 blocker.
 
 
 ## 14. 2026-10-04 V07 item/economy first-pass closure
@@ -1018,7 +1018,7 @@ Verified documentation result:
 - D-061 schema-v1/no-new-top-level-progression-owner boundary retained;
 - evidence: `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`.
 
-No Python/Android/CI/emulator/device test execution is claimed by P12. Runtime implementation remains deferred. The direct next D-045 child is the **Gate Twelve Progression Proof Packet**, followed by the Progression UX Contract.
+No Python/Android/CI/emulator/device test execution is claimed by P12. Runtime implementation remains deferred. **Historical handoff:** P12 originally pointed next to the Gate Twelve Progression Proof Packet; P16 has since materialized that child. The current direct D-045 follow-on is the **Progression UX Contract**.
 
 ## D-045 combat class catalog checkpoint — 2026-10-04
 
