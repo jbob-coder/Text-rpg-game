@@ -1,6 +1,6 @@
 # THE GAME — Tactical Coordinate & Occupancy Standard
 
-Status: **APPROVED FIRST-PASS CONTRACT / IMPLEMENTATION NOT STARTED**
+Status: **APPROVED FIRST-PASS CONTRACT / D-069 COORDINATE-GRID FOUNDATION IMPLEMENTED + VERIFIED**
 Parent authorities:
 - docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md
 - docs/systems/TACTICAL_COMBAT_MASTER_PLAN.md
@@ -14,11 +14,22 @@ Define the authoritative coordinate, cell, occupancy, footprint, adjacency, and 
 
 This document exists so pathing, cover, line of sight, targeting, AI, save/replay tooling, Android projection, and encounter authoring all use the same spatial truth instead of reconstructing geometry independently.
 
-## 2. Current reality
+## 2. Historical baseline and current implementation checkpoint
 
-At the pre-batch documentation head, the Python engine contains no dedicated tactical-combat module or durable tactical-state field. Current GameState owns world/story state, resources, relationships, knowledge, inventory, quests, NPCs, party, abilities, equipment, perks, history, turn, and world time. Tactical combat is therefore a target subsystem, not current runtime behavior.
+At the pre-batch documentation head, the Python engine contained no dedicated tactical-combat module or durable tactical-state field. That baseline is preserved as design history, but it is no longer the live implementation state.
 
-Phase 1 does not require mid-combat save. The first implementation may keep tactical encounter state transient inside the authoritative Python rules layer and commit only the aftermath to durable GameState. Mid-combat save requires an explicit save-schema migration later.
+D-069 now implements and verifies the coordinate/grid portion of this contract:
+- optional validated tactical map/action/archetype/encounter records;
+- strict integer tactical coordinates, cells, zones, anchors and explicit z transitions;
+- deterministic cardinal occupancy/pathing;
+- transition-aware optimal pathing;
+- deterministic LOS/supercover and directional blocked-edge/cover semantics;
+- topology/cross-reference validation;
+- no tactical save-v1 expansion.
+
+Accepted D-069 evidence: `docs/evidence/D069_TACTICAL_SCHEMA_GRID_CORE_FINAL_2026-10-05.md`; authority merge `8b2115cf8a6f04127bdf20dd1217abd947cf8150`; PR #76 / workflow run #390 `37347612244`; Python **402/402 PASS**, Android unit/build/package PASS, emulator **35/35 PASS**.
+
+D-070 and D-071 subsequently implement the transient combat-session/turn/action and decision/objective/retreat/AI layers. Tactical encounter state remains transient for Phase 1; durable aftermath is D-072, currently owned separately. Mid-combat save still requires an explicit future save-schema decision and is not implied by D-069 through D-071.
 
 ## 3. Coordinate spaces
 
