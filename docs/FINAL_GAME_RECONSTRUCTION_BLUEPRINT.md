@@ -364,7 +364,7 @@ Rules:
 - panel focus changes presentation only, not authoritative NPC state;
 - panels may be absent when no focused actor is needed.
 
-The current scene/location actor binding is transitional and should be replaced/extended by this projected actor model when the consumer audit is ready.
+The room-actor presence migration is now **implemented and verified by D-064**: Python owns the player-safe room projection, Android consumes typed `GameRoomActor` records, and scene/location IDs no longer invent story-actor presence. The remaining work is expansion of authored actor coverage, focus-panel/interaction depth and final visual/content production—not a return to presentation-side presence heuristics. Evidence: `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`; authority merge `d7ebb7ca439695e256a429a1e5d160daae69a521`.
 
 ## 12. Gate Twelve proof-region production list
 
