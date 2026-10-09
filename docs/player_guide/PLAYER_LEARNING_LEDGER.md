@@ -358,3 +358,13 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - STILL UNKNOWN / BLOCKED: actual authored hierarchy IDs/parent graph, domain version, new Python API and Kotlin DTOs; final APK; D-072/D-073/D-074 chain unrelated. Master D-026 remains IN_PROGRESS beyond P13.
 - NEXT PLAYER SHORTCUT: use the P13 source/field/action/test matrix as a plan, then re-fetch latest Python map wire/manifest before creating Kotlin DTOs; verify concealment and Gate Twelve flat-map equivalence before implementation acceptance.
 - SUPPORTING ARTIFACT: `docs/evidence/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_2026-10-08.md`.
+
+
+## P14 / D-046 — Social publication requires explicit authority
+
+- **OWNER / CLAIM:** Veyr, Wave-3 P14/D-046 under OR-036. Source contract: `docs/systems/status/SOCIAL_PASSIVE_EVIDENCE_PUBLICATION_QUALIFICATION_CONTRACT_P14.md`; evidence: `docs/evidence/P14_D046_SOCIAL_PROVENANCE_QUALIFICATION_2026-10-08.md`.
+- **EXACT CURRENT OWNER:** `src/textrpg/core.py` persists quest/history, actor relationships and knowledge; `social.py` stores and transfers NPC facts; `quests.py` emits quest-specific transitions. `android_bridge.py` projects a player-safe scene/status/quest/room view. None currently implements an authorized public reputation publisher or SOC passive qualification ledger.
+- **TRAP:** one NPC memory or public-facing location is not public knowledge; shared hearsay does not prove true reputation. No scene replay, UI refresh or repeated dialogue can itself count as a second qualifying social case.
+- **DESIGN HANDOFF:** Five gates are independent: world event, observer/recipient knowledge, authorized public publication, record-specific qualification with stable case ID/anti-replay, and per-viewer Status disclosure. Keep SOC_0007/0010 calibration unimplemented and do not extend the provisional UEV/COS/CLS governance standard to SOC automatically.
+- **VERIFICATION:** source/packet readback only; no Python/Android/CI tests executed. Future tests must cover private facts, invalid NPC identity, duplicate occurrence, failed atomic writes and projection redaction. No new save field, canon publisher or numeric threshold approved.
+- **NEXT:** public publication/canon owner and typed social qualifier plus save-schema migration/projection approval. Re-fetch Bulletin before claiming follow-up work; do not overlap Silex D-072.
