@@ -1,5 +1,7 @@
 # Text RPG Game — Foundation v0.1
 
+> **Current authority relationship:** this file is the durable high-level design foundation, not the live task queue, save-schema specification, or final domain implementation contract. Repository execution is governed by `MASTER_GAME_DEVELOPMENT_PROGRAM.md`; current work/ownership by `AI_TASK_BULLETIN_BOARD.md` plus `THE_GAME_MASTER_TASK_REGISTER.md`. Detailed design authority now lives in `systems/PROGRESSION_MASTER_PLAN.md`, `systems/TACTICAL_COMBAT_MASTER_PLAN.md`, `systems/NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, `world/WORLD_DEVELOPMENT_MASTER_INDEX.md`, `android/APPLICATION_UX_MASTER_PLAN.md`, and `assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`. Current source, persistence contracts and accepted migration packets override any older “recommended” field/layout example below when they differ. Preserve this document for game identity and design pillars rather than silently treating v0.1 examples as current runtime schema.
+
 ## Product goal
 
 Build an authored, choice-driven RPG that feels like a living pen-and-paper campaign without requiring generative AI at runtime. The player reads scenes, talks to characters, acts alone or with a group, trains, fights, investigates, equips gear, develops powers, and changes the world through persistent decisions.
