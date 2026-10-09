@@ -2,13 +2,13 @@
 
 Parent: [Room actor/panel/overlay standard](ROOM_ACTOR_PANEL_OVERLAY_REUSE_STANDARD.md).
 Evidence: program baseline `4d596bcd27b6e2f8ef9ce3a93b9dab22f5f4812e`.
-Status: operational design contract; proposed payloads below are not implemented APIs.
+Status: operational design contract. **Current authority update:** D-064 has implemented and verified the player-safe room-actor projection and typed Android actor consumer. Contextual focus-panel payloads, broader actor coverage, equipment/held-object expansion and several asset/occlusion details below remain target/proposed work. Evidence: `docs/evidence/D064_PLAYER_SAFE_ROOM_ACTOR_PROJECTION_FINAL_2026-10-05.md`.
 
-## 1. Actual baseline and gap
+## 1. Historical baseline and current gap
 
-`SceneIllustration.kt` receives projected location, scene ID and relay state. It draws preferred raster (or source-native scene fallback), scene/state overlays, decals, props, story actors, Trace FX and workbench relay art. `PixelStoryActorCatalog.placements()` selects fixed actors from scene/location IDs. `GameSnapshot` in `engine/GameEngine.kt` has no general visible-actor list or contextual portrait-panel model at this baseline.
+At the recorded program baseline, `SceneIllustration.kt` received projected location, scene ID and relay state; `PixelStoryActorCatalog.placements()` selected opening actors from scene/location IDs; and `GameSnapshot` had no general visible-actor list or contextual portrait-panel model.
 
-The lookup is a bounded opening-story implementation, not general NPC presence. Do not infer that every named person in prose stands in the room.
+D-064 superseded the **presence** portion of that baseline: Python now projects player-safe room actors, Android maps typed `GameRoomActor` records, and `SceneIllustration` consumes projected actor placements rather than inventing story-actor presence from scene/location IDs. The remaining gap is broader authored actor/population coverage plus the still-unimplemented contextual portrait/focus-panel model. Do not infer that every named person in prose stands in the room.
 
 | Scene | Location | Existing actor placement x,y |
 | --- | --- | --- |
@@ -19,9 +19,9 @@ The lookup is a bounded opening-story implementation, not general NPC presence. 
 
 These are sprite origins on the 128x64 scene canvas, not feet or world coordinates. Unknown scene/location pairs return no actors. A target ground pivot must explicitly convert from these origins; do not reuse them as foot anchors.
 
-## 2. Proposed domain-to-presentation boundary
+## 2. Implemented actor boundary and proposed panel extension
 
-Engine projection should eventually emit a versioned room view with: visible actor identity (or anonymous presentation identity when unknown), authorized display name, presentation role, safe pose/outfit variant, inspectability, dialogue/interaction availability and visible condition tags. The asset registry resolves sprite/portrait IDs. The area packet resolves slots/pivots/occlusion; engine must not decide pixel art layout.
+D-064 implements the versioned player-safe room-actor boundary for visible actor/presentation identity and semantic placement. Future extensions may add or deepen authorized display name, presentation role, pose/outfit variant, inspectability, dialogue/interaction availability, visible condition tags and contextual panel data where their owners approve them. The asset registry resolves sprite/portrait IDs. The area packet resolves slots/pivots/occlusion; engine must not decide pixel art layout.
 
 Do not emit private goals, undiscovered names, hidden relationships, raw memories, secret injuries, quest prerequisites, unrevealed equipment or enemy intentions. A visible appearance variant must be approved by the projection policy, even if it reveals no text.
 
@@ -58,7 +58,7 @@ Source-native catalog remains an inspectable fallback. Authored map images remai
 
 ## 6. Creation queue and acceptance
 
-First: reconcile preferred scene/raster pairs and later Tunnel/Stair branches. Second: area anchors/occlusion packets for the nine locations. Third: visible actor projection with opening-story equivalence fixtures. Fourth: Jack/Tamsin portrait/pose families from established references. Fifth: contextual panels and reusable chrome. Sixth: atmosphere/props/state variants bound to actual safe state. Later: expanded NPC population and tactical art once those rules exist.
+First: reconcile preferred scene/raster pairs and later Tunnel/Stair branches. Second: area anchors/occlusion packets for the nine locations. Third: **preserve D-064 room-actor projection invariants while expanding authored actor coverage and semantic placements**. Fourth: Jack/Tamsin portrait/pose families from established references. Fifth: contextual panels and reusable chrome. Sixth: atmosphere/props/state variants bound to actual safe state. Later: expanded NPC population and tactical art once those rules exist.
 
 Accept each asset independently as SOURCE_MASTER_PRESENT, RASTER_PRESENT, INTEGRATED, VERIFIED, CANON_APPROVED or DEFERRED_INTEGRATION; do not compress into one 'finished' flag. Existing batch IDs stay unchanged; new derivatives receive explicit variants/lineage rather than silently stealing old IDs.
 
