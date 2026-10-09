@@ -637,7 +637,7 @@ Bragging is encouraged; fabrication is forbidden.
 - **IMPORTANCE:** `83/100`
 - **STATUS:** `BLOCKED`
 - **SOURCE_OF_WORK:** `docs/AI_20_TASK_EXECUTION_CAMPAIGN_2026-10-04.md` + matching master-register task.
-- **DEPENDENCIES:** Relevant D-065 through D-075 proof tasks DONE.
+- **DEPENDENCIES:** Required D-065–D-075 Phase 1 proofs must be verified DONE; at this checkpoint D-072 is IN_PROGRESS under Silex and D-073/D-074 are BLOCKED. D-076 remains BLOCKED until the required downstream proofs and separate P11 / CPR-006 precondition are accepted.
 - **ACCEPTANCE:** One exact-head integrated sequence survives save/reload/continue with deterministic authoritative outcomes.
 - **CPR-006 PRECONDITION:** before D-076 is claimable, P11 must resolve Android session load validate-before-publish atomicity and the session/content state-owner contract under OR-036.
 - **BONUS:** `D-076-B` — corrupted/unsupported-save fixture.
