@@ -1,5 +1,7 @@
 # THE GAME — Player-AI Wake Readiness — 2026-10-07
 
+> **HISTORICAL SHUTDOWN/Wake CHECKPOINT — SUPERSEDED FOR CURRENT STATE:** the roster, task readiness and released-work statements below describe the 2026-10-07 shutdown checkpoint only. Do not use them as current activation or task authority. D-070 and D-083 have since completed; on the current 2026-10-08 control path D-072 is IN_PROGRESS under Silex, D-073 is BLOCKED, and P11/CPR-006 is IN_PROGRESS under Nodus. Canonical Drive controls current Player-AI identity/session locks; the live Bulletin controls repository task ownership. Preserve the original checkpoint below as continuity evidence.
+
 **Purpose:** auditable shutdown/wake checkpoint for Player-AI continuity. This file does not replace the Bulletin, Master Task Register, Mission Control, or Google Drive canonical entity locks.
 
 ## Verified roster state
