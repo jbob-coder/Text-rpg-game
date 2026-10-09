@@ -1106,7 +1106,10 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - MATERIALIZED CHILD: `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md` — P12 defines CURRENT/TARGET/PROPOSAL-separated training-path, mentor/evaluator-capability and facility-capability ownership without duplicating `ACTIVITY_*` identity, training arithmetic, NPC/world owners or D-061 schema-v1 boundaries.
 - P12 VERIFICATION: committed readback contains **23/23** current runtime skill IDs and **7/7** target class-family rows with zero missing; stable proposal namespaces, legality/plateau/access/privacy rules, migration/test seams and explicit no-runtime/no-canon boundaries are present.
 - P12 EVIDENCE: `docs/evidence/P12_D045_TRAINING_MENTOR_FACILITY_2026-10-08.md`; primary creation commit `a61f920296bd4d11eefb83595e77ce339609ea39`; readback blob `7430a51a13c9f02161e0bdab6a92a35ab628b7b4`.
-- NEXT: create the **Gate Twelve Progression Proof Packet**, then the Progression UX Contract.
+- MATERIALIZED CHILD: `docs/systems/GATE_TWELVE_PROGRESSION_PROOF_PACKET.md` — P16 binds current D-066 Trace Echo/Signal Pulse mastery and D-068 Trace Chamber `powers` training into the evolved D-045 evidence/class/profession/training contracts while preserving CURRENT/TARGET/PROPOSAL separation and refusing implicit class/profession/rank acquisition.
+- P16 VERIFICATION: exact source readback found **23/23** current registered skill IDs, **7/7** target class families and all required current Gate Twelve proof identities (`ABILITY_TRACE_ECHO`, `TECHNIQUE_SIGNAL_PULSE`, `PRACTICE_SIGNAL_PULSE_ONE_HOUR`, `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS`, `TRACE_STABILIZATION_HUB`, `TRACE_CHAMBER`). `CLASS_ABILITY_SPECIALIST` remains TARGET/PROPOSAL and runtime-not-implemented; save schema v1/current owners remain unchanged.
+- P16 EVIDENCE: `docs/evidence/P16_D045_GATE_TWELVE_PROGRESSION_PROOF_2026-10-08.md`; primary creation commit `aa9ce08321bda73fd508a644437bf16175f87892`; committed primary readback blob `6b7314983ff7a59ebf9ff26a991f4752a2a6541c`. Documentation/source-contract verification only; no Python/Android/CI/emulator/device/APK execution is claimed.
+- NEXT: create the **Progression UX Contract**, then justified numeric/range fixtures and later migration/canon work.
 - IMPLEMENTATION: deferred until design contracts are sufficiently coherent.
 
 
