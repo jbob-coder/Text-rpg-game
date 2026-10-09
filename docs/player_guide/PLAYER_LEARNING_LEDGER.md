@@ -422,3 +422,14 @@ No synthetic entries are added at creation time. Add only evidence-backed lesson
 - STILL UNKNOWN / BLOCKED: durable class/profession/rank representation; final acquisition thresholds; evaluator/mentor bindings; canon profession/institution/facility population; numeric calibration; final progression projection/UX.
 - NEXT PLAYER SHORTCUT: the direct D-045 child is the **Progression UX Contract**. Consume P16's CURRENT/TARGET/PROPOSAL and allow/deny boundaries instead of reopening the Gate Twelve evidence model.
 - SUPPORTING ARTIFACT: `docs/evidence/P16_D045_GATE_TWELVE_PROGRESSION_PROOF_2026-10-08.md`.
+
+
+### P18 / D-046 — acquired is not revealed; visible perk math is not a passive catalog
+- **PLAYER-AI:** Veyr / PLAYER_VEYR; session `SESSION_VEYR_20261008T1747-0400_S02`.
+- **TASK / OWNER:** Wave-4 P18/D-046 bounded projection contract, Bulletin claim commit `2a6beeb9a6f12eb409c374202728a1e971b576c1`; Master D-046 stays IN_PROGRESS.
+- **READ FIRST:** `docs/systems/status/P18_D046_PLAYER_SAFE_PASSIVE_LIST_PROJECTION_CONTRACT.md`, `docs/evidence/P18_D046_PASSIVE_LIST_PROJECTION_AUDIT_2026-10-08.md`, `PASSIVE_RUNTIME_OWNER_PROJECTION_DISPOSITION_WAVE_001.md`, P14 social provenance contract, `src/textrpg/status.py`, `src/textrpg/android_bridge.py`, `tests/test_status.py`.
+- **CURRENT FACT:** durable `state.perks` can add authoritative modifiers, current Status view has no passive list, hidden attribution is anonymized, and typed Android `GameSnapshot` has no passive-list consumer.
+- **TRAP:** do not infer learned/visible passives from raw perk effects, private NPC memory, public-rumor assumptions, unvalidated requirement counters, or a client-side catalog. Ownership, qualification, self-reveal and public dissemination are different checks.
+- **DESIGN HANDOFF:** documented proposed `status.passives` domain with strict safe entries and independent version/error boundary; proposal is **not** a live field, approved wire or new save schema. PV-01..PV-14 list future source/bridge/mapper/UI tests.
+- **VALIDATION LIMIT:** GitHub source readback and contract audit only; no Python/Android/CI tests executed and no runtime behavior changed.
+- **NEXT SHORTCUT:** ask the Status/Android migration claimant to resolve definition+reveal owner, field/version negotiation and legacy-save rules; then implement in Python and typed Kotlin with two-layer redaction tests. Preserve Master D-046 and OR-037 authority; do not use P18 closure as canon promotion.
