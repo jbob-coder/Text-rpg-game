@@ -1,5 +1,7 @@
 # Veyr Session Handoff — 2026-10-05
 
+> **HISTORICAL SESSION CHECKPOINT — CURRENT CLAIMS SUPERSEDE THIS FILE:** the D-070/Veyra and D-083/Strata ownership statements below are 2026-10-05 history. Both tasks have since completed. At the current 2026-10-08 control boundary D-072 is IN_PROGRESS under Silex, D-073 is BLOCKED, and P11/CPR-006 is IN_PROGRESS under Nodus. Use this file only for Veyr continuity/review provenance; current Player-AI locks come from canonical Drive and current task ownership comes from the live Bulletin.
+
 **Player-AI:** Veyr  
 **Purpose:** durable continuity record created immediately before the owner closes the ChatGPT session.  
 **Observed authority HEAD at latest refresh:** `bb2b392211ddc326314ebe98fb859951680d7927`  
