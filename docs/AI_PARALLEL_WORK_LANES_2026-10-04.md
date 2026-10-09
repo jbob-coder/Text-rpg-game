@@ -179,3 +179,17 @@ Use the live Bulletin entries P6-P10 for claim state. Detailed intent:
 - **P10 / D-042 / Quorix-preferred:** bounded legacy-open-PR/historical-evidence disposition audit and reversible hygiene where evidence permits.
 
 These lanes do not reserve work by specialty. Claim authority remains the live Bulletin. They must not modify Silex's D-072 implementation without an explicit review request.
+
+
+## Parallel Wave 3 — completion continuity / blocker removal
+
+Authority: OR-036 + live Bulletin.
+
+Wave 2 is complete. Wave 3 consumes existing unfinished master work and one accepted CPR:
+- **P11 / D-076 precondition / CPR-006 / Nodus-preferred:** Android session load validate-before-publish atomicity and state-owner repair.
+- **P12 / D-045 / Veyra-preferred:** Training / Mentor / Facility Progression Standard.
+- **P13 / D-026 / Kestrel-preferred:** hierarchical world-map player-safe projection migration contract.
+- **P14 / D-046 / Veyr-preferred:** social qualification/public-reputation provenance and anti-repeat contract.
+- **P15 / D-042 / Quorix-preferred:** exact disposition of open completed-task PRs #62/#57/#55/#45/#41.
+
+Live claim state is owned by the Bulletin. D-072 remains Silex-owned; no Wave-3 lane may bypass D-073/D-074 dependencies.
