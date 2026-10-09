@@ -199,15 +199,17 @@ Needs:
 
 ### `docs/IMPLEMENTATION_STATUS.md`
 Purpose:
-- exact verified implementation state.
+- preserve the exact verified V6 implementation snapshot and later explicit authority overlays.
 
-Current issue:
-- still frames V6 stabilization as the current objective.
+Current status:
+- V6 stabilization is explicitly labeled historical rather than the live repository objective;
+- the file points current work to the master program, live Bulletin and Master Task Register;
+- the 2026-10-08 overlay records D-069..D-071 complete, D-072 IN_PROGRESS under Silex and D-073+ gated.
 
-Required update:
-- preserve V6 evidence as historical;
-- point current objective to documentation-first master program;
-- list current Android/pixel/map branch stack as separate development evidence.
+Maintenance:
+- keep revision-bound V6 evidence immutable;
+- add only source-backed authority overlays when later implementation state materially changes;
+- never use the historical V6 `CURRENT_OBJECTIVE` / `NEXT_ACTION` fields as live task ownership.
 
 ### `docs/V6_STABILIZATION_HANDOFF.md`
 Purpose:
