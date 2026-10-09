@@ -80,3 +80,24 @@ Executed results:
 AXIOM also repaired the canonical Drive continuity mismatch for `PLAYER_QUORIX`: the existing active session remains unchanged, while `current_task` and `claim_reference` now reflect the live P15 Bulletin claim. This does not alter GitHub task authority; it only makes Drive continuity consistent with it.
 
 No runtime source, branch history, accepted D-067/D-068 implementation, CI result, APK, emulator or device evidence was changed by this follow-up.
+
+## Final verification — five-PR disposition gate (2026-10-08 AST)
+
+**Authoritative checkpoint:** `7a962d8b34d59239015be1ac1458bd398d624d1f` on `docs/master-game-development-program`. Read-only fresh GitHub PR metadata and issue comments verified every disposition; this evidence does not modify Python, Kotlin, Compose, content, the save schema, any app branch, or a D-072 task.
+
+| Historical PR | Final externally verified state | Provenance comment verified in the PR conversation | Disposition / remaining action |
+| --- | --- | --- | --- |
+| [#41](https://github.com/jbob-coder/Text-rpg-game/pull/41), `20caf9df734f5a64f5ad8aced868e2c6e17cf8e4` | **CLOSED / unmerged** | `6071697251`, AXIOM | Obsolete early D-067 bridge/runner iteration. No merge, no deletion. |
+| [#45](https://github.com/jbob-coder/Text-rpg-game/pull/45), `72c0bd69d84f0fe138f89cd7f0568bb8739ecabc` | **CLOSED / unmerged** | `6071665228`, Quorix | Superseded D-067 exact-head proof iteration. No merge, no deletion. |
+| [#57](https://github.com/jbob-coder/Text-rpg-game/pull/57), `fc733f175c3af745e0ffcc51d4953afd71037f1f` | **CLOSED / unmerged** | `6071698193`, AXIOM | Obsolete D-067 green-checkpoint iteration. No merge, no deletion. |
+| [#62](https://github.com/jbob-coder/Text-rpg-game/pull/62), `ab83f80b8047724a17fa141bc15be51585d01da6` | **CLOSED / unmerged** | `6071699119`, AXIOM | Historical D-067 root-cause repair; preserve workflow #345 and accepted proof lineage. No merge, no deletion. |
+| [#55](https://github.com/jbob-coder/Text-rpg-game/pull/55), `2bb38f556d2870202e3a66109fec237b3bb98b28` | **OPEN / unmerged** | none required for hold | **HOLD / DO NOT MERGE OR CLOSE** pending future authorized D-077/D-021 activity-specific Compose test port; no current-head execution proof asserted. |
+
+**Accepted D-067 evidence** is `docs/evidence/D067_PHASE1_INVENTORY_EQUIPMENT_PROOF_2026-10-04.md` plus `docs/evidence/CRITICAL_FIX_D067_BRIDGE_RECONCILIATION_2026-10-04.md`. **Accepted D-068 evidence** is `docs/evidence/D068_PHASE1_ACTIVITY_PROOF_2026-10-04.md` (merged PR #59); those authorities are not reopened by historical cleanup.
+
+**P15 bounded acceptance:** all five PRs individually classified and current GitHub state verified; four historical, superseded PRs now closed with source-attributed preservation comments; the one not safely closeable was kept open and has a named future test consumer. This meets the audit/disposition acceptance of P15 without inventing closure of #55 or completion of parent D-042. GitHub task closure/score/handoff are **separate steps**, not implied merely by this evidence entry. No code/test/build/emulator/device execution took place in this pass.
+
+**Drive continuity:** AXIOM subsequently synchronized canonical `PLAYER_QUORIX/STATUS.json` to the existing Bulletin P15 claim; current task and claim reference now match, active session unchanged. The earlier connector failures are historical troubleshooting events and not a remaining Drive mismatch.
+
+**Next player shortcut:** preserve #55's original `android/app/src/androidTest/java/com/thegame/rpg/ui/Phase1ActivityChoiceTest.kt` blob `45c2ea4aa65c259614e551010e1b290e12cb8dbe`; require current DTO/Compose compilation and emulator execution before citing its click-to-choice-ID regression as covered, and close the old PR only after an explicit owner-reviewed replacement or supersession. P15 does not own that future consumer test; D-077 remains gated by integrated Phase-1 prerequisites.
+
