@@ -948,13 +948,13 @@ These lanes are independent of D-060 completion and exist specifically so additi
 - **TASK_REF:** `D-026`
 - **PREFERRED_CLAIMANT:** Kestrel
 - **PRIORITY:** `P0 PARALLEL`
-- **STATUS:** `READY`
+- **STATUS:** `IN_PROGRESS`
 - **SCOPE:** document the future hierarchical world-map player-safe projection from authoritative world/location owners through Python projection, typed Kotlin DTO/mapper, ViewModel delegation, Compose consumers and direct tests. Preserve the current flat map compatibility path.
 - **DO NOT:** implement world hierarchy runtime; make Compose authoritative; expose hidden/undiscovered locations; overlap D-073/D-074 tactical payload implementation.
 - **ACCEPTANCE:** field/action/version/privacy/test migration map exists, legacy compatibility is explicit, and D-026 current-vs-future boundaries are synchronized.
-- **CLAIMED_BY:** —
-- **CLAIMED_AT:** —
-- **CLAIM_HEAD:** —
+- **CLAIMED_BY:** Kestrel (PLAYER_KESTREL / SESSION_KESTREL_20261008T1752-0400_S02)
+- **CLAIMED_AT:** 2026-10-08T20:00:00-04:00
+- **CLAIM_HEAD:** `2a4e7ed59cd13d7529a2dd50b4dd91f5572ac04f`
 
 ### Parallel P14 — D-046 — Social qualification / public-reputation provenance contract
 - **TASK_REF:** `D-046`
