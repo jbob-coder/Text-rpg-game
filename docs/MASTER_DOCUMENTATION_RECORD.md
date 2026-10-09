@@ -370,7 +370,7 @@ D-026/D-021 current-source consumer discovery is now complete at field/action, n
 | **V03 — Gate Twelve proof region** | **ESTABLISHED FIRST-PASS CONTRACT** | Implementation/acceptance remains incomplete | `GATE_TWELVE_REGION_MASTER_PLAN.md`, map/animation blueprints, asset status matrix, room composition contract | Parent-world proposal still requires owner canon decision; bounded runtime migration and physical-device acceptance remain future work. |
 | **V04 — World development** | **ESTABLISHED STANDARDS / PARTIAL POPULATION** | World is not populated at final scale | `WORLD_DEVELOPMENT_MASTER_INDEX.md`, geography/politics/settlement/routes/ecology/beast/population/balance/loot/NPC standards | Canon macroregions, sovereign entities, settlements, routes, ecosystems, populations, institutions, and large-scale structured records. |
 | **V05 — Characters / NPC / social / rivals** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / D-032 SOCIAL MIGRATION CHILD COMPLETE** | Current social primitives and Tamsin branch exist; normalized identity/schedule/memory runtime remains partial | NPC/social master, V05 child contracts, Tamsin proof packet, and `SOCIAL_SCHEMA_API_MIGRATION_PACKET.md` | D-062 now fixes the implementation/save/privacy migration path without adding a second social owner. Runtime durable-memory/reactive proof remains D-065; broader character/faction catalogs, final social projection/UI and world-scale population remain open. Persistent-adversary depth remains V09 work. |
-| **V06 — Progression / stats / skills / abilities / passives / classes / ranks** | **LARGE ACTIVE CORPUS / IN_PROGRESS / CLASS + PROFESSION-RANK-STATUS + TRAINING-MENTOR-FACILITY CHILDREN MATERIALIZED / PASSIVE RUNTIME DISPOSITION MATERIALIZED** | Target design substantially exceeds current runtime | `PROGRESSION_MASTER_PLAN.md`, `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`, `EVOLVED_SKILL_REGISTRY.md`, `COMBAT_CLASS_CATALOG.md`, `PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md`, `TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`, `STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`, `docs/systems/status/**` | Status Phase A is complete; Wave 001 has 1,019 structurally audited records; primary-ability detail coverage is 47/47; passive family baseline coverage is 23/23; all 23 conceptual passive owners now have current-runtime/projection dispositions and the 230/230 owner-row milestone has an automated audit. D-045 now has the seven-family combat class catalog, profession/rank/status namespace and P12 training/mentor/facility progression standard, each grounded in the 23 current skills while preserving D-061 schema-v1 boundaries. Still missing: progression Gate Twelve proof packet; progression UX contract; numeric/range fixtures; world/canon promotion; target-schema/API migration and explicit passive-list projection. |
+| **V06 — Progression / stats / skills / abilities / passives / classes / ranks** | **LARGE ACTIVE CORPUS / IN_PROGRESS / CLASS + PROFESSION-RANK-STATUS + TRAINING-MENTOR-FACILITY + GATE-TWELVE-PROOF CHILDREN MATERIALIZED / PASSIVE RUNTIME DISPOSITION MATERIALIZED** | Target design substantially exceeds current runtime | `PROGRESSION_MASTER_PLAN.md`, `PROGRESSION_CLASSES_RANKS_EVOLVED_GAME_DESIGN.md`, `EVOLVED_SKILL_REGISTRY.md`, `COMBAT_CLASS_CATALOG.md`, `PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md`, `TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`, `GATE_TWELVE_PROGRESSION_PROOF_PACKET.md`, `STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`, `docs/systems/status/**` | Status Phase A is complete; Wave 001 has 1,019 structurally audited records; primary-ability detail coverage is 47/47; passive family baseline coverage is 23/23; all 23 conceptual passive owners now have current-runtime/projection dispositions and the 230/230 owner-row milestone has an automated audit. D-045 now also has P16's source-bound Gate Twelve progression proof mapping current D-066/D-068 evidence into the target Ability Specialist/profession/training boundaries without adding runtime state. Still missing: Progression UX Contract; numeric/range fixtures; world/canon promotion; target-schema/API migration and explicit passive-list projection. |
 | **V07 — Items / economy / loot** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | Current flat inventory/equipment exists; full economy is not implemented | Item/economy master plus item catalog, inventory, equipment, quality/rarity/condition, provenance, loot, pricing, vendor/ownership and Phase 1 proof contracts | Large item/material/resource catalogs, final currency/prices, vendor population, loot tables, later migration/verification and final economy UI. |
 | **V08 — Tactical combat** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 10 OF 10 MINIMUM UNITS** | D-069/D-070 foundation and D-071 decision/objective/retreat layer verified; durable aftermath and full encounter integration remain pending | Tactical master, camera/presentation standard, coordinate/occupancy, turn/action budget, movement, LOS/knowledge, cover/terrain, action resolution, injury/aftermath, AI/objective standards | Proposed Gate Twelve encounter packet now exists; remaining work is D-072 aftermath, D-073 content/bridge, D-074 tactical UI, final balance, low-end performance and final encounter acceptance. |
 | **V09 — Persistent adversaries / world memory** | **FIRST-PASS CONTRACT LAYER ESTABLISHED / 8 OF 8 MINIMUM UNITS** | Runtime not implemented; no canon recurring Gate Twelve adversary selected | Dedicated V09 master plus eligibility, encounter-memory/adaptation, lifecycle, hierarchy/succession, territory/routing, player-safe intel and Gate Twelve proof contracts | D-032 adversary schema/API migration packet now exists; remaining work is authored persistent-adversary content, runtime recurrence/adaptation, world/faction integration, typed Android consumption, save-round-trip evidence and low-end profiling. |
@@ -522,10 +522,9 @@ Execution of the final APK reconstruction remains intentionally gated.
    - passive Phase-C family baseline coverage is complete for 23 / 23 families;
    - conceptual passive owner/write-target mapping covers 230 / 230 passive IDs.
 
-   D-045 now has three materialized reconstruction-grade children beyond the skill registry: `docs/systems/COMBAT_CLASS_CATALOG.md`, `docs/systems/PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md`, and `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`. Together they cover all seven target class families, all 23 current-skill dependency rows, namespace separation, and training/mentor/facility capability ownership without expanding the current schema-v1 progression owner.
+   D-045 now has four materialized reconstruction-grade children beyond the skill registry: `docs/systems/COMBAT_CLASS_CATALOG.md`, `docs/systems/PROFESSION_RANK_STATUS_NAMESPACE_STANDARD.md`, `docs/systems/TRAINING_MENTOR_FACILITY_PROGRESSION_STANDARD.md`, and `docs/systems/GATE_TWELVE_PROGRESSION_PROOF_PACKET.md`. Together they cover all seven target class families, all 23 current-skill dependency rows, namespace separation, training/mentor/facility capability ownership, and one source-bound Gate Twelve proof that preserves the current schema-v1 progression owner.
 
    Still missing as reconstruction-grade progression work:
-   - the Gate Twelve Progression Proof Packet beyond the bounded verified D-066 Trace Echo path;
    - the Progression UX Contract;
    - justified parent-system range/test fixtures and numeric envelopes;
    - remaining world/knowledge integration and state-owner/runtime mappings;
@@ -646,7 +645,7 @@ The current strongest order is:
 4. **Continue D-026/D-021 from the narrowed remainder**: member/asset-ID consumer proof, future activity/hierarchical-map/adversary/evolved-status/tactical projection work, final APK destination mapping and later exact-head execution evidence. D-030 actor migration mapping and D-064 typed room projection are already complete; the live `GameSnapshot` inventory is 21 fields.
 5. **Continue D-029 asset provenance/equivalence work** without making owner visual/canon decisions by inference.
 6. **Resolve D-031 Gate Twelve parent-world canon with the owner** before promoting proposal-only higher-world names/relationships.
-7. **Continue D-045 progression children** from the materialized combat class, profession/rank/status and training/mentor/facility standards into the **Gate Twelve Progression Proof Packet**, then the Progression UX Contract.
+7. **Continue D-045 progression children** from the now-materialized Gate Twelve Progression Proof Packet into the **Progression UX Contract**, then justified numeric/range fixtures and later migration/canon work.
 8. **Create D-032 mechanics schema/API migration packets** before broad runtime reconstruction.
 9. **Populate world/character/item/combat/life-loop content only against accepted standards and migration rules.**
 10. **Keep D-033/final APK teardown and reconstruction late-stage and gated.**
@@ -988,6 +987,23 @@ This checkpoint does not complete the full evolved progression corpus, class/pro
 
 
 
+
+## D-045 P16 Gate Twelve progression proof checkpoint — 2026-10-08
+
+Parallel P16 / D-045 materialized `docs/systems/GATE_TWELVE_PROGRESSION_PROOF_PACKET.md` as the fifth reconstruction-grade D-045 progression child.
+
+Verified documentation/source result:
+- current `schema.SKILL_CATALOG` readback contains 23 / 23 registered skills; the bounded proof directly exercises `powers`;
+- all seven target class families remain represented; Ability Specialist is the only target class relationship consumed by this bounded route;
+- current source identities `ABILITY_TRACE_ECHO`, `TECHNIQUE_SIGNAL_PULSE`, `PRACTICE_SIGNAL_PULSE_ONE_HOUR`, `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS`, `TRACE_STABILIZATION_HUB` and `TRACE_CHAMBER` are present;
+- current D-066/D-068 behavior is mapped into TARGET evidence semantics without inferring class, profession, profession grade, rank, mentor/evaluator, training-path or facility-capability runtime state;
+- `CLASS_ABILITY_SPECIALIST` remains TARGET/PROPOSAL and runtime-not-implemented;
+- D-061 save-schema-v1/current-owner boundaries and player-safe visibility constraints remain intact;
+- evidence: `docs/evidence/P16_D045_GATE_TWELVE_PROGRESSION_PROOF_2026-10-08.md`.
+
+No Python/Android/Gradle/CI/emulator/device/APK test execution is claimed by P16. Historical D-066/D-068 test evidence is consumed as prior accepted proof, not re-labeled as current-head execution.
+
+The direct next D-045 child is the **Progression UX Contract**.
 
 ## D-045 P12 training / mentor / facility checkpoint — 2026-10-08
 
