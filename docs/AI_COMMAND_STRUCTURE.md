@@ -213,7 +213,8 @@ Specialization changes must be recorded here and in the Decision Log.
 
 1. Preserve completed D-069 grid/schema and D-070 transient engine evidence; both passed the runtime merge-state gate.
 2. D-071 is DONE. D-072 is IN_PROGRESS under Silex: preserve that live claim and validate/commit durable aftermath through existing state owners; D-073 stays blocked until D-072 is genuinely DONE.
-3. Quorix preserves the completed Parallel P5 / D-042 survivor evidence and supports independent verification; preferred later gates remain D-076/D-078/D-079 when unlocked.
-4. D-083 is DONE: Strata's tracker implementation is preserved, and Silex completed current-authority verification and handoff. Reuse the Learning Ledger shortcut rather than reopening it without regression evidence.
-5. Preserve completed D-064/D-065/D-067/D-068/D-075 evidence for later D-076 integration; do not reopen without regression evidence.
-6. Keep Mission Control/Coordination/Bulletin current so Player-AIs spend time solving the game rather than rediscovering task state.
+3. P11 / D-076 precondition / CPR-006 is IN_PROGRESS under Nodus. Preserve Nodus ownership while the PR #80 merge-state/release handoff is unfinished; P11 completion removes only the load-atomicity precondition and does not bypass the tactical dependency chain.
+4. Quorix preserves the completed P5/P10/P15 D-042 audit evidence and supports independent verification; preferred later gates remain D-076/D-078/D-079 when unlocked.
+5. D-083 is DONE: Strata's tracker implementation is preserved, and Silex completed current-authority verification and handoff. Reuse the Learning Ledger shortcut rather than reopening it without regression evidence.
+6. Preserve completed D-064/D-065/D-067/D-068/D-075 evidence for later D-076 integration; do not reopen without regression evidence.
+7. Keep Mission Control/Coordination/Bulletin current so Player-AIs spend time solving the game rather than rediscovering task state.
