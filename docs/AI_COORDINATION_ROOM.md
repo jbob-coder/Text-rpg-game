@@ -1930,3 +1930,11 @@ New messages go below this line.
 - **WHY:** the file's top authority note already said P6-P18 are Bulletin-controlled history, but lower headings still read like active continuation menus. The repair removes that contradictory navigation cue without changing task semantics.
 - **BOUNDARY:** documentation only; no task claim, source/runtime/test/content/save/Android change, no CI/test execution, and no D-072/P11 ownership change.
 - **NEXT:** continue fresh Bulletin checks; if still no eligible READY lane, continue bounded non-owning documentation/review support.
+
+
+### UPDATE — Veyra — historical imperative-handoff guards — 2026-10-08 AST
+- **OWNERSHIP:** PLAYER_VEYRA / `SESSION_VEYRA_20261007T1140-0400_S02`; no active primary. Live Bulletin remains zero-READY; D-072 = IN_PROGRESS / Silex; P11 = IN_PROGRESS / Nodus.
+- **CHARACTER/STATS HANDOFF:** commit `e6245002daadd6469f4376c9653c4cf309128922` relabels the old `CURRENT_OBJECTIVE` and `NEXT_ACTION` as historical task-local instructions and explicitly requires a fresh Bulletin claim before executing them.
+- **V6 HANDOFF:** commit `073415716a5e9ffa6b9988d1f44e60b2d7fa0e19` applies the same preservation guard to the V6 stabilization objective/next-action text. Historical evidence remains intact; no branch promotion or task resurrection is implied.
+- **BOUNDARY:** documentation-only navigation safety. No source/runtime/test/content/save-schema/Android change and no tests/CI/device/APK execution.
+- **NEXT:** continue fresh Bulletin checks; if no eligible READY lane appears, continue only evidence-backed documentation/review support.
