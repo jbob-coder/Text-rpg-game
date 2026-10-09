@@ -990,6 +990,34 @@ No whole pixel catalog should be removed from the current evidence based only on
 
 **Retention decision:** KEEP used scene/strain-avatar members; RETAIN unused-for-UI portrait effect masters as possible future source art, but label **NO CURRENT PRODUCTION UI CONSUMER FOUND** rather than claiming the portrait feature is integrated. Before any removal, consult non-UI consumers, approved asset provenance/owner, planned portrait surfaces and real build/render test evidence. Do not create private-state-driven effects merely to turn test-only assets into UI assets.
 
+### 30.1D Procedural UI chrome member/consumer matrix — 2026-10-08
+
+**Documentation-only / no task claim.** At inspected authority HEAD `63cf6705888b8da2a8681b0ed9243586b9d3a6f1`, this review compared all 17 `PixelUiChromeCatalog.kt::produced` members with production references across all 29 Kotlin files under `android/app/src/main/java/com/thegame/rpg/ui/`, plus `GameViewModel.kt` and `MainActivity.kt`, and read `PixelUiChromeCatalogTest.kt`. This is source-reference evidence, **not** a compiled/runtime coverage claim, a repo-wide removal decision or completion of D-026/D-021. Historical provenance stays in [UI/FX provenance](../assets/UI_FX_ANIMATION_PROVENANCE_2026-10-03.md), section 2.
+
+| Existing asset ID(s) | Direct current source consumer | Member-level disposition |
+| --- | --- | --- |
+| `UI_PANEL_STORY_FRAME` | `PixelUiChromeCatalog.panel(PixelPanelChrome.STORY)` via `PixelComponents.kt::PixelPanel` default; story panels/avatar variants use that default. | KEEP — live panel path. |
+| `UI_PANEL_CHARACTER_FRAME` | `CharacterSection.kt` passes `PixelPanelChrome.CHARACTER` through `PixelPanel`, `PlayerStatusSummary`, `StatusResourceGrid` and avatar panel paths. | KEEP — live panel path. |
+| `UI_PANEL_STATS_FRAME` | `StatsSection.kt` and `StatusComponents.kt` select `PixelPanelChrome.STATS`; `GameScreen.kt` also calls `PixelUiChromeCatalog.statsFrame` for one direct chrome. | KEEP — live panel path. |
+| `UI_PANEL_INVENTORY_FRAME` | `GameScreen.kt` selects `PixelPanelChrome.INVENTORY` for Loadout/Bag. | KEEP — live panel path. |
+| `UI_PANEL_QUEST_FRAME` | `GameScreen.kt` selects `PixelPanelChrome.QUEST` for quest/category panels. | KEEP — live panel path. |
+| `UI_PANEL_MAP_FRAME` | `GameScreen.kt` selects `PixelPanelChrome.MAP` for the public map panel. | KEEP — live panel path. |
+| `UI_PANEL_SETTINGS_FRAME` | `GameScreen.kt` selects `PixelPanelChrome.SETTINGS` for Settings/Narration/Session/More panels. | KEEP — live panel path. |
+| `UI_PANEL_DEVELOPER_FRAME` | `GameScreen.kt` selects `PixelPanelChrome.DEVELOPER` for the developer section. | KEEP — live, section-gated panel path. |
+| `UI_MODAL_FRAME` | `CharacterSection.kt` selects `PixelPanelChrome.MODAL`; the `PixelPanel` mapper resolves the modal frame. | KEEP — live modal-styled panel path. |
+| `UI_CHOICE_CARD_ENABLED`, `UI_CHOICE_CARD_DISABLED` | `PixelComponents.kt::PixelChoiceCard` uses public `choice.enabled && !busy` to pick one asset before applying `.clickable(enabled = enabled)`. | KEEP — direct public-state conditional consumer. |
+| `UI_CHOICE_CARD_SELECTED` | **No direct production reference found** to `choiceSelected` among audited UI source files; appears in catalog definition/`produced` list. | RETAIN / **DEFINED, NO PRESENT UI CONSUMER VERIFIED**; do not claim a selected-choice visual currently ships. |
+| `UI_BUTTON_PRIMARY` | `GameScreen.kt` and `CharacterSection.kt` apply `buttonPrimary` via `.pixelChrome` / their button components. | KEEP — live button path. |
+| `UI_BUTTON_SECONDARY` | `CharacterSection.kt` supplies `buttonSecondary` to its button chrome parameter. | KEEP — live button path. |
+| `UI_BUTTON_DANGER` | **No direct production reference found** to `buttonDanger` among audited UI source files; appears in catalog definition/`produced` list and `PixelUiChromeCatalogTest.kt` distinction assertion. | RETAIN / **DEFINED, TEST-REFERENCED, NO PRESENT UI CONSUMER VERIFIED**; not evidence of a destructive-action button on screen. |
+| `UI_TAB_ACTIVE`, `UI_TAB_INACTIVE` | `GameScreen.kt` selects `tabActive` or `tabInactive` from the `active` flag in its navigation-tab chrome. | KEEP — live presentation-selection path, not navigation authority. |
+
+**Implementation boundary:** `PixelUiChromeCatalog.panel` maps nine `PixelPanelChrome` variants. `PixelComponents.kt::PixelPanel` feeds that asset into `Modifier.pixelChrome`; the modifier draws hard-edged frames with Compose `drawBehind` and uses no required PNG/9-slice raster export. Screen selection and click/choice legality remain separate from these color/frame definitions. `choiceSelected` and `buttonDanger` being enumerated in `produced` is an asset-existence assertion, not proof of active-screen usage.
+
+**Test-source limits:** `PixelUiChromeCatalogTest.kt` checks 17 unique `UI_` IDs, all nine panel-kind mappings and distinct IDs for enabled/disabled choices, active/inactive tabs and primary/danger buttons. It does not assert any production call to `choiceSelected` or `buttonDanger`; it does not cover rendered contrast, touch targeting, state accessibility, animation or screenshot fidelity. **No Gradle, instrumentation, emulator, device or APK tests were executed in this review.**
+
+**Follow-up:** If a selected-choice or danger-button variant is later required, introduce a deliberate and tested source consumer while keeping choice legality and destructive-action confirmation outside the chrome catalog. Before deleting either unused-for-UI member, check non-UI/transitive consumers, the asset owner/provenance plan and rebuild acceptance evidence. Remaining catalog-member inventory, final APK and accessibility QA are still open.
+
 ### 30.2 Hardcoded/transitional state found during consumer audit
 
 The original audit found scene/location-derived actor presence. **D-064 resolved that item.** Current transitional or presentation-local state includes:
