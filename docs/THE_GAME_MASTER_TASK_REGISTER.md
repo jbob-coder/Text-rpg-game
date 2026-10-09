@@ -1239,7 +1239,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 #### D-055 closure — V10 first-pass breadth floor
 - RESULT: V10 reaches 8 / 8 first-pass canonical units using the activity master plus seven child standards/packets.
 - CURRENT FOUNDATION PRESERVED: simulation train/recover/time/conditions and powers practice/recovery remain implementation anchors.
-- PHASE 1 IMPACT: requirement #8 uses existing TRAIN_POWER_FUNDAMENTALS_TWO_HOURS in TRACE_CHAMBER as the proof candidate; exact-head save/load/Android verification remains pending.
+- PHASE 1 IMPACT: requirement #8 uses existing `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` in `TRACE_CHAMBER`; the bounded exact-head legality/time/resource/progression/save-load/Android proof was subsequently verified by D-068. Broader V10 activity/life-loop expansion remains separate.
 - RUNTIME: no behavior changed in this documentation batch.
 - COMPLETED_AT: 2026-10-04 AST
 
@@ -1247,7 +1247,7 @@ Renumbering note: these continuation tasks were reassigned to D-034–D-043 on 2
 - STATUS: DONE
 - PRIORITY: P0/P1
 - RESULT: V07 reaches 10 / 10 first-pass canonical units using the existing item/economy master plus nine child standards/packets.
-- PHASE 1 IMPACT: requirement #6 has a documented proof path using current inventory/equipment, Maintenance Seal consumption and Dead Relay acquisition; exact-head integration verification remains separate.
+- PHASE 1 IMPACT: requirement #6's documented inventory/equipment path was subsequently verified by D-067 across authoritative mutation, persistence, Android presentation and invalid-equip rollback. Broader V07 economy/loot expansion remains separate.
 - BOUNDARY: currency, vendors, crafting, durability, encumbrance, random loot and large catalogs are not claimed as runtime-complete.
 - RUNTIME: no behavior changed in the V07 documentation batch.
 - COMPLETED_AT: 2026-10-04 AST
