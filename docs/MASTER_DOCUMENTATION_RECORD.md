@@ -974,13 +974,18 @@ Verified:
 
 Evidence:
 - `docs/evidence/D066_PHASE1_PROGRESSION_PROOF_2026-10-04.md`;
-- isolated verification PR #42 at `48ce6223fb84c3d31457c7f1dacaec87ce0d3df2`;
-- Android Pixel Client run #312 / `37250124885`;
-- Android JVM tests, instrumentation compilation, debug APK build/content verification and API-35 connected suite all passed;
-- connected instrumentation: 35 / 35 tests passed;
-- APK SHA-256: `a14ee38462da6a77a159225b71d2506bb0e18a051430b3a5f90e9a291eb81d8d`.
+- isolated verification PR #42 final proof head `c60f2ca1f52caf95ced00272a57b432e7740a866`;
+- Actions PR merge checkout `1bc7939ba6100c99db0ab442fc6939aa9af44ed4`;
+- final Android Pixel Client run **#319 / `37250623837` — SUCCESS**;
+- Python engine: **319 / 319 passed, 0 failures/errors**;
+- Android JVM/build/package: **PASS**;
+- Compose instrumentation compilation: **PASS**;
+- connected API-35 emulator suite: **35 / 35 passed**;
+- APK SHA-256: `e7066e937c01e61d33541822c4532b4ce41c55cc61f8b63a40f5f9c901e7b441`;
+- APK artifact digest: `sha256:397516ebda57978a61fa266d4e76ea135e080585bd1110d0b72cb4eda790bf29`;
+- UI-QA artifact digest: `sha256:a2fb3ca743375e4e60a5f7a48a00430d2cbbfc6a2ee3030130e9f9b6fb6be3f7`.
 
-The workflow's aggregate Python job is not globally green because the unchanged room-projection test imports `pytest` while the job installs no pytest dependency. D-066's targeted progression/persistence/status tests executed successfully and no D-066 Python failure was observed.
+Run #312 / `37250124885` was the earlier partially red verification attempt caused by the frozen base's `pytest` harness mismatch. It is troubleshooting history, not the D-066 acceptance run.
 
 This checkpoint does not complete the full evolved progression corpus, class/profession/rank population, final balance, or final progression UX.
 
