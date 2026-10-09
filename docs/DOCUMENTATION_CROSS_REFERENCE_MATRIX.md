@@ -1356,3 +1356,12 @@ Boundary: conversation only; Bulletin/Master Task Register remain authoritative.
 - **Future target:** separately versioned player-safe hierarchy without replacing legacy flat `map`; world-scale levels explicit, discovered-only/public-place and route provenance preserved. Gate Twelve's region/macrozone/subzone model is design-only and is not a new runtime graph.
 - **Boundaries:** OR-010 static room placement is not geography; OR-015 additive projection versioning; OR-036 Wave-3 documentation-only scope; save schema v1 unchanged. D-073/D-074 combat coordinates and D-072 aftermath unaffected.
 - **Evidence:** `docs/evidence/P13_D026_HIERARCHICAL_WORLD_MAP_PROJECTION_2026-10-08.md` (2 document links + 10 existing source/test paths checked on exact non-truncated tree). Tests, CI, emulator, APK and device execution are **NOT CLAIMED**.
+
+## D-026 / P17 — Persistent adversary intel player-safe projection migration
+
+- **Canonical child:** [P17 adversary-intel migration](android/P17_D026_PERSISTENT_ADVERSARY_INTEL_PROJECTION_MIGRATION_2026-10-08.md); parent `docs/android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md`, Master D-026, OR-037.
+- **V09 design sources:** `docs/systems/PERSISTENT_ADVERSARY_WORLD_MEMORY_MASTER_PLAN.md`, `docs/systems/PERSISTENT_ADVERSARY_SCHEMA_API_MIGRATION_PACKET.md`, `docs/systems/ADVERSARY_PLAYER_SAFE_INTEL_STANDARD.md`; Gate Twelve adversary proof is provisional/not canon/Phase-1-required.
+- **Current producers / absence:** `GameState.npcs`, `social.py` NPC memory/knowledge; no V09 `adversary_intel` in `AndroidGameSession._view_for`, no typed V09 Kotlin `GameSnapshot` or gateway action.
+- **Future consumers:** observer-safe Python allowlist -> optional independently versioned `adversary_intel` -> typed Kotlin mapper -> ViewModel -> Story, journal, known map-marker or contact UI; no raw NPC memory, hidden current location, adaptation, cooldown, private faction or succession leak.
+- **Boundary:** social/world NPC identity and knowledge owners are reused; V09 does not create a second actor registry; OR-015 additive projection version does not upgrade schema-v1 saves; D-049 chooses final screen placement, D-073/D-074 tactical contact identities remain separately governed.
+- **Evidence:** `docs/evidence/P17_D026_ADVERSARY_INTEL_PROJECTION_2026-10-08.md`, 7/7 relative links and 11/11 code/test paths at non-truncated exact HEAD; no Python/Android/CI/emulator/device tests. Master D-026 remains IN_PROGRESS.
