@@ -87,3 +87,51 @@ This D-076 review changes neither Wave-4 task, reserves no claim, and should not
 **Important limits:** GitHub job and workflow conclusions are observed provider evidence, not local test execution by this review; individual logs/counts, screenshots, APK SHA and raw RED pre-fix test failure were **not** inspected. The workflow's successful head does **not** independently prove the PR can merge cleanly against the **latest** authority HEAD. It also does not close P11: the canonical Bulletin and Nodus Drive still report P11 IN_PROGRESS. Do not infer implementation task handoff, acceptance or score from this independent documentation checkpoint.
 
 **Consumer shortcut:** D-076 later should link accepted P11 completion evidence (including the correct merged authority SHA and stable `LOAD_ERROR` RED/GREEN tests), not cite this draft PR as final source of truth. Re-run the live Bulletin/PR/workflow check when P11 changes.
+
+## 9. Exact authored pre-combat replay spine — source-bound extension (2026-10-08 AST)
+
+This section makes the future D-076 **pre-combat** test reproducible without inventing a quest route. The source is `content/vertical_slice_01.json` at blob `3eeeb9d684ef31759eb11aa595e4d111b16c4c82` (`content_id=CONTENT_VERTICAL_SLICE_01`, `canon_status=provisional_canon`) and three existing proof sources: `tests/test_phase1_inventory_equipment_proof.py`, `tests/test_phase1_quest_branch_world_consequence.py` and `tests/test_phase1_activity.py`. A content fixture marked `provisional_canon` is not authorization to introduce separate permanent combat canon.
+
+### A. Reuse the tested solo route; authoring is an explicit chain
+
+| Order | Legal choice ID | Source scene → target scene | Authored high-level effect families |
+| --- | --- | --- | --- |
+| 1 | `TAKE_DEAD_RELAY` | `OPENING_DEPOT_BLACKOUT` → `OPENING_RELAY_CASING` | quest start/objective, inventory, player knowledge, Tamsin story transition |
+| 2 | `USE_MAINTENANCE_SEAL` | `OPENING_RELAY_CASING` → `OPENING_DECISION` | inventory, knowledge, quest objective |
+| 3 | `KEEP_GATE_TWELVE_SECRET` | `OPENING_DECISION` → `OPENING_SOLO_EXIT` | relationship, quest objective, Tamsin story transition |
+| 4 | `LEAVE_DEPOT_ALONE` | `OPENING_SOLO_EXIT` → `OPENING_END` | flag and quest objective |
+| 5 | `CONTINUE_BELOW_GATE_TWELVE` | `OPENING_END` → `POWER_GATE_TWELVE_SIGNAL` | flags and quest start |
+| 6 | `FOLLOW_TRACE_ECHO` | `POWER_GATE_TWELVE_SIGNAL` → `POWER_FIRST_PRACTICE` | ability/technique discovery, knowledge, quest objective |
+| 7 | `PRACTICE_SIGNAL_PULSE_ONE_HOUR` | `POWER_FIRST_PRACTICE` → `POWER_FIRST_LIVE_USE` | technique practice and quest objective |
+| 8 | `USE_SIGNAL_PULSE_ON_RELAY` | `POWER_FIRST_LIVE_USE` → `POWER_TRACE_STRAIN` | technique use, knowledge and quest objective |
+| 9 | `RECOVER_TRACE_RESONANCE_THIRTY_MINUTES` | `POWER_TRACE_STRAIN` → `POWER_FIRST_PRACTICE_RESULT` | power recovery and quest objective |
+| 10 | `BEGIN_TRACE_STABILIZATION_PLAN` | `POWER_FIRST_PRACTICE_RESULT` → `TRACE_STABILIZATION_HUB` | flag and quest start |
+| 11 | `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` | `TRACE_STABILIZATION_HUB` → same scene | `skill_train` |
+
+This is the exact route constant `TRACE_HUB_ROUTE` in `tests/test_phase1_activity.py` plus its tested final activity choice; the latter test proves +120 minutes, -16 stamina, -10 focus and Powers skill 2.0 **relative to its actual hub checkpoint**. Do not infer total route time by summing only the scene-level `time_cost_minutes`: some actions, notably `technique_practice` and `power_recover`, own their own world-minute effects. Assert the resulting authoritative `state.time_minutes`.
+
+### B. Bridge inventory and equipment into the *same* future scenario
+
+The independent inventory proof already establishes a non-invented setup:
+
+1. `create_session` / `open_android_session` on `content/vertical_slice_01.json`.
+2. Equip `ITEM_DEPOT_JACKET` before `TAKE_DEAD_RELAY`; `tests/test_phase1_inventory_equipment_proof.py` proves body slot equipment and a +2 equipment contribution to endurance (observed total 37.0 in that source fixture).
+3. After choice 1, `ITEM_DEAD_RELAY` appears; after choice 2, `ITEM_MAINTENANCE_SEAL` is consumed and the relay visual moves from intact to opened.
+4. Preserve the body-slot equipment, inventory, derived endurance and player-safe view through the same `OPENING_END` and `TRACE_STABILIZATION_HUB` checkpoints, including at least one save/reload boundary.
+5. Exercise `TRAIN_POWER_FUNDAMENTALS_TWO_HOURS` exactly once, verify world time/resources/skill/history and then reload and resume a legal next choice if one is authored and enabled. Do not fabricate an extra “next” action.
+
+The individual source tests separately demonstrate steps 2–3 and the hub training, but **no combined route from equipping the jacket to the final training outcome is asserted by these sources**. A D-076 owner must test the combined scenario before reporting it as a pass.
+
+### C. Cooperative/solo branch is an additional non-equivalence control
+
+`tests/test_phase1_quest_branch_world_consequence.py` separately proves the first two choices followed by `TELL_TAMSIN_GATE_TWELVE` → `ENTER_GATE_TWELVE_WITH_TAMSIN` and compares them with the solo branch `KEEP_GATE_TWELVE_SECRET` → `LEAVE_DEPOT_ALONE`. Both reach `OPENING_END`, but the fingerprint intentionally differs by party, Tamsin knowledge/memory/story state/relationship/goal and later player-safe choices. The cooperative path carries `npc_learn`, `party_add` and later `npc_memory_add` effects.
+
+**Do not** compare cooperative and solo durable snapshots for equality. The correct D-076 invariants are: *same route and seed with/without save boundaries are equivalent*; **different authored choices retain their deliberate durable and player-visible differences**; raw `MEM_TAMSIN_ENTERED_GATE_TWELVE_WITH_JACK` and NPC memory containers stay out of player-safe view. The activity test uses the **solo** branch; cooperative progression to the hub is not established by that test and remains a future source/test check.
+
+### D. Suggested reproducible regression ownership
+
+- **Pre-combat integration owner (future D-076):** create one new test class/function that uses this exact solo choice spine, captures independent `deepcopy(state.snapshot())` / `session.scene_view()` fingerprints at selected save checkpoints, compares continuous execution against replay with reloads, and verifies no history duplication or equipment/quest/progression cross-domain drift. Do not implement under this non-owning review.
+- **Branch privacy counterexample:** reuse `tests/fixtures/d075_dead_relay_branch_diff.json`; do not copy hidden Tamsin memory or raw authoring effects into Android projections.
+- **P11 precondition:** consume only the **accepted, merged** CPR-006 load-atomicity proof, not the current draft PR or an unmerged branch as the accepted live runtime.
+- **Later tactical extension:** only after D-072/D-073/D-074 acceptance should the replay add one real bridge-run encounter and durable aftermath. The exact authored pre-combat route is not itself evidence of tactical combat integration.
+- **Execution evidence:** all statements here are derived from source files and existing test assertions at the cited blobs. No new Python/Android/CI/emulator/physical-device commands were run for this extension.
