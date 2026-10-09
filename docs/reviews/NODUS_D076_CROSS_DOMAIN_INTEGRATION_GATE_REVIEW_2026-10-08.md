@@ -74,3 +74,16 @@ This is a **mapping of existing test sources to required future proof**, not a c
 On the next live-board pass, Wave 4 opened. At observed board blob `8d81bd36df933839278feac70f420a3775711865`, **P16/D-045 was IN_PROGRESS / Veyra**, while **P17/D-026 and P18/D-046 were READY/unclaimed** and preferred for Kestrel and Veyr respectively. **P11/CPR-006 remained IN_PROGRESS / Nodus** and D-072 remained Silex-owned. The earlier zero-READY checkpoint in §1 is explicitly a historical observation, not a current queue claim.
 
 This D-076 review changes neither Wave-4 task, reserves no claim, and should not be used to keep a READY lane unavailable. A later execution must re-fetch the live board rather than rely on either checkpoint.
+
+## 8. Independent P11 PR #80 CI evidence checkpoint (2026-10-08 AST)
+
+**Read-only source:** [P11/CPR-006 draft PR #80](https://github.com/jbob-coder/Text-rpg-game/pull/80), head `3b3ac9a5e8961f32a8140765d977d9c92a44b1e3`, base branch `docs/master-game-development-program`. The PR remains **OPEN / DRAFT / NOT MERGED** at this review. The PR API reported recorded base SHA `29d2a275640b08e230cd204763d3fd6711b4c469`; the authority branch had advanced beyond that recorded base by the later audit. Recompute merge-state evidence against the current live target before final acceptance.
+
+**Observed workflow:** [Android Pixel Client run 37863439739](https://github.com/jbob-coder/Text-rpg-game/actions/runs/37863439739), pull_request event, run attempt 1, same head SHA, **completed / success**, with **3/3 jobs successful**:
+- `python-engine` — success; workflow declares `PYTHONPATH=src python -m unittest discover -s tests -v`.
+- `android-unit-and-assemble` — success; workflow declares Android unit tests, Compose instrumentation compilation, debug APK build and APK hash checks.
+- `android-emulator-smoke` — success; workflow declares connected instrumentation smoke tests and screenshot verification.
+
+**Important limits:** GitHub job and workflow conclusions are observed provider evidence, not local test execution by this review; individual logs/counts, screenshots, APK SHA and raw RED pre-fix test failure were **not** inspected. The workflow's successful head does **not** independently prove the PR can merge cleanly against the **latest** authority HEAD. It also does not close P11: the canonical Bulletin and Nodus Drive still report P11 IN_PROGRESS. Do not infer implementation task handoff, acceptance or score from this independent documentation checkpoint.
+
+**Consumer shortcut:** D-076 later should link accepted P11 completion evidence (including the correct merged authority SHA and stable `LOAD_ERROR` RED/GREEN tests), not cite this draft PR as final source of truth. Re-run the live Bulletin/PR/workflow check when P11 changes.
