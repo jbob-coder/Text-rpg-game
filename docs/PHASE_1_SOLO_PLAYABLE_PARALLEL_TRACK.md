@@ -260,11 +260,11 @@ Requirement 9 (one tactical encounter):
 Requirement 10 (persistent injury/condition):
 - generic injury/aftermath contract: **CONTRACT-READY**;
 - existing player condition primitive: **CURRENT RUNTIME FOUNDATION EXISTS**;
-- one specific Gate Twelve combat injury and recovery path: **PROPOSED IN THE ENCOUNTER PACKET**; runtime/catalog approval remains pending.
+- one specific Gate Twelve combat injury and recovery path: **PROPOSED IN THE ENCOUNTER PACKET**; OR-034 permits bounded `PROVISIONAL_INTEGRATION` use for D-073 after D-072 is DONE, while canon promotion remains a later gate.
 
-What this unlocks:
-- a bounded Phase 1 combat schema/API migration packet can now be written without inventing core spatial/turn/LOS/cover/action rules;
-- a single authored Gate Twelve encounter can now be specified against stable first-pass rules.
+Materialized downstream inputs:
+- `docs/systems/PHASE_1_COMBAT_SCHEMA_API_MIGRATION_PACKET.md` already defines the bounded combat schema/API migration path without inventing new core spatial/turn/LOS/cover/action rules;
+- `docs/systems/GATE_TWELVE_PHASE1_TACTICAL_ENCOUNTER_PACKET.md` already specifies the bounded proposed Gate Twelve encounter against the stable first-pass rules.
 
 What it does not unlock:
 - broad tactical implementation across the full game;
