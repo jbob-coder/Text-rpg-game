@@ -1,5 +1,7 @@
 # THE GAME — Project Status Snapshot — D-081 Baseline
 
+> **HISTORICAL EXACT-REVISION SNAPSHOT:** every count, percentage, task state and “active critical dependency” statement below applies only to source HEAD `37cc88b6d068cdc160ecb5c69fdb9a1b0c1aeb7d` on 2026-10-05. It is immutable evidence, not today's queue. For current ownership/readiness use the live Bulletin; for current semantic/completion reporting regenerate the tracker at the desired revision under `docs/PROJECT_STATUS_TRACKING_STANDARD.md`.
+
 **Source HEAD:** `37cc88b6d068cdc160ecb5c69fdb9a1b0c1aeb7d`  
 **Tree SHA:** `b06d1096dffcca1b29ad48b2c7a69447cb425499`  
 **Tree completeness:** recursive Git tree `truncated=false`  
