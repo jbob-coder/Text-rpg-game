@@ -4,11 +4,19 @@
 
 **Priority repository:** `jbob-coder/Text-rpg-game`.
 
-Repository-wide game development is now documentation-first under [`docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`](docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md). The current objective is to finish the authority/world/visual/system/application contracts before broad implementation expansion or a final APK rebuild. The existing V6 stabilization material remains valid historical engine evidence, but it is not the top-level product objective.
+Repository-wide game development is governed by [`docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`](docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md) and is now in **bounded Phase 1 implementation + exact-head verification**, with reconstruction-grade documentation retained as the guardrail and handoff authority. The existing V6 stabilization material remains valid historical engine evidence, but it is not the top-level product objective or live queue.
 
-Gate Twelve is the first proof region. Its region plan Steps 1–14 are now complete on the program branch; the next P0 work is exact live implementation/asset reconciliation plus reproducible documentation/world/asset inventory before broad runtime migration.
+Gate Twelve is the first proof region. The early audit/inventory transition is historical: D-064 and D-069 through D-071 are complete. At this checkpoint D-072 durable aftermath is **IN_PROGRESS under Silex**, P11/CPR-006 Android session-load atomicity is **IN_PROGRESS under Nodus**, and D-073 plus downstream tactical/integration gates remain dependency-blocked. Never infer current readiness from this README; use the live Bulletin.
 
-Start here for current work:
+Operational fast path for current work:
+1. [AGENTS.md](AGENTS.md)
+2. [AI Task Bulletin Board](docs/AI_TASK_BULLETIN_BOARD.md) — live READY/claim/blocked authority
+3. [AI Coordination Room](docs/AI_COORDINATION_ROOM.md)
+4. [Player-AI Mission Control](docs/PLAYER_AI_MISSION_CONTROL.md)
+5. [Master Task Register](docs/THE_GAME_MASTER_TASK_REGISTER.md) — semantic scope/dependencies/evidence
+6. relevant domain authority and Learning Ledger entry
+
+The broader documentation/reconstruction map begins here:
 
 1. [Master Development & Documentation Program](docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md)
 2. [Master Documentation Record](docs/MASTER_DOCUMENTATION_RECORD.md)
@@ -56,7 +64,7 @@ Current stabilization candidate: `fix/v6-runtime-boundaries`, based on
 `integration/rules-ability-v6-reconcile@7f5f104fb839068bdfaf5cec72f37129ae20d463`.
 The default `main` branch is still a placeholder; select the candidate branch to run this implementation.
 
-> Coding agents and future sessions: start with [`AGENTS.md`](AGENTS.md), then read [`docs/THE_GAME_MASTER_TASK_REGISTER.md`](docs/THE_GAME_MASTER_TASK_REGISTER.md) for the current objective, blockers, task states, and handoff rules.
+> Coding agents and future sessions: start with [`AGENTS.md`](AGENTS.md), then re-fetch the [live Bulletin](docs/AI_TASK_BULLETIN_BOARD.md) for readiness/claims and use [`docs/THE_GAME_MASTER_TASK_REGISTER.md`](docs/THE_GAME_MASTER_TASK_REGISTER.md) for task semantics, dependencies and durable evidence.
 
 ## Rules-engine vertical slice
 
@@ -65,7 +73,7 @@ The rules layer is deliberately separated from presentation. The game can later 
 - `docs/GAME_FOUNDATION.md` — canonical systems direction.
 - `docs/VISUAL_BIBLE.md` — pixel-art and character consistency rules.
 - `docs/REFERENCE_NOTES.md` — abstract lessons from supplied reference material; no copied story content.
-- `docs/IMPLEMENTATION_STATUS.md` — current objective, verified state, completed work, risks, and next actions.
+- `docs/IMPLEMENTATION_STATUS.md` — historical V6 stabilization snapshot with a current-authority warning; do not use its old NEXT_ACTION as the live queue.
 - `docs/V6_STABILIZATION_HANDOFF.md` — executed baseline, repairs, compatibility boundaries, and verification evidence.
 - `docs/THE_GAME_MASTER_TASK_REGISTER.md` — repository-native task queue and continuity index.
 - `src/textrpg/core.py` — deterministic scene/choice rules and persistent state.
