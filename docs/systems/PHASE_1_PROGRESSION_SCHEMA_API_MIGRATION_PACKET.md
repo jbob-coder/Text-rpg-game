@@ -1,6 +1,6 @@
 # THE GAME — Phase 1 Progression Schema & API Migration Packet
 
-Status: **APPROVED MIGRATION DESIGN / D-032 PROGRESSION CHILD / IMPLEMENTATION NOT STARTED**
+Status: **APPROVED MIGRATION DESIGN / D-032 PROGRESSION CHILD / HISTORICAL PRE-D-066 PLAN / D-066 IMPLEMENTED**
 Repository: `jbob-coder/Text-rpg-game`
 Source inspection HEAD: `d6e80edafe71e678fcd15c293b601a6815eaad90`
 Parents:
@@ -10,6 +10,30 @@ Parents:
 - `docs/systems/SAVE_AND_CONTENT_MIGRATION_MASTER_PLAN.md`
 - `docs/systems/STATUS_UI_ABILITIES_AND_PASSIVES_MASTER_PLAN.md`
 - `docs/THE_GAME_MASTER_TASK_REGISTER.md`
+
+## Current implementation overlay — 2026-10-08
+
+This packet was written before D-066 implementation. Preserve the detailed sections below as the migration design and rationale, but do **not** interpret statements such as “D-066 should,” “implementation not started,” or “D-066 may begin” as current task state.
+
+D-066 is now **DONE / VERIFIED BOUNDED PHASE 1 PROOF**:
+- final verification head: `c60f2ca1f52caf95ced00272a57b432e7740a866`;
+- Actions PR merge checkout: `1bc7939ba6100c99db0ab442fc6939aa9af44ed4`;
+- final workflow: Android Pixel Client run **#319 / `37250623837` — SUCCESS**;
+- Python engine: **319 / 319 passed**;
+- Android JVM/build/package: **PASS**;
+- connected API-35 emulator suite: **35 / 35 passed**;
+- APK SHA-256: `e7066e937c01e61d33541822c4532b4ce41c55cc61f8b63a40f5f9c901e7b441`;
+- accepted evidence: `docs/evidence/D066_PHASE1_PROGRESSION_PROOF_2026-10-04.md`.
+
+Implemented bounded migration/result:
+- stable ability ID is included in player-safe Python ability projection;
+- typed Kotlin ability/technique/resource mapping exists for the bounded proof;
+- discovered progression reaches the Stats consumer without UI-owned progression arithmetic;
+- raw authored requirements/discovery requirements/effects remain excluded from the typed Android boundary;
+- the selected Trace Echo / Signal Pulse mastery route persists through save/load and deterministic replay;
+- save schema remains **v1** and no competing top-level progression owner was added.
+
+This does **not** implement the evolved class/profession/rank target model. Those remain separate D-045/migration/canon work. P16 has since materialized the Gate Twelve Progression Proof Packet; the direct documented D-045 follow-on is the **Progression UX Contract**, only when the live Bulletin publishes an eligible lane.
 
 ## 1. Purpose
 
