@@ -714,10 +714,16 @@ It then selects presentation-only assets through:
 - `PixelTraceFxCatalog`;
 - `PixelAssetCatalog`.
 
-Important transitional inference:
-- `PixelStoryActorCatalog` chooses Tamsin/courier placements from `sceneId + locationId`;
-- it does not read raw NPC state;
-- D-030 remains the target replacement for this heuristic through a formal player-safe room/actor projection.
+Historical pre-D-064 inference (superseded):
+- `PixelStoryActorCatalog` previously chose Tamsin/courier presence from `sceneId + locationId`;
+- it did not read raw NPC state;
+- D-064 replaced that presence heuristic with the formal player-safe room/actor projection.
+
+Current D-064 path:
+- Python projects player-safe room actors;
+- Kotlin maps typed `GameRoomActor` records;
+- `SceneIllustration` passes projected room actors into `PixelStoryActorCatalog.placements(roomActors)`;
+- the catalog still owns presentation placement/art selection, but it no longer invents actor presence from scene/location IDs.
 
 Fallback geometry still exists inside `SceneIllustration` for locations without a selected scene master. This is a presentation fallback, not final authored art authority.
 
@@ -900,7 +906,7 @@ This is a file-level consumer map for the current Android pixel-presentation sou
 | `PixelRasterCatalog.kt` | `PixelComponents.kt`, `SceneIllustration.kt` | **KEEP raster binding / provenance-critical** |
 | `PixelSceneCatalog.kt` | `PixelRasterCatalog.kt`, `SceneIllustration.kt` | **KEEP current scene-master lookup / classify each scene asset** |
 | `PixelSceneOverlayCatalog.kt` | `SceneIllustration.kt` | **KEEP state-overlay separation** |
-| `PixelStoryActorCatalog.kt` | `SceneIllustration.kt` | **TRANSITIONAL / REWORK toward D-030 room actor projection** |
+| `PixelStoryActorCatalog.kt` | `SceneIllustration.kt` | **KEEP as D-064 semantic presentation-placement consumer / expand authored coverage as needed** |
 | `PixelTheme.kt` | `MainActivity.kt` | **KEEP / visual tuning allowed** |
 | `PixelTraceFxCatalog.kt` | `SceneIllustration.kt` | **KEEP / selective FX provenance and accessibility review** |
 | `PixelTraceStrainCatalog.kt` | `PixelComponents.kt` | **KEEP condition-driven presentation** |
@@ -985,20 +991,20 @@ No whole pixel catalog should be removed from the current evidence based only on
 
 ### 30.2 Hardcoded/transitional state found during consumer audit
 
-Confirmed transitional or presentation-local state includes:
+The original audit found scene/location-derived actor presence. **D-064 resolved that item.** Current transitional or presentation-local state includes:
 
-1. `PixelStoryActorCatalog` actor presence inferred from `sceneId + locationId`;
-2. `SceneIllustration` location-specific procedural fallback geometry;
-3. `SceneIllustration` special-case `RELAY_WORKBENCH` relay placement;
-4. `GameScreen` local section/settings/selected-map-node state;
-5. `GameViewModel` travel-transition token/from/to presentation state;
-6. Settings narration rate, auto-read and text-reveal controls;
-7. developer cheat-code text input.
+1. `SceneIllustration` location-specific procedural fallback geometry;
+2. `SceneIllustration` special-case `RELAY_WORKBENCH` relay placement;
+3. `GameScreen` local section/settings/selected-map-node state;
+4. `GameViewModel` travel-transition token/from/to presentation state;
+5. Settings narration rate, auto-read and text-reveal controls;
+6. developer cheat-code text input.
 
 Classification:
 
-- items 4–7 are legitimate application/transient state and should remain outside authoritative saves unless a later product requirement says otherwise;
-- items 1–3 are presentation migration debt, not gameplay authority;
+- items 3–6 are legitimate application/transient state and should remain outside authoritative saves unless a later product requirement says otherwise;
+- items 1–2 are presentation migration debt, not gameplay authority;
+- room-actor **presence** is no longer part of this debt because D-064 moved it to the player-safe room projection;
 - none of these findings justify raw-state access in Compose.
 
 ## 31. Updated D-026 audit boundary
@@ -1009,8 +1015,8 @@ Still required before D-026/D-021 can be considered reconstruction-complete:
 
 1. member/asset-ID level zero-consumer matrix;
 2. exact `GameSnapshot` field/action -> test method coverage/gap matrix;
-3. D-030 actor projection implementation migration plan at field/consumer level;
-4. future activity/combat/hierarchical-map/adversary projection records;
+3. broader D-064 room-actor coverage plus remaining D-030 contextual-panel/interaction consumer mapping;
+4. future activity/combat/hierarchical-map/adversary/evolved-status projection records and their implementation acceptance;
 5. final destination APK component migration matrix.
 
 
@@ -1093,10 +1099,10 @@ The exact current `GameSnapshot` field and `GameEngine` action test-source matri
 Remaining D-026/D-021 reconstruction work is reduced to:
 
 1. member/asset-ID level consumer/zero-consumer matrix;
-2. D-030 actor projection implementation migration map;
-3. future projection contracts;
+2. D-064 actor-coverage/contextual-panel follow-through rather than re-implementing room presence projection;
+3. future projection contracts and implementation acceptance;
 4. final destination APK migration mapping;
-5. runtime execution evidence when code changes begin.
+5. runtime execution evidence for future code-changing slices.
 
 ## 34. Wave-2 P8 / D-026 — Tactical projection migration boundary
 
