@@ -370,7 +370,7 @@ Owns:
 - population/NPC distribution;
 - progression/world-level interaction.
 
-Required future children:
+Materialized first-pass children:
 - `WORLD_GEOGRAPHY_STANDARD.md`
 - `WORLD_POLITICAL_ENTITIES.md`
 - `WORLD_SETTLEMENT_CATALOG.md`
@@ -380,7 +380,7 @@ Required future children:
 - `WORLD_POPULATION_AND_CITIZEN_HIERARCHY.md`
 - `WORLD_BALANCE_AND_LEVEL_BANDS.md`
 
-Do not create thousands of fictional records before schemas and Gate Twelve proof are stable.
+These files establish world schemas/contracts; their existence does not mean final geography, political entities, settlements, ecosystems, population, routes, beast distribution or balance content is fully authored/canonized. Do not create thousands of fictional records merely to inflate coverage before bounded evidence and owner/canon decisions support them.
 
 ---
 
