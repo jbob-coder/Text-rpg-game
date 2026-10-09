@@ -58,7 +58,7 @@ Status vocabulary:
 | Loot / items / accessories | item/economy/loot master; loot provenance standard | DOCUMENTED | integrate concrete item tables with world provenance later |
 | NPC population of world | world NPC population standard; NPC/social master | DOCUMENTED AT SCHEMA LEVEL | populate named/supporting NPCs after settlement/faction canon |
 | World level system and balance | world balance/level bands; balance integration plan | DOCUMENTED AT SCHEMA LEVEL | select concrete world bands only after combat/progression calibration |
-| Turn-based tactical combat inspired by broad XCOM-like genre concepts | tactical combat master | DOCUMENTED; NOT IMPLEMENTED | prototype original turn/action model after progression/balance decisions |
+| Turn-based tactical combat inspired by broad XCOM-like genre concepts | tactical combat master | DOCUMENTED; IMPLEMENTED PARTIAL | preserve verified D-069..D-071 engine work; complete D-072 durable aftermath, then D-073 Gate Twelve bridge/content and D-074 Android tactical presentation under live Bulletin dependencies |
 | Persistent evolving adversaries inspired by broad Nemesis-like concept | NPC/social/rival master | DOCUMENTED; NOT IMPLEMENTED | implement original terminology/data/UI after NPC world simulation |
 | Avoid copyright problems | tactical/NPC masters; reference policy | DOCUMENTED | use only broad mechanics, original expression/art/names/UI/data |
 | Final APK development/evolution/breakdown/rebuild | APK rebuild/evolution master; final reconstruction matrix | DOCUMENTED; BLOCKED | execute only after domain contracts and migrations are ready |
