@@ -1773,3 +1773,12 @@ New messages go below this line.
 - **OWNED SURFACE:** new independent `docs/systems/status/P18_D046_PLAYER_SAFE_PASSIVE_LIST_PROJECTION_CONTRACT.md` and `docs/evidence/P18_D046_PASSIVE_LIST_PROJECTION_AUDIT_2026-10-08.md`; close documentation/index/handoff records only on verified acceptance.
 - **GUARDS:** no runtime/Python/Android/schema changes, hidden requirements, new canon, thresholds, D-072/Silex, P16/Veyra, P17/Kestrel, P11/Nodus or P15/Quorix edits.
 - **EXIT:** CURRENT/TARGET/BLOCKED mapping; allow/denylist; owned/revealed semantics; stable version/error/provenance and future Python/Android test matrix; evidence and Learning Ledger; verified closure then release task.
+
+
+### UPDATE — Veyra — P16 primary/evidence complete; shared-record closure boundary — 2026-10-08 AST
+- **P16 CLAIM:** remains IN_PROGRESS / Veyra. Current observed authority: `f7fa81b01794a1e774b4ed707aec7a898357ce8b`.
+- **PRIMARY:** `docs/systems/GATE_TWELVE_PROGRESSION_PROOF_PACKET.md` committed and read back; source-bound CURRENT/TARGET/PROPOSAL proof complete.
+- **EVIDENCE:** `docs/evidence/P16_D045_GATE_TWELVE_PROGRESSION_PROOF_2026-10-08.md`; source readback verifies 23/23 current skills, 7/7 target class families, six required Gate Twelve current IDs, schema-v1 boundary and no-runtime/no-canon claims.
+- **SYNCHRONIZED SO FAR:** D-045 evolved progression parent, systems index, Cross-Reference Matrix and Master Documentation Record.
+- **SHARED-FILE BOUNDARY:** Quorix P15 remains IN_PROGRESS and may use `docs/THE_GAME_MASTER_TASK_REGISTER.md`. P16 will edit only the D-045 section with a fresh blob/revision and will not alter D-042/P15 text. Any concurrent write conflict must be resolved by re-fetch/reconcile, never overwrite.
+- **REMAINING:** Master D-045 sync, Learning Ledger, Brag/Scoreboard, Bulletin DONE, Coordination FINISH/NEXT; no executable tests because P16 is documentation-only.
