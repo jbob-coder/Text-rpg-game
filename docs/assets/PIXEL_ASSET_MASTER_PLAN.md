@@ -2,6 +2,10 @@
 
 Status: documentation-first; no generated image is canon or production-ready merely because it exists.
 
+**Authority boundary:** this plan owns source-native pixel grids, dimensions, anchors, naming, asset lifecycle and production QA. Runtime room/actor/equipment/prop/overlay/FX/panel layering is owned by `PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`; source assets must satisfy that composition contract rather than duplicating scene-state logic here.
+
+**Current player visual reference:** Jack Wilson's approved Character-tab reference is audited at `docs/assets/references/UI_REFERENCE_CHARACTER_APPROVED_V1.md`. It is reference-only, not a runtime sprite; native player masters still require the source-grid reconstruction, layer separation, metadata and QA defined by this plan.
+
 ## 1. Objective
 
 Build a reusable, inspectable pixel-art asset system for the Android narrative RPG. Assets must support the existing authoritative game state rather than becoming a second source of truth.
