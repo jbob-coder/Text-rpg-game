@@ -272,7 +272,7 @@ IDs:
 - `EMERGENCY_LIGHT_OVERLAY`
 - `BLACKOUT_SHADOW_OVERLAY`
 
-These are reusable 128x64 transparent environmental layers.
+These are reusable 128x64 transparent environmental layers. Both are consumed as inputs to `PixelSceneOverlayCatalog.districtPlazaBlackout`, not necessarily drawn separately; `SceneIllustration` renders that composited sprite when the player-visible scene key is `DISTRICT_HUB`. The exact four-ID decal/composite consumer chain and distinct location-vs-scene selectors are documented in [Android Consumer & Projection Map §30.1F](../android/ANDROID_CONSUMER_AND_PROJECTION_MAP.md).
 
 QA:
 
