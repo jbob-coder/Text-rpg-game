@@ -72,7 +72,7 @@ Estas relaciones **no** establecen cuántos años median entre etapas.
 
 ## 5. Índice de volúmenes y desarrollo acotado
 
-- **Volumen I:** antes del cambio, fase simultánea y nacimiento de la crisis (borrador acompañante `D084_HISTORY_VOLUME_01_DRAFT_2026-10-26.md`).
+- **Volumen I (YA EXISTE EN DRIVE):** «THE GAME — Historia novelada — Volumen I — BORRADOR v0.8», manuscrito extenso en continua revisión, no canon final. No crear otro Volumen I paralelo. Véase el [puente narración→juego](D084_DRIVE_TO_GAME_INTEGRATION_BOUNDARY_2026-10-26.md).
 - **Volumen II (pendiente):** estudio humano de cristales, aprendizaje, resistencia y reorganización antes de la guerra. Requiere fuentes concretas para evitar inventar eventos.
 - **Volumen III (pendiente):** desarrollo de la Primera Guerra, bandos y consecuencias. Requiere eventos y participantes comprobados.
 - **Volumen IV (pendiente):** tregua y normalización en la época jugable. Requiere cronología y contexto de sociedades/territorios.
@@ -83,11 +83,15 @@ Estas relaciones **no** establecen cuántos años median entre etapas.
 1. Recuperar del Centro Drive la fuente cronológica original que sustenta el lapso ya decidido; registrar **archivo y evidencia**, no pedir una fecha nueva por defecto.
 2. Reconciliar CX-03 (mundo ficticio frente a Tierra) sin silenciosamente reescribir H-01/H-36.
 3. Examinar cómo integrar, si procede, la prueba de Gate Twelve a la civilización de cristales; preservar save/quest IDs y Trace Echo.
-4. Escribir una versión literaria más profunda tras obtener eventos, nombres, grupos y percepción humana originales, manteniendo el borrador actual no canónico.
+4. Continuar editorialmente el **manuscrito Drive v0.8 ya existente**, cruzándolo con los registros de continuidad y preguntas pendientes. No crear una novela competidora en el repositorio ni promover propuestas a hechos aprobados.
 5. Solo tras claim legítimo y revisión: sincronizar D-084, índice de mundo, Master Documentation Record, Brag/Learning y el Bulletin. Nunca marcar **DONE** sin los entregables y aceptación completos.
+
+## 5A. Nueva evidencia recuperada en Drive (26 de octubre)
+
+El trabajo editorial avanzó fuera del repositorio: ya existe en Drive el manuscrito **Volumen I BORRADOR v0.8**, un **Registro histórico relacional** (v1.6, actualización 2026-10-26), una **Matriz de divulgación**, el **Cuestionario QH** y el **Dossier de la Primera Guerra**. No duplicar sus capítulos ni su estructura de eventos en un archivo nuevo. En especial, el dossier localizó referencias al antiguo `WORLD_CAUSALITY_ATLAS_2670_V1` con guerra 2645–2659, acuerdo en 2660 y escenario 2670: son datos **HISTÓRICOS/DE PROCEDENCIA PENDIENTE**, no fechas aprobadas para la línea H-36. El atlas usa una secuencia previa que puede entrar en conflicto con H-36. El objetivo es rastrear el documento matriz, comparar linaje y conservar divergencias explícitas. Véase el [contrato de integración narrativa al juego](D084_DRIVE_TO_GAME_INTEGRATION_BOUNDARY_2026-10-26.md).
 
 ## 6. Verificación y límites de este lote
 
-**Se leyó:** Bulletin Board, Master Task Register (entrada D-084), `AGENTS.md`, Mission Control, `docs/world/WORLD_CANON_DECISION_QUEUE.md`, `docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md`, Historia original prioritaria y Centro de Historia y Canon (Drive), registry de Player-AIs; `world_vantiel.txt` solo para frontera histórica.
+**Se leyó:** Bulletin Board, Master Task Register (entrada D-084), `AGENTS.md`, Mission Control, `docs/world/WORLD_CANON_DECISION_QUEUE.md`, `docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md`, Historia original prioritaria y Centro de Historia y Canon, el manuscrito existente Volumen I v0.8, Dossier de la Primera Guerra (2026-10-15), Matriz de divulgación del estallido (2026-10-14), Cuestionario maestro de historia y Registro histórico relacional con sincronización del 2026-10-26 (Drive), registry de Player-AIs; `world_vantiel.txt` solo para frontera histórica.
 
 **No ejecutado:** suite Python, Android, CI, emulador ni dispositivo; no hay cambios de runtime. **Sin claim:** las siete entidades canónicas permanecían `INACTIVE` al consultar el registry; ninguna fue activada, prestada ni suplantada. Este lote vive en rama de revisión separada y no cambia la autoridad hasta merge explícito.
