@@ -1,0 +1,316 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-10-26",
+  "state": "DRAFT_REVIEW_NON_CANON_NON_CLAIM",
+  "authority_note": "Creator-authored history decisions H-01..H-36 are source-narrative authority; technical production integration is pending. This graph is a crosswalk, not runtime content.",
+  "source_documents": {
+    "creator_history": "https://docs.google.com/document/d/1FWyk7YzDmkb2DwOdkRAAHl0gNpVCRVPAiFNfEfSia1Q/edit",
+    "relational_index": "https://docs.google.com/document/d/1vrkgISD2qwCzFTs9Pe1alut67Rh6UTa628rr560FXBw/edit",
+    "war_dossier": "https://docs.google.com/document/d/1WXLD2op8PjH8p-AQcPnL0L_zHlrggFZJW1hFREqenfc/edit",
+    "historical_questionnaire": "https://docs.google.com/document/d/1Iu7RWHN7O19GMOzpSPhC7jRR_HXtclGfnxtDG9vO3lE/edit",
+    "technical_queue": "docs/world/WORLD_CANON_DECISION_QUEUE.md"
+  },
+  "vocabulary": {
+    "creator_decision": "Explicit user-approved narrative fact recorded by source; not yet evidence of technical integration",
+    "open": "Unresolved ordering/identity/details; do not convert into edges",
+    "provisional": "Editorial/scope-only possibility; not production or story canon",
+    "technical": "Existing implementation, possibly provisional canon"
+  },
+  "concurrency_groups": [
+    {
+      "id": "T0_H36",
+      "meaning": "historical-same-outbreak; neither exact-second simultaneity nor uniform public perception",
+      "members": [
+        "PORTAL_OPENINGS",
+        "SPATIAL_RUPTURES",
+        "INVADERS_ARRIVAL",
+        "BEASTS_ARRIVAL",
+        "SYSTEM_MANIFESTATION"
+      ],
+      "evidence": [
+        "H-32",
+        "H-33",
+        "H-34",
+        "H-35",
+        "H-36"
+      ],
+      "status": "creator_decision"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "EARLIER_INVADER_CELESTIAL_CONFLICT",
+      "kind": "background",
+      "status": "creator_decision",
+      "evidence": [
+        "H-02"
+      ],
+      "public_knowledge": "unknown"
+    },
+    {
+      "id": "PORTAL_OPENINGS",
+      "kind": "historical_event",
+      "status": "creator_decision",
+      "evidence": [
+        "H-08",
+        "H-32",
+        "H-36"
+      ]
+    },
+    {
+      "id": "SPATIAL_RUPTURES",
+      "kind": "historical_event",
+      "status": "creator_decision",
+      "evidence": [
+        "H-08",
+        "H-36"
+      ]
+    },
+    {
+      "id": "INVADERS_ARRIVAL",
+      "kind": "historical_event",
+      "status": "creator_decision",
+      "evidence": [
+        "H-01",
+        "H-34",
+        "H-35",
+        "H-36"
+      ]
+    },
+    {
+      "id": "BEASTS_ARRIVAL",
+      "kind": "historical_event",
+      "status": "creator_decision",
+      "evidence": [
+        "H-09",
+        "H-16",
+        "H-36"
+      ]
+    },
+    {
+      "id": "BEAST_CRYSTALS_PREEXIST",
+      "kind": "property",
+      "status": "creator_decision",
+      "evidence": [
+        "H-16"
+      ]
+    },
+    {
+      "id": "SYSTEM_MANIFESTATION",
+      "kind": "historical_event",
+      "status": "creator_decision",
+      "evidence": [
+        "H-03",
+        "H-04",
+        "H-32",
+        "H-33",
+        "H-36"
+      ]
+    },
+    {
+      "id": "CELESTIAL_TABLET",
+      "kind": "object_secret",
+      "status": "creator_decision",
+      "evidence": [
+        "H-04"
+      ],
+      "public_knowledge": "invasores_no_conocen"
+    },
+    {
+      "id": "CRYSTAL_DISCOVERY_AND_USE",
+      "kind": "history_phase",
+      "status": "creator_decision",
+      "evidence": [
+        "H-11",
+        "H-19",
+        "H-20"
+      ]
+    },
+    {
+      "id": "BEAST_EVOLUTION",
+      "kind": "conditional_capability",
+      "status": "creator_decision",
+      "evidence": [
+        "H-10",
+        "H-17",
+        "H-18"
+      ]
+    },
+    {
+      "id": "FIRST_TERRESTRIAL_WAR",
+      "kind": "historical_event",
+      "status": "creator_decision",
+      "evidence": [
+        "H-12"
+      ]
+    },
+    {
+      "id": "TERRITORIAL_TRUCE",
+      "kind": "historical_event",
+      "status": "creator_decision",
+      "evidence": [
+        "H-13"
+      ]
+    },
+    {
+      "id": "POST_TRUCE_DAILY_LIFE",
+      "kind": "editorial_scope",
+      "status": "provisional",
+      "evidence": [
+        "H-28",
+        "H-29",
+        "H-30"
+      ],
+      "details": "no confirmed institutions, dates, laws or settlements"
+    }
+  ],
+  "edges": [
+    {
+      "from": "EARLIER_INVADER_CELESTIAL_CONFLICT",
+      "type": "precedes",
+      "to": "INVADERS_ARRIVAL",
+      "evidence": [
+        "H-02"
+      ],
+      "status": "creator_decision",
+      "note": "Prior offstage confrontation; chronology otherwise undefined"
+    },
+    {
+      "from": "PORTAL_OPENINGS",
+      "type": "causes",
+      "to": "SPATIAL_RUPTURES",
+      "evidence": [
+        "H-08"
+      ],
+      "status": "creator_decision",
+      "note": "No mechanism detail or duration asserted"
+    },
+    {
+      "from": "SPATIAL_RUPTURES",
+      "type": "enables_arrival",
+      "to": "BEASTS_ARRIVAL",
+      "evidence": [
+        "H-09",
+        "H-36"
+      ],
+      "status": "creator_decision"
+    },
+    {
+      "from": "SPATIAL_RUPTURES",
+      "type": "exploited_by",
+      "to": "INVADERS_ARRIVAL",
+      "evidence": [
+        "H-15"
+      ],
+      "status": "creator_decision",
+      "note": "Do not infer total control or exclusive creation purpose"
+    },
+    {
+      "from": "BEAST_CRYSTALS_PREEXIST",
+      "type": "precedes",
+      "to": "BEASTS_ARRIVAL",
+      "evidence": [
+        "H-16"
+      ],
+      "status": "creator_decision",
+      "note": "Pre-existing inside beast bodies, not necessarily created by Earth portals"
+    },
+    {
+      "from": "SYSTEM_MANIFESTATION",
+      "type": "precedes",
+      "to": "FIRST_TERRESTRIAL_WAR",
+      "evidence": [
+        "H-12"
+      ],
+      "status": "creator_decision"
+    },
+    {
+      "from": "FIRST_TERRESTRIAL_WAR",
+      "type": "precedes",
+      "to": "TERRITORIAL_TRUCE",
+      "evidence": [
+        "H-13"
+      ],
+      "status": "creator_decision",
+      "note": "Tregua is not peace or proven victory"
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "U01",
+      "question": "Does the 8-Oct original fictional-world direction encompass literal Earth, or is there a retcon/project-boundary conflict?",
+      "sources": [
+        "owner priority section in Bulletin (2026-10-08)",
+        "H-01",
+        "H-28",
+        "H-36"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "U02",
+      "question": "What event anchors AC (Antes del Crystal), its exact relation to T0, and the verified post-event nomenclature?",
+      "sources": [
+        "D-084",
+        "G-01"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "U03",
+      "question": "When did humans discover/forge crystal arms relative to beginning of the First War?",
+      "sources": [
+        "H-11",
+        "H-12",
+        "DOSS-WAR-001 R-WAR-01"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "U04",
+      "question": "What armies negotiated the territorial truce, and when/where?",
+      "sources": [
+        "H-13",
+        "QH-16",
+        "QH-20"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "U05",
+      "question": "Does older WORLD_CAUSALITY_ATLAS_2670_V1.json belong to the same continuity?",
+      "sources": [
+        "DOSS-WAR-001 R-WAR-02",
+        "QH-25"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "U06",
+      "question": "Are Jack Wilson/Steal and Gate Twelve/Trace Echo ever an approved migration of one game continuity?",
+      "sources": [
+        "D-084",
+        "content/vertical_slice_01.json"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "U07",
+      "question": "What do inhabitants/player know of System origin and tablet; what remains secret?",
+      "sources": [
+        "H-04",
+        "H-30",
+        "proposed communication matrix"
+      ],
+      "status": "open"
+    }
+  ],
+  "prohibited_assumptions": [
+    "Order inside T0 concurrency group must not be imposed by list order",
+    "INVADERS_ARRIVAL and BEASTS_ARRIVAL are distinct categories",
+    "No edges from crystal weapon use to first terrestrial war until dated",
+    "No post-truce world date, treaty signatory or battle locations may be invented",
+    "No editorial sample scenes may be turned into stable gameplay entities",
+    "Narrative decisions do not change Python runtime, Android projection, or saved state"
+  ]
+}
