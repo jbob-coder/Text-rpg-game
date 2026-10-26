@@ -4,6 +4,10 @@ Parent: [World master index](WORLD_DEVELOPMENT_MASTER_INDEX.md).
 Scope: baseline program branch at `4d596bcd27b6e2f8ef9ce3a93b9dab22f5f4812e`.
 These are repository decisions and proposals, not imported Godot/MVS lore.
 
+## D-084 post-directive narrative-source review (non-canon, 2026-10-26)
+
+Before promoting WD-001/WD-002 or importing any story material, consult the [source/provenance and conflict crosswalk](D084_NARRATIVE_CANON_RECONCILIATION_2026-10-26.md) and its [partial-order causality graph](D084_CAUSALITY_GRAPH_2026-10-26.json). These are **review artifacts**, not new world canon or a D-084 task claim. They reconcile the later Drive creator decisions H-01–H-36 and manuscript v0.8 against the older world/AC directives. In particular, H-36 establishes the shared initial crisis, while world identity (fictional-world vs literal Earth), AC calendar mapping, Jack/Steal vs Gate Twelve/Trace Echo and older 2670 chronology remain **unapproved for runtime migration**. Preserve this queue's stable WD decision IDs and the current content/saves.
+
 ## 1. Established versus provisional
 
 The playable content identifies itself as `provisional_canon`. Existing named places and relationships are confirmed implementation facts at this baseline; that does not freeze every story detail as final world canon.
