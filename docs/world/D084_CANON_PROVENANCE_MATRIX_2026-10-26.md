@@ -38,12 +38,12 @@ Este lote remedia un desfase de fuentes: el Bulletin y el Master Task Register d
 
 - **T-antes:** enfrentamientos históricos entre invasores y celestiales, fuera del foco narrativo (H-02).
 - **T-ruptura:** `{primeras aperturas, rupturas, invasores, bestias, manifestación del Sistema}` en una **fase simultánea** (H-32–H-36). Los núcleos de las bestias ya existían antes de su llegada (H-16).
-- **T-adaptación:** los humanos aprenden a emplear cristales y el Sistema, en una secuencia interna todavía no cerrada (H-05/H-07/H-11).
-- **T-guerra:** Primera Guerra **posterior** a la concesión del Sistema (H-12). Su relación puntual con cada descubrimiento no consta.
+- **T-guerra:** Primera Guerra **posterior** a la concesión del Sistema (H-12). Su relación con cada descubrimiento no consta.
 - **T-tregua:** suspensión territorial de la Primera Guerra (H-13).
 - **T-juego:** marco inicial jugable, **sin fecha/lapso verificado** (H-31).
+- **T-aprendizaje [SIN POSICIÓN FIJA RESPECTO A T-guerra]:** los humanos aprenden a utilizar cristales y habilidades (H-05/H-07/H-11), pero **no está confirmado si las primeras armas de cristal aparecieron antes, durante o después del inicio de la guerra** (Dossier de la Primera Guerra, CAN-WAR-009 / R-WAR-01).
 
-Estas relaciones **no** establecen cuántos años median entre etapas.
+Estas relaciones **no** establecen años ni un orden total de descubrimientos. La posición editorial de T-aprendizaje en esta lista no indica precedencia temporal.
 
 ## 3. Matriz de contradicciones y cortafuegos
 
@@ -73,7 +73,7 @@ Estas relaciones **no** establecen cuántos años median entre etapas.
 ## 5. Índice de volúmenes y desarrollo acotado
 
 - **Volumen I (YA EXISTE EN DRIVE):** «THE GAME — Historia novelada — Volumen I — BORRADOR v0.8», manuscrito extenso en continua revisión, no canon final. No crear otro Volumen I paralelo. Véase el [puente narración→juego](D084_DRIVE_TO_GAME_INTEGRATION_BOUNDARY_2026-10-26.md).
-- **Volumen II (pendiente):** estudio humano de cristales, aprendizaje, resistencia y reorganización antes de la guerra. Requiere fuentes concretas para evitar inventar eventos.
+- **Volumen II (pendiente):** estudio humano de cristales, aprendizaje, resistencia y reorganización alrededor de la crisis y la guerra, **sin fijar anticipadamente cuándo ocurrió la primera forja**. Requiere fuentes concretas para evitar inventar eventos.
 - **Volumen III (pendiente):** desarrollo de la Primera Guerra, bandos y consecuencias. Requiere eventos y participantes comprobados.
 - **Volumen IV (pendiente):** tregua y normalización en la época jugable. Requiere cronología y contexto de sociedades/territorios.
 - **Anexos pendientes:** arcos de facciones/personajes, reglas de conocimiento de NPCs, atlas, cronología absoluta y tabla de decisiones.
