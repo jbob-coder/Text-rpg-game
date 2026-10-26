@@ -67,6 +67,17 @@
       ]
     },
     {
+      "id": "INVADER_FORCES",
+      "kind": "actor_category",
+      "status": "creator_decision",
+      "evidence": [
+        "H-01",
+        "H-15",
+        "H-35"
+      ],
+      "note": "Intelligent invaders are an actor category; the arrival is a separate event"
+    },
+    {
       "id": "INVADERS_ARRIVAL",
       "kind": "historical_event",
       "status": "creator_decision",
@@ -132,8 +143,7 @@
       "status": "creator_decision",
       "evidence": [
         "H-10",
-        "H-17",
-        "H-18"
+        "H-17"
       ]
     },
     {
@@ -198,7 +208,7 @@
     {
       "from": "SPATIAL_RUPTURES",
       "type": "exploited_by",
-      "to": "INVADERS_ARRIVAL",
+      "to": "INVADER_FORCES",
       "evidence": [
         "H-15"
       ],
