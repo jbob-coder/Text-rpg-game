@@ -94,3 +94,14 @@ Ejemplo de **secreto narrativo confirmado**: la tableta vinculada al Sistema exi
 **Privacidad de referencias:** se quitaron los enlaces directos a IDs de archivos privados de Google Drive de la versión actual de este documento. Localizar las fuentes mediante sus títulos verificables y el Centro de Historia y Canon en el Drive conectado. Esta corrección de contenido **no borra los commits anteriores del historial Git**; cualquier purga histórica requeriría una decisión distinta de reescritura de historial y su revisión de impacto. No copiar IDs de Drive a nuevos expedientes públicos.
 
 **Estado:** propuesta no propietaria; ninguna activación de Player-AI, modificación de Bulletin o promoción de canon; sin pruebas Python/Android/device en esta intervención.
+
+## 8. NOV-XII collision comparison — 2026-10-27, register readback verified
+
+The Google Drive **Registro histórico relacional** now has a live, revision-guarded comparison record **CMP-XII-20261027**, verified by native document readback (not only by intended edit). Two different drafts share the provisional bare token `NOV-XII`:
+
+- **NOV-XII-MANUSCRITO-v0.9** = «El oficio de volver a vivir», 16 narrative paragraphs embedded in the existing Volumen I, before the XIII archival note. Covers return to home, legitimacy and ability, education, civic memory, reconstruction.
+- **NOV-XII-DR06-BORRADOR-v0.1** = «Lo que debía seguir funcionando», 22 narrative paragraphs in a distinct Drive document. Has a composed **DR-06** repair/inventory scene and more explicit logistical dependencies (source → transit → reception → use, material reserves, repeated deliveries, verification of repairs).
+
+**Result:** comparison confirmed **distinct texts**, shared subject matter and complementary emphasis; do not silently overwrite, concatenate, import DR-06 into playable content, or allocate the same unqualified identifier to both. Retain the manuscript v0.9 as the current **literary** chapter XII and the other piece as a **separate proposal** until editor/owner chooses whether a limited logistics passage warrants revision. The register's labeled comparison is an **editorial recommendation only**, not approval, canon migration or task DONE. H-01–H-36, AC calendar, character continuity and runtime remain unchanged.
+
+**Privacy:** locate the comparison under its exact ID in the connected Drive register; no private Drive file URLs/IDs are copied into this public repository proposal. This note does not correct earlier Git history that contained such links.
