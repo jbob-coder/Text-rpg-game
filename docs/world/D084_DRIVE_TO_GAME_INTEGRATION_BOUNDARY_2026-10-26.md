@@ -128,6 +128,25 @@ Estas pruebas son **criterios propuestos**, no archivos test añadidos ni report
 4. **Producto:** una vez validados conceptos narrativos, preparar un contrato para conectar historias al slice jugable sin perder saves/quests ni filtrar secretos; no intervenir en D-072/Silex ni en claims inactivos.
 5. **Gobernanza:** D-084 seguía READY/UNCLAIMED en el Bulletin inspeccionado. La contribución es **no propietaria**; requiere claimant legítimo, revisión, sincronización del Master Register/Bulletin/índices y aprobación de canon antes de promoverse a terminado.
 
+## 6A. Manifiesto revisable y control local ejecutable (2026-10-27)
+
+Además de las propuestas INT-01..INT-14, se creó una **barrera de revisión automatizable**, separada del motor y los datos que se distribuyen con Android:
+
+- [`D084_EVENT_KNOWLEDGE_REVIEW_MANIFEST_2026-10-27.json`](D084_EVENT_KNOWLEDGE_REVIEW_MANIFEST_2026-10-27.json): **contrato editorial `PROPOSED_NOT_INTEGRATED`**. Incluye los cinco elementos concurrentes de H-36, Primera Guerra y tregua solo como relaciones temporales parciales H-12/H-13, prohibición de fechas no adoptadas, excepción de forja con orden abierto, definición corregida de AC, procedencia del atlas anterior, estado v0.9.1/DR-06, secreto de tableta en contexto autoral, separación de conocimiento y salvaguarda de identificadores del slice.
+- [`tools/validate_d084_review_manifest.py`](../../tools/validate_d084_review_manifest.py): lector JSON estricto que rechaza claves duplicadas y valida restricciones, **sin importar módulos `textrpg` ni escribir estado o contenido jugable**.
+- [`tests/test_d084_review_manifest.py`](../../tests/test_d084_review_manifest.py): 16 regresiones para las reglas de cronología, ambigüedad editorial, secretos, separación NPC/jugador, ID de Tamsin y rechazo de promoción.
+
+Uso al revisar esta rama, desde la raíz del repositorio:
+
+```bash
+python tools/validate_d084_review_manifest.py
+python -m unittest discover -s tests -p 'test_d084_review_manifest.py' -v
+```
+
+**Evidencia local acotada del 2026-10-27:** 16/16 pruebas `unittest` **PASS** y salida `D-084 REVIEW PASS` del validador, realizados sobre **copia aislada** de estos archivos y un fixture mínimo de `content/vertical_slice_01.json` que contiene sus campos de identidad, canon y NPC requeridos. **No se ejecutó aún la suite completa en el checkout de GitHub ni la construcción Android; esto no es aceptación de runtime ni de la migración.** La revisión de GitHub debe confirmar que el fixture mínimo coincide con el contenido real y ejecutar el validador de nuevo después de la integración.
+
+**Importante:** `REVIEW_INITIAL_BURST`, `FIRST_WAR`, `TERRITORIAL_TRUCE` y `SYSTEM_TABLET_EXISTS` son **identificadores de esta herramienta de revisión**; no son IDs de eventos, quests o NPCs ya inscritos en el motor. El manifiesto no debe importarse desde `content/` ni empacarse como lore inicial del usuario. Su propósito es detectar una adopción accidental antes de programarla, no habilitarla.
+
 ## 7. Evidencia de revisión
 
 **Leídos:** `AGENTS.md`, `docs/AI_TASK_BULLETIN_BOARD.md`, D-084 del master register, `docs/world/WORLD_CANON_DECISION_QUEUE.md`, `docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md`, `content/vertical_slice_01.json`, `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`, fuentes CAN/CEN/REL/NOV/WAR/DISC/QH/♾ de Drive (incluido NOV **v0.9.1** y cotejo actualizado de NOV-XII), y en biblioteca personal, los **dos archivos originales** `WORLD_CAUSALITY_ATLAS_2670_V1` junto a una antigua planificación Godot con interpretación errónea de AC. No se copiaron fuentes de la biblioteca al repositorio público.
