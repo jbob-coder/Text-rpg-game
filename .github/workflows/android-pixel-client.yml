@@ -20,6 +20,10 @@ on:
       - "src/**"
       - "tests/**"
       - "content/**"
+      # D-084 editorial-only manifest and checker also need the existing PR gate.
+      # Do not open a competing CI workflow or broaden to all documentation.
+      - "docs/world/D084_EVENT_KNOWLEDGE_REVIEW_MANIFEST_2026-10-27.json"
+      - "tools/validate_d084_review_manifest.py"
       - ".github/workflows/android-pixel-client.yml"
   workflow_dispatch:
 
