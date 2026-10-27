@@ -147,6 +147,14 @@ python -m unittest discover -s tests -p 'test_d084_review_manifest.py' -v
 
 **Importante:** `REVIEW_INITIAL_BURST`, `FIRST_WAR`, `TERRITORIAL_TRUCE` y `SYSTEM_TABLET_EXISTS` son **identificadores de esta herramienta de revisión**; no son IDs de eventos, quests o NPCs ya inscritos en el motor. El manifiesto no debe importarse desde `content/` ni empacarse como lore inicial del usuario. Su propósito es detectar una adopción accidental antes de programarla, no habilitarla.
 
+## 6B. Criterios de cierre y revisión negativa (2026-10-27)
+
+Nueva revisión contrastada con **Historia prioritaria H-01–H-36**, **Matriz de divulgación M-01–M-08** y **CAP-15 propuesta v0.1** actuales en Drive: [`D084_FINAL_REVIEW_BOUNDARIES_2026-10-27.md`](D084_FINAL_REVIEW_BOUNDARIES_2026-10-27.md).
+
+Este documento establece los límites concretos de conocimiento de NPC/invasores/jugador, registro por fuente/adquisición, casos de fuga y decisiones que bloquean la adopción narrativa a runtime. `tools/validate_d084_review_manifest.py` ahora comprueba también **campos desconocidos del manifiesto**, procedencia editorial y entradas de estado malformadas; un campo extra con información secreta debe producir error, no pasar como dato sin revisión.
+
+La suite **contiene 26 pruebas definidas** tras añadir diez regresiones nuevas. La evidencia histórica de **16/16 PASS** corresponde a la versión previa y NO prueba las diez añadidas. La ejecución CI o local de esta versión debe verificarse de forma independiente. La aceptación de D-084 completo sigue bloqueada en decisiones del creador y claimant legítimo; no cambiar task status a DONE a partir de este lote.
+
 ## 7. Evidencia de revisión
 
 **Leídos:** `AGENTS.md`, `docs/AI_TASK_BULLETIN_BOARD.md`, D-084 del master register, `docs/world/WORLD_CANON_DECISION_QUEUE.md`, `docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md`, `content/vertical_slice_01.json`, `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`, fuentes CAN/CEN/REL/NOV/WAR/DISC/QH/♾ de Drive (incluido NOV **v0.9.1** y cotejo actualizado de NOV-XII), y en biblioteca personal, los **dos archivos originales** `WORLD_CAUSALITY_ATLAS_2670_V1` junto a una antigua planificación Godot con interpretación errónea de AC. No se copiaron fuentes de la biblioteca al repositorio público.
