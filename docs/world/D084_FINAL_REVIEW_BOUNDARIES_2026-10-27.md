@@ -66,6 +66,17 @@ Caso concreto `SYSTEM_TABLET_EXISTS` (identificador **solo del revisor**, no un 
 4. Tratamiento aprobado de las fuentes/editoriales pendientes y ratificación del volumen/biblia para producción.
 5. Designación/CLAIM legítima y registro de aprobación según Bulletin, Master Register y control de cambios.
 
-**Salida comprobable en esta PR:** `D084_EVENT_KNOWLEDGE_REVIEW_MANIFEST_2026-10-27.json` y `tools/validate_d084_review_manifest.py` verifican que el manifiesto sea cerrado, no importable, no auto-revele conocimiento y conserve el baseline. `tests/test_d084_review_manifest.py` contiene ahora **26 pruebas definidas** (16 previamente ejecutadas sobre fixture reducido; 10 regresiones añadidas después; una lectura de definición no es ejecución). Ninguna de ellas sustituye pruebas futuras de saves, Android o contenido autorizado.
+**Salida comprobable en esta PR:** `D084_EVENT_KNOWLEDGE_REVIEW_MANIFEST_2026-10-27.json` y `tools/validate_d084_review_manifest.py` verifican que el manifiesto sea cerrado, no importable, no auto-revele conocimiento y conserve el baseline. `tests/test_d084_review_manifest.py` contiene ahora **33 pruebas definidas**: las 26 del ciclo anterior (con ejecución confirmada en el flujo remoto #411), más **7 regresiones añadidas** en este ciclo contra filtración de identificadores editoriales dentro del contenido inicial, diálogo, claves JSON y tipos inválidos de conocimiento de NPCs. El control recorre el `content/vertical_slice_01.json` real y no se limita a inspeccionar el manifiesto. **Las siete pruebas nuevas requieren comprobar el CI del commit actual**; no atribuirles por anticipado el resultado del flujo #411. Ninguna sustituye futuras pruebas de saves, Android o contenido autorizado.
 
 **Decisión de seguridad:** PR #85 permanece **DRAFT, NO MERGE, NO CLAIM D-084**, hasta revisión legítima. Este lote evita trabajo duplicado, deja especificado el camino de aceptación y no fabrica decisiones del creador.
+
+
+## 6. Cierre de hueco del validador: contenido real (revisión 2026-10-27)
+
+**Riesgo verificado por inspección del validador previo:** el revisor comprobaba la etiqueta declarativa «no conceder el secreto», pero no recorría el `content/vertical_slice_01.json` para comprobar si un identificador interno de D-084 había sido introducido accidentalmente en diálogos, escenas, conocimiento inicial de jugador/NPC, claves o metadatos. Ausencia de cobertura no prueba una filtración existente.
+
+**Cambio de esta rama:** `tools/validate_d084_review_manifest.py` recorre recursivamente claves y valores del contenido real para rechazar cuatro identificadores exclusivos de revisión (`SYSTEM_TABLET_EXISTS`, `REVIEW_INITIAL_BURST`, `FIRST_WAR`, `TERRITORIAL_TRUCE`). Comprueba además el tipo de los contenedores de conocimiento inicial y del estado social de Tamsin. `tests/test_d084_review_manifest.py` incluye siete pruebas negativas específicas para ese límite.
+
+**Alcance:** este control detecta esos identificadores textuales únicamente; no es un análisis semántico de todos los spoilers posibles. Una descripción equivalente con otras palabras exigiría revisión editorial y futuros tests de proyección. No se implementa el secreto ni una ruta de importación al motor.
+
+**Ejecución pendiente de precisar:** el flujo #411 pasó antes de las siete pruebas nuevas. La evidencia del cambio corresponderá al flujo #413 o al posterior de un HEAD que lo contenga. No inferir PASS hasta que termine.
