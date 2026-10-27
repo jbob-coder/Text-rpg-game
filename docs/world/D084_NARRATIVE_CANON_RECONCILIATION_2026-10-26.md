@@ -1,0 +1,227 @@
+# D-084 — Cruce de canon narrativo, procedencia y límites de integración
+
+**Corte de revisión:** 2026-10-26 AST  
+**Estado:** REVIEW / NO CANON PROMOTION / NON-OWNING D-084 SUPPORT  
+**Rama de origen revisada:** `docs/master-game-development-program@dac5d22cdbe211d0d35d3df98b542be2653f1b85`  
+**Responsabilidad:** auditoría de integración de las fuentes narrativas posteriores al 2026-10-08; no equivale a reclamar D-084 ni a reactivar ninguna entidad de Drive.
+
+## 1. Resultado y autoridad
+
+La directiva D-084 del repositorio (8 de octubre) es anterior a decisiones expresas del creador (9–13 de octubre), una narrativa prioritaria H-01–H-36, un registro relacional, un dossier de guerra y un manuscrito literario v0.9. **El expediente narrativo ya existe en Drive y se ha ampliado con NOV-XII (27 oct.); D-084 no debe reiniciarse como si no hubiese texto.** Tampoco está integrada ni aceptada automáticamente su semántica en los contratos técnicos del repositorio.
+
+La autoridad de lectura para esta integración es:
+
+| Código | Fuente verificada | Papel y frontera |
+| --- | --- | --- |
+| G-01 | Historia original prioritaria, H-01–H-36 [fuente Drive: recuperar por título en el Centro de Historia y Canon] (actualizada 14 oct.) | Decisiones narrativas expresas; el propio documento avisa que su integración formal en el repositorio está **pendiente** |
+| G-02 | Centro de Historia y Canon [fuente Drive: recuperar por título en el Centro de Historia y Canon] | Índice y reglas de autoridad; informa que el manuscrito literario, actualizado actualmente a v0.9, no equivale a canon |
+| G-03 | Registro histórico relacional v1.6 [fuente Drive: recuperar por título en el Centro de Historia y Canon] (sincronizado 26 oct., v1.6) | EVT/ENT/TEC/REL/CAP, cronología parcial y dependencias; registro **subordinado** a G-01 |
+| G-04 | Manuscrito Volumen I v0.9 [fuente Drive: recuperar por título en el Centro de Historia y Canon] (27 oct.) | Doce secciones + nota y apéndices; **BORRADOR**, incluye escenas compuestas DR-01 y DR-05 |
+| G-05 | Dossier de la Primera Guerra [fuente Drive: recuperar por título en el Centro de Historia y Canon] | Advertencias R-WAR-01–10; cuarentena de la cronología 2670/Veinfall/Halcyon |
+| G-06 | Cuestionario maestro QH-01–28 [fuente Drive: recuperar por título en el Centro de Historia y Canon] | QH-01 está resuelta por H-36; las demás preguntas históricas continúan abiertas salvo evidencia posterior |
+| R-01 | [Bulletin](../AI_TASK_BULLETIN_BOARD.md), [Master Task Register](../THE_GAME_MASTER_TASK_REGISTER.md) | D-084 READY/unclaimed en la rama inspeccionada; reglas de coordinación y aceptación |
+| R-02 | [World Canon Decision Queue](WORLD_CANON_DECISION_QUEUE.md), [World Master Index](WORLD_DEVELOPMENT_MASTER_INDEX.md), [Gate Twelve](../../content/vertical_slice_01.json) | World-parent por decidir, esquemas técnicos y contenido jugable provisional, sin canon global aprobado |
+| R-03 | [AGENTS](../../AGENTS.md) y Drive entity registry [fuente Drive: recuperar por título en el Centro de Historia y Canon] (última modificación 8 oct. AST) | Separan autorización de trabajo, activación, claim, integración y despliegue. Las siete entidades canónicas aparecen INACTIVE/null sesión al leerlas aquí |
+
+**Regla de actualización:** las decisiones expresas más recientes del creador gobiernan el diseño narrativo; el código y la rama de autoridad prueban únicamente **qué está implementado**. Una decisión narrativa no migra por sí misma saves, clases, escenas, NPCs ni mundo jugable.
+
+## 2. Estado del canon: matriz de reconciliación
+
+| ID | Hecho o conflicto | Clasificación a 26 oct. | Acción segura |
+| --- | --- | --- | --- |
+| CW-01 | H-36: primeras aperturas, rupturas, llegada de invasores, primeras bestias y manifestación del Sistema pertenecen al **mismo estallido histórico**, sin simultaneidad de segundos obligatoria | DECISIÓN DEL CREADOR, G-01; rectifica órdenes anteriores | Conservar un **evento conjunto** con subeventos sin orden interno total; no representar una llegada tardía de las primeras bestias |
+| CW-02 | H-01/H-34/H-35: invasores extraplanetarios inteligentes/tecnológicos **antes** de llegar, distintos de bestias con evolución potencial H-09/H-10/H-17 | DECISIÓN DEL CREADOR, G-01 | Distintas entidades e IDs, sin asumir que híbridos son invasores o firmantes de tregua |
+| CW-03 | H-03–H-06/H-32–H-33: ayuda celestial indirecta, tableta oculta a invasores; Sistema de una habilidad principal aleatoria + derivadas, manifestado en crisis | DECISIÓN DEL CREADOR; mecanismo privado aún ABIERTO | Mantener el trasfondo oculto fuera de proyecciones públicas; no implementar concesión anticipada del Sistema |
+| CW-04 | H-07/H-11/H-16: cristales ya presentes en bestias **antes** de llegar a Tierra; existen aplicaciones humanas y armas, pero fecha de descubrimiento/forja frente a guerra no fijada | DECISIÓN con orden parcial, G-01/G-05 | No colocar armas cristalinas obligatoriamente antes de Primera Guerra |
+| CW-05 | H-12/H-13: Primera Guerra después del Sistema; termina en tregua territorial, **no paz** ni victoria confirmada | DECISIÓN con actores/fronteras/fechas ABIERTOS | No inventar vencedores, tratados, campañas, ejércitos o países |
+| CW-06 | H-28–H-31: novela-documental omnisciente en tercera persona, larga y causal, con zonas grises | DECISIÓN EDITORIAL, G-01 | Reusar G-04 como borrador activo, no regenerar una segunda biblia contradictoria |
+| CW-07 | `AC` = **Antes del Crystal**, según corrección explícita del 8 oct.; eras post-Evento, evento ancla y fechas exactas no validadas | DIRECTIVA EN REPO; cotejo de calendarios ABIERTO | No invertir AC ni equiparar automáticamente “Cristal” calendario a H-36 |
+| CW-08 | Directiva 8 oct.: **mundo ficticio original**; H-01/H-28/H-36 posteriores hablan literalmente de **Tierra** y humanidad | CONFLICTO DE MODELO / MIGRACIÓN NO AUTORIZADA | Registrar ambas fuentes y pedir decisión de pertenencia/continuidad antes de convertir WORLD_*, mapas o fechas en hechos |
+| CW-09 | El protagonista previo Jack Wilson/Steal y el vertical slice Gate Twelve/Trace Echo | DOS CONTINUIDADES SIN EQUIVALENCIA VALIDADA | Preservar IDs y evitar retcon automático, sustitución o fusión de poderes |
+| CW-10 | `WORLD_CAUSALITY_ATLAS_2670_V1.json` y su par `.md`, “Veinfall”, 2645–2659 y “Halcyon Gate Concord” | EXISTENCIA ORIGINAL RECUPERADA EN BIBLIOTECA / CONTINUIDAD AÚN EN CUARENTENA, G-05/G-06 | Los archivos originales están localizados y fueron examinados por la revisión PR #85; queda por probar el vínculo de continuidad y adopción. No inferir equivalencia con H-12/H-13 |
+| CW-11 | G-04 v0.9: escenas DR-01 (depósito de provisiones) y DR-05 (noticia de tregua) | ESCENAS COMPUESTAS, NO HECHOS | No crear localidades, NPCs, quests, rutas o leyes a partir de sus detalles |
+| CW-12 | Gate Twelve: 9 nodos/8 aristas y `provisional_canon`; parent city/world no confirmado | REALIDAD DE IMPLEMENTACIÓN, NO WORLD CANON | No reescribir `content/vertical_slice_01.json` ni ruta del jugador al aceptar fuentes narrativas |
+
+No hay evidencia de que un capítulo literario, el grafo de Drive o el D-084 de octubre estén formalmente unidos al runtime del repositorio. La rama registrada sigue siendo la autoridad técnica.
+
+## 3. Grafo mínimo de causalidad — orden parcial, no línea temporal inventada
+
+Companion machine-readable: [D084_CAUSALITY_GRAPH_2026-10-26.json](D084_CAUSALITY_GRAPH_2026-10-26.json).
+
+- **Fuera del foco / antes:** invasores y seres celestiales tienen un antecedente de conflicto (H-02). No fijar sus fechas.
+- **Estallido T0 (simultaneidad histórica):** `PORTAL_INITIAL_OPENING`, `SPATIAL_RUPTURES`, `INVADERS_INITIAL_ARRIVAL`, `BEASTS_INITIAL_ARRIVAL`, `SYSTEM_MANIFESTATION` (H-36). Las aperturas implican gran gasto de poder natural y causan rupturas (H-08); las bestias ya llevaban núcleos (H-16).
+- **Transformaciones sin orden absoluto:** descubrimiento/aprovechamiento humano de cristales (H-11/H-19–H-27), aprendizaje del Sistema, evolución posible de bestias (H-10/H-17), movilización social. Sus posiciones exactas respecto al inicio y desarrollo de guerra no se deducen de H-36.
+- **Secuencia inequívoca:** `SYSTEM_MANIFESTATION -> PRECEDES -> FIRST_TERRESTRIAL_WAR -> PRECEDES -> TERRITORIAL_TRUCE` (H-12/H-13). La tregua no resuelve todas las amenazas. El contexto jugable posterior tiene fecha/relación aún no confirmada.
+
+**Principio:** causalidad no equivale a cronología universal; simultaneidad del suceso no obliga a conocimiento público simultáneo. Una narración puede exponer retrospectivamente algo que ocurrió a T0.
+
+## 4. Límite mundo / reglas / conocimiento
+
+| Capa | Fuente de autoridad | No hacer |
+| --- | --- | --- |
+| Historia **ocurrida** | G-01 decisiones H y G-03 relaciones validadas | Promover escenas dramáticas a hechos, asignar años sin ancla |
+| Historia **divulgada** a habitantes | Solo hechos que tenga derecho a conocer cada observador; matriz de divulgación [fuente Drive: recuperar por título en el Centro de Historia y Canon] es PROPUESTA | Filtrar tableta/causas cósmicas a todos los NPCs o UI |
+| **Narrador** documental | G-04, sujeto a G-01 y revisión editorial | Confundir omnisciencia literaria con verdad cerrada de preguntas abiertas |
+| **Estado jugable** | `src/textrpg/`, `content/`, tests y contratos del repositorio | Añadir System, crystals, beasts, facciones o nuevos save fields sin schema/fixture/test/PR autorizado |
+| **Mundo propuesto** | R-02, WD-001–WD-012 y contratos | Nombrar de oficio un país, convertir Gate Twelve en capital o imponer mapas en metros |
+
+Ejemplo de **secreto narrativo confirmado**: la tableta vinculada al Sistema existe, pero los invasores la desconocen (H-04). Que el narrador pueda decirlo no autoriza a `build_scene_view`, NPC memory o Android a revelarlo a un personaje. Requiere política explícita de divulgación, conocimiento por actor y prueba de proyección player-safe.
+
+## 5. Unidades de avance verificables (sin duplicar el manuscrito)
+
+1. **Cruce editorial de D-084 con G-01–G-06.** Llevar a la autoridad técnica una decisión explícita sobre qué hechos narrativos se incorporan como canon de producción; mantener CW-07–CW-10 abiertos. No declarar D-084 DONE solo por este documento.
+2. **Grafo estable y reversible.** Revisar nodos/aristas del JSON adjunto contra los H-IDs; resolver QH-25 solo tras hallar archivo matriz y procedencia. No forzar orden total ni año cero.
+3. **Novela ya en curso.** Continuar CAP-14/15 sobre instituciones y cotidianeidad después de la tregua con escenas y extrapolaciones etiquetadas PROPUESTA; G-04 ha avanzado a v0.9 con NOV-XII «El oficio de volver a vivir», que trata la transición civil posterior a la tregua. No repetir ese capítulo: continuar la conexión hacia el escenario de los personajes solo desde decisiones y hechos verificables. No inventar instituciones “canónicas”.
+4. **Protocolo de incorporación futura.** Tras aprobación del mundo/protagonista, escribir un mapa `narrative_fact_id -> authoritative_content_id -> state_owner -> projection_policy -> test`; no tocar código antes de esta puerta.
+5. **Coordinación:** el registro de entidades leído muestra siete Player-AIs INACTIVE y ninguna sesión activa; no fingir activación, task claim, puntuación ni progreso de Silex D-072. Un agente habilitado puede reclamar D-084 por el Bulletin al retomar.
+
+## 6. Verificación y handoff de esta entrega
+
+- **Leído:** programa `AGENTS.md`, Bulletin, Register (D-084), Mission Control, Coordination, world index/canon queue, README y fuentes G-01–G-06.
+- **Evidencia de revisión:** títulos de las fuentes Drive recuperables desde el Centro autorizado, H-ID/EVT/REL/WD y enlaces de navegación del propio repositorio; no se conservan enlaces directos a Drive en el archivo actual. No se obtuvo ninguna prueba de finalización de D-084.
+- **No ejecutado:** motor Python, Android, CI, emulador o device; `git clone` local no estuvo disponible por resolución DNS.
+- **Archivos afectados por esta propuesta:** únicamente este cruce documental y JSON causal; sin cambio de implementación ni Drive.
+- **Siguiente acción segura:** no repetir NOV-XII; contrastar el nuevo capítulo con H-01–H-36 y la matriz de conocimiento, completar relaciones editoriales que falten para NOV-XII en el registro v1.6 mediante revisión y continuar la preparación documentada del escenario de los personajes solo con fuentes verificables.
+
+**No modificar el Bulletin, el estado de Drive o el Master Register como DONE desde este expediente no propietario.**
+
+## 7. Actualización de continuidad y visibilidad — 2026-10-27
+
+**Fuentes posteriores al corte original:** el manuscrito de Drive ahora es **Volumen I v0.9**, con **NOV-XII «El oficio de volver a vivir»** insertado antes de la nota de archivo, que pasó a XIII. El Registro histórico relacional contiene sincronización **v1.6** de NOV-X/NOV-XI; no asumir que NOV-XII esté incorporado a dicho grafo sin lectura posterior. El nuevo pasaje trata recursos civiles, habilidades, suministros, memoria y recuperación bajo la tregua, con todas las extrapolaciones explícitamente **BORRADOR**. No se agregó otro capítulo en esta rama para evitar duplicación.
+
+**Complemento no redundante:** el [PR #83](https://github.com/jbob-coder/Text-rpg-game/pull/83) conserva un puente documental de fuentes; el [PR #85](https://github.com/jbob-coder/Text-rpg-game/pull/85) aporta matriz de procedencia, frontera Drive→runtime y comprobación de existencia de los originales del atlas 2670. Este PR #84 aporta especialmente el **grafo JSON de orden parcial** y su índice WD; antes de fusionar propuestas se debe reconciliar la superposición para evitar tres autoridades de D-084.
+
+**Privacidad de referencias:** se quitaron los enlaces directos a IDs de archivos privados de Google Drive de la versión actual de este documento. Localizar las fuentes mediante sus títulos verificables y el Centro de Historia y Canon en el Drive conectado. Esta corrección de contenido **no borra los commits anteriores del historial Git**; cualquier purga histórica requeriría una decisión distinta de reescritura de historial y su revisión de impacto. No copiar IDs de Drive a nuevos expedientes públicos.
+
+**Estado:** propuesta no propietaria; ninguna activación de Player-AI, modificación de Bulletin o promoción de canon; sin pruebas Python/Android/device en esta intervención.
+
+## 8. NOV-XII collision comparison — 2026-10-27, register readback verified
+
+The Google Drive **Registro histórico relacional** now has a live, revision-guarded comparison record **CMP-XII-20261027**, verified by native document readback (not only by intended edit). Two different drafts share the provisional bare token `NOV-XII`:
+
+- **NOV-XII-MANUSCRITO-v0.9** = «El oficio de volver a vivir», 16 narrative paragraphs embedded in the existing Volumen I, before the XIII archival note. Covers return to home, legitimacy and ability, education, civic memory, reconstruction.
+- **NOV-XII-DR06-BORRADOR-v0.1** = «Lo que debía seguir funcionando», 22 narrative paragraphs in a distinct Drive document. Has a composed **DR-06** repair/inventory scene and more explicit logistical dependencies (source → transit → reception → use, material reserves, repeated deliveries, verification of repairs).
+
+**Result:** comparison confirmed **distinct texts**, shared subject matter and complementary emphasis; do not silently overwrite, concatenate, import DR-06 into playable content, or allocate the same unqualified identifier to both. Retain the manuscript v0.9 as the current **literary** chapter XII and the other piece as a **separate proposal** until editor/owner chooses whether a limited logistics passage warrants revision. The register's labeled comparison is an **editorial recommendation only**, not approval, canon migration or task DONE. H-01–H-36, AC calendar, character continuity and runtime remain unchanged.
+
+**Privacy:** locate the comparison under its exact ID in the connected Drive register; no private Drive file URLs/IDs are copied into this public repository proposal. This note does not correct earlier Git history that contained such links.
+
+## 9. CAP-15 / DR-06 continuity QA — 2026-10-27
+
+**Current revision supersedes earlier current-state observations in sections 5–8.** The connected-Drive Volumen I is now **v0.9.1**. After the source comparison CMP-XII-20261027, a separate editor incorporated an **adaptation of exactly three paragraphs** from fictional scene DR-06 after «Las normas que permiten convivir» into the chapter XII «El oficio de volver a vivir». The source NOV-XII-DR06-FUENTE-v0.1 remains unchanged. The relational register contains an explicit post-comparison correction, so the earlier statement that chapter XII does not yet contain DR-06 was correct only for manuscript v0.9.
+
+**Further authoritative source review.** The connected Drive Knowledge and Disclosure Matrix contains B-PLAY-01–06 and six proposed integration gates: G1 creator provenance, G2 H/EVT causal evidence, G3 actor-specific knowledge/disclosure, G4 WD domain decisions, G5 existing content/IDs/save ownership, G6 executed tests. This proposal is **not** an implemented interface. The repository `content/vertical_slice_01.json` was independently read at source blob `3eeeb9d684ef31759eb11aa595e4d111b16c4c82`, with `CONTENT_VERTICAL_SLICE_01`, `canon_status=provisional_canon`, `The Dead Relay`, one `NPC_TAMSIN`, four quest entries, `ABILITY_TRACE_ECHO`, nine map nodes and eight map edges. The existing initial NPC state contains separate `knowledge`, `memories`, `goals`, `story_state` fields; these facts are about the prototype, not about historical lore.
+
+| Audit ID | Source-backed constraint | Assessment and acceptance boundary |
+| --- | --- | --- |
+| QA-01 | H-36 concurrent initial openings, ruptures, invader/beast arrival, System | **SOURCE VERIFIED.** Do not place first beasts in a later chronological era, force exact-second simultaneity or imply everyone knew the facts immediately. |
+| QA-02 | H-35 distinction of intelligent invaders and potentially evolving beasts | **SOURCE VERIFIED.** No automatic equivalence of invaders, beasts, Hybrid Beasts or treaty signatories. |
+| QA-03 | H-04 celestial tablet unknown to invaders; general public awareness undetermined | **DISCLOSURE BLOCKED.** No HUD, NPC, dialog, quest or initial save may reveal tablet origin as public knowledge without authorized character-specific discovery. |
+| QA-04 | H-11/H-16 human uses of pre-existing beast crystals, time of first forge still open | **ORDER OPEN.** No prewar-forging timeline edge or first Smith guild inferred. |
+| QA-05 | H-12/H-13 First War after System, territorial truce without peace or confirmed victor | **SOURCE VERIFIED.** No fabricated battle, signatory, peace year, borders, or bestial participation. |
+| QA-06 | Repository owner AC means `Antes del Crystal`; original 2645–2670 atlas exists but its lineage is unproven | **CALENDAR BLOCKED.** Do not use AC as After Crystal or import Halcyon/Kharvori/dates into present canon automatically. |
+| QA-07 | NOV-XII manuscript v0.9.1 adapts three DR-06 paragraphs from standalone v0.1 | **TEXT READBACK VERIFIED; NONCANON.** No invented repair bench, people, stock ledger, deliveries or workshop from composite illustration in the game world. |
+| QA-08 | `The Dead Relay` actual provisional content: `NPC_TAMSIN`, `ABILITY_TRACE_ECHO`, mission keys and map IDs | **REPO JSON PARSED; MIGRATION BLOCKED.** Preserve save keys and gameplay identity; later runtime changes require real Python/Android tests and verified ownership. |
+| QA-09 | D-084 fictional crystal society vs H-history literal Earth | **PROVENANCE CONFLICT.** G1 must demonstrate the same world or receive an explicit owner direction. No retcon by paraphrase. |
+| QA-10 | P-TRUCE-01..06 civilian economy, education, social customs, institutions and generations | **EDITORIAL PROPOSALS.** Use `[C]/[P]/[A]` markers; none establishes actual historical law, NPC lore, world map or classes. |
+
+**Executed here:** fresh connected Google Docs text reads for current manuscript and relational register; connected-drive matrix excerpt; direct JSON parse of `content/vertical_slice_01.json`; crosscheck of the adapted scene with the source collision record. **Not executed:** Python engine suite, device playthrough, Android build, emulator, CI, APK, or any world migration. This is *source verification*, not production QA success.
+
+**Next action:** keep the current v0.9.1 chapter rather than producing a duplicate XII, and proceed toward CAP-15 only through documented knowledge and provenance gates. PR #84 remains non-owning DRAFT; no activation, claim, merge or canon approval follows from this review.
+
+## 10. CAP-15 editorial source handoff — 2026-10-27
+
+The connected-Drive historical relational register now contains **`NOV-XIII-v0.2-DRIVE-INDEX`**, verified by native readback (exactly one entry). It locates the separate Google Doc **«THE GAME — CAP-15 / NOV-XIII — El mundo que todavía se descubre — BORRADOR v0.2»** without placing any private document ID in this public repository. The literary draft contains a 31-paragraph narrative and source/knowledge annotations for all eight `P-15-01` through `P-15-08` editorial sequences. It is **NOT part of the current Volumen I v0.9.1**, whose XIII is still «Nota del archivo histórico».
+
+**Review condition:** keep the novel and the independently stored CAP-15 proposal separate unless a revision-guarded, reviewed literary integration explicitly replaces the archival-note numbering and preserves the original draft's canon disclaimers. D-084, WD-001, AC calendar, Jack/Steal vs Gate Twelve/Trace Echo, knowledge of the celestial tablet, and runtime G1–G6 gates remain unresolved. No new NPC, quest, saved knowledge flag, first forge date, or history event is authorized by this cross-reference. No Python/Android/runtime tests were executed here.
+
+## 11. CAP-15 copy-level editorial integration QA — 2026-10-27
+
+**Reviewed artifact:** a distinct **candidate copy** of *Volumen I* titled `CANDIDATO DE INTEGRACIÓN CAP-15 v0.10 — BORRADOR NO CANON` was created in connected Drive; its stable lookup key is **`INTEGRACION-CAP15-V010-20261027`** in the historical relational register. The record contains the private Drive locations. **Do not insert those file IDs or URLs into this public GitHub artifact.**
+
+**Copy construction and verification:** the literary proposal `NOV-XIII v0.2`, covering eight planned `P-15-01..P-15-08` sections, supplied the 31 narrative paragraphs of chapter XIII, «El mundo que todavía se descubre». They were inserted immediately after XII «El oficio de volver a vivir» and immediately before the original archival note. The copy's current archive note heading alone was changed to **XIV. NOTA DEL ARCHIVO HISTÓRICO**. Top-of-file labeling now says **v0.10 CANDIDATO, NO CANON**; a provenance appendix records source, scope, and open gates. Post-write readback compared **31/31 paragraphs exactly** with the independent draft and verified the order and heading styles.
+
+**Preservation:** the original *Volumen I v0.9.1* was independently re-read at its unchanged revision after the candidate was created: still twelve literary chapters with XIII archival note; it contains no inserted NOV-XIII chapter. The independent CAP-15 v0.2 document also remains unchanged. Earlier editorial appendices in the copy retain historic v0.9.1 wording as revision evidence, not the copy's current status.
+
+**Authority and integration limits:** this is an **editorial proof copy**, not acceptance of the draft, conversion of historical H-01–H-36 to runtime canon, or a change to `content/vertical_slice_01.json`, player saves, maps, NPCs, quests or abilities. `WD-001` (world identity and provenance), `AC=Antes del Crystal` calendar mapping, R-WAR-01 chronology, Jack/Steal vs Gate Twelve/Trace Echo and actor-specific secret knowledge remain unresolved. G1–G6 integration gates have not passed. No Python/Android/CI/emulator/device tests executed for this copy. Do not mark D-084 complete or automatically merge this draft PR.
+
+**Next bounded action:** solicit/check editor or creator source authority before promoting the copy to the working Volumen I; if approved, version and review the replacement against the current Doc revision, preserving its historical notes. Meanwhile the 31-paragraph integration candidate can undergo independent literary/continuity review without affecting gameplay.
+
+## 12. E-15-03 variant audit — Volumen II candidate source and version fidelity
+
+**New editorial evidence recorded and verified** in the connected-Drive CAP-15 outline under **`E-15-03 | AUDITORÍA MATERIAL DE VARIANTES CAP-15 / VOLUMEN II`**. Do not infer file IDs from this public crosswalk; the source document holds its own Drive links.
+
+| Distinct artifact | Grounded observation | Current authority |
+| --- | --- | --- |
+| A: `CAP-15 — Lo que una vida puede saber` **v0.2.1** | **25 narrative paragraphs**, two explicitly hypothetical scenes `ESC-C15-A/B`, and DR-07-derived *one-paragraph editorial addition*. Source document is 45 paragraphs including its editorial appendices. | Preferred *provisional literary source* of E-15-01, NOT accepted canon or game introduction. |
+| `Volumen II candidato editorial v0.1` | 49 total paragraphs; changes cover/roman-number proposal and appends four editorial records; **25/25 narrative paragraphs match A byte-for-byte at readback text level**. | Packaging proposal, NOT new story text. |
+| File titled `Volumen II propuesto — CANDIDATO LITERARIO v0.3` | **All 45/45 paragraphs are exactly the same as A v0.2.1**, including the internal v0.2.1 header. Its *filename v0.3* is **not substantiated by any inspected textual revision**. | Alias/mislabeled copy; do NOT claim a new literary v0.3 milestone or let name supersede content. |
+| B: `El mundo que todavía se descubre` **v0.2** | Different 31-paragraph expository variant with a P-15-01..08 evidence table. | Source for alternative experiment only, not an approved chapter XIII. |
+| `Volumen I v0.10` experimental | Copied Volumen I, inserted B's 31 paragraphs and renumbered the archival heading XIV **in that copy**. | Noncanon comparison candidate; E-15-01 explicitly favors leaving the real Volumen I's XIII note intact. |
+| Original `Volumen I v0.9.1` | 12 narrative sections and **XIII. NOTA DEL ARCHIVO HISTÓRICO**; remained intact during these checks. | Existing literary manuscript, still DRAFT, not accepted game canon. |
+
+**Scope of comparison:** exact Google Docs text paragraph equality was checked for A against the "v0.3" labeled copy (45/45 exact) and for A against the Volumen II v0.1 candidate's *story-only* paragraphs (25/25 exact). This demonstrates textual equality, not perfect visual formatting, revision history identity, or canonical authority.
+
+**Editorial redline suggestions only (NOT edits):** the phrase «cuando ya no quedaban testigos capaces de explicarlo entero» in A's second narrative paragraph could be read as dating the extinction of witnesses despite H-31's unconfirmed elapsed time; a possible neutral alternative is «ningún testigo podía explicarlo por entero». A's opening shorthand mentions ruptures/invaders/beasts/System but omits the explicit term *opening of portals* in its first sentence; H-36 defines portals as part of the same outbreak. Consider tightening the historical reminder without reopening a repeated prologue.
+
+**Result:** the existing E-15-01/02 proposal prefers A as a possible opening for a future Volumen II, but **no owner/editor approval** resolves location or world identity. Maintain `E-15-03` as a comparison index; do not copy whole draft B into A, rename the Volumen I historical note, create another redundant Volumen II copy, or migrate any scene into `CONTENT_VERTICAL_SLICE_01`. `WD-001`, `AC = Antes del Crystal`, the first-forging date, celestial disclosure, and G1–G6 remain blocked. No runtime/Android/CI tests were performed.
+
+## 13. CAP-15 live-delta correction — v0.2.2 vs v0.3.1
+
+The connected CAP-15 editorial outline now contains a new source-readback audit under **`QA-CAP15-V031-20261027`**, validated after a revision-guarded write. This section supersedes the *CURRENT VERSION* claims of §12 without erasing its accurate historical snapshot. The actual source and copies have since changed under other reviewers' work.
+
+| Artifact | Current readback | Textual relationship |
+| --- | --- | --- |
+| Source A, `CAP-15 — Lo que una vida puede saber` **v0.2.2** | 25 narrative paragraphs plus its editorial provenance | Adds a rewritten hypothetical `ESC-C15-B` as paragraph index 28; no new gameplay fact. |
+| `Volumen II candidato v0.1` | Earlier packaging copy of A v0.2.1 | **24/25** story paragraphs match **current A v0.2.2**. Paragraph 28 in this copy is still its earlier generic hypothetical scene. The previously reported **25/25** match was valid only at the older A v0.2.1 revision. |
+| `Volumen II propuesto v0.3.1`, identified in Drive as `CAP15-II-MICROREV-20261027` | Distinct edited candidate, same 25-paragraph outline | **21/25** story paragraphs match current A v0.2.2. Exactly four changed at source paragraph indices **5, 6, 27, 29** (reworked introduction and conclusion). Paragraph 28 **matches** A's revised `ESC-C15-B` exactly. |
+| Original `Volumen I v0.9.1` | Real manuscript remains separate, XIII archival note unchanged | Neither this review nor the v0.3.1 editorial copy edits its publication hierarchy. |
+| Experimental `Volumen I candidate v0.10` | Copy only, contains B's 31 paragraphs | Not preferred as canonical or definitive structural placement. |
+
+**Previously flagged openings:** §12's concern over A's «cuando ya no quedaban testigos...» remains applicable **to A v0.2.2 and old Volumen II v0.1**, but the two new opening paragraphs of **v0.3.1** avoid implying all crisis witnesses have vanished. The newer second paragraph also explicitly mentions **initial portal openings** alongside ruptures, invaders, beasts and System, consistent with H-36. These corrections apply only in v0.3.1; do not claim that source A itself was fixed.
+
+**Editorial provenance, not canon:** `E-15-04` is already reserved in the Drive historical register for the **A v0.2.2** ESC-C15-B revision. The competing copy work was rekeyed to **`CAP15-II-MICROREV-20261027`**; never double-claim `E-15-04`. The differences were verified at paragraph-text level in connected Docs; no formatting, runtime or CI assertions follow from them. The narrative versions maintain composite scenarios rather than real settlements or NPCs, and creator-specific world identity/era/characters remain unresolved. No private Google Drive ID/URL is carried into this public review.
+
+**Current disposition:** reversible editorial preference for a possible Volume II opening; preserve all prior sources and candidates as alternatives, do not concatenate two separate CAP-15 variants or use their literary scenes to populate `content/vertical_slice_01.json`. `WD-001`, `D-084`, `AC=Antes del Crystal`, historical vs game canon linkage and G1–G6 remain open. No edits to runtime/save/quests and no Python/Android or device testing were performed in this audit.
+
+## 14. CAP-15 v0.3.4 two-scene independent narrative QA — 2026-10-27
+
+**Concurrently revised source:** the independently maintained connected-Drive `CAP15-II-MICROREV-20261027` was re-fetched and found at **Volumen II literary candidate v0.3.4** (still **NONCANON**, proposed volume/chapter). Its previous v0.3.3 wording had already been updated by another editor before this pass; **no further edit to either scene was made by this review**. Do not reapply earlier line-edit proposals to v0.3.4 or assert an old paragraph is still present.
+
+**Source-to-candidate paragraph-level QA, executed in this review:** exactly **25 narrative paragraphs**, keeping the same paragraph positions as independent A v0.2.2; **14/25 paragraph texts are identical** and **11/25 differ**, at narrative indices **01, 02, 03, 06, 07, 08, 09, 10, 23, 24, 25** (Google Docs paragraph positions 5, 6, 7, 10–14, 27–29). Do not confuse this *current* 14/25 result with **21/25** for the older v0.3.1 copy documented in §13. This is a readback comparison, not a rendered page-layout validation.
+
+**Scene ESC-C15-A — narrative 06–10:** an anonymous two-voice hypothetical conversation asks whether possessing a power requires accepting others' expectations and whether it reflects what the recipient “deserves.” Its five paragraphs are shorter than A v0.2.2 at the same positions. The characters **do not receive knowledge of the actual assignment mechanism** or celestial tablet. The narrator, and not a character's statement, subsequently distinguishes the creator-grounded **random assignment of one main ability with derivatives** (H-05/06) from the persons' speculative beliefs. The current version removes meta-editorial explanation from the dialogue, while the scene's introduction and provenance appendix identify it as fictional composition, not historical NPC conversation or public doctrine.
+
+**Scene ESC-C15-B — narrative 24:** a hypothetical damaged object is observed and a rupture is proposed as its cause by hearsay. The current candidate explicitly says observations **do not prove the cause**, no one has repaired the object, and the speakers do not know its origin. This paragraph is shorter than source A v0.2.2 while preserving the distinction between **observed failure** and **unverified explanation**. No new in-world rupture event, item, NPC, location or quest may be inferred from it.
+
+**Remaining blockers and style findings:** the first crisis still includes portals, ruptures, intelligent invaders, beasts and System concurrently without generalizing universal witnesses (H-36). The First War ends in territorial truce, not proven ultimate peace/victory (H-12/13). Beast-carried cores predate Earth arrival (H-16); historical Earth and the fictional crystal world remain unresolved under **WD-001**. The omniscient narrator discusses the tablet, but NPC/player disclosure is **not established** under G1–G6. Three editorial phrases outside the composed scenes—“No se ha establecido,” “no se puede establecer sin fuentes,” and “Antes de narrar la primera decisión”—may benefit from a later diegetic prose pass; **these are nonblocking style observations, not canon errors**, and were not edited here.
+
+**Verification boundary:** connected-native-text readback and paragraph comparison only. Original Volumen I v0.9.1 retains **XIII Nota del archivo histórico**; independent A v0.2.2 remains separate. No source/creative acceptance, GitHub merge, player-save migration, Python-engine execution, Android/CI/device test, or gameplay implementation was performed. The project remains D-084/WD-001 **PENDING**, PR draft and non-owning.
+
+## 15. Later concurrent prose bridge: CAP-15 v0.3.5 — 2026-10-27
+
+**Fresh readback after §14:** another parallel editor advanced the *same* proposed Volume II Google Doc to **v0.3.5** (internal header and Drive file name), leaving the v0.3.4 scene audit as historical evidence. The candidate now contains exactly 25 story paragraphs. A fresh current-state comparison against independent source A v0.2.2 finds **17 of 25 paragraphs different** (indices **01,02,03,06–11,13,15,17,19,22–25**) and **8 unchanged**. This is a cross-version paragraph comparison, not a claim that all 17 changed specifically in v0.3.5.
+
+**Provenance of v0.3.5 change:** the candidate's own editorial note `CAP15-II-PROSE-BRIDGE-20261027` records six prose paragraph revisions relative to v0.3.4, positions **11,13,15,17,19,22**, with the stated goal of replacing meta-editorial exposition by a natural bridge between the two composed scenes. These positions are the narrative 1-based indices (Google Docs paragraphs 15,17,19,21,23,26). **Do not infer six new scenes or engine events.** The existing `ESC-C15-A` and `ESC-C15-B` scenes remain in their respective positions, both hypothetical.
+
+**Retested at v0.3.5:** in composed conversation A, the human voices do not disclose the celestial tablet; assignment of the main ability at random is separated into the narrator's explanation (H-05/06). In composed observation B, attributed rupture damage remains **unproven** and the passage explicitly says it is a hypothetical scene. No location, new character, public doctrine, ritual, item, quest, calendar year or reliable NPC secret knowledge is established. Original Volumen I is still **v0.9.1**, retaining XIII archival note.
+
+**Snapshot rule:** §13 (v0.3.1) and §14 (v0.3.4) should be read as verified, *past-revision* audit records; the prose document was revised by other workers afterward. §15 is the newer observed copy-level readback, **not author approval** of Volume II or a claim that independent source A was updated. The creator's fictional-world provenance WD-001 and all game-integration G1–G6 remain unresolved. No GitHub game content, runtime, saves, Android/CI tests or scene implementation was modified in this work.
+
+## 17. WD-001 recovered primary-source conflicts and authority ladder — 2026-10-27
+
+A **new verified source-trace record** exists in the connected Drive Historical Relational Register under `WD001-SOURCE-TRACE-20261027` (native readback: one entry). It compares contemporaneous authority directives to recovered *actual earlier files* rather than relying exclusively on prior summaries. No private Drive URLs or IDs belong in this public crosswalk.
+
+| Source | What is directly verified | Authority boundary |
+| --- | --- | --- |
+| **Owner directive, 2026-10-08** — `docs/THE_GAME_MASTER_TASK_REGISTER.md` / `docs/AI_TASK_BULLETIN_BOARD.md` at authority branch | The intended primary THE GAME setting is an **original fictional crystal-centered civilization** with portals/beasts; `AC` is explicitly **ANTES del Crystal**. An earlier `AC = After Crystal` reading and its derived post-crystal `2010 AC` assertion were revoked. | Owner-level world-setting and calendar interpretation; it does not supply a world map, epoch anchor or post-Crystal acronym. |
+| **Recovered July design brief** — personal Library `Pasted text(48).txt` (974 lines) | Older text explicitly calls `2010 AC` *After Crystal*, `2000 BC` *Before Crystal*, and describes beast crystals forming in creatures after anomalous gateways. | Historical **source exists**, not verified as currently accepted owner canon. Its AC expansion is **superseded** by Oct 8, and the implied formation chronology conflicts with creator H-16. The 2010/2000 dates remain unapproved; do not invert calendar to accommodate them. |
+| **Recovered August campaign atlas** — personal Library `WORLD_CAUSALITY_ATLAS_2670_V1.json` and paired `.md` | Distinct 2670 campaign-state document includes `Veinfall`, a named Human/Kharvori war spanning 2645–2659, a 2660 Halcyon Gate Concord, Earth/Asterline/Eastbank/Riverbend and Jack academy lodging. | Its document-level authority is **prior-campaign causal reference**, not proof of incorporation into THE GAME's newer H timeline. Keep every named date, polity, treaty, settlement and Jack placement quarantined from the H novel until linked to a positive owner decision. |
+| **Later October creator H-01..H-36**, connected Drive `Historia original prioritaria` | Repeated explicit **Tierra** referent (H-01/04/16/36); the initial portals/ruptures/invaders/beasts/System belong to one historical outbreak (H-36); beasts **already possessed cores before arriving** (H-16). System precedes First War, followed by a non-conquest truce without definitive victor/peace (H-12/13). | Direct narrative decisions, newer than the recovered briefs. Their *relationship to the fictional world named in Oct 8 D-084* and the `AC` epoch remains **unstated**. |
+| **Current provisional implementation** — `content/vertical_slice_01.json`, `docs/world/GATE_TWELVE_PARENT_WORLD_PROPOSAL.md` | `The Dead Relay` / Gate Twelve / Trace Echo are marked `provisional_canon`; proposed `Arden Crossing` / `Alder Basin` parents explicitly require approval. | Implementation fact ≠ world/protagonist/campaign equivalence. Keep local IDs, player knowledge and saves intact. |
+
+**Resolved at source-meaning level (not runtime):** `AC = Antes del Crystal` is not ambiguous; the archived `After Crystal` gloss is superseded. In H, the earliest arriving beasts **already carry cores**, correcting older “crystals formed after gateway arrival” accounts; historical H-36 concurrency is not a calendar timestamp and does not place crystal discovery at a precise second. The 2670 atlas' existence, state date and scenario are proven; its **adoption in THE GAME is not**.
+
+**Remaining WD-001 owner-only mapping:** determine whether H's literal *Earth* denotes (a) a fictionalized Earth in the same main-world retelling, (b) a different world/era connected to the owner's fictional crystal world, or (c) a separate design line. These are **options, not decisions**. Only after mapping that referent may the Crystal epoch be attached to an H event, and only after a separate continuity decision may Jack/Steal, the 2670 campaign, Gate Twelve/Trace Echo or proposed Arden parents be reused. Historical and player-facing knowledge must remain separate.
+
+**No migration:** this recovery does not claim WD-001 or D-084 DONE, does not merge PR #84, does not approve Volumen I/II drafts, and does not change the runtime, map, calendar, NPCs, quests or saves. **G1 creator continuity mapping is still blocked**; G2–G6 each require independent evidence and tests.
