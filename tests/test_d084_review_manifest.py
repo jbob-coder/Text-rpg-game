@@ -133,6 +133,40 @@ class D084ReviewManifestTests(unittest.TestCase):
         self.slice["initial_state"]["npcs"]["NPC_TAMSIN"] = None
         self.assert_rejected("Tamsin social containers changed")
 
+    def test_review_secret_cannot_be_seeded_in_player_knowledge(self):
+        self.slice["initial_state"]["knowledge"] = {
+            "SYSTEM_TABLET_EXISTS": {"learned": True},
+        }
+        self.assert_rejected("review-only identifier imported into gameplay content")
+
+    def test_review_secret_cannot_be_seeded_in_npc_knowledge(self):
+        self.slice["initial_state"]["npcs"]["NPC_TAMSIN"]["knowledge"][
+            "SYSTEM_TABLET_EXISTS"
+        ] = {"confidence": 1.0}
+        self.assert_rejected("review-only identifier imported into gameplay content")
+
+    def test_review_secret_cannot_leak_in_nested_scene_text(self):
+        self.slice["scenes"] = {
+            "OPENING": {"dialogue": [{"body": "SYSTEM_TABLET_EXISTS"}]},
+        }
+        self.assert_rejected("review-only identifier imported into gameplay content")
+
+    def test_review_only_event_id_cannot_become_authored_key(self):
+        self.slice["quests"] = [{"FIRST_WAR": {"known": True}}]
+        self.assert_rejected("review-only identifier imported into gameplay content")
+
+    def test_malformed_initial_player_knowledge_fails_closed(self):
+        self.slice["initial_state"]["knowledge"] = []
+        self.assert_rejected("initial player knowledge must be an object")
+
+    def test_malformed_tamsin_knowledge_fails_closed(self):
+        self.slice["initial_state"]["npcs"]["NPC_TAMSIN"]["knowledge"] = []
+        self.assert_rejected("Tamsin knowledge must retain its original container type")
+
+    def test_malformed_non_tamsin_npc_knowledge_fails_closed(self):
+        self.slice["initial_state"]["npcs"]["NPC_OTHER"] = {"knowledge": "all secrets"}
+        self.assert_rejected("initial NPC knowledge must be an object")
+
     def test_duplicate_json_keys_fail_closed(self):
         with TemporaryDirectory() as tmp:
             path = Path(tmp) / "duplicates.json"
