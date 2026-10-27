@@ -1,6 +1,6 @@
 # D-084 — Matriz de procedencia, canon y conflictos (lote no propietario)
 
-**Fecha de lectura:** 2026-10-26 (AST)  
+**Fecha de lectura:** 2026-10-26; ampliación de fuente primaria histórica: 2026-10-27 (AST)  
 **Proyecto:** THE GAME, `jbob-coder/Text-rpg-game`  
 **Rama base auditada:** `docs/master-game-development-program` @ `dac5d22cdbe211d0d35d3df98b542be2653f1b85`  
 **Tipo:** contribución preparatoria/revisable de D-084; NO reclama la tarea ni activa ninguna entidad Player-AI.  
@@ -57,6 +57,8 @@ Estas relaciones **no** establecen años ni un orden total de descubrimientos. L
 | CX-06 | `world_vantiel.txt` de la antigua continuidad describe Tres Murallas, Fractura y Pacto Radiante. | **HISTÓRICO / OTRO UNIVERSO.** No usar nombres, geografías, guerras ni magia como canon de THE GAME. |
 | CX-07 | My Vampire System inspira el proyecto, pero sus instituciones/híbridos no son el canon original. | **REFERENCIA, NO IMPORTACIÓN.** No trasplantar personajes ni equivalencias de especies. |
 | CX-08 | Una cronología vieja ponía llegada de bestias después de la manifestación del Sistema o les atribuía el pronombre «ellos». | **SUPERADO por H-34/H-35/H-36.** Invasores y bestias son categorías distintas, contemporáneas en la crisis. |
+| CX-09 | Atlas antiguo 2670: guerra intermundial 2645–2659, acuerdo de 2660 y partida del 2670; H-12/H-13 no ofrecen fechas ni demuestran mismos bandos. | **VERIFICADO EN EL ATLAS ORIGINAL / NO PROMOVIDO.** Los años son válidos solo como contenidos de la fuente antigua; identidad de guerra, tratado y cronología con THE GAME actual por verificar. |
+| CX-10 | Plan antiguo de 2010 AC explícitamente glosaba AC como *After Crystal* y describía cristales como motores de la sociedad en 2010 AC. | **SUPERADO POR LA CORRECCIÓN DEL CREADOR (2026-10-08):** AC significa *Antes del Crystal*. El plan histórico de desarrollo no fija la edad del presente jugable. |
 
 ## 4. Control de revelaciones: autor frente a jugador
 
@@ -80,7 +82,7 @@ Estas relaciones **no** establecen años ni un orden total de descubrimientos. L
 
 ### Próxima secuencia verificable para D-084
 
-1. Recuperar del Centro Drive la fuente cronológica original que sustenta el lapso ya decidido; registrar **archivo y evidencia**, no pedir una fecha nueva por defecto.
+1. La fuente primaria antigua del calendario **2670 ya se encontró en la biblioteca**: verificar ahora su *linaje y adopción* frente a H-36 antes de reutilizar años; el lugar exacto del archivo original no se publica en este repositorio. Buscar aún la fuente cronológica que gobierna la continuidad narrativa actual, si es distinta.
 2. Reconciliar CX-03 (mundo ficticio frente a Tierra) sin silenciosamente reescribir H-01/H-36.
 3. Examinar cómo integrar, si procede, la prueba de Gate Twelve a la civilización de cristales; preservar save/quest IDs y Trace Echo.
 4. Continuar editorialmente el **manuscrito Drive v0.8 ya existente**, cruzándolo con los registros de continuidad y preguntas pendientes. No crear una novela competidora en el repositorio ni promover propuestas a hechos aprobados.
@@ -88,7 +90,31 @@ Estas relaciones **no** establecen años ni un orden total de descubrimientos. L
 
 ## 5A. Nueva evidencia recuperada en Drive (26 de octubre)
 
-El trabajo editorial avanzó fuera del repositorio: ya existe en Drive el manuscrito **Volumen I BORRADOR v0.8**, un **Registro histórico relacional** (v1.6, actualización 2026-10-26), una **Matriz de divulgación**, el **Cuestionario QH** y el **Dossier de la Primera Guerra**. No duplicar sus capítulos ni su estructura de eventos en un archivo nuevo. En especial, el dossier localizó referencias al antiguo `WORLD_CAUSALITY_ATLAS_2670_V1` con guerra 2645–2659, acuerdo en 2660 y escenario 2670: son datos **HISTÓRICOS/DE PROCEDENCIA PENDIENTE**, no fechas aprobadas para la línea H-36. El atlas usa una secuencia previa que puede entrar en conflicto con H-36. El objetivo es rastrear el documento matriz, comparar linaje y conservar divergencias explícitas. Véase el [contrato de integración narrativa al juego](D084_DRIVE_TO_GAME_INTEGRATION_BOUNDARY_2026-10-26.md).
+El trabajo editorial avanzó fuera del repositorio: ya existe en Drive el manuscrito **Volumen I BORRADOR v0.8**, un **Registro histórico relacional** (v1.6, actualización 2026-10-26), una **Matriz de divulgación**, el **Cuestionario QH** y el **Dossier de la Primera Guerra**. No duplicar sus capítulos ni su estructura de eventos en un archivo nuevo. En especial, el dossier localizó referencias al antiguo `WORLD_CAUSALITY_ATLAS_2670_V1` con guerra 2645–2659, acuerdo en 2660 y escenario 2670: son datos **HISTÓRICOS/DE PROCEDENCIA PENDIENTE**, no fechas aprobadas para la línea H-36. El atlas usa una secuencia previa que puede entrar en conflicto con H-36. **Actualización 2026-10-27:** el JSON y el Markdown del atlas original ya fueron encontrados y leídos en la biblioteca; resta comprobar **identidad de continuidad** y autoridad de adopción, no la existencia del archivo. El objetivo es comparar linaje y conservar divergencias explícitas. Véase el [contrato de integración narrativa al juego](D084_DRIVE_TO_GAME_INTEGRATION_BOUNDARY_2026-10-26.md).
+
+## 5B. Auditoría directa del atlas anterior, 2026-10-27
+
+**Fuentes recuperadas en la biblioteca personal (leídas, no importadas ni republicadas):**
+- `WORLD_CAUSALITY_ATLAS_2670_V1.json`, 542 líneas de texto en el registro; `schema_version: 1.0.0`, `revision: 2`, `updated_at: 2026-08-23T20:18:00-04:00`. El campo `authority` se limita a **USER_DIRECTIVE_PLUS_ORIGINAL_CAMPAIGN_CANON_DERIVED_FROM_ACTIVE_WORLD_RECORDS** y `status` a **READY_FOR_CHAT_GAME_CAUSAL_REFERENCE**. Son atribuciones de **esa campaña**, no de esta rama de GitHub.
+- `WORLD_CAUSALITY_ATLAS_2670_V1.md`: resumen explicativo del mismo atlas. Declara un encadenamiento local de Veinfall, economía de cristales, posterior expansión portal, guerra y reconstrucción de Asterline/Riverbend, sin afirmación de que sea el corpus de H-36.
+- `Pasted text(48).txt`, transcripción histórica de un archivo de planificación Godot separado. Su pasaje `HIGH-LEVEL THEME` afirma `2010 AC` y `AC means After Crystal`; también planeaba `2000 BC gateway opening`. **Esa definición AC está expresamente anulada por la decisión más reciente del creador citada en CX-02**. No se adjudica esa planificación de Godot al juego actual.
+
+**Cotejo de hechos en dos capas (la primera describe el contenido auténtico del atlas; la segunda evalúa su posible adopción):**
+
+| ID | Qué afirma el artefacto antiguo | Relación con H-## vigente | Dictamen |
+| --- | --- | --- | --- |
+| LA-01 | `snapshot_world_datetime: 2670-08-31T06:00:00-04:00`; uso como referencia causal de una partida centrada en Jack | H-31 dice que falta comprobar el lapso de la historia original actual | **FUENTE ORIGINAL VERIFICADA, IDENTIDAD DE CONTINUIDAD NO VERIFICADA**. No cambiar la fecha del RPG ni inferir equivalencia con el protagonista provisional del slice. |
+| LA-02 | `CAUSE_VEINFALL` (cristales/experiencia de habilidades/ecología bestial), seguido por `CAUSE_PORTAL_EXPANSION` (ciencia portal y expansión hacia recursos exteriores) | H-36 declara simultaneidad de **primeras aperturas**, rupturas, invasores, bestias y Sistema | **RELACIÓN INDETERMINADA**: una *expansión posterior* puede seguir a primeras aperturas sin contradicción. Sí sería conflicto afirmar que **los primeros portales** surgieron después de años de Sistema/cristales; el atlas no lo prueba por sí solo. |
+| LA-03 | `CAUSE_FIRST_INTERWORLD_WAR`: conflicto humano/Kharvori 2645–2659 | H-12 confirma Primera Guerra terrestre posterior al Sistema, sin años, bandos ni identidad con Kharvori | **NO EQUIVALENCIA DEMOSTRADA**. Evitar copiar nombre, fechas o resultado. |
+| LA-04 | `CAUSE_HALCYON`: acuerdo de 2660 que pone fin a guerra a gran escala sin eliminar tensión | H-13 confirma tregua territorial, sin fecha ni texto de tratado | **COMPATIBILIDAD TEMÁTICA, NO IDENTIDAD**. No rebautizar la tregua como Halcyon. |
+| LA-05 | Tierra como Bastión humano; Asterline, siete wards, Eastbank/Riverbend; ruta de estudio de Jack a Ravelin | WD-001/WD-002 mantienen pendiente el lugar/tecnología global; Gate Twelve es `provisional_canon` | **GEOGRAFÍA Y PERSONAJE DE OTRA CAPA HISTÓRICA**. No inyectar barrios/coordenadas, política de residencia ni edad/academia en Gate Twelve. |
+| LA-06 | Una planificación Godot antigua equipara `AC` con `After Crystal` y describe `2010 AC` como sociedad cristalina | Directiva posterior del propietario: `AC = Antes del Crystal` | **RECTIFICADO**. No usar `2010 AC` de esa propuesta para fechar una civilización posterior al cristal. |
+
+### Regla formal de migración de datos temporales
+
+Una fecha o topónimo del atlas solo puede promocionarse si se demuestra, en ese orden: **(1)** identidad del proyecto y universo, **(2)** misma continuidad/evento/personaje, **(3)** compatibilidad con decisiones expresas posteriores H-##, **(4)** aprobación o evidencia clara de adopción en la autoridad narrativa actual, y **(5)** mapeo de implementación independiente si afecta al juego. En ausencia de uno de esos eslabones, conservar el registro como **HISTÓRICO / CANDIDATO** y no marcar el evento como canon.
+
+**Resultado:** la tarea anterior «localizar atlas» queda cerrada a nivel de existencia de fuente. La tarea nueva es **demostrar vínculo de continuidad**, sin inventar fechas. No se modificó la biblioteca ni el atlas, ni se transfirieron datos privados al repositorio público.
 
 ## 6. Verificación y límites de este lote
 
