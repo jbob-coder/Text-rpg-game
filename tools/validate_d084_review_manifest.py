@@ -22,6 +22,38 @@ STATE_PATHS = {
     "state.npcs[*].goals", "state.npcs[*].story_state",
 }
 
+# Closed, editorial-only contract: unknown fields can carry unreviewed lore or
+# private NPC state. Reject extensions until a reviewed schema revision exists.
+REVIEW_KEYS = {
+    "manifest": {"schema_version", "kind", "review_status", "runtime_import",
+                 "source_authorities", "initial_burst", "relative_events",
+                 "unresolved", "calendar", "historical_sources", "editorial",
+                 "knowledge_boundary", "gameplay_boundary"},
+    "source_authorities": {"narrative", "manuscript", "technical"},
+    "initial_burst": {"phase_id", "temporal_relation", "source_ids", "members",
+                      "absolute_date", "location"},
+    "relative_events[]": {"id", "source_ids", "after", "absolute_date",
+                          "combatants", "signatories"},
+    "unresolved": {"first_crystal_forging_relative_to_war", "current_game_year",
+                   "world_identity_vs_earth", "post_crystal_era_label"},
+    "calendar": {"ac_definition", "source", "allow_legacy_after_crystal_interpretation"},
+    "historical_sources[]": {"id", "status", "observed_dates",
+                             "adopted_into_current_canon"},
+    "editorial": {"manuscript_version", "narrative_sections",
+                  "historical_note_section", "chapter_xii_id",
+                  "alternative_xii_id", "dr06_adaptation", "dr06_is_historical_event"},
+    "knowledge_boundary": {"world_secret_proposition", "source_ids",
+                           "author_truth_status", "initial_player_knowledge",
+                           "initial_npc_knowledge", "invader_knowledge",
+                           "android_raw_npc_state_allowed",
+                           "requires_authored_discovery_for_runtime"},
+    "gameplay_boundary": {"current_content_id", "current_content_canon_status",
+                          "migration_status", "preserve_npc_id",
+                          "preserve_existing_knowledge_id",
+                          "preserve_existing_story_track", "protect_state_paths",
+                          "never_auto_create_from_editorial"},
+}
+
 
 def _distinct_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     result: dict[str, Any] = {}
@@ -44,6 +76,21 @@ def validate(manifest: dict[str, Any], slice_content: dict[str, Any]) -> list[st
     """Validate non-runtime boundaries. Returns specific failures, never modifies inputs."""
     errors: list[str] = []
 
+    def check_keys(label: str, value: dict[str, Any]) -> None:
+        expected = REVIEW_KEYS[label]
+        if set(value) != expected:
+            missing = sorted(expected - set(value))
+            unexpected = sorted(set(value) - expected)
+            errors.append(f"{label} field mismatch: missing={missing}, unexpected={unexpected}")
+
+    def string_ids(value: Any, label: str) -> list[str]:
+        if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+            errors.append(f"{label} must be a list of strings")
+            return []
+        return value
+
+    check_keys("manifest", manifest)
+
     def require(condition: bool, message: str) -> None:
         if not condition:
             errors.append(message)
@@ -53,6 +100,7 @@ def validate(manifest: dict[str, Any], slice_content: dict[str, Any]) -> list[st
         if not isinstance(value, dict):
             errors.append(f"{key} must be an object")
             return {}
+        check_keys(key, value)
         return value
 
     require(type(manifest.get("schema_version")) is int and manifest["schema_version"] == 1, "schema_version must equal integer 1")
@@ -61,6 +109,7 @@ def validate(manifest: dict[str, Any], slice_content: dict[str, Any]) -> list[st
     require(manifest.get("runtime_import") is False, "review content must not be a runtime import")
     authorities = obj("source_authorities")
     require("H-01..H-36" in str(authorities.get("narrative", "")), "narrative source authority missing")
+    require("v0.9.1" in str(authorities.get("manuscript", "")), "manuscript authority/version mismatch")
 
     burst = obj("initial_burst")
     members = burst.get("members")
@@ -68,7 +117,7 @@ def validate(manifest: dict[str, Any], slice_content: dict[str, Any]) -> list[st
             "H-36 initial burst must contain exactly five distinct types")
     require(burst.get("phase_id") == "REVIEW_INITIAL_BURST", "phase ID must remain review-only")
     require(burst.get("temporal_relation") == "SAME_HISTORICAL_PHASE_NOT_SAME_SECOND", "burst cannot impose micro-order")
-    require({"H-32", "H-33", "H-34", "H-35", "H-36"}.issubset(set(burst.get("source_ids", []))), "H-36 provenance incomplete")
+    require({"H-32", "H-33", "H-34", "H-35", "H-36"}.issubset(set(string_ids(burst.get("source_ids"), "initial_burst.source_ids"))), "H-36 provenance incomplete")
     require(burst.get("absolute_date") is None and burst.get("location") is None, "burst date/location remains unknown")
 
     events = manifest.get("relative_events")
@@ -76,10 +125,12 @@ def validate(manifest: dict[str, Any], slice_content: dict[str, Any]) -> list[st
         errors.append("exactly two review-only relative event records required")
     else:
         war, truce = events
+        for event in events:
+            check_keys("relative_events[]", event)
         require(war.get("id") == "FIRST_WAR" and war.get("after") == "REVIEW_INITIAL_BURST"
-                and "H-12" in war.get("source_ids", []), "First War must follow System in H-12")
+                and "H-12" in string_ids(war.get("source_ids"), "FIRST_WAR.source_ids"), "First War must follow System in H-12")
         require(truce.get("id") == "TERRITORIAL_TRUCE" and truce.get("after") == "FIRST_WAR"
-                and "H-13" in truce.get("source_ids", []), "territorial truce must follow First War in H-13")
+                and "H-13" in string_ids(truce.get("source_ids"), "TERRITORIAL_TRUCE.source_ids"), "territorial truce must follow First War in H-13")
         require(all(x.get("absolute_date") is None for x in events), "absolute historical years remain unadopted")
         require(war.get("combatants") is None and truce.get("signatories") is None, "war parties/signatories unverified")
 
@@ -91,14 +142,20 @@ def validate(manifest: dict[str, Any], slice_content: dict[str, Any]) -> list[st
 
     calendar = obj("calendar")
     require(calendar.get("ac_definition") == "Antes del Crystal"
+            and calendar.get("source") == "OWNER_CORRECTION_2026-10-08"
             and calendar.get("allow_legacy_after_crystal_interpretation") is False, "AC is Antes del Crystal, never After Crystal")
 
     legacy = manifest.get("historical_sources")
     require(isinstance(legacy, list) and len(legacy) == 1 and isinstance(legacy[0], dict)
             and legacy[0].get("id") == "WORLD_CAUSALITY_ATLAS_2670_V1"
             and legacy[0].get("status") == "HISTORICAL_UNLINKED"
-            and legacy[0].get("adopted_into_current_canon") is False,
+            and legacy[0].get("adopted_into_current_canon") is False
+            and legacy[0].get("observed_dates") == ["2645-2659", "2660", "2670"],
             "old 2670 campaign is not automatically H-36 canon")
+    if isinstance(legacy, list):
+        for historical_record in legacy:
+            if isinstance(historical_record, dict):
+                check_keys("historical_sources[]", historical_record)
 
     editorial = obj("editorial")
     require(editorial.get("manuscript_version") == "v0.9.1"
@@ -111,7 +168,7 @@ def validate(manifest: dict[str, Any], slice_content: dict[str, Any]) -> list[st
 
     knowledge = obj("knowledge_boundary")
     require(knowledge.get("world_secret_proposition") == "SYSTEM_TABLET_EXISTS"
-            and "H-04" in knowledge.get("source_ids", []), "System tablet must retain H-04 provenance")
+            and "H-04" in string_ids(knowledge.get("source_ids"), "knowledge_boundary.source_ids"), "System tablet must retain H-04 provenance")
     require(knowledge.get("author_truth_status") == "CONFIRMED_NARRATIVE_ONLY", "secret is not gameplay-enabled")
     require(knowledge.get("initial_player_knowledge") == "UNSPECIFIED_NO_AUTOGRANT"
             and knowledge.get("initial_npc_knowledge") == "UNSPECIFIED_NO_AUTOGRANT", "author truth must not be granted to NPC/player")
@@ -126,17 +183,29 @@ def validate(manifest: dict[str, Any], slice_content: dict[str, Any]) -> list[st
     require(gameplay.get("preserve_npc_id") == "NPC_TAMSIN"
             and gameplay.get("preserve_existing_knowledge_id") == "KNOW_RELAY_DESTINATION_SERVICE_GATE_12"
             and gameplay.get("preserve_existing_story_track") == "TRACK_RELAY_CASE", "existing persistent social IDs must be preserved")
-    require(isinstance(gameplay.get("protect_state_paths"), list)
-            and set(gameplay["protect_state_paths"]) == STATE_PATHS, "player/NPC/private state owners must be separate")
-    require(set(gameplay.get("never_auto_create_from_editorial", [])) ==
+    require(set(string_ids(gameplay.get("protect_state_paths"), "gameplay_boundary.protect_state_paths")) == STATE_PATHS,
+            "player/NPC/private state owners must be separate")
+    require(set(string_ids(gameplay.get("never_auto_create_from_editorial"), "gameplay_boundary.never_auto_create_from_editorial")) ==
             {"npc", "location", "route", "quest", "item", "ability", "save_field"}, "proposed prose cannot create gameplay entities")
 
     require(slice_content.get("content_id") == gameplay.get("current_content_id")
             and slice_content.get("canon_status") == "provisional_canon", "current slice baseline changed: refresh before migration")
-    initial = slice_content.get("initial_state", {})
-    npc = initial.get("npcs", {}).get("NPC_TAMSIN", {})
+    initial = slice_content.get("initial_state")
+    if not isinstance(initial, dict):
+        errors.append("initial_state must be an object")
+        initial = {}
+    npcs = initial.get("npcs")
+    if not isinstance(npcs, dict):
+        errors.append("initial_state.npcs must be an object")
+        npcs = {}
+    npc = npcs.get("NPC_TAMSIN")
+    if not isinstance(npc, dict):
+        errors.append("Tamsin social containers changed")
+        npc = {}
     require(all(x in npc for x in ("knowledge", "memories", "goals", "story_state")), "Tamsin social containers changed")
-    require(gameplay.get("preserve_npc_id") in initial.get("relationships", {}), "Tamsin relationship anchor changed")
+    relationships = initial.get("relationships")
+    require(isinstance(relationships, dict) and gameplay.get("preserve_npc_id") in relationships,
+            "Tamsin relationship anchor changed")
     return errors
 
 
