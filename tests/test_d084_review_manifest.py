@@ -93,6 +93,46 @@ class D084ReviewManifestTests(unittest.TestCase):
         self.contract["gameplay_boundary"]["protect_state_paths"].remove("state.npcs[*].knowledge")
         self.assert_rejected("state owners must be separate")
 
+    def test_rejects_new_unreviewed_editorial_field(self):
+        self.contract["knowledge_boundary"]["initial_player_secret_payload"] = "SYSTEM_TABLET_EXISTS"
+        self.assert_rejected("knowledge_boundary field mismatch")
+
+    def test_rejects_new_runtime_autogrant_field(self):
+        self.contract["gameplay_boundary"]["secret_autogrant"] = True
+        self.assert_rejected("gameplay_boundary field mismatch")
+
+    def test_rejects_missing_disclosure_gate(self):
+        del self.contract["knowledge_boundary"]["requires_authored_discovery_for_runtime"]
+        self.assert_rejected("knowledge_boundary field mismatch")
+
+    def test_rejects_added_event_timing_detail(self):
+        self.contract["relative_events"][0]["year"] = 2645
+        self.assert_rejected("relative_events.FIRST_WAR field mismatch")
+
+    def test_rejects_changed_historical_atlas_dates(self):
+        self.contract["historical_sources"][0]["observed_dates"].append("2099")
+        self.assert_rejected("old 2670 campaign")
+
+    def test_rejects_mismatched_manuscript_authority(self):
+        self.contract["source_authorities"]["manuscript"] = "Volumen I v0.8"
+        self.assert_rejected("manuscript authority/version mismatch")
+
+    def test_missing_provenance_list_is_rejected_not_crash(self):
+        self.contract["initial_burst"]["source_ids"] = None
+        self.assert_rejected("initial_burst.source_ids must be a list")
+
+    def test_missing_war_provenance_list_is_rejected_not_crash(self):
+        self.contract["relative_events"][0]["source_ids"] = None
+        self.assert_rejected("FIRST_WAR.source_ids must be a list")
+
+    def test_missing_social_state_is_rejected_not_crash(self):
+        self.slice["initial_state"] = None
+        self.assert_rejected("initial_state must be an object")
+
+    def test_nonobject_npc_is_rejected_not_crash(self):
+        self.slice["initial_state"]["npcs"]["NPC_TAMSIN"] = None
+        self.assert_rejected("Tamsin social containers changed")
+
     def test_duplicate_json_keys_fail_closed(self):
         with TemporaryDirectory() as tmp:
             path = Path(tmp) / "duplicates.json"
