@@ -36,16 +36,18 @@ def _find_review_only_content_ids(value: Any, path: str = "content") -> list[str
     if isinstance(value, dict):
         for key, item in value.items():
             if isinstance(key, str):
-                for identifier in REVIEW_ONLY_CONTENT_IDS:
-                    if identifier in key:
+                normalized_key = key.casefold()
+                for identifier in sorted(REVIEW_ONLY_CONTENT_IDS):
+                    if identifier.casefold() in normalized_key:
                         hits.append(f"{path}.{key}: {identifier}")
             hits.extend(_find_review_only_content_ids(item, f"{path}.{key}"))
     elif isinstance(value, list):
         for index, item in enumerate(value):
             hits.extend(_find_review_only_content_ids(item, f"{path}[{index}]"))
     elif isinstance(value, str):
-        for identifier in REVIEW_ONLY_CONTENT_IDS:
-            if identifier in value:
+        normalized_value = value.casefold()
+        for identifier in sorted(REVIEW_ONLY_CONTENT_IDS):
+            if identifier.casefold() in normalized_value:
                 hits.append(f"{path}: {identifier}")
     return hits
 
