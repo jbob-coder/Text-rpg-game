@@ -22,6 +22,34 @@ STATE_PATHS = {
     "state.npcs[*].goals", "state.npcs[*].story_state",
 }
 
+# These labels belong solely to the D-084 reviewer, not the shipped content pack.
+# Fail closed if they appear even in a nested scene/dialogue/metadata string.
+REVIEW_ONLY_CONTENT_IDS = {
+    "REVIEW_INITIAL_BURST", "FIRST_WAR", "TERRITORIAL_TRUCE",
+    "SYSTEM_TABLET_EXISTS",
+}
+
+
+def _find_review_only_content_ids(value: Any, path: str = "content") -> list[str]:
+    """Find accidental imports at any depth, including dictionary keys."""
+    hits: list[str] = []
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if isinstance(key, str):
+                for identifier in REVIEW_ONLY_CONTENT_IDS:
+                    if identifier in key:
+                        hits.append(f"{path}.{key}: {identifier}")
+            hits.extend(_find_review_only_content_ids(item, f"{path}.{key}"))
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            hits.extend(_find_review_only_content_ids(item, f"{path}[{index}]"))
+    elif isinstance(value, str):
+        for identifier in REVIEW_ONLY_CONTENT_IDS:
+            if identifier in value:
+                hits.append(f"{path}: {identifier}")
+    return hits
+
+
 # Closed, editorial-only contract: unknown fields can carry unreviewed lore or
 # private NPC state. Reject extensions until a reviewed schema revision exists.
 REVIEW_KEYS = {
@@ -203,6 +231,21 @@ def validate(manifest: dict[str, Any], slice_content: dict[str, Any]) -> list[st
         errors.append("Tamsin social containers changed")
         npc = {}
     require(all(x in npc for x in ("knowledge", "memories", "goals", "story_state")), "Tamsin social containers changed")
+    for field, required_type in (("knowledge", dict), ("memories", list),
+                                 ("goals", dict), ("story_state", dict)):
+        require(isinstance(npc.get(field), required_type),
+                f"Tamsin {field} must retain its original container type")
+    player_knowledge = initial.get("knowledge", {})
+    require(isinstance(player_knowledge, dict), "initial player knowledge must be an object")
+    for npc_id, npc_state in npcs.items():
+        if not isinstance(npc_state, dict):
+            errors.append(f"initial NPC state must be an object: {npc_id}")
+            continue
+        if "knowledge" in npc_state:
+            require(isinstance(npc_state["knowledge"], dict),
+                    f"initial NPC knowledge must be an object: {npc_id}")
+    for hit in _find_review_only_content_ids(slice_content):
+        errors.append(f"review-only identifier imported into gameplay content: {hit}")
     relationships = initial.get("relationships")
     require(isinstance(relationships, dict) and gameplay.get("preserve_npc_id") in relationships,
             "Tamsin relationship anchor changed")
