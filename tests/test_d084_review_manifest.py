@@ -174,6 +174,40 @@ class D084ReviewManifestTests(unittest.TestCase):
                 }
                 self.assert_rejected("review-only identifier imported into gameplay content")
 
+    def test_all_editorial_ids_rejected_in_lowercase_dialogue(self):
+        """Capitalization cannot bypass the complete nine-token review gate."""
+        event_ids = (
+            self.contract["initial_burst"]["members"]
+            + [self.contract["initial_burst"]["phase_id"]]
+            + [event["id"] for event in self.contract["relative_events"]]
+            + [self.contract["knowledge_boundary"]["world_secret_proposition"]]
+        )
+        for event_id in event_ids:
+            with self.subTest(event_id=event_id):
+                self.slice["scenes"] = {
+                    "OPENING": {"dialogue": [{"body": event_id.lower()}]},
+                }
+                self.assert_rejected("review-only identifier imported into gameplay content")
+
+    def test_all_editorial_ids_rejected_in_mixed_case_nested_keys(self):
+        """Noncanonical casing in serialized state is still a review-only ID."""
+        event_ids = (
+            self.contract["initial_burst"]["members"]
+            + [self.contract["initial_burst"]["phase_id"]]
+            + [event["id"] for event in self.contract["relative_events"]]
+            + [self.contract["knowledge_boundary"]["world_secret_proposition"]]
+        )
+        for event_id in event_ids:
+            with self.subTest(event_id=event_id):
+                mixed_case = "".join(
+                    char.upper() if index % 2 == 0 else char.lower()
+                    for index, char in enumerate(event_id)
+                )
+                self.slice["scenes"] = {
+                    "OPENING": {"metadata": {mixed_case: True}},
+                }
+                self.assert_rejected("review-only identifier imported into gameplay content")
+
     def test_review_only_event_id_cannot_become_authored_key(self):
         self.slice["quests"] = [{"FIRST_WAR": {"known": True}}]
         self.assert_rejected("review-only identifier imported into gameplay content")
