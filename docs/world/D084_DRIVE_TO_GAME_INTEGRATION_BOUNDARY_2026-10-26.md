@@ -23,7 +23,7 @@ Fuentes narrativas recuperadas, con función distinta y sin copiar URL privadas 
 | QH | THE GAME — Cuestionario maestro de historia — Q&A por etapas | Preguntas aún no resueltas | Herramienta, no decisiones nuevas |
 | ♾ | THE GAME — Continuidad contextual, permisos y retoma — Leer Primero (2026-10-13) | Interpretación de continuidad autónoma | Permisos/retoma; no habilita identidad Player-AI suspendida |
 
-**Hallazgo sobre calendario:** WAR documenta la existencia de un archivo histórico llamado `WORLD_CAUSALITY_ATLAS_2670_V1` con etiquetas de años 2645–2659, 2660 y 2670; esas fechas pertenecen a un snapshot anterior que **no se ha demostrado idéntico** al canon H-36. El dossier advierte que una secuencia anterior de la expansión portal/cristales puede contradecir la simultaneidad H-36. **No migrar** años, nombres de guerras, acuerdos o facciones (incluido «Halcyon Gate Concord» o «Kharvori») al canon nuevo por parecido. El trabajo pendiente es identificar la fuente matriz y probar continuidad o divergencia.
+**Hallazgo sobre calendario — verificado con fuente primaria 2026-10-27:** WAR condujo al original `WORLD_CAUSALITY_ATLAS_2670_V1.json` y su par `.md`, localizados y leídos directamente en la biblioteca del usuario. El JSON consta de 542 líneas, revisión 2 del 2026-08-23, y se autodefine como **referencia causal de una campaña original de chat**, no como canon técnico de este repositorio. Contiene una guerra intermundial humano/Kharvori 2645–2659, el acuerdo Halcyon de 2660 y snapshot de 2670. **Esas fechas existen en esa fuente, pero su pertenencia a H-36 no está probada.** Importa distinguir *primera apertura* (H-36) de *expansión posterior de portales* (atlas): una secuencia de expansión posterior no contradice por sí sola la simultaneidad inicial. **No migrar** fechas, bandos, nombres, coordenadas, población ni relaciones de Jack a este juego por parecido. Restan pruebas de identidad y adopción, no buscar el archivo otra vez. Véase auditoría LA-01..LA-06 en la matriz hermana.
 
 ## 2. Reconciliación con el producto actual
 
@@ -81,12 +81,15 @@ flowchart TD
 | INT-06 | Registro de invasor y criatura evolucionada | Son tipos separados; no comparten por defecto rol político ni progresión |
 | INT-07 | Evento guerra/tregua con campos desconocidos | Falta de año, firmantes o coordenadas no se rellena con valores inventados |
 | INT-08 | Borrador NOV v0.8 en corpus de contenido | No se expone automáticamente como escena/journal canon; revisión requerida |
+| INT-09 | Ingesta de atlas viejo con fechas de guerra 2645–2659/2660 y metadatos de campaña | Debe permanecer HISTORICAL/UNLINKED hasta comprobación de continuidad; ni años ni bandos se convierten en hechos H-12/H-13 |
+| INT-10 | Atlas menciona expansión de portales, canon H-36 exige primer estallido simultáneo | La validación distingue ‘initial opening’ de ‘later expansion’ y no infiere contradicción automática ni altera el orden de H-36 |
+| INT-11 | Entrada legada interpreta AC = After Crystal | Debe quedar marcada SUPERSEDED ante directiva del creador AC = Antes del Crystal, sin calcular años del presente jugable |
 
 Estas pruebas son **criterios propuestos**, no archivos test añadidos ni reportes PASS de ejecución.
 
 ## 6. Riesgos y próximos pasos sin solapamientos
 
-1. **Calendario:** localizar la matriz primaria `WORLD_CAUSALITY_ATLAS_2670_V1`, comprobar procedencia y compararla con H-36; si contradice la continuidad, mantenerla histórica.
+1. **Calendario:** los archivos principales `WORLD_CAUSALITY_ATLAS_2670_V1.json` / `.md` están **localizados y leídos** en la biblioteca; rastrear ahora el vínculo de continuidad que justificaría adoptar sus fechas en H-36. Si no existe evidencia suficiente, conservar sus fechas solo como cronología de la campaña antigua.
 2. **Manuscrito:** seguir trabajando en NOV v0.8 y REL v1.6 en su continuidad Drive autorizada; **no** crear un segundo Volumen I en GitHub.
 3. **Identidad planetaria:** conciliar el uso reiterado «Tierra» de H-## con la directriz de «mundo ficticio original» en el Master Register.
 4. **Producto:** una vez validados conceptos narrativos, preparar un contrato para conectar historias al slice jugable sin perder saves/quests ni filtrar secretos; no intervenir en D-072/Silex ni en claims inactivos.
@@ -94,6 +97,6 @@ Estas pruebas son **criterios propuestos**, no archivos test añadidos ni report
 
 ## 7. Evidencia de revisión
 
-**Leídos:** `AGENTS.md`, `docs/AI_TASK_BULLETIN_BOARD.md`, D-084 del master register, `docs/world/WORLD_CANON_DECISION_QUEUE.md`, `docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md`, `content/vertical_slice_01.json`, `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`, y fuentes CAN/CEN/REL/NOV/WAR/DISC/QH/♾ de Drive.
+**Leídos:** `AGENTS.md`, `docs/AI_TASK_BULLETIN_BOARD.md`, D-084 del master register, `docs/world/WORLD_CANON_DECISION_QUEUE.md`, `docs/world/WORLD_DEVELOPMENT_MASTER_INDEX.md`, `content/vertical_slice_01.json`, `docs/systems/SOCIAL_SCHEMA_API_MIGRATION_PACKET.md`, fuentes CAN/CEN/REL/NOV/WAR/DISC/QH/♾ de Drive y, en biblioteca personal, los **dos archivos originales** `WORLD_CAUSALITY_ATLAS_2670_V1` junto a una antigua planificación Godot con interpretación errónea de AC. No se copiaron fuentes de la biblioteca al repositorio público.
 
 **Sin cambios:** runtime, APK, tests, estado de jugadores, reclamaciones de tarea, GitHub authority branch y canon aprobado. La lectura de documentos y el diff GitHub son verificaciones documentales; ninguna suite de pruebas de juego fue ejecutada.
