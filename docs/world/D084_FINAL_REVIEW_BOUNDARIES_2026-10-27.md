@@ -91,3 +91,12 @@ Caso concreto `SYSTEM_TABLET_EXISTS` (identificador **solo del revisor**, no un 
 **Pruebas:** `tests/test_d084_review_manifest.py` incorpora dos métodos de regresión con subcasos para los cinco IDs cada uno: (a) cadenas del diálogo y (b) claves JSON anidadas. Ahora hay **36 métodos de prueba D-084** definidos (34 previos + 2 nuevos). Las nuevas verificaciones no pretenden detectar spoilers expresados semánticamente con otras palabras; requieren además revisión de narrativa y futura separación real de conocimiento público/privado antes de importar canon.
 
 **Estado de CI para el HEAD que incluye el cambio:** commits `fc151de` (validador) y `939f913` (regresiones), workflow #418 **disparado; resultado todavía no atribuido al redactar este registro**. Solo el resultado final del run de este HEAD puede acreditar la revisión; no confundir el PASS de #415/#416 con #418. PR #85 permanece **DRAFT / NO MERGED / NO CLAIM D-084**.
+
+
+## 8. Igualdad de etiquetas sin sensibilidad a mayúsculas (2026-10-27)
+
+**Bug confirmado en inspección de código:** el scanner recursivo del ciclo anterior comparaba las nueve etiquetas exclusivas del revisor mediante `identifier in key/value`, una comparación sensible a mayúsculas. Una escena que almacenara `system_tablet_exists` o una clave `sPaTiAl_RuPtUrEs` no dispararía el bloqueo aunque equivalgan a identificadores declarativos de D-084. La búsqueda previa insensible a mayúsculas del *slice* actual no encontró ninguna de las nueve etiquetas: **corrección preventiva, no fuga comprobada**.
+
+**Corrección:** usar `.casefold()` al comparar cadenas de contenido y claves JSON; recorrer las nueve etiquetas ordenadas para producir errores de validación deterministas. Se conservan los límites existentes: únicamente etiquetas editoriales completas como subcadena, sin lectura de Drive, mutación de juego, migración, valor semántico de spoilers ni nuevo ID canónico.
+
+**Pruebas:** dos métodos de regresión nuevos, uno para diálogo en minúsculas y otro para claves JSON de mayúsculas alternas; cada uno recorre **las nueve etiquetas**. Total actual: **38 métodos D-084 definidos** (36 previos + 2 nuevos), con 18 subcasos en estos dos métodos. Las pruebas del HEAD anterior no validan automáticamente el cambio actual; confirmar el estado del último flujo CI después de los commits y no atribuir resultado antes de obtenerlo. PR #85 sigue DRAFT / sin merge ni CLAIM D-084.
