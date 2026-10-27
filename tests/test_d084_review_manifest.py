@@ -156,6 +156,24 @@ class D084ReviewManifestTests(unittest.TestCase):
         }
         self.assert_rejected("review-only identifier imported into gameplay content")
 
+    def test_all_h36_burst_labels_are_rejected_in_scene_text(self):
+        """Do not ship the review graph's H-36 event nodes as gameplay text."""
+        for event_id in self.contract["initial_burst"]["members"]:
+            with self.subTest(event_id=event_id):
+                self.slice["scenes"] = {
+                    "OPENING": {"dialogue": [{"body": event_id}]},
+                }
+                self.assert_rejected("review-only identifier imported into gameplay content")
+
+    def test_all_h36_burst_labels_are_rejected_as_json_keys(self):
+        """Recursive scan also catches unapproved event IDs in metadata keys."""
+        for event_id in self.contract["initial_burst"]["members"]:
+            with self.subTest(event_id=event_id):
+                self.slice["scenes"] = {
+                    "OPENING": {"flags": {event_id: True}},
+                }
+                self.assert_rejected("review-only identifier imported into gameplay content")
+
     def test_review_only_event_id_cannot_become_authored_key(self):
         self.slice["quests"] = [{"FIRST_WAR": {"known": True}}]
         self.assert_rejected("review-only identifier imported into gameplay content")
