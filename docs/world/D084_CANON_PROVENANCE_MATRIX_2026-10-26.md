@@ -1,6 +1,6 @@
 # D-084 — Matriz de procedencia, canon y conflictos (lote no propietario)
 
-**Fecha de lectura:** 2026-10-26; ampliación de fuente primaria histórica: 2026-10-27 (AST)  
+**Fecha de lectura:** 2026-10-26; ampliación de fuentes históricas y sincronización editorial: 2026-10-27 (AST)  
 **Proyecto:** THE GAME, `jbob-coder/Text-rpg-game`  
 **Rama base auditada:** `docs/master-game-development-program` @ `dac5d22cdbe211d0d35d3df98b542be2653f1b85`  
 **Tipo:** contribución preparatoria/revisable de D-084; NO reclama la tarea ni activa ninguna entidad Player-AI.  
@@ -74,7 +74,7 @@ Estas relaciones **no** establecen años ni un orden total de descubrimientos. L
 
 ## 5. Índice de volúmenes y desarrollo acotado
 
-- **Volumen I (YA EXISTE EN DRIVE):** «THE GAME — Historia novelada — Volumen I — BORRADOR v0.8», manuscrito extenso en continua revisión, no canon final. No crear otro Volumen I paralelo. Véase el [puente narración→juego](D084_DRIVE_TO_GAME_INTEGRATION_BOUNDARY_2026-10-26.md).
+- **Volumen I (YA EXISTE EN DRIVE):** «THE GAME — Historia novelada — Volumen I: La era de las rupturas — BORRADOR v0.9.1», verificado el **2026-10-27**, doce secciones narrativas I–XII y XIII «Nota del archivo histórico»; trabajo literario en revisión, no canon final. El capítulo XII es «El oficio de volver a vivir» y contiene una adaptación puntual y expresamente *ficticia* de la escena compuesta DR-06. La fuente independiente «Lo que debía seguir funcionando» permanece intacta, no es un capítulo segundo ni un evento validado. No crear otro Volumen I. Véase el [puente narración→juego](D084_DRIVE_TO_GAME_INTEGRATION_BOUNDARY_2026-10-26.md).
 - **Volumen II (pendiente):** estudio humano de cristales, aprendizaje, resistencia y reorganización alrededor de la crisis y la guerra, **sin fijar anticipadamente cuándo ocurrió la primera forja**. Requiere fuentes concretas para evitar inventar eventos.
 - **Volumen III (pendiente):** desarrollo de la Primera Guerra, bandos y consecuencias. Requiere eventos y participantes comprobados.
 - **Volumen IV (pendiente):** tregua y normalización en la época jugable. Requiere cronología y contexto de sociedades/territorios.
@@ -85,12 +85,12 @@ Estas relaciones **no** establecen años ni un orden total de descubrimientos. L
 1. La fuente primaria antigua del calendario **2670 ya se encontró en la biblioteca**: verificar ahora su *linaje y adopción* frente a H-36 antes de reutilizar años; el lugar exacto del archivo original no se publica en este repositorio. Buscar aún la fuente cronológica que gobierna la continuidad narrativa actual, si es distinta.
 2. Reconciliar CX-03 (mundo ficticio frente a Tierra) sin silenciosamente reescribir H-01/H-36.
 3. Examinar cómo integrar, si procede, la prueba de Gate Twelve a la civilización de cristales; preservar save/quest IDs y Trace Echo.
-4. Continuar editorialmente el **manuscrito Drive v0.8 ya existente**, cruzándolo con los registros de continuidad y preguntas pendientes. No crear una novela competidora en el repositorio ni promover propuestas a hechos aprobados.
+4. Continuar editorialmente el **manuscrito Drive v0.9.1 ya existente** (I–XII narrativo + XIII nota histórica), cruzándolo con REL y preguntas pendientes. Conservar los identificadores de procedencia NOV-XII-MANUSCRITO-v0.9.1 y NOV-XII-DR06-BORRADOR-v0.1; no crear una novela competidora ni promover la escena DR-06 a hecho histórico.
 5. Solo tras claim legítimo y revisión: sincronizar D-084, índice de mundo, Master Documentation Record, Brag/Learning y el Bulletin. Nunca marcar **DONE** sin los entregables y aceptación completos.
 
 ## 5A. Nueva evidencia recuperada en Drive (26 de octubre)
 
-El trabajo editorial avanzó fuera del repositorio: ya existe en Drive el manuscrito **Volumen I BORRADOR v0.8**, un **Registro histórico relacional** (v1.6, actualización 2026-10-26), una **Matriz de divulgación**, el **Cuestionario QH** y el **Dossier de la Primera Guerra**. No duplicar sus capítulos ni su estructura de eventos en un archivo nuevo. En especial, el dossier localizó referencias al antiguo `WORLD_CAUSALITY_ATLAS_2670_V1` con guerra 2645–2659, acuerdo en 2660 y escenario 2670: son datos **HISTÓRICOS/DE PROCEDENCIA PENDIENTE**, no fechas aprobadas para la línea H-36. El atlas usa una secuencia previa que puede entrar en conflicto con H-36. **Actualización 2026-10-27:** el JSON y el Markdown del atlas original ya fueron encontrados y leídos en la biblioteca; resta comprobar **identidad de continuidad** y autoridad de adopción, no la existencia del archivo. El objetivo es comparar linaje y conservar divergencias explícitas. Véase el [contrato de integración narrativa al juego](D084_DRIVE_TO_GAME_INTEGRATION_BOUNDARY_2026-10-26.md).
+El trabajo editorial avanzó fuera del repositorio: el manuscrito se había identificado originalmente como **Volumen I BORRADOR v0.8**, pero fue releído el **2026-10-27** ya en **v0.9.1** (12 secciones narrativas + nota XIII), junto a un **Registro histórico relacional** (v1.6 y adiciones del 2026-10-27), una **Matriz de divulgación**, el **Cuestionario QH** y el **Dossier de la Primera Guerra**. No duplicar sus capítulos ni su estructura de eventos en un archivo nuevo. En especial, el dossier localizó referencias al antiguo `WORLD_CAUSALITY_ATLAS_2670_V1` con guerra 2645–2659, acuerdo en 2660 y escenario 2670: son datos **HISTÓRICOS/DE PROCEDENCIA PENDIENTE**, no fechas aprobadas para la línea H-36. El atlas usa una secuencia previa que puede entrar en conflicto con H-36. **Actualización 2026-10-27:** el JSON y el Markdown del atlas original ya fueron encontrados y leídos en la biblioteca; resta comprobar **identidad de continuidad** y autoridad de adopción, no la existencia del archivo. El objetivo es comparar linaje y conservar divergencias explícitas. Véase el [contrato de integración narrativa al juego](D084_DRIVE_TO_GAME_INTEGRATION_BOUNDARY_2026-10-26.md).
 
 ## 5B. Auditoría directa del atlas anterior, 2026-10-27
 
@@ -115,6 +115,18 @@ El trabajo editorial avanzó fuera del repositorio: ya existe en Drive el manusc
 Una fecha o topónimo del atlas solo puede promocionarse si se demuestra, en ese orden: **(1)** identidad del proyecto y universo, **(2)** misma continuidad/evento/personaje, **(3)** compatibilidad con decisiones expresas posteriores H-##, **(4)** aprobación o evidencia clara de adopción en la autoridad narrativa actual, y **(5)** mapeo de implementación independiente si afecta al juego. En ausencia de uno de esos eslabones, conservar el registro como **HISTÓRICO / CANDIDATO** y no marcar el evento como canon.
 
 **Resultado:** la tarea anterior «localizar atlas» queda cerrada a nivel de existencia de fuente. La tarea nueva es **demostrar vínculo de continuidad**, sin inventar fechas. No se modificó la biblioteca ni el atlas, ni se transfirieron datos privados al repositorio público.
+
+## 5C. Sincronización del manuscrito vivo y colisión NOV-XII, 2026-10-27
+
+**Nueva fuente comprobada en Drive:** el Volumen I ya no termina en v0.8. Su encabezado actual es **BORRADOR LITERARIO v0.9.1**, con **doce secciones narrativas I–XII** y una **nota editorial/histórica XIII**. Se leyeron el encabezado, la tabla visible de títulos, el capítulo XII y el apéndice de conciliación fechado 2026-10-27. El registro histórico relacional conserva antecedentes de versiones inferiores y un cotejo editorial; **esos párrafos antiguos son historial, no el estado actual del manuscrito**.
+
+- **ID único de la obra activa:** `NOV-XII-MANUSCRITO-v0.9.1` — sección XII de Volumen I, «El oficio de volver a vivir», con síntesis de continuidad material/civil tras la tregua. Estado: **BORRADOR / editorial**, no H-canon.
+- **ID de fuente alternativa:** `NOV-XII-DR06-BORRADOR-v0.1` — «Lo que debía seguir funcionando», un borrador independiente de 22 párrafos registrado en Drive y **no eliminado**.
+- **Integración comprobada:** los párrafos del capítulo XII después del apartado de normas cotidianas incluyen una **adaptación acotada** de la escena logística `DR-06`: material, reparaciones, solicitudes, prueba de objetos y disputa de reservas; etiquetada expresamente como **escena compuesta**, sin localidades/personajes/órganos oficiales o acontecimientos canónicos. El apéndice final confirma `DR-06-ADAPTADO` y conservación de la fuente independiente.
+- **Regla de identidad:** `NOV-XII` sin calificador es ambiguo en registro histórico. No crear una segunda sección XII ni importar `DR-06` como mapa, NPC, quest, institución, ítems o ruta del juego. Nada en la descripción del episodio prueba que esos sucesos acontecieran literalmente.
+- **Regla de autoridad:** el registro REL puede retener un cotejo de una versión anterior a la adaptación; ante divergencia documental se lee la versión **actual** del manuscrito y se conserva el registro antiguo como historial, sin alterar H-01–H-36.
+
+**Consecuencia concreta para el RPG:** el tema de abastecimiento podría justificar un **futuro diseño** de recursos y actividades; **no** autoriza a generar automáticamente una economía, taller, NPC dedicado a reparaciones o misiones de `DR-06`. El puente de integración hermana añade gates y casos INT-12–INT-14. La próxima revisión debe verificar la versión Drive fresca y su continuidad antes de planificar nuevas escenas.
 
 ## 6. Verificación y límites de este lote
 
