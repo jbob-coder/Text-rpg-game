@@ -14,7 +14,7 @@ La autoridad de lectura para esta integración es:
 | Código | Fuente verificada | Papel y frontera |
 | --- | --- | --- |
 | G-01 | Historia original prioritaria, H-01–H-36 [fuente Drive: recuperar por título en el Centro de Historia y Canon] (actualizada 14 oct.) | Decisiones narrativas expresas; el propio documento avisa que su integración formal en el repositorio está **pendiente** |
-| G-02 | Centro de Historia y Canon [fuente Drive: recuperar por título en el Centro de Historia y Canon] | Índice y reglas de autoridad; informa que la versión literaria v0.8 no equivale a canon |
+| G-02 | Centro de Historia y Canon [fuente Drive: recuperar por título en el Centro de Historia y Canon] | Índice y reglas de autoridad; informa que el manuscrito literario, actualizado actualmente a v0.9, no equivale a canon |
 | G-03 | Registro histórico relacional v1.6 [fuente Drive: recuperar por título en el Centro de Historia y Canon] (sincronizado 26 oct., v1.6) | EVT/ENT/TEC/REL/CAP, cronología parcial y dependencias; registro **subordinado** a G-01 |
 | G-04 | Manuscrito Volumen I v0.9 [fuente Drive: recuperar por título en el Centro de Historia y Canon] (27 oct.) | Doce secciones + nota y apéndices; **BORRADOR**, incluye escenas compuestas DR-01 y DR-05 |
 | G-05 | Dossier de la Primera Guerra [fuente Drive: recuperar por título en el Centro de Historia y Canon] | Advertencias R-WAR-01–10; cuarentena de la cronología 2670/Veinfall/Halcyon |
@@ -78,10 +78,10 @@ Ejemplo de **secreto narrativo confirmado**: la tableta vinculada al Sistema exi
 ## 6. Verificación y handoff de esta entrega
 
 - **Leído:** programa `AGENTS.md`, Bulletin, Register (D-084), Mission Control, Coordination, world index/canon queue, README y fuentes G-01–G-06.
-- **Evidencia de revisión:** URLs directas y H-ID/EVT/REL/WD referidos arriba. No se obtuvo ninguna prueba de finalización de D-084.
+- **Evidencia de revisión:** títulos de las fuentes Drive recuperables desde el Centro autorizado, H-ID/EVT/REL/WD y enlaces de navegación del propio repositorio; no se conservan enlaces directos a Drive en el archivo actual. No se obtuvo ninguna prueba de finalización de D-084.
 - **No ejecutado:** motor Python, Android, CI, emulador o device; `git clone` local no estuvo disponible por resolución DNS.
 - **Archivos afectados por esta propuesta:** únicamente este cruce documental y JSON causal; sin cambio de implementación ni Drive.
-- **Siguiente acción segura:** revisión de las decisiones narrativas recientes con autoridad del creador, incorporación selectiva, y avance de la novela CAP-14/15 sin promoción automática.
+- **Siguiente acción segura:** no repetir NOV-XII; contrastar el nuevo capítulo con H-01–H-36 y la matriz de conocimiento, completar relaciones editoriales que falten para NOV-XII en el registro v1.6 mediante revisión y continuar la preparación documentada del escenario de los personajes solo con fuentes verificables.
 
 **No modificar el Bulletin, el estado de Drive o el Master Register como DONE desde este expediente no propietario.**
 
