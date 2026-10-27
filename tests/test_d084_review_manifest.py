@@ -6,7 +6,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from tools.validate_d084_review_manifest import MANIFEST, load_json, validate
+from tools.validate_d084_review_manifest import MANIFEST, SLICE, load_json, validate
 
 
 MINIMAL_CURRENT_SLICE = {
@@ -32,6 +32,11 @@ class D084ReviewManifestTests(unittest.TestCase):
 
     def test_fresh_manifest_passes_nonruntime_review(self):
         self.assertEqual([], validate(self.contract, self.slice))
+
+    def test_real_authority_slice_passes_current_nonruntime_guard(self):
+        """CI must inspect the actual, entire content pack, not only a small fixture."""
+        real_slice = load_json(SLICE)
+        self.assertEqual([], validate(self.contract, real_slice))
 
     def test_review_gate_never_mutates_input(self):
         manifest = deepcopy(self.contract)
