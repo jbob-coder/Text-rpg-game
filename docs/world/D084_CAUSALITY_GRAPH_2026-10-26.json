@@ -1,14 +1,33 @@
 {
   "schema_version": 1,
-  "review_date": "2026-10-26",
+  "review_date": "2026-10-27",
   "state": "DRAFT_REVIEW_NON_CANON_NON_CLAIM",
   "authority_note": "Creator-authored history decisions H-01..H-36 are source-narrative authority; technical production integration is pending. This graph is a crosswalk, not runtime content.",
   "source_documents": {
-    "creator_history": "https://docs.google.com/document/d/1FWyk7YzDmkb2DwOdkRAAHl0gNpVCRVPAiFNfEfSia1Q/edit",
-    "relational_index": "https://docs.google.com/document/d/1vrkgISD2qwCzFTs9Pe1alut67Rh6UTa628rr560FXBw/edit",
-    "war_dossier": "https://docs.google.com/document/d/1WXLD2op8PjH8p-AQcPnL0L_zHlrggFZJW1hFREqenfc/edit",
-    "historical_questionnaire": "https://docs.google.com/document/d/1Iu7RWHN7O19GMOzpSPhC7jRR_HXtclGfnxtDG9vO3lE/edit",
-    "technical_queue": "docs/world/WORLD_CANON_DECISION_QUEUE.md"
+    "creator_history": {
+      "title": "THE GAME — Historia original prioritaria — H-01..H-36",
+      "location": "Connected Drive; find by exact title",
+      "authority": "Narrative creator-decision register"
+    },
+    "relational_index": {
+      "title": "THE GAME — Registro histórico relacional — v1.6",
+      "location": "Connected Drive; find by exact title",
+      "authority": "Editorial relationships, not independent canon"
+    },
+    "war_dossier": {
+      "title": "THE GAME — Dossier de la Primera Guerra — fuentes y continuidad",
+      "location": "Connected Drive; find by exact title",
+      "authority": "Research and open conflict register"
+    },
+    "historical_questionnaire": {
+      "title": "THE GAME — Cuestionario maestro de historia — Q&A por etapas",
+      "location": "Connected Drive; find by exact title",
+      "authority": "Questionnaire, no autonomous canon creation"
+    },
+    "technical_queue": {
+      "path": "docs/world/WORLD_CANON_DECISION_QUEUE.md",
+      "authority": "Repository WD task constraints"
+    }
   },
   "vocabulary": {
     "creator_decision": "Explicit user-approved narrative fact recorded by source; not yet evidence of technical integration",
@@ -288,12 +307,13 @@
     },
     {
       "id": "U05",
-      "question": "Does older WORLD_CAUSALITY_ATLAS_2670_V1.json belong to the same continuity?",
+      "question": "The historical atlas originals are located and read, but is their older 2645–2670 world/campaign chronology part of this H-36 continuity and has the creator adopted it?",
       "sources": [
         "DOSS-WAR-001 R-WAR-02",
-        "QH-25"
+        "QH-25",
+        "PR #85 LA-01..LA-06 original atlas verification"
       ],
-      "status": "open"
+      "status": "open_lineage_not_location"
     },
     {
       "id": "U06",
@@ -322,5 +342,6 @@
     "No post-truce world date, treaty signatory or battle locations may be invented",
     "No editorial sample scenes may be turned into stable gameplay entities",
     "Narrative decisions do not change Python runtime, Android projection, or saved state"
-  ]
+  ],
+  "revision_note": "Revision reflects Drive novel v0.9 and relational index v1.6 without canon promotion. Private Google Drive URLs omitted from publicly visible artifact; historical Git commits may still contain earlier references."
 }
