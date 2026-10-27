@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "kind": "D084_EDITORIAL_REVIEW_CONTRACT",
+  "review_status": "PROPOSED_NOT_INTEGRATED",
+  "runtime_import": false,
+  "source_authorities": {
+    "narrative": "THE GAME - Historia original prioritaria - 2026-10-10 (H-01..H-36)",
+    "manuscript": "THE GAME - Historia novelada - Volumen I - BORRADOR v0.9.1",
+    "technical": "docs/master-game-development-program"
+  },
+  "initial_burst": {
+    "phase_id": "REVIEW_INITIAL_BURST",
+    "temporal_relation": "SAME_HISTORICAL_PHASE_NOT_SAME_SECOND",
+    "source_ids": [
+      "H-32",
+      "H-33",
+      "H-34",
+      "H-35",
+      "H-36"
+    ],
+    "members": [
+      "FIRST_PORTAL_OPENINGS",
+      "SPATIAL_RUPTURES",
+      "INTELLIGENT_INVADERS_ARRIVE",
+      "CRYSTAL_BEARING_BEASTS_ARRIVE",
+      "CELESTIAL_SYSTEM_APPEARS"
+    ],
+    "absolute_date": null,
+    "location": null
+  },
+  "relative_events": [
+    {
+      "id": "FIRST_WAR",
+      "source_ids": [
+        "H-12"
+      ],
+      "after": "REVIEW_INITIAL_BURST",
+      "absolute_date": null,
+      "combatants": null
+    },
+    {
+      "id": "TERRITORIAL_TRUCE",
+      "source_ids": [
+        "H-13"
+      ],
+      "after": "FIRST_WAR",
+      "absolute_date": null,
+      "signatories": null
+    }
+  ],
+  "unresolved": {
+    "first_crystal_forging_relative_to_war": "UNKNOWN",
+    "current_game_year": null,
+    "world_identity_vs_earth": "UNRECONCILED",
+    "post_crystal_era_label": null
+  },
+  "calendar": {
+    "ac_definition": "Antes del Crystal",
+    "source": "OWNER_CORRECTION_2026-10-08",
+    "allow_legacy_after_crystal_interpretation": false
+  },
+  "historical_sources": [
+    {
+      "id": "WORLD_CAUSALITY_ATLAS_2670_V1",
+      "status": "HISTORICAL_UNLINKED",
+      "observed_dates": [
+        "2645-2659",
+        "2660",
+        "2670"
+      ],
+      "adopted_into_current_canon": false
+    }
+  ],
+  "editorial": {
+    "manuscript_version": "v0.9.1",
+    "narrative_sections": 12,
+    "historical_note_section": "XIII",
+    "chapter_xii_id": "NOV-XII-MANUSCRITO-v0.9.1",
+    "alternative_xii_id": "NOV-XII-DR06-BORRADOR-v0.1",
+    "dr06_adaptation": "COMPOSITE_SCENE_PROPOSED",
+    "dr06_is_historical_event": false
+  },
+  "knowledge_boundary": {
+    "world_secret_proposition": "SYSTEM_TABLET_EXISTS",
+    "source_ids": [
+      "H-04"
+    ],
+    "author_truth_status": "CONFIRMED_NARRATIVE_ONLY",
+    "initial_player_knowledge": "UNSPECIFIED_NO_AUTOGRANT",
+    "initial_npc_knowledge": "UNSPECIFIED_NO_AUTOGRANT",
+    "invader_knowledge": "DOES_NOT_KNOW",
+    "android_raw_npc_state_allowed": false,
+    "requires_authored_discovery_for_runtime": true
+  },
+  "gameplay_boundary": {
+    "current_content_id": "CONTENT_VERTICAL_SLICE_01",
+    "current_content_canon_status": "provisional_canon",
+    "migration_status": "NOT_AUTHORIZED",
+    "preserve_npc_id": "NPC_TAMSIN",
+    "preserve_existing_knowledge_id": "KNOW_RELAY_DESTINATION_SERVICE_GATE_12",
+    "preserve_existing_story_track": "TRACK_RELAY_CASE",
+    "protect_state_paths": [
+      "state.knowledge",
+      "state.npcs[*].knowledge",
+      "state.npcs[*].memories",
+      "state.npcs[*].goals",
+      "state.npcs[*].story_state"
+    ],
+    "never_auto_create_from_editorial": [
+      "npc",
+      "location",
+      "route",
+      "quest",
+      "item",
+      "ability",
+      "save_field"
+    ]
+  }
+}
