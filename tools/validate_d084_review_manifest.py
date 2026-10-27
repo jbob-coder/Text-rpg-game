@@ -27,7 +27,7 @@ STATE_PATHS = {
 REVIEW_ONLY_CONTENT_IDS = {
     "REVIEW_INITIAL_BURST", "FIRST_WAR", "TERRITORIAL_TRUCE",
     "SYSTEM_TABLET_EXISTS",
-}
+} | BURST  # All five H-36 event labels are also reviewer-only until approved.
 
 
 def _find_review_only_content_ids(value: Any, path: str = "content") -> list[str]:
