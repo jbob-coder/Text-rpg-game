@@ -32,8 +32,8 @@ REVIEW_KEYS = {
     "source_authorities": {"narrative", "manuscript", "technical"},
     "initial_burst": {"phase_id", "temporal_relation", "source_ids", "members",
                       "absolute_date", "location"},
-    "relative_events[]": {"id", "source_ids", "after", "absolute_date",
-                          "combatants", "signatories"},
+    "relative_events.FIRST_WAR": {"id", "source_ids", "after", "absolute_date", "combatants"},
+    "relative_events.TERRITORIAL_TRUCE": {"id", "source_ids", "after", "absolute_date", "signatories"},
     "unresolved": {"first_crystal_forging_relative_to_war", "current_game_year",
                    "world_identity_vs_earth", "post_crystal_era_label"},
     "calendar": {"ac_definition", "source", "allow_legacy_after_crystal_interpretation"},
@@ -125,8 +125,8 @@ def validate(manifest: dict[str, Any], slice_content: dict[str, Any]) -> list[st
         errors.append("exactly two review-only relative event records required")
     else:
         war, truce = events
-        for event in events:
-            check_keys("relative_events[]", event)
+        check_keys("relative_events.FIRST_WAR", war)
+        check_keys("relative_events.TERRITORIAL_TRUCE", truce)
         require(war.get("id") == "FIRST_WAR" and war.get("after") == "REVIEW_INITIAL_BURST"
                 and "H-12" in string_ids(war.get("source_ids"), "FIRST_WAR.source_ids"), "First War must follow System in H-12")
         require(truce.get("id") == "TERRITORIAL_TRUCE" and truce.get("after") == "FIRST_WAR"
