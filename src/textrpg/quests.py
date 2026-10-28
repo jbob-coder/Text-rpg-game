@@ -99,6 +99,12 @@ def validate_quest_definitions(
                             errors,
                         )
 
+            # A cycle can reference only existing IDs yet leave every involved
+            # objective permanently locked. Reject it before starting a quest.
+            _validate_objective_prerequisite_cycles(
+                quest_id, stage_id, objectives, errors
+            )
+
             for outcome_key in ("on_complete", "on_fail"):
                 outcome = stage.get(outcome_key)
                 if outcome is not None:
@@ -119,6 +125,56 @@ def validate_quest_definitions(
                     )
 
     return errors
+
+
+def _validate_objective_prerequisite_cycles(
+    quest_id: str,
+    stage_id: str,
+    objectives: Mapping[str, Any],
+    errors: list[str],
+) -> None:
+    """Reject self- and multi-objective cycles without traversing malformed data.
+
+    Kahn's algorithm avoids recursion limits for large authored quest stages.
+    Invalid references and types are reported by the caller's existing checks.
+    """
+    dependencies: dict[str, set[str]] = {}
+    for objective_id, objective in objectives.items():
+        if not isinstance(objective_id, str) or not isinstance(objective, Mapping):
+            continue
+        prerequisites = objective.get("requires_objectives", [])
+        if not isinstance(prerequisites, list):
+            prerequisites = []
+        dependencies[objective_id] = {
+            prerequisite
+            for prerequisite in prerequisites
+            if isinstance(prerequisite, str)
+            and prerequisite in objectives
+            and isinstance(objectives[prerequisite], Mapping)
+        }
+
+    dependents: dict[str, set[str]] = {key: set() for key in dependencies}
+    remaining = {key: len(values) for key, values in dependencies.items()}
+    for objective_id, prerequisites in dependencies.items():
+        for prerequisite in prerequisites:
+            dependents[prerequisite].add(objective_id)
+
+    ready = [key for key, count in remaining.items() if count == 0]
+    visited = 0
+    while ready:
+        completed = ready.pop()
+        visited += 1
+        for dependent in dependents[completed]:
+            remaining[dependent] -= 1
+            if remaining[dependent] == 0:
+                ready.append(dependent)
+
+    if visited != len(dependencies):
+        blocked = ", ".join(sorted(key for key, count in remaining.items() if count))
+        errors.append(
+            f"{quest_id}.{stage_id}.objectives contains a circular "
+            f"prerequisite dependency (blocked: {blocked})"
+        )
 
 
 def _validate_quest_outcome(
