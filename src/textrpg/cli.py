@@ -89,7 +89,11 @@ def play(
 
     while True:
         output_fn(render_scene(engine, state))
-        command = input_fn("> ").strip()
+        try:
+            command = input_fn("> ").strip()
+        except (EOFError, KeyboardInterrupt):
+            output_fn("Input closed; exiting game.")
+            break
 
         if command.lower() in {"quit", "q", "exit"}:
             break
@@ -100,8 +104,12 @@ def play(
             if save_path is None:
                 output_fn("No save path configured.")
             else:
-                save_state(save_path, state)
-                output_fn(f"Saved: {save_path}")
+                try:
+                    save_state(save_path, state)
+                except OSError as exc:
+                    output_fn(f"Save failed: {exc}")
+                else:
+                    output_fn(f"Saved: {save_path}")
             continue
 
         try:
@@ -112,7 +120,10 @@ def play(
                 f"time={event['time_minutes']}m"
             )
             if save_path is not None:
-                save_state(save_path, state)
+                try:
+                    save_state(save_path, state)
+                except OSError as exc:
+                    output_fn(f"Autosave failed: {exc}. Progress is only in memory; use 'save' to retry.")
         except (ValueError, RuleError) as exc:
             output_fn(f"Invalid action: {exc}")
 
@@ -138,7 +149,10 @@ def main(argv: Iterable[str] | None = None) -> int:
     try:
         pack = load_content_pack(args.content)
         if args.load_save_path:
-            state = load_state(args.load_save_path)
+            try:
+                state = load_state(args.load_save_path)
+            except (OSError, UnicodeError) as exc:
+                raise RuleError(f"Could not load save: {args.load_save_path}: {exc}") from exc
             if state.scene_id not in pack.engine.scenes:
                 raise RuleError(
                     f"Loaded save scene is not present in content pack: {state.scene_id}"
