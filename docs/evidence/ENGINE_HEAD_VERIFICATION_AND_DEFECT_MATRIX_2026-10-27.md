@@ -94,3 +94,31 @@ Los estados **CONFIRMADO POR LECTURA** describen expresiones y secuencias presen
 **NOT DONE:** pruebas de reproducción, arreglos de código, retirada de ilustraciones, integración de candidatos, aprobación de PR ni publicación de APK.  
 **NEXT:** revisar los candidatos de guardado/CLI sin solaparlos, reproducir E-004 bajo el dueño CPR-006 y acordar una tarea específica de presentación texto+mapa antes de tocar la UI.  
 **Riesgo de deriva:** los PR pueden fusionarse después de este informe; los estados solo son válidos en el SHA fijado.
+
+---
+
+## Revisión posterior — ciclo ♾️ / 2026-10-28
+
+**Nuevo HEAD observado de autoridad:** `fe7e277d8ad53be7c97f454f6185794a41de4879`. El informe anterior sigue anclado al SHA `369621a`; **no trasladar automáticamente todas sus afirmaciones al nuevo HEAD sin diff**. Esta adenda recoge evidencia nueva de PR y CI, no reescribe el historial.
+
+### QA de sustitución visual texto + mapa: conflicto de dos candidatos
+
+| Candidato | Observación verificada | Estado / requisito de salida |
+| --- | --- | --- |
+| [PR #97](https://github.com/jbob-coder/Text-rpg-game/pull/97), `676515ec70817d5d28282a82b83194b621a8c5e2` | [Run 40620429532](https://github.com/jbob-coder/Text-rpg-game/actions/runs/40620429532): `python-engine=success`, `android-emulator-smoke=success`, `android-unit-and-assemble=FAILURE`. Error Kotlin `:app:compileDebugUnitTestKotlin` en `android/app/src/test/java/com/thegame/rpg/ui/PixelMapTravelTransitionCatalogTest.kt:10`: `Unresolved reference 'PixelMapTravelTransitionCatalog'`; el test sigue imponiendo el catálogo pixelado que `PixelMapTravelTransition.kt` ya sustituyó por aviso de viaje textual. | **CI ROJA**, no merge. Reemplazar prueba de ocho frames por validación del contrato textual y del mapa conservado; no eliminar pruebas para forzar verde. Comentario de revisión publicado en el PR (ID `6469316049`). |
+| [PR #94](https://github.com/jbob-coder/Text-rpg-game/pull/94), `506235dacdf2fb07c9478db8982cb31d8ddf1226` | [Run 40619522192](https://github.com/jbob-coder/Text-rpg-game/actions/runs/40619522192): **los tres jobs SUCCESS**. Diff de **94 archivos**; elimina por completo antiguos test suites instrumentados `GameScreenTest.kt` y `CharacterStatsSectionTest.kt` y reescribe presentación ampliamente. | **CI VERDE en el candidato**, pero la cobertura anterior eliminada requiere evaluación/recuperación semántica para estado, decisiones, navegación y equipo. Comentario publicado en el PR (ID `6469316801`). |
+
+**No combinar ambos PR sin reconciliación.** Preferir solución mínima y pruebas que conserven los contratos reales, con mapa visual permitido, sin animación/ilustración de narrativa ni restauración de pixel art. La eliminación de un test cuya función desapareció puede ser legítima **solo** si se demuestra que las capacidades de usuario que importan siguen probadas por otro test. Verde en una suite reducida no equivale a equivalencia de cobertura.
+
+### Estado observado de otros PR al efectuar esta revisión
+
+- **PR #98** (protección de suma de atributos `add_player` contra overflow): candidato abierto, HEAD `73caaf959e5520faa6c1aa3c41e20b4a71651909`; run `40690222845` **in_progress** en la consulta. Un run anterior del PR, `40619901640`, fue success para **otro HEAD**. No confundirlos.
+- **PR #89** (archivo temporal concurrente y cierre de entrada CLI): HEAD `e6f43186a10dc9929e33659f680d5eaa56a7a0f1`, run `40690104472` **in_progress**.
+- **PR #92** (límite de I/O de guardados): HEAD `5c8228adebe08346351c2d9ac21c75491e58b4e0`, base **la rama de #89**, no la de autoridad; run `40690167814` **in_progress**.
+- Un estado **in_progress** no equivale a PASS ni FAIL; consultar el run final, compatibilidad y merge antes de cerrar cualquiera de los riesgos E-001/E-002/E-003. Evitar que el PR #90 solapado entre sin reconciliación.
+
+### Límite de ejecución y siguiente acción
+
+Se leyó el log de GitHub Actions del job `122593008826` para establecer el primer error de Kotlin, y se contrastaron patches/PRs #94 y #97 y el estado de los commits recientes. El intento local de `git ls-remote` contra GitHub falló por resolución DNS de `github.com`: **no se ejecutaron pruebas locales ni se instaló APK**. Los comentarios enviados a PR #94 y #97 son las únicas modificaciones ajenas a esta documentación; **no se modificó motor, UI, assets, tests, ni la rama de autoridad**.
+
+**NEXT:** esperar el resultado real de #89/#92/#98, reconciliar un solo cambio visual (incluyendo pruebas funcionales de reemplazo) y ejecutar CI exact-head antes de cualquier merge.
