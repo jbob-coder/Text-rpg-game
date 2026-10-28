@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 from typing import Any, Dict
 
 from .core import GameState, RuleError, validate_game_state_structure
@@ -76,11 +78,29 @@ def loads_state(raw: str) -> GameState:
 
 
 def save_state(path: str | Path, state: GameState) -> None:
+    # Validate before creating any files, and never reuse a shared .tmp path:
+    # concurrent saves must not overwrite one another's in-progress contents.
+    serialized = dumps_state(state)
     target = Path(path)
     target.parent.mkdir(parents=True, exist_ok=True)
-    temp = target.with_suffix(target.suffix + ".tmp")
-    temp.write_text(dumps_state(state), encoding="utf-8")
-    temp.replace(target)
+    temporary_path: Path | None = None
+    try:
+        with NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=target.parent,
+            prefix=f".{target.name}.",
+            suffix=".tmp",
+            delete=False,
+        ) as temporary:
+            temporary_path = Path(temporary.name)
+            temporary.write(serialized)
+        os.replace(temporary_path, target)
+    finally:
+        # os.replace removes the source on success. On any write/replace
+        # failure, remove only the unique temporary file, not the prior save.
+        if temporary_path is not None:
+            temporary_path.unlink(missing_ok=True)
 
 
 def load_state(path: str | Path) -> GameState:
