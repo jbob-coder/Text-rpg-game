@@ -117,7 +117,14 @@ def validate_quest_definitions(
                         errors,
                     )
 
-            if stage.get("terminal") is True:
+            terminal = stage.get("terminal", False)
+            if not isinstance(terminal, bool):
+                errors.append(f"{quest_id}.{stage_id}.terminal must be a boolean")
+            if terminal is True:
+                if objectives:
+                    errors.append(
+                        f"{quest_id}.{stage_id}.terminal stage cannot define objectives"
+                    )
                 status = stage.get("terminal_status", "completed")
                 if status not in ("completed", "failed"):
                     errors.append(
