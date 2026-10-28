@@ -1,3 +1,13 @@
+# ACTUALIZACIÓN DEL REGISTRO — 2026-10-28
+
+**La sección 3 inferior es el inventario histórico previo a la eliminación**, no el estado actual de la rama propuesta. En PR #97, commit `00426ea387065e3cc8ac96951322d1751df4d4f5`, se eliminaron 68 archivos heredados mediante un solo commit reversible: **22 archivos Kotlin** de catálogos/renderizadores de pixel art, **24 PNG**, **20 pruebas unitarias Kotlin sólo de arte**, y el verificador raster Python con su test (**2 archivos**). `PixelComponents.kt` mantiene sólo panel/elección de texto y el enum temporal de estilos; `PixelTheme.kt` sigue proporcionando tipografía y colores para texto, no sprites; `PixelMapTravelTransition.kt` muestra únicamente ruta textual. Se preservan los contratos de mapas, engine, inventario y guardados.
+
+**Resultado verificado por inspección del árbol de ese commit:** 0 PNG `drawable-nodpi/pixel_*.png`; 0 catálogos de escena/avatar pixel art seleccionados. La suite Python está aprobada en GitHub Actions #461; al redactar, compilación Android y emulador todavía en curso. **No afirmar cierre completo de CI, validación física ni merge.**
+
+Los documentos históricos que obligaban a sprites eran una directiva errónea; se retiran como autoridad y permanecen recuperables en Git. La auditoría de arte original sigue disponible en historial Git para no perder evidencia del error.
+
+---
+
 # THE GAME — Retirada controlada de presentación pixel art
 **Revisión:** 2026-10-27 (Puerto Rico)  
 **Repositorio:** `jbob-coder/Text-rpg-game`  

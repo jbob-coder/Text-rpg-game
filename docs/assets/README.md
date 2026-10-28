@@ -1,3 +1,5 @@
+> **RETIRADO / OBSOLETO — 2026-10-28.** Por directiva posterior del dueño, THE GAME no usa pixel art ni ilustraciones de escenas, personajes u objetos. Sólo conserva el mapa de lugares/rutas como gráfico funcional y el resto como interacciones de texto. Este archivo documentaba una dirección errónea y NO autoriza producir, reconstruir ni reintroducir sprites. Registro y evidencia: [TEXT_FIRST_PRESENTATION_REMOVAL_REGISTER_2026-10-27.md](../android/TEXT_FIRST_PRESENTATION_REMOVAL_REGISTER_2026-10-27.md). El contenido anterior es recuperable en el historial Git. PR #97 sigue sin fusionar.
+
 # THE GAME — Pixel Asset Documentation Index
 
 Read in this order before generating or integrating visual assets:
