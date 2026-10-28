@@ -299,6 +299,8 @@ def fail_objective(
         raise RuleError(f"Completed objective cannot fail: {objective_id}")
     if objective_id in quest.get("failed_objectives", []):
         raise RuleError(f"Objective already failed: {objective_id}")
+    if objective_id not in available_objectives(state, quest_id, definition):
+        raise RuleError(f"Objective is not currently available to fail: {objective_id}")
 
     quest["failed_objectives"].append(objective_id)
     quest["updated_at_minutes"] = state.time_minutes
