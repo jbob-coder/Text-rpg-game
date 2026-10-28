@@ -95,6 +95,55 @@ class QuestGraphTests(unittest.TestCase):
             any(".requires_objectives must be a list" in error for error in errors)
         )
 
+    def test_self_prerequisite_is_rejected_before_quest_mutation(self):
+        definition = self.definition()
+        objectives = definition["stages"]["STAGE_INVESTIGATE"]["objectives"]
+        objectives["OBJ_FIND_RECORD"]["requires_objectives"] = ["OBJ_FIND_RECORD"]
+
+        errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
+        self.assertTrue(any("circular prerequisite" in error for error in errors))
+        state = self.state()
+        with self.assertRaisesRegex(RuleError, "circular prerequisite"):
+            start_quest(state, "QUEST_ARCHIVE", definition)
+        self.assertEqual(state.quests, {})
+        self.assertEqual(state.history, [])
+
+    def test_mutual_prerequisites_are_rejected_before_quest_start(self):
+        definition = self.definition()
+        objectives = definition["stages"]["STAGE_INVESTIGATE"]["objectives"]
+        objectives["OBJ_FIND_RECORD"]["requires_objectives"] = [
+            "OBJ_INTERVIEW_WITNESS"
+        ]
+        # OBJ_INTERVIEW_WITNESS already requires OBJ_FIND_RECORD.
+        errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
+        self.assertTrue(any("circular prerequisite" in error for error in errors))
+
+        with self.assertRaisesRegex(RuleError, "circular prerequisite"):
+            start_quest(self.state(), "QUEST_ARCHIVE", definition)
+
+    def test_optional_objectives_cannot_hide_three_node_cycle(self):
+        definition = self.definition()
+        objectives = definition["stages"]["STAGE_INVESTIGATE"]["objectives"]
+        objectives["OBJ_FIND_RECORD"]["requires_objectives"] = [
+            "OBJ_SEARCH_ROOF"
+        ]
+        objectives["OBJ_SEARCH_ROOF"]["requires_objectives"] = [
+            "OBJ_INTERVIEW_WITNESS"
+        ]
+        # FIND <- ROOF <- INTERVIEW <- FIND is impossible to complete.
+        errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
+        self.assertTrue(any("circular prerequisite" in error for error in errors))
+
+    def test_long_valid_prerequisite_chain_is_not_rejected(self):
+        definition = self.definition()
+        objectives = definition["stages"]["STAGE_INVESTIGATE"]["objectives"]
+        objectives["OBJ_SEARCH_ROOF"]["requires_objectives"] = [
+            "OBJ_INTERVIEW_WITNESS"
+        ]
+        self.assertEqual(
+            validate_quest_definitions({"QUEST_ARCHIVE": definition}), []
+        )
+
     def test_objective_prerequisites_control_availability(self):
         state = self.state()
         definition = self.definition()
