@@ -166,6 +166,25 @@ class InvalidContentDiscriminatorTests(unittest.TestCase):
                 self.assertTrue(any("." + field in e for e in errors), errors)
 
 
+    def test_invalid_registry_container_returns_validation_error(self):
+        scenes = self.scene(condition={"type": "knows", "knowledge_id": "KNOW_TEST"})
+        errors = validate_content_pack(scenes, registries=[])
+        self.assertIn("registries must be an object", errors)
+        with self.assertRaisesRegex(RuleError, "registries must be an object"):
+            from textrpg import assert_valid_content_pack
+            assert_valid_content_pack(scenes, registries=[])
+
+    def test_invalid_power_container_returns_validation_error(self):
+        scenes = self.scene(condition={
+            "type": "technique_discoverable",
+            "ability_id": "ABILITY_TEST",
+            "technique_id": "TECH_TEST",
+        })
+        errors = validate_content_pack(scenes, powers=[])
+        self.assertIn("power definitions must be an object", errors)
+        self.assertTrue(any("unknown power" in error for error in errors))
+
+
 
 if __name__ == "__main__":
     unittest.main()
