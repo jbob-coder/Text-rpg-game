@@ -222,7 +222,7 @@ class PersistenceTests(unittest.TestCase):
     def test_loading_non_utf8_save_returns_rule_error(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "invalid-utf8.json"
-            path.write_bytes(b"\\xff")
+            path.write_bytes(bytes([0xFF]))
             with self.assertRaisesRegex(RuleError, "Could not read save file"):
                 load_state(path)
 
