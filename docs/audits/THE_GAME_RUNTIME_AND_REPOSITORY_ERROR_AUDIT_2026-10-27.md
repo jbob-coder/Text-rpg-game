@@ -149,3 +149,72 @@ La nota superior de cierre de agentes declara **P11/CPR-006 RELEASED → READY /
 - Para cerrar cada hallazgo, exigir: enlace al commit y PR exactos, regresión que falle antes y pase después cuando sea ejecutable, full suite Python, build Android, pruebas de emulador cuando aplique y evidencia de merge a la autoridad. **Ningún hallazgo en este documento queda marcado como resuelto por mera documentación.**
 
 **Resultado de esta actividad:** informe de errores creado en rama separada; ningún fichero jugable alterado, sin merge ni release. La auditoría es amplia pero **no una prueba de que se hayan detectado todos los errores posibles**.
+
+
+---
+
+## Segunda ronda: hallazgos nuevos TG-AUD-011 a TG-AUD-014 — 2026-10-27
+
+Esta ronda conserva los 10 hallazgos previos sin reclasificar riesgos como errores reproducidos. **No se modificó ni ejecutó el código del juego.** Lectura directa de fuentes en `docs/master-game-development-program@dac5d22cdbe211d0d35d3df98b542be2653f1b85`.
+
+### TG-AUD-011 — P1: el cliente Android omite un archivo auxiliar de presencia de personajes
+
+**Estado:** **CONFIRMADO POR CADENA DE CÓDIGO + ARCHIVOS DE AUTORÍA; falta test Android de regresión.** Afecta los datos de **presencia** de personajes en las escenas, no el funcionamiento intrínseco de las reglas narrativas.
+
+**Fuentes de autoridad (líneas del HEAD examinado):**
+- [`android/app/src/main/java/com/thegame/rpg/engine/PythonGameEngine.kt` líneas 208–227 y 310–330](../../android/app/src/main/java/com/thegame/rpg/engine/PythonGameEngine.kt): `ChaquopySessionGateway.start()` llama a `installContent()`, que copia **únicamente** `vertical_slice_01.json` al directorio `filesDir/content/`.
+- [`src/textrpg/content.py` líneas 176–220](../../src/textrpg/content.py): `load_content_pack()` sólo incorpora `vertical_slice_01_room_presence.json` si existe **junto al archivo principal en el sistema de archivos**. Si no está, prosigue silenciosamente.
+- [`content/vertical_slice_01_room_presence.json`](../../content/vertical_slice_01_room_presence.json): cinco registros de aparición entre cuatro escenas: dos actores en `OPENING_DEPOT_BLACKOUT`, uno en `OPENING_DECISION`, `OPENING_RECOVERY` y `OPENING_TUNNEL`.
+- [`content/vertical_slice_01.json`](../../content/vertical_slice_01.json): en las 19 escenas examinadas no hay listas `actors` embebidas.
+- [`src/textrpg/room_projection.py`](../../src/textrpg/room_projection.py): `scene.get("actors", [])` devuelve lista vacía cuando el auxiliar no se incorporó.
+- [`android/app/src/androidTest/java/com/thegame/rpg/ActivityBootSmokeTest.kt`](../../android/app/src/androidTest/java/com/thegame/rpg/ActivityBootSmokeTest.kt): las pruebas de arranque verifican escena/avatar/decisiones, pero no que la proyección de actores de la partida **real instalada** incluya los registros del auxiliar.
+
+**Resultado lógico en instalación limpia:** el archivo auxiliar no llega al directorio desde el que Python lo busca; la proyección `room.actors` queda vacía para esas escenas aunque el JSON auxiliar exista dentro del repositorio y posiblemente como asset del paquete. `assets.srcDir("../../content")` en `android/app/build.gradle.kts` incluye assets de origen, pero **no implica** que el auxiliar haya sido extraído al mismo directorio que el JSON principal.
+
+**Límites:** este defecto **no demuestra** que el APK del usuario muestre o deba mostrar sprites; únicamente detecta pérdida de metadatos de presencia de personajes dentro del contrato de datos. No se inspeccionó ni instaló el APK concreto.
+
+**Regresión requerida:** arrancar Android con `filesDir/content` limpio, inspeccionar el payload del puente en la escena `OPENING_DEPOT_BLACKOUT` y comparar `room.actors[*].presentation_id` con el resultado de `load_content_pack` ejecutado sobre `content/vertical_slice_01.json` acompañado por su sidecar. Validar paridad sin inferir o inventar una presentación visual. **No reintroducir pixel art**: una futura corrección del empaquetado sólo tiene sentido si el campo semántico de presencia permanece requerido por la arquitectura aprobada.
+
+### TG-AUD-012 — P2: sustitución no atómica del archivo de contenido Android
+
+**Estado:** **CONFIRMADO EN CÓDIGO COMO PATRÓN DE RIESGO; escenario de fallo aún NO reproducido**.
+
+**Fuente:** [`PythonGameEngine.kt` líneas 310–330](../../android/app/src/main/java/com/thegame/rpg/engine/PythonGameEngine.kt).
+
+**Causa:** `installContent()` prepara `vertical_slice_01.json.tmp`, **borra** `vertical_slice_01.json` anterior y **después** intenta `temp.renameTo(target)`; si el renombrado falla, hace `temp.copyTo(target, overwrite = true)`. El reemplazo no es un único paso atómico, aunque los bytes de origen se copien antes a un temporal. Con error de escritura, falta de espacio o fallo durante la copia alternativa puede quedar sin archivo válido en el destino.
+
+**Impacto potencial:** arranque fallido y pérdida de copia previa de contenido instalada. No hay evidencia de pérdida de partida guardada: la ruta de saves está separada.
+
+**Aceptación:** probar fallo de `renameTo` y de `copyTo` con archivos temporales; preservar siempre un fichero anterior verificable o recuperar la instalación mediante mecanismo de rollback; no borrar el destino hasta disponer de reemplazo verificable.
+
+### TG-AUD-013 — P2: guardado manual en CLI puede abortar fuera del manejador de errores
+
+**Estado:** **CONFIRMADO — CÓDIGO; reproducción automatizada pendiente**.
+
+**Fuentes:** [`src/textrpg/cli.py` líneas 88–119 y 136–152](../../src/textrpg/cli.py), [`src/textrpg/persistence.py` líneas 78–88](../../src/textrpg/persistence.py); [`tests/test_cli.py`](../../tests/test_cli.py).
+
+**Causa y frontera:**
+- `play()` procesa el comando literal `save` **antes** del bloque `try/except (ValueError, RuleError)`; por tanto `save_state()` puede propagar `OSError` fuera del ciclo.
+- El autosave tras una decisión sí se encuentra dentro del `try`, pero `OSError` **no** está en las excepciones capturadas.
+- `main()` sólo captura `RuleError`; tampoco convierte a un resultado controlado un fallo de escritura/lectura del sistema de archivos.
+- La suite `tests/test_cli.py` verificada tiene tres tests de presentación, decisión y estado, sin inyección de fallo de escritura.
+
+**Impacto:** directorio no escribible, disco sin espacio o ruta inválida podrían terminar la consola con traceback en lugar de un error recuperable con partida en memoria.
+
+**Pruebas:** `unittest.mock.patch("textrpg.cli.save_state", side_effect=OSError(...))`, `input_fn` controlado y captura de mensajes, comprobando que un error de I/O no cierre el ciclo ni altere el estado. Establecer qué error de lectura al invocar `--load-save` es recuperable o terminal con salida clara. **No afirmar una reproducción real** hasta ejecutarla.
+
+### TG-AUD-014 — P2: pruebas de Android no cubren la paridad real del sidecar
+
+**Estado:** **BRECHA DE COBERTURA**, no regresión independiente.
+
+**Fuentes:** [`ActivityBootSmokeTest.kt`](../../android/app/src/androidTest/java/com/thegame/rpg/ActivityBootSmokeTest.kt), [`tests/test_room_projection.py`](../../tests/test_room_projection.py), [`tests/test_d064_android_scene_projection_source.py`](../../tests/test_d064_android_scene_projection_source.py).
+
+**Evidencia:** los tests unitarios Python prueban `build_room_projection` con actores incrustados directamente en diccionarios, y los tests de pantalla Android comprueban el arranque y la navegación, pero no la **extracción del sidecar durante el inicio real**. Las pruebas estáticas del renderer comprueban referencias al campo `room.actors`, no que el campo esté poblado en el APK.
+
+**Cierre requerido:** un test sobre la sesión Chaquopy iniciada desde assets empaquetados y directorio vacío, comparando sólo IDs/presencia de escenas, además de una prueba de instalación limpia/actualización y error de sidecar. Evitar afirmar que las 35 pruebas de emulador detectan errores fuera de sus aserciones.
+
+### Recuento y garantías tras esta ronda
+
+**Total de hallazgos registrados en el informe: 14 (10 iniciales + 4 nuevos).** Los hallazgos TG-AUD-004, 005, 012 y 013 siguen sujetos a prueba adicional; TG-AUD-009 y 014 son pendientes de integración/cobertura, no regresiones demostradas. **TG-AUD-011 es una divergencia demostrable entre rutas de carga**, pero falta comprobarla en el APK del usuario.
+
+**Actividad realizada:** lectura de archivos de GitHub y comparación de flujo de empaquetado Android ↔ cargador Python ↔ proyección de escena; auditoría de frontera CLI/persistencia; documentación en rama aislada. **No se ejecutaron tests nuevos, no hubo borrados, no se tocaron recursos visuales, motor, ni saves.**
