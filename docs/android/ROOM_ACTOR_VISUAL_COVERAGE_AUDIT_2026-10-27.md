@@ -60,7 +60,7 @@ Added `tests/test_room_actor_visual_source_coverage.py`. Its source contract tes
 To run the focused static coverage test from the repository root:
 
 ```bash
-PYTHONPATH=src python -m unittest tests.test_room_actor_visual_source_coverage -v
+PYTHONPATH=src python -m unittest discover -s tests -p 'test_room_actor_visual_source_coverage.py' -v
 ```
 
 Follow with the full Python and Android test gates under their existing build instructions. Do not interpret an unexecuted command as a passing test.
