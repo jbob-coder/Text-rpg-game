@@ -1193,7 +1193,7 @@ def validate_content_pack(
     power_lookup = power_definitions if isinstance(power_definitions, Mapping) else {}
     if registries is not None:
         errors.extend(validate_registries(registries))
-        if isinstance(scenes, Mapping):
+        if isinstance(scenes, Mapping) and isinstance(registries, Mapping):
             errors.extend(
                 _registry_reference_errors(
                     scenes,
@@ -1339,7 +1339,7 @@ def validate_content_pack(
                         f"condition[{condition_index}]"
                     )
                     ability_id = condition.get("ability_id")
-                    definition = power_definitions.get(ability_id) if isinstance(ability_id, str) else None
+                    definition = power_lookup.get(ability_id) if isinstance(ability_id, str) else None
                     if definition is None:
                         errors.append(
                             f"{location} references unknown power {ability_id!r}"
