@@ -1,9 +1,13 @@
 import copy
+import os
 import tempfile
+import threading
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from unittest.mock import patch
 
-from textrpg import GameState, RuleError, dumps_state, loads_state, save_state
+from textrpg import GameState, RuleError, dumps_state, load_state, loads_state, save_state
 
 
 class PersistenceTests(unittest.TestCase):
@@ -23,6 +27,59 @@ class PersistenceTests(unittest.TestCase):
                         save_state(path, state)
                     self.assertEqual(state.snapshot(), before)
                     self.assertEqual(path.read_bytes(), original_bytes)
+
+    def test_failed_atomic_replace_preserves_previous_save_and_cleans_temp(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "save.json"
+            original = GameState(seed="original", scene_id="SCENE_A")
+            save_state(path, original)
+            before = path.read_bytes()
+
+            updated = GameState(seed="updated", scene_id="SCENE_B")
+            with patch(
+                "textrpg.persistence.os.replace",
+                side_effect=OSError("simulated rename failure"),
+            ):
+                with self.assertRaisesRegex(OSError, "simulated rename failure"):
+                    save_state(path, updated)
+
+            self.assertEqual(path.read_bytes(), before)
+            self.assertEqual(load_state(path).snapshot(), original.snapshot())
+            self.assertEqual(list(path.parent.glob(".save.json.*.tmp")), [])
+
+    def test_simultaneous_saves_use_distinct_temporary_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "save.json"
+            states = [
+                GameState(seed="save-one", scene_id="SCENE_A"),
+                GameState(seed="save-two", scene_id="SCENE_B"),
+            ]
+            barrier = threading.Barrier(2)
+            seen_sources = []
+            real_replace = os.replace
+
+            def synchronized_replace(source, destination):
+                seen_sources.append(Path(source))
+                # Force both temporary writes to exist before either rename.
+                barrier.wait(timeout=15)
+                return real_replace(source, destination)
+
+            with patch(
+                "textrpg.persistence.os.replace",
+                side_effect=synchronized_replace,
+            ):
+                with ThreadPoolExecutor(max_workers=2) as executor:
+                    futures = [executor.submit(save_state, path, state) for state in states]
+                    for future in futures:
+                        future.result(timeout=20)
+
+            self.assertEqual(len(seen_sources), 2)
+            self.assertNotEqual(seen_sources[0], seen_sources[1])
+            self.assertEqual(list(path.parent.glob(".save.json.*.tmp")), [])
+            self.assertIn(
+                load_state(path).snapshot(),
+                [state.snapshot() for state in states],
+            )
 
     def test_load_rejects_non_finite_numbers_in_arbitrary_metadata(self):
         for token in ("NaN", "Infinity", "-Infinity", "1e400", "-1e400"):
