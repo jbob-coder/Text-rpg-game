@@ -109,4 +109,9 @@ def save_state(path: str | Path, state: GameState) -> None:
 
 
 def load_state(path: str | Path) -> GameState:
-    return loads_state(Path(path).read_text(encoding="utf-8"))
+    target = Path(path)
+    try:
+        raw = target.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        raise RuleError(f"Could not read save file: {target}: {exc}") from exc
+    return loads_state(raw)
