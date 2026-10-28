@@ -52,6 +52,7 @@ internal fun CharacterSection(
     val selected = slots.firstOrNull { it.slot == selectedId }
 
     BoxWithConstraints(Modifier.fillMaxSize()) {
+        val columns = if (maxWidth >= 300.dp && LocalDensity.current.fontScale <= 1.4f) 2 else 1
         Column(
             Modifier.fillMaxSize().verticalScroll(rememberScrollState()).testTag("character-scroll"),
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -59,7 +60,6 @@ internal fun CharacterSection(
             PlayerStatusSummary(snapshot, chrome = PixelPanelChrome.CHARACTER)
             Text("EQUIPMENT", color = PixelColors.Gold,
                 style = MaterialTheme.typography.titleLarge)
-            val columns = if (maxWidth >= 300.dp && LocalDensity.current.fontScale <= 1.4f) 2 else 1
             slots.chunked(columns).forEach { pair ->
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     pair.forEach { slot ->
