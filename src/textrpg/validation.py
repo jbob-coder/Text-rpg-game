@@ -543,11 +543,15 @@ def validate_scenes(scenes: Any) -> List[str]:
                     continue
                 _walk_effects(outcome.get("effects", []), outcome_location, errors)
                 next_scene = outcome.get("next_scene")
-                if next_scene is not None and next_scene not in scene_ids:
+                if next_scene is not None and (
+                    not isinstance(next_scene, str) or next_scene not in scene_ids
+                ):
                     errors.append(f"{outcome_location} points to unknown scene {next_scene!r}")
 
             choice_next = choice.get("next_scene")
-            if choice_next is not None and choice_next not in scene_ids:
+            if choice_next is not None and (
+                not isinstance(choice_next, str) or choice_next not in scene_ids
+            ):
                 errors.append(f"{location} points to unknown scene {choice_next!r}")
 
     return errors
@@ -625,9 +629,9 @@ def validate_world_map(
             continue
         start = edge.get("from")
         end = edge.get("to")
-        if start not in node_ids:
+        if not isinstance(start, str) or start not in node_ids:
             errors.append(f"{location}.from references unknown node {start!r}")
-        if end not in node_ids:
+        if not isinstance(end, str) or end not in node_ids:
             errors.append(f"{location}.to references unknown node {end!r}")
         travel_minutes = edge.get("travel_minutes", 10)
         if (
@@ -1227,7 +1231,7 @@ def validate_content_pack(
                         "quest_fail",
                     }:
                         quest_id = effect.get("quest_id")
-                        definition = quest_lookup.get(quest_id)
+                        definition = quest_lookup.get(quest_id) if isinstance(quest_id, str) else None
                         if definition is None:
                             errors.append(
                                 f"{location} references unknown quest {quest_id!r}"
@@ -1236,7 +1240,11 @@ def validate_content_pack(
                             stages = definition.get("stages", {})
                             if effect_type == "quest_stage":
                                 stage_id = effect.get("stage")
-                                if stage_id not in stages:
+                                if (
+                                    not isinstance(stages, Mapping)
+                                    or not isinstance(stage_id, str)
+                                    or stage_id not in stages
+                                ):
                                     errors.append(
                                         f"{location} references unknown stage "
                                         f"{stage_id!r} for quest {quest_id!r}"
@@ -1250,6 +1258,8 @@ def validate_content_pack(
                                     stage_id
                                     for stage_id, stage in stages.items()
                                     if isinstance(stage, Mapping)
+                                    and isinstance(objective_id, str)
+                                    and isinstance(stage.get("objectives", {}), Mapping)
                                     and objective_id in stage.get("objectives", {})
                                 ]
                                 if not matching_stages:
@@ -1266,7 +1276,7 @@ def validate_content_pack(
                         "power_recover",
                     }:
                         ability_id = effect.get("ability_id")
-                        definition = power_lookup.get(ability_id)
+                        definition = power_lookup.get(ability_id) if isinstance(ability_id, str) else None
                         if definition is None:
                             errors.append(
                                 f"{location} references unknown power {ability_id!r}"
@@ -1284,6 +1294,7 @@ def validate_content_pack(
                             techniques = definition.get("techniques", {})
                             if (
                                 not isinstance(techniques, Mapping)
+                                or not isinstance(technique_id, str)
                                 or technique_id not in techniques
                             ):
                                 errors.append(
@@ -1307,7 +1318,7 @@ def validate_content_pack(
                 for condition_index, condition in enumerate(conditions):
                     if not isinstance(condition, Mapping):
                         continue
-                    if condition.get("type") not in {
+                    if not isinstance(condition.get("type"), str) or condition.get("type") not in {
                         "technique_discoverable",
                         "technique_stage_min",
                     }:
@@ -1317,7 +1328,7 @@ def validate_content_pack(
                         f"condition[{condition_index}]"
                     )
                     ability_id = condition.get("ability_id")
-                    definition = power_definitions.get(ability_id)
+                    definition = power_definitions.get(ability_id) if isinstance(ability_id, str) else None
                     if definition is None:
                         errors.append(
                             f"{location} references unknown power {ability_id!r}"
@@ -1329,6 +1340,7 @@ def validate_content_pack(
                     techniques = definition.get("techniques", {})
                     if (
                         not isinstance(techniques, Mapping)
+                        or not isinstance(technique_id, str)
                         or technique_id not in techniques
                     ):
                         errors.append(
