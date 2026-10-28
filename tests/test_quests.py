@@ -1,4 +1,5 @@
 import unittest
+from copy import deepcopy
 
 from textrpg import GameState, RuleError, RulesEngine
 from textrpg.quests import (
@@ -159,7 +160,7 @@ class QuestGraphTests(unittest.TestCase):
         definition = self.definition()
         start_quest(state, "QUEST_ARCHIVE", definition)
 
-        before_quest = dict(state.quests["QUEST_ARCHIVE"])
+        before_quest = deepcopy(state.quests["QUEST_ARCHIVE"])
         before_history = list(state.history)
         with self.assertRaisesRegex(RuleError, "not currently available to fail"):
             fail_objective(
