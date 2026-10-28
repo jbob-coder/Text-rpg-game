@@ -10,6 +10,17 @@ from .modifiers import validate_modifier_mapping, validate_modifier_path
 
 
 STABLE_ID = re.compile(r"^[A-Z][A-Z0-9_]*$")
+
+
+def _is_finite_number(value: Any) -> bool:
+    """Check JSON-compatible numbers without overflowing on huge integers."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return False
+    try:
+        return isfinite(float(value))
+    except OverflowError:
+        return False
+
 SUPPORTED_CONDITIONS: Set[str] = {
     "flag",
     "stat_min",
@@ -221,7 +232,7 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
             if (
                 isinstance(quality, bool)
                 or not isinstance(quality, (int, float))
-                or not isfinite(float(quality))
+                or not _is_finite_number(quality)
                 or float(quality) < 0
             ):
                 errors.append(
@@ -277,7 +288,7 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
             if (
                 isinstance(progress, bool)
                 or not isinstance(progress, (int, float))
-                or not isfinite(float(progress))
+                or not _is_finite_number(progress)
                 or float(progress) < 0
                 or float(progress) > 100
             ):
@@ -291,14 +302,14 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
             if (
                 isinstance(delta, bool)
                 or not isinstance(delta, (int, float))
-                or not isfinite(float(delta))
+                or not _is_finite_number(delta)
             ):
                 errors.append(f"{item_location}.delta must be finite numeric")
             threshold = effect.get("completion_threshold", 100)
             if (
                 isinstance(threshold, bool)
                 or not isinstance(threshold, (int, float))
-                or not isfinite(float(threshold))
+                or not _is_finite_number(threshold)
                 or float(threshold) <= 0
                 or float(threshold) > 100
             ):
@@ -599,7 +610,7 @@ def validate_world_map(
             if (
                 isinstance(value, bool)
                 or not isinstance(value, (int, float))
-                or not isfinite(float(value))
+                or not _is_finite_number(value)
                 or float(value) < 0
                 or float(value) > 100
             ):
