@@ -45,7 +45,8 @@ fun PixelPanel(
 ) {
     Column(
         modifier = modifier
-            .pixelChrome(PixelUiChromeCatalog.panel(chrome))
+            .background(PixelColors.Panel)
+            .border(1.dp, PixelColors.Muted)
             .padding(12.dp),
     ) {
         if (title != null) {
@@ -59,17 +60,14 @@ fun PixelPanel(
 @Composable
 fun PixelChoiceCard(choice: GameChoice, busy: Boolean, onClick: () -> Unit) {
     val enabled = choice.enabled && !busy
-    val chrome = if (enabled) {
-        PixelUiChromeCatalog.choiceEnabled
-    } else {
-        PixelUiChromeCatalog.choiceDisabled
-    }
+
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .testTag("choice-${choice.id}")
-            .pixelChrome(chrome)
+            .background(PixelColors.PanelAlt)
+            .border(1.dp, if (enabled) PixelColors.Cyan else PixelColors.Disabled)
             .clickable(enabled = enabled, role = Role.Button, onClick = onClick)
             .padding(horizontal = 14.dp, vertical = 12.dp),
     ) {
