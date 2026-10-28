@@ -1,3 +1,5 @@
+> **OWNER VISUAL CORRECTION (2026-10-27):** Text-based gameplay with navigable map; pixel art/scene sprites in older documents are superseded for active presentation. See docs/GAME_CONTEXT_LOGS/2026-10-27_TEXT_MAP_VISUAL_RETIREMENT.md.
+
 # Text RPG Game
 
 ## Current priority program

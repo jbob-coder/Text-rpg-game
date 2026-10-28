@@ -1,3 +1,5 @@
+> **CURRENT OWNER OVERRIDE (2026-10-27 AST):** Where historical pixel-art mandates conflict with the text-first + navigable-map instruction, the current owner decision controls. See docs/GAME_CONTEXT_LOGS/2026-10-27_TEXT_MAP_VISUAL_RETIREMENT.md; older pixel plans are historical, not active work.
+
 # THE GAME — Master Development & Documentation Program
 
 Status: **PRIMARY PROJECT / DOCUMENTATION + BOUNDED EXECUTION AUTHORIZED / CONTRACT-GATED**  

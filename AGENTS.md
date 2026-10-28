@@ -1,3 +1,5 @@
+> **CURRENT OWNER VISUAL OVERRIDE (2026-10-27 AST):** Text-first THE GAME with navigable map; do not rebuild pixel scenes/sprites. Previous pixel documentation is historical only. See docs/GAME_CONTEXT_LOGS/2026-10-27_TEXT_MAP_VISUAL_RETIREMENT.md. Do not push to main; use development authority branch + review PR.
+
 # AGENTS.md — Text RPG Game
 
 This file is the repository entry point for coding agents and automated assistants.
