@@ -73,6 +73,47 @@ class QuestGraphTests(unittest.TestCase):
             [],
         )
 
+    def test_terminal_flag_rejects_non_boolean_values_before_start(self):
+        for invalid_flag in ("true", 1, None, {}):
+            with self.subTest(invalid_flag=invalid_flag):
+                definition = self.definition()
+                definition["stages"]["STAGE_INVESTIGATE"]["terminal"] = invalid_flag
+                errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
+                self.assertTrue(
+                    any(".terminal must be a boolean" in error for error in errors)
+                )
+                state = self.state()
+                with self.assertRaisesRegex(RuleError, "terminal must be a boolean"):
+                    start_quest(state, "QUEST_ARCHIVE", definition)
+                self.assertEqual(state.quests, {})
+                self.assertEqual(state.history, [])
+
+    def test_terminal_stage_cannot_silently_skip_its_objectives(self):
+        definition = self.definition()
+        definition["stages"]["STAGE_COMPLETE"]["objectives"] = {
+            "OBJ_NOT_DONE": {"required": True}
+        }
+        errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
+        self.assertTrue(
+            any("terminal stage cannot define objectives" in error for error in errors)
+        )
+        state = self.state()
+        with self.assertRaisesRegex(RuleError, "terminal stage cannot define objectives"):
+            start_quest(state, "QUEST_ARCHIVE", definition)
+        self.assertEqual(state.quests, {})
+        self.assertEqual(state.history, [])
+
+    def test_empty_boolean_terminal_stage_still_completes_immediately(self):
+        definition = self.definition()
+        definition["start_stage"] = "STAGE_COMPLETE"
+        self.assertEqual(
+            validate_quest_definitions({"QUEST_ARCHIVE": definition}), []
+        )
+        state = self.state()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+        self.assertEqual(state.quests["QUEST_ARCHIVE"]["status"], "completed")
+        self.assertEqual(state.history[-1]["type"], "quest_terminal")
+
     def test_invalid_stage_reference_is_reported(self):
         definition = self.definition()
         definition["stages"]["STAGE_INVESTIGATE"]["on_complete"] = {
