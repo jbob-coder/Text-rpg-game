@@ -51,7 +51,7 @@ fun MapTravelTransitionOverlay(
                 style = MaterialTheme.typography.titleLarge)
             Spacer(Modifier.height(4.dp))
             Text(
-                text = "${displayLocation(transition.fromLocation)} → ${displayLocation(transition.toLocation)}",
+                text = travelRouteLabel(transition.fromLocation, transition.toLocation),
                 color = PixelColors.Paper,
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.testTag("map-travel-transition-route"),
@@ -62,3 +62,6 @@ fun MapTravelTransitionOverlay(
 
 private fun displayLocation(locationId: String): String =
     locationId.replace('_', ' ').uppercase()
+
+internal fun travelRouteLabel(fromLocation: String, toLocation: String): String =
+    "${displayLocation(fromLocation)} → ${displayLocation(toLocation)}"
