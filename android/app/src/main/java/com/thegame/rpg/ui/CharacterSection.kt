@@ -50,11 +50,8 @@ internal fun CharacterSection(
     var detailOpen by rememberSaveable { mutableStateOf(false) }
     val slots = snapshot.inventory.equipment
     val selected = slots.firstOrNull { it.slot == selectedId }
-    val midpoint = (slots.size + 1) / 2
 
     BoxWithConstraints(Modifier.fillMaxSize()) {
-        val railWidth = if (maxWidth < 380.dp) 56.dp else 72.dp
-        val surroundRig = maxWidth >= 300.dp && LocalDensity.current.fontScale <= 1.4f
         Column(
             Modifier.fillMaxSize().verticalScroll(rememberScrollState()).testTag("character-scroll"),
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -173,7 +170,7 @@ private fun CharacterSlotCard(slot: GameEquipmentSlot, active: Boolean, onSelect
             .testTag("character-slot-${slot.slot}"),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-            Text(label, color = PixelColors.Paper, style = MaterialTheme.typography.labelLarge)
+        Text(label, color = PixelColors.Paper, style = MaterialTheme.typography.labelLarge)
     }
 }
 
