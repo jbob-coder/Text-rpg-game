@@ -576,13 +576,6 @@ internal fun InventorySection(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                PixelUiIcon(
-                    sprite = PixelUiIconCatalog.navigation(GameSection.INVENTORY.label),
-                    modifier = Modifier.size(20.dp),
-                    tint = PixelColors.Gold,
-                    testTag = "inventory-loadout-icon",
-                )
-                Spacer(Modifier.width(6.dp))
                 Text(
                     "EQUIPPED ${slots.count { it.equipped }} / ${slots.size}",
                     color = PixelColors.Paper,
@@ -620,20 +613,6 @@ internal fun InventorySection(
                         .testTag("inventory-slot-detail"),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    if (selectedSlot.equipped && selectedSlot.itemId != null) {
-                        PixelItemIcon(
-                            itemId = selectedSlot.itemId,
-                            quality = selectedSlot.quality,
-                            modifier = Modifier.size(44.dp),
-                        )
-                    } else {
-                        PixelUiIcon(
-                            sprite = PixelEquipmentSlotCatalog.slot(selectedSlot.slot),
-                            modifier = Modifier.size(40.dp),
-                            tint = PixelColors.Muted,
-                        )
-                    }
-                    Spacer(Modifier.width(8.dp))
                     Column(Modifier.weight(1f)) {
                         Text(
                             slotDisplayName(selectedSlot.slot),
@@ -696,12 +675,6 @@ internal fun InventorySection(
                             .testTag("inventory-item-detail"),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        PixelItemIcon(
-                            itemId = selectedItem.id,
-                            quality = selectedItem.quality,
-                            modifier = Modifier.size(54.dp),
-                        )
-                        Spacer(Modifier.width(8.dp))
                         Column(Modifier.weight(1f)) {
                             Text(
                                 selectedItem.name,
@@ -793,19 +766,6 @@ private fun InventorySlotTile(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        if (slot.equipped && slot.itemId != null && PixelAssetCatalog.itemIcon(slot.itemId) != null) {
-            PixelItemIcon(
-                itemId = slot.itemId,
-                quality = slot.quality,
-                modifier = Modifier.size(34.dp),
-            )
-        } else {
-            PixelUiIcon(
-                sprite = PixelEquipmentSlotCatalog.slot(slot.slot),
-                modifier = Modifier.size(30.dp),
-                tint = PixelColors.Muted,
-            )
-        }
         Text(
             slotDisplayName(slot.slot),
             color = if (active) PixelColors.Gold else PixelColors.Paper,
@@ -831,12 +791,6 @@ private fun InventoryItemTile(
             .testTag("inventory-item-${item.id}"),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        PixelItemIcon(
-            itemId = item.id,
-            quality = item.quality,
-            modifier = Modifier.size(42.dp),
-        )
-        Spacer(Modifier.width(6.dp))
         Column(Modifier.weight(1f)) {
             Text(
                 item.name,
@@ -873,18 +827,6 @@ private fun QuestSection(snapshot: GameSnapshot) {
                     PixelPanel(title = category, chrome = PixelPanelChrome.QUEST) {
                         quests.forEach { quest ->
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                PixelUiIcon(
-                                    sprite = PixelUiIconCatalog.quest(category),
-                                    modifier = Modifier.size(16.dp),
-                                    tint = when (category) {
-                                        "main" -> PixelColors.Gold
-                                        "side" -> PixelColors.Cyan
-                                        "optional" -> PixelColors.Paper
-                                        else -> PixelColors.Muted
-                                    },
-                                    testTag = "quest-icon-$category",
-                                )
-                                Spacer(Modifier.width(6.dp))
                                 Text(quest.title, color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
                             }
                             if (quest.description.isNotBlank()) {
@@ -1130,13 +1072,6 @@ private fun EquipmentSlotValue(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        PixelUiIcon(
-            sprite = PixelEquipmentSlotCatalog.slot(slotId),
-            modifier = Modifier.size(24.dp),
-            tint = PixelColors.Paper,
-            testTag = "equipment-slot-icon-$slotId",
-        )
-        Spacer(Modifier.width(8.dp))
         Column(Modifier.weight(1f)) {
             Text(
                 slotDisplayName(slotId),
