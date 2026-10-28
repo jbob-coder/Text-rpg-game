@@ -64,6 +64,78 @@ class InvalidContentDiscriminatorTests(unittest.TestCase):
         )
         self.assertEqual([], validate_scenes(scenes))
 
+    def test_unhashable_scene_destinations_are_validation_errors(self):
+        for destination in ([], {}, ["SCENE_TEST"]):
+            for location in ("choice", "outcome"):
+                with self.subTest(destination=destination, location=location):
+                    scenes = self.scene()
+                    choice = scenes["SCENE_TEST"]["choices"][0]
+                    if location == "choice":
+                        choice["next_scene"] = destination
+                    else:
+                        choice["outcomes"]["default"]["next_scene"] = destination
+                    errors = validate_scenes(scenes)
+                    self.assertTrue(any("unknown scene" in e for e in errors))
+
+    def test_unhashable_world_map_edge_endpoints_are_validation_errors(self):
+        from textrpg.validation import validate_world_map
+
+        nodes = {
+            "NODE_A": {"x": 0, "y": 0},
+            "NODE_B": {"x": 1, "y": 1},
+        }
+        for endpoint in ("from", "to"):
+            for bad in ([], {}, ["NODE_A"]):
+                with self.subTest(endpoint=endpoint, bad=bad):
+                    edge = {"from": "NODE_A", "to": "NODE_B"}
+                    edge[endpoint] = bad
+                    errors = validate_world_map(
+                        {"nodes": nodes, "edges": [edge]}, self.scene()
+                    )
+                    self.assertTrue(any("unknown node" in e for e in errors))
+
+    def test_unhashable_quest_refs_are_validation_errors(self):
+        quests = {
+            "QUEST_TEST": {
+                "start_stage": "STAGE_ONE",
+                "stages": {"STAGE_ONE": {"objectives": {}}},
+            }
+        }
+        for field, bad in (("quest_id", []), ("stage", {})):
+            with self.subTest(field=field):
+                effect = {
+                    "type": "quest_stage",
+                    "quest_id": "QUEST_TEST",
+                    "stage": "STAGE_ONE",
+                }
+                effect[field] = bad
+                errors = validate_content_pack(self.scene(effect=effect), quests)
+                self.assertTrue(
+                    any("unknown quest" in e or "unknown stage" in e for e in errors)
+                )
+
+    def test_unhashable_power_refs_are_validation_errors(self):
+        effects = (
+            {"type": "ability_discover", "ability_id": []},
+            {
+                "type": "technique_discover",
+                "ability_id": "ABILITY_TEST",
+                "technique_id": {},
+            },
+        )
+        for effect in effects:
+            with self.subTest(effect=effect):
+                errors = validate_content_pack(self.scene(effect=effect), powers={})
+                self.assertTrue(any("unknown power" in e for e in errors))
+        condition = {
+            "type": "technique_discoverable",
+            "ability_id": [],
+            "technique_id": "TECH_TEST",
+        }
+        errors = validate_content_pack(self.scene(condition=condition), powers={})
+        self.assertTrue(any("unknown power" in e for e in errors))
+
+
 
 if __name__ == "__main__":
     unittest.main()
