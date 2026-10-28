@@ -136,6 +136,36 @@ class InvalidContentDiscriminatorTests(unittest.TestCase):
         self.assertTrue(any("unknown power" in e for e in errors))
 
 
+    def test_extremely_large_json_integer_rejected_in_world_coordinates(self):
+        from textrpg.validation import validate_world_map
+
+        huge = 10 ** 400
+        nodes = {"NODE_A": {"x": huge, "y": 12}}
+        errors = validate_world_map({"nodes": nodes}, self.scene())
+        self.assertTrue(any("NODE_A.x must be finite numeric" in e for e in errors))
+        self.assertEqual([], validate_world_map(
+            {"nodes": {"NODE_A": {"x": 12, "y": 100}}}, self.scene()
+        ))
+
+    def test_extremely_large_json_integer_rejected_in_effect_numbers(self):
+        huge = 10 ** 400
+        cases = (
+            ("quality", {"type": "power_recover", "ability_id": "ABILITY_TEST",
+                          "minutes": 1, "quality": huge}),
+            ("progress", {"type": "npc_goal_create", "npc": "NPC_TEST",
+                           "goal_id": "GOAL_TEST", "progress": huge}),
+            ("delta", {"type": "npc_goal_progress", "npc": "NPC_TEST",
+                        "goal_id": "GOAL_TEST", "delta": huge}),
+            ("completion_threshold", {"type": "npc_goal_progress", "npc": "NPC_TEST",
+                                      "goal_id": "GOAL_TEST", "delta": 1,
+                                      "completion_threshold": huge}),
+        )
+        for field, effect in cases:
+            with self.subTest(field=field):
+                errors = validate_scenes(self.scene(effect=effect))
+                self.assertTrue(any("." + field in e for e in errors), errors)
+
+
 
 if __name__ == "__main__":
     unittest.main()
