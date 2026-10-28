@@ -1,7 +1,10 @@
 import copy
 import tempfile
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from threading import Barrier
+from unittest import mock
 
 from textrpg import GameState, RuleError, dumps_state, loads_state, save_state
 
@@ -152,6 +155,56 @@ class PersistenceTests(unittest.TestCase):
         state.player["debug_values"] = {"not", "json"}
         with self.assertRaises(RuleError):
             dumps_state(state)
+
+    def test_two_simultaneous_saves_use_distinct_temporary_files(self):
+        # Force both writes to reach replace() together. With the former fixed
+        # save.json.tmp path one replacement consumes the other's source.
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "save.json"
+            states = (
+                GameState(seed="first", scene_id="SCENE_A"),
+                GameState(seed="second", scene_id="SCENE_A"),
+            )
+            barrier = Barrier(2)
+            real_replace = Path.replace
+
+            def synchronized_replace(source, destination):
+                barrier.wait(timeout=10)
+                return real_replace(source, destination)
+
+            with mock.patch.object(
+                Path, "replace", autospec=True, side_effect=synchronized_replace
+            ):
+                with ThreadPoolExecutor(max_workers=2) as pool:
+                    list(pool.map(lambda state: save_state(path, state), states))
+
+            self.assertIn(load_state(path).seed, {"first", "second"})
+            self.assertEqual([file.name for file in Path(directory).iterdir()], ["save.json"])
+
+    def test_failed_replace_preserves_previous_save_and_cleans_temp(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "save.json"
+            save_state(path, GameState(seed="original", scene_id="SCENE_A"))
+            old_bytes = path.read_bytes()
+
+            with mock.patch.object(
+                Path, "replace", autospec=True, side_effect=OSError("replace refused")
+            ):
+                with self.assertRaisesRegex(OSError, "replace refused"):
+                    save_state(path, GameState(seed="replacement", scene_id="SCENE_A"))
+
+            self.assertEqual(path.read_bytes(), old_bytes)
+            self.assertEqual(sorted(file.name for file in Path(directory).iterdir()), ["save.json"])
+
+    def test_invalid_save_state_does_not_create_save_directory(self):
+        with tempfile.TemporaryDirectory() as directory:
+            parent = Path(directory) / "new" / "nested"
+            path = parent / "save.json"
+            invalid = GameState(seed="invalid", scene_id="SCENE_A", schema_version=99)
+
+            with self.assertRaisesRegex(RuleError, "schema"):
+                save_state(path, invalid)
+            self.assertFalse(parent.exists())
 
 if __name__ == "__main__":
     unittest.main()
