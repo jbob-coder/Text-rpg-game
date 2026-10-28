@@ -11,6 +11,7 @@ UI = REPO_ROOT / "android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt"
 CHARACTER = REPO_ROOT / "android/app/src/main/java/com/thegame/rpg/ui/CharacterSection.kt"
 BRIDGE = REPO_ROOT / "src/textrpg/android_bridge.py"
 KOTLIN = REPO_ROOT / "android/app/src/main/java/com/thegame/rpg/engine/GameEngine.kt"
+ROOM_CONTRACT = REPO_ROOT / "android/app/src/main/java/com/thegame/rpg/engine/RoomProjectionContract.kt"
 
 
 class TextFirstAndroidPresentationSourceTests(unittest.TestCase):
@@ -29,7 +30,7 @@ class TextFirstAndroidPresentationSourceTests(unittest.TestCase):
         kotlin = KOTLIN.read_text(encoding="utf-8")
         self.assertIn('"room"', bridge)
         self.assertIn("data class GameRoomProjection(", kotlin)
-        self.assertIn("RoomProjectionContract", kotlin)
+        self.assertIn("RoomProjectionContract", ROOM_CONTRACT.read_text(encoding="utf-8"))
 
     def test_map_remains_a_selectable_authoritative_route_graph(self):
         screen = UI.read_text(encoding="utf-8")
