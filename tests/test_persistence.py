@@ -206,5 +206,25 @@ class PersistenceTests(unittest.TestCase):
                 save_state(path, invalid)
             self.assertFalse(parent.exists())
 
+    def test_loading_missing_save_returns_rule_error(self):
+        with tempfile.TemporaryDirectory() as directory:
+            missing = Path(directory) / "missing.json"
+            with self.assertRaisesRegex(RuleError, "Could not read save file"):
+                load_state(missing)
+
+    def test_loading_permission_denied_returns_rule_error(self):
+        with mock.patch.object(
+            Path, "read_text", autospec=True, side_effect=PermissionError("permission denied")
+        ):
+            with self.assertRaisesRegex(RuleError, "permission denied"):
+                load_state("protected.json")
+
+    def test_loading_non_utf8_save_returns_rule_error(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "invalid-utf8.json"
+            path.write_bytes(b"\\xff")
+            with self.assertRaisesRegex(RuleError, "Could not read save file"):
+                load_state(path)
+
 if __name__ == "__main__":
     unittest.main()
