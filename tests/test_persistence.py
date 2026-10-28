@@ -6,7 +6,7 @@ from pathlib import Path
 from threading import Barrier
 from unittest import mock
 
-from textrpg import GameState, RuleError, dumps_state, loads_state, save_state
+from textrpg import GameState, RuleError, dumps_state, load_state, loads_state, save_state
 
 
 class PersistenceTests(unittest.TestCase):
