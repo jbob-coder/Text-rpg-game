@@ -218,3 +218,69 @@ Esta ronda conserva los 10 hallazgos previos sin reclasificar riesgos como error
 **Total de hallazgos registrados en el informe: 14 (10 iniciales + 4 nuevos).** Los hallazgos TG-AUD-004, 005, 012 y 013 siguen sujetos a prueba adicional; TG-AUD-009 y 014 son pendientes de integración/cobertura, no regresiones demostradas. **TG-AUD-011 es una divergencia demostrable entre rutas de carga**, pero falta comprobarla en el APK del usuario.
 
 **Actividad realizada:** lectura de archivos de GitHub y comparación de flujo de empaquetado Android ↔ cargador Python ↔ proyección de escena; auditoría de frontera CLI/persistencia; documentación en rama aislada. **No se ejecutaron tests nuevos, no hubo borrados, no se tocaron recursos visuales, motor, ni saves.**
+
+
+---
+
+## Tercera ronda: contratos de misiones y compatibilidad de guardados — 2026-10-27
+
+**Base estática verificada:** `docs/master-game-development-program@dac5d22cdbe211d0d35d3df98b542be2653f1b85`. Esta ronda añade problemas nuevos **sin modificar el motor ni ejecutar tests nuevos**. Las conclusiones de alcance y gravedad dependen de lo observable en la fuente, no de inferencias sobre el APK del usuario.
+
+### TG-AUD-015 — P2: validador de misiones no detecta ciclos en requisitos de objetivos
+
+**Estado:** **BRECHA DE VALIDACIÓN CONFIRMADA EN CÓDIGO; ejemplo negativo todavía no ejecutado en Python**.
+
+**Fuentes:** [`src/textrpg/quests.py` líneas 20–124 y 208–229](../../src/textrpg/quests.py); [`tests/test_quests.py`](../../tests/test_quests.py).
+
+`validate_quest_definitions()` verifica que cada `requires_objectives` sea una lista de IDs existentes **en la misma etapa**, pero no comprueba dependencias recursivas, autorreferencias o ciclos entre varios objetivos. `available_objectives()` exige que los requisitos estén completados; por tanto, en una etapa nueva donde `OBJ_A` exige `OBJ_B` y `OBJ_B` exige `OBJ_A`, ninguno es seleccionable.
+
+**Ejemplo de prueba futura:** crear una misión con `STAGE_LOCKED`, `OBJ_A.requires_objectives=["OBJ_B"]`, `OBJ_B.requires_objectives=["OBJ_A"]`; esperar rechazo explícito al validar o una regla de escape autorizada. Distinguir entre círculo imposible y un requisito imposible intencional para contenido de prueba.
+
+**Control positivo:** se inspeccionaron los grafos de requisitos de **16 etapas** de las **4 misiones** en `content/vertical_slice_01.json`: **0 ciclos detectados**. **No** reportar que la partida publicada tenga una misión bloqueada por este defecto de validador.
+
+**Cierre:** validación de ciclos con grafo dirigido y regresión para autorreferencia y ciclo de dos nodos; preservar ramas alternativas con salida intencional y el contrato de `required=false`.
+
+### TG-AUD-016 — P2: asimetría de precondiciones al fallar un objetivo de misión
+
+**Estado:** **CONFIRMADO EN LA RUTA DEL CÓDIGO, pero clasificación funcional requiere contrato del diseño**.
+
+**Fuentes:** [`src/textrpg/quests.py` líneas 230–322](../../src/textrpg/quests.py), [`src/textrpg/core.py` líneas 622–659](../../src/textrpg/core.py), [`tests/test_quests.py` líneas 98–155](../../tests/test_quests.py).
+
+`complete_objective()` exige `objective_id in available_objectives(...)`; `fail_objective()` sólo verifica que el ID pertenece a la etapa y que no figura ya en completados/fallidos. Esto permite que un efecto `quest_objective_fail` marque como fallado un objetivo todavía bloqueado por `requires_objectives`; el motor permite tal efecto y no lo limita a objetivos ofrecidos al jugador.
+
+**Alcance real:** puede ser correcto **si** los autores desean que un objetivo futuro falle por una causa externa (plazo, pérdida de oportunidad). No declarar bug de juego sin revisar ese requisito. La documentación no explicita en las funciones citadas la excepción para fallo de objetivos bloqueados.
+
+**Prueba/decisión requerida:** con el fixture ya existente `OBJ_INTERVIEW_WITNESS` depende de `OBJ_FIND_RECORD`; antes de completar `OBJ_FIND_RECORD`, invocar `fail_objective` y verificar si el contrato aprobado exige rechazo o un tipo explícito de fallo externo. Añadir prueba para ambos casos según autorización de reglas, sin cambiar semántica sin decisión de diseño.
+
+### TG-AUD-017 — P1/P2: identidad de paquete de contenido ausente del guardado
+
+**Estado:** **RIESGO DE COMPATIBILIDAD CONFIRMADO POR ESQUEMA; pérdida de datos NO demostrada**.
+
+**Fuentes:** [`src/textrpg/core.py` líneas 108–153](../../src/textrpg/core.py); [`src/textrpg/content.py` líneas 17–52](../../src/textrpg/content.py); [`src/textrpg/persistence.py` líneas 14–87](../../src/textrpg/persistence.py); [`src/textrpg/cli.py` líneas 136–151](../../src/textrpg/cli.py). Contrato de migración Android relacionado: TG-AUD-001 y TG-AUD-012.
+
+El paquete jugable tiene `content_id`, pero `GameState` **no** contiene un `content_id` ni huella/revisión de contenido en el snapshot persistido. `loads_state()` valida `schema_version=1` y estructura, mientras que la CLI sólo comprueba que el `scene_id` guardado siga existiendo en el paquete actual. Dos versiones o packs que reutilizan la misma escena pueden tener misiones, IDs de recursos, objetos, condiciones o poderes distintos sin que se detecte esa divergencia en la entrada del save. La futura reparación CPR-006 al validar proyecciones limita algunos casos, pero **no garantiza compatibilidad semántica de contenido** por sí sola.
+
+**Riesgo:** fallos posteriores por referencias semánticas que ya no se ajustan al contenido, comportamiento distinto al reanudar o necesidad de migraciones parciales. **No** se ha observado tal problema en los guardados reales del usuario.
+
+**Cierre:** decidir compatibilidad entre versiones de contenido, historial de migraciones y relación entre `content_id` y `schema_version`. Añadir tests con dos paquetes que comparten escena, pero cambian contrato de misión/ítem; el sistema debe aplicar migración explícita, rechazar con explicación o demostrar compatibilidad. No ampliar el esquema sin plan de migración y consentimiento del propietario.
+
+### TG-AUD-018 — P2: archivo temporal fijo en guardado permite colisión entre escritores concurrentes
+
+**Estado:** **RIESGO CONDICIONAL CONFIRMADO EN CÓDIGO; concurrencia concurrente NO reproducida**.
+
+**Fuente:** [`src/textrpg/persistence.py` líneas 78–86](../../src/textrpg/persistence.py).
+
+`save_state()` usa siempre `target.with_suffix(target.suffix + ".tmp")` para una misma ruta destino. La sustitución `temp.replace(target)` es atómica en condiciones locales habituales **para un solo escritor**, pero dos ejecuciones que guardan simultáneamente en el mismo path pueden escribir sobre el mismo temporal o competir por renombrarlo. Ningún bloqueo interproceso ni nombre de archivo temporal exclusivo está presente en esta función.
+
+**Límite:** `GameViewModel` bloquea operaciones mientras `busy=true` dentro de una sesión; esto reduce la probabilidad en ese cliente. No hay evidencia de que el usuario ejecute dos escritores de la misma partida ni de corrupción en producción. El problema es de robustez cuando múltiples instancias usan un destino común.
+
+**Cierre:** test de concurrencia controlada sobre ruta compartida y prueba de recuperación de temporal incompleto; si se admite más de un escritor, usar temporales únicos en el mismo directorio más mecanismo de serialización/lease y conservar la política de escritura atómica.
+
+### Comprobaciones de contenido que NO deben convertirse en falsos positivos
+
+- La inspección de rutas `next_scene` desde el inicio alcanzó **17 de 19 escenas** por **elecciones**; `DISTRICT_ARCHIVE` y `DISTRICT_WORKSHOP` se visitan por el **mapa** y no son escenas necesariamente inaccesibles. No clasificarlas como rotas por un grafo exclusivamente narrativo.
+- El grafo del mapa tiene **dos componentes** según los ocho enlaces, compatibles con áreas separadas por desbloqueos/relato. No afirmar que falte una carretera sin requisito de conexión total.
+- Las **16 etapas de misión** del contenido inspeccionado **no presentan ciclos** de `requires_objectives`.
+- Las funciones `RulesEngine.choose()` y `advance_time()` tienen validación previa/rollback en las rutas verificadas. No reportar ausencia total de atomicidad del motor basándose en riesgos del puente Android.
+
+**Acumulado: 18 hallazgos documentados (14 anteriores + 4 nuevos).** TG-AUD-015 y TG-AUD-016 son brechas de contrato/validación; TG-AUD-017 y TG-AUD-018 son riesgos condicionados. **No se ejecutaron tests nuevos ni builds en esta ronda**: confirmación del código fuente no es equivalente a fallo reproducido. Este informe sigue siendo un inventario de investigación, **no** certifica haber encontrado todos los errores del repositorio.
