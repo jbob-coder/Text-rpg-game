@@ -76,7 +76,7 @@ def _walk_conditions(conditions: Any, location: str, errors: List[str]) -> None:
             errors.append(f"{item_location} must be an object")
             continue
         kind = condition.get("type")
-        if kind not in SUPPORTED_CONDITIONS:
+        if not isinstance(kind, str) or kind not in SUPPORTED_CONDITIONS:
             errors.append(f"{item_location} has unsupported type {kind!r}")
             continue
         if kind in {"stat_min", "stat_max"}:
@@ -118,7 +118,7 @@ def _walk_conditions(conditions: Any, location: str, errors: List[str]) -> None:
                 f"{item_location}.technique_id",
                 errors,
             )
-            if condition.get("stage") not in {
+            if not isinstance(condition.get("stage"), str) or condition.get("stage") not in {
                 "discovered",
                 "unstable",
                 "learned",
@@ -172,7 +172,7 @@ def _walk_effects(effects: Any, location: str, errors: List[str]) -> None:
             continue
 
         kind = effect.get("type")
-        if kind not in SUPPORTED_EFFECTS:
+        if not isinstance(kind, str) or kind not in SUPPORTED_EFFECTS:
             errors.append(f"{item_location} has unsupported type {kind!r}")
             continue
 
@@ -390,6 +390,8 @@ def _registry_reference_errors(
                         continue
                     location = f"{scene_id}.choices[{choice_index}].{gate_name}[{index}]"
                     kind = condition.get("type")
+                    if not isinstance(kind, str):
+                        continue
                     if kind in {"knows", "not_knows", "npc_knows", "npc_not_knows"}:
                         require("knowledge", condition.get("knowledge_id"), location)
                     elif kind in {"has_perk", "not_has_perk"}:
@@ -414,6 +416,8 @@ def _registry_reference_errors(
                         f"{outcome_name}.effect[{effect_index}]"
                     )
                     kind = effect.get("type")
+                    if not isinstance(kind, str):
+                        continue
                     if kind in {"learn", "npc_learn"}:
                         require("knowledge", effect.get("knowledge_id"), location)
                     elif kind == "inventory":
@@ -1208,6 +1212,8 @@ def validate_content_pack(
                     if not isinstance(effect, Mapping):
                         continue
                     effect_type = effect.get("type")
+                    if not isinstance(effect_type, str):
+                        continue  # Invalid discriminator is reported by validate_scenes.
                     location = (
                         f"{scene_id}.choices[{choice_index}]."
                         f"outcomes.{outcome_name}.effect[{effect_index}]"
