@@ -146,7 +146,6 @@ internal fun CharacterSection(
                         label = "CLOSE",
                         enabled = true,
                         tag = "character-detail-close",
-                        chrome = PixelUiChromeCatalog.buttonSecondary,
                     ) { detailOpen = false }
                 }
             }
