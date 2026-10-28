@@ -77,12 +77,6 @@ internal fun StatusResourceGrid(
                             chrome = chrome,
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                PixelUiIcon(
-                                    sprite = PixelUiIconCatalog.resource(resource.id),
-                                    modifier = Modifier.size(16.dp),
-                                    tint = PixelColors.Cyan,
-                                )
-                                Spacer(Modifier.width(6.dp))
                                 Text(
                                     resource.id.replaceFirstChar { it.uppercase() },
                                     color = PixelColors.Muted,
