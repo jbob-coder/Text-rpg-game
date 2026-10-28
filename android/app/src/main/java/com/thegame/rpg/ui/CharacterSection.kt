@@ -125,7 +125,6 @@ internal fun CharacterSection(
                             label = "UNEQUIP",
                             enabled = !busy,
                             tag = "character-unequip",
-                            chrome = PixelUiChromeCatalog.buttonSecondary,
                         ) { onUnequip(selected.slot) }
                     } else {
                         Text("Empty slot", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
@@ -179,7 +178,6 @@ private fun CharacterActionButton(
     label: String,
     enabled: Boolean,
     tag: String,
-    chrome: PixelChromeAsset = PixelUiChromeCatalog.buttonPrimary,
     onClick: () -> Unit,
 ) {
     val style = Modifier.background(PixelColors.PanelAlt)
