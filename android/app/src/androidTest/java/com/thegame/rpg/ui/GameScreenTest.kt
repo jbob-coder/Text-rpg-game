@@ -54,7 +54,7 @@ class GameScreenTest {
     )
 
     @Test
-    fun gameplayShellShowsScrollableNarrativeChoicesAvatarAndNavigation() {
+    fun gameplayShellShowsScrollableNarrativeAndTextNavigation() {
         composeRule.setContent {
             PixelTheme {
                 GameScreen(
@@ -70,8 +70,9 @@ class GameScreenTest {
             .assertIsDisplayed()
             .assert(hasScrollAction())
         composeRule.onNodeWithText(snapshot.body).assertIsDisplayed()
-        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
-        composeRule.onNodeWithTag("button-with-icon-access_audio_narration_icon")
+        composeRule.onAllNodesWithTag("player-avatar").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("scene-illustration").assertCountEquals(0)
+        composeRule.onNodeWithText("READ ALOUD")
             .performScrollTo()
             .assertIsDisplayed()
 
@@ -268,76 +269,6 @@ class GameScreenTest {
     }
 
     @Test
-    fun currentCatalogIconsRenderAsRealComposeAssets() {
-        val itemIds = listOf(
-            "ITEM_DEPOT_JACKET",
-            "ITEM_WORK_GLOVES",
-            "ITEM_SIGNAL_RING",
-            "ITEM_COURIER_NECKTAG",
-            "ITEM_MAINTENANCE_SEAL",
-            "ITEM_DEAD_RELAY",
-        )
-
-        composeRule.setContent {
-            PixelTheme {
-                Column {
-                    itemIds.forEach { itemId ->
-                        PixelItemIcon(
-                            itemId = itemId,
-                            modifier = Modifier.size(48.dp),
-                        )
-                    }
-                }
-            }
-        }
-
-        itemIds.forEach { itemId ->
-            composeRule.onNodeWithTag("item-icon-$itemId")
-                .assertIsDisplayed()
-        }
-    }
-
-    @Test
-    fun productionUiIconCatalogRendersThroughCompose() {
-        composeRule.setContent {
-            PixelTheme {
-                Column {
-                    PixelUiIconCatalog.productionIcons.forEach { icon ->
-                        PixelUiIcon(
-                            sprite = icon,
-                            modifier = Modifier.size(24.dp),
-                            testTag = "production-ui-icon",
-                        )
-                    }
-                }
-            }
-        }
-
-        composeRule.onAllNodesWithTag("production-ui-icon")
-            .assertCountEquals(PixelUiIconCatalog.productionIcons.size)
-    }
-
-    @Test
-    fun equipmentSlotIconSetRendersThroughCompose() {
-        composeRule.setContent {
-            PixelTheme {
-                Column {
-                    PixelEquipmentSlotCatalog.productionSlots.forEach { icon ->
-                        PixelUiIcon(
-                            sprite = icon,
-                            modifier = Modifier.size(24.dp),
-                            testTag = "production-equipment-slot-icon",
-                        )
-                    }
-                }
-            }
-        }
-
-        composeRule.onAllNodesWithTag("production-equipment-slot-icon")
-            .assertCountEquals(PixelEquipmentSlotCatalog.productionSlots.size)
-    }
-
-    @Test
     fun projectedRelayStateRendersThroughNarrativeScene() {
         val relaySnapshot = snapshot.copy(
             location = "RELAY_WORKBENCH",
@@ -355,132 +286,8 @@ class GameScreenTest {
             }
         }
 
-        composeRule.onNodeWithTag("scene-illustration")
-            .assertIsDisplayed()
-    }
-
-    @Test
-    fun allCurrentNamedSceneMastersRenderThroughCompose() {
-        val locations = listOf(
-            "PLATFORM_NINE",
-            "RELAY_WORKBENCH",
-            "GATE_TWELVE",
-            "SERVICE_TUNNEL",
-            "EVAC_STAIR",
-            "TRACE_CHAMBER",
-            "DISTRICT_PLAZA",
-            "DISTRICT_ARCHIVE",
-            "WORKSHOP_ROW",
-        )
-
-        composeRule.setContent {
-            PixelTheme {
-                Column {
-                    locations.forEach { locationId ->
-                        SceneIllustration(
-                            locationId = locationId,
-                            relayState = if (locationId == "RELAY_WORKBENCH") "intact" else null,
-                            modifier = Modifier.size(96.dp, 48.dp),
-                        )
-                    }
-                }
-            }
-        }
-
-        composeRule.onAllNodesWithTag("scene-illustration")
-            .assertCountEquals(locations.size)
-    }
-
-    @Test
-    fun playerFacingSceneIdsRenderStateOverlaysThroughCompose() {
-        val cases = listOf(
-            "GATE_TWELVE" to "POWER_GATE_TWELVE_SIGNAL",
-            "SERVICE_TUNNEL" to "TRACE_DIRECTIONAL_AFTERSHOCK",
-            "TRACE_CHAMBER" to "POWER_FIRST_PRACTICE",
-            "DISTRICT_PLAZA" to "DISTRICT_HUB",
-        )
-
-        composeRule.setContent {
-            PixelTheme {
-                Column {
-                    cases.forEach { (locationId, sceneId) ->
-                        SceneIllustration(
-                            locationId = locationId,
-                            sceneId = sceneId,
-                            modifier = Modifier.size(256.dp, 128.dp),
-                        )
-                    }
-                }
-            }
-        }
-
-        composeRule.onAllNodesWithTag("scene-illustration")
-            .assertCountEquals(cases.size)
-    }
-
-    @Test
-    fun equippedGearIsReflectedByTheVisibleAvatar() {
-        val equippedSnapshot = snapshot.copy(
-            inventory = GameInventory(
-                equipment = listOf(
-                    GameEquipmentSlot(
-                        slot = "body",
-                        equipped = true,
-                        itemId = "ITEM_DEPOT_JACKET",
-                        name = "Depot utility jacket",
-                    ),
-                    GameEquipmentSlot(
-                        slot = "ring_1",
-                        equipped = true,
-                        itemId = "ITEM_SIGNAL_RING",
-                        name = "Signal ring",
-                    ),
-                )
-            )
-        )
-
-        composeRule.setContent {
-            PixelTheme {
-                GameScreen(
-                    snapshot = equippedSnapshot,
-                    busy = false,
-                    onChoice = {},
-                    onNavigate = {},
-                )
-            }
-        }
-
-        composeRule.onNodeWithTag("avatar-visible-gear").assertIsDisplayed()
-    }
-
-    @Test
-    fun unmappedEquippedItemDoesNotInventVisibleAvatarLayer() {
-        val equippedSnapshot = snapshot.copy(
-            inventory = GameInventory(
-                equipment = listOf(
-                    GameEquipmentSlot(
-                        slot = "head",
-                        equipped = true,
-                        itemId = "ITEM_FUTURE_HELMET",
-                        name = "Future helmet",
-                    ),
-                )
-            )
-        )
-
-        composeRule.setContent {
-            PixelTheme {
-                GameScreen(
-                    snapshot = equippedSnapshot,
-                    busy = false,
-                    onChoice = {},
-                    onNavigate = {},
-                )
-            }
-        }
-
-        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
-        composeRule.onAllNodesWithTag("avatar-visible-gear").assertCountEquals(0)
+        composeRule.onNodeWithText(relaySnapshot.body).assertIsDisplayed()
+        composeRule.onAllNodesWithTag("scene-illustration").assertCountEquals(0)
     }
 
     @Test
@@ -539,7 +346,7 @@ class GameScreenTest {
         composeRule.onNodeWithTag("nav-character")
             .performScrollTo()
             .performClick()
-        composeRule.onNodeWithTag("character-loadout-board")
+        composeRule.onNodeWithTag("character-scroll")
             .assertIsDisplayed()
         composeRule.onNodeWithTag("character-slot-body")
             .assertHasClickAction()
@@ -611,36 +418,6 @@ class GameScreenTest {
         composeRule.onNodeWithTag("character-equipment-detail")
             .assertIsDisplayed()
         composeRule.onNodeWithText("Future helmet").assertIsDisplayed()
-        composeRule.onAllNodesWithTag("avatar-visible-gear").assertCountEquals(0)
-    }
-
-    @Test
-    fun projectedEchoStrainConditionActivatesVisibleAvatarFx() {
-        val strainedSnapshot = snapshot.copy(
-            conditions = listOf(
-                GameCondition(
-                    id = PixelTraceStrainCatalog.ECHO_STRAIN_CONDITION_ID,
-                    name = "Echo Strain",
-                    severity = 2,
-                    durationMinutes = 35,
-                    tags = listOf("power", "sensory", "strain"),
-                )
-            )
-        )
-
-        composeRule.setContent {
-            PixelTheme {
-                GameScreen(
-                    snapshot = strainedSnapshot,
-                    busy = false,
-                    onChoice = {},
-                    onNavigate = {},
-                )
-            }
-        }
-
-        composeRule.onNodeWithTag("player-avatar-canvas-trace-strain")
-            .assertIsDisplayed()
     }
 
     @Test
@@ -679,23 +456,5 @@ class GameScreenTest {
         composeRule.mainClock.autoAdvance = true
     }
 
-
-    @Test
-    fun uncommonInventoryQualityRendersAsSeparateItemFrameOverlay() {
-        composeRule.setContent {
-            PixelTheme {
-                PixelItemIcon(
-                    itemId = "ITEM_SIGNAL_RING",
-                    quality = "uncommon",
-                    modifier = Modifier.size(48.dp),
-                )
-            }
-        }
-
-        composeRule.onNodeWithTag("item-icon-ITEM_SIGNAL_RING")
-            .assertIsDisplayed()
-        composeRule.onNodeWithTag("item-quality-frame-uncommon")
-            .assertIsDisplayed()
-    }
 
 }
