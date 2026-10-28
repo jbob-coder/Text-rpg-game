@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import os
+import tempfile
 from pathlib import Path
 from typing import Any, Dict
 
@@ -76,11 +78,34 @@ def loads_state(raw: str) -> GameState:
 
 
 def save_state(path: str | Path, state: GameState) -> None:
+    # Serialize before touching the filesystem so invalid state leaves the
+    # existing save (and its directory) unchanged.
+    payload = dumps_state(state)
     target = Path(path)
     target.parent.mkdir(parents=True, exist_ok=True)
-    temp = target.with_suffix(target.suffix + ".tmp")
-    temp.write_text(dumps_state(state), encoding="utf-8")
-    temp.replace(target)
+
+    # A fixed "<save>.tmp" name lets concurrent saves overwrite each other's
+    # temporary file. Give every write its own file in the destination directory,
+    # then atomically replace the save only after the file is closed.
+    temp: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            prefix=f".{target.name}.",
+            suffix=".tmp",
+            dir=target.parent,
+            delete=False,
+        ) as handle:
+            temp = Path(handle.name)
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        temp.replace(target)
+    finally:
+        # A failed write/replace must not leave a stale temporary save behind.
+        if temp is not None:
+            temp.unlink(missing_ok=True)
 
 
 def load_state(path: str | Path) -> GameState:
