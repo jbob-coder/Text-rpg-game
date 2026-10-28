@@ -154,6 +154,52 @@ class QuestGraphTests(unittest.TestCase):
             "STAGE_DAMAGE_CONTROL",
         )
 
+    def test_locked_objective_cannot_fail_or_take_failure_route(self):
+        state = self.state()
+        definition = self.definition()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+
+        before_quest = dict(state.quests["QUEST_ARCHIVE"])
+        before_history = list(state.history)
+        with self.assertRaisesRegex(RuleError, "not currently available to fail"):
+            fail_objective(
+                state, "QUEST_ARCHIVE", "OBJ_INTERVIEW_WITNESS", definition
+            )
+
+        self.assertEqual(state.quests["QUEST_ARCHIVE"], before_quest)
+        self.assertEqual(state.history, before_history)
+        self.assertEqual(
+            state.quests["QUEST_ARCHIVE"]["stage"], "STAGE_INVESTIGATE"
+        )
+
+    def test_unlocked_objective_can_fail_and_follow_authored_route(self):
+        state = self.state()
+        definition = self.definition()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+        complete_objective(
+            state, "QUEST_ARCHIVE", "OBJ_FIND_RECORD", definition
+        )
+
+        event = fail_objective(
+            state, "QUEST_ARCHIVE", "OBJ_INTERVIEW_WITNESS", definition
+        )
+        self.assertEqual(event["type"], "quest_objective_failed")
+        self.assertEqual(
+            state.quests["QUEST_ARCHIVE"]["stage"], "STAGE_DAMAGE_CONTROL"
+        )
+
+    def test_available_optional_objective_can_fail(self):
+        state = self.state()
+        definition = self.definition()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+        event = fail_objective(
+            state, "QUEST_ARCHIVE", "OBJ_SEARCH_ROOF", definition
+        )
+        self.assertEqual(event["objective_id"], "OBJ_SEARCH_ROOF")
+        self.assertEqual(
+            state.quests["QUEST_ARCHIVE"]["stage"], "STAGE_DAMAGE_CONTROL"
+        )
+
     def test_terminal_stage_completes_quest(self):
         state = self.state()
         definition = self.definition()
