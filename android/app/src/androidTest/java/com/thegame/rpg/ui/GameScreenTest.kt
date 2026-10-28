@@ -441,8 +441,8 @@ class GameScreenTest {
 
         composeRule.onNodeWithTag("map-travel-transition")
             .assertIsDisplayed()
-        composeRule.onNodeWithTag("map-travel-transition-canvas")
-            .assertIsDisplayed()
+        composeRule.onAllNodesWithTag("map-travel-transition-canvas")
+            .assertCountEquals(0)
         composeRule.onNodeWithText("DISTRICT PLAZA → DISTRICT ARCHIVE")
             .assertIsDisplayed()
 
