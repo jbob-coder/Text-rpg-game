@@ -1431,5 +1431,48 @@ class PowerRuntimeTests(unittest.TestCase):
                 )
 
 
+    def test_corrupt_runtime_stage_is_rejected_without_spending(self):
+        for corrupt_stage in ([], {}, ["learned"]):
+            with self.subTest(corrupt_stage=repr(corrupt_stage)):
+                state = self.state()
+                state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"][
+                    "stage"
+                ] = corrupt_stage
+                before = copy.deepcopy(state.snapshot())
+
+                with self.assertRaises(RuleError):
+                    technique_use_status(
+                        state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition()
+                    )
+                with self.assertRaises(RuleError):
+                    use_technique(
+                        state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition()
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_corrupt_prerequisite_stage_is_rejected_without_discovery(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"][
+            "stage"
+        ] = []
+        before = copy.deepcopy(state.snapshot())
+
+        with self.assertRaises(RuleError):
+            discover_technique(
+                state,
+                "ABILITY_FLUX",
+                "TECHNIQUE_NEW",
+                {
+                    "discovery_requirements": {
+                        "techniques": {"TECHNIQUE_PULSE": "learned"}
+                    }
+                },
+            )
+        self.assertEqual(state.snapshot(), before)
+        self.assertNotIn(
+            "TECHNIQUE_NEW", state.abilities["ABILITY_FLUX"]["techniques"]
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
