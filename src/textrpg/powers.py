@@ -130,6 +130,69 @@ def _validate_requirements_block(
                 )
 
 
+
+def _validate_discovery_dependency_cycles(
+    ability_id: str,
+    techniques: Mapping[str, Any],
+    errors: list[str],
+) -> None:
+    """Reject cycles between technique *discovery* prerequisites.
+
+    Use requirements are deliberately excluded: a technique can already be
+    discovered before another technique requires it for use. Malformed
+    definitions are reported by the existing per-technique checks.
+    """
+    dependencies: dict[str, set[str]] = {}
+    for technique_id, technique in techniques.items():
+        if (
+            not isinstance(technique_id, str)
+            or not _STABLE_ID.fullmatch(technique_id)
+            or not isinstance(technique, Mapping)
+        ):
+            continue
+        discovery = technique.get("discovery_requirements", {})
+        if not isinstance(discovery, Mapping):
+            continue
+        required = discovery.get("techniques", {})
+        if not isinstance(required, Mapping):
+            continue
+        dependencies[technique_id] = {
+            ref for ref in required
+            if isinstance(ref, str)
+            and ref != technique_id
+            and ref in techniques
+            and isinstance(techniques[ref], Mapping)
+        }
+
+    # Discard references to definitions already rejected as malformed.
+    valid = set(dependencies)
+    remaining = {
+        technique_id: len(refs & valid)
+        for technique_id, refs in dependencies.items()
+    }
+    dependents: dict[str, set[str]] = {key: set() for key in dependencies}
+    for technique_id, refs in dependencies.items():
+        for ref in refs & valid:
+            dependents[ref].add(technique_id)
+
+    ready = [key for key, count in remaining.items() if count == 0]
+    visited = 0
+    while ready:
+        current = ready.pop()
+        visited += 1
+        for dependent in dependents[current]:
+            remaining[dependent] -= 1
+            if remaining[dependent] == 0:
+                ready.append(dependent)
+
+    if visited != len(dependencies):
+        blocked = ", ".join(sorted(key for key, count in remaining.items() if count))
+        errors.append(
+            f"{ability_id}.techniques contains circular discovery prerequisites "
+            f"(blocked: {blocked})"
+        )
+
+
 def validate_power_definitions(
     definitions: Mapping[str, Mapping[str, Any]],
 ) -> list[str]:
@@ -253,6 +316,8 @@ def validate_power_definitions(
                                 f"{ability_id}.{technique_id}.{field_name} "
                                 f"references unknown technique {required_id!r}"
                             )
+
+        _validate_discovery_dependency_cycles(ability_id, techniques, errors)
 
         evolutions = definition.get("evolutions", {})
         if not isinstance(evolutions, Mapping):
