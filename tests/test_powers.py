@@ -1250,6 +1250,101 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertTrue(any("unknown technique" in error for error in errors))
 
 
+
+    def test_power_catalog_rejects_mutual_discovery_cycle(self):
+        definitions = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_A": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_B": "discovered"}
+                        }
+                    },
+                    "TECHNIQUE_B": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_A": "discovered"}
+                        }
+                    },
+                }
+            }
+        }
+        errors = validate_power_definitions(definitions)
+        self.assertTrue(
+            any("circular discovery prerequisite" in error for error in errors),
+            errors,
+        )
+        self.assertTrue(any("TECHNIQUE_A" in error for error in errors))
+        self.assertTrue(any("TECHNIQUE_B" in error for error in errors))
+
+    def test_power_catalog_rejects_longer_discovery_cycle(self):
+        definitions = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_A": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_B": "discovered"}
+                        }
+                    },
+                    "TECHNIQUE_B": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_C": "discovered"}
+                        }
+                    },
+                    "TECHNIQUE_C": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_A": "discovered"}
+                        }
+                    },
+                }
+            }
+        }
+        self.assertTrue(
+            any(
+                "circular discovery prerequisite" in error
+                for error in validate_power_definitions(definitions)
+            )
+        )
+
+    def test_acyclic_technique_discovery_chain_remains_valid(self):
+        definitions = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_A": {},
+                    "TECHNIQUE_B": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_A": "learned"}
+                        }
+                    },
+                    "TECHNIQUE_C": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_B": "discovered"}
+                        }
+                    },
+                }
+            }
+        }
+        self.assertEqual(validate_power_definitions(definitions), [])
+
+    def test_usage_only_technique_dependencies_are_not_discovery_cycles(self):
+        definitions = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_A": {
+                        "requirements": {
+                            "techniques": {"TECHNIQUE_B": "discovered"}
+                        }
+                    },
+                    "TECHNIQUE_B": {
+                        "requirements": {
+                            "techniques": {"TECHNIQUE_A": "discovered"}
+                        }
+                    },
+                }
+            }
+        }
+        self.assertEqual(validate_power_definitions(definitions), [])
+
+
     def test_failed_technique_discovery_does_not_create_empty_container(self):
         state = GameState(
             seed="s",
