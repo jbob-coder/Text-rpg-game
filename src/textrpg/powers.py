@@ -1202,6 +1202,27 @@ def validate_technique_definition(definition: Any) -> list[str]:
         if not isinstance(values, list) or not all(isinstance(v, str) and v for v in values):
             errors.append(f"requirements.{section} must be a list of non-empty IDs")
 
+    # Usage prerequisites are distinct from discovery prerequisites. Their
+    # references are checked by validate_power_definitions at catalog scope.
+    required_techniques = requirements.get("techniques", {})
+    if not isinstance(required_techniques, Mapping):
+        errors.append("requirements.techniques must be an object")
+    else:
+        for required_id, minimum_stage in required_techniques.items():
+            if not isinstance(required_id, str) or not _STABLE_ID.fullmatch(required_id):
+                errors.append(
+                    f"requirements.techniques has invalid technique ID {required_id!r}"
+                )
+            if (
+                not isinstance(minimum_stage, str)
+                or minimum_stage not in _STAGE_ORDER
+                or minimum_stage == "unknown"
+            ):
+                errors.append(
+                    f"requirements.techniques.{required_id} has unsupported stage "
+                    f"{minimum_stage!r}"
+                )
+
     costs = definition.get("costs", {})
     if not isinstance(costs, Mapping):
         errors.append("costs must be an object")
@@ -1462,6 +1483,17 @@ def technique_use_status(
             equipment_sets=equipment_sets,
         )
     )
+
+    # Previously these authored usage-stage gates were cross-reference
+    # validated but never evaluated; techniques could run while locked.
+    for required_id, required_stage in requirements.get("techniques", {}).items():
+        record = techniques.get(required_id)
+        if record is None:
+            reasons.append(f"technique:{required_id}:{required_stage}")
+        elif not isinstance(record, Mapping):
+            raise RuleError(f"Technique state must be an object: {required_id}")
+        elif not _stage_at_least(record.get("stage", "unknown"), required_stage):
+            reasons.append(f"technique:{required_id}:{required_stage}")
 
     minimum_stage = definition.get("stage_min", "discovered")
     if not _stage_at_least(technique.get("stage", "unknown"), minimum_stage):
