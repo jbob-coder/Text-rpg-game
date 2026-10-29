@@ -81,3 +81,30 @@ Prerequisites for implementation:
 - **QA:** run and inspect the exact PR HEAD CI for Python and Android; obtain physical device evidence separately before any release claim.
 
 **Decision:** do not add `GameState.classes`, alter `CURRENT_SCHEMA_VERSION`, award class ranks, or grant a second principal ability in this PR. The smallest safe next implementation is an approved read-only readiness query using evidence producers that already have trustworthy provenance; until then, this packet is a reviewable specification and test checklist only.
+
+---
+
+## 7. Concrete event provenance crosswalk — verified against runtime, 2026-10-29
+
+This section is a **source-code inspection**, not authorization to grant classes. Current event emitters were inspected in `powers.py`, `quests.py` and `social.py`. The current v1 history is an append-only-looking mutable list, **not** a signed, unique, anti-replay proof ledger; code can persist or import history through save data. Do not equate an event's presence alone with trusted class-eligibility evidence.
+
+| Existing event type | Fields present in observed emitter | Narrow inference justified today | Still absent for class-proof acceptance |
+| --- | --- | --- | --- |
+| `ability_discovered` | `ability_id`, family, form, turn, `time_minutes` | Ability identity discovered within this state | Authentic single-principal assignment provenance, actor, unique event identity; not ability-specialist proficiency |
+| `technique_discovered` | `ability_id`, `technique_id`, turn, `time_minutes` | Technique record created within a discovered ability | Actual field application, event ID, source revision and authorization of this ability's one principal owner |
+| `technique_practice` | ability/technique IDs, duration, intensity, mentor bonus, before/after mastery, stamina/focus spent, `time_minutes` | Engine-recorded paid practice in the current timeline | Trusted event ID, actor, location/facility, anti-replay proof; not field proof for other classes |
+| `technique_use` | ability/technique IDs, `time_minutes`, costs, cooldown, drawbacks, mastery changes | Engine use with resource/cooldown rules | Actual combat or world target, outcome, actor, verifiable context; not a successful Vanguard/Investigator/Smith action automatically |
+| `ability_evolution` | ability/evolution IDs, time, prior/new form, granted perks, consumed items | A power evolution was committed with authored effect | Independent primary ability ownership certification, per-class field proof, event identity |
+| `quest_objective_completed` | quest ID, stage, objective ID, turn, time | Authored quest objective marked completed | Actual activity kind, target, geometry, materials, actor, proof that skill was performed rather than a dialogue state |
+| `relationship_change` | NPC ID, source, before/after axes, turn, time | Relationship axes changed under social rules | Voluntary consent/negotiation result, role-proof audit, identity of speaker/action and replay safeguards |
+| `npc_goal_progress` | NPC/goal IDs, before/after, goal status, turn, time | NPC goal progress applied | Proof of player's action, actor relationship, objective validation, signed provenance |
+
+### Safe next implementation sequence
+
+1. **Engine-owned evidence boundaries first:** identify each real action producer (e.g. tactical defense, traversal, knowledge research, forging); do not award `Vanguard` for `quest_objective_completed` alone or `Smith` for `technique_use`.
+2. **Provenance and identity contract:** approve how actor ID, source action, immutable event ID, authored revision, outcome and unique playthrough/replay identity are stored and checked. The existing `history` list has no such global anti-replay guarantee.
+3. **Read-only candidate analysis:** only after (1) and (2), implement `query_class_readiness` against trusted evidence producers, returning `not_evaluable` rather than assuming that missing fields are proof.
+4. **Separate durable class ownership decision:** target seven class families require accepted IDs, thresholds, status UX and save migration. Smith forging remains distinct, with core properties and material constraints; H-05/H-06 single-principal rule is a separate invariant.
+5. **Redaction and negative proofs:** ordinary UI must not expose a hidden NPC/celestial source; repeated saves must not double-award; a failed repair or refused negotiation is an observable consequence, not automatically a mastery award.
+
+**Evidence-grade status:** the table demonstrates that some **technique practice** evidence already exists, but not enough to infer formal combat-class rank. No current version-1 `GameState` schema change is requested or silently implemented in this PR.
