@@ -1728,5 +1728,57 @@ class PowerRuntimeTests(unittest.TestCase):
                 self.assertEqual(state.snapshot(), before)
 
 
+    def test_use_rejects_mastery_sum_overflow_before_any_spend(self):
+        # Both values can be finite separately while their sum is infinity.
+        for axis, gain_key in (
+            ("technique", "mastery_gain"),
+            ("ability", "ability_mastery_gain"),
+        ):
+            with self.subTest(axis=axis):
+                state = self.state()
+                definition = self.definition()
+                definition[gain_key] = 1e308
+                if axis == "technique":
+                    state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"][
+                        "mastery_xp"
+                    ] = 1e308
+                else:
+                    state.abilities["ABILITY_FLUX"]["mastery_xp"] = 1e308
+                before = copy.deepcopy(state.snapshot())
+
+                with self.assertRaisesRegex(RuleError, "mastery gain would overflow"):
+                    technique_use_status(
+                        state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+                    )
+                with self.assertRaisesRegex(RuleError, "mastery gain would overflow"):
+                    use_technique(
+                        state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_large_but_finite_mastery_gain_remains_usable(self):
+        state = self.state()
+        definition = self.definition()
+        definition["mastery_gain"] = 1e300
+        before = copy.deepcopy(state.snapshot())
+        status = technique_use_status(
+            state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+        )
+        self.assertTrue(status["available"], status)
+        self.assertEqual(state.snapshot(), before)
+
+        event = use_technique(
+            state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+        )
+        self.assertEqual(event["type"], "technique_use")
+        self.assertEqual(state.player["resources"]["focus"], 16.0)
+        self.assertEqual(
+            state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"][
+                "mastery_xp"
+            ],
+            1e300,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
