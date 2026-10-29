@@ -199,6 +199,40 @@ def validate_game_state_structure(state: GameState) -> None:
         raise RuleError("state.history entries must be objects")
 
 
+    # Legacy quest_stage records can omit graph fields. Check only fields
+    # present in each quest, but never accept a malformed durable record that
+    # would crash or silently hide a quest after load.
+    for quest_id, quest in state.quests.items():
+        if not isinstance(quest_id, str) or not quest_id:
+            raise RuleError("state.quests IDs must be non-empty strings")
+        if not isinstance(quest, Mapping):
+            raise RuleError(f"state.quests.{quest_id} must be an object")
+        if "stage" in quest and (
+            not isinstance(quest["stage"], str) or not quest["stage"]
+        ):
+            raise RuleError(f"state.quests.{quest_id}.stage must be non-empty text")
+        if "status" in quest and quest["status"] not in ("active", "completed", "failed"):
+            raise RuleError(f"state.quests.{quest_id}.status is invalid")
+        for field_name in ("completed_objectives", "failed_objectives"):
+            if field_name not in quest:
+                continue
+            values = quest[field_name]
+            if not isinstance(values, list) or not all(
+                isinstance(value, str) and value for value in values
+            ):
+                raise RuleError(
+                    f"state.quests.{quest_id}.{field_name} must be a list "
+                    "of non-empty IDs"
+                )
+        if "history" in quest:
+            events = quest["history"]
+            if not isinstance(events, list) or not all(
+                isinstance(event, Mapping) for event in events
+            ):
+                raise RuleError(
+                    f"state.quests.{quest_id}.history must be a list of objects"
+                )
+
     for item_id, quantity in state.inventory.items():
         if not isinstance(item_id, str) or not item_id:
             raise RuleError("state.inventory item IDs must be non-empty strings")
