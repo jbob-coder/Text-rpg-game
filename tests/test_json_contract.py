@@ -17,7 +17,7 @@ class StrictJsonObjectKeysTests(unittest.TestCase):
     def test_escaped_alias_is_detected_as_duplicate(self):
         # JSON unescaping happens before object_pairs_hook receives keys.
         with self.assertRaisesRegex(ValueError, "Duplicate JSON object key"):
-            loads_strict_json('{"scene_id":"A","scene\\u005fid":"B"}')
+            loads_strict_json(r'{"scene_id":"A","scene\\u005fid":"B"}')
 
     def test_duplicate_names_in_different_objects_are_allowed(self):
         result = loads_strict_json('{"left":{"id":"A"},"right":{"id":"B"}}')
