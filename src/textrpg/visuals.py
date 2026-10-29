@@ -52,12 +52,14 @@ def validate_character_visuals(
             "skin_tone",
             "default_outfit",
         ):
-            value = record.get(field)
-            if value is not None and (not isinstance(value, str) or not value.strip()):
+            if field not in record:
+                continue  # The missing required field was already reported.
+            value = record[field]
+            if not isinstance(value, str) or not value.strip():
                 errors.append(f"{character_id}.{field} must be a non-empty string")
 
-        hair = record.get("hair")
-        if hair is not None:
+        if "hair" in record:
+            hair = record["hair"]
             if not isinstance(hair, Mapping):
                 errors.append(f"{character_id}.hair must be an object")
             else:
@@ -83,9 +85,9 @@ def validate_character_visuals(
             "emotion_set",
             "poses",
         ):
-            value = record.get(field)
-            if value is None:
-                continue
+            if field not in record:
+                continue  # The missing required field was already reported.
+            value = record[field]
             if not isinstance(value, list):
                 errors.append(f"{character_id}.{field} must be a list")
                 continue
@@ -95,11 +97,12 @@ def validate_character_visuals(
                 errors.append(
                     f"{character_id}.{field} entries must be non-empty strings"
                 )
+                continue  # Invalid values can be unhashable; do not use set(value).
             if len(value) != len(set(value)):
                 errors.append(f"{character_id}.{field} contains duplicate entries")
 
-        palette = record.get("palette")
-        if palette is not None:
+        if "palette" in record:
+            palette = record["palette"]
             if not isinstance(palette, Mapping):
                 errors.append(f"{character_id}.palette must be an object")
             else:
