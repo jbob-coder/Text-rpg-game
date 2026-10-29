@@ -1560,5 +1560,121 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertEqual(state.snapshot(), before)
 
 
+    def test_use_requires_other_technique_to_reach_authored_stage(self):
+        state = self.state()
+        discover_technique(state, "ABILITY_FLUX", "TECHNIQUE_SECOND")
+        definition = {
+            "requirements": {"techniques": {"TECHNIQUE_PULSE": "learned"}},
+        }
+        before = copy.deepcopy(state.snapshot())
+
+        status = technique_use_status(
+            state, "ABILITY_FLUX", "TECHNIQUE_SECOND", definition
+        )
+        self.assertFalse(status["available"])
+        self.assertIn("technique:TECHNIQUE_PULSE:learned", status["reasons"])
+        with self.assertRaises(RuleError):
+            use_technique(state, "ABILITY_FLUX", "TECHNIQUE_SECOND", definition)
+        self.assertEqual(state.snapshot(), before)
+
+        gain_technique_mastery(state, "ABILITY_FLUX", "TECHNIQUE_PULSE", 40)
+        status = technique_use_status(
+            state, "ABILITY_FLUX", "TECHNIQUE_SECOND", definition
+        )
+        self.assertTrue(status["available"], status)
+        event = use_technique(
+            state, "ABILITY_FLUX", "TECHNIQUE_SECOND", definition
+        )
+        self.assertEqual(event["type"], "technique_use")
+        self.assertEqual(
+            state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_SECOND"]["uses"],
+            1,
+        )
+
+    def test_missing_use_prerequisite_never_spends_resources(self):
+        state = self.state()
+        definition = {
+            "requirements": {"techniques": {"TECHNIQUE_MISSING": "learned"}},
+            "costs": {"resources.focus": 3},
+        }
+        before = copy.deepcopy(state.snapshot())
+        status = technique_use_status(
+            state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+        )
+        self.assertFalse(status["available"])
+        self.assertIn("technique:TECHNIQUE_MISSING:learned", status["reasons"])
+        with self.assertRaises(RuleError):
+            use_technique(state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition)
+        self.assertEqual(state.snapshot(), before)
+
+    def test_usage_prerequisites_validate_shape_and_stage(self):
+        state = self.state()
+        invalid_blocks = (
+            [],
+            {"TECHNIQUE_PULSE": []},
+            {"TECHNIQUE_PULSE": {}},
+            {"TECHNIQUE_PULSE": "unknown"},
+            {"bad-id": "learned"},
+        )
+        for invalid in invalid_blocks:
+            with self.subTest(invalid=repr(invalid)):
+                definition = {"requirements": {"techniques": invalid}}
+                errors = validate_technique_definition(definition)
+                self.assertTrue(
+                    any("requirements.techniques" in error for error in errors),
+                    errors,
+                )
+                before = copy.deepcopy(state.snapshot())
+                with self.assertRaises(RuleError):
+                    use_technique(
+                        state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_mutual_usage_dependencies_work_once_both_discovered(self):
+        definitions = {
+            "ABILITY_FLUX": {
+                "techniques": {
+                    "TECHNIQUE_PULSE": {
+                        "requirements": {
+                            "techniques": {"TECHNIQUE_SECOND": "discovered"}
+                        }
+                    },
+                    "TECHNIQUE_SECOND": {
+                        "requirements": {
+                            "techniques": {"TECHNIQUE_PULSE": "discovered"}
+                        }
+                    },
+                }
+            }
+        }
+        self.assertEqual(validate_power_definitions(definitions), [])
+        state = self.state()
+        discover_technique(state, "ABILITY_FLUX", "TECHNIQUE_SECOND")
+        for technique_id in ("TECHNIQUE_PULSE", "TECHNIQUE_SECOND"):
+            status = technique_use_status(
+                state,
+                "ABILITY_FLUX",
+                technique_id,
+                definitions["ABILITY_FLUX"]["techniques"][technique_id],
+            )
+            self.assertTrue(status["available"], status)
+
+    def test_corrupt_use_prerequisite_stage_is_rejected_without_spend(self):
+        state = self.state()
+        discover_technique(state, "ABILITY_FLUX", "TECHNIQUE_SECOND")
+        state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["stage"] = []
+        definition = {
+            "requirements": {"techniques": {"TECHNIQUE_PULSE": "learned"}},
+            "costs": {"resources.focus": 3},
+        }
+        before = copy.deepcopy(state.snapshot())
+        with self.assertRaises(RuleError):
+            use_technique(
+                state, "ABILITY_FLUX", "TECHNIQUE_SECOND", definition
+            )
+        self.assertEqual(state.snapshot(), before)
+
+
 if __name__ == "__main__":
     unittest.main()
