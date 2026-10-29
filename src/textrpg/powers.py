@@ -716,7 +716,7 @@ def technique_discovery_status(
             raise RuleError(f"Technique state must be an object: {technique_id}")
         return {"available": True, "reasons": [], "already_discovered": True}
 
-    definition = definition or {}
+    definition = {} if definition is None else definition
     definition_errors = validate_technique_definition(definition)
     if definition_errors:
         raise RuleError(
@@ -840,8 +840,8 @@ def gain_technique_mastery(
     if xp < 0:
         raise RuleError("Technique mastery gain cannot be negative")
     ability = state.abilities.get(ability_id)
-    if not ability:
-        raise RuleError(f"Unknown ability: {ability_id}")
+    if not isinstance(ability, Mapping):
+        raise RuleError(f"Unknown or invalid ability state: {ability_id}")
     techniques = ability.get("techniques", {})
     if not isinstance(techniques, Mapping):
         raise RuleError(f"Ability techniques must be an object: {ability_id}")
@@ -930,7 +930,10 @@ def practice_technique(
     _ability_progression_state(ability, ability_id)
     validate_time_advance(state, minutes)
     _validate_history_container(state)
-    technique = ability.get("techniques", {}).get(technique_id)
+    techniques = ability.get("techniques", {})
+    if not isinstance(techniques, Mapping):
+        raise RuleError(f"Ability techniques must be an object: {ability_id}")
+    technique = techniques.get(technique_id)
     if not isinstance(technique, MutableMapping):
         raise RuleError(f"Technique has not been discovered: {technique_id}")
 
@@ -1865,7 +1868,10 @@ def ability_player_view(
     if not ability:
         raise RuleError(f"Unknown ability: {ability_id}")
 
-    definition = definition or {}
+    if definition is None:
+        definition = {}
+    elif not isinstance(definition, Mapping):
+        raise RuleError("Ability definition must be an object")
     rank_value = ability.get("rank", 0)
     if isinstance(rank_value, bool) or not isinstance(rank_value, int) or rank_value < 0:
         raise RuleError(f"Ability rank must be a non-negative integer: {ability_id}")
