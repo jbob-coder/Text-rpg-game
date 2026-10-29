@@ -1676,5 +1676,57 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertEqual(state.snapshot(), before)
 
 
+    def test_empty_discovered_technique_record_is_corrupt_not_undiscovered(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"] = {}
+        before = copy.deepcopy(state.snapshot())
+        with self.assertRaisesRegex(RuleError, "Technique state must be a non-empty object"):
+            technique_use_status(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition()
+            )
+        with self.assertRaises(RuleError):
+            use_technique(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition()
+            )
+        self.assertEqual(state.snapshot(), before)
+
+    def test_absent_technique_still_reports_undiscovered(self):
+        state = self.state()
+        before = copy.deepcopy(state.snapshot())
+        result = technique_use_status(
+            state, "ABILITY_FLUX", "TECHNIQUE_NOT_FOUND", {}
+        )
+        self.assertEqual(result["reasons"], ["technique_undiscovered"])
+        self.assertFalse(result["available"])
+        self.assertEqual(state.snapshot(), before)
+
+    def test_player_view_rejects_corrupt_ability_and_technique_containers(self):
+        for corrupt in ([], ["bad"], "invalid", 0):
+            with self.subTest(corrupt=repr(corrupt)):
+                state = self.state()
+                state.abilities["ABILITY_FLUX"]["techniques"] = corrupt
+                before = copy.deepcopy(state.snapshot())
+                with self.assertRaises(RuleError):
+                    ability_player_view(state, "ABILITY_FLUX")
+                self.assertEqual(state.snapshot(), before)
+
+        state = self.state()
+        state.abilities["ABILITY_FLUX"] = ["bad", "owner"]
+        before = copy.deepcopy(state.snapshot())
+        with self.assertRaises(RuleError):
+            ability_player_view(state, "ABILITY_FLUX")
+        self.assertEqual(state.snapshot(), before)
+
+    def test_player_view_rejects_unsupported_technique_stage(self):
+        for stage in ("not_a_stage", [], {}, False):
+            with self.subTest(stage=repr(stage)):
+                state = self.state()
+                state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["stage"] = stage
+                before = copy.deepcopy(state.snapshot())
+                with self.assertRaises(RuleError):
+                    ability_player_view(state, "ABILITY_FLUX")
+                self.assertEqual(state.snapshot(), before)
+
+
 if __name__ == "__main__":
     unittest.main()
