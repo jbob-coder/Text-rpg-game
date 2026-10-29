@@ -1530,6 +1530,14 @@ def technique_use_status(
     if ability_mastery_gain < 0:
         raise RuleError("Ability mastery gain cannot be negative")
 
+    # A finite authored gain can still overflow a finite saved mastery value.
+    # Preflight both totals here, before use_technique spends any resources,
+    # updates cooldowns or applies conditions.
+    if not isfinite(float(technique_mastery) + mastery_gain):
+        raise RuleError(f"Technique mastery gain would overflow: {technique_id}")
+    if not isfinite(float(ability_mastery) + ability_mastery_gain):
+        raise RuleError(f"Ability mastery gain would overflow: {ability_id}")
+
     for drawback in definition.get("drawbacks", []):
         if drawback.get("type") != "condition":
             raise RuleError(f"Unsupported power drawback type: {drawback.get('type')}")
