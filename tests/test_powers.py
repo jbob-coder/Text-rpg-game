@@ -1378,5 +1378,58 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertNotIn("techniques", state.abilities["ABILITY_TRACE"])
 
 
+    def test_malformed_unhashable_stages_return_validation_errors(self):
+        # Imported/hand-authored JSON must be rejected by validation, not crash
+        # because a list/dict stage value is unhashable.
+        for bad_stage in ([], {}, ["learned"]):
+            with self.subTest(bad_stage=repr(bad_stage)):
+                technique = {
+                    "stage_min": bad_stage,
+                    "discovery_requirements": {
+                        "techniques": {"TECHNIQUE_BASE": bad_stage}
+                    },
+                }
+                errors = validate_technique_definition(technique)
+                self.assertTrue(
+                    any("stage_min has unsupported value" in error for error in errors),
+                    errors,
+                )
+                self.assertTrue(
+                    any(
+                        "discovery_requirements.techniques.TECHNIQUE_BASE"
+                        in error and "unsupported stage" in error
+                        for error in errors
+                    ),
+                    errors,
+                )
+                catalog_errors = validate_power_definitions(
+                    {
+                        "ABILITY_TRACE": {
+                            "techniques": {
+                                "TECHNIQUE_BASE": {},
+                                "TECHNIQUE_NEXT": technique,
+                            }
+                        }
+                    }
+                )
+                self.assertTrue(
+                    any("TECHNIQUE_NEXT" in error and "unsupported" in error
+                        for error in catalog_errors),
+                    catalog_errors,
+                )
+
+                evolution_errors = validate_evolution_definition(
+                    {"requirements": {"techniques": {"TECHNIQUE_BASE": bad_stage}}}
+                )
+                self.assertTrue(
+                    any(
+                        "requirements.techniques.TECHNIQUE_BASE" in error
+                        and "unsupported stage" in error
+                        for error in evolution_errors
+                    ),
+                    evolution_errors,
+                )
+
+
 if __name__ == "__main__":
     unittest.main()
