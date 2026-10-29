@@ -33,6 +33,47 @@ class SocialTests(unittest.TestCase):
         self.assertIn("KNOW_SECRET", state.npcs["NPC_B"]["knowledge"])
         self.assertTrue(state.npcs["NPC_B"]["memories"])
 
+    def test_transfer_rejects_non_boolean_voluntary_without_mutation(self):
+        state = GameState(seed="s", scene_id="A")
+        npc_learn(state, "NPC_A", "KNOW_SECRET", source="PLAYER", secrecy=2)
+        from copy import deepcopy
+
+        for invalid in ("false", 0, None, []):
+            with self.subTest(voluntary=invalid):
+                before = deepcopy(state.snapshot())
+                with self.assertRaisesRegex(RuleError, "voluntary must be a boolean"):
+                    share_knowledge(
+                        state,
+                        speaker="NPC_A",
+                        recipient="NPC_B",
+                        knowledge_id="KNOW_SECRET",
+                        voluntary=invalid,
+                    )
+                self.assertEqual(state.snapshot(), before)
+                self.assertNotIn("NPC_B", state.npcs)
+
+    def test_transfer_boolean_flag_records_correct_provenance(self):
+        state = GameState(seed="s", scene_id="A")
+        npc_learn(state, "NPC_A", "KNOW_SECRET", source="PLAYER", secrecy=2)
+        share_knowledge(
+            state,
+            speaker="NPC_A",
+            recipient="NPC_B",
+            knowledge_id="KNOW_SECRET",
+            voluntary=False,
+        )
+        share_knowledge(
+            state,
+            speaker="NPC_A",
+            recipient="NPC_C",
+            knowledge_id="KNOW_SECRET",
+            voluntary=True,
+        )
+        self.assertIn("leak", state.npcs["NPC_B"]["memories"][-1]["tags"])
+        self.assertNotIn("voluntary", state.npcs["NPC_B"]["memories"][-1]["tags"])
+        self.assertIn("voluntary", state.npcs["NPC_C"]["memories"][-1]["tags"])
+        self.assertNotIn("leak", state.npcs["NPC_C"]["memories"][-1]["tags"])
+
     def test_leak_candidates_are_deterministic(self):
         state = GameState(
             seed="s",
