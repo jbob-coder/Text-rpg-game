@@ -27,6 +27,19 @@ class PersistenceTests(unittest.TestCase):
                     self.assertEqual(state.snapshot(), before)
                     self.assertEqual(path.read_bytes(), original_bytes)
 
+    def test_save_rejects_conflicting_duplicate_root_fields(self):
+        raw = '{"schema_version":1,"seed":"first","seed":"second","scene_id":"A"}'
+        with self.assertRaisesRegex(RuleError, "strict JSON"):
+            loads_state(raw)
+
+    def test_save_rejects_conflicting_nested_flags(self):
+        raw = (
+            '{"schema_version":1,"seed":"s","scene_id":"A",'
+            '"flags":{"FLAG_A":false,"FLAG_A":true}}'
+        )
+        with self.assertRaisesRegex(RuleError, "strict JSON"):
+            loads_state(raw)
+
     def test_load_rejects_non_finite_numbers_in_arbitrary_metadata(self):
         for token in ("NaN", "Infinity", "-Infinity", "1e400", "-1e400"):
             with self.subTest(token=token):
