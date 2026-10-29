@@ -723,7 +723,9 @@ def technique_discovery_status(
             "Invalid technique definition: " + "; ".join(definition_errors)
         )
 
-    requirements = definition.get("discovery_requirements", {})
+    # The authored validator allows an explicit null block to mean no
+    # discovery prerequisites. Normalize it before reading requirement keys.
+    requirements = definition.get("discovery_requirements") or {}
     reasons: list[str] = []
 
     if rank < int(requirements.get("rank_min", 0)):
