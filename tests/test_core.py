@@ -1002,5 +1002,59 @@ class ExtendedStateTests(unittest.TestCase):
         self.assertEqual(game_state.history, [])
 
 
+
+class PlayerNumericEffectIntegrityTests(unittest.TestCase):
+    def _engine(self, amount):
+        return RulesEngine({
+            "A": {"choices": [{
+                "id": "ADD_FOCUS",
+                "text": "Gain focus",
+                "outcomes": {"default": {"effects": [{
+                    "type": "add_player",
+                    "path": "resources.focus",
+                    "value": amount,
+                }]}},
+            }]}
+        })
+
+    def test_finite_add_player_inputs_cannot_overflow_saved_state(self):
+        game_state = GameState(
+            seed="overflow-seed",
+            scene_id="A",
+            player={"resources": {"focus": 1e308}},
+        )
+        before = json.dumps(game_state.snapshot(), sort_keys=True, allow_nan=False)
+
+        with self.assertRaisesRegex(RuleError, "non-finite numeric result"):
+            self._engine(1e308).choose(game_state, "ADD_FOCUS")
+
+        self.assertEqual(
+            json.dumps(game_state.snapshot(), sort_keys=True, allow_nan=False),
+            before,
+        )
+        self.assertEqual(game_state.turn, 0)
+        self.assertEqual(game_state.history, [])
+
+    def test_huge_integer_input_raises_rule_error_not_overflow_error(self):
+        game_state = GameState(
+            seed="int-overflow",
+            scene_id="A",
+            player={"resources": {"focus": 10 ** 400}},
+        )
+        with self.assertRaisesRegex(RuleError, "invalid numeric delta/value"):
+            self._engine(1).choose(game_state, "ADD_FOCUS")
+        self.assertEqual(game_state.turn, 0)
+        self.assertEqual(game_state.player["resources"]["focus"], 10 ** 400)
+
+    def test_normal_add_player_effect_is_unchanged(self):
+        game_state = GameState(
+            seed="finite-sum",
+            scene_id="A",
+            player={"resources": {"focus": 4}},
+        )
+        self._engine(3).choose(game_state, "ADD_FOCUS")
+        self.assertEqual(game_state.player["resources"]["focus"], 7)
+        self.assertEqual(game_state.turn, 1)
+
 if __name__ == "__main__":
     unittest.main()
