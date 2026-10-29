@@ -254,6 +254,62 @@ def validate_power_definitions(
                                 f"references unknown technique {required_id!r}"
                             )
 
+
+        # Discovery prerequisites form a directed graph. A mutual or longer
+        # cycle cannot be bootstrapped by an undiscovered technique, even
+        # though each individual prerequisite names an existing technique.
+        # Usage prerequisites are intentionally excluded: already-discovered
+        # techniques can legitimately depend on each other at use time.
+        discovery_dependencies: dict[str, set[str]] = {}
+        for technique_id, technique in techniques.items() if isinstance(techniques, Mapping) else ():
+            if (
+                not isinstance(technique_id, str)
+                or not _STABLE_ID.fullmatch(technique_id)
+                or not isinstance(technique, Mapping)
+            ):
+                continue
+            discovery = technique.get("discovery_requirements", {})
+            dependencies = (
+                discovery.get("techniques", {})
+                if isinstance(discovery, Mapping)
+                else {}
+            )
+            if not isinstance(dependencies, Mapping):
+                dependencies = {}
+            discovery_dependencies[technique_id] = {
+                required_id
+                for required_id in dependencies
+                if isinstance(required_id, str)
+                and required_id != technique_id
+                and required_id in techniques
+                and isinstance(techniques[required_id], Mapping)
+                and _STABLE_ID.fullmatch(required_id)
+            }
+
+        dependents: dict[str, set[str]] = {
+            technique_id: set() for technique_id in discovery_dependencies
+        }
+        remaining = {
+            technique_id: len(dependencies)
+            for technique_id, dependencies in discovery_dependencies.items()
+        }
+        for technique_id, dependencies in discovery_dependencies.items():
+            for required_id in dependencies:
+                dependents[required_id].add(technique_id)
+        ready = [technique_id for technique_id, count in remaining.items() if count == 0]
+        while ready:
+            technique_id = ready.pop()
+            for dependent in dependents[technique_id]:
+                remaining[dependent] -= 1
+                if remaining[dependent] == 0:
+                    ready.append(dependent)
+        blocked = sorted(technique_id for technique_id, count in remaining.items() if count)
+        if blocked:
+            errors.append(
+                f"{ability_id}.techniques contains a circular discovery "
+                f"prerequisite dependency (blocked: {', '.join(blocked)})"
+            )
+
         evolutions = definition.get("evolutions", {})
         if not isinstance(evolutions, Mapping):
             errors.append(f"{ability_id}.evolutions must be an object")
