@@ -106,8 +106,12 @@ def play(
             if save_path is None:
                 output_fn("No save path configured.")
             else:
-                save_state(save_path, state)
-                output_fn(f"Saved: {save_path}")
+                try:
+                    save_state(save_path, state)
+                except (OSError, RuleError) as exc:
+                    output_fn(f"Save failed: {exc}")
+                else:
+                    output_fn(f"Saved: {save_path}")
             continue
 
         try:
@@ -118,7 +122,12 @@ def play(
                 f"time={event['time_minutes']}m"
             )
             if save_path is not None:
-                save_state(save_path, state)
+                try:
+                    save_state(save_path, state)
+                except (OSError, RuleError) as exc:
+                    # The choice already committed in memory. A failed autosave
+                    # is not an invalid player action and must be reported clearly.
+                    output_fn(f"Auto-save failed: {exc}; progress remains in memory.")
         except (ValueError, RuleError) as exc:
             output_fn(f"Invalid action: {exc}")
 
