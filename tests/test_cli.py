@@ -2,7 +2,7 @@ import unittest
 from pathlib import Path
 
 from textrpg import load_content_pack
-from textrpg.cli import apply_choice_number, render_scene, render_state_summary
+from textrpg.cli import apply_choice_number, play, render_scene, render_state_summary
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +30,21 @@ class CliTests(unittest.TestCase):
         self.assertIn("QUEST_DEAD_RELAY", output)
         self.assertIn("STAGE_RELAY", output)
 
+
+    def test_closed_input_exits_gracefully_without_changing_state(self):
+        for exception in (EOFError, KeyboardInterrupt):
+            with self.subTest(exception=exception.__name__):
+                pack = load_content_pack(SLICE)
+                before = pack.state.snapshot()
+                messages = []
+
+                def closed_input(_prompt):
+                    raise exception()
+
+                returned = play(pack, input_fn=closed_input, output_fn=messages.append)
+                self.assertIs(returned, pack.state)
+                self.assertEqual(returned.snapshot(), before)
+                self.assertIn("Input closed; exiting.", messages)
 
 if __name__ == "__main__":
     unittest.main()

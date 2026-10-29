@@ -1,4 +1,5 @@
 import unittest
+from copy import deepcopy
 
 from textrpg import GameState, RuleError, RulesEngine
 from textrpg.quests import (
@@ -72,6 +73,47 @@ class QuestGraphTests(unittest.TestCase):
             [],
         )
 
+    def test_terminal_flag_rejects_non_boolean_values_before_start(self):
+        for invalid_flag in ("true", 1, None, {}):
+            with self.subTest(invalid_flag=invalid_flag):
+                definition = self.definition()
+                definition["stages"]["STAGE_INVESTIGATE"]["terminal"] = invalid_flag
+                errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
+                self.assertTrue(
+                    any(".terminal must be a boolean" in error for error in errors)
+                )
+                state = self.state()
+                with self.assertRaisesRegex(RuleError, "terminal must be a boolean"):
+                    start_quest(state, "QUEST_ARCHIVE", definition)
+                self.assertEqual(state.quests, {})
+                self.assertEqual(state.history, [])
+
+    def test_terminal_stage_cannot_silently_skip_its_objectives(self):
+        definition = self.definition()
+        definition["stages"]["STAGE_COMPLETE"]["objectives"] = {
+            "OBJ_NOT_DONE": {"required": True}
+        }
+        errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
+        self.assertTrue(
+            any("terminal stage cannot define objectives" in error for error in errors)
+        )
+        state = self.state()
+        with self.assertRaisesRegex(RuleError, "terminal stage cannot define objectives"):
+            start_quest(state, "QUEST_ARCHIVE", definition)
+        self.assertEqual(state.quests, {})
+        self.assertEqual(state.history, [])
+
+    def test_empty_boolean_terminal_stage_still_completes_immediately(self):
+        definition = self.definition()
+        definition["start_stage"] = "STAGE_COMPLETE"
+        self.assertEqual(
+            validate_quest_definitions({"QUEST_ARCHIVE": definition}), []
+        )
+        state = self.state()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+        self.assertEqual(state.quests["QUEST_ARCHIVE"]["status"], "completed")
+        self.assertEqual(state.history[-1]["type"], "quest_terminal")
+
     def test_invalid_stage_reference_is_reported(self):
         definition = self.definition()
         definition["stages"]["STAGE_INVESTIGATE"]["on_complete"] = {
@@ -93,6 +135,55 @@ class QuestGraphTests(unittest.TestCase):
         self.assertTrue(any(".required must be a boolean" in error for error in errors))
         self.assertTrue(
             any(".requires_objectives must be a list" in error for error in errors)
+        )
+
+    def test_self_prerequisite_is_rejected_before_quest_mutation(self):
+        definition = self.definition()
+        objectives = definition["stages"]["STAGE_INVESTIGATE"]["objectives"]
+        objectives["OBJ_FIND_RECORD"]["requires_objectives"] = ["OBJ_FIND_RECORD"]
+
+        errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
+        self.assertTrue(any("circular prerequisite" in error for error in errors))
+        state = self.state()
+        with self.assertRaisesRegex(RuleError, "circular prerequisite"):
+            start_quest(state, "QUEST_ARCHIVE", definition)
+        self.assertEqual(state.quests, {})
+        self.assertEqual(state.history, [])
+
+    def test_mutual_prerequisites_are_rejected_before_quest_start(self):
+        definition = self.definition()
+        objectives = definition["stages"]["STAGE_INVESTIGATE"]["objectives"]
+        objectives["OBJ_FIND_RECORD"]["requires_objectives"] = [
+            "OBJ_INTERVIEW_WITNESS"
+        ]
+        # OBJ_INTERVIEW_WITNESS already requires OBJ_FIND_RECORD.
+        errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
+        self.assertTrue(any("circular prerequisite" in error for error in errors))
+
+        with self.assertRaisesRegex(RuleError, "circular prerequisite"):
+            start_quest(self.state(), "QUEST_ARCHIVE", definition)
+
+    def test_optional_objectives_cannot_hide_three_node_cycle(self):
+        definition = self.definition()
+        objectives = definition["stages"]["STAGE_INVESTIGATE"]["objectives"]
+        objectives["OBJ_FIND_RECORD"]["requires_objectives"] = [
+            "OBJ_SEARCH_ROOF"
+        ]
+        objectives["OBJ_SEARCH_ROOF"]["requires_objectives"] = [
+            "OBJ_INTERVIEW_WITNESS"
+        ]
+        # FIND <- ROOF <- INTERVIEW <- FIND is impossible to complete.
+        errors = validate_quest_definitions({"QUEST_ARCHIVE": definition})
+        self.assertTrue(any("circular prerequisite" in error for error in errors))
+
+    def test_long_valid_prerequisite_chain_is_not_rejected(self):
+        definition = self.definition()
+        objectives = definition["stages"]["STAGE_INVESTIGATE"]["objectives"]
+        objectives["OBJ_SEARCH_ROOF"]["requires_objectives"] = [
+            "OBJ_INTERVIEW_WITNESS"
+        ]
+        self.assertEqual(
+            validate_quest_definitions({"QUEST_ARCHIVE": definition}), []
         )
 
     def test_objective_prerequisites_control_availability(self):
@@ -152,6 +243,52 @@ class QuestGraphTests(unittest.TestCase):
         self.assertEqual(
             state.quests["QUEST_ARCHIVE"]["stage"],
             "STAGE_DAMAGE_CONTROL",
+        )
+
+    def test_locked_objective_cannot_fail_or_take_failure_route(self):
+        state = self.state()
+        definition = self.definition()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+
+        before_quest = deepcopy(state.quests["QUEST_ARCHIVE"])
+        before_history = list(state.history)
+        with self.assertRaisesRegex(RuleError, "not currently available to fail"):
+            fail_objective(
+                state, "QUEST_ARCHIVE", "OBJ_INTERVIEW_WITNESS", definition
+            )
+
+        self.assertEqual(state.quests["QUEST_ARCHIVE"], before_quest)
+        self.assertEqual(state.history, before_history)
+        self.assertEqual(
+            state.quests["QUEST_ARCHIVE"]["stage"], "STAGE_INVESTIGATE"
+        )
+
+    def test_unlocked_objective_can_fail_and_follow_authored_route(self):
+        state = self.state()
+        definition = self.definition()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+        complete_objective(
+            state, "QUEST_ARCHIVE", "OBJ_FIND_RECORD", definition
+        )
+
+        event = fail_objective(
+            state, "QUEST_ARCHIVE", "OBJ_INTERVIEW_WITNESS", definition
+        )
+        self.assertEqual(event["type"], "quest_objective_failed")
+        self.assertEqual(
+            state.quests["QUEST_ARCHIVE"]["stage"], "STAGE_DAMAGE_CONTROL"
+        )
+
+    def test_available_optional_objective_can_fail(self):
+        state = self.state()
+        definition = self.definition()
+        start_quest(state, "QUEST_ARCHIVE", definition)
+        event = fail_objective(
+            state, "QUEST_ARCHIVE", "OBJ_SEARCH_ROOF", definition
+        )
+        self.assertEqual(event["objective_id"], "OBJ_SEARCH_ROOF")
+        self.assertEqual(
+            state.quests["QUEST_ARCHIVE"]["stage"], "STAGE_DAMAGE_CONTROL"
         )
 
     def test_terminal_stage_completes_quest(self):
