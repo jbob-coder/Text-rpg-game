@@ -92,3 +92,9 @@ Las tres rutas requieren costo y consecuencia proporcionados, alguna posibilidad
 7. **Calendario:** AC significa «Antes del Crystal». No se inventó fecha ni abreviatura posterior.
 
 **Siguiente puerta editorial:** comparar con la propuesta existente Volumen II v0.3.8, decidir si se descarta, integra o modifica, y confirmar por separado su uso como material del juego. Hasta entonces permanece independiente y reemplazable, sin migraciones.
+
+### Continuaciones alternativas (borradores separados)
+
+- La ruta de **investigación** tiene una continuación hipotética en [«El peso de una prueba»](PROPOSED_VOLUME_II_CHAPTER_03_2026-10-29.md).
+- Las rutas de **protección** y **reparación** tienen desarrollos independientes en [«Rutas alternativas para La medida de lo que se sabe»](PROPOSED_VOLUME_II_ALTERNATE_ROUTES_PROTECT_REPAIR_2026-10-29.md).
+- Estas tres alternativas no se convierten en sucesos cronológicos simultáneos. No hay todavía misión implementada, aprobación de canon, clase concedida ni migración de guardado.
