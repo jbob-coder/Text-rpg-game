@@ -112,3 +112,27 @@ Current catalog target families and proof opportunities:
 **Classes/Smith:** new [read-only readiness integration packet](../systems/CLASS_READINESS_AND_SINGLE_ABILITY_INTEGRATION_PACKET_2026-10-29.md) ties actual v1 state ownership and quest/evidence gaps to seven target class families, Smith professional constraints and H-05/H-06 single-principal-ability rule. It includes proposed query statuses and acceptance tests only; **no class runtime, rank, schema change, Smith formula or ability allocation change** was introduced.
 
 **Test state after continuation:** the 2026-10-29 GitHub workflow for the latest PR HEAD must complete after these commits. Intermediate runs may be cancelled by superseding pushes and are not passing evidence. Check the exact HEAD SHA and all job conclusions before any approval/merge claim. Physical-device testing, canon approval, WD-001, D-084, and class migration gates remain open.
+
+---
+
+## 8. Further engine hardening and story branching — 2026-10-29
+
+### Implementation additions (same isolated PR)
+
+- **Null discovery block:** `validate_technique_definition` deliberately accepts `discovery_requirements: null` as no prerequisites. Previously `technique_discovery_status` accessed `.get()` on `None`; normalization now preserves that authored meaning without a crash. A test verifies catalog acceptance, read purity, and one-time successful discovery.
+- **Falsey invalid definition roots:** `technique_discovery_status` previously used `definition or {}`, converting `[]`, `False`, `0`, and `""` into an empty valid definition. Now only `None` means an absent optional definition; malformed roots raise `RuleError` before discovery.
+- **Player-safe view:** the same falsey-root coercion in `ability_player_view` is replaced with a strict mapping check. A negative test verifies no hidden state mutation on invalid metadata.
+- **Malformed state owner:** `gain_technique_mastery` now rejects a non-object ability record with `RuleError`, and `practice_technique` rejects a non-object technique container before spending stamina/focus or world time.
+- **Tests:** five new test methods in `tests/test_powers.py` cover null discovery, falsey invalid discovery input, invalid ability-view definition, corrupt technique practice container, and corrupt mastery owner. Together with the prior set, the exact code HEAD `ab737846fa3fe7f358d9744264a3c47fb06c074f` passed **509 Python tests** in GitHub Actions run [40963457190](https://github.com/jbob-coder/Text-rpg-game/actions/runs/40963457190), `python-engine` job success. Android conclusion is tracked independently; do not transfer that passing status to later docs commits without exact-head evidence.
+
+### Story progression additions
+
+- [Alternate A/C route developments](../story/PROPOSED_VOLUME_II_ALTERNATE_ROUTES_PROTECT_REPAIR_2026-10-29.md) provide prose for protecting/withdrawing people and for a bounded repair attempt. These **branch** from proposed Chapter II rather than following the investigative Chapter III as mandatory sequential events.
+- Chapter II now links all three alternatives; Chapter III remains the hypothetical investigative route. None is installed as a quest.
+- Each route records potential evidence for disciplines only where an actual future engine action produces verifiable outcomes; selection of dialogue text is never class XP by itself. Smith remains distinct from Operator and a secondary principal ability is forbidden by H-05/H-06.
+
+### Tests and scope boundaries
+
+- Code remains limited to `src/textrpg/powers.py` and `tests/test_powers.py`; no new class schema, permanent grant, Android logic or save migration.
+- Volumes I/II Drive manuscripts, creator canon records, and Gate Twelve vertical slice remain unchanged.
+- Exact final PR HEAD CI for Python, Android unit/assemble and emulator smoke must be observed before merge readiness; physical device and canon promotion remain open.
