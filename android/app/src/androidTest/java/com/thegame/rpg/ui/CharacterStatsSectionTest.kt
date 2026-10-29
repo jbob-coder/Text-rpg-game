@@ -96,6 +96,11 @@ class CharacterStatsSectionTest {
 
         composeRule.onNodeWithTag("narrative-scroll").assertIsDisplayed()
         composeRule.onNodeWithTag("scene-title").assertIsDisplayed()
+        composeRule.onNodeWithTag("story-resource-hud").assertIsDisplayed()
+        listOf("health", "stamina", "focus", "resolve").forEach { resourceId ->
+            composeRule.onNodeWithTag("story-resource-value-$resourceId").assertIsDisplayed()
+        }
+        composeRule.onNodeWithText("Health 100 / 144").assertIsDisplayed()
         composeRule.onAllNodesWithTag("story-pixel-header").assertCountEquals(0)
         composeRule.onAllNodesWithTag("scene-illustration").assertCountEquals(0)
         composeRule.onAllNodesWithTag("player-avatar").assertCountEquals(0)

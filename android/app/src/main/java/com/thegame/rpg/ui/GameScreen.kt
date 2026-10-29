@@ -331,14 +331,44 @@ private fun StorySection(
     onNarrate: (String) -> Boolean,
     textDelayMs: Int,
 ) {
-    NarrativePanel(
-        snapshot = snapshot,
-        busy = busy,
-        onChoice = onChoice,
-        onNarrate = onNarrate,
-        textDelayMs = textDelayMs,
+    Column(
         modifier = Modifier.fillMaxSize(),
-    )
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        if (snapshot.resources.isNotEmpty()) {
+            PixelPanel(modifier = Modifier.fillMaxWidth()) {
+                Column(
+                    modifier = Modifier.testTag("story-resource-hud"),
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                ) {
+                    snapshot.resources.chunked(2).forEach { pair ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            pair.forEach { resource ->
+                                Text(
+                                    text = "${resource.id.replaceFirstChar { it.uppercase() }} ${statValue(resource.current)} / ${statValue(resource.max)}",
+                                    modifier = Modifier.weight(1f).testTag("story-resource-value-${resource.id}"),
+                                    color = PixelColors.Paper,
+                                    style = MaterialTheme.typography.labelLarge,
+                                )
+                            }
+                            if (pair.size == 1) Spacer(Modifier.weight(1f))
+                        }
+                    }
+                }
+            }
+        }
+        NarrativePanel(
+            snapshot = snapshot,
+            busy = busy,
+            onChoice = onChoice,
+            onNarrate = onNarrate,
+            textDelayMs = textDelayMs,
+            modifier = Modifier.fillMaxWidth().weight(1f),
+        )
+    }
 }
 
 @Composable
