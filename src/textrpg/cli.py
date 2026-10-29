@@ -89,7 +89,13 @@ def play(
 
     while True:
         output_fn(render_scene(engine, state))
-        command = input_fn("> ").strip()
+        try:
+            command = input_fn("> ").strip()
+        except (EOFError, KeyboardInterrupt):
+            # A closed terminal/input stream is a normal exit condition.
+            # The last successful choice has already been autosaved.
+            output_fn("Input closed; exiting.")
+            break
 
         if command.lower() in {"quit", "q", "exit"}:
             break

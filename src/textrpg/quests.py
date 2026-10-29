@@ -117,7 +117,14 @@ def validate_quest_definitions(
                         errors,
                     )
 
-            if stage.get("terminal") is True:
+            terminal = stage.get("terminal", False)
+            if not isinstance(terminal, bool):
+                errors.append(f"{quest_id}.{stage_id}.terminal must be a boolean")
+            if terminal is True:
+                if objectives:
+                    errors.append(
+                        f"{quest_id}.{stage_id}.terminal stage cannot define objectives"
+                    )
                 status = stage.get("terminal_status", "completed")
                 if status not in ("completed", "failed"):
                     errors.append(
@@ -355,6 +362,8 @@ def fail_objective(
         raise RuleError(f"Completed objective cannot fail: {objective_id}")
     if objective_id in quest.get("failed_objectives", []):
         raise RuleError(f"Objective already failed: {objective_id}")
+    if objective_id not in available_objectives(state, quest_id, definition):
+        raise RuleError(f"Objective is not currently available to fail: {objective_id}")
 
     quest["failed_objectives"].append(objective_id)
     quest["updated_at_minutes"] = state.time_minutes
