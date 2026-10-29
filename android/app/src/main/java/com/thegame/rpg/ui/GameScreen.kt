@@ -360,6 +360,16 @@ private fun StorySection(
                 }
             }
         }
+        if (snapshot.room.actors.isNotEmpty()) {
+            PixelPanel(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = "PRESENT: " + snapshot.room.actors.joinToString(", ") { it.displayName },
+                    modifier = Modifier.testTag("room-actors-text"),
+                    color = PixelColors.Paper,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
+        }
         NarrativePanel(
             snapshot = snapshot,
             busy = busy,

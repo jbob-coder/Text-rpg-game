@@ -25,6 +25,8 @@ import com.thegame.rpg.engine.GameCondition
 import com.thegame.rpg.engine.GameEquipmentSlot
 import com.thegame.rpg.engine.GameInventory
 import com.thegame.rpg.engine.GameResource
+import com.thegame.rpg.engine.GameRoomActor
+import com.thegame.rpg.engine.GameRoomProjection
 import com.thegame.rpg.engine.GameSnapshot
 import com.thegame.rpg.engine.GameStatContribution
 import com.thegame.rpg.engine.GameStatInspection
@@ -90,6 +92,44 @@ class GameScreenTest {
         listOf("Stats", "Inventory", "Quests", "Map", "More").forEach { label ->
             composeRule.onNodeWithText(label).assertIsDisplayed().assertHasClickAction()
         }
+    }
+
+    @Test
+    fun playerSafeRoomActorsRemainVisibleAsTextWithoutArtwork() {
+        val withActor = snapshot.copy(
+            room = GameRoomProjection(
+                locationId = "CITY_GATE",
+                actors = listOf(
+                    GameRoomActor(
+                        presentationId = "NPC_TAMSIN",
+                        knownActorId = "NPC_TAMSIN",
+                        displayName = "Tamsin",
+                        visualFamily = "NPC_TAMSIN",
+                        placementKey = "GATE_RIGHT",
+                        poseKey = null,
+                        outfitKey = null,
+                        visibleTags = emptyList(),
+                        inspectable = true,
+                        dialogueAvailable = false,
+                        actions = emptyList(),
+                    )
+                ),
+            )
+        )
+        composeRule.setContent {
+            PixelTheme {
+                GameScreen(
+                    snapshot = withActor,
+                    busy = false,
+                    onChoice = {},
+                    onNavigate = {},
+                )
+            }
+        }
+        composeRule.onNodeWithTag("room-actors-text").assertIsDisplayed()
+        composeRule.onNodeWithText("PRESENT: Tamsin").assertIsDisplayed()
+        composeRule.onAllNodesWithTag("player-avatar").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("scene-illustration").assertCountEquals(0)
     }
 
     @Test

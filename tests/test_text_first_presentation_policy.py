@@ -55,6 +55,7 @@ class TextFirstPresentationPolicyTests(unittest.TestCase):
     def test_text_choice_and_map_travel_are_preserved(self):
         source = (UI / "GameScreen.kt").read_text(encoding="utf-8")
         self.assertIn("snapshot.choices.forEach", source)
+        self.assertIn("snapshot.room.actors", source)
         self.assertIn("world-map-canvas", source)
         self.assertIn("map.edges.forEach", source)
         self.assertIn("map.nodes.forEach", source)
