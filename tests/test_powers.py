@@ -1474,5 +1474,38 @@ class PowerRuntimeTests(unittest.TestCase):
         )
 
 
+    def test_null_discovery_requirements_are_no_prerequisites(self):
+        state = GameState(seed="null-requirements", scene_id="A")
+        discover_ability(state, "ABILITY_TRACE")
+        definition = {"discovery_requirements": None}
+        catalog = {
+            "ABILITY_TRACE": {"techniques": {"TECHNIQUE_FREE": definition}}
+        }
+
+        self.assertEqual(validate_power_definitions(catalog), [])
+        before = copy.deepcopy(state.snapshot())
+        status = technique_discovery_status(
+            state, "ABILITY_TRACE", "TECHNIQUE_FREE", definition
+        )
+        self.assertEqual(
+            status,
+            {"available": True, "reasons": [], "already_discovered": False},
+        )
+        self.assertEqual(state.snapshot(), before)
+
+        learned = discover_technique(
+            state, "ABILITY_TRACE", "TECHNIQUE_FREE", definition
+        )
+        self.assertEqual(learned["stage"], "discovered")
+        self.assertEqual(
+            len([
+                e for e in state.history
+                if e["type"] == "technique_discovered"
+                and e["technique_id"] == "TECHNIQUE_FREE"
+            ]),
+            1,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
