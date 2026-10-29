@@ -392,6 +392,7 @@ class GameScreenTest {
             .performClick()
         composeRule.onNodeWithTag("character-scroll")
             .assertIsDisplayed()
+        composeRule.onNodeWithText("Chest: Depot utility jacket").assertIsDisplayed()
         composeRule.onNodeWithTag("character-slot-body")
             .assertHasClickAction()
             .performClick()

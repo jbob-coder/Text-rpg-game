@@ -168,7 +168,11 @@ private fun CharacterSlotCard(slot: GameEquipmentSlot, active: Boolean, onSelect
             .testTag("character-slot-${slot.slot}"),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(label, color = PixelColors.Paper, style = MaterialTheme.typography.labelLarge)
+        Text(
+            text = "$label: " + if (slot.equipped) (slot.name ?: "Equipped item") else "Empty",
+            color = PixelColors.Paper,
+            style = MaterialTheme.typography.labelLarge,
+        )
     }
 }
 

@@ -286,6 +286,7 @@ class CharacterStatsSectionTest {
             assertTrue(node.boundsInRoot.left >= viewport.left - 1)
             assertTrue(node.boundsInRoot.right <= viewport.right + 1)
         }
+        composeRule.onNodeWithText("Chest: Depot utility jacket").assertIsDisplayed()
         composeRule.onNodeWithTag("character-slot-body").performScrollTo().performClick()
         composeRule.onNodeWithTag("character-equipment-detail").assertIsDisplayed()
         composeRule.onNodeWithText("Depot utility jacket").assertIsDisplayed()
