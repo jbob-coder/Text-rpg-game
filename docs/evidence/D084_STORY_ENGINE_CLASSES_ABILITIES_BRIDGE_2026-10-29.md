@@ -98,3 +98,17 @@ Current catalog target families and proof opportunities:
 8. Choose a final story-to-game bridge only after narrative canon and Gate Twelve relationship are resolved.
 
 **Continuity at handoff:** the code fix and chapter are isolated to a reversible working branch. The owner-controlled narrative docs remain unchanged. Any new ♾️ work should first check latest authority/PR HEAD and run the outstanding test gates rather than inventing extra class or canon state.
+
+---
+
+## 7. Autonomous continuation — 2026-10-29, later session
+
+**Verified prior checkpoint:** GitHub Actions [40903508912](https://github.com/jbob-coder/Text-rpg-game/actions/runs/40903508912) on `70d4933ee85f68ad8071c42ed3efa935070689d6` completed successfully with `python-engine`, `android-unit-and-assemble`, and `android-emulator-smoke`. These results apply to **that commit only**, not automatically to later code.
+
+**Additional code change:** `src/textrpg/powers.py` now checks stage-value type before membership lookup in three validators: technique discovery prerequisites, required stage for technique use, and evolution technique prerequisites. Previously, an unhashable JSON value such as `[]` or `{}` in these positions could cause `TypeError` rather than returning validation errors. A test in `tests/test_powers.py` covers all three validation paths and validates that authored catalogs report malformed stages.
+
+**Narrative work:** new separate [proposed Chapter III, «El peso de una prueba»](../story/PROPOSED_VOLUME_II_CHAPTER_03_2026-10-29.md) expands one **hypothetical investigative** continuation of Chapter II. This is not declared canon, not installed as a quest, and not a determination of the final world/date. Compared against the 2026-10-27 Volume II v0.3.8 candidate, the new chapter does not replace its 25 narrative paragraphs or original two composed scenes; it remains an independent, reversible draft.
+
+**Classes/Smith:** new [read-only readiness integration packet](../systems/CLASS_READINESS_AND_SINGLE_ABILITY_INTEGRATION_PACKET_2026-10-29.md) ties actual v1 state ownership and quest/evidence gaps to seven target class families, Smith professional constraints and H-05/H-06 single-principal-ability rule. It includes proposed query statuses and acceptance tests only; **no class runtime, rank, schema change, Smith formula or ability allocation change** was introduced.
+
+**Test state after continuation:** the 2026-10-29 GitHub workflow for the latest PR HEAD must complete after these commits. Intermediate runs may be cancelled by superseding pushes and are not passing evidence. Check the exact HEAD SHA and all job conclusions before any approval/merge claim. Physical-device testing, canon approval, WD-001, D-084, and class migration gates remain open.
