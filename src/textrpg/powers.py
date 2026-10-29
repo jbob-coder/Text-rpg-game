@@ -1022,10 +1022,10 @@ def practice_technique(
 
 
 def _stage_at_least(actual: str, minimum: str) -> bool:
-    if actual not in _STAGE_ORDER:
-        raise RuleError(f"Unknown technique stage: {actual}")
-    if minimum not in _STAGE_ORDER:
-        raise RuleError(f"Unknown required technique stage: {minimum}")
+    if not isinstance(actual, str) or actual not in _STAGE_ORDER:
+        raise RuleError(f"Unknown technique stage: {actual!r}")
+    if not isinstance(minimum, str) or minimum not in _STAGE_ORDER:
+        raise RuleError(f"Unknown required technique stage: {minimum!r}")
     return _STAGE_ORDER[actual] >= _STAGE_ORDER[minimum]
 
 
