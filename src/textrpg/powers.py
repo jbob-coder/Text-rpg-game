@@ -1445,10 +1445,10 @@ def technique_use_status(
     if not isinstance(techniques, Mapping):
         raise RuleError(f"Ability techniques must be an object: {ability_id}")
     technique = techniques.get(technique_id)
-    if not technique:
+    if technique is None:
         return {"available": False, "reasons": ["technique_undiscovered"]}
-    if not isinstance(technique, Mapping):
-        raise RuleError(f"Technique state must be an object: {technique_id}")
+    if not isinstance(technique, Mapping) or not technique:
+        raise RuleError(f"Technique state must be a non-empty object: {technique_id}")
 
     technique_mastery = technique.get("mastery_xp", 0.0)
     if (
@@ -1897,8 +1897,10 @@ def ability_player_view(
     inaccessible to a normal status UI.
     """
     ability = state.abilities.get(ability_id)
-    if not ability:
+    if ability is None:
         raise RuleError(f"Unknown ability: {ability_id}")
+    if not isinstance(ability, Mapping):
+        raise RuleError(f"Ability state must be an object: {ability_id}")
 
     if definition is None:
         definition = {}
@@ -2026,7 +2028,11 @@ def ability_player_view(
     if technique_definitions is not None and not isinstance(technique_definitions, Mapping):
         raise RuleError("Ability technique definitions must be an object")
 
-    for technique_id, record in ability.get("techniques", {}).items():
+    owned_techniques = ability.get("techniques", {})
+    if not isinstance(owned_techniques, Mapping):
+        raise RuleError(f"Ability techniques must be an object: {ability_id}")
+
+    for technique_id, record in owned_techniques.items():
         if not isinstance(technique_id, str) or not technique_id:
             raise RuleError("Technique state keys must be non-empty IDs")
         if not isinstance(record, Mapping):
@@ -2061,6 +2067,9 @@ def ability_player_view(
         if authored is not None and not isinstance(authored, Mapping):
             raise RuleError(f"Technique definition must be an object: {technique_id}")
         authored = authored or {}
+        stage = record.get("stage", "discovered")
+        if not isinstance(stage, str) or stage not in _STAGE_ORDER:
+            raise RuleError(f"Technique stage is invalid: {technique_id}")
         ready_at = ready_at_value
         output["techniques"].append(
             {
@@ -2070,11 +2079,7 @@ def ability_player_view(
                     f"Technique display name {technique_id}",
                     default=technique_id,
                 ),
-                "stage": _visible_text(
-                    record.get("stage"),
-                    f"Technique stage {technique_id}",
-                    default="discovered",
-                ),
+                "stage": stage,
                 "mastery_xp": float(technique_mastery),
                 "uses": uses_value,
                 "ready": state.time_minutes >= ready_at,
