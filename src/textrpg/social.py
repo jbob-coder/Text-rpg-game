@@ -191,6 +191,8 @@ def share_knowledge(
     voluntary: bool = True,
 ) -> Dict[str, Any]:
     """Transfer knowledge only after both source and recipient state preflight."""
+    if not isinstance(voluntary, bool):
+        raise RuleError("Knowledge transfer voluntary must be a boolean")
     speaker_state = state.npcs.get(speaker)
     if speaker_state is None:
         raise RuleError(f"{speaker} does not know {knowledge_id}")
