@@ -191,6 +191,34 @@ class SocialTests(unittest.TestCase):
         with self.assertRaises(RuleError):
             set_goal(state, "NPC_A", "GOAL_FIND_ARCHIVE")
 
+    def test_paused_goal_cannot_progress_or_complete(self):
+        state = GameState(seed="pause-goal", scene_id="A")
+        goal = set_goal(
+            state, "NPC_A", "GOAL_WAIT", progress=95, status="paused"
+        )
+        history_before = list(state.history)
+        goal_before = dict(goal)
+
+        with self.assertRaisesRegex(RuleError, "Cannot progress inactive goal"):
+            update_goal_progress(state, "NPC_A", "GOAL_WAIT", 10)
+
+        self.assertEqual(goal, goal_before)
+        self.assertEqual(state.history, history_before)
+        self.assertEqual(goal["status"], "paused")
+
+    def test_corrupt_goal_status_rejected_without_writing_progress(self):
+        state = GameState(seed="corrupt-goal", scene_id="A")
+        goal = set_goal(state, "NPC_A", "GOAL_WAIT", progress=10)
+        goal["status"] = None
+        history_before = list(state.history)
+
+        with self.assertRaisesRegex(RuleError, "Cannot progress inactive goal"):
+            update_goal_progress(state, "NPC_A", "GOAL_WAIT", 20)
+
+        self.assertEqual(goal["progress"], 10.0)
+        self.assertIsNone(goal["status"])
+        self.assertEqual(state.history, history_before)
+
     def test_story_state_transition_is_guarded(self):
         state = GameState(seed="s", scene_id="A")
         first = transition_story_state(
