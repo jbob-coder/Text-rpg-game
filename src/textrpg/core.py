@@ -65,16 +65,24 @@ def _set_path(data: MutableMapping[str, Any], path: str, value: Any) -> None:
 
 def _add_path(data: MutableMapping[str, Any], path: str, delta: float) -> None:
     current = _get_path(data, path, 0)
-    if (
-        isinstance(current, bool)
-        or not isinstance(current, (int, float))
-        or not isfinite(float(current))
-        or isinstance(delta, bool)
-        or not isinstance(delta, (int, float))
-        or not isfinite(float(delta))
-    ):
+
+    def finite_number(value: Any) -> bool:
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            return False
+        try:
+            return isfinite(float(value))
+        except (OverflowError, ValueError):
+            return False
+
+    if not finite_number(current) or not finite_number(delta):
         raise RuleError(f"Cannot add invalid numeric delta/value at path: {path}")
-    _set_path(data, path, current + delta)
+
+    updated = current + delta
+    if not finite_number(updated):
+        # A pair of finite inputs may overflow to Infinity. Never commit a
+        # non-JSON numeric state, even for an otherwise valid player choice.
+        raise RuleError(f"Cannot add non-finite numeric result at path: {path}")
+    _set_path(data, path, updated)
 
 
 def inventory_quantity(state: "GameState", item_id: str) -> int:
