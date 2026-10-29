@@ -1,3 +1,5 @@
+> **OWNER VISUAL UPDATE — 2026-10-27 AST:** Text-based THE GAME with map navigation. Existing pixel-art obligations in older lanes are superseded for new work; do not claim art production tasks without a new explicit owner instruction. See docs/GAME_CONTEXT_LOGS/2026-10-27_TEXT_MAP_VISUAL_RETIREMENT.md. This notice does not reassign another worker's active claim.
+
 # AI Task Bulletin Board — THE GAME
 
 **Status:** ACTIVE  

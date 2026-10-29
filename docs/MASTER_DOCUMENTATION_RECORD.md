@@ -1,3 +1,5 @@
+> **CURRENT OWNER VISUAL OVERRIDE (2026-10-27 AST):** Pixel-art production status below describes a superseded direction; do not treat it as active development demand. Preserve map and textual RPG presentation. See docs/GAME_CONTEXT_LOGS/2026-10-27_TEXT_MAP_VISUAL_RETIREMENT.md.
+
 # THE GAME — Master Documentation Record
 
 Status: **ACTIVE / CANONICAL DOCUMENTATION STATUS INDEX**  

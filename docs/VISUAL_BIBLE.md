@@ -1,3 +1,5 @@
+> **SUPERSEDED FOR ACTIVE PRESENTATION — OWNER UPDATE 2026-10-27 AST.** THE GAME's current direction is a text-based RPG with a navigable map, **not** a pixel-art Android scene/sprite/animation client. This document survives as historical provenance only. Do not generate, reinstate or require pixel assets. See [owner correction](GAME_CONTEXT_LOGS/2026-10-27_TEXT_MAP_VISUAL_RETIREMENT.md) and [migration audit](android/TEXT_FIRST_PRESENTATION_RETIREMENT_AUDIT_2026-10-27.md). The existing Python game and travel rules are preserved.
+
 # Pixel Visual Bible — v0.2
 
 > **Authority boundary:** this bible owns visual language, identity consistency and acceptance principles. `docs/assets/PIXEL_ASSET_MASTER_PLAN.md` owns technical source grids, dimensions, anchors, naming and asset lifecycle. `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md` owns how room art, actors, equipment, props, overlays, FX and panels are composed at runtime. If a style example here conflicts with those technical/composition contracts or authoritative gameplay state, use the specialized authority rather than inventing a second visual-state owner.

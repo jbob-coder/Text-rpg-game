@@ -1,26 +1,26 @@
-name: Android Pixel Client
+name: Android Text RPG Client
 
 concurrency:
-  group: android-pixel-client-${{ github.ref }}
+  group: android-text-client-${{ github.ref }}
   cancel-in-progress: true
 
 on:
   push:
     branches:
-      - feature/android-pixel-client-v1
+      - feature/android-text-client-v1
     paths:
       - "android/**"
       - "src/**"
       - "tests/**"
       - "content/**"
-      - ".github/workflows/android-pixel-client.yml"
+      - ".github/workflows/android-text-client.yml"
   pull_request:
     paths:
       - "android/**"
       - "src/**"
       - "tests/**"
       - "content/**"
-      - ".github/workflows/android-pixel-client.yml"
+      - ".github/workflows/android-text-client.yml"
   workflow_dispatch:
 
 jobs:
@@ -82,7 +82,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
         with:
-          name: THE-GAME-Android-Pixel-Client-${{ github.sha }}
+          name: THE-GAME-Android-Text-Client-${{ github.sha }}
           path: |
             android/app/build/outputs/apk/debug/app-debug.apk
             android-apk-sha256.txt
@@ -118,7 +118,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Run pixel shell and real boot smoke tests
+      - name: Run text UI and Python engine boot smoke tests
         uses: ReactiveCircus/android-emulator-runner@v2.38.0
         with:
           api-level: 35
@@ -128,29 +128,3 @@ jobs:
           disable-animations: true
           script: |
             gradle -p android connectedDebugAndroidTest --stacktrace
-
-      - name: Verify collected UI screenshot set
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import hashlib
-          import struct
-          root = Path('android/app/build/outputs/connected_android_test_additional_output')
-          files = sorted(root.rglob('*.png'))
-          expected = {'character-320dp.png', 'equipment-jacket-detail.png', 'inventory-320dp.png', 'map-gate-twelve-320dp.png', 'map-service-tunnel-preview-320dp.png', 'relay-workbench-320dp.png', 'skills-320dp.png', 'stats-320dp.png', 'stats-perception-detail.png', 'story-opening-actors-320dp.png', 'story-scene-first-320dp.png'}
-          assert len(files) == len(expected) and {file.name for file in files} == expected, f'Missing UI evidence: {[str(file) for file in files]}'
-          for file in files:
-              content = file.read_bytes()
-              assert content[:8] == b'\x89PNG\r\n\x1a\n' and content[12:16] == b'IHDR', f'Invalid PNG: {file}'
-              width, height = struct.unpack('>II', content[16:24])
-              assert width > 0 and height > 0, f'Empty PNG: {file}'
-              print(f'{file.name}: {width}x{height}; SHA-256 {hashlib.sha256(content).hexdigest()}')
-          PY
-
-      - name: Upload small UI verification screenshots
-        uses: actions/upload-artifact@v4
-        with:
-          name: THE-GAME-UI-QA-${{ github.run_id }}
-          path: android/app/build/outputs/connected_android_test_additional_output/**/*.png
-          if-no-files-found: error
-          retention-days: 1

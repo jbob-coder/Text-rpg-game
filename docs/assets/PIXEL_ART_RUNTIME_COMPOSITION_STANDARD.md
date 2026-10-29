@@ -1,3 +1,5 @@
+> **SUPERSEDED FOR ACTIVE PRESENTATION — 2026-10-27 AST.** Historical pixel-art composition details below are not authorized as current THE GAME runtime requirements. Current owner direction is text gameplay and a navigable map, no sprites/pixel scenes. See [owner directive](../GAME_CONTEXT_LOGS/2026-10-27_TEXT_MAP_VISUAL_RETIREMENT.md) and [migration audit](../android/TEXT_FIRST_PRESENTATION_RETIREMENT_AUDIT_2026-10-27.md).
+
 # THE GAME — Pixel Art Runtime Composition Standard
 
 Status: **ACTIVE VISUAL INTEGRATION CONTRACT**  

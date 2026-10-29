@@ -11,7 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import com.thegame.rpg.audio.NarrationController
-import com.thegame.rpg.ui.TheGamePixelTheme
+import androidx.compose.material3.MaterialTheme
 import com.thegame.rpg.ui.TheGameRoot
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
             var narrationRate by rememberSaveable { mutableStateOf(0.92f) }
             var textDelayMs by rememberSaveable { mutableStateOf(0) }
 
-            TheGamePixelTheme {
+            MaterialTheme {
                 val uiState by gameViewModel.uiState.collectAsState()
                 LaunchedEffect(Unit) { gameViewModel.startIfNeeded() }
 
