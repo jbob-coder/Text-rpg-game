@@ -1,5 +1,8 @@
 # THE GAME — Final Game Reconstruction Blueprint
 
+> **CAMBIO DE ALCANCE EXPRESO DEL DUEÑO — 2026-10-27/28 (supersede arte previo):** THE GAME es un RPG de texto con un **mapa funcional de ubicaciones y rutas**. Los sprites, ilustraciones de escena, avatares dibujados, iconos pixel art y animaciones artísticas introducidos antes fueron un error y **no deben implementarse, restaurarse ni exigirse**. Las instrucciones históricas sobre pixel art de este archivo quedan **OBSOLETAS / NO AUTORITATIVAS**, incluso si aparecen en secciones de tareas o planes antiguos. Mantener el engine Python, la semántica de viajes, el mapa y las interacciones textuales. El registro técnico y evidencia de retirada está en `docs/android/TEXT_FIRST_PRESENTATION_REMOVAL_REGISTER_2026-10-27.md`, con PR #97 como candidato independiente (no aprobado/merged al escribir esto). Sólo una nueva instrucción expresa del dueño puede cambiar ese límite.
+
+
 Status: **PRIMARY INTEGRATION BLUEPRINT / DOCUMENTATION-FIRST / IMPLEMENTATION GATED**  
 Repository: `jbob-coder/Text-rpg-game`  
 Program branch: `docs/master-game-development-program`  
