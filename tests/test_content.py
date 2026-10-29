@@ -29,6 +29,25 @@ class ContentPackTests(unittest.TestCase):
         self.assertNotIn("PERK_TRACE_TOLERANCE", repr(view))
         self.assertEqual(view["breakdown"]["unidentified_modifier"], 3.0)
 
+    def test_file_loader_rejects_duplicate_authored_metadata(self):
+        data = self.data()
+        data["metadata"] = {"probe": 1}
+        raw = json.dumps(data).replace('"probe": 1', '"probe": 1, "probe": 2')
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "content.json"
+            path.write_text(raw, encoding="utf-8")
+            with self.assertRaisesRegex(RuleError, "strict JSON"):
+                load_content_pack(path)
+
+    def test_room_presence_sidecar_rejects_duplicate_scene_keys(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "content.json"
+            path.write_text(json.dumps(self.data()), encoding="utf-8")
+            sidecar = Path(directory) / "content_room_presence.json"
+            sidecar.write_text('{"OPENING_DEPOT_BLACKOUT":[],"OPENING_DEPOT_BLACKOUT":[]}', encoding="utf-8")
+            with self.assertRaisesRegex(RuleError, "strict JSON room presence sidecar"):
+                load_content_pack(path)
+
     def test_file_loader_rejects_non_finite_numbers_in_metadata(self):
         data = self.data()
         data["metadata"] = {"probe": None}
