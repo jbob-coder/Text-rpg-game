@@ -124,7 +124,7 @@ def _validate_requirements_block(
                 errors.append(
                     f"{label}.techniques has invalid technique ID: {technique_id!r}"
                 )
-            if stage not in _STAGE_ORDER or stage == "unknown":
+            if not isinstance(stage, str) or stage not in _STAGE_ORDER or stage == "unknown":
                 errors.append(
                     f"{label}.techniques.{technique_id} has unsupported stage {stage!r}"
                 )
@@ -1145,7 +1145,7 @@ def validate_technique_definition(definition: Any) -> list[str]:
     )
 
     stage_min = definition.get("stage_min", "discovered")
-    if stage_min not in _STAGE_ORDER:
+    if not isinstance(stage_min, str) or stage_min not in _STAGE_ORDER:
         errors.append(f"stage_min has unsupported value {stage_min!r}")
 
     requirements = definition.get("requirements", {})
@@ -1326,7 +1326,7 @@ def validate_evolution_definition(definition: Any) -> list[str]:
         for technique_id, stage in techniques.items():
             if not isinstance(technique_id, str) or not technique_id:
                 errors.append("requirements.techniques keys must be non-empty IDs")
-            if stage not in _STAGE_ORDER:
+            if not isinstance(stage, str) or stage not in _STAGE_ORDER:
                 errors.append(
                     f"requirements.techniques.{technique_id} has unsupported stage {stage!r}"
                 )
