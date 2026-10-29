@@ -233,6 +233,27 @@ def validate_game_state_structure(state: GameState) -> None:
                     f"state.quests.{quest_id}.history must be a list of objects"
                 )
 
+    # NPC shells may be partial in older saves, but any fields that are
+    # present must use the container shapes expected by the social engine.
+    for npc_id, npc in state.npcs.items():
+        if not isinstance(npc_id, str) or not npc_id:
+            raise RuleError("state.npcs IDs must be non-empty strings")
+        if not isinstance(npc, Mapping):
+            raise RuleError(f"state.npcs.{npc_id} must be an object")
+        for field_name in ("personality", "knowledge", "goals", "story_state"):
+            if field_name in npc and not isinstance(npc[field_name], Mapping):
+                raise RuleError(
+                    f"state.npcs.{npc_id}.{field_name} must be an object"
+                )
+        if "memories" in npc:
+            memories = npc["memories"]
+            if not isinstance(memories, list) or not all(
+                isinstance(memory, Mapping) for memory in memories
+            ):
+                raise RuleError(
+                    f"state.npcs.{npc_id}.memories must be a list of objects"
+                )
+
     for item_id, quantity in state.inventory.items():
         if not isinstance(item_id, str) or not item_id:
             raise RuleError("state.inventory item IDs must be non-empty strings")
