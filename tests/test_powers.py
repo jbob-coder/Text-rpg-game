@@ -1507,5 +1507,58 @@ class PowerRuntimeTests(unittest.TestCase):
         )
 
 
+    def test_falsey_invalid_discovery_definitions_never_become_free_unlocks(self):
+        # Only None is shorthand for an omitted definition. Invalid falsey
+        # JSON-like roots must not become an empty requirements object.
+        for bad_definition in ([], False, 0, ""):
+            with self.subTest(bad_definition=repr(bad_definition)):
+                state = GameState(seed="s", scene_id="A")
+                discover_ability(state, "ABILITY_TRACE")
+                before = copy.deepcopy(state.snapshot())
+
+                with self.assertRaises(RuleError):
+                    technique_discovery_status(
+                        state, "ABILITY_TRACE", "TECHNIQUE_BAD", bad_definition
+                    )
+                with self.assertRaises(RuleError):
+                    discover_technique(
+                        state, "ABILITY_TRACE", "TECHNIQUE_BAD", bad_definition
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_falsey_invalid_ability_view_definition_is_rejected(self):
+        for bad_definition in ([], False, 0, ""):
+            with self.subTest(bad_definition=repr(bad_definition)):
+                state = self.state()
+                before = copy.deepcopy(state.snapshot())
+                with self.assertRaises(RuleError):
+                    ability_player_view(
+                        state, "ABILITY_FLUX", bad_definition
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_corrupt_technique_owner_is_rejected_before_practice_cost(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["techniques"] = []
+        before = copy.deepcopy(state.snapshot())
+
+        with self.assertRaises(RuleError):
+            practice_technique(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", minutes=60
+            )
+        self.assertEqual(state.snapshot(), before)
+
+    def test_corrupt_ability_owner_is_rejected_before_mastery(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"] = ["invalid", "owner"]
+        before = copy.deepcopy(state.snapshot())
+
+        with self.assertRaises(RuleError):
+            gain_technique_mastery(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", 10
+            )
+        self.assertEqual(state.snapshot(), before)
+
+
 if __name__ == "__main__":
     unittest.main()
