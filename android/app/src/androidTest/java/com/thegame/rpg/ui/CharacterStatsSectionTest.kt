@@ -80,7 +80,7 @@ class CharacterStatsSectionTest {
     }
 
     @Test
-    fun storyPhoneShowsSceneFirstPixelHeaderAndEquippedAvatar() {
+    fun storyPhoneShowsNarrativeWithoutArt() {
         composeRule.setContent {
             PixelTheme {
                 Box(Modifier.size(320.dp, 640.dp).testTag("qa-phone")) {
@@ -94,22 +94,21 @@ class CharacterStatsSectionTest {
             }
         }
 
-        composeRule.onNodeWithTag("story-pixel-header").assertIsDisplayed()
-        composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
-        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        composeRule.onNodeWithTag("narrative-scroll").assertIsDisplayed()
+        composeRule.onNodeWithTag("scene-title").assertIsDisplayed()
         composeRule.onNodeWithTag("story-resource-hud").assertIsDisplayed()
-        composeRule.onNodeWithTag("story-resource-bar-health").assertIsDisplayed()
-        composeRule.onNodeWithTag("story-resource-fill-health").assertIsDisplayed()
-        composeRule.onNodeWithTag("story-resource-value-health").assertIsDisplayed()
-        composeRule.onNodeWithText("100/144").assertIsDisplayed()
-        composeRule.onNodeWithTag("story-resource-bar-stamina").assertIsDisplayed()
-        composeRule.onNodeWithTag("story-resource-bar-focus").assertIsDisplayed()
-        composeRule.onNodeWithTag("story-resource-bar-resolve").assertIsDisplayed()
+        listOf("health", "stamina", "focus", "resolve").forEach { resourceId ->
+            composeRule.onNodeWithTag("story-resource-value-$resourceId").assertIsDisplayed()
+        }
+        composeRule.onNodeWithText("Health 100 / 144").assertIsDisplayed()
+        composeRule.onAllNodesWithTag("story-pixel-header").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("scene-illustration").assertCountEquals(0)
+        composeRule.onAllNodesWithTag("player-avatar").assertCountEquals(0)
         saveScreenshot("story-scene-first-320dp")
     }
 
     @Test
-    fun openingDepotStoryCapturesTamsinAndCourierPixelArt() {
+    fun openingDepotStoryCapturesWrittenScene() {
         val openingSnapshot = snapshot.copy(
             sceneId = "OPENING_DEPOT_BLACKOUT",
             title = "The Last Light in Platform Nine",
@@ -130,14 +129,14 @@ class CharacterStatsSectionTest {
             }
         }
 
-        composeRule.onNodeWithTag("story-pixel-header").assertIsDisplayed()
-        composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
-        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        composeRule.onNodeWithTag("scene-title").assertIsDisplayed()
+        composeRule.onNodeWithText(openingSnapshot.body).assertIsDisplayed()
+        composeRule.onAllNodesWithTag("scene-illustration").assertCountEquals(0)
         saveScreenshot("story-opening-actors-320dp")
     }
 
     @Test
-    fun relayWorkbenchStoryHasPhoneSizedArtEvidence() {
+    fun relayWorkbenchStoryHasPhoneSizedTextEvidence() {
         val relaySnapshot = snapshot.copy(
             sceneId = "OPENING_RELAY_CASING",
             title = "A Case That Should Be Empty",
@@ -159,14 +158,14 @@ class CharacterStatsSectionTest {
             }
         }
 
-        composeRule.onNodeWithTag("story-pixel-header").assertIsDisplayed()
-        composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
-        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        composeRule.onNodeWithTag("scene-title").assertIsDisplayed()
+        composeRule.onNodeWithText(relaySnapshot.body).assertIsDisplayed()
+        composeRule.onAllNodesWithTag("scene-illustration").assertCountEquals(0)
         saveScreenshot("relay-workbench-320dp")
     }
 
     @Test
-    fun mapPhoneRendersAuthoredDistrictArtWithProjectedNodes() {
+    fun mapPhoneRendersAuthoredRouteGraphWithProjectedNodes() {
         val mapSnapshot = snapshot.copy(
             worldMap = GameWorldMap(
                 title = "Gate Twelve District",
@@ -202,7 +201,7 @@ class CharacterStatsSectionTest {
     }
 
     @Test
-    fun mapServiceTunnelUsesExistingMaintenanceCorridorPixelArt() {
+    fun mapServiceTunnelUsesTextArrivalInformation() {
         val mapSnapshot = snapshot.copy(
             worldMap = GameWorldMap(
                 title = "Gate Twelve District",
@@ -228,12 +227,14 @@ class CharacterStatsSectionTest {
         }
 
         composeRule.onNodeWithTag("map-node-SERVICE_TUNNEL").performScrollTo().performClick()
-        composeRule.onNodeWithTag("map-arrival-preview-SERVICE_TUNNEL").performScrollTo().assertIsDisplayed()
+        composeRule.onNodeWithText("Maintenance traversal below the evacuation route.")
+            .performScrollTo().assertIsDisplayed()
+        composeRule.onAllNodesWithTag("map-arrival-preview-SERVICE_TUNNEL").assertCountEquals(0)
         saveScreenshot("map-service-tunnel-preview-320dp")
     }
 
     @Test
-    fun inventoryPhoneUsesPixelLoadoutStripBagGridAndItemDetail() {
+    fun inventoryPhoneUsesTextLoadoutBagGridAndItemDetail() {
         val bagSnapshot = snapshot.copy(
             inventory = snapshot.inventory.copy(
                 items = listOf(
@@ -268,7 +269,7 @@ class CharacterStatsSectionTest {
     }
 
     @Test
-    fun allTwelveSlotsAndAvatarFitPhoneWidthAndSelectedGearShowsItsEngineBonus() {
+    fun allTwelveTextSlotsFitPhoneWidthAndSelectedGearShowsEngineBonus() {
         var unequipped: String? = null
         composeRule.setContent {
             PixelTheme {
@@ -278,13 +279,14 @@ class CharacterStatsSectionTest {
             }
         }
         saveScreenshot("character-320dp")
-        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
+        composeRule.onAllNodesWithTag("player-avatar").assertCountEquals(0)
         val viewport = composeRule.onNodeWithTag("qa-phone").fetchSemanticsNode().boundsInRoot
         slotIds.forEach { slot ->
             val node = composeRule.onNodeWithTag("character-slot-$slot").performScrollTo().assertIsDisplayed().fetchSemanticsNode()
             assertTrue(node.boundsInRoot.left >= viewport.left - 1)
             assertTrue(node.boundsInRoot.right <= viewport.right + 1)
         }
+        composeRule.onNodeWithText("Chest: Depot utility jacket").assertIsDisplayed()
         composeRule.onNodeWithTag("character-slot-body").performScrollTo().performClick()
         composeRule.onNodeWithTag("character-equipment-detail").assertIsDisplayed()
         composeRule.onNodeWithText("Depot utility jacket").assertIsDisplayed()

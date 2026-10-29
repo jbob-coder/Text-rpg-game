@@ -46,12 +46,11 @@ class ActivityBootSmokeTest {
     fun realActivityBootsAndAppliesFirstPythonChoice() {
         composeRule.waitUntil(timeoutMillis = 60_000) {
             composeRule.onAllNodes(
-                androidx.compose.ui.test.hasTestTag("player-avatar")
+                androidx.compose.ui.test.hasTestTag("scene-title")
             ).fetchSemanticsNodes().isNotEmpty()
         }
 
-        composeRule.onNodeWithTag("player-avatar").assertIsDisplayed()
-        composeRule.onNodeWithTag("scene-illustration").assertIsDisplayed()
+        composeRule.onNodeWithTag("scene-title").assertIsDisplayed()
         scrollToChoiceAndClick("TAKE_DEAD_RELAY")
 
         waitForText("A Case That Should Be Empty", timeoutMillis = 30_000)
@@ -98,7 +97,7 @@ class ActivityBootSmokeTest {
     @Test
     fun realActivityCharacterEquipmentAndStatsFollowAuthoritativeEngine() {
         composeRule.waitUntil(timeoutMillis = 60_000) {
-            composeRule.onAllNodes(androidx.compose.ui.test.hasTestTag("player-avatar"))
+            composeRule.onAllNodes(androidx.compose.ui.test.hasTestTag("scene-title"))
                 .fetchSemanticsNodes().isNotEmpty()
         }
         composeRule.onNodeWithTag("nav-character").performScrollTo().performClick()
@@ -128,7 +127,7 @@ class ActivityBootSmokeTest {
     fun realActivityDeveloperDistrictCheatAndMapTravelOpenNarrativeScene() {
         composeRule.waitUntil(timeoutMillis = 60_000) {
             composeRule.onAllNodes(
-                androidx.compose.ui.test.hasTestTag("player-avatar")
+                androidx.compose.ui.test.hasTestTag("scene-title")
             ).fetchSemanticsNodes().isNotEmpty()
         }
 

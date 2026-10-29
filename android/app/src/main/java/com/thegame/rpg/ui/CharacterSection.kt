@@ -50,64 +50,27 @@ internal fun CharacterSection(
     var detailOpen by rememberSaveable { mutableStateOf(false) }
     val slots = snapshot.inventory.equipment
     val selected = slots.firstOrNull { it.slot == selectedId }
-    val midpoint = (slots.size + 1) / 2
 
     BoxWithConstraints(Modifier.fillMaxSize()) {
-        val railWidth = if (maxWidth < 380.dp) 56.dp else 72.dp
-        val surroundRig = maxWidth >= 300.dp && LocalDensity.current.fontScale <= 1.4f
+        val columns = if (maxWidth >= 300.dp && LocalDensity.current.fontScale <= 1.4f) 2 else 1
         Column(
             Modifier.fillMaxSize().verticalScroll(rememberScrollState()).testTag("character-scroll"),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             PlayerStatusSummary(snapshot, chrome = PixelPanelChrome.CHARACTER)
-            if (surroundRig) {
-                Row(Modifier.fillMaxWidth().testTag("character-loadout-board"), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Column(Modifier.width(railWidth), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        slots.take(midpoint).forEach { slot ->
+            Text("EQUIPMENT", color = PixelColors.Gold,
+                style = MaterialTheme.typography.titleLarge)
+            slots.chunked(columns).forEach { pair ->
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    pair.forEach { slot ->
+                        Box(Modifier.weight(1f)) {
                             CharacterSlotCard(slot, selectedId == slot.slot) {
                                 selectedId = slot.slot
                                 detailOpen = true
                             }
                         }
                     }
-                    PlayerAvatarPanel(
-                        identity = snapshot.identity,
-                        equipment = slots,
-                        conditions = snapshot.conditions,
-                        modifier = Modifier.weight(1f),
-                        showSummary = false,
-                        panelChrome = PixelPanelChrome.CHARACTER,
-                    )
-                    Column(Modifier.width(railWidth), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        slots.drop(midpoint).forEach { slot ->
-                            CharacterSlotCard(slot, selectedId == slot.slot) {
-                                selectedId = slot.slot
-                                detailOpen = true
-                            }
-                        }
-                    }
-                }
-            } else {
-                PlayerAvatarPanel(
-                    snapshot.identity,
-                    slots,
-                    snapshot.conditions,
-                    Modifier.fillMaxWidth(),
-                    showSummary = false,
-                    panelChrome = PixelPanelChrome.CHARACTER,
-                )
-                slots.chunked(2).forEach { pair ->
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        pair.forEach { slot ->
-                            Box(Modifier.weight(1f)) {
-                                CharacterSlotCard(slot, selectedId == slot.slot) {
-                                    selectedId = slot.slot
-                                    detailOpen = true
-                                }
-                            }
-                        }
-                        if (pair.size == 1) Spacer(Modifier.weight(1f))
-                    }
+                    if (pair.size < columns) Spacer(Modifier.weight(1f))
                 }
             }
             StatusResourceGrid(snapshot, chrome = PixelPanelChrome.CHARACTER)
@@ -162,7 +125,6 @@ internal fun CharacterSection(
                             label = "UNEQUIP",
                             enabled = !busy,
                             tag = "character-unequip",
-                            chrome = PixelUiChromeCatalog.buttonSecondary,
                         ) { onUnequip(selected.slot) }
                     } else {
                         Text("Empty slot", color = PixelColors.Muted, style = MaterialTheme.typography.bodyMedium)
@@ -172,7 +134,6 @@ internal fun CharacterSection(
                         Text("FROM YOUR BAG", color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
                         candidates.forEach { item ->
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                PixelItemIcon(item.id, item.quality, Modifier.size(40.dp))
                                 Spacer(Modifier.width(8.dp))
                                 Text(item.name, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
                             }
@@ -185,7 +146,6 @@ internal fun CharacterSection(
                         label = "CLOSE",
                         enabled = true,
                         tag = "character-detail-close",
-                        chrome = PixelUiChromeCatalog.buttonSecondary,
                     ) { detailOpen = false }
                 }
             }
@@ -208,12 +168,11 @@ private fun CharacterSlotCard(slot: GameEquipmentSlot, active: Boolean, onSelect
             .testTag("character-slot-${slot.slot}"),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        if (slot.equipped && PixelAssetCatalog.itemIcon(slot.itemId ?: "") != null) {
-            PixelItemIcon(slot.itemId ?: "", slot.quality, Modifier.size(28.dp))
-        } else {
-            PixelUiIcon(PixelEquipmentSlotCatalog.slot(slot.slot), Modifier.size(24.dp), tint = PixelColors.Muted)
-        }
-        Text(label, color = PixelColors.Paper, style = MaterialTheme.typography.labelLarge)
+        Text(
+            text = "$label: " + if (slot.equipped) (slot.name ?: "Equipped item") else "Empty",
+            color = PixelColors.Paper,
+            style = MaterialTheme.typography.labelLarge,
+        )
     }
 }
 
@@ -222,16 +181,10 @@ private fun CharacterActionButton(
     label: String,
     enabled: Boolean,
     tag: String,
-    chrome: PixelChromeAsset = PixelUiChromeCatalog.buttonPrimary,
     onClick: () -> Unit,
 ) {
-    val style = if (enabled) {
-        Modifier.pixelChrome(chrome)
-    } else {
-        Modifier
-            .background(PixelColors.PanelAlt)
-            .border(2.dp, PixelColors.Disabled)
-    }
+    val style = Modifier.background(PixelColors.PanelAlt)
+        .border(1.dp, if (enabled) PixelColors.Muted else PixelColors.Disabled)
     Box(
         Modifier.fillMaxWidth()
             .then(style)

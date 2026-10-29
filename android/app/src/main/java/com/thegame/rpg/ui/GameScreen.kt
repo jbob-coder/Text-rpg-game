@@ -331,79 +331,53 @@ private fun StorySection(
     onNarrate: (String) -> Boolean,
     textDelayMs: Int,
 ) {
-    BoxWithConstraints(Modifier.fillMaxSize()) {
-        if (maxWidth >= 720.dp) {
-            Row(
-                modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                Column(Modifier.weight(0.36f).fillMaxHeight()) {
-                    PlayerAvatarPanel(
-                        identity = snapshot.identity,
-                        equipment = snapshot.inventory.equipment,
-                        conditions = snapshot.conditions,
-                    )
-                    Spacer(Modifier.height(8.dp))
-                    ResourcePanel(snapshot)
-                }
-                NarrativePanel(
-                    snapshot = snapshot,
-                    busy = busy,
-                    onChoice = onChoice,
-                    onNarrate = onNarrate,
-                    textDelayMs = textDelayMs,
-                    modifier = Modifier.weight(0.64f).fillMaxHeight(),
-                )
-            }
-        } else {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(210.dp)
-                        .testTag("story-pixel-header"),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        if (snapshot.resources.isNotEmpty()) {
+            PixelPanel(modifier = Modifier.fillMaxWidth()) {
+                Column(
+                    modifier = Modifier.testTag("story-resource-hud"),
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
-                    SceneIllustration(
-                        locationId = snapshot.location,
-                        sceneId = snapshot.sceneId,
-                        relayState = snapshot.visuals.relayState,
-                        roomActors = snapshot.room.actors,
-                        modifier = Modifier
-                            .weight(0.68f)
-                            .fillMaxHeight(),
-                    )
-                    PlayerAvatarPanel(
-                        identity = snapshot.identity,
-                        equipment = snapshot.inventory.equipment,
-                        conditions = snapshot.conditions,
-                        modifier = Modifier
-                            .weight(0.32f)
-                            .fillMaxHeight(),
-                        compact = true,
-                        showSummary = false,
-                    )
+                    snapshot.resources.chunked(2).forEach { pair ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            pair.forEach { resource ->
+                                Text(
+                                    text = "${resource.id.replaceFirstChar { it.uppercase() }} ${statValue(resource.current)} / ${statValue(resource.max)}",
+                                    modifier = Modifier.weight(1f).testTag("story-resource-value-${resource.id}"),
+                                    color = PixelColors.Paper,
+                                    style = MaterialTheme.typography.labelLarge,
+                                )
+                            }
+                            if (pair.size == 1) Spacer(Modifier.weight(1f))
+                        }
+                    }
                 }
-                StoryResourceHud(
-                    snapshot = snapshot,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                NarrativePanel(
-                    snapshot = snapshot,
-                    busy = busy,
-                    onChoice = onChoice,
-                    onNarrate = onNarrate,
-                    textDelayMs = textDelayMs,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    showSceneIllustration = false,
+            }
+        }
+        if (snapshot.room.actors.isNotEmpty()) {
+            PixelPanel(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = "PRESENT: " + snapshot.room.actors.joinToString(", ") { it.displayName },
+                    modifier = Modifier.testTag("room-actors-text"),
+                    color = PixelColors.Paper,
+                    style = MaterialTheme.typography.labelLarge,
                 )
             }
         }
+        NarrativePanel(
+            snapshot = snapshot,
+            busy = busy,
+            onChoice = onChoice,
+            onNarrate = onNarrate,
+            textDelayMs = textDelayMs,
+            modifier = Modifier.fillMaxWidth().weight(1f),
+        )
     }
 }
 
@@ -415,7 +389,6 @@ private fun NarrativePanel(
     onNarrate: (String) -> Boolean,
     textDelayMs: Int,
     modifier: Modifier,
-    showSceneIllustration: Boolean = true,
 ) {
     var visibleChars by remember(snapshot.sceneId, snapshot.body, textDelayMs) {
         mutableStateOf(if (textDelayMs <= 0) snapshot.body.length else 0)
@@ -453,21 +426,7 @@ private fun NarrativePanel(
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.testTag("scene-title"),
                 )
-                if (showSceneIllustration) {
-                    Spacer(Modifier.height(8.dp))
-                    SceneIllustration(
-                        locationId = snapshot.location,
-                        sceneId = snapshot.sceneId,
-                        relayState = snapshot.visuals.relayState,
-                        roomActors = snapshot.room.actors,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(150.dp),
-                    )
-                    Spacer(Modifier.height(12.dp))
-                } else {
-                    Spacer(Modifier.height(8.dp))
-                }
+                Spacer(Modifier.height(8.dp))
                 Text(
                     text = visibleBody,
                     color = PixelColors.Paper,
@@ -475,12 +434,7 @@ private fun NarrativePanel(
                     modifier = Modifier.clickable(role = Role.Button) { onNarrate(snapshot.body) },
                 )
                 Spacer(Modifier.height(10.dp))
-                PixelIconTextButton(
-                    label = "READ ALOUD",
-                    icon = PixelUiUtilityCatalog.narrationIcon,
-                ) {
-                    onNarrate(snapshot.body)
-                }
+                PixelTextButton("READ ALOUD") { onNarrate(snapshot.body) }
                 Spacer(Modifier.height(18.dp))
                 Text("DECIDE", color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
                 Spacer(Modifier.height(8.dp))
@@ -491,120 +445,14 @@ private fun NarrativePanel(
             }
 
             if (narrativeScroll.value < narrativeScroll.maxValue) {
-                PixelUiIcon(
-                    sprite = PixelUiUtilityCatalog.scrollMarker,
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .size(18.dp)
-                        .background(PixelColors.PanelAlt),
-                    testTag = "narrative-scroll-marker",
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun StoryResourceHud(
-    snapshot: GameSnapshot,
-    modifier: Modifier = Modifier,
-) {
-    if (snapshot.resources.isEmpty()) return
-
-    Column(
-        modifier = modifier
-            .pixelChrome(PixelUiChromeCatalog.statsFrame)
-            .padding(horizontal = 8.dp, vertical = 6.dp)
-            .testTag("story-resource-hud"),
-        verticalArrangement = Arrangement.spacedBy(5.dp),
-    ) {
-        snapshot.resources.forEach { resource ->
-            val ratio = if (resource.max > 0.0) {
-                (resource.current / resource.max).coerceIn(0.0, 1.0)
-            } else {
-                0.0
-            }
-            val resourceColor = when (resource.id.lowercase()) {
-                "health" -> PixelColors.Health
-                "stamina" -> PixelColors.Stamina
-                "focus" -> PixelColors.Focus
-                "resolve" -> PixelColors.Resolve
-                else -> PixelColors.Paper
-            }
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                PixelUiIcon(
-                    sprite = PixelUiIconCatalog.resource(resource.id),
-                    modifier = Modifier.size(14.dp),
-                    tint = resourceColor,
-                    testTag = "story-resource-icon-${resource.id.lowercase()}",
-                )
-                Spacer(Modifier.width(5.dp))
                 Text(
-                    resource.id.uppercase(),
-                    color = PixelColors.Paper,
-                    style = MaterialTheme.typography.labelLarge,
-                    modifier = Modifier.widthIn(min = 58.dp),
-                )
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(10.dp)
-                        .background(PixelColors.Ink)
-                        .border(1.dp, PixelColors.Muted)
-                        .testTag("story-resource-bar-${resource.id.lowercase()}"),
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .fillMaxWidth(ratio.toFloat())
-                            .background(resourceColor)
-                            .testTag("story-resource-fill-${resource.id.lowercase()}"),
-                    )
-                }
-                Spacer(Modifier.width(6.dp))
-                Text(
-                    "${statValue(resource.current)}/${statValue(resource.max)}",
-                    color = resourceColor,
-                    style = MaterialTheme.typography.labelLarge,
-                    modifier = Modifier.testTag("story-resource-value-${resource.id.lowercase()}"),
+                    text = "↓",
+                    color = PixelColors.Muted,
+                    modifier = Modifier.align(Alignment.BottomCenter)
+                        .background(PixelColors.PanelAlt)
+                        .testTag("narrative-scroll-marker"),
                 )
             }
-        }
-    }
-}
-
-@Composable
-private fun ResourcePanel(snapshot: GameSnapshot) {
-    PixelPanel(title = "Resources") {
-        snapshot.resources.forEach { resource ->
-            val percent = if (resource.max > 0.0) {
-                ((resource.current / resource.max) * 100.0).coerceIn(0.0, 100.0).roundToInt()
-            } else 0
-            val resourceColor = when {
-                percent <= 25 -> PixelColors.Danger
-                percent <= 50 -> PixelColors.Gold
-                else -> PixelColors.Paper
-            }
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                PixelUiIcon(
-                    sprite = PixelUiIconCatalog.resource(resource.id),
-                    modifier = Modifier.size(16.dp),
-                    tint = resourceColor,
-                    testTag = "resource-icon-${resource.id.lowercase()}",
-                )
-                Spacer(Modifier.width(6.dp))
-                Text(
-                    "${resource.id.uppercase().padEnd(8)} ${resource.current.roundToInt()} / ${resource.max.roundToInt()} [$percent%]",
-                    color = resourceColor,
-                    style = MaterialTheme.typography.labelLarge,
-                )
-            }
-            Spacer(Modifier.height(4.dp))
         }
     }
 }
@@ -768,13 +616,6 @@ internal fun InventorySection(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                PixelUiIcon(
-                    sprite = PixelUiIconCatalog.navigation(GameSection.INVENTORY.label),
-                    modifier = Modifier.size(20.dp),
-                    tint = PixelColors.Gold,
-                    testTag = "inventory-loadout-icon",
-                )
-                Spacer(Modifier.width(6.dp))
                 Text(
                     "EQUIPPED ${slots.count { it.equipped }} / ${slots.size}",
                     color = PixelColors.Paper,
@@ -812,20 +653,6 @@ internal fun InventorySection(
                         .testTag("inventory-slot-detail"),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    if (selectedSlot.equipped && selectedSlot.itemId != null) {
-                        PixelItemIcon(
-                            itemId = selectedSlot.itemId,
-                            quality = selectedSlot.quality,
-                            modifier = Modifier.size(44.dp),
-                        )
-                    } else {
-                        PixelUiIcon(
-                            sprite = PixelEquipmentSlotCatalog.slot(selectedSlot.slot),
-                            modifier = Modifier.size(40.dp),
-                            tint = PixelColors.Muted,
-                        )
-                    }
-                    Spacer(Modifier.width(8.dp))
                     Column(Modifier.weight(1f)) {
                         Text(
                             slotDisplayName(selectedSlot.slot),
@@ -888,12 +715,6 @@ internal fun InventorySection(
                             .testTag("inventory-item-detail"),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        PixelItemIcon(
-                            itemId = selectedItem.id,
-                            quality = selectedItem.quality,
-                            modifier = Modifier.size(54.dp),
-                        )
-                        Spacer(Modifier.width(8.dp))
                         Column(Modifier.weight(1f)) {
                             Text(
                                 selectedItem.name,
@@ -985,19 +806,6 @@ private fun InventorySlotTile(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        if (slot.equipped && slot.itemId != null && PixelAssetCatalog.itemIcon(slot.itemId) != null) {
-            PixelItemIcon(
-                itemId = slot.itemId,
-                quality = slot.quality,
-                modifier = Modifier.size(34.dp),
-            )
-        } else {
-            PixelUiIcon(
-                sprite = PixelEquipmentSlotCatalog.slot(slot.slot),
-                modifier = Modifier.size(30.dp),
-                tint = PixelColors.Muted,
-            )
-        }
         Text(
             slotDisplayName(slot.slot),
             color = if (active) PixelColors.Gold else PixelColors.Paper,
@@ -1023,12 +831,6 @@ private fun InventoryItemTile(
             .testTag("inventory-item-${item.id}"),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        PixelItemIcon(
-            itemId = item.id,
-            quality = item.quality,
-            modifier = Modifier.size(42.dp),
-        )
-        Spacer(Modifier.width(6.dp))
         Column(Modifier.weight(1f)) {
             Text(
                 item.name,
@@ -1065,18 +867,6 @@ private fun QuestSection(snapshot: GameSnapshot) {
                     PixelPanel(title = category, chrome = PixelPanelChrome.QUEST) {
                         quests.forEach { quest ->
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                PixelUiIcon(
-                                    sprite = PixelUiIconCatalog.quest(category),
-                                    modifier = Modifier.size(16.dp),
-                                    tint = when (category) {
-                                        "main" -> PixelColors.Gold
-                                        "side" -> PixelColors.Cyan
-                                        "optional" -> PixelColors.Paper
-                                        else -> PixelColors.Muted
-                                    },
-                                    testTag = "quest-icon-$category",
-                                )
-                                Spacer(Modifier.width(6.dp))
                                 Text(quest.title, color = PixelColors.Gold, style = MaterialTheme.typography.titleLarge)
                             }
                             if (quest.description.isNotBlank()) {
@@ -1135,34 +925,30 @@ internal fun MapSection(
     ) {
         PixelPanel(title = map.title, chrome = PixelPanelChrome.MAP) {
             if (map.nodes.isEmpty()) {
-                Text(
-                    "No mapped location has been discovered yet.",
-                    color = PixelColors.Muted,
-                    style = MaterialTheme.typography.bodyLarge,
-                )
+                Text("No mapped location has been discovered yet.",
+                    color = PixelColors.Muted, style = MaterialTheme.typography.bodyLarge)
             } else {
+                // Coordinate percentages and graph edges come from the authoritative
+                // map projection. No illustrated backgrounds, sprites or icons.
                 Canvas(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(220.dp)
+                    modifier = Modifier.fillMaxWidth().height(220.dp)
                         .testTag("world-map-canvas")
                         .background(PixelColors.Deep)
-                        .border(2.dp, PixelColors.Muted)
-                        .pointerInput(map.nodes, map.title) {
+                        .border(1.dp, PixelColors.Muted)
+                        .pointerInput(map.nodes) {
                             detectTapGestures { tap ->
-                                val viewport = PixelMapArtCatalog.viewport(
-                                    mapTitle = map.title,
-                                    canvasWidth = size.width.toFloat(),
-                                    canvasHeight = size.height.toFloat(),
+                                fun point(x: Double, y: Double): Offset = Offset(
+                                    (x.coerceIn(0.0, 100.0) / 100.0 * size.width).toFloat(),
+                                    (y.coerceIn(0.0, 100.0) / 100.0 * size.height).toFloat(),
                                 )
                                 val nearest = map.nodes.minByOrNull { node ->
-                                    val p = viewport.point(node.x, node.y)
+                                    val p = point(node.x, node.y)
                                     val dx = tap.x - p.x
                                     val dy = tap.y - p.y
                                     dx * dx + dy * dy
                                 }
                                 if (nearest != null) {
-                                    val p = viewport.point(nearest.x, nearest.y)
+                                    val p = point(nearest.x, nearest.y)
                                     val dx = tap.x - p.x
                                     val dy = tap.y - p.y
                                     val threshold = 30.dp.toPx()
@@ -1173,65 +959,35 @@ internal fun MapSection(
                             }
                         },
                 ) {
-                    val viewport = PixelMapArtCatalog.viewport(
-                        mapTitle = map.title,
-                        canvasWidth = size.width,
-                        canvasHeight = size.height,
-                    )
-                    PixelMapArtCatalog.base(map.title)?.let { base ->
-                        drawPixelSprite(
-                            sprite = base,
-                            pixelSize = viewport.pixelSize,
-                            originX = viewport.originX,
-                            originY = viewport.originY,
-                        )
-                    }
-
                     fun point(id: String): Offset? {
                         val node = map.nodes.firstOrNull { it.id == id } ?: return null
-                        return viewport.point(node.x, node.y)
+                        return Offset(
+                            (node.x.coerceIn(0.0, 100.0) / 100.0 * size.width).toFloat(),
+                            (node.y.coerceIn(0.0, 100.0) / 100.0 * size.height).toFloat(),
+                        )
                     }
                     map.edges.forEach { edge ->
                         val from = point(edge.from)
                         val to = point(edge.to)
-                        if (from != null && to != null) drawLine(PixelColors.Muted, from, to, strokeWidth = 5f)
-                    }
-                    val markerPixel = 2f
-                    val markerExtent = 16f * markerPixel
-                    map.nodes.forEach { node ->
-                        val p = point(node.id) ?: return@forEach
-                        val ox = p.x - markerExtent / 2f
-                        val oy = p.y - markerExtent / 2f
-
-                        drawPixelSprite(
-                            sprite = PixelMapMarkerCatalog.discoveredMarker,
-                            pixelSize = markerPixel,
-                            originX = ox,
-                            originY = oy,
-                        )
-                        drawPixelSprite(
-                            sprite = PixelMapMarkerCatalog.stateOverlay(
-                                current = node.current,
-                                reachable = node.reachable,
-                            ),
-                            pixelSize = markerPixel,
-                            originX = ox,
-                            originY = oy,
-                        )
-                        if (node.current) {
-                            drawPixelSprite(
-                                sprite = PixelMapMarkerCatalog.playerMarker,
-                                pixelSize = markerPixel,
-                                originX = ox,
-                                originY = oy,
-                            )
+                        if (from != null && to != null) {
+                            drawLine(PixelColors.Muted, from, to, strokeWidth = 2f)
                         }
+                    }
+                    map.nodes.forEach { node ->
+                        val center = point(node.id) ?: return@forEach
+                        val color = when {
+                            node.current -> PixelColors.Gold
+                            node.reachable -> PixelColors.Cyan
+                            else -> PixelColors.Muted
+                        }
+                        drawCircle(color = color, radius = if (node.current) 8.dp.toPx() else 6.dp.toPx(),
+                            center = center)
                     }
                 }
 
                 Spacer(Modifier.height(10.dp))
-                Text("DISCOVERED LOCATIONS", color = PixelColors.Gold, style = MaterialTheme.typography.labelLarge)
-                Spacer(Modifier.height(6.dp))
+                Text("DISCOVERED LOCATIONS", color = PixelColors.Gold,
+                    style = MaterialTheme.typography.labelLarge)
                 map.nodes.forEach { node ->
                     PixelTextButton(
                         label = if (node.current) "> ${node.title} [YOU]" else node.title,
@@ -1240,44 +996,24 @@ internal fun MapSection(
                     )
                     Spacer(Modifier.height(6.dp))
                 }
-
                 if (selected != null) {
-                    Spacer(Modifier.height(8.dp))
-                    Text(selected.title, color = PixelColors.Cyan, style = MaterialTheme.typography.titleLarge)
+                    Text(selected.title, color = PixelColors.Cyan,
+                        style = MaterialTheme.typography.titleLarge)
                     if (selected.description.isNotBlank()) {
-                        Text(selected.description, color = PixelColors.Paper, style = MaterialTheme.typography.bodyMedium)
-                    }
-                    if (PixelEnvironmentModuleCatalog.arrivalPreview(selected.id) != null) {
-                        Spacer(Modifier.height(8.dp))
-                        Text(
-                            "ARRIVAL VIEW",
-                            color = PixelColors.Gold,
-                            style = MaterialTheme.typography.labelLarge,
-                        )
-                        Spacer(Modifier.height(4.dp))
-                        PixelEnvironmentArrivalPreview(
-                            locationId = selected.id,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(96.dp),
-                        )
+                        Text(selected.description, color = PixelColors.Paper,
+                            style = MaterialTheme.typography.bodyMedium)
                     }
                     if (!selected.current) {
-                        Spacer(Modifier.height(8.dp))
                         if (selected.reachable) {
                             PixelTextButton(
                                 label = if (busy) "TRAVELING..." else "TRAVEL HERE",
-                                onClick = {
-                                    if (!busy) onTravel(selected.id)
-                                },
+                                onClick = { if (!busy) onTravel(selected.id) },
                                 modifier = Modifier.testTag("map-travel"),
                             )
                         } else {
-                            Text(
-                                text = "NO DIRECT ROUTE FROM CURRENT LOCATION",
+                            Text("NO DIRECT ROUTE FROM CURRENT LOCATION",
                                 color = PixelColors.Disabled,
-                                style = MaterialTheme.typography.labelLarge,
-                            )
+                                style = MaterialTheme.typography.labelLarge)
                         }
                     }
                 }
@@ -1329,55 +1065,14 @@ private fun BottomPixelNav(selected: GameSection, onSelect: (GameSection) -> Uni
 @Composable
 private fun PixelNavButton(label: String, active: Boolean, onClick: () -> Unit) {
     Box(
-        modifier = Modifier
-            .testTag("nav-${label.lowercase()}")
-            .pixelChrome(
-                if (active) PixelUiChromeCatalog.tabActive
-                else PixelUiChromeCatalog.tabInactive,
-            )
+        modifier = Modifier.testTag("nav-${label.lowercase()}")
+            .background(if (active) PixelColors.PanelAlt else PixelColors.Deep)
+            .border(1.dp, if (active) PixelColors.Gold else PixelColors.Muted)
             .clickable(role = Role.Tab, onClick = onClick)
-            .padding(horizontal = 6.dp, vertical = 5.dp),
+            .padding(horizontal = 10.dp, vertical = 10.dp),
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            PixelUiIcon(
-                sprite = PixelUiIconCatalog.navigation(label),
-                modifier = Modifier.size(20.dp),
-                tint = if (active) PixelColors.Ink else PixelColors.Paper,
-                testTag = "nav-icon-${label.lowercase()}",
-            )
-            Spacer(Modifier.height(2.dp))
-            Text(
-                text = label,
-                color = if (active) PixelColors.Ink else PixelColors.Paper,
-                style = MaterialTheme.typography.labelLarge,
-            )
-        }
-    }
-}
-
-@Composable
-private fun PixelIconTextButton(
-    label: String,
-    icon: PixelSprite,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit,
-) {
-    Box(
-        modifier = modifier
-            .pixelChrome(PixelUiChromeCatalog.buttonPrimary)
-            .testTag("button-with-icon-${icon.assetId.lowercase()}")
-            .clickable(role = Role.Button, onClick = onClick)
-            .padding(horizontal = 12.dp, vertical = 8.dp),
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            PixelUiIcon(
-                sprite = icon,
-                modifier = Modifier.size(20.dp),
-                testTag = "button-icon-${icon.assetId.lowercase()}",
-            )
-            Spacer(Modifier.width(8.dp))
-            Text(label, color = PixelColors.Paper, style = MaterialTheme.typography.labelLarge)
-        }
+        Text(label, color = if (active) PixelColors.Gold else PixelColors.Paper,
+            style = MaterialTheme.typography.labelLarge)
     }
 }
 
@@ -1399,7 +1094,8 @@ private fun PixelTextButton(
 ) {
     Box(
         modifier = modifier
-            .pixelChrome(PixelUiChromeCatalog.buttonPrimary)
+            .background(PixelColors.PanelAlt)
+            .border(1.dp, PixelColors.Muted)
             .clickable(role = Role.Button, onClick = onClick)
             .padding(horizontal = 12.dp, vertical = 8.dp),
     ) {
@@ -1416,13 +1112,6 @@ private fun EquipmentSlotValue(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        PixelUiIcon(
-            sprite = PixelEquipmentSlotCatalog.slot(slotId),
-            modifier = Modifier.size(24.dp),
-            tint = PixelColors.Paper,
-            testTag = "equipment-slot-icon-$slotId",
-        )
-        Spacer(Modifier.width(8.dp))
         Column(Modifier.weight(1f)) {
             Text(
                 slotDisplayName(slotId),

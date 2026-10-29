@@ -1,42 +1,45 @@
+"""Source-level protection for the text-first Android interface.
+
+The Python/Kotlin room projection boundary remains, but authored character art and
+scene illustrations must not be a prerequisite of viewing a narrative scene.
+"""
 from pathlib import Path
 import unittest
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SCENE_ILLUSTRATION = REPO_ROOT / "android/app/src/main/java/com/thegame/rpg/ui/SceneIllustration.kt"
-GAME_SCREEN = REPO_ROOT / "android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt"
+UI = REPO_ROOT / "android/app/src/main/java/com/thegame/rpg/ui/GameScreen.kt"
+CHARACTER = REPO_ROOT / "android/app/src/main/java/com/thegame/rpg/ui/CharacterSection.kt"
+BRIDGE = REPO_ROOT / "src/textrpg/android_bridge.py"
+KOTLIN = REPO_ROOT / "android/app/src/main/java/com/thegame/rpg/engine/GameEngine.kt"
+ROOM_CONTRACT = REPO_ROOT / "android/app/src/main/java/com/thegame/rpg/engine/RoomProjectionContract.kt"
 
 
-class D064AndroidSceneProjectionSourceTests(unittest.TestCase):
-    def test_scene_renderer_consumes_projected_room_actors_without_presence_heuristic(self):
-        source = SCENE_ILLUSTRATION.read_text(encoding="utf-8")
+class TextFirstAndroidPresentationSourceTests(unittest.TestCase):
+    def test_narrative_and_character_do_not_invoke_scene_or_avatar_art(self):
+        screen = UI.read_text(encoding="utf-8")
+        character = CHARACTER.read_text(encoding="utf-8")
+        for forbidden in ("SceneIllustration(", "PlayerAvatarPanel(", "drawPixelSprite("):
+            self.assertNotIn(forbidden, screen)
+        for forbidden in ("PlayerAvatarPanel(", "PixelItemIcon(", "PixelUiIcon("):
+            self.assertNotIn(forbidden, character)
+        self.assertIn("NarrativePanel(", screen)
+        self.assertIn("snapshot.choices.forEach", screen)
 
-        self.assertIn("roomActors: List<GameRoomActor>", source)
-        self.assertIn("PixelStoryActorCatalog.placements(roomActors)", source)
-        self.assertNotIn("PixelStoryActorCatalog.placements(\n                locationId = locationId", source)
+    def test_authored_room_projection_remains_on_the_engine_boundary(self):
+        bridge = BRIDGE.read_text(encoding="utf-8")
+        kotlin = KOTLIN.read_text(encoding="utf-8")
+        self.assertIn('"room"', bridge)
+        self.assertIn("data class GameRoomProjection(", kotlin)
+        self.assertIn("RoomProjectionContract", ROOM_CONTRACT.read_text(encoding="utf-8"))
 
-    def test_scene_renderer_preserves_existing_fallback_scene_ids(self):
-        source = SCENE_ILLUSTRATION.read_text(encoding="utf-8")
-        for location_id in (
-            "PLATFORM_NINE",
-            "RELAY_WORKBENCH",
-            "GATE_TWELVE",
-            "SERVICE_TUNNEL",
-            "EVAC_STAIR",
-            "TRACE_CHAMBER",
-            "DISTRICT_PLAZA",
-            "DISTRICT_ARCHIVE",
-            "WORKSHOP_ROW",
-        ):
-            self.assertIn(f'"{location_id}"', source)
-
-    def test_game_screen_wires_authoritative_room_actors_into_every_scene_illustration(self):
-        source = GAME_SCREEN.read_text(encoding="utf-8")
-        call_count = source.count("SceneIllustration(")
-        projected_actor_argument_count = source.count("roomActors = snapshot.room.actors")
-
-        self.assertEqual(2, call_count)
-        self.assertEqual(call_count, projected_actor_argument_count)
+    def test_map_remains_a_selectable_authoritative_route_graph(self):
+        screen = UI.read_text(encoding="utf-8")
+        self.assertIn("world-map-canvas", screen)
+        self.assertIn("map.nodes.forEach", screen)
+        self.assertIn("map.edges.forEach", screen)
+        self.assertIn("onTravel(selected.id)", screen)
+        self.assertNotIn("PixelMapArtCatalog", screen)
+        self.assertNotIn("PixelMapMarkerCatalog", screen)
 
 
 if __name__ == "__main__":
