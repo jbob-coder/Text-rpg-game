@@ -616,8 +616,11 @@ def update_goal_progress(
     goal = goals.get(goal_id)
     if not isinstance(goal, MutableMapping):
         raise RuleError(f"Unknown goal for {npc_id}: {goal_id}")
-    if goal.get("status") in {"completed", "failed"}:
+    status = goal.get("status")
+    if status in ("completed", "failed"):
         raise RuleError(f"Cannot progress closed goal: {goal_id}")
+    if status != "active":
+        raise RuleError(f"Cannot progress inactive goal: {goal_id} ({status!r})")
 
     before = _finite_number(
         goal.get("progress", 0),
