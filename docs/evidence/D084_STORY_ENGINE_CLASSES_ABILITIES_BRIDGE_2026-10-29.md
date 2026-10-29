@@ -136,3 +136,35 @@ Current catalog target families and proof opportunities:
 - Code remains limited to `src/textrpg/powers.py` and `tests/test_powers.py`; no new class schema, permanent grant, Android logic or save migration.
 - Volumes I/II Drive manuscripts, creator canon records, and Gate Twelve vertical slice remain unchanged.
 - Exact final PR HEAD CI for Python, Android unit/assemble and emulator smoke must be observed before merge readiness; physical device and canon promotion remain open.
+
+---
+
+## 9. Use-time technique gates and editorial non-duplication review — 2026-10-29
+
+### Engine finding — gameplay prerequisite bypass
+
+**CONFIRMED FROM SOURCE:** `validate_power_definitions` checked `requirements.techniques` references for unknown IDs/self-dependency, but `technique_use_status` only evaluated ability rank/mastery, knowledge/perks, attributes/skills/flags/items, the technique's *own* stage, cooldown and resources. It did **not** evaluate `requirements.techniques` of other techniques. Consequently, a player could use an authored technique that declared a prerequisite technique at `learned` without meeting that stage.
+
+**CHANGE:** `validate_technique_definition` now checks `requirements.techniques` is an object of stable technique IDs to supported, non-`unknown` stages. `technique_use_status` now checks each required technique is discovered and has attained the minimum stage; failure yields `technique:<id>:<stage>` in the status reasons. Corrupt prerequisite stage records raise `RuleError`. `use_technique` already consults the status before spending resources, so failed prerequisites remain atomic.
+
+**PRESERVED:** `discovery_requirements.techniques` still governs how a technique is *obtained*, not whether it is used. Mutual `requirements.techniques` references among **already discovered** techniques are legal; only discovery cycles are rejected. No class, ability, save-schema, Android interface or existing content-pack migration was introduced.
+
+**TESTS:** five cases cover: blocked use until the required technique is `learned`; absence of prerequisite leaves resources untouched; malformed use-time metadata is a validation error; mutual usage references work when both are discovered; and corrupt runtime prerequisite stages are rejected without mutations. The first CI run for the code HEAD `a19c3b2c19b6c52e2d56644bf4c6a6070ca5b902` [40965721911](https://github.com/jbob-coder/Text-rpg-game/actions/runs/40965721911) reported Python **514 tests, OK**. Android and emulator must be checked independently and later documentation commits must be verified at their final HEAD.
+
+### Story duplication audit — primary texts actually compared
+
+Authoritative editorial sources inspected in Google Drive on 2026-10-29:
+- [Volumen I v0.9.1, XII «El oficio de volver a vivir»](https://docs.google.com/document/d/1HEhArzECznhRgGGV7yeXTQdJRLHn15I-DsqdT59HQIg/edit): already develops unsafe transit, repair priority, repeated verification, supply, training, and the adapted DR-06 composed scene of a damaged object requiring inspection.
+- [Volumen II candidate v0.3.8, I «Lo que una vida puede saber»](https://docs.google.com/document/d/1pT_HlkZWa9bUaDangqsp99HxY37Lg1wgavUaqb9NF3Q/edit): already contains anonymous ESC-C15-A about an ability being misinterpreted as fate and ESC-C15-B about an allegedly rupture-damaged object whose cause remains unproved.
+- [New proposed Chapter II](../story/PROPOSED_VOLUME_II_CHAPTER_02_2026-10-29.md), [Chapter III](../story/PROPOSED_VOLUME_II_CHAPTER_03_2026-10-29.md), and [route A/C alternatives](../story/PROPOSED_VOLUME_II_ALTERNATE_ROUTES_PROTECT_REPAIR_2026-10-29.md): reuse a failed passage, rumors, proof/causation, bounded repairs and the distinction between gift and learned discipline.
+
+**EDITORIAL RISK (not a lore contradiction):** the new scenes are independently written but overlap significantly with the existing manuscripts in both situation and argumentative trajectory. Their presence as three GitHub files does not establish three necessary chapters, and they should **not** be appended uncritically to Volume II or mistaken for novel canon. This explicitly supersedes the assumption that continued expansion of the damaged-passage scenario is inherently narrative progress.
+
+**NEXT NARRATIVE DIRECTION (PROPOSAL ONLY):**
+1. Stop writing further damaged-structure or testimony-comparison chapters until the editorial owner decides whether Chapter II is worth retaining at all.
+2. Preserve the draft files as reversible experimental branches. Compare unique character conflict, change of situation, stakes, and causal consequence rather than word count. The primary Drive Volumes outrank new GitHub drafts for editorial continuity.
+3. If a follow-on story is approved, move away from repeated abstract uncertainty toward **observable cost and relationship change**: for example, differences between a person learning an ordinary field skill and controlling an assigned principal ability; credible conflict over time, access, fatigue, trust, responsibility and opportunity. Such events require actual characters, timeframe, place and provenance before canonical adoption.
+4. Keep Smith competence separate from core properties, professions separate from combat classes, a single randomly assigned principal ability per human, and all hidden celestial/tablet knowledge outside ordinary NPC awareness (H-03–H-06, H-20–H-27).
+5. Reconcile WD-001 (Tierra/fictional-world identity), protagonist/ability continuity and Volume II placement **before** adding a playable quest or assigning scene IDs. Until then, do not modify Gate Twelve content.
+
+**Class design consequence:** the source-backed use-time stage fix makes one existing ability-level prerequisite enforceable today. It is **not** evidence that the seven class families or Smith profession now have a runtime progression system. Future class progression needs independent, provenance-aware field proofs and an approved migration contract, as recorded in the companion class-readiness packet.
