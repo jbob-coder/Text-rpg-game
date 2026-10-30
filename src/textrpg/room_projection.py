@@ -73,7 +73,7 @@ def build_room_projection(scene: Mapping[str, Any], location_id: str) -> Dict[st
             raise RuleError("scene actor entries must be objects")
         unknown = set(raw) - _ALLOWED_ACTOR_KEYS
         if unknown:
-            raise RuleError(f"room actor contains unsupported fields: {sorted(unknown)}")
+            raise RuleError(f"room actor contains unsupported fields: {sorted(unknown, key=str)}")
         if "x" in raw or "y" in raw:
             raise RuleError("room actor records cannot contain presentation coordinates")
 
