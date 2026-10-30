@@ -924,6 +924,8 @@ def practice_technique(
         minimum=0.0,
     )
 
+    if not isinstance(state.abilities, MutableMapping):
+        raise RuleError("state.abilities must be mutable")
     ability = state.abilities.get(ability_id)
     if not isinstance(ability, MutableMapping):
         raise RuleError(f"Unknown or immutable ability state: {ability_id}")
@@ -1582,6 +1584,10 @@ def use_technique(
             f"Technique cannot be used: {technique_id} ({', '.join(status['reasons'])})"
         )
 
+    # gain_ability_mastery requires a writable top-level ability registry.
+    # Reject an immutable owner before costs, cooldowns, or mastery mutate.
+    if not isinstance(state.abilities, MutableMapping):
+        raise RuleError("state.abilities must be mutable")
     _validate_history_container(state)
     if definition.get("drawbacks"):
         _validate_condition_container(state)
