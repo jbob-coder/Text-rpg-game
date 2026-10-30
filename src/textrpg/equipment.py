@@ -145,6 +145,10 @@ def equip_item(
     if slot not in DEFAULT_SLOTS:
         raise RuleError(f"Unsupported equipment slot: {slot}")
 
+    # A direct equipment action must honor the same authored metadata contract
+    # as content loading. Preflight before changing equipment or inventory.
+    validate_item_definition(item_id, item)
+
     inventory_quantity = None
     if consume_inventory:
         if not isinstance(state.inventory, MutableMapping):
