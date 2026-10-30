@@ -25,6 +25,16 @@ def _effective(
         raise RuleError(f"Invalid effective player value for {path}: {exc}") from exc
 
 
+def _finite_numeric(value: Any) -> bool:
+    """Reject non-finite values and huge integers without float overflow."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return False
+    try:
+        return isfinite(float(value))
+    except OverflowError:
+        return False
+
+
 def validate_player_stats(state: GameState) -> list[str]:
     errors: list[str] = []
     attrs = state.player.get("attributes", {})
@@ -41,7 +51,7 @@ def validate_player_stats(state: GameState) -> list[str]:
         if (
             isinstance(value, bool)
             or not isinstance(value, (int, float))
-            or not isfinite(float(value))
+            or not _finite_numeric(value)
         ):
             errors.append(f"attribute {key} must be finite numeric")
             continue
@@ -54,7 +64,7 @@ def validate_player_stats(state: GameState) -> list[str]:
         if (
             isinstance(value, bool)
             or not isinstance(value, (int, float))
-            or not isfinite(float(value))
+            or not _finite_numeric(value)
             or value < 0
             or value > 100
         ):
@@ -94,12 +104,16 @@ def derived_stat_breakdown(
         weight = float(weight_raw)
         effective = _effective(state, path, set_definitions)
         contribution = effective * weight
+        if not isfinite(contribution):
+            raise RuleError(f"Non-finite contribution for derived.{name}: {path}")
         inputs[path] = {
             "effective_value": round(effective, 4),
             "weight": weight,
             "contribution": round(contribution, 4),
         }
         formula_total += contribution
+        if not isfinite(formula_total):
+            raise RuleError(f"Non-finite formula total for derived.{name}")
 
     try:
         direct = modifier_breakdown(
@@ -112,6 +126,8 @@ def derived_stat_breakdown(
 
     direct_total = float(direct["total"])
     raw_total = formula_total + direct_total
+    if not isfinite(raw_total):
+        raise RuleError(f"Non-finite total for derived.{name}")
     total = _bounded_derived(name, raw_total)
     floor = DERIVED_STAT_SPECS[name].get("min")
     floor_adjustment = total - round(raw_total, 2)
@@ -184,7 +200,7 @@ def initialize_resources(
         if (
             isinstance(maximum, bool)
             or not isinstance(maximum, (int, float))
-            or not isfinite(float(maximum))
+            or not _finite_numeric(maximum)
             or float(maximum) < 0
         ):
             raise RuleError(f"Derived resource maximum is invalid: {key}")
@@ -201,7 +217,7 @@ def initialize_resources(
         if (
             isinstance(current, bool)
             or not isinstance(current, (int, float))
-            or not isfinite(float(current))
+            or not _finite_numeric(current)
         ):
             raise RuleError(f"Current resource must be a finite number: {key}")
         planned[key] = max(0.0, min(float(current), maximum))
