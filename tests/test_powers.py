@@ -1,5 +1,6 @@
 import copy
 import unittest
+from types import MappingProxyType
 
 from textrpg import GameState, RuleError, gain_ability_mastery
 from textrpg.powers import (
@@ -1820,6 +1821,50 @@ class PowerRuntimeTests(unittest.TestCase):
                 focus_per_hour=0.0,
             )
         self.assertEqual(state.snapshot(), before)
+
+
+    def test_practice_rejects_immutable_ability_registry_before_spending(self):
+        state = self.state()
+        initial_player = copy.deepcopy(state.player)
+        initial_ability = copy.deepcopy(state.abilities["ABILITY_FLUX"])
+        initial_history = copy.deepcopy(state.history)
+        initial_time = state.time_minutes
+        state.abilities = MappingProxyType(state.abilities)
+
+        with self.assertRaisesRegex(RuleError, "state.abilities must be mutable"):
+            practice_technique(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", minutes=60
+            )
+
+        self.assertEqual(state.player, initial_player)
+        self.assertEqual(state.abilities["ABILITY_FLUX"], initial_ability)
+        self.assertEqual(state.history, initial_history)
+        self.assertEqual(state.time_minutes, initial_time)
+
+    def test_use_rejects_immutable_ability_registry_before_spending(self):
+        state = self.state()
+        definition = self.definition()
+        initial_player = copy.deepcopy(state.player)
+        initial_ability = copy.deepcopy(state.abilities["ABILITY_FLUX"])
+        initial_history = copy.deepcopy(state.history)
+        initial_time = state.time_minutes
+        state.abilities = MappingProxyType(state.abilities)
+
+        # Availability is still a permitted read; only mutation is forbidden.
+        self.assertTrue(
+            technique_use_status(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+            )["available"]
+        )
+        with self.assertRaisesRegex(RuleError, "state.abilities must be mutable"):
+            use_technique(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+            )
+
+        self.assertEqual(state.player, initial_player)
+        self.assertEqual(state.abilities["ABILITY_FLUX"], initial_ability)
+        self.assertEqual(state.history, initial_history)
+        self.assertEqual(state.time_minutes, initial_time)
 
 
 if __name__ == "__main__":
