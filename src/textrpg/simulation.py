@@ -14,17 +14,26 @@ def _minutes(value: Any, label: str, *, minimum: int = 0) -> int:
         raise RuleError(f"{label} must be an integer")
     if value < minimum:
         raise RuleError(f"{label} must be >= {minimum}")
+    # Training/recovery convert minutes to float during rate calculations.
+    # Reject integers too large for that conversion before mutating state.
+    try:
+        finite_minutes = float(value)
+    except OverflowError as exc:
+        raise RuleError(f"{label} exceeds supported numeric range") from exc
+    if not isfinite(finite_minutes):
+        raise RuleError(f"{label} exceeds supported numeric range")
     return value
 
 
 def _finite(value: Any, label: str, *, minimum: float | None = None, maximum: float | None = None) -> float:
-    if (
-        isinstance(value, bool)
-        or not isinstance(value, (int, float))
-        or not isfinite(float(value))
-    ):
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise RuleError(f"{label} must be a finite number")
-    number = float(value)
+    try:
+        number = float(value)
+    except (OverflowError, ValueError) as exc:
+        raise RuleError(f"{label} must be a finite number") from exc
+    if not isfinite(number):
+        raise RuleError(f"{label} must be a finite number")
     if minimum is not None and number < minimum:
         raise RuleError(f"{label} must be >= {minimum}")
     if maximum is not None and number > maximum:
