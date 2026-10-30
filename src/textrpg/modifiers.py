@@ -35,13 +35,17 @@ def _get_path(data: Mapping[str, Any], path: str, default: Any = None) -> Any:
 
 
 def _numeric(value: Any, *, source: str, path: str) -> float:
-    if (
-        isinstance(value, bool)
-        or not isinstance(value, (int, float))
-        or not isfinite(float(value))
-    ):
-        raise ValueError(f"Non-finite numeric modifier/value at {source}:{path}")
-    return float(value)
+    """Reject invalid values and integer-to-float overflow at the same boundary."""
+    message = f"Non-finite numeric modifier/value at {source}:{path}"
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ValueError(message)
+    try:
+        number = float(value)
+    except OverflowError as exc:
+        raise ValueError(message) from exc
+    if not isfinite(number):
+        raise ValueError(message)
+    return number
 
 
 def _state_mapping(state: Any, field_name: str) -> Mapping[str, Any]:
@@ -183,7 +187,9 @@ def equipment_modifiers(
             source=f"equipment:{slot}",
         )
         for path, value in modifiers.items():
-            total[path] = total.get(path, 0.0) + value
+            total[path] = _numeric(
+                total.get(path, 0.0) + value, source=f"equipment:{slot}", path=path
+            )
     if set_definitions:
         for bonus_id, bonus in active_set_bonuses(state, set_definitions).items():
             modifiers = validate_modifier_mapping(
@@ -191,7 +197,9 @@ def equipment_modifiers(
                 source=f"set:{bonus_id}",
             )
             for path, value in modifiers.items():
-                total[path] = total.get(path, 0.0) + value
+                total[path] = _numeric(
+                total.get(path, 0.0) + value, source=f"set:{bonus_id}", path=path
+            )
     return total
 
 
@@ -205,7 +213,9 @@ def perk_modifiers(state: Any) -> Dict[str, float]:
             source=f"perk:{perk_id}",
         )
         for path, value in modifiers.items():
-            total[path] = total.get(path, 0.0) + value
+            total[path] = _numeric(
+                total.get(path, 0.0) + value, source=f"perk:{perk_id}", path=path
+            )
     return total
 
 
@@ -223,7 +233,9 @@ def condition_modifiers(state: Any) -> Dict[str, float]:
             source=f"condition:{condition_id}",
         )
         for path, value in modifiers.items():
-            total[path] = total.get(path, 0.0) + value
+            total[path] = _numeric(
+                total.get(path, 0.0) + value, source=f"condition:{condition_id}", path=path
+            )
     return total
 
 
@@ -248,7 +260,9 @@ def modifier_totals(
     )
     for source in sources:
         for path, value in source.items():
-            total[path] = total.get(path, 0.0) + value
+            total[path] = _numeric(
+                total.get(path, 0.0) + value, source="combined modifiers", path=path
+            )
     return total
 
 
@@ -322,7 +336,9 @@ def modifier_breakdown(
         if path in modifiers:
             breakdown[f"condition:{condition_id}"] = modifiers[path]
 
-    breakdown["total"] = sum(breakdown.values())
+    breakdown["total"] = _numeric(
+        sum(breakdown.values()), source="modifier breakdown", path=path
+    )
     return breakdown
 
 
