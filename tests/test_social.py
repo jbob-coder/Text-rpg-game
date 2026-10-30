@@ -207,6 +207,74 @@ class SocialTests(unittest.TestCase):
             )
         )
 
+    def test_relationship_gate_rejects_hidden_invalid_minimums(self):
+        state = GameState(
+            seed="gate-preflight",
+            scene_id="A",
+            relationships={"NPC_A": {"trust": 10, "respect": 20}},
+        )
+        before = state.snapshot()
+        # The trust requirement already fails; invalid later keys and values
+        # must still be caught before the player reaches the threshold.
+        for invalid, expected in (
+            ({"trust": 80, "TYPO_AXIS": 5}, "Unknown relationship axis"),
+            ({"trust": 80, "respect": "not-a-number"}, "must be a finite number"),
+            ({"trust": 80, "respect": float("nan")}, "must be a finite number"),
+        ):
+            with self.subTest(invalid=invalid):
+                with self.assertRaisesRegex(RuleError, expected):
+                    relationship_meets(state, "NPC_A", minimums=invalid)
+                self.assertEqual(state.snapshot(), before)
+
+    def test_relationship_gate_checks_maximums_even_when_minimum_fails(self):
+        state = GameState(
+            seed="gate-preflight",
+            scene_id="A",
+            relationships={"NPC_A": {"trust": 10, "suspicion": 20}},
+        )
+        before = state.snapshot()
+        for invalid, expected in (
+            ({"INVALID_AXIS": 5}, "Unknown relationship axis"),
+            ({"suspicion": True}, "must be a finite number"),
+        ):
+            with self.subTest(invalid=invalid):
+                with self.assertRaisesRegex(RuleError, expected):
+                    relationship_meets(
+                        state,
+                        "NPC_A",
+                        minimums={"trust": 80},
+                        maximums=invalid,
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_valid_relationship_gates_keep_normal_boolean_results(self):
+        state = GameState(
+            seed="gate-preflight",
+            scene_id="A",
+            relationships={"NPC_A": {"trust": 70, "suspicion": 15}},
+        )
+        self.assertTrue(
+            relationship_meets(
+                state, "NPC_A",
+                minimums={"trust": 60},
+                maximums={"suspicion": 20},
+            )
+        )
+        self.assertFalse(
+            relationship_meets(
+                state, "NPC_A",
+                minimums={"trust": 80},
+                maximums={"suspicion": 20},
+            )
+        )
+        self.assertFalse(
+            relationship_meets(
+                state, "NPC_A",
+                minimums={"trust": 60},
+                maximums={"suspicion": 10},
+            )
+        )
+
     def test_goal_progress_completes_without_replacing_goal_identity(self):
         state = GameState(seed="s", scene_id="A")
         goal = set_goal(

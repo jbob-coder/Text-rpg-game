@@ -474,7 +474,11 @@ def relationship_meets(
     minimums: Mapping[str, float] | None = None,
     maximums: Mapping[str, float] | None = None,
 ) -> bool:
-    """Evaluate authored multidimensional relationship gates without flattening axes."""
+    """Validate every authored relationship gate before checking live values.
+
+    A failing first gate must not mask a typo or invalid threshold in a later
+    gate that could crash the playthrough when relationships change.
+    """
     relationship = state.relationships.get(npc_id, {})
     if not isinstance(relationship, Mapping):
         raise RuleError(f"Relationship state must be an object: {npc_id}")
@@ -483,36 +487,36 @@ def relationship_meets(
     if maximums is not None and not isinstance(maximums, Mapping):
         raise RuleError("Relationship maximums must be an object")
 
-    for axis, minimum in (minimums or {}).items():
-        if axis not in RELATIONSHIP_AXES:
-            raise RuleError(f"Unknown relationship axis: {axis}")
+    checked_minimums: Dict[str, float] = {}
+    checked_maximums: Dict[str, float] = {}
+    for label, raw_gates, checked in (
+        ("minimum", minimums, checked_minimums),
+        ("maximum", maximums, checked_maximums),
+    ):
+        for axis, boundary in (raw_gates or {}).items():
+            if axis not in RELATIONSHIP_AXES:
+                raise RuleError(f"Unknown relationship axis: {axis}")
+            checked[axis] = _finite_number(
+                boundary, f"Relationship {label} {axis}"
+            )
+
+    for axis, minimum_value in checked_minimums.items():
         actual = _finite_number(
             relationship.get(axis, 0),
             f"Relationship state {npc_id}/{axis}",
-        )
-        minimum_value = _finite_number(
-            minimum,
-            f"Relationship minimum {axis}",
         )
         if actual < minimum_value:
             return False
 
-    for axis, maximum in (maximums or {}).items():
-        if axis not in RELATIONSHIP_AXES:
-            raise RuleError(f"Unknown relationship axis: {axis}")
+    for axis, maximum_value in checked_maximums.items():
         actual = _finite_number(
             relationship.get(axis, 0),
             f"Relationship state {npc_id}/{axis}",
-        )
-        maximum_value = _finite_number(
-            maximum,
-            f"Relationship maximum {axis}",
         )
         if actual > maximum_value:
             return False
 
     return True
-
 
 GOAL_STATUSES = ("active", "paused", "completed", "failed")
 
