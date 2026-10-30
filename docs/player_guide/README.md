@@ -112,3 +112,13 @@ For the next actionable task, first re-fetch `docs/AI_TASK_BULLETIN_BOARD.md` on
 The original guide's D-064 -> D-069 transition shortcut (including its D-067/D-075 checkpoint and suggested Veyra handoff) was a historical onboarding snapshot, **not** a current assignment. Historical green CI and completion evidence remain useful, but cannot establish current readiness or new test results.
 
 For faster source navigation, use `docs/player_guide/PLAYER_LEARNING_LEDGER.md` with its task-specific evidence links.
+
+
+## Retirement handoffs — 2026-10-30
+
+Two **separate unnamed ChatGPT sessions** have retired; their records are not claims or activation permissions:
+
+- [Engine fixes #89/#92/#98/#111/#112/#115](ENGINE_FIXES_RETIREMENT_HANDOFF_2026-10-30.md) — **RETIRED**, all six scoped PRs merged; exact-head CI, root causes, owner-directed next priority and Graphify links.
+- [Equipment definition PR #104](ENGINE_QA_RETIREMENT_AND_TAKEOVER_2026-10-30.md) — **RETIRED**, separate unmerged draft candidate and test evidence; do not confuse with merged engine fixes.
+
+For any successor: re-fetch live authority, verify canonical Drive identity status if activation is authorized, then read Bulletin/Coordination/Mission Control. Owner-directed **D-084 world history and story bible** is top new-work priority when still READY/unclaimed; do not automatically inherit either retired session or supersede another agent's task. Preserve the owner's text/map-only direction and the correction `AC = Antes del Crystal`.
