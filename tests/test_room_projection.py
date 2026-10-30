@@ -108,6 +108,19 @@ class RoomProjectionTests(unittest.TestCase):
                         "PLATFORM_NINE",
                     )
 
+    def test_room_projection_rejects_mixed_type_unknown_keys_as_rule_error(self) -> None:
+        actor = _tamsin()
+        actor[42] = "unexpected numeric key"
+        actor["private_note"] = "must not be projected"
+
+        with self.assertRaisesRegex(RuleError, "unsupported fields") as error:
+            build_room_projection(
+                {"location_id": "PLATFORM_NINE", "actors": [actor]},
+                "PLATFORM_NINE",
+            )
+        self.assertIn("private_note", str(error.exception))
+        self.assertIn("42", str(error.exception))
+
     def test_room_projection_rejects_malformed_actor_contract(self) -> None:
         actor = _tamsin()
         actor["inspectable"] = "yes"
