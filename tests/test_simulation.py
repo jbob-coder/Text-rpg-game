@@ -27,6 +27,26 @@ class SimulationTests(unittest.TestCase):
         initialize_resources(state, refill=True)
         return state
 
+    def test_huge_integer_inputs_are_rule_errors_without_state_mutation(self):
+        huge = 10 ** 400
+        cases = (
+            ("time advance", lambda state: advance_time(state, huge)),
+            ("recovery duration", lambda state: recover(state, huge)),
+            ("recovery quality", lambda state: recover(state, 60, quality=huge)),
+            ("training duration", lambda state: train(state, skill="athletics", minutes=huge)),
+            ("training intensity", lambda state: train(state, skill="athletics", minutes=60, intensity=huge)),
+            ("mentor bonus", lambda state: train(state, skill="athletics", minutes=60, mentor_bonus=huge)),
+            ("attribute duration", lambda state: train_attribute(state, attribute="might", minutes=huge)),
+            ("attribute intensity", lambda state: train_attribute(state, attribute="might", minutes=120, intensity=huge)),
+        )
+        for label, action in cases:
+            with self.subTest(label=label):
+                state = self.state()
+                before = state.snapshot()
+                with self.assertRaises(RuleError):
+                    action(state)
+                self.assertEqual(state.snapshot(), before)
+
     def test_conditions_expire_with_time(self):
         state = self.state()
         apply_condition(state, "COND_BRUISED", duration_minutes=30)
