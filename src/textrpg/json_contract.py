@@ -1,4 +1,4 @@
-"""Shared finite-number JSON decoding for saves and authored content."""
+"""Shared strict JSON decoding for saves and authored content."""
 
 from __future__ import annotations
 
@@ -18,6 +18,21 @@ def _finite_float(value: str) -> float:
     return number
 
 
+def _unique_object_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """Reject ambiguous keys at every object depth, including escaped aliases."""
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"Duplicate JSON object key is not allowed: {key!r}")
+        result[key] = value
+    return result
+
+
 def loads_strict_json(raw: str) -> Any:
-    """Reject non-standard constants and numeric literals that overflow to infinity."""
-    return json.loads(raw, parse_constant=_reject_constant, parse_float=_finite_float)
+    """Reject non-finite numbers and duplicate keys at any nesting level."""
+    return json.loads(
+        raw,
+        parse_constant=_reject_constant,
+        parse_float=_finite_float,
+        object_pairs_hook=_unique_object_keys,
+    )
