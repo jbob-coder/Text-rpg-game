@@ -86,5 +86,64 @@ class VisualIdentityTests(unittest.TestCase):
         )
 
 
+    def test_unhashable_list_entries_are_rejected_without_type_error(self):
+        for field in (
+            "silhouette_anchors", "role_markers", "equipment_attachment_points",
+            "permanent_marks", "forbidden_deviations", "emotion_set", "poses",
+        ):
+            with self.subTest(field=field):
+                record = self.record()
+                record[field] = ["valid", {"invalid": "object"}]
+                errors = validate_character_visuals({"NPC_TAMSIN": record})
+                self.assertTrue(
+                    any(f"{field} entries must be non-empty strings" in e for e in errors)
+                )
+                with self.assertRaises(RuleError):
+                    character_generation_contract("NPC_TAMSIN", record)
+
+    def test_null_required_scalar_or_hair_is_rejected(self):
+        for field in ("height_class", "body_proportions", "skin_tone", "default_outfit", "hair"):
+            with self.subTest(field=field):
+                record = self.record()
+                record[field] = None
+                errors = validate_character_visuals({"NPC_TAMSIN": record})
+                self.assertTrue(any(f"NPC_TAMSIN.{field}" in e for e in errors))
+                with self.assertRaises(RuleError):
+                    character_generation_contract("NPC_TAMSIN", record)
+
+    def test_null_required_lists_are_rejected(self):
+        for field in (
+            "silhouette_anchors", "role_markers", "equipment_attachment_points",
+            "permanent_marks", "forbidden_deviations", "emotion_set", "poses",
+        ):
+            with self.subTest(field=field):
+                record = self.record()
+                record[field] = None
+                errors = validate_character_visuals({"NPC_TAMSIN": record})
+                self.assertIn(f"NPC_TAMSIN.{field} must be a list", errors)
+                with self.assertRaises(RuleError):
+                    character_generation_contract("NPC_TAMSIN", record)
+
+    def test_null_optional_palette_does_not_crash_generation(self):
+        record = self.record()
+        record["palette"] = None
+        errors = validate_character_visuals({"NPC_TAMSIN": record})
+        self.assertIn("NPC_TAMSIN.palette must be an object", errors)
+        with self.assertRaises(RuleError):
+            character_generation_contract("NPC_TAMSIN", record)
+
+        del record["palette"]
+        self.assertEqual(validate_character_visuals({"NPC_TAMSIN": record}), [])
+        self.assertEqual(character_generation_contract("NPC_TAMSIN", record)["palette"], {})
+
+    def test_null_optional_reference_assets_returns_contract_error(self):
+        record = self.record()
+        record["approved_reference_assets"] = None
+        errors = validate_character_visuals({"NPC_TAMSIN": record})
+        self.assertTrue(any("approved_reference_assets must be a list" in e for e in errors))
+        with self.assertRaises(RuleError):
+            character_generation_contract("NPC_TAMSIN", record)
+
+
 if __name__ == "__main__":
     unittest.main()
