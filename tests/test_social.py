@@ -74,6 +74,55 @@ class SocialTests(unittest.TestCase):
         self.assertIn("voluntary", state.npcs["NPC_C"]["memories"][-1]["tags"])
         self.assertNotIn("leak", state.npcs["NPC_C"]["memories"][-1]["tags"])
 
+    def test_leak_rejects_present_corrupt_knowledge_without_mutation(self):
+        for record in (None, False, 0, "", [], {}):
+            with self.subTest(record=record):
+                state = GameState(
+                    seed="leak-corruption",
+                    scene_id="A",
+                    npcs={
+                        "NPC_A": {
+                            "knowledge": {"KNOW_X": record},
+                            "personality": {"discipline": 10, "honesty": 90},
+                        }
+                    },
+                )
+                before = state.snapshot()
+                with self.assertRaisesRegex(RuleError, "NPC knowledge record"):
+                    eligible_leak_targets(
+                        state,
+                        holder="NPC_A",
+                        knowledge_id="KNOW_X",
+                        network={"NPC_A": ["NPC_B"]},
+                    )
+                with self.assertRaisesRegex(RuleError, "NPC knowledge record"):
+                    execute_leak_event(
+                        state,
+                        holder="NPC_A",
+                        knowledge_id="KNOW_X",
+                        network={"NPC_A": ["NPC_B"]},
+                    )
+                self.assertEqual(state.snapshot(), before)
+                self.assertNotIn("NPC_B", state.npcs)
+
+    def test_leak_with_genuinely_absent_knowledge_returns_no_candidates(self):
+        state = GameState(
+            seed="leak-absent",
+            scene_id="A",
+            npcs={"NPC_A": {"knowledge": {}, "personality": {"discipline": 10}}},
+        )
+        before = state.snapshot()
+        self.assertEqual(
+            eligible_leak_targets(
+                state,
+                holder="NPC_A",
+                knowledge_id="KNOW_X",
+                network={"NPC_A": ["NPC_B"]},
+            ),
+            [],
+        )
+        self.assertEqual(state.snapshot(), before)
+
     def test_leak_candidates_are_deterministic(self):
         state = GameState(
             seed="s",
