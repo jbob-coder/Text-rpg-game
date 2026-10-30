@@ -1780,5 +1780,47 @@ class PowerRuntimeTests(unittest.TestCase):
         )
 
 
+    def test_practice_mastery_overflow_rejected_before_time_or_resource_spend(self):
+        # An exceptionally long legal integer duration can yield finite gains
+        # whose addition to an existing finite mastery XP exceeds float range.
+        for axis in ("technique", "ability"):
+            with self.subTest(axis=axis):
+                state = self.state()
+                ability = state.abilities["ABILITY_FLUX"]
+                if axis == "technique":
+                    ability["techniques"]["TECHNIQUE_PULSE"]["mastery_xp"] = 1.79e308
+                else:
+                    ability["mastery_xp"] = 1.79e308
+                before = copy.deepcopy(state.snapshot())
+                with self.assertRaisesRegex(
+                    RuleError, "practice mastery gain would overflow"
+                ):
+                    practice_technique(
+                        state,
+                        "ABILITY_FLUX",
+                        "TECHNIQUE_PULSE",
+                        minutes=10**308,
+                        intensity=2.0,
+                        mentor_bonus=1.0,
+                        stamina_per_hour=0.0,
+                        focus_per_hour=0.0,
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_practice_extreme_integer_duration_returns_rule_error_without_spend(self):
+        state = self.state()
+        before = copy.deepcopy(state.snapshot())
+        with self.assertRaisesRegex(RuleError, "duration is too large"):
+            practice_technique(
+                state,
+                "ABILITY_FLUX",
+                "TECHNIQUE_PULSE",
+                minutes=10**400,
+                stamina_per_hour=0.0,
+                focus_per_hour=0.0,
+            )
+        self.assertEqual(state.snapshot(), before)
+
+
 if __name__ == "__main__":
     unittest.main()
