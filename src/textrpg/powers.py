@@ -945,7 +945,10 @@ def practice_technique(
             f"Technique is still recovering for {ready_at - state.time_minutes} minutes"
         )
 
-    hours = minutes / 60.0
+    try:
+        hours = minutes / 60.0
+    except OverflowError as exc:
+        raise RuleError("Technique practice duration is too large") from exc
     stamina_cost = hours * stamina_per_hour * intensity
     focus_cost = hours * focus_per_hour * intensity
 
@@ -984,6 +987,10 @@ def practice_technique(
         * (1.0 + mentor_bonus)
     )
     ability_gain = technique_gain * 0.35
+    if not isfinite(technique_gain) or not isfinite(technique_before + technique_gain):
+        raise RuleError("Technique practice mastery gain would overflow")
+    if not isfinite(ability_gain) or not isfinite(ability_before + ability_gain):
+        raise RuleError("Ability practice mastery gain would overflow")
 
     # All validation happens above this point. Mutations below are deliberate.
     _set_player_path(state, "resources.stamina", stamina_before - stamina_cost)
