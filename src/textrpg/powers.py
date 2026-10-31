@@ -124,7 +124,7 @@ def _validate_requirements_block(
                 errors.append(
                     f"{label}.techniques has invalid technique ID: {technique_id!r}"
                 )
-            if stage not in _STAGE_ORDER or stage == "unknown":
+            if not isinstance(stage, str) or stage not in _STAGE_ORDER or stage == "unknown":
                 errors.append(
                     f"{label}.techniques.{technique_id} has unsupported stage {stage!r}"
                 )
@@ -253,6 +253,62 @@ def validate_power_definitions(
                                 f"{ability_id}.{technique_id}.{field_name} "
                                 f"references unknown technique {required_id!r}"
                             )
+
+
+        # Discovery prerequisites form a directed graph. A mutual or longer
+        # cycle cannot be bootstrapped by an undiscovered technique, even
+        # though each individual prerequisite names an existing technique.
+        # Usage prerequisites are intentionally excluded: already-discovered
+        # techniques can legitimately depend on each other at use time.
+        discovery_dependencies: dict[str, set[str]] = {}
+        for technique_id, technique in techniques.items() if isinstance(techniques, Mapping) else ():
+            if (
+                not isinstance(technique_id, str)
+                or not _STABLE_ID.fullmatch(technique_id)
+                or not isinstance(technique, Mapping)
+            ):
+                continue
+            discovery = technique.get("discovery_requirements", {})
+            dependencies = (
+                discovery.get("techniques", {})
+                if isinstance(discovery, Mapping)
+                else {}
+            )
+            if not isinstance(dependencies, Mapping):
+                dependencies = {}
+            discovery_dependencies[technique_id] = {
+                required_id
+                for required_id in dependencies
+                if isinstance(required_id, str)
+                and required_id != technique_id
+                and required_id in techniques
+                and isinstance(techniques[required_id], Mapping)
+                and _STABLE_ID.fullmatch(required_id)
+            }
+
+        dependents: dict[str, set[str]] = {
+            technique_id: set() for technique_id in discovery_dependencies
+        }
+        remaining = {
+            technique_id: len(dependencies)
+            for technique_id, dependencies in discovery_dependencies.items()
+        }
+        for technique_id, dependencies in discovery_dependencies.items():
+            for required_id in dependencies:
+                dependents[required_id].add(technique_id)
+        ready = [technique_id for technique_id, count in remaining.items() if count == 0]
+        while ready:
+            technique_id = ready.pop()
+            for dependent in dependents[technique_id]:
+                remaining[dependent] -= 1
+                if remaining[dependent] == 0:
+                    ready.append(dependent)
+        blocked = sorted(technique_id for technique_id, count in remaining.items() if count)
+        if blocked:
+            errors.append(
+                f"{ability_id}.techniques contains a circular discovery "
+                f"prerequisite dependency (blocked: {', '.join(blocked)})"
+            )
 
         evolutions = definition.get("evolutions", {})
         if not isinstance(evolutions, Mapping):
@@ -660,14 +716,16 @@ def technique_discovery_status(
             raise RuleError(f"Technique state must be an object: {technique_id}")
         return {"available": True, "reasons": [], "already_discovered": True}
 
-    definition = definition or {}
+    definition = {} if definition is None else definition
     definition_errors = validate_technique_definition(definition)
     if definition_errors:
         raise RuleError(
             "Invalid technique definition: " + "; ".join(definition_errors)
         )
 
-    requirements = definition.get("discovery_requirements", {})
+    # The authored validator allows an explicit null block to mean no
+    # discovery prerequisites. Normalize it before reading requirement keys.
+    requirements = definition.get("discovery_requirements") or {}
     reasons: list[str] = []
 
     if rank < int(requirements.get("rank_min", 0)):
@@ -782,8 +840,8 @@ def gain_technique_mastery(
     if xp < 0:
         raise RuleError("Technique mastery gain cannot be negative")
     ability = state.abilities.get(ability_id)
-    if not ability:
-        raise RuleError(f"Unknown ability: {ability_id}")
+    if not isinstance(ability, Mapping):
+        raise RuleError(f"Unknown or invalid ability state: {ability_id}")
     techniques = ability.get("techniques", {})
     if not isinstance(techniques, Mapping):
         raise RuleError(f"Ability techniques must be an object: {ability_id}")
@@ -866,13 +924,18 @@ def practice_technique(
         minimum=0.0,
     )
 
+    if not isinstance(state.abilities, MutableMapping):
+        raise RuleError("state.abilities must be mutable")
     ability = state.abilities.get(ability_id)
     if not isinstance(ability, MutableMapping):
         raise RuleError(f"Unknown or immutable ability state: {ability_id}")
     _ability_progression_state(ability, ability_id)
     validate_time_advance(state, minutes)
     _validate_history_container(state)
-    technique = ability.get("techniques", {}).get(technique_id)
+    techniques = ability.get("techniques", {})
+    if not isinstance(techniques, Mapping):
+        raise RuleError(f"Ability techniques must be an object: {ability_id}")
+    technique = techniques.get(technique_id)
     if not isinstance(technique, MutableMapping):
         raise RuleError(f"Technique has not been discovered: {technique_id}")
 
@@ -884,7 +947,10 @@ def practice_technique(
             f"Technique is still recovering for {ready_at - state.time_minutes} minutes"
         )
 
-    hours = minutes / 60.0
+    try:
+        hours = minutes / 60.0
+    except OverflowError as exc:
+        raise RuleError("Technique practice duration is too large") from exc
     stamina_cost = hours * stamina_per_hour * intensity
     focus_cost = hours * focus_per_hour * intensity
 
@@ -923,6 +989,10 @@ def practice_technique(
         * (1.0 + mentor_bonus)
     )
     ability_gain = technique_gain * 0.35
+    if not isfinite(technique_gain) or not isfinite(technique_before + technique_gain):
+        raise RuleError("Technique practice mastery gain would overflow")
+    if not isfinite(ability_gain) or not isfinite(ability_before + ability_gain):
+        raise RuleError("Ability practice mastery gain would overflow")
 
     # All validation happens above this point. Mutations below are deliberate.
     _set_player_path(state, "resources.stamina", stamina_before - stamina_cost)
@@ -966,10 +1036,10 @@ def practice_technique(
 
 
 def _stage_at_least(actual: str, minimum: str) -> bool:
-    if actual not in _STAGE_ORDER:
-        raise RuleError(f"Unknown technique stage: {actual}")
-    if minimum not in _STAGE_ORDER:
-        raise RuleError(f"Unknown required technique stage: {minimum}")
+    if not isinstance(actual, str) or actual not in _STAGE_ORDER:
+        raise RuleError(f"Unknown technique stage: {actual!r}")
+    if not isinstance(minimum, str) or minimum not in _STAGE_ORDER:
+        raise RuleError(f"Unknown required technique stage: {minimum!r}")
     return _STAGE_ORDER[actual] >= _STAGE_ORDER[minimum]
 
 
@@ -1089,7 +1159,7 @@ def validate_technique_definition(definition: Any) -> list[str]:
     )
 
     stage_min = definition.get("stage_min", "discovered")
-    if stage_min not in _STAGE_ORDER:
+    if not isinstance(stage_min, str) or stage_min not in _STAGE_ORDER:
         errors.append(f"stage_min has unsupported value {stage_min!r}")
 
     requirements = definition.get("requirements", {})
@@ -1140,6 +1210,27 @@ def validate_technique_definition(definition: Any) -> list[str]:
         values = requirements.get(section, [])
         if not isinstance(values, list) or not all(isinstance(v, str) and v for v in values):
             errors.append(f"requirements.{section} must be a list of non-empty IDs")
+
+    # Usage prerequisites are distinct from discovery prerequisites. Their
+    # references are checked by validate_power_definitions at catalog scope.
+    required_techniques = requirements.get("techniques", {})
+    if not isinstance(required_techniques, Mapping):
+        errors.append("requirements.techniques must be an object")
+    else:
+        for required_id, minimum_stage in required_techniques.items():
+            if not isinstance(required_id, str) or not _STABLE_ID.fullmatch(required_id):
+                errors.append(
+                    f"requirements.techniques has invalid technique ID {required_id!r}"
+                )
+            if (
+                not isinstance(minimum_stage, str)
+                or minimum_stage not in _STAGE_ORDER
+                or minimum_stage == "unknown"
+            ):
+                errors.append(
+                    f"requirements.techniques.{required_id} has unsupported stage "
+                    f"{minimum_stage!r}"
+                )
 
     costs = definition.get("costs", {})
     if not isinstance(costs, Mapping):
@@ -1270,7 +1361,7 @@ def validate_evolution_definition(definition: Any) -> list[str]:
         for technique_id, stage in techniques.items():
             if not isinstance(technique_id, str) or not technique_id:
                 errors.append("requirements.techniques keys must be non-empty IDs")
-            if stage not in _STAGE_ORDER:
+            if not isinstance(stage, str) or stage not in _STAGE_ORDER:
                 errors.append(
                     f"requirements.techniques.{technique_id} has unsupported stage {stage!r}"
                 )
@@ -1363,10 +1454,10 @@ def technique_use_status(
     if not isinstance(techniques, Mapping):
         raise RuleError(f"Ability techniques must be an object: {ability_id}")
     technique = techniques.get(technique_id)
-    if not technique:
+    if technique is None:
         return {"available": False, "reasons": ["technique_undiscovered"]}
-    if not isinstance(technique, Mapping):
-        raise RuleError(f"Technique state must be an object: {technique_id}")
+    if not isinstance(technique, Mapping) or not technique:
+        raise RuleError(f"Technique state must be a non-empty object: {technique_id}")
 
     technique_mastery = technique.get("mastery_xp", 0.0)
     if (
@@ -1402,6 +1493,17 @@ def technique_use_status(
         )
     )
 
+    # Previously these authored usage-stage gates were cross-reference
+    # validated but never evaluated; techniques could run while locked.
+    for required_id, required_stage in requirements.get("techniques", {}).items():
+        record = techniques.get(required_id)
+        if record is None:
+            reasons.append(f"technique:{required_id}:{required_stage}")
+        elif not isinstance(record, Mapping):
+            raise RuleError(f"Technique state must be an object: {required_id}")
+        elif not _stage_at_least(record.get("stage", "unknown"), required_stage):
+            reasons.append(f"technique:{required_id}:{required_stage}")
+
     minimum_stage = definition.get("stage_min", "discovered")
     if not _stage_at_least(technique.get("stage", "unknown"), minimum_stage):
         reasons.append(f"stage:{minimum_stage}")
@@ -1436,6 +1538,14 @@ def technique_use_status(
     ability_mastery_gain = float(definition.get("ability_mastery_gain", 0))
     if ability_mastery_gain < 0:
         raise RuleError("Ability mastery gain cannot be negative")
+
+    # A finite authored gain can still overflow a finite saved mastery value.
+    # Preflight both totals here, before use_technique spends any resources,
+    # updates cooldowns or applies conditions.
+    if not isfinite(float(technique_mastery) + mastery_gain):
+        raise RuleError(f"Technique mastery gain would overflow: {technique_id}")
+    if not isfinite(float(ability_mastery) + ability_mastery_gain):
+        raise RuleError(f"Ability mastery gain would overflow: {ability_id}")
 
     for drawback in definition.get("drawbacks", []):
         if drawback.get("type") != "condition":
@@ -1474,6 +1584,10 @@ def use_technique(
             f"Technique cannot be used: {technique_id} ({', '.join(status['reasons'])})"
         )
 
+    # gain_ability_mastery requires a writable top-level ability registry.
+    # Reject an immutable owner before costs, cooldowns, or mastery mutate.
+    if not isinstance(state.abilities, MutableMapping):
+        raise RuleError("state.abilities must be mutable")
     _validate_history_container(state)
     if definition.get("drawbacks"):
         _validate_condition_container(state)
@@ -1804,10 +1918,15 @@ def ability_player_view(
     inaccessible to a normal status UI.
     """
     ability = state.abilities.get(ability_id)
-    if not ability:
+    if ability is None:
         raise RuleError(f"Unknown ability: {ability_id}")
+    if not isinstance(ability, Mapping):
+        raise RuleError(f"Ability state must be an object: {ability_id}")
 
-    definition = definition or {}
+    if definition is None:
+        definition = {}
+    elif not isinstance(definition, Mapping):
+        raise RuleError("Ability definition must be an object")
     rank_value = ability.get("rank", 0)
     if isinstance(rank_value, bool) or not isinstance(rank_value, int) or rank_value < 0:
         raise RuleError(f"Ability rank must be a non-negative integer: {ability_id}")
@@ -1930,7 +2049,11 @@ def ability_player_view(
     if technique_definitions is not None and not isinstance(technique_definitions, Mapping):
         raise RuleError("Ability technique definitions must be an object")
 
-    for technique_id, record in ability.get("techniques", {}).items():
+    owned_techniques = ability.get("techniques", {})
+    if not isinstance(owned_techniques, Mapping):
+        raise RuleError(f"Ability techniques must be an object: {ability_id}")
+
+    for technique_id, record in owned_techniques.items():
         if not isinstance(technique_id, str) or not technique_id:
             raise RuleError("Technique state keys must be non-empty IDs")
         if not isinstance(record, Mapping):
@@ -1965,6 +2088,9 @@ def ability_player_view(
         if authored is not None and not isinstance(authored, Mapping):
             raise RuleError(f"Technique definition must be an object: {technique_id}")
         authored = authored or {}
+        stage = record.get("stage", "discovered")
+        if not isinstance(stage, str) or stage not in _STAGE_ORDER:
+            raise RuleError(f"Technique stage is invalid: {technique_id}")
         ready_at = ready_at_value
         output["techniques"].append(
             {
@@ -1974,11 +2100,7 @@ def ability_player_view(
                     f"Technique display name {technique_id}",
                     default=technique_id,
                 ),
-                "stage": _visible_text(
-                    record.get("stage"),
-                    f"Technique stage {technique_id}",
-                    default="discovered",
-                ),
+                "stage": stage,
                 "mastery_xp": float(technique_mastery),
                 "uses": uses_value,
                 "ready": state.time_minutes >= ready_at,

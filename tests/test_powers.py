@@ -1,5 +1,6 @@
 import copy
 import unittest
+from types import MappingProxyType
 
 from textrpg import GameState, RuleError, gain_ability_mastery
 from textrpg.powers import (
@@ -1250,6 +1251,101 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertTrue(any("unknown technique" in error for error in errors))
 
 
+
+    def test_power_catalog_rejects_mutual_discovery_cycle(self):
+        definitions = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_A": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_B": "discovered"}
+                        }
+                    },
+                    "TECHNIQUE_B": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_A": "discovered"}
+                        }
+                    },
+                }
+            }
+        }
+        errors = validate_power_definitions(definitions)
+        self.assertTrue(
+            any("circular discovery prerequisite" in error for error in errors),
+            errors,
+        )
+        self.assertTrue(any("TECHNIQUE_A" in error for error in errors))
+        self.assertTrue(any("TECHNIQUE_B" in error for error in errors))
+
+    def test_power_catalog_rejects_longer_discovery_cycle(self):
+        definitions = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_A": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_B": "discovered"}
+                        }
+                    },
+                    "TECHNIQUE_B": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_C": "discovered"}
+                        }
+                    },
+                    "TECHNIQUE_C": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_A": "discovered"}
+                        }
+                    },
+                }
+            }
+        }
+        self.assertTrue(
+            any(
+                "circular discovery prerequisite" in error
+                for error in validate_power_definitions(definitions)
+            )
+        )
+
+    def test_acyclic_technique_discovery_chain_remains_valid(self):
+        definitions = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_A": {},
+                    "TECHNIQUE_B": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_A": "learned"}
+                        }
+                    },
+                    "TECHNIQUE_C": {
+                        "discovery_requirements": {
+                            "techniques": {"TECHNIQUE_B": "discovered"}
+                        }
+                    },
+                }
+            }
+        }
+        self.assertEqual(validate_power_definitions(definitions), [])
+
+    def test_usage_only_technique_dependencies_are_not_discovery_cycles(self):
+        definitions = {
+            "ABILITY_TRACE": {
+                "techniques": {
+                    "TECHNIQUE_A": {
+                        "requirements": {
+                            "techniques": {"TECHNIQUE_B": "discovered"}
+                        }
+                    },
+                    "TECHNIQUE_B": {
+                        "requirements": {
+                            "techniques": {"TECHNIQUE_A": "discovered"}
+                        }
+                    },
+                }
+            }
+        }
+        self.assertEqual(validate_power_definitions(definitions), [])
+
+
     def test_failed_technique_discovery_does_not_create_empty_container(self):
         state = GameState(
             seed="s",
@@ -1281,6 +1377,494 @@ class PowerRuntimeTests(unittest.TestCase):
         self.assertEqual(state.abilities["ABILITY_TRACE"], before)
         self.assertEqual(state.history, before_history)
         self.assertNotIn("techniques", state.abilities["ABILITY_TRACE"])
+
+
+    def test_malformed_unhashable_stages_return_validation_errors(self):
+        # Imported/hand-authored JSON must be rejected by validation, not crash
+        # because a list/dict stage value is unhashable.
+        for bad_stage in ([], {}, ["learned"]):
+            with self.subTest(bad_stage=repr(bad_stage)):
+                technique = {
+                    "stage_min": bad_stage,
+                    "discovery_requirements": {
+                        "techniques": {"TECHNIQUE_BASE": bad_stage}
+                    },
+                }
+                errors = validate_technique_definition(technique)
+                self.assertTrue(
+                    any("stage_min has unsupported value" in error for error in errors),
+                    errors,
+                )
+                self.assertTrue(
+                    any(
+                        "discovery_requirements.techniques.TECHNIQUE_BASE"
+                        in error and "unsupported stage" in error
+                        for error in errors
+                    ),
+                    errors,
+                )
+                catalog_errors = validate_power_definitions(
+                    {
+                        "ABILITY_TRACE": {
+                            "techniques": {
+                                "TECHNIQUE_BASE": {},
+                                "TECHNIQUE_NEXT": technique,
+                            }
+                        }
+                    }
+                )
+                self.assertTrue(
+                    any("TECHNIQUE_NEXT" in error and "unsupported" in error
+                        for error in catalog_errors),
+                    catalog_errors,
+                )
+
+                evolution_errors = validate_evolution_definition(
+                    {"requirements": {"techniques": {"TECHNIQUE_BASE": bad_stage}}}
+                )
+                self.assertTrue(
+                    any(
+                        "requirements.techniques.TECHNIQUE_BASE" in error
+                        and "unsupported stage" in error
+                        for error in evolution_errors
+                    ),
+                    evolution_errors,
+                )
+
+
+    def test_corrupt_runtime_stage_is_rejected_without_spending(self):
+        for corrupt_stage in ([], {}, ["learned"]):
+            with self.subTest(corrupt_stage=repr(corrupt_stage)):
+                state = self.state()
+                state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"][
+                    "stage"
+                ] = corrupt_stage
+                before = copy.deepcopy(state.snapshot())
+
+                with self.assertRaises(RuleError):
+                    technique_use_status(
+                        state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition()
+                    )
+                with self.assertRaises(RuleError):
+                    use_technique(
+                        state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition()
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_corrupt_prerequisite_stage_is_rejected_without_discovery(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"][
+            "stage"
+        ] = []
+        before = copy.deepcopy(state.snapshot())
+
+        with self.assertRaises(RuleError):
+            discover_technique(
+                state,
+                "ABILITY_FLUX",
+                "TECHNIQUE_NEW",
+                {
+                    "discovery_requirements": {
+                        "techniques": {"TECHNIQUE_PULSE": "learned"}
+                    }
+                },
+            )
+        self.assertEqual(state.snapshot(), before)
+        self.assertNotIn(
+            "TECHNIQUE_NEW", state.abilities["ABILITY_FLUX"]["techniques"]
+        )
+
+
+    def test_null_discovery_requirements_are_no_prerequisites(self):
+        state = GameState(seed="null-requirements", scene_id="A")
+        discover_ability(state, "ABILITY_TRACE")
+        definition = {"discovery_requirements": None}
+        catalog = {
+            "ABILITY_TRACE": {"techniques": {"TECHNIQUE_FREE": definition}}
+        }
+
+        self.assertEqual(validate_power_definitions(catalog), [])
+        before = copy.deepcopy(state.snapshot())
+        status = technique_discovery_status(
+            state, "ABILITY_TRACE", "TECHNIQUE_FREE", definition
+        )
+        self.assertEqual(
+            status,
+            {"available": True, "reasons": [], "already_discovered": False},
+        )
+        self.assertEqual(state.snapshot(), before)
+
+        learned = discover_technique(
+            state, "ABILITY_TRACE", "TECHNIQUE_FREE", definition
+        )
+        self.assertEqual(learned["stage"], "discovered")
+        self.assertEqual(
+            len([
+                e for e in state.history
+                if e["type"] == "technique_discovered"
+                and e["technique_id"] == "TECHNIQUE_FREE"
+            ]),
+            1,
+        )
+
+
+    def test_falsey_invalid_discovery_definitions_never_become_free_unlocks(self):
+        # Only None is shorthand for an omitted definition. Invalid falsey
+        # JSON-like roots must not become an empty requirements object.
+        for bad_definition in ([], False, 0, ""):
+            with self.subTest(bad_definition=repr(bad_definition)):
+                state = GameState(seed="s", scene_id="A")
+                discover_ability(state, "ABILITY_TRACE")
+                before = copy.deepcopy(state.snapshot())
+
+                with self.assertRaises(RuleError):
+                    technique_discovery_status(
+                        state, "ABILITY_TRACE", "TECHNIQUE_BAD", bad_definition
+                    )
+                with self.assertRaises(RuleError):
+                    discover_technique(
+                        state, "ABILITY_TRACE", "TECHNIQUE_BAD", bad_definition
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_falsey_invalid_ability_view_definition_is_rejected(self):
+        for bad_definition in ([], False, 0, ""):
+            with self.subTest(bad_definition=repr(bad_definition)):
+                state = self.state()
+                before = copy.deepcopy(state.snapshot())
+                with self.assertRaises(RuleError):
+                    ability_player_view(
+                        state, "ABILITY_FLUX", bad_definition
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_corrupt_technique_owner_is_rejected_before_practice_cost(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["techniques"] = []
+        before = copy.deepcopy(state.snapshot())
+
+        with self.assertRaises(RuleError):
+            practice_technique(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", minutes=60
+            )
+        self.assertEqual(state.snapshot(), before)
+
+    def test_corrupt_ability_owner_is_rejected_before_mastery(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"] = ["invalid", "owner"]
+        before = copy.deepcopy(state.snapshot())
+
+        with self.assertRaises(RuleError):
+            gain_technique_mastery(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", 10
+            )
+        self.assertEqual(state.snapshot(), before)
+
+
+    def test_use_requires_other_technique_to_reach_authored_stage(self):
+        state = self.state()
+        discover_technique(state, "ABILITY_FLUX", "TECHNIQUE_SECOND")
+        definition = {
+            "requirements": {"techniques": {"TECHNIQUE_PULSE": "learned"}},
+        }
+        before = copy.deepcopy(state.snapshot())
+
+        status = technique_use_status(
+            state, "ABILITY_FLUX", "TECHNIQUE_SECOND", definition
+        )
+        self.assertFalse(status["available"])
+        self.assertIn("technique:TECHNIQUE_PULSE:learned", status["reasons"])
+        with self.assertRaises(RuleError):
+            use_technique(state, "ABILITY_FLUX", "TECHNIQUE_SECOND", definition)
+        self.assertEqual(state.snapshot(), before)
+
+        gain_technique_mastery(state, "ABILITY_FLUX", "TECHNIQUE_PULSE", 40)
+        status = technique_use_status(
+            state, "ABILITY_FLUX", "TECHNIQUE_SECOND", definition
+        )
+        self.assertTrue(status["available"], status)
+        event = use_technique(
+            state, "ABILITY_FLUX", "TECHNIQUE_SECOND", definition
+        )
+        self.assertEqual(event["type"], "technique_use")
+        self.assertEqual(
+            state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_SECOND"]["uses"],
+            1,
+        )
+
+    def test_missing_use_prerequisite_never_spends_resources(self):
+        state = self.state()
+        definition = {
+            "requirements": {"techniques": {"TECHNIQUE_MISSING": "learned"}},
+            "costs": {"resources.focus": 3},
+        }
+        before = copy.deepcopy(state.snapshot())
+        status = technique_use_status(
+            state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+        )
+        self.assertFalse(status["available"])
+        self.assertIn("technique:TECHNIQUE_MISSING:learned", status["reasons"])
+        with self.assertRaises(RuleError):
+            use_technique(state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition)
+        self.assertEqual(state.snapshot(), before)
+
+    def test_usage_prerequisites_validate_shape_and_stage(self):
+        state = self.state()
+        invalid_blocks = (
+            [],
+            {"TECHNIQUE_PULSE": []},
+            {"TECHNIQUE_PULSE": {}},
+            {"TECHNIQUE_PULSE": "unknown"},
+            {"bad-id": "learned"},
+        )
+        for invalid in invalid_blocks:
+            with self.subTest(invalid=repr(invalid)):
+                definition = {"requirements": {"techniques": invalid}}
+                errors = validate_technique_definition(definition)
+                self.assertTrue(
+                    any("requirements.techniques" in error for error in errors),
+                    errors,
+                )
+                before = copy.deepcopy(state.snapshot())
+                with self.assertRaises(RuleError):
+                    use_technique(
+                        state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_mutual_usage_dependencies_work_once_both_discovered(self):
+        definitions = {
+            "ABILITY_FLUX": {
+                "techniques": {
+                    "TECHNIQUE_PULSE": {
+                        "requirements": {
+                            "techniques": {"TECHNIQUE_SECOND": "discovered"}
+                        }
+                    },
+                    "TECHNIQUE_SECOND": {
+                        "requirements": {
+                            "techniques": {"TECHNIQUE_PULSE": "discovered"}
+                        }
+                    },
+                }
+            }
+        }
+        self.assertEqual(validate_power_definitions(definitions), [])
+        state = self.state()
+        discover_technique(state, "ABILITY_FLUX", "TECHNIQUE_SECOND")
+        for technique_id in ("TECHNIQUE_PULSE", "TECHNIQUE_SECOND"):
+            status = technique_use_status(
+                state,
+                "ABILITY_FLUX",
+                technique_id,
+                definitions["ABILITY_FLUX"]["techniques"][technique_id],
+            )
+            self.assertTrue(status["available"], status)
+
+    def test_corrupt_use_prerequisite_stage_is_rejected_without_spend(self):
+        state = self.state()
+        discover_technique(state, "ABILITY_FLUX", "TECHNIQUE_SECOND")
+        state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["stage"] = []
+        definition = {
+            "requirements": {"techniques": {"TECHNIQUE_PULSE": "learned"}},
+            "costs": {"resources.focus": 3},
+        }
+        before = copy.deepcopy(state.snapshot())
+        with self.assertRaises(RuleError):
+            use_technique(
+                state, "ABILITY_FLUX", "TECHNIQUE_SECOND", definition
+            )
+        self.assertEqual(state.snapshot(), before)
+
+
+    def test_empty_discovered_technique_record_is_corrupt_not_undiscovered(self):
+        state = self.state()
+        state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"] = {}
+        before = copy.deepcopy(state.snapshot())
+        with self.assertRaisesRegex(RuleError, "Technique state must be a non-empty object"):
+            technique_use_status(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition()
+            )
+        with self.assertRaises(RuleError):
+            use_technique(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", self.definition()
+            )
+        self.assertEqual(state.snapshot(), before)
+
+    def test_absent_technique_still_reports_undiscovered(self):
+        state = self.state()
+        before = copy.deepcopy(state.snapshot())
+        result = technique_use_status(
+            state, "ABILITY_FLUX", "TECHNIQUE_NOT_FOUND", {}
+        )
+        self.assertEqual(result["reasons"], ["technique_undiscovered"])
+        self.assertFalse(result["available"])
+        self.assertEqual(state.snapshot(), before)
+
+    def test_player_view_rejects_corrupt_ability_and_technique_containers(self):
+        for corrupt in ([], ["bad"], "invalid", 0):
+            with self.subTest(corrupt=repr(corrupt)):
+                state = self.state()
+                state.abilities["ABILITY_FLUX"]["techniques"] = corrupt
+                before = copy.deepcopy(state.snapshot())
+                with self.assertRaises(RuleError):
+                    ability_player_view(state, "ABILITY_FLUX")
+                self.assertEqual(state.snapshot(), before)
+
+        state = self.state()
+        state.abilities["ABILITY_FLUX"] = ["bad", "owner"]
+        before = copy.deepcopy(state.snapshot())
+        with self.assertRaises(RuleError):
+            ability_player_view(state, "ABILITY_FLUX")
+        self.assertEqual(state.snapshot(), before)
+
+    def test_player_view_rejects_unsupported_technique_stage(self):
+        for stage in ("not_a_stage", [], {}, False):
+            with self.subTest(stage=repr(stage)):
+                state = self.state()
+                state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"]["stage"] = stage
+                before = copy.deepcopy(state.snapshot())
+                with self.assertRaises(RuleError):
+                    ability_player_view(state, "ABILITY_FLUX")
+                self.assertEqual(state.snapshot(), before)
+
+
+    def test_use_rejects_mastery_sum_overflow_before_any_spend(self):
+        # Both values can be finite separately while their sum is infinity.
+        for axis, gain_key in (
+            ("technique", "mastery_gain"),
+            ("ability", "ability_mastery_gain"),
+        ):
+            with self.subTest(axis=axis):
+                state = self.state()
+                definition = self.definition()
+                definition[gain_key] = 1e308
+                if axis == "technique":
+                    state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"][
+                        "mastery_xp"
+                    ] = 1e308
+                else:
+                    state.abilities["ABILITY_FLUX"]["mastery_xp"] = 1e308
+                before = copy.deepcopy(state.snapshot())
+
+                with self.assertRaisesRegex(RuleError, "mastery gain would overflow"):
+                    technique_use_status(
+                        state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+                    )
+                with self.assertRaisesRegex(RuleError, "mastery gain would overflow"):
+                    use_technique(
+                        state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_large_but_finite_mastery_gain_remains_usable(self):
+        state = self.state()
+        definition = self.definition()
+        definition["mastery_gain"] = 1e300
+        before = copy.deepcopy(state.snapshot())
+        status = technique_use_status(
+            state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+        )
+        self.assertTrue(status["available"], status)
+        self.assertEqual(state.snapshot(), before)
+
+        event = use_technique(
+            state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+        )
+        self.assertEqual(event["type"], "technique_use")
+        self.assertEqual(state.player["resources"]["focus"], 16.0)
+        self.assertEqual(
+            state.abilities["ABILITY_FLUX"]["techniques"]["TECHNIQUE_PULSE"][
+                "mastery_xp"
+            ],
+            1e300,
+        )
+
+
+    def test_practice_mastery_overflow_rejected_before_time_or_resource_spend(self):
+        # An exceptionally long legal integer duration can yield finite gains
+        # whose addition to an existing finite mastery XP exceeds float range.
+        for axis in ("technique", "ability"):
+            with self.subTest(axis=axis):
+                state = self.state()
+                ability = state.abilities["ABILITY_FLUX"]
+                if axis == "technique":
+                    ability["techniques"]["TECHNIQUE_PULSE"]["mastery_xp"] = 1.79e308
+                else:
+                    ability["mastery_xp"] = 1.79e308
+                before = copy.deepcopy(state.snapshot())
+                with self.assertRaisesRegex(
+                    RuleError, "practice mastery gain would overflow"
+                ):
+                    practice_technique(
+                        state,
+                        "ABILITY_FLUX",
+                        "TECHNIQUE_PULSE",
+                        minutes=10**308,
+                        intensity=2.0,
+                        mentor_bonus=1.0,
+                        stamina_per_hour=0.0,
+                        focus_per_hour=0.0,
+                    )
+                self.assertEqual(state.snapshot(), before)
+
+    def test_practice_extreme_integer_duration_returns_rule_error_without_spend(self):
+        state = self.state()
+        before = copy.deepcopy(state.snapshot())
+        with self.assertRaisesRegex(RuleError, "duration is too large"):
+            practice_technique(
+                state,
+                "ABILITY_FLUX",
+                "TECHNIQUE_PULSE",
+                minutes=10**400,
+                stamina_per_hour=0.0,
+                focus_per_hour=0.0,
+            )
+        self.assertEqual(state.snapshot(), before)
+
+
+    def test_practice_rejects_immutable_ability_registry_before_spending(self):
+        state = self.state()
+        initial_player = copy.deepcopy(state.player)
+        initial_ability = copy.deepcopy(state.abilities["ABILITY_FLUX"])
+        initial_history = copy.deepcopy(state.history)
+        initial_time = state.time_minutes
+        state.abilities = MappingProxyType(state.abilities)
+
+        with self.assertRaisesRegex(RuleError, "state.abilities must be mutable"):
+            practice_technique(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", minutes=60
+            )
+
+        self.assertEqual(state.player, initial_player)
+        self.assertEqual(state.abilities["ABILITY_FLUX"], initial_ability)
+        self.assertEqual(state.history, initial_history)
+        self.assertEqual(state.time_minutes, initial_time)
+
+    def test_use_rejects_immutable_ability_registry_before_spending(self):
+        state = self.state()
+        definition = self.definition()
+        initial_player = copy.deepcopy(state.player)
+        initial_ability = copy.deepcopy(state.abilities["ABILITY_FLUX"])
+        initial_history = copy.deepcopy(state.history)
+        initial_time = state.time_minutes
+        state.abilities = MappingProxyType(state.abilities)
+
+        # Availability is still a permitted read; only mutation is forbidden.
+        self.assertTrue(
+            technique_use_status(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+            )["available"]
+        )
+        with self.assertRaisesRegex(RuleError, "state.abilities must be mutable"):
+            use_technique(
+                state, "ABILITY_FLUX", "TECHNIQUE_PULSE", definition
+            )
+
+        self.assertEqual(state.player, initial_player)
+        self.assertEqual(state.abilities["ABILITY_FLUX"], initial_ability)
+        self.assertEqual(state.history, initial_history)
+        self.assertEqual(state.time_minutes, initial_time)
 
 
 if __name__ == "__main__":
