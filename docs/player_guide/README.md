@@ -120,5 +120,6 @@ Two **separate unnamed ChatGPT sessions** have retired; their records are not cl
 
 - [Engine fixes #89/#92/#98/#111/#112/#115](ENGINE_FIXES_RETIREMENT_HANDOFF_2026-10-30.md) — **RETIRED**, all six scoped PRs merged; exact-head CI, root causes, owner-directed next priority and Graphify links.
 - [Equipment definition PR #104](ENGINE_QA_RETIREMENT_AND_TAKEOVER_2026-10-30.md) — **RETIRED**, separate unmerged draft candidate and test evidence; do not confuse with merged engine fixes.
+- [Validation + numeric + visual-contract fixes #87/#105/#107/#110](VALIDATION_NUMERIC_VISUAL_RETIREMENT_HANDOFF_2026-10-30.md) — **RETIRED**, four implementation PRs remain OPEN/unmerged; combined QA #113 CLOSED without merge, 555 Python + Android/emulator PASS on its exact tested SHA; live integration/review still required.
 
 For any successor: re-fetch live authority, verify canonical Drive identity status if activation is authorized, then read Bulletin/Coordination/Mission Control. Owner-directed **D-084 world history and story bible** is top new-work priority when still READY/unclaimed; do not automatically inherit either retired session or supersede another agent's task. Preserve the owner's text/map-only direction and the correction `AC = Antes del Crystal`.
