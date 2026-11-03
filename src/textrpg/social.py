@@ -279,12 +279,16 @@ def eligible_leak_targets(
     knowledge = npc.get("knowledge", {})
     if not isinstance(knowledge, Mapping):
         raise RuleError(f"NPC knowledge must be an object: {holder}")
-    record = knowledge.get(knowledge_id)
-    if not record:
+    if knowledge_id not in knowledge:
         return []
+    record = knowledge[knowledge_id]
     if not isinstance(record, Mapping):
         raise RuleError(
             f"NPC knowledge record must be an object: {holder}/{knowledge_id}"
+        )
+    if not record:
+        raise RuleError(
+            f"NPC knowledge record must not be empty: {holder}/{knowledge_id}"
         )
 
     secrecy = record.get("secrecy", 0)
