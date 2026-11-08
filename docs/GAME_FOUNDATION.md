@@ -2,6 +2,8 @@
 
 > **Current authority relationship:** this file is the durable high-level design foundation, not the live task queue, save-schema specification, or final domain implementation contract. Repository execution is governed by `MASTER_GAME_DEVELOPMENT_PROGRAM.md`; current work/ownership by `AI_TASK_BULLETIN_BOARD.md` plus `THE_GAME_MASTER_TASK_REGISTER.md`. Detailed design authority now lives in `systems/PROGRESSION_MASTER_PLAN.md`, `systems/TACTICAL_COMBAT_MASTER_PLAN.md`, `systems/NPC_SOCIAL_AND_RIVAL_MASTER_PLAN.md`, `world/WORLD_DEVELOPMENT_MASTER_INDEX.md`, `android/APPLICATION_UX_MASTER_PLAN.md`, and `assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md`. Current source, persistence contracts and accepted migration packets override any older “recommended” field/layout example below when they differ. Preserve this document for game identity and design pillars rather than silently treating v0.1 examples as current runtime schema.
 
+> **Current product identity and presentation precedence (2026-11-08):** [Game type and how to play](GAME_TYPE_AND_HOW_TO_PLAY.md) explains the player experience, and [Product Presentation Decision](PRODUCT_PRESENTATION_DECISION_2026-11-08.md) records text-first choices plus a functional world map. Older pixel-art statements in this v0.1 foundation and its linked asset plans are historical, not approval to restore removed presentation. The screen-reference images are design studies, not canon or live engine schema.
+
 ## Product goal
 
 Build an authored, choice-driven RPG that feels like a living pen-and-paper campaign without requiring generative AI at runtime. The player reads scenes, talks to characters, acts alone or with a group, trains, fights, investigates, equips gear, develops powers, and changes the world through persistent decisions.
@@ -17,7 +19,7 @@ The core requirement is **stateful consequence**: choices should not merely move
 5. **Characters are stateful actors.** NPCs have memory, private knowledge, relationships, motivations, personality axes, and their own story state.
 6. **Information is gameplay.** Knowing a fact can unlock choices. Revealing a fact can change who knows it, who trusts the player, and what later scenes occur.
 7. **Deterministic rules.** The same save state plus the same seed and action must resolve identically. This makes saves, testing, replay analysis, and balancing reliable.
-8. **Pixel-art presentation.** The rules layer is independent from the presentation layer so portraits, scene illustrations, UI animation, and later engine choices do not corrupt game state.
+8. **Text-first, presentation-independent gameplay.** Story and player choices remain readable text, with a functional schematic world map. Optional styling never invents gameplay or changes the rule/state owner; old pixel-art proposals remain historical references only.
 
 ## Runtime state model
 
@@ -308,7 +310,7 @@ The rules engine never decides what art should look like. It emits state and pre
 - `animation = skill_unlock_minor`
 - `equipment_visual_tag = plated_left_arm`
 
-The UI/art layer resolves those tags to approved pixel assets.
+The presentation layer may resolve optional tags to approved, player-safe UI treatments. Historical pixel-asset bindings are not a current shipping requirement; the text-first narrative and functional route map must work without illustration assets.
 
 ## Save and compatibility rules
 
