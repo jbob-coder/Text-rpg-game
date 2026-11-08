@@ -7,6 +7,8 @@ Program branch: `docs/master-game-development-program`
 Started: 2026-10-01 AST  
 Owner authorization: broad game-development authority granted, subject to the explicit prohibitions, evidence rules, safety boundaries, and no-silent-downgrade rules already recorded in the repository.
 
+> **2026-11-08 documentation addendum (review-branch proposal):** [Game type and how to play](GAME_TYPE_AND_HOW_TO_PLAY.md) describes the authored, single-player text RPG and its actual Phase 1 play loop. [Product Presentation Decision](PRODUCT_PRESENTATION_DECISION_2026-11-08.md) records the later text-first + functional world-map requirement and relegates older pixel-art mandates to historical implementation evidence; user-supplied mobile screen blueprints are provisional layout references, not automatic gameplay or canon. This cross-reference does **not** supersede owner canon/D-084, change the live task queue, certify a build or merge pending Android changes.
+
 ---
 
 ## 0. Why this document exists
