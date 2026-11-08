@@ -1,12 +1,15 @@
 # Text RPG Game
 
+> **What is this game and how do I play?** Read [Game type & how to play](docs/GAME_TYPE_AND_HOW_TO_PLAY.md). The current text-first/mobile/map presentation decision is [Product Presentation Decision — 2026-11-08](docs/PRODUCT_PRESENTATION_DECISION_2026-11-08.md). These are documentation-only proposals on a review branch, not proof of shipped Android screens or new game rules.
+
+
 ## Current priority program
 
 **Priority repository:** `jbob-coder/Text-rpg-game`.
 
 Repository-wide game development is governed by [`docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`](docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md) and is now in **bounded Phase 1 implementation + exact-head verification**, with reconstruction-grade documentation retained as the guardrail and handoff authority. The existing V6 stabilization material remains valid historical engine evidence, but it is not the top-level product objective or live queue.
 
-Gate Twelve is the first proof region. The early audit/inventory transition is historical: D-064 and D-069 through D-071 are complete. At this checkpoint D-072 durable aftermath is **IN_PROGRESS under Silex**, P11/CPR-006 Android session-load atomicity is **IN_PROGRESS under Nodus**, and D-073 plus downstream tactical/integration gates remain dependency-blocked. Never infer current readiness from this README; use the live Bulletin.
+Gate Twelve is the first proof region. The early audit/inventory transition is historical: D-064 and D-069 through D-071 are complete. An earlier checkpoint reported D-072 durable aftermath **IN_PROGRESS** and P11/CPR-006 Android session-load atomicity **IN_PROGRESS**; the later owner-directed 2026-10-08 Bulletin entry released P11 to **READY / OWNER-PAUSED / UNCLAIMED**. Check the live Bulletin for today's owner/claim status, rather than using this README as a task snapshot. Never infer current readiness from this README; use the live Bulletin.
 
 Operational fast path for current work:
 1. [AGENTS.md](AGENTS.md)
