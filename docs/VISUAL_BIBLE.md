@@ -1,14 +1,12 @@
-# Pixel Visual Bible — v0.2
+# Pixel Visual Bible — v0.2 (HISTORICAL / SUPERSEDED PRESENTATION POLICY)
+
+> **Current status (2026-11-08): HISTORICAL VISUAL EVIDENCE, NOT A SHIPPING STYLE MANDATE.** The later owner requirement is a text-first RPG with a functional world map, without unwanted pixel-art presentation. See [Product Presentation Decision](PRODUCT_PRESENTATION_DECISION_2026-11-08.md), [Game type and how to play](GAME_TYPE_AND_HOW_TO_PLAY.md) and [unmerged PR #97](https://github.com/jbob-coder/Text-rpg-game/pull/97). The asset specifications and character history below remain useful as provenance; they **do not authorize pixel UI, avatar, illustrations or sprite map restoration**. This decision does not delete the older work or claim that PR #97 is merged.
 
 > **Authority boundary:** this bible owns visual language, identity consistency and acceptance principles. `docs/assets/PIXEL_ASSET_MASTER_PLAN.md` owns technical source grids, dimensions, anchors, naming and asset lifecycle. `docs/assets/PIXEL_ART_RUNTIME_COMPOSITION_STANDARD.md` owns how room art, actors, equipment, props, overlays, FX and panels are composed at runtime. If a style example here conflicts with those technical/composition contracts or authoritative gameplay state, use the specialized authority rather than inventing a second visual-state owner.
 
-## Product rule — non-negotiable
+## Historical product rule — superseded
 
-The shipped game presentation is **pixel style**. This applies to the player avatar, recurring characters, equipment layers, scene illustrations, locations, map presentation, icons, HUD ornaments, menus, transitions, and major narrative moments.
-
-The project owner has explicitly authorized creative additions and presentation improvements as long as they preserve the requested game features, remain consistent with the authoritative gameplay architecture, and keep the pixel-art direction intact.
-
-Pixel style is not a temporary prototype treatment. It is a product constraint.
+This section formerly required pixel styling across characters, scenes, maps, menus and HUD. It was authoritative at an earlier design checkpoint, but **must no longer be applied as the current product requirement** after the later owner-directed text-first/map-only correction. The following asset and composition details are preserved for audit/history and must not override the current player-facing requirements.
 
 ## Goal
 

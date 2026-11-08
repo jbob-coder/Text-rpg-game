@@ -9,6 +9,8 @@ Parents:
 Spatial/tactical presentation authority:
 - `docs/systems/CAMERA_AND_TACTICAL_PRESENTATION_STANDARD.md`
 
+> **2026-11-08 presentation precedence:** [Product Presentation Decision](../PRODUCT_PRESENTATION_DECISION_2026-11-08.md) governs candidate use of the owner's black-and-gold mobile screenshot blueprints, while [Game type and how to play](../GAME_TYPE_AND_HOW_TO_PLAY.md) defines the text-first player experience. Story choices and functional map travel are retained. Screenshots do **not** establish approved class/XP/skill-point formulas, new content, field names, exact dp measurements or runtime tabs. Existing Compose/Python DTOs must be audited before UX implementation. Older pixel-runtime sections below are retained for migration/provenance only.
+
 ## 0. Current planning-phase boundary
 
 This document is currently a **planning authority**, not the final detailed UI specification.
@@ -260,16 +262,9 @@ Every major surface needs:
 - unsupported schema;
 - safe recovery.
 
-## 17. Pixel-art runtime
+## 17. Historical pixel-art runtime (superseded presentation rule)
 
-UI must:
-- use nearest-neighbor;
-- preserve source aspect;
-- avoid smoothing;
-- use correct z-order;
-- select assets from safe visual state;
-- support overlays;
-- avoid shipping reference boards.
+The prior pixel-asset requirements (nearest-neighbor, aspect, z-order, visual-state selectors and overlays) describe an earlier presentation implementation. They are **not** requirements to reintroduce image-based gameplay. For the current product, preserve readable narrative, choices and schematic map; use original accessible typography/controls and authoritative player-safe projections. Historical asset pipelines may be consulted solely to inventory/remediate legacy code without asserting they are live UI requirements.
 
 ## 18. Final decisions still needed
 
