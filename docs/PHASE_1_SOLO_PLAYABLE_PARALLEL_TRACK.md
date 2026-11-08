@@ -6,6 +6,8 @@ Parent authority: `docs/MASTER_GAME_DEVELOPMENT_PROGRAM.md`
 Proof region: Gate Twelve  
 Hardware direction: Galaxy A02-class low-end Android target
 
+> **Player-facing explanation:** [Game type and how to play](GAME_TYPE_AND_HOW_TO_PLAY.md). **Presentation decision:** [2026-11-08 text-first UX boundaries](PRODUCT_PRESENTATION_DECISION_2026-11-08.md). These documents do not enlarge Phase 1, install screenshot-only class/XP/ability mechanics, or loosen the exact-head/save/load/Android exit gate below.
+
 ## 1. Purpose
 
 Maintain a real playable line in parallel with the large documentation program.
